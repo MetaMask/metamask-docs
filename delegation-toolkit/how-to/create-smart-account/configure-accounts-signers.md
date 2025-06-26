@@ -69,7 +69,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ```typescript
 import { http, createPublicClient } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 
 const transport = http(); 
 export const publicClient = createPublicClient({ 
@@ -126,7 +126,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ```typescript
 import { http, createPublicClient } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 
 const transport = http(); 
 export const publicClient = createPublicClient({ 
@@ -141,7 +141,7 @@ export const publicClient = createPublicClient({
 
 ```typescript
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { http, createWalletClient } from "viem";
 
 const privateKey = generatePrivateKey(); 
@@ -202,7 +202,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ```typescript
 import { http, createPublicClient } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 
 const transport = http(); 
 export const publicClient = createPublicClient({ 
@@ -277,7 +277,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ```typescript
 import { http, createPublicClient } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 
 const transport = http(); 
 export const publicClient = createPublicClient({ 
@@ -291,7 +291,7 @@ export const publicClient = createPublicClient({
 
 ```typescript
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { http, createWalletClient } from "viem";
 
 // This private key will be used to generate the first signer.

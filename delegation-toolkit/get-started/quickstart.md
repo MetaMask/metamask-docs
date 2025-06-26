@@ -22,7 +22,7 @@ This client will let the delegator account query the signer's account state and 
 
 ```typescript
 import { createPublicClient, http } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
  
 const publicClient = createPublicClient({
   chain,

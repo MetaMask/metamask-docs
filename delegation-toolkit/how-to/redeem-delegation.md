@@ -103,12 +103,12 @@ export const delegateSmartAccount = await toMetaMaskSmartAccount({
 
 ```typescript
 import { createPublicClient, http } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { createBundlerClient } from "viem/account-abstraction";
 import { createPimlicoClient } from "permissionless/clients/pimlico";
 
 // You can get the API Key from the Pimlico dashboard.
-const pimlicoUrl = "https://api.pimlico.io/v2/59141/rpc";
+const pimlicoUrl = "https://api.pimlico.io/v2/11155111/rpc";
 
 export const publicClient = createPublicClient({
   chain,
@@ -144,7 +144,7 @@ import {
 } from "@metamask/delegation-toolkit";
 import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
 import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { delegateWalletClient } from "./account.ts";
 
 const delegations: Delegation[] = [ signedDelegation ];
@@ -179,7 +179,7 @@ const transactionHash = await walletClient.sendTransaction({
 
 ```typescript
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { createWalletClient, http } from "viem";
 
 const delegateAccount = privateKeyToAccount("0x...");
@@ -293,12 +293,12 @@ export const delegateSmartAccount = await toMetaMaskSmartAccount({
 
 ```typescript
 import { createPublicClient, http } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { createBundlerClient } from "viem/account-abstraction";
 import { createPimlicoClient } from "permissionless/clients/pimlico";
 
 // You can get the API Key from the Pimlico dashboard.
-const pimlicoUrl = "https://api.pimlico.io/v2/59141/rpc";
+const pimlicoUrl = "https://api.pimlico.io/v2/11155111/rpc";
 
 export const publicClient = createPublicClient({
   chain,

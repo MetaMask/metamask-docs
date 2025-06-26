@@ -37,7 +37,7 @@ import {
   createBundlerClient,
 } from "viem/account-abstraction";
 import { http } from "viem";
-import { lineaSepolia as chain } from "viem/chains"; 
+import { sepolia as chain } from "viem/chains"; 
 
 // Replace these URLs with your actual bundler and paymaster endpoints.
 const bundlerUrl = "https://your-bundler-url.com";

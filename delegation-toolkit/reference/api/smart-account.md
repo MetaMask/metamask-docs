@@ -71,7 +71,7 @@ const aggregatedSignature = aggregateSignature({
 import { createPublicClient, http } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { createBundlerClient } from "viem/account-abstraction";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
@@ -156,7 +156,7 @@ const signature = delegatorSmartAccount.signDelegation({ delegation });
 ```ts
 import { createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
@@ -210,7 +210,7 @@ const signature = smartAccount.signMessage({
 ```ts
 import { createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
@@ -277,7 +277,7 @@ const signature = smartAccount.signTypedData({
 ```ts
 import { createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
@@ -338,7 +338,7 @@ const userOpSignature = smartAccount.signUserOperation({
 ```ts
 import { createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
@@ -406,7 +406,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 ```ts
 import { createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
  
 export const account = privateKeyToAccount("0x...");
 export const publicClient = createPublicClient({
@@ -452,7 +452,7 @@ const aliceSmartAccount = await toMetaMaskSmartAccount({
 ```ts
 import { createPublicClient, http } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 
 export const publicClient = createPublicClient({
   chain,
@@ -495,7 +495,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 ```ts
 import { createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
  
 export const account = privateKeyToAccount("0x...");
 export const publicClient = createPublicClient({

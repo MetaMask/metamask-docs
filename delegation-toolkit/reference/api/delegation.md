@@ -45,7 +45,7 @@ import {
 } from "@metamask/delegation-toolkit";
 import { createWalletClient, createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
  
 const publicClient = createPublicClient({
   chain,
@@ -185,7 +185,7 @@ Deploys the Delegation Framework contracts to an EVM chain.
 ```ts
 import { deployDeleGatorEnvironment } from "@metamask/delegation-toolkit/utils";
 import { walletClient, publicClient } from "./config.ts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 
 const environment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -199,7 +199,7 @@ const environment = await deployDeleGatorEnvironment(
 
 ```ts
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { http, createWalletClient, createPublicClient } from "viem";
 
 // Your deployer wallet private key.
@@ -228,7 +228,7 @@ environment using `overrideDeployedEnvironment`.
 
 ```ts title="example.ts"
 import { walletClient, publicClient } from "./config.ts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { DeleGatorEnvironment } from "@metamask/delegation-toolkit";
 import { 
   overrideDeployedEnvironment,

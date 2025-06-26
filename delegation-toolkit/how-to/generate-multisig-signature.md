@@ -75,7 +75,7 @@ const aggregatedSignature = aggregateSignature({
 import { createPublicClient, http } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { createBundlerClient } from "viem/account-abstraction";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
