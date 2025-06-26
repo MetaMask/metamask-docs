@@ -336,7 +336,7 @@ This example creates a signatory from a private key using Viem's [`privateKeyToA
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./client.ts"
+import { publicClient } from "./client.ts";
 import { account } from "./signatory.ts";
 import { 
   Implementation, 
