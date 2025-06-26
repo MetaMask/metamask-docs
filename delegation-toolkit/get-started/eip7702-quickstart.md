@@ -51,17 +51,17 @@ Set up [Viem Wallet Client](https://viem.sh/docs/clients/wallet) using Viem's `c
 This lets you sign and submit EIP-7702 authorization.
 
 ```typescript
-import { createWalletClient, http } from "viem"
-import { sepolia as chain } from "viem/chains"
-import { privateKeyToAccount } from "viem/accounts"
+import { createWalletClient, http } from "viem";
+import { sepolia as chain } from "viem/chains";
+import { privateKeyToAccount } from "viem/accounts";
  
-export const acconut = privateKeyToAccount("0x...") 
+export const account = privateKeyToAccount("0x...");
  
 export const walletClient = createWalletClient({
   account,
   chain,
   transport: http(),
-})
+});
 ```
 
 ### 4. Authorize a 7702 delegation

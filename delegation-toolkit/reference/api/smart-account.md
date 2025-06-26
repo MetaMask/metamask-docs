@@ -485,7 +485,7 @@ const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Stateless7702,
   address: account.address,
-  signatory: { account: account },
+  signatory: { account },
 });
 ```
 

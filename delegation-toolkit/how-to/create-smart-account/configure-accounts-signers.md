@@ -389,7 +389,7 @@ using Viem's `createWalletClient` function.
 <TabItem value="example.ts">
 
 ```typescript
-import { publicClient } from "./client.ts"
+import { publicClient } from "./client.ts";
 import { walletClient } from "./signatory.ts";
 import { 
   Implementation, 
