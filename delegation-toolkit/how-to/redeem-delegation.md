@@ -13,7 +13,7 @@ A delegate can redeem a delegation by submitting either a user operation or a re
 depending on whether the delegate is a smart account or externally owned account (EOA).
 
 The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the delegator's behalf.
-To prepare the calldata for the redeem transaction, use the `redeemDelegation` utility function.
+To prepare the calldata for the redeem transaction, use the [`redeemDelegation`](../reference/api/delegation.md#redeemdelegation) utility function.
 The function supports batch redemption, allowing multiple delegations to be processed within a single transaction.
 
 ## Prerequisites
