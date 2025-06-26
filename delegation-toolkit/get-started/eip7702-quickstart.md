@@ -12,7 +12,8 @@ abstraction, such as batch transactions, gas sponsorship, and [ERC-7710 delegati
 
 ## Prerequisites
 
-[Install and set up the Delegation Toolkit.](install.md)
+- [Install and set up the Delegation Toolkit.](install.md)
+- [Install Viem](https://viem.sh/)
 
 ## Steps
 
