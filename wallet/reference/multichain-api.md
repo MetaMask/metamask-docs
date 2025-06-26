@@ -393,8 +393,4 @@ The Multichain API can return the following JSON-RPC error codes:
 | ---- | ----------- | --------------- |
 | 5000 | Unknown error with request | `wallet_revokeSession`, `wallet_createSession` | 
 | 5100 | Requested networks are not supported | `wallet_createSession` |
-| 5101 | Requested methods are not supported | `wallet_createSession` |
-| 5102 | Requested notifications are not supported | `wallet_createSession` |
-| 5300 | Invalid `scopedProperties` requested | `wallet_createSession`|
-| 5301 | `scopedProperties` can only be outside of `sessionScopes` | `wallet_createSession`|
 | 5302 | Invalid `sessionProperties` requested | `wallet_createSession` |
