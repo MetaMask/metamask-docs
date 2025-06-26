@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 # Create a smart account
 
 The MetaMask Delegation Toolkit is embedded, meaning that the end user can instantly interact with a dapp without wallet authorization, confirmations, or corporate logos.
-Enable users to create a [smart account](../concepts/smart-accounts) directly in your dapp.
+Enable users to create a [smart account](../../concepts/smart-accounts.md) directly in your dapp.
 
 ## Prerequisites
 

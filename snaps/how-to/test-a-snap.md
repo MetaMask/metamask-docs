@@ -5,7 +5,7 @@ sidebar_position: 6
 
 # Test a Snap
 
-You can test your Snap [locally](#test-locally), in the [Snaps sandbox](#test-in-a-sandbox), and [end-to-end using Jest](#test-end-to-end).
+You can test your Snap [locally](#test-locally), in the [Snaps sandbox](#test-in-the-sandbox), and [end-to-end using Jest](#test-end-to-end).
 
 ## Test locally
 

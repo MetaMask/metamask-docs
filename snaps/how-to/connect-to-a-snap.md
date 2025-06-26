@@ -15,7 +15,7 @@ This is possible because Snaps can expose a [custom JSON-RPC API](../learn/about
 ## Detect wallet
 
 To connect to a Snap, dapps must first detect MetaMask in the user's browser.
-See the Wallet documentation on [how to connect to MetaMask](/wallet/how-to/connect).
+See the Wallet API documentation on [how to connect to the MetaMask extension](/wallet/how-to/connect-extension).
 
 ### Detect MetaMask Flask
 
