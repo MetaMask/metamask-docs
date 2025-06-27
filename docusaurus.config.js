@@ -195,6 +195,12 @@ const config = {
     './src/plugins/segment',
     './src/plugins/launchdarkly',
     './src/plugins/sentry',
+    [
+      '@docusaurus/plugin-google-tag-manager',
+      {
+        containerId: 'GTM-5FGPLC2Q',
+      },
+    ],
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:
