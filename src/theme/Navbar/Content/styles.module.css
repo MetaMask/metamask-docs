@@ -1,7 +1,7 @@
 /*
 Hide color mode toggle in small viewports
  */
-@media (max-width: 1196px) {
+@media (width <= 1196px) {
   .colorModeToggle {
     display: none;
   }
