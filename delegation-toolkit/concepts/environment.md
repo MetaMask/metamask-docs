@@ -42,7 +42,7 @@ import {
 } from "@metamask/delegation-toolkit";
 import { privateKeyToAccount } from "viem/accounts";
 import { createPublicClient, http } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
  
 const publicClient = createPublicClient({
   chain,
@@ -79,8 +79,8 @@ import {
   DeleGatorEnvironment, 
 } from "@metamask/delegation-toolkit"; 
 
-// Resolves the DeleGatorEnvironment for Linea Sepolia
-const environment: DeleGatorEnvironment = getDelegatorEnvironment(59141);
+// Resolves the DeleGatorEnvironment for Sepolia
+const environment: DeleGatorEnvironment = getDelegatorEnvironment(11155111);
 ```
 
 ## Deploy custom delegator environment
@@ -97,7 +97,8 @@ Your wallet must have sufficient native token balance to deploy the contracts.
 
 ```typescript
 import { walletClient, publicClient } from "./config.ts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
+import { deployDeleGatorEnvironment } from "@metamask/delegation-toolkit/utils";
 
 const environment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -111,7 +112,7 @@ const environment = await deployDeleGatorEnvironment(
 
 ```typescript
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { http, createWalletClient, createPublicClient } from "viem";
 
 // Your deployer wallet private key.
@@ -139,7 +140,8 @@ For example, if you've already deployed the `EntryPoint` contract on the target 
 ```typescript
 // The config.ts is the same as in the previous example.
 import { walletClient, publicClient } from "./config.ts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
+import { deployDeleGatorEnvironment } from "@metamask/delegation-toolkit/utils";
 
 const environment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -163,12 +165,12 @@ To override the delegator environment, the toolkit provides an [`overrideDeploye
 ```typescript
 // The config.ts is the same as in the previous example.
 import { walletClient, publicClient } from "./config.ts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
+import { DeleGatorEnvironment } from "@metamask/delegation-toolkit";
 import { 
-  DeleGatorEnvironment, 
   overrideDeployedEnvironment,
-  deployDeleGatorEnvironment
-} from "@metamask/delegation-toolkit";
+  deployDeleGatorEnvironment 
+} from "@metamask/delegation-toolkit/utils";
 
 const environment: DeleGatorEnvironment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -188,14 +190,14 @@ If you've already deployed the contracts using a different method, you can creat
 ```typescript
 // remove-start
 - import { walletClient, publicClient } from "./config.ts";
-- import { lineaSepolia as chain } from "viem/chains";
+- import { sepolia as chain } from "viem/chains";
 // remove-end
+import { DeleGatorEnvironment } from "@metamask/delegation-toolkit";
 import { 
-  DeleGatorEnvironment, 
   overrideDeployedEnvironment,
   // remove-next-line
 - deployDeleGatorEnvironment
-} from "@metamask/delegation-toolkit";
+} from "@metamask/delegation-toolkit/utils";
 
 // remove-start
 - const environment: DeleGatorEnvironment = await deployDeleGatorEnvironment(

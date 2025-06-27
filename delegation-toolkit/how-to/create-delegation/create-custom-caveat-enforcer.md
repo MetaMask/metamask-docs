@@ -122,7 +122,7 @@ const delegation = createDelegation({
 
 ```typescript
 import { createPublicClient, http } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,

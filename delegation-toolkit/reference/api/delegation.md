@@ -19,7 +19,7 @@ Builds an array of caveats.
 ### Parameters
 
 | Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
+| --- | --- | --- | --- |
 | `environment` | `DeleGatorEnvironment` | Yes | Environment to resolve the smart contracts for the current chain. |
 | `config` | `CaveatBuilderConfig` | No | Configuration for `CaveatBuilder`. |
 
@@ -45,7 +45,7 @@ import {
 } from "@metamask/delegation-toolkit";
 import { createWalletClient, createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
  
 const publicClient = createPublicClient({
   chain,
@@ -77,8 +77,64 @@ import { delegatorSmartAccount } from "./config.ts";
 
 const caveats = createCaveatBuilder(delegatorSmartAccount.environment, {
   // add-next-line 
-  allowEmptyCaveats: true
-})
+  allowEmptyCaveats: true,
+});
+```
+
+## `createDelegation`
+
+Creates a delegation with specific delegate.
+
+### Parameters
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| `from` | `Hex` | Yes | The address that is granting the delegation. |
+| `to` | `Hex` | Yes | The address to which the delegation is being granted. |
+| `caveats` | `Caveats` | Yes | Caveats to restrict the authority being granted. |
+| `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
+| `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
+
+### Example
+
+```typescript
+import { createDelegation } from "@metamask/delegation-toolkit";
+
+const delegation = createDelegation({
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Empty caveats array - we recommend adding appropriate restrictions
+  caveats: [],
+});
+```
+
+## `createOpenDelegation`
+
+Creates an open delegation that can be redeemed by any delegate.
+
+### Parameters
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| `from` | `Hex` | Yes | The address that is granting the delegation. |
+| `caveats` | `Caveats` | Yes | Caveats to restrict the authority being granted. |
+| `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
+| `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
+
+
+### Example
+
+```typescript
+import { createOpenDelegation } from "@metamask/delegation-toolkit";
+
+const delegation = createOpenDelegation({
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Empty caveats array - we recommend adding appropriate restrictions
+  caveats: [],
+});
 ```
 
 ## `createExecution`
@@ -88,8 +144,8 @@ Creates an `ExecutionStruct` instance.
 ### Parameters
 
 | Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
-| `target` | `Hex` | No | Address of the contract or recipient that the call is directed to. |
+| --- | --- | --- | --- |
+| `target` | `Address` | No | Address of the contract or recipient that the call is directed to. |
 | `value` | `bigint` | No | Value of native tokens to send along with the call in wei. |
 | `callData` | `Hex` | No | Encoded function data or payload to be executed on the target address. |
 
@@ -98,14 +154,14 @@ Creates an `ExecutionStruct` instance.
 ```ts
 import { createExecution } from "@metamask/delegation-toolkit";
 
-// Creates an ExecutionStruct to transfer 0.01 ETH to 
+// Creates an ExecutionStruct to transfer 0.01 ETH to
 // 0xe3C818389583fDD5cAC32f548140fE26BcEaE907 address.
-const caveats = createExecution(
-  "0xe3C818389583fDD5cAC32f548140fE26BcEaE907",
+const execution = createExecution({
+  target: "0xe3C818389583fDD5cAC32f548140fE26BcEaE907",
   // 0.01 ETH in wei
-  10000000000000000n,
-  "0x",
-);
+  value: 10000000000000000n,
+  callData: "0x",
+});
 ```
 
 ## `deployDeleGatorEnvironment`
@@ -127,9 +183,9 @@ Deploys the Delegation Framework contracts to an EVM chain.
 <TabItem value="example.ts">
 
 ```ts
-import { deployDeleGatorEnvironment } from "@metamask/delegation-toolkit";
+import { deployDeleGatorEnvironment } from "@metamask/delegation-toolkit/utils";
 import { walletClient, publicClient } from "./config.ts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 
 const environment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -143,7 +199,7 @@ const environment = await deployDeleGatorEnvironment(
 
 ```ts
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { http, createWalletClient, createPublicClient } from "viem";
 
 // Your deployer wallet private key.
@@ -172,12 +228,12 @@ environment using `overrideDeployedEnvironment`.
 
 ```ts title="example.ts"
 import { walletClient, publicClient } from "./config.ts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
+import { DeleGatorEnvironment } from "@metamask/delegation-toolkit";
 import { 
-  DeleGatorEnvironment, 
   overrideDeployedEnvironment,
-  deployDeleGatorEnvironment
-} from "@metamask/delegation-toolkit";
+  deployDeleGatorEnvironment,
+} from "@metamask/delegation-toolkit/utils";
 
 const environment: DeleGatorEnvironment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -233,7 +289,7 @@ Overrides or adds the `DeleGatorEnvironment` for a chain and supported version.
 
 ```ts
 import { environment } from "./environment.ts";
-import { getDeleGatorEnvironment } from "@metamask/delegation-toolkit";
+import { overrideDeployedEnvironment } from "@metamask/delegation-toolkit/utils";
 import { sepolia } from "viem/chains";
 
 overrideDeployedEnvironment(
@@ -253,7 +309,7 @@ export const environment: DeleGatorEnvironment = {
   SimpleFactory: "0x124..",
   // ...
   implementations: {
-  // ...
+    // ...
   },
 };
 ```
@@ -268,7 +324,7 @@ Encodes calldata for redeeming delegations.
 ### Parameters
 
 | Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
+| --- | --- | --- | --- |
 | `delegations` | `Delegation[][]` | Yes | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed. |
 | `modes` | `ExecutionMode[]` | Yes | A collection specifying the execution mode for each corresponding delegation chain. |
 | `executions` | `ExecutionStruct[][]` | Yes | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain. |
@@ -278,13 +334,12 @@ Encodes calldata for redeeming delegations.
 This example assumes you have a delegation signed by the delegator.
 
 ```ts
-import { 
-  createExecution,
-  DelegationFramework,
-} from "@metamask/delegation-toolkit";
+import { createExecution } from "@metamask/delegation-toolkit";
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
+import { zeroAddress } from "viem";
 
-const execution = createExecution();
-const data = DelegationFramework.encode.redeemDelegations({
+const data = DelegationManager.encode.redeemDelegations({
   delegations: [[ signedDelegation ]],
   modes: [ SINGLE_DEFAULT_MODE ],
   executions: [[ execution ]],
@@ -298,7 +353,7 @@ Signs the delegation and returns the delegation signature.
 ### Parameters
 
 | Name | Type | Required | Description |
-| ---- | ---- | -------- | ----------- |
+| --- | --- | --- | --- |
 | `signer` | `WalletClient` | Yes | [Viem Wallet Client](https://viem.sh/docs/clients/wallet#wallet-client) to sign the delegation. |
 | `delegation` | `Omit<Delegation, "signature">` | Yes | The unsigned delegation object to sign. |
 | `chainId` | `number` | Yes | The chain ID on which the delegation manager is deployed. |
@@ -348,7 +403,7 @@ export const walletClient = createWalletClient({
   chain: sepolia,
 });
 
-// The address to which the delegation is granted. It can be an EOA address, or 
+// The address to which the delegation is granted. It can be an EOA address, or
 // smart account address.
 const delegate = "0x2FcB88EC2359fA635566E66415D31dD381CF5585";
 

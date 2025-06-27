@@ -68,7 +68,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 ```typescript
 import { createPublicClient, http } from "viem";
 import { createBundlerClient } from "viem/account-abstraction";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { 
   Implementation, 
@@ -111,7 +111,7 @@ which fetches user operation gas price using the RPC method [`pimlico_getUserOpe
 
 :::info Installation required
 
-To estimate the gas fee using Pimlico's bundler, install the [permissionless.js SDK](https://docs.pimlico.io/references/permissionless/).
+To estimate the gas fee for Pimlico's bundler, install the [permissionless.js SDK](https://docs.pimlico.io/references/permissionless/).
 
 :::
 
@@ -128,7 +128,7 @@ import { bundlerClient, smartAccount } from "./config.ts" // The config.ts is th
 
 // add-start
 + const pimlicoClient = createPimlicoClient({
-+   transport: http("https://api.pimlico.io/v2/59141/rpc"), // You can get the API Key from the Pimlico dashboard.
++   transport: http("https://api.pimlico.io/v2/11155111/rpc"), // You can get the API Key from the Pimlico dashboard.
 + });
 +
 + const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();
@@ -160,7 +160,7 @@ import { createPimlicoClient } from "permissionless/clients/pimlico";
 import { bundlerClient, smartAccount } from "./config.ts" // The config.ts is the same as in the previous example.
 
 const pimlicoClient = createPimlicoClient({
-  transport: http("https://api.pimlico.io/v2/59141/rpc"), // You can get the API Key from the Pimlico dashboard.
+  transport: http("https://api.pimlico.io/v2/11155111/rpc"), // You can get the API Key from the Pimlico dashboard.
 });
 
 const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();

@@ -1,6 +1,6 @@
 ---
 description: Get started with the MetaMask Delegation Toolkit using the `create-gator-app` CLI.
-sidebar_position: 3
+sidebar_position: 4
 sidebar_label: CLI quickstart
 ---
 

@@ -22,7 +22,7 @@ This client will let the delegator account query the signer's account state and 
 
 ```typescript
 import { createPublicClient, http } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
  
 const publicClient = createPublicClient({
   chain,
@@ -101,6 +101,13 @@ delegator account to the delegate account.
 This example passes an empty `caveats` array, which means the delegate can perform any action on the delegator's behalf.
 We recommend [restricting the delegation](../how-to/create-delegation/restrict-delegation.md) by adding caveat enforcers.
 
+:::warning Important
+
+Before creating a delegation, ensure that the delegator account has 
+been deployed. If the account is not deployed, redeeming the delegation will fail.
+
+:::
+
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
 
@@ -137,18 +144,16 @@ executes actions on the delegator's behalf.
 To prepare the calldata for the redeem transaction, use the [`redeemDelegation`](../reference/api/delegation.md#redeemdelegation) utility function from the Delegation Toolkit.
 
 ```typescript
-import {
-  createExecution,
-  DelegationFramework,
-  SINGLE_DEFAULT_MODE,
-} from "@metamask/delegation-toolkit";
+import { createExecution } from "@metamask/delegation-toolkit";
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
 import { zeroAddress } from "viem";
 
 const delegations = [ signedDelegation ];
 
-const executions = createExecution(zeroAddress);
+const executions = createExecution({ target: zeroAddress });
 
-const redeemDelegationCalldata = DelegationFramework.encode.redeemDelegations({
+const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [ delegations ],
   modes: [ SINGLE_DEFAULT_MODE ],
   executions: [ executions ]

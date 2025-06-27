@@ -36,11 +36,9 @@ It assumes you have a delegation signed by the delegator, and that the delegate 
 <TabItem value="example.ts">
 
 ```typescript
-import { 
-  DelegationFramework, 
-  SINGLE_DEFAULT_MODE, 
-  ExecutionStruct
-} from "@metamask/delegation-toolkit";
+import { ExecutionStruct } from "@metamask/delegation-toolkit";
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
 import { bundlerClient, pimlicoClient } from "./client.ts";
 import { delegateSmartAccount } from "./account.ts";
 
@@ -56,7 +54,7 @@ const executions: ExecutionStruct[] = [{
   callData: "0x"
 }];
 
-const redeemDelegationCalldata = DelegationFramework.encode.redeemDelegations({
+const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [ delegations ],
   modes: [ mode ],
   executions: [ executions ]
@@ -105,12 +103,12 @@ export const delegateSmartAccount = await toMetaMaskSmartAccount({
 
 ```typescript
 import { createPublicClient, http } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { createBundlerClient } from "viem/account-abstraction";
 import { createPimlicoClient } from "permissionless/clients/pimlico";
 
 // You can get the API Key from the Pimlico dashboard.
-const pimlicoUrl = "https://api.pimlico.io/v2/59141/rpc";
+const pimlicoUrl = "https://api.pimlico.io/v2/11155111/rpc";
 
 export const publicClient = createPublicClient({
   chain,
@@ -139,11 +137,14 @@ The following example demonstrates how to submit a transaction to redeem a deleg
 
 ```typescript
 import { 
-  DelegationFramework, 
-  SINGLE_DEFAULT_MODE, 
-  ExecutionStruct
+  ExecutionStruct,
+  ExecutionMode
+  Delegation,
+  getDeleGatorEnvironment,
 } from "@metamask/delegation-toolkit";
-import { lineaSepolia as chain } from "viem/chains";
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
+import { sepolia as chain } from "viem/chains";
 import { delegateWalletClient } from "./account.ts";
 
 const delegations: Delegation[] = [ signedDelegation ];
@@ -159,7 +160,7 @@ const executions: ExecutionStruct[] = [{
   callData: "0x"
 }];
 
-const redeemDelegationCalldata = DelegationFramework.encode.redeemDelegations({
+const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [ delegations ],
   modes: [ mode ],
   executions: [ executions ]
@@ -178,7 +179,7 @@ const transactionHash = await walletClient.sendTransaction({
 
 ```typescript
 import { privateKeyToAccount } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { createWalletClient, http } from "viem";
 
 const delegateAccount = privateKeyToAccount("0x...");
@@ -207,10 +208,12 @@ the primary difference is that an EOA submits a regular transaction instead of a
 
 ```typescript
 import { 
-  DelegationFramework, 
-  SINGLE_DEFAULT_MODE, 
-  ExecutionStruct
+  ExecutionStruct,
+  Delegation,
+  ExecutionMode,
 } from "@metamask/delegation-toolkit";
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
 import { bundlerClient, pimlicoClient } from "./client.ts";
 import { delegateSmartAccount } from "./account.ts";
 
@@ -241,7 +244,7 @@ const executionsArray: ExecutionStruct:[][] = [
  execution
 ];
 
-const redeemDelegationCalldata = DelegationFramework.encode.redeemDelegations({
+const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [ delegations ],
   modes: [ mode ],
   executions: [ executions ]
@@ -290,12 +293,12 @@ export const delegateSmartAccount = await toMetaMaskSmartAccount({
 
 ```typescript
 import { createPublicClient, http } from "viem";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { createBundlerClient } from "viem/account-abstraction";
 import { createPimlicoClient } from "permissionless/clients/pimlico";
 
 // You can get the API Key from the Pimlico dashboard.
-const pimlicoUrl = "https://api.pimlico.io/v2/59141/rpc";
+const pimlicoUrl = "https://api.pimlico.io/v2/11155111/rpc";
 
 export const publicClient = createPublicClient({
   chain,

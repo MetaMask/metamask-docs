@@ -11,21 +11,31 @@ If you don't see the network you're looking for, you can request support by emai
 
 ## Mainnet networks
 
-| Network Name        | v0.10.1 | v0.10.2 | v0.11.0 |
+| Network Name        | v0.10.2 | v0.11.0 | v0.12.0 |
 | ------------------- | ------- | ------- | ------- |
 | Ethereum            | ✅      | ✅      | ✅      |
 | Polygon             | ✅      | ✅      | ✅      |
 | Binance Smart Chain | ✅      | ✅      | ✅      |
 | Optimism            | ✅      | ✅      | ✅      |
-| Arbitrum            | ✅      | ✅      | ✅      |
+| Arbitrum One        | ✅      | ✅      | ✅      |
 | Base                | ✅      | ✅      | ✅      |
 | Gnosis Chain        | ✅      | ✅      | ✅      |
+| Unichain            | ❌      | ❌      | ✅      |
+| Arbitrum Nova       | ❌      | ❌      | ✅      |
+| Berachain           | ❌      | ❌      | ✅      |
 
 ## Testnet networks
 
-| Network Name     | v0.10.1 | v0.10.2 | v0.11.0 |
-| ---------------- | ------- | ------- | ------- |
-| Ethereum Sepolia | ✅      | ✅      | ✅      |
-| Base Sepolia     | ✅      | ✅      | ✅      |
-| MegaEth          | ✅      | ✅      | ✅      |
-| Gnosis Chiado    | ❌      | ❌      | ✅      |
+| Network Name                | v0.10.2 | v0.11.0 | v0.12.0 |
+| --------------------------- | ------- | ------- | ------- |
+| Ethereum Sepolia            | ✅      | ✅      | ✅      |
+| Base Sepolia                | ✅      | ✅      | ✅      |
+| MegaEth                     | ✅      | ✅      | ✅      |
+| Gnosis Chiado               | ❌      | ✅      | ✅      |
+| Arbitrum Sepolia            | ❌      | ❌      | ✅      |
+| Unichain Sepolia            | ❌      | ❌      | ✅      |
+| Berachain Bepolia           | ❌      | ❌      | ✅      |
+| Optimism Sepolia            | ❌      | ❌      | ✅      |
+| Binance Smart Chain         | ❌      | ❌      | ✅      |
+| Polygon Amoy                | ❌      | ❌      | ✅      |
+| Monad                       | ❌      | ❌      | ✅      |  

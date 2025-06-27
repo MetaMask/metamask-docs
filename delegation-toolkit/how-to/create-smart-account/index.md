@@ -53,7 +53,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 ```typescript
 import { http, createPublicClient } from "viem";
 import { privateKeyToAccount, generatePrivateKey } from "viem/accounts";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 
 const transport = http(); 
 export const publicClient = createPublicClient({ 
