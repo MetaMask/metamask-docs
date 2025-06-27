@@ -69,7 +69,7 @@ export delegatorSmartAccount;
 See the changelog of the toolkit version you are using (in the left sidebar) for supported chains.
 :::
 
-Alternatively, you can use the `getDelegatorEnvironment` function to resolve the environment.
+Alternatively, you can use the [`getDelegatorEnvironment`](../reference/api/delegation.md#getdelegatorenvironment) function to resolve the environment.
 This function is especially useful if your delegator is not a smart account when
 [creating a redelegation](../how-to/create-delegation/index.md#create-a-redelegation).
 
@@ -85,7 +85,7 @@ const environment: DeleGatorEnvironment = getDelegatorEnvironment(11155111);
 
 ## Deploy custom delegator environment
 
-You can deploy the contracts using any method, but the toolkit provides a convenient `deployDelegatorEnvironment` function. This function simplifies deploying the Delegation Framework contracts to your desired EVM chain.
+You can deploy the contracts using any method, but the toolkit provides a convenient [`deployDelegatorEnvironment`](../reference/api/delegation.md#deploydelegatorenvironment) function. This function simplifies deploying the Delegation Framework contracts to your desired EVM chain.
 
 This function requires a Viem [Public Client](https://viem.sh/docs/clients/public.html), [Wallet Client](https://viem.sh/docs/clients/wallet.html), and [Chain](https://viem.sh/docs/glossary/types#chain)
 to deploy the contracts and resolve the `DeleGatorEnvironment`. 
@@ -159,7 +159,7 @@ Once the contracts are deployed, you can use them to override the delegator envi
 
 ## Override delegator environment
 
-To override the delegator environment, the toolkit provides a `overrideDeployedEnvironment` function to resolve
+To override the delegator environment, the toolkit provides an [`overrideDeployedEnvironment`](../reference/api/delegation.md#overridedeployedenvironment) function to resolve
 `DeleGatorEnvironment` with specified contracts for the given chain and contract version. 
 
 ```typescript

@@ -28,7 +28,7 @@ Use the `CaveatBuilder` to easily ensure that your delegations grant only the ne
 
 ## Create the caveat builder
 
-To create the caveat builder, call the `createCaveatBuilder()` function, passing an instance of `DeleGatorEnvironment`.
+To create the caveat builder, call the [`createCaveatBuilder`](../../reference/api/delegation.md#createcaveatbuilder) function, passing an instance of `DeleGatorEnvironment`.
 The environment can be accessed from the `MetaMaskSmartAccount`, as in this example:
 
 ```typescript

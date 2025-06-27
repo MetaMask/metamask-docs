@@ -120,8 +120,8 @@ const delegation = createDelegation({
 
 ### 6. Sign the delegation
 
-[Sign the delegation](../how-to/create-delegation/index.md#sign-a-delegation) using the `signDelegation` method from `MetaMaskSmartAccount`.
-Alternatively, you can use the Delegation Toolkit's `signDelegation` utility.
+[Sign the delegation](../how-to/create-delegation/index.md#sign-a-delegation) using the [`signDelegation`](../reference/api/smart-account.md#signdelegation) method from `MetaMaskSmartAccount`.
+Alternatively, you can use the Delegation Toolkit's [`signDelegation`](../reference/api/delegation.md#signdelegation) utility.
 The signed delegation will be used later to perform actions on behalf of the delegator.
 
 ```typescript
@@ -141,7 +141,7 @@ The delegate account can now [redeem the delegation](../how-to/redeem-delegation
 The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and
 executes actions on the delegator's behalf.
 
-To prepare the calldata for the redeem transaction, use the `redeemDelegation` utility function from the Delegation Toolkit.
+To prepare the calldata for the redeem transaction, use the [`redeemDelegation`](../reference/api/delegation.md#redeemdelegation) utility function from the Delegation Toolkit.
 
 ```typescript
 import { createExecution } from "@metamask/delegation-toolkit";
