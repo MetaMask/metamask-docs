@@ -1,7 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-import fs from "fs";
+import fs from 'fs'
 require('dotenv').config()
 const { themes } = require('prism-react-renderer')
 const { REF_ALLOW_LOGIN_PATH } = require('./src/lib/constants')
@@ -12,10 +12,13 @@ const {
   MM_RPC_URL,
 } = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
-const helpDropdown = fs.readFileSync("./src/components/NavDropdown/DeveloperTools.html", "utf-8");
-const connectDropdown = fs.readFileSync("./src/components/NavDropdown/ConnectMetaMask.html", "utf-8");
-const embedDropdown = fs.readFileSync("./src/components/NavDropdown/EmbedMetaMask.html", "utf-8");
-const extendDropdown = fs.readFileSync("./src/components/NavDropdown/ExtendScale.html", "utf-8");
+const helpDropdown = fs.readFileSync('./src/components/NavDropdown/DeveloperTools.html', 'utf-8')
+const connectDropdown = fs.readFileSync(
+  './src/components/NavDropdown/ConnectMetaMask.html',
+  'utf-8'
+)
+const embedDropdown = fs.readFileSync('./src/components/NavDropdown/EmbedMetaMask.html', 'utf-8')
+const extendDropdown = fs.readFileSync('./src/components/NavDropdown/ExtendScale.html', 'utf-8')
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'MetaMask developer documentation',
@@ -119,17 +122,17 @@ const config = {
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
-        lastVersion: "0.11.0",
+        lastVersion: '0.12.0',
         versions: {
           // Defaults to the ./docs folder.
           // Using "development" instead of "next" as path.
           current: {
-            label: "development",
-            path: "development",
+            label: 'development',
+            path: 'development',
           },
           // The latest release.
-          "0.11.0": {
-            label: "latest (0.11.0)",
+          '0.12.0': {
+            label: 'latest (0.12.0)',
           },
         },
       },
@@ -202,8 +205,9 @@ const config = {
     ({
       metadata: [
         {
-          name: "keywords",
-          content: "MetaMask, SDK, Wallet, API, Dapp, App, Connect, Delegation, Toolkit, Documentation, Smart, Account, Snaps, Infura, Services, Dashboard",
+          name: 'keywords',
+          content:
+            'MetaMask, SDK, Wallet, API, Dapp, App, Connect, Delegation, Toolkit, Documentation, Smart, Account, Snaps, Infura, Services, Dashboard',
         },
       ],
       image: '/img/metamaskog.jpeg',
@@ -224,7 +228,7 @@ const config = {
             label: 'Connect to MetaMask',
             items: [
               {
-                type: "html",
+                type: 'html',
                 value: connectDropdown,
               },
             ],
@@ -234,7 +238,7 @@ const config = {
             label: 'Embed MetaMask',
             items: [
               {
-                type: "html",
+                type: 'html',
                 value: embedDropdown,
               },
             ],
@@ -244,7 +248,7 @@ const config = {
             label: 'Extend and scale',
             items: [
               {
-                type: "html",
+                type: 'html',
                 value: extendDropdown,
               },
             ],
@@ -255,7 +259,7 @@ const config = {
             to: 'developer-tools/dashboard',
             items: [
               {
-                type: "html",
+                type: 'html',
                 value: helpDropdown,
               },
             ],
@@ -407,14 +411,14 @@ const config = {
         additionalLanguages: ['csharp', 'gradle', 'bash', 'json'],
         magicComments: [
           {
-            className: "git-diff-remove",
-            line: "remove-next-line",
-            block: { start: "remove-start", end: "remove-end" },
+            className: 'git-diff-remove',
+            line: 'remove-next-line',
+            block: { start: 'remove-start', end: 'remove-end' },
           },
           {
-            className: "git-diff-add",
-            line: "add-next-line",
-            block: { start: "add-start", end: "add-end" },
+            className: 'git-diff-add',
+            line: 'add-next-line',
+            block: { start: 'add-start', end: 'add-end' },
           },
         ],
       },
