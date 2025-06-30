@@ -13,8 +13,11 @@ This page provides instructions to install and set up the MetaMask Delegation To
 ## Prerequisites
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
-- Install [Yarn](https://yarnpkg.com/), [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
-- If you plan to use any smart contracts (for example, to [create a custom caveat enforcer](../how-to/create-delegation/create-custom-caveat-enforcer.md)), install [Foundry](https://book.getfoundry.sh/getting-started/installation).
+- Install [Yarn](https://yarnpkg.com/),
+    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+- If you plan to use any smart contracts (for example, to
+    [create a custom caveat enforcer](../how-to/create-delegation/create-custom-caveat-enforcer.md)),
+    install [Foundry](https://book.getfoundry.sh/getting-started/installation).
 
 ## Steps
 
@@ -28,7 +31,9 @@ npm install @metamask/delegation-toolkit
 
 ### 2. (Optional) Install the contracts
 
-If you plan to extend the Delegation Framework smart contracts (for example, to [create a custom caveat enforcer](../how-to/create-delegation/create-custom-caveat-enforcer.md)), install the contract package using Foundry's command-line tool, Forge:
+If you plan to extend the Delegation Framework smart contracts (for example, to
+[create a custom caveat enforcer](../how-to/create-delegation/create-custom-caveat-enforcer.md)), install
+the contract package using Foundry's command-line tool, Forge:
 
 ```bash
 forge install metamask/delegation-framework@v1.3.0
@@ -38,4 +43,5 @@ Add `@metamask/delegation-framework/=lib/metamask/delegation-framework/` in your
 
 ### 3. Get started
 
-You're now ready to start using the MetaMask Delegation Toolkit. Check out the [Delegation Toolkit quickstart](quickstart.md) to walk through a simple example.
+You're now ready to start using the MetaMask Delegation Toolkit.
+Check out the [Delegation Toolkit quickstart](quickstart.md) to walk through a simple example.
