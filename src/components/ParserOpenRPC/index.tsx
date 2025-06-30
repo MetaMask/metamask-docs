@@ -10,6 +10,7 @@ import global from './global.module.scss'
 import modalDrawerStyles from './ModalDrawer/styles.module.scss'
 import clsx from 'clsx'
 import { useColorMode } from '@docusaurus/theme-common'
+import { trackClickForSegment, trackInputChangeForSegment } from '@site/src/lib/segmentAnalytics'
 import { AuthBox } from '@site/src/components/ParserOpenRPC/AuthBox'
 import { MetamaskProviderContext } from '@site/src/theme/Root'
 import ProjectsBox from '@site/src/components/ParserOpenRPC/ProjectsBox'
@@ -51,8 +52,27 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   const [defExampleResponse, setDefExampleResponse] = useState(undefined)
   const [isLoading, setIsLoading] = useState(false)
   const { colorMode } = useColorMode()
+  const trackAnalyticsForRequest = response => {
+    trackClickForSegment({
+      eventName: 'Request Sent',
+      clickType: 'Request Sent',
+      userExperience: 'B',
+      // @ts-ignore
+      ...(response?.code && { responseStatus: response.code }),
+      responseMsg: null,
+      timestamp: Date.now(),
+    })
+  }
   const openModal = () => {
     setModalOpen(true)
+    trackClickForSegment({
+      eventName: 'Customize Request',
+      clickType: 'Customize Request',
+      userExperience: 'B',
+      responseStatus: null,
+      responseMsg: null,
+      timestamp: Date.now(),
+    })
   }
   const closeModal = () => setModalOpen(false)
 
@@ -144,6 +164,11 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   }
 
   const onParamsChangeHandle = data => {
+    trackInputChangeForSegment({
+      eventName: 'Request Configuration Started',
+      userExperience: 'B',
+      timestamp: Date.now(),
+    })
 
     if (typeof data !== 'object' || data === null || Object.keys(data).length === 0) {
       setParamsData([])
@@ -167,6 +192,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
         params: paramsData,
       })
       setReqResult(response)
+      trackAnalyticsForRequest(response)
       if (method === 'eth_getEncryptionPublicKey' && response) {
         setUserEncPublicKey(response as string)
       }
@@ -200,6 +226,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
       if (res.ok) {
         const response = await res.json()
         setReqResult(response)
+        trackAnalyticsForRequest(response)
       } else {
         const errorText = await res.text()
         const errorState = JSON.parse(errorText)
