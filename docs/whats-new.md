@@ -224,7 +224,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Documented [Snaps custom name resolution](/snaps/features/custom-name-resolution).
   ([#924](https://github.com/MetaMask/metamask-docs/pull/924))
 - Deprecated `snaps-types` and `snaps-ui` packages and updated
-  [Snaps tutorials](/snaps/learn/tutorials) to match latest tooling.
+  [Snaps tutorials](/snaps/learn/tutorials/gas-estimation) to match latest tooling.
   ([#1206](https://github.com/MetaMask/metamask-docs/pull/1206) and
   [#1210](https://github.com/MetaMask/metamask-docs/pull/1210))
 - Documented new [Snaps custom UI](/snaps/features/custom-ui) components and improved examples.
@@ -242,7 +242,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   - `selectedAddress` property
   - `networkChanged` event
   - `net_version` support in `send()`
-- Added [Snaps best practices section](/snaps/learn/best-practices).
+- Added [Snaps best practices section](/snaps/learn/best-practices/design-guidelines).
   ([#1187](https://github.com/MetaMask/metamask-docs/pull/1187))
 - Updated [Snaps CLI reference](/snaps/reference/cli) with Webpack configuration options.
   ([#1178](https://github.com/MetaMask/metamask-docs/pull/1178))

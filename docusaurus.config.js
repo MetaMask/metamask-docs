@@ -294,7 +294,6 @@ const config = {
           {
             type: 'dropdown',
             label: 'Developer tools',
-            to: 'developer-tools/dashboard',
             items: [
               {
                 type: "html",

@@ -97,11 +97,13 @@
 
   &__link--sublist-caret {
     &::after {
-      background: var(--ifm-menu-link-sublist-icon);
-      background-repeat: no-repeat;
-      background-size: contain;
-      height: 0.7rem;
-      width: 0.9rem;
+      background: var(--ifm-menu-link-sublist-icon) !important;
+      background-repeat: no-repeat !important;
+      background-size: contain !important;
+      height: 0.7rem !important;
+      width: 0.9rem !important;
+      transform: none !important;
+      content: '' !important;
     }
   }
 
@@ -133,11 +135,13 @@
     opacity: 0.25;
 
     &::before {
-      background: var(--ifm-menu-link-sublist-icon);
-      background-repeat: no-repeat;
-      background-size: contain;
-      height: 0.7rem;
-      width: 0.9rem;
+      background: var(--ifm-menu-link-sublist-icon) !important;
+      background-repeat: no-repeat !important;
+      background-size: contain !important;
+      height: 0.7rem !important;
+      width: 0.9rem !important;
+      transform: none !important;
+      content: '' !important;
     }
   }
 }
