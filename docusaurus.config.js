@@ -205,6 +205,48 @@ const config = {
           name: "keywords",
           content: "MetaMask, SDK, Wallet, API, Dapp, App, Connect, Delegation, Toolkit, Documentation, Smart, Account, Snaps, Infura, Services, Dashboard",
         },
+        // Twitter-specific meta tags
+        {
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          name: "twitter:image",
+          content: "https://docs.metamask.io/img/metamaskog.jpeg",
+        },
+        {
+          name: "twitter:image:alt",
+          content: "MetaMask Developer Documentation",
+        },
+        {
+          name: "twitter:site",
+          content: "@MetaMask",
+        },
+        {
+          name: "twitter:creator",
+          content: "@MetaMask",
+        },
+        // Open Graph meta tags for better social sharing
+        {
+          property: "og:image",
+          content: "https://docs.metamask.io/img/metamaskog.jpeg",
+        },
+        {
+          property: "og:image:width",
+          content: "1200",
+        },
+        {
+          property: "og:image:height",
+          content: "630",
+        },
+        {
+          property: "og:image:alt",
+          content: "MetaMask Developer Documentation",
+        },
+        {
+          property: "og:type",
+          content: "website",
+        },
       ],
       image: '/img/metamaskog.jpeg',
       colorMode: {
