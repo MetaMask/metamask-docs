@@ -4,7 +4,8 @@ description: Learn how to install and set up the MetaMask Delegation Toolkit.
 sidebar_position: 1
 ---
 
-import Tabs from "@theme/Tabs"; import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
 # Install and set up the Delegation Toolkit
 
