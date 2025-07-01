@@ -128,15 +128,19 @@
     },
     {
       "source": "/wallet/category/how-to/",
-      "destination": "/wallet/how-to/"
+      "destination": "/wallet/how-to/connect-extension/"
+    },
+    {
+      "source": "/wallet/how-to/",
+      "destination": "/wallet/how-to/connect-extension/"
     },
     {
       "source": "/wallet/connect/",
-      "destination": "/wallet/how-to/connect/"
+      "destination": "/wallet/how-to/connect-extension/"
     },
     {
       "source": "/wallet/connect/wallet-api/",
-      "destination": "/wallet/how-to/connect/"
+      "destination": "/wallet/how-to/connect-extension/"
     },
     {
       "source": "/guide/accessing-accounts/",
@@ -149,6 +153,10 @@
     {
       "source": "/wallet/get-started/access-accounts/",
       "destination": "/wallet/how-to/access-accounts/"
+    },
+    {
+      "source": "/wallet/how-to/manage-networks/",
+      "destination": "/wallet/how-to/manage-networks/detect-network/"
     },
     {
       "source": "/wallet/get-started/detect-network/",
@@ -193,6 +201,10 @@
     {
       "source": "/wallet/how-to/batch-json-rpc-requests/",
       "destination": "/sdk/guides/advanced/batch-requests/"
+    },
+    {
+      "source": "/wallet/how-to/display/",
+      "destination": "/wallet/how-to/display/tokens/"
     },
     {
       "source": "/guide/registering-your-token/",
@@ -259,8 +271,12 @@
       "destination": "/wallet/how-to/secure-dapp/"
     },
     {
+      "source": "/wallet/concepts/",
+      "destination": "/wallet/concepts/wallet-api/"
+    },
+    {
       "source": "/wallet/category/concepts/",
-      "destination": "/wallet/concepts/"
+      "destination": "/wallet/concepts/wallet-api/"
     },
     {
       "source": "/guide/provider-migration/",
@@ -307,8 +323,12 @@
       "destination": "/wallet/concepts/smart-contracts/"
     },
     {
+      "source": "/wallet/tutorials/",
+      "destination": "/wallet/tutorials/react-dapp-local-state/"
+    },
+    {
       "source": "/wallet/category/tutorials/",
-      "destination": "/wallet/tutorials/"
+      "destination": "/wallet/tutorials/react-dapp-local-state/"
     },
     {
       "source": "/wallet/how-to/set-up-dev-environment/",
@@ -355,8 +375,12 @@
       "destination": "/sdk/"
     },
     {
+      "source": "/wallet/reference/",
+      "destination": "/wallet/reference/json-rpc-methods/"
+    },
+    {
       "source": "/wallet/category/reference/",
-      "destination": "/wallet/reference/"
+      "destination": "/wallet/reference/json-rpc-methods/"
     },
     {
       "source": "/guide/ethereum-provider/",
@@ -391,16 +415,28 @@
       "destination": "/wallet/reference/json-rpc-methods/$1"
     },
     {
+      "source": "/wallet/reference/non-evm-apis/",
+      "destination": "/wallet/how-to/use-non-evm-networks/"
+    },
+    {
       "source": "/guide/snaps/",
       "destination": "/snaps/"
     },
     {
+      "source": "/snaps/get-started/",
+      "destination": "/snaps/get-started/install-flask/"
+    },
+    {
       "source": "/snaps/category/get-started/",
-      "destination": "/snaps/get-started/"
+      "destination": "/snaps/get-started/install-flask/"
     },
     {
       "source": "/snaps/get-started/install-snaps/",
       "destination": "/snaps/get-started/install-flask/"
+    },
+    {
+      "source": "/snaps/learn/",
+      "destination": "/snaps/learn/about-snaps/"
     },
     {
       "source": "/guide/snaps-concepts/",
@@ -443,12 +479,16 @@
       "destination": "/snaps/learn/about-snaps/files/"
     },
     {
+      "source": "/snaps/learn/tutorials/",
+      "destination": "/snaps/learn/tutorials/gas-estimation/"
+    },
+    {
       "source": "/snaps/category/tutorials/",
-      "destination": "/snaps/learn/tutorials/"
+      "destination": "/snaps/learn/tutorials/gas-estimation/"
     },
     {
       "source": "/snaps/tutorials/",
-      "destination": "/snaps/learn/tutorials/"
+      "destination": "/snaps/learn/tutorials/gas-estimation/"
     },
     {
       "source": "/snaps/tutorials/gas-estimation/",
@@ -457,6 +497,10 @@
     {
       "source": "/snaps/tutorials/transaction-insights/",
       "destination": "/snaps/learn/tutorials/transaction-insights/"
+    },
+    {
+      "source": "/snaps/learn/best-practices/",
+      "destination": "/snaps/learn/best-practices/design-guidelines/"
     },
     {
       "source": "/snaps/concepts/design-guidelines/",
@@ -479,8 +523,16 @@
       "destination": "/snaps/learn/resources/"
     },
     {
+      "source": "/snaps/how-to/",
+      "destination": "/snaps/how-to/request-permissions/"
+    },
+    {
       "source": "/snaps/category/how-to/",
-      "destination": "/snaps/how-to/"
+      "destination": "/snaps/how-to/request-permissions/"
+    },
+    {
+      "source": "/snaps/features/",
+      "destination": "/snaps/features/cron-jobs/"
     },
     {
       "source": "/snaps/how-to/use-custom-ui/",
@@ -543,8 +595,12 @@
       "destination": "/snaps/how-to/connect-to-a-snap/"
     },
     {
+      "source": "/snaps/reference/",
+      "destination": "/snaps/reference/snaps-api/"
+    },
+    {
       "source": "/snaps/category/reference/",
-      "destination": "/snaps/reference/"
+      "destination": "/snaps/reference/snaps-api/"
     },
     {
       "source": "/guide/snaps-rpc-api/",
@@ -569,6 +625,38 @@
     {
       "source": "/snaps/reference/cli/options/",
       "destination": "/snaps/reference/config-options/"
+    },
+    {
+      "source": "/services/get-started/",
+      "destination": "/services/get-started/infura"
+    },
+    {
+      "source": "/services/how-to/",
+      "destination": "/services/how-to/avoid-rate-limiting"
+    },
+    {
+      "source": "/services/how-to/use-ipfs/access-ipfs-content",
+      "destination": "/services/how-to/use-ipfs/access-ipfs-content/dedicated-gateways"
+    },
+    {
+      "source": "/services/concepts/",
+      "destination": "/services/concepts/failover-protection"
+    },
+    {
+      "source": "/services/tutorials/",
+      "destination": "/services/tutorials/ethereum/authenticate-with-jwt"
+    },
+    {
+      "source": "/services/tutorials/ethereum/",
+      "destination": "/services/tutorials/ethereum/authenticate-with-jwt"
+    },
+    {
+      "source": "/services/tutorials/layer-2-networks/",
+      "destination": "/services/tutorials/layer-2-networks/deploy-an-nft-smart-contract-on-palm/"
+    },
+    {
+      "source": "/services/reference/",
+      "destination": "/services/reference/arbitrum/"
     },
     {
       "source": "/services/gas-api/",

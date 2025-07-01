@@ -148,6 +148,36 @@
   font-size: 1.6rem;
 }
 
+// Styles for markdown content rendered by MDContent component
+:global(.md-content) {
+  a {
+    color: var(--ifm-link-color);
+    text-decoration: underline;
+    text-decoration-color: var(--ifm-link-color);
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.4rem;
+    transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    font-weight: 500;
+
+    &:hover {
+      color: var(--ifm-link-hover-color);
+      text-decoration: underline;
+      text-decoration-color: var(--ifm-link-hover-color);
+      text-decoration-thickness: 0.1rem;
+      text-underline-offset: 0.4rem;
+    }
+  }
+
+  code {
+    font-family: var(--font-mm-sans-mono);
+    font-size: 80%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background: var(--ifm-code-background);
+    border-radius: 0.4rem;
+  }
+}
+
 html[data-theme='dark'] {
   .paramWrapper,
   .borderWrapper,

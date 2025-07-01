@@ -43,24 +43,19 @@ The toolkit enables:
 
 ## Where do I start?
 
-Check out the following sections to get started with the MetaMask Delegation Toolkit:
+Check out the following guides to get started with the MetaMask Delegation Toolkit:
 
 <CardList
   items={[
     {
-      href: "get-started",
-      title: "🏁 Get started",
-      description: "If you're ready to get started building, install the Toolkit and follow a quickstart.",
+      href: "get-started/install",
+      title: "Install and set up",
+      description: "Install and set up the MetaMask Delegation Toolkit.",
     },
     {
-      href: "how-to",
-      title: "🛠️ How-to guides",
-      description: "To complete specific tasks with the Delegation Toolkit, follow the how-to guides.",
-    },
-    {
-      href: "concepts",
-      title: "💭 Concepts",
-      description: "If you're new to the Delegation Toolkit, learn about some key concepts.",
+      href: "get-started/quickstart",
+      title: "Delegation quickstart",
+      description: "Create a delegator account and complete the delegation lifecycle.",
     }
   ]}
 />

@@ -1,7 +1,5 @@
 ---
 sidebar_position: 1
-tags:
-  - Keyring API
 ---
 
 import Tabs from "@theme/Tabs";
