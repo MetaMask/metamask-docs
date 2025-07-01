@@ -16,6 +16,7 @@ const helpDropdown = fs.readFileSync("./src/components/NavDropdown/DeveloperTool
 const connectDropdown = fs.readFileSync("./src/components/NavDropdown/ConnectMetaMask.html", "utf-8");
 const embedDropdown = fs.readFileSync("./src/components/NavDropdown/EmbedMetaMask.html", "utf-8");
 const extendDropdown = fs.readFileSync("./src/components/NavDropdown/ExtendScale.html", "utf-8");
+const npm2yarnPlugin = [require("@docusaurus/remark-plugin-npm2yarn"), { sync: true }];
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'MetaMask developer documentation',
@@ -72,6 +73,7 @@ const config = {
           editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
           sidebarPath: false,
           breadcrumbs: false,
+          remarkPlugins: [npm2yarnPlugin],
         },
         theme: {
           customCss: require.resolve('./src/scss/custom.scss'),
@@ -91,6 +93,7 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./snaps-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
         admonitions: {
           keywords: [
             'info',
@@ -116,6 +119,7 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./gator-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
@@ -143,6 +147,7 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./services-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
       },
     ],
     [
@@ -154,6 +159,7 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./dashboard-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
       },
     ],
     [
@@ -165,6 +171,7 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./wallet-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           const sidebarItems = await defaultSidebarItemsGenerator(args)
           const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
@@ -188,6 +195,7 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./sdk-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
       },
     ],
     './src/plugins/plugin-json-rpc.ts',
@@ -195,6 +203,12 @@ const config = {
     './src/plugins/segment',
     './src/plugins/launchdarkly',
     './src/plugins/sentry',
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'GTM-5FGPLC2Q',
+      },
+    ],
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:
