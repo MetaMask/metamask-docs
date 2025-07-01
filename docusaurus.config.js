@@ -517,12 +517,6 @@ const config = {
           },
         },
       },
-      announcementBar: {
-        id: 'support_us',
-        content:
-          '<span style="font-weight: 600">NEW!</span> Build embedded wallets with MetaMask using the <a target="_blank" rel="noopener noreferrer" href="https://web3auth.io/docs">Embedded Wallets SDK (Web3Auth)</a>. Instantly onboard users with social logins, passkeys, and more.',
-        isCloseable: false,
-      },
     }),
 }
 
