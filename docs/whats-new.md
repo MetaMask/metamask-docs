@@ -11,8 +11,15 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## June 2025
 
+- Updated the [docs homepage](/), added descriptive dropdowns the top navigation bar, and
+  added title banners to each product section.
+  ([#2074](https://github.com/MetaMask/metamask-docs/pull/2074))
+- Simplified and enhanced the [SDK introduction](/sdk).
+  ([#2064](https://github.com/MetaMask/metamask-docs/pull/2064))
 - Added [Delegation Toolkit](/delegation-toolkit) to MetaMask documentation.
   ([#2045](https://github.com/MetaMask/metamask-docs/pull/2045))
+- Documented how to use the SDK CLI to set up a [Web3Auth SDK](/sdk/connect/javascript-web3auth) project.
+  ([#2075](https://github.com/MetaMask/metamask-docs/pull/2075))
 
 ## May 2025
 
