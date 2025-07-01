@@ -1,0 +1,9 @@
+{
+  "label": "Experimental actions",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "slug": "/reference/api/experimental-actions",
+    "title": "Delegation Toolkit experimental actions API reference"
+  }
+}
