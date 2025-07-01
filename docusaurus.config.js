@@ -204,9 +204,9 @@ const config = {
     './src/plugins/launchdarkly',
     './src/plugins/sentry',
     [
-      '@docusaurus/plugin-google-gtag',
+      '@docusaurus/plugin-google-tag-manager',
       {
-        trackingID: 'GTM-5FGPLC2Q',
+        containerId: 'GTM-5FGPLC2Q',
       },
     ],
   ],
