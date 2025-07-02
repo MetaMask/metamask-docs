@@ -1,9 +1,4 @@
 {
   "label": "Experimental",
-  "position": 5,
-  "link": {
-    "type": "generated-index",
-    "slug": "/experimental",
-    "title": "Delegation Toolkit experimental features"
-  }
+  "position": 5
 }

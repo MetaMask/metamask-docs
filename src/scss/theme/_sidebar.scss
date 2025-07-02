@@ -95,16 +95,6 @@
     }
   }
 
-  &__link--sublist-caret {
-    &::after {
-      background: var(--ifm-menu-link-sublist-icon);
-      background-repeat: no-repeat;
-      background-size: contain;
-      height: 0.7rem;
-      width: 0.9rem;
-    }
-  }
-
   &__link {
     color: var(--ifm-menu-color-active);
     font-size: 1.7rem;
@@ -138,8 +128,19 @@
       background-size: contain;
       height: 0.7rem;
       width: 0.9rem;
+      content: '';
     }
   }
+
+  &__link--active + &__caret::before {
+    opacity: 1;
+  }
+
+  &__link--non-collapsible {
+    cursor: default;
+  }
+
+
 }
 
 .theme-doc-sidebar-container {

@@ -168,7 +168,7 @@ The decimal conversion of the result is `11392978000069000000000069` wei, which 
 
 ## 4. Secure your API key
 
-[Configure security settings](../../../developer-tools/dashboard/how-to/secure-an-api/) in the **Settings** tab.
+[Configure security settings](/developer-tools/dashboard/how-to/secure-an-api/api-key) in the **Settings** tab.
 This is optional.
 
 For example, you can force API requests to include the API key secret and/or

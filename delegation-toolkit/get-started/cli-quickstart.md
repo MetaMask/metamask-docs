@@ -1,21 +1,21 @@
 ---
-description: Get started with the MetaMask Delegation Toolkit using the `create-gator-app` CLI.
+description: Get started with the MetaMask Delegation Toolkit using the `@metamask/create-gator-app` CLI.
 sidebar_position: 5
 sidebar_label: CLI quickstart
 ---
 
 # Delegation Toolkit CLI quickstart
 
-Use the `create-gator-app` interactive CLI to bootstrap a project with the MetaMask Delegation Toolkit in under two minutes. 
+Use the `@metamask/create-gator-app` interactive CLI to bootstrap a project with the MetaMask Delegation Toolkit in under two minutes. 
 The CLI automatically installs the required dependencies and sets up a project structure using a selected template,
 allowing you to focus on building your dapp.
 
 ## Run the CLI
 
-Run the following command to automatically install the `create-gator-app` package:
+Run the following command to automatically install the `@metamask/create-gator-app` package:
 
 ```bash
-npx create-gator-app@latest
+npx @metamask/create-gator-app@latest
 ```
 
 Upon installation, you'll be asked the following prompts:
@@ -43,7 +43,7 @@ The CLI provides the following options to display CLI details, and further custo
 
 | Option              | Description                                                                                                                                                 |
 |---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `-v` or `--version` | Check the current version of the `create-gator-app` CLI.                                                                                                    |
+| `-v` or `--version` | Check the current version of the `@metamask/create-gator-app` CLI.                                                                                                    |
 | `-h` or `--help`    | Display the available options.                                                                                                                              |
 | `--skip-install`    | Skip the installation of dependencies.                                                                                                                      |
 | `--add-web3auth`    | Add Web3Auth Embedded Wallet as a signer for the delegator account. <br/>Supported templates: <ul><li>Next.js starter</li><li> Vite React starter</li></ul> |
@@ -53,10 +53,10 @@ The CLI provides the following options to display CLI details, and further custo
 
 ### Web3Auth configuration
 
-To create a project that uses [Web3Auth](https://web3auth.io/docs/) Embedded Wallet as the signer for your delegator account, use the `--add-web3auth` option with `create-gator-app`:
+To create a project that uses [Web3Auth](https://web3auth.io/docs/) Embedded Wallet as the signer for your delegator account, use the `--add-web3auth` option with `@metamask/create-gator-app`:
 
 ```bash
-npx create-gator-app --add-web3auth
+npx @metamask/create-gator-app --add-web3auth
 ```
 
 You'll be prompted to provide additional Web3Auth configuration details:
@@ -69,10 +69,10 @@ You'll be prompted to provide additional Web3Auth configuration details:
 
 ### LLM rules
 
-To create a project with LLM rules tailored to your preferred IDE, use the `--add-llm-rules` option with `create-gator-app`:
+To create a project with LLM rules tailored to your preferred IDE, use the `--add-llm-rules` option with `@metamask/create-gator-app`:
 
 ```bash
-npx create-gator-app --add-llm-rules
+npx @metamask/create-gator-app --add-llm-rules
 ```
 
 You'll be prompted to select your IDE.
