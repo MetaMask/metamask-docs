@@ -1,12 +1,12 @@
 ---
-description: Upgrade an externally owned account (EOA) to a smart account
+description: Upgrade an externally owned account (EOA) to a Smart Account
 sidebar_position: 3
 sidebar_label: EIP-7702 quickstart
 ---
 
 # EIP-7702 quickstart
 
-This page demonstrates how to upgrade your externally owned account (EOA) to support MetaMask smart account 
+This page demonstrates how to upgrade your externally owned account (EOA) to support MetaMask Smart Account 
 functionality using an [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702) transaction. This enables your EOA to leverage the benefits of account 
 abstraction, such as batch transactions, gas sponsorship, and [ERC-7710 delegation capabilities](./../concepts/delegation.md).
 
@@ -73,7 +73,7 @@ does not support JSON-RPC accounts.
 
 This example uses [`EIP7702StatelessDeleGator`](https://github.com/MetaMask/delegation-framework/blob/main/src/EIP7702/EIP7702StatelessDeleGator.sol) as the EIP-7702 delegator contract. 
 It follows a stateless design, as it does not store signer data in the contract's state. This approach
-provides a lightweight and secure way to upgrade an EOA to a smart account.
+provides a lightweight and secure way to upgrade an EOA to a Smart Account.
 
 ```typescript
 import {
@@ -108,9 +108,9 @@ const hash = await walletClient.sendTransaction({
 });
 ```
 
-### 6. Create a MetaMask smart account
+### 6. Create a MetaMask Smart Account
 
-Create a smart account instance for the EOA and start 
+Create a Smart Account instance for the EOA and start 
 leveraging the benefits of account abstraction.
 
 ```ts

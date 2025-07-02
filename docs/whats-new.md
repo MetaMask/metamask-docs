@@ -9,6 +9,12 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+
+## July 2025
+
+- Added a [MetaMask Smart Account quickstart](/delegation-toolkit/development/quickstart).
+  ([#2132](https://github.com/MetaMask/metamask-docs/pull/2132))
+
 ## June 2025
 
 - Updated the [docs homepage](/), added descriptive dropdowns the top navigation bar, and

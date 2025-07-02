@@ -404,7 +404,7 @@ export const walletClient = createWalletClient({
 });
 
 // The address to which the delegation is granted. It can be an EOA address, or
-// smart account address.
+// Smart Account address.
 const delegate = "0x2FcB88EC2359fA635566E66415D31dD381CF5585";
 
 export const delegation = createDelegation({

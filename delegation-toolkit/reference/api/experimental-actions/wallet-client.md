@@ -44,7 +44,7 @@ const expiry = Math.floor(Date.now() / 1000 + 604_800); // 1 week from now.
 const currentTime = Math.floor(Date.now() / 1000); // now
 
 // Address of the wallet that will manage the session. It can 
-// be either a smart account or an externally owned account (EOA)
+// be either a Smart Account or an externally owned account (EOA)
 const sessionAccount = "0x1431..";
 
 const grantedPermissions = await walletClient.grantPermissions([{

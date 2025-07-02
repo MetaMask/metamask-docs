@@ -12,8 +12,8 @@ import TabItem from "@theme/TabItem";
 This is an experimental feature and may change in future releases.
 :::
 
-[ERC-7710](https://eip.tools/eip/7710) introduces a standard way for smart accounts to delegate capabilities to other
-smart accounts or externally owned accounts (EOAs).
+[ERC-7710](https://eip.tools/eip/7710) introduces a standard way for Smart Accounts to delegate capabilities to other
+Smart Accounts or externally owned accounts (EOAs).
 
 The MetaMask Delegation Toolkit provides two experimental functions, `erc7710BundlerActions()` and `erc7710WalletActions()`, that let
 a caller redeem delegations granted by MetaMask's permissions system.
@@ -57,7 +57,7 @@ const permissionsResponse = [{
 
 const permissionsContext = permissionsResponse[0].context;
 const delegationManager = permissionsResponse[0].signerMeta.delegationManager;
-// accountMeta is only present when the smart account is not deployed.
+// accountMeta is only present when the Smart Account is not deployed.
 const accountMetadata = permissionsResponse[0].accountMeta;
 ```
 
@@ -80,11 +80,11 @@ If you redeem delegations in any other way, it is your responsibility to validat
 
 ## Redeem the permission
 
-Redeem a delegation with a [smart account](#redeem-with-a-smart-account) or an [externally owned account (EOA)](#redeem-with-an-eoa).
+Redeem a delegation with a [Smart Account](#redeem-with-a-smart-account) or an [externally owned account (EOA)](#redeem-with-an-eoa).
 
-### Redeem with a smart account
+### Redeem with a Smart Account
 
-To redeem a delegation with a smart account, create a [`MetaMaskSmartAccount`](../how-to/create-smart-account/index.md#create-a-metamasksmartaccount)
+To redeem a delegation with a Smart Account, create a [`MetaMaskSmartAccount`](../how-to/create-smart-account/index.md#create-a-metamasksmartaccount)
 and a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler).
 
 After setting up your Bundler Client, you can extend its functionality with `erc7710BundlerActions` actions to support ERC-7710. Once extended, use [`sendUserOperationWithDelegation`](../reference/api/experimental-actions/bundler-client.md#senduseroperationwithdelegation) to redeem the permission.
