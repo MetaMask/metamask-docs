@@ -6,12 +6,12 @@ sidebar_position: 1
 # MetaMask Smart Accounts
 
 The MetaMask Delegation Toolkit enables you to create and manage MetaMask Smart Accounts.
-Smart Accounts are [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) smart contract accounts
+MetaMask Smart Accounts are [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) smart contract accounts
 that support programmable account behavior and advanced features such as multi-signature approvals,
 automated transaction batching, and custom security policies.
-Unlike traditional wallets, which rely on private keys for every transaction, MetaMask Smart Accounts use smart contracts to govern account logic.
+Unlike traditional wallets, which rely on private keys for every transaction, smart accounts use smart contracts to govern account logic.
 
-Smart Accounts are referenced in the toolkit as `MetaMaskSmartAccount`.
+Smart accounts are referenced in the toolkit as `MetaMaskSmartAccount`.
 
 ## Account abstraction (ERC-4337)
 
@@ -23,7 +23,7 @@ accounts, or externally owned accounts (EOAs).
 ERC-4337 introduces the following concepts:
 
 - **User operation** - A package of instructions signed by a user, specifying executions for
-  the Smart Account to perform.
+  the smart account to perform.
   User operations are collected and submitted to the network by bundlers.
 
 - **Bundler** - A service that collects multiple user operations, packages them into a single transaction,
@@ -33,42 +33,42 @@ ERC-4337 introduces the following concepts:
   adhere to the required rules and security checks.
 
 - **Paymasters** - Entities that handle the payment of gas fees on behalf of users, often integrated
-  into Smart Accounts to facilitate gas abstraction.
+  into smart accounts to facilitate gas abstraction.
 
-## Smart Account implementation types
+## Smart account implementation types
 
-The MetaMask Delegation Toolkit supports three types of Smart Accounts, each offering unique features and use cases.
+The MetaMask Delegation Toolkit supports three types of MetaMask Smart Accounts, each offering unique features and use cases.
 
 See [Configure accounts and signers](../how-to/create-smart-account/configure-accounts-signers.md) to learn how to use these different account types.
 
-### Hybrid Smart Account
+### Hybrid smart account
 
-The Hybrid Smart Account is a flexible implementation that supports both an externally owned account (EOA) "owner" and any number of P256 (passkey) signers.
-You can configure any of these signers as the signatory, and use them to sign any data, including user operations, on behalf of the Smart Account.
+The Hybrid smart account is a flexible implementation that supports both an externally owned account (EOA) "owner" and any number of P256 (passkey) signers.
+You can configure any of these signers as the signatory, and use them to sign any data, including user operations, on behalf of the smart account.
 
 This type is referenced in the toolkit as `Implementation.Hybrid`.
 
-### Multisig Smart Account
+### Multisig smart account
 
-The Multisig Smart Account is an implementation that supports multiple signers with a configurable threshold for valid signatures, allowing for enhanced security and flexibility in account management.
+The Multisig smart account is an implementation that supports multiple signers with a configurable threshold for valid signatures, allowing for enhanced security and flexibility in account management.
 The signatory must have at least as many signers include as the threshold is configured for the account.
 
 This type is referenced in the toolkit as `Implementation.Multisig`.
 
-### Stateless 7702 Smart Account
+### Stateless 7702 smart account
 
-The Stateless 7702 Smart Account implementation represents an externally owned account (EOA) upgraded to
-support Smart Account functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702). This implementation enables EOAs to perform Smart Account operations, including the creation and management of delegations.
+The Stateless 7702 smart account implementation represents an externally owned account (EOA) upgraded to
+support smart account functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702). This implementation enables EOAs to perform smart account operations, including the creation and management of delegations.
 
 This type is referenced in the toolkit as `Implementation.Stateless7702`.
 
-## Smart Account flow
+## Smart account flow
 
-The MetaMask Smart Account flow is as follows:
+The MetaMask Smart Accounts flow is as follows:
 
-1. **Account setup** - A user creates a Smart Account by deploying a smart contract, and initializing it with
+1. **Account setup** - A user creates a smart account by deploying a smart contract, and initializing it with
    ownership and security settings.
-   The user can customize the Smart Account in the following ways:
+   The user can customize the smart account in the following ways:
 
     - **Account logic** - They can configure custom logic for actions such as multi-signature
       approvals, spending limits, and automated transaction batching.
@@ -90,6 +90,6 @@ The MetaMask Smart Account flow is as follows:
 
 ## Delegator accounts
 
-Delegator accounts are a type of Smart Account that allows users to grant permission to other Smart Accounts or EOAs
+Delegator accounts are a type of MetaMask smart account that allows users to grant permission to other smart accounts or EOAs
 to perform specific executions on their behalf, under defined rules and restrictions.
 Learn more about [delegation](delegation.md).

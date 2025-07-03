@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Install and set up the Delegation Toolkit
 
-This page provides instructions to install and set up the MetaMask Delegation Toolkit, enabling you to integrate [Smart Accounts](../concepts/smart-accounts.md) into your dapp.
+This page provides instructions to install and set up the MetaMask Delegation Toolkit, enabling you to integrate [MetaMask Smart Accounts](../concepts/smart-accounts.md) into your dapp.
 
 ## Prerequisites
 

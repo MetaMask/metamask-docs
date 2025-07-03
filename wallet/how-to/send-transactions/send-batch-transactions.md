@@ -14,13 +14,13 @@ You can send and manage batch transactions in MetaMask, using the methods specif
 ## About atomic batch transactions
 
 An atomic batch transaction is a group of transactions that are executed together as a single unit.
-When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their externally owned account (EOA) to a [MetaMask Smart Account](/delegation-toolkit/concepts/smart-accounts).
+When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their externally owned account (EOA) to a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts).
 If the user accepts, MetaMask proceeds to upgrade the account and process the request as a single atomic transaction as specified by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
 
-:::note Smart Accounts
+:::note MetaMask Smart Accounts
 MetaMask Smart Accounts are [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) smart contract accounts that support programmable account behavior and advanced features such as multi-signature approvals, transaction batching, and custom security policies.
 
-See the [Delegation Toolkit documentation](/delegation-toolkit) for more information about Smart Accounts and their capabilities.
+See the [Delegation Toolkit documentation](/delegation-toolkit) for more information about smart accounts and their capabilities.
 :::
 
 The key benefits of atomic batch transactions include:
@@ -81,7 +81,7 @@ For example:
 The `atomic` capability can have a `status` of `supported` or `ready`:
 
 - `supported` means MetaMask supports atomic batch transactions for the account and chain ID.
-- `ready` means MetaMask will prompt the user to upgrade their account to a MetaMask Smart Account.
+- `ready` means MetaMask will prompt the user to upgrade their account to a MetaMask smart account.
   If the user approves, the `status` will upgrade to `supported`.
 
 If the `atomic` capability is not `supported` or `ready` for a specified chain ID, MetaMask will not return anything for that chain ID.
@@ -219,7 +219,7 @@ In these cases, `atomic` is `true` but multiple receipts are returned.
 ## Resources
 
 - See the [MetaMask 7702/5792 Readiness dapp](https://7702playground.metamask.io/) to quickly test sending batch transactions.
-- See the [MetaMask Delegation Toolkit documentation](/delegation-toolkit) for more information about Smart Accounts and their capabilities.
+- See the [MetaMask Delegation Toolkit documentation](/delegation-toolkit) for more information about MetaMask Smart Accounts and their capabilities.
 - See the following topics in the MetaMask end user documentation:
   - [What is a smart account?](https://support.metamask.io/configure/accounts/what-is-a-smart-account/)
   - [How to switch to or revert from a smart account](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/)

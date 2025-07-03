@@ -1,15 +1,15 @@
 ---
 sidebar_label: Configure accounts and signers
-description: Learn how to configure different types of delegator accounts and signers using Viem.
+description: Learn how to configure different types of smart accounts and signers using Viem.
 sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Configure Smart Accounts and signers
+# Configure MetaMask Smart Accounts and signers
 
-The MetaMask Delegation Toolkit supports different [Smart Account types](../../concepts/smart-accounts.md#smart-account-implementation-types),
+The MetaMask Delegation Toolkit supports different [MetaMask smart account types](../../concepts/smart-accounts.md#smart-account-implementation-types),
 each with its own configuration and support for different signing mechanisms.
 You can create flexible and secure delegator accounts tailored to your specific needs.
 
@@ -17,27 +17,27 @@ You can create flexible and secure delegator accounts tailored to your specific 
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
 - [Configure the Delegation Toolkit.](../configure.md)
-- [Create a Smart Account.](index.md)
+- [Create a MetaMask smart account.](index.md)
 
-## Configure a Hybrid Smart Account
+## Configure a Hybrid smart account
 
-The [Hybrid Smart Account](../../concepts/smart-accounts.md#hybrid-smart-account) supports both an EOA "owner" and any number of P256 (passkey) signers.
+The [Hybrid smart account](../../concepts/smart-accounts.md#hybrid-smart-account) supports both an EOA "owner" and any number of P256 (passkey) signers.
 
-To configure a Hybrid Smart Account, provide the following parameters:
+To configure a Hybrid smart account, provide the following parameters:
 
 - `owner`: The owner's account address as a hex string.
   The owner can be the zero address, indicating that there is no owner configured.
 - `p256KeyIds`: An array of key identifiers for P256 signers as hex strings.
 - `p256XValues`: An array of public key x-values for P256 signers as `bigint`s.
 - `p256YValues`: An array of public key y-values for P256 signers as `bigint`s.
-- `signatory`: A signer that will sign on behalf of the Smart Account.
+- `signatory`: A signer that will sign on behalf of the smart account.
 
 :::note
 You can set all `p256` parameters to empty arrays to configure no WebAuthn signer.
 However, we recommend configuring at least one signer for account recoverability.
 :::
 
-For a Hybrid Smart Account, you can configure the following types of signatories:
+For a Hybrid smart account, you can configure the following types of signatories:
 
 ### Configure an account signatory
 
@@ -222,7 +222,7 @@ import {
 } from "viem/account-abstraction";
   
 export const credential = await createWebAuthnCredential({
-  name: "MetaMask Smart Account",
+  name: "MetaMask smart account",
 });
 
 export const webAuthnAccount = toWebAuthnAccount({ credential });
@@ -232,19 +232,19 @@ export const webAuthnAccount = toWebAuthnAccount({ credential });
 </Tabs>
 
 
-## Configure a Multisig Smart Account
+## Configure a Multisig smart account
 
-The [Multisig Smart Account](../../concepts/smart-accounts.md#multisig-smart-account) supports multiple EOA signers with a configurable threshold for execution.
+The [Multisig smart account](../../concepts/smart-accounts.md#multisig-smart-account) supports multiple EOA signers with a configurable threshold for execution.
 
-To configure a Multisig Smart Account, provide the following parameters:
+To configure a Multisig smart account, provide the following parameters:
 
 - `signers`: An array of EOA signer addresses as hex strings.
 - `threshold`: The number of signers required to execute a transaction, as a `bigint`.
-- `signatory`: A signer that will sign on behalf of the Smart Account.
+- `signatory`: A signer that will sign on behalf of the smart account.
 
 ### Configure signatories
 
-For a Multisig Smart Account, you can use a combination of account signatories and Wallet Client signatories.
+For a Multisig smart account, you can use a combination of account signatories and Wallet Client signatories.
 For example:
 
 <Tabs>
@@ -316,17 +316,17 @@ export const walletClient = createWalletClient({
 The number of signers in the signatories must be at least equal to the threshold for valid signature generation.
 :::
 
-## Configure a Stateless 7702 Smart Account
+## Configure a Stateless 7702 smart account
 
-The [Stateless 7702 Smart Account](../../concepts/smart-accounts.md#stateless-7702-smart-account) represents an EOA that has been upgraded to support Smart Account 
+The [Stateless 7702 smart account](../../concepts/smart-accounts.md#stateless-7702-smart-account) represents an EOA that has been upgraded to support MetaMask Smart Accounts 
 functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702). This implementation does not handle the upgrade process; see the [EIP-7702 quickstart](./../../get-started/eip7702-quickstart.md) to learn how to upgrade.
 
-To configure a Stateless 7702 Smart Account, provide the following parameters:
+To configure a Stateless 7702 smart account, provide the following parameters:
 
-- `address`: The address of the EOA that has been upgraded to a Smart Account.
-- `signatory`: A signer that will sign on behalf of the Smart Account.
+- `address`: The address of the EOA that has been upgraded to a smart account.
+- `signatory`: A signer that will sign on behalf of the smart account.
 
-For a Stateless 7702 Smart Account, you can configure the following types of signatories:
+For a Stateless 7702 smart account, you can configure the following types of signatories:
 
 ### Configure an account signatory
 

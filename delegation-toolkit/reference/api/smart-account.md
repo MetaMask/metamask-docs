@@ -1,6 +1,6 @@
 ---
-description: Smart Account-related API methods reference.
-sidebar_label: Smart Account
+description: MetaMask Smart Accounts-related API methods reference.
+sidebar_label: MetaMask Smart Accounts
 sidebar_position: 2
 toc_max_heading_level: 2
 ---
@@ -8,9 +8,9 @@ toc_max_heading_level: 2
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Smart Account API reference
+# MetaMask Smart Accounts API reference
 
-The following API methods are related to creating, managing, and signing with [Smart Accounts](../../concepts/smart-accounts.md).
+The following API methods are related to creating, managing, and signing with [MetaMask Smart Accounts](../../concepts/smart-accounts.md).
 
 ## `aggregateSignature`
 
@@ -137,7 +137,7 @@ import { createDelegation } from "@metamask/delegation-toolkit";
 import { delegatorSmartAccount } from "./config.ts";
 
 // The address to which the delegation is granted. It can be an EOA address, or 
-// Smart Account address.
+// smart account address.
 const delegate = "0x2FcB88EC2359fA635566E66415D31dD381CF5585";
 
 const delegation = createDelegation({
@@ -371,13 +371,13 @@ Creates a `MetaMaskSmartAccount` instance.
 
 | Name | Type                                                | Required                                                     | Description                                                                                                                                                                       |
 | ---- |-----------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `client` | `Client`                                            | Yes                                                          | Viem Client to retrieve Smart Account data.                                                                                                                                       |
-| `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the Smart Account. Can be Hybrid, Multisig, or Stateless7702.                                                                                                             |
-| `signatory` | `SignatoryConfigByImplementation <TImplementation>` | Yes                                                          | Signers for the Smart Account. Can be a Viem Account, Viem Wallet Client, or a WebAuthnAccount. Web3AuthnAccounts are only supported for Hybrid implementations.                  |
+| `client` | `Client`                                            | Yes                                                          | Viem Client to retrieve smart account data.                                                                                                                                       |
+| `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be Hybrid, Multisig, or Stateless7702.                                                                                                             |
+| `signatory` | `SignatoryConfigByImplementation <TImplementation>` | Yes                                                          | Signers for the smart account. Can be a Viem Account, Viem Wallet Client, or a WebAuthnAccount. Web3AuthnAccounts are only supported for Hybrid implementations.                  |
 | `environment` | `DeleGatorEnvironment`                              | No                                                           | Environment to resolve the smart contracts.                                                                                                                                       |
-| `deployParams` | `DeployParams<TImplementation>`                     | Required if `address` is not provided                        | The parameters that will be used to deploy the Smart Account and generate its deterministic address.                                                                              |
-| `deploySalt` | `Hex`                                               | Required if `address` is not provided                        | The salt that will be used to deploy the Smart Account.                                                                                                                           |
-| `address` | `Address`                                           | Required if `deployParams` and `deploySalt` are not provided, or if the implementation is `Stateless7702`. | The address of the Smart Account. If an address is provided, the Smart Account will not be deployed. This should be used if you intend to interact with an existing Smart Account. |
+| `deployParams` | `DeployParams<TImplementation>`                     | Required if `address` is not provided                        | The parameters that will be used to deploy the smart account and generate its deterministic address.                                                                              |
+| `deploySalt` | `Hex`                                               | Required if `address` is not provided                        | The salt that will be used to deploy the smart account.                                                                                                                           |
+| `address` | `Address`                                           | Required if `deployParams` and `deploySalt` are not provided, or if the implementation is `Stateless7702`. | The address of the smart account. If an address is provided, the smart account will not be deployed. This should be used if you intend to interact with an existing smart account. |
 
 ### Hybrid implementation example
 

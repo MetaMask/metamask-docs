@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 # Redeem a delegation
 
 A delegate can redeem a delegation by submitting either a user operation or a regular transaction,
-depending on whether the delegate is a Smart Account or externally owned account (EOA).
+depending on whether the delegate is a MetaMask smart account or externally owned account (EOA).
 
 The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the delegator's behalf.
 To prepare the calldata for the redeem transaction, use the [`redeemDelegation`](../reference/api/delegation.md#redeemdelegation) utility function.
@@ -20,17 +20,17 @@ The function supports batch redemption, allowing multiple delegations to be proc
 
 - [Install and set up the Delegation Toolkit.](../get-started/install.md)
 - [Configure the Delegation Toolkit.](configure.md)
-- [Create a delegator Smart Account.](create-smart-account/index.md)
+- [Create a delegator smart account.](create-smart-account/index.md)
 - [Create a delegation.](create-delegation/index.md)
 
 ## Redeem a delegation
 
-Redeem a delegation with a [Smart Account](#redeem-with-a-smart-account) or an [externally owned account (EOA)](#redeem-with-an-eoa).
+Redeem a delegation with a [MetaMask smart account](#redeem-with-a-metamask-smart-account) or an [externally owned account (EOA)](#redeem-with-an-eoa).
 
-### Redeem with a Smart Account
+### Redeem with a MetaMask smart account
 
 The following example demonstrates how to submit a user operation to redeem a delegation.
-It assumes you have a delegation signed by the delegator, and that the delegate is a Smart Account.
+It assumes you have a delegation signed by the delegator, and that the delegate is a MetaMask smart account.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -199,7 +199,7 @@ export const delegateWalletClient = createWalletClient({
 You can redeem multiple delegations in a single user operation, each delegation independent of the others.
 Each element in the `delegationsArray` must have a corresponding element in the `executionsArray` and `modes`.
 
-The following example assumes you already have multiple signed delegations and that the delegate is a Smart Account.
+The following example assumes you already have multiple signed delegations and that the delegate is a MetaMask smart account.
 The preparation of the calldata is the same when [using an EOA as the delegate](#redeem-with-an-eoa);
 the primary difference is that an EOA submits a regular transaction instead of a user operation.
 
