@@ -54,6 +54,46 @@
   border-top: 1px solid var(--general-gray-light);
 }
 
+.propItemWrapper {
+  margin-top: 0.8rem;
+}
+
+.propItemLabel {
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--general-gray-dark);
+  margin-right: 0.4rem;
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}
+
+.propItemValue {
+  font-family: var(--font-mm-sans-mono);
+  font-size: 1.4rem;
+  color: var(--general-black);
+  background-color: var(--ifm-code-background);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+  word-break: break-word;
+
+  [data-theme='dark'] & {
+    color: var(--general-white);
+  }
+}
+
+.paramSeparator {
+  border: none;
+  border-top: 1px solid var(--general-gray-light);
+  margin: 2rem 0;
+  height: 0;
+
+  [data-theme='dark'] & {
+    border-top-color: var(--general-black-light);
+  }
+}
+
 .borderTopLine {
   border-top: 1px solid var(--general-gray-light);
 }
@@ -144,7 +184,8 @@
   font-style: italic;
 }
 
-.methodDescription, .noParamsDescription {
+.methodDescription,
+.noParamsDescription {
   font-size: 1.6rem;
 }
 
