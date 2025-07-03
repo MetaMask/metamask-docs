@@ -51,8 +51,8 @@
       "destination": "/sdk/"
     },
     {
-      "source": "/sdk/quickstart/:path*",
-      "destination": "/sdk/connect/:path*"
+      "source": "/sdk/quickstart/:path*/",
+      "destination": "/sdk/connect/:path*/"
     },
     {
       "source": "/sdk/introduction/supported-platforms/",
@@ -88,7 +88,7 @@
     },
     {
       "source": "/wallet/connect/3rd-party-libraries/wagmi/",
-      "destination": "/sdk/quickstart/javascript-wagmi"
+      "destination": "/sdk/connect/javascript-wagmi"
     },
     {
       "source": "/wallet/connect/3rd-party-libraries/web3-onboard/",
@@ -685,6 +685,18 @@
     {
       "source": "/services/gas-api/api-reference/busythreshold/",
       "destination": "/services/reference/gas-api/api-reference/busythreshold/"
+    },
+    {
+      "source": "/services/reference/:path*/json-rpc-methods/eth_sign/",
+      "destination": "/services/get-started/infura/"
+    },
+    {
+      "source": "/services/reference/:path*/json-rpc-methods/eth_sendtransaction/",
+      "destination": "/services/get-started/infura/"
+    },
+    {
+      "source": "/services/reference/:path*/json-rpc-methods/eth_coinbase/",
+      "destination": "/services/get-started/infura/"
     }
   ]
 }
