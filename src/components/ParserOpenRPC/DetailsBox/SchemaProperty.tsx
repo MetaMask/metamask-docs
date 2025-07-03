@@ -12,6 +12,7 @@ interface SchemaPropertyProps {
   description?: string
   pattern?: string
   defaultVal?: string
+  showRequired?: boolean
 }
 
 interface TagProps {
@@ -25,6 +26,7 @@ export const SchemaProperty = ({
   description,
   pattern,
   defaultVal,
+  showRequired = true,
 }: SchemaPropertyProps) => {
   return (
     <div className={styles.schemaWrapper}>
@@ -35,7 +37,7 @@ export const SchemaProperty = ({
           </Heading>
           <span className={clsx(styles.textAltColor, 'type-paragraph-m')}>{type}</span>
         </div>
-        {required && (
+        {required && showRequired && (
           <span className={clsx(styles.textErrorColor, 'type-paragraph-m')}>required</span>
         )}
       </div>

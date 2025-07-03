@@ -83,7 +83,7 @@ const getArrayTypeDescription = (items, schemas) => {
   return 'array'
 }
 
-const renderSchema = (schemaItem, schemas, name) => {
+const renderSchema = (schemaItem, schemas, name, showRequired = true) => {
   if (!schemaItem) return <div>Invalid schema</div>
 
   const resolveRef = (ref, originalItem) => {
@@ -93,7 +93,7 @@ const renderSchema = (schemaItem, schemas, name) => {
       ...newSchema,
       description: originalItem?.description || newSchema.description || newSchema.title || '',
     }
-    return renderSchema(resolvedSchema, schemas, name)
+    return renderSchema(resolvedSchema, schemas, name, showRequired)
   }
 
   if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref, schemaItem)
@@ -110,6 +110,7 @@ const renderSchema = (schemaItem, schemas, name) => {
           description={item.description || item.title || ''}
           pattern={item.pattern}
           defaultVal={item.default}
+          showRequired={showRequired}
         />
         <div className="padding-bottom--md">
           <CollapseBox>
@@ -122,7 +123,8 @@ const renderSchema = (schemaItem, schemas, name) => {
                       required: requiredFields.includes(key),
                     },
                     schemas,
-                    key
+                    key,
+                    showRequired
                   )}
                 </div>
               ))}
@@ -164,11 +166,14 @@ const renderSchema = (schemaItem, schemas, name) => {
           description={schemaItem.description || item.description || item.title || ''}
           pattern={schemaItem.pattern}
           defaultVal={schemaItem.default}
+          showRequired={showRequired}
         />
         {shouldShowDetails && (
           <div className="padding-bottom--md">
             <CollapseBox>
-              <div className={styles.paramItemWrapper}>{renderSchema(item.items, schemas, '')}</div>
+              <div className={styles.paramItemWrapper}>
+                {renderSchema(item.items, schemas, '', showRequired)}
+              </div>
             </CollapseBox>
           </div>
         )}
@@ -193,12 +198,13 @@ const renderSchema = (schemaItem, schemas, name) => {
         description={item.description || item.title || ''}
         pattern={item.pattern}
         defaultVal={item.default}
+        showRequired={showRequired}
       />
       <div className="padding-bottom--md">
         <CollapseBox>
           {item[type].map((option, index) => (
             <div key={`${index}`} className={styles.paramItemWrapper}>
-              {renderSchema(option, schemas, option.title)}
+              {renderSchema(option, schemas, option.title, showRequired)}
             </div>
           ))}
         </CollapseBox>
@@ -245,6 +251,7 @@ const renderSchema = (schemaItem, schemas, name) => {
           }
           pattern={schemaItem.schema.pattern || schemaItem.pattern}
           defaultVal={schemaItem.schema.default || schemaItem.default}
+          showRequired={showRequired}
         />
         {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum)}
       </div>
@@ -266,6 +273,7 @@ const renderSchema = (schemaItem, schemas, name) => {
         description={schemaItem.description || schemaItem.title}
         pattern={schemaItem.pattern}
         defaultVal={schemaItem.default}
+        showRequired={showRequired}
       />
       {schemaItem.enum && renderEnum(schemaItem.enum)}
     </div>
@@ -278,7 +286,7 @@ export const renderParamSchemas = (inputSchema, schemas) => {
       {inputSchema.map((item, i) => {
         return (
           <div key={`${i}`}>
-            {renderSchema(item, schemas, item.name)}
+            {renderSchema(item, schemas, item.name, true)}
             {i < inputSchema.length - 1 && <hr className={styles.paramSeparator} />}
           </div>
         )
@@ -290,7 +298,7 @@ export const renderParamSchemas = (inputSchema, schemas) => {
 export const renderResultSchemas = (inputSchema, schemas) => {
   const customResult = inputSchema?.schema?.maxPriorityFeePerGas
   if (customResult) {
-    return <>{renderSchema(customResult, schemas, inputSchema.name)}</>
+    return <>{renderSchema(customResult, schemas, inputSchema.name, false)}</>
   }
-  return <>{renderSchema(inputSchema, schemas, inputSchema.name)}</>
+  return <>{renderSchema(inputSchema, schemas, inputSchema.name, false)}</>
 }
