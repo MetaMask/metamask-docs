@@ -1,6 +1,8 @@
 import React from 'react'
+import clsx from 'clsx'
 import { SchemaProperty } from './SchemaProperty'
 import { CollapseBox } from '../CollapseBox/CollapseBox'
+import { MDContent } from './MDContent'
 import styles from './styles.module.scss'
 import { SchemaPropertyType } from '@site/src/components/ParserOpenRPC/interfaces'
 
@@ -9,7 +11,87 @@ const getRefSchemaFromComponents = (initRef, components) => {
   return components[ref]
 }
 
-const renderSchema = (schemaItem, schemas, name) => {
+const getArrayTypeDescription = (items, schemas) => {
+  if (!items) return 'array'
+
+  // Handle reference types - default to just "array"
+  if (items.$ref || items.schema?.$ref) {
+    return 'array'
+  }
+
+  // Handle nested arrays - show as "multidimensional array"
+  if (items.type === 'array' || items.schema?.type === 'array') {
+    return 'multidimensional array'
+  }
+
+  // Handle object types
+  if (items.type === 'object' || items.schema?.type === 'object') {
+    return 'array of objects'
+  }
+
+  // Handle combination types
+  if (items.oneOf || items.schema?.oneOf) {
+    return 'array'
+  }
+  if (items.allOf || items.schema?.allOf) {
+    return 'array'
+  }
+  if (items.anyOf || items.schema?.anyOf) {
+    return 'array'
+  }
+
+  // Handle enum types
+  if (items.enum || items.schema?.enum) {
+    return 'array'
+  }
+
+  // Handle basic types
+  const itemType = items.type || items.schema?.type
+  if (itemType) {
+    switch (itemType) {
+      case 'string':
+        return 'array of strings'
+      case 'number':
+        return 'array of numbers'
+      case 'integer':
+        return 'array of integers'
+      case 'boolean':
+        return 'array of booleans'
+      case 'null':
+        return 'array of null values'
+      default:
+        return 'array'
+    }
+  }
+
+  // Handle case where items is just a type string (fallback)
+  if (typeof items === 'string') {
+    switch (items) {
+      case 'string':
+        return 'array of strings'
+      case 'number':
+        return 'array of numbers'
+      case 'integer':
+        return 'array of integers'
+      case 'boolean':
+        return 'array of booleans'
+      case 'null':
+        return 'array of null values'
+      default:
+        return 'array'
+    }
+  }
+
+  return 'array'
+}
+
+const renderSchema = (
+  schemaItem,
+  schemas,
+  name,
+  showRequired = true,
+  isExpandedByDefault = true
+) => {
   if (!schemaItem) return <div>Invalid schema</div>
 
   const resolveRef = (ref, originalItem) => {
@@ -19,7 +101,7 @@ const renderSchema = (schemaItem, schemas, name) => {
       ...newSchema,
       description: originalItem?.description || newSchema.description || newSchema.title || '',
     }
-    return renderSchema(resolvedSchema, schemas, name)
+    return renderSchema(resolvedSchema, schemas, name, showRequired, isExpandedByDefault)
   }
 
   if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref, schemaItem)
@@ -36,9 +118,10 @@ const renderSchema = (schemaItem, schemas, name) => {
           description={item.description || item.title || ''}
           pattern={item.pattern}
           defaultVal={item.default}
+          showRequired={showRequired}
         />
         <div className="padding-bottom--md">
-          <CollapseBox>
+          <CollapseBox isInitCollapsed={isExpandedByDefault}>
             <>
               {Object.entries(item.properties).map(([key, value]: [string, SchemaPropertyType]) => (
                 <div key={key} className={styles.paramItemWrapper}>
@@ -48,7 +131,9 @@ const renderSchema = (schemaItem, schemas, name) => {
                       required: requiredFields.includes(key),
                     },
                     schemas,
-                    key
+                    key,
+                    showRequired,
+                    isExpandedByDefault
                   )}
                 </div>
               ))}
@@ -67,23 +152,91 @@ const renderSchema = (schemaItem, schemas, name) => {
     return renderObject(schemaItem, name || schemaItem.title)
   }
 
-  const renderArray = (item, itemName) => (
-    <div>
-      <SchemaProperty
-        title={itemName || item.title}
-        type="array"
-        required={schemaItem.required || !!item.required}
-        description={schemaItem.description || item.description || item.title || ''}
-        pattern={schemaItem.pattern}
-        defaultVal={schemaItem.default}
-      />
-      <div className="padding-bottom--md">
-        <CollapseBox>
-          <div className={styles.paramItemWrapper}>{renderSchema(item.items, schemas, '')}</div>
-        </CollapseBox>
+  const renderArray = (item, itemName) => {
+    const arrayType = getArrayTypeDescription(item.items, schemas)
+
+    // Simple array types that don't need dropdown details
+    const simpleArrayTypes = [
+      'array of strings',
+      'array of numbers',
+      'array of integers',
+      'array of booleans',
+      'array of null values',
+    ]
+
+    const shouldShowDetails = !simpleArrayTypes.includes(arrayType)
+
+    // Helper function to render object properties directly (flatter structure)
+    const renderObjectProperties = objectSchema => {
+      if (!objectSchema || !objectSchema.properties) return null
+
+      const requiredFields = Array.isArray(objectSchema.required) ? objectSchema.required : []
+
+      return (
+        <>
+          {Object.entries(objectSchema.properties).map(
+            ([key, value]: [string, SchemaPropertyType]) => (
+              <div key={key} className={styles.paramItemWrapper}>
+                {renderSchema(
+                  {
+                    ...value,
+                    required: requiredFields.includes(key),
+                  },
+                  schemas,
+                  key,
+                  showRequired,
+                  isExpandedByDefault
+                )}
+              </div>
+            )
+          )}
+        </>
+      )
+    }
+
+    return (
+      <div>
+        <SchemaProperty
+          title={itemName || item.title}
+          type={arrayType}
+          required={schemaItem.required || !!item.required}
+          description={schemaItem.description || item.description || item.title || ''}
+          pattern={schemaItem.pattern}
+          defaultVal={schemaItem.default}
+          showRequired={showRequired}
+        />
+        {shouldShowDetails && (
+          <div className="padding-bottom--md">
+            <CollapseBox isInitCollapsed={isExpandedByDefault}>
+              {(() => {
+                // Check if array items are objects - if so, render properties directly (flatter structure)
+                if (arrayType === 'array of objects') {
+                  // Handle referenced objects
+                  if (item.items?.$ref) {
+                    const refSchema = getRefSchemaFromComponents(item.items.$ref, schemas)
+                    const objectProperties = renderObjectProperties(refSchema)
+                    if (objectProperties) return objectProperties
+                  }
+                  // Handle inline objects
+                  else if (item.items?.type === 'object' && item.items.properties) {
+                    const objectProperties = renderObjectProperties(item.items)
+                    if (objectProperties) return objectProperties
+                  }
+                }
+
+                // For all other array types, use the original rendering approach
+                return (
+                  <div className={styles.paramItemWrapper}>
+                    {renderSchema(item.items, schemas, '', showRequired, isExpandedByDefault)}
+                  </div>
+                )
+              })()}
+            </CollapseBox>
+          </div>
+        )}
       </div>
-    </div>
-  )
+    )
+  }
 
   if (schemaItem.type === 'array' && schemaItem.items) {
     return renderArray(schemaItem, name || schemaItem.title)
@@ -102,12 +255,13 @@ const renderSchema = (schemaItem, schemas, name) => {
         description={item.description || item.title || ''}
         pattern={item.pattern}
         defaultVal={item.default}
+        showRequired={showRequired}
       />
       <div className="padding-bottom--md">
-        <CollapseBox>
+        <CollapseBox isInitCollapsed={false}>
           {item[type].map((option, index) => (
             <div key={`${index}`} className={styles.paramItemWrapper}>
-              {renderSchema(option, schemas, option.title)}
+              {renderSchema(option, schemas, option.title, showRequired, isExpandedByDefault)}
             </div>
           ))}
         </CollapseBox>
@@ -124,14 +278,12 @@ const renderSchema = (schemaItem, schemas, name) => {
   if (schemaItem.anyOf) return renderCombinations(schemaItem, name, 'anyOf')
 
   const renderEnum = enumValues => {
+    const formattedValues = enumValues.map(value => `\`${value}\``).join(', ')
     return (
-      <div className={styles.enumWrapper}>
-        <span className={styles.propItemLabel}>Enum:</span>
-        {enumValues.map((value, index) => (
-          <div key={index} className={styles.propItemValue}>
-            {`"${value}"`}
-          </div>
-        ))}
+      <div className={styles.propItemWrapper}>
+        <p className={clsx(styles.description, 'margin--none type-paragraph-m')}>
+          <MDContent content={`Valid options are: ${formattedValues}`} />
+        </p>
       </div>
     )
   }
@@ -141,13 +293,20 @@ const renderSchema = (schemaItem, schemas, name) => {
       <div className={styles.borderTopLine}>
         <SchemaProperty
           title={name || schemaItem.schema.title}
-          type={schemaItem.schema.enum ? 'enum' : schemaItem.schema.type}
+          type={
+            schemaItem.schema.enum
+              ? 'enum'
+              : schemaItem.schema.type === 'array'
+                ? getArrayTypeDescription(schemaItem.schema.items, schemas)
+                : schemaItem.schema.type
+          }
           required={!!schemaItem.required}
           description={
             schemaItem.description || schemaItem.schema.description || schemaItem.schema.title || ''
           }
           pattern={schemaItem.schema.pattern || schemaItem.pattern}
           defaultVal={schemaItem.schema.default || schemaItem.default}
+          showRequired={showRequired}
         />
         {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum)}
       </div>
@@ -158,11 +317,18 @@ const renderSchema = (schemaItem, schemas, name) => {
     <div className={styles.borderTopLine}>
       <SchemaProperty
         title={name || schemaItem.title}
-        type={schemaItem.enum ? 'enum' : schemaItem.type}
+        type={
+          schemaItem.enum
+            ? 'enum'
+            : schemaItem.type === 'array'
+              ? getArrayTypeDescription(schemaItem.items, schemas)
+              : schemaItem.type
+        }
         required={!!schemaItem.required}
         description={schemaItem.description || schemaItem.title}
         pattern={schemaItem.pattern}
         defaultVal={schemaItem.default}
+        showRequired={showRequired}
       />
       {schemaItem.enum && renderEnum(schemaItem.enum)}
     </div>
@@ -175,7 +341,7 @@ export const renderParamSchemas = (inputSchema, schemas) => {
       {inputSchema.map((item, i) => {
         return (
           <div key={`${i}`}>
-            {renderSchema(item, schemas, item.name)}
+            {renderSchema(item, schemas, item.name, true, true)}
             {i < inputSchema.length - 1 && <hr className={styles.paramSeparator} />}
           </div>
         )
@@ -187,7 +353,7 @@ export const renderParamSchemas = (inputSchema, schemas) => {
 export const renderResultSchemas = (inputSchema, schemas) => {
   const customResult = inputSchema?.schema?.maxPriorityFeePerGas
   if (customResult) {
-    return <>{renderSchema(customResult, schemas, inputSchema.name)}</>
+    return <>{renderSchema(customResult, schemas, inputSchema.name, false, false)}</>
   }
-  return <>{renderSchema(inputSchema, schemas, inputSchema.name)}</>
+  return <>{renderSchema(inputSchema, schemas, inputSchema.name, false, false)}</>
 }
