@@ -26,7 +26,7 @@ const getArrayTypeDescription = (items, schemas) => {
 
   // Handle object types
   if (items.type === 'object' || items.schema?.type === 'object') {
-    return 'array'
+    return 'array of objects'
   }
 
   // Handle combination types
@@ -166,6 +166,34 @@ const renderSchema = (
 
     const shouldShowDetails = !simpleArrayTypes.includes(arrayType)
 
+    // Helper function to render object properties directly (flatter structure)
+    const renderObjectProperties = objectSchema => {
+      if (!objectSchema || !objectSchema.properties) return null
+
+      const requiredFields = Array.isArray(objectSchema.required) ? objectSchema.required : []
+
+      return (
+        <>
+          {Object.entries(objectSchema.properties).map(
+            ([key, value]: [string, SchemaPropertyType]) => (
+              <div key={key} className={styles.paramItemWrapper}>
+                {renderSchema(
+                  {
+                    ...value,
+                    required: requiredFields.includes(key),
+                  },
+                  schemas,
+                  key,
+                  showRequired,
+                  isExpandedByDefault
+                )}
+              </div>
+            )
+          )}
+        </>
+      )
+    }
+
     return (
       <div>
         <SchemaProperty
@@ -180,9 +208,29 @@ const renderSchema = (
         {shouldShowDetails && (
           <div className="padding-bottom--md">
             <CollapseBox isInitCollapsed={isExpandedByDefault}>
-              <div className={styles.paramItemWrapper}>
-                {renderSchema(item.items, schemas, '', showRequired, isExpandedByDefault)}
-              </div>
+              {(() => {
+                // Check if array items are objects - if so, render properties directly (flatter structure)
+                if (arrayType === 'array of objects') {
+                  // Handle referenced objects
+                  if (item.items?.$ref) {
+                    const refSchema = getRefSchemaFromComponents(item.items.$ref, schemas)
+                    const objectProperties = renderObjectProperties(refSchema)
+                    if (objectProperties) return objectProperties
+                  }
+                  // Handle inline objects
+                  else if (item.items?.type === 'object' && item.items.properties) {
+                    const objectProperties = renderObjectProperties(item.items)
+                    if (objectProperties) return objectProperties
+                  }
+                }
+
+                // For all other array types, use the original rendering approach
+                return (
+                  <div className={styles.paramItemWrapper}>
+                    {renderSchema(item.items, schemas, '', showRequired, isExpandedByDefault)}
+                  </div>
+                )
+              })()}
             </CollapseBox>
           </div>
         )}
