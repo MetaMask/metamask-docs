@@ -21,8 +21,8 @@ The MetaMask Delegation Toolkit provides the experimental actions for ERC-7715 t
 ## Request permissions
 
 To request permissions, extend your [Viem Wallet Client](https://viem.sh/docs/clients/wallet) with `erc7715ProviderActions` actions.
-You'll need a session account to request the permission, which can be either a MetaMask smart account or an externally owned account (EOA).
-This example uses a smart account:
+You'll need a session account to request the permission, which can be either a smart account or an externally owned account (EOA).
+This example uses a MetaMask smart account:
 
 <Tabs>
 <TabItem value="example.ts">
