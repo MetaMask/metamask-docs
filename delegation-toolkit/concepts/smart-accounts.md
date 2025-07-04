@@ -9,9 +9,9 @@ The MetaMask Delegation Toolkit enables you to create and manage MetaMask Smart 
 MetaMask Smart Accounts are [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) smart contract accounts
 that support programmable account behavior and advanced features such as multi-signature approvals,
 automated transaction batching, and custom security policies.
-Unlike traditional wallets, which rely on private keys for every transaction, smart accounts use smart contracts to govern account logic.
+Unlike traditional wallets, which rely on private keys for every transaction, MetaMask Smart Accounts use smart contracts to govern account logic.
 
-Smart accounts are referenced in the toolkit as `MetaMaskSmartAccount`.
+MetaMask Smart Accounts are referenced in the toolkit as `MetaMaskSmartAccount`.
 
 ## Account abstraction (ERC-4337)
 
