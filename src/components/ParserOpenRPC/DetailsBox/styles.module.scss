@@ -23,6 +23,8 @@
 
 .textAltColor {
   color: var(--general-gray-dark);
+  font-style: italic;
+  font-size: 1.3rem;
 
   [data-theme='dark'] & {
     color: var(--general-gray);
@@ -80,6 +82,42 @@
 
   [data-theme='dark'] & {
     color: var(--general-white);
+  }
+}
+
+.patternWrapper {
+  display: inline-block;
+  background-color: var(--general-white-off);
+  border: 1px solid var(--general-gray-light);
+  border-radius: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  margin-left: 0.8rem;
+  font-size: 1rem;
+  line-height: 1.2;
+  vertical-align: baseline;
+
+  [data-theme='dark'] & {
+    background-color: var(--general-black-light);
+    border-color: var(--general-black-light);
+  }
+}
+
+.patternLabel {
+  font-weight: 500;
+  color: var(--general-gray-dark);
+  margin-right: 0.3rem;
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}
+
+.patternValue {
+  font-family: var(--font-mm-sans-mono);
+  color: var(--general-gray-dark);
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
   }
 }
 

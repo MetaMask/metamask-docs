@@ -36,6 +36,12 @@ export const SchemaProperty = ({
             {title}
           </Heading>
           <span className={clsx(styles.textAltColor, 'type-paragraph-m')}>{type}</span>
+          {pattern && (
+            <div className={styles.patternWrapper}>
+              <span className={styles.patternLabel}>Pattern: </span>
+              <span className={styles.patternValue}>{pattern}</span>
+            </div>
+          )}
         </div>
         {required && showRequired && (
           <span className={clsx(styles.textErrorColor, 'type-paragraph-m')}>required</span>
@@ -43,12 +49,6 @@ export const SchemaProperty = ({
       </div>
       <p className={clsx(styles.description, 'margin--none type-paragraph-m')}>
         <MDContent content={description} />
-        {pattern && (
-          <div className={styles.propItemWrapper}>
-            <span className={styles.propItemLabel}>Pattern: </span>
-            <span className={styles.propItemValue}>{pattern}</span>
-          </div>
-        )}
         {defaultVal && (
           <div className={styles.propItemWrapper}>
             <span className={styles.propItemLabel}>Default: </span>
