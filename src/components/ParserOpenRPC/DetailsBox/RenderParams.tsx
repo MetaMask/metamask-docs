@@ -85,7 +85,13 @@ const getArrayTypeDescription = (items, schemas) => {
   return 'array'
 }
 
-const renderSchema = (schemaItem, schemas, name, showRequired = true) => {
+const renderSchema = (
+  schemaItem,
+  schemas,
+  name,
+  showRequired = true,
+  isExpandedByDefault = true
+) => {
   if (!schemaItem) return <div>Invalid schema</div>
 
   const resolveRef = (ref, originalItem) => {
@@ -95,7 +101,7 @@ const renderSchema = (schemaItem, schemas, name, showRequired = true) => {
       ...newSchema,
       description: originalItem?.description || newSchema.description || newSchema.title || '',
     }
-    return renderSchema(resolvedSchema, schemas, name, showRequired)
+    return renderSchema(resolvedSchema, schemas, name, showRequired, isExpandedByDefault)
   }
 
   if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref, schemaItem)
@@ -115,7 +121,7 @@ const renderSchema = (schemaItem, schemas, name, showRequired = true) => {
           showRequired={showRequired}
         />
         <div className="padding-bottom--md">
-          <CollapseBox>
+          <CollapseBox isInitCollapsed={isExpandedByDefault}>
             <>
               {Object.entries(item.properties).map(([key, value]: [string, SchemaPropertyType]) => (
                 <div key={key} className={styles.paramItemWrapper}>
@@ -126,7 +132,8 @@ const renderSchema = (schemaItem, schemas, name, showRequired = true) => {
                     },
                     schemas,
                     key,
-                    showRequired
+                    showRequired,
+                    isExpandedByDefault
                   )}
                 </div>
               ))}
@@ -172,9 +179,9 @@ const renderSchema = (schemaItem, schemas, name, showRequired = true) => {
         />
         {shouldShowDetails && (
           <div className="padding-bottom--md">
-            <CollapseBox>
+            <CollapseBox isInitCollapsed={isExpandedByDefault}>
               <div className={styles.paramItemWrapper}>
-                {renderSchema(item.items, schemas, '', showRequired)}
+                {renderSchema(item.items, schemas, '', showRequired, isExpandedByDefault)}
               </div>
             </CollapseBox>
           </div>
@@ -203,10 +210,10 @@ const renderSchema = (schemaItem, schemas, name, showRequired = true) => {
         showRequired={showRequired}
       />
       <div className="padding-bottom--md">
-        <CollapseBox>
+        <CollapseBox isInitCollapsed={false}>
           {item[type].map((option, index) => (
             <div key={`${index}`} className={styles.paramItemWrapper}>
-              {renderSchema(option, schemas, option.title, showRequired)}
+              {renderSchema(option, schemas, option.title, showRequired, isExpandedByDefault)}
             </div>
           ))}
         </CollapseBox>
@@ -286,7 +293,7 @@ export const renderParamSchemas = (inputSchema, schemas) => {
       {inputSchema.map((item, i) => {
         return (
           <div key={`${i}`}>
-            {renderSchema(item, schemas, item.name, true)}
+            {renderSchema(item, schemas, item.name, true, true)}
             {i < inputSchema.length - 1 && <hr className={styles.paramSeparator} />}
           </div>
         )
@@ -298,7 +305,7 @@ export const renderParamSchemas = (inputSchema, schemas) => {
 export const renderResultSchemas = (inputSchema, schemas) => {
   const customResult = inputSchema?.schema?.maxPriorityFeePerGas
   if (customResult) {
-    return <>{renderSchema(customResult, schemas, inputSchema.name, false)}</>
+    return <>{renderSchema(customResult, schemas, inputSchema.name, false, false)}</>
   }
-  return <>{renderSchema(inputSchema, schemas, inputSchema.name, false)}</>
+  return <>{renderSchema(inputSchema, schemas, inputSchema.name, false, false)}</>
 }
