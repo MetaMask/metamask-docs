@@ -1,23 +1,22 @@
 ---
-description: Learn about MetaMask smart accounts.
+description: Learn about MetaMask Smart Accounts.
 sidebar_position: 1
 ---
 
-# Smart accounts
+# MetaMask Smart Accounts
 
-The MetaMask Delegation Toolkit enables you to create and manage MetaMask *smart accounts*.
-Smart accounts are [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) smart contract accounts
+The MetaMask Delegation Toolkit enables you to create and manage MetaMask Smart Accounts.
+MetaMask Smart Accounts are [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) smart contract accounts
 that support programmable account behavior and advanced features such as multi-signature approvals,
 automated transaction batching, and custom security policies.
-Unlike traditional wallets, which rely on private keys for every transaction, MetaMask smart
-accounts use smart contracts to govern account logic.
+Unlike traditional wallets, which rely on private keys for every transaction, MetaMask Smart Accounts use smart contracts to govern account logic.
 
-Smart accounts are referenced in the toolkit as `MetaMaskSmartAccount`.
+MetaMask Smart Accounts are referenced in the toolkit as `MetaMaskSmartAccount`.
 
 ## Account abstraction (ERC-4337)
 
 Account abstraction, specified by [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337), is a
-mechanism that enables users to manage smart accounts containing arbitrary verification logic.
+mechanism that enables users to manage smart contract accounts containing arbitrary verification logic.
 ERC-4337 enables smart contracts to be used as primary accounts in place of traditional private key-based
 accounts, or externally owned accounts (EOAs).
 
@@ -38,7 +37,7 @@ ERC-4337 introduces the following concepts:
 
 ## Smart account implementation types
 
-The MetaMask Delegation Toolkit supports three types of smart accounts, each offering unique features and use cases.
+The MetaMask Delegation Toolkit supports three types of MetaMask Smart Accounts, each offering unique features and use cases.
 
 See [Configure accounts and signers](../how-to/create-smart-account/configure-accounts-signers.md) to learn how to use these different account types.
 
@@ -65,7 +64,7 @@ This type is referenced in the toolkit as `Implementation.Stateless7702`.
 
 ## Smart account flow
 
-The MetaMask smart account flow is as follows:
+The MetaMask Smart Accounts flow is as follows:
 
 1. **Account setup** - A user creates a smart account by deploying a smart contract, and initializing it with
    ownership and security settings.
@@ -91,6 +90,6 @@ The MetaMask smart account flow is as follows:
 
 ## Delegator accounts
 
-Delegator accounts are a type of smart account that allows users to grant permission to other smart accounts or EOAs
+Delegator accounts are a type of MetaMask smart account that allows users to grant permission to other smart accounts or EOAs
 to perform specific executions on their behalf, under defined rules and restrictions.
 Learn more about [delegation](delegation.md).

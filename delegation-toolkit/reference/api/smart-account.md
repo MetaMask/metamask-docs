@@ -1,6 +1,6 @@
 ---
-description: Smart account-related API methods reference.
-sidebar_label: Smart account
+description: MetaMask Smart Accounts-related API methods reference.
+sidebar_label: MetaMask Smart Accounts
 sidebar_position: 2
 toc_max_heading_level: 2
 ---
@@ -8,9 +8,9 @@ toc_max_heading_level: 2
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Smart account API reference
+# MetaMask Smart Accounts API reference
 
-The following API methods are related to creating, managing, and signing with [smart accounts](../../concepts/smart-accounts.md).
+The following API methods are related to creating, managing, and signing with [MetaMask Smart Accounts](../../concepts/smart-accounts.md).
 
 ## `aggregateSignature`
 

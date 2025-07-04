@@ -28,7 +28,7 @@ Learn how to [restrict a delegation](./restrict-delegation.md) using caveat enfo
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
 - [Configure the Delegation Toolkit.](../configure.md)
-- [Create a smart account.](../create-smart-account/index.md)
+- [Create a MetaMask smart account.](../create-smart-account/index.md)
 
 ## Create a root delegation
 

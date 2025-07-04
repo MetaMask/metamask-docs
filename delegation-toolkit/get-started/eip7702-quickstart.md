@@ -6,7 +6,7 @@ sidebar_label: EIP-7702 quickstart
 
 # EIP-7702 quickstart
 
-This page demonstrates how to upgrade your externally owned account (EOA) to support MetaMask smart account 
+This page demonstrates how to upgrade your externally owned account (EOA) to support MetaMask Smart Accounts 
 functionality using an [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702) transaction. This enables your EOA to leverage the benefits of account 
 abstraction, such as batch transactions, gas sponsorship, and [ERC-7710 delegation capabilities](./../concepts/delegation.md).
 
