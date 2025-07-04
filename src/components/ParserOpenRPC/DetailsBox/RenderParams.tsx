@@ -1,6 +1,8 @@
 import React from 'react'
+import clsx from 'clsx'
 import { SchemaProperty } from './SchemaProperty'
 import { CollapseBox } from '../CollapseBox/CollapseBox'
+import { MDContent } from './MDContent'
 import styles from './styles.module.scss'
 import { SchemaPropertyType } from '@site/src/components/ParserOpenRPC/interfaces'
 
@@ -221,14 +223,12 @@ const renderSchema = (schemaItem, schemas, name, showRequired = true) => {
   if (schemaItem.anyOf) return renderCombinations(schemaItem, name, 'anyOf')
 
   const renderEnum = enumValues => {
+    const formattedValues = enumValues.map(value => `\`${value}\``).join(', ')
     return (
-      <div className={styles.enumWrapper}>
-        <span className={styles.propItemLabel}>Enum:</span>
-        {enumValues.map((value, index) => (
-          <div key={index} className={styles.propItemValue}>
-            {`"${value}"`}
-          </div>
-        ))}
+      <div className={styles.propItemWrapper}>
+        <p className={clsx(styles.description, 'margin--none type-paragraph-m')}>
+          <MDContent content={`Valid options are: ${formattedValues}`} />
+        </p>
       </div>
     )
   }
