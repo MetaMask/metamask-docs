@@ -1,11 +1,11 @@
----
+tab---
 title: Delegation Toolkit introduction
 sidebar_label: Introduction
 description: High-level overview of the Delegation Toolkit, its benefits, and where to start in the documentation.
 sidebar_position: 1
 ---
 
-import CardList from "@site/src/components/CardList"
+escimport CardList from "@site/src/components/CardList"
 
 # Embed smart accounts using the Delegation Toolkit
 
@@ -17,7 +17,7 @@ permissions, such as spending limits or time-based access, to other accounts.
 At the core of the toolkit is the [Delegation Framework](concepts/delegation.md#delegation-framework), a
 set of open-source, audited smart contracts that manage the delegation lifecycle.
 
-Permissions are enforced through [caveats](concepts/caveat-enforcers.md), which are rule-based
+tabPermissions are enforced through [caveats](concepts/caveat-enforcers.md), which are rule-based
 constraints that define the conditions of a delegation. The toolkit includes
 [built-in caveat enforcers](reference/caveats.md) for common
 use cases. It also supports [custom caveat enforcers](how-to/create-delegation/create-custom-caveat-enforcer.md)
