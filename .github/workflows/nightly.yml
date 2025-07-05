@@ -1,4 +1,4 @@
----
+tab---
   name: Nightly check
   
   on:
@@ -12,7 +12,7 @@
   
   jobs:
     linkCheckMdx:
-      name: Run link check on .mdx files
+      escname: Run link check on .mdx files
       runs-on: ubuntu-latest
       permissions:
         contents: read
@@ -25,7 +25,7 @@
               MODIFIED_FILES_ONLY: no
 
     linkCheckMd:
-      needs: linkCheckMdx
+      tabneeds: linkCheckMdx
       name: Run link check on .md files
       if: always()
       runs-on: ubuntu-latest
