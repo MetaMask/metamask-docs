@@ -45,44 +45,17 @@ const getArrayTypeDescription = (items, schemas) => {
     return 'array'
   }
 
-  // Handle basic types
-  const itemType = items.type || items.schema?.type
-  if (itemType) {
-    switch (itemType) {
-      case 'string':
-        return 'array of strings'
-      case 'number':
-        return 'array of numbers'
-      case 'integer':
-        return 'array of integers'
-      case 'boolean':
-        return 'array of booleans'
-      case 'null':
-        return 'array of null values'
-      default:
-        return 'array'
-    }
+  // Handle basic types with lookup table
+  const typeLabels: Record<string, string> = {
+    string: 'array of strings',
+    number: 'array of numbers',
+    integer: 'array of integers',
+    boolean: 'array of booleans',
+    null: 'array of null values',
   }
 
-  // Handle case where items is just a type string (fallback)
-  if (typeof items === 'string') {
-    switch (items) {
-      case 'string':
-        return 'array of strings'
-      case 'number':
-        return 'array of numbers'
-      case 'integer':
-        return 'array of integers'
-      case 'boolean':
-        return 'array of booleans'
-      case 'null':
-        return 'array of null values'
-      default:
-        return 'array'
-    }
-  }
-
-  return 'array'
+  const type = typeof items === 'string' ? items : items.type || items.schema?.type
+  return typeLabels[type] || 'array'
 }
 
 const renderSchema = (
@@ -121,7 +94,7 @@ const renderSchema = (
           showRequired={showRequired}
         />
         <div className="padding-bottom--md">
-          <CollapseBox isInitCollapsed={isExpandedByDefault}>
+          <CollapseBox isInitExpanded={isExpandedByDefault}>
             <>
               {Object.entries(item.properties).map(([key, value]: [string, SchemaPropertyType]) => (
                 <div key={key} className={styles.paramItemWrapper}>
@@ -207,7 +180,7 @@ const renderSchema = (
         />
         {shouldShowDetails && (
           <div className="padding-bottom--md">
-            <CollapseBox isInitCollapsed={isExpandedByDefault}>
+            <CollapseBox isInitExpanded={isExpandedByDefault}>
               {(() => {
                 // Check if array items are objects - if so, render properties directly (flatter structure)
                 if (arrayType === 'array of objects') {
@@ -258,7 +231,7 @@ const renderSchema = (
         showRequired={showRequired}
       />
       <div className="padding-bottom--md">
-        <CollapseBox isInitCollapsed={false}>
+        <CollapseBox isInitExpanded={false}>
           {item[type].map((option, index) => (
             <div key={`${index}`} className={styles.paramItemWrapper}>
               {renderSchema(option, schemas, option.title, showRequired, isExpandedByDefault)}
