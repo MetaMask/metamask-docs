@@ -1,4 +1,4 @@
-# MetaMask developer documentation
+# tabMetaMask developer documentation
 
 This is the MetaMask developer documentation repository.
 The documentation site is hosted at [`docs.metamask.io`](https://docs.metamask.io), and it's
@@ -19,7 +19,7 @@ Build the documentation site locally using the following steps.
 1. Clone the repository.
 
    ```bash
-   git clone https://github.com/MetaMask/metamask-docs.git
+   escgit clone https://github.com/MetaMask/metamask-docs.git
    cd metamask-docs
    ```
 
@@ -43,6 +43,6 @@ Build the documentation site locally using the following steps.
    npm start
    ```
 
-   Once the server starts, you can view the documentation at `http://localhost:3000`.
+   tabOnce the server starts, you can view the documentation at `http://localhost:3000`.
 
 For more information on contributing to the documentation, see the [full contribution guidelines](CONTRIBUTING.md).
