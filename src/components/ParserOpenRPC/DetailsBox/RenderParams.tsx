@@ -125,6 +125,54 @@ const renderSchema = (
     return renderObject(schemaItem, name || schemaItem.title)
   }
 
+  // Helper function to check if oneOf should be flattened for results
+  const shouldFlattenOneOf = (oneOfArray, isResultSchema) => {
+    if (!isResultSchema || !Array.isArray(oneOfArray) || oneOfArray.length !== 2) {
+      return null
+    }
+
+    // Filter out "empty" responses (notFound, null, etc.)
+    const meaningfulOptions = oneOfArray.filter(option => {
+      // Skip notFound references
+      if (option.$ref?.includes('notFound')) return false
+      if (option.$ref?.includes('null')) return false
+      // Skip null types
+      if (option.type === 'null') return false
+      // Keep actual data structures
+      return true
+    })
+
+    // If exactly one meaningful option remains, return it for flattening
+    if (meaningfulOptions.length === 1) {
+      return meaningfulOptions[0]
+    }
+
+    return null
+  }
+
+  const renderCombinations = (item, itemName, type) => (
+    <div>
+      <SchemaProperty
+        title={itemName || item.title}
+        type={type}
+        required={schemaItem.required || !!item.required}
+        description={item.description || item.title || ''}
+        pattern={item.pattern}
+        defaultVal={item.default}
+        showRequired={showRequired}
+      />
+      <div className="padding-bottom--md">
+        <CollapseBox isInitExpanded={false}>
+          {item[type].map((option, index) => (
+            <div key={`${index}`} className={styles.paramItemWrapper}>
+              {renderSchema(option, schemas, option.title, showRequired, isExpandedByDefault)}
+            </div>
+          ))}
+        </CollapseBox>
+      </div>
+    </div>
+  )
+
   const renderArray = (item, itemName) => {
     const arrayType = getArrayTypeDescription(item.items, schemas)
 
@@ -141,14 +189,16 @@ const renderSchema = (
 
     // Helper function to render object properties directly (flatter structure)
     const renderObjectProperties = objectSchema => {
-      if (!objectSchema || !objectSchema.properties) return null
+      if (!objectSchema) return null
 
-      const requiredFields = Array.isArray(objectSchema.required) ? objectSchema.required : []
+      const elements = []
 
-      return (
-        <>
-          {Object.entries(objectSchema.properties).map(
-            ([key, value]: [string, SchemaPropertyType]) => (
+      // Render direct properties first
+      if (objectSchema.properties) {
+        const requiredFields = Array.isArray(objectSchema.required) ? objectSchema.required : []
+        Object.entries(objectSchema.properties).forEach(
+          ([key, value]: [string, SchemaPropertyType]) => {
+            elements.push(
               <div key={key} className={styles.paramItemWrapper}>
                 {renderSchema(
                   {
@@ -162,9 +212,38 @@ const renderSchema = (
                 )}
               </div>
             )
-          )}
-        </>
-      )
+          }
+        )
+      }
+
+      // Handle combination schemas (oneOf/anyOf/allOf) within the same object
+      // This is important for complex structures like Linea transaction objects
+      if (objectSchema.oneOf) {
+        elements.push(
+          <div key="oneOf-variations" className={styles.paramItemWrapper}>
+            <h6 className="type-paragraph-s font-primary font-weight-medium">Transaction Types:</h6>
+            {renderCombinations(objectSchema, 'Transaction Types', 'oneOf')}
+          </div>
+        )
+      }
+
+      if (objectSchema.anyOf) {
+        elements.push(
+          <div key="anyOf-variations" className={styles.paramItemWrapper}>
+            {renderCombinations(objectSchema, 'Variations', 'anyOf')}
+          </div>
+        )
+      }
+
+      if (objectSchema.allOf) {
+        elements.push(
+          <div key="allOf-variations" className={styles.paramItemWrapper}>
+            {renderCombinations(objectSchema, 'Combined Types', 'allOf')}
+          </div>
+        )
+      }
+
+      return elements.length > 0 ? <>{elements}</> : null
     }
 
     return (
@@ -218,54 +297,6 @@ const renderSchema = (
   if (schemaItem?.schema?.type === 'array' && schemaItem?.schema?.items) {
     return renderArray(schemaItem.schema, name || schemaItem.schema.title)
   }
-
-  // Helper function to check if oneOf should be flattened for results
-  const shouldFlattenOneOf = (oneOfArray, isResultSchema) => {
-    if (!isResultSchema || !Array.isArray(oneOfArray) || oneOfArray.length !== 2) {
-      return null
-    }
-
-    // Filter out "empty" responses (notFound, null, etc.)
-    const meaningfulOptions = oneOfArray.filter(option => {
-      // Skip notFound references
-      if (option.$ref?.includes('notFound')) return false
-      if (option.$ref?.includes('null')) return false
-      // Skip null types
-      if (option.type === 'null') return false
-      // Keep actual data structures
-      return true
-    })
-
-    // If exactly one meaningful option remains, return it for flattening
-    if (meaningfulOptions.length === 1) {
-      return meaningfulOptions[0]
-    }
-
-    return null
-  }
-
-  const renderCombinations = (item, itemName, type) => (
-    <div>
-      <SchemaProperty
-        title={itemName || item.title}
-        type={type}
-        required={schemaItem.required || !!item.required}
-        description={item.description || item.title || ''}
-        pattern={item.pattern}
-        defaultVal={item.default}
-        showRequired={showRequired}
-      />
-      <div className="padding-bottom--md">
-        <CollapseBox isInitExpanded={false}>
-          {item[type].map((option, index) => (
-            <div key={`${index}`} className={styles.paramItemWrapper}>
-              {renderSchema(option, schemas, option.title, showRequired, isExpandedByDefault)}
-            </div>
-          ))}
-        </CollapseBox>
-      </div>
-    </div>
-  )
 
   // Handle oneOf flattening for results (when showRequired is false)
   const isResultSchema = !showRequired
