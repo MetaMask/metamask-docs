@@ -219,6 +219,31 @@ const renderSchema = (
     return renderArray(schemaItem.schema, name || schemaItem.schema.title)
   }
 
+  // Helper function to check if oneOf should be flattened for results
+  const shouldFlattenOneOf = (oneOfArray, isResultSchema) => {
+    if (!isResultSchema || !Array.isArray(oneOfArray) || oneOfArray.length !== 2) {
+      return null
+    }
+
+    // Filter out "empty" responses (notFound, null, etc.)
+    const meaningfulOptions = oneOfArray.filter(option => {
+      // Skip notFound references
+      if (option.$ref?.includes('notFound')) return false
+      if (option.$ref?.includes('null')) return false
+      // Skip null types
+      if (option.type === 'null') return false
+      // Keep actual data structures
+      return true
+    })
+
+    // If exactly one meaningful option remains, return it for flattening
+    if (meaningfulOptions.length === 1) {
+      return meaningfulOptions[0]
+    }
+
+    return null
+  }
+
   const renderCombinations = (item, itemName, type) => (
     <div>
       <SchemaProperty
@@ -242,11 +267,55 @@ const renderSchema = (
     </div>
   )
 
-  if (schemaItem?.schema?.oneOf) return renderCombinations(schemaItem.schema, name, 'oneOf')
+  // Handle oneOf flattening for results (when showRequired is false)
+  const isResultSchema = !showRequired
+
+  if (schemaItem?.schema?.oneOf) {
+    const flattenedOption = shouldFlattenOneOf(schemaItem.schema.oneOf, isResultSchema)
+    if (flattenedOption) {
+      // Preserve the parent description when flattening
+      const flattenedWithDescription = {
+        ...flattenedOption,
+        description:
+          schemaItem.description || schemaItem.schema.description || flattenedOption.description,
+        title: name || schemaItem.name || schemaItem.schema.title || flattenedOption.title,
+      }
+
+      return renderSchema(
+        flattenedWithDescription,
+        schemas,
+        name || schemaItem.name,
+        showRequired,
+        isExpandedByDefault
+      )
+    }
+    return renderCombinations(schemaItem.schema, name, 'oneOf')
+  }
+
   if (schemaItem?.schema?.allOf) return renderCombinations(schemaItem.schema, name, 'allOf')
   if (schemaItem?.schema?.anyOf) return renderCombinations(schemaItem.schema, name, 'anyOf')
 
-  if (schemaItem.oneOf) return renderCombinations(schemaItem, name, 'oneOf')
+  if (schemaItem.oneOf) {
+    const flattenedOption = shouldFlattenOneOf(schemaItem.oneOf, isResultSchema)
+    if (flattenedOption) {
+      // Preserve the parent description when flattening
+      const flattenedWithDescription = {
+        ...flattenedOption,
+        description: schemaItem.description || flattenedOption.description,
+        title: name || schemaItem.name || schemaItem.title || flattenedOption.title,
+      }
+
+      return renderSchema(
+        flattenedWithDescription,
+        schemas,
+        name || schemaItem.name,
+        showRequired,
+        isExpandedByDefault
+      )
+    }
+    return renderCombinations(schemaItem, name, 'oneOf')
+  }
+
   if (schemaItem.allOf) return renderCombinations(schemaItem, name, 'allOf')
   if (schemaItem.anyOf) return renderCombinations(schemaItem, name, 'anyOf')
 
