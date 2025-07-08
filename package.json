@@ -28,7 +28,7 @@
     "**/*.{md,mdx,ts,js,tsx,jsx,json}": "npm run format"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^11.9.1",
+    "@apidevtools/json-schema-ref-parser": "^14.0.3",
     "@docusaurus/core": "3.8.1",
     "@docusaurus/plugin-content-docs": "3.8.1",
     "@docusaurus/plugin-content-pages": "3.8.1",
@@ -79,7 +79,7 @@
     "@docusaurus/plugin-client-redirects": "3.8.1",
     "@docusaurus/tsconfig": "3.8.1",
     "@docusaurus/types": "3.8.1",
-    "@eslint/js": "^9.27.0",
+    "@eslint/js": "^9.30.1",
     "@tsconfig/docusaurus": "^2.0.3",
     "@types/react-alert": "^7.0.6",
     "@types/react-modal": "^3.16.3",
