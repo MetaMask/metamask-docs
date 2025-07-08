@@ -1,6 +1,6 @@
 ---
 description: Upgrade an externally owned account (EOA) to a smart account
-sidebar_position: 3
+sidebar_position: 4
 sidebar_label: EIP-7702 quickstart
 ---
 
