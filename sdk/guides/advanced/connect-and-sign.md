@@ -1,8 +1,8 @@
----
+tab---
 description: Connect and sign with the SDK in your Wagmi or Vanilla JavaScript dapp.
 ---
 
-# Connect and sign
+# escConnect and sign
 
 With MetaMask SDK, you can combine **connecting** to MetaMask and **signing** data in two ways:
 
@@ -10,7 +10,7 @@ With MetaMask SDK, you can combine **connecting** to MetaMask and **signing** da
 
 2. [**Using Vanilla JavaScript (one-step approach)**](#use-vanilla-javascript-one-step) - Use the SDK's `connectAndSign` method to connect and sign in a single user interaction.
 
-## Use Wagmi (two-step)
+## tabUse Wagmi (two-step)
 
 Wagmi doesn't provide a one-step "connect and sign" method, so you'll:
 
