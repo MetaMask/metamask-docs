@@ -12,8 +12,9 @@ import CardList from "@site/src/components/CardList"
 The MetaMask Delegation Toolkit is a [Viem](https://viem.sh/)-based collection of tools for embedding [MetaMask Smart Accounts](concepts/smart-accounts.md) into dapps.
 Smart accounts support programmable account behavior and advanced features like delegated permissions, multi-signature approvals, and gas abstraction.
 
-The toolkit's [Delegation Framework](concepts/delegation.md#delegation-framework) extends MetaMask Smart Accounts with secure, rule-based permission sharing.
-Use [caveat enforcers](concepts/caveat-enforcers.md) to define exactly how, when, and by whom a smart account can be used, enabling use cases like spending limits and time-based access.
+[Delegations](concepts/delegation.md) are a core feature of MetaMask Smart Accounts, enabling secure, rule-based permission sharing.
+These delegations are powered by the toolkit's Delegation Framework, which defines how 
+permissions are created, shared, and enforced.
 
 ## Why use the toolkit?
 
