@@ -328,8 +328,11 @@
   font-size: 1.4rem;
 }
 
-// Styles for markdown content rendered by MDContent component
-:global(.md-content) {
+// Styles for markdown content rendered by MDContent component - scoped to ParserOpenRPC
+:global(.colContentWrap_src-components-ParserOpenRPC-global-module .md-content) {
+  font-size: 1.4rem;
+  line-height: 1.5;
+
   a {
     color: var(--ifm-link-color);
     text-decoration: underline;
@@ -355,6 +358,22 @@
     padding-right: 0.5rem;
     background: var(--ifm-code-background);
     border-radius: 0.4rem;
+  }
+
+  ul,
+  ol {
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+
+  li {
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+
+  p {
+    font-size: 1.4rem;
+    line-height: 1.5;
   }
 }
 

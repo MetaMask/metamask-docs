@@ -166,7 +166,7 @@ const renderSchema = (
           showRequired={showRequired}
         />
         <div className="padding-bottom--md">
-          <CollapseBox isInitExpanded={isExpandedByDefault}>
+          <CollapseBox isInitExpanded={false}>
             <>{elements}</>
           </CollapseBox>
         </div>
@@ -293,7 +293,7 @@ const renderSchema = (
         />
         {shouldShowDetails && (
           <div className="padding-bottom--md">
-            <CollapseBox isInitExpanded={isExpandedByDefault}>
+            <CollapseBox isInitExpanded={false}>
               {(() => {
                 // Check if array items are objects - if so, render properties directly (flatter structure)
                 if (arrayType === 'array of objects') {
@@ -384,15 +384,9 @@ const renderSchema = (
   if (schemaItem.allOf) return renderCombinations(schemaItem, name, 'allOf')
   if (schemaItem.anyOf) return renderCombinations(schemaItem, name, 'anyOf')
 
-  const renderEnum = enumValues => {
-    const formattedValues = enumValues.map(value => `\`${value}\``).join(', ')
-    return (
-      <div className={styles.propItemWrapper}>
-        <p className={clsx(styles.description, 'margin--none type-paragraph-m')}>
-          <MDContent content={`Valid options are: ${formattedValues}`} />
-        </p>
-      </div>
-    )
+  const formatEnumType = enumValues => {
+    const values = enumValues.map(value => String(value)).join(' | ')
+    return `enum: ${values}`
   }
 
   if (schemaItem?.schema) {
@@ -402,7 +396,7 @@ const renderSchema = (
           title={name || schemaItem.schema.title}
           type={
             schemaItem.schema.enum
-              ? 'enum'
+              ? formatEnumType(schemaItem.schema.enum)
               : schemaItem.schema.type === 'array'
                 ? getArrayTypeDescription(schemaItem.schema.items, schemas)
                 : schemaItem.schema.type
@@ -415,7 +409,6 @@ const renderSchema = (
           defaultVal={schemaItem.schema.default || schemaItem.default}
           showRequired={showRequired}
         />
-        {schemaItem.schema.enum && renderEnum(schemaItem.schema.enum)}
       </div>
     )
   }
@@ -426,7 +419,7 @@ const renderSchema = (
         title={name || schemaItem.title}
         type={
           schemaItem.enum
-            ? 'enum'
+            ? formatEnumType(schemaItem.enum)
             : schemaItem.type === 'array'
               ? getArrayTypeDescription(schemaItem.items, schemas)
               : schemaItem.type
@@ -437,7 +430,6 @@ const renderSchema = (
         defaultVal={schemaItem.default}
         showRequired={showRequired}
       />
-      {schemaItem.enum && renderEnum(schemaItem.enum)}
     </div>
   )
 }
