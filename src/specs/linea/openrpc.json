@@ -6916,7 +6916,7 @@
 			],
 			"result": {
 				"name": "eth_getTransactionByBlockHashAndIndexResponse",
-				"description": "Returns the transaction information or `null`.",
+				"description": "Returns the transaction information or \"not found\".",
 				"schema": {
 					"oneOf": [
 						{
@@ -6925,7 +6925,7 @@
 						},
 						{
 							"type": "object",
-							"title": "Linea transaction information",
+							"title": "Linea transaction context",
 							"required": [
 								"blockHash",
 								"blockNumber",
@@ -6934,29 +6934,7 @@
 								"transactionIndex"
 							],
 							"unevaluatedProperties": false,
-							"properties": {
-								"blockHash": {
-									"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
-									"$ref": "#/components/schemas/hash32"
-								},
-								"blockNumber": {
-									"description": "Block number as hex-encoded unsigned integer.",
-									"$ref": "#/components/schemas/uint"
-								},
-								"from": {
-									"description": "Sender's address.",
-									"$ref": "#/components/schemas/address"
-								},
-								"hash": {
-									"description": "32 byte hex identifier for the transaction hash.",
-									"$ref": "#/components/schemas/hash32"
-								},
-								"transactionIndex": {
-									"description": "Transaction position.",
-									"$ref": "#/components/schemas/uint"
-								}
-							},
-							"anyOf": [
+							"oneOf": [
 								{
 									"type": "object",
 									"title": "Signed 1559 transaction",
@@ -6973,8 +6951,7 @@
 										"r",
 										"s",
 										"type",
-										"value",
-										"yParity"
+										"value"
 									],
 									"properties": {
 										"type": {
@@ -7073,14 +7050,8 @@
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
 										},
-										"yParity": {
-											"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-											"type": "string",
-											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-											"example": "0x1"
-										},
 										"v": {
-											"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+											"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 											"type": "string",
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
@@ -7113,8 +7084,7 @@
 										"r",
 										"s",
 										"type",
-										"value",
-										"yParity"
+										"value"
 									],
 									"properties": {
 										"type": {
@@ -7201,14 +7171,8 @@
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
 										},
-										"yParity": {
-											"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-											"type": "string",
-											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-											"example": "0x1"
-										},
 										"v": {
-											"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+											"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 											"type": "string",
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
@@ -7323,7 +7287,36 @@
 										}
 									}
 								}
-							]
+							],
+							"properties": {
+								"blockHash": {
+									"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
+									"type": "string",
+									"pattern": "^0x[0-9a-f]{64}$"
+								},
+								"blockNumber": {
+									"description": "Block number as hex-encoded unsigned integer.",
+									"type": "string",
+									"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+									"example": "0x1"
+								},
+								"from": {
+									"description": "Sender's address.",
+									"type": "string",
+									"pattern": "^0x[0-9a-fA-F]{40}$"
+								},
+								"hash": {
+									"description": "32 byte hex identifier for the transaction hash.",
+									"type": "string",
+									"pattern": "^0x[0-9a-f]{64}$"
+								},
+								"transactionIndex": {
+									"description": "Transaction position.",
+									"type": "string",
+									"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+									"example": "0x1"
+								}
+							}
 						}
 					]
 				}
@@ -7420,7 +7413,7 @@
 			],
 			"result": {
 				"name": "eth_getTransactionByBlockNumberAndIndexResponse",
-				"description": "Returns the transaction information or `null`.",
+				"description": "Returns the transaction information or \"not found\".",
 				"schema": {
 					"oneOf": [
 						{
@@ -7429,7 +7422,7 @@
 						},
 						{
 							"type": "object",
-							"title": "Linea transaction information",
+							"title": "Linea transaction context",
 							"required": [
 								"blockHash",
 								"blockNumber",
@@ -7438,29 +7431,7 @@
 								"transactionIndex"
 							],
 							"unevaluatedProperties": false,
-							"properties": {
-								"blockHash": {
-									"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
-									"$ref": "#/components/schemas/hash32"
-								},
-								"blockNumber": {
-									"description": "Block number as hex-encoded unsigned integer.",
-									"$ref": "#/components/schemas/uint"
-								},
-								"from": {
-									"description": "Sender's address.",
-									"$ref": "#/components/schemas/address"
-								},
-								"hash": {
-									"description": "32 byte hex identifier for the transaction hash.",
-									"$ref": "#/components/schemas/hash32"
-								},
-								"transactionIndex": {
-									"description": "Transaction position.",
-									"$ref": "#/components/schemas/uint"
-								}
-							},
-							"anyOf": [
+							"oneOf": [
 								{
 									"type": "object",
 									"title": "Signed 1559 transaction",
@@ -7477,8 +7448,7 @@
 										"r",
 										"s",
 										"type",
-										"value",
-										"yParity"
+										"value"
 									],
 									"properties": {
 										"type": {
@@ -7577,14 +7547,8 @@
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
 										},
-										"yParity": {
-											"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-											"type": "string",
-											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-											"example": "0x1"
-										},
 										"v": {
-											"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+											"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 											"type": "string",
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
@@ -7617,8 +7581,7 @@
 										"r",
 										"s",
 										"type",
-										"value",
-										"yParity"
+										"value"
 									],
 									"properties": {
 										"type": {
@@ -7705,14 +7668,8 @@
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
 										},
-										"yParity": {
-											"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-											"type": "string",
-											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-											"example": "0x1"
-										},
 										"v": {
-											"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+											"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 											"type": "string",
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
@@ -7827,7 +7784,36 @@
 										}
 									}
 								}
-							]
+							],
+							"properties": {
+								"blockHash": {
+									"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
+									"type": "string",
+									"pattern": "^0x[0-9a-f]{64}$"
+								},
+								"blockNumber": {
+									"description": "Block number as hex-encoded unsigned integer.",
+									"type": "string",
+									"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+									"example": "0x1"
+								},
+								"from": {
+									"description": "Sender's address.",
+									"type": "string",
+									"pattern": "^0x[0-9a-fA-F]{40}$"
+								},
+								"hash": {
+									"description": "32 byte hex identifier for the transaction hash.",
+									"type": "string",
+									"pattern": "^0x[0-9a-f]{64}$"
+								},
+								"transactionIndex": {
+									"description": "Transaction position.",
+									"type": "string",
+									"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+									"example": "0x1"
+								}
+							}
 						}
 					]
 				}
@@ -7897,7 +7883,7 @@
 			"result": {
 				"name": "eth_getTransactionByHashResponse",
 				"schema": {
-					"description": "Returns the transaction information or `null`.",
+					"description": "Returns the transaction information or \"not found\".",
 					"oneOf": [
 						{
 							"description": "Not Found (null).",
@@ -7905,7 +7891,7 @@
 						},
 						{
 							"type": "object",
-							"title": "Linea transaction information",
+							"title": "Linea transaction context",
 							"required": [
 								"blockHash",
 								"blockNumber",
@@ -7914,29 +7900,7 @@
 								"transactionIndex"
 							],
 							"unevaluatedProperties": false,
-							"properties": {
-								"blockHash": {
-									"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
-									"$ref": "#/components/schemas/hash32"
-								},
-								"blockNumber": {
-									"description": "Block number as hex-encoded unsigned integer.",
-									"$ref": "#/components/schemas/uint"
-								},
-								"from": {
-									"description": "Sender's address.",
-									"$ref": "#/components/schemas/address"
-								},
-								"hash": {
-									"description": "32 byte hex identifier for the transaction hash.",
-									"$ref": "#/components/schemas/hash32"
-								},
-								"transactionIndex": {
-									"description": "Transaction position.",
-									"$ref": "#/components/schemas/uint"
-								}
-							},
-							"anyOf": [
+							"oneOf": [
 								{
 									"type": "object",
 									"title": "Signed 1559 transaction",
@@ -7953,8 +7917,7 @@
 										"r",
 										"s",
 										"type",
-										"value",
-										"yParity"
+										"value"
 									],
 									"properties": {
 										"type": {
@@ -8053,14 +8016,8 @@
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
 										},
-										"yParity": {
-											"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-											"type": "string",
-											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-											"example": "0x1"
-										},
 										"v": {
-											"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+											"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 											"type": "string",
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
@@ -8093,8 +8050,7 @@
 										"r",
 										"s",
 										"type",
-										"value",
-										"yParity"
+										"value"
 									],
 									"properties": {
 										"type": {
@@ -8181,14 +8137,8 @@
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
 										},
-										"yParity": {
-											"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-											"type": "string",
-											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-											"example": "0x1"
-										},
 										"v": {
-											"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+											"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 											"type": "string",
 											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 											"example": "0x1"
@@ -8303,7 +8253,36 @@
 										}
 									}
 								}
-							]
+							],
+							"properties": {
+								"blockHash": {
+									"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
+									"type": "string",
+									"pattern": "^0x[0-9a-f]{64}$"
+								},
+								"blockNumber": {
+									"description": "Block number as hex-encoded unsigned integer.",
+									"type": "string",
+									"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+									"example": "0x1"
+								},
+								"from": {
+									"description": "Sender's address.",
+									"type": "string",
+									"pattern": "^0x[0-9a-fA-F]{40}$"
+								},
+								"hash": {
+									"description": "32 byte hex identifier for the transaction hash.",
+									"type": "string",
+									"pattern": "^0x[0-9a-f]{64}$"
+								},
+								"transactionIndex": {
+									"description": "Transaction position.",
+									"type": "string",
+									"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+									"example": "0x1"
+								}
+							}
 						}
 					]
 				}
@@ -17616,88 +17595,97 @@
 						},
 						{
 							"type": "object",
-							"title": "Transaction context",
-							"required": [
-								"blockHash",
-								"blockNumber",
-								"from",
-								"hash",
-								"transactionIndex"
-							],
-							"unevaluatedProperties": false,
-							"properties": {
-								"blockHash": {
-									"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
-									"type": "string",
-									"pattern": "^0x[0-9a-f]{64}$"
-								},
-								"blockNumber": {
-									"description": "Block number as hex-encoded unsigned integer.",
-									"type": "string",
-									"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-									"example": "0x1"
-								},
-								"from": {
-									"description": "Sender's address.",
-									"type": "string",
-									"pattern": "^0x[0-9a-fA-F]{40}$"
-								},
-								"hash": {
-									"description": "32 byte hex identifier for the transaction hash.",
-									"type": "string",
-									"pattern": "^0x[0-9a-f]{64}$"
-								},
-								"transactionIndex": {
-									"description": "Transaction position.",
-									"type": "string",
-									"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-									"example": "0x1"
+							"allOf": [
+								{
+									"title": "Contextual information",
+									"required": [
+										"blockHash",
+										"blockNumber",
+										"from",
+										"hash",
+										"transactionIndex"
+									],
+									"unevaluatedProperties": false,
+									"properties": {
+										"blockHash": {
+											"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
+											"type": "string",
+											"pattern": "^0x[0-9a-f]{64}$"
+										},
+										"blockNumber": {
+											"description": "Block number as hex-encoded unsigned integer.",
+											"type": "string",
+											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+											"example": "0x1"
+										},
+										"from": {
+											"description": "Sender's address.",
+											"type": "string",
+											"pattern": "^0x[0-9a-fA-F]{40}$"
+										},
+										"hash": {
+											"description": "32 byte hex identifier for the transaction hash.",
+											"type": "string",
+											"pattern": "^0x[0-9a-f]{64}$"
+										},
+										"transactionIndex": {
+											"description": "Transaction position.",
+											"type": "string",
+											"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+											"example": "0x1"
+										}
+									}
 								}
-							}
+							],
+							"title": "Transaction context"
 						}
 					]
 				}
 			},
 			"LineaTransactionContext": {
 				"type": "object",
-				"title": "Contextual information",
-				"required": [
-					"blockHash",
-					"blockNumber",
-					"from",
-					"hash",
-					"transactionIndex"
-				],
-				"unevaluatedProperties": false,
-				"properties": {
-					"blockHash": {
-						"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
-						"type": "string",
-						"pattern": "^0x[0-9a-f]{64}$"
-					},
-					"blockNumber": {
-						"description": "Block number as hex-encoded unsigned integer.",
-						"type": "string",
-						"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-						"example": "0x1"
-					},
-					"from": {
-						"description": "Sender's address.",
-						"type": "string",
-						"pattern": "^0x[0-9a-fA-F]{40}$"
-					},
-					"hash": {
-						"description": "32 byte hex identifier for the transaction hash.",
-						"type": "string",
-						"pattern": "^0x[0-9a-f]{64}$"
-					},
-					"transactionIndex": {
-						"description": "Transaction position.",
-						"type": "string",
-						"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-						"example": "0x1"
+				"allOf": [
+					{
+						"title": "Contextual information",
+						"required": [
+							"blockHash",
+							"blockNumber",
+							"from",
+							"hash",
+							"transactionIndex"
+						],
+						"unevaluatedProperties": false,
+						"properties": {
+							"blockHash": {
+								"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
+								"type": "string",
+								"pattern": "^0x[0-9a-f]{64}$"
+							},
+							"blockNumber": {
+								"description": "Block number as hex-encoded unsigned integer.",
+								"type": "string",
+								"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+								"example": "0x1"
+							},
+							"from": {
+								"description": "Sender's address.",
+								"type": "string",
+								"pattern": "^0x[0-9a-fA-F]{40}$"
+							},
+							"hash": {
+								"description": "32 byte hex identifier for the transaction hash.",
+								"type": "string",
+								"pattern": "^0x[0-9a-f]{64}$"
+							},
+							"transactionIndex": {
+								"description": "Transaction position.",
+								"type": "string",
+								"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+								"example": "0x1"
+							}
+						}
 					}
-				}
+				]
 			},
 			"LineaTransactionExclusion": {
 				"oneOf": [
@@ -17755,437 +17743,44 @@
 			},
 			"LineaTransactionInfo": {
 				"type": "object",
-				"title": "Linea transaction information",
-				"required": [
-					"blockHash",
-					"blockNumber",
-					"from",
-					"hash",
-					"transactionIndex"
-				],
-				"unevaluatedProperties": false,
-				"properties": {
-					"blockHash": {
-						"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
-						"$ref": "#/components/schemas/hash32"
-					},
-					"blockNumber": {
-						"description": "Block number as hex-encoded unsigned integer.",
-						"$ref": "#/components/schemas/uint"
-					},
-					"from": {
-						"description": "Sender's address.",
-						"$ref": "#/components/schemas/address"
-					},
-					"hash": {
-						"description": "32 byte hex identifier for the transaction hash.",
-						"$ref": "#/components/schemas/hash32"
-					},
-					"transactionIndex": {
-						"description": "Transaction position.",
-						"$ref": "#/components/schemas/uint"
-					}
-				},
-				"anyOf": [
+				"allOf": [
 					{
 						"type": "object",
 						"allOf": [
 							{
-								"type": "object",
-								"description": "EIP-1559 transaction.",
+								"title": "Contextual information",
 								"required": [
-									"type",
-									"nonce",
-									"gas",
-									"value",
-									"input",
-									"maxFeePerGas",
-									"maxPriorityFeePerGas",
-									"gasPrice",
-									"chainId",
-									"accessList"
+									"blockHash",
+									"blockNumber",
+									"from",
+									"hash",
+									"transactionIndex"
 								],
+								"unevaluatedProperties": false,
 								"properties": {
-									"type": {
-										"description": "Hex-encoded byte for transaction type as introduced in EIP-2718. Use:\n- 0x00 for LegacyTxType\n- 0x01 for AccessListTxType\n- 0x02 for DynamicFeeTxType\n- 0x03 for BlobTxType\n",
+									"blockHash": {
+										"description": "Block hash, 32 byte hex identifier for the block derived from the block header.",
 										"type": "string",
-										"enum": [
-											0,
-											1,
-											2,
-											3
-										]
+										"pattern": "^0x[0-9a-f]{64}$"
 									},
-									"nonce": {
-										"description": "A counter for the number of transactions sent from the account; used for replay protection..",
+									"blockNumber": {
+										"description": "Block number as hex-encoded unsigned integer.",
 										"type": "string",
 										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 										"example": "0x1"
 									},
-									"to": {
-										"description": "The recipient's address. `null` when it's a contract creation transaction.",
-										"oneOf": [
-											{
-												"title": "Contract creation",
-												"type": "null"
-											},
-											{
-												"description": "Hex-encoded address.",
-												"type": "string",
-												"pattern": "^0x[0-9a-fA-F]{40}$",
-												"title": "Address"
-											}
-										]
-									},
-									"gas": {
-										"description": "Gas limit.",
+									"from": {
+										"description": "Sender's address.",
 										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
+										"pattern": "^0x[0-9a-fA-F]{40}$"
 									},
-									"value": {
-										"description": "Value.",
+									"hash": {
+										"description": "32 byte hex identifier for the transaction hash.",
 										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
+										"pattern": "^0x[0-9a-f]{64}$"
 									},
-									"input": {
-										"description": "Alternative term for `data`. The hash of the method signature and encoded parameters. For more information, see the Contract ABI description in the Solidity documentation.",
-										"type": "string",
-										"pattern": "^0x[0-9a-f]*$"
-									},
-									"maxPriorityFeePerGas": {
-										"description": "Maximum fee per gas the sender is willing to pay to miners in wei.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"maxFeePerGas": {
-										"description": "The maximum total fee per gas the sender is willing to pay (includes the network / base fee and miner / priority fee) in wei.\n",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"gasPrice": {
-										"description": "The effective gas price paid by the sender in wei. For transactions not yet included in a block, this value should be set equal to the max fee per gas. This field is DEPRECATED, please transition to using `effectiveGasPrice` in the receipt object going forward.\n",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"accessList": {
-										"description": "EIP-2930 access list.",
-										"type": "array",
-										"items": {
-											"description": "Access list entry.",
-											"type": "object",
-											"additionalProperties": false,
-											"properties": {
-												"address": {
-													"description": "Hex-encoded address.",
-													"type": "string",
-													"pattern": "^0x[0-9a-fA-F]{40}$"
-												},
-												"storageKeys": {
-													"type": "array",
-													"items": {
-														"description": "32 byte hex value.",
-														"type": "string",
-														"pattern": "^0x[0-9a-f]{64}$"
-													}
-												}
-											}
-										}
-									},
-									"chainId": {
-										"description": "Chain ID that this transaction is valid on.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									}
-								},
-								"title": "Unsigned 1559 transaction"
-							},
-							{
-								"type": "object",
-								"required": [
-									"r",
-									"s",
-									"yParity"
-								],
-								"properties": {
-									"yParity": {
-										"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"v": {
-										"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"r": {
-										"description": "ECDSA signature r.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"s": {
-										"description": "ECDSA signature s.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									}
-								},
-								"title": "Signature properties"
-							}
-						],
-						"title": "Signed 1559 transaction"
-					},
-					{
-						"type": "object",
-						"allOf": [
-							{
-								"type": "object",
-								"description": "EIP-2930 transaction.",
-								"required": [
-									"type",
-									"nonce",
-									"gas",
-									"value",
-									"input",
-									"gasPrice",
-									"chainId",
-									"accessList"
-								],
-								"properties": {
-									"type": {
-										"description": "Hex-encoded byte for transaction type as introduced in EIP-2718. Use:\n- 0x00 for LegacyTxType\n- 0x01 for AccessListTxType\n- 0x02 for DynamicFeeTxType\n- 0x03 for BlobTxType\n",
-										"type": "string",
-										"enum": [
-											0,
-											1,
-											2,
-											3
-										]
-									},
-									"nonce": {
-										"description": "A counter for the number of transactions sent from the account; used for replay protection.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"to": {
-										"description": "The recipient's address. `null` when it's a contract creation transaction.",
-										"oneOf": [
-											{
-												"title": "Contract creation",
-												"type": "null"
-											},
-											{
-												"description": "Hex-encoded address.",
-												"type": "string",
-												"pattern": "^0x[0-9a-fA-F]{40}$",
-												"title": "Address"
-											}
-										]
-									},
-									"gas": {
-										"description": "Gas limit.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"value": {
-										"description": "Value.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"input": {
-										"description": "Alternative term for `data`. The hash of the method signature and encoded parameters. For more information, see the Contract ABI description in the Solidity documentation.",
-										"type": "string",
-										"pattern": "^0x[0-9a-f]*$"
-									},
-									"gasPrice": {
-										"description": "The gas price the sender is willing to be paid in wei.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"accessList": {
-										"description": "EIP-2930 access list.",
-										"type": "array",
-										"items": {
-											"description": "Access list entry.",
-											"type": "object",
-											"additionalProperties": false,
-											"properties": {
-												"address": {
-													"description": "Hex-encoded address.",
-													"type": "string",
-													"pattern": "^0x[0-9a-fA-F]{40}$"
-												},
-												"storageKeys": {
-													"type": "array",
-													"items": {
-														"description": "32 byte hex value.",
-														"type": "string",
-														"pattern": "^0x[0-9a-f]{64}$"
-													}
-												}
-											}
-										}
-									},
-									"chainId": {
-										"description": "Chain ID that this transaction is valid on.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									}
-								},
-								"title": "Unsigned 2930 transaction"
-							},
-							{
-								"type": "object",
-								"required": [
-									"r",
-									"s",
-									"yParity"
-								],
-								"properties": {
-									"yParity": {
-										"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"v": {
-										"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"r": {
-										"description": "ECDSA signature r.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"s": {
-										"description": "ECDSA signature s.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									}
-								},
-								"title": "Signature properties"
-							}
-						],
-						"title": "Signed 2930 transaction"
-					},
-					{
-						"description": "Signed Legacy Transaction.",
-						"type": "object",
-						"allOf": [
-							{
-								"type": "object",
-								"description": "Legacy transaction.",
-								"required": [
-									"type",
-									"nonce",
-									"gas",
-									"value",
-									"input",
-									"gasPrice"
-								],
-								"properties": {
-									"type": {
-										"description": "Hex-encoded byte for transaction type as introduced in EIP-2718. Use:\n- 0x00 for LegacyTxType\n- 0x01 for AccessListTxType\n- 0x02 for DynamicFeeTxType\n- 0x03 for BlobTxType\n",
-										"type": "string",
-										"enum": [
-											0,
-											1,
-											2,
-											3
-										]
-									},
-									"nonce": {
-										"description": "A counter for the number of transactions sent from the account; used for replay protection.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"to": {
-										"description": "The recipient's address. `null` when it's a contract creation transaction.",
-										"oneOf": [
-											{
-												"title": "Contract creation",
-												"type": "null"
-											},
-											{
-												"description": "Hex-encoded address.",
-												"type": "string",
-												"pattern": "^0x[0-9a-fA-F]{40}$",
-												"title": "Address"
-											}
-										]
-									},
-									"gas": {
-										"description": "Gas limit.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"value": {
-										"description": "Value.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"input": {
-										"description": "Alternative term for `data`. The hash of the method signature and encoded parameters. For more information, see the Contract ABI description in the Solidity documentation.",
-										"type": "string",
-										"pattern": "^0x[0-9a-f]*$"
-									},
-									"gasPrice": {
-										"description": "The gas price the sender is willing to pay in wei.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"chainId": {
-										"description": "Chain ID that this transaction is valid on.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									}
-								},
-								"title": "Unsigned Legacy transaction"
-							},
-							{
-								"title": "Legacy transaction signature properties",
-								"required": [
-									"v",
-									"r",
-									"s"
-								],
-								"properties": {
-									"v": {
-										"description": "ECDSA Recovery ID.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"r": {
-										"description": "ECDSA signature r.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
-									"s": {
-										"description": "ECDSA signature s.",
+									"transactionIndex": {
+										"description": "Transaction position.",
 										"type": "string",
 										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 										"example": "0x1"
@@ -18193,7 +17788,406 @@
 								}
 							}
 						],
-						"title": "Signed legacy transaction"
+						"title": "Linea transaction context"
+					},
+					{
+						"oneOf": [
+							{
+								"type": "object",
+								"allOf": [
+									{
+										"type": "object",
+										"description": "EIP-1559 transaction.",
+										"required": [
+											"type",
+											"nonce",
+											"gas",
+											"value",
+											"input",
+											"maxFeePerGas",
+											"maxPriorityFeePerGas",
+											"gasPrice",
+											"chainId",
+											"accessList"
+										],
+										"properties": {
+											"type": {
+												"description": "Hex-encoded byte for transaction type as introduced in EIP-2718. Use:\n- 0x00 for LegacyTxType\n- 0x01 for AccessListTxType\n- 0x02 for DynamicFeeTxType\n- 0x03 for BlobTxType\n",
+												"type": "string",
+												"enum": [
+													0,
+													1,
+													2,
+													3
+												]
+											},
+											"nonce": {
+												"description": "A counter for the number of transactions sent from the account; used for replay protection..",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"to": {
+												"description": "The recipient's address. `null` when it's a contract creation transaction.",
+												"oneOf": [
+													{
+														"title": "Contract creation",
+														"type": "null"
+													},
+													{
+														"description": "Hex-encoded address.",
+														"type": "string",
+														"pattern": "^0x[0-9a-fA-F]{40}$",
+														"title": "Address"
+													}
+												]
+											},
+											"gas": {
+												"description": "Gas limit.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"value": {
+												"description": "Value.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"input": {
+												"description": "Alternative term for `data`. The hash of the method signature and encoded parameters. For more information, see the Contract ABI description in the Solidity documentation.",
+												"type": "string",
+												"pattern": "^0x[0-9a-f]*$"
+											},
+											"maxPriorityFeePerGas": {
+												"description": "Maximum fee per gas the sender is willing to pay to miners in wei.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"maxFeePerGas": {
+												"description": "The maximum total fee per gas the sender is willing to pay (includes the network / base fee and miner / priority fee) in wei.\n",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"gasPrice": {
+												"description": "The effective gas price paid by the sender in wei. For transactions not yet included in a block, this value should be set equal to the max fee per gas. This field is DEPRECATED, please transition to using `effectiveGasPrice` in the receipt object going forward.\n",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"accessList": {
+												"description": "EIP-2930 access list.",
+												"type": "array",
+												"items": {
+													"description": "Access list entry.",
+													"type": "object",
+													"additionalProperties": false,
+													"properties": {
+														"address": {
+															"description": "Hex-encoded address.",
+															"type": "string",
+															"pattern": "^0x[0-9a-fA-F]{40}$"
+														},
+														"storageKeys": {
+															"type": "array",
+															"items": {
+																"description": "32 byte hex value.",
+																"type": "string",
+																"pattern": "^0x[0-9a-f]{64}$"
+															}
+														}
+													}
+												}
+											},
+											"chainId": {
+												"description": "Chain ID that this transaction is valid on.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											}
+										},
+										"title": "Unsigned 1559 transaction"
+									},
+									{
+										"type": "object",
+										"required": [
+											"r",
+											"s"
+										],
+										"properties": {
+											"v": {
+												"description": "ECDSA Recovery ID. An alternative to `yParity`.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"r": {
+												"description": "ECDSA signature r.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"s": {
+												"description": "ECDSA signature s.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											}
+										},
+										"title": "Signature properties"
+									}
+								],
+								"title": "Signed 1559 transaction"
+							},
+							{
+								"type": "object",
+								"allOf": [
+									{
+										"type": "object",
+										"description": "EIP-2930 transaction.",
+										"required": [
+											"type",
+											"nonce",
+											"gas",
+											"value",
+											"input",
+											"gasPrice",
+											"chainId",
+											"accessList"
+										],
+										"properties": {
+											"type": {
+												"description": "Hex-encoded byte for transaction type as introduced in EIP-2718. Use:\n- 0x00 for LegacyTxType\n- 0x01 for AccessListTxType\n- 0x02 for DynamicFeeTxType\n- 0x03 for BlobTxType\n",
+												"type": "string",
+												"enum": [
+													0,
+													1,
+													2,
+													3
+												]
+											},
+											"nonce": {
+												"description": "A counter for the number of transactions sent from the account; used for replay protection.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"to": {
+												"description": "The recipient's address. `null` when it's a contract creation transaction.",
+												"oneOf": [
+													{
+														"title": "Contract creation",
+														"type": "null"
+													},
+													{
+														"description": "Hex-encoded address.",
+														"type": "string",
+														"pattern": "^0x[0-9a-fA-F]{40}$",
+														"title": "Address"
+													}
+												]
+											},
+											"gas": {
+												"description": "Gas limit.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"value": {
+												"description": "Value.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"input": {
+												"description": "Alternative term for `data`. The hash of the method signature and encoded parameters. For more information, see the Contract ABI description in the Solidity documentation.",
+												"type": "string",
+												"pattern": "^0x[0-9a-f]*$"
+											},
+											"gasPrice": {
+												"description": "The gas price the sender is willing to be paid in wei.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"accessList": {
+												"description": "EIP-2930 access list.",
+												"type": "array",
+												"items": {
+													"description": "Access list entry.",
+													"type": "object",
+													"additionalProperties": false,
+													"properties": {
+														"address": {
+															"description": "Hex-encoded address.",
+															"type": "string",
+															"pattern": "^0x[0-9a-fA-F]{40}$"
+														},
+														"storageKeys": {
+															"type": "array",
+															"items": {
+																"description": "32 byte hex value.",
+																"type": "string",
+																"pattern": "^0x[0-9a-f]{64}$"
+															}
+														}
+													}
+												}
+											},
+											"chainId": {
+												"description": "Chain ID that this transaction is valid on.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											}
+										},
+										"title": "Unsigned 2930 transaction"
+									},
+									{
+										"type": "object",
+										"required": [
+											"r",
+											"s"
+										],
+										"properties": {
+											"v": {
+												"description": "ECDSA Recovery ID. An alternative to `yParity`.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"r": {
+												"description": "ECDSA signature r.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"s": {
+												"description": "ECDSA signature s.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											}
+										},
+										"title": "Signature properties"
+									}
+								],
+								"title": "Signed 2930 transaction"
+							},
+							{
+								"description": "Signed Legacy Transaction.",
+								"type": "object",
+								"allOf": [
+									{
+										"type": "object",
+										"description": "Legacy transaction.",
+										"required": [
+											"type",
+											"nonce",
+											"gas",
+											"value",
+											"input",
+											"gasPrice"
+										],
+										"properties": {
+											"type": {
+												"description": "Hex-encoded byte for transaction type as introduced in EIP-2718. Use:\n- 0x00 for LegacyTxType\n- 0x01 for AccessListTxType\n- 0x02 for DynamicFeeTxType\n- 0x03 for BlobTxType\n",
+												"type": "string",
+												"enum": [
+													0,
+													1,
+													2,
+													3
+												]
+											},
+											"nonce": {
+												"description": "A counter for the number of transactions sent from the account; used for replay protection.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"to": {
+												"description": "The recipient's address. `null` when it's a contract creation transaction.",
+												"oneOf": [
+													{
+														"title": "Contract creation",
+														"type": "null"
+													},
+													{
+														"description": "Hex-encoded address.",
+														"type": "string",
+														"pattern": "^0x[0-9a-fA-F]{40}$",
+														"title": "Address"
+													}
+												]
+											},
+											"gas": {
+												"description": "Gas limit.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"value": {
+												"description": "Value.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"input": {
+												"description": "Alternative term for `data`. The hash of the method signature and encoded parameters. For more information, see the Contract ABI description in the Solidity documentation.",
+												"type": "string",
+												"pattern": "^0x[0-9a-f]*$"
+											},
+											"gasPrice": {
+												"description": "The gas price the sender is willing to pay in wei.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"chainId": {
+												"description": "Chain ID that this transaction is valid on.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											}
+										},
+										"title": "Unsigned Legacy transaction"
+									},
+									{
+										"title": "Legacy transaction signature properties",
+										"required": [
+											"v",
+											"r",
+											"s"
+										],
+										"properties": {
+											"v": {
+												"description": "ECDSA Recovery ID.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"r": {
+												"description": "ECDSA signature r.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											},
+											"s": {
+												"description": "ECDSA signature s.",
+												"type": "string",
+												"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
+												"example": "0x1"
+											}
+										}
+									}
+								],
+								"title": "Signed legacy transaction"
+							}
+						],
+						"title": "Signed transaction"
 					}
 				]
 			},
@@ -18207,7 +18201,7 @@
 				]
 			},
 			"LineaTransactionSigned": {
-				"anyOf": [
+				"oneOf": [
 					{
 						"type": "object",
 						"allOf": [
@@ -18330,18 +18324,11 @@
 								"type": "object",
 								"required": [
 									"r",
-									"s",
-									"yParity"
+									"s"
 								],
 								"properties": {
-									"yParity": {
-										"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
 									"v": {
-										"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+										"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 										"type": "string",
 										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 										"example": "0x1"
@@ -18472,18 +18459,11 @@
 								"type": "object",
 								"required": [
 									"r",
-									"s",
-									"yParity"
+									"s"
 								],
 								"properties": {
-									"yParity": {
-										"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-										"type": "string",
-										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-										"example": "0x1"
-									},
 									"v": {
-										"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+										"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 										"type": "string",
 										"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 										"example": "0x1"
@@ -18726,18 +18706,11 @@
 						"type": "object",
 						"required": [
 							"r",
-							"s",
-							"yParity"
+							"s"
 						],
 						"properties": {
-							"yParity": {
-								"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-								"type": "string",
-								"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-								"example": "0x1"
-							},
 							"v": {
-								"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+								"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 								"type": "string",
 								"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 								"example": "0x1"
@@ -18763,18 +18736,11 @@
 				"type": "object",
 				"required": [
 					"r",
-					"s",
-					"yParity"
+					"s"
 				],
 				"properties": {
-					"yParity": {
-						"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-						"type": "string",
-						"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-						"example": "0x1"
-					},
 					"v": {
-						"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+						"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 						"type": "string",
 						"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 						"example": "0x1"
@@ -18915,18 +18881,11 @@
 						"type": "object",
 						"required": [
 							"r",
-							"s",
-							"yParity"
+							"s"
 						],
 						"properties": {
-							"yParity": {
-								"description": "The YParity (0 for even, 1 for odd) of the y-value of the secp256k1 signature.",
-								"type": "string",
-								"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
-								"example": "0x1"
-							},
 							"v": {
-								"description": "ECDSA Recovery ID. An alternative to `yParity`. This field is DEPRECATED and all use of it should migrate to `yParity`.",
+								"description": "ECDSA Recovery ID. An alternative to `yParity`.",
 								"type": "string",
 								"pattern": "^0x([1-9a-f]+[0-9a-f]*|0)$",
 								"example": "0x1"

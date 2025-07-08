@@ -80,8 +80,80 @@ const renderSchema = (
   if (schemaItem?.schema?.$ref) return resolveRef(schemaItem.schema.$ref, schemaItem)
   if (schemaItem?.$ref) return resolveRef(schemaItem.$ref, schemaItem)
 
+  const renderCombinations = (item, itemName, type) => (
+    <div>
+      <SchemaProperty
+        title={itemName || item.title}
+        type={type}
+        required={schemaItem.required || !!item.required}
+        description={item.description || item.title || ''}
+        pattern={item.pattern}
+        defaultVal={item.default}
+        showRequired={showRequired}
+      />
+      <div className="padding-bottom--md">
+        <CollapseBox isInitExpanded={false}>
+          {item[type].map((option, index) => (
+            <div key={`${index}`} className={styles.paramItemWrapper}>
+              {renderSchema(option, schemas, option.title, showRequired, isExpandedByDefault)}
+            </div>
+          ))}
+        </CollapseBox>
+      </div>
+    </div>
+  )
+
   const renderObject = (item, itemName) => {
     const requiredFields = Array.isArray(item.required) ? item.required : []
+    const elements = []
+
+    // First render direct properties
+    if (item.properties) {
+      Object.entries(item.properties).forEach(([key, value]: [string, SchemaPropertyType]) => {
+        elements.push(
+          <div key={key} className={styles.paramItemWrapper}>
+            {renderSchema(
+              {
+                ...value,
+                required: requiredFields.includes(key),
+              },
+              schemas,
+              key,
+              showRequired,
+              isExpandedByDefault
+            )}
+          </div>
+        )
+      })
+    }
+
+    // Then render combination schemas (oneOf/anyOf/allOf) within the same object
+    if (item.oneOf) {
+      elements.push(
+        <div key="oneOf-variations" className={styles.paramItemWrapper}>
+          <h6 className="type-paragraph-s font-primary font-weight-medium">Transaction Types:</h6>
+          {renderCombinations(item, 'Transaction Types', 'oneOf')}
+        </div>
+      )
+    }
+
+    if (item.anyOf) {
+      elements.push(
+        <div key="anyOf-variations" className={styles.paramItemWrapper}>
+          <h6 className="type-paragraph-s font-primary font-weight-medium">Transaction Types:</h6>
+          {renderCombinations(item, 'Transaction Types', 'anyOf')}
+        </div>
+      )
+    }
+
+    if (item.allOf) {
+      elements.push(
+        <div key="allOf-variations" className={styles.paramItemWrapper}>
+          {renderCombinations(item, 'Combined Types', 'allOf')}
+        </div>
+      )
+    }
+
     return (
       <div>
         <SchemaProperty
@@ -95,22 +167,7 @@ const renderSchema = (
         />
         <div className="padding-bottom--md">
           <CollapseBox isInitExpanded={isExpandedByDefault}>
-            <>
-              {Object.entries(item.properties).map(([key, value]: [string, SchemaPropertyType]) => (
-                <div key={key} className={styles.paramItemWrapper}>
-                  {renderSchema(
-                    {
-                      ...value,
-                      required: requiredFields.includes(key),
-                    },
-                    schemas,
-                    key,
-                    showRequired,
-                    isExpandedByDefault
-                  )}
-                </div>
-              ))}
-            </>
+            <>{elements}</>
           </CollapseBox>
         </div>
       </div>
@@ -149,29 +206,6 @@ const renderSchema = (
 
     return null
   }
-
-  const renderCombinations = (item, itemName, type) => (
-    <div>
-      <SchemaProperty
-        title={itemName || item.title}
-        type={type}
-        required={schemaItem.required || !!item.required}
-        description={item.description || item.title || ''}
-        pattern={item.pattern}
-        defaultVal={item.default}
-        showRequired={showRequired}
-      />
-      <div className="padding-bottom--md">
-        <CollapseBox isInitExpanded={false}>
-          {item[type].map((option, index) => (
-            <div key={`${index}`} className={styles.paramItemWrapper}>
-              {renderSchema(option, schemas, option.title, showRequired, isExpandedByDefault)}
-            </div>
-          ))}
-        </CollapseBox>
-      </div>
-    </div>
-  )
 
   const renderArray = (item, itemName) => {
     const arrayType = getArrayTypeDescription(item.items, schemas)
