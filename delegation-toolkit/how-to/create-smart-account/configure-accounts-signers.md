@@ -1,6 +1,6 @@
 ---
 sidebar_label: Configure accounts and signers
-description: Learn how to configure different types of smart accounts and signers using Viem.
+description: Learn how to configure different types of MetaMask Smart Accounts and signers using Viem.
 sidebar_position: 1
 ---
 
