@@ -6,7 +6,7 @@ sidebar_label: Quickstart
 
 # MetaMask Smart Accounts quickstart
 
-This page demonstrates how to get started quickly with the MetaMask Smart Accounts, and send the first user operation.
+This page demonstrates how to get started quickly with MetaMask Smart Accounts, and send the first user operation.
 
 ## Prerequisites
 
@@ -19,13 +19,13 @@ This page demonstrates how to get started quickly with the MetaMask Smart Accoun
 Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. This client will let the smart account query the signer's account state and interact with blockchain network.
 
 ```typescript
-import { createPublicClient, http } from 'viem'
-import { sepolia as chain } from 'viem/chains'
+import { createPublicClient, http } from "viem";
+import { sepolia as chain } from "viem/chains";
 
 const publicClient = createPublicClient({
   chain,
   transport: http(),
-})
+});
 ```
 
 ### 2. Set up a Bundler Client
@@ -33,33 +33,33 @@ const publicClient = createPublicClient({
 Set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function. This lets you use the bundler service to estimate gas for user operations and submit transactions to the network.
 
 ```typescript
-import { createBundlerClient } from 'viem/account-abstraction'
+import { createBundlerClient } from "viem/account-abstraction";
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http('https://your-bundler-rpc.com'),
-})
+  transport: http("https://your-bundler-rpc.com"),
+});
 ```
 
 ### 3. Create a MetaMask smart account
 
-[Create a MetaMask smart account](../how-to/create-smart-account/index.md) to send first user operation.
+[Create a MetaMask smart account](../how-to/create-smart-account/index.md) to send the first user operation.
 
 This example configures a [Hybrid](../how-to/create-smart-account/configure-accounts-signers.md#configure-a-hybrid-smart-account) smart account:
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit'
-import { privateKeyToAccount } from 'viem/accounts'
+import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit";
+import { privateKeyToAccount } from "viem/accounts";
 
-const account = privateKeyToAccount('0x...')
+const account = privateKeyToAccount("0x...");
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
-  deploySalt: '0x',
+  deploySalt: "0x",
   signatory: { account },
-})
+});
 ```
 
 ### 4. Send a user operation
@@ -72,21 +72,21 @@ The smart account will remain counterfactual until the first user operation. If 
 deployed, it will be automatically deployed upon the sending first user operation.
 
 ```ts
-import { parseEther } from 'viem'
+import { parseEther } from "viem";
 
 // Appropriate fee per gas must be determined for the specific bundler being used.
-const maxFeePerGas = 1n
-const maxPriorityFeePerGas = 1n
+const maxFeePerGas = 1n;
+const maxPriorityFeePerGas = 1n;
 
 const userOperationHash = await bundlerClient.sendUserOperation({
   account: smartAccount,
   calls: [
     {
-      to: '0x1234567890123456789012345678901234567890',
-      value: parseEther('1'),
+      to: "0x1234567890123456789012345678901234567890",
+      value: parseEther("1"),
     },
   ],
   maxFeePerGas,
   maxPriorityFeePerGas,
-})
+});
 ```
