@@ -1,15 +1,15 @@
 ---
-description: Learn how to create a delegator account using Viem.
+description: Learn how to create a MetaMask smart account using Viem.
 sidebar_position: 2
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Create a smart account
+# Create a MetaMask smart account
 
 The MetaMask Delegation Toolkit is embedded, meaning that the end user can instantly interact with a dapp without wallet authorization, confirmations, or corporate logos.
-Enable users to create a [smart account](../../concepts/smart-accounts.md) directly in your dapp.
+Enable users to create a [MetaMask smart account](../../concepts/smart-accounts.md) directly in your dapp.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ Enable users to create a [smart account](../../concepts/smart-accounts.md) direc
 
 ## Create a `MetaMaskSmartAccount`
 
-The following is an example of creating a smart account using Viem Core SDK.
+The following is an example of creating a MetaMask smart account using Viem Core SDK.
 Viem Core SDK provides low-level interfaces to offer flexibility and control over the smart
 account creation lifecycle.
 

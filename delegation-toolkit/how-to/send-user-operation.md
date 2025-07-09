@@ -20,14 +20,14 @@ Instead, they are sent to a bundler, which validates, optimizes, and aggregates 
 See [Viem's Bundler Client](https://viem.sh/account-abstraction/clients/bundler) for details on how to interact with the bundler.
 
 :::note
-If a user operation is sent from a smart contract account that has not been deployed, the toolkit configures the user operation to automatically deploy the account.
+If a user operation is sent from a MetaMask smart account that has not been deployed, the toolkit configures the user operation to automatically deploy the account.
 :::
 
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../get-started/install.md)
 - [Configure the Delegation Toolkit.](configure.md)
-- [Create a smart account.](create-smart-account/index.md)
+- [Create a MetaMask smart account.](create-smart-account/index.md)
 
 ## Send a user operation
 

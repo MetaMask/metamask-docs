@@ -19,7 +19,7 @@ export default function Home(): JSX.Element {
           icon: 'arrow-right',
         }}
       />
-      <SectionIntro description="What do you want to build with MetaMask? Whether you're integrating with the extension, embedding smart wallets, or scaling with powerful infrastructure—choose a path below to get started." />
+      <SectionIntro description="What do you want to build with MetaMask? Whether you're integrating with the extension, embedding smart accounts, or scaling with powerful infrastructure—choose a path below to get started." />
       <CardSection
         title="Connect to MetaMask extension and mobile"
         description="Connect your dapp to the MetaMask browser extension and MetaMask mobile app. Ideal for users who want full control over their keys and transactions."
@@ -50,7 +50,7 @@ export default function Home(): JSX.Element {
           {
             title: 'Delegation Toolkit',
             description:
-              'Integrate MetaMask smart accounts into your dapp. Create embedded wallets that support delegated permissions, gas abstraction, and secure execution.',
+              'Integrate MetaMask Smart Accounts into your dapp. Create embedded wallets that support delegated permissions, gas abstraction, and secure execution.',
             href: '/delegation-toolkit',
             buttonIcon: "arrow-right",
           },
