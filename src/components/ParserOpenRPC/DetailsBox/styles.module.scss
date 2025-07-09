@@ -362,12 +362,13 @@
 
   ul,
   ol {
-    font-size: 1.4rem;
+    font-size: 1.4rem !important;
     line-height: 1.5;
+    margin: 0.5rem 0;
   }
 
   li {
-    font-size: 1.4rem;
+    font-size: 1.4rem !important;
     line-height: 1.5;
   }
 
@@ -375,6 +376,22 @@
     font-size: 1.4rem;
     line-height: 1.5;
   }
+}
+
+// Additional high-specificity selectors to ensure lists match paragraph font size
+:global(.type-paragraph-m ul),
+:global(.type-paragraph-m ol),
+:global(.type-paragraph-m li) {
+  font-size: 1.4rem !important;
+  line-height: 1.5;
+}
+
+// Even higher specificity for cases where lists break out of paragraphs
+:global(.description_Vomw ul),
+:global(.description_Vomw ol),
+:global(.description_Vomw li) {
+  font-size: 1.4rem !important;
+  line-height: 1.5;
 }
 
 html[data-theme='dark'] {
