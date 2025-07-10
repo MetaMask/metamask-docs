@@ -56,11 +56,13 @@ export default function DetailsBox({
         </p>
       )}
       {description !== null && (
-        <div className={clsx("padding-top--md", styles.methodDescription)}>
+        <div className={clsx('padding-top--md', styles.methodDescription)}>
           <MDContent content={description} />
         </div>
       )}
-      {extraContent && <div className="padding-top--lg">{extraContent}</div>}
+      {extraContent && (
+        <div className={clsx('padding-top--lg', styles.extraContent)}>{extraContent}</div>
+      )}
       <Heading
         as="h2"
         className={clsx(styles.secondaryHeading, 'padding-top--lg padding-bottom--md')}>
@@ -68,7 +70,9 @@ export default function DetailsBox({
       </Heading>
       <div className={styles.paramContainer}>
         {params.length === 0 ? (
-          <div className={clsx("padding-vert--md", styles.noParamsDescription)}>This method doesn't accept any parameters.</div>
+          <div className={clsx('padding-vert--md', styles.noParamsDescription)}>
+            This method doesn't accept any parameters.
+          </div>
         ) : (
           params && renderParamSchemas(params, components)
         )}

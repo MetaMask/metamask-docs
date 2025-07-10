@@ -394,6 +394,85 @@
   line-height: 1.5;
 }
 
+// Styles for extraContent to match the rest of the component
+.extraContent {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  color: var(--ifm-color-content);
+
+  // Ensure paragraphs match
+  p {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  // Ensure lists match
+  ul,
+  ol {
+    font-size: 1.4rem !important;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+  }
+
+  li {
+    font-size: 1.4rem !important;
+    line-height: 1.5;
+  }
+
+  // Ensure headings are proportional
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  // Ensure code blocks match
+  code {
+    font-family: var(--font-mm-sans-mono);
+    font-size: 1.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background: var(--ifm-code-background);
+    border-radius: 0.4rem;
+  }
+
+  // Ensure links match
+  a {
+    color: var(--ifm-link-color);
+    text-decoration: underline;
+    text-decoration-color: var(--ifm-link-color);
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.4rem;
+    transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    font-weight: 500;
+
+    &:hover {
+      color: var(--ifm-link-hover-color);
+      text-decoration: underline;
+      text-decoration-color: var(--ifm-link-hover-color);
+      text-decoration-thickness: 0.1rem;
+      text-underline-offset: 0.4rem;
+    }
+  }
+
+  // Ensure Docusaurus admonitions match the component font size
+  :global(.alert) {
+    font-size: 1.4rem;
+    line-height: 1.5;
+
+    p {
+      font-size: 1.4rem;
+      line-height: 1.5;
+    }
+  }
+}
+
 html[data-theme='dark'] {
   .paramWrapper,
   .borderWrapper,
