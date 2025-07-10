@@ -21,14 +21,14 @@
   margin-bottom: 0.2rem;
 
   h5 {
-    font-size: 1.4rem;
+    font-size: inherit;
   }
 }
 
 .textAltColor {
   color: var(--general-gray-dark);
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: calc(var(--parser-font-size) * 0.85);
 
   [data-theme='dark'] & {
     color: var(--general-gray);
@@ -36,13 +36,13 @@
 }
 
 .textErrorColor {
-  font-size: 1.2rem;
+  font-size: calc(var(--parser-font-size) * 0.85);
   color: var(--error);
 }
 
 .description {
   color: var(--general-gray-dark);
-  font-size: 1.4rem;
+  font-size: inherit;
 
   [data-theme='dark'] & {
     color: var(--general-gray);
@@ -67,7 +67,7 @@
 
 .propItemLabel {
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: calc(var(--parser-font-size) * 0.85);
   color: var(--general-gray-dark);
   margin-right: 0.4rem;
 
@@ -78,7 +78,7 @@
 
 .propItemValue {
   font-family: var(--font-mm-sans-mono);
-  font-size: 1.2rem;
+  font-size: calc(var(--parser-font-size) * 0.85);
   color: var(--general-black);
   background-color: var(--ifm-code-background);
   padding: 0.2rem 0.4rem;
@@ -158,7 +158,7 @@
 .enumWrapper {
   border: 1px solid var(--general-gray-light);
   margin-bottom: 2rem;
-  font-size: 1.4rem;
+  font-size: inherit;
 }
 
 .enumItem {
@@ -172,7 +172,7 @@
 
 .enumTitle {
   display: inline-block;
-  font-size: 1.2rem;
+  font-size: calc(var(--parser-font-size) * 0.85);
   line-height: 1;
   padding: 0.4rem;
   border: 1px solid var(--general-gray-light);
@@ -180,92 +180,92 @@
 }
 
 .heading1 {
-  font-size: 2.7rem !important;
+  font-size: calc(var(--parser-font-size) * 1.93) !important;
   line-height: 133.333%;
 }
 
 .heading2 {
-  font-size: 2.3rem !important;
+  font-size: calc(var(--parser-font-size) * 1.64) !important;
   line-height: 140%;
 }
 
 .headingSmall {
-  font-size: 1.5rem !important;
+  font-size: calc(var(--parser-font-size) * 1.07) !important;
 }
 
 // Target the actual HTML structure in the parser component
 :global(.colContentWrap_src-components-ParserOpenRPC-global-module) {
   h1 {
-    font-size: 2.7rem !important;
+    font-size: calc(var(--parser-font-size) * 1.93) !important;
   }
 
   h2 {
-    font-size: 2.3rem !important;
+    font-size: calc(var(--parser-font-size) * 1.64) !important;
   }
 
   h3 {
-    font-size: 1.5rem !important;
+    font-size: calc(var(--parser-font-size) * 1.07) !important;
   }
 
   h4 {
-    font-size: 1.4rem !important;
+    font-size: inherit !important;
   }
 
   h5 {
-    font-size: 1.4rem !important;
+    font-size: inherit !important;
   }
 }
 
 // Target utility classes that might be overriding
 :global(.type-paragraph-m) {
   h1 {
-    font-size: 2.7rem !important;
+    font-size: calc(var(--parser-font-size) * 1.93) !important;
   }
 
   h2 {
-    font-size: 2.3rem !important;
+    font-size: calc(var(--parser-font-size) * 1.64) !important;
   }
 
   h3 {
-    font-size: 1.5rem !important;
+    font-size: calc(var(--parser-font-size) * 1.07) !important;
   }
 
   h4 {
-    font-size: 1.4rem !important;
+    font-size: inherit !important;
   }
 
   h5 {
-    font-size: 1.4rem !important;
+    font-size: inherit !important;
   }
 }
 
 // More specific targeting for the parser content area
 :global([id='centerContent']) {
   h1 {
-    font-size: 2.7rem !important;
+    font-size: calc(var(--parser-font-size) * 1.93) !important;
   }
 
   h2 {
-    font-size: 2.3rem !important;
+    font-size: calc(var(--parser-font-size) * 1.64) !important;
   }
 
   h3 {
-    font-size: 1.5rem !important;
+    font-size: calc(var(--parser-font-size) * 1.07) !important;
   }
 }
 
 // Additional specificity for heading elements within the parser component
 :global(.parserOpenRPC) {
   h1 {
-    font-size: 2.7rem !important;
+    font-size: calc(var(--parser-font-size) * 1.93) !important;
   }
 
   h2 {
-    font-size: 2.3rem !important;
+    font-size: calc(var(--parser-font-size) * 1.64) !important;
   }
 
   h3 {
-    font-size: 1.5rem !important;
+    font-size: calc(var(--parser-font-size) * 1.07) !important;
   }
 }
 
@@ -274,15 +274,15 @@
 :global(.type-heading-m),
 :global(.type-heading-s) {
   &.heading1 {
-    font-size: 2.7rem !important;
+    font-size: calc(var(--parser-font-size) * 1.93) !important;
   }
 
   &.heading2 {
-    font-size: 2.3rem !important;
+    font-size: calc(var(--parser-font-size) * 1.64) !important;
   }
 
   &.headingSmall {
-    font-size: 1.5rem !important;
+    font-size: calc(var(--parser-font-size) * 1.07) !important;
   }
 }
 
@@ -320,18 +320,18 @@
 
 .methodSummary {
   font-style: italic;
-  font-size: 1.4rem;
+  font-size: inherit;
 }
 
 .methodDescription,
 .noParamsDescription {
-  font-size: 1.4rem;
+  font-size: inherit;
 }
 
 // Styles for markdown content rendered by MDContent component - scoped to ParserOpenRPC
 :global(.colContentWrap_src-components-ParserOpenRPC-global-module .md-content) {
-  font-size: 1.4rem;
-  line-height: 1.5;
+  font-size: inherit;
+  line-height: inherit;
 
   a {
     color: var(--ifm-link-color);
@@ -353,7 +353,7 @@
 
   code {
     font-family: var(--font-mm-sans-mono);
-    font-size: 80%;
+    font-size: var(--parser-code-font-size);
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     background: var(--ifm-code-background);
@@ -362,19 +362,19 @@
 
   ul,
   ol {
-    font-size: 1.4rem !important;
-    line-height: 1.5;
+    font-size: inherit !important;
+    line-height: inherit;
     margin: 0.5rem 0;
   }
 
   li {
-    font-size: 1.4rem !important;
-    line-height: 1.5;
+    font-size: inherit !important;
+    line-height: inherit;
   }
 
   p {
-    font-size: 1.4rem;
-    line-height: 1.5;
+    font-size: inherit;
+    line-height: inherit;
   }
 }
 
@@ -382,42 +382,42 @@
 :global(.type-paragraph-m ul),
 :global(.type-paragraph-m ol),
 :global(.type-paragraph-m li) {
-  font-size: 1.4rem !important;
-  line-height: 1.5;
+  font-size: inherit !important;
+  line-height: inherit;
 }
 
 // Even higher specificity for cases where lists break out of paragraphs
 :global(.description_Vomw ul),
 :global(.description_Vomw ol),
 :global(.description_Vomw li) {
-  font-size: 1.4rem !important;
-  line-height: 1.5;
+  font-size: inherit !important;
+  line-height: inherit;
 }
 
 // Styles for extraContent to match the rest of the component
 .extraContent {
-  font-size: 1.4rem;
-  line-height: 1.5;
+  font-size: inherit;
+  line-height: inherit;
   color: var(--ifm-color-content);
 
   // Ensure paragraphs match
   p {
-    font-size: 1.4rem;
-    line-height: 1.5;
+    font-size: inherit;
+    line-height: inherit;
     margin-bottom: 1rem;
   }
 
   // Ensure lists match
   ul,
   ol {
-    font-size: 1.4rem !important;
-    line-height: 1.5;
+    font-size: inherit !important;
+    line-height: inherit;
     margin: 0.5rem 0;
   }
 
   li {
-    font-size: 1.4rem !important;
-    line-height: 1.5;
+    font-size: inherit !important;
+    line-height: inherit;
   }
 
   // Ensure headings are proportional
@@ -427,7 +427,7 @@
   h4,
   h5,
   h6 {
-    font-size: 1.6rem;
+    font-size: calc(var(--parser-font-size) * 1.14);
     font-weight: 600;
     margin-bottom: 0.5rem;
   }
@@ -435,7 +435,7 @@
   // Ensure code blocks match
   code {
     font-family: var(--font-mm-sans-mono);
-    font-size: 1.2rem;
+    font-size: var(--parser-code-font-size);
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     background: var(--ifm-code-background);
@@ -463,12 +463,12 @@
 
   // Ensure Docusaurus admonitions match the component font size
   :global(.alert) {
-    font-size: 1.4rem;
-    line-height: 1.5;
+    font-size: inherit;
+    line-height: inherit;
 
     p {
-      font-size: 1.4rem;
-      line-height: 1.5;
+      font-size: inherit;
+      line-height: inherit;
     }
   }
 }
