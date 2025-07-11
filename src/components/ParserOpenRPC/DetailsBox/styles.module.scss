@@ -216,6 +216,22 @@
   }
 }
 
+// High specificity override for extraContent h2 to override global type-heading-sm
+:global(.colContentWrap_src-components-ParserOpenRPC-global-module) {
+  .extraContent {
+    h2 {
+      font-size: calc(var(--parser-font-size) * 1.64) !important;
+      font-family: var(--ifm-font-family-base) !important;
+      font-weight: 500 !important;
+      line-height: 140% !important;
+
+      @include bp('desktop') {
+        line-height: 125% !important;
+      }
+    }
+  }
+}
+
 // Target utility classes that might be overriding
 :global(.type-paragraph-m) {
   h1 {
@@ -404,20 +420,51 @@
   p {
     font-size: inherit;
     line-height: inherit;
-    margin-bottom: 1rem;
+    margin: 0 0 0.5rem 0;
   }
 
-  // Ensure lists match
-  ul,
+  // Ensure lists match with proper bullet styling
+  ul {
+    font-size: inherit !important;
+    line-height: inherit;
+    margin: 0.5rem 0 1rem 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+    list-style-position: outside;
+  }
+
   ol {
     font-size: inherit !important;
     line-height: inherit;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 1rem 0;
+    padding-left: 1.5rem;
+    list-style-type: decimal;
+    list-style-position: outside;
   }
 
   li {
     font-size: inherit !important;
     line-height: inherit;
+    margin-bottom: 0.25rem;
+    padding-left: 0.25rem;
+    list-style: inherit;
+  }
+
+  // Nested lists
+  ul ul,
+  ol ol,
+  ul ol,
+  ol ul {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  ul ul {
+    list-style-type: circle;
+  }
+
+  ul ul ul {
+    list-style-type: square;
   }
 
   // Ensure headings are proportional
@@ -432,14 +479,26 @@
     margin-bottom: 0.5rem;
   }
 
-  // Ensure code blocks match
-  code {
+  // Ensure inline code blocks match, but don't interfere with CodeBlock components
+  code:not(.codeBlockLines_e6Vv):not([class*='codeBlock']) {
     font-family: var(--font-mm-sans-mono);
     font-size: var(--parser-code-font-size);
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     background: var(--ifm-code-background);
     border-radius: 0.4rem;
+  }
+
+  // Ensure CodeBlock components maintain their original styling
+  div[class*='codeBlockContainer'] {
+    margin: 1rem 0;
+  }
+
+  pre[class*='codeBlock'] code {
+    background: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    font-size: inherit !important;
   }
 
   // Ensure links match

@@ -8,6 +8,7 @@ import ErrorsBox from '@site/src/components/ParserOpenRPC/ErrorsBox'
 import { ModalDrawer } from '@site/src/components/ParserOpenRPC/ModalDrawer'
 import global from './global.module.scss'
 import modalDrawerStyles from './ModalDrawer/styles.module.scss'
+import detailsBoxStyles from './DetailsBox/styles.module.scss'
 import clsx from 'clsx'
 import { useColorMode } from '@docusaurus/theme-common'
 import { trackClickForSegment, trackInputChangeForSegment } from '@site/src/lib/segmentAnalytics'
@@ -25,7 +26,7 @@ import localLineaSpec from '@site/src/specs/linea/openrpc.json'
 interface ParserProps {
   network: NETWORK_NAMES
   method?: string
-  extraContent?: JSX.Element
+  extraContent?: JSX.Element | Record<string, JSX.Element>
   src?: 'local' | 'remote'
 }
 
@@ -61,6 +62,17 @@ export default function ParserOpenRPC({
   const [defExampleResponse, setDefExampleResponse] = useState(undefined)
   const [isLoading, setIsLoading] = useState(false)
   const { colorMode } = useColorMode()
+
+  // Helper function to render extraContent at specific positions
+  const renderExtraContent = (position: string) => {
+    if (React.isValidElement(extraContent)) {
+      // Backward compatibility - old syntax doesn't support after-errors
+      return null
+    }
+    // New syntax - render at specified position
+    return extraContent?.[position] || null
+  }
+
   const trackAnalyticsForRequest = response => {
     trackClickForSegment({
       eventName: 'Request Sent',
@@ -299,6 +311,11 @@ export default function ParserOpenRPC({
               extraContent={extraContent}
             />
             <ErrorsBox errors={currentMethodData.errors} />
+            {renderExtraContent('after-errors') && (
+              <div className={clsx('padding-top--lg', detailsBoxStyles.extraContent)}>
+                {renderExtraContent('after-errors')}
+              </div>
+            )}
           </div>
           <ModalDrawer
             title={
