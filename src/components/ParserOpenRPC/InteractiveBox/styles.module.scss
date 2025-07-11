@@ -105,7 +105,7 @@
   padding-bottom: 0.2rem;
   color: var(--general-gray-mid);
   line-height: 2.4rem;
-  font-size: 1.4rem;
+  font-size: inherit;
 }
 .tableColumnTypeDropdown {
   width: 100%;
@@ -248,7 +248,7 @@
 }
 .tableButtonAddArrayItemName {
   margin-left: 0.8rem;
-  font-size: 1.4rem;
+  font-size: inherit;
   font-weight: 500;
 }
 .tableComplexType {
@@ -271,7 +271,7 @@
 .formControl {
   width: 100%;
   padding: 1.2rem 7.2rem 1.2rem 1.6rem;
-  font-size: 1.4rem;
+  font-size: inherit;
   line-height: 2.4rem;
   color: var(--general-black);
   border-radius: 0;
@@ -359,7 +359,7 @@
   display: flex;
   align-items: center;
   color: var(--general-gray-light);
-  font-size: 1.4rem;
+  font-size: inherit;
   cursor: pointer;
 }
 .arrayFormDataWrap {
@@ -384,7 +384,7 @@
   border: 0;
   outline: none;
   color: var(--general-gray-mid);
-  font-size: 1.4rem;
+  font-size: inherit;
   line-height: 1;
   cursor: pointer;
 }

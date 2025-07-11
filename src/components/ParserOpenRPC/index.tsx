@@ -8,6 +8,7 @@ import ErrorsBox from '@site/src/components/ParserOpenRPC/ErrorsBox'
 import { ModalDrawer } from '@site/src/components/ParserOpenRPC/ModalDrawer'
 import global from './global.module.scss'
 import modalDrawerStyles from './ModalDrawer/styles.module.scss'
+import detailsBoxStyles from './DetailsBox/styles.module.scss'
 import clsx from 'clsx'
 import { useColorMode } from '@docusaurus/theme-common'
 import { trackClickForSegment, trackInputChangeForSegment } from '@site/src/lib/segmentAnalytics'
@@ -19,10 +20,14 @@ import useIsBrowser from '@docusaurus/useIsBrowser'
 import { encrypt } from '@metamask/eth-sig-util'
 import { hexlify } from 'ethers'
 
+// Import local specs
+import localLineaSpec from '@site/src/specs/linea/openrpc.json'
+
 interface ParserProps {
   network: NETWORK_NAMES
   method?: string
-  extraContent?: JSX.Element
+  extraContent?: JSX.Element | Record<string, JSX.Element>
+  src?: 'local' | 'remote'
 }
 
 interface ParserOpenRPCContextProps {
@@ -35,7 +40,12 @@ interface ParserOpenRPCContextProps {
 
 export const ParserOpenRPCContext = createContext<ParserOpenRPCContextProps | null>(null)
 
-export default function ParserOpenRPC({ network, method, extraContent }: ParserProps) {
+export default function ParserOpenRPC({
+  network,
+  method,
+  extraContent,
+  src = 'remote',
+}: ParserProps) {
   const isBrowser = useIsBrowser()
   if (!isBrowser) {
     return null
@@ -52,6 +62,17 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   const [defExampleResponse, setDefExampleResponse] = useState(undefined)
   const [isLoading, setIsLoading] = useState(false)
   const { colorMode } = useColorMode()
+
+  // Helper function to render extraContent at specific positions
+  const renderExtraContent = (position: string) => {
+    if (React.isValidElement(extraContent)) {
+      // Backward compatibility - old syntax doesn't support after-errors
+      return null
+    }
+    // New syntax - render at specified position
+    return extraContent?.[position] || null
+  }
+
   const trackAnalyticsForRequest = response => {
     trackClickForSegment({
       eventName: 'Request Sent',
@@ -79,9 +100,18 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
   const { netData } = usePluginData('plugin-json-rpc') as {
     netData?: ResponseItem[]
   }
-  const currentNetwork = netData?.find(net => net.name === network)
 
-  if (!currentNetwork && currentNetwork.error) return null
+  // Use local data when src="local", otherwise use plugin data
+  const currentNetwork =
+    src === 'local'
+      ? {
+          name: network,
+          data: network === NETWORK_NAMES.linea ? localLineaSpec : null,
+          error: network !== NETWORK_NAMES.linea, // Error if local spec not available for this network
+        }
+      : netData?.find(net => net.name === network)
+
+  if (!currentNetwork || currentNetwork.error) return null
 
   const currentMethodData = useMemo(() => {
     const findReferencedItem = (items, refPath, componentType) => {
@@ -136,7 +166,7 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
       tags,
       servers: currentNetwork.data?.servers?.[0]?.url || null,
     }
-  }, [currentNetwork, method])
+  }, [currentNetwork, method, src])
 
   if (currentMethodData === null) return null
 
@@ -281,6 +311,11 @@ export default function ParserOpenRPC({ network, method, extraContent }: ParserP
               extraContent={extraContent}
             />
             <ErrorsBox errors={currentMethodData.errors} />
+            {renderExtraContent('after-errors') && (
+              <div className={clsx('padding-top--lg', detailsBoxStyles.extraContent)}>
+                {renderExtraContent('after-errors')}
+              </div>
+            )}
           </div>
           <ModalDrawer
             title={

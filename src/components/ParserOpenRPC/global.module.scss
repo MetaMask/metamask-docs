@@ -2,16 +2,25 @@
   --font-family-sans: 'Euclid Circular B', 'Roboto', sans-serif;
 }
 
+.rowWrap {
+  // Font inheritance system for entire ParserOpenRPC component
+  --parser-font-size: 1.4rem;
+  --parser-line-height: 1.5;
+  --parser-code-font-size: 1.2rem;
+
+  // Set base font styling - all child components inherit from here
+  font-size: var(--parser-font-size);
+  line-height: var(--parser-line-height);
+
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1.8rem 2.6rem 0 0;
+}
+
 .stickyCol {
   position: sticky;
   top: 8.4rem;
   left: 0;
-}
-
-.rowWrap {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 1.8rem 2.6rem 0 0;
 }
 
 .colLeft {
