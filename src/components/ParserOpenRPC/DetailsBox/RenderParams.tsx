@@ -85,7 +85,11 @@ const renderSchema = (
       <SchemaProperty
         title={itemName || item.title}
         type={type}
-        required={schemaItem.required || !!item.required}
+        required={
+          Array.isArray(schemaItem.required)
+            ? schemaItem.required.includes(name)
+            : !!schemaItem.required
+        }
         description={item.description || item.title || ''}
         pattern={item.pattern}
         defaultVal={item.default}
@@ -159,7 +163,11 @@ const renderSchema = (
         <SchemaProperty
           title={itemName || item.title}
           type="object"
-          required={schemaItem.required || !!item.required}
+          required={
+            Array.isArray(schemaItem.required)
+              ? schemaItem.required.includes(name)
+              : !!schemaItem.required
+          }
           description={item.description || item.title || ''}
           pattern={item.pattern}
           defaultVal={item.default}
@@ -285,7 +293,11 @@ const renderSchema = (
         <SchemaProperty
           title={itemName || item.title}
           type={arrayType}
-          required={schemaItem.required || !!item.required}
+          required={
+            Array.isArray(schemaItem.required)
+              ? schemaItem.required.includes(name)
+              : !!schemaItem.required
+          }
           description={schemaItem.description || item.description || item.title || ''}
           pattern={schemaItem.pattern}
           defaultVal={schemaItem.default}
@@ -401,7 +413,11 @@ const renderSchema = (
                 ? getArrayTypeDescription(schemaItem.schema.items, schemas)
                 : schemaItem.schema.type
           }
-          required={!!schemaItem.required}
+          required={
+            Array.isArray(schemaItem.required)
+              ? schemaItem.required.includes(name)
+              : !!schemaItem.required
+          }
           description={
             schemaItem.description || schemaItem.schema.description || schemaItem.schema.title || ''
           }
@@ -424,7 +440,11 @@ const renderSchema = (
               ? getArrayTypeDescription(schemaItem.items, schemas)
               : schemaItem.type
         }
-        required={!!schemaItem.required}
+        required={
+          Array.isArray(schemaItem.required)
+            ? schemaItem.required.includes(name)
+            : !!schemaItem.required
+        }
         description={schemaItem.description || schemaItem.title}
         pattern={schemaItem.pattern}
         defaultVal={schemaItem.default}
