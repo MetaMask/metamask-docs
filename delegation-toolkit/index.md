@@ -1,37 +1,30 @@
 ---
 title: Delegation Toolkit introduction
 sidebar_label: Introduction
-description: High-level overview of the Delegation Toolkit, its benefits, and where to start in the documentation.
+description: High-level overview of MetaMask Smart Accounts and the Delegation Toolkit.
 sidebar_position: 1
 ---
 
 import CardList from "@site/src/components/CardList"
 
-# Embed smart accounts using the Delegation Toolkit
+# Embed MetaMask Smart Accounts using the Delegation Toolkit
 
-The MetaMask Delegation Toolkit is a [Viem](https://viem.sh/)-based collection of tools for integrating
-embedded smart contract wallets, known as [MetaMask smart accounts](concepts/smart-accounts.md),
-into dapps. Developers can create and manage MetaMask smart accounts that delegate specific
-permissions, such as spending limits or time-based access, to other accounts.
+The MetaMask Delegation Toolkit is a [Viem](https://viem.sh/)-based collection of tools for embedding [MetaMask Smart Accounts](concepts/smart-accounts.md) into dapps.
+Smart accounts support programmable account behavior and advanced features like delegated permissions, multi-signature approvals, and gas abstraction.
 
-At the core of the toolkit is the [Delegation Framework](concepts/delegation.md#delegation-framework), a
-set of open-source, audited smart contracts that manage the delegation lifecycle.
-
-Permissions are enforced through [caveats](concepts/caveat-enforcers.md), which are rule-based
-constraints that define the conditions of a delegation. The toolkit includes
-[built-in caveat enforcers](reference/caveats.md) for common
-use cases. It also supports [custom caveat enforcers](how-to/create-delegation/create-custom-caveat-enforcer.md)
-for advanced scenarios.
+[Delegations](concepts/delegation.md) are a core feature of MetaMask Smart Accounts, enabling secure, rule-based permission sharing.
+These delegations are powered by the toolkit's Delegation Framework, which defines how 
+permissions are created, shared, and enforced.
 
 ## Why use the toolkit?
 
-The toolkit enables developers to create frictionless new experiences based on granular permission
-sharing and trust. The toolkit offers a suite of contracts, libraries, and services designed for
+The toolkit enables developers to create frictionless new experiences based on programmable account behavior and granular permission
+sharing. The toolkit offers a suite of contracts, libraries, and services designed for
 maximum composability, allowing developers to build and extend their dapps with ease.
 
 The toolkit enables:
 
-- **Instant user onboarding.** Provide frictionless onboarding with no browser extension, mobile
+- **Instant user onboarding.** Instantly onboard users with embedded MetaMask Smart Accounts — no browser extension, mobile
   app, or seed phrase required.
 
 - **New web3 experiences.** Unlock new experiences such as peer-to-peer social
@@ -54,8 +47,8 @@ Check out the following guides to get started with the MetaMask Delegation Toolk
     },
     {
       href: "get-started/quickstart",
-      title: "Delegation quickstart",
-      description: "Create a delegator account and complete the delegation lifecycle.",
+      title: "Quickstart",
+      description: "Create a MetaMask smart account and send a user operation.",
     }
   ]}
 />
