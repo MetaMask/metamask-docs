@@ -394,6 +394,56 @@
   }
 }
 
+// Fallback selector for contexts where CSS module class names don't apply (e.g., wallet documentation)
+:global([id='centerContent'] .md-content) {
+  font-size: inherit;
+  line-height: inherit;
+
+  a {
+    color: var(--ifm-link-color);
+    text-decoration: underline;
+    text-decoration-color: var(--ifm-link-color);
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.4rem;
+    transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    font-weight: 500;
+
+    &:hover {
+      color: var(--ifm-link-hover-color);
+      text-decoration: underline;
+      text-decoration-color: var(--ifm-link-hover-color);
+      text-decoration-thickness: 0.1rem;
+      text-underline-offset: 0.4rem;
+    }
+  }
+
+  code {
+    font-family: var(--font-mm-sans-mono);
+    font-size: var(--parser-code-font-size);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background: var(--ifm-code-background);
+    border-radius: 0.4rem;
+  }
+
+  ul,
+  ol {
+    font-size: inherit !important;
+    line-height: inherit;
+    margin: 0.5rem 0;
+  }
+
+  li {
+    font-size: inherit !important;
+    line-height: inherit;
+  }
+
+  p {
+    font-size: inherit;
+    line-height: inherit;
+  }
+}
+
 // Additional high-specificity selectors to ensure lists match paragraph font size
 :global(.type-paragraph-m ul),
 :global(.type-paragraph-m ol),
