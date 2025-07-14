@@ -1,0 +1,100 @@
+---
+title: 'sei_getBlockByNumber'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
+
+# `sei_getBlockByNumber`
+
+Returns block information by number, including synthetic transactions from Cosmos SDK modules. This is an enhanced version of `eth_getBlockByNumber` that provides visibility into cross-VM operations and includes both EVM and Cosmos transactions. <CreditCost network="evm" method="sei_getBlockByNumber" />
+
+## Parameters
+
+- `blockNumber`: [_Required_] Block number (hexadecimal) or one of `"earliest"`, `"latest"`, `"pending"`
+- `fullTxObjects`: [_Required_] Whether to include full transaction objects (`true`) or only hashes (`false`)
+
+## Returns
+
+Block object including synthetic transactions. The block object follows the standard Ethereum format with additional synthetic transactions that have a `synthetic` field indicating they originated from Cosmos SDK module interactions.
+
+### Block Object Schema
+
+The block object follows the standard Ethereum format with additional synthetic transactions:
+
+```json
+{
+  "number": "0x...",
+  "hash": "0x...",
+  "parentHash": "0x...",
+  "timestamp": "0x...",
+  "transactions": [
+    {
+      "hash": "0x...",
+      "from": "0x...",
+      "to": "0x...",
+      "value": "0x0",
+      "synthetic": true
+    }
+  ]
+}
+```
+
+The `synthetic` field on transactions indicates they originated from Cosmos SDK module interactions.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with an API key from your MetaMask Developer dashboard.
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://sei-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "sei_getBlockByNumber",
+    "params": [
+      "0x5bad55",
+      true
+    ],
+    "id": 1
+  }'
+```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "number": "0x5bad55",
+    "hash": "0xb3b20624f8f0f86eb50dd04688409e5cea4bd02d700bf6e79e9384d47d6a5a35",
+    "parentHash": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+    "timestamp": "0x627a7a1b",
+    "transactions": [
+      {
+        "hash": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+        "from": "0xa1e4380a3b1f749673e270229993ee55f35663b4",
+        "to": "0x5aae5775c0d8fb2b8b5b5b5b5b5b5b5b5b5b5b5b",
+        "value": "0x0",
+        "synthetic": false
+      },
+      {
+        "hash": "0xsyntheticTransactionHash0987654321",
+        "from": "0xderivedfromCosmWasmAddress",
+        "to": "0xpointerContractAddress",
+        "value": "0x0",
+        "synthetic": true
+      }
+    ]
+  }
+}
+```

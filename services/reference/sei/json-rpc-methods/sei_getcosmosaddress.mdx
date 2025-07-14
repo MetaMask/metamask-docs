@@ -1,0 +1,53 @@
+---
+title: 'sei_getCosmosAddress'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
+
+# `sei_getCosmosAddress`
+
+Retrieves the associated Cosmos SDK (bech32) address for a given EVM address. This method enables cross-VM address mapping by providing the corresponding SEI address for an EVM address. <CreditCost network="evm" method="sei_getCosmosAddress" />
+
+## Parameters
+
+- `evmAddress`: [_Required_] The EVM address (0x format)
+
+## Returns
+
+The corresponding Cosmos SDK bech32 address (SEI prefix) as a string.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with an API key from your MetaMask Developer dashboard.
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://sei-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "sei_getCosmosAddress",
+    "params": [
+      "0x1234567890abcdef1234567890abcdef12345678"
+    ],
+    "id": 1
+  }'
+```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "sei1abc123def456ghi789jkl012mno345pqr678stu"
+}
+```

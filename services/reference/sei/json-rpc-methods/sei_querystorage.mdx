@@ -1,0 +1,74 @@
+---
+title: 'sei_queryStorage'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
+
+# `sei_queryStorage`
+
+Queries raw storage data from the Cosmos SDK key-value store. This method provides low-level access to the blockchain's storage layer, allowing direct querying of stored data by key. <CreditCost network="evm" method="sei_queryStorage" />
+
+## Parameters
+
+- `key`: [_Required_] Storage key (hexadecimal encoded)
+- `storeName`: The store name (optional, default: "main")
+- `height`: Block height for the query (optional, default: latest)
+- `prove`: Whether to return a proof (optional, default: false)
+
+## Returns
+
+Storage query response with value and optional proof as an object.
+
+### Response Schema
+
+```json
+{
+  "value": "hexencodedvalue",
+  "proof": {
+    "ops": [...]
+  },
+  "height": "12345"
+}
+```
+
+## Example
+
+Replace `<YOUR-API-KEY>` with an API key from your MetaMask Developer dashboard.
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://sei-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "sei_queryStorage",
+    "params": [
+      "0x02bc04a2ba4a6f2f3c7b9e8d1a5c3f2e8d1a9b2c3e4f5a6b7c8d9e0f1a2b3c4d",
+      "bank",
+      "latest",
+      false
+    ],
+    "id": 1
+  }'
+```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "value": "0x0a0c0a04757365691204313030300",
+    "height": "12345"
+  }
+}
+```
