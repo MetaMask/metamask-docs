@@ -8,15 +8,15 @@ import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 # `sei_associate`
 
-Sends a transaction to establish association between the signer's Sei address and EVM address onchain. This method enables cross-VM functionality by linking Cosmos SDK addresses with EVM addresses. <CreditCost network="evm" method="sei_associate" />
+Sends a transaction to link the signer's Sei address and EVM address onchain. <CreditCost network="evm" method="sei_associate" />
 
 ## Parameters
 
-- `object`: [_Required_] A custom object containing a string message and the v, r, s of the signed message.
-  - `custom_message`: Any string message
-  - `r`: The R-part of the signature over the Keccak256 hash of the custom message
-  - `s`: The S-part of the signature over the Keccak256 hash of the custom message
-  - `v`: The V-part of the signature over the Keccak256 hash of the custom message
+- CUSTOM MESSAGE OBJECT [_Required_]
+  - `custom_message`: Any string message.
+  - `r`: The R-part of the signature over the Keccak256 hash of the custom message.
+  - `s`: The S-part of the signature over the Keccak256 hash of the custom message.
+  - `v`: The V-part of the signature over the Keccak256 hash of the custom message.
 
 ## Returns
 
