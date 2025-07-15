@@ -77,27 +77,6 @@ const result = await ethereum.request({
 ```
 
 </TabItem>
-<TabItem value="Node.js">
-
-```javascript
-import { MetaMaskSDK } from "@metamask/sdk"
-
-const MMSDK = new MetaMaskSDK({
-  dappMetadata: {
-    name: "Node.js dapp",
-  },
-  infuraAPIKey: process.env.INFURA_API_KEY,
-})
-
-// Connect and get accounts
-const accounts = await MMSDK.connect()
-console.log("Connected accounts:", accounts)
-
-// Access provider
-const provider = MMSDK.getProvider()
-```
-
-</TabItem>
 </Tabs>
 
 ### 3. Configure the SDK
