@@ -16,7 +16,7 @@ module.exports = function (context, options) {
                     sassOptions: {
                       includePaths: [path.resolve(context.siteDir, 'src/scss')],
                     },
-                    additionalData: `@use "sass:math"; @import "src/scss/utils/global-import";`,
+                    additionalData: `@use "sass:math"; @import "${path.resolve(context.siteDir, 'src/scss/utils/global-import')}";`,
                   },
                 },
               ],
