@@ -1,0 +1,22 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="curl" label="curl" default>
+
+```bash
+curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"method":"debug_traceBlockByNumber","params":["0x4d0c", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
+```
+  </TabItem>
+  <TabItem value="WSS" label="WSS" >
+
+```bash
+wscat -c wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY> \
+-x '{"method":"debug_traceBlockByNumber","params":["0x4d0c", {"tracer": "callTracer"}],"id":1,"jsonrpc":"2.0"}'
+```
+
+  </TabItem>
+</Tabs>

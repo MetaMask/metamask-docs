@@ -1,8 +1,6 @@
 ---
 sidebar_position: 1
 sidebar_label: Objects
-tags:
-  - Keyring API
 ---
 
 # Account Management API objects

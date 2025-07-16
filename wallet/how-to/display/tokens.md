@@ -1,5 +1,5 @@
 ---
-description: Register a token with users using wallet_watchAsset.
+description: Display a user's ERC-20 tokens or NFTs.
 ---
 
 # Display tokens

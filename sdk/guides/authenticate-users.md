@@ -1,5 +1,5 @@
 ---
-description: Authenticate users
+description: Authenticate users with the SDK in your Wagmi or Vanilla JavaScript dapp.
 toc_max_heading_level: 2
 ---
 
@@ -17,7 +17,7 @@ With the SDK, you can:
 - **Support multiple wallet types** (extension, mobile app).
 
 <p align="center">
-  <a href="https://metamask-sdk-examples-relink.vercel.app/" target="_blank">
+  <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
     <img src={require("../_assets/connect.gif").default} alt="Connect to MetaMask" width="450px" />
   </a>
 </p>
@@ -85,7 +85,9 @@ function WatchAccount() {
 
 ## Use Vanilla JavaScript
 
-You can implement user authentication directly in Vanilla JavaScript.
+You can implement user authentication directly in Vanilla JavaScript, using the
+[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) RPC method
+and [`accountsChanged`](/wallet/reference/provider-api/#accountschanged) provider event.
 For example:
 
 ```javascript
@@ -148,10 +150,6 @@ Display connect and disconnect buttons in HTML:
   </button>
 </div>
 ```
-
-:::info
-See the [Provider API](/wallet/reference/provider-api) reference for more information.
-:::
 
 ## Best practices
 

@@ -8,16 +8,16 @@ import styles from './styles.module.scss'
 
 interface CollapseBoxProps {
   children: JSX.Element
-  isInitCollapsed?: boolean
+  isInitExpanded?: boolean
 }
 
-export const CollapseBox = ({ children, isInitCollapsed = false }: CollapseBoxProps) => {
+export const CollapseBox = ({ children, isInitExpanded = false }: CollapseBoxProps) => {
   const { collapsed, toggleCollapsed } = useCollapsible({ initialState: true })
   useEffect(() => {
-    if (isInitCollapsed) {
+    if (isInitExpanded) {
       toggleCollapsed()
     }
-  }, [isInitCollapsed])
+  }, [isInitExpanded])
   return (
     <div className={clsx(styles.collapseWrapper, !collapsed && styles.collapsedWrapperView)}>
       <button

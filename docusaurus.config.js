@@ -1,6 +1,7 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+import fs from 'fs'
 require('dotenv').config()
 const { themes } = require('prism-react-renderer')
 const { REF_ALLOW_LOGIN_PATH } = require('./src/lib/constants')
@@ -11,9 +12,14 @@ const {
   MM_RPC_URL,
 } = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
-const remarkCodesandbox = require('remark-codesandbox')
-const isProd = process.env.NODE_ENV === 'production'
-
+const helpDropdown = fs.readFileSync('./src/components/NavDropdown/DeveloperTools.html', 'utf-8')
+const connectDropdown = fs.readFileSync(
+  './src/components/NavDropdown/ConnectMetaMask.html',
+  'utf-8'
+)
+const embedDropdown = fs.readFileSync('./src/components/NavDropdown/EmbedMetaMask.html', 'utf-8')
+const extendDropdown = fs.readFileSync('./src/components/NavDropdown/ExtendScale.html', 'utf-8')
+const npm2yarnPlugin = [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'MetaMask developer documentation',
@@ -43,6 +49,7 @@ const config = {
     DASHBOARD_URL: process.env.DASHBOARD_URL || 'http://localhost:3000',
     SENTRY_KEY: process.env.SENTRY_KEY,
     LINEA_ENS_URL: process.env.LINEA_ENS_URL,
+    SEGMENT_ANALYTICS_KEY: process.env.SEGMENT_ANALYTICS_KEY,
   },
 
   trailingSlash: true,
@@ -50,11 +57,6 @@ const config = {
   scripts: [
     {
       src: 'https://cmp.osano.com/AzZMxHTbQDOQD8c1J/84e64bce-4a70-4dcc-85cb-7958f22b2371/osano.js',
-    },
-    {
-      src: 'https://plausible.io/js/script.js',
-      defer: true,
-      'data-domain': 'docs.metamask.io',
     },
   ],
 
@@ -74,6 +76,7 @@ const config = {
           editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
           sidebarPath: false,
           breadcrumbs: false,
+          remarkPlugins: [npm2yarnPlugin],
         },
         theme: {
           customCss: require.resolve('./src/scss/custom.scss'),
@@ -93,6 +96,7 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./snaps-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
         admonitions: {
           keywords: [
             'info',
@@ -112,12 +116,41 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
+        id: 'gator',
+        path: 'delegation-toolkit',
+        routeBasePath: 'delegation-toolkit',
+        editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
+        sidebarPath: require.resolve('./gator-sidebar.js'),
+        breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
+        sidebarCollapsed: false,
+        includeCurrentVersion: true,
+        // Set to the latest release.
+        lastVersion: '0.12.0',
+        versions: {
+          // Defaults to the ./docs folder.
+          // Using "development" instead of "next" as path.
+          current: {
+            label: 'development',
+            path: 'development',
+          },
+          // The latest release.
+          '0.12.0': {
+            label: 'latest (0.12.0)',
+          },
+        },
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'services',
         path: 'services',
         routeBasePath: 'services',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./services-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
       },
     ],
     [
@@ -129,6 +162,7 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./dashboard-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
       },
     ],
     [
@@ -140,6 +174,7 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./wallet-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           const sidebarItems = await defaultSidebarItemsGenerator(args)
           const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
@@ -163,74 +198,130 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./sdk-sidebar.js'),
         breadcrumbs: false,
+        remarkPlugins: [npm2yarnPlugin],
       },
     ],
     './src/plugins/plugin-json-rpc.ts',
-    isProd
-      ? [
-          'docusaurus-plugin-segment',
-          {
-            apiKey: process.env.SEGMENT_ANALYTICS_KEY,
-            load: { cookie: { sameSite: 'None', secure: true } },
-            page: true,
-          },
-        ]
-      : null,
+    // Custom Segment plugin for controlled analytics
+    './src/plugins/segment',
     './src/plugins/launchdarkly',
     './src/plugins/sentry',
+    [
+      '@docusaurus/plugin-google-tag-manager',
+      {
+        containerId: 'GTM-5FGPLC2Q',
+      },
+    ],
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [{ name: 'og:image', content: '/img/metamaskog.jpeg' }],
+      metadata: [
+        {
+          name: 'keywords',
+          content:
+            'MetaMask, SDK, Wallet, API, Dapp, App, Connect, Delegation, Toolkit, Documentation, Smart, Account, Snaps, Infura, Services, Dashboard',
+        },
+        // Twitter-specific meta tags
+        {
+          name: 'twitter:card',
+          content: 'summary_large_image',
+        },
+        {
+          name: 'twitter:image',
+          content: 'https://docs.metamask.io/img/metamaskog.jpeg',
+        },
+        {
+          name: 'twitter:image:alt',
+          content: 'MetaMask Developer Documentation',
+        },
+        {
+          name: 'twitter:site',
+          content: '@MetaMask',
+        },
+        {
+          name: 'twitter:creator',
+          content: '@MetaMask',
+        },
+        // Open Graph meta tags for better social sharing
+        {
+          property: 'og:image',
+          content: 'https://docs.metamask.io/img/metamaskog.jpeg',
+        },
+        {
+          property: 'og:image:width',
+          content: '1200',
+        },
+        {
+          property: 'og:image:height',
+          content: '630',
+        },
+        {
+          property: 'og:image:alt',
+          content: 'MetaMask Developer Documentation',
+        },
+        {
+          property: 'og:type',
+          content: 'website',
+        },
+      ],
+      image: '/img/metamaskog.jpeg',
+      colorMode: {
+        respectPrefersColorScheme: true,
+      },
       navbar: {
-        title: ' │ ‎ Documentation',
         logo: {
           alt: 'MetaMask logo',
           src: 'img/metamask-logo.svg',
           srcDark: 'img/metamask-logo-dark.svg',
           width: 150,
         },
+        hideOnScroll: true,
         items: [
           {
-            to: 'sdk',
-            label: 'SDK',
+            type: 'dropdown',
+            label: 'Connect to MetaMask',
+            items: [
+              {
+                type: 'html',
+                value: connectDropdown,
+              },
+            ],
           },
           {
-            to: 'wallet',
-            label: 'Wallet API',
+            type: 'dropdown',
+            label: 'Embed MetaMask',
+            items: [
+              {
+                type: 'html',
+                value: embedDropdown,
+              },
+            ],
           },
           {
-            to: 'snaps',
-            label: 'Snaps',
-          },
-          {
-            to: 'services',
-            label: 'Services',
+            type: 'dropdown',
+            label: 'Extend and scale',
+            items: [
+              {
+                type: 'html',
+                value: extendDropdown,
+              },
+            ],
           },
           {
             type: 'dropdown',
             label: 'Developer tools',
             items: [
               {
-                label: 'Developer dashboard',
-                to: 'developer-tools/dashboard',
-              },
-              {
-                label: 'Faucet',
-                to: 'developer-tools/faucet',
+                type: 'html',
+                value: helpDropdown,
               },
             ],
           },
           {
             to: 'whats-new',
             label: "What's new?",
-            position: 'right',
-          },
-          {
-            href: 'https://support.metamask.io/',
-            label: 'User support',
             position: 'right',
           },
           {
@@ -268,8 +359,12 @@ const config = {
                 to: '/sdk',
               },
               {
-                label: 'Wallet',
+                label: 'Wallet API',
                 to: '/wallet',
+              },
+              {
+                label: 'Delegation Toolkit',
+                to: '/delegation-toolkit',
               },
               {
                 label: 'Snaps',
@@ -293,7 +388,7 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-docs',
               },
               {
-                label: 'MetaMask wallet GitHub',
+                label: 'MetaMask extension GitHub',
                 href: 'https://github.com/MetaMask/metamask-extension/',
               },
               {
@@ -301,7 +396,11 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {
-                label: 'MetaMask Mobile GitHub',
+                label: 'Delegation Toolkit GitHub',
+                href: 'https://github.com/MetaMask/delegation-toolkit',
+              },
+              {
+                label: 'MetaMask mobile GitHub',
                 href: 'https://github.com/MetaMask/metamask-mobile',
               },
               {
@@ -313,6 +412,14 @@ const config = {
           {
             title: 'Community',
             items: [
+              {
+                label: 'Faucet',
+                to: '/developer-tools/faucet',
+              },
+              {
+                label: 'MetaMask Developer',
+                href: 'https://developer.metamask.io/login',
+              },
               {
                 label: 'Consensys Discord',
                 href: 'https://discord.gg/consensys',
@@ -347,6 +454,10 @@ const config = {
                 href: 'https://metamask.io/cla/',
               },
               {
+                label: 'Accessibility',
+                href: 'https://consensys.io/accessibility',
+              },
+              {
                 html: "<button id='manage-cookie-btn'>Manage cookies</button>",
               },
             ],
@@ -357,6 +468,18 @@ const config = {
       prism: {
         theme: codeTheme,
         additionalLanguages: ['csharp', 'gradle', 'bash', 'json'],
+        magicComments: [
+          {
+            className: 'git-diff-remove',
+            line: 'remove-next-line',
+            block: { start: 'remove-start', end: 'remove-end' },
+          },
+          {
+            className: 'git-diff-add',
+            line: 'add-next-line',
+            block: { start: 'add-start', end: 'add-end' },
+          },
+        ],
       },
       algolia: {
         // The application ID provided by Algolia

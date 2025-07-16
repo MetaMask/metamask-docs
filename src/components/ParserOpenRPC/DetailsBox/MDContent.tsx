@@ -63,5 +63,5 @@ interface MDContentProps {
 }
 
 export const MDContent = ({ content = "" }: MDContentProps) => (
-  <span dangerouslySetInnerHTML={{ __html: parseMarkdown(content) }} />
+  <span className="md-content" dangerouslySetInnerHTML={{ __html: parseMarkdown(content) }} />
 );

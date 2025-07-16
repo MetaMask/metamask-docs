@@ -4,32 +4,21 @@
 const sidebar = {
   sdkSidebar: [
     {
-      type: 'category',
+      type: 'doc',
       label: 'Introduction',
-      collapsible: false,
-      collapsed: false,
-      items: [
-        'introduction/welcome',
-        'introduction/supported-platforms',
-        'introduction/supported-networks',
-        'introduction/llm-prompt',
-        {
-          type: 'link',
-          label: 'Try demo dapp',
-          href: 'https://metamask-sdk-examples.vercel.app/',
-        },
-      ],
+      id: "index",
     },
     {
       type: 'category',
-      label: 'Quickstart',
+      label: 'Connect to MetaMask',
       collapsible: false,
       collapsed: false,
       items: [
-        'quickstart/javascript-wagmi',
-        'quickstart/javascript',
-        'quickstart/javascript-dynamic',
-        'quickstart/react-native',
+        'connect/javascript-wagmi',
+        'connect/javascript',
+        'connect/javascript-dynamic',
+        'connect/javascript-web3auth',
+        'connect/react-native',
       ],
     },
     {
@@ -57,11 +46,22 @@ const sidebar = {
       ],
     },
     {
+      type:'category',
+      label: 'Tutorials',
+      collapsible: false,
+      collapsed: false,
+      items: ['tutorials/create-wallet-ai-agent'],
+    },
+    {
       type: 'category',
       label: 'Reference',
       collapsible: false,
       collapsed: false,
-      items: ['reference/sdk-options'],
+      items: [
+        'reference/llm-prompt',
+        'reference/supported-platforms',
+        'reference/sdk-options',
+      ],
     },
   ],
 }

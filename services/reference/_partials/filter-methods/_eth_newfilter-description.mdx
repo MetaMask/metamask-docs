@@ -1,5 +1,10 @@
-Creates a filter object based on the given filter options, to notify when the state changes (logs). To check if the state has changed, call [`eth_getFilterChanges`](../../ethereum/json-rpc-methods/filter-methods/eth_getfilterchanges.mdx).
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
 
-:::tip Valid for fifteen minutes
-Filter IDs will be valid for up to fifteen minutes, and can be polled by any connection using the same `<YOUR-API-KEY>`.
+Creates a filter object based on the given filter options, to notify when the state changes (logs).
+To check if the state has changed, call [`eth_getFilterChanges`](../eth_getfilterchanges). <CreditCost network="evm_filter" method="eth_newFilter" />
+
+:::warning Expires after 15 minutes of inactivity
+Filters that are not polled using [`eth_getFilterChanges`](../eth_getfilterchanges) automatically
+expires after 15 minutes of inactivity.
+Filter IDs can be polled by any connection using the same API key.
 :::

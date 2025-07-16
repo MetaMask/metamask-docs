@@ -1,5 +1,5 @@
 ---
-description: Handle transactions
+description: Handle transactions with the SDK in your Wagmi or Vanilla JavaScript dapp.
 toc_max_heading_level: 2
 ---
 
@@ -111,6 +111,11 @@ The following are examples of sending a [basic transaction](#basic-transaction-1
 
 ### Basic transaction
 
+The basic transaction uses the [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts),
+[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction), and
+[`eth_getTransactionReceipt`](/wallet/reference/json-rpc-methods/eth_gettransactionreceipt)
+RPC methods.
+
 ```javascript
 async function sendTransaction(recipientAddress, amount) {
   try {
@@ -209,6 +214,9 @@ async function handleSend() {
 
 ### Advanced transaction with gas estimation
 
+To add gas estimation, use the [`eth_estimateGas`](/wallet/reference/json-rpc-methods/eth_estimategas)
+RPC method.
+
 ```javascript
 async function estimateGas(transaction) {
   try {
@@ -225,10 +233,6 @@ async function estimateGas(transaction) {
   }
 }
 ```
-
-:::info
-See the [Provider API](/wallet/reference/provider-api) reference and [JSON-RPC API](/wallet/reference/json-rpc-methods) reference for more information.
-:::
 
 ## Best practices
 

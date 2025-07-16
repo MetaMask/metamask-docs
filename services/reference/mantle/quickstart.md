@@ -1,11 +1,12 @@
 ---
 description: Mantle quickstart guide.
 sidebar_position: 2
+sidebar_label: Quickstart
 ---
 
 import Banner from '@site/src/components/Banner'
 
-# Quickstart
+# Mantle quickstart
 
 This quickstart guide will help you set up and make calls on the Mantle network using the Infura endpoints.
 

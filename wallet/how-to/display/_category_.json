@@ -1,9 +1,0 @@
-{
-  "label": "Display in MetaMask",
-  "position": 7,
-  "link": {
-    "type": "generated-index",
-    "slug": "how-to/display",
-    "description": "You can display a variety of components on a user's MetaMask interface."
-  }
-}

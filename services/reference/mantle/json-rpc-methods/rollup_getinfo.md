@@ -1,5 +1,5 @@
 ---
-description: rollup_getInfo API method
+description: Returns the information about a node.
 ---
 
 import Tabs from "@theme/Tabs";

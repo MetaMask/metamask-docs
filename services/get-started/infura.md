@@ -50,7 +50,7 @@ view your API key.
 ## 3. Send requests
 
 Use the API key when sending requests. The following examples interact with the Ethereum network by
-sending requests using HTTP:
+sending requests using HTTP.
 
 :::info
 
@@ -61,6 +61,23 @@ sending requests using HTTP:
 :::
 
 Use a tool such as the [Client Uniform Resource Locator (curl)](../concepts/curl.md) or [Postman](https://www.postman.com/downloads/) to make requests.
+
+<details>
+<summary>Supported API methods</summary>
+<div>
+  View the supported API methods for each network in the **Reference** section in the left sidebar.
+  The following methods are not supported on any network by Infura:
+
+  - `eth_coinbase`
+  - `eth_sendTransaction`
+  - `eth_sign`
+
+  Infura doesn't store the user's private key required to sign transactions.
+  You can use [`web3.eth.sendTransaction`](https://web3js.readthedocs.io/en/v1.2.0/web3-eth.html#sendtransaction),
+  which signs the transaction locally using the private key of the account, and sends the transaction via [`web3.eth.sendSignedTransaction`](https://web3js.readthedocs.io/en/v1.2.0/web3-eth.html#sendsignedtransaction),
+  which is a wrapper for [`eth_sendRawTransaction`](../reference/ethereum/json-rpc-methods/eth_sendrawtransaction.mdx).
+</div>
+</details>
 
 ### 3.1 Get the current block number
 
@@ -151,7 +168,7 @@ The decimal conversion of the result is `11392978000069000000000069` wei, which 
 
 ## 4. Secure your API key
 
-[Configure security settings](../../../developer-tools/dashboard/how-to/secure-an-api/) in the **Settings** tab.
+[Configure security settings](/developer-tools/dashboard/how-to/secure-an-api/api-key) in the **Settings** tab.
 This is optional.
 
 For example, you can force API requests to include the API key secret and/or

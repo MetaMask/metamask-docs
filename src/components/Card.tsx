@@ -15,13 +15,14 @@ export type CardItem = {
   href: string
   description?: string | ReactNode
   theme?: string
+  buttonIcon?: 'arrow-right' | 'external-arrow'
 }
 
-export default function Card({ title, href, description, theme }: CardItem) {
+export default function Card({ title, href, description, theme, buttonIcon = "arrow-right" }: CardItem) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <li className={clsx(styles['item'], isHovered && styles['active'])}>
+    <div className={clsx(styles['item'], isHovered && styles['active'])}>
       <CutOffCorners size="s">
         <div
           className={styles['holder']}
@@ -49,7 +50,7 @@ export default function Card({ title, href, description, theme }: CardItem) {
                   as="button"
                   label={false}
                   type={theme === 'dark' ? 'secondary' : 'primary'}
-                  icon="arrow-right"
+                  icon={buttonIcon}
                   className={styles['button']}
                   style={
                     theme === 'dark'
@@ -68,6 +69,6 @@ export default function Card({ title, href, description, theme }: CardItem) {
           </Link>
         </div>
       </CutOffCorners>
-    </li>
+    </div>
   )
 }

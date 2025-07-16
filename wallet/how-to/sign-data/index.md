@@ -1,5 +1,5 @@
 ---
-description: Sign data using eth_signTypedData_v4 and personal_sign.
+description: Use RPC methods to request cryptographic signatures from users.
 ---
 
 # Sign data

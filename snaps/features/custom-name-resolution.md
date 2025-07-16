@@ -41,7 +41,7 @@ At least one of these properties must be specified if `matchers` is specified.
 
 Expose an [`onNameLookup`](../reference/entry-points.md#onnamelookup) entry point, which receives a
 `chainId` and either a `domain` or an `address`.
-The following example implements a very basic resolution from Unstoppable Domains domain names to
+The following example implements a basic resolution from Unstoppable Domains domain names to
 Ethereum addresses in `onNameLookup`:
 
 ```typescript title="index.ts"

@@ -1,12 +1,3 @@
-export const trackPageViewForSegment = ({ name, path, userExperience }) => {
-  if (window.analytics) {
-    window.analytics.page("Page viewed", name, {
-      ...(path && { path: path }),
-      ...(userExperience && { user_experience: userExperience }),
-    });
-  }
-};
-
 export const trackClickForSegment = ({
   eventName,
   clickType,

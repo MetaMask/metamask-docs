@@ -19,7 +19,7 @@ Use [testnet endpoints](../get-started/endpoints.md) during development and init
 |-------------|-------------------|-------------------------------|
 | [Arbitrum Sepolia](https://docs.arbitrum.io/launch-orbit-chain/how-tos/add-orbit-chain-to-bridge-ui)| [Arbitrum Sepolia faucet](https://faucet.quicknode.com/arbitrum/sepolia)| [Arbitrum bridge](https://bridge.arbitrum.io/)|
 | [Avalanche Fuji](https://docs.avax.network/learn/networks/fuji-testnet)| [Avalanche Fuji faucet](https://faucet.avax.network)| [Avalanche bridge](https://bridge.avax.network/)|
-| [Base Sepolia](https://docs.base.org/docs/using-base/)| [Base Sepolia faucet](https://faucet.quicknode.com/base/sepolia)| [Base bridge](https://bridge.base.org/deposit)|
+| [Base Sepolia](https://docs.base.org/chain/using-base#metamask-1)| [Base Sepolia faucet](https://faucet.quicknode.com/base/sepolia)| [Base bridge](https://bridge.base.org/deposit)|
 | [Blast Sepolia](https://docs.blast.io/using-blast)| [Blast Sepolia faucet](https://faucet.quicknode.com/blast/sepolia)|     |
 | [Binance Smart Chain (BSC) Sepolia](https://academy.binance.com/en/articles/connecting-metamask-to-binance-smart-chain)| [BSC Sepolia faucet](https://www.bnbchain.org/en/testnet-faucet)| [BSC bridge](https://www.bnbchain.org/en/bnb-chain-bridges)|
 | [Celo Alfajores](https://docs.celo.org/getting-started/alfajores-testnet)| [Celo Alfajores faucet](https://faucet.celo.org/alfajores)| [Celo bridge](https://docs.celo.org/protocol/bridge#token-bridges)|

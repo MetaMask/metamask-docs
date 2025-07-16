@@ -17,5 +17,11 @@
 # Snaps documentation
 /snaps/ @MetaMask/tech-writers @MetaMask/snaps
 
-# Wallet and SDK documentation
-/wallet/ @MetaMask/tech-writers @MetaMask/wallet-api-platform-engineers @MetaMask/sdk-devs
+# Delegation Toolkit documentation
+/delegation-toolkit/ @MetaMask/tech-writers @MetaMask/delegation @MetaMask/delegation-devrel
+
+# SDK documentation
+/sdk/ @MetaMask/tech-writers @MetaMask/sdk-devs @MetaMask/sdk-devrel
+
+# Wallet documentation
+/wallet/ @MetaMask/tech-writers @MetaMask/wallet-api-platform-engineers

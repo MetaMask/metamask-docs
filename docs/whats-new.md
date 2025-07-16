@@ -9,14 +9,57 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## July 2025
+
+- Added a [MetaMask Smart Accounts quickstart](/delegation-toolkit/development/quickstart).
+  ([#2132](https://github.com/MetaMask/metamask-docs/pull/2132))
+
+## June 2025
+
+- Updated the [docs homepage](/), added descriptive dropdowns the top navigation bar, and
+  added title banners to each product section.
+  ([#2074](https://github.com/MetaMask/metamask-docs/pull/2074))
+- Simplified and enhanced the [SDK introduction](/sdk).
+  ([#2064](https://github.com/MetaMask/metamask-docs/pull/2064))
+- Added [Delegation Toolkit](/delegation-toolkit) to MetaMask documentation.
+  ([#2045](https://github.com/MetaMask/metamask-docs/pull/2045))
+- Documented how to use the SDK CLI to set up a [Web3Auth SDK](/sdk/connect/javascript-web3auth) project.
+  ([#2075](https://github.com/MetaMask/metamask-docs/pull/2075))
+
+## May 2025
+
+- Documented Multichain API [guide](/wallet/how-to/manage-networks/use-multichain),
+  [concept](/wallet/concepts/multichain-api), and [reference](/wallet/reference/multichain-api).
+  ([#1621](https://github.com/MetaMask/metamask-docs/pull/1621))
+- Documented [Solana](/wallet/how-to/use-non-evm-networks/solana) dapp support via the Wallet Standard and third-party libraries.
+  ([#1940](https://github.com/MetaMask/metamask-docs/pull/1940))
+- Documented [MetaMask SDK + Web3Auth SDK integration](/sdk/connect/javascript-web3auth).
+  ([#2029](https://github.com/MetaMask/metamask-docs/pull/2029))
+- Added [Delegation Toolkit](/delegation-toolkit) to MetaMask documentation.
+  ([#2045](https://github.com/MetaMask/metamask-docs/pull/2045))
+- Documented [how to use the Snaps sandbox](/snaps/how-to/test-a-snap/#test-in-the-sandbox).
+  ([#2030](https://github.com/MetaMask/metamask-docs/pull/2030))
+- Documented how to use the SDK CLI to set up a [JavaScript + Wagmi](/sdk/connect/javascript-wagmi) or [Dynamic SDK](/sdk/connect/javascript-dynamic) project.
+  ([#2010](https://github.com/MetaMask/metamask-docs/pull/2010))
+- Documented [how to send batch transactions via EIP-5792 and EIP-7702](/wallet/how-to/send-transactions/send-batch-transactions).
+  ([#1946](https://github.com/MetaMask/metamask-docs/pull/1946))
+- Documented Infura's filter API method support for [Arbitrum](/services/reference/arbitrum/json-rpc-methods/filter-methods/),
+    [Avalanche](/services/reference/avalanche-c-chain/json-rpc-methods/filter-methods/), [Base](/services/reference/base/json-rpc-methods/filter-methods/),
+    [Celo](/services/reference/celo/json-rpc-methods/filter-methods/), [Linea](/services/reference/linea/json-rpc-methods/filter-methods/),
+    [Optimism](/services/reference/optimism/json-rpc-methods/filter-methods/), and
+    [Polygon POS](/services/reference/polygon-pos/json-rpc-methods/filter-methods/) networks. ([#1994](https://github.com/MetaMask/metamask-docs/pull/1994))
+- Discontinue Infura support for the Ethereum Holesky testnet. ([#1996](https://github.com/MetaMask/metamask-docs/pull/1996))
+
 ## April 2025
 
+- Added a tutorial for [creating a wallet AI agent with the SDK](/sdk/tutorials/create-wallet-ai-agent).
+  ([#1993](https://github.com/MetaMask/metamask-docs/pull/1993))
 - Documented [Ethereum Hoodi testnet](/services/get-started/endpoints/#ethereum) support. ([#1977](https://github.com/MetaMask/metamask-docs/pull/1977))
 - Documented [how to use deeplinks](/sdk/guides/use-deeplinks).
   ([#1928](https://github.com/MetaMask/metamask-docs/pull/1928))
-- Documented [MetaMask SDK + Dynamic SDK integration](/sdk/quickstart/javascript-dynamic).
+- Documented [MetaMask SDK + Dynamic SDK integration](/sdk/connect/javascript-dynamic).
   ([#1972](https://github.com/MetaMask/metamask-docs/pull/1972))
-- Documented [Snaps bundle analyzer option](/snaps/reference/cli/subcommands/#analyze).
+- Documented [Snaps bundle analyzer option](/snaps/reference/cli/#analyze).
   ([#1955](https://github.com/MetaMask/metamask-docs/pull/1955))
 
 ## March 2025
@@ -69,7 +112,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   ([#1509](https://github.com/MetaMask/metamask-docs/pull/1509))
 - Documented [Scroll](/services/reference/scroll) support.
   ([#1641](https://github.com/MetaMask/metamask-docs/pull/1641))
-- Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/how-to/connect) section
+- Updated [Wallet landing page](/wallet) and added [Connect to MetaMask](/wallet/how-to/connect-extension) section
   with SDK, third-party libraries, and Wallet API connection options.
   ([#1494](https://github.com/MetaMask/metamask-docs/pull/1494))
 - Documented [`snap_getPreferences`](/snaps/reference/snaps-api/#snap_getpreferences).
@@ -175,7 +218,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 
 ## March 2024
 
-- Documented [Snaps `polyfills` configuration option](/snaps/reference/cli/options/#polyfills).
+- Documented [Snaps `polyfills` configuration option](/snaps/reference/config-options/#polyfills).
   ([#1238](https://github.com/MetaMask/metamask-docs/pull/1238))
 - Documented [Snaps interactive UI](/snaps/features/custom-ui/interactive-ui).
   ([#1166](https://github.com/MetaMask/metamask-docs/pull/1166))
@@ -193,7 +236,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Documented [Snaps custom name resolution](/snaps/features/custom-name-resolution).
   ([#924](https://github.com/MetaMask/metamask-docs/pull/924))
 - Deprecated `snaps-types` and `snaps-ui` packages and updated
-  [Snaps tutorials](/snaps/learn/tutorials) to match latest tooling.
+  [Snaps tutorials](/snaps/learn/tutorials/gas-estimation) to match latest tooling.
   ([#1206](https://github.com/MetaMask/metamask-docs/pull/1206) and
   [#1210](https://github.com/MetaMask/metamask-docs/pull/1210))
 - Documented new [Snaps custom UI](/snaps/features/custom-ui) components and improved examples.
@@ -211,7 +254,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   - `selectedAddress` property
   - `networkChanged` event
   - `net_version` support in `send()`
-- Added [Snaps best practices section](/snaps/learn/best-practices).
+- Added [Snaps best practices section](/snaps/learn/best-practices/design-guidelines).
   ([#1187](https://github.com/MetaMask/metamask-docs/pull/1187))
 - Updated [Snaps CLI reference](/snaps/reference/cli) with Webpack configuration options.
   ([#1178](https://github.com/MetaMask/metamask-docs/pull/1178))

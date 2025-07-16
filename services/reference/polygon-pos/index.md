@@ -17,7 +17,7 @@ The Polygon PoS network is a hybrid Plasma Proof of Stake side-chain to Ethereum
 virtual machine (EVM) which allows developers to leverage Infura, MetaMask, and other tools they use for Ethereum when
 developing and deploying smart contracts to the Polygon network.
 
-The Polygon Bor node API is based on geth's JSON-RPC implementation, you can also use WebSockets to call JSON-RPCs
+The Polygon Bor node API is based on Geth's JSON-RPC implementation, you can also use WebSockets to call JSON-RPCs
 and [create subscriptions](../../how-to/subscribe-to-events.md).
 
 :::info see also
@@ -50,12 +50,15 @@ The [official Polygon documentation](https://docs.polygon.technology) for more i
 
 No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
 
+The following partners provide failover support:
+
 <!-- markdown-link-check-disable -->
-
-Rivet.cloud ([Terms of Service](https://rivet.cloud/terms), [Privacy Policy](https://rivet.cloud/privacy-policy)) is Infura's failover-protection partner. While Rivet.cloud supports most Infura methods,
-it does not yet support the following methods:
-
+- Infstones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
+- Bware Labs ([Terms of Use](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy))
+- Rivet.cloud ([Terms of Service](https://rivet.cloud/terms), [Privacy Policy](https://rivet.cloud/privacy-policy))
 <!-- markdown-link-check-enable -->
+
+While Rivet.cloud supports most Infura methods, it does not yet support the following methods:
 
 - `eth_accounts`
 - `eth_coinbase`

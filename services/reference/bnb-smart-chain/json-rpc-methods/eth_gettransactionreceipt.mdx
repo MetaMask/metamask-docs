@@ -1,13 +1,24 @@
 ---
-title: "eth_getTransactionReceipt"
+title: BNB Smart Chain eth_getTransactionReceipt
+sidebar_label: eth_getTransactionReceipt
+description: Gets transaction receipt by transaction hash on BNB Smart Chain.
 ---
 
 import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
 
-import Description from "./_eth_gettransactionreceipt-description.mdx";
+import Description from "/services/reference/_partials/_eth_gettransactionreceipt-description.mdx";
+
+# `eth_getTransactionReceipt`
 
 <Description />
+
+:::info Binance Smart Chain archive support
+
+- **Mainnet:** Near head requests (latest 128 blocks) and archive requests are supported.
+- **Testnet:** Only near head requests are supported; archive requests are not available.
+
+:::
 
 ## Parameters
 

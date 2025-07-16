@@ -22,7 +22,7 @@
 }
 
 .heading2 {
-  font-size: 2rem;
+  font-size: calc(var(--parser-font-size) * 1.43);
   line-height: 140%;
 }
 
@@ -46,6 +46,8 @@
   width: 8rem;
   min-height: 4.8rem;
   border-right: 1px solid var(--general-gray-light);
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .errColMsg {
@@ -54,6 +56,31 @@
   width: calc(100% - 8rem);
   padding: 1.2rem;
   min-height: 4.8rem;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+// Consistent font styling for error message content
+.errColMsg :global(.md-content) {
+  font-size: inherit;
+  line-height: inherit;
+
+  * {
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  code {
+    font-size: var(--parser-code-font-size);
+    font-family: var(--ifm-font-family-monospace);
+    background-color: var(--ifm-code-background);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.2rem;
+  }
 }
 
 html[data-theme='dark'] {

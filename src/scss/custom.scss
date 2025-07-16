@@ -25,6 +25,7 @@
   --font-mm-sans-mono: 'MM Sans Mono', 'Andale Mono', AndaleMono, monospace;
   --font-mm-sans-variable: 'MM Sans Variable', Arial, 'Helvetica Neue', Helvetica, sans-serif;
   --font-mm-centra: 'MM Centra No1', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-mm-euclid: 'Euclid Circular B', Arial, 'Helvetica Neue', Helvetica, sans-serif;
   --ifm-color-primary: var(--developer-purple);
   --ifm-color-primary-dark: var(--developer-purple-dark);
   --ifm-color-primary-darker: var(--institution-purple-dark-2);
@@ -74,7 +75,7 @@
 
   --ifm-font-family-monospace: var(--font-mm-sans-mono);
   --ifm-heading-font-family: var(--ifm-font-family-monospace);
-  --ifm-font-family-base: var(--font-mm-centra);
+  --ifm-font-family-base: var(--font-mm-euclid);
   --font-family-sans: var(--font-mm-sans);
 
   --ifm-color-success: var(--developer-green-light);
@@ -306,7 +307,7 @@ ol {
   padding: 2rem 0 0;
 
   @include bp('desktop') {
-    padding: 2.8rem 0 0 8rem;
+    padding: 2.8rem 0 0 5rem;
   }
 }
 
@@ -348,17 +349,45 @@ ol {
   }
 }
 
+.navbar__brand {
+  margin-right: 2rem !important;
+}
+
 .DocSearch-Button-Placeholder {
   font-size: 1.4rem !important;
+}
+
+/* Breadcrumbs */
+
+.breadcrumbs {
+  margin-top: 0 !important;
+  margin-bottom: 2rem !important;
+}
+
+.breadcrumbs__link {
+  font-size: 1.3rem !important;
 }
 
 /* Details */
 
 .details_lb9f > summary {
-  padding-left: 2rem !important;
+  padding-left: 2.7rem !important;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+  text-transform: uppercase;
 
   &::before {
     border-width: 0.8rem !important;
+    margin-left: 0.5rem !important;
+  }
+}
+
+.collapsibleContent_i85q {
+  padding-top: 0 !important;
+
+  > div {
+    font-weight: normal;
   }
 }
 
@@ -379,12 +408,10 @@ ol {
   border-radius: 0.5rem;
 }
 
-/**
- * Temporary style - to be deleted
- */
+/* Doc version banner */
 
-.getfeedback-container {
-  margin-top: 5rem;
+.theme-doc-version-banner {
+  font-size: 1.6rem;
 }
 
 /* Header */
@@ -623,4 +650,200 @@ ol {
     @extend .markdown;
     max-width: 80rem;
   }
+}
+
+.git-diff-remove {
+  background-color: #ff000020;
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  border-left: 3px solid #ff000080;
+}
+
+.git-diff-add {
+  background-color: #1aff0020;
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+  border-left: 3px solid #1aff0080;
+}
+
+.nav-dropdown-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  gap: var(--ifm-spacing-horizontal);
+  border-radius: 8px;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0;
+    list-style: none;
+    color: var(--ifm-navbar-link-color);
+  }
+
+  a {
+    position: relative; // Needed for ::before to be positioned correctly
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 350px;
+    padding-left: 0;
+    margin: 0;
+    color: var(--ifm-navbar-link-color);
+    border-radius: 8px;
+    text-decoration: none !important;
+    gap: 10px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background-color: var(--ifm-color-primary);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      border-radius: 1px;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
+      padding: 0;
+    }
+
+    span {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 5px;
+      background-color: var(--w3a-color-icon-background);
+      border-radius: 8px;
+
+      svg {
+        display: inline-block;
+        vertical-align: top;
+        width: 26px;
+        height: 24px;
+        color: var(--w3a-color-icon-gray);
+        transition: color 0.2s ease;
+      }
+    }
+
+    &:hover span {
+      background-color: var(--w3a-color-icon-active-background);
+
+      svg {
+        color: var(--ifm-color-primary);
+      }
+    }
+
+    h2 {
+      @extend .dropdown__link;
+      font-size: 1.6rem !important;
+      text-decoration: none !important;
+      margin: 0 0 4px 0;
+      color: inherit;
+    }
+
+    p {
+      font-size: 1.4rem;
+      line-height: 1.8rem;
+      font-weight: 400 !important;
+      color: var(--w3a-color-icon-gray);
+      text-decoration: none !important;
+      margin: 0;
+    }
+  }
+}
+
+.nav-dropdown-menu a:hover h2 {
+  color: inherit !important;
+}
+
+@include bp-max('tablet') {
+  .nav-dropdown-menu ul {
+    gap: 15px;
+  }
+
+  .nav-dropdown-menu a {
+    width: 80%;
+  }
+}
+
+div[class^='theme-announcement-bar'] {
+  font-family: var(--font-mm-euclid);
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  text-align: center;
+  border-bottom: 1px solid var(--general-gray-light);
+  background-color: var(--developer-purple-light);
+  color: var(--color-text);
+
+  a {
+    color: var(--ifm-link-color);
+    text-decoration: underline;
+    font-weight: 500;
+
+    &:hover {
+      color: var(--ifm-link-hover-color);
+    }
+  }
+
+  [data-theme='dark'] & {
+    background-color: var(--developer-purple-light);
+    color: var(--general-black);
+
+    a {
+      color: var(--general-black);
+
+      &:hover {
+        color: var(--developer-purple);
+      }
+    }
+  }
+}
+
+/* Removes "What's new?" on small viewports to make room for left navbar labels */
+@media (max-width: 1196px) {
+  .navbar__items--right .navbar__item {
+    display: none;
+  }
+
+  [class*='docMainContainer'],
+  [class*='mainContainer'] {
+    padding: 2rem 0 0 2rem;
+  }
+}
+
+/* Fixes bug: Removes sidebar logo appearing on Wallet RPC reference pages */
+.sidebar_mhZE .sidebarLogo_F_0z {
+  display: none !important;
+}
+
+.sidebar_mhZE {
+  padding-top: var(--ifm-navbar-height) !important;
+}
+
+.pageWrapper .sidebar_mhZE {
+  padding-top: 0 !important;
+}
+
+/* Add scroll padding to account for sticky product banner */
+html {
+  scroll-padding-top: 10rem;
 }
