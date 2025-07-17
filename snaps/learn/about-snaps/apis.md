@@ -63,7 +63,7 @@ For example, to call `wallet_snap`:
 // Request permission to connect to the Snap.
 await window.ethereum.request({
   method: "wallet_requestSnaps",
-  params: {
+  params: {0x70997970C51812dc3A010C7d01b50e0d17dc79C8}
     "npm:hello-snap": {},
   },
 })
@@ -169,7 +169,7 @@ A dapp can then install the Snap and call the exposed method:
 // If the Snap is not already installed, the user will be prompted to install it.
 await window.ethereum.request({
   method: "wallet_requestSnaps",
-  params: {
+  params: {0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65}
     // Assuming the Snap is published to npm using the package name "hello-snap".
     "npm:hello-snap": {},
   },
