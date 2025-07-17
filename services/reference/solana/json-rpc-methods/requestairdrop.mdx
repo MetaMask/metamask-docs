@@ -1,0 +1,60 @@
+---
+title: "requestAirdrop"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `requestAirdrop`
+
+Requests an airdrop of lamports to a specified account.
+
+:::info
+This method doesn't work on mainnet.
+:::
+
+## Parameters
+
+- `address`: (string) _[required]_ - The `base-58` encoded public key of the receiving account.
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `minContextSlot`: _[optional]_ - The minimum slot to use for the query.
+
+## Returns
+
+`result` - The transaction signature of the airdrop.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-testnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id":1, "method":"requestAirdrop", "params": ["83astBRguLMdt2h5U1Tpdq5tjFoJ6noeGwaY3mDLVcri", 100000]}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result":"3Q51CirQ3eyysjpbe2FmPgMMpnaTdcY6MGpKUhuZ7TBcWZFHvNB5QMwy5Z5LYy78K4rtYFo78ozw9zxkZgYJMm3D",
+    "id":1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

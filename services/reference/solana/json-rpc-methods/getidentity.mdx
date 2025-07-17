@@ -1,0 +1,53 @@
+---
+title: "getIdentity"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getIdentity`
+
+Returns the public key identity of the current node.
+
+## Parameters
+
+None
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `identity` - The public key identity as a `base58` encoded string.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getIdentity"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result": {
+      "identity":"5UHT2MnFvARGe5mGbKZth5Yh546UWmPtucQYBGTYsi4n"
+    },
+    "id":1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

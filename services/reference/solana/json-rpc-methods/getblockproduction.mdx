@@ -1,0 +1,90 @@
+---
+title: "getBlockProduction"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getBlockProduction`
+
+Returns recent block production information from the current or previous epoch.
+
+## Parameters
+
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `range`: (array) _[optional]_ - Slot range to return block production for. If not provided, defaults to current epoch.
+        - `firstSlot`: (integer) _[optional]_ - The first slot in the range.
+        - `lastSlot`: (integer) _[optional]_ - The last slot in the range.
+    - `identity`: (string) _[optional]_ - Only return results for this `base58` encoded validator identity.
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `context` - An object containing the following keys:
+    - `slot` - The slot number of the block that was queried.
+    - `apiVersion` - The API version used for the query.
+- `value` - An object containing block production information:
+    - `byIdentity` - A dictionary of validator identities, as `base58` encoded strings. This is a two
+        element array containing the number of leader slots and the number of blocks produced.
+    - `range` - The block production slot range:
+        - `firstSlot` - The first slot of the block production information (inclusive).
+        - `lastSlot` - The last slot of the block production information (inclusive).
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getBlockProduction", "params": []}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "context": {
+        "apiVersion": "2.2.3",
+        "slot": 371687291
+      },
+      "value": {
+        "byIdentity": {
+          "3zvXem8vqvDYos6BKu66FV84tmDdQwgLxYSempy8tSrs": [
+            584,
+            584
+          ],
+          ...
+          "dv4ACNkpYPcE3aKmYDqZm9G5EB3J4MRoeE7WNDRBVJB": [
+            40400,
+            40400
+          ]
+        },
+        "range": {
+          "firstSlot": 371520000,
+          "lastSlot": 371687291
+        }
+      }
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

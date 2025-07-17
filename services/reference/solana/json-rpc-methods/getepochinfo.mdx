@@ -1,0 +1,69 @@
+---
+title: "getEpochInfo"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getEpochInfo`
+
+Returns information about the current epoch.
+
+## Parameters
+
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `minContextSlot`: (integer) _[optional]_ - The minimum slot to use for the query.
+
+## Returns
+
+`result`: An array of objects with the following fields:
+
+- `absoluteSlot` - The current slot.
+- `blockHeight` - The current block height.
+- `epoch` - The current epoch.
+- `slotIndex` - The current slot relative to the start of the current epoch.
+- `slotsInEpoch` - The number of slots in this epoch.
+- `transactionCount` The total number of transactions processed during the current epoch.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getEpochInfo"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "absoluteSlot": 371857300,
+      "blockHeight": 359834889,
+      "epoch": 860,
+      "slotIndex": 337300,
+      "slotsInEpoch": 432000,
+      "transactionCount": 15448034599
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

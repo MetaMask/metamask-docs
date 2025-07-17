@@ -1,0 +1,77 @@
+---
+title: "getSignatureStatuses"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getSignatureStatuses`
+
+Returns the statuses of a list of signatures. Unless the `searchTransactionHistory` configuration parameter
+is included, this method only searches the recent status cache of signatures, which retains statuses for
+all active slots plus `MAX_RECENT_BLOCKHASHES` rooted slots.
+
+## Parameters
+
+- `txSignatures`: (array of strings) _[required]_ - An array of `base58` encoded transaction signatures to confirm.
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `searchTransactionHistory`: boolean - If `true`, the search includes the entire transaction
+        history. If `false`, the search only includes recent transactions in the latest confirmed block.
+        The default is `false`.
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `context` - An object containing the following keys:
+    - `slot` - The slot number of the block that was queried.
+    - `apiVersion` - The API version used for the query.
+- `value` - An array of objects containing the following keys, or `null` if the signature is not found:
+    - `confirmationStatus` - The transaction's cluster confirmation status. It can either be `processed`, `confirmed`, or `finalized`.
+    - `confirmations` - The number of confirmations a transaction has received. If the transaction is
+        `finalized` (confirmed at the highest level of commitment), the value will be `null`.
+    - `err` - Error code if the transaction failed, or `null` if the transaction succeeds.
+    - `slot` - The slot number in which the transaction was confirmed.
+    - `status` - The processing status of the transaction. It returns `Ok` if the transaction was successful
+        and `Err` if the transaction failed.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getSignatureStatuses", "params": [["5VERv8NMvzbJMEkV8xnrLkEaWRtSz9CosKDYjCJjBRnbJLgp8uirBgmQpjKhoR4tjF3ZpRzrFmBV6UjKdiSZkQUW"], {"searchTransactionHistory": true}]}'
+  ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "context": {
+        "apiVersion": "2.2.3",
+        "slot": 373170033
+      },
+      "value": [null]
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

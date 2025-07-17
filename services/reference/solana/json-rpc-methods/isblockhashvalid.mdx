@@ -1,0 +1,63 @@
+---
+title: "isBlockhashValid"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `isBlockhashValid`
+
+Returns whether a block hash is still valid.
+
+## Parameters
+
+- `blockhash`: (string) _[requiredl]_  - The `base58` encoded hash of the block.
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `epoch`: (integer) _[optional]_ - The epoch for which to query the rewards. If not specified, the current epoch is used.
+    - `minContextSlot`: _[optional]_ - The minimum slot to use for the query.
+
+## Returns
+
+`result` - `true` if the block hash is still valid; otherwise `false`.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "id":1, "method":"isBlockhashValid", "params":["4JsC66MuiW8EbromjB3h64NmZQAH24rAWxwK5raQFTt9", {"commitment":"processed"}]}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result": {
+      "context": {
+        "apiVersion":"2.1.16",
+        "slot":333329792
+      },
+      "value":false
+    },
+    "id":1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

@@ -1,0 +1,63 @@
+---
+title: "getBlockCommitment"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getBlockCommitment`
+
+Returns the commitment for a block identified by the given slot number.
+
+## Parameters
+
+`slot`: (integer) _[required]_ - The slot number of the block to query.
+
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `commitment` - The commitment values for the block. Returns either:
+    - `null` if the block is not found.
+    - Array of `u64` integers logging the amount of cluster stake in lamports that has voted on the
+        block at each depth from `0` to `MAX_LOCKOUT_HISTORY`.
+- `totalStake` - The total number of lamports being used by validators to participate in the block production
+    and voting process
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getBlockCommitment", "params": [5]}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "commitment": [
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 10, 32
+      ],
+      "totalStake": 42
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

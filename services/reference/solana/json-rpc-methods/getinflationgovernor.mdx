@@ -1,0 +1,67 @@
+---
+title: "getInflationGovernor"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getInflationGovernor`
+
+Returns the current inflation governor, which controls the inflation rate in the network.
+
+## Parameters
+
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `foundation` - The proportion of total inflation allocated to the foundation.
+- `foundationTerm` - The period in years during which the foundation allocation will be paid out.
+- `initial` - The initial inflation percentage from time (`0`).
+- `taper` - The period in years during which the inflation rate will gradually decrease from the
+    initial rate to the final rate.
+- `terminal` - The terminal inflation percentage.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getInflationGovernor"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result": {
+      "foundation":0.0,
+      "foundationTerm":0.0,
+      "initial":0.08,
+      "taper":0.15,
+      "terminal":0.015
+    },
+    "id":1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

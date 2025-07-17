@@ -1,0 +1,75 @@
+---
+title: "getClusterNodes"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getClusterNodes`
+
+Returns information about all the nodes participating in the cluster.
+
+## Parameters
+
+None
+
+## Returns
+
+`result`: An array of objects with the following fields:
+
+- `featureSet` - The unique identifier of the node's feature set.
+- `gossip` - The gossip network address for the node.
+- `pubkey` - The public key of the node encoded as `base58` string.
+- `rpc` -The IP address and port number of the node's JSON-RPC service. `nul`` if the JSON-RPC service is disabled.
+- `shredVersion` - The version of the data structure used by this node to store and transmit blocks.
+- `tpu` - The TPU network address for the node.
+- `version` - The software version of the node. `null` if the version information is unavailable.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id":1, "method":"getClusterNodes"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": [
+      {
+        "featureSet": 3294202862,
+        "gossip": "208.91.107.3:8001",
+        "pubkey": "8GFyFHMa8oobGzK6Bab1qdExMqjvQoFeHYTpkfJiR8NH",
+        "pubsub": null,
+        "rpc": null,
+        "serveRepair": "208.91.107.3:8013",
+        "shredVersion": 2405,
+        "tpu": "208.91.107.3:8004",
+        "tpuForwards": "208.91.107.3:8005",
+        "tpuForwardsQuic": "208.91.107.3:8011",
+        "tpuQuic": "208.91.107.3:8010",
+        "tpuVote": "208.91.107.3:8006",
+        "tvu": "208.91.107.3:8002",
+        "version": "2.2.3"
+      },
+      ...
+    ],
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

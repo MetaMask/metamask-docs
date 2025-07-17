@@ -1,0 +1,89 @@
+---
+title: "getProgramAccounts"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getProgramAccounts`
+
+Returns all accounts owned by the provided program public key.
+
+## Parameters
+
+- `address`: (string) _[required]_ - The `base-58` encoded public key of the program to query.
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `encoding`: (string) _[optional]_ - The encoding format to use. Can be one of `base58`, `base64`, `base64+zstd`,
+        or `jsonParsed`
+    - `dataSlice`: (object) _[optional]_ - A slice of the account data to return. Only available for `base58`, `base64`,
+        or `base64+zstd` encoding. This is an object with two properties:
+        - `offset` - The starting byte offset of the slice.
+        - `length` - The length of the slice in bytes.
+    - `minContextSlot`: _[optional]_ - The minimum slot to use for the query.
+    - `withContext`: (boolean). Wraps the result in a JSON object.
+    - `filters` - Filter results using an array of up to 4 filter objects.
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `pubkey` - The public key of the node encoded as `base58` string.
+- `account` - An object with the following fields:
+    - `data` - The account data, encoded in the specified format.
+    - `executable` - A boolean indicating whether the account is executable.
+    - `lamports` - The number of lamports assigned to the account.
+    - `owner` - The public key of the program that owns the account.
+    - `rentEpoch` - The epoch in which the account will next be due for rent.
+    - `space` - The size of the account data in bytes.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getProgramAccounts", "params": ["4Nd1mBQtrMJVYVfKf2PJy9NZUZdTAsp7D4xWLs4gDB4T", {"filters": [{"dataSize": 17}, {"memcmp": {"offset": 4, "bytes": "3Mc6vR"}}]}]}'
+  ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": [
+      {
+        "account": {
+          "data": "2R9jLfiAQ9bgdcw6h8s44439",
+          "executable": false,
+          "lamports": 15298080,
+          "owner": "4Nd1mBQtrMJVYVfKf2PJy9NZUZdTAsp7D4xWLs4gDB4T",
+          "rentEpoch": 28,
+          "space": 42
+        },
+          "pubkey": "CxELquR1gPP8wHe33gZ4QxqGB3sZ9RSwsJ2KshVewkFY"
+      }
+    ],
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

@@ -1,0 +1,59 @@
+---
+title: "getBlocks"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `getBlocks`
+
+Returns a list of confirmed blocks between two given slots.
+
+## Parameters
+
+- `startSlot`: (integer) _[required]_ - The starting slot number for the range of blocks to query.
+- `endSlot`: (integer) _[optional]_ - The ending slot number for the range of blocks to query.
+    Must be no more than 500,000 blocks higher than `startSlot`.
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+
+
+
+## Returns
+
+`result`: (integer) - An array of `u64` integers representing the block numbers within the specified range. If `endSlot` is not
+provided, the method will return blocks starting from `startSlot` to the most recent block.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id":1, "method":"getBlocks", "params":[371661723, 371661733]}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result":[371661723,371661724,371661725,371661726,371661727,371661728,371661729,371661730,371661731,371661732,371661733],
+    "id":1
+  }
+  ```
+
+  </TabItem>
+</Tabs>
