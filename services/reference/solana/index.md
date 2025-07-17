@@ -47,7 +47,7 @@ Select an option below to get started with the Solana network.
 
 ## Partners and privacy policies
 
-The following partners provide access to the Scroll network:
+The following partners provide access to the Solana network:
 <!-- markdown-link-check-disable -->
 - Everstake ([Terms of Service](https://everstake.one/docs/terms-of-use.pdf), [Privacy Policy](https://everstake.one/docs/privacy-policy.pdf))
 - Triton One ([Terms of Service and Privacy Policy](https://triton.one/legal))
