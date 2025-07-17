@@ -2,6 +2,9 @@
   // This file is not used in compilation. It is here just for a nice editor experience.
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib":["DOM", "ES2022"],
+    "types": ["react","docusaurus-plugin-sass"],
     "rootDir": "./src",
     "baseUrl": ".",
     "paths": {
@@ -11,8 +14,7 @@
         "./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"
       ],
       "sentry-plugin": ["./node_modules/@sentry/browser/build/npm/esm/index.js"]
-    },
-    "types": ["docusaurus-plugin-sass"]
+    }
   },
   "include": ["src/globals.d.ts", "./src/**/*"],
   "exclude": ["node_modules"]
