@@ -84,7 +84,7 @@
     "@types/react-alert": "^7.0.6",
     "@types/react-modal": "^3.16.3",
     "@typescript-eslint/parser": "^8.37.0",
-    "eslint": "^9.31.0",
+    "eslint": "^8.0.0",
     "eslint-plugin-react": "^7.37.5",
     "stylelint": "^16.21.1",
     "stylelint-config-standard": "^38.0.0",
