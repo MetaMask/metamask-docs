@@ -12,7 +12,7 @@ from a wallet, and execute transactions on a user's behalf.
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](install.md)
-- [Install MetaMask Flask 12.14.2 or later](/snaps/get-started/install-flask.md)
+- [Install MetaMask Flask 12.14.2 or later](/snaps/get-started/install-flask.md).
 
 ## Steps
 
@@ -20,7 +20,7 @@ from a wallet, and execute transactions on a user's behalf.
 
 Set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) using Viem's `createWalletClient` function. This client will help you interact with MetaMask Flask. 
 
-Once you’ve created the client, make sure to extend the Wallet Client functionality 
+Then, extend the Wallet Client functionality 
 using `erc7715ProviderActions`. These actions enable you to request ERC-7715 
 permissions from the user.
 
@@ -36,7 +36,7 @@ const walletClient = createWalletClient({
 ### 2. Set up a Public Client
 
 Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. 
-This client will help you query the account state and interact with blockchain network.
+This client will help you query the account state and interact with blockchain networks.
 
 ```typescript
 import { createPublicClient, http } from "viem";
@@ -78,7 +78,7 @@ const sessionAccount = await toMetaMaskSmartAccount({
 ### 4. Request ERC-7715 permissions
 
 Request ERC-7715 permissions from the user. Currently, only the 
-`native-token-stream` permission type is supported, which allows the dApp to stream 
+`native-token-stream` permission type is supported, which allows the dapp to stream 
 native tokens from the user's wallet.
 
 ```typescript
@@ -113,7 +113,7 @@ Set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundl
 using Viem's `createBundlerClient` function. This lets you use the bundler service 
 to estimate gas for user operations and submit transactions to the network.
 
-Once you’ve created the client, make sure to extend the Bundler Client 
+Then, extend the Bundler Client 
 functionality using `erc7710BundlerActions`. These actions enable you to redeem ERC-7715 permissions, and execute transactions on a user's behalf. 
 
 ```typescript
