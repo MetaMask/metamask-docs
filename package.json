@@ -86,7 +86,7 @@
     "@typescript-eslint/parser": "^8.30.1",
     "eslint": "^9.20.0",
     "eslint-plugin-react": "^7.37.4",
-    "stylelint": "^15.0.0 ",
+    "stylelint": "^16.21.1",
     "stylelint-config-standard": "^34.0.0",
     "tsc-files": "^1.1.4",
     "typescript": "^5.8.3"
