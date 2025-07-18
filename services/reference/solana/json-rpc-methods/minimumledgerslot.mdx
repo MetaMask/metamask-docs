@@ -1,0 +1,49 @@
+---
+title: "minimumLedgerSlot"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# `minimumLedgerSlot`
+
+Returns the lowest slot that the node has information about in its ledger.
+
+## Parameters
+
+None
+
+## Returns
+
+`result` (integer): The lowest slot that the node has information about in its ledger.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id":1, "method":"minimumLedgerSlot"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result":333274647,
+    "id":1
+  }
+  ```
+
+  </TabItem>
+</Tabs>
