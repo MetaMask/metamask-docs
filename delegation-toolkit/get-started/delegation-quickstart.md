@@ -146,7 +146,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   account: delegateSmartAccount,
   calls: [
     {
-      to: delegateSmartAccount.address,
+      to: delegatorSmartAccount.address,
       data: redeemDelegationCalldata,
     },
   ],
