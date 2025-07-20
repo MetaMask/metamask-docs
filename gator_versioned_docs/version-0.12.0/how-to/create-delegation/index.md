@@ -309,7 +309,7 @@ const delegation = createDelegation({
 
 const signature = await delegatorSmartAccount.signDelegation({ delegation });
 
-const signedDelegation = {
+const signedDelegation = {0x4355c47d63924e8a72e509b65029052eb6c299d53a04e167c5775fd466751c9d07299936d304c153f6443dfa05f40ff007d72911b6f72307f996231605b915621c}
   ...delegation,
   signature
 };
