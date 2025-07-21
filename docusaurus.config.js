@@ -17,6 +17,7 @@ const connectDropdown = fs.readFileSync(
   './src/components/NavDropdown/ConnectMetaMask.html',
   'utf-8'
 )
+const baseUrl = process.env.DEST || '/';
 const embedDropdown = fs.readFileSync('./src/components/NavDropdown/EmbedMetaMask.html', 'utf-8')
 const extendDropdown = fs.readFileSync('./src/components/NavDropdown/ExtendScale.html', 'utf-8')
 const npm2yarnPlugin = [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
@@ -25,7 +26,7 @@ const config = {
   title: 'MetaMask developer documentation',
   // tagline: '',
   url: 'https://docs.metamask.io',
-  baseUrl: process.env.DEST || '/', // overwritten in github action for staging / latest
+  baseUrl, // overwritten in github action for staging / latest
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/metamask-fox.svg',
@@ -55,6 +56,16 @@ const config = {
   trailingSlash: true,
 
   scripts: [
+    {
+      src: baseUrl + "js/fix-trailing-slash.js",
+      async: false,
+      defer: false,
+    },
+    {
+      src: baseUrl + "js/code-focus.js",
+      async: false,
+      defer: true,
+    },
     {
       src: 'https://cmp.osano.com/AzZMxHTbQDOQD8c1J/84e64bce-4a70-4dcc-85cb-7958f22b2371/osano.js',
     },
@@ -490,6 +501,21 @@ const config = {
         additionalLanguages: ['csharp', 'gradle', 'bash', 'json'],
         magicComments: [
           {
+            className: 'theme-code-block-highlighted-line',
+            line: 'highlight-next-line',
+            block: { start: 'highlight-start', end: 'highlight-end' },
+          },
+          {
+            className: "code-unfocus",
+            line: "unfocus-next-line",
+            block: { start: "unfocus-start", end: "unfocus-end" },
+          },
+          {
+            className: "code-focus",
+            line: "focus-next-line",
+            block: { start: "focus-start", end: "focus-end" },
+          },
+          {
             className: 'git-diff-remove',
             line: 'remove-next-line',
             block: { start: 'remove-start', end: 'remove-end' },
@@ -519,7 +545,7 @@ const config = {
         // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
         replaceSearchResultPathname: {
           from: '/',
-          to: process.env.DEST || '/',
+          to: baseUrl,
         },
 
         // Optional: Algolia search parameters
