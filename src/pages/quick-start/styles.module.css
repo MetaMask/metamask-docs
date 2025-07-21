@@ -390,7 +390,7 @@ input:checked+.slider:before {
   background: var(--ifm-color-primary-light);
   border: 1px solid var(--ifm-color-primary-light);
   box-shadow: 0px 1px 2px var(--ifm-color-primary-light);
-  color: var(--ifm-color-white);
+  color: var(--ifm-color-primary-darkest);
   padding: 8px 12px 7px 12px;
 
 }

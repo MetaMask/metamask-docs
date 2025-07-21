@@ -48,19 +48,8 @@ const getURLFromBuilderOptions = (opts: Record<string, string>, stepIndex): stri
 };
 
 export default function IntegrationBuilderPage(props: any) {
-  // Debug what we're actually receiving
-  console.log('=== DEBUG: Component props ===');
-  console.log('Full props object:', props);
-  console.log('Props keys:', Object.keys(props));
-  console.log('props.files:', props.files);
-  console.log('props.route:', props.route);
-  console.log('props.route?.modules:', props.route?.modules);
-
   // Try different ways to access files
   const files = props.files || (props.route?.modules?.files ? JSON.parse(props.route.modules.files) : {});
-  console.log('Extracted files:', files);
-  console.log('Files is object?', typeof files === 'object');
-  console.log('Files keys:', Object.keys(files || {}));
 
   const [builderOptions, setBuilderOptions] = useState<Record<string, string>>(
     getDefaultBuilderOptions(),
