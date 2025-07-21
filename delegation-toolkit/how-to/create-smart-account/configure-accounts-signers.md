@@ -1,15 +1,15 @@
 ---
 sidebar_label: Configure accounts and signers
-description: Learn how to configure different types of delegator accounts and signers using Viem.
+description: Learn how to configure different types of MetaMask Smart Accounts and signers using Viem.
 sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Configure smart accounts and signers
+# Configure MetaMask Smart Accounts and signers
 
-The MetaMask Delegation Toolkit supports different [smart account types](../../concepts/smart-accounts.md#smart-account-implementation-types),
+The MetaMask Delegation Toolkit supports different [MetaMask smart account types](../../concepts/smart-accounts.md#smart-account-implementation-types),
 each with its own configuration and support for different signing mechanisms.
 You can create flexible and secure delegator accounts tailored to your specific needs.
 
@@ -17,7 +17,7 @@ You can create flexible and secure delegator accounts tailored to your specific 
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
 - [Configure the Delegation Toolkit.](../configure.md)
-- [Create a smart account.](index.md)
+- [Create a MetaMask smart account.](index.md)
 
 ## Configure a Hybrid smart account
 
@@ -222,7 +222,7 @@ import {
 } from "viem/account-abstraction";
   
 export const credential = await createWebAuthnCredential({
-  name: "MetaMask Smart Account",
+  name: "MetaMask smart account",
 });
 
 export const webAuthnAccount = toWebAuthnAccount({ credential });
@@ -318,8 +318,8 @@ The number of signers in the signatories must be at least equal to the threshold
 
 ## Configure a Stateless 7702 smart account
 
-The [Stateless 7702 smart account](../../concepts/smart-accounts.md#stateless-7702-smart-account) represents an EOA that has been upgraded to support smart account 
-functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702). This implementation does not handle the upgrade process; see the [EIP-7702 quickstart](./../../get-started/7702-quickstart.md) to learn how to upgrade.
+The [Stateless 7702 smart account](../../concepts/smart-accounts.md#stateless-7702-smart-account) represents an EOA that has been upgraded to support MetaMask Smart Accounts 
+functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702). This implementation does not handle the upgrade process; see the [EIP-7702 quickstart](./../../get-started/eip7702-quickstart.md) to learn how to upgrade.
 
 To configure a Stateless 7702 smart account, provide the following parameters:
 

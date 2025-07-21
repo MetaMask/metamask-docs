@@ -1,8 +1,4 @@
 {
   "label": "Tutorials",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "slug": "learn/tutorials"
-  }
+  "position": 2
 }

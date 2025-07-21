@@ -9,10 +9,22 @@ The latest major MetaMask documentation updates are listed by the month they wer
 For a comprehensive list of recent product changes, visit the "Release Notes" section at the bottom
 of the [MetaMask developer page](https://metamask.io/developer/).
 
+## July 2025
+
+- Added a [MetaMask Smart Accounts quickstart](/delegation-toolkit/development/quickstart).
+  ([#2132](https://github.com/MetaMask/metamask-docs/pull/2132))
+
 ## June 2025
 
+- Updated the [docs homepage](/), added descriptive dropdowns the top navigation bar, and
+  added title banners to each product section.
+  ([#2074](https://github.com/MetaMask/metamask-docs/pull/2074))
+- Simplified and enhanced the [SDK introduction](/sdk).
+  ([#2064](https://github.com/MetaMask/metamask-docs/pull/2064))
 - Added [Delegation Toolkit](/delegation-toolkit) to MetaMask documentation.
   ([#2045](https://github.com/MetaMask/metamask-docs/pull/2045))
+- Documented how to use the SDK CLI to set up a [Web3Auth SDK](/sdk/connect/javascript-web3auth) project.
+  ([#2075](https://github.com/MetaMask/metamask-docs/pull/2075))
 
 ## May 2025
 
@@ -224,7 +236,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
 - Documented [Snaps custom name resolution](/snaps/features/custom-name-resolution).
   ([#924](https://github.com/MetaMask/metamask-docs/pull/924))
 - Deprecated `snaps-types` and `snaps-ui` packages and updated
-  [Snaps tutorials](/snaps/learn/tutorials) to match latest tooling.
+  [Snaps tutorials](/snaps/learn/tutorials/gas-estimation) to match latest tooling.
   ([#1206](https://github.com/MetaMask/metamask-docs/pull/1206) and
   [#1210](https://github.com/MetaMask/metamask-docs/pull/1210))
 - Documented new [Snaps custom UI](/snaps/features/custom-ui) components and improved examples.
@@ -242,7 +254,7 @@ of the [MetaMask developer page](https://metamask.io/developer/).
   - `selectedAddress` property
   - `networkChanged` event
   - `net_version` support in `send()`
-- Added [Snaps best practices section](/snaps/learn/best-practices).
+- Added [Snaps best practices section](/snaps/learn/best-practices/design-guidelines).
   ([#1187](https://github.com/MetaMask/metamask-docs/pull/1187))
 - Updated [Snaps CLI reference](/snaps/reference/cli) with Webpack configuration options.
   ([#1178](https://github.com/MetaMask/metamask-docs/pull/1178))

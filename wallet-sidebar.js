@@ -13,7 +13,6 @@ const sidebar = {
       label: "How to",
       collapsible: true,
       collapsed: false,
-      link: { type: "generated-index", slug: "/how-to" },
       items: [
         {
           type: "doc",
@@ -30,7 +29,6 @@ const sidebar = {
           label: "Manage networks",
           collapsible: true,
           collapsed: true,
-          link: { type: "generated-index", slug: "/how-to/manage-networks" },
           items: [
             {
               type: "doc",
@@ -82,7 +80,6 @@ const sidebar = {
           label: "Display in MetaMask",
           collapsible: true,
           collapsed: true,
-          link: { type: "generated-index", slug: "/how-to/display" },
           items: [
             {
               type: "doc",
@@ -189,7 +186,6 @@ const sidebar = {
       label: "Concepts",
       collapsible: true,
       collapsed: true,
-      link: { type: "generated-index", slug: "/concepts" },
       items: [
         {
           type: "doc",
@@ -228,7 +224,6 @@ const sidebar = {
       label: "Tutorials",
       collapsible: true,
       collapsed: true,
-      link: { type: "generated-index", slug: "/tutorials" },
       items: [
         {
           type: "doc",
@@ -252,18 +247,12 @@ const sidebar = {
       label: "Reference",
       collapsible: true,
       collapsed: false,
-      link: { type: "generated-index", slug: "/reference" },
       items: [
         {
           type: "category",
           label: "Non-EVM APIs",
           collapsible: true,
           collapsed: true,
-          link: {
-            type: "generated-index",
-            slug: "/reference/non-evm-apis",
-            description: "Use the following APIs to interact with users' non-EVM accounts."
-          },
           items: [
             {
               type: "doc",
