@@ -101,16 +101,37 @@ export default function IntegrationBuilderPage(props: any) {
 
     const el = e.target as HTMLDivElement;
     const stepEls = el.getElementsByClassName(styles.stepContainer);
+    const containerHeight = el.clientHeight;
+    const scrollTop = el.scrollTop;
+    const scrollHeight = el.scrollHeight;
+    const viewportCenter = scrollTop + containerHeight / 2;
 
-    for (let i = 0; i < stepEls.length; i += 1) {
-      const stepEl = stepEls.item(i) as HTMLDivElement;
-      if (el.scrollTop <= stepEl.offsetTop) {
-        const dis = stepEl.offsetTop - el.scrollTop;
-        if (dis >= 700 && dis <= 800) {
-          onChangeStep(i);
-          break;
+    // Check if we're at the bottom of the scroll container
+    const isAtBottom = scrollTop + containerHeight >= scrollHeight - 5; // 5px tolerance
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    // If we're at the bottom, automatically select the last element
+    if (isAtBottom && stepEls.length > 0) {
+      closestIndex = stepEls.length - 1;
+    } else {
+      // Otherwise, find the element closest to center
+      for (let i = 0; i < stepEls.length; i += 1) {
+        const stepEl = stepEls.item(i) as HTMLDivElement;
+        const elementCenter = stepEl.offsetTop + stepEl.offsetHeight / 2;
+        const distance = Math.abs(viewportCenter - elementCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = i;
         }
       }
+    }
+
+    // Only update if the closest step is different from current
+    if (closestIndex !== stepIndex) {
+      onChangeStep(closestIndex);
     }
   };
 
