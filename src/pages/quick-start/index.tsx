@@ -16,6 +16,8 @@ import IntegrationBuilderCodeView from "../../theme/IntegrationBuilderCodeView";
 import builder from "./builder";
 import styles from "./styles.module.css";
 import { getWindowLocation } from "../../theme/URLParams";
+import BrowserOnly from "@docusaurus/BrowserOnly";
+import { IntegrationStep } from "./interfaces";
 
 const getDefaultBuilderOptions = () => {
   const defaultOpts = Object.fromEntries(
@@ -45,7 +47,30 @@ const getURLFromBuilderOptions = (opts: Record<string, string>, stepIndex): stri
   return url.toString();
 };
 
-export default function IntegrationBuilderPage({ files }: { files: Record<string, any> }) {
+export default function IntegrationBuilderPage(props: { files?: any }) {
+  // Get files from props (passed via Docusaurus modules)
+  const [files, setFiles] = useState<Record<string, string>>({});
+  const [filesLoaded, setFilesLoaded] = useState(false);
+
+  useEffect(() => {
+    if (props.files) {
+      try {
+        // The files should be available directly from props
+        const filesData = props.files.default || props.files;
+        console.log('Loaded files from props, count:', Object.keys(filesData).length);
+        setFiles(filesData);
+        setFilesLoaded(true);
+      } catch (error) {
+        console.error('Error accessing files from props:', error);
+        setFiles({});
+        setFilesLoaded(true);
+      }
+    } else {
+      console.log('No files found in props');
+      setFilesLoaded(true);
+    }
+  }, [props.files]);
+
   const [builderOptions, setBuilderOptions] = useState<Record<string, string>>(
     getDefaultBuilderOptions(),
   );
@@ -64,7 +89,7 @@ export default function IntegrationBuilderPage({ files }: { files: Record<string
     () => builder.build(builderOptions, files, stepIndex),
     [builderOptions, files, stepIndex],
   );
-  const [selectedFilename, setSelectedFilename] = useState(integration.filenames[0]);
+  const [selectedFilename, setSelectedFilename] = useState(integration.filenames[0] || "");
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const ref = useRef(null);
@@ -85,7 +110,9 @@ export default function IntegrationBuilderPage({ files }: { files: Record<string
       // eslint-disable-next-line no-param-reassign
       index = steps.length - 1;
     }
-    setSelectedFilename(steps[index].pointer!.filename);
+    if (steps[index] && steps[index].pointer && steps[index].pointer.filename) {
+      setSelectedFilename(steps[index].pointer.filename);
+    }
     setStepIndex(index);
   };
 
@@ -149,7 +176,11 @@ export default function IntegrationBuilderPage({ files }: { files: Record<string
   useEffect(() => {
     setStepIndex(integration.stepIndex);
     // Update selected file when either integration changed
-    setSelectedFilename(integration.steps[integration.stepIndex].pointer!.filename);
+    if (integration.steps && integration.steps[integration.stepIndex] && integration.steps[integration.stepIndex].pointer) {
+      setSelectedFilename(integration.steps[integration.stepIndex].pointer.filename);
+    } else if (integration.filenames && integration.filenames.length > 0) {
+      setSelectedFilename(integration.filenames[0]);
+    }
 
     for (const optionKey in builderOptions) {
       if (builder.options[optionKey]) {
@@ -170,7 +201,7 @@ export default function IntegrationBuilderPage({ files }: { files: Record<string
   // Update the useEffect for initial navigation
   useEffect(() => {
     // Initialize to the step index from URL
-    if (stepIndex > 0 && steps[stepIndex]) {
+    if (stepIndex > 0 && steps && steps[stepIndex]) {
       const stepElements = document.getElementsByClassName(styles.stepContainer);
       if (stepElements && stepElements.length > stepIndex) {
         const element = stepElements[stepIndex] as HTMLElement;
@@ -318,7 +349,7 @@ export default function IntegrationBuilderPage({ files }: { files: Record<string
         <div className={styles.cols} ref={ref}>
           <div className={styles.leftCol} onScroll={onScrollLeft}>
             <MDXProvider components={MDXComponents}>
-              {steps.map((step, index) => (
+              {steps && steps.length > 0 ? steps.map((step, index) => (
                 <div
                   key={step.title}
                   className={classNames(styles.stepContainer, {
@@ -333,7 +364,12 @@ export default function IntegrationBuilderPage({ files }: { files: Record<string
                   <p className={styles.stepHeader}>{step.title}</p>
                   <div className={styles.stepBody}>{step.content}</div>
                 </div>
-              ))}
+              )) : (
+                <div className={styles.stepContainer}>
+                  <p className={styles.stepHeader}>Loading...</p>
+                  <div className={styles.stepBody}>Please wait while we load the integration steps.</div>
+                </div>
+              )}
             </MDXProvider>
           </div>
           <div className={styles.rightCol}>
