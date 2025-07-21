@@ -15,6 +15,8 @@ guide in some places.
   - [Update `MetaMask/api-specs`](#update-metamaskapi-specs)
   - [Update `ethereum/execution-apis`](#update-ethereumexecution-apis)
 - [Test analytics](#test-analytics)
+- [MetaMask SDK Guide](https://docs.metamask.io/guide/sdk.html)
+- [MetaMask Developer Portal](https://developer.metamask.io/)
 
 ## Contribution workflow
 
