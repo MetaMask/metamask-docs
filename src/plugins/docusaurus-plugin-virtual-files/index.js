@@ -10,11 +10,13 @@ const environment = process.env.IB_ENV || "development";
 
 async function fetchHostedFile(filename) {
   try {
-    response = await axios.get("https:/raw.githubusercontent.com/" + filename);
+    console.log(`Fetching file: ${filename}`);
+    const response = await axios.get("https://raw.githubusercontent.com/" + filename);
     var fileContent = response.data;
     if (typeof fileContent !== "string") {
       fileContent = JSON.stringify(fileContent, null, 2);
     }
+    console.log(`Successfully fetched ${filename}, content length: ${fileContent.length}`);
     return fileContent;
   } catch (e) {
     console.log(`Error fetching ${filename}: ${e}`);
