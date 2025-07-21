@@ -78,6 +78,20 @@ const config = {
           breadcrumbs: false,
           remarkPlugins: [npm2yarnPlugin],
         },
+        pages: {
+          path: 'src/pages',
+          routeBasePath: '/',
+          include: ['**/**.{js,jsx,ts,tsx,md,mdx}'],
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+            '**/quick-start/**',  // Exclude quick-start directory from pages plugin
+          ],
+          mdxPageComponent: '@theme/MDXPage',
+          remarkPlugins: [npm2yarnPlugin],
+        },
         theme: {
           customCss: require.resolve('./src/scss/custom.scss'),
         },
@@ -85,6 +99,7 @@ const config = {
     ],
   ],
   plugins: [
+    ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache' }],
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',
     [
@@ -212,7 +227,6 @@ const config = {
         containerId: 'GTM-5FGPLC2Q',
       },
     ],
-    ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache' }],
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:

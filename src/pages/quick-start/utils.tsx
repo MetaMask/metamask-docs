@@ -24,6 +24,12 @@ export class ReplaceFileAggregator {
   replacementOutcomes = [];
 
   replaceFileVariable(fileContent: string, filename: string, variableName: string, replacement: string): string {
+    // Add defensive check for undefined/null fileContent
+    if (!fileContent || typeof fileContent !== 'string') {
+      console.warn(`Warning: fileContent is ${fileContent} for file ${filename}. Using empty string.`);
+      return '';
+    }
+
     // 1. number of new lines to derive OFFSET
     const replacementLineCount = replacement.split(`\n`).length - 3;
     // 2. line that this occurs on
@@ -47,6 +53,12 @@ export class ReplaceFileAggregator {
     fileContent: string,
     variableName: string,
   ): { range: string; filename: string; fileContent: string; variableName: string } {
+    // Add defensive check for undefined/null fileContent
+    if (!fileContent || typeof fileContent !== 'string') {
+      console.warn(`Warning: fileContent is ${fileContent} for file ${filename} in highlightRange. Using empty string.`);
+      return { range: "1-1", filename, fileContent: "", variableName };
+    }
+
     const contentByLine = fileContent.split(`\n`);
     const startLine = [];
     const endLine = [];

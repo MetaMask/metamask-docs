@@ -10,17 +10,14 @@ const environment = process.env.IB_ENV || "development";
 
 async function fetchHostedFile(filename) {
   try {
-    console.log(`Fetching file: ${filename}`);
     const response = await axios.get("https://raw.githubusercontent.com/" + filename);
     var fileContent = response.data;
     if (typeof fileContent !== "string") {
       fileContent = JSON.stringify(fileContent, null, 2);
     }
-    console.log(`Successfully fetched ${filename}, content length: ${fileContent.length}`);
     return fileContent;
   } catch (e) {
-    console.log(`Error fetching ${filename}: ${e}`);
-    return "";
+    return ""; // Return empty string as fallback
   }
 }
 
@@ -28,6 +25,7 @@ const IBfileLinks = require("../../utils/IBfileLinks.json");
 module.exports = (context, options) => ({
   name: "docusaurus-plugin-virtual-files",
   async loadContent() {
+    console.log('🔄 Virtual files plugin: loadContent called');
     const dir = path.resolve(context.siteDir, options.rootDir);
     const filenames = Object.values(IBfileLinks);
     const fileContents = {};
@@ -42,15 +40,12 @@ module.exports = (context, options) => ({
         try {
           data = await readFileAsync(filePath, "utf8");
         } catch (e) {
-          console.log(`Fetching ${filename} since local cache not available`);
-
           data = await fetchHostedFile(filename);
 
           try {
             await writeFileAsync(filePath, data);
-            console.log(`Saved ${filename} to cache`);
           } catch (error) {
-            console.log(`Error saving ${filename} to cache`);
+            console.log(`Error saving ${filename} to cache: ${error.message}`);
           }
         }
         fileContents[filename] = data;
@@ -61,18 +56,38 @@ module.exports = (context, options) => ({
       }
     }
 
+    const emptyFiles = Object.entries(fileContents).filter(([key, value]) => !value || value.length === 0);
+    if (emptyFiles.length > 0) {
+      console.log(`Warning: ${emptyFiles.length} files are empty:`, emptyFiles.map(([key]) => key));
+    }
+
+    console.log(`✅ Virtual files plugin: Loaded ${Object.keys(fileContents).length} files`);
     return fileContents;
   },
   async contentLoaded({ content, actions }) {
     const { createData, addRoute } = actions;
+
+    console.log('🔄 Virtual files plugin: contentLoaded called');
+    console.log(`📁 Content has ${Object.keys(content).length} files`);
+
+    // Create JSON data file like web3auth-docs
     const files = await createData("files.json", JSON.stringify(content));
+    console.log('📄 Created files.json data:', files);
+
+    const routePath = "/quick-start";
+    console.log(`🛣️ Adding route at path: ${routePath}`);
+    console.log(`📍 Component path: @site/src/pages/quick-start`);
+
     addRoute({
-      path: (process.env.REACT_APP_BASE_URL || "/docs/") + "quick-start",
+      path: routePath,
+      exact: true,
       component: "@site/src/pages/quick-start",
       modules: {
         files,
       },
     });
+
+    console.log('✅ Virtual files plugin: Route added successfully');
   },
 });
 
