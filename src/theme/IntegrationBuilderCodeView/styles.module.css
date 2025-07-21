@@ -21,8 +21,10 @@
 }
 
 .container :global ::-webkit-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .container ::-webkit-scrollbar-thumb {
@@ -39,11 +41,11 @@
   overflow: scroll;
 }
 
-.body > div {
+.body>div {
   margin-bottom: 0;
 }
 
-.body :global .prism-code > div {
+.body :global .prism-code>div {
   min-height: 80vh;
 }
 
@@ -52,7 +54,7 @@
   border-radius: 0;
 }
 
-.container :global .prism-code > div {
+.container :global .prism-code>div {
   padding-top: 10px;
 }
 
@@ -75,13 +77,14 @@
   font-weight: 500;
   padding: 4px 10px 3px 10px;
   margin: 6px;
+  margin-bottom: 20px;
   border-radius: 9999px;
   border: none;
   user-select: none;
   transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
 }
 
-.codeTabs :global .tabs__item > svg {
+.codeTabs :global .tabs__item>svg {
   margin-right: 4px;
   margin-bottom: 2px;
 }
