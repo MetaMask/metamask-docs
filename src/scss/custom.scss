@@ -652,6 +652,43 @@ ol {
   }
 }
 
+/* Code Focus & Blur Effects */
+%blur-transition {
+  filter: blur(0.5px);
+  opacity: 0.3;
+  transition:
+    filter 0.2s ease,
+    opacity 0.2s ease;
+  will-change: filter, opacity;
+}
+
+%clear-blur {
+  filter: none;
+  opacity: 1;
+}
+
+.code-unfocus {
+  @extend %blur-transition;
+}
+
+.blurred-code {
+  .token-line:not(.code-focus) {
+    @extend %blur-transition;
+  }
+
+  .code-focus {
+    @extend %clear-blur;
+  }
+
+  &:hover .token-line:not(.code-focus) {
+    @extend %clear-blur;
+  }
+}
+
+code:hover .code-unfocus {
+  @extend %clear-blur;
+}
+
 .git-diff-remove {
   background-color: #ff000020;
   display: block;

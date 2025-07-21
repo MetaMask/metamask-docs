@@ -9,7 +9,7 @@ function highlightStart(fileContent: string, variableName: string): string {
   const contentByLine = fileContent.split(`\n`)
   for (let i = 0; i < contentByLine.length; i += 1) {
     if (contentByLine[i].includes(`IMP START - ${variableName}`)) {
-      contentByLine[i] = '// highlight-start'
+      contentByLine[i] = `//highlight-start \n// focus-start`
     }
   }
   return contentByLine.join('\n')
@@ -25,7 +25,7 @@ function highlightEnd(fileContent: string, variableName: string): string {
   const contentByLine = fileContent.split(`\n`)
   for (let i = 0; i < contentByLine.length; i += 1) {
     if (contentByLine[i].includes(`IMP END - ${variableName}`)) {
-      contentByLine[i] = '// highlight-end'
+      contentByLine[i] = `//highlight-end \n// focus-end`
     }
   }
   return contentByLine.join('\n')
