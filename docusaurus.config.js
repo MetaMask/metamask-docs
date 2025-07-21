@@ -212,6 +212,7 @@ const config = {
         containerId: 'GTM-5FGPLC2Q',
       },
     ],
+    ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache' }],
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:
@@ -308,6 +309,11 @@ const config = {
                 value: extendDropdown,
               },
             ],
+          },
+          {
+            label: 'Quick Start',
+            to: '/quick-start',
+            position: 'left',
           },
           {
             type: 'dropdown',
