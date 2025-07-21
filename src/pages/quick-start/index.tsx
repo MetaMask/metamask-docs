@@ -47,29 +47,20 @@ const getURLFromBuilderOptions = (opts: Record<string, string>, stepIndex): stri
   return url.toString();
 };
 
-export default function IntegrationBuilderPage(props: { files?: any }) {
-  // Get files from props (passed via Docusaurus modules)
-  const [files, setFiles] = useState<Record<string, string>>({});
-  const [filesLoaded, setFilesLoaded] = useState(false);
+export default function IntegrationBuilderPage(props: any) {
+  // Debug what we're actually receiving
+  console.log('=== DEBUG: Component props ===');
+  console.log('Full props object:', props);
+  console.log('Props keys:', Object.keys(props));
+  console.log('props.files:', props.files);
+  console.log('props.route:', props.route);
+  console.log('props.route?.modules:', props.route?.modules);
 
-  useEffect(() => {
-    if (props.files) {
-      try {
-        // The files should be available directly from props
-        const filesData = props.files.default || props.files;
-        console.log('Loaded files from props, count:', Object.keys(filesData).length);
-        setFiles(filesData);
-        setFilesLoaded(true);
-      } catch (error) {
-        console.error('Error accessing files from props:', error);
-        setFiles({});
-        setFilesLoaded(true);
-      }
-    } else {
-      console.log('No files found in props');
-      setFilesLoaded(true);
-    }
-  }, [props.files]);
+  // Try different ways to access files
+  const files = props.files || (props.route?.modules?.files ? JSON.parse(props.route.modules.files) : {});
+  console.log('Extracted files:', files);
+  console.log('Files is object?', typeof files === 'object');
+  console.log('Files keys:', Object.keys(files || {}));
 
   const [builderOptions, setBuilderOptions] = useState<Record<string, string>>(
     getDefaultBuilderOptions(),
@@ -85,10 +76,10 @@ export default function IntegrationBuilderPage(props: { files?: any }) {
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [initialLoadComplete, setInitialLoadComplete] = useState<boolean>(false);
-  const integration = useMemo(
-    () => builder.build(builderOptions, files, stepIndex),
-    [builderOptions, files, stepIndex],
-  );
+  const integration = useMemo(() => {
+    const result = builder.build(builderOptions, files || {}, stepIndex);
+    return result;
+  }, [builderOptions, files, stepIndex]);
   const [selectedFilename, setSelectedFilename] = useState(integration.filenames[0] || "");
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -238,7 +229,7 @@ export default function IntegrationBuilderPage(props: { files?: any }) {
               onChange={(event) => onChangeDropdown(key, event.target.value)}
             >
               {option.choices.map((value) => (
-                <option value={value.key} key={key}>
+                <option value={value.key} key={value.key}>
                   {value.displayName}
                 </option>
               ))}
