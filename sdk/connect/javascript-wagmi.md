@@ -146,7 +146,11 @@ For example:
 const config = createConfig({
   ssr: true, // Make sure to enable this for server-side rendering (SSR) applications.
   chains: [mainnet, linea, lineaSepolia],
-  connectors: [metaMask()],
+  connectors: [
+    metaMask({
+      infuraAPIKey: process.env.NEXT_PUBLIC_INFURA_API_KEY!,
+    }),
+  ],
   transports: {
     [mainnet.id]: http(),
     [linea.id]: http(),
