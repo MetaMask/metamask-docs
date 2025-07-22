@@ -249,10 +249,9 @@ export default function IntegrationBuilderPage(props: any) {
       case "product_selection":
         return (
           <div key={key} className={styles.list}>
-            <h3>{option.displayName}</h3>
             <div className={styles.cardContainer}>
               {option.choices.map((value) => (
-                <>
+                <React.Fragment key={value.key}>
                   {value.key === METAMASK_SDK && (
                     <div
                       className={builderOptions[key] === METAMASK_SDK ? styles.selectedCard : styles.card}
@@ -285,7 +284,7 @@ export default function IntegrationBuilderPage(props: any) {
                       </h5>
                     </div>
                   )}
-                </>
+                </React.Fragment>
               ))}
             </div>
           </div>
@@ -368,8 +367,18 @@ export default function IntegrationBuilderPage(props: any) {
         )}
         <div className={styles.optionsPane}>
           <div className={styles.optionsContainer}>
-            <div className={styles.utilityButtonsContainer}>
-              {Object.entries(builder.options).map(([key, option]) => optionRender(key, option))}
+            {/* Product Selection Row */}
+            <div className={styles.productSelectionRow}>
+              {Object.entries(builder.options).map(([key, option]) =>
+                option.type === 'product_selection' ? optionRender(key, option) : null
+              )}
+            </div>
+
+            {/* Controls Row */}
+            <div className={styles.controlsRow}>
+              {Object.entries(builder.options).map(([key, option]) =>
+                option.type === 'dropdown' ? optionRender(key, option) : null
+              )}
 
               <button
                 className={styles.copyButton2}
