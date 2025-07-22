@@ -1,5 +1,5 @@
 ---
-description: Base quickstart guide
+description: Sei quickstart guide
 sidebar_position: 2
 ---
 
@@ -7,15 +7,15 @@ import Banner from '@site/src/components/Banner'
 
 # Quickstart
 
-This quickstart guide will help you set up and make calls on the Base network using the Infura endpoints.
+This quickstart guide will help you set up and make calls on the Sei network using the Infura endpoints.
 
 <Banner>
-Don't have an Infura account? Sign up for our free plan and start using the Base network!
+Don't have an Infura account? Sign up for our free plan and start using the Sei network!
 </Banner>
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Base network enabled.
+Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Sei network enabled.
 
 ## Make calls
 
@@ -24,7 +24,7 @@ Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/c
 Run the following command in your terminal, replacing `<YOUR-API-KEY>` with your actual Infura API key:
 
 ```bash
-curl https://base-sepolia.infura.io/v3/<YOUR-API-KEY> \
+curl https://sei-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
@@ -49,7 +49,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    ```javascript title="index.js"
    import fetch from "node-fetch"
 
-   fetch("https://base-sepolia.infura.io/v3/<YOUR-API-KEY>", {
+   fetch("https://sei-mainnet.infura.io/v3/<YOUR-API-KEY>", {
      method: "POST",
      headers: {
        "Content-Type": "application/json",
@@ -92,7 +92,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    const axios = require("axios")
 
    axios
-     .post("https://base-sepolia.infura.io/v3/<YOUR-API-KEY>", {
+     .post("https://sei-mainnet.infura.io/v3/<YOUR-API-KEY>", {
        jsonrpc: "2.0",
        method: "eth_blockNumber",
        params: [],
@@ -128,7 +128,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    const ethers = require("ethers")
 
    const provider = new ethers.providers.JsonRpcProvider(
-     "https://base-sepolia.infura.io/v3/<YOUR-API-KEY>"
+     "https://sei-mainnet.infura.io/v3/<YOUR-API-KEY>"
    )
 
    provider
@@ -163,7 +163,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    import requests
    import json
 
-   url = "https://base-sepolia.infura.io/v3/<YOUR-API-KEY>"
+   url = "https://sei-mainnet.infura.io/v3/<YOUR-API-KEY>"
 
    payload = {
      "jsonrpc": "2.0",
@@ -187,10 +187,10 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 ## Next steps
 
-Now that you have successfully made a call to the Base network, you can explore more functionalities and APIs provided
+Now that you have successfully made a call to the Sei network, you can explore more functionalities and APIs provided
 by Infura. Here are some suggestions:
 
-- **Explore other Base APIs**: Infura supports a wide range of APIs. You can find more information in the
+- **Explore other Sei APIs**: Infura supports a wide range of APIs. You can find more information in the
   [JSON-RPC API method documentation](json-rpc-methods/index.md).
 
 - **Try out different networks**: Infura supports multiple networks including Ethereum, Linea, Polygon, Optimism, and more.
