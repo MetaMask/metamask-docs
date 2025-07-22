@@ -16,8 +16,7 @@ import IntegrationBuilderCodeView from "../../theme/IntegrationBuilderCodeView";
 import builder from "./builder";
 import styles from "./styles.module.css";
 import { getWindowLocation } from "../../theme/URLParams";
-import BrowserOnly from "@docusaurus/BrowserOnly";
-import { IntegrationStep } from "./interfaces";
+import { METAMASK_SDK, EMBEDDED_WALLETS, DELEGATION_TOOLKIT } from "./builder/choices";
 
 const getDefaultBuilderOptions = () => {
   const defaultOpts = Object.fromEntries(
@@ -244,6 +243,51 @@ export default function IntegrationBuilderPage(props: any) {
                 </option>
               ))}
             </select>
+          </div>
+        );
+
+      case "product_selection":
+        return (
+          <div key={key} className={styles.list}>
+            <h3>{option.displayName}</h3>
+            <div className={styles.cardContainer}>
+              {option.choices.map((value) => (
+                <>
+                  {value.key === METAMASK_SDK && (
+                    <div
+                      className={builderOptions[key] === METAMASK_SDK ? styles.selectedCard : styles.card}
+                      onClick={() => onChangeDropdown(key, value.key)}
+                    >
+                      <h5 className={classNames(styles.cardTitle)}>
+                        {value.displayName}
+                      </h5>
+                    </div>
+                  )}
+                  {value.key === EMBEDDED_WALLETS && (
+                    <div
+                      className={builderOptions[key] === EMBEDDED_WALLETS ? styles.selectedCard : styles.card}
+                      onClick={() => onChangeDropdown(key, value.key)}
+                    >
+                      <h5 className={classNames(styles.cardTitle)}>
+                        {value.displayName}
+                      </h5>
+                    </div>
+                  )}
+                  {value.key === DELEGATION_TOOLKIT && (
+                    <div
+                      className={
+                        builderOptions[key] === DELEGATION_TOOLKIT ? styles.selectedCard : styles.card
+                      }
+                      onClick={() => onChangeDropdown(key, value.key)}
+                    >
+                      <h5 className={classNames(styles.cardTitle)}>
+                        {value.displayName}
+                      </h5>
+                    </div>
+                  )}
+                </>
+              ))}
+            </div>
           </div>
         );
 

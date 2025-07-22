@@ -1,4 +1,4 @@
-export const quickStartHostedLinks = {
+export const EWQuickStartHostedLinks = {
   // PNP Modal SDK
   ANGULAR: "https://web3auth-angular-quick-start.vercel.app/",
   HTML: "https://web3auth-vanillajs-quick-start.vercel.app/",
@@ -14,7 +14,17 @@ export const quickStartHostedLinks = {
   UNITY: "https://w3a.link/pnp-unity-android-quick-start",
 };
 
-export const quickStartSourceCode = {
+export const DTKQuickStartHostedLinks = {
+  REACT: "https://web3auth-react-quick-start-tau.vercel.app/",
+  NEXTJS: "https://web3auth-nextjs-quick-start.vercel.app/",
+};
+
+export const MMSDKQuickStartHostedLinks = {
+  REACT: "https://web3auth-react-quick-start-tau.vercel.app/",
+  NEXTJS: "https://web3auth-nextjs-quick-start.vercel.app/",
+};
+
+export const EWQuickStartSourceCode = {
   REACT: "https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/react-quick-start",
   REACT_SOLANA:
     "https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/react-solana-quick-start",
@@ -34,6 +44,15 @@ export const quickStartSourceCode = {
   UNREAL: "https://github.com/Web3Auth/web3auth-unreal-example/tree/master",
 };
 
+export const DTKQuickStartSourceCode = {
+  REACT: "https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/react-quick-start",
+  NEXTJS: "https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/nextjs-quick-start",
+};
+
+export const MMSDKQuickStartSourceCode = {
+  REACT: "https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/react-quick-start",
+  NEXTJS: "https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/nextjs-quick-start",
+};
 export interface GuidesInterface {
   content: Record<
     string,
@@ -823,9 +842,9 @@ export const pnpiOSExamples: ExamplesInterface[] = [
     image: "banners/ios-swift.png",
     type: QUICK_START,
     tags: [tags.pnp, tags.ios, tags.evm, "swift"],
-    link: quickStartHostedLinks.IOS,
+    link: EWQuickStartHostedLinks.IOS,
     id: "ios-quick-start",
-    githubLink: quickStartSourceCode.IOS,
+    githubLink: EWQuickStartSourceCode.IOS,
     qsLink: "/quick-start?framework=IOS&stepIndex=0",
   },
   {
@@ -900,8 +919,8 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
     image: "banners/android.png",
     type: QUICK_START,
     tags: [tags.pnp, tags.android, tags.evm, "kotlin"],
-    link: quickStartHostedLinks.ANDROID,
-    githubLink: quickStartSourceCode.ANDROID,
+    link: EWQuickStartHostedLinks.ANDROID,
+    githubLink: EWQuickStartSourceCode.ANDROID,
     id: "android-quick-start",
     qsLink: "/quick-start?framework=ANDROID&stepIndex=0",
   },
@@ -989,8 +1008,8 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
     image: "banners/react-native.png",
     type: QUICK_START,
     tags: [tags.pnp, tags.android, tags.ios, tags.evm, tags.reactNative],
-    link: quickStartHostedLinks.REACT_NATIVE,
-    githubLink: quickStartSourceCode.REACT_NATIVE,
+    link: EWQuickStartHostedLinks.REACT_NATIVE,
+    githubLink: EWQuickStartSourceCode.REACT_NATIVE,
     id: "rn-bare-quick-start",
     qsLink: "/quick-start?framework=REACT_NATIVE&stepIndex=0",
   },
@@ -1164,9 +1183,9 @@ export const pnpUnityExamples: ExamplesInterface[] = [
     image: "banners/unity.png",
     type: QUICK_START,
     tags: [tags.pnp, tags.unity, "csharp", tags.android, tags.ios, tags.evm, "webgl"],
-    link: quickStartSourceCode.UNITY,
+    link: EWQuickStartSourceCode.UNITY,
     id: "unity-quick-start",
-    githubLink: quickStartSourceCode.UNITY,
+    githubLink: EWQuickStartSourceCode.UNITY,
   },
   {
     title: "Using Auth0 with Web3Auth PnP Unity SDK",
@@ -1225,7 +1244,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
     tags: [tags.pnp, tags.unreal, "csharp", tags.android, tags.evm, tags.ios],
     link: "https://github.com/Web3Auth/web3auth-unreal-example/tree/master",
     id: "unreal-quick-start",
-    githubLink: quickStartSourceCode.UNREAL,
+    githubLink: EWQuickStartSourceCode.UNREAL,
   },
   {
     id: "unreal-auth0-example",
