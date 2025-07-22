@@ -70,9 +70,9 @@ const builder: IntegrationBuilder = {
     },
     framework: {
       displayName: 'Platform/ Framework',
-      default: LANGS_EMBEDDED_WALLETS[0].key,
+      default: LANGS_METAMASK_SDK[0].key,
       type: 'dropdown',
-      choices: LANGS_EMBEDDED_WALLETS,
+      choices: LANGS_METAMASK_SDK,
     },
   },
 

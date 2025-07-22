@@ -7,8 +7,8 @@ export const DELEGATION_TOOLKIT = 'DELEGATION_TOOLKIT'
 
 // Product choices
 export const PRODUCTS: DisplayChoice[] = [
-  { key: EMBEDDED_WALLETS, displayName: 'Embedded Wallets' },
   { key: METAMASK_SDK, displayName: 'Metamask SDK' },
+  { key: EMBEDDED_WALLETS, displayName: 'Embedded Wallets' },
   { key: DELEGATION_TOOLKIT, displayName: 'Delegation Toolkit' },
 ]
 

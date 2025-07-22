@@ -311,6 +311,40 @@ export default function IntegrationBuilderPage(props: any) {
         url="https://web3auth.io/docs/quick-start"
       />
       <div className={styles.container}>
+        {/* Top Control Pane */}
+        <div className={styles.topControlPane}>
+          <div className={styles.topControlContainer}>
+            {/* Product Selection */}
+            {Object.entries(builder.options).map(([key, option]) =>
+              option.type === 'product_selection' ? optionRender(key, option) : null
+            )}
+
+            {/* Dropdown and Actions */}
+            <div className={styles.controlActions}>
+              {Object.entries(builder.options).map(([key, option]) =>
+                option.type === 'dropdown' ? optionRender(key, option) : null
+              )}
+
+              <button
+                className={styles.copyButton2}
+                onClick={() => window.open(integration.sourceCodeLink, "_blank")}
+                type="button"
+              >
+                Source Code
+              </button>
+              {integration.embedLink && (
+                <button
+                  className={styles.previewButton2}
+                  onClick={() => togglePreviewModal(integration.embedLink)}
+                  type="button"
+                >
+                  Preview
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+
         {showPreviewModal && (
           <div className={styles.previewModalContainer} onClick={() => togglePreviewModal()}>
             <div className={styles.previewModal} onClick={handleModalClick}>
@@ -365,40 +399,7 @@ export default function IntegrationBuilderPage(props: any) {
             </div>
           </div>
         )}
-        <div className={styles.optionsPane}>
-          <div className={styles.optionsContainer}>
-            {/* Product Selection Row */}
-            <div className={styles.productSelectionRow}>
-              {Object.entries(builder.options).map(([key, option]) =>
-                option.type === 'product_selection' ? optionRender(key, option) : null
-              )}
-            </div>
 
-            {/* Controls Row */}
-            <div className={styles.controlsRow}>
-              {Object.entries(builder.options).map(([key, option]) =>
-                option.type === 'dropdown' ? optionRender(key, option) : null
-              )}
-
-              <button
-                className={styles.copyButton2}
-                onClick={() => window.open(integration.sourceCodeLink, "_blank")}
-                type="button"
-              >
-                Source Code
-              </button>
-              {integration.embedLink && (
-                <button
-                  className={styles.previewButton2}
-                  onClick={() => togglePreviewModal(integration.embedLink)}
-                  type="button"
-                >
-                  Preview
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
 
         <div className={styles.cols} ref={ref}>
           <div className={styles.leftCol} onScroll={onScrollLeft}>
