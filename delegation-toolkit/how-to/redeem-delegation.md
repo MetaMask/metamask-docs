@@ -66,7 +66,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   account: delegateSmartAccount,
   calls: [
     {
-      to: "<DELEGATOR-SMART-ACCOUNT-ADDRESS>",
+      to: delegateSmartAccount.address,
       data: redeemDelegationCalldata
     }
   ],
@@ -256,7 +256,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   account: delegateSmartAccount,
   calls: [
     {
-      to: "<DELEGATOR-SMART-ACCOUNT-ADDRESS>",
+      to: delegateSmartAccount.address,
       data: redeemDelegationCalldata
     }
   ],
