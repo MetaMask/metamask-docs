@@ -1,4 +1,4 @@
----
+wallet-rectify
 description: Access a user's accounts and handle changed accounts.
 ---
 
