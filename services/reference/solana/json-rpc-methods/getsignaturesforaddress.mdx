@@ -4,10 +4,11 @@ title: "getSignaturesForAddress"
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
 
 # `getSignaturesForAddress`
 
-Returns signatures for confirmed transactions that include the specified address in the `accountKeys` list.
+Returns signatures for confirmed transactions that include the specified address in the `accountKeys` list. <CreditCost network="solana" method="getSignaturesForAddress" />
 Results are returned in reverse chronological order, starting from the provided signature or the most recent confirmed block.
 
 ## Parameters
