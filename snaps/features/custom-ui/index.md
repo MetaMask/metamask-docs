@@ -1248,6 +1248,7 @@ Outputs text.
   The default is `"start"`.
 - `children` - The content to display.
   This can include strings, and [`Bold`](#bold), [`Italic`](#italic), [`Icon`](#icon), [`Link`](#link), and [`Skeleton`](#skeleton) components.
+- `size` - (Optional) The size of the text. Possible values are `"sm"`, `"md"`. The default is `"md"`.
 
 
 #### Example
