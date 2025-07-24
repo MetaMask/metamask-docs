@@ -1,0 +1,50 @@
+---
+title: "getMaxShredInsertSlot"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getMaxShredInsertSlot`
+
+Get the maximum slot visible from after the shred insert. <CreditCost network="solana" method="getMaxShredInsertSlot" />
+
+## Parameters
+
+None
+
+## Returns
+
+`result` - The slot number as a 64-bit unsigned integer.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getMaxShredInsertSlot"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result":372942171,
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

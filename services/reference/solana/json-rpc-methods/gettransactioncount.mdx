@@ -1,0 +1,56 @@
+---
+title: "getTransactionCount"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getTransactionCount`
+
+Returns the current transaction count from the ledger. <CreditCost network="solana" method="getTransactionCount" />
+
+## Parameters
+
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `minContextSlot`: (integer) _[optional]_ - The minimum slot to use for the query.
+
+## Returns
+
+`result` (integer): The current transaction count.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getTransactionCount"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result":394414196266,
+    "id":1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

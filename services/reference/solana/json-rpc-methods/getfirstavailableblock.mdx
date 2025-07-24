@@ -1,0 +1,50 @@
+---
+title: "getFirstAvailableBlock"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getFirstAvailableBlock`
+
+Returns the slot of the lowest confirmed block that has not been purged from the ledger. <CreditCost network="solana" method="getFirstAvailableBlock" />
+
+## Parameters
+
+None
+
+## Returns
+
+`result`: (integer) - The slot of the lowest confirmed block as a 64-bit unsigned integer.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getFirstAvailableBlock"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result":116113408,
+    "id":1
+}
+  ```
+
+  </TabItem>
+</Tabs>

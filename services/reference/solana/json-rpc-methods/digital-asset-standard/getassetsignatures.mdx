@@ -1,0 +1,92 @@
+---
+title: "getAssetSignatures"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getAssetSignatures`
+
+Retrieve a list of transaction signatures linked to a compressed asset. <CreditCost network="solana" method="getAssetSignatures" />
+
+This method supports only compressed assets created by the
+[Metaplex Bubblegum program](https://developers.metaplex.com/bubblegum).
+
+## Parameters
+
+- `id`: (string) _[required]_ - The `base58` encoded public key of the asset.
+- `owner`: (string) _[optional]_ - The `base58` encoded public key of the asset owner.
+- `page`: (number) _[optional]_ - The current pagination page.
+- `limit`: (number) _[optional]_ - The number of results per page.
+- `cursor`: (string) _[optional]_ - Optional pagination cursor.
+- `before`: (string) _[optional]_ - Return results before the specified signature.
+- `after`: (string) _[optional]_ - Return results after the specified signature.
+
+## Returns
+
+`result` - An object containing the following fields:
+
+- `total` - The total number of transaction signatures matching the query.
+- `limit` - The maximum number of transaction signatures returned in this response.
+- `page` - The current pagination page.
+- `items` - An array of transaction signature objects. Each object contains:
+  - `signature` - The transaction signature.
+  - `type` - The type of the signature.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getAssetSignatures",
+      "params": [
+        "D85MZkvir9yQZFDHt8U2ZmS7D3LXKdiSjvw2MBdscJJa",
+        null,
+        1,
+        null,
+        null,
+        null,
+        null
+      ]
+    }'
+  ```
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "total": 1,
+      "limit": 1000,
+      "page": 1,
+      "items": [
+        [
+          "3b52uoDvGTkJKk7ygozyK38gfrU8iruz2VPRZPFJKY1zUgWCA8df1ZZUFf5zwokwhEinsofHxiY7mMMuFsik6bjW",
+          "MintToCollectionV1"
+        ]
+      ]
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

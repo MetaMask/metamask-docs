@@ -1,0 +1,56 @@
+---
+title: "getVersion"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getVersion`
+
+Returns the Solana version running on the node. <CreditCost network="solana" method="getVersion" />
+
+## Parameters
+
+None
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `solana-core` - The version of the Solana core software.
+- `feature-set` - ID of the software's feature set.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0","id":1, "method":"getVersion"}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc":"2.0",
+    "result": {
+      "feature-set":3271415109,
+      "solana-core":"2.1.16"
+    },
+    "id":1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

@@ -1,0 +1,87 @@
+---
+title: "getRecentPerformanceSamples"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getRecentPerformanceSamples`
+
+Returns a list of recent performance samples, in reverse slot order. Performance samples are taken every 60 seconds
+and include the number of transactions and slots that occur in a given time window. <CreditCost network="solana" method="getRecentPerformanceSamples" />
+
+## Parameters
+
+- `limit`: (integer) - The number of samples to return (maximum 720).
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `numNonVoteTransactions` - The number of non-vote transactions during the specified sample period.
+- `numSlots` - The number of slots in the sample.
+- `numTransactions` - The number of transactions in the sample.
+- `samplePeriodSecs` - The number of seconds in the sample window.
+- `slot` - The slot in which the sample was taken at.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc":"2.0", "id":1, "method":"getRecentPerformanceSamples", "params": [4]}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": [
+      {
+        "numNonVoteTransactions": 4255,
+        "numSlots": 156,
+        "numTransactions": 6751,
+        "samplePeriodSecs": 60,
+        "slot": 372969680
+      },
+      {
+        "numNonVoteTransactions": 5486,
+        "numSlots": 156,
+        "numTransactions": 7980,
+        "samplePeriodSecs": 60,
+        "slot": 372969524
+      },
+      {
+        "numNonVoteTransactions": 4069,
+        "numSlots": 154,
+        "numTransactions": 6532,
+        "samplePeriodSecs": 60,
+        "slot": 372969368
+      },
+      {
+        "numNonVoteTransactions": 3760,
+        "numSlots": 155,
+        "numTransactions": 6224,
+        "samplePeriodSecs": 60,
+        "slot": 372969214
+      }
+    ],
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
