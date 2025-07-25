@@ -37,7 +37,7 @@ const config = {
       rel: 'icon',
       type: 'image/png',
       sizes: '96x96',
-      href: '/img/favicons/favicon-96x96.png',
+      href: 'img/favicons/favicon-96x96.png',
     },
   },
   {
@@ -46,7 +46,7 @@ const config = {
       rel: 'icon',
       type: 'image/png',
       sizes: '192x192',
-      href: '/img/favicons/web-app-manifest-192x192.png',
+      href: 'img/favicons/web-app-manifest-192x192.png',
     },
   },
   {
@@ -55,7 +55,7 @@ const config = {
       rel: 'icon',
       type: 'image/png',
       sizes: '512x512',
-      href: '/img/favicons/web-app-manifest-512x512.png',
+      href: 'img/favicons/web-app-manifest-512x512.png',
     },
   },
   {
@@ -63,7 +63,7 @@ const config = {
     attributes: {
       rel: 'apple-touch-icon',
       sizes: '180x180',
-      href: '/img/favicons/apple-touch-icon.png',
+      href: 'img/favicons/apple-touch-icon.png',
     },
   },
   {
