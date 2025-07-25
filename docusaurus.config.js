@@ -28,7 +28,59 @@ const config = {
   baseUrl: process.env.DEST || '/', // overwritten in github action for staging / latest
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/metamask-fox.svg',
+  favicon: 'img/favicons/favicon-96x96.png',
+
+  headTags: [
+  {
+    tagName: 'link',
+    attributes: {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '96x96',
+      href: '/img/favicons/favicon-96x96.png',
+    },
+  },
+  {
+    tagName: 'link',
+    attributes: {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '192x192',
+      href: '/img/favicons/web-app-manifest-192x192.png',
+    },
+  },
+  {
+    tagName: 'link',
+    attributes: {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '512x512',
+      href: '/img/favicons/web-app-manifest-512x512.png',
+    },
+  },
+  {
+    tagName: 'link',
+    attributes: {
+      rel: 'apple-touch-icon',
+      sizes: '180x180',
+      href: '/img/favicons/apple-touch-icon.png',
+    },
+  },
+  {
+    tagName: 'script',
+    attributes: {
+      type: 'application/ld+json',
+    },
+    innerHTML: `
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "url": "https://docs.metamask.io",
+        "logo": "https://docs.metamask.io/img/favicons/favicon-96x96.png"
+      }
+    `,
+  },
+],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
