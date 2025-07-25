@@ -21,6 +21,8 @@ const embedDropdown = fs.readFileSync('./src/components/NavDropdown/EmbedMetaMas
 const extendDropdown = fs.readFileSync('./src/components/NavDropdown/ExtendScale.html', 'utf-8')
 const npm2yarnPlugin = [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
 /** @type {import('@docusaurus/types').Config} */
+const siteUrl = 'https://docs.metamask.io'
+const basePath = process.env.DEST || '/'
 const config = {
   title: 'MetaMask developer documentation',
   // tagline: '',
@@ -67,19 +69,19 @@ const config = {
     },
   },
   {
-    tagName: 'script',
-    attributes: {
-      type: 'application/ld+json',
-    },
-    innerHTML: `
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "url": "${config.url}${config.baseUrl}",
-        "logo": "${config.url}${config.baseUrl}img/favicons/favicon-96x96.png"
-      }
-    `,
+  tagName: 'script',
+  attributes: {
+    type: 'application/ld+json',
   },
+  innerHTML: `
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "${siteUrl}${basePath}",
+      "logo": "${siteUrl}${basePath}img/favicons/favicon-96x96.png"
+    }
+  `,
+}
 ],
 
   // GitHub pages deployment config.
