@@ -23,7 +23,7 @@ export default function FooterWrapper(props) {
     if (typeof window !== "undefined") {
       // check if footer can be shown
       const path = window.location.pathname;
-      if (path.includes("quick-start")) {
+      if (path.includes("playground")) {
         setCanShowFooter(false);
       }
     }
