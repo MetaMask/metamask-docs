@@ -75,8 +75,8 @@ const config = {
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "url": "https://docs.metamask.io",
-        "logo": "https://docs.metamask.io/img/favicons/favicon-96x96.png"
+        "url": "${config.url}${config.baseUrl}",
+        "logo": "${config.url}${config.baseUrl}img/favicons/favicon-96x96.png"
       }
     `,
   },
