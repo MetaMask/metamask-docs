@@ -1,4 +1,4 @@
----
+--- 
 description: Configuration options reference for MetaMask SDK.
 ---
 
