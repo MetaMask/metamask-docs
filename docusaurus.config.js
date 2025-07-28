@@ -12,14 +12,12 @@ const {
   MM_RPC_URL,
 } = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
-const helpDropdown = fs.readFileSync('./src/components/NavDropdown/DeveloperTools.html', 'utf-8')
-const connectDropdown = fs.readFileSync(
-  './src/components/NavDropdown/ConnectMetaMask.html',
+const learnDropdown = fs.readFileSync('./src/components/NavDropdown/Learn.html', 'utf-8')
+const productsDropdown = fs.readFileSync(
+  './src/components/NavDropdown/Products.html',
   'utf-8'
 )
 const baseUrl = process.env.DEST || '/';
-const embedDropdown = fs.readFileSync('./src/components/NavDropdown/EmbedMetaMask.html', 'utf-8')
-const extendDropdown = fs.readFileSync('./src/components/NavDropdown/ExtendScale.html', 'utf-8')
 const npm2yarnPlugin = [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
 /** @type {import('@docusaurus/types').Config} */
 const siteUrl = 'https://docs.metamask.io'
@@ -362,31 +360,21 @@ const config = {
         items: [
           {
             type: 'dropdown',
-            label: 'Connect to MetaMask',
+            label: 'Products',
             items: [
               {
                 type: 'html',
-                value: connectDropdown,
+                value: productsDropdown,
               },
             ],
           },
           {
             type: 'dropdown',
-            label: 'Embed MetaMask',
+            label: 'Learn',
             items: [
               {
                 type: 'html',
-                value: embedDropdown,
-              },
-            ],
-          },
-          {
-            type: 'dropdown',
-            label: 'Extend and scale',
-            items: [
-              {
-                type: 'html',
-                value: extendDropdown,
+                value: learnDropdown,
               },
             ],
           },
@@ -396,18 +384,14 @@ const config = {
             position: 'left',
           },
           {
-            type: 'dropdown',
-            label: 'Developer tools',
-            items: [
-              {
-                type: 'html',
-                value: helpDropdown,
-              },
-            ],
+            to: 'developer-tools/faucet/',
+            label: "Faucet",
+            position: 'right',
+            excludeUrl: REF_ALLOW_LOGIN_PATH,
           },
           {
-            to: 'whats-new',
-            label: "What's new?",
+            to: 'https://community.metamask.io/',
+            label: "Help ↗",
             position: 'right',
           },
           {

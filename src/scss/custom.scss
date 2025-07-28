@@ -768,7 +768,7 @@ code:hover .code-unfocus {
       align-items: flex-start;
       justify-content: center;
       padding: 5px;
-      background-color: var(--w3a-color-icon-background);
+      background-color: var(--ifm-code-background);
       border-radius: 8px;
 
       svg {
@@ -776,13 +776,13 @@ code:hover .code-unfocus {
         vertical-align: top;
         width: 26px;
         height: 24px;
-        color: var(--w3a-color-icon-gray);
+        color: var(--ifm-menu-color);
         transition: color 0.2s ease;
       }
     }
 
     &:hover span {
-      background-color: var(--w3a-color-icon-active-background);
+      background-color: var(--ifm-color-primary-light);
 
       svg {
         color: var(--ifm-color-primary);
@@ -791,17 +791,20 @@ code:hover .code-unfocus {
 
     h2 {
       @extend .dropdown__link;
+      font-family: var(--ifm-font-family-base);
       font-size: 1.6rem !important;
+      font-weight: 500;
       text-decoration: none !important;
       margin: 0 0 4px 0;
       color: inherit;
     }
 
     p {
+      font-family: var(--ifm-font-family-base);
       font-size: 1.4rem;
       line-height: 1.8rem;
       font-weight: 400 !important;
-      color: var(--w3a-color-icon-gray);
+      color: var(--ifm-menu-color);
       text-decoration: none !important;
       margin: 0;
     }
@@ -883,4 +886,336 @@ div[class^='theme-announcement-bar'] {
 /* Add scroll padding to account for sticky product banner */
 html {
   scroll-padding-top: 10rem;
+}
+
+.sdk-menu {
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  padding: 0;
+}
+
+.sdk-menu h2 {
+  font-family: var(--ifm-font-family-base);
+  font-size: 1.6rem;
+  font-weight: 500 !important;
+  margin: 0 0 4px 0;
+}
+
+.sdk-menu h3 {
+  font-family: var(--ifm-font-family-base);
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  font-weight: 500 !important;
+  color: var(--ifm-menu-color);
+  padding-left: 14px;
+  margin: 0;
+  margin-top: 14px;
+  opacity: 0.8;
+}
+
+.sdk-menu p {
+  font-family: var(--ifm-font-family-base);
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  font-weight: 400 !important;
+  margin: 0;
+  color: var(--ifm-menu-color);
+}
+
+.product-selection-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px;
+  gap: var(--ifm-spacing-horizontal);
+  border-radius: 8px;
+  background-color: var(--ifm-background-surface-color);
+  margin: 0;
+}
+
+.product-selection-menu ul {
+  display: flex;
+  padding-left: 0;
+  color: var(--ifm-navbar-link-color);
+  list-style-type: none;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-selection-menu a {
+  display: flex;
+  padding-left: 14px;
+  color: var(--ifm-navbar-link-color);
+  flex-direction: row;
+  justify-content: space-between;
+  width: 190px;
+  align-items: center;
+  border-radius: 8px;
+  margin: 0;
+  border: 0;
+  background-color: var(--ifm-background-surface-color);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  text-decoration: none !important;
+
+  &:hover,
+  &:focus {
+    background-color: var(--ifm-hover-overlay);
+    color: var(--ifm-navbar-link-hover-color);
+    outline: none;
+  }
+}
+
+.product-selection-menu .selected {
+  background-color: var(--ifm-color-primary);
+  color: var(--general-white);
+
+  &:hover {
+    background-color: var(--ifm-color-primary);
+    color: var(--general-white);
+  }
+}
+
+.product-selection-menu a div {
+  font-family: var(--ifm-font-family-base);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  margin: 0;
+}
+
+.product-selection-menu a h2 {
+  font-family: var(--ifm-font-family-base);
+  font-size: 1.6rem !important;
+  font-weight: 500;
+  text-decoration: none !important;
+  margin: 0 0 4px 0;
+  color: inherit;
+}
+
+.product-selection-menu a p {
+  font-family: var(--ifm-font-family-base);
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  font-weight: 400 !important;
+  color: var(--ifm-menu-color);
+  text-decoration: none !important;
+  margin: 0;
+}
+
+.sdk-selection-menu {
+  display: none;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px;
+  gap: var(--ifm-spacing-horizontal);
+  border-radius: 8px;
+}
+
+.selected-menu {
+  display: flex !important;
+}
+
+.sdk-selection-menu ul {
+  display: flex;
+  padding-left: 0;
+  color: var(--ifm-navbar-link-color);
+  list-style-type: none;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sdk-selection-menu a {
+  position: relative;
+  display: flex;
+  padding-left: 14px;
+  color: var(--ifm-navbar-link-color);
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 240px;
+  align-items: center;
+  border-radius: 8px;
+  margin: 0;
+  text-decoration: none !important;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background-color: var(--ifm-color-primary);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: 1px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--ifm-hover-overlay);
+    color: var(--ifm-navbar-link-hover-color);
+    outline: none;
+
+    &::before {
+      opacity: 1;
+    }
+
+    span {
+      background-color: var(--ifm-color-primary-light);
+
+      svg {
+        color: var(--ifm-color-primary);
+      }
+    }
+  }
+}
+
+.sdk-selection-menu a div {
+  font-family: var(--ifm-font-family-base);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  margin: 0;
+}
+
+.sdk-selection-menu a h2 {
+  font-family: var(--ifm-font-family-base);
+  font-size: 1.6rem !important;
+  font-weight: 500;
+  text-decoration: none !important;
+  margin: 0 0 4px 0;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.sdk-selection-menu a p {
+  font-family: var(--ifm-font-family-base);
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  font-weight: 400 !important;
+  color: var(--ifm-menu-color);
+  text-decoration: none !important;
+  margin: 0;
+}
+
+.sdk-selection-menu a span {
+  display: flex;
+  background-color: var(--ifm-code-background);
+  border-radius: 8px;
+  margin: 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.sdk-selection-menu a:has(p) {
+  align-items: flex-start;
+}
+
+.sdk-selection-menu a:has(p) span {
+  margin-top: 10px;
+}
+
+.sdk-selection-menu a span svg {
+  height: 24px;
+  width: 24px;
+  color: var(--ifm-menu-color);
+  display: block;
+  position: relative;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+@media screen and (max-width: 996px) {
+  .sdk-selection-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+    gap: 0;
+  }
+
+  .sdk-selection-menu ul {
+    gap: 0;
+  }
+
+  .sdk-selection-menu a {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media screen and (max-width: 996px) {
+  .sdk-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+    gap: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  .product-selection-menu {
+    display: none;
+  }
+
+  .sdk-selection-menu {
+    display: flex;
+  }
+
+  #pnp-menu h3::before {
+    content: 'Plug and Play - ';
+  }
+
+  #core-kit-sfa-menu h3::before {
+    content: 'Core Kit SFA - ';
+  }
+
+  #core-kit-mfa-menu h3::before {
+    content: 'Core Kit MFA - ';
+  }
+
+  #wallet-ecosystems-menu h3::before {
+    content: 'Wallet Ecosystems - ';
+  }
+
+  #helper-sdks-menu h3::before {
+    content: 'Helper SDKs - ';
+  }
+
+  .sdk-selection-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0;
+    gap: 0;
+  }
+
+  .sdk-selection-menu ul {
+    gap: 0;
+  }
+
+  .sdk-selection-menu a {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
