@@ -206,7 +206,7 @@ import {
 // remove-end
 
 // add-start
-+ const evniroment: DeleGatorEnvironment = {
++ const environment: DeleGatorEnvironment = {
 +  SimpleFactory: "0x124..",
 +  // ...
 +  implementations: {
