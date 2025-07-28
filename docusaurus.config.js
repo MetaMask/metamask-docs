@@ -18,10 +18,10 @@ const productsDropdown = fs.readFileSync(
   'utf-8'
 )
 const baseUrl = process.env.DEST || '/';
+const siteUrl = 'https://docs.metamask.io';
+
 const npm2yarnPlugin = [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
 /** @type {import('@docusaurus/types').Config} */
-const siteUrl = 'https://docs.metamask.io'
-const baseUrl = process.env.DEST || '/'
 const fullUrl = new URL(baseUrl, siteUrl).toString()
 const config = {
   title: 'MetaMask developer documentation',
