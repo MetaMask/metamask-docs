@@ -237,7 +237,7 @@ For example:
 <TabItem value="example.ts">
 
 ```typescript
-import { publiClient } from "./client.ts";
+import { publicClient } from "./client.ts";
 import { account, walletClient } from "./signers.ts";
 import { 
   Implementation, 
