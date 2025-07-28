@@ -1,0 +1,20 @@
+An object containing the user operation information and transaction details, or `null` if the user
+operation is not available. When available, the response object contains:
+
+- `userOperation`: (object) - The user operation object containing:
+  - `sender`: (string) - The address of the account that initiated the user operation.
+  - `nonce`: (string) - The nonce used for the user operation.
+  - `initCode`: (string) - The initialization code for account creation.
+  - `callData`: (string) - The data to pass to the sender during the main execution call.
+  - `callGasLimit`: (string) - The amount of gas allocated for the main execution call.
+  - `verificationGasLimit`: (string) - The amount of gas allocated for the verification step.
+  - `preVerificationGas`: (string) - The amount of gas to compensate the bundler for pre-verification execution.
+  - `maxFeePerGas`: (string) - Maximum fee per gas, in wei, the sender is willing to pay per gas.
+  - `maxPriorityFeePerGas`: (string) - Maximum fee, in wei, the sender is willing to pay per gas above
+      the base fee.
+  - `paymasterAndData`: (string) - The paymaster address and data.
+  - `signature`: (string) - The signature data for the user operation.
+- `entryPoint`: (string) - The entry point contract address used.
+- `transactionHash`: (string) - The hash of the transaction that included this user operation.
+- `blockHash`: (string) - The hash of the block containing the transaction.
+- `blockNumber`: (string) - The number of the block containing the transaction.

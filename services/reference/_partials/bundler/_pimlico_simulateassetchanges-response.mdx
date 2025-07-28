@@ -1,0 +1,175 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="Native Currency">
+
+  ```JSON
+  {
+    "jsonrpc": "2.0",
+    "id": 4337,
+    "result": {
+      "assetChanges": [
+        {
+          "token": {
+            "tokenType": "NATIVE"
+          },
+          "value": {
+            "diff": "-1000000000000000000",
+            "pre": "5000000000000000000",
+            "post": "4000000000000000000"
+          }
+        }
+      ]
+    }
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="ERC-20">
+
+  ```JSON
+  {
+    "jsonrpc": "2.0",
+    "id": 4337,
+    "result": {
+      "assetChanges": [
+        {
+          "token": {
+            "tokenType": "ERC-20",
+            "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "decimals": 6,
+            "name": "USD Coin",
+            "symbol": "USDC"
+          },
+          "value": {
+            "diff": "-1000000",
+            "pre": "100000000",
+            "post": "99000000"
+          }
+        }
+      ]
+    }
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="ERC-721">
+
+  ```JSON
+  {
+    "jsonrpc": "2.0",
+    "id": 4337,
+    "result": {
+      "assetChanges": [
+        {
+          "token": {
+            "tokenType": "ERC-721",
+            "address": "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D",
+            "tokenId": 1234,
+            "name": "Bored Ape Yacht Club",
+            "symbol": "BAYC"
+          },
+          "value": {
+            "diff": "1",
+            "pre": "0",
+            "post": "1"
+          }
+        }
+      ]
+    }
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="ERC-1155">
+
+  ```JSON
+  {
+    "jsonrpc": "2.0",
+    "id": 4337,
+    "result": {
+      "assetChanges": [
+        {
+          "token": {
+            "tokenType": "ERC-1155",
+            "address": "0x76BE3b62873462d2142405439777e971754E8E77",
+            "tokenId": 5678,
+            "name": "OpenSea Shared Storefront",
+            "symbol": "OPENSTORE"
+          },
+          "value": {
+            "diff": "10",
+            "pre": "5",
+            "post": "15"
+          }
+        }
+      ]
+    }
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="Multiple Assets">
+
+  ```JSON
+  {
+    "jsonrpc": "2.0",
+    "id": 4337,
+    "result": {
+      "assetChanges": [
+        {
+          "token": {
+            "tokenType": "ERC-20",
+            "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+            "decimals": 6,
+            "name": "USD Coin",
+            "symbol": "USDC"
+          },
+          "value": {
+            "diff": "-1000000",
+            "pre": "100000000",
+            "post": "99000000"
+          }
+        },
+        {
+          "token": {
+            "tokenType": "ERC-20",
+            "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+            "decimals": 8,
+            "name": "Wrapped BTC",
+            "symbol": "WBTC"
+          },
+          "value": {
+            "diff": "1196",
+            "pre": "0",
+            "post": "1196"
+          }
+        },
+        {
+          "token": {
+            "tokenType": "NATIVE"
+          },
+          "value": {
+            "diff": "-1000000000000000000",
+            "pre": "5000000000000000000",
+            "post": "4000000000000000000"
+          }
+        }
+      ]
+    }
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
+## Errors
+
+Common error responses when simulation fails:
+
+| Error Code               | Description                                        |
+| :------------------------| :------------------------------------------------- |
+| `AA23`                   | User operation reverted during simulation.         |
+| `UserOperationReverted`  | User operation execution failed during simulation. |
+| `SimulateValidation`     | Validation failed for the user operation.          |

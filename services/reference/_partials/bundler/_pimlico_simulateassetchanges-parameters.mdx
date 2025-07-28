@@ -1,0 +1,16 @@
+- `userOperation`: (object) - The user operation object with the same format as `eth_estimateUserOperationGas`:
+  - `sender`: (string) - The address of the account making the operation.
+  - `nonce`: (string) - The account nonce.
+  - `callData`: (string) - The data to pass to the sender during the main execution call.
+  - `callGasLimit`: (string) [_optional_] - The amount of gas to allocate the main execution call.
+  - `verificationGasLimit`: (string) [_optional_] - The amount of gas to allocate for the verification step.
+  - `preVerificationGas`: (string) [_optional_] - The amount of gas to pay for to compensate the bundler.
+  - `maxFeePerGas`: (string) [_optional_] - Maximum fee per gas, in wei, the sender is willing to pay per gas.
+  - `maxPriorityFeePerGas`: (string) [_optional_] - Maximum priority fee per gas above the base fee.
+  - `paymasterVerificationGasLimit`: (string) [_optional_] - Gas for paymaster verification step.
+  - `paymasterPostOpGasLimit`: (string) [_optional_] - Gas for paymaster post-operation step.
+  - `signature`: (string) - Must be a valid dummy signature for simulation.
+
+- `entryPoint`: (string) - The entry point contract address.
+
+- `blockNumber`: (string) [_optional_] - Hex encoded block number to run the simulation at (defaults to `latest`).

@@ -1,0 +1,10 @@
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
+
+Returns the user operation status and, optionally, the transaction hash that
+the bundler is using to bundle the user operation onchain. <CreditCost network="ethereum" method="pimlico_getUserOperationStatus" />
+
+:::info
+The transaction hash returned when the result is `submitted` can change if the bundler resubmits the
+user operation inside a different transaction. For this reason, when showing the pending transaction hash to
+the user, it is recommended to keep calling this method in case the transaction hash changes.
+:::

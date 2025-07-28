@@ -1,0 +1,25 @@
+An object containing the user operation receipt information, or `null` if the receipt is not available.
+When available, the receipt object contains:
+
+- `entryPoint`: (string) - The entry point contract address.
+- `userOpHash`: (string) - The hash of the user operation.
+- `sender`: (string) - The address of the account that initiated the user operation.
+- `nonce`: (string) - The nonce used for the user operation.
+- `actualGasUsed`: (string) - The actual amount of gas used during execution.
+- `actualGasCost`: (string) - The actual cost of gas in wei.
+- `success`: (boolean) - Whether the user operation was successful.
+- `logs`: (array) - Array of log entries generated during execution.
+- `receipt`: (object) - The underlying transaction receipt containing:
+  - `transactionHash`: (string) - The hash of the transaction.
+  - `transactionIndex`: (string) - The index of the transaction in the block.
+  - `blockHash`: (string) - The hash of the block containing the transaction.
+  - `blockNumber`: (string) - The number of the block containing the transaction.
+  - `from`: (string) - The address that initiated the transaction.
+  - `to`: (string) - The address that received the transaction.
+  - `cumulativeGasUsed`: (string) - The total gas used by all transactions in the block up to this one.
+  - `gasUsed`: (string) - The amount of gas used by this transaction.
+  - `address`: (string) - The contract address created, if any.
+  - `logs`: (array) - Array of log entries for this transaction.
+  - `logsBloom`: (string) - The bloom filter for the logs.
+  - `status`: (string) - The status of the transaction (`0x1` for success, `0x0` for failure).
+  - `effectiveGasPrice`: (string) - The effective gas price used for the transaction.
