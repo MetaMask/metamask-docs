@@ -76,8 +76,9 @@ function highlight(stepIndex, filenames, files, steps) {
         pointer.fileContent || files[filenames[i]],
         pointer.variableName
       )
+    } else {
+      newFiles[filenames[i]] = removeHighlightCode(files[filenames[i]])
     }
-    newFiles[filenames[i]] = removeHighlightCode(files[filenames[i]])
   }
 
   return newFiles
