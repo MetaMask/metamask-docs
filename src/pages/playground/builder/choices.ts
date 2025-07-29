@@ -37,11 +37,6 @@ export const LANGS_METAMASK_SDK: DisplayChoice[] = [
   { key: NEXTJS, displayName: 'Next JS' },
 ]
 
-export const LANGS_DELEGATION_TOOLKIT: DisplayChoice[] = [
-  { key: REACT, displayName: 'React' },
-  { key: NEXTJS, displayName: 'Next JS' },
-]
-
 // Misc choices
 
 export const YES = 'YES'

@@ -7,7 +7,7 @@ import Layout from "@theme/Layout";
 import MDXComponents from "@theme/MDXComponents";
 import classNames from "classnames";
 import copyToClipboard from "copy-to-clipboard";
-import { UIEvent, useEffect, useMemo, useState, useRef } from "react";
+import { UIEvent, useEffect, useMemo, useState, useRef, useCallback } from "react";
 import MoonLoader from "react-spinners/BeatLoader";
 import React from "react";
 
@@ -16,7 +16,7 @@ import IntegrationBuilderCodeView from "../../theme/IntegrationBuilderCodeView";
 import builder from "./builder";
 import styles from "./styles.module.css";
 import { getWindowLocation } from "../../theme/URLParams";
-import { METAMASK_SDK, EMBEDDED_WALLETS, DELEGATION_TOOLKIT } from "./builder/choices";
+import { METAMASK_SDK, EMBEDDED_WALLETS } from "./builder/choices";
 import NavigationOverlay from "./NavigationOverlay";
 
 const hasRelevantURLParams = () => {
@@ -52,6 +52,44 @@ const getURLFromBuilderOptions = (opts: Record<string, string>, stepIndex): stri
   url.searchParams.append("stepIndex", stepIndex.toString());
   return url.toString();
 };
+
+interface NavigationFlowProps {
+  onSelect: (product: string) => void;
+}
+
+// Add new component for step navigation menu
+const StepNavigationMenu: React.FC<{
+  steps: any[];
+  currentStepIndex: number;
+  onStepChange: (index: number) => void;
+  scrollToStep: (stepElementId: string) => void;
+}> = ({ steps, currentStepIndex, onStepChange, scrollToStep }) => {
+  return (
+    <div className={styles.stepNavigationMenu}>
+      <div className={styles.stepMenuList}>
+        {steps.map((step, index) => (
+          <div
+            key={index}
+            className={classNames(styles.stepMenuItem, {
+              [styles.stepMenuItemActive]: index === currentStepIndex,
+              [styles.stepMenuItemCompleted]: index < currentStepIndex,
+            })}
+            onClick={() => scrollToStep(`step-${index}`)}
+          >
+            <div className={styles.stepMenuNumber}>
+              {index < currentStepIndex ? '✓' : index + 1}
+            </div>
+            <div className={styles.stepMenuTitle}>
+              {step.title}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+
 
 export default function IntegrationBuilderPage(props: any) {
   // Try different ways to access files
@@ -128,16 +166,281 @@ export default function IntegrationBuilderPage(props: any) {
 
   const { steps } = integration;
 
-  const onChangeStep = (index: number) => {
+  const onChangeStep = useCallback((index: number) => {
     if (index >= steps.length) {
       // eslint-disable-next-line no-param-reassign
       index = steps.length - 1;
+    }
+    if (index < 0) {
+      // eslint-disable-next-line no-param-reassign
+      index = 0;
     }
     if (steps[index] && steps[index].pointer && steps[index].pointer.filename) {
       setSelectedFilename(steps[index].pointer.filename);
     }
     setStepIndex(index);
-  };
+
+    // Update URL with new step index
+    const url = new URL(getWindowLocation());
+    url.searchParams.set('stepIndex', index.toString());
+    // eslint-disable-next-line no-restricted-globals
+    history.pushState({}, "", url.toString());
+  }, [steps]);
+
+  // Navigation handlers with smooth scrolling to exact top
+  const scrollToStep = useCallback((stepElementId: string) => {
+    const stepsContainer = document.getElementById('steps-container');
+    const targetStepElement = document.getElementById(stepElementId);
+
+    if (stepsContainer && targetStepElement) {
+      const containerRect = stepsContainer.getBoundingClientRect();
+      const stepRect = targetStepElement.getBoundingClientRect();
+      const scrollOffset = stepRect.top - containerRect.top + stepsContainer.scrollTop;
+
+      // Use same custom easing for manual navigation
+      const startPosition = stepsContainer.scrollTop;
+      const distance = scrollOffset - startPosition;
+      const duration = Math.min(400, Math.abs(distance) * 0.5); // Quick, responsive timing
+      const startTime = performance.now();
+
+      const easeOutCubic = (t: number): number => {
+        return 1 - Math.pow(1 - t, 3);
+      };
+
+      const animateScroll = (currentTime: number) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutCubic(progress);
+
+        stepsContainer.scrollTop = startPosition + (distance * easedProgress);
+
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll);
+        }
+      };
+
+      requestAnimationFrame(animateScroll);
+    }
+  }, []);
+
+  const handlePreviousStep = useCallback(() => {
+    if (stepIndex > 0) {
+      scrollToStep(`step-${stepIndex - 1}`);
+    }
+  }, [stepIndex, scrollToStep]);
+
+  const handleNextStep = useCallback(() => {
+    if (stepIndex < steps.length - 1) {
+      scrollToStep(`step-${stepIndex + 1}`);
+    }
+  }, [stepIndex, steps.length, scrollToStep]);
+
+  // Natural scroll-spy navigation with gentle snapping
+  useEffect(() => {
+    const stepsContainer = document.getElementById('steps-container');
+    if (!stepsContainer || steps.length === 0) return;
+
+    let scrollTimeout: NodeJS.Timeout;
+    let snapTimeout: NodeJS.Timeout;
+    let isUserScrolling = false;
+    let lastScrollDirection = 'none';
+    let lastScrollTop = 0;
+
+    const handleScroll = () => {
+      isUserScrolling = true;
+
+      // Track actual scroll direction
+      const currentScrollTop = stepsContainer.scrollTop;
+      const actualDirection = currentScrollTop > lastScrollTop ? 'down' : currentScrollTop < lastScrollTop ? 'up' : 'none';
+      lastScrollTop = currentScrollTop;
+
+      // Clear existing timeouts
+      clearTimeout(scrollTimeout);
+      clearTimeout(snapTimeout);
+
+      // Immediate scroll-spy update (faster response)
+      scrollTimeout = setTimeout(() => {
+        const containerRect = stepsContainer.getBoundingClientRect();
+        const containerCenter = containerRect.top + containerRect.height / 2;
+
+        let activeStepIndex = stepIndex;
+        let minDistance = Infinity;
+        let closestStepElement: HTMLElement | null = null;
+
+        // Check if we're at the bottom of the scroll container
+        const isAtBottom = stepsContainer.scrollTop + stepsContainer.clientHeight >= stepsContainer.scrollHeight - 50;
+
+        // If at bottom, force select the last step
+        if (isAtBottom) {
+          activeStepIndex = steps.length - 1;
+          closestStepElement = document.getElementById(`step-${steps.length - 1}`);
+          minDistance = 0;
+        } else {
+          // Find which step is at the top of the viewport (simplified for fixed heights)
+          steps.forEach((_, index) => {
+            const stepElement = document.getElementById(`step-${index}`);
+            if (stepElement) {
+              const stepRect = stepElement.getBoundingClientRect();
+              const containerTop = containerRect.top;
+
+              // Since all steps are the same height, use simple top-based detection
+              const stepDistanceFromTop = Math.abs(stepRect.top - containerTop);
+
+              // Simple visibility check - step must be at least partially visible
+              const isVisible = stepRect.bottom > containerTop && stepRect.top < containerRect.bottom;
+
+              if (isVisible && stepDistanceFromTop < minDistance) {
+                minDistance = stepDistanceFromTop;
+                activeStepIndex = index;
+                closestStepElement = stepElement;
+              }
+            }
+          });
+        }
+
+        // Update active step if it changed, but only allow sequential progression
+        if (activeStepIndex !== stepIndex) {
+          // Detect scroll direction
+          const stepDifference = activeStepIndex - stepIndex;
+          const currentDirection = stepDifference > 0 ? 'down' : stepDifference < 0 ? 'up' : 'none';
+
+          // Reset direction tracking when direction changes or when starting
+          if (lastScrollDirection !== currentDirection) {
+            lastScrollDirection = currentDirection;
+          }
+
+          // Only allow one step forward or backward, never skip steps
+          let targetStep = stepIndex;
+
+          if (stepDifference > 0) {
+            // Moving forward - only go to next step
+            targetStep = stepIndex + 1;
+          } else if (stepDifference < 0) {
+            // Moving backward - only go to previous step
+            targetStep = stepIndex - 1;
+          }
+
+          // Ensure target step is within bounds
+          if (targetStep >= 0 && targetStep < steps.length && targetStep !== stepIndex) {
+            onChangeStep(targetStep);
+          }
+        }
+
+        // Set up gentle snapping when user stops scrolling
+        snapTimeout = setTimeout(() => {
+          if (closestStepElement) {
+            // Check if this is the last step and we're near the bottom
+            const isLastStep = activeStepIndex === steps.length - 1;
+            const isAtBottom = stepsContainer.scrollTop + stepsContainer.clientHeight >= stepsContainer.scrollHeight - 50;
+
+            // For last step, snap to show it at top if not already at bottom
+            if (isLastStep && !isAtBottom && minDistance > 20) {
+              // Calculate exact position to place step at top of container
+              const containerRect = stepsContainer.getBoundingClientRect();
+              const stepRect = closestStepElement.getBoundingClientRect();
+              const scrollOffset = stepRect.top - containerRect.top + stepsContainer.scrollTop;
+
+              // Use custom easing for smoother snap
+              const startPosition = stepsContainer.scrollTop;
+              const distance = scrollOffset - startPosition;
+              const duration = Math.min(400, Math.abs(distance) * 0.5); // Quick, responsive duration
+              const startTime = performance.now();
+
+              const easeOutCubic = (t: number): number => {
+                return 1 - Math.pow(1 - t, 3);
+              };
+
+              const animateScroll = (currentTime: number) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easedProgress = easeOutCubic(progress);
+
+                stepsContainer.scrollTop = startPosition + (distance * easedProgress);
+
+                if (progress < 1) {
+                  requestAnimationFrame(animateScroll);
+                }
+              };
+
+              requestAnimationFrame(animateScroll);
+            } else if (!isLastStep && minDistance > 20) {
+              // Normal snapping for non-last steps
+              const containerRect = stepsContainer.getBoundingClientRect();
+              const stepRect = closestStepElement.getBoundingClientRect();
+              const scrollOffset = stepRect.top - containerRect.top + stepsContainer.scrollTop;
+
+              const startPosition = stepsContainer.scrollTop;
+              const distance = scrollOffset - startPosition;
+              const duration = Math.min(400, Math.abs(distance) * 0.5);
+              const startTime = performance.now();
+
+              const easeOutCubic = (t: number): number => {
+                return 1 - Math.pow(1 - t, 3);
+              };
+
+              const animateScroll = (currentTime: number) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easedProgress = easeOutCubic(progress);
+
+                stepsContainer.scrollTop = startPosition + (distance * easedProgress);
+
+                if (progress < 1) {
+                  requestAnimationFrame(animateScroll);
+                }
+              };
+
+              requestAnimationFrame(animateScroll);
+            }
+          }
+          isUserScrolling = false;
+        }, 300); // Consistent snapping delay for all directions
+
+      }, 30); // Fast, consistent updates for fixed-height steps
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Only handle keyboard navigation when not in an input field
+      if (
+        event.target instanceof HTMLInputElement ||
+        event.target instanceof HTMLTextAreaElement ||
+        event.target instanceof HTMLSelectElement
+      ) {
+        return;
+      }
+
+      switch (event.key) {
+        case 'ArrowLeft':
+          event.preventDefault();
+          handlePreviousStep();
+          break;
+        case 'ArrowRight':
+          event.preventDefault();
+          handleNextStep();
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          handlePreviousStep();
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          handleNextStep();
+          break;
+        default:
+          break;
+      }
+    };
+
+    stepsContainer.addEventListener('scroll', handleScroll, { passive: true });
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      stepsContainer.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('keydown', handleKeyDown);
+      clearTimeout(scrollTimeout);
+      clearTimeout(snapTimeout);
+    };
+  }, [stepIndex, steps.length, onChangeStep, handlePreviousStep, handleNextStep]);
 
   const onScrollLeft = (e: UIEvent<HTMLDivElement>) => {
     if (!initialLoadComplete) return;
@@ -321,18 +624,6 @@ export default function IntegrationBuilderPage(props: any) {
                       </h5>
                     </div>
                   )}
-                  {value.key === DELEGATION_TOOLKIT && (
-                    <div
-                      className={
-                        builderOptions[key] === DELEGATION_TOOLKIT ? styles.selectedCard : styles.card
-                      }
-                      onClick={() => onChangeDropdown(key, value.key)}
-                    >
-                      <h5 className={classNames(styles.cardTitle)}>
-                        {value.displayName}
-                      </h5>
-                    </div>
-                  )}
                 </React.Fragment>
               ))}
             </div>
@@ -458,24 +749,48 @@ export default function IntegrationBuilderPage(props: any) {
 
 
         <div className={styles.cols} ref={ref}>
-          <div className={styles.leftCol} onScroll={onScrollLeft}>
+          <div className={styles.leftCol} id="steps-container">
             <MDXProvider components={MDXComponents}>
-              {steps && steps.length > 0 ? steps.map((step, index) => (
-                <div
-                  key={step.title}
-                  className={classNames(styles.stepContainer, {
-                    [styles.stepSelected]: index === stepIndex,
-                  })}
-                  onClick={onChangeStep.bind(this, index)}
-                  onKeyDown={onChangeStep.bind(this, index)}
-                  role="tab"
-                  tabIndex={index}
-                  id={`step-${index}`}
-                >
-                  <p className={styles.stepHeader}>{step.title}</p>
-                  <div className={styles.stepBody}>{step.content}</div>
+              {steps && steps.length > 0 ? (
+                <div className={styles.stepsScrollContainer}>
+                  {steps.map((step, index) => (
+                    <div
+                      key={index}
+                      className={classNames(styles.stepSection, {
+                        [styles.activeStep]: index === stepIndex,
+                        [styles.previousStep]: index < stepIndex,
+                        [styles.upcomingStep]: index > stepIndex,
+                        [styles.nextStep]: index === stepIndex + 1,
+                      })}
+                      id={`step-${index}`}
+                      data-step-index={index}
+                      onClick={() => {
+                        if (index > stepIndex) {
+                          scrollToStep(`step-${index}`);
+                        }
+                      }}
+                      style={{
+                        cursor: index > stepIndex ? 'pointer' : 'default'
+                      }}
+                    >
+                      <div className={styles.stepContainer}>
+                        <div className={styles.stepProgressIndicator}>
+                          Step {index + 1} of {steps.length}
+                        </div>
+                        <p className={styles.stepHeader}>{step.title}</p>
+                        <div className={styles.stepBody}>{step.content}</div>
+                      </div>
+
+                      {/* Simple separator between steps */}
+                      {index < steps.length - 1 && (
+                        <div className={styles.stepSeparator}>
+                          <div className={styles.separatorLine}></div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
-              )) : (
+              ) : (
                 <div className={styles.stepContainer}>
                   <p className={styles.stepHeader}>Loading...</p>
                   <div className={styles.stepBody}>Please wait while we load the integration steps.</div>
@@ -496,6 +811,16 @@ export default function IntegrationBuilderPage(props: any) {
               onClickFilename={(filename: string) => setSelectedFilename(filename)}
             />
           </div>
+
+          {/* Step Navigation Menu */}
+          {steps && steps.length > 0 && (
+            <StepNavigationMenu
+              steps={steps}
+              currentStepIndex={stepIndex}
+              onStepChange={onChangeStep}
+              scrollToStep={scrollToStep}
+            />
+          )}
         </div>
       </div>
     </Layout>

@@ -177,7 +177,7 @@
 }
 
 .stepContainer {
-  padding: 1.25rem var(--ifm-navbar-padding-horizontal);
+  padding: 0.25rem var(--ifm-navbar-padding-horizontal);
   border-left: 6px solid transparent;
   cursor: pointer;
   background: var(--ifm-color-emphasis-100);
@@ -530,17 +530,409 @@ input:checked+.slider:before {
   .cols {
     display: flex;
     height: calc(100vh - 86px - 45px);
+    position: relative;
   }
 
   .leftCol {
-    width: 40%;
+    width: 50%;
     overflow-x: hidden;
     overflow-y: scroll;
     margin-left: 0;
     margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scroll-padding-top: 0;
+    scroll-snap-type: y proximity;
   }
 
   .rightCol {
-    width: 60%;
+    width: 50%;
+  }
+}
+
+/* Step Navigation Menu */
+.stepNavigationMenu {
+  background: var(--ifm-background-surface-color);
+  border-left: 1px solid var(--ifm-color-emphasis-300);
+  padding: 1rem 0;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 86px - 45px);
+}
+
+.stepMenuHeader {
+  padding: 0 1rem 0.5rem 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  margin-bottom: 0.5rem;
+}
+
+.stepMenuHeader h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stepMenuList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stepMenuItem {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.stepMenuItem:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.stepMenuItemActive {
+  background: var(--ifm-color-emphasis-200);
+  border-left-color: var(--ifm-color-primary);
+}
+
+.stepMenuItemCompleted {
+  color: var(--ifm-color-success);
+}
+
+.stepMenuNumber {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ifm-color-emphasis-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.stepMenuItemActive .stepMenuNumber {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+.stepMenuItemCompleted .stepMenuNumber {
+  background: var(--ifm-color-success);
+  color: white;
+}
+
+.stepMenuTitle {
+  font-size: 13px;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+
+
+/* Steps Scroll Container */
+.stepsScrollContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-bottom: 100vh;
+  /* Enough space for last step to reach top */
+}
+
+/* Step Section - Fixed height containers for consistent scrolling */
+.stepSection {
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  height: 85vh;
+  /* Fixed height for ALL steps */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  scroll-snap-align: start;
+  position: relative;
+  padding: 1rem 0;
+  /* Consistent padding */
+  box-sizing: border-box;
+  /* Remove margin-bottom for consistent spacing */
+}
+
+/* First step uses same height as others */
+.stepSection:first-child {
+  height: 85vh;
+  /* Same as all other steps */
+  padding: 1rem 0;
+  /* Same padding as others */
+}
+
+/* Active Step */
+.activeStep {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  z-index: 2;
+}
+
+.activeStep .stepContainer {
+  border-left: none;
+  cursor: default;
+  background: var(--ifm-background-surface-color);
+  padding: 1.5rem;
+  margin-top: 0;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(85vh - 4rem);
+  /* Adjusted for new container height */
+}
+
+/* Previous Steps */
+.previousStep {
+  opacity: 0.65;
+  transform: translateY(-3px) scale(0.98);
+  z-index: 1;
+}
+
+.previousStep .stepContainer {
+  border-left: none;
+  background: var(--ifm-color-emphasis-50);
+  padding: 1.5rem;
+  border-radius: 10px;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(85vh - 4rem);
+  /* Adjusted for new container height */
+}
+
+.previousStep .stepProgressIndicator {
+  background: var(--ifm-color-success);
+  color: white;
+}
+
+/* Upcoming Steps */
+.upcomingStep {
+  opacity: 0.5;
+  transform: translateY(3px) scale(0.97);
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+.upcomingStep .stepContainer {
+  border-left: none;
+  background: var(--ifm-color-emphasis-25);
+  padding: 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(85vh - 4rem);
+  /* Adjusted for new container height */
+}
+
+.upcomingStep:hover {
+  opacity: 0.8;
+  transform: translateY(0px) scale(0.99);
+}
+
+.upcomingStep[style*="pointer"] {
+  cursor: pointer !important;
+}
+
+.upcomingStep[style*="pointer"]:hover {
+  opacity: 0.85;
+  transform: translateY(-1px) scale(1);
+}
+
+.upcomingStep .stepProgressIndicator {
+  background: var(--ifm-color-emphasis-400);
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Make the immediate next step much more visible */
+.nextStep {
+  opacity: 0.9;
+  transform: translateY(1px) scale(0.99);
+  transition: all 0.3s ease;
+}
+
+.nextStep .stepContainer {
+  background: var(--ifm-color-emphasis-75);
+  border: 1px solid var(--ifm-color-emphasis-400);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(85vh - 4rem);
+  /* Adjusted for new container height */
+}
+
+.nextStep .stepHeader {
+  color: var(--ifm-color-content);
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* Ensure upcoming step titles are readable */
+.upcomingStep .stepHeader {
+  color: var(--ifm-color-content);
+  opacity: 0.9;
+}
+
+.nextStep:hover {
+  opacity: 0.98;
+  transform: translateY(-1px) scale(1);
+}
+
+.nextStep[style*="pointer"]:hover {
+  opacity: 1;
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Step Progress Indicator */
+.stepProgressIndicator {
+  background: var(--ifm-color-primary-light);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+
+/* Step Separator */
+.stepSeparator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4rem 0;
+  opacity: 0.3;
+}
+
+.separatorLine {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right,
+      transparent 0%,
+      var(--ifm-color-emphasis-300) 50%,
+      transparent 100%);
+}
+
+
+
+/* Completion Indicator */
+.completionIndicator {
+  text-align: center;
+  padding: 2rem;
+  margin: 4rem 1.5rem 2rem 1.5rem;
+  background: linear-gradient(135deg, var(--ifm-color-success-light) 0%, var(--ifm-color-success) 100%);
+  color: white;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth transition animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 960px) {
+  .stepNavigationMenu {
+    display: none;
+  }
+
+  .leftCol {
+    width: 100% !important;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .rightCol {
+    width: 100% !important;
+    margin-top: 1rem;
+  }
+
+  .cols {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .stepSection {
+    height: 75vh;
+    /* Fixed height for mobile */
+    padding: 0.5rem 0;
+    /* Consistent padding */
+  }
+
+  .stepSection:first-child {
+    height: 75vh;
+    /* Same as all other steps on mobile */
+    padding: 0.5rem 0;
+    /* Same padding as others */
+  }
+
+  .stepSection .stepContainer {
+    max-height: calc(75vh - 3rem);
+    /* Adjusted for new mobile container height */
+  }
+
+  .stepSeparator {
+    margin: 3rem 0;
+  }
+
+  .stepsScrollContainer {
+    padding-bottom: 80vh;
+    /* Enough space for last step on mobile */
+  }
+
+  .stepProgressIndicator {
+    font-size: 10px;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .completionIndicator {
+    font-size: 16px;
+    padding: 1.5rem;
   }
 }
