@@ -1,10 +1,10 @@
 ---
 description: Learn how to use ERC-7715 to request permisisons.
 sidebar_position: 5
-sidebar_label: EIP-7715 quickstart
+sidebar_label: ERC-7715 quickstart
 ---
 
-# EIP-7715 quickstart
+# ERC-7715 quickstart
 
 This page demonstrates how to use [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) to request permissions 
 from a wallet, and execute transactions on a user's behalf. 
@@ -12,7 +12,7 @@ from a wallet, and execute transactions on a user's behalf.
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](install.md)
-- [Install MetaMask Flask 12.14.2 or later](/snaps/get-started/install-flask.md).
+- [Install MetaMask Flask 12.14.2 or later](/snaps/get-started/install-flask).
 
 ## Steps
 
