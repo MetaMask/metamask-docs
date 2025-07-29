@@ -280,7 +280,7 @@ export const API_COSTS = {
     eth_getUserOperationReceipt: 80,
     eth_sendUserOperation: 80,
     eth_supportedEntryPoints: 80,
-    pimlico_getUserOperationByHash: 80,
+    pimlico_getUserOperationGasPrice: 80,
     pimlico_getUserOperationStatus: 80,
     pimlico_simulateAssetChanges: 80,
   },
