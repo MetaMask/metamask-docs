@@ -10,16 +10,15 @@ import Shape from '@site/static/img/shapes/intro-cards/shape.svg';
 import styles from './NavigationOverlay.module.css';
 import {
   METAMASK_SDK,
-  EMBEDDED_WALLETS,
-  DELEGATION_TOOLKIT
+  EMBEDDED_WALLETS
 } from '../builder/choices';
 
 interface NavigationOption {
   id: string;
   title: string;
   description: string;
-  icon?: string;
-  product: string;
+  product?: string;
+  link?: string;
 }
 
 interface NavigationFlowProps {
@@ -28,26 +27,47 @@ interface NavigationFlowProps {
 
 const navigationOptions: NavigationOption[] = [
   {
-    id: 'connect-wallets',
-    title: "I want to connect users' wallets to my dApp",
-    description: "Enable wallet connections for Web3 interactions",
-    icon: "🔗",
+    id: 'mm-sdk',
+    title: "I want to connect to users' MetaMask Wallet",
+    description: "MetaMask SDK",
     product: METAMASK_SDK
   },
   {
-    id: 'create-wallets',
-    title: "I want to create wallets inside my application",
-    description: "Embed wallet functionality directly in your app",
-    icon: "💳",
+    id: 'embedded-wallets-1',
+    title: "I want to create wallets inside my dApp/ Mobile App",
+    description: "Embedded Wallets",
     product: EMBEDDED_WALLETS
   },
   {
-    id: 'gasless-transactions',
-    title: "I want to manage gasless transactions",
-    description: "Handle transaction fees for your users",
-    icon: "⚡",
-    product: DELEGATION_TOOLKIT
-  }
+    id: 'embedded-wallets-2',
+    title: "I want a Wallet Aggregator for my dApp",
+    description: "Embedded Wallets",
+    product: EMBEDDED_WALLETS
+  },
+  {
+    id: 'delegation-toolkit-1',
+    title: "I want to manage Gasless Transactions",
+    description: "Delegation Toolkit",
+    link: "/delegation-toolkit"
+  },
+  {
+    id: 'delegation-toolkit-2',
+    title: "I want to Delegate Permission for my users",
+    description: "Delegation Toolkit",
+    link: "/delegation-toolkit"
+  },
+  {
+    id: 'delegation-toolkit-3',
+    title: "I want to convert EOAs to Smart Wallets",
+    description: "Delegation Toolkit",
+    link: "/delegation-toolkit"
+  },
+  {
+    id: 'delegation-toolkit-4',
+    title: "I want to request Readable Permissions",
+    description: "Delegation Toolkit",
+    link: "/delegation-toolkit"
+  },
 ];
 
 const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
@@ -55,7 +75,11 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   const handleOptionSelect = (option: NavigationOption) => {
-    onSelect(option.product);
+    if (option.product) {
+      onSelect(option.product);
+    } else if (option.link) {
+      window.location.href = option.link;
+    }
   };
 
   return (
@@ -83,7 +107,6 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
                     <Shape className={styles.cardShape} />
 
                     <div className={styles.cardHeader}>
-                      <SvgStar className={styles.cardIcon} />
                       <Heading as="h3" className={styles.cardTitle}>
                         {option.title}
                       </Heading>
@@ -95,7 +118,7 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
                       </p>
                       <Button
                         as="button"
-                        label={false}
+                        label={option.product ? "Use Builder" : "View Docs"}
                         type={colorMode === 'dark' ? 'secondary' : 'primary'}
                         icon="arrow-right"
                         className={styles.cardButton}
