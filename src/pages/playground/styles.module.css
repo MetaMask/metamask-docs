@@ -253,6 +253,11 @@
   background-color: var(--ifm-color-primary-light);
 }
 
+/* Dark mode: Better visibility for checked switches */
+[data-theme='dark'] .switch input:checked+.slider {
+  background-color: var(--ifm-color-primary);
+}
+
 .switch input:checked+.slider:before {
   background-color: var(--ifm-color-white);
 }
@@ -454,12 +459,28 @@ input:checked+.slider:before {
   color: var(--ifm-background-surface-color);
 }
 
+/* Dark mode: Better contrast for preview buttons */
+[data-theme='dark'] .previewButton,
+[data-theme='dark'] .previewButton2 {
+  background: var(--ifm-color-primary-dark);
+  border: 1px solid var(--ifm-color-primary-dark);
+  color: white;
+}
+
 .previewButton:hover,
 .previewButton2:hover {
   background: var(--ifm-color-primary-light);
   border-color: var(--ifm-color-primary-light);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   transform: translateY(-1px);
+}
+
+/* Dark mode: Better contrast for preview button hover */
+[data-theme='dark'] .previewButton:hover,
+[data-theme='dark'] .previewButton2:hover {
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: white;
 }
 
 .hideButton {
@@ -625,8 +646,20 @@ input:checked+.slider:before {
   color: white;
 }
 
+/* Dark mode: Ensure good contrast for active step numbers */
+[data-theme='dark'] .stepMenuItemActive .stepMenuNumber {
+  background: var(--ifm-color-primary-dark);
+  color: white;
+}
+
 .stepMenuItemCompleted .stepMenuNumber {
   background: var(--ifm-color-success);
+  color: black;
+}
+
+/* Dark mode: Use darker success color for better visibility with black text */
+[data-theme='dark'] .stepMenuItemCompleted .stepMenuNumber {
+  background: var(--consumer-green-dark);
   color: white;
 }
 
@@ -720,6 +753,12 @@ input:checked+.slider:before {
 
 .previousStep .stepProgressIndicator {
   background: var(--ifm-color-success);
+  color: black;
+}
+
+/* Dark mode: Use darker success color for better contrast with white text */
+[data-theme='dark'] .previousStep .stepProgressIndicator {
+  background: var(--consumer-green-dark);
   color: white;
 }
 
@@ -816,6 +855,12 @@ input:checked+.slider:before {
   letter-spacing: 0.5px;
 }
 
+/* Dark mode: Use darker background for better contrast with white text */
+[data-theme='dark'] .stepProgressIndicator {
+  background: var(--ifm-color-primary-dark);
+  color: white;
+}
+
 
 
 /* Step Separator */
@@ -849,6 +894,12 @@ input:checked+.slider:before {
   font-size: 18px;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark mode: Better contrast for completion indicator */
+[data-theme='dark'] .completionIndicator {
+  background: linear-gradient(135deg, var(--consumer-green-dark) 0%, var(--institution-green-dark) 100%);
+  color: white;
 }
 
 /* Smooth transition animations */
