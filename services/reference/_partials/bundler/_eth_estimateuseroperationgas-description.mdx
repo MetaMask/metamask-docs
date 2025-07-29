@@ -1,7 +1,7 @@
 import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
 
 Simulates the user operation and estimates the appropriate gas limits. Returns an error if the operation
-is unsuccessful. <CreditCost network="ethereum" method="eth_estimateUserOperationGas" />
+is unsuccessful. <CreditCost network="bundler" method="eth_estimateUserOperationGas" />
 
 :::tip
 You can use `stateOverrides` to estimate the gas cost even if the sender has no funds.
