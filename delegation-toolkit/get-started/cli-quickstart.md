@@ -26,15 +26,17 @@ Upon installation, you'll be asked the following prompts:
 ❯ nextjs
   vite-react
 ? Pick a template: (Use arrow keys)
-❯ Basic Delegator app with NextJS 
-  Experimental: Basic Gator app to try out ERC7715 Permissions
+❯ MetaMask Smart Accounts Starter
+  MetaMask Smart Accounts &amp; Delegation Starter
+  Experimental: ERC7715 Permissions starter
 ? Pick a package manager: (Use arrow keys)
 ❯ npm 
   yarn 
   pnpm 
 ```
 
-Once you've answered the prompts with the required configuration and selected a template, the CLI will create the project using the specified name and settings.
+Once you've answered the prompts with the required configuration and selected a template, the CLI will create the 
+project using the specified name and settings.
 See the following section to learn more about available CLI configurations. 
 
 ## Options
@@ -46,14 +48,15 @@ The CLI provides the following options to display CLI details, and further custo
 | `-v` or `--version` | Check the current version of the `@metamask/create-gator-app` CLI.                                                                                                    |
 | `-h` or `--help`    | Display the available options.                                                                                                                              |
 | `--skip-install`    | Skip the installation of dependencies.                                                                                                                      |
-| `--add-web3auth`    | Add Web3Auth Embedded Wallet as a signer for the delegator account. <br/>Supported templates: <ul><li>Next.js starter</li><li> Vite React starter</li></ul> |
-| `--add-llm-rules`   | Add LLM rules for your IDE. Supported templates: <ul><li>Next.js ERC-7715 starter</li></ul>                                                                 |
+| `--add-web3auth`    | Add Web3Auth Embedded Wallet as a signer for the delegator account. <br/>Supported templates: <ul><li>MetaMask Smart Accounts Starter</li><li> MetaMask Smart Accounts &amp; Delegation Starter</li></ul> |
+| `--add-llm-rules`   | Add LLM rules for your IDE. Supported templates: <ul><li>Experimental: ERC7715 Permissions starter</li></ul>                                                                 |
 
 ## Examples
 
 ### Web3Auth configuration
 
-To create a project that uses [Web3Auth](https://web3auth.io/docs/) Embedded Wallet as the signer for your delegator account, use the `--add-web3auth` option with `@metamask/create-gator-app`:
+To create a project that uses [Web3Auth](https://web3auth.io/docs/) Embedded Wallet as the signer for your delegator 
+account, use the `--add-web3auth` option with `@metamask/create-gator-app`:
 
 ```bash
 npx @metamask/create-gator-app --add-web3auth
@@ -89,5 +92,6 @@ Currently, only Cursor and Windsurf are supported.
 
 | Template                                           | Next.js | Vite React |
 |----------------------------------------------------|---------|------------|
-| Basic dapp with delegation and redeem flow         | ✅       | ✅          |
-| Experimental: Basic dapp with ERC-7715 permissions | ✅       |            | 
+| MetaMask Smart Accounts Starter                    | ✅       | ✅         |
+| MetaMask Smart Accounts &amp; Delegation Starter   | ✅       | ✅         | 
+| Experimental: ERC7715 Permissions starter          | ✅       |            | 
