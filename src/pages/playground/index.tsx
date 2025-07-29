@@ -17,6 +17,13 @@ import builder from "./builder";
 import styles from "./styles.module.css";
 import { getWindowLocation } from "../../theme/URLParams";
 import { METAMASK_SDK, EMBEDDED_WALLETS, DELEGATION_TOOLKIT } from "./builder/choices";
+import NavigationOverlay from "./NavigationOverlay";
+
+const hasRelevantURLParams = () => {
+  const url = new URL(getWindowLocation());
+  const relevantParams = ['product', 'framework'];
+  return relevantParams.some(param => url.searchParams.has(param));
+};
 
 const getDefaultBuilderOptions = () => {
   const defaultOpts = Object.fromEntries(
@@ -50,8 +57,9 @@ export default function IntegrationBuilderPage(props: any) {
   // Try different ways to access files
   const files = props.files || (props.route?.modules?.files ? JSON.parse(props.route.modules.files) : {});
 
+  const [showNavigationOverlay, setShowNavigationOverlay] = useState<boolean>(!hasRelevantURLParams());
   const [builderOptions, setBuilderOptions] = useState<Record<string, string>>(
-    getDefaultBuilderOptions(),
+    hasRelevantURLParams() ? getDefaultBuilderOptions() : {},
   );
   const [isLinkCopied, setLinkCopied] = useState<boolean>(false);
   const [IBCountdown, setIBCountdown] = useState<number>(10);
@@ -64,10 +72,46 @@ export default function IntegrationBuilderPage(props: any) {
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [initialLoadComplete, setInitialLoadComplete] = useState<boolean>(false);
+
+  // Handle navigation overlay selection
+  const handleNavigationSelect = (product: string) => {
+    const newBuilderOptions = {
+      product: product,
+    };
+    setBuilderOptions(newBuilderOptions);
+    setShowNavigationOverlay(false);
+
+    // Update URL with selected options
+    // eslint-disable-next-line no-restricted-globals
+    history.pushState({}, "", getURLFromBuilderOptions(newBuilderOptions, 0));
+  };
+
+  const handleCloseOverlay = () => {
+    // User chose to manually explore - set default options
+    const defaultOptions = getDefaultBuilderOptions();
+    setBuilderOptions(defaultOptions);
+    setShowNavigationOverlay(false);
+
+    // Update URL with default options
+    // eslint-disable-next-line no-restricted-globals
+    history.pushState({}, "", getURLFromBuilderOptions(defaultOptions, 0));
+  };
+
   const integration = useMemo(() => {
+    // Don't build integration if overlay is showing
+    if (showNavigationOverlay || Object.keys(builderOptions).length === 0) {
+      return {
+        filenames: [],
+        files: {},
+        steps: [],
+        stepIndex: 0,
+        embedLink: '',
+        sourceCodeLink: ''
+      };
+    }
     const result = builder.build(builderOptions, files || {}, stepIndex);
     return result;
-  }, [builderOptions, files, stepIndex]);
+  }, [builderOptions, files, stepIndex, showNavigationOverlay]);
   const [selectedFilename, setSelectedFilename] = useState(integration.filenames[0] || "");
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -174,6 +218,9 @@ export default function IntegrationBuilderPage(props: any) {
   };
 
   useEffect(() => {
+    // Don't update anything if overlay is showing
+    if (showNavigationOverlay) return;
+
     setStepIndex(integration.stepIndex);
     // Update selected file when either integration changed
     if (integration.steps && integration.steps[integration.stepIndex] && integration.steps[integration.stepIndex].pointer) {
@@ -193,10 +240,12 @@ export default function IntegrationBuilderPage(props: any) {
         }
       }
     }
-    // Update query params
-    // eslint-disable-next-line no-restricted-globals
-    history.pushState({}, "", getURLFromBuilderOptions(builderOptions, stepIndex));
-  }, [builderOptions, integration, stepIndex, isLinkCopied]);
+    // Update query params only if we have valid options
+    if (Object.keys(builderOptions).length > 0) {
+      // eslint-disable-next-line no-restricted-globals
+      history.pushState({}, "", getURLFromBuilderOptions(builderOptions, stepIndex));
+    }
+  }, [builderOptions, integration, stepIndex, isLinkCopied, showNavigationOverlay]);
 
   // Update the useEffect for initial navigation
   useEffect(() => {
@@ -310,7 +359,14 @@ export default function IntegrationBuilderPage(props: any) {
         image="https://web3auth.io/docs/images/docs-meta-cards/integration-builder-card.png"
         url="https://web3auth.io/docs/quick-start"
       />
-      <div className={styles.container}>
+      {showNavigationOverlay && (
+        <NavigationOverlay
+          onClose={handleCloseOverlay}
+          onSelect={handleNavigationSelect}
+        />
+      )}
+
+      <div className={styles.container} style={{ position: 'relative' }}>
         {/* Top Control Pane */}
         <div className={styles.topControlPane}>
           <div className={styles.topControlContainer}>
