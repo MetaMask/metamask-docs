@@ -22,7 +22,7 @@ Set rate limiting in the API key's **Settings** tab **Key Credit Limits** sectio
 
     The value `0` means default limits are applied.
 
-- **Per day total credits** restricts total daily credit usage for the API key. Set a limit on number of
+- **Per day total credits** restricts total daily credit usage for the API key. Set a limit on the number of
     credits per day in integers, for example, 20000. The value `0` means default limits are applied.
 
     When the number of used credits reaches this limit, all requests will be rejected until the next day (00:00 UTC).
