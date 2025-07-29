@@ -3,13 +3,11 @@ import { DisplayChoice } from '../interfaces'
 //Product choices
 export const EMBEDDED_WALLETS = 'EMBEDDED_WALLETS'
 export const METAMASK_SDK = 'METAMASK_SDK'
-export const DELEGATION_TOOLKIT = 'DELEGATION_TOOLKIT'
 
 // Product choices
 export const PRODUCTS: DisplayChoice[] = [
   { key: METAMASK_SDK, displayName: 'Metamask SDK' },
   { key: EMBEDDED_WALLETS, displayName: 'Embedded Wallets' },
-  { key: DELEGATION_TOOLKIT, displayName: 'Delegation Toolkit' },
 ]
 
 // Platform choices

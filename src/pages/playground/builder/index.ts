@@ -1,21 +1,12 @@
 /* eslint-disable camelcase */
 import { IntegrationBuilder, IntegrationStep } from '../interfaces'
 import {
-  DTKQuickStartSourceCode,
-  DTKQuickStartHostedLinks,
   EWQuickStartHostedLinks,
   EWQuickStartSourceCode,
   MMSDKQuickStartSourceCode,
   MMSDKQuickStartHostedLinks,
 } from '../../../utils/IBmaps'
-import {
-  PRODUCTS,
-  LANGS_EMBEDDED_WALLETS,
-  LANGS_METAMASK_SDK,
-  LANGS_DELEGATION_TOOLKIT,
-  EMBEDDED_WALLETS,
-  DELEGATION_TOOLKIT,
-} from './choices'
+import { PRODUCTS, LANGS_EMBEDDED_WALLETS, LANGS_METAMASK_SDK, EMBEDDED_WALLETS } from './choices'
 
 import highlight from './highlight'
 import EWAndroid from './embedded-wallets/android'
@@ -28,8 +19,6 @@ import EWReact from './embedded-wallets/react'
 import EWVue from './embedded-wallets/vue'
 import MMReact from './metamask-sdk/react'
 import MMNextjs from './metamask-sdk/nextjs'
-import DTKReact from './delegation-toolkit/react'
-import DTKNextjs from './delegation-toolkit/nextjs'
 
 const frameworks = {
   EW_ANGULAR: EWAngular,
@@ -42,16 +31,12 @@ const frameworks = {
   EW_FLUTTER: EWFlutter,
   MMSDK_REACT: MMReact,
   MMSDK_NEXTJS: MMNextjs,
-  DTK_REACT: DTKReact,
-  DTK_NEXTJS: DTKNextjs,
 }
 
 // Helper function to map framework choice to framework key based on product
 const getFrameworkKey = (product: string, framework: string): string => {
   if (product === EMBEDDED_WALLETS) {
     return `EW_${framework}`
-  } else if (product === DELEGATION_TOOLKIT) {
-    return `DTK_${framework}`
   } else {
     return `MMSDK_${framework}`
   }
@@ -89,9 +74,6 @@ const builder: IntegrationBuilder = {
     if (finalValues.product === EMBEDDED_WALLETS) {
       frameworkChoices = LANGS_EMBEDDED_WALLETS
       frameworkDefault = LANGS_EMBEDDED_WALLETS[0].key
-    } else if (finalValues.product === DELEGATION_TOOLKIT) {
-      frameworkChoices = LANGS_DELEGATION_TOOLKIT
-      frameworkDefault = LANGS_DELEGATION_TOOLKIT[0].key
     } else {
       frameworkChoices = LANGS_METAMASK_SDK
       frameworkDefault = LANGS_METAMASK_SDK[0].key
@@ -121,9 +103,6 @@ const builder: IntegrationBuilder = {
     if (finalValues.product === EMBEDDED_WALLETS) {
       sourceCodeLink = EWQuickStartSourceCode[finalValues.framework]
       embedLink = EWQuickStartHostedLinks[finalValues.framework]
-    } else if (finalValues.product === DELEGATION_TOOLKIT) {
-      sourceCodeLink = DTKQuickStartSourceCode[finalValues.framework]
-      embedLink = DTKQuickStartHostedLinks[finalValues.framework]
     } else {
       sourceCodeLink = MMSDKQuickStartSourceCode[finalValues.framework]
       embedLink = MMSDKQuickStartHostedLinks[finalValues.framework]
