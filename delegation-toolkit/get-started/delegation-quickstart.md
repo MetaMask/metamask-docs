@@ -48,7 +48,7 @@ const bundlerClient = createBundlerClient({
 
 ### 3. Create a delegator account
 
-Create an account to represent Alice, the delegator who will set up the delegation.
+Create an account to represent Alice, the delegator who will create a delegation.
 The delegator must be a [smart account](../how-to/create-smart-account/index.md).
 
 This example configures a [Hybrid](../concepts/smart-accounts.md#hybrid-smart-account) smart account,
@@ -96,7 +96,7 @@ const delegateSmartAccount = await toMetaMaskSmartAccount({
 
 ### 5. Create a delegation
 
-[Create a root delegation](../how-to/create-delegation/index.md#create-a-root-delegation) from Alice to Bob.
+[Create a delegation](../how-to/create-delegation/index.md) from Alice to Bob.
 
 This example passes an empty `caveats` array, which means Bob can perform any action on Alice's behalf. We recommend [restricting the delegation](../how-to/create-delegation/restrict-delegation.md) by adding caveat enforcers.
 For example, Alice can delegate the ability to sepnd her USDC to Bob, limiting the amount to 100 USDC.
@@ -166,3 +166,8 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   maxPriorityFeePerGas: 1n,
 })
 ```
+
+:::note
+If Bob's account (the delegate account) is an externally owned account (EOA) instead of a smart account,
+see [how to redeem the delegation with an EOA](../how-to/redeem-delegation.md#redeem-with-an-eoa).
+:::
