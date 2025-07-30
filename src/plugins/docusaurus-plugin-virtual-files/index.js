@@ -74,14 +74,14 @@ module.exports = (context, options) => ({
     const files = await createData("files.json", JSON.stringify(content));
     console.log('📄 Created files.json data:', files);
 
-    const routePath = "/playground";
+    const routePath = "/quickstart";
     console.log(`🛣️ Adding route at path: ${routePath}`);
-    console.log(`📍 Component path: @site/src/pages/playground`);
+    console.log(`📍 Component path: @site/src/pages/quickstart`);
 
     addRoute({
       path: routePath,
       exact: true,
-      component: "@site/src/pages/playground",
+      component: "@site/src/pages/quickstart",
       modules: {
         files,
       },

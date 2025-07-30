@@ -151,7 +151,7 @@ const config = {
             '**/_*/**',
             '**/*.test.{js,jsx,ts,tsx}',
             '**/__tests__/**',
-            '**/playground/**',  // Exclude playground directory from pages plugin
+            '**/quickstart/**',  // Exclude quickstart directory from pages plugin
           ],
           mdxPageComponent: '@theme/MDXPage',
           remarkPlugins: [npm2yarnPlugin],
@@ -379,8 +379,8 @@ const config = {
             ],
           },
           {
-            label: 'Playground',
-            to: '/playground',
+            label: 'Quick Start',
+            to: '/quickstart',
             position: 'left',
           },
           {

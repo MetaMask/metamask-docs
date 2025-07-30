@@ -14,8 +14,8 @@ export default function Home(): JSX.Element {
         title={siteConfig.title}
         description="Build with the world's leading self-custodial crypto wallet."
         button={{
-          label: 'Playground',
-          href: '/playground',
+          label: 'Quick Start',
+          href: '/quickstart',
           icon: 'arrow-right',
         }}
       />
