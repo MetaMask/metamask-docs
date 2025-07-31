@@ -1,28 +1,27 @@
-- `userOperation`: (object) - The user operation object containing the following fields:
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+<TabItem value="v0.7" label="v0.7 and v0.8 user operation">
+
+- `userOperation`: The user operation object containing the following fields:
+
   - `sender`: (string) - The address of the account making the operation.
-  - `nonce`: (string) - The account nonce.
-  - `factory`: (string) [_optional_] - The factory contract address that will deploy the smart account
-      if it doesn't exist yet.
+  - `nonce`: (string) - Unique identifier for the request from this sender. This includes the key and sequence number.
+  - `factory`: (string) [_optional_] - The factory contract address that will deploy the smart account if it doesn't exist yet.
   - `factoryData`: (string) [_optional_] - The data passed to the factory contract to deploy the smart account.
-  - `callData`: (string) - The data to pass to the sender during the main execution call.
+  - `callData`: (string) [_optional_] - The data to pass to the sender during the main execution call.
   - `callGasLimit`: (string) - The amount of gas to allocate the main execution call.
   - `verificationGasLimit`: (string) - The amount of gas to allocate for the verification step.
-  - `preVerificationGas`: (string) - The amount of gas to pay for to compensate the bundler for
-      pre-verification execution and `calldata`.
+  - `preVerificationGas`: (string) - The amount of gas to pay for to compensate the bundler for pre-verification execution and `calldata`.
   - `maxFeePerGas`: (string) - Maximum fee per gas, in wei, the sender is willing to pay per gas.
-  - `maxPriorityFeePerGas`: (string) - Maximum fee, in wei, the sender is willing to pay per gas above
-      the base fee.
+  - `maxPriorityFeePerGas`: (string) - Maximum fee, in wei, the sender is willing to pay per gas above the base fee.
   - `paymaster`: (string) [_optional_] - Address of paymaster sponsoring the transaction, or `null` if none.
-  - `paymasterVerificationGasLimit`: (string) [_optional_] - The amount of gas to allocate for the
-      verification step of the paymaster, or `null` if no paymaster.
-  - `paymasterPostOpGasLimit`: (string) [_optional_] - The amount of gas to allocate for the
-      post-operation step of the paymaster, or `null` if no paymaster.
-  - `paymasterData`: (string) [_optional_] - The data to pass to the paymaster during the verification
-      step, or `null` if no paymaster.
-  - `signature`: (string) - The signature data. For gas estimation, this can be a dummy signature. For example,
-      `0xfffffffffffffffffffffffffffffff0000000000000000000000000000000007aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1c`
-  - `eip7702Auth`: (object) [_optional_] - The EIP-7702 authorization data. This can be a dummy authorization
-      for estimations:
+  - `paymasterVerificationGasLimit`: (string) [_optional_] - The amount of gas to allocate for the verification step of the paymaster, or `null` if no paymaster.
+  - `paymasterPostOpGasLimit`: (string) [_optional_] - The amount of gas to allocate for the post-operation step of the paymaster, or `null` if no paymaster.
+  - `paymasterData`: (string) [_optional_] - The data to pass to the paymaster during the verification step, or `null` if no paymaster.
+  - `signature`: (string) - The signature data. For gas estimation, this can be a dummy signature.
+  - `eip7702Auth`: (object) [_optional_] - The EIP-7702 authorization data. This can be a dummy authorization for estimations. `SignedAuthorization Type`:
     - `address`: (string) - The contract address for the authorization.
     - `chainId`: (string) - The chain ID.
     - `nonce`: (string) - The nonce.
@@ -31,15 +30,48 @@
     - `v`: (string) - The v component of the signature.
     - `yParity`: (string) - The y-parity value.
 
-- `entryPoint`: (string) - The entry point contract address (`0x0000000071727De22E5E9d8BAf0edAc6f37da032`).
+- `entryPoint`: (string) - The EntryPoint contract address (`0x0000000071727De22E5E9d8BAf0edAc6f37da032`).
 
-- `stateOverrides`: (object) [_optional_] - State overrides to apply for the simulation:
-  - Each key is an address.
-  - Each value is an object that can contain:
-    - `balance`: (string) [_optional_] - The balance to set for the address.
-    - `nonce`: (string) [_optional_] - The nonce to set for the address.
-    - `code`: (string) [_optional_] - The code to set for the address.
-    - `state`: (object) [_optional_] - Complete state to set, where each key is a 32-byte hex storage
-        slot and each value is a 32-byte hex value.
-    - `stateDiff`: (object) [_optional_] - State differences to apply, where each key is a 32-byte hex
-        storage slot and each value is a 32-byte hex value.
+- `stateOverrides`: (object) [_optional_] - State overrides to apply for the simulation. Each key is an address, and each value is an object that can contain:
+  - `balance`: (string) [_optional_] - The balance to set for the address.
+  - `nonce`: (string) [_optional_] - The nonce to set for the address.
+  - `code`: (string) [_optional_] - The code to set for the address.
+  - `state`: (object) [_optional_] - Complete state to set, where each key is a 32-byte hex storage slot and each value is a 32-byte hex value.
+  - `stateDiff`: (object) [_optional_] - State differences to apply, where each key is a 32-byte hex storage slot and each value is a 32-byte hex value.
+
+</TabItem>
+<TabItem value="v0.6" label="v0.6 user operation">
+
+- `userOperation`: The user operation object containing the following fields:
+
+  - `sender`: (string) - The address of the account making the operation.
+  - `nonce`: (string) - Unique identifier for the request from this sender.
+  - `initCode`: (string) - The initialization code for the smart account if it doesn't exist yet.
+  - `callData`: (string) [_optional_] - The data to pass to the sender during the main execution call.
+  - `callGasLimit`: (string) - The amount of gas to allocate the main execution call.
+  - `verificationGasLimit`: (string) - The amount of gas to allocate for the verification step.
+  - `preVerificationGas`: (string) - The amount of gas to pay for to compensate the bundler for pre-verification execution and `calldata`.
+  - `maxFeePerGas`: (string) - Maximum fee per gas, in wei, the sender is willing to pay per gas.
+  - `maxPriorityFeePerGas`: (string) - Maximum fee, in wei, the sender is willing to pay per gas above the base fee.
+  - `paymasterAndData`: (string) - The address of the paymaster contract and the data that will be passed to it.
+  - `signature`: (string) - The signature data. For gas estimation, this can be a dummy signature.
+  - `eip7702Auth`: (object) [_optional_] - The EIP-7702 authorization data. This can be a dummy authorization for estimations. `SignedAuthorization Type`:
+    - `address`: (string) - The contract address for the authorization.
+    - `chainId`: (string) - The chain ID.
+    - `nonce`: (string) - The nonce.
+    - `r`: (string) - The r component of the signature.
+    - `s`: (string) - The s component of the signature.
+    - `v`: (string) - The v component of the signature.
+    - `yParity`: (string) - The y-parity value.
+
+- `entryPoint`: (string) - The EntryPoint contract address (`0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789`).
+
+- `stateOverrides`: (object) [_optional_] - State overrides to apply for the simulation. Each key is an address, and each value is an object that can contain:
+  - `balance`: (string) [_optional_] - The balance to set for the address.
+  - `nonce`: (string) [_optional_] - The nonce to set for the address.
+  - `code`: (string) [_optional_] - The code to set for the address.
+  - `state`: (object) [_optional_] - Complete state to set, where each key is a 32-byte hex storage slot and each value is a 32-byte hex value.
+  - `stateDiff`: (object) [_optional_] - State differences to apply, where each key is a 32-byte hex storage slot and each value is a 32-byte hex value.
+
+</TabItem>
+</Tabs>
