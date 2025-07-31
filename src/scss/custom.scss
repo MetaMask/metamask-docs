@@ -25,7 +25,7 @@
   --font-mm-sans-mono: 'MM Sans Mono', 'Andale Mono', AndaleMono, monospace;
   --font-mm-sans-variable: 'MM Sans Variable', Arial, 'Helvetica Neue', Helvetica, sans-serif;
   --font-mm-centra: 'MM Centra No1', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-  --font-mm-euclid: 'Euclid Circular B', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-mm-geist: 'Geist', Arial, 'Helvetica Neue', Helvetica, sans-serif;
   --ifm-color-primary: var(--developer-purple);
   --ifm-color-primary-dark: var(--developer-purple-dark);
   --ifm-color-primary-darker: var(--institution-purple-dark-2);
@@ -75,7 +75,7 @@
 
   --ifm-font-family-monospace: var(--font-mm-sans-mono);
   --ifm-heading-font-family: var(--ifm-font-family-monospace);
-  --ifm-font-family-base: var(--font-mm-euclid);
+  --ifm-font-family-base: var(--font-mm-geist);
   --font-family-sans: var(--font-mm-sans);
 
   --ifm-color-success: var(--developer-green-light);
@@ -786,7 +786,7 @@ ol {
 }
 
 div[class^='theme-announcement-bar'] {
-  font-family: var(--font-mm-euclid);
+  font-family: var(--font-mm-geist);
   font-size: 1.4rem;
   padding: 1rem 2rem;
   text-align: center;
