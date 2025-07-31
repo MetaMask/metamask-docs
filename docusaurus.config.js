@@ -21,6 +21,9 @@ const embedDropdown = fs.readFileSync('./src/components/NavDropdown/EmbedMetaMas
 const extendDropdown = fs.readFileSync('./src/components/NavDropdown/ExtendScale.html', 'utf-8')
 const npm2yarnPlugin = [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
 /** @type {import('@docusaurus/types').Config} */
+const siteUrl = 'https://docs.metamask.io'
+const baseUrl = process.env.DEST || '/'
+const fullUrl = new URL(baseUrl, siteUrl).toString()
 const config = {
   title: 'MetaMask developer documentation',
   // tagline: '',
@@ -28,7 +31,59 @@ const config = {
   baseUrl: process.env.DEST || '/', // overwritten in github action for staging / latest
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/metamask-fox.svg',
+  favicon: 'img/favicons/favicon-96x96.png',
+
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '96x96',
+        href: 'img/favicons/favicon-96x96.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '192x192',
+        href: 'img/favicons/web-app-manifest-192x192.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '512x512',
+        href: 'img/favicons/web-app-manifest-512x512.png',
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: 'img/favicons/apple-touch-icon.png',
+      },
+    },
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: `
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "url": "${fullUrl}",
+      "logo": "${new URL('img/favicons/favicon-96x96.png', fullUrl).toString()}"
+    }
+  `,
+    },
+  ],
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.

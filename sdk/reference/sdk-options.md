@@ -120,28 +120,6 @@ MetaMask displays this metadata in the connection modal to help users identify a
 connection request.
 :::
 
-### `defaultReadOnlyChainId`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-defaultReadOnlyChainId: <number or hexadecimal string>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-defaultReadOnlyChainId: "0x1"
-```
-
-</TabItem>
-</Tabs>
-
-Enables sending read-only RPC requests to this chain ID before the user connects to MetaMask.
-The value is automatically updated to the chain ID used in MetaMask once connected.
-
 ### `enableAnalytics`
 
 <Tabs>

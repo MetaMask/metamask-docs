@@ -56,7 +56,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
     }
   ],
   maxFeePerGas,
-  maxPriortyFeePerGas
+  maxPriorityFeePerGas
 });
 ```
 
@@ -134,7 +134,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   ],
   // remove-start
 -  maxFeePerGas,
--  maxPriortyFeePerGas
+-  maxPriorityFeePerGas
   // remove-end
   // add-next-line
 +  ...fee
