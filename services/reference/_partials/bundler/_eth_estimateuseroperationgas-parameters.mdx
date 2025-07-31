@@ -21,7 +21,8 @@ import TabItem from "@theme/TabItem"
   - `paymasterPostOpGasLimit`: (string) [_optional_] - The amount of gas to allocate for the post-operation step of the paymaster, or `null` if no paymaster.
   - `paymasterData`: (string) [_optional_] - The data to pass to the paymaster during the verification step, or `null` if no paymaster.
   - `signature`: (string) - The signature data. For gas estimation, this can be a dummy signature.
-  - `eip7702Auth`: (object) [_optional_] - The EIP-7702 authorization data. This can be a dummy authorization for estimations. `SignedAuthorization Type`:
+  - `eip7702Auth`: (object) [_optional_] - The EIP-7702 authorization data. This can be a dummy authorization
+      for estimations:
     - `address`: (string) - The contract address for the authorization.
     - `chainId`: (string) - The chain ID.
     - `nonce`: (string) - The nonce.
@@ -55,7 +56,8 @@ import TabItem from "@theme/TabItem"
   - `maxPriorityFeePerGas`: (string) - Maximum fee, in wei, the sender is willing to pay per gas above the base fee.
   - `paymasterAndData`: (string) - The address of the paymaster contract and the data that will be passed to it.
   - `signature`: (string) - The signature data. For gas estimation, this can be a dummy signature.
-  - `eip7702Auth`: (object) [_optional_] - The EIP-7702 authorization data. This can be a dummy authorization for estimations. `SignedAuthorization Type`:
+  - `eip7702Auth`: (object) [_optional_] - The EIP-7702 authorization data. This can be a dummy authorization
+      for estimations:
     - `address`: (string) - The contract address for the authorization.
     - `chainId`: (string) - The chain ID.
     - `nonce`: (string) - The nonce.

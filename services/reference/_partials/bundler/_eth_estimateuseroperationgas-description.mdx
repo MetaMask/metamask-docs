@@ -4,7 +4,10 @@ Simulates the user operation and estimates the appropriate gas limits. Returns a
 is unsuccessful. <CreditCost network="bundler" method="eth_estimateUserOperationGas" />
 
 :::tip
-You can use `stateOverrides` to estimate the gas cost even if the sender has no funds.
-However, if the operation is sent onchain when the sender has no balance, it will revert during
-the call phase due to lack of funds.
+- You can use `stateOverrides` to estimate the gas cost even if the sender has no funds.
+    However, if the operation is sent onchain when the sender has no balance, it will revert during
+    the call phase due to lack of funds.
+
+- You can include a dummy signature for the `signature` field to estimate the gas cost. For example:
+    `0xfffffffffffffffffffffffffffffff0000000000000000000000000000000007aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1c`
 :::
