@@ -1,0 +1,84 @@
+---
+title: "getSignaturesForAddress"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getSignaturesForAddress`
+
+Returns signatures for confirmed transactions that include the specified address in the `accountKeys` list. <CreditCost network="solana" method="getSignaturesForAddress" />
+Results are returned in reverse chronological order, starting from the provided signature or the most recent confirmed block.
+
+## Parameters
+
+- `address`: (string) _[required]_ - The `base-58` encoded public key of the account to query.
+
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `minContextSlot`: _[optional]_ - The minimum slot to use for the query.
+    - `limit`: (number) _[optional]_ - The maximum number of signatures to return (between `1` and `1000`).
+        The default is `1000`.
+    - `before`: (string) _[optional]_ - Starts searching backward from the specified transaction signature.
+        If not provided, the search begins from the most recent confirmed block.
+    - `until`: (string) _[optional]_ - The signature to end the query at (if found before reaching `limit`).
+
+## Returns
+
+`result` - An object with the following fields:
+
+- `blockTime` - The estimated production time, as Unix timestamp (seconds since the Unix epoch). `null` if not available.
+- `confirmationStatus` - The transaction's cluster confirmation status. The status can be `processed`, `confirmed`, or `finalized`.
+- `err` - Error code if the transaction failed, or `null` if the transaction succeeds.
+- `memo` - The memo associated with the transaction, or `null` if no memo is present.
+- `signature` - The `base58` encoded signature of the transaction.
+- `slot` - The slot number in which the transaction was confirmed.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getSignaturesForAddress", "params": ["Vote111111111111111111111111111111111111111", {"limit": 1}]}'
+  ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": [
+      {
+        "blockTime": 1744177112,
+        "confirmationStatus": "finalized",
+        "err": null,
+        "memo": null,
+        "signature": "2QYQGurkeT9CwdMTnMNTETbqwU4NiLoB8kqA4KxVUu4vV1BWxw79YfzWAWpPduqA2zmxgbunyrPZtCbDR7LCmTZr",
+        "slot": 373019515
+      }
+    ],
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

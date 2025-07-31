@@ -1,0 +1,138 @@
+---
+title: "getTokenAccountsByOwner"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getTokenAccountsByOwner`
+
+Retrieves all SPL token accounts for the specified token owner. <CreditCost network="solana" method="getTokenAccountsByOwner" />
+
+## Parameters
+
+- `address`: (string) _[required]_ - The `base58` encoded public key of the account owner to query.
+- `accountDetails`: (object) _[required]_ - An object containing one the following fields:
+    - `mint`: (string) _[optional]_ - The `base58` encoded public key of the mint account.
+    - `programId`: (string) _[optional]_ - The `base58` encoded public key of the token program that owns the account.
+- `config`: (object) _[optional]_  - Configuration object with the following options:
+    - `commitment`: (string) _[optional]_  - The commitment level to use for the query. The default is `finalized`. Possible values are:
+        - `finalized` - Queries the most recent block confirmed by a super majority of the cluster as having
+            reached maximum lockout, meaning the cluster has recognized this block as finalized.
+        - `confirmed` - Queries the most recent block that has been voted on by a super majority of the cluster.
+        - `processed` - Queries its most recent block. The block may still be skipped by the cluster.
+    - `encoding`: (string) _[optional]_ - The encoding format to use. Can be one of `base58`, `base64`, `base64+zstd`,
+        or `jsonParsed`
+    - `dataSlice`: (object) _[optional]_ - A slice of the account data to return. Only available for `base58`, `base64`,
+        or `base64+zstd` encoding. This is an object with two properties:
+        - `offset` - The starting byte offset of the slice.
+        - `length` - The length of the slice in bytes.
+    - `minContextSlot`: _[optional]_ - The minimum slot to use for the query.
+
+## Returns
+
+`result` - An array of objects with the following fields:
+
+- `context` - An object containing the following keys:
+    - `slot` - The slot number of the block that was queried.
+    - `apiVersion` - The API version used for the query.
+- `value` - An object with the following fields:
+    - `pubkey` - The `base58` encoded public key of the account.
+    - `account` - An object containing the address used to store assets:
+        - `data` - An object containing state data associated with the account, either as
+            encoded binary data or in JSON format:
+            - `program` The program that manages the token.
+            - `parsed` - An array of parsed instructions that were executed in the block's transactions:
+                - `info` - An array of objects that provide additional details about the transactions in the block:
+                    - `tokenAmount` - The balance of the token in the account.
+                        - `amount` - The raw total token supply without decimals, a string representation of a u64 integer.
+                        - `decimals` - An integer value representing the number of decimal places used by the token.
+                        - `uiAmount` - The total token supply using mint-prescribed decimals (DEPRECATED).
+                        - `uiAmountString` - The total token supply as a string using mint-prescribed decimals.
+                    - `delegate` - The public address of the delegate from which the account tokens are to be retrieved encoded as base-58 string.
+                    - `delegateAmount` The configuration object with the following fields:
+                        - `amount` - The raw total token supply without decimals, a string representation of a u64 integer.
+                        - `decimals` - An integer value representing the number of decimal places used by the token.
+                        - `uiAmount` - The total token supply using mint-prescribed decimals (DEPRECATED).
+                        - `uiAmountString` - The total token supply as a string using mint-prescribed decimals.
+                    - `isNative` - A boolean value indicating whether the token is a native token of the Solana blockchain.
+                    - `mint` - Provides information about the creation of new tokens.
+                    - `owner` - The base-58 encoded Pubkey of the program this account has been assigned to.
+                    - `state` - The current state of the token account.
+                - `type` - The type of the block. It can be used to differentiate between regular blocks and special blocks such as snapshot or transaction confirmation blocks.
+            - `space` - The amount of storage space required to store the token account.
+        - `executable` - A boolean indicating whether the account is executable.
+        - `lamports` - The number of lamports in the account.
+        - `owner` - The public key of the program that owns the account.
+        - `rentEpoch` - The epoch in which the account will next be due for rent.
+        - `space` - The size of the account data in bytes.
+
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getTokenAccountsByOwner", "params": ["A1TMhSGzQxMr1TboBKtgixKz1sS6REASMxPo1qsyTSJd", {"programId":"TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"}, {"encoding": "jsonParsed"}]}'
+    ```
+
+    </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "context": { "apiVersion": "2.0.15", "slot": 341197933 },
+      "value": [
+        {
+          "pubkey": "BGocb4GEpbTFm8UFV2VsDSaBXHELPfAXrvd4vtt8QWrA",
+          "account": {
+            "data": {
+              "program": "spl-token",
+              "parsed": {
+                "info": {
+                  "isNative": false,
+                  "mint": "2cHr7QS3xfuSV8wdxo3ztuF4xbiarF6Nrgx3qpx3HzXR",
+                  "owner": "A1TMhSGzQxMr1TboBKtgixKz1sS6REASMxPo1qsyTSJd",
+                  "state": "initialized",
+                  "tokenAmount": {
+                    "amount": "420000000000000",
+                    "decimals": 6,
+                    "uiAmount": 420000000.0,
+                    "uiAmountString": "420000000"
+                  }
+                },
+                "type": "account"
+              },
+              "space": 165
+            },
+            "executable": false,
+            "lamports": 2039280,
+            "owner": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+            "rentEpoch": 18446744073709551615,
+            "space": 165
+          }
+        }
+      ]
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>
