@@ -23,6 +23,7 @@ Access to archive data is automatically enabled on the following supported netwo
  |Polygon |Amoy   |
  |Arbitrum|       |
  |Celo    |       |
+ |Sei     |       |
 
 Infura provides access to [full nodes](#full-nodes)
 and [archive nodes](#archive-nodes). 
