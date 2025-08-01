@@ -4,7 +4,7 @@ sidebar_position: 3
 sidebar_label: Delegation quickstart
 ---
 
-# Delegation Toolkit quickstart
+# Delegation quickstart
 
 This page demonstrates how to get started quickly with [delegations](../concepts/delegation.md).
 Delegation is the ability for a [MetaMask smart account](../concepts/smart-accounts.md) to grant permission to another account to perform executions on their behalf.
@@ -96,7 +96,9 @@ const delegateSmartAccount = await toMetaMaskSmartAccount({
 
 ### 5. Create a delegation
 
-[Create a delegation](../how-to/create-delegation/index.md) from Alice to Bob.
+[Create a root delegation](../how-to/create-delegation/index.md#create-a-root-delegation) from Alice to Bob.
+A root delegation is a delegation that doesn't derive its authority from another delegation.
+Alice is delegating her own authority away, as opposed to *redelegating* permissions she received from a previous delegation.
 
 This example passes an empty `caveats` array, which means Bob can perform any action on Alice's behalf. We recommend [restricting the delegation](../how-to/create-delegation/restrict-delegation.md) by adding caveat enforcers.
 For example, Alice can delegate the ability to sepnd her USDC to Bob, limiting the amount to 100 USDC.
