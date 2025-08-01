@@ -27,7 +27,7 @@ Upon installation, you'll be asked the following prompts:
   vite-react
 ? Pick a template: (Use arrow keys)
 ❯ MetaMask Smart Accounts Starter
-  MetaMask Smart Accounts &amp; Delegation Starter
+  MetaMask Smart Accounts & Delegation Starter
   Experimental: ERC7715 Permissions starter
 ? Pick a package manager: (Use arrow keys)
 ❯ npm 
