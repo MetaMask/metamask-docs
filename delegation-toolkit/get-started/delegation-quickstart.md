@@ -6,8 +6,7 @@ sidebar_label: Delegation quickstart
 
 # Delegation quickstart
 
-This page demonstrates how to get started quickly with [delegations](../concepts/delegation.md).
-Delegation is the ability for a [MetaMask smart account](../concepts/smart-accounts.md) to grant permission to another account to perform executions on their behalf.
+[Delegation](../concepts/delegation.md) is the ability for a [MetaMask smart account](../concepts/smart-accounts.md) to grant permission to another account to perform executions on their behalf.
 
 In this quickstart, you will create a *delegator account* (the account that grants the permission) and *delegate account* (the account that receives the permission), and complete the delegation lifecycle (create, sign, and redeem a delegation).
 
