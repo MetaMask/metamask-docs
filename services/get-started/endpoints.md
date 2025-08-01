@@ -151,6 +151,13 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Mainnet | JSON-RPC over HTTPS     | `https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Sepolia | JSON-RPC over HTTPS     | `https://scroll-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 
+## Sei
+
+| Network | Description             | URL                                                   |
+|---------|-------------------------|-------------------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS     | `https://sei-mainnet.infura.io/v3/<YOUR-API-KEY>`     |
+| Testnet | JSON-RPC over HTTPS     | `https://sei-testnet.infura.io/v3/<YOUR-API-KEY>`     |
+
 ## Starknet
 
 | Network           | Description         | URL                                                    |
