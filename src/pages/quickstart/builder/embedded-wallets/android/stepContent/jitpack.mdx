@@ -1,0 +1,14 @@
+### Add Jitpack Repository
+
+In your project-level `build.gradle` or `settings.gradle` file, add the JitPack repository.
+
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" } // <-- Add this line
+    }
+}
+```
