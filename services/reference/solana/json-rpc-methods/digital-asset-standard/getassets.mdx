@@ -1,0 +1,325 @@
+---
+title: "getAssets"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getAssets`
+
+Returns the metadata information of multiple compressed or standard assets. <CreditCost network="solana" method="getAssets" />
+
+## Parameters
+
+- `ids`: (array of strings) _[required]_ - The `base58` encoded public keys of the assets to query.
+- `config`: (object) _[optional]_ - Optional flags to return additional information about the asset:
+  - `showFungible`: (boolean) - Whether to return the `token_info` object about the asset.
+  - `showCollectionMetadata`: (boolean) - Whether to return the collection metadata.
+
+## Returns
+
+`result` - An array of objects, where each object contains the following fields:
+
+- `interface` - The interface type of the asset. Return types include: `V1_NFT`, `V1_PRINT`, `LEGACY_NFT`, `V2_NFT`, `FungibleAsset`, `FungibleToken`, `Custom`, `Identity`, `Executable`, `ProgrammableNFT`.
+- `id` - The ID of the asset.
+- `content` - Metadata and content information:
+  - `$schema` - The schema URI.
+  - `json_uri` - The URI pointing to the asset's JSON metadata.
+  - `files` - List of associated files with `uri`, `mime`, and optional `contexts`.
+  - `metadata` - Metadata fields:
+    - `name` - The name of the asset.
+    - `symbol` - The symbol of the asset.
+    - `description` - A description of the asset.
+    - `attributes` - List of attributes with `trait_type` and `value`.
+    - `token_standard` - The token standard of the asset.
+- `ownership` - An object containing the ownership details:
+  - `owner` - The owner's public key.
+  - `frozen` - Whether the asset is frozen.
+  - `delegated` - Whether the asset is delegated.
+  - `delegate` - The delegate's public key.
+  - `ownership_model` - The ownership model, for example `single` or `token`.
+- `compression` - An object containing the asset compression details:
+  - `eligible` - Whether the asset is eligible for compression.
+  - `compressed` - Whether the asset is compressed.
+  - `data_hash` - The data hash of the asset.
+  - `creator_hash` - The creator hash of the asset.
+  - `asset_hash` - The asset hash.
+  - `tree` - The Merkle tree ID.
+  - `seq` - The sequence number.
+  - `leaf_id` - The leaf ID.
+- `royalty` - An object containing the royalty details:
+  - `royalty_model` - The royalty model (`creators`, `fanout`, or `single`).
+  - `target` - The target address for royalties.
+  - `percent` - The royalty percentage.
+  - `basis_points` - The royalty in basis points.
+  - `primary_sale_happened` - Whether the primary sale has occurred.
+  - `locked` - Whether the royalty is locked.
+- `creators` - List of creators:
+  - `address` - The creator's public key.
+  - `share` - The creator's share percentage.
+  - `verified` - Whether the creator is verified.
+- `grouping` - Grouping details:
+  - `group_key` - The group key (for example, `collection`).
+  - `group_value` - The group value.
+- `uses` - An object containing the usage details:
+  - `use_method` - The usage method (`burn`, `multiple`, or `single`).
+  - `remaining` - The remaining uses.
+  - `total` - The total uses.
+- `supply` - Supply details:
+  - `print_max_supply` - The maximum supply for prints.
+  - `print_current_supply` - The current supply for prints.
+  - `edition_nonce` - The edition nonce.
+- `mutable` - Whether the asset is mutable.
+- `burnt` - Whether the asset is burnt.
+- `token_info` - Additional token info which is returned via the `showFungible` flag:
+  - `supply` - The supply of the asset.
+  - `decimals` - The decimals supported by the asset.
+  - `token_program` - The token program of the asset.
+  - `mint_authority` - The mint authority of the asset.
+  - `freeze_authority` - The freeze authority of the asset.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "getAssets",
+      "params": [["GEciJX32EwG7DeHrXgosvpDAgjiuPo3uSEUAfJPLoSBD", "83astBRguLMdt2h5U1Tpdq5tjFoJ6noeGwaY3mDLVcri"]]
+    }'
+    ```
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": [
+      {
+        "interface": "Custom",
+        "id": "GEciJX32EwG7DeHrXgosvpDAgjiuPo3uSEUAfJPLoSBD",
+        "content": {
+          "$schema": "https://schema.metaplex.com/nft1.0.json",
+          "json_uri": "https://arweave.net/I657C0VaPHIN7G4iL8Lr_8nctJhoIecFIyzlMCVF6IQ",
+          "files": [
+            {
+              "uri": "https://arweave.net/IxZAe2W4quFYdtae3d_NFZ8kAAcledOkK6_C7H352es",
+              "mime": "image/png"
+            },
+            {
+              "uri": "https://arweave.net/IxZAe2W4quFYdtae3d_NFZ8kAAcledOkK6_C7H352es?ext=png",
+              "mime": "image/png"
+            }
+          ],
+          "metadata": {
+            "attributes": [
+              {
+                "value": "Green",
+                "trait_type": "Background"
+              },
+              ...
+              {
+                "value": 2463,
+                "trait_type": "sequence",
+                "display_type": "number"
+              }
+            ],
+            "description": "Deep in the heart of Dingus Forest echoes the sleepless cries of a troop of 10,000 apes. These aren’t just regular apes, however. These are degenerate apes.",
+            "name": "Degen Ape #2463",
+            "symbol": "DAPE"
+          },
+          "links": {
+            "image": "https://arweave.net/IxZAe2W4quFYdtae3d_NFZ8kAAcledOkK6_C7H352es",
+            "external_url": ""
+          }
+        },
+        "authorities": [
+          {
+            "address": "DC2mkgwhy56w3viNtHDjJQmc7SGu2QX785bS4aexojwX",
+            "scopes": [
+              "full"
+            ]
+          }
+        ],
+        "compression": {
+          "eligible": false,
+          "compressed": false,
+          "data_hash": "",
+          "creator_hash": "",
+          "asset_hash": "",
+          "tree": "",
+          "seq": 0,
+          "leaf_id": 0
+        },
+        "grouping": [
+          {
+            "group_key": "collection",
+            "group_value": "DSwfRF1jhhu6HpSuzaig1G19kzP73PfLZBPLofkw6fLD"
+          }
+        ],
+        "royalty": {
+          "royalty_model": "creators",
+          "target": null,
+          "percent": 0.042,
+          "basis_points": 420,
+          "primary_sale_happened": true,
+          "locked": false
+        },
+        "creators": [
+          {
+            "address": "9BKWqDHfHZh9j39xakYVMdr6hXmCLHH5VfCpeq2idU9L",
+            "share": 39,
+            "verified": false
+          },
+          {
+            "address": "9FYsKrNuEweb55Wa2jaj8wTKYDBvuCG3huhakEj96iN9",
+            "share": 25,
+            "verified": false
+          },
+          {
+            "address": "HNGVuL5kqjDehw7KR63w9gxow32sX6xzRNgLb8GkbwCM",
+            "share": 25,
+            "verified": false
+          },
+          {
+            "address": "7FzXBBPjzrNJbm9MrZKZcyvP3ojVeYPUG2XkBPVZvuBu",
+            "share": 10,
+            "verified": false
+          },
+          {
+            "address": "DC2mkgwhy56w3viNtHDjJQmc7SGu2QX785bS4aexojwX",
+            "share": 1,
+            "verified": true
+          }
+        ],
+        "ownership": {
+          "frozen": false,
+          "delegated": false,
+          "delegate": null,
+          "ownership_model": "single",
+          "owner": "1BWutmTvYPwDtmw9abTkS4Ssr8no61spGAvW1X6NDix"
+        },
+        "supply": {
+          "print_max_supply": 0,
+          "print_current_supply": 0,
+          "edition_nonce": 255
+        },
+        "mutable": false,
+        "burnt": false
+      },
+      {
+        "interface": "ProgrammableNFT",
+        "id": "exMUf3JuFQMBUc3p6osuqJRFQWr9wgQWBGiuzXmHJTa",
+        "content": {
+          "$schema": "https://schema.metaplex.com/nft1.0.json",
+          "json_uri": "https://arweave.net/4yDL8qbv-j58hjv3imAnC_nP-2VKmjy7bNMNPsdUDZQ",
+          "files": [
+            {
+              "uri": "https://arweave.net/qAr3txiC4QwJk5Na9_0bJbEiPlUeRvVDH4-YzOALK44",
+              "mime": "image/png"
+            }
+          ],
+          "metadata": {
+            "attributes": [
+              {
+                "value": "Cream",
+                "trait_type": "Background"
+              },
+              ...
+              {
+                "value": "Hooded Cardigan",
+                "trait_type": "Clothes"
+              }
+            ],
+            "description": "Okay Bears is a culture shift. A clean collection of 10,000 diverse bears building a virtuous community that will transcend the internet into the real world.",
+            "name": "Okay Bear #6261",
+            "symbol": "OKB",
+            "token_standard": "ProgrammableNonFungible"
+          },
+          "links": {
+            "external_url": "https://www.okaybears.com/",
+            "image": "https://arweave.net/qAr3txiC4QwJk5Na9_0bJbEiPlUeRvVDH4-YzOALK44"
+          }
+        },
+        "authorities": [
+          {
+            "address": "4zj22pu8yRyenFHwLmue28CqVmGFgVQt5FmVvwdP5fLa",
+            "scopes": [
+              "full"
+            ]
+          }
+        ],
+        "compression": {
+          "eligible": false,
+          "compressed": false,
+          "data_hash": "",
+          "creator_hash": "",
+          "asset_hash": "",
+          "tree": "",
+          "seq": 0,
+          "leaf_id": 0
+        },
+        "grouping": [
+          {
+            "group_key": "collection",
+            "group_value": "3saAedkM9o5g1u5DCqsuMZuC4GRqPB4TuMkvSsSVvGQ3"
+          }
+        ],
+        "royalty": {
+          "royalty_model": "creators",
+          "target": null,
+          "percent": 0.05,
+          "basis_points": 500,
+          "primary_sale_happened": true,
+          "locked": false
+        },
+        "creators": [
+          {
+            "address": "3xVDoLaecZwXXtN59o6T3Gfxwjcgf8Hc9RfoqBn995P9",
+            "share": 0,
+            "verified": true
+          },
+          {
+            "address": "7zL7HVn85F5yFT6XM3BsJcQF7PBcNE7R2BT5GyfunpKe",
+            "share": 100,
+            "verified": false
+          }
+        ],
+        "ownership": {
+          "frozen": true,
+          "delegated": false,
+          "delegate": null,
+          "ownership_model": "single",
+          "owner": "1BWutmTvYPwDtmw9abTkS4Ssr8no61spGAvW1X6NDix"
+        },
+        "supply": {
+          "print_max_supply": 0,
+          "print_current_supply": 0,
+          "edition_nonce": 254
+        },
+        "mutable": true,
+        "burnt": false
+      }
+    ],
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>
