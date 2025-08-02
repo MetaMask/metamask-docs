@@ -127,7 +127,7 @@ if (accountMetadata?.length !== 0) {
     data: accountMetadata[0].factoryData,
   });
   
-  // You should wait for transaction to be successfully executed.
+  // You should wait for the transaction to be successfully executed.
   // You can use the TransactionReceipt.status to verify the state.
   await publicClient.waitForTransactionReceipt( { hash });
 }
@@ -155,7 +155,7 @@ export const publicClient = createPublicClient({
   transport: http()
 });
 
-// Your session account for requesting and redeeming should be same.
+// Your session account for requesting and redeeming should be the same.
 const privateKey = "0x...";
 const account = privateKeyToAccount(privateKey);
 

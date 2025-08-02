@@ -34,7 +34,7 @@ To configure a Hybrid smart account, provide the following parameters:
 
 :::note
 You can set all `p256` parameters to empty arrays to configure no WebAuthn signer.
-However, we recommend configuring at least one signer for account recoverability.
+However, we recommend configuring at least one signer for account recovery.
 :::
 
 For a Hybrid smart account, you can configure the following types of signatories:

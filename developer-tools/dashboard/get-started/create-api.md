@@ -7,7 +7,7 @@ sidebar_position: 2
 
 :::important API key restrictions
 
-Based on your plan, Infura allows for the following amount of API keys:
+Based on your plan, Infura allows for the following number of API keys:
 
 - Free plan - Allows one API key.
 - Developer plan - Allows up to five API keys.

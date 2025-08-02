@@ -83,7 +83,7 @@ const caveats = createCaveatBuilder(delegatorSmartAccount.environment, {
 
 ## `createDelegation`
 
-Creates a delegation with specific delegate.
+Creates a delegation with a specific delegate.
 
 ### Parameters
 
