@@ -51,7 +51,7 @@
     "@types/react": "^18.3.3",
     "clsx": "^2.1.1",
     "docusaurus-plugin-sass": "^0.2.5",
-    "dotenv": "^16.4.7",
+    "dotenv": "^17.2.1",
     "ethers": "^6.13.5",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
