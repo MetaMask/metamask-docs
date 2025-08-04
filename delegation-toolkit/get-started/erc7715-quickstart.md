@@ -1,5 +1,5 @@
 ---
-description: Learn how to use ERC-7715 to request permisisons.
+description: Learn how to use ERC-7715 to request permissions.
 sidebar_position: 5
 sidebar_label: ERC-7715 quickstart
 ---
