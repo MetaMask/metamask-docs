@@ -52,6 +52,7 @@ const sidebar = {
         'reference/llm-prompt',
         'reference/supported-platforms',
         'reference/sdk-options',
+        'reference/sdk-methods',
       ],
     },
   ],

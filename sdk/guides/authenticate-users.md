@@ -164,7 +164,7 @@ Display connect and disconnect buttons in HTML:
 
 ### Connect and sign
 
-If you're not using Wagmi, you can access MetaMask SDK's `connectAndSign` method,
+If you're not using Wagmi, you can access MetaMask SDK's [`connectAndSign`](../reference/sdk-methods.md#connectandsign) method,
 which requests wallet access and signs the message in a single user interaction.
 For example:
 
