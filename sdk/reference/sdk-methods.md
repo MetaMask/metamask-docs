@@ -90,6 +90,22 @@ if (provider) {
 }
 ```
 
+## `isInitialized`
+
+Checks if the SDK has been initialized.
+
+### Returns
+
+`True` if the SDK is initialized, `false` otherwise.
+
+### Example
+
+```javascript
+if (sdk.isInitialized()) {
+  console.log("SDK is ready to use");
+}
+```
+
 ## `terminate`
 
 Terminates the MetaMask connection, switching back to the injected provider if connected via extension.
