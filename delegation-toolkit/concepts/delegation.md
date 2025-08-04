@@ -6,7 +6,7 @@ sidebar_position: 2
 # Delegation
 
 *Delegation* is the ability for a [MetaMask smart account](smart-accounts.md) to grant permission to another smart account
-or externally owned account (EOA) to perform specific executions on their behalf, under defined rules and restrictions.
+or externally owned account (EOA) to perform specific executions on its behalf, under defined rules and restrictions.
 The account that grants the permission is called the *delegator account*, while the account that receives the permission
 is called the *delegate account*.
 
