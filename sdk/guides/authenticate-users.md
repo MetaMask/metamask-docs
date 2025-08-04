@@ -1,6 +1,7 @@
 ---
 description: Authenticate users with the SDK in your Wagmi or Vanilla JavaScript dapp.
-toc_max_heading_level: 2
+keywords: [SDK, Wagmi, JavaScript, authenticate, connect, sign, accounts, wallet, dapp]
+toc_max_heading_level: 3
 ---
 
 # Authenticate users
@@ -11,6 +12,7 @@ With the SDK, you can:
 
 - **Connect users' wallets** to your dapp.
 - **Access user accounts** (addresses).
+- [**Connect and sign**](#connect-and-sign) in a single user interaction.
 - **Handle connection states** (connected/disconnected).
 - **Listen for account changes** in real time.
 - **Manage wallet sessions** (connect/disconnect).
@@ -125,6 +127,15 @@ async function connectWallet() {
   }
 }
 
+// Disconnect wallet
+async function disconnectWallet() {
+  try {
+    await MMSDK.terminate()
+  } catch (err) {
+    console.error("Error with disconnecting:", err)
+  }
+}
+
 // Handle account changes
 provider.on("accountsChanged", (accounts) => {
   if (accounts.length === 0) {
@@ -150,6 +161,43 @@ Display connect and disconnect buttons in HTML:
   </button>
 </div>
 ```
+
+### Connect and sign
+
+If you're not using Wagmi, you can access MetaMask SDK's `connectAndSign` method,
+which requests wallet access and signs the message in a single user interaction.
+For example:
+
+```js
+import { MetaMaskSDK } from "@metamask/sdk"
+
+const MMSDK = new MetaMaskSDK()
+const provider = MMSDK.getProvider()
+
+async function handleConnectAndSign() {
+  try {
+    const signature = await MMSDK.connectAndSign({ msg: "Hello in one go!" })
+    console.log("Signature:", signature)
+  } catch (err) {
+    console.error("Error with connectAndSign:", err)
+  }
+}
+
+document
+  .getElementById("connectSignBtn")
+  .addEventListener("click", handleConnectAndSign)
+```
+
+The following HTML displays a **Connect & Sign** button:
+
+```html
+<button id="connectSignBtn">Connect & Sign</button>
+```
+
+:::tip
+This one-step flow is unique to MetaMask SDK's `connectAndSign` method.
+It's not part of Wagmi or other wallet libraries.
+:::
 
 ## Best practices
 
