@@ -195,7 +195,7 @@ ZKsync Era WebSockets are supported on Mainnet only.
 
 ## Gas API
 
-The Gas REST API supports multiple networks.
+The [Gas REST API](../reference/gas-api/index.md) supports multiple networks.
 
 Specify the chain ID in your request to interact with the relevant network.
 

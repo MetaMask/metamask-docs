@@ -23,6 +23,7 @@ based on historical data.
 **Path**:
 
 - `chainId`: `string` - ID of the chain to query.
+  See the [list of supported chain IDs](../../../get-started/endpoints.md#gas-api).
 
 ## Returns
 
