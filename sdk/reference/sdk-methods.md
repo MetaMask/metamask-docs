@@ -50,9 +50,9 @@ Connects to MetaMask and executes a specific [JSON-RPC method](/wallet/reference
 
 ### Parameters
 
-- `rpc`: `object` - The RPC method to execute
-  - `method`: `string` - The RPC method name
-  - `params`: `any[]` - The parameters for the RPC method
+- `rpc`: `object` - The RPC method to execute.
+  - `method`: `string` - The RPC method name.
+  - `params`: `any[]` - The parameters for the RPC method.
 
 ### Returns
 
