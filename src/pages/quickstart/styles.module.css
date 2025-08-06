@@ -565,7 +565,6 @@ input:checked+.slider:before {
     scroll-behavior: smooth;
     scrollbar-width: thin;
     scroll-padding-top: 0;
-    scroll-snap-type: y proximity;
   }
 
   .rightCol {
@@ -680,7 +679,6 @@ input:checked+.slider:before {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  scroll-snap-align: start;
   position: relative;
   padding: 1rem 0;
   /* Consistent padding */
@@ -1041,5 +1039,320 @@ input:checked+.slider:before {
 
   .hybridMediaStep {
     border-radius: 6px;
+  }
+}
+
+/* Hybrid Tab Layout Styles */
+.hybridTabContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--ifm-background-surface-color);
+  border-radius: 12px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  overflow: hidden;
+}
+
+.tabNavigation {
+  display: flex;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 1px 0 0 var(--ifm-color-emphasis-200);
+}
+
+.tabButton {
+  flex: 1;
+  padding: 14px 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ifm-color-content-secondary);
+  transition: all 0.15s ease-in-out;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.tabButton:hover {
+  background: var(--ifm-hover-overlay);
+  color: var(--ifm-color-content);
+}
+
+.tabButtonActive {
+  background: transparent;
+  color: var(--ifm-color-primary);
+  position: relative;
+}
+
+.tabButtonActive::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--ifm-color-primary);
+  border-radius: 3px 3px 0 0;
+}
+
+.tabButtonActive:hover {
+  background: var(--ifm-hover-overlay);
+  color: var(--ifm-color-primary);
+}
+
+.tabContent {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Ensure both tab contents have identical sizing */
+.tabContent>* {
+  width: 100% !important;
+  height: 100% !important;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+  max-width: none !important;
+  max-height: none !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.tabContent .hybridMediaStep {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0;
+  border: none;
+  flex: 1;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+  overflow: hidden;
+}
+
+.tabContent .hybridCodeView {
+  width: 100% !important;
+  height: 100% !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+  overflow: hidden;
+}
+
+.tabContent .hybridCodeView>* {
+  width: 100% !important;
+  height: 100%;
+  flex: 1;
+  max-width: none !important;
+}
+
+/* Force light background for code blocks in hybrid tabs */
+.tabContent .hybridCodeView .prism-code {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView pre {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView code {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Override any dark theme code styling in hybrid tabs */
+.tabContent .hybridCodeView [class*="language-"] {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView [class*="language-"] pre {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView [class*="language-"] code {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Override the IntegrationBuilderCodeView container background */
+.tabContent .hybridCodeView .container {
+  background: var(--ifm-background-surface-color) !important;
+}
+
+.tabContent .hybridCodeView .body {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Ensure code text has proper contrast on light background */
+.tabContent .hybridCodeView .token {
+  color: var(--ifm-color-content) !important;
+}
+
+/* Override any CSS variables that might affect code block styling */
+.tabContent .hybridCodeView {
+  --prism-background-color: var(--ifm-color-emphasis-100) !important;
+  --ifm-pre-background: var(--ifm-color-emphasis-100) !important;
+  --w3a-ib-code-tab-background-color: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Override header styling to match light theme */
+.tabContent .hybridCodeView .header {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Target specific scrollbar backgrounds */
+.tabContent .hybridCodeView ::-webkit-scrollbar {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Keep tab items styling intact */
+.tabContent .hybridCodeView .tabs__item {
+  background: transparent !important;
+}
+
+.tabContent .hybridCodeView .tabs__item--active {
+  background: var(--ifm-color-emphasis-300) !important;
+}
+
+/* Additional CodeBlock overrides */
+.tabContent .hybridCodeView [class*="codeBlockContainer"] {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView [class*="codeBlock"] {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Comprehensive override for all possible code-related backgrounds */
+.tabContent .hybridCodeView div[class*="code"],
+.tabContent .hybridCodeView div[class*="prism"],
+.tabContent .hybridCodeView div[class*="theme"] {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Override any MediaStep internal constraints in hybrid tabs */
+.tabContent .hybridMediaStep .mediaContainer {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.tabContent .hybridMediaStep .mediaContent {
+  width: 100% !important;
+  max-width: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  flex: 1 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2rem !important;
+  background: var(--ifm-background-surface-color) !important;
+}
+
+/* Force exact same layout for both tab types */
+.hybridTabContainer .tabContent>div {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Override media element constraints in hybrid tabs */
+.tabContent .hybridMediaStep .youtubePlayer,
+.tabContent .hybridMediaStep .videoPlayer {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  aspect-ratio: unset !important;
+  height: 100% !important;
+  min-height: unset !important;
+  max-height: 100% !important;
+}
+
+/* Special styling for images in hybrid tabs */
+.tabContent .hybridMediaStep .imageDisplay {
+  width: auto !important;
+  max-width: 90% !important;
+  height: auto !important;
+  max-height: 80% !important;
+  margin: auto !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Caption styling for hybrid tabs */
+.tabContent .hybridMediaStep .mediaCaption {
+  margin-top: 1rem !important;
+  padding: 0.75rem 1rem !important;
+  background: var(--ifm-color-emphasis-100) !important;
+  border-radius: 8px !important;
+  max-width: 90% !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.tabContent .hybridMediaStep .mediaCaption p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: var(--ifm-color-content-secondary) !important;
+  line-height: 1.4 !important;
+}
+
+/* Responsive styles for tabs */
+@media (max-width: 768px) {
+  .tabButton {
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .hybridTabContainer {
+    border-radius: 8px;
+  }
+
+  .tabButtonActive::after {
+    height: 2px;
+  }
+
+  /* Mobile image adjustments */
+  .tabContent .hybridMediaStep .mediaContent {
+    padding: 1rem !important;
+  }
+
+  .tabContent .hybridMediaStep .imageDisplay {
+    max-width: 95% !important;
+    max-height: 85% !important;
+    border-radius: 8px !important;
   }
 }

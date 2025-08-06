@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
 export interface IntegrationStep {
+  title?: string // Optional title for the step
   content?: ReactNode // Make optional for media-only steps
   contentType?: 'text' | 'media' | 'hybrid' // Default: 'text'
   mediaContent?: {

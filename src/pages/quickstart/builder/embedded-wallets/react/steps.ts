@@ -20,14 +20,6 @@ export default function getSteps(steps, files, replacementAggregator) {
       ),
     },
     {
-      ...STEPS.reactBundlerIssues,
-      pointer: replacementAggregator.highlightRange(
-        IBfileLinks.EW_REACT_INDEX_HTML,
-        files[IBfileLinks.EW_REACT_INDEX_HTML],
-        'Bundler Issues'
-      ),
-    },
-    {
       ...STEPS.registerApp,
       pointer: replacementAggregator.highlightRange(
         IBfileLinks.EW_REACT_WEB3AUTHCONTEXT_TSX,
@@ -81,6 +73,14 @@ export default function getSteps(steps, files, replacementAggregator) {
         IBfileLinks.EW_REACT_APP_TSX,
         files[IBfileLinks.EW_REACT_APP_TSX],
         'Logout'
+      ),
+    },
+    {
+      ...STEPS.reactBundlerIssues,
+      pointer: replacementAggregator.highlightRange(
+        IBfileLinks.EW_REACT_INDEX_HTML,
+        files[IBfileLinks.EW_REACT_INDEX_HTML],
+        'Bundler Issues'
       ),
     }
   )

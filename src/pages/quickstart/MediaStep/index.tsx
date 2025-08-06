@@ -10,10 +10,9 @@ interface MediaStepProps {
 }
 
 const MediaStep: React.FC<MediaStepProps> = ({ step, className, isVisible = true }) => {
-  const [isLoading, setIsLoading] = useState(false); // Start with false for lazy loading
+  const [isLoading, setIsLoading] = useState(true); // Start loading immediately
   const [hasError, setHasError] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [shouldLoad, setShouldLoad] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
 
@@ -47,42 +46,18 @@ const MediaStep: React.FC<MediaStepProps> = ({ step, className, isVisible = true
     setIsPlaying(false);
   }, []);
 
-  const startLoading = useCallback(() => {
-    if (!shouldLoad) {
-      setShouldLoad(true);
-      setIsLoading(true);
-      setHasError(false);
-      setIsPlaying(false);
-    }
-  }, [shouldLoad]);
 
-  // Lazy loading effect - only load when visible
-  useEffect(() => {
-    if (isVisible && !shouldLoad) {
-      // Auto-load YouTube videos (they're lightweight), but require manual loading for local videos
-      if (type === 'youtube') {
-        const timer = setTimeout(() => {
-          startLoading();
-        }, 200); // Small delay for YouTube
-        return () => clearTimeout(timer);
-      }
-      // Local videos and images still require manual loading
-    }
-  }, [isVisible, shouldLoad, startLoading, type]);
+
+
 
   // Reset when URL changes
   useEffect(() => {
-    setShouldLoad(false);
-    setIsLoading(false);
+    setIsLoading(true);
     setHasError(false);
     setIsPlaying(false);
   }, [url]);
 
   const renderMedia = () => {
-    // Don't render media until shouldLoad is true
-    if (!shouldLoad) {
-      return null;
-    }
 
     if (type === 'youtube') {
       const youtubeUrl = `https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&showinfo=0${autoplay ? '&autoplay=1' : ''}${muted ? '&mute=1' : ''}`;
@@ -91,7 +66,7 @@ const MediaStep: React.FC<MediaStepProps> = ({ step, className, isVisible = true
         <iframe
           className={styles.youtubePlayer}
           src={youtubeUrl}
-          title={step.title}
+          title={`${type === 'youtube' ? 'YouTube video' : 'Video'} - ${caption || 'Media content'}`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -108,12 +83,12 @@ const MediaStep: React.FC<MediaStepProps> = ({ step, className, isVisible = true
           className={styles.videoPlayer}
           src={url}
           poster={poster}
-          autoPlay={autoplay && isVisible} // Only autoplay if visible
+          autoPlay={autoplay}
           loop={loop}
           muted={muted}
           controls
           playsInline
-          preload="none" // Prevent preloading for performance
+          preload="metadata" // Load metadata immediately
           onLoadedData={handleLoad}
           onError={handleError}
           onPlay={handlePlay}
@@ -130,8 +105,8 @@ const MediaStep: React.FC<MediaStepProps> = ({ step, className, isVisible = true
           ref={imageRef}
           className={styles.imageDisplay}
           src={url}
-          alt={alt || step.title}
-          loading="lazy" // Native lazy loading
+          alt={alt || 'Image content'}
+          loading="eager" // Load immediately
           onLoad={handleLoad}
           onError={handleError}
         />
@@ -143,21 +118,7 @@ const MediaStep: React.FC<MediaStepProps> = ({ step, className, isVisible = true
 
   return (
     <div className={classNames(styles.mediaContainer, className)}>
-      {/* Placeholder State - before loading */}
-      {!shouldLoad && (
-        <div className={styles.mediaPlaceholder}>
-          <div className={styles.placeholderIcon}>
-            {type === 'youtube' ? '▶️' : type === 'video' ? '🎬' : '🖼️'}
-          </div>
-          <p>Click to load {type === 'youtube' ? 'YouTube video' : type}</p>
-          <button
-            className={styles.loadButton}
-            onClick={startLoading}
-          >
-            Load {type === 'youtube' ? 'YouTube Video' : type}
-          </button>
-        </div>
-      )}
+
 
       {/* Loading State */}
       {isLoading && !hasError && (
@@ -175,9 +136,8 @@ const MediaStep: React.FC<MediaStepProps> = ({ step, className, isVisible = true
           <button
             className={styles.retryButton}
             onClick={() => {
-              setShouldLoad(false);
-              // Reset and try again
-              setTimeout(() => startLoading(), 100);
+              setIsLoading(true);
+              setHasError(false);
             }}
           >
             Retry
@@ -188,21 +148,21 @@ const MediaStep: React.FC<MediaStepProps> = ({ step, className, isVisible = true
       {/* Media Content */}
       <div
         className={classNames(styles.mediaContent, {
-          [styles.hidden]: isLoading || hasError || !shouldLoad,
+          [styles.hidden]: isLoading || hasError,
           [styles.playing]: isPlaying
         })}
       >
         {renderMedia()}
 
         {/* Caption */}
-        {caption && shouldLoad && (
+        {caption && !isLoading && !hasError && (
           <div className={styles.mediaCaption}>
             <p>{caption}</p>
           </div>
         )}
 
         {/* Video Play Status Indicator */}
-        {type === 'video' && shouldLoad && (
+        {type === 'video' && !isLoading && !hasError && (
           <div className={classNames(styles.playStatus, {
             [styles.visible]: isPlaying
           })}>

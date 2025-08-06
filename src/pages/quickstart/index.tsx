@@ -227,6 +227,7 @@ export default function IntegrationBuilderPage(props: any) {
     return result;
   }, [builderOptions, files, stepIndex, showNavigationOverlay]);
   const [selectedFilename, setSelectedFilename] = useState(integration.filenames[0] || "");
+  const [activeTab, setActiveTab] = useState<'media' | 'code'>('media');
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const ref = useRef(null);
@@ -241,6 +242,13 @@ export default function IntegrationBuilderPage(props: any) {
   };
 
   const { steps } = integration;
+
+  // Reset to media tab when step changes for hybrid content
+  useEffect(() => {
+    if (steps[stepIndex]?.contentType === 'hybrid') {
+      setActiveTab('media');
+    }
+  }, [stepIndex, steps]);
 
   // Navigation handlers with smooth scrolling to exact top
   const scrollToStep = useCallback((stepElementId: string) => {
@@ -778,26 +786,50 @@ export default function IntegrationBuilderPage(props: any) {
                 isVisible={true} // Always visible when it's the active step
               />
             ) : steps[stepIndex]?.contentType === 'hybrid' ? (
-              <div className={styles.hybridContainer}>
-                <div className={styles.hybridMediaSection}>
-                  <MediaStep
-                    step={steps[stepIndex]}
-                    className={styles.hybridMediaStep}
-                    isVisible={true} // Always visible when it's the active step
-                  />
+              <div className={styles.hybridTabContainer}>
+                {/* Tab Navigation */}
+                <div className={styles.tabNavigation}>
+                  <button
+                    className={classNames(styles.tabButton, {
+                      [styles.tabButtonActive]: activeTab === 'media'
+                    })}
+                    onClick={() => setActiveTab('media')}
+                  >
+                    Media
+                  </button>
+                  <button
+                    className={classNames(styles.tabButton, {
+                      [styles.tabButtonActive]: activeTab === 'code'
+                    })}
+                    onClick={() => setActiveTab('code')}
+                  >
+                    Code
+                  </button>
                 </div>
-                <div className={styles.hybridCodeSection}>
-                  <IntegrationBuilderCodeView
-                    filenames={integration.filenames}
-                    fileContents={integration.files}
-                    highlight={
-                      steps[stepIndex]?.pointer?.filename === selectedFilename
-                        ? steps[stepIndex]?.pointer?.range
-                        : undefined
-                    }
-                    selectedFilename={selectedFilename}
-                    onClickFilename={(filename: string) => setSelectedFilename(filename)}
-                  />
+
+                {/* Tab Content */}
+                <div className={styles.tabContent}>
+                  {activeTab === 'media' ? (
+                    <MediaStep
+                      step={steps[stepIndex]}
+                      className={styles.hybridMediaStep}
+                      isVisible={true} // Always visible when it's the active step
+                    />
+                  ) : (
+                    <div className={styles.hybridCodeView}>
+                      <IntegrationBuilderCodeView
+                        filenames={integration.filenames}
+                        fileContents={integration.files}
+                        highlight={
+                          steps[stepIndex]?.pointer?.filename === selectedFilename
+                            ? steps[stepIndex]?.pointer?.range
+                            : undefined
+                        }
+                        selectedFilename={selectedFilename}
+                        onClickFilename={(filename: string) => setSelectedFilename(filename)}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             ) : (
