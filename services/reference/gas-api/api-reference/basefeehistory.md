@@ -21,7 +21,8 @@ data for a specific blockchain network.
 
 **Path**:
 
-- `chainId`: `string` - ID of the chain to query
+- `chainId`: `string` - ID of the chain to query.
+  See the [list of supported chain IDs](../../../get-started/endpoints.md#gas-api).
 
 ## Returns
 
