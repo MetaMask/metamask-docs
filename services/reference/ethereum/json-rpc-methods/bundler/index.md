@@ -6,8 +6,8 @@ description: Ethereum bundler methods
 
 Infura provides seamless integration with the Pimlico account abstraction bundler infrastructure, enabling
 developers to access ERC‑4337 smart account features.
-Infura transparently routes supported smart‑account methods to the Pimlico backend, allowing
-teams to construct, validate, simulate, and submit user‑operations without needing to directly call
+Infura transparently routes supported smart account methods to the Pimlico backend, allowing
+teams to construct, validate, simulate, and submit user operations without needing to directly call
 Pimlico endpoints or manage bundler infrastructure.
 
 :::info
@@ -29,7 +29,7 @@ The following bundler methods are supported on Ethereum Mainnet and Sepolia:
 
 ## Method EntryPoints
 
-The bundler supports calling multiple EntryPoint versions (v0.6 vs v0.7/v0.8) through the same set of
+The bundler supports calling multiple EntryPoint versions (v0.6 and v0.7/v0.8) through the same set of
 RPC methods (for example, `eth_sendUserOperation` and `eth_estimateUserOperationGas`, etc.), allowing
 it to handle both older and modern smart account schemes.
 
