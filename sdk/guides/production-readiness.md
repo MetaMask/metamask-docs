@@ -1,5 +1,6 @@
 ---
 description: MetaMask-specific production readiness checklist for dapps using MetaMask SDK.
+keywords: [SDK, production, readiness, checklist, compatibility, errors, dapp]
 toc_max_heading_level: 2
 ---
 

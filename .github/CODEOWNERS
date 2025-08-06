@@ -2,11 +2,7 @@
 # so the listed codeowners apply only if there is no later match.
 
 # Default owner for all other files
-* @MetaMask/dashboard @MetaMask/tech-writers
-
-# All other Markdown files
-*.md @MetaMask/tech-writers
-*.mdx @MetaMask/tech-writers
+* @MetaMask/dashboard @MetaMask/tech-writers @MetaMask/delegation-devrel @MetaMask/embedded-wallets-devrel @MetaMask/sdk-devrel
 
 # Developer tools documentation
 /developer-tools/ @MetaMask/tech-writers

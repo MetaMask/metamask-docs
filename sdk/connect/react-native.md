@@ -176,7 +176,7 @@ For example:
 import { useSDK } from "@metamask/sdk-react"
 
 function App() {
-  const { connect, disconnect, account, chainId, ethereum } = useSDK()
+  const { connect, terminate, account, chainId, ethereum } = useSDK()
 
   // Connect to MetaMask
   const connectWallet = async () => {
@@ -196,7 +196,7 @@ function App() {
 
   // Disconnect wallet
   const disconnectWallet = async () => {
-    await disconnect()
+    await terminate()
   }
 
   return (

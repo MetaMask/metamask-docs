@@ -419,6 +419,18 @@
       "destination": "/wallet/how-to/use-non-evm-networks/"
     },
     {
+      "source": "/sdk/guides/advanced/connect-and-sign/",
+      "destination": "/sdk/guides/authenticate-users/"
+    },
+    {
+      "source": "/sdk/guides/advanced/batch-requests/",
+      "destination": "/sdk/guides/batch-requests/"
+    },
+    {
+      "source": "/sdk/guides/advanced/production-readiness/",
+      "destination": "/sdk/guides/production-readiness/"
+    },
+    {
       "source": "/guide/snaps/",
       "destination": "/snaps/"
     },

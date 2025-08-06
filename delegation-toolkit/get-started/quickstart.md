@@ -1,12 +1,12 @@
 ---
 description: Get started quickly with the MetaMask Smart Accounts
 sidebar_position: 2
-sidebar_label: Quickstart
+sidebar_label: Smart account quickstart
 ---
 
 # MetaMask Smart Accounts quickstart
 
-This page demonstrates how to get started quickly with MetaMask Smart Accounts, and send the first user operation.
+This page demonstrates how to get started quickly with [MetaMask Smart Accounts](../concepts/smart-accounts.md), and send the first user operation.
 
 ## Prerequisites
 
@@ -45,7 +45,8 @@ const bundlerClient = createBundlerClient({
 
 [Create a MetaMask smart account](../how-to/create-smart-account/index.md) to send the first user operation.
 
-This example configures a [Hybrid](../how-to/create-smart-account/configure-accounts-signers.md#configure-a-hybrid-smart-account) smart account:
+This example configures a [Hybrid](../concepts/smart-accounts.md#hybrid-smart-account) smart account,
+which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers:
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit";
@@ -61,6 +62,10 @@ const smartAccount = await toMetaMaskSmartAccount({
   signatory: { account },
 });
 ```
+
+:::note
+See [how to configure other smart account types](../how-to/create-smart-account/configure-accounts-signers.md).
+:::
 
 ### 4. Send a user operation
 

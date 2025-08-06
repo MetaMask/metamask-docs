@@ -18,6 +18,7 @@ blockchain network. <CreditCost network="gasApi" method="suggestedGasFees" />
 **Path**:
 
 - `chainId`: `string` - ID of the chain to query.
+  See the [list of supported chain IDs](../../../get-started/endpoints.md#gas-api).
 
 ## Returns
 
