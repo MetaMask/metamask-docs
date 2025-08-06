@@ -1,5 +1,6 @@
 ---
 description: Manage networks with the SDK in your Wagmi or Vanilla JavaScript dapp.
+keywords: [SDK, Wagmi, JavaScript, detect, switch, add, network, networks, dapp]
 toc_max_heading_level: 2
 ---
 

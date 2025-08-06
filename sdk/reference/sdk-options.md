@@ -1,5 +1,6 @@
 ---
 description: Configuration options reference for MetaMask SDK.
+keywords: [SDK, configure, configuration, option, options, dapp]
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,5 +1,6 @@
 ---
-description: Use deeplinks to connect to users' mobile wallets.
+description: Use deeplinks to connect to users' MetaMask mobile wallets.
+keywords: [SDK, deeplink, deeplinks, mobile, dapp]
 toc_max_heading_level: 2
 ---
 
