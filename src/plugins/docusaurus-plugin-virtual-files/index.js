@@ -21,13 +21,13 @@ async function fetchHostedFile(filename) {
   }
 }
 
-const IBfileLinks = require("../../utils/IBfileLinks.json");
+const qsFileLinks = require("../../utils/qs-file-links.json");
 module.exports = (context, options) => ({
   name: "docusaurus-plugin-virtual-files",
   async loadContent() {
     console.log('🔄 Virtual files plugin: loadContent called');
     const dir = path.resolve(context.siteDir, options.rootDir);
-    const filenames = Object.values(IBfileLinks);
+    const filenames = Object.values(qsFileLinks);
     const fileContents = {};
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });

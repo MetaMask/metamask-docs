@@ -5,7 +5,7 @@ import {
   EWQuickStartSourceCode,
   MMSDKQuickStartSourceCode,
   MMSDKQuickStartHostedLinks,
-} from '../../../utils/IBmaps'
+} from '../../../utils/qs-map'
 import { PRODUCTS, LANGS_EMBEDDED_WALLETS, LANGS_METAMASK_SDK, EMBEDDED_WALLETS } from './choices'
 
 import highlight from './highlight'
