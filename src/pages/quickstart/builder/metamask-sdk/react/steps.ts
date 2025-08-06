@@ -4,6 +4,10 @@ import STEPS from './stepContent'
 export default function getSteps(steps, files, replacementAggregator) {
   steps.push(
     {
+      ...STEPS.videoDemo,
+      // No pointer needed for media content
+    },
+    {
       ...STEPS.reactQuickStart,
       pointer: replacementAggregator.highlightRange(
         IBfileLinks.MMSDK_REACT_WEB3AUTHCONTEXT_TSX,

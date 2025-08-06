@@ -1,8 +1,19 @@
 import { ReactNode } from 'react'
 
 export interface IntegrationStep {
-  title: string
-  content: ReactNode
+  content?: ReactNode // Make optional for media-only steps
+  contentType?: 'text' | 'media' | 'hybrid' // Default: 'text'
+  mediaContent?: {
+    type: 'image' | 'video' | 'youtube'
+    url?: string // For images or regular videos
+    youtubeId?: string // For YouTube videos (just the video ID)
+    alt?: string
+    caption?: string
+    poster?: string // For videos
+    autoplay?: boolean
+    loop?: boolean
+    muted?: boolean
+  }
   pointer?: {
     filename: string
     variableName: string

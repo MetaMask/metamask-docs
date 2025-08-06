@@ -5,15 +5,26 @@ import { IntegrationStep } from "./interfaces";
 
 interface Module {
   default: React.FC<any>;
-  frontMatter: Record<string, any>;
+  frontMatter?: Record<string, any>;
 }
 
 export function toStep(mod: Module): IntegrationStep {
   const Component = mod.default;
-  return {
-    title: mod.frontMatter.title,
-    content: <Component />,
+  const step: IntegrationStep = {
+    content: <Component />, // Always include the MDX content
   };
+
+  // Add contentType if specified
+  if (mod.frontMatter?.contentType) {
+    step.contentType = mod.frontMatter.contentType;
+  }
+
+  // Add mediaContent if specified
+  if (mod.frontMatter?.mediaContent) {
+    step.mediaContent = mod.frontMatter.mediaContent;
+  }
+
+  return step;
 }
 
 export function toSteps<T extends { [key in keyof T]: Module }>(mods: T) {

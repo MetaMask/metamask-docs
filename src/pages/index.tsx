@@ -14,7 +14,7 @@ export default function Home(): JSX.Element {
         title={siteConfig.title}
         description="Build with the world's leading self-custodial crypto wallet."
         button={{
-          label: 'Quick Start',
+          label: 'Get Started',
           href: '/quickstart',
           icon: 'arrow-right',
         }}
@@ -26,21 +26,21 @@ export default function Home(): JSX.Element {
         colorPalette="purple"
         cards={[
           {
-            title: 'Features',
-            description: 'Explore MetaMask features and capabilities for developers.',
-            href: '/features/',
-            buttonIcon: 'arrow-right',
-          },
-          {
-            title: 'Tutorials',
+            title: 'Guides',
             description: 'Step-by-step guides to help you build with MetaMask.',
-            href: '/tutorials/',
+            href: '/guides/',
             buttonIcon: 'arrow-right',
           },
           {
-            title: 'Quickstart',
+            title: 'Quick Start',
             description: 'Get up and running quickly with our quickstart guides.',
-            href: '/quick-start',
+            href: '/quickstart',
+            buttonIcon: 'arrow-right',
+          },
+          {
+            title: 'Faucet',
+            description: 'Access testnet tokens for development and testing purposes.',
+            href: '/developer-tools/faucet/',
             buttonIcon: 'arrow-right',
           },
         ]}
@@ -60,7 +60,7 @@ export default function Home(): JSX.Element {
           {
             title: 'Create embedded wallets',
             description: 'Onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
-            href: '/sdk',
+            href: '/embedded-wallets',
             buttonIcon: 'arrow-right',
           },
           {
@@ -79,12 +79,6 @@ export default function Home(): JSX.Element {
             title: 'Extend MetaMask\'s capabilities',
             description: 'Create a custom mini app that runs inside the MetaMask extension. Add support for custom networks, accounts types, and APIs.',
             href: '/snaps',
-            buttonIcon: 'arrow-right',
-          },
-          {
-            title: 'Get testnet tokens',
-            description: 'Access testnet tokens for development and testing purposes.',
-            href: '/faucet',
             buttonIcon: 'arrow-right',
           },
         ]}

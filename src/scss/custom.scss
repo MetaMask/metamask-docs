@@ -980,6 +980,15 @@ html {
   }
 }
 
+/* Dark mode: Use dark text on primary color for better contrast */
+[data-theme='dark'] .product-selection-menu .selected {
+  color: var(--general-black);
+
+  &:hover {
+    color: var(--general-black);
+  }
+}
+
 .product-selection-menu a div {
   font-family: var(--ifm-font-family-base);
   padding: 10px;
@@ -1078,6 +1087,18 @@ html {
       svg {
         color: var(--ifm-color-primary);
       }
+    }
+  }
+}
+
+/* Dark mode: Better contrast for SDK selection menu hover/focus */
+[data-theme='dark'] .sdk-selection-menu a:hover,
+[data-theme='dark'] .sdk-selection-menu a:focus {
+  span {
+    background-color: var(--ifm-color-primary);
+
+    svg {
+      color: var(--general-black);
     }
   }
 }

@@ -132,20 +132,20 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
         ))}
       </div>
 
-      <div className={styles.quickLinks}>
+      {/* <div className={styles.quickLinks}>
         <Heading as="h4" className={styles.quickLinksTitle}>Quick Links</Heading>
         <div className={styles.linkGrid}>
           <Link href="/sdk" className={styles.quickLink}>
-            📖 MetaMask SDK Documentation
+            📖 MetaMask SDK Docs
           </Link>
           <Link href="/wallet" className={styles.quickLink}>
-            💳 Embedded Wallets Guide
+            💳 Embedded Wallets Docs
           </Link>
           <Link href="/delegation-toolkit" className={styles.quickLink}>
             ⚡ Delegation Toolkit Docs
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

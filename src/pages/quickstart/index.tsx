@@ -18,6 +18,7 @@ import styles from "./styles.module.css";
 import { getWindowLocation } from "../../theme/URLParams";
 import { METAMASK_SDK, EMBEDDED_WALLETS } from "./builder/choices";
 import NavigationOverlay from "./NavigationOverlay";
+import MediaStep from "./MediaStep";
 
 const hasRelevantURLParams = () => {
   const url = new URL(getWindowLocation());
@@ -74,13 +75,10 @@ const StepNavigationMenu: React.FC<{
               [styles.stepMenuItemActive]: index === currentStepIndex,
               [styles.stepMenuItemCompleted]: index < currentStepIndex,
             })}
-            onClick={() => scrollToStep(`step-${index}`)}
+            onClick={() => onStepChange(index)}
           >
             <div className={styles.stepMenuNumber}>
               {index < currentStepIndex ? '✓' : index + 1}
-            </div>
-            <div className={styles.stepMenuTitle}>
-              {step.title}
             </div>
           </div>
         ))}
@@ -95,10 +93,9 @@ export default function IntegrationBuilderPage(props: any) {
   // Try different ways to access files
   const files = props.files || (props.route?.modules?.files ? JSON.parse(props.route.modules.files) : {});
 
-  const [showNavigationOverlay, setShowNavigationOverlay] = useState<boolean>(!hasRelevantURLParams());
-  const [builderOptions, setBuilderOptions] = useState<Record<string, string>>(
-    hasRelevantURLParams() ? getDefaultBuilderOptions() : {},
-  );
+  // Always check URL params dynamically instead of caching at init
+  const [showNavigationOverlay, setShowNavigationOverlay] = useState<boolean>(false);
+  const [builderOptions, setBuilderOptions] = useState<Record<string, string>>({});
   const [isLinkCopied, setLinkCopied] = useState<boolean>(false);
   const [IBCountdown, setIBCountdown] = useState<number>(10);
   const [builderView, setBuilderView] = useState<boolean>(true);
@@ -106,10 +103,87 @@ export default function IntegrationBuilderPage(props: any) {
   const [showPreviewModal, setShowPreviewModal] = useState<boolean>(false);
   const url = new URL(getWindowLocation());
   const [stepIndex, setStepIndex] = useState(
-    parseInt(url.searchParams.get("stepIndex") || "0", 10),
+    // Always start at step 0 when showing navigation overlay
+    hasRelevantURLParams() ? parseInt(url.searchParams.get("stepIndex") || "0", 10) : 0,
   );
   const [loading, setLoading] = useState<boolean>(false);
   const [initialLoadComplete, setInitialLoadComplete] = useState<boolean>(false);
+  const [isManualNavigation, setIsManualNavigation] = useState<boolean>(false);
+
+  // Check URL params and set initial state
+  useEffect(() => {
+    const hasParams = hasRelevantURLParams();
+
+    if (!hasParams) {
+      setShowNavigationOverlay(true);
+      setBuilderOptions({});
+      setStepIndex(0);
+
+      // Clean URL by removing any step-related params
+      const currentUrl = new URL(getWindowLocation());
+      if (currentUrl.searchParams.has('stepIndex')) {
+        currentUrl.searchParams.delete('stepIndex');
+        // eslint-disable-next-line no-restricted-globals
+        history.replaceState({}, "", currentUrl.toString());
+      }
+    } else {
+      setShowNavigationOverlay(false);
+      setBuilderOptions(getDefaultBuilderOptions());
+    }
+  }, []); // Run once on mount
+
+  // Monitor URL changes and reset to overlay if params are removed
+  useEffect(() => {
+    const checkURLAndResetIfNeeded = () => {
+      const hasParams = hasRelevantURLParams();
+
+      if (!hasParams) {
+        setShowNavigationOverlay(true);
+        setBuilderOptions({});
+        setStepIndex(0);
+      }
+    };
+
+    // Check on popstate (back/forward navigation)
+    const handlePopState = () => {
+      checkURLAndResetIfNeeded();
+    };
+
+    // Check on pushstate/replacestate (programmatic navigation)
+    const originalPushState = history.pushState;
+    const originalReplaceState = history.replaceState;
+
+    history.pushState = function (...args) {
+      originalPushState.apply(history, args);
+      setTimeout(checkURLAndResetIfNeeded, 0);
+    };
+
+    history.replaceState = function (...args) {
+      originalReplaceState.apply(history, args);
+      setTimeout(checkURLAndResetIfNeeded, 0);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      history.pushState = originalPushState;
+      history.replaceState = originalReplaceState;
+    };
+  }, []);
+
+  // Simplified URL change detection - only when actually needed
+  useEffect(() => {
+    // Only check if we're showing builder (not overlay) and detect if params disappear
+    if (!showNavigationOverlay) {
+      const hasParams = hasRelevantURLParams();
+      if (!hasParams) {
+        setShowNavigationOverlay(true);
+        setBuilderOptions({});
+        setStepIndex(0);
+      }
+    }
+  }, [showNavigationOverlay]); // Only when overlay state changes
 
   // Handle navigation overlay selection
   const handleNavigationSelect = (product: string) => {
@@ -118,8 +192,9 @@ export default function IntegrationBuilderPage(props: any) {
     };
     setBuilderOptions(newBuilderOptions);
     setShowNavigationOverlay(false);
+    setStepIndex(0); // Always start at step 0 when selecting from overlay
 
-    // Update URL with selected options
+    // Update URL with selected options and reset to step 0
     // eslint-disable-next-line no-restricted-globals
     history.pushState({}, "", getURLFromBuilderOptions(newBuilderOptions, 0));
   };
@@ -129,8 +204,9 @@ export default function IntegrationBuilderPage(props: any) {
     const defaultOptions = getDefaultBuilderOptions();
     setBuilderOptions(defaultOptions);
     setShowNavigationOverlay(false);
+    setStepIndex(0); // Always start at step 0 when closing overlay
 
-    // Update URL with default options
+    // Update URL with default options and reset to step 0
     // eslint-disable-next-line no-restricted-globals
     history.pushState({}, "", getURLFromBuilderOptions(defaultOptions, 0));
   };
@@ -165,27 +241,6 @@ export default function IntegrationBuilderPage(props: any) {
   };
 
   const { steps } = integration;
-
-  const onChangeStep = useCallback((index: number) => {
-    if (index >= steps.length) {
-      // eslint-disable-next-line no-param-reassign
-      index = steps.length - 1;
-    }
-    if (index < 0) {
-      // eslint-disable-next-line no-param-reassign
-      index = 0;
-    }
-    if (steps[index] && steps[index].pointer && steps[index].pointer.filename) {
-      setSelectedFilename(steps[index].pointer.filename);
-    }
-    setStepIndex(index);
-
-    // Update URL with new step index
-    const url = new URL(getWindowLocation());
-    url.searchParams.set('stepIndex', index.toString());
-    // eslint-disable-next-line no-restricted-globals
-    history.pushState({}, "", url.toString());
-  }, [steps]);
 
   // Navigation handlers with smooth scrolling to exact top
   const scrollToStep = useCallback((stepElementId: string) => {
@@ -223,6 +278,37 @@ export default function IntegrationBuilderPage(props: any) {
     }
   }, []);
 
+  const onChangeStep = useCallback((index: number) => {
+    if (index >= steps.length) {
+      // eslint-disable-next-line no-param-reassign
+      index = steps.length - 1;
+    }
+    if (index < 0) {
+      // eslint-disable-next-line no-param-reassign
+      index = 0;
+    }
+    if (steps[index] && steps[index].pointer && steps[index].pointer.filename) {
+      setSelectedFilename(steps[index].pointer.filename);
+    }
+    setStepIndex(index);
+    setIsManualNavigation(true);
+
+    // Update URL with new step index
+    const url = new URL(getWindowLocation());
+    url.searchParams.set('stepIndex', index.toString());
+    // eslint-disable-next-line no-restricted-globals
+    history.pushState({}, "", url.toString());
+
+    // Scroll to the step to ensure it's visible
+    setTimeout(() => {
+      scrollToStep(`step-${index}`);
+      // Reset manual navigation flag very quickly to not interfere with user scrolling
+      setTimeout(() => {
+        setIsManualNavigation(false);
+      }, 50); // Very short delay to only block during initial animation
+    }, 10); // Minimal delay to ensure state update is complete
+  }, [steps, scrollToStep]);
+
   const handlePreviousStep = useCallback(() => {
     if (stepIndex > 0) {
       scrollToStep(`step-${stepIndex - 1}`);
@@ -240,163 +326,50 @@ export default function IntegrationBuilderPage(props: any) {
     const stepsContainer = document.getElementById('steps-container');
     if (!stepsContainer || steps.length === 0) return;
 
-    let scrollTimeout: NodeJS.Timeout;
-    let snapTimeout: NodeJS.Timeout;
-    let isUserScrolling = false;
-    let lastScrollDirection = 'none';
-    let lastScrollTop = 0;
-
     const handleScroll = () => {
-      isUserScrolling = true;
+      if (isManualNavigation) return;
 
-      // Track actual scroll direction
-      const currentScrollTop = stepsContainer.scrollTop;
-      const actualDirection = currentScrollTop > lastScrollTop ? 'down' : currentScrollTop < lastScrollTop ? 'up' : 'none';
-      lastScrollTop = currentScrollTop;
+      // Check if scrolled to bottom first
+      const isAtBottom = stepsContainer.scrollTop + stepsContainer.clientHeight >= stepsContainer.scrollHeight - 10;
 
-      // Clear existing timeouts
-      clearTimeout(scrollTimeout);
-      clearTimeout(snapTimeout);
-
-      // Immediate scroll-spy update (faster response)
-      scrollTimeout = setTimeout(() => {
-        const containerRect = stepsContainer.getBoundingClientRect();
-        const containerCenter = containerRect.top + containerRect.height / 2;
-
-        let activeStepIndex = stepIndex;
-        let minDistance = Infinity;
-        let closestStepElement: HTMLElement | null = null;
-
-        // Check if we're at the bottom of the scroll container
-        const isAtBottom = stepsContainer.scrollTop + stepsContainer.clientHeight >= stepsContainer.scrollHeight - 50;
-
-        // If at bottom, force select the last step
-        if (isAtBottom) {
-          activeStepIndex = steps.length - 1;
-          closestStepElement = document.getElementById(`step-${steps.length - 1}`);
-          minDistance = 0;
-        } else {
-          // Find which step is at the top of the viewport (simplified for fixed heights)
-          steps.forEach((_, index) => {
-            const stepElement = document.getElementById(`step-${index}`);
-            if (stepElement) {
-              const stepRect = stepElement.getBoundingClientRect();
-              const containerTop = containerRect.top;
-
-              // Since all steps are the same height, use simple top-based detection
-              const stepDistanceFromTop = Math.abs(stepRect.top - containerTop);
-
-              // Simple visibility check - step must be at least partially visible
-              const isVisible = stepRect.bottom > containerTop && stepRect.top < containerRect.bottom;
-
-              if (isVisible && stepDistanceFromTop < minDistance) {
-                minDistance = stepDistanceFromTop;
-                activeStepIndex = index;
-                closestStepElement = stepElement;
-              }
-            }
-          });
+      if (isAtBottom) {
+        // Force last step when at bottom
+        const lastStepIndex = steps.length - 1;
+        if (stepIndex !== lastStepIndex) {
+          setStepIndex(lastStepIndex);
         }
+        return;
+      }
 
-        // Update active step if it changed, but only allow sequential progression
-        if (activeStepIndex !== stepIndex) {
-          // Detect scroll direction
-          const stepDifference = activeStepIndex - stepIndex;
-          const currentDirection = stepDifference > 0 ? 'down' : stepDifference < 0 ? 'up' : 'none';
+      // Simple scroll-spy: find which step is most visible
+      const containerRect = stepsContainer.getBoundingClientRect();
+      const containerTop = containerRect.top;
+      const containerBottom = containerRect.bottom;
 
-          // Reset direction tracking when direction changes or when starting
-          if (lastScrollDirection !== currentDirection) {
-            lastScrollDirection = currentDirection;
-          }
+      let bestStepIndex = stepIndex;
+      let maxVisibleArea = 0;
 
-          // Only allow one step forward or backward, never skip steps
-          let targetStep = stepIndex;
+      steps.forEach((_, index) => {
+        const stepElement = document.getElementById(`step-${index}`);
+        if (stepElement) {
+          const stepRect = stepElement.getBoundingClientRect();
 
-          if (stepDifference > 0) {
-            // Moving forward - only go to next step
-            targetStep = stepIndex + 1;
-          } else if (stepDifference < 0) {
-            // Moving backward - only go to previous step
-            targetStep = stepIndex - 1;
-          }
+          // Calculate visible area of this step
+          const visibleTop = Math.max(stepRect.top, containerTop);
+          const visibleBottom = Math.min(stepRect.bottom, containerBottom);
+          const visibleArea = Math.max(0, visibleBottom - visibleTop);
 
-          // Ensure target step is within bounds
-          if (targetStep >= 0 && targetStep < steps.length && targetStep !== stepIndex) {
-            onChangeStep(targetStep);
+          if (visibleArea > maxVisibleArea) {
+            maxVisibleArea = visibleArea;
+            bestStepIndex = index;
           }
         }
+      });
 
-        // Set up gentle snapping when user stops scrolling
-        snapTimeout = setTimeout(() => {
-          if (closestStepElement) {
-            // Check if this is the last step and we're near the bottom
-            const isLastStep = activeStepIndex === steps.length - 1;
-            const isAtBottom = stepsContainer.scrollTop + stepsContainer.clientHeight >= stepsContainer.scrollHeight - 50;
-
-            // For last step, snap to show it at top if not already at bottom
-            if (isLastStep && !isAtBottom && minDistance > 20) {
-              // Calculate exact position to place step at top of container
-              const containerRect = stepsContainer.getBoundingClientRect();
-              const stepRect = closestStepElement.getBoundingClientRect();
-              const scrollOffset = stepRect.top - containerRect.top + stepsContainer.scrollTop;
-
-              // Use custom easing for smoother snap
-              const startPosition = stepsContainer.scrollTop;
-              const distance = scrollOffset - startPosition;
-              const duration = Math.min(400, Math.abs(distance) * 0.5); // Quick, responsive duration
-              const startTime = performance.now();
-
-              const easeOutCubic = (t: number): number => {
-                return 1 - Math.pow(1 - t, 3);
-              };
-
-              const animateScroll = (currentTime: number) => {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const easedProgress = easeOutCubic(progress);
-
-                stepsContainer.scrollTop = startPosition + (distance * easedProgress);
-
-                if (progress < 1) {
-                  requestAnimationFrame(animateScroll);
-                }
-              };
-
-              requestAnimationFrame(animateScroll);
-            } else if (!isLastStep && minDistance > 20) {
-              // Normal snapping for non-last steps
-              const containerRect = stepsContainer.getBoundingClientRect();
-              const stepRect = closestStepElement.getBoundingClientRect();
-              const scrollOffset = stepRect.top - containerRect.top + stepsContainer.scrollTop;
-
-              const startPosition = stepsContainer.scrollTop;
-              const distance = scrollOffset - startPosition;
-              const duration = Math.min(400, Math.abs(distance) * 0.5);
-              const startTime = performance.now();
-
-              const easeOutCubic = (t: number): number => {
-                return 1 - Math.pow(1 - t, 3);
-              };
-
-              const animateScroll = (currentTime: number) => {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const easedProgress = easeOutCubic(progress);
-
-                stepsContainer.scrollTop = startPosition + (distance * easedProgress);
-
-                if (progress < 1) {
-                  requestAnimationFrame(animateScroll);
-                }
-              };
-
-              requestAnimationFrame(animateScroll);
-            }
-          }
-          isUserScrolling = false;
-        }, 300); // Consistent snapping delay for all directions
-
-      }, 30); // Fast, consistent updates for fixed-height steps
+      // Update step if it changed
+      if (bestStepIndex !== stepIndex) {
+        setStepIndex(bestStepIndex);
+      }
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -437,8 +410,6 @@ export default function IntegrationBuilderPage(props: any) {
     return () => {
       stepsContainer.removeEventListener('scroll', handleScroll);
       document.removeEventListener('keydown', handleKeyDown);
-      clearTimeout(scrollTimeout);
-      clearTimeout(snapTimeout);
     };
   }, [stepIndex, steps.length, onChangeStep, handlePreviousStep, handleNextStep]);
 
@@ -765,12 +736,12 @@ export default function IntegrationBuilderPage(props: any) {
                       id={`step-${index}`}
                       data-step-index={index}
                       onClick={() => {
-                        if (index > stepIndex) {
-                          scrollToStep(`step-${index}`);
+                        if (index !== stepIndex) {
+                          onChangeStep(index);
                         }
                       }}
                       style={{
-                        cursor: index > stepIndex ? 'pointer' : 'default'
+                        cursor: index !== stepIndex ? 'pointer' : 'default'
                       }}
                     >
                       <div className={styles.stepContainer}>
@@ -799,17 +770,50 @@ export default function IntegrationBuilderPage(props: any) {
             </MDXProvider>
           </div>
           <div className={styles.rightCol}>
-            <IntegrationBuilderCodeView
-              filenames={integration.filenames}
-              fileContents={integration.files}
-              highlight={
-                steps[stepIndex]?.pointer?.filename === selectedFilename
-                  ? steps[stepIndex]?.pointer?.range
-                  : undefined
-              }
-              selectedFilename={selectedFilename}
-              onClickFilename={(filename: string) => setSelectedFilename(filename)}
-            />
+            {/* Conditionally render media or code based on step content type */}
+            {steps[stepIndex]?.contentType === 'media' ? (
+              <MediaStep
+                step={steps[stepIndex]}
+                className={styles.mediaStepContainer}
+                isVisible={true} // Always visible when it's the active step
+              />
+            ) : steps[stepIndex]?.contentType === 'hybrid' ? (
+              <div className={styles.hybridContainer}>
+                <div className={styles.hybridMediaSection}>
+                  <MediaStep
+                    step={steps[stepIndex]}
+                    className={styles.hybridMediaStep}
+                    isVisible={true} // Always visible when it's the active step
+                  />
+                </div>
+                <div className={styles.hybridCodeSection}>
+                  <IntegrationBuilderCodeView
+                    filenames={integration.filenames}
+                    fileContents={integration.files}
+                    highlight={
+                      steps[stepIndex]?.pointer?.filename === selectedFilename
+                        ? steps[stepIndex]?.pointer?.range
+                        : undefined
+                    }
+                    selectedFilename={selectedFilename}
+                    onClickFilename={(filename: string) => setSelectedFilename(filename)}
+                  />
+                </div>
+              </div>
+            ) : (
+              // Default: show code view for 'text' content type or undefined
+              <IntegrationBuilderCodeView
+                filenames={integration.filenames}
+                fileContents={integration.files}
+                highlight={
+                  steps[stepIndex]?.pointer?.filename === selectedFilename
+                    ? steps[stepIndex]?.pointer?.range
+                    : undefined
+                }
+                selectedFilename={selectedFilename}
+                onClickFilename={(filename: string) => setSelectedFilename(filename)}
+              />
+            )}
           </div>
 
           {/* Step Navigation Menu */}

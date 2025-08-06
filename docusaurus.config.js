@@ -12,7 +12,6 @@ const {
   MM_RPC_URL,
 } = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
-const learnDropdown = fs.readFileSync('./src/components/NavDropdown/Learn.html', 'utf-8')
 const productsDropdown = fs.readFileSync(
   './src/components/NavDropdown/Products.html',
   'utf-8'
@@ -365,16 +364,6 @@ const config = {
               {
                 type: 'html',
                 value: productsDropdown,
-              },
-            ],
-          },
-          {
-            type: 'dropdown',
-            label: 'Learn',
-            items: [
-              {
-                type: 'html',
-                value: learnDropdown,
               },
             ],
           },
