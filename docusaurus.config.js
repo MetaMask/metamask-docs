@@ -163,6 +163,7 @@ const config = {
   ],
   plugins: [
     ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache' }],
+    './src/plugins/docusaurus-plugin-guides',
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',
     [
@@ -371,6 +372,11 @@ const config = {
             label: 'Quick Start',
             to: '/quickstart',
             position: 'left',
+          },
+          {
+            label: "Guides",
+            to: "/guides",
+            position: "left",
           },
           {
             to: 'developer-tools/faucet/',

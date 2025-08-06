@@ -1,0 +1,474 @@
+---
+title: 'Client-Side Setup for Telegram Mini App with Web3Auth'
+image: 'guides/guides-banners/telegram-miniapp-client.png'
+description: |
+  Learn how to set up the client-side of a Telegram Mini App using Web3Auth to authenticate users and retrieve wallet details. This guide is the second part of the Telegram Mini App series.
+type: guide
+tags: [client, telegram, authentication, web3auth, ton]
+date: October 24, 2024
+author: Web3Auth Team
+---
+
+import SEO from '@site/src/components/SEO'
+import TelegramMiniAppDiagram from '@site/static/img/guides/telegram-mini-app-flow-diagram.png'
+
+<SEO
+  title="Client-Side Setup for Telegram Mini App with Web3Auth"
+  description="Learn how to set up the client-side of a Telegram Mini App using Web3Auth to authenticate users and retrieve wallet details."
+  image="https://web3auth.io/docs/guides/guides-banners/telegram-miniapp-client.png"
+  slug="/guides/telegram-miniapp-client"
+/>
+
+:::tip Live Demo
+
+Before diving into development, experience Web3Auth in action! Check out our demo Telegram Mini App:
+
+👉 **[Launch Demo Mini App](https://t.me/w3a_tg_mini_app_bot)**
+
+:::
+
+:::info Source Code
+
+You can find the full working code for this client + server example here: [**Web3Auth Telegram Mini App Example**](https://github.com/Web3Auth/web3auth-core-kit-examples/tree/main/single-factor-auth-web/sfa-web-ton-telegram-example)
+
+:::
+
+### **Objectives**
+
+In this guide, we will focus on setting up the client-side of a Telegram Mini App using Web3Auth for authentication. By the end of this guide, you will:
+
+1. Implement Web3Auth in the **client-side app** to authenticate Telegram users using the JWT tokens generated in [Part 1](/guides/telegram-miniapp-server).
+2. Retrieve wallet details (e.g., TON blockchain addresses) via Web3Auth and display them in the app.
+
+:::tip
+
+**Prerequisite**: If you haven't completed [Part 1](/guides/telegram-miniapp-server), where we set up the backend server and handled Telegram authentication, it's recommended to start from there before proceeding with this guide.
+
+:::
+
+---
+
+### **Guide Breakdown**
+
+1. **Part 1**: Set up the server-side logic to validate Telegram login data and generate JWT tokens.
+2. **Part 2 (Current Guide)**: Focuses on integrating Web3Auth into the client-side app to authenticate users and retrieve their wallet details.
+
+---
+
+### Overview
+
+In this guide, we will implement the client-side part of the Telegram Mini App. The client will handle user interaction, manage the login flow using Web3Auth, and retrieve wallet details from the TON blockchain.
+
+We'll be using the JWT token generated in [Part 1](/guides/telegram-miniapp-server) of this guide to authenticate users on the client-side and establish a session with Web3Auth to retrieve decentralized wallet information.
+
+The flow is as follows:
+
+<img
+  style={{ display: 'block', maxHeight: '800px', margin: '20px auto' }}
+  src={TelegramMiniAppDiagram}
+  alt="Telegram Mini App Flow Diagram"
+/>
+
+1. The user logs into the Telegram Mini App.
+2. The JWT token (generated from the backend) is passed to Web3Auth for authentication.
+3. Web3Auth authenticates the user and retrieves wallet details (e.g., the user's TON blockchain address).
+4. The client displays the wallet details to the user.
+
+---
+
+### **What You Will Learn:**
+
+1. Integrate Web3Auth into a client-side app to handle user authentication.
+2. Retrieve wallet details (TON blockchain) from Web3Auth.
+3. Mock Telegram environments for local development and testing.
+
+---
+
+[Follow these steps to set up your Custom Verifier with Web3Auth](/docs/authentication/custom-connections/custom-jwt#set-up-custom-jwt-connection).
+
+---
+
+### Step 1: Install Required Packages
+
+Before starting, install the required dependencies for the client-side app.
+
+```bash
+npm install @web3auth/single-factor-auth @telegram-apps/sdk-react dotenv @orbs-network/ton-access
+```
+
+#### **Brief Overview of Dependencies:**
+
+- **@web3auth/single-factor-auth**: This is the core package for using Web3Auth's Single Factor Authentication (SFA) flow, which will allow us to authenticate Telegram users and retrieve blockchain data.
+- **@telegram-apps/sdk-react**: This package is used to handle Telegram's launch parameters and mock Telegram environments for testing during development.
+- **dotenv**: Allows loading environment variables from a `.env` file, ensuring secure storage of sensitive data such as server URLs.
+- **@orbs-network/ton-access**: Provides access to the TON blockchain RPC endpoint for fetching account information and signing messages on the TON network.
+
+---
+
+### Step 2: Set Up Environment Variables
+
+Ensure that the `.env` file contains the following value:
+
+```env
+VITE_SERVER_URL=https://your-server-url.com
+```
+
+This value will be used to connect the client-side app to your backend server.
+
+---
+
+### Step 3: Import Necessary Packages and Set Up States
+
+In this step, we will import all the necessary packages for our client-side application and set up the states that will manage the login flow, user data, and TON blockchain interactions.
+
+#### Import and State Setup
+
+```tsx
+import { useEffect, useState } from "react";
+import { Web3Auth, decodeToken } from "@web3auth/single-factor-auth";
+import { CHAIN_NAMESPACES, WEB3AUTH_NETWORK } from "@web3auth/base";
+import { CommonPrivateKeyProvider } from "@web3auth/base-provider";
+import { useLaunchParams } from "@telegram-apps/sdk-react";
+import { useTelegramMock } from "./hooks/useMockTelegramInitData";
+import { getHttpEndpoint } from "@orbs-network/ton-access";
+import "./App.css";
+
+const verifier = "w3a-telegram-demo";
+const clientId = "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ";
+
+function App() {
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [web3authSfa, setWeb3authSfa] = useState<Web3Auth | null>(null);
+  const [web3AuthInitialized, setWeb3AuthInitialized] = useState(false);
+  const [userData, setUserData] = useState<any | null>(null);
+  const [tonAccountAddress, setTonAccountAddress] = useState<string | null>(null);
+  const [signedMessage, setSignedMessage] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const { initDataRaw, initData, themeParams } = useLaunchParams() || {};
+
+  useTelegramMock(); // Initialize the Telegram mock data
+```
+
+- **Explanation**: In this step, we import the necessary libraries and set up states like `isLoggingIn`, `web3authSfa`, `web3AuthInitialized`, `userData`, `tonAccountAddress`, and `signedMessage` that will manage our app's flow.
+
+---
+
+### Step 4: Initialize Web3Auth and Fetch the ID Token
+
+Now that the states are set up, let's move on to initializing **Web3Auth** and setting up the connection to our backend server to fetch the ID token generated in **[Part 1](/guides/telegram-miniapp-server)**.
+
+#### Web3Auth Initialization and Configuration
+
+```tsx
+useEffect(() => {
+  const initializeWeb3Auth = async () => {
+    try {
+      console.log('Fetching TON Testnet RPC endpoint...')
+      const testnetRpc = await getHttpEndpoint({
+        network: 'testnet',
+        protocol: 'json-rpc',
+      })
+
+      const chainConfig = {
+        chainNamespace: CHAIN_NAMESPACES.OTHER,
+        chainId: 'testnet',
+        rpcTarget: testnetRpc,
+        displayName: 'TON Testnet',
+        blockExplorerUrl: 'https://testnet.tonscan.org',
+        ticker: 'TON',
+        tickerName: 'Toncoin',
+      }
+
+      const privateKeyProvider = new CommonPrivateKeyProvider({
+        config: { chainConfig },
+      })
+
+      // Initialize Web3Auth
+      const web3authInstance = new Web3Auth({
+        clientId,
+        web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+        usePnPKey: false,
+        privateKeyProvider,
+      })
+
+      setWeb3authSfa(web3authInstance)
+
+      console.log('Initializing Web3Auth...')
+      await web3authInstance.init()
+      console.log('Web3Auth initialized.')
+
+      setWeb3AuthInitialized(true)
+    } catch (error) {
+      console.error('Error fetching TON Testnet RPC endpoint: ', error)
+    }
+  }
+
+  initializeWeb3Auth()
+}, [])
+```
+
+- **Explanation**: This block initializes Web3Auth using the **Single Factor Authentication** method. We also fetch the TON blockchain's testnet RPC endpoint, which will allow us to connect to the network and retrieve blockchain data such as the wallet address.
+
+---
+
+### Step 5: Mocking Telegram Environments for Local Development
+
+Before we proceed with connecting to Web3Auth, we need to simulate the Telegram environment in local development. We achieve this by using the `useTelegramMock()` hook.
+
+#### Mocking Telegram Environment with `useTelegramMock.ts`
+
+```tsx
+/* eslint-disable camelcase */
+import { mockTelegramEnv, parseInitData, retrieveLaunchParams } from '@telegram-apps/sdk-react'
+
+/**
+ * Mocks
+
+ Telegram environment in development mode.
+ */
+export function useTelegramMock(): void {
+  if (process.env.NODE_ENV !== 'development') return
+
+  let shouldMock: boolean
+
+  try {
+    retrieveLaunchParams()
+    shouldMock = !!sessionStorage.getItem('____mocked')
+  } catch (e) {
+    shouldMock = true
+  }
+
+  if (shouldMock) {
+    const randomId = Math.floor(Math.random() * 1000000000)
+
+    const initDataRaw = new URLSearchParams([
+      [
+        'user',
+        JSON.stringify({
+          id: randomId,
+          first_name: 'Andrew',
+          last_name: 'Rogue',
+          username: 'rogue',
+          language_code: 'en',
+          is_premium: true,
+          allows_write_to_pm: true,
+        }),
+      ],
+      ['hash', '89d6079ad6762351f38c6dbbc41bb53048019256a9443988af7a48bcad16ba31'],
+      ['auth_date', '1716922846'],
+      ['start_param', 'debug'],
+      ['chat_type', 'sender'],
+      ['chat_instance', '8428209589180549439'],
+    ]).toString()
+
+    mockTelegramEnv({
+      themeParams: {
+        accentTextColor: '#6ab2f2',
+        bgColor: '#17212b',
+        buttonColor: '#5288c1',
+        buttonTextColor: '#ffffff',
+        destructiveTextColor: '#ec3942',
+        headerBgColor: '#17212b',
+        hintColor: '#708499',
+        linkColor: '#6ab3f3',
+        secondaryBgColor: '#232e3c',
+        sectionBgColor: '#17212b',
+        sectionHeaderTextColor: '#6ab3f3',
+        subtitleTextColor: '#708499',
+        textColor: '#f5f5f5',
+      },
+      initData: parseInitData(initDataRaw),
+      initDataRaw,
+      version: '7.7',
+      platform: 'tdesktop',
+    })
+
+    sessionStorage.setItem('____mocked', '1')
+  }
+}
+```
+
+- **Explanation**: This hook mocks the Telegram environment by generating mock `initData` that mimics Telegram's launch parameters, ensuring that the app behaves as if it were running in an actual Telegram Mini App environment.
+
+:::tip **Why is Mocking Necessary?**
+
+Mocking the environment during local development ensures smooth testing. Without mocking, the Telegram SDK might throw errors or behave unexpectedly when not running within Telegram.
+
+:::
+
+---
+
+### Step 6: Connecting to Web3Auth and Fetching the ID Token
+
+Now, let's connect to Web3Auth and retrieve the ID token from our backend server, as configured in **[Part 1](/guides/telegram-miniapp-server)**.
+
+#### Connecting Web3Auth
+
+```tsx
+useEffect(() => {
+  const connectWeb3Auth = async () => {
+    if (web3authSfa && web3AuthInitialized && initDataRaw) {
+      setIsLoggingIn(true)
+      try {
+        if (web3authSfa.status === 'connected') {
+          await web3authSfa.logout()
+        }
+
+        const idToken = await getIdTokenFromServer(initDataRaw, initData.user.photoUrl) // Fetch ID token
+        const { payload } = decodeToken(idToken)
+
+        await web3authSfa.connect({
+          verifier,
+          verifierId: payload.sub,
+          idToken,
+        })
+
+        setUserData(payload)
+        setIsLoggedIn(true)
+
+        const tonRpc = new TonRPC(web3authSfa.provider)
+        const tonAddress = await tonRpc.getAccounts()
+        setTonAccountAddress(tonAddress)
+
+        const signedMsg = await tonRpc.signMessage('Hello, TON!')
+        setSignedMessage(signedMsg)
+      } catch (error) {
+        console.error('Error during Web3Auth connection:', error)
+      } finally {
+        setIsLoggingIn(false)
+      }
+    }
+  }
+
+  if (web3AuthInitialized && initDataRaw) {
+    connectWeb3Auth()
+  }
+}, [initDataRaw, web3authSfa, web3AuthInitialized])
+```
+
+- **Explanation**: This effect establishes a connection to Web3Auth using the ID token fetched from the backend. Once connected, we fetch the TON blockchain account details, including the account address and a signed message.
+
+---
+
+### Step 7: Display User and TON Account Information
+
+Finally, we display the user's Telegram profile details and their TON account address along with the signed message.
+
+```tsx
+const userInfoBox = (
+  <div className="user-info-box">
+    <img src={userData?.avatar_url} alt="User avatar" className="user-avatar" />
+    <div className="user-info">
+      <p>
+        <strong>ID:</strong> {userData?.telegram_id}
+      </p>
+      <p>
+        <strong>Username:</strong> {userData?.username}
+      </p>
+      <p>
+        <strong>Name:</strong> {userData?.name}
+      </p>
+    </div>
+  </div>
+)
+
+const tonAccountBox = (
+  <div className="info-box">
+    <p>
+      <strong>TON Account:</strong> {tonAccountAddress}
+    </p>
+  </div>
+)
+
+const signedMessageBox = (
+  <div className="info-box">
+    <p>
+      <strong>Signed Message:</strong> {signedMessage}
+    </p>
+  </div>
+)
+
+return (
+  <div className="container">
+    <h1 className="title">Web3Auth TON Telegram MiniApp</h1>
+    {isLoggedIn ? (
+      <>
+        {userInfoBox}
+        {tonAccountBox}
+        {signedMessageBox}
+      </>
+    ) : (
+      <Loading />
+    )}
+  </div>
+)
+```
+
+---
+
+### Step 8: Running and Testing the App
+
+To run the app locally:
+
+```bash
+npm run start
+```
+
+Ensure that the backend server from **[Part 1](/guides/telegram-miniapp-server)** is running and accessible via the `VITE_SERVER_URL`.
+
+For detailed steps on debugging your Telegram Mini App, refer to this [official guide](https://docs.ton.org/develop/dapps/telegram-apps/testing-apps).
+
+---
+
+### Step 9: Deploy Your App
+
+Deploy this app to GitHub Pages, Vercel, or any other hosting service. For Vercel:
+
+- Push your code to GitHub.
+- Sign in to [Vercel](https://vercel.com/).
+- Import your GitHub repository.
+- Deploy your project.
+
+After deployment, you will get a domain link. Use this link when setting up your Telegram bot.
+
+:::info
+
+Remember to whitelist the deployed client app's URL in the allowed origins array in the backend server CORS configuration that we set up in **[Part 1](/guides/telegram-miniapp-server)**.
+
+:::
+
+---
+
+### Step 10: Setting Up a Telegram Bot
+
+To connect your Mini App to Telegram, you need to **create a bot** and set up a Mini App for it.
+
+Follow these steps:
+
+1. **Start a Chat with BotFather**
+
+   - Open the Telegram app or web version.
+   - Search for `@BotFather` or follow the [link](https://t.me/BotFather).
+   - Start a chat with BotFather by clicking on the `START` button.
+
+2. **Create a New Bot**
+
+   - Send the `/newbot` command to BotFather.
+   - BotFather will ask you to choose a name for your bot (this is a display name and can contain spaces).
+   - Next, choose a unique username for your bot, which must end in "bot" (e.g., `sample_bot`).
+
+3. **Set Up Bot Mini App**
+
+   - Send the `/mybots` command to BotFather.
+   - Choose your bot from the list and select the "Bot Settings" option.
+   - Choose the "Menu Button" option.
+   - Choose "Edit Menu Button URL" and send the URL to your Telegram Mini App, for example, the link from GitHub Pages or Vercel deploy.
+
+4. **Accessing the Bot**
+   - You can now search for your bot using its username in Telegram's search bar.
+   - Press the button next to the attach picker to launch your Telegram Mini App in the messenger.
+
+---
+
+This completes the client-side setup for the Telegram Mini App. By following these steps, you can authenticate Telegram users, retrieve their TON blockchain account details, and allow them to interact with decentralized applications via Web3Auth.

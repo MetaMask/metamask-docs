@@ -1,0 +1,1091 @@
+---
+title: Create an Ethereum Web3 wallet in Android
+image: 'guides/guides-banners/android-wallet.png'
+description: Empower your Android app with a Ethereum Web3 wallet using the Web3Auth PnP SDK.
+type: guide
+tags: [plug and play, android, evm, kotlin, secp256k1]
+date: May 27, 2024
+author: Web3Auth Team
+---
+
+import SEO from '@site/src/components/SEO'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import WalletPreview from '@site/static/img/guides/android-wallet-preview.png'
+
+<SEO
+  title="Build your own Ethereum Web3 wallet in Android"
+  description="Empower your Android app with a Ethereum Web3 wallet using the Web3Auth PnP SDK."
+  image="https://web3auth.io/docs/guides/guides-banners/android-wallet.png"
+  slug="/guides/android-wallet"
+/>
+
+In this guide, we'll talk about how we can use Web3Auth to build your Ethereum Web3 wallet in Android. The wallet will only support the Ethereum ecosystem, but functionality can be extended with any blockchain ecosystem.
+
+As an overview, the app is quite simple, with functionality to log in, display user details, and perform blockchain interactions. The signing of the blockchain transactions is done through the Web3Auth embedded wallet. You can check out the infrastructure docs, ["Web3Auth Wallet Management Infrastructure"](/docs/infrastructure) for a high-level overview of the Web3Auth architecture and implementation. For those who want to skip straight to the code, you can find it on [GitHub](https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-playground).
+
+Here are a few screenshots of the application.
+
+<img
+  style={{ display: 'block', margin: '20px auto' }}
+  src={WalletPreview}
+  alt="Android Wallet Screenshots"
+/>
+
+## How to set up Web3Auth Dashboard
+
+If you haven't already, sign up on the Web3Auth platform. It is free and gives you access to the Web3Auth's base plan. After the basic setup, explore other features and functionalities offered by the Web3Auth Dashboard. It includes custom verifiers, whitelabeling, analytics, and more. Head to [Web3Auth's documentation](/docs/dashboard) page for detailed instructions on setting up the Web3Auth Dashboard.
+
+## Integrating Web3Auth in Android
+
+Once, you have set up the Web3Auth Dashboard, and created a new project, it's time to integrate Web3Auth in your Android application. For the implementation, we'll use the ["web3auth-android-sdk"](https://github.com/Web3Auth/web3auth-android-sdk) SDK. This SDK facilitates integration with Web3Auth. This way you can easily manage an embedded wallet in your Android application.
+
+### Installation
+
+To install the web3auth-android-sdk SDK,in your module-level `build.gradle` or `settings.gradle` file, add JitPack repository.
+
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // focus-next-line
+        maven { url "https://jitpack.io" } // <-- Add this line
+    }
+}
+```
+
+Once, you have added the JitPack repository, then in your app-level `build.gradle` dependencies section, add the `web3auth-android-sdk`.
+
+```groovy
+dependencies {
+    // ...
+    // focus-next-line
+    implementation 'com.github.web3auth:web3auth-android-sdk:7.4.0'
+}
+```
+
+For the prerequisites, and other mandatory configuration of the SDK, please head to our [installation documentation](/docs/sdk/mobile/pnp/android/install).
+
+### Initialization
+
+After successfully installing the package, the next step is to initialize Web3Auth in your Android app. This sets up the necessary configurations using Client Id and prepares Web3Auth. [Learn more about Web3Auth Initialization](/docs/sdk/mobile/pnp/android/initialize).
+
+Since we are using the MVVM architecture for the wallet, along with dependency injection, we have defined a `Web3AuthHelper` to interact with a `Web3Auth` instance, which also makes it easier to write mocks for unit testing.
+
+```kotlin
+class Web3AuthHelperImpl(
+    private val web3Auth: Web3Auth
+): Web3AuthHelper {
+
+    // Performs the login to authenticate the user with Web3Auth netowrk.
+    override suspend fun login(loginParams: LoginParams): CompletableFuture<Web3AuthResponse> {
+        return web3Auth.login(loginParams)
+    }
+
+    // Logout of the current active session.
+    override suspend fun logOut(): CompletableFuture<Void> {
+        return web3Auth.logout()
+    }
+
+    // Returns the Ethereum compatible private key.
+    override fun getPrivateKey(): String {
+      return web3Auth.getPrivkey()
+    }
+
+    // Returns the user information such as name, email, profile image, and etc.
+    // For more details, please checkout UserInfo.
+    override fun getUserInfo(): UserInfo {
+        try {
+            return web3Auth.getUserInfo()!!
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    override suspend fun initialize(): CompletableFuture<Void> {
+        return web3Auth.initialize()
+    }
+
+    override suspend fun setResultUrl(uri: Uri?) {
+        return web3Auth.setResultUrl(uri)
+    }
+
+    override suspend fun isUserAuthenticated(): Boolean {
+        return web3Auth.getPrivkey().isNotEmpty()
+    }
+}
+```
+
+Once we have the created `Web3AuthHelper`, the next is to initialize the `Web3Auth` instance in the Koin module and make it a singleton component.
+
+```kotlin
+val appModule = module {
+    // focus-start
+    single {
+        getWeb3AuthHelper(get())
+    }
+    // focus-end
+
+    // Additional code
+
+    viewModel { MainViewModel(get()) }
+}
+
+private fun getWeb3AuthHelper(context: Context): Web3AuthHelper {
+    // focus-start
+    val web3Auth = Web3Auth(
+        Web3AuthOptions(
+            clientId = "WEB3AUTH_CLIENT_ID",
+            context = context,
+            network = Network.SAPPHIRE_MAINNET,
+            redirectUrl = Uri.parse("w3a://com.example.android_playground/auth")
+        )
+    )
+    // focus-end
+
+    return Web3AuthHelperImpl(web3Auth)
+}
+```
+
+### Session Management
+
+To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivKey` method. For a user already authenticated, the result would be a non-empty `String`. You can navigate to different views based on the result. If the user is already authenticated, we'll generate and prepare the `Credentials`, important to interact with the blockchain. Along with that, we'll retrieve user info, and navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again. [Learn more about Web3Auth session management](/docs/features/session-management).
+
+Since we are using the MVVM architecture, we'll create a `ViewModel` class to encapsulate the business logic for Web3Auth and Ethereum chain interaction.
+
+```kotlin
+class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
+
+    // _isLoggedIn can be used in the UI to know whether the user is logged.
+    private val _isLoggedIn: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isLoggedIn: StateFlow<Boolean> = _isLoggedIn
+
+    lateinit var credentials: Credentials
+    lateinit var userInfo: UserInfo
+
+    // Additional code
+
+    // Function to retrieve private key.
+    private fun privateKey(): String {
+        // focus-next-line
+        return web3AuthHelper.getPrivateKey()
+    }
+
+    // prepareCredentials uses the private key to create Ethereum credentials which
+    // can be used to retrieve the EOA address, and sign the transactions.
+    private fun prepareCredentials() {
+        // focus-next-line
+        credentials = Credentials.create(privateKey())
+    }
+
+    private fun prepareUserInfo() {
+        // focus-next-line
+        userInfo = web3AuthHelper.getUserInfo()
+    }
+
+    // Additional code
+
+    fun initialise() {
+        viewModelScope.launch {
+            web3AuthHelper.initialize().await()
+            isUserLoggedIn()
+        }
+    }
+
+    private fun isUserLoggedIn() {
+        viewModelScope.launch {
+            try {
+                 // focus-start
+                val isLoggedIn = web3AuthHelper.isUserAuthenticated()
+                if (isLoggedIn) {
+                    prepareCredentials()
+                    prepareUserInfo()
+                }
+                _isLoggedIn.emit(isLoggedIn)
+                // focus-end
+            } catch (e: Exception) {
+                _isLoggedIn.emit(false)
+            }
+        }
+    }
+}
+```
+
+### Authentication
+
+If the user is not authenticated, we can utilize the `login` method to authenticate the user. For the Wallet, we will add an Email Passwordless login. We'll create a helper function, `login` inside `MainViewModel`. The login method is pretty straightforward in Web3Auth and takes `LoginParams` as input. After successfully logging in, we'll generate and prepare the `Credentials`, important to interact with the blockchain. Along with that, we'll retrieve user info, and navigate them to `HomeScreen`.
+
+Learn more about [Web3Auth LoginParams](/docs/sdk/mobile/pnp/android/usage#parameters).
+
+```kotlin
+class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
+    // Additional code
+
+    fun login(email: String) {
+        // focus-start
+        val loginParams = LoginParams(
+            loginProvider = Provider.EMAIL_PASSWORDLESS,
+            extraLoginOptions = ExtraLoginOptions(login_hint = email)
+        )
+        // focus-end
+        viewModelScope.launch {
+            try {
+                // focus-next-line
+                web3AuthHelper.login(loginParams = loginParams).await()
+                // Functions from Session Management code snippets
+                prepareCredentials()
+                prepareUserInfo()
+
+                // Emit true to navigate to HomeScreen
+                _isLoggedIn.emit(true)
+            } catch (error: Exception) {
+                _isLoggedIn.emit(false)
+                throw error
+            }
+        }
+    }
+}
+```
+
+## Set up Blockchain Providers
+
+Once we have successfully authenticated the user, the next step would be to fetch the user details, retrieve the wallet address, and prepare blockchain providers for interactions. For this guide, we are supporting only the Ethereum ecosystem, but the general idea can be used for any blockchain ecosystem.
+
+Given that the project follows MVVM architecture pattern, we'll want to create a UseCase to interact with the Blockchain. This UseCase will help us easily expand the blockchain support while isolating it from the rest of the application.
+
+For interacting with Ethereum chains, we'll use the [web3j](https://github.com/hyperledger/web3j) SDK.
+
+To install the web3j SDK, in your module-level `build.gradle` or `settings.gradle` file, add `web3j` in your app-level dependencies.
+
+```groovy
+dependencies {
+    // ...
+    // focus-next-line
+    implementation 'org.web3j:core:4.8.7-android'
+}
+```
+
+After successfully installing the SDK, it's time to set up our Ethereum UseCase. First, we'll create a new class, `EthereumUseCase` interface, which will used as a base class for `EthereumUseCaseImpl`. If you wish to support any additional ecosystem, you can create the chain-agnostic UseCase and implement the methods.
+
+If you want to learn, how you can integrate different blockchains with Web3Auth, you can check out our [Connect Blockchain resources](/docs/connect-blockchain/).
+
+```kotlin
+interface EthereumUseCase {
+    suspend fun getBalance(publicKey: String): String
+    suspend fun signMessage(message: String, sender: Credentials): String
+    suspend fun sendETH(amount: String, recipientAddress: String, sender: Credentials): String
+
+    suspend fun getBalanceOf(contractAddress: String, address: String, credentials: Credentials): String
+    suspend fun approve(contractAddress: String, spenderAddress: String, credentials: Credentials): String
+}
+```
+
+Generally, for any blockchain provider, you'll only require the `getBalance`, `sendTransaction`, and `signMessage`. The `getBalance` and `approve` can be used to interact with smart contracts. To interact with smart contracts, we'll be required to generate smart contract function wrappers in Java from Solidity ABI files.
+
+### Smart Contract Wrappers
+
+For generating the wrappers, we'll use the [web3j command line tools](https://docs.web3j.io/4.11.0/command_line_tools/).
+
+To install the web3j cli, you can use the below command. Read more about [web3j cli installation](https://docs.web3j.io/4.11.0/command_line_tools/#installation).
+
+```bash
+curl -L get.web3j.io | sh && source ~/.web3j/source.sh
+```
+
+Once, we have installed the cli, the next step is to create `Token.sol` file, which has the smart contract interface for the ERC-20 token. [Learn more about ERC-20 token standard](https://docs.web3j.io/4.11.0/getting_started/deploy_interact_smart_contracts/#eip-20-ethereum-token-standard-smart-contract).
+
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+interface IERC20 {
+    function totalSupply() external view returns (uint256);
+    function balanceOf(address account) external view returns (uint256);
+    function transfer(address recipient, uint256 amount)
+        external
+        returns (bool);
+    function allowance(address owner, address spender)
+        external
+        view
+        returns (uint256);
+    function approve(address spender, uint256 amount) external returns (bool);
+    function transferFrom(address sender, address recipient, uint256 amount)
+        external
+        returns (bool);
+}
+```
+
+After creating the interface for the ERC-20 token, the next step is to compile the solidity file and generate the abi and bin files to generate the wrappers. To compile the solidity file, we'll use the [solc](https://docs.soliditylang.org/en/latest/installing-solidity.html).
+
+To install the solc we'll require the npm or yarn. If you have the npm already installed, you can use the below command to install the solc package globally.
+
+```bash
+npm install -g solc
+```
+
+Once, we have the solc package installed, we'll compile the smart contract. The bin and abi options will generate the abi and bin files. Feel free to choose the output directory of your choice.
+
+```bash
+solc Token.sol --bin --abi --optimize -o <output-dir>/
+```
+
+Once, we have compiled the smart contract, the next step is to use the web3j cli to generat the wrpapers.
+
+```bash
+web3j generate solidity -b /path/to/Tokne.bin -a /path/to/Token..abi -o /path/to/src/main/java -p com.your.organisation.name
+```
+
+Once you run the command, it'll create a wrapper `Token.java` which extends the `Contract`. You can use this class to interact with the smart contracts. Please make sure to compile and regenerate wrappers if you make any changes in the smart contract.
+
+### Ethereum UseCase Implementation
+
+Once we have generated `Token` wrapper, we'll create `EthereumUseCaseImpl` and implement the methods. To create the `Web3j` instance, you'll require the rpcTarget URL. If you are using public RPCs, you can face some network congestion. It's ideal to use paid RPCs for production.
+
+The `getBalance`, and `approve` methods are used to interact with smart contracts in the Ethereum ecosystem. The `getBalance` is used to read the balance from the ERC-20 smart contracts, whereas the `approve` is used to change the approval to zero for the ERC-20. For the `getBalance` and `approve` we'll be using the `Token` wrapper.
+
+```kotlin
+class EthereumUseCaseImpl(
+    private val web3: Web3j
+) : EthereumUseCase {
+    override suspend fun getBalance(publicKey: String): String = withContext(Dispatchers.IO) {
+        try {
+            val balanceResponse = web3.ethGetBalance(publicKey, DefaultBlockParameterName.LATEST).send()
+            val ethBalance = BigDecimal.valueOf(balanceResponse.balance.toDouble()).divide(BigDecimal.TEN.pow(18))
+            DecimalFormat("#,##0.00000").format(ethBalance)
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    override suspend fun signMessage(message: String, sender: Credentials): String {
+        try {
+            val signature = Sign.signPrefixedMessage(message.toByteArray(), sender.ecKeyPair)
+            val r = Numeric.toHexString(signature.r)
+            val s = Numeric.toHexString(signature.s).substring(2)
+            val v = Numeric.toHexString(signature.v).substring(2)
+
+            return StringBuilder(r).append(s).append(v).toString()
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    override suspend fun sendETH(amount: String, recipientAddress: String, sender: Credentials): String {
+        try {
+
+
+            val ethGetTransactionCount: EthGetTransactionCount =
+                web3.ethGetTransactionCount(sender.address, DefaultBlockParameterName.LATEST)
+                    .sendAsync().get()
+            val nonce: BigInteger = ethGetTransactionCount.transactionCount
+            val value: BigInteger = Convert.toWei(amount, Convert.Unit.ETHER).toBigInteger()
+            val gasLimit: BigInteger = BigInteger.valueOf(21000)
+            val gasPrice = web3.ethGasPrice().sendAsync().get()
+
+
+            val rawTransaction: RawTransaction = RawTransaction.createEtherTransaction(
+                nonce,
+                gasPrice.gasPrice,
+                gasLimit,
+                recipientAddress,
+                value
+            )
+
+            val signedMessage: ByteArray = TransactionEncoder.signMessage(rawTransaction, sender)
+            val hexValue: String = Numeric.toHexString(signedMessage)
+            val ethSendTransaction: EthSendTransaction =
+                web3.ethSendRawTransaction(hexValue).sendAsync().get()
+
+            if (ethSendTransaction.error != null) {
+                throw Exception(ethSendTransaction.error.message)
+            } else {
+                return ethSendTransaction.transactionHash
+            }
+        } catch (e: Exception) {
+            throw e
+        }
+    }
+
+    override suspend fun getBalanceOf(contractAddress: String, address: String, credentials: Credentials): String = withContext(Dispatchers.IO) {
+        val token = Token.load(contractAddress, web3, credentials, DefaultGasProvider())
+        val balanceResponse = token.balanceOf(address).sendAsync().get()
+        BigDecimal.valueOf(balanceResponse.toDouble()).divide(BigDecimal.TEN.pow(18)).toString()
+    }
+
+    override suspend fun approve(
+        contractAddress: String,
+        spenderAddress: String,
+        credentials: Credentials
+    ): String = withContext(Dispatchers.IO) {
+        val token = Token.load(contractAddress, web3, credentials, DefaultGasProvider())
+        val hash = token.approve(spenderAddress, BigInteger.ZERO).sendAsync().get()
+        hash.transactionHash
+    }
+}
+```
+
+Once we have the created `EthereumUseCaseImpl`, next is to initialize the `EthereumUseCaseImpl` instance in the Koin module.
+
+```kotlin
+val appModule = module {
+    // Additional code
+
+    // focus-next-line
+    factory<EthereumUseCase> { EthereumUseCaseImpl(Web3j.build(HttpService(chainConfigList.first().rpcTarget))) }
+
+    // Additonal code
+```
+
+## Set up Supported Chains
+
+After having our blockchain UseCase in place, the next step on the list is to define the supported chains. To keep things simple, we'll simply create a new file `ChainConfigList` with an array of ChainConfig to define the supported chains.
+
+For the guide, we have added the support for Ethereum Sepolia, and Arbitrum Sepolia. If you wish to support more chains in your wallet, you can simply add the config with the required details in the list below. Along with that, you can also add the desired chain using the add custom chain feature in the app.
+
+```kotlin
+var chainConfigList = arrayOf(
+    ChainConfig(
+        chainNamespace = ChainNamespace.EIP155,
+        decimals = 18,
+        blockExplorerUrl = "https://sepolia.etherscan.io/",
+        chainId = "11155111",
+        displayName = "Ethereum Sepolia",
+        rpcTarget = "https://1rpc.io/sepolia",
+        ticker = "ETH",
+        tickerName = "Ethereum"
+    ),
+    ChainConfig(
+        chainNamespace = ChainNamespace.EIP155,
+        decimals = 18,
+        blockExplorerUrl = "https://sepolia.etherscan.io/",
+        chainId = "421614",
+        displayName = "Arbitrum Sepolia",
+        rpcTarget = "https://endpoints.omniatech.io/v1/arbitrum/sepolia/public",
+        ticker = "ETH",
+        tickerName = "Ethereum"
+    )
+)
+```
+
+## Wallet Implementation
+
+Once, we have set up the EthereumUseCase, and supported chains, it's time to integrate and plug them into the wallet. Since we have already created `MainViewModel` before, we'll add the other features inside it.
+
+This will help us to separate business logic from UI.
+
+### Set up MainViewModel
+
+Once we have set up supported chains, the next on the list is to add more functionality in `MinaViewModel` to help us manage the state & functionality of the wallet. It will help us manage the state of the currently selected chain, fetch balance, sign transactions, and access other functionalities of Web3Auth.
+
+```kotlin
+class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
+    // _isLoggedIn can be used in the UI to know whether the user is logged.
+    private val _isLoggedIn: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isLoggedIn: StateFlow<Boolean> = _isLoggedIn
+
+    // _isAccountLoaded can be used in the UI to know whether the user's account is loaded.
+    // If it's false, we'll show the loading indictor.
+    private val _isAccountLoaded: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val isAccountLoaded: StateFlow<Boolean> = _isAccountLoaded
+
+    // _balance holds the user's balance for the selected ChainConfig.
+    private val _balance: MutableStateFlow<String> = MutableStateFlow("0.0")
+    val balance: StateFlow<String> = _balance
+
+
+    // Currently selected ChainConfig by the user. By default, it would be the first ChainConfig
+    // in the list.
+    private val _selectedChain: MutableStateFlow<ChainConfig> = MutableStateFlow(chainConfigList[0])
+    val selectedChain: StateFlow<ChainConfig> = _selectedChain
+
+    // Credentials will be used to retrive user's EOA address, and sign the transactions.
+    lateinit var credentials: Credentials
+    lateinit var userInfo: UserInfo
+
+    // EthereumUseCaseImpl to interact with the selected Ethereum ChainConfig.
+    private var ethereumUseCase: EthereumUseCase = EthereumUseCaseImpl(
+        Web3j.build(
+            HttpService(
+                chainConfigList.first().rpcTarget
+            )
+        )
+    )
+
+    // User's Ethereum compatible private key.
+    private fun privateKey(): String {
+        return web3AuthHelper.getPrivateKey()
+    }
+
+    private fun prepareCredentials() {
+        credentials = Credentials.create(privateKey())
+    }
+
+    private fun prepareUserInfo() {
+        userInfo = web3AuthHelper.getUserInfo()
+    }
+
+    fun login(email: String) {
+       // Defined previously
+    }
+
+    fun initialise() {
+        // Defined previously
+    }
+
+    private fun isUserLoggedIn() {
+        // Defined previously
+    }
+
+    // Retrieves user's balance for the currently selected ChainConfig.
+    fun getBalance() {
+        viewModelScope.launch {
+            _isAccountLoaded.emit(false)
+            try {
+                Log.d("Address", credentials.address)
+                _balance.emit(ethereumUseCase.getBalance(credentials.address))
+                _isAccountLoaded.emit(true)
+            } catch (e: Exception) {
+                _isAccountLoaded.emit(false)
+                throw e
+            }
+        }
+    }
+
+    // Logouts out user, and deletes the currently active session.
+    fun logOut() {
+        viewModelScope.launch {
+            try {
+                web3AuthHelper.logOut().await()
+                _isLoggedIn.emit(true)
+            } catch (e: Exception) {
+                _isLoggedIn.emit(false)
+            }
+        }
+    }
+
+    // Signs and broadcast a trasnfer transaction.
+    fun sendTransaction(value: String, recipient: String, onSign: (hash: String?, error: String?) -> Unit) {
+        viewModelScope.launch {
+            try {
+              val hash = ethereumUseCase.sendETH(value, recipient, credentials)
+                onSign(hash, null)
+            } catch (e: Exception) {
+                e.localizedMessage?.let { onSign(null, it) }
+            }
+        }
+    }
+
+    // Signs a personal message.
+    fun signMessage(message: String, onSign: (hash: String?, error: String?) -> Unit) {
+        viewModelScope.launch {
+            try {
+              val signature = ethereumUseCase.signMessage(message, credentials)
+                Log.d("Signature", signature)
+                onSign(signature, null)
+            } catch (e: Exception) {
+                e.localizedMessage?.let { onSign(null, it) }
+            }
+        }
+    }
+
+    // Changes the currently selected ChainConfig.
+    fun changeChainConfig(config: ChainConfig) {
+        _selectedChain.value = config
+        ethereumUseCase = EthereumUseCaseImpl(
+            Web3j.build(
+                HttpService(
+                    config.rpcTarget
+                )
+            )
+        )
+        getBalance()
+    }
+
+    // Retreives the ERC-20 token balance using the getBalanceOf method.
+    fun getTokenBalance(contractAddress: String, onSuccess: (balance: String?, error: String?) -> Unit) {
+        viewModelScope.launch {
+            try {
+                val balance = ethereumUseCase.getBalanceOf(contractAddress, credentials.address, credentials)
+                Log.d("Token Balance:",balance)
+                onSuccess(balance, null)
+            } catch (e: Exception) {
+                onSuccess(null, e.localizedMessage)
+            }
+        }
+    }
+
+    // Revokes the approval for the ERC-20 token using the approve function.
+    fun revokeApproval(contractAddress: String, spenderAddress: String, onRevoke: (hash: String?, error: String?) -> Unit) {
+        viewModelScope.launch {
+            try {
+                val hash = ethereumUseCase.approve(contractAddress, spenderAddress, credentials)
+                Log.d("Revoke Hash:", hash)
+                onRevoke(hash, null)
+            } catch (e: Exception) {
+                onRevoke(null, e.localizedMessage)
+            }
+        }
+    }
+
+    fun userInfo(onAvailable: (userInfo: UserInfo?, error: String?) -> Unit) {
+        try {
+            val info = web3AuthHelper.getUserInfo()
+            onAvailable(info, null)
+        } catch (e: Exception) {
+            e.localizedMessage?.let { onAvailable(null, it) }
+        }
+    }
+}
+```
+
+### Set up Home screen
+
+Once, we have our view model ready, we create a new `HomeScreen` to show user details as email address, wallet address, user's balance for selectedChain, and blockchain interaction methods.
+
+To get the user's balance, we'll use `getBalance` method from the `MainViewModel`. The method internally uses `EthereumUseCaseImpl` to retrieve the user's wallet address and fetch the wallet balance for the address. Check out `EthereumUseCaseImpl` implementation for more details.
+
+For the bottom navigation, we have created `TabBarView`, please check TabBarView.kt file for more details on UI implementation.
+
+```kotlin
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeScreen(viewModel: MainViewModel) {
+    val homeTab = TabBarItem(
+        title = "Home",
+        selectedIcon = Icons.Filled.Home,
+        unselectedIcon = Icons.Outlined.Home
+    )
+    val alertsTab = TabBarItem(
+        title = "Sign & Send",
+        selectedIcon = Icons.Filled.Create,
+        unselectedIcon = Icons.Outlined.Create
+    )
+    val settingsTab = TabBarItem(
+        title = "Smart Contracts",
+        selectedIcon = Icons.Filled.Receipt,
+        unselectedIcon = Icons.Outlined.Receipt
+    )
+
+    val tabBarItems = listOf(homeTab, alertsTab, settingsTab)
+
+    val navController = rememberNavController()
+
+    // Show the UI if the account is loaded, otherwise show the
+    // progress indictor.
+    if (viewModel.isAccountLoaded.collectAsState().value) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(text = "Android Playground")
+                    },
+
+                    actions = {
+                        Row {
+                            // Logs out user
+                            IconButton(onClick = { viewModel.logOut() }) {
+                                Icon(Icons.Outlined.ExitToApp, contentDescription = "Logout")
+                            }
+                        }
+                    }
+                )
+            },
+            bottomBar = {
+                TabView(tabBarItems = tabBarItems, navController = navController)
+            }
+        ) { innerPadding ->
+            // Different Views which will be shown upon user selection. By default, it'll be AccountView.
+            NavHost(navController = navController, startDestination = "Home", modifier = Modifier.padding(innerPadding)) {
+                composable(homeTab.title) {
+                    AccountView(viewModel = viewModel)
+                }
+                composable(alertsTab.title) {
+                    TransactionScreen(viewModel = viewModel)
+                }
+                composable(settingsTab.title) {
+                   SmartContractsScreen(viewModel = viewModel)
+                }
+            }
+        }
+    } else {
+        // Shows CircularProgressIndicator
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@Composable
+fun AccountView(viewModel: MainViewModel) {
+    // Used for ExposedDropdownMenuBox state management
+    var expanded by remember { mutableStateOf(false) }
+
+    // Defines whether to showcase user info dialog. By default,
+    // it's false.
+    val openUserInfoDialog = remember {
+        mutableStateOf(false)
+    }
+
+    var balance = viewModel.balance.collectAsState().value
+    val clipboardManager: ClipboardManager = LocalClipboardManager.current
+    val refreshing by viewModel.isAccountLoaded.collectAsState()
+
+    val pullRefreshState = rememberPullRefreshState(!refreshing, { viewModel.getBalance() })
+
+    // Displays UserInfoDialog when openUserInfoDialog is true.
+    if(openUserInfoDialog.value) {
+        UserInfoDialog(onDismissRequest = {
+            openUserInfoDialog.value = false
+        }, userInfo = viewModel.userInfo.toString())
+    }
+
+    Box(Modifier.pullRefresh(pullRefreshState)) {
+        LazyColumn(
+            modifier = Modifier
+                .padding(PaddingValues(horizontal = 16.dp, vertical = 8.dp))
+        ) {
+            item {
+                // Additional UI
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    // Dropdown for chain selection
+                    ExposedDropdownMenuBox(
+                        expanded = expanded,
+                        onExpandedChange = {
+                            expanded = !expanded
+                        }
+                    ) {
+                        OutlinedTextField(
+                            value = viewModel.selectedChain.collectAsState().value.displayName!!,
+                            onValueChange = {},
+                            readOnly = true,
+                            trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                            modifier = Modifier
+                                .menuAnchor()
+                                .fillMaxWidth()
+                        )
+
+                        ExposedDropdownMenu(
+                            expanded = expanded,
+                            onDismissRequest = { expanded = false }
+                        ) {
+                            chainConfigList.forEach { item ->
+                                DropdownMenuItem(
+                                    text = { Text(text = item.displayName!!) },
+                                    onClick = {
+                                        expanded = false
+                                        viewModel.changeChainConfig(item)
+                                    }
+                                )
+                            }
+                        }
+                    }
+                }
+                // Additonal UI code
+
+                // Display User info
+                Row {
+                    Box(
+                        modifier = Modifier
+                            .height(120.dp)
+                            .width(120.dp)
+                            .background(color = MaterialTheme.colorScheme.primary),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = viewModel.userInfo.name.first().uppercase(),
+                            style = Typography.headlineLarge.copy(color = Color.White)
+                        )
+                    }
+
+                    Box(modifier = Modifier.width(16.dp))
+                    Column {
+                        Text(text = viewModel.userInfo.name, style = Typography.titleLarge)
+                        Box(modifier = Modifier.height(12.dp))
+                        Row(
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            // Displays user's EOA address
+                            Text(
+                                text = viewModel.credentials.address.addressAbbreviation(),
+                                style = Typography.titleMedium
+                            )
+                            IconButton(onClick = {
+                                clipboardManager.setText(AnnotatedString(viewModel.credentials.address))
+                            }) {
+                                Icon(Icons.Outlined.ContentCopy, contentDescription = "Copy")
+                            }
+                        }
+                    }
+                }
+                // Additional UI code
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Column {
+                        // Displays user's wallet balance for selected ChainConfig.
+                        Text(text = "Wallet Balance", style = Typography.titleMedium)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(text = balance, style = Typography.headlineSmall)
+                    }
+                    Column(horizontalAlignment = Alignment.End) {
+                        // Displays the chainId for selected ChainConfig
+                        Text(text = "Chain id", style = Typography.titleMedium)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(text = viewModel.selectedChain.collectAsState().value.chainId, style = Typography.headlineSmall)
+                    }
+                }
+            }
+        }
+
+        // Adds additional pull to refresh functionality
+        PullRefreshIndicator(!refreshing, pullRefreshState, Modifier.align(Alignment.TopCenter))
+    }
+}
+```
+
+### Chain Interactions
+
+Once we have set up `HomeScreen` and `AccountView`, the next step is to set up chain interactions for signing messages, signing transactions, reading from contracts, and writing on contracts. For signing messages and transaction, we'll create a new `TransactionScreen` widget and utilize `signMessage` and `sendTransaction` from `MainViewModel` for the respective functionality.
+
+```kotlin
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun TransactionScreen(viewModel: MainViewModel) {
+    val pagerState = rememberPagerState( 0)
+    val tabItems = listOf(
+        "Sign Message",
+        "Send Transaction",
+    )
+
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Signing/Transaction", style = Typography.headlineLarge,
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Tabs(pagerState = pagerState, tabItems)
+        Spacer(modifier = Modifier.height(16.dp))
+        TabsContent(pagerState = pagerState, viewModel)
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun TabsContent(pagerState: PagerState, viewModel: MainViewModel) {
+
+    HorizontalPager(state = pagerState, count =  2) {
+        page ->
+        when (page) {
+            0 -> SigningView(viewModel = viewModel)
+            1 -> TransactionView(viewModel = viewModel)
+        }
+    }
+}
+
+@Composable
+fun SigningView(viewModel: MainViewModel) {
+    // Default signing message
+    var messageText by remember { mutableStateOf("Welcome to Web3Auth") }
+    val openAlertDialog = remember { mutableStateOf(false) }
+    var dialogText by remember { mutableStateOf("") }
+
+    when {
+        openAlertDialog.value -> MinimalDialog(dialogText) {
+            openAlertDialog.value = false
+        }
+    }
+
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(horizontal = 16.dp)) {
+        // Additional UI code
+        Button(onClick = {
+            // focus-start
+            // Signs the message and show the signature
+            viewModel.signMessage(messageText, onSign = {
+                signature, error ->
+                if(signature != null) {
+                   dialogText = "Signature:\n$signature"
+                    openAlertDialog.value = true
+                } else {
+                    dialogText = "Error:\n$error"
+                    openAlertDialog.value = true
+
+                }
+            })
+            // focus-end
+        }, shape = RoundedCornerShape(4.dp), modifier = Modifier.fillMaxWidth()) {
+            Text("Sign Message")
+        }
+
+    }
+}
+
+
+@Composable
+fun TransactionView(viewModel: MainViewModel) {
+    var valueText by remember { mutableStateOf("") }
+    var addressText by remember { mutableStateOf("") }
+    val openAlertDialog = remember { mutableStateOf(false) }
+    var dialogText by remember { mutableStateOf("") }
+
+    when {
+        openAlertDialog.value -> MinimalDialog(dialogText) {
+            openAlertDialog.value = false
+        }
+    }
+
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(horizontal = 16.dp)) {
+        // Additional UI code
+        Button(onClick = {
+            // focus-start
+            // Performs transfer transaction and displays the hash for the transaction
+            viewModel.sendTransaction(valueText, addressText, onSign = {
+                    hash, error ->
+                if(hash != null) {
+                    dialogText = "Hash:\n$hash"
+                    openAlertDialog.value = true
+                } else {
+                    dialogText = "Error:\n$error"
+                    openAlertDialog.value = true
+                }
+            })
+            // focus-end
+        }, shape = RoundedCornerShape(4.dp), modifier = Modifier.fillMaxWidth()) {
+            Text("Send transaction")
+        }
+    }
+}
+```
+
+Once we have set up `TransactionScreen`, the next is to create `SmartContractsScreen` for fetching ERC-20 token balance, and revoking approval. We'll utilize the `getTokenBalance` and `revokeApproval` methods from `MainViewModel` for the above functionality.
+
+```kotlin
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun SmartContractsScreen(viewModel: MainViewModel) {
+    val pagerState = rememberPagerState( 0)
+    val tabItems = listOf(
+        "Read from Contract",
+        "Write from Contract",
+    )
+
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Smart Contract Interactions", style = Typography.headlineLarge,
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Tabs(pagerState = pagerState, tabItems)
+        Spacer(modifier = Modifier.height(16.dp))
+        ContractTabsContent(pagerState = pagerState, viewModel)
+    }
+}
+
+
+@Composable
+@OptIn(ExperimentalPagerApi::class)
+fun ContractTabsContent(pagerState: PagerState, viewModel: MainViewModel) {
+    HorizontalPager(state = pagerState, count =  2) {
+            page ->
+        when (page) {
+            0 -> ReadContractView(viewModel = viewModel)
+            1 -> WriteContractView(viewModel = viewModel)
+        }
+    }
+}
+
+@Composable
+fun ReadContractView(viewModel: MainViewModel) {
+    var contractAddressText by remember { mutableStateOf("0x10279e6333f9d0EE103F4715b8aaEA75BE61464C") }
+    val openAlertDialog = remember { mutableStateOf(false) }
+    var dialogText by remember { mutableStateOf("") }
+
+    when {
+        openAlertDialog.value -> MinimalDialog(dialogText) {
+            openAlertDialog.value = false
+        }
+    }
+
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(horizontal = 16.dp)) {
+        // Additional code
+        Button(onClick = {
+            // focus-start
+            // Retrieves ERC-20 token balance for the user's EOA address
+            viewModel.getTokenBalance(contractAddressText, onSuccess = {
+                balance, error ->
+                if(balance != null) {
+                    dialogText = "Balance:\n$balance"
+                    openAlertDialog.value = true
+                } else {
+                    dialogText = "Error:\n$error"
+                    openAlertDialog.value = true
+                }
+            })
+            // focus-end
+        }, shape = RoundedCornerShape(4.dp), modifier = Modifier.fillMaxWidth()) {
+            Text("Fetch Balance")
+        }
+    }
+}
+
+@Composable
+fun WriteContractView(viewModel: MainViewModel) {
+    var contractAddressText by remember { mutableStateOf("0x10279e6333f9d0EE103F4715b8aaEA75BE61464C") }
+    var spenderAddressText by remember { mutableStateOf("") }
+    val openAlertDialog = remember { mutableStateOf(false) }
+    var dialogText by remember { mutableStateOf("") }
+
+    when {
+        openAlertDialog.value -> MinimalDialog(dialogText) {
+            openAlertDialog.value = false
+        }
+    }
+
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(horizontal = 16.dp)) {
+        // Additional code
+        Button(onClick = {
+            // focus-start
+            // Revokes the approval of ERC-20 token for respective spenderAddress.
+            viewModel.revokeApproval(contractAddressText, spenderAddressText, onRevoke = {
+                hash, error ->
+                if(hash != null) {
+                    dialogText = "Hash:\n$hash"
+                    openAlertDialog.value = true
+                } else {
+                    dialogText = "Error:\n$error"
+                    openAlertDialog.value = true
+                }
+            })
+            // focus-end
+        }, shape = RoundedCornerShape(4.dp), modifier = Modifier.fillMaxWidth()) {
+            Text("Revoke Approval")
+        }
+
+    }
+}
+```
+
+## Conclusion
+
+Voila, you have build a Ethereum Web3 wallet. This guide only gives you an overview of how to create your wallet with Ethereum ecosystem support. The general idea of the guide can be used for any of the blockchain ecosystem.
+
+If you are interested in learning more about Web3Auth, please checkout our [documentation for Android](/docs/sdk/mobile/pnp/android). You can find the code used for the guide on our [examples repo](https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-playground).
