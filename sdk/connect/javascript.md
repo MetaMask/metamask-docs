@@ -9,25 +9,19 @@ import TabItem from "@theme/TabItem";
 
 # Connect to MetaMask using JavaScript
 
-Get started with MetaMask SDK in your JavaScript dapp.
+Get started with MetaMask SDK in your JavaScript dApp.
 
 ## Steps
 
 ### 1. Install the SDK
 
-Install the SDK in an existing JavaScript project using npm or Yarn:
+Install the SDK in an existing JavaScript project using npm, Yarn, pnpm, or Bun:
 
-```bash
+```bash npm2yarn
 npm install @metamask/sdk
 ```
 
-or
-
-```
-yarn add @metamask/sdk
-```
-
-### 2.  Use the SDK
+### 2. Initialize the SDK
 
 The following are examples of using the SDK in various JavaScript environments:
 
@@ -39,23 +33,17 @@ import { MetaMaskSDK } from "@metamask/sdk"
 
 const MMSDK = new MetaMaskSDK({
   dappMetadata: {
-    name: "Example JavaScript Dapp",
+    name: "Example JavaScript dApp",
     url: window.location.href,
+    // iconUrl: 'https://mydapp.com/icon.png' // Optional
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
 })
-
-const ethereum = MMSDK.getProvider()
-
-// Connect to MetaMask
-const accounts = await MMSDK.connect()
-
-// Make requests
-const result = await ethereum.request({ 
-  method: "eth_accounts", 
-  params: [] 
-})
 ```
+
+- - `dappMetadata` ensures trust by showing your dapp’s `name`, `url`, and `iconUrl` during connection.
+
+- - `infuraAPIKey` enables read-only RPC and load‑balancing.
 
 </TabItem>
 <TabItem value="Pure JavaScript (CDN)">
@@ -66,12 +54,12 @@ const result = await ethereum.request({
   <script>
     const MMSDK = new MetaMaskSDK.MetaMaskSDK({
       dappMetadata: {
-        name: "Example Pure JS Dapp",
+        name: "Example JavaScript dApp",
+        url: window.location.href,
+        // iconUrl: "https://mydapp.com/icon.png" // Optional
       },
       infuraAPIKey: process.env.INFURA_API_KEY,
-    });
-    
-    MMSDK.connect()
+    })
   </script>
 </head>
 ```
@@ -79,50 +67,59 @@ const result = await ethereum.request({
 </TabItem>
 </Tabs>
 
-### 3. Configure the SDK
+### 3. Connect and use provider
 
-The SDK accepts several [configuration options](../reference/sdk-options.md) when initializing.
-For example:
-
-```javascript
-const MMSDK = new MetaMaskSDK({
-  // Required - Your dapp's info
-  dappMetadata: {
-    name: "Your Dapp Name",
-    url: window.location.href,
-  },
-  
-  // Optional - Infura API key for read-only RPC calls
-  infuraAPIKey: process.env.INFURA_API_KEY,
-  
-  // Optional - Customize modal display
-  headless: false,
-})
-```
-
-### 4. Call common methods
-
-The following are common methods you can call with the SDK:
+Connect to MetaMask and get the provider for RPC requests:
 
 ```javascript
-// Connect and get accounts
-const accounts = await MMSDK.connect()
-
-// Get provider for RPC requests
 const provider = MMSDK.getProvider()
 
-// Make an RPC request
-const result = await provider.request({ 
+const accounts = await MMSDK.connect()
+console.log("Connected account:", accounts[0])
+
+const result = await provider.request({
   method: "eth_accounts",
-  params: [] 
+  params: [],
+})
+console.log("eth_accounts result:", result)
+```
+
+Use the provider to make RPC request to get accounts, chainId, etc.
+
+- `MMSDK.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
+- Use `provider.request()` for arbitrary RPC calls like `eth_chainId`, `eth_getBalance`, or batching via `metamask_batch`.
+
+### 4. Common SDK methods at a glance
+
+| Method                                 | Description                                  |
+| -------------------------------------- | -------------------------------------------- |
+| `connect()`                            | Triggers wallet connection flow              |
+| `connectAndSign({ msg: '...' })`       | Connects and prompts user to sign a message  |
+| `getProvider()`                        | Returns the provider object for RPC requests |
+| `provider.request({ method, params })` | Any Ethereum JSON‑RPC call                   |
+| Batched RPC                            | Use `metamask_batch` to group multiple calls |
+
+### 5. Usage example
+
+```javascript
+// 1. Connect and get accounts
+const accounts = await MMSDK.connect()
+
+// 2. Connect and sign in one step
+const signResult = await MMSDK.connectAndSign({
+  msg: "Sign in to Dapp",
 })
 
-// Connect and sign in one step
-const signResult = await MMSDK.connectAndSign({ 
-  msg: "Sign in to Dapp" 
+// 3. Get provider for RPC requests
+const provider = MMSDK.getProvider()
+
+// 4. Make an RPC request
+const result = await provider.request({
+  method: "eth_accounts",
+  params: [],
 })
 
-// Batch multiple RPC requests
+// 5. Batch multiple RPC requests
 const batchResults = await provider.request({
   method: "metamask_batch",
   params: [
