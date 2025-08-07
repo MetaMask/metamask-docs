@@ -54,7 +54,7 @@ const MMSDK = new MetaMaskSDK({
   <script>
     const MMSDK = new MetaMaskSDK.MetaMaskSDK({
       dappMetadata: {
-        name: "Example JavaScript dApp",
+        name: "Example JavaScript dapp",
         url: window.location.href,
         // iconUrl: "https://mydapp.com/icon.png" // Optional
       },
