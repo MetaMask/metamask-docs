@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Connect to MetaMask using JavaScript
 
-Get started with MetaMask SDK in your JavaScript dApp.
+Get started with MetaMask SDK in your JavaScript dapp.
 
 ## Steps
 
