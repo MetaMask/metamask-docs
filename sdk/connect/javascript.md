@@ -15,7 +15,7 @@ Get started with MetaMask SDK in your JavaScript dapp.
 
 ### 1. Install the SDK
 
-Install the SDK in an existing JavaScript project using npm, Yarn, pnpm, or Bun:
+Install the SDK in an existing JavaScript project:
 
 ```bash npm2yarn
 npm install @metamask/sdk
