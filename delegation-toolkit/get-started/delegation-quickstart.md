@@ -48,9 +48,9 @@ const bundlerClient = createBundlerClient({
 ### 3. Create a delegator account
 
 Create an account to represent Alice, the delegator who will create a delegation.
-The delegator must be a [smart account](../how-to/create-smart-account/index.md).
+The delegator must be a [smart account](../concepts/smart-accounts.md).
 
-This example configures a [Hybrid](../concepts/smart-accounts.md#hybrid-smart-account) smart account,
+This example configures a Hybrid smart account,
 which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers:
 
 ```typescript
@@ -69,7 +69,7 @@ const delegatorSmartAccount = await toMetaMaskSmartAccount({
 ```
 
 :::note
-See [how to configure other smart account types](../how-to/create-smart-account/configure-accounts-signers.md).
+See [how to configure other smart account types](../how-to/create-smart-account.md).
 :::
 
 ### 4. Create a delegate account
