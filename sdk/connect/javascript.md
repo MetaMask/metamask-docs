@@ -11,6 +11,13 @@ import TabItem from "@theme/TabItem";
 
 Get started with MetaMask SDK in your JavaScript dapp.
 
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) version 19 or later installed.
+- A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or [Yarn](https://yarnpkg.com/).
+- [MetaMask](https://metamask.io/) installed in your browser or on mobile.
+
+
 ## Steps
 
 ### 1. Install the SDK
