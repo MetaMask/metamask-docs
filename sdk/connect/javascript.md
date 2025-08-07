@@ -92,11 +92,11 @@ Use `provider.request()` for arbitrary [JSON-RPC requests](/wallet/reference/jso
 
 | Method                                 | Description                                  |
 | -------------------------------------- | -------------------------------------------- |
-| `connect()`                            | Triggers wallet connection flow              |
-| `connectAndSign({ msg: '...' })`       | Connects and prompts user to sign a message  |
-| `getProvider()`                        | Returns the provider object for RPC requests |
-| `provider.request({ method, params })` | Any Ethereum JSON‑RPC call                   |
-| Batched RPC                            | Use `metamask_batch` to group multiple calls |
+| [`connect()`](../reference/sdk-methods.md#connect)                            | Triggers wallet connection flow              |
+| [`connectAndSign({ msg: '...' })`](../reference/sdk-methods.md#connectandsign)       | Connects and prompts user to sign a message  |
+| [`getProvider()`](../reference/sdk-methods.md#getprovider)                        | Returns the provider object for RPC requests |
+| [`provider.request({ method, params })`](/wallet/reference/provider-api/#request) | Calls any Ethereum JSON‑RPC method                   |
+| [Batched RPC](../guides/batch-requests.md)                            | Use `metamask_batch` to group multiple JSON-RPC requests |
 
 ### 5. Usage example
 
