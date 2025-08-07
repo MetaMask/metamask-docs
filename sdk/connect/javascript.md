@@ -98,7 +98,7 @@ Use `provider.request()` for arbitrary [JSON-RPC requests](/wallet/reference/jso
 | [`provider.request({ method, params })`](/wallet/reference/provider-api/#request) | Calls any Ethereum JSON‑RPC method                   |
 | [Batched RPC](../guides/batch-requests.md)                            | Use `metamask_batch` to group multiple JSON-RPC requests |
 
-### 5. Usage example
+## Usage example
 
 ```javascript
 // 1. Connect and get accounts
