@@ -84,10 +84,9 @@ const result = await provider.request({
 console.log("eth_accounts result:", result)
 ```
 
-Use the provider to make RPC request to get accounts, chainId, etc.
+`MMSDK.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
 
-- `MMSDK.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
-- Use `provider.request()` for arbitrary RPC calls like `eth_chainId`, `eth_getBalance`, or batching via `metamask_batch`.
+Use `provider.request()` for arbitrary [JSON-RPC requests](/wallet/reference/json-rpc-methods) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/batch-requests.md) via `metamask_batch`.
 
 ### 4. Common SDK methods at a glance
 
