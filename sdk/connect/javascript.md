@@ -88,7 +88,7 @@ console.log("eth_accounts result:", result)
 
 Use `provider.request()` for arbitrary [JSON-RPC requests](/wallet/reference/json-rpc-methods) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/batch-requests.md) via `metamask_batch`.
 
-### 4. Common SDK methods at a glance
+## Common SDK methods at a glance
 
 | Method                                 | Description                                  |
 | -------------------------------------- | -------------------------------------------- |
