@@ -41,7 +41,7 @@ const MMSDK = new MetaMaskSDK({
 })
 ```
 
-- - `dappMetadata` ensures trust by showing your dapp’s `name`, `url`, and `iconUrl` during connection.
+- [`dappMetadata`](../reference/sdk-options.md#dappmetadata) - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
 
 - - `infuraAPIKey` enables read-only RPC and load‑balancing.
 
