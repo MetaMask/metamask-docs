@@ -73,6 +73,42 @@ Check out the following guides to get started with the MetaMask Delegation Toolk
   ]}
 />
 
-## Questions?
+## Partner integrations
 
-If you have questions, email hellogators@consensys.net.
+The MetaMask Delegation Toolkit is integrated with multiple ecosystem partners.
+Check out the following documentation from these partners:
+
+<CardList
+  items={[
+    {
+      href: "https://scaffoldeth.io/extensions",
+      title: "Scaffold-ETH 2",
+      description: "Install the MetaMask Delegation Toolkit extension for Scaffold-ETH 2.",
+      buttonIcon: 'external-arrow',
+    },
+    {
+      href: "https://viem.sh/account-abstraction/accounts/smart/toMetaMaskSmartAccount",
+      title: "Viem",
+      description: "Use MetaMask Smart Accounts with Viem.",
+      buttonIcon: 'external-arrow',
+    },
+    {
+      href: "https://docs.arbitrum.io/for-devs/third-party-docs/MetaMask/",
+      title: "Arbitrum",
+      description: "Use MetaMask Smart Accounts with Arbitrum.",
+      buttonIcon: 'external-arrow',
+    },
+    {
+      href: "https://docs.pimlico.io/guides/how-to/accounts/use-metamask-account",
+      title: "permissionless.js",
+      description: "Use MetaMask Smart Accounts with permissionless.js.",
+      buttonIcon: 'external-arrow',
+    },
+    {
+      href: "https://docs.monad.xyz/tooling-and-infra/account-abstraction/wallet-providers#metamask-delegation-toolkit",
+      title: "Monad",
+      description: "Use MetaMask Smart Accounts with Monad Testnet.",
+      buttonIcon: 'external-arrow',
+    }
+  ]}
+/>

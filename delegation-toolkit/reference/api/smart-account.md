@@ -379,7 +379,20 @@ Creates a `MetaMaskSmartAccount` instance.
 | `deploySalt` | `Hex`                                               | Required if `address` is not provided                        | The salt that will be used to deploy the smart account.                                                                                                                           |
 | `address` | `Address`                                           | Required if `deployParams` and `deploySalt` are not provided, or if the implementation is `Stateless7702`. | The address of the smart account. If an address is provided, the smart account will not be deployed. This should be used if you intend to interact with an existing smart account. |
 
-### Hybrid implementation example
+### Hybrid implementation
+
+#### `deployParams`
+
+All Hybrid deploy parameters are required:
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `owner` | `Hex` | The owner's account address. The owner can be the zero address, indicating that there is no owner configured. |
+| `p256KeyIds` | `Hex[]` | An array of key identifiers for P256 signers. |
+| `p256XValues` | `bigint[]` | An array of public key x-values for P256 signers. |
+| `p256YValues` | `bigint[]` | An array of public key y-values for P256 signers. |
+
+#### Example
 
 <Tabs>
 <TabItem value ="example.ts">
@@ -418,7 +431,18 @@ export const publicClient = createPublicClient({
 </TabItem>
 </Tabs>
 
-### Multisig implementation example
+### Multisig implementation
+
+#### `deployParams`
+
+All Multisig deploy parameters are required:
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `signers` | `Hex[]` | An array of EOA signer addresses. |
+| `threshold` | `bigint` | The number of signers required to execute a transaction. |
+
+#### Example
 
 <Tabs>
 <TabItem value="example.ts">
