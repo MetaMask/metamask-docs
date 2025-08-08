@@ -46,6 +46,13 @@
     gap: 4rem;
     align-items: start;
   }
+
+  // When there's no title or description, use full width for cards
+  &.cards-only {
+    @include bp('desktop') {
+      grid-template-columns: 1fr;
+    }
+  }
 }
 
 .content-column {
@@ -60,6 +67,10 @@
 
   @include bp('tablet') {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include bp('desktop') {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

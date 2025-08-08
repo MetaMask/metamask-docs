@@ -12,23 +12,21 @@ const {
   MM_RPC_URL,
 } = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
-const helpDropdown = fs.readFileSync('./src/components/NavDropdown/DeveloperTools.html', 'utf-8')
-const connectDropdown = fs.readFileSync(
-  './src/components/NavDropdown/ConnectMetaMask.html',
+const productsDropdown = fs.readFileSync(
+  './src/components/NavDropdown/Products.html',
   'utf-8'
 )
-const embedDropdown = fs.readFileSync('./src/components/NavDropdown/EmbedMetaMask.html', 'utf-8')
-const extendDropdown = fs.readFileSync('./src/components/NavDropdown/ExtendScale.html', 'utf-8')
+const baseUrl = process.env.DEST || '/';
+const siteUrl = 'https://docs.metamask.io';
+
 const npm2yarnPlugin = [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
 /** @type {import('@docusaurus/types').Config} */
-const siteUrl = 'https://docs.metamask.io'
-const baseUrl = process.env.DEST || '/'
 const fullUrl = new URL(baseUrl, siteUrl).toString()
 const config = {
   title: 'MetaMask developer documentation',
   // tagline: '',
   url: 'https://docs.metamask.io',
-  baseUrl: process.env.DEST || '/', // overwritten in github action for staging / latest
+  baseUrl, // overwritten in github action for staging / latest
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicons/favicon-96x96.png',
@@ -111,6 +109,16 @@ const config = {
 
   scripts: [
     {
+      src: baseUrl + "js/fix-trailing-slash.js",
+      async: false,
+      defer: false,
+    },
+    {
+      src: baseUrl + "js/code-focus.js",
+      async: false,
+      defer: true,
+    },
+    {
       src: 'https://cmp.osano.com/AzZMxHTbQDOQD8c1J/84e64bce-4a70-4dcc-85cb-7958f22b2371/osano.js',
     },
   ],
@@ -133,6 +141,20 @@ const config = {
           breadcrumbs: false,
           remarkPlugins: [npm2yarnPlugin],
         },
+        pages: {
+          path: 'src/pages',
+          routeBasePath: '/',
+          include: ['**/**.{js,jsx,ts,tsx,md,mdx}'],
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+            '**/quickstart/**',  // Exclude quickstart directory from pages plugin
+          ],
+          mdxPageComponent: '@theme/MDXPage',
+          remarkPlugins: [npm2yarnPlugin],
+        },
         theme: {
           customCss: require.resolve('./src/scss/custom.scss'),
         },
@@ -140,6 +162,7 @@ const config = {
     ],
   ],
   plugins: [
+    ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache' }],
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',
     [
@@ -336,47 +359,28 @@ const config = {
         items: [
           {
             type: 'dropdown',
-            label: 'Connect to MetaMask',
+            label: 'Products',
             items: [
               {
                 type: 'html',
-                value: connectDropdown,
+                value: productsDropdown,
               },
             ],
           },
           {
-            type: 'dropdown',
-            label: 'Embed MetaMask',
-            items: [
-              {
-                type: 'html',
-                value: embedDropdown,
-              },
-            ],
+            label: 'Quick Start',
+            to: '/quickstart',
+            position: 'left',
           },
           {
-            type: 'dropdown',
-            label: 'Extend and scale',
-            items: [
-              {
-                type: 'html',
-                value: extendDropdown,
-              },
-            ],
+            to: 'developer-tools/faucet/',
+            label: "Faucet",
+            position: 'right',
+            excludeUrl: REF_ALLOW_LOGIN_PATH,
           },
           {
-            type: 'dropdown',
-            label: 'Developer tools',
-            items: [
-              {
-                type: 'html',
-                value: helpDropdown,
-              },
-            ],
-          },
-          {
-            to: 'whats-new',
-            label: "What's new?",
+            to: 'https://community.metamask.io/',
+            label: "Help ↗",
             position: 'right',
           },
           {
@@ -525,6 +529,21 @@ const config = {
         additionalLanguages: ['csharp', 'gradle', 'bash', 'json'],
         magicComments: [
           {
+            className: 'theme-code-block-highlighted-line',
+            line: 'highlight-next-line',
+            block: { start: 'highlight-start', end: 'highlight-end' },
+          },
+          {
+            className: "code-unfocus",
+            line: "unfocus-next-line",
+            block: { start: "unfocus-start", end: "unfocus-end" },
+          },
+          {
+            className: "code-focus",
+            line: "focus-next-line",
+            block: { start: "focus-start", end: "focus-end" },
+          },
+          {
             className: 'git-diff-remove',
             line: 'remove-next-line',
             block: { start: 'remove-start', end: 'remove-end' },
@@ -554,7 +573,7 @@ const config = {
         // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
         replaceSearchResultPathname: {
           from: '/',
-          to: process.env.DEST || '/',
+          to: baseUrl,
         },
 
         // Optional: Algolia search parameters
