@@ -14,7 +14,7 @@ Get started with MetaMask SDK in your JavaScript dapp.
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) version 19 or later installed.
-- A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation) or [bun](https://bun.sh/).
+- A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
 
 
