@@ -48,10 +48,6 @@ const MMSDK = new MetaMaskSDK({
 })
 ```
 
-- [`dappMetadata`](../reference/sdk-options.md#dappmetadata) - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
-
-- [`infuraAPIKey`](../reference/sdk-options.md#infuraapikey) - Enables read-only RPC and load‑balancing.
-
 </TabItem>
 <TabItem value="Pure JavaScript (CDN)">
 
@@ -73,6 +69,12 @@ const MMSDK = new MetaMaskSDK({
 
 </TabItem>
 </Tabs>
+
+These examples configure the SDK with the following options:
+
+- [`dappMetadata`](../reference/sdk-options.md#dappmetadata) - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
+
+- [`infuraAPIKey`](../reference/sdk-options.md#infuraapikey) - Enables read-only RPC and load‑balancing.
 
 ### 3. Connect and use provider
 
