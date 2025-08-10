@@ -6,7 +6,7 @@ sidebar_label: JSON-RPC API
 
 # Monad JSON-RPC API
 
-Infura supports the standard Ethereum JSON-RPC methods on the Monad testnet.
+Infura supports the standard EVM-compatible JSON-RPC methods on the Monad testnet.
 
 :::info Testnet only
 Monad network support is for the testnet only, as the Monad mainnet has not yet launched.
