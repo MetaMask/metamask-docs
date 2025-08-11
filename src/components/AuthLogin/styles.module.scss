@@ -21,13 +21,8 @@
   top: 50%;
   transform: translate(-50%, -50%);
   overflow: auto;
+  outline: none;
   background: var(--modal-bg-color-primary);
-
-  /* Enhanced focus styles for modal accessibility */
-  &:focus-visible {
-    outline: 2px solid var(--focus-outline-color-light);
-    outline-offset: 2px;
-  }
   width: 60%;
   padding: 1.4rem;
   border-radius: 1rem;
