@@ -285,11 +285,8 @@
     background-color: var(--general-gray-dark);
   }
 }
-/* Enhanced focus styles for better accessibility */
-.formControl:focus-visible {
-  outline: 2px solid var(--focus-outline-color-light);
-  outline-offset: 1px;
-  border-color: var(--focus-outline-color-light);
+.formControl:focus {
+  outline: none;
 }
 .formControl[type='number'] {
   border-color: transparent;
@@ -385,16 +382,11 @@
   background: none;
   padding: 0;
   border: 0;
+  outline: none;
   color: var(--general-gray-mid);
   font-size: inherit;
   line-height: 1;
   cursor: pointer;
-
-  /* Enhanced focus styles for interactive buttons */
-  &:focus-visible {
-    outline: 2px solid var(--focus-outline-color-light);
-    outline-offset: 2px;
-  }
 }
 .addItemIcon {
   display: inline-flex;

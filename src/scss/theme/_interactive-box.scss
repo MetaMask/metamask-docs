@@ -69,13 +69,6 @@
     transition: border var(--ifm-transition-fast) ease;
 
     background-color: transparent;
-
-    /* Enhanced focus styles for interactive box inputs */
-    &:focus-visible {
-      outline: 2px solid var(--focus-outline-color-light);
-      outline-offset: 1px;
-      border-color: var(--focus-outline-color-light);
-    }
   }
 
   &#method select,
@@ -94,12 +87,6 @@
     appearance: auto;
     width: 1.6rem;
     height: 1.6rem;
-
-    /* Enhanced focus styles for checkboxes */
-    &:focus-visible {
-      outline: 2px solid var(--focus-outline-color-light);
-      outline-offset: 2px;
-    }
   }
 
   &#interactive-box .form-group {
