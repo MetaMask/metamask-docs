@@ -21,3 +21,4 @@ npm-debug.log*
 .vercel
 .envrc
 .env
+.integrationBuilderCache
