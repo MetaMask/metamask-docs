@@ -38,13 +38,6 @@
     width: 100%;
     margin-bottom: 4px;
 
-    /* Enhanced focus styles for better accessibility */
-    &:focus-visible {
-      outline: 2px solid var(--focus-outline-color-light);
-      outline-offset: 1px;
-      border-color: var(--focus-outline-color-light);
-    }
-
     &:disabled {
       opacity: 0.5;
       pointer-events: none;
