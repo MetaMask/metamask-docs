@@ -21,7 +21,7 @@ interface ButtonProps {
   href?: string
   onClick?: () => void
   disabled?: boolean
-  as?: 'link' | 'a' | 'button'
+  as?: 'link' | 'a' | 'button' | 'div'
   external?: boolean
   rel?: string | boolean
   download?: boolean | string

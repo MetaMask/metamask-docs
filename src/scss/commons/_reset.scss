@@ -152,12 +152,6 @@ button {
   background: none;
 }
 
-a,
-li,
-button {
-  outline-color: var(--general-white);
-}
-
 input,
 select,
 button,
@@ -168,7 +162,6 @@ textarea {
 
   appearance: none;
   border: none;
-  outline: none;
 }
 
 input[type='submit'] {

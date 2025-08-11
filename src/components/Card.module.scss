@@ -76,6 +76,13 @@
       opacity: 1;
     }
   }
+
+  border: 2px solid transparent;
+
+  &:focus {
+    border: 2px solid var(--focus-outline-color-light);
+    outline: none;
+  }
 }
 
 .shape {

@@ -25,7 +25,14 @@ select {
     border-color calc(var(--motion) * var(--motion-speed) * 0.5) $gentle-ease;
 
   &:focus {
-    border-color: var(--general-dark);
+    border-color: var(--focus-outline-color-light);
+  }
+
+  /* Enhanced focus visibility for form controls */
+  &:focus-visible {
+    border-color: var(--focus-outline-color-light);
+    outline: 2px solid var(--focus-outline-color-light);
+    outline-offset: 1px;
   }
 }
 
