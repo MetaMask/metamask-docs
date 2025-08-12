@@ -41,7 +41,10 @@ const sidebar = {
       label: 'Tutorials',
       collapsible: false,
       collapsed: false,
-      items: ['tutorials/create-wallet-ai-agent'],
+      items: [
+        'tutorials/create-wallet-ai-agent',
+        'tutorials/upgrade-eoa-to-smart-account',
+      ],
     },
     {
       type: 'category',
