@@ -1,0 +1,284 @@
+@import '../../scss/utils/breakpoints';
+@import '../../scss/utils/variables';
+
+.feedbackBox {
+  margin: 2.5rem 0;
+  padding: 1rem 0;
+}
+
+.feedbackContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+.feedbackMain {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+  }
+}
+
+.question {
+  margin: 0;
+  font-size: 1.125rem;
+  font-family: var(--ifm-font-family-base);
+  color: var(--ifm-color-emphasis-800);
+  font-weight: 500;
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--ifm-color-emphasis-600);
+  }
+}
+
+.successMessage {
+  margin: 0;
+  font-size: 1.125rem;
+  font-family: var(--ifm-font-family-base);
+  color: var(--ifm-color-emphasis-800);
+  font-weight: 700;
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--ifm-color-emphasis-600);
+  }
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.feedbackButton {
+  display: flex;
+  flex-direction: row;
+  gap: 0.875rem;
+  align-items: center;
+  padding: 0.875rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  font-family: var(--ifm-font-family-base);
+  font-weight: 500;
+  line-height: 1.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid transparent;
+  color: var(--ifm-color-emphasis-800);
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(var(--ifm-color-emphasis-200-rgb), 0.1);
+    color: var(--ifm-color-emphasis-600);
+  }
+
+  &:hover {
+    color: var(--ifm-color-emphasis-900);
+    border-color: var(--ifm-color-emphasis-500);
+
+    @media (prefers-color-scheme: dark) {
+      color: var(--ifm-color-emphasis-300);
+      border-color: var(--ifm-color-emphasis-500);
+    }
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  small {
+    font-size: 1.125rem;
+    font-family: var(--ifm-font-family-base);
+    font-weight: 500;
+  }
+}
+
+.positiveButton {
+  // Uses default button styles
+}
+
+.negativeButton {
+  border: 1px solid var(--ifm-color-emphasis-500);
+  color: var(--ifm-color-emphasis-700);
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--ifm-color-emphasis-300);
+  }
+
+  &:hover {
+    color: var(--ifm-color-emphasis-700);
+    border-color: var(--ifm-color-emphasis-500);
+
+    @media (prefers-color-scheme: dark) {
+      color: var(--ifm-color-emphasis-300);
+    }
+  }
+}
+
+.reasonButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 1.5rem 0;
+}
+
+.reasonButton {
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 1.25rem 1.375rem;
+  font-size: 1.125rem;
+  font-family: var(--ifm-font-family-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--ifm-color-emphasis-800);
+  text-align: left;
+
+  // Ensure visibility in both light and dark modes
+  @media (prefers-color-scheme: dark) {
+    background: var(--ifm-background-surface-color);
+    border-color: var(--ifm-color-emphasis-400);
+    color: var(--ifm-color-content);
+  }
+
+  &:hover {
+    background: var(--ifm-color-emphasis-100);
+    border-color: var(--ifm-color-primary);
+    transform: translateX(4px);
+
+    @media (prefers-color-scheme: dark) {
+      background: var(--ifm-color-emphasis-200);
+      border-color: var(--ifm-color-primary);
+    }
+  }
+
+  &:active {
+    transform: translateX(2px);
+  }
+}
+
+.textArea {
+  width: 100%;
+  max-width: 500px;
+  min-height: 120px;
+  padding: 1.125rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-emphasis-800);
+  font-size: 1.125rem;
+  font-family: var(--ifm-font-family-base);
+  line-height: 1.5;
+  resize: vertical;
+  margin-bottom: 0.75rem;
+
+  @media (prefers-color-scheme: dark) {
+    color: var(--ifm-color-content);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--ifm-color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--ifm-color-primary-rgb), 0.2);
+  }
+
+  &::placeholder {
+    color: var(--ifm-color-emphasis-600);
+    font-family: var(--ifm-font-family-base);
+  }
+}
+
+.textareaFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 0.5rem;
+}
+
+.charCount {
+  font-size: 1rem;
+  font-family: var(--ifm-font-family-base);
+  color: var(--ifm-color-emphasis-600);
+  font-weight: 500;
+}
+
+.submitButton {
+  background: var(--ifm-color-primary);
+  color: white;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 8px;
+  padding: 0.875rem 1.75rem;
+  font-size: 1.125rem;
+  font-family: var(--ifm-font-family-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: var(--ifm-color-primary-dark);
+    border-color: var(--ifm-color-primary-dark);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .feedbackContainer {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .feedbackMain {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .reasonButtons {
+    max-width: 100%;
+  }
+
+  .textArea {
+    max-width: 100%;
+  }
+
+  .textareaFooter {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+
+    .charCount {
+      align-self: flex-start;
+      order: 2;
+    }
+
+    .submitButton {
+      order: 1;
+      align-self: flex-start;
+    }
+  }
+}
