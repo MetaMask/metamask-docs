@@ -8,11 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # Create a MetaMask smart account
 
-The MetaMask Delegation Toolkit is embedded, meaning that the end user can instantly interact with a dapp without wallet authorization, confirmations, or corporate logos.
 You can enable users to create a [MetaMask smart account](../concepts/smart-accounts.md) directly in your dapp.
-The toolkit supports different [smart account types](../concepts/smart-accounts.md#smart-account-implementation-types),
-each with its own configuration and support for different signing mechanisms.
-
 This page provides examples of using [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) with Viem Core SDK to create different types of smart accounts with different types of signatories.
 
 ## Prerequisites
@@ -25,7 +21,7 @@ This page provides examples of using [`toMetaMaskSmartAccount`](../reference/api
 A Hybrid smart account supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers.
 You can create a Hybrid smart account with the following types of signatories.
 
-### Create a Hybrid smart account with an account signatory
+### Create a Hybrid smart account with an Account signatory
 
 Use [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount) to create a Hybrid smart account with a signatory from a private key:
 
@@ -147,7 +143,7 @@ export const walletClient = createWalletClient({
 Use [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`toWebAuthnAccount`](https://viem.sh/account-abstraction/accounts/webauthn) to create a Hybrid smart account with a WebAuthn Account signatory:
 
 :::info Installation required
-To use WebAuthn, install the [Ox SDK](https://oxlib.sh/).
+To work with WebAuthn, install the [Ox SDK](https://oxlib.sh/).
 :::
 
 <Tabs>
@@ -419,5 +415,5 @@ With a MetaMask smart account, you can perform the following functions:
 
 - In conjunction with [Viem Account Abstraction clients](configure.md), deploy the smart account
   and [send user operations](send-user-operation.md).
-- [Sign delegations](create-delegation/index.md) that can be used to grant specific rights and permissions to other accounts.
-  Smart accounts that sign delegations are called *delegator accounts*.
+- [Create delegations](create-delegation/index.md) that can be used to grant specific rights and permissions to other accounts.
+  Smart accounts that create delegations are called *delegator accounts*.
