@@ -1,9 +1,9 @@
 ---
 title: "JSON-RPC methods"
-description: Supported standard Ethereum methods on Base network.
+description: Supported standard Ethereum methods on Sei network.
 ---
 
-# JSON-RPC methods
+# JSON-RPC API
 
 The standard Ethereum methods documented in this section are supported by Infura on the Sei network.
 
