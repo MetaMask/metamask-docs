@@ -148,11 +148,13 @@
 
 .headerInteractionArea {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 32px;
+  margin-bottom: 48px;
   align-items: flex-start;
-  gap: 20px;
+  gap: 24px;
+  padding: 0 8px;
 }
 
 .searchArea {
@@ -161,12 +163,106 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  gap: 13px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 280px;
+  max-width: 400px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+/* Target the Input component wrapper specifically */
+.searchInput>label {
+  margin: 0 !important;
+  width: 100%;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
+
+/* Ensure input component has same baseline as selects */
+.searchInput input {
+  margin: 0 !important;
+  vertical-align: top !important;
+  border-color: var(--ifm-color-emphasis-300) !important;
+  background-color: var(--ifm-background-surface-color) !important;
+  box-sizing: border-box !important;
+  flex: 1;
+}
+
+/* Ensure consistent minimum heights for all form elements */
+.searchArea input {
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+}
+
+.searchArea>div {
+  min-height: 48px;
+  height: auto;
+  max-height: none;
+}
+
+/* Style the custom select components to match */
+.searchArea .customSelect {
+  min-width: 200px;
+  max-width: 300px;
+  flex-shrink: 0;
+  margin: 0;
+  align-self: center;
+}
+
+/* Add focus states for better accessibility */
+.searchArea input:focus {
+  border-color: var(--ifm-color-primary) !important;
+  box-shadow: 0 0 0 2px rgba(var(--ifm-color-primary-r), var(--ifm-color-primary-g), var(--ifm-color-primary-b), 0.2) !important;
+  outline: none !important;
+}
+
+
+
+@media (max-width: 768px) {
+  .searchArea {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .searchInput {
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .searchInput input {
+    width: 100% !important;
+  }
+
+  .searchArea .customSelect {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
 }
 
 mark {
-  background-color: rgba(var(--ifm-color-primary-r), var(--ifm-color-primary-g), var(--ifm-color-primary-b), 0.3);
-  color: var(--ifm-font-color-base);
+  background-color: #fef3c7;
+  color: #92400e;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+html[data-theme='dark'] mark {
+  background-color: #451a03;
+  color: #fbbf24;
 }
 
 .filterButton {
@@ -247,13 +343,39 @@ mark {
   width: 24px;
 }
 
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+  margin-top: 0;
+  padding: 0px 8px 16px 8px;
+}
+
+@media (max-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cardsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 32px;
+  }
+}
+
 .noResults {
   width: 100%;
   text-align: center;
   font-size: 20px;
   font-weight: 700;
   color: var(--ifm-font-color-base);
-  margin-top: 20px;
+  margin-top: 40px;
+  padding: 40px 20px;
+  background-color: var(--ifm-color-emphasis-100);
+  border-radius: 12px;
 }
 
 .modalHeader {

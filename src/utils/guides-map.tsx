@@ -1,9 +1,10 @@
 export const tags = {
-  pnp: "plug and play",
-  mpcCoreKit: "mpc core kit",
-  sfa: "single factor auth",
-  sfaJS: "@web3auth/single-factor-auth",
-  mpcCoreKitJS: "@web3auth/mpc-core-kit",
+  web3Auth: "web3auth",
+  embeddedWallet: "embedded wallets",
+  metamaskSdk: "metamask sdk",
+  delegationToolkit: "delegation toolkit",
+  infura: "infura",
+  snaps: "snaps",
   web: "web",
   android: "android",
   ios: "ios",
@@ -31,10 +32,8 @@ export const tags = {
   tezos: "tezos",
   tron: "tron",
   ton: "ton",
-  customAuthentication: "custom authentication",
   accountAbstraction: "account abstraction",
   onRamp: "on ramp",
-  mfa: "mfa",
 };
 
 export interface GuidesInterface {
@@ -91,15 +90,15 @@ export const platformMap = [
 
 export const productMap = [
   {
-    label: "Plug and Play",
-    value: tags.pnp,
+    label: "Metamask SDK",
+    value: tags.metamaskSdk,
   },
   {
-    label: "Single Factor Auth",
-    value: tags.sfa,
+    label: "Embedded Wallets",
+    value: tags.embeddedWallet,
   },
   {
-    label: "MPC Core Kit",
-    value: tags.mpcCoreKit,
+    label: "Delegation Toolkit",
+    value: tags.delegationToolkit,
   },
 ];

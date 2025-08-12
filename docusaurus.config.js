@@ -382,18 +382,17 @@ const config = {
             to: 'developer-tools/faucet/',
             label: "Faucet",
             position: 'right',
-            excludeUrl: REF_ALLOW_LOGIN_PATH,
           },
           {
             to: 'https://community.metamask.io/',
             label: "Help ↗",
             position: 'right',
           },
-          {
-            type: 'custom-navbarWallet',
-            position: 'right',
-            includeUrl: REF_ALLOW_LOGIN_PATH,
-          },
+          // {
+          //   type: 'custom-navbarWallet',
+          //   position: 'right',
+          //   includeUrl: REF_ALLOW_LOGIN_PATH,
+          // },
           /* Language drop down
           {
             type: "localeDropdown",

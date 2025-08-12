@@ -34,9 +34,9 @@ module.exports = (context, options) => ({
     const { createData, addRoute } = actions;
     const contentHub = await createData("guides.json", JSON.stringify(content));
     addRoute({
-      path: (process.env.REACT_APP_BASE_URL || "/docs/") + "guides",
+      path: "/guides",
       exact: true,
-      component: "@site/src/pages/guides",
+      component: "@site/src/components/GuidesPage",
       modules: { content: contentHub },
     });
   },
