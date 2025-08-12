@@ -17,7 +17,7 @@
       permissions:
         contents: read
       steps:
-        - uses: actions/checkout@v4
+        - uses: actions/checkout@v5
         - name: LinkCheck mdx files
           uses: ConsenSys/github-actions/docs-link-check@main
           with:
@@ -32,7 +32,7 @@
       permissions:
         contents: read
       steps:
-        - uses: actions/checkout@v4
+        - uses: actions/checkout@v5
         - name: LinkCheck md files
           uses: ConsenSys/github-actions/docs-link-check@main
           with:
