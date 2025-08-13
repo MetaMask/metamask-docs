@@ -267,18 +267,14 @@ const config = {
         containerId: 'GTM-5FGPLC2Q',
       },
     ],
-    // Temporary direct GA4 for feedback testing
-    ...(process.env.GA4_MEASUREMENT_ID
-      ? [
-          [
-            '@docusaurus/plugin-google-gtag',
-            {
-              trackingID: process.env.GA4_MEASUREMENT_ID,
-              anonymizeIP: true,
-            },
-          ],
-        ]
-      : []),
+
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-E8PSQ0E1L7',
+        anonymizeIP: true,
+      },
+    ],
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:
