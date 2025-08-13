@@ -6,17 +6,68 @@ sidebar_label: ERC-7715 quickstart
 
 # ERC-7715 quickstart
 
-This page demonstrates how to use [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) to request permissions 
-from a wallet, and execute transactions on a user's behalf. 
+The Delegation Toolkit supports [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715), which enables you to request permissions from MetaMask and execute transactions on a user's behalf.
+You can get started quickly with ERC-7715 in the following ways:
 
-## Prerequisites
+- [CLI quickstart](#cli-quickstart) - Use the interactive CLI to bootstrap an ERC-7715 project in under two minutes.
+- [Manual quickstart](#manual-quickstart) - Follow these steps to request and redeem ERC-7715 permissions.
+
+## CLI quickstart
+
+Run the following command to install the CLI package:
+
+```bash
+npx @metamask/create-gator-app@latest
+```
+
+You'll be asked the following prompts:
+
+```bash
+? What is your project named? (my-gator-app)
+? Pick a framework: (Use arrow keys) 
+❯ nextjs
+  vite-react
+? Pick a template: (Use arrow keys)
+  MetaMask Smart Accounts Starter
+  MetaMask Smart Accounts & Delegation Starter
+❯ Experimental: ERC7715 Permissions starter
+? Pick a package manager: (Use arrow keys)
+❯ npm 
+  yarn 
+  pnpm 
+```
+
+To use ERC-7715, choose the **nextjs** framework and the **Experimental: ERC7715 Permissions starter** template.
+This template provides an interface to create a session account and request and redeem ERC-7715 permissions.
+
+Once you've answered the prompts, the CLI will create the project using the specified configuration and install the required dependencies.
+
+### Use LLM rules
+
+To create an ERC-7715 project with LLM rules tailored to your preferred IDE, use the `--add-llm-rules` option when installing the CLI:
+
+```bash
+npx @metamask/create-gator-app --add-llm-rules
+```
+
+You'll be prompted to select your IDE.
+Currently, only Cursor and Windsurf are supported.
+
+```bash
+? Which IDE's LLM rules would you like to copy? (Use arrow keys)
+  Cursor 
+  Windsurf 
+❯ Both 
+```
+
+## Manual quickstart
+
+### 1. Install dependencies
 
 - [Install and set up the Delegation Toolkit.](install.md)
-- [Install MetaMask Flask 12.14.2 or later](/snaps/get-started/install-flask).
+- ERC-7715 is an experimental feature, which requires you to [install MetaMask Flask 12.14.2 or later](/snaps/get-started/install-flask).
 
-## Steps
-
-### 1. Set up a Wallet Client
+### 2. Set up a Wallet Client
 
 Set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) using Viem's `createWalletClient` function. This client will help you interact with MetaMask Flask. 
 
@@ -33,7 +84,7 @@ const walletClient = createWalletClient({
 }).extend(erc7715ProviderActions());
 ```
 
-### 2. Set up a Public Client
+### 3. Set up a Public Client
 
 Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. 
 This client will help you query the account state and interact with blockchain networks.
@@ -48,7 +99,7 @@ const publicClient = createPublicClient({
 });
 ```
 
-### 3. Set up a session account
+### 4. Set up a session account
 
 Set up a session account which can either be a smart account or an externally owned 
 account (EOA) to request ERC-7715 permissions. This account is responsible 
@@ -75,7 +126,7 @@ const sessionAccount = await toMetaMaskSmartAccount({
 });
 ```
 
-### 4. Request ERC-7715 permissions
+### 5. Request ERC-7715 permissions
 
 Request ERC-7715 permissions from the user. Currently, only the 
 `native-token-stream` permission type is supported, which allows the dapp to stream 
@@ -107,7 +158,7 @@ const grantedPermissions = await walletClient.grantPermissions([{
 }]);
 ```
 
-### 5. Set up a Bundler Client
+### 6. Set up a Bundler Client
 
 Set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) 
 using Viem's `createBundlerClient` function. This lets you use the bundler service 
@@ -128,7 +179,7 @@ const bundlerClient = createBundlerClient({
 }).extend(erc7710BundlerActions());
 ```
 
-### 6. Redeem ERC-7715 permissions
+### 7. Redeem ERC-7715 permissions
 
 The session account can now [redeem the delegation](../how-to/redeem-delegation.md). The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 
