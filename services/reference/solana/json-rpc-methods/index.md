@@ -3,7 +3,7 @@ title: "JSON-RPC methods"
 description: Supported methods on the Solana network.
 ---
 
-# JSON-RPC methods
+# JSON-RPC API
 
 :::note Decentralized Infrastructure Network (DIN)
 Solana is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
