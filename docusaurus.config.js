@@ -267,6 +267,14 @@ const config = {
         containerId: 'GTM-5FGPLC2Q',
       },
     ],
+
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-E8PSQ0E1L7',
+        anonymizeIP: true,
+      },
+    ],
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:
