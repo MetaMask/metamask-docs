@@ -76,6 +76,16 @@ export const trackFeedbackForGA = ({
     `📱 Device detected as: ${detectedDeviceType} (screen: ${window.screen.width}x${window.screen.height})`
   )
 
+  // Enable debug mode in development
+  if (process.env.NODE_ENV === 'development' && typeof window.gtag === 'function') {
+    try {
+      window.gtag('config', 'debug_mode', true)
+      console.log('🔍 GA4 Debug mode enabled for development')
+    } catch (error) {
+      console.log('⚠️ Could not enable debug mode:', error)
+    }
+  }
+
   // Try gtag first (preferred method)
   if (typeof window.gtag === 'function') {
     try {
