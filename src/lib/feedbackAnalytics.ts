@@ -1,27 +1,80 @@
 interface FeedbackData {
   positive: boolean
   reason?: string
+  response?: string
   locale?: string
   timestamp?: number
+  device_type?: string
+}
+
+/**
+ * Detect device type based on user agent and screen size
+ */
+const getDeviceType = (): string => {
+  if (typeof window === 'undefined') return 'unknown'
+
+  const userAgent = navigator.userAgent.toLowerCase()
+  const screenWidth = window.screen.width
+
+  // Mobile devices
+  if (/android|webos|iphone|ipod|blackberry|iemobile|opera mini/i.test(userAgent)) {
+    return 'mobile'
+  }
+
+  // Tablet devices
+  if (
+    /ipad|android(?!.*mobile)|tablet/i.test(userAgent) ||
+    (screenWidth >= 768 && screenWidth <= 1024)
+  ) {
+    return 'tablet'
+  }
+
+  // Desktop devices
+  if (screenWidth > 1024) {
+    return 'desktop'
+  }
+
+  // Fallback based on screen size
+  if (screenWidth <= 768) {
+    return 'mobile'
+  }
+
+  return 'desktop'
 }
 
 /**
  * Track feedback events for Google Analytics 4
  * Sends feedback data to GA4 using gtag() or dataLayer fallback
  */
-export const trackFeedbackForGA = ({ positive, reason, locale, timestamp }: FeedbackData): void => {
+export const trackFeedbackForGA = ({
+  positive,
+  reason,
+  response,
+  locale,
+  timestamp,
+  device_type,
+}: FeedbackData): void => {
   if (typeof window === 'undefined') {
     console.warn('Window object not available - feedback tracking skipped')
     return
   }
 
+  const detectedDeviceType = device_type || getDeviceType()
+
   const eventData = {
     feedback_type: positive ? 'positive' : 'negative',
     ...(reason && { reason }),
+    ...(response && { response }),
     locale: locale || navigator.language,
     page_path: window.location.pathname,
     timestamp: timestamp || Date.now(),
+    device_type: detectedDeviceType,
   }
+
+  // Console log for demo purposes
+  console.log(
+    `📱 Device detected as: ${detectedDeviceType} (screen: ${window.screen.width}x${window.screen.height})`
+  )
 
   // Try gtag first (preferred method)
   if (typeof window.gtag === 'function') {

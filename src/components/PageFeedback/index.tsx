@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { trackFeedbackForGA } from '../../utils/analytics'
+import { trackFeedbackForGA } from '../../lib/feedbackAnalytics'
 import styles from './styles.module.scss'
 
 export default function PageFeedback() {
@@ -27,12 +27,12 @@ export default function PageFeedback() {
   }
 
   const handleReasonSubmit = (r: string) => {
-    const finalReason = r === 'other' ? otherReason.trim() : r
-    console.log(`💭 User selected reason: "${finalReason}"`)
+    console.log(`💭 User selected reason: "${r}"`)
 
     const data = {
       positive: false,
-      reason: finalReason,
+      reason: r,
+      ...(r === 'other' && otherReason.trim() && { response: otherReason.trim() }),
       locale: navigator.language,
     }
     trackFeedbackForGA(data)
@@ -121,7 +121,7 @@ export default function PageFeedback() {
             Outdated content
           </button>
           <button className={styles.reasonButton} onClick={() => setReason('other')}>
-            Other
+            Other (include response)
           </button>
         </div>
       </div>

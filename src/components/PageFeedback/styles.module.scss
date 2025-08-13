@@ -134,6 +134,10 @@
   gap: 1rem;
   max-width: 500px;
   margin: 1.5rem 0;
+
+  @media (min-width: 768px) {
+    margin-left: auto;
+  }
 }
 
 .reasonButton {
@@ -187,6 +191,10 @@
   resize: vertical;
   margin-bottom: 0.75rem;
 
+  @media (min-width: 768px) {
+    margin-left: auto;
+  }
+
   @media (prefers-color-scheme: dark) {
     color: var(--ifm-color-content);
   }
@@ -212,6 +220,10 @@
   width: 100%;
   max-width: 500px;
   margin-top: 0.5rem;
+
+  @media (min-width: 768px) {
+    margin-left: auto;
+  }
 }
 
 .charCount {
