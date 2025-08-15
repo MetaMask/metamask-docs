@@ -709,6 +709,10 @@
     {
       "source": "/services/reference/:path*/json-rpc-methods/eth_coinbase/",
       "destination": "/services/get-started/infura/"
+    },
+    {
+      "source": "/delegation-toolkit/development/how-to/create-smart-account/configure-accounts-signers/",
+      "destination": "/delegation-toolkit/development/how-to/create-smart-account/"
     }
   ]
 }

@@ -1,47 +1,29 @@
 ---
-sidebar_label: Configure accounts and signers
-description: Learn how to configure different types of MetaMask Smart Accounts and signers using Viem.
-sidebar_position: 1
+description: Learn how to create a MetaMask smart account using Viem.
+sidebar_position: 2
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Configure MetaMask Smart Accounts and signers
+# Create a MetaMask smart account
 
-The MetaMask Delegation Toolkit supports different [MetaMask smart account types](../../concepts/smart-accounts.md#smart-account-implementation-types),
-each with its own configuration and support for different signing mechanisms.
-You can create flexible and secure delegator accounts tailored to your specific needs.
+You can enable users to create a [MetaMask smart account](../concepts/smart-accounts.md) directly in your dapp.
+This page provides examples of using [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) with Viem Core SDK to create different types of smart accounts with different types of signatories.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../configure.md)
-- [Create a MetaMask smart account.](index.md)
+- [Install and set up the Delegation Toolkit.](../get-started/install.md)
+- [Configure the Delegation Toolkit.](configure.md)
 
-## Configure a Hybrid smart account
+## Create a Hybrid smart account
 
-The [Hybrid smart account](../../concepts/smart-accounts.md#hybrid-smart-account) supports both an EOA "owner" and any number of P256 (passkey) signers.
+A Hybrid smart account supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers.
+You can create a Hybrid smart account with the following types of signatories.
 
-To configure a Hybrid smart account, provide the following parameters:
+### Create a Hybrid smart account with an Account signatory
 
-- `owner`: The owner's account address as a hex string.
-  The owner can be the zero address, indicating that there is no owner configured.
-- `p256KeyIds`: An array of key identifiers for P256 signers as hex strings.
-- `p256XValues`: An array of public key x-values for P256 signers as `bigint`s.
-- `p256YValues`: An array of public key y-values for P256 signers as `bigint`s.
-- `signatory`: A signer that will sign on behalf of the smart account.
-
-:::note
-You can set all `p256` parameters to empty arrays to configure no WebAuthn signer.
-However, we recommend configuring at least one signer for account recovery.
-:::
-
-For a Hybrid smart account, you can configure the following types of signatories:
-
-### Configure an account signatory
-
-This example creates a signatory from a private key using Viem's [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount) function.
+Use [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount) to create a Hybrid smart account with a signatory from a private key:
 
 <Tabs>
 <TabItem value="example.ts">
@@ -92,10 +74,9 @@ export const account = privateKeyToAccount(privateKey);
 </TabItem>
 </Tabs>
 
-### Configure a Wallet Client signatory
+### Create a Hybrid smart account with a Wallet Client signatory
 
-This example creates a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) as the signatory,
-using Viem's `createWalletClient` function.
+Use [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) to create a Hybrid smart account with a Wallet Client signatory:
 
 <Tabs>
 <TabItem value="example.ts">
@@ -157,15 +138,12 @@ export const walletClient = createWalletClient({
 </TabItem>
 </Tabs>
 
-### Configure a WebAuthn (passkey) signatory
+### Create a Hybrid smart account with a WebAuthn (passkey) signatory
 
-This example creates a [Viem WebAuthn Account](https://viem.sh/account-abstraction/accounts/webauthn) as the signatory,
-using Viem's `toWebAuthnAccount` function.
+Use [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`toWebAuthnAccount`](https://viem.sh/account-abstraction/accounts/webauthn) to create a Hybrid smart account with a WebAuthn Account signatory:
 
 :::info Installation required
-
 To work with WebAuthn, install the [Ox SDK](https://oxlib.sh/).
-
 :::
 
 <Tabs>
@@ -231,21 +209,10 @@ export const webAuthnAccount = toWebAuthnAccount({ credential });
 </TabItem>
 </Tabs>
 
+## Create a Multisig smart account
 
-## Configure a Multisig smart account
-
-The [Multisig smart account](../../concepts/smart-accounts.md#multisig-smart-account) supports multiple EOA signers with a configurable threshold for execution.
-
-To configure a Multisig smart account, provide the following parameters:
-
-- `signers`: An array of EOA signer addresses as hex strings.
-- `threshold`: The number of signers required to execute a transaction, as a `bigint`.
-- `signatory`: A signer that will sign on behalf of the smart account.
-
-### Configure signatories
-
-For a Multisig smart account, you can use a combination of account signatories and Wallet Client signatories.
-For example:
+A [Multisig smart account](../concepts/smart-accounts.md#multisig-smart-account) supports multiple EOA signers with a configurable threshold for execution.
+Use [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) to create a Multsig smart account with a combination of account signatories and Wallet Client signatories:
 
 <Tabs>
 <TabItem value="example.ts">
@@ -316,21 +283,20 @@ export const walletClient = createWalletClient({
 The number of signers in the signatories must be at least equal to the threshold for valid signature generation.
 :::
 
-## Configure a Stateless 7702 smart account
+## Create a Stateless 7702 smart account
 
-The [Stateless 7702 smart account](../../concepts/smart-accounts.md#stateless-7702-smart-account) represents an EOA that has been upgraded to support MetaMask Smart Accounts 
-functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702). This implementation does not handle the upgrade process; see the [EIP-7702 quickstart](./../../get-started/eip7702-quickstart.md) to learn how to upgrade.
+A [Stateless 7702 smart account](../concepts/smart-accounts.md#stateless-7702-smart-account) represents an EOA that has been upgraded to support MetaMask Smart Accounts 
+functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
 
-To configure a Stateless 7702 smart account, provide the following parameters:
+:::note
+This implementation does not handle the upgrade process; see the [EIP-7702 quickstart](../get-started/eip7702-quickstart.md) to learn how to upgrade.
+:::
 
-- `address`: The address of the EOA that has been upgraded to a smart account.
-- `signatory`: A signer that will sign on behalf of the smart account.
+You can create a Stateless 7702 smart account with the following types of signatories.
 
-For a Stateless 7702 smart account, you can configure the following types of signatories:
+### Create a Stateless 7702 smart account with an account signatory
 
-### Configure an account signatory
-
-This example creates a signatory from a private key using Viem's [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount) function.
+Use [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount) to create a Stateless 7702 smart account with a signatory from a private key:
 
 <Tabs>
 <TabItem value="example.ts">
@@ -346,7 +312,7 @@ import {
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Stateless7702,
-  address: account.address
+  address: account.address // Address of the upgraded EOA
   signatory: { account },
 });
 ```
@@ -380,10 +346,9 @@ export const account = privateKeyToAccount(privateKey);
 </TabItem>
 </Tabs>
 
-### Configure a Wallet Client signatory
+### Create a Stateless 7702 smart account with a Wallet Client signatory
 
-This example creates a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) as the signatory,
-using Viem's `createWalletClient` function.
+Use [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) to create a Stateless 7702 smart account with a Wallet Client signatory:
 
 <Tabs>
 <TabItem value="example.ts">
@@ -402,7 +367,7 @@ const address = addresses[0];
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Stateless7702,
-  address, 
+  address, // Address of the upgraded EOA
   signatory: { walletClient },
 });
 ```
@@ -443,3 +408,12 @@ export const walletClient = createWalletClient({
 
 </TabItem>
 </Tabs>
+
+## Next steps
+
+With a MetaMask smart account, you can perform the following functions:
+
+- In conjunction with [Viem Account Abstraction clients](configure.md), deploy the smart account
+  and [send user operations](send-user-operation.md).
+- [Create delegations](create-delegation/index.md) that can be used to grant specific rights and permissions to other accounts.
+  Smart accounts that create delegations are called *delegator accounts*.
