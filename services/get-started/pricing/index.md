@@ -31,7 +31,7 @@ credits toward your daily credit quota:
     within a batch call consumes credits (including the batch call itself).
 
 - [**Archive requests**](../../concepts/archive-data.md): Accessing archive data (older than 128 blocks)
-    currently consumes the same amount of credits as non-archive data, however, this might change in the future.
+    Currently consumes the same amount of credits as non-archive data, however, this might change in the future.
 
 ## Infura plans
 
