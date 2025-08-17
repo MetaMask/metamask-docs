@@ -61,7 +61,7 @@ const caveats = caveatBuilder
     "transfer(address,uint256)"
   ])
   // limitedCalls accepts a number.
-  // This caveat restricts the caller to only use the delegation one time.
+  // This caveat restricts the caller to only use the delegation once.
   .addCaveat("limitedCalls", 1)
   .build();
 ```
