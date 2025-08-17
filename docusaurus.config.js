@@ -271,7 +271,7 @@ const config = {
     [
       '@docusaurus/plugin-google-gtag',
       {
-        trackingID: 'G-E8PSQ0E1L7',
+        trackingID: process.env.GA4_MEASUREMENT_ID || 'G-E8PSQ0E1L7',
         anonymizeIP: true,
       },
     ],

@@ -79,7 +79,7 @@ export const trackFeedbackForGA = ({
   // Enable debug mode in development
   if (process.env.NODE_ENV === 'development' && typeof window.gtag === 'function') {
     try {
-      window.gtag('config', 'debug_mode', true)
+      window.gtag('config', 'G-E8PSQ0E1L7', { debug_mode: true })
       console.log('🔍 GA4 Debug mode enabled for development')
     } catch (error) {
       console.log('⚠️ Could not enable debug mode:', error)
@@ -117,6 +117,23 @@ export const trackFeedbackForGA = ({
 
   // Final fallback - just log the event for manual tracking
   console.warn('No tracking method available. Event data:', eventData)
+}
+
+/**
+ * Unified feedback tracking function that sends to both GA4 and Segment
+ */
+export const trackFeedback = (data: FeedbackData): void => {
+  // Track to GA4
+  trackFeedbackForGA(data)
+
+  // Track to Segment
+  import('../lib/segmentAnalytics')
+    .then(({ trackFeedbackForSegment }) => {
+      trackFeedbackForSegment(data)
+    })
+    .catch(error => {
+      console.warn('Could not load Segment analytics:', error)
+    })
 }
 
 // Type augmentation for window object

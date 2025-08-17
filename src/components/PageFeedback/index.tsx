@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { trackFeedbackForGA } from '../../lib/feedbackAnalytics'
+import { trackFeedback } from '../../lib/feedbackAnalytics'
 import styles from './styles.module.scss'
 
 export default function PageFeedback() {
@@ -18,7 +18,7 @@ export default function PageFeedback() {
     console.log(`🎯 User clicked: ${positive ? 'Yes' : 'No'} (positive: ${positive})`)
     setFeedbackGiven(true)
     if (positive) {
-      trackFeedbackForGA({
+      trackFeedback({
         positive: true,
         locale: navigator.language,
       })
@@ -35,7 +35,7 @@ export default function PageFeedback() {
       ...(r === 'other' && otherReason.trim() && { response: otherReason.trim() }),
       locale: navigator.language,
     }
-    trackFeedbackForGA(data)
+    trackFeedback(data)
     setSubmitted(true)
   }
 
