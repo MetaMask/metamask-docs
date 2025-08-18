@@ -31,7 +31,7 @@ With the SDK, you can easily onboard users and interact with their accounts on d
 MetaMask SDK gives your dapp a powerful upgrade:
 
 - **Cross-platform, cross-browser support** - One integration covers both desktop and mobile, all major browsers, and the MetaMask mobile app—streamlining your user onboarding and eliminating edge cases.
-- **Mobile connection that just works** - Say goodbye to clunky "open in in-app browser" flows.
+- **Mobile connection that just works** - Say goodbye to clunky "open in-app browser" flows.
   The SDK enables a native connection from any mobile browser (Safari, Chrome, etc.) directly to the MetaMask mobile app, using secure deeplinking and session management.
 - **Production-ready, battle-tested** - MetaMask SDK is used in high-volume dapps across DeFi, NFTs, gaming, and more—ensuring stability, speed, and a smooth developer experience.
 - **Multichain-ready by design** - Today, the SDK supports all EVM networks.
