@@ -129,7 +129,14 @@ export const trackFeedback = (data: FeedbackData): void => {
   // Track to Segment
   import('../lib/segmentAnalytics')
     .then(({ trackFeedbackForSegment }) => {
-      trackFeedbackForSegment(data)
+      trackFeedbackForSegment({
+        ...data,
+        reason: data.reason || '',
+        response: data.response || '',
+        locale: data.locale || navigator.language,
+        timestamp: data.timestamp || Date.now(),
+        device_type: data.device_type || getDeviceType(),
+      })
     })
     .catch(error => {
       console.warn('Could not load Segment analytics:', error)
