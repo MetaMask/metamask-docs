@@ -116,6 +116,61 @@ export const bundlerClient = createBundlerClient({
 </TabItem>
 </Tabs>
 
+## `encodeCalls`
+
+Encodes calls for execution by MetaMask smart account contract. If there's a single call directly to the smart account, it returns the call data directly. For multiple calls or calls to other addresses, it creates executions and encodes them for the smart account's `execute` function.
+
+The execution mode is set to `SINGLE_DEFAULT_MODE` for a single call to other address, or `BATCH_DEFAULT_MODE` for multiple calls. [Learn more about execution modes](../../how-to/redeem-delegation#execution-modes).
+
+### Example 
+
+<Tabs>
+<TabItem value ="example.ts">
+
+```ts
+import { smartAccount } from "./config.ts";
+
+const calls = [{
+  to: zeroAddress,
+  data: "0x",
+  value: 0n
+}];
+
+const executeCallData = await smartAccount.encodeCalls(calls);
+```
+
+</TabItem>
+
+<TabItem value ="config.ts">
+
+```ts
+import { createPublicClient, http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { sepolia as chain } from "viem/chains";
+import {
+  Implementation,
+  toMetaMaskSmartAccount,
+} from "@metamask/delegation-toolkit";
+
+const publicClient = createPublicClient({
+  chain,
+  transport: http(),
+});
+
+const delegatorAccount = privateKeyToAccount("0x...");
+
+export const smartAccount = await toMetaMaskSmartAccount({
+  client: publicClient,
+  implementation: Implementation.Hybrid,
+  deployParams: [delegatorAccount.address, [], [], []],
+  deploySalt: "0x",
+  signatory: { account: delegatorAccount },
+});
+```
+
+</TabItem>
+</Tabs>
+
 ## `getFactoryArgs`
 
 Returns the factory address and factory data that can be used to deploy the smart account. 
@@ -129,6 +184,54 @@ Returns the factory address and factory data that can be used to deploy the smar
 import { smartAccount } from "./config.ts";
 
 const { factory, factoryData } = await smartAccount.getFactoryArgs();
+```
+
+</TabItem>
+
+<TabItem value ="config.ts">
+
+```ts
+import { createPublicClient, http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { sepolia as chain } from "viem/chains";
+import {
+  Implementation,
+  toMetaMaskSmartAccount,
+} from "@metamask/delegation-toolkit";
+
+const publicClient = createPublicClient({
+  chain,
+  transport: http(),
+});
+
+const delegatorAccount = privateKeyToAccount("0x...");
+
+export const smartAccount = await toMetaMaskSmartAccount({
+  client: publicClient,
+  implementation: Implementation.Hybrid,
+  deployParams: [delegatorAccount.address, [], [], []],
+  deploySalt: "0x",
+  signatory: { account: delegatorAccount },
+});
+```
+
+</TabItem>
+</Tabs>
+
+
+## `getNonce`
+
+Returns the nonce for smart account.
+
+### Example
+
+<Tabs>
+<TabItem value ="example.ts">
+
+```ts
+import { smartAccount } from "./config.ts";
+
+const nonce = await smartAccount.getNonce();
 ```
 
 </TabItem>
