@@ -120,7 +120,13 @@ export const bundlerClient = createBundlerClient({
 
 Encodes calls for execution by MetaMask smart account contract. If there's a single call directly to the smart account, it returns the call data directly. For multiple calls or calls to other addresses, it creates executions and encodes them for the smart account's `execute` function.
 
-The execution mode is set to `SINGLE_DEFAULT_MODE` for a single call to other address, or `BATCH_DEFAULT_MODE` for multiple calls. [Learn more about execution modes](../../how-to/redeem-delegation#execution-modes).
+The execution mode is set to `SINGLE_DEFAULT_MODE` for a single call to other address, or `BATCH_DEFAULT_MODE` for multiple calls.
+
+### Parameters
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| `calls` | `Call[]` | Yes | List of calls to be encoded. |
 
 ### Example 
 

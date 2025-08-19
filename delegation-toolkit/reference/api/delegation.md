@@ -254,6 +254,12 @@ overrideDeployedEnvironment(
 
 Encodes the calldata for disabling delegation.
 
+### Parameters
+
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| `delegation` | `Delegation` | Yes | The delegation to be disabled. |
+
 ### Example
 
 <Tabs>
