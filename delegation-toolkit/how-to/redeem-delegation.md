@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 # Redeem a delegation
 
 A delegate can redeem a delegation by submitting either a user operation or a regular transaction,
-depending on whether the delegate is a MetaMask smart account or externally owned account (EOA).
+depending on whether the delegate is a MetaMask smart account or an externally owned account (EOA).
 
 The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the delegator's behalf.
 To prepare the calldata for the redeem transaction, use the [`redeemDelegation`](../reference/api/delegation.md#redeemdelegation) utility function.

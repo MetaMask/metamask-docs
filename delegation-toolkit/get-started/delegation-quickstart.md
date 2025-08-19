@@ -100,7 +100,7 @@ A root delegation is a delegation that doesn't derive its authority from another
 Alice is delegating her own authority away, as opposed to *redelegating* permissions she received from a previous delegation.
 
 This example passes an empty `caveats` array, which means Bob can perform any action on Alice's behalf. We recommend [restricting the delegation](../how-to/create-delegation/restrict-delegation.md) by adding caveat enforcers.
-For example, Alice can delegate the ability to sepnd her USDC to Bob, limiting the amount to 100 USDC.
+For example, Alice can delegate the ability to spend her USDC to Bob, limiting the amount to 100 USDC.
 
 :::warning Important
 

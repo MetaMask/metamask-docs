@@ -67,7 +67,7 @@ https://metamask.app.link/send/0x0000000@137?value=1e16
 This deeplink starts the process of sending a transaction in the native currency.
 If the chain ID is specified, the MetaMask mobile app automatically switches to the correct network.
 
-The example displays the confirmation screen to send 0.01 POL (`1e16` wei) in Polygon (chain ID `137`) to recipient address `0x0000000`.
+The example displays the confirmation screen to send 0.01 POL (`1e16` wei) in Polygon (chain ID `137`) to the recipient address `0x0000000`.
 
 ### Path parameters
 

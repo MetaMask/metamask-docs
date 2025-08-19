@@ -658,7 +658,7 @@ caveatBuilder.addCaveat("ownershipTransfer",
 ## `redeemer`
 
 Limits the addresses that can redeem the delegation.
-This caveat is designed for restricting smart contracts or EOAs lacking delegation support,
+This caveat is designed to restrict smart contracts or EOAs lacking delegation support,
 and can be placed anywhere in the delegation chain to restrict the redeemer.
 
 :::note
