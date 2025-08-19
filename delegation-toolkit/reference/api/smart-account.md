@@ -116,6 +116,53 @@ export const bundlerClient = createBundlerClient({
 </TabItem>
 </Tabs>
 
+## `getFactoryArgs`
+
+Returns the factory address and factory data that can be used to deploy the smart account. 
+
+### Example
+
+<Tabs>
+<TabItem value ="example.ts">
+
+```ts
+import { smartAccount } from "./config.ts";
+
+const { factory, factoryData } = await smartAccount.getFactoryArgs();
+```
+
+</TabItem>
+
+<TabItem value ="config.ts">
+
+```ts
+import { createPublicClient, http } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import { sepolia as chain } from "viem/chains";
+import {
+  Implementation,
+  toMetaMaskSmartAccount,
+} from "@metamask/delegation-toolkit";
+
+const publicClient = createPublicClient({
+  chain,
+  transport: http(),
+});
+
+const delegatorAccount = privateKeyToAccount("0x...");
+
+export const smartAccount = await toMetaMaskSmartAccount({
+  client: publicClient,
+  implementation: Implementation.Hybrid,
+  deployParams: [delegatorAccount.address, [], [], []],
+  deploySalt: "0x",
+  signatory: { account: delegatorAccount },
+});
+```
+
+</TabItem>
+</Tabs>
+
 ## `signDelegation`
 
 Signs the delegation and returns the delegation signature.
