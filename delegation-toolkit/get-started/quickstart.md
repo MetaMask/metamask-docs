@@ -101,9 +101,9 @@ const bundlerClient = createBundlerClient({
 
 ### 4. Create a MetaMask smart account
 
-[Create a MetaMask smart account](../how-to/create-smart-account/index.md) to send the first user operation.
+[Create a MetaMask smart account](../how-to/create-smart-account.md) to send the first user operation.
 
-This example configures a [Hybrid](../concepts/smart-accounts.md#hybrid-smart-account) smart account,
+This example configures a Hybrid smart account,
 which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers:
 
 ```typescript

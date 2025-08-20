@@ -711,8 +711,12 @@
       "destination": "/services/get-started/infura/"
     },
     {
-      "source": "/delegation-toolkit/development/get-started/cli-quickstart/",
-      "destination": "/delegation-toolkit/development/get-started/quickstart/"
+      "source": "/delegation-toolkit/development/how-to/create-smart-account/configure-accounts-signers/",
+      "destination": "/delegation-toolkit/development/how-to/create-smart-account/"
+    },
+    {
+      "source": "/developer-tools/faucet/sepolia/",
+      "destination": "/developer-tools/faucet/"
     }
   ]
 }
