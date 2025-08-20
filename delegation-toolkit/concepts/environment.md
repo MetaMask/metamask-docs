@@ -90,7 +90,7 @@ You can deploy the contracts using any method, but the toolkit provides a conven
 This function requires a Viem [Public Client](https://viem.sh/docs/clients/public.html), [Wallet Client](https://viem.sh/docs/clients/wallet.html), and [Chain](https://viem.sh/docs/glossary/types#chain)
 to deploy the contracts and resolve the `DeleGatorEnvironment`. 
 
-Your wallet must have sufficient native token balance to deploy the contracts.
+Your wallet must have a sufficient native token balance to deploy the contracts.
 
 <Tabs>
 <TabItem value="example.ts">
