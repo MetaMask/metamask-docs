@@ -163,7 +163,7 @@ const config = {
   ],
   plugins: [
     ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache' }],
-    './src/plugins/docusaurus-plugin-guides',
+    './src/plugins/docusaurus-plugin-tutorials',
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',
     [
@@ -374,8 +374,8 @@ const config = {
             position: 'left',
           },
           {
-            label: "Guides",
-            to: "/guides",
+            label: "Tutorials",
+            to: "/tutorials",
             position: "left",
           },
           {

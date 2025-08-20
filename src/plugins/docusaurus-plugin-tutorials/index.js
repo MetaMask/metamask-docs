@@ -8,13 +8,13 @@ const globAsync = util.promisify(glob);
 const readFileAsync = util.promisify(fs.readFile);
 
 module.exports = (context, options) => ({
-  name: "docusaurus-plugin-guides",
+  name: "docusaurus-plugin-tutorials",
   getPathsToWatch() {
-    const dir = path.resolve(context.siteDir, "src", "pages", "guides");
+    const dir = path.resolve(context.siteDir, "src", "pages", "tutorials");
     return [`${dir}/**/*.{md,mdx}`];
   },
   async loadContent() {
-    const dir = path.resolve(context.siteDir, "src", "pages", "guides");
+    const dir = path.resolve(context.siteDir, "src", "pages", "tutorials");
 
     const filenames = await globAsync("**/*.{md,mdx}", { cwd: dir, nodir: true });
     const frontMatters = {};
@@ -32,9 +32,9 @@ module.exports = (context, options) => ({
   },
   async contentLoaded({ content, actions }) {
     const { createData, addRoute } = actions;
-    const contentHub = await createData("guides.json", JSON.stringify(content));
+    const contentHub = await createData("tutorials.json", JSON.stringify(content));
     addRoute({
-      path: "/guides",
+      path: "/tutorials",
       exact: true,
       component: "@site/src/components/GuidesPage",
       modules: { content: contentHub },

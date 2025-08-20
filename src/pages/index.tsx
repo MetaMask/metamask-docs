@@ -26,9 +26,9 @@ export default function Home(): JSX.Element {
         colorPalette="purple"
         cards={[
           {
-            title: 'Guides',
+            title: 'Tutorials',
             description: 'Step-by-step guides to help you build with MetaMask.',
-            href: '/guides/',
+            href: '/tutorials/',
             buttonIcon: 'arrow-right',
           },
           {

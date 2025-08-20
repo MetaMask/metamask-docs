@@ -139,16 +139,16 @@ export default function Guides({ content = {} }: GuidesInterface) {
   // No transformation needed - we'll render GuideCard directly
 
   return (
-    <Layout title="Guides">
+    <Layout title="Tutorials">
       <SEO
-        title="Guides"
+        title="Tutorials"
         description="MetaMask developer guides to integrate, customize, and build with our SDKs and services."
         image={`${baseUrl}images/docs-meta-cards/guides-card.png`}
         slug="/guides"
       />
 
       <Hero
-        title="Guides"
+        title="Tutorials"
         description="Your hub for integration walkthroughs, SDK usage, customization, troubleshooting, and advanced features."
       />
 
@@ -156,7 +156,7 @@ export default function Guides({ content = {} }: GuidesInterface) {
         <div className={styles.headerInteractionArea}>
           <div className={styles.searchArea}>
             <Input
-              placeholder="Search guides"
+              placeholder="Search tutorials"
               value={searchInput}
               onChange={onChangeSearch}
               className={styles.searchInput}
