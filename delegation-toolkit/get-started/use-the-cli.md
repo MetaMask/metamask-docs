@@ -89,6 +89,7 @@ Currently, only Cursor and Windsurf are supported.
 ```
 
 ## Supported templates
+
 | Template                                           | Next.js | Vite React |
 |----------------------------------------------------|---------|------------|
 | MetaMask Smart Accounts Starter                    | ✅       | ✅         |
