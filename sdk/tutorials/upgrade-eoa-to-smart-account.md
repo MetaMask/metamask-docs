@@ -5,7 +5,7 @@ keywords: [SDK, Wagmi, EOA, smart, account, 7702, EIP-7702, 5792, EIP-5792]
 
 # Upgrade an EOA to a smart account
 
-This tutorial walks you through upgrading an externally owned account (EOA) to a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
+This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
 You will use a provided template, which sets up MetaMask SDK with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
 
 ## Prerequisites
@@ -21,10 +21,10 @@ You will use a provided template, which sets up MetaMask SDK with a [Next.js](ht
 
 ### 1. Set up the project
 
-1. Clone the [`7702-livestream-demo`](https://github.com/AyushBherwani1998/7702-livestream-demo/tree/main) repository:
+1. Clone the [`MetaMask/7702-livestream-demo`](https://github.com/MetaMask/7702-livestream-demo) repository:
 
     ```bash
-    git clone git@github.com:AyushBherwani1998/7702-livestream-demo.git
+    git clone git@github.com:MetaMask/7702-livestream-demo.git
     ```
 
 2. Switch to the `feat/mm-sdk` branch:
@@ -486,9 +486,10 @@ When you select the **Check Transaction Status** button, if the transaction is c
   </div>
 </div>
 
-You have successfully used the SDK to upgrade an EOA to a MetaMask smart account, send an atomic batch transaction, and check its status!
+You have successfully used the SDK to upgrade a MetaMask EOA to a MetaMask smart account, send an atomic batch transaction, and check its status!
 
 ## Resources
 
-- View the `feat-mm-sdk-final` branch of the [`7702-livestream-demo`](https://github.com/AyushBherwani1998/7702-livestream-demo/tree/feat-mm-sdk-final) repository for the completed implementation of this tutorial.
+- View the `feat-mm-sdk-final` branch of the [`MetaMask/7702-livestream-demo`](https://github.com/MetaMask/7702-livestream-demo/tree/feat-mm-sdk-final) repository for the completed implementation of this tutorial.
 - Watch the [live coding session](https://www.youtube.com/watch?v=crMqCb8RPEE) on YouTube, in which the MetaMask DevRel team walks through setting up EIP-7702 functionality from the initial template.
+- See the [Delegation Toolkit EIP-7702 quickstart](/delegation-toolkit/get-started/eip7702-quickstart) to learn how to use the Delegation Toolkit to upgrade an EOA to a MetaMask smart account.

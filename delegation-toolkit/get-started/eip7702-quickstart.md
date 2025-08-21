@@ -153,3 +153,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   maxPriorityFeePerGas
 });
 ```
+
+:::info
+You can also [use MetaMask SDK to upgrade an EOA to a smart account](/sdk/tutorials/upgrade-eoa-to-smart-account).
+:::
