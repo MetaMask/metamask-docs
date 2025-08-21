@@ -32,7 +32,7 @@ export default function PageFeedback() {
     const data = {
       positive: false,
       reason: r,
-      ...(r === 'other' && otherReason.trim() && { response: otherReason.trim() }),
+      ...(r === 'other' && otherReason.trim() && { custom_reason: otherReason.trim() }),
       locale: navigator.language,
     }
     trackFeedback(data)

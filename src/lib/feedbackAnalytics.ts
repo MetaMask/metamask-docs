@@ -1,9 +1,8 @@
 interface FeedbackData {
   positive: boolean
   reason?: string
-  response?: string
+  custom_reason?: string
   locale?: string
-  timestamp?: number
   device_type?: string
 }
 
@@ -43,15 +42,14 @@ const getDeviceType = (): string => {
 }
 
 /**
- * Track feedback events for Google Analytics 4
- * Sends feedback data to GA4 using gtag() or dataLayer fallback
+ * Track feedback events using dataLayer
+ * Sends feedback data directly to dataLayer for Google Tag Manager
  */
 export const trackFeedbackForGA = ({
   positive,
   reason,
-  response,
+  custom_reason,
   locale,
-  timestamp,
   device_type,
 }: FeedbackData): void => {
   if (typeof window === 'undefined') {
@@ -61,13 +59,16 @@ export const trackFeedbackForGA = ({
 
   const detectedDeviceType = device_type || getDeviceType()
 
+  // Initialize dataLayer if it doesn't exist
+  window.dataLayer = window.dataLayer || []
+
   const eventData = {
+    event: 'page_feedback',
     feedback_type: positive ? 'positive' : 'negative',
     ...(reason && { reason }),
-    ...(response && { response }),
+    ...(custom_reason && { custom_reason }),
     locale: locale || navigator.language,
     page_path: window.location.pathname,
-    timestamp: timestamp || Date.now(),
     device_type: detectedDeviceType,
   }
 
@@ -76,47 +77,15 @@ export const trackFeedbackForGA = ({
     `📱 Device detected as: ${detectedDeviceType} (screen: ${window.screen.width}x${window.screen.height})`
   )
 
-  // Enable debug mode in development
-  if (process.env.NODE_ENV === 'development' && typeof window.gtag === 'function') {
-    try {
-      window.gtag('config', 'G-E8PSQ0E1L7', { debug_mode: true })
-      console.log('🔍 GA4 Debug mode enabled for development')
-    } catch (error) {
-      console.log('⚠️ Could not enable debug mode:', error)
-    }
+  try {
+    window.dataLayer.push(eventData)
+    console.log('✅ Feedback tracked via dataLayer:', eventData)
+    console.log('📊 DataLayer updated:', window.dataLayer.slice(-2)) // Show last 2 entries
+  } catch (error) {
+    console.error('Error tracking feedback event via dataLayer:', error)
+    // Final fallback - just log the event for manual tracking
+    console.warn('No tracking method available. Event data:', eventData)
   }
-
-  // Try gtag first (preferred method)
-  if (typeof window.gtag === 'function') {
-    try {
-      window.gtag('event', 'page_feedback', eventData)
-      console.log('✅ Feedback tracked via Google Analytics (gtag):', eventData)
-      return
-    } catch (error) {
-      console.error('Error tracking feedback event via gtag:', error)
-    }
-  }
-
-  // Fallback to dataLayer (works even before GTM fully loads)
-  if (typeof window !== 'undefined') {
-    // Initialize dataLayer if it doesn't exist
-    window.dataLayer = window.dataLayer || []
-
-    try {
-      window.dataLayer.push({
-        event: 'page_feedback',
-        ...eventData,
-      })
-      console.log('✅ Feedback tracked via Google Tag Manager (dataLayer):', eventData)
-      console.log('📊 DataLayer updated:', window.dataLayer.slice(-2)) // Show last 2 entries
-      return
-    } catch (error) {
-      console.error('Error tracking feedback event via dataLayer:', error)
-    }
-  }
-
-  // Final fallback - just log the event for manual tracking
-  console.warn('No tracking method available. Event data:', eventData)
 }
 
 /**
@@ -132,9 +101,9 @@ export const trackFeedback = (data: FeedbackData): void => {
       trackFeedbackForSegment({
         ...data,
         reason: data.reason || '',
-        response: data.response || '',
+        response: data.custom_reason || '', // Map custom_reason to response for Segment
         locale: data.locale || navigator.language,
-        timestamp: data.timestamp || Date.now(),
+        timestamp: Date.now(),
         device_type: data.device_type || getDeviceType(),
       })
     })
