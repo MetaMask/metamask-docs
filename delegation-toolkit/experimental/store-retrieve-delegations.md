@@ -2,6 +2,7 @@
 description: Store and retrieve delegations using the `DelegationStorageClient`.
 sidebar_position: 1
 toc_max_heading_level: 2
+sidebar_class_name: hidden
 ---
 
 import Tabs from "@theme/Tabs";
