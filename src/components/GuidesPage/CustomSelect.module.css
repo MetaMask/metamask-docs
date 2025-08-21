@@ -31,7 +31,8 @@
 }
 
 .controlFocused {
-  box-shadow: 0 0 0 2px rgba(var(--ifm-color-primary-r), var(--ifm-color-primary-g), var(--ifm-color-primary-b), 0.2);
+  box-shadow: 0 0 0 2px
+    rgba(var(--ifm-color-primary-r), var(--ifm-color-primary-g), var(--ifm-color-primary-b), 0.2);
   border-color: var(--ifm-color-primary);
 }
 
@@ -159,7 +160,9 @@
 .dropdownIndicator {
   color: var(--ifm-color-emphasis-600);
   font-size: 12px;
-  transition: transform 0.15s ease, color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    color 0.15s ease;
   user-select: none;
 }
 
@@ -175,7 +178,9 @@
   background: var(--ifm-background-surface-color);
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 10px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   z-index: 1000;
   position: absolute;
   top: 100%;

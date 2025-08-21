@@ -356,7 +356,7 @@ const config = {
           srcDark: 'img/metamask-logo-dark.svg',
           width: 150,
         },
-        hideOnScroll: true,
+        hideOnScroll: false,
         items: [
           {
             type: 'dropdown',

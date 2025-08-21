@@ -55,7 +55,8 @@
   max-height: max-content;
   overflow: hidden;
   background: var(--ifm-color-second-narbar);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2),
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.2),
     0 6px 12px rgba(0, 0, 0, 0.1),
     0 10px 20px #00000026;
   position: fixed;
@@ -238,7 +239,7 @@
 
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 16px;
   width: 16px;
   left: 4px;
@@ -249,24 +250,24 @@
   border-radius: 50%;
 }
 
-.switch input:checked+.slider {
+.switch input:checked + .slider {
   background-color: var(--ifm-color-primary-light);
 }
 
 /* Dark mode: Better visibility for checked switches */
-[data-theme='dark'] .switch input:checked+.slider {
+[data-theme='dark'] .switch input:checked + .slider {
   background-color: var(--ifm-color-primary);
 }
 
-.switch input:checked+.slider:before {
+.switch input:checked + .slider:before {
   background-color: var(--ifm-color-white);
 }
 
-.switch input:focus+.slider {
+.switch input:focus + .slider {
   box-shadow: 0 0 1px var(--ifm-color-primary-light);
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
   -webkit-transform: translateX(16px);
   -ms-transform: translateX(16px);
   transform: translateX(16px);
@@ -280,7 +281,7 @@ input:checked+.slider:before {
 
 .w3DropdownLink:after {
   border: none;
-  content: "";
+  content: '';
   display: inline-block;
   margin-right: 10px;
   box-sizing: border-box;
@@ -307,8 +308,6 @@ input:checked+.slider:before {
 .w3DropdownMenu li:hover {
   background-color: var(--ifm-color-emphasis-100);
 }
-
-
 
 .heading {
   color: var(--ifm-color-content);
@@ -774,11 +773,11 @@ input:checked+.slider:before {
   transform: translateY(0px) scale(0.99);
 }
 
-.upcomingStep[style*="pointer"] {
+.upcomingStep[style*='pointer'] {
   cursor: pointer !important;
 }
 
-.upcomingStep[style*="pointer"]:hover {
+.upcomingStep[style*='pointer']:hover {
   opacity: 0.85;
   transform: translateY(-1px) scale(1);
 }
@@ -822,7 +821,7 @@ input:checked+.slider:before {
   transform: translateY(-1px) scale(1);
 }
 
-.nextStep[style*="pointer"]:hover {
+.nextStep[style*='pointer']:hover {
   opacity: 1;
   transform: translateY(-2px) scale(1.01);
 }
@@ -847,8 +846,6 @@ input:checked+.slider:before {
   color: white;
 }
 
-
-
 /* Step Separator */
 .stepSeparator {
   display: flex;
@@ -861,20 +858,24 @@ input:checked+.slider:before {
 .separatorLine {
   width: 100%;
   height: 1px;
-  background: linear-gradient(to right,
-      transparent 0%,
-      var(--ifm-color-emphasis-300) 50%,
-      transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--ifm-color-emphasis-300) 50%,
+    transparent 100%
+  );
 }
-
-
 
 /* Completion Indicator */
 .completionIndicator {
   text-align: center;
   padding: 2rem;
   margin: 4rem 1.5rem 2rem 1.5rem;
-  background: linear-gradient(135deg, var(--ifm-color-success-light) 0%, var(--ifm-color-success) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--ifm-color-success-light) 0%,
+    var(--ifm-color-success) 100%
+  );
   color: white;
   border-radius: 12px;
   font-size: 18px;
@@ -884,7 +885,11 @@ input:checked+.slider:before {
 
 /* Dark mode: Better contrast for completion indicator */
 [data-theme='dark'] .completionIndicator {
-  background: linear-gradient(135deg, var(--consumer-green-dark) 0%, var(--institution-green-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--consumer-green-dark) 0%,
+    var(--institution-green-dark) 100%
+  );
   color: white;
 }
 
@@ -1119,7 +1124,7 @@ input:checked+.slider:before {
 }
 
 /* Ensure both tab contents have identical sizing */
-.tabContent>* {
+.tabContent > * {
   width: 100% !important;
   height: 100% !important;
   flex: 1 1 auto;
@@ -1158,7 +1163,7 @@ input:checked+.slider:before {
   overflow: hidden;
 }
 
-.tabContent .hybridCodeView>* {
+.tabContent .hybridCodeView > * {
   width: 100% !important;
   height: 100%;
   flex: 1;
@@ -1179,15 +1184,15 @@ input:checked+.slider:before {
 }
 
 /* Override any dark theme code styling in hybrid tabs */
-.tabContent .hybridCodeView [class*="language-"] {
+.tabContent .hybridCodeView [class*='language-'] {
   background: var(--ifm-color-emphasis-100) !important;
 }
 
-.tabContent .hybridCodeView [class*="language-"] pre {
+.tabContent .hybridCodeView [class*='language-'] pre {
   background: var(--ifm-color-emphasis-100) !important;
 }
 
-.tabContent .hybridCodeView [class*="language-"] code {
+.tabContent .hybridCodeView [class*='language-'] code {
   background: var(--ifm-color-emphasis-100) !important;
 }
 
@@ -1232,18 +1237,18 @@ input:checked+.slider:before {
 }
 
 /* Additional CodeBlock overrides */
-.tabContent .hybridCodeView [class*="codeBlockContainer"] {
+.tabContent .hybridCodeView [class*='codeBlockContainer'] {
   background: var(--ifm-color-emphasis-100) !important;
 }
 
-.tabContent .hybridCodeView [class*="codeBlock"] {
+.tabContent .hybridCodeView [class*='codeBlock'] {
   background: var(--ifm-color-emphasis-100) !important;
 }
 
 /* Comprehensive override for all possible code-related backgrounds */
-.tabContent .hybridCodeView div[class*="code"],
-.tabContent .hybridCodeView div[class*="prism"],
-.tabContent .hybridCodeView div[class*="theme"] {
+.tabContent .hybridCodeView div[class*='code'],
+.tabContent .hybridCodeView div[class*='prism'],
+.tabContent .hybridCodeView div[class*='theme'] {
   background: var(--ifm-color-emphasis-100) !important;
 }
 
@@ -1273,7 +1278,7 @@ input:checked+.slider:before {
 }
 
 /* Force exact same layout for both tab types */
-.hybridTabContainer .tabContent>div {
+.hybridTabContainer .tabContent > div {
   width: 100% !important;
   height: 100% !important;
   display: flex !important;

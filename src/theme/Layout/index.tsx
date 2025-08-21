@@ -15,7 +15,6 @@ import LayoutProvider from '@theme/Layout/Provider';
 import ErrorPageContent from '@theme/ErrorPageContent';
 import type {Props} from '@theme/Layout';
 import styles from './styles.module.css';
-import ProductBanner from '@site/src/components/ProductBanner';
 
 export default function Layout(props: Props): ReactNode {
   const {
@@ -38,8 +37,6 @@ export default function Layout(props: Props): ReactNode {
       <AnnouncementBar />
 
       <Navbar />
-
-      <ProductBanner />
 
       <div
         id={SkipToContentFallbackId}
