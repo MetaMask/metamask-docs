@@ -1,6 +1,6 @@
 ---
 description: Learn how to send an ERC-4337 user operation using Viem.
-sidebar_position: 4
+sidebar_position: 2
 ---
 
 import Tabs from "@theme/Tabs";
@@ -184,3 +184,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 + console.log(receipt.transactionHash);
 // add-end
 ```
+
+## Next steps
+
+- To sponsor the gas for end users, see how to [send a gasless transaction](send-gasless-transaction.md). 

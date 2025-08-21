@@ -1,12 +1,12 @@
 ---
-description: Learn how to create a MetaMask smart account using Viem.
-sidebar_position: 2
+description: Learn how to create a MetaMask smart account using Delegation Toolkit.
+sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Create a MetaMask smart account
+# Create a smart account
 
 You can enable users to create a [MetaMask smart account](../concepts/smart-accounts.md) directly in your dapp.
 This page provides examples of using [`toMetaMaskSmartAccount`](../reference/api/smart-account.md#tometamasksmartaccount) with Viem Core SDK to create different types of smart accounts with different types of signatories.
