@@ -118,7 +118,7 @@ export const bundlerClient = createBundlerClient({
 
 ## `encodeCalls`
 
-Encodes calls for execution by MetaMask smart account contract. If there's a single call directly to the smart account, it returns the call data directly. For multiple calls or calls to other addresses, it creates executions and encodes them for the smart account's `execute` function.
+Encodes calls for execution by a MetaMask smart account. If there's a single call directly to the smart account, it returns the call data directly. For multiple calls or calls to other addresses, it creates executions and encodes them for the smart account's `execute` function.
 
 The execution mode is set to `SINGLE_DEFAULT_MODE` for a single call to other address, or `BATCH_DEFAULT_MODE` for multiple calls.
 
@@ -179,7 +179,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
 
 ## `getFactoryArgs`
 
-Returns the factory address and factory data that can be used to deploy the smart account. 
+Returns the factory address and factory data that can be used to deploy a smart account.
 
 ### Example
 
@@ -227,7 +227,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
 
 ## `getNonce`
 
-Returns the nonce for smart account.
+Returns the nonce for a smart account.
 
 ### Example
 

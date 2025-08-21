@@ -252,7 +252,7 @@ overrideDeployedEnvironment(
 
 ## `disableDelegation`
 
-Encodes the calldata for disabling delegation.
+Encodes the calldata for disabling a delegation.
 
 ### Parameters
 
