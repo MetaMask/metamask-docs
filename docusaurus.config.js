@@ -369,7 +369,7 @@ const config = {
             ],
           },
           {
-            label: 'Quick Start',
+            label: 'Quickstart',
             to: '/quickstart',
             position: 'left',
           },
