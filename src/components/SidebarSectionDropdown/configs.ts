@@ -1,16 +1,20 @@
-import type { SidebarSectionDropdownProps } from './SidebarSectionDropdown'
+import type { SidebarSectionDropdownProps, SidebarStaticTitleProps } from './SidebarSectionDropdown'
 
 export const SERVICES_DASHBOARD_CONFIG: SidebarSectionDropdownProps = {
   sections: [
     {
       key: 'services',
       label: 'Services',
+      title: 'Services docs',
+      description: 'Use high performance APIs provided by Infura',
       path: '/services/',
       pathPattern: '/services',
     },
     {
       key: 'dashboard',
       label: 'Dashboard',
+      title: 'Developer dashboard docs',
+      description: 'Manage keys, monitor usage, and access account info',
       path: '/developer-tools/dashboard/',
       pathPattern: '/developer-tools/dashboard',
     },
@@ -24,18 +28,32 @@ export const SDK_WALLET_CONFIG: SidebarSectionDropdownProps = {
     {
       key: 'sdk',
       label: 'SDK',
+      title: 'MetaMask SDK docs',
+      description: 'Connect to MetaMask extension and mobile',
       path: '/sdk/',
       pathPattern: '/sdk',
     },
     {
       key: 'wallet',
       label: 'Wallet API',
+      title: 'Wallet API docs',
+      description: 'Connect to MetaMask extension only',
       path: '/wallet/',
       pathPattern: '/wallet',
     },
   ],
   dropdownLabel: 'Product:',
   defaultSection: 'sdk',
+}
+
+export const SNAPS_CONFIG: SidebarStaticTitleProps = {
+  title: 'MetaMask Snaps docs',
+  pathPattern: '/snaps',
+}
+
+export const DELEGATION_TOOLKIT_CONFIG: SidebarStaticTitleProps = {
+  title: 'Delegation Toolkit docs',
+  pathPattern: '/delegation-toolkit',
 }
 
 export function isPathInSections(

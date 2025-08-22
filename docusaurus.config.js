@@ -12,12 +12,9 @@ const {
   MM_RPC_URL,
 } = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
-const productsDropdown = fs.readFileSync(
-  './src/components/NavDropdown/Products.html',
-  'utf-8'
-)
-const baseUrl = process.env.DEST || '/';
-const siteUrl = 'https://docs.metamask.io';
+const productsDropdown = fs.readFileSync('./src/components/NavDropdown/Products.html', 'utf-8')
+const baseUrl = process.env.DEST || '/'
+const siteUrl = 'https://docs.metamask.io'
 
 const npm2yarnPlugin = [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
 /** @type {import('@docusaurus/types').Config} */
@@ -109,12 +106,12 @@ const config = {
 
   scripts: [
     {
-      src: baseUrl + "js/fix-trailing-slash.js",
+      src: baseUrl + 'js/fix-trailing-slash.js',
       async: false,
       defer: false,
     },
     {
-      src: baseUrl + "js/code-focus.js",
+      src: baseUrl + 'js/code-focus.js',
       async: false,
       defer: true,
     },
@@ -150,7 +147,7 @@ const config = {
             '**/_*/**',
             '**/*.test.{js,jsx,ts,tsx}',
             '**/__tests__/**',
-            '**/quickstart/**',  // Exclude quickstart directory from pages plugin
+            '**/quickstart/**', // Exclude quickstart directory from pages plugin
           ],
           mdxPageComponent: '@theme/MDXPage',
           remarkPlugins: [npm2yarnPlugin],
@@ -374,18 +371,18 @@ const config = {
             position: 'left',
           },
           {
-            label: "Tutorials",
-            to: "/tutorials",
-            position: "left",
+            label: 'Tutorials',
+            to: '/tutorials',
+            position: 'left',
           },
           {
             to: 'developer-tools/faucet/',
-            label: "Faucet",
+            label: 'Faucet',
             position: 'right',
           },
           {
             to: 'https://community.metamask.io/',
-            label: "Help ↗",
+            label: 'Help ↗',
             position: 'right',
           },
           // {
@@ -539,14 +536,14 @@ const config = {
             block: { start: 'highlight-start', end: 'highlight-end' },
           },
           {
-            className: "code-unfocus",
-            line: "unfocus-next-line",
-            block: { start: "unfocus-start", end: "unfocus-end" },
+            className: 'code-unfocus',
+            line: 'unfocus-next-line',
+            block: { start: 'unfocus-start', end: 'unfocus-end' },
           },
           {
-            className: "code-focus",
-            line: "focus-next-line",
-            block: { start: "focus-start", end: "focus-end" },
+            className: 'code-focus',
+            line: 'focus-next-line',
+            block: { start: 'focus-start', end: 'focus-end' },
           },
           {
             className: 'git-diff-remove',

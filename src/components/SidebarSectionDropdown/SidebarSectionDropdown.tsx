@@ -3,9 +3,13 @@ import { useHistory, useLocation } from '@docusaurus/router'
 import clsx from 'clsx'
 import styles from './SidebarSectionDropdown.module.css'
 
+export { default as SidebarStaticTitle } from './SidebarStaticTitle'
+
 interface SectionOption {
   key: string
   label: string
+  title?: string
+  description?: string
   path: string
   pathPattern: string | string[]
 }
@@ -14,6 +18,11 @@ export interface SidebarSectionDropdownProps {
   sections: SectionOption[]
   defaultSection?: string
   dropdownLabel?: string
+}
+
+export interface SidebarStaticTitleProps {
+  title: string
+  pathPattern: string | string[]
 }
 
 export default function SidebarSectionDropdown({
@@ -48,8 +57,10 @@ export default function SidebarSectionDropdown({
   }
 
   const currentSection = getCurrentSection()
-  const currentSectionLabel =
-    sections.find(section => section.key === currentSection)?.label || sections[0]?.label || ''
+  const currentSectionData = sections.find(section => section.key === currentSection) || sections[0]
+  const currentSectionLabel = currentSectionData?.label || ''
+  const currentSectionTitle = currentSectionData?.title
+  const currentSectionDescription = currentSectionData?.description
 
   const handleSelect = (sectionKey: string) => {
     const selectedSection = sections.find(section => section.key === sectionKey)
@@ -79,9 +90,20 @@ export default function SidebarSectionDropdown({
         role="button"
         tabIndex={0}
         onKeyDown={e => e.key === 'Enter' && toggleDropdown()}>
-        <span className={styles.label}>
-          {dropdownLabel} {currentSectionLabel}
-        </span>
+        <div className={styles.labelContainer}>
+          {currentSectionTitle ? (
+            <>
+              <div className={styles.title}>{currentSectionTitle}</div>
+              {currentSectionDescription && (
+                <div className={styles.description}>{currentSectionDescription}</div>
+              )}
+            </>
+          ) : (
+            <span className={styles.label}>
+              {dropdownLabel} {currentSectionLabel}
+            </span>
+          )}
+        </div>
         <span className={clsx(styles.chevron)} aria-hidden>
           ▾
         </span>
@@ -99,7 +121,16 @@ export default function SidebarSectionDropdown({
               role="menuitem"
               onMouseEnter={() => setHoveredSection(section.key)}
               onMouseLeave={() => setHoveredSection(null)}>
-              {section.label}
+              <div className={styles.menuItemContent}>
+                <div className={styles.menuItemTitle}>
+                  {section.title || section.label}
+                </div>
+                {section.description && (
+                  <div className={styles.menuItemDescription}>
+                    {section.description}
+                  </div>
+                )}
+              </div>
             </li>
           ))}
         </ul>
