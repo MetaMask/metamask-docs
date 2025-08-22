@@ -8,18 +8,19 @@ import TabItem from "@theme/TabItem";
 
 # Send a gasless transaction
 
-Gas sponsorship is a core feature of MetaMask Smart Accounts, designed to simplify onboarding by abstracting gas fees away from end users. You can use any paymaster service provider of your choice i.e as [Pimlico](https://docs.pimlico.io/references/paymaster), [ZeroDev](https://docs.zerodev.app/meta-infra/rpcs), or even plug in your own custom paymaster.
+MetaMask Smart Accounts support gas sponsorship, which simplifies onboarding by abstracting gas fees away from end users.
+You can use any paymaster service provider, such as [Pimlico](https://docs.pimlico.io/references/paymaster) or [ZeroDev](https://docs.zerodev.app/meta-infra/rpcs), or plug in your own custom paymaster.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../get-started/install.md)
-- [Configure the Delegation Toolkit.](configure.md)
+- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a MetaMask smart account.](create-smart-account.md)
-
 
 ## Send a gasless transaction
 
-This guide demonstrates how to use Viem's [Paymaster Client](https://viem.sh/account-abstraction/clients/paymaster) to send gasless transactions. You can provide the paymaster client via the paymaster property in the [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation#paymaster-optional) method, or in the [`Bundler Client`](https://viem.sh/account-abstraction/clients/bundler#paymaster-optional).
+The following example demonstrates how to use Viem's [Paymaster Client](https://viem.sh/account-abstraction/clients/paymaster) to send gasless transactions.
+You can provide the paymaster client using the paymaster property in the [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation#paymaster-optional) method, or in the [Bundler Client](https://viem.sh/account-abstraction/clients/bundler#paymaster-optional).
 
 In this example, the paymaster client is passed to the `sendUserOperation` method.
 

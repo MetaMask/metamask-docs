@@ -43,7 +43,7 @@ const bundlerClient = createBundlerClient({
 
 ### 3. Create a MetaMask smart account
 
-[Create a MetaMask smart account](../how-to/create-smart-account.md) to send the first user operation.
+[Create a MetaMask smart account](../guides/smart-accounts/create-smart-account.md) to send the first user operation.
 
 This example configures a Hybrid smart account,
 which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers:
@@ -64,14 +64,14 @@ const smartAccount = await toMetaMaskSmartAccount({
 ```
 
 :::note
-See [how to configure other smart account types](../how-to/create-smart-account.md).
+See [how to configure other smart account types](../guides/smart-accounts/create-smart-account.md).
 :::
 
 ### 4. Send a user operation
 
 Send a user operation using Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
 
-See [send user operation](./../how-to/send-user-operation.md) to learn how to estimate fee per gas, and wait for the transaction receipt.
+See [send user operation](../guides/smart-accounts/send-user-operation.md) to learn how to estimate fee per gas, and wait for the transaction receipt.
 
 The smart account will remain counterfactual until the first user operation. If the smart account is not 
 deployed, it will be automatically deployed upon the sending first user operation.

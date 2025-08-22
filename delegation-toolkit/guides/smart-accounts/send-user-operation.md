@@ -25,8 +25,8 @@ If a user operation is sent from a MetaMask smart account that has not been depl
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../get-started/install.md)
-- [Configure the Delegation Toolkit.](configure.md)
+- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a MetaMask smart account.](create-smart-account.md)
 
 ## Send a user operation
@@ -187,4 +187,4 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 ## Next steps
 
-- To sponsor the gas for end users, see how to [send a gasless transaction](send-gasless-transaction.md). 
+To sponsor gas for end users, see how to [send a gasless transaction](send-gasless-transaction.md).

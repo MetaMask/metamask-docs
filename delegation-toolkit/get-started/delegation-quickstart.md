@@ -69,7 +69,7 @@ const delegatorSmartAccount = await toMetaMaskSmartAccount({
 ```
 
 :::note
-See [how to configure other smart account types](../how-to/create-smart-account.md).
+See [how to configure other smart account types](../guides/smart-accounts/create-smart-account.md).
 :::
 
 ### 4. Create a delegate account
@@ -95,11 +95,11 @@ const delegateSmartAccount = await toMetaMaskSmartAccount({
 
 ### 5. Create a delegation
 
-[Create a root delegation](../how-to/create-delegation/index.md#create-a-root-delegation) from Alice to Bob.
+[Create a root delegation](../guides/create-delegation/index.md#create-a-root-delegation) from Alice to Bob.
 A root delegation is a delegation that doesn't derive its authority from another delegation.
 Alice is delegating her own authority away, as opposed to *redelegating* permissions she received from a previous delegation.
 
-This example passes an empty `caveats` array, which means Bob can perform any action on Alice's behalf. We recommend [restricting the delegation](../how-to/create-delegation/restrict-delegation.md) by adding caveat enforcers.
+This example passes an empty `caveats` array, which means Bob can perform any action on Alice's behalf. We recommend [restricting the delegation](../guides/create-delegation/restrict-delegation.md) by adding caveat enforcers.
 For example, Alice can delegate the ability to spend her USDC to Bob, limiting the amount to 100 USDC.
 
 :::warning Important
@@ -120,7 +120,7 @@ const delegation = createDelegation({
 
 ### 6. Sign the delegation
 
-[Sign the delegation](../how-to/create-delegation/index.md#sign-a-delegation) with Alice's account, using the [`signDelegation`](../reference/api/smart-account.md#signdelegation) method from `MetaMaskSmartAccount`. Alternatively, you can use the Delegation Toolkit's [`signDelegation`](../reference/api/delegation.md#signdelegation) utility. Bob will later use the signed delegation to perform actions on Alice's behalf.
+[Sign the delegation](../guides/create-delegation/index.md#sign-a-delegation) with Alice's account, using the [`signDelegation`](../reference/api/smart-account.md#signdelegation) method from `MetaMaskSmartAccount`. Alternatively, you can use the Delegation Toolkit's [`signDelegation`](../reference/api/delegation.md#signdelegation) utility. Bob will later use the signed delegation to perform actions on Alice's behalf.
 
 ```typescript
 const signature = await delegatorSmartAccount.signDelegation({
@@ -135,7 +135,7 @@ const signedDelegation = {
 
 ### 7. Redeem the delegation
 
-Bob can now [redeem the delegation](../how-to/redeem-delegation.md). The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on Alice's behalf.
+Bob can now [redeem the delegation](../guides/redeem-delegation.md). The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on Alice's behalf.
 
 To prepare the calldata for the redeem transaction, use the [`redeemDelegation`](../reference/api/delegation.md#redeemdelegation) utility function from the Delegation Toolkit.
 
@@ -170,5 +170,5 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 :::note
 If Bob's account (the delegate account) is an externally owned account (EOA) instead of a smart account,
-see [how to redeem the delegation with an EOA](../how-to/redeem-delegation.md#redeem-with-an-eoa).
+see [how to redeem the delegation with an EOA](../guides/redeem-delegation.md#redeem-with-an-eoa).
 :::

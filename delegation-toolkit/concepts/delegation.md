@@ -50,7 +50,7 @@ The delegation lifecycle is as follows:
    delegation through an [ERC-4337 user operation](smart-accounts.md#account-abstraction-erc-4337),
    which verifies that the delegated authority is valid in order to perform the execution.
 
-See [how to create a delegation](../how-to/create-delegation/index.md) to get started with the
+See [how to create a delegation](../guides/create-delegation/index.md) to get started with the
 delegation lifecycle.
 
 ## Delegation Framework

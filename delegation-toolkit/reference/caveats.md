@@ -6,7 +6,7 @@ toc_max_heading_level: 2
 
 # Caveats
 
-When [restricting a delegation](../how-to/create-delegation/restrict-delegation.md), you can specify the following caveat types in the `CaveatBuilder`.
+When [restricting a delegation](../guides/create-delegation/restrict-delegation.md), you can specify the following caveat types in the `CaveatBuilder`.
 
 ## `allowedCalldata`
 

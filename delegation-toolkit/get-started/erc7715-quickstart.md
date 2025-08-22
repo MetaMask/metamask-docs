@@ -130,7 +130,7 @@ const bundlerClient = createBundlerClient({
 
 ### 6. Redeem ERC-7715 permissions
 
-The session account can now [redeem the delegation](../how-to/redeem-delegation.md). The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
+The session account can now [redeem the delegation](../guides/redeem-delegation.md). The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 
 To redeem the permissions, you can use the `sendUserOperationWithDelegation` bundler client action.
 

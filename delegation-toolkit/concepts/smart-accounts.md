@@ -39,7 +39,7 @@ ERC-4337 introduces the following concepts:
 
 The MetaMask Delegation Toolkit supports three types of MetaMask Smart Accounts, each offering unique features and use cases.
 
-See [Create a smart account](../how-to/create-smart-account.md) to learn how to use these different account types.
+See [Create a smart account](../guides/smart-accounts/create-smart-account.md) to learn how to use these different account types.
 
 ### Hybrid smart account
 
