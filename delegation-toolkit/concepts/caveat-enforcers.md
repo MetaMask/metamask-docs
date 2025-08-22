@@ -119,7 +119,7 @@ This "all-or-nothing" approach ensures that delegations only execute exactly as 
 
 ## Caveat builder
 
-While caveat enforcers operate at the smart contract level, most developers interact with them through the [`CaveatBuilder`](../how-to/create-delegation/restrict-delegation.md) interface in the MetaMask Delegation Toolkit.
+While caveat enforcers operate at the smart contract level, most developers interact with them through the [`CaveatBuilder`](../guides/create-delegation/restrict-delegation.md) interface in the MetaMask Delegation Toolkit.
 
 The `CaveatBuilder` provides a developer-friendly TypeScript API that:
 
@@ -160,11 +160,11 @@ for common restriction patterns, including:
 - Restricting token transfers and approvals.
 - Limiting execution frequency.
 
-For more complex scenarios, you can also [create custom caveat enforcers](../how-to/create-delegation/create-custom-caveat-enforcer.md) by implementing the `ICaveatEnforcer` interface.
+For more complex scenarios, you can also [create custom caveat enforcers](../guides/create-delegation/create-custom-caveat-enforcer.md) by implementing the `ICaveatEnforcer` interface.
 
 ## Attenuating authority with redelegations
 
-When [creating chains of delegations](../how-to/create-delegation/index.md#create-a-redelegation), it's important to understand how authority flows and can be restricted.
+When [creating chains of delegations](../guides/create-delegation/index.md#create-a-redelegation), it's important to understand how authority flows and can be restricted.
 
 Caveats applied to a chain of delegations are *accumulative*—they stack on top of each other:
 

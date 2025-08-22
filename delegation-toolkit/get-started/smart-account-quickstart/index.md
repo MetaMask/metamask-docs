@@ -43,7 +43,7 @@ const bundlerClient = createBundlerClient({
 
 ### 3. Create a MetaMask smart account
 
-[Create a MetaMask smart account](../../how-to/create-smart-account.md) to send the first user operation.
+[Create a MetaMask smart account](../../guides/smart-accounts/create-smart-account.md) to send the first user operation.
 
 This example configures a Hybrid smart account,
 which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers:
@@ -67,7 +67,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 Send a user operation using Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
 
-See [Send a user operation](../../how-to/send-user-operation.md) to learn how to estimate fee per gas, and wait for the transaction receipt.
+See [Send a user operation](../../guides/smart-accounts/send-user-operation.md) to learn how to estimate fee per gas, and wait for the transaction receipt.
 
 The smart account will remain counterfactual until the first user operation. If the smart account is not 
 deployed, it will be automatically deployed upon the sending first user operation.
@@ -94,8 +94,8 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 ## Next steps
 
-- To grant specific permissions to other accounts from your smart account, [create a delegation](../../how-to/create-delegation/index.md).
+- To grant specific permissions to other accounts from your smart account, [create a delegation](../../guides/create-delegation/index.md).
 - This quickstart example uses a Hybrid smart account.
-  You can also [configure other smart account types](../../how-to/create-smart-account/configure-accounts-signers.md).
+  You can also [configure other smart account types](../../guides/smart-accounts/create-smart-account.md).
 - To upgrade an EOA to a smart account, see the [EIP-7702 quickstart](eip7702-quickstart.md).
 - To quickly bootstrap a MetaMask Smart Accounts project, [use the CLI](../use-the-cli.md).

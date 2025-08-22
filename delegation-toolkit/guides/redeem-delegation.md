@@ -20,7 +20,7 @@ The function supports batch redemption, allowing multiple delegations to be proc
 
 - [Install and set up the Delegation Toolkit.](../get-started/install.md)
 - [Configure the Delegation Toolkit.](configure.md)
-- [Create a delegator smart account.](create-smart-account.md)
+- [Create a delegator smart account.](smart-accounts/create-smart-account.md)
 - [Create a delegation.](create-delegation/index.md)
 
 ## Redeem a delegation

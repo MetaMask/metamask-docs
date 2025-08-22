@@ -84,7 +84,7 @@ Redeem a delegation with a [MetaMask smart account](#redeem-with-a-metamask-smar
 
 ### Redeem with a MetaMask smart account
 
-To redeem a delegation with a MetaMask smart account, [create a smart account](../how-to/create-smart-account.md)
+To redeem a delegation with a MetaMask smart account, [create a smart account](../guides/smart-accounts/create-smart-account.md)
 and a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler).
 
 After setting up your Bundler Client, you can extend its functionality with `erc7710BundlerActions` actions to support ERC-7710. Once extended, use [`sendUserOperationWithDelegation`](../reference/api/experimental-actions/bundler-client.md#senduseroperationwithdelegation) to redeem the permission.

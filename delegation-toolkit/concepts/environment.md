@@ -71,7 +71,7 @@ See the changelog of the toolkit version you are using (in the left sidebar) for
 
 Alternatively, you can use the [`getDelegatorEnvironment`](../reference/api/delegation.md#getdelegatorenvironment) function to resolve the environment.
 This function is especially useful if your delegator is not a smart account when
-[creating a redelegation](../how-to/create-delegation/index.md#create-a-redelegation).
+[creating a redelegation](../guides/create-delegation/index.md#create-a-redelegation).
 
 ```typescript
 import { 
