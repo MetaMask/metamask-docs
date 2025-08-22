@@ -163,4 +163,4 @@ const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
 
 ## Next steps
 
-To quickly bootstrap an ERC-7715 project, you can [use the CLI](use-the-cli.md).
+To quickly bootstrap an ERC-7715 project, [use the CLI](use-the-cli.md).

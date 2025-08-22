@@ -45,4 +45,4 @@ Add `@metamask/delegation-framework/=lib/metamask/delegation-framework/` in your
 ### 3. Get started
 
 You're now ready to start using the Delegation Toolkit.
-Check out the [MetaMask Smart Accounts quickstart](smart-account-quickstart/index.md) to walk through a simple example.
+See the [MetaMask Smart Accounts quickstart](smart-account-quickstart/index.md) to walk through a simple example.

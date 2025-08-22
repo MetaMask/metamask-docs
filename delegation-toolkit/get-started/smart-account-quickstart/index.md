@@ -94,8 +94,8 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 ## Next steps
 
-- With a MetaMask smart account, you can [create delegations](../../how-to/create-delegation/index.md) that can be used to grant specific rights and permissions to other accounts.
+- To grant specific permissions to other accounts from your smart account, [create a delegation](../../how-to/create-delegation/index.md).
 - This quickstart example uses a Hybrid smart account.
   You can also [configure other smart account types](../../how-to/create-smart-account/configure-accounts-signers.md).
 - To upgrade an EOA to a smart account, see the [EIP-7702 quickstart](eip7702-quickstart.md).
-- To quickly bootstrap a MetaMask Smart Accounts project, you can [use the CLI](../use-the-cli.md).
+- To quickly bootstrap a MetaMask Smart Accounts project, [use the CLI](../use-the-cli.md).
