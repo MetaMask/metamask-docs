@@ -15,7 +15,7 @@ This is an experimental feature and may change in future releases.
 :::
 
 You can use methods provided by the `DelegationStorageClient` of the MetaMask Delegation Toolkit to store and retrieve
-[delegations](../concepts/delegation.md).
+[delegations](../concepts/delegation/index.md).
 
 ## Prerequisites
 

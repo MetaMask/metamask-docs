@@ -92,4 +92,4 @@ The MetaMask Smart Accounts flow is as follows:
 
 Delegator accounts are a type of MetaMask smart account that allows users to grant permission to other smart accounts or EOAs
 to perform specific executions on their behalf, under defined rules and restrictions.
-Learn more about [delegation](delegation.md).
+Learn more about [delegation](delegation/index.md).

@@ -17,9 +17,7 @@ The MetaMask Delegation Toolkit provides custom middleware for [Pimlico's](https
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](../get-started/install.md).
-- Optionally, complete the [smart account quickstart](../get-started/quickstart.md) or [delegation quickstart](../get-started/delegation-quickstart.md) to
-  familiarize yourself with the toolkit's capabilities.
+[Install and set up the Delegation Toolkit.](../get-started/install.md)
 
 ## Viem's Account Abstraction API
 
