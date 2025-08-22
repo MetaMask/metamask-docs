@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 # Delegation API reference
 
-The following API methods are related to creating and managing [delegations](../../concepts/delegation.md).
+The following API methods are related to creating and managing [delegations](../../concepts/delegation/index.md).
 
 ## `createCaveatBuilder`
 
@@ -358,16 +358,17 @@ export const environment: DeleGatorEnvironment = {
 </TabItem>
 </Tabs>
 
-## `redeemDelegation`
+## `redeemDelegations`
 
 Encodes calldata for redeeming delegations.
+This method supports batch redemption, allowing multiple delegations to be processed within a single transaction.
 
 ### Parameters
 
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
 | `delegations` | `Delegation[][]` | Yes | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed. |
-| `modes` | `ExecutionMode[]` | Yes | A collection specifying the execution mode for each corresponding delegation chain. |
+| `modes` | `ExecutionMode[]` | Yes | A collection specifying the [execution mode](../../concepts/delegation/index.md#execution-modes) for each corresponding delegation chain. Supported execution modes are `SINGLE_DEFAULT_MODE`, `SINGLE_TRY_MODE`, `BATCH_DEFAULT_MODE`, and `BATCH_TRY_MODE`. |
 | `executions` | `ExecutionStruct[][]` | Yes | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain. |
 
 ### Example

@@ -289,7 +289,7 @@ A [Stateless 7702 smart account](../../concepts/smart-accounts.md#stateless-7702
 functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
 
 :::note
-This implementation does not handle the upgrade process; see the [EIP-7702 quickstart](../../get-started/eip7702-quickstart.md) to learn how to upgrade.
+This implementation does not handle the upgrade process; see the [EIP-7702 quickstart](../../get-started/smart-account-quickstart/eip7702.md) to learn how to upgrade.
 :::
 
 You can create a Stateless 7702 smart account with the following types of signatories.
@@ -415,5 +415,5 @@ With a MetaMask smart account, you can perform the following functions:
 
 - In conjunction with [Viem Account Abstraction clients](../configure.md), deploy the smart account
   and [send user operations](send-user-operation.md).
-- [Create delegations](../create-delegation/index.md) that can be used to grant specific rights and permissions to other accounts.
+- [Create delegations](../delegation/execute-on-users-behalf.md) that can be used to grant specific rights and permissions to other accounts.
   Smart accounts that create delegations are called *delegator accounts*.
