@@ -60,7 +60,6 @@ export default function SidebarSectionDropdown({
   const currentSectionData = sections.find(section => section.key === currentSection) || sections[0]
   const currentSectionLabel = currentSectionData?.label || ''
   const currentSectionTitle = currentSectionData?.title
-  const currentSectionDescription = currentSectionData?.description
 
   const handleSelect = (sectionKey: string) => {
     const selectedSection = sections.find(section => section.key === sectionKey)
@@ -92,12 +91,7 @@ export default function SidebarSectionDropdown({
         onKeyDown={e => e.key === 'Enter' && toggleDropdown()}>
         <div className={styles.labelContainer}>
           {currentSectionTitle ? (
-            <>
-              <div className={styles.title}>{currentSectionTitle}</div>
-              {currentSectionDescription && (
-                <div className={styles.description}>{currentSectionDescription}</div>
-              )}
-            </>
+            <div className={styles.title}>{currentSectionTitle}</div>
           ) : (
             <span className={styles.label}>
               {dropdownLabel} {currentSectionLabel}
@@ -122,13 +116,9 @@ export default function SidebarSectionDropdown({
               onMouseEnter={() => setHoveredSection(section.key)}
               onMouseLeave={() => setHoveredSection(null)}>
               <div className={styles.menuItemContent}>
-                <div className={styles.menuItemTitle}>
-                  {section.title || section.label}
-                </div>
+                <div className={styles.menuItemTitle}>{section.title || section.label}</div>
                 {section.description && (
-                  <div className={styles.menuItemDescription}>
-                    {section.description}
-                  </div>
+                  <div className={styles.menuItemDescription}>{section.description}</div>
                 )}
               </div>
             </li>
