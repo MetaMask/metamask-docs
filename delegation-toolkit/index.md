@@ -46,17 +46,12 @@ Check out the following guides to get started with the MetaMask Delegation Toolk
       description: "Install and set up the MetaMask Delegation Toolkit.",
     },
     {
-      href: "get-started/quickstart",
+      href: "get-started/smart-account-quickstart",
       title: "MetaMask Smart Accounts quickstart",
       description: "Create a MetaMask smart account and send a user operation.",
     },
     {
-      href: "get-started/delegation-quickstart",
-      title: "Delegation quickstart",
-      description: "Create, sign, and redeem a delegation.",
-    },
-    {
-      href: "get-started/eip7702-quickstart",
+      href: "get-started/smart-account-quickstart/eip7702",
       title: "EIP-7702 quickstart",
       description: "Upgrade an externally owned account to a smart account.",
     },
@@ -66,8 +61,8 @@ Check out the following guides to get started with the MetaMask Delegation Toolk
       description: "Request permissions from MetaMask and execute transactions on a user's behalf.",
     },
     {
-      href: "get-started/cli-quickstart",
-      title: "CLI quickstart",
+      href: "get-started/use-the-cli",
+      title: "Use the CLI",
       description: "Use the Delegation Toolkit CLI to bootstrap a project.",
     }
   ]}
