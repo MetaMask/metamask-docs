@@ -343,7 +343,7 @@ Also, update the connect/disconnect button to reset states when disconnected:
 ```
 
 In the development server, test that the button works to send batch transactions from your wallet.
-Make sure you are connected to the Sepolia network in MetaMask.
+Ensure you are connected to the Sepolia network in MetaMask.
 MetaMask prompts you to upgrade your EOA to a smart account in order to send a batch transaction:
 
 <div class="imgRow">
@@ -474,8 +474,8 @@ Then, create a button to check the batch transaction status:
 // ...
 ```
 
-In the development server, when you send a new batch transaction, if the transaction is successful, the success state and the **Check Transaction Status** button displays.
-When you select the **Check Transaction Status** button, if the transaction is confirmed, a link to Etherscan with your transaction hash displays:
+In the development server, when you send a successful batch transaction, the success state and the **Check Transaction Status** button appear.
+When you select the **Check Transaction Status** button, if the transaction is confirmed, a link to Etherscan with your transaction hash appears:
 
 <div class="imgRow">
   <div class="imgCol">
