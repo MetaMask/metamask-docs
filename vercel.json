@@ -715,6 +715,18 @@
       "destination": "/delegation-toolkit/development/how-to/create-smart-account/"
     },
     {
+      "source": "/delegation-toolkit/development/get-started/quickstart/",
+      "destination": "/delegation-toolkit/development/get-started/smart-account-quickstart/"
+    },
+    {
+      "source": "/delegation-toolkit/development/get-started/eip7702-quickstart/",
+      "destination": "/delegation-toolkit/development/get-started/smart-account-quickstart/eip7702/"
+    },
+    {
+      "source": "/delegation-toolkit/development/get-started/cli-quickstart/",
+      "destination": "/delegation-toolkit/development/get-started/use-the-cli/"
+    },
+    {
       "source": "/developer-tools/faucet/sepolia/",
       "destination": "/developer-tools/faucet/"
     }

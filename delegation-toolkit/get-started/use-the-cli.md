@@ -1,10 +1,10 @@
 ---
 description: Get started with the MetaMask Delegation Toolkit using the `@metamask/create-gator-app` CLI.
-sidebar_position: 6
-sidebar_label: CLI quickstart
+sidebar_position: 4
+sidebar_label: Use the CLI
 ---
 
-# Delegation Toolkit CLI quickstart
+# Use the Delegation Toolkit CLI
 
 Use the `@metamask/create-gator-app` interactive CLI to bootstrap a project with the MetaMask Delegation Toolkit in under two minutes. 
 The CLI automatically installs the required dependencies and sets up a project structure using a selected template,
@@ -94,4 +94,4 @@ Currently, only Cursor and Windsurf are supported.
 |----------------------------------------------------|---------|------------|
 | MetaMask Smart Accounts Starter                    | ✅       | ✅         |
 | MetaMask Smart Accounts &amp; Delegation Starter   | ✅       | ✅         | 
-| Experimental: ERC7715 Permissions starter          | ✅       |            | 
+| Experimental: ERC7715 Permissions starter          | ✅       |            |
