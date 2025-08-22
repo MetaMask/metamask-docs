@@ -250,6 +250,47 @@ overrideDeployedEnvironment(
 // add-end
 ```
 
+## `disableDelegation`
+
+Encodes the calldata for disabling a delegation.
+
+### Parameters
+
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| `delegation` | `Delegation` | Yes | The delegation to be disabled. |
+
+### Example
+
+<Tabs>
+<TabItem value="example.ts">
+
+```ts
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { delegation } from "./delegation.ts";
+
+const disableDelegationData = DelegationManager.encode.disableDelegation({
+  delegation,
+});
+```
+
+</TabItem>
+<TabItem value="delegation.ts">
+
+```ts
+import { createDelegation } from "@metamask/delegation-toolkit";
+
+export const delegation = createDelegation({
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Empty caveats array - we recommend adding appropriate restrictions
+  caveats: [],
+});
+```
+
+</TabItem>
+</Tabs>
+
 ## `getDeleGatorEnvironment`
 
 Resolves the `DeleGatorEnvironment` for a chain.
