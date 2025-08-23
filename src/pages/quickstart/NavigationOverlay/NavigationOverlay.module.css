@@ -16,9 +16,8 @@ html[data-theme='dark'] .overlayContainer {
 }
 
 .overlayContent {
-  height: 100%;
   width: 100%;
-  padding: 1.6rem;
+  padding: 2rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -350,8 +349,8 @@ html[data-theme='dark'] .overlayContainer {
 
 .cardTitle {
   color: var(--general-black);
-  font-size: 1.6rem;
-  font-weight: 600;
+  font-size: 1.8rem;
+  font-weight: 500;
   margin: 0;
   line-height: 1.4;
 }
@@ -359,14 +358,14 @@ html[data-theme='dark'] .overlayContainer {
 /* Tablet and up */
 @media (min-width: 768px) {
   .cardTitle {
-    font-size: 1.7rem;
+    font-size: 2rem;
   }
 }
 
 /* Desktop and up */
 @media (min-width: 997px) {
   .cardTitle {
-    font-size: 1.8rem;
+    font-size: 2.4rem;
   }
 }
 

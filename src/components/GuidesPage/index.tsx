@@ -142,14 +142,14 @@ export default function Guides({ content = {} }: GuidesInterface) {
     <Layout title="Tutorials">
       <SEO
         title="Tutorials"
-        description="MetaMask developer guides to integrate, customize, and build with our SDKs and services."
+        description="Tutorials to integrate, customize, and build with MetaMask developer tools."
         image={`${baseUrl}images/docs-meta-cards/guides-card.png`}
         slug="/guides"
       />
 
       <Hero
         title="Tutorials"
-        description="Your hub for integration walkthroughs, SDK usage, customization, troubleshooting, and advanced features."
+        description="Explore use cases and follow these hands-on tutorials to integrate and build with MetaMask developer tools."
       />
 
       <section className="container">

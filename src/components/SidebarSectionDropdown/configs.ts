@@ -47,7 +47,7 @@ export const SDK_WALLET_CONFIG: SidebarSectionDropdownProps = {
 }
 
 export const SNAPS_CONFIG: SidebarStaticTitleProps = {
-  title: 'MetaMask Snaps docs',
+  title: 'Snaps docs',
   pathPattern: '/snaps',
 }
 

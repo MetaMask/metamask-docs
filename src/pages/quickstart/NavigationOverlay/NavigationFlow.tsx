@@ -28,43 +28,37 @@ interface NavigationFlowProps {
 const navigationOptions: NavigationOption[] = [
   {
     id: 'mm-sdk',
-    title: "I want to connect to users' MetaMask Wallet",
+    title: "I want to connect to users' MetaMask wallets",
     description: "MetaMask SDK",
     product: METAMASK_SDK
   },
   {
     id: 'embedded-wallets-1',
-    title: "I want to create wallets inside my dApp/ Mobile App",
-    description: "Embedded Wallets",
+    title: "I want to create wallets inside my dapp",
+    description: "Embedded Wallets SDK",
     product: EMBEDDED_WALLETS
   },
   {
     id: 'embedded-wallets-2',
-    title: "I want a Wallet Aggregator for my dApp",
-    description: "Embedded Wallets",
+    title: "I want a wallet aggregator for my dapp",
+    description: "Embedded Wallets SDK",
     product: EMBEDDED_WALLETS
   },
   {
     id: 'delegation-toolkit-1',
-    title: "I want to manage Gasless Transactions",
+    title: "I want to send gasless transactions",
     description: "Delegation Toolkit",
     link: "/delegation-toolkit"
   },
   {
     id: 'delegation-toolkit-2',
-    title: "I want to Delegate Permission for my users",
+    title: "I want to perform executions on behalf of users",
     description: "Delegation Toolkit",
     link: "/delegation-toolkit"
   },
   {
     id: 'delegation-toolkit-3',
-    title: "I want to convert EOAs to Smart Wallets",
-    description: "Delegation Toolkit",
-    link: "/delegation-toolkit"
-  },
-  {
-    id: 'delegation-toolkit-4',
-    title: "I want to request Readable Permissions",
+    title: "I want to convert EOAs to smart accounts",
     description: "Delegation Toolkit",
     link: "/delegation-toolkit"
   },
@@ -85,7 +79,7 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
   return (
     <div className={styles.flowContainer}>
       <div className={styles.stepHeader}>
-        <Heading as="h2" className={styles.sectionTitle}>What would you like to do?</Heading>
+        <Heading as="h2" className={styles.sectionTitle}>What do you want to do with MetaMask?</Heading>
         <p className={styles.sectionDescription}>Choose the option that best describes your project goals:</p>
       </div>
 

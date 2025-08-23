@@ -13,11 +13,6 @@ export default function Home(): JSX.Element {
       <Hero
         title={siteConfig.title}
         description="Build with the world's leading self-custodial crypto wallet."
-        button={{
-          label: 'Quickstart',
-          href: '/quickstart',
-          icon: 'arrow-right',
-        }}
       />
 
       <SectionIntro description="Get started with the following resources:" />
@@ -26,21 +21,15 @@ export default function Home(): JSX.Element {
         colorPalette="purple"
         cards={[
           {
-            title: 'Tutorials',
-            description: 'Step-by-step guides to help you build with MetaMask.',
-            href: '/tutorials/',
-            buttonIcon: 'arrow-right',
-          },
-          {
             title: 'Quickstart',
-            description: 'Get up and running quickly with our quickstart guides.',
+            description: 'Get up and running in under 10 minutes with the quickstart guides.',
             href: '/quickstart',
             buttonIcon: 'arrow-right',
           },
           {
-            title: 'Faucet',
-            description: 'Access testnet tokens for development and testing purposes.',
-            href: '/developer-tools/faucet/',
+            title: 'Tutorials',
+            description: 'Explore use cases and follow the hands-on tutorials to build end-to-end dapps.',
+            href: '/tutorials/',
             buttonIcon: 'arrow-right',
           },
         ]}
@@ -49,7 +38,7 @@ export default function Home(): JSX.Element {
       <SectionIntro description="What do you want to do with MetaMask?" />
 
       <CardSection
-        colorPalette="purple"
+        colorPalette="blue"
         cards={[
           {
             title: 'Connect to MetaMask',
@@ -76,7 +65,7 @@ export default function Home(): JSX.Element {
             buttonIcon: 'arrow-right',
           },
           {
-            title: 'Extend MetaMask\'s capabilities',
+            title: 'Extend MetaMask',
             description: 'Create a custom mini app that runs inside the MetaMask extension. Add support for custom networks, accounts types, and APIs.',
             href: '/snaps',
             buttonIcon: 'arrow-right',
