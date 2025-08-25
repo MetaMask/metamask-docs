@@ -122,7 +122,7 @@ export const Insight = ({ from, to }) => {
 ## Return a list
 
 To return a list of elements, you can use an array.
-In the following example, the `Accounts` components receives an array of accounts as props, and uses
+In the following example, the `Accounts` component receives an array of accounts as props, and uses
 the array to display a list of accounts using `Array.map`:
 
 ```jsx title="Accounts.jsx"

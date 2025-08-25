@@ -6,7 +6,7 @@ toc_max_heading_level: 2
 
 # Caveats
 
-When [restricting a delegation](../how-to/create-delegation/restrict-delegation.md), you can specify the following caveat types in the `CaveatBuilder`.
+When [restricting a delegation](../guides/create-delegation/restrict-delegation.md), you can specify the following caveat types in the `CaveatBuilder`.
 
 ## `allowedCalldata`
 
@@ -658,7 +658,7 @@ caveatBuilder.addCaveat("ownershipTransfer",
 ## `redeemer`
 
 Limits the addresses that can redeem the delegation.
-This caveat is designed for restricting smart contracts or EOAs lacking delegation support,
+This caveat is designed to restrict smart contracts or EOAs lacking delegation support,
 and can be placed anywhere in the delegation chain to restrict the redeemer.
 
 :::note

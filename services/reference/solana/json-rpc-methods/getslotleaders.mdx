@@ -1,0 +1,57 @@
+---
+title: "getSlotLeaders"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getSlotLeaders`
+
+Returns the slot leaders for a given slot range. <CreditCost network="solana" method="getSlotLeaders" />
+
+## Parameters
+
+- `startSlot`: (integer) _[required]_ - The starting slot number for the query.`
+- `limit`: (integer) _[required]_ - The maximum number of slot leaders to return (`1` to `5000`).
+
+## Returns
+
+`result`: (array of strings) - An array  of `base58` encoded public key addresses identifying the slot leaders.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getSlotLeaders", "params": [373184397, 5]}'
+   ```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": [
+      "dv3qDFk1DTF36Z62bNvrCXe9sKATA6xvVy6A798xxAS",
+      "dv3qDFk1DTF36Z62bNvrCXe9sKATA6xvVy6A798xxAS",
+      "dv3qDFk1DTF36Z62bNvrCXe9sKATA6xvVy6A798xxAS",
+      "dv2eQHeP4RFrJZ6UeiZWoc3XTtmtZCUKxxCApCDcRNV",
+      "dv2eQHeP4RFrJZ6UeiZWoc3XTtmtZCUKxxCApCDcRNV"
+    ],
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

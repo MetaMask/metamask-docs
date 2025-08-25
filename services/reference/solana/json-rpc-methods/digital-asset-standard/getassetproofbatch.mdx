@@ -1,0 +1,84 @@
+---
+title: "getAssetProofBatch"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getAssetProofBatch`
+
+Returns the Merkle tree proof information for multiple compressed assets. <CreditCost network="solana" method="getAssetProofBatch" />
+
+## Parameters
+
+- `ids`: (array of strings)  _[required]_ - An array of `base58` encoded public keys of the assets to query.
+
+## Returns
+
+`result` - An object where each key is an asset ID, and the value is an object containing the following fields:
+
+- `root` - The root hash of the Merkle tree.
+- `proof` - An array of hashes representing the Merkle proof.
+- `node_index` - The index of the node in the Merkle tree.
+- `leaf` - The hash of the leaf node.
+- `tree_id` - The ID of the Merkle tree.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getAssetProofBatch", "params": [["D85MZkvir9yQZFDHt8U2ZmS7D3LXKdiSjvw2MBdscJJa", "ELDjRRs5Wb478K4h3B5bMPEhqFD8FvoET5ctHku5uiYi"]]}'
+  ```
+
+    </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "ELDjRRs5Wb478K4h3B5bMPEhqFD8FvoET5ctHku5uiYi": null,
+      "D85MZkvir9yQZFDHt8U2ZmS7D3LXKdiSjvw2MBdscJJa": {
+        "root": "HscyoK57Grh1CGHi7HDDGaQRqe3CtetqgwZCBjw6E73t",
+        "proof": [
+          "4EVwURnyVehgq4LhPfJFmPngfuNvreJgBGX1jbojcg7p",
+          "89KmAg6NuRkwbSmpEU2fH8tJmuoGkwAwkV7MZaTRuRyE",
+          "DD34gSoVzcDJKK4FcQx6RPDBmjwsWJ2JyL9Poch9i6Hm",
+          "F9oTuKohez7fbLjXXfqurqNG4KhVn2RgnC7o85Z4qgnm",
+          "HSfwLLiVjmhtFFFaLF6VFQZ7NrWZW9qoZDGWTPnU8Trw",
+          "CyFfjtkvg1HfexcekN6cCrUYmUwqtoeFGaTWeyPGxqmj",
+          "3Rv9v5r97j6vudzjVF8idGQdeu7jJdHgm75pTAeiN9ce",
+          "6mr5hmD2nkPU76irs6duAYekRgPxDWh8JMuunua4Whra",
+          "HxDaLgV8UrMq4G3YtXfcCx4UXm511hWSxPTeAfcD39vG",
+          "EvxphsdRErrDMs9nhFfF4nzq8i1C2KSogA7uB96TPpPR",
+          "HpMJWAzQv9HFgHBqY1o8V1B27sCYPFHJdGivDA658jEL",
+          "GcUfCg1P6XhSXzW34YmgXspCYaT7ujHSNmDK2CDEA3dy",
+          "4YCF1CSyTXm1Yi9W9JeYevawupkomdgy2dLxEBHL9euq",
+          "E3oMtCuPEauftdZLX8EZ8YX7BbFzpBCVRYEiLxwPJLY2"
+        ],
+        "node_index": 18559,
+        "leaf": "91eAJoZoXMmLbxCGWo7tdfHT7ZDYZMLgJRaGi2ocPxwL",
+        "tree_id": "5i1rrMFvFfwCkR15cf66bEXM2LmtfffDfYegQ3qdWgcF"
+      }
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

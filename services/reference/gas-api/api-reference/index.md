@@ -8,13 +8,17 @@ import TabItem from "@theme/TabItem";
 
 # Gas API reference
 
-This section provides reference information for the various Gas REST APIs.
+This section provides reference information for the Gas REST APIs.
 Use the APIs to:
 
 - [Get EIP-1559 gas prices.](./gasprices-type2.md)
 - [Get the base fee history (in Gwei).](./basefeehistory.md)
 - [Get the base fee percentile (in Gwei).](./basefeepercentile.md)
 - [Get the busy threshold for a network.](./busythreshold.md)
+
+:::info
+See the [list of supported Gas API networks](../../../get-started/endpoints.md#gas-api).
+:::
 
 ## Supported API request formats
 

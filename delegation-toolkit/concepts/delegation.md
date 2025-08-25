@@ -6,7 +6,7 @@ sidebar_position: 2
 # Delegation
 
 *Delegation* is the ability for a [MetaMask smart account](smart-accounts.md) to grant permission to another smart account
-or externally owned account (EOA) to perform specific executions on their behalf, under defined rules and restrictions.
+or externally owned account (EOA) to perform specific executions on its behalf, under defined rules and restrictions.
 The account that grants the permission is called the *delegator account*, while the account that receives the permission
 is called the *delegate account*.
 
@@ -50,7 +50,7 @@ The delegation lifecycle is as follows:
    delegation through an [ERC-4337 user operation](smart-accounts.md#account-abstraction-erc-4337),
    which verifies that the delegated authority is valid in order to perform the execution.
 
-See [how to create a delegation](../how-to/create-delegation/index.md) to get started with the
+See [how to create a delegation](../guides/create-delegation/index.md) to get started with the
 delegation lifecycle.
 
 ## Delegation Framework

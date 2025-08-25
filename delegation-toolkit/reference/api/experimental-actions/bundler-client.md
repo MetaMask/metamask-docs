@@ -83,7 +83,7 @@ export const publicClient = createPublicClient({
   transport: http(),
 });
 
-// Your session account for requesting and redeeming should be same.
+// Your session account for requesting and redeeming should be the same.
 const privateKey = "0x...";
 const account = privateKeyToAccount(privateKey);
 

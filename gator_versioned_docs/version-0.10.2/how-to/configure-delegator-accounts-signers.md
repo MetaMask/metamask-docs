@@ -237,7 +237,7 @@ For example:
 <TabItem value="example.ts">
 
 ```typescript
-import { publiClient } from "./client.ts";
+import { publicClient } from "./client.ts";
 import { account, walletClient } from "./signers.ts";
 import { 
   Implementation, 
@@ -285,8 +285,8 @@ const privateKey = generatePrivateKey();
 export const account = privateKeyToAccount(privateKey);
 
 // This private key will be used to generate the second signer.
-const walletClientPivatekey = generatePrivateKey(); 
-const walletClientAccount = privateKeyToAccount(walletClientPivatekey);
+const walletClientPrivatekey = generatePrivateKey(); 
+const walletClientAccount = privateKeyToAccount(walletClientPrivatekey);
 
 export const walletClient = createWalletClient({
   account: walletClientAccount,
