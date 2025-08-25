@@ -147,7 +147,7 @@ const config = {
             '**/_*/**',
             '**/*.test.{js,jsx,ts,tsx}',
             '**/__tests__/**',
-            '**/quickstart/**', // Exclude quickstart directory from pages plugin
+            '**/quickstart/**/stepContent/**',
           ],
           mdxPageComponent: '@theme/MDXPage',
           remarkPlugins: [npm2yarnPlugin],
