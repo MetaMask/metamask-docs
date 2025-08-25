@@ -4,10 +4,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding-top: 5%;
-  padding-right: 5%;
-  padding-bottom: 16px;
-  padding-left: 5%;
+  padding: 5% 5% 16px;
 }
 
 .header h1 {
@@ -16,7 +13,7 @@
   line-height: 150%;
 }
 
-.header h1:after {
+.header h1::after {
   display: none;
 }
 
@@ -48,8 +45,8 @@
 }
 
 .article img {
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   opacity: 1;
   border-radius: 20px;
   margin-bottom: 8px;
@@ -96,22 +93,19 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow: scroll hidden;
   gap: 5px;
+  -ms-overflow-style: none;
+
+  /* IE and Edge */
+  scrollbar-width: none;
+
+  /* Firefox */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .tagContainer::-webkit-scrollbar {
   display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.tagContainer {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
 }
 
 .tag {
@@ -160,11 +154,10 @@
 .searchArea {
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: flex-start;
   gap: 16px;
-  flex-wrap: wrap;
 }
 
 .searchInput {
@@ -222,13 +215,13 @@
 /* Add focus states for better accessibility */
 .searchArea input:focus {
   border-color: var(--ifm-color-primary) !important;
-  box-shadow: 0 0 0 2px rgba(var(--ifm-color-primary-r), var(--ifm-color-primary-g), var(--ifm-color-primary-b), 0.2) !important;
+  box-shadow: 0 0 0 2px rgb(var(--ifm-color-primary-r) var(--ifm-color-primary-g) var(--ifm-color-primary-b) / 20%) !important;
   outline: none !important;
 }
 
 
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .searchArea {
     flex-direction: column;
     align-items: stretch;
@@ -269,7 +262,6 @@ html[data-theme='dark'] mark {
   width: 100%;
   max-width: 175px;
   height: 42px;
-  padding: 10px;
   background-color: var(--ifm-background-surface-color);
   align-items: center;
   border: 1px solid var(--ifm-color-emphasis-300);
@@ -348,10 +340,10 @@ html[data-theme='dark'] mark {
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 24px;
   margin-top: 0;
-  padding: 0px 8px 16px 8px;
+  padding: 0 8px 16px;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .cardsGrid {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -359,7 +351,7 @@ html[data-theme='dark'] mark {
   }
 }
 
-@media (min-width: 1200px) {
+@media (width >= 1200px) {
   .cardsGrid {
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     gap: 32px;
@@ -437,7 +429,7 @@ html[data-theme='dark'] mark {
 
 .checkBoxContainer:hover {
   cursor: pointer;
-  background-color: rgba(var(--ifm-color-primary-r), var(--ifm-color-primary-g), var(--ifm-color-primary-b), 0.3);
+  background-color: rgb(var(--ifm-color-primary-r) var(--ifm-color-primary-g) var(--ifm-color-primary-b) / 30%);
 }
 
 .checkBoxInputContainer {
@@ -503,7 +495,7 @@ html[data-theme='dark'] mark {
   font-size: 17px;
   line-height: 24px;
   font-weight: 500;
-  color: #ffffff;
+  color: #fff;
 }
 
 .modalSaveButton:hover {
@@ -538,7 +530,7 @@ html[data-theme='dark'] mark {
   font-weight: 500;
   font-size: 16px;
   line-height: 125%;
-  padding: 0px 16px 30px;
+  padding: 0 16px 30px;
   gap: 6px;
   color: var(--w3a-color-icon-gray);
   cursor: pointer;
@@ -566,7 +558,7 @@ html[data-theme='dark'] mark {
   font-weight: 500;
   font-size: 16px;
   line-height: 125%;
-  padding: 0px 16px 30px;
+  padding: 0 16px 30px;
   gap: 6px;
   cursor: pointer;
 }
@@ -579,9 +571,10 @@ html[data-theme='dark'] mark {
 
 .pillContainer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+
   /* white */
   background: var(--w3a-color-indigo-background);
   border-radius: 8px;
@@ -591,30 +584,25 @@ html[data-theme='dark'] mark {
   margin-bottom: 7px;
   width: max-content;
   overflow: hidden;
-  flex-wrap: wrap;
 }
 
 .pill {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   justify-content: center;
   text-align: center;
   align-items: center;
   width: max-content;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 2px 12px;
   margin: 0;
   font-weight: 500 !important;
   font-size: 12px;
   text-transform: uppercase;
   line-height: 150%;
   color: var(--w3a-color-indigo);
-  flex-wrap: wrap;
 }
 
-@media only screen and (max-width: 1046px) {
+@media only screen and (width <= 1046px) {
   .headerInteractionArea {
     flex-direction: column;
     gap: 50px;
@@ -625,7 +613,7 @@ html[data-theme='dark'] mark {
   }
 }
 
-@media only screen and (max-width: 889px) {
+@media only screen and (width <= 889px) {
   .header {
     text-align: center;
     align-items: center;
@@ -651,19 +639,19 @@ html[data-theme='dark'] mark {
   }
 }
 
-@media only screen and (min-width: 889px) {
+@media only screen and (width >= 889px) {
   .article {
     width: 45%;
   }
 }
 
-@media only screen and (min-width: 1334px) {
+@media only screen and (width >= 1334px) {
   .article {
     width: 30%;
   }
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (width <= 750px) {
   .modalBody {
     flex-direction: column;
   }

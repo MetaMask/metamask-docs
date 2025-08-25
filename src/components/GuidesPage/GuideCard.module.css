@@ -1,7 +1,7 @@
 :root {
   --card-border-radius: 12px;
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  --card-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 2px 8px rgb(0 0 0 / 5%);
+  --card-shadow-hover: 0 4px 16px rgb(0 0 0 / 10%);
   --card-padding: 24px;
   --card-gap: 16px;
 }
@@ -110,8 +110,8 @@ mark {
 
 /* Dark theme adjustments */
 html[data-theme='dark'] {
-  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --card-shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --card-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+  --card-shadow-hover: 0 4px 16px rgb(0 0 0 / 30%);
 }
 
 html[data-theme='dark'] .card {

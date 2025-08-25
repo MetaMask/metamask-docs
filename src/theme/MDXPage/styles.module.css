@@ -1,9 +1,8 @@
 .titleContainer {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   overflow: hidden;
   width: 95%;
   margin-bottom: 16px;
@@ -12,10 +11,9 @@
 
 .tagsContainer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
   width: 100%;
   gap: 5px;
 }
@@ -57,9 +55,10 @@
 
 .pillContainer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
+
   /* white */
   background: var(--w3a-color-indigo-background);
   border-radius: 8px;
@@ -69,27 +68,22 @@
   margin-bottom: 7px;
   width: max-content;
   overflow: hidden;
-  flex-wrap: wrap;
 }
 
 .pill {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   justify-content: center;
   text-align: center;
   align-items: center;
   width: max-content;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 2px 15px;
   margin: 0;
   font-weight: 500 !important;
   font-size: 15px;
   text-transform: uppercase;
   line-height: 150%;
   color: var(--w3a-color-indigo);
-  flex-wrap: wrap;
 }
 
 .socialButtonContainer {
@@ -104,7 +98,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 24px 8px 24px;
+  padding: 8px 24px;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -129,7 +123,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 24px 8px 24px;
+  padding: 8px 24px;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -180,7 +174,7 @@
   line-height: 150%;
 }
 
-@media only screen and (min-width: 481px) {
+@media only screen and (width >= 481px) {
   .title {
     font-size: 40px;
   }
@@ -190,7 +184,7 @@
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (width >= 768px) {
   .title {
     font-size: 48px;
   }
@@ -208,7 +202,7 @@
   }
 }
 
-@media only screen and (min-width: 1216px) {
+@media only screen and (width >= 1216px) {
   .title {
     font-size: 52px;
   }

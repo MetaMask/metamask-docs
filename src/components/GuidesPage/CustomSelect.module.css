@@ -32,7 +32,7 @@
 
 .controlFocused {
   box-shadow: 0 0 0 2px
-    rgba(var(--ifm-color-primary-r), var(--ifm-color-primary-g), var(--ifm-color-primary-b), 0.2);
+    rgb(var(--ifm-color-primary-r) var(--ifm-color-primary-g) var(--ifm-color-primary-b) / 20%);
   border-color: var(--ifm-color-primary);
 }
 
@@ -179,8 +179,8 @@
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 10px;
   box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    0 4px 6px -1px rgb(0 0 0 / 10%),
+    0 2px 4px -1px rgb(0 0 0 / 6%);
   z-index: 1000;
   position: absolute;
   top: 100%;
@@ -244,11 +244,11 @@
 }
 
 .optionRemove:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgb(255 255 255 / 20%);
 }
 
 /* Mobile responsive styles */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .customSelect {
     min-width: 100%;
     max-width: 100%;

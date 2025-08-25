@@ -52,7 +52,7 @@
   background: var(--general-white);
   border: 1px solid var(--general-gray-light);
   border-radius: 4px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px rgb(0 0 0 / 10%);
   margin-top: 0.3rem;
   padding-bottom: 1rem;
   z-index: 100;
@@ -85,7 +85,7 @@
   font-weight: 500;
   line-height: 1.4;
   color: var(--ifm-color-emphasis-700);
-  margin: 0.2rem 0rem;
+  margin: 0.2rem 0;
 }
 
 .menuItem:hover {

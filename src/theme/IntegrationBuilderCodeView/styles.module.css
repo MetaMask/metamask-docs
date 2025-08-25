@@ -18,12 +18,11 @@
   background: var(--w3a-ib-code-tab-background-color);
   width: 4px;
   height: 4px;
-}
-
-.container :global ::-webkit-scrollbar {
   -ms-overflow-style: none;
+
   /* IE and Edge */
   scrollbar-width: none;
+
   /* Firefox */
 }
 
@@ -75,7 +74,7 @@
   color: var(--ifm-color-gray-400);
   font-size: 16px;
   font-weight: 500;
-  padding: 4px 10px 3px 10px;
+  padding: 4px 10px 3px;
   margin: 6px;
   margin-bottom: 20px;
   border-radius: 9999px;

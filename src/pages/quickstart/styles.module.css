@@ -26,13 +26,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgb(0 0 0 / 50%);
   z-index: 1000;
 }
 
@@ -40,7 +37,7 @@
   display: block;
   background: var(--ifm-background-surface-color);
   border: 1px solid var(--ifm-color-emphasis-200);
-  box-shadow: 0px 1px 2px var(--ifm-color-emphasis-200);
+  box-shadow: 0 1px 2px var(--ifm-color-emphasis-200);
   border-radius: 16px;
   padding: 24px;
   margin: 5%;
@@ -56,12 +53,13 @@
   overflow: hidden;
   background: var(--ifm-color-second-narbar);
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.2),
-    0 6px 12px rgba(0, 0, 0, 0.1),
+    0 4px 8px rgb(0 0 0 / 20%),
+    0 6px 12px rgb(0 0 0 / 10%),
     0 10px 20px #00000026;
   position: fixed;
   bottom: 1%;
   right: 10px;
+
   /* transition: max-height 0.3s ease-in-out, width 0.3s ease-in-out, padding 0.3s ease-in-out; */
   width: max-content;
   z-index: 1000;
@@ -87,36 +85,32 @@
 
 .optionsHeaderButtonsContainer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: space-evenly;
   align-items: center;
-  flex-wrap: wrap;
   gap: 8px;
 }
 
 .optionsContainer {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   justify-content: flex-start;
   align-items: flex-end;
-  flex-wrap: wrap;
 }
 
 .builderContainer {
   display: flex;
-  flex-direction: col;
+  flex-flow: col wrap;
   justify-content: flex-start;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .utilityButtonsContainer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
 }
 
 .productSelectionRow {
@@ -130,11 +124,10 @@
 
 .controlsRow {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
 }
 
 /* Top Control Pane */
@@ -144,7 +137,7 @@
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
   padding: 8px 16px;
   top: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
 }
 
 .topControlContainer {
@@ -171,8 +164,7 @@
 }
 
 .leftCol {
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden scroll;
   margin-left: 0;
   margin-right: 0;
 }
@@ -191,7 +183,6 @@
 .stepContainer.stepSelected {
   /* background-color: var(--ifm-background-surface-color); */
   background: var(--ifm-color-emphasis-200);
-
   border-color: var(--ifm-color-primary);
 }
 
@@ -227,17 +218,14 @@
 .slider {
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: var(--ifm-color-emphasis-200);
-  -webkit-transition: 0.4s;
+  transition: 0.4s;
   transition: 0.4s;
   border-radius: 34px;
 }
 
-.slider:before {
+.slider::before {
   position: absolute;
   content: '';
   height: 16px;
@@ -245,32 +233,32 @@
   left: 4px;
   bottom: 4px;
   background-color: var(--ifm-color-gray-400);
-  -webkit-transition: 0.4s;
+  transition: 0.4s;
   transition: 0.4s;
   border-radius: 50%;
 }
 
-.switch input:checked + .slider {
-  background-color: var(--ifm-color-primary-light);
-}
-
-/* Dark mode: Better visibility for checked switches */
-[data-theme='dark'] .switch input:checked + .slider {
-  background-color: var(--ifm-color-primary);
-}
-
-.switch input:checked + .slider:before {
-  background-color: var(--ifm-color-white);
-}
-
-.switch input:focus + .slider {
+.switch input:focus+.slider {
   box-shadow: 0 0 1px var(--ifm-color-primary-light);
 }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(16px);
-  -ms-transform: translateX(16px);
+.switch input:checked+.slider {
+  background-color: var(--ifm-color-primary-light);
+}
+
+input:checked+.slider::before {
   transform: translateX(16px);
+  transform: translateX(16px);
+  transform: translateX(16px);
+}
+
+.switch input:checked+.slider::before {
+  background-color: var(--ifm-color-white);
+}
+
+/* Dark mode: Better visibility for checked switches */
+[data-theme='dark'] .switch input:checked+.slider {
+  background-color: var(--ifm-color-primary);
 }
 
 /* Drowpdown */
@@ -279,7 +267,7 @@ input:checked + .slider:before {
   margin-right: 0.5rem;
 }
 
-.w3DropdownLink:after {
+.w3DropdownLink::after {
   border: none;
   content: '';
   display: inline-block;
@@ -335,9 +323,8 @@ input:checked + .slider:before {
 
 .cardContainer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   gap: 6px;
-  flex-wrap: wrap;
   min-width: 300px;
 }
 
@@ -400,8 +387,8 @@ input:checked + .slider:before {
   min-width: 140px;
   background: var(--ifm-background-surface-color);
   border: 1px solid var(--ifm-color-emphasis-200);
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none;
+  appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg width='10' height='17' viewBox='0 0 10 17' fill='gray' xmlns='http://www.w3.org/2000/svg'><path d='M0.937273 11.1465C1.04471 11.0528 1.19041 11.0001 1.34233 11.0001C1.49424 11.0001 1.63994 11.0528 1.74738 11.1465L4.58331 13.6215L7.41925 11.1465C7.52731 11.0554 7.67203 11.005 7.82224 11.0062C7.97246 11.0073 8.11615 11.0599 8.22238 11.1526C8.3286 11.2453 8.38885 11.3707 8.39016 11.5018C8.39146 11.6329 8.33372 11.7592 8.22936 11.8535L4.98837 14.682C4.88093 14.7758 4.73523 14.8284 4.58331 14.8284C4.4314 14.8284 4.2857 14.7758 4.17826 14.682L0.937273 11.8535C0.829868 11.7598 0.769531 11.6326 0.769531 11.5C0.769531 11.3674 0.829868 11.2403 0.937273 11.1465Z' fill='gray'/><path d='M0.937273 5.85348C1.04471 5.94722 1.19041 5.99988 1.34233 5.99988C1.49424 5.99988 1.63994 5.94722 1.74738 5.85348L4.58331 3.37848L7.41925 5.85348C7.52731 5.94456 7.67203 5.99496 7.82224 5.99382C7.97246 5.99268 8.11615 5.9401 8.22238 5.84739C8.3286 5.75469 8.38885 5.62928 8.39016 5.49819C8.39146 5.36709 8.33372 5.24079 8.22936 5.14648L4.98837 2.31798C4.88093 2.22425 4.73523 2.17159 4.58331 2.17159C4.4314 2.17159 4.2857 2.22425 4.17826 2.31798L0.937273 5.14648C0.829868 5.24025 0.769531 5.3674 0.769531 5.49998C0.769531 5.63257 0.829868 5.75972 0.937273 5.85348Z' fill='gray'/></svg>");
   background-repeat: no-repeat;
   background-position: center right 12px;
@@ -446,7 +433,7 @@ input:checked + .slider:before {
 .copyButton:hover,
 .copyButton2:hover {
   border-color: var(--ifm-color-primary-light);
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
   transform: translateY(-1px);
 }
 
@@ -454,7 +441,7 @@ input:checked + .slider:before {
 .previewButton2 {
   background: var(--ifm-color-primary);
   border: 1px solid var(--ifm-color-primary);
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
   color: var(--ifm-background-surface-color);
 }
 
@@ -470,7 +457,7 @@ input:checked + .slider:before {
 .previewButton2:hover {
   background: var(--ifm-color-primary-light);
   border-color: var(--ifm-color-primary-light);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
   transform: translateY(-1px);
 }
 
@@ -512,7 +499,7 @@ input:checked + .slider:before {
   border: none;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .topControlPane {
     padding: 6px 12px;
   }
@@ -546,7 +533,7 @@ input:checked + .slider:before {
   }
 }
 
-@media (min-width: 960px) {
+@media (width >= 960px) {
   .cols {
     display: flex;
     height: calc(100vh - 86px - 45px);
@@ -555,8 +542,7 @@ input:checked + .slider:before {
 
   .leftCol {
     width: 50%;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: hidden scroll;
     margin-left: 0;
     margin-right: 0;
     display: flex;
@@ -583,7 +569,7 @@ input:checked + .slider:before {
 }
 
 .stepMenuHeader {
-  padding: 0 1rem 0.5rem 1rem;
+  padding: 0 1rem 0.5rem;
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
   margin-bottom: 0.5rem;
 }
@@ -644,15 +630,15 @@ input:checked + .slider:before {
   color: white;
 }
 
+.stepMenuItemCompleted .stepMenuNumber {
+  background: var(--ifm-color-success);
+  color: black;
+}
+
 /* Dark mode: Ensure good contrast for active step numbers */
 [data-theme='dark'] .stepMenuItemActive .stepMenuNumber {
   background: var(--ifm-color-primary-dark);
   color: white;
-}
-
-.stepMenuItemCompleted .stepMenuNumber {
-  background: var(--ifm-color-success);
-  color: black;
 }
 
 /* Dark mode: Use darker success color for better visibility with black text */
@@ -667,6 +653,7 @@ input:checked + .slider:before {
   flex-direction: column;
   min-height: 100%;
   padding-bottom: 100vh;
+
   /* Enough space for last step to reach top */
 }
 
@@ -674,22 +661,27 @@ input:checked + .slider:before {
 .stepSection {
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   height: 85vh;
+
   /* Fixed height for ALL steps */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
   padding: 1rem 0;
+
   /* Consistent padding */
   box-sizing: border-box;
+
   /* Remove margin-bottom for consistent spacing */
 }
 
 /* First step uses same height as others */
 .stepSection:first-child {
   height: 85vh;
+
   /* Same as all other steps */
   padding: 1rem 0;
+
   /* Same padding as others */
 }
 
@@ -706,14 +698,29 @@ input:checked + .slider:before {
   background: var(--ifm-background-surface-color);
   padding: 1.5rem;
   margin-top: 0;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 25px rgb(0 0 0 / 8%);
   border-radius: 12px;
   border: 1px solid var(--ifm-color-emphasis-200);
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   flex: 1;
   overflow-y: auto;
   max-height: calc(85vh - 4rem);
+
   /* Adjusted for new container height */
+}
+
+/* Step Progress Indicator - Base styles */
+.stepProgressIndicator {
+  background: var(--ifm-color-primary-light);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Previous Steps */
@@ -733,12 +740,24 @@ input:checked + .slider:before {
   flex: 1;
   overflow-y: auto;
   max-height: calc(85vh - 4rem);
+
   /* Adjusted for new container height */
 }
 
 .previousStep .stepProgressIndicator {
   background: var(--ifm-color-success);
   color: black;
+}
+
+.upcomingStep .stepProgressIndicator {
+  background: var(--ifm-color-emphasis-400);
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Dark mode: Use darker background for better contrast with white text */
+[data-theme='dark'] .stepProgressIndicator {
+  background: var(--ifm-color-primary-dark);
+  color: white;
 }
 
 /* Dark mode: Use darker success color for better contrast with white text */
@@ -765,12 +784,13 @@ input:checked + .slider:before {
   flex: 1;
   overflow-y: auto;
   max-height: calc(85vh - 4rem);
+
   /* Adjusted for new container height */
 }
 
 .upcomingStep:hover {
   opacity: 0.8;
-  transform: translateY(0px) scale(0.99);
+  transform: translateY(0) scale(0.99);
 }
 
 .upcomingStep[style*='pointer'] {
@@ -780,11 +800,6 @@ input:checked + .slider:before {
 .upcomingStep[style*='pointer']:hover {
   opacity: 0.85;
   transform: translateY(-1px) scale(1);
-}
-
-.upcomingStep .stepProgressIndicator {
-  background: var(--ifm-color-emphasis-400);
-  color: var(--ifm-color-emphasis-700);
 }
 
 /* Make the immediate next step much more visible */
@@ -797,10 +812,11 @@ input:checked + .slider:before {
 .nextStep .stepContainer {
   background: var(--ifm-color-emphasis-75);
   border: 1px solid var(--ifm-color-emphasis-400);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 4%);
   flex: 1;
   overflow-y: auto;
   max-height: calc(85vh - 4rem);
+
   /* Adjusted for new container height */
 }
 
@@ -826,25 +842,7 @@ input:checked + .slider:before {
   transform: translateY(-2px) scale(1.01);
 }
 
-/* Step Progress Indicator */
-.stepProgressIndicator {
-  background: var(--ifm-color-primary-light);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
-  display: inline-block;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-/* Dark mode: Use darker background for better contrast with white text */
-[data-theme='dark'] .stepProgressIndicator {
-  background: var(--ifm-color-primary-dark);
-  color: white;
-}
+/* Step Progress Indicator styles moved above */
 
 /* Step Separator */
 .stepSeparator {
@@ -858,43 +856,37 @@ input:checked + .slider:before {
 .separatorLine {
   width: 100%;
   height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    var(--ifm-color-emphasis-300) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(to right,
+      transparent 0%,
+      var(--ifm-color-emphasis-300) 50%,
+      transparent 100%);
 }
 
 /* Completion Indicator */
 .completionIndicator {
   text-align: center;
   padding: 2rem;
-  margin: 4rem 1.5rem 2rem 1.5rem;
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-success-light) 0%,
-    var(--ifm-color-success) 100%
-  );
+  margin: 4rem 1.5rem 2rem;
+  background: linear-gradient(135deg,
+      var(--ifm-color-success-light) 0%,
+      var(--ifm-color-success) 100%);
   color: white;
   border-radius: 12px;
   font-size: 18px;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
 }
 
 /* Dark mode: Better contrast for completion indicator */
 [data-theme='dark'] .completionIndicator {
-  background: linear-gradient(
-    135deg,
-    var(--consumer-green-dark) 0%,
-    var(--institution-green-dark) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--consumer-green-dark) 0%,
+      var(--institution-green-dark) 100%);
   color: white;
 }
 
 /* Smooth transition animations */
-@keyframes fadeIn {
+@keyframes fade-in {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -906,7 +898,7 @@ input:checked + .slider:before {
   }
 }
 
-@keyframes fadeInUp {
+@keyframes fade-in-up {
   from {
     opacity: 0;
     transform: translateY(20px) scale(0.98);
@@ -919,7 +911,7 @@ input:checked + .slider:before {
 }
 
 /* Mobile responsive adjustments */
-@media (max-width: 960px) {
+@media (width <= 960px) {
   .stepNavigationMenu {
     display: none;
   }
@@ -942,20 +934,25 @@ input:checked + .slider:before {
 
   .stepSection {
     height: 75vh;
+
     /* Fixed height for mobile */
     padding: 0.5rem 0;
+
     /* Consistent padding */
   }
 
   .stepSection:first-child {
     height: 75vh;
+
     /* Same as all other steps on mobile */
     padding: 0.5rem 0;
+
     /* Same padding as others */
   }
 
   .stepSection .stepContainer {
     max-height: calc(75vh - 3rem);
+
     /* Adjusted for new mobile container height */
   }
 
@@ -965,6 +962,7 @@ input:checked + .slider:before {
 
   .stepsScrollContainer {
     padding-bottom: 80vh;
+
     /* Enough space for last step on mobile */
   }
 
@@ -1016,7 +1014,7 @@ input:checked + .slider:before {
 }
 
 /* Responsive Design for Media Components */
-@media (max-width: 996px) {
+@media (width <= 996px) {
   .hybridContainer {
     flex-direction: column;
   }
@@ -1032,7 +1030,7 @@ input:checked + .slider:before {
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .mediaStepContainer {
     border-radius: 8px;
   }
@@ -1124,7 +1122,7 @@ input:checked + .slider:before {
 }
 
 /* Ensure both tab contents have identical sizing */
-.tabContent > * {
+.tabContent>* {
   width: 100% !important;
   height: 100% !important;
   flex: 1 1 auto;
@@ -1161,9 +1159,13 @@ input:checked + .slider:before {
   padding: 0 !important;
   min-width: 0 !important;
   overflow: hidden;
+
+  --prism-background-color: var(--ifm-color-emphasis-100) !important;
+  --ifm-pre-background: var(--ifm-color-emphasis-100) !important;
+  --w3a-ib-code-tab-background-color: var(--ifm-color-emphasis-100) !important;
 }
 
-.tabContent .hybridCodeView > * {
+.tabContent .hybridCodeView>* {
   width: 100% !important;
   height: 100%;
   flex: 1;
@@ -1210,12 +1212,7 @@ input:checked + .slider:before {
   color: var(--ifm-color-content) !important;
 }
 
-/* Override any CSS variables that might affect code block styling */
-.tabContent .hybridCodeView {
-  --prism-background-color: var(--ifm-color-emphasis-100) !important;
-  --ifm-pre-background: var(--ifm-color-emphasis-100) !important;
-  --w3a-ib-code-tab-background-color: var(--ifm-color-emphasis-100) !important;
-}
+/* Override any CSS variables that might affect code block styling - merged above */
 
 /* Override header styling to match light theme */
 .tabContent .hybridCodeView .header {
@@ -1278,7 +1275,7 @@ input:checked + .slider:before {
 }
 
 /* Force exact same layout for both tab types */
-.hybridTabContainer .tabContent > div {
+.hybridTabContainer .tabContent>div {
   width: 100% !important;
   height: 100% !important;
   display: flex !important;
@@ -1310,7 +1307,7 @@ input:checked + .slider:before {
   max-height: 80% !important;
   margin: auto !important;
   border-radius: 12px !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%) !important;
   object-fit: contain !important;
   display: block !important;
 }
@@ -1335,7 +1332,7 @@ input:checked + .slider:before {
 }
 
 /* Responsive styles for tabs */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .tabButton {
     padding: 12px 16px;
     font-size: 14px;
