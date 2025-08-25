@@ -147,7 +147,11 @@ const config = {
             '**/_*/**',
             '**/*.test.{js,jsx,ts,tsx}',
             '**/__tests__/**',
-            '**/quickstart/**/stepContent/**',
+            '**/quickstart/**/stepContent/**', // Only exclude step content, not commonSteps
+            '**/quickstart/builder/**',
+            '**/quickstart/index.tsx',
+            '**/quickstart/interfaces.ts',
+            '**/quickstart/utils.tsx',
           ],
           mdxPageComponent: '@theme/MDXPage',
           remarkPlugins: [npm2yarnPlugin],
