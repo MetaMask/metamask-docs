@@ -87,6 +87,15 @@ module.exports = (context, options) => ({
       },
     });
 
+    // Add this to prevent other routes from being created in the quickstart namespace
+    addRoute({
+      path: `${routePath}/*`,
+      component: "@site/src/pages/quickstart",
+      modules: {
+        files,
+      },
+    });
+
     console.log('✅ Virtual files plugin: Route added successfully');
   },
 });
