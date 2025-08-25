@@ -118,17 +118,17 @@ const NavbarWalletComponent: FC = ({ includeUrl = [] }: INavbarWalletComponent) 
       style={
         colorMode === 'dark'
           ? {
-              '--button-color': 'var(--consumer-orange)',
-              '--button-text-color': 'var(--general-black)',
-              '--button-color-hover': 'var(--general-white)',
-              '--button-text-color-hover': 'var(--general-black)',
-            }
+            '--button-color': 'var(--consumer-orange)',
+            '--button-text-color': 'var(--general-black)',
+            '--button-color-hover': 'var(--general-white)',
+            '--button-text-color-hover': 'var(--general-black)',
+          }
           : {
-              '--button-color': 'var(--consumer-orange)',
-              '--button-text-color': 'var(--general-black)',
-              '--button-color-hover': 'var(--general-black)',
-              '--button-text-color-hover': 'var(--general-white)',
-            }
+            '--button-color': 'var(--consumer-orange)',
+            '--button-text-color': 'var(--general-black)',
+            '--button-color-hover': 'var(--general-black)',
+            '--button-text-color-hover': 'var(--general-white)',
+          }
       }
     />
   ) : (
@@ -200,6 +200,14 @@ const NavbarWallet = props => {
   const [loginEnabled, setLoginEnabled] = useState(false)
 
   useEffect(() => {
+    // Handle case where ldClient is null (when LaunchDarkly isn't initialized)
+    if (!ldClient) {
+      console.warn('LaunchDarkly client not available, disabling login feature');
+      setLdReady(true);
+      setLoginEnabled(false);
+      return;
+    }
+
     ldClient.waitUntilReady().then(() => {
       setLoginEnabled(ldClient.variation(LOGIN_FF, false))
       setLdReady(true)

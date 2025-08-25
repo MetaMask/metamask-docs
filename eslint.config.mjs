@@ -19,6 +19,7 @@ export default [{
         "**/.eslintrc.js",
         "node_modules/*",
         ".docusaurus/*",
+        ".integrationBuilderCache/*",
         "**/*.md",
         "**/*.mdx",
         "static/*",
@@ -42,6 +43,12 @@ export default [{
 
             project: ["./tsconfig.json"],
             tsconfigRootDir: "./",
+        },
+    },
+
+    settings: {
+        react: {
+            version: "detect",
         },
     },
 

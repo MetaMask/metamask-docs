@@ -1,0 +1,102 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.header {
+  height: 56px;
+  padding: 0 12px;
+  background: var(--w3a-ib-code-tab-background-color);
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.container :global ::-webkit-scrollbar {
+  background: var(--w3a-ib-code-tab-background-color);
+  width: 4px;
+  height: 4px;
+  -ms-overflow-style: none;
+
+  /* IE and Edge */
+  scrollbar-width: none;
+
+  /* Firefox */
+}
+
+.container ::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-gray-400);
+  border-radius: 8px;
+}
+
+.container ::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-white);
+}
+
+.body {
+  height: 100%;
+  overflow: scroll;
+}
+
+.body>div {
+  margin-bottom: 0;
+}
+
+.body :global .prism-code>div {
+  min-height: 80vh;
+}
+
+.container :global .prism-code {
+  counter-reset: line-number;
+  border-radius: 0;
+}
+
+.container :global .prism-code>div {
+  padding-top: 10px;
+}
+
+.container :global .prism-code[class*="language-"] .token-line::before {
+  counter-increment: line-number;
+  display: inline-block;
+  content: counter(line-number);
+  min-width: 1.625em;
+  text-align: right;
+  margin-right: calc(var(--ifm-pre-padding) * 1.25);
+  opacity: 0.25;
+}
+
+.codeTabs :global .tabs__item {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--ifm-color-gray-400);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 4px 10px 3px;
+  margin: 6px;
+  margin-bottom: 20px;
+  border-radius: 9999px;
+  border: none;
+  user-select: none;
+  transition: all var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+}
+
+.codeTabs :global .tabs__item>svg {
+  margin-right: 4px;
+  margin-bottom: 2px;
+}
+
+.codeTabs :global .tabs__item:last-child {
+  margin-right: 0;
+}
+
+.codeTabs :global .tabs__item:hover {
+  color: var(--ifm-color-white);
+}
+
+.codeTabs :global .tabs__item.tabs__item--active {
+  color: var(--ifm-color-content);
+  background: var(--ifm-color-emphasis-300);
+}
