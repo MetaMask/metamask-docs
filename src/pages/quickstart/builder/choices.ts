@@ -32,10 +32,7 @@ export const LANGS_EMBEDDED_WALLETS: DisplayChoice[] = [
   { key: FLUTTER, displayName: 'Flutter' },
 ]
 
-export const LANGS_METAMASK_SDK: DisplayChoice[] = [
-  { key: REACT, displayName: 'React' },
-  { key: NEXTJS, displayName: 'Next JS' },
-]
+export const LANGS_METAMASK_SDK: DisplayChoice[] = [{ key: REACT, displayName: 'React' }]
 
 // Misc choices
 

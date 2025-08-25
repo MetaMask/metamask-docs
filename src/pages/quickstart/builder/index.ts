@@ -18,7 +18,6 @@ import EWNextjs from './embedded-wallets/nextjs'
 import EWReact from './embedded-wallets/react'
 import EWVue from './embedded-wallets/vue'
 import MMReact from './metamask-sdk/react'
-import MMNextjs from './metamask-sdk/nextjs'
 
 const frameworks = {
   EW_ANGULAR: EWAngular,
@@ -30,7 +29,6 @@ const frameworks = {
   EW_REACT_NATIVE: EWReactNative,
   EW_FLUTTER: EWFlutter,
   MMSDK_REACT: MMReact,
-  MMSDK_NEXTJS: MMNextjs,
 }
 
 // Helper function to map framework choice to framework key based on product

@@ -20,8 +20,8 @@ export const DTKQuickStartHostedLinks = {
 };
 
 export const MMSDKQuickStartHostedLinks = {
-  REACT: "https://web3auth-react-quick-start-tau.vercel.app/",
-  NEXTJS: "https://web3auth-nextjs-quick-start.vercel.app/",
+  REACT: "https://metamask-sdk-examples.vercel.app/",
+  NEXTJS: "https://metamask-sdk-examples.vercel.app/",
 };
 
 export const EWQuickStartSourceCode = {
@@ -50,7 +50,7 @@ export const DTKQuickStartSourceCode = {
 };
 
 export const MMSDKQuickStartSourceCode = {
-  REACT: "https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/react-quick-start",
-  NEXTJS: "https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/nextjs-quick-start",
+  REACT: "https://github.com/MetaMask/metamask-sdk-examples/tree/feat/new-structure/quickstarts/react",
+  NEXTJS: "https://github.com/MetaMask/metamask-sdk-examples/tree/feat/new-structure/quickstarts/next",
 };
 
