@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 # Delegation
 
 *Delegation* is the ability for a [MetaMask smart account](../smart-accounts.md) to grant permission to another smart account
-or externally owned account (EOA) to perform specific executions on its behalf, under defined rules and restrictions.
+or externally owned account (EOA) to perform specific executions on its behalf.
 The account that grants the permission is called the *delegator account*, while the account that receives the permission
 is called the *delegate account*.
 
@@ -22,36 +22,46 @@ For example: Alice delegates the ability to spend her USDC to Bob, limiting the 
 
 The delegation lifecycle is as follows:
 
-1. **Delegation creation** - A delegation is initialized, and the delegator account signs it.
+1. **Create a delegation** - The delegator account creates and signs a delegation.
 
-2. **Caveat enforcement** - The caveats applied to the delegation specify conditions under which
+2. **Apply caveats** - The caveats applied to the delegation specify conditions under which
    the delegation can be redeemed.
 
-3. **Delegation storage** - The delegation can be stored, enabling retrieval for future redemption.
+3. **Store the delegation** - A dapp can store the delegation, enabling retrieval for future redemption.
 
-4. **Delegation redemption** - The delegate (the account being granted the permission) redeems the delegation via the Delegation Manager,
+4. **Redeem the delegation** - The delegate (the account being granted the permission) redeems the delegation via the Delegation Manager,
    which verifies that the delegated authority is valid in order to perform the execution.
 
 See [how to perform executions on a user's behalf](../../guides/delegation/execute-on-users-behalf.md) to get started with the delegation lifecycle.
 
 ## Delegation types
 
-There are multiple types of delegations you can create:
+You can create the following delegation types:
 
-- A **root delegation** is a delegation that doesn't derive its authority from another delegation.
-  It is when a delegator delegates its own authority away, as opposed to a redelegation.
+- **Root delegation** - A root delegation is a delegation that doesn't derive its authority from another delegation.
+  It is when a delegator delegates its own authority away.
+  For example, Alice delegates the ability to spend her USDC to Bob, limiting the amount to 100 USDC.
+
   Use [`createDelegation`](../../reference/api/delegation.md#createdelegation) to create a root delegation.
 
-- An **open root delegation** is a root delegation that doesn't specify a delegate.
+- **Open root delegation** - An open root delegation is a root delegation that doesn't specify a delegate.
   This means that any account can redeem the delegation.
+  For example, Alice delegates the ability to spend 100 of her USDC to anyone.
+
   You must create open root delegations carefully, to ensure that they are not misused.
   Use [`createOpenDelegation`](../../reference/api/delegation.md#createopendelegation) to create a root delegation.
 
-- A delegate can **redelegate** permissions that have been granted to them, creating a chain of delegations across trusted parties.
+- **Redelegation** - A delegate can redelegate permissions that have been granted to them, creating a chain of delegations across trusted parties.
+  For example, Alice delegates the ability to spend 100 of her USDC to Bob.
+  Bob redelegates the ability to spend 50 of Alice's 100 USDC to Carol.
+
   Use [`createDelegation`](../../reference/api/delegation.md#createdelegation) to create a redelegation.
 
-- An **open redelegation** is a redelegation that doesn't specify a delegate.
+- **Open redelegation** - An open redelegation is a redelegation that doesn't specify a delegate.
   This means that any account can redeem the redelegation.
+  For example, Alice delegates the ability to spend 100 of her USDC to Bob.
+  Bob redelegates the ability to spend 50 of Alice's 100 USDC to anyone.
+
   As with open root delegations, you must create open redelegations carefully, to ensure that they are not misused.
   Use [`createOpenDelegation`](../../reference/api/delegation.md#createopendelegation) to create an open redelegation.
 
@@ -95,7 +105,7 @@ It consists of the following components:
 
 ## Delegation flow
 
-This diagram illustrates how a delegation is created and subsequently redeemed on the Delegation Manager.
+This diagram shows how a delegation is created and redeemed with the Delegation Manager.
 The Delegation Manager is responsible for validating the signature of the delegation and the caveat enforcers.
 If everything is correct, it allows a delegate to execute an action on behalf of the delegator.
 
@@ -148,7 +158,8 @@ The Delegation Toolkit supports several execution modes based on [ERC-7579](http
 
 ### `SINGLE` execution modes
 
-In `SINGLE` execution modes, only a single delegation chain and a single execution can be provided. This mode processes delegations sequentially:
+In `SINGLE` modes, you can provide only one delegation chain and one execution.
+Processing is sequential:
 
 1. For each delegation in the chain, all caveats' `before` hooks are called.
 2. The single redeemed action is executed.
@@ -156,7 +167,8 @@ In `SINGLE` execution modes, only a single delegation chain and a single executi
 
 ### `BATCH` execution modes
 
-In `BATCH` execution modes, multiple delegation chains and multiple executions can be provided. This mode executes delegations in an interleaved way:
+In `BATCH` modes, you can provide multiple delegation chains and multiple executions.
+Processing is interleaved:
 
 1. For each chain in the batch, and each delegation in the chain, all caveats' `before` hooks are called.
 2. Each redeemed action is executed.

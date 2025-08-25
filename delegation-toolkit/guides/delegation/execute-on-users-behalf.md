@@ -11,9 +11,8 @@ import TabItem from "@theme/TabItem";
 
 [Delegation](../../concepts/delegation/index.md) is the ability for a [MetaMask smart account](../../concepts/smart-accounts.md) to grant permission to another account to perform executions on its behalf.
 
-This guide demonstrates how to create a *delegator account* (the account that grants the permission) and *delegate account* (the account that receives the permission), and complete the delegation lifecycle (create, sign, and redeem a delegation).
-
-This guide will refer to the delegator account as "Alice," who grants permission to "Bob," the delegate account, to perform executions on her behalf.
+In this guide, you'll create a delegator account (Alice) and a delegate account (Bob), and grant Bob permission to perform executions on Alice's behalf.
+You'll complete the delegation lifecycle (create, sign, and redeem a delegation).
 
 ## Prerequisites
 
@@ -21,9 +20,10 @@ This guide will refer to the delegator account as "Alice," who grants permission
 
 ## Steps
 
-### 1. Set up a Public Client
+### 1. Create a Public Client
 
-Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. This client will let the delegator account query the signer's account state and interact with smart contracts.
+Create a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function.
+Your dapp can use the Public Client to query the signer's account state and interact with smart contracts.
 
 ```typescript
 import { createPublicClient, http } from "viem"
@@ -35,9 +35,10 @@ const publicClient = createPublicClient({
 })
 ```
 
-### 2. Set up a Bundler Client
+### 2. Create a Bundler Client
 
-Set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function. This lets you use the bundler service to estimate gas for user operations and submit transactions to the network.
+Create a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function.
+Your dapp can use the bundler service to estimate gas for user operations and submit transactions to the network.
 
 ```typescript
 import { createBundlerClient } from "viem/account-abstraction"
