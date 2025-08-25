@@ -1,3 +1,4 @@
+tab
 ---
 slug: /
 title: Wallet API introduction
@@ -11,7 +12,7 @@ keywords: [extension, api]
 For cross-platform development, mobile integration, or advanced features like QR codes and 
 deeplinking, see the [**MetaMask SDK** documentation](/sdk).
 :::
-
+tab
 The Wallet API is MetaMask's core interface for web dapps to interact with the MetaMask browser extension.
 With the Wallet API, you can:
 
