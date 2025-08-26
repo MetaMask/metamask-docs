@@ -1,8 +1,8 @@
-import Head from "@docusaurus/Head";
+import Head from '@docusaurus/Head'
 
 export default function SEO(props) {
   // eslint-disable-next-line react/prop-types
-  const { title, description, image, slug, keywords } = props;
+  const { title, description, image, slug, keywords } = props
 
   return (
     <Head>
@@ -19,7 +19,10 @@ export default function SEO(props) {
       {/* Add keywords to meta from an array of keywords */}
       {keywords ? (
         keywords.length > 0 && (
-          <meta name="keywords" content={`web3auth, blockchain, solana, ethereum, multi party computation, ${keywords.join(", ")}`} />
+          <meta
+            name="keywords"
+            content={`web3auth, blockchain, solana, ethereum, multi party computation, ${keywords.join(', ')}`}
+          />
         )
       ) : (
         <meta
@@ -31,7 +34,11 @@ export default function SEO(props) {
       {/* Open Graph Meta Tags  */}
       <meta property="og:site_name" content="Web3Auth" />
       <meta property="og:type" content="website" />
-      {title ? <meta property="og:title" content={title} /> : <meta property="og:title" content="Documentation | Web3Auth" />}
+      {title ? (
+        <meta property="og:title" content={title} />
+      ) : (
+        <meta property="og:title" content="Documentation | Web3Auth" />
+      )}
       {description ? (
         <meta property="og:description" content={description} />
       ) : (
@@ -40,12 +47,19 @@ export default function SEO(props) {
           content="Web3Auth is simple, non-custodial auth infrastructure that enables Web3 wallets and applications to provide seamless user logins for both mainstream and native Web3 users."
         />
       )}
-      {slug ? <meta property="og:url" content={`https://web3auth.io/docs${slug}`} /> : <meta property="og:url" content="https://web3auth.io/docs" />}
+      {slug ? (
+        <meta property="og:url" content={`https://web3auth.io/docs${slug}`} />
+      ) : (
+        <meta property="og:url" content="https://web3auth.io/docs" />
+      )}
 
       {image ? (
         <meta property="og:image" content={image} />
       ) : (
-        <meta property="og:image" content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png" />
+        <meta
+          property="og:image"
+          content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png"
+        />
       )}
 
       {/* Twitter Meta Tags */}
@@ -65,11 +79,18 @@ export default function SEO(props) {
       {image ? (
         <meta name="twitter:image" content={image} />
       ) : (
-        <meta name="twitter:image" content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png" />
+        <meta
+          name="twitter:image"
+          content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png"
+        />
       )}
 
       {/* Google / Search Engine Tags */}
-      {title ? <meta itemProp="name" content={title} /> : <meta itemProp="name" content="Documentation | Web3Auth" />}
+      {title ? (
+        <meta itemProp="name" content={title} />
+      ) : (
+        <meta itemProp="name" content="Documentation | Web3Auth" />
+      )}
       {description ? (
         <meta itemProp="description" content={description} />
       ) : (
@@ -81,10 +102,13 @@ export default function SEO(props) {
       {image ? (
         <meta itemProp="image" content={image} />
       ) : (
-        <meta itemProp="image" content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png" />
+        <meta
+          itemProp="image"
+          content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png"
+        />
       )}
 
       <meta name="author" content="Web3Auth" />
     </Head>
-  );
+  )
 }

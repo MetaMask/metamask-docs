@@ -1,26 +1,26 @@
-import * as React from "react";
-import BrowserOnly from "@docusaurus/BrowserOnly";
-import Link from "@docusaurus/Link";
-import { MDXProvider } from "@mdx-js/react";
-import Layout from "@theme/Layout";
-import MDXComponents from "@theme/MDXComponents";
-import TOC from "@theme/TOC";
-import OriginalMDXPage from "@theme-original/MDXPage";
-import { ComponentProps, useState } from "react";
-import Bookmark from "react-bookmark";
+import * as React from 'react'
+import BrowserOnly from '@docusaurus/BrowserOnly'
+import Link from '@docusaurus/Link'
+import { MDXProvider } from '@mdx-js/react'
+import Layout from '@theme/Layout'
+import MDXComponents from '@theme/MDXComponents'
+import TOC from '@theme/TOC'
+import OriginalMDXPage from '@theme-original/MDXPage'
+import { ComponentProps, useState } from 'react'
+import Bookmark from 'react-bookmark'
 
-import DiscourseComment from "../../components/DiscourseComment";
-import styles from "./styles.module.css";
+import DiscourseComment from '../../components/DiscourseComment'
+import styles from './styles.module.css'
 
 export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
-  const [copyButtonText, setCopyButtonText] = useState<string>("Copy");
+  const [copyButtonText, setCopyButtonText] = useState<string>('Copy')
 
-  const { content: MDXPageContent } = props;
-  const { frontMatter, metadata } = MDXPageContent;
-  const { permalink } = metadata;
+  const { content: MDXPageContent } = props
+  const { frontMatter, metadata } = MDXPageContent
+  const { permalink } = metadata
 
   if (!permalink.includes(`/guides/`)) {
-    return <OriginalMDXPage {...props} />;
+    return <OriginalMDXPage {...props} />
   }
 
   // if (!permalink.includes(`/blog/`)) {
@@ -37,19 +37,19 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
     date,
     wrapperClassName,
     communityPortalTopicId,
-  } = frontMatter;
-  const url = `https://web3auth.io${permalink}`;
-  const facebookLink = `https://www.facebook.com/sharer/sharer.php?${url}`;
-  const twitterLink = `http://twitter.com/share?text=Checkout ${title} published by @Web3Auth&url=${url}`;
+  } = frontMatter
+  const url = `https://web3auth.io${permalink}`
+  const facebookLink = `https://www.facebook.com/sharer/sharer.php?${url}`
+  const twitterLink = `http://twitter.com/share?text=Checkout ${title} published by @Web3Auth&url=${url}`
 
   const handleClick = () => {
-    navigator.clipboard.writeText(url);
-    setCopyButtonText("Copied!");
+    navigator.clipboard.writeText(url)
+    setCopyButtonText('Copied!')
 
     setTimeout(() => {
-      setCopyButtonText("Copy");
-    }, 500);
-  };
+      setCopyButtonText('Copy')
+    }, 500)
+  }
 
   return (
     <Layout title={title} description={description} wrapperClassName={wrapperClassName}>
@@ -65,12 +65,12 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
                     <div className={styles.topMenu}>
                       <span className={styles.tagsContainer}>
                         {tags &&
-                          tags.map((item) => {
+                          tags.map(item => {
                             return (
                               <code key={item} className={styles.tag}>
                                 {item}
                               </code>
-                            );
+                            )
                           })}
                       </span>
                       <span className={styles.date}>
@@ -93,8 +93,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
                           height="16"
                           viewBox="0 0 16 16"
                           fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
+                          xmlns="http://www.w3.org/2000/svg">
                           <g clipPath="url(#clip0_1_9)">
                             <path
                               d="M16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 11.993 2.92547 15.3027 6.75 15.9028V10.3125H4.71875V8H6.75V6.2375C6.75 4.2325 7.94438 3.125 9.77172 3.125C10.6467 3.125 11.5625 3.28125 11.5625 3.28125V5.25H10.5538C9.56 5.25 9.25 5.86672 9.25 6.5V8H11.4688L11.1141 10.3125H9.25V15.9028C13.0745 15.3027 16 11.993 16 8Z"
@@ -117,8 +116,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
                           height="16"
                           viewBox="0 0 16 16"
                           fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
+                          xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M5.03168 14.5003C11.0694 14.5003 14.3718 9.4981 14.3718 5.16018C14.3718 5.0181 14.3718 4.87666 14.3622 4.73586C15.0047 4.27117 15.5593 3.69579 16 3.03666C15.4009 3.30227 14.7654 3.47637 14.1146 3.55314C14.7999 3.14294 15.3128 2.49767 15.5578 1.73746C14.9134 2.11987 14.2084 2.38935 13.4733 2.53426C12.9783 2.00798 12.3237 1.65949 11.6108 1.54272C10.8978 1.42595 10.1663 1.54741 9.52931 1.8883C8.89234 2.22919 8.38548 2.77051 8.08716 3.4285C7.78884 4.08648 7.71569 4.82444 7.87904 5.52818C6.57393 5.46272 5.29717 5.12354 4.13164 4.53267C2.9661 3.9418 1.93784 3.11244 1.1136 2.09842C0.693819 2.82109 0.565248 3.67658 0.754066 4.49071C0.942885 5.30484 1.43489 6.01639 2.12992 6.4805C1.60749 6.4652 1.09643 6.32426 0.64 6.06962V6.11122C0.640207 6.86912 0.902567 7.60362 1.38258 8.19014C1.86259 8.77665 2.53071 9.17907 3.2736 9.32914C2.79032 9.46097 2.28325 9.48024 1.79136 9.38546C2.00121 10.0377 2.40962 10.608 2.95949 11.0168C3.50937 11.4255 4.17322 11.6522 4.85824 11.6651C4.17763 12.2001 3.39821 12.5957 2.56458 12.8291C1.73096 13.0626 0.859476 13.1294 0 13.0258C1.50122 13.9891 3.24795 14.5001 5.03168 14.4978"
                             fill="currentColor"
@@ -133,8 +131,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
                         height="14"
                         viewBox="0 0 13 14"
                         fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                           fillRule="evenodd"
                           clipRule="evenodd"
@@ -153,8 +150,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
                           height="20"
                           viewBox="0 0 16 20"
                           fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
+                          xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M1.58579 1.58579C1.21071 1.96086 1 2.46957 1 3V19L8 15.5L15 19V3C15 2.46957 14.7893 1.96086 14.4142 1.58579C14.0391 1.21071 13.5304 1 13 1H3C2.46957 1 1.96086 1.21071 1.58579 1.58579Z"
                             stroke="currentColor"
@@ -170,7 +166,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
                 <DiscourseComment postUrl={url} />
               </div>
               {MDXPageContent.toc && (
-                <div className="col col--3" style={{ paddingRight: "30px" }}>
+                <div className="col col--3" style={{ paddingRight: '30px' }}>
                   <TOC toc={MDXPageContent.toc} />
                 </div>
               )}
@@ -179,5 +175,5 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
         </div>
       </main>
     </Layout>
-  );
+  )
 }

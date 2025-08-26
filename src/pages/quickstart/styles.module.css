@@ -221,7 +221,6 @@
   inset: 0;
   background-color: var(--ifm-color-emphasis-200);
   transition: 0.4s;
-  transition: 0.4s;
   border-radius: 34px;
 }
 
@@ -233,7 +232,6 @@
   left: 4px;
   bottom: 4px;
   background-color: var(--ifm-color-gray-400);
-  transition: 0.4s;
   transition: 0.4s;
   border-radius: 50%;
 }
@@ -247,8 +245,6 @@
 }
 
 input:checked+.slider::before {
-  transform: translateX(16px);
-  transform: translateX(16px);
   transform: translateX(16px);
 }
 
@@ -387,7 +383,6 @@ input:checked+.slider::before {
   min-width: 140px;
   background: var(--ifm-background-surface-color);
   border: 1px solid var(--ifm-color-emphasis-200);
-  appearance: none;
   appearance: none;
   background-image: url("data:image/svg+xml;utf8,<svg width='10' height='17' viewBox='0 0 10 17' fill='gray' xmlns='http://www.w3.org/2000/svg'><path d='M0.937273 11.1465C1.04471 11.0528 1.19041 11.0001 1.34233 11.0001C1.49424 11.0001 1.63994 11.0528 1.74738 11.1465L4.58331 13.6215L7.41925 11.1465C7.52731 11.0554 7.67203 11.005 7.82224 11.0062C7.97246 11.0073 8.11615 11.0599 8.22238 11.1526C8.3286 11.2453 8.38885 11.3707 8.39016 11.5018C8.39146 11.6329 8.33372 11.7592 8.22936 11.8535L4.98837 14.682C4.88093 14.7758 4.73523 14.8284 4.58331 14.8284C4.4314 14.8284 4.2857 14.7758 4.17826 14.682L0.937273 11.8535C0.829868 11.7598 0.769531 11.6326 0.769531 11.5C0.769531 11.3674 0.829868 11.2403 0.937273 11.1465Z' fill='gray'/><path d='M0.937273 5.85348C1.04471 5.94722 1.19041 5.99988 1.34233 5.99988C1.49424 5.99988 1.63994 5.94722 1.74738 5.85348L4.58331 3.37848L7.41925 5.85348C7.52731 5.94456 7.67203 5.99496 7.82224 5.99382C7.97246 5.99268 8.11615 5.9401 8.22238 5.84739C8.3286 5.75469 8.38885 5.62928 8.39016 5.49819C8.39146 5.36709 8.33372 5.24079 8.22936 5.14648L4.98837 2.31798C4.88093 2.22425 4.73523 2.17159 4.58331 2.17159C4.4314 2.17159 4.2857 2.22425 4.17826 2.31798L0.937273 5.14648C0.829868 5.24025 0.769531 5.3674 0.769531 5.49998C0.769531 5.63257 0.829868 5.75972 0.937273 5.85348Z' fill='gray'/></svg>");
   background-repeat: no-repeat;

@@ -38,11 +38,10 @@ export default function CardSection({
               style={
                 colorPalette
                   ? ({
-                    '--color-palette': `var(--developer-${colorPalette})`,
-                  } as CSSProperties)
+                      '--color-palette': `var(--developer-${colorPalette})`,
+                    } as CSSProperties)
                   : {}
-              }
-            >
+              }>
               {/* Title and Description Column */}
               {(title || description) && (
                 <div className={styles['content-column']}>

@@ -1,8 +1,8 @@
-import React from 'react';
-import styles from './SidebarSectionDropdown.module.css';
+import React from 'react'
+import styles from './SidebarSectionDropdown.module.css'
 
 interface SidebarStaticTitleProps {
-  title: string;
+  title: string
 }
 
 export default function SidebarStaticTitle({ title }: SidebarStaticTitleProps) {
@@ -14,5 +14,5 @@ export default function SidebarStaticTitle({ title }: SidebarStaticTitleProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

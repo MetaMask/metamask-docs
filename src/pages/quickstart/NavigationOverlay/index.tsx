@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styles from './NavigationOverlay.module.css';
-import NavigationFlow from './NavigationFlow';
+import React, { useState } from 'react'
+import styles from './NavigationOverlay.module.css'
+import NavigationFlow from './NavigationFlow'
 
 interface NavigationOverlayProps {
-  onClose: () => void;
-  onSelect: (product: string, platform: string) => void;
+  onClose: () => void
+  onSelect: (product: string) => void
 }
 
 const NavigationOverlay: React.FC<NavigationOverlayProps> = ({ onClose, onSelect }) => {
@@ -14,7 +14,7 @@ const NavigationOverlay: React.FC<NavigationOverlayProps> = ({ onClose, onSelect
         <NavigationFlow onSelect={onSelect} />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NavigationOverlay; 
+export default NavigationOverlay
