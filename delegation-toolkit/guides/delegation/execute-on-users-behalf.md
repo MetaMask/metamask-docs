@@ -23,7 +23,7 @@ You'll complete the delegation lifecycle (create, sign, and redeem a delegation)
 ### 1. Create a Public Client
 
 Create a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function.
-Your dapp can use the Public Client to query the signer's account state and interact with smart contracts.
+You will configure Alice's account (the delegator) and the Bundler Client with the Public Client, which you can use to query the signer's account state and interact with smart contracts.
 
 ```typescript
 import { createPublicClient, http } from "viem"
@@ -38,7 +38,7 @@ const publicClient = createPublicClient({
 ### 2. Create a Bundler Client
 
 Create a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function.
-Your dapp can use the bundler service to estimate gas for user operations and submit transactions to the network.
+You can use the bundler service to estimate gas for user operations and submit transactions to the network.
 
 ```typescript
 import { createBundlerClient } from "viem/account-abstraction"
