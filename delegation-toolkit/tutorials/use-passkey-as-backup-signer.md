@@ -1,5 +1,5 @@
 ---
-description: Learn how to use Passkey as a back up signer with MetaMask smart account
+description: Follow this tutorial to use a passkey as a backup signer with a Hybrid MetaMask smart account.
 sidebar_position: 1
 ---
 
@@ -15,7 +15,6 @@ Passkeys eliminate the need for traditional seed phrases that are difficult to r
 
 MetaMask Smart Accounts offer a [Hybrid implementation](../concepts/smart-accounts.md#hybrid-smart-account), which supports signature validation for both secp256k1 and secp256r1 curves.
 This allows you to add a passkey as a backup signer for your smart account.
-
 
 You can add passkeys during smart account creation or after the account has been deployed.
 This tutorial walks you through adding a passkey signer to an already deployed smart account.
