@@ -755,6 +755,10 @@
       "destination": "/delegation-toolkit/development/get-started/use-the-cli/"
     },
     {
+      "source": "/delegation-toolkit/development/guides/create-delegation/create-custom-caveat-enforcer/",
+      "destination": "/delegation-toolkit/development/tutorials/create-custom-caveat-enforcer/"
+    },
+    {
       "source": "/developer-tools/faucet/sepolia/",
       "destination": "/developer-tools/faucet/"
     }

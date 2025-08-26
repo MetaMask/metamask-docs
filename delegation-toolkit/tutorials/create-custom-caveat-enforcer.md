@@ -1,5 +1,5 @@
 ---
-description: Learn how to create, deploy, and apply a custom caveat enforcer
+description: Follow this tutorial to create a custom caveat enforcer for a delegation.
 sidebar_position: 2
 ---
 
@@ -8,24 +8,31 @@ import TabItem from "@theme/TabItem";
 
 # Create a custom caveat enforcer
 
-When [restricting a delegation](restrict-delegation.md), the MetaMask Delegation Toolkit provides some [out-of-the-box caveat enforcers](../../reference/caveats.md)
-that cover common use cases.
-For more granular or custom control, you can follow the instructions on this page to create custom caveat enforcers from scratch.
+This tutorial walks you through creating a custom [caveat enforcer](../concepts/caveat-enforcers.md) and applying it to a [delegation](../concepts/delegation.md).
+
+The MetaMask Delegation Toolkit provides some [out-of-the-box caveat enforcers](../reference/caveats.md) that define rules and restrictions for common use cases.
+For more granular or custom control, you can create custom caveat enforcers from scratch.
+This tutorial walks you through creating and applying a caveat enforcer that only allows a delegation to be redeemed after a specific timestamp.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Install and set up the Delegation Toolkit](../../get-started/install.md) in your project.
 - [Configure the Delegation Toolkit.](../configure.md)
+- [Install Foundry and Forge.](https://getfoundry.sh/introduction/installation)
+- Get an [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
+- Have a MetaMask account with some Sepolia ETH to deploy your contract.
+  :::note
+  You can use the [MetaMask faucet](/developer-tools/faucet) to get Sepolia ETH.
+  :::
 
 ## Steps
 
 ### 1. Create the caveat enforcer
 
-Create a contract that extends the
+In your project's `src` directory, create a contract that extends the
 [`ICaveatEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/interfaces/ICaveatEnforcer.sol)
 interface.
-
-For example, the following is a simple caveat enforcer that only allows a delegation to be redeemed after a specific timestamp.
+The following `AfterTimestampEnforcer.sol` caveat enforcer only allows a delegation to be redeemed after a specific timestamp:
 
 ```solidity title="AfterTimestampEnforcer.sol"
 // SPDX-License-Identifier: MIT
@@ -66,23 +73,28 @@ contract AfterTimestampEnforcer is CaveatEnforcer {
 
 ### 2. Deploy the caveat enforcer
 
-Deploy your custom caveat enforcer to obtain its contract address.
-For example, you can [deploy your smart contract using Forge](https://book.getfoundry.sh/forge/deploying).
+Deploy your custom caveat enforcer using [Forge](https://book.getfoundry.sh/forge/deploying) to obtain its contract address.
+Replace `<YOUR-API-KEY>` with your Infura API key, and `<YOUR-PRIVATE-KEY>` with the private key of your MetaMask account:
+
+```bash
+forge create src/AfterTimestampEnforcer.sol:AfterTimestampEnforcer \
+  --rpc-url https://sepolia.infura.io/v3/<YOUR-API-KEY>            \
+  --private-key <YOUR-PRIVATE-KEY>                                 \
+  --broadcast
+```
+
+The Forge CLI will display the address of the deployed caveat enforcer.
 
 ### 3. Apply the caveat enforcer
 
-When creating a delegation, add the `Caveat` for the custom caveat to the `CaveatBuilder`.
-Learn more about [applying caveats to a delegation](restrict-delegation.md).
+Specify the address where your `AfterTimestampEnforcer.sol` contract is deployed, add it to the caveat builder, and create a delegation.
+Learn more about [applying caveats to a delegation](../guides/create-delegation/restrict-delegation.md).
 
-The following example uses the custom `AfterTimestampEnforcer.sol` caveat enforcer to create a delegation granting
-an allowance of 1,000,000 wei that can only be spent after one hour from when the delegation is created.
-
-:::warning Important
-Depending on the use case, it may be necessary to add additional caveats to restrict the delegation further.
-:::
+The following code snippet uses the custom caveat enforcer to create a delegation granting
+an allowance of 1,000,000 wei that can only be spent after one hour from when the delegation is created:
 
 <Tabs>
-<TabItem value="example.ts">
+<TabItem value="delegation.ts">
 
 ```typescript
 import {
@@ -94,7 +106,7 @@ import { delegatorSmartAccount } from "./config.ts";
 
 const environment = delegatorSmartAccount.environment;
 
-// Replace this with the address where the AfterTimestampEnforcer.sol contract is deployed.
+// Replace this with the address where your AfterTimestampEnforcer.sol contract is deployed.
 const afterTimestampEnforcer = "0x22Ae4c4919C3aB4B5FC309713Bf707569B74876F";
 
 const caveatBuilder = createCaveatBuilder(environment);
@@ -114,7 +126,6 @@ const delegation = createDelegation({
   caveats
 });
 ```
-
 
 </TabItem>
 
@@ -147,3 +158,8 @@ export const delegatorSmartAccount = await toMetaMaskSmartAccount({
 
 </TabItem>
 </Tabs>
+
+You've successfully created, deployed, and applied a custom caveat enforcer!
+
+For production use cases, you might need to add additional caveats to restrict the delegation further.
+Learn more about [caveat enforcers](../concepts/caveat-enforcers.md).
