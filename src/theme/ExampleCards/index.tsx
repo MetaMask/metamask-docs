@@ -41,11 +41,6 @@ export default function ExampleCards(props: { exampleMap: ExamplesInterface[] })
                   Source Code{chevron}
                 </Link>
               ) : null}
-              {example.qsLink ? (
-                <Link className={styles.pill} to={example.qsLink}>
-                  Integration Builder{chevron}
-                </Link>
-              ) : null}
               {example.guideLink ? (
                 <Link className={styles.pill} to={example.guideLink}>
                   Guide{chevron}
@@ -53,17 +48,6 @@ export default function ExampleCards(props: { exampleMap: ExamplesInterface[] })
               ) : null}
             </div>
           ) : null}
-
-          <div className={styles.tagContainer}>
-            {example.tags &&
-              example.tags.map((tag) => {
-                return (
-                  <div key={tag} className={styles.tag}>
-                    {tag}
-                  </div>
-                );
-              })}
-          </div>
         </div>
       ))}
     </div>

@@ -1,4 +1,4 @@
-import {
+ import {
   reactJS,
   vue,
   android,
@@ -101,7 +101,7 @@ function mobileTopNavButton(selectedSDK) {
         Web
       </a>
       <div class="sdk-sidebar-option-selected">
-        Plug and Play
+        Mobile
         <div class="sdk-sidebar-dropdown-container">
           <select class="sdk-sidebar-dropdown" onchange="location.href=this.value">
               <option value="">${selectedSDK}</option>
@@ -128,7 +128,6 @@ const sidebar = {
       value: webTopNavButton(reactJS),
       defaultStyle: true,
     },
-
     "react/react",
     {
       type: "category",
