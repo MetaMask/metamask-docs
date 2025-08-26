@@ -1,0 +1,45 @@
+---
+title: Providers for PnP React Native SDK
+sidebar_label: Overview
+description: 'Web3Auth Providers | Documentation - Web3Auth'
+---
+
+Providers are basically pre-configured RPC clients for different blockchains. They are used to interact with the blockchain network. Web3Auth provides you with a few common providers for the most commonly asked chains. In case of SSS-based private key providers, you can also use the private key of the user to connect to other blockchain networks.
+
+Currently, Web3Auth supports the following private key providers:
+
+### Private Key Providers
+
+- [EIP1193 Private Key Provider for EVM Compatible Chains](/sdk/web/react)
+- [Solana Private Key Provider for Solana Blockchain](/sdk/web/react)
+- [XRPL Private Key Provider for XRPL Blockchain](/sdk/web/react)
+- [Common Private Key Provider for Connecting to any Blockchain](/sdk/web/react)
+
+## Base Type Reference for Web3Auth Providers
+
+For facilitating these providers, Web3Auth exposes a `IProvider` which is a provider type helping you make standardized RPC calls to a blockchain.
+
+This provider contains two functions, `send` and `request`. You can find its type reference below:
+
+```tsx
+export interface IProvider extends SafeEventEmitter {
+  sendAsync: <T, IProvider=> Promise<U>;
+  send: <T, U>(req: JRPCRequest<T>, callback: SendCallBack<U>) => void;
+  request: <T>(args: RequestArguments) => Promise<Maybe<T>>;
+}
+
+export interface JRPCRequest<T> extends JRPCBase {
+  method: string;
+  params?: T;
+}
+export interface JRPCBase {
+  jsonrpc?: JRPCVersion;
+  id?: JRPCId;
+}
+export declare type JRPCVersion = "2.0";
+export declare type JRPCId = number | string | void;
+export interface RequestArguments {
+  method: string;
+  params?: unknown[] | object;
+}
+```

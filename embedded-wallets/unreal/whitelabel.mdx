@@ -1,0 +1,97 @@
+---
+title: Whitelabel PnP Unreal Engine SDK
+sidebar_label: Whitelabel
+description: 'Web3Auth PnP Unreal Engine SDK - Whitelabel | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import WhiteLabelShowcase from '../_common/_whitelabel_showcase.mdx'
+import GrowthPlanNote from '../_common/_growth_plan_note.mdx'
+
+For defining custom UI, branding, and translations for your brand app, you just need to specify an additional parameter within the `Web3AuthOptions` class called `whiteLabel`. This parameter takes another object called `WhiteLabelData`.
+
+<GrowthPlanNote />
+
+## Arguments
+
+### `WhiteLabelData`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `appName?` | Display name for the app in the UI. |
+| `logoLight?` | App logo to be used in dark mode. It accepts url in `FString` as a value. |
+| `logoDark?` | App logo to be used in light mode. It accepts url in `FString` as a value. |
+| `defaultLanguage?` | Language which will be used by Web3Auth, app will use browser language if not specified. Default language is `FLanguage::en`. Checkout `FLanguage` for supported languages. |
+| `mode?` | Theme mode for the login modal. Choose between `FThemeModes::auto`, `FThemeModes::light` or `FThemeModes::dark` background modes. |
+| `theme?` | Used to customize the theme of the login modal. It accepts `TMap<FString, FString>` as a value. |
+| `appUrl?` | Url to be used in the Modal. It accepts url in `FString` as a value. |
+| `useLogoLoader?` | Use logo loader. If `logoDark` and `logoLight` are null, the default Web3Auth logo will be used for the loader. Default value is false. |
+
+</TabItem>
+<TabItem value="interface">
+
+```cs
+USTRUCT(BlueprintType)
+struct FWhiteLabelData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString appName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString logoLight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString logoDark;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	FLanguage defaultLanguage = FLanguage::en;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	FThemeModes mode;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TMap<FString, FString> theme;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	FString appUrl;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	bool useLogoLoader;
+
+	FWhiteLabelData() {};
+
+	void operator= (const FWhiteLabelData& other) {
+		appName = other.appName;
+		logoLight = other.logoLight;
+		logoDark = other.logoDark;
+		defaultLanguage = other.defaultLanguage;
+		mode = other.mode;
+		theme = other.theme;
+		appUrl = other.appUrl;
+		useLogoLoader = other.useLogoLoader;
+	}
+
+};
+```
+
+</TabItem>
+</Tabs>
+
+<WhiteLabelShowcase />
+
+## Example
+
+![Unreal Whitelabel](/img/unreal/unreal-whitelable-data.png)

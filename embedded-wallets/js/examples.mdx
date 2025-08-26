@@ -1,0 +1,16 @@
+---
+title: Examples - PnP Web JS SDK
+sidebar_label: Examples
+description: "Web3Auth PnP Web JS SDK Examples | Documentation - Web3Auth"
+hide_table_of_contents: true
+---
+
+import ExampleCards from "@theme/ExampleCards";
+import { webExamples } from "@site/src/utils/example-maps";
+
+<ExampleCards
+  exampleMap={[...webExamples].filter(
+    (obj) =>
+      !obj.tags?.includes("react") && !obj.tags?.includes("vue") && !obj.tags?.includes("nextjs"),
+  )}
+/>

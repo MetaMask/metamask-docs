@@ -1,0 +1,55 @@
+---
+title: Advanced Configuration
+sidebar_label: Overview
+description: '@web3auth/modal Advanced Configuration | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import Web3AuthOptions from '../../_common/_web3auth-options.mdx'
+import AdvancedConfigOptions from '../../_common/_advanced-config-options.mdx'
+
+# Advanced Configuration
+
+The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
+
+## Configuration Structure
+
+When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
+
+```tsx
+import { Component } from "@angular/core";
+import { Web3Auth, WEB3AUTH_NETWORK } from "@web3auth/modal";
+
+// focus-start
+const web3auth = new Web3Auth({
+  clientId: "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  // Core and advanced options go here
+});
+// focus-end
+
+@Component({
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
+})
+export class AppComponent {
+
+  async ngOnInit() {
+    const init = async () => {
+      // focus-next-line
+      await web3auth.init();
+    };
+
+    init();
+  }
+  ...
+}
+```
+
+### `Web3AuthOptions`
+
+<Web3AuthOptions />
+
+<AdvancedConfigOptions />

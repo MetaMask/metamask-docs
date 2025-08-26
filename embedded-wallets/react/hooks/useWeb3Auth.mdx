@@ -1,0 +1,98 @@
+---
+title: useWeb3Auth
+sidebar_label: useWeb3Auth
+description: "@web3auth/modal React Hooks useWeb3Auth | Documentation - Web3Auth"
+---
+
+Hook to access the Web3Auth context.
+
+### Import
+
+```tsx
+import { useWeb3Auth } from "@web3auth/modal/react";
+```
+
+### Usage
+
+```tsx
+import { useWeb3Auth } from "@web3auth/modal/react";
+
+function App() {
+  const { web3Auth, isConnected, isInitializing, provider, status, initError } = useWeb3Auth();
+
+  if (isConnected) {
+    // User is connected
+    console.log("Connected with provider:", provider);
+  }
+  if (isInitializing) {
+    // Web3Auth is initializing
+    console.log("Web3Auth is initializing");
+  }
+  if (provider) {
+    // Web3Auth provider is connected
+    console.log("Web3Auth provider is connected");
+  }
+  if (status) {
+    // Web3Auth status
+    console.log("Web3Auth status:", status);
+  }
+  if (initError) {
+    // Web3Auth initialization error
+    console.log("Web3Auth initialization error:", initError);
+  }
+}
+```
+
+### Return Type
+
+```tsx
+import { type IUseWeb3Auth } from "@web3auth/modal/react";
+```
+
+#### initError
+
+`Error | null`
+
+Error that occurred during Web3Auth initialization.
+
+#### isConnected
+
+`boolean`
+
+Whether the user is connected to Web3Auth.
+
+#### isInitialized
+
+`boolean`
+
+Whether Web3Auth has completed initialization.
+
+#### isInitializing
+
+`boolean`
+
+Whether Web3Auth is currently initializing.
+
+#### provider
+
+`IProvider | null`
+
+Connected provider from Web3Auth.
+
+#### status
+
+`string`
+
+Current status of the Web3Auth connection.
+
+#### web3Auth
+
+`Web3Auth`
+
+The Web3Auth instance.
+
+#### getPlugin
+
+`(pluginName: PLUGIN_NAME) => IPlugin | null`
+
+Helper function to get a plugin by name.

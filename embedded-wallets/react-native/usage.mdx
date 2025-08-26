@@ -1,0 +1,437 @@
+---
+title: Using of PnP React Native SDK
+sidebar_label: Usage
+description: 'Web3Auth PnP React Native SDK - Usage | Documentation - Web3Auth'
+---
+
+import ChainConfig from '../_common/_chain-config.mdx'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+Once you've installed and successfully initialized Web3Auth, you can use it to authenticate your users.
+
+Web3Auth returns the following functions:
+
+- `login()` - Logs in the User using the particular configuration you require for authentication.
+- `logout()` - Logs out the User.
+- `userInfo()` - After logging in, the Web3Auth instance will provide you with information regarding the user that is logged in.
+- `privKey()` - After login, gets the private key of the user (default is `secp256k1` key).
+- `ed25519Key()` - After login, gets the `ed25519` key.
+- `enableMFA()` - Takes your user to the MFA enabling flow, helping them set up MFA.
+- `launchWalletServices()` - Launches the Wallet Services UI for the user to interact with their wallet.
+- `request()` - Pops up the signature request modal for the user to sign a message.
+
+## Logging in a User
+
+#### `login(loginParams: SdkLoginParams): Promise<void>;`
+
+Trigger the login flow that navigates the user to a browser model that allows them to log in with the selected login provider.
+
+#### Arguments
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`. |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
+| `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `string` as a value. |
+| `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `string` as a value. |
+| `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MfaLevelType.default`, which shows MFA screen every 3rd login. It accepts `MfaLevelType` as a value. |
+| `dappShare?` | Custom verifier logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `string` as a value. |
+| `curve?` | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `ed25519Key` method. The default value is `SUPPORTED_KEY_CURVES_TYPE.secp256k1`. |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```typescript
+
+async login(options: SdkLoginParams): Promise<void>;
+export type SdkLoginParams = Omit<LoginParams, "fastLogin" | "skipTKey" | "getWalletKey"> & Required<Pick<LoginParams, "loginProvider">>;
+
+export type BaseRedirectParams = {
+  /**
+   * redirectUrl is the dapp's url where user will be redirected after login.
+   *
+   * @remarks
+   * Register this url at {@link "https://dashboard.web3auth.io"| developer dashboard}
+   * else initialization will give error.
+   */
+  redirectUrl?: string;
+  /**
+   * Any custom state you wish to pass along. This will be returned to you post redirect.
+   * Use this to store data that you want to be available to the dapp after login.
+   */
+  appState?: string;
+};
+
+export type LoginParams = BaseRedirectParams & {
+  /**
+   * loginProvider sets the oauth login method to be used.
+   * You can use any of the valid loginProvider from the supported list.
+   *
+   * If this param is not passed then it will show all the available
+   * login methods to user in a modal.
+   *
+   */
+  loginProvider: LOGIN_PROVIDER_TYPE | CUSTOM_LOGIN_PROVIDER_TYPE;
+
+  /**
+   * You can set the `mfaLevel` to customize when mfa screen should be shown to user.
+   * It currently accepts 4 values:-
+   * - `'default'`: Setting mfa level to `default` will present mfa screen to user on every third login.
+   * - `'optional'`: Setting mfa level to `default` will present mfa screen to user on every login but user can skip it.
+   * - `'mandatory'`: Setting mfa level to `mandatory` will make it mandatory for user to setup mfa after login.
+   * - `'none'`: Setting mfa level to `none` will make the user skip the mfa setup screen
+   *
+   * Defaults to `default`
+   * @defaultValue `default`
+   */
+  mfaLevel?: MfaLevelType;
+
+  /**
+   * extraLoginOptions can be used to pass standard oauth login options to
+   * loginProvider.
+   *
+   * For ex: you will have to pass `login_hint` as user's email and `domain`
+   * as your app domain in `extraLoginOptions` while using `email_passwordless`
+   * loginProvider
+   */
+  extraLoginOptions?: ExtraLoginOptions;
+
+  /**
+   * Custom Logins can get a dapp share returned to them post successful login.
+   * This is useful if the dapps want to use this share to allow users to login seamlessly
+   * dappShare is a 24 word seed phrase
+   */
+  dappShare?: string;
+
+  /**
+   * How long should a login session last at a minimum in seconds
+   *
+   * @defaultValue 86400 seconds
+   * @remarks Max value of sessionTime can be 7 * 86400 (30 days)
+   */
+  sessionTime?: number;
+
+  /**
+   * This curve will be used to determine the public key encoded in the jwt token which returned in
+   * `getUserInfo` function after user login.
+   * You can use that public key from jwt token as a unique user identifier in your backend.
+   *
+   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in jwt token to use.
+   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in jwt token to use.
+   *
+   * Note: This parameter won't change format of private key returned by auth service. Private key returned
+   * by auth service is always `secp256k1`. As of now you have to convert it to `'ed25519'` if you want.
+   * You can use `@web3auth/base-provider` npm package for this purpose.
+   *
+   *
+   * @defaultValue secp256k1
+   */
+  curve?: SUPPORTED_KEY_CURVES_TYPE;
+};
+
+```
+
+</TabItem>
+
+</Tabs>
+
+#### Example
+
+```typescript title="example.tsx"
+await web3auth.login({
+  loginProvider: LoginProvider.GOOGLE,
+  redirectUrl: resolvedRedirectUrl,
+})
+```
+
+### Selecting Curve
+
+The `web3auth.login()` method accepts a `curve` parameter. This parameter can be used to select the elliptic curve to use for deriving the address of the key within the jwt returned by Web3Auth for Server Side Verification.
+
+```typescript
+await web3auth.login({
+  loginProvider: LoginProvider.GOOGLE,
+  redirectUrl: resolvedRedirectUrl,
+  // focus-next-line
+  curve: 'secp256k1', // `secp256k1` and `ed25519` are supported
+})
+```
+
+#### Example
+
+<Tabs
+  defaultValue="secp256k1"
+  values={[
+    { label: "SECP256K1", value: "secp256k1" },
+    { label: "ED25519", value: "ed25519" },
+  ]}
+>
+
+<TabItem value="secp256k1">
+
+```typescript
+await web3auth.login({
+  loginProvider: LoginProvider.GOOGLE,
+  redirectUrl: resolvedRedirectUrl,
+  // focus-next-line
+  curve: 'secp256k1',
+})
+```
+
+</TabItem>
+
+<TabItem value="ed25519">
+
+```typescript
+await web3auth.login({
+  loginProvider: LoginProvider.GOOGLE,
+  redirectUrl: resolvedRedirectUrl,
+  // focus-next-line
+  curve: 'ed25519',
+})
+```
+
+</TabItem>
+
+</Tabs>
+
+## Logging out a user
+
+#### `logout(): Promise<void>;`
+
+:::info
+
+Trigger the logout flow. It is not advised to be used in iOS since it will trigger a system dialog that asks if users want to allow a Login operation.
+
+:::
+
+This method has no input and returns a `Promise` that resolves if the operation is successful, and rejects if the operation failed.
+
+#### Example
+
+```typescript
+await web3auth.logout()
+```
+
+## Getting the User Information
+
+#### `userInfo(): State["userInfo"];`
+
+To get the information of the user, extracted from the id token, you can call the `userInfo` method in the web3auth instance.
+
+```tsx
+const userInfo = web3auth.userInfo()
+```
+
+```json
+{
+  "aggregateVerifier": "tkey-google",
+  "email": "john@gmail.com",
+  "name": "John Dash",
+  "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
+  "typeOfLogin": "google",
+  "verifier": "torus",
+  "verifierId": "john@gmail.com",
+  "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
+  "idToken": "<jwtToken issued by Web3Auth>",
+  "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+  "oAuthAccessToken": "<accessToken issued by OAuth Provider>" // will be sent only incase of custom verifiers
+}
+```
+
+## Getting the `secp256k1` private key
+
+#### `get privKey(): string;`
+
+Using the `privKey()` method in the web3auth instance you can get the `secp256k1` private key.
+
+```tsx
+const privateKey = web3auth.privKey()
+```
+
+```string
+"0ajjsdsd...."
+```
+
+## Getting the `ed25519` private key
+
+#### `get ed25519Key(): string;`
+
+Using the `ed25519Key()` method in the web3auth instance you can get the `ed25519` private key.
+
+```tsx
+const ed25519Key = web3auth.ed25519Key()
+```
+
+```string
+"666523652352635...."
+```
+
+## Enabling MFA
+
+#### `enableMFA(): Promise<boolean>;`
+
+This method is used to enable MFA for the user. It takes no arguments and returns a `Promise` that resolves if the operation is successful, and rejects if the operation failed.
+
+#### Example
+
+```typescript
+await web3auth.enableMFA()
+```
+
+## Launching Wallet Services UI
+
+#### `launchWalletServices(chainConfig: ChainConfig, path?: string | null): Promise<void>;`
+
+The `launchWalletServices` method launches a Secure Web Browser which allows you to use the templated wallet UI services. The method takes `ChainConfig` as the required input. Wallet Services is currently only available for EVM chains.
+
+<ChainConfig />
+
+:::note
+
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+
+:::
+
+#### Example
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://rpc.sepolia.org',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  decimals: 18,
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
+
+await web3auth.launchWalletServices(chainConfig)
+```
+
+## Requesting a Signature
+
+#### `request(chainConfig: ChainConfig, method: string, params: unknown[], path?: string): Promise<string>;`
+
+The `request` method facilitates the use of templated transaction screens for signing transactions. This function returns a promise of the signature that can be used to broadcast the transaction.
+
+Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
+
+### Arguments
+
+| Arguments | Description |
+| --- | --- |
+| `chainConfig` | Defines the chain to be used for signature. |
+| `method` | JSON RPC method name in `string`. Currently, the request method only supports the singing methods. |
+| `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api) to know more. |
+
+#### Example
+
+##### Personal Sign
+
+```tsx
+const params = [
+  {
+    challenge: 'Hello World',
+    address,
+  },
+  null,
+]
+const res = await web3auth.request(chainConfig, 'personal_sign', params)
+```
+
+##### Personal Sign Shorthand
+
+```tsx
+const params = ['Hello World', address]
+const res = await web3auth.request(chainConfig, 'personal_sign', params)
+```
+
+##### Sign Type 4
+
+```tsx
+const params = [
+  address,
+  {
+    types: {
+      EIP712Domain: [
+        {
+          name: 'name',
+          type: 'string',
+        },
+        {
+          name: 'version',
+          type: 'string',
+        },
+        {
+          name: 'chainId',
+          type: 'uint256',
+        },
+        {
+          name: 'verifyingContract',
+          type: 'address',
+        },
+      ],
+      Person: [
+        {
+          name: 'name',
+          type: 'string',
+        },
+        {
+          name: 'wallet',
+          type: 'address',
+        },
+      ],
+      Mail: [
+        {
+          name: 'from',
+          type: 'Person',
+        },
+        {
+          name: 'to',
+          type: 'Person',
+        },
+        {
+          name: 'contents',
+          type: 'string',
+        },
+      ],
+    },
+    primaryType: 'Mail',
+    domain: {
+      name: 'Ether Mail',
+      version: '1',
+      chainId: chainConfig.chainId,
+      verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+    },
+    message: {
+      from: {
+        name: 'Cow',
+        wallet: address,
+      },
+      to: {
+        name: 'Bob',
+        wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+      },
+      contents: 'Hello, Bob!',
+    },
+  },
+]
+const res = await web3auth.request(chainConfig, 'eth_signTypedData_v4', params)
+```

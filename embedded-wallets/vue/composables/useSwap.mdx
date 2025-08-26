@@ -1,0 +1,54 @@
+---
+title: useSwap
+sidebar_label: useSwap
+description: "@web3auth/modal Vue Composables useSwap | Documentation - Web3Auth"
+---
+
+Hook to open the Swap interface using the Wallet Services Plugin.
+
+### Import
+
+```ts
+import { useSwap } from "@web3auth/modal/vue";
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useSwap } from "@web3auth/modal/vue";
+
+  const { showSwap, loading, error } = useSwap();
+</script>
+
+<template>
+  <button @click="showSwap()" :disabled="loading">
+    {{ loading ? "Opening Swap..." : "Open Swap" }}
+  </button>
+  <div v-if="error">Error: {{ error.message }}</div>
+</template>
+```
+
+### Return Type
+
+```ts
+import { type IUseSwap } from "@web3auth/modal/vue";
+```
+
+#### loading
+
+`boolean`
+
+Whether the swap interface is being opened.
+
+#### error
+
+`Web3AuthError | null`
+
+Error that occurred while opening the swap interface.
+
+#### showSwap
+
+`(showSwapParams?: BaseEmbedControllerState["showSwap"]) => Promise<void>`
+
+Function to open the swap interface. Accepts optional parameters for customizing the swap view.

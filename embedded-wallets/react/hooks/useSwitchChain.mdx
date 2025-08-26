@@ -1,0 +1,91 @@
+---
+title: useSwitchChain
+sidebar_label: useSwitchChain
+description: "@web3auth/modal React Hooks useSwitchChain | Documentation - Web3Auth"
+---
+
+Hook to switch blockchain networks with Web3Auth.
+
+### Import
+
+```tsx
+import { useSwitchChain } from "@web3auth/modal/react";
+```
+
+### Usage
+
+```tsx
+import { useSwitchChain } from "@web3auth/modal/react";
+
+function SwitchChainButton() {
+  const { switchChain, loading, error } = useSwitchChain();
+
+  return (
+    <div>
+      <button onClick={() => switchChain("0x1")} disabled={loading}>
+        {loading ? "Switching..." : "Switch to Ethereum Mainnet"}
+      </button>
+      {error && <span>Error: {error.message}</span>}
+    </div>
+  );
+}
+```
+
+### Return Type
+
+```tsx
+import { type IUseSwitchChain } from "@web3auth/modal/react";
+```
+
+#### loading
+
+`boolean`
+
+Whether the chain switching process is in progress.
+
+#### error
+
+`Web3AuthError | null`
+
+Error that occurred during the chain switching process.
+
+#### switchChain
+
+`(chainId: string) => Promise<void>`
+
+Function to initiate the chain switch. Pass the target `chainId` as a string (e.g., "0x1" for
+Ethereum Mainnet).
+
+## Example
+
+```tsx title="switchChain.tsx"
+import { useSwitchChain, useWeb3Auth } from "@web3auth/modal/react";
+
+export function SwitchChain() {
+  const { web3Auth } = useWeb3Auth();
+
+  const { switchChain, error } = useSwitchChain();
+
+  return (
+    <div>
+      <h2>Switch Chain</h2>
+      <h3>Connected to {web3Auth?.currentChain?.displayName}</h3>
+      {web3Auth?.coreOptions.chains?.map((chain) => {
+        return (
+          <button
+            disabled={web3Auth?.currentChain?.chainId === chain.chainId}
+            key={chain.chainId}
+            onClick={() => switchChain(chain.chainId)}
+            type="button"
+            className="card"
+          >
+            {chain.displayName}
+          </button>
+        );
+      })}
+
+      {error?.message}
+    </div>
+  );
+}
+```

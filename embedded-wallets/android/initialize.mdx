@@ -1,0 +1,165 @@
+---
+title: Initializing PnP Android SDK
+sidebar_label: Initialize
+description: "Web3Auth PnP Android SDK - Initialize | Documentation - Web3Auth"
+---
+
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+After installation, the next step to use Web3Auth is to configure & initialize the SDK.
+
+However, configuring and initializing is a four-step process:
+
+1. [Creating a Web3Auth Instance](#create-web3auth-instance)
+2. [Setting a Result URL](#set-result-url)
+3. [Triggering Login exceptions](#triggering-login-exceptions)
+4. [Initialize Web3Auth](#initialize-web3auth)
+
+## Create Web3Auth Instance
+
+The first step is to create the Web3Auth instance, and configure the Whitelabeling, Session time,
+and Custom Authentication. Please note that these are the most critical steps where you need to pass
+on different parameters according to the preference of your project.
+
+### Parameters
+
+The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter         | Description                                                                                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context`         | Android context to launch Web-based authentication, usually is the current activity. It's a mandatory field, and accepts `android.content.Context` as a value.       |
+| `clientId`        | Your Web3Auth Client ID. You can get it from Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `String`     |
+| `network`         | Defines the Web3Auth Network. It's a mandatory field of type Network.                                                                                                |
+| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type `Uri`.                                     |
+| `whiteLabel?`     | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabelData` as a value.                 |
+| `loginConfig?`    | Login config for the custom verifiers. It takes `HashMap<String, LoginConfigItem>` as a value.                                                                       |
+| `useCoreKitKey?`  | Use CoreKit Key to get core kit key. It's an optional field with default value as `false`.                                                                           |
+| `chainNamespace?` | Chain Namespace [`EIP155` and `SOLANA`]. It takes `ChainNamespace` as a value.                                                                                       |
+| `mfaSettings?`    | Allows developers to configure the Mfa settings for authentication. It takes `MfaSettings` as a value.                                                               |
+| `sessionTime?`    | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```kotlin
+data class Web3AuthOptions(
+    var context: Context,
+    val clientId: String,
+    val network: Network,
+    var buildEnv: BuildEnv? = BuildEnv.PRODUCTION,
+    @Transient var redirectUrl: Uri,
+    var sdkUrl: String = getSdkUrl(buildEnv),
+    val whiteLabel: WhiteLabelData? = null,
+    val loginConfig: HashMap<String, LoginConfigItem>? = null,
+    val useCoreKitKey: Boolean? = false,
+    val chainNamespace: ChainNamespace? = ChainNamespace.EIP155,
+    val mfaSettings: MfaSettings? = null,
+    val sessionTime: Int? = 86400
+)
+```
+
+</TabItem>
+</Tabs>
+
+### Instantiate Web3Auth
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+
+var web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+  )
+)
+
+// Handle user signing in when app is in background
+web3Auth.setResultUrl(intent?.data)
+```
+
+
+## Set Result URL
+
+Whenever user initiates a login flow, a new intent of CustomTabs is launched. It's necessary step to
+use `setResultUrl` in `onNewIntent` method to successful track the login process.
+
+```kotlin
+override fun onNewIntent(intent: Intent?) {
+  super.onNewIntent(intent)
+
+  // Handle user signing in when app is active
+  web3Auth.setResultUrl(intent.data)
+}
+```
+
+## Triggering Login exceptions
+
+The `setCustomTabsClosed` method can be used to trigger login exceptions for Android. The Android
+SDK uses the custom tabs and from current implementation of chrome custom tab, it's not possible to
+add a listener directly to chrome custom tab close button and trigger login exceptions.
+
+Hence, it's necessary to use `setCustomTabsClosed` method in your login screen to trigger
+exceptions.
+
+```kotlin
+class MainActivity : AppCompatActivity() {
+    // Additional code
+
+    override fun onResume() {
+        super.onResume()
+        // focus-start
+        if (Web3Auth.getCustomTabsClosed()) {
+            Toast.makeText(this, "User closed the browser.", Toast.LENGTH_SHORT).show()
+            web3Auth.setResultUrl(null)
+            Web3Auth.setCustomTabsClosed(false)
+        }
+        // focus-end
+    }
+
+    // Additional code
+}
+```
+
+## Initialize Web3Auth
+
+After instantiating Web3Auth, the next step is to initialize it using the `initialize` method. This
+method is essential for setting up the SDK, checking for any active sessions, and fetching the
+whitelabel configuration from your dashboard.
+
+Once the `initialize` method executes successfully, you can use the `getPrivKey` or
+`getEd25519PrivKey` methods to verify if an active session exists. If there is no active session,
+these methods will return an empty string; otherwise, they will return the respective private key.
+
+Note that if the API call to fetch the project configuration fails, the method will throw an error.
+
+```kotlin
+val initializeCF: CompletableFuture<Void> = web3Auth.initialize()
+initializeCF.whenComplete { _, error ->
+  if (error == null) {
+    // Check for the active session
+    if(web3Auth.getPrivKey()isNotEmpty()) {
+      // Active session found
+    }
+    // No active session is not present
+
+  } else {
+    // Handle the error
+  }
+}
+```

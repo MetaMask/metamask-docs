@@ -1,0 +1,535 @@
+---
+title: Using Custom Authentication in PnP Android SDK
+sidebar_label: Custom Authentication
+description: 'Web3Auth PnP Android SDK - Using Custom Authentication | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import GrowthPlanNote from '../_common/_growth_plan_note.mdx'
+
+## Configuration
+
+To use custom authentication (Using Social providers or Login providers like Auth0, AWS Cognito, Firebase etc. or even your own custom JWT login) you can add the configuration using `loginConfig` parameter during the initialization.
+
+The `loginConfig` parameter is a key value map. The key should be one of the `Web3AuthProvider` in its string form, and the value should be a `LoginConfigItem` instance.
+
+To use custom authentication, first you'll need to configure your own verifier in the Web3Auth Dashboard in Custom Authentication" section. [Learn how to create a custom verifier](/authentication).
+
+:::tip Create Custom Verifier
+
+Learn how to create a [Custom Verifier](/authentication) on the Web3Auth Dashboard.
+
+:::
+
+<GrowthPlanNote />
+
+### Parameters
+
+After creating the verifier, you can use the following parameters in the `LoginConfigItem`.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `verifier` | The name of the verifier that you have registered on the Web3Auth Dashboard. It's a mandatory field, and accepts `String` as a value. |
+| `typeOfLogin` | Type of login of this verifier, this value will affect the login flow that is adapted. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should be providing your own JWT token, no sign-in flow will be presented. It's a mandatory field, and accepts `TypeOfLogin` as a value. |
+| `clientId` | Client id provided by your login provider used for custom verifier. e.g. Google's Client ID or Web3Auth's client Id if using 'jwt' as TypeOfLogin. It's a mandatory field, and accepts `String` as a value. |
+| `name?` | Display name for the verifier. If null, the default name is used. It accepts `String` as a value. |
+| `description?` | Description for the button. If provided, it renders as a full length button. else, icon button. It accepts `String` as a value. |
+| `verifierSubIdentifier?` | The field in JWT token which maps to verifier id. Please make sure you selected correct JWT verifier id in the developer dashboard. It accepts `String` as a value. |
+| `logoHover?` | Logo to be shown on mouse hover. It accepts `String` as a value. |
+| `logoLight?` | Light logo for dark background. It accepts `String` as a value. |
+| `logoDark?` | Dark logo for light background. It accepts `String` as a value. |
+| `mainOption?` | Show login button on the main list. It accepts `Boolean` as a value. Default value is false. |
+| `showOnModal?` | Whether to show the login button on modal or not. Default value is true. |
+| `showOnDesktop?` | Whether to show the login button on desktop. Default value is true. |
+| `showOnMobile?` | Whether to show the login button on mobile. Default value is true. |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```kotlin
+data class LoginConfigItem(
+    var verifier: String,
+    private var typeOfLogin: TypeOfLogin,
+    private var name: String? = null,
+    private var description: String? = null,
+    private var clientId: String,
+    private var verifierSubIdentifier: String? = null,
+    private var logoHover: String? = null,
+    private var logoLight: String? = null,
+    private var logoDark: String? = null,
+    private var mainOption: Boolean? = false,
+    private var showOnModal: Boolean? = true,
+    private var showOnDesktop: Boolean? = true,
+    private var showOnMobile: Boolean? = true,
+)
+
+enum class TypeOfLogin {
+    @SerializedName("google")
+    GOOGLE,
+    @SerializedName("facebook")
+    FACEBOOK,
+    @SerializedName("reddit")
+    REDDIT,
+    @SerializedName("discord")
+    DISCORD,
+    @SerializedName("twitch")
+    TWITCH,
+    @SerializedName("apple")
+    APPLE,
+    @SerializedName("line")
+    LINE,
+    @SerializedName("github")
+    GITHUB,
+    @SerializedName("kakao")
+    KAKAO,
+    @SerializedName("linkedin")
+    LINKEDIN,
+    @SerializedName("twitter")
+    TWITTER,
+    @SerializedName("weibo")
+    WEIBO,
+    @SerializedName("wechat")
+    WECHAT,
+    @SerializedName("email_passwordless")
+    EMAIL_PASSWORDLESS,
+    @SerializedName("email_password")
+    EMAIL_PASSWORD,
+    @SerializedName("jwt")
+    JWT
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Usage
+
+<Tabs
+  defaultValue="google"
+  values={[
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
+    { label: "Auth0", value: "auth0" },
+    { label: "JWT", value: "jwt" },
+  ]}
+>
+
+<TabItem value="google">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    // focus-start
+    loginConfig = hashMapOf("google" to LoginConfigItem(
+      verifier = "verifier-name", // Get it from Web3Auth dashboard
+      typeOfLogin = TypeOfLogin.GOOGLE,
+      clientId = getString(R.string.google_client_id) // Google's client id
+    ))
+    // focus-end
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+    LoginParams(Provider.GOOGLE)
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="facebook">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    // focus-start
+    loginConfig = hashMapOf(
+      "facebook" to LoginConfigItem(
+        verifier = "verifier-name", // Get it from Web3Auth dashboard
+        typeOfLogin = TypeOfLogin.FACEBOOK,
+        clientId = getString(R.string.facebook_client_id) // Facebook's client id
+      )
+    )
+    // focus-end
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+  LoginParams(Provider.Facebook)
+)
+// focus-end
+
+```
+
+</TabItem>
+
+<TabItem value="auth0">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    // focus-start
+    loginConfig = hashMapOf("jwt" to LoginConfigItem(
+      verifier = "verifier-name", // Get it from Web3Auth dashboard
+      typeOfLogin = TypeOfLogin.JWT,
+      clientId = getString (R.string.auth0_project_id) // Auth0's client id
+    ))
+    // focus-end
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+    LoginParams(Provider.JWT)
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="jwt">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    // focus-start
+    loginConfig = hashMapOf(
+      "jwt" to LoginConfigItem(
+        verifier = "verifier-name", // Get it from Web3Auth dashboard
+        typeOfLogin = TypeOfLogin.JWT,
+      )
+    )
+    // focus-end
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+  LoginParams(Provider.JWT)
+)
+// focus-end
+
+```
+
+</TabItem>
+</Tabs>
+
+## Configure Extra Login Options
+
+Additional to the `LoginConfig` you can pass extra options to the `login` function to configure the login flow for cases requiring additional info for enabling login. The `ExtraLoginOptions` accepts the following parameters.
+
+### Parameters
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `additionalParams?` | Additional params in `HashMap` format for OAuth login, use id_token(JWT) to authenticate with web3auth. |
+| `domain?` | Your custom authentication domain in `String` format. For example, if you are using Auth0, it can be example.au.auth0.com. |
+| `client_id?` | Client id in `String` format, provided by your login provider used for custom verifier. |
+| `leeway?` | The value used to account for clock skew in JWT expirations. The value is in the seconds, and ideally should no more than 60 seconds or 120 seconds at max. It takes `String` as a value. |
+| `verifierIdField?` | The field in JWT token which maps to verifier id. Please make sure you selected correct JWT verifier id in the developer dashboard. It takes `String` as a value. |
+| `isVerifierIdCaseSensitive?` | Boolean to confirm Whether the verifier id field is case sensitive or not. |
+| `display?` | Allows developers the configure the display of UI. It takes `Display` as a value. |
+| `prompt?` | Prompt shown to the user during authentication process. It takes `Prompt` as a value. |
+| `max_age?` | Max time allowed without reauthentication. If the last time user authenticated is greater than this value, then user must reauthenticate. It takes `String` as a value. |
+| `ui_locales?` | The space separated list of language tags, ordered by preference. For instance `fr-CA fr en`. |
+| `id_token_hint?` | It denotes the previously issued ID token. It takes `String` as a value. |
+| `id_token?` | JWT (ID Token) to be passed for login. |
+| `login_hint?` | Used to specify the user's email address or phone number for Email/SMS Passwordless login flows. Takes a `String` value. For the SMS, the format should be: `+{country_code}-{phone_number}` (e.g. `+1-1234567890`) |
+| `acr_values?` | acc_values |
+| `scope?` | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. It takes `String` as a value. |
+| `audience?` | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It takes `String` as a value. |
+| `connection?` | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. It takes `String` as a value. |
+| `state?` | state |
+| `response_type?` | Defines which grant to execute for the authorization server. It takes `String` as a value. |
+| `nonce?` | nonce |
+| `redirect_uri?` | It can be used to specify the default url, where your custom jwt verifier can redirect your browser to with the result. If you are using Auth0, it must be whitelisted in the Allowed Callback URLs in your Auth0's application. |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```kotlin
+data class ExtraLoginOptions(
+  private var additionalParams : HashMap<String, String>? = null,
+  private var domain : String? = null,
+  private var client_id : String? = null,
+  private var leeway : String? = null,
+  private var verifierIdField : String? =null,
+  private var isVerifierIdCaseSensitive : Boolean? = null,
+  private var display : Display? = null,
+  private var prompt : Prompt? = null,
+  private var max_age : String? = null,
+  private var ui_locales : String? = null,
+  private var id_token : String? = null,
+  private var id_token_hint : String? = null,
+  private var login_hint : String? = null,
+  private var acr_values : String? = null,
+  private var scope : String? = null,
+  private var audience : String? = null,
+  private var connection : String? = null,
+  private var state : String? = null,
+  private var response_type : String? = null,
+  private var nonce : String? = null,
+  private var redirect_uri : String? = null
+)
+```
+
+</TabItem>
+</Tabs>
+
+### Single Verifier Usage
+
+<Tabs
+  defaultValue="auth0"
+  values={[
+    { label: "Auth0", value: "auth0" },
+    { label: "Custom JWT", value: "byoj" },
+    { label: "Email Passwordless", value: "email-passwordless" },
+    { label: "SMS Passwordless", value: "sms-passwordless" },
+  ]}
+>
+
+<TabItem value="auth0">
+
+Auth0 has a special login flow, called the SPA flow. This flow requires a `client_id` and `domain` to be passed, and Web3Auth will get the JWT `id_token` from Auth0 directly. You can pass these configurations in the `ExtraLoginOptions` object in the login function.
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    // focus-start
+    loginConfig = hashMapOf("jwt" to LoginConfigItem(
+      verifier = "verifier-name", // Get it from Web3Auth dashboard
+      typeOfLogin = TypeOfLogin.JWT,
+      clientId = getString (R.string.auth0_project_id) // Auth0's client id
+    ))
+    // focus-end
+  )
+)
+
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+  LoginParams(
+    Provider.JWT,
+    // focus-start
+    extraLoginOptions = ExtraLoginOptions(
+      domain: "https://username.us.auth0.com", // Domain of your Auth0 app
+      verifierIdField: "sub", // The field in jwt token which maps to verifier id.
+    )
+    // focus-end
+  )
+)
+```
+
+</TabItem>
+
+<TabItem value="byoj">
+If you're using any other provider like Firebase/ AWS Cognito or deploying your own Custom JWT
+server, you need to put the jwt token into the `id_token` field of the `extraLoginOptions`,
+additionally, you need to pass over the `domain` field as well, which is mandatory. If you don't
+have a domain, just passover a string in that field.
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    // focus-start
+    loginConfig = hashMapOf("jwt" to LoginConfigItem(
+      verifier = "verifier-name", // Get it from Web3Auth dashboard
+      typeOfLogin = TypeOfLogin.JWT,
+    ))
+    // focus-end
+  )
+)
+
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+  LoginParams(
+    Provider.JWT,
+    // focus-start
+    extraLoginOptions = ExtraLoginOptions(
+      id_token: "Your JWT id token",
+    )
+    // focus-end
+  )
+)
+```
+
+</TabItem>
+
+<TabItem value="email-passwordless">
+To use the Email Passwordless login, you need to put the email into the `login_hint` parameter of
+the `ExtraLoginOptions`. By default, the login flow will be `code` flow, if you want to use the
+`link` flow, you need to put `flow_type` into the `additionalParams` parameter of the
+`ExtraLoginOptions`.
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+  )
+)
+
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+  LoginParams(
+    Provider.EMAIL_PASSWORDLESS,
+    // focus-next-line
+    extraLoginOptions = ExtraLoginOptions(login_hint = "hello@web3auth.io")
+  )
+)
+```
+
+</TabItem>
+
+<TabItem value="sms-passwordless">
+To use the SMS Passwordless login, send the phone number as the `login_hint` parameter of the
+`ExtraLoginOptions`. Please make sure the phone number is in the format of
++\{country_code}-\{phone_number}, i.e. (+91-09xx901xx1).
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+  LoginParams(
+    Provider.SMS_PASSWORDLESS,
+    extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344")
+  )
+)
+// focus-end
+
+```
+
+</TabItem>
+</Tabs>
+
+### Aggregate Verifier Usage
+
+You can use aggregate verifier to combine multiple login methods to get the same address for the users regardless of their login providers. For example, combining a Google and Email Passwordless login, or Google and GitHub via Auth0 to access the same address for your user.
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    // focus-start
+    loginConfig = hashMapOf(
+      "google" to LoginConfigItem(
+        verifier = "aggregate-sapphire",
+        verifierSubIdentifier= "w3a-google",
+        typeOfLogin = TypeOfLogin.GOOGLE,
+        name = "Aggregate Login",
+        clientId = getString(R.string.web3auth_google_client_id)
+      ),
+      "jwt" to LoginConfigItem(
+        verifier = "aggregate-sapphire",
+        verifierSubIdentifier= "w3a-a0-email-passwordless",
+        typeOfLogin = TypeOfLogin.JWT,
+        name = "Aggregate Login",
+        clientId = getString(R.string.web3auth_auth0_client_id)
+      )
+    )
+    // focus-end
+  )
+)
+
+// focus-start
+// Google Login
+web3Auth.login(LoginParams(Provider.GOOGLE))
+// focus-end
+
+// focus-start
+// Auth0 Login
+web3Auth.login(LoginParams(
+  Provider.JWT,
+  extraLoginOptions = ExtraLoginOptions(
+    domain = "https://web3auth.au.auth0.com",
+    verifierIdField = "email",
+    isVerifierIdCaseSensitive = false
+  )
+))
+// focus-end
+```

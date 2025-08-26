@@ -1,0 +1,251 @@
+---
+title: Whitelabel
+sidebar_label: Whitelabel
+description: 'Whitelabel Web3Auth | Documentation - Web3Auth'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+
+Web3Auth allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
+
+- **UI elements**: Customize the appearance of modals and components
+- **Branding**: Apply your brand colors, logos, and themes
+- **Translations**: Localize the interface for your users
+
+:::info
+
+All of these settings can be easily managed directly from the Web3Auth Dashboard. Once you update your branding, or UI preferences there, the changes will automatically apply to your integration. As this is the recommended approach, we will not cover basic customization via the SDK here. Instead, this guide focuses on advanced customization options available through the SDK.
+
+:::
+
+<GrowthPlanNote />
+
+## Customizing the Web3Auth Modal
+
+While basic modal appearance can be configured directly on the dashboard, the following advanced options provide even greater control through the `modalConfig` property.
+
+### `modalConfig`
+
+The `modalConfig` option in the constructor lets you configure the modal UI and customize authentication:
+
+```ts
+modalConfig?: ConnectorsModalConfig;
+
+export interface ConnectorsModalConfig {
+    connectors?: Partial<Record<WALLET_CONNECTOR_TYPE, ModalConfig>>;
+    hideWalletDiscovery?: boolean;
+}
+
+export type WALLET_CONNECTOR_TYPE = (typeof WALLET_CONNECTORS)[keyof typeof WALLET_CONNECTORS];
+
+export interface ModalConfig extends Omit<BaseConnectorConfig, "isInjected" | "chainNamespaces"> {
+    loginMethods?: LoginMethodConfig;
+}
+```
+
+### `LoginMethodConfig`
+
+The `LoginMethodConfig` interface provides extensive customization options for each authentication method:
+
+<Tabs>
+  <TabItem value="Table">
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `name` | `string` | Custom display name (defaults to auth app's default if not provided) |
+| `description` | `string` | Button description (renders as full-length button if provided; otherwise as an icon) |
+| `logoHover` | `string` | Logo shown on mouse hover (defaults to auth app's default) |
+| `logoLight` | `string` | Logo for dark theme/background (defaults to auth app's default) |
+| `logoDark` | `string` | Logo for light theme/background (defaults to auth app's default) |
+| `mainOption` | `boolean` | Whether to show login button on the main list |
+| `showOnModal` | `boolean` | Controls visibility of the login button on modal |
+| `authConnectionId` | `string` | Auth connection ID of the provider |
+| `groupedAuthConnectionId` | `string` | Grouped auth connection ID of the provider |
+| `extraLoginOptions` | `ExtraLoginOptions` | Additional parameters for social login |
+| `authConnection` | `AUTH_CONNECTION_TYPE` | Auth connection type (useful for customizing login buttons with custom connectors) |
+| `isDefault` | `boolean` | Whether it's the default connector _(internal)_ |
+
+  </TabItem>
+
+  <TabItem value="Interface">
+
+```ts
+export type LoginMethodConfig = Partial<
+  Record<
+    AUTH_CONNECTION_TYPE,
+    {
+      /**
+       * Display Name. If not provided, we use the default for auth app
+       */
+      name?: string
+      /**
+       * Description for button. If provided, it renders as a full length button. else, icon button
+       */
+      description?: string
+      /**
+       * Logo to be shown on mouse hover. If not provided, we use the default for auth app
+       */
+      logoHover?: string
+      /**
+       * Logo to be shown on dark background (dark theme). If not provided, we use the default for auth app
+       */
+      logoLight?: string
+      /**
+       * Logo to be shown on light background (light theme). If not provided, we use the default for auth app
+       */
+      logoDark?: string
+      /**
+       * Show login button on the main list
+       */
+      mainOption?: boolean
+      /**
+       * Whether to show the login button on modal or not
+       */
+      showOnModal?: boolean
+      /**
+       * Auth connection id of the provider.
+       */
+      authConnectionId?: string
+      /**
+       * Grouped auth connection id of the provider.
+       */
+      groupedAuthConnectionId?: string
+      /**
+       * ExtraLoginOption params to be used for social login.
+       */
+      extraLoginOptions?: ExtraLoginOptions
+      /**
+       * Auth connection type of the auth connector.
+       * Can be different from the original key.
+       *
+       * Example: This helps in customizing the google login button with auth0 custom connector.
+       */
+      authConnection?: AUTH_CONNECTION_TYPE
+      /**
+       * Whether is it default connector.
+       *
+       * @internal
+       */
+      isDefault?: boolean
+    }
+  >
+>
+```
+
+  </TabItem>
+</Tabs>
+
+## Common Customization Examples
+
+### Disabling Specific Social Login Methods
+
+Web3Auth provides the following social login methods:
+
+```tsx
+export declare const AUTH_CONNECTION: {
+  readonly GOOGLE: 'google'
+  readonly TWITTER: 'twitter'
+  readonly FACEBOOK: 'facebook'
+  readonly DISCORD: 'discord'
+  readonly FARCASTER: 'farcaster'
+  readonly APPLE: 'apple'
+  readonly GITHUB: 'github'
+  readonly REDDIT: 'reddit'
+  readonly LINE: 'line'
+  readonly KAKAO: 'kakao'
+  readonly LINKEDIN: 'linkedin'
+  readonly TWITCH: 'twitch'
+  readonly TELEGRAM: 'telegram'
+  readonly WECHAT: 'wechat'
+  readonly EMAIL_PASSWORDLESS: 'email_passwordless'
+  readonly SMS_PASSWORDLESS: 'sms_passwordless'
+  readonly CUSTOM: 'custom'
+  readonly PASSKEYS: 'passkeys'
+  readonly AUTHENTICATOR: 'authenticator'
+}
+```
+
+To disable specific login methods, set `showOnModal` to `false` for the corresponding auth connection:
+
+```ts
+import { Web3Auth, WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // focus-start
+  modalConfig: {
+    connectors: {
+      [WALLET_CONNECTORS.AUTH]: {
+        label: 'auth',
+        loginMethods: {
+          // Disable Facebook and Reddit
+          facebook: {
+            name: 'facebook',
+            showOnModal: false,
+          },
+          reddit: {
+            name: 'reddit',
+            showOnModal: false,
+          },
+        },
+        // Setting to false will hide all social login methods from modal
+        showOnModal: true,
+      },
+    },
+  },
+  // focus-end
+})
+
+// Initialize web3auth
+await web3auth.init()
+```
+
+### Enhancing Email and SMS Login Experience
+
+By specifying a custom `authConnectionId` for email or SMS login methods, you can ensure the entire authentication flow takes place seamlessly within the modal, eliminating the need for external popups.
+
+:::info
+
+In the default setup, users are redirected to a separate popup to enter their email or phone number for security purposes. However, with a custom `authConnectionId`, this input step is securely embedded directly inside the modal, providing a smoother and more integrated user experience.
+
+:::
+
+```ts
+import { Web3Auth, WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // focus-start
+  modalConfig: {
+    connectors: {
+      [WALLET_CONNECTORS.AUTH]: {
+        label: 'auth',
+        loginMethods: {
+          email_passwordless: {
+            name: 'email passwordless login',
+            authConnectionId: 'w3a-email_passwordless-demo',
+          },
+          sms_passwordless: {
+            name: 'sms passwordless login',
+            authConnectionId: 'w3a-sms_passwordless-demo',
+          },
+        },
+      },
+    },
+  },
+  // focus-end
+})
+
+// Initialize web3auth
+await web3auth.init()
+```
+
+## Creating a Fully Custom UI
+
+For complete control over the authentication interface, you can bypass the Web3Auth modal entirely and use the `connectTo` function. This allows you to create custom buttons that connect directly to specific auth providers.
+
+See the [Custom Authentication](./custom-authentication) section for detailed implementation instructions.

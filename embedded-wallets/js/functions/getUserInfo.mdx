@@ -1,0 +1,111 @@
+---
+title: getUserInfo
+sidebar_label: getUserInfo
+description: "@web3auth/modal Function getUserInfo | Documentation - Web3Auth"
+---
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+Function to retrieve information about the connected user.
+
+:::note
+
+This function will only return information based on the connected adapter. These details are not
+stored anywhere and are fetched from the adapter during the connection and remain in the session.
+
+:::
+
+### Usage
+
+```javascript
+// After successful login
+const userInfo = await web3auth.getUserInfo();
+console.log(userInfo);
+```
+
+### Return Type
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Type Declarations", value: "type" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Property            | Type    | Description                                                                                      |
+| ------------------- | ------- | ------------------------------------------------------------------------------------------------ |
+| `email`             | string  | Email of the user.                                                                               |
+| `name`              | string  | Name of the user.                                                                                |
+| `profileImage`      | string  | Profile image of the user.                                                                       |
+| `aggregateVerifier` | string  | Aggregate verifier of the user.                                                                  |
+| `verifier`          | string  | Verifier of the user.                                                                            |
+| `verifierId`        | string  | Verifier ID of the user.                                                                         |
+| `typeOfLogin`       | string  | Type of login provider.                                                                          |
+| `dappShare`         | string  | Dapp share of the user.                                                                          |
+| `idToken`           | string  | Token issued by Web3Auth.                                                                        |
+| `oAuthIdToken`      | string  | Token issued by OAuth provider. Will be available only if you are using custom verifiers.        |
+| `oAuthAccessToken`  | string  | Access Token issued by OAuth provider. Will be available only if you are using custom verifiers. |
+| `appState`          | string  | App state of the user.                                                                           |
+| `touchIDPreference` | string  | Touch ID preference of the user.                                                                 |
+| `isMfaEnabled`      | boolean | Whether Multi Factor Authentication is enabled for the user.                                     |
+
+</TabItem>
+
+<TabItem value="type">
+
+```typescript
+getUserInfo(): Promise<Partial<AuthUserInfo>>;
+
+type AuthUserInfo = {
+  email?: string;
+  name?: string;
+  profileImage?: string;
+  aggregateVerifier?: string;
+  verifier: string;
+  verifierId: string;
+  typeOfLogin: LOGIN_PROVIDER_TYPE | CUSTOM_LOGIN_PROVIDER_TYPE;
+  dappShare?: string;
+  /**
+   * Token issued by Web3Auth.
+   */
+  idToken?: string;
+  /**
+   * Token issued by OAuth provider. Will be available only if you are using
+   * custom verifiers.
+   */
+  oAuthIdToken?: string;
+  /**
+   * Access Token issued by OAuth provider. Will be available only if you are using
+   * custom verifiers.
+   */
+  oAuthAccessToken?: string;
+  appState?: string;
+  touchIDPreference?: string;
+  isMfaEnabled?: boolean;
+};
+```
+
+</TabItem>
+</Tabs>
+
+### Sample Response
+
+```json
+{
+  "email": "john@gmail.com",
+  "name": "John Dash",
+  "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
+  "aggregateVerifier": "tkey-google-lrc",
+  "verifier": "torus",
+  "verifierId": "john@gmail.com",
+  "typeOfLogin": "google",
+  "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
+  "idToken": "<jwtToken issued by Web3Auth>",
+  "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+  "oAuthAccessToken": "<accessToken issued by OAuth Provider>" // will be sent only incase of custom verifiers
+}
+```

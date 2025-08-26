@@ -74,6 +74,7 @@
     "react-player": "^3.3.1",
     "react-spinners": "^0.17.0",
     "react-spring": "^10.0.1",
+    "react-select": "^5.10.2",
     "react-tippy": "^1.4.0",
     "remark-codesandbox": "^0.10.1",
     "remark-docusaurus-tabs": "^0.2.0",

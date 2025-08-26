@@ -1,0 +1,55 @@
+---
+title: useWeb3AuthDisconnect
+sidebar_label: useWeb3AuthDisconnect
+description: "@web3auth/modal Vue Composables useWeb3AuthDisconnect | Documentation - Web3Auth"
+---
+
+Hook to disconnect from Web3Auth.
+
+### Import
+
+```ts
+import { useWeb3AuthDisconnect } from "@web3auth/modal/vue";
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useWeb3AuthDisconnect } from "@web3auth/modal/vue";
+
+  const { disconnect, loading, error } = useWeb3AuthDisconnect();
+</script>
+
+<template>
+  <button @click="disconnect()" :disabled="loading">
+    {{ loading ? "Disconnecting..." : "Disconnect" }}
+  </button>
+  <div v-if="error">{{ error.message }}</div>
+</template>
+```
+
+### Return Type
+
+```ts
+import type { IUseWeb3AuthDisconnect } from "@web3auth/modal/vue";
+```
+
+#### loading
+
+`Ref<boolean>`
+
+Whether the disconnection process is in progress.
+
+#### error
+
+`Ref<Web3AuthError | null>`
+
+Error that occurred during the disconnection process.
+
+#### disconnect
+
+`(options?: { cleanup: boolean }) => Promise<void>`
+
+Function to initiate the disconnection process. Optional `cleanup` parameter controls whether to
+remove all user data.

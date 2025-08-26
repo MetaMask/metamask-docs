@@ -1,0 +1,58 @@
+---
+title: useManageMFA
+sidebar_label: useManageMFA
+description: "@web3auth/modal React Hooks useManageMFA | Documentation - Web3Auth"
+---
+
+Hook to manage Multi-Factor Authentication (MFA) using Web3Auth. This hook provides a convenient way
+to trigger MFA management actions, such as updating or configuring MFA settings for the user.
+
+### Import
+
+```tsx
+import { useManageMFA } from "@web3auth/modal/react";
+```
+
+### Usage
+
+```tsx
+import { useManageMFA } from "@web3auth/modal/react";
+
+function ManageMFAButton() {
+  const { manageMFA, loading, error } = useManageMFA();
+
+  return (
+    <div>
+      <button onClick={() => manageMFA()} disabled={loading}>
+        {loading ? "Managing MFA..." : "Manage MFA"}
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  );
+}
+```
+
+### Return Type
+
+```tsx
+import { type IUseManageMFA } from "@web3auth/modal/react";
+```
+
+#### loading
+
+`boolean`
+
+Whether the MFA management process is in progress.
+
+#### error
+
+`Web3AuthError | null`
+
+Error that occurred during the MFA management process.
+
+#### manageMFA
+
+`<T>(params?: T) => Promise<void>`
+
+Function to initiate the MFA management process. Accepts optional parameters depending on the MFA
+action or configuration required by your implementation.

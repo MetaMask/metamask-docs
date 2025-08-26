@@ -1,0 +1,194 @@
+---
+title: Account Abstraction
+sidebar_label: Account Abstraction
+description: '@web3auth/react-native-sdk Native Account Abstraction | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import AccountAbstractionDescription from '../_common/_account-abstraction-description.mdx'
+import AccountAbstractionProviderInstallation from '../_common/_aa-provider-installation.mdx'
+import AAProviderConfiguration from '../_common/_aa-provider-configuration.mdx'
+import ConfigureSmartAccountProvider from '../_common/_smart-account-provider-configuration.mdx'
+import ConfigureBundler from '../_common/_bundler-configuration.mdx'
+import ConfigureSponsoredPaymaster from '../_common/_sponsored-paymaster-configuration.mdx'
+import ConfigureERC20Paymaster from '../_common/_erc20-paymaster-configuration.mdx'
+import ConfigureSigners from '../_common/_configure-aa-signers.mdx'
+import SmartAccountAddress from '../_common/_aa-address.mdx'
+import SmartAccountSendTransaction from '../_common/_aa-send-transaction.mdx'
+
+import GrowthPlanNote from '../_common/_growth_plan_note.mdx'
+
+<AccountAbstractionDescription />
+<GrowthPlanNote />
+
+## Installation
+
+<AccountAbstractionProviderInstallation />
+
+## Configure
+
+<AAProviderConfiguration />
+
+Please note this is the important step for setting the Web3Auth account abstraction provider.
+
+- [Configure Smart Account provider](#configure-smart-account-provider)
+- [Configure Bundler](#configure-bundler)
+- [Configure Sponsored Paymaster](#sponsored-paymaster)
+- [Configure ERC-20 Paymaster](#erc-20-paymaster)
+
+## Configure Smart Account Provider
+
+<ConfigureSmartAccountProvider />
+
+## Configure Bundler
+
+<ConfigureBundler />
+
+## Configure Paymaster
+
+You can configure the paymaster of your choice to sponsor gas fees for your users, along with the paymaster context. The paymaster context lets you set additional parameters, such as choosing the token for ERC-20 paymasters, defining gas policies, and more.
+
+### Sponsored Paymaster
+
+<ConfigureSponsoredPaymaster />
+
+### ERC-20 Paymaster
+
+<ConfigureERC20Paymaster />
+
+## Set up
+
+### Configure Web3Auth Instance
+
+<Tabs
+  values={[
+    { label: "React Native Bare App", value: "rn-bare" },
+    { label: "React Native Expo App", value: "rn-expo" },
+  ]}
+>
+<TabItem value="rn-bare" default>
+
+```ts
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+// focus-start
+import {
+  AccountAbstractionProvider,
+  SafeSmartAccount,
+} from '@web3auth/account-abstraction-provider'
+//focus-end
+import Web3Auth, { WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
+import * as WebBrowser from '@toruslabs/react-native-web-browser'
+import EncryptedStorage from 'react-native-encrypted-storage'
+import { CHAIN_NAMESPACES } from '@web3auth/base'
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://rpc.sepolia.org',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
+
+// focus-start
+const accountAbstractionProvider = new AccountAbstractionProvider({
+  config: {
+    chainConfig,
+    bundlerConfig: {
+      // Get the pimlico API Key from dashboard.pimlico.io
+      url: `https://api.pimlico.io/v2/11155111/rpc?apikey=${pimlicoAPIKey}`,
+    },
+    smartAccountInit: new SafeSmartAccount(),
+  },
+})
+// focus-end
+
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: { chainConfig },
+})
+
+const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
+  clientId,
+  redirectUrl,
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
+  privateKeyProvider,
+  // focus-next-line
+  accountAbstractionProvider: aaProvider,
+})
+```
+
+</TabItem>
+<TabItem value="rn-expo">
+
+```ts
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+// focus-start
+import {
+  AccountAbstractionProvider,
+  SafeSmartAccount,
+} from '@web3auth/account-abstraction-provider'
+//focus-end
+import Web3Auth, { WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
+import * as WebBrowser from 'expo-web-browser'
+import * as SecureStore from 'expo-secure-store'
+import { CHAIN_NAMESPACES } from '@web3auth/base'
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://rpc.sepolia.org',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
+
+// focus-start
+const accountAbstractionProvider = new AccountAbstractionProvider({
+  config: {
+    chainConfig,
+    bundlerConfig: {
+      // Get the pimlico API Key from dashboard.pimlico.io
+      url: `https://api.pimlico.io/v2/11155111/rpc?apikey=${pimlicoAPIKey}`,
+    },
+    smartAccountInit: new SafeSmartAccount(),
+  },
+})
+// focus-end
+
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: { chainConfig },
+})
+
+const web3auth = new Web3Auth(WebBrowser, SecureStore, {
+  clientId,
+  redirectUrl,
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
+  privateKeyProvider,
+  // focus-next-line
+  accountAbstractionProvider: aaProvider,
+})
+```
+
+</TabItem>
+</Tabs>
+
+### Configure Signer
+
+<ConfigureSigners />
+
+## Smart Account Address
+
+<SmartAccountAddress />
+
+## Send Transaction
+
+<SmartAccountSendTransaction />
+
+## Advanced Smart Account Operations
+
+To learn more about supported transaction methods, and how to perform batch transactions, [checkout our detailed documentation of AccountAbstractionProvider](/docs/sdk/web/react).

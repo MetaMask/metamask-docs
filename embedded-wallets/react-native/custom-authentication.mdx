@@ -1,0 +1,218 @@
+---
+title: Custom Authentication in PnP React Native SDK
+sidebar_label: Custom Authentication
+description: 'Web3Auth PnP React Native SDK - Using Custom Authentication  | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import GrowthPlanNote from '../_common/_growth_plan_note.mdx'
+
+## Overview
+
+Custom Authentication allows you to authenticate users using your own custom authentication service or third-party providers like Google, Auth0, AWS Cognito, or Firebase. This guide will walk you through the process of integrating custom authentication into your React Native app using the Web3Auth PnP React Native SDK.
+
+## Prerequisites
+
+Before you start, ensure you have configured a custom verifier in the Web3Auth Dashboard. This verifier will be used to facilitate custom authentication.
+
+<GrowthPlanNote />
+
+:::tip
+
+Create Custom Verifier Check out how to create a **[Custom Verifier](/authentication)** on the Web3Auth Dashboard.
+
+:::
+
+:::info using dapp share
+
+- dApp Share is only returned for Custom verifiers.
+- 2FA should be enabled for accounts using it. Use `mfaLevel = MFALevel.MANDATORY` in the `LoginParams` during login. See **[MFA](/sdk/mobile/pnp/react-native/mfa)** for more details.
+
+:::
+
+## Single Verifier
+
+### Step 1: Configure the `LoginConfig`
+
+To use custom authentication with a single verifier, add the configuration to the `loginConfig` parameter of the `SdkInitParams` object during initialization. The `loginConfig` parameter is a key-value map where the key should be one of the `LOGIN_PROVIDER` in its string form, and the value should be a `LoginConfig` object.
+
+```javascript
+import * as WebBrowser from '@toruslabs/react-native-web-browser'
+import Web3Auth, { WEB3AUTH_NETWORK, LOGIN_PROVIDER, TypeOfLogin } from '@web3auth/react-native-sdk'
+
+const web3auth = new Web3Auth(WebBrowser, {
+  clientId: 'YOUR_CLIENT_ID', // web3auth's client id
+  network: WEB3AUTH_NETWORK.MAINNET, // or other networks
+  loginConfig: {
+    google: {
+      verifier: 'google-verifier', // Get this from the Web3Auth Dashboard
+      typeOfLogin: TypeOfLogin.GOOGLE,
+      clientId: 'GOOGLE_CLIENT_ID', // Google's client id
+    },
+    jwt: {
+      verifier: 'jwt-verifier', // Get this from the Web3Auth Dashboard
+      typeOfLogin: TypeOfLogin.JWT,
+      clientId: 'JWT_CLIENT_ID', // Custom JWT client id
+    },
+  },
+})
+```
+
+### Step 2: `LoginConfig` Object Structure
+
+The `LoginConfig` object contains various parameters that define the behavior of the custom authentication process. Below are the details of the `LoginConfig` object:
+
+| Parameter | Description |
+| --- | --- |
+| `verifier` | The name of the verifier that you have registered on the Web3Auth Dashboard. It's a mandatory field and accepts a `string` as a value. |
+| `typeOfLogin` | Type of login for this verifier. This value will affect the login flow. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should provide your own JWT token, and no sign-in flow will be presented. It's a mandatory field and accepts a `TypeOfLogin` value. |
+| `clientId` | The client ID provided by your login provider, e.g., Google's Client ID or Web3Auth's client ID if using `jwt` as `typeOfLogin`. It's a mandatory field and accepts a `string` as a value. |
+| `name?` | Display name for the verifier. If null, the default name is used. It accepts a `string` as a value. |
+| `description?` | Description for the button. If provided, it renders as a full-length button; otherwise, an icon button is shown. It accepts a `string` as a value. |
+| `verifierSubIdentifier?` | The field in the JWT token that maps to the verifier ID. Ensure you selected the correct JWT verifier ID in the developer dashboard. It accepts a `string` as a value. |
+| `logoHover?` | Logo to be shown on mouse hover. It accepts a `string` as a value. |
+| `logoLight?` | Light logo for dark backgrounds. It accepts a `string` as a value. |
+| `logoDark?` | Dark logo for light backgrounds. It accepts a `string` as a value. |
+| `mainOption?` | Shows the login button on the main list. It accepts a `boolean` as a value. The default value is `false`. |
+| `showOnModal?` | Whether to show the login button on the modal. The default value is `true`. |
+| `showOnDesktop?` | Whether to show the login button on the desktop. The default value is `true`. |
+| `showOnMobile?` | Whether to show the login button on mobile. The default value is `true`. |
+| `jwtParameters?` | Custom JWT parameters to configure the login. Useful for Auth0 configuration. It accepts `JwtParameters` as a value. |
+
+### Step 3: `TypeOfLogin` Enum
+
+```typescript
+export type TypeOfLogin =
+  | 'google'
+  | 'facebook'
+  | 'reddit'
+  | 'discord'
+  | 'twitch'
+  | 'apple'
+  | 'github'
+  | 'linkedin'
+  | 'twitter'
+  | 'weibo'
+  | 'line'
+  | 'email_password'
+  | 'passwordless'
+  | 'jwt'
+
+export const LOGIN_PROVIDER = {
+  GOOGLE: 'google',
+  FACEBOOK: 'facebook',
+  REDDIT: 'reddit',
+  DISCORD: 'discord',
+  TWITCH: 'twitch',
+  APPLE: 'apple',
+  LINE: 'line',
+  GITHUB: 'github',
+  KAKAO: 'kakao',
+  LINKEDIN: 'linkedin',
+  TWITTER: 'twitter',
+  WEIBO: 'weibo',
+  WECHAT: 'wechat',
+  EMAIL_PASSWORDLESS: 'email_passwordless',
+  SMS_PASSWORDLESS: 'sms_passwordless',
+  JWT: 'jwt',
+} as const
+```
+
+### Step 4: Example Implementations
+
+#### Using Google Login
+
+```javascript
+web3auth.login({
+  loginProvider: LOGIN_PROVIDER.GOOGLE,
+  redirectUrl: `${scheme}://auth`,
+  extraLoginOptions: {
+    login_hint: 'user@example.com', // Optional: pre-fill the email field
+  },
+})
+```
+
+#### Using JWT Login (e.g., Auth0)
+
+```javascript
+web3auth.login({
+  loginProvider: LOGIN_PROVIDER.JWT,
+  redirectUrl: `${scheme}://auth`,
+  extraLoginOptions: {
+    id_token: 'YOUR_JWT_ID_TOKEN', // JWT ID token
+    domain: 'https://example.auth0.com', // Auth0 domain
+    verifierIdField: 'sub', // The field in JWT token mapping to verifier id
+  },
+})
+```
+
+## Aggregate Verifier
+
+You can use an aggregate verifier to combine multiple login methods, allowing users to log in using different providers but receive the same address.
+
+### Step 1: Configure the `LoginConfig`
+
+To use aggregate verifiers, set up the `loginConfig` object with multiple providers under a single verifier.
+
+```javascript
+const web3auth = new Web3Auth(WebBrowser, {
+  clientId: 'YOUR_CLIENT_ID', // Web3Auth's client id
+  network: WEB3AUTH_NETWORK.MAINNET, // or other networks
+  loginConfig: {
+    google: {
+      verifier: 'aggregate-verifier',
+      verifierSubIdentifier: 'google-sub-id',
+      typeOfLogin: TypeOfLogin.GOOGLE,
+      clientId: 'GOOGLE_CLIENT_ID',
+    },
+    auth0emailpasswordless: {
+      verifier: 'aggregate-verifier',
+      verifierSubIdentifier: 'auth0-sub-id',
+      typeOfLogin: TypeOfLogin.JWT,
+      clientId: 'AUTH0_CLIENT_ID',
+      jwtParameters: {
+        domain: 'https://example.auth0.com',
+        verifierIdField: 'email',
+        isVerifierIdCaseSensitive: false,
+      },
+    },
+  },
+})
+```
+
+### Step 2: Example Implementations
+
+#### Using Google and Auth0 Combined Login
+
+```javascript
+web3auth.login({
+  loginProvider: LOGIN_PROVIDER.GOOGLE, // or LOGIN_PROVIDER.JWT
+  redirectUrl: `${scheme}://auth`,
+})
+```
+
+## Extra Login Options for Special Cases
+
+The `extraLoginOptions` parameter can be used to pass additional options required by specific login providers.
+
+| Parameter | Description |
+| --- | --- |
+| `additionalParams?` | Additional params in `[key: string]` format for OAuth login. Use `id_token` (JWT) to authenticate with Web3Auth. |
+| `domain?` | Your custom authentication domain in `string` format. For example, if you are using Auth0, it can be `example.auth0.com`. |
+| `client_id?` | Client ID in `string` format, provided by your login provider and used for the custom verifier. |
+| `leeway?` | The value used to account for clock skew in JWT expirations. The value is in seconds, ideally no more than 60 seconds or 120 seconds at max. It takes a `string` as a value. |
+| `verifierIdField?` | The field in JWT token which maps to verifier ID. Ensure you select the correct JWT verifier ID in the developer dashboard. It takes a `string` as a value. |
+| `isVerifierIdCaseSensitive?` | Boolean to confirm whether the verifier ID field is case-sensitive or not. |
+| `display?` | Allows developers to configure the display of UI. It takes a `string` as a value. |
+| `prompt?` | Prompt shown to the user during the authentication process. It takes a `string` as a value. |
+| `max_age?` | Maximum allowable elapsed time (in seconds) since authentication. If the last time user authenticated is greater than this value, the user must reauthenticate. It takes a `string` as a value. |
+| `ui_locales?` | The space-separated list of language tags, ordered by preference. For example `fr-CA fr en`. |
+| `id_token_hint?` | It denotes the previously issued ID token. It takes a `string` as a value. |
+| `id_token?` | JWT (ID Token) to be passed for login. |
+| `login_hint?` | It is used to send the user's email address during Email Passwordless login. It takes a `string` as a value. |
+| `acr_values?` | `acr_values` is a space-separated string that specifies the desired Authentication Context Class Reference values. |
+| `scope?` | The default scope to be used on authentication requests. The `defaultScope` defined in the Auth0Client is included along with this scope. It takes a `string` as a value. |
+| `audience?` | The audience, presented as the `aud` claim in the access token, defines the intended consumer of the token. It takes a `string` as a value. |
+| `connection?` | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. It takes a `string` as a value. |
+| `redirect_uri?` | It can be used to specify the default URL where your custom JWT verifier can redirect your browser with the result. If using Auth0, it must be whitelisted in the Allowed Callback URLs in your Auth0 application settings. It takes a `string` as a value. |

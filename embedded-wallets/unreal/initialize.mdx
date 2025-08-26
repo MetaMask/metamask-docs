@@ -1,0 +1,135 @@
+---
+title: Initializing PnP Unreal Engine SDK
+sidebar_label: Initialize
+description: "Web3Auth PnP Unreal Engine SDK - Initialize | Documentation - Web3Auth"
+---
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+import unrealInitialization from "@site/static/img/unreal/unreal-w3a-init.png";
+import unrealExample from "@site/static/img/unreal/unreal-usage.png";
+
+After Installation, the next step to using Web3Auth is to Initialize the SDK. However, In Unreal,
+the Initialization happens through the blueprint.
+
+## Web3Auth Initialization Blueprint
+
+<img
+  src={unrealInitialization}
+  style={{ alignSelf: "center", maxWidth: "100%" }}
+  alt="web3auth unreal initialization"
+/>
+
+### Arguments
+
+#### `Web3AuthOptions`
+
+The Web3Auth Constructor takes a class `Web3AuthOptions` as input. This class has the following
+arguments.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter         | Description                                                                                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`        | Your Web3Auth Client ID. You can get it from Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `FString`    |
+| `network`         | Defines the Web3Auth Network. It's a mandatory field of type Network.                                                                                                |
+| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type `FString`.                                 |
+| `whiteLabel?`     | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `FWhiteLabelData` as a value.                |
+| `loginConfig?`    | Login config for the custom verifiers. It takes `TMap<FString, FLoginConfigItem>` as a value.                                                                        |
+| `useCoreKitKey?`  | Use CoreKit Key to get core kit key. It's an optional field with default value as `false`.                                                                           |
+| `chainNamespace?` | Chain Namespace [`EIP155` and `SOLANA`]. It takes `FChainNamespace` as a value.                                                                                      |
+| `mfaSettings?`    | Allows developers to configure the Mfa settings for authentication. It takes `FMfaSettings` as a value.                                                              |
+| `sessionTime?`    | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```c
+USTRUCT(BlueprintType)
+struct FWeb3AuthOptions
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString clientId;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString redirectUrl;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString sdkUrl = "https://sdk.openlogin.com";
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FNetwork network;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        FBuildEnv buildEnv;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FWhiteLabelData whiteLabel;
+
+	UPROPERTY(BlueprintReadWrite)
+		TMap<FString, FLoginConfigItem> loginConfig;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        FChainNamespace chainNamespace;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        bool useCoreKitKey;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	FMfaSettings mfaSettings;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        int32 sessionTime = 86400;
+
+	FWeb3AuthOptions() {};
+
+	void operator= (const FWeb3AuthOptions& other) {
+		clientId = other.clientId;
+		redirectUrl = other.redirectUrl;
+		sdkUrl = other.sdkUrl;
+		network = other.network;
+		buildEnv = other.buildEnv;
+		whiteLabel = other.whiteLabel;
+		loginConfig = other.loginConfig;
+		chainNamespace = other.chainNamespace;
+        useCoreKitKey = other.useCoreKitKey;
+        mfaSettings = other.mfaSettings;
+        sessionTime = other.sessionTime;
+	}
+
+};
+
+UENUM(BlueprintType)
+enum class FNetwork : uint8
+{
+	MAINNET = 0, TESTNET = 1, CYAN = 2, AQUA = 3, SAPPHIRE_DEVNET = 4, SAPPHIRE_MAINNET = 5
+};
+```
+
+</TabItem>
+
+</Tabs>
+
+## Usage
+
+The following is the graph to set Web3Auth actor configuration. The graph currently uses string
+values to add parameters to blueprint blocks, but you can connect the values coming from different
+UI components.
+
+<img
+  src={unrealExample}
+  style={{ alignSelf: "center", maxWidth: "100%" }}
+  alt="unreal example blueprint"
+/>

@@ -1,0 +1,104 @@
+---
+title: Whitelabel PnP Android SDK
+sidebar_label: Whitelabel
+description: 'Web3Auth PnP Android SDK - Whitelabel | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import WhiteLabelShowcase from '../_common/_whitelabel_showcase.mdx'
+import GrowthPlanNote from '../_common/_growth_plan_note.mdx'
+
+Web3Auth is fully whitelabelable with application branding to have a consistent user experience. For Whitelabeling, there are two different aspects available for you. Web3Auth gives you the ability to define a custom UI, branding, and translations for your applications. All our SDKs support Whitelabeling, giving granular customization capability across all our offerings.
+
+<GrowthPlanNote />
+
+Within the Web3Auth Plug and Play Android SDK, whitelabeling can happen in two different places:
+
+### NEW: Whitelabeling via the Dashboard
+
+From version `8.0.0`, Web3Auth Android Plug and Play SDK offers whitelabeling capabilities via the Dashboard. This enables developers to customize the authentication flow, user interface, and translations to align with their application's branding and user experience requirements.
+
+- Customize the Authentication screens: Modify the appearance of the authentication screens, including the primary color, application name, logo and dark or light mode, to align with your application's branding.
+- Configure Language and Translations: Customize the language and translations within the authentication flow to cater to your target audience.
+
+![Web3Auth Whitelabeling Dashboard](/img/whitelabel/modal/branding.gif)
+
+### Whitelabeling while Web3Auth Instantiating
+
+For defining custom UI, branding, and translations for your brand during Web3Auth instantiation, you just need to specify an additional parameter within the `Web3AuthOptions` object called `whiteLabel`. This parameter takes object called `WhiteLabelData`.
+
+### Arguments
+
+`WhiteLabelData`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `appName?` | Display name for the app in the UI. |
+| `logoLight?` | App logo to be used in dark mode. It accepts url in `String` as a value. |
+| `logoDark?` | App logo to be used in light mode. It accepts url in `String` as a value. |
+| `defaultLanguage?` | Language which will be used by Web3Auth, app will use browser language if not specified. Default language is `Language.EN`. Checkout `Language` for supported languages. |
+| `mode?` | Theme mode for the login modal. Choose between `ThemeModes.AUTO`, `ThemeModes.LIGHT` or `ThemeModes.DARK` background modes. Default value is `ThemeModes.AUTO`. |
+| `theme?` | Used to customize the theme of the login modal. It accepts `HashMap` as a value. |
+| `appUrl?` | Url to be used in the Modal. It accepts url in `String` as a value. |
+| `useLogoLoader?` | Use logo loader. If `logoDark` and `logoLight` are null, the default Web3Auth logo will be used for the loader. Default value is false. |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```kotlin
+data class WhiteLabelData(
+    private var appName: String? = null,
+    private var appUrl: String? = null,
+    private var logoLight: String? = null,
+    private var logoDark: String? = null,
+    private var defaultLanguage: Language? = Language.EN,
+    private var mode: ThemeModes? = null,
+    private var useLogoLoader: Boolean? = false,
+    private var theme: HashMap<String, String>? = null
+)
+```
+
+</TabItem>
+</Tabs>
+
+<WhiteLabelShowcase />
+
+### Example
+
+```kotlin title="Usage"
+web3Auth = Web3Auth (
+  Web3AuthOptions (
+    context = this,
+    clientId = getString (R.string.web3auth_project_id),
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse ("{YOUR_APP_PACKAGE_NAME}://auth"),
+    // Optional whitelabel object
+    // focus-start
+    whiteLabel = WhiteLabelData (
+      appName = "Web3Auth Sample App",
+      appUrl = null,
+      logoLight = null,
+      logoDark = null,
+      defaultLanguage = Language.EN, // EN, DE, JA, KO, ZH, ES, FR, PT, NL
+      ThemeModes = ThemeModes.DARK, // LIGHT, DARK, AUTO
+      useLogoLoader = true,
+      theme = hashMapOf (
+        "primary" to "#229954"
+      )
+    )
+    // focus-end
+  )
+)
+```

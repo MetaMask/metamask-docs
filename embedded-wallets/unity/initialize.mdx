@@ -1,0 +1,170 @@
+---
+title: Initializing PnP Unity SDK
+sidebar_label: Initialize
+description: "Web3Auth PnP Unity SDK - Initialize | Documentation - Web3Auth"
+---
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+import web3authCS from "@site/static/img/unity/web3authCS.png";
+
+After installation, the next step in using Web3Auth is to initialize the SDK.
+
+However, initialization is a two-step process:
+
+1. [Creating a Web3Auth instance](#create-web3auth-instance)
+2. [Setting up Web3Auth options](#setting-up-web3auth-options)
+
+Please note that these are the most critical steps where you will need to pass different parameters
+according to your project's preference. Additionally, you must configure whitelabeling and custom
+authentication within this step if you want to customize your Web3Auth instance.
+
+## Create Web3Auth Instance
+
+Attach a `Web3Auth.cs` script to your game object where you want to write your authentication code.
+
+:::tip
+
+You can refer to following sample file on how your boilerplate script should look like:
+
+```cs title="/Assets/Web3Auth.cs"
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using Newtonsoft.Json;
+
+public class Web3Auth : MonoBehaviour
+{
+  // Start is called before the first frame update
+  void Start() {}
+  public void login() {}
+  private void onLogin(Web3AuthResponse response) {}
+  public void logout() {}
+  private void onLogout() {}
+}
+```
+
+:::
+
+Within your script, import the `Web3Auth` component in your class.
+
+```cs
+Web3Auth web3Auth;
+```
+
+Next, you need to create an instance within your `Start()` function by creating an instance of the
+component you just imported.
+
+```cs
+web3Auth = GetComponent<Web3Auth>();
+```
+
+## Setting up Web3Auth Options
+
+After instantiation, within your `Start()` function, set up the Web3Auth Options as follows:
+
+```cs
+web3Auth.setOptions(new Web3AuthOptions(){
+
+});
+```
+
+### Arguments
+
+#### `Web3AuthOptions`
+
+The Web3Auth Constructor takes a class `Web3AuthOptions` as input. This class has the following
+arguments.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter         | Description                                                                                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`        | Your Web3Auth Client ID. You can get it from the Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `string` |
+| `network`         | Defines the Web3Auth Network. It's a mandatory field of type Network.                                                                                                |
+| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type `Uri`.                                     |
+| `whiteLabel?`     | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabelData` as a value.                 |
+| `loginConfig?`    | Login config for the custom verifiers. It takes `Dictionary<string, LoginConfigItem>` as a value.                                                                    |
+| `useCoreKitKey?`  | Use CoreKit Key to get core kit key. It's an optional field with default value as `false`.                                                                           |
+| `chainNamespace?` | Chain Namespace [`EIP155` and `SOLANA`]. It takes `Web3Auth.ChainNamespace` as a value.                                                                              |
+| `mfaSettings?`    | Allows developers to configure the MFA settings for authentication. It takes `MfaSettings` as a value.                                                               |
+| `sessionTime?`    | Session time in seconds. It's an optional field with default value as `86400`.                                                                                       |
+| `chainConfig?`    | Chain Config for the custom chain. It takes `ChainConfig` as a value. Useful for using Wallet Services.                                                              |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```cs
+class Web3AuthOptions {
+  string clientId;  // Your Web3Auth project ID
+  public Web3Auth.Network network;    // Network to run Web3Auth, either SAPPHIRE_MAINNET, SAPPHIRE_DEVNET, MAINNET, TESTNET, AQUA or CYAN
+  public Uri redirectUrl;  // URL that Web3Auth will redirect API responses
+  public WhiteLabelData? whiteLabel;  // Optional param to configure look
+  public Dictionary<string, LoginConfigItem> loginConfig;  // Optional
+  public bool? useCoreKitKey ; // Optional
+  public Web3Auth.ChainNamespace? chainNamespace; // Optional, default is "EIP155"
+  public MfaSettings? mfaSettings; // Optional
+  public int sessionTime { get; set; } = 86400; // Optional
+  public ChainConfig? chainConfig { get; set; } // Optional
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+:::tip
+
+You can also configure your `client_id`, `redirect_url` and `network` within the script settings in
+the Unity Editor. It will look something like this:
+
+<img src={web3authCS} style={{ alignSelf: "center", maxWidth: "100%" }} />
+
+:::
+
+## Example
+
+```cs
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using Newtonsoft.Json;
+
+public class Web3custom : MonoBehaviour
+{
+  Web3Auth web3Auth;
+
+  // Start is called before the first frame update
+  void Start()
+  {
+    web3Auth = GetComponent<Web3Auth>();
+    web3Auth.setOptions(new Web3AuthOptions()
+    {
+      redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+      clientId = "BAwFgL-r7wzQKmtcdiz2uHJKNZdK7gzEf2q-m55xfzSZOw8jLOyIi4AVvvzaEQO5nv2dFLEmf9LBkF8kaq3aErg",
+      network = Web3Auth.Network.TESTNET,
+    });
+    web3Auth.onLogin += onLogin;
+    web3Auth.onLogout += onLogout;
+  }
+  public void login() {}
+  private void onLogin(Web3AuthResponse response) {}
+  public void logout() {}
+  private void onLogout() {}
+}
+
+```

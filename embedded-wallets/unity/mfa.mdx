@@ -1,0 +1,168 @@
+---
+title: Multi Factor Authentication in PnP Unity SDK
+sidebar_label: Multi Factor Authentication
+description: 'Web3Auth PnP Unity SDK - Multi Factor Authentication | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import MFAMinimumPlan from '../_common/_scale_plan_note.mdx'
+
+MFA is an extra layer of protection that verifies your identity when accessing your account. To ensure ownership, you must provide two or more different backup factors. You have the option to choose from the device, social, backup factor (seed phrase), and password factors to guarantee access to your Web3 account. Once you create a recovery factor, MFA is enabled, and your keys are divided into three shares for off-chain multi-sig, making the key self-custodial. With backup factors, you can easily recover your account if you lose access to your original device or help login into a new device.
+
+For a dApp, we provide several options to set up Multi-Factor Authentication. You can customize the MFA screen by setting the `mfaLevel` argument. You can enable or disable a backup factor and change their order. Currently, there are four values for `mfaLevel`:
+
+- `default`: presents the MFA screen every third login
+- `optional`: presents the MFA screen on every login, but you can skip it
+- `mandatory`: make it mandatory to set up MFA after login
+- `none`: skips the MFA setup screen
+
+:::caution Note
+
+If you are using default verifiers, your users may have set up MFA on other dApps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dApps. This is because MFA cannot be turned off once it is enabled.
+
+:::
+
+We offer the following backup factors under `mfaSettings`:
+
+- `deviceShareFactor`,
+- `backUpShareFactor`,
+- `socialBackupFactor`,
+- `passwordFactor`,
+- `passkeysFactor`, and
+- `authenticatorFactor`.
+
+Choose the best options that suit your needs to ensure a safe and secure Web3 experience.
+
+<MFAMinimumPlan />
+
+## Arguments
+
+### `MFALevel`
+
+```cs
+public enum MFALevel
+{
+    [EnumMember(Value = "default")]
+    DEFAULT,
+    [EnumMember(Value = "optional")]
+    OPTIONAL,
+    [EnumMember(Value = "mandatory")]
+    MANDATORY,
+    [EnumMember(Value = "none")]
+    NONE
+}
+```
+
+```cs title="Usage"
+public void login()
+{
+    var selectedProvider = Provider.GOOGLE;
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider,
+		mfaLevel = MFALevel.MANDATORY
+    };
+    web3Auth.login(options);
+}
+```
+
+### `MFASettings`
+
+:::note
+
+This is a paid feature and the minimum [pricing plan](https://web3auth.io/pricing.html) to use this SDK in a production environment is the **SCALE Plan**. You can use this feature for free in the `sapphire_devnet`.
+
+:::
+
+`MfaSetting`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter    | Description                                                                     |
+| ------------ | ------------------------------------------------------------------------------- |
+| `enable`     | Enable/Disable MFA. It accepts `bool` as a value.                               |
+| `priority?`  | Priority of MFA. It accepts `int` as a value, where valid range is from 1 to 4. |
+| `mandatory?` | Mandatory/Optional MFA. It acccepts `bool` as a value.                          |
+
+</TabItem>
+<TabItem value="class">
+
+```cs
+public class MfaSetting
+{
+    public bool enable { get; set; }
+    public int? priority { get; set; }
+    public bool? mandatory { get; set; }
+
+    // Constructor
+    public MfaSetting(bool enable, int? priority, bool? mandatory)
+    {
+        this.enable = enable;
+        this.priority = priority;
+        this.mandatory = mandatory;
+    }
+}
+```
+
+</TabItem>
+</Tabs>
+
+```cs title="Usage"
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using Newtonsoft.Json;
+
+public class Web3custom : MonoBehaviour
+{
+  Web3Auth web3Auth;
+
+  // Start is called before the first frame update
+  void Start()
+  {
+    web3Auth = GetComponent<Web3Auth>();
+    web3Auth.setOptions(new Web3AuthOptions()
+    {
+      redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+      clientId = "BAwFgL-r7wzQKmtcdiz2uHJKNZdK7gzEf2q-m55xfzSZOw8jLOyIi4AVvvzaEQO5nv2dFLEmf9LBkF8kaq3aErg",
+      network = Web3Auth.Network.TESTNET,
+      mfaSettings = new MfaSettings(
+        new MfaSetting(true, 1, true),
+        new MfaSetting(true, 1, true),
+        new MfaSetting(true, 1, false),
+        new MfaSetting(true, 1, true),
+        new MfaSetting(true, 1, true),
+        new MfaSetting(true, 1, true)
+      )
+    });
+    web3Auth.onLogin += onLogin;
+    web3Auth.onLogout += onLogout;
+  }
+  public void login() {}
+  private void onLogin(Web3AuthResponse response) {}
+  public void logout() {}
+  private void onLogout() {}
+}
+
+```
+
+:::note Note
+
+- At least two factors are mandatory when setting up the mfaSettings.
+- If you set `mandatory: true` for all factors, the user must set up all four factors.
+- If you set `mandatory: false` for all factors, the user can skip setting up MFA. But at least two factors are mandatory.
+- If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can skip the optional factors. But, the user must set up at least two factors.
+- The `priority` field is used to set the order of the factors. The factor with the lowest priority will be the first factor to be set up. The factor with the highest priority will be the last factor to be set up.
+
+:::

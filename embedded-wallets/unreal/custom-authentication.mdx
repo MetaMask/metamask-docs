@@ -1,0 +1,190 @@
+---
+title: Using Custom Authentication in PnP Unreal Engine SDK
+sidebar_label: Custom Authentication
+description: 'Web3Auth PnP Unreal Engine SDK - Using Custom Authentication | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import GrowthPlanNote from '../_common/_growth_plan_note.mdx'
+
+Custom Authentication is a way to authenticate users with your own custom authentication service. For example, while authenticating with Google, you have the ability to use your own Google Client ID and Dashboard to authenticate users directly. To login using your own custom JWT issuers like Auth0, AWS Cognito, or Firebase, you can add the your configuration to the `loginConfig` field of the `Web3AuthOptions` class.
+
+The `loginConfig` field is a key value map. The key should be one of the `Web3AuthProvider` in its string form, and the value should be a `LoginConfigItem` struct instance.
+
+First, configure your own verifier in the Web3Auth Dashboard to use custom authentication.
+
+<GrowthPlanNote />
+
+:::tip
+
+Check out how to create [Custom Verifier](/authentication) on Web3Auth Dashboard.
+
+:::
+
+Then, you should specify the details of your verifier in the `LoginConfigItem` struct, the details of this struct are as follows.
+
+## Arguments
+
+### `LoginConfigItem`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `verifier` | The name of the verifier that you have registered on the Web3Auth Dashboard. It's a mandatory field, and accepts `FString` as a value. |
+| `typeOfLogin` | Type of login of this verifier, this value will affect the login flow that is adapted. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should be providing your own JWT token, no sign-in flow will be presented. It's a mandatory field, and accepts `FTypeOfLogin` as a value. |
+| `clientId` | Client id provided by your login provider used for custom verifier. e.g. Google's Client ID or Web3Auth's client Id if using 'jwt' as TypeOfLogin. It's a mandatory field, and accepts `FString` as a value. |
+| `name?` | Display name for the verifier. If null, the default name is used. It accepts `FString` as a value. |
+| `description?` | Description for the button. If provided, it renders as a full length button. else, icon button. It accepts `FString` as a value. |
+| `verifierSubIdentifier?` | The field in JWT token which maps to verifier id. Please make sure you selected correct JWT verifier id in the developer dashboard. It accepts `FString` as a value. |
+| `logoHover?` | Logo to be shown on mouse hover. It accepts `FString` as a value. |
+| `logoLight?` | Light logo for dark background. It accepts `FString` as a value. |
+| `logoDark?` | Dark logo for light background. It accepts `FString` as a value. |
+| `mainOption?` | Show login button on the main list. It accepts `bool` as a value. Default value is false. |
+| `showOnModal?` | Whether to show the login button on modal or not. Default value is true. |
+| `showOnDesktop?` | Whether to show the login button on desktop. Default value is true. |
+| `showOnMobile?` | Whether to show the login button on mobile. Default value is true. |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```cs
+USTRUCT(BlueprintType)
+struct FLoginConfigItem
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString verifier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString typeOfLogin;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString description;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString clientId;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString verifierSubIdentifier;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString logoHover;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString logoLight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString logoDark;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool mainOption;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool showOnModal;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool showOnDesktop;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool showOnMobile;
+
+	FLoginConfigItem() {};
+
+	bool operator== (const FLoginConfigItem& other) {
+		return other.clientId == clientId;
+	}
+
+};
+```
+
+</TabItem>
+
+</Tabs>
+
+### `TypeOfLogin`
+
+```c
+UENUM(BlueprintType)
+enum class FTypeOfLogin : uint8
+{
+	GOOGLE,
+	FACEBOOK,
+	REDDIT,
+	DISCORD,
+	TWITCH,
+	APPLE,
+	LINE,
+	GITHUB,
+	KAKAO,
+	LINKEDIN,
+	TWITTER,
+	WEIBO,
+	WECHAT,
+	EMAIL_PASSWORDLESS,
+	EMAIL_PASSWORD,
+	JWT
+};
+```
+
+## Usage
+
+![Unreal Blueprint Login Options](/img/unreal/provider-options.png)
+
+<Tabs
+  defaultValue="google"
+  values={[
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
+    { label: "Email Passwordless", value: "email_passwordless" },
+    { label: "Auth0", value: "auth0" },
+  ]}
+>
+
+<TabItem value="google">
+
+![Unreal Blueprint Google Custom Login](/img/unreal/google-custom-auth.png)
+
+</TabItem>
+
+<TabItem value="facebook">
+
+![Unreal Blueprint Facebook Custom Login](/img/unreal/fb-custom-auth.png)
+
+</TabItem>
+
+<TabItem value="email_passwordless">
+
+![Unreal Blueprint Email Passwordless Custom Login](/img/unreal/email-passwordless.png)
+
+</TabItem>
+
+<TabItem value="auth0">
+
+![Unreal Blueprint Auth0 Custom Login](/img/unreal/auth0-login-config.png) ![Unreal Blueprint Auth0 Extralogin option](/img/unreal/extraloginoption-auth0.png)
+
+</TabItem>
+
+</Tabs>
+
+:::note
+
+- dApp Share is only returned for the Custom Authentication verifiers.
+- Also, 2FA should be enabled for the account using it.
+
+  Use `mfaLevel = MFALevel.MANDATORY` in the `LoginParams` during login. See **[MFA](/docs/sdk/gaming/unreal/mfa)** for more details.
+
+:::
