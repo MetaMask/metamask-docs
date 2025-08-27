@@ -23,7 +23,7 @@ You can create a Hybrid smart account with the following types of signatories.
 
 ### Create a Hybrid smart account with an Account signatory
 
-Use [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount) to create a Hybrid smart account with a signatory from a private key:
+Use [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount), and Viem's [`privateKeyToAccount` and `generatePrivateKey`](https://viem.sh/docs/accounts/local/privateKeyToAccount), to create a Hybrid smart account with a signatory from a randomly generated private key:
 
 <Tabs>
 <TabItem value="example.ts">
@@ -415,5 +415,5 @@ With a MetaMask smart account, you can perform the following functions:
 
 - In conjunction with [Viem Account Abstraction clients](../configure.md), deploy the smart account
   and [send user operations](send-user-operation.md).
-- [Create delegations](../delegation/execute-on-users-behalf.md) that can be used to grant specific rights and permissions to other accounts.
+- [Create delegations](../delegation/execute-on-smart-accounts-behalf.md) that can be used to grant specific rights and permissions to other accounts.
   Smart accounts that create delegations are called *delegator accounts*.

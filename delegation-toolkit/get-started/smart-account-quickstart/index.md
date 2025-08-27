@@ -94,7 +94,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 ## Next steps
 
-- To grant specific permissions to other accounts from your smart account, [create a delegation](../../guides/delegation/execute-on-users-behalf.md).
+- To grant specific permissions to other accounts from your smart account, [create a delegation](../../guides/delegation/execute-on-smart-accounts-behalf.md).
 - This quickstart example uses a Hybrid smart account.
   You can also [configure other smart account types](../../guides/smart-accounts/create-smart-account.md).
 - To upgrade an EOA to a smart account, see the [EIP-7702 quickstart](eip7702.md).

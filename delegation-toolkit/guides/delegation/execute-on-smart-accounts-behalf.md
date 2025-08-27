@@ -1,13 +1,13 @@
 ---
-description: Use delegations to perform executions on a user's behalf.
+description: Use delegations to perform executions on a smart account's behalf.
 sidebar_position: 1
-sidebar_label: Execute on a user's behalf
+sidebar_label: Execute on a smart account's behalf
 ---
 
 import Tabs from "@theme/Tabs"; 
 import TabItem from "@theme/TabItem";
 
-# Perform executions on a user's behalf
+# Perform executions on a smart account's behalf
 
 [Delegation](../../concepts/delegation/index.md) is the ability for a [MetaMask smart account](../../concepts/smart-accounts.md) to grant permission to another account to perform executions on its behalf.
 
@@ -54,8 +54,8 @@ const bundlerClient = createBundlerClient({
 Create an account to represent Alice, the delegator who will create a delegation.
 The delegator must be a MetaMask smart account; use the toolkit's [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) method to create the delegator account.
 
-This example configures a Hybrid smart account,
-which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers:
+A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers.
+This examples configures a [Hybrid smart account with an Account signatory](../smart-accounts/create-smart-account.md#create-a-hybrid-smart-account-with-an-account-signatory):
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit"
@@ -121,8 +121,7 @@ export const delegateWalletClient = createWalletClient({
 ### 5. Create a delegation
 
 Create a [root delegation](../../concepts/delegation/index.md#delegation-types) from Alice to Bob.
-A root delegation is a delegation that doesn't derive its authority from another delegation.
-Alice is delegating her own authority away, as opposed to *redelegating* permissions she received from a previous delegation.
+With a root delegation, Alice is delegating her own authority away, as opposed to *redelegating* permissions she received from a previous delegation.
 
 Use the toolkit's [`createDelegation`](../../reference/api/delegation.md#createdelegation) method to create a root delegation.
 This example passes an empty `caveats` array, which means Bob can perform any action on Alice's behalf. We recommend [restricting the delegation](restrict-delegation.md) by adding caveat enforcers.
@@ -162,7 +161,9 @@ const signedDelegation = {
 ### 7. Redeem the delegation
 
 Bob can now redeem the delegation. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on Alice's behalf.
+
 To prepare the calldata for the redeem transaction, use the [`redeemDelegations`](../../reference/api/delegation.md#redeemdelegations) method from `DelegationManager`.
+Since Bob is redeeming a single delegation chain, use the [`SINGLE_DEFAULT_MODE`](../../concepts/delegation/index.md#execution-modes) execution mode.
 
 Bob can redeem the delegation by submitting a user operation if his account is a smart account, or a regular transaction if his account is an EOA:
 
@@ -226,8 +227,3 @@ const transactionHash = await delegateWalletClient.sendTransaction({
 
 </TabItem>
 </Tabs>
-
-:::note
-`SINGLE_DEFAULT_MODE` is the default execution mode.
-Learn about the different [execution modes](../../concepts/delegation/index.md#execution-modes).
-:::
