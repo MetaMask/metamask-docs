@@ -33,7 +33,7 @@ If your Snap only uses [open permissions](#open-permissions), anyone can install
 
   The audit must cover the Snap source code that is to run within the Snaps system, and any modules used for key management. You must provide the commit that was audited and the commit that has any fixes documented in the audit report.
 
-  :::info A list of approved third-party auditors and details about the audit process are available on the [MetaMask Snaps Builder Engagement Program](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3). :::
+  :::info A list of approved third-party auditors and details about the audit process are available on the [MetaMask Snaps Wiki](https://github.com/MetaMask/snaps/wiki/Audits). :::
 
 ## Steps
 
@@ -59,7 +59,7 @@ Fill out the [MetaMask Snaps Directory Information form](https://go.metamask.io/
 
   :::note The audit report will be made public. You can ask your auditor to publish the report on their website and provide the link to us. :::
 
-- **Customer support details** - [Customer support information](https://consensys.notion.site/Providing-User-Support-Information-cff79a7d896e4da6a2f8a17ce074e585) to ensure a smooth user experience for your Snap. This allows MetaMask to escalate any issues that a user might encounter with your Snap. The escalation contact will be kept confidential within MetaMask, and the rest of the information will be public. You must provide an escalation contact and at least one other customer support item.
+- **Customer support details** - [Customer support information](https://github.com/MetaMask/snaps/wiki/User-Support-Information) to ensure a smooth user experience for your Snap. This allows MetaMask to escalate any issues that a user might encounter with your Snap. The escalation contact will be kept confidential within MetaMask, and the rest of the information will be public. You must provide an escalation contact and at least one other customer support item.
 
 - **Images** - Screenshots or promotional images to help users get an idea of what your Snap can do. Here's your opportunity to provide compelling previews of your Snap!
 
