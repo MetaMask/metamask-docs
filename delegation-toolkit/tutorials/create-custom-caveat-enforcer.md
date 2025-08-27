@@ -10,9 +10,9 @@ import TabItem from "@theme/TabItem";
 
 This tutorial walks you through creating a custom [caveat enforcer](../concepts/caveat-enforcers.md) and applying it to a [delegation](../concepts/delegation.md).
 
-The MetaMask Delegation Toolkit provides some [out-of-the-box caveat enforcers](../reference/caveats.md) that define rules and restrictions for common use cases.
-For more granular or custom control, you can create custom caveat enforcers from scratch.
-This tutorial walks you through creating and applying a caveat enforcer that only allows a delegation to be redeemed after a specific timestamp.
+The MetaMask Delegation Toolkit includes [out-of-the-box caveat enforcers](../reference/caveats.md) that define rules and restrictions for common use cases.
+For more specific control or other use cases, you can create custom caveat enforcers.
+In this tutorial, you'll create and apply a caveat enforcer that only allows a delegation to be redeemed after a specific timestamp.
 
 ## Prerequisites
 
@@ -87,11 +87,11 @@ The Forge CLI will display the address of the deployed caveat enforcer.
 
 ### 3. Apply the caveat enforcer
 
-Specify the address where your `AfterTimestampEnforcer.sol` contract is deployed, add it to the caveat builder, and create a delegation.
+Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the caveat builder, and create a delegation.
 Learn more about [applying caveats to a delegation](../guides/create-delegation/restrict-delegation.md).
 
 The following code snippet uses the custom caveat enforcer to create a delegation granting
-an allowance of 1,000,000 wei that can only be spent after one hour from when the delegation is created:
+a 1,000,000 wei allowance that becomes spendable one hour after it is created:
 
 <Tabs>
 <TabItem value="delegation.ts">
@@ -106,7 +106,7 @@ import { delegatorSmartAccount } from "./config.ts";
 
 const environment = delegatorSmartAccount.environment;
 
-// Replace this with the address where your AfterTimestampEnforcer.sol contract is deployed.
+// Replace this with the address of the deployed AfterTimestampEnforcer.sol contract.
 const afterTimestampEnforcer = "0x22Ae4c4919C3aB4B5FC309713Bf707569B74876F";
 
 const caveatBuilder = createCaveatBuilder(environment);

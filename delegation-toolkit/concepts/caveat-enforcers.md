@@ -152,7 +152,7 @@ When designing delegations with caveats, consider these best practices:
 
 ## Available caveat enforcers
 
-The Delegation Toolkit provides [many out-of-the-box caveat enforcers](../reference/caveats.md)
+The Delegation Toolkit provides [out-of-the-box caveat enforcers](../reference/caveats.md)
 for common restriction patterns, including:
 
 - Limiting target addresses and methods.
@@ -160,7 +160,7 @@ for common restriction patterns, including:
 - Restricting token transfers and approvals.
 - Limiting execution frequency.
 
-For more complex scenarios, you can also [create custom caveat enforcers](../guides/create-delegation/create-custom-caveat-enforcer.md) by implementing the `ICaveatEnforcer` interface.
+For other restriction patterns, you can also [create custom caveat enforcers](../tutorials/create-custom-caveat-enforcer.md) by implementing the `ICaveatEnforcer` interface.
 
 ## Attenuating authority with redelegations
 
