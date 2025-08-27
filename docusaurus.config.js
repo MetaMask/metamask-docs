@@ -264,7 +264,17 @@ const config = {
     [
       '@docusaurus/plugin-google-tag-manager',
       {
-        containerId: 'GTM-5FGPLC2Q',
+        // TODO: change to GTM-5FGPLC2Q. Below is test container.
+        containerId: 'GTM-MTBMB3DL',
+      },
+    ],
+
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        // TODO: change to G-E8PSQ0E1L7. Below is test measurement ID.
+        trackingID: process.env.GA4_MEASUREMENT_ID || 'G-3R2ZC64RNY',
+        anonymizeIP: true,
       },
     ],
   ],
