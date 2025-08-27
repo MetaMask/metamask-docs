@@ -21,10 +21,10 @@ This tutorial walks you through adding a passkey signer to an already deployed s
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../get-started/install)
-- [Install Ox SDK.](https://oxlib.sh/#installation)
-- [Configure the Delegation Toolkit.](../guides/configure)
-- [Create and deploy a Hybrid smart account.](../guides/smart-accounts/create-smart-account)
+- [Install and set up the Delegation Toolkit](../get-started/install) in your project.
+- [Install Ox SDK](https://oxlib.sh/#installation).
+- [Configure the Delegation Toolkit](../guides/configure).
+- [Create and deploy a Hybrid smart account,](../guides/smart-accounts/create-smart-account) with a signatory from a private key.
 
 ## Steps
 
@@ -59,7 +59,7 @@ const bundlerClient = createBundlerClient({
 
 ### 3. Create a Hybrid smart account
 
-Create a [Hybrid smart account](../guides/smart-accounts/create-smart-account.md#create-a-hybrid-smart-account) with a signatory from a private key.
+Configure the same [Hybrid smart account](../guides/smart-accounts/create-smart-account.md#create-a-hybrid-smart-account) that you created and deployed as a [prerequisite](#prerequisites).
 The Hybrid implementation supports adding additional passkey signers.
 
 ```typescript
