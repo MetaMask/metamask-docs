@@ -43,15 +43,15 @@ See [Create a smart account](../guides/smart-accounts/create-smart-account.md) t
 
 ### Hybrid smart account
 
-The Hybrid smart account is a flexible implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers.
+The Hybrid smart account is a flexible implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 You can configure any of these signers as the signatory, and use them to sign any data, including user operations, on behalf of the smart account.
 
 This type is referenced in the toolkit as `Implementation.Hybrid`.
 
 ### Multisig smart account
 
-The Multisig smart account is an implementation that supports multiple signers with a configurable threshold for valid signatures, allowing for enhanced security and flexibility in account management.
-The signatory must have at least as many signers include as the threshold is configured for the account.
+The Multisig smart account is an implementation that supports multiple signers with a configurable threshold, allowing for enhanced security and flexibility in account management.
+A valid signature requires signatures from at least the number of signers specified by the threshold.
 
 This type is referenced in the toolkit as `Implementation.Multisig`.
 
