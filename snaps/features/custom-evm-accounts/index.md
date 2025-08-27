@@ -5,7 +5,9 @@ sidebar_position: 2
 
 # Custom EVM accounts
 
-:::caution MetaMask is not currently accepting allowlisting requests for Custom EVM Account Snaps. :::
+::: caution 
+MetaMask is not currently accepting allowlisting requests for Custom EVM Account Snaps. 
+:::
 
 The Keyring API integrates custom EVM accounts inside MetaMask. You can use the Keyring API to display custom accounts, such as multi-party computation (MPC) accounts and [ERC-4337 accounts](#account-abstraction-erc-4337), alongside regular MetaMask accounts in the user interface:
 
