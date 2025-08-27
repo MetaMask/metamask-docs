@@ -544,9 +544,9 @@ All Hybrid deploy parameters are required:
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `owner` | `Hex` | The owner's account address. The owner can be the zero address, indicating that there is no owner configured. |
-| `p256KeyIds` | `Hex[]` | An array of key identifiers for P256 signers. |
-| `p256XValues` | `bigint[]` | An array of public key x-values for P256 signers. |
-| `p256YValues` | `bigint[]` | An array of public key y-values for P256 signers. |
+| `p256KeyIds` | `Hex[]` | An array of key identifiers for passkey signers. |
+| `p256XValues` | `bigint[]` | An array of public key x-values for passkey signers. |
+| `p256YValues` | `bigint[]` | An array of public key y-values for passkey signers. |
 
 #### Example
 
