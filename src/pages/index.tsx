@@ -22,7 +22,7 @@ export default function Home(): JSX.Element {
         cards={[
           {
             title: 'Quickstart',
-            description: 'Get up and running in under 10 minutes with the quickstart guides.',
+            description: 'Choose a quickstart guide that matches your project goals.',
             href: '/quickstart',
             buttonIcon: 'arrow-right',
           },
