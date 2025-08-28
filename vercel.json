@@ -732,15 +732,15 @@
     },
     {
       "source": "/delegation-toolkit/development/how-to/create-delegation/",
-      "destination": "/delegation-toolkit/development/guides/create-delegation/"
+      "destination": "/delegation-toolkit/development/guides/delegation/execute-on-smart-accounts-behalf/"
     },
     {
       "source": "/delegation-toolkit/development/how-to/create-delegation/:path*/",
-      "destination": "/delegation-toolkit/development/guides/create-delegation/:path*/"
+      "destination": "/delegation-toolkit/development/guides/delegation/:path*/"
     },
     {
       "source": "/delegation-toolkit/development/how-to/redeem-delegation/",
-      "destination": "/delegation-toolkit/development/guides/redeem-delegation/"
+      "destination": "/delegation-toolkit/development/guides/delegation/execute-on-smart-accounts-behalf/"
     },
     {
       "source": "/delegation-toolkit/development/get-started/quickstart/",
@@ -753,6 +753,10 @@
     {
       "source": "/delegation-toolkit/development/get-started/cli-quickstart/",
       "destination": "/delegation-toolkit/development/get-started/use-the-cli/"
+    },
+    {
+      "source": "/delegation-toolkit/development/concepts/caveat-enforcers/",
+      "destination": "/delegation-toolkit/development/concepts/delegation/caveat-enforcers/"
     },
     {
       "source": "/developer-tools/faucet/sepolia/",
