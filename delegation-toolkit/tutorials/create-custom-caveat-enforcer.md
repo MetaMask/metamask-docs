@@ -8,7 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # Create a custom caveat enforcer
 
-This tutorial walks you through creating a custom [caveat enforcer](../concepts/caveat-enforcers.md) and applying it to a [delegation](../concepts/delegation.md).
+This tutorial walks you through creating a custom [caveat enforcer](../concepts/delegation/caveat-enforcers.md) and applying it to a [delegation](../concepts/delegation/index.md).
 
 The MetaMask Delegation Toolkit includes [out-of-the-box caveat enforcers](../reference/caveats.md) that define rules and restrictions for common use cases.
 For more specific control or other use cases, you can create custom caveat enforcers.
@@ -16,8 +16,8 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](../../get-started/install.md) in your project.
-- [Configure the Delegation Toolkit.](../configure.md)
+- [Install and set up the Delegation Toolkit](../get-started/install.md) in your project.
+- [Configure the Delegation Toolkit.](../guides/configure.md)
 - [Install Foundry and Forge.](https://getfoundry.sh/introduction/installation)
 - Get an [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 - Have a MetaMask account with some Sepolia ETH to deploy your contract.
@@ -88,7 +88,7 @@ The Forge CLI will display the address of the deployed caveat enforcer.
 ### 3. Apply the caveat enforcer
 
 Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the caveat builder, and create a delegation.
-Learn more about [applying caveats to a delegation](../guides/create-delegation/restrict-delegation.md).
+Learn more about [applying caveats to a delegation](../guides/delegation/restrict-delegation.md).
 
 The following code snippet uses the custom caveat enforcer to create a delegation granting
 a 1,000,000 wei allowance that becomes spendable one hour after it is created:
@@ -162,4 +162,4 @@ export const delegatorSmartAccount = await toMetaMaskSmartAccount({
 You've successfully created, deployed, and applied a custom caveat enforcer!
 
 For production use cases, you might need to add additional caveats to restrict the delegation further.
-Learn more about [caveat enforcers](../concepts/caveat-enforcers.md).
+Learn more about [caveat enforcers](../concepts/delegation/caveat-enforcers.md).
