@@ -1,12 +1,12 @@
 ---
 description: Learn about caveat enforcers and how they restrict delegations.
-sidebar_position: 4
+sidebar_position: 2
 ---
 
 # Caveat enforcers
 
 The MetaMask Delegation Toolkit provides *caveat enforcers*, which are smart contracts that implement rules and restrictions (*caveats*) on delegations.
-They serve as the underlying mechanism that enables conditional execution within the [Delegation Framework](delegation.md#delegation-framework).
+They serve as the underlying mechanism that enables conditional execution within the [Delegation Framework](index.md#delegation-framework).
 
 A caveat enforcer acts as a gate that validates whether a delegation can be used for a particular execution. When a delegate attempts to execute an action on behalf of a delegator, each caveat enforcer specified in the delegation evaluates whether the execution meets its defined criteria.
 
@@ -119,7 +119,7 @@ This "all-or-nothing" approach ensures that delegations only execute exactly as 
 
 ## Caveat builder
 
-While caveat enforcers operate at the smart contract level, most developers interact with them through the [`CaveatBuilder`](../guides/create-delegation/restrict-delegation.md) interface in the MetaMask Delegation Toolkit.
+While caveat enforcers operate at the smart contract level, most developers interact with them through the [`CaveatBuilder`](../../guides/delegation/restrict-delegation.md) interface in the MetaMask Delegation Toolkit.
 
 The `CaveatBuilder` provides a developer-friendly TypeScript API that:
 
@@ -127,7 +127,7 @@ The `CaveatBuilder` provides a developer-friendly TypeScript API that:
 - Provides type-checking and validation for caveat parameters.
 - Handles the creation of the `caveats` array needed when creating a delegation.
 
-Each [caveat type](../reference/caveats.md) in the `CaveatBuilder`
+Each [caveat type](../../reference/caveats.md) in the `CaveatBuilder`
 corresponds to a specific caveat enforcer contract. For example, when you use:
 
 ```typescript
@@ -135,7 +135,7 @@ caveatBuilder.addCaveat("allowedTargets", ["0xc11F3a8E5C7D16b75c9E2F60d26f5321C6
 ```
 
 The builder is creating a caveat that references the
-[`AllowedTargetsEnforcer`](../reference/caveats.md#allowedtargets) contract address and
+[`AllowedTargetsEnforcer`](../../reference/caveats.md#allowedtargets) contract address and
 properly encodes the provided addresses as terms for that enforcer.
 
 ## Caveat enforcer best practices
@@ -145,14 +145,14 @@ When designing delegations with caveats, consider these best practices:
 - **Combine caveat enforcers appropriately** - Use multiple caveat enforcers to create comprehensive restrictions.
    
 - **Consider caveat enforcer order** - When using caveat enforcers that modify external contract states, the order matters.
-  For example, using [`NativeTokenPaymentEnforcer`](../reference/caveats.md#nativetokenpayment) before
-  [`NativeBalanceChangeEnforcer`](../reference/caveats.md#nativebalancechange) might cause validation failures.
+  For example, using [`NativeTokenPaymentEnforcer`](../../reference/caveats.md#nativetokenpayment) before
+  [`NativeBalanceChangeEnforcer`](../../reference/caveats.md#nativebalancechange) might cause validation failures.
 
 - **Be careful with unbounded delegations** - Always include appropriate caveat enforcers to limit what a delegate can do.
 
 ## Available caveat enforcers
 
-The Delegation Toolkit provides [out-of-the-box caveat enforcers](../reference/caveats.md)
+The Delegation Toolkit provides [out-of-the-box caveat enforcers](../../reference/caveats.md)
 for common restriction patterns, including:
 
 - Limiting target addresses and methods.
@@ -160,11 +160,11 @@ for common restriction patterns, including:
 - Restricting token transfers and approvals.
 - Limiting execution frequency.
 
-For other restriction patterns, you can also [create custom caveat enforcers](../tutorials/create-custom-caveat-enforcer.md) by implementing the `ICaveatEnforcer` interface.
+For other restriction patterns, you can also [create custom caveat enforcers](../../tutorials/create-custom-caveat-enforcer.md) by implementing the `ICaveatEnforcer` interface.
 
 ## Attenuating authority with redelegations
 
-When [creating chains of delegations](../guides/create-delegation/index.md#create-a-redelegation), it's important to understand how authority flows and can be restricted.
+When creating chains of delegations via [redelegations](index.md#delegation-types), it's important to understand how authority flows and can be restricted.
 
 Caveats applied to a chain of delegations are *accumulative*—they stack on top of each other:
 
