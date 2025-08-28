@@ -9,7 +9,8 @@ import TabItem from "@theme/TabItem";
 # Create a smart account
 
 You can enable users to create a [MetaMask smart account](../../concepts/smart-accounts.md) directly in your dapp.
-This page provides examples of using [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) with Viem Core SDK to create different types of smart accounts with different types of signatories.
+This page provides examples of using [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) with Viem Core SDK to create different types of smart accounts with different signature schemes.
+An account's supported *signatories* can sign data on behalf of the smart account.
 
 ## Prerequisites
 
@@ -18,12 +19,12 @@ This page provides examples of using [`toMetaMaskSmartAccount`](../../reference/
 
 ## Create a Hybrid smart account
 
-A Hybrid smart account supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers.
+A Hybrid smart account supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 You can create a Hybrid smart account with the following types of signatories.
 
 ### Create a Hybrid smart account with an Account signatory
 
-Use [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount) to create a Hybrid smart account with a signatory from a private key:
+Use [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount), and Viem's [`privateKeyToAccount` and `generatePrivateKey`](https://viem.sh/docs/accounts/local/privateKeyToAccount), to create a Hybrid smart account with a signatory from a randomly generated private key:
 
 <Tabs>
 <TabItem value="example.ts">
@@ -138,9 +139,9 @@ export const walletClient = createWalletClient({
 </TabItem>
 </Tabs>
 
-### Create a Hybrid smart account with a WebAuthn (passkey) signatory
+### Create a Hybrid smart account with a passkey signatory
 
-Use [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`toWebAuthnAccount`](https://viem.sh/account-abstraction/accounts/webauthn) to create a Hybrid smart account with a WebAuthn Account signatory:
+Use [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`toWebAuthnAccount`](https://viem.sh/account-abstraction/accounts/webauthn) to create a Hybrid smart account with a passkey (WebAuthn) signatory:
 
 :::info Installation required
 To work with WebAuthn, install the [Ox SDK](https://oxlib.sh/).
@@ -289,7 +290,7 @@ A [Stateless 7702 smart account](../../concepts/smart-accounts.md#stateless-7702
 functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
 
 :::note
-This implementation does not handle the upgrade process; see the [EIP-7702 quickstart](../../get-started/eip7702-quickstart.md) to learn how to upgrade.
+This implementation does not handle the upgrade process; see the [EIP-7702 quickstart](../../get-started/smart-account-quickstart/eip7702.md) to learn how to upgrade.
 :::
 
 You can create a Stateless 7702 smart account with the following types of signatories.
@@ -415,5 +416,5 @@ With a MetaMask smart account, you can perform the following functions:
 
 - In conjunction with [Viem Account Abstraction clients](../configure.md), deploy the smart account
   and [send user operations](send-user-operation.md).
-- [Create delegations](../create-delegation/index.md) that can be used to grant specific rights and permissions to other accounts.
+- [Create delegations](../delegation/execute-on-smart-accounts-behalf.md) that can be used to grant specific rights and permissions to other accounts.
   Smart accounts that create delegations are called *delegator accounts*.

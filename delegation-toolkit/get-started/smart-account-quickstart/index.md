@@ -46,7 +46,7 @@ const bundlerClient = createBundlerClient({
 [Create a MetaMask smart account](../../guides/smart-accounts/create-smart-account.md) to send the first user operation.
 
 This example configures a Hybrid smart account,
-which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers:
+which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit";
@@ -94,8 +94,8 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 ## Next steps
 
-- To grant specific permissions to other accounts from your smart account, [create a delegation](../../guides/create-delegation/index.md).
+- To grant specific permissions to other accounts from your smart account, [create a delegation](../../guides/delegation/execute-on-smart-accounts-behalf.md).
 - This quickstart example uses a Hybrid smart account.
   You can also [configure other smart account types](../../guides/smart-accounts/create-smart-account.md).
-- To upgrade an EOA to a smart account, see the [EIP-7702 quickstart](eip7702-quickstart.md).
+- To upgrade an EOA to a smart account, see the [EIP-7702 quickstart](eip7702.md).
 - To quickly bootstrap a MetaMask Smart Accounts project, [use the CLI](../use-the-cli.md).
