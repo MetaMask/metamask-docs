@@ -9,7 +9,8 @@ import TabItem from "@theme/TabItem";
 # Create a smart account
 
 You can enable users to create a [MetaMask smart account](../../concepts/smart-accounts.md) directly in your dapp.
-This page provides examples of using [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) with Viem Core SDK to create different types of smart accounts with different types of signatories.
+This page provides examples of using [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) with Viem Core SDK to create different types of smart accounts with different signature schemes.
+An account's supported *signatories* can sign data on behalf of the smart account.
 
 ## Prerequisites
 
@@ -18,7 +19,7 @@ This page provides examples of using [`toMetaMaskSmartAccount`](../../reference/
 
 ## Create a Hybrid smart account
 
-A Hybrid smart account supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers.
+A Hybrid smart account supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 You can create a Hybrid smart account with the following types of signatories.
 
 ### Create a Hybrid smart account with an Account signatory
@@ -138,9 +139,9 @@ export const walletClient = createWalletClient({
 </TabItem>
 </Tabs>
 
-### Create a Hybrid smart account with a WebAuthn (passkey) signatory
+### Create a Hybrid smart account with a passkey signatory
 
-Use [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`toWebAuthnAccount`](https://viem.sh/account-abstraction/accounts/webauthn) to create a Hybrid smart account with a WebAuthn Account signatory:
+Use [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) and Viem's [`toWebAuthnAccount`](https://viem.sh/account-abstraction/accounts/webauthn) to create a Hybrid smart account with a passkey (WebAuthn) signatory:
 
 :::info Installation required
 To work with WebAuthn, install the [Ox SDK](https://oxlib.sh/).
