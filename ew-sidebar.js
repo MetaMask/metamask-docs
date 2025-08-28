@@ -1,4 +1,4 @@
- import {
+import {
   reactJS,
   vue,
   android,
@@ -122,7 +122,7 @@ function mobileTopNavButton(selectedSDK) {
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebar = {
-  sdk_pnp_react: [
+  sdk_react: [
     {
       type: "html",
       value: webTopNavButton(reactJS),
@@ -192,7 +192,7 @@ const sidebar = {
       href: "https://github.com/Web3Auth/web3auth-web/releases",
     },
   ],
-  sdk_pnp_vue: [
+  sdk_vue: [
     {
       type: "html",
       value: webTopNavButton(vue),
@@ -258,7 +258,7 @@ const sidebar = {
       href: "https://github.com/Web3Auth/web3auth-web/releases",
     },
   ],
-  sdk_pnp_js: [
+  sdk_js: [
     {
       type: "html",
       value: webTopNavButton(js),
@@ -311,7 +311,7 @@ const sidebar = {
       href: "https://github.com/Web3Auth/web3auth-web/releases",
     },
   ],
-  sdk_pnp_android: [
+  sdk_android: [
     {
       type: "html",
       value: mobileTopNavButton(android),
@@ -350,7 +350,7 @@ const sidebar = {
       href: "https://github.com/Web3Auth/web3auth-android-sdk/releases",
     },
   ],
-  sdk_pnp_ios: [
+  sdk_ios: [
     {
       type: "html",
       value: mobileTopNavButton(ios),
@@ -389,7 +389,7 @@ const sidebar = {
       href: "https://github.com/Web3Auth/web3auth-swift-sdk/releases",
     },
   ],
-  sdk_pnp_react_native: [
+  sdk_react_native: [
     {
       type: "html",
       value: mobileTopNavButton(reactnative),
@@ -436,7 +436,7 @@ const sidebar = {
       href: "https://github.com/Web3Auth/web3auth-react-native-sdk/releases",
     },
   ],
-  sdk_pnp_flutter: [
+  sdk_flutter: [
     {
       type: "html",
       value: mobileTopNavButton(flutter),
@@ -480,7 +480,7 @@ const sidebar = {
       href: "https://github.com/Web3Auth/web3auth-flutter-sdk/releases",
     },
   ],
-  sdk_pnp_unity: [
+  sdk_unity: [
     {
       type: "html",
       value: gamingTopNavButton(unity),
@@ -514,7 +514,7 @@ const sidebar = {
       href: "https://github.com/Web3Auth/web3auth-unity-sdk/releases",
     },
   ],
-  sdk_pnp_unreal: [
+  sdk_unreal: [
     {
       type: "html",
       value: gamingTopNavButton(unreal),
