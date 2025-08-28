@@ -1,5 +1,5 @@
 ---
-description: Follow this tutorial to create a custom caveat enforcer for a delegation.
+description: Follow this tutorial to create, deploy, and apply a custom caveat enforcer for a delegation.
 sidebar_position: 2
 ---
 
@@ -29,10 +29,12 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 
 ### 1. Create the caveat enforcer
 
-In your project's `src` directory, create a contract that extends the
+At the root of your project, create a `contracts` directory.
+In that directory, create a new contract named `AfterTimestampEnforcer.sol`.
+
+Add the following code to `AfterTimestampEnforcer.sol`, which creates a caveat enforcer that extends the
 [`ICaveatEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/interfaces/ICaveatEnforcer.sol)
-interface.
-The following `AfterTimestampEnforcer.sol` caveat enforcer only allows a delegation to be redeemed after a specific timestamp:
+interface and only allows a delegation to be redeemed after a specific timestamp:
 
 ```solidity title="AfterTimestampEnforcer.sol"
 // SPDX-License-Identifier: MIT
