@@ -87,8 +87,8 @@ The form requests information about your Snap, including the following:
   source code, and the npm package of your [published Snap](../how-to/publish-a-snap.md).
   If your Snap's source code is hosted on a different site, such as GitLab, you can link to that instead.
 
-- **Snap version number to be allowlisted** - The Snap version number as specified in `package.json` and
-  `snap.manifest.json`.
+- **Snap version number to be allowlisted** - The Snap version number as specified in `package.json`
+  and `snap.manifest.json`.
   Make sure that the version numbers match and that the Snap has been built with the correct `shasum`.
 
 - **Snap auditor and audit report** - A PDF or URL of the [required audit report](#prerequisites),
@@ -100,10 +100,12 @@ The form requests information about your Snap, including the following:
   You can ask your auditor to publish the report on their website and provide the link to us.
   :::
 
-- **Customer support details** - [Customer support information](https://github.com/MetaMask/snaps/wiki/User-Support-Information)
+- **Customer support details** -
+  [Customer support information](https://github.com/MetaMask/snaps/wiki/User-Support-Information)
   to ensure a smooth user experience for your Snap.
   This allows MetaMask to escalate any issues that a user might encounter with your Snap.
-  The escalation contact will be kept confidential within MetaMask, and the rest of the information will be public.
+  The escalation contact will be kept confidential within MetaMask, and the rest of the information
+  will be public.
   You must provide an escalation contact and at least one other customer support item.
 
 - **Images** - Screenshots or promotional images to help users get an idea of what your Snap can do.
@@ -126,8 +128,8 @@ You can direct users to the directory to find and install your Snap.
 
 ### 4. Distribute your Snap
 
-You can deploy a companion dapp where users can learn about your Snap and install it, or you can integrate your Snap with
-your existing dapp.
+You can deploy a companion dapp where users can learn about your Snap and install it, or you can
+integrate your Snap with your existing dapp.
 
 If your Snap is designed to communicate with dapps, you can encourage other dapp developers to
 [connect to your Snap](connect-to-a-snap.md).

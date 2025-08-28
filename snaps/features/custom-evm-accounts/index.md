@@ -19,8 +19,9 @@ in the user interface:
 </p>
 
 To use the Keyring API, you first [implement the API in an account management Snap](create-account-snap.md)
-(also known as an "account Snap"). You can then [call Keyring API methods from a companion dapp](create-companion-dapp.md) to enable
-users to create and interact with the custom accounts.
+(also known as an "account Snap").
+You can then [call Keyring API methods from a companion dapp](create-companion-dapp.md)
+to enable users to create and interact with the custom accounts.
 
 :::tip see also
 
