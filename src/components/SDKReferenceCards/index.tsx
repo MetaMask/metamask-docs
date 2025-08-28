@@ -7,8 +7,6 @@ import { web, mobile, gaming, enterprise } from "./SDKOptions";
 import { webIcons, mobileIcons, gamingIcons } from "./icons";
 import styles from "./styles.module.css";
 
-const baseUrl = "/docs/";
-
 const chevron = (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -51,9 +49,9 @@ export const pnpweb = (
         <div className={styles.cardContentText}>
           <h3>React SDK</h3>
           <div className={styles.links}>
-            <a href={`${baseUrl}quick-start?framework=REACT&stepIndex=0`}>Quick Start{chevron}</a>
-            <a href={`${baseUrl}sdk/web/react`}>SDK Reference{chevron}</a>
-            <a href={`${baseUrl}sdk/web/react/examples`}>Examples{chevron}</a>
+            <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=REACT&stepIndex=0`}>Quick Start{chevron}</a>
+            <a href={`embedded-wallets/react`}>SDK Reference{chevron}</a>
+            <a href={`embedded-wallets/react/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -78,9 +76,9 @@ export const pnpweb = (
         <div className={styles.cardContentText}>
           <h3>Vue SDK</h3>
           <div className={styles.links}>
-            <a href={`${baseUrl}quick-start?framework=VUE&stepIndex=0`}>Quick Start{chevron}</a>
-            <a href={`${baseUrl}sdk/web/vue`}>SDK Reference{chevron}</a>
-            <a href={`${baseUrl}sdk/web/vue/examples`}>Examples{chevron}</a>
+            <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=VUE&stepIndex=0`}>Quick Start{chevron}</a>
+            <a href={`embedded-wallets/vue`}>SDK Reference{chevron}</a>
+            <a href={`embedded-wallets/vue/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -101,9 +99,9 @@ export const pnpweb = (
         <div className={styles.cardContentText}>
           <h3>Javascript SDK</h3>
           <div className={styles.links}>
-            <a href={`${baseUrl}quick-start?framework=ANGULAR&stepIndex=0`}>Quick Start{chevron}</a>
-            <a href={`${baseUrl}sdk/web/js`}>SDK Reference{chevron}</a>
-            <a href={`${baseUrl}sdk/web/js/examples`}>Examples{chevron}</a>
+            <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=ANGULAR&stepIndex=0`}>Quick Start{chevron}</a>
+            <a href={`embedded-wallets/js`}>SDK Reference{chevron}</a>
+            <a href={`embedded-wallets/js/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -141,9 +139,9 @@ export const pnpmobile = (
         <div className={styles.cardContentText}>
           <h3>Android SDK</h3>
           <div className={styles.links}>
-            <a href={`${baseUrl}quick-start?framework=ANDROID&stepIndex=0`}>Quick Start{chevron}</a>
-            <a href={`${baseUrl}sdk/mobile/pnp/android`}>SDK Reference{chevron}</a>
-            <a href={`${baseUrl}sdk/mobile/pnp/android/examples`}>Examples{chevron}</a>
+            <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=ANDROID&stepIndex=0`}>Quick Start{chevron}</a>
+            <a href={`embedded-wallets/android`}>SDK Reference{chevron}</a>
+            <a href={`embedded-wallets/android/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -166,9 +164,9 @@ export const pnpmobile = (
         <div className={styles.cardContentText}>
           <h3>iOS SDK</h3>
           <div className={styles.links}>
-            <a href={`${baseUrl}quick-start?framework=IOS&stepIndex=0`}>Quick Start{chevron}</a>
-            <a href={`${baseUrl}sdk/mobile/pnp/ios`}>SDK Reference{chevron}</a>
-            <a href={`${baseUrl}sdk/mobile/pnp/ios/examples`}>Examples{chevron}</a>
+            <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=IOS&stepIndex=0`}>Quick Start{chevron}</a>
+            <a href={`embedded-wallets/ios`}>SDK Reference{chevron}</a>
+            <a href={`embedded-wallets/ios/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -189,9 +187,9 @@ export const pnpmobile = (
         <div className={styles.cardContentText}>
           <h3>Flutter SDK</h3>
           <div className={styles.links}>
-            <a href={`${baseUrl}quick-start?framework=FLUTTER&stepIndex=0`}>Quick Start{chevron}</a>
-            <a href={`${baseUrl}sdk/mobile/pnp/flutter`}>SDK Reference{chevron}</a>
-            <a href={`${baseUrl}sdk/mobile/pnp/flutter/examples`}>Examples{chevron}</a>
+            <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=FLUTTER&stepIndex=0`}>Quick Start{chevron}</a>
+            <a href={`embedded-wallets/flutter`}>SDK Reference{chevron}</a>
+            <a href={`embedded-wallets/flutter/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -212,11 +210,11 @@ export const pnpmobile = (
         <div className={styles.cardContentText}>
           <h3>React Native SDK</h3>
           <div className={styles.links}>
-            <a href={`${baseUrl}quick-start?framework=REACT_NATIVE&stepIndex=0`}>
+            <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=REACT_NATIVE&stepIndex=0`}>
               Quick Start{chevron}
             </a>
-            <a href={`${baseUrl}sdk/mobile/pnp/react-native`}>SDK Reference{chevron}</a>
-            <a href={`${baseUrl}sdk/mobile/pnp/react-native/examples`}>Examples{chevron}</a>
+            <a href={`embedded-wallets/react-native`}>SDK Reference{chevron}</a>
+            <a href={`embedded-wallets/react-native/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -260,8 +258,8 @@ export const pnpgaming = (
         <div className={styles.cardContentText}>
           <h3>Unity SDK</h3>
           <div className={styles.links}>
-            <a href={`${baseUrl}sdk/gaming/unity`}>SDK Reference{chevron}</a>
-            <a href={`${baseUrl}sdk/gaming/unity/examples`}>Examples{chevron}</a>
+            <a href={`embedded-wallets/unity`}>SDK Reference{chevron}</a>
+            <a href={`embedded-wallets/unity/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -284,8 +282,8 @@ export const pnpgaming = (
             <h3>Unreal SDK</h3>
           </div>
           <div className={styles.links}>
-            <a href={`${baseUrl}sdk/gaming/unreal`}>SDK Reference{chevron}</a>
-            <a href={`${baseUrl}sdk/gaming/unreal/examples`}>Examples{chevron}</a>
+            <a href={`embedded-wallets/unreal`}>SDK Reference{chevron}</a>
+            <a href={`embedded-wallets/unreal/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -293,75 +291,75 @@ export const pnpgaming = (
   </div>
 );
 
-export const mpccorekit = (
-  <div className={styles.card}>
-    <div className={styles.cardContainerIntro}>
-      <h3>MPC Core Kit SDKs</h3>
-      <p>
-        Designed for projects that require a tailored approach to authentication, providing the
-        tools and flexibility necessary to build advanced, secure, and integrated authentication
-        systems. <br />
-        <br />
-        Works for Web, React Native & NodeJS environments.
-      </p>
-      {webIcons}
-    </div>
-    <ul className={styles.cardContainer}>
-      <div className={styles.cardContent}>
-        <div className={styles.sdkIconContainer}>
-          <svg
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className={styles.sdkIcon}
-          >
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M4.083 9H6.029C6.118 7.454 6.412 6.03 6.866 4.882C6.13501 5.32992 5.50842 5.92919 5.02838 6.6395C4.54834 7.34982 4.22598 8.1547 4.083 9ZM10 2C7.87827 2 5.84344 2.84285 4.34315 4.34315C2.84285 5.84344 2 7.87827 2 10C2 12.1217 2.84285 14.1566 4.34315 15.6569C5.84344 17.1571 7.87827 18 10 18C12.1217 18 14.1566 17.1571 15.6569 15.6569C17.1571 14.1566 18 12.1217 18 10C18 7.87827 17.1571 5.84344 15.6569 4.34315C14.1566 2.84285 12.1217 2 10 2ZM10 4C9.924 4 9.768 4.032 9.535 4.262C9.297 4.496 9.038 4.885 8.798 5.444C8.409 6.351 8.125 7.586 8.032 9H11.968C11.875 7.586 11.591 6.351 11.202 5.444C10.962 4.884 10.702 4.496 10.465 4.262C10.232 4.032 10.076 4 10 4ZM13.971 9C13.882 7.454 13.588 6.03 13.134 4.882C13.865 5.32992 14.4916 5.92919 14.9716 6.6395C15.4517 7.34982 15.774 8.1547 15.917 9H13.971ZM11.968 11H8.032C8.125 12.414 8.409 13.649 8.798 14.556C9.038 15.116 9.298 15.504 9.535 15.738C9.768 15.968 9.924 16 10 16C10.076 16 10.232 15.968 10.465 15.738C10.703 15.504 10.963 15.115 11.202 14.556C11.591 13.649 11.875 12.414 11.968 11ZM13.134 15.118C13.588 13.971 13.882 12.546 13.971 11H15.917C15.774 11.8453 15.4517 12.6502 14.9716 13.3605C14.4916 14.0708 13.865 14.6701 13.134 15.118ZM6.866 15.118C6.412 13.97 6.118 12.546 6.03 11H4.083C4.22598 11.8453 4.54834 12.6502 5.02838 13.3605C5.50842 14.0708 6.13501 14.6701 6.866 15.118Z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-        <div className={styles.cardContentText}>
-          <h3>MPC Core Kit JS SDK</h3>
-          <div className={styles.links}>
-            <a href={`${baseUrl}sdk/mpc-core-kit/mpc-core-kit-js`}>SDK Reference{chevron}</a>
-            <a href={`${baseUrl}sdk/mpc-core-kit/mpc-core-kit-js/examples`}>Examples{chevron}</a>
-          </div>
-        </div>
-      </div>
-      <div className={styles.cardContent}>
-        <div className={styles.sdkIconContainer}>
-          <svg
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className={styles.sdkIcon}
-          >
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M4.083 9H6.029C6.118 7.454 6.412 6.03 6.866 4.882C6.13501 5.32992 5.50842 5.92919 5.02838 6.6395C4.54834 7.34982 4.22598 8.1547 4.083 9ZM10 2C7.87827 2 5.84344 2.84285 4.34315 4.34315C2.84285 5.84344 2 7.87827 2 10C2 12.1217 2.84285 14.1566 4.34315 15.6569C5.84344 17.1571 7.87827 18 10 18C12.1217 18 14.1566 17.1571 15.6569 15.6569C17.1571 14.1566 18 12.1217 18 10C18 7.87827 17.1571 5.84344 15.6569 4.34315C14.1566 2.84285 12.1217 2 10 2ZM10 4C9.924 4 9.768 4.032 9.535 4.262C9.297 4.496 9.038 4.885 8.798 5.444C8.409 6.351 8.125 7.586 8.032 9H11.968C11.875 7.586 11.591 6.351 11.202 5.444C10.962 4.884 10.702 4.496 10.465 4.262C10.232 4.032 10.076 4 10 4ZM13.971 9C13.882 7.454 13.588 6.03 13.134 4.882C13.865 5.32992 14.4916 5.92919 14.9716 6.6395C15.4517 7.34982 15.774 8.1547 15.917 9H13.971ZM11.968 11H8.032C8.125 12.414 8.409 13.649 8.798 14.556C9.038 15.116 9.298 15.504 9.535 15.738C9.768 15.968 9.924 16 10 16C10.076 16 10.232 15.968 10.465 15.738C10.703 15.504 10.963 15.115 11.202 14.556C11.591 13.649 11.875 12.414 11.968 11ZM13.134 15.118C13.588 13.971 13.882 12.546 13.971 11H15.917C15.774 11.8453 15.4517 12.6502 14.9716 13.3605C14.4916 14.0708 13.865 14.6701 13.134 15.118ZM6.866 15.118C6.412 13.97 6.118 12.546 6.03 11H4.083C4.22598 11.8453 4.54834 12.6502 5.02838 13.3605C5.50842 14.0708 6.13501 14.6701 6.866 15.118Z"
-              fill="currentColor"
-            />
-          </svg>
-        </div>
-        <div className={styles.cardContentText}>
-          <h3>MPC Core Kit React Native SDK</h3>
-          <div className={styles.links}>
-            <a href={`${baseUrl}sdk/mpc-core-kit/mpc-core-kit-react-native`}>
-              SDK Reference{chevron}
-            </a>
-            <a href={`${baseUrl}sdk/mpc-core-kit/mpc-core-kit-react-native/examples`}>
-              Examples{chevron}
-            </a>
-          </div>
-        </div>
-      </div>
-    </ul>
-  </div>
-);
+// export const mpccorekit = (
+//   <div className={styles.card}>
+//     <div className={styles.cardContainerIntro}>
+//       <h3>MPC Core Kit SDKs</h3>
+//       <p>
+//         Designed for projects that require a tailored approach to authentication, providing the
+//         tools and flexibility necessary to build advanced, secure, and integrated authentication
+//         systems. <br />
+//         <br />
+//         Works for Web, React Native & NodeJS environments.
+//       </p>
+//       {webIcons}
+//     </div>
+//     <ul className={styles.cardContainer}>
+//       <div className={styles.cardContent}>
+//         <div className={styles.sdkIconContainer}>
+//           <svg
+//             viewBox="0 0 20 20"
+//             fill="none"
+//             xmlns="http://www.w3.org/2000/svg"
+//             className={styles.sdkIcon}
+//           >
+//             <path
+//               fillRule="evenodd"
+//               clipRule="evenodd"
+//               d="M4.083 9H6.029C6.118 7.454 6.412 6.03 6.866 4.882C6.13501 5.32992 5.50842 5.92919 5.02838 6.6395C4.54834 7.34982 4.22598 8.1547 4.083 9ZM10 2C7.87827 2 5.84344 2.84285 4.34315 4.34315C2.84285 5.84344 2 7.87827 2 10C2 12.1217 2.84285 14.1566 4.34315 15.6569C5.84344 17.1571 7.87827 18 10 18C12.1217 18 14.1566 17.1571 15.6569 15.6569C17.1571 14.1566 18 12.1217 18 10C18 7.87827 17.1571 5.84344 15.6569 4.34315C14.1566 2.84285 12.1217 2 10 2ZM10 4C9.924 4 9.768 4.032 9.535 4.262C9.297 4.496 9.038 4.885 8.798 5.444C8.409 6.351 8.125 7.586 8.032 9H11.968C11.875 7.586 11.591 6.351 11.202 5.444C10.962 4.884 10.702 4.496 10.465 4.262C10.232 4.032 10.076 4 10 4ZM13.971 9C13.882 7.454 13.588 6.03 13.134 4.882C13.865 5.32992 14.4916 5.92919 14.9716 6.6395C15.4517 7.34982 15.774 8.1547 15.917 9H13.971ZM11.968 11H8.032C8.125 12.414 8.409 13.649 8.798 14.556C9.038 15.116 9.298 15.504 9.535 15.738C9.768 15.968 9.924 16 10 16C10.076 16 10.232 15.968 10.465 15.738C10.703 15.504 10.963 15.115 11.202 14.556C11.591 13.649 11.875 12.414 11.968 11ZM13.134 15.118C13.588 13.971 13.882 12.546 13.971 11H15.917C15.774 11.8453 15.4517 12.6502 14.9716 13.3605C14.4916 14.0708 13.865 14.6701 13.134 15.118ZM6.866 15.118C6.412 13.97 6.118 12.546 6.03 11H4.083C4.22598 11.8453 4.54834 12.6502 5.02838 13.3605C5.50842 14.0708 6.13501 14.6701 6.866 15.118Z"
+//               fill="currentColor"
+//             />
+//           </svg>
+//         </div>
+//         <div className={styles.cardContentText}>
+//           <h3>MPC Core Kit JS SDK</h3>
+//           <div className={styles.links}>
+//             <a href={`/sdk/mpc-core-kit/mpc-core-kit-js`}>SDK Reference{chevron}</a>
+//             <a href={`/sdk/mpc-core-kit/mpc-core-kit-js/examples`}>Examples{chevron}</a>
+//           </div>
+//         </div>
+//       </div>
+//       <div className={styles.cardContent}>
+//         <div className={styles.sdkIconContainer}>
+//           <svg
+//             viewBox="0 0 20 20"
+//             fill="none"
+//             xmlns="http://www.w3.org/2000/svg"
+//             className={styles.sdkIcon}
+//           >
+//             <path
+//               fillRule="evenodd"
+//               clipRule="evenodd"
+//               d="M4.083 9H6.029C6.118 7.454 6.412 6.03 6.866 4.882C6.13501 5.32992 5.50842 5.92919 5.02838 6.6395C4.54834 7.34982 4.22598 8.1547 4.083 9ZM10 2C7.87827 2 5.84344 2.84285 4.34315 4.34315C2.84285 5.84344 2 7.87827 2 10C2 12.1217 2.84285 14.1566 4.34315 15.6569C5.84344 17.1571 7.87827 18 10 18C12.1217 18 14.1566 17.1571 15.6569 15.6569C17.1571 14.1566 18 12.1217 18 10C18 7.87827 17.1571 5.84344 15.6569 4.34315C14.1566 2.84285 12.1217 2 10 2ZM10 4C9.924 4 9.768 4.032 9.535 4.262C9.297 4.496 9.038 4.885 8.798 5.444C8.409 6.351 8.125 7.586 8.032 9H11.968C11.875 7.586 11.591 6.351 11.202 5.444C10.962 4.884 10.702 4.496 10.465 4.262C10.232 4.032 10.076 4 10 4ZM13.971 9C13.882 7.454 13.588 6.03 13.134 4.882C13.865 5.32992 14.4916 5.92919 14.9716 6.6395C15.4517 7.34982 15.774 8.1547 15.917 9H13.971ZM11.968 11H8.032C8.125 12.414 8.409 13.649 8.798 14.556C9.038 15.116 9.298 15.504 9.535 15.738C9.768 15.968 9.924 16 10 16C10.076 16 10.232 15.968 10.465 15.738C10.703 15.504 10.963 15.115 11.202 14.556C11.591 13.649 11.875 12.414 11.968 11ZM13.134 15.118C13.588 13.971 13.882 12.546 13.971 11H15.917C15.774 11.8453 15.4517 12.6502 14.9716 13.3605C14.4916 14.0708 13.865 14.6701 13.134 15.118ZM6.866 15.118C6.412 13.97 6.118 12.546 6.03 11H4.083C4.22598 11.8453 4.54834 12.6502 5.02838 13.3605C5.50842 14.0708 6.13501 14.6701 6.866 15.118Z"
+//               fill="currentColor"
+//             />
+//           </svg>
+//         </div>
+//         <div className={styles.cardContentText}>
+//           <h3>MPC Core Kit React Native SDK</h3>
+//           <div className={styles.links}>
+//             <a href={`/sdk/mpc-core-kit/mpc-core-kit-react-native`}>
+//               SDK Reference{chevron}
+//             </a>
+//             <a href={`/sdk/mpc-core-kit/mpc-core-kit-react-native/examples`}>
+//               Examples{chevron}
+//             </a>
+//           </div>
+//         </div>
+//       </div>
+//     </ul>
+//   </div>
+// );
 
 export default function QuickNavigation() {
   const location = useLocation();
@@ -402,18 +400,18 @@ export default function QuickNavigation() {
           >
             {gaming}
           </div>
-          <div
+          {/* <div
             className={platform === enterprise ? styles.selectedTab : styles.tab}
             onClick={() => setPlatform(enterprise)}
           >
             {enterprise}
-          </div>
+          </div> */}
         </div>
       </div>
       {platform === web && pnpweb}
       {platform === mobile && pnpmobile}
       {platform === gaming && pnpgaming}
-      {platform === enterprise && mpccorekit}
+      {/* {platform === enterprise && mpccorekit} */}
     </div>
   );
 }
