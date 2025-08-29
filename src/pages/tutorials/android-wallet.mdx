@@ -66,11 +66,11 @@ dependencies {
 }
 ```
 
-For the prerequisites, and other mandatory configuration of the SDK, please head to our [installation documentation](/docs/sdk/mobile/pnp/android/install).
+For the prerequisites, and other mandatory configuration of the SDK, please head to our [installation documentation](/embedded-wallets/sdk/android/install).
 
 ### Initialization
 
-After successfully installing the package, the next step is to initialize Web3Auth in your Android app. This sets up the necessary configurations using Client Id and prepares Web3Auth. [Learn more about Web3Auth Initialization](/docs/sdk/mobile/pnp/android/initialize).
+After successfully installing the package, the next step is to initialize Web3Auth in your Android app. This sets up the necessary configurations using Client Id and prepares Web3Auth. [Learn more about Web3Auth Initialization](/embedded-wallets/sdk/android/initialize).
 
 Since we are using the MVVM architecture for the wallet, along with dependency injection, we have defined a `Web3AuthHelper` to interact with a `Web3Auth` instance, which also makes it easier to write mocks for unit testing.
 
@@ -217,7 +217,7 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
 
 If the user is not authenticated, we can utilize the `login` method to authenticate the user. For the Wallet, we will add an Email Passwordless login. We'll create a helper function, `login` inside `MainViewModel`. The login method is pretty straightforward in Web3Auth and takes `LoginParams` as input. After successfully logging in, we'll generate and prepare the `Credentials`, important to interact with the blockchain. Along with that, we'll retrieve user info, and navigate them to `HomeScreen`.
 
-Learn more about [Web3Auth LoginParams](/docs/sdk/mobile/pnp/android/usage#parameters).
+Learn more about [Web3Auth LoginParams](/embedded-wallets/sdk/android/usage#parameters).
 
 ```kotlin
 class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
@@ -1088,4 +1088,4 @@ fun WriteContractView(viewModel: MainViewModel) {
 
 Voila, you have build a Ethereum Web3 wallet. This guide only gives you an overview of how to create your wallet with Ethereum ecosystem support. The general idea of the guide can be used for any of the blockchain ecosystem.
 
-If you are interested in learning more about Web3Auth, please checkout our [documentation for Android](/docs/sdk/mobile/pnp/android). You can find the code used for the guide on our [examples repo](https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-playground).
+If you are interested in learning more about Web3Auth, please checkout our [documentation for Android](/embedded-wallets/sdk/android). You can find the code used for the guide on our [examples repo](https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-playground).
