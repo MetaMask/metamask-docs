@@ -1,9 +1,9 @@
-import Link from "@docusaurus/Link";
-import useBaseUrl from "@docusaurus/useBaseUrl";
+import Link from '@docusaurus/Link'
+import useBaseUrl from '@docusaurus/useBaseUrl'
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css'
 
-import type { ExamplesInterface } from "@site/src/common/maps";
+import type { ExamplesInterface } from '@site/src/common/maps'
 
 const chevron = (
   <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,14 +15,14 @@ const chevron = (
       strokeLinejoin="round"
     />
   </svg>
-);
+)
 
 export default function ExampleCards(props: { exampleMap: ExamplesInterface[] }) {
-  const { exampleMap } = props;
-  exampleMap.forEach((example) => {
-    example.image = useBaseUrl(example.image);
-    return example;
-  });
+  const { exampleMap } = props
+  exampleMap.forEach(example => {
+    example.image = useBaseUrl(example.image)
+    return example
+  })
 
   return (
     <div className={styles.exampleGroupContent}>
@@ -51,5 +51,5 @@ export default function ExampleCards(props: { exampleMap: ExamplesInterface[] })
         </div>
       ))}
     </div>
-  );
+  )
 }

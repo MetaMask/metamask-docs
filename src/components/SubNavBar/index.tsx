@@ -46,8 +46,8 @@ export default function SubNavBar({ config }: SubNavBarProps) {
     // Check if current path starts with this link path
     if (linkPath !== '/' && location.pathname.startsWith(linkPath)) {
       // Find all matching links (that current path starts with)
-      const matchingLinks = links.filter(link =>
-        link.path !== '/' && location.pathname.startsWith(link.path)
+      const matchingLinks = links.filter(
+        link => link.path !== '/' && location.pathname.startsWith(link.path)
       )
 
       // Return true only if this is the longest/most specific match
@@ -67,15 +67,14 @@ export default function SubNavBar({ config }: SubNavBarProps) {
         <h2 className={styles.sectionHeading}>{sectionName}</h2>
         <div className={styles.navContent}>
           <ul className={styles.linksList}>
-            {links.map((link) => (
+            {links.map(link => (
               <li key={link.key} className={styles.linkItem}>
                 {link.external ? (
                   <a
                     href={link.path}
                     className={clsx(styles.link, styles.externalLink)}
                     target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                    rel="noopener noreferrer">
                     {link.label}
                     <span className={styles.externalIcon}>↗</span>
                   </a>
@@ -83,9 +82,8 @@ export default function SubNavBar({ config }: SubNavBarProps) {
                   <Link
                     to={link.path}
                     className={clsx(styles.link, {
-                      [styles.activeLink]: isActiveLink(link.path)
-                    })}
-                  >
+                      [styles.activeLink]: isActiveLink(link.path),
+                    })}>
                     {link.label}
                   </Link>
                 )}

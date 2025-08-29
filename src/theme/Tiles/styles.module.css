@@ -6,8 +6,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   gap: 2%;
 }
 
@@ -39,13 +38,13 @@
   font-weight: 500;
 }
 
-@media (max-width: 996px) {
+@media (width <= 996px) {
   .tile {
     flex-basis: 49%;
   }
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .tile {
     flex-basis: 100%;
   }

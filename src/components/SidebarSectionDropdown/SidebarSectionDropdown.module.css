@@ -6,7 +6,7 @@
   top: var(--ifm-navbar-height);
   z-index: 100;
   font-family: var(--ifm-font-family-base);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
   backdrop-filter: blur(8px);
   border-right: 1px solid var(--ifm-toc-border-color);
 }
@@ -93,7 +93,7 @@
   background: var(--general-white);
   border: 1px solid var(--general-gray-light);
   border-radius: 4px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgb(0 0 0 / 15%);
   backdrop-filter: blur(8px);
   margin-top: 0.3rem;
   padding-bottom: 1rem;
@@ -147,7 +147,7 @@
 [data-theme='dark'] .menu {
   background: var(--general-black-light) !important;
   border-color: var(--general-white) !important;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 16px rgb(0 0 0 / 40%);
 }
 
 [data-theme='dark'] .menuItem {
@@ -172,7 +172,7 @@
 [data-theme='dark'] .dropdown {
   background: var(--ifm-background-color);
   border-bottom-color: var(--ifm-color-emphasis-300);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
 }
 
 [data-theme='dark'] .title {

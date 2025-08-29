@@ -20,10 +20,9 @@
 
 .container {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   gap: 2rem;
   justify-content: space-around;
-  flex-wrap: wrap;
   overflow: visible;
   scroll-behavior: smooth;
 }
@@ -34,7 +33,7 @@
   flex-direction: row;
   background: var(--ifm-background-surface-color);
   border: 1px solid var(--ifm-color-emphasis-200);
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
   border-radius: 20px;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -43,14 +42,12 @@
 .cardContainerIntro,
 .cardContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-flow: column wrap;
   align-items: flex-start;
   text-align: left;
   width: 50%;
   padding: 3rem;
   gap: 2rem;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -83,16 +80,15 @@
 
 .cardTitleContainer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   gap: 1.1rem;
   align-items: center;
   justify-content: flex-start;
-  flex-wrap: wrap;
 }
 
 .tabContainer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: flex-start;
   align-items: center;
   background: var(--ifm-background-surface-color);
@@ -103,9 +99,8 @@
   padding: 0;
   margin: 0;
   overflow: hidden;
-  flex-wrap: wrap;
   cursor: pointer;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
 }
 
 .selectedTab,
@@ -138,7 +133,7 @@
 
 .pillContainer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
   background: var(--ifm-color-emphasis-100);
@@ -148,12 +143,11 @@
   margin: 0;
   width: max-content;
   overflow: hidden;
-  flex-wrap: wrap;
 }
 
 .pill {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -164,17 +158,15 @@
   font-size: 1.2rem;
   line-height: 1.5;
   color: var(--ifm-color-primary);
-  flex-wrap: wrap;
   text-transform: uppercase;
 }
 
 .cardContent {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1.6rem;
-  flex-wrap: wrap;
 }
 
 .sdkIconContainer {
@@ -215,11 +207,10 @@
 
 .links {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 1.6rem;
-  flex-wrap: wrap;
 }
 
 .links a {
@@ -239,15 +230,14 @@
 }
 
 
-@media (max-width: 1231px) {
-
+@media (width <= 1231px) {
   .cardContainerIntro,
   .cardContainer {
     padding: 2.5rem;
   }
 }
 
-@media (max-width: 996px) {
+@media (width <= 996px) {
   .container {
     flex-direction: column;
   }
@@ -283,7 +273,7 @@
 [data-theme='dark'] {
   .card {
     border-color: var(--ifm-color-emphasis-300);
-    box-shadow: 0px 1px 2px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 1px 2px rgb(255 255 255 / 10%);
   }
 
   .cardContainerIntro {
@@ -292,7 +282,7 @@
 
   .tabContainer {
     border-color: var(--ifm-color-emphasis-300);
-    box-shadow: 0px 1px 2px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 1px 2px rgb(255 255 255 / 10%);
   }
 
   .tab,
@@ -310,7 +300,7 @@
   }
 
 
-  @media (max-width: 996px) {
+  @media (width <= 996px) {
     .cardContainerIntro {
       border-bottom: 1px solid var(--ifm-color-emphasis-300);
     }

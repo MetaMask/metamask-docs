@@ -6,10 +6,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
-  flex-direction: row;
-  flex-wrap: wrap;
-  row-gap: 20px;
-  column-gap: 30px;
+  flex-flow: row wrap;
+  gap: 20px 30px;
 }
 
 .example {
@@ -18,18 +16,21 @@
   margin: 0;
   max-width: 550px;
   padding: 10px;
+
   /* white */
   background: var(--ifm-background-surface-color);
+
   /* gray/200 */
   border: 1px solid var(--general-gray-light);
+
   /* shadow-sm */
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 5%);
   border-radius: 20px;
 }
 
 .example img {
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
   opacity: 1;
   border-radius: 20px;
   margin-bottom: 8px;
@@ -42,6 +43,15 @@
 
 .exampleContent:hover {
   text-decoration: none !important;
+}
+
+.example h3 {
+  font-family: var(--ifm-font-family-base);
+  font-size: 18px;
+  line-height: 150%;
+  color: var(--ifm-color-content);
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .example:hover {
@@ -63,16 +73,16 @@
 
 .example .pillContainer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: flex-start;
   align-items: center;
+
   /* white */
   text-decoration: none;
   padding: 0;
   margin: 0;
   gap: 10px;
   overflow: hidden;
-  flex-wrap: wrap;
   margin-right: 10px;
   margin-left: 10px;
   margin-bottom: 20px;
@@ -81,23 +91,19 @@
 .example .pill {
   background: var(--developer-purple-light);
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: center;
   text-align: center;
   align-items: center;
   width: max-content;
   gap: 2px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 2px 12px;
   margin: 0;
   font-weight: 500 !important;
   font-size: 12px;
   text-transform: uppercase;
   line-height: 150%;
   color: var(--developer-purple-dark);
-  flex-wrap: wrap;
   border-radius: 8px;
   border: 1px solid var(--developer-purple-light);
   text-decoration: none !important;
@@ -106,18 +112,15 @@
 .example .pillPrimary {
   background: var(--ifm-color-emphasis-100);
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: center;
   text-align: center;
   align-items: center;
   width: max-content;
   gap: 2px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 2px 12px;
   margin: 0;
-  margin-top: 10px;
+  margin: 10px;
   font-weight: 500 !important;
   font-size: 12px;
   text-transform: uppercase;
@@ -128,26 +131,13 @@
     color: var(--ifm-color-content);
   }
 
-  flex-wrap: wrap;
   border-radius: 8px;
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-bottom: 10px;
 }
 
 .example .pill:hover {
   cursor: pointer;
   border-color: var(--developer-purple);
   text-decoration: none !important;
-}
-
-.example h3 {
-  font-family: var(--ifm-font-family-base);
-  font-size: 18px;
-  line-height: 150%;
-  color: var(--ifm-color-content);
-  margin-right: 10px;
-  margin-left: 10px;
 }
 
 .example p {
@@ -160,11 +150,10 @@
 
 .example .links {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 16px;
-  flex-wrap: wrap;
   margin-right: 10px;
   margin-left: 10px;
   margin-bottom: 20px;
@@ -237,13 +226,13 @@
   text-decoration: none !important;
 }
 
-@media only screen and (min-width: 889px) {
+@media only screen and (width >=889px) {
   .example {
     width: 45%;
   }
 }
 
-@media only screen and (min-width: 1334px) {
+@media only screen and (width >=1334px) {
   .example {
     width: 30%;
   }
@@ -253,7 +242,7 @@
 [data-theme='dark'] {
   .example {
     border-color: var(--ifm-background-surface-color);
-    box-shadow: 0px 1px 2px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 1px 2px rgb(255 255 255 / 10%);
   }
 
   .example .pill {

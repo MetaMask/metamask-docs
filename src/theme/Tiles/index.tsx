@@ -1,24 +1,24 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import Link from "@docusaurus/Link";
-import useBaseUrl from "@docusaurus/useBaseUrl";
+import Link from '@docusaurus/Link'
+import useBaseUrl from '@docusaurus/useBaseUrl'
 
-import styles from "./styles.module.css";
+import styles from './styles.module.css'
 
 export interface Tile {
-  key: string;
-  title: string;
-  icon: string;
-  path: string;
+  key: string
+  title: string
+  icon: string
+  path: string
 }
 
 export interface TileGroup {
-  name: string;
-  description: string;
-  tiles: Tile[];
+  name: string
+  description: string
+  tiles: Tile[]
 }
 
 export default function Tiles(props: { tileGroups: TileGroup[] }) {
-  const { tileGroups } = props;
+  const { tileGroups } = props
   return (
     <>
       {tileGroups.map((group: TileGroup) => (
@@ -44,5 +44,5 @@ export default function Tiles(props: { tileGroups: TileGroup[] }) {
         </div>
       ))}
     </>
-  );
+  )
 }
