@@ -1,0 +1,109 @@
+---
+title: Different Private Keys/ Wallet Address across Integrations
+image: 'images/docs-meta-cards/documentation-card.png'
+sidebar_label: Different Private Keys
+description: 'Different Private Keys across Integrations | Documentation - Web3Auth'
+---
+
+Developers and users frequently face confusion when they get different wallet addresses for multitudes of reasons. Here's our attempt to explain the possible reasons for different wallet addresses and what to keep in mind while designing your solutions.
+
+## Verifier
+
+A verifier is a piece of information about the OAuth provider being used by the application, which is queried by web3auth auth network nodes from a smart contract deployed on the Ethereum blockchain to verify the JWT token.
+
+:::tip
+
+To know more about creating verifiers, please refer to [here](/authentication).
+
+:::
+
+If you use the same verifier across every SDK your wallet address will not change, since all SDKs support all the same verifier information.
+
+> You might face errors where users using different social login credentials use different methods (like Google Login and Email Passwordless), and receive different wallet addresses/ keys. This is because, **when you use different login providers, verifiers do change,** even though the id, sub, email etc fields remain the same. For such cases, you can use an Aggregate Verifier.
+
+### Aggregate Verifier
+
+An aggregate verifier combines multiple login methods to create a verifier to get the same wallet address for your user for the same email ID regardless of their login providers, for example, combining a Google and Email Passwordless login or Google and GitHub via Auth0 to access the same key for your user.
+
+:::tip
+
+Refer to the docs [here](/authentication/group-connections) to know more about creating an aggregate verifier.
+
+:::
+
+Here, multiple sub-verifiers are combined under one single aggregate verifier, and one wallet address is generated from the aggregate verifier. So for In the case discussed above verifiers with different login providers can be added as sub-verifiers under one aggregate verifier, which would allow users get a single wallet address provided one of the fields (like email) stays the same across sub-verifiers.
+
+## Client ID
+
+To get your Client ID, it's as simple as setting up a new Plug and Play project on the Web3Auth dashboard. Now, "Plug and Play" might sound technical, but it's just a way of describing the pre-packaged user interface and experience that Web3Auth has ready for you. The idea here is to integrate Web3Auth into your project as easily and efficiently as possible, saving you the hassle of building everything from scratch.
+
+:::tip
+
+To get a client ID for your project, please refer to [here](/dashboard).
+
+:::
+
+> Wallet addresses change if the client ID changes. Please use the same client ID across all your SDK integrations to get the same wallet address.
+
+## Environment
+
+While creating a verifier you need to select between `testnet`, `mainnet`, `aqua`, `cyan`, `sapphire_devnet`, and `sapphire_mainnet`.
+
+`testnet` and `sapphire_devnet` are sandbox environments for developers to experiment with. People usually test and finish their integration here. `mainnet`, `aqua`, `cyan` & `sapphire_mainnet` are the production environments for scalable applications.
+
+> Every network has different nodes and that causes the keys to change. If you move from one network to another, the keys are meant to change.
+
+## Product
+
+Every product across the Web3Auth Stack has a different set of keys, owing to how the infrastructure is set up and how the keys are generated. At large, we can consider 3 different sets of Web3Auth Products:
+
+- Plug and Play SDKs: Includes the Plug and Play SDKs across various platforms. The accounts here are generated from the Single Factor Auth Mobile SDKs, however, the keys are different because of the subkey generation logic. Keys here change according to the verifier and client ID selected.
+
+- Single Factor Auth Mobile SDKs: Contain the base key generation logic according to the verifier selected.
+
+- MPC Core Kit SDKs: Includes the MPC Core Kit SDKs across various platforms. The accounts here are generated using TSS (Threshold Signature Scheme) and are different from the other products.
+
+### Migrating between SDKs
+
+Whether you're seeking to optimize your current user flows or want to try out new features, migrating from one Web3Auth product to another can be a powerful way to enhance your application. However, it's crucial to handle migrations properly to ensure security and seamless user experience.
+
+:::warning
+
+Migrations might involve changing the wallets, that can lead to loss of access to the user's account. Please ensure you meet all the requirements for migrating between SDKs.
+
+:::
+
+#### Plug and Play to Single Factor Auth Migration
+
+:::danger
+
+This migration is only possible if you've used custom authentication with your own login verifiers with Plug and Play SDKs. If you're using the standard authentication flows, the keys will change in the new integration.
+
+:::
+
+##### To Single Factor Auth (SFA) SDKs
+
+If you're migrating to SFA Mobile SDKs, you can directly use the SDK with the same Client ID, alongside authentication and verifier details. Additionally, by setting the `usePnPKey` flag to `true`, you can get the same key as the Plug and Play SDKs. However, if a user has enabled MFA, they will not be able to use the SFA Mobile SDKs.
+
+##### To tKey JS SDK
+
+If you're migrating to the tKey JS SDK, it is a more manual process in total. Firstly, you need to use the same authentication and verifier details as the plug-and-play integration, but additionally, you need to create a subkey of the final private key generated by the Plug and Play SDKs. To do this, you'll need to use the `@toruslabs/openlogin-subkey` and generate a subkey of the private key with your Plug and Play Client ID as the parameter.
+
+```tsx
+import { subkey } from '@toruslabs/openlogin-subkey'
+
+subkey(PRIVATE_KEY.padStart(64, '0'), Buffer.from(CLIENT_ID, 'base64'))
+```
+
+:::info Pre-planning Migrations
+
+If you're looking to use Single Factor Auth Mobile SDKs in the future, planning the use Plug and Play SDKs right now, make sure:
+
+- You're using Custom Authentication with your own login verifiers.
+- Set the `useCoreKitKey` flag to `true`
+
+:::
+
+#### Single Factor Auth to Plug and Play Migration
+
+This migration typically occurs when developers want to leverage the prebuilt UI/UX of the Plug and Play SDKs for user MFA. Use the same verifier details from your Single Factor Auth integration in the custom authentication feature of Plug and Play. Set the `useCoreKitKey` flag to `true` to use the same private key as the Single Factor Auth Mobile SDKs.

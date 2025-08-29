@@ -15,9 +15,9 @@ import {
 function webTopNavButton(selectedSDK) {
 
   var webSDKs = {
-    [reactJS]: `/embedded-wallets/react`,
-    [vue]: `/embedded-wallets/vue`,
-    [js]: `/embedded-wallets/js`,
+    [reactJS]: `/embedded-wallets/sdk/react`,
+    [vue]: `/embedded-wallets/sdk/vue`,
+    [js]: `/embedded-wallets/sdk/js`,
   };
   if (webSDKs.hasOwnProperty(selectedSDK)) {
     delete webSDKs[selectedSDK];
@@ -39,10 +39,10 @@ function webTopNavButton(selectedSDK) {
           v${sdkVersion}
         </div>
       </div>
-      <a class="sdk-sidebar-option" href="/embedded-wallets/android">
+      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/android">
         Mobile
       </a>
-      <a class="sdk-sidebar-option" href="/embedded-wallets/unity">
+      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/unity">
         Gaming
       </a>
     </div>`;
@@ -50,8 +50,8 @@ function webTopNavButton(selectedSDK) {
 
 function gamingTopNavButton(selectedSDK) {
   var gamingSDKs = {
-    [unity]: `/embedded-wallets/unity`,
-    [unreal]: `/embedded-wallets/unreal`,
+    [unity]: `/embedded-wallets/sdk/unity`,
+    [unreal]: `/embedded-wallets/sdk/unreal`,
   };
   if (gamingSDKs.hasOwnProperty(selectedSDK)) {
     delete gamingSDKs[selectedSDK];
@@ -62,10 +62,10 @@ function gamingTopNavButton(selectedSDK) {
 
   return `
     <div class="sdk-sidebar-container">
-      <a class="sdk-sidebar-option" href="/embedded-wallets/react">
+      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/react">
         Web
       </a>
-      <a class="sdk-sidebar-option" href="/embedded-wallets/android">
+      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/android">
         Mobile
       </a>
       <div class="sdk-sidebar-option-selected">
@@ -83,10 +83,10 @@ function gamingTopNavButton(selectedSDK) {
 
 function mobileTopNavButton(selectedSDK) {
   var mobileSDKs = {
-    [android]: `/embedded-wallets/android`,
-    [ios]: `/embedded-wallets/ios`,
-    [reactnative]: `/embedded-wallets/react-native`,
-    [flutter]: `/embedded-wallets/flutter`,
+    [android]: `/embedded-wallets/sdk/android`,
+    [ios]: `/embedded-wallets/sdk/ios`,
+    [reactnative]: `/embedded-wallets/sdk/react-native`,
+    [flutter]: `/embedded-wallets/sdk/flutter`,
   };
   if (mobileSDKs.hasOwnProperty(selectedSDK)) {
     delete mobileSDKs[selectedSDK];
@@ -97,7 +97,7 @@ function mobileTopNavButton(selectedSDK) {
 
   return `
     <div class="sdk-sidebar-container">
-      <a class="sdk-sidebar-option" href="/embedded-wallets/react">
+      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/react">
         Web
       </a>
       <div class="sdk-sidebar-option-selected">
@@ -112,7 +112,7 @@ function mobileTopNavButton(selectedSDK) {
           v${sdkVersion}
         </div>
       </div>
-      <a class="sdk-sidebar-option" href="/embedded-wallets/unity">
+      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/unity">
         Gaming
       </a>
     </div>`;
@@ -122,60 +122,187 @@ function mobileTopNavButton(selectedSDK) {
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebar = {
+  overview: [
+    "README",
+    "how-web3auth-works",
+    {
+      type: "category",
+      label: "Dashboard",
+      collapsible: true,
+      collapsed: false,
+      items: [
+        "dashboard/README",
+        "dashboard/create-new-project",
+        {
+          type: "category",
+          label: "Configuration",
+          items: [
+            "dashboard/configuration/project-settings",
+            "dashboard/configuration/chains-and-networks",
+            "dashboard/configuration/authentication",
+            "dashboard/configuration/wallet-services",
+            "dashboard/configuration/customization",
+            "dashboard/configuration/analytics",
+          ],
+        }
+      ],
+    },
+    {
+      type: "category",
+      label: "Get Started",
+      collapsible: true,
+      collapsed: false,
+      items: [
+        { type: "link", label: "React", href: "/embedded-wallets/sdk/react" },
+        { type: "link", label: "Vue", href: "/embedded-wallets/sdk/vue" },
+        { type: "link", label: "JavaScript", href: "/embedded-wallets/sdk/js" },
+        { type: "link", label: "Android", href: "/embedded-wallets/sdk/android" },
+        { type: "link", label: "iOS", href: "/embedded-wallets/sdk/ios" },
+        { type: "link", label: "React Native", href: "/embedded-wallets/sdk/react-native" },
+        { type: "link", label: "Flutter", href: "/embedded-wallets/sdk/flutter" },
+        { type: "link", label: "Unity", href: "/embedded-wallets/sdk/unity" },
+        { type: "link", label: "Unreal", href: "/embedded-wallets/sdk/unreal" },
+      ],
+    },
+  ],
+  authentication: [
+    "authentication/README",
+    {
+      type: "category",
+      label: "Basic Logins",
+      collapsible: true,
+      collapsed: false,
+      items: [
+        "authentication/basic-logins/email-passwordless",
+        "authentication/basic-logins/sms-otp",
+        "authentication/basic-logins/external-wallets",
+      ],
+      collapsible: true,
+      collapsed: false,
+    },
+    {
+      type: "category",
+      label: "Social Logins",
+      collapsible: true,
+      collapsed: false,
+      items: [
+        "authentication/social-logins/google",
+        "authentication/social-logins/facebook",
+        "authentication/social-logins/twitch",
+        "authentication/social-logins/discord",
+        "authentication/social-logins/oauth",
+      ],
+    },
+    {
+      type: "category",
+      label: "Custom Connections",
+      collapsible: true,
+      collapsed: false,
+      items: [
+        "authentication/custom-connections/auth0",
+        "authentication/custom-connections/aws-cognito",
+        "authentication/custom-connections/firebase",
+        "authentication/custom-connections/custom-jwt",
+      ],
+    },
+    "authentication/group-connections",
+    "authentication/id-token",
+  ],
+  connect_blockchain: [
+    "connect-blockchain/README",
+    {
+      type: "category",
+      label: "EVM Based Chains",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Solana",
+      items: [{ type: "autogenerated", dirName: "connect-blockchain/solana" }],
+    },
+    {
+      type: "category",
+      label: "Other Chains",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/other" },
+      ],
+      collapsible: true,
+      collapsed: false,
+    },
+    "connect-blockchain/custom-chains",
+    "connect-blockchain/rpc-headers",
+  ],
+  infrastructure: [
+    "infrastructure/README",
+    "infrastructure/mpc-architecture",
+    "infrastructure/sss-architecture",
+    "infrastructure/nodes-and-dkg",
+    "infrastructure/glossary",
+    {
+      type: "link",
+      label: "Compliance, Audits and Trust",
+      href: "https://trust.web3auth.io",
+    },
+  ],
+  troubleshooting: [
+    { type: "autogenerated", dirName: "troubleshooting" },
+  ],
   sdk_react: [
     {
       type: "html",
       value: webTopNavButton(reactJS),
       defaultStyle: true,
     },
-    "react/react",
+    "sdk/react/README",
     {
       type: "category",
       collapsible: true,
       collapsed: false,
       label: "Advanced",
       items: [
-        "react/advanced/advanced",
-        "react/advanced/custom-authentication",
-        "react/advanced/whitelabel",
-        "react/advanced/mfa",
-        "react/advanced/smart-accounts",
-        "react/advanced/wallet-services",
+        "sdk/react/advanced/README",
+        "sdk/react/advanced/custom-authentication",
+        "sdk/react/advanced/whitelabel",
+        "sdk/react/advanced/mfa",
+        "sdk/react/advanced/smart-accounts",
+        "sdk/react/advanced/wallet-services",
       ],
     },
     {
       type: "category",
       label: "Web3Auth Hooks",
       items: [
-        "react/hooks/hooks",
-        "react/hooks/useWeb3Auth",
-        "react/hooks/useWeb3AuthConnect",
-        "react/hooks/useWeb3AuthDisconnect",
-        "react/hooks/useWeb3AuthUser",
-        "react/hooks/useIdentityToken",
-        "react/hooks/useEnableMFA",
-        "react/hooks/useManageMFA",
-        "react/hooks/useCheckout",
-        "react/hooks/useSwap",
-        "react/hooks/useSwitchChain",
-        "react/hooks/useWalletConnectScanner",
-        "react/hooks/useWalletServicesPlugin",
-        "react/hooks/useWalletUI",
+        "sdk/react/hooks/README",
+        "sdk/react/hooks/useWeb3Auth",
+        "sdk/react/hooks/useWeb3AuthConnect",
+        "sdk/react/hooks/useWeb3AuthDisconnect",
+        "sdk/react/hooks/useWeb3AuthUser",
+        "sdk/react/hooks/useIdentityToken",
+        "sdk/react/hooks/useEnableMFA",
+        "sdk/react/hooks/useManageMFA",
+        "sdk/react/hooks/useCheckout",
+        "sdk/react/hooks/useSwap",
+        "sdk/react/hooks/useSwitchChain",
+        "sdk/react/hooks/useWalletConnectScanner",
+        "sdk/react/hooks/useWalletServicesPlugin",
+        "sdk/react/hooks/useWalletUI",
       ],
     },
-    "react/ethereum-hooks",
+    "sdk/react/ethereum-hooks",
     {
       type: "category",
       label: "Solana Hooks",
       items: [
-        "react/solana-hooks/solana-hooks",
-        "react/solana-hooks/useSolanaWallet",
-        "react/solana-hooks/useSignMessage",
-        "react/solana-hooks/useSignTransaction",
-        "react/solana-hooks/useSignAndSendTransaction",
+        "sdk/react/solana-hooks/README",
+        "sdk/react/solana-hooks/useSolanaWallet",
+        "sdk/react/solana-hooks/useSignMessage",
+        "sdk/react/solana-hooks/useSignTransaction",
+        "sdk/react/solana-hooks/useSignAndSendTransaction",
       ],
     },
-    "react/examples",
+    "sdk/react/examples",
     {
       type: "link",
       label: "Playground",
@@ -199,54 +326,54 @@ const sidebar = {
       defaultStyle: true,
     },
 
-    "vue/vue",
+    "sdk/vue/README",
     {
       type: "category",
       collapsible: true,
       collapsed: false,
       label: "Advanced",
       items: [
-        "vue/advanced/advanced",
-        "vue/advanced/custom-authentication",
-        "vue/advanced/whitelabel",
-        "vue/advanced/mfa",
-        "vue/advanced/smart-accounts",
-        "vue/advanced/wallet-services",
+        "sdk/vue/advanced/README",
+        "sdk/vue/advanced/custom-authentication",
+        "sdk/vue/advanced/whitelabel",
+        "sdk/vue/advanced/mfa",
+        "sdk/vue/advanced/smart-accounts",
+        "sdk/vue/advanced/wallet-services",
       ],
     },
     {
       type: "category",
       label: "Web3Auth Composables",
       items: [
-        "vue/composables/composables",
-        "vue/composables/useWeb3Auth",
-        "vue/composables/useWeb3AuthConnect",
-        "vue/composables/useWeb3AuthDisconnect",
-        "vue/composables/useWeb3AuthUser",
-        "vue/composables/useIdentityToken",
-        "vue/composables/useEnableMFA",
-        "vue/composables/useManageMFA",
-        "vue/composables/useCheckout",
-        "vue/composables/useSwap",
-        "vue/composables/useSwitchChain",
-        "vue/composables/useWalletConnectScanner",
-        "vue/composables/useWalletServicesPlugin",
-        "vue/composables/useWalletUI",
+        "sdk/vue/composables/README",
+        "sdk/vue/composables/useWeb3Auth",
+        "sdk/vue/composables/useWeb3AuthConnect",
+        "sdk/vue/composables/useWeb3AuthDisconnect",
+        "sdk/vue/composables/useWeb3AuthUser",
+        "sdk/vue/composables/useIdentityToken",
+        "sdk/vue/composables/useEnableMFA",
+        "sdk/vue/composables/useManageMFA",
+        "sdk/vue/composables/useCheckout",
+        "sdk/vue/composables/useSwap",
+        "sdk/vue/composables/useSwitchChain",
+        "sdk/vue/composables/useWalletConnectScanner",
+        "sdk/vue/composables/useWalletServicesPlugin",
+        "sdk/vue/composables/useWalletUI",
       ],
     },
-    "vue/ethereum-composables",
+    "sdk/vue/ethereum-composables",
     {
       type: "category",
       label: "Solana Composables",
       items: [
-        "vue/solana-composables/solana-composables",
-        "vue/solana-composables/useSolanaWallet",
-        "vue/solana-composables/useSignMessage",
-        "vue/solana-composables/useSignTransaction",
-        "vue/solana-composables/useSignAndSendTransaction",
+        "sdk/vue/solana-composables/README",
+        "sdk/vue/solana-composables/useSolanaWallet",
+        "sdk/vue/solana-composables/useSignMessage",
+        "sdk/vue/solana-composables/useSignTransaction",
+        "sdk/vue/solana-composables/useSignAndSendTransaction",
       ],
     },
-    "vue/examples",
+    "sdk/vue/examples",
     {
       type: "link",
       label: "Support Forum",
@@ -264,42 +391,42 @@ const sidebar = {
       value: webTopNavButton(js),
       defaultStyle: true,
     },
-    "js/js",
+    "sdk/js/README",
     {
       type: "category",
       collapsible: true,
       collapsed: false,
       label: "Advanced",
       items: [
-        "js/advanced/advanced",
-        "js/advanced/custom-authentication",
-        "js/advanced/whitelabel",
-        "js/advanced/mfa",
-        "js/advanced/smart-accounts",
-        "js/advanced/wallet-services",
+        "sdk/js/advanced/README",
+        "sdk/js/advanced/custom-authentication",
+        "sdk/js/advanced/whitelabel",
+        "sdk/js/advanced/mfa",
+        "sdk/js/advanced/smart-accounts",
+        "sdk/js/advanced/wallet-services",
       ],
     },
-    "js/events",
+    "sdk/js/events",
     {
       type: "category",
       label: "Functions",
       items: [
-        "js/functions/functions",
-        "js/functions/connect",
-        "js/functions/getUserInfo",
-        "js/functions/getIdentityToken",
-        "js/functions/logout",
-        "js/functions/enableMFA",
-        "js/functions/manageMFA",
-        "js/functions/showCheckout",
-        "js/functions/showSwap",
-        "js/functions/switchChain",
-        "js/functions/showWalletConnectScanner",
-        "js/functions/showWalletUI",
+        "sdk/js/functions/README",
+        "sdk/js/functions/connect",
+        "sdk/js/functions/getUserInfo",
+        "sdk/js/functions/getIdentityToken",
+        "sdk/js/functions/logout",
+        "sdk/js/functions/enableMFA",
+        "sdk/js/functions/manageMFA",
+        "sdk/js/functions/showCheckout",
+        "sdk/js/functions/showSwap",
+        "sdk/js/functions/switchChain",
+        "sdk/js/functions/showWalletConnectScanner",
+        "sdk/js/functions/showWalletUI",
       ],
     },
-    "js/ethereum-integration",
-    "js/examples",
+    "sdk/js/ethereum-integration",
+    "sdk/js/examples",
     {
       type: "link",
       label: "Support Forum",
@@ -317,21 +444,21 @@ const sidebar = {
       value: mobileTopNavButton(android),
       defaultStyle: true,
     },
-    "android/android",
-    "android/install",
-    "android/initialize",
-    "android/usage",
-    "android/examples",
+    "sdk/android/README",
+    "sdk/android/install",
+    "sdk/android/initialize",
+    "sdk/android/usage",
+    "sdk/android/examples",
     {
       type: "category",
       collapsible: true,
       collapsed: false,
       label: "Additional Settings",
       items: [
-        "android/whitelabel",
-        "android/custom-authentication",
-        "android/mfa",
-        "android/dapp-share",
+        "sdk/android/whitelabel",
+        "sdk/android/custom-authentication",
+        "sdk/android/mfa",
+        "sdk/android/dapp-share",
       ],
     },
     {
@@ -342,7 +469,7 @@ const sidebar = {
     {
       type: "link",
       label: "Support Forum",
-      href: "https://web3auth.io/community/c/help-pnp/pnp-android/16",
+      href: "https://web3auth.io/community/c/help-pnp/pnp-sdk/android/16",
     },
     {
       type: "link",
@@ -356,21 +483,21 @@ const sidebar = {
       value: mobileTopNavButton(ios),
       defaultStyle: true,
     },
-    "ios/ios",
-    "ios/install",
-    "ios/initialize",
-    "ios/usage",
-    "ios/examples",
+    "sdk/ios/README",
+    "sdk/ios/install",
+    "sdk/ios/initialize",
+    "sdk/ios/usage",
+    "sdk/ios/examples",
     {
       type: "category",
       collapsible: true,
       collapsed: false,
       label: "Additional Settings",
       items: [
-        "ios/whitelabel",
-        "ios/custom-authentication",
-        "ios/mfa",
-        "ios/dapp-share",
+        "sdk/ios/whitelabel",
+        "sdk/ios/custom-authentication",
+        "sdk/ios/mfa",
+        "sdk/ios/dapp-share",
       ],
     },
     {
@@ -395,34 +522,34 @@ const sidebar = {
       value: mobileTopNavButton(reactnative),
       defaultStyle: true,
     },
-    "react-native/react-native",
-    "react-native/install",
-    "react-native/initialize",
-    "react-native/usage",
-    "react-native/examples",
+    "sdk/react-native/README",
+    "sdk/react-native/install",
+    "sdk/react-native/initialize",
+    "sdk/react-native/usage",
+    "sdk/react-native/examples",
     {
       type: "category",
       collapsible: true,
       collapsed: false,
       label: "Additional Settings",
       items: [
-        "react-native/account-abstraction",
-        "react-native/whitelabel",
-        "react-native/custom-authentication",
-        "react-native/mfa",
-        "react-native/dapp-share",
+        "sdk/react-native/account-abstraction",
+        "sdk/react-native/whitelabel",
+        "sdk/react-native/custom-authentication",
+        "sdk/react-native/mfa",
+        "sdk/react-native/dapp-share",
       ],
     },
     {
       type: "category",
       label: "Providers",
       items: [
-        "react-native/providers/providers",
-        "react-native/providers/evm",
-        "react-native/providers/aa-provider",
-        "react-native/providers/solana",
-        "react-native/providers/xrpl",
-        "react-native/providers/common",
+        "sdk/react-native/providers/README",
+        "sdk/react-native/providers/evm",
+        "sdk/react-native/providers/aa-provider",
+        "sdk/react-native/providers/solana",
+        "sdk/react-native/providers/xrpl",
+        "sdk/react-native/providers/common",
       ],
     },
     {
@@ -442,21 +569,21 @@ const sidebar = {
       value: mobileTopNavButton(flutter),
       defaultStyle: true,
     },
-    "flutter/flutter",
-    "flutter/install",
-    "flutter/initialize",
-    "flutter/usage",
-    "flutter/examples",
+    "sdk/flutter/README",
+    "sdk/flutter/install",
+    "sdk/flutter/initialize",
+    "sdk/flutter/usage",
+    "sdk/flutter/examples",
     {
       type: "category",
       collapsible: true,
       collapsed: false,
       label: "Additional Settings",
       items: [
-        "flutter/whitelabel",
-        "flutter/custom-authentication",
-        "flutter/mfa",
-        "flutter/dapp-share",
+        "sdk/flutter/whitelabel",
+        "sdk/flutter/custom-authentication",
+        "sdk/flutter/mfa",
+        "sdk/flutter/dapp-share",
       ],
     },
     {
@@ -486,21 +613,21 @@ const sidebar = {
       value: gamingTopNavButton(unity),
       defaultStyle: true,
     },
-    "unity/unity",
-    "unity/install",
-    "unity/initialize",
-    "unity/usage",
-    "unity/examples",
+    "sdk/unity/README",
+    "sdk/unity/install",
+    "sdk/unity/initialize",
+    "sdk/unity/usage",
+    "sdk/unity/examples",
     {
       type: "category",
       collapsible: true,
       collapsed: false,
       label: "Additional Settings",
       items: [
-        "unity/whitelabel",
-        "unity/custom-authentication",
-        "unity/mfa",
-        "unity/dapp-share",
+        "sdk/unity/whitelabel",
+        "sdk/unity/custom-authentication",
+        "sdk/unity/mfa",
+        "sdk/unity/dapp-share",
       ],
     },
     {
@@ -520,20 +647,20 @@ const sidebar = {
       value: gamingTopNavButton(unreal),
       defaultStyle: true,
     },
-    "unreal/unreal",
-    "unreal/install",
-    "unreal/initialize",
-    "unreal/usage",
-    "unreal/examples",
+    "sdk/unreal/README",
+    "sdk/unreal/install",
+    "sdk/unreal/initialize",
+    "sdk/unreal/usage",
+    "sdk/unreal/examples",
     {
       type: "category",
       collapsible: true,
       collapsed: false,
       label: "Additional Settings",
       items: [
-        "unreal/whitelabel",
-        "unreal/custom-authentication",
-        "unreal/mfa",
+        "sdk/unreal/whitelabel",
+        "sdk/unreal/custom-authentication",
+        "sdk/unreal/mfa",
       ],
     },
     {

@@ -1,0 +1,134 @@
+---
+title: Integrate Web3Auth with the Sui Blockchain
+sidebar_label: Sui
+image: 'banners/sui.png'
+
+keywords: [sui, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the Sui Blockchain | Documentation - Web3Auth'
+---
+
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While using the Web3Auth Web SDK for a non-EVM chain like [Sui](https://sui.io/) you get a standard provider from which you can get the private key of the user. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's public `signing key`, fetching `balance`, and `sign & send transaction`. We have highlighted a few methods here to get you started quickly on that.
+
+## Installation
+
+For Sui, we will use the [@mysten/sui.js](https://www.npmjs.com/package/@mysten/sui.js) library to create the Sui address, query the chain and submit transactions.
+
+```bash npm2yarn
+npm install --save @mysten/sui.js
+```
+
+## Initializing Provider
+
+### Getting the `chainConfig`
+
+<Tabs
+ groupId="chain"
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Devnet", value: "devnet", }
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: OTHER
+- Chain ID: 35834a8a
+- Public RPC URL: https://fullnode.mainnet.sui.io:443
+- Display Name: Sui Mainnet
+- Block Explorer Link: https://suiexplorer.com/
+- Ticker: SUI
+- Ticker Name: Sui
+- Logo: https://cryptologos.cc/logos/sui-sui-logo.png?v=029
+
+</TabItem>
+
+<TabItem value="devnet">
+
+- Chain Namespace: OTHER
+- Chain ID: fd2adfa8
+- Public RPC URL: https://fullnode.devnet.sui.io:443
+- Display Name: Sui Devnet
+- Block Explorer Link: https://suiexplorer.com/?network=devnet
+- Ticker: SUI
+- Ticker Name: Sui
+- Logo: https://cryptologos.cc/logos/sui-sui-logo.png?v=029
+
+</TabItem>
+</Tabs>
+
+## Get Account and KeyPair
+
+Once a user logs in, the Web3Auth SDK returns a provider. Since Web3Auth doesn't have a native provider for Sui, we need to directly use the private key to create account.
+
+Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, Web3Auth does not provide direct access to Sui specific signing functions, hence, we create a new `Ed25519Keypair` to give SDK the ability to sign transactions with this key pair.
+
+```tsx
+import { Ed25519Keypair } from '@mysten/sui.js/keypairs/ed25519'
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// Create a Uint8Arrray from private key which is in hex format
+const privateKeyUint8Array = new Uint8Array(
+  privateKey.match(/.{1,2}/g)!.map((byte: any) => parseInt(byte, 16))
+)
+
+// Create an instance of the Sui local key pair manager
+const keyPair = Ed25519Keypair.fromSecretKey(privateKeyUint8Array)
+
+const address = keyPair.toSuiAddress()
+console.log(`Sui account: ${address}`)
+```
+
+## Get Balance
+
+```tsx
+import { CoinBalance, getFullnodeUrl, SuiClient } from '@mysten/sui.js/client';
+import { MIST_PER_SUI } from '@mysten/sui.js/utils';
+
+// Use the getFullnodeUrl from SDK to get the RPC detils for the Sui network.
+const rpcUrl = getFullnodeUrl('devnet');
+const suiClient = new SuiClient({ url: this.rpcUrl });
+
+// Use code from the above to retrive address here.
+const balanceResponse = await this.suiClient.getBalance({owner: address});
+const suiBalance = balance(balanceResponse);
+console.log(`Sui Balance: ${suiBalance}`);
+
+
+// Convert MIST to Sui
+private balance = (balance: CoinBalance) => {
+    return Number.parseInt(balance.totalBalance) / Number(MIST_PER_SUI);
+}
+```
+
+## Send Transaction
+
+```tsx
+import { TransactionBlock } from '@mysten/sui.js/transactions'
+import { MIST_PER_SUI } from '@mysten/sui.js/utils'
+
+// Use code from the above Initializing SuiClient and Ed25519Keypair here
+
+const tx = new TransactionBlock()
+
+// Convert value to be transferred to smallest value.
+const [coin] = tx.splitCoins(tx.gas, [tx.pure(0.2 * Number(MIST_PER_SUI))])
+tx.transferObjects(
+  [coin],
+  tx.pure('0x7d42ef777fa6e46a7b19d54dc9353c898e7f1c65a3abab8b73f92fe5efe6d96d')
+)
+
+const result = await this.suiClient.signAndExecuteTransactionBlock({
+  signer: keyPair,
+  transactionBlock: tx,
+})
+const transactionHash = result.digest
+console.log(`Transaction hash: ${transactionHash}`)
+```

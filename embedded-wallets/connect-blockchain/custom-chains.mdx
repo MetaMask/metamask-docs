@@ -1,0 +1,69 @@
+---
+title: Add Custom Chains to the Dashboard
+sidebar_label: Add Custom Chains to the Dashboard
+image: 'images/docs-meta-cards/documentation-card.png'
+description: 'Add Custom Chains | Documentation - Web3Auth'
+---
+
+Web3Auth PnP V10 onwards does not need any additional setup on the code side for blockchain connections. All of it is handled on our updated Dashboard. We can use any chain from the extensive list of predefined chains and add more if we need by toggling them on.
+
+![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)
+
+## Adding Custom Chains
+
+To add a custom chain, we need to follow these steps:
+
+1. Go to the [Dashboard](https://dashboard.web3auth.io).
+2. Click on the `Projects` section and select the project you want to add the custom chain to.
+3. Click on the `Chains & Networks` tab.
+4. Fill in the details of the chain you want to add.(Like LogoURL, Network Name etc.)
+5. Then press Save Network blue button at the bottom.
+
+![Adding Custom Chain](/img/connect-blockchain/add-a-chain-dashboard-v2.png)
+
+## Adding Chains on Code-side for PnP Web SDK
+
+While chains can be configured through the dashboard, you can also override these settings in your code by specifying custom chains during SDK initialization.
+
+### Example
+
+```typescript title="App.tsx"
+import { Web3Auth, WEB3AUTH_NETWORK, CHAIN_NAMESPACES } from '@web3auth/modal'
+
+// Define custom chain configurations
+const evmChainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: '0xaa36a7', // Sepolia chainId in hex
+  rpcTarget: 'https://1rpc.io/sepolia',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  decimals: 18,
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
+
+const arbitrumChainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: '0x66eee', // Arbitrum Sepolia (421614 in hex)
+  rpcTarget: 'https://sepolia-rollup.arbitrum.io/rpc',
+  displayName: 'Arbitrum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.arbiscan.io/',
+  ticker: 'AETH',
+  tickerName: 'AETH',
+  decimals: 18,
+  logo: 'https://arbitrum.foundation/images/logo.png',
+}
+
+// Initialize Web3Auth with custom chains
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  chains: [evmChainConfig, arbitrumChainConfig], // Pass array of custom chains
+  defaultChainId: '0x66eee', // Set default chain by chainId
+})
+```
+
+By using the `chains` parameter, you can specify multiple chain configurations for your application, only provided chains will be used. The `defaultChainId` parameter allows you to set which chain should be used by default.
+
+This approach gives you flexibility to dynamically configure chains in your code while maintaining the ease of dashboard configuration for your project.

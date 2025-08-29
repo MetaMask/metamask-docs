@@ -1,0 +1,110 @@
+---
+title: Integrate Web3Auth with the Mint Blockchain in React Native
+sidebar_label: React Native
+image: 'banners/mint.png'
+
+keywords: [react-native, mint, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the Mint Blockchain in React Native | Documentation - Web3Auth'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Web3Auth with the Mint Blockchain in React Native"
+  description="Integrate Web3Auth with the Mint Blockchain in React Native | Documentation - Web3Auth"
+  image="https://web3auth.io/docs/banners/mint.png"
+  slug="/embedded-wallets/connect-blockchain/evm/mint/react-native"
+/>
+
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Mint Blockchain](https://mintscan.org/) blockchain calls like getting the user's `account`, fetching `balance`, signing transactions, sending transactions, and interacting with smart contracts. We have highlighted a few key examples to get you started quickly.
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0xB9', // hex of 185, Mint Mainnet
+  rpcTarget: 'https://rpc.mintchain.io',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura.
+  displayName: 'Mint Mainnet',
+  blockExplorer: 'https://explorer.mintchain.io',
+  ticker: 'ETH',
+  tickerName: 'ETH',
+}
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x697', // hex of 1687, Mint Sepolia Testnet
+  rpcTarget: 'https://sepolia-testnet-rpc.mintchain.io',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura.
+  displayName: 'Mint Sepolia Testnet',
+  blockExplorer: 'https://sepolia-testnet-explorer.mintchain.io',
+  ticker: 'ETH',
+  tickerName: 'ETH',
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

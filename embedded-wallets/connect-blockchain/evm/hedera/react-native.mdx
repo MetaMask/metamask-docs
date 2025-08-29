@@ -1,0 +1,126 @@
+---
+title: Integrate Web3Auth with the Hedera Blockchain in React Native
+sidebar_label: React Native
+image: 'banners/hedera.png'
+
+keywords: [react-native, hedera, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the Hedera Blockchain in React Native | Documentation - Web3Auth'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Web3Auth with the Hedera Blockchain in React Native"
+  description="Integrate Web3Auth with the Hedera Blockchain in React Native | Documentation - Web3Auth"
+  image="https://web3auth.io/docs/banners/hedera.png"
+  slug="/embedded-wallets/connect-blockchain/evm/hedera/react-native"
+/>
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+    { label: "Previewnet", value: "previewnet", },
+]}
+
+>
+
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x127',
+  rpcTarget: 'https://mainnet.hashio.io/api',
+  displayName: 'Hedera Mainnet',
+  blockExplorerUrl: 'https://hashscan.io/mainnet/',
+  ticker: 'HBAR',
+  tickerName: 'HBAR',
+  logo: 'https://cryptologos.cc/logos/hedera-hbar-logo.png?v=033',
+}
+```
+
+</TabItem>
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x128',
+  rpcTarget: 'https://testnet.hashio.io/api',
+  displayName: 'Hedera Testnet',
+  blockExplorerUrl: 'https://hashscan.io/testnet/',
+  ticker: 'HBAR',
+  tickerName: 'HBAR',
+  logo: 'https://cryptologos.cc/logos/hedera-hbar-logo.png?v=033',
+}
+```
+
+</TabItem>
+<TabItem
+  value="previewnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x129',
+  rpcTarget: 'https://previewnet.hashio.io/api',
+  displayName: 'Hedera Previewnet',
+  blockExplorerUrl: 'https://hashscan.io/previewnet/',
+  ticker: 'HBAR',
+  tickerName: 'HBAR',
+  logo: 'https://cryptologos.cc/logos/hedera-hbar-logo.png?v=033',
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

@@ -1,0 +1,264 @@
+---
+title: Embedded Wallets SDK for Unity
+sidebar_label: Getting Started
+description: 'MetaMask Embedded Wallets SDK for Unity | Documentation'
+---
+
+import ExampleCards from '@theme/ExampleCards'
+import { webExamples, QUICK_START } from '@site/src/utils/example-maps'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
+
+## Overview
+
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provides a seamless authentication experience for Unity game applications with social logins, external wallets, and more. Using our Unity SDK written in C#, you can easily connect users to their preferred wallets and manage authentication state across all mobile platforms.
+
+## Requirements
+
+- Unity Editor 2019.4.9f1 or greater
+- .Net Framework 4.x
+- iOS Platform Target Version 14 and above
+- Android Target SDK Version 24 and above
+- Basic knowledge of C# and Unity Development
+
+## Installation
+
+Install the Web3Auth Unity SDK using one of the following methods:
+
+### Download Unity Package
+
+Download the [.unitypackage](https://github.com/Web3Auth/web3auth-unity-sdk/releases/tag/3.0.0) from our latest release and import the package file into your existing Unity3D project.
+
+:::warning
+
+You may encounter errors when importing this package into your existing project.
+
+`The type or namespace name 'Newtonsoft' could not be found (are you missing a using directive or an assembly reference?)`
+
+To fix this problem you need to add the following line into the dependencies object which is inside the `Packages/manifest.json` file.
+
+```json title="/Packages/manifest.json"
+"com.unity.nuget.newtonsoft-json": "3.2.1"
+```
+
+:::
+
+:::tip
+
+We recommend you use the [Nethereum Library](https://docs.nethereum.com/en/latest/unity3d-introduction/) for making the blockchain calls. You can check our documentation on how to integrate Nethereum it with Web3Auth [here](/connect-blockchain/evm/ethereum/unity).
+
+:::
+
+## Setup
+
+:::info
+
+Prerequisites Before you start, make sure you have registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/) and have set up your project. You can look into the [Dashboard Setup](/dashboard) guide to learn more.
+
+:::
+
+### 1. Configure Web3Auth Project
+
+- Go to [Developer Dashboard](https://dashboard.web3auth.io/), create or select an Web3Auth project:
+- Add `{{SCHEMA}}://{YOUR_APP_PACKAGE_NAME}/auth` to **Whitelist URLs**.
+- Copy the `Client ID` for usage later.
+
+### 2. Create Web3Auth Instance
+
+Attach a `Web3Auth.cs` script to your game object where you want to write your authentication code.
+
+```cs title="/Assets/Web3Auth.cs"
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using Newtonsoft.Json;
+
+public class Web3Auth : MonoBehaviour
+{
+  // Start is called before the first frame update
+  void Start() {}
+  public void login() {}
+  private void onLogin(Web3AuthResponse response) {}
+  public void logout() {}
+  private void onLogout() {}
+}
+```
+
+Within your script, import the `Web3Auth` component in your class:
+
+```cs
+Web3Auth web3Auth;
+```
+
+### 3. Configuration
+
+Create an instance within your `Start()` function by creating an instance of the component you just imported:
+
+```cs
+web3Auth = GetComponent<Web3Auth>();
+```
+
+After instantiation, within your `Start()` function, set up the Web3Auth Options as follows:
+
+```cs
+web3Auth.setOptions(new Web3AuthOptions(){
+    clientId = "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+    network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
+    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+});
+```
+
+### 4. Initialize and Setup Event Handlers
+
+Set up event handlers for login and logout events:
+
+```cs
+void Start()
+{
+    web3Auth = GetComponent<Web3Auth>();
+    web3Auth.setOptions(new Web3AuthOptions()
+    {
+        clientId = "YOUR_CLIENT_ID",
+        network = Web3Auth.Network.SAPPHIRE_MAINNET,
+        redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+    });
+
+    // Set up event handlers
+    web3Auth.onLogin += onLogin;
+    web3Auth.onLogout += onLogout;
+}
+
+private void onLogin(Web3AuthResponse response)
+{
+    Debug.Log("Login successful!");
+    Debug.Log("Private Key: " + response.privKey);
+}
+
+private void onLogout()
+{
+    Debug.Log("Logout successful!");
+}
+```
+
+## Advanced Configuration
+
+The Web3Auth Unity SDK offers a rich set of advanced configuration options:
+
+- **[Custom Authentication](./custom-authentication)**: Define authentication methods.
+- **[Whitelabeling & UI Customization](./whitelabel)**: Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./mfa)**: Set up and manage MFA.
+- **[DApp Share](./dapp-share)**: Share DApp sessions across devices.
+
+:::tip
+
+Head over to the advanced configuration sections to learn more about each configuration option.
+
+:::
+
+## Blockchain Integration
+
+Web3Auth is blockchain agnostic, enabling integration with any blockchain network. We recommend using the **Nethereum Library** for Ethereum integration.
+
+### Ethereum Integration
+
+For Ethereum integration, you can get the private key and use it with Nethereum:
+
+```cs
+public void login()
+{
+    var selectedProvider = Provider.GOOGLE;
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider
+    };
+    web3Auth.login(options);
+}
+
+private void onLogin(Web3AuthResponse response)
+{
+    var privateKey = response.privKey;
+    // Use private key with Nethereum for Ethereum transactions
+    Debug.Log("Ethereum Private Key: " + privateKey);
+}
+```
+
+### Solana Integration
+
+For Solana integration, you can get the Ed25519 private key:
+
+```cs
+private void onLogin(Web3AuthResponse response)
+{
+    var ed25519PrivKey = response.ed25519PrivKey;
+    // Use Ed25519 private key with Solana libraries
+    Debug.Log("Solana Ed25519 Private Key: " + ed25519PrivKey);
+}
+```
+
+<Tabs
+  defaultValue="basic-config"
+  values={[
+    { label: "Basic Configuration", value: "basic-config" },
+    { label: "Advanced Configuration", value: "advanced-config" },
+  ]}
+>
+
+<TabItem value="basic-config">
+
+```cs
+web3Auth.setOptions(new Web3AuthOptions(){
+    clientId = "YOUR_CLIENT_ID",
+    network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
+    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+});
+```
+
+</TabItem>
+
+<TabItem value="advanced-config">
+
+```cs
+web3Auth.setOptions(new Web3AuthOptions(){
+    clientId = "YOUR_CLIENT_ID",
+    network = Web3Auth.Network.SAPPHIRE_MAINNET,
+    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+    whiteLabel = new WhiteLabelData() {
+        appName = "Your App Name",
+        logoLight = "https://your-logo-light.png",
+        logoDark = "https://your-logo-dark.png",
+        defaultLanguage = Language.EN,
+        mode = ThemeModes.AUTO
+    },
+    mfaSettings = new MfaSettings() {
+        deviceShareFactor = new MfaSetting() {
+            enable = true,
+            priority = 1
+        },
+        backUpShareFactor = new MfaSetting() {
+            enable = true,
+            priority = 2
+        },
+        socialBackupFactor = new MfaSetting() {
+            enable = true,
+            priority = 3
+        },
+        passwordFactor = new MfaSetting() {
+            enable = true,
+            priority = 4
+        }
+    }
+});
+```
+
+</TabItem>
+
+</Tabs>
+
+<SdkTroubleshootingIntro />
+
+## Quick Starts
+
+<ExampleCards exampleMap={webExamples.filter(obj => obj.type === QUICK_START)} />

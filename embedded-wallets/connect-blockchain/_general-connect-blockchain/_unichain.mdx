@@ -1,0 +1,38 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x82 (hex of 130)
+- Public RPC URL: https://mainnet.unichain.org (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: Unichain Mainnet
+- Block Explorer Link: https://uniscan.xyz
+- Ticker: ETH
+- Ticker Name: ETH
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x515 (hex of 1301)
+- Public RPC URL: https://sepolia.unichain.org (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: Unichain Sepolia Testnet
+- Block Explorer Link: https://sepolia.uniscan.xyz/
+- Ticker: ETH
+- Ticker Name: ETH
+
+</TabItem>
+</Tabs>

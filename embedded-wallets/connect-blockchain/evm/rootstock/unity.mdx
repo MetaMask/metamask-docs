@@ -1,0 +1,90 @@
+---
+title: Integrate Web3Auth with the Rootstock Blockchain in Unity
+sidebar_label: Unity
+image: 'banners/rootstock.png'
+
+keywords: [unity, rootstock, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the Rootstock Blockchain in Unity | Documentation - Web3Auth'
+---
+
+import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Web3Auth with the Rootstock Blockchain in Unity"
+  description="Integrate Web3Auth with the Rootstock Blockchain in Unity | Documentation - Web3Auth"
+  image="https://web3auth.io/docs/banners/rootstock.png"
+  slug="/embedded-wallets/connect-blockchain/evm/rootstock/unity"
+/>
+
+## Installation
+
+<InstallationSnippet />
+
+## Chain Details for Rootstock
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x1e
+- Public RPC URL: https://public-node.rsk.co​
+- Display Name: Rootstock Mainnet
+- Block Explorer Link: https://explorer.rootstock.io
+- Ticker: RBTC
+- Ticker Name: RBTC
+
+</TabItem>
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x1f
+- Public RPC URL: https://public-node.testnet.rsk.co
+- Display Name: Rootstock Testnet
+- Block Explorer Link: https://explorer.testnet.rootstock.io
+- Ticker: tRBTC
+- Ticker Name: tRBTC
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />

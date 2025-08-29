@@ -1,0 +1,115 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="pnp"
+  values={[
+    { label: "PnP React Native SDK", value: "pnp", },
+    { label: "SFA JS SDK", value: "sfa", },
+  ]}
+>
+<TabItem
+  value="pnp"
+>
+
+```typescript
+import * as WebBrowser from "@toruslabs/react-native-web-browser";
+import EncryptedStorage from "react-native-encrypted-storage";
+import Web3Auth, { LOGIN_PROVIDER, WEB3AUTH_NETWORK } from "@web3auth/react-native-sdk";
+import "@ethersproject/shims";
+import { ethers } from "ethers";
+import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+
+const [provider, setProvider] = useState<IProvider | null>(null);
+
+const ethereumPrivateKeyProvider = new EthereumPrivateKeyProvider({
+  config: {
+    chainConfig,
+  },
+});
+
+const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
+  clientId,
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
+});
+
+await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey);
+
+setProvider(ethereumPrivateKeyProvider);
+```
+
+</TabItem>
+
+<TabItem
+  value="sfa"
+>
+
+```typescript
+import React, {useEffect, useState} from 'react';
+import '@ethersproject/shims';
+import EncryptedStorage from 'react-native-encrypted-storage';
+import {CHAIN_NAMESPACES, IProvider, WEB3AUTH_NETWORK} from '@web3auth/base';
+
+// IMP START - Quick Start
+import {Web3Auth, SDK_MODE, decodeToken} from '@web3auth/single-factor-auth';
+import {EthereumPrivateKeyProvider} from '@web3auth/ethereum-provider';
+// IMP END - Quick Start
+import {ethers} from 'ethers';
+
+// IMP START - Chain Config
+const chainConfig = {
+  chainId: '0x1',
+  displayName: 'Ethereum Mainnet',
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  tickerName: 'Ethereum',
+  ticker: 'ETH',
+  decimals: 18,
+  rpcTarget: 'https://rpc.ethereum.org',
+  blockExplorerUrl: 'https://etherscan.io',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+};
+// IMP END - Chain Config
+
+// IMP START - SDK Initialization
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: {chainConfig},
+});
+
+const web3auth = new Web3Auth({
+  clientId, // Get your Client ID from Web3Auth Dashboard
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  privateKeyProvider,
+  storage: EncryptedStorage,
+  mode: SDK_MODE.REACT_NATIVE,
+});
+// IMP END - SDK Initialization
+
+export default function App() {
+  const [provider, setProvider] = useState<IProvider | null>(null);
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [userInfo, setUserInfo] = useState<string>('');
+  const [consoleUI, setConsoleUI] = useState<string>('');
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        // IMP START - SDK Initialization
+        await web3auth.init();
+        setProvider(web3auth.provider);
+        // IMP END - SDK Initialization
+
+        if (web3auth.connected) {
+          setLoggedIn(true);
+        }
+      } catch (error) {
+        uiConsole(error, 'mounted caught');
+      }
+    };
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+```
+
+</TabItem>
+</Tabs>

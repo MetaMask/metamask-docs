@@ -1,0 +1,294 @@
+---
+title: OAuth 2.0 Login with Web3Auth
+sidebar_label: OAuth 2.0
+description: 'OAuth 2.0 Login with Web3Auth | Documentation - Web3Auth'
+---
+
+import OAuthToggle from '@site/static/img/w3a-dashboard/authentication-social-connections.png'
+
+OAuth 2.0 is a widely adopted standard that enables users to authenticate with third-party identity providers in a secure and user-friendly manner. Web3Auth offers native support for multiple OAuth 2.0 login options, allowing developers to integrate familiar authentication experiences directly into their applications.
+
+:::success Enable on Dashboard
+
+To use this feature, please enable `X(Twitter)`, `Farcaster`, `Apple`, `GitHub`, `Reddit`, `Line`, `Kakao`, `LinkedIn` or `Wechat` from the Social Connections section in the [Web3Auth Dashboard](https://dashboard.web3auth.io).
+
+> By default, Web3Auth uses its own pre-configured credentials for different social login providers.
+
+:::
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={OAuthToggle}
+    style={{
+      maxWidth: '800px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Toggle OAuth Connection on Dashboard"
+  />
+</div>
+
+## Usage
+
+> Follow our [Quickstart Guide](/quick-start) to setup the basic flow.
+
+### Login with X
+
+> Don't forget to enable X(Twitter) on the Dashboard.
+
+```tsx title="App.tsx"
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
+import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
+
+function CustomConnectors() {
+  const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
+
+  const loginWithX = async () => {
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      // focus-next-line
+      authConnection: AUTH_CONNECTION.TWITTER,
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={loginWithX} disabled={loading || isConnected}>
+        Login with X
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Login with Farcaster
+
+> Don't forget to enable Farcaster on the Dashboard.
+
+```tsx title="App.tsx"
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
+import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
+
+function CustomConnectors() {
+  const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
+
+  const loginWithFarcaster = async () => {
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      // focus-next-line
+      authConnection: AUTH_CONNECTION.FARCASTER,
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={loginWithFarcaster} disabled={loading || isConnected}>
+        Login with Farcaster
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Login with Apple
+
+> Don't forget to enable Apple on the Dashboard.
+
+```tsx title="App.tsx"
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
+import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
+
+function CustomConnectors() {
+  const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
+
+  const loginWithApple = async () => {
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      // focus-next-line
+      authConnection: AUTH_CONNECTION.APPLE,
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={loginWithApple} disabled={loading || isConnected}>
+        Login with Apple
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Login with GitHub
+
+> Don't forget to enable GitHub on the Dashboard.
+
+```tsx title="App.tsx"
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
+import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
+
+function CustomConnectors() {
+  const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
+
+  const loginWithGitHub = async () => {
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      // focus-next-line
+      authConnection: AUTH_CONNECTION.GITHUB,
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={loginWithGitHub} disabled={loading || isConnected}>
+        Login with GitHub
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Login with Reddit
+
+> Don't forget to enable Reddit on the Dashboard.
+
+```tsx title="App.tsx"
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
+import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
+
+function CustomConnectors() {
+  const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
+
+  const loginWithReddit = async () => {
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      // focus-next-line
+      authConnection: AUTH_CONNECTION.REDDIT,
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={loginWithReddit} disabled={loading || isConnected}>
+        Login with Reddit
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Login with Line
+
+> Don't forget to enable Line on the Dashboard.
+
+```tsx title="App.tsx"
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
+import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
+
+function CustomConnectors() {
+  const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
+
+  const loginWithLine = async () => {
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      // focus-next-line
+      authConnection: AUTH_CONNECTION.LINE,
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={loginWithLine} disabled={loading || isConnected}>
+        Login with Line
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Login with Kakao
+
+> Don't forget to enable Kakao on the Dashboard.
+
+```tsx title="App.tsx"
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
+import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
+
+function CustomConnectors() {
+  const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
+
+  const loginWithKakao = async () => {
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      // focus-next-line
+      authConnection: AUTH_CONNECTION.KAKAO,
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={loginWithKakao} disabled={loading || isConnected}>
+        Login with Kakao
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Login with LinkedIn
+
+> Don't forget to enable LinkedIn on the Dashboard.
+
+```tsx title="App.tsx"
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
+import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
+
+function CustomConnectors() {
+  const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
+
+  const loginWithLinkedIn = async () => {
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      // focus-next-line
+      authConnection: AUTH_CONNECTION.LINKEDIN,
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={loginWithLinkedIn} disabled={loading || isConnected}>
+        Login with LinkedIn
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Login with Wechat
+
+> Don't forget to enable Wechat on the Dashboard.
+
+```tsx title="App.tsx"
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
+import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
+
+function CustomConnectors() {
+  const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
+
+  const loginWithWechat = async () => {
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      // focus-next-line
+      authConnection: AUTH_CONNECTION.WECHAT,
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={loginWithWechat} disabled={loading || isConnected}>
+        Login with Wechat
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```

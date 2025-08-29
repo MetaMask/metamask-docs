@@ -1,0 +1,192 @@
+---
+title: Integrate Web3Auth with the Bitcoin Blockchain
+sidebar_label: Bitcoin
+image: 'banners/bitcoin.png'
+keywords:
+  [
+    bitcoin,
+    wallet,
+    integration,
+    taproot,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
+description: 'Integrate Web3Auth with the Bitcoin Blockchain | Documentation - Web3Auth'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+
+When using the Web3Auth Web SDK for non-EVM chains like [Bitcoin](https://developer.bitcoin.org/), you get a standard provider that allows you to access the user's private key. With this private key, you can use the appropriate Bitcoin blockchain libraries to perform various actions such as retrieving the user's account information, fetching their balance, signing transactions, and sending transactions. We've highlighted a few methods here to help you get started quickly.
+
+:::note
+
+This documentation is for the Bitcoin Taproot Integration
+
+:::
+
+## Installation
+
+```bash npm2yarn
+npm install --save bitcoinjs-lib ecpair axios
+```
+
+## Initializing Provider
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: OTHER
+- Chain ID: Bitcoin
+- Public RPC URL: https://api.blockcypher.com/v1/btc/main (Avoid using public rpcTarget in production)
+- Display Name: Bitcoin Mainnet
+- Block Explorer Link: https://blockstream.info/
+- Ticker: BTC
+- Ticker Name: Bitcoin
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain Namespace: OTHER
+- Chain ID: Bitcoin
+- Public RPC URL: https://api.blockcypher.com/v1/btc/test3 (Avoid using public rpcTarget in production)
+- Display Name: Bitcoin Testnet
+- Block Explorer Link: https://blockstream.info/testnet/
+- Ticker: tBTC
+- Ticker Name: Bitcoin Testnet
+
+</TabItem>
+</Tabs>
+
+## Get Bitcoin Account and KeyPair
+
+Once a user logs in, the Web3Auth SDK returns a provider. Since Web3Auth doesn't have a native provider for Bitcoin, we need to directly use the private key to make the KeyPair using the necessary Bitcoin libraries.
+
+Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. This private key can be used to derive the Bitcoin KeyPair using the `bitcoinjs-lib` library.
+
+```tsx
+import { IProvider } from '@web3auth/base'
+import ecc from '@bitcoinerlab/secp256k1'
+import ECPairFactory from 'ecpair'
+import { Psbt, networks, payments, crypto, initEccLib } from 'bitcoinjs-lib'
+import axios from 'axios'
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+const keyPair = ECPair.fromPrivateKey(Buffer.from(privateKey, 'hex'))
+const bufPubKey = keyPair.publicKey
+const xOnlyPubKey = bufPubKey.subarray(1, 33)
+const tweakedChildNode = keyPair.tweak(crypto.taggedHash('TapTweak', xOnlyPubKey))
+const { address, output } = payments.p2tr({
+  pubkey: Buffer.from(tweakedChildNode.publicKey.subarray(1, 33)),
+  network,
+})
+```
+
+The code above uses the `privateKey` to create a `keyPair` using the `ECPair` class from the `bitcoinjs-lib` library. The `keyPair` is then used to derive the `xOnlyPubKey`, and `tweakedChildNode` using the `tweak` method. The `address` and `output` are then generated using the `payments.p2tr` method.
+
+**Key Points**:
+
+- **`keyPair`**: This is the Bitcoin key pair derived from the provided private key from Web3Auth using the `ECPair` class. The key pair consists of the private key and the public key. The private key is used to sign transactions, while the public key is used to generate the Bitcoin address.
+
+- **`xOnlyPubKey`**: This represents the x-coordinate of the public key, excluding the prefix byte. Taproot uses Schnorr signatures, which require only the x-coordinate of the public key. This x-only format is more efficient and is a key aspect of the Taproot design.
+
+- **`tweakedChildNode`**: This is the resulting key after tweaking the original public key. Taproot involves tweaking the public key using a tagged hash, which modifies the public key in a way that remains cryptographically secure but incorporates additional data or functionality.
+
+- **`address`**: This is the Bitcoin Taproot address derived from the provided public key. It is used to receive Bitcoin.
+
+- **`output`**: This is the output script associated with the address. In Bitcoin transactions, an output script (also known as a scriptPubKey) defines the conditions that must be met to spend the funds sent to an address. For Taproot addresses, the output script enforces the spending conditions defined by the Taproot upgrade.
+
+## Get Balance
+
+```tsx
+/*
+  Use `address` from above
+*/
+const response = await axios.get(`https://blockstream.info/testnet/api/address/${address}/utxo`)
+const utxos = response.data.filter(
+  (utxo: { status: { confirmed: boolean } }) => utxo.status.confirmed
+)
+const balance = utxos.reduce((acc: any, utxo: { value: any }) => acc + utxo.value, 0)
+console.log('Bitcoin Balance: ', balance)
+```
+
+The code above fetches the UTXOs for the given `address` and filters out the unconfirmed UTXOs. The balance is then calculated by summing the value of the UTXOs.
+
+## Send Transaction
+
+```tsx
+/*
+  Use `address`, `output`, `tweakedChildNode`, `xOnlyPubKey`, `utxos` from above.
+*/
+const utxo = utxos[0]
+const feeResponse = await axios.get('https://blockstream.info/testnet/api/fee-estimates')
+// For mainnet use https://blockstream.info/api/fee-estimates
+const maxFee = Math.max(...(Object.values(feeResponse.data) as number[]))
+const fee = maxFee * 1.2
+if (amount <= fee) {
+  const errorMsg = `Insufficient funds: ${amount} <= ${fee}`
+  uiConsole(errorMsg)
+  throw new Error(errorMsg)
+}
+
+const sendAmount = amount - Math.floor(fee)
+
+const psbt = new Psbt({ network })
+  .addInput({
+    hash: utxo.txid,
+    index: utxo.vout,
+    witnessUtxo: { value: utxo.value, script: output! },
+    tapInternalKey: xOnlyPubKey,
+  })
+  .addOutput({
+    value: sendAmount,
+    address: 'tb1ph9cxmts2r8z56mfzyhem74pep0kfz2k0pc56uhujzx0c3v2rrgssx8zc5q',
+  })
+
+psbt.signInput(0, tweakedChildNode)
+psbt.finalizeAllInputs()
+const txHex = psbt.extractTransaction().toHex()
+
+try {
+  const response = await axios.post(`https://blockstream.info/testnet/api/tx`, txHex)
+  // For mainnet use https://blockstream.info/api/tx
+  console.log('Transaction sent successfully:', response.data)
+  return response.data
+} catch (error) {
+  console.error('Error sending transaction:', error)
+  throw error
+}
+```
+
+The code above sends a transaction to the Bitcoin blockchain. The code fetches the fee estimates from the Bitcoin blockchain and calculates the fee for the transaction. The code then creates a PSBT object and adds the input and output to the PSBT object. The input is signed using the `tweakedChildNode` and the PSBT object is finalized. The transaction is then sent to the Bitcoin blockchain.
+
+## Example
+
+You can find a complete example of the Bitcoin Taproot integration in [this GitHub Repo](https://github.com/Web3Auth/mpc-core-kit-examples/blob/main/single-factor-auth-web/sfa-web-bitcoin-example).
+
+Live Demo: [https://sfa-web-bitcoin-example.vercel.app](https://sfa-web-bitcoin-example.vercel.app)

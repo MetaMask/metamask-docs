@@ -1,0 +1,69 @@
+---
+title: Integrate Web3Auth with the XPLA Blockchain
+sidebar_label: XPLA
+hide_table_of_contents: true
+
+image: 'banners/xpla.png'
+description: 'Integrate Web3Auth with the XPLA Blockchain | Documentation - Web3Auth'
+---
+
+import Tiles from '@theme/Tiles'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Web3Auth with the XPLA Blockchain"
+  description="Integrate Web3Auth with the XPLA Blockchain | Documentation - Web3Auth"
+  image="https://web3auth.io/docs/banners/xpla.png"
+  slug="/embedded-wallets/connect-blockchain/evm/xpla"
+/>
+
+Integrate Web3Auth seamlessly with EVM-based XPLA blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+
+This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
+
+export const XPLA = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/connect-blockchain/evm/xpla/web',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/connect-blockchain/evm/xpla/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/connect-blockchain/evm/xpla/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/connect-blockchain/evm/xpla/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/xpla/react-native',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/evm/xpla/unity',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={XPLA} />

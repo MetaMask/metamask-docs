@@ -1,0 +1,48 @@
+---
+title: PnP Android SDK - v7.3 to v7.4
+description: "PnP Android SDK - v7.3 to v7.4 | Documentation - Web3Auth"
+sidebar_label: v7.3 to v7.4
+---
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Migration Guide from v7.3 to v7.4 for Web3Auth PnP Android SDK
+
+## Overview
+
+This migration guide provides steps for upgrading from version 7.3(v7.3) to version 7.4(v7.4) of the
+Web3Auth PnP Android SDK. The guide outlines significant breaking change in `Web3AuthOptions`.
+
+## Changes in Detail
+
+### `Web3AuthOptions` changes
+
+From v7.4 onwards redirectUrl is a mandatory parameter in `Web3AuthOptions`.
+
+#### Before (v7.3)
+
+```kotlin title="Usage"
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    // Your Web3Auth Client ID from Developer Dashboard
+    clientId = getString(R.string.web3auth_project_id),
+    network = Network.MAINNET,
+  )
+)
+```
+
+#### After (v7.4)
+
+```kotlin title="Usage"
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    // Your Web3Auth Client ID from Developer Dashboard
+    clientId = getString(R.string.web3auth_project_id),
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth")
+  )
+)
+```

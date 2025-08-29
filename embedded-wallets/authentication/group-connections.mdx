@@ -1,0 +1,96 @@
+---
+title: Group Connections
+sidebar_label: Group Connections
+description: 'Group Connections | Documentation - Web3Auth'
+image: 'images/docs-meta-cards/documentation-card.png'
+---
+
+import AuthenticationGroupConnectionsSelect from '@site/static/img/w3a-dashboard/authentication-group-connections-select.png'
+import AuthenticationGroupConnectionsCreate from '@site/static/img/w3a-dashboard/authentication-group-connections-create.png'
+import AuthenticationGroupConnectionsConfirm from '@site/static/img/w3a-dashboard/authentication-group-connections-confirm.png'
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+import GroupConnectionFirebase from '../sdk/react/advanced/_custom-authentication-snippets/_grouped_auth_firebase.mdx'
+import GroupConnectionAuth0Implicit from '../sdk/react/advanced/_custom-authentication-snippets/_grouped_auth_implicit_auth0.mdx'
+import GroupConnectionAuth0JWT from '../sdk/react/advanced/_custom-authentication-snippets/_grouped_auth_jwt_auth0.mdx'
+import GroupModal from '../sdk/react/advanced/_custom-authentication-snippets/_grouped_modal_connections.mdx'
+
+Group Connections enable multiple login methods to be linked to the same on-chain user identity. This means that users logging in with different authentication providers (e.g., **_Google and Email Passwordless_**) can still access the **same wallet address**—ensuring a unified user experience.
+
+> _Before setting up a group connection, developers must first configure individual login connections that are eligible._
+
+## Set Up a Group Connection
+
+:::success Create Group Connection on Dashboard
+
+To use this feature, developers must go to the `Group Connections` tab in the [Web3Auth Dashboard](https://dashboard.web3auth.io).
+
+:::
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={AuthenticationGroupConnectionsCreate}
+    style={{
+      maxWidth: '800px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Authentication Group Connections"
+  />
+</div>
+
+Follow these steps:
+
+1. Visit the [Web3Auth Dashboard](https://dashboard.web3auth.io).
+2. Go to the `Group Connections` section.
+3. Click on the `Create Group` button.
+4. Enter your custom `Group Name`.
+5. Select `1st social connection` and `2nd social connection`.
+6. Click `Create Group`.
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={AuthenticationGroupConnectionsSelect}
+    style={{
+      maxWidth: '800px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Authentication Group Connections"
+  />
+</div>
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={AuthenticationGroupConnectionsConfirm}
+    style={{
+      maxWidth: '800px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Authentication Group Connections Confirm"
+  />
+</div>
+
+## Usage
+
+Since, the `Group Connections` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+
+> Follow our [Quickstart Guide](/quick-start) to setup the basic flow.
+
+<Tabs>
+  <TabItem value="modal" label="Modal Connection">
+    <GroupModal />
+  </TabItem>
+  <TabItem value="Google [Implicit] + Auth0 [Implicit]">
+    <GroupConnectionAuth0Implicit />
+  </TabItem>
+  <TabItem value="Google One Tap [JWT] + Auth0 [JWT]">
+    <GroupConnectionAuth0JWT />
+  </TabItem>
+  <TabItem value="Google [Implicit] + Firebase [JWT]">
+    <GroupConnectionFirebase />
+  </TabItem>
+</Tabs>

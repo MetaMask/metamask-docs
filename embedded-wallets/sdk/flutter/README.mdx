@@ -1,0 +1,316 @@
+---
+title: Embedded Wallets SDK for Flutter
+sidebar_label: Getting Started
+description: 'MetaMask Embedded Wallets SDK for Flutter | Documentation'
+---
+
+import ExampleCards from '@theme/ExampleCards'
+import { webExamples, QUICK_START } from '@site/src/utils/example-maps'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
+
+## Overview
+
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provides a seamless authentication experience for Flutter applications with social logins, external wallets, and more. Using our Flutter SDK written in Dart, you can easily connect users to their preferred wallets and manage authentication state across both iOS and Android platforms.
+
+## Requirements
+
+- **Android** API version 26 or newer
+- **iOS** 14, Xcode 12+ and Swift 5.x
+- Basic knowledge of Dart and Flutter Development
+
+## Installation
+
+To install the Web3Auth Flutter package, you have two options. You can either manually add the package in the `pubspec.yaml` file, or you can use the `flutter pub add` command.
+
+### Add via pubspec.yaml
+
+Add `web3auth_flutter` as a dependency to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  web3auth_flutter: ^6.1.2
+```
+
+### Add via flutter pub add
+
+Add `web3auth_flutter` using `flutter pub add` command:
+
+```sh
+flutter pub add web3auth_flutter
+```
+
+## Setup
+
+:::info
+
+Prerequisites Before you start, make sure you have registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/) and have set up your project. You can look into the [Dashboard Setup](/dashboard) guide to learn more.
+
+:::
+
+### 1. Android Configuration
+
+Once we have installed Web3Auth Flutter SDK, we also need to add the configuration for Android.
+
+#### Update compileSdkVersion
+
+For Android build `compileSdkVersion` needs to be `34`. Check your app module gradle file in your project to change it:
+
+```groovy
+android {
+    namespace "com.example.app_name"
+    // focus-next-line
+    compileSdkVersion 34
+   // ..
+}
+```
+
+#### Add Web3Auth to Gradle
+
+In your project-level gradle file add JitPack repository:
+
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // focus-next-line
+        maven { url "https://jitpack.io" } // <-- Add this line
+    }
+}
+```
+
+#### Update Permissions
+
+Open your app's `AndroidManifest.xml` file and add the following permission. Please make sure the `<uses-permission>` element should be a direct child of the `<manifest>` root element:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+### 2. Configuration
+
+Import and configure Web3Auth in your Flutter application:
+
+```dart title="main.dart"
+import 'package:web3auth_flutter/web3auth_flutter.dart';
+import 'package:web3auth_flutter/enums.dart';
+import 'package:web3auth_flutter/input.dart';
+import 'package:web3auth_flutter/output.dart';
+import 'dart:io';
+
+Future<void> initWeb3Auth() async {
+  late final Uri redirectUrl;
+
+  if (Platform.isAndroid) {
+    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
+    // w3a://com.example.w3aflutter/auth
+  } else {
+    redirectUrl = Uri.parse('{bundleId}://auth');
+    // com.example.w3aflutter://auth
+  }
+
+  await Web3AuthFlutter.init(Web3AuthOptions(
+    clientId: "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+    network: Network.sapphire_mainnet, // or Network.sapphire_devnet
+    redirectUrl: redirectUrl,
+  ));
+}
+```
+
+### 3. Initialize Web3Auth
+
+Initialize the Web3Auth instance and check for existing sessions:
+
+```dart
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  String _result = '';
+  bool logoutVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  Future<void> initPlatformState() async {
+    await initWeb3Auth();
+
+    try {
+      // Initialize and check for existing session
+      await Web3AuthFlutter.initialize();
+      final privateKey = await Web3AuthFlutter.getPrivKey();
+
+      if (privateKey.isNotEmpty) {
+        setState(() {
+          logoutVisible = true;
+          _result = 'Existing session found';
+        });
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+}
+```
+
+### 4. Handle Custom Tabs (Android)
+
+For Android, you need to handle custom tabs lifecycle to trigger login exceptions:
+
+```dart
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    // focus-next-line
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // focus-next-line
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  // focus-start
+  @override
+  void didChangeAppLifecycleState(final AppLifecycleState state) {
+    // This is important to trigger the user cancellation on Android.
+    if (state == AppLifecycleState.resumed) {
+      Web3AuthFlutter.setCustomTabsClosed();
+    }
+  }
+  // focus-end
+}
+```
+
+## Advanced Configuration
+
+The Web3Auth Flutter SDK offers a rich set of advanced configuration options:
+
+- **[Custom Authentication](./custom-authentication)**: Define authentication methods.
+- **[Whitelabeling & UI Customization](./whitelabel)**: Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./mfa)**: Set up and manage MFA.
+- **[DApp Share](./dapp-share)**: Share DApp sessions across devices.
+
+:::tip
+
+Head over to the advanced configuration sections to learn more about each configuration option.
+
+:::
+
+## Blockchain Integration
+
+Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
+
+### Ethereum Integration
+
+For Ethereum integration, you can get the private key and use it with web3dart or other Ethereum libraries:
+
+```dart
+Future<void> loginWithGoogle() async {
+  try {
+    final Web3AuthResponse response = await Web3AuthFlutter.login(
+      LoginParams(loginProvider: Provider.google)
+    );
+
+    final privateKey = response.privKey;
+    // Use private key with web3dart for Ethereum transactions
+    print("Ethereum Private Key: $privateKey");
+
+  } catch (e) {
+    print("Login failed: $e");
+  }
+}
+```
+
+### Solana Integration
+
+For Solana integration, you can get the Ed25519 private key:
+
+```dart
+Future<void> getSolanaAccount() async {
+  try {
+    final ed25519PrivKey = await Web3AuthFlutter.getEd25519PrivKey();
+    // Use Ed25519 private key with Solana libraries
+    print("Solana Ed25519 Private Key: $ed25519PrivKey");
+
+  } catch (e) {
+    print("Error getting private key: $e");
+  }
+}
+```
+
+<Tabs
+  defaultValue="basic-config"
+  values={[
+    { label: "Basic Configuration", value: "basic-config" },
+    { label: "Advanced Configuration", value: "advanced-config" },
+  ]}
+>
+
+<TabItem value="basic-config">
+
+```dart
+await Web3AuthFlutter.init(Web3AuthOptions(
+  clientId: "YOUR_CLIENT_ID",
+  network: Network.sapphire_mainnet, // or Network.sapphire_devnet
+  redirectUrl: redirectUrl,
+));
+```
+
+</TabItem>
+
+<TabItem value="advanced-config">
+
+```dart
+await Web3AuthFlutter.init(Web3AuthOptions(
+  clientId: "YOUR_CLIENT_ID",
+  network: Network.sapphire_mainnet,
+  redirectUrl: redirectUrl,
+  whiteLabel: WhiteLabelData(
+    appName: "Your App Name",
+    logoLight: "https://your-logo-light.png",
+    logoDark: "https://your-logo-dark.png",
+    defaultLanguage: Language.en,
+    mode: ThemeModes.auto,
+  ),
+  mfaSettings: MfaSettings(
+    deviceShareFactor: MfaSetting(
+      enable: true,
+      priority: 1,
+    ),
+    backUpShareFactor: MfaSetting(
+      enable: true,
+      priority: 2,
+    ),
+    socialBackupFactor: MfaSetting(
+      enable: true,
+      priority: 3,
+    ),
+    passwordFactor: MfaSetting(
+      enable: true,
+      priority: 4,
+    ),
+  ),
+));
+```
+
+</TabItem>
+
+</Tabs>
+
+<SdkTroubleshootingIntro />
+
+## Quick Starts
+
+<ExampleCards exampleMap={webExamples.filter(obj => obj.type === QUICK_START)} />

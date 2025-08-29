@@ -1,0 +1,173 @@
+---
+title: PnP Android SDK - v5 to v6
+
+description: "PnP Android SDK - v5 to v6 | Documentation - Web3Auth"
+sidebar_label: v5 to v6
+---
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Migration Guide from v5 to v6 for Web3Auth PnP Android SDK
+
+## Overview
+
+This migration guide provides steps for upgrading from version 5(v5) to version 6(v6) of the
+Web3Auth PnP Android SDK. The guide outlines significant changes and enhancements, including the
+introduction of `enableMFA` method to initiate MFA setup flow, and `launchWalletServices` method for
+template wallet interface.
+
+## Changes in Detail
+
+### `enableMFA` method
+
+From v6, developers can use the `enableMFA` method to initiate MFA setup flow for already logged in
+users.
+
+<Tabs
+  defaultValue="default-verifier"
+  values={[
+    { label: "Default Verifier", value: "default-verifier" },
+    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+  ]}
+>
+
+<TabItem value = "default-verifier">
+
+```kotlin title="Usage"
+import android.widget.Button
+import com.web3auth.core.Web3Auth
+import android.os.Bundle
+
+class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Auth
+
+     private fun enableMFA() {
+       // focus-next-line
+       val completableFuture = web3Auth.enableMFA()
+
+        completableFuture.whenComplete{_, error ->
+            if (error == null) {
+                Log.d("MainActivity_Web3Auth", "Launched successfully")
+                // Add your logic
+            } else {
+                // Add your logic on error
+                Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        ...
+        // Setup UI and event handlers
+        val enableMFAButton = findViewById<Button>(R.id.enableMFAButton)
+        enableMFAButton.setOnClickListener { enableMFA() }
+        ...
+    }
+    ...
+
+}
+
+```
+
+</TabItem>
+
+<TabItem value="custom-jwt-verifier">
+
+```kotlin title="Usage"
+import android.widget.Button
+import com.web3auth.core.Web3Auth
+import android.os.Bundle
+
+class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Auth
+
+     private fun enableMFA() {
+        val loginParams = LoginParams(
+            Provider.JWT,
+            extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+        )
+
+        // focus-next-line
+        val completableFuture = web3Auth.enableMFA(loginParams)
+
+        completableFuture.whenComplete{_, error ->
+            if (error == null) {
+                Log.d("MainActivity_Web3Auth", "Launched successfully")
+                // Add your logic
+            } else {
+                // Add your logic on error
+                Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        ...
+        // Setup UI and event handlers
+        val enableMFAButton = findViewById<Button>(R.id.enableMFAButton)
+        enableMFAButton.setOnClickListener { enableMFA() }
+        ...
+    }
+    ...
+
+}
+```
+
+</TabItem>
+</Tabs>
+
+### `launchWalletServices` method
+
+From v6, developers can use the `launchWalletServices` to launches a WebView which allows them to
+use the templated wallet UI services. Developers can pass the `ChainConfig` to open wallet services
+with a specific chain selected.
+
+:::note
+
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The
+minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production
+environment is the **Scale Plan**.
+
+:::
+
+#### ChainConfig Arguments
+
+| Parameter           | Description                                                                                                                 |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `chainNamespace`    | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.EIP155`. |
+| `decimals?`         | Number of decimals for the currency ticker. Default value is 18, and accepts `Int` as value.                                |
+| `blockExplorerUrl?` | Blockchain's explorer URL. (eg: `https://etherscan.io`)                                                                     |
+| `chainId`           | The chain id of the selected blockchain in hex `String`.                                                                    |
+| `displayName?`      | Display Name for the chain.                                                                                                 |
+| `logo?`             | Logo for the selected `chainNamespace` & `chainId`.                                                                         |
+| `rpcTarget`         | RPC Target URL for the selected `chainNamespace` & `chainId`.                                                               |
+| `ticker?`           | Default currency ticker of the network (e.g: `ETH`)                                                                         |
+| `tickerName?`       | Name for currency ticker (e.g: `Ethereum`)                                                                                  |
+
+#### Usage
+
+```kotlin title="Usage"
+// focus-start
+val launchWalletCompletableFuture = web3Auth.launchWalletServices(
+    loginParams = LoginParams(
+        selectedLoginProvider,
+        extraLoginOptions = null,
+        mfaLevel = MFALevel.NONE,
+    ),
+
+    chainConfig = ChainConfig(
+        chainId = "0x1",
+        rpcTarget = "https://mainnet.infura.io/v3/$key",
+        ticker = "ETH",
+        chainNamespace = ChainNamespace.EIP155
+    )
+)
+// focus-end
+
+launchWalletCompletableFuture.whenComplete { _, error ->
+    if (error == null) {
+        Log.d("MainActivity_Web3Auth", "Wallet launched successfully")
+    } else {
+        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+    }
+}
+```

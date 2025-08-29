@@ -1,0 +1,199 @@
+---
+title: Integrate Web3Auth with the StarkEx Blockchain
+sidebar_label: StarkEx
+image: 'banners/starkex.png'
+
+keywords: [starkex, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the StarkEx Blockchain | Documentation - Web3Auth'
+---
+
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While using the Web3Auth Web SDK for a non-EVM chain like [StarkEx](https://starkware.co/starkex/) you get a standard provider from which you can get the private key of the user. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few methods here to get you started quickly on that.
+
+:::note
+
+This reference is for the `Web`, however, you can use StarkEx on other Mobile and Gaming Platforms as well. Please follow our reference for [EVM Blockchains](/connect-blockchain/evm/), and similarly use StarkEx libraries that support the platforms to use the private key and make blockchain calls accordingly.
+
+:::
+
+## Installation
+
+```bash npm2yarn
+npm install --save web3 bn.js elliptic @starkware-industries/starkex-js @starkware-industries/starkware-crypto-utils
+```
+
+## Initializing Provider
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0x1
+- Public RPC URL: https://rpc.ethereum.org (Avoid using public rpcTarget in production)
+- Display Name: StarkEx Mainnet
+- Block Explorer Link: https://etherscan.io
+- Ticker: STARK
+- Ticker Name: StarkEx
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0xaa36a7
+- Public RPC URL: https://rpc.sepolia.org (Avoid using public rpcTarget in production)
+- Display Name: StarkEx Testnet
+- Block Explorer Link: https://sepolia.etherscan.io
+- Ticker: STARK
+- Ticker Name: StarkEx
+
+</TabItem>
+</Tabs>
+
+## Get Account and Key
+
+Once a user logs in, the Web3Auth SDK returns a provider. Even though StarkEx is a layer 2 on Ethereum, it is not EVM compatible. Hence to use it, one cannot use the native [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider that Web3Auth gives for EVM blockchains. Hence we need to directly use the private key to make the calls.
+
+Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with StarkEx EC Curve specific signing functions, hence, we first derive the Stark Key using the `getStarkKey()` function.
+
+On the underhood, it uses the `starkwareCrypto.ec.keyFromPrivate()` function, where we pass our Private key with the `hex` argument, since it is hex encoded. Further we get the public key from this using the `starkwareCrypto.ec.keyFromPublic()` function, and we take its X-coordinate using `.pub.getX()` which is our `starkKey`. We use this starkKey on `StarkEx` transactions.
+
+```tsx
+import starkwareCrypto from '@starkware-industries/starkware-crypto-utils'
+import { ec as elliptic } from 'elliptic'
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+const keyPair = starkwareCrypto.ec.keyFromPrivate(privateKey, 'hex')
+// get the account address from the public key
+const account = starkwareCrypto.ec.keyFromPublic(keyPair.getPublic(true, 'hex'), 'hex')
+
+// Use this key for the StarkEx transactions
+const startKey = account.pub.getX().toString('hex')
+```
+
+## Mint Request
+
+```tsx
+import StarkExAPI from '@starkware-industries/starkex-js/dist/browser'
+import starkwareCrypto from '@starkware-industries/starkware-crypto-utils'
+import { ec as elliptic } from 'elliptic'
+
+const starkExAPI = new StarkExAPI({
+  endpoint: 'https://gw.playground-v2.starkex.co',
+})
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+const keyPair = starkwareCrypto.ec.keyFromPrivate(privateKey, 'hex')
+// get the account address from the public key
+const account = starkwareCrypto.ec.keyFromPublic(keyPair.getPublic(true, 'hex'), 'hex')
+
+// Use this key for the StarkEx transactions
+const startKey = account.pub.getX().toString('hex')
+
+const txId = await starkExAPI.gateway.getFirstUnusedTxId()
+
+const request = {
+  txId,
+  vaultId: 1654615998,
+  amount: '6',
+  tokenId: '0x400de4b5a92118719c78df48f4ff31e78de58575487ce1eaf19922ad9b8a714',
+  starkKey: `0x${starkKey}`,
+}
+const response = await starkExAPI.gateway.mint(request)
+```
+
+## Deposit Request
+
+```tsx
+import StarkExAPI from '@starkware-industries/starkex-js/dist/browser'
+import starkwareCrypto from '@starkware-industries/starkware-crypto-utils'
+import { ec as elliptic } from 'elliptic'
+
+const starkExAPI = new StarkExAPI({
+  endpoint: 'https://gw.playground-v2.starkex.co',
+})
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+const keyPair = starkwareCrypto.ec.keyFromPrivate(privateKey, 'hex')
+// get the account address from the public key
+const account = starkwareCrypto.ec.keyFromPublic(keyPair.getPublic(true, 'hex'), 'hex')
+
+// Use this key for the StarkEx transactions
+const startKey = account.pub.getX().toString('hex')
+
+const txId = await starkExAPI.gateway.getFirstUnusedTxId()
+
+const request = {
+  txId,
+  amount: 8,
+  starkKey: `0x${starkKey}`,
+  tokenId: '0x3ef811e040c4bc9f9eee715441cee470f5d5aff69b9cd9aca7884f5a442a890',
+  vaultId: 1924014660,
+}
+const response = await starkExAPI.gateway.deposit(request)
+```
+
+## Withdraw Request
+
+```tsx
+import StarkExAPI from '@starkware-industries/starkex-js/dist/browser'
+import starkwareCrypto from '@starkware-industries/starkware-crypto-utils'
+import { ec as elliptic } from 'elliptic'
+
+const starkExAPI = new StarkExAPI({
+  endpoint: 'https://gw.playground-v2.starkex.co',
+})
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+const keyPair = starkwareCrypto.ec.keyFromPrivate(privateKey, 'hex')
+// get the account address from the public key
+const account = starkwareCrypto.ec.keyFromPublic(keyPair.getPublic(true, 'hex'), 'hex')
+
+// Use this key for the StarkEx transactions
+const startKey = account.pub.getX().toString('hex')
+
+const txId = await starkExAPI.gateway.getFirstUnusedTxId()
+
+const request = {
+  txId,
+  amount: 8,
+  starkKey: `0x${starkKey}`,
+  tokenId: '0x2dd48fd7a024204f7c1bd874da5e709d4713d60c8a70639eb1167b367a9c378',
+  vaultId: 612008755,
+}
+const response = await starkExAPI.gateway.withdrawal(request)
+```

@@ -1,0 +1,40 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet (Coston)", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x13 (hex of 19)
+- Public RPC URL: https://songbird-api.flare.network/ext/C/rpc (Avoid using public rpcTarget in
+  production, use services provided by Flare or other node providers)
+- Display Name: Songbird canary network
+- Block Explorer Link: https://songbird-explorer.flare.network
+- Ticker: SGB
+- Ticker Name: SGB
+- Logo: https://cryptologos.cc/logos/flare-flr-logo.png
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x10 (hex of 16)
+- Public RPC URL: https://coston-api.flare.network/ext/C/rpc (Avoid using public rpcTarget in
+  production, use services provided by Flare or other node providers)
+- Display Name: Coston testnet
+- Block Explorer Link: https://coston-explorer.flare.network/
+- Ticker: CFLR
+- Ticker Name: CFLR
+- Logo: https://cryptologos.cc/logos/flare-flr-logo.png
+
+</TabItem>
+</Tabs>

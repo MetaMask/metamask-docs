@@ -1,0 +1,106 @@
+---
+title: Integrate Web3Auth with the Kinto Blockchain in React Native
+sidebar_label: React Native
+image: 'banners/kinto.png'
+
+keywords: [react-native, kinto, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the Kinto Blockchain in React Native | Documentation - Web3Auth'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Web3Auth with the Kinto Blockchain in React Native"
+  description="Integrate Web3Auth with the Kinto Blockchain in React Native | Documentation - Web3Auth"
+  image="https://web3auth.io/docs/banners/kinto.png"
+  slug="/embedded-wallets/connect-blockchain/evm/kinto/react-native"
+/>
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x1ecf',
+  rpcTarget: 'https://rpc.kinto.xyz/http',
+  displayName: 'Kinto Testnet',
+  blockExplorerUrl: 'https://explorer.kinto.xyz',
+  ticker: 'ETH',
+  tickerName: 'ETH',
+  logo: 'https://pbs.twimg.com/profile_images/1658109577081044992/ZBpLvGSb_400x400.jpg',
+}
+```
+
+</TabItem>
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0xa788',
+  rpcTarget: 'http://35.215.120.180:8545',
+  displayName: 'Kinto Mainnet',
+  blockExplorerUrl: 'https://explorer.kinto.xyz',
+  ticker: 'ETH',
+  tickerName: 'ETH',
+  logo: 'https://pbs.twimg.com/profile_images/1658109577081044992/ZBpLvGSb_400x400.jpg',
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

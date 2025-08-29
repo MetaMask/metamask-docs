@@ -1,0 +1,110 @@
+---
+title: Integrate Web3Auth with the Base Chain (Coinbase) Blockchain in React Native
+sidebar_label: React Native
+image: 'banners/base.png'
+
+keywords: [react-native, base, coinbase, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the Base Chain (Coinbase) Blockchain in React Native | Documentation - Web3Auth'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Web3Auth with the Base Chain (Coinbase) Blockchain in React Native"
+  description="Integrate Web3Auth with the Base Chain (Coinbase) Blockchain in React Native | Documentation - Web3Auth"
+  image="https://web3auth.io/docs/banners/base.png"
+  slug="/embedded-wallets/connect-blockchain/evm/base/react-native"
+/>
+
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Base Chain (Coinbase)](https://base.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x2105', // hex of 8453
+  rpcTarget: '`https://mainnet.base.org`',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'Base',
+  blockExplorer: 'https://basescan.org/',
+  ticker: 'ETH',
+  tickerName: 'ETH',
+}
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x14A34', // hex of 84531
+  rpcTarget: '`https://sepolia.base.org`',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'Base Sepolia',
+  blockExplorer: 'https://sepolia-explorer.base.org/',
+  ticker: 'ETH',
+  tickerName: 'ETH',
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

@@ -1,0 +1,392 @@
+---
+title: Web3Auth Identity Token
+sidebar_label: Web3Auth Identity Token
+image: 'images/docs-meta-cards/documentation-card.png'
+description: 'Identity Token | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The **Identity Token** (ID Token) issued by Web3Auth is a JSON Web Token (JWT) that contains verified identity claims about the authenticated user. This token is signed using Web3Auth's private key and cannot be spoofed, allowing developers to trust the identity information presented by the client.
+
+Once a user successfully authenticates via Web3Auth, the platform issues an ID token which can then be used to authorize client-to-server requests or verify ownership of associated wallet addresses.
+
+#### Purpose of the ID Token
+
+- **User Identity Verification**: Ensures that the client user is indeed who they claim to be.
+- **Secure Backend Requests**: The token should be passed in API requests to validate sessions server-side.
+- **Wallet Ownership Proof**: Includes public wallet keys to prove a user owns a particular wallet.
+
+When making a backend request from the frontend, the client must include this ID token to ensure the backend can verify the authenticated user.
+
+## ID Token Format
+
+Web3Auth tokens are ES256-signed JWTs containing various identity claims about the user.
+
+A sample decoded token is shown below:
+
+<details>
+  <summary>Sample ID Token</summary>
+
+```js
+{
+  "iat": 1747727490,
+  "aud": "BJp5VGbuhg_mUA.....7B0SseDPBWabmYmEFXpfu8CGWSw",
+  "nonce": "030cb3f1ab9593d987b17cb....38afe331561105213",
+  "iss": "https://api-auth.web3auth.io",
+  "wallets": [
+    {
+      "public_key": "5771379329ae0f3b76........82f17373a13d8683561",
+      "type": "web3auth_app_key",
+      "curve": "ed25519"
+    },
+    {
+      "public_key": "020fda199e933b24a74...........6c9cc67a13c23d",
+      "type": "web3auth_app_key",
+      "curve": "secp256k1"
+    }
+  ],
+  "email": "shahbaz@web3auth.io",
+  "name": "Mohammad Shahbaz Alam",
+  "profileImage": "https://lh3.googleusercontent.com/a/AcJD_Fs0...._xzcWYzT=s96-c",
+  "authConnection": "web3auth",
+  "userId": "shahbaz@web3auth.io",
+  "groupedAuthConnectionId": "web3auth-google-sapphire-mainnet",
+  "exp": 1747813890
+}
+```
+
+:::warning NOTE
+
+If the `Return user data in identity token` setting is disabled on the Web3Auth Dashboard, personally identifiable information (PII) such as **email**, **name**, and **profileImage** will be omitted from the token.
+
+:::
+
+</details>
+
+## Getting the ID Token
+
+To retrieve the ID token on the client-side, use the `getIdentityToken()` method. This is typically called after the user logs in.
+
+<Tabs>
+<TabItem value="React SDK">
+
+```tsx
+import { useIdentityToken } from '@web3auth/modal/react'
+
+function IdentityTokenButton() {
+  const { getIdentityToken, loading, error, token } = useIdentityToken()
+
+  return (
+    <div>
+      <button onClick={() => getIdentityToken()} disabled={loading}>
+        {loading ? 'Authenticating...' : 'Get Identity Token'}
+      </button>
+      {token && <div>Token: {token}</div>}
+      {error && <div>Error: {error.message}</div>}
+    </div>
+  )
+}
+```
+
+</TabItem>
+<TabItem value="Vue SDK">
+
+```html
+<script setup lang="ts">
+  import { useIdentityToken } from '@web3auth/modal/vue'
+
+  const { getIdentityToken, loading, error, token } = useIdentityToken()
+</script>
+
+<template>
+  <div>
+    <button @click="getIdentityToken" :disabled="loading">
+      {{ loading ? "Authenticating..." : "Get Identity Token" }}
+    </button>
+    <div v-if="token">Token: {{ token }}</div>
+    <div v-if="error">Error: {{ error.message }}</div>
+  </div>
+</template>
+```
+
+</TabItem>
+<TabItem value="JavaScript SDK">
+
+```tsx
+try {
+  const idToken = await web3auth.getIdentityToken()
+  console.log(idToken)
+} catch (error) {
+  console.error('Error authenticating user:', error)
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Verifying the ID Token
+
+To validate an ID token server-side, use Web3Auth's JWKS endpoint or project-specific verification key. This process ensures the JWT was issued by Web3Auth and its contents have not been tampered with.
+
+### Using JWKS Endpoint
+
+<Tabs>
+<TabItem value="Social Login">
+
+JWKS Endpoint: `https://api-auth.web3auth.io/jwks`
+
+```ts title="login/route.ts"
+import * as jose from 'jose'
+import { NextRequest, NextResponse } from 'next/server'
+
+export async function POST(req: NextRequest) {
+  try {
+    //focus-start
+    // Extract JWT token from Authorization header
+    const authHeader = req.headers.get('authorization')
+    const idToken = authHeader?.split(' ')[1]
+    // Get public key from request body
+    const { appPubKey } = await req.json()
+    //focus-end
+
+    if (!idToken) {
+      return NextResponse.json({ error: 'No token provided' }, { status: 401 })
+    }
+
+    if (!appPubKey) {
+      return NextResponse.json({ error: 'No appPubKey provided' }, { status: 400 })
+    }
+
+    //focus-start
+    // Verify JWT using Web3Auth JWKS
+    // highlight-next-line
+    const jwks = jose.createRemoteJWKSet(new URL('https://api-auth.web3auth.io/jwks'))
+    const { payload } = await jose.jwtVerify(idToken, jwks, { algorithms: ['ES256'] })
+
+    // Find matching wallet in JWT
+    const wallets = (payload as any).wallets || []
+    const normalizedAppKey = appPubKey.toLowerCase().replace(/^0x/, '')
+
+    const isValid = wallets.some((wallet: any) => {
+      if (wallet.type !== 'web3auth_app_key') return false
+
+      const walletKey = wallet.public_key.toLowerCase()
+
+      // Direct key comparison for ed25519 keys
+      if (walletKey === normalizedAppKey) return true
+
+      // Handle compressed secp256k1 keys
+      if (
+        wallet.curve === 'secp256k1' &&
+        walletKey.length === 66 &&
+        normalizedAppKey.length === 128
+      ) {
+        const compressedWithoutPrefix = walletKey.substring(2)
+        return normalizedAppKey.startsWith(compressedWithoutPrefix)
+      }
+
+      return false
+      //focus-end
+    })
+
+    if (isValid) {
+      return NextResponse.json({ name: 'Verification Successful' }, { status: 200 })
+    } else {
+      return NextResponse.json({ name: 'Verification Failed' }, { status: 400 })
+    }
+  } catch (error) {
+    console.error('Social login verification error:', error)
+    return NextResponse.json({ error: 'Verification error' }, { status: 500 })
+  }
+}
+```
+
+</TabItem>
+<TabItem value="External Wallets">
+
+JWKS Endpoint: `https://authjs.web3auth.io/jwks`
+
+```ts title="login-external/route.ts"
+import * as jose from 'jose'
+import { NextRequest, NextResponse } from 'next/server'
+
+export async function POST(req: NextRequest) {
+  try {
+    //focus-start
+    // Extract JWT token from Authorization header
+    const authHeader = req.headers.get('authorization')
+    const idToken = authHeader?.split(' ')[1]
+    // Get address from request body
+    const { address } = await req.json()
+    //focus-end
+
+    if (!idToken) {
+      return NextResponse.json({ error: 'No token provided' }, { status: 401 })
+    }
+
+    if (!address) {
+      return NextResponse.json({ error: 'No address provided' }, { status: 400 })
+    }
+
+    //focus-start
+    // Verify JWT using AuthJS JWKS
+    // highlight-next-line
+    const jwks = jose.createRemoteJWKSet(new URL('https://authjs.web3auth.io/jwks'))
+    const { payload } = await jose.jwtVerify(idToken, jwks, { algorithms: ['ES256'] })
+
+    // Find matching wallet in JWT
+    const wallets = (payload as any).wallets || []
+    const addressToCheck = Array.isArray(address) ? address[0] : address
+    const normalizedAddress = addressToCheck.toLowerCase()
+
+    const isValid = wallets.some((wallet: any) => {
+      return (
+        wallet.type === 'ethereum' &&
+        wallet.address &&
+        wallet.address.toLowerCase() === normalizedAddress
+      )
+    })
+    //focus-end
+
+    if (isValid) {
+      return NextResponse.json({ name: 'Verification Successful' }, { status: 200 })
+    } else {
+      return NextResponse.json({ name: 'Verification Failed' }, { status: 400 })
+    }
+  } catch (error) {
+    console.error('External wallet verification error:', error)
+    return NextResponse.json({ error: 'Verification error' }, { status: 500 })
+  }
+}
+```
+
+</TabItem>
+<TabItem value="Frontend Call">
+
+```ts title="App.tsx"
+const { token, getIdentityToken, loading: idTokenLoading, error: idTokenError } = useIdentityToken()
+
+const validateIdToken = async () => {
+  //focus-next-line
+  const idToken = await getIdentityToken()
+
+  let res
+  if (connectorName === 'auth') {
+    //focus-start
+    // Social login: send public key
+    const pubKey = await web3Auth?.provider?.request({ method: 'public_key' })
+    console.log('pubKey:', pubKey)
+    res = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${idToken}`,
+      },
+      body: JSON.stringify({ appPubKey: pubKey }),
+    })
+    //focus-end
+  } else {
+    //focus-start
+    // External wallet: send address
+    const address = await web3Auth?.provider?.request({ method: 'eth_accounts' })
+    res = await fetch('/api/login-external', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${idToken}`,
+      },
+      body: JSON.stringify({ address }),
+    })
+    //focus-end
+  }
+
+  // Handle response
+  if (res.status === 200) {
+    toast.success('JWT Verification Successful')
+    uiConsole(`Logged in Successfully!`, userInfo)
+  } else {
+    toast.error('JWT Verification Failed')
+    await disconnect()
+  }
+
+  return res.status
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Using Verification Key
+
+To manually verify the token, use your **Verification Key** available on the **Project Settings** page in the Web3Auth Dashboard.
+
+<Tabs
+defaultValue="jose"
+values={[
+  { label: "jose", value: "jose" },
+  { label: "jsonwebtoken", value: "jsonwebtoken" },
+]}
+>
+<TabItem value="jose">
+
+```bash
+npm install jose
+```
+
+```js title="Example (JWT Verification using jose)"
+const verificationKey = await jose.importSPKI('insert-your-web3auth-verification-key', 'ES256')
+
+const idToken = 'insert-the-users-id-token'
+
+try {
+  const payload = await jose.jwtVerify(idToken, verificationKey, {
+    issuer: 'https://api-auth.web3auth.io',
+    audience: 'your-project-client-id',
+  })
+  console.log(payload)
+} catch (error) {
+  console.error(error)
+}
+```
+
+</TabItem>
+<TabItem value="jsonwebtoken">
+```bash
+npm install jsonwebtoken
+```
+
+```js title="Example (JWT Verification using jsonwebtoken)"
+const verificationKey = 'insert-your-web3auth-verification-key'.replace(/\\n/g, '\n')
+
+const idToken = 'insert-the-users-id-token'
+
+try {
+  const decoded = jwt.verify(idToken, verificationKey, {
+    issuer: 'https://api-auth.web3auth.io',
+    audience: 'your-project-client-id',
+  })
+  console.log(decoded)
+} catch (error) {
+  console.error(error)
+}
+```
+
+> The replace operation above ensures that any instances of '\n' in the stringified public key are replaced with actual newlines, per the PEM-encoded format.
+
+</TabItem>
+</Tabs>
+
+:::info
+
+If the token is valid, the payload will contain identity claims (e.g., userId). If invalid, an error is thrown.
+
+:::
+
+## Things to Remember
+
+- The `iss` field in the token must be `https://api-auth.web3auth.io`.
+- The `aud` field must match your **Project Client ID**.
+- The `exp` field must be in the future.
+- The `iat` field must be in the past.

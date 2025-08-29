@@ -1,0 +1,74 @@
+---
+title: Integrate Web3Auth with the Optimism Blockchain
+sidebar_label: Optimism
+hide_table_of_contents: true
+
+image: 'banners/optimism.png'
+description: 'Integrate Web3Auth with the Optimism Blockchain | Documentation - Web3Auth'
+---
+
+import Tiles from '@theme/Tiles'
+import SEO from '@site/src/components/SEO'
+import ChainDetailsOptimism from '../../_general-connect-blockchain/_optimism.mdx'
+
+<SEO
+  title="Integrate Web3Auth with the Optimism Blockchain"
+  description="Integrate Web3Auth with the Optimism Blockchain | Documentation - Web3Auth"
+  image="https://web3auth.io/docs/banners/optimism.png"
+  slug="/embedded-wallets/connect-blockchain/evm/optimism"
+/>
+
+Integrate Web3Auth seamlessly with EVM-based Optimism Blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+
+This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
+
+## Chain Details for Optimism
+
+<ChainDetailsOptimism />
+
+export const Optimism = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: '/connect-blockchain/evm/optimism/web',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/connect-blockchain/evm/optimism/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/connect-blockchain/evm/optimism/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/connect-blockchain/evm/optimism/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/connect-blockchain/evm/optimism/react-native',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/connect-blockchain/evm/optimism/unity',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={Optimism} />

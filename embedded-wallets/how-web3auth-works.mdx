@@ -1,0 +1,39 @@
+---
+title: How Web3Auth Works?
+image: 'images/docs-meta-cards/documentation-card.png'
+sidebar_label: How Web3Auth Works?
+description: 'How Web3Auth Works? | Documentation - Web3Auth'
+---
+
+import PnPCoreKitFlowDark from '@site/static/img/flow-diagrams/pnp-core-kit-flow-dark.png'
+import PnPCoreKitFlowLight from '@site/static/img/flow-diagrams/pnp-core-kit-flow-light.png'
+
+Web3Auth operates as a wallet infrastructure, providing enhanced flexibility and security for decentralized applications (dApps) and blockchain wallets. Throughout this documentation, we'll explore the functionality of Web3Auth, showcasing how it produces unique cryptographic key providers for each user and application.
+
+## High-Level Architecture
+
+The Web3Auth SDK lives solely on the user/application's front-end client and handles the interactions between OAuth providers and the Web3Auth Network.
+
+The diagram below describes the relationship between the Web3Auth SDKs and integrating applications. It also depicts the difference between the products Web3Auth offers, to enable a developer-friendly integration of this infrastructure.
+
+<picture>
+  <source srcset={PnPCoreKitFlowLight} media="(prefers-color-scheme: light)" />
+  <source srcset={PnPCoreKitFlowDark} media="(prefers-color-scheme: dark)" />
+  <img
+    src={PnPCoreKitFlowLight}
+    style={{ display: 'block', maxHeight: '600px', margin: '20px auto' }}
+    alt="This diagram describes the relationship between the Web3Auth SDK and integrating application"
+  />
+</picture>
+
+## Web3Auth Wallet Management Infrastructure
+
+Web3Auth's [Wallet Management Infrastructure](/infrastructure/) enhances security by distributing a user's wallet across various key shares, thereby avoiding direct exposure of seed phrases. These key shares form a 'web of trust' and enable wallet management akin to multi-factor account handling. Users employ OAuth logins, trusted devices, and other factors to manage their cryptographic key pairs. Importantly, the complete private keys are not stored anywhere within the Wallet Infrastructure system, including our databases or any participating nodes.
+
+To create a social login share, users interact with the Web3Auth Network, where key generation operates via a 5/9 consensus system. This setup guarantees that wallets remain non-custodial, ensuring that neither Web3Auth, Social Login Providers, nor any other party holding a key share can claim full ownership.
+
+:::tip managing wallets
+
+For managing wallets, our infrastructure uses various cryptographic techniques such as Shamir's Secret Sharing, Threshold Cryptography, and Multi Party Computation. To learn more about how we manage wallets, please refer to our [Wallet Management and Security of our Infrastructure](/infrastructure/).
+
+:::

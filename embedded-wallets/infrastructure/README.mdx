@@ -1,0 +1,155 @@
+---
+title: Web3Auth Wallet Management Infrastructure
+sidebar_label: Overview
+
+description: 'Web3Auth Wallet Management Infrastructure | Documentation - Web3Auth'
+---
+
+import KeyManagementDark from '@site/static/img/flow-diagrams/key-management-dark.png'
+import KeyManagementLight from '@site/static/img/flow-diagrams/key-management-light.png'
+import NodeArchitecture from '@site/static/img/infrastructure/node-architecture.png'
+import ShareSplitting from '@site/static/img/infrastructure/share-splitting.png'
+
+Web3Auth's Wallet Infrastructure is designed to make managing cryptographic wallets intuitive, reducing onboarding times, increasing conversion and improving security. It achieves this by distributing a user's private key across multiple key shares, forming a 'web of trust' that enables multi-factor account handling. The system leverages Threshold Cryptography principles or MPC(Multi-Party Computation), where a user needs a threshold of 2 out of n key shares to access their private key or generate transaction signatures.
+
+One of the key advantages of this infrastructure is that it eliminates the need to store complete private keys anywhere, including databases, devices and participating nodes. Instead, the private key is distributed across the system in a non-custodial manner, reducing the risk of a single point of failure and preventing potential losses due to device theft or loss.
+
+The design goals of Web3Auth's wallet infrastructure include:
+
+- Seamless non-custodial wallet user experiences.
+- Compatibility with existing authentication methods and blockchain ecosystems.
+- Global performance and scalability to meet the demands of the Web3 market.
+
+## Overview
+
+As we proceed further into the inner workings of Web3Auth, it's essential to take a step back and understand the understand the infrastructure that underpins our entire system. Before moving forward, you may want to revisit the [How Web3Auth Works](/how-web3auth-works) section if you need a refresher on the product and implementations. This section provides an overview of how our wallet management infrastructure operates. diving deeper into our implementation of Shamir Secret Sharing (SSS) and Threshold Signature Scheme (TSS) based Multi-Party Computation (MPC) systems.
+
+Here's a video explaining our SSS based Wallet Management Infrastructure.
+
+<iframe
+  src="https://www.youtube.com/embed/K8yWgtAFKNY?controls=0"
+  title="Web3Auth SSS based Wallet Management Infrastructure"
+  style={{
+    display: 'block',
+    maxHeight: '600px',
+    margin: '10px auto',
+    width: '100%',
+    aspectRatio: '16/9',
+  }}
+  frameBorder="0"
+  allowFullScreen
+/>
+
+:::note
+
+This video covers the basics of how Web3Auth's SSS based shallow MPC Wallet Management Infrastructure. Similar concepts apply for our TSS based full MPC Infrastructure as well, however, we can replace the part where key reconstructions happen with partial signature generations. The flow remains the same, but the key is **never reconstructed**
+
+:::
+
+In a typical 2 out of 3 (2/3) setup, the user is provided with three factors: OAuth Login Factor, Device Factor, and Backup/ 2FA Factor. Please note that the threshold can increase for more security. It is dependent on the integrating application.
+
+- **OAuth Login Factor** is managed and divided across Web3Auth Network and can be accessed through an OAuth login provider owned by the user, like their Google account.
+- **Device Factor** is stored on the user's device. The method of storage is specific to the device and system. For instance, on mobile devices, the factor could be stored in device storage that's secured with biometrics.
+- **Backup/ 2FA Factor** serves as a recovery share. It's an extra factor that the user can keep on a separate device, download, or base on user input with sufficient entropy. This could include a password, security questions, or a hardware device, among other options.
+
+<picture>
+  <source srcset={KeyManagementLight} media="(prefers-color-scheme: light)" />
+  <source srcset={KeyManagementDark} media="(prefers-color-scheme: dark)" />
+  <img
+    src={KeyManagementLight}
+    style={{ display: 'block', maxHeight: '600px', margin: '20px auto' }}
+    alt="This diagram describes the relationship between the Web3Auth SDK and integrating application"
+  />
+</picture>
+
+## Web3Auth Infrastructure
+
+Web3Auth Infrastucture is designed to manage a factor of a key for hundreds of millions of users. It utilizes a distributed security model that is inspired from Apple's iCloud and other highly performant distributed systems. The design of it revolves around achieving high guarantees for:
+
+- A distributed multi-setup security model
+- Close to 100% uptime
+- Upscales and downscales to cater to spikes in load
+
+In order to meet these objectives, Web3Auth's Infra is designed to be a set of nodes.
+
+<img
+  style={{ display: 'block', maxHeight: '600px', margin: '20px auto' }}
+  src={ShareSplitting}
+  alt="Web3Auth Infrasturcture secures a factor of a users key"
+/>
+
+_Web3Auth Infrasturcture secures a factor of a users key_
+
+<img
+  style={{ display: 'block', maxHeight: '600px', margin: '20px auto' }}
+  src={NodeArchitecture}
+  alt="Architecture of a Node"
+/>
+
+_Architecture of a Node_
+
+### t of n Distributed Model for Security and Uptime
+
+These nodes operate in a t of n security model, a user's factor (share) is further split into sub-shares and secured individually by each of these nodes. Threshold(t) number of nodes are able to sign signatures for users.
+
+In order to compromise this setup, one must compromise a total t of n setups. Similarly in order for the services to go down, n-t setups must go down (i.e. 2 nodes in a 3/5 setup). This is on a technical level very unlikley.
+
+### Regionally available services
+
+Signatures and login services are often expected to be low-latency sub 1.5s interactions from the user. To achieve that level of latency, each node operates clusters of instances in regions across the world. This includes operations in US-east, west, Singapore, South America, Africa, Europe east and west and ultimately is flexible.
+
+### Horizonally scalable for billions
+
+In each node, in each regional cluster, there runs an orchestration layer that operates multiple services. Services are spun up and down in different regions to cater to the load necessary for global applications.
+
+These clusters is orchistracted via a master coordinator that communicates with different nodes to understand the load that they should be receiving and coordinate on a distributed level.
+
+### Load expectation via Verifiers
+
+Verifier contracts define the relationship between infrastructure and applications. It contain information about authentication parameters, as well as supported methods for users. It acts as a long standing agreement between the application and nodes, and serves as a central point of reference for wallet front-ends that implement the user transaction functionality. It is also in charge of the submission and validation of user transactions (which is dependent on the authentication protocol parameters).
+
+## Core Features and Benefits
+
+### Self Custodial
+
+With Web3Auth, the power to access and control their cryptographic key pair always remains in the hands of the user. Despite login services having access to one share, they can never retrieve the user's private key independently.
+
+### Familiar User Experience
+
+Web3Auth has been designed to closely mirror traditional Web 2.0 login flows, ensuring a seamless and user-friendly experience. This familiarity significantly enhances the user's experience and eases the onboarding process.
+
+### Enhanced Key Recovery and Redundancy
+
+Web3Auth incorporates a built-in redundancy feature for key recovery in the event of a lost device or share. Users can also refresh shares to revoke any lost shares. This approach is more secure than relying on a written-down seed phrase, where its loss leads to complete access to the private key. With Web3Auth, losing a share is manageable as long as the user doesn't lose more than one share without refreshing the existing ones.
+
+### Incremental Security
+
+Users have the ability to incrementally enhance the security of their key by increasing the share threshold. For instance, the threshold can be raised from 2/3 to 3/4, with the addition of an extra authentication factor like a hardware device. This additional security layer might be crucial for users who have large amounts of cryptocurrency linked to their private key.
+
+### Versatility across Chains and Platforms
+
+Web3Auth interfaces seamlessly with a native cryptographic key pair, making it compatible with a wide range of cryptographic constructs across different platforms and elliptic curves. The off-chain secret sharing and share refresh processes make Web3Auth a viable option for blockchains with limited smart contract functionality.
+
+### Resistance to Censorship
+
+The 2/3 share threshold feature of Web3Auth safeguards against censorship by Torus nodes. Even if the nodes decline to return the user's private key share after successful authentication, the user can still reconstruct their private key using their device share and recovery share.
+
+## Privacy, User Data and Compliance
+
+Web3Auth's takes a conservative approach to data collection. The only required stored data is a relationship of an anonymised identifier from the OAuth or JWT that is pegged up into the infrastucture.
+
+This is often the required `sub` field on the JWT RFC, which applications have the option of storing outright or storing a Hashed value of `sub`. This relationship is first created on initial key generation/assignment and later utilized to authenicate the specific public key and session token to the user's end device.
+
+## Security Extensions
+
+By limiting the base transaction types and functionality we can limit the complexity of the system and thus provide better guarantees on safety and liveness. The aforementioned functionality is sufficient for generic threshold cryptography operations.
+
+However, we fully intend to extend the capabilities of our system to support other interesting use cases. We make provisions for these types of extended functionality using "extensions" that reuse the existing interfaces that have already been defined.
+
+### Additional verification / checks
+
+Additional dynamic transaction verification / message validation can be done during the SessionRequest or SignRequest phase by each one of the nodes to reduce the impact of phishing attacks or scams. Smart contract wallet rules like spending limits can also be implemented in this way.
+
+### User defined access structures
+
+Although the default nodeset is defined by the application, the user may want to control this access. One way we can provide this functionality is by implementing a proxy contract in front of the parameter lookups that happen at the start of SessionRequest, with this proxy contract being user-controlled.

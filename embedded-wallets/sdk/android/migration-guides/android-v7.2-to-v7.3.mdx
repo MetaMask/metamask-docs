@@ -1,0 +1,82 @@
+---
+title: PnP Android SDK - v7.2 to v7.3
+
+description: "PnP Android SDK - v7.2 to v7.3 | Documentation - Web3Auth"
+sidebar_label: v7.2 to v7.3
+---
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Migration Guide from v7.2 to v7.3 for Web3Auth PnP Android SDK
+
+## Overview
+
+This migration guide provides steps for upgrading from version 7.2(v7.2) to version 7.3(v7.3) of the
+Web3Auth PnP Android SDK. The guide outlines significant changes in the `request` method.
+
+## Changes in Detail
+
+### `request` method updates
+
+From v7.2, `loginParams` is removed from the `request` method. To further improve developer
+experience, developers can now pass the `chainConfig` to request signature for specific chain.
+
+#### Before (v7.2)
+
+```kotlin title="Usage"
+val params = JsonArray().apply {
+    add("Hello, World!")
+    add("<User's Hex address>")
+    add("Android")
+}
+
+// focus-start
+val signMsgCompletableFuture = web3Auth.request(
+    loginParams = LoginParams(
+        selectedLoginProvider,
+        extraLoginOptions = null,
+        mfaLevel = MFALevel.NONE,
+    ),
+    "personal_sign",
+    requestParams = params
+)
+// focus-end
+
+signMsgCompletableFuture.whenComplete { _, error ->
+    if (error == null) {
+        Log.d("MainActivity_Web3Auth", "Message signed successfully")
+    } else {
+        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+    }
+}
+```
+
+#### After (v7.3)
+
+```kotlin title="Usage"
+val params = JsonArray().apply {
+    add("Hello, World!")
+    add("<User's Hex address>")
+    add("Android")
+}
+
+// focus-start
+val signMsgCompletableFuture = web3Auth.request(
+     chainConfig = ChainConfig(
+        chainId = "0x1",
+        rpcTarget = "https://mainnet.infura.io/v3/$key",
+    ),
+    "personal_sign",
+    requestParams = params
+)
+// focus-end
+
+signMsgCompletableFuture.whenComplete { _, error ->
+    if (error == null) {
+        Log.d("MainActivity_Web3Auth", "Message signed successfully")
+    } else {
+        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+    }
+}
+```

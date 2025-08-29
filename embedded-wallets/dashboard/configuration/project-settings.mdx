@@ -1,0 +1,105 @@
+---
+title: Project Settings
+sidebar_label: Project Settings
+image: 'images/docs-meta-cards/documentation-card.png'
+description: 'Configure project settings in Web3Auth Dashboard | Documentation - Web3Auth'
+---
+
+import ProjectSettingsGeneral from '@site/static/img/w3a-dashboard/project-settings-general.png'
+import ProjectSettingsDomain from '@site/static/img/w3a-dashboard/project-settings-domain.png'
+import ProjectSettingsAdvanced from '@site/static/img/w3a-dashboard/project-settings-advanced.png'
+
+The **Project Settings** section of the Web3Auth Dashboard allows developers to manage core configuration options for each project. These settings determine how the project integrates with the Web3Auth SDK and how it behaves across different environments.
+
+## General
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={ProjectSettingsGeneral}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Project Settings General"
+  />
+</div>
+
+The **General tab** provides an overview of key project-specific parameters:
+
+- **Project Name**: This is the name of the project that will be displayed to users during the Web3Auth login flow and in any related email communication. The name can be updated post-creation at any time.
+- **Environment**: This indicates the Web3Auth environment (devnet or mainnet) selected during project creation. These environments are globally distributed and highly scalable. Once set, the environment cannot be modified.
+- **Client ID**: A unique identifier automatically generated for each project. This value is required for SDK integration and is safe to expose publicly.
+- **Client Secret**: A confidential key used for authenticating server-side API requests. It should never be exposed to the frontend or any client-side environment to maintain security.
+- **JWKS Endpoint**: A public endpoint that exposes the JSON Web Key Set (JWKS) used by Web3Auth to sign JWTs. Developers can use this endpoint to verify identity tokens. [Learn more](#).
+- **Project Verification Key**: An alternative to using the JWKS endpoint. This static key allows for token verification without depending on the JWKS URL. [Learn more](#).
+- **Project Platform**: Developers can select from a wide range of platform options such as Web, Mobile, or Gaming, depending on the nature of the application.
+
+### Archive Project
+
+The Archive Project button allows developers to archive a project. Once archived, the project becomes read-only and cannot be modified unless explicitly restored.
+
+## Whitelist Domains
+
+To enhance security, Web3Auth enables domain whitelisting for both web and mobile applications.
+
+- Domain Authorization Developers must add and verify URLs that are authorized to use the Web3Auth SDK.
+
+  > For mainnet projects, at least one domain or URL must be whitelisted before the SDK can be used in production.
+
+  {" "}
+
+  <div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+    <img
+      src={ProjectSettingsDomain}
+      style={{ alignSelf: 'center', maxWidth: '100%' }}
+      alt="Project Settings Domains"
+    />
+  </div>
+
+## Advanced
+
+The Advanced tab provides developers with additional configuration options to fine-tune authentication behavior, session control, and data privacy.
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={ProjectSettingsAdvanced}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Project Settings Advanced"
+  />
+</div>
+
+### Session Duration
+
+Web3Auth allows customization of session lifetime:
+
+- Developers can configure how long a user session remains active before requiring re-authentication.
+- The default session duration is 1 day.
+- Minimum configurable duration is 1 second, while the maximum is 30 days.
+
+This setting is particularly useful for balancing security and user experience. Shorter durations increase security by reducing exposure, while longer durations improve usability for trusted applications.
+
+### Return User Data in Identity Token
+
+This option determines whether Personally Identifiable Information (PII)—such as the user's email, profile picture, and name—is returned in the JWT identity token issued by Web3Auth.
+
+- Enabling this setting allows applications to access additional user metadata directly from the identity token.
+- If userIdentifier is set to email, only the user's email will be returned in the token. This provides a privacy-centric approach to user identity management.
+
+> Why this matters: Including user PII in the JWT can streamline user onboarding, personalization, and session management in your application. However, developers must consider user consent, data minimization, and jurisdictional privacy regulations (such as GDPR or CCPA) before enabling this option. Only request what is essential for your application's functionality.
+
+### Enable Key Export
+
+This setting allows developers to control whether users can programmatically export their private keys using the Web3Auth SDK.
+
+- When enabled, the application can allow users to retrieve their private key. For this, the dApp must use the `eth_private_key` JSON-RPC method.
+- When disabled, users will only be able to export their keys manually via Web3Auth's built-in wallet interface.
+
+This functionality is crucial for advanced use cases such as migration, backup, or interoperability with non-EVM-compatible blockchains.
+
+> Example: Programmatically retrieving the private key after login:
+
+```javascript
+// Assuming user is already logged in
+async function getPrivateKey() {
+  const privateKey = await web3auth.provider.request({
+    method: 'eth_private_key',
+  })
+}
+```

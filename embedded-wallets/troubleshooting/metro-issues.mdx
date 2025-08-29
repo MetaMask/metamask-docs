@@ -1,0 +1,188 @@
+---
+title: Bundler Polyfill Issues - React Native Metro
+image: '/docs/images/docs-meta-cards/troubleshoot-card.png'
+sidebar_label: React Native Metro Polyfill Issues
+description: 'Bundler Polyfill Issues - React Native Metro | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While setting up a new web3 project from scratch, you might face multiple issues with the bundler. This issue is caused because the core packages like `eccrypto` have certain dependencies, which are not present within the build environment. For rectifying this, the go-to method has been to just add the missing modules directly into the package, and edit the bundler configuration to take advantage of that.
+
+Although this method works, it increases the bundle size significantly. Causing slow loading speeds and a bad user experience. It is important to note that these modules, even while the build fails, are still present within the browser environment. Many libraries like Web3Auth are written in a way to take advantage of this fact. Hence, even if the build doesn't contain the polyfill, the library should still work as expected. However, if you are using a library that does not take advantage of this fact, you might face issues while using the library.
+
+Hence, you need to be mindful of the fact that you only require certain node polyfills to be added to your project, while testing each of its functionalities. At the same time, you need to tell the bundler to ignore the missing modules, and not include them in the build.
+
+In this guide, we have added instructions for adding the polyfills in React Native Metro.
+
+## Install the missing modules
+
+Check for the missing libraries in your build and included packages, and accordingly polyfill them. For Web3Auth, you need to polyfill the `buffer`, `process`, `crypto` and `stream` libraries. For the rest of the libraries, we are installing a dummy module called `empty-module` which helps us get rid of the warnings while building the project.
+
+```bash npm2yarn
+npm install --save empty-module readable-stream crypto-browserify react-native-get-random-values buffer process
+```
+
+:::warning
+
+There might be a possibility that you might need to polyfill more libraries, in case you're using any other blockchain library alongside Web3Auth that requires them. Generally, the libraries like `browserify-zlib`, `assert`, `stream-http`, `https-browserify`, `os-browserify`, `url` are the ones that might be required.
+
+:::
+
+## Update your `metro.config.js`
+
+To make use of the polyfilled modules while building the application, you need to reconfigure your metro bundler config.
+
+:::info Expo Managed Workflow
+
+You will have to create `metro.config.js` for Expo Managed Workflow, as it is not present by default. Read through this documentation to learn more about [**Customizing Metro Bundler**](https://docs.expo.dev/guides/customizing-metro/).
+
+Note that polyfilling is not supported with "Expo Go" app. It is compatible only with Custom Dev Client and EAS builds. Please [**prebuild your expo app**](https://docs.expo.dev/workflow/prebuild/) to generate native code based on the version of expo a project has installed, before moving forward.
+
+:::
+
+You can copy the following code in your `metro.config.js` file. This will tell the bundler to ignore the missing modules and include the ones that are needed.
+
+#### `metro.config.js`
+
+<Tabs
+  defaultValue="bare"
+  values={[
+    { label: "Bare React Native", value: "bare" },
+    { label: "Expo", value: "expo" },
+  ]}
+>
+<TabItem value="bare">
+
+```tsx title="metro.config.js"
+const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config')
+
+const defaultConfig = getDefaultConfig(__dirname)
+
+const config = {
+  resolver: {
+    extraNodeModules: {
+      assert: require.resolve('empty-module'), // assert can be polyfilled here if needed
+      http: require.resolve('empty-module'), // stream-http can be polyfilled here if needed
+      https: require.resolve('empty-module'), // https-browserify can be polyfilled here if needed
+      os: require.resolve('empty-module'), // os-browserify can be polyfilled here if needed
+      url: require.resolve('empty-module'), // url can be polyfilled here if needed
+      zlib: require.resolve('empty-module'), // browserify-zlib can be polyfilled here if needed
+      path: require.resolve('empty-module'),
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('readable-stream'),
+    },
+    sourceExts: [...defaultConfig.resolver.sourceExts, 'svg'],
+  },
+}
+
+module.exports = mergeConfig(defaultConfig, config)
+```
+
+</TabItem>
+
+<TabItem value="expo">
+
+```tsx title="metro.config.js"
+// Learn more https://docs.expo.io/guides/customizing-metro
+const { getDefaultConfig } = require('expo/metro-config')
+
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = getDefaultConfig(__dirname)
+
+config.resolver.extraNodeModules = {
+  assert: require.resolve('empty-module'), // assert can be polyfilled here if needed
+  http: require.resolve('empty-module'), // stream-http can be polyfilled here if needed
+  https: require.resolve('empty-module'), // https-browserify can be polyfilled here if needed
+  os: require.resolve('empty-module'), // os-browserify can be polyfilled here if needed
+  url: require.resolve('empty-module'), // url can be polyfilled here if needed
+  zlib: require.resolve('empty-module'), // browserify-zlib can be polyfilled here if needed
+  path: require.resolve('empty-module'),
+  crypto: require.resolve('crypto-browserify'),
+  stream: require.resolve('readable-stream'),
+  buffer: require.resolve('buffer'),
+}
+
+config.transformer.getTransformOptions = () => ({
+  transform: {
+    experimentalImportSupport: false,
+    inlineRequires: true,
+  },
+})
+
+module.exports = config
+```
+
+</TabItem>
+
+</Tabs>
+
+## Fixing additional dependency issues
+
+- Create a `globals.js` to your project root directory and add the following code to it.
+
+  ```tsx title="globals.js"
+  global.Buffer = require('buffer').Buffer
+
+  // Needed so that 'stream-http' chooses the right default protocol.
+  global.location = {
+    protocol: 'file:',
+  }
+
+  global.process.version = 'v16.0.0'
+  if (!global.process.version) {
+    global.process = require('process')
+    console.log({ process: global.process })
+  }
+
+  process.browser = true
+  ```
+
+- Then, import the dependencies to `index.js` of your project.
+
+:::info
+
+For Expo apps, you need to create an entry point, ie. the index.js file. This can be done by following the steps [**here**](https://docs.expo.dev/versions/latest/sdk/register-root-component/#what-if-i-want-to-name-my-main-app-file-something-other-than-appjs)
+
+:::
+
+  <Tabs
+    defaultValue="bare"
+    values={[
+      { label: "Bare React Native", value: "bare" },
+      { label: "Expo", value: "expo" },
+    ]}
+  >
+  <TabItem value="bare">
+
+```tsx title="index.js"
+import { AppRegistry } from 'react-native'
+import './globals'
+import 'react-native-get-random-values'
+import App from './App'
+import { name as appName } from './app.json'
+AppRegistry.registerComponent(appName, () => App)
+```
+
+  </TabItem>
+
+  <TabItem value="expo">
+
+```tsx title="index.js"
+import '@ethersproject/shims'
+import '@expo/metro-runtime'
+import 'react-native-get-random-values'
+import './globals'
+
+import { App } from 'expo-router/build/qualified-entry'
+import { renderRootComponent } from 'expo-router/build/renderRootComponent'
+
+// This file should only import and register the root. No components or exports
+// should be added here.
+renderRootComponent(App)
+```
+
+  </TabItem>
+
+  </Tabs>

@@ -1,0 +1,197 @@
+---
+title: Integrate Web3Auth with the TON Blockchain
+sidebar_label: TON
+image: 'guides/banners/ton.png'
+keywords: [ton, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the TON Blockchain | Documentation - Web3Auth'
+---
+
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+
+While using the Web3Auth Web SDK for a non-EVM chain like [TON](https://ton.org/), you get a standard provider from which you can obtain the private key of the user. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's `account`, `balance`, `send transaction`, etc. We have highlighted a few methods here to get you started quickly on that.
+
+:::note
+
+This reference is for the `Web`, but you can use TON on other Mobile and Gaming Platforms as well. Please follow our reference for [EVM Blockchains](/connect-blockchain/evm/), and similarly use TON libraries that support the platforms to use the private key and make blockchain calls accordingly.
+
+:::
+
+## Installation
+
+```bash npm2yarn
+npm install --save @web3auth/no-modal @web3auth/auth-adapter @web3auth/base tonweb @orbs-network/ton-access
+```
+
+## Initializing Provider
+
+### Getting the `rpc`
+
+```typescript
+import { getHttpEndpoint } from '@orbs-network/ton-access'
+
+const rpc = await getHttpEndpoint()
+```
+
+## TON Libraries
+
+`TonWeb` is a JavaScript/TypeScript library that provides a high-level interface for interacting with the TON blockchain. It allows for the creation and management of wallets, signing transactions, and interacting with smart contracts.
+
+`@orbs-network/ton-access` is a lightweight library that helps discover and connect to TON blockchain nodes. It provides an endpoint to the TON network, ensuring you can reliably connect to the blockchain for your operations.
+
+## Get Accounts
+
+Using `getKeyPairFromPrivateKey()` and TON's wallet libraries, you can retrieve the user's account address.
+
+```typescript
+import type { IProvider } from '@web3auth/base'
+import TonWeb from 'tonweb'
+
+const rpc = await getHttpEndpoint()
+
+export default class TonRPC {
+  private provider: IProvider
+  private tonweb: TonWeb
+
+  constructor(provider: IProvider) {
+    this.provider = provider
+    this.tonweb = new TonWeb(new TonWeb.HttpProvider(rpc))
+  }
+
+  async getAccounts(): Promise<string> {
+    try {
+      const privateKey = await this.getPrivateKey()
+      const keyPair = this.getKeyPairFromPrivateKey(privateKey)
+      const WalletClass = this.tonweb.wallet.all['v3R2']
+      const wallet = new WalletClass(this.tonweb.provider, {
+        publicKey: keyPair.publicKey,
+      })
+      const address = await wallet.getAddress()
+      return address.toString(true, true, true)
+    } catch (error) {
+      console.error('Error getting accounts:', error)
+      return ''
+    }
+  }
+
+  async getPrivateKey(): Promise<string> {
+    try {
+      return await this.provider.request({
+        method: 'private_key',
+      })
+    } catch (error) {
+      console.error('Error getting private key:', error)
+      throw error
+    }
+  }
+
+  public getKeyPairFromPrivateKey(privateKey: string): {
+    publicKey: Uint8Array
+    secretKey: Uint8Array
+  } {
+    const privateKeyBytes = new Uint8Array(
+      privateKey.match(/.{1,2}/g)!.map(byte => parseInt(byte, 16))
+    )
+
+    if (privateKeyBytes.length !== 32) {
+      const adjustedPrivateKey = new Uint8Array(32)
+      adjustedPrivateKey.set(privateKeyBytes.slice(0, 32))
+      return TonWeb.utils.nacl.sign.keyPair.fromSeed(adjustedPrivateKey)
+    }
+
+    return TonWeb.utils.nacl.sign.keyPair.fromSeed(privateKeyBytes)
+  }
+}
+```
+
+## Get Balance
+
+Using the account address we received in the previous step, we can fetch the balance using an RPC call to `tonweb.getBalance()`.
+
+```typescript
+import TonWeb from 'tonweb'
+
+export default class TonRPC {
+  async getBalance(): Promise<string> {
+    try {
+      const address = await this.getAccounts()
+      const balance = await this.tonweb.getBalance(address)
+      return TonWeb.utils.fromNano(balance)
+    } catch (error) {
+      console.error('Error getting balance:', error)
+      return '0'
+    }
+  }
+}
+```
+
+## Send Transaction
+
+```typescript
+import TonWeb from 'tonweb'
+
+export default class TonRPC {
+  async sendTransaction(): Promise<any> {
+    try {
+      const privateKey = await this.getPrivateKey()
+      const keyPair = this.getKeyPairFromPrivateKey(privateKey)
+      const WalletClass = this.tonweb.wallet.all['v3R2']
+      const wallet = new WalletClass(this.tonweb.provider, {
+        publicKey: keyPair.publicKey,
+      })
+
+      const address = await wallet.getAddress()
+      console.log('Wallet address:', address.toString(true, true, true))
+
+      const balance = await this.tonweb.getBalance(address)
+      console.log('Wallet balance:', TonWeb.utils.fromNano(balance))
+
+      const isDeployed = balance !== '0'
+      console.log('Is wallet deployed:', isDeployed)
+
+      if (!isDeployed) {
+        console.log(
+          'Wallet not deployed or has zero balance. Please deploy the wallet and fund it before sending transactions.'
+        )
+        return { error: 'Wallet not deployed or has zero balance' }
+      }
+
+      let seqno
+      for (let i = 0; i < 3; i++) {
+        try {
+          seqno = await wallet.methods.seqno().call()
+          console.log('Current seqno:', seqno)
+          if (seqno !== null) break
+        } catch (seqnoError) {
+          console.error(`Error getting seqno (attempt ${i + 1}):`, seqnoError)
+        }
+        await new Promise(resolve => setTimeout(resolve, 2000))
+      }
+
+      if (seqno === null) {
+        throw new Error('Failed to retrieve seqno after multiple attempts')
+      }
+
+      const transfer = wallet.methods.transfer({
+        secretKey: keyPair.secretKey,
+        toAddress: 'EQD4FPq-PRDieyQKkizFTRtSDyucUIqrj0v_zXJmqaDp6_0t',
+        amount: TonWeb.utils.toNano('0.01'),
+        seqno: seqno,
+        payload: 'Hello, TON!',
+        sendMode: 3,
+      })
+
+      console.log('Prepared transfer:', transfer)
+
+      const result = await transfer.send()
+      console.log('Transaction result:', result)
+
+      return {
+        transactionHash: result.hash,
+      }
+    } catch (error) {
+      console.error('Error sending transaction:', error)
+      return { error: error.message }
+    }
+  }
+}
+```

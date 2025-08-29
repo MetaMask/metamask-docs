@@ -1,0 +1,52 @@
+.tileGroup {
+  margin: 30px 0;
+}
+
+.tileGroupContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2%;
+}
+
+.tile {
+  display: flex;
+  background: var(--ifm-background-surface-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 15px;
+  margin-bottom: 2%;
+  flex-basis: 32%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--ifm-background-surface-color);
+}
+
+.tile:hover {
+  text-decoration: none !important;
+  border-color: var(--ifm-color-primary);
+}
+
+.tileIcon {
+  height: 25px;
+  margin-right: 15px;
+}
+
+.tileText {
+  color: var(--ifm-color-content);
+  font-weight: 500;
+}
+
+@media (max-width: 996px) {
+  .tile {
+    flex-basis: 49%;
+  }
+}
+
+@media (max-width: 600px) {
+  .tile {
+    flex-basis: 100%;
+  }
+}

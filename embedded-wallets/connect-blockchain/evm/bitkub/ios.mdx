@@ -1,0 +1,91 @@
+---
+title: Integrate Web3Auth with the BitKub Blockchain in iOS/Swift Applications
+sidebar_label: iOS
+image: 'banners/bitkub.png'
+keywords: [ios, swift, bitkub, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the BitKub Blockchain in iOS/Swift Applications | Documentation - Web3Auth'
+---
+
+import InstallationSnippet from '../../_ios-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_ios-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_ios-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_ios-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_ios-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_ios-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_ios-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Web3Auth with the BitKub Blockchain in iOS/Swift Applications"
+  description="Integrate Web3Auth with the BitKub Blockchain in iOS/Swift Applications | Documentation - Web3Auth"
+  image="https://web3auth.io/docs/banners/bitkub.png"
+  slug="/embedded-wallets/connect-blockchain/evm/bitkub/ios"
+/>
+
+While using the Web3Auth iOS SDK, you get the private key within the user scope. This private key can interact with [BitKub](https://developers.bitkubchain.com/) to make any blockchain calls, like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Installation
+
+<InstallationSnippet />
+
+## Chain Details for BitKub
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: `0x60`
+- Public RPC URL: `https://rpc.bitkubchain.io`
+- Display Name: BitKub Mainnet
+- Block Explorer Link: `https://www.bkcscan.com`
+- Ticker: KUB
+- Ticker Name: KUB
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: `0x6545`
+- Public RPC URL: `https://rpc-testnet.bitkubchain.io/`
+- Display Name: BitKub Testnet
+- Block Explorer Link: `https://testnet.bkcscan.com`
+- Ticker: tKUB
+- Ticker Name: tKUB
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

@@ -1,0 +1,171 @@
+---
+title: Integrate Web3Auth with the Flare Blockchain in React Native
+sidebar_label: React Native
+image: 'banners/flare.png'
+
+keywords: [react-native, flare, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the Flare Blockchain in React Native | Documentation - Web3Auth'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Web3Auth with the Flare Blockchain in React Native"
+  description="Integrate Web3Auth with the Flare Blockchain in React Native | Documentation - Web3Auth"
+  image="https://web3auth.io/docs/banners/flare.png"
+  slug="/embedded-wallets/connect-blockchain/evm/flare/react-native"
+/>
+
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Flare](https://www.flare.network) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet (Coston2)", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0xE', // hex of 14
+  rpcTarget: 'https://flare-api.flare.network/ext/C/rpc',
+  // Avoid using public rpcTarget in production.
+  // Use services provided by Flare or other node providers
+  displayName: 'Flare Mainnet',
+  blockExplorer: 'https://flare-explorer.flare.network/',
+  ticker: 'FLR',
+  tickerName: 'FLR',
+}
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x72', // hex of 114
+  rpcTarget: 'https://coston2-api.flare.network/ext/C/rpc',
+  // Avoid using public rpcTarget in production.
+  // Use services provided by Flare or other node providers
+  displayName: 'Coston2 testnet',
+  blockExplorer: 'https://coston2-explorer.flare.network/',
+  ticker: 'C2FLR',
+  tickerName: 'C2FLR',
+  // faucet link- "https://coston2-faucet.towolabs.com"
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />
+
+## Read the current Bitcoin price from the FTSO system
+
+Flare provides a native decentralized oracle system called FTSO (Flare Time Series Oracle) to fetch the current price of an asset.
+
+<Tabs
+  defaultValue="web3"
+  values={[
+    { label: "web3.js", value: "web3" },
+    { label: "ethers.js", value: "ethers" },
+  ]}
+>
+<TabItem value="web3">
+
+```js
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3 is const web3 = new Web3(web3authProvider); from above.
+
+const contractABI =
+  '[{"type":"constructor","stateMutability":"nonpayable","inputs":[]},{"type":"event","name":"GovernanceCallTimelocked","inputs":[{"type":"bytes4","name":"selector","internalType":"bytes4","indexed":false},{"type":"uint256","name":"allowedAfterTimestamp","internalType":"uint256","indexed":false},{"type":"bytes","name":"encodedCall","internalType":"bytes","indexed":false}],"anonymous":false},{"type":"event","name":"GovernanceInitialised","inputs":[{"type":"address","name":"initialGovernance","internalType":"address","indexed":false}],"anonymous":false},{"type":"event","name":"GovernedProductionModeEntered","inputs":[{"type":"address","name":"governanceSettings","internalType":"address","indexed":false}],"anonymous":false},{"type":"event","name":"TimelockedGovernanceCallCanceled","inputs":[{"type":"bytes4","name":"selector","internalType":"bytes4","indexed":false},{"type":"uint256","name":"timestamp","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"event","name":"TimelockedGovernanceCallExecuted","inputs":[{"type":"bytes4","name":"selector","internalType":"bytes4","indexed":false},{"type":"uint256","name":"timestamp","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}],"name":"addFtso","inputs":[{"type":"address","name":"_ftsoContract","internalType":"contract IIFtso"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"cancelGovernanceCall","inputs":[{"type":"bytes4","name":"_selector","internalType":"bytes4"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"executeGovernanceCall","inputs":[{"type":"bytes4","name":"_selector","internalType":"bytes4"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"contract IIFtsoManager"}],"name":"ftsoManager","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"_addressUpdater","internalType":"address"}],"name":"getAddressUpdater","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"tuple[]","name":"","internalType":"struct IFtsoRegistry.PriceInfo[]","components":[{"type":"uint256","name":"ftsoIndex","internalType":"uint256"},{"type":"uint256","name":"price","internalType":"uint256"},{"type":"uint256","name":"decimals","internalType":"uint256"},{"type":"uint256","name":"timestamp","internalType":"uint256"}]}],"name":"getAllCurrentPrices","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address[]","name":"_ftsos","internalType":"contract IIFtso[]"}],"name":"getAllFtsos","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_price","internalType":"uint256"},{"type":"uint256","name":"_timestamp","internalType":"uint256"}],"name":"getCurrentPrice","inputs":[{"type":"string","name":"_symbol","internalType":"string"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_price","internalType":"uint256"},{"type":"uint256","name":"_timestamp","internalType":"uint256"}],"name":"getCurrentPrice","inputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_price","internalType":"uint256"},{"type":"uint256","name":"_timestamp","internalType":"uint256"},{"type":"uint256","name":"_assetPriceUsdDecimals","internalType":"uint256"}],"name":"getCurrentPriceWithDecimals","inputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_price","internalType":"uint256"},{"type":"uint256","name":"_timestamp","internalType":"uint256"},{"type":"uint256","name":"_assetPriceUsdDecimals","internalType":"uint256"}],"name":"getCurrentPriceWithDecimals","inputs":[{"type":"string","name":"_symbol","internalType":"string"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"tuple[]","name":"","internalType":"struct IFtsoRegistry.PriceInfo[]","components":[{"type":"uint256","name":"ftsoIndex","internalType":"uint256"},{"type":"uint256","name":"price","internalType":"uint256"},{"type":"uint256","name":"decimals","internalType":"uint256"},{"type":"uint256","name":"timestamp","internalType":"uint256"}]}],"name":"getCurrentPricesByIndices","inputs":[{"type":"uint256[]","name":"_indices","internalType":"uint256[]"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"tuple[]","name":"","internalType":"struct IFtsoRegistry.PriceInfo[]","components":[{"type":"uint256","name":"ftsoIndex","internalType":"uint256"},{"type":"uint256","name":"price","internalType":"uint256"},{"type":"uint256","name":"decimals","internalType":"uint256"},{"type":"uint256","name":"timestamp","internalType":"uint256"}]}],"name":"getCurrentPricesBySymbols","inputs":[{"type":"string[]","name":"_symbols","internalType":"string[]"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"_activeFtso","internalType":"contract IIFtso"}],"name":"getFtso","inputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"_activeFtso","internalType":"contract IIFtso"}],"name":"getFtsoBySymbol","inputs":[{"type":"string","name":"_symbol","internalType":"string"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address[5]","name":"_ftsoAddressHistory","internalType":"contract IIFtso[5]"}],"name":"getFtsoHistory","inputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}],"name":"getFtsoIndex","inputs":[{"type":"string","name":"_symbol","internalType":"string"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"string","name":"_symbol","internalType":"string"}],"name":"getFtsoSymbol","inputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address[]","name":"_ftsos","internalType":"contract IFtsoGenesis[]"}],"name":"getFtsos","inputs":[{"type":"uint256[]","name":"_assetIndices","internalType":"uint256[]"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address[]","name":"_ftsos","internalType":"contract IIFtso[]"}],"name":"getSupportedFtsos","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"_supportedIndices","internalType":"uint256[]"}],"name":"getSupportedIndices","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"_supportedIndices","internalType":"uint256[]"},{"type":"address[]","name":"_ftsos","internalType":"contract IIFtso[]"}],"name":"getSupportedIndicesAndFtsos","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"_supportedIndices","internalType":"uint256[]"},{"type":"string[]","name":"_supportedSymbols","internalType":"string[]"}],"name":"getSupportedIndicesAndSymbols","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"_supportedIndices","internalType":"uint256[]"},{"type":"string[]","name":"_supportedSymbols","internalType":"string[]"},{"type":"address[]","name":"_ftsos","internalType":"contract IIFtso[]"}],"name":"getSupportedIndicesSymbolsAndFtsos","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"string[]","name":"_supportedSymbols","internalType":"string[]"}],"name":"getSupportedSymbols","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"string[]","name":"_supportedSymbols","internalType":"string[]"},{"type":"address[]","name":"_ftsos","internalType":"contract IIFtso[]"}],"name":"getSupportedSymbolsAndFtsos","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"governance","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"contract IGovernanceSettings"}],"name":"governanceSettings","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"initialise","inputs":[{"type":"address","name":"_initialGovernance","internalType":"address"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"initialiseRegistry","inputs":[{"type":"address","name":"_addressUpdater","internalType":"address"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"productionMode","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"removeFtso","inputs":[{"type":"address","name":"_ftso","internalType":"contract IIFtso"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"switchToProductionMode","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"allowedAfterTimestamp","internalType":"uint256"},{"type":"bytes","name":"encodedCall","internalType":"bytes"}],"name":"timelockedCalls","inputs":[{"type":"bytes4","name":"","internalType":"bytes4"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"updateContractAddresses","inputs":[{"type":"bytes32[]","name":"_contractNameHashes","internalType":"bytes32[]"},{"type":"address[]","name":"_contractAddresses","internalType":"address[]"}]}]'
+const contractAddress = '0x13DC2b5053857AE17a4f95aFF55530b267F3E040'
+const contract = new web3.eth.Contract(JSON.parse(contractABI), contractAddress)
+
+// Read current pricing data from FTSO system
+const [btcPriceInfo, flarePriceInfo] = await contract.methods
+  .getCurrentPricesBySymbols(['BTC', 'FLR'])
+  .call()
+const btcPrice = btcPriceInfo.price
+const flarePrice = flarePriceInfo.price
+```
+
+</TabItem>
+<TabItem value="ethers">
+
+```js
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// provider is const provider = new ethers.providers.Web3Provider(web3authProvider); from above.
+
+const signer = provider.getSigner()
+
+const contractABI =
+  '[{"type":"constructor","stateMutability":"nonpayable","inputs":[]},{"type":"event","name":"GovernanceCallTimelocked","inputs":[{"type":"bytes4","name":"selector","internalType":"bytes4","indexed":false},{"type":"uint256","name":"allowedAfterTimestamp","internalType":"uint256","indexed":false},{"type":"bytes","name":"encodedCall","internalType":"bytes","indexed":false}],"anonymous":false},{"type":"event","name":"GovernanceInitialised","inputs":[{"type":"address","name":"initialGovernance","internalType":"address","indexed":false}],"anonymous":false},{"type":"event","name":"GovernedProductionModeEntered","inputs":[{"type":"address","name":"governanceSettings","internalType":"address","indexed":false}],"anonymous":false},{"type":"event","name":"TimelockedGovernanceCallCanceled","inputs":[{"type":"bytes4","name":"selector","internalType":"bytes4","indexed":false},{"type":"uint256","name":"timestamp","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"event","name":"TimelockedGovernanceCallExecuted","inputs":[{"type":"bytes4","name":"selector","internalType":"bytes4","indexed":false},{"type":"uint256","name":"timestamp","internalType":"uint256","indexed":false}],"anonymous":false},{"type":"function","stateMutability":"nonpayable","outputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}],"name":"addFtso","inputs":[{"type":"address","name":"_ftsoContract","internalType":"contract IIFtso"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"cancelGovernanceCall","inputs":[{"type":"bytes4","name":"_selector","internalType":"bytes4"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"executeGovernanceCall","inputs":[{"type":"bytes4","name":"_selector","internalType":"bytes4"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"contract IIFtsoManager"}],"name":"ftsoManager","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"_addressUpdater","internalType":"address"}],"name":"getAddressUpdater","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"tuple[]","name":"","internalType":"struct IFtsoRegistry.PriceInfo[]","components":[{"type":"uint256","name":"ftsoIndex","internalType":"uint256"},{"type":"uint256","name":"price","internalType":"uint256"},{"type":"uint256","name":"decimals","internalType":"uint256"},{"type":"uint256","name":"timestamp","internalType":"uint256"}]}],"name":"getAllCurrentPrices","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address[]","name":"_ftsos","internalType":"contract IIFtso[]"}],"name":"getAllFtsos","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_price","internalType":"uint256"},{"type":"uint256","name":"_timestamp","internalType":"uint256"}],"name":"getCurrentPrice","inputs":[{"type":"string","name":"_symbol","internalType":"string"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_price","internalType":"uint256"},{"type":"uint256","name":"_timestamp","internalType":"uint256"}],"name":"getCurrentPrice","inputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_price","internalType":"uint256"},{"type":"uint256","name":"_timestamp","internalType":"uint256"},{"type":"uint256","name":"_assetPriceUsdDecimals","internalType":"uint256"}],"name":"getCurrentPriceWithDecimals","inputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_price","internalType":"uint256"},{"type":"uint256","name":"_timestamp","internalType":"uint256"},{"type":"uint256","name":"_assetPriceUsdDecimals","internalType":"uint256"}],"name":"getCurrentPriceWithDecimals","inputs":[{"type":"string","name":"_symbol","internalType":"string"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"tuple[]","name":"","internalType":"struct IFtsoRegistry.PriceInfo[]","components":[{"type":"uint256","name":"ftsoIndex","internalType":"uint256"},{"type":"uint256","name":"price","internalType":"uint256"},{"type":"uint256","name":"decimals","internalType":"uint256"},{"type":"uint256","name":"timestamp","internalType":"uint256"}]}],"name":"getCurrentPricesByIndices","inputs":[{"type":"uint256[]","name":"_indices","internalType":"uint256[]"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"tuple[]","name":"","internalType":"struct IFtsoRegistry.PriceInfo[]","components":[{"type":"uint256","name":"ftsoIndex","internalType":"uint256"},{"type":"uint256","name":"price","internalType":"uint256"},{"type":"uint256","name":"decimals","internalType":"uint256"},{"type":"uint256","name":"timestamp","internalType":"uint256"}]}],"name":"getCurrentPricesBySymbols","inputs":[{"type":"string[]","name":"_symbols","internalType":"string[]"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"_activeFtso","internalType":"contract IIFtso"}],"name":"getFtso","inputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"_activeFtso","internalType":"contract IIFtso"}],"name":"getFtsoBySymbol","inputs":[{"type":"string","name":"_symbol","internalType":"string"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address[5]","name":"_ftsoAddressHistory","internalType":"contract IIFtso[5]"}],"name":"getFtsoHistory","inputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}],"name":"getFtsoIndex","inputs":[{"type":"string","name":"_symbol","internalType":"string"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"string","name":"_symbol","internalType":"string"}],"name":"getFtsoSymbol","inputs":[{"type":"uint256","name":"_assetIndex","internalType":"uint256"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address[]","name":"_ftsos","internalType":"contract IFtsoGenesis[]"}],"name":"getFtsos","inputs":[{"type":"uint256[]","name":"_assetIndices","internalType":"uint256[]"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"address[]","name":"_ftsos","internalType":"contract IIFtso[]"}],"name":"getSupportedFtsos","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"_supportedIndices","internalType":"uint256[]"}],"name":"getSupportedIndices","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"_supportedIndices","internalType":"uint256[]"},{"type":"address[]","name":"_ftsos","internalType":"contract IIFtso[]"}],"name":"getSupportedIndicesAndFtsos","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"_supportedIndices","internalType":"uint256[]"},{"type":"string[]","name":"_supportedSymbols","internalType":"string[]"}],"name":"getSupportedIndicesAndSymbols","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256[]","name":"_supportedIndices","internalType":"uint256[]"},{"type":"string[]","name":"_supportedSymbols","internalType":"string[]"},{"type":"address[]","name":"_ftsos","internalType":"contract IIFtso[]"}],"name":"getSupportedIndicesSymbolsAndFtsos","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"string[]","name":"_supportedSymbols","internalType":"string[]"}],"name":"getSupportedSymbols","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"string[]","name":"_supportedSymbols","internalType":"string[]"},{"type":"address[]","name":"_ftsos","internalType":"contract IIFtso[]"}],"name":"getSupportedSymbolsAndFtsos","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"address"}],"name":"governance","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"address","name":"","internalType":"contract IGovernanceSettings"}],"name":"governanceSettings","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"initialise","inputs":[{"type":"address","name":"_initialGovernance","internalType":"address"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"initialiseRegistry","inputs":[{"type":"address","name":"_addressUpdater","internalType":"address"}]},{"type":"function","stateMutability":"view","outputs":[{"type":"bool","name":"","internalType":"bool"}],"name":"productionMode","inputs":[]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"removeFtso","inputs":[{"type":"address","name":"_ftso","internalType":"contract IIFtso"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"switchToProductionMode","inputs":[]},{"type":"function","stateMutability":"view","outputs":[{"type":"uint256","name":"allowedAfterTimestamp","internalType":"uint256"},{"type":"bytes","name":"encodedCall","internalType":"bytes"}],"name":"timelockedCalls","inputs":[{"type":"bytes4","name":"","internalType":"bytes4"}]},{"type":"function","stateMutability":"nonpayable","outputs":[],"name":"updateContractAddresses","inputs":[{"type":"bytes32[]","name":"_contractNameHashes","internalType":"bytes32[]"},{"type":"address[]","name":"_contractAddresses","internalType":"address[]"}]}]'
+const contractAddress = '0x13DC2b5053857AE17a4f95aFF55530b267F3E040'
+
+const contract = new ethers.Contract(contractAddress, contractABI, signer)
+
+// Read current pricing data from FTSO system
+const [btcPriceInfo, flarePriceInfo] = await contract.getCurrentPricesBySymbols(['BTC', 'FLR'])
+const btcPrice = btcPriceInfo.price
+const flarePrice = flarePriceInfo.price
+```
+
+</TabItem>
+</Tabs>

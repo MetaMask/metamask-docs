@@ -1,0 +1,277 @@
+---
+title: PnP React Native - v3 to v4
+sidebar_label: PnP React Native - v3 to v4
+description: "PnP React Native SDK - v3 to v4 | Documentation - Web3Auth"
+---
+
+## Third parameter to web3auth constructor
+
+To introduce session management without storing the private key in the device, a new parameter is
+introduced to the web3auth constructor. This is the `Storage` parameter.
+
+### In Expo-managed workflow
+
+When using our SDK with an Expo-based React Native app (aka managed workflow), you have to install
+the `expo-web-browser` package as a `WebBrowser` implementation. You also need to install
+`expo-secure-store` to store the user's session.
+
+```bash
+expo install expo-web-browser expo-secure-store
+```
+
+```tsx
+import * as WebBrowser from "expo-web-browser";
+import * as SecureStore from "expo-secure-store";
+import Web3Auth, { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@web3auth/react-native-sdk";
+
+const clientId = "YOUR WEB3AUTH CLIENT ID";
+
+const web3auth = new Web3Auth(WebBrowser, SecureStore, {
+  clientId,
+  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+});
+```
+
+### In Bare React native workflow
+
+Install Web3Auth's React Native SDK in your React Native project. When using our SDK with a bare
+workflow React Native app, you have to install a `WebBrowser` implementation made by us and a
+`Storage` implementation provided by react-native.
+
+```bash npm2yarn
+npm install --save @toruslabs/react-native-web-browser react-native-encrypted-storage
+```
+
+```tsx
+import * as WebBrowser from "@toruslabs/react-native-web-browser";
+import EncryptedStorage from "react-native-encrypted-storage";
+import Web3Auth, { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@web3auth/react-native-sdk";
+
+const clientId = "YOUR_WEB3AUTH_CLIENT_ID";
+
+const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
+  clientId,
+  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+});
+```
+
+## Polyfilling required are different
+
+### For Bare React Native workflow
+
+Add `globals.js` file to your project and import it into your `index.js` file.
+
+```tsx title="globals.js"
+global.Buffer = require("buffer").Buffer;
+
+// Needed so that 'stream-http' chooses the right default protocol.
+global.location = {
+  protocol: "file:",
+};
+
+global.process.version = "v16.0.0";
+if (!global.process.version) {
+  global.process = require("process");
+  console.log({ process: global.process });
+}
+
+process.browser = true;
+```
+
+```tsx title="index.js"
+import { AppRegistry } from "react-native";
+// focus-next-line
+import "./globals";
+import App from "./App";
+import { name as appName } from "./app.json";
+console.log("index.js");
+AppRegistry.registerComponent(appName, () => App);
+```
+
+Then, add the following to your `metro-config.js` file.
+
+:::info
+
+Install `empty-module`, `crypto-browserify` and `readable-stream` packages.
+
+```bash npm2yarn
+npm install --save empty-module crypto-browserify readable-stream
+```
+
+:::
+
+```tsx title="metro.config.js"
+const { getDefaultConfig } = require("metro-config");
+
+module.exports = (async () => {
+  const {
+    resolver: { sourceExts, assetExts },
+  } = await getDefaultConfig(__dirname);
+
+  const defaultSourceExts = [...sourceExts, "svg", "mjs", "cjs"];
+
+  return {
+    resolver: {
+      extraNodeModules: {
+        assert: require.resolve("empty-module"), // assert can be polyfilled here if needed
+        http: require.resolve("empty-module"), // stream-http can be polyfilled here if needed
+        https: require.resolve("empty-module"), // https-browserify can be polyfilled here if needed
+        os: require.resolve("empty-module"), // os-browserify can be polyfilled here if needed
+        url: require.resolve("empty-module"), // url can be polyfilled here if needed
+        zlib: require.resolve("empty-module"), // browserify-zlib can be polyfilled here if needed
+        path: require.resolve("empty-module"),
+        crypto: require.resolve("crypto-browserify"),
+        stream: require.resolve("readable-stream"),
+      },
+
+      assetExts: assetExts.filter((ext) => ext !== "svg"),
+
+      sourceExts: process.env.TEST_REACT_NATIVE
+        ? ["e2e.js"].concat(defaultSourceExts)
+        : defaultSourceExts,
+    },
+    transformer: {
+      getTransformOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineRequires: true,
+        },
+      }),
+    },
+  };
+})();
+```
+
+### For Expo managed workflow
+
+Before running `npm run ios` or `npm run android` in your Expo-managed workflow project, run the
+following command.
+
+```bash
+npx expo prebuild
+```
+
+This generates the native folder structure for your project, just like you would have in a bare
+workflow project. This is required for the polyfills to work.
+
+Create a `globals.js` file in your project and import it into your `index.js` file.
+
+```tsx title="globals.js"
+global.Buffer = require("buffer").Buffer;
+
+// Needed so that 'stream-http' chooses the right default protocol.
+global.location = {
+  protocol: "file:",
+};
+
+global.process.version = "v16.0.0";
+if (!global.process.version) {
+  global.process = require("process");
+  console.log({ process: global.process });
+}
+
+process.browser = true;
+```
+
+Then add this line to your `index.js` file.
+
+```tsx title="index.js"
+import "./globals";
+```
+
+Once you have done the above, create a new metro.config.js file in your project and add the
+following to it.
+
+:::info
+
+Install `@expo/metro-config`, `empty-module`, `crypto-browserify` and `readable-stream` packages.
+
+```bash npm2yarn
+npm install --save @expo/metro-config empty-module crypto-browserify readable-stream
+```
+
+:::
+
+```tsx title="metro.config.js"
+const { getDefaultConfig } = require("expo/metro-config");
+
+module.exports = (async () => {
+  const {
+    resolver: { sourceExts, assetExts },
+  } = await getDefaultConfig(__dirname);
+
+  const defaultSourceExts = [...sourceExts, "svg", "mjs", "cjs"];
+
+  return {
+    resolver: {
+      extraNodeModules: {
+        assert: require.resolve("empty-module"), // assert can be polyfilled here if needed
+        http: require.resolve("empty-module"), // stream-http can be polyfilled here if needed
+        https: require.resolve("empty-module"), // https-browserify can be polyfilled here if needed
+        os: require.resolve("empty-module"), // os-browserify can be polyfilled here if needed
+        url: require.resolve("empty-module"), // url can be polyfilled here if needed
+        zlib: require.resolve("empty-module"), // browserify-zlib can be polyfilled here if needed
+        process: require.resolve("empty-module"), // process can be polyfilled here if needed
+        path: require.resolve("empty-module"),
+        crypto: require.resolve("crypto-browserify"),
+        stream: require.resolve("readable-stream"),
+      },
+
+      assetExts: assetExts.filter((ext) => ext !== "svg"),
+
+      sourceExts: process.env.TEST_REACT_NATIVE
+        ? ["e2e.js"].concat(defaultSourceExts)
+        : defaultSourceExts,
+    },
+    transformer: {
+      getTransformOptions: async () => ({
+        transform: {
+          experimentalImportSupport: false,
+          inlineRequires: true,
+        },
+      }),
+    },
+  };
+})();
+```
+
+## `web3auth.login()` does not return any response
+
+Previous versions of the SDK returned a response object with the `login()` method. This is no longer
+the case. The `login()` method now returns a `Promise<void>`. You can use the getters such as the
+`web3auth.privKey()` to get the private key of the user (default is `secp256k1` key). Or use
+`web3auth.ed25519Key()` to get the `ed25519` key. Lastly, for userInfo, instead of accessing the
+object properties directly you can use the `web3auth.userInfo()`. Types for the react-native PnP
+SDK.
+
+```tsx
+import { EncryptedStorage } from "./types/IEncryptedStorage";
+import { SecureStore } from "./types/IExpoSecureStore";
+import { IWeb3Auth, SdkInitParams, SdkLoginParams, State } from "./types/interface";
+import { IWebBrowser } from "./types/IWebBrowser";
+declare class Web3Auth implements IWeb3Auth {
+  private initParams;
+  private webBrowser;
+  private keyStore;
+  private state;
+  private sessionManager;
+  constructor(
+    webBrowser: IWebBrowser,
+    storage: SecureStore | EncryptedStorage,
+    initParams: SdkInitParams,
+  );
+  get privKey(): string;
+  get ed25519Key(): string;
+  init(): Promise<void>;
+  login(options: SdkLoginParams): Promise<void>;
+  logout(): Promise<void>;
+  userInfo(): State["userInfo"];
+  private _syncState;
+  private request;
+  private _authorizeSession;
+}
+export default Web3Auth;
+```
+
+Check out our react-native PnP examples in the PnP examples repo to know how to use the new SDK
+methods.

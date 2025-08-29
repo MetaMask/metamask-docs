@@ -1,0 +1,77 @@
+---
+title: PnP iOS SDK - v8 to v8.1
+
+description: "PnP iOS SDK - v8 to v8.1 | Documentation - Web3Auth"
+sidebar_label: v8 to v8.1
+---
+
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+# Migration Guide from v8 to v8.1 for Web3Auth PnP iOS SDK
+
+## Overview
+
+This migration guide provides steps for upgrading from version 8(v8) to version 8.1(v8.1) of the
+Web3Auth PnP iOS SDK. The guide outlines significant changes and enhancements, including the removal
+of `chainConfig` parameter from `W3AInitParams`, and addition of `chainConfig` parameter in
+`launchWalletServices` method.
+
+## Changes in Detail
+
+### `chainConfig` parameter changes
+
+From v8.1, the `chainConfig` parameter is removed from `W3AInitParams` and added to
+`launchWalletServices` method. This change ensures, developers can open the wallet services with
+their choice of chain on runtime.
+
+#### Before (v8)
+
+```swift title="Usage"
+do {
+  var chainConfig = ChainConfig(
+    chainNamespace: ChainNamespace.eip155,
+    chainId: "0x1",
+    rpcTarget: "https://mainnet.infura.io/v3/${key}",
+    ticker: "ETH"
+  )
+
+  val web3Auth = await Web3Auth(.init(
+    clientId: clientID,
+    network: network,
+    buildEnv: buildEnv,
+    // focus-start
+    chainConfig: chainConfig
+  ))
+
+  // focus-start
+  try await web3Auth?.launchWalletServices(
+    W3ALoginParams(loginProvider: .GOOGLE),
+  )
+  // focus-end
+} catch {
+  // Handle error
+}
+```
+
+#### After (v8.1)
+
+```swift title="Usage"
+do {
+  var chainConfig = ChainConfig(
+    chainNamespace: ChainNamespace.eip155,
+    chainId: "0x1",
+    rpcTarget: "https://mainnet.infura.io/v3/${key}",
+    ticker: "ETH"
+  )
+
+  // focus-start
+  try await web3Auth?.launchWalletServices(
+    W3ALoginParams(loginProvider: .GOOGLE),
+    chainConfig: chainConfig
+  )
+  // focus-end
+} catch {
+  // Handle error
+}
+```

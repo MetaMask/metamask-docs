@@ -16,7 +16,12 @@ const productsDropdown = fs.readFileSync('./src/components/NavDropdown/Products.
 const baseUrl = process.env.DEST || '/'
 const siteUrl = 'https://docs.metamask.io'
 
-const npm2yarnPlugin = [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
+const remarkPlugins = [
+  require('remark-math'),
+  [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
+]
+
+const rehypePlugins = [[require('rehype-katex'), { strict: false }]]
 /** @type {import('@docusaurus/types').Config} */
 const fullUrl = new URL(baseUrl, siteUrl).toString()
 const config = {
@@ -136,7 +141,8 @@ const config = {
           editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
           sidebarPath: false,
           breadcrumbs: false,
-          remarkPlugins: [npm2yarnPlugin],
+          remarkPlugins,
+          rehypePlugins,
         },
         pages: {
           path: 'src/pages',
@@ -149,7 +155,8 @@ const config = {
             '**/__tests__/**',
           ],
           mdxPageComponent: '@theme/MDXPage',
-          remarkPlugins: [npm2yarnPlugin],
+          remarkPlugins,
+          rehypePlugins,
         },
         theme: {
           customCss: require.resolve('./src/scss/custom.scss'),
@@ -171,7 +178,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./snaps-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
         admonitions: {
           keywords: [
             'info',
@@ -197,7 +205,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./gator-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
@@ -225,7 +234,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./services-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
       },
     ],
     [
@@ -237,7 +247,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./dashboard-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
       },
     ],
     [
@@ -249,7 +260,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./wallet-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           const sidebarItems = await defaultSidebarItemsGenerator(args)
           const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
@@ -273,7 +285,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./sdk-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
       },
     ],
 
@@ -286,7 +299,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./ew-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
       },
     ],
     './src/plugins/plugin-json-rpc.ts',

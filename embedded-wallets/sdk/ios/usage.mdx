@@ -1,0 +1,593 @@
+---
+title: Using PnP iOS SDK
+sidebar_label: Usage
+description: 'Web3Auth PnP iOS SDK - Usage | Documentation - Web3Auth'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+## Functionality Overview
+
+| Name | Description |
+| --- | --- |
+| [login](#logging-in-a-user) | Logs in the user with the selected login provider. |
+| [logout](#logging-out-a-user) | Logs out the user from the currently active session. |
+| [getPrivKey](#secp256k1-private-key) | Retrieve the user's secp256K1 key. The key can be used to sign transactions for chains using the secp256k1 curve like EVM-compatible chains. |
+| [getEd25519PrivKey](#ed25519-private-key) | Retrieve the user's ed25519 key. The key can be used to sign transactions for chains using the ed25519 curve like Solana, Near, Algorand, and others. |
+| [getUserInfo](#retrieve-user-information) | Retrieve the user information, such as login provider, name, email, oAuth token, etc. |
+| [enableMFA](#enable-mfa-for-a-user) | Use to trigger the setup MFA flow for the users. |
+| [manageMFA](#manage-mfa-for-a-user) | Use to trigger the manage MFA flow for the users. |
+| [launchWalletServices](#launch-wallet-services) | Use to open the templated wallet UI in WebView. |
+| [request](#request-signature) | Use to open templated transaction screens for signing EVM transactions. |
+
+## Logging in a User
+
+To login in a user, you can use the `login` method. It will trigger login flow will navigate the user to a browser model allowing the user to login into the service. You can pass in the supported providers to the login method for specific social logins such as GOOGLE, APPLE, FACEBOOK, etc., and do whitelabel login.
+
+### Parameters
+
+The login method accepts `W3ALoginParams` as a required parameter.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Struct", value: "struct" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `SMS_PASSWORDLESS`, and `FARCASTER`. |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `nil`, and it accepts `ExtraLoginOptions` as a value. |
+| `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `nil`, and accepts `URL` as a value. |
+| `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `nil`, and accepts `String` as a value. |
+| `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value. |
+| `dappShare?` | Custom verifier logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `String` as a value. |
+| `curve?` | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivKey` method. The default value is `SUPPORTED_KEY_CURVES.SECP256K1`. |
+
+</TabItem>
+
+<TabItem value="struct">
+
+```swift
+public struct W3ALoginParams: Codable {
+	public init() {
+		loginProvider = nil
+		dappShare = nil
+		extraLoginOptions = nil
+		redirectUrl = nil
+		appState = nil
+		mfaLevel = nil
+		curve = .SECP256K1
+	}
+
+	let loginProvider: String?
+	var dappShare: String?
+	let extraLoginOptions: ExtraLoginOptions?
+	let redirectUrl: String?
+	let appState: String?
+	let mfaLevel: MFALevel?
+	let curve: SUPPORTED_KEY_CURVES
+}
+
+public enum Web3AuthProvider: String, Codable {
+    case GOOGLE = "google"
+    case FACEBOOK = "facebook"
+    case REDDIT = "reddit"
+    case DISCORD = "discord"
+    case TWITCH = "twitch"
+    case APPLE = "apple"
+    case LINE = "line"
+    case GITHUB = "github"
+    case KAKAO = "kakao"
+    case LINKEDIN = "linkedin"
+    case TWITTER = "twitter"
+    case WEIBO = "weibo"
+    case WECHAT = "wechat"
+    case EMAIL_PASSWORDLESS = "email_passwordless"
+    case JWT = "jwt"
+    case SMS_PASSWORDLESS = "sms_passwordless"
+    case FARCASTER = "farcaster"
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Usage
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .GOOGLE))
+```
+
+### Examples
+
+<Tabs
+  defaultValue="google"
+  values={[
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
+    { label: "Discord", value: "discord" },
+    { label: "Twitch", value: "twitch" },
+    { label: "Email Passwordless", value: "email_passwordless" },
+	{ label: "SMS Passwordless", value: "sms_passwordless" },
+	{ label: "Farcaster", value: "farcaster" },
+	{ label: "JWT", value: "jwt" }
+  ]}
+>
+
+<TabItem value="google">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .GOOGLE))
+```
+
+</TabItem>
+
+<TabItem value="facebook">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .FACEBOOK))
+```
+
+</TabItem>
+
+<TabItem value="discord">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .DISCORD))
+```
+
+</TabItem>
+
+<TabItem value="twitch">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .TWITCH))
+```
+
+</TabItem>
+
+<TabItem value="email_passwordless">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(
+  W3AInitParams(
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+    network:.sapphire_mainnet,
+    redirectUrl: "bundleId://auth"
+  )
+)
+
+// focus-start
+let result = try await web3Auth.login(
+  W3ALoginParams(
+    loginProvider: .EMAIL_PASSWORDLESS,
+    extraLoginOptions: .init(loginHint: "hello@web3auth.io")
+  )
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="sms_passwordless">
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams( clientId: "YOUR_WEB3AUTH_CLIENT_ID", network: .sapphire_mainnet, redirectUrl: "bundleId://auth" ))
+
+// focus-start let result = try await web3Auth.login(W3ALoginParams( Web3AuthProvider.SMS_PASSWORDLESS, // The phone number should be in format of +{country_code}-{phone_number} extraLoginOptions: .init(loginHint: "+91-9911223344") )) // focus-end
+
+````
+
+</TabItem>
+
+<TabItem value="farcaster">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(
+  W3AInitParams(
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+    network: .sapphire_mainnet,
+    redirectUrl: "bundleId://auth"
+  )
+)
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .FARCASTER))
+
+````
+
+</TabItem>
+
+<TabItem value="jwt">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-start
+let result = try await web3Auth.login(
+  W3ALoginParams(
+    loginProvider: .JWT,
+    extraLoginOptions: .init(domain:"your-domain", id_token: "your_jwt_token")
+  )
+)
+// focus-end
+```
+
+</TabItem>
+</Tabs>
+
+## Retrieve Private Key
+
+Web3Auth supports two widely used cryptographic curves, Secp256k1 and Ed25519, making it chain-agnostic and compatible with multiple blockchain networks. [Learn more about how to connect different blockchains](/embedded-wallets/connect-blockchain).
+
+### Secp256k1 Private Key
+
+To retrieve the secp256k1 private key of the user, use `getPrivkey` method. The method returns an EVM compatible private key which can be used to sign transactions on EVM compatible chains.
+
+```swift
+let privateKey = web3Auth.getPrivKey();
+```
+
+### Ed25519 Private Key
+
+To retrieve the secp256k1 private key of the user., use `getEd25519PrivKey` method. This private key can be used to sign transactions on Solana, Near, Algorand, and other chains that use the ed25519 curve.
+
+```swift
+let privateKey = web3Auth.getEd25519PrivKey();
+```
+
+## Retrieve User Information
+
+You can use the `getUserInfo` method to retrieve various details about the user, such as their login type, whether multi-factor authentication (MFA) is enabled, profile image, name, and other relevant information.
+
+### Usage
+
+```swift
+let web3AuthUserInfo = web3Auth.getUserInfo();
+```
+
+### UserInfo Response
+
+```json
+{
+  "userInfo": {
+    "email": "w3a-heroes@web3auth.com",
+    "name": "Web3Auth Heroes",
+    "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
+    "verifier": "torus",
+    "verifierId": "w3a-heroes@web3auth.com",
+    "typeOfLogin": "google",
+    "aggregateVerifier": "w3a-google-sapphire",
+    "dappShare": "", // 24 words of seed phrase will be sent only incase of custom verifiers
+    "idToken": "<jwtToken issued by Web3Auth>",
+    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "isMfaEnabled": false // Returns whether the user has enabled MFA or not
+  }
+}
+```
+
+## Session Management
+
+The Session Management feature allows you to check the existing sessions with Web3Auth. The `Web3AuthState` will allow users to remain authenticated with Web3Auth for 1 day by default, or a maximum of 30 days, or until the user logout or session data is cleared.
+
+The `W3AInitParams` initialization accepts a `sessionTime` parameter.
+
+### Usage
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth",
+  // focus-next-line
+  sessionTime: 86400 // 1 Day
+))
+```
+
+## Logging out a user
+
+To logout the user and remove the session id from the device you can use the `logout` method. The user will need to login again to use the dApp next time the dApp is opened.
+
+```swift
+try await web3auth.logout()
+```
+
+## Enable MFA for a user
+
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `W3ALoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `W3ALoginParams`. If you are using custom jwt verifiers, you need to pass the valid JWT token in `W3ALoginParams` as well.
+
+<Tabs
+  defaultValue="default-verifier"
+  values={[
+    { label: "Default Verifier", value: "default-verifier" },
+    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+  ]}
+>
+
+<TabItem value = "default-verifier">
+
+```swift
+do {
+	// focus-next-line
+  let isMFAEnabled = try await web3Auth.enableMFA()
+} catch {
+  print(error.localizedDescription)
+  // Handle Error
+}
+```
+
+</TabItem>
+
+<TabItem value = "custom-jwt-verifier">
+
+```swift
+do {
+  let loginParams = W3ALoginParams(
+    loginProvider: .JWT,
+    extraLoginOptions: .init(id_token: "your_jwt_token")
+   )
+
+  let isMFAEnabled = try await web3Auth.enableMFA(loginParams)
+
+} catch {
+  print(error.localizedDescription)
+  // Handle Error
+}
+
+```
+
+</TabItem>
+</Tabs>
+
+## Manage MFA for a user
+
+The `manageMFA` method is used to trigger manage MFA flow for users, allowing users to update their MFA settings. The method takes `W3ALoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `W3ALoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
+
+<Tabs
+  defaultValue="default-verifier"
+  values={[
+    { label: "Default Verifier", value: "default-verifier" },
+    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+  ]}
+>
+
+<TabItem value = "default-verifier">
+
+```swift
+do {
+  let response = try await web3Auth.manageMFA()
+  if response {
+    // Handle success
+  } else {
+    // Something went wrong
+  }
+} catch {
+  // Handle error
+}
+```
+
+</TabItem>
+
+<TabItem value="custom-jwt-verifier">
+
+```swift
+let loginParams = W3ALoginParams(
+  loginProvider: .JWT,
+  extraLoginOptions: .init(id_token: "your_jwt_token")
+)
+
+do {
+  let response = try await web3Auth.manageMFA(loginParams)
+  if response {
+    // Handle success
+  } else {
+    // Something went wrong
+  }
+} catch {
+  // Handle error
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Launch Wallet Services
+
+The `launchWalletServices` method launches a WebView which allows you to use the templated wallet UI services. The method takes `ChainConfig` as the required input. Wallet Services is currently only available for EVM chains.
+
+:::note
+
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+
+:::
+
+![Wallet Services](/img/wallet-services/mobile-wallet-services.png)
+
+### Parameters
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `chainNamespace` | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.eip155`. |
+| `decimals?` | Number of decimals for the currency ticker. Default value is 18, and accepts `Int` as value. |
+| `blockExplorerUrl?` | Blockchain's explorer URL. (eg: `https://etherscan.io`) |
+| `chainId` | The chain id of the selected blockchain `String`. |
+| `displayName?` | Display Name for the chain. |
+| `logo?` | Logo for the selected `chainNamespace` & `chainId`. |
+| `rpcTarget` | RPC Target URL for the selected `chainNamespace` & `chainId`. |
+| `ticker?` | Default currency ticker of the network (e.g: `ETH`) |
+| `tickerName?` | Name for currency ticker (e.g: `Ethereum`) |
+
+</TabItem>
+
+<TabItem value="class">
+
+```swift
+public struct ChainConfig: Codable {
+    public init(chainNamespace: ChainNamespace = ChainNamespace.eip155, decimals: Int? = 18, blockExplorerUrl: String? = nil, chainId: String, displayName: String? = nil, logo: String? = nil, rpcTarget: String, ticker: String? = nil, tickerName: String? = nil) {
+        self.chainNamespace = chainNamespace
+        self.decimals = decimals
+        self.blockExplorerUrl = blockExplorerUrl
+        self.chainId = chainId
+        self.displayName = displayName
+        self.logo = logo
+        self.rpcTarget = rpcTarget
+        self.ticker = ticker
+        self.tickerName = tickerName
+    }
+}
+
+```
+
+</TabItem>
+</Tabs>
+
+### Usage
+
+```swift
+do {
+	// focus-start
+  try await web3Auth!.launchWalletServices(
+    chainConfig: ChainConfig(
+      chainId: "0xaa36a7",
+      rpcTarget: "https://eth-sepolia.public.blastapi.io"
+    )
+   )
+	// focus-end
+} catch {
+  print(error.localizedDescription)
+  // Handle error
+}
+```
+
+## Request signature
+
+The `request` method facilitates the use of templated transaction screens for signing transactions. The method will return [SignResponse](#signresponse). It can be used to sign transactions for any EVM chain and screens can be whitelabeled to your branding.
+
+Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
+
+![Request Method](/img/wallet-services/mobile-request-method.png)
+
+### Parameters
+
+| Parameter | Description |
+| --- | --- |
+| `chainConfig` | Defines the chain to be used for signature. |
+| `method` | JSON RPC method name in `String`. Currently, the request method only supports the singing methods. |
+| `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/) to know more. |
+
+### Usage
+
+```swift
+do {
+  var params = [Any]()
+  // Message to be signed
+  params.append("Hello, Web3Auth from iOS!")
+  // User's EOA address
+  params.append(address)
+
+  // focus-start
+  let response = try await web3Auth?.request(
+    chainConfig: ChainConfig(
+      chainId: "0xaa36a7",
+      rpcTarget: "https://eth-sepolia.public.blastapi.io"
+    ),
+    method: "personal_sign",
+    requestParams: params
+  )
+  // focus-end
+
+  if response!.success {
+     print(response!.result!)
+   } else {
+     // Handle Error
+     print(response!.error!)
+   }
+
+} catch {
+  print(error.localizedDescription)
+  // Handle error
+}
+```
+
+### SignResponse
+
+| Name      | Description                                                   |
+| --------- | ------------------------------------------------------------- |
+| `success` | Determines whether the request was successful or not.         |
+| `result?` | Holds the signature for the request when `success` is `true`. |
+| `error?`  | Holds the error for the request when `success` is `false`.    |

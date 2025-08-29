@@ -1,0 +1,131 @@
+---
+title: Integrate Web3Auth with the ImmutableX Blockchain
+sidebar_label: ImmutableX
+image: 'banners/immutablex.png'
+
+keywords: [immutablex, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the ImmutableX Blockchain | Documentation - Web3Auth'
+---
+
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While using the Web3Auth Web SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [ImmutableX](https://www.avalabs.org) blockchain calls. However, since this chain is not fully EVM-compatible, there are a few extra setup requirements. We have highlighted a few methods here to get you started quickly on that.
+
+:::note
+
+This reference is for the `Web`, however, you can use ImmutableX on other Mobile and Gaming Platforms as well. Please follow our reference for [EVM Blockchains](/connect-blockchain/evm/), and similarly use ImmutableX libraries that support the platforms to use the private key and make blockchain calls accordingly.
+
+:::
+
+## Installation
+
+```bash npm2yarn
+npm install --save @imtbl/core-sdk
+```
+
+## Initializing Provider
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: EIP155
+- Chain ID: 0x1
+- Public RPC URL: https://rpc.ethereum.org (Avoid using public rpcTarget in production)
+- Display Name: ImmutableX Mainnet
+- Block Explorer Link: https://explorer.immutable.com
+- Ticker: IMX
+- Ticker Name: ImmutableX
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain Namespace: EIP155
+- Chain ID: 0xaa36a7
+- Public RPC URL: https://rpc.sepolia.org (Avoid using public rpcTarget in production)
+- Display Name: ImmutableX Testnet
+- Block Explorer Link: https://explorer.testnet.immutable.com
+- Ticker: IMX
+- Ticker Name: ImmutableX
+
+</TabItem>
+</Tabs>
+
+## Creating Layer 1 and Layer 2 Signers
+
+Once a user logs in, the Web3Auth SDK returns a provider. ImmutableX is a layer 2 solution for Ethereum, thus we need to create a eth signer using the provider. We will use the ethers library to create the signer. Then we use the helper function `createStarkSigner` from the `@imtbl/core-sdk` to create a stark signer from the private key.
+
+```tsx
+import { IProvider } from '@web3auth/base'
+import { ImmutableX, Config, createStarkSigner } from '@imtbl/core-sdk'
+import { ethers } from 'ethers'
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+const ethersProvider = new ethers.providers.Web3Provider(web3authProvider)
+const ethSigner = ethersProvider.getSigner()
+
+// Get user's Ethereum public address
+const address = await ethSigner.getAddress()
+
+// Get user's Starkex public address
+
+const starkKey = await web3authProvider.request({ method: 'private_key' })
+const starkSigner = createStarkSigner(starkKey)
+```
+
+After creating the signers, we need to register these signers with the ImmutableX SDK. We can do this by calling the `registerOffchain` method.
+
+```tsx
+const config = Config.SANDBOX // Or Config.PRODUCTION or Config.ROPSTEN
+const client = new ImmutableX(config)
+
+// We use the signers we created in the above step
+
+const walletConnection = { ethSigner, starkSigner }
+const response = await client.registerOffchain(walletConnection)
+```
+
+## Get Balance
+
+We can get the Layer 1 ( Ethereum ) balance using the below code snippet.
+
+```tsx
+const ethersProvider = new ethers.providers.Web3Provider(web3authProvider)
+const signer = ethersProvider.getSigner()
+
+// Get user's Ethereum public address
+const address = await signer.getAddress()
+
+// Get user's balance in ether
+const balance = ethers.utils.formatEther(
+  await ethersProvider.getBalance(address) // Balance is in wei
+)
+```
+
+## Send funds from Layer 1 to Layer 2
+
+```tsx
+const ethersProvider = new ethers.providers.Web3Provider(web3authProvider)
+const ethSigner = ethersProvider.getSigner()
+const depositResponse = await client.deposit(ethSigner, {
+  type: 'ETH',
+  amount: '10000000000000', // Amount in wei
+})
+```

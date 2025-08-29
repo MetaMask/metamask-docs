@@ -1,0 +1,85 @@
+---
+title: Google Login with Web3Auth
+sidebar_label: Google
+description: 'Google Login with Web3Auth | Documentation - Web3Auth'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import GoogleToggle from '@site/static/img/w3a-dashboard/authentication-social-connections.png'
+import GoogleConnection from '@site/static/img/w3a-dashboard/google-connection.png'
+
+import JwtLoginGoogle from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_google_one_tap.mdx'
+import ImplicitLoginGoogle from '../../sdk/react/advanced/_custom-authentication-snippets/_implicit_login_google.mdx'
+
+Google Sign-In is a widely adopted authentication method that allows users to log in using their existing Google accounts. Web3Auth supports Google as a social login provider, enabling seamless onboarding and authentication experiences for users with Google credentials.
+
+To integrate Google Sign-In with Web3Auth, developers must first configure a Google OAuth 2.0 Client ID in the Google Cloud Console.
+
+## Create a Google app
+
+1. Follow Google’s instructions to [set up an OAuth 2.0 app.](https://support.google.com/cloud/answer/6158849?hl=en)
+2. Paste the following URI as a redirect URI into the "Authorized redirect URIs" field.
+   - `https://auth.web3auth.io/auth`
+
+   ![Google OAuth2.0 App Dashboard](/img/authentication/google/google-app-redirect-uri.png)
+
+3. Obtain the OAuth `Client ID` from the [App on the Google Developer dashboard](https://console.developers.google.com/)
+
+## Create a Google Connection
+
+:::success Enable on Dashboard
+
+To use this feature, please enable `Google` from the Social Connections section in the [Web3Auth Dashboard](https://dashboard.web3auth.io).
+
+> By default, Web3Auth uses its own pre-configured credentials for Google login.
+
+:::
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={GoogleToggle}
+    style={{
+      maxWidth: '800px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Toggle Google Connection on Dashboard"
+  />
+</div>
+
+Follow these steps to create a Google connection:
+
+1. Visit the [Web3Auth Dashboard](https://dashboard.web3auth.io).
+1. Go to the `Social Connections` section.
+1. Click on the `Settings` icon near the Google connection.
+1. Enter the `Auth Connection ID`.
+1. Enter the `Google Client ID`.
+1. Finally, click on the `Add Connection` button.
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={GoogleConnection}
+    style={{
+      maxWidth: '600px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Google Connection"
+  />
+</div>
+
+## Usage
+
+Since, the `Google Connection` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+
+> Follow our [Quickstart Guide](/quick-start) to setup the basic flow.
+
+<Tabs>
+  <TabItem value="implicit" label="Implicit Login">
+    <ImplicitLoginGoogle />
+  </TabItem>
+  <TabItem value="jwt" label="JWT Login with Google SDK">
+    <JwtLoginGoogle />
+  </TabItem>
+</Tabs>

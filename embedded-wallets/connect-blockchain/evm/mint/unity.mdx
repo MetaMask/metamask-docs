@@ -1,0 +1,92 @@
+---
+title: Integrate Web3Auth with the Mint Blockchain in Unity
+sidebar_label: Unity
+image: 'banners/mint.png'
+
+keywords: [unity, mint, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the Mint Blockchain in Unity | Documentation - Web3Auth'
+---
+
+import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Web3Auth with the Mint Blockchain in Unity"
+  description="Integrate Web3Auth with the Mint Blockchain in Unity | Documentation - Web3Auth"
+  image="https://web3auth.io/docs/banners/mint.png"
+  slug="/embedded-wallets/connect-blockchain/evm/mint/unity"
+/>
+
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, such as getting the user's `account`, fetching `balance`, signing transactions, sending transactions, and interacting with smart contracts. We have highlighted a few key examples to get you started.
+
+## Installation
+
+<InstallationSnippet />
+
+## Chain Details for Mint
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0xB9
+- Public RPC URL: https://rpc.mintchain.io (Avoid using public rpcTarget in production, use services like Infura, Quicknode, etc.)
+- Display Name: Mint Mainnet
+- Block Explorer Link: https://explorer.mintchain.io
+- Ticker: ETH
+- Ticker Name: ETH
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x697
+- Public RPC URL: https://sepolia-testnet-rpc.mintchain.io (Avoid using public rpcTarget in production, use services like Infura, Quicknode, etc.)
+- Display Name: Mint Sepolia Testnet
+- Block Explorer Link: https://sepolia-testnet-explorer.mintchain.io
+- Ticker: ETH
+- Ticker Name: ETH
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />

@@ -1,0 +1,171 @@
+---
+title: Integrate Web3Auth with the Tezos Blockchain
+sidebar_label: Tezos
+image: 'banners/tezos.png'
+
+keywords: [tezos, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the Tezos Blockchain | Documentation - Web3Auth'
+---
+
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While using the Web3Auth Web SDK for a non EVM chain like [Tezos](https://tezos.com/) you get a standard provider from which you can get the private key of the user. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few methods here for getting you started quickly on that.
+
+:::note
+
+This reference is for the `Web`, however, you can use Tezos on other Mobile and Gaming Platforms as well. Please follow our reference for [EVM Blockchains](/connect-blockchain/evm/), and similarly use Tezos libraries that support the platforms to use the private key and make blockchain calls accordingly.
+
+:::
+
+## Installation
+
+```bash npm2yarn
+npm install --save @taquito/signer @taquito/taquito @taquito/utils @tezos-core-tools/crypto-utils
+```
+
+## Initializing Provider
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0x1
+- Public RPC URL: https://rpc.tzbeta.net/ (Avoid using public rpcTarget in production)
+- Display Name: Tezos Mainnet
+- Block Explorer Link: https://tzstats.com
+- Ticker: XTZ
+- Ticker Name: Tezos
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0x5
+- Public RPC URL: https://rpc.tzbeta.net/ (Avoid using public rpcTarget in production)
+- Display Name: Tezos Testnet
+- Block Explorer Link: https://tzstats.com
+- Ticker: XTZ
+- Ticker Name: Tezos
+
+</TabItem>
+</Tabs>
+
+## Get Account, Balance and Key
+
+Once a user logs in, the Web3Auth SDK returns a provider. Since Web3Auth doesn't have a native provider for Tezos, we need to directly use the private key to make the RPC calls.
+
+Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Tezos EC Curve specific signing functions, hence, we first derive the Tezos Key using the `getTezosKeyPair()` function.
+
+On the underhood, it uses the `tezosCrypto.utils.seedToKeyPair()` function, where we need to pass the `hex2buf(privateKey)`, ie. the hexadecimal to byteArray converted private key. We can use the returned private key pair from this and use on Tezos transactions.
+
+```tsx
+import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
+import { IProvider } from '@web3auth/base'
+import { TezosToolkit } from '@taquito/taquito'
+import { hex2buf } from '@taquito/utils'
+import { InMemorySigner } from '@taquito/signer'
+
+const tezos = new TezosToolkit('https://ithacanet.ecadinfra.com')
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// derive the Tezos Key Pair from the private key
+const keyPair = tezosCrypto.utils.seedToKeyPair(hex2buf(privateKey))
+
+// keyPair.pkh is the account address.
+const account = keyPair?.pkh
+
+// get balance of the account
+const balance = await tezos.tz.getBalance(account)
+```
+
+## Send Transaction
+
+```tsx
+import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
+import { IProvider } from '@web3auth/base'
+import { TezosToolkit } from '@taquito/taquito'
+import { hex2buf } from '@taquito/utils'
+import { InMemorySigner } from '@taquito/signer'
+
+const tezos = new TezosToolkit('https://ithacanet.ecadinfra.com')
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// derive the Tezos Key Pair from the private key
+const keyPair = tezosCrypto.utils.seedToKeyPair(hex2buf(privateKey))
+
+// keyPair.pkh is the account address.
+const account = keyPair?.pkh
+
+// use TacoInfra's RemoteSigner for better security on mainnet..
+tezos.setSignerProvider(await InMemorySigner.fromSecretKey(keyPair?.sk))
+
+// example address.
+const address = 'tz1dHzQTA4PGBk2igZ3kBrDsVXuvHdN8kvTQ'
+
+// NOTE: The account which is used to send tezos should have some balance for this transaction to go through.
+// If there is no balance, then you will receive an error - "implicit.empty_implicit_contract"
+// To solve this error, use a faucet account to send some tzs to the account.
+// Alternate solution:
+// 1. Use this link: https://tezostaquito.io/docs/making_transfers#transfer-from-an-implicit-tz1-address-to-a-tz1-address
+// 2. Modify the address and use the pkh key extracted from web3auth seed in the live code editor and click run code.
+// 3. Check balance in the account and have some fun.
+const op = await tezos.wallet
+  .transfer({
+    to: address,
+    amount: 0.00005,
+  })
+  .send()
+
+const txRes = await op.confirmation()
+```
+
+## Sign Message
+
+```tsx
+import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
+import { IProvider } from '@web3auth/base'
+import { TezosToolkit } from '@taquito/taquito'
+import { hex2buf } from '@taquito/utils'
+import { InMemorySigner } from '@taquito/signer'
+
+const tezos = new TezosToolkit('https://ithacanet.ecadinfra.com')
+// List of available RPC Nodes -- https://tezostaquito.io/docs/rpc_nodes
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+// derive the Tezos Key Pair from the private key
+const keyPair = tezosCrypto.utils.seedToKeyPair(hex2buf(privateKey))
+
+const signer = new InMemorySigner(keyPair.sk)
+const message = '0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad'
+const signature = await signer.sign(message)
+```
