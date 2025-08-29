@@ -1,40 +1,39 @@
 ---
-title: Account Dashboard
-sidebar_label: Account Dashboard
-description: 'Account Dashboard | Embedded Wallets'
+title: User Account Dashboard
+sidebar_label: User Account Dashboard
+description: 'Manage recovery, devices, security, and connected apps for MetaMask Embedded Wallets'
 ---
 
-# Account Dashboard
+The Embedded Wallets Account Dashboard gives your users one place to manage their embedded wallet account across apps. They can configure recovery and MFA, review and revoke connected apps, and manage trusted devices.
 
-The [Account Dashboard](https://account.web3auth.io) provides a unified platform for users to manage their Multi-Factor Authentication (MFA) and account security with ease. This document provides an overview of its features and how to integrate it seamlessly into your application.
+:::info Try now
 
-Try now: [https://account.web3auth.io](https://account.web3auth.io)
+[https://account.web3auth.io](https://account.web3auth.io)
+
+:::
 
 ![Unified Recovery Management Screenshot](/img/account-dashboard/unified-recovery-management.jpg)
 
-### 1. Unified Recovery Management
+### Recovery and MFA
 
-The [Account Dashboard](https://account.web3auth.io) allows users to:
+Users can:
 
-- Set up recovery factors such as Password, Social Recovery, Authenticator App, and Recovery Phrase.
-- Manage and modify existing recovery factors.
+- Set up and manage recovery factors: Password, Social Recovery, Authenticator app, Recovery phrase, Passkeys.
+- Unhide and copy backup phrase.
+- Resend the recovery phrase to a registered email address.
+- Add or remove MFA factors at any time.
 
-With these features, users can strengthen their account security effortlessly.
+![Account Dashboard Overview Screenshot](/img/account-dashboard/account-dashboard-overview.jpg)
 
-Additionally, users can:
+### Connected apps and sessions
 
-- Unhide and copy their backup phrase for safekeeping.
-- Resend the recovery phrase to their registered email address if forgotten.
-- Add or remove MFA factors as needed for enhanced security.
+Users can see which apps are connected to their account and stay in control of access:
 
-The Account Dashboard allows users to:
+- View all apps authorized to use the account.
+- Revoke an app’s access instantly.
+- Sign out of active sessions as needed.
 
-- Set up recovery factors such as Password, Social Recovery, Authenticator App, and Recovery Phrase.
-- Manage and modify existing recovery factors.
-
-With these features, users can strengthen their account security effortlessly. ![Account Dashboard Overview Screenshot](/img/account-dashboard/account-dashboard-overview.jpg)
-
-### 2. Device Overview
+### Device overview
 
 Users can view and manage all devices connected to their account, ensuring complete control over their sessions. They can:
 
@@ -44,29 +43,27 @@ Users can view and manage all devices connected to their account, ensuring compl
 
 ![Device Overview Screenshot](/img/account-dashboard/device-overview.jpg)
 
-### 3. Security Insights
+### Security status
 
 A visual indicator displays the overall security status of the account, encouraging users to set up additional recovery factors for better protection.
 
 ![Security Insights Screenshot](/img/account-dashboard/security-insights.jpg)
 
-## Setup and Integration
+## Use in your app
 
-### Implementation in Your dApp
+Users access the dashboard after authenticating with any app that uses MetaMask Embedded Wallets (Web3Auth).
 
-Integrate the Account Dashboard with your dApp by embedding it as part of your user flow. This provides users with:
+:::tip
 
-- Seamless access to recovery factor setup.
-- Quick device management.
-- Real-time security insights.
+For a smoother experience, add a "Manage account" or "Security" link to [https://account.web3auth.io](https://account.web3auth.io) in your app’s settings/profile.
 
-### Enhance User Security
+:::
 
-We recommend encouraging your users to:
+We recommend encouraging users to:
 
 1. Set up at least three recovery factors.
-2. Regularly review their connected devices.
-3. Enable advanced security measures like passkeys and authenticator apps.
+2. Regularly review connected apps and sessions.
+3. Periodically review devices and enable passkeys or an authenticator app.
 
 ## FAQs
 

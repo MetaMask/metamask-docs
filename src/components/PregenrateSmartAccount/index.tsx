@@ -48,11 +48,11 @@ export default function LookupSCWAPIPage() {
   const [response, setResponse] = useState<string | null>(null);
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
     setResponse(null);
@@ -67,7 +67,7 @@ export default function LookupSCWAPIPage() {
       });
       setResponse(JSON.stringify(res.data, null, 2));
     } catch (err) {
-      setError(err.message);
+      setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsLoading(false);
     }
@@ -85,7 +85,7 @@ export default function LookupSCWAPIPage() {
         });
         setResponse(JSON.stringify(res.data, null, 2));
       } catch (err) {
-        setError(err.message);
+        setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {
         setIsLoading(false);
       }
@@ -99,8 +99,8 @@ export default function LookupSCWAPIPage() {
       <h3>HTTP Request</h3>
       {constructURL()}
 
-      <form onSubmit={handleSubmit}>
-        <table className={styles.formTable}>
+      <form onSubmit={handleSubmit} role="form" aria-label="Smart Contract Wallet Lookup API Form">
+        <table className={styles.formTable} role="table" aria-label="API Parameters">
           <thead>
             <tr>
               <th>Parameter</th>
@@ -113,7 +113,7 @@ export default function LookupSCWAPIPage() {
               <td>
                 <code>verifier</code>
               </td>
-              <td>
+              <td id="verifier-description">
                 The verifier name can be found on your Web3Auth dashboard. To learn more about
                 verifiers, click{" "}
                 <a href="/docs/authentication" target="_blank" rel="noopener noreferrer">
@@ -128,6 +128,8 @@ export default function LookupSCWAPIPage() {
                   value={formData.verifier}
                   onChange={handleChange}
                   required
+                  aria-label="Verifier name"
+                  aria-describedby="verifier-description"
                 />
               </td>
             </tr>
@@ -135,7 +137,7 @@ export default function LookupSCWAPIPage() {
               <td>
                 <code>verifierId</code>
               </td>
-              <td>
+              <td id="verifierId-description">
                 The verifier ID value. One of the ways to get it is via the response to the{" "}
                 <code>getUserInfo()</code> method.
               </td>
@@ -146,6 +148,8 @@ export default function LookupSCWAPIPage() {
                   value={formData.verifierId}
                   onChange={handleChange}
                   required
+                  aria-label="Verifier ID"
+                  aria-describedby="verifierId-description"
                 />
               </td>
             </tr>
@@ -153,13 +157,15 @@ export default function LookupSCWAPIPage() {
               <td>
                 <code>web3AuthNetwork</code>
               </td>
-              <td>Name of the Web3Auth Network your project is deployed on.</td>
+              <td id="web3AuthNetwork-description">Name of the Web3Auth Network your project is deployed on.</td>
               <td>
                 <select
                   name="web3AuthNetwork"
                   value={formData.web3AuthNetwork}
                   onChange={handleChange}
                   required
+                  aria-label="Web3Auth Network"
+                  aria-describedby="web3AuthNetwork-description"
                 >
                   {networkOptions.map((network) => (
                     <option key={network} value={network}>
@@ -305,14 +311,19 @@ export default function LookupSCWAPIPage() {
           <p>Edit parameters and click submit to see the response in the terminal.</p>
         </div>
         <div className={styles.submitButtonContainer}>
-          <button type="submit" className={styles.submitButton} disabled={isLoading}>
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={isLoading}
+            aria-label={isLoading ? "Submitting request..." : "Submit API request"}
+          >
             {isLoading ? <div className={styles.loader}></div> : "Submit"}
           </button>
         </div>
       </form>
 
       <h3>Response</h3>
-      <div className={styles.responseTerminal}>
+      <div className={styles.responseTerminal} role="region" aria-label="API Response" aria-live="polite">
         {isLoading && <p>Request sent...</p>}
         {response && <pre>{response}</pre>}
         {error && <p className={styles.error}>{error}</p>}

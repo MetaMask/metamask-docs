@@ -1,26 +1,32 @@
 ---
-title: External Wallets
+title: External Wallet Aggregator
 image: 'img/docs-meta-cards/documentation-card.png'
-sidebar_label: External Wallets
-description: 'External Wallets | Embedded Wallets'
+description: 'A complete, cross-ecosystem wallet aggregation experience built into the Embedded Wallets SDK.'
 ---
 
-The SDK allows you to connect using external wallets. You can configure this using two different ways.
+The MM Embedded Wallets SDK contains one of the most complete wallet aggregators on the market. It unifies EVM and Solana wallet discovery, connection, and session management into a single, production‑ready layer you can drop into any app.
 
-## Wallet Discovery
+:::info demo
 
-Users can connect to their existing wallets (EVM and Solana) using wallet discovery. This feature leverages Multi Injected Provider Discovery ([MIPD - EIP6963](https://eips.ethereum.org/EIPS/eip-6963)), Solana's [Wallet Standard](https://github.com/wallet-standard/wallet-standard/blob/master/extensions/solana.md) & Wallet Connect, to enable users to connect to any wallet of their choice.
-
-:::info
-
-Checkout our [Demo](https://demo.web3auth.io) to see it in action.
+Looking for a quick preview? See the [Demo](https://demo.web3auth.io).
 
 :::
 
-![Wallet Discovery](/img/wallet-discovery.png)
+## Highlights
 
-## Integrating Web3Auth within Wagmi
+- **Cross‑ecosystem**: EVM + Solana in a single flow.
+- **Standards‑native**: EIP‑6963 (EVM) and Solana Wallet Standard.
+- **Works with your stack**: `ethers`, `viem`, `wagmi`, `@solana/web3.js`.
+- **First‑class DX**: Hooks and composables for React/Vue.
+- **Central control**: Manage everything in the Dashboard.
 
-In addition to Web3Auth's native adapters, developers can integrate Web3Auth with wallet aggregation libraries like wagmi. This integration enables the use of Web3Auth within popular frameworks and products, enhancing Web3Auth's flexibility and reach.
+![Wallet Discovery](/img/wallet-discovery.png) _A familiar, unified wallet selection experience for users._
 
-Using the `@web3auth/web3auth-wagmi-connector`, developers can incorporate Web3Auth into WAGMI's React Hooks for Ethereum. This connector supports the Plug and Play Web SDKs of Web3Auth, enabling integration with products like RainbowKit, ConnectKit, and Web3Modal.
+## Customize flow within the Developer Dashboard
+
+- **Wallet aggregator only**: Drop‑in discovery, connection, and session state.
+- **With social logins**: Offer socials and external wallets side‑by‑side in one flow.
+
+![Dashboard Wallet Toggle](/img/w3a-dashboard/external-wallets-toggle.png) _Toggle social logins and external wallets visibility._
+
+![Dashboard Wallet Selector](/img/w3a-dashboard/external-wallets-select-wallets.png) _Toggle and manage supported wallets._
