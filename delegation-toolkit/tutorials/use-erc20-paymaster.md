@@ -1,5 +1,5 @@
 ---
-description: Follow this tutorial to use ERC-20 paymaster.
+description: Follow this tutorial to use ERC-20 paymaster with MetaMask Smart Accounts.
 sidebar_position: 1
 ---
 
