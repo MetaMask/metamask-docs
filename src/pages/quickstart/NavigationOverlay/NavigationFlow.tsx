@@ -45,19 +45,19 @@ const navigationOptions: NavigationOption[] = [
     id: 'delegation-toolkit-1',
     title: 'I want to send gasless transactions',
     description: 'Delegation Toolkit',
-    link: '/delegation-toolkit',
+    link: '/delegation-toolkit/development/guides/smart-accounts/send-gasless-transaction',
   },
   {
     id: 'delegation-toolkit-2',
     title: 'I want to perform executions on behalf of users',
     description: 'Delegation Toolkit',
-    link: '/delegation-toolkit',
+    link: '/delegation-toolkit/development/guides/delegation/execute-on-smart-accounts-behalf',
   },
   {
     id: 'delegation-toolkit-3',
     title: 'I want to convert EOAs to smart accounts',
     description: 'Delegation Toolkit',
-    link: '/delegation-toolkit',
+    link: '/delegation-toolkit/development/get-started/smart-account-quickstart/eip7702',
   },
 ]
 
