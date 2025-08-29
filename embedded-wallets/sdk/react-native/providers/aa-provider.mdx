@@ -16,6 +16,8 @@ import ConfigureERC20Paymaster from '../_erc20-paymaster-configuration.mdx'
 import ConfigureSigners from '../../_common/_configure-aa-signers.mdx'
 import SmartAccountAddress from '../../_common/_aa-address.mdx'
 import SmartAccountSendTransaction from '../../_common/_aa-send-transaction.mdx'
+import AAModalSetup from '../../_common/_aa-modal-setup.mdx'
+import ConfigurePaymasterContext from '../../_common/_configure-paymaster-context.mdx'
 
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
@@ -241,7 +243,7 @@ const web3auth = new Web3Auth({
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
   // focus-start
-  accountAbstractionProvider,
+  accountAbstractionProvider: aaProvider,
   // focus-end
 })
 ```
