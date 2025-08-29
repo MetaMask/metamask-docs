@@ -7,7 +7,7 @@
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "es5",
-  "proseWrap": "never",
+  "proseWrap": "preserve",
   "printWidth": 100,
   "htmlWhitespaceSensitivity": "css",
   "vueIndentScriptAndStyle": true

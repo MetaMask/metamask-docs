@@ -5,7 +5,7 @@ description: Learn about the Multichain API.
 # About the Multichain API
 
 :::tip Experimental
-The Multichain API is an experimental feature and currently only available on the extension (not on mobile).
+The Multichain API is an experimental feature.
 :::
 
 The Multichain API is a scalable, generalized web3 wallet API that supports simultaneous

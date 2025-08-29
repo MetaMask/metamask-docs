@@ -1,11 +1,55 @@
 .collapseWrapper {
   overflow: hidden;
-  margin: 0.5rem 0 0.6rem;
+  margin: 0;
   border-radius: 0;
   border: 1px solid var(--general-gray-light);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  contain: layout;
+  width: 100%;
+  box-sizing: border-box;
 
   html[data-theme='dark'] & {
     border: 1px solid var(--general-black-light);
+  }
+
+  // Make both states use identical dimensions to prevent layout shifts
+  .buttonToggle {
+    // Common styles for both states
+    border-radius: 0.6rem;
+    margin: 0.5rem;
+    width: calc(100% - 1rem);
+    font-weight: 500;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+  }
+
+  // Collapsed state styling (not expanded)
+  &:not(.collapsedWrapperView) {
+    border: none;
+    background: transparent;
+
+    .buttonToggle {
+      background-color: var(--general-gray-dark);
+      color: var(--ifm-color-white);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        background-color: var(--general-black);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      html[data-theme='dark'] & {
+        background-color: var(--general-gray);
+        color: var(--general-black);
+
+        &:hover {
+          background-color: var(--general-gray-light);
+        }
+      }
+    }
   }
 }
 
@@ -15,9 +59,11 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  width: 100%;
   padding: 1.6rem;
   color: var(--ifm-heading-color);
+  font-size: inherit;
+  border: none;
+  background: transparent;
 
   &:hover {
     background-color: var(--general-white-off);
@@ -32,6 +78,7 @@
   display: flex;
   width: 1.6rem;
   height: 1.6rem;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .arrowUp {
@@ -39,19 +86,36 @@
   width: 1.6rem;
   height: 1.6rem;
   transform: scale(-1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .collapsedWrapperView {
   > div {
     border-top: 1px solid var(--general-gray-light);
     border-radius: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   > button {
-    background-color: var(--general-white-off);
+    background-color: var(--general-gray-light);
+    color: var(--general-gray-dark);
+
+    &:hover {
+      background-color: var(--general-gray);
+      color: var(--general-black);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
     html[data-theme='dark'] & {
       background-color: var(--general-black-light);
+      color: var(--general-gray);
+
+      &:hover {
+        background-color: var(--general-gray-dark);
+        color: var(--general-gray-light);
+      }
     }
   }
 

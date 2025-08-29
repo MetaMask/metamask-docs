@@ -2,7 +2,7 @@
 title: Supported networks
 sidebar_label: Supported networks
 description: Supported networks for Delegation Toolkit.
-sidebar_position: 6
+sidebar_position: 5
 ---
 
 The following tables display the networks supported by each version of the MetaMask Delegation Toolkit.

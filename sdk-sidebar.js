@@ -32,17 +32,8 @@ const sidebar = {
         'guides/handle-transactions',
         'guides/interact-with-contracts',
         'guides/use-deeplinks',
-        {
-          type: 'category',
-          label: 'Advanced',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            'guides/advanced/connect-and-sign',
-            'guides/advanced/batch-requests',
-            'guides/advanced/production-readiness',
-          ],
-        },
+        'guides/batch-requests',
+        'guides/production-readiness',
       ],
     },
     {
@@ -50,7 +41,10 @@ const sidebar = {
       label: 'Tutorials',
       collapsible: false,
       collapsed: false,
-      items: ['tutorials/create-wallet-ai-agent'],
+      items: [
+        'tutorials/create-wallet-ai-agent',
+        'tutorials/upgrade-eoa-to-smart-account',
+      ],
     },
     {
       type: 'category',
@@ -61,6 +55,7 @@ const sidebar = {
         'reference/llm-prompt',
         'reference/supported-platforms',
         'reference/sdk-options',
+        'reference/sdk-methods',
       ],
     },
   ],

@@ -151,6 +151,13 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Mainnet | JSON-RPC over HTTPS     | `https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Sepolia | JSON-RPC over HTTPS     | `https://scroll-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 
+## Sei
+
+| Network | Description             | URL                                                   |
+|---------|-------------------------|-------------------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS     | `https://sei-mainnet.infura.io/v3/<YOUR-API-KEY>`     |
+| Testnet | JSON-RPC over HTTPS     | `https://sei-testnet.infura.io/v3/<YOUR-API-KEY>`     |
+
 ## Starknet
 
 | Network           | Description         | URL                                                    |
@@ -188,7 +195,7 @@ ZKsync Era WebSockets are supported on Mainnet only.
 
 ## Gas API
 
-The Gas REST API supports multiple networks.
+The [Gas REST API](../reference/gas-api/index.md) supports multiple networks.
 
 Specify the chain ID in your request to interact with the relevant network.
 
