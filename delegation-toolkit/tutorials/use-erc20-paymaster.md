@@ -56,7 +56,7 @@ Replace `<YOUR-API-KEY>` with your Pimlico API key.
 ```typescript
 import { createPaymasterClient } from "viem/account-abstraction";
 
-const bundlerClient = createPaymasterClient({
+const paymasterClient = createPaymasterClient({
   transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>"),
 });
 ```
@@ -113,7 +113,9 @@ used by the paymaster.
 
 To modify the token allowance for the paymaster, you’ll perform a write operation on the USDC contract. In this tutorial, you set an allowance of 10 USDC tokens. However, in a production dApp, you should first check the existing token allowance and only approve the amount required by the paymaster. 
 
-Now, send a user operation using Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method from Bundler Client. Make sure to batch the approve call with other on chain interactions you want to perform.
+Now, send a user operation using Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method from Bundler Client. You can provide the `paymasterCient` from [step 2](#2-create-a-paymaster-client) using the paymaster property.
+
+Make sure to batch the approve call if with other on chain interactions you want to perform. 
 
 ```typescript
 // Appropriate fee per gas must be determined for the specific bundler being used.
@@ -143,6 +145,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   ],
   maxFeePerGas,
   maxPriorityFeePerGas,
+  paymaster: paymasterClient,
 });
 ```
 
