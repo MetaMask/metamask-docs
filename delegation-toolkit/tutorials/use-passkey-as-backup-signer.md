@@ -1,6 +1,6 @@
 ---
 description: Follow this tutorial to use a passkey as a backup signer with a Hybrid MetaMask smart account.
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # Use a passkey as a backup signer

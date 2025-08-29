@@ -1,6 +1,6 @@
 ---
 description: Follow this tutorial to create, deploy, and apply a custom caveat enforcer for a delegation.
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 import Tabs from "@theme/Tabs"; 
