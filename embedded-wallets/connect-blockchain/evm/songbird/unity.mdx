@@ -1,10 +1,10 @@
 ---
-title: Integrate Web3Auth with the Songbird Blockchain in Unity
+title: Integrate Embedded Wallets with the Songbird Blockchain in Unity
 sidebar_label: Unity
 image: 'banners/unity.png'
 
 keywords: [unity, songbird, web3auth, authentication, blockchain]
-description: 'Integrate Web3Auth with the Songbird Blockchain in Unity | Documentation - Web3Auth'
+description: 'Integrate Embedded Wallets with the Songbird Blockchain in Unity'
 ---
 
 import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
@@ -19,74 +19,10 @@ import TabItem from '@theme/TabItem'
 import SEO from '@site/src/components/SEO'
 
 <SEO
-  title="Integrate Web3Auth with the Songbird Blockchain in Unity"
-  description="Integrate Web3Auth with the Songbird Blockchain in Unity | Documentation - Web3Auth"
+  title="Integrate Embedded Wallets with the Songbird Blockchain in Unity"
+  description="Integrate Embedded Wallets with the Songbird Blockchain in Unity"
   image="https://web3auth.io/docs/banners/songbird.png"
   slug="/embedded-wallets/connect-blockchain/evm/songbird/unity"
 />
 
-While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
-
-## Installation
-
-<InstallationSnippet />
-
-## Chain Details for Songbird
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
-
-- Chain ID: 0x13
-- Public RPC URL: https://songbird-api.flare.network/ext/C/rpc (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Songbird canary network
-- Block Explorer Link: https://songbird-explorer.flare.network
-- Ticker: SGB
-- Ticker Name: SGB
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0x10
-- Public RPC URL: https://coston-api.flare.network/ext/C/rpc (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Coston testnet
-- Block Explorer Link: https://coston-explorer.flare.network
-- Ticker: CFLR
-- Ticker Name: CFLR
-
-</TabItem>
-</Tabs>
-
-## Initialize
-
-<InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
-
-## Get Account
-
-<GetAccountSnippet />
-
-## Get Balance
-
-<GetBalanceSnippet />
-
-## Sign a message
-
-<SignMessageSnippet />
-
-## Send Transaction
-
-<SendTransactionSnippet />
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `

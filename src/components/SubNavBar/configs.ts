@@ -7,7 +7,7 @@ export const EMBEDDED_WALLETS_SUBNAV_CONFIG: SubNavBarConfig = {
     {
       key: 'overview',
       label: 'Overview',
-      path: '/embedded-wallets/',
+      path: '/embedded-wallets',
     },
     {
       key: 'sdk',

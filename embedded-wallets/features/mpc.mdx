@@ -1,0 +1,64 @@
+---
+title: Multi-Party Computation
+sidebar_label: Multi-Party Computation
+description: 'Multi-Party Computation | Documentation - Web3Auth'
+---
+
+import KeyManagementDark from '@site/static/img/flow-diagrams/key-management-dark.png'
+import KeyManagementLight from '@site/static/img/flow-diagrams/key-management-light.png'
+import { mpccorekit } from '@site/src/components/EWSDKCards'
+
+Multi-Party Computation (MPC) forms the backbone of Web3Auth's advanced wallet infrastructure, offering a secure and non-custodial way to manage digital assets. This document provides a high-level overview, with links to more in-depth technical documentation for those who wish to explore further.
+
+{mpccorekit}
+
+## Understanding MPC in Web3Auth
+
+Web3Auth utilizes Threshold Cryptography, a principle of MPC, to ensure that a user can access their private key or generate transaction signatures only if they meet a specified threshold - typically 2 out of n key shares.
+
+This section is an overview of Web3Auth MPC. For an in-depth understanding, it might be helpful to read through [How Web3Auth Works](/how-web3auth-works) and [Wallet Management and Security of our Infrastructure](/infrastructure).
+
+### Design Goals
+
+- **Seamless User Experience:** Web3Auth aims to provide a frictionless non-custodial wallet experience.
+- **Broad Compatibility:** Ensures integration with existing authentication methods and blockchain ecosystems.
+- **Global Performance & Scalability:** Designed to meet the expansive demands of the Web3 market efficiently.
+
+### Typical 2 out of 3 (2/3) Setup
+
+In this setup, users are equipped with three factors for authentication and recovery:
+
+1. **OAuth Login Factor:** Managed across Web3Auth Network, accessible via OAuth providers like Google.
+2. **Device Factor:** Stored securely on the user's device, often protected by device-specific security features such as biometrics.
+3. **Backup/ 2FA Factor:** Acts as a recovery share, stored separately or based on user's input with sufficient entropy, including passwords or security questions.
+
+### Implementation Variants
+
+Web3Auth's MPC is implemented in two main forms:
+
+1. **Shamir Secret Sharing-based shallow MPC:** Utilizes secret sharing for a simplified key reconstruction approach.
+2. **Threshold Signature Scheme (TSS) based full MPC:** Enhances security by enabling partial signature generations instead of key reconstructions, maintaining the integrity of the distributed private key.
+
+<picture>
+  <source srcset={KeyManagementLight} media="(prefers-color-scheme: light)" />
+  <source srcset={KeyManagementDark} media="(prefers-color-scheme: dark)" />
+  <img
+    src={KeyManagementLight}
+    style={{ display: 'block', maxHeight: '600px', margin: '20px auto' }}
+    alt="This diagram describes the relationship between the Web3Auth SDK and integrating application"
+  />
+</picture>
+
+Both methods adhere to the core concept of threshold-based security but differ in their approach to wallet management and signature generation.
+
+## Web3Auth Wallet Management Infrastructure
+
+Web3Auth's [Wallet Management Infrastructure](/infrastructure/) enhances security by distributing a user's wallet across various key shares, thereby avoiding direct exposure of seed phrases. These key shares form a 'web of trust' and enable wallet management akin to multi-factor account handling. Users employ OAuth logins, trusted devices, and other factors to manage their cryptographic key pairs. Importantly, the complete private keys are not stored anywhere within the Wallet Infrastructure system, including our databases or any participating nodes.
+
+To create a social login share, users interact with the Web3Auth Network, where key generation operates via a 5/9 consensus system. This setup guarantees that wallets remain non-custodial, ensuring that neither Web3Auth, Social Login Providers, nor any other party holding a key share can claim full ownership.
+
+:::tip managing wallets
+
+For managing wallets, our infrastructure uses various cryptographic techniques such as Shamir's Secret Sharing, Threshold Cryptography, and Multi Party Computation. To learn more about how we manage wallets, please refer to our [Wallet Management and Security of our Infrastructure](/infrastructure/).
+
+:::

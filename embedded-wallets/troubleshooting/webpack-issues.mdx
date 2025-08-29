@@ -1,6 +1,6 @@
 ---
 title: Bundler Polyfill Issues - Webpack 5
-image: 'images/docs-meta-cards/troubleshoot-card.png'
+image: 'img/docs-meta-cards/troubleshoot-card.png'
 sidebar_label: Webpack 5 Polyfill Issues
 description: 'Bundler Polyfill Issues - Webpack 5 | Documentation - Web3Auth'
 ---
@@ -14,7 +14,9 @@ React's development team has officially **deprecated** Create React App (CRA) an
 
 While Web3Auth libraries are compatible with CRA, there is a possibility that certain functionalities may not work as expected due to sub-dependencies. We recommend using Vite to set up your React app.
 
-Read this guide on [**How to Migrate from Create React App to Vite**](https://web3auth.io/community/t/how-to-migrate-from-create-react-app-to-vite/8807). :::
+Read this guide on [**How to Migrate from Create React App to Vite**](https://web3auth.io/community/t/how-to-migrate-from-create-react-app-to-vite/8807).
+
+:::
 
 While setting up a new web3 project from scratch, you might face multiple issues the bundler. This issue is due to the fact that core packages like `eccrypto` have certain dependencies which are not present within the build environment. Webpack 5 especially introduced a lot of issues since it does not include many of these packages by default. The go-to method for rectifying these issues has been to simply add the missing modules directly into the package, and edit the bundler configuration to take advantage of that.
 

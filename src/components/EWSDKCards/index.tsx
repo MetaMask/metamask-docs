@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useEffect, useState, useRef } from 'react'
-import { useHistory, useLocation } from '@docusaurus/router'
+import { useState } from 'react'
 
 import { web, mobile, gaming, enterprise } from './SDKOptions'
 import { webIcons, mobileIcons, gamingIcons } from './icons'
@@ -365,21 +364,7 @@ export const pnpgaming = (
 // );
 
 export default function QuickNavigation() {
-  const location = useLocation()
-  const queryParams = new URLSearchParams(location.search)
-  const history = useHistory()
   const [platform, setPlatform] = useState<string>(web)
-
-  useEffect(() => {
-    history.push({ search: `platform=${platform}` })
-  }, [platform])
-
-  useEffect(() => {
-    const URLPlatform = queryParams.get('platform')
-    if (URLPlatform) {
-      setPlatform(URLPlatform)
-    }
-  }, [])
 
   return (
     <div className={styles.container}>

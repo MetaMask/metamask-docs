@@ -1,19 +1,20 @@
 ---
-title: "Installing PnP Unity SDK"
-sidebar_label: "Install"
-description: "Installing Web3Auth PnP Unity SDK | Documentation - Web3Auth"
+title: 'Installing Embedded Wallet Unity SDK'
+sidebar_label: 'Install'
+description: 'Installing Embedded Wallet Unity SDK (formerly Web3Auth PnP)'
 ---
 
-import deepLinkGenerator from "@site/static/img/unity/deepLinkGenerator.png";
-import web3uthConfigUnity from "@site/static/img/unity/web3auth-unity.jpg";
-import unityManifest from "@site/static/img/unity/unityManifest.jpg";
-import unityiOS from "@site/static/img/unity/unity-iOS.jpg";
-import unityiOSapprove from "@site/static/img/unity/unityApproveSigner.jpg";
+import deepLinkGenerator from '@site/static/img/unity/deepLinkGenerator.png'
+import web3uthConfigUnity from '@site/static/img/unity/web3auth-unity.jpg'
+import unityManifest from '@site/static/img/unity/unityManifest.jpg'
+import unityiOS from '@site/static/img/unity/unity-iOS.jpg'
+import unityiOSapprove from '@site/static/img/unity/unityApproveSigner.jpg'
+
+> Embedded Wallets SDKs were previously marketed as Web3Auth Plug and Play SDKs. Package names and APIs remain Web3Auth.
 
 ## Download the Unity Package
 
-Download [.unitypackage](https://github.com/Web3Auth/web3auth-unity-sdk/releases/tag/3.0.0) from our
-latest release and import the package file into your existing Unity3D project.
+Download [.unitypackage](https://github.com/Web3Auth/web3auth-unity-sdk/releases/tag/3.0.0) from our latest release and import the package file into your existing Unity3D project.
 
 :::warning
 
@@ -21,8 +22,7 @@ You may encounter errors when importing this package into your existing project.
 
 `The type or namespace name 'Newtonsoft' could not be found (are you missing a using directive or an assembly reference?)`
 
-To fix this problem you need to add the following line into the dependencies object which is inside
-the `Packages/manifest.json` file.
+To fix this problem you need to add the following line into the dependencies object which is inside the `Packages/manifest.json` file.
 
 ```json title="/Packages/manifest.json"
 "com.unity.nuget.newtonsoft-json": "3.2.1"
@@ -32,18 +32,15 @@ the `Packages/manifest.json` file.
 
 :::tip
 
-We recommend you use the
-[Nethereum Library](https://docs.nethereum.com/en/latest/unity3d-introduction/) for making the
-blockchain calls. You can check our documentation on how to integrate Nethereum it with Web3Auth
-[here](/connect-blockchain/evm/ethereum/unity).
+We recommend you use the [Nethereum Library](https://docs.nethereum.com/en/latest/unity3d-introduction/) for making the blockchain calls. You can check our documentation on how to integrate Nethereum it with Web3Auth [here](/connect-blockchain/evm/ethereum/unity).
 
 :::
 
 ## Configuration
 
-### Configure a Plug n Play project
+### Configure a project
 
-- Go to [Developer Dashboard](https://dashboard.web3auth.io/), create or select an Web3Auth project:
+- Go to [Developer Dashboard](https://dashboard.web3auth.io/), create or select a Web3Auth project:
 
 - Add `{{SCHEMA}}://{YOUR_APP_PACKAGE_NAME}/auth` to **Whitelist URLs**.
 
@@ -51,17 +48,13 @@ blockchain calls. You can check our documentation on how to integrate Nethereum 
 
 ### Configure Deep Link (for Mobile Devices)
 
-Unity SDK works on Unity deep linking features to redirect the callback from Web3Auth. Before
-building the application for Android/IOS you need to register the redirect_uri, which can be easily
-done using the tool provided inside the SDK. To achieve that, you need to follow the steps mentioned
-below.
+Unity SDK works on Unity deep linking features to redirect the callback from Web3Auth. Before building the application for Android/IOS you need to register the redirect_uri, which can be easily done using the tool provided inside the SDK. To achieve that, you need to follow the steps mentioned below.
 
-- Open the "Deep Link Generator" tool provided by Web3Auth Unity SDK from
-  `Window > Web3Auth > Deep Link Generator`
+- Open the "Deep Link Generator" tool provided by Web3Auth Unity SDK from `Window > Web3Auth > Deep Link Generator`
 
   <img
     src={deepLinkGenerator}
-    style={{ alignSelf: "center", maxWidth: "100%" }}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
     alt="Deep Link Generator"
   />
 
@@ -69,20 +62,17 @@ below.
 
 :::tip
 
-We're using `torusapp://com.torus.Web3AuthUnity/auth` as the `redirect_url` in our example just to
-give you a reference on how your app's `redirect_url` should look like.
+We're using `torusapp://com.torus.Web3AuthUnity/auth` as the `redirect_url` in our example just to give you a reference on how your app's `redirect_url` should look like.
 
 :::
 
-### Add Web3Auth Configuration Script to the scene
+### Add Web3Auth configuration script to the scene
 
-- Inside `Project > Assets > Plugins > Web3AuthSDK` there is a file called `Web3Auth` that must be
-  dragged to the component in the scene. In our examples we are using a canvas. So you can now
-  configure you clientId, rediretUrl and Network from the UI.
+- Inside `Project > Assets > Plugins > Web3AuthSDK` there is a file called `Web3Auth` that must be dragged to the component in the scene. In our examples we are using a canvas. So you can now configure you clientId, rediretUrl and Network from the UI.
 
   <img
     src={web3uthConfigUnity}
-    style={{ alignSelf: "center", maxWidth: "100%" }}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
     alt="Config Web3Auth"
   />
 
@@ -92,14 +82,13 @@ give you a reference on how your app's `redirect_url` should look like.
 
   :::
 
-### Android Configuration
+### Android configuration
 
-- Create an Android manifest in Unity by navigating to Edit > Project Settings > Player > Publishing
-  Settings and clik over the "Custom Main Manifest" checkbox.
+- Create an Android manifest in Unity by navigating to Edit > Project Settings > Player > Publishing Settings and clik over the "Custom Main Manifest" checkbox.
 
   <img
     src={unityManifest}
-    style={{ alignSelf: "center", maxWidth: "100%" }}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
     alt="Unity Add manifest"
   />
 
@@ -139,26 +128,22 @@ This is our AndroidManifest.xml file for our examples:
 </manifest>
 ```
 
-### iOS Configuration
+### iOS configuration
 
-Once you build the unity project for iOS. You would need to open with the xCode and you would see
-and error informing that you have to choose a user certificate to sign the app. When you click on
-the error you will have to choose it with the configuration that you see in the image.
+Once you build the unity project for iOS. You would need to open with the xCode and you would see and error informing that you have to choose a user certificate to sign the app. When you click on the error you will have to choose it with the configuration that you see in the image.
 
 <img
   src={unityiOS}
-  style={{ alignSelf: "center", maxWidth: "100%" }}
+  style={{ alignSelf: 'center', maxWidth: '100%' }}
   alt="iOS Unity Team selection"
 />
 
-After running the app, when testing on your iPhone/iPad, you need to approve the signer certificate
-on your device to run the apps. For this purpose on your device, go to
-`General > VPN & Device Manager > Developer App`.
+After running the app, when testing on your iPhone/iPad, you need to approve the signer certificate on your device to run the apps. For this purpose on your device, go to `General > VPN & Device Manager > Developer App`.
 
-<div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
   <img
     src={unityiOSapprove}
-    style={{ alignSelf: "center", maxWidth: "40%" }}
+    style={{ alignSelf: 'center', maxWidth: '40%' }}
     alt="iOS Unity Approve certificate"
   />
 </div>

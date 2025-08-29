@@ -1,0 +1,135 @@
+.formTable {
+  width: 100%;
+  table-layout: fixed;
+  padding-top: 20px;
+}
+
+.formTable th,
+.formTable td {
+  padding: 8px;
+}
+
+.formTable th:nth-child(1),
+.formTable td:nth-child(1) {
+  width: 15%;
+}
+
+.formTable th:nth-child(2),
+.formTable td:nth-child(2) {
+  width: 40%;
+}
+
+.formTable th:nth-child(3),
+.formTable td:nth-child(3) {
+  width: 45%;
+}
+
+.formTable input[type="text"],
+.formTable select {
+  width: calc(100% - 24px);
+  padding: 12px;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background: var(--ifm-background-surface-color);
+  border: none;
+}
+
+.submitButton {
+  background: var(--ifm-color-primary);
+  color: var(--ifm-background-surface-color);
+  padding: 10px 20px;
+  border-width: 1px;
+  border-color: var(--ifm-color-primary);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.submitButton:disabled {
+  background: none;
+  border: none;
+}
+
+.loader {
+  border: 4px solid var(--ifm-color-primary-lightest);
+  border-top: 4px solid var(--ifm-color-primary);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.responseTerminal {
+  background: var(--ifm-color-gray-900);
+  color: var(--ifm-color-gray-100);
+  font-family: "Courier New", monospace;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  min-height: 100px;
+  overflow: auto;
+  border: 1px solid var(--ifm-color-gray-500);
+  white-space: pre-wrap;
+}
+
+.responseTerminal pre {
+  background: none;
+  padding: none;
+  margin: none;
+}
+
+.error {
+  color: var(--ifm-color-danger);
+}
+
+.urlDisplay {
+  background-color: var(--ifm-background-surface-color);
+  border-left: 3px solid var(--ifm-color-primary);
+  padding: 10px;
+  font-family: monospace;
+  color: var(--ifm-color-content);
+  margin-top: 10px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+}
+
+.parameterKey {
+  font-weight: 700;
+  color: var(--ifm-color-primary-light);
+}
+
+.parameterValue {
+  color: var(--ifm-color-primary);
+}
+
+.submitButtonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.instructionTextContainer {
+  text-align: center;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.getMethod {
+  color: var(--ifm-color-success);
+  font-weight: bold;
+  font-family: monospace;
+}
