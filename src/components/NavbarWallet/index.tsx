@@ -200,6 +200,14 @@ const NavbarWallet = props => {
   const [loginEnabled, setLoginEnabled] = useState(false)
 
   useEffect(() => {
+    // Handle case where ldClient is null (when LaunchDarkly isn't initialized)
+    if (!ldClient) {
+      console.warn('LaunchDarkly client not available, disabling login feature')
+      setLdReady(true)
+      setLoginEnabled(false)
+      return
+    }
+
     ldClient.waitUntilReady().then(() => {
       setLoginEnabled(ldClient.variation(LOGIN_FF, false))
       setLdReady(true)

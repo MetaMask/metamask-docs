@@ -11,7 +11,6 @@ interface IFaq {
 }
 
 export default function Faq({ network, className, classNameHeading, isLimitedUserPlan }: IFaq) {
-
   switch (network) {
     case 'linea':
       return (
@@ -54,10 +53,7 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
             </Text>
             <Text as="p" className={styles.accordionContainer}>
               <span>
-                <a
-                  data-testid="faq-linea-what-is-linea"
-                  target="_blank"
-                  href="https://linea.build">
+                <a data-testid="faq-linea-what-is-linea" target="_blank" href="https://linea.build">
                   Linea
                 </a>{' '}
                 is a type 2 zero knowledge Ethereum Virtual Machine (zkEVM). A zkEVM replicates the
@@ -109,10 +105,7 @@ export default function Faq({ network, className, classNameHeading, isLimitedUse
               <span>
                 Linea ETH comes from Sepolia ETH that is bridged to Linea using the canonical Linea
                 ETH comes from Sepolia ETH that is bridged to Linea using the canonical{' '}
-                <a
-                  data-testid="faq-linea-bridge"
-                  target="_blank"
-                  href="https://bridge.linea.build">
+                <a data-testid="faq-linea-bridge" target="_blank" href="https://bridge.linea.build">
                   bridge.
                 </a>
               </span>

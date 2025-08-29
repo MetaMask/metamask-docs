@@ -121,13 +121,13 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-solana.svg`,
   },
   {
-    name: "Sei",
-    href: "/services/reference/sei",
+    name: 'Sei',
+    href: '/services/reference/sei',
     logo: `${LOGO_PATH}/logo-sei.svg`,
   },
   {
-    name: "Starknet",
-    href: "/services/reference/starknet",
+    name: 'Starknet',
+    href: '/services/reference/starknet',
     logo: `${LOGO_PATH}/logo-starknet.svg`,
   },
   {

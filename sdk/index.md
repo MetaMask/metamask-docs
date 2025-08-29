@@ -16,7 +16,7 @@ With the SDK, you can easily onboard users and interact with their accounts on d
 <p align="center">
   <Button
     as="a"
-    href="connect/javascript-wagmi"
+    href="/sdk/connect/javascript-wagmi"
     label="Get started with the SDK"
     icon="arrow-right"
     style={{
@@ -46,27 +46,27 @@ You can access it directly via npm, through popular developer libraries like Wag
 <CardList
   items={[
     {
-      href: 'connect/javascript-wagmi',
+      href: '/sdk/connect/javascript-wagmi',
       title: 'JavaScript + Wagmi (recommended)',
       description: 'Use the CLI or template to set up the SDK in a Next.js and Wagmi dapp.',
     },
     {
-      href: 'connect/javascript',
+      href: '/sdk/connect/javascript',
       title: 'JavaScript',
       description: 'Set up the SDK in a JavaScript dapp.',
     },
     {
-      href: 'connect/javascript-dynamic',
+      href: '/sdk/connect/javascript-dynamic',
       title: 'Dynamic SDK',
       description: 'Use the CLI or template to set up Dynamic SDK in a Next.js dapp. Use MetaMask SDK features with Dynamic.',
     },
     {
-      href: 'connect/javascript-web3auth',
+      href: '/sdk/connect/javascript-web3auth',
       title: 'Web3Auth SDK',
       description: 'Use the CLI or template to set up Web3Auth SDK in a Next.js dapp. Use MetaMask SDK features with Web3Auth.',
     },
     {
-      href: 'connect/react-native',
+      href: '/sdk/connect/react-native',
       title: 'React Native',
       description: 'Set up the SDK in a React Native or Expo dapp.',
     },

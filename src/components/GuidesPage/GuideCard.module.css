@@ -1,0 +1,137 @@
+:root {
+  --card-border-radius: 12px;
+  --card-shadow: 0 2px 8px rgb(0 0 0 / 5%);
+  --card-shadow-hover: 0 4px 16px rgb(0 0 0 / 10%);
+  --card-padding: 24px;
+  --card-gap: 16px;
+}
+
+.card {
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  transition: all 0.2s ease-in-out;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-2px);
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cardLink:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover .image {
+  transform: scale(1.02);
+}
+
+.content {
+  padding: var(--card-padding);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+}
+
+.typeContainer {
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ifm-font-color-base);
+  margin: 0;
+  margin-bottom: 12px;
+}
+
+.description {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ifm-color-emphasis-700);
+  margin: 0;
+  flex: 1;
+}
+
+.tagsContainer {
+  padding: 0 var(--card-padding) var(--card-padding);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.meta {
+  padding: 0 var(--card-padding) var(--card-padding);
+  font-size: 14px;
+  color: var(--ifm-color-emphasis-600);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  padding-top: 16px;
+}
+
+/* Search highlight styling */
+mark {
+  background-color: #fef3c7;
+  color: #92400e;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* Dark theme adjustments */
+html[data-theme='dark'] {
+  --card-shadow: 0 2px 8px rgb(0 0 0 / 20%);
+  --card-shadow-hover: 0 4px 16px rgb(0 0 0 / 30%);
+}
+
+html[data-theme='dark'] .card {
+  background-color: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+html[data-theme='dark'] .card:hover {
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+html[data-theme='dark'] .imageContainer {
+  background-color: var(--ifm-color-emphasis-200);
+}
+
+html[data-theme='dark'] .meta {
+  border-top-color: var(--ifm-color-emphasis-300);
+}
+
+html[data-theme='dark'] mark {
+  background-color: #451a03;
+  color: #fbbf24;
+}

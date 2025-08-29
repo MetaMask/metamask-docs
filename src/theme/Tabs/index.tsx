@@ -17,9 +17,8 @@ function TabList({
   selectValue,
   tabValues,
 }: Props & ReturnType<typeof useTabs>) {
-  const tabRefs: (HTMLLIElement | null)[] = [];
-  const {blockElementScrollPositionUntilNextRender} =
-    useScrollPositionBlocker();
+  const tabRefs: (HTMLLIElement | null)[] = []
+  const { blockElementScrollPositionUntilNextRender } = useScrollPositionBlocker()
 
   const handleTabChange = (
     event:

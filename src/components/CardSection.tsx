@@ -30,16 +30,18 @@ export default function CardSection({
       <div className="container">
         <div className={styles['grid-wrapper']}>
           <div className={styles['grid-col-center']}>
-            <div 
-              className={styles['section-grid']}
+            <div
+              className={clsx(
+                styles['section-grid'],
+                !title && !description && styles['cards-only']
+              )}
               style={
                 colorPalette
                   ? ({
                       '--color-palette': `var(--developer-${colorPalette})`,
                     } as CSSProperties)
                   : {}
-              }
-            >
+              }>
               {/* Title and Description Column */}
               {(title || description) && (
                 <div className={styles['content-column']}>

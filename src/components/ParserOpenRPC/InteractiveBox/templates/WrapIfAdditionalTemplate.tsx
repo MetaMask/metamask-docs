@@ -1,10 +1,10 @@
-import { useContext, useEffect } from "react";
-import { ADDITIONAL_PROPERTY_FLAG } from "@rjsf/utils";
-import { BaseInputTemplate } from "@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate";
-import { ParserOpenRPCContext } from "@site/src/components/ParserOpenRPC";
-import  * as isPlainObject  from "lodash.isplainobject"
+import { useContext, useEffect } from 'react'
+import { ADDITIONAL_PROPERTY_FLAG } from '@rjsf/utils'
+import { BaseInputTemplate } from '@site/src/components/ParserOpenRPC/InteractiveBox/templates/BaseInputTemplate'
+import { ParserOpenRPCContext } from '@site/src/components/ParserOpenRPC'
+import * as isPlainObject from 'lodash.isplainobject'
 
-export const WrapIfAdditionalTemplate = (props) => {
+export const WrapIfAdditionalTemplate = props => {
   const {
     id,
     classNames,
@@ -19,40 +19,36 @@ export const WrapIfAdditionalTemplate = (props) => {
     registry,
     formContext,
     formData,
-  } = props;
-  const { templates } = registry;
-  const { RemoveButton } = templates.ButtonTemplates;
-  const additional = ADDITIONAL_PROPERTY_FLAG in schema;
-  const {
-    drawerLabel,
-    isComplexTypeView,
-    setIsComplexTypeView,
-    setDrawerLabel,
-  } = useContext(ParserOpenRPCContext);
-  const { currentSchemaId, setCurrentSchemaId } = formContext;
+  } = props
+  const { templates } = registry
+  const { RemoveButton } = templates.ButtonTemplates
+  const additional = ADDITIONAL_PROPERTY_FLAG in schema
+  const { drawerLabel, isComplexTypeView, setIsComplexTypeView, setDrawerLabel } =
+    useContext(ParserOpenRPCContext)
+  const { currentSchemaId, setCurrentSchemaId } = formContext
   const onRemoveButtonClick = () => {
     if (isPlainObject(formData) && Object.keys(formData).length === 0) {
-      setIsComplexTypeView(false);
-      setDrawerLabel(null);
+      setIsComplexTypeView(false)
+      setDrawerLabel(null)
     }
-  };
+  }
 
   if (!additional) {
     return (
       <div className={classNames} style={style}>
         {children}
       </div>
-    );
+    )
   }
 
   useEffect(() => {
-    if (!id.includes("_newKey")) {
-      setCurrentSchemaId(id);
+    if (!id.includes('_newKey')) {
+      setCurrentSchemaId(id)
     }
-  }, []);
+  }, [])
 
   if (!id.includes(currentSchemaId)) {
-    return null;
+    return null
   }
 
   return isComplexTypeView ? (
@@ -69,11 +65,11 @@ export const WrapIfAdditionalTemplate = (props) => {
           {/* @ts-ignore */}
           <BaseInputTemplate
             name="key"
-            onChange={(target) => {
-              onKeyChange(target);
-              setDrawerLabel(target);
+            onChange={target => {
+              onKeyChange(target)
+              setDrawerLabel(target)
             }}
-            schema={{ ...schema, ...{ type: "string" } }}
+            schema={{ ...schema, ...{ type: 'string' } }}
             formContext={formContext}
             value={label}
           />
@@ -81,5 +77,5 @@ export const WrapIfAdditionalTemplate = (props) => {
       )}
       <div>{children}</div>
     </div>
-  ) : null;
-};
+  ) : null
+}

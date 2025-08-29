@@ -1,9 +1,9 @@
-import React from 'react';
-import { API_COSTS } from '@site/src/lib/data';
+import React from 'react'
+import { API_COSTS } from '@site/src/lib/data'
 
 // Function to render the tables
 const renderTable = (methods, categoryName, header) => {
-  if (!methods || Object.keys(methods).length === 0) return null;
+  if (!methods || Object.keys(methods).length === 0) return null
 
   return (
     <div>
@@ -15,37 +15,37 @@ const renderTable = (methods, categoryName, header) => {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(methods).map((method) => (
+          {Object.keys(methods).map(method => (
             <tr key={method}>
-              <td><code>{method}</code></td>
               <td>
-                {methods[method]} credits
+                <code>{method}</code>
               </td>
+              <td>{methods[method]} credits</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
 const CreditCostTable = ({ methods }) => {
   // Map methods prop to the corresponding category in API_COSTS
-  const methodCategory = API_COSTS[methods];
+  const methodCategory = API_COSTS[methods]
 
   if (!methodCategory) {
-    return <p>No data available for the specified method category.</p>;
+    return <p>No data available for the specified method category.</p>
   }
 
   // Set header dynamically based on the category
-  let header = 'RPC method';
+  let header = 'RPC method'
   if (methods === 'gasApi') {
-    header = 'API endpoint';  // Change header for 'gasApi'
+    header = 'API endpoint' // Change header for 'gasApi'
   } else if (methods === 'evm_subscription') {
-    header = 'Subscription events';  // Change header for 'evm_subscription'
+    header = 'Subscription events' // Change header for 'evm_subscription'
   }
 
-  return renderTable(methodCategory, methods, header);
-};
+  return renderTable(methodCategory, methods, header)
+}
 
-export default CreditCostTable;
+export default CreditCostTable
