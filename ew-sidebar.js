@@ -132,7 +132,6 @@ const sidebar = {
       collapsed: false,
       items: [
         "dashboard/README",
-        "dashboard/create-new-project",
         {
           type: "category",
           label: "Configuration",

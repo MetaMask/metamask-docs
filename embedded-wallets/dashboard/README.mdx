@@ -1,8 +1,8 @@
 ---
-title: Configure Web3Auth Dashboard
-sidebar_label: Overview
+title: Create a new project in Web3Auth Dashboard
+sidebar_label: Create a new project
 image: 'images/docs-meta-cards/documentation-card.png'
-description: 'Configure Web3Auth Dashboard | Documentation - Web3Auth'
+description: 'Create a new project in Web3Auth Dashboard | Documentation - Web3Auth'
 ---
 
 import DashboardSignUpPage from '@site/static/img/w3a-dashboard/dashboard-signup.gif'
@@ -21,6 +21,39 @@ While setting up your account, Web3Auth will prompt you to share some basic info
 
 Once you've set up your account, you can use the Dashboard to manage your **projects** and **team**.
 
+:::tip
+
 Use the [Projects](https://dashboard.web3auth.io/organization) page of the Dashboard to create and manage new projects for your account. Resources within Web3Auth, including wallets, authentication methods, and more are scoped to individual projects.
 
-Use the **Settings** page of the Dashboard to invite other administrators for your account. All administrators for your account can log in to the Dashboard, access credentials, and manage projects and configurations.
+:::
+
+## Create a new project
+
+Before implementing any Web3Auth SDK, developers must create a new project in the Web3Auth Dashboard. This process generates a Client ID required for Web3Auth SDK integration.
+
+:::success Note
+
+It is recommended to maintain separate projects for different environments (e.g., development, staging, production) to ensure optimal security of credentials.
+
+:::
+
+Login to the [Web3Auth Dashboard](https://dashboard.web3auth.io) and create a new project if you haven't already.
+
+## Get the Client ID
+
+After creating a project, navigate to **Project Settings** and select the **General** tab to obtain the `Client ID`.
+
+The project comes pre-configured with default connections, chains and networks to facilitate faster integration with Web3Auth SDK.
+
+For detailed implementation steps, developers can refer to the [Quickstart Guide](/quick-start) to integrate Web3Auth SDK into their applications.
+
+## Dashboard Configuration
+
+Once your project is created, you can configure various aspects of your Web3Auth integration through the dashboard:
+
+- **[Project Settings](./project-settings)** - Configure general settings, domain whitelisting, and advanced options
+- **[Chains and Networks](./chains-and-networks)** - Manage blockchain networks and custom chain configurations
+- **[Authentication](./authentication)** - Configure login methods, social connections, and custom authentication
+- **[Wallet Services](./wallet-services)** - Customize wallet UI and configure wallet features
+- **[Customization](./customization)** - Brand your login flow and customize the user experience
+- **[Analytics](./analytics)** - Monitor project usage and user engagement metrics
