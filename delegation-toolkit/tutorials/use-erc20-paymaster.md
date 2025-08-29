@@ -56,7 +56,7 @@ Replace `<YOUR-API-KEY>` with your Pimlico API key.
 ```typescript
 import { createPaymasterClient } from "viem/account-abstraction";
 
-const bundlerClient = createBundlerClient({
+const bundlerClient = createPaymasterClient({
   transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>"),
 });
 ```
