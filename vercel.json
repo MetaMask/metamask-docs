@@ -735,8 +735,8 @@
       "destination": "/delegation-toolkit/development/guides/delegation/execute-on-smart-accounts-behalf/"
     },
     {
-      "source": "/delegation-toolkit/development/how-to/create-delegation/:path*/",
-      "destination": "/delegation-toolkit/development/guides/delegation/:path*/"
+      "source": "/delegation-toolkit/development/how-to/create-delegation/restrict-delegation/",
+      "destination": "/delegation-toolkit/development/guides/delegation/restrict-delegation/"
     },
     {
       "source": "/delegation-toolkit/development/how-to/redeem-delegation/",
@@ -755,6 +755,10 @@
       "destination": "/delegation-toolkit/development/get-started/use-the-cli/"
     },
     {
+      "source": "/delegation-toolkit/development/how-to/create-delegation/create-custom-caveat-enforcer/",
+      "destination": "/delegation-toolkit/development/tutorials/create-custom-caveat-enforcer/"
+    },
+    {  
       "source": "/delegation-toolkit/development/concepts/caveat-enforcers/",
       "destination": "/delegation-toolkit/development/concepts/delegation/caveat-enforcers/"
     },
