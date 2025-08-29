@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import useIsBrowser from '@docusaurus/useIsBrowser';
 import styles from "./styles.module.css";
 
 export default function LookupAPIPage() {
+  const isBrowser = useIsBrowser();
   const networkOptions = ["sapphire_mainnet", "sapphire_devnet"];
+
+  if (!isBrowser) {
+    return <div>Loading...</div>;
+  }
 
   const constructURL = () => {
     const baseUrl = "https://lookup.web3auth.io/lookup";
@@ -48,6 +53,7 @@ export default function LookupAPIPage() {
     setError("");
 
     try {
+      const axios = (await import("axios")).default;
       const res = await axios.get(`https://lookup.web3auth.io/lookup`, { params: formData });
       setResponse(JSON.stringify(res.data, null, 2));
     } catch (err) {
@@ -58,9 +64,12 @@ export default function LookupAPIPage() {
   };
 
   useEffect(() => {
+    if (!isBrowser) return;
+
     const fetchInitialData = async () => {
       setIsLoading(true);
       try {
+        const axios = (await import("axios")).default;
         const res = await axios.get(`https://lookup.web3auth.io/lookup`, { params: formData });
         setResponse(JSON.stringify(res.data, null, 2));
       } catch (err) {
@@ -71,7 +80,7 @@ export default function LookupAPIPage() {
     };
 
     fetchInitialData();
-  }, []);
+  }, [isBrowser]);
 
   return (
     <>

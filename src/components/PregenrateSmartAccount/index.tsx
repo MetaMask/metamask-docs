@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import useIsBrowser from '@docusaurus/useIsBrowser';
 import styles from "@site/src/components/PregenerateWallet/styles.module.css";
 
 export default function LookupSCWAPIPage() {
+  const isBrowser = useIsBrowser();
   const networkOptions = ["sapphire_mainnet", "sapphire_devnet"];
   const smartAccountTypeOptions = ["metamask"];
   const entryPointVersionOptions = ["0.7"];
+
+  if (!isBrowser) {
+    return <div>Loading...</div>;
+  }
   const constructURL = () => {
     const baseUrl = "https://lookup.web3auth.io/lookup/scw";
     const filteredFormData = Object.fromEntries(
@@ -59,6 +64,7 @@ export default function LookupSCWAPIPage() {
     setError("");
 
     try {
+      const axios = (await import("axios")).default;
       const filteredFormData = Object.fromEntries(
         Object.entries(formData).filter(([_, value]) => value !== ""),
       );
@@ -74,9 +80,12 @@ export default function LookupSCWAPIPage() {
   };
 
   useEffect(() => {
+    if (!isBrowser) return;
+
     const fetchInitialData = async () => {
       setIsLoading(true);
       try {
+        const axios = (await import("axios")).default;
         const filteredFormData = Object.fromEntries(
           Object.entries(formData).filter(([_, value]) => value !== ""),
         );
@@ -92,7 +101,7 @@ export default function LookupSCWAPIPage() {
     };
 
     fetchInitialData();
-  }, []);
+  }, [isBrowser]);
 
   return (
     <>

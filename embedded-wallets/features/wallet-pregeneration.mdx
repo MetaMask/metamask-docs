@@ -4,6 +4,7 @@ sidebar_label: Wallet Pregeneration
 description: 'Wallet Pregeneration | Embedded Wallets'
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly'
 import PregenerateWallet from '@site/src/components/PregenerateWallet'
 import PregenrateSmartAccount from '@site/src/components/PregenrateSmartAccount'
 
@@ -45,7 +46,7 @@ Learn more about how [keys can change within different products](/embedded-walle
 2. **API Call:** Use the provided API to submit the user's identifier. You'll need to specify parameters from the dashboard, specifically the Verifier Name, Web3Auth Network, and Client Id.
 3. **Receive Wallet Address:** The API response will include the new wallet address, ready for use by the user upon their first login.
 
-<PregenerateWallet />
+<BrowserOnly>{() => <PregenerateWallet />}</BrowserOnly>
 
 ## Pre-generate Smart Accounts
 
@@ -57,4 +58,4 @@ We provide a straightforward API to facilitate the creation of pre-generated Sma
 2. **API Call:** Use the provided API to submit the user's identifier. You'll need to specify parameters from the dashboard, specifically the Verifier Name, Web3Auth Network, and Client Id.
 3. **Receive Wallet Address:** The API response will include the new wallet address, ready for use by the user upon their first login.
 
-<PregenrateSmartAccount />
+<BrowserOnly>{() => <PregenrateSmartAccount />}</BrowserOnly>
