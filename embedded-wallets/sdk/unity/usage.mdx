@@ -1,27 +1,23 @@
 ---
 title: Using of PnP Unity SDK
 sidebar_label: Usage
-description: "Web3Auth PnP Unity SDK - Usage | Documentation - Web3Auth"
+description: 'Web3Auth PnP Unity SDK - Usage | Embedded Wallets'
 ---
 
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
-Once you've installed and successfully initialized Web3Auth, you can use it to authenticate your
-users.
+Once you've installed and successfully initialized Web3Auth, you can use it to authenticate your users.
 
 ## Logging in a User
 
 #### `web3Auth.login(LoginParams)`
 
-This function helps your users to trigger the login process. The login flow is triggered based on
-the selected provider. You can view the list of selected providers in the [provider](#provider)
-section.
+This function helps your users to trigger the login process. The login flow is triggered based on the selected provider. You can view the list of selected providers in the [provider](#provider) section.
 
 :::tip
 
-Additionally, you can associate a function to be triggered on successful login. This function
-receives the user's profile as a parameter.
+Additionally, you can associate a function to be triggered on successful login. This function receives the user's profile as a parameter.
 
 ```cs
 void Start()
@@ -60,16 +56,16 @@ private void onLogin(Web3AuthResponse response)
 
 <TabItem value="table">
 
-| Parameter            | Description                                                                                                                                                                                                                                                                                              |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `loginProvider`      | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`.                                                          |
-| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass the user's email address as. The Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value.                                                                |
-| `redirectUrl?`       | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `URI` as a value.                                                                                           |
-| `appState?`          | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `string` as a value.                                                                                                                                                       |
-| `mfaLevel?`          | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value.                                                                                                         |
-| `dappShare?`         | Custom verifier logins can get a dapp share returned to them after a successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `string` as a value.                                                                                            |
-| `curve?`             | It is used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change the format of private key returned by Web3Auth. Private key returned by `getPrivKey` is always secp256k1. The default value is `Curve.SECP256K1`. |
-| `sessionTime?`       | It allows developers to configure the session management time. Session Time is in seconds, and takes an `int` as a value.                                                                                                                                                                                |
+| Parameter | Description |
+| --- | --- |
+| `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`. |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass the user's email address as. The Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
+| `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `URI` as a value. |
+| `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `string` as a value. |
+| `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value. |
+| `dappShare?` | Custom verifier logins can get a dapp share returned to them after a successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `string` as a value. |
+| `curve?` | It is used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change the format of private key returned by Web3Auth. Private key returned by `getPrivKey` is always secp256k1. The default value is `Curve.SECP256K1`. |
+| `sessionTime?` | It allows developers to configure the session management time. Session Time is in seconds, and takes an `int` as a value. |
 
 </TabItem>
 
@@ -137,9 +133,7 @@ public enum Provider
 
 ### `ExtraLoginOptions`
 
-The `LoginParams` class accepts the `ExtraLoginOptions` as an optional input, containing advanced
-options for custom authentication, email passwordless login, etc. This parameter can be considered
-as advanced login options needed for specific cases.
+The `LoginParams` class accepts the `ExtraLoginOptions` as an optional input, containing advanced options for custom authentication, email passwordless login, etc. This parameter can be considered as advanced login options needed for specific cases.
 
 ```cs
 LoginParams() { selectedLoginProvider, extraLoginOptions = ExtraLoginOptions() }
@@ -155,29 +149,29 @@ LoginParams() { selectedLoginProvider, extraLoginOptions = ExtraLoginOptions() }
 
 <TabItem value="table">
 
-| Parameter                    | Description                                                                                                                                                                                                                      |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `additionalParams?`          | Additional params in `Dictionary<string, string>` format for OAuth login, use id_token(JWT) to authenticate with web3auth.                                                                                                       |
-| `domain?`                    | Your custom authentication domain in `string` format. For example, if you are using Auth0, this could be example.au.auth0.com.                                                                                                   |
-| `client_id?`                 | Client id in `string` format, provided by your login provider used for custom verifier.                                                                                                                                          |
-| `leeway?`                    | The value used to account for clock skew in JWT expirations. The value is in the seconds, and ideally should be no more than 60 seconds, with a maxium of 120 seconds. It takes `string` as a value.                             |
-| `verifierIdField?`           | The field in the JWT token that maps to verifier id. Please make sure you have selected the correct JWT verifier id in the Developer Dashboard. It takes `string` as a value.                                                    |
-| `isVerifierIdCaseSensitive?` | `bool` to confirm whether the verifier id field is case sensitive or not.                                                                                                                                                        |
-| `display?`                   | Allows developers to configure the display of UI. It takes `Display` as a value.                                                                                                                                                 |
-| `prompt?`                    | Prompt shown to the user during the authentication process. It takes `Prompt` as a value.                                                                                                                                        |
-| `max_age?`                   | Maxium time allowed without reauthentication. If the last time the user authenticated is greater than this value, then the user must reauthenticate. It takes `string` as a value.                                               |
-| `ui_locales?`                | The space separated list of language tags, ordered by preference. For example `fr-CA fr en`.                                                                                                                                     |
-| `id_token_hint?`             | It specify the previously issued ID token. It takes `string` as a value.                                                                                                                                                         |
-| `id_token?`                  | JWT (ID Token) to be passed for login.                                                                                                                                                                                           |
-| `login_hint?`                | It is used to send the user's email address during Email Passwordless login. It takes `string` as a value.                                                                                                                       |
-| `acr_values?`                | acr_values                                                                                                                                                                                                                       |
-| `scope?`                     | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. It takes `string` as a value.                                                            |
-| `audience?`                  | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It takes `string` as a value.                                                                                          |
-| `connection?`                | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. It takes `string` as a value.                                                           |
-| `state?`                     | state                                                                                                                                                                                                                            |
-| `response_type?`             | Defines which grant to be execute for the authorization server. It takes `string` as a value.                                                                                                                                    |
-| `nonce?`                     | nonce value                                                                                                                                                                                                                      |
-| `redirect_uri?`              | It can be used to specify the default URL, where your custom JWT verifier can redirect your browser to with the result. If you are using Auth0, it must be whitelisted in the Allowed Callback URLs in your Auth0's application. |
+| Parameter | Description |
+| --- | --- |
+| `additionalParams?` | Additional params in `Dictionary<string, string>` format for OAuth login, use id_token(JWT) to authenticate with web3auth. |
+| `domain?` | Your custom authentication domain in `string` format. For example, if you are using Auth0, this could be example.au.auth0.com. |
+| `client_id?` | Client id in `string` format, provided by your login provider used for custom verifier. |
+| `leeway?` | The value used to account for clock skew in JWT expirations. The value is in the seconds, and ideally should be no more than 60 seconds, with a maxium of 120 seconds. It takes `string` as a value. |
+| `verifierIdField?` | The field in the JWT token that maps to verifier id. Please make sure you have selected the correct JWT verifier id in the Developer Dashboard. It takes `string` as a value. |
+| `isVerifierIdCaseSensitive?` | `bool` to confirm whether the verifier id field is case sensitive or not. |
+| `display?` | Allows developers to configure the display of UI. It takes `Display` as a value. |
+| `prompt?` | Prompt shown to the user during the authentication process. It takes `Prompt` as a value. |
+| `max_age?` | Maxium time allowed without reauthentication. If the last time the user authenticated is greater than this value, then the user must reauthenticate. It takes `string` as a value. |
+| `ui_locales?` | The space separated list of language tags, ordered by preference. For example `fr-CA fr en`. |
+| `id_token_hint?` | It specify the previously issued ID token. It takes `string` as a value. |
+| `id_token?` | JWT (ID Token) to be passed for login. |
+| `login_hint?` | It is used to send the user's email address during Email Passwordless login. It takes `string` as a value. |
+| `acr_values?` | acr_values |
+| `scope?` | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. It takes `string` as a value. |
+| `audience?` | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It takes `string` as a value. |
+| `connection?` | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. It takes `string` as a value. |
+| `state?` | state |
+| `response_type?` | Defines which grant to be execute for the authorization server. It takes `string` as a value. |
+| `nonce?` | nonce value |
+| `redirect_uri?` | It can be used to specify the default URL, where your custom JWT verifier can redirect your browser to with the result. If you are using Auth0, it must be whitelisted in the Allowed Callback URLs in your Auth0's application. |
 
 </TabItem>
 
@@ -215,8 +209,7 @@ public class ExtraLoginOptions {
 
 ### `Curve`
 
-The `LoginParams` class accepts a `curve` parameter. This parameter can be used to select the
-elliptic curve to use for the signature.
+The `LoginParams` class accepts a `curve` parameter. This parameter can be used to select the elliptic curve to use for the signature.
 
 ```cs
 LoginParams() { selectedLoginProvider, curve = Curve.SECP256K1 }
@@ -294,7 +287,6 @@ public void login()
   }
 }
 ```
-
 
 ### Example
 
@@ -418,9 +410,7 @@ public void login()
 
 ## Session Management
 
-The Session Management feature allows you to check the existing sessions with Web3Auth. The
-`Web3AuthState` will allow users to remain authenticated with Web3Auth for 1 day by default, or a
-maximum of 30 days, or until the user logout or session data is cleared.
+The Session Management feature allows you to check the existing sessions with Web3Auth. The `Web3AuthState` will allow users to remain authenticated with Web3Auth for 1 day by default, or a maximum of 30 days, or until the user logout or session data is cleared.
 
 The Web3Auth `login` function accepts a `sessionTime` parameter.
 
@@ -439,10 +429,7 @@ public void login()
 
 ## Enable MFA for a user
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams`
-which will used during custom verifiers. If you are using default login providers, you don't need to
-pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in
-`loginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
 
 :::tip
 
@@ -521,15 +508,11 @@ private void onMFASetup(bool response)
 
 ## Launch Wallet Services
 
-The `launchWalletServices` method launches a WebView which allows you to use the templated wallet UI
-services. The method takes `ChainConfig` as the required input. Wallet Services is currently only
-available for EVM chains.
+The `launchWalletServices` method launches a WebView which allows you to use the templated wallet UI services. The method takes `ChainConfig` as the required input. Wallet Services is currently only available for EVM chains.
 
 :::note
 
-Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The
-minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production
-environment is the **Scale Plan**.
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
 
 :::
 
@@ -547,17 +530,17 @@ environment is the **Scale Plan**.
 
 <TabItem value="table">
 
-| Parameter           | Description                                                                                                                 |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| `chainNamespace`    | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.eip155`. |
-| `decimals?`         | Number of decimals for the currency ticker. Default value is 18, and accepts `int` as value.                                |
-| `blockExplorerUrl?` | Blockchain's explorer URL. (eg: `https://etherscan.io`)                                                                     |
-| `chainId`           | The chain id of the selected blockchain in hex `String`.                                                                    |
-| `displayName?`      | Display Name for the chain.                                                                                                 |
-| `logo?`             | Logo for the selected `chainNamespace` & `chainId`.                                                                         |
-| `rpcTarget`         | RPC Target URL for the selected `chainNamespace` & `chainId`.                                                               |
-| `ticker?`           | Default currency ticker of the network (e.g: `ETH`)                                                                         |
-| `tickerName?`       | Name for currency ticker (e.g: `Ethereum`)                                                                                  |
+| Parameter | Description |
+| --- | --- |
+| `chainNamespace` | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.eip155`. |
+| `decimals?` | Number of decimals for the currency ticker. Default value is 18, and accepts `int` as value. |
+| `blockExplorerUrl?` | Blockchain's explorer URL. (eg: `https://etherscan.io`) |
+| `chainId` | The chain id of the selected blockchain in hex `String`. |
+| `displayName?` | Display Name for the chain. |
+| `logo?` | Logo for the selected `chainNamespace` & `chainId`. |
+| `rpcTarget` | RPC Target URL for the selected `chainNamespace` & `chainId`. |
+| `ticker?` | Default currency ticker of the network (e.g: `ETH`) |
+| `tickerName?` | Name for currency ticker (e.g: `Ethereum`) |
 
 </TabItem>
 
@@ -603,22 +586,19 @@ public class ChainConfig {
 
 The `request` method facilitates the use of templated transaction screens for signing transactions.
 
-Please check the list of
-[JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request
-method currently supports only the signing methods.
+Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
 
 ### Arguments
 
-| Arguments       | Description                                                                                                                                                                                            |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `chainConfig`   | Defines the chain to be used for signature.                                                                                                                                                            |
-| `method`        | JSON RPC method name in `String`. Currently, the request method only supports the singing methods.                                                                                                     |
+| Arguments | Description |
+| --- | --- |
+| `chainConfig` | Defines the chain to be used for signature. |
+| `method` | JSON RPC method name in `String`. Currently, the request method only supports the singing methods. |
 | `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api) to know more. |
 
 :::tip
 
-Additionally you can associate a `getSignResponse` function to retrieve the signature for the
-request.
+Additionally you can associate a `getSignResponse` function to retrieve the signature for the request.
 
 ```cs
 void Start()
@@ -677,8 +657,7 @@ private void onSignResponse(SignResponse signResponse)
 
 ### `web3Auth.logout()`
 
-Trigger logout flow. This function doesn't take parameters. A completable future containing a void
-object will be returned on successfull logout otherwise an error response is returned.
+Trigger logout flow. This function doesn't take parameters. A completable future containing a void object will be returned on successfull logout otherwise an error response is returned.
 
 :::tip
 

@@ -1,7 +1,7 @@
 ---
 title: useWeb3AuthUser
 sidebar_label: useWeb3AuthUser
-description: "@web3auth/modal/vue Composable useWeb3AuthUser | Documentation - Web3Auth"
+description: '@web3auth/modal/vue Composable useWeb3AuthUser | Embedded Wallets'
 ---
 
 Composable to fetch and manage the current Web3Auth user information in Vue.
@@ -9,16 +9,16 @@ Composable to fetch and manage the current Web3Auth user information in Vue.
 ### Import
 
 ```ts
-import { useWeb3AuthUser } from "@web3auth/modal/vue";
+import { useWeb3AuthUser } from '@web3auth/modal/vue'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { useWeb3AuthUser } from "@web3auth/modal/vue";
+  import { useWeb3AuthUser } from '@web3auth/modal/vue'
 
-  const { userInfo, loading, error, isMFAEnabled, getUserInfo } = useWeb3AuthUser();
+  const { userInfo, loading, error, isMFAEnabled, getUserInfo } = useWeb3AuthUser()
 </script>
 
 <template>
@@ -36,7 +36,7 @@ import { useWeb3AuthUser } from "@web3auth/modal/vue";
 ### Return Type
 
 ```ts
-import type { IUseWeb3AuthUser } from "@web3auth/modal/vue";
+import type { IUseWeb3AuthUser } from '@web3auth/modal/vue'
 ```
 
 #### loading

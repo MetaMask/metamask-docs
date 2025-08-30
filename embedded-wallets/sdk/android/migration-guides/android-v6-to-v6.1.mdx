@@ -1,27 +1,23 @@
 ---
-title: PnP Android SDK - v6 to v6.1
-
-description: "PnP Android SDK - v6 to v6.1 | Documentation - Web3Auth"
+title: Android SDK - v6 to v6.1
+description: 'Android SDK - v6 to v6.1 | Embedded Wallets'
 sidebar_label: v6 to v6.1
 ---
 
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
-# Migration Guide from v6 to v6.1 for Web3Auth PnP Android SDK
+# Migration Guide from v6 to v6.1 for Web3Auth Android SDK
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 6(v6) to version 6.1(v6.1) of the
-Web3Auth PnP Android SDK. The guide outlines the introduction of new `request` method.
+This migration guide provides steps for upgrading from version 6(v6) to version 6.1(v6.1) of the Web3Auth Android SDK. The guide outlines the introduction of new `request` method.
 
 ## Changes in Detail
 
 ### `request` method
 
-Now, developers can use the `request` method to use the templated transaction confirmation screens
-for signing transactions. To retrive the signature for the request, developers can use the
-`getSignResponse` static method.
+Now, developers can use the `request` method to use the templated transaction confirmation screens for signing transactions. To retrive the signature for the request, developers can use the `getSignResponse` static method.
 
 ```kotlin title="Usage"
 val params = JsonArray().apply {

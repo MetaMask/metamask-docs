@@ -1,18 +1,18 @@
 ---
 title: switchChain
 sidebar_label: switchChain
-description: "@web3auth/modal Usage | Documentation - Web3Auth"
+description: '@web3auth/modal Usage | Embedded Wallets'
 ---
 
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
 Function to switch blockchain networks with Web3Auth.
 
 ## Usage
 
 ```javascript
-await web3auth.switchChain({ chainId: "0xaa36a7" });
+await web3auth.switchChain({ chainId: '0xaa36a7' })
 ```
 
 ## Parameters
@@ -27,9 +27,9 @@ await web3auth.switchChain({ chainId: "0xaa36a7" });
 
 <TabItem value="table">
 
-| Parameter             | Description                                                      | Type   | Required |
-| --------------------- | ---------------------------------------------------------------- | ------ | -------- |
-| `{ chainId: string }` | chainId of the chain to switch to, e.g `{ chainId: "0xaa36a7" }` | Object | Yes      |
+| Parameter | Description | Type | Required |
+| --- | --- | --- | --- |
+| `{ chainId: string }` | chainId of the chain to switch to, e.g `{ chainId: "0xaa36a7" }` | Object | Yes |
 
 </TabItem>
 
@@ -54,17 +54,17 @@ async switchChain(params: { chainId: string }): Promise<void> {
 
 // Switch to Sepolia Testnet
 try {
-  await web3auth.switchChain({ chainId: "0xaa36a7" });
-  console.log("Successfully switched to Sepolia Testnet");
+  await web3auth.switchChain({ chainId: '0xaa36a7' })
+  console.log('Successfully switched to Sepolia Testnet')
 } catch (error) {
-  console.error("Error switching chain:", error);
+  console.error('Error switching chain:', error)
 }
 
 // Later, switch to Ethereum Mainnet
 try {
-  await web3auth.switchChain({ chainId: "0x1" });
-  console.log("Successfully switched to Ethereum Mainnet");
+  await web3auth.switchChain({ chainId: '0x1' })
+  console.log('Successfully switched to Ethereum Mainnet')
 } catch (error) {
-  console.error("Error switching chain:", error);
+  console.error('Error switching chain:', error)
 }
 ```

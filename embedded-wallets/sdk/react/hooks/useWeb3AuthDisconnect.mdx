@@ -1,7 +1,7 @@
 ---
 title: useWeb3AuthDisconnect
 sidebar_label: useWeb3AuthDisconnect
-description: "@web3auth/modal React Hooks useWeb3AuthDisconnect | Documentation - Web3Auth"
+description: '@web3auth/modal React Hooks useWeb3AuthDisconnect | Embedded Wallets'
 ---
 
 Hook to disconnect from Web3Auth.
@@ -9,32 +9,32 @@ Hook to disconnect from Web3Auth.
 ### Import
 
 ```tsx
-import { useWeb3AuthDisconnect } from "@web3auth/modal/react";
+import { useWeb3AuthDisconnect } from '@web3auth/modal/react'
 ```
 
 ### Usage
 
 ```tsx
-import { useWeb3AuthDisconnect } from "@web3auth/modal/react";
+import { useWeb3AuthDisconnect } from '@web3auth/modal/react'
 
 function DisconnectButton() {
-  const { disconnect, loading, error } = useWeb3AuthDisconnect();
+  const { disconnect, loading, error } = useWeb3AuthDisconnect()
 
   return (
     <div>
       <button onClick={() => disconnect()} disabled={loading}>
-        {loading ? "Disconnecting..." : "Disconnect"}
+        {loading ? 'Disconnecting...' : 'Disconnect'}
       </button>
       {error && <div>{error.message}</div>}
     </div>
-  );
+  )
 }
 ```
 
 ### Return Type
 
 ```tsx
-import { type IUseWeb3AuthDisconnect } from "@web3auth/modal/react";
+import { type IUseWeb3AuthDisconnect } from '@web3auth/modal/react'
 ```
 
 #### loading
@@ -53,5 +53,4 @@ Error that occurred during the disconnection process.
 
 `(options?: { cleanup: boolean }) => Promise<void>`
 
-Function to initiate the disconnection process. Optional `cleanup` parameter controls whether to
-remove all user data.
+Function to initiate the disconnection process. Optional `cleanup` parameter controls whether to remove all user data.

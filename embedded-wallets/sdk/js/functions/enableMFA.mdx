@@ -1,7 +1,7 @@
 ---
 title: enableMFA
 sidebar_label: enableMFA
-description: "@web3auth/modal Function enableMFA | Documentation - Web3Auth"
+description: '@web3auth/modal Function enableMFA | Embedded Wallets'
 ---
 
 Function to enable Multi-Factor Authentication (MFA) for users with Web3Auth.
@@ -10,10 +10,10 @@ ge
 
 ```javascript
 try {
-  await web3auth.enableMFA();
-  console.log("MFA setup process initiated");
+  await web3auth.enableMFA()
+  console.log('MFA setup process initiated')
 } catch (error) {
-  console.error("Error enabling MFA:", error);
+  console.error('Error enabling MFA:', error)
 }
 ```
 
@@ -31,6 +31,4 @@ Optional parameters for the login process when setting up MFA.
 
 `Promise<void>`
 
-A promise that resolves when the MFA setup process has been initiated. This function will trigger a
-redirect to the MFA setup page, where the user will be asked to login again and set up the MFA
-methods according to the configuration set in the Web3Auth instance.
+A promise that resolves when the MFA setup process has been initiated. This function will trigger a redirect to the MFA setup page, where the user will be asked to login again and set up the MFA methods according to the configuration set in the Web3Auth instance.

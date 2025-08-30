@@ -1,17 +1,15 @@
 ---
 title: PnP React Native - v5 to v6
 sidebar_label: PnP React Native - v5 to v6
-description: "PnP React Native SDK - v5 to v6 | Documentation - Web3Auth"
+description: 'PnP React Native SDK - v5 to v6 | Embedded Wallets'
 ---
 
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
 ### Overview
 
-This guide provides a detailed step-by-step process to help you migrate your PnP React Native
-project from version 5 to version 6 of the SDK. This includes necessary changes to your
-`metro.config.js` and `globals.ts` files and updates for both bare React Native and Expo workflows.
+This guide provides a detailed step-by-step process to help you migrate your PnP React Native project from version 5 to version 6 of the SDK. This includes necessary changes to your `metro.config.js` and `globals.ts` files and updates for both bare React Native and Expo workflows.
 
 ## Metro Configurations
 
@@ -20,63 +18,63 @@ project from version 5 to version 6 of the SDK. This includes necessary changes 
 #### Before:
 
 ```javascript
-const { getDefaultConfig } = require("expo/metro-config");
+const { getDefaultConfig } = require('expo/metro-config')
 
 /** @type {import('expo/metro-config').MetroConfig} */
-const config = getDefaultConfig(__dirname);
+const config = getDefaultConfig(__dirname)
 
 config.resolver.extraNodeModules = {
-  assert: require.resolve("empty-module"), // assert can be polyfilled here if needed
-  http: require.resolve("empty-module"), // stream-http can be polyfilled here if needed
-  https: require.resolve("empty-module"), // https-browserify can be polyfilled here if needed
-  os: require.resolve("empty-module"), // os-browserify can be polyfilled here if needed
-  url: require.resolve("empty-module"), // url can be polyfilled here if needed
-  zlib: require.resolve("empty-module"), // browserify-zlib can be polyfilled here if needed
-  path: require.resolve("empty-module"),
-  crypto: require.resolve("crypto-browserify"),
-  stream: require.resolve("readable-stream"),
-  buffer: require.resolve("buffer"),
-};
+  assert: require.resolve('empty-module'), // assert can be polyfilled here if needed
+  http: require.resolve('empty-module'), // stream-http can be polyfilled here if needed
+  https: require.resolve('empty-module'), // https-browserify can be polyfilled here if needed
+  os: require.resolve('empty-module'), // os-browserify can be polyfilled here if needed
+  url: require.resolve('empty-module'), // url can be polyfilled here if needed
+  zlib: require.resolve('empty-module'), // browserify-zlib can be polyfilled here if needed
+  path: require.resolve('empty-module'),
+  crypto: require.resolve('crypto-browserify'),
+  stream: require.resolve('readable-stream'),
+  buffer: require.resolve('buffer'),
+}
 
 config.transformer.getTransformOptions = () => ({
   transform: {
     experimentalImportSupport: false,
     inlineRequires: true,
   },
-});
+})
 
-module.exports = config;
+module.exports = config
 ```
 
 #### After:
 
 ```javascript
-const { getDefaultConfig } = require("expo/metro-config");
+const { getDefaultConfig } = require('expo/metro-config')
 
 /** @type {import('expo/metro-config').MetroConfig} */
-const config = getDefaultConfig(__dirname);
+const config = getDefaultConfig(__dirname)
 
 config.resolver.extraNodeModules = {
-  assert: require.resolve("empty-module"), // assert can be polyfilled here if needed
-  http: require.resolve("empty-module"), // stream-http can be polyfilled here if needed
-  https: require.resolve("empty-module"), // https-browserify can be polyfilled here if needed
-  os: require.resolve("empty-module"), // os-browserify can be polyfilled here if needed
-  url: require.resolve("empty-module"), // url can be polyfilled here if needed
-  zlib: require.resolve("empty-module"), // browserify-zlib can be polyfilled here if needed
-  path: require.resolve("empty-module"),
-  stream: require.resolve("readable-stream"),
-  buffer: require.resolve("buffer"),
-};
+  assert: require.resolve('empty-module'), // assert can be polyfilled here if needed
+  http: require.resolve('empty-module'), // stream-http can be polyfilled here if needed
+  https: require.resolve('empty-module'), // https-browserify can be polyfilled here if needed
+  os: require.resolve('empty-module'), // os-browserify can be polyfilled here if needed
+  url: require.resolve('empty-module'), // url can be polyfilled here if needed
+  zlib: require.resolve('empty-module'), // browserify-zlib can be polyfilled here if needed
+  path: require.resolve('empty-module'),
+  stream: require.resolve('readable-stream'),
+  buffer: require.resolve('buffer'),
+}
 
 // focus-start
 config.resolver.resolveRequest = (context, moduleName, platform) => {
-  if (moduleName === "crypto") {
+  if (moduleName === 'crypto') {
     // when importing crypto, resolve to react-native-quick-crypto
-    return context.resolveRequest(context, "react-native-quick-crypto", platform);
+    return context.resolveRequest(context, 'react-native-quick-crypto', platform)
   }
   // otherwise chain to the standard Metro resolver.
-  return context.resolveRequest(context, moduleName, platform);
-};
+  return context.resolveRequest(context, moduleName, platform)
+}
 // focus-end
 
 config.transformer.getTransformOptions = () => ({
@@ -84,9 +82,9 @@ config.transformer.getTransformOptions = () => ({
     experimentalImportSupport: false,
     inlineRequires: true,
   },
-});
+})
 
-module.exports = config;
+module.exports = config
 ```
 
 ## Updating `globals.ts`
@@ -94,38 +92,38 @@ module.exports = config;
 ### Bare React Native Workflow
 
 ```typescript
-import { install } from "react-native-quick-crypto";
+import { install } from 'react-native-quick-crypto'
 
-install();
+install()
 
 // Needed so that 'stream-http' chooses the right default protocol.
 // @ts-ignore
 global.location = {
-  protocol: "file:",
-};
-// @ts-ignore
-global.process.version = "v16.0.0";
-if (!global.process.version) {
-  global.process = require("process");
-  console.log({ process: global.process });
+  protocol: 'file:',
 }
 // @ts-ignore
-process.browser = true;
+global.process.version = 'v16.0.0'
+if (!global.process.version) {
+  global.process = require('process')
+  console.log({ process: global.process })
+}
+// @ts-ignore
+process.browser = true
 ```
 
 ### Expo Workflow
 
 ```typescript
-import "./globals";
-import "@ethersproject/shims";
-import "@expo/metro-runtime";
+import './globals'
+import '@ethersproject/shims'
+import '@expo/metro-runtime'
 
-import { App } from "expo-router/build/qualified-entry";
-import { renderRootComponent } from "expo-router/build/renderRootComponent";
+import { App } from 'expo-router/build/qualified-entry'
+import { renderRootComponent } from 'expo-router/build/renderRootComponent'
 
 // This file should only import and register the root. No components or exports
 // should be added here.
-renderRootComponent(App);
+renderRootComponent(App)
 ```
 
 :::note
@@ -143,24 +141,24 @@ npm install react-native-quick-crypto
 ### Bare React Native Workflow
 
 ```typescript
-import { AppRegistry } from "react-native";
-import "./globals";
-import App from "./App";
-import { name as appName } from "./app.json";
-AppRegistry.registerComponent(appName, () => App);
+import { AppRegistry } from 'react-native'
+import './globals'
+import App from './App'
+import { name as appName } from './app.json'
+AppRegistry.registerComponent(appName, () => App)
 ```
 
 ### Expo Workflow
 
 ```typescript
-import "./globals";
-import "@ethersproject/shims";
-import "@expo/metro-runtime";
+import './globals'
+import '@ethersproject/shims'
+import '@expo/metro-runtime'
 
-import { App } from "expo-router/build/qualified-entry";
-import { renderRootComponent } from "expo-router/build/renderRootComponent";
+import { App } from 'expo-router/build/qualified-entry'
+import { renderRootComponent } from 'expo-router/build/renderRootComponent'
 
 // This file should only import and register the root. No components or exports
 // should be added here.
-renderRootComponent(App);
+renderRootComponent(App)
 ```

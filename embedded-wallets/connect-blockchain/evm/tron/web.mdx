@@ -1,21 +1,18 @@
 ---
 title: Integrate Web3Auth with the Tron Blockchain in JavaScript
 sidebar_label: Web
-image: "banners/tron.png"
+image: 'banners/tron.png'
 
 keywords: [tron, web3auth, authentication, blockchain]
-description: "Integrate Web3Auth with the Tron Blockchain in JavaScript | Documentation - Web3Auth"
+description: 'Integrate Web3Auth with the Tron Blockchain in JavaScript | Embedded Wallets'
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 ## Overview
 
-While using the Web3Auth Web SDK, you get an EIP1193-compatible provider, similar to the MetaMask
-provider. This provider can be used with libraries like TronWeb to make blockchain calls such as
-getting the user's account, fetching balances, signing transactions, sending transactions, etc. We
-have highlighted a few examples to get you started quickly.
+While using the Web3Auth Web SDK, you get an EIP1193-compatible provider, similar to the MetaMask provider. This provider can be used with libraries like TronWeb to make blockchain calls such as getting the user's account, fetching balances, signing transactions, sending transactions, etc. We have highlighted a few examples to get you started quickly.
 
 ---
 
@@ -73,45 +70,44 @@ For different Tron networks, you can use the appropriate chain configuration.
 We will now initialize Web3Auth with the TRON configuration.
 
 ```typescript
-import { Web3AuthNoModal } from "@web3auth/no-modal";
-import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
-import { AuthAdapter } from "@web3auth/auth-adapter";
-import { TRON_SHASTA_TESTNET } from "./chainConfig";
-import TronRpc from "./tronRPC";
+import { Web3AuthNoModal } from '@web3auth/no-modal'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+import { AuthAdapter } from '@web3auth/auth-adapter'
+import { TRON_SHASTA_TESTNET } from './chainConfig'
+import TronRpc from './tronRPC'
 
-const clientId = "YOUR_CLIENT_ID"; // Replace with your Web3Auth client ID
+const clientId = 'YOUR_CLIENT_ID' // Replace with your Web3Auth client ID
 
 const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig: TRON_SHASTA_TESTNET },
-});
+})
 
 const web3auth = new Web3AuthNoModal({
   clientId, // Your Web3Auth Client ID
   chainConfig: TRON_SHASTA_TESTNET, // Using Tron Shasta Testnet
   privateKeyProvider,
-});
+})
 
 const authAdapter = new AuthAdapter({
   adapterSettings: {
-    uxMode: "redirect",
+    uxMode: 'redirect',
   },
-});
-web3auth.configureAdapter(authAdapter);
-await web3auth.init();
+})
+web3auth.configureAdapter(authAdapter)
+await web3auth.init()
 ```
 
 ---
 
 ## Getting the Web3Auth Provider
 
-After initializing Web3Auth, the next step is to authenticate and retrieve the provider to interact
-with the Tron blockchain.
+After initializing Web3Auth, the next step is to authenticate and retrieve the provider to interact with the Tron blockchain.
 
 ```typescript
-await web3auth.connect();
+await web3auth.connect()
 
 // Get the provider
-const provider = web3auth.provider;
+const provider = web3auth.provider
 ```
 
 Once logged in, Web3Auth provides a JWT token and access to the Tron provider.
@@ -123,8 +119,8 @@ Once logged in, Web3Auth provides a JWT token and access to the Tron provider.
 After logging in, you can retrieve information about the user.
 
 ```typescript
-const user = await web3auth.getUserInfo();
-console.log(user);
+const user = await web3auth.getUserInfo()
+console.log(user)
 ```
 
 ---
@@ -135,16 +131,16 @@ Once logged in, we can use `tronRpc.ts` to fetch the user’s account and balanc
 
 ```typescript
 // tronRpc.ts should be implemented as per previous example
-const tronRpc = new TronRpc(provider);
-await tronRpc.init();
+const tronRpc = new TronRpc(provider)
+await tronRpc.init()
 
 // Get the user's Tron account address
-const accounts = await tronRpc.getAccounts();
-console.log("Account: ", accounts[0]);
+const accounts = await tronRpc.getAccounts()
+console.log('Account: ', accounts[0])
 
 // Get the balance
-const balance = await tronRpc.getBalance();
-console.log("Balance: ", balance);
+const balance = await tronRpc.getBalance()
+console.log('Balance: ', balance)
 ```
 
 ---
@@ -154,8 +150,8 @@ console.log("Balance: ", balance);
 You can send a transaction using the user's private key.
 
 ```typescript
-const transaction = await tronRpc.sendTransaction();
-console.log("Transaction Hash: ", transaction);
+const transaction = await tronRpc.sendTransaction()
+console.log('Transaction Hash: ', transaction)
 ```
 
 This will send a transaction from the user's Tron account.
@@ -167,14 +163,12 @@ This will send a transaction from the user's Tron account.
 You can also sign a message using the private key of the logged-in user.
 
 ```typescript
-const signedMessage = await tronRpc.signMessage("Hello Tron!");
-console.log("Signed Message: ", signedMessage);
+const signedMessage = await tronRpc.signMessage('Hello Tron!')
+console.log('Signed Message: ', signedMessage)
 ```
 
 This will return the signature of the message.
 
 ## Conclusion
 
-With Web3Auth, you can easily integrate Tron blockchain capabilities into your application. By using
-the TronWeb library, you can perform various blockchain operations such as fetching accounts,
-sending transactions, signing messages, and interacting with smart contracts.
+With Web3Auth, you can easily integrate Tron blockchain capabilities into your application. By using the TronWeb library, you can perform various blockchain operations such as fetching accounts, sending transactions, signing messages, and interacting with smart contracts.

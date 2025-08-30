@@ -1,7 +1,7 @@
 ---
 title: useSwitchChain
 sidebar_label: useSwitchChain
-description: "@web3auth/modal Vue Composables useSwitchChain | Documentation - Web3Auth"
+description: '@web3auth/modal Vue Composables useSwitchChain | Embedded Wallets'
 ---
 
 Composable to switch blockchain networks with Web3Auth in Vue.
@@ -9,16 +9,16 @@ Composable to switch blockchain networks with Web3Auth in Vue.
 ### Import
 
 ```ts
-import { useSwitchChain } from "@web3auth/modal/vue";
+import { useSwitchChain } from '@web3auth/modal/vue'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { useSwitchChain } from "@web3auth/modal/vue";
+  import { useSwitchChain } from '@web3auth/modal/vue'
 
-  const { switchChain, loading, error } = useSwitchChain();
+  const { switchChain, loading, error } = useSwitchChain()
 </script>
 
 <template>
@@ -32,7 +32,7 @@ import { useSwitchChain } from "@web3auth/modal/vue";
 ### Return Type
 
 ```ts
-import { type IUseSwitchChain } from "@web3auth/modal/vue";
+import { type IUseSwitchChain } from '@web3auth/modal/vue'
 ```
 
 #### loading
@@ -51,20 +51,19 @@ Error that occurred during the chain switching process.
 
 `(chainId: string) => Promise<void>`
 
-Function to initiate the chain switch. Pass the target `chainId` as a string (e.g., "0x1" for
-Ethereum Mainnet).
+Function to initiate the chain switch. Pass the target `chainId` as a string (e.g., "0x1" for Ethereum Mainnet).
 
 ## Example
 
 ```html title="switchChain.vue"
 <script setup lang="ts">
-  import { useWeb3Auth, useSwitchChain } from "@web3auth/modal/vue";
-  import { computed } from "vue";
+  import { useWeb3Auth, useSwitchChain } from '@web3auth/modal/vue'
+  import { computed } from 'vue'
 
-  const { web3Auth } = useWeb3Auth();
-  const { switchChain, error } = useSwitchChain();
+  const { web3Auth } = useWeb3Auth()
+  const { switchChain, error } = useSwitchChain()
 
-  const currentChainName = computed(() => web3Auth.value?.currentChain?.displayName || "");
+  const currentChainName = computed(() => web3Auth.value?.currentChain?.displayName || '')
 </script>
 
 <template>
@@ -77,8 +76,7 @@ Ethereum Mainnet).
       :disabled="web3Auth?.currentChain?.chainId === chain.chainId"
       @click="switchChain({ chainId: chain.chainId })"
       type="button"
-      class="card"
-    >
+      class="card">
       {{ chain.displayName }}
     </button>
     <div v-if="error" class="error">{{ error.message }}</div>

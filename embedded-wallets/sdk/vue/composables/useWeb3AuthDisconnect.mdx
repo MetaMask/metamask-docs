@@ -1,7 +1,7 @@
 ---
 title: useWeb3AuthDisconnect
 sidebar_label: useWeb3AuthDisconnect
-description: "@web3auth/modal Vue Composables useWeb3AuthDisconnect | Documentation - Web3Auth"
+description: '@web3auth/modal Vue Composables useWeb3AuthDisconnect | Embedded Wallets'
 ---
 
 Hook to disconnect from Web3Auth.
@@ -9,16 +9,16 @@ Hook to disconnect from Web3Auth.
 ### Import
 
 ```ts
-import { useWeb3AuthDisconnect } from "@web3auth/modal/vue";
+import { useWeb3AuthDisconnect } from '@web3auth/modal/vue'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { useWeb3AuthDisconnect } from "@web3auth/modal/vue";
+  import { useWeb3AuthDisconnect } from '@web3auth/modal/vue'
 
-  const { disconnect, loading, error } = useWeb3AuthDisconnect();
+  const { disconnect, loading, error } = useWeb3AuthDisconnect()
 </script>
 
 <template>
@@ -32,7 +32,7 @@ import { useWeb3AuthDisconnect } from "@web3auth/modal/vue";
 ### Return Type
 
 ```ts
-import type { IUseWeb3AuthDisconnect } from "@web3auth/modal/vue";
+import type { IUseWeb3AuthDisconnect } from '@web3auth/modal/vue'
 ```
 
 #### loading
@@ -51,5 +51,4 @@ Error that occurred during the disconnection process.
 
 `(options?: { cleanup: boolean }) => Promise<void>`
 
-Function to initiate the disconnection process. Optional `cleanup` parameter controls whether to
-remove all user data.
+Function to initiate the disconnection process. Optional `cleanup` parameter controls whether to remove all user data.

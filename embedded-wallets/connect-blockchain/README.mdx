@@ -2,7 +2,7 @@
 title: Connecting Blockchains with Web3Auth
 sidebar_label: Overview
 
-description: 'Connect to any Blockchain via Web3Auth | Documentation - Web3Auth'
+description: 'Connect to any Blockchain via Web3Auth | Embedded Wallets'
 image: 'img/docs-meta-cards/documentation-card.png'
 ---
 
@@ -11,14 +11,14 @@ import OtherChains from './_other-chains.mdx'
 
 Web3Auth is the frontend authentication system for your dApp. Once the user is authenticated, the Web3Auth SDK returns a provider. A provider is how libraries like web3.js & ethers.js talk to the blockchain. Providers take JSON-RPC requests and return the response. This is normally done by submitting the request to an HTTP or IPC socket-based server. With Web3Auth, you get two types of providers, depending on the product you use:
 
-1. [Shamir Secret Sharing based Private Key Providers](#for-web3auth-pnp-web-sdk)
+1. [Shamir Secret Sharing based Private Key Providers](#for-web3auth-web-sdk)
 2. [Threshold Signature Scheme based MPC Providers](#mpc-core-kit-providers)
 
 ## Web3Auth is Chain Agnostic
 
-By default, Web3Auth supports the `secp256k1` and `ed25519` key curves. While these key curves serve the majority of blockchains out there, certain blockchains have different curve implementations of their own. While for MPC Core Kit, you need dedicated providers to interact with certain blockchains, with **Web3Auth PnP & SFA you can interact with any blockchain of your choice**.
+By default, Web3Auth supports the `secp256k1` and `ed25519` key curves. While these key curves serve the majority of blockchains out there, certain blockchains have different curve implementations of their own. While for MPC Core Kit, you need dedicated providers to interact with certain blockchains, with **Web3Auth you can interact with any blockchain of your choice**.
 
-In Web3Auth PnP & SFA, the ability to export the user's private key comes in handy. This private key can be utilized by the dApp to interact with the chain.
+In Web3Auth the ability to export the user's private key comes in handy. This private key can be utilized by the dApp to interact with the chain.
 
 You can read more about this in our [Connect with Other Blockchains](./other/) section.
 
@@ -28,19 +28,11 @@ Web3Auth is composable - you can combine it with meta-transaction flows, multisi
 
 :::
 
-## For Web3Auth PnP Web SDK
+## For Web3Auth Web SDK
 
-The Web3Auth PnP Web SDK(`@web3auth/modal`) from v10 onwards does not need any additional setup on the code side for blockchain connections. All of it is handled on the Dashboard. We can use any chain from the extensive list of predefined chains and add more if we need.
+The Web3Auth Web SDK(`@web3auth/modal`) from v10 onwards does not need any additional setup on the code side for blockchain connections. All of it is handled on the Dashboard. We can use any chain from the extensive list of predefined chains and add more if we need.
 
 ![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)
-
-## MPC Core Kit Providers
-
-The Threshold Signature Scheme-based MPC Providers work with our MPC Core Kit SDK. These providers generate a signature of the particular key curve the provider is configured for and accordingly gives you the interface to initialize with the blockchain it is configured for. Currently, Web3Auth MPC Core Kit supports the following providers:
-
-- EIP1193 MPC Provider: For connecting with EVM-based chains
-- EDDSA MPC Provider: For connecting with Solana and other chains that support the `ed25519` curve.
-- Bitcoin MPC Provider
 
 ## Reference Guides for Blockchain Connections
 

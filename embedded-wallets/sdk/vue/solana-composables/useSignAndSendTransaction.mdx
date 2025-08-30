@@ -1,38 +1,37 @@
 ---
 title: useSignAndSendTransaction
 sidebar_label: useSignAndSendTransaction
-description: "@web3auth/modal Vue Composable useSignAndSendTransaction | Documentation - Web3Auth"
+description: '@web3auth/modal Vue Composable useSignAndSendTransaction | Embedded Wallets'
 ---
 
-Composable to sign and send a Solana transaction using the connected Solana wallet from Web3Auth in
-Vue.
+Composable to sign and send a Solana transaction using the connected Solana wallet from Web3Auth in Vue.
 
 ### Import
 
 ```ts
-import { useSignAndSendTransaction } from "@web3auth/modal/vue/solana";
+import { useSignAndSendTransaction } from '@web3auth/modal/vue/solana'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { ref } from "vue";
-  import { useSignAndSendTransaction } from "@web3auth/modal/vue/solana";
-  import type { TransactionOrVersionedTransaction } from "@web3auth/modal";
+  import { ref } from 'vue'
+  import { useSignAndSendTransaction } from '@web3auth/modal/vue/solana'
+  import type { TransactionOrVersionedTransaction } from '@web3auth/modal'
 
-  const transaction = ref<TransactionOrVersionedTransaction | null>(null); // Provide your transaction here
-  const { signAndSendTransaction, loading, error, data } = useSignAndSendTransaction();
+  const transaction = ref<TransactionOrVersionedTransaction | null>(null) // Provide your transaction here
+  const { signAndSendTransaction, loading, error, data } = useSignAndSendTransaction()
 
   const handleSignAndSend = async () => {
-    if (!transaction.value) return;
+    if (!transaction.value) return
     try {
-      await signAndSendTransaction(transaction.value);
+      await signAndSendTransaction(transaction.value)
       // Do something with data.value (signature)
     } catch (e) {
       // Handle error
     }
-  };
+  }
 </script>
 
 <template>
@@ -50,11 +49,11 @@ import { useSignAndSendTransaction } from "@web3auth/modal/vue/solana";
 
 ```ts
 export type IUseSignAndSendTransaction = {
-  loading: boolean;
-  error: Web3AuthError | null;
-  data: string | null;
-  signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>;
-};
+  loading: boolean
+  error: Web3AuthError | null
+  data: string | null
+  signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+}
 ```
 
 #### loading
@@ -91,46 +90,46 @@ Function to sign and send a transaction. Returns the transaction signature as a 
     SystemProgram,
     TransactionMessage,
     VersionedTransaction,
-  } from "@solana/web3.js";
-  import { useSolanaWallet, useSignAndSendTransaction } from "@web3auth/modal/vue/solana";
+  } from '@solana/web3.js'
+  import { useSolanaWallet, useSignAndSendTransaction } from '@web3auth/modal/vue/solana'
 
   const {
     data: hash,
     error,
     loading: isPending,
     signAndSendTransaction,
-  } = useSignAndSendTransaction();
-  const { accounts, connection } = useSolanaWallet();
+  } = useSignAndSendTransaction()
+  const { accounts, connection } = useSolanaWallet()
 
   async function submit(event: Event) {
-    event.preventDefault();
-    const formData = new FormData(event.target as HTMLFormElement);
-    const to = formData.get("address") as string;
-    const value = formData.get("value") as string;
+    event.preventDefault()
+    const formData = new FormData(event.target as HTMLFormElement)
+    const to = formData.get('address') as string
+    const value = formData.get('value') as string
 
-    const connectionValue = connection.value;
-    const accountsValue = accounts.value;
+    const connectionValue = connection.value
+    const accountsValue = accounts.value
 
     if (!connectionValue || !accountsValue || accountsValue.length === 0) {
-      console.error("Connection or accounts not available");
-      return;
+      console.error('Connection or accounts not available')
+      return
     }
 
-    const block = await connectionValue.getLatestBlockhash();
+    const block = await connectionValue.getLatestBlockhash()
     const TransactionInstruction = SystemProgram.transfer({
       fromPubkey: new PublicKey(accountsValue[0]),
       toPubkey: new PublicKey(to),
       lamports: Number(value) * LAMPORTS_PER_SOL,
-    });
+    })
 
     const transactionMessage = new TransactionMessage({
       recentBlockhash: block.blockhash,
       instructions: [TransactionInstruction],
       payerKey: new PublicKey(accountsValue[0]),
-    });
+    })
 
-    const transaction = new VersionedTransaction(transactionMessage.compileToV0Message());
-    signAndSendTransaction(transaction);
+    const transaction = new VersionedTransaction(transactionMessage.compileToV0Message())
+    signAndSendTransaction(transaction)
   }
 </script>
 

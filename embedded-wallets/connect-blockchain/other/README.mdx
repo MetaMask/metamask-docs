@@ -9,7 +9,7 @@ description: 'Connect Embedded Wallets with any Blockchain - Chain Agnostic'
 
 import Tiles from '@theme/Tiles'
 
-While using the Web3Auth PnP & SFA Mobile SDKs for non-EVM chains, other than Solana and XRPL, we use the Common Private Key Provider. This provider is a basic wrapper around the private key, helping us export it on demand. The private key returned by this provider is of the curve `secp256k1` & `ed25519` based on the particular requests. While these key curves serve the majority of blockchains out there, certain blockchains have different curve implementations of their own.
+With the Web3Auth SDKs, we can export the private key on demand. The private key returned is of the curve `secp256k1` & `ed25519` based on the particular requests. While these key curves serve the majority of blockchains out there, certain blockchains have different curve implementations of their own.
 
 ## Standard Approach for connecting with Non EVM Chains
 

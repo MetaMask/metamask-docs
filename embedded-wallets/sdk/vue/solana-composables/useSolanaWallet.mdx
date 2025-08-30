@@ -1,7 +1,7 @@
 ---
 title: useSolanaWallet
 sidebar_label: useSolanaWallet
-description: "@web3auth/modal Vue Composables useSolanaWallet | Documentation - Web3Auth"
+description: '@web3auth/modal Vue Composables useSolanaWallet | Embedded Wallets'
 ---
 
 Composable to retrieve and manage Solana wallet, accounts, and connection from Web3Auth in Vue.
@@ -9,16 +9,16 @@ Composable to retrieve and manage Solana wallet, accounts, and connection from W
 ### Import
 
 ```ts
-import { useSolanaWallet } from "@web3auth/modal/vue";
+import { useSolanaWallet } from '@web3auth/modal/vue'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { useSolanaWallet } from "@web3auth/modal/vue";
+  import { useSolanaWallet } from '@web3auth/modal/vue'
 
-  const { solanaWallet, accounts, connection } = useSolanaWallet();
+  const { solanaWallet, accounts, connection } = useSolanaWallet()
 </script>
 
 <template>
@@ -33,7 +33,7 @@ import { useSolanaWallet } from "@web3auth/modal/vue";
 ### Return Type
 
 ```ts
-import type { IUseSolanaWallet } from "@web3auth/modal/vue";
+import type { IUseSolanaWallet } from '@web3auth/modal/vue'
 ```
 
 #### accounts
@@ -58,55 +58,55 @@ The Solana Connection instance for making RPC calls, or null if not available.
 
 ```html title="getBalance.vue"
 <script setup lang="ts">
-  import { ref, onMounted, watch } from "vue";
-  import { useSolanaWallet } from "@web3auth/modal/vue/solana";
-  import { useWeb3Auth } from "@web3auth/modal/vue";
-  import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
+  import { ref, onMounted, watch } from 'vue'
+  import { useSolanaWallet } from '@web3auth/modal/vue/solana'
+  import { useWeb3Auth } from '@web3auth/modal/vue'
+  import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js'
 
-  const { web3Auth } = useWeb3Auth();
-  const { accounts, connection } = useSolanaWallet();
-  const balance = ref<number | null>(null);
-  const isLoading = ref(false);
-  const error = ref<string | null>(null);
+  const { web3Auth } = useWeb3Auth()
+  const { accounts, connection } = useSolanaWallet()
+  const balance = ref<number | null>(null)
+  const isLoading = ref(false)
+  const error = ref<string | null>(null)
 
   const fetchBalance = async () => {
     if (!web3Auth.value?.connected) {
-      error.value = "Please connect your wallet first";
-      return;
+      error.value = 'Please connect your wallet first'
+      return
     }
     try {
-      isLoading.value = true;
-      error.value = null;
+      isLoading.value = true
+      error.value = null
       // Check if accounts exist and have values before creating PublicKey
       if (!accounts.value || accounts.value.length === 0) {
-        console.error("No accounts found. Please connect your wallet.", accounts.value);
-        throw new Error("No accounts found. Please connect your wallet.");
+        console.error('No accounts found. Please connect your wallet.', accounts.value)
+        throw new Error('No accounts found. Please connect your wallet.')
       }
-      const publicKey = new PublicKey(accounts.value[0]);
-      const balanceResult = await connection.value!.getBalance(publicKey);
-      balance.value = balanceResult;
+      const publicKey = new PublicKey(accounts.value[0])
+      const balanceResult = await connection.value!.getBalance(publicKey)
+      balance.value = balanceResult
     } catch (err) {
-      console.error("Error fetching balance:", err);
-      error.value = err instanceof Error ? err.message : "Unknown error";
-      balance.value = null;
+      console.error('Error fetching balance:', err)
+      error.value = err instanceof Error ? err.message : 'Unknown error'
+      balance.value = null
     } finally {
-      isLoading.value = false;
+      isLoading.value = false
     }
-  };
+  }
 
   // Fetch balance when connection or accounts change
   watch([connection, accounts], () => {
     if (web3Auth.value?.connected) {
-      fetchBalance();
+      fetchBalance()
     }
-  });
+  })
 
   // Initial fetch on component mount
   onMounted(() => {
     if (web3Auth.value?.connected) {
-      fetchBalance();
+      fetchBalance()
     }
-  });
+  })
 </script>
 
 <template>

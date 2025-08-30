@@ -1,7 +1,7 @@
 ---
 title: useWeb3Auth
 sidebar_label: useWeb3Auth
-description: "@web3auth/modal/vue Composable useWeb3Auth | Documentation - Web3Auth"
+description: '@web3auth/modal/vue Composable useWeb3Auth | Embedded Wallets'
 ---
 
 Composable to access the Web3Auth context in Vue.
@@ -9,46 +9,46 @@ Composable to access the Web3Auth context in Vue.
 ### Import
 
 ```ts
-import { useWeb3Auth } from "@web3auth/modal/vue";
+import { useWeb3Auth } from '@web3auth/modal/vue'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { useWeb3Auth } from "@web3auth/modal/vue";
+  import { useWeb3Auth } from '@web3auth/modal/vue'
 
-  const { web3Auth, isConnected, isInitializing, provider, status, initError } = useWeb3Auth();
+  const { web3Auth, isConnected, isInitializing, provider, status, initError } = useWeb3Auth()
 
   watchEffect(() => {
     if (isConnected.value) {
       // User is connected
-      console.log("Connected with provider:", provider.value);
+      console.log('Connected with provider:', provider.value)
     }
     if (isInitializing.value) {
       // Web3Auth is initializing
-      console.log("Web3Auth is initializing");
+      console.log('Web3Auth is initializing')
     }
     if (provider.value) {
       // Web3Auth provider is connected
-      console.log("Web3Auth provider is connected");
+      console.log('Web3Auth provider is connected')
     }
     if (status.value) {
       // Web3Auth status
-      console.log("Web3Auth status:", status.value);
+      console.log('Web3Auth status:', status.value)
     }
     if (initError.value) {
       // Web3Auth initialization error
-      console.log("Web3Auth initialization error:", initError.value);
+      console.log('Web3Auth initialization error:', initError.value)
     }
-  });
+  })
 </script>
 ```
 
 ### Return Type
 
 ```ts
-import type { IUseWeb3Auth } from "@web3auth/modal/vue";
+import type { IUseWeb3Auth } from '@web3auth/modal/vue'
 ```
 
 #### initError

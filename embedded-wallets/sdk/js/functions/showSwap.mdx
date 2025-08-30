@@ -1,7 +1,7 @@
 ---
 title: showSwap
 sidebar_label: showSwap
-description: "@web3auth/modal showSwap Function | Documentation - Web3Auth"
+description: '@web3auth/modal showSwap Function | Embedded Wallets'
 ---
 
 Function to open the Swap interface using the Wallet Services Plugin.
@@ -11,23 +11,23 @@ Function to open the Swap interface using the Wallet Services Plugin.
 ```ts
 await web3auth.showSwap({
   show: true,
-}); // Opens the Swap Modal
+}) // Opens the Swap Modal
 ```
 
 ### Parameters
 
-| Name         | Type      | Description                                                                                                  |
-| ------------ | --------- | ------------------------------------------------------------------------------------------------------------ |
-| `show`       | `boolean` | Controls whether the Swap UI is visible. Set to `true` to display the Swap interface, or `false` to hide it. |
-| `fromToken?` | `string`  | Specifies the token being swapped from. Optional field.                                                      |
-| `toToken?`   | `string`  | Specifies the token being swapped to. Optional field.                                                        |
-| `fromValue?` | `string`  | The amount of the `fromToken` to be swapped. Optional field.                                                 |
-| `toAddress?` | `string`  | The recipient's address for the `toToken`. Optional field.                                                   |
+| Name | Type | Description |
+| --- | --- | --- |
+| `show` | `boolean` | Controls whether the Swap UI is visible. Set to `true` to display the Swap interface, or `false` to hide it. |
+| `fromToken?` | `string` | Specifies the token being swapped from. Optional field. |
+| `toToken?` | `string` | Specifies the token being swapped to. Optional field. |
+| `fromValue?` | `string` | The amount of the `fromToken` to be swapped. Optional field. |
+| `toAddress?` | `string` | The recipient's address for the `toToken`. Optional field. |
 
 ### Return Type
 
 ```ts
-Promise<void>;
+Promise<void>
 ```
 
 The function returns a Promise that resolves when the swap modal is successfully displayed.

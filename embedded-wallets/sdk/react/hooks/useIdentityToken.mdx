@@ -1,7 +1,7 @@
 ---
 title: useIdentityToken
 sidebar_label: useIdentityToken
-description: "@web3auth/modal React Hooks useIdentityToken | Documentation - Web3Auth"
+description: '@web3auth/modal React Hooks useIdentityToken | Embedded Wallets'
 ---
 
 Hook to retrieve and manage the identity token from Web3Auth.
@@ -9,33 +9,33 @@ Hook to retrieve and manage the identity token from Web3Auth.
 ### Import
 
 ```tsx
-import { useIdentityToken } from "@web3auth/modal/react";
+import { useIdentityToken } from '@web3auth/modal/react'
 ```
 
 ### Usage
 
 ```tsx
-import { useIdentityToken } from "@web3auth/modal/react";
+import { useIdentityToken } from '@web3auth/modal/react'
 
 function IdentityTokenButton() {
-  const { getIdentityToken, loading, error, token } = useIdentityToken();
+  const { getIdentityToken, loading, error, token } = useIdentityToken()
 
   return (
     <div>
       <button onClick={() => getIdentityToken()} disabled={loading}>
-        {loading ? "Authenticating..." : "Get Identity Token"}
+        {loading ? 'Authenticating...' : 'Get Identity Token'}
       </button>
       {token && <div>Token: {token}</div>}
       {error && <div>Error: {error.message}</div>}
     </div>
-  );
+  )
 }
 ```
 
 ### Return Type
 
 ```tsx
-import { type IUseIdentityToken } from "@web3auth/modal/react";
+import { type IUseIdentityToken } from '@web3auth/modal/react'
 ```
 
 #### loading

@@ -1,23 +1,18 @@
 ---
 title: PnP iOS SDK - v9 to v10
-description: "PnP iOS SDK - v9 to v10 | Documentation - Web3Auth"
+description: 'PnP iOS SDK - v9 to v10 | Embedded Wallets'
 sidebar_label: v9 to v10
 ---
 
-This migration guide provides steps for upgrading from version v9 to v10 of the PnP iOS SDK. The
-guide outlines significant changes and enhancements, including the support of Web3Auth OpenLogin
-version v9, and Wallet Services v3.
+This migration guide provides steps for upgrading from version v9 to v10 of the PnP iOS SDK. The guide outlines significant changes and enhancements, including the support of Web3Auth OpenLogin version v9, and Wallet Services v3.
 
 ## Breaking Changes
 
 ### `getSignResponse` is now removed.
 
-In v10, we try to improve the developer experience by removing the `getSignResponse` method and
-returning the result in the `request` method itself.
+In v10, we try to improve the developer experience by removing the `getSignResponse` method and returning the result in the `request` method itself.
 
-Previously, after calling the `request` method, developers had to use the `getSignResponse` method
-to retrieve the `SignResponse`. In the latest version v10, the `request` method will return the
-`SignResponse` directly.
+Previously, after calling the `request` method, developers had to use the `getSignResponse` method to retrieve the `SignResponse`. In the latest version v10, the `request` method will return the `SignResponse` directly.
 
 ```swift
 // remove-next-line
@@ -45,6 +40,4 @@ if response!.success {
 
 ## Enhancements
 
-In the latest version v10, we have added support for the Web3Auth Auth Service version v9, and
-Wallet Services v3. In Wallet Services v3, the prebuilt wallet UI now supports the swap
-functionality allowing users to swap to their favorite token from the app itself.
+In the latest version v10, we have added support for the Web3Auth Auth Service version v9, and Wallet Services v3. In Wallet Services v3, the prebuilt wallet UI now supports the swap functionality allowing users to swap to their favorite token from the app itself.

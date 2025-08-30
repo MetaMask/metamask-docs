@@ -1,25 +1,20 @@
 ---
 title: Integrate Web3Auth with the Solana Blockchain in Android
 sidebar_label: Android
-image: "banners/solana.png"
+image: 'banners/solana.png'
 
 keywords: [android, solana, web3auth, authentication, blockchain]
-description: "Integrate Web3Auth with the Solana Blockchain in Android | Documentation - Web3Auth"
+description: 'Integrate Web3Auth with the Solana Blockchain in Android | Embedded Wallets'
 ---
 
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
-While using the Web3Auth Android SDK, you can retrive the Ed25519 private key upon successful
-authentication. This private key can be used to derive user's public address and interact with
-[Solana](https://solana.org/) chain. We have highlighted a few methods here for getting you started
-quickly on that.
+While using the Web3Auth Android SDK, you can retrive the Ed25519 private key upon successful authentication. This private key can be used to derive user's public address and interact with [Solana](https://solana.org/) chain. We have highlighted a few methods here for getting you started quickly on that.
 
 ## Installation
 
-To interact with the Solana blockchain in Android, you can use any Solana compatible SDK. Here,
-we're using [sol4k](https://github.com/sol4k/sol4k) to demonstrate how to interact with Solana chain
-using Web3Auth.
+To interact with the Solana blockchain in Android, you can use any Solana compatible SDK. Here, we're using [sol4k](https://github.com/sol4k/sol4k) to demonstrate how to interact with Solana chain using Web3Auth.
 
 In your app-level gradle's dependencies section, add the following:
 
@@ -53,11 +48,7 @@ dependencies {
 
 ## Initialize
 
-To Initialize the `Connection` we require rpc url. The `Connection` object will provide a gateway &
-protocol to interact with Solana cluster while sending requests and receving response.The `sol4k`
-SDK also provides `RpcUrl` constant for all the supported clusters. For this example, we are using
-`RpcUrl.DEVNET` for Devnet-beta. To interact with Testnet or Mainnet, you can simply change the
-`RpcUrl`.
+To Initialize the `Connection` we require rpc url. The `Connection` object will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response.The `sol4k` SDK also provides `RpcUrl` constant for all the supported clusters. For this example, we are using `RpcUrl.DEVNET` for Devnet-beta. To interact with Testnet or Mainnet, you can simply change the `RpcUrl`.
 
 ### Initializing Solana SDK
 
@@ -72,13 +63,9 @@ val connection = Connection(RpcUrl.DEVNET)
 
 ### Initializing Web3Auth SDK
 
-In the below code block, we'll initialize the Web3Auth SDK and check whether the user has any
-Web3Auth session persisted or not. If the user is already authenticated, you can route them directly
-to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. For
-checking, if user is already authenticated, we can check whether private key is empty or not.
+In the below code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. For checking, if user is already authenticated, we can check whether private key is empty or not.
 
-By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter
-during initialization.
+By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter during initialization.
 
 > Note: Note: The session can be persisted only for 30 days max
 
@@ -107,11 +94,7 @@ val isUserAuthenticated = web3Auth.getPrivkey().isNotEmpty()
 
 ## Get User Info
 
-After logging in, the Web3Auth instance will provide you with information regarding the user that is
-logged in. This information is obtained directly from the JWT token and is not stored by Web3Auth.
-Therefore, this information can only be accessed through social logins after the user has logged
-into your application. You can get the user information using `getUserInfo` function. The function
-will throw error in case if user is not authenticated.
+After logging in, the Web3Auth instance will provide you with information regarding the user that is logged in. This information is obtained directly from the JWT token and is not stored by Web3Auth. Therefore, this information can only be accessed through social logins after the user has logged into your application. You can get the user information using `getUserInfo` function. The function will throw error in case if user is not authenticated.
 
 ```kotlin
 try {
@@ -124,10 +107,7 @@ try {
 
 ## Get Account
 
-We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana
-ecosystem. In the below code block, we'll use the Ed25519 private key to retive user's public
-address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to
-sign the Solana transactions.
+We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retive user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
 
 ```kotlin
 val ed25519PrivateKey = web3Auth.getEd25519PrivKey()
@@ -139,10 +119,7 @@ val userAccount = solanaKeyPair.publicKey.toBase58()
 
 ## Get User balance
 
-Once we have retrived userAccount, we can use it to fetch user balance. We'll use `getBalance`
-method from `Connection` instance to interact with Solana cluster and fetch user balance. The
-response of `getBalance` is BigInteger, we will need to divide it by by 10^9, because Solana's token
-decimals is 9.
+Once we have retrived userAccount, we can use it to fetch user balance. We'll use `getBalance` method from `Connection` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is BigInteger, we will need to divide it by by 10^9, because Solana's token decimals is 9.
 
 ```kotlin
 try {
@@ -162,10 +139,7 @@ try {
 
 ## Sign Transaction
 
-Let's now go through how can we sign the transaction. In the below codeblock, we'll create a new
-function `prepareSignedTransaction` which can be used to retrive the Base58 signature as well as
-broadcast transaction to the cluster. We'll use `TransferInstruction` to create the transaction to
-self transfer 0.01 Sol and sign it.
+Let's now go through how can we sign the transaction. In the below codeblock, we'll create a new function `prepareSignedTransaction` which can be used to retrive the Base58 signature as well as broadcast transaction to the cluster. We'll use `TransferInstruction` to create the transaction to self transfer 0.01 Sol and sign it.
 
 ```kotlin
 private suspend fun prepareSignedTransaction(sender: Keypair) : Transaction = withContext(Dispatchers.IO) {
@@ -183,8 +157,7 @@ private suspend fun prepareSignedTransaction(sender: Keypair) : Transaction = wi
 }
 ```
 
-Once we have created `prepareSignedTransaction` function, we'll use it to prepare, sign the
-transaction, and serialize it to get Base58 signature.
+Once we have created `prepareSignedTransaction` function, we'll use it to prepare, sign the transaction, and serialize it to get Base58 signature.
 
 ```kotlin
  try {
@@ -198,8 +171,7 @@ transaction, and serialize it to get Base58 signature.
 
 ## Send Transaction
 
-For the send transaction, we'll use `sendTransaction` method from `Connection` instance to broadcast
-the result of `prepareSignedTransaction` to the cluster.
+For the send transaction, we'll use `sendTransaction` method from `Connection` instance to broadcast the result of `prepareSignedTransaction` to the cluster.
 
 ```kotlin
  try {

@@ -1,26 +1,25 @@
 ---
 title: useWalletServicesPlugin
 sidebar_label: useWalletServicesPlugin
-description: "@web3auth/modal React Hooks useWalletServicesPlugin | Documentation - Web3Auth"
+description: '@web3auth/modal React Hooks useWalletServicesPlugin | Embedded Wallets'
 ---
 
-Hook to access the Wallet Services Plugin context, enabling wallet-related features such as
-WalletConnect, Checkout, Swap, and Wallet UI.
+Hook to access the Wallet Services Plugin context, enabling wallet-related features such as WalletConnect, Checkout, Swap, and Wallet UI.
 
 ### Import
 
 ```tsx
-import { useWalletServicesPlugin } from "@web3auth/modal/react";
+import { useWalletServicesPlugin } from '@web3auth/modal/react'
 ```
 
 ### Usage
 
 ```tsx
-import { useWalletServicesPlugin } from "@web3auth/modal/react";
+import { useWalletServicesPlugin } from '@web3auth/modal/react'
 
 function WalletServicesExample() {
   const { isPluginConnected, showWalletConnectScanner, showCheckout, showWalletUI } =
-    useWalletServicesPlugin();
+    useWalletServicesPlugin()
 
   return (
     <div>
@@ -34,14 +33,14 @@ function WalletServicesExample() {
         Show Wallet UI
       </button>
     </div>
-  );
+  )
 }
 ```
 
 ### Return Type
 
 ```tsx
-import { type IWalletServicesContext } from "@web3auth/modal/react";
+import { type IWalletServicesContext } from '@web3auth/modal/react'
 ```
 
 #### isPluginConnected
@@ -54,19 +53,16 @@ Whether the Wallet Services Plugin is connected and ready to use.
 
 `(showWalletConnectParams?: BaseEmbedControllerState["showWalletConnect"]) => Promise<void>`
 
-Shows the WalletConnect QR scanner. Accepts optional parameters for customizing the scanner
-behavior.
+Shows the WalletConnect QR scanner. Accepts optional parameters for customizing the scanner behavior.
 
 #### showCheckout
 
 `(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
 
-Shows the TopUp modal for fiat-to-crypto checkout. Accepts optional parameters for customizing the
-checkout experience.
+Shows the TopUp modal for fiat-to-crypto checkout. Accepts optional parameters for customizing the checkout experience.
 
 #### showWalletUI
 
 `(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
 
-Shows the Wallet Services modal UI. Accepts optional parameters for customizing the wallet UI
-experience.
+Shows the Wallet Services modal UI. Accepts optional parameters for customizing the wallet UI experience.

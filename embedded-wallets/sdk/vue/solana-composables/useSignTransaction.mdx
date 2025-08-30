@@ -1,40 +1,40 @@
 ---
 title: useSignTransaction
 sidebar_label: useSignTransaction
-description: "@web3auth/modal Vue Composable useSignTransaction | Documentation - Web3Auth"
+description: '@web3auth/modal Vue Composable useSignTransaction | Embedded Wallets'
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 Composable to sign a Solana transaction using the connected wallet from Web3Auth.
 
 ### Import
 
 ```ts
-import { useSignTransaction } from "@web3auth/modal/vue/solana";
+import { useSignTransaction } from '@web3auth/modal/vue/solana'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { ref } from "vue";
-  import { useSignTransaction } from "@web3auth/modal/vue/solana";
-  import { Transaction } from "@solana/web3.js";
+  import { ref } from 'vue'
+  import { useSignTransaction } from '@web3auth/modal/vue/solana'
+  import { Transaction } from '@solana/web3.js'
 
-  const transaction = ref<Transaction | null>(null); // Your transaction object
-  const { signTransaction, loading, error, data } = useSignTransaction();
+  const transaction = ref<Transaction | null>(null) // Your transaction object
+  const { signTransaction, loading, error, data } = useSignTransaction()
 
   const handleSign = async () => {
-    if (!transaction.value) return;
+    if (!transaction.value) return
     try {
-      await signTransaction(transaction.value);
+      await signTransaction(transaction.value)
       // Do something with data.value (signed transaction)
     } catch (e) {
       // Handle error
     }
-  };
+  }
 </script>
 
 <template>
@@ -52,11 +52,11 @@ import { useSignTransaction } from "@web3auth/modal/vue/solana";
 
 ```ts
 export type IUseSignTransaction = {
-  loading: Ref<boolean>;
-  error: Ref<Web3AuthError | null>;
-  data: Ref<string | null>;
-  signTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>;
-};
+  loading: Ref<boolean>
+  error: Ref<Web3AuthError | null>
+  data: Ref<string | null>
+  signTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+}
 ```
 
 #### loading
@@ -87,39 +87,39 @@ Function to sign a Solana transaction. Returns the signed transaction as a strin
 
 ```html
 <script setup lang="ts">
-  import { LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
-  import { useSolanaWallet, useSignTransaction } from "@web3auth/modal/vue/solana";
+  import { LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from '@solana/web3.js'
+  import { useSolanaWallet, useSignTransaction } from '@web3auth/modal/vue/solana'
 
   const {
     data: signedTransaction,
     error,
     loading: isPending,
     signTransaction,
-  } = useSignTransaction();
-  const { accounts, connection } = useSolanaWallet();
+  } = useSignTransaction()
+  const { accounts, connection } = useSolanaWallet()
 
   async function submit(event: Event) {
-    event.preventDefault();
-    const formData = new FormData(event.target as HTMLFormElement);
-    const to = formData.get("address") as string;
-    const value = formData.get("value") as string;
+    event.preventDefault()
+    const formData = new FormData(event.target as HTMLFormElement)
+    const to = formData.get('address') as string
+    const value = formData.get('value') as string
 
-    if (!connection.value || !accounts.value || accounts.value.length === 0) return;
+    if (!connection.value || !accounts.value || accounts.value.length === 0) return
 
-    const block = await connection.value.getLatestBlockhash();
+    const block = await connection.value.getLatestBlockhash()
     const TransactionInstruction = SystemProgram.transfer({
       fromPubkey: new PublicKey(accounts.value[0]),
       toPubkey: new PublicKey(to),
       lamports: Number(value) * LAMPORTS_PER_SOL,
-    });
+    })
 
     const transaction = new Transaction({
       blockhash: block.blockhash,
       lastValidBlockHeight: block.lastValidBlockHeight,
       feePayer: new PublicKey(accounts.value[0]),
-    }).add(TransactionInstruction);
+    }).add(TransactionInstruction)
 
-    signTransaction(transaction);
+    signTransaction(transaction)
   }
 </script>
 

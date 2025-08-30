@@ -1,7 +1,7 @@
 ---
 title: useCheckout
 sidebar_label: useCheckout
-description: "@web3auth/modal Vue Composable useCheckout | Documentation - Web3Auth"
+description: '@web3auth/modal Vue Composable useCheckout | Embedded Wallets'
 ---
 
 Composable to show the cryptocurrency checkout modal using Wallet Services Plugin.
@@ -9,16 +9,16 @@ Composable to show the cryptocurrency checkout modal using Wallet Services Plugi
 ### Import
 
 ```ts
-import { useCheckout } from "@web3auth/modal/vue";
+import { useCheckout } from '@web3auth/modal/vue'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { useCheckout } from "@web3auth/modal/vue";
+  import { useCheckout } from '@web3auth/modal/vue'
 
-  const { showCheckout, loading, error } = useCheckout();
+  const { showCheckout, loading, error } = useCheckout()
 </script>
 
 <template>
@@ -32,7 +32,7 @@ import { useCheckout } from "@web3auth/modal/vue";
 ### Return Type
 
 ```ts
-import { type IUseCheckout } from "@web3auth/modal/vue";
+import { type IUseCheckout } from '@web3auth/modal/vue'
 ```
 
 #### loading
@@ -51,5 +51,4 @@ Error that occurred during the checkout process.
 
 `(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
 
-Function to initiate the checkout modal. Optional `showCheckoutParams` can be passed to customize
-the modal.
+Function to initiate the checkout modal. Optional `showCheckoutParams` can be passed to customize the modal.

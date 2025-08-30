@@ -475,7 +475,22 @@ const sidebar = {
         "sdk/android/advanced/dapp-share",
       ],
     },
-    "sdk/android/usage",
+    {
+      type: "category",
+      label: "Functions",
+      items: [
+        "sdk/android/functions/README",
+        "sdk/android/functions/login",
+        "sdk/android/functions/getUserInfo",
+        "sdk/android/functions/getPrivKey",
+        "sdk/android/functions/getEd25519PrivKey",
+        "sdk/android/functions/logout",
+        "sdk/android/functions/enableMFA",
+        "sdk/android/functions/manageMFA",
+        "sdk/android/functions/launchWalletServices",
+        "sdk/android/functions/request",
+      ],
+    },
     "sdk/android/examples",
     {
       type: "link",

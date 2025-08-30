@@ -1,7 +1,7 @@
 ---
 title: useWeb3AuthUser
 sidebar_label: useWeb3AuthUser
-description: "@web3auth/modal React Hooks useWeb3AuthUser | Documentation - Web3Auth"
+description: '@web3auth/modal React Hooks useWeb3AuthUser | Embedded Wallets'
 ---
 
 Hook to fetch and manage the current Web3Auth user information.
@@ -9,38 +9,38 @@ Hook to fetch and manage the current Web3Auth user information.
 ### Import
 
 ```tsx
-import { useWeb3AuthUser } from "@web3auth/modal/react";
+import { useWeb3AuthUser } from '@web3auth/modal/react'
 ```
 
 ### Usage
 
 ```tsx
-import { useWeb3AuthUser } from "@web3auth/modal/react";
+import { useWeb3AuthUser } from '@web3auth/modal/react'
 
 function UserInfo() {
-  const { userInfo, loading, error, isMFAEnabled, getUserInfo } = useWeb3AuthUser();
+  const { userInfo, loading, error, isMFAEnabled, getUserInfo } = useWeb3AuthUser()
 
-  if (loading) return <div>Loading user info...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-  if (!userInfo) return <div>No user info available.</div>;
+  if (loading) return <div>Loading user info...</div>
+  if (error) return <div>Error: {error.message}</div>
+  if (!userInfo) return <div>No user info available.</div>
 
   return (
     <>
-    <div>
-      <pre>{JSON.stringify(userInfo, null, 2)}</pre>
-      <div>MFA Enabled: {isMFAEnabled ? "Yes" : "No"}</div>
-      <button onClick={() => getUserInfo()}>Refresh User Info</button>
-    </div>
-    {error && <div>{error.message}</div>}
+      <div>
+        <pre>{JSON.stringify(userInfo, null, 2)}</pre>
+        <div>MFA Enabled: {isMFAEnabled ? 'Yes' : 'No'}</div>
+        <button onClick={() => getUserInfo()}>Refresh User Info</button>
+      </div>
+      {error && <div>{error.message}</div>}
     </>
-  );
+  )
 }
 ```
 
 ### Return Type
 
 ```tsx
-import { type IUseWeb3AuthUser } from "@web3auth/modal/react";
+import { type IUseWeb3AuthUser } from '@web3auth/modal/react'
 ```
 
 #### loading

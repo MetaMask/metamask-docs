@@ -1,23 +1,22 @@
 ---
 title: Initializing PnP Unreal Engine SDK
 sidebar_label: Initialize
-description: "Web3Auth PnP Unreal Engine SDK - Initialize | Documentation - Web3Auth"
+description: 'Web3Auth PnP Unreal Engine SDK - Initialize | Embedded Wallets'
 ---
 
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
-import unrealInitialization from "@site/static/img/unreal/unreal-w3a-init.png";
-import unrealExample from "@site/static/img/unreal/unreal-usage.png";
+import unrealInitialization from '@site/static/img/unreal/unreal-w3a-init.png'
+import unrealExample from '@site/static/img/unreal/unreal-usage.png'
 
-After Installation, the next step to using Web3Auth is to Initialize the SDK. However, In Unreal,
-the Initialization happens through the blueprint.
+After Installation, the next step to using Web3Auth is to Initialize the SDK. However, In Unreal, the Initialization happens through the blueprint.
 
 ## Web3Auth Initialization Blueprint
 
 <img
   src={unrealInitialization}
-  style={{ alignSelf: "center", maxWidth: "100%" }}
+  style={{ alignSelf: 'center', maxWidth: '100%' }}
   alt="web3auth unreal initialization"
 />
 
@@ -25,8 +24,7 @@ the Initialization happens through the blueprint.
 
 #### `Web3AuthOptions`
 
-The Web3Auth Constructor takes a class `Web3AuthOptions` as input. This class has the following
-arguments.
+The Web3Auth Constructor takes a class `Web3AuthOptions` as input. This class has the following arguments.
 
 <Tabs
   defaultValue="table"
@@ -38,17 +36,17 @@ arguments.
 
 <TabItem value="table">
 
-| Parameter         | Description                                                                                                                                                          |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`        | Your Web3Auth Client ID. You can get it from Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `FString`    |
-| `network`         | Defines the Web3Auth Network. It's a mandatory field of type Network.                                                                                                |
-| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type `FString`.                                 |
-| `whiteLabel?`     | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `FWhiteLabelData` as a value.                |
-| `loginConfig?`    | Login config for the custom verifiers. It takes `TMap<FString, FLoginConfigItem>` as a value.                                                                        |
-| `useCoreKitKey?`  | Use CoreKit Key to get core kit key. It's an optional field with default value as `false`.                                                                           |
-| `chainNamespace?` | Chain Namespace [`EIP155` and `SOLANA`]. It takes `FChainNamespace` as a value.                                                                                      |
-| `mfaSettings?`    | Allows developers to configure the Mfa settings for authentication. It takes `FMfaSettings` as a value.                                                              |
-| `sessionTime?`    | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days |
+| Parameter | Description |
+| --- | --- |
+| `clientId` | Your Web3Auth Client ID. You can get it from Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `FString` |
+| `network` | Defines the Web3Auth Network. It's a mandatory field of type Network. |
+| `redirectUrl` | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type `FString`. |
+| `whiteLabel?` | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `FWhiteLabelData` as a value. |
+| `loginConfig?` | Login config for the custom verifiers. It takes `TMap<FString, FLoginConfigItem>` as a value. |
+| `useCoreKitKey?` | Use CoreKit Key to get core kit key. It's an optional field with default value as `false`. |
+| `chainNamespace?` | Chain Namespace [`EIP155` and `SOLANA`]. It takes `FChainNamespace` as a value. |
+| `mfaSettings?` | Allows developers to configure the Mfa settings for authentication. It takes `FMfaSettings` as a value. |
+| `sessionTime?` | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days |
 
 </TabItem>
 
@@ -124,12 +122,10 @@ enum class FNetwork : uint8
 
 ## Usage
 
-The following is the graph to set Web3Auth actor configuration. The graph currently uses string
-values to add parameters to blueprint blocks, but you can connect the values coming from different
-UI components.
+The following is the graph to set Web3Auth actor configuration. The graph currently uses string values to add parameters to blueprint blocks, but you can connect the values coming from different UI components.
 
 <img
   src={unrealExample}
-  style={{ alignSelf: "center", maxWidth: "100%" }}
+  style={{ alignSelf: 'center', maxWidth: '100%' }}
   alt="unreal example blueprint"
 />

@@ -1,7 +1,7 @@
 ---
 title: useSignAndSendTransaction
 sidebar_label: useSignAndSendTransaction
-description: "@web3auth/modal React Hook useSignAndSendTransaction | Documentation - Web3Auth"
+description: '@web3auth/modal React Hook useSignAndSendTransaction | Embedded Wallets'
 ---
 
 Hook to sign and send a Solana transaction using the connected Solana wallet from Web3Auth.
@@ -9,40 +9,40 @@ Hook to sign and send a Solana transaction using the connected Solana wallet fro
 ### Import
 
 ```tsx
-import { useSignAndSendTransaction } from "@web3auth/modal/react/solana";
+import { useSignAndSendTransaction } from '@web3auth/modal/react/solana'
 ```
 
 ### Usage
 
 ```tsx
-import { useSignAndSendTransaction } from "@web3auth/modal/react/solana";
-import { TransactionOrVersionedTransaction } from "@web3auth/modal";
+import { useSignAndSendTransaction } from '@web3auth/modal/react/solana'
+import { TransactionOrVersionedTransaction } from '@web3auth/modal'
 
 function SignAndSendTransactionButton({
   transaction,
 }: {
-  transaction: TransactionOrVersionedTransaction;
+  transaction: TransactionOrVersionedTransaction
 }) {
-  const { signAndSendTransaction, loading, error, data } = useSignAndSendTransaction();
+  const { signAndSendTransaction, loading, error, data } = useSignAndSendTransaction()
 
   const handleSignAndSend = async () => {
     try {
-      const signature = await signAndSendTransaction(transaction);
+      const signature = await signAndSendTransaction(transaction)
       // Do something with signature
     } catch (e) {
       // Handle error
     }
-  };
+  }
 
   return (
     <div>
       <button onClick={handleSignAndSend} disabled={loading}>
-        {loading ? "Signing & Sending..." : "Sign & Send Transaction"}
+        {loading ? 'Signing & Sending...' : 'Sign & Send Transaction'}
       </button>
       {error && <div>Error: {error.message}</div>}
       {data && <div>Signature: {data}</div>}
     </div>
-  );
+  )
 }
 ```
 
@@ -50,11 +50,11 @@ function SignAndSendTransactionButton({
 
 ```ts
 export type IUseSignAndSendTransaction = {
-  loading: boolean;
-  error: Web3AuthError | null;
-  data: string | null;
-  signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>;
-};
+  loading: boolean
+  error: Web3AuthError | null
+  data: string | null
+  signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+}
 ```
 
 #### loading
@@ -84,15 +84,15 @@ Function to sign and send a transaction. Returns the transaction signature as a 
 ## Example
 
 ```tsx title="sendVersionedTransaction.tsx"
-import { FormEvent } from "react";
-import { useSolanaWallet, useSignAndSendTransaction } from "@web3auth/modal/react/solana";
+import { FormEvent } from 'react'
+import { useSolanaWallet, useSignAndSendTransaction } from '@web3auth/modal/react/solana'
 import {
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
   TransactionMessage,
   VersionedTransaction,
-} from "@solana/web3.js";
+} from '@solana/web3.js'
 
 export function SendVersionedTransaction() {
   const {
@@ -100,30 +100,30 @@ export function SendVersionedTransaction() {
     error,
     loading: isPending,
     signAndSendTransaction,
-  } = useSignAndSendTransaction();
-  const { accounts, connection } = useSolanaWallet();
+  } = useSignAndSendTransaction()
+  const { accounts, connection } = useSolanaWallet()
 
   async function submit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const to = formData.get("address") as string;
-    const value = formData.get("value") as string;
+    e.preventDefault()
+    const formData = new FormData(e.target as HTMLFormElement)
+    const to = formData.get('address') as string
+    const value = formData.get('value') as string
 
-    const block = await connection!.getLatestBlockhash();
+    const block = await connection!.getLatestBlockhash()
     const TransactionInstruction = SystemProgram.transfer({
       fromPubkey: new PublicKey(accounts![0]),
       toPubkey: new PublicKey(to),
       lamports: Number(value) * LAMPORTS_PER_SOL,
-    });
+    })
 
     const transactionMessage = new TransactionMessage({
       recentBlockhash: block.blockhash,
       instructions: [TransactionInstruction],
       payerKey: new PublicKey(accounts![0]),
-    });
+    })
 
-    const transaction = new VersionedTransaction(transactionMessage.compileToV0Message());
-    signAndSendTransaction(transaction);
+    const transaction = new VersionedTransaction(transactionMessage.compileToV0Message())
+    signAndSendTransaction(transaction)
   }
 
   return (
@@ -133,12 +133,12 @@ export function SendVersionedTransaction() {
         <input name="address" placeholder="Address" required />
         <input name="value" placeholder="Amount (SOL)" type="number" step="0.01" required />
         <button disabled={isPending} type="submit">
-          {isPending ? "Confirming..." : "Send"}
+          {isPending ? 'Confirming...' : 'Send'}
         </button>
       </form>
       {hash && <div>Transaction Hash: {hash}</div>}
       {error && <div>Error: {error.message}</div>}
     </div>
-  );
+  )
 }
 ```

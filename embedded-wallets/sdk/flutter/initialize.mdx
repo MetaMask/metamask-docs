@@ -1,11 +1,11 @@
 ---
-title: Initializing PnP Flutter SDK
+title: Initializing
 sidebar_label: Initialize
-description: "Web3Auth PnP Flutter SDK - Initialization | Documentation - Web3Auth"
+description: 'Web3Auth Flutter SDK - Initialization | Embedded Wallets'
 ---
 
-import TabItem from "@theme/TabItem";
-import Tabs from "@theme/Tabs";
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
 After installation, the next step to use Web3Auth is to configure & initialize the SDK.
 
@@ -17,14 +17,11 @@ However, configuring & initializing is a three-step process:
 
 ## Configure Web3Auth instance
 
-Please note that these are the most critical steps where you need to pass on different parameters
-according to the preference of your project. Additionally, Whitelabeling and Custom Authentication
-have to be configured within this step, if you wish to customize your Web3Auth Instance.
+Please note that these are the most critical steps where you need to pass on different parameters according to the preference of your project. Additionally, Whitelabeling and Custom Authentication have to be configured within this step, if you wish to customize your Web3Auth Instance.
 
 ### Parameters
 
-The `init` method takes an object called `Web3AuthOptions` as input to configure the Web3Auth
-instance.
+The `init` method takes an object called `Web3AuthOptions` as input to configure the Web3Auth instance.
 
 <Tabs
   defaultValue="table"
@@ -36,17 +33,17 @@ instance.
 
 <TabItem value="table">
 
-| Parameter         | Description                                                                                                                                                                                                                                 |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`        | Your Web3Auth Client ID. You can get it from Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `String`                                                                            |
-| `network`         | Web3Auth Network, `sapphire_mainnet`, `sapphire_devnet`, `mainnet`, `cyan`, `aqua` or `testnet`. It's a mandatory field of type [Network](https://pub.dev/documentation/web3auth_flutter/latest/enums/Network.html).                        |
-| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type [Uri](https://api.dart.dev/stable/2.18.0/dart-core/Uri-class.html).                                               |
-| `whiteLabel?`     | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes [WhiteLabelData](https://pub.dev/documentation/web3auth_flutter/latest/input/WhiteLabelData-class.html) as a value. |
-| `loginConfig?`    | Login config for the custom verifiers. It takes `HashMap<String, LoginConfigItem>` as a value.                                                                                                                                              |
-| `useCoreKitKey?`  | Use CoreKit Key to get core kit key. It's an optional field with default value as `false`.                                                                                                                                                  |
-| `chainNamespace?` | Chain Namespace [`eip155` and `solana`]. It takes [ChainNamespace](https://pub.dev/documentation/web3auth_flutter/latest/enums/ChainNamespace.html) as a value.                                                                             |
-| `mfaSettings?`    | Allows developers to configure the Mfa settings for authentication. It takes [MfaSettings](https://pub.dev/documentation/web3auth_flutter/latest/input/MfaSettings-class.html) as a value.                                                  |
-| `sessionTime?`    | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days                                                                        |
+| Parameter | Description |
+| --- | --- |
+| `clientId` | Your Web3Auth Client ID. You can get it from Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `String` |
+| `network` | Web3Auth Network, `sapphire_mainnet`, `sapphire_devnet`, `mainnet`, `cyan`, `aqua` or `testnet`. It's a mandatory field of type [Network](https://pub.dev/documentation/web3auth_flutter/latest/enums/Network.html). |
+| `redirectUrl` | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type [Uri](https://api.dart.dev/stable/2.18.0/dart-core/Uri-class.html). |
+| `whiteLabel?` | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes [WhiteLabelData](https://pub.dev/documentation/web3auth_flutter/latest/input/WhiteLabelData-class.html) as a value. |
+| `loginConfig?` | Login config for the custom verifiers. It takes `HashMap<String, LoginConfigItem>` as a value. |
+| `useCoreKitKey?` | Use CoreKit Key to get core kit key. It's an optional field with default value as `false`. |
+| `chainNamespace?` | Chain Namespace [`eip155` and `solana`]. It takes [ChainNamespace](https://pub.dev/documentation/web3auth_flutter/latest/enums/ChainNamespace.html) as a value. |
+| `mfaSettings?` | Allows developers to configure the Mfa settings for authentication. It takes [MfaSettings](https://pub.dev/documentation/web3auth_flutter/latest/input/MfaSettings-class.html) as a value. |
+| `sessionTime?` | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days |
 
 </TabItem>
 
@@ -130,13 +127,9 @@ Future<void> initWeb3Auth() async {
 
 ## Triggering Login exceptions
 
-The `setCustomTabsClosed` method can be used to trigger login exceptions for Android. For iOS, you
-don't need this method to trigger the login exceptions. The Android SDK uses the custom tabs and
-from current implementation of chrome custom tab, it's not possible to add a listener directly to
-chrome custom tab close button and trigger login exceptions.
+The `setCustomTabsClosed` method can be used to trigger login exceptions for Android. For iOS, you don't need this method to trigger the login exceptions. The Android SDK uses the custom tabs and from current implementation of chrome custom tab, it's not possible to add a listener directly to chrome custom tab close button and trigger login exceptions.
 
-Hence, it's necessary to use `setCustomTabsClosed` method in your login screen to trigger
-exceptions.
+Hence, it's necessary to use `setCustomTabsClosed` method in your login screen to trigger exceptions.
 
 ```dart
 class LoginScreen extends State<T> with WidgetsBindingObserver {
@@ -173,13 +166,9 @@ class LoginScreen extends State<T> with WidgetsBindingObserver {
 
 ## Initialize Web3Auth
 
-After configuring Web3Auth, the next step is to initialize it using the `initialize` method. This
-method is essential for setting up the SDK, checking for any active sessions, and fetching the
-whitelabel configuration from your dashboard.
+After configuring Web3Auth, the next step is to initialize it using the `initialize` method. This method is essential for setting up the SDK, checking for any active sessions, and fetching the whitelabel configuration from your dashboard.
 
-Once the `initialize` method executes successfully, you can use the `getPrivKey` or
-`getEd25519PrivKey` methods to verify if an active session exists. If there is no active session,
-these methods will return an empty string; otherwise, they will return the respective private key.
+Once the `initialize` method executes successfully, you can use the `getPrivKey` or `getEd25519PrivKey` methods to verify if an active session exists. If there is no active session, these methods will return an empty string; otherwise, they will return the respective private key.
 
 Note that if the API call to fetch the project configuration fails, the method will throw an error.
 
