@@ -1,0 +1,19 @@
+---
+title: Secp256k1 Private Key
+sidebar_label: getPrivKey
+description: 'Web3Auth Flutter SDK - getPrivKey Function | Embedded Wallets'
+---
+
+To retrieve the secp256k1 private key of the user., use `getPrivkey` method. The method returns an EVM compatible private key which can be used to sign transactions on EVM compatible chains.
+
+## Usage
+
+```dart
+final privateKey = await Web3AuthFlutter.getPrivKey();
+```
+
+:::note
+
+Web3Auth supports two widely used cryptographic curves, Secp256k1 and Ed25519, making it chain-agnostic and compatible with multiple blockchain networks. [Learn more about how to connect different blockchains](/embedded-wallets/connect-blockchain).
+
+:::

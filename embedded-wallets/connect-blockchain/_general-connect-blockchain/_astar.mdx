@@ -1,0 +1,38 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x250
+- Public RPC URL: https://evm.astar.network (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: Astar
+- Block Explorer Link: https://astar.subscan.io
+- Ticker: ASTR
+- Ticker Name: Astar
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x24f
+- Public RPC URL: https://evm.shibuya.astar.network (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: Shibuya Testnet
+- Block Explorer Link: https://shibuya.subscan.io
+- Ticker: SBY
+- Ticker Name: Shibuya
+
+</TabItem>
+</Tabs>

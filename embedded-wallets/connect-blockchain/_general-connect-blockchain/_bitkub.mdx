@@ -1,0 +1,38 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x60 (hex of 96)
+- Public RPC URL: https://rpc.bitkubchain.io (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: BitKub
+- Block Explorer Link: https://www.bkcscan.com
+- Ticker: KUB
+- Ticker Name: KUB
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x6545 (hex of 25925)
+- Public RPC URL: https://rpc-testnet.bitkubchain.io (Avoid using public rpcTarget in production,
+  use services like Infura)
+- Display Name: BitKub Testnet
+- Block Explorer Link: https://testnet.bkcscan.com
+- Ticker: tKUB
+- Ticker Name: tKUB
+
+</TabItem>
+</Tabs>

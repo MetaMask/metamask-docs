@@ -1,0 +1,38 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x1
+- Public RPC URL: https://rpc.ankr.com/eth (Avoid using public rpcTarget in production, use services
+  like Infura)
+- Display Name: Ethereum Mainnet
+- Block Explorer Link: https://etherscan.io
+- Ticker: ETH
+- Ticker Name: Ethereum
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x5
+- Public RPC URL: https://rpc.ankr.com/eth_goerli (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: Ethereum Goerli Testnet
+- Block Explorer Link: https://goerli.etherscan.io
+- Ticker: ETH
+- Ticker Name: Ethereum
+
+</TabItem>
+</Tabs>

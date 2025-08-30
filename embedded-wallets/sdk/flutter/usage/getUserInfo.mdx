@@ -1,0 +1,33 @@
+---
+title: Retrieve User Information
+sidebar_label: getUserInfo
+description: 'Web3Auth Flutter SDK - getUserInfo Function | Embedded Wallets'
+---
+
+You can use the `getUserInfo` method to retrieve various details about the user, such as their login type, whether multi-factor authentication (MFA) is enabled, profile image, name, and other relevant information.
+
+## Usage
+
+```dart
+final userInfo = Web3AuthFlutter.getUserInfo();
+```
+
+## UserInfo Response
+
+```json
+{
+  "userInfo": {
+    "email": "w3a-heroes@web3auth.com",
+    "name": "Web3Auth Heroes",
+    "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
+    "verifier": "torus",
+    "verifierId": "w3a-heroes@web3auth.com",
+    "typeOfLogin": "google",
+    "dappShare": "",
+    "idToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFjZjQ4Y...",
+    "oAuthIdToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjFjZjQ4Y...",
+    "oAuthAccessToken": "ya29.a0Aa4xrXMmY_0S6s...",
+    "isMfaEnabled": false
+  }
+}
+```

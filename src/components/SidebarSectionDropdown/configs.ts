@@ -5,7 +5,7 @@ export const SERVICES_DASHBOARD_CONFIG: SidebarSectionDropdownProps = {
     {
       key: 'services',
       label: 'Services',
-      title: 'Services docs',
+      title: 'Services',
       description: 'Use high performance APIs provided by Infura',
       path: '/services/',
       pathPattern: '/services',
@@ -13,7 +13,7 @@ export const SERVICES_DASHBOARD_CONFIG: SidebarSectionDropdownProps = {
     {
       key: 'dashboard',
       label: 'Dashboard',
-      title: 'Developer dashboard docs',
+      title: 'Developer dashboard',
       description: 'Manage keys, monitor usage, and access account info',
       path: '/developer-tools/dashboard/',
       pathPattern: '/developer-tools/dashboard',
@@ -28,7 +28,7 @@ export const SDK_WALLET_CONFIG: SidebarSectionDropdownProps = {
     {
       key: 'sdk',
       label: 'SDK',
-      title: 'MetaMask SDK docs',
+      title: 'MetaMask SDK',
       description: 'Connect to MetaMask extension and mobile',
       path: '/sdk/',
       pathPattern: '/sdk',
@@ -36,7 +36,7 @@ export const SDK_WALLET_CONFIG: SidebarSectionDropdownProps = {
     {
       key: 'wallet',
       label: 'Wallet API',
-      title: 'Wallet API docs',
+      title: 'Wallet API',
       description: 'Connect to MetaMask extension only',
       path: '/wallet/',
       pathPattern: '/wallet',
@@ -47,12 +47,12 @@ export const SDK_WALLET_CONFIG: SidebarSectionDropdownProps = {
 }
 
 export const SNAPS_CONFIG: SidebarStaticTitleProps = {
-  title: 'Snaps docs',
+  title: 'Snaps',
   pathPattern: '/snaps',
 }
 
 export const DELEGATION_TOOLKIT_CONFIG: SidebarStaticTitleProps = {
-  title: 'Delegation Toolkit docs',
+  title: 'Delegation Toolkit',
   pathPattern: '/delegation-toolkit',
 }
 

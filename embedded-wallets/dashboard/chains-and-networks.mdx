@@ -1,0 +1,53 @@
+---
+title: Chains and Networks
+sidebar_label: Chains and Networks
+image: 'img/docs-meta-cards/documentation-card.png'
+description: 'Configure blockchain networks in Web3Auth Dashboard | Embedded Wallets'
+---
+
+import ChainsAndNetworks from '@site/static/img/w3a-dashboard/chains-and-networks.png'
+
+Web3Auth simplifies blockchain configuration with a no-code approach to managing chains and networks directly from the dashboard. Developers can enable or disable mainnet and testnet networks with a single click—no need to write or manage chain-related code within the SDK.
+
+The interface offers an extensive list of popular blockchains including Ethereum, Arbitrum, Avalanche, Base, and more. Custom networks can also be added effortlessly by filling in essential details like Chain ID, Currency Symbol, Block Explorer URL, and Namespace.
+
+This intuitive setup ensures seamless integration and flexibility, allowing developers to focus on building without worrying about manual chain configuration.
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={ChainsAndNetworks}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Chains and Networks"
+  />
+</div>
+
+## Supported Networks
+
+The dashboard provides pre-configured support for major blockchain networks including:
+
+- **Ethereum** (Mainnet and Sepolia testnet)
+- **Arbitrum** (One and Sepolia testnet)
+- **Avalanche** (C-Chain and Fuji testnet)
+- **Base** (Mainnet and Sepolia testnet)
+- **Polygon** (Mainnet and Amoy testnet)
+- **Optimism** (Mainnet and Sepolia testnet)
+- **BNB Smart Chain** (Mainnet and testnet)
+
+And many more...
+
+## Adding Custom Networks
+
+For networks not included in the pre-configured list, developers can add custom blockchain networks by providing:
+
+- **Chain ID**: The unique identifier for the blockchain network
+- **Currency Symbol**: The native token symbol (e.g., ETH, MATIC, AVAX)
+- **Block Explorer URL**: The base URL for the network's block explorer
+- **Namespace**: The blockchain namespace (typically "eip155" for EVM-compatible chains)
+- **RPC URL**: The endpoint for interacting with the blockchain network
+
+## Network Configuration Benefits
+
+- **No SDK Changes Required**: Network configurations are handled entirely through the dashboard
+- **Instant Updates**: Changes take effect immediately without requiring code deployments
+- **Environment-Specific Settings**: Different network configurations for development and production
+- **Testnet Support**: Easy switching between mainnet and testnet environments for development

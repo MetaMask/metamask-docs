@@ -1,0 +1,48 @@
+---
+title: Android SDK - v6 to v6.1
+description: 'Android SDK - v6 to v6.1 | Embedded Wallets'
+sidebar_label: v6 to v6.1
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+# Migration Guide from v6 to v6.1 for Web3Auth Android SDK
+
+## Overview
+
+This migration guide provides steps for upgrading from version 6(v6) to version 6.1(v6.1) of the Web3Auth Android SDK. The guide outlines the introduction of new `request` method.
+
+## Changes in Detail
+
+### `request` method
+
+Now, developers can use the `request` method to use the templated transaction confirmation screens for signing transactions. To retrive the signature for the request, developers can use the `getSignResponse` static method.
+
+```kotlin title="Usage"
+val params = JsonArray().apply {
+    add("Hello, World!")
+    add("<User's Hex address>")
+    add("Android")
+}
+
+// focus-start
+val signMsgCompletableFuture = web3Auth.request(
+    loginParams = LoginParams(
+        selectedLoginProvider,
+        extraLoginOptions = null,
+        mfaLevel = MFALevel.NONE,
+    ),
+    "personal_sign",
+    requestParams = params
+)
+// focus-end
+
+signMsgCompletableFuture.whenComplete { _, error ->
+    if (error == null) {
+        Log.d("MainActivity_Web3Auth", "Message signed successfully")
+    } else {
+        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+    }
+}
+```

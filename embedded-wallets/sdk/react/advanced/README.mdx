@@ -1,0 +1,41 @@
+---
+title: Advanced Configuration
+sidebar_label: Overview
+description: '@web3auth/modal Advanced Configuration | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import Web3AuthOptions from '../../_common/_web3auth-options.mdx'
+import AdvancedConfigOptions from '../../_common/_advanced-config-options.mdx'
+
+# Advanced Configuration
+
+The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
+
+## Configuration Structure
+
+When setting up Web3Auth, you'll create a configuration object that is passed to the `Web3AuthProvider`. This consists of:
+
+```tsx title="web3authContext.tsx"
+import { type Web3AuthContextConfig } from '@web3auth/modal/react'
+import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
+
+// focus-start
+const web3AuthOptions: Web3AuthOptions = {
+  clientId: 'YOUR_CLIENT_ID', // Get your Client ID from Web3Auth Dashboard
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  // Core and advanced options go here
+}
+// focus-end
+
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions,
+}
+```
+
+### `Web3AuthOptions`
+
+<Web3AuthOptions />
+
+<AdvancedConfigOptions />

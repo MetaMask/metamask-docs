@@ -1,0 +1,272 @@
+---
+title: Embedded Wallets SDK for React Native
+sidebar_label: Getting Started
+description: 'MetaMask Embedded Wallets SDK for React Native | Documentation'
+---
+
+import ExampleCards from '@theme/ExampleCards'
+import { webExamples, QUICK_START } from '@site/src/utils/example-maps'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
+
+## Overview
+
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provides a seamless authentication experience for React Native applications with social logins, external wallets, and more. Using our React Native SDK, you can easily connect users to their preferred wallets and manage authentication state across both iOS and Android platforms.
+
+## Requirements
+
+- React Native Release 0.71 and above (for Bare React Native Workflow)
+- Expo SDK 48 and above (for Expo Managed Workflow)
+- iOS Platform Target Version 14 and above
+- Android Target SDK Version 31 and above
+- Basic knowledge of JavaScript/TypeScript and React Native
+
+:::warning
+
+The Web3Auth React Native PnP SDK is not compatible with "Expo Go" app. It is compatible only with Custom Dev Client and EAS builds. Please refer to the troubleshooting section for more on this.
+
+Please run `npx expo prebuild` to generate native code based on the version of expo a project has installed, before moving forward.
+
+:::
+
+## Installation
+
+Install the Web3Auth React Native SDK using npm or yarn:
+
+```bash npm2yarn
+npm install --save @web3auth/react-native-sdk
+```
+
+### Selecting your Workflow
+
+In React Native, you have the choice to use one of the following workflows:
+
+#### Expo Managed Workflow
+
+Your Expo app is built on your Expo's cloud, so you don't have control over the native modules used in the app. Developers build managed workflow apps using `expo-cli` on their computers and a development client on their mobile devices.
+
+#### Bare React Native Workflow
+
+Your Bare React Native app is entirely built on your machine. In this workflow, the developer has complete control, along with the complexity that comes with that.
+
+## Setup
+
+:::info
+
+Prerequisites Before you start, make sure you have registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/) and have set up your project. You can look into the [Dashboard Setup](/dashboard) guide to learn more.
+
+:::
+
+### 1. Install Helper Modules
+
+Install required helper modules for WebBrowser and Storage:
+
+<Tabs
+  defaultValue="expo"
+  values={[
+    { label: "Expo Managed Workflow", value: "expo" },
+    { label: "Bare React Native Workflow", value: "bare" },
+  ]}
+>
+
+<TabItem value="expo">
+
+```bash npm2yarn
+npm install --save expo-web-browser expo-secure-store
+```
+
+</TabItem>
+
+<TabItem value="bare">
+
+```bash npm2yarn
+npm install --save @toruslabs/react-native-web-browser react-native-encrypted-storage
+```
+
+</TabItem>
+</Tabs>
+
+### 2. Configuration
+
+Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Web3Auth Dashboard](https://dashboard.web3auth.io/).
+
+<Tabs
+  defaultValue="expo"
+  values={[
+    { label: "Expo Managed Workflow", value: "expo" },
+    { label: "Bare React Native Workflow", value: "bare" },
+  ]}
+>
+
+<TabItem value="expo">
+
+```typescript title="App.tsx"
+import Web3Auth, { WEB3AUTH_NETWORK, LOGIN_PROVIDER } from '@web3auth/react-native-sdk'
+import * as WebBrowser from 'expo-web-browser'
+import * as SecureStore from 'expo-secure-store'
+
+const scheme = 'web3authrnexample' // Or your desired app redirection scheme
+const resolvedRedirectUrl = `${scheme}://auth`
+
+const web3auth = new Web3Auth(WebBrowser, SecureStore, {
+  clientId: 'YOUR_CLIENT_ID', // Get your Client ID from Web3Auth Dashboard
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  redirectUrl: resolvedRedirectUrl,
+})
+```
+
+</TabItem>
+
+<TabItem value="bare">
+
+```typescript title="App.tsx"
+import Web3Auth, { WEB3AUTH_NETWORK, LOGIN_PROVIDER } from '@web3auth/react-native-sdk'
+import * as WebBrowser from '@toruslabs/react-native-web-browser'
+import EncryptedStorage from 'react-native-encrypted-storage'
+
+const scheme = 'web3authrnexample' // Or your desired app redirection scheme
+const resolvedRedirectUrl = `${scheme}://auth`
+
+const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
+  clientId: 'YOUR_CLIENT_ID', // Get your Client ID from Web3Auth Dashboard
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  redirectUrl: resolvedRedirectUrl,
+})
+```
+
+</TabItem>
+</Tabs>
+
+### 3. Initialize Web3Auth
+
+Initialize the Web3Auth instance before using any authentication methods:
+
+```typescript
+import { useEffect } from 'react'
+
+useEffect(() => {
+  const init = async () => {
+    try {
+      await web3auth.init()
+      console.log('Web3Auth initialized successfully')
+    } catch (error) {
+      console.error('Error initializing Web3Auth:', error)
+    }
+  }
+  init()
+}, [])
+```
+
+## Advanced Configuration
+
+The Web3Auth React Native SDK offers a rich set of advanced configuration options:
+
+- **[Account Abstraction](./account-abstraction)**: Configure smart account parameters.
+- **[Custom Authentication](./custom-authentication)**: Define authentication methods.
+- **[Whitelabeling & UI Customization](./whitelabel)**: Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./mfa)**: Set up and manage MFA.
+
+:::tip
+
+Head over to the advanced configuration sections to learn more about each configuration option.
+
+:::
+
+## Blockchain Integration
+
+Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
+
+### Ethereum Integration
+
+For Ethereum integration, you can get the provider and use it with ethers or viem:
+
+```typescript
+const login = async () => {
+  try {
+    await web3auth.login({
+      loginProvider: LOGIN_PROVIDER.GOOGLE,
+    })
+
+    // Get the provider
+    const provider = web3auth.provider
+
+    // Use with ethers.js
+    const ethProvider = new ethers.BrowserProvider(provider)
+
+    // Get account
+    const accounts = await ethProvider.listAccounts()
+    console.log('User account:', accounts[0])
+  } catch (error) {
+    console.error('Login failed:', error)
+  }
+}
+```
+
+### Solana Integration
+
+For Solana integration, you can get the private key and use it with Solana libraries:
+
+```typescript
+const getSolanaAccount = async () => {
+  try {
+    const privateKey = await web3auth.getPrivKey()
+    // Use private key with Solana libraries
+    console.log('Solana private key:', privateKey)
+  } catch (error) {
+    console.error('Error getting private key:', error)
+  }
+}
+```
+
+<Tabs
+  defaultValue="basic-config"
+  values={[
+    { label: "Basic Configuration", value: "basic-config" },
+    { label: "Advanced Configuration", value: "advanced-config" },
+  ]}
+>
+
+<TabItem value="basic-config">
+
+```typescript
+import Web3Auth, { WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
+
+const web3auth = new Web3Auth(WebBrowser, SecureStore, {
+  clientId: 'YOUR_CLIENT_ID',
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  redirectUrl: resolvedRedirectUrl,
+})
+```
+
+</TabItem>
+
+<TabItem value="advanced-config">
+
+```typescript
+import Web3Auth, { WEB3AUTH_NETWORK, MFA_LEVELS } from '@web3auth/react-native-sdk'
+
+const web3auth = new Web3Auth(WebBrowser, SecureStore, {
+  clientId: 'YOUR_CLIENT_ID',
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  redirectUrl: resolvedRedirectUrl,
+  mfaLevel: MFA_LEVELS.MANDATORY,
+  whiteLabel: {
+    appName: 'Your App Name',
+    logoLight: 'https://your-logo-light.png',
+    logoDark: 'https://your-logo-dark.png',
+    defaultLanguage: 'en',
+    mode: 'auto',
+  },
+})
+```
+
+</TabItem>
+
+</Tabs>
+
+<SdkTroubleshootingIntro />
+
+## Quick Starts
+
+<ExampleCards exampleMap={webExamples.filter(obj => obj.type === QUICK_START)} />

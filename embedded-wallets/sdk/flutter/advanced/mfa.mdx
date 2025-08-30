@@ -1,0 +1,268 @@
+---
+title: Multi Factor Authentication
+sidebar_label: Multi Factor Authentication
+description: 'Web3Auth Flutter SDK - Multi Factor Authentication | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import MFAMinimumPlan from '../../_common/_scale_plan_note.mdx'
+
+At Web3Auth, we prioritize your security by offering Multi-Factor Authentication (MFA). MFA is an extra layer of protection that verifies your identity when accessing your account. To ensure ownership, you must provide two or more different backup factors. You have the option to choose from the device, social, backup factor (seed phrase), and password factors to guarantee access to your Web3 account. Once you create a recovery factor, MFA is enabled, and your keys are divided into three shares for off-chain multi-sig, making the key self-custodial. With backup factors, you can easily recover your account if you lose access to your original device or helps login into a new device.
+
+<MFAMinimumPlan />
+
+## Enable using the MFA Level
+
+For a dApp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
+
+:::caution Note
+
+If you are using default verifiers, your users may have set up MFA on other dApps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dApps. This is because MFA cannot be turned off once it is enabled.
+
+:::
+
+### MFA Level Options
+
+| MFA Level | Description                                                |
+| --------- | ---------------------------------------------------------- |
+| DEFAULT   | Shows the MFA screen every third login.                    |
+| OPTIONAL  | Shows the MFA screen on every login, but user can skip it. |
+| MANDATORY | Makes it mandatory to set up MFA after first login.        |
+| NONE      | Skips the MFA setup screen                                 |
+
+### Usage
+
+```dart
+Web3AuthFlutter.login(
+  LoginParams(
+    loginProvider: Provider.google,
+    // focus-next-line
+    mfaLevel: MFALevel.MANDATORY,
+  ),
+);
+```
+
+## Explicitly enable MFA
+
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
+
+<Tabs
+  defaultValue="default-verifier"
+  values={[
+    { label: "Default Verifier", value: "default-verifier" },
+    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+  ]}
+>
+
+<TabItem value="default-verifier">
+
+```dart title="Usage"
+try {
+  // focus-next-line
+  await Web3AuthFlutter.enableMFA();
+} on UserCancelledException {
+  log("User cancelled.");
+} catch(e) {
+  log("Unknown exception occurred");
+}
+```
+
+</ TabItem>
+
+<TabItem value="custom-jwt-verifier">
+
+```dart title="Usage"
+try {
+    final loginParams = LoginParams(
+        loginProvider: Provider.jwt,
+        extraLoginOptions: ExtraLoginOptions(
+            id_token: "YOUR_JWT_TOKEN",
+        ),
+    );
+
+    // focus-next-line
+    await Web3AuthFlutter.enableMFA(loginParams);
+
+} on UserCancelledException { log("User cancelled."); } catch(e) { log("Unknown exception
+occurred"); }
+
+```
+
+</ TabItem>
+</ Tabs>
+
+## Configure MFA Settings
+
+You can configure the order of MFA, and enable or disable MFA type by passing the `mfaSettings` parameter in `Web3AuthOptions` during initialization.
+
+:::note Note
+
+- At least two factors are mandatory when setting up the mfaSettings.
+- If you set `mandatory: true` for all factors, the user must set up all four factors.
+- If you set `mandatory: false` for all factors, the user can skip setting up MFA. But at least two factors are mandatory.
+- If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can skip the optional factors. But, the user must set up at least two factors.
+- The `priority` field is used to set the order of the factors. The factor with the lowest priority will be the first factor to be set up. The factor with the highest priority will be the last factor to be set up.
+
+:::
+
+### Parameters - MfaSettings
+
+`MfaSettings` allows you to set the type of the MFA.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `deviceShareFactor?` | MFA setting for deviceShareFactor. It accepts `MfaSetting` as a value. |
+| `backUpShareFactor?` | MFA setting for backUpShareFactor. It accepts `MfaSetting` as a value. |
+| `socialBackupFactor?` | MFA setting for socialBackupFactor. It accepts `MfaSetting` as a value. |
+| `passwordFactor?` | MFA setting for passwordFactor. It accepts `MfaSetting` as a value. |
+| `passkeysFactor?` | MFA setting for passkeysFactor. It accepts `MfaSetting` as a value. |
+| `authenticatorFactor?` | MFA setting for authenticatorFactor. It accepts `MfaSetting` as a value. |
+
+</TabItem>
+
+<TabItem value="class">
+
+```dart
+class MfaSettings {
+  final MfaSetting? deviceShareFactor;
+  final MfaSetting? backUpShareFactor;
+  final MfaSetting? socialBackupFactor;
+  final MfaSetting? passwordFactor;
+  final MfaSetting? passkeysFactor;
+  final MfaSetting? authenticatorFactor;
+
+  MfaSettings({
+    this.deviceShareFactor,
+    this.backUpShareFactor,
+    this.socialBackupFactor,
+    this.passwordFactor,
+    this.passkeysFactor,
+    this.authenticatorFactor,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'deviceShareFactor': deviceShareFactor,
+      'backUpShareFactor': backUpShareFactor,
+      'socialBackupFactor': socialBackupFactor,
+      'passwordFactor': passwordFactor,
+      'passkeysFactor': passkeysFactor,
+      'authenticatorFactor': authenticatorFactor,
+    };
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Parameters - MfaSetting
+
+`MfaSetting` allows you to setup MFA setting for a particular MFA type.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter    | Description                                                                     |
+| ------------ | ------------------------------------------------------------------------------- |
+| `enable`     | Enable/Disable MFA. It accepts `bool` as a value.                               |
+| `priority?`  | Priority of MFA. It accepts `int` as a value, where valid range is from 1 to 4. |
+| `mandatory?` | Mandatory/Optional MFA. It acccepts `bool` as a value.                          |
+
+</TabItem>
+<TabItem value="class">
+
+```dart
+class MfaSetting {
+  final bool enable;
+  final int? priority;
+  final bool? mandatory;
+
+  MfaSetting({required this.enable, this.priority, this.mandatory});
+
+  Map<String, dynamic> toJson() {
+    return {'enable': enable, 'priority': priority, 'mandatory': mandatory};
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Usage
+
+```dart
+Future<void> initWeb3Auth() async {
+
+  late final Uri redirectUrl;
+  if (Platform.isAndroid) {
+    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
+    // w3a://com.example.w3aflutter/auth
+  } else {
+    redirectUrl = Uri.parse('{bundleId}://auth');
+    // com.example.w3aflutter://auth
+  }
+
+
+  await Web3AuthFlutter.init(
+    Web3AuthOptions(
+    clientId: "WEB3AUTH_CLIENT_ID",
+    network: Network.sapphire_mainnet,
+    redirectUrl: redirectUrl,
+    // focus-start
+    mfaSettings: MfaSettings(
+      deviceShareFactor: MfaSetting(
+        enable: true,
+        priority: 4,
+        mandatory: true,
+      ),
+      backUpShareFactor: MfaSetting(
+        enable: true,
+        priority: 2,
+        mandatory: true,
+      ),
+      socialBackupFactor: MfaSetting(
+        enable: true,
+        priority: 3,
+        mandatory: false,
+      ),
+      passwordFactor: MfaSetting(
+        enable: true,
+        priority: 1,
+        mandatory: true,
+      ),
+      passkeysFactor: MfaSetting(
+        enable: true,
+        priority: 5,
+        mandatory: true,
+      ),
+      authenticatorFactor: MfaSetting(
+        enable: true,
+        priority: 6,
+        mandatory: true,
+      ),
+    ),
+    // focus-end
+  );
+
+  await Web3AuthFlutter.initialize();
+}
+```

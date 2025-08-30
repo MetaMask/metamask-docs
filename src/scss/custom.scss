@@ -1240,3 +1240,114 @@ html {
     justify-content: flex-start;
   }
 }
+.sdk-sidebar-container {
+  background-color: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 0.8rem;
+  margin-bottom: 1.6rem;
+  overflow: hidden;
+}
+
+.sdk-sidebar-option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: transparent;
+  padding: 1.6rem 1.6rem;
+  color: var(--ifm-menu-color);
+  font-size: 1.6rem;
+  line-height: 124%;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: var(--ifm-hover-overlay);
+    color: var(--ifm-menu-color-active);
+    text-decoration: none;
+  }
+}
+
+.sdk-sidebar-option-selected {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--ifm-color-primary-lightest);
+  padding: 1rem 1.5rem;
+  color: var(--ifm-menu-color-active);
+  font-size: 1.6rem;
+  line-height: 124%;
+  font-weight: 600;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  [data-theme='dark'] & {
+    background-color: var(--ifm-color-emphasis-200);
+  }
+}
+
+.sdk-sidebar-dropdown-container {
+  display: flex;
+  margin-top: 0.8rem;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.4rem;
+  color: var(--ifm-color-emphasis-700);
+  font-weight: 500;
+}
+
+.sdk-sidebar-dropdown {
+  flex: 1;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background-color: var(--ifm-background-surface-color);
+  border-radius: 0.4rem;
+  padding: 0.6rem 1rem;
+  font-size: 1.4rem;
+  color: var(--ifm-color-emphasis-800);
+  font-family: inherit;
+  font-weight: 500;
+  transition: all 0.2s ease;
+
+  /* Use theme's select arrow */
+  appearance: none;
+  background-image: var(--select-arrow);
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 0.8rem;
+  padding-right: 2.8rem;
+
+  &:focus {
+    outline: none;
+    border-color: var(--ifm-color-primary);
+    box-shadow: 0 0 0 1px var(--ifm-color-primary-light);
+  }
+
+  &:hover {
+    border-color: var(--ifm-color-primary);
+  }
+
+  [data-theme='dark'] & {
+    border-color: var(--ifm-color-emphasis-400);
+
+    &:hover {
+      border-color: var(--ifm-color-primary);
+    }
+  }
+}
+
+.sdk-sidebar-description {
+  margin-top: 0.4rem;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.4;
+}

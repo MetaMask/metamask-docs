@@ -1,0 +1,58 @@
+---
+title: Vue Composables for Web3Auth Modal
+sidebar_label: Overview
+description: '@web3auth/modal Vue Composables | Embedded Wallets'
+---
+
+Web3Auth offers a comprehensive suite of Vue composables to streamline integration and state management within your Vue applications. These composables abstract away common authentication and wallet operations, enabling you to implement Web3Auth features with minimal boilerplate. Each composable is focused on a specific aspect of Web3Auth functionality, making it easy to implement authentication, wallet operations, and blockchain interactions in your Vue projects.
+
+## List of Vue Composables
+
+:::tip
+
+For detailed usage, configuration options, and code examples, refer to the dedicated documentation page for each composable.
+
+:::
+
+### Web3Auth Composables
+
+| Composable Name | Description                                                       |
+| --------------- | ----------------------------------------------------------------- |
+| `useWeb3Auth`   | Core composable for Web3Auth initialization and state management. |
+
+### Authentication Composables
+
+| Composable Name         | Description                            |
+| ----------------------- | -------------------------------------- |
+| `useWeb3AuthConnect`    | Handles Web3Auth connection processes. |
+| `useWeb3AuthDisconnect` | Manages disconnection from Web3Auth.   |
+
+### Identity Composables
+
+| Composable Name    | Description                                              |
+| ------------------ | -------------------------------------------------------- |
+| `useIdentityToken` | Retrieves and manages identity tokens.                   |
+| `useWeb3AuthUser`  | Provides access to the authenticated user's information. |
+
+### Blockchain Composables
+
+| Composable Name  | Description                                             |
+| ---------------- | ------------------------------------------------------- |
+| `useSwitchChain` | Allows switching between different blockchain networks. |
+
+### MFA Composables
+
+| Composable Name | Description                                                      |
+| --------------- | ---------------------------------------------------------------- |
+| `useEnableMFA`  | Enables Multi-Factor Authentication (MFA) for enhanced security. |
+| `useManageMFA`  | Provides functionality to manage MFA settings.                   |
+
+### Wallet Services Plugin Composables
+
+| Composable Name           | Description                                         |
+| ------------------------- | --------------------------------------------------- |
+| `useWalletConnectScanner` | Integrates WalletConnect scanner functionality.     |
+| `useWalletUI`             | Manages wallet UI components and user interactions. |
+| `useCheckout`             | Facilitates cryptocurrency checkout processes.      |
+| `useSwap`                 | Enables token swapping capabilities.                |
+| `useWalletServicesPlugin` | Provides access to wallet service plugins.          |

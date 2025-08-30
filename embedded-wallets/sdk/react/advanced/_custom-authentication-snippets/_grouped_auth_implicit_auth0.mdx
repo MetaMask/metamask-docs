@@ -1,0 +1,37 @@
+```tsx title="App.tsx"
+const loginWithGoogle = async () => {
+  // focus-start
+  await connectTo(WALLET_CONNECTORS.AUTH, {
+    groupedAuthConnectionId: "aggregate-sapphire",
+    authConnectionId: "w3a-google",
+    authConnection: AUTH_CONNECTION.GOOGLE,
+  });
+  // focus-end
+};
+
+const loginWithAuth0Google = async () => {
+  // focus-start
+  await connectTo(WALLET_CONNECTORS.AUTH, {
+    groupedAuthConnectionId: "aggregate-sapphire",
+    authConnectionId: "w3a-a0-google",
+    authConnection: AUTH_CONNECTION.CUSTOM,
+    extraLoginOptions: {
+      connection: "google-oauth2",
+    },
+  });
+  // focus-end
+};
+
+const loginWithAuth0GitHub = async () => {
+  // focus-start
+  await connectTo(WALLET_CONNECTORS.AUTH, {
+    groupedAuthConnectionId: "aggregate-sapphire",
+    authConnectionId: "w3a-a0-github",
+    authConnection: AUTH_CONNECTION.CUSTOM,
+    extraLoginOptions: {
+      connection: "github",
+    },
+  });
+  // focus-end
+};
+```

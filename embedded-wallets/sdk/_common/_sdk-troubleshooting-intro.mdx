@@ -1,0 +1,26 @@
+## Troubleshooting
+
+### Bundler Issues: Missing Dependencies
+
+You might encounter errors related to missing dependencies in the browser environment:
+
+- `Buffer is not defined`
+- `process is not defined`
+- Other Node.js-specific modules missing errors
+
+These Node.js dependencies need to be polyfilled in your application. We've prepared detailed troubleshooting guides for popular bundlers:
+
+- **[Vite Troubleshooting Guide](/troubleshooting/vite-issues)**
+- **[Svelte Troubleshooting Guide](/troubleshooting/svelte-issues)**
+- **[Nuxt Troubleshooting Guide](/troubleshooting/nuxt-issues)**
+- **[Webpack 5 Troubleshooting Guide](/troubleshooting/webpack-issues)**
+
+### JWT Errors
+
+When using Custom Authentication, you may encounter JWT errors:
+
+- [**Invalid JWT Verifiers ID field**](/troubleshooting/jwt-errors#invalid-jwt-verifiers-id-field)
+- [**Failed to verify JWS signature**](/troubleshooting/jwt-errors#failed-to-verify-jws-signature)
+- [**Duplicate Token**](/troubleshooting/jwt-errors#duplicate-token)
+- [**Expired Token**](/troubleshooting/jwt-errors#expired-token)
+- [**Mismatch JWT Validation field**](/troubleshooting/jwt-errors#mismatch-jwt-validation-field)

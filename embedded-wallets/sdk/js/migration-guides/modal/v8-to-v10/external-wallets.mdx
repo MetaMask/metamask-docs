@@ -1,0 +1,90 @@
+---
+title: Migrating External Wallet Adapters from v8 to v10
+description:
+  Comprehensive guide for migrating Web3Auth external wallet adapter configurations from v8 to v10.
+sidebar_label: External Wallets Migration
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Web3Auth v10 External Wallet Adapters Migration Guide
+
+This guide focuses specifically on migrating external wallet adapter configurations from Web3Auth v8
+to v10. This is a supplementary guide to the main
+[v8 to v10 migration guide](./modal-v8-to-v10.mdx).
+
+## Overview
+
+In v8, external wallets required manual adapter configuration. V10 simplifies this by using MIPD
+(Multiple Injected Provider Discovery) to automatically detect and provide access to external
+wallets without manual setup.
+
+## Migration Steps
+
+### External Wallet Adapter Migration
+
+```typescript
+// remove-start
+// Individual wallet adapters
+import { MetamaskAdapter } from "@web3auth/metamask-adapter";
+import { PhantomAdapter } from "@web3auth/phantom-adapter";
+import { SolflareAdapter } from "@web3auth/solflare-adapter";
+
+// Default adapter functions
+import { getDefaultExternalAdapters, getInjectedAdapters } from "@web3auth/default-evm-adapter";
+
+// Manual adapter configuration
+const metamaskAdapter = new MetamaskAdapter();
+const phantomAdapter = new PhantomAdapter();
+web3auth.configureAdapter(metamaskAdapter);
+web3auth.configureAdapter(phantomAdapter);
+
+// Or using helper functions
+const adapters = await getDefaultExternalAdapters({ options: web3AuthOptions });
+adapters.forEach((adapter) => {
+  web3auth.configureAdapter(adapter);
+});
+
+await web3auth.initModal();
+// remove-end
+
+// add-start
+// All external wallets are automatically detected via MIPD
+// No manual adapter configuration needed
+await web3auth.init();
+// add-end
+```
+
+## Key Changes
+
+- **Package Removal**: Remove all external wallet adapter packages
+- **MIPD Integration**: External wallets are automatically detected using MIPD (Multiple Injected
+  Provider Discovery)
+- **No Configuration**: No need to manually configure or register external adapters
+- **WalletConnect Support**: WalletConnect-compatible wallets are automatically available
+
+## Package Removal
+
+Remove these deprecated packages from your project:
+
+```bash npm2yarn
+# Remove all external wallet adapter packages
+npm uninstall @web3auth/metamask-adapter @web3auth/phantom-adapter @web3auth/solflare-adapter @web3auth/slope-adapter @web3auth/default-evm-adapter @web3auth/default-solana-adapter
+```
+
+## How It Works in v10
+
+V10 uses MIPD (Multiple Injected Provider Discovery) to automatically detect injected wallets in the
+browser. When users attempt to connect, they'll see:
+
+1. **Installed Wallets**: Any injected wallets found in the browser
+2. **WalletConnect Options**: Popular wallets available via WalletConnect
+3. **Install Prompts**: Options to install wallets if none are found
+
+This provides a better user experience with no configuration required from developers.
+
+## Next Steps
+
+Return to the main [v8 to v10 migration guide](./modal-v8-to-v10.mdx) to continue with other
+migration aspects.

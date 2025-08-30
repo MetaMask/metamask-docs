@@ -1,0 +1,12 @@
+```cs
+public void getBalance() {
+  if (account == null) {
+    Debug.Log("Please Login First");
+    return;
+  }
+  // focus-next-line
+  var balance = web3.Eth.GetBalance.SendRequestAsync(account.Address).Result.Value;
+
+  Debug.Log(balance);
+}
+```

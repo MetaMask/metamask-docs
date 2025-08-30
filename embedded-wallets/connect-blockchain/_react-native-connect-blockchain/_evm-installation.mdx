@@ -1,0 +1,27 @@
+To interact with an EVM blockchain in React Native, you can use any [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible package like
+[`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc.
+
+In this reference, we're using `ethers.js` to demonstrate how to make blockchain calls using it with Web3Auth.
+
+- Install the `ethers.js` package using `npm` or `yarn`:
+
+```bash npm2yarn
+npm install @ethersproject/shims ethers
+```
+
+- Import the packages and shims into your codebase:
+
+```tsx
+// Import the required shims
+import "@ethersproject/shims";
+
+// Import the ethers library
+import { ethers } from "ethers";
+```
+
+:::info
+
+We have followed [this guide](https://docs.ethers.org/v5/cookbook/react-native/#cookbook-reactnative) to set up the `ethers.js` package in React
+Native.
+
+:::

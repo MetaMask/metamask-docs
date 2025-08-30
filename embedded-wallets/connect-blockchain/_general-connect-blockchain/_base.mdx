@@ -1,0 +1,38 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x2105
+- Public RPC URL: https://mainnet.base.org (Avoid using public rpcTarget in production, use services
+  like Infura)
+- Display Name: Base Mainnet
+- Block Explorer Link: https://basescan.org
+- Ticker: ETH
+- Ticker Name: Ethereum
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x14a33
+- Public RPC URL: https://goerli.base.org (Avoid using public rpcTarget in production, use services
+  like Infura)
+- Display Name: Base Goerli Testnet
+- Block Explorer Link: https://goerli.basescan.org
+- Ticker: ETH
+- Ticker Name: Ethereum
+
+</TabItem>
+</Tabs>

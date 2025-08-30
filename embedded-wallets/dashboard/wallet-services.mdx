@@ -1,0 +1,78 @@
+---
+title: Wallet Services
+sidebar_label: Wallet Services
+image: 'img/docs-meta-cards/documentation-card.png'
+description: 'Configure wallet services and UI in Web3Auth Dashboard | Embedded Wallets'
+---
+
+import WalletConfiguration from '@site/static/img/w3a-dashboard/wallet-configuration.png'
+
+The Wallet Configuration tab within the Web3Auth Dashboard enables developers to customize the wallet experience provided to users within their decentralized applications (dApps). These settings define the appearance, capabilities, and interactivity of the Web3Auth wallet interface.
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={WalletConfiguration}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Wallet Configuration"
+  />
+</div>
+
+## Customize Wallet UI
+
+The Wallet UI can be tailored to align with the application's user experience and branding preferences. The following customization options are available:
+
+### Portfolio Widget
+
+Enable or disable the portfolio widget that displays token balances, transaction history, and wallet analytics. This provides users with a clear overview of their holdings directly within the dApp.
+
+### Widget Placement
+
+Choose the position of the wallet widget on the application interface. Available positions include:
+
+- **Bottom Right**
+- **Bottom Left**
+- **Top Left**
+- **Top Right**
+
+This flexibility ensures seamless integration with your existing UI/UX design.
+
+### Token and NFT Display
+
+Configure whether users can view their token balances and NFTs within the wallet interface. Enabling these options enhances the wallet's functionality, offering users visibility into their digital assets without leaving the dApp.
+
+### Wallet Features
+
+Toggle individual wallet actions such as:
+
+- **Buy**: Allow users to purchase crypto assets via integrated on-ramps.
+- **Swap**: Enable in-wallet token swaps through supported liquidity protocols.
+- **Send / Receive**: Facilitate peer-to-peer asset transfers.
+- **WalletConnect**: Add interoperability by allowing users to connect with external dApps that support WalletConnect protocol.
+
+### Transaction Confirmation Modal
+
+When enabled, users will be prompted to approve each transaction via a confirmation modal. This mirrors the behavior of traditional external wallets (e.g., MetaMask), offering an additional layer of transparency and user control over on-chain interactions.
+
+> Note: These wallet services are fully integrated and require no additional SDK logic—configuration through the dashboard is sufficient to apply changes across your application.
+
+## Benefits of Wallet Customization
+
+These customization options ensure that developers can build a wallet experience that meets both usability and security expectations while maintaining consistency with their application's design.
+
+### Enhanced User Experience
+
+- Seamless integration with your application's design language
+- Familiar wallet functionality without leaving your dApp
+- Customizable feature set based on your use case
+
+### Security & Control
+
+- Transaction confirmation modals for user awareness
+- Granular control over available wallet features
+- Built-in security measures and best practices
+
+### Developer Efficiency
+
+- No additional SDK implementation required
+- Dashboard-based configuration with instant updates
+- Comprehensive wallet functionality out of the box

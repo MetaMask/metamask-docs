@@ -236,24 +236,24 @@
   border-radius: 50%;
 }
 
-.switch input:focus + .slider {
+.switch input:focus+.slider {
   box-shadow: 0 0 1px var(--ifm-color-primary-light);
 }
 
-.switch input:checked + .slider {
+.switch input:checked+.slider {
   background-color: var(--ifm-color-primary-light);
 }
 
-input:checked + .slider::before {
+input:checked+.slider::before {
   transform: translateX(16px);
 }
 
-.switch input:checked + .slider::before {
+.switch input:checked+.slider::before {
   background-color: var(--ifm-color-white);
 }
 
 /* Dark mode: Better visibility for checked switches */
-[data-theme='dark'] .switch input:checked + .slider {
+[data-theme='dark'] .switch input:checked+.slider {
   background-color: var(--ifm-color-primary);
 }
 
@@ -282,6 +282,11 @@ input:checked + .slider::before {
 .w3DropdownMenu {
   padding: 4px 0;
   margin-top: -5px;
+}
+
+.stepBody li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
 }
 
 .w3DropdownMenu li {
@@ -494,7 +499,7 @@ input:checked + .slider::before {
   border: none;
 }
 
-@media (width <= 768px) {
+@media (width <=768px) {
   .topControlPane {
     padding: 6px 12px;
   }
@@ -528,7 +533,7 @@ input:checked + .slider::before {
   }
 }
 
-@media (width >= 960px) {
+@media (width >=960px) {
   .cols {
     display: flex;
     height: calc(100vh - 86px - 45px);
@@ -851,12 +856,10 @@ input:checked + .slider::before {
 .separatorLine {
   width: 100%;
   height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    var(--ifm-color-emphasis-300) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(to right,
+      transparent 0%,
+      var(--ifm-color-emphasis-300) 50%,
+      transparent 100%);
 }
 
 /* Completion Indicator */
@@ -864,11 +867,9 @@ input:checked + .slider::before {
   text-align: center;
   padding: 2rem;
   margin: 4rem 1.5rem 2rem;
-  background: linear-gradient(
-    135deg,
-    var(--ifm-color-success-light) 0%,
-    var(--ifm-color-success) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--ifm-color-success-light) 0%,
+      var(--ifm-color-success) 100%);
   color: white;
   border-radius: 12px;
   font-size: 18px;
@@ -878,11 +879,9 @@ input:checked + .slider::before {
 
 /* Dark mode: Better contrast for completion indicator */
 [data-theme='dark'] .completionIndicator {
-  background: linear-gradient(
-    135deg,
-    var(--consumer-green-dark) 0%,
-    var(--institution-green-dark) 100%
-  );
+  background: linear-gradient(135deg,
+      var(--consumer-green-dark) 0%,
+      var(--institution-green-dark) 100%);
   color: white;
 }
 
@@ -912,7 +911,7 @@ input:checked + .slider::before {
 }
 
 /* Mobile responsive adjustments */
-@media (width <= 960px) {
+@media (width <=960px) {
   .stepNavigationMenu {
     display: none;
   }
@@ -998,24 +997,19 @@ input:checked + .slider::before {
   margin: 1rem 0;
 }
 
-.stepBody li {
-  margin: 0.5rem 0;
-  line-height: 1.6;
-}
-
 /* Only target inline code, not code blocks */
-.stepBody p > code,
-.stepBody li > code,
-.stepBody span > code,
-.stepBody td > code,
-.stepBody th > code,
-.stepBody h1 > code,
-.stepBody h2 > code,
-.stepBody h3 > code,
-.stepBody h4 > code,
-.stepBody h5 > code,
-.stepBody h6 > code,
-.stepBody a > code {
+.stepBody p>code,
+.stepBody li>code,
+.stepBody span>code,
+.stepBody td>code,
+.stepBody th>code,
+.stepBody h1>code,
+.stepBody h2>code,
+.stepBody h3>code,
+.stepBody h4>code,
+.stepBody h5>code,
+.stepBody h6>code,
+.stepBody a>code {
   font-family: var(--font-mm-sans-mono);
   font-size: 80%;
   background: var(--ifm-code-background);
@@ -1073,7 +1067,7 @@ input:checked + .slider::before {
 }
 
 /* Responsive Design for Media Components */
-@media (width <= 996px) {
+@media (width <=996px) {
   .hybridContainer {
     flex-direction: column;
   }
@@ -1089,7 +1083,7 @@ input:checked + .slider::before {
   }
 }
 
-@media (width <= 768px) {
+@media (width <=768px) {
   .mediaStepContainer {
     border-radius: 8px;
   }
@@ -1181,7 +1175,7 @@ input:checked + .slider::before {
 }
 
 /* Ensure both tab contents have identical sizing */
-.tabContent > * {
+.tabContent>* {
   width: 100% !important;
   height: 100% !important;
   flex: 1 1 auto;
@@ -1224,7 +1218,7 @@ input:checked + .slider::before {
   --w3a-ib-code-tab-background-color: var(--ifm-color-emphasis-100) !important;
 }
 
-.tabContent .hybridCodeView > * {
+.tabContent .hybridCodeView>* {
   width: 100% !important;
   height: 100%;
   flex: 1;
@@ -1334,7 +1328,7 @@ input:checked + .slider::before {
 }
 
 /* Force exact same layout for both tab types */
-.hybridTabContainer .tabContent > div {
+.hybridTabContainer .tabContent>div {
   width: 100% !important;
   height: 100% !important;
   display: flex !important;
@@ -1391,7 +1385,7 @@ input:checked + .slider::before {
 }
 
 /* Responsive styles for tabs */
-@media (width <= 768px) {
+@media (width <=768px) {
   .tabButton {
     padding: 12px 16px;
     font-size: 14px;

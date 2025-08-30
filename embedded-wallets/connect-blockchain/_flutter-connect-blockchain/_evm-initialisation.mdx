@@ -1,0 +1,11 @@
+We'll initialize the `Web3Client` with the RPC URL of the network you want to connect to. This
+client allows us to interact with the blockchain. To get the public RPC URL, you can checkout
+[chainlist.org](https://chainlist.org/).
+
+```dart
+import 'package:web3dart/web3dart.dart';
+
+// Please avoid using public RPC URL in production, use services
+// like Infura, Quicknode, etc.
+final client = Web3Client("YOUR_RPC_URL", Client());
+```

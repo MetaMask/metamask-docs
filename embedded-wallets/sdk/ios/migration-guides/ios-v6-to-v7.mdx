@@ -1,0 +1,304 @@
+---
+title: PnP IOS SDK - v6 to v7
+
+description: 'PnP IOS SDK - v6 to v7 | Embedded Wallets'
+sidebar_label: v6 to v7
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+## General
+
+### openlogin v5 is supported
+
+With V7, Users can now log in from `Sapphire Mainnet` and `Sapphire Devnet`.
+
+```swift
+import Web3Auth
+
+let web3auth = Web3Auth(W3AInitParams(
+  clientId: "<your clientId>",
+  network: .mainnet, // you can use .sapphire_devnet or .sapphire_mainnet
+  sdkUrl: ...,
+  redirectUrl: ...,
+))
+```
+
+### `Web3AuthState` now has more parameters
+
+In v7, you can configure additional `coreKitKey` and `coreKitEd25519PrivKey` fields when you initialize `Web3authState`.
+
+```swift
+public struct Web3AuthState: Codable {
+    public let privKey: String?
+    public let ed25519PrivKey: String?
+    public let sessionId: String?
+    public let userInfo: Web3AuthUserInfo?
+    public let error: String?
+    // focus-start
+    public let coreKitKey: String?
+    public let coreKitEd25519PrivKey: String?
+    // focus-end
+}
+```
+
+### `W3AInitParams` param configuration changed
+
+In v7, the whiteLabel parameter type and configuration has changed. And, as mentioned earlier, the sapphire network type has been added. Also several parameters have been added to `W3AInitParams`.
+
+#### change of `WhiteLabel` parameter configuration
+
+<Tabs
+  defaultValue="v7"
+  values={[
+    { label: "V6", value: "v6" },
+    { label: "V7", value: "v7" },
+  ]}
+>
+
+<TabItem value="v6">
+
+| Parameter | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| `name` | `String` | No | Name of your application |
+| `logoLight` | `String` | No | Light logo for dark background |
+| `logoDark` | `String` | No | Dark logo for light background |
+| `defaultLanguage` | `String` | No | Default translation language to be used |
+| `dark` | `Boolean` | No | If true, enables dark mode. Default is light mode |
+| `theme` | `[String, String]` | No | Whitelabel theme |
+
+</TabItem>
+
+<TabItem value="v7">
+
+| Parameter | Type | Description | Default | Mandatory |
+| --- | --- | --- | --- | --- |
+| `appName` | `String` | App name to be displayed in the User Flow Screens. | dApp's Website URL | No |
+| `logoLight` | `String` | App logo to be shown on the dark background (dark theme) | [web3auth-logo.svg](https://images.web3auth.io/web3auth-logo.svg) | No |
+| `logoDark` | `String` | App logo to be shown on the light background (light theme) | [web3auth-logo.svg](https://images.web3auth.io/web3auth-logo.svg) | No |
+| `defaultLanguage` | `Language` | Default Language to use. <br/> Choose from: <ul><li>`en` - English</li><li>`de` - German</li><li>`ja` - Japanese</li><li>`ko` - Korean</li><li>`zh` - Mandarin</li><li>`es` - Spanish</li><li>`fr` - French</li><li>`pt` - Portuguese</li><li>`nl` - Dutch</li></ul> | en - English | No |
+| `mode` | `ThemeModes` | Choose between `auto`, `light` or `dark` modes. | `auto` | No |
+| `theme` | `[String: String]` | Used to customize the theme of the login modal with the following options <br /> `'primary'` - To customize the primary color of the modal's content | `#0364FF` | No |
+| `appUrl` | `String` | App URL to be displayed in the User Flow Screens. | dApp's Website URL | No |
+| `useLogoLoader` | `Bool` | Loads the logo when loading | false | No |
+
+</TabItem>
+
+</Tabs>
+
+```swift title="Usage"
+web3Auth = await Web3Auth(
+  W3AInitParams(
+    clientId:"YOUR_CLIENT_ID",
+    network: .testnet,
+    // focus-start
+    whiteLabel: W3AWhiteLabelData(
+      appName: "Web3Auth Stub",
+      logoLight: "https://images.web3auth.io/web3auth-logo-w.svg",
+      logoDark: "https://images.web3auth.io/web3auth-logo-w.svg",
+      defaultLanguage: .en, // en, de, ja, ko, zh, es, fr, pt, nl
+      mode: .dark
+      theme: ["primary": "#d53f8c"])
+    ))
+    // focus-end
+```
+
+#### change of `W3AInitParams` object
+
+The `Web3Auth` constructor takes an object called `W3AInitParams` as input. Below are the available fields of the `W3AInitParams` object. With v7, additional 2 parameters, which are `MfaSettings` and `sessionTime` can be set.
+
+<Tabs
+  defaultValue="v7"
+  values={[
+    { label: "V6", value: "v6" },
+    { label: "V7", value: "v7" },
+  ]}
+>
+
+<TabItem value="v6">
+
+| Parameter | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| `clientId` | String | Yes | Your Web3Auth project ID |
+| `network` | Network | Yes | Web3Auth Network to run the authentication on, either `.mainnet`,`.aqua`, `.testnet` or `.cyan` |
+| `sdkUrl` | URL | No | Web3Auth sdk frontend to be used. This field is for advanced usage only and should not be changed. |
+| `redirectUrl` | String | No | redirectUrl to be passed to the SDK frontend. This field is for advanced usage only and should not be changed. |
+| `whiteLabel` | W3AWhiteLabelData | No | A configuration optional object to customize UI, branding, and translations for your brand. Refer to the WhiteLabeling section for more info. |
+| `loginConfig` | `[String : W3ALoginConfig]` | No | A configuration optional object to customize login flow. |
+| `useCoreKitKey` | `bool` | No | Use CoreKit Key to get core kit key. |
+| `chainNamespace` | `ChainNamespace` | No | Chain Namespace [`eip155` and `solana`] |
+
+</TabItem>
+
+<TabItem value="v7">
+
+| Parameter | Type | Mandatory | Description |
+| --- | --- | --- | --- |
+| `clientId` | String | Yes | Your Web3Auth project ID |
+| `network` | Network | Yes | Web3Auth Network to run the authentication on, either `.mainnet`,`.aqua`, `.testnet`, `.cyan`, or `.sapphire_devnet` or `.sapphire_mainnet` |
+| `buildEnv` | BuildEnv | No | Option for auth service, `production`, `staging`, `testing` available |
+| `sdkUrl` | URL | No | Web3Auth sdk frontend to be used. This field is for advanced usage only and should not be changed. |
+| `redirectUrl` | String | No | redirectUrl to be passed to the sdk frontend. This field is for advanced usage only and should not be changed. |
+| `whiteLabel` | W3AWhiteLabelData | No | A configuration optional object to customize UI, branding, and translations for your brand. Refer to the WhiteLabeling section for more info. |
+| `loginConfig` | `[String : W3ALoginConfig]` | No | A configuration optional object to customize login flow. |
+| `useCoreKitKey` | `bool` | No | Use CoreKit Key to get core kit key. |
+| `chainNamespace` | `ChainNamespace` | No | Chain Namespace [`eip155` and `solana`] |
+| `MfaSettings` | `MfaSettings` | No | Settings for Multi factor authentication |
+| `sessionTime` | Int | No | Session maintenance time |
+
+</TabItem>
+
+</Tabs>
+
+Here's the example configuration of `Web3AuthOptions`.
+
+```swift
+        let result = try await Web3Auth(.init(
+            clientId: clientId,
+            network: network,
+            loginConfig: [
+                TypeOfLogin.google.rawValue:
+                        .init(
+                            verifier: "w3a-agg-example",
+                            typeOfLogin: .google,
+                            name: "Web3Auth-Aggregate-Verifier-Google-Example",
+                            clientId: "774338308167-q463s7kpvja16l4l0kko3nb925ikds2p.apps.googleusercontent.com",
+                            verifierSubIdentifier: "w3a-google"
+                        )
+            ],
+            whiteLabel: W3AWhiteLabelData(
+                    appName: "Web3Auth Stub",
+                    logoLight: "https://images.web3auth.io/web3auth-logo-w.svg",
+                    logoDark: "https://images.web3auth.io/web3auth-logo-w.svg",
+                    defaultLanguage: .en, // en, de, ja, ko, zh, es, fr, pt, nl
+                    mode: .dark,
+                    theme: ["primary": "#d53f8c"]),
+            mfaSettings: MfaSettings(
+                deviceShareFactor: MfaSetting(enable: true, priority: 1),
+                backUpShareFactor: MfaSetting(enable: true, priority: 2),
+                socialBackupFactor: MfaSetting(enable: true, priority: 3),
+                passwordFactor: MfaSetting(enable: true, priority: 4)
+            )
+        )).login(
+            W3ALoginParams(
+            loginProvider: .GOOGLE,
+            dappShare: nil,
+            extraLoginOptions: ExtraLoginOptions(display: nil, prompt: nil, max_age: nil, ui_locales: nil, id_token_hint: nil, id_token: nil, login_hint: nil, acr_values: nil, scope: nil, audience: nil, connection: nil, domain: nil, client_id: nil, redirect_uri: nil, leeway: nil, verifierIdField: nil, isVerifierIdCaseSensitive: nil, additionalParams: nil),
+            mfaLevel: .DEFAULT,
+            curve: .SECP256K1
+        ))
+```
+
+### Using the `mfaSettings` to configure MFA Order
+
+You can configure the order of MFA or enable/disable MFA type by passing the `mfaSettings` object in `Web3AuthOptions`.
+
+`MfaSettings`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+`deviceShareFactor` | `backUpShareFactor` | `socialBackupFactor` | `passwordFactor`
+
+| Parameter   | Type   | Mandatory | Description            |
+| ----------- | ------ | --------- | ---------------------- |
+| `enable`    | `bool` | Yes       | Enable/Disable MFA     |
+| `priority`  | `int`  | No        | Priority of MFA        |
+| `mandatory` | `bool` | No        | Mandatory/Optional MFA |
+
+</TabItem>
+
+<TabItem value="class">
+
+```swift
+
+    public struct MfaSetting: Codable {
+        public init(enable: Bool, priority: Int?, mandatory: Bool? = nil) {
+            self.enable = enable
+            self.priority = priority
+            self.mandatory = mandatory
+        }
+
+        let enable: Bool
+        let priority: Int?
+        let mandatory: Bool?
+    }
+
+    public struct MfaSettings: Codable {
+        public init(deviceShareFactor: MfaSetting?, backUpShareFactor: MfaSetting?, socialBackupFactor: MfaSetting?, passwordFactor: MfaSetting?) {
+            self.deviceShareFactor = deviceShareFactor
+            self.backUpShareFactor = backUpShareFactor
+            self.socialBackupFactor = socialBackupFactor
+            self.passwordFactor = passwordFactor
+        }
+
+        let deviceShareFactor: MfaSetting?
+        let backUpShareFactor: MfaSetting?
+        let socialBackupFactor: MfaSetting?
+        let passwordFactor: MfaSetting?
+    }
+
+
+```
+
+</TabItem>
+
+</Tabs>
+
+### `web3.swift` version updated to v1.6
+
+With V7, lots of package dependencies have been updated. Among that, version of package `web3.swift` is updated to v1.6.0. Ethereum-related calls from the client changed lot, so need to care about that.
+
+### ExtraLoginOptions
+
+With V7, ExtraLoginOptions now has one more parameter which is `additionalParams: [String : String]?`
+
+<TabItem value="table">
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `domain` | `string` | Your Auth0 account domain such as `example.auth0.com` or `example.mycompany.com` etc. **Use any random string in case of custom JWT login.** |
+| `client_id` | `string` | The Client ID found on your Auth0 Application settings page. **Use web3auth client id in case of custom JWT login.** |
+| `redirect_uri` | `string` | The default URL where Auth0 will redirect your browser to with the authentication result. |
+| `leeway` | `number` | The value in seconds used to account for clock skew in JWT expirations. |
+| `verifierIdField` | `string` | The field in jwt token which maps to verifier id. |
+| `isVerifierIdCaseSensitive` | `boolean` | Whether the verifier id field is case sensitive. Defaults to `true` |
+
+</TabItem>
+
+<TabItem value="struct">
+
+```swift
+public struct ExtraLoginOptions: Codable{
+  let display: String?
+  let prompt: String?
+  let max_age: String?
+  let ui_locales: String?
+  let id_token_hint: String?
+  let id_token: String?
+  let login_hint: String?
+  let acr_values: String?
+  let scope: String?
+  let audience: String?
+  let connection: String?
+  let domain: String?
+  let client_id: String?
+  let redirect_uri: String?
+  let leeway: Int?
+  let verifierIdField: String?
+  let isVerifierIdCaseSensitive: Bool?
+  // focus-start
+  let additionalParams: [String : String]?
+  // focus-end
+}
+```
+
+</TabItem>

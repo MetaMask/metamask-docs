@@ -1,0 +1,20 @@
+To sign the message, you need to use the `Sign.signPrefixedMessage` method. The method takes in the
+data of the message, ecKeyPair, and returns the Signature object which has r, s and v value of the
+signature.
+
+We can append the r, s, and v values to generate the signed hash. The r value is the first 32 bytes
+of the signature, s is the next 32 bytes, and v is the last 1 byte of the signature.
+
+```kotlin
+import org.web3j.utils.Numeric
+import org.web3j.crypto.Sign
+
+val message = "Hello World"
+val signature = Sign.signPrefixedMessage(message.toByteArray(), credentials.ecKeyPair)
+
+val r = Numeric.toHexString(signature.r)
+val s = Numeric.toHexString(signature.s).substring(2)
+val v = Numeric.toHexString(signature.v).substring(2)
+
+val signedHash = StringBuilder(r).append(s).append(v).toString()
+```

@@ -1,0 +1,103 @@
+---
+title: PnP iOS SDK - v8.2 to v8.3
+
+description: 'PnP iOS SDK - v8.2 to v8.3 | Embedded Wallets'
+sidebar_label: v8.2 to v8.3
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+# Migration Guide from v8.2 to v8.3 for Web3Auth PnP iOS SDK
+
+## Overview
+
+This migration guide provides steps for upgrading from version 8.2(v8.2) to version 8.3(v8.3) of the Web3Auth PnP iOS SDK. The guide outlines significant changes and enhancements, including the introduction of new login providers, and changes in `request` method.
+
+## Changes in Detail
+
+### `request` method updates
+
+From v8.3, developers can pass the `chainConfig` to request the signature for specific chain. To further improve developer experience, we have removed the `loginParams` from the `request` method.
+
+#### Before (v8.2)
+
+```swift title="Usage"
+var params = [Any]()
+params.append("Hello, Web3Auth from Android!")
+params.append("0x764dd67c0420b43a39ab337463d8995622f226a2")
+params.append("Web3Auth")
+
+do {
+  // focus-start
+  try await self.web3Auth?.request(
+    W3ALoginParams(loginProvider: .GOOGLE, mfaLevel: .NONE),
+    method: "personal_sign",
+    requestParams: params
+  )
+  // focus-end
+} catch {
+  // Handle error
+}
+```
+
+#### After (v8.3)
+
+```swift title="Usage"
+var params = [Any]()
+params.append("Hello, Web3Auth from Android!")
+params.append("0x764dd67c0420b43a39ab337463d8995622f226a2")
+params.append("Web3Auth")
+
+var chainConfig = ChainConfig(
+    chainNamespace: ChainNamespace.eip155,
+    chainId: "0x1",
+    rpcTarget: "https://mainnet.infura.io/v3/${key}",
+    ticker: "ETH"
+)
+
+do {
+  // focus-start
+  try await self.web3Auth?.request(
+    chainConfig: chainConfig
+    method: "personal_sign",
+    requestParams: params,
+  )
+  // focus-end
+} catch {
+  // Handle error
+}
+```
+
+### New Login Providers
+
+v8.3 update brings two new providers. Now developers can use the SMS Passwordless and Farcaster login options.
+
+#### SMS Passwordless
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+ // focus-start
+let result = try await web3Auth.login(W3ALoginParams(
+  Web3AuthProvider.SMS_PASSWORDLESS,
+  // The phone number should be in format of +{country_code}-{phone_number}
+  extraLoginOptions: .init(loginHint: "+91-9911223344")
+))
+ // focus-end
+```
+
+#### Farcaster
+
+```swift title="Usage"
+let result = try await Web3Auth().login(
+    // focus-next-line
+    W3ALoginParams(loginProvider: .Farcaster)
+)
+```

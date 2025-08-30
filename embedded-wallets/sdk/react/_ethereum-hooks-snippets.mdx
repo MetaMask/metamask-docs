@@ -1,0 +1,151 @@
+You need to install the `wagmi` and `@tanstack/react-query` packages and use the **Web3Auth
+implementation of `WagmiProvider`** for configuration.
+
+:::info
+
+The Web3Auth implementation of `WagmiProvider` is a custom implementation that is used to integrate
+with the Web3Auth Modal SDK. It is a wrapper around the `WagmiProvider` that makes it compatible.
+
+With this implementation, you can use the Wagmi hooks, however **no external connectors are
+supported**. Web3Auth provides a whole suite of connectors which you can use directly for a better
+experience with external wallets.
+
+:::
+
+```bash npm2yarn
+npm install wagmi @tanstack/react-query
+```
+
+```tsx title="main.tsx"
+import "./index.css";
+
+import ReactDOM from "react-dom/client";
+import { Web3AuthProvider } from "@web3auth/modal/react";
+import web3AuthContextConfig from "./web3authContext";
+// focus-start
+import { WagmiProvider } from "@web3auth/modal/react/wagmi";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// focus-end
+
+import App from "./App";
+
+// focus-next-line
+const queryClient = new QueryClient();
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <Web3AuthProvider config={web3AuthContextConfig}>
+    {/* focus-start */}
+    <QueryClientProvider client={queryClient}>
+      <WagmiProvider>
+        <App />
+      </WagmiProvider>
+    </QueryClientProvider>
+    {/* focus-end */}
+  </Web3AuthProvider>,
+);
+```
+
+:::info
+
+Wagmi provides a comprehensive set of React hooks for Ethereum and EVM-compatible chains. Web3Auth
+integrates seamlessly with Wagmi, so you can use hooks like `useAccount`, `useBalance`,
+`useSendTransaction`, and more, out of the box.
+
+:::
+
+Below are some examples of using Wagmi hooks in your dApp after Web3Auth and Wagmi are set up. You
+can note these functions work directly with Wagmi. Once you have set up Wagmi with Web3Auth, you can
+use any Wagmi hook as you would in a standard Wagmi application.
+
+### Get Account Balance
+
+```tsx
+import { useAccount, useBalance } from "wagmi";
+import { formatUnits } from "viem";
+
+export function Balance() {
+  const { address } = useAccount();
+  const { data, isLoading, error } = useBalance({ address });
+
+  return (
+    <div>
+      <h2>Balance</h2>
+      <div>
+        {data?.value !== undefined && `${formatUnits(data.value, data.decimals)} ${data.symbol}`}{" "}
+        {isLoading && "Loading..."} {error && "Error: " + error.message}
+      </div>
+    </div>
+  );
+}
+```
+
+### Send Transaction
+
+```tsx
+import { FormEvent } from "react";
+import { useWaitForTransactionReceipt, useSendTransaction, BaseError } from "wagmi";
+import { Hex, parseEther } from "viem";
+
+export function SendTransaction() {
+  const { data: hash, error, isPending, sendTransaction } = useSendTransaction();
+
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const to = formData.get("address") as Hex;
+    const value = formData.get("value") as string;
+    sendTransaction({ to, value: parseEther(value) });
+  }
+
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash,
+  });
+
+  return (
+    <div>
+      <h2>Send Transaction</h2>
+      <form onSubmit={submit}>
+        <input name="address" placeholder="Address" required />
+        <input name="value" placeholder="Amount (ETH)" type="number" step="0.000000001" required />
+        <button disabled={isPending} type="submit">
+          {isPending ? "Confirming..." : "Send"}
+        </button>
+      </form>
+      {hash && <div>Transaction Hash: {hash}</div>}
+      {isConfirming && "Waiting for confirmation..."}
+      {isConfirmed && "Transaction confirmed."}
+      {error && <div>Error: {(error as BaseError).shortMessage || error.message}</div>}
+    </div>
+  );
+}
+```
+
+### Switch Chain
+
+```tsx
+import { useChainId, useSwitchChain } from "wagmi";
+
+export function SwitchChain() {
+  const chainId = useChainId();
+  const { chains, switchChain, error } = useSwitchChain();
+
+  return (
+    <div>
+      <h2>Switch Chain</h2>
+      <h3>Connected to {chainId}</h3>
+      {chains.map((chain) => (
+        <button
+          disabled={chainId === chain.id}
+          key={chain.id}
+          onClick={() => switchChain({ chainId: chain.id })}
+          type="button"
+          className="card"
+        >
+          {chain.name}
+        </button>
+      ))}
+      {error?.message}
+    </div>
+  );
+}
+```

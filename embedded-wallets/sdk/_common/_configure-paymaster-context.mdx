@@ -1,0 +1,50 @@
+You can send additional metadata in the paymaster context to supply whatever information the
+Paymaster needs to process user operations. For instance, you might include the type of Paymaster
+(e.g., a Sponsored Paymaster versus an ERC-20-based Paymaster), references to specific tokens used
+for gas sponsorship, custom gas policies or limits, and any other parameters relevant to your
+sponsorship logic.
+
+To configure the paymaster context, you can use the `paymasterContext` property in the
+`bundlerConfig`.
+
+```ts
+import {
+  AccountAbstractionProvider,
+  SafeSmartAccount,
+} from "@web3auth/account-abstraction-provider";
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: "0xaa36a7",
+  rpcTarget: "https://rpc.sepolia.org",
+  displayName: "Ethereum Sepolia Testnet",
+  blockExplorerUrl: "https://sepolia.etherscan.io",
+  ticker: "ETH",
+  tickerName: "Ethereum",
+  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+};
+
+const accountAbstractionProvider = new AccountAbstractionProvider({
+  config: {
+    chainConfig,
+    bundlerConfig: {
+      // Get the pimlico API Key from dashboard.pimlico.io
+      url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
+      // focus-start
+      // This is just an example of how you can configure the paymaster context.
+      // Please refer to the documentation of the paymaster you are using
+      // to understand the required parameters.
+      paymasterContext: {
+        token: "SUPPORTED_TOKEN_CONTRACT_ADDRESS",
+        sponsorshipPolicyId: "sp_my_policy_id",
+      },
+      // focus-end
+    },
+    smartAccountInit: new SafeSmartAccount(),
+    paymasterConfig: {
+      // Get the pimlico API Key from dashboard.pimlico.io
+      url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
+    },
+  },
+});
+```

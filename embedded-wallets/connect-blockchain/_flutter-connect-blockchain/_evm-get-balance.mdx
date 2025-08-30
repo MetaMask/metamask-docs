@@ -1,0 +1,17 @@
+To retrieve the native balance of the user, you can use the `Web3Client` object we created earlier.
+It has `getBalance` method which helps to fetch the user's native token balance.
+
+The result we get from Web3Client is in wei, the smallest value. To convert the value to ether, you
+can divide it with 10^18, where 18 denotes the decimals for wei.
+
+For the simplicity, we'll use a helper function from web3dart package which has the same
+implementation
+
+```dart
+
+// Use the client and address variable from above
+final balanceResponse = await client.getBalance(address);
+
+// Convert the balance to ether format, and round off to 4 decimal places.
+final balance = balanceResponse.getValueInUnit(EtherUnit.ether).toStringAsFixed(4);
+```

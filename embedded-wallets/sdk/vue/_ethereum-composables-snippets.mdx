@@ -1,0 +1,172 @@
+You need to install the `wagmi` & `@tanstack/vue-query` packages and use the **Web3Auth
+implementation of `WagmiProvider`** for configuration.
+
+:::info
+
+The Web3Auth implementation of `WagmiProvider` is a custom implementation that is used to integrate
+with the Web3Auth Modal SDK. It is a wrapper around the `WagmiProvider` that makes it compatible.
+
+With this implementation, you can use the Wagmi composables, however **no external connectors are
+supported**. Web3Auth provides a whole suite of connectors which you can use directly for a better
+experience with external wallets.
+
+:::
+
+```bash
+npm install wagmi @tanstack/vue-query
+```
+
+Update your `main.ts` to use the Vue Query plugin **only if you are using Wagmi**:
+
+```ts title="main.ts"
+// focus-next-line
+import { VueQueryPlugin } from "@tanstack/vue-query";
+import { createApp } from "vue";
+import App from "./App.vue";
+import "./style.css";
+
+// focus-next-line
+createApp(App).use(VueQueryPlugin).mount("#app");
+```
+
+Then, in your `App.vue`, wrap your app with both providers:
+
+```html title="App.vue"
+<script setup lang="ts">
+  import Home from "./Home.vue";
+  import { Web3AuthProvider } from "@web3auth/modal/vue";
+  // focus-next-line
+  import { WagmiProvider } from "@web3auth/modal/vue/wagmi";
+  import web3AuthContextConfig from "./web3authContext";
+</script>
+
+<template>
+  <div class="min-h-screen flex flex-col">
+    <Web3AuthProvider :config="web3AuthContextConfig">
+      <!-- focus-start -->
+      <WagmiProvider>
+        <Home />
+      </WagmiProvider>
+      <!-- focus-end -->
+    </Web3AuthProvider>
+  </div>
+</template>
+```
+
+:::info
+
+Wagmi provides a comprehensive set of composables for Ethereum and EVM-compatible chains in Vue.
+Web3Auth integrates seamlessly with Wagmi, so you can use composables like `useAccount`,
+`useBalance`, `useSendTransaction`, and more, out of the box.
+
+:::
+
+Below are some examples of using Wagmi composables in your dApp after Web3Auth and Wagmi are set up.
+You can note these functions work directly with Wagmi. Once you have set up Wagmi with Web3Auth, you
+can use any Wagmi composable as you would in a standard Wagmi application.
+
+### Get Account Balance
+
+```html
+<script setup lang="ts">
+  import { useAccount, useBalance } from "wagmi";
+  import { formatUnits } from "viem";
+  import { computed } from "vue";
+
+  const { address } = useAccount();
+  const { data, isLoading, error } = useBalance(computed(() => ({ address: address.value })));
+</script>
+
+<template>
+  <div>
+    <h2>Balance</h2>
+    <div>
+      <span v-if="data && data.value !== undefined">
+        {{ formatUnits(data.value, data.decimals) }} {{ data.symbol }}
+      </span>
+      <span v-if="isLoading">Loading...</span>
+      <span v-if="error">Error: {{ error.message }}</span>
+    </div>
+  </div>
+</template>
+```
+
+### Send Transaction
+
+```html
+<script setup lang="ts">
+  import { ref } from "vue";
+  import { useSendTransaction, useWaitForTransactionReceipt } from "wagmi";
+  import { parseEther } from "viem";
+
+  const address = ref("");
+  const value = ref("");
+  const { data: hash, error, isPending, sendTransaction } = useSendTransaction();
+
+  function submit() {
+    sendTransaction({
+      to: address.value,
+      value: parseEther(value.value),
+    });
+  }
+
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash,
+  });
+</script>
+
+<template>
+  <div>
+    <h2>Send Transaction</h2>
+    <form @submit.prevent="submit">
+      <input v-model="address.value" name="address" placeholder="Address" required />
+      <input
+        v-model="value.value"
+        name="value"
+        placeholder="Amount (ETH)"
+        type="number"
+        step="0.000000001"
+        required
+      />
+      <button :disabled="isPending" type="submit">
+        {{ isPending ? "Confirming..." : "Send" }}
+      </button>
+    </form>
+    <div v-if="hash">Transaction Hash: {{ hash }}</div>
+    <div v-if="isConfirming">Waiting for confirmation...</div>
+    <div v-if="isConfirmed">Transaction confirmed.</div>
+    <div v-if="error">Error: {{ error.shortMessage || error.message }}</div>
+  </div>
+</template>
+```
+
+### Switch Chain
+
+```html
+<script setup lang="ts">
+  import { useChainId, useSwitchChain } from "wagmi";
+
+  const chainId = useChainId();
+  const { chains, switchChain, error } = useSwitchChain();
+</script>
+
+<template>
+  <div>
+    <h2>Switch Chain</h2>
+    <h3>Connected to {{ chainId }}</h3>
+    <div>
+      <button
+        v-for="chain in chains"
+        :key="chain.id"
+        :disabled="chainId === chain.id"
+        @click="switchChain({ chainId: chain.id })"
+        type="button"
+        class="card"
+      >
+        {{ chain.name }}
+      </button>
+    </div>
+    <div v-if="error">{{ error.message }}</div>
+  </div>
+</template>
+```

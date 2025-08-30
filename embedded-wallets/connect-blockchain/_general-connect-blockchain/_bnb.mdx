@@ -1,0 +1,38 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x38
+- Public RPC URL: https://bsc-dataseed.binance.org (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: BNB Smart Chain Mainnet
+- Block Explorer Link: https://bscscan.com
+- Ticker: BNB
+- Ticker Name: Binance Coin
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x61
+- Public RPC URL: https://data-seed-prebsc-1-s1.binance.org:8545 (Avoid using public rpcTarget in
+  production, use services like Infura)
+- Display Name: BNB Smart Chain Testnet
+- Block Explorer Link: https://testnet.bscscan.com
+- Ticker: BNB
+- Ticker Name: Binance Coin
+
+</TabItem>
+</Tabs>

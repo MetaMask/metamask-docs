@@ -1,0 +1,40 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="testnet"
+  values={[
+    { label: "Testnet", value: "testnet", },
+    { label: "Holesky", value: "holesky", },
+  ]}
+>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0xa96 (hex of 2710)
+- Public RPC URL: https://rpc-testnet.morphl2.io (Avoid using public rpcTarget in production)
+- Display Name: Morph Testnet
+- Block Explorer Link: https://explorer-testnet.morphl2.io/
+- Ticker: ETH
+- Ticker Name: ETH
+- Logo:
+  https://morphl2brand.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Ffcab2c10-8da9-4414-aa63-4998ddf62e78%2F64fbcffc-0e7c-45e1-8900-1bb36dc90924%2FFrame_1597882262.png?table=block&id=0e6a22c3-ed4e-4c25-9575-11b95b1eade9&spaceId=fcab2c10-8da9-4414-aa63-4998ddf62e78&width=2000&userId=&cache=v2
+
+</TabItem>
+<TabItem
+  value="holesky"
+>
+
+- Chain ID: 0xafa (hex of 2810)
+- Public RPC URL: https://rpc-holesky.morphl2.io (Avoid using public rpcTarget in production)
+- Display Name: Morph Holesky
+- Block Explorer Link: https://explorer-holesky.morphl2.io/
+- Ticker: ETH
+- Ticker Name: ETH
+- Logo:
+  https://morphl2brand.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Ffcab2c10-8da9-4414-aa63-4998ddf62e78%2F64fbcffc-0e7c-45e1-8900-1bb36dc90924%2FFrame_1597882262.png?table=block&id=0e6a22c3-ed4e-4c25-9575-11b95b1eade9&spaceId=fcab2c10-8da9-4414-aa63-4998ddf62e78&width=2000&userId=&cache=v2
+
+</TabItem>
+</Tabs>

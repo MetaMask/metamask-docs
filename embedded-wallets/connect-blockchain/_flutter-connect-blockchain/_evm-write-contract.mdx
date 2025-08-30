@@ -1,0 +1,21 @@
+Similary, you can write to the contract using the `sendTransaction` method of Web3Client. In this
+sample, we'll update the message in the contract we deployed previously.
+
+```dart
+import 'package:web3dart/web3dart.dart';
+// Use the client, address, contractAbi and credentials from previous code snippets
+final contract = DeployedContract(
+    ContractAbi.fromJson(contractAbi, ''),
+    "ADDRESS_OF_DEPLOYED_CONTRACT_IN_HEX",
+);
+
+final updateFunction = contract.function('update');
+final receipt = await client.sendTransaction(
+  credentials,
+  Transaction.callContract(
+    contract: contract,
+    function: updateFunction,
+    parameters: ["YOUR_NEW_MESSAGE"]
+  )
+);
+```

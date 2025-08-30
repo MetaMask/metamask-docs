@@ -73,7 +73,7 @@ dependencies:
 
 ### Initialization
 
-After successfully installing the package, the next step is to initialize Web3Auth in your Flutter app. This sets up the necessary configurations using Client Id and prepares Web3Auth. [Learn more about Web3Auth Initialization](/docs/sdk/mobile/pnp/flutter/initialize).
+After successfully installing the package, the next step is to initialize Web3Auth in your Flutter app. This sets up the necessary configurations using Client Id and prepares Web3Auth. [Learn more about Web3Auth Initialization](/embedded-wallets/sdk/flutter/initialize).
 
 ```dart
 Future<void> main() async {
@@ -151,7 +151,7 @@ class _MainAppState extends State<MainApp> {
 
 If the user is not authenticated, you should utilize the `login` method. For the Wallet, we will add two login options, Google, and Email Passwordless login. In Web3Auth, you can choose between a Single Page Authentication flow or a Regular Web Application flow. For this guide, we'll be using a Single Page Authentication flow. We'll create a helper function, `_login` inside `LoginScreen`. The login method is pretty straightforward in Web3Auth and takes `LoginParams` as input. After successfully logging in, we'll navigate the user to `HomeScreen`.
 
-Learn more about [Web3Auth LoginParams](/docs/sdk/mobile/pnp/flutter/usage#arguments).
+Learn more about [Web3Auth LoginParams](/embedded-wallets/sdk/flutter/usage#arguments).
 
 ```dart
 class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
@@ -922,4 +922,4 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 
 Voila, you have build a chain agnostic Web3 wallet. This guide only gives you an overview of how to create your wallet with EVM and Solana ecosystem support. The general idea of the guide can be used for any of the blockchain ecosystem.
 
-If you are interested in learning more about Web3Auth, please checkout our [documentation for Flutter](/docs/sdk/mobile/pnp/flutter). You can find the code used for the guide on our [examples repo](https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-playground).
+If you are interested in learning more about Web3Auth, please checkout our [documentation for Flutter](/embedded-wallets/sdk/flutter). You can find the code used for the guide on our [examples repo](https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-playground).

@@ -1,0 +1,13 @@
+```tsx
+// For ethers v5
+// const ethersProvider = new ethers.providers.Web3Provider(this.provider);
+const ethersProvider = new ethers.BrowserProvider(provider!);
+
+// For ethers v5
+// const signer = ethersProvider.getSigner();
+const signer = await ethersProvider.getSigner();
+
+// Get user's Ethereum public address
+const address = signer.getAddress();
+uiConsole(address);
+```

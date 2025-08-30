@@ -1,0 +1,15 @@
+To interact with the blockchain, initialize the `EthereumHttpClient` with the RPC URL, and chain id
+of the network you want to connect to. To get the public RPC URL, and other details as chain id, you
+can checkout [ChainList](https://chainlist.org/).
+
+```swift
+import web3
+
+let client = EthereumHttpClient(
+    // Please avoid using public RPC URL in production, use services
+    // like Infura, Quicknode, etc.
+    url: URL.init(string: rpcUrl)!,
+    // Replace with the chain id of the network you want to connect to
+    network: .custom(chainId)
+)
+```

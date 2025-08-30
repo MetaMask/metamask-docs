@@ -1,0 +1,15 @@
+---
+title: Examples - PnP Web React SDK
+sidebar_label: Examples
+description: 'Web3Auth PnP Web React SDK Examples | Embedded Wallets'
+hide_table_of_contents: true
+---
+
+import ExampleCards from '@theme/ExampleCards'
+import { webExamples } from '@site/src/utils/example-maps'
+
+<ExampleCards
+  exampleMap={[...webExamples].filter(
+    obj => obj.tags?.includes('react') || obj.tags?.includes('nextjs')
+  )}
+/>

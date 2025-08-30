@@ -1,0 +1,27 @@
+To retrieve the balance of an Ethereum address, you can use the `EthereumClient.eth_getBalance`
+method. The response we get from this method is in Wei, so we need to convert it to Ether. The get
+the ether value, you can divide the wei value with `1 / 10^18`.
+
+```swift
+import web3
+
+let etherInWei = pow(Double(10), 18)
+
+/// Convert Wei(BInt) unit to Ether(Decimal) unit
+public func toEther(wei: Wei) -> Ether {
+    guard let decimalWei = Double(wei.description) else {
+        return 0
+    }
+    return decimalWei / etherInWei
+}
+
+// focus-start
+let balanceResponse = try await client.eth_getBalance(
+    // Use the address from previous step
+    address: address,
+    block: .Latest
+)
+
+let balance = toEther(wei: balanceResponse)
+// focus-end
+```

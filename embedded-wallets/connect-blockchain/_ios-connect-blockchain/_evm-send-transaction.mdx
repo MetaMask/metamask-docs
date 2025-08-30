@@ -1,0 +1,73 @@
+For signing and sending the transaction, we'll create helper methods to get the nonce, gas price,
+estimate the gas and send the transaction. The nonce is the number of transactions sent from the
+address. The gas price is the price of the gas in Wei. The gas limit is the maximum amount of gas
+that can be used to send the transaction. Apart form that, we'll also create a helper method to
+convert the amount to Wei.
+
+Once the transaction object is created, we'll estimate the gas and create a new transaction object
+with the gas limit. Finally, we'll send the transaction using
+`EthereumHttpClient.eth_sendRawTransaction` method and get the hash.
+
+```swift
+import web3
+
+private let etherInWei = pow(Double(10), 18)
+
+private func getNonce() async throws -> Int {
+    let nonce = try await client.eth_getTransactionCount(address: account.address, block: .Latest)
+    return nonce
+}
+
+private func getGasPrice() async throws -> BigUInt {
+    return try await client.eth_gasPrice()
+}
+
+private func estimateGas(ethereumTransaction: EthereumTransaction) async throws -> BigUInt {
+    return try await client.eth_estimateGas(ethereumTransaction)
+}
+
+public func toWei(ether: Ether) -> Wei {
+    let wei = Wei(ether * etherInWei)
+    return wei
+}
+
+let nonce = try await getNonce()
+let gasPrice = try await getGasPrice()
+
+// Convert the amount to Wei
+let value = toWei(ether: Ether(floatLiteral: 0.001))
+
+let ethereumTransaction = EthereumTransaction(
+    // Use the account from previous step
+    from: account.address,
+    to: EthereumAddress.init(stringLiteral: "RECIPIENT_ADDRESS_IN_HEX_FORMAT"),
+    value: value,
+    // Empty data, 0x
+    data: Data(),
+    nonce: nonce,
+    gasPrice: gasPrice,
+    gasLimit: nil,
+    // Use the chain id from previous step
+    chainId: CHAIN_ID_IN_INTEGER
+)
+
+// Estimate the gas
+let gasLimit = try await estimateGas(ethereumTransaction: ethereumTransaction)
+
+let transaction = EthereumTransaction(
+    // Use the account from previous step
+    from: account.address,
+    to: EthereumAddress.init(stringLiteral: "RECIPIENT_ADDRESS_IN_HEX_FORMAT"),
+    value: value,
+    // Empty data, 0x
+    data: Data(),
+    nonce: nonce,
+    gasPrice: gasPrice,
+    gasLimit: gasLimit,
+    // Use the chain id from previous step
+    chainId: CHAIN_ID_IN_INTEGER
+)
+
+// Use the account from previous step
+let hash = try await client.eth_sendRawTransaction(transaction, withAccount: account)
+```

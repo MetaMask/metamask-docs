@@ -1,0 +1,40 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0xA (hex of 10)
+- Public RPC URL: https://mainnet.optimism.io (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: Optimism Mainnet
+- Block Explorer Link: https://optimistic.etherscan.io
+- Ticker: ETH
+- Ticker Name: ETH
+- Logo: https://cryptologos.cc/logos/optimism-ethereum-op-logo.png
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0xAA37DC (hex of 11155420)
+- Public RPC URL: https://sepolia.optimism.io (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: OP Sepolia
+- Block Explorer Link: https://sepolia-optimistic.etherscan.io
+- Ticker: ETH
+- Ticker Name: ETH
+- Logo: https://cryptologos.cc/logos/optimism-ethereum-op-logo.png
+
+</TabItem>
+</Tabs>

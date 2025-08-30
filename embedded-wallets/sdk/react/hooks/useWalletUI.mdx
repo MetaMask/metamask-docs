@@ -1,0 +1,56 @@
+---
+title: useWalletUI
+sidebar_label: useWalletUI
+description: '@web3auth/modal React Hooks useWalletUI | Embedded Wallets'
+---
+
+Hook to show the Wallet Services UI modal using the Wallet Services Plugin.
+
+### Import
+
+```tsx
+import { useWalletUI } from '@web3auth/modal/react'
+```
+
+### Usage
+
+```tsx
+import { useWalletUI } from '@web3auth/modal/react'
+
+function WalletUIButton() {
+  const { showWalletUI, loading, error } = useWalletUI()
+
+  return (
+    <div>
+      <button onClick={() => showWalletUI()} disabled={loading}>
+        {loading ? 'Opening Wallet UI...' : 'Show Wallet UI'}
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Return Type
+
+```tsx
+import { type IUseWalletUI } from '@web3auth/modal/react'
+```
+
+#### loading
+
+`boolean`
+
+Whether the Wallet UI opening process is in progress.
+
+#### error
+
+`Web3AuthError | null`
+
+Error that occurred during the Wallet UI opening process.
+
+#### showWalletUI
+
+`(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
+
+Function to show the Wallet Services modal UI. Accepts optional parameters for customizing the wallet UI experience.

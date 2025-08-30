@@ -1,0 +1,180 @@
+---
+title: getIdentityToken
+sidebar_label: getIdentityToken
+description: '@web3auth/modal getIdentityToken | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+Function to retrieve the identity token from Web3Auth.
+
+:::note
+
+This function will only return information based on the connected adapter. These details are not stored anywhere and are fetched from the adapter during the connection and remain in the session.
+
+:::
+
+### Usage
+
+```ts
+// Later in your code:
+try {
+  const idToken = await web3auth.getIdentityToken()
+  console.log(idToken)
+} catch (error) {
+  console.error('Error authenticating user:', error)
+}
+```
+
+### Return Type
+
+```typescript
+getIdentityToken(): Promise<UserAuthInfo>
+
+type UserAuthInfo = { idToken: string };
+```
+
+### Response Format
+
+The `idToken` is a JWT that can be decoded to get user information.
+
+<Tabs
+  defaultValue="social-login"
+  values={[
+    { label: "Social Login", value: "social-login" },
+    { label: "External Wallet", value: "external-wallet" },
+  ]}
+>
+
+<TabItem value="social-login">
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Type Declarations", value: "type" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `iat` | `number` | The "iat" (issued at) claim identifies the time at which the JWT was issued. |
+| `aud` | `string` | The "aud" (audience) claim identifies the recipients that the JWT is intended for. (Here, it's the dapp `client_id`) |
+| `iss` | `string` | The "iss" (issuer) claim identifies who issued the JWT. (Here, it's Web3Auth `https://api.openlogin.com/`) |
+| `email` | `string` | The email address of the user (optional) |
+| `name` | `string` | The name of the user (optional) |
+| `profileImage` | `string` | The profile image of the user (optional) |
+| `verifier` | `string` | Web3Auth's verifier used while user login |
+| `verifierId` | `string` | Unique user id given by OAuth login provider |
+| `aggregateVerifier` | `string` | Name of the verifier if you are using a single id verifier (aggregateVerifier) (optional) |
+| `exp` | `number` | The "exp" (expiration time) claim identifies the expiration time on or after which the _JWT MUST NOT be accepted for processing_. |
+| `wallets` | `array` | list of wallets for which this token is issued: <ul><li>`curve` "secp256k1" (default) or "ed25519" <br/> You can specify which curve you want use for the encoded public key in the login parameters<br/></li><li>`type` "web3auth_key" incase of social logins</li><li>`public_key` compressed public key derived based on the specified curve </li></ul> |
+
+</TabItem>
+
+<TabItem value="type">
+
+`getIdentityToken(): Promise<UserAuthInfo>`
+
+```tsx
+export type UserAuthInfo = { idToken: string }
+```
+
+</TabItem>
+
+</Tabs>
+
+#### Sample Response
+
+```json
+{
+  "iat": 1655835494,
+  "aud": "BCtbnOamqh0cJFEUYA0NB5YkvBECZ3HLZsKfvSRBvew2EiiKW3UxpyQASSR0artjQkiUOCHeZ_ZeygXpYpxZjOs",
+  "iss": "https://api.openlogin.com/",
+  "email": "xyz@xyz.com",
+  "name": "John Doe",
+  "profileImage": "https://lh3.googleusercontent.com/a/AATXAJx3lnGmHiM4K97uLo9Rb0AxOceH-dQCBSRqGbck=s96-c",
+  "verifier": "torus",
+  "verifierId": "xyz@xyz.com",
+  "aggregateVerifier": "tkey-google-lrc",
+  "exp": 1655921894,
+  "wallets": [
+    {
+      "public_key": "035143318b83eb5d31611f8c03582ab1200494f66f5e11a67c34f5581f48c1b70b",
+      "type": "web3auth_key",
+      "curve": "secp256k1"
+    }
+  ]
+}
+```
+
+</TabItem>
+
+<TabItem value="external-wallet">
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Type Declarations", value: "type" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `iat` | `number` | The "iat" (issued at) claim identifies the time at which the JWT was issued. |
+| `aud` | `string` | The "audience" claim identifies the recipients that the JWT is intended for. (Here, it's `website's url`) |
+| `iss` | `string` | The "issuer" claim identifies who issued the JWT. <br/> Here, issuer could be `torus-evm`, `torus-solana`, `metamask`, `phantom`, `walletconnect-v1`, `coinbase`, `solflare` |
+| `wallets` | `array` | list of wallets for which this token is issued: <ul><li>`address` : Wallet public address</li><li>`type` Network Type such as "ethereum", "solana" or "starkware" incase of external wallets </li></ul> |
+
+</TabItem>
+
+<TabItem value="type">
+
+`getIdentityToken(): Promise<UserAuthInfo>`
+
+```tsx
+export type UserAuthInfo = { idToken: string }
+```
+
+</TabItem>
+
+</Tabs>
+
+#### Sample Response
+
+```json
+{
+  "iat": 1661158877,
+  "issuer": "<issuer-name>",
+  "audience": "https://requesting.website",
+  "wallets": [
+    {
+      "address": "0x809d4310d578649d8539e718030ee11e603ee8f3",
+      "type": "ethereum"
+    }
+  ],
+  "exp": 1661245277
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### Error Handling
+
+```javascript
+try {
+  const userInfo = await web3auth.getIdentityToken()
+  // Use the token
+} catch (error) {
+  // Handle errors (e.g., user not connected, network issues)
+  console.error('Authentication failed:', error)
+}
+```

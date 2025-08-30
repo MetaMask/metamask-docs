@@ -1,0 +1,137 @@
+---
+title: PnP No Modal SDK - v5 to v6
+
+description: 'PnP No Modal SDK - v5 to v6 | Embedded Wallets'
+sidebar_label: v5 to v6
+---
+
+## General
+
+### `web3auth.connected` is introduced
+
+#### Manage session using `web3auth.connected` instead of `web3auth.provider`
+
+With V6, users can manage their session using `web3auth.connected` instead of `web3auth.provider`.
+
+```tsx
+// With V6
+// focus-start
+if (web3auth.connected) {
+  setLoggedIn(true)
+}
+// focus-end
+```
+
+### `provider` is now always available
+
+In V5, we used to add a check for setting the `provider` only if the `web3auth.provider` was present. But now with V6 we always have a provider available even if the user is not logged in.
+
+```tsx
+// With V5
+if (web3auth.provider) {
+  setProvider(web3auth.provider)
+}
+// With V6
+// focus-next-line
+setProvider(web3auth.provider) // before the connect() or connectTo(), provider is available.
+```
+
+### `rpcTarget` and `chainId` is now a mandatory parameter
+
+Previously, the Web Modal SDK required `chainConfig` as a parameter which had `rpcTarget` & `chainId` as the optional parameter. But with V6, it's mandatory to add `rpcTarget` & `chainId` in the `chainConfig` object.
+
+```tsx
+const web3auth = new Web3Auth({
+  clientId,
+  chainConfig: {
+    chainNamespace: CHAIN_NAMESPACES.EIP155,
+    // focus-start
+    chainId: '0x1',
+    rpcTarget: 'https://rpc.ethereum.org', // This is the public RPC we have added, please pass on your own custom endpoint while creating an app
+    // focus-end
+  },
+  web3AuthNetwork: 'sapphire_mainnet',
+})
+```
+
+### `privateKeyProvider` is introduced
+
+#### `privateKeyProvider` is now a mandatory parameter to be passed into the `OpenLoginAdapter`
+
+With V6, we have added a new parameter `privateKeyProvider` which is mandatory to be passed into the `OpenLoginAdapter`.
+
+#### For EVM chains
+
+For EVM chains use the `EthereumPrivateKeyProvider` from the `@web3auth/ethereum-provider`package. Please note that`EthereumPrivateKeyProvider`requires`chainConfig`as the `config` parameter at the time of initialization.
+
+```tsx
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: '0x1',
+  rpcTarget: 'https://rpc.ethereum.org',
+  displayName: 'Ethereum Mainnet',
+  blockExplorer: 'https://etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+}
+// focus-next-line
+const privateKeyProvider = new EthereumPrivateKeyProvider({ config: { chainConfig } })
+const openloginAdapter = new OpenloginAdapter({
+  // focus-next-line
+  privateKeyProvider,
+})
+web3authInstance.configureAdapter(openloginAdapter)
+```
+
+#### For Solana
+
+For Solana use the `SolanaPrivateKeyProvider` from the `@web3auth/solana-provider`package. Please note that `SolanaPrivateKeyProvider` requires `chainConfig` as the `config` parameter at the time of initialization.
+
+```tsx
+import { SolanaPrivateKeyProvider } from '@web3auth/solana-provider'
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.SOLANA,
+  chainId: '0x1', // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
+  rpcTarget: 'https://api.mainnet-beta.solana.com',
+  displayName: 'Solana Mainnet',
+  blockExplorer: 'https://explorer.solana.com',
+  ticker: 'SOL',
+  tickerName: 'Solana',
+}
+// focus-next-line
+const privateKeyProvider = new SolanaPrivateKeyProvider({ config: { chainConfig } })
+const openloginAdapter = new OpenloginAdapter({
+  // focus-next-line
+  privateKeyProvider,
+})
+web3auth.configureAdapter(openloginAdapter)
+```
+
+#### For all other chains
+
+For all Non-EVM & Non-Solana chains use the `CommonPrivateKeyProvider` from the `@web3auth/base-provider`package. Please note that `CommonPrivateKeyProvider` requires `chainConfig` as the `config` parameter at the time of initialization.
+
+```tsx
+import { CommonPrivateKeyProvider } from '@web3auth/base-provider'
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.SOLANA,
+  chainId: '0x1', // Please use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
+  rpcTarget: 'https://api.mainnet-beta.solana.com',
+  displayName: 'Solana Mainnet',
+  blockExplorer: 'https://explorer.solana.com',
+  ticker: 'SOL',
+  tickerName: 'Solana',
+}
+// focus-next-line
+const privateKeyProvider = new CommonPrivateKeyProvider({ config: { chainConfig } })
+
+const openloginAdapter = new OpenloginAdapter({
+  // focus-next-line
+  privateKeyProvider,
+})
+web3authInstance.configureAdapter(openloginAdapter)
+```

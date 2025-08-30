@@ -29,7 +29,7 @@ For those who want to skip straight to the code, you can find it on [GitHub](htt
 
 - Pimlico Account: Since we'll be using the Pimlico paymaster, you'll need to have an API key from Pimlico. You can get a free API key from [Pimlico Dashboard](https://dashboard.pimlico.io/).
 - Web3Auth Dashboard: If you haven't already, sign up on the Web3Auth platform. It is free and gives you access to the Web3Auth's base plan. Head to Web3Auth's documentation page for detailed [instructions on setting up the Web3Auth Dashboard](/docs/dashboard).
-- Web3Auth PnP Web SDK: This guide assumes that you already know how to integrate the PnP Web SDK in your project. If not, you can learn how to [integrate Web3Auth in your Web app](/docs/sdk/web/react/).
+- Web3Auth PnP Web SDK: This guide assumes that you already know how to integrate the PnP Web SDK in your project. If not, you can learn how to [integrate Web3Auth in your Web app](/embedded-wallets/sdk/react/).
 
 ## Integrate AccountAbstractionProvider
 
@@ -49,7 +49,7 @@ The AccountAbstractionProvider requires specific configurations to function corr
 
 You can choose from a variety of paymaster services available in the ecosystem. In this guide, we'll be configuring the Pimlico's paymaster. However, it's important to note that paymaster support is not limited to the Pimlico, giving you the flexibility to integrate any compatible paymaster service that suits your requirements.
 
-For the simplicity, we have only use `SafeSmartAccount`, but you choose your favorite smart account provider from the available ones. [Learn how to configure the smart account](/docs/sdk/web/react/advanced/smart-accounts).
+For the simplicity, we have only use `SafeSmartAccount`, but you choose your favorite smart account provider from the available ones. [Learn how to configure the smart account](/embedded-wallets/sdk/react/advanced/smart-accounts).
 
 ```ts
 // focus-start
@@ -291,4 +291,4 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 
 ## Conclusion
 
-Voila, you have successfully sent your first gasless transaction using the Pimlico paymaster with Web3Auth Account Abstraction Provider. To learn more about advance features of the Account Abstraction Provider like performing batch transactions, using ERC-20 paymaster you can refer to the [Account Abstraction Provider](/docs/sdk/web/react) documentation.
+Voila, you have successfully sent your first gasless transaction using the Pimlico paymaster with Web3Auth Account Abstraction Provider. To learn more about advance features of the Account Abstraction Provider like performing batch transactions, using ERC-20 paymaster you can refer to the [Account Abstraction Provider](/embedded-wallets/sdk/react) documentation.
