@@ -74,36 +74,6 @@ Head over to the [**Advanced Configuration**](./advanced) section to learn more 
 
 :::
 
-## Blockchain Integration
-
-Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**, each with dedicated provider methods.
-
-### Solana Integration
-
-To interact with Solana networks, you can get the provider from Web3Auth and use it with Solana libraries:
-
-```javascript
-await web3auth.connect()
-// Use with a Solana library
-const solanaWallet = new SolanaWallet(web3auth.provider)
-```
-
-### Ethereum Integration
-
-For Ethereum integration, you can get the provider and use it with ethers or viem:
-
-```javascript
-await web3auth.connect()
-// Use with ethers.js
-const ethProvider = new ethers.BrowserProvider(web3auth.provider)
-// OR
-// Use with viem
-const walletClient = createWalletClient({
-  chain: getViewChain(web3auth.provider),
-  transport: custom(web3auth.provider),
-})
-```
-
 <Tabs
   defaultValue="basic-config"
   values={[
@@ -170,8 +140,34 @@ const web3auth = new Web3Auth({
 
 </Tabs>
 
+## Blockchain Integration
+
+Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**, each with dedicated provider methods.
+
+### Solana Integration
+
+To interact with Solana networks, you can get the provider from Web3Auth and use it with Solana libraries:
+
+```javascript
+await web3auth.connect()
+// Use with a Solana library
+const solanaWallet = new SolanaWallet(web3auth.provider)
+```
+
+### Ethereum Integration
+
+For Ethereum integration, you can get the provider and use it with ethers or viem:
+
+```javascript
+await web3auth.connect()
+// Use with ethers.js
+const ethProvider = new ethers.BrowserProvider(web3auth.provider)
+// OR
+// Use with viem
+const walletClient = createWalletClient({
+  chain: getViewChain(web3auth.provider),
+  transport: custom(web3auth.provider),
+})
+```
+
 <SdkTroubleshootingIntro />
-
-## Quick Starts
-
-<ExampleCards exampleMap={webExamples.filter(obj => obj.type === QUICK_START)} />

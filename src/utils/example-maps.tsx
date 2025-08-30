@@ -1,7 +1,6 @@
 export const quickStartHostedLinks = {
   // PNP Modal SDK
   ANGULAR: 'https://web3auth-angular-quick-start.vercel.app/',
-  HTML: 'https://web3auth-vanillajs-quick-start.vercel.app/',
   NEXTJS: 'https://web3auth-nextjs-quick-start.vercel.app/',
   REACT: 'https://web3auth-react-quick-start-tau.vercel.app/',
   REACT_SOLANA: 'https://web3auth-react-solana-quick-start.vercel.app/',
@@ -24,7 +23,6 @@ export const quickStartSourceCode = {
   VUE_SOLANA:
     'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/vue-solana-quick-start',
   NEXTJS: 'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/nextjs-quick-start',
-  HTML: 'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/vanillajs-quick-start',
   ANDROID: 'https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-quick-start',
   IOS: 'https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-quick-start',
   REACT_NATIVE:
@@ -414,18 +412,6 @@ export const webExamples: ExamplesInterface[] = [
       'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/nextjs-quick-start',
     id: 'nextjs-quick-start',
     qsLink: '/quick-start?framework=NEXTJS&stepIndex=0',
-  },
-  {
-    title: 'Vanilla JS Quick Start',
-    description: 'A quick integration of Web3Auth SDK in Vanilla JavaScript',
-    image: 'banners/htmljs.png',
-    type: QUICK_START,
-    tags: [tags.pnp, tags.web, tags.evm],
-    link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/vanillajs-quick-start',
-    githubLink:
-      'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/vanillajs-quick-start',
-    id: 'vanillajs-quick-start',
-    qsLink: '/quick-start?framework=HTML&stepIndex=0',
   },
 
   // React Playground

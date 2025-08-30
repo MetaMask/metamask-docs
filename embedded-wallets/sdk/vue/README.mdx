@@ -96,22 +96,6 @@ Head over to the [**Advanced Configuration**](./advanced) section to learn more 
 
 :::
 
-## Blockchain Integration
-
-Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**, each with dedicated Vue composables.
-
-### Solana Integration
-
-Solana composables are included natively within the `@web3auth/modal` package. No additional setup is required—simply use the provided composables to interact with Solana networks.
-
-For detailed usage and examples, visit the [**Solana Composables**](./vue/solana-composables) section.
-
-### Ethereum Integration
-
-Ethereum composables are provided through the popular `wagmi` library, which works seamlessly with Web3Auth. This allows you to leverage a wide range of Ethereum composables for account management, transactions, and more.
-
-For implementation details and examples, refer to the [**Ethereum Composables**](./vue/ethereum-composables) section.
-
 <Tabs
   defaultValue="basic-config"
   values={[
@@ -193,8 +177,20 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
 
 </Tabs>
 
+## Blockchain Integration
+
+Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**, each with dedicated Vue composables.
+
+### Solana Integration
+
+Solana composables are included natively within the `@web3auth/modal` package. No additional setup is required—simply use the provided composables to interact with Solana networks.
+
+For detailed usage and examples, visit the [**Solana Composables**](./vue/solana-composables) section.
+
+### Ethereum Integration
+
+Ethereum composables are provided through the popular `wagmi` library, which works seamlessly with Web3Auth. This allows you to leverage a wide range of Ethereum composables for account management, transactions, and more.
+
+For implementation details and examples, refer to the [**Ethereum Composables**](./vue/ethereum-composables) section.
+
 <SdkTroubleshootingIntro />
-
-## Quick Starts
-
-<ExampleCards exampleMap={webExamples.filter(obj => obj.type === QUICK_START)} />
