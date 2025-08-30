@@ -558,7 +558,7 @@ const config = {
       },
       prism: {
         theme: codeTheme,
-        additionalLanguages: ['csharp', 'gradle', 'bash', 'json'],
+        additionalLanguages: ['csharp', 'gradle', 'bash', 'json', 'java', 'kotlin', 'swift', 'groovy', 'dart'],
         magicComments: [
           {
             className: 'theme-code-block-highlighted-line',

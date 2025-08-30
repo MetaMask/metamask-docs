@@ -116,6 +116,31 @@ Open your app's `AndroidManifest.xml` file and add the following deep link inten
 </intent-filter>
 ```
 
+### 4. Triggering Login exceptions
+
+The `setCustomTabsClosed` method can be used to trigger login exceptions for Android. The Android SDK uses the custom tabs and from current implementation of chrome custom tab, it's not possible to add a listener directly to chrome custom tab close button and trigger login exceptions.
+
+Hence, it's necessary to use `setCustomTabsClosed` method in your login screen to trigger exceptions.
+
+```kotlin
+class MainActivity : AppCompatActivity() {
+    // Additional code
+
+    override fun onResume() {
+        super.onResume()
+        // focus-start
+        if (Web3Auth.getCustomTabsClosed()) {
+            Toast.makeText(this, "User closed the browser.", Toast.LENGTH_SHORT).show()
+            web3Auth.setResultUrl(null)
+            Web3Auth.setCustomTabsClosed(false)
+        }
+        // focus-end
+    }
+
+    // Additional code
+}
+```
+
 ## Initialize Web3Auth
 
 ### 1. Create a Web3Auth instance
@@ -223,25 +248,25 @@ val web3Auth = Web3Auth(
 <TabItem value="advanced-config">
 
 ```kotlin
-web3Auth = Web3Auth (
-  Web3AuthOptions (
-    context = this,
-    clientId = getString (R.string.web3auth_project_id),
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse ("{YOUR_APP_PACKAGE_NAME}://auth"),
-    loginConfig = hashMapOf("google" to LoginConfigItem(
-      verifier = "verifier-name", // Get it from Web3Auth dashboard
-      typeOfLogin = TypeOfLogin.GOOGLE,
-      clientId = getString(R.string.google_client_id) // Google's client id
-    )),
-    mfaSettings = MfaSettings(
-      deviceShareFactor = MfaSetting(true, 1, true),
-      socialBackupFactor = MfaSetting(true, 2, true),
-      passwordFactor = MfaSetting(true, 3, false),
-      backUpShareFactor = MfaSetting(true, 4, false),
-      passkeysFactor = MfaSetting(true, 5, true),
-      authenticatorFactor = MfaSetting(true, 6, true),
-    )
+val web3Auth = Web3Auth(
+    Web3AuthOptions(
+        context = this,
+        clientId = "YOUR_CLIENT_ID",
+        network = Network.SAPPHIRE_MAINNET, // or Network.SAPPHIRE_DEVNET
+        redirectUrl = "YOUR_APP_SCHEME://auth"
+        loginConfig = hashMapOf("google" to LoginConfigItem(
+          verifier = "verifier-name", // Get it from Web3Auth dashboard
+          typeOfLogin = TypeOfLogin.GOOGLE,
+          clientId = getString(R.string.google_client_id) // Google's client id
+        )),
+        mfaSettings = MfaSettings(
+          deviceShareFactor = MfaSetting(true, 1, true),
+          socialBackupFactor = MfaSetting(true, 2, true),
+          passwordFactor = MfaSetting(true, 3, false),
+          backUpShareFactor = MfaSetting(true, 4, false),
+          passkeysFactor = MfaSetting(true, 5, true),
+          authenticatorFactor = MfaSetting(true, 6, true),
+        )
   )
 )
 ```
@@ -261,6 +286,8 @@ For Ethereum integration, you can get the private key using the `getPrivKey` met
 ```kotlin
 import org.web3j.crypto.Credentials
 import org.web3j.protocol.core.DefaultBlockParameterName
+import org.web3j.protocol.Web3j
+import org.web3j.protocol.http.HttpService
 
 // Use your Web3Auth instance to get the private key
 val privateKey = web3Auth.getPrivKey()
@@ -271,7 +298,10 @@ val credentials = Credentials.create(privateKey)
 // Get the address
 val address = credentials.address
 
-// Use the existing Web3j instance, and address from the previous step
+// Create the Web3j instance using your RPC URL
+val web3 = Web3j.build(HttpService("YOUR_RPC_URL"))
+
+// Get the balance
 val balanceResponse = web3.ethGetBalance(address, DefaultBlockParameterName.LATEST).send()
 
 // Convert the balance from Wei to Ether format

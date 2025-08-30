@@ -90,75 +90,25 @@ Open your app's `AndroidManifest.xml` file and add the following permission. Ple
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-### 2. Configuration
+#### Configure Deep Link
 
-Import and configure Web3Auth in your Flutter application:
+Open your app's `AndroidManifest.xml` file and add the following deep link intent filter to your Main activity:
 
-```dart title="main.dart"
-import 'package:web3auth_flutter/web3auth_flutter.dart';
-import 'package:web3auth_flutter/enums.dart';
-import 'package:web3auth_flutter/input.dart';
-import 'package:web3auth_flutter/output.dart';
-import 'dart:io';
+```xml
+<intent-filter>
+  <action android:name="android.intent.action.VIEW" />
 
-Future<void> initWeb3Auth() async {
-  late final Uri redirectUrl;
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
 
-  if (Platform.isAndroid) {
-    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
-    // w3a://com.example.w3aflutter/auth
-  } else {
-    redirectUrl = Uri.parse('{bundleId}://auth');
-    // com.example.w3aflutter://auth
-  }
-
-  await Web3AuthFlutter.init(Web3AuthOptions(
-    clientId: "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
-    network: Network.sapphire_mainnet, // or Network.sapphire_devnet
-    redirectUrl: redirectUrl,
-  ));
-}
+  <data android:scheme="{scheme}" android:host="{YOUR_APP_PACKAGE_NAME}"/>
+  <!-- Accept URIs: w3a://com.example.w3aflutter -->
+</intent-filter>
 ```
 
-### 3. Initialize Web3Auth
+#### Handle Custom Tabs
 
-Initialize the Web3Auth instance and check for existing sessions:
-
-```dart
-class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
-  String _result = '';
-  bool logoutVisible = false;
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
-    await initWeb3Auth();
-
-    try {
-      // Initialize and check for existing session
-      await Web3AuthFlutter.initialize();
-      final privateKey = await Web3AuthFlutter.getPrivKey();
-
-      if (privateKey.isNotEmpty) {
-        setState(() {
-          logoutVisible = true;
-          _result = 'Existing session found';
-        });
-      }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
-}
-```
-
-### 4. Handle Custom Tabs (Android)
-
-For Android, you need to handle custom tabs lifecycle to trigger login exceptions:
+For Android, you need to handle custom tabs lifecycle to trigger login exceptions. The Android SDK uses chrome custom tabs, and it's not possible to add a listener directly to the chrome custom tab close button to trigger login exceptions.
 
 ```dart
 class LoginScreen extends StatefulWidget {
@@ -193,6 +143,101 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
 }
 ```
 
+### 2. iOS Configuration
+
+#### Update global iOS platform
+
+For iOS build global platform needs to be 14.0. Check `Podfile` in your project to change the global platform:
+
+```
+platform :ios, '14.0'
+```
+
+### 3. Configure Redirection
+
+- Go to [Web3Auth Developer Dashboard](https://dashboard.web3auth.io), and create or open an existing Web3Auth project.
+- For iOS, whitelist `{bundleId}://auth` in the developer dashboard. This step is mandatory for the redirect to work.
+
+## Initialize Web3Auth
+
+### 1. Configure Web3Auth Instance
+
+Import and configure Web3Auth in your Flutter application:
+
+```dart title="main.dart"
+import 'package:web3auth_flutter/web3auth_flutter.dart';
+import 'package:web3auth_flutter/enums.dart';
+import 'package:web3auth_flutter/input.dart';
+import 'package:web3auth_flutter/output.dart';
+import 'dart:io';
+
+Future<void> initWeb3Auth() async {
+  late final Uri redirectUrl;
+
+  if (Platform.isAndroid) {
+    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
+    // w3a://com.example.w3aflutter/auth
+  } else {
+    redirectUrl = Uri.parse('{bundleId}://auth');
+    // com.example.w3aflutter://auth
+  }
+
+  // focus-start
+  await Web3AuthFlutter.init(Web3AuthOptions(
+    clientId: "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+    network: Network.sapphire_mainnet, // or Network.sapphire_devnet
+    redirectUrl: redirectUrl,
+  ));
+  // focus-end
+}
+```
+
+### 2. Initialize Web3Auth Instance
+
+Initialize the Web3Auth instance and check for existing sessions:
+
+```dart
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  String _result = '';
+  bool logoutVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  Future<void> initPlatformState() async {
+    await initWeb3Auth();
+
+    try {
+      // Initialize and check for existing session
+      // focus-start
+      await Web3AuthFlutter.initialize();
+      // focus-end
+      final privateKey = await Web3AuthFlutter.getPrivKey();
+
+      if (privateKey.isNotEmpty) {
+        setState(() {
+          logoutVisible = true;
+          _result = 'Existing session found';
+        });
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+}
+```
+
+:::note
+
+After configuring Web3Auth, the next step is to initialize it using the `initialize` method. This method is essential for setting up the SDK, checking for any active sessions, and fetching the whitelabel configuration from your dashboard.
+
+If the API call to fetch the project configuration fails, the method will throw an error.
+
+:::
+
 ## Advanced Configuration
 
 The Web3Auth Flutter SDK offers a rich set of advanced configuration options:
@@ -207,48 +252,6 @@ The Web3Auth Flutter SDK offers a rich set of advanced configuration options:
 Head over to the advanced configuration sections to learn more about each configuration option.
 
 :::
-
-## Blockchain Integration
-
-Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
-
-### Ethereum Integration
-
-For Ethereum integration, you can get the private key and use it with web3dart or other Ethereum libraries:
-
-```dart
-Future<void> loginWithGoogle() async {
-  try {
-    final Web3AuthResponse response = await Web3AuthFlutter.login(
-      LoginParams(loginProvider: Provider.google)
-    );
-
-    final privateKey = response.privKey;
-    // Use private key with web3dart for Ethereum transactions
-    print("Ethereum Private Key: $privateKey");
-
-  } catch (e) {
-    print("Login failed: $e");
-  }
-}
-```
-
-### Solana Integration
-
-For Solana integration, you can get the Ed25519 private key:
-
-```dart
-Future<void> getSolanaAccount() async {
-  try {
-    final ed25519PrivKey = await Web3AuthFlutter.getEd25519PrivKey();
-    // Use Ed25519 private key with Solana libraries
-    print("Solana Ed25519 Private Key: $ed25519PrivKey");
-
-  } catch (e) {
-    print("Error getting private key: $e");
-  }
-}
-```
 
 <Tabs
   defaultValue="basic-config"
@@ -277,13 +280,6 @@ await Web3AuthFlutter.init(Web3AuthOptions(
   clientId: "YOUR_CLIENT_ID",
   network: Network.sapphire_mainnet,
   redirectUrl: redirectUrl,
-  whiteLabel: WhiteLabelData(
-    appName: "Your App Name",
-    logoLight: "https://your-logo-light.png",
-    logoDark: "https://your-logo-dark.png",
-    defaultLanguage: Language.en,
-    mode: ThemeModes.auto,
-  ),
   mfaSettings: MfaSettings(
     deviceShareFactor: MfaSetting(
       enable: true,
@@ -309,8 +305,66 @@ await Web3AuthFlutter.init(Web3AuthOptions(
 
 </Tabs>
 
-<SdkTroubleshootingIntro />
+## Blockchain Integration
 
-## Quick Starts
+Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
 
-<ExampleCards exampleMap={webExamples.filter(obj => obj.type === QUICK_START)} />
+### Ethereum Integration
+
+For Ethereum integration, you can get the private key and use it with web3dart or other Ethereum libraries:
+
+```dart
+import 'package:web3dart/web3dart.dart';
+
+// Use your Web3Auth instance to get the private key
+final privateKey = await Web3AuthFlutter.getPrivKey();
+
+// Generate the Credentials
+final credentials = EthPrivateKey.fromHex(privateKey);
+
+// Get the address
+final address = credentials.address;
+
+// Create the Web3Client instance using your RPC URL
+final client = Web3Client("YOUR_RPC_URL", Client());
+
+// Get the balance
+final balanceResponse = await client.getBalance(address);
+
+// Convert the balance to ether format, and round off to 4 decimal places.
+final balance = balanceResponse.getValueInUnit(EtherUnit.ether).toStringAsFixed(4);
+```
+
+### Solana Integration
+
+For Solana integration, you can get the Ed25519 private key:
+
+```dart
+import 'dart:math';
+import 'package:solana/solana.dart';
+import 'package:web3auth_flutter/web3auth_flutter.dart';
+
+// Use your Web3Auth instance to get the ED25519 private key
+final privateKey = await Web3AuthFlutter.getED25519PrivKey();
+
+// Generate the KeyPair
+final keyPair = await Ed25519HDKeyPair.fromPrivateKeyBytes(
+  privateKey: privateKey,
+);
+
+// Get the address
+final address = keyPair.address;
+
+// Create the SolanaClient instance using Solana RPC URL
+final client = SolanaClient(
+  rpcUrl: Uri.parse('https://api.devnet.solana.com'),
+  websocketUrl: Uri.parse('ws://api.devnet.solana.com'),
+);
+
+// Get the balance
+final balanceResponse = await client.rpcClient.getBalance(address);
+
+// Convert the balance from lamports to SOL, and round off to 4 decimal places
+final balance = (balanceResponse.value / pow(10, 9)).toStringAsFixed(4);
+
+```
