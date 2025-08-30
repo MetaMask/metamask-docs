@@ -89,7 +89,30 @@ void AYourGameMode::BeginPlay()
 }
 ```
 
-### 5. Setup Authentication Callbacks
+## Initialize Web3Auth
+
+### 1. Initialize Web3Auth Instance
+
+Initialize the Web3Auth SDK in your Unreal project:
+
+```cpp
+#include "Web3AuthSDK.h"
+
+void AYourGameMode::BeginPlay()
+{
+    Super::BeginPlay();
+
+    // Initialize Web3Auth
+    FWeb3AuthOptions Options;
+    Options.ClientId = TEXT("YOUR_CLIENT_ID"); // Get your Client ID from Web3Auth Dashboard
+    Options.Network = TEXT("sapphire_mainnet"); // or "sapphire_devnet"
+    Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
+
+    UWeb3AuthSDK::GetInstance()->Initialize(Options);
+}
+```
+
+### 2. Setup Authentication Callbacks
 
 Set up callbacks to handle authentication responses:
 
@@ -129,9 +152,9 @@ void AYourGameMode::OnWeb3AuthLogout()
 
 The Web3Auth Unreal SDK offers a rich set of advanced configuration options:
 
-- **[Custom Authentication](./custom-authentication)**: Define authentication methods.
-- **[Whitelabeling & UI Customization](./whitelabel)**: Personalize the modal's appearance.
-- **[Multi-Factor Authentication (MFA)](./mfa)**: Set up and manage MFA.
+- **[Custom Authentication](./advanced/custom-authentication)**: Define authentication methods.
+- **[Whitelabeling & UI Customization](./advanced/whitelabel)**: Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa)**: Set up and manage MFA.
 
 :::tip
 

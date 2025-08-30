@@ -1,0 +1,22 @@
+---
+title: Logout User
+sidebar_label: logout
+description: 'Web3Auth Unreal SDK - logout | Embedded Wallets'
+---
+
+Trigger logout flow. This function doesn't take any parameters. A completable future containing void object is returned on successfull logout otherwise an error response is returned.
+
+## Usage
+
+```cpp
+void AYourGameMode::LogoutUser()
+{
+    UWeb3AuthSDK::GetInstance()->Logout();
+}
+
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLogout()
+{
+    UE_LOG(LogTemp, Warning, TEXT("Web3Auth Logout Success"));
+}
+```

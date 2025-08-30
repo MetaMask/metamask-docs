@@ -111,7 +111,56 @@ web3Auth.setOptions(new Web3AuthOptions(){
 });
 ```
 
-### 4. Initialize and Setup Event Handlers
+## Initialize Web3Auth
+
+### 1. Create Web3Auth Instance
+
+Attach a `Web3Auth.cs` script to your game object where you want to write your authentication code:
+
+```cs title="/Assets/Web3Auth.cs"
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using Newtonsoft.Json;
+
+public class Web3Auth : MonoBehaviour
+{
+  // Start is called before the first frame update
+  void Start() {}
+  public void login() {}
+  private void onLogin(Web3AuthResponse response) {}
+  public void logout() {}
+  private void onLogout() {}
+}
+```
+
+Within your script, import the `Web3Auth` component in your class:
+
+```cs
+Web3Auth web3Auth;
+```
+
+Create an instance within your `Start()` function by creating an instance of the component you just imported:
+
+```cs
+web3Auth = GetComponent<Web3Auth>();
+```
+
+### 2. Configure Web3Auth Options
+
+After instantiation, within your `Start()` function, set up the Web3Auth Options:
+
+```cs
+web3Auth.setOptions(new Web3AuthOptions(){
+    clientId = "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+    network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
+    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+});
+```
+
+### 3. Setup Event Handlers
 
 Set up event handlers for login and logout events:
 
@@ -147,10 +196,10 @@ private void onLogout()
 
 The Web3Auth Unity SDK offers a rich set of advanced configuration options:
 
-- **[Custom Authentication](./custom-authentication)**: Define authentication methods.
-- **[Whitelabeling & UI Customization](./whitelabel)**: Personalize the modal's appearance.
-- **[Multi-Factor Authentication (MFA)](./mfa)**: Set up and manage MFA.
-- **[DApp Share](./dapp-share)**: Share DApp sessions across devices.
+- **[Custom Authentication](./advanced/custom-authentication)**: Define authentication methods.
+- **[Whitelabeling & UI Customization](./advanced/whitelabel)**: Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa)**: Set up and manage MFA.
+- **[DApp Share](./advanced/dapp-share)**: Share DApp sessions across devices.
 
 :::tip
 
