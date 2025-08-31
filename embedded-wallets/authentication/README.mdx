@@ -7,13 +7,19 @@ description: 'Authentication | Embedded Wallets'
 
 import Tiles from '@theme/Tiles'
 
-**Web3Auth** offers a robust authentication system designed to bridge the gap between Web2 and Web3 identity, providing developers with powerful tools to implement secure, flexible, and user-friendly onboarding flows. By offering fine-grained control over login experiences and wallet integrations, Web3Auth helps enhance user conversion while enabling seamless access to blockchain-based functionality.
+**Embedded Wallets** (formerly Web3Auth) offers a robust authentication system designed to bridge the gap between Web2 and Web3 identity, providing developers with powerful tools to implement secure, flexible, and user-friendly onboarding flows. By offering fine-grained control over login experiences and wallet integrations, Embedded Wallets helps enhance user conversion while enabling seamless access to blockchain-based functionality.
 
-Using Web3Auth's client-side SDKs, applications can authenticate users through a variety of mechanisms, supporting both traditional (Web2) and decentralized (Web3) identity paradigms.
+Using the Embedded Wallets SDKs, applications can authenticate users through a variety of mechanisms, supporting both traditional (Web2) and decentralized (Web3) identity paradigms.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
 
 ## Supported Authentication Methods
 
-Web3Auth supports a wide range of authentication options, enabling developers to meet the needs of diverse user bases and platform requirements.
+Embedded Wallets supports a wide range of authentication options, enabling developers to meet the needs of diverse user bases and platform requirements.
 
 ### Native Email & SMS Login
 
@@ -21,11 +27,11 @@ Provides passwordless login via one-time passcodes (OTP)/ magic links sent to th
 
 ### External Wallets
 
-Users can also authenticate using [third-party wallets](/authentication/basic-logins/external-wallets) such as MetaMask, Phantom, and other WalletConnect supported wallets. Developers can select which wallets to display via the Web3Auth Dashboard, providing tailored options based on user preference or regional relevance.
+Users can also authenticate using [third-party wallets](/authentication/basic-logins/external-wallets) such as MetaMask and other WalletConnect supported wallets. Developers can select which wallets to display via the Embedded Wallets Dashboard, providing tailored options based on user preference or regional relevance.
 
 ### OAuth and Social Login
 
-Web3Auth supports a variety of social identity providers, allowing users to authenticate using accounts they already trust and use daily. Supported providers include:
+Embedded Wallets supports a variety of social identity providers, allowing users to authenticate using accounts they already trust and use daily. Supported providers include:
 
 export const SocialLoginSetup = [
   {
@@ -36,79 +42,79 @@ export const SocialLoginSetup = [
         key: 'google',
         title: 'Google',
         icon: 'logo-google.png',
-        path: '/authentication/social-logins/google',
+        path: 'social-logins/google',
       },
       {
         key: 'apple',
         title: 'Apple',
         icon: 'logo-apple.png',
-        path: '/authentication/social-logins/oauth/#login-with-apple',
+        path: 'social-logins/oauth/#login-with-apple',
       },
       {
         key: 'twitter',
         title: 'Twitter (X)',
         icon: 'logo-twitter.png',
-        path: '/authentication/social-logins/oauth/#login-with-x',
+        path: 'social-logins/oauth/#login-with-x',
       },
       {
         key: 'facebook',
         title: 'Facebook',
         icon: 'logo-facebook.png',
-        path: '/authentication/social-logins/facebook',
+        path: 'social-logins/facebook',
       },
       {
         key: 'discord',
         title: 'Discord',
         icon: 'logo-discord.png',
-        path: '/authentication/social-logins/discord',
+        path: 'social-logins/discord',
       },
       {
         key: 'twitch',
         title: 'Twitch',
         icon: 'logo-twitch.png',
-        path: '/authentication/social-logins/twitch',
+        path: 'social-logins/twitch',
       },
       {
         key: 'github',
         title: 'GitHub',
         icon: 'logo-github.png',
-        path: '/authentication/social-logins/oauth/#login-with-github',
+        path: 'social-logins/oauth/#login-with-github',
       },
       {
         key: 'farcaster',
         title: 'Farcaster',
         icon: 'logo-farcaster.png',
-        path: '/authentication/social-logins/oauth/#login-with-farcaster',
+        path: 'social-logins/oauth/#login-with-farcaster',
       },
       {
         key: 'reddit',
         title: 'Reddit',
         icon: 'logo-reddit.png',
-        path: '/authentication/social-logins/oauth/#login-with-reddit',
+        path: 'social-logins/oauth/#login-with-reddit',
       },
       {
         key: 'kakao',
         title: 'Kakao',
         icon: 'logo-kakao.png',
-        path: '/authentication/social-logins/oauth/#login-with-kakao',
+        path: 'social-logins/oauth/#login-with-kakao',
       },
       {
         key: 'linkedin',
         title: 'LinkedIn',
         icon: 'logo-linkedin.png',
-        path: '/authentication/social-logins/oauth/#login-with-linkedin',
+        path: 'social-logins/oauth/#login-with-linkedin',
       },
       {
         key: 'line',
         title: 'Line',
         icon: 'logo-line.png',
-        path: '/authentication/social-logins/oauth/#login-with-line',
+        path: 'social-logins/oauth/#login-with-line',
       },
       {
         key: 'wechat',
         title: 'WeChat',
         icon: 'logo-wechat.png',
-        path: '/authentication/social-logins/oauth/#login-with-wechat',
+        path: 'social-logins/oauth/#login-with-wechat',
       },
     ],
   },
@@ -120,7 +126,7 @@ Social login simplifies onboarding by reducing friction and improving usabilityâ
 
 ### JWT-Based Authentication
 
-Web3Auth allows integration with any existing JWT-based authentication system. This includes OpenID Connect (OIDC) and OAuth 2.0 compliant identity providers such as:
+Embedded Wallets allows integration with any existing JWT-based authentication system. This includes OpenID Connect (OIDC) and OAuth 2.0 compliant identity providers such as:
 
 export const JWTLoginSetup = [
   {
@@ -131,25 +137,25 @@ export const JWTLoginSetup = [
         key: 'auth0',
         title: 'Auth0',
         icon: 'logo-auth0.png',
-        path: '/authentication/custom-connections/auth0',
+        path: 'custom-connections/auth0',
       },
       {
         key: 'firebase',
         title: 'Firebase',
         icon: 'logo-firebase.png',
-        path: '/authentication/custom-connections/firebase',
+        path: 'custom-connections/firebase',
       },
       {
         key: 'aws-cognito',
         title: 'AWS Cognito',
         icon: 'logo-aws-cognito.png',
-        path: '/authentication/custom-connections/aws-cognito',
+        path: 'custom-connections/aws-cognito',
       },
       {
         key: 'custom-jwt',
         title: 'Custom JWT',
         icon: 'logo-jwt.png',
-        path: '/authentication/custom-connections/custom-jwt',
+        path: 'custom-connections/custom-jwt',
       },
     ],
   },
