@@ -1,18 +1,18 @@
 ---
-title: Integrate Web3Auth with the TON Blockchain
+title: Integrate Embedded Wallets with the TON Blockchain
 sidebar_label: TON
 image: 'guides/banners/ton.png'
-keywords: [ton, web3auth, authentication, blockchain]
-description: 'Integrate Web3Auth with the TON Blockchain | Embedded Wallets'
+keywords: [ton, embedded-wallets, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the TON Blockchain | Embedded Wallets'
 ---
 
 import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 
-While using the Web3Auth Web SDK for a non-EVM chain like [TON](https://ton.org/), you get a standard provider from which you can obtain the private key of the user. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's `account`, `balance`, `send transaction`, etc. We have highlighted a few methods here to get you started quickly on that.
+While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [TON](https://ton.org/), you can obtain the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's `account`, `balance`, `send transaction`, etc. We have highlighted a few methods here to get you started quickly.
 
 :::note
 
-This reference is for the `Web`, but you can use TON on other Mobile and Gaming Platforms as well. Please follow our reference for [EVM Blockchains](/connect-blockchain/evm/), and similarly use TON libraries that support the platforms to use the private key and make blockchain calls accordingly.
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
 :::
 

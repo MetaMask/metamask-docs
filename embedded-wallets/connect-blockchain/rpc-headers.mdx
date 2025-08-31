@@ -8,9 +8,15 @@ description: 'How to securely attach API keys to blockchain RPC requests | Embed
 
 ### Adding API Keys in RPC Headers
 
-Web3Auth allows you to specify the RPC endpoint URL, but it doesn't directly provide an option to set custom HTTP headers such as API keys required by certain blockchain providers. To accommodate blockchain APIs that require authentication headers, you need to manually intercept and attach these headers to your application's outgoing RPC requests.
+MetaMask Embedded Wallets (formerly Web3Auth) allows you to specify the RPC endpoint URL, but it doesn't directly provide an option to set custom HTTP headers such as API keys required by certain blockchain providers. To accommodate blockchain APIs that require authentication headers, you need to manually intercept and attach these headers to your application's outgoing RPC requests.
 
 We'll use **TRON** as an example in this guide. You can obtain your TRON API key [here](https://developers.tron.network/reference/select-network).
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
 
 :::tip
 
@@ -85,7 +91,7 @@ Perform this operation with caution. Avoid exposing sensitive API keys within cl
 
 ### Why This Approach Works
 
-- Web3Auth SDK uses the provided RPC URL configured via the developer dashboard.
+- MetaMask Embedded Wallets SDK uses the provided RPC URL configured via the developer dashboard.
 - Blockchain SDKs like `TronWeb` internally use the global `fetch` API.
 - Our patch intercepts these fetch calls and injects necessary headers, ensuring compatibility with authenticated blockchain RPCs.
 

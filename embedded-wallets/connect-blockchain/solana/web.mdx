@@ -1,5 +1,5 @@
 ---
-title: Integrate Web3Auth with the Solana Blockchain in Javascript
+title: Integrate Embedded Wallets with the Solana Blockchain in Javascript
 sidebar_label: Web
 image: 'banners/solana.png'
 keywords:
@@ -7,7 +7,7 @@ keywords:
     solana,
     wallet,
     integration,
-    web3auth,
+    embedded-wallets,
     API,
     SDK,
     authentication,
@@ -15,19 +15,19 @@ keywords:
     solution,
     development,
   ]
-description: 'Integrate Web3Auth with the Solana Blockchain in Javascript | Embedded Wallets'
+description: 'Integrate Embedded Wallets with the Solana Blockchain in Javascript | Embedded Wallets'
 ---
 
 import SolanaProviderSetup from '../_solana-provider-setup.mdx'
 import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 
-While using the Web3Auth Web SDK for [Solana](https://solana.com/) you get a standard provider for Solana containing functions to help you make blockchain calls via the [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) library. We have highlighted a few methods here for getting you started quickly on that.
+While using the Embedded Wallets Web SDK (formerly Web3Auth) for [Solana](https://solana.com/), you get a Solana provider with functions to help you make blockchain calls via the [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) library. We’ve highlighted a few methods here to get you started quickly.
 
-:::note
+::::note
 
-This reference is for the `Web`, however, you can use Solana on `React Native`, as well, quite similarly. Please follow our reference for [EVM Chains](/connect-blockchain/evm/), and similarly use Solana libraries that support the platforms to use the private key and make blockchain calls accordingly.
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
-:::
+::::
 
 ## Installation
 
@@ -231,3 +231,7 @@ To do gasless transactions in Solana, use [Solana labs's Octane](https://github.
 Octane is a gasless transaction relayer for Solana. Octane accepts transactions via an HTTP API, signs them if they satisfy certain conditions and broadcasts to the network.
 
 Follow [this guide](https://github.com/solana-labs/octane/blob/master/docs/example-integration.md) to run your first transaction through Octane.
+
+```
+
+```

@@ -1,18 +1,24 @@
 ---
-title: Integrate Web3Auth with the Solana Blockchain
+title: Integrate Embedded Wallets with the Solana Blockchain
 sidebar_label: Solana
 hide_table_of_contents: true
 image: 'banners/solana.png'
-description: 'Integrate Web3Auth with the Solana Blockchain | Embedded Wallets'
+description: 'Integrate Embedded Wallets with the Solana Blockchain | Embedded Wallets'
 ---
 
 import Tiles from '@theme/Tiles'
 
-For Solana integration, Web3Auth offers an `ed25519` private key specifically tailored for the Solana blockchain. This cryptographic key conforms to the standards required for secure authentication and transaction signing on Solana's network.
+For Solana integration, Embedded Wallets (formerly Web3Auth) offers an `ed25519` private key specifically tailored for the Solana blockchain. This cryptographic key conforms to the standards required for secure authentication and transaction signing on Solana's network.
 
-Integrating Web3Auth with Solana is straightforward and efficient. Developers can leverage Web3Auth's functionalities to establish secure connections with Solana nodes, enabling seamless interaction with the blockchain. This includes tasks such as submitting transactions, querying blockchain data, and managing user authentication within Solana-based applications.
+Integrating Embedded Wallets with Solana is straightforward and efficient. Developers can leverage the SDK to establish secure connections with Solana nodes, enabling seamless interaction with the blockchain. This includes tasks such as submitting transactions, querying blockchain data, and managing user authentication within Solana-based applications.
 
-With Web3Auth's native support for Solana and the `ed25519` curve, developers can streamline their development process and harness the full potential of blockchain technology within their Solana-based projects.
+With native support for Solana and the `ed25519` curve, you can streamline development and harness the full potential of blockchain technology within Solana-based projects.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
 
 This documentation provides a straightforward guide for developers looking to implement Solana connection quickly and effortlessly across various platforms.
 
@@ -25,25 +31,25 @@ export const Solana = [
         key: 'web',
         title: 'Web',
         icon: 'logo-js.png',
-        path: '/connect-blockchain/solana/web',
+        path: '/embedded-wallets/connect-blockchain/solana/web',
       },
       {
         key: 'flutter',
         title: 'Flutter',
         icon: 'logo-flutter.png',
-        path: '/connect-blockchain/solana/flutter',
+        path: '/embedded-wallets/connect-blockchain/solana/flutter',
       },
       {
         key: 'android',
         title: 'Android',
         icon: 'logo-android.png',
-        path: '/connect-blockchain/solana/android',
+        path: '/embedded-wallets/connect-blockchain/solana/android',
       },
       {
         key: 'iOS',
         title: 'iOS',
         icon: 'logo-apple.png',
-        path: '/connect-blockchain/solana/ios',
+        path: '/embedded-wallets/connect-blockchain/solana/ios',
       },
     ],
   },

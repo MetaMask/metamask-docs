@@ -25,7 +25,13 @@ import SEO from '@site/src/components/SEO'
   slug="/embedded-wallets/connect-blockchain/evm/base/react-native"
 />
 
-While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Base Chain (Coinbase)](https://base.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) in React Native, the private key is available in the SDK state. Use it with EVM libraries to derive accounts, sign, and make JSON-RPC calls to the [Base](https://base.org/) network.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
 
 ## Installation
 

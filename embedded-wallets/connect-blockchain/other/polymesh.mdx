@@ -1,17 +1,23 @@
 ---
-title: Integrate Web3Auth with the Polymesh Blockchain
+title: Integrate Embedded Wallets with the Polymesh Blockchain
 sidebar_label: Polymesh
 image: 'banners/polymesh.png'
 
-keywords: [polymesh, web3auth, authentication, blockchain]
-description: 'Integrate Web3Auth with the Polymesh Blockchain | Embedded Wallets'
+keywords: [polymesh, embedded-wallets, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Polymesh Blockchain | Embedded Wallets'
 ---
 
 import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Web3Auth Web SDK for a non-EVM chain like [Polymesh](https://www.polymesh.network/) you get a standard provider from which you can get the private key of the user. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's public `signing key`, fetching `balance`, and `sign & send transaction`. We have highlighted a few methods here to get you started quickly on that.
+While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [Polymesh](https://www.polymesh.network/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's public `signing key`, fetching `balance`, and `sign & send transaction`. We have highlighted a few methods here to get you started quickly.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
 
 ## Installation
 
@@ -64,7 +70,7 @@ npm install --save @polymeshassociation/polymesh-sdk @polymeshassociation/local-
 
 ## Get Account and KeyPair
 
-Once a user logs in, the Web3Auth SDK returns a provider. Since Web3Auth doesn't have a native provider for Polymesh, we need to directly use the private key to make the RPC calls.
+Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Polymesh, we directly use the private key to make RPC calls.
 
 Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, Web3Auth does not provide direct access to Polymesh-specific signing functions, hence, we create a new `LocalSigningManager` and import this private key to give the Polymesh SDK the ability to sign transactions with this key.
 

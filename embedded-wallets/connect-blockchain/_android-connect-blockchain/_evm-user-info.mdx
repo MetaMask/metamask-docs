@@ -1,6 +1,4 @@
-You get the user information after a successful login returned from the `login` method. The
-`userInfo` object contains the user information, whereas the `privKey` object contains the private
-key that can be used to make blockchain calls.
+You get the user information after a successful login returned from the `login` method. The `userInfo` object contains the user information, whereas the `privKey` object contains the private key that can be used to make blockchain calls.
 
 ```kotlin
 
@@ -11,7 +9,7 @@ private fun signIn() {
 
   loginCompletableFuture.whenComplete { _, error ->
     if (error == null) {
-      // render logged in UI with User's Info
+      // render logged in UI with User's Info (Embedded Wallets)
       // focus-next-line
       credentials = Credentials.create(web3Auth.getPrivkey())
       web3 = Web3j.build(HttpService(rpcUrl))
@@ -20,5 +18,4 @@ private fun signIn() {
     }
   }
 }
-
 ```

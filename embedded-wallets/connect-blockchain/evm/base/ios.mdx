@@ -25,7 +25,13 @@ import SEO from '@site/src/components/SEO'
   slug="/embedded-wallets/connect-blockchain/evm/base/ios"
 />
 
-While using the Web3Auth iOS SDK, you get the private key within the user scope. This private key can interact with [Base Chain (Coinbase)](https://base.org/) to make any blockchain calls, like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) on iOS, the private key is available in the SDK state. Use it to derive the user's address and interact with the [Base](https://base.org/) network for signing and JSON-RPC calls.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
 
 ## Installation
 
