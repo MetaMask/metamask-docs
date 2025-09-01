@@ -1,16 +1,22 @@
 ---
-title: Integrate Web3Auth with the Near Blockchain
+title: Integrate Embedded Wallets with the Near Blockchain
 sidebar_label: Near
 image: 'banners/near.png'
 hide_table_of_contents: true
-description: 'Integrate Web3Auth with the Near Blockchain | Embedded Wallets'
+description: 'Integrate Embedded Wallets with the Near Blockchain | Embedded Wallets'
 ---
 
 import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Web3Auth Web SDK for a non-EVM chain like [NEAR](https://near.org/), you get a standard provider from which you can get the user's private key. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting a user's `account`, fetching `balance`, performing `send transaction`, etc. To help you get started, we've outlined some methods for you to use.
+While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [NEAR](https://near.org/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting a user's `account`, fetching `balance`, and performing `send transaction`. To help you get started, we've outlined some methods you can use.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
 
 ## Installation
 
@@ -60,9 +66,9 @@ npm install --save near-api-js@4.0.4
 
 ## Get Key Pair and Account
 
-After a user logs in, they receive a provider from the Web3Auth SDK. However, there is no native provider for Near in Web3Auth, so we must use the private key to make RPC calls directly.
+After a user logs in, they receive a provider from the Embedded Wallets SDK. However, there is no native provider for Near, so we use the private key to make RPC calls directly.
 
-To access the user's private key, the application can use the function `web3auth.provider.request({method: "private_key"})` from the Web3Auth provider. Yet, this key cannot be used with Near since it requires the `ed25519` key. Therefore, we must use the `getED25519Key()` function from `@web3auth/base-provider` to convert the `secp256k1` key to an `ed25519` key.
+To access the user's private key, the application can use `web3auth.provider.request({method: "private_key"})`. Since Near requires `ed25519`, use `getED25519Key()` (from the same package set) to convert the `secp256k1` key to an `ed25519` key.
 
 ```tsx
 import { connect, KeyPair, keyStores, utils } from 'near-api-js'

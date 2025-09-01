@@ -1,21 +1,21 @@
 ---
-title: Integrate Web3Auth with the Cosmos Blockchain
+title: Integrate Embedded Wallets with the Cosmos Blockchain
 sidebar_label: Cosmos
 image: 'banners/cosmos.png'
 
-keywords: [cosmos, web3auth, authentication, blockchain]
-description: 'Integrate Web3Auth with the Cosmos Blockchain | Embedded Wallets'
+keywords: [cosmos, embedded-wallets, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Cosmos Blockchain | Embedded Wallets'
 ---
 
 import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Web3Auth Web SDK for a non-EVM chain like [Cosmos](https://cosmos.network/) you get a standard provider from which you can get the private key of the user. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's `account`, `chain ID`, fetch `balance`, `send transaction`, etc. We have highlighted a few methods here to get you started quickly on that.
+While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [Cosmos](https://cosmos.network/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's `account`, `chain ID`, fetching `balance`, `send transaction`, etc. We have highlighted a few methods here to get you started quickly.
 
 :::note
 
-This reference is for the `Web`, however, you can use Cosmos on other Mobile and Gaming Platforms as well. Please follow our reference for [EVM Blockchains](/connect-blockchain/evm/), and similarly use Cosmos libraries that support the platforms to use the private key and make blockchain calls accordingly.
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
 :::
 
@@ -67,7 +67,7 @@ npm install --save @web3auth/no-modal @web3auth/auth-adapter @web3auth/base @cos
 
 ## Get ChainID
 
-Once a user logs in, the Web3Auth SDK returns a provider. Since Web3Auth doesn't have a native provider for Cosmos, we need to directly use the private key to make the RPC calls.
+Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Cosmos, we directly use the private key to make RPC calls.
 
 ### CosmJS Libraries
 

@@ -1,7 +1,7 @@
 ---
-title: Custom JWT Login with Web3Auth
+title: Custom JWT Login with Embedded Wallets
 sidebar_label: Custom JWT
-description: 'Custom JWT Login with Web3Auth | Embedded Wallets'
+description: 'Custom JWT Login with Embedded Wallets | Embedded Wallets'
 image: 'img/docs-meta-cards/documentation-card.png'
 ---
 
@@ -16,13 +16,13 @@ Web3Auth supports integration with custom login providers through JWT-based auth
 
 To use this feature, developers must ensure that their JWTs adhere to the [JWT specification](https://datatracker.ietf.org/doc/html/rfc7519). Each JWT must be signed using a private key, and its corresponding public key must be accessible via a [JWKS (JSON Web Key Set)](https://datatracker.ietf.org/doc/html/rfc7517) endpoint. Web3Auth will use this endpoint to verify the integrity and authenticity of incoming tokens during login.
 
-Once the Custom JWT login is working, developers can proceed to add it as a custom connection in the Web3Auth Dashboard.
+Once the Custom JWT login is working, developers can proceed to add it as a custom connection in the Embedded Wallets Dashboard.
 
 ## Set up Custom JWT Connection
 
 :::success Create Custom Connection on Dashboard
 
-To use this feature, developers must go to the `Custom Connections` tab in the [Web3Auth Dashboard](https://dashboard.web3auth.io).
+To use this feature, developers must go to the `Custom Connections` tab in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
 
 :::
 
@@ -40,7 +40,7 @@ To use this feature, developers must go to the `Custom Connections` tab in the [
 
 Follow these steps to create a AWS Cognito connection:
 
-1. Visit the [Web3Auth Dashboard](https://dashboard.web3auth.io).
+1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
 1. Go to the `Custom Connections` section.
 1. Click on the `Settings` icon near the `Custom Connection`.
 1. Enter the `Auth Connection ID`.
@@ -223,7 +223,7 @@ const jwt = await new jose.SignJWT({ 'urn:example:claim': true })
 console.log(jwt)
 
 // Verifying the JWT using Remote JWK Set.
-// This is just to show how the Verify works, look above to set-up custom jwt verifier on the Web3Auth Dashboard.
+// This is just to show how the Verify works, look above to set-up custom jwt verifier on the Embedded Wallets Dashboard.
 // Check the steps below to see how once can generate the JWKS
 const JWKS = jose.createRemoteJWKSet(new URL('https://my-authz-server/.well-known/jwks.json'))
 
@@ -303,4 +303,4 @@ If you're using `jose` or `jsonwebtoken` library, you can use the following step
 
 4. To complete the process, you need to save the output as a `.json` file, host it on your server, and make sure it's publicly accessible.
 
-   This will give you the `JWKS Endpoint`, which is required when setting up a `Custom JWT Verifier` on the Web3Auth Dashboard.
+   This will give you the `JWKS Endpoint`, which is required when setting up a `Custom JWT Verifier` on the Embedded Wallets Dashboard.

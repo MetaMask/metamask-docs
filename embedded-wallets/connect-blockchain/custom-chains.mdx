@@ -5,11 +5,17 @@ image: 'img/docs-meta-cards/documentation-card.png'
 description: 'Add Custom Chains | Embedded Wallets'
 ---
 
-Web3Auth V10 onwards does not need any additional setup on the code side for blockchain connections. All of it is handled on our updated Dashboard. We can use any chain from the extensive list of predefined chains and add more if we need by toggling them on.
+MetaMask Embedded Wallets (formerly Web3Auth) Web SDK v10 onwards does not need any additional setup on the code side for blockchain connections. All of it is handled on our updated Dashboard. You can use any chain from the extensive list of predefined chains and add more if needed by toggling them on.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
 
 ![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)
 
-## Adding Custom Chains
+## Add Custom Chains
 
 To add a custom chain, we need to follow these steps:
 
@@ -21,7 +27,7 @@ To add a custom chain, we need to follow these steps:
 
 ![Adding Custom Chain](/img/connect-blockchain/add-a-chain-dashboard-v2.png)
 
-## Adding Chains on Code-side for Web SDK
+## Add Chains in Code (Web SDK)
 
 While chains can be configured through the dashboard, you can also override these settings in your code by specifying custom chains during SDK initialization.
 
