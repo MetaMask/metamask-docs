@@ -107,6 +107,8 @@
   --ifm-color-black: var(--general-black);
 
   --ifm-color-content-secondary: var(--general-gray-dark);
+  
+  --ifm-background-color: var(--general-white);
 
   --ifm-container-width-xl: var(--site-container-max-width);
   --ifm-global-spacing: #{$grid-gutter-width};
