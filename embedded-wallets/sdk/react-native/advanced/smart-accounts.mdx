@@ -1,7 +1,7 @@
 ---
-title: Account Abstraction
-sidebar_label: Account Abstraction
-description: '@web3auth/react-native-sdk Native Account Abstraction | Embedded Wallets'
+title: Smart Accounts
+sidebar_label: Smart Accounts
+description: '@web3auth/react-native-sdk Native Smart Accounts | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -19,8 +19,34 @@ import SmartAccountSendTransaction from '../../_common/_aa-send-transaction.mdx'
 
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
-<AccountAbstractionDescription />
+Effortlessly create and manage smart accounts for your users with just a few lines of code, using our Smart Account feature. Smart accounts offer enhanced control and programmability, enabling powerful features that traditional wallets can't provide.
+
+**Key features of Smart Accounts include:**
+
+- **Gas Abstraction:** Cover transaction fees for users, or allow users to pay for their own transactions using ERC-20 tokens.
+- **Batch Transactions:** Perform multiple transactions in a single call.
+- **Automated Transactions:** Allow users to automate actions, like swapping ETH to USDT when ETH hits a specific price.
+- **Custom Spending Limits:** Allow users to set tailored spending limits.
+
+> For more information about ERC-4337 and its components, [check out our detailed blog post](https://blog.web3auth.io/an-ultimate-guide-to-web3-wallets-externally-owned-account-and-smart-contract-wallet/#introduction-to-eip-4337).
+
+Our smart account integration streamlines your setup, allowing you to create and manage smart accounts using your favorite libraries like Viem, Ethers, and Wagmi. You don't need to rely on third-party packages to effortlessly create ERC-4337 compatible Smart Contract Wallets (SCWs), giving users the ability to perform batch transactions and efficiently manage gas sponsorship.
+
 <GrowthPlanNote />
+
+## Enabling Smart Accounts
+
+:::info prerequisite
+
+To enable this feature, you need to configure Smart Accounts from your project in the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io).
+
+:::
+
+### Dashboard Configuration
+
+To enable Smart Accounts, navigate to the Smart Accounts section in the Web3Auth dashboard, and enable the "Set up Smart Accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
+
+![Enable Smart Accounts](/img/w3a-dashboard/smart-account/enable-smart-account.png)
 
 ## Installation
 
