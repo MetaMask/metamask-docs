@@ -18,7 +18,13 @@ export type CardItem = {
   buttonIcon?: 'arrow-right' | 'external-arrow'
 }
 
-export default function Card({ title, href, description, theme, buttonIcon = "arrow-right" }: CardItem) {
+export default function Card({
+  title,
+  href,
+  description,
+  theme,
+  buttonIcon = 'arrow-right',
+}: CardItem) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -47,7 +53,7 @@ export default function Card({ title, href, description, theme, buttonIcon = "ar
 
               {href && (
                 <Button
-                  as="button"
+                  as="div"
                   label={false}
                   type={theme === 'dark' ? 'secondary' : 'primary'}
                   icon={buttonIcon}
