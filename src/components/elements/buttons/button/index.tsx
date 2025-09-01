@@ -118,8 +118,8 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
     const isLinkElement = asValue === 'link' || asValue === 'a'
     const isButtonElement = asValue === 'button'
 
-    const elementProps: Record<string, any> = {
-      ref: ref as React.Ref<any>,
+    const elementProps: Record<string, unknown> = {
+      ref: ref as React.Ref<unknown>,
       'aria-label': ariaLabel,
       onClick,
       className: buttonClassNames,
