@@ -214,3 +214,7 @@ export const SendTransaction = () => {
   );
 };
 ```
+
+## Live example
+
+<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/partners/web3auth?ctl=1&embed=1&file=app%2Fproviders.tsx&hideNavigation=1"></iframe>

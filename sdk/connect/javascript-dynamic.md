@@ -211,3 +211,7 @@ Common issues and solutions include:
   - Test on actual mobile devices.
   - Verify redirect URLs.
   - Check MetaMask mobile app installation.
+
+## Live example
+
+<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/partners/dynamic?ctl=1&embed=1&file=app%2Fproviders.tsx&hideNavigation=1"></iframe>

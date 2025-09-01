@@ -188,3 +188,7 @@ After completing the basic setup, you can follow these guides to add your own fu
 - [Manage networks](../guides/manage-networks.md)
 - [Handle transactions](../guides/handle-transactions.md)
 - [Interact with smart contracts](../guides/interact-with-contracts.md)
+
+## Live example
+
+<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/quickstarts/wagmi?ctl=1&embed=1&file=wagmi.config.ts&hideNavigation=1"></iframe>
