@@ -20,7 +20,7 @@ export default function Guides({ content = {} }: GuidesInterface) {
 
   const completeGuides = Object.entries(safeContent)
     .map(([key, value]) => {
-      if (value && value.type === 'guide') return { ...value, link: `/guides/${key}` }
+      if (value && value.type === 'guide') return { ...value, link: `/tutorials/${key}` }
       return null
     })
     .filter(Boolean)
