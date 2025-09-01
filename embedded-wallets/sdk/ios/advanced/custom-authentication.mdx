@@ -1,0 +1,470 @@
+---
+title: Using Custom Authentication in PnP iOS SDK
+sidebar_label: Custom Authentication
+description: 'Web3Auth PnP iOS SDK - Using Custom Authentication | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+
+Custom Authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
+
+This feature, with MFA turned off, can even make Web3Auth invisible to the end user.
+
+<GrowthPlanNote />
+
+## Getting an Auth Connection ID
+
+:::info prerequisite
+
+To enable this, you need to [Create a Connection](/dashboard/configure-connections) from the **Authentication** tab of your project from the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io) with your desired configuration.
+
+:::
+
+To configure a connection, you need to provide the particular details of the connection into our Web3Auth Dashboard. This enables us to map a `authConnectionId` with your connection details. This `authConnectionId` helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
+
+:::tip
+
+Visit the [Auth Provider Setup](/authentication) page to learn more about to setup the different configurations available for each connection.
+
+:::
+
+## Configuration
+
+:::warning
+
+_**"Auth Connection"**_ is called _**"Verifier"**_ in the Android SDK. It is the older terminology which we will be updating in the upcoming releases.
+
+Consequentially, you will see the terms _**"Verifier ID"**_ and _**"Aggregate Verifier"**_ used in the codebase and documentation referring to _**"Auth Connection ID"**_ and _**"Grouped Auth Connection"**_ respectively.
+
+:::
+
+To use custom authentication (Using Social providers or Login providers like Auth0, AWS Cognito, Firebase etc. or even your own custom JWT login) you can add the configuration using the `loginConfig` parameter during the initialization.
+
+The `loginConfig` parameter is a key value map. The key should be one of the `Web3AuthProvider` in its string form, and the value should be a `W3ALoginConfig` struct.
+
+### Parameters
+
+After creating the verifier, you can use the following parameters in the `W3ALoginConfig`.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Struct", value: "struct" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `verifier` | The name of the verifier that you have registered on the Web3Auth Dashboard. It's a mandatory field, and accepts `String` as a value. |
+| `typeOfLogin` | Type of login of this verifier, this value will affect the login flow that is adapted. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should be providing your own JWT token, no sign-in flow will be presented. It's a mandatory field, and accepts `TypeOfLogin` as a value. |
+| `clientId` | Client id provided by your login provider used for custom verifier. e.g. Google's Client ID or Web3Auth's client Id if using 'jwt' as TypeOfLogin. It's a mandatory field, and accepts `String` as a value. |
+| `name?` | Display name for the verifier. If null, the default name is used. It accepts `String` as a value. |
+| `description?` | Description for the button. If provided, it renders as a full length button. else, icon button. It accepts `String` as a value. |
+| `verifierSubIdentifier?` | The field in JWT token which maps to verifier id. Please make sure you selected correct JWT verifier id in the developer dashboard. It accepts `String` as a value. |
+| `logoHover?` | Logo to be shown on mouse hover. It accepts `String` as a value. |
+| `logoLight?` | Light logo for dark background. It accepts `String` as a value. |
+| `logoDark?` | Dark logo for light background. It accepts `String` as a value. |
+| `mainOption?` | Show login button on the main list. It accepts `Bool` as a value. Default value is false. |
+| `showOnModal?` | Whether to show the login button on modal or not. Default value is true. |
+| `showOnDesktop?` | Whether to show the login button on desktop. Default value is true. |
+| `showOnMobile?` | Whether to show the login button on mobile. Default value is true. |
+
+</TabItem>
+
+<TabItem value="struct">
+
+```swift
+public struct W3ALoginConfig: Codable {
+  let verifier: String
+  let typeOfLogin: TypeOfLogin
+  let clientId: String
+  let name: String?
+  let description: String?
+  let verifierSubIdentifier: String?
+  let logoHover: String?
+  let logoLight: String?
+  let logoDark: String?
+  let mainOption: Bool?
+  let showOnModal: Bool?
+  let showOnDesktop: Bool?
+  let showOnMobile: Bool?
+}
+
+public enum TypeOfLogin: String, Codable {
+  case google
+  case facebook
+  case reddit
+  case discord
+  case twitch
+  case apple
+  case github
+  case linkedin
+  case twitter
+  case weibo
+  case line
+  case email_password
+  case passwordless
+  case jwt
+}
+
+```
+
+</TabItem>
+</Tabs>
+
+### Usage
+
+<Tabs
+  defaultValue="google"
+  values={[
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
+    { label: "JWT", value: "jwt" },
+  ]}
+>
+
+<TabItem value="google">
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+  W3AInitParams(
+    clientId: "YOUR_CLIENT_ID",
+    network: .sapphire_mainnet,
+    // focus-start
+    loginConfig: [
+      Web3AuthProvider.JWT.rawValue: .init(
+        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        typeOfLogin: TypeOfLogin.google,
+        clientId: "YOUR_GOOGLE_CLIENT_ID",
+      )
+    ]
+    // focus-end
+  )
+)
+```
+
+</TabItem>
+
+<TabItem value="facebook">
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+  W3AInitParams(
+    clientId: "YOUR_CLIENT_ID",
+    network: .sapphire_mainnet,
+    // focus-start
+    loginConfig: [
+      Web3AuthProvider.JWT.rawValue: .init(
+        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        typeOfLogin: TypeOfLogin.facebook,
+        clientId: "YOUR_FACEBOOK_CLIENT_ID",
+      )
+    ]
+    // focus-end
+  )
+)
+
+```
+
+</TabItem>
+
+<TabItem value="jwt">
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+  W3AInitParams(
+    clientId:"YOUR_CLIENT_ID",
+    network: .sapphire_mainnet,
+    // focus-start
+    loginConfig: [
+      Web3AuthProvider.JWT.rawValue: .init(
+        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        typeOfLogin: TypeOfLogin.jwt,
+        clientId: "YOUR_CLIENT_ID",
+      )
+    ]
+    // focus-end
+  )
+)
+```
+
+</TabItem>
+
+</Tabs>
+
+## Configure Extra Login Options
+
+Additional to the login config during initialization, you can pass extra options to the `login` function to configure the login flow for cases requiring additional info for enabling login. The `ExtraLoginOptions` accepts the following parameters.
+
+### Parameters
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Struct", value: "struct" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `additionalParams?` | Additional params in `[String:String]` format for OAuth login, use id_token(JWT) to authenticate with web3auth. |
+| `domain?` | Your custom authentication domain in `String` format. For example, if you are using Auth0, it can be example.au.auth0.com. |
+| `client_id?` | Client id in `String` format, provided by your login provider used for custom verifier. |
+| `leeway?` | The value used to account for clock skew in JWT expirations. The value is in the seconds, and ideally should no more than 60 seconds or 120 seconds at max. It takes `Int` as a value. |
+| `verifierIdField?` | The field in JWT token which maps to verifier id. Please make sure you selected correct JWT verifier id in the developer dashboard. It takes `String` as a value. |
+| `isVerifierIdCaseSensitive?` | `Bool` to confirm Whether the verifier id field is case sensitive or not. |
+| `display?` | Allows developers the configure the display of UI. It takes `String` as a value. |
+| `prompt?` | Prompt shown to the user during authentication process. It takes `String` as a value. |
+| `max_age?` | Max time allowed without reauthentication. If the last time user authenticated is greater than this value, then user must reauthenticate. It takes `String` as a value. |
+| `ui_locales?` | The space separated list of language tags, ordered by preference. For instance `fr-CA fr en`. |
+| `id_token_hint?` | It denotes the previously issued ID token. It takes `String` as a value. |
+| `id_token?` | JWT (ID Token) to be passed for login. |
+| `login_hint?` | It is used to send the user's email address during Email Passwordless login. It takes `String` as a value. |
+| `acr_values?` | acc_values |
+| `scope?` | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. It takes `String` as a value. |
+| `audience?` | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It takes `String` as a value. |
+| `connection?` | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. It takes `String` as a value. |
+| `state?` | state |
+| `response_type?` | Defines which grant to execute for the authorization server. It takes `String` as a value. |
+| `nonce?` | nonce |
+| `redirect_uri?` | It can be used to specify the default url, where your custom jwt verifier can redirect your browser to with the result. If you are using Auth0, it must be whitelisted in the Allowed Callback URLs in your Auth0's application. |
+
+</TabItem>
+
+<TabItem value="struct">
+
+```swift
+public struct ExtraLoginOptions: Codable {
+  let display: String?
+  let prompt: String?
+  let max_age: String?
+  let ui_locales: String?
+  let id_token_hint: String?
+  let id_token: String?
+  let login_hint: String?
+  let acr_values: String?
+  let scope: String?
+  let audience: String?
+  let connection: String?
+  let domain: String?
+  let client_id: String?
+  let redirect_uri: String?
+  let leeway: Int?
+  let verifierIdField: String?
+  let isVerifierIdCaseSensitive: Bool?
+  let additionalParams: [String : String]?
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### Single Verifier Example
+
+<Tabs defaultValue="auth0"
+  values={[
+    { label: "Auth0", value: "auth0" },
+    { label: "Custom JWT", value: "byoj" },
+    { label: "Email Passwordless", value: "email-passwordless" },
+    { label: "SMS Passwordless", value: "sms-passwordless" },
+  ]}
+>
+
+<TabItem value="auth0">
+Auth0 has a special login flow, called the SPA flow. This flow requires a `client_id` and `domain`
+to be passed, and Web3Auth will get the JWT `id_token` from Auth0 directly. You can pass these
+configurations in the `ExtraLoginOptions` object in the login function.
+
+```swift
+import
+
+let web3Auth = try await Web3Auth(
+  W3AInitParams(
+    clientId:"YOUR_CLIENT_ID",
+    network: .sapphire_mainnet,
+    // Optional loginConfig object
+    //focus-start
+    loginConfig: [
+      Web3AuthProvider.JWT.rawValue: .init(
+        verifier: "YOUR_VERIFIER_NAME", // Get it from Web3Auth dashboard
+        typeOfLogin: TypeOfLogin.jwt,
+        clientId: "YOUR_AUTH0_CLIENT_ID",
+      )
+    ]
+    //focus-end
+  )
+)
+
+ // focus-start
+let result = try await web3Auth.login(
+  W3ALoginParams(
+    .JWT,
+    extraLoginOptions: .init(
+      // Domain of your auth0 app
+      domain:"https://username.us.auth0.com",
+      // The field in jwt token which maps to verifier id
+      verifierIdField: "sub",
+    )
+  )
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="byoj">
+If you're using any other provider like Firebase, AWS Cognito or deploying your own Custom JWT
+server, you need to put the jwt token into the `id_token` field of the `extraLoginOptions`,
+additionally, you need to pass over the `domain` field as well, which is mandatory. If you don't
+have a domain, just passover a string in that field.
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+  W3AInitParams(
+    clientId:"YOUR_CLIENT_ID",
+    network: .testnet,
+    // Optional loginConfig object
+    // focus-start
+    loginConfig: [
+      Web3AuthProvider.JWT.rawValue: .init(
+        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        typeOfLogin: TypeOfLogin.jwt,
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+      )
+    ]
+    //focus-end
+  )
+)
+
+ // focus-start
+let result = await web3Auth.login(
+  W3ALoginParams(
+    Web3AuthProvider.JWT,
+    extraLoginOptions: .init(domain:"your-domain", id_token: "your_jwt_token")
+  )
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="email-passwordless">
+To use the Email Passwordless login, you need to put the email into the `login_hint` parameter of
+the `ExtraLoginOptions`. By default, the login flow will be `code` flow, if you want to use the
+`link` flow, you need to put `flow_type` into the `additionalParams` parameter of the
+`ExtraLoginOptions`.
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+ // focus-start
+let result = try await web3Auth.login(
+  W3ALoginParams(
+    Web3AuthProvider.EMAIL_PASSWORDLESS,
+    extraLoginOptions: .init(loginHint: "hello@web3auth.io")
+))
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="sms-passwordless">
+
+To use the SMS Passwordless login, send the phone number as the `login_hint` parameter of the `ExtraLoginOptions`. Please make sure the phone number is in the format of +\{country_code}-\{phone_number}, i.e. (+91-09xx901xx1).
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+ // focus-start
+let result = try await web3Auth.login(W3ALoginParams(
+  Web3AuthProvider.SMS_PASSWORDLESS,
+  // The phone number should be in format of +{country_code}-{phone_number}
+  extraLoginOptions: .init(loginHint: "+91-9911223344")
+))
+ // focus-end
+```
+
+</TabItem>
+</Tabs>
+
+### Aggregate Verifier Example
+
+You can use aggregate verifier to combine multiple login methods to get the same address for the users regardless of their login providers. For example, combining a Google and Email Passwordless login, or Google and GitHub via Auth0 to access the same address for your user.
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+  W3AInitParams(
+    clientId: clientId,
+    network: network,
+    redirectUrl: "web3auth.ios-aggregate-example://auth",
+    // focus-start
+    loginConfig: [
+      TypeOfLogin.google.rawValue: .init(
+        verifier: "aggregate-sapphire",
+        typeOfLogin: .google,
+        name: "Web3Auth-Aggregate-Verifier-Google-Example",
+        clientId: "YOUR_GOOGLE_CLIENT_ID",
+        verifierSubIdentifier: "w3a-google"
+      ),
+      TypeOfLogin.jwt.rawValue: .init(
+        verifier: "aggregate-sapphire",
+        typeOfLogin: .jwt,
+        clientId: "YOUR_AUTH0_CLIENT_ID",
+        verifierSubIdentifier: "w3a-a0-github"
+      )
+    ],
+    // focus-end
+))
+
+func loginWithGoogle() async {
+  // focus-start
+  let result = try await web3Auth?.login(
+    W3ALoginParams(
+      loginProvider: .GOOGLE,
+    )
+  )
+  // focus-end
+}
+
+func loginWithGitHub() async {
+  // focus-start
+  let result = try await web3Auth?.login(
+    W3ALoginParams(
+      loginProvider: .JWT,
+      extraLoginOptions: ExtraLoginOptions(display: nil, prompt: nil, max_age: nil, ui_locales: nil, id_token_hint: nil, id_token: nil, login_hint: nil, acr_values: nil, scope: nil, audience: nil, connection: "github", domain: "https://web3auth.au.auth0.com", client_id: nil, redirect_uri: nil, leeway: nil, verifierIdField: "email", isVerifierIdCaseSensitive: false, additionalParams: nil),
+    )
+  )
+  // focus-end
+}
+```

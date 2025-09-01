@@ -1,0 +1,306 @@
+---
+title: Custom JWT Login with Embedded Wallets
+sidebar_label: Custom JWT
+description: 'Custom JWT Login with Embedded Wallets | Embedded Wallets'
+image: 'img/docs-meta-cards/documentation-card.png'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+import CustomConnectionOptions from '@site/static/img/w3a-dashboard/authentication-custom-connections.png'
+import CustomJWTConnection from '@site/static/img/w3a-dashboard/custom-connection.png'
+import JwtLoginCustom from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_custom.mdx'
+
+Web3Auth supports integration with custom login providers through JWT-based authentication schemes, allowing developers to maintain their existing authentication infrastructure while leveraging Web3Auth’s wallet and key management capabilities. Custom authentication can be implemented using industry-standard cryptographic algorithms such as RSA or ECDSA signatures.
+
+To use this feature, developers must ensure that their JWTs adhere to the [JWT specification](https://datatracker.ietf.org/doc/html/rfc7519). Each JWT must be signed using a private key, and its corresponding public key must be accessible via a [JWKS (JSON Web Key Set)](https://datatracker.ietf.org/doc/html/rfc7517) endpoint. Web3Auth will use this endpoint to verify the integrity and authenticity of incoming tokens during login.
+
+Once the Custom JWT login is working, developers can proceed to add it as a custom connection in the Embedded Wallets Dashboard.
+
+## Set up Custom JWT Connection
+
+:::success Create Custom Connection on Dashboard
+
+To use this feature, developers must go to the `Custom Connections` tab in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+
+:::
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={CustomConnectionOptions}
+    style={{
+      maxWidth: '600px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Custom Connection Options"
+  />
+</div>
+
+Follow these steps to create a AWS Cognito connection:
+
+1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+1. Go to the `Custom Connections` section.
+1. Click on the `Settings` icon near the `Custom Connection`.
+1. Enter the `Auth Connection ID`.
+1. Paste the `JWKS Endpoint`.
+1. Paste a sample `JWT Token` to auto populate the best **JWT validations** possible.
+1. Select the `JWT user identifier`: `email`, `sub` or `custom`.
+1. Toggle the Case Sensitivity of `User Identifier`. (Optional)
+1. Click on `Add Custom Validations` to add validations manually.
+   1. Type iss as a field and `your-issuer` as a value.
+   1. Next, type aud as a field and `your-audience` as a value.
+1. Finally, click on the `Add Connection` button.
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={CustomJWTConnection}
+    style={{
+      maxWidth: '600px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Custom JWT Connection"
+  />
+</div>
+
+## Create JWT
+
+To generate the JWT, developers may use a package of their choice. Web3Auth provides documentation and examples using both the `jsonwebtoken` and `jose` libraries.
+
+### Generate Private Key
+
+Developers can generate a private key using the `openssl` command-line tool. This private key will be used to sign the ID token.
+
+<Tabs
+defaultValue="rsa"
+values={[
+  { label: "RSA256", value: "rsa" },
+  { label: "ECDSA", value: "ecdsa" },
+]}
+>
+<TabItem value="rsa">
+
+Developers can run the following command in the terminal to generate a new `privateKey.pem` file containing the `RSA256` key details.
+
+```bash
+openssl genrsa -out privateKey.pem 2048
+```
+
+Once the private key is generated, developers can generate the public key which can be used to verify the JWT and [convert it to JWKS](#how-to-convert-pem-to-jwks).
+
+```bash
+openssl rsa -in privateKey.pem -pubout -out publicKey.pem
+```
+
+</TabItem>
+
+<TabItem value="ecdsa">
+
+Developers can run the following command in the terminal to generate a new `privateKey.pem` file containing the `ECDSA` key details.
+
+```bash
+openssl ecparam -name secp256k1 -genkey -noout -out ec-secp256k1-privateKey.pem
+```
+
+Once the private key is generated, developers can generate the public key which can be used to verify the JWT and [convert it to JWKS](#how-to-convert-pem-to-jwks).
+
+```bash
+openssl ec -in ec-secp256k1-privateKey.pem -pubout -out ec-secp256k1-publicKey.pem
+```
+
+</TabItem>
+</Tabs>
+
+### Install JWT Library
+
+Developers can install a JWT library of their choice. Following are the documentation and examples using both the `jsonwebtoken` and `jose` libraries.
+
+```bash npm2yarn
+npm i jsonwebtoken
+
+npm i jose
+```
+
+### Generate JWT
+
+<Tabs
+defaultValue="jsonwebtoken"
+values={[
+  { label: "jsonwebtoken", value: "jsonwebtoken" },
+  { label: "jose", value: "jose" },
+]}
+>
+<TabItem value="jsonwebtoken">
+
+Web3Auth provides documentation for using RSA256 and ECDSA—two of the most commonly used algorithms—for generating JWTs with the `jsonwebtoken` package. For a complete list of supported algorithms, developers can refer to the [jsonwebtoken documentation](https://www.npmjs.com/package/jsonwebtoken#algorithms-supported).
+
+<Tabs
+defaultValue="rsa"
+values={[
+  { label: "RSA256", value: "rsa" },
+  { label: "ECDSA", value: "ecdsa" },
+]}
+>
+<TabItem value="rsa">
+
+Developers can create an `index.js` file and insert the following code snippet to generate a JWT using the `RSA` algorithm.
+
+```tsx
+import jwt from 'jsonwebtoken'
+import fs from 'fs'
+
+var privateKey = fs.readFileSync('privateKey.pem')
+
+var token = jwt.sign(
+  {
+    sub: 'faj2720i2fdG7NsqznOKrthDvq43', // must be unique to each user
+    name: 'Mohammad Shahbaz Alam',
+    email: 'shahbaz@web3auth.io',
+    aud: 'urn:my-resource-server', // -> to be used in Custom Authentication as JWT Field
+    iss: 'https://my-authz-server', // -> to be used in Custom Authentication as JWT Field
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + 60 * 60,
+  },
+  privateKey,
+  { algorithm: 'RS256', keyid: '1bb9605c36e69386830202b2d' } // <-- Replace it with your kid. This has to be present in the JWKS endpoint.
+)
+
+console.log(token)
+```
+
+</TabItem>
+<TabItem value="ecdsa">
+
+Developers can create an `index.js` file and insert the following code snippet to generate a JWT using the `ECDSA` algorithm.
+
+```tsx
+import jwt from 'jsonwebtoken'
+import fs from 'fs'
+
+var privateKey = fs.readFileSync('ec-secp256k1-privateKey.pem')
+
+var token = jwt.sign(
+  {
+    sub: 'faj2720i2fdG7NsqzncndijwnKrthDvq43',
+    name: 'Mohammad Shahbaz Alam',
+    email: 'shahbaz@web3auth.io',
+    aud: 'urn:my-resource-server', // -> to be used in Custom Authentication as JWT Field
+    iss: 'https://my-authz-server', // -> to be used in Custom Authentication as JWT Field
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + 60 * 60,
+  },
+  privateKey,
+  { algorithm: 'ECDSA', keyid: '1bb9605c36e69386830202b2d' } // <-- Replace it with your kid. This has to be present in the JWKS endpoint.
+)
+
+console.log(token)
+```
+
+</TabItem>
+</Tabs>
+
+</TabItem>
+<TabItem value="jose">
+
+Create an index.js file and paste the below code to generate the JWT using RSA algorithm.
+
+```tsx
+import * as jose from 'jose'
+import fs from 'fs'
+var privateKey = fs.readFileSync('privateKey.pem')
+var publicKey = fs.readFileSync('publicKey.pem')
+
+const jwt = await new jose.SignJWT({ 'urn:example:claim': true })
+  .setProtectedHeader({ alg: 'RS256', kid: '1bb9605c36e69386830202b2d' }) // <-- Replace it with your kid. This has to be present in the JWKS endpoint.
+  .setIssuedAt()
+  .setIssuer('https://my-authz-server')
+  .setAudience('urn:my-resource-server')
+  .setExpirationTime('2h')
+  .sign(privateKey)
+
+console.log(jwt)
+
+// Verifying the JWT using Remote JWK Set.
+// This is just to show how the Verify works, look above to set-up custom jwt verifier on the Embedded Wallets Dashboard.
+// Check the steps below to see how once can generate the JWKS
+const JWKS = jose.createRemoteJWKSet(new URL('https://my-authz-server/.well-known/jwks.json'))
+
+const { payload, protectedHeader } = await jose.jwtVerify(jwt, JWKS, {
+  issuer: 'https://my-authz-server',
+  audience: 'urn:my-resource-server',
+})
+
+console.log(protectedHeader)
+console.log(payload)
+```
+
+</TabItem>
+</Tabs>
+
+:::warning Facing issue with JWT?
+
+Check out [**this troubleshooting page to fix those.**](/troubleshooting/jwt-errors)
+
+:::
+
+## Usage
+
+Since, the `Custom Connection` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+
+> Follow our [Quickstart Guide](/quick-start) to setup the basic flow.
+
+### Login with JWT
+
+<JwtLoginCustom />
+
+## What are JWKS?
+
+JWKS stands for JSON Web Key Set. It is a set of keys containing the public keys that should be used to verify any JSON Web Token (JWT) issued by the authorization server and signed using the RS256 signing algorithm.
+
+### How to create JWKS?
+
+- Most of the login providers that support JWT-based login will provide you this URL, such as Firebase, Google, Auth0, AWS Cognito etc.
+  - Firebase: `https://www.googleapis.com/service_accounts/v1/jwk/{your-project-id}`
+  - Auth0: `https://{your-domain}/.well-known/jwks.json`
+  - Google: `https://www.googleapis.com/oauth2/v3/certs`
+  - AWS Cognito: `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`
+
+- If you are using your own custom JWT, you will need to convert your PEM file to JWKS.
+
+### How to convert PEM to JWKS?
+
+If you're using `jose` or `jsonwebtoken` library, you can use the following steps to convert your PEM file to JWKS.
+
+1. Create a Private Key using openssl.
+
+   ```bash
+   openssl genrsa -out privateKey.pem 2048
+   ```
+
+   This privateKey will be used to sign the token.
+
+2. Using the above privateKey.pem file, create a Public Key.
+
+   ```bash
+   openssl rsa -in privateKey.pem -pubout -out publicKey.pem
+   ```
+
+   This publicKey.pem file will be converted to JWKS.
+
+3. Convert the publicKey.pem file to JWKS.
+
+   Now, look for a tool that converts `.pem` to `jwk(s)` format.
+   - One of the tools is https://pem2jwk.vercel.app/
+     - Select Signing Algorithm: `RS256`
+     - Select Public Key Use: `Signing`
+     - Key ID: `paste-yours` or leave it blank to generate a random one.
+     - PEM encoded key: `{paste-the-publicKey-pem-file-s-content-here}`
+   - Click on the `Convert to JWK` button.
+
+     ![JWKS Convert Tool](https://web3auth.io/community/uploads/default/optimized/2X/3/3e58a3b7378b9778b0b2d646ec2a3cf47c56ee5e_2_690x448.jpeg)
+
+4. To complete the process, you need to save the output as a `.json` file, host it on your server, and make sure it's publicly accessible.
+
+   This will give you the `JWKS Endpoint`, which is required when setting up a `Custom JWT Verifier` on the Embedded Wallets Dashboard.

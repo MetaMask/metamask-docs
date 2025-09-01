@@ -1,0 +1,149 @@
+---
+title: Integrate Embedded Wallets with the Near Blockchain
+sidebar_label: Near
+image: 'banners/near.png'
+hide_table_of_contents: true
+description: 'Integrate Embedded Wallets with the Near Blockchain | Embedded Wallets'
+---
+
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [NEAR](https://near.org/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting a user's `account`, fetching `balance`, and performing `send transaction`. To help you get started, we've outlined some methods you can use.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Installation
+
+```bash npm2yarn
+npm install --save near-api-js@4.0.4
+```
+
+## Initializing Provider
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0x4e454152
+- Public RPC URL: https://mainnet.aurora.dev (Avoid using public rpcTarget in production)
+- Display Name: Near
+- Block Explorer Link: https://aurorascan.dev
+- Ticker: NEAR
+- Ticker Name: NEAR
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0x4e454153
+- Public RPC URL: https://testnet.aurora.dev (Avoid using public rpcTarget in production)
+- Display Name: Near
+- Block Explorer Link: https://explorer.testnet.aurora.dev
+- Ticker: NEAR
+- Ticker Name: NEAR
+
+</TabItem>
+</Tabs>
+
+## Get Key Pair and Account
+
+After a user logs in, they receive a provider from the Embedded Wallets SDK. However, there is no native provider for Near, so we use the private key to make RPC calls directly.
+
+To access the user's private key, the application can use `web3auth.provider.request({method: "private_key"})`. Since Near requires `ed25519`, use `getED25519Key()` (from the same package set) to convert the `secp256k1` key to an `ed25519` key.
+
+```tsx
+import { connect, KeyPair, keyStores, utils } from 'near-api-js'
+import { getED25519Key } from '@web3auth/auth-adapter'
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// Convert the secp256k1 key to ed25519 key
+// When starting your application with "solana" namespace, you can skip the below two lines
+// and pass the privateKey directly to buffer.
+const privateKeyEd25519 = getED25519Key(privateKey).sk.toString('hex')
+
+// Convert the private key to Buffer
+const privateKeyEd25519Buffer = Buffer.from(privateKeyEd25519, 'hex')
+
+// Convert the private key to base58
+const bs58encode = utils.serialize.base_encode(privateKeyEd25519Buffer)
+
+// Convert the base58 private key to KeyPair
+const keyPair = KeyPair.fromString(`ed25519:${bs58encode}`)
+
+// publicAddress
+const publicAddress = keyPair?.getPublicKey().data || []
+
+// accountId is the account address on Near which is where funds will be sent to.
+const accountId = Buffer.from(pk58 || []).toString('hex')
+```
+
+## Get Balance
+
+```tsx
+import { connect, keyStores, utils } from 'near-api-js'
+/*
+  Use code from the above Initializing Provider here
+*/
+const myKeyStore = new keyStores.InMemoryKeyStore()
+await myKeyStore.setKey('testnet', accountId, keyPair) // accountId and keyPair from above
+const connectionConfig = {
+  networkId: 'testnet',
+  keyStore: myKeyStore,
+  nodeUrl: 'https://rpc.testnet.near.org',
+  walletUrl: 'https://wallet.testnet.near.org',
+  helperUrl: 'https://helper.testnet.near.org',
+  explorerUrl: 'https://explorer.testnet.near.org',
+}
+const nearConnection = await connect(connectionConfig)
+const account = await nearConnection.account(accountId)
+const accountBalance = await account.getAccountBalance()
+const availableBalance = utils.format.formatNearAmount(accountBalance.available)
+```
+
+## Send Transaction
+
+```tsx
+import { connect, keyStores, utils } from 'near-api-js'
+/*
+  Use code from the above Initializing Provider here
+*/
+const receiver = 'shahbaz17.testnet'
+const amount = '2' // in NEAR
+const myKeyStore = new keyStores.InMemoryKeyStore()
+await myKeyStore.setKey('testnet', accountId, keyPair) // accountId and keyPair from above
+const connectionConfig = {
+  networkId: 'testnet',
+  keyStore: myKeyStore,
+  nodeUrl: 'https://rpc.testnet.near.org',
+  walletUrl: 'https://wallet.testnet.near.org',
+  helperUrl: 'https://helper.testnet.near.org',
+  explorerUrl: 'https://explorer.testnet.near.org',
+}
+const nearConnection = await connect(connectionConfig)
+const senderAccount = await nearConnection.account(accountId)
+const result = await senderAccount.sendMoney(receiver, utils.format.parseNearAmount(amount))
+```

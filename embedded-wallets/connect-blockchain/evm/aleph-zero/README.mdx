@@ -1,0 +1,78 @@
+---
+title: Integrate Embedded Wallets with the Aleph Zero Blockchain
+sidebar_label: Aleph Zero
+hide_table_of_contents: true
+
+image: 'banners/aleph-zero.png'
+description: 'Integrate Embedded Wallets with the Aleph Zero Blockchain | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import SEO from '@site/src/components/SEO'
+import ChainDetailsAlephZero from '../../_general-connect-blockchain/_aleph-zero.mdx'
+
+<SEO
+  title="Integrate Embedded Wallets with the Aleph Zero Blockchain"
+  description="Integrate Embedded Wallets with the Aleph Zero Blockchain | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/aleph-zero.png"
+  slug="/embedded-wallets/connect-blockchain/evm/aleph-zero"
+/>
+
+The Aleph Zero blockchain's integration with Embedded Wallets (formerly Web3Auth) helps you get started in minutes. The integration is available for the following platforms: Web, Android, iOS, Flutter, React Native, and Unity.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Chain Details for Aleph Zero
+
+<ChainDetailsAlephZero />
+
+export const AlephZero = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/connect-blockchain/evm/aleph-zero/web',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/connect-blockchain/evm/aleph-zero/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/connect-blockchain/evm/aleph-zero/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/connect-blockchain/evm/aleph-zero/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/aleph-zero/react-native',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/evm/aleph-zero/unity',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={AlephZero} />

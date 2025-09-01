@@ -1,0 +1,34 @@
+---
+title: Retrieve User Information
+sidebar_label: getUserInfo
+description: 'Web3Auth Android SDK - getUserInfo Function | Embedded Wallets'
+---
+
+You can use the `getUserInfo` method to retrieve various details about the user, such as their login type, whether multi-factor authentication (MFA) is enabled, profile image, name, and other relevant information.
+
+## Usage
+
+```kotlin
+val userInfo = web3Auth.getUserInfo()
+```
+
+## UserInfo Response
+
+```json
+{
+  "userInfo": {
+    "email": "w3a-heroes@web3auth.com",
+    "name": "Web3Auth Heroes",
+    "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
+    "verifier": "torus",
+    "verifierId": "w3a-heroes@web3auth.com",
+    "typeOfLogin": "google",
+    "aggregateVerifier": "w3a-google-sapphire",
+    "dappShare": "", // 24 words of seed phrase will be sent only incase of custom verifiers
+    "idToken": "<jwtToken issued by Web3Auth>",
+    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "isMfaEnabled": false // Returns whether the user has enabled MFA or not
+  }
+}
+```

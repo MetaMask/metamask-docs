@@ -1,0 +1,217 @@
+---
+title: Embedded Wallets SDK for Unreal Engine
+sidebar_label: Getting Started
+description: 'MetaMask Embedded Wallets SDK for Unreal Engine | Documentation'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+## Overview
+
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provides a seamless authentication experience for Unreal Engine game applications with social logins, external wallets, and more. Using our Unreal SDK written in C++, you can easily connect users to their preferred wallets and manage authentication state across all mobile platforms.
+
+## Requirements
+
+- Unreal Engine `v5.3.1` with Xcode 15
+- [Epic Game Launcher](https://www.unrealengine.com/en-US/download) to download Unreal library
+- Basic knowledge of C++ and Unreal Engine Development
+
+## Installation
+
+Install the Web3Auth Unreal Engine SDK using one of the following methods:
+
+### Git Clone Installation
+
+Follow these instructions to install the `web3auth-unreal-sdk` plugin:
+
+1. Close your existing Unreal Engine app.
+2. Create a directory in your app root called Plugins.
+3. Clone with:
+
+```bash
+git clone https://github.com/Web3Auth/web3auth-unreal-sdk/tree/main/Plugins/Web3AuthSDK ./Plugins/Web3AuthSDK
+```
+
+4. Open UE5 Editor, navigator to `Menu` → `Edit` → `Plugins`, check the option to enable Web3AuthSDK.
+5. Start your app & it will ask to compile the plugin. Proceed with that.
+
+### Manual Installation
+
+Download the [Unreal Package](https://github.com/Web3Auth/web3auth-unreal-sdk/releases) from our latest release and import the package file into your existing Unreal Engine project.
+
+## Setup
+
+:::info
+
+Prerequisites Before you start, make sure you have registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/) and have set up your project. You can look into the [Dashboard Setup](/dashboard) guide to learn more.
+
+:::
+
+### 1. Configure Web3Auth Project
+
+- Go to [Developer Dashboard](https://dashboard.web3auth.io/), create or select an Web3Auth project:
+- Add `{{SCHEMA}}://{YOUR_APP_PACKAGE_NAME}` to **Whitelist URLs**.
+- Copy the `Client ID` for usage later.
+
+### 2. Configure Deep Link for Android
+
+To setup Android sdk and ndk for unreal editor. Please [see the unreal documentation](https://docs.unrealengine.com/5.0/en-US/how-to-set-up-android-sdk-and-ndk-for-your-unreal-engine-development-environment).
+
+- To add redirect URI into your Android app, open the `<Project-Path>/Plugins/Web3AuthSDK/Source/Web3AuthSDK_Android.xml` file.
+- Find the `<androidManifestUpdates>` tag and inside that, will be a `<data>` tag element. Replace the existing redirect URI with one that you have registered on your Web3Auth Dashboard.
+
+### 3. Configure Deep Link for iOS
+
+Configure your iOS deep link settings in the appropriate configuration files. Make sure the redirect URI matches what you have registered in your Web3Auth Dashboard.
+
+## Initialize Web3Auth
+
+### 1. Initialize Web3Auth Instance
+
+Initialize the Web3Auth SDK in your Unreal project:
+
+```cpp
+#include "Web3AuthSDK.h"
+
+void AYourGameMode::BeginPlay()
+{
+    Super::BeginPlay();
+
+    // Initialize Web3Auth
+    FWeb3AuthOptions Options;
+    Options.ClientId = TEXT("YOUR_CLIENT_ID"); // Get your Client ID from Web3Auth Dashboard
+    Options.Network = TEXT("sapphire_mainnet"); // or "sapphire_devnet"
+    Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
+
+    UWeb3AuthSDK::GetInstance()->Initialize(Options);
+}
+```
+
+### 2. Setup Authentication Callbacks
+
+Set up callbacks to handle authentication responses:
+
+```cpp
+void AYourGameMode::SetupWeb3AuthCallbacks()
+{
+    // Bind login success callback
+    UWeb3AuthSDK::GetInstance()->OnLoginSuccess.AddDynamic(this, &AYourGameMode::OnWeb3AuthLoginSuccess);
+
+    // Bind login error callback
+    UWeb3AuthSDK::GetInstance()->OnLoginError.AddDynamic(this, &AYourGameMode::OnWeb3AuthLoginError);
+
+    // Bind logout callback
+    UWeb3AuthSDK::GetInstance()->OnLogout.AddDynamic(this, &AYourGameMode::OnWeb3AuthLogout);
+}
+
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FString& PublicAddress)
+{
+    UE_LOG(LogTemp, Warning, TEXT("Web3Auth Login Success - Private Key: %s"), *PrivateKey);
+}
+
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLoginError(const FString& Error)
+{
+    UE_LOG(LogTemp, Error, TEXT("Web3Auth Login Error: %s"), *Error);
+}
+
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLogout()
+{
+    UE_LOG(LogTemp, Warning, TEXT("Web3Auth Logout Success"));
+}
+```
+
+## Advanced Configuration
+
+The Web3Auth Unreal SDK offers a rich set of advanced configuration options:
+
+- **[Custom Authentication](./advanced/custom-authentication)**: Define authentication methods.
+- **[Whitelabeling & UI Customization](./advanced/whitelabel)**: Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa)**: Set up and manage MFA.
+
+:::tip
+
+Head over to the advanced configuration sections to learn more about each configuration option.
+
+:::
+
+<Tabs
+  defaultValue="basic-config"
+  values={[
+    { label: "Basic Configuration", value: "basic-config" },
+    { label: "Advanced Configuration", value: "advanced-config" },
+  ]}
+>
+
+<TabItem value="basic-config">
+
+```cpp
+FWeb3AuthOptions Options;
+Options.ClientId = TEXT("YOUR_CLIENT_ID");
+Options.Network = TEXT("sapphire_mainnet"); // or "sapphire_devnet"
+Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
+
+UWeb3AuthSDK::GetInstance()->Initialize(Options);
+```
+
+</TabItem>
+
+<TabItem value="advanced-config">
+
+```cpp
+FWeb3AuthOptions Options;
+Options.ClientId = TEXT("YOUR_CLIENT_ID");
+Options.Network = TEXT("sapphire_mainnet");
+Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
+
+// Set up whitelabel options
+FWeb3AuthWhiteLabelOptions WhiteLabelOptions;
+WhiteLabelOptions.AppName = TEXT("Your App Name");
+WhiteLabelOptions.LogoLight = TEXT("https://your-logo-light.png");
+WhiteLabelOptions.LogoDark = TEXT("https://your-logo-dark.png");
+WhiteLabelOptions.DefaultLanguage = TEXT("en");
+WhiteLabelOptions.Mode = TEXT("auto");
+
+Options.WhiteLabelOptions = WhiteLabelOptions;
+
+UWeb3AuthSDK::GetInstance()->Initialize(Options);
+```
+
+</TabItem>
+
+</Tabs>
+
+## Blockchain Integration
+
+Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
+
+### Ethereum Integration
+
+For Ethereum integration, you can get the private key and use it with Ethereum libraries:
+
+```cpp
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FString& PublicAddress)
+{
+    // Use private key for Ethereum transactions
+    UE_LOG(LogTemp, Warning, TEXT("Ethereum Private Key: %s"), *PrivateKey);
+    UE_LOG(LogTemp, Warning, TEXT("Ethereum Address: %s"), *PublicAddress);
+}
+```
+
+### Solana Integration
+
+For Solana integration, you can get the Ed25519 private key:
+
+```cpp
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FString& PublicAddress)
+{
+    // Get Ed25519 private key for Solana
+    FString Ed25519PrivKey = UWeb3AuthSDK::GetInstance()->GetEd25519PrivKey();
+    UE_LOG(LogTemp, Warning, TEXT("Solana Ed25519 Private Key: %s"), *Ed25519PrivKey);
+}
+```

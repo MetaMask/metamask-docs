@@ -1,0 +1,106 @@
+---
+title: Integrate Embedded Wallets with the Morph Blockchain in React Native
+sidebar_label: React Native
+image: 'banners/morph.png'
+
+keywords: [react-native, morph, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Morph Blockchain in React Native | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Embedded Wallets with the Morph Blockchain in React Native"
+  description="Integrate Embedded Wallets with the Morph Blockchain in React Native | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/morph.png"
+  slug="/embedded-wallets/connect-blockchain/evm/morph/react-native"
+/>
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="testnet"
+  values={[
+    { label: "Testnet", value: "testnet", },
+    { label: "Holesky", value: "holesky", },
+  ]}
+>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0xa96',
+  rpcTarget: 'https://rpc-testnet.morphl2.io',
+  displayName: 'Morph Testnet',
+  blockExplorerUrl: 'https://explorer-testnet.morphl2.io/',
+  ticker: 'ETH',
+  tickerName: 'ETH',
+  logo: 'https://morphl2brand.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Ffcab2c10-8da9-4414-aa63-4998ddf62e78%2F64fbcffc-0e7c-45e1-8900-1bb36dc90924%2FFrame_1597882262.png?table=block&id=0e6a22c3-ed4e-4c25-9575-11b95b1eade9&spaceId=fcab2c10-8da9-4414-aa63-4998ddf62e78&width=2000&userId=&cache=v2',
+}
+```
+
+</TabItem>
+<TabItem
+  value="holesky"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0xafa',
+  rpcTarget: 'https://rpc-holesky.morphl2.io',
+  displayName: 'Morph Holesky',
+  blockExplorerUrl: 'https://explorer-holesky.morphl2.io/',
+  ticker: 'ETH',
+  tickerName: 'ETH',
+  logo: 'https://morphl2brand.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Ffcab2c10-8da9-4414-aa63-4998ddf62e78%2F64fbcffc-0e7c-45e1-8900-1bb36dc90924%2FFrame_1597882262.png?table=block&id=0e6a22c3-ed4e-4c25-9575-11b95b1eade9&spaceId=fcab2c10-8da9-4414-aa63-4998ddf62e78&width=2000&userId=&cache=v2',
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

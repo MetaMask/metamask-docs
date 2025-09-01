@@ -1,0 +1,86 @@
+---
+title: PnP React Native - v4 to v5
+sidebar_label: PnP React Native - v4 to v5
+description: 'PnP React Native SDK - v4 to v5 | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+## Changes to the `WhiteLabelData` object
+
+### Addition and modifications to parameters
+
+- With v5, when sending the whitelabel object while initialization, please keep in mind that the `name` parameter signifying the name of the app has been changed to `appName`.
+- The `dark` parameter that used to accept a boolean value to switch between dark or light mode has been changed to `mode` that accepts a string value of either `light` or `dark` or `auto`.
+- The `theme` parameter now accepts an object with key-value pairs, where the value corresponds to the color for a specific set of keys.
+- Other than the above modifications, new parameters have been added to the `WhiteLabelData` object, like, `appUrl`, `useLogoLoader`, `tncLink` and `privacyPolicy`.
+
+Please look at the [whitelabel](/sdk/react-native/whitelabel) section for `WhiteLabelData` interface.
+
+<Tabs
+  defaultValue="expo"
+  values={[
+    { label: "Expo Managed Workflow", value: "expo" },
+    { label: "Bare React Native Workflow", value: "bare" },
+  ]}
+>
+
+<TabItem value="expo">
+
+```tsx
+import * as WebBrowser from 'expo-web-browser'
+import * as SecureStore from 'expo-secure-store'
+import Web3Auth, { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from '@web3auth/react-native-sdk'
+
+const clientId = 'YOUR WEB3AUTH CLIENT ID'
+
+const web3auth = new Web3Auth(WebBrowser, SecureStore, {
+  clientId,
+  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+  // focus-start
+  whiteLabel: {
+    appName: 'My App',
+    logoLight: 'https://web3auth.io/images/logo-light.png',
+    logoDark: 'https://web3auth.io/images/logo-dark.png',
+    defaultLanguage: 'en',
+    mode: 'auto', // or "dark" or "light"
+    theme: {
+      primary: '#cddc39',
+    },
+  },
+  // focus-end
+})
+```
+
+</TabItem>
+
+<TabItem value="bare">
+
+```tsx
+import * as WebBrowser from '@toruslabs/react-native-web-browser'
+import EncryptedStorage from 'react-native-encrypted-storage'
+import Web3Auth, { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from '@web3auth/react-native-sdk'
+
+const clientId = 'YOUR WEB3AUTH CLIENT ID'
+
+const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
+  clientId,
+  network: OPENLOGIN_NETWORK.TESTNET, // or other networks
+  // focus-start
+  whiteLabel: {
+    appName: 'My App',
+    logoLight: 'https://web3auth.io/images/logo-light.png',
+    logoDark: 'https://web3auth.io/images/logo-dark.png',
+    defaultLanguage: 'en',
+    mode: 'auto', // or "dark" or "light"
+    theme: {
+      primary: '#cddc39',
+    },
+  },
+  // focus-end
+})
+```
+
+</TabItem>
+</Tabs>

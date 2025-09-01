@@ -1,0 +1,80 @@
+---
+title: Integrate Embedded Wallets with the Astar zkEVM Blockchain
+sidebar_label: Astar zkEVM
+hide_table_of_contents: true
+
+image: 'banners/zkevm.png'
+description: 'Integrate Embedded Wallets with the Astar zkEVM Blockchain | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import SEO from '@site/src/components/SEO'
+import ChainDetailsAstarZkevm from '../../_general-connect-blockchain/_astar-zkevm.mdx'
+
+<SEO
+  title="Integrate Embedded Wallets with the Astar zkEVM Blockchain"
+  description="Integrate Embedded Wallets with the Astar zkEVM Blockchain | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/zkevm.png"
+  slug="/embedded-wallets/connect-blockchain/evm/zkevm"
+/>
+
+Integrate Embedded Wallets (formerly Web3Auth) seamlessly with the EVM-based Astar zkEVM blockchain. For Web SDKs, you get a MetaMask-style EIP-1193 provider compatible with ethers.js and web3.js. For Embedded Wallets Mobile SDKs (Android, iOS, React Native), the private key is available in the SDK state for direct signing and JSON-RPC calls.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
+
+## Chain Details for Astar zkEVM
+
+<ChainDetailsAstarZkevm />
+
+export const zkEVM = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/web',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/react-native',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/unity',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={zkEVM} />

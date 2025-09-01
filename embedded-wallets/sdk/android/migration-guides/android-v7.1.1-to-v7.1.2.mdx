@@ -1,0 +1,32 @@
+---
+title: Android SDK - v7.1.1 to v7.1.2
+description: 'Android SDK - v7.1.1 to v7.1.2 | Embedded Wallets'
+sidebar_label: v7.1.1 to v7.1.2
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+# Migration Guide from v7.1.1 to v7.1.2 for Web3Auth Android SDK
+
+## Overview
+
+This migration guide provides steps for upgrading from version 7.1.1(v7.1.1) to version 7.1.2(v7.1.2) of the Web3Auth Android SDK. The guide outlines the breaking changes in the AndroidManifest file.
+
+## Changes in Detail
+
+### AndroidManifest changes
+
+From version **7.1.2**, please make sure to set `android:allowBackup` to `false`, and add `tools:replace="android:fullBackupContent"` in your `AndroidManifest.xml` file.
+
+```xml
+<application
+        // focus-start
+        android:allowBackup="false"
+        tools:replace="android:fullBackupContent"
+        // focus-end
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher">
+</application>
+```
