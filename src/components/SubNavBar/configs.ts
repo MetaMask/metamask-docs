@@ -11,7 +11,7 @@ export const EMBEDDED_WALLETS_SUBNAV_CONFIG: SubNavBarConfig = {
     },
     {
       key: 'sdk',
-      label: 'SDK',
+      label: 'SDKs',
       path: '/embedded-wallets/sdk/',
     },
     {

@@ -1,9 +1,12 @@
 ---
+title: Upgrade an MetaMask EOA to a Smart Account
 description: Upgrade an EOA to a smart account using MetaMask SDK and Wagmi.
-keywords: [SDK, Wagmi, EOA, smart, account, 7702, EIP-7702, 5792, EIP-5792]
+image: 'img/guides/guides-banners/mm-eoa-smart-account.png'
+type: guide
+tags: [metamask sdk, wagmi, EOA, smart, account, EIP 7702, EIP 5792]
+date: Aug 22, 2025
+author: MetaMask Developer Relations
 ---
-
-# Upgrade an EOA to a smart account
 
 This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
 You will use a provided template, which sets up MetaMask SDK with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
@@ -23,32 +26,32 @@ You will use a provided template, which sets up MetaMask SDK with a [Next.js](ht
 
 1. Clone the [`MetaMask/7702-livestream-demo`](https://github.com/MetaMask/7702-livestream-demo) repository:
 
-    ```bash
-    git clone git@github.com:MetaMask/7702-livestream-demo.git
-    ```
+   ```bash
+   git clone git@github.com:MetaMask/7702-livestream-demo.git
+   ```
 
 2. Switch to the `feat/mm-sdk` branch:
 
-    ```bash
-    cd 7702-livestream-demo && git switch feat/mm-sdk
-    ```
+   ```bash
+   cd 7702-livestream-demo && git switch feat/mm-sdk
+   ```
 
 3. Install dependencies:
 
-    ```bash
-    npm install
-    ```
+   ```bash
+   npm install
+   ```
 
 4. Run the development server and navigate to [`http://localhost:3000`](http://localhost:3000/):
 
-    ```bash
-    npm run dev
-    ```
-  
-    The initial template displays with non-functional buttons:
+   ```bash
+   npm run dev
+   ```
+
+   The initial template displays with non-functional buttons:
 
 <p align="center">
-  <img src={require("../_assets/sdk-7702-initial.png").default} alt="SDK 7702 initial template" class="appScreen" height="300px" />
+  <img src={require("@site/static/img/guides/sdk-7702-initial.png").default} alt="SDK 7702 initial template" class="appScreen" height="300px" />
 </p>
 
 ### 2. Configure the MetaMask connector
@@ -188,10 +191,10 @@ When connected, the interface displays your connected wallet address:
 
 <div class="imgRow">
   <div class="imgCol">
-    <img src={require("../_assets/sdk-7702-disconnected.png").default} alt="SDK disconnected" class="appScreen" height="320px" />
+    <img src={require("@site/static/img/guides/sdk-7702-disconnected.png").default} alt="SDK disconnected" class="appScreen" height="320px" />
   </div>
   <div class="imgCol">
-    <img src={require("../_assets/sdk-7702-connected.png").default} alt="SDK connected" class="appScreen" height="320px" />
+    <img src={require("@site/static/img/guides/sdk-7702-connected.png").default} alt="SDK connected" class="appScreen" height="320px" />
   </div>
 </div>
 
@@ -330,7 +333,7 @@ Also, update the connect/disconnect button to reset states when disconnected:
 +       </div>
 +     </div>
 +   )}
-+ 
++
 +   {error && (
 +     <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
 +       <div className="text-red-700 font-medium">Transaction Error</div>
@@ -348,10 +351,10 @@ MetaMask prompts you to upgrade your EOA to a smart account in order to send a b
 
 <div class="imgRow">
   <div class="imgCol">
-    <img src={require("../_assets/sdk-7702-send-batch-txns.png").default} alt="SDK send batch transactions button" class="appScreen" height="550px" />
+    <img src={require("@site/static/img/guides/sdk-7702-send-batch-txns.png").default} alt="SDK send batch transactions button" class="appScreen" height="550px" />
   </div>
   <div class="imgCol">
-    <img src={require("../_assets/sdk-7702-upgrade-eoa.png").default} alt="SDK upgrade EOA to smart account" class="appScreen" height="550px" />
+    <img src={require("@site/static/img/guides/sdk-7702-upgrade-eoa.png").default} alt="SDK upgrade EOA to smart account" class="appScreen" height="550px" />
   </div>
 </div>
 
@@ -479,10 +482,10 @@ When you select the **Check Transaction Status** button, if the transaction is c
 
 <div class="imgRow">
   <div class="imgCol">
-    <img src={require("../_assets/sdk-7702-successful-txn.png").default} alt="SDK successful 7702 transaction" class="appScreen" height="320px" />
+    <img src={require("@site/static/img/guides/sdk-7702-successful-txn.png").default} alt="SDK successful 7702 transaction" class="appScreen" height="320px" />
   </div>
   <div class="imgCol">
-    <img src={require("../_assets/sdk-7702-check-txn-status.png").default} alt="SDK check transaction status" class="appScreen" height="320px" />
+    <img src={require("@site/static/img/guides/sdk-7702-check-txn-status.png").default} alt="SDK check transaction status" class="appScreen" height="320px" />
   </div>
 </div>
 

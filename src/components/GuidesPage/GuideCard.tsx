@@ -100,7 +100,7 @@ export default function GuideCard({
           {tags.map(tag => (
             <Badge
               key={tag}
-              label={tag}
+              label={tag.toLowerCase()}
               variant={activeTags.includes(tag) ? 'success' : 'default'}
             />
           ))}

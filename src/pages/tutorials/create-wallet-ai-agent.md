@@ -1,12 +1,14 @@
 ---
+title: Create an AI agent using MetaMask SDK
+image: 'img/guides/guides-banners/mm-sdk-ai-agent.png'
 description: Create a wallet AI agent using MetaMask SDK and Vercel's AI SDK.
-keywords: [SDK, wallet, AI, agent, Vercel, Wagmi, Next.js, OpenAI, dapp]
+type: guide
+tags: [metamask sdk, wallet, AI, agent, Vercel, Wagmi, Next.js, OpenAI]
+date: May 2, 2025
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-
-# Create a wallet AI agent
 
 This tutorial walks you through creating an AI agent dapp that can display your wallet balance and initiate transactions from your wallet, on the Linea Sepolia network.
 You will use a provided template, which sets up MetaMask SDK and [Vercel's AI SDK](https://sdk.vercel.ai/) with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
@@ -24,36 +26,36 @@ You will use a provided template, which sets up MetaMask SDK and [Vercel's AI SD
 
 ### 1. Set up the project
 
-1. Clone the [`Consensys/wallet-agent`](https://github.com/Consensys/wallet-agent/tree/main) repository:
+1.  Clone the [`Consensys/wallet-agent`](https://github.com/Consensys/wallet-agent/tree/main) repository:
 
     ```bash
     git clone git@github.com:Consensys/wallet-agent.git
     ```
 
-2. Switch to the `initial-setup` branch:
+2.  Switch to the `initial-setup` branch:
 
     ```bash
     cd wallet-agent && git switch initial-setup
     ```
 
-3. Install dependencies:
+3.  Install dependencies:
 
     ```bash
     npm install
     ```
 
-4. Create a `.env.local` file:
+4.  Create a `.env.local` file:
 
     ```bash
     touch .env.local
     ```
 
-5. In `.env.local`, add an `OPENAI_API_KEY` environment variable, replacing `<YOUR-API-KEY>` with your [OpenAI](https://platform.openai.com/docs/overview) API key.
-Vercel's AI SDK will use this environment variable to authenticate your dapp with the OpenAI service.
+5.  In `.env.local`, add an `OPENAI_API_KEY` environment variable, replacing `<YOUR-API-KEY>` with your [OpenAI](https://platform.openai.com/docs/overview) API key.
+    Vercel's AI SDK will use this environment variable to authenticate your dapp with the OpenAI service.
 
-    ```text title=".env.local"
-    OPENAI_API_KEY=<YOUR-API-KEY>
-    ```
+        ```text title=".env.local"
+        OPENAI_API_KEY=<YOUR-API-KEY>
+        ```
 
 ### 2. Create the dapp interface
 
@@ -78,7 +80,7 @@ import Image from "next/image";
 +   const { connect } = useConnect();
 +   const { address, isConnected } = useAccount();
 +   const { disconnect } = useDisconnect();
-+ 
++
 +   return (
 +     <div className="mx-auto">
 +       {isConnected ? (
@@ -117,7 +119,7 @@ When connected, the AI agent chat interface displays with your connected wallet 
 You can test the AI functionality by sending messages in the chat:
 
 <p align="center">
-  <img src={require("../_assets/sdk-ai-agent.png").default} alt="SDK AI agent initial setup" class="appScreen" />
+  <img src={require("@site/static/img/guides/sdk-ai-agent.png").default} alt="SDK AI agent initial setup" class="appScreen" />
 </p>
 
 ### 3. Create a Public Client
@@ -153,7 +155,7 @@ Use the [`getBalance`](https://viem.sh/docs/actions/public/getBalance) method of
 
 ```ts title="tools.ts"
 // add-start
-+ import { publicClient } from "@/wagmi.config"; 
++ import { publicClient } from "@/wagmi.config";
 + import { formatEther } from "viem";
 // add-end
 import { tool as createTool } from "ai";
@@ -196,7 +198,7 @@ export const tools = {
 In the development server, test that this tool works to get your current Linea Sepolia ETH balance:
 
 <p align="center">
-  <img src={require("../_assets/sdk-ai-agent-get-balance.png").default} alt="SDK AI agent get balance" class="appScreen" />
+  <img src={require("@site/static/img/guides/sdk-ai-agent-get-balance.png").default} alt="SDK AI agent get balance" class="appScreen" />
 </p>
 
 ### 5. Create a tool to send transactions
@@ -243,18 +245,15 @@ export const tools = {
 
 ```tsx
 // ...
-if (toolName === "sendTransaction") {
-  const {
-    result,
-  }: { result: { to: string; amount: string } } =
-    toolInvocation;
+if (toolName === 'sendTransaction') {
+  const { result }: { result: { to: string; amount: string } } = toolInvocation
 
   if (isLoading) {
     return (
       <div key={toolCallId}>
         <p>Loading...</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -266,17 +265,12 @@ if (toolName === "sendTransaction") {
             to: result.to as `0x${string}`,
             value: parseEther(result.amount),
           })
-        }
-      >
+        }>
         Send Transaction
       </Button>
-      <p>
-        {hash
-          ? `Transaction sent: ${hash}`
-          : "Transaction not sent"}
-      </p>
+      <p>{hash ? `Transaction sent: ${hash}` : 'Transaction not sent'}</p>
     </div>
-  );
+  )
 }
 // ...
 ```
@@ -289,13 +283,13 @@ In the development server, test that this tool works to send Linea Sepolia ETH f
 When you request the agent to send a transaction, it will provide a button for you to send the transaction, but it will not send it for you:
 
 <p align="center">
-  <img src={require("../_assets/sdk-ai-agent-txn-not-sent.png").default} alt="NFT confirmation" class="appScreen" />
+  <img src={require("@site/static/img/guides/sdk-ai-agent-txn-not-sent.png").default} alt="NFT confirmation" class="appScreen" />
 </p>
 
 When you select the button and confirm the transaction in MetaMask, the transaction will be sent:
 
 <p align="center">
-  <img src={require("../_assets/sdk-ai-agent-txn-sent.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
+  <img src={require("@site/static/img/guides/sdk-ai-agent-txn-sent.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
 </p>
 
 You can check the status of the transaction in the [Linea Sepolia block explorer](https://sepolia.lineascan.build/).
