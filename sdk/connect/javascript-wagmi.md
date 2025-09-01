@@ -27,10 +27,10 @@ You can set up the SDK in the following ways:
 
 ## Set up using a template
 
-1. Download the [MetaMask SDK Wagmi template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstart/wagmi):
+1. Download the [MetaMask SDK Wagmi template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/wagmi):
 
    ```bash
-   npx degit MetaMask/metamask-sdk-examples/quickstart/wagmi metamask-wagmi
+   npx degit MetaMask/metamask-sdk-examples/quickstarts/wagmi metamask-wagmi
    ```
 
    > `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
@@ -44,11 +44,11 @@ You can set up the SDK in the following ways:
     <details>
     <summary>GitHub clone instead of degit?</summary>
     <div>
-    Clone the MetaMask SDK examples repository and navigate into the `quickstart/wagmi` directory:
+    Clone the MetaMask SDK examples repository and navigate into the `quickstarts/wagmi` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
-   cd metamask-sdk-examples/quickstart/wagmi
+   cd metamask-sdk-examples/quickstarts/wagmi
    ```
 
    > Note: _this will download the entire repository._

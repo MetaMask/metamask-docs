@@ -28,10 +28,10 @@ Get started with [MetaMask SDK](https://github.com/MetaMask/metamask-sdk) in you
 
 ## Set up using a template
 
-1. Download the [MetaMask SDK JavaScript template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstart/javascript):
+1. Download the [MetaMask SDK JavaScript template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript):
 
    ```bash
-   npx degit MetaMask/metamask-sdk-examples/quickstart/javascript metamask-javascript
+   npx degit MetaMask/metamask-sdk-examples/quickstarts/javascript metamask-javascript
    ```
 
    > `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
@@ -45,11 +45,11 @@ Get started with [MetaMask SDK](https://github.com/MetaMask/metamask-sdk) in you
     <details>
     <summary>GitHub clone instead of degit?</summary>
     <div>
-    Clone the MetaMask SDK examples repository and navigate into the `quickstart/javascript` directory:
+    Clone the MetaMask SDK examples repository and navigate into the `quickstarts/javascript` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
-   cd metamask-sdk-examples/quickstart/javascript
+   cd metamask-sdk-examples/quickstarts/javascript
    ```
 
    > Note: _this will download the entire repository._
