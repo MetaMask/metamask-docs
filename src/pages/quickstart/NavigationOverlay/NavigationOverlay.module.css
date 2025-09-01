@@ -1,4 +1,4 @@
-/* Overlay Container - Full layover covering entire builder */
+/* Overlay Container - Covers builder area only */
 .overlayContainer {
   position: absolute;
   inset: 0;
@@ -19,7 +19,6 @@ html[data-theme='dark'] .overlayContainer {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  margin-top: 6rem;
 }
 
 /* Tablet and up */

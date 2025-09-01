@@ -16,14 +16,33 @@ import IntegrationBuilderCodeView from '../../theme/IntegrationBuilderCodeView'
 import builder from './builder'
 import styles from './styles.module.css'
 import { getWindowLocation } from '../../theme/URLParams'
-import { METAMASK_SDK, EMBEDDED_WALLETS } from './builder/choices'
+import { METAMASK_SDK, EMBEDDED_WALLETS, YES, NO } from './builder/choices'
 import NavigationOverlay from './NavigationOverlay'
 import MediaStep from './MediaStep'
 
 const hasRelevantURLParams = () => {
   const url = new URL(getWindowLocation())
-  const relevantParams = ['product', 'framework']
+  const relevantParams = ['product', 'framework', 'walletAggregatorOnly']
   return relevantParams.some(param => url.searchParams.has(param))
+}
+
+const validateURLParams = () => {
+  const url = new URL(getWindowLocation())
+  const product = url.searchParams.get('product')
+  const framework = url.searchParams.get('framework')
+  const walletAggregatorOnly = url.searchParams.get('walletAggregatorOnly')
+
+  // Must have at least a product parameter to be valid
+  if (!product) return false
+
+  // Validate product parameter
+  const validProducts = [METAMASK_SDK, EMBEDDED_WALLETS]
+  if (!validProducts.includes(product)) return false
+
+  // If we have walletAggregatorOnly, validate its value
+  if (walletAggregatorOnly && ![YES, NO].includes(walletAggregatorOnly)) return false
+
+  return true
 }
 
 const getDefaultBuilderOptions = () => {
@@ -86,10 +105,74 @@ const StepNavigationMenu: React.FC<{
   )
 }
 
+// Fallback: Import files directly from build output if props don't contain them
+async function loadFilesDirectly() {
+  try {
+    const filesModule = await import('../../../.docusaurus/docusaurus-plugin-virtual-files/default/files.json')
+    return filesModule.default || filesModule
+  } catch (e) {
+    console.error('Could not load files directly:', e)
+    return {}
+  }
+}
+
 export default function IntegrationBuilderPage(props: any) {
-  // Try different ways to access files
-  const files =
-    props.files || (props.route?.modules?.files ? JSON.parse(props.route.modules.files) : {})
+  // Try different ways to access files from component props
+  let files = {}
+
+  // Method 1: Direct props.files
+  if (props.files) {
+    files = props.files
+  }
+  // Method 2: From route modules (for Docusaurus plugin data)
+  else if (props.route?.modules?.files) {
+    const filesData = props.route.modules.files
+    if (typeof filesData === 'string') {
+      try {
+        files = JSON.parse(filesData)
+      } catch (e) {
+        console.error('Failed to parse files JSON:', e)
+      }
+    } else {
+      files = filesData
+    }
+  }
+  // Method 3: Check if files are in route.modules directly
+  else if (props.route?.modules && typeof props.route.modules === 'object') {
+    // Sometimes Docusaurus puts the data directly in modules
+    const moduleKeys = Object.keys(props.route.modules)
+    for (const key of moduleKeys) {
+      if (key.includes('files') || key.includes('Files')) {
+        const moduleData = props.route.modules[key]
+        if (typeof moduleData === 'string') {
+          try {
+            files = JSON.parse(moduleData)
+            break
+          } catch (e) {
+            console.error(`Failed to parse ${key}:`, e)
+          }
+        } else if (typeof moduleData === 'object') {
+          files = moduleData
+          break
+        }
+      }
+    }
+  }
+
+  // Method 4: If still no files, try to load them directly (fallback)
+  const [fallbackFiles, setFallbackFiles] = useState({})
+  useEffect(() => {
+    if (Object.keys(files).length === 0 && Object.keys(fallbackFiles).length === 0) {
+      loadFilesDirectly().then(loadedFiles => {
+        setFallbackFiles(loadedFiles)
+      }).catch(err => {
+        console.error('Failed to load fallback files:', err)
+      })
+    }
+  }, [files, fallbackFiles])
+
+  // Use fallback files if main files are empty
+  const finalFiles = Object.keys(files).length > 0 ? files : fallbackFiles
 
   // Always check URL params dynamically instead of caching at init
   const [showNavigationOverlay, setShowNavigationOverlay] = useState<boolean>(false)
@@ -111,16 +194,18 @@ export default function IntegrationBuilderPage(props: any) {
   // Check URL params and set initial state
   useEffect(() => {
     const hasParams = hasRelevantURLParams()
+    const isValid = validateURLParams()
 
-    if (!hasParams) {
+    if (!hasParams || !isValid) {
       setShowNavigationOverlay(true)
-      setBuilderOptions({})
+      // Still set default builder options so builder renders underneath
+      setBuilderOptions(getDefaultBuilderOptions())
       setStepIndex(0)
 
-      // Clean URL by removing any step-related params
-      const currentUrl = new URL(getWindowLocation())
-      if (currentUrl.searchParams.has('stepIndex')) {
-        currentUrl.searchParams.delete('stepIndex')
+      // Clean URL by removing any invalid params
+      if (!isValid && hasParams) {
+        const currentUrl = new URL(getWindowLocation())
+        currentUrl.search = '' // Clear all parameters if invalid
         // eslint-disable-next-line no-restricted-globals
         history.replaceState({}, '', currentUrl.toString())
       }
@@ -134,8 +219,9 @@ export default function IntegrationBuilderPage(props: any) {
   useEffect(() => {
     const checkURLAndResetIfNeeded = () => {
       const hasParams = hasRelevantURLParams()
+      const isValid = validateURLParams()
 
-      if (!hasParams) {
+      if (!hasParams || !isValid) {
         setShowNavigationOverlay(true)
         setBuilderOptions({})
         setStepIndex(0)
@@ -172,22 +258,42 @@ export default function IntegrationBuilderPage(props: any) {
 
   // Simplified URL change detection - only when actually needed
   useEffect(() => {
-    // Only check if we're showing builder (not overlay) and detect if params disappear
+    // Only check if we're showing builder (not overlay) and detect if params disappear or become invalid
     if (!showNavigationOverlay) {
       const hasParams = hasRelevantURLParams()
-      if (!hasParams) {
+      const isValid = validateURLParams()
+      if (!hasParams || !isValid) {
         setShowNavigationOverlay(true)
-        setBuilderOptions({})
+        setBuilderOptions(getDefaultBuilderOptions())
         setStepIndex(0)
       }
     }
   }, [showNavigationOverlay]) // Only when overlay state changes
 
-  // Handle navigation overlay selection
-  const handleNavigationSelect = (product: string) => {
-    const newBuilderOptions = {
-      product: product,
+  // Handle body scroll prevention when overlay is open
+  useEffect(() => {
+    if (showNavigationOverlay) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
     }
+
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [showNavigationOverlay])
+
+  // Handle navigation overlay selection
+  const handleNavigationSelect = (options: { product: string; walletAggregatorOnly?: string }) => {
+    const newBuilderOptions: Record<string, string> = {
+      product: options.product,
+    }
+
+    // Add walletAggregatorOnly if specified
+    if (options.walletAggregatorOnly !== undefined) {
+      newBuilderOptions.walletAggregatorOnly = options.walletAggregatorOnly
+    }
+
     setBuilderOptions(newBuilderOptions)
     setShowNavigationOverlay(false)
     setStepIndex(0) // Always start at step 0 when selecting from overlay
@@ -210,8 +316,8 @@ export default function IntegrationBuilderPage(props: any) {
   }
 
   const integration = useMemo(() => {
-    // Don't build integration if overlay is showing
-    if (showNavigationOverlay || Object.keys(builderOptions).length === 0) {
+    // Always build integration - even when overlay is showing
+    if (Object.keys(builderOptions).length === 0) {
       return {
         filenames: [],
         files: {},
@@ -221,9 +327,9 @@ export default function IntegrationBuilderPage(props: any) {
         sourceCodeLink: '',
       }
     }
-    const result = builder.build(builderOptions, files || {}, stepIndex)
+    const result = builder.build(builderOptions, finalFiles || {}, stepIndex)
     return result
-  }, [builderOptions, files, stepIndex, showNavigationOverlay])
+  }, [builderOptions, finalFiles, stepIndex])
   const [selectedFilename, setSelectedFilename] = useState(integration.filenames[0] || '')
   const [activeTab, setActiveTab] = useState<'media' | 'code'>('media')
 
@@ -338,7 +444,18 @@ export default function IntegrationBuilderPage(props: any) {
     const handleScroll = () => {
       if (isManualNavigation) return
 
-      // Check if scrolled to bottom first
+      // Check if scrolled to top first
+      const isAtTop = stepsContainer.scrollTop <= 10
+
+      if (isAtTop) {
+        // Force first step when at top
+        if (stepIndex !== 0) {
+          setStepIndex(0)
+        }
+        return
+      }
+
+      // Check if scrolled to bottom
       const isAtBottom =
         stepsContainer.scrollTop + stepsContainer.clientHeight >= stepsContainer.scrollHeight - 10
 
@@ -631,10 +748,6 @@ export default function IntegrationBuilderPage(props: any) {
         image="https://web3auth.io/docs/images/docs-meta-cards/integration-builder-card.png"
         url="https://web3auth.io/docs/quick-start"
       />
-      {showNavigationOverlay && (
-        <NavigationOverlay onClose={handleCloseOverlay} onSelect={handleNavigationSelect} />
-      )}
-
       <div className={styles.container} style={{ position: 'relative' }}>
         {/* Top Control Pane */}
         <div className={styles.topControlPane}>
@@ -646,8 +759,14 @@ export default function IntegrationBuilderPage(props: any) {
 
             {/* Dropdown and Actions */}
             <div className={styles.controlActions}>
+              {/* Wallet Aggregator Toggle (show first) */}
               {Object.entries(builder.options).map(([key, option]) =>
-                option.type === 'dropdown' ? optionRender(key, option) : null
+                key === 'walletAggregatorOnly' && option.type === 'dropdown' ? optionRender(key, option) : null
+              )}
+
+              {/* Other dropdowns (platform selection, etc.) */}
+              {Object.entries(builder.options).map(([key, option]) =>
+                key !== 'walletAggregatorOnly' && option.type === 'dropdown' ? optionRender(key, option) : null
               )}
 
               <button
@@ -851,6 +970,10 @@ export default function IntegrationBuilderPage(props: any) {
             />
           )}
         </div>
+
+        {showNavigationOverlay && (
+          <NavigationOverlay onClose={handleCloseOverlay} onSelect={handleNavigationSelect} />
+        )}
       </div>
     </Layout>
   )

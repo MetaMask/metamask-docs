@@ -377,7 +377,7 @@ input:checked+.slider::before {
 }
 
 .list select {
-  padding: 8px 16px;
+  padding: 8px 32px 8px 16px;
   font-weight: 500 !important;
   font-size: 14px;
   line-height: 20px;
@@ -530,6 +530,7 @@ input:checked+.slider::before {
 
   .list select {
     min-width: 120px;
+    padding: 8px 28px 8px 12px;
   }
 }
 
@@ -849,7 +850,7 @@ input:checked+.slider::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 4rem 0;
+  margin: 1rem 0;
   opacity: 0.3;
 }
 
@@ -866,7 +867,7 @@ input:checked+.slider::before {
 .completionIndicator {
   text-align: center;
   padding: 2rem;
-  margin: 4rem 1.5rem 2rem;
+  margin: 1rem 1.5rem 2rem;
   background: linear-gradient(135deg,
       var(--ifm-color-success-light) 0%,
       var(--ifm-color-success) 100%);
@@ -957,7 +958,7 @@ input:checked+.slider::before {
   }
 
   .stepSeparator {
-    margin: 3rem 0;
+    margin: 1rem 0;
   }
 
   .stepsScrollContainer {

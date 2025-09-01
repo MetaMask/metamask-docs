@@ -43,3 +43,8 @@ export const TOGGLE: DisplayChoice[] = [
   { key: NO, displayName: 'No' },
   { key: YES, displayName: 'Yes' },
 ]
+
+export const WALLET_AGGREGATOR_TOGGLE: DisplayChoice[] = [
+  { key: NO, displayName: 'Social Logins' },
+  { key: YES, displayName: 'Wallet Aggregator' },
+]

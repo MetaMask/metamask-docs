@@ -1,6 +1,7 @@
 import * as getUserInfo from '../../../../commonSteps/getUserInfo.mdx'
 import * as reactNativeBundlerIssues from './reactNativeBundlerIssues.mdx'
 import * as registerApp from '../../../../commonSteps/registerApp.mdx'
+import * as walletAggregatorOnly from '../../../../commonSteps/walletAggregatorOnly.mdx'
 import { toSteps } from '../../../../utils'
 import * as blockchainCalls from './blockchainCallsReactNative.mdx'
 import * as initialization from './initializeReactNative.mdx'
@@ -20,6 +21,7 @@ const STEPS = toSteps({
   whitelist,
   installation,
   registerApp,
+  walletAggregatorOnly,
   initialization,
   login,
   getUserInfo,

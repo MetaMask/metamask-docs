@@ -3,9 +3,9 @@ import { ReplaceFileAggregator } from '../../../utils'
 import getSteps from './steps'
 
 const framework = {
-  build({ filenames, files, steps }) {
+  build({ filenames, files, steps, ...values }) {
     const replacementAggregator = new ReplaceFileAggregator()
-    getSteps(steps, files, replacementAggregator)
+    getSteps(steps, files, replacementAggregator, values)
     filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX)
     filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_PACKAGE_JSON)
     filenames.push(qsFileLinks.EW_PNP_REACT_NATIVE_METRO_CONFIG_JS)

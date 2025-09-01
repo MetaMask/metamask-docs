@@ -1,7 +1,8 @@
 import qsFileLinks from '../../../../../utils/qs-file-links.json'
 import STEPS from './stepContent'
+import { YES } from '../../choices'
 
-export default function getSteps(steps, files, replacementAggregator) {
+export default function getSteps(steps, files, replacementAggregator, values = {}) {
   steps.push(
     {
       ...STEPS.reactQuickStart,
@@ -26,7 +27,22 @@ export default function getSteps(steps, files, replacementAggregator) {
         files[qsFileLinks.EW_REACT_WEB3AUTHCONTEXT_TSX],
         'Dashboard Registration'
       ),
-    },
+    }
+  )
+
+  // Add wallet aggregator only step if enabled
+  if (values.walletAggregatorOnly === YES) {
+    steps.push({
+      ...STEPS.walletAggregatorOnly,
+      pointer: replacementAggregator.highlightRange(
+        qsFileLinks.EW_REACT_WEB3AUTHCONTEXT_TSX,
+        files[qsFileLinks.EW_REACT_WEB3AUTHCONTEXT_TSX],
+        'Wallet Aggregator Configuration'
+      ),
+    })
+  }
+
+  steps.push(
     {
       ...STEPS.config,
       pointer: replacementAggregator.highlightRange(

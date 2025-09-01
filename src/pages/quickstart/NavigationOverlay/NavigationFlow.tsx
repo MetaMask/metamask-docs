@@ -8,7 +8,7 @@ import Button from '@site/src/components/elements/buttons/button'
 import SvgStar from '@site/static/img/icons/star.svg'
 import Shape from '@site/static/img/shapes/intro-cards/shape.svg'
 import styles from './NavigationOverlay.module.css'
-import { METAMASK_SDK, EMBEDDED_WALLETS } from '../builder/choices'
+import { METAMASK_SDK, EMBEDDED_WALLETS, YES, NO } from '../builder/choices'
 
 interface NavigationOption {
   id: string
@@ -16,10 +16,11 @@ interface NavigationOption {
   description: string
   product?: string
   link?: string
+  walletAggregatorOnly?: string
 }
 
 interface NavigationFlowProps {
-  onSelect: (product: string) => void
+  onSelect: (options: { product: string; walletAggregatorOnly?: string }) => void
 }
 
 const navigationOptions: NavigationOption[] = [
@@ -34,12 +35,14 @@ const navigationOptions: NavigationOption[] = [
     title: 'I want to create wallets inside my dapp',
     description: 'Embedded Wallets SDK',
     product: EMBEDDED_WALLETS,
+    walletAggregatorOnly: NO,
   },
   {
     id: 'embedded-wallets-2',
     title: 'I want a wallet aggregator for my dapp',
     description: 'Embedded Wallets SDK',
     product: EMBEDDED_WALLETS,
+    walletAggregatorOnly: YES,
   },
   {
     id: 'delegation-toolkit-1',
@@ -67,7 +70,13 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
 
   const handleOptionSelect = (option: NavigationOption) => {
     if (option.product) {
-      onSelect(option.product)
+      const options: { product: string; walletAggregatorOnly?: string } = {
+        product: option.product,
+      }
+      if (option.walletAggregatorOnly !== undefined) {
+        options.walletAggregatorOnly = option.walletAggregatorOnly
+      }
+      onSelect(options)
     } else if (option.link) {
       window.location.href = option.link
     }

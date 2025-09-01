@@ -5,6 +5,7 @@ import * as login from './login.mdx'
 import * as logout from './logout.mdx'
 import * as blockchainCalls from './blockchainCalls.mdx'
 import * as registerApp from '../../../../commonSteps/registerApp.mdx'
+import * as walletAggregatorOnly from '../../../../commonSteps/walletAggregatorOnly.mdx'
 import * as installation from './installation.mdx'
 import * as config from './config.mdx'
 import { toSteps } from '../../../../utils'
@@ -16,6 +17,7 @@ const STEPS = toSteps({
   initialization,
   config,
   registerApp,
+  walletAggregatorOnly,
   blockchainCalls,
   login,
   logout,

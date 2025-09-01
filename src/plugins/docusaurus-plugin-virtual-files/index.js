@@ -25,7 +25,6 @@ const qsFileLinks = require('../../utils/qs-file-links.json')
 module.exports = (context, options) => ({
   name: 'docusaurus-plugin-virtual-files',
   async loadContent() {
-    console.log('🔄 Virtual files plugin: loadContent called')
     const dir = path.resolve(context.siteDir, options.rootDir)
     const filenames = Object.values(qsFileLinks)
     const fileContents = {}
@@ -56,32 +55,16 @@ module.exports = (context, options) => ({
       }
     }
 
-    const emptyFiles = Object.entries(fileContents).filter(
-      ([key, value]) => !value || value.length === 0
-    )
-    if (emptyFiles.length > 0) {
-      console.log(
-        `Warning: ${emptyFiles.length} files are empty:`,
-        emptyFiles.map(([key]) => key)
-      )
-    }
-
     console.log(`✅ Virtual files plugin: Loaded ${Object.keys(fileContents).length} files`)
     return fileContents
   },
   async contentLoaded({ content, actions }) {
     const { createData, addRoute } = actions
 
-    console.log('🔄 Virtual files plugin: contentLoaded called')
-    console.log(`📁 Content has ${Object.keys(content).length} files`)
-
-    // Create JSON data file like web3auth-docs
+    // Create JSON data file
     const files = await createData('files.json', JSON.stringify(content))
-    console.log('📄 Created files.json data:', files)
 
     const routePath = '/quickstart'
-    console.log(`🛣️ Adding route at path: ${routePath}`)
-    console.log(`📍 Component path: @site/src/pages/quickstart`)
 
     addRoute({
       path: routePath,
@@ -100,8 +83,6 @@ module.exports = (context, options) => ({
         files,
       },
     })
-
-    console.log('✅ Virtual files plugin: Route added successfully')
   },
 })
 
