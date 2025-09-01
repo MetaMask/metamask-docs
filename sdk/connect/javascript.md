@@ -186,3 +186,7 @@ const batchResults = await provider.request({
   params: [{ method: 'eth_accounts' }, { method: 'eth_chainId' }],
 })
 ```
+
+## Live example
+
+<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript?ctl=1&embed=1&file=src%2Fmain.js&hideNavigation=1"></iframe>
