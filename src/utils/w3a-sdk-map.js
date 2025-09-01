@@ -18,7 +18,7 @@ export const pnpAndroidVersion = `9.1.2`
 export const pnpIOSVersion = `11.1.0`
 export const pnpRNVersion = `8.1.x`
 export const pnpFlutterVersion = `6.1.2`
-export const pnpUnityVersion = `5.x.x`
+export const pnpUnityVersion = `7.0.x`
 export const pnpUnrealVersion = `4.1.x`
 
 export const sfaWebVersion = `9.2.x`

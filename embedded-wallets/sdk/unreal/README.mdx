@@ -4,11 +4,8 @@ sidebar_label: Getting Started
 description: 'MetaMask Embedded Wallets SDK for Unreal Engine | Documentation'
 ---
 
-import ExampleCards from '@theme/ExampleCards'
-import { webExamples, QUICK_START } from '@site/src/utils/example-maps'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
 
 ## Overview
 
@@ -67,27 +64,6 @@ To setup Android sdk and ndk for unreal editor. Please [see the unreal documenta
 ### 3. Configure Deep Link for iOS
 
 Configure your iOS deep link settings in the appropriate configuration files. Make sure the redirect URI matches what you have registered in your Web3Auth Dashboard.
-
-### 4. Configuration
-
-Initialize the Web3Auth SDK in your Unreal project:
-
-```cpp
-#include "Web3AuthSDK.h"
-
-void AYourGameMode::BeginPlay()
-{
-    Super::BeginPlay();
-
-    // Initialize Web3Auth
-    FWeb3AuthOptions Options;
-    Options.ClientId = TEXT("YOUR_CLIENT_ID"); // Get your Client ID from Web3Auth Dashboard
-    Options.Network = TEXT("sapphire_mainnet"); // or "sapphire_devnet"
-    Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
-
-    UWeb3AuthSDK::GetInstance()->Initialize(Options);
-}
-```
 
 ## Initialize Web3Auth
 
@@ -162,46 +138,6 @@ Head over to the advanced configuration sections to learn more about each config
 
 :::
 
-## Blockchain Integration
-
-Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
-
-### Ethereum Integration
-
-For Ethereum integration, you can get the private key and use it with Ethereum libraries:
-
-```cpp
-void AYourGameMode::LoginWithGoogle()
-{
-    FWeb3AuthLoginParams LoginParams;
-    LoginParams.LoginProvider = TEXT("google");
-
-    UWeb3AuthSDK::GetInstance()->Login(LoginParams);
-}
-
-UFUNCTION()
-void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FString& PublicAddress)
-{
-    // Use private key for Ethereum transactions
-    UE_LOG(LogTemp, Warning, TEXT("Ethereum Private Key: %s"), *PrivateKey);
-    UE_LOG(LogTemp, Warning, TEXT("Ethereum Address: %s"), *PublicAddress);
-}
-```
-
-### Solana Integration
-
-For Solana integration, you can get the Ed25519 private key:
-
-```cpp
-UFUNCTION()
-void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FString& PublicAddress)
-{
-    // Get Ed25519 private key for Solana
-    FString Ed25519PrivKey = UWeb3AuthSDK::GetInstance()->GetEd25519PrivKey();
-    UE_LOG(LogTemp, Warning, TEXT("Solana Ed25519 Private Key: %s"), *Ed25519PrivKey);
-}
-```
-
 <Tabs
   defaultValue="basic-config"
   values={[
@@ -248,8 +184,34 @@ UWeb3AuthSDK::GetInstance()->Initialize(Options);
 
 </Tabs>
 
-<SdkTroubleshootingIntro />
+## Blockchain Integration
 
-## Quick Starts
+Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
 
-<ExampleCards exampleMap={webExamples.filter(obj => obj.type === QUICK_START)} />
+### Ethereum Integration
+
+For Ethereum integration, you can get the private key and use it with Ethereum libraries:
+
+```cpp
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FString& PublicAddress)
+{
+    // Use private key for Ethereum transactions
+    UE_LOG(LogTemp, Warning, TEXT("Ethereum Private Key: %s"), *PrivateKey);
+    UE_LOG(LogTemp, Warning, TEXT("Ethereum Address: %s"), *PublicAddress);
+}
+```
+
+### Solana Integration
+
+For Solana integration, you can get the Ed25519 private key:
+
+```cpp
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FString& PublicAddress)
+{
+    // Get Ed25519 private key for Solana
+    FString Ed25519PrivKey = UWeb3AuthSDK::GetInstance()->GetEd25519PrivKey();
+    UE_LOG(LogTemp, Warning, TEXT("Solana Ed25519 Private Key: %s"), *Ed25519PrivKey);
+}
+```

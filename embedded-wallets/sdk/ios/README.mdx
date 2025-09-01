@@ -4,11 +4,8 @@ sidebar_label: Getting Started
 description: 'MetaMask Embedded Wallets SDK for iOS | Documentation'
 ---
 
-import ExampleCards from '@theme/ExampleCards'
-import { webExamples, QUICK_START } from '@site/src/utils/example-maps'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
 
 ## Overview
 
@@ -59,14 +56,16 @@ Prerequisites Before you start, make sure you have registered on the [**Web3Auth
 
 :::
 
-### 1. Configure Redirection
+### Configure Redirection
 
 To use Web3Auth for iOS you need to Whitelist your `bundleId` in your Web3Auth project.
 
 - Go to [Web3Auth Developer Dashboard](https://dashboard.web3auth.io), and create or open an existing Web3Auth project.
 - Whitelist `{bundleId}://auth` in the developer dashboard. This step is mandatory for the redirect to work.
 
-### 2. Configuration
+## Initialize Web3Auth
+
+### 1. Create a Web3Auth Instance
 
 Import and configure Web3Auth in your application:
 
@@ -89,9 +88,7 @@ class ViewController: UIViewController {
 }
 ```
 
-## Initialize Web3Auth
-
-### 1. Initialize Web3Auth Instance
+### 2. Initialize the Web3Auth Instance
 
 Initialize the Web3Auth instance:
 
@@ -110,7 +107,7 @@ override func viewDidLoad() {
 }
 ```
 
-### 2. Handle URL Callbacks
+### 3. Handle URL Callbacks
 
 Configure your application to handle URL callbacks in your `SceneDelegate`:
 
@@ -172,15 +169,15 @@ web3Auth = Web3Auth(W3AInitParams(
 ```swift
 web3Auth = Web3Auth(W3AInitParams(
     clientId: "YOUR_CLIENT_ID",
-    network: .sapphire_mainnet,
+    network: .sapphire_mainnet, // or .sapphire_devnet
     redirectUrl: "com.yourapp.bundleid://auth",
-    whiteLabel: W3AWhiteLabelData(
-        appName: "Your App Name",
-        logoLight: "https://your-logo-light.png",
-        logoDark: "https://your-logo-dark.png",
-        defaultLanguage: .en,
-        mode: .auto
-    ),
+    loginConfig: [
+      Web3AuthProvider.JWT.rawValue: .init(
+        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        typeOfLogin: TypeOfLogin.google,
+        clientId: "YOUR_GOOGLE_CLIENT_ID",
+      )
+    ],
     mfaSettings: MfaSettings(
         deviceShareFactor: MfaSetting(
             enable: true,
@@ -215,20 +212,36 @@ Web3Auth is blockchain agnostic, enabling integration with any blockchain networ
 For Ethereum integration, you can get the private key and use it with web3.swift or other Ethereum libraries:
 
 ```swift
-@IBAction func loginButtonTapped() {
-    Task {
-        do {
-            let result = try await web3Auth?.login(W3ALoginParams(loginProvider: .GOOGLE))
-            let privateKey = result?.privKey
+import web3
+import Web3Auth
 
-            // Use private key with web3.swift or other Ethereum libraries
-            print("Ethereum Private Key: \(privateKey ?? "")")
+// Use your Web3Auth instance to get the private key
+val privateKey = web3Auth.getPrivKey()
 
-        } catch {
-            print("Login failed: \(error)")
-        }
-    }
-}
+// Generate the Ethereum Account
+let account = try EthereumAccount(privateKey)
+
+// Get the address
+let address = account.address
+
+// Create a client
+let client = EthereumHttpClient(
+    // Please avoid using public RPC URL in production, use services
+    // like Infura, Quicknode, etc.
+    url: URL.init(string: rpcUrl)!,
+    // Replace with the chain id of the network you want to connect to
+    network: .custom(chainId)
+)
+
+// Get the balance
+let balanceResponse = try await client.eth_getBalance(
+    // Use the address from previous step
+    address: address,
+    block: .Latest
+)
+
+// Convert the balance from Wei to Ether format
+let balance = toEther(wei: balanceResponse)
 ```
 
 ### Solana Integration
@@ -236,24 +249,30 @@ For Ethereum integration, you can get the private key and use it with web3.swift
 For Solana integration, you can get the Ed25519 private key:
 
 ```swift
-@IBAction func loginButtonTapped() {
-    Task {
-        do {
-            let result = try await web3Auth?.login(W3ALoginParams(loginProvider: .GOOGLE))
-            let ed25519PrivKey = result?.ed25519PrivKey
+import SolanaSwift
 
-            // Use Ed25519 private key with Solana libraries
-            print("Solana Ed25519 Private Key: \(ed25519PrivKey ?? "")")
+// Use your Web3Auth instance to get the private key
+let ed25519PrivateKey = web3Auth.getEd25519PrivKey()
 
-        } catch {
-            print("Login failed: \(error)")
-        }
-    }
-}
+// Generate the KeyPair
+let keyPair = try KeyPair(secretKey: Data(hex: ed25519PrivateKey))
+
+// Get the user account
+let userAccount = keyPair.publicKey.base58EncodedString
+
+// Create the JSONRPCAPIClient instance
+let endpoint = APIEndPoint(
+    address: "https://api.devnet.solana.com",
+    network: .devnet
+)
+let solanaJSONRPCClient = JSONRPCAPIClient(endpoint: endpoint)
+
+// Get the balance
+let balanceResponse = try await solanaJSONRPCClient.getBalance(
+     // Use userAccount from above
+    account: userAccount
+)
+
+// We are dividing the balance by 10^9, because Solana's token decimals is set to be 9;
+let userBalance = return balanceResponse.convertToBalance(decimals: 9)
 ```
-
-<SdkTroubleshootingIntro />
-
-## Quick Starts
-
-<ExampleCards exampleMap={webExamples.filter(obj => obj.type === QUICK_START)} />

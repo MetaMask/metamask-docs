@@ -7,16 +7,22 @@ description: 'Web3Auth PnP Unity SDK - Whitelabel | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import WhiteLabelShowcase from '../../_common/_whitelabel_showcase.mdx'
+import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
+
+Web3Auth allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
+
+- **UI elements**: Customize the appearance of modals and components
+- **Branding**: Apply your brand colors, logos, and themes
+- **Translations**: Localize the interface for your users
+
+<WhitelabelingNote />
+
+<GrowthPlanNote />
+
+## Customizing the Web3Auth Login Screens
 
 For defining custom UI, branding, and translations for your branded app, you just need to add an additional parameter within the `Web3AuthOptions` class called `whiteLabel`. This parameter takes another object called `WhiteLabelData`.
-
-:::note
-
-This is a paid feature and the minimum [pricing plan](https://web3auth.io/pricing.html) to use this SDK in a production environment is the **Growth Plan**. You can use this feature for free in the `sapphire_devnet`.
-
-:::
-
-## Arguments
 
 ### `WhiteLabelData`
 
@@ -63,7 +69,7 @@ public class WhiteLabelData {
 
 <WhiteLabelShowcase />
 
-## Example
+### Example
 
 ```cs
 void Start()

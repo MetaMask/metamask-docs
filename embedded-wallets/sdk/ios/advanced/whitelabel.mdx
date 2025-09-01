@@ -8,23 +8,19 @@ import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import WhiteLabelShowcase from '../../_common/_whitelabel_showcase.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
-Web3Auth is fully whitelabelable with application branding to have a consistent user experience. For Whitelabeling, there are two different aspects available for you. Web3Auth gives you the ability to define a custom UI, branding, and translations for your applications. All our SDKs support Whitelabeling, giving granular customization capability across all our offerings.
+Web3Auth allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
+
+- **UI elements**: Customize the appearance of modals and components
+- **Branding**: Apply your brand colors, logos, and themes
+- **Translations**: Localize the interface for your users
+
+<WhitelabelingNote />
 
 <GrowthPlanNote />
 
-Within the Web3Auth Plug and Play iOS SDK, whitelabeling can happen in two different places:
-
-### NEW: Whitelabeling via the Dashboard
-
-From version `9.0.0`, Web3Auth iOS Plug and Play SDK offers whitelabeling capabilities via the Dashboard. This enables developers to customize the authentication flow, user interface, and translations to align with their application's branding and user experience requirements.
-
-- Customize the Authentication screens: Modify the appearance of the authentication screens, including the primary color, application name, logo and dark or light mode, to align with your application's branding.
-- Configure Language and Translations: Customize the language and translations within the authentication flow to cater to your target audience.
-
-![Web3Auth Whitelabeling Dashboard](/img/whitelabel/modal/branding.gif)
-
-### Whitelabeling while Web3Auth Instantiating
+## Customizing the Web3Auth Login Screens
 
 For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `W3AWhiteLabelData`. `W3AWhiteLabelData` can be definied during initialization of the SDK in `W3AInitParams` object.
 
