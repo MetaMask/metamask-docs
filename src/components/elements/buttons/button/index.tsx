@@ -115,20 +115,18 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
       textTransform !== 'none' && textTransform
     )
 
-    // Conditionally build props based on element type
     const isLinkElement = asValue === 'link' || asValue === 'a'
     const isButtonElement = asValue === 'button'
-    
+
     const elementProps: Record<string, any> = {
       ref: ref as React.Ref<any>,
       'aria-label': ariaLabel,
       onClick,
       className: buttonClassNames,
       style,
-      ...rest
+      ...rest,
     }
 
-    // Add link-specific props only for link elements
     if (isLinkElement) {
       elementProps.href = href
       if (external) {
@@ -142,7 +140,6 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
       }
     }
 
-    // Add button-specific props only for button elements
     if (isButtonElement) {
       elementProps.disabled = disabled
       if (buttonType) {
