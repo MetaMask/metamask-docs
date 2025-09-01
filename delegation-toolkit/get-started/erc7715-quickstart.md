@@ -1,18 +1,18 @@
 ---
 description: Learn how to use ERC-7715 to request permissions.
-sidebar_position: 5
+sidebar_position: 3
 sidebar_label: ERC-7715 quickstart
 ---
 
 # ERC-7715 quickstart
 
-This page demonstrates how to use [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) to request permissions 
-from a wallet, and execute transactions on a user's behalf. 
+The Delegation Toolkit supports [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715), which enables you to request permissions from MetaMask and execute transactions on a user's behalf.
+This quickstart demonstrates how to request and redeem ERC-7715 permissions.
 
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](install.md)
-- [Install MetaMask Flask 12.14.2 or later](/snaps/get-started/install-flask).
+- [Install MetaMask Flask 12.14.2 or later.](/snaps/get-started/install-flask)
 
 ## Steps
 
@@ -130,7 +130,7 @@ const bundlerClient = createBundlerClient({
 
 ### 6. Redeem ERC-7715 permissions
 
-The session account can now [redeem the delegation](../how-to/redeem-delegation.md). The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
+The session account can now [redeem the delegation](../experimental/erc-7710-redeem-delegations.md). The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 
 To redeem the permissions, you can use the `sendUserOperationWithDelegation` bundler client action.
 
@@ -160,3 +160,7 @@ const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
   accountMetadata,
 });
 ```
+
+## Next steps
+
+To quickly bootstrap an ERC-7715 project, [use the CLI](use-the-cli.md).

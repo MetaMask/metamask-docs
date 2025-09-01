@@ -1,6 +1,6 @@
 ---
 description: Learn how to restrict a delegation using caveat enforcers, and the available caveat types.
-sidebar_position: 1
+sidebar_position: 2
 toc_max_heading_level: 3
 ---
 
@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Restrict a delegation
 
-Use [caveat enforcers](../../concepts/caveat-enforcers.md) to apply specific rules and restrictions
+Use [caveat enforcers](../../concepts/delegation/caveat-enforcers.md) to apply specific rules and restrictions
 to a delegation, ensuring that delegated executions are only performed under predefined circumstances.
 
 A delegation has a `caveats` property, which is an array of `Caveat` objects.
@@ -105,5 +105,5 @@ const delegation = createDelegation({
 });
 ```
 
-For more granular or custom control, you can also [create custom caveat enforcers](create-custom-caveat-enforcer.md)
+For more specific or custom control, you can also [create custom caveat enforcers](../../tutorials/create-custom-caveat-enforcer.md)
 and add them to the caveat builder.

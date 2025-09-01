@@ -1,6 +1,6 @@
 ---
 description: Learn how to generate a Multisig signature.
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 import Tabs from "@theme/Tabs";
@@ -8,17 +8,17 @@ import TabItem from "@theme/TabItem";
 
 # Generate a multisig signature
 
-The MetaMask Delegation Toolkit supports [Multisig smart accounts](../concepts/smart-accounts.md#multisig-smart-account),
+The MetaMask Delegation Toolkit supports [Multisig smart accounts](../../concepts/smart-accounts.md#multisig-smart-account),
 allowing you to add multiple externally owned accounts (EOA) 
 signers with a configurable execution threshold. When the threshold 
 is greater than 1, you can collect signatures from the required signers 
-and use the [`aggregateSignature`](../reference/api/smart-account.md#aggregatesignature) function to combine them 
+and use the [`aggregateSignature`](../../reference/api/smart-account.md#aggregatesignature) function to combine them 
 into a single aggregated signature.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../get-started/install.md)
-- [Configure the Delegation Toolkit.](configure.md)
+- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a Multisig smart account.](create-smart-account.md#create-a-multisig-smart-account)
 
 ## Generate a multisig signature

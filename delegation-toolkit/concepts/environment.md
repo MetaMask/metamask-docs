@@ -8,7 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # Delegator environment
 
-The `DeleGatorEnvironment` object is a component of the MetaMask Delegation Toolkit that defines the contract addresses necessary for interacting with the [Delegation Framework](delegation.md#delegation-framework) on a specific network.
+The `DeleGatorEnvironment` object is a component of the MetaMask Delegation Toolkit that defines the contract addresses necessary for interacting with the [Delegation Framework](delegation/index.md#delegation-framework) on a specific network.
 
 The delegator environment serves several key purposes:
 
@@ -71,7 +71,7 @@ See the changelog of the toolkit version you are using (in the left sidebar) for
 
 Alternatively, you can use the [`getDelegatorEnvironment`](../reference/api/delegation.md#getdelegatorenvironment) function to resolve the environment.
 This function is especially useful if your delegator is not a smart account when
-[creating a redelegation](../how-to/create-delegation/index.md#create-a-redelegation).
+creating a [redelegation](delegation/index.md#delegation-types).
 
 ```typescript
 import { 

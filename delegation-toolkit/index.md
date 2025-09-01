@@ -12,8 +12,8 @@ import CardList from "@site/src/components/CardList"
 The MetaMask Delegation Toolkit is a [Viem](https://viem.sh/)-based collection of tools for embedding [MetaMask Smart Accounts](concepts/smart-accounts.md) into dapps.
 Smart accounts support programmable account behavior and advanced features like delegated permissions, multi-signature approvals, and gas abstraction.
 
-[Delegations](concepts/delegation.md) are a core feature of MetaMask Smart Accounts, enabling secure, rule-based permission sharing.
-These delegations are powered by the toolkit's Delegation Framework, which defines how 
+[Delegation](concepts/delegation/index.md) is a core feature of MetaMask Smart Accounts, enabling secure, rule-based permission sharing.
+Delegation is powered by the toolkit's Delegation Framework, which defines how 
 permissions are created, shared, and enforced.
 
 ## Why use the toolkit?
@@ -46,17 +46,12 @@ Check out the following guides to get started with the MetaMask Delegation Toolk
       description: "Install and set up the MetaMask Delegation Toolkit.",
     },
     {
-      href: "get-started/quickstart",
+      href: "get-started/smart-account-quickstart",
       title: "MetaMask Smart Accounts quickstart",
       description: "Create a MetaMask smart account and send a user operation.",
     },
     {
-      href: "get-started/delegation-quickstart",
-      title: "Delegation quickstart",
-      description: "Create, sign, and redeem a delegation.",
-    },
-    {
-      href: "get-started/eip7702-quickstart",
+      href: "get-started/smart-account-quickstart/eip7702",
       title: "EIP-7702 quickstart",
       description: "Upgrade an externally owned account to a smart account.",
     },
@@ -66,8 +61,8 @@ Check out the following guides to get started with the MetaMask Delegation Toolk
       description: "Request permissions from MetaMask and execute transactions on a user's behalf.",
     },
     {
-      href: "get-started/cli-quickstart",
-      title: "CLI quickstart",
+      href: "get-started/use-the-cli",
+      title: "Use the CLI",
       description: "Use the Delegation Toolkit CLI to bootstrap a project.",
     }
   ]}
