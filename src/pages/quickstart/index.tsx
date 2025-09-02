@@ -109,6 +109,8 @@ const StepNavigationMenu: React.FC<{
 async function loadFilesDirectly() {
   try {
     // Use dynamic import to load build-time generated files
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore - This file is generated at build time by Docusaurus
     const filesModule = await import(
       '../../../.docusaurus/docusaurus-plugin-virtual-files/default/files.json'
     )
