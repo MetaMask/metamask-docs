@@ -37,12 +37,12 @@ You can find the full working code for this client + server example here: [**Web
 
 In this guide, we will focus on setting up the client-side of a Telegram Mini App using Web3Auth for authentication. By the end of this guide, you will:
 
-1. Implement Web3Auth in the **client-side app** to authenticate Telegram users using the JWT tokens generated in [Part 1](/guides/telegram-miniapp-server).
+1. Implement Web3Auth in the **client-side app** to authenticate Telegram users using the JWT tokens generated in [Part 1](/tutorials/telegram-miniapp-server).
 2. Retrieve wallet details (e.g., TON blockchain addresses) via Web3Auth and display them in the app.
 
 :::tip
 
-**Prerequisite**: If you haven't completed [Part 1](/guides/telegram-miniapp-server), where we set up the backend server and handled Telegram authentication, it's recommended to start from there before proceeding with this guide.
+**Prerequisite**: If you haven't completed [Part 1](/tutorials/telegram-miniapp-server), where we set up the backend server and handled Telegram authentication, it's recommended to start from there before proceeding with this guide.
 
 :::
 
@@ -59,7 +59,7 @@ In this guide, we will focus on setting up the client-side of a Telegram Mini Ap
 
 In this guide, we will implement the client-side part of the Telegram Mini App. The client will handle user interaction, manage the login flow using Web3Auth, and retrieve wallet details from the TON blockchain.
 
-We'll be using the JWT token generated in [Part 1](/guides/telegram-miniapp-server) of this guide to authenticate users on the client-side and establish a session with Web3Auth to retrieve decentralized wallet information.
+We'll be using the JWT token generated in [Part 1](/tutorials/telegram-miniapp-server) of this guide to authenticate users on the client-side and establish a session with Web3Auth to retrieve decentralized wallet information.
 
 The flow is as follows:
 
@@ -84,7 +84,7 @@ The flow is as follows:
 
 ---
 
-[Follow these steps to set up your Custom Verifier with Web3Auth](/docs/authentication/custom-connections/custom-jwt#set-up-custom-jwt-connection).
+[Follow these steps to set up your Custom Verifier with Web3Auth](/embedded-wallets/authentication/custom-connections/custom-jwt#set-up-custom-jwt-connection).
 
 ---
 
@@ -156,7 +156,7 @@ function App() {
 
 ### Step 4: Initialize Web3Auth and Fetch the ID Token
 
-Now that the states are set up, let's move on to initializing **Web3Auth** and setting up the connection to our backend server to fetch the ID token generated in **[Part 1](/guides/telegram-miniapp-server)**.
+Now that the states are set up, let's move on to initializing **Web3Auth** and setting up the connection to our backend server to fetch the ID token generated in **[Part 1](/tutorials/telegram-miniapp-server)**.
 
 #### Web3Auth Initialization and Configuration
 
@@ -301,7 +301,7 @@ Mocking the environment during local development ensures smooth testing. Without
 
 ### Step 6: Connecting to Web3Auth and Fetching the ID Token
 
-Now, let's connect to Web3Auth and retrieve the ID token from our backend server, as configured in **[Part 1](/guides/telegram-miniapp-server)**.
+Now, let's connect to Web3Auth and retrieve the ID token from our backend server, as configured in **[Part 1](/tutorials/telegram-miniapp-server)**.
 
 #### Connecting Web3Auth
 
@@ -415,7 +415,7 @@ To run the app locally:
 npm run start
 ```
 
-Ensure that the backend server from **[Part 1](/guides/telegram-miniapp-server)** is running and accessible via the `VITE_SERVER_URL`.
+Ensure that the backend server from **[Part 1](/tutorials/telegram-miniapp-server)** is running and accessible via the `VITE_SERVER_URL`.
 
 For detailed steps on debugging your Telegram Mini App, refer to this [official guide](https://docs.ton.org/develop/dapps/telegram-apps/testing-apps).
 
@@ -434,7 +434,7 @@ After deployment, you will get a domain link. Use this link when setting up your
 
 :::info
 
-Remember to whitelist the deployed client app's URL in the allowed origins array in the backend server CORS configuration that we set up in **[Part 1](/guides/telegram-miniapp-server)**.
+Remember to whitelist the deployed client app's URL in the allowed origins array in the backend server CORS configuration that we set up in **[Part 1](/tutorials/telegram-miniapp-server)**.
 
 :::
 

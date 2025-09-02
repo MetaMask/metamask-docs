@@ -6,7 +6,7 @@ description: 'Web3Auth Android SDK - dApp Share | Embedded Wallets'
 
 ## Web3Auth Infrastructure at a glance
 
-If you go through the [Web3Auth infrastructure](/infrastructure/) you'll notice that to enable the non custodiality of Web3Auth, we split the private key into multiple parts, ie. `shares`. These shares are a part of the off chain multisig, where multiple shares are stored in different places and can be used to reconstruct the private key dynamically in the user's frontend application. For a glance at the structure of the shares, these are the following:
+If you go through the [Web3Auth infrastructure](/embedded-wallets/infrastructure/) you'll notice that to enable the non custodiality of Web3Auth, we split the private key into multiple parts, ie. `shares`. These shares are a part of the off chain multisig, where multiple shares are stored in different places and can be used to reconstruct the private key dynamically in the user's frontend application. For a glance at the structure of the shares, these are the following:
 
 1. **`ShareA` is managed by a login service via node operators**: This share is further split amongst a network of nodes and retrieved via conventional authentication flows.
 2. **`ShareB` is stored on the user's device**: Implementation is device and system specific. For example, on mobile devices, the share could be stored in device storage secured via biometrics.

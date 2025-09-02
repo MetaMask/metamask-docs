@@ -1,0 +1,308 @@
+---
+title: Create a Telegram Mini App Server with Web3Auth - Part 1
+image: 'img/guides/guides-banners/telegram-miniapp-server.png'
+description: Set up the backend server for Telegram Mini App authentication with Web3Auth JWT tokens.
+type: guide
+tags: [telegram, miniapp, server, jwt, authentication, web3auth, nodejs]
+date: December 15, 2024
+author: MetaMask Developer Relations
+---
+
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Create a Telegram Mini App Server with Web3Auth - Part 1"
+  description="Set up the backend server for Telegram Mini App authentication with Web3Auth JWT tokens."
+  image="https://web3auth.io/docs/img/guides/guides-banners/telegram-miniapp-server.png"
+  slug="/tutorials/telegram-miniapp-server"
+/>
+
+This is **Part 1** of a two-part guide for creating a Telegram Mini App with Web3Auth integration. In this part, we'll set up the backend server that validates Telegram login data and generates JWT tokens for Web3Auth authentication.
+
+## Overview
+
+In this guide, we'll create a Node.js server that:
+
+1. Validates Telegram authentication data
+2. Generates JWT tokens for Web3Auth
+3. Provides secure authentication for Telegram Mini Apps
+4. Handles CORS for client-side integration
+
+## Prerequisites
+
+- Node.js and npm installed
+- Basic knowledge of JavaScript and Express.js
+- A Telegram Bot Token (create via [@BotFather](https://t.me/botfather))
+- Web3Auth project set up (see [Dashboard Setup](/embedded-wallets/dashboard/))
+
+## Step 1: Project Setup
+
+Create a new directory and initialize the project:
+
+```bash
+mkdir telegram-miniapp-server
+cd telegram-miniapp-server
+npm init -y
+```
+
+Install required dependencies:
+
+```bash
+npm install express cors crypto jsonwebtoken dotenv
+npm install --save-dev nodemon
+```
+
+## Step 2: Environment Configuration
+
+Create a `.env` file in your project root:
+
+```env
+PORT=3001
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token_here
+JWT_SECRET=your_jwt_secret_here
+WEB3AUTH_CLIENT_ID=your_web3auth_client_id
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:5173
+```
+
+## Step 3: Server Implementation
+
+Create `server.js`:
+
+```javascript
+const express = require('express')
+const cors = require('cors')
+const crypto = require('crypto')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
+
+const app = express()
+const PORT = process.env.PORT || 3001
+
+// Middleware
+app.use(express.json())
+app.use(
+  cors({
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+)
+
+// Telegram data validation function
+function validateTelegramWebAppData(token, initData) {
+  const encoded = decodeURIComponent(initData)
+  const secret = crypto.createHmac('sha256', 'WebAppData').update(token)
+  const arr = encoded.split('&')
+  const hashIndex = arr.findIndex(str => str.startsWith('hash='))
+  const hash = arr[hashIndex].split('=')[1]
+
+  // Remove hash from the array
+  arr.splice(hashIndex, 1)
+
+  // Sort the array
+  arr.sort()
+
+  // Create data string
+  const dataCheckString = arr.join('\n')
+
+  // Create signature
+  const signature = crypto
+    .createHmac('sha256', secret.digest())
+    .update(dataCheckString)
+    .digest('hex')
+
+  return signature === hash
+}
+
+// Parse Telegram init data
+function parseTelegramInitData(initData) {
+  const params = new URLSearchParams(initData)
+  const user = JSON.parse(params.get('user') || '{}')
+  const authDate = params.get('auth_date')
+  const hash = params.get('hash')
+
+  return {
+    user,
+    authDate: authDate ? new Date(parseInt(authDate) * 1000) : null,
+    hash,
+    raw: initData,
+  }
+}
+
+// Generate JWT token for Web3Auth
+function generateWeb3AuthJWT(telegramUser) {
+  const payload = {
+    iss: 'telegram-miniapp-server',
+    aud: process.env.WEB3AUTH_CLIENT_ID,
+    sub: telegramUser.id.toString(),
+    email: `${telegramUser.username || telegramUser.id}@telegram.local`,
+    name: `${telegramUser.first_name} ${telegramUser.last_name || ''}`.trim(),
+    picture: telegramUser.photo_url || '',
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + 60 * 60, // 1 hour expiry
+  }
+
+  return jwt.sign(payload, process.env.JWT_SECRET, { algorithm: 'HS256' })
+}
+
+// Routes
+app.get('/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() })
+})
+
+app.post('/auth/telegram', (req, res) => {
+  const { initData } = req.body
+
+  if (!initData) {
+    return res.status(400).json({ error: 'Missing initData' })
+  }
+
+  try {
+    // Validate Telegram data
+    const isValid = validateTelegramWebAppData(process.env.TELEGRAM_BOT_TOKEN, initData)
+
+    if (!isValid) {
+      return res.status(401).json({ error: 'Invalid Telegram data' })
+    }
+
+    // Parse user data
+    const { user, authDate } = parseTelegramInitData(initData)
+
+    if (!user || !user.id) {
+      return res.status(400).json({ error: 'Invalid user data' })
+    }
+
+    // Check if auth data is not too old (5 minutes)
+    if (authDate && Date.now() - authDate.getTime() > 5 * 60 * 1000) {
+      return res.status(401).json({ error: 'Auth data too old' })
+    }
+
+    // Generate Web3Auth JWT
+    const jwtToken = generateWeb3AuthJWT(user)
+
+    res.json({
+      success: true,
+      user: {
+        id: user.id,
+        username: user.username,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        photoUrl: user.photo_url,
+      },
+      jwtToken,
+      expiresIn: 3600, // 1 hour
+    })
+  } catch (error) {
+    console.error('Authentication error:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// Error handling middleware
+app.use((error, req, res, next) => {
+  console.error('Server error:', error)
+  res.status(500).json({ error: 'Internal server error' })
+})
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not found' })
+})
+
+app.listen(PORT, () => {
+  console.log(`Telegram Mini App server running on port ${PORT}`)
+  console.log(`Health check: http://localhost:${PORT}/health`)
+})
+
+module.exports = app
+```
+
+## Step 4: Add NPM Scripts
+
+Update your `package.json` to include these scripts:
+
+```json
+{
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
+```
+
+## Step 5: Testing the Server
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Test the health endpoint:
+
+```bash
+curl http://localhost:3001/health
+```
+
+You should see:
+
+```json
+{
+  "status": "OK",
+  "timestamp": "2024-12-15T10:30:00.000Z"
+}
+```
+
+## Step 6: Configure Web3Auth Dashboard
+
+1. Go to your [Web3Auth Dashboard](https://dashboard.web3auth.io)
+2. Select your project
+3. Navigate to **Custom Connections**
+4. Create a new **Custom JWT** connection with these settings:
+   - **Connection ID**: `telegram-miniapp`
+   - **JWT Verifier ID**: Choose `sub`
+   - **JWKS Endpoint**: Not applicable (we're using HS256)
+   - **Sample JWT**: Use a test token from your server
+
+## Security Considerations
+
+- Keep your `TELEGRAM_BOT_TOKEN` and `JWT_SECRET` secure
+- Use environment variables for all sensitive data
+- Implement rate limiting for production
+- Add request validation and sanitization
+- Use HTTPS in production
+- Rotate JWT secrets regularly
+
+## Next Steps
+
+Now that your server is set up, proceed to [**Part 2: Client-Side Integration**](/tutorials/telegram-miniapp-client) to learn how to integrate this server with your Telegram Mini App frontend.
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Invalid Telegram data**: Ensure your bot token is correct and the initData is properly formatted
+2. **CORS errors**: Check that your client URL is included in `ALLOWED_ORIGINS`
+3. **JWT errors**: Verify your JWT secret and Web3Auth client ID are correct
+4. **Auth data too old**: The Telegram auth data expires after 5 minutes
+
+### Testing with curl
+
+You can test the authentication endpoint:
+
+```bash
+curl -X POST http://localhost:3001/auth/telegram \
+  -H "Content-Type: application/json" \
+  -d '{
+    "initData": "user=%7B%22id%22%3A123456789%2C%22first_name%22%3A%22Test%22%2C%22username%22%3A%22testuser%22%7D&auth_date=1672531200&hash=valid_hash_here"
+  }'
+```
+
+Replace the `initData` with actual data from your Telegram Mini App.
+
+## Additional Resources
+
+- [Telegram Mini Apps Documentation](https://core.telegram.org/bots/webapps)
+- [Web3Auth Custom JWT Documentation](/embedded-wallets/authentication/custom-connections/custom-jwt)
+- [JWT.io - JWT Debugger](https://jwt.io/)

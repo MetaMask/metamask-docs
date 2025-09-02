@@ -190,6 +190,7 @@ export default function IntegrationBuilderPage(props: any) {
   const [loading, setLoading] = useState<boolean>(false)
   const [initialLoadComplete, setInitialLoadComplete] = useState<boolean>(false)
   const [isManualNavigation, setIsManualNavigation] = useState<boolean>(false)
+  const [isInitializing, setIsInitializing] = useState<boolean>(true)
 
   // Check URL params and set initial state
   useEffect(() => {
@@ -212,7 +213,17 @@ export default function IntegrationBuilderPage(props: any) {
     } else {
       setShowNavigationOverlay(false)
       setBuilderOptions(getDefaultBuilderOptions())
+      // Preserve stepIndex from URL if provided
+      const urlStepIndex = url.searchParams.get('stepIndex')
+      if (urlStepIndex) {
+        setStepIndex(parseInt(urlStepIndex, 10))
+      }
     }
+
+    // Mark initialization complete after a short delay
+    setTimeout(() => {
+      setIsInitializing(false)
+    }, 100)
   }, []) // Run once on mount
 
   // Monitor URL changes and reset to overlay if params are removed
@@ -645,12 +656,12 @@ export default function IntegrationBuilderPage(props: any) {
         }
       }
     }
-    // Update query params only if we have valid options
-    if (Object.keys(builderOptions).length > 0) {
+    // Update query params only if we have valid options and we're not initializing
+    if (Object.keys(builderOptions).length > 0 && !isInitializing) {
       // eslint-disable-next-line no-restricted-globals
       history.pushState({}, '', getURLFromBuilderOptions(builderOptions, stepIndex))
     }
-  }, [builderOptions, integration, stepIndex, isLinkCopied, showNavigationOverlay])
+  }, [builderOptions, integration, stepIndex, isLinkCopied, showNavigationOverlay, isInitializing])
 
   // Update the useEffect for initial navigation
   useEffect(() => {

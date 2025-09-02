@@ -46,25 +46,25 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 <TabItem value="basic">
 
-| Parameter | Description |
-| --- | --- |
-| `context` | Android context to launch Web-based authentication, usually is the current activity. It's a mandatory field, and accepts `android.content.Context` as a value. |
-| `clientId` | Your Web3Auth Client ID. You can get it from Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `String` |
-| `network` | Defines the Web3Auth Network. It's a mandatory field of type Network. |
-| `redirectUrl` | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type `Uri`. |
-| `sessionTime?` | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days |
-| `useCoreKitKey?` | Use CoreKit (or SFA) Key to get core kit key given by SFA SDKs. It's an optional field with default value as `false`. Useful for Wallet Pregeneration. |
-| `chainNamespace?` | Chain Namespace [`EIP155` and `SOLANA`]. It takes `ChainNamespace` as a value. |
+| Parameter         | Description                                                                                                                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context`         | Android context to launch Web-based authentication, usually is the current activity. It's a mandatory field, and accepts `android.content.Context` as a value.       |
+| `clientId`        | Your Web3Auth Client ID. You can get it from Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `String`     |
+| `network`         | Defines the Web3Auth Network. It's a mandatory field of type Network.                                                                                                |
+| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type `Uri`.                                     |
+| `sessionTime?`    | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days |
+| `useCoreKitKey?`  | Use CoreKit (or SFA) Key to get core kit key given by SFA SDKs. It's an optional field with default value as `false`. Useful for Wallet Pregeneration.               |
+| `chainNamespace?` | Chain Namespace [`EIP155` and `SOLANA`]. It takes `ChainNamespace` as a value.                                                                                       |
 
 </TabItem>
 
 <TabItem value="advanced">
 
-| Parameter | Description |
-| --- | --- |
-| `whiteLabel?` | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabelData` as a value. |
-| `loginConfig?` | Login config for the custom verifiers. It takes `HashMap<String, LoginConfigItem>` as a value. |
-| `mfaSettings?` | Allows developers to configure the Mfa settings for authentication. It takes `MfaSettings` as a value. |
+| Parameter      | Description                                                                                                                                          |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `whiteLabel?`  | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabelData` as a value. |
+| `loginConfig?` | Login config for the custom verifiers. It takes `HashMap<String, LoginConfigItem>` as a value.                                                       |
+| `mfaSettings?` | Allows developers to configure the Mfa settings for authentication. It takes `MfaSettings` as a value.                                               |
 
 </TabItem>
 
@@ -115,15 +115,15 @@ var web3Auth = Web3Auth(
 
 ## Custom Authentication Methods
 
-Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./advanced/custom-authentication) section.
+Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication) section.
 
 ## UI Customization
 
-Create a seamless brand experience by customizing the Web3Auth Login Screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./advanced/whitelabel) section.
+Create a seamless brand experience by customizing the Web3Auth Login Screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel) section.
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./advanced/mfa) section.
+Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa) section.
 
 **Key Configuration Options:**
 

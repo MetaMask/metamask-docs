@@ -22,7 +22,7 @@ import WalletPreview from '@site/static/img/guides/flutter-wallet-preview.png'
 
 In this guide, we'll talk about how we can use Web3Auth to build your chain-agnostic Web3 wallet in Flutter. The wallet will support the Ethereum and Solana ecosystem.
 
-As an overview, the app is quite simple, with functionality to log in, display user details, and perform blockchain interactions. The signing of the blockchain transactions is done through the Web3Auth embedded wallet. You can check out the infrastructure docs, ["Web3Auth Wallet Management Infrastructure"](/docs/infrastructure) for a high-level overview of the Web3Auth architecture and implementation. For those who want to skip straight to the code, you can find it on [GitHub](https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-playground).
+As an overview, the app is quite simple, with functionality to log in, display user details, and perform blockchain interactions. The signing of the blockchain transactions is done through the Web3Auth embedded wallet. You can check out the infrastructure docs, ["Web3Auth Wallet Management Infrastructure"](/embedded-wallets/infrastructure/) for a high-level overview of the Web3Auth architecture and implementation. For those who want to skip straight to the code, you can find it on [GitHub](https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-playground).
 
 Here are few screenshots of the application.
 
@@ -34,7 +34,7 @@ Here are few screenshots of the application.
 
 ## How to set up Web3Auth Dashboard
 
-If you haven't already, sign up on the Web3Auth platform. It is free and gives you access to the Web3Auth's base plan. After the basic setup, explore other features and functionalities offered by the Web3Auth Dashboard. It includes custom verifiers, whitelabeling, analytics, and more. Head to [Web3Auth's documentation](/docs/dashboard) page for detailed instructions on setting up the Web3Auth Dashboard.
+If you haven't already, sign up on the Web3Auth platform. It is free and gives you access to the Web3Auth's base plan. After the basic setup, explore other features and functionalities offered by the Web3Auth Dashboard. It includes custom verifiers, whitelabeling, analytics, and more. Head to [Web3Auth's documentation](/embedded-wallets/dashboard/) page for detailed instructions on setting up the Web3Auth Dashboard.
 
 ## Integrating Web3Auth in Flutter
 
@@ -73,7 +73,7 @@ dependencies:
 
 ### Initialization
 
-After successfully installing the package, the next step is to initialize Web3Auth in your Flutter app. This sets up the necessary configurations using Client Id and prepares Web3Auth. [Learn more about Web3Auth Initialization](/embedded-wallets/sdk/flutter/initialize).
+After successfully installing the package, the next step is to initialize Web3Auth in your Flutter app. This sets up the necessary configurations using Client Id and prepares Web3Auth. [Learn more about Web3Auth Initialization](/embedded-wallets/sdk/flutter#initialize-web3auth).
 
 ```dart
 Future<void> main() async {
@@ -105,7 +105,7 @@ Future<void> main() async {
 
 ### Session Management
 
-To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivKey` method. For a user already authenticated, the result would be a non-empty `String`. You can navigate to different views based on the result. If the user is already authenticated, we'll navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again. [Learn more about Web3Auth session management](/docs/features/session-management).
+To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivKey` method. For a user already authenticated, the result would be a non-empty `String`. You can navigate to different views based on the result. If the user is already authenticated, we'll navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again. [Learn more about Web3Auth session management](/embedded-wallets/features/session-management).
 
 ```dart
 class MainApp extends StatefulWidget {
@@ -247,7 +247,7 @@ dependencies:
 
 After successfully installing both packages, it's time to set up our Blockchain provider. First, we'll create a new class, `ChainProvider`, which will used as a base class for `EthereumProvider` and `SolanaProvider`. If you wish to support any additional ecosystem, you can extend the `ChainProvider` and implement the methods.
 
-If you want to learn, how you can integrate different blockchain with Web3Auth, you can checkout our [Connect Blockchain resources](/docs/connect-blockchain/).
+If you want to learn, how you can integrate different blockchain with Web3Auth, you can checkout our [Connect Blockchain resources](/embedded-wallets/connect-blockchain/).
 
 ```dart
 abstract class ChainProvider {

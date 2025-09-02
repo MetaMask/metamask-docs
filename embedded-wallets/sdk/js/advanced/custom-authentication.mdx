@@ -18,7 +18,7 @@ Custom Authentication is a way to authenticate users with your custom authentica
 
 :::info prerequisite
 
-To enable this, you need to [Create a Connection](/dashboard/configure-connections) from the **Authentication** tab of your project from the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [Create a Connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io) with your desired configuration.
 
 :::
 
@@ -26,7 +26,7 @@ To configure a connection, you need to provide the particular details of the con
 
 :::tip
 
-Visit the [Auth Provider Setup](/authentication) page to learn more about to setup the different configurations available for each connection.
+Visit the [Auth Provider Setup](/embedded-wallets/authentication) page to learn more about to setup the different configurations available for each connection.
 
 :::
 
@@ -177,14 +177,14 @@ export type LoginParamMap = {
 <Tabs>
   <TabItem value="Table">
 
-| Parameter | Description |
-| --- | --- |
-| `loginHint?` | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` & `sms_passwordless` logins. |
-| `idToken?` | Pass over the JWT ID Token directly to Web3Auth for JWT authentication. |
-| `authConnection?` | The auth provider to use for login (e.g., "google", "facebook"). |
-| `authConnectionId?` | The ID configured in your Web3Auth Dashboard for the connection. |
-| `groupedAuthConnectionId?` | The grouped auth connection ID to be used for login. |
-| `extraLoginOptions?` | Custom OAuth options (e.g., login_hint, domain, etc.). |
+| Parameter                  | Description                                                                                                                        |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `loginHint?`               | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` & `sms_passwordless` logins. |
+| `idToken?`                 | Pass over the JWT ID Token directly to Web3Auth for JWT authentication.                                                            |
+| `authConnection?`          | The auth provider to use for login (e.g., "google", "facebook").                                                                   |
+| `authConnectionId?`        | The ID configured in your Web3Auth Dashboard for the connection.                                                                   |
+| `groupedAuthConnectionId?` | The grouped auth connection ID to be used for login.                                                                               |
+| `extraLoginOptions?`       | Custom OAuth options (e.g., login_hint, domain, etc.).                                                                             |
 
   </TabItem>
 
