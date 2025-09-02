@@ -1,0 +1,74 @@
+---
+title: Integrate Embedded Wallets with the Klaytn Blockchain
+sidebar_label: Klaytn
+hide_table_of_contents: true
+
+image: 'banners/klaytn.png'
+description: 'Integrate Embedded Wallets with the Klaytn Blockchain | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import SEO from '@site/src/components/SEO'
+import ChainDetailsKlaytn from '../../_general-connect-blockchain/_klaytn.mdx'
+
+<SEO
+  title="Integrate Embedded Wallets with the Klaytn Blockchain"
+  description="Integrate Embedded Wallets with the Klaytn Blockchain | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/klaytn.png"
+  slug="/embedded-wallets/connect-blockchain/evm/klaytn"
+/>
+
+Integrate Web3Auth seamlessly with EVM-based Klaytn blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+
+This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
+
+## Chain Details for Klaytn
+
+<ChainDetailsKlaytn />
+
+export const Klaytn = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/connect-blockchain/evm/klaytn/web',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/connect-blockchain/evm/klaytn/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/connect-blockchain/evm/klaytn/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/connect-blockchain/evm/klaytn/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/klaytn/react-native',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/evm/klaytn/unity',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={Klaytn} />

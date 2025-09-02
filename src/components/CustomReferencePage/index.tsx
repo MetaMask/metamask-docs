@@ -1,58 +1,58 @@
-import React from "react";
-import Layout from "@theme/Layout";
-import ParserOpenRPC from "@site/src/components/ParserOpenRPC";
-import DocSidebar from "@theme/DocSidebar";
-import { useLocation } from "@docusaurus/router";
-import { prepareLinkItems, MM_REF_PATH } from "@site/src/plugins/plugin-json-rpc";
-import styles from "./styles.module.css";
-const sidebar = require("../../../wallet-sidebar.js");
+import React from 'react'
+import Layout from '@theme/Layout'
+import ParserOpenRPC from '@site/src/components/ParserOpenRPC'
+import DocSidebar from '@theme/DocSidebar'
+import { useLocation } from '@docusaurus/router'
+import { prepareLinkItems, MM_REF_PATH } from '@site/src/plugins/plugin-json-rpc'
+import styles from './styles.module.css'
+const sidebar = require('../../../wallet-sidebar.js')
 
 function transformItems(items, dynamicItems) {
   return items.map(item => {
-    let newItem = { ...item };
-    if (newItem.type === "doc") {
-      newItem.type = "link";
-      newItem.href = newItem.id;
-      delete newItem.id;
+    let newItem = { ...item }
+    if (newItem.type === 'doc') {
+      newItem.type = 'link'
+      newItem.href = newItem.id
+      delete newItem.id
     }
-    if (newItem.type === "category") {
-      if (newItem.label === "JSON-RPC API") {
-        newItem.items = dynamicItems;
-        newItem.collapsed = false;
+    if (newItem.type === 'category') {
+      if (newItem.label === 'JSON-RPC API') {
+        newItem.items = dynamicItems
+        newItem.collapsed = false
       }
       if (newItem.link) {
-        newItem.href = newItem.link.id || newItem.link.slug;
-        delete newItem.link;
+        newItem.href = newItem.link.id || newItem.link.slug
+        delete newItem.link
       }
       if (newItem.items && Array.isArray(newItem.items)) {
-        newItem.items = transformItems(newItem.items, dynamicItems);
+        newItem.items = transformItems(newItem.items, dynamicItems)
       }
     }
     if (newItem.href) {
-      if (!newItem.href.startsWith("/")) {
-        newItem.href = `/${newItem.href}`;
+      if (!newItem.href.startsWith('/')) {
+        newItem.href = `/${newItem.href}`
       }
-      if (newItem.href.endsWith("/index")) {
-        newItem.href = newItem.href.slice(0, -5);
+      if (newItem.href.endsWith('/index')) {
+        newItem.href = newItem.href.slice(0, -5)
       }
-      if (newItem.href === "/") {
-        newItem.href = "/wallet/";
+      if (newItem.href === '/') {
+        newItem.href = '/wallet/'
       } else {
-        newItem.href = `/wallet${newItem.href}`;
+        newItem.href = `/wallet${newItem.href}`
       }
     }
-    return newItem;
-  });
+    return newItem
+  })
 }
 
 const CustomReferencePage = props => {
-  const customData = props.route.customData;
-  const { pathname } = useLocation();
+  const customData = props.route.customData
+  const { pathname } = useLocation()
   const refItems = prepareLinkItems(props.methodsData, MM_REF_PATH).map(item => ({
     ...item,
-    href: item.href.replace("/wallet", ""),
-  }));
-  const updatedSidebar = transformItems(sidebar.walletSidebar, refItems);
+    href: item.href.replace('/wallet', ''),
+  }))
+  const updatedSidebar = transformItems(sidebar.walletSidebar, refItems)
   return (
     <Layout>
       <div className={styles.pageWrapper}>
@@ -75,7 +75,7 @@ const CustomReferencePage = props => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default CustomReferencePage;
+export default CustomReferencePage

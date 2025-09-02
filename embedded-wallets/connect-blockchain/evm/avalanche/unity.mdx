@@ -1,0 +1,67 @@
+---
+title: Integrate Embedded Wallets with the Avalanche Blockchain in Unity
+sidebar_label: Unity
+image: 'banners/unity.png'
+
+keywords: [unity, avalanche, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Avalanche Blockchain in Unity | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import ChainDetailsAvalanche from '../../_general-connect-blockchain/_avalanche.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Embedded Wallets with the Avalanche Blockchain in Unity"
+  description="Integrate Embedded Wallets with the Avalanche Blockchain in Unity | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/avalanche.png"
+  slug="/embedded-wallets/connect-blockchain/evm/avalanche/unity"
+/>
+
+While using the Embedded Wallets Unity SDK (formerly Web3Auth), you get the private key within the user scope. Use it with Nethereum to make EVM-based blockchain calls on [Avalanche (C-Chain)](https://www.avax.network/): get account, fetch balance, sign and send transactions, and interact with contracts.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Chain Details for Avalanche
+
+<ChainDetailsAvalanche />
+
+## Installation
+
+<InstallationSnippet />
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />

@@ -1,0 +1,403 @@
+---
+title: Login User
+sidebar_label: login
+description: 'Web3Auth Unity SDK - login | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+This function helps your users to trigger the login process. The login flow is triggered based on the selected provider.
+
+:::tip
+
+Additionally, you can associate a function to be triggered on successful login. This function receives the user's profile as a parameter.
+
+```cs
+void Start()
+{
+    web3Auth = GetComponent<Web3Auth>();
+    web3Auth.setOptions(new Web3AuthOptions()
+    {
+
+    });
+    // focus-next-line
+    web3Auth.onLogin += onLogin;
+}
+//focus-start
+private void onLogin(Web3AuthResponse response)
+{
+    // Functions to be called after logging in your user
+}
+//focus-end
+```
+
+:::
+
+## Arguments
+
+`web3Auth.login()` requires `LoginParams` as a required input.
+
+### `LoginParams`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`. |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass the user's email address as. The Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
+| `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `URI` as a value. |
+| `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `string` as a value. |
+| `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value. |
+| `dappShare?` | Custom verifier logins can get a dapp share returned to them after a successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `string` as a value. |
+| `curve?` | It is used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change the format of private key returned by Web3Auth. Private key returned by `getPrivKey` is always secp256k1. The default value is `Curve.SECP256K1`. |
+| `sessionTime?` | It allows developers to configure the session management time. Session Time is in seconds, and takes an `int` as a value. |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```cs
+public class LoginParams
+{
+    public Provider loginProvider { get; set; }
+    public string dappShare { get; set; }
+    public ExtraLoginOptions extraLoginOptions { get; set; }
+    public Uri redirectUrl { get; set; }
+    public string appState { get; set; }
+    public MFALevel mfaLevel { get; set; }
+    public int sessionTime { get; set; }
+    public Curve curve { get; set; }
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### `Provider`
+
+```cs
+public enum Provider
+{
+    [EnumMember(Value = "google")]
+    GOOGLE,
+    [EnumMember(Value = "facebook")]
+    FACEBOOK,
+    [EnumMember(Value = "reddit")]
+    REDDIT,
+    [EnumMember(Value = "discord")]
+    DISCORD,
+    [EnumMember(Value = "twitch")]
+    TWITCH,
+    [EnumMember(Value = "apple")]
+    APPLE,
+    [EnumMember(Value = "line")]
+    LINE,
+    [EnumMember(Value = "github")]
+    GITHUB,
+    [EnumMember(Value = "kakao")]
+    KAKAO,
+    [EnumMember(Value = "linkedin")]
+    LINKEDIN,
+    [EnumMember(Value = "twitter")]
+    TWITTER,
+    [EnumMember(Value = "weibo")]
+    WEIBO,
+    [EnumMember(Value = "wechat")]
+    WECHAT,
+    [EnumMember(Value = "email_passwordless")]
+    EMAIL_PASSWORDLESS,
+    [EnumMember(Value = "email_password")]
+    EMAIL_PASSWORD,
+    [EnumMember(Value = "jwt")]
+    JWT,
+    [EnumMember(Value = "CUSTOM_VERIFIER")]
+    CUSTOM_VERIFIER
+}
+```
+
+### `ExtraLoginOptions`
+
+The `LoginParams` class accepts the `ExtraLoginOptions` as an optional input, containing advanced options for custom authentication, email passwordless login, etc. This parameter can be considered as advanced login options needed for specific cases.
+
+```cs
+LoginParams() { selectedLoginProvider, extraLoginOptions = ExtraLoginOptions() }
+```
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `additionalParams?` | Additional params in `Dictionary<string, string>` format for OAuth login, use id_token(JWT) to authenticate with web3auth. |
+| `domain?` | Your custom authentication domain in `string` format. For example, if you are using Auth0, this could be example.au.auth0.com. |
+| `client_id?` | Client id in `string` format, provided by your login provider used for custom verifier. |
+| `leeway?` | The value used to account for clock skew in JWT expirations. The value is in the seconds, and ideally should be no more than 60 seconds, with a maxium of 120 seconds. It takes `string` as a value. |
+| `verifierIdField?` | The field in the JWT token that maps to verifier id. Please make sure you have selected the correct JWT verifier id in the Developer Dashboard. It takes `string` as a value. |
+| `isVerifierIdCaseSensitive?` | `bool` to confirm whether the verifier id field is case sensitive or not. |
+| `display?` | Allows developers to configure the display of UI. It takes `Display` as a value. |
+| `prompt?` | Prompt shown to the user during the authentication process. It takes `Prompt` as a value. |
+| `max_age?` | Maxium time allowed without reauthentication. If the last time the user authenticated is greater than this value, then the user must reauthenticate. It takes `string` as a value. |
+| `ui_locales?` | The space separated list of language tags, ordered by preference. For example `fr-CA fr en`. |
+| `id_token_hint?` | It specify the previously issued ID token. It takes `string` as a value. |
+| `id_token?` | JWT (ID Token) to be passed for login. |
+| `login_hint?` | It is used to send the user's email address during Email Passwordless login. It takes `string` as a value. |
+| `acr_values?` | acr_values |
+| `scope?` | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. It takes `string` as a value. |
+| `audience?` | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It takes `string` as a value. |
+| `connection?` | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. It takes `string` as a value. |
+| `state?` | state |
+| `response_type?` | Defines which grant to be execute for the authorization server. It takes `string` as a value. |
+| `nonce?` | nonce value |
+| `redirect_uri?` | It can be used to specify the default URL, where your custom JWT verifier can redirect your browser to with the result. If you are using Auth0, it must be whitelisted in the Allowed Callback URLs in your Auth0's application. |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```cs
+public class ExtraLoginOptions {
+    public Dictionary<string, string> additionalParams { get; set; }
+    public string domain { get; set; }
+    public string client_id { get; set; }
+    public string leeway { get; set; }
+    public string verifierIdField { get; set; }
+    public bool isVerifierIdCaseSensitive { get; set; }
+    public Display display { get; set; }
+    public Prompt prompt { get; set; }
+    public string max_age { get; set; }
+    public string ui_locales { get; set; }
+    public string id_token_hint { get; set; }
+    public string login_hint { get; set; }
+    public string id_token { get; set; }
+    public string acr_values { get; set; }
+    public string scope { get; set; }
+    public string audience { get; set; }
+    public string connection { get; set; }
+    public string state { get; set; }
+    public string response_type { get; set; }
+    public string nonce { get; set; }
+    public string redirect_uri { get; set; }
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+### `Curve`
+
+The `LoginParams` class accepts a `curve` parameter. This parameter can be used to select the elliptic curve to use for the signature.
+
+```cs
+LoginParams() { selectedLoginProvider, curve = Curve.SECP256K1 }
+```
+
+<Tabs
+  defaultValue="secp256k1"
+  values={[
+    { label: "SECP256K1", value: "secp256k1" },
+    { label: "ED25519", value: "ed25519" },
+  ]}
+>
+
+<TabItem value="secp256k1">
+
+```cs
+public void login()
+{
+    var selectedProvider = Provider.GOOGLE;
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider,
+        //focus-next-line
+        curve = Curve.SECP256K1
+    };
+    web3Auth.login(options);
+}
+```
+
+</TabItem>
+
+<TabItem value="ed25519">
+
+```cs
+public void login()
+{
+    var selectedProvider = Provider.GOOGLE;
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider,
+        //focus-next-line
+        curve = Curve.ED25519
+    };
+    web3Auth.login(options);
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+## Sample Response
+
+```json
+{
+  "ed25519PrivKey": "666523652352635....",
+  "privKey": "0ajjsdsd....",
+  "coreKitKey": "0ajjsdsd....",
+  "coreKitEd25519PrivKey": "666523652352635....",
+  "sessionId": "....",
+  "error": "....",
+  "userInfo": {
+    "aggregateVerifier": "w3a-google",
+    "email": "john@gmail.com",
+    "name": "John Dash",
+    "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
+    "typeOfLogin": "google",
+    "verifier": "torus",
+    "verifierId": "john@gmail.com",
+    "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
+    "idToken": "<jwtToken issued by Web3Auth>",
+    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "isMfaEnabled": true // returns true if user has enabled mfa
+  }
+}
+```
+
+## Examples
+
+<Tabs
+  defaultValue="google"
+  values={[
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
+    { label: "Discord", value: "discord" },
+    { label: "Twitch", value: "twitch" },
+    { label: "Email Passwordless", value: "email_passwordless" },
+    { label: "JWT", value: "jwt" },
+  ]}
+>
+
+<TabItem value="google">
+
+```cs
+public void login()
+{
+    var selectedProvider = Provider.GOOGLE;
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider
+    };
+    web3Auth.login(options);
+}
+```
+
+</TabItem>
+
+<TabItem value="facebook">
+
+```cs
+public void login()
+{
+    var selectedProvider = Provider.FACEBOOK;
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider
+    };
+    web3Auth.login(options);
+}
+```
+
+</TabItem>
+
+<TabItem value="discord">
+
+```cs
+public void login()
+{
+    var selectedProvider = Provider.DISCORD;
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider
+    };
+    web3Auth.login(options);
+}
+```
+
+</TabItem>
+
+<TabItem value="twitch">
+
+```cs
+public void login()
+{
+    var selectedProvider = Provider.TWITCH;
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider
+    };
+    web3Auth.login(options);
+}
+```
+
+</TabItem>
+
+<TabItem value="email_passwordless">
+
+```cs
+public void login()
+{
+    var selectedProvider = Provider.EMAIL_PASSWORDLESS;
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider,
+        extraLoginOptions = new ExtraLoginOptions()
+        {
+            login_hint = "hello@web3auth.io"
+        }
+    };
+    web3Auth.login(options);
+}
+```
+
+</TabItem>
+
+<TabItem value="jwt">
+
+```cs
+public void login()
+{
+    var selectedProvider = Provider.JWT;
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider,
+        extraLoginOptions = new ExtraLoginOptions()
+        {
+            id_token = "your_jwt_token"
+        }
+    };
+    web3Auth.login(options);
+}
+```
+
+</TabItem>
+
+</Tabs>

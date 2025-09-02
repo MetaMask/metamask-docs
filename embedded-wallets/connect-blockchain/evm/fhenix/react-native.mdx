@@ -1,0 +1,88 @@
+---
+title: Integrate Embedded Wallets with the Fhenix Blockchain in React Native
+sidebar_label: React Native
+image: 'banners/fhenix.png'
+
+keywords: [react-native, fhenix, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Fhenix Blockchain in React Native | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Embedded Wallets with the Fhenix Blockchain in React Native"
+  description="Integrate Embedded Wallets with the Fhenix Blockchain in React Native | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/fhenix.png"
+  slug="/embedded-wallets/connect-blockchain/evm/fhenix/react-native"
+/>
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="helium"
+  values={[
+    { label: "Helium", value: "helium", },
+]}
+
+>
+
+<TabItem
+  value="helium"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x7a31c7',
+  rpcTarget: 'https://api.helium.fhenix.zone',
+  displayName: 'Fhenix Helium',
+  blockExplorerUrl: 'https://explorer.helium.fhenix.zone',
+  ticker: 'tFHE',
+  tickerName: 'tFHE',
+  logo: 'https://img.cryptorank.io/coins/fhenix1695737384486.png',
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

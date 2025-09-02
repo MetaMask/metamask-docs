@@ -1,0 +1,77 @@
+## Session Management
+
+Control how long users stay authenticated and how sessions persist.
+
+**Key Configuration Options:**
+
+- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before
+  needing to log in again.
+  - Minimum: 1 second (`1`).
+  - Maximum: 30 days (`86400 * 30`).
+  - Default: 7 days (`86400 * 7`).
+- `storageType` - Storage location for authentication state. Options:
+  - `"local"`: Persists across browser tabs and browser restarts (localStorage)
+  - `"session"`: Persists only in current tab, cleared when tab closes (sessionStorage)
+
+```tsx
+const web3AuthOptions = {
+  clientId: "YOUR_CLIENT_ID",
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+
+  // Session configuration
+  sessionTime: 86400 * 7, // 7 days (in seconds)
+  storageType: "local", // 'local' (persistent across tabs) or 'session' (single tab only)
+};
+```
+
+## Multi-Factor Authentication (MFA)
+
+Add additional security layers to protect user accounts with two-factor authentication. For detailed
+configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa)
+section.
+
+**Key Configuration Options:**
+
+- `mfaSettings` - Configure MFA settings for different authentication flows
+- `mfaLevel` - Control when users are prompted to set up MFA
+
+## Custom Authentication Methods
+
+Control the login options presented to your users and how they're displayed in the modal. For
+detailed configuration options and implementation examples, see the
+[Custom Authentication](./custom-authentication) section.
+
+**Key Configuration Options:**
+
+- `modalConfig` - Define which authentication methods are available and customize their appearance
+
+## UI Customization
+
+Create a seamless brand experience by customizing the Web3Auth Modal to match your application's
+design. For complete customization options, refer to the
+[Whitelabeling & UI Customization](./whitelabel) section.
+
+**Key Configuration Options:**
+
+- `uiConfig` - Personalize the modal's look and feel with custom colors, logos, themes, and more
+- `modalConfig` - Control the visibility and arrangement of authentication options
+
+## Smart Accounts (Account Abstraction)
+
+Improve user experience with gasless transactions and advanced account features. Learn more in the
+[Smart Accounts](./smart-accounts) documentation.
+
+**Key Configuration Options:**
+
+- `accountAbstractionConfig` - Fine-tune parameters for smart account implementation
+- `useAAWithExternalWallet` - Enable account abstraction functionality even when users connect with
+  external wallets
+
+## Wallet Services
+
+Extend your application with enhanced wallet functionality. See the
+[Wallet Services](./wallet-services) documentation for complete configuration options.
+
+**Key Configuration Options:**
+
+- `walletServicesConfig` - Integrate additional wallet services and features

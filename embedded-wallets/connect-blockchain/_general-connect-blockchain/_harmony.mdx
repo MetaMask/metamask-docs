@@ -1,0 +1,40 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x63564c40 (hex of 1666600000)
+- Public RPC URL: https://api.harmony.one (Avoid using public rpcTarget in production, use services
+  like Infura)
+- Display Name: Harmony Mainnet
+- Block Explorer Link: https://explorer.harmony.one
+- Ticker: ONE
+- Ticker Name: ONE
+- Logo: https://cryptologos.cc/logos/harmony-one-logo.png
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x6357d2e0 (hex of 1666700000)
+- Public RPC URL: https://api.s0.b.hmny.io (Avoid using public rpcTarget in production, use services
+  like Infura)
+- Display Name: Harmony Testnet
+- Block Explorer Link: https://explorer.testnet.harmony.one
+- Ticker: ONE
+- Ticker Name: ONE
+- Logo: https://cryptologos.cc/logos/harmony-one-logo.png
+
+</TabItem>
+</Tabs>

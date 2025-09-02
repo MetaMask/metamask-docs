@@ -1,0 +1,42 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x440 (hex of 1088)
+- Public RPC URL: https://andromeda.metis.io/?owner=1088 (Avoid using public rpcTarget in
+  production, use services like Infura)
+- Display Name: Andromeda Mainnet
+- Block Explorer Link: https://andromeda-explorer.metis.io
+- Ticker: METIS
+- Ticker Name: Metis
+- Logo:
+  https://cdn.prod.website-files.com/6507242ad3e4e6ff563301e4/65456ca18876498fe5fd2a49_Symbol.png
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0xE9FE (hex of 59902)
+- Public RPC URL: https://sepolia.metisdevops.link/ (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: Sepolia Testnet
+- Block Explorer Link: https://sepolia-explorer.metisdevops.link/
+- Ticker: tMetis
+- Ticker Name: tMetis
+- Logo:
+  https://cdn.prod.website-files.com/6507242ad3e4e6ff563301e4/65456ca18876498fe5fd2a49_Symbol.png
+
+</TabItem>
+</Tabs>

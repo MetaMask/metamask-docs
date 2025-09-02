@@ -1,0 +1,33 @@
+---
+title: Using PnP Web Modal SDK
+sidebar_label: Usage
+description: '@web3auth/modal Usage | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+#### `manageMFA()`
+
+You can redirect users to the Web3Auth Account Dashboard to manage their MFA settings by calling the `manageMFA()` function. This method ensures that identity details are injected into the dashboard internally for custom verifier-based dApps. In order to see what's present on the account dashboard, please refer to the [Account Dashboard](/embedded-wallets/features/user-account-dashboard).
+
+```javascript
+await web3auth.manageMFA()
+```
+
+#### Interface
+
+```typescript
+manageMFA<T>(loginParams?: T): Promise<void>;
+```
+
+- **`loginParams`** (optional): Optional parameters to include during the MFA management process.
+- **Returns**: A `Promise<void>` indicating successful redirection to the Account Dashboard.
+
+:::tip
+
+If MFA is not already enabled, the `manageMFA()` method will throw an error. Ensure you use `enableMFA()` before calling `manageMFA()`.
+
+If your dApp uses default verifiers, users can directly log in to the Account Dashboard to manage MFA. For custom verifier-based dApps, the `manageMFA()` method must be used.
+
+:::

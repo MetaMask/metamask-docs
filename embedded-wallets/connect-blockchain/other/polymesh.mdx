@@ -1,0 +1,215 @@
+---
+title: Integrate Embedded Wallets with the Polymesh Blockchain
+sidebar_label: Polymesh
+image: 'banners/polymesh.png'
+
+keywords: [polymesh, embedded-wallets, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Polymesh Blockchain | Embedded Wallets'
+---
+
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [Polymesh](https://www.polymesh.network/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's public `signing key`, fetching `balance`, and `sign & send transaction`. We have highlighted a few methods here to get you started quickly.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Installation
+
+For Polymesh, we will use the libraries `@polymeshassociation/polymesh-sdk` and `@polymeshassociation/local-signing-manager` to create the Polymesh address, query the chain and submit transactions.
+
+```bash npm2yarn
+npm install --save @polymeshassociation/polymesh-sdk @polymeshassociation/local-signing-manager
+```
+
+## Initializing Provider
+
+### Getting the `chainConfig`
+
+<Tabs
+ groupId="chain"
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0x1
+- Public RPC URL: https://mainnet-rpc.polymesh.network (Avoid using public rpcTarget in production)
+- Display Name: Polymesh Mainnet
+- Block Explorer Link: https://polymesh.subscan.io
+- Ticker: POLYX
+- Ticker Name: Polymesh
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0x5
+- Public RPC URL: https://testnet-rpc.polymesh.live (Avoid using public rpcTarget in production)
+- Display Name: Polymesh Testnet
+- Block Explorer Link: https://polymesh-testnet.subscan.io
+- Ticker: POLYX
+- Ticker Name: Polymesh
+
+</TabItem>
+</Tabs>
+
+## Get Account and KeyPair
+
+Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Polymesh, we directly use the private key to make RPC calls.
+
+Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, Web3Auth does not provide direct access to Polymesh-specific signing functions, hence, we create a new `LocalSigningManager` and import this private key to give the Polymesh SDK the ability to sign transactions with this key.
+
+```tsx
+import { LocalSigningManager } from '@polymeshassociation/local-signing-manager'
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// create and instance of the polymesh local signing manager and import the web3Auth private hey
+const localSigningManager = await LocalSigningManager.create({
+  accounts: [{ uri: '0x' + privateKey, derivationPath: '' }],
+  // A derivation path can optionally be added to derive multiple keys from the same private key
+})
+```
+
+At this point if we were to query the public key derived from the private key by calling `localSigningManager.getAccounts()` the function would throw an error as a SS58 prefix for the chain has not been set. The SS58 prefix can be set manually by calling e.g. `localSigningManager.setSs58Format(12)`, or by attaching the signing manager to an instance of the Polymesh SDK which will automatically read the correct SS58 prefix from the chain and set it in the signing manager.
+
+<Tabs
+ groupId="chain"
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+```tsx
+import { Polymesh } from '@polymeshassociation/polymesh-sdk'
+
+// Create an instance of the Polymesh SDK, attaching the previously
+// created signing manager and connect to a Polymesh RPC node
+const polymeshApi = await Polymesh.connect({
+  nodeUrl: 'wss://mainnet-rpc.polymesh.network/',
+  signingManager: localSigningManager,
+})
+
+// Query the derived Public key from the Polymesh SDK instance
+const signingAccount = polymeshApi.accountManagement.getSigningAccount()
+// Note: if you have added multiple signing keys to the signing manager
+// the default signing account will be the first key added
+console.log(`Public Key: ${signingAccount.address}`)
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```tsx
+import { Polymesh } from '@polymeshassociation/polymesh-sdk'
+
+// Create an instance of the Polymesh SDK, attaching the previously
+// created signing manager and connect to a Polymesh RPC node
+const polymeshApi = await Polymesh.connect({
+  nodeUrl: 'wss://testnet-rpc.polymesh.live/',
+  signingManager: localSigningManager,
+})
+
+// Query the derived Public key from the Polymesh SDK instance.
+const signingAccount = polymeshApi.accountManagement.getSigningAccount()
+// Note: if you have added multiple signing keys to the signing manager
+// the default signing account will be the first key added
+console.log(`Public Key: ${signingAccount.address}`)
+```
+
+</TabItem>
+</Tabs>
+
+## Get Balance
+
+```tsx
+/*
+  Use code from the above Initializing Provider and connecting to Polymesh here
+*/
+
+// Retrieve the POLYX balance associate with the signing key
+const balance = await polymeshApi.accountManagement.getAccountBalance()
+```
+
+## Get The Associated Identity ID
+
+Before a key on Polymesh can receive tokens or transact on chain it must be associated with an onchain identity. A new identity can be assigned by a permissioned Certified Due Diligence (CDD) provider or you can add the key to an existing identity. Individuals can onboard their key by visiting https://testnet-onboarding.polymesh.live/ or https://mainnet-onboarding.polymesh.network/.
+
+```tsx
+/*
+  Use code from the above Initializing Provider and connecting to Polymesh here
+*/
+
+// Retrieve the Identity associate with the signing key
+const identity = await polymeshApi.getSigningIdentity()
+console.log(`Signing Identity: ${identity?.did || 'No identity found'}`)
+```
+
+## Send Transaction
+
+```tsx
+/*
+  Use code from the above Initializing Provider and connecting to Polymesh here
+*/
+
+import { BigNumber } from "@polymeshassociation/polymesh-sdk";
+import type { GenericPolymeshTransaction } from '@polymeshassociation/polymesh-sdk/types';
+
+// Prepare a POLYX transfer transaction from the signer added previously
+const polyxTransferTx = await polymeshApi.network.transferPolyx(
+  {
+    amount: new BigNumber(10);,
+    to: "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
+    memo: "I sent some POLYX", //optional
+  }
+);
+
+console.log(`\nTransferring ${amount.toString()} POLYX from ${signingAccount.address} to ${to}`);
+
+// Optionally subscribe to transaction status changes and handle status changes
+const unsub = polyxTransferTx.onStatusChange(
+  (tx: GenericPolymeshTransaction<any, any>) => {
+    // Do something on status changes
+  },
+);
+
+try {
+  // Execute the PolyX transfer transaction
+  await polyxTransferTx.run();
+} catch (error) {
+  console.log("Transaction Error:", (error as Error).message);
+} finally {
+  // Unsubscribe from transaction status changes
+  unsub();
+}
+
+console.log(JSON.stringify(polyxTransferTx.receipt?.events));
+```

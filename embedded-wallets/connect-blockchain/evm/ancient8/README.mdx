@@ -1,0 +1,78 @@
+---
+title: Integrate Embedded Wallets with the Ancient8 Blockchain
+sidebar_label: Ancient8
+hide_table_of_contents: true
+
+image: 'banners/ancient8.png'
+description: 'Integrate Embedded Wallets with the Ancient8 Blockchain | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import SEO from '@site/src/components/SEO'
+import ChainDetailsAncient8 from '../../_general-connect-blockchain/_ancient8.mdx'
+
+<SEO
+  title="Integrate Embedded Wallets with the Ancient8 Blockchain"
+  description="Integrate Embedded Wallets with the Ancient8 Blockchain | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/ancient8.png"
+  slug="/embedded-wallets/connect-blockchain/evm/ancient8"
+/>
+
+The Ancient8 blockchain's integration with Embedded Wallets (formerly Web3Auth) helps you get started in minutes. The integration is available for Web and Embedded Wallets Mobile SDKs (Android, iOS, React Native), as well as Flutter, React Native, and Unity.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Chain Details for Ancient8
+
+<ChainDetailsAncient8 />
+
+export const Ancient8 = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/connect-blockchain/evm/ancient8/web',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/connect-blockchain/evm/ancient8/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/connect-blockchain/evm/ancient8/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/connect-blockchain/evm/ancient8/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/ancient8/react-native',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/evm/ancient8/unity',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={Ancient8} />

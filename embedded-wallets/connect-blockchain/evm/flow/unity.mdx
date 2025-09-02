@@ -1,0 +1,60 @@
+---
+title: Integrate Embedded Wallets with the Flow Blockchain in Unity
+sidebar_label: Unity
+image: 'banners/flow.png'
+keywords: [unity, flow, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Flow Blockchain in Unity | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+import ChainDetailsFlow from '../../_general-connect-blockchain/_flow.mdx'
+
+<SEO
+  title="Integrate Embedded Wallets with the Flow Blockchain in Unity"
+  description="Integrate Embedded Wallets with the Flow Blockchain in Unity | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/flow.png"
+  slug="/embedded-wallets/connect-blockchain/evm/flow/unity"
+/>
+
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Installation
+
+<InstallationSnippet />
+
+## Chain Details for Flow
+
+<ChainDetailsFlow />
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
