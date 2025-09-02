@@ -2,7 +2,12 @@ import qsFileLinks from '../../../../../utils/qs-file-links.json'
 import STEPS from './stepContent'
 import { YES } from '../../choices'
 
-export default function getSteps(steps, files, replacementAggregator, values = {}) {
+export default function getSteps(
+  steps,
+  files,
+  replacementAggregator,
+  values: Record<string, string> = {}
+) {
   steps.push(
     {
       ...STEPS.reactQuickStart,

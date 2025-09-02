@@ -3,7 +3,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl'
 
 import styles from './styles.module.css'
 
-import type { ExamplesInterface } from '@site/src/common/maps'
+import type { ExamplesInterface } from '@site/src/utils/example-maps'
 
 const chevron = (
   <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

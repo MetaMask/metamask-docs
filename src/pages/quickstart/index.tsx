@@ -108,6 +108,8 @@ const StepNavigationMenu: React.FC<{
 // Fallback: Import files directly from build output if props don't contain them
 async function loadFilesDirectly() {
   try {
+    // Use dynamic import to avoid linting issues with build-time generated files
+    // @ts-ignore - This file is generated at build time
     const filesModule = await import(
       '../../../.docusaurus/docusaurus-plugin-virtual-files/default/files.json'
     )
