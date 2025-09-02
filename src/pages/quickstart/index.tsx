@@ -108,7 +108,9 @@ const StepNavigationMenu: React.FC<{
 // Fallback: Import files directly from build output if props don't contain them
 async function loadFilesDirectly() {
   try {
-    const filesModule = await import('../../../.docusaurus/docusaurus-plugin-virtual-files/default/files.json')
+    const filesModule = await import(
+      '../../../.docusaurus/docusaurus-plugin-virtual-files/default/files.json'
+    )
     return filesModule.default || filesModule
   } catch (e) {
     console.error('Could not load files directly:', e)
@@ -163,11 +165,13 @@ export default function IntegrationBuilderPage(props: any) {
   const [fallbackFiles, setFallbackFiles] = useState({})
   useEffect(() => {
     if (Object.keys(files).length === 0 && Object.keys(fallbackFiles).length === 0) {
-      loadFilesDirectly().then(loadedFiles => {
-        setFallbackFiles(loadedFiles)
-      }).catch(err => {
-        console.error('Failed to load fallback files:', err)
-      })
+      loadFilesDirectly()
+        .then(loadedFiles => {
+          setFallbackFiles(loadedFiles)
+        })
+        .catch(err => {
+          console.error('Failed to load fallback files:', err)
+        })
     }
   }, [files, fallbackFiles])
 
@@ -781,12 +785,16 @@ export default function IntegrationBuilderPage(props: any) {
             <div className={styles.controlActions}>
               {/* Wallet Aggregator Toggle (show first) */}
               {Object.entries(builder.options).map(([key, option]) =>
-                key === 'walletAggregatorOnly' && option.type === 'dropdown' ? optionRender(key, option) : null
+                key === 'walletAggregatorOnly' && option.type === 'dropdown'
+                  ? optionRender(key, option)
+                  : null
               )}
 
               {/* Other dropdowns (platform selection, etc.) */}
               {Object.entries(builder.options).map(([key, option]) =>
-                key !== 'walletAggregatorOnly' && option.type === 'dropdown' ? optionRender(key, option) : null
+                key !== 'walletAggregatorOnly' && option.type === 'dropdown'
+                  ? optionRender(key, option)
+                  : null
               )}
 
               <button

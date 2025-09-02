@@ -1,107 +1,107 @@
-import React, { useState, useEffect } from "react";
-import useIsBrowser from '@docusaurus/useIsBrowser';
-import styles from "@site/src/components/PregenerateWallet/styles.module.css";
+import React, { useState, useEffect } from 'react'
+import useIsBrowser from '@docusaurus/useIsBrowser'
+import styles from '@site/src/components/PregenerateWallet/styles.module.css'
 
 export default function LookupSCWAPIPage() {
-  const isBrowser = useIsBrowser();
-  const networkOptions = ["sapphire_mainnet", "sapphire_devnet"];
-  const smartAccountTypeOptions = ["metamask"];
-  const entryPointVersionOptions = ["0.7"];
+  const isBrowser = useIsBrowser()
+  const networkOptions = ['sapphire_mainnet', 'sapphire_devnet']
+  const smartAccountTypeOptions = ['metamask']
+  const entryPointVersionOptions = ['0.7']
 
   if (!isBrowser) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
   const constructURL = () => {
-    const baseUrl = "https://lookup.web3auth.io/lookup/scw";
+    const baseUrl = 'https://lookup.web3auth.io/lookup/scw'
     const filteredFormData = Object.fromEntries(
-      Object.entries(formData).filter(([_, value]) => value !== ""),
-    );
-    const queryParams = new URLSearchParams(filteredFormData);
+      Object.entries(formData).filter(([_, value]) => value !== '')
+    )
+    const queryParams = new URLSearchParams(filteredFormData)
 
-    const readableParams: React.ReactNode[] = [];
+    const readableParams: React.ReactNode[] = []
     queryParams.forEach((value, key) => {
       readableParams.push(
         <span key={key}>
           <span className={styles.parameterKey}>{key}</span>=
           <span className={styles.parameterValue}>{value}</span>&
-        </span>,
-      );
-    });
+        </span>
+      )
+    })
 
     return (
       <div className={styles.urlDisplay}>
         <span className={styles.getMethod}>GET</span> {baseUrl}?{readableParams}
       </div>
-    );
-  };
+    )
+  }
 
   const [formData, setFormData] = useState({
-    verifier: "w3a-google-demo",
-    verifierId: "devrel@web3auth.io",
-    web3AuthNetwork: "sapphire_mainnet",
+    verifier: 'w3a-google-demo',
+    verifierId: 'devrel@web3auth.io',
+    web3AuthNetwork: 'sapphire_mainnet',
     clientId:
-      "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ",
-    chainId: "0x1",
-    smartAccountType: "metamask",
-    smartAccountVersion: "",
-    nonceKey: "",
-    saltNonce: "",
-    factoryAddress: "",
-    entryPointVersion: "0.7",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [response, setResponse] = useState<string | null>(null);
-  const [error, setError] = useState("");
+      'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ',
+    chainId: '0x1',
+    smartAccountType: 'metamask',
+    smartAccountVersion: '',
+    nonceKey: '',
+    saltNonce: '',
+    factoryAddress: '',
+    entryPointVersion: '0.7',
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const [response, setResponse] = useState<string | null>(null)
+  const [error, setError] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setResponse(null);
-    setError("");
+    e.preventDefault()
+    setIsLoading(true)
+    setResponse(null)
+    setError('')
 
     try {
-      const axios = (await import("axios")).default;
+      const axios = (await import('axios')).default
       const filteredFormData = Object.fromEntries(
-        Object.entries(formData).filter(([_, value]) => value !== ""),
-      );
+        Object.entries(formData).filter(([_, value]) => value !== '')
+      )
       const res = await axios.get(`https://lookup.web3auth.io/lookup/scw`, {
         params: filteredFormData,
-      });
-      setResponse(JSON.stringify(res.data, null, 2));
+      })
+      setResponse(JSON.stringify(res.data, null, 2))
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : 'An error occurred')
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    if (!isBrowser) return;
+    if (!isBrowser) return
 
     const fetchInitialData = async () => {
-      setIsLoading(true);
+      setIsLoading(true)
       try {
-        const axios = (await import("axios")).default;
+        const axios = (await import('axios')).default
         const filteredFormData = Object.fromEntries(
-          Object.entries(formData).filter(([_, value]) => value !== ""),
-        );
+          Object.entries(formData).filter(([_, value]) => value !== '')
+        )
         const res = await axios.get(`https://lookup.web3auth.io/lookup/scw`, {
           params: filteredFormData,
-        });
-        setResponse(JSON.stringify(res.data, null, 2));
+        })
+        setResponse(JSON.stringify(res.data, null, 2))
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
+        setError(err instanceof Error ? err.message : 'An error occurred')
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
+    }
 
-    fetchInitialData();
-  }, [isBrowser]);
+    fetchInitialData()
+  }, [isBrowser])
 
   return (
     <>
@@ -124,7 +124,7 @@ export default function LookupSCWAPIPage() {
               </td>
               <td id="verifier-description">
                 The verifier name can be found on your Web3Auth dashboard. To learn more about
-                verifiers, click{" "}
+                verifiers, click{' '}
                 <a href="/docs/authentication" target="_blank" rel="noopener noreferrer">
                   here
                 </a>
@@ -147,7 +147,7 @@ export default function LookupSCWAPIPage() {
                 <code>verifierId</code>
               </td>
               <td id="verifierId-description">
-                The verifier ID value. One of the ways to get it is via the response to the{" "}
+                The verifier ID value. One of the ways to get it is via the response to the{' '}
                 <code>getUserInfo()</code> method.
               </td>
               <td>
@@ -166,7 +166,9 @@ export default function LookupSCWAPIPage() {
               <td>
                 <code>web3AuthNetwork</code>
               </td>
-              <td id="web3AuthNetwork-description">Name of the Web3Auth Network your project is deployed on.</td>
+              <td id="web3AuthNetwork-description">
+                Name of the Web3Auth Network your project is deployed on.
+              </td>
               <td>
                 <select
                   name="web3AuthNetwork"
@@ -174,9 +176,8 @@ export default function LookupSCWAPIPage() {
                   onChange={handleChange}
                   required
                   aria-label="Web3Auth Network"
-                  aria-describedby="web3AuthNetwork-description"
-                >
-                  {networkOptions.map((network) => (
+                  aria-describedby="web3AuthNetwork-description">
+                  {networkOptions.map(network => (
                     <option key={network} value={network}>
                       {network}
                     </option>
@@ -229,9 +230,8 @@ export default function LookupSCWAPIPage() {
                   name="smartAccountType"
                   value={formData.smartAccountType}
                   onChange={handleChange}
-                  required
-                >
-                  {smartAccountTypeOptions.map((smartAccountType) => (
+                  required>
+                  {smartAccountTypeOptions.map(smartAccountType => (
                     <option key={smartAccountType} value={smartAccountType}>
                       {smartAccountType}
                     </option>
@@ -252,9 +252,8 @@ export default function LookupSCWAPIPage() {
                 <select
                   name="entryPointVersion"
                   value={formData.entryPointVersion}
-                  onChange={handleChange}
-                >
-                  {entryPointVersionOptions.map((entryPointVersion) => (
+                  onChange={handleChange}>
+                  {entryPointVersionOptions.map(entryPointVersion => (
                     <option key={entryPointVersion} value={entryPointVersion}>
                       {entryPointVersion}
                     </option>
@@ -324,19 +323,22 @@ export default function LookupSCWAPIPage() {
             type="submit"
             className={styles.submitButton}
             disabled={isLoading}
-            aria-label={isLoading ? "Submitting request..." : "Submit API request"}
-          >
-            {isLoading ? <div className={styles.loader}></div> : "Submit"}
+            aria-label={isLoading ? 'Submitting request...' : 'Submit API request'}>
+            {isLoading ? <div className={styles.loader}></div> : 'Submit'}
           </button>
         </div>
       </form>
 
       <h3>Response</h3>
-      <div className={styles.responseTerminal} role="region" aria-label="API Response" aria-live="polite">
+      <div
+        className={styles.responseTerminal}
+        role="region"
+        aria-label="API Response"
+        aria-live="polite">
         {isLoading && <p>Request sent...</p>}
         {response && <pre>{response}</pre>}
         {error && <p className={styles.error}>{error}</p>}
       </div>
     </>
-  );
+  )
 }

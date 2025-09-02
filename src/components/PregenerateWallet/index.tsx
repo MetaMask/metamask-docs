@@ -1,86 +1,86 @@
-import React, { useState, useEffect } from "react";
-import useIsBrowser from '@docusaurus/useIsBrowser';
-import styles from "./styles.module.css";
+import React, { useState, useEffect } from 'react'
+import useIsBrowser from '@docusaurus/useIsBrowser'
+import styles from './styles.module.css'
 
 export default function LookupAPIPage() {
-  const isBrowser = useIsBrowser();
-  const networkOptions = ["sapphire_mainnet", "sapphire_devnet"];
+  const isBrowser = useIsBrowser()
+  const networkOptions = ['sapphire_mainnet', 'sapphire_devnet']
 
   if (!isBrowser) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   const constructURL = () => {
-    const baseUrl = "https://lookup.web3auth.io/lookup";
-    const queryParams = new URLSearchParams(formData);
+    const baseUrl = 'https://lookup.web3auth.io/lookup'
+    const queryParams = new URLSearchParams(formData)
 
-    const readableParams: React.ReactNode[] = [];
+    const readableParams: React.ReactNode[] = []
     queryParams.forEach((value, key) => {
       readableParams.push(
         <span key={key}>
           <span className={styles.parameterKey}>{key}</span>=
           <span className={styles.parameterValue}>{value}</span>&
-        </span>,
-      );
-    });
+        </span>
+      )
+    })
 
     return (
       <div className={styles.urlDisplay}>
         <span className={styles.getMethod}>GET</span> {baseUrl}?{readableParams}
       </div>
-    );
-  };
+    )
+  }
 
   const [formData, setFormData] = useState({
-    verifier: "w3a-google-demo",
-    verifierId: "devrel@web3auth.io",
-    web3AuthNetwork: "sapphire_mainnet",
+    verifier: 'w3a-google-demo',
+    verifierId: 'devrel@web3auth.io',
+    web3AuthNetwork: 'sapphire_mainnet',
     clientId:
-      "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [response, setResponse] = useState<string | null>(null);
-  const [error, setError] = useState("");
+      'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ',
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const [response, setResponse] = useState<string | null>(null)
+  const [error, setError] = useState('')
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setResponse(null);
-    setError("");
+  const handleSubmit = async e => {
+    e.preventDefault()
+    setIsLoading(true)
+    setResponse(null)
+    setError('')
 
     try {
-      const axios = (await import("axios")).default;
-      const res = await axios.get(`https://lookup.web3auth.io/lookup`, { params: formData });
-      setResponse(JSON.stringify(res.data, null, 2));
+      const axios = (await import('axios')).default
+      const res = await axios.get(`https://lookup.web3auth.io/lookup`, { params: formData })
+      setResponse(JSON.stringify(res.data, null, 2))
     } catch (err) {
-      setError(err.message);
+      setError(err.message)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   useEffect(() => {
-    if (!isBrowser) return;
+    if (!isBrowser) return
 
     const fetchInitialData = async () => {
-      setIsLoading(true);
+      setIsLoading(true)
       try {
-        const axios = (await import("axios")).default;
-        const res = await axios.get(`https://lookup.web3auth.io/lookup`, { params: formData });
-        setResponse(JSON.stringify(res.data, null, 2));
+        const axios = (await import('axios')).default
+        const res = await axios.get(`https://lookup.web3auth.io/lookup`, { params: formData })
+        setResponse(JSON.stringify(res.data, null, 2))
       } catch (err) {
-        setError(err.message);
+        setError(err.message)
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
+    }
 
-    fetchInitialData();
-  }, [isBrowser]);
+    fetchInitialData()
+  }, [isBrowser])
 
   return (
     <>
@@ -103,7 +103,7 @@ export default function LookupAPIPage() {
               </td>
               <td>
                 The verifier name can be found on your Web3Auth dashboard. To learn more about
-                verifiers, click{" "}
+                verifiers, click{' '}
                 <a href="/docs/authentication" target="_blank" rel="noopener noreferrer">
                   here
                 </a>
@@ -124,7 +124,7 @@ export default function LookupAPIPage() {
                 <code>verifierId</code>
               </td>
               <td>
-                The verifier ID value. One of the ways to get it is via the response to the{" "}
+                The verifier ID value. One of the ways to get it is via the response to the{' '}
                 <code>getUserInfo()</code> method.
               </td>
               <td>
@@ -147,9 +147,8 @@ export default function LookupAPIPage() {
                   name="web3AuthNetwork"
                   value={formData.web3AuthNetwork}
                   onChange={handleChange}
-                  required
-                >
-                  {networkOptions.map((network) => (
+                  required>
+                  {networkOptions.map(network => (
                     <option key={network} value={network}>
                       {network}
                     </option>
@@ -181,7 +180,7 @@ export default function LookupAPIPage() {
         </div>
         <div className={styles.submitButtonContainer}>
           <button type="submit" className={styles.submitButton} disabled={isLoading}>
-            {isLoading ? <div className={styles.loader}></div> : "Submit"}
+            {isLoading ? <div className={styles.loader}></div> : 'Submit'}
           </button>
         </div>
       </form>
@@ -193,5 +192,5 @@ export default function LookupAPIPage() {
         {error && <p className={styles.error}>{error}</p>}
       </div>
     </>
-  );
+  )
 }

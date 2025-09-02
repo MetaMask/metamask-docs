@@ -33,7 +33,7 @@ module.exports = (context, options) => ({
   async contentLoaded({ content, actions }) {
     const { createData, addRoute } = actions
     const contentHub = await createData('tutorials.json', JSON.stringify(content))
-    
+
     // Create the hub page that lists all tutorials
     addRoute({
       path: '/tutorials',

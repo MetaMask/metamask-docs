@@ -41,7 +41,7 @@
 }
 
 /* Mobile responsive design */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .formTable {
     display: block;
     overflow-x: auto;
@@ -166,7 +166,7 @@
 .responseTerminal {
   background: var(--ifm-color-emphasis-100);
   color: var(--ifm-color-content);
-  font-family: "SF Mono", "Monaco", "Consolas", "Courier New", monospace;
+  font-family: "SF Mono", Monaco, Consolas, "Courier New", monospace;
   font-size: 13px;
   line-height: 1.4;
   padding: 20px;
@@ -186,7 +186,7 @@
   border-color: var(--ifm-color-gray-700);
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .responseTerminal {
     padding: 16px;
     font-size: 12px;
@@ -209,7 +209,7 @@
   border: 1px solid var(--ifm-color-emphasis-300);
   border-left: 4px solid var(--ifm-color-primary);
   padding: 16px;
-  font-family: "SF Mono", "Monaco", "Consolas", "Courier New", monospace;
+  font-family: "SF Mono", Monaco, Consolas, "Courier New", monospace;
   font-size: 14px;
   color: var(--ifm-color-content);
   margin-top: 20px;
@@ -219,7 +219,7 @@
   word-break: break-all;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .urlDisplay {
     font-size: 12px;
     padding: 12px;
@@ -259,7 +259,7 @@
   margin-top: 20px;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .submitButtonContainer {
     margin-top: 16px;
   }
@@ -277,7 +277,7 @@
   font-weight: bold;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .instructionTextContainer {
     margin-top: 16px;
     font-size: 14px;
