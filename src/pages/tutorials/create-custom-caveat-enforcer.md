@@ -1,6 +1,6 @@
 ---
 title: Create a custom caveat enforcer
-image: 'img/guides/guides-banners/custom-caveat-enforcer.png'
+image: 'img/guides/guides-img/embedded-wallets/banners/custom-caveat-enforcer.png'
 description: Create, deploy, and apply a custom caveat enforcer for a delegation.
 tags: [delegation toolkit, caveat enforcer, smart contracts, ethereum]
 date: Aug 27, 2025

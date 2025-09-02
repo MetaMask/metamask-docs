@@ -51,9 +51,9 @@ The CLI provides the following options to display CLI details, and further custo
 
 ## Examples
 
-### Web3Auth configuration
+### MetaMask Embedded Wallets configuration
 
-To create a project that uses [Web3Auth](https://web3auth.io/docs/) Embedded Wallet as the signer for your delegator account, use the `--add-web3auth` option with `@metamask/create-gator-app`:
+To create a project that uses [MetaMask Embedded Wallets (Web3Auth)](https://docs.metamask.io/embedded-wallets/) as the signer for your delegator account, use the `--add-web3auth` option with `@metamask/create-gator-app`:
 
 ```bash
 npx @metamask/create-gator-app --add-web3auth

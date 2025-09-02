@@ -6,8 +6,8 @@ description:
 sidebar_label: v7 to v10
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # Web3Auth No-Modal v7 to v10 Migration Guide
 
@@ -64,9 +64,9 @@ npm install @web3auth/ethereum-provider
 
 ```typescript
 // remove-start
-import { Web3AuthNoModal } from "@web3auth/no-modal";
-import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
-import { WalletServicesPlugin } from "@web3auth/wallet-services-plugin";
+import { Web3AuthNoModal } from '@web3auth/no-modal'
+import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
+import { WalletServicesPlugin } from '@web3auth/wallet-services-plugin'
 // remove-end
 ```
 
@@ -74,7 +74,7 @@ import { WalletServicesPlugin } from "@web3auth/wallet-services-plugin";
 
 ```typescript
 // add-start
-import { Web3Auth } from "@web3auth/modal";
+import { Web3Auth } from '@web3auth/modal'
 // Most functionality is now built-in - no separate adapters needed for basic use cases
 // add-end
 ```
@@ -85,14 +85,14 @@ import { Web3Auth } from "@web3auth/modal";
 
 ```typescript
 // remove-start
-import { Web3AuthNoModal } from "@web3auth/no-modal";
+import { Web3AuthNoModal } from '@web3auth/no-modal'
 
 const web3auth = new Web3AuthNoModal({
-  clientId: "YOUR_CLIENT_ID",
+  clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   chainConfig,
   privateKeyProvider,
-});
+})
 // remove-end
 ```
 
@@ -100,13 +100,13 @@ const web3auth = new Web3AuthNoModal({
 
 ```typescript
 // add-start
-import { Web3Auth } from "@web3auth/modal";
+import { Web3Auth } from '@web3auth/modal'
 
 const web3auth = new Web3Auth({
-  clientId: "YOUR_CLIENT_ID",
+  clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // Chain configuration managed via Web3Auth Developer Dashboard
-});
+})
 // add-end
 ```
 
@@ -120,21 +120,21 @@ const openloginAdapter = new OpenloginAdapter({
   adapterSettings: {
     loginConfig: {
       google: {
-        verifier: "YOUR_GOOGLE_VERIFIER_NAME",
-        typeOfLogin: "google",
-        clientId: "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
+        verifier: 'YOUR_GOOGLE_VERIFIER_NAME',
+        typeOfLogin: 'google',
+        clientId: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
       },
     },
   },
-});
+})
 
-web3auth.configureAdapter(openloginAdapter);
-await web3auth.init();
+web3auth.configureAdapter(openloginAdapter)
+await web3auth.init()
 
 // Custom UI - connect directly
-await web3auth.connectTo("openlogin", {
-  loginProvider: "google",
-});
+await web3auth.connectTo('openlogin', {
+  loginProvider: 'google',
+})
 // remove-end
 ```
 
@@ -142,18 +142,18 @@ await web3auth.connectTo("openlogin", {
 
 ```typescript
 // add-start
-await web3auth.init();
+await web3auth.init()
 
 // Custom UI - use connectTo
 await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.GOOGLE,
-});
+})
 
 // Or with custom verifiers/connections
 await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.GOOGLE,
-  authConnectionId: "YOUR_GOOGLE_AUTH_CONNECTION_ID",
-});
+  authConnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID',
+})
 // add-end
 ```
 
@@ -163,27 +163,27 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
 
 ```typescript
 // remove-start
-import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 
 const chainConfig = {
-  chainNamespace: "eip155",
-  chainId: "0x1",
-  rpcTarget: "https://rpc.ethereum.org",
-  displayName: "Ethereum Mainnet",
-  blockExplorer: "https://etherscan.io/",
-  ticker: "ETH",
-  tickerName: "Ethereum",
-};
+  chainNamespace: 'eip155',
+  chainId: '0x1',
+  rpcTarget: 'https://rpc.ethereum.org',
+  displayName: 'Ethereum Mainnet',
+  blockExplorer: 'https://etherscan.io/',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+}
 
 const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
-});
+})
 
 const web3auth = new Web3AuthNoModal({
-  clientId: "YOUR_CLIENT_ID",
+  clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
-});
+})
 // remove-end
 ```
 
@@ -192,10 +192,10 @@ const web3auth = new Web3AuthNoModal({
 ```typescript
 // add-start
 const web3auth = new Web3Auth({
-  clientId: "YOUR_CLIENT_ID",
+  clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // Chain configuration managed via Web3Auth Developer Dashboard
-});
+})
 // add-end
 ```
 
@@ -209,6 +209,3 @@ of in code.
 3. Replace direct adapter methods with `connectTo` calls
 4. Configure your chains and branding on the Web3Auth Developer Dashboard
 5. Test your custom UI implementation with the new `connectTo` API
-
-For any specific migration challenges, consult the
-[Web3Auth documentation](https://web3auth.io/docs/).

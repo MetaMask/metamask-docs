@@ -7,7 +7,7 @@ keywords: [connect, MetaMask, Web3Auth, SDK, dapp]
 
 # Connect to MetaMask using Web3Auth SDK
 
-Get started with MetaMask SDK and [Web3Auth SDK](https://web3auth.io/docs/),
+Get started with MetaMask SDK and [Web3Auth SDK](https://docs.metamask.io/embedded-wallets/),
 enabling users to sign in with an email or social media account.
 You can use MetaMask SDK features directly within Web3Auth SDK.
 Set up the SDKs in one of the following ways:
@@ -26,58 +26,58 @@ Set up the SDKs in one of the following ways:
 - A package manager installed.
   The examples in this quickstart use [pnpm](https://pnpm.io/installation).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
-- A [Web3Auth Client ID](https://web3auth.io/docs/dashboard/create-new-project#get-the-client-id).
+- A [Web3Auth Client ID](https://docs.metamask.io/embedded-wallets/dashboard/#get-the-client-id).
 
 ## Set up using the CLI
 
 1. Run the CLI command, replacing `<project-name>` with your project name:
 
-    ```bash
-    npx @consensys/create-web3-app <project-name>
-    ```
+   ```bash
+   npx @consensys/create-web3-app <project-name>
+   ```
 
 1. Select the Web3Auth Quickstart template:
 
-    ```bash
-    ? Please select the template you want to use: 
-      MetaMask <-> Next.js (Wagmi) Quickstart (Recommended) 
-    ❯ MetaMask <-> Web3Auth Quickstart
-      MetaMask <-> Dynamic Quickstart
-    ```
+   ```bash
+   ? Please select the template you want to use:
+     MetaMask <-> Next.js (Wagmi) Quickstart (Recommended)
+   ❯ MetaMask <-> Web3Auth Quickstart
+     MetaMask <-> Dynamic Quickstart
+   ```
 
 1. Select your preferred blockchain tooling if your project requires it:
 
-    ```bash
-    ? Would you like to include blockchain tooling? (Use arrow keys)
-      HardHat 
-      Foundry 
-    ❯ None 
-    ```
+   ```bash
+   ? Would you like to include blockchain tooling? (Use arrow keys)
+     HardHat
+     Foundry
+   ❯ None
+   ```
 
 1. Select your preferred package manager.
-    We recommend pnpm for speed and efficiency:
+   We recommend pnpm for speed and efficiency:
 
-    ```bash
-    ? Please select the package manager you want to use: 
-      Yarn 
-      NPM 
-    ❯ pnpm 
-    ```
+   ```bash
+   ? Please select the package manager you want to use:
+     Yarn
+     NPM
+   ❯ pnpm
+   ```
 
 1. Select to enter your Web3Auth Client ID in the command prompt:
 
-    ```bash
-    Note: The selected template requires a Web3Auth client ID. 
-    You can obtain one from https://dashboard.web3auth.io and later 
-    add NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<your_client_id> to a .env file in your site's directory. 
-    ```
+   ```bash
+   Note: The selected template requires a Web3Auth client ID.
+   You can obtain one from https://dashboard.web3auth.io and later
+   add NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<your_client_id> to a .env file in your site's directory.
+   ```
 
 1. The CLI will take a few minutes to set up your project.
-    Once complete, you can run the project using the following command in `cd <project-name>`:
+   Once complete, you can run the project using the following command in `cd <project-name>`:
 
-    ```bash
-    pnpm run dev
-    ```
+   ```bash
+   pnpm run dev
+   ```
 
 You've successfully set up MetaMask SDK and Web3Auth SDK.
 See how to [use the Web3Auth SDK](#usage).
@@ -86,39 +86,39 @@ See how to [use the Web3Auth SDK](#usage).
 
 1. Download the [MetaMask SDK + Web3Auth SDK template](https://github.com/MetaMask/metamask-web3auth):
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-web3auth
-    ```
+   ```bash
+   git clone https://github.com/MetaMask/metamask-web3auth
+   ```
 
 2. Navigate into the repository:
 
-    ```bash
-    cd metamask-web3auth
-    ```
+   ```bash
+   cd metamask-web3auth
+   ```
 
 3. Install dependencies:
 
-    ```bash
-    pnpm install
-    ```
+   ```bash
+   pnpm install
+   ```
 
 4. Create a `.env.local` file:
 
-    ```bash
-    touch .env.local
-    ```
+   ```bash
+   touch .env.local
+   ```
 
 5. In `.env.local`, add a `NEXT_PUBLIC_WEB3AUTH_CLIENT_ID` environment variable, replacing `<YOUR-CLIENT-ID>` with your Web3Auth Client ID:
 
-    ```text title=".env.local"
-    NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<YOUR-CLIENT-ID>
-    ```
+   ```text title=".env.local"
+   NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<YOUR-CLIENT-ID>
+   ```
 
 6. Run the project:
 
-    ```bash
-    pnpm dev
-    ```
+   ```bash
+   pnpm dev
+   ```
 
 You've successfully set up MetaMask SDK and Web3Auth SDK.
 See how to [use the Web3Auth SDK](#usage).

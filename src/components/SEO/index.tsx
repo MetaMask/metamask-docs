@@ -48,9 +48,9 @@ export default function SEO(props) {
         />
       )}
       {slug ? (
-        <meta property="og:url" content={`https://web3auth.io/docs${slug}`} />
+        <meta property="og:url" content={`https://docs.metamask.io${slug}`} />
       ) : (
-        <meta property="og:url" content="https://web3auth.io/docs" />
+        <meta property="og:url" content="https://docs.metamask.io" />
       )}
 
       {image ? (
@@ -58,7 +58,7 @@ export default function SEO(props) {
       ) : (
         <meta
           property="og:image"
-          content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png"
+          content="http://docs.metamask.io/img/docs-meta-cards/documentation-card.png"
         />
       )}
 
@@ -81,7 +81,7 @@ export default function SEO(props) {
       ) : (
         <meta
           name="twitter:image"
-          content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png"
+          content="http://docs.metamask.io/img/docs-meta-cards/documentation-card.png"
         />
       )}
 
@@ -104,7 +104,7 @@ export default function SEO(props) {
       ) : (
         <meta
           itemProp="image"
-          content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png"
+          content="http://docs.metamask.io/img/docs-meta-cards/documentation-card.png"
         />
       )}
 
