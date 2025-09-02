@@ -1,12 +1,11 @@
 ---
 title: Migrating External Wallet Adapters from v8 to v10
-description:
-  Comprehensive guide for migrating Web3Auth external wallet adapter configurations from v8 to v10.
+description: Comprehensive guide for migrating Web3Auth external wallet adapter configurations from v8 to v10.
 sidebar_label: External Wallets Migration
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # Web3Auth v10 External Wallet Adapters Migration Guide
 
@@ -27,32 +26,32 @@ wallets without manual setup.
 ```typescript
 // remove-start
 // Individual wallet adapters
-import { MetamaskAdapter } from "@web3auth/metamask-adapter";
-import { PhantomAdapter } from "@web3auth/phantom-adapter";
-import { SolflareAdapter } from "@web3auth/solflare-adapter";
+import { MetamaskAdapter } from '@web3auth/metamask-adapter'
+import { PhantomAdapter } from '@web3auth/phantom-adapter'
+import { SolflareAdapter } from '@web3auth/solflare-adapter'
 
 // Default adapter functions
-import { getDefaultExternalAdapters, getInjectedAdapters } from "@web3auth/default-evm-adapter";
+import { getDefaultExternalAdapters, getInjectedAdapters } from '@web3auth/default-evm-adapter'
 
 // Manual adapter configuration
-const metamaskAdapter = new MetamaskAdapter();
-const phantomAdapter = new PhantomAdapter();
-web3auth.configureAdapter(metamaskAdapter);
-web3auth.configureAdapter(phantomAdapter);
+const metamaskAdapter = new MetamaskAdapter()
+const phantomAdapter = new PhantomAdapter()
+web3auth.configureAdapter(metamaskAdapter)
+web3auth.configureAdapter(phantomAdapter)
 
 // Or using helper functions
-const adapters = await getDefaultExternalAdapters({ options: web3AuthOptions });
-adapters.forEach((adapter) => {
-  web3auth.configureAdapter(adapter);
-});
+const adapters = await getDefaultExternalAdapters({ options: web3AuthOptions })
+adapters.forEach(adapter => {
+  web3auth.configureAdapter(adapter)
+})
 
-await web3auth.initModal();
+await web3auth.initModal()
 // remove-end
 
 // add-start
 // All external wallets are automatically detected via MIPD
 // No manual adapter configuration needed
-await web3auth.init();
+await web3auth.init()
 // add-end
 ```
 

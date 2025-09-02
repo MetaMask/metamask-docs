@@ -8,7 +8,7 @@ date: Aug 27, 2025
 author: MetaMask Developer Relations
 ---
 
-This tutorial walks you through using a passkey as a backup signer for your [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts.md).
+This tutorial walks you through using a passkey as a backup signer for your [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts).
 
 ## About passkeys
 
@@ -16,7 +16,7 @@ An externally owned account (EOA) uses the secp256k1 elliptic curve to generate 
 In contrast, a passkey (WebAuthn credential) uses the secp256r1 (P-256) elliptic curve to generate key pairs and signatures.
 Passkeys eliminate the need for traditional seed phrases that are difficult to remember, enabling a more seamless and secure way for users to access their web3 wallets.
 
-MetaMask Smart Accounts offer a [Hybrid implementation](/delegation-toolkit/concepts/smart-accounts.md#hybrid-smart-account), which supports signature validation for both secp256k1 and secp256r1 curves.
+MetaMask Smart Accounts offer a [Hybrid implementation](/delegation-toolkit/concepts/smart-accounts#hybrid-smart-account), which supports signature validation for both secp256k1 and secp256r1 curves.
 This allows you to add a passkey as a backup signer for your smart account.
 
 You can add passkeys during smart account creation or after the account has been deployed.
@@ -24,10 +24,10 @@ This tutorial walks you through adding a passkey signer to an already deployed s
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](/delegation-toolkit/get-started/install.md) in your project.
+- [Install and set up the Delegation Toolkit](/delegation-toolkit/get-started/install) in your project.
 - [Install Ox SDK](https://oxlib.sh/#installation).
-- [Configure the Delegation Toolkit](/delegation-toolkit/guides/configure.md).
-- [Create and deploy a Hybrid smart account,](/delegation-toolkit/guides/smart-accounts/create-smart-account.md) with a signatory from a private key.
+- [Configure the Delegation Toolkit](/delegation-toolkit/guides/configure).
+- [Create and deploy a Hybrid smart account,](/delegation-toolkit/guides/smart-accounts/create-smart-account) with a signatory from a private key.
 
 ## Steps
 
@@ -62,7 +62,7 @@ const bundlerClient = createBundlerClient({
 
 ### 3. Create a Hybrid smart account
 
-Configure the same [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account.md#create-a-hybrid-smart-account) that you created and deployed as a [prerequisite](#prerequisites).
+Configure the same [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account#create-a-hybrid-smart-account) that you created and deployed as a [prerequisite](#prerequisites).
 The Hybrid implementation supports adding additional passkey signers.
 
 ```typescript
@@ -164,5 +164,5 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ## Next steps
 
-- See [Create a MetaMask smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account.md) to learn more about smart account implementations.
-- See [Send a gasless transaction](/delegation-toolkit/guides/smart-accounts/send-gasless-transaction.md) to learn how to sponsor gas fees when adding a passkey as a backup signer.
+- See [Create a MetaMask smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account) to learn more about smart account implementations.
+- See [Send a gasless transaction](/delegation-toolkit/guides/smart-accounts/send-gasless-transaction) to learn how to sponsor gas fees when adding a passkey as a backup signer.

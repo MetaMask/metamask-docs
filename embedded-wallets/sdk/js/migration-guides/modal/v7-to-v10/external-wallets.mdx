@@ -4,8 +4,8 @@ description: Comprehensive guide for migrating Web3Auth external wallet adapters
 sidebar_label: External Wallet Adapters Migration
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # Web3Auth v10 External Wallet Adapters Migration Guide
 
@@ -26,35 +26,35 @@ wallets without manual setup.
 ```typescript
 // remove-start
 // Individual wallet adapters in v7
-import { MetamaskAdapter } from "@web3auth/metamask-adapter";
-import { PhantomAdapter } from "@web3auth/phantom-adapter";
+import { MetamaskAdapter } from '@web3auth/metamask-adapter'
+import { PhantomAdapter } from '@web3auth/phantom-adapter'
 import {
   WalletConnectV2Adapter,
   getWalletConnectV2Settings,
-} from "@web3auth/wallet-connect-v2-adapter";
-import { WalletConnectModal } from "@walletconnect/modal";
+} from '@web3auth/wallet-connect-v2-adapter'
+import { WalletConnectModal } from '@walletconnect/modal'
 
 // Manual adapter configuration
-const metamaskAdapter = new MetamaskAdapter();
-web3auth.configureAdapter(metamaskAdapter);
+const metamaskAdapter = new MetamaskAdapter()
+web3auth.configureAdapter(metamaskAdapter)
 
-const phantomAdapter = new PhantomAdapter();
-web3auth.configureAdapter(phantomAdapter);
+const phantomAdapter = new PhantomAdapter()
+web3auth.configureAdapter(phantomAdapter)
 
-const defaultWcSettings = await getWalletConnectV2Settings("eip155", ["1"], "PROJECT_ID");
+const defaultWcSettings = await getWalletConnectV2Settings('eip155', ['1'], 'PROJECT_ID')
 const walletConnectV2Adapter = new WalletConnectV2Adapter({
   adapterSettings: { qrcodeModal: WalletConnectModal, ...defaultWcSettings.adapterSettings },
   loginSettings: { ...defaultWcSettings.loginSettings },
-});
-web3auth.configureAdapter(walletConnectV2Adapter);
+})
+web3auth.configureAdapter(walletConnectV2Adapter)
 
-await web3auth.initModal();
+await web3auth.initModal()
 // remove-end
 
 // add-start
 // All external wallets are automatically detected via MIPD
 // No manual adapter configuration needed
-await web3auth.init();
+await web3auth.init()
 // add-end
 ```
 

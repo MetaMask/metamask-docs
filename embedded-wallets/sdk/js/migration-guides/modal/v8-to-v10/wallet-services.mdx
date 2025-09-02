@@ -4,8 +4,8 @@ description: Comprehensive guide for migrating Web3Auth Wallet Services plugin f
 sidebar_label: Wallet Services Migration
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # Web3Auth v10 Wallet Services Migration Guide
 
@@ -24,34 +24,34 @@ these services directly into the main SDK.
 
 ```typescript
 // remove-start
-import { WalletServicesPlugin } from "@web3auth/wallet-services-plugin";
+import { WalletServicesPlugin } from '@web3auth/wallet-services-plugin'
 
 const walletServicesPlugin = new WalletServicesPlugin({
   // plugin configuration options
-});
+})
 
-web3auth.addPlugin(walletServicesPlugin);
-await web3auth.initModal();
+web3auth.addPlugin(walletServicesPlugin)
+await web3auth.initModal()
 
 // Usage
-await walletServicesPlugin.showWalletUi();
-await walletServicesPlugin.showCheckout();
-await walletServicesPlugin.showWalletConnectScanner();
+await walletServicesPlugin.showWalletUi()
+await walletServicesPlugin.showCheckout()
+await walletServicesPlugin.showWalletConnectScanner()
 // remove-end
 
 // add-start
-import { EVM_PLUGINS } from "@web3auth/modal";
+import { EVM_PLUGINS } from '@web3auth/modal'
 
-await web3auth.init();
+await web3auth.init()
 
 // Get the built-in wallet services plugin
-const walletServicesPlugin = web3auth.getPlugin(EVM_PLUGINS.WALLET_SERVICES);
+const walletServicesPlugin = web3auth.getPlugin(EVM_PLUGINS.WALLET_SERVICES)
 
 // Usage (methods now require { show: true } parameter)
-await walletServicesPlugin.showWalletUi({ show: true });
-await walletServicesPlugin.showCheckout({ show: true });
-await walletServicesPlugin.showSwap({ show: true });
-await walletServicesPlugin.showWalletConnectScanner({ show: true });
+await walletServicesPlugin.showWalletUi({ show: true })
+await walletServicesPlugin.showCheckout({ show: true })
+await walletServicesPlugin.showSwap({ show: true })
+await walletServicesPlugin.showWalletConnectScanner({ show: true })
 // add-end
 ```
 
