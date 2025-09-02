@@ -1,0 +1,54 @@
+---
+title: useEnableMFA
+sidebar_label: useEnableMFA
+description: '@web3auth/modal Vue Composable useEnableMFA | Embedded Wallets'
+---
+
+Composable to enable Multi-Factor Authentication (MFA) using Web3Auth in Vue.
+
+### Import
+
+```ts
+import { useEnableMFA } from '@web3auth/modal/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useEnableMFA } from '@web3auth/modal/vue'
+
+  const { enableMFA, loading, error } = useEnableMFA()
+</script>
+
+<template>
+  <button @click="enableMFA" :disabled="loading">
+    {{ loading ? "Enabling MFA..." : "Enable MFA" }}
+  </button>
+  <div v-if="error">{{ error.message }}</div>
+</template>
+```
+
+### Return Type
+
+```ts
+import type { UseEnableMFA } from '@web3auth/modal/vue'
+```
+
+#### loading
+
+`Ref<boolean>`
+
+Whether the MFA enabling process is in progress.
+
+#### error
+
+`Ref<Web3AuthError | null>`
+
+Error that occurred during the MFA enabling process.
+
+#### enableMFA
+
+`<T>(params?: T) => Promise<void>`
+
+Function to initiate the MFA enabling process. Accepts optional parameters depending on the MFA method or configuration required by your implementation.

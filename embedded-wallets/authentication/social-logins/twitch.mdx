@@ -1,0 +1,86 @@
+---
+title: Twitch Social Login with Embedded Wallets
+sidebar_label: Twitch
+description: 'Twitch Social Login with Embedded Wallets | Embedded Wallets'
+---
+
+import TwitchToggle from '@site/static/img/w3a-dashboard/authentication-social-connections.png'
+import TwitchConnection from '@site/static/img/w3a-dashboard/twitch-connection.png'
+
+Twitch Login is a social login provider that allows users to sign in using their Twitch credentials. Web3Auth supports Twitch as a social login provider, allowing developers to offer a familiar and quick authentication method for users with Twitch accounts.
+
+To integrate Twitch with Web3Auth, developers must first create a Twitch App via the [Twitch Developer Portal](https://dev.twitch.tv/console/apps).
+
+## Create a Twitch app
+
+1. Follow Twitch's [registration instructions](https://dev.twitch.tv/docs/authentication/#registration) to (register your app)[https://dev.twitch.tv/console/apps/create].
+2. Paste the following as a Redirect URI into the "OAuth Redirect URLs" field.
+   - [https://auth.web3auth.io/auth](https://auth.web3auth.io/auth)
+
+   ![Twitch OAuth2.0 App Dashboard](/img/authentication/twitch/twitch-app.png)
+
+3. After creation of your Twitch app, click **Manage**
+
+   ![Twitch OAuth2.0 App Manage](/img/authentication/twitch/twitch-manage.png)
+
+4. Obtain the **Client ID**
+
+   ![Twitch OAuth2.0 App Manage](/img/authentication/twitch/twitch-client-id.png)
+
+## Create a Twitch Connection
+
+:::success Enable on Dashboard
+
+To use this feature, please enable `Twitch` from the Social Connections section in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+
+> By default, Web3Auth uses its own pre-configured credentials for Twitch login.
+
+:::
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={TwitchToggle}
+    style={{
+      maxWidth: '800px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Toggle Twitch Connection on Dashboard"
+  />
+</div>
+
+Follow these steps to create a Twitch connection:
+
+1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+1. Go to the `Social Connections` section.
+1. Click on the `Settings` icon near the Twitch connection.
+1. Enter the `Auth Connection ID`.
+1. Enter the `Twitch Client ID`.
+1. Finally, click on the `Add Connection` button.
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={TwitchConnection}
+    style={{
+      maxWidth: '600px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Twitch Connection"
+  />
+</div>
+
+## Usage
+
+Since, the `Twitch Connection` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+
+> Follow our [Quick Starts](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to setup the basic flow.
+
+### Login with Twitch
+
+```jsx
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.TWITCH,
+  authConnectionId: 'w3a-twitch-demo',
+})
+```

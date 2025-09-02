@@ -1,0 +1,115 @@
+---
+title: Multi Factor Authentication in PnP Unreal Engine SDK
+sidebar_label: Multi Factor Authentication
+description: 'Web3Auth PnP Unreal Engine SDK - Multi Factor Authentication | Embedded Wallets'
+---
+
+import MFAMinimumPlan from '../../_common/_scale_plan_note.mdx'
+
+The Multi Factor Authentication feature refers to the ability of the user to create a backup share (recovery phrase). This helps them login into a new device and also to recover their account if they lose their original device.
+
+You can set the mfaLevel within the `loginParams` to customize when mfa screen should be shown to user. It currently accepts 4 values:
+
+- **`default`** - Setting the mfaLevel to default will present the MFA screen to user on every third login. `mfaLevel = MFALevel.DEFAULT`
+- **`optional`** - Setting mfaLevel to optional will present the MFA screen to user on every login but user will have the option to skip it. `mfaLevel = MFALevel.OPTIONAL`
+- **`mandatory`** - Setting mfaLevel to mandatory will make it mandatory for user to setup MFA after login. `mfaLevel = MFALevel.MANDATORY`
+- **`none`** - Setting mfaLevel to none will skip the mfa setup screen totally. `mfaLevel = MFALevel.NONE`
+
+:::caution Note
+
+If you are using default verifiers, your users may have set up MFA on other dApps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dApps. This is because MFA cannot be turned off once it is enabled.
+
+:::
+
+<MFAMinimumPlan />
+
+## `MFALevel`
+
+```c
+UENUM(BlueprintType)
+enum class FMFALevel : uint8
+{
+	DEFAULT,
+	OPTIONAL,
+	MANDATORY,
+	NONE
+};
+```
+
+### Usage
+
+![Unreal Blueprint MFA Options](/img/unreal/mfa.png)
+
+## `MFASettings`
+
+:::note
+
+This is a paid feature and the minimum [pricing plan](https://web3auth.io/pricing.html) to use this SDK in a production environment is the **SCALE Plan**. You can use this feature in `sapphire_devnet` for free.
+
+:::
+
+```c
+USTRUCT(BlueprintType)
+struct FMfaSettings
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	FMfaSetting deviceShareFactor;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	FMfaSetting backUpShareFactor;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        FMfaSetting socialBackupFactor;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+        FMfaSetting passwordFactor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FMfaSetting passkeysFactor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FMfaSetting authenticatorFactor;
+
+	FMfaSettings() {};
+
+	void operator= (const FMfaSettings& other) {
+		deviceShareFactor = other.deviceShareFactor;
+		backUpShareFactor = other.backUpShareFactor;
+		socialBackupFactor = other.socialBackupFactor;
+		passwordFactor = other.passwordFactor;
+		passkeysFactor = other.passkeysFactor;
+		authenticatorFactor = other.authenticatorFactor;
+	}
+
+	bool operator==(const FMfaSettings& other) const
+    {
+    if (deviceShareFactor == other.deviceShareFactor &&
+	    backUpShareFactor == other.backUpShareFactor  &&
+	    socialBackupFactor == other.socialBackupFactor &&
+	    passwordFactor == other.passwordFactor &&
+	    passkeysFactor == other.passkeysFactor &&
+	    authenticatorFactor == other.authenticatorFactor)
+		{
+			return true;
+		}
+	return false;
+    }
+
+};
+```
+
+:::note Note
+
+- At least two factors are mandatory when setting up the mfaSettings.
+- If you set `mandatory: true` for all factors, the user must set up all four factors.
+- If you set `mandatory: false` for all factors, the user can skip setting up MFA. But at least two factors are mandatory.
+- If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can skip the optional factors. But, the user must set up at least two factors.
+- The `priority` field is used to set the order of the factors. The factor with the lowest priority will be the first factor to be set up. The factor with the highest priority will be the last factor to be set up.
+
+:::
+
+### Usage
+
+![Unreal Blueprint MFA Settings Options](/img/unreal/unreal-mfa-settings.png)

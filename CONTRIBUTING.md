@@ -79,8 +79,6 @@ To contribute changes:
    > - If you delete, rename, or move a documentation file, add a
    >   [redirect](https://vercel.com/docs/edge-network/redirects#configuration-redirects).
    > - See additional instructions for [updating the interactive API reference](#update-the-interactive-api-reference).
-   > - If the PR contains a major change to the documentation content, add an entry to the top of
-   >   the ["What's new?"](docs/whats-new.md) page.
 
 5. [Preview your changes locally](https://docs-template.consensys.net/contribute/preview) to check
    that the changes render correctly.

@@ -1,0 +1,131 @@
+---
+title: Bundler Polyfill Issues - Vite
+image: '/img/docs-meta-cards/troubleshoot-card.png'
+sidebar_label: Vite Polyfill Issues
+description: 'Bundler Polyfill Issues - Vite | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While setting up a new web3 project from scratch, you might face multiple issues with the bundler. This issue is caused because the core packages like `eccrypto` have certain dependencies, which are not present within the build environment. For rectifying this, the go-to method has been to just add the missing modules directly into the package, and edit the bundler configuration to take advantage of that.
+
+Although this method works, it increases the bundle size significantly. Causing slow loading speeds and a bad user experience. It is important to note that these modules, even while the build fails, are still present within the browser environment. Many libraries like Web3Auth are written in a way to take advantage of this fact. Hence, even if the build doesn't contain the polyfill, the library should still work as expected. However, if you are using a library that does not take advantage of this fact, you might face issues while using the library.
+
+Hence, you need to be mindful of the fact that you only require certain node polyfills to be added to your project, while testing each of its functionalities. At the same time, you need to tell the bundler to ignore the missing modules, and not include them in the build.
+
+In this guide, we have added instructions for adding the polyfills in Vite:
+
+## Install the missing modules
+
+Check for the missing libraries in your build and included packages, and accordingly polyfill them. For Web3Auth, you just need to polyfill the `buffer` and `process` libraries.
+
+```bash npm2yarn
+npm install --save-dev buffer process
+```
+
+## Adding the polyfills to your project
+
+Update the `index.html` file to include the polyfills. As shown in the code snippet below we added the `<script>` tag to include the polyfills.
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <!--focus-start-->
+    <script type="module">
+      import { Buffer } from 'buffer'
+      import process from 'process'
+      window.Buffer = Buffer
+      window.process = process
+    </script>
+    <!--focus-end-->
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+```
+
+## Update your `vite.config.js`
+
+Additional to the polyfilled modules, you need to update the `nuxt.config.js` file to define the `global` object.
+
+:::warning
+
+There might be a possibility that you might need to polyfill more libraries, in case you're using any other blockchain library alongside Web3Auth that requires them. Generally the libraries like `crypto-browserify`, `stream-browserify`, `browserify-zlib`, `assert`, `stream-http`, `https-browserify`, `os-browserify`, `url` are the ones that might be required. `crypto-browserify` and `url` being the most common polyfills.
+
+:::
+
+<Tabs
+  defaultValue="react"
+  values={[
+    { label: "React", value: "react" },
+    { label: "Vue", value: "vue" },
+  ]}
+>
+
+<TabItem value="react">
+
+```tsx
+/* eslint-disable import/no-extraneous-dependencies */
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  // alias are only to be added when absolutely necessary, these modules are already present in the browser environment
+  // resolve: {
+  // alias: {
+  // crypto: "crypto-browserify",
+  // assert: "assert",
+  // http: "stream-http",
+  // https: "https-browserify",
+  // url: "url",
+  // zlib: "browserify-zlib",
+  // stream: "stream-browserify",
+  // },
+  // },
+  define: {
+    global: 'globalThis',
+  },
+})
+```
+
+</TabItem>
+
+<TabItem value="vue">
+
+```tsx
+/* eslint-disable import/no-extraneous-dependencies */
+import vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [vue()],
+  // alias are only to be added when absolutely necessary, these modules are already present in the browser environment
+  // resolve: {
+  // alias: {
+  // crypto: "crypto-browserify",
+  // assert: "assert",
+  // http: "stream-http",
+  // https: "https-browserify",
+  // url: "url",
+  // zlib: "browserify-zlib",
+  // stream: "stream-browserify",
+  // },
+  // },
+  define: {
+    global: 'globalThis',
+  },
+})
+```
+
+</TabItem>
+</Tabs>

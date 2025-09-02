@@ -1,0 +1,25 @@
+---
+title: Logout User
+sidebar_label: logout
+description: 'Web3Auth React Native SDK - logout | Embedded Wallets'
+---
+
+Trigger the logout flow.
+
+:::info
+
+It is not advised to be used in iOS since it will trigger a system dialog that asks if users want to allow a Login operation.
+
+:::
+
+## Method
+
+`logout(): Promise<void>;`
+
+This method has no input and returns a `Promise` that resolves if the operation is successful, and rejects if the operation failed.
+
+## Usage
+
+```typescript
+await web3auth.logout()
+```

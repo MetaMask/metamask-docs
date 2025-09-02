@@ -105,5 +105,5 @@ const delegation = createDelegation({
 });
 ```
 
-For more specific or custom control, you can also [create custom caveat enforcers](../../tutorials/create-custom-caveat-enforcer.md)
+For more specific or custom control, you can also [create custom caveat enforcers](/tutorials/create-custom-caveat-enforcer)
 and add them to the caveat builder.

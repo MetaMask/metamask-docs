@@ -1,0 +1,79 @@
+---
+title: Integrate Embedded Wallets with the Avalanche (C-Chain) Blockchain
+sidebar_label: Avalanche
+hide_table_of_contents: true
+image: 'banners/avalanche.png'
+description: 'Integrate Embedded Wallets with the Avalanche (C-Chain) Blockchain | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import SEO from '@site/src/components/SEO'
+import ChainDetailsAvalanche from '../../_general-connect-blockchain/_avalanche.mdx'
+
+<SEO
+  title="Integrate Embedded Wallets with the Avalanche (C-Chain) Blockchain"
+  description="Integrate Embedded Wallets with the Avalanche (C-Chain) Blockchain | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/avalanche.png"
+  slug="/embedded-wallets/connect-blockchain/evm/avalanche"
+/>
+
+Integrate Embedded Wallets (formerly Web3Auth) seamlessly with the EVM-based Avalanche (C-Chain) blockchain. For Web SDKs, you get a MetaMask-style EIP-1193 provider compatible with ethers.js and web3.js. For Embedded Wallets Mobile SDKs (Android, iOS, React Native), the private key is available in the SDK state for direct signing and JSON-RPC calls.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
+
+## Chain Details for Avalanche
+
+<ChainDetailsAvalanche />
+
+export const Avalanche = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/connect-blockchain/evm/avalanche/web',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/connect-blockchain/evm/avalanche/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/connect-blockchain/evm/avalanche/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/connect-blockchain/evm/avalanche/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/avalanche/react-native',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/evm/avalanche/unity',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={Avalanche} />

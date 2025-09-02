@@ -1,0 +1,26 @@
+```tsx title="App.tsx"
+const loginWithFirebaseGithub = async () => {
+  try {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const githubProvider = new GithubAuthProvider();
+
+    const result = await signInWithPopup(auth, githubProvider);
+
+    const idToken = await result.user.getIdToken(true);
+
+    // focus-start
+    connectTo(WALLET_CONNECTORS.AUTH, {
+      authConnectionId: "w3a-firebase-demo",
+      authConnection: AUTH_CONNECTION.CUSTOM,
+      idToken,
+      extraLoginOptions: {
+        isUserIdCaseSensitive: false,
+      },
+    });
+    // focus-end
+  } catch (error) {
+    console.error("Firebase authentication error:", error);
+  }
+};
+```

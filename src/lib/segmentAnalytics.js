@@ -13,20 +13,16 @@ export const trackClickForSegment = ({
       ...(responseStatus && { response_status: responseStatus }),
       ...(responseMsg && { response_msg: responseMsg }),
       ...(timestamp && { timestamp: timestamp }),
-    });
+    })
   }
-};
+}
 
-export const trackInputChangeForSegment = ({
-  eventName,
-  userExperience,
-  timestamp,
-}) => {
+export const trackInputChangeForSegment = ({ eventName, userExperience, timestamp }) => {
   if (window.analytics) {
-    window.analytics.track("Input changed", {
+    window.analytics.track('Input changed', {
       ...(eventName && { event_name: eventName }),
       ...(userExperience && { user_experience: userExperience }),
       ...(timestamp && { timestamp: timestamp }),
-    });
+    })
   }
-};
+}

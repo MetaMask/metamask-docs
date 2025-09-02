@@ -1,0 +1,120 @@
+---
+title: Advanced Configuration
+sidebar_label: Overview
+description: 'Web3Auth iOS SDK - Advanced Configuration | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
+
+## Configuration Structure
+
+When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
+
+```swift
+import Web3Auth
+
+// focus-start
+web3Auth = Web3Auth(W3AInitParams(
+    clientId: "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+    network: .sapphire_mainnet, // or .sapphire_devnet
+    redirectUrl: "com.yourapp.bundleid://auth"
+))
+// focus-end
+```
+
+### `W3AInitParams`
+
+The Web3Auth Constructor takes an object with `W3AInitParams` as input.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Struct", value: "struct" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `clientId` | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `String`. |
+| `network` | Web3Auth Network: `.sapphire_mainnet`, `.sapphire_devnet`, `.mainnet`, `.cyan`, `.aqua` or `.testnet`. Mandatory field of type `Network`. |
+| `redirectUrl` | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `String`. |
+| `whiteLabel?` | WhiteLabel options for custom UI, branding, and translations. Takes `W3AWhiteLabelData` as a value. |
+| `loginConfig?` | Login config for custom verifiers. Takes `[String: W3ALoginConfig]` as a value. |
+| `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value. |
+| `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days. |
+
+</TabItem>
+
+<TabItem value="struct">
+
+```swift
+public struct W3AInitParams {
+    public let clientId: String
+    public let network: Network
+    public let redirectUrl: String
+    public let whiteLabel: W3AWhiteLabelData?
+    public let loginConfig: [String: W3ALoginConfig]?
+    public let useCoreKitKey: Bool?
+    public let chainNamespace: ChainNamespace?
+    public let mfaSettings: MfaSettings?
+    public let sessionTime: Int?
+
+    public init(
+        clientId: String,
+        network: Network,
+        redirectUrl: String,
+        whiteLabel: W3AWhiteLabelData? = nil,
+        loginConfig: [String: W3ALoginConfig]? = nil,
+        useCoreKitKey: Bool? = nil,
+        chainNamespace: ChainNamespace? = .eip155,
+        mfaSettings: MfaSettings? = nil,
+        sessionTime: Int? = 86400
+    )
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Session Management
+
+Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keychain.
+
+**Key Configuration Options:**
+
+- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
+  - Minimum: 1 second (`1`).
+  - Maximum: 30 days (`86400 * 30`).
+  - Default: 7 days (`86400 * 7`).
+
+```swift
+web3Auth = Web3Auth(W3AInitParams(
+    clientId: "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+    network: .sapphire_mainnet, // or .sapphire_devnet
+    sessionTime: 86400 * 7, // 7 days (in seconds)
+    redirectUrl: "com.yourapp.bundleid://auth"
+))
+```
+
+## Custom Authentication Methods
+
+Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication) section.
+
+## UI Customization
+
+Create a seamless brand experience by customizing the Web3Auth Login Screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel) section.
+
+## Multi-Factor Authentication (MFA)
+
+Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa) section.
+
+**Key Configuration Options:**
+
+- `mfaSettings` - Configure MFA settings for different authentication flows
+- `mfaLevel` - Control when users are prompted to set up MFA

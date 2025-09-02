@@ -1,0 +1,74 @@
+---
+title: Request Signature
+sidebar_label: request
+description: 'Web3Auth Unity SDK - request | Embedded Wallets'
+---
+
+The `request` method facilitates the use of templated transaction screens for signing transactions.
+
+Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
+
+## Parameters
+
+| Arguments | Description |
+| --- | --- |
+| `chainConfig` | Defines the chain to be used for signature. |
+| `method` | JSON RPC method name in `String`. Currently, the request method only supports the singing methods. |
+| `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api) to know more. |
+
+:::tip
+
+Additionally you can associate a `getSignResponse` function to retrieve the signature for the request.
+
+```cs
+void Start()
+{
+    web3Auth = GetComponent<Web3Auth>();
+    web3Auth.setOptions(new Web3AuthOptions()
+    {
+
+    });
+    // focus-next-line
+    web3Auth.onSignResponse += onSignResponse;
+}
+//focus-start
+private void onSignResponse(SignResponse signResponse)
+{
+    // Functions to be called after receiving sign response
+}
+//focus-end
+```
+
+:::
+
+## Usage
+
+```cs
+ public void PopupSignMessageUI() {
+    var chainConfig = new ChainConfig()
+    {
+        chainId = "0xaa36a7",
+        rpcTarget = "https://rpc.sepolia.org",
+        ticker = "ETH",
+        chainNamespace = Web3Auth.ChainNamespace.EIP155
+    };
+
+    JArray paramsArray = new JArray
+    {
+            "Hello World",
+            account.Address,
+            "Android"
+    };
+
+    web3Auth.request(chainConfig, "personal_sign", paramsArray);
+}
+
+
+private void onSignResponse(SignResponse signResponse)
+
+{
+    Debug.Log("Retrieved SignResponse: " + signResponse);
+    updateConsole("Retrieved SignResponse: " + signResponse);
+}
+
+```

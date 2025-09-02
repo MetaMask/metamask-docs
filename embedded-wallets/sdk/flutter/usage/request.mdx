@@ -1,0 +1,57 @@
+---
+title: Request signature
+sidebar_label: request
+description: 'Web3Auth Flutter SDK - request Function | Embedded Wallets'
+---
+
+The `request` method facilitates the use of templated transaction screens for signing transactions. The method will return [SignResponse](#signresponse). It can be used to sign transactions for any EVM chain and screens can be whitelabeled to your branding.
+
+Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
+
+![Request Method](/img/wallet-services/mobile-request-method.png)
+
+## Arguments
+
+| Arguments | Description |
+| --- | --- |
+| `chainConfig` | Defines the chain to be used for signature. |
+| `method` | JSON RPC method name in `String`. Currently, the request method only supports the signing methods. |
+| `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api) to know more. |
+
+## Usage
+
+```dart title="Usage"
+
+try {
+  List<dynamic> params = [];
+  // Message to be signed
+  params.add("Hello, Web3Auth from Flutter!");
+  // User's EOA address
+  params.add("<User Address in Hex>");
+
+  // focus-start
+  final response = await Web3AuthFlutter.request(
+    ChainConfig(
+      chainId: "0x1",
+      rpcTarget: "https://mainnet.infura.io/v3/$key",
+    ),
+    "personal_sign",
+    params,
+  );
+
+  log(response.toString());
+  // focus-end
+} on UserCancelledException {
+  log("User cancelled.");
+} catch(e) {
+  log("Unknown exception occurred");
+}
+```
+
+## SignResponse
+
+| Name      | Description                                                   |
+| --------- | ------------------------------------------------------------- |
+| `success` | Determines whether the request was successful or not.         |
+| `result?` | Holds the signature for the request when `success` is `true`. |
+| `error?`  | Holds the error for the request when `success` is `false`.    |

@@ -1,0 +1,74 @@
+---
+title: Integrate Embedded Wallets with the Skale Blockchain
+sidebar_label: Skale
+hide_table_of_contents: true
+
+image: 'banners/skale.png'
+description: 'Integrate Embedded Wallets with the Skale Blockchain | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import SEO from '@site/src/components/SEO'
+import ChainDetailsSkale from '../../_general-connect-blockchain/_skale.mdx'
+
+<SEO
+  title="Integrate Embedded Wallets with the Skale Blockchain"
+  description="Integrate Embedded Wallets with the Skale Blockchain | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/skale.png"
+  slug="/embedded-wallets/connect-blockchain/evm/skale"
+/>
+
+Integrate Web3Auth seamlessly with EVM-based Skale Blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+
+This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
+
+## Chain Details for Skale
+
+<ChainDetailsSkale />
+
+export const Skale = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/connect-blockchain/evm/skale/web',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/connect-blockchain/evm/skale/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/connect-blockchain/evm/skale/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/connect-blockchain/evm/skale/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/skale/react-native',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/evm/skale/unity',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={Skale} />
