@@ -120,8 +120,8 @@ See how to [use the Web3Auth SDK](#usage).
    pnpm dev
    ```
 
-You've successfully set up MetaMask SDK and Web3Auth SDK.
-See how to [use the Web3Auth SDK](#usage).
+You've successfully set up MetaMask SDK and MetaMask Embedded Wallets.
+See how to [use Embedded Wallets](#usage).
 
 ## Set up manually
 
