@@ -9,10 +9,8 @@ import TabItem from "@theme/TabItem";
 
 # Connect to MetaMask using JavaScript
 
-Get started with [MetaMask SDK](https://github.com/MetaMask/metamask-sdk) in your JavaScript dapp. You can set up the SDK in the following ways:
-
-- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a JavaScript dapp.
-- [Manual setup](#set-up-manually) - Set up MetaMask SDK in an existing dapp.
+Get started with MetaMask SDK in your JavaScript dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDK](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
@@ -34,8 +32,6 @@ Get started with [MetaMask SDK](https://github.com/MetaMask/metamask-sdk) in you
    npx degit MetaMask/metamask-sdk-examples/quickstarts/javascript metamask-javascript
    ```
 
-   > `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-
 2. Navigate into the repository:
 
    ```bash
@@ -43,16 +39,18 @@ Get started with [MetaMask SDK](https://github.com/MetaMask/metamask-sdk) in you
    ```
 
     <details>
-    <summary>GitHub clone instead of degit?</summary>
+    <summary>Degit vs. Git clone</summary>
     <div>
-    Clone the MetaMask SDK examples repository and navigate into the `quickstarts/javascript` directory:
 
-   ```bash
-   git clone https://github.com/MetaMask/metamask-sdk-examples
-   cd metamask-sdk-examples/quickstarts/javascript
-   ```
+    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
+    
+    Alternatively, you can use `git clone`, which will download the entire repository.
+    To do so, clone the MetaMask SDK examples repository and navigate into the `quickstarts/javascript` directory:
 
-   > Note: _this will download the entire repository._
+    ```bash
+    git clone https://github.com/MetaMask/metamask-sdk-examples
+    cd metamask-sdk-examples/quickstarts/javascript
+    ```
 
     </div>
     </details>
@@ -89,11 +87,11 @@ The following are examples of using the SDK in various JavaScript environments:
 <TabItem value="Web dapps">
 
 ```javascript
-import { MetaMaskSDK } from '@metamask/sdk'
+import { MetaMaskSDK } from "@metamask/sdk"
 
 const MMSDK = new MetaMaskSDK({
   dappMetadata: {
-    name: 'Example JavaScript dapp',
+    name: "Example JavaScript dapp",
     url: window.location.href,
     // iconUrl: "https://mydapp.com/icon.png" // Optional
   },
@@ -110,7 +108,7 @@ const MMSDK = new MetaMaskSDK({
   <script>
     const MMSDK = new MetaMaskSDK.MetaMaskSDK({
       dappMetadata: {
-        name: 'Example JavaScript dapp',
+        name: "Example JavaScript dapp",
         url: window.location.href,
         // iconUrl: "https://mydapp.com/icon.png" // Optional
       },
@@ -137,13 +135,13 @@ Connect to MetaMask and get the provider for RPC requests:
 const provider = MMSDK.getProvider()
 
 const accounts = await MMSDK.connect()
-console.log('Connected account:', accounts[0])
+console.log("Connected account:", accounts[0])
 
 const result = await provider.request({
-  method: 'eth_accounts',
+  method: "eth_accounts",
   params: [],
 })
-console.log('eth_accounts result:', result)
+console.log("eth_accounts result:", result)
 ```
 
 `MMSDK.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
@@ -155,7 +153,7 @@ Use `provider.request()` for arbitrary [JSON-RPC requests](/wallet/reference/jso
 | Method                                                                            | Description                                              |
 | --------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | [`connect()`](../reference/sdk-methods.md#connect)                                | Triggers wallet connection flow                          |
-| [`connectAndSign({ msg: '...' })`](../reference/sdk-methods.md#connectandsign)    | Connects and prompts user to sign a message              |
+| [`connectAndSign({ msg: "..." })`](../reference/sdk-methods.md#connectandsign)    | Connects and prompts user to sign a message              |
 | [`getProvider()`](../reference/sdk-methods.md#getprovider)                        | Returns the provider object for RPC requests             |
 | [`provider.request({ method, params })`](/wallet/reference/provider-api/#request) | Calls any Ethereum JSON‑RPC method                       |
 | [Batched RPC](../guides/batch-requests.md)                                        | Use `metamask_batch` to group multiple JSON-RPC requests |
@@ -168,7 +166,7 @@ const accounts = await MMSDK.connect()
 
 // 2. Connect and sign in one step
 const signResult = await MMSDK.connectAndSign({
-  msg: 'Sign in to Dapp',
+  msg: "Sign in to the dapp",
 })
 
 // 3. Get provider for RPC requests
@@ -176,14 +174,14 @@ const provider = MMSDK.getProvider()
 
 // 4. Make an RPC request
 const result = await provider.request({
-  method: 'eth_accounts',
+  method: "eth_accounts",
   params: [],
 })
 
 // 5. Batch multiple RPC requests
 const batchResults = await provider.request({
-  method: 'metamask_batch',
-  params: [{ method: 'eth_accounts' }, { method: 'eth_chainId' }],
+  method: "metamask_batch",
+  params: [{ method: "eth_accounts" }, { method: "eth_chainId" }],
 })
 ```
 

@@ -9,10 +9,7 @@ keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 
 Get started with MetaMask SDK and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
 You can use MetaMask SDK features directly within Dynamic SDK.
-Set up the SDKs in one of the following ways:
-
-- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Dynamic dapp.
-- [Manual setup](#set-up-manually) - Set up Dynamic SDK in an existing dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-dynamic-demo.vercel.app/" target="_blank">
@@ -35,8 +32,6 @@ Set up the SDKs in one of the following ways:
    npx degit MetaMask/metamask-sdk-examples/partners/dynamic metamask-dynamic
    ```
 
-   > `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-
 2. Navigate into the repository:
 
    ```bash
@@ -44,16 +39,18 @@ Set up the SDKs in one of the following ways:
    ```
 
     <details>
-    <summary>GitHub clone instead of degit?</summary>
+    <summary>Degit vs. Git clone</summary>
     <div>
-    Clone the MetaMask SDK examples repository and navigate into the `partners/dynamic` directory:
 
-   ```bash
-   git clone https://github.com/MetaMask/metamask-sdk-examples
-   cd metamask-sdk-examples/partners/dynamic
-   ```
+    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
+    
+    Alternatively, you can use `git clone`, which will download the entire repository.
+    To do so, clone the MetaMask SDK examples repository and navigate into the `partners/dynamic` directory:
 
-   > Note: _this will download the entire repository._
+    ```bash
+    git clone https://github.com/MetaMask/metamask-sdk-examples
+    cd metamask-sdk-examples/partners/dynamic
+    ```
 
     </div>
     </details>

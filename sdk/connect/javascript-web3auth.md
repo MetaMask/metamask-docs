@@ -1,19 +1,16 @@
 ---
-sidebar_label: Embedded Wallets
-description: Quickstart guide for using MetaMask SDK and MetaMask Embedded Wallets.
+sidebar_label: Embedded Wallets SDK
+description: Quickstart guide for using MetaMask SDK and Embedded Wallets SDK.
 toc_max_heading_level: 2
 keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
 ---
 
-# Connect to MetaMask using Embedded Wallets
+# Connect to MetaMask using Embedded Wallets SDK
 
-Get started with MetaMask SDK and [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets),
+Get started with MetaMask SDK and [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets),
 enabling users to sign in with an email or social media account.
-You can use MetaMask SDK features directly within Embedded Wallets.
-Set up the SDKs in one of the following ways:
-
-- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Web3Auth dapp.
-- [Manual setup](#set-up-manually) - Set up Web3Auth SDK in an existing dapp.
+You can use MetaMask SDK features directly within Embedded Wallets SDK.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-web3auth-demo.vercel.app/" target="_blank">
@@ -36,8 +33,6 @@ Set up the SDKs in one of the following ways:
    npx degit MetaMask/metamask-sdk-examples/partners/web3auth metamask-web3auth
    ```
 
-   > `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-
 2. Navigate into the repository:
 
    ```bash
@@ -45,16 +40,18 @@ Set up the SDKs in one of the following ways:
    ```
 
     <details>
-    <summary>GitHub clone instead of degit?</summary>
+    <summary>Degit vs. Git clone</summary>
     <div>
-    Clone the MetaMask SDK examples repository and navigate into the `partners/web3auth` directory:
 
-   ```bash
-   git clone https://github.com/MetaMask/metamask-sdk-examples
-   cd metamask-sdk-examples/partners/web3auth
-   ```
+    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
+    
+    Alternatively, you can use `git clone`, which will download the entire repository.
+    To do so, clone the MetaMask SDK examples repository and navigate into the `partners/web3auth` directory:
 
-   > Note: _this will download the entire repository._
+    ```bash
+    git clone https://github.com/MetaMask/metamask-sdk-examples
+    cd metamask-sdk-examples/partners/web3auth
+    ```
 
     </div>
     </details>

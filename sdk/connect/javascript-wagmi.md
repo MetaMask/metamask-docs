@@ -7,11 +7,8 @@ keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp, Wallet SDK]
 
 # Connect to MetaMask using JavaScript + Wagmi
 
-Get started with [MetaMask SDK](https://github.com/MetaMask/metamask-sdk) in a JavaScript and Wagmi dapp.
-You can set up the SDK in the following ways:
-
-- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Wagmi dapp.
-- [Manual setup](#set-up-manually) - Set up the SDK in an existing dapp.
+Get started with MetaMask SDK in a JavaScript and Wagmi dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDK](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-wagmi-demo.vercel.app/" target="_blank">
@@ -33,8 +30,6 @@ You can set up the SDK in the following ways:
    npx degit MetaMask/metamask-sdk-examples/quickstarts/wagmi metamask-wagmi
    ```
 
-   > `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-
 2. Navigate into the repository:
 
    ```bash
@@ -42,16 +37,18 @@ You can set up the SDK in the following ways:
    ```
 
     <details>
-    <summary>GitHub clone instead of degit?</summary>
+    <summary>Degit vs. Git clone</summary>
     <div>
-    Clone the MetaMask SDK examples repository and navigate into the `quickstarts/wagmi` directory:
 
-   ```bash
-   git clone https://github.com/MetaMask/metamask-sdk-examples
-   cd metamask-sdk-examples/quickstarts/wagmi
-   ```
+    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
+    
+    Alternatively, you can use `git clone`, which will download the entire repository.
+    To do so, clone the MetaMask SDK examples repository and navigate into the `quickstarts/wagmi` directory:
 
-   > Note: _this will download the entire repository._
+    ```bash
+    git clone https://github.com/MetaMask/metamask-sdk-examples
+    cd metamask-sdk-examples/quickstarts/wagmi
+    ```
 
     </div>
     </details>
@@ -83,10 +80,10 @@ npm install @metamask/sdk wagmi viem@2.x @tanstack/react-query
 In the root of your project, import the required dependencies:
 
 ```jsx
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { http, WagmiProvider, createConfig } from 'wagmi'
-import { mainnet, linea, lineaSepolia } from 'wagmi/chains'
-import { metaMask } from 'wagmi/connectors'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { http, WagmiProvider, createConfig } from "wagmi"
+import { mainnet, linea, lineaSepolia } from "wagmi/chains"
+import { metaMask } from "wagmi/connectors"
 ```
 
 ### 3. Configure your project
@@ -134,7 +131,7 @@ const App = () => {
 Add the wallet connect and disconnect buttons to your application:
 
 ```jsx
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useAccount, useConnect, useDisconnect } from "wagmi"
 
 export const ConnectButton = () => {
   const { address } = useAccount()
@@ -172,8 +169,8 @@ You can configure your RPC endpoints in the Wagmi configuration as follows:
 const config = createConfig({
   // ... other config options
   transports: {
-    [mainnet.id]: http('https://mainnet.infura.io/v3/<YOUR-API-KEY>'),
-    [sepolia.id]: http('https://sepolia.infura.io/v3/<YOUR-API-KEY>'),
+    [mainnet.id]: http("https://mainnet.infura.io/v3/<YOUR-API-KEY>"),
+    [sepolia.id]: http("https://sepolia.infura.io/v3/<YOUR-API-KEY>"),
   },
 })
 ```
