@@ -1,6 +1,5 @@
 ---
 description: Learn how to restrict a delegation using caveat enforcers, and the available caveat types.
-sidebar_position: 2
 toc_max_heading_level: 3
 ---
 

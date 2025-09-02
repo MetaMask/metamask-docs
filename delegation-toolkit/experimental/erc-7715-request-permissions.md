@@ -1,6 +1,5 @@
 ---
 description: Learn how to request ERC-7715 permissions.
-sidebar_position: 2
 ---
 
 import Tabs from "@theme/Tabs";

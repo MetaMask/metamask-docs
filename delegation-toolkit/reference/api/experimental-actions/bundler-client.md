@@ -1,7 +1,6 @@
 ---
 description: Bundler Client API methods reference.
 sidebar_label: Bundler Client
-sidebar_position: 1
 toc_max_heading_level: 2
 ---
 
