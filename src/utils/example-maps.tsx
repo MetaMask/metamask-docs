@@ -59,6 +59,7 @@ export interface ExamplesInterface {
   link: string
   githubLink: string
   qsLink?: string
+  guideLink?: string
 }
 
 export const tags = {
