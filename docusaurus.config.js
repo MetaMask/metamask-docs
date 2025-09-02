@@ -375,8 +375,8 @@ const config = {
       navbar: {
         logo: {
           alt: 'MetaMask logo',
-          src: '/img/metamask-logo.svg',
-          srcDark: '/img/metamask-logo-dark.svg',
+          src: 'img/metamask-logo.svg',
+          srcDark: 'img/metamask-logo-dark.svg',
           width: 150,
         },
         hideOnScroll: false,
@@ -432,8 +432,8 @@ const config = {
       footer: {
         logo: {
           alt: 'MetaMask logo',
-          src: '/img/metamask-logo.svg',
-          srcDark: '/img/metamask-logo-dark.svg',
+          src: 'img/metamask-logo.svg',
+          srcDark: 'img/metamask-logo-dark.svg',
           href: 'https://metamask.io/',
           width: 250,
         },
