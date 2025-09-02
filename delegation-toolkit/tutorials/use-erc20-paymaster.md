@@ -1,6 +1,5 @@
 ---
-description: Follow this tutorial to use ERC-20 paymaster with MetaMask Smart Accounts.
-sidebar_position: 1
+description: Follow this tutorial to use an ERC-20 paymaster with MetaMask Smart Accounts.
 ---
 
 # Use an ERC-20 paymaster
@@ -20,6 +19,9 @@ This removes the need for users to hold native tokens, allowing them to perform 
 - [Install and set up the Delegation Toolkit](../get-started/install) in your project.
 - [Configure the Delegation Toolkit](../guides/configure).
 - [Create a Hybrid smart account](../guides/smart-accounts/create-smart-account), and fund it with some Sepolia USDC to pay gas fees.
+  :::note
+  You can use [Circle's faucet](https://faucet.circle.com/) to get Sepolia USDC.
+  :::
 - [Create a Pimlico API key](https://docs.pimlico.io/guides/create-api-key#create-api-key).
 
 ## Steps
@@ -78,8 +80,8 @@ const bundlerClient = createBundlerClient({
 
 ### 4. Create a Hybrid smart account
 
-Configure a [Hybrid smart account](../guides/smart-accounts/create-smart-account.md#create-a-hybrid-smart-account), which is a flexible smart account implementation 
-that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
+Configure the same [Hybrid smart account](../guides/smart-accounts/create-smart-account.md#create-a-hybrid-smart-account) that you created and funded as a [prerequisite](#prerequisites).
+A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit";
@@ -109,7 +111,8 @@ For this tutorial, set an allowance of 10 USDC tokens.
 In a production dapp, you should first check the existing token allowance and only approve the amount required by the paymaster.
 :::
 
-Batch the approve call with other onchain actions you want to perform, and provide the `paymasterClient` from [Step 2](#2-create-a-paymaster-client) using the `paymaster` property.
+Batch the approve call with other onchain actions you want to perform using the ERC-20 paymaster.
+Pass the `paymasterClient` from [Step 2](#2-create-a-paymaster-client) to the `paymaster` property.
 
 ```typescript
 // Appropriate fee per gas must be determined for the specific bundler being used.

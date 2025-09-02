@@ -1,6 +1,5 @@
 ---
 description: Use delegations to perform executions on a smart account's behalf.
-sidebar_position: 1
 sidebar_label: Execute on a smart account's behalf
 ---
 

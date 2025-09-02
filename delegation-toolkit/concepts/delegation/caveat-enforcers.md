@@ -1,6 +1,5 @@
 ---
 description: Learn about caveat enforcers and how they restrict delegations.
-sidebar_position: 2
 ---
 
 # Caveat enforcers

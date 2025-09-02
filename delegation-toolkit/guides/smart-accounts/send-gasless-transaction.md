@@ -1,6 +1,5 @@
 ---
 description: Learn how to send a gasless transaction
-sidebar_position: 3
 ---
 
 import Tabs from "@theme/Tabs";
