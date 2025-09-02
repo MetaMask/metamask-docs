@@ -6,13 +6,13 @@ export default function SEO(props) {
 
   return (
     <Head>
-      {title ? <title>{title} | Web3Auth </title> : <title>Documentation | Web3Auth</title>}
+      {title ? <title>{title} | MetaMask </title> : <title>Documentation | MetaMask</title>}
       {description ? (
         <meta name="description" content={description} />
       ) : (
         <meta
           name="description"
-          content="Web3Auth is simple, non-custodial auth infrastructure that enables Web3 wallets and applications to provide seamless user logins for both mainstream and native Web3 users."
+          content="MetaMask is the leading self-custodial wallet. Build with the world's leading self-custodial crypto wallet through MetaMask developer documentation."
         />
       )}
 
@@ -21,36 +21,36 @@ export default function SEO(props) {
         keywords.length > 0 && (
           <meta
             name="keywords"
-            content={`web3auth, blockchain, solana, ethereum, multi party computation, ${keywords.join(', ')}`}
+            content={`metamask, wallet, blockchain, solana, ethereum, crypto, sdk, ${keywords.join(', ')}`}
           />
         )
       ) : (
         <meta
           name="keywords"
-          content="web3auth, blockchain, web3, web3.js, ethers.js, solana, ethereum, passwordless, passwordless magic link, multi party computation, tkey, torus, web3 auth, auth"
+          content="metamask, wallet, blockchain, web3, web3.js, ethers.js, solana, ethereum, crypto, sdk, snaps, dapp"
         />
       )}
 
       {/* Open Graph Meta Tags  */}
-      <meta property="og:site_name" content="Web3Auth" />
+      <meta property="og:site_name" content="MetaMask" />
       <meta property="og:type" content="website" />
       {title ? (
         <meta property="og:title" content={title} />
       ) : (
-        <meta property="og:title" content="Documentation | Web3Auth" />
+        <meta property="og:title" content="Documentation | MetaMask" />
       )}
       {description ? (
         <meta property="og:description" content={description} />
       ) : (
         <meta
           property="og:description"
-          content="Web3Auth is simple, non-custodial auth infrastructure that enables Web3 wallets and applications to provide seamless user logins for both mainstream and native Web3 users."
+          content="MetaMask is the leading self-custodial wallet. Build with the world's leading self-custodial crypto wallet through MetaMask developer documentation."
         />
       )}
       {slug ? (
-        <meta property="og:url" content={`https://web3auth.io/docs${slug}`} />
+        <meta property="og:url" content={`https://docs.metamask.io${slug}`} />
       ) : (
-        <meta property="og:url" content="https://web3auth.io/docs" />
+        <meta property="og:url" content="https://docs.metamask.io" />
       )}
 
       {image ? (
@@ -58,15 +58,15 @@ export default function SEO(props) {
       ) : (
         <meta
           property="og:image"
-          content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png"
+          content="https://docs.metamask.io/img/metamaskog.jpg"
         />
       )}
 
       {/* Twitter Meta Tags */}
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@Web3Auth" />
-      <meta name="twitter:creator" content="@Web3Auth" />
+      <meta name="twitter:site" content="@MetaMask" />
+      <meta name="twitter:creator" content="@MetaMask" />
       {/* {title ? <meta name="twitter:title" content={title} /> : <meta name="twitter:title" content="Documentation | Web3Auth" />}
       {description ? (
         <meta name="twitter:description" content={description} />
@@ -81,7 +81,7 @@ export default function SEO(props) {
       ) : (
         <meta
           name="twitter:image"
-          content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png"
+          content="https://docs.metamask.io/img/metamaskog.jpg"
         />
       )}
 
@@ -89,14 +89,14 @@ export default function SEO(props) {
       {title ? (
         <meta itemProp="name" content={title} />
       ) : (
-        <meta itemProp="name" content="Documentation | Web3Auth" />
+        <meta itemProp="name" content="Documentation | MetaMask" />
       )}
       {description ? (
         <meta itemProp="description" content={description} />
       ) : (
         <meta
           itemProp="description"
-          content="Web3Auth is simple, non-custodial auth infrastructure that enables Web3 wallets and applications to provide seamless user logins for both mainstream and native Web3 users."
+          content="MetaMask is the leading self-custodial wallet. Build with the world's leading self-custodial crypto wallet through MetaMask developer documentation."
         />
       )}
       {image ? (
@@ -104,11 +104,11 @@ export default function SEO(props) {
       ) : (
         <meta
           itemProp="image"
-          content="http://web3auth.io/docs/images/docs-meta-cards/documentation-card.png"
+          content="https://docs.metamask.io/img/metamaskog.jpg"
         />
       )}
 
-      <meta name="author" content="Web3Auth" />
+      <meta name="author" content="MetaMask" />
     </Head>
   )
 }

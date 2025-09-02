@@ -8,7 +8,7 @@ import Layout from '@theme/Layout'
 import { GuidesInterface, platformMap, productMap } from '../../utils/guides-map'
 
 import { useState, useEffect } from 'react'
-import SEO from '../../components/SEO'
+import SEO from '@site/src/components/SEO'
 import Hero from '@site/src/components/Hero/Hero'
 import Input from '@site/src/components/Input'
 import GuideCard from './GuideCard'
@@ -143,7 +143,7 @@ export default function Guides({ content = {} }: GuidesInterface) {
       <SEO
         title="Tutorials"
         description="Tutorials to integrate, customize, and build with MetaMask developer tools."
-        image={`${baseUrl}images/docs-meta-cards/guides-card.png`}
+        image={`${baseUrl}img/tutorialsog.jpg`}
         slug="/guides"
       />
 

@@ -323,7 +323,7 @@ const config = {
         {
           name: 'keywords',
           content:
-            'MetaMask, SDK, Wallet, API, Dapp, App, Connect, Delegation, Toolkit, Documentation, Smart, Account, Snaps, Infura, Services, Dashboard',
+            'MetaMask, Embedded Wallets, Quickstart, Web3 Development, SDK, Wallet Integration, API, Dapp Development, Blockchain Development, Ethereum Development, Smart Contract, Account Abstraction, Snaps, Crypto Wallet, DeFi, NFT, Infura, Services, Dashboard',
         },
         // Twitter-specific meta tags
         {
@@ -332,7 +332,7 @@ const config = {
         },
         {
           name: 'twitter:image',
-          content: 'https://docs.metamask.io/img/metamaskog.jpeg',
+          content: 'https://docs.metamask.io/img/metamaskog.jpg',
         },
         {
           name: 'twitter:image:alt',
@@ -349,7 +349,7 @@ const config = {
         // Open Graph meta tags for better social sharing
         {
           property: 'og:image',
-          content: 'https://docs.metamask.io/img/metamaskog.jpeg',
+          content: 'https://docs.metamask.io/img/metamaskog.jpg',
         },
         {
           property: 'og:image:width',
@@ -368,7 +368,7 @@ const config = {
           content: 'website',
         },
       ],
-      image: '/img/metamaskog.jpeg',
+      image: '/img/metamaskog.jpg',
       colorMode: {
         respectPrefersColorScheme: true,
       },
