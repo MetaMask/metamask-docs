@@ -1,15 +1,15 @@
 ---
-sidebar_label: Web3Auth SDK
-description: Quickstart guide for using MetaMask SDK and Web3Auth SDK.
+sidebar_label: Embedded Wallets
+description: Quickstart guide for using MetaMask SDK and MetaMask Embedded Wallets.
 toc_max_heading_level: 2
-keywords: [connect, MetaMask, Web3Auth, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
 ---
 
-# Connect to MetaMask using Web3Auth SDK
+# Connect to MetaMask using Embedded Wallets
 
-Get started with MetaMask SDK and [Web3Auth SDK](https://web3auth.io/docs/),
+Get started with MetaMask SDK and [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets),
 enabling users to sign in with an email or social media account.
-You can use MetaMask SDK features directly within Web3Auth SDK.
+You can use MetaMask SDK features directly within Embedded Wallets.
 Set up the SDKs in one of the following ways:
 
 - [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Web3Auth dapp.
@@ -26,7 +26,7 @@ Set up the SDKs in one of the following ways:
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
-- A [Web3Auth Client ID](https://web3auth.io/docs/dashboard/create-new-project#get-the-client-id).
+- A [Web3Auth Client ID](/embedded-wallets/dashboard/#get-the-client-id).
 
 ## Set up using a template
 
@@ -83,8 +83,8 @@ Set up the SDKs in one of the following ways:
    pnpm dev
    ```
 
-You've successfully set up MetaMask SDK and Web3Auth SDK.
-See how to [use the Web3Auth SDK](#usage).
+You've successfully set up MetaMask SDK and MetaMask Embedded Wallets.
+See how to [use Embedded Wallets](#usage).
 
 ## Set up manually
 

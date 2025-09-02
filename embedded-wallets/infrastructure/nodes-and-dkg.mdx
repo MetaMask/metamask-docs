@@ -13,7 +13,7 @@ The architecture consists of four parts:‌
 - A private BFT network between nodes
 - A front-end client/SDK that interacts with nodes
 
-![Architecture](/img/guides/graph-6-final.png)
+![Architecture](/img/tutorials/graph-6-final.png)
 
 A smart contract is used for node discovery. Nodes are selected, operate for a fixed period, and generate a set of keys via DKG.‌
 
@@ -67,7 +67,7 @@ The keys are assigned to a combination of `verifier` \(e.g., Google, Reddit, Dis
 
 The fundamental flow for Torus sign-in is as follows:
 
-![Standard login with OAuth2 (Google, Facebook, Apple, Reddit, Discord, Twitch)](/img/guides/login-key-assignments.png)
+![Standard login with OAuth2 (Google, Facebook, Apple, Reddit, Discord, Twitch)](/img/tutorials/login-key-assignments.png)
 
 1. Your application gets the user to sign-in via their preferred method \(OAuth / email password / passwordless / verification code\).
 2. After the user gives consent/verifies his/her email, Torus SDK will receive an ID token and assign a key to the user depending on User Verifier ID from ID Token.
