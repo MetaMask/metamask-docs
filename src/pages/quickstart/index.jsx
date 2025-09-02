@@ -761,6 +761,33 @@ export default function IntegrationBuilderPage(props) {
       <SEO
         title="MetaMask Quickstart"
         description="MetaMask Quickstart for easy quick start. Choose the right MetaMask integration for your project and start building with the world's leading self-custodial crypto wallet."
+        keywords={[
+          'metamask quickstart',
+          'web3 development',
+          'dapp development',
+          'ethereum development',
+          'blockchain development',
+          'metamask sdk',
+          'web3 tutorial',
+          'smart contract integration',
+          'crypto wallet integration',
+          'defi development',
+          'nft development',
+          'blockchain api',
+          'web3 javascript',
+          'ethereum javascript',
+          'metamask react',
+          'web3 react',
+          'blockchain tutorial',
+          'crypto development',
+          'ethereum tutorial',
+          'web3 integration',
+          'metamask integration',
+          'wallet connect',
+          'web3 authentication',
+          'blockchain wallet',
+          'ethereum wallet',
+        ]}
         image="https://docs.metamask.io/img/quickstartog.jpg"
         url="https://docs.metamask.io/quickstart"
       />
