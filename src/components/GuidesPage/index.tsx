@@ -20,8 +20,7 @@ export default function Guides({ content = {} }: GuidesInterface) {
 
   const completeGuides = Object.entries(safeContent)
     .map(([key, value]) => {
-      if (value && value.type === 'guide') return { ...value, link: `/tutorials/${key}` }
-      return null
+      return { ...value, link: `/tutorials/${key}` }
     })
     .filter(Boolean)
     .sort((a: any, b: any) => {
@@ -193,7 +192,6 @@ export default function Guides({ content = {} }: GuidesInterface) {
                 tags={item.tags || []}
                 author={item.author}
                 date={item.date}
-                type={item.type}
                 searchInput={searchInput}
                 activeTags={tags}
               />

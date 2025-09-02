@@ -20,7 +20,8 @@
   flex-basis: 32%;
   border-width: 1px;
   border-style: solid;
-  border-color: var(--ifm-background-surface-color);
+  border-color: var(--ifm-toc-border-color);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .tile:hover {
@@ -38,13 +39,13 @@
   font-weight: 500;
 }
 
-@media (width <= 996px) {
+@media (width <=996px) {
   .tile {
     flex-basis: 49%;
   }
 }
 
-@media (width <= 600px) {
+@media (width <=600px) {
   .tile {
     flex-basis: 100%;
   }

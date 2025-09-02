@@ -2,7 +2,6 @@
 title: Upgrade an MetaMask EOA to a Smart Account
 description: Upgrade an EOA to a smart account using MetaMask SDK and Wagmi.
 image: 'img/guides/guides-banners/mm-eoa-smart-account.png'
-type: guide
 tags: [metamask sdk, wagmi, EOA, smart, account, EIP 7702, EIP 5792]
 date: Aug 22, 2025
 author: MetaMask Developer Relations

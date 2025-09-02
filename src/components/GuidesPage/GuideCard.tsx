@@ -83,14 +83,7 @@ export default function GuideCard({
         )}
 
         <div className={styles.content}>
-          {type && (
-            <div className={styles.typeContainer}>
-              <Badge label={type} variant="default" />
-            </div>
-          )}
-
           <h3 className={styles.title}>{highlightSearchText(title)}</h3>
-
           <p className={styles.description}>{highlightSearchText(description)}</p>
         </div>
       </Link>

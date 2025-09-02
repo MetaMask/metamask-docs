@@ -2,7 +2,6 @@
 title: Create an Ethereum Web3 wallet in Android
 image: 'img/guides/guides-banners/android-wallet.png'
 description: Empower your Android app with a Ethereum Web3 wallet using the Web3Auth PnP SDK.
-type: guide
 tags: [embedded wallets, android, evm, kotlin, secp256k1, web3auth]
 date: May 27, 2024
 author: MetaMask Developer Relations
@@ -217,7 +216,7 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
 
 If the user is not authenticated, we can utilize the `login` method to authenticate the user. For the Wallet, we will add an Email Passwordless login. We'll create a helper function, `login` inside `MainViewModel`. The login method is pretty straightforward in Web3Auth and takes `LoginParams` as input. After successfully logging in, we'll generate and prepare the `Credentials`, important to interact with the blockchain. Along with that, we'll retrieve user info, and navigate them to `HomeScreen`.
 
-Learn more about [Web3Auth LoginParams](/embedded-wallets/sdk/android/usage#parameters).
+Learn more about [Web3Auth LoginParams](/embedded-wallets/sdk/android/usage/login#parameters).
 
 ```kotlin
 class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {

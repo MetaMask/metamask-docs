@@ -241,7 +241,16 @@ export default function IntegrationBuilderPage(props: any) {
 
     // Check on popstate (back/forward navigation)
     const handlePopState = () => {
-      checkURLAndResetIfNeeded()
+      // Always clear URL params and show overlay on back button
+      const currentUrl = new URL(getWindowLocation())
+      currentUrl.search = '' // Clear all parameters
+      // eslint-disable-next-line no-restricted-globals
+      history.replaceState({}, '', currentUrl.toString())
+
+      // Reset to overlay state
+      setShowNavigationOverlay(true)
+      setBuilderOptions({})
+      setStepIndex(0)
     }
 
     // Check on pushstate/replacestate (programmatic navigation)

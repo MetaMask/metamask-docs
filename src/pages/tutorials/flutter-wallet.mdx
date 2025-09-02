@@ -2,7 +2,6 @@
 title: Create a Chain Agnostic Web3 wallet in Flutter
 image: 'img/guides/guides-banners/flutter-wallet.png'
 description: Empower your Flutter app with a Chain Agnostic Web3 wallet using the Web3Auth PnP SDK.
-type: guide
 tags: [embedded wallets, flutter, andriod, ios, evm, solana, web3auth]
 date: April 22, 2024
 author: MetaMask Developer Relations
@@ -151,7 +150,7 @@ class _MainAppState extends State<MainApp> {
 
 If the user is not authenticated, you should utilize the `login` method. For the Wallet, we will add two login options, Google, and Email Passwordless login. In Web3Auth, you can choose between a Single Page Authentication flow or a Regular Web Application flow. For this guide, we'll be using a Single Page Authentication flow. We'll create a helper function, `_login` inside `LoginScreen`. The login method is pretty straightforward in Web3Auth and takes `LoginParams` as input. After successfully logging in, we'll navigate the user to `HomeScreen`.
 
-Learn more about [Web3Auth LoginParams](/embedded-wallets/sdk/flutter/usage#arguments).
+Learn more about [Web3Auth LoginParams](/embedded-wallets/sdk/flutter/usage/login#parameters).
 
 ```dart
 class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
