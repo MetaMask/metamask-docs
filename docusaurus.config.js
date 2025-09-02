@@ -31,7 +31,7 @@ const config = {
   baseUrl, // overwritten in github action for staging / latest
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: '/img/favicons/favicon-96x96.png',
+  favicon: 'img/favicons/favicon-96x96.png',
 
   headTags: [
     {
@@ -40,7 +40,7 @@ const config = {
         rel: 'icon',
         type: 'image/png',
         sizes: '96x96',
-        href: '/img/favicons/favicon-96x96.png',
+        href: 'img/favicons/favicon-96x96.png',
       },
     },
     {
@@ -49,7 +49,7 @@ const config = {
         rel: 'icon',
         type: 'image/png',
         sizes: '192x192',
-        href: '/img/favicons/web-app-manifest-192x192.png',
+        href: 'img/favicons/web-app-manifest-192x192.png',
       },
     },
     {
@@ -58,7 +58,7 @@ const config = {
         rel: 'icon',
         type: 'image/png',
         sizes: '512x512',
-        href: '/img/favicons/web-app-manifest-512x512.png',
+        href: 'img/favicons/web-app-manifest-512x512.png',
       },
     },
     {
@@ -66,7 +66,7 @@ const config = {
       attributes: {
         rel: 'apple-touch-icon',
         sizes: '180x180',
-        href: '/img/favicons/apple-touch-icon.png',
+        href: 'img/favicons/apple-touch-icon.png',
       },
     },
     {
@@ -332,7 +332,7 @@ const config = {
         },
         {
           name: 'twitter:image',
-          content: '/img/metamaskog.jpg',
+          content: 'https://docs.metamask.io/img/metamaskog.jpg',
         },
         {
           name: 'twitter:image:alt',
@@ -349,7 +349,7 @@ const config = {
         // Open Graph meta tags for better social sharing
         {
           property: 'og:image',
-          content: '/img/metamaskog.jpg',
+          content: 'https://docs.metamask.io/img/metamaskog.jpg',
         },
         {
           property: 'og:image:width',
