@@ -26,7 +26,7 @@ Set up the SDKs in one of the following ways:
 - A package manager installed.
   The examples in this quickstart use [pnpm](https://pnpm.io/installation).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
-- A [Web3Auth Client ID](https://docs.metamask.io/embedded-wallets/dashboard/#get-the-client-id).
+- A [Web3Auth Client ID](/embedded-wallets/dashboard/#get-the-client-id).
 
 ## Set up using the CLI
 
