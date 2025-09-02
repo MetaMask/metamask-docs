@@ -7,9 +7,9 @@ keywords: [connect, MetaMask, Web3Auth, SDK, dapp]
 
 # Connect to MetaMask using Embedded Wallets
 
-Get started with MetaMask SDK and [Web3Auth SDK](https://docs.metamask.io/embedded-wallets/),
+Get started with MetaMask SDK and [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets),
 enabling users to sign in with an email or social media account.
-You can use MetaMask SDK features directly within Web3Auth SDK.
+You can use MetaMask SDK features directly within Embedded Wallets.
 Set up the SDKs in one of the following ways:
 
 - [SDK CLI](#set-up-using-the-cli) - Use the CLI to scaffold a Next.js and Web3Auth dapp.
