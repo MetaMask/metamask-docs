@@ -5,7 +5,7 @@ toc_max_heading_level: 2
 keywords: [connect, MetaMask, Web3Auth, SDK, dapp]
 ---
 
-# Connect to MetaMask using Web3Auth SDK
+# Connect to MetaMask using Embedded Wallets
 
 Get started with MetaMask SDK and [Web3Auth SDK](https://docs.metamask.io/embedded-wallets/),
 enabling users to sign in with an email or social media account.
