@@ -79,8 +79,8 @@ Set up the SDKs in one of the following ways:
    pnpm run dev
    ```
 
-You've successfully set up MetaMask SDK and Web3Auth SDK.
-See how to [use the Web3Auth SDK](#usage).
+You've successfully set up MetaMask SDK and MetaMask Embedded Wallets.
+See how to [use Embedded Wallets](#usage).
 
 ## Set up using a template
 
