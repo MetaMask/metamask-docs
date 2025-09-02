@@ -1,6 +1,6 @@
 ---
 title: SDK Errors & Warnings
-image: '/img/docs-meta-cards/troubleshoot-card.png'
+image: 'img/metamaskog.jpg'
 sidebar_label: SDK Errors & Warnings
 description: 'SDK Errors & Warnings | Embedded Wallets'
 ---
@@ -11,65 +11,65 @@ description: 'SDK Errors & Warnings | Embedded Wallets'
 
 ### General Errors
 
-| Code | Message | Description |
-| --- | --- | --- |
-| `TPC_NOT_SUPPORTED` | Unable to detect device share. | This may be due to browser security settings. Adjust your current browser settings from 'Strict' to 'Moderate'. Alternatively, login via a Chrome Browser. |
-| `NETWORK_RESPONSE_FAILED` | Unable to detect login share from the Web3Auth Network. | This may be due to slow internet connection. Check your internet speed and try again. |
-| `DUPLICATE_TOKEN_FOUND` | Unable to verify. | This may be due to invalid login. Kindly log out of your social login provider on your current browser and login again. |
-| `BUSY_NETWORK` | Unable to connect to Web3Auth Network. | The Network may be congested. Please try again in 5 minutes. |
-| `KEY_ASSIGN_FAILED` | A key has not been assigned to you. | This might be due to communication with the Web3Auth Network Nodes. Kindly relogin to try again. If problem persists, please Contact Support. |
-| `VERIFIER_NOT_SUPPORTED` | Verifier not supported. | Kindly ensure you have a live verifier on the right network (Testnet/Mainnet). Set up / Check verifier status here: https://dashboard.web3auth.io |
-| `DEFAULT` | There seems to be some bug in the code. | Please contact support to fix this. |
+| Code                      | Message                                                 | Description                                                                                                                                                |
+| ------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `TPC_NOT_SUPPORTED`       | Unable to detect device share.                          | This may be due to browser security settings. Adjust your current browser settings from 'Strict' to 'Moderate'. Alternatively, login via a Chrome Browser. |
+| `NETWORK_RESPONSE_FAILED` | Unable to detect login share from the Web3Auth Network. | This may be due to slow internet connection. Check your internet speed and try again.                                                                      |
+| `DUPLICATE_TOKEN_FOUND`   | Unable to verify.                                       | This may be due to invalid login. Kindly log out of your social login provider on your current browser and login again.                                    |
+| `BUSY_NETWORK`            | Unable to connect to Web3Auth Network.                  | The Network may be congested. Please try again in 5 minutes.                                                                                               |
+| `KEY_ASSIGN_FAILED`       | A key has not been assigned to you.                     | This might be due to communication with the Web3Auth Network Nodes. Kindly relogin to try again. If problem persists, please Contact Support.              |
+| `VERIFIER_NOT_SUPPORTED`  | Verifier not supported.                                 | Kindly ensure you have a live verifier on the right network (Testnet/Mainnet). Set up / Check verifier status here: https://dashboard.web3auth.io          |
+| `DEFAULT`                 | There seems to be some bug in the code.                 | Please contact support to fix this.                                                                                                                        |
 
 ### Initialization Errors
 
-| Code | Message | Description |
-| --- | --- | --- |
-| `5001` | Wallet is not found | Error occurred, when there's no wallet found |
-| `5002` | Wallet is not installed | Error occurred, when the requested wallet is not installed |
-| `5003` | Wallet is not ready yet | Error occurred, when the wallet is not ready |
-| `5004` | Wallet window is blocked | Error occurred, when the wallet window is blocked |
-| `5005` | Wallet window has been closed by the user | Error occurred, when the wallet window is closed by the user |
-| `5006` | Incompatible chain namespace provided | Error occurred, when the incompatible chainNamespace was passed |
-| `5007` | Adapter has already been included | Error occurred, when an already included adapter is being included again |
-| `5008` | Invalid provider Config | Error occurred, when an invalid provider configs are being used |
-| `5009` | Provider is not ready yet | Error occurred, when the provider is not ready and trying to use it |
-| `5010` | Failed to connect with rpc url | Error occurred, when trying to connect the wallet with the rpc url |
-| `5011` | Invalid params passed in | Error occurred, when an invalid parameter was passed |
-| `5013` | Invalid network provided | Error occurred, when an invalid network was provided during initialization |
+| Code   | Message                                   | Description                                                                |
+| ------ | ----------------------------------------- | -------------------------------------------------------------------------- |
+| `5001` | Wallet is not found                       | Error occurred, when there's no wallet found                               |
+| `5002` | Wallet is not installed                   | Error occurred, when the requested wallet is not installed                 |
+| `5003` | Wallet is not ready yet                   | Error occurred, when the wallet is not ready                               |
+| `5004` | Wallet window is blocked                  | Error occurred, when the wallet window is blocked                          |
+| `5005` | Wallet window has been closed by the user | Error occurred, when the wallet window is closed by the user               |
+| `5006` | Incompatible chain namespace provided     | Error occurred, when the incompatible chainNamespace was passed            |
+| `5007` | Adapter has already been included         | Error occurred, when an already included adapter is being included again   |
+| `5008` | Invalid provider Config                   | Error occurred, when an invalid provider configs are being used            |
+| `5009` | Provider is not ready yet                 | Error occurred, when the provider is not ready and trying to use it        |
+| `5010` | Failed to connect with rpc url            | Error occurred, when trying to connect the wallet with the rpc url         |
+| `5011` | Invalid params passed in                  | Error occurred, when an invalid parameter was passed                       |
+| `5013` | Invalid network provided                  | Error occurred, when an invalid network was provided during initialization |
 
 ### Login Errors
 
-| Code | Message | Description |
-| --- | --- | --- |
-| `5111` | Failed to connect with wallet | Upon login, the wallet is unable to connect |
-| `5112` | Failed to disconnect from wallet | Upon log out, the wallet is unable to disconnect |
-| `5113` | Wallet is not connected | Throws this error when trying to use a logged out wallet |
+| Code   | Message                                  | Description                                                |
+| ------ | ---------------------------------------- | ---------------------------------------------------------- |
+| `5111` | Failed to connect with wallet            | Upon login, the wallet is unable to connect                |
+| `5112` | Failed to disconnect from wallet         | Upon log out, the wallet is unable to disconnect           |
+| `5113` | Wallet is not connected                  | Throws this error when trying to use a logged out wallet   |
 | `5114` | Wallet popup has been closed by the user | Throws this error when the user has closed the Login Modal |
 
 ### JSON RPC Errors
 
-| Code | Message | Description |
-| --- | --- | --- |
-| -32700 | `Parse Error` | Invalid JSON was received by the server. An error occurred on the server while parsing the JSON text. |
-| -32600 | `Invalid Request` | The JSON sent is not a valid Request object. |
-| -32601 | `Method Not Found` | The method does not exist / is not available. |
-| -32602 | `Invalid Params` | Invalid method parameter(s). |
-| -32603 | `Internal Error` | Internal JSON-RPC error. These can manifest as different generic issues (i.e.: attempting to access a protected endpoint before the user is logged in). |
-| -32000 to -32099 | `Server Error` | Reserved for implementation-defined server-errors. |
+| Code             | Message            | Description                                                                                                                                             |
+| ---------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -32700           | `Parse Error`      | Invalid JSON was received by the server. An error occurred on the server while parsing the JSON text.                                                   |
+| -32600           | `Invalid Request`  | The JSON sent is not a valid Request object.                                                                                                            |
+| -32601           | `Method Not Found` | The method does not exist / is not available.                                                                                                           |
+| -32602           | `Invalid Params`   | Invalid method parameter(s).                                                                                                                            |
+| -32603           | `Internal Error`   | Internal JSON-RPC error. These can manifest as different generic issues (i.e.: attempting to access a protected endpoint before the user is logged in). |
+| -32000 to -32099 | `Server Error`     | Reserved for implementation-defined server-errors.                                                                                                      |
 
 ## Torus EVM & Solana Wallet Plugin Errors
 
-| Code | Message |
-| --- | --- |
-| `5210` | Torus Wallet Plugin is not initialized. |
+| Code   | Message                                                                                                                  |
+| ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `5210` | Torus Wallet Plugin is not initialized.                                                                                  |
 | `5211` | Web3Auth is connected to unsupported adapter. Torus wallet connector plugin requires web3auth connected to auth adapter. |
-| `5212` | Provider is required. |
-| `5213` | Web3Auth instance is required while initialization. |
-| `5214` | Web3Auth is not connected. |
-| `5215` | UserInfo is required. |
-| `5216` | Plugin is already initialized. |
-| `5217` | Torus wallet instance is not set. |
+| `5212` | Provider is required.                                                                                                    |
+| `5213` | Web3Auth instance is required while initialization.                                                                      |
+| `5214` | Web3Auth is not connected.                                                                                               |
+| `5215` | UserInfo is required.                                                                                                    |
+| `5216` | Plugin is already initialized.                                                                                           |
+| `5217` | Torus wallet instance is not set.                                                                                        |
 
 ## Web3Auth Node SDK
 
@@ -77,25 +77,25 @@ description: 'SDK Errors & Warnings | Embedded Wallets'
 
 ### Constructor Errors
 
-| Message | Description |
-| --- | --- |
-| `chainNamespace is required` | chainNamespace is required for EVM and Solana Chains |
-| `Please provide a valid clientId in constructor` | Invalid clientId was passed in the constructor. |
-| `chainId is required for non-OTHER chainNamespace` | chainId is required for EVM and Solana Chains |
-| `rpcTarget is required for non-OTHER chainNamespace` | rpcTarget is required for EVM and Solana Chains |
+| Message                                              | Description                                          |
+| ---------------------------------------------------- | ---------------------------------------------------- |
+| `chainNamespace is required`                         | chainNamespace is required for EVM and Solana Chains |
+| `Please provide a valid clientId in constructor`     | Invalid clientId was passed in the constructor.      |
+| `chainId is required for non-OTHER chainNamespace`   | chainId is required for EVM and Solana Chains        |
+| `rpcTarget is required for non-OTHER chainNamespace` | rpcTarget is required for EVM and Solana Chains      |
 
 ### Initialization Errors
 
-| Message | Description |
-| --- | --- |
-| `chainConfig is required for Solana in constructor ` | When initializing, chainConfig for Solana needs to be passed, else will throw this error |
-| `chainConfig is required for EVM chain in constructor` | When initializing, chainConfig for EVM Chains needs to be passed, else will throw this error |
-| `Invalid chainNamespace: ${this.currentChainNamespace} found while connecting to wallet` | When initializing, unsupported chainConfig was passed |
+| Message                                                                                  | Description                                                                                  |
+| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `chainConfig is required for Solana in constructor `                                     | When initializing, chainConfig for Solana needs to be passed, else will throw this error     |
+| `chainConfig is required for EVM chain in constructor`                                   | When initializing, chainConfig for EVM Chains needs to be passed, else will throw this error |
+| `Invalid chainNamespace: ${this.currentChainNamespace} found while connecting to wallet` | When initializing, unsupported chainConfig was passed                                        |
 
 ### Login Errors
 
-| Message | Description |
-| --- | --- |
+| Message                                                                                      | Description                                                                                   |
+| -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `User has already enabled mfa, please use the @web3auth/web3auth-web sdk for login with mfa` | A user has enabled 2FA, `@web3auth/node-sdk` only works for a users who have not enabled MFA. |
 
 ### Other Errors
@@ -110,31 +110,31 @@ Some other errors could be found during `@web3auth/node-sdk` implementations:
 
 ## Web3Auth Infrastructure Errors
 
-| Code | Message |
-| --- | --- |
-| `1001` | Unable to delete service provider share |
-| `1002` | Wrong share index |
-| `1003` | Unable to updateSDK |
-| `1101` | metadata not found, SDK likely not initialized |
-| `1102` | getMetadata errored |
-| `1103` | setMetadata errored |
-| `1104` | previouslyFetchedCloudMetadata provided in initialization is outdated |
+| Code   | Message                                                                                                         |
+| ------ | --------------------------------------------------------------------------------------------------------------- |
+| `1001` | Unable to delete service provider share                                                                         |
+| `1002` | Wrong share index                                                                                               |
+| `1003` | Unable to updateSDK                                                                                             |
+| `1101` | metadata not found, SDK likely not initialized                                                                  |
+| `1102` | getMetadata errored                                                                                             |
+| `1103` | setMetadata errored                                                                                             |
+| `1104` | previouslyFetchedCloudMetadata provided in initialization is outdated                                           |
 | `1105` | previouslyFetchedCloudMetadata.nonce should never be higher than the latestShareDetails, please contact support |
-| `1201` | Invalid tkeyStore |
-| `1202` | Encryption failed |
-| `1203` | Decryption failed |
-| `1301` | Private key not available. Please reconstruct key first |
-| `1302` | Unable to reconstruct |
-| `1303` | reconstructed key is not pub key |
-| `1304` | Share found in unexpected polynomial |
-| `1305` | Input is not supported |
-| `1306` | no encrypted share store for share exists |
-| `1307` | Share doesn't exist |
-| `1308` | Share was deleted |
-| `1401` | Unable to acquire lock |
-| `1402` | Unable to release lock |
-| `1501` | privkey unavailable |
-| `1502` | metadata pubkey unavailable |
-| `1503` | getAuthMetadata errored |
-| `1504` | setAuthMetadata errored |
-| `1601` | delete1OutOf1 requires manualSync=true |
+| `1201` | Invalid tkeyStore                                                                                               |
+| `1202` | Encryption failed                                                                                               |
+| `1203` | Decryption failed                                                                                               |
+| `1301` | Private key not available. Please reconstruct key first                                                         |
+| `1302` | Unable to reconstruct                                                                                           |
+| `1303` | reconstructed key is not pub key                                                                                |
+| `1304` | Share found in unexpected polynomial                                                                            |
+| `1305` | Input is not supported                                                                                          |
+| `1306` | no encrypted share store for share exists                                                                       |
+| `1307` | Share doesn't exist                                                                                             |
+| `1308` | Share was deleted                                                                                               |
+| `1401` | Unable to acquire lock                                                                                          |
+| `1402` | Unable to release lock                                                                                          |
+| `1501` | privkey unavailable                                                                                             |
+| `1502` | metadata pubkey unavailable                                                                                     |
+| `1503` | getAuthMetadata errored                                                                                         |
+| `1504` | setAuthMetadata errored                                                                                         |
+| `1601` | delete1OutOf1 requires manualSync=true                                                                          |

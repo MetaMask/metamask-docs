@@ -7,11 +7,11 @@ import Layout from '@theme/Layout'
 import MDXComponents from '@theme/MDXComponents'
 import classNames from 'classnames'
 import copyToClipboard from 'copy-to-clipboard'
-import { UIEvent, useEffect, useMemo, useState, useRef, useCallback } from 'react'
+import { useEffect, useMemo, useState, useRef, useCallback } from 'react'
 import MoonLoader from 'react-spinners/BeatLoader'
 import React from 'react'
 
-import SEO from '../../components/SEO'
+import SEO from '@site/src/components/SEO'
 import IntegrationBuilderCodeView from '../../theme/IntegrationBuilderCodeView'
 import builder from './builder'
 import styles from './styles.module.css'
@@ -58,7 +58,7 @@ const getDefaultBuilderOptions = () => {
 
   return { ...defaultOpts, ...urlOpts }
 }
-const getURLFromBuilderOptions = (opts: Record<string, string>, stepIndex): string => {
+const getURLFromBuilderOptions = (opts, stepIndex) => {
   const url = new URL(getWindowLocation())
   // Clear all existing parameters
   url.search = ''
@@ -73,17 +73,8 @@ const getURLFromBuilderOptions = (opts: Record<string, string>, stepIndex): stri
   return url.toString()
 }
 
-interface NavigationFlowProps {
-  onSelect: (product: string) => void
-}
-
 // Add new component for step navigation menu
-const StepNavigationMenu: React.FC<{
-  steps: any[]
-  currentStepIndex: number
-  onStepChange: (index: number) => void
-  scrollToStep: (stepElementId: string) => void
-}> = ({ steps, currentStepIndex, onStepChange, scrollToStep }) => {
+const StepNavigationMenu = ({ steps, currentStepIndex, onStepChange, scrollToStep }) => {
   return (
     <div className={styles.stepNavigationMenu}>
       <div className={styles.stepMenuList}>
@@ -109,8 +100,6 @@ const StepNavigationMenu: React.FC<{
 async function loadFilesDirectly() {
   try {
     // Use dynamic import to load build-time generated files
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore - This file is generated at build time by Docusaurus
     const filesModule = await import(
       '../../../.docusaurus/docusaurus-plugin-virtual-files/default/files.json'
     )
@@ -121,7 +110,7 @@ async function loadFilesDirectly() {
   }
 }
 
-export default function IntegrationBuilderPage(props: any) {
+export default function IntegrationBuilderPage(props) {
   // Try different ways to access files from component props
   let files = {}
 
@@ -182,22 +171,22 @@ export default function IntegrationBuilderPage(props: any) {
   const finalFiles = Object.keys(files).length > 0 ? files : fallbackFiles
 
   // Always check URL params dynamically instead of caching at init
-  const [showNavigationOverlay, setShowNavigationOverlay] = useState<boolean>(false)
-  const [builderOptions, setBuilderOptions] = useState<Record<string, string>>({})
-  const [isLinkCopied, setLinkCopied] = useState<boolean>(false)
-  const [IBCountdown, setIBCountdown] = useState<number>(10)
-  const [builderView, setBuilderView] = useState<boolean>(true)
-  const [abortCountdown, setAbortCountdown] = useState<boolean>(false)
-  const [showPreviewModal, setShowPreviewModal] = useState<boolean>(false)
+  const [showNavigationOverlay, setShowNavigationOverlay] = useState(false)
+  const [builderOptions, setBuilderOptions] = useState({})
+  const [isLinkCopied, setLinkCopied] = useState(false)
+  const [IBCountdown, setIBCountdown] = useState(10)
+  const [builderView, setBuilderView] = useState(true)
+  const [abortCountdown, setAbortCountdown] = useState(false)
+  const [showPreviewModal, setShowPreviewModal] = useState(false)
   const url = new URL(getWindowLocation())
   const [stepIndex, setStepIndex] = useState(
     // Always start at step 0 when showing navigation overlay
     hasRelevantURLParams() ? parseInt(url.searchParams.get('stepIndex') || '0', 10) : 0
   )
-  const [loading, setLoading] = useState<boolean>(false)
-  const [initialLoadComplete, setInitialLoadComplete] = useState<boolean>(false)
-  const [isManualNavigation, setIsManualNavigation] = useState<boolean>(false)
-  const [isInitializing, setIsInitializing] = useState<boolean>(true)
+  const [loading, setLoading] = useState(false)
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false)
+  const [isManualNavigation, setIsManualNavigation] = useState(false)
+  const [isInitializing, setIsInitializing] = useState(true)
 
   // Check URL params and set initial state
   useEffect(() => {
@@ -311,8 +300,8 @@ export default function IntegrationBuilderPage(props: any) {
   }, [showNavigationOverlay])
 
   // Handle navigation overlay selection
-  const handleNavigationSelect = (options: { product: string; walletAggregatorOnly?: string }) => {
-    const newBuilderOptions: Record<string, string> = {
+  const handleNavigationSelect = options => {
+    const newBuilderOptions = {
       product: options.product,
     }
 
@@ -358,7 +347,7 @@ export default function IntegrationBuilderPage(props: any) {
     return result
   }, [builderOptions, finalFiles, stepIndex])
   const [selectedFilename, setSelectedFilename] = useState(integration.filenames[0] || '')
-  const [activeTab, setActiveTab] = useState<'media' | 'code'>('media')
+  const [activeTab, setActiveTab] = useState('media')
 
   const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
   const ref = useRef(null)
@@ -382,7 +371,7 @@ export default function IntegrationBuilderPage(props: any) {
   }, [stepIndex, steps])
 
   // Navigation handlers with smooth scrolling to exact top
-  const scrollToStep = useCallback((stepElementId: string) => {
+  const scrollToStep = useCallback(stepElementId => {
     const stepsContainer = document.getElementById('steps-container')
     const targetStepElement = document.getElementById(stepElementId)
 
@@ -397,11 +386,11 @@ export default function IntegrationBuilderPage(props: any) {
       const duration = Math.min(400, Math.abs(distance) * 0.5) // Quick, responsive timing
       const startTime = performance.now()
 
-      const easeOutCubic = (t: number): number => {
+      const easeOutCubic = t => {
         return 1 - Math.pow(1 - t, 3)
       }
 
-      const animateScroll = (currentTime: number) => {
+      const animateScroll = currentTime => {
         const elapsed = currentTime - startTime
         const progress = Math.min(elapsed / duration, 1)
         const easedProgress = easeOutCubic(progress)
@@ -418,7 +407,7 @@ export default function IntegrationBuilderPage(props: any) {
   }, [])
 
   const onChangeStep = useCallback(
-    (index: number) => {
+    index => {
       if (index >= steps.length) {
         // eslint-disable-next-line no-param-reassign
         index = steps.length - 1
@@ -526,7 +515,7 @@ export default function IntegrationBuilderPage(props: any) {
       }
     }
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = event => {
       // Only handle keyboard navigation when not in an input field
       if (
         event.target instanceof HTMLInputElement ||
@@ -567,10 +556,10 @@ export default function IntegrationBuilderPage(props: any) {
     }
   }, [stepIndex, steps.length, onChangeStep, handlePreviousStep, handleNextStep])
 
-  const onScrollLeft = (e: UIEvent<HTMLDivElement>) => {
+  const onScrollLeft = e => {
     if (!initialLoadComplete) return
 
-    const el = e.target as HTMLDivElement
+    const el = e.target
     const stepEls = el.getElementsByClassName(styles.stepContainer)
     const containerHeight = el.clientHeight
     const scrollTop = el.scrollTop
@@ -589,7 +578,7 @@ export default function IntegrationBuilderPage(props: any) {
     } else {
       // Otherwise, find the element closest to center
       for (let i = 0; i < stepEls.length; i += 1) {
-        const stepEl = stepEls.item(i) as HTMLDivElement
+        const stepEl = stepEls.item(i)
         const elementCenter = stepEl.offsetTop + stepEl.offsetHeight / 2
         const distance = Math.abs(viewportCenter - elementCenter)
 
@@ -606,8 +595,8 @@ export default function IntegrationBuilderPage(props: any) {
     }
   }
 
-  // const onChangeOptionValue = (optionKey: string, event: ChangeEvent<HTMLInputElement>) => {
-  //   const el = event.target as HTMLInputElement;
+  // const onChangeOptionValue = (optionKey, event) => {
+  //   const el = event.target;
   //   const finalOptionValue = el.checked ? YES : NO;
 
   //   setBuilderOptions({
@@ -616,7 +605,7 @@ export default function IntegrationBuilderPage(props: any) {
   //   });
   // };
 
-  const onChangeDropdown = (optionKey: string, optionValue: string) => {
+  const onChangeDropdown = (optionKey, optionValue) => {
     setBuilderOptions({
       ...builderOptions,
       [optionKey]: optionValue,
@@ -627,7 +616,7 @@ export default function IntegrationBuilderPage(props: any) {
   const toggleBuilderView = async () => {
     if (builderView) {
       setBuilderView(false)
-      const element = ref.current as HTMLElement | null
+      const element = ref.current
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
       }
@@ -636,7 +625,7 @@ export default function IntegrationBuilderPage(props: any) {
     }
   }
 
-  const togglePreviewModal = (link?: string) => {
+  const togglePreviewModal = link => {
     if (showPreviewModal) {
       setShowPreviewModal(false)
     } else {
@@ -685,7 +674,7 @@ export default function IntegrationBuilderPage(props: any) {
     if (stepIndex > 0 && steps && steps[stepIndex]) {
       const stepElements = document.getElementsByClassName(styles.stepContainer)
       if (stepElements && stepElements.length > stepIndex) {
-        const element = stepElements[stepIndex] as HTMLElement
+        const element = stepElements[stepIndex]
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' })
 
@@ -767,13 +756,40 @@ export default function IntegrationBuilderPage(props: any) {
 
   return (
     <Layout
-      title="Integration Builder"
-      description="Web3Auth is simple, non-custodial auth infrastructure that enables Web3 wallets and applications to provide seamless user logins for both mainstream and native Web3 users.">
+      title="MetaMask Quickstart"
+      description="MetaMask Quickstart - Choose the right MetaMask integration for your project. Build with the world's leading self-custodial crypto wallet.">
       <SEO
-        title="Integration Builder"
-        description="Web3Auth Integration Builder for easy quick start. Web3Auth is simple, non-custodial auth infrastructure that enables Web3 wallets and applications to provide seamless user logins for both mainstream and native Web3 users."
-        image="https://web3auth.io/docs/images/docs-meta-cards/integration-builder-card.png"
-        url="https://web3auth.io/docs/quick-start"
+        title="MetaMask Quickstart"
+        description="MetaMask Quickstart for easy quick start. Choose the right MetaMask integration for your project and start building with the world's leading self-custodial crypto wallet."
+        keywords={[
+          'metamask quickstart',
+          'web3 development',
+          'dapp development',
+          'ethereum development',
+          'blockchain development',
+          'metamask sdk',
+          'web3 tutorial',
+          'smart contract integration',
+          'crypto wallet integration',
+          'defi development',
+          'nft development',
+          'blockchain api',
+          'web3 javascript',
+          'ethereum javascript',
+          'metamask react',
+          'web3 react',
+          'blockchain tutorial',
+          'crypto development',
+          'ethereum tutorial',
+          'web3 integration',
+          'metamask integration',
+          'wallet connect',
+          'web3 authentication',
+          'blockchain wallet',
+          'ethereum wallet',
+        ]}
+        image="https://docs.metamask.io/img/quickstartog.jpg"
+        url="https://docs.metamask.io/quickstart"
       />
       <div className={styles.container} style={{ position: 'relative' }}>
         {/* Top Control Pane */}
@@ -969,7 +985,7 @@ export default function IntegrationBuilderPage(props: any) {
                             : undefined
                         }
                         selectedFilename={selectedFilename}
-                        onClickFilename={(filename: string) => setSelectedFilename(filename)}
+                        onClickFilename={filename => setSelectedFilename(filename)}
                       />
                     </div>
                   )}
@@ -986,7 +1002,7 @@ export default function IntegrationBuilderPage(props: any) {
                     : undefined
                 }
                 selectedFilename={selectedFilename}
-                onClickFilename={(filename: string) => setSelectedFilename(filename)}
+                onClickFilename={filename => setSelectedFilename(filename)}
               />
             )}
           </div>

@@ -3,6 +3,7 @@ import Hero from '@site/src/components/Hero/Hero'
 import CardSection from '@site/src/components/CardSection'
 import CallToAction from '@site/src/components/CallToAction/CallToAction'
 import SectionIntro from '@site/src/components/SectionIntro/SectionIntro'
+import SEO from '@site/src/components/SEO'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 export default function Home(): JSX.Element {
@@ -10,6 +11,12 @@ export default function Home(): JSX.Element {
 
   return (
     <Layout title="Home">
+      <SEO
+        description="Build with the world's leading self-custodial crypto wallet. MetaMask developer documentation - SDK, Wallet API, Snaps, Embedded Wallets, Smart Accounts."
+        title="MetaMask Developer Documentation - Build Web3 Apps"
+        keywords={['metamask', 'web3 development', 'dapp development', 'embedded wallets', 'metamask quickstart', 'blockchain development', 'ethereum development', 'metamask sdk', 'web3 documentation', 'crypto wallet', 'defi development', 'nft development']}
+        slug="/"
+      />
       <Hero
         title={siteConfig.title}
         description="Build with the world's leading self-custodial crypto wallet."
