@@ -8,7 +8,7 @@ import Layout from '@theme/Layout'
 import { GuidesInterface, platformMap, productMap } from '../../utils/guides-map'
 
 import { useState, useEffect } from 'react'
-import SEO from '../../components/SEO'
+import SEO from '@site/src/components/SEO'
 import Hero from '@site/src/components/Hero/Hero'
 import Input from '@site/src/components/Input'
 import GuideCard from './GuideCard'

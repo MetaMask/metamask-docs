@@ -11,7 +11,7 @@ import { useEffect, useMemo, useState, useRef, useCallback } from 'react'
 import MoonLoader from 'react-spinners/BeatLoader'
 import React from 'react'
 
-import SEO from '../../components/SEO'
+import SEO from '@site/src/components/SEO'
 import IntegrationBuilderCodeView from '../../theme/IntegrationBuilderCodeView'
 import builder from './builder'
 import styles from './styles.module.css'
@@ -756,11 +756,11 @@ export default function IntegrationBuilderPage(props) {
 
   return (
     <Layout
-      title="Integration Builder"
-      description="Web3Auth is simple, non-custodial auth infrastructure that enables Web3 wallets and applications to provide seamless user logins for both mainstream and native Web3 users.">
+      title="MetaMask Quickstart"
+      description="MetaMask Quickstart - Choose the right MetaMask integration for your project. Build with the world's leading self-custodial crypto wallet.">
       <SEO
-        title="Integration Builder"
-        description="Web3Auth Integration Builder for easy quick start. Web3Auth is simple, non-custodial auth infrastructure that enables Web3 wallets and applications to provide seamless user logins for both mainstream and native Web3 users."
+        title="MetaMask Quickstart"
+        description="MetaMask Quickstart for easy quick start. Choose the right MetaMask integration for your project and start building with the world's leading self-custodial crypto wallet."
         image="https://docs.metamask.io/img/quickstartog.jpg"
         url="https://docs.metamask.io/quickstart"
       />
