@@ -345,7 +345,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'React Quick Start',
     description: 'A quick integration of Web3Auth SDK in React',
-    image: '/img/embedded-wallets/banners/react.png',
+    image: 'img/embedded-wallets/banners/react.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/react-quick-start',
@@ -357,7 +357,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'React Solana Quick Start',
     description: 'A quick integration of Web3Auth SDK in React with Solana blockchain',
-    image: '/img/embedded-wallets/banners/solana.png',
+    image: 'img/embedded-wallets/banners/solana.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.web, tags.solana, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/react-solana-quick-start',
@@ -369,7 +369,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Angular Quick Start',
     description: 'A quick integration of Web3Auth SDK in Angular',
-    image: '/img/embedded-wallets/banners/angular.png',
+    image: 'img/embedded-wallets/banners/angular.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.web, tags.evm, 'angular'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/angular-quick-start',
@@ -381,7 +381,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Vue Quick Start',
     description: 'A quick integration of Web3Auth SDK in Vue',
-    image: '/img/embedded-wallets/banners/vue.png',
+    image: 'img/embedded-wallets/banners/vue.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'vue'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/vue-quick-start',
@@ -393,7 +393,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Vue Solana Quick Start',
     description: 'A quick integration of Web3Auth SDK in Vue with Solana blockchain',
-    image: '/img/embedded-wallets/banners/solana.png',
+    image: 'img/embedded-wallets/banners/solana.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.web, tags.solana, 'vue'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/vue-solana-quick-start',
@@ -405,7 +405,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'NextJS Quick Start',
     description: 'A quick integration of Web3Auth SDK in NextJS',
-    image: '/img/embedded-wallets/banners/next.js.png',
+    image: 'img/embedded-wallets/banners/next.js.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'nextjs'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/nextjs-quick-start',
@@ -419,7 +419,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'React Playground',
     description: 'A playground to test all the features of Web3Auth SDKs in React',
-    image: '/img/embedded-wallets/banners/react.png',
+    image: 'img/embedded-wallets/banners/react.png',
     type: PLAYGROUND,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'hooks'],
     link: 'https://web3auth-playground.vercel.app/',
@@ -431,7 +431,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Auth0 Implicit Example',
     description: 'Implementing Auth0 implicit flow authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/auth0.png',
+    image: 'img/embedded-wallets/banners/auth0.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'auth0', 'implicit'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/auth0-implicit-example',
@@ -442,7 +442,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Auth0 JWT Example',
     description: 'Implementing Auth0 JWT authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/auth0.png',
+    image: 'img/embedded-wallets/banners/auth0.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'auth0', 'jwt'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/auth0-jwt-example',
@@ -453,7 +453,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Cognito Implicit Example',
     description: 'Implementing AWS Cognito implicit flow authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/cognito.png',
+    image: 'img/embedded-wallets/banners/cognito.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'cognito', 'implicit'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/cognito-implicit-example',
@@ -464,7 +464,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Custom JWT Example',
     description: 'Implementing custom JWT authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/jwt.png',
+    image: 'img/embedded-wallets/banners/jwt.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'jwt', 'custom'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/custom-jwt-example',
@@ -475,7 +475,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Discord Implicit Example',
     description: 'Implementing Discord implicit flow authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/discord.png',
+    image: 'img/embedded-wallets/banners/discord.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'discord', 'implicit'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/discord-implicit-example',
@@ -486,7 +486,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Facebook Implicit Example',
     description: 'Implementing Facebook implicit flow authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/facebook.png',
+    image: 'img/embedded-wallets/banners/facebook.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'facebook', 'implicit'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/facebook-implicit-example',
@@ -497,7 +497,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Firebase JWT Example',
     description: 'Implementing Firebase JWT authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/firebase.png',
+    image: 'img/embedded-wallets/banners/firebase.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'firebase', 'jwt'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/firebase-jwt-example',
@@ -508,7 +508,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Google Implicit Example',
     description: 'Implementing Google implicit flow authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/google.png',
+    image: 'img/embedded-wallets/banners/google.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'google', 'implicit'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/google-implicit-example',
@@ -519,7 +519,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Google One Tap Example',
     description: 'Implementing Google One Tap authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/google.png',
+    image: 'img/embedded-wallets/banners/google.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'google', 'one-tap'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/google-one-tap-example',
@@ -530,7 +530,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Modal Example',
     description: 'Implementing Web3Auth Modal for authentication',
-    image: '/img/embedded-wallets/banners/react.png',
+    image: 'img/embedded-wallets/banners/react.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'modal'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/modal-example',
@@ -541,7 +541,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Twitch Implicit Example',
     description: 'Implementing Twitch implicit flow authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/twitch.png',
+    image: 'img/embedded-wallets/banners/twitch.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'twitch', 'implicit'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/twitch-implicit-example',
@@ -552,7 +552,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Worldcoin Implicit Example',
     description: 'Implementing Worldcoin implicit flow authentication with Web3Auth',
-    image: '/img/embedded-wallets/banners/worldcoin.png',
+    image: 'img/embedded-wallets/banners/worldcoin.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'worldcoin', 'implicit'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/single-connection/worldcoin-implicit-example',
@@ -565,7 +565,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Auth0 Google Implicit Grouped Example',
     description: 'Implementing Auth0 and Google grouped authentication with implicit flow',
-    image: '/img/embedded-wallets/banners/auth0.png',
+    image: 'img/embedded-wallets/banners/auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -586,7 +586,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Auth0 Google JWT Grouped Example',
     description: 'Implementing Auth0 and Google grouped authentication with JWT',
-    image: '/img/embedded-wallets/banners/auth0.png',
+    image: 'img/embedded-wallets/banners/auth0.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'auth0', 'google', 'jwt', 'grouped'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/custom-authentication/grouped-connection/auth0-google-jwt-grouped-example',
@@ -597,7 +597,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Firebase Google JWT Grouped Example',
     description: 'Implementing Firebase and Google grouped authentication with JWT',
-    image: '/img/embedded-wallets/banners/firebase.png',
+    image: 'img/embedded-wallets/banners/firebase.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -618,7 +618,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Modal Google Email Passwordless Grouped Example',
     description: 'Implementing Web3Auth Modal with Google and Email Passwordless authentication',
-    image: '/img/embedded-wallets/banners/google.png',
+    image: 'img/embedded-wallets/banners/google.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -642,7 +642,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Algorand Example',
     description: 'Implementing Web3Auth with Algorand blockchain',
-    image: '/img/embedded-wallets/banners/algorand.png',
+    image: 'img/embedded-wallets/banners/algorand.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.algorand, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/algorand-example',
@@ -652,7 +652,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Aptos Example',
     description: 'Implementing Web3Auth with Aptos blockchain',
-    image: '/img/embedded-wallets/banners/aptos.png',
+    image: 'img/embedded-wallets/banners/aptos.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.aptos, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/aptos-example',
@@ -662,7 +662,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Bitcoin Example',
     description: 'Implementing Web3Auth with Bitcoin blockchain',
-    image: '/img/embedded-wallets/banners/react.png',
+    image: 'img/embedded-wallets/banners/react.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.bitcoin, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/bitcoin-example',
@@ -672,7 +672,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Cosmos Example',
     description: 'Implementing Web3Auth with Cosmos blockchain',
-    image: '/img/embedded-wallets/banners/cosmos.png',
+    image: 'img/embedded-wallets/banners/cosmos.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.cosmos, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/cosmos-example',
@@ -682,7 +682,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Multi Chain Example',
     description: 'Implementing Web3Auth with multiple blockchain networks',
-    image: '/img/embedded-wallets/banners/multichain.png',
+    image: 'img/embedded-wallets/banners/multichain.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.multiChain, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/multi-chain-example',
@@ -692,7 +692,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Polkadot Example',
     description: 'Implementing Web3Auth with Polkadot blockchain',
-    image: '/img/embedded-wallets/banners/polkadot.png',
+    image: 'img/embedded-wallets/banners/polkadot.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.polkadot, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/polkadot-example',
@@ -702,7 +702,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Polymesh Example',
     description: 'Implementing Web3Auth with Polymesh blockchain',
-    image: '/img/embedded-wallets/banners/polymesh.png',
+    image: 'img/embedded-wallets/banners/polymesh.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.polymesh, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/polymesh-example',
@@ -712,7 +712,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Server Side Verification Example',
     description: 'Implementing server-side verification with Web3Auth',
-    image: '/img/embedded-wallets/banners/ssv.png',
+    image: 'img/embedded-wallets/banners/ssv.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'nextjs', 'server-side'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/server-side-verification-example',
@@ -723,7 +723,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Sign Protocol Example',
     description: 'Implementing signing protocols with Web3Auth',
-    image: '/img/embedded-wallets/banners/sign-protocol.png',
+    image: 'img/embedded-wallets/banners/sign-protocol.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'signing'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/sign-protocol-example',
@@ -734,7 +734,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Smart Account Example',
     description: 'Implementing smart accounts with Web3Auth for account abstraction',
-    image: '/img/embedded-wallets/banners/react.png',
+    image: 'img/embedded-wallets/banners/react.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', tags.accountAbstraction],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/smart-account-example',
@@ -745,7 +745,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Sui Example',
     description: 'Implementing Web3Auth with Sui blockchain',
-    image: '/img/embedded-wallets/banners/sui.png',
+    image: 'img/embedded-wallets/banners/sui.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.sui, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/sui-example',
@@ -755,7 +755,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Tezos Example',
     description: 'Implementing Web3Auth with Tezos blockchain',
-    image: '/img/embedded-wallets/banners/tezos.png',
+    image: 'img/embedded-wallets/banners/tezos.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.tezos, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/tezos-example',
@@ -765,7 +765,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'TON Example',
     description: 'Implementing Web3Auth with TON blockchain',
-    image: '/img/embedded-wallets/banners/ton.png',
+    image: 'img/embedded-wallets/banners/ton.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.ton, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/ton-example',
@@ -775,7 +775,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'TRON Example',
     description: 'Implementing Web3Auth with TRON blockchain',
-    image: '/img/embedded-wallets/banners/tron.png',
+    image: 'img/embedded-wallets/banners/tron.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.tron, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/tron-example',
@@ -785,7 +785,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'XMTP Example',
     description: 'Implementing Web3Auth with XMTP messaging protocol',
-    image: '/img/embedded-wallets/banners/xmtp.png',
+    image: 'img/embedded-wallets/banners/xmtp.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'react', 'xmtp', 'messaging'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/xmtp-example',
@@ -795,7 +795,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'XRPL Example',
     description: 'Implementing Web3Auth with XRP Ledger',
-    image: '/img/embedded-wallets/banners/xrpl.png',
+    image: 'img/embedded-wallets/banners/xrpl.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.xrpl, 'react'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/xrpl-example',
@@ -807,7 +807,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP iOS SDK Quick Start',
     description: 'A quick integration of Web3Auth Plug and Play iOS SDK',
-    image: '/img/embedded-wallets/banners/ios-swift.png',
+    image: 'img/embedded-wallets/banners/ios-swift.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.ios, tags.evm, 'swift'],
     link: quickStartHostedLinks.IOS,
@@ -818,7 +818,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
   {
     title: 'Integrate Web3Auth PnP iOS SDK with Solana Blockchain',
     description: 'Use Solana Blockchain with Plug and Play iOS SDK',
-    image: '/img/embedded-wallets/banners/ios-solana.png',
+    image: 'img/embedded-wallets/banners/ios-solana.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.ios, 'swift', tags.solana, 'ed25519'],
     link: 'https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-solana-example',
@@ -828,7 +828,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
   {
     title: 'PnP iOS SDK Playground',
     description: 'A playground to test all the features of Plug and Play iOS SDK',
-    image: '/img/embedded-wallets/banners/ios-swift.png',
+    image: 'img/embedded-wallets/banners/ios-swift.png',
     type: PLAYGROUND,
     tags: [tags.pnp, tags.ios, 'swift', tags.solana, tags.evm, 'secp256k1'],
     link: 'https://w3a.link/pnp-ios-playground',
@@ -838,7 +838,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
   {
     title: 'Integrate Firebase based Login in PnP iOS SDK',
     description: 'Use your own Firebase ID Token based Login with Plug and Play iOS SDK',
-    image: '/img/embedded-wallets/banners/ios-firebase.png',
+    image: 'img/embedded-wallets/banners/ios-firebase.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.ios, 'swift', 'firebase', tags.evm, 'id token login'],
     link: 'https://github.com/Web3Auth/web3auth-ios-examples/tree/main/ios-firebase-example',
@@ -860,7 +860,7 @@ export const pnpiOSExamples: ExamplesInterface[] = [
     title: 'Using Aggregate Verifiers in Web3Auth PnP iOS SDK',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in Web3Auth Plug and Play iOS SDK',
-    image: '/img/embedded-wallets/banners/ios-auth0.png',
+    image: 'img/embedded-wallets/banners/ios-auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -884,7 +884,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP Android SDK Quick Start',
     description: 'A quick integration of Web3Auth Plug and Play Android SDK',
-    image: '/img/embedded-wallets/banners/android.png',
+    image: 'img/embedded-wallets/banners/android.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.android, tags.evm, 'kotlin'],
     link: quickStartHostedLinks.ANDROID,
@@ -895,7 +895,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
   {
     title: 'Integrate Web3Auth PnP Android SDK with Solana Blockchain',
     description: 'Use Solana Blockchain with Plug and Play Android SDK',
-    image: '/img/embedded-wallets/banners/android-solana.png',
+    image: 'img/embedded-wallets/banners/android-solana.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.android, 'kotlin', tags.solana, 'ed25519'],
     link: 'https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-solana-example',
@@ -906,7 +906,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
   {
     title: 'PnP Android SDK Playground',
     description: 'A playground to test all the features of Plug and Play Android SDK',
-    image: '/img/embedded-wallets/banners/android.png',
+    image: 'img/embedded-wallets/banners/android.png',
     type: PLAYGROUND,
     tags: [tags.pnp, tags.android, 'kotlin', tags.solana, tags.evm, 'secp256k1'],
     link: 'https://w3a.link/pnp-android-playground',
@@ -917,7 +917,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
   {
     title: 'Integrate Firebase based Login in PnP Android SDK',
     description: 'Use your own Firebase ID Token based Login with Plug and Play Android SDK',
-    image: '/img/embedded-wallets/banners/android-firebase.png',
+    image: 'img/embedded-wallets/banners/android-firebase.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.android, 'kotlin', 'firebase', tags.evm, 'id token login'],
     link: 'https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-firebase-example',
@@ -928,7 +928,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
   {
     title: 'Integrate Auth0 SPA in PnP Android SDK',
     description: 'Use Auth0 Single Page App (Implicit Mode) with Plug and Play Android SDK',
-    image: '/img/embedded-wallets/banners/android-auth0.png',
+    image: 'img/embedded-wallets/banners/android-auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -948,7 +948,7 @@ export const pnpAndroidExamples: ExamplesInterface[] = [
     title: 'Using Aggregate Verifiers in Web3Auth PnP Android SDK',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in Web3Auth Plug and Play Android SDK',
-    image: '/img/embedded-wallets/banners/android-auth0.png',
+    image: 'img/embedded-wallets/banners/android-auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -973,7 +973,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
     title: 'Web3Auth PnP React Native SDK Quick Start',
     description:
       'A quick integration of Web3Auth Plug and Play React Native SDK in Android and iOS',
-    image: '/img/embedded-wallets/banners/react-native.png',
+    image: 'img/embedded-wallets/banners/react-native.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.android, tags.ios, tags.evm, tags.reactNative],
     link: quickStartHostedLinks.REACT_NATIVE,
@@ -985,7 +985,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
     title: 'Using Auth0 with Web3Auth PnP React Native SDK',
     description:
       'Using Auth0 Single Page App (Implicit Mode) in Web3Auth Plug and Play React Native SDK in Android and iOS',
-    image: '/img/embedded-wallets/banners/react-native-auth0.png',
+    image: 'img/embedded-wallets/banners/react-native-auth0.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.android, tags.ios, tags.reactNative, tags.evm, 'auth0', 'implicit mode'],
     link: 'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-auth0-example',
@@ -997,7 +997,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
     title: 'Using Aggregate Verifiers in Web3Auth PnP React Native SDK',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in Web3Auth Plug and Play React Native SDK for Android and iOS',
-    image: '/img/embedded-wallets/banners/react-native-auth0.png',
+    image: 'img/embedded-wallets/banners/react-native-auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -1021,7 +1021,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
   {
     title: 'Using Web3Auth PnP React Native SDK in Expo',
     description: 'Using Web3Auth Plug and Play React Native SDK in an Expo App',
-    image: '/img/embedded-wallets/banners/expo.png',
+    image: 'img/embedded-wallets/banners/expo.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.android, tags.ios, tags.evm, tags.reactNative, 'expo'],
     link: 'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-expo-example',
@@ -1034,7 +1034,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP Flutter SDK Quick Start',
     description: 'A quick integration of Web3Auth Plug and Play Flutter SDK for Android and iOS',
-    image: '/img/embedded-wallets/banners/flutter.png',
+    image: 'img/embedded-wallets/banners/flutter.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.flutter, tags.ios, tags.android, tags.evm, 'dart'],
     link: 'https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-quick-start',
@@ -1045,7 +1045,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
   {
     title: 'Integrate Web3Auth PnP Flutter SDK with Solana Blockchain',
     description: 'Use Solana Blockchain with Plug and Play Flutter SDK for Android and iOS',
-    image: '/img/embedded-wallets/banners/flutter-solana.png',
+    image: 'img/embedded-wallets/banners/flutter-solana.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.flutter, tags.ios, tags.android, 'dart', tags.solana, 'ed25519'],
     link: 'https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-solana-example',
@@ -1057,7 +1057,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
     title: 'PnP Flutter SDK Playground',
     description:
       'A playground to test all the features of Plug and Play Flutter SDK for Android and iOS',
-    image: '/img/embedded-wallets/banners/flutter.png',
+    image: 'img/embedded-wallets/banners/flutter.png',
     type: PLAYGROUND,
     tags: [
       tags.pnp,
@@ -1078,7 +1078,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
     title: 'Integrate Firebase based Login in PnP Flutter SDK',
     description:
       'Use your own Firebase ID Token based Login with Plug and Play Flutter SDK for Android and iOS',
-    image: '/img/embedded-wallets/banners/flutter-firebase.png',
+    image: 'img/embedded-wallets/banners/flutter-firebase.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -1099,7 +1099,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
     title: 'Integrate Auth0 SPA in PnP Flutter SDK',
     description:
       'Use Auth0 Single Page App (Implicit Mode) with Plug and Play Flutter SDK for Android and iOS',
-    image: '/img/embedded-wallets/banners/flutter-auth0.png',
+    image: 'img/embedded-wallets/banners/flutter-auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -1121,7 +1121,7 @@ export const pnpFlutterExamples: ExamplesInterface[] = [
     title: 'Using Aggregate Verifiers in Web3Auth PnP Flutter SDK',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in Web3Auth Plug and Play Flutter SDK for Android and iOS',
-    image: '/img/embedded-wallets/banners/flutter-auth0.png',
+    image: 'img/embedded-wallets/banners/flutter-auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -1148,7 +1148,7 @@ export const pnpUnityExamples: ExamplesInterface[] = [
     title: 'Web3Auth PnP Unity SDK Quick Start',
     description:
       'A quick integration of Web3Auth Plug and Play Unity SDK in Android, iOS and WebGL',
-    image: '/img/embedded-wallets/banners/unity.png',
+    image: 'img/embedded-wallets/banners/unity.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.unity, 'csharp', tags.android, tags.ios, tags.evm, 'webgl'],
     link: quickStartSourceCode.UNITY,
@@ -1159,7 +1159,7 @@ export const pnpUnityExamples: ExamplesInterface[] = [
     title: 'Using Auth0 with Web3Auth PnP Unity SDK',
     description:
       'Using Auth0 Single Page App (Implicit Mode) in Web3Auth Plug and Play Unity SDK in Android, iOS and WebGL',
-    image: '/img/embedded-wallets/banners/unity-auth0.png',
+    image: 'img/embedded-wallets/banners/unity-auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -1180,7 +1180,7 @@ export const pnpUnityExamples: ExamplesInterface[] = [
     title: 'Using Aggregate Verifiers in Web3Auth PnP Unity SDK',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in Web3Auth Plug and Play Unity SDK for Android, iOS and WebGL',
-    image: '/img/embedded-wallets/banners/unity-auth0.png',
+    image: 'img/embedded-wallets/banners/unity-auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -1207,7 +1207,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth PnP Unreal Engine SDK Quick Start',
     description: 'A quick integration of Web3Auth Plug and Play Unreal Engine SDK in Android & iOS',
-    image: '/img/embedded-wallets/banners/unreal.png',
+    image: 'img/embedded-wallets/banners/unreal.png',
     type: QUICK_START,
     tags: [tags.pnp, tags.unreal, 'csharp', tags.android, tags.evm, tags.ios],
     link: 'https://github.com/Web3Auth/web3auth-unreal-example/tree/master',
@@ -1219,7 +1219,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
     title: 'Using Auth0 with Web3Auth PnP Unreal Engine SDK',
     description:
       'Using Auth0 Single Page App (Implicit Mode) in Web3Auth Plug and Play Unreal Engine SDK in Android & iOS',
-    image: '/img/embedded-wallets/banners/unreal-auth0.png',
+    image: 'img/embedded-wallets/banners/unreal-auth0.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.unreal, tags.android, tags.ios, 'auth0', tags.evm, 'implicit mode'],
     link: 'https://github.com/Web3Auth/web3auth-unreal-example/tree/auth0-example',
@@ -1230,7 +1230,7 @@ export const pnpUnrealExamples: ExamplesInterface[] = [
     title: 'Using Google in Web3Auth PnP Unreal Engine SDK',
     description:
       'Using Google Custom Authentication in Web3Auth Plug and Play Unreal Engine SDK for Android & iOS',
-    image: '/img/embedded-wallets/banners/unreal-google.png',
+    image: 'img/embedded-wallets/banners/unreal-google.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,
@@ -1254,7 +1254,7 @@ export const coreKitSfaiOSExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth Single Factor Auth iOS SDK Quick Start',
     description: 'A quick integration of Single Factor Auth iOS SDK',
-    image: '/img/embedded-wallets/banners/ios-swift.png',
+    image: 'img/embedded-wallets/banners/ios-swift.png',
     type: QUICK_START,
     tags: [tags.sfa, 'sfa', tags.ios, tags.evm, 'swift'],
     link: 'https://github.com/Web3Auth/web3auth-ios-examples/tree/main/sfa-ios-quick-start',
@@ -1266,7 +1266,7 @@ export const coreKitSfaAndroidExamples: ExamplesInterface[] = [
   {
     title: 'Web3Auth Single Factor Auth Android SDK Quick Start',
     description: 'A quick integration of Web3Auth Single Factor Auth Android SDK',
-    image: '/img/embedded-wallets/banners/android.png',
+    image: 'img/embedded-wallets/banners/android.png',
     type: QUICK_START,
     tags: [tags.sfa, 'sfa', tags.android, tags.evm, 'kotlin'],
     link: 'https://github.com/Web3Auth/web3auth-android-examples/tree/main/sfa-android-quick-start',
@@ -1281,7 +1281,7 @@ export const coreKitSfaReactNativeExamples: ExamplesInterface[] = [
     title: 'Web3Auth Single Factor Auth React Native SDK Quick Start',
     description:
       'A quick integration of Web3Auth Single Factor Auth React Native SDK in Android and iOS',
-    image: '/img/embedded-wallets/banners/react-native.png',
+    image: 'img/embedded-wallets/banners/react-native.png',
     type: QUICK_START,
     tags: [tags.sfa, 'sfa', tags.android, tags.ios, tags.evm, tags.reactNative],
     link: 'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/sfa-rn-bare-quick-start',
@@ -1292,7 +1292,7 @@ export const coreKitSfaReactNativeExamples: ExamplesInterface[] = [
     id: 'sfa-rn-expo-auth0-example',
     title: 'Using Web3Auth Single Factor Auth React Native SDK in Expo',
     description: 'Using Web3Auth Single Factor Auth React Native SDK in an Expo App',
-    image: '/img/embedded-wallets/banners/expo.png',
+    image: 'img/embedded-wallets/banners/expo.png',
     type: SAMPLE_APP,
     tags: [tags.sfa, 'sfa', tags.android, tags.ios, tags.reactNative, 'expo'],
     link: 'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/sfa-rn-expo-auth0-example',
@@ -1306,7 +1306,7 @@ export const coreKitSfaFlutterExamples: ExamplesInterface[] = [
     title: 'Web3Auth Single Factor Auth Flutter SDK Quick Start',
     description:
       'A quick integration of Web3Auth Single Factor Auth Flutter SDK for Android and iOS',
-    image: '/img/embedded-wallets/banners/flutter.png',
+    image: 'img/embedded-wallets/banners/flutter.png',
     type: QUICK_START,
     tags: [tags.sfa, 'sfa', tags.flutter, tags.ios, tags.android, tags.evm, 'dart'],
     link: 'https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/sfa_flutter_quick_start',
@@ -1317,7 +1317,7 @@ export const coreKitSfaFlutterExamples: ExamplesInterface[] = [
     id: 'sfa_flutter_solana',
     title: 'Integrate Web3Auth Single Factor Auth Flutter SDK with Solana Blockchain',
     description: 'Use Solana Blockchain with Single Factor Auth Flutter SDK for Android and iOS',
-    image: '/img/embedded-wallets/banners/flutter-solana.png',
+    image: 'img/embedded-wallets/banners/flutter-solana.png',
     type: SAMPLE_APP,
     tags: [tags.sfa, 'sfa', tags.flutter, tags.ios, tags.android, 'dart', tags.solana, 'ed25519'],
     link: 'https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/sfa_flutter_solana',
@@ -1330,7 +1330,7 @@ export const coreKitMPCWebExamples: ExamplesInterface[] = [
   {
     title: 'MPC Core Kit React Quick Start',
     description: 'A quick integration of Multi Party Computation Core Kit SDK in React',
-    image: '/img/embedded-wallets/banners/react.png',
+    image: 'img/embedded-wallets/banners/react.png',
     type: QUICK_START,
     tags: [
       tags.mpcCoreKit,
@@ -1350,7 +1350,7 @@ export const coreKitMPCWebExamples: ExamplesInterface[] = [
   {
     title: 'MPC Core Kit Angular Quick Start',
     description: 'A quick integration of Multi Party Computation Core Kit SDK in angular',
-    image: '/img/embedded-wallets/banners/angular.png',
+    image: 'img/embedded-wallets/banners/angular.png',
     type: QUICK_START,
     tags: [
       tags.mpcCoreKit,
@@ -1370,7 +1370,7 @@ export const coreKitMPCWebExamples: ExamplesInterface[] = [
   {
     title: 'MPC Core Kit Vue Quick Start',
     description: 'A quick integration of Multi Party Computation Core Kit SDK in Vue',
-    image: '/img/embedded-wallets/banners/vue.png',
+    image: 'img/embedded-wallets/banners/vue.png',
     type: QUICK_START,
     tags: [tags.mpcCoreKit, 'mpc', tags.web, tags.mpcCoreKitJS, tags.evm, 'vue', 'id token login'],
     link: 'https://github.com/Web3Auth/mpc-core-kit-examples/tree/main/mpc-core-kit-web/quick-starts/mpc-core-kit-vue-quick-start',
@@ -1381,7 +1381,7 @@ export const coreKitMPCWebExamples: ExamplesInterface[] = [
   {
     title: 'MPC Core Kit NextJS Quick Start',
     description: 'A quick integration of Multi Party Computation Core Kit SDK in NextJS',
-    image: '/img/embedded-wallets/banners/next.js.png',
+    image: 'img/embedded-wallets/banners/next.js.png',
     type: QUICK_START,
     tags: [
       tags.mpcCoreKit,
@@ -1402,7 +1402,7 @@ export const coreKitMPCWebExamples: ExamplesInterface[] = [
     title: 'Use Aggregate Verifiers in MPC Core Kit SDK',
     description:
       'Aggregate Google, Auth0 GitHub & Email Passwordless in Multi Party Computation Core Kit SDK',
-    image: '/img/embedded-wallets/banners/auth0.png',
+    image: 'img/embedded-wallets/banners/auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.mpcCoreKit,
@@ -1426,7 +1426,7 @@ export const coreKitMPCWebExamples: ExamplesInterface[] = [
   {
     title: 'Integrate Farcaster Login in MPC Core Kit SDK',
     description: 'Use Farcaster with Multi Party Computation Core Kit SDK',
-    image: '/img/embedded-wallets/banners/farcaster.png',
+    image: 'img/embedded-wallets/banners/farcaster.png',
     type: SAMPLE_APP,
     tags: [
       tags.mpcCoreKit,
@@ -1446,7 +1446,7 @@ export const coreKitMPCWebExamples: ExamplesInterface[] = [
   {
     title: 'Integrate MPC Core Kit SDK with Solana Blockchain',
     description: 'Use Solana with MPC Core Kit SDK',
-    image: '/img/embedded-wallets/banners/solana.png',
+    image: 'img/embedded-wallets/banners/solana.png',
     type: SAMPLE_APP,
     tags: [tags.mpcCoreKit, tags.web, tags.mpcCoreKitJS, tags.evm, tags.solana, 'ed25519'],
     link: 'https://github.com/Web3Auth/mpc-core-kit-examples/tree/main/mpc-core-kit-web/mpc-core-kit-solana',
@@ -1461,7 +1461,7 @@ export const coreKitMPCReactNativeExamples: ExamplesInterface[] = [
     title: 'Web3Auth MPC Core Kit React Native Quick Start',
     description:
       'A quick integration of Web3Auth Multi Party Computation Core Kit in React Native for Android and iOS',
-    image: '/img/embedded-wallets/banners/react-native.png',
+    image: 'img/embedded-wallets/banners/react-native.png',
     type: QUICK_START,
     tags: [tags.mpcCoreKit, 'mpc', tags.android, tags.evm, tags.ios, tags.reactNative],
     link: 'https://github.com/Web3Auth/mpc-core-kit-examples/tree/main/mpc-core-kit-react-native/mpc-core-kit-rn-quick-start',
@@ -1473,7 +1473,7 @@ export const coreKitMPCReactNativeExamples: ExamplesInterface[] = [
     title: 'Using Auth0 with MPC Core Kit React Native',
     description:
       'Integrate Auth0 with Web3Auth Multi Party Computation Core Kit in React Native for Android and iOS',
-    image: '/img/embedded-wallets/banners/react-native-auth0.png',
+    image: 'img/embedded-wallets/banners/react-native-auth0.png',
     type: SAMPLE_APP,
     tags: [
       tags.mpcCoreKit,
@@ -1494,7 +1494,7 @@ export const coreKitMPCReactNativeExamples: ExamplesInterface[] = [
     id: 'mpc-core-kit-rn-solana',
     title: 'Using Solana MPC Core Kit SDK React Native',
     description: 'Integrate Solana with Web3Auth MPC Core Kit in React Native for Android and iOS',
-    image: '/img/embedded-wallets/banners/solana.png',
+    image: 'img/embedded-wallets/banners/solana.png',
     type: SAMPLE_APP,
     tags: [
       tags.mpcCoreKit,
@@ -1516,7 +1516,7 @@ export const coreKitMPCReactNativeExamples: ExamplesInterface[] = [
     title: 'Using MPC Core Kit SDK in Expo',
     description:
       'Integrate Auth0 with Web3Auth MPC Core Kit in React Native Expo for Android and iOS',
-    image: '/img/embedded-wallets/banners/expo.png',
+    image: 'img/embedded-wallets/banners/expo.png',
     type: SAMPLE_APP,
     tags: [
       tags.mpcCoreKit,
