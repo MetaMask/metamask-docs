@@ -5,7 +5,6 @@
   background: var(--ifm-background-surface-color);
   z-index: 100;
   animation: fade-in 0.3s ease-out;
-  height: 100vh;
 }
 
 /* Dark mode: Use darker background for better contrast with cards */
