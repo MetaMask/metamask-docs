@@ -143,7 +143,7 @@ export default function Guides({ content = {} }: GuidesInterface) {
       <SEO
         title="Tutorials"
         description="Tutorials to integrate, customize, and build with MetaMask developer tools."
-        image={`${baseUrl}images/docs-meta-cards/guides-card.png`}
+        image={`${baseUrl}images/tutorialsog.jpg`}
         slug="/guides"
       />
 

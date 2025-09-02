@@ -58,7 +58,7 @@ export default function SEO(props) {
       ) : (
         <meta
           property="og:image"
-          content="http://docs.metamask.io/img/docs-meta-cards/documentation-card.png"
+          content="http://docs.metamask.io/img/metamaskog.jpg"
         />
       )}
 
@@ -81,7 +81,7 @@ export default function SEO(props) {
       ) : (
         <meta
           name="twitter:image"
-          content="http://docs.metamask.io/img/docs-meta-cards/documentation-card.png"
+          content="http://docs.metamask.io/img/metamaskog.jpg"
         />
       )}
 
@@ -104,7 +104,7 @@ export default function SEO(props) {
       ) : (
         <meta
           itemProp="image"
-          content="http://docs.metamask.io/img/docs-meta-cards/documentation-card.png"
+          content="http://docs.metamask.io/img/metamaskog.jpg"
         />
       )}
 

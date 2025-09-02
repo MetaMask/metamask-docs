@@ -772,7 +772,7 @@ export default function IntegrationBuilderPage(props: any) {
       <SEO
         title="Integration Builder"
         description="Web3Auth Integration Builder for easy quick start. Web3Auth is simple, non-custodial auth infrastructure that enables Web3 wallets and applications to provide seamless user logins for both mainstream and native Web3 users."
-        image="https://docs.metamask.io/img/docs-meta-cards/integration-builder-card.png"
+        image="https://docs.metamask.io/img/quickstartog.jpg"
         url="https://docs.metamask.io/quickstart"
       />
       <div className={styles.container} style={{ position: 'relative' }}>
