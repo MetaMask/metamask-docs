@@ -48,14 +48,14 @@ The CLI provides the following options to display CLI details, and further custo
 | `-v` or `--version` | Check the current version of the `@metamask/create-gator-app` CLI.                                                                                                    |
 | `-h` or `--help`    | Display the available options.                                                                                                                              |
 | `--skip-install`    | Skip the installation of dependencies.                                                                                                                      |
-| `--add-web3auth` | Add [MetaMask Embedded Wallets, prev Web3Auth](https://docs.metamask.io/embedded-wallets) as a signer for the delegator account.<br/>Supported templates:<br/>- MetaMask Smart Accounts Starter<br/>- MetaMask Smart Accounts & Delegation Starter |
+| `--add-web3auth` | Add [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets) as a signer for the delegator account.<br/>Supported templates:<br/>- MetaMask Smart Accounts Starter<br/>- MetaMask Smart Accounts & Delegation Starter |
 | `--add-llm-rules`   | Add LLM rules for your IDE. Supported in the Experimental: ERC7715 Permissions Starter template.                                                                 |
 
 ## Examples
 
 ### MetaMask Embedded Wallets configuration
 
-To create a project that uses [MetaMask Embedded Wallets](https://docs.metamask.io/embedded-wallets) Embedded Wallet as the signer for your delegator 
+To create a project that uses [MetaMask Embedded Wallets](/embedded-wallets) as the signer for your delegator 
 account, use the `--add-web3auth` option with `@metamask/create-gator-app`:
 
 ```bash

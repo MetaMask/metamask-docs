@@ -5,11 +5,11 @@ toc_max_heading_level: 2
 keywords: [connect, MetaMask, Web3Auth, SDK, dapp]
 ---
 
-# Connect to MetaMask using Web3Auth SDK
+# Connect to MetaMask using Embedded Wallets
 
-Get started with MetaMask SDK and [Web3Auth SDK](https://docs.metamask.io/embedded-wallets/),
+Get started with MetaMask SDK and [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets),
 enabling users to sign in with an email or social media account.
-You can use MetaMask SDK features directly within Web3Auth SDK.
+You can use MetaMask SDK features directly within Embedded Wallets.
 Set up the SDKs in one of the following ways:
 
 - [SDK CLI](#set-up-using-the-cli) - Use the CLI to scaffold a Next.js and Web3Auth dapp.
@@ -26,7 +26,7 @@ Set up the SDKs in one of the following ways:
 - A package manager installed.
   The examples in this quickstart use [pnpm](https://pnpm.io/installation).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
-- A [Web3Auth Client ID](https://docs.metamask.io/embedded-wallets/dashboard/#get-the-client-id).
+- A [Web3Auth Client ID](/embedded-wallets/dashboard/#get-the-client-id).
 
 ## Set up using the CLI
 
@@ -79,8 +79,8 @@ Set up the SDKs in one of the following ways:
    pnpm run dev
    ```
 
-You've successfully set up MetaMask SDK and Web3Auth SDK.
-See how to [use the Web3Auth SDK](#usage).
+You've successfully set up MetaMask SDK and MetaMask Embedded Wallets.
+See how to [use Embedded Wallets](#usage).
 
 ## Set up using a template
 
@@ -120,8 +120,8 @@ See how to [use the Web3Auth SDK](#usage).
    pnpm dev
    ```
 
-You've successfully set up MetaMask SDK and Web3Auth SDK.
-See how to [use the Web3Auth SDK](#usage).
+You've successfully set up MetaMask SDK and MetaMask Embedded Wallets.
+See how to [use Embedded Wallets](#usage).
 
 ## Set up manually
 
