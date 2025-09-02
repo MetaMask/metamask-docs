@@ -1,6 +1,6 @@
 ---
 title: Create an AI agent using MetaMask SDK
-image: 'https://docs.metamask.io/img/guides/guides-img/embedded-wallets/banners/mm-sdk-ai-agent.png'
+image: '/img/guides/guides-img/embedded-wallets/banners/mm-sdk-ai-agent.png'
 description: Create a wallet AI agent using MetaMask SDK and Vercel's AI SDK.
 tags: [metamask sdk, wallet, AI, agent, Vercel, Wagmi, Next.js, OpenAI]
 date: May 2, 2025
