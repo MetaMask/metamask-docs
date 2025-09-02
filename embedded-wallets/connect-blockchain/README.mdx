@@ -1,0 +1,90 @@
+---
+title: Connecting Blockchains with Embedded Wallets
+sidebar_label: Overview
+
+description: 'Connect to any Blockchain via MetaMask Embedded Wallets | Embedded Wallets'
+image: 'img/docs-meta-cards/documentation-card.png'
+---
+
+import EVMChains from './_evm-chains.mdx'
+import OtherChains from './_other-chains.mdx'
+
+Embedded Wallets (formerly Web3Auth) is the frontend authentication system for your dApp. Once the user is authenticated, the SDK returns a way to interact with the blockchain. A provider is how libraries like web3.js & ethers.js talk to the blockchain by sending JSON-RPC requests and receiving responses.
+
+With Embedded Wallets, you can connect in two ways:
+
+- Web (Embedded Wallets Web SDK): You get a MetaMask-style EIP-1193 provider (compatible with ethers.js and web3.js) to submit JSON-RPC requests and interact with the blockchain.
+- Mobile (Embedded Wallets Mobile SDK): The user's private key is available in the SDK state, enabling direct signing and lower-level JSON-RPC calls from your app.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Embedded Wallets are Chain Agnostic
+
+By default, Embedded Wallets supports the `secp256k1` and `ed25519` key curves. While these key curves serve the majority of blockchains out there, certain blockchains have different curve implementations of their own. With **Embedded Wallets you can interact with any blockchain of your choice**.
+
+In Embedded Wallets the ability to export the user's private key comes in handy. This private key can be utilized by the dApp to interact with the chain.
+
+You can read more about this in our [Connect with Other Blockchains](./other/) section.
+
+:::info
+
+Embedded Wallets is composable - you can combine it with meta-transaction flows, multisigs, and other cryptographic protocols. It is easy to build on top of, and generally fits in with most other technology stacks, including but not limited to; your favorite scalability solutions, meta transactions, smart contract wallets, different elliptic curve pairs and even RSA.
+
+:::
+
+## Dashboard Configuration
+
+The Embedded Wallets Web SDK(`@web3auth/modal`) from v10 onwards does not need any additional setup on the code side for blockchain connections. All of it is handled on the Dashboard. We can use any chain from the extensive list of predefined chains and add more if we need.
+
+![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)
+
+## Reference Guides for Blockchain Connections
+
+You can check out the following guides we've written for certain blockchains. We have covered a wide variety of EVM and EVM Chains, supported by multiple Embedded Wallets providers.
+
+### EVM Chain Guides
+
+<EVMChains />
+### Non EVM Chain guides
+
+<OtherChains />
+
+## Adding JSON RPC APIs
+
+Embedded Wallets providers give you a standard way of interacting with the blockchain. However, alongside that, it is recommended to use JSON RPC APIs, which help you connect to the blockchain without the need to run your own instance/ nodes. There are many services which offer a web API for accessing different blockchains:
+
+#### Infura
+
+[Infura](https://infura.io) is the leading platform for Ethereum infrastructure. It provides a gateway to the Ethereum network, allowing developers to build and scale decentralized applications without having to run their own infrastructure. Most of the Embedded Wallets backend infrastructure runs on Infura APIs.
+
+## Faucets for Different Blockchains
+
+Faucets are services that provide users with a small amount of cryptocurrency for free. These are often used for testing purposes or to onboard new users to a blockchain network. Here are some popular faucet services for different test blockchains:
+
+- Amoy Polygon faucet
+  - https://faucet.polygon.technology/
+- Avalanche
+  - https://faucet.avax.network/
+- Base Sepolia Faucet
+  - https://docs.base.org/chain/network-faucets
+- Binance Smart Chain Faucet
+  - https://www.bnbchain.org/en/testnet-faucet
+- Cosmos
+  - https://stakely.io/en/faucet/cosmos-atom
+- Optimism
+  - https://app.optimism.io/faucet
+- Polkadot Rococo / Westend / Paseo
+  - https://faucet.polkadot.io/
+- Sepolia Ethereum Faucet
+  - https://www.infura.io/faucet/sepolia
+  - (Sepolia PoW Faucet)[https://sepolia-faucet.pk910.de/]
+- Solana
+  - https://faucet.solana.com/
+- Gnosis
+  - https://faucet.gnosischain.com/
+- Lisk
+  - https://docs.lisk.com/lisk-tools/faucets/

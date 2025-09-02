@@ -1,0 +1,38 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x12c
+- Public RPC URL: https://rpc.ancient8.gg (Avoid using public rpcTarget in production, use services
+  like Infura)
+- Display Name: Ancient8
+- Block Explorer Link: https://scan.ancient8.gg
+- Ticker: ETH
+- Ticker Name: Ethereum
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x2af3
+- Public RPC URL: https://rpc-testnet.ancient8.gg (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: Ancient8 Testnet
+- Block Explorer Link: https://scan-testnet.ancient8.gg
+- Ticker: ETH
+- Ticker Name: Ethereum
+
+</TabItem>
+</Tabs>

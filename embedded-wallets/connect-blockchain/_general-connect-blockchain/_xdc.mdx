@@ -1,0 +1,54 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet (Apothem)", value: "apothem", },
+    { label: "Devnet", value: "devnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x32 (hex of 50)
+- Public RPC URL: https://erpc.xinfin.network (Avoid using public rpcTarget in production)
+- Display Name: XDC Network Mainnet
+- Block Explorer Link: https://xdcscan.io/
+- Ticker: XDC
+- Ticker Name: XDC
+- Logo: https://docs.xdc.network/assets/logo.svg
+
+</TabItem>
+
+<TabItem
+  value="apothem"
+>
+
+- Chain ID: 0x33 (hex of 51)
+- Public RPC URL: https://rpc.apothem.network (Avoid using public rpcTarget in production)
+- Display Name: XDC Network Apothem Network
+- Block Explorer Link: https://apothem.xdcscan.io
+- Ticker: XDC
+- Ticker Name: XDC
+- Logo: https://docs.xdc.network/assets/logo.svg
+
+</TabItem>
+
+<TabItem
+  value="devnet"
+>
+
+- Chain ID: 0x227 (hex of 551)
+- Public RPC URL: https://devnetstats.apothem.network/devnet (Avoid using public rpcTarget in
+  production)
+- Display Name: XDC Network Devnet
+- Block Explorer Link: https://devnet.xdcscan.io
+- Ticker: XDC
+- Ticker Name: XDC
+- Logo: https://docs.xdc.network/assets/logo.svg
+
+</TabItem>
+</Tabs>

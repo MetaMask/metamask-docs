@@ -1,0 +1,293 @@
+---
+title: Send your first gasless transaction
+image: 'img/guides/guides-banners/gasless-transaction.png'
+description: Learn how to use gasless paymaster with Web3Auth Native Account Abstraction.
+tags: [embedded wallets, account abstraction, web, paymaster, eip 4337, web3auth]
+date: October 22, 2024
+author: MetaMask Developer Relations
+---
+
+import SEO from '@site/src/components/SEO'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+<SEO
+  title="Send your first gasless transaction"
+  description="Learn how to use gasless paymaster with Web3Auth Native Account Abstraction."
+  image="https://web3auth.io/docs/img/guides/guides-banners/gasless-transaction.png"
+  slug="/tutorials/sending-gasless-transaction"
+/>
+
+A paymaster is a vital component in the ERC-4337 standard, responsible for covering transaction costs on behalf of the user. There are various types of paymasters, such as gasless paymasters, ERC-20 paymasters, and more.
+
+In this guide, we'll talk about how you can use the Pimlico gasless Paymaster with Web3Auth Account Abstraction Provider to sponsor the transaction for your users without requiring the user to pay gas fees.
+
+For those who want to skip straight to the code, you can find it on [GitHub](https://github.com/Web3Auth/web3auth-examples/tree/main/other/smart-account-example).
+
+## Prerequisites
+
+- Pimlico Account: Since we'll be using the Pimlico paymaster, you'll need to have an API key from Pimlico. You can get a free API key from [Pimlico Dashboard](https://dashboard.pimlico.io/).
+- Web3Auth Dashboard: If you haven't already, sign up on the Web3Auth platform. It is free and gives you access to the Web3Auth's base plan. Head to Web3Auth's documentation page for detailed [instructions on setting up the Web3Auth Dashboard](/embedded-wallets/dashboard/).
+- Web3Auth PnP Web SDK: This guide assumes that you already know how to integrate the PnP Web SDK in your project. If not, you can learn how to [integrate Web3Auth in your Web app](/embedded-wallets/sdk/react/).
+
+## Integrate AccountAbstractionProvider
+
+Once, you have set up the Web3Auth Dashboard, and created a new project, it's time to integrate Web3Auth Account Abstraction Provider in your Web application. For the implementation, we'll use the [@web3auth/account-abstraction-provider](https://www.npmjs.com/package/@web3auth/account-abstraction-provider). The provider simplifies the entire process by managing the complex logic behind configuring the account abstraction provider, bundler, and preparing user operations.
+
+If you are already using the Web3Auth Pnp SDK in your project, you just need to configure the AccountAbstractionProvider with the paymaster details, and pass it to the Web3Auth instance. No other changes are required.
+
+### Installation
+
+```bash
+npm install --save @web3auth/account-abstraction-provider
+```
+
+### Configure Paymaster
+
+The AccountAbstractionProvider requires specific configurations to function correctly. One key configuration is the paymaster. Web3Auth supports custom paymaster configurations, allowing you to deploy your own paymaster and integrate it with the provider.
+
+You can choose from a variety of paymaster services available in the ecosystem. In this guide, we'll be configuring the Pimlico's paymaster. However, it's important to note that paymaster support is not limited to the Pimlico, giving you the flexibility to integrate any compatible paymaster service that suits your requirements.
+
+For the simplicity, we have only use `SafeSmartAccount`, but you choose your favorite smart account provider from the available ones. [Learn how to configure the smart account](/embedded-wallets/sdk/react/advanced/smart-accounts).
+
+```ts
+// focus-start
+import {
+  AccountAbstractionProvider,
+  SafeSmartAccount,
+} from '@web3auth/account-abstraction-provider'
+// focus-end
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://rpc.sepolia.org',
+  displayName: 'Ethereum Sepolia Testnet',
+  blockExplorerUrl: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+}
+
+// focus-start
+const accountAbstractionProvider = new AccountAbstractionProvider({
+  config: {
+    chainConfig,
+    bundlerConfig: {
+      // Get the pimlico API Key from dashboard.pimlico.io
+      url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
+    },
+    smartAccountInit: new SafeSmartAccount(),
+    paymasterConfig: {
+      // Get the pimlico API Key from dashboard.pimlico.io
+      url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
+    },
+  },
+})
+// focus-end
+```
+
+## Configure Web3Auth
+
+Once you have configured your `AccountAbstractionProvider`, you can now plug it in your Web3Auth Modal/No Modal instance. If you are using the external wallets like MetaMask, Coinbase, etc, you can define whether you want to use the AccountAbstractionProvider, or EthereumPrivateKeyProvider by setting the `useAAWithExternalWallet` in `IWeb3AuthCoreOptions`.
+
+If you are setting `useAAWithExternalWallet` to `true`, it'll create a new Smart Account for your user, where the signer/creator of the Smart Account would be the external wallet.
+
+If you are setting `useAAWithExternalWallet` to `false`, it'll skip creating a new Smart Account, and directly use the external wallet to sign the transactions.
+
+<Tabs
+  defaultValue="modal"
+  values={[
+    { label: "PnP Modal SDK", value: "modal" },
+    { label: "PnP No Modal SDK", value: "no-modal" },
+  ]}
+>
+
+<TabItem value="modal">
+
+```ts
+import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+import { Web3Auth } from "@web3auth/modal";
+
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  // Use the chain config we declared earlier
+  config: { chainConfig },
+});
+
+const web3auth = new Web3Auth({
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  privateKeyProvider,
+  // Use the account abstraction provider we configured earlier
+  accountAbstractionProvider
+  // This will allow you to use EthereumPrivateKeyProvider for
+  // external wallets, while use the AccountAbstractionProvider
+  // for Web3Auth embedded wallets.
+  useAAWithExternalWallet: false,
+});
+```
+
+</TabItem>
+
+<TabItem value="no-modal">
+
+```ts
+import { Web3AuthNoModal } from "@web3auth/no-modal";
+import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+import { AuthAdapter } from "@web3auth/auth-adapter";
+
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: { chainConfig },
+});
+
+const web3auth = new Web3AuthNoModal({
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  privateKeyProvider,
+  // Use the account abstraction provider we configured earlier
+  accountAbstractionProvider
+  // This will allow you to use EthereumPrivateKeyProvider for
+  // external wallets, while use the AccountAbstractionProvider
+  // for Web3Auth embedded wallets.
+  useAAWithExternalWallet: false,
+});
+
+const authadapter = new AuthAdapter();
+web3auth.configureAdapter(authadapter);
+```
+
+</TabItem>
+</Tabs>
+
+## Configure Signer
+
+The Web3Auth Smart Account feature is compatible with popular signer SDKs, including wagmi, ethers, and viem. You can choose your preferred package to configure the signer.
+
+You can retreive the provider to configure the signer from Web3Auth instance.
+
+:::info Wagmi
+
+Wagmi does not require any special configuration to use the signer with smart accounts. Once you have set up your Web3Auth provider and connected your wallet, Wagmi's hooks (such as useSigner or useAccount) will automatically use the smart account as the signer. You can interact with smart accounts using Wagmi just like you would with a regular EOA (Externally Owned Account) signer—no additional setup is needed.
+
+:::
+
+<Tabs
+  defaultValue="viem"
+  values={[
+    { label: "Viem", value: "viem" },
+    { label: "Ethers", value: "ethers" },
+  ]}
+>
+
+<TabItem value="viem">
+
+```tsx
+import { createWalletClient } from 'viem'
+
+// Use your Web3Auth instance to retreive the provider.
+const provider = web3auth.provider
+
+const walletClient = createWalletClient({
+  transport: custom(provider),
+})
+```
+
+</TabItem>
+
+<TabItem value="ethers">
+
+```tsx
+import { ethers } from 'ethers'
+
+// Use your Web3Auth instance to retreive the provider.
+const provider = web3auth.provider
+
+const ethersProvider = new ethers.providers.Web3Provider(provider)
+const signer = await ethersProvider.getSigner()
+```
+
+</TabItem>
+</Tabs>
+
+## Send a transaction
+
+Developers can use their preferred signer or Wagmi hooks to initiate on-chain transactions, while Web3Auth manages the creation and submission of the UserOperation. Only the `to`, `data`, and `value` fields need to be provided. Any additional parameters will be ignored and automatically overridden.
+
+To ensure reliable execution, the bundler client sets maxFeePerGas and maxPriorityFeePerGas values. If custom values are required, developers can use the [Viem's BundlerClient](https://viem.sh/account-abstraction/clients/bundler#bundler-client) to manually construct and send the user operation.
+
+Since Smart Accounts are deployed smart contracts, the user's first transaction also triggers the on-chain deployment of their wallet.
+
+<Tabs
+  defaultValue="viem"
+  values={[
+    { label: "Viem", value: "viem" },
+    { label: "Ethers", value: "ethers" },
+    { label: "Wagmi", value: "wagmi" },
+  ]}
+>
+
+<TabItem value="wagmi">
+
+```tsx
+import { useSendTransaction } from 'wagmi'
+
+const { data: hash, sendTransaction } = useSendTransaction()
+
+// Convert 1 ether to WEI format
+const value = web3.utils.toWei(1)
+
+sendTransaction({ to: 'DESTINATION_ADDRESS', value, data: '0x' })
+
+const {
+  data: receipt,
+  isLoading: isConfirming,
+  isSuccess: isConfirmed,
+} = useWaitForTransactionReceipt({
+  hash,
+})
+```
+
+</TabItem>
+<TabItem value="ethers">
+
+```tsx
+// Convert 1 ether to WEI format
+const amount = ethers.parseEther('1.0')
+
+// Submits a user operation to the blockchain
+const transaction = await signer.sendTransaction({
+  to: 'DESTINATION_ADDRESS',
+  value: amount,
+  // This will perform the transfer of ETH
+  data: '0x',
+})
+
+// Wait for the transaction to be mined
+const receipt = await transaction.wait()
+```
+
+</TabItem>
+<TabItem value="viem">
+
+```tsx
+// Convert 1 ether to WEI format
+const amount = parseEther('1')
+
+// Submits a user operation to the blockchain
+const hash = await walletClient.sendTransaction({
+  to: 'DESTINATION_ADDRESS',
+  value: amount,
+  // This will perform the transfer of ETH
+  data: '0x',
+})
+
+// Wait for the transaction to be mined
+const receipt = await publicClient.waitForTransactionReceipt({ hash })
+```
+
+</TabItem>
+</Tabs>
+
+## Conclusion
+
+Voila, you have successfully sent your first gasless transaction using the Pimlico paymaster with Web3Auth Account Abstraction Provider. To learn more about advance features of the Account Abstraction Provider like performing batch transactions, using ERC-20 paymaster you can refer to the [Account Abstraction Provider](/embedded-wallets/sdk/react) documentation.

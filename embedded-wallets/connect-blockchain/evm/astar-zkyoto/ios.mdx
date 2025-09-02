@@ -1,0 +1,84 @@
+---
+title: Integrate Embedded Wallets with the Astar zKyoto Testnet in iOS/Swift Applications
+sidebar_label: iOS
+image: '/docs/banners/zkevm.png'
+
+keywords: [ios, swift, zkyoto, astar, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Astar zKyoto Testnet in iOS/Swift Applications | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_ios-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_ios-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_ios-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_ios-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_ios-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_ios-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_ios-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Embedded Wallets with the Astar zKyoto Testnet in iOS/Swift Applications"
+  description="Integrate Embedded Wallets with the Astar zKyoto Testnet in iOS/Swift Applications | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/zkevm.png"
+  slug="/embedded-wallets/connect-blockchain/evm/zkyoto/ios"
+/>
+
+While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) on iOS, the private key is available in the SDK state. Use it to derive the user's address and interact with the [Astar zKyoto](https://docs.astar.network/docs/build/zkEVM/quickstart) testnet for signing and JSON-RPC calls.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Installation
+
+<InstallationSnippet />
+
+## Chain Details for zKyoto
+
+<Tabs
+ defaultValue="testnet"
+  values={[
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x5C2359
+- Public RPC URL: https://rpc.startale.com/astar-zkyoto (Avoid using public rpcTarget in production, use services like Infura)
+- Display Name: Astar zKyoto
+- Block Explorer Link: https://zkyoto.explorer.startale.com/
+- Ticker: ETH
+- Ticker Name: ETH
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

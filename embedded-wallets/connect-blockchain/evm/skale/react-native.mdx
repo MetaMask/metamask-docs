@@ -1,0 +1,260 @@
+---
+title: Integrate Embedded Wallets with the Skale Blockchain in React Native
+sidebar_label: React Native
+image: 'banners/skale.png'
+
+keywords: [react-native, skale, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Skale Blockchain in React Native | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="Integrate Embedded Wallets with the Skale Blockchain in React Native"
+  description="Integrate Embedded Wallets with the Skale Blockchain in React Native | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/skale.png"
+  slug="/embedded-wallets/connect-blockchain/evm/skale/react-native"
+/>
+
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [SKALE](https://skale.space/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig` for Europa Hub
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x79f99296',
+  rpcTarget: 'https://mainnet.skalenodes.com/v1/elated-tan-skat',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'SKALE Europa Hub Mainnet',
+  blockExplorer: 'https://elated-tan-skat.explorer.mainnet.skalenodes.com/',
+  ticker: 'sFUEL',
+  tickerName: 'sFUEL',
+}
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x561bf78b',
+  rpcTarget: 'https://testnet.skalenodes.com/v1/juicy-low-small-testnet',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'SKALE Europa Hub Testnet',
+  blockExplorer: 'https://juicy-low-small-testnet.explorer.testnet.skalenodes.com/',
+  ticker: 'sFUEL',
+  tickerName: 'sFUEL',
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Getting the `chainConfig` for Calypso Hub
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x5d456c62',
+  rpcTarget: 'https://mainnet.skalenodes.com/v1/honorable-steel-rasalhague',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'SKALE Calypso Hub Mainnet',
+  blockExplorer: 'https://honorable-steel-rasalhague.explorer.mainnet.skalenodes.com/',
+  ticker: 'sFUEL',
+  tickerName: 'sFUEL',
+}
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x3a14269b',
+  rpcTarget: 'https://testnet.skalenodes.com/v1/giant-half-dual-testnet',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'SKALE Calypso Hub Testnet',
+  blockExplorer: 'https://giant-half-dual-testnet.explorer.testnet.skalenodes.com/ ',
+  ticker: 'sFUEL',
+  tickerName: 'sFUEL',
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Getting the `chainConfig` for Nebula Gaming Hub
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x585eb4b1',
+  rpcTarget: 'https://mainnet.skalenodes.com/v1/green-giddy-denebola',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'SKALE Nebula Gaming Hub Mainnet',
+  blockExplorer: 'https://green-giddy-denebola.explorer.mainnet.skalenodes.com/',
+  ticker: 'sFUEL',
+  tickerName: 'sFUEL',
+}
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x0235ddd0',
+  rpcTarget: 'https://testnet.skalenodes.com/v1/lanky-ill-funny-testnet',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'SKALE Nebula Gaming Hub Testnet',
+  blockExplorer: 'https://lanky-ill-funny-testnet.explorer.testnet.skalenodes.com/',
+  ticker: 'sFUEL',
+  tickerName: 'sFUEL',
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Getting the `chainConfig` for Titan Hub
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x507aaa2a',
+  rpcTarget: 'https://mainnet.skalenodes.com/v1/parallel-stormy-spica',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'SKALE Titan Hub Mainnet',
+  blockExplorer: 'https://parallel-stormy-spica.explorer.mainnet.skalenodes.com/',
+  ticker: 'sFUEL',
+  tickerName: 'sFUEL',
+}
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x3cd156dc',
+  rpcTarget: 'https://testnet.skalenodes.com/v1/aware-fake-trim-testnet',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'SKALE Titan Hub Testnet',
+  blockExplorer: 'https://aware-fake-trim-testnet.explorer.testnet.skalenodes.com/',
+  ticker: 'sFUEL',
+  tickerName: 'sFUEL',
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

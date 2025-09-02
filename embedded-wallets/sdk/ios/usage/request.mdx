@@ -1,0 +1,61 @@
+---
+title: Request Signature
+sidebar_label: request
+description: 'Web3Auth iOS SDK - request | Embedded Wallets'
+---
+
+The `request` method facilitates the use of templated transaction screens for signing transactions. The method will return [SignResponse](#signresponse). It can be used to sign transactions for any EVM chain and screens can be whitelabeled to your branding.
+
+Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
+
+![Request Method](/img/wallet-services/mobile-request-method.png)
+
+## Parameters
+
+| Parameter | Description |
+| --- | --- |
+| `chainConfig` | Defines the chain to be used for signature. |
+| `method` | JSON RPC method name in `String`. Currently, the request method only supports the singing methods. |
+| `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/) to know more. |
+
+## Usage
+
+```swift
+do {
+  var params = [Any]()
+  // Message to be signed
+  params.append("Hello, Web3Auth from iOS!")
+  // User's EOA address
+  params.append(address)
+
+  // focus-start
+  let response = try await web3Auth?.request(
+    chainConfig: ChainConfig(
+      chainId: "0xaa36a7",
+      rpcTarget: "https://eth-sepolia.public.blastapi.io"
+    ),
+    method: "personal_sign",
+    requestParams: params
+  )
+  // focus-end
+
+  if response!.success {
+     print(response!.result!)
+   } else {
+     // Handle Error
+     print(response!.error!)
+   }
+
+} catch {
+  print(error.localizedDescription)
+  // Handle error
+}
+```
+
+## SignResponse
+
+| Name      | Description                                                   |
+| --------- | ------------------------------------------------------------- |
+| `success` | Determines whether the request was successful or not.         |
+| `result?` | Holds the signature for the request when `success` is `true`. |
+| `error?`  | Holds the error for the request when `success` is `false`.    |

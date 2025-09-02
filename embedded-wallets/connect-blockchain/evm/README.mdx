@@ -1,0 +1,35 @@
+---
+title: Integrate Embedded Wallets with EVM Compatible Chains
+sidebar_label: Overview
+image: 'banners/ethereum.png'
+description: 'Integrate Embedded Wallets with EVM Compatible Chains | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import SEO from '@site/src/components/SEO'
+import EVMChains from '../_evm-chains.mdx'
+
+<SEO
+  title="Integrate Embedded Wallets with EVM Compatible Chains"
+  description="Integrate Embedded Wallets with EVM Compatible Chains | Embedded Wallets"
+  image="https://web3auth.io/docs/banners/ethereum.png"
+  slug="/embedded-wallets/connect-blockchain/evm/"
+/>
+
+Embedded Wallets (formerly Web3Auth) SDKs are fully compatible with all EVM-based chains, following the specifications outlined in EIP-155 and EIP-1193. EIP-155 defines the standard for transaction replay protection, enhancing security across platforms. EIP-1193 outlines the standard EVM API, enabling developers to interact with EVM blockchains efficiently.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+::::info
+
+With Embedded Wallets v10 onwards, chains are already added to the Dashboard. You can use any chain from the extensive list of predefined chains and add more if needed by toggling them on. See our guide to [add custom chains](/embedded-wallets/connect-blockchain/custom-chains) for more details.
+
+::::
+
+We have documented some of the famous EVM Compatible Chains here.
+
+<EVMChains />

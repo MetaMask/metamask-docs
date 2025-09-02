@@ -1,0 +1,649 @@
+---
+title: Integrate Embedded Wallets with the Solana Blockchain in Flutter
+sidebar_label: Flutter
+image: 'banners/solana.png'
+
+keywords: [flutter, solana, embedded-wallets, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Solana Blockchain in Flutter | Embedded Wallets'
+---
+
+While using the Embedded Wallets Flutter SDK (formerly Web3Auth), you can retrieve the Ed25519 private key upon successful authentication. This private key can be used to derive the user's public address and interact with the [Solana](https://solana.org/) chain. We’ve highlighted a few methods here to get you started quickly.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Installation
+
+To interact with the Solana blockchain in Flutter, you can use any Solana compatible package. Here, we're using [solana](https://pub.dev/packages/solana) to demonstrate how to interact with Solana chain using Web3Auth.
+
+```dart
+flutter pub add solana get_it hex
+```
+
+> Note: We will also be using `get_it` package for dependency injection, and `hex` package to perform Hex encoding and decoding.
+
+## Initialize
+
+To Initialize the `SolanaClient` we require `rpcUrl` and `websocketUrl`. The `rpcUrl` will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response. For this example, we are using `rpcUrl` & `websocketUrl` for Devnet-beta. To interact with Testnet or Mainnet, you can simply change the `rpcUrl` and `websocketUrl`.
+
+### Initializing Solana SDK
+
+In the below code block, we'll initialize the `SolanaClient` using the Devnet-beta rpc and websocket urls. We'll also register the instance in GetIt for it to be accessed anywhere using service locator.
+
+```dart
+import 'package:flutter_solana_example/core/solana/solana_provider.dart';
+import 'package:get_it/get_it.dart';
+// focus-next-line
+import 'package:solana/solana.dart';
+
+class ServiceLocator {
+  ServiceLocator._();
+
+  static GetIt get getIt => GetIt.instance;
+
+  static Future<void> init() async {
+    // focus-start
+    final solanaClient = SolanaClient(
+      rpcUrl: Uri.parse('https://api.devnet.solana.com'),
+      websocketUrl: Uri.parse('ws://api.devnet.solana.com'),
+    );
+     // focus-end
+
+    // Register SolanaClient to be accessed using service locator
+    getIt.registerLazySingleton<SolanaClient>(() => solanaClient);
+  }
+}
+```
+
+### Initializing Web3Auth
+
+In the below code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, we can route them directly to `HomeScreen`, otherwise we can route them to `LoginScreen`.
+
+By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter during initialization.
+
+> Note: The session can be persisted only for 30 days max.
+
+```dart
+// Additional imports
+// ...
+import 'package:web3auth_flutter/web3auth_flutter.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize ServiceLocator
+  ServiceLocator.init();
+
+  final Uri redirectUrl;
+  if (Platform.isAndroid) {
+    redirectUrl = Uri.parse('w3aexample://com.example.flutter_solana_example/auth');
+  } else {
+    redirectUrl = Uri.parse('com.web3auth.fluttersolanasample://auth');
+  }
+
+  // focus-start
+  await Web3AuthFlutter.init(
+    Web3AuthOptions(
+      clientId:
+          "BHgArYmWwSeq21czpcarYh0EVq2WWOzflX-NTK-tY1-1pauPzHKRRLgpABkmYiIV_og9jAvoIxQ8L3Smrwe04Lw",
+      network: Network.sapphire_devnet,
+      redirectUrl: redirectUrl,
+    ),
+  );
+
+  // focus-end
+
+  runApp(const MainApp());
+}
+
+class MainApp extends StatefulWidget {
+  const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  late final Future<String> privateKeyFuture;
+  @override
+  void initState() {
+    super.initState();
+    privateKeyFuture = Web3AuthFlutter.getEd25519PrivKey();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: FutureBuilder<String>(
+        future: privateKeyFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            // focus-start
+            if (snapshot.hasData) {
+              // Check if user is already authenticated. If user is already
+              // authenticated the snapshot.data will be non empty string
+              // representing the private key used for Solana ecosystem.
+              if (snapshot.data!.isNotEmpty) {
+                return const HomeScreen();
+              }
+            }
+            return const LoginScreen();
+            // focus-end
+          }
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        },
+      ),
+    );
+  }
+}
+```
+
+## Get User Info
+
+After logging in, the Web3Auth instance will provide you with information regarding the user that is logged in. This information is obtained directly from the JWT token and is not stored by Web3Auth. Therefore, this information can only be accessed through social logins after the user has logged into your application.
+
+```dart
+
+// ..
+// Additional code
+// ..
+class _HomeScreenState extends State<HomeScreen> {
+  late final ValueNotifier<bool> isAccountLoaded;
+  late final Ed25519HDKeyPair keyPair;
+  late final SolanaProvider provider;
+  late double balance;
+  // focus-next-line
+  late final dynamic web3AuthInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    isAccountLoaded = ValueNotifier<bool>(false);
+    provider = ServiceLocator.getIt<SolanaProvider>();
+    loadAccount(context);
+  }
+
+  Future<void> loadAccount(BuildContext context) async {
+    try {
+      final privateKey = await Web3AuthFlutter.getEd25519PrivKey();
+
+      // getUserInfo method can be used to fetch the user information
+      // such as email, name, isMFA enabled. Checkout documentation
+      // to know more.
+      // focus-next-line
+      web3AuthInfo = await Web3AuthFlutter.getUserInfo();
+
+      // ..
+      // Additional codebase
+      // ..
+      isAccountLoaded.value = true;
+    } catch (e, _) {
+      if (context.mounted) {
+        showInfoDialog(context, e.toString());
+      }
+    }
+  }
+
+  Widget get verticalGap => const SizedBox(height: 16);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            logOut(context);
+          },
+        ),
+      ),
+      body: ValueListenableBuilder<bool>(
+        valueListenable: isAccountLoaded,
+        builder: (context, isLoaded, _) {
+          if (isLoaded) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    balance.toString(),
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  // focus-start
+                  if (web3AuthInfo.email != null) ...[
+                    verticalGap,
+                    Text(
+                      web3AuthInfo.email!,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    )
+                  ],
+                  // focus-end
+
+                  // ..
+                  // Additional code
+                  // ..
+
+                  verticalGap,
+
+                  // Logs the user information in the console
+                  // focus-start
+                  OutlinedButton(
+                    onPressed: () async {
+                     showInfoDialog(
+                        context,
+                        jsonEncode(web3AuthInfo.toJson()),
+                        true,
+                      );
+                    },
+                    child: const Text("Get user info"),
+                  ),
+                  // focus-end
+                ],
+              ),
+            );
+          }
+          return const Center(child: CircularProgressIndicator.adaptive());
+        },
+      ),
+    );
+  }
+```
+
+## Get Account and Balance
+
+We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retive user's public address, and solana balance. We'll use `SolanaProvider` class to interact with Solana cluster and fetch user balance.
+
+### Setup Solana Provider
+
+In the below code block, we'll create Solana provider to interact and perform solana operations.
+
+```dart
+import 'dart:math';
+
+import 'package:solana/dto.dart';
+import 'package:solana/solana.dart';
+
+const int tokenDecimals = 9;
+
+class SolanaProvider {
+  final SolanaClient solanaClient;
+
+  SolanaProvider(this.solanaClient);
+
+  // focus-start
+  Future<double> getBalance(String address) async {
+    final balanceResponse = await solanaClient.rpcClient.getBalance(
+      address,
+    );
+
+    /// We are dividing the balance by 10^9, because Solana's
+    /// token decimals is set to be 9;
+    return balanceResponse.value / pow(10, tokenDecimals);
+  }
+  // focus-end
+
+   // ..
+  // Additional methods
+  // ..
+}
+```
+
+Once we have setup the `SolanaProvider` we'll use it to fetch user balance in the `HomeScreen`.
+
+```dart
+// ..
+// Additional code
+// ..
+class _HomeScreenState extends State<HomeScreen> {
+  late final ValueNotifier<bool> isAccountLoaded;
+  late final Ed25519HDKeyPair keyPair;
+  late final SolanaProvider provider;
+  late double balance;
+  late final dynamic web3AuthInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    isAccountLoaded = ValueNotifier<bool>(false);
+    // focus-next-line
+    provider = ServiceLocator.getIt<SolanaProvider>();
+    loadAccount(context);
+  }
+
+  Future<void> loadAccount(BuildContext context) async {
+    try {
+      final privateKey = await Web3AuthFlutter.getEd25519PrivKey();
+
+      // ..
+      // Additional code
+      // ..
+
+      /// The ED25519 PrivateKey returns a key pair from
+      /// which we only require first 32 byte.
+      // focus-start
+      keyPair = await Ed25519HDKeyPair.fromPrivateKeyBytes(
+        privateKey: privateKey.hexToBytes.take(32).toList(),
+      );
+      balance = await provider.getBalance(keyPair.address);
+      // focus-end
+      isAccountLoaded.value = true;
+    } catch (e, _) {
+      if (context.mounted) {
+        showInfoDialog(context, e.toString());
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ValueListenableBuilder<bool>(
+        valueListenable: isAccountLoaded,
+        builder: (context, isLoaded, _) {
+          if (isLoaded) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // focus-start
+                  Text(
+                    balance.toString(),
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  // focus-end
+                  // ..
+                  // Additional code
+                  // ..
+                  // focus-start
+                  Row(
+                    children: [
+                      const Spacer(),
+                      Text(
+                        keyPair.address.addressAbbreviation,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          copyContentToClipboard(context, keyPair.address);
+                        },
+                        icon: const Icon(Icons.copy),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                  // focus-end
+                  // ..
+                  // Additional code
+                  // ..
+                ],
+              ),
+            );
+          }
+          return const Center(child: CircularProgressIndicator.adaptive());
+        },
+      ),
+    );
+  }
+}
+```
+
+## Sign Transaction
+
+Let's now go through how can we sign the transaction. In the below code block, we'll add a new method inside `SolanaProvider` we setup earlier to help us sign a transfer transaction. After successful implementation, we can use the method in `HomeScreen`.
+
+```dart
+class SolanaProvider {
+  final SolanaClient solanaClient;
+
+  SolanaProvider(this.solanaClient);
+
+  // focus-start
+  Future<String> signSendTransaction({
+    required Ed25519HDKeyPair keyPair,
+    required String destination,
+    required double value,
+  }) async {
+    /// Converting user input to the lamports, which are smallest value
+    /// in Solana.
+    final num lamports = value * pow(10, tokenDecimals);
+
+    final message = Message(instructions: [
+      SystemInstruction.transfer(
+        fundingAccount: keyPair.publicKey,
+        recipientAccount: Ed25519HDPublicKey.fromBase58(destination),
+        lamports: lamports.toInt(),
+      ),
+    ]);
+
+    final recentBlockHash = await getRecentBlockhash();
+
+    final signedTx = await signTransaction(recentBlockHash, message, [keyPair]);
+    return signedTx.signatures.first.toBase58();
+  }
+  // focus-end
+
+  Future<RecentBlockhash> getRecentBlockhash() async {
+    return await solanaClient.rpcClient
+        .getRecentBlockhash(commitment: Commitment.finalized)
+        .value;
+  }
+}
+
+// HomeScreen code
+
+// ..
+// Additional code
+// ..
+class _HomeScreenState extends State<HomeScreen> {
+
+  late final SolanaProvider provider;
+
+  @override
+  void initState() {
+    super.initState();
+    isAccountLoaded = ValueNotifier<bool>(false);
+    // focus-next-line
+    provider = ServiceLocator.getIt<SolanaProvider>();
+    loadAccount(context);
+  }
+
+  // ..
+  // Additional code
+  // ..
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // ..
+      body: ValueListenableBuilder<bool>(
+        valueListenable: isAccountLoaded,
+        builder: (context, isLoaded, _) {
+          if (isLoaded) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // focus-start
+                  OutlinedButton(
+                    onPressed: () {
+                      signSelfTransfer(context);
+                    },
+                    child: const Text(
+                      "Sign Self transfer 0.0001 Sol",
+                    ),
+                  ),
+                  // focus-end
+                ],
+              ),
+            );
+          }
+          return const Center(child: CircularProgressIndicator.adaptive());
+        },
+      ),
+    );
+  }
+
+  // focus-start
+  Future<void> signSelfTransfer(BuildContext context) async {
+    showLoader(context);
+    try {
+      final signedMessage = await provider.signSendTransaction(
+        keyPair: keyPair,
+        destination: keyPair.address,
+        value: 0.0001,
+      );
+      if (context.mounted) {
+        removeDialog(context);
+        showInfoDialog(context, "Signed message\n$signedMessage");
+      }
+    } catch (e, _) {
+      if (context.mounted) {
+        removeDialog(context);
+        showInfoDialog(context, e.toString());
+      }
+    }
+  }
+  // focus-end
+}
+
+```
+
+## Send Transaction
+
+For the send transaction, we'll create a new method `sendSol` in the `SolanaProvider`.
+
+```dart
+class SolanaProvider {
+  final SolanaClient solanaClient;
+
+  SolanaProvider(this.solanaClient);
+
+  // focus-start
+  Future<String> sendSol({
+    required Ed25519HDKeyPair keyPair,
+    required String destination,
+    required double value,
+  }) async {
+    /// Converting user input to the lamports, which are smallest value
+    /// in Solana.
+    final num lamports = value * pow(10, tokenDecimals);
+    final transactionHash = await solanaClient.transferLamports(
+      source: keyPair,
+      destination: Ed25519HDPublicKey.fromBase58(destination),
+      lamports: lamports.toInt(),
+    );
+
+    return transactionHash;
+  }
+  // focus-end
+}
+```
+
+Once created, we can use the method in `HomeScreen` to transfer SOL. Upon successful transfer, we'll also refresh the balance of the user.
+
+```dart
+// ..
+
+class _HomeScreenState extends State<HomeScreen> {
+  late final ValueNotifier<bool> isAccountLoaded;
+  late final Ed25519HDKeyPair keyPair;
+  late final SolanaProvider provider;
+  late double balance;
+  late final dynamic web3AuthInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    isAccountLoaded = ValueNotifier<bool>(false);
+    provider = ServiceLocator.getIt<SolanaProvider>();
+    loadAccount(context);
+  }
+
+  Future<void> refreshBalance(BuildContext context) async {
+    try {
+      isAccountLoaded.value = false;
+      balance = await provider.getBalance(keyPair.address);
+      isAccountLoaded.value = true;
+    } catch (e, _) {
+      if (context.mounted) {
+        showInfoDialog(context, e.toString());
+      }
+    }
+  }
+
+  Widget get verticalGap => const SizedBox(height: 16);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            logOut(context);
+          },
+        ),
+      ),
+      body: ValueListenableBuilder<bool>(
+        valueListenable: isAccountLoaded,
+        builder: (context, isLoaded, _) {
+          if (isLoaded) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // ..
+                  verticalGap,
+                  // focus-start
+                  OutlinedButton(
+                    onPressed: () {
+                      selfTransfer(context);
+                    },
+                    child: const Text(
+                      "Self transfer 0.0001 Sol",
+                    ),
+                  ),
+                  // focus-end
+                  // ..
+                ],
+              ),
+            );
+          }
+          return const Center(child: CircularProgressIndicator.adaptive());
+        },
+      ),
+    );
+  }
+
+  // focus-start
+  Future<void> selfTransfer(BuildContext context) async {
+    showLoader(context);
+    try {
+      final hash = await provider.sendSol(
+        destination: keyPair.address,
+        keyPair: keyPair,
+        value: 0.0001,
+      );
+      if (context.mounted) {
+        removeDialog(context);
+        showInfoDialog(context, "Success: $hash");
+        refreshBalance(context);
+      }
+    } catch (e, _) {
+      if (context.mounted) {
+        removeDialog(context);
+        showInfoDialog(context, e.toString());
+      }
+    }
+  }
+  // focus-end
+}
+```

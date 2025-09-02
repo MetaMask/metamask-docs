@@ -1,0 +1,273 @@
+---
+title: Auth0 Login with Embedded Wallets
+sidebar_label: Auth0
+description: 'Auth0 Login with Embedded Wallets | Embedded Wallets'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import Tiles from '@theme/Tiles'
+
+import CustomConnectionOptions from '@site/static/img/w3a-dashboard/authentication-custom-connections.png'
+import Auth0Connection from '@site/static/img/w3a-dashboard/auth0-connection.png'
+
+import JwtLoginAuth0 from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_auth0.mdx'
+import ImplicitLoginAuth0Google from '../../sdk/react/advanced/_custom-authentication-snippets/_implicit_login_auth0_google.mdx'
+import ImplicitLoginAuth0Spa from '../../sdk/react/advanced/_custom-authentication-snippets/_implicit_login_auth0_spa.mdx'
+
+Auth0 is a powerful authentication and authorization platform that enables developers to securely manage user identities. Web3Auth offers native support for integrating Auth0 as a service provider, allowing projects to leverage Auth0’s robust authentication mechanisms within the Web3Auth ecosystem.
+
+[Take a look at the supported social logins on Auth0](https://marketplace.auth0.com/categories/social-login)
+
+## Create an Auth0 Application
+
+To begin, developers must first create an Auth0 application specific to their project. This initial setup is essential before configuring the connection with Web3Auth. Once the Auth0 application is created, developers can proceed to establish an Auth0 connection within the Embedded Wallets Dashboard.
+
+This integration allows users to authenticate through Auth0, while still benefiting from Web3Auth’s key management and wallet abstraction features. For platform-specific implementation details or additional customization, developers are encouraged to refer to the [official Auth0 documentation](https://auth0.com/docs/quickstart/native#webapp).
+
+export const Auth0Setup = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: 'https://auth0.com/docs/quickstart/spa/vanillajs/interactive',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: 'https://auth0.com/docs/quickstart/native/android/interactive',
+      },
+      {
+        key: 'ios',
+        title: 'iOS',
+        icon: 'logo-apple.png',
+        path: 'https://auth0.com/docs/quickstart/native/ios-swift/interactive',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: 'https://auth0.com/docs/quickstart/native/flutter/interactive',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: 'https://auth0.com/docs/quickstart/native/react-native/interactive',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={Auth0Setup} />
+
+## Create an Auth0 Connection
+
+:::success Create Auth0 Connection on Dashboard
+
+To use this feature, developers must go to the `Custom Connections` tab in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+
+:::
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={CustomConnectionOptions}
+    style={{
+      maxWidth: '800px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Custom Connection Options"
+  />
+</div>
+
+Follow these steps to create an Auth0 connection:
+
+1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+2. Go to the `Custom Connections` section.
+3. Click on the `Settings` icon near the Auth0 connection.
+4. Enter the `Auth Connection ID`.
+5. Select the `JWT user identifier`: `email`, `sub` or `custom`.
+6. Toggle the Case Sensitivity of `User Identifier`. (Optional)
+7. Enter `Auth0 Client ID`.
+8. Enter `Auth0 Domain`.
+9. Finally, click on the `Add Connection` button.
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={Auth0Connection}
+    style={{
+      maxWidth: '800px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="Auth0 Connection"
+  />
+</div>
+
+## Usage
+
+Since, the `Auth0 Connection` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+
+> Follow our [Quick Starts](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to setup the basic flow.
+
+### Web
+
+<Tabs>
+  <TabItem value="implicit-spa" label="Implicit Login (SPA)">
+    <ImplicitLoginAuth0Spa />
+  </TabItem>
+  <TabItem value="implicit" label="Implicit Login Auth0 Google">
+    <ImplicitLoginAuth0Google />
+  </TabItem>
+  <TabItem value="jwt" label="JWT Login with Auth0 SDK">
+    <JwtLoginAuth0 />
+  </TabItem>
+</Tabs>
+
+### Android
+
+##### Create Web3Auth Instance
+
+In your activity, create a `Web3Auth` instance with your Web3Auth project's configurations.
+
+```kotlin
+web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Developer Dashboard
+    network = Network.SAPPHIRE_MAINNET
+    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), // your app's redirect URL
+    // focus-start
+    loginConfig = hashMapOf("jwt" to LoginConfigItem(
+        verifier = "web3auth-auth0-demo",
+        typeOfLogin = TypeOfLogin.JWT,
+        name = "Auth0 Login",
+        clientId = getString(R.string.web3auth_auth0_client_id)
+        )
+    )
+    // focus-end
+  )
+)
+
+// Handle user signing in when app is not alive
+web3Auth.setResultUrl(intent?.data)
+```
+
+##### Logging in
+
+Once initialized, you can use the `web3Auth.login(LoginParams("{selectedLoginProvider}"))` function to authenticate the user when they click the login button.
+
+```kotlin
+private fun signIn() {
+  val selectedLoginProvider = Provider.JWT   // For Auth0, we use JWT
+  val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+    // focus-start
+    LoginParams(
+      selectedLoginProvider,
+      extraLoginOptions = ExtraLoginOptions(
+        domain = "https://YOUR_AUTH0_DOMAIN",
+        verifierIdField = "sub"
+      )
+    )
+    // focus-end
+  )
+}
+```
+
+When connecting, the `login` function takes the LoginParams arguments for the login. See the [LoginParams](/embedded-wallets/sdk/android/usage/login#parameters) for more details.
+
+### Flutter
+
+##### Create Web3Auth Instance
+
+In your `main.dart` file, initialize the `Web3AuthFlutter` plugin at the very beginning such as in the overriden `initState` function
+
+```dart
+Future<void> initPlatformState() async {
+
+  Uri redirectUrl;
+  if (Platform.isAndroid) {
+    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
+    // w3a://com.example.w3aflutter/auth
+  } else if (Platform.isIOS) {
+    redirectUrl = Uri.parse('{bundleId}://auth');
+    // com.example.w3aflutter://openlogin
+  } else {
+    throw UnKnownException('Unknown platform');
+  }
+  // focus-start
+  final loginConfig = HashMap<String, LoginConfigItem>();
+  loginConfig['jwt'] = LoginConfigItem(
+    verifier: "VERIFIER-NAME", // get it from web3auth dashboard
+    typeOfLogin: TypeOfLogin.jwt,
+    name: "Web3Auth Flutter Auth0 Example",
+    clientId: "AUTH0-CLIENT-ID" // auth0 client id
+  );
+  // focus-end
+
+  await Web3AuthFlutter.init(Web3AuthOptions(
+    clientId:'YOUR WEB3AUTH CLIENT ID FROM DASHBOARD',
+    network: Network.sapphire_mainnet,
+    redirectUri: redirectUrl,
+    loginConfig: loginConfig
+  ));
+
+  await Web3AuthFlutter.initialize();
+}
+```
+
+##### Logging in
+
+Once initialized, you can use the `Web3AuthFlutter.login(LoginParams( loginProvider: Provider.google ))` function to authenticate the user when they click the login button.
+
+```dart
+Future<Web3AuthResponse> _withAuth0() {
+  // focus-start
+  return Web3AuthFlutter.login(LoginParams(
+    loginProvider: Provider.jwt,
+    mfaLevel: MFALevel.OPTIONAL,
+    extraLoginOptions: ExtraLoginOptions(
+      domain: 'YOUR_AUTH0_DOMAIN', // eg. https://torus.us.auth0.com
+      verifierIdField: 'sub')));
+  // focus-end
+}
+```
+
+Read more about initializing the Flutter SDK [here](/embedded-wallets/sdk/flutter#initialize-web3auth).
+
+### React Native
+
+```tsx
+const web3auth = new Web3Auth(WebBrowser, SecureStore, {
+  clientId,
+  network: OPENLOGIN_NETWORK.SAPPHIRE_MAINNET, // SAPPHIRE_MAINNET or SAPPHIRE_DEVNET
+  loginConfig: {
+    // focus-start
+    jwt: {
+      verifier: 'YOUR_AUTH0_VERIFIER_NAME', // Please create a verifier on the developer dashboard and pass the name here
+      typeOfLogin: 'jwt',
+      clientId: 'AUTH0_CLIENT_ID_123ABcdefg4HiJKlMno4P5QR6stUvWXY', // use your app client id you got from auth0
+    },
+    // focus-end
+  },
+})
+```
+
+```tsx
+const web3authResponse = await web3auth.login({
+  redirectUrl: resolvedRedirectUrl,
+  // focus-start
+  loginProvider: 'jwt',
+  extraLoginOptions: {
+    domain: 'https://YOUR-AUTH0-DOMAIN', // Please append "https://" before your domain
+    verifierIdField: 'sub', // For SMS & Email Passwordless, use "name" as verifierIdField
+  },
+  // focus-end
+})
+```

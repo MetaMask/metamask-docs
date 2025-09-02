@@ -160,7 +160,7 @@ for common restriction patterns, including:
 - Restricting token transfers and approvals.
 - Limiting execution frequency.
 
-For other restriction patterns, you can also [create custom caveat enforcers](../../tutorials/create-custom-caveat-enforcer.md) by implementing the `ICaveatEnforcer` interface.
+For other restriction patterns, you can also [create custom caveat enforcers](/tutorials/create-custom-caveat-enforcer) by implementing the `ICaveatEnforcer` interface.
 
 ## Attenuating authority with redelegations
 

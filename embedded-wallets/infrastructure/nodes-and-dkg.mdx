@@ -1,0 +1,102 @@
+---
+title: Nodes and DKG
+sidebar_label: Nodes and DKG
+description: 'DKG Nodes in Wallet Management | Embedded Wallets'
+---
+
+The Web3Auth Network Nodes run a Distributed Key Generation protocol amongst themselves to assign, store and return secrets/keys to users. In general within Web3Auth Network, nodes manage a share retrieved via conventional OAuth flows.
+
+The architecture consists of four parts:‌
+
+- Nodes in charge of Distributed Key Generation (DKG)
+- A smart contract in charge of the management of nodes
+- A private BFT network between nodes
+- A front-end client/SDK that interacts with nodes
+
+![Architecture](/img/guides/graph-6-final.png)
+
+A smart contract is used for node discovery. Nodes are selected, operate for a fixed period, and generate a set of keys via DKG.‌
+
+When a user arrives at a DApp, the client is loaded. From there, a user logs in, they provide proof that they are logged in, and the proof is verified by each node individually. This proof is integrated with the modern OAuth 2.0 Token Authentication flow. For new users, nodes will assign a new key share from the pre-generated set of key shares, and store this assignment in an internal mapping. For returning users, nodes will look up their internal mapping and return that user's corresponding key share.‌
+
+The client then assembles these shares and reconstructs the users key in the front-end.
+
+## Lifecycle
+
+### Initialization
+
+When a Web3Auth Network Node is started, it tries to register its connection details on an Ethereum smart contract. Once all nodes have been registered for that epoch, they try to connect with each other to set up the BFT network, and start generating distributed keys. They also listen for incoming information from nodes in the previous epoch.
+
+### Operation
+
+During operation, a node runs three separate parallel process:
+
+1. Mapping user IDs to keys
+2. Generating distributed key shares
+3. Allowing users to retrieve their shares.
+
+#### Mapping user IDs to keys
+
+The mapping process primarily interacts with the BFT layer, which allows nodes to share state on which keys belong to which users. When a new user requests for a key, the node submits a BFT transaction that modifies this state. Existing users who have logged in are compared against this shared state to ensure that they retrieve the correct key share.
+
+#### Generating distributed key shares
+
+The distributed key generation process primarily uses libp2p for communication between nodes, and generates a buffer of shared keys, in order to reduce the average response time for key assignments for new users.
+
+#### Allowing users to retrieve their shares.
+
+The share retrieval process starts when a user wishes to retrieve their keys. They individually submit their OAuth token via a commit-reveal scheme to the nodes, and once this OAuth token is checked for uniqueness and validity, each node returns the user's \(encrypted\) key share. This does not require communication between the nodes.
+
+Assignments of keys to new users only require interaction with the mapping process, assuming that there is at least one unassigned key in the buffer. As such, we are able to assign keys to accounts ahead of time, before that accounts' owner decides to login and reconstruct the key. This forms the basis for our account resolver APIs.
+
+### Migration
+
+When an epoch comes to an end, the current node operators agree on the next epoch, and send information about the current mapping state and the existing keys to the next set of nodes in the next epoch. This is done via typical reliable broadcast methods for the mapping, and PSS \(proactive secret sharing\) for the key shares.
+
+### Trust Assumptions
+
+The Torus Network operates on two main threshold assumptions: a key generation threshold \(&gt;¼\)and a key retrieval threshold \(&gt;½\). Generating keys for new users requires more than ¾ of the nodes to be operating honestly, and reconstructing keys for existing users requires &gt;½ of the nodes to be operating honestly. For more information, refer to the dual-threshold construction in [AVSS](https://eprint.iacr.org/2002/134.pdf).
+
+While most other secret sharing schemes use ⅔ honest majority with a &gt;⅓ reconstruction threshold, our preference for total system failure over key theft favors the former thresholds.‌
+
+## Key Assignments
+
+The keys are assigned to a combination of `verifier` \(e.g., Google, Reddit, Discord\) and `verifier_id` \(e.g., email, username\), which is a unique identifier respective to and provided by the `verifier`.‌ This assignment can be triggered by any node and is decided through the nodes consensus layer.
+
+### Verifiers and Key Retrieval
+
+The fundamental flow for Torus sign-in is as follows:
+
+![Standard login with OAuth2 (Google, Facebook, Apple, Reddit, Discord, Twitch)](/img/guides/login-key-assignments.png)
+
+1. Your application gets the user to sign-in via their preferred method \(OAuth / email password / passwordless / verification code\).
+2. After the user gives consent/verifies his/her email, Torus SDK will receive an ID token and assign a key to the user depending on User Verifier ID from ID Token.
+3. The key is retrieved from the Torus network and exposed to Web3 provider \(DApp\) to complete user sign-in request.
+4. Torus uses this ID Token to check if the user's profile information exists in the DApp.
+   1. If it does, the user will be signed in to the DApp with their preferred login.
+   2. If it doesn't, the user can create a new account on the DApp with their preferred login.
+
+In order to allow for general verifiers to be used instead of only allowing OAuth, we typically need at least two of these APIs to be implemented by the external verifier:‌
+
+1. an API that issues unique tokens when a user is logged in.
+2. an API that consumes these tokens and returns user information as well as when the token was issued.
+
+The first API must be accessible from the browser \(e.g. CORS-enabled, restricted headers\), in order to ensure that the Torus servers are not able to intercept the user's token \(front-running\).
+
+Typically any entity that fulfills these two APIs and provides signatures on unique ID strings and timestamp can be a verifier. This is extendable to several authentication schemes, including existing authentication standards like OAuth Token flow and OpenID Connect.‌
+
+## Front-Running Protection
+
+In order to prevent a rogue node, or the Torus servers, from front-running you by taking your token, impersonating your login, and thereby stealing your key, we use a commitment scheme on our token similar to Bracha's Reliable Broadcast, to ensure that all nodes can be sure that a threshold number of other nodes are aware of the commitment, before it is finally revealed.‌
+
+The general approach is as follows: we ensure that the front-end gets access to the token first, creates a commitment to the token and a temporary public-private keypair, and reveals the token only if a threshold number of nodes accept this commitment. The nodes will then use this keypair to encrypt the shares before sending it to the user.
+
+This is done by generating a temporary public-private keypair in the front-end. The front-end calls the first API and receives an authentication token. This token is hashed, and the front-end sends the token hash and the temporary public key to each node, and each node returns a signature on this message, if this is the first time they have seen this token commitment. A bundle of these signatures is the proof, and submitting the proof together with the plain \(unhashed token\) to each node results in the node responding with a key share that is encrypted with the temporary public key.
+
+### Attack 1: Front-runner intercepts the original commitment request and sends a modified public key
+
+In this case, the user will not receive a threshold number of signatures, and thus will not reveal their token. They will then be required to login again and request for a new token. Since the requests to the nodes are made in a random order, eventually a threshold honest set can be reached before a front-runner receives the commitment request.
+
+### Attack 2: Front-runner intercepts the reveal request and resends it to other nodes
+
+Since a public key is already associated with the token in the commitment request, nodes will only respond with encrypted shares. Even if a front-runner intercepts the encrypted shares, they will be unable to decrypt it.

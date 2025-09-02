@@ -1,0 +1,102 @@
+---
+title: useSolanaWallet
+sidebar_label: useSolanaWallet
+description: '@web3auth/modal React Hooks useSolanaWallet | Embedded Wallets'
+---
+
+Hook to retrieve and manage Solana wallet, accounts, and connection from Web3Auth.
+
+### Import
+
+```tsx
+import { useSolanaWallet } from '@web3auth/modal/react'
+```
+
+### Usage
+
+```tsx
+import { useSolanaWallet } from '@web3auth/modal/react'
+
+function SolanaWalletInfo() {
+  const { solanaWallet, accounts, connection } = useSolanaWallet()
+
+  return (
+    <div>
+      <div>Accounts: {accounts ? accounts.join(', ') : 'No accounts'}</div>
+      <div>SolanaWallet: {solanaWallet ? 'Available' : 'Not available'}</div>
+      <div>Connection: {connection ? 'Connected' : 'Not connected'}</div>
+    </div>
+  )
+}
+```
+
+### Return Type
+
+```tsx
+import { type IUseSolanaWallet } from '@web3auth/modal/react'
+```
+
+#### accounts
+
+`string[] | null`
+
+The list of Solana account addresses, or null if not available.
+
+#### solanaWallet
+
+`SolanaWallet | null`
+
+The SolanaWallet instance for interacting with the Solana blockchain, or null if not available.
+
+#### connection
+
+`Connection | null`
+
+The Solana Connection instance for making RPC calls, or null if not available.
+
+### Example: Fetching SOL Balance
+
+```tsx title="getBalance.tsx"
+import { useSolanaWallet } from '@web3auth/modal/react/solana'
+import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js'
+import { useEffect, useState } from 'react'
+
+export function Balance() {
+  const { accounts, connection } = useSolanaWallet()
+  const [balance, setBalance] = useState<number | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const fetchBalance = async () => {
+    if (connection && accounts && accounts.length > 0) {
+      try {
+        setIsLoading(true)
+        setError(null)
+        const publicKey = new PublicKey(accounts[0])
+        const balance = await connection.getBalance(publicKey)
+        setBalance(balance)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Unknown error')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchBalance()
+  }, [connection, accounts])
+
+  return (
+    <div>
+      <h2>Balance</h2>
+      <div>{balance !== null && `${balance / LAMPORTS_PER_SOL} SOL`}</div>
+      {isLoading && <span className="loading">Loading...</span>}
+      {error && <span className="error">Error: {error}</span>}
+      <button onClick={fetchBalance} type="submit" className="card">
+        Fetch Balance
+      </button>
+    </div>
+  )
+}
+```

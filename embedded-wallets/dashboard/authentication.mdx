@@ -1,0 +1,279 @@
+---
+title: Authentication
+sidebar_label: Authentication
+image: 'img/docs-meta-cards/documentation-card.png'
+description: 'Configure authentication methods and login connections | Embedded Wallets'
+---
+
+import AuthenticationSocialConnections from '@site/static/img/w3a-dashboard/authentication-social-connections.png'
+import AuthenticationCustomConnections from '@site/static/img/w3a-dashboard/authentication-custom-connections.png'
+import AuthenticationGroupConnectionsSelect from '@site/static/img/w3a-dashboard/authentication-group-connections-select.png'
+
+import Tiles from '@theme/Tiles'
+
+export const tileGroupsDataBasic = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'email-passwordless',
+        title: 'Email Passwordless',
+        icon: 'logo-email-passwordless.png',
+        path: '/embedded-wallets/authentication/basic-logins/email-passwordless',
+      },
+      {
+        key: 'sms-otp',
+        title: 'SMS OTP',
+        icon: 'logo-sms-passwordless.png',
+        path: '/embedded-wallets/authentication/basic-logins/sms-otp',
+      },
+      {
+        key: 'external-wallets',
+        title: 'External Wallets',
+        icon: 'logo-external-wallet.svg',
+        path: '/embedded-wallets/authentication/basic-logins/external-wallets',
+      },
+    ],
+  },
+]
+
+export const tileGroupsDataSocial = [
+  {
+    name: "",
+    description: "",
+    tiles: [
+        {
+        key: "google",
+        title: "Google",
+        icon: "logo-google.png",
+        path: "/embedded-wallets/authentication/social-logins/google",
+        },
+        {
+        key: "twitter",
+        title: "X (Twitter)",
+        icon: "logo-twitter.png",
+        path: "/embedded-wallets/authentication/social-logins/oauth/#login-with-x",
+        },
+        {
+        key: "facebook",
+        title: "Facebook",
+        icon: "logo-facebook.png",
+        path: "/embedded-wallets/authentication/social-logins/facebook",
+        },
+        {
+        key: "discord",
+        title: "Discord",
+        icon: "logo-discord.png",
+        path: "/embedded-wallets/authentication/social-logins/discord",
+        },
+        {
+        key: "farcaster",
+        title: "Farcaster",
+        icon: "logo-farcaster.png",
+        path: "/embedded-wallets/authentication/social-logins/oauth/#login-with-farcaster",
+        },
+
+        {
+        key: "apple",
+        title: "Apple",
+        icon: "logo-apple.png",
+        path: "/embedded-wallets/authentication/social-logins/oauth/#login-with-apple",
+        },
+        {
+        key: "github",
+        title: "GitHub",
+        icon: "logo-github.png",
+        path: "/embedded-wallets/authentication/social-logins/oauth/#login-with-github",
+        },
+        {
+        key: "reddit",
+        title: "Reddit",
+        icon: "logo-reddit.png",
+        path: "/embedded-wallets/authentication/social-logins/oauth/#login-with-reddit",
+        },
+        {
+        key: "line",
+        title: "Line",
+        icon: "logo-line.png",
+        path: "/embedded-wallets/authentication/social-logins/oauth/#login-with-line",
+        },
+        {
+        key: "kakao",
+        title: "KaKao",
+        icon: "logo-kakao.png",
+        path: "/embedded-wallets/authentication/social-logins/oauth/#login-with-kakao",
+        },
+        {
+        key: "linkedin",
+        title: "Linkedin",
+        icon: "logo-linkedin.png",
+        path: "/embedded-wallets/authentication/social-logins/oauth/#login-with-linkedin",
+        },
+        {
+        key: "twitch",
+        title: "Twitch",
+        icon: "logo-twitch.png",
+        path: "/embedded-wallets/authentication/social-logins/twitch",
+        },
+        {
+        key: "wechat",
+        title: "WeChat",
+        icon: "logo-wechat.png",
+        path: "/embedded-wallets/authentication/social-logins/oauth/#login-with-wechat",
+        },
+        {
+        key: "new",
+        title: "Missing login option?",
+        icon: "logo-question-mark.svg",
+        path: "https://web3auth.io/community/c/feature-request/14",
+        },
+    ],
+
+}, ];
+
+export const tileGroupsDataCustom = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'auth0',
+        title: 'Auth0',
+        icon: 'logo-auth0.png',
+        path: '/embedded-wallets/authentication/custom-connections/auth0',
+      },
+      {
+        key: 'aws-cognito',
+        title: 'AWS Cognito',
+        icon: 'logo-aws-cognito.png',
+        path: '/embedded-wallets/authentication/custom-connections/aws-cognito',
+      },
+      {
+        key: 'firebase',
+        title: 'Firebase',
+        icon: 'logo-firebase.png',
+        path: '/embedded-wallets/authentication/custom-connections/firebase',
+      },
+      {
+        key: 'jwt',
+        title: 'Custom connection',
+        icon: 'logo-jwt.png',
+        path: '/embedded-wallets/authentication/custom-connections/custom-jwt',
+      },
+    ],
+  },
+]
+
+export const tileGroupsDataGroup = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'group-connections',
+        title: 'Create Group Connections',
+        icon: 'logo-group-connections.png',
+        path: '/embedded-wallets/authentication/group-connections',
+      },
+    ],
+  },
+]
+
+To use Web3Auth for user onboarding, developers must first configure the login methods that their application will support. All Web3Auth client SDKs require at least one login method to be enabled for authentication to function. This configuration ensures that users can authenticate securely and reliably across various platforms and environments.
+
+:::note
+
+A thoughtfully configured set of login options improves accessibility, enhances security, and provides flexibility for future scalability.
+
+:::
+
+## Social Connections
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={AuthenticationSocialConnections}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Authentication Social Connections"
+  />
+</div>
+
+### Basic Logins
+
+Basic Logins refer to standard authentication methods such as passwordless email or phone number login. These options are particularly useful for users who may not wish to use social accounts or external wallets.
+
+For most applications, it is recommended to either pair Basic Logins with alternative methods (such as social or external logins) or enable **Multi-Factor Authentication (MFA)**. This ensures users can retain access to their accounts even if they lose access to a primary login method. Supporting multiple login types also improves reach across various regions where certain providers may be limited.
+
+<Tiles tileGroups={tileGroupsDataBasic} />
+
+### Social Logins
+
+Social Logins allow users to authenticate using their existing accounts from widely adopted platforms, offering a seamless and familiar experience. Web3Auth supports a wide range of social identity providers, including:
+
+Each social login method can be configured individually through the Web3Auth Dashboard. Developers can follow platform-specific guides to obtain necessary credentials (e.g., client IDs, secrets) and enable the desired providers.
+
+<Tiles tileGroups={tileGroupsDataSocial} />
+
+## Custom Connections
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={AuthenticationCustomConnections}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Authentication Custom Connections"
+  />
+</div>
+
+Custom Connections allow developers to integrate Web3Auth with third-party or self-hosted identity providers. Supported platforms include:
+
+<Tiles tileGroups={tileGroupsDataCustom} />
+
+These integrations offer advanced flexibility, enabling projects to maintain existing identity infrastructure while benefiting from Web3Auth's non-custodial key management. Developers can authenticate users using their preferred systems while still supporting seamless blockchain wallet access.
+
+:::note TIP
+
+Custom connections are ideal for enterprises or apps with an existing authentication backend who want to integrate Web3 capabilities without compromising on their current identity solutions.
+
+:::
+
+## Group Connections
+
+Group Connections enable multiple login methods to be linked to the same on-chain user identity. This means that users logging in with different authentication providers (e.g., **_Google and Email Passwordless_**) can still access the same wallet address—ensuring a unified user experience.
+
+Before setting up a group connection, developers must first configure individual login connections that are eligible to be grouped. Once eligible connections are established, they can be grouped together under a single Group Connection.
+
+<Tiles tileGroups={tileGroupsDataGroup} />
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={AuthenticationGroupConnectionsSelect}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Authentication Group Connections"
+  />
+</div>
+
+:::note
+
+Group Keys differ from standard individual connection keys. Ensure that each login method intended for grouping is properly configured beforehand.
+
+:::
+
+> Group Connections are especially useful in scenarios where users may switch or alternate between login methods, allowing for continuous access to the same digital identity without fragmentation.
+
+## Security Considerations
+
+### Domain Whitelisting
+
+Ensure authentication is restricted to authorized domains for enhanced security.
+
+### Connection Verification
+
+Verify OAuth credentials and callback URLs for all social login providers.
+
+### Rate Limiting
+
+Configure appropriate rate limits for authentication attempts to prevent abuse.
+
+### Multi-Factor Authentication
+
+Enable additional security layers where supported by the authentication provider.

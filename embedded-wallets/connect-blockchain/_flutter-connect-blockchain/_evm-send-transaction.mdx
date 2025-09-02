@@ -1,0 +1,22 @@
+If you wish to sign, and also broadcast the transaction, you can use the
+`Web3Client.sendTransaction` method.
+
+This method prepares the transaction, and signs similar to `signTransaction` method. The only
+difference is, it also broadcasts the transaction to the network, and returns the transaction
+receipt.
+
+```dart
+import 'package:web3dart/web3dart.dart';
+
+// Use client, address, and credentials from previous code snippets
+final receipt = await client.sendTransaction(
+  credentials,
+  Transaction(
+    from: address,
+    to: EthereumAddress.fromHex('0x809D4310d578649D8539e718030EE11e603Ee8f3'),
+    value: EtherAmount.fromUnitAndValue(EtherUnit.gwei, 50000000), // 0.05 ETH
+    chainId: null,
+    fetchChainIdFromNetworkId: true,
+  ),
+);
+```

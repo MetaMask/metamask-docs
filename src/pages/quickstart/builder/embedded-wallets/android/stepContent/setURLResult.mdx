@@ -1,0 +1,11 @@
+### Set Result URL
+
+This handles sign-in for the app within an activity.
+
+```kotlin
+override fun onNewIntent(intent: Intent?) {
+  super.onNewIntent(intent)
+
+  web3Auth.setResultUrl(intent?.data)
+}
+```

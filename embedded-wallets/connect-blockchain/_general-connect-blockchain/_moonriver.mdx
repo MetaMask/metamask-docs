@@ -1,0 +1,40 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x505 (hex of 1285)
+- Public RPC URL: https://rpc.api.moonriver.moonbeam.network (Avoid using public rpcTarget in
+  production, use services like Infura)
+- Display Name: Moonriver Mainnet
+- Block Explorer Link: https://moonriver.moonscan.io
+- Ticker: MOVR
+- Ticker Name: MOVR
+- Logo: https://seeklogo.com/images/M/moonriver-logo-1EECA82DD2-seeklogo.com.png
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x507 (hex of 1287)
+- Public RPC URL: https://rpc.api.moonriver.moonbeam.network (Avoid using public rpcTarget in
+  production, use services like Infura)
+- Display Name: Moonriver Testnet
+- Block Explorer Link: https://moonbase.moonscan.io
+- Ticker: MOVR
+- Ticker Name: MOVR
+- Logo: https://seeklogo.com/images/M/moonriver-logo-1EECA82DD2-seeklogo.com.png
+
+</TabItem>
+</Tabs>
