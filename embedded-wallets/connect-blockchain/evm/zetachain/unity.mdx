@@ -1,0 +1,69 @@
+---
+title: Integrate Embedded Wallets with the ZetaChain Blockchain in Unity
+sidebar_label: Unity
+image: 'img/embedded-wallets/banners/zetachain.png'
+
+keywords: [unity, zetachain, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the ZetaChain Blockchain in Unity | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+## Installation
+
+<InstallationSnippet />
+
+## Chain Details for ZetaChain
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+  ]}
+>
+
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x1B58
+- Public RPC URL: https://zetachain-mainnet.g.allthatnode.com/archive/evm
+- Display Name: ZetaChain Mainnet
+- Block Explorer Link: https://zetachain.blockscout.com/
+- Ticker: ZETA
+- Ticker Name: ZETA
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />

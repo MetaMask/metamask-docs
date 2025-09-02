@@ -1,0 +1,40 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0xe9ac0d6 (hex of 245022934)
+- Public RPC URL: https://neon-proxy-mainnet.solana.p2p.org (Avoid using public rpcTarget in
+  production, use services like Infura)
+- Display Name: Neon Mainnet
+- Block Explorer Link: https://neonscan.org/
+- Ticker: NEON
+- Ticker Name: NEON
+- Logo: https://docs.neonevm.org/icons/token.svg
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0xe9ac0ce (hex of 245022926)
+- Public RPC URL: https://devnet.neonevm.org (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: Neon Devnet
+- Block Explorer Link: https://devnet.neonscan.org/
+- Ticker: NEON
+- Ticker Name: NEON
+- Logo: https://docs.neonevm.org/icons/token.svg
+
+</TabItem>
+</Tabs>

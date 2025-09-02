@@ -1,0 +1,71 @@
+---
+title: Integrate Embedded Wallets with the BitKub Blockchain
+sidebar_label: BitKub
+hide_table_of_contents: true
+image: 'img/embedded-wallets/banners/bitkub.png'
+description: 'Integrate Embedded Wallets with the BitKub Blockchain | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import ChainDetailsBitkub from '../../_general-connect-blockchain/_bitkub.mdx'
+
+The BitKub blockchain's integration with Embedded Wallets (formerly Web3Auth) helps you get started in minutes. The integration is available for Web and Embedded Wallets Mobile SDKs (Android, iOS, React Native), as well as Flutter, React Native, and Unity.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
+
+## Chain Details for Bitkub
+
+<ChainDetailsBitkub />
+
+export const BitKub = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bitkub/web',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bitkub/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bitkub/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bitkub/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bitkub/react-native',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bitkub/unity',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={BitKub} />

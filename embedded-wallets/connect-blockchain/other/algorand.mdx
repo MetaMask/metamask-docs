@@ -1,0 +1,219 @@
+---
+title: Integrate Embedded Wallets with the Algorand Blockchain
+sidebar_label: Algorand
+image: 'img/embedded-wallets/banners/algorand.png'
+
+keywords: [algorand, embedded-wallets, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Algorand Blockchain | Embedded Wallets'
+---
+
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [Algorand](https://algorandtechnologies.com/), you can obtain the user's private key from the standard provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few methods here to get you started quickly.
+
+:::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+:::
+
+## Installation
+
+```bash npm2yarn
+npm install --save algosdk
+```
+
+## Initializing Provider
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: other
+- Chain ID: Algorand
+- Public RPC URL: https://api.algoexplorer.io (Avoid using public rpcTarget in production, use services like PureStake, AlgoExplorer API, etc.)
+- Display Name: Algorand Mainnet
+- Block Explorer Link: https://algoexplorer.io
+- Ticker: ALGO
+- Ticker Name: Algorand
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0x3E9
+- Public RPC URL: https://api.algoexplorer.io (Avoid using public rpcTarget in production, use services like PureStake, AlgoExplorer API, etc.)
+- Display Name: Algorand Testnet
+- Block Explorer Link: https://testnet.algoexplorer.io
+- Ticker: tALGO
+- Ticker Name: Algorand
+
+</TabItem>
+</Tabs>
+
+## Get Account and KeyPair
+
+Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Algorand, we use the private key directly to make RPC calls.
+
+Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Algorand-specific signing functions, hence, we first derive the Algorand Key using the `getAlgorandKeyPair()` function.
+
+On the underhood, it uses the `algosdk.secretKeyToMnemonic()` function, where we need to pass the `Buffer.from(privateKey, "hex")`, ie. the hexadecimal to Uint8Array converted private key. We get a mnemonic seed phrase that can be used to derive the key pair using the `algosdk.mnemonicToSecretKey()`, this returns a key pair. We can use the returned private key pair from this and use it on Algorand transactions.
+
+```tsx
+import { IProvider } from '@web3auth/base'
+import algosdk from 'algosdk'
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// derive the Algorand Key Pair from the private key
+var passphrase = algosdk.secretKeyToMnemonic(Buffer.from(privateKey, 'hex'))
+var keyPair = algosdk.mnemonicToSecretKey(passphrase)
+
+// keyPair.addr is the account address.
+const account = keyPair.addr
+```
+
+## Get Balance
+
+```tsx
+import { IProvider } from '@web3auth/base'
+import algosdk from 'algosdk'
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// derive the Algorand Key Pair from the private key
+var passphrase = algosdk.secretKeyToMnemonic(Buffer.from(privateKey, 'hex'))
+var keyPair = algosdk.mnemonicToSecretKey(passphrase)
+
+// keyPair.addr is the account address.
+const account = keyPair.addr
+
+// Making a connection to the Algorand TestNet
+const algodToken = {
+  'x-api-key': 'YOUR_ALGOD_API_KEY',
+}
+const algodServer = 'https://testnet-algorand.api.purestake.io/ps2' // for testnet
+const algodPort = ''
+const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort)
+const balance = await client.accountInformation(keyPair.addr).do()
+```
+
+## Send Transaction
+
+```tsx
+import { IProvider } from '@web3auth/base'
+import algosdk from 'algosdk'
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// derive the Algorand Key Pair from the private key
+var passphrase = algosdk.secretKeyToMnemonic(Buffer.from(privateKey, 'hex'))
+var keyPair = algosdk.mnemonicToSecretKey(passphrase)
+
+// keyPair.addr is the account address.
+const account = keyPair.addr
+
+// Making a connection to the Algorand TestNet
+const algodToken = {
+  'x-api-key': 'YOUR_ALGOD_API_KEY',
+}
+const algodServer = 'https://testnet-algorand.api.purestake.io/ps2' // for testnet
+const algodPort = ''
+const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort)
+
+// Creating the transaction
+
+const params = await client.getTransactionParams().do()
+const enc = new TextEncoder()
+const message = enc.encode('Web3Auth says hello!')
+
+// You need to have some funds in your account to send a transaction
+// You can get some testnet funds here: https://bank.testnet.algorand.network/
+
+const txn = algosdk.makePaymentTxnWithSuggestedParams(
+  keyPair.addr, // sender
+  keyPair.addr, // receiver
+  1000,
+  undefined,
+  message,
+  params
+)
+let signedTxn = algosdk.signTransaction(txn, keyPair.sk)
+
+const txHash = await client.sendRawTransaction(signedTxn.blob).do()
+```
+
+## Sign Message
+
+```tsx
+import { IProvider } from '@web3auth/base'
+import algosdk from 'algosdk'
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// derive the Algorand Key Pair from the private key
+var passphrase = algosdk.secretKeyToMnemonic(Buffer.from(privateKey, 'hex'))
+var keyPair = algosdk.mnemonicToSecretKey(passphrase)
+
+// keyPair.addr is the account address.
+const account = keyPair.addr
+
+// Making a connection to the Algorand TestNet
+
+const algodToken = {
+  'x-api-key': 'YOUR_ALGOD_API_KEY',
+}
+const algodServer = 'https://testnet-algorand.api.purestake.io/ps2' // for testnet
+const algodPort = ''
+const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort)
+
+// Generating the message to sign
+
+const params = await client.getTransactionParams().do()
+const enc = new TextEncoder()
+const message = enc.encode('Web3Auth says hello!')
+const txn = algosdk.makePaymentTxnWithSuggestedParams(
+  keyPair.addr,
+  keyPair.addr,
+  0,
+  undefined,
+  message,
+  params
+)
+let signedTxn = algosdk.signTransaction(txn, keyPair.sk)
+let txId = signedTxn.txID
+```

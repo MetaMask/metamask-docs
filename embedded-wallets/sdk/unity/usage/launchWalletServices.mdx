@@ -1,0 +1,80 @@
+---
+title: Launch Wallet Services
+sidebar_label: launchWalletServices
+description: 'Web3Auth Unity SDK - launchWalletServices | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The `launchWalletServices` method launches a WebView which allows you to use the templated wallet UI services. The method takes `ChainConfig` as the required input. Wallet Services is currently only available for EVM chains.
+
+:::note
+
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+
+:::
+
+## Parameters
+
+`ChainConfig`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `chainNamespace` | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.eip155`. |
+| `decimals?` | Number of decimals for the currency ticker. Default value is 18, and accepts `int` as value. |
+| `blockExplorerUrl?` | Blockchain's explorer URL. (eg: `https://etherscan.io`) |
+| `chainId` | The chain id of the selected blockchain in hex `String`. |
+| `displayName?` | Display Name for the chain. |
+| `logo?` | Logo for the selected `chainNamespace` & `chainId`. |
+| `rpcTarget` | RPC Target URL for the selected `chainNamespace` & `chainId`. |
+| `ticker?` | Default currency ticker of the network (e.g: `ETH`) |
+| `tickerName?` | Name for currency ticker (e.g: `Ethereum`) |
+
+</TabItem>
+
+<TabItem value="class">
+
+```cs
+using System.Collections.Generic;
+#nullable enable
+public class ChainConfig {
+    public Web3Auth.ChainNamespace? chainNamespace { get; set; } = Web3Auth.ChainNamespace.EIP155;
+    public int decimals { get; set; } = 18;
+    public string blockExplorerUrl { get; set; } = null;
+    public string chainId { get; set; }
+    public string displayName { get; set; } = null;
+    public string logo { get; set; } = null;
+    public string rpcTarget { get; set; }
+    public string ticker { get; set; } = null;
+    public string tickerName { get; set; } = null;
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+```cs
+{
+    var chainConfig = new ChainConfig()
+    {
+        chainId = "0x1",
+        rpcTarget = rpcURL,
+        ticker = "ETH",
+        chainNamespace = Web3Auth.ChainNamespace.EIP155
+    };
+    web3Auth.launchWalletServices(chainConfig);
+}
+```

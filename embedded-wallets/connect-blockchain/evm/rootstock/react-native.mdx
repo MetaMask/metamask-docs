@@ -1,0 +1,98 @@
+---
+title: Integrate Embedded Wallets with the Rootstock Blockchain in React Native
+sidebar_label: React Native
+image: 'img/embedded-wallets/banners/rootstock.png'
+
+keywords: [react-native, rootstock, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Rootstock Blockchain in React Native | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x1e',
+  rpcTarget: 'https://public-node.rsk.co​',
+  displayName: 'Rootstock Mainnet',
+  blockExplorerUrl: 'https://explorer.rootstock.io/',
+  ticker: 'RBTC',
+  tickerName: 'RBTC',
+  logo: 'https://pbs.twimg.com/profile_images/1592915327343624195/HPPSuVx3_400x400.jpg',
+}
+```
+
+</TabItem>
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x1f',
+  rpcTarget: 'https://public-node.testnet.rsk.co',
+  displayName: 'Rootstock Testnet',
+  blockExplorerUrl: 'https://explorer.testnet.rootstock.io/',
+  ticker: 'tRBTC',
+  tickerName: 'tRBTC',
+  logo: 'https://pbs.twimg.com/profile_images/1592915327343624195/HPPSuVx3_400x400.jpg',
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

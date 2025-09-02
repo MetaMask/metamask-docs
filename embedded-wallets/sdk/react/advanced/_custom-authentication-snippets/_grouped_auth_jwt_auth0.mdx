@@ -1,0 +1,43 @@
+```tsx title="App.tsx"
+const loginWithGoogle = async (response: CredentialResponse) => {
+  const idToken = response.credential;
+
+  // focus-start
+  await connectTo(WALLET_CONNECTORS.AUTH, {
+    groupedAuthConnectionId: "aggregate-sapphire",
+    authConnectionId: "w3a-google",
+    authConnection: AUTH_CONNECTION.GOOGLE,
+    idToken,
+    extraLoginOptions: {
+      isUserIdCaseSensitive: false,
+      verifierIdField: "email",
+    },
+  });
+  // focus-end
+};
+
+const loginWithAuth0 = async () => {
+  try {
+    await loginWithPopup();
+    const idToken = (await getIdTokenClaims())?.__raw.toString();
+    if (!idToken) {
+      throw new Error("No id token found");
+    }
+
+    // focus-start
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      groupedAuthConnectionId: "aggregate-sapphire",
+      authConnectionId: "w3a-a0-github",
+      authConnection: AUTH_CONNECTION.CUSTOM,
+      idToken,
+      extraLoginOptions: {
+        isUserIdCaseSensitive: false,
+        verifierIdField: "email",
+      },
+    });
+    // focus-end
+  } catch (err) {
+    console.error(err);
+  }
+};
+```

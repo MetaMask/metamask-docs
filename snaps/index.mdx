@@ -5,7 +5,21 @@ description: Introduction page for the MetaMask Snaps documentation.
 ---
 
 import CardList from '@site/src/components/CardList'
+import SEO from '@site/src/components/SEO'
 import YoutubeEmbed from '@site/src/components/YoutubeEmbed'
+
+<SEO
+  title="MetaMask Snaps - Browser Extension Development"
+  description="Create mini apps for MetaMask browser extension. Extend MetaMask with custom functionalities and new blockchain protocols using Snaps API."
+  keywords={[
+    'metamask snaps',
+    'browser extension',
+    'metamask flask',
+    'snaps api',
+    'metamask plugins',
+  ]}
+  slug="/snaps/"
+/>
 
 # Create a custom mini app using Snaps
 
@@ -24,57 +38,57 @@ The following Snaps features are available in the stable version of MetaMask:
 <CardList
   items={[
     {
-      href: 'features/cron-jobs',
+      href: '/snaps/features/cron-jobs',
       title: 'Cron jobs',
       description: 'Schedule periodic actions for your users.',
     },
     {
-      href: 'features/custom-evm-accounts',
+      href: '/snaps/features/custom-evm-accounts',
       title: 'Custom EVM accounts',
       description: 'Connect to custom EVM accounts in MetaMask.',
     },
     {
-      href: 'features/custom-name-resolution',
+      href: '/snaps/features/custom-name-resolution',
       title: 'Custom name resolution',
       description: 'Resolve names to addresses and vice versa.',
     },
     {
-      href: 'features/custom-ui',
+      href: '/snaps/features/custom-ui',
       title: 'Custom UI',
       description: 'Display custom UI in MetaMask using a set of pre-defined components.',
     },
     {
-      href: 'features/data-storage',
+      href: '/snaps/features/data-storage',
       title: 'Data storage',
       description: 'Store encrypted and unencrypted data within a Snap.',
     },
     {
-      href: 'features/custom-ui/dialogs',
+      href: '/snaps/features/custom-ui/dialogs',
       title: 'Dialogs',
       description: 'Display custom alert, confirmation, or prompt screens in MetaMask.',
     },
     {
-      href: 'features/custom-ui/home-pages',
+      href: '/snaps/features/custom-ui/home-pages',
       title: 'Home pages',
       description: 'Display a dedicated UI page in MetaMask for your Snap.',
     },
     {
-      href: 'features/custom-ui/interactive-ui',
+      href: '/snaps/features/custom-ui/interactive-ui',
       title: 'Interactive UI',
       description: 'Display interactive UI in MetaMask that can be updated dynamically.',
     },
     {
-      href: 'features/lifecycle-hooks',
+      href: '/snaps/features/lifecycle-hooks',
       title: 'Lifecycle hooks',
       description: 'Call an action when your Snap is installed or updated.',
     },
     {
-      href: 'features/localization',
+      href: '/snaps/features/localization',
       title: 'Localization',
       description: "Translate your Snap UI based on the user's locale.",
     },
     {
-      href: 'features/network-access',
+      href: '/snaps/features/network-access',
       title: 'Network access',
       description: (
         <>
@@ -83,29 +97,27 @@ The following Snaps features are available in the stable version of MetaMask:
       ),
     },
     {
-      href: 'features/non-evm-networks',
+      href: '/snaps/features/non-evm-networks',
       title: 'Non-EVM networks',
       description: 'Manage non-EVM accounts and assets in MetaMask.',
     },
     {
-      href: 'features/notifications',
+      href: '/snaps/features/notifications',
       title: 'Notifications',
       description: 'Notify users directly in MetaMask, or natively in their OS.',
     },
     {
-      icon: require('./assets/features/signature-insights.png').default,
-      href: 'features/signature-insights',
+      href: '/snaps/features/signature-insights',
       title: 'Signature insights',
       description: 'Provide signature insights before a user signs a message.',
     },
     {
-      icon: require('./assets/features/getfile.png').default,
-      href: 'features/static-files',
+      href: '/snaps/features/static-files',
       title: 'Static files',
       description: 'Lazy-load static files such as Wasm modules or ZK circuits.',
     },
     {
-      href: 'features/transaction-insights',
+      href: '/snaps/features/transaction-insights',
       title: 'Transaction insights',
       description: "Provide transaction insights in MetaMask's transaction confirmation window.",
     },
@@ -117,7 +129,7 @@ The following Snaps features are only available in [MetaMask Flask](get-started/
 <CardList
   items={[
     {
-      href: 'features/custom-evm-accounts#account-abstraction-erc-4337',
+      href: '/snaps/features/custom-evm-accounts#account-abstraction-erc-4337',
       title: 'Account abstraction',
       description: 'Connect to ERC-4337 accounts in MetaMask.',
       flaskOnly: true,
@@ -132,22 +144,22 @@ If you're new to Snaps, get started learning with the following topics:
 <CardList
   items={[
     {
-      href: 'learn/about-snaps',
+      href: '/snaps/learn/about-snaps',
       title: 'About Snaps',
       description: 'See a high-level, technical overview of the Snaps system.',
     },
     {
-      href: 'learn/about-snaps/apis',
+      href: '/snaps/learn/about-snaps/apis',
       title: 'About the Snaps APIs',
       description: 'Learn about how Snaps, dapps, and MetaMask communicate with each other.',
     },
     {
-      href: 'learn/tutorials/gas-estimation',
+      href: '/snaps/learn/tutorials/gas-estimation',
       title: 'Gas estimation Snap tutorial',
       description: 'Follow an end-to-end tutorial to create a Snap that estimates gas fees.',
     },
     {
-      href: 'learn/resources',
+      href: '/snaps/learn/resources',
       title: 'Snaps resources',
       description:
         'Learn and explore MetaMask Snaps with supplemental resources, tools, examples, and guides.',

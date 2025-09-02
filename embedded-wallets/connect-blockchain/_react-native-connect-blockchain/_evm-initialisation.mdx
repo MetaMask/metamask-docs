@@ -1,0 +1,25 @@
+```typescript
+import * as WebBrowser from '@toruslabs/react-native-web-browser'
+import EncryptedStorage from 'react-native-encrypted-storage'
+import Web3Auth, { LOGIN_PROVIDER, WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
+import '@ethersproject/shims'
+import { ethers } from 'ethers'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+
+const [provider, setProvider] = useState<IProvider | null>(null)
+
+const ethereumPrivateKeyProvider = new EthereumPrivateKeyProvider({
+  config: {
+    chainConfig,
+  },
+})
+
+const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
+  clientId,
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
+})
+
+await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey)
+
+setProvider(ethereumPrivateKeyProvider)
+```
