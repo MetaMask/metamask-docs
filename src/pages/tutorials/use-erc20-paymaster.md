@@ -21,7 +21,7 @@ This removes the need for users to hold native tokens, allowing them to perform 
 
 - [Install and set up the Delegation Toolkit](/delegation-toolkit/get-started/install) in your project.
 - [Configure the Delegation Toolkit](/delegation-toolkit/development/guides/configure).
-- [Create a Hybrid smart account](delegation-toolkit/development/guides/smart-accounts/create-smart-account), and fund it with some Sepolia USDC to pay gas fees.
+- [Create a Hybrid smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account), and fund it with some Sepolia USDC to pay gas fees.
   :::note
   You can use [Circle's faucet](https://faucet.circle.com/) to get Sepolia USDC.
   :::
