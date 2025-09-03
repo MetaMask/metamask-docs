@@ -1,6 +1,5 @@
 ---
 description: Learn about delegation, the delegation lifecycle, and the Delegation Framework.
-sidebar_position: 2
 toc_max_heading_level: 2
 ---
 

@@ -2,7 +2,6 @@
 title: Delegation Toolkit introduction
 sidebar_label: Introduction
 description: High-level overview of Smart Accounts and the Delegation Toolkit.
-sidebar_position: 1
 ---
 
 import CardList from "@site/src/components/CardList"

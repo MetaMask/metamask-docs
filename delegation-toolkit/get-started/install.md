@@ -1,7 +1,6 @@
 ---
 sidebar_label: Install and set up
 description: Learn how to install and set up the MetaMask Delegation Toolkit.
-sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,6 +1,5 @@
 ---
 description: Learn how to generate a Multisig signature.
-sidebar_position: 4
 ---
 
 import Tabs from "@theme/Tabs";

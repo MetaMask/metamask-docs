@@ -1,6 +1,5 @@
 ---
 description: Learn how to configure the MetaMask Delegation Toolkit using Viem.
-sidebar_position: 1
 sidebar_label: Configure the toolkit
 ---
 

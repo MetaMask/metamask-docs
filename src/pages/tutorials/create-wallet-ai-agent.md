@@ -1,6 +1,6 @@
 ---
 title: Create an AI agent using MetaMask SDK
-image: 'img/guides/guides-img/embedded-wallets/banners/mm-sdk-ai-agent.png'
+image: 'img/tutorials/tutorials-banners/mm-sdk-ai-agent.png'
 description: Create a wallet AI agent using MetaMask SDK and Vercel's AI SDK.
 tags: [metamask sdk, wallet, AI, agent, Vercel, Wagmi, Next.js, OpenAI]
 date: May 2, 2025
@@ -119,7 +119,7 @@ When connected, the AI agent chat interface displays with your connected wallet 
 You can test the AI functionality by sending messages in the chat:
 
 <p align="center">
-  <img src={require("@site/static/img/guides/sdk-ai-agent.png").default} alt="SDK AI agent initial setup" class="appScreen" />
+  <img src={require("@site/static/img/tutorials/sdk-ai-agent.png").default} alt="SDK AI agent initial setup" class="appScreen" />
 </p>
 
 ### 3. Create a Public Client
@@ -198,7 +198,7 @@ export const tools = {
 In the development server, test that this tool works to get your current Linea Sepolia ETH balance:
 
 <p align="center">
-  <img src={require("@site/static/img/guides/sdk-ai-agent-get-balance.png").default} alt="SDK AI agent get balance" class="appScreen" />
+  <img src={require("@site/static/img/tutorials/sdk-ai-agent-get-balance.png").default} alt="SDK AI agent get balance" class="appScreen" />
 </p>
 
 ### 5. Create a tool to send transactions
@@ -283,13 +283,13 @@ In the development server, test that this tool works to send Linea Sepolia ETH f
 When you request the agent to send a transaction, it will provide a button for you to send the transaction, but it will not send it for you:
 
 <p align="center">
-  <img src={require("@site/static/img/guides/sdk-ai-agent-txn-not-sent.png").default} alt="NFT confirmation" class="appScreen" />
+  <img src={require("@site/static/img/tutorials/sdk-ai-agent-txn-not-sent.png").default} alt="NFT confirmation" class="appScreen" />
 </p>
 
 When you select the button and confirm the transaction in MetaMask, the transaction will be sent:
 
 <p align="center">
-  <img src={require("@site/static/img/guides/sdk-ai-agent-txn-sent.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
+  <img src={require("@site/static/img/tutorials/sdk-ai-agent-txn-sent.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
 </p>
 
 You can check the status of the transaction in the [Linea Sepolia block explorer](https://sepolia.lineascan.build/).

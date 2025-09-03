@@ -1,7 +1,6 @@
 ---
 description: Wallet Client API methods reference.
 sidebar_label: Wallet Client
-sidebar_position: 2
 toc_max_heading_level: 2
 ---
 

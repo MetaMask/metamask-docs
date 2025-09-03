@@ -1,7 +1,6 @@
 ---
 description: MetaMask Smart Accounts-related API methods reference.
 sidebar_label: MetaMask Smart Accounts
-sidebar_position: 2
 toc_max_heading_level: 2
 ---
 
