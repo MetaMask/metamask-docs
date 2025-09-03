@@ -1,24 +1,27 @@
 ---
-description: Follow this tutorial to use an ERC-20 paymaster with MetaMask Smart Accounts.
+title: Use an ERC-20 paymaster
+image: 'img/tutorials/tutorials-banners/erc20-paymaster.png'
+description: Use an ERC-20 paymaster with MetaMask Smart Accounts.
+tags: [delegation toolkit, ERC-20 paymaster, smart accounts]
+date: Sep 2, 2025
+author: MetaMask Developer Relations
 ---
 
-# Use an ERC-20 paymaster
-
-This tutorial walks you through using an ERC-20 paymaster with [MetaMask Smart Accounts](../concepts/smart-accounts), enabling users to pay gas fees in USDC.
+This tutorial walks you through using an ERC-20 paymaster with [MetaMask Smart Accounts](/delegation-toolkit/concepts/smart-accounts), enabling users to pay gas fees in USDC.
 This tutorial uses Pimlico's paymaster, but you can use any paymaster of your choice.
 
 ## About paymasters
 
-A paymaster is an important component of the [account abstraction (ERC-4337)](../concepts/smart-accounts.md) standard, responsible for abstracting gas fees for end users. 
+A paymaster is an important component of the [account abstraction (ERC-4337)](/delegation-toolkit/concepts/smart-accounts) standard, responsible for abstracting gas fees for end users. 
 There are different types of paymasters, such as gasless paymasters and ERC-20 paymasters. 
 While a gasless paymaster covers the transaction on behalf of the user, an ERC-20 paymaster allows users to pay gas fees using a supported ERC-20 token.
 This removes the need for users to hold native tokens, allowing them to perform onchain actions using only stablecoins.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](../get-started/install) in your project.
-- [Configure the Delegation Toolkit](../guides/configure).
-- [Create a Hybrid smart account](../guides/smart-accounts/create-smart-account), and fund it with some Sepolia USDC to pay gas fees.
+- [Install and set up the Delegation Toolkit](/delegation-toolkit/get-started/install) in your project.
+- [Configure the Delegation Toolkit](/delegation-toolkit/development/guides/configure).
+- [Create a Hybrid smart account](delegation-toolkit/development/guides/smart-accounts/create-smart-account), and fund it with some Sepolia USDC to pay gas fees.
   :::note
   You can use [Circle's faucet](https://faucet.circle.com/) to get Sepolia USDC.
   :::
@@ -80,7 +83,7 @@ const bundlerClient = createBundlerClient({
 
 ### 4. Create a Hybrid smart account
 
-Configure the same [Hybrid smart account](../guides/smart-accounts/create-smart-account.md#create-a-hybrid-smart-account) that you created and funded as a [prerequisite](#prerequisites).
+Configure the same [Hybrid smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account) that you created and funded as a [prerequisite](#prerequisites).
 A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 
 ```typescript
@@ -149,5 +152,5 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 ## Next steps
 
-- See [Create a MetaMask smart account](../guides/smart-accounts/create-smart-account.md) to learn more about smart account implementations. 
-- See [Send a gasless transaction](../guides/smart-accounts/send-gasless-transaction.md) to learn how to use gasless paymaster.
+- See [Create a MetaMask smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account) to learn more about smart account implementations. 
+- See [Send a gasless transaction](/delegation-toolkit/development/guides/smart-accounts/send-gasless-transaction) to learn how to use gasless paymaster.
