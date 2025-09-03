@@ -1,6 +1,5 @@
 ---
 description: Learn how to use the spending limit scopes for a delegation.
-sidebar_position: 1
 sidebar_label: Spending limit scopes
 ---
 

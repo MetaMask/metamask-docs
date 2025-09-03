@@ -1,6 +1,5 @@
 ---
 description: Learn how to use the function call scope for a delegation.
-sidebar_position: 2
 sidebar_label: Function call scope
 ---
 

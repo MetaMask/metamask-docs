@@ -1,6 +1,5 @@
 ---
 description: Learn how to use the delegation scopes.
-sidebar_position: 1.5
 ---
 
 # Use delegation scopes

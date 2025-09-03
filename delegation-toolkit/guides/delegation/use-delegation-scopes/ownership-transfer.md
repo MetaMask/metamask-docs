@@ -1,6 +1,5 @@
 ---
 description: Learn how to use the ownership transfer scope for a delegation.
-sidebar_position: 3
 sidebar_label: Ownership transfer scope
 ---
 
