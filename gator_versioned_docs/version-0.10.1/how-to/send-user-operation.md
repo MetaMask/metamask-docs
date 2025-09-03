@@ -67,7 +67,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 ```typescript
 import { createPublicClient, http } from "viem";
 import { createBundlerClient } from "viem/account-abstraction";
-import { lineaSepolia as chain } from "viem/chains";
+import { sepolia as chain } from "viem/chains";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
