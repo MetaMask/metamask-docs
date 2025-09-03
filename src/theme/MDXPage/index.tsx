@@ -38,7 +38,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
     wrapperClassName,
     communityPortalTopicId,
   } = frontMatter
-  const url = `https://web3auth.io${permalink}`
+  const url = `https://metamask.io${permalink}`
   const facebookLink = `https://www.facebook.com/sharer/sharer.php?${url}`
   const twitterLink = `http://twitter.com/share?text=Checkout ${title} published by @Web3Auth&url=${url}`
 

@@ -53,7 +53,7 @@ const getFrameworkKey = (product: string, framework: string): string => {
 
 const builder: IntegrationBuilder = {
   // Name of the integration builder
-  displayName: 'Web3Auth',
+  displayName: 'MetaMask',
   // Options that will be displayed in the UI for selection
   options: {
     product: {
