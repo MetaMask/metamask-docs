@@ -1,7 +1,7 @@
 ---
-title: Use an ERC-20 paymaster
-image: 'img/tutorials/tutorials-banners/erc20-paymaster.png'
-description: Use an ERC-20 paymaster with MetaMask Smart Accounts.
+title: Use an ERC-20 paymaster with a smart account
+image: 'img/tutorials/tutorials-banners/use-erc20-paymaster.png'
+description: Enable users to pay gas fees with an ERC-20 token using a smart account and paymaster.
 tags: [delegation toolkit, ERC-20 paymaster, smart accounts]
 date: Sep 2, 2025
 author: MetaMask Developer Relations

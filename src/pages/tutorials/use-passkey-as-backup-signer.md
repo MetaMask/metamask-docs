@@ -1,6 +1,6 @@
 ---
 title: Use a passkey as a backup signer
-image: 'img/tutorials/tutorials-banners/dtk-passkey-backup.png'
+image: 'img/tutorials/tutorials-banners/use-passkey-as-backup-signer.png'
 description: Use a passkey as a backup signer for a MetaMask smart account.
 tags: [delegation toolkit, passkey, backup signer, smart account]
 date: Aug 27, 2025

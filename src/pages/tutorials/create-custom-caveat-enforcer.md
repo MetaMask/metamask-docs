@@ -1,6 +1,6 @@
 ---
 title: Create a custom caveat enforcer
-image: 'img/tutorials/tutorials-banners/custom-caveat-enforcer.png'
+image: 'img/tutorials/tutorials-banners/create-custom-caveat-enforcer.png'
 description: Define custom rules for a delegation by creating, deploying, and applying a custom caveat enforcer.
 tags: [delegation toolkit, caveat enforcer, smart contracts]
 date: Aug 27, 2025
