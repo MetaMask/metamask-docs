@@ -1,6 +1,5 @@
 ---
 description: Learn how to send an ERC-4337 user operation using Viem.
-sidebar_position: 2
 ---
 
 import Tabs from "@theme/Tabs";

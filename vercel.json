@@ -756,7 +756,7 @@
     },
     {
       "source": "/delegation-toolkit/development/how-to/create-delegation/create-custom-caveat-enforcer/",
-      "destination": "/delegation-toolkit/development/tutorials/create-custom-caveat-enforcer/"
+      "destination": "/tutorials/create-custom-caveat-enforcer/"
     },
     {  
       "source": "/delegation-toolkit/development/concepts/caveat-enforcers/",

@@ -1,6 +1,5 @@
 ---
 description: Learn about MetaMask Smart Accounts.
-sidebar_position: 1
 ---
 
 # MetaMask Smart Accounts

@@ -1,6 +1,5 @@
 ---
 description: Learn about the delegator environment object `DeleGatorEnvironment` and how to use it.
-sidebar_position: 3
 ---
 
 import Tabs from "@theme/Tabs";

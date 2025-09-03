@@ -1,6 +1,5 @@
 ---
 description: Get started quickly with the MetaMask Smart Accounts
-sidebar_position: 2
 sidebar_label: Smart account quickstart
 ---
 

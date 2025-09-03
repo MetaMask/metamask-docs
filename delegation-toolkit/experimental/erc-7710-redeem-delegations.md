@@ -1,6 +1,5 @@
 ---
 description: Learn how to redeem ERC-7710 delegations with a smart contract account or an externally owned account (EOA).
-sidebar_position: 3
 ---
 
 import Tabs from "@theme/Tabs";
