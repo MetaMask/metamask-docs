@@ -40,7 +40,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
   } = frontMatter
   const url = `https://metamask.io${permalink}`
   const facebookLink = `https://www.facebook.com/sharer/sharer.php?${url}`
-  const twitterLink = `http://twitter.com/share?text=Checkout ${title} published by @Web3Auth&url=${url}`
+  const twitterLink = `http://twitter.com/share?text=Checkout ${title} published by @MetaMask&url=${url}`
 
   const handleClick = () => {
     navigator.clipboard.writeText(url)
