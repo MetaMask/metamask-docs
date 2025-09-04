@@ -1,8 +1,8 @@
 ---
 title: Create a custom caveat enforcer
-image: 'img/tutorials/tutorials-banners/custom-caveat-enforcer.png'
-description: Create, deploy, and apply a custom caveat enforcer for a delegation.
-tags: [delegation toolkit, caveat enforcer, smart contracts, ethereum]
+image: 'img/tutorials/tutorials-banners/create-custom-caveat-enforcer.png'
+description: Define custom rules for a delegation by creating, deploying, and applying a custom caveat enforcer.
+tags: [delegation toolkit, caveat enforcer, smart contracts]
 date: Aug 27, 2025
 author: MetaMask Developer Relations
 ---

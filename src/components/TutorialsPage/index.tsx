@@ -5,20 +5,20 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
-import { GuidesInterface, platformMap, productMap } from '../../utils/guides-map'
+import { TutorialsInterface, platformMap, productMap } from '../../utils/tutorials-map'
 
 import { useState, useEffect } from 'react'
 import SEO from '@site/src/components/SEO'
 import Hero from '@site/src/components/Hero/Hero'
 import Input from '@site/src/components/Input'
-import GuideCard from './GuideCard'
+import TutorialCard from './TutorialCard'
 import CustomSelect, { OptionType } from './CustomSelect'
 import styles from './styles.module.css'
 
-export default function Guides({ content = {} }: GuidesInterface) {
+export default function Tutorials({ content = {} }: TutorialsInterface) {
   const safeContent = content || {}
 
-  const completeGuides = Object.entries(safeContent)
+  const completeTutorials = Object.entries(safeContent)
     .map(([key, value]) => {
       return { ...value, link: `/tutorials/${key}` }
     })
@@ -37,16 +37,16 @@ export default function Guides({ content = {} }: GuidesInterface) {
   const [platformFilter, setPlatformFilter] = useState<string[]>([])
   const [selectedProducts, setSelectedProducts] = useState<OptionType[]>([])
   const [selectedPlatforms, setSelectedPlatforms] = useState<OptionType[]>([])
-  const [filteredGuides, setFilteredGuides] = useState(completeGuides)
+  const [filteredTutorials, setFilteredTutorials] = useState(completeTutorials)
   const { siteConfig } = useDocusaurusContext()
   const { baseUrl } = siteConfig
 
   // Apply tag filters first
   useEffect(() => {
-    let filtered = completeGuides
+    let filtered = completeTutorials
 
     if (productFilter.length > 0 || platformFilter.length > 0) {
-      filtered = completeGuides.filter(item => {
+      filtered = completeTutorials.filter(item => {
         if (!item || !item.tags || !Array.isArray(item.tags)) return false
 
         const prodFil =
@@ -58,8 +58,8 @@ export default function Guides({ content = {} }: GuidesInterface) {
       })
     }
 
-    setFilteredGuides(filtered)
-  }, [productFilter, platformFilter, completeGuides])
+    setFilteredTutorials(filtered)
+  }, [productFilter, platformFilter, completeTutorials])
 
   const onChangeProduct = (selectedOptions: OptionType[]) => {
     const filterValue = selectedOptions ? selectedOptions.map(item => item.value) : []
@@ -120,8 +120,8 @@ export default function Guides({ content = {} }: GuidesInterface) {
     setSearchInput(input)
   }
 
-  // Filter the already filtered guides based on search
-  const displayedGuides = filteredGuides.filter(item => {
+  // Filter the already filtered tutorials based on search
+  const displayedTutorials = filteredTutorials.filter(item => {
     if (!item) return false // Skip null items
     if (!searchInput.trim()) return true
 
@@ -136,7 +136,7 @@ export default function Guides({ content = {} }: GuidesInterface) {
     )
   })
 
-  // No transformation needed - we'll render GuideCard directly
+  // No transformation needed - we'll render TutorialCard directly
 
   return (
     <Layout title="Tutorials">
@@ -144,7 +144,7 @@ export default function Guides({ content = {} }: GuidesInterface) {
         title="Tutorials"
         description="Tutorials to integrate, customize, and build with MetaMask developer tools."
         image={`${baseUrl}img/tutorialsog.jpg`}
-        slug="/guides"
+        slug="/tutorials"
       />
 
       <Hero
@@ -180,10 +180,10 @@ export default function Guides({ content = {} }: GuidesInterface) {
           </div>
         </div>
 
-        {displayedGuides.length > 0 ? (
+        {displayedTutorials.length > 0 ? (
           <div className={styles.cardsGrid}>
-            {displayedGuides.map((item: any) => (
-              <GuideCard
+            {displayedTutorials.map((item: any) => (
+              <TutorialCard
                 key={item.link}
                 title={item.title}
                 description={item.description || ''}

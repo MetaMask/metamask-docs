@@ -89,7 +89,11 @@ const sidebar = {
       label: 'Tutorials',
       collapsed: false,
       items: [
-        'tutorials/use-erc20-paymaster',
+        {
+          type: "link",
+          label: "Use an ERC-20 paymaster",
+          href: "/tutorials/use-erc20-paymaster"
+        },
         {
           type: "link",
           label: "Use a passkey as a backup signer",
