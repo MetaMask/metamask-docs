@@ -5,11 +5,11 @@ export default function DiscourseComment(props) {
   const { postUrl } = props
   useEffect(() => {
     const url = window.location.href
-    if (!url.includes('https://web3auth.io/')) {
+    if (!url.includes('https://metamask.io/')) {
       return
     } else {
       window.DiscourseEmbed = {
-        discourseUrl: 'https://web3auth.io/community/',
+        discourseUrl: 'https://builder.metamask.io/',
         discourseEmbedUrl: postUrl,
       }
 

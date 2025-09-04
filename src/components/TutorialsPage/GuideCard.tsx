@@ -4,7 +4,7 @@ import Badge from '@site/src/components/Badge'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import styles from './GuideCard.module.css'
 
-interface GuideCardProps {
+interface TutorialCardProps {
   title: string
   description: string
   link: string
@@ -17,7 +17,7 @@ interface GuideCardProps {
   activeTags?: string[]
 }
 
-export default function GuideCard({
+export default function TutorialCard({
   title,
   description,
   link,
@@ -28,7 +28,7 @@ export default function GuideCard({
   type,
   searchInput = '',
   activeTags = [],
-}: GuideCardProps) {
+}: TutorialCardProps) {
   const { siteConfig } = useDocusaurusContext()
   const { baseUrl } = siteConfig
 

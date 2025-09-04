@@ -67,15 +67,15 @@ export default function SEO(props) {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@MetaMask" />
       <meta name="twitter:creator" content="@MetaMask" />
-      {/* {title ? <meta name="twitter:title" content={title} /> : <meta name="twitter:title" content="Documentation | Web3Auth" />}
+      {title ? <meta name="twitter:title" content={title} /> : <meta name="twitter:title" content="Documentation | MetaMask" />}
       {description ? (
         <meta name="twitter:description" content={description} />
       ) : (
         <meta
           name="twitter:description"
-          content="Web3Auth is simple, non-custodial auth infrastructure that enables Web3 wallets and applications to provide seamless user logins for both mainstream and native Web3 users."
+          content="MetaMask is the leading self-custodial wallet. Build with the world's leading self-custodial crypto wallet through MetaMask developer documentation."
         />
-      )} */}
+      )}
       {image ? (
         <meta name="twitter:image" content={image} />
       ) : (

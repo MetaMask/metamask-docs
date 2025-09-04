@@ -36,7 +36,7 @@ export const tags = {
   onRamp: 'on ramp',
 }
 
-export interface GuidesInterface {
+export interface TutorialsInterface {
   content: Record<
     string,
     {
