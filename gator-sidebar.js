@@ -76,6 +76,9 @@ const sidebar = {
               collapsed: false,
               link: { type: "doc", id: "guides/delegation/use-delegation-scopes/index" },
               items: [
+                'guides/delegation/use-delegation-scopes/spending-limit',
+                'guides/delegation/use-delegation-scopes/function-call',
+                'guides/delegation/use-delegation-scopes/ownership-transfer',
                 'guides/delegation/use-delegation-scopes/refine-scope',
               ],
             },

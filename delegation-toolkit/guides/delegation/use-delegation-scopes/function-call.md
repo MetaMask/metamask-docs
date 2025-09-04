@@ -1,12 +1,11 @@
 ---
 description: Learn how to use the function call scope for a delegation.
-sidebar_label: Function call scope
 ---
 
 # Use the function call scope
  
 The function call scope defines the specific methods, contract addresses, and calldata that are allowed for the delegation.
-For example, Alice can delegate to Bob the ability to call the approve function on the USDC contract, with the approval amount set to `0`.
+For example, Alice delegates to Bob the ability to call the approve function on the USDC contract, with the approval amount set to `0`.
 
 Internally, this scope uses the [`allowedTargets`](../../../reference/caveats.md#allowedtargets) and [`allowedMethods`](../../../reference/caveats.md#allowedmethods) caveat enforcers, and 
 optionally uses the [`allowedCalldata`](../../../reference/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
@@ -44,4 +43,4 @@ const delegation = createDelegation({
 
 ## Next steps
 
-See [Restrict a delegation](../restrict-delegation.md) to learn how to further limit the authority of a delegation.
+See [how to further refine the authority of a delegation](refine-scope.md) using caveat enforcers.

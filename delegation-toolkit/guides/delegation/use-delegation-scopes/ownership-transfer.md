@@ -1,12 +1,11 @@
 ---
 description: Learn how to use the ownership transfer scope for a delegation.
-sidebar_label: Ownership transfer scope
 ---
 
 # Use the ownership transfer scope
  
 The ownership transfer scope restricts a delegation to ownership transfer calls only.
-For example, if Alice has deployed a smart contract, she can delegate to Bob the ability to transfer ownership of that contract.
+For example, Alice has deployed a smart contract, and she delegates to Bob the ability to transfer ownership of that contract.
 
 Internally, this scope uses the [`ownershipTransfer`](../../../reference/caveats.md#ownershiptransfer) caveat enfrocer.
 
@@ -38,4 +37,4 @@ const delegation = createDelegation({
 
 ## Next steps
 
-See [Restrict a delegation](../restrict-delegation.md) to learn how to further limit the authority of a delegation.
+See [how to further refine the authority of a delegation](refine-scope.md) using caveat enforcers.

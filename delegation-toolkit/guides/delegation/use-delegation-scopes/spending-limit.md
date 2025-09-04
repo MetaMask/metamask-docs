@@ -1,11 +1,10 @@
 ---
 description: Learn how to use the spending limit scopes for a delegation.
-sidebar_label: Spending limit scopes
 ---
 
 # Use spending limit scopes
  
-Spending limit scopes let you define how much a delegate can spend in native, ERC-20, or ERC-721 tokens. 
+Spending limit scopes define how much a delegate can spend in native, ERC-20, or ERC-721 tokens. 
 The toolkit provides multiple types of spending limit scopes tailored for different use cases.
 
 ## Prerequisites
@@ -19,10 +18,9 @@ The toolkit provides multiple types of spending limit scopes tailored for differ
 
 This scope ensures that ERC-20 token transfers remain within a predefined limit during a specified time window.
 At the start of each new period, the transfer allowance resets.
-For example, Alice can create a delegation that allows Bob to spend 10 USDC on her behalf each day, week, or month.
+For example, Alice creates a delegation that allows Bob to spend 10 USDC on her behalf each day, week, or month.
 
-When this scope is applied, the toolkit automatically sets the native token transfer limit 
-to `0`, meaning native token transfers are disabled. 
+When this scope is applied, the toolkit automatically disables native token transfers (sets the native token transfer limit to `0`). 
 
 Internally, this scope uses the [`erc20PeriodTransfer`](../../../reference/caveats.md#erc20periodtransfer) and [`valueLte`](../../../reference/caveats.md#valuelte) caveat enforcers.
 
@@ -47,10 +45,9 @@ const delegation = createDelegation({
 This scopes ensures a linear streaming transfer limit for ERC-20 tokens.
 Token transfers are blocked until the defined start timestamp.
 At the start, a specified initial amount is released, after which tokens accrue linearly at the configured rate, up to the maximum allowed amount.
-For example, Alice can create delegation that allows Bob to spend 0.1 USDC per second, starting with an initial amount of 10 USDC, up to a maximum of 100 USDC.
+For example, Alice creates a delegation that allows Bob to spend 0.1 USDC per second, starting with an initial amount of 10 USDC, up to a maximum of 100 USDC.
 
-When this scope is applied, the toolkit automatically sets the native token transfer limit 
-to `0`, meaning native token transfers are disabled.
+When this scope is applied, the toolkit automatically disables native token transfers (sets the native token transfer limit to `0`).
 
 Internally, this scope uses the [`erc20Streaming`](../../../reference/caveats.md#erc20streaming) and [`valueLte`](../../../reference/caveats.md#valuelte) caveat enforcers.
 
@@ -75,11 +72,10 @@ const delegation = createDelegation({
 
 This scope ensures that ERC-20 token transfers are limited to a predefined maximum amount. 
 This scope is useful for setting simple, fixed transfer limits without any time based or streaming conditions.
-For example, Alice can create a delegation that allows Bob to spend up to 10 USDC without any conditions.
+For example, Alice creates a delegation that allows Bob to spend up to 10 USDC without any conditions.
 Bob may use the 10 USDC in a single transaction or make multiple transactions, as long as the total does not exceed 10 USDC.
 
-When this scope is applied, the toolkit automatically sets the native token transfer limit 
-to `0`, meaning native token transfers are disabled.
+When this scope is applied, the toolkit automatically disables native token transfers (sets the native token transfer limit to `0`).
 
 Internally, this scope uses the [`erc20TransferAmount`](../../../reference/caveats.md#erc20transferamount) and [`valueLte`](../../../reference/caveats.md#valuelte) caveat enforcers.
 
@@ -100,7 +96,7 @@ const delegation = createDelegation({
 ## ERC-721 scope
 
 This scope limits the delegation to ERC-721 token transfers only.
-For example, Alice can create a delegation that allows Bob to transfer an NFT she owns on her behalf.
+For example, Alice creates a delegation that allows Bob to transfer an NFT she owns on her behalf.
 
 Internally, this scope uses the [`erc721Transfer`](../../../reference/caveats.md#erc721transfer) caveat enforcer. 
 
@@ -122,9 +118,9 @@ const delegation = createDelegation({
 
 This scope ensures that native token transfers remain within a predefined limit during a specified time window.
 At the start of each new period, the transfer allowance resets.
-For example, Alice can create a delegation that allows Bob to spend 0.01 ETH on her behalf each day, week, or month.
+For example, Alice creates a delegation that allows Bob to spend 0.01 ETH on her behalf each day, week, or month.
 
-When this scope is applied, the toolkit automatically sets the allowed calldata to `0x`, disabling the ERC-20 and ERC-721 token transfers.
+When this scope is applied, the toolkit automatically disables ERC-20 and ERC-721 token transfers (sets the allowed calldata to `0x`).
 
 Internally, this scope uses the [`exactCalldata`](../../../reference/caveats.md#exactcalldata) and [`nativeTokenPeriodTransfer`](../../../reference/caveats.md#nativetokenperiodtransfer) caveat enforcers.
 
@@ -148,9 +144,9 @@ const delegation = createDelegation({
 This scopes ensures a linear streaming transfer limit for native tokens.
 Token transfers are blocked until the defined start timestamp.
 At the start, a specified initial amount is released, after which tokens accrue linearly at the configured rate, up to the maximum allowed amount.
-For example, Alice can create delegation that allows Bob to spend 0.001 ETH per second, starting with an initial amount of 0.01 ETH, up to a maximum of 0.1 ETH.
+For example, Alice creates delegation that allows Bob to spend 0.001 ETH per second, starting with an initial amount of 0.01 ETH, up to a maximum of 0.1 ETH.
 
-When this scope is applied, the toolkit automatically sets the allowed calldata to `0x`, disabling the ERC-20 and ERC-721 token transfers.
+When this scope is applied, the toolkit automatically disables ERC-20 and ERC-721 token transfers (sets the allowed calldata to `0x`).
 
 Internally, this scope uses the [`exactCalldata`](../../../reference/caveats.md#exactcalldata) and [`nativeTokenStreaming`](../../../reference/caveats.md#nativetokenstreaming) caveat enforcers.
 
@@ -174,10 +170,10 @@ const delegation = createDelegation({
 
 This scope ensures that native token transfers are limited to a predefined maximum amount. 
 This scope is useful for setting simple, fixed transfer limits without any time based or streaming conditions.
-For example, Alice can create a delegation that allows Bob to spend up to 0.1 ETH without any conditions.
+For example, Alice creates a delegation that allows Bob to spend up to 0.1 ETH without any conditions.
 Bob may use the 0.1 ETH in a single transaction or make multiple transactions, as long as the total does not exceed 0.1 ETH.
 
-When this scope is applied, the toolkit automatically sets the allowed calldata to `0x`, disabling the ERC-20 and ERC-721 token transfers.
+When this scope is applied, the toolkit automatically disables ERC-20 and ERC-721 token transfers (sets the allowed calldata to `0x`).
 
 Internally, this scope uses the [`exactCalldata`](../../../reference/caveats.md#exactcalldata) and [`nativeTokenTransferAmount`](../../../reference/caveats.md#nativetokentransferamount) caveat enforcers.
 
@@ -196,4 +192,4 @@ const delegation = createDelegation({
 
 ## Next steps
 
-See [Restrict a delegation](../restrict-delegation.md) to learn how to further limit the authority of a delegation.
+See [how to further refine the authority of a delegation](refine-scope.md) using caveat enforcers.
