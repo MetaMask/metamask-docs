@@ -5,6 +5,7 @@
   background: var(--ifm-background-surface-color);
   z-index: 100;
   animation: fade-in 0.3s ease-out;
+  overflow: hidden;
 }
 
 /* Dark mode: Use darker background for better contrast with cards */
@@ -14,10 +15,12 @@ html[data-theme='dark'] .overlayContainer {
 
 .overlayContent {
   width: 100%;
+  height: 100%;
   padding: 2rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 /* Tablet and up */
@@ -538,5 +541,31 @@ html[data-theme='dark'] .cardDescription {
     padding: 1rem 1.6rem;
     font-size: 1.4rem;
     justify-content: flex-start;
+  }
+}
+
+/* Mobile specific scrolling improvements */
+@media (width <=768px) {
+  .overlayContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .overlayContent {
+    height: 100vh;
+    padding: 1rem;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .cardsWrapper {
+    margin-bottom: 4rem;
   }
 }

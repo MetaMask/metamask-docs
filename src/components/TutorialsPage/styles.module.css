@@ -32,6 +32,9 @@
   margin-top: 20px;
   margin-bottom: 60px;
   justify-content: space-between;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .article {
@@ -149,6 +152,7 @@
   align-items: flex-start;
   gap: 24px;
   padding: 0 8px;
+  overflow-x: hidden;
 }
 
 .searchArea {
@@ -158,6 +162,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 16px;
+  overflow-x: hidden;
 }
 
 .searchInput {
@@ -221,27 +226,40 @@
 
 
 
-@media (width <= 768px) {
+@media (width <=768px) {
+  .headerInteractionArea {
+    padding: 0 16px;
+    margin-top: 24px;
+    margin-bottom: 32px;
+    gap: 16px;
+  }
+
   .searchArea {
     flex-direction: column;
     align-items: stretch;
     gap: 12px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   .searchInput {
     min-width: 100%;
     max-width: 100%;
     width: 100%;
+    margin: 0;
   }
 
   .searchInput input {
     width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .searchArea .customSelect {
     min-width: 100% !important;
     max-width: 100% !important;
     width: 100% !important;
+    margin: 0;
   }
 }
 
@@ -341,17 +359,51 @@ html[data-theme='dark'] mark {
   gap: 24px;
   margin-top: 0;
   padding: 0 8px 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-@media (width <= 768px) {
+@media (width <=768px) {
   .cardsGrid {
     grid-template-columns: 1fr;
     gap: 20px;
-    padding: 0;
+    padding: 0 16px 16px;
+    margin: 0;
   }
 }
 
-@media (width >= 1200px) {
+@media (width <=480px) {
+  .cardsGrid {
+    padding: 0 8px 16px;
+    gap: 16px;
+  }
+
+  .container {
+    width: 95%;
+    margin: 2.5%;
+    margin-top: 16px;
+    margin-bottom: 40px;
+  }
+
+  .headerInteractionArea {
+    padding: 0 8px;
+    margin-top: 16px;
+    margin-bottom: 24px;
+    gap: 12px;
+  }
+
+  .noResults {
+    font-size: 18px;
+    padding: 24px 16px;
+    margin-top: 24px;
+  }
+
+  .searchInput {
+    min-width: 100%;
+  }
+}
+
+@media (width >=1200px) {
   .cardsGrid {
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     gap: 32px;
@@ -368,6 +420,9 @@ html[data-theme='dark'] mark {
   padding: 40px 20px;
   background-color: var(--ifm-color-emphasis-100);
   border-radius: 12px;
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .modalHeader {
@@ -602,18 +657,21 @@ html[data-theme='dark'] mark {
   color: var(--w3a-color-indigo);
 }
 
-@media only screen and (width <= 1046px) {
+@media only screen and (width <=1046px) {
   .headerInteractionArea {
     flex-direction: column;
-    gap: 50px;
+    gap: 32px;
+    padding: 0 16px;
   }
 
   .searchArea {
     justify-content: flex-start;
+    width: 100%;
+    overflow-x: hidden;
   }
 }
 
-@media only screen and (width <= 889px) {
+@media only screen and (width <=889px) {
   .header {
     text-align: center;
     align-items: center;
@@ -621,37 +679,42 @@ html[data-theme='dark'] mark {
   }
 
   .headerInteractionArea {
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0 16px;
   }
 
   .buttonGroup {
     width: 100%;
-    overflow: scroll;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   .searchArea {
     flex-direction: column;
+    align-items: stretch;
   }
 
   .container {
     justify-content: center;
+    padding: 0 16px;
   }
 }
 
-@media only screen and (width >= 889px) {
+@media only screen and (width >=889px) {
   .article {
     width: 45%;
   }
 }
 
-@media only screen and (width >= 1334px) {
+@media only screen and (width >=1334px) {
   .article {
     width: 30%;
   }
 }
 
-@media only screen and (width <= 750px) {
+@media only screen and (width <=750px) {
   .modalBody {
     flex-direction: column;
   }

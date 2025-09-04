@@ -32,7 +32,7 @@ export const quickStartSourceCode = {
   UNREAL: 'https://github.com/Web3Auth/web3auth-unreal-example/tree/master',
 }
 
-export interface GuidesInterface {
+export interface TutorialsInterface {
   content: Record<
     string,
     {

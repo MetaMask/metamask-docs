@@ -33,7 +33,7 @@ export default function LookupAPIPage() {
 
   const [formData, setFormData] = useState({
     verifier: 'w3a-google-demo',
-    verifierId: 'devrel@web3auth.io',
+    verifierId: 'devrel@metamask.io',
     web3AuthNetwork: 'sapphire_mainnet',
     clientId:
       'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ',

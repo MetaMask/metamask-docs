@@ -38,7 +38,7 @@ module.exports = (context, options) => ({
     addRoute({
       path: '/tutorials',
       exact: true,
-      component: '@site/src/components/GuidesPage',
+      component: '@site/src/components/TutorialsPage',
       modules: { content: contentHub },
     })
   },
