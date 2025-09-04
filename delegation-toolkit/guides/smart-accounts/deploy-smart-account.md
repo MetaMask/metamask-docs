@@ -156,5 +156,5 @@ export const walletClient = createWalletClient({
 
 ## Next steps
 
-- See [Send a user operation](send-user-operation.md) to learn how to send user operations. 
-- See [Send a gasless transaction](send-gasless-transaction.md) to learn how to use gasless paymaster.
+- Learn more about [sending user operations](send-user-operation.md).
+- To sponsor gas for end users, see how to [send a gasless transaction](send-gasless-transaction.md).
