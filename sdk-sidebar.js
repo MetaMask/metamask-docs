@@ -42,8 +42,16 @@ const sidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        { type: "link", label: "Create a Wallet AI Agent", href: "/tutorials/create-wallet-ai-agent" },
-        { type: "link", label: "Upgrade an EOA to a Smart Account", href: "/tutorials/upgrade-eoa-to-smart-account" },
+        {
+          type: "link",
+          label: "Create a wallet AI agent",
+          href: "/tutorials/create-wallet-ai-agent"
+        },
+        { 
+          type: "link",
+          label: "Upgrade an EOA to a smart account",
+          href: "/tutorials/upgrade-eoa-to-smart-account"
+        },
       ],
     },
     {
