@@ -1,7 +1,6 @@
 ---
 sidebar_label: Install and set up
 description: Learn how to install and set up the MetaMask Delegation Toolkit.
-sidebar_position: 1
 ---
 
 import Tabs from "@theme/Tabs";
@@ -17,7 +16,7 @@ This page provides instructions to install and set up the MetaMask Delegation To
 - Install [Yarn](https://yarnpkg.com/),
     [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 - If you plan to use any smart contracts (for example, to
-    [create a custom caveat enforcer](../how-to/create-delegation/create-custom-caveat-enforcer.md)),
+    [create a custom caveat enforcer](/tutorials/create-custom-caveat-enforcer)),
     install [Foundry](https://book.getfoundry.sh/getting-started/installation).
 
 ## Steps
@@ -33,7 +32,7 @@ npm install @metamask/delegation-toolkit
 ### 2. (Optional) Install the contracts
 
 If you plan to extend the Delegation Framework smart contracts (for example, to
-[create a custom caveat enforcer](../how-to/create-delegation/create-custom-caveat-enforcer.md)), install
+[create a custom caveat enforcer](/tutorials/create-custom-caveat-enforcer)), install
 the contract package using Foundry's command-line tool, Forge:
 
 ```bash
@@ -44,5 +43,5 @@ Add `@metamask/delegation-framework/=lib/metamask/delegation-framework/` in your
 
 ### 3. Get started
 
-You're now ready to start using MetaMask Smart Accounts.
-Check out the [quickstart](quickstart.md) to walk through a simple example.
+You're now ready to start using the Delegation Toolkit.
+See the [MetaMask Smart Accounts quickstart](smart-account-quickstart/index.md) to walk through a simple example.

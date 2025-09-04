@@ -1,0 +1,106 @@
+---
+title: Whitelabel PnP Unreal Engine SDK
+sidebar_label: Whitelabel
+description: 'Web3Auth PnP Unreal Engine SDK - Whitelabel | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import WhiteLabelShowcase from '../../_common/_whitelabel_showcase.mdx'
+import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
+
+Web3Auth allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
+
+- **UI elements**: Customize the appearance of modals and components
+- **Branding**: Apply your brand colors, logos, and themes
+- **Translations**: Localize the interface for your users
+
+<WhitelabelingNote />
+
+<GrowthPlanNote />
+
+## Customizing the Web3Auth Login Screens
+
+For defining custom UI, branding, and translations for your brand during Web3Auth instantiation, you just need to specify an additional parameter within the `Web3AuthOptions` object called `whiteLabel`. This parameter takes object called `WhiteLabelData`.
+
+### `WhiteLabelData`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter          | Description                                                                                                                                                                 |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `appName?`         | Display name for the app in the UI.                                                                                                                                         |
+| `logoLight?`       | App logo to be used in dark mode. It accepts url in `FString` as a value.                                                                                                   |
+| `logoDark?`        | App logo to be used in light mode. It accepts url in `FString` as a value.                                                                                                  |
+| `defaultLanguage?` | Language which will be used by Web3Auth, app will use browser language if not specified. Default language is `FLanguage::en`. Checkout `FLanguage` for supported languages. |
+| `mode?`            | Theme mode for the login modal. Choose between `FThemeModes::auto`, `FThemeModes::light` or `FThemeModes::dark` background modes.                                           |
+| `theme?`           | Used to customize the theme of the login modal. It accepts `TMap<FString, FString>` as a value.                                                                             |
+| `appUrl?`          | Url to be used in the Modal. It accepts url in `FString` as a value.                                                                                                        |
+| `useLogoLoader?`   | Use logo loader. If `logoDark` and `logoLight` are null, the default Web3Auth logo will be used for the loader. Default value is false.                                     |
+
+</TabItem>
+<TabItem value="interface">
+
+```cs
+USTRUCT(BlueprintType)
+struct FWhiteLabelData
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString appName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString logoLight;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FString logoDark;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	FLanguage defaultLanguage = FLanguage::en;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	FThemeModes mode;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TMap<FString, FString> theme;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	FString appUrl;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    	bool useLogoLoader;
+
+	FWhiteLabelData() {};
+
+	void operator= (const FWhiteLabelData& other) {
+		appName = other.appName;
+		logoLight = other.logoLight;
+		logoDark = other.logoDark;
+		defaultLanguage = other.defaultLanguage;
+		mode = other.mode;
+		theme = other.theme;
+		appUrl = other.appUrl;
+		useLogoLoader = other.useLogoLoader;
+	}
+
+};
+```
+
+</TabItem>
+</Tabs>
+
+<WhiteLabelShowcase />
+
+## Example
+
+![Unreal Whitelabel](/img/embedded-wallets/unreal/unreal-whitelable-data.png)

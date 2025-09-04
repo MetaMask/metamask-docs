@@ -2,142 +2,82 @@
 sidebar_label: Dynamic SDK
 description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
 toc_max_heading_level: 2
-keywords: [connect, MetaMask, Dynamic, SDK, dapp]
+keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 ---
 
 # Connect to MetaMask using Dynamic SDK
 
 Get started with MetaMask SDK and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
 You can use MetaMask SDK features directly within Dynamic SDK.
-Set up the SDKs in one of the following ways:
-
-- [SDK CLI](#set-up-using-the-cli) - Use the CLI to scaffold a Next.js and Dynamic dapp.
-- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Dynamic dapp.
-- [Manual setup](#set-up-manually) - Set up Dynamic SDK in an existing dapp.
-
-<details>
-<summary>Project structure</summary>
-<div>
-The project you set up using the CLI or template has the following structure:
-
-```text
-├── app/
-│   ├── providers.tsx # Main providers configuration
-│   └── layout.tsx    # Root layout with providers
-├── components/
-│   ├── Navbar.tsx    # Navigation with wallet connection
-│   └── Hero.tsx      # Hero section with wallet status
-├── wagmi.config.ts   # Wagmi configuration
-├── next.config.ts    # Next.js configuration
-└── package.json      # Project dependencies
-```
-</div>
-</details>
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
 
 <p align="center">
-  <img src={require("../_assets/quickstart-dynamic.png").default} alt="Dynamic SDK Quickstart" width="600px" />
+  <a href="https://metamask-dynamic-demo.vercel.app/" target="_blank">
+    <img src={require("../_assets/quickstart-dynamic.png").default} alt="Dynamic SDK Quickstart" width="600px" />
+  </a>
 </p>
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) version 19 or later installed.
-- A package manager installed.
-  The examples in this quickstart use [pnpm](https://pnpm.io/installation).
+- A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
 - A [Dynamic Environment ID](https://app.dynamic.xyz/).
 
-## Set up using the CLI
-
-1. Run the CLI command, replacing `<project-name>` with your project name:
-
-    ```bash
-    npx @consensys/create-web3-app <project-name>
-    ```
-
-2. Select the Dynamic Quickstart template:
-
-    ```bash
-    ? Please select the template you want to use: 
-      MetaMask <-> Next.js (Wagmi) Quickstart (Recommended) 
-      MetaMask <-> Web3Auth Quickstart
-    ❯ MetaMask <-> Dynamic Quickstart
-    ```
-
-3. Select your preferred blockchain tooling if your project requires it:
-
-    ```bash
-    ? Would you like to include blockchain tooling? (Use arrow keys)
-    ❯ HardHat 
-      Foundry 
-      None 
-    ```
-
-4. Select your preferred package manager.
-    We recommend pnpm for speed and efficiency:
-
-    ```bash
-    ? Please select the package manager you want to use: 
-      Yarn 
-      NPM 
-    ❯ pnpm 
-    ```
-
-5. Select to enter your Dynamic Environment ID in the command prompt:
-
-    ```bash
-    ? The selected template uses Dynamic.xyz. You'll need a Dynamic Environment ID 
-    added to a .env file. Would you like to add it now? You can get one from 
-    https://app.dynamic.xyz/dashboard/developer/api Yes
-    ? Please paste your Dynamic Environment ID: 
-    ```
-
-5. The CLI will take a few minutes to set up your project.
-    Once complete, you can run the project using the following command in `<project-name>/packages/site`:
-
-    ```bash
-    pnpm run dev
-    ```
-
-You've successfully set up MetaMask SDK and Dynamic SDK.
-See how to [use the combined SDKs](#usage).
-
 ## Set up using a template
 
-1. Download the [MetaMask SDK + Dynamic SDK template](https://github.com/MetaMask/metamask-dynamic):
+1. Download the [MetaMask SDK + Dynamic SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/dynamic):
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-dynamic
-    ```
+   ```bash
+   npx degit MetaMask/metamask-sdk-examples/partners/dynamic metamask-dynamic
+   ```
 
 2. Navigate into the repository:
 
+   ```bash
+   cd metamask-dynamic
+   ```
+
+    <details>
+    <summary>Degit vs. Git clone</summary>
+    <div>
+
+    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
+    
+    Alternatively, you can use `git clone`, which will download the entire repository.
+    To do so, clone the MetaMask SDK examples repository and navigate into the `partners/dynamic` directory:
+
     ```bash
-    cd metamask-dynamic
+    git clone https://github.com/MetaMask/metamask-sdk-examples
+    cd metamask-sdk-examples/partners/dynamic
     ```
+
+    </div>
+    </details>
 
 3. Install dependencies:
 
-    ```bash
-    pnpm install
-    ```
+   ```bash
+   pnpm install
+   ```
 
 4. Create a `.env.local` file:
 
-    ```bash
-    touch .env.local
-    ```
+   ```bash
+   touch .env.local
+   ```
 
 5. In `.env.local`, add a `NEXT_PUBLIC_DYNAMIC_ENVIRONMENT_ID` environment variable, replacing `<YOUR-ENVIRONMENT-ID>` with your Dynamic Environment ID:
 
-    ```text title=".env.local"
-    NEXT_PUBLIC_DYNAMIC_ENVIRONMENT_ID=<YOUR-ENVIRONMENT-ID>
-    ```
+   ```text title=".env.local"
+   NEXT_PUBLIC_DYNAMIC_ENVIRONMENT_ID=<YOUR-ENVIRONMENT-ID>
+   ```
 
-4. Run the project:
+6. Run the project:
 
-    ```bash
-    pnpm dev
-    ```
+   ```bash
+   pnpm dev
+   ```
 
 You've successfully set up MetaMask SDK and Dynamic SDK.
 See how to [use the combined SDKs](#usage).
@@ -148,8 +88,8 @@ See how to [use the combined SDKs](#usage).
 
 Install the SDK and the required dependencies to an existing project:
 
-```bash
-pnpm i @dynamic-labs/sdk-react-core @dynamic-labs/ethereum @dynamic-labs/wagmi-connector wagmi viem @tanstack/react-query
+```bash npm2yarn
+npm install @dynamic-labs/sdk-react-core @dynamic-labs/ethereum @dynamic-labs/wagmi-connector wagmi viem @tanstack/react-query
 ```
 
 ### 2. Configure providers
@@ -268,3 +208,7 @@ Common issues and solutions include:
   - Test on actual mobile devices.
   - Verify redirect URLs.
   - Check MetaMask mobile app installation.
+
+## Live example
+
+<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/partners/dynamic?ctl=1&embed=1&file=app%2Fproviders.tsx&hideNavigation=1"></iframe>

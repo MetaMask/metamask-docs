@@ -1,0 +1,158 @@
+---
+title: Integrate Embedded Wallets with the Polkadot Blockchain
+sidebar_label: Polkadot
+image: 'img/embedded-wallets/banners/polkadot.png'
+
+keywords: [polkadot, embedded-wallets, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Polkadot Blockchain | Embedded Wallets'
+---
+
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [Polkadot](https://www.polkadot.network/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's `account`, fetching `balance`, and `sign & send transaction`. We have highlighted a few methods here to get you started quickly.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Installation
+
+For Polkadot, we will use the libraries `@polkadot/keyring` and `@polkadot/util-crypto` to create the Polkadot address.
+
+```bash npm2yarn
+npm install --save @polkadot/keyring @polkadot/util-crypto
+```
+
+## Initializing Provider
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: other
+- Chain ID: Polkadot
+- Public RPC URL: https://rpc.polkadot.io (Avoid using public rpcTarget in production)
+- Display Name: Polkadot Mainnet
+- Block Explorer Link: https://explorer.polkascan.io/polkadot
+- Ticker: DOT
+- Ticker Name: Polkadot
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0x5
+- Public RPC URL: https://westend-rpc.polkadot.io (Avoid using public rpcTarget in production)
+- Display Name: Polkadot Testnet
+- Block Explorer Link: https://westend.subscan.io
+- Ticker: DOT
+- Ticker Name: Polkadot
+
+</TabItem>
+</Tabs>
+
+## Get Account and KeyPair
+
+Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Polkadot, we directly use the private key to make RPC calls.
+
+Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Polkadot-specific signing functions, hence, we first derive the Polkadot Keyring using the `Keyring` class.
+
+```tsx
+import { Keyring } from '@polkadot/api'
+import { cryptoWaitReady } from '@polkadot/util-crypto'
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// cryptoWaitReady is required to initialize the Keyring
+await cryptoWaitReady()
+const keyring = new Keyring({ ss58Format: 42, type: 'sr25519' })
+const keyPair = keyring.addFromUri('0x' + privateKey)
+// keyPair.address is the account address.
+const address = keyPair.address
+```
+
+## Get Balance
+
+```tsx
+import { Keyring } from '@polkadot/api'
+import { cryptoWaitReady } from '@polkadot/util-crypto'
+import { ApiPromise, WsProvider } from '@polkadot/api'
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// cryptoWaitReady is required to initialize the Keyring
+await cryptoWaitReady()
+const keyring = new Keyring({ ss58Format: 42, type: 'sr25519' })
+const keyPair = keyring.addFromUri('0x' + privateKey)
+
+const provider = new WsProvider('wss://westend-rpc.polkadot.io') // testnet
+// const provider = new WsProvider("wss://rpc.polkadot.io"); // Polkadot Relay Chain
+
+// Create the API and wait until ready
+const api = await ApiPromise.create({ provider })
+
+// Retrieve the chain & node information information via rpc calls
+const data = await api.query.system.account(keyPair.address)
+
+// Balance
+const balance = data.toHuman()
+```
+
+## Send Transaction
+
+```tsx
+import { Keyring } from '@polkadot/api'
+import { cryptoWaitReady } from '@polkadot/util-crypto'
+import { ApiPromise, WsProvider } from '@polkadot/api'
+
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+
+// cryptoWaitReady is required to initialize the Keyring
+await cryptoWaitReady()
+const keyring = new Keyring({ ss58Format: 42, type: 'sr25519' })
+const keyPair = keyring.addFromUri('0x' + privateKey)
+
+const provider = new WsProvider('wss://westend-rpc.polkadot.io') // testnet
+// const provider = new WsProvider("wss://rpc.polkadot.io"); // Polkadot Relay Chain
+
+// Create the API and wait until ready
+const api = await ApiPromise.create({ provider })
+
+// Transfer 12345 units to '5Gzhnn1MsDUjMi7S4cN41CfggEVzSyM58LkTYPFJY3wt7o3d'
+const txHash = await api.tx.balances
+  .transferKeepAlive('5Gzhnn1MsDUjMi7S4cN41CfggEVzSyM58LkTYPFJY3wt7o3d', 12345)
+  .signAndSend(keyPair)
+
+console.log('txHash', txHash.toHuman())
+```

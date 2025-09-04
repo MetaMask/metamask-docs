@@ -1,0 +1,35 @@
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+To interact with the Ethereum compatible blockchains in Flutter, you can use any [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible package. Here, we're using [web3dart](https://pub.dev/packages/web3dart) to demonstrate how to make blockchain calls using it with Embedded Wallets (formerly Web3Auth).
+
+To install the `web3dart` package, you have two options. You can either manually add the package in the `pubspec.yaml` file, or you can use the `flutter pub add` command.
+
+<Tabs defaultValue = "console"
+  values={[
+    { label: "Console", value: "console", },
+    { label: "Pubspec", value: "pubspec", },
+  ]}
+>
+
+<TabItem value="console">
+
+Add `web3dart` using `flutter pub add` command.
+
+```sh
+flutter pub add web3dart
+```
+
+</TabItem>
+
+<TabItem value="pubspec">
+
+Add `web3dart` as a dependency to your `pubspec.yaml`.
+
+```yaml
+dependencies:
+  web3dart: ^2.7.3
+```
+
+</TabItem>
+</Tabs>

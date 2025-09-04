@@ -1,6 +1,5 @@
 ---
 description: Learn how to redeem ERC-7710 delegations with a smart contract account or an externally owned account (EOA).
-sidebar_position: 3
 ---
 
 import Tabs from "@theme/Tabs";
@@ -84,7 +83,7 @@ Redeem a delegation with a [MetaMask smart account](#redeem-with-a-metamask-smar
 
 ### Redeem with a MetaMask smart account
 
-To redeem a delegation with a MetaMask smart account, create a [`MetaMaskSmartAccount`](../how-to/create-smart-account/index.md#create-a-metamasksmartaccount)
+To redeem a delegation with a MetaMask smart account, [create a smart account](../guides/smart-accounts/create-smart-account.md)
 and a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler).
 
 After setting up your Bundler Client, you can extend its functionality with `erc7710BundlerActions` actions to support ERC-7710. Once extended, use [`sendUserOperationWithDelegation`](../reference/api/experimental-actions/bundler-client.md#senduseroperationwithdelegation) to redeem the permission.

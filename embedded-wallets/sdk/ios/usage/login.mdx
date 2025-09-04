@@ -1,0 +1,263 @@
+---
+title: Login User
+sidebar_label: login
+description: 'Web3Auth iOS SDK - login | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+To login in a user, you can use the `login` method. It will trigger login flow will navigate the user to a browser model allowing the user to login into the service. You can pass in the supported providers to the login method for specific social logins such as GOOGLE, APPLE, FACEBOOK, etc., and do whitelabel login.
+
+## Parameters
+
+The login method accepts `W3ALoginParams` as a required parameter.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Struct", value: "struct" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `SMS_PASSWORDLESS`, and `FARCASTER`. |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `nil`, and it accepts `ExtraLoginOptions` as a value. |
+| `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `nil`, and accepts `URL` as a value. |
+| `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `nil`, and accepts `String` as a value. |
+| `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value. |
+| `dappShare?` | Custom verifier logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `String` as a value. |
+| `curve?` | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivKey` method. The default value is `SUPPORTED_KEY_CURVES.SECP256K1`. |
+
+</TabItem>
+
+<TabItem value="struct">
+
+```swift
+public struct W3ALoginParams: Codable {
+	public init() {
+		loginProvider = nil
+		dappShare = nil
+		extraLoginOptions = nil
+		redirectUrl = nil
+		appState = nil
+		mfaLevel = nil
+		curve = .SECP256K1
+	}
+
+	let loginProvider: String?
+	var dappShare: String?
+	let extraLoginOptions: ExtraLoginOptions?
+	let redirectUrl: String?
+	let appState: String?
+	let mfaLevel: MFALevel?
+	let curve: SUPPORTED_KEY_CURVES
+}
+
+public enum Web3AuthProvider: String, Codable {
+    case GOOGLE = "google"
+    case FACEBOOK = "facebook"
+    case REDDIT = "reddit"
+    case DISCORD = "discord"
+    case TWITCH = "twitch"
+    case APPLE = "apple"
+    case LINE = "line"
+    case GITHUB = "github"
+    case KAKAO = "kakao"
+    case LINKEDIN = "linkedin"
+    case TWITTER = "twitter"
+    case WEIBO = "weibo"
+    case WECHAT = "wechat"
+    case EMAIL_PASSWORDLESS = "email_passwordless"
+    case JWT = "jwt"
+    case SMS_PASSWORDLESS = "sms_passwordless"
+    case FARCASTER = "farcaster"
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .GOOGLE))
+```
+
+## Examples
+
+<Tabs
+  defaultValue="google"
+  values={[
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
+    { label: "Discord", value: "discord" },
+    { label: "Twitch", value: "twitch" },
+    { label: "Email Passwordless", value: "email_passwordless" },
+	{ label: "SMS Passwordless", value: "sms_passwordless" },
+	{ label: "Farcaster", value: "farcaster" },
+	{ label: "JWT", value: "jwt" }
+  ]}
+>
+
+<TabItem value="google">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .GOOGLE))
+```
+
+</TabItem>
+
+<TabItem value="facebook">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .FACEBOOK))
+```
+
+</TabItem>
+
+<TabItem value="discord">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .DISCORD))
+```
+
+</TabItem>
+
+<TabItem value="twitch">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .TWITCH))
+```
+
+</TabItem>
+
+<TabItem value="email_passwordless">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(
+  W3AInitParams(
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+    network:.sapphire_mainnet,
+    redirectUrl: "bundleId://auth"
+  )
+)
+
+// focus-start
+let result = try await web3Auth.login(
+  W3ALoginParams(
+    loginProvider: .EMAIL_PASSWORDLESS,
+    extraLoginOptions: .init(loginHint: "hello@web3auth.io")
+  )
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="sms_passwordless">
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams( clientId: "YOUR_WEB3AUTH_CLIENT_ID", network: .sapphire_mainnet, redirectUrl: "bundleId://auth" ))
+
+// focus-start let result = try await web3Auth.login(W3ALoginParams( Web3AuthProvider.SMS_PASSWORDLESS, // The phone number should be in format of +{country_code}-{phone_number} extraLoginOptions: .init(loginHint: "+91-9911223344") )) // focus-end
+
+````
+
+</TabItem>
+
+<TabItem value="farcaster">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(
+  W3AInitParams(
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+    network: .sapphire_mainnet,
+    redirectUrl: "bundleId://auth"
+  )
+)
+
+// focus-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .FARCASTER))
+
+````
+
+</TabItem>
+
+<TabItem value="jwt">
+
+```swift
+import Web3Auth
+
+let web3auth = try await Web3Auth(W3AInitParams(
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+
+// focus-start
+let result = try await web3Auth.login(
+  W3ALoginParams(
+    loginProvider: .JWT,
+    extraLoginOptions: .init(domain:"your-domain", id_token: "your_jwt_token")
+  )
+)
+// focus-end
+```
+
+</TabItem>
+</Tabs>

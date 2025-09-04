@@ -1,6 +1,5 @@
 ---
 description: Learn about MetaMask Smart Accounts.
-sidebar_position: 1
 ---
 
 # MetaMask Smart Accounts
@@ -39,19 +38,19 @@ ERC-4337 introduces the following concepts:
 
 The MetaMask Delegation Toolkit supports three types of MetaMask Smart Accounts, each offering unique features and use cases.
 
-See [Configure accounts and signers](../how-to/create-smart-account/configure-accounts-signers.md) to learn how to use these different account types.
+See [Create a smart account](../guides/smart-accounts/create-smart-account.md) to learn how to use these different account types.
 
 ### Hybrid smart account
 
-The Hybrid smart account is a flexible implementation that supports both an externally owned account (EOA) "owner" and any number of P256 (passkey) signers.
+The Hybrid smart account is a flexible implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 You can configure any of these signers as the signatory, and use them to sign any data, including user operations, on behalf of the smart account.
 
 This type is referenced in the toolkit as `Implementation.Hybrid`.
 
 ### Multisig smart account
 
-The Multisig smart account is an implementation that supports multiple signers with a configurable threshold for valid signatures, allowing for enhanced security and flexibility in account management.
-The signatory must have at least as many signers include as the threshold is configured for the account.
+The Multisig smart account is an implementation that supports multiple signers with a configurable threshold, allowing for enhanced security and flexibility in account management.
+A valid signature requires signatures from at least the number of signers specified by the threshold.
 
 This type is referenced in the toolkit as `Implementation.Multisig`.
 
@@ -92,4 +91,4 @@ The MetaMask Smart Accounts flow is as follows:
 
 Delegator accounts are a type of MetaMask smart account that allows users to grant permission to other smart accounts or EOAs
 to perform specific executions on their behalf, under defined rules and restrictions.
-Learn more about [delegation](delegation.md).
+Learn more about [delegation](delegation/index.md).

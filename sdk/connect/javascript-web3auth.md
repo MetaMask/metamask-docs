@@ -1,127 +1,87 @@
 ---
-sidebar_label: Web3Auth SDK
-description: Quickstart guide for using MetaMask SDK and Web3Auth SDK.
+sidebar_label: Embedded Wallets SDK
+description: Quickstart guide for using MetaMask SDK and Embedded Wallets SDK.
 toc_max_heading_level: 2
-keywords: [connect, MetaMask, Web3Auth, SDK, dapp]
+keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
 ---
 
-# Connect to MetaMask using Web3Auth SDK
+# Connect to MetaMask using Embedded Wallets SDK
 
-Get started with MetaMask SDK and [Web3Auth SDK](https://web3auth.io/docs/),
+Get started with MetaMask SDK and [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets),
 enabling users to sign in with an email or social media account.
-You can use MetaMask SDK features directly within Web3Auth SDK.
-Set up the SDKs in one of the following ways:
-
-- [SDK CLI](#set-up-using-the-cli) - Use the CLI to scaffold a Next.js and Web3Auth dapp.
-- [Quickstart template](#set-up-using-a-template) - Clone the template to set up a Next.js and Web3Auth dapp.
-- [Manual setup](#set-up-manually) - Set up Web3Auth SDK in an existing dapp.
+You can use MetaMask SDK features directly within Embedded Wallets SDK.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
 
 <p align="center">
-  <img src={require("../_assets/quickstart-web3auth.png").default} alt="Web3Auth SDK Quickstart" width="600px" />
+  <a href="https://metamask-web3auth-demo.vercel.app/" target="_blank">
+    <img src={require("../_assets/quickstart-web3auth.png").default} alt="Web3Auth SDK Quickstart" width="600px" />
+  </a>
 </p>
 
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) version 19 or later installed.
-- A package manager installed.
-  The examples in this quickstart use [pnpm](https://pnpm.io/installation).
+- A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
-- A [Web3Auth Client ID](https://web3auth.io/docs/dashboard/create-new-project#get-the-client-id).
-
-## Set up using the CLI
-
-1. Run the CLI command, replacing `<project-name>` with your project name:
-
-    ```bash
-    npx @consensys/create-web3-app <project-name>
-    ```
-
-1. Select the Web3Auth Quickstart template:
-
-    ```bash
-    ? Please select the template you want to use: 
-      MetaMask <-> Next.js (Wagmi) Quickstart (Recommended) 
-    ❯ MetaMask <-> Web3Auth Quickstart
-      MetaMask <-> Dynamic Quickstart
-    ```
-
-1. Select your preferred blockchain tooling if your project requires it:
-
-    ```bash
-    ? Would you like to include blockchain tooling? (Use arrow keys)
-      HardHat 
-      Foundry 
-    ❯ None 
-    ```
-
-1. Select your preferred package manager.
-    We recommend pnpm for speed and efficiency:
-
-    ```bash
-    ? Please select the package manager you want to use: 
-      Yarn 
-      NPM 
-    ❯ pnpm 
-    ```
-
-1. Select to enter your Web3Auth Client ID in the command prompt:
-
-    ```bash
-    Note: The selected template requires a Web3Auth client ID. 
-    You can obtain one from https://dashboard.web3auth.io and later 
-    add NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<your_client_id> to a .env file in your site's directory. 
-    ```
-
-1. The CLI will take a few minutes to set up your project.
-    Once complete, you can run the project using the following command in `cd <project-name>`:
-
-    ```bash
-    pnpm run dev
-    ```
-
-You've successfully set up MetaMask SDK and Web3Auth SDK.
-See how to [use the Web3Auth SDK](#usage).
+- A [Web3Auth Client ID](/embedded-wallets/dashboard/#get-the-client-id).
 
 ## Set up using a template
 
-1. Download the [MetaMask SDK + Web3Auth SDK template](https://github.com/MetaMask/metamask-web3auth):
+1. Download the [MetaMask SDK + Web3Auth SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/web3auth):
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-web3auth
-    ```
+   ```bash
+   npx degit MetaMask/metamask-sdk-examples/partners/web3auth metamask-web3auth
+   ```
 
 2. Navigate into the repository:
 
+   ```bash
+   cd metamask-web3auth
+   ```
+
+    <details>
+    <summary>Degit vs. Git clone</summary>
+    <div>
+
+    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
+    
+    Alternatively, you can use `git clone`, which will download the entire repository.
+    To do so, clone the MetaMask SDK examples repository and navigate into the `partners/web3auth` directory:
+
     ```bash
-    cd metamask-web3auth
+    git clone https://github.com/MetaMask/metamask-sdk-examples
+    cd metamask-sdk-examples/partners/web3auth
     ```
+
+    </div>
+    </details>
 
 3. Install dependencies:
 
-    ```bash
-    pnpm install
-    ```
+   ```bash
+   pnpm install
+   ```
 
 4. Create a `.env.local` file:
 
-    ```bash
-    touch .env.local
-    ```
+   ```bash
+   touch .env.local
+   ```
 
 5. In `.env.local`, add a `NEXT_PUBLIC_WEB3AUTH_CLIENT_ID` environment variable, replacing `<YOUR-CLIENT-ID>` with your Web3Auth Client ID:
 
-    ```text title=".env.local"
-    NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<YOUR-CLIENT-ID>
-    ```
+   ```text title=".env.local"
+   NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<YOUR-CLIENT-ID>
+   ```
 
 6. Run the project:
 
-    ```bash
-    pnpm dev
-    ```
+   ```bash
+   pnpm dev
+   ```
 
-You've successfully set up MetaMask SDK and Web3Auth SDK.
-See how to [use the Web3Auth SDK](#usage).
+You've successfully set up MetaMask SDK and MetaMask Embedded Wallets.
+See how to [use Embedded Wallets](#usage).
 
 ## Set up manually
 
@@ -129,8 +89,8 @@ See how to [use the Web3Auth SDK](#usage).
 
 Install the SDK and the required dependencies to an existing project:
 
-```bash
-pnpm i viem wagmi @tanstack/react-query @web3auth/modal@10
+```bash npm2yarn
+npm install viem wagmi @tanstack/react-query @web3auth/modal@10
 ```
 
 ### 2. Configure providers
@@ -251,3 +211,7 @@ export const SendTransaction = () => {
   );
 };
 ```
+
+## Live example
+
+<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/partners/web3auth?ctl=1&embed=1&file=app%2Fproviders.tsx&hideNavigation=1"></iframe>

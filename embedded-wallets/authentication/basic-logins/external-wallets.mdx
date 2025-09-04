@@ -1,0 +1,48 @@
+---
+title: External Wallets Login with Embedded Wallets
+sidebar_label: External Wallets
+description: 'External Wallets Login with Embedded Wallets | Embedded Wallets'
+---
+
+import ExternalWalletsToggle from '@site/static/img/embedded-wallets/w3a-dashboard/external-wallets-toggle.png'
+import ExternalWalletsSelectWallets from '@site/static/img/embedded-wallets/w3a-dashboard/external-wallets-select-wallets.png'
+
+Web3Auth provides built-in support for email and SMS-based authentication, allowing users to log in seamlessly using a one-time passcode (OTP) sent to their email address or phone number. This form of passwordless authentication simplifies the onboarding process, removes friction for end users, and expands accessibility—especially in regions where social login options may be limited.
+
+## Enable External Wallets
+
+:::success Enable on Dashboard
+
+To enable this feature, developers must first activate `External Wallets` from the Social Connections section in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+
+:::
+
+<div style={{ display: 'flex', margin: '20px 0' }}>
+  <img
+    src={ExternalWalletsToggle}
+    alt="External Wallets Toggle"
+    style={{
+      maxWidth: '600px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+  />
+</div>
+
+To choose which external wallets to enable, click the `Settings` icon next to the **External Wallets** toggle in the Social Connections section of the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+
+:::note
+
+Metamask Wallet is enabled by default and cannot be disabled.
+
+:::
+
+A wide range of wallets are available to choose from.
+
+<div style={{ display: 'flex', margin: '20px 0' }}>
+  <img
+    src={ExternalWalletsSelectWallets}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="External Wallets Select Wallets"
+  />
+</div>

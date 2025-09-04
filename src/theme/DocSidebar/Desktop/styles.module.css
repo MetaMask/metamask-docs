@@ -1,4 +1,4 @@
-@media (min-width: 997px) {
+@media (width >= 997px) {
   .sidebar {
     display: flex;
     flex-direction: column;

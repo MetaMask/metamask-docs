@@ -1,0 +1,189 @@
+---
+title: Integrate Embedded Wallets with the Solana Blockchain in Android
+sidebar_label: Android
+image: 'img/embedded-wallets/banners/solana.png'
+
+keywords: [android, solana, embedded-wallets, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Solana Blockchain in Android | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While using the Embedded Wallets Android SDK (formerly Web3Auth), you can retrieve the Ed25519 private key upon successful authentication. This private key can be used to derive the user's public address and interact with the [Solana](https://solana.org/) chain. We’ve highlighted a few methods here to get you started quickly.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Installation
+
+To interact with the Solana blockchain in Android, you can use any Solana compatible SDK. Here, we're using [sol4k](https://github.com/sol4k/sol4k) to demonstrate how to interact with Solana chain using Web3Auth.
+
+In your app-level gradle's dependencies section, add the following:
+
+<Tabs defaultValue = "groovy"
+  values={[
+    { label: "Groovy", value: "groovy", },
+    { label: "Kotlin", value: "kotlin", },
+  ]}
+>
+
+<TabItem value="groovy">
+
+```groovy
+dependencies {
+     implementation 'org.sol4k:sol4k:0.4.1'
+}
+```
+
+</TabItem>
+
+<TabItem value="kotlin">
+
+```kotlin
+dependencies {
+   implementation("org.sol4k:sol4k:0.4.1")
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+To Initialize the `Connection` we require rpc url. The `Connection` object will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response.The `sol4k` SDK also provides `RpcUrl` constant for all the supported clusters. For this example, we are using `RpcUrl.DEVNET` for Devnet-beta. To interact with Testnet or Mainnet, you can simply change the `RpcUrl`.
+
+### Initializing Solana SDK
+
+In the below code block, we'll create the `Connection` instance using the Devnet-beta rpc.
+
+```kotlin
+import org.sol4k.Connection
+import org.sol4k.RpcUrl
+
+val connection = Connection(RpcUrl.DEVNET)
+```
+
+### Initializing Web3Auth SDK
+
+In the below code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. For checking, if user is already authenticated, we can check whether private key is empty or not.
+
+By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter during initialization.
+
+> Note: Note: The session can be persisted only for 30 days max
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Network
+import com.web3auth.core.types.Web3AuthOptions
+
+// Initialize Web3Auth SDK
+// focus-start
+val web3Auth: Web3Auth = Web3Auth(
+    Web3AuthOptions(
+        clientId = "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ",
+        context = context,
+        network = Network.SAPPHIRE_MAINNET,
+        redirectUrl = Uri.parse( "com.example.androidsolanaexample://auth")
+    )
+)
+// focus-end
+
+// Check whether private key is empty or not for user authentication status.
+val isUserAuthenticated = web3Auth.getPrivkey().isNotEmpty()
+
+// Customize your logic to perform operations or navigation
+```
+
+## Get User Info
+
+After logging in, the Web3Auth instance will provide you with information regarding the user that is logged in. This information is obtained directly from the JWT token and is not stored by Web3Auth. Therefore, this information can only be accessed through social logins after the user has logged into your application. You can get the user information using `getUserInfo` function. The function will throw error in case if user is not authenticated.
+
+```kotlin
+try {
+    // focus-next-line
+    val userInfo = web3Auth.getUserInfo()!!
+} catch(e: Exception) {
+    // Perform suitable error handling
+}
+```
+
+## Get Account
+
+We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retive user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
+
+```kotlin
+val ed25519PrivateKey = web3Auth.getEd25519PrivKey()
+val solanaKeyPair = Keypair.fromSecretKey(ed25519PrivateKey.hexToByteArray())
+
+// focus-next-line
+val userAccount = solanaKeyPair.publicKey.toBase58()
+```
+
+## Get User balance
+
+Once we have retrived userAccount, we can use it to fetch user balance. We'll use `getBalance` method from `Connection` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is BigInteger, we will need to divide it by by 10^9, because Solana's token decimals is 9.
+
+```kotlin
+try {
+    // Use solanaPrivateKey from above
+    val publicKey = solanaPrivateKey.publicKey;
+
+    // focus-next-line
+    val balanceResponse = connection.getBalance(publicKey).toBigDecimal()
+
+    // We are dividing the balance by 10^9, because Solana's
+    // token decimals is set to be 9;
+    val userBalance = balanceResponse.divide(BigDecimal.TEN.pow(9)).toString()
+} catch (e: Exception) {
+    // Perform error handling
+}
+```
+
+## Sign Transaction
+
+Let's now go through how can we sign the transaction. In the below codeblock, we'll create a new function `prepareSignedTransaction` which can be used to retrive the Base58 signature as well as broadcast transaction to the cluster. We'll use `TransferInstruction` to create the transaction to self transfer 0.01 Sol and sign it.
+
+```kotlin
+private suspend fun prepareSignedTransaction(sender: Keypair) : Transaction = withContext(Dispatchers.IO) {
+    try {
+        // highlight-next-start
+        val blockHash = connection.getLatestBlockhash()
+        val instruction = TransferInstruction(sender.publicKey, sender.publicKey, lamports = 10000000)
+        val transaction = Transaction(blockHash, instruction, feePayer = sender.publicKey)
+        transaction.sign(sender)
+        transaction
+        // highlight-next-end
+    }catch (e: Exception) {
+        throw e
+    }
+}
+```
+
+Once we have created `prepareSignedTransaction` function, we'll use it to prepare, sign the transaction, and serialize it to get Base58 signature.
+
+```kotlin
+ try {
+    val transaction = prepareSignedTransaction(sender)
+    // focus-next-line
+    val signedTransaction = Base58.encode(transaction.serialize())
+} catch (e:Exception) {
+    // Perform error handling
+}
+```
+
+## Send Transaction
+
+For the send transaction, we'll use `sendTransaction` method from `Connection` instance to broadcast the result of `prepareSignedTransaction` to the cluster.
+
+```kotlin
+ try {
+    val transaction = prepareSignedTransaction(sender)
+    connection.sendTransaction(transaction = transaction)
+} catch (e:Exception) {
+    // Perform error handling
+}
+```

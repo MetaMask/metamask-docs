@@ -2,7 +2,7 @@
 slug: /
 title: SDK introduction
 description: Introduction page for MetaMask SDK documentation.
-keywords: [connect, MetaMask, SDK, integrate, dapp]
+keywords: [connect, sdk, integrate, dapp]
 ---
 
 import Button from '@site/src/components/elements/buttons/button'
@@ -16,7 +16,7 @@ With the SDK, you can easily onboard users and interact with their accounts on d
 <p align="center">
   <Button
     as="a"
-    href="connect/javascript-wagmi"
+    href="/sdk/connect/javascript-wagmi"
     label="Get started with the SDK"
     icon="arrow-right"
     style={{
@@ -44,39 +44,39 @@ MetaMask SDK is available in a variety of ways to make integration as easy as po
 You can access it directly via npm, through popular developer libraries like Wagmi, or as part of popular convenience libraries.
 
 <CardList
-  items={[
-    {
-      href: 'connect/javascript-wagmi',
-      title: 'JavaScript + Wagmi (recommended)',
-      description: 'Use the CLI or template to set up the SDK in a Next.js and Wagmi dapp.',
-    },
-    {
-      href: 'connect/javascript',
-      title: 'JavaScript',
-      description: 'Set up the SDK in a JavaScript dapp.',
-    },
-    {
-      href: 'connect/javascript-dynamic',
-      title: 'Dynamic SDK',
-      description: 'Use the CLI or template to set up Dynamic SDK in a Next.js dapp. Use MetaMask SDK features with Dynamic.',
-    },
-    {
-      href: 'connect/javascript-web3auth',
-      title: 'Web3Auth SDK',
-      description: 'Use the CLI or template to set up Web3Auth SDK in a Next.js dapp. Use MetaMask SDK features with Web3Auth.',
-    },
-    {
-      href: 'connect/react-native',
-      title: 'React Native',
-      description: 'Set up the SDK in a React Native or Expo dapp.',
-    },
-    {
-      href: 'https://onboard.blocknative.com',
-      title: 'Web3-Onboard',
-      description: 'Use SDK features with Web3-Onboard.',
-      buttonIcon: 'external-arrow',
-    }
-  ]}
+items={[
+{
+href: '/sdk/connect/javascript-wagmi',
+title: 'JavaScript + Wagmi (recommended)',
+description: 'Use the CLI or template to set up the SDK in a Next.js and Wagmi dapp.',
+},
+{
+href: '/sdk/connect/javascript',
+title: 'JavaScript',
+description: 'Set up the SDK in a JavaScript dapp.',
+},
+{
+href: '/sdk/connect/javascript-dynamic',
+title: 'Dynamic SDK',
+description: 'Use the CLI or template to set up Dynamic SDK in a Next.js dapp. Use MetaMask SDK features with Dynamic.',
+},
+{
+href: '/sdk/connect/javascript-web3auth',
+title: 'Web3Auth SDK',
+description: 'Use the CLI or template to set up Web3Auth SDK in a Next.js dapp. Use MetaMask SDK features with Web3Auth.',
+},
+{
+href: '/sdk/connect/react-native',
+title: 'React Native',
+description: 'Set up the SDK in a React Native or Expo dapp.',
+},
+{
+href: 'https://onboard.blocknative.com',
+title: 'Web3-Onboard',
+description: 'Use SDK features with Web3-Onboard.',
+buttonIcon: 'external-arrow',
+}
+]}
 />
 
 :::tip Build embedded wallet experiences that work seamlessly with MetaMask

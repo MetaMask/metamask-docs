@@ -1,0 +1,38 @@
+---
+title: Get User Info
+sidebar_label: getUserInfo
+description: 'Web3Auth Unreal SDK - getUserInfo | Embedded Wallets'
+---
+
+You can use the `getUserInfo` method to retrieve various details about the user, such as their login type, whether multi-factor authentication (MFA) is enabled, profile image, name, and other relevant information.
+
+## Usage
+
+```cpp
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FString& PublicAddress)
+{
+    // Get user info from the login success callback
+    FString UserInfo = UWeb3AuthSDK::GetInstance()->GetUserInfo();
+    UE_LOG(LogTemp, Warning, TEXT("User Info: %s"), *UserInfo);
+}
+```
+
+## UserInfo Response
+
+```json
+{
+  "aggregateVerifier": "w3a-google",
+  "email": "john@gmail.com",
+  "name": "John Dash",
+  "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
+  "typeOfLogin": "google",
+  "verifier": "torus",
+  "verifierId": "john@gmail.com",
+  "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
+  "idToken": "<jwtToken issued by Web3Auth>",
+  "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+  "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+  "isMfaEnabled": true // returns true if user has enabled mfa
+}
+```

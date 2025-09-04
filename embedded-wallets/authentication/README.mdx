@@ -1,0 +1,166 @@
+---
+title: Authentication
+sidebar_label: Overview
+image: 'img/metamaskog.jpg'
+description: 'Authentication | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+
+**Embedded Wallets** (formerly Web3Auth) offers a robust authentication system designed to bridge the gap between Web2 and Web3 identity, providing developers with powerful tools to implement secure, flexible, and user-friendly onboarding flows. By offering fine-grained control over login experiences and wallet integrations, Embedded Wallets helps enhance user conversion while enabling seamless access to blockchain-based functionality.
+
+Using the Embedded Wallets SDKs, applications can authenticate users through a variety of mechanisms, supporting both traditional (Web2) and decentralized (Web3) identity paradigms.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Supported Authentication Methods
+
+Embedded Wallets supports a wide range of authentication options, enabling developers to meet the needs of diverse user bases and platform requirements.
+
+### Native Email & SMS Login
+
+Provides passwordless login via one-time passcodes (OTP)/ magic links sent to the user's [email address](/embedded-wallets/authentication/basic-logins/email-passwordless) or [phone number](/embedded-wallets/authentication/basic-logins/sms-otp). This method is widely accessible and especially useful for onboarding users unfamiliar with Web3 or crypto wallets.
+
+### External Wallets
+
+Users can also authenticate using [third-party wallets](/embedded-wallets/authentication/basic-logins/external-wallets) such as MetaMask and other WalletConnect supported wallets. Developers can select which wallets to display via the Embedded Wallets Dashboard, providing tailored options based on user preference or regional relevance.
+
+### OAuth and Social Login
+
+Embedded Wallets supports a variety of social identity providers, allowing users to authenticate using accounts they already trust and use daily. Supported providers include:
+
+export const SocialLoginSetup = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'google',
+        title: 'Google',
+        icon: 'logo-google.png',
+        path: 'social-logins/google',
+      },
+      {
+        key: 'apple',
+        title: 'Apple',
+        icon: 'logo-apple.png',
+        path: 'social-logins/oauth/#login-with-apple',
+      },
+      {
+        key: 'twitter',
+        title: 'Twitter (X)',
+        icon: 'logo-twitter.png',
+        path: 'social-logins/oauth/#login-with-x',
+      },
+      {
+        key: 'facebook',
+        title: 'Facebook',
+        icon: 'logo-facebook.png',
+        path: 'social-logins/facebook',
+      },
+      {
+        key: 'discord',
+        title: 'Discord',
+        icon: 'logo-discord.png',
+        path: 'social-logins/discord',
+      },
+      {
+        key: 'twitch',
+        title: 'Twitch',
+        icon: 'logo-twitch.png',
+        path: 'social-logins/twitch',
+      },
+      {
+        key: 'github',
+        title: 'GitHub',
+        icon: 'logo-github.png',
+        path: 'social-logins/oauth/#login-with-github',
+      },
+      {
+        key: 'farcaster',
+        title: 'Farcaster',
+        icon: 'logo-farcaster.png',
+        path: 'social-logins/oauth/#login-with-farcaster',
+      },
+      {
+        key: 'reddit',
+        title: 'Reddit',
+        icon: 'logo-reddit.png',
+        path: 'social-logins/oauth/#login-with-reddit',
+      },
+      {
+        key: 'kakao',
+        title: 'Kakao',
+        icon: 'logo-kakao.png',
+        path: 'social-logins/oauth/#login-with-kakao',
+      },
+      {
+        key: 'linkedin',
+        title: 'LinkedIn',
+        icon: 'logo-linkedin.png',
+        path: 'social-logins/oauth/#login-with-linkedin',
+      },
+      {
+        key: 'line',
+        title: 'Line',
+        icon: 'logo-line.png',
+        path: 'social-logins/oauth/#login-with-line',
+      },
+      {
+        key: 'wechat',
+        title: 'WeChat',
+        icon: 'logo-wechat.png',
+        path: 'social-logins/oauth/#login-with-wechat',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={SocialLoginSetup} />
+
+Social login simplifies onboarding by reducing friction and improving usability—particularly in consumer-facing applications.
+
+### JWT-Based Authentication
+
+Embedded Wallets allows integration with any existing JWT-based authentication system. This includes OpenID Connect (OIDC) and OAuth 2.0 compliant identity providers such as:
+
+export const JWTLoginSetup = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'auth0',
+        title: 'Auth0',
+        icon: 'logo-auth0.png',
+        path: 'custom-connections/auth0',
+      },
+      {
+        key: 'firebase',
+        title: 'Firebase',
+        icon: 'logo-firebase.png',
+        path: 'custom-connections/firebase',
+      },
+      {
+        key: 'aws-cognito',
+        title: 'AWS Cognito',
+        icon: 'logo-aws-cognito.png',
+        path: 'custom-connections/aws-cognito',
+      },
+      {
+        key: 'custom-jwt',
+        title: 'Custom JWT',
+        icon: 'logo-jwt.png',
+        path: 'custom-connections/custom-jwt',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={JWTLoginSetup} />
+
+This is ideal for applications that already have a secure identity layer and want to enhance it with non-custodial wallet generation and key management.

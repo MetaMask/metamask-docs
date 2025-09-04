@@ -1,0 +1,80 @@
+---
+title: Launch Wallet Services
+sidebar_label: launchWalletServices
+description: 'Web3Auth Android SDK - launchWalletServices Function | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The `launchWalletServices` method launches a WebView which allows you to use the templated wallet UI services. The method takes`ChainConfig` as the required input. Wallet Services is currently only available for EVM chains.
+
+:::note
+
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+
+:::
+
+![Wallet Services](/img/embedded-wallets/wallet-services/mobile-wallet-services.png)
+
+## Parameters
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter           | Description                                                                                                                 |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `chainNamespace`    | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.EIP155`. |
+| `decimals?`         | Number of decimals for the currency ticker. Default value is 18, and accepts `Int` as value.                                |
+| `blockExplorerUrl?` | Blockchain's explorer URL. (eg: `https://etherscan.io`)                                                                     |
+| `chainId`           | The chain id of the selected blockchain in hex `String`.                                                                    |
+| `displayName?`      | Display Name for the chain.                                                                                                 |
+| `logo?`             | Logo for the selected `chainNamespace` & `chainId`.                                                                         |
+| `rpcTarget`         | RPC Target URL for the selected `chainNamespace` & `chainId`.                                                               |
+| `ticker?`           | Default currency ticker of the network (e.g: `ETH`)                                                                         |
+| `tickerName?`       | Name for currency ticker (e.g: `Ethereum`)                                                                                  |
+
+</TabItem>
+
+<TabItem value="class">
+
+```kotlin
+data class ChainConfig(
+    val chainNamespace: ChainNamespace = ChainNamespace.EIP155,
+    val decimals: Int? = 18,
+    val blockExplorerUrl: String? = null,
+    val chainId: String,
+    val displayName: String? = null,
+    val logo: String? = null,
+    val rpcTarget: String,
+    val ticker: String?,
+    val tickerName: String? = null,
+)
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+```kotlin
+val chainConfig = ChainConfig(
+    chainId = "0x1",
+    rpcTarget = "https://rpc.ethereum.org",
+    ticker = "ETH",
+    chainNamespace = ChainNamespace.EIP155
+)
+
+// focus-start
+val completableFuture = web3Auth.launchWalletServices(
+    chainConfig
+)
+// focus-end
+```

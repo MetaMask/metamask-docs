@@ -1,0 +1,1435 @@
+.stepBody a {
+  color: var(--ifm-link-color);
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-color: var(--ifm-link-color);
+  text-decoration-thickness: .1rem;
+  text-underline-offset: .4rem;
+  transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+}
+.stepBody a:hover,
+.stepBody a:focus {
+  color: var(--ifm-link-hover-color);
+  text-decoration: underline;
+  text-decoration-color: var(--ifm-link-hover-color);
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--ifm-color-content);
+  background-color: var(--ifm-background-surface-color);
+  font-size: large;
+}
+
+.iframeContainer {
+  width: 100%;
+  height: 90%;
+  overflow: scroll;
+  border-radius: 16px;
+  background: var(--ifm-color-white);
+}
+
+.previewModalContainer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  background: rgb(0 0 0 / 50%);
+  z-index: 1000;
+}
+
+.previewModal {
+  display: block;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 1px 2px var(--ifm-color-emphasis-200);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 5%;
+  height: 90%;
+  width: 90%;
+  overflow: hidden;
+}
+
+.optionsPane {
+  padding: 16px;
+  border-radius: 16px;
+  max-height: max-content;
+  overflow: hidden;
+  background: var(--ifm-color-second-narbar);
+  box-shadow:
+    0 4px 8px rgb(0 0 0 / 20%),
+    0 6px 12px rgb(0 0 0 / 10%),
+    0 10px 20px #00000026;
+  position: fixed;
+  bottom: 1%;
+  right: 10px;
+
+  /* transition: max-height 0.3s ease-in-out, width 0.3s ease-in-out, padding 0.3s ease-in-out; */
+  width: max-content;
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.optionsHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.optionsHeaderText {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 30px;
+  color: var(--ifm-color-content);
+  margin: 0;
+}
+
+.optionsHeaderButtonsContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 8px;
+}
+
+.optionsContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.builderContainer {
+  display: flex;
+  flex-flow: col wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.utilityButtonsContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.productSelectionRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.controlsRow {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Top Control Pane */
+.topControlPane {
+  width: 100%;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 8px 16px;
+  top: 0;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+}
+
+.topControlContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  gap: 20px;
+}
+
+.controlActions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.cols {
+  width: 100%;
+  display: block;
+  flex-direction: row;
+}
+
+.leftCol {
+  overflow: hidden scroll;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.stepContainer {
+  padding: 0.25rem var(--ifm-navbar-padding-horizontal);
+  border-left: 6px solid transparent;
+  cursor: pointer;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.stepContainer:hover {
+  border-color: var(--ifm-color-primary-darkest);
+}
+
+.stepContainer.stepSelected {
+  /* background-color: var(--ifm-background-surface-color); */
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-primary);
+}
+
+/* .stepContainer p {
+  margin-bottom: 0;
+} */
+
+.stepContainer .stepHeader {
+  font-family: var(--ifm-font-family-base);
+  font-weight: 600;
+  margin-bottom: 12px;
+  font-size: 20px;
+}
+
+.rightCol {
+  width: 100%;
+}
+
+/* Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: var(--ifm-color-emphasis-200);
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: '';
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--ifm-color-gray-400);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.switch input:focus+.slider {
+  box-shadow: 0 0 1px var(--ifm-color-primary-light);
+}
+
+.switch input:checked+.slider {
+  background-color: var(--ifm-color-primary-light);
+}
+
+input:checked+.slider::before {
+  transform: translateX(16px);
+}
+
+.switch input:checked+.slider::before {
+  background-color: var(--ifm-color-white);
+}
+
+/* Dark mode: Better visibility for checked switches */
+[data-theme='dark'] .switch input:checked+.slider {
+  background-color: var(--ifm-color-primary);
+}
+
+/* Drowpdown */
+.w3DropdownLink {
+  cursor: pointer;
+  margin-right: 0.5rem;
+}
+
+.w3DropdownLink::after {
+  border: none;
+  content: '';
+  display: inline-block;
+  margin-right: 10px;
+  box-sizing: border-box;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: rotate(45deg);
+  right: -18px;
+  top: 9px;
+}
+
+.w3DropdownMenu {
+  padding: 4px 0;
+  margin-top: -5px;
+}
+
+.stepBody li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+
+.stepBody strong,
+.stepBody b {
+  font-weight: 700;
+}
+
+.w3DropdownMenu li {
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.w3DropdownMenu li:hover {
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.heading {
+  color: var(--ifm-color-content);
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 150%;
+}
+
+.productSelection {
+  display: block;
+  width: 100%;
+}
+
+.productSelection h3 {
+  font-weight: 600 !important;
+  font-size: 18px;
+  line-height: 150%;
+  color: var(--ifm-color-content);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.cardContainer {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 6px;
+  min-width: 300px;
+}
+
+.card,
+.selectedCard {
+  padding: 8px 16px;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 6px;
+  min-width: 90px;
+  text-decoration: none;
+  color: var(--ifm-color-content);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--ifm-color-primary-light);
+}
+
+.selectedCard {
+  border: 1px solid var(--ifm-color-primary);
+}
+
+.cardTitle {
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--ifm-color-content);
+  font-weight: 500 !important;
+  margin: 0;
+  text-align: center;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list h3 {
+  font-weight: 600 !important;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--ifm-color-content);
+  padding: 0;
+  margin: 0;
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+.list select {
+  padding: 8px 32px 8px 16px;
+  font-weight: 500 !important;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--ifm-color-content);
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  min-width: 140px;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg width='10' height='17' viewBox='0 0 10 17' fill='gray' xmlns='http://www.w3.org/2000/svg'><path d='M0.937273 11.1465C1.04471 11.0528 1.19041 11.0001 1.34233 11.0001C1.49424 11.0001 1.63994 11.0528 1.74738 11.1465L4.58331 13.6215L7.41925 11.1465C7.52731 11.0554 7.67203 11.005 7.82224 11.0062C7.97246 11.0073 8.11615 11.0599 8.22238 11.1526C8.3286 11.2453 8.38885 11.3707 8.39016 11.5018C8.39146 11.6329 8.33372 11.7592 8.22936 11.8535L4.98837 14.682C4.88093 14.7758 4.73523 14.8284 4.58331 14.8284C4.4314 14.8284 4.2857 14.7758 4.17826 14.682L0.937273 11.8535C0.829868 11.7598 0.769531 11.6326 0.769531 11.5C0.769531 11.3674 0.829868 11.2403 0.937273 11.1465Z' fill='gray'/><path d='M0.937273 5.85348C1.04471 5.94722 1.19041 5.99988 1.34233 5.99988C1.49424 5.99988 1.63994 5.94722 1.74738 5.85348L4.58331 3.37848L7.41925 5.85348C7.52731 5.94456 7.67203 5.99496 7.82224 5.99382C7.97246 5.99268 8.11615 5.9401 8.22238 5.84739C8.3286 5.75469 8.38885 5.62928 8.39016 5.49819C8.39146 5.36709 8.33372 5.24079 8.22936 5.14648L4.98837 2.31798C4.88093 2.22425 4.73523 2.17159 4.58331 2.17159C4.4314 2.17159 4.2857 2.22425 4.17826 2.31798L0.937273 5.14648C0.829868 5.24025 0.769531 5.3674 0.769531 5.49998C0.769531 5.63257 0.829868 5.75972 0.937273 5.85348Z' fill='gray'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center right 12px;
+  transition: all 0.2s ease;
+}
+
+.list select:hover {
+  border-color: var(--ifm-color-primary-light);
+}
+
+.list select::-ms-expand {
+  display: none;
+}
+
+.list :disabled {
+  color: var(--ifm-color-emphasis-600);
+}
+
+.copyButton,
+.previewButton,
+.copyButton2,
+.previewButton2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600 !important;
+  min-width: 100px;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: var(--ifm-color-content);
+}
+
+.copyButton:hover,
+.copyButton2:hover {
+  border-color: var(--ifm-color-primary-light);
+  box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
+  transform: translateY(-1px);
+}
+
+.previewButton,
+.previewButton2 {
+  background: var(--ifm-color-primary);
+  border: 1px solid var(--ifm-color-primary);
+  box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
+  color: var(--ifm-background-surface-color);
+}
+
+/* Dark mode: Better contrast for preview buttons */
+[data-theme='dark'] .previewButton,
+[data-theme='dark'] .previewButton2 {
+  background: var(--ifm-color-primary-dark);
+  border: 1px solid var(--ifm-color-primary-dark);
+  color: white;
+}
+
+.previewButton:hover,
+.previewButton2:hover {
+  background: var(--ifm-color-primary-light);
+  border-color: var(--ifm-color-primary-light);
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%);
+  transform: translateY(-1px);
+}
+
+/* Dark mode: Better contrast for preview button hover */
+[data-theme='dark'] .previewButton:hover,
+[data-theme='dark'] .previewButton2:hover {
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: white;
+}
+
+.hideButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500 !important;
+  cursor: pointer;
+  line-height: 21px;
+  gap: 8px;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  color: var(--ifm-color-content);
+}
+
+.closeButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500 !important;
+  cursor: pointer;
+  line-height: 21px;
+  gap: 8px;
+  background: none;
+  border: none;
+}
+
+@media (width <=768px) {
+  .topControlPane {
+    padding: 6px 12px;
+  }
+
+  .topControlContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .cardContainer {
+    justify-content: center;
+    min-width: auto;
+  }
+
+  .controlActions {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .copyButton2,
+  .previewButton2 {
+    min-width: 80px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .list select {
+    min-width: 120px;
+    padding: 8px 28px 8px 12px;
+  }
+}
+
+@media (width >=960px) {
+  .cols {
+    display: flex;
+    height: calc(100vh - 86px - 45px);
+    position: relative;
+  }
+
+  .leftCol {
+    width: 50%;
+    overflow: hidden scroll;
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scroll-padding-top: 0;
+  }
+
+  .rightCol {
+    width: 50%;
+  }
+}
+
+/* Step Navigation Menu */
+.stepNavigationMenu {
+  background: var(--ifm-background-surface-color);
+  border-left: 1px solid var(--ifm-color-emphasis-300);
+  padding: 1rem 0;
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 86px - 45px);
+}
+
+.stepMenuHeader {
+  padding: 0 1rem 0.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  margin-bottom: 0.5rem;
+}
+
+.stepMenuHeader h4 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stepMenuList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stepMenuItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.stepMenuItem:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.stepMenuItemActive {
+  background: var(--ifm-color-emphasis-200);
+  border-left-color: var(--ifm-color-primary);
+}
+
+.stepMenuItemCompleted {
+  color: var(--ifm-color-success);
+}
+
+.stepMenuNumber {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ifm-color-emphasis-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.stepMenuItemActive .stepMenuNumber {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+.stepMenuItemCompleted .stepMenuNumber {
+  background: var(--ifm-color-success);
+  color: black;
+}
+
+/* Dark mode: Ensure good contrast for active step numbers */
+[data-theme='dark'] .stepMenuItemActive .stepMenuNumber {
+  background: var(--ifm-color-primary-dark);
+  color: white;
+}
+
+/* Dark mode: Use darker success color for better visibility with black text */
+[data-theme='dark'] .stepMenuItemCompleted .stepMenuNumber {
+  background: var(--consumer-green-dark);
+  color: white;
+}
+
+/* Steps Scroll Container */
+.stepsScrollContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding-bottom: 100vh;
+
+  /* Enough space for last step to reach top */
+}
+
+/* Step Section - Fixed height containers for consistent scrolling */
+.stepSection {
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  height: 85vh;
+
+  /* Fixed height for ALL steps */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  padding: 1rem 0;
+
+  /* Consistent padding */
+  box-sizing: border-box;
+
+  /* Remove margin-bottom for consistent spacing */
+}
+
+/* First step uses same height as others */
+.stepSection:first-child {
+  height: 85vh;
+
+  /* Same as all other steps */
+  padding: 1rem 0;
+
+  /* Same padding as others */
+}
+
+/* Active Step */
+.activeStep {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  z-index: 2;
+}
+
+.activeStep .stepContainer {
+  border-left: none;
+  cursor: default;
+  background: var(--ifm-background-surface-color);
+  padding: 1.5rem;
+  margin-top: 0;
+  box-shadow: 0 8px 25px rgb(0 0 0 / 8%);
+  border-radius: 12px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(85vh - 4rem);
+
+  /* Adjusted for new container height */
+}
+
+/* Step Progress Indicator - Base styles */
+.stepProgressIndicator {
+  background: var(--ifm-color-primary-light);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Previous Steps */
+.previousStep {
+  opacity: 0.65;
+  transform: translateY(-3px) scale(0.98);
+  z-index: 1;
+}
+
+.previousStep .stepContainer {
+  border-left: none;
+  background: var(--ifm-color-emphasis-50);
+  padding: 1.5rem;
+  border-radius: 10px;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(85vh - 4rem);
+
+  /* Adjusted for new container height */
+}
+
+.previousStep .stepProgressIndicator {
+  background: var(--ifm-color-success);
+  color: black;
+}
+
+.upcomingStep .stepProgressIndicator {
+  background: var(--ifm-color-emphasis-400);
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Dark mode: Use darker background for better contrast with white text */
+[data-theme='dark'] .stepProgressIndicator {
+  background: var(--ifm-color-primary-dark);
+  color: white;
+}
+
+/* Dark mode: Use darker success color for better contrast with white text */
+[data-theme='dark'] .previousStep .stepProgressIndicator {
+  background: var(--consumer-green-dark);
+  color: white;
+}
+
+/* Upcoming Steps */
+.upcomingStep {
+  opacity: 0.5;
+  transform: translateY(3px) scale(0.97);
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+.upcomingStep .stepContainer {
+  border-left: none;
+  background: var(--ifm-color-emphasis-25);
+  padding: 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(85vh - 4rem);
+
+  /* Adjusted for new container height */
+}
+
+.upcomingStep:hover {
+  opacity: 0.8;
+  transform: translateY(0) scale(0.99);
+}
+
+.upcomingStep[style*='pointer'] {
+  cursor: pointer !important;
+}
+
+.upcomingStep[style*='pointer']:hover {
+  opacity: 0.85;
+  transform: translateY(-1px) scale(1);
+}
+
+/* Make the immediate next step much more visible */
+.nextStep {
+  opacity: 0.9;
+  transform: translateY(1px) scale(0.99);
+  transition: all 0.3s ease;
+}
+
+.nextStep .stepContainer {
+  background: var(--ifm-color-emphasis-75);
+  border: 1px solid var(--ifm-color-emphasis-400);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 4%);
+  flex: 1;
+  overflow-y: auto;
+  max-height: calc(85vh - 4rem);
+
+  /* Adjusted for new container height */
+}
+
+.nextStep .stepHeader {
+  color: var(--ifm-color-content);
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* Ensure upcoming step titles are readable */
+.upcomingStep .stepHeader {
+  color: var(--ifm-color-content);
+  opacity: 0.9;
+}
+
+.nextStep:hover {
+  opacity: 0.98;
+  transform: translateY(-1px) scale(1);
+}
+
+.nextStep[style*='pointer']:hover {
+  opacity: 1;
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Step Progress Indicator styles moved above */
+
+/* Step Separator */
+.stepSeparator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+  opacity: 0.3;
+}
+
+.separatorLine {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right,
+      transparent 0%,
+      var(--ifm-color-emphasis-300) 50%,
+      transparent 100%);
+}
+
+/* Completion Indicator */
+.completionIndicator {
+  text-align: center;
+  padding: 2rem;
+  margin: 1rem 1.5rem 2rem;
+  background: linear-gradient(135deg,
+      var(--ifm-color-success-light) 0%,
+      var(--ifm-color-success) 100%);
+  color: white;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
+}
+
+/* Dark mode: Better contrast for completion indicator */
+[data-theme='dark'] .completionIndicator {
+  background: linear-gradient(135deg,
+      var(--consumer-green-dark) 0%,
+      var(--institution-green-dark) 100%);
+  color: white;
+}
+
+/* Smooth transition animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (width <=960px) {
+  .stepNavigationMenu {
+    display: none;
+  }
+
+  .leftCol {
+    width: 100% !important;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .rightCol {
+    width: 100% !important;
+    margin-top: 1rem;
+  }
+
+  .cols {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .stepSection {
+    height: 75vh;
+
+    /* Fixed height for mobile */
+    padding: 0.5rem 0;
+
+    /* Consistent padding */
+  }
+
+  .stepSection:first-child {
+    height: 75vh;
+
+    /* Same as all other steps on mobile */
+    padding: 0.5rem 0;
+
+    /* Same padding as others */
+  }
+
+  .stepSection .stepContainer {
+    max-height: calc(75vh - 3rem);
+
+    /* Adjusted for new mobile container height */
+  }
+
+  .stepSeparator {
+    margin: 1rem 0;
+  }
+
+  .stepsScrollContainer {
+    padding-bottom: 80vh;
+
+    /* Enough space for last step on mobile */
+  }
+
+  .stepProgressIndicator {
+    font-size: 10px;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .completionIndicator {
+    font-size: 16px;
+    padding: 1.5rem;
+  }
+}
+
+/* Step Body - MDX Content Styling */
+.stepBody {
+  /* Enable proper markdown styling for MDX content */
+}
+
+/* Ensure lists display properly with bullet points */
+.stepBody ul {
+  list-style: disc;
+  list-style-position: outside;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.stepBody ol {
+  list-style: decimal;
+  list-style-position: outside;
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+/* Only target inline code, not code blocks */
+.stepBody p>code,
+.stepBody li>code,
+.stepBody span>code,
+.stepBody td>code,
+.stepBody th>code,
+.stepBody h1>code,
+.stepBody h2>code,
+.stepBody h3>code,
+.stepBody h4>code,
+.stepBody h5>code,
+.stepBody h6>code,
+.stepBody a>code {
+  font-family: var(--font-mm-sans-mono);
+  font-size: 80%;
+  background: var(--ifm-code-background);
+  border-radius: var(--ifm-code-border-radius);
+  padding: 0.15rem 0.3rem;
+  color: var(--ifm-code-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+/* Ensure code blocks are NOT affected */
+.stepBody pre code {
+  /* Reset any inline code styling for code blocks */
+  font-size: inherit;
+  background: inherit;
+  border-radius: inherit;
+  padding: inherit;
+  color: inherit;
+  border: none;
+}
+
+/* Media Step Styles */
+.mediaStepContainer {
+  height: 100%;
+  width: 100%;
+  background: var(--ifm-background-surface-color);
+  border-radius: 12px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  overflow: hidden;
+}
+
+/* Hybrid Layout Styles */
+.hybridContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1rem;
+}
+
+.hybridMediaSection {
+  flex: 0 0 40%;
+  min-height: 200px;
+  max-height: 400px;
+}
+
+.hybridCodeSection {
+  flex: 1;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+.hybridMediaStep {
+  height: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+}
+
+/* Responsive Design for Media Components */
+@media (width <=996px) {
+  .hybridContainer {
+    flex-direction: column;
+  }
+
+  .hybridMediaSection {
+    flex: 0 0 250px;
+    max-height: 250px;
+  }
+
+  .hybridCodeSection {
+    flex: 1;
+    min-height: 200px;
+  }
+}
+
+@media (width <=768px) {
+  .mediaStepContainer {
+    border-radius: 8px;
+  }
+
+  .hybridMediaSection {
+    flex: 0 0 200px;
+    max-height: 200px;
+  }
+
+  .hybridMediaStep {
+    border-radius: 6px;
+  }
+}
+
+/* Hybrid Tab Layout Styles */
+.hybridTabContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--ifm-background-surface-color);
+  border-radius: 12px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  overflow: hidden;
+}
+
+.tabNavigation {
+  display: flex;
+  background: var(--ifm-background-surface-color);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 1px 0 0 var(--ifm-color-emphasis-200);
+}
+
+.tabButton {
+  flex: 1;
+  padding: 14px 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ifm-color-content-secondary);
+  transition: all 0.15s ease-in-out;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.tabButton:hover {
+  background: var(--ifm-hover-overlay);
+  color: var(--ifm-color-content);
+}
+
+.tabButtonActive {
+  background: transparent;
+  color: var(--ifm-color-primary);
+  position: relative;
+}
+
+.tabButtonActive::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--ifm-color-primary);
+  border-radius: 3px 3px 0 0;
+}
+
+.tabButtonActive:hover {
+  background: var(--ifm-hover-overlay);
+  color: var(--ifm-color-primary);
+}
+
+.tabContent {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Ensure both tab contents have identical sizing */
+.tabContent>* {
+  width: 100% !important;
+  height: 100% !important;
+  flex: 1 1 auto;
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+  max-width: none !important;
+  max-height: none !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.tabContent .hybridMediaStep {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0;
+  border: none;
+  flex: 1;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+  overflow: hidden;
+}
+
+.tabContent .hybridCodeView {
+  width: 100% !important;
+  height: 100% !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-width: 0 !important;
+  overflow: hidden;
+
+  --prism-background-color: var(--ifm-color-emphasis-100) !important;
+  --ifm-pre-background: var(--ifm-color-emphasis-100) !important;
+  --w3a-ib-code-tab-background-color: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView>* {
+  width: 100% !important;
+  height: 100%;
+  flex: 1;
+  max-width: none !important;
+}
+
+/* Force light background for code blocks in hybrid tabs */
+.tabContent .hybridCodeView .prism-code {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView pre {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView code {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Override any dark theme code styling in hybrid tabs */
+.tabContent .hybridCodeView [class*='language-'] {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView [class*='language-'] pre {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView [class*='language-'] code {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Override the IntegrationBuilderCodeView container background */
+.tabContent .hybridCodeView .container {
+  background: var(--ifm-background-surface-color) !important;
+}
+
+.tabContent .hybridCodeView .body {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Ensure code text has proper contrast on light background */
+.tabContent .hybridCodeView .token {
+  color: var(--ifm-color-content) !important;
+}
+
+/* Override any CSS variables that might affect code block styling - merged above */
+
+/* Override header styling to match light theme */
+.tabContent .hybridCodeView .header {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Target specific scrollbar backgrounds */
+.tabContent .hybridCodeView ::-webkit-scrollbar {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Keep tab items styling intact */
+.tabContent .hybridCodeView .tabs__item {
+  background: transparent !important;
+}
+
+.tabContent .hybridCodeView .tabs__item--active {
+  background: var(--ifm-color-emphasis-300) !important;
+}
+
+/* Additional CodeBlock overrides */
+.tabContent .hybridCodeView [class*='codeBlockContainer'] {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+.tabContent .hybridCodeView [class*='codeBlock'] {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Comprehensive override for all possible code-related backgrounds */
+.tabContent .hybridCodeView div[class*='code'],
+.tabContent .hybridCodeView div[class*='prism'],
+.tabContent .hybridCodeView div[class*='theme'] {
+  background: var(--ifm-color-emphasis-100) !important;
+}
+
+/* Override any MediaStep internal constraints in hybrid tabs */
+.tabContent .hybridMediaStep .mediaContainer {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.tabContent .hybridMediaStep .mediaContent {
+  width: 100% !important;
+  max-width: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  flex: 1 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2rem !important;
+  background: var(--ifm-background-surface-color) !important;
+}
+
+/* Force exact same layout for both tab types */
+.hybridTabContainer .tabContent>div {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Override media element constraints in hybrid tabs */
+.tabContent .hybridMediaStep .youtubePlayer,
+.tabContent .hybridMediaStep .videoPlayer {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  aspect-ratio: unset !important;
+  height: 100% !important;
+  min-height: unset !important;
+  max-height: 100% !important;
+}
+
+/* Special styling for images in hybrid tabs */
+.tabContent .hybridMediaStep .imageDisplay {
+  width: auto !important;
+  max-width: 90% !important;
+  height: auto !important;
+  max-height: 80% !important;
+  margin: auto !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%) !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+/* Caption styling for hybrid tabs */
+.tabContent .hybridMediaStep .mediaCaption {
+  margin-top: 1rem !important;
+  padding: 0.75rem 1rem !important;
+  background: var(--ifm-color-emphasis-100) !important;
+  border-radius: 8px !important;
+  max-width: 90% !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.tabContent .hybridMediaStep .mediaCaption p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: var(--ifm-color-content-secondary) !important;
+  line-height: 1.4 !important;
+}
+
+/* Responsive styles for tabs */
+@media (width <=768px) {
+  .tabButton {
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .hybridTabContainer {
+    border-radius: 8px;
+  }
+
+  .tabButtonActive::after {
+    height: 2px;
+  }
+
+  /* Mobile image adjustments */
+  .tabContent .hybridMediaStep .mediaContent {
+    padding: 1rem !important;
+  }
+
+  .tabContent .hybridMediaStep .imageDisplay {
+    max-width: 95% !important;
+    max-height: 85% !important;
+    border-radius: 8px !important;
+  }
+}

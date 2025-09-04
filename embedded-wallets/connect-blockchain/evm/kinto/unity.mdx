@@ -1,0 +1,82 @@
+---
+title: Integrate Embedded Wallets with the Kinto Blockchain in Unity
+sidebar_label: Unity
+image: 'img/embedded-wallets/banners/kinto.png'
+
+keywords: [unity, kinto, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Kinto Blockchain in Unity | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+## Installation
+
+<InstallationSnippet />
+
+## Chain Details for Kinto
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x1ecf
+- Public RPC URL: https://rpc.kinto.xyz/http
+- Display Name: Kinto Mainnet
+- Block Explorer Link: https://explorer.kinto.xyz
+- Ticker: ETH
+- Ticker Name: ETH
+
+</TabItem>
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0xa788
+- Public RPC URL: http://35.215.120.180:8545
+- Display Name: Kinto Testnet
+- Block Explorer Link: https://explorer.kinto.xyz
+- Ticker: ETH
+- Ticker Name: ETH
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />

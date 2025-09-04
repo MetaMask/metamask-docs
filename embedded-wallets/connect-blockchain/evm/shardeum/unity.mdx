@@ -1,0 +1,69 @@
+---
+title: Integrate Embedded Wallets with the Shardeum Blockchain in Unity
+sidebar_label: Unity
+image: 'img/embedded-wallets/banners/shardeum.png'
+
+keywords: [unity, shardeum, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Shardeum Blockchain in Unity | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+## Installation
+
+<InstallationSnippet />
+
+## Chain Details for Shardeum
+
+<Tabs
+ defaultValue="testnet"
+  values={[
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x1F92
+- Public RPC URL: https://atomium.shardeum.org
+- Display Name: Shardeum Atomium
+- Block Explorer Link: https://explorer-atomium.shardeum.org/
+- Ticker: SHM
+- Ticker Name: SHM
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
