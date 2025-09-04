@@ -12,6 +12,10 @@ export default function getSteps(steps, files, replacementAggregator) {
       ),
     },
     {
+      ...STEPS.prerequisites,
+      pointer: undefined,
+    },
+    {
       ...STEPS.installation,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_IOS_CONTENTVIEW_SWIFT,
