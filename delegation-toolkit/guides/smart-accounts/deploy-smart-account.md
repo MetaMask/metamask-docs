@@ -7,20 +7,20 @@ import TabItem from "@theme/TabItem";
 
 # Deploy a smart account
 
-You can deploy MetaMask Smart Accounts in two different ways. You can either deploy the smart account automatically when sending 
-the first user operation, or use a manual approach.
+You can deploy MetaMask Smart Accounts in two different ways. You can either deploy a smart account automatically when sending 
+the first user operation, or manually deploy the account.
 
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
 - [Configure the Delegation Toolkit.](../configure.md)
-- [Create a MetaMask smart account](create-smart-account.md) 
+- [Create a MetaMask smart account.](create-smart-account.md) 
 
-## Sending first user operation
+## Deploy with the first user operation
 
-Whenever you send the first user operation, it checks whether the smart account is already deployed. If the account 
-is not deployed, the `initCode` is added to the user operation to ensure the smart account is deployed within the 
-same operation. Internally, the `initCode` is encoded using the factory and factory data. 
+When you send the first user operation from a smart account, the Delegation Toolkit checks whether the account is already deployed. If the account 
+is not deployed, the toolkit adds the `initCode` to the user operation to deploy the account within the 
+same operation. Internally, the `initCode` is encoded using the `factory` and `factoryData`. 
 
 <Tabs>
 <TabItem value="example.ts">
@@ -86,10 +86,10 @@ export const bundlerClient = createBundlerClient({
 </TabItem>
 </Tabs>
 
-## Manual approach
+## Deploy manually
 
-To use the manual approach, you can call the MetaMask Smart Account [`getFactoryArgs`](../../reference/api/smart-account#getfactoryargs)
-method to retrieve the `factory` and `factoryData`. This allows you to use a relay account to sponsor the deployment without needing a paymaster. 
+To deploy a smart account manually, call the [`getFactoryArgs`](../../reference/api/smart-account.md#getfactoryargs)
+method from the smart account to retrieve the `factory` and `factoryData`. This allows you to use a relay account to sponsor the deployment without needing a paymaster. 
 
 The `factory` represents the contract address responsible for deploying the smart account, while `factoryData` contains the 
 calldata that will be executed by the `factory` to deploy the smart account. 
