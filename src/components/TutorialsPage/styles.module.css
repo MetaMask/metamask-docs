@@ -34,7 +34,7 @@
   justify-content: space-between;
   max-width: 100%;
   box-sizing: border-box;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 .article {
@@ -152,7 +152,7 @@
   align-items: flex-start;
   gap: 24px;
   padding: 0 8px;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 .searchArea {
@@ -162,7 +162,7 @@
   align-items: center;
   justify-content: flex-start;
   gap: 16px;
-  overflow-x: hidden;
+  overflow: visible;
 }
 
 .searchInput {
@@ -667,7 +667,7 @@ html[data-theme='dark'] mark {
   .searchArea {
     justify-content: flex-start;
     width: 100%;
-    overflow-x: hidden;
+    overflow: visible;
   }
 }
 

@@ -7,6 +7,7 @@
   font-size: 14px;
   line-height: 125%;
   box-sizing: border-box;
+  overflow: visible;
 }
 
 .control {
@@ -181,7 +182,7 @@
   box-shadow:
     0 4px 6px -1px rgb(0 0 0 / 10%),
     0 2px 4px -1px rgb(0 0 0 / 6%);
-  z-index: 1000;
+  z-index: 9999;
   position: absolute;
   top: 100%;
   left: 0;
