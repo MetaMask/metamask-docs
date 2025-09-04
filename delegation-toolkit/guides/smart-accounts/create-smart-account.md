@@ -413,7 +413,7 @@ export const walletClient = createWalletClient({
 
 With a MetaMask smart account, you can perform the following functions:
 
-- In conjunction with [Viem Account Abstraction clients](../configure.md), deploy the smart account
+- In conjunction with [Viem Account Abstraction clients](../configure.md), [deploy the smart account](deploy-smart-account.md)
   and [send user operations](send-user-operation.md).
 - [Create delegations](../delegation/execute-on-smart-accounts-behalf.md) that can be used to grant specific rights and permissions to other accounts.
   Smart accounts that create delegations are called *delegator accounts*.
