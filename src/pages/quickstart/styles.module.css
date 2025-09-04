@@ -289,6 +289,11 @@ input:checked+.slider::before {
   line-height: 1.6;
 }
 
+.stepBody strong,
+.stepBody b {
+  font-weight: 700;
+}
+
 .w3DropdownMenu li {
   padding: 4px 12px;
   cursor: pointer;
