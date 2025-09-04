@@ -26,6 +26,11 @@ The following bundler methods are supported on Ethereum Mainnet and Sepolia:
 - [`pimlico_getUserOperationGasPrice`](./pimlico_getuseroperationgasprice): Returns the gas prices that must be used for the user operation.
 - [`pimlico_getUserOperationStatus`](./pimlico_getuseroperationstatus): Returns the user operation status.
 - [`pimlico_simulateAssetChanges`](./pimlico_simulateassetchanges): Simulates a user operation to predict the asset changes it will cause.
+- [`pimlico_getTokenQuotes`](./pimlico_gettokenquotes): Returns the tentative token exchange rates used by the ERC-20 Paymaster.
+- [`pm_sponsorUserOperation`](./pm_sponsoruseroperation): Sponsors a user operation by providing paymaster-related fields and updated gas parameters.
+- [`pm_getPaymasterData`](./pm_getpaymasterdata): Returns values to be used in paymaster-related fields of a signed user operation.
+- [`pm_getPaymasterStubData`](./pm_getpaymasterstubdata): Returns stub values to be used in paymaster-related fields of an unsigned user operation for gas estimation.
+- [`pm_validateSponsorshipPolicies`](./pm_validatesponsorshippolicies): Validates a user operation against sponsorship policies to determine which are willing to sponsor it.
 
 ## Method EntryPoints
 
