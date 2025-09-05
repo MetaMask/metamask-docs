@@ -10,12 +10,22 @@ This quickstart demonstrates how to request and redeem ERC-7715 permissions.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](install.md)
-- [Install MetaMask Flask 12.14.2 or later.](/snaps/get-started/install-flask)
+- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
+- Install [Yarn](https://yarnpkg.com/),
+    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+- [Install MetaMask Flask 12.14.2 or later](/snaps/get-started/install-flask).
 
 ## Steps
 
-### 1. Set up a Wallet Client
+### 1. Install the toolkit
+
+Install the [MetaMask Delegation Toolkit](https://github.com/MetaMask/delegation-toolkit):
+
+```bash npm2yarn
+npm install @metamask/delegation-toolkit
+```
+
+### 2. Set up a Wallet Client
 
 Set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) using Viem's `createWalletClient` function. This client will help you interact with MetaMask Flask. 
 
@@ -32,7 +42,7 @@ const walletClient = createWalletClient({
 }).extend(erc7715ProviderActions());
 ```
 
-### 2. Set up a Public Client
+### 3. Set up a Public Client
 
 Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. 
 This client will help you query the account state and interact with blockchain networks.
@@ -47,7 +57,7 @@ const publicClient = createPublicClient({
 });
 ```
 
-### 3. Set up a session account
+### 4. Set up a session account
 
 Set up a session account which can either be a smart account or an externally owned 
 account (EOA) to request ERC-7715 permissions. This account is responsible 
@@ -74,7 +84,7 @@ const sessionAccount = await toMetaMaskSmartAccount({
 });
 ```
 
-### 4. Request ERC-7715 permissions
+### 5. Request ERC-7715 permissions
 
 Request ERC-7715 permissions from the user. Currently, only the 
 `native-token-stream` permission type is supported, which allows the dapp to stream 
@@ -106,7 +116,7 @@ const grantedPermissions = await walletClient.grantPermissions([{
 }]);
 ```
 
-### 5. Set up a Bundler Client
+### 6. Set up a Bundler Client
 
 Set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) 
 using Viem's `createBundlerClient` function. This lets you use the bundler service 
@@ -127,7 +137,7 @@ const bundlerClient = createBundlerClient({
 }).extend(erc7710BundlerActions());
 ```
 
-### 6. Redeem ERC-7715 permissions
+### 7. Redeem ERC-7715 permissions
 
 The session account can now [redeem the delegation](../experimental/erc-7710-redeem-delegations.md). The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 

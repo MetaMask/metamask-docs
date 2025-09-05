@@ -163,5 +163,5 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ## Next steps
 
-- See [Create a MetaMask smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account) to learn more about smart account implementations.
-- See [Send a gasless transaction](/delegation-toolkit/guides/smart-accounts/send-gasless-transaction) to learn how to sponsor gas fees when adding a passkey as a backup signer.
+- Learn more about [smart account implementations](/delegation-toolkit/development/guides/smart-accounts/create-smart-account).
+- To sponsor gas fees when adding a passkey as a backup signer, see how to [send a gasless transaction](/delegation-toolkit/development/guides/smart-accounts/send-gasless-transaction).

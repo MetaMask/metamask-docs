@@ -23,7 +23,7 @@ This page provides instructions to install and set up the MetaMask Delegation To
 
 ### 1. Install the toolkit
 
-Install the [MetaMask Delegation Toolkit](https://github.com/MetaMask/delegation-toolkit) dependencies:
+Install the [MetaMask Delegation Toolkit](https://github.com/MetaMask/delegation-toolkit):
 
 ```bash npm2yarn
 npm install @metamask/delegation-toolkit
