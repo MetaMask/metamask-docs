@@ -70,7 +70,18 @@ const sidebar = {
           collapsed: false,
           items: [
             'guides/delegation/execute-on-smart-accounts-behalf',
-            'guides/delegation/restrict-delegation',
+            {
+              type: 'category',
+              label: 'Use delegation scopes',
+              collapsed: false,
+              link: { type: "doc", id: "guides/delegation/use-delegation-scopes/index" },
+              items: [
+                'guides/delegation/use-delegation-scopes/spending-limit',
+                'guides/delegation/use-delegation-scopes/function-call',
+                'guides/delegation/use-delegation-scopes/ownership-transfer',
+                'guides/delegation/use-delegation-scopes/refine-scope',
+              ],
+            },
           ],
         },
       ],
@@ -111,6 +122,7 @@ const sidebar = {
       label: 'Reference',
       collapsed: false,
       items: [
+        'reference/delegation-scopes',
         'reference/caveats',
         {
           type: 'category',

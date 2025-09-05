@@ -1,15 +1,16 @@
 ---
 description: Learn how to restrict a delegation using caveat enforcers, and the available caveat types.
+sidebar_label: Refine a scope
 toc_max_heading_level: 3
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Restrict a delegation
+# Refine a delegation scope
 
-Use [caveat enforcers](../../concepts/delegation/caveat-enforcers.md) to apply specific rules and restrictions
-to a delegation, ensuring that delegated executions are only performed under predefined circumstances.
+Apply [caveat enforcers](../../concepts/delegation/caveat-enforcers.md) to a delegation to refine the initial authority defined by its [delegation scope](index.md).
+Caveat enforcers ensure delegated executions are only performed under specific, predefined circumstances.
 
 A delegation has a `caveats` property, which is an array of `Caveat` objects.
 Each caveat is specified as follows:
