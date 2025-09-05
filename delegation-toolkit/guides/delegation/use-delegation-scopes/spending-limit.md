@@ -4,8 +4,8 @@ description: Learn how to use the spending limit scopes for a delegation.
 
 # Use spending limit scopes
  
-Spending limit scopes define how much a delegate can spend in native, ERC-20, or ERC-721 tokens. 
-The toolkit provides multiple types of spending limit scopes tailored for different use cases.
+Spending limit scopes define how much a delegate can spend in native, ERC-20, or ERC-721 tokens.
+You can set transfer limits with or without time-based (periodic) or streaming conditions, depending on your use case.
 
 ## Prerequisites
 
@@ -16,9 +16,11 @@ The toolkit provides multiple types of spending limit scopes tailored for differ
 
 ## ERC-20 periodic scope
 
-This scope ensures that ERC-20 token transfers remain within a predefined limit during a specified time window.
-At the start of each new period, the transfer allowance resets.
-For example, Alice creates a delegation that allows Bob to spend 10 USDC on her behalf each day, week, or month.
+This scope ensures a per-period limit for ERC-20 token transfers.
+You set the amount and the time window.
+At the start of each new period, the allowance resets.
+For example, Alice creates a delegation that lets Bob spend up to 10 USDC on her behalf each day.
+Bob can transfer a total of 10 USDC per day; the limit resets at the beginning of the next day.
 
 When this scope is applied, the toolkit automatically disables native token transfers (sets the native token transfer limit to `0`). 
 
@@ -116,9 +118,11 @@ const delegation = createDelegation({
 
 ## Native token periodic scope
 
-This scope ensures that native token transfers remain within a predefined limit during a specified time window.
-At the start of each new period, the transfer allowance resets.
-For example, Alice creates a delegation that allows Bob to spend 0.01 ETH on her behalf each day, week, or month.
+This scope ensures a per-period limit for native token transfers.
+You set the amount and the time window.
+At the start of each new period, the allowance resets.
+For example, Alice creates a delegation that lets Bob spend up to 0.01 ETH on her behalf each day.
+Bob can transfer a total of 0.01 ETH per day; the limit resets at the beginning of the next day.
 
 When this scope is applied, the toolkit automatically disables ERC-20 and ERC-721 token transfers (sets the allowed calldata to `0x`).
 

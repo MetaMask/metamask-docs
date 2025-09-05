@@ -11,8 +11,8 @@ Learn [how to use delegation scopes](../guides/delegation/use-delegation-scopes/
 
 ### ERC-20 periodic scope
 
-Ensures that ERC-20 token transfers remain within a predefined limit during a specified time window.
-At the start of each new period, the transfer allowance resets.
+Ensures a per-period limit for ERC-20 token transfers.
+At the start of each new period, the allowance resets.
 
 #### Example
 
@@ -92,8 +92,8 @@ const delegation = createDelegation({
 
 ### Native token periodic scope
 
-Ensures that native token transfers remain within a predefined limit during a specified time window.
-At the start of each new period, the transfer allowance resets.
+Ensures a per-period limit for native token transfers.
+At the start of each new period, the allowance resets.
 
 #### Example
 

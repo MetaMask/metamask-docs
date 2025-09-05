@@ -9,8 +9,8 @@ import TabItem from "@theme/TabItem";
 
 # Refine a delegation scope
 
-You can apply [caveat enforcers](../../concepts/delegation/caveat-enforcers.md) to a delegation, refining the initial authority specified by a [delegation scope](index.md).
-Caveat enforcers enable you to apply specific rules and restrictions, ensuring that delegated executions are only performed under predefined circumstances.
+Apply [caveat enforcers](../../concepts/delegation/caveat-enforcers.md) to a delegation to refine the initial authority defined by its [delegation scope](index.md).
+Caveat enforcers ensure delegated executions are only performed under specific, predefined circumstances.
 
 A delegation has a `caveats` property, which is an array of `Caveat` objects.
 Each caveat is specified as follows:

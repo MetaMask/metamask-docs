@@ -7,7 +7,7 @@ description: Learn how to use the ownership transfer scope for a delegation.
 The ownership transfer scope restricts a delegation to ownership transfer calls only.
 For example, Alice has deployed a smart contract, and she delegates to Bob the ability to transfer ownership of that contract.
 
-Internally, this scope uses the [`ownershipTransfer`](../../../reference/caveats.md#ownershiptransfer) caveat enfrocer.
+Internally, this scope uses the [`ownershipTransfer`](../../../reference/caveats.md#ownershiptransfer) caveat enforcer.
 
 ## Prerequisites
 
