@@ -19,7 +19,7 @@ This quickstart demonstrates how to request and redeem ERC-7715 permissions.
 
 ### 1. Install the toolkit
 
-Install the [MetaMask Delegation Toolkit](https://github.com/MetaMask/delegation-toolkit):
+Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit):
 
 ```bash npm2yarn
 npm install @metamask/delegation-toolkit
