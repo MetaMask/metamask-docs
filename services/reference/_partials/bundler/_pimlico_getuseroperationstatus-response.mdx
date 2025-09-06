@@ -1,0 +1,47 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="not_found">
+
+```JSON
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "status": "not_found",
+    "transactionHash": null
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="submitted">
+
+```JSON
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "status": "submitted",
+    "transactionHash": "0x9bd004b8240da8eba3a02190a72be8a70ade8ef4c581b6e59789643c5e642ac3"
+  }
+}
+```
+
+  </TabItem>
+  <TabItem value="included">
+
+```JSON
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "status": "included",
+    "transactionHash": "0x9bd004b8240da8eba3a02190a72be8a70ade8ef4c581b6e59789643c5e642ac3"
+  }
+}
+```
+
+  </TabItem>
+</Tabs>
