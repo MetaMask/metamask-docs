@@ -28,7 +28,7 @@ MetaMask also supports non-EVM networks, including native support for [Solana](h
 
 [Get started with the Wallet API.](how-to/connect-extension.md)
 
-## Wallet API vs. SDK
+## Wallet API vs. SDK3040779b6af94856854b3b03a419c8a1
 
 The **Wallet API** is designed for web dapps that connect to the MetaMask browser extension.
 If you're building a desktop web-only dapp, the Wallet API provides everything you need.
