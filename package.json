@@ -81,7 +81,7 @@
     "remark-codesandbox": "^0.10.1",
     "remark-docusaurus-tabs": "^0.2.0",
     "remark-math": "^6.0.0",
-    "sass": "^1.89.2"
+    "sass": "^1.92.1"
   },
   "devDependencies": {
     "@docusaurus/eslint-plugin": "3.8.1",
