@@ -122,9 +122,11 @@ export const delegateWalletClient = createWalletClient({
 Create a [root delegation](../../concepts/delegation/index.md#delegation-types) from Alice to Bob.
 With a root delegation, Alice is delegating her own authority away, as opposed to *redelegating* permissions she received from a previous delegation.
 
-Use the toolkit's [`createDelegation`](../../reference/api/delegation.md#createdelegation) method to create a root delegation.
-This example passes an empty `caveats` array, which means Bob can perform any action on Alice's behalf. We recommend [restricting the delegation](restrict-delegation.md) by adding caveat enforcers.
-For example, Alice can delegate the ability to spend her USDC to Bob, limiting the amount to 100 USDC.
+Use the toolkit's [`createDelegation`](../../reference/api/delegation.md#createdelegation) method to create a root delegation. When creating 
+delegation, you need to configure the scope of the delegation to define the initial authority. 
+
+This example uses the [`erc20TransferAmount`](./use-delegation-scopes/spending-limit#erc-20-transfer-scope) scope, allowing Alice to delegate to Bob the ability to spend her USDC, with a 
+specified limit on the total amount.
 
 :::warning Important
 
@@ -135,10 +137,17 @@ Before creating a delegation, ensure that the delegator account (in this example
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit"
 
+// USDC address on Ethereum Sepolia.
+const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+
 const delegation = createDelegation({
   to: delegateSmartAccount.address, // This example uses a delegate smart account
   from: delegatorSmartAccount.address,
-  caveats: [], // Empty caveats array - we recommend adding appropriate restrictions.
+   scope: {
+    type: "erc20TransferAmount",
+    tokenAddress,
+    maxAmount: 10000000n,
+  },
 })
 ```
 
@@ -226,3 +235,8 @@ const transactionHash = await delegateWalletClient.sendTransaction({
 
 </TabItem>
 </Tabs>
+
+## Next steps
+
+- See [how to configure different scopes](./use-delegation-scopes) to define the initial authority.
+- See [how to further refine the authority of a delegation](./use-delegation-scopes/refine-scope) using caveat enforcers.
