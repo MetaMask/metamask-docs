@@ -39,6 +39,7 @@ const delegation = createDelegation({
   },
   to: delegateAccount,
   from: delegatorAccount,
+  environment: delegatorAccount.environment,
 });
 ```
 
@@ -67,6 +68,7 @@ const delegation = createDelegation({
   },
   to: delegateAccount,
   from: delegatorAccount,
+  environment: delegatorAccount.environment,
 });
 ```
 
@@ -92,6 +94,7 @@ const delegation = createDelegation({
   },
   to: delegateAccount,
   from: delegatorAccount,
+  environment: delegatorAccount.environment,
 });
 ```
 
@@ -113,6 +116,7 @@ const delegation = createDelegation({
   },
   to: delegateAccount,
   from: delegatorAccount,
+  environment: delegatorAccount.environment,
 });
 ```
 
@@ -140,6 +144,7 @@ const delegation = createDelegation({
   },
   to: delegateAccount,
   from: delegatorAccount,
+  environment: delegatorAccount.environment,
 });
 ```
 
@@ -167,6 +172,7 @@ const delegation = createDelegation({
   },
   to: delegateAccount,
   from: delegatorAccount,
+  environment: delegatorAccount.environment,
 });
 ```
 
@@ -187,10 +193,12 @@ import { createDelegation } from "@metamask/delegation-toolkit";
 const delegation = createDelegation({
   scope: {
     type: "nativeTokenTransferAmount",
-    maxAmount: 1000000n,
+    // 0.001 ETH in wei format.
+    maxAmount: 1000000000000000n,
   },
   to: delegateAccount,
   from: delegatorAccount,
+  environment: delegatorAccount.environment,
 });
 ```
 

@@ -90,22 +90,30 @@ Creates a delegation with a specific delegate.
 | ---- | ---- | -------- | ----------- |
 | `from` | `Hex` | Yes | The address that is granting the delegation. |
 | `to` | `Hex` | Yes | The address to which the delegation is being granted. |
-| `caveats` | `Caveats` | Yes | Caveats to restrict the authority being granted. |
+| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. |
+| `environment` | `DeleGatorEnvironment` | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
+| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. |
 | `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
 | `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 
 ### Example
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
 
 const delegation = createDelegation({
   // Address that is granting the delegation
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
   // Address to which the delegation is being granted
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
-  // Empty caveats array - we recommend adding appropriate restrictions
-  caveats: [],
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
+  scope: {
+    type: "nativeTokenTransferAmount",
+    // 0.001 ETH in wei format.
+    maxAmount: 1000000000000000n,
+  },
 });
 ```
 
@@ -118,7 +126,9 @@ Creates an open delegation that can be redeemed by any delegate.
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
 | `from` | `Hex` | Yes | The address that is granting the delegation. |
-| `caveats` | `Caveats` | Yes | Caveats to restrict the authority being granted. |
+| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. |
+| `environment` | `DeleGatorEnvironment` | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
+| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. |
 | `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
 | `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 
@@ -126,13 +136,19 @@ Creates an open delegation that can be redeemed by any delegate.
 ### Example
 
 ```typescript
-import { createOpenDelegation } from "@metamask/delegation-toolkit";
+import { createOpenDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
 
 const delegation = createOpenDelegation({
   // Address that is granting the delegation
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Empty caveats array - we recommend adding appropriate restrictions
-  caveats: [],
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
+  scope: {
+    type: "nativeTokenTransferAmount",
+    // 0.001 ETH in wei format.
+    maxAmount: 1000000000000000n,
+  },
 });
 ```
 
@@ -278,12 +294,17 @@ const disableDelegationData = DelegationManager.encode.disableDelegation({
 
 ```ts
 import { createDelegation } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
 
 export const delegation = createDelegation({
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
-  // Empty caveats array - we recommend adding appropriate restrictions
-  caveats: [],
+  environment: getDelegatorEnvironment(sepolia.id);
+  scope: {
+    type: "nativeTokenTransferAmount",
+    // 0.001 ETH in wei format.
+    maxAmount: 1000000000000000n,
+  },
 });
 ```
 
@@ -432,9 +453,8 @@ import { createWalletClient } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia } from "viem/chains";
 
-export const delegationManager = getDeleGatorEnvironment(
-  sepolia.id
-).DelegationManager;
+const environment = getDelegatorEnvironment(sepolia.id);
+export const delegationManager = environment.DelegationManager;
 
 const account = privateKeyToAccount(delegateWallet as `0x${string}`);
 
@@ -451,8 +471,12 @@ const delegate = "0x2FcB88EC2359fA635566E66415D31dD381CF5585";
 export const delegation = createDelegation({
   to: delegate,
   from: account.address,
-  // Empty caveats array - we recommend adding appropriate restrictions.
-  caveats: [],
+  environment,
+  scope: {
+    type: "nativeTokenTransferAmount",
+    // 0.001 ETH in wei format.
+    maxAmount: 1000000000000000n,
+  },
 });
 ```
 

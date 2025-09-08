@@ -38,6 +38,7 @@ const delegation = createDelegation({
   },
   to: delegateAccount,
   from: delegatorAccount,
+  environment: delegatorAccount.environment,
 });
 ```
 
