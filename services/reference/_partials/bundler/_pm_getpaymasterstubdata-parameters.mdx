@@ -33,10 +33,10 @@ import TabItem from "@theme/TabItem"
 
 - `chainId`: (string) - The chain ID in hexadecimal format.
 
-- `context`: (object) [_optional_] - Additional context information. Can be one of:
+- `context`: (object) [_optional_] - Information about the specific paymaster implementation you are using.
+    If use paying gas in ERC-20 Tokens, pass the token address:
   - An object with `token`: (string) - The ERC-20 token address to use for payment.
   - An object with `sponsorshipPolicyId`: (string) - The ID of the sponsorship policy to use.
-  - `null` - No additional context.
 
 </TabItem>
 <TabItem value="v0.6" label="v0.6 user operation">
@@ -67,10 +67,10 @@ import TabItem from "@theme/TabItem"
 
 - `chainId`: (string) - The chain ID in hexadecimal format.
 
-- `context`: (object) [_optional_] - Additional context information. Can be one of:
+- `context`: (object) [_optional_] - Information about the specific paymaster implementation you are using.
+    If use paying gas in ERC-20 Tokens, pass the token address:
   - An object with `token`: (string) - The ERC-20 token address to use for payment.
   - An object with `sponsorshipPolicyId`: (string) - The ID of the sponsorship policy to use.
-  - `null` - No additional context.
 
 </TabItem>
 </Tabs>
