@@ -155,10 +155,10 @@ The Delegation Toolkit supports the following execution modes, based on [ERC-757
 
 | Execution mode | Number of delegation chains passed to `redeemDelegations` | Processing method | Does user operation continue execution if redemption reverts? |
 |--|--|--|--|
-| `SINGLE_DEFAULT_MODE` | One      | Sequential  | No  |
-| `SINGLE_TRY_MODE`     | One      | Sequential  | Yes |
-| `BATCH_DEFAULT_MODE`  | Multiple | Interleaved | No  |
-| `BATCH_TRY_MODE`      | Multiple | Interleaved | Yes |
+| `SingleDefault` | One      | Sequential  | No  |
+| `SingleTry`     | One      | Sequential  | Yes |
+| `BatchDefault`  | Multiple | Interleaved | No  |
+| `BatchTry`      | Multiple | Interleaved | Yes |
 
 ### Sequential processing
 
