@@ -288,7 +288,7 @@ Signs the delegation and returns the delegation signature.
 <TabItem value ="example.ts">
 
 ```ts
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
 import { delegatorSmartAccount } from "./config.ts";
 
 // The address to which the delegation is granted. It can be an EOA address, or 
@@ -298,8 +298,12 @@ const delegate = "0x2FcB88EC2359fA635566E66415D31dD381CF5585";
 const delegation = createDelegation({
   to: delegate,
   from: account.address,
-  // Empty caveats array - we recommend adding appropriate restrictions.
-  caveats: [],
+  environment: delegatorSmartAccount.environment,
+  scope: {
+    type: "nativeTokenTransferAmount",
+    // 0.001 ETH in wei format.
+    maxAmount: 1000000000000000n,
+  },
 });
 
 const signature = delegatorSmartAccount.signDelegation({ delegation });

@@ -27,6 +27,9 @@ At the start of each new period, the allowance resets.
 #### Example
 
 ```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
 const delegation = createDelegation({
   scope: {
     type: "erc20PeriodTransfer",
@@ -35,8 +38,12 @@ const delegation = createDelegation({
     periodDuration: 86400,
     startDate: 1743763600,
   },
-  to: delegateAccount,
-  from: delegatorAccount,
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
 
@@ -59,6 +66,9 @@ At the start, a specified initial amount is released, after which tokens accrue 
 #### Example
 
 ```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
 const delegation = createDelegation({
   scope: {
     type: "erc20Streaming",
@@ -68,8 +78,12 @@ const delegation = createDelegation({
     maxAmount: 10000000n,
     startTime: 1703980800,
   },
-  to: delegateAccount,
-  from: delegatorAccount,
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
 
@@ -88,14 +102,21 @@ This scope is useful for setting simple, fixed transfer limits without any time-
 #### Example
 
 ```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
 const delegation = createDelegation({
   scope: {
     type: "erc20TransferAmount",
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
     maxAmount: 10000n,
   },
-  to: delegateAccount,
-  from: delegatorAccount,
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
 
@@ -113,14 +134,21 @@ Limits the delegation to ERC-721 token transfers only.
 #### Example
 
 ```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
 const delegation = createDelegation({
   scope: {
     type: "erc721Transfer",
     tokenAddress: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
     tokenId: 1n,
   },
-  to: delegateAccount,
-  from: delegatorAccount,
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
 
@@ -140,6 +168,9 @@ At the start of each new period, the allowance resets.
 #### Example
 
 ```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
 const delegation = createDelegation({
   scope: {
     type: "nativeTokenPeriodTransfer",
@@ -147,8 +178,12 @@ const delegation = createDelegation({
     periodDuration: 86400,
     startDate: 1743763600,
   },
-  to: delegateAccount,
-  from: delegatorAccount,
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
 
@@ -170,6 +205,9 @@ At the start, a specified initial amount is released, after which tokens accrue 
 #### Example
 
 ```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
 const delegation = createDelegation({
   scope: {
     type: "nativeTokenStreaming",
@@ -178,8 +216,12 @@ const delegation = createDelegation({
     maxAmount: 10000000n,
     startTime: 1703980800,
   },
-  to: delegateAccount,
-  from: delegatorAccount,
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
 
@@ -197,13 +239,21 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 #### Example
 
 ```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
 const delegation = createDelegation({
   scope: {
     type: "nativeTokenTransferAmount",
-    maxAmount: 1000000n,
+    // 0.001 ETH in wei format.
+    maxAmount: 1000000000000000n,
   },
-  to: delegateAccount,
-  from: delegatorAccount,
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
 
@@ -225,14 +275,21 @@ Defines the specific methods, contract addresses, and calldata that are allowed 
 This example sets the delegation scope to allow the delegate to call the `approve` function on the USDC token contract.
 
 ```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
 const delegation = createDelegation({
   scope: {
     type: "functionCall",
     targets: ["0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"], // USDC address on Sepolia.
     selectors: ["approve(address, uint256)"]
   },
-  to: delegateAccount,
-  from: delegatorAccount,
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
 
@@ -249,6 +306,9 @@ Restricts a delegation to ownership transfer calls only.
 #### Example
 
 ```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
 const contractAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
 const delegation = createDelegation({
@@ -256,7 +316,11 @@ const delegation = createDelegation({
     type: "ownershipTransfer",
     contractAddress,
   },
-  to: delegateAccount,
-  from: delegatorAccount,
+  // Address that is granting the delegation
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
