@@ -101,7 +101,7 @@ a 1,000,000 wei allowance that becomes spendable one hour after it is created:
 <TabItem value="delegation.ts">
 
 ```typescript
-import { createCaveatBuilder, createDelegation } from '@metamask/delegation-toolkit'
+import { createCaveatBuilder, createDelegation, ROOT_AUTHORITY } from '@metamask/delegation-toolkit'
 import { toHex } from 'viem'
 import { delegatorSmartAccount } from './config.ts'
 
@@ -114,16 +114,18 @@ const caveatBuilder = createCaveatBuilder(environment)
 
 const tenAM = 10 * 60 * 60 // 10:00 AM as seconds since midnight.
 
-const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', 1_000_000).addCaveat({
+const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', 1000000n).addCaveat({
   enforcer: afterTimestampEnforcer,
-  terms: toHex(tenAm),
+  terms: toHex(tenAM),
 })
 
-const delegation = createDelegation({
-  to: delegate,
-  from: delegatorSmartAccount.address,
-  caveats,
-})
+const delegation: Delegation =  {
+  delegate: "DELEGATE_ADDRESS",
+  delegator: delegatorSmartAccount.address,
+  authority: ROOT_AUTHORITY,
+  caveats: caveats.build(),
+  salt: '0x',
+};
 ```
 
 </TabItem>
