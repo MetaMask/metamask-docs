@@ -126,9 +126,9 @@ Creates an open delegation that can be redeemed by any delegate.
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
 | `from` | `Hex` | Yes | The address that is granting the delegation. |
-| `caveats` | `Caveats` | Yes | Caveats to restrict the authority being granted. |
 | `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. |
 | `environment` | `DeleGatorEnvironment` | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
+| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. |
 | `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
 | `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 

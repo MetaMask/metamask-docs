@@ -122,14 +122,14 @@ const delegation = createDelegation({
 
 ### ERC-721 scope
 
-Limits the delegation to ERC-721 token transfers only.
+Limits the delegation to ERC-721 token (NFT) transfers only.
 
 #### Parameters
 
 | Name           | Type      | Required | Description                                                                  |
 | -------------- | --------- | -------- | ---------------------------------------------------------------------------- |
 | `tokenAddress` | `Address` | Yes      | The ERC-721 token contract address.                                          |
-| `tokenId`      | `bigint`  | Yes      | The token id of the NFT (ERC-721 token) that can be transferred by delegate. |
+| `tokenId`      | `bigint`  | Yes      | The ID of the ERC-721 token that can be transferred by delegate. |
 
 #### Example
 

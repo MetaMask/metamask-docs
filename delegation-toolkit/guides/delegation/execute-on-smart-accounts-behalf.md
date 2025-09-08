@@ -239,5 +239,5 @@ const transactionHash = await delegateWalletClient.sendTransaction({
 
 ## Next steps
 
-- See [how to configure different scopes](./use-delegation-scopes) to define the initial authority.
-- See [how to further refine the authority of a delegation](./use-delegation-scopes/refine-scope) using caveat enforcers.
+- See [how to configure different scopes](use-delegation-scopes/index.md) to define the initial authority of a delegation.
+- See [how to further refine the authority of a delegation](use-delegation-scopes/refine-scope.md) using caveat enforcers.
