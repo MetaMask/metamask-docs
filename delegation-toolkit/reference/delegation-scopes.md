@@ -14,6 +14,16 @@ Learn [how to use delegation scopes](../guides/delegation/use-delegation-scopes/
 Ensures a per-period limit for ERC-20 token transfers.
 At the start of each new period, the allowance resets.
 
+
+#### Parameters
+
+| Name             | Type      | Required | Description                                                      |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------- |
+| `tokenAddress`   | `Address` | Yes      | The ERC-20 token contract address as a hex string.               |
+| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
+| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
+| `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
+
 #### Example
 
 ```typescript
@@ -35,6 +45,16 @@ const delegation = createDelegation({
 Ensures a linear streaming transfer limit for ERC-20 tokens.
 Token transfers are blocked until the defined start timestamp.
 At the start, a specified initial amount is released, after which tokens accrue linearly at the configured rate, up to the maximum allowed amount.
+
+#### Parameters
+
+| Name              | Type      | Required | Description                                               |
+| ----------------- | --------- | -------- | --------------------------------------------------------- |
+| `tokenAddress`    | `Address` | Yes      | The ERC-20 token contract address.                        |
+| `initialAmount`   | `bigint`  | Yes      | The initial amount that can be transferred at start time. |
+| `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
+| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
+| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
 
 #### Example
 
@@ -58,6 +78,13 @@ const delegation = createDelegation({
 Ensures that ERC-20 token transfers are limited to a predefined maximum amount. 
 This scope is useful for setting simple, fixed transfer limits without any time-based or streaming conditions.
 
+#### Parameters
+
+| Name           | Type      | Required | Description                                                       |
+| -------------- | --------- | -------- | ----------------------------------------------------------------- |
+| `tokenAddress` | `Address` | Yes      | The ERC-20 token contract address.                                |
+| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
+
 #### Example
 
 ```typescript
@@ -75,6 +102,13 @@ const delegation = createDelegation({
 ### ERC-721 scope
 
 Limits the delegation to ERC-721 token transfers only.
+
+#### Parameters
+
+| Name           | Type      | Required | Description                                                                  |
+| -------------- | --------- | -------- | ---------------------------------------------------------------------------- |
+| `tokenAddress` | `Address` | Yes      | The ERC-721 token contract address.                                          |
+| `tokenId`      | `bigint`  | Yes      | The token id of the NFT (ERC-721 token) that can be transferred by delegate. |
 
 #### Example
 
@@ -94,6 +128,14 @@ const delegation = createDelegation({
 
 Ensures a per-period limit for native token transfers.
 At the start of each new period, the allowance resets.
+
+#### Parameters
+
+| Name             | Type      | Required | Description                                                      |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------- |
+| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
+| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
+| `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
 
 #### Example
 
@@ -116,6 +158,15 @@ Ensures a linear streaming transfer limit for native tokens.
 Token transfers are blocked until the defined start timestamp.
 At the start, a specified initial amount is released, after which tokens accrue linearly at the configured rate, up to the maximum allowed amount.
 
+#### Parameters
+
+| Name              | Type      | Required | Description                                               |
+| ----------------- | --------- | -------- | --------------------------------------------------------- |
+| `initialAmount`   | `bigint`  | Yes      | The initial amount that can be transferred at start time. |
+| `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
+| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
+| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
+
 #### Example
 
 ```typescript
@@ -137,6 +188,12 @@ const delegation = createDelegation({
 Ensures that native token transfers are limited to a predefined maximum amount. 
 This scope is useful for setting simple, fixed transfer limits without any time based or streaming conditions.
 
+#### Parameters
+
+| Name           | Type      | Required | Description                                                       |
+| -------------- | --------- | -------- | ----------------------------------------------------------------- |
+| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
+
 #### Example
 
 ```typescript
@@ -153,6 +210,15 @@ const delegation = createDelegation({
 ## Function call scope
 
 Defines the specific methods, contract addresses, and calldata that are allowed for the delegation.
+
+#### Parameters
+
+| Name              | Type                             | Required | Description                                                                                                                                                     |
+| ----------------- | -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `targets`         | `Address[]`                      | Yes      | The list of addresses that the delegate is allowed to call.                                                                                                     |
+| `selectors`       | `MethodSelector[]`               | Yes      | The list of method selectors that the delegate is allowed to call. The selector value can be 4-byte hex string, ABI function signature, or ABI function object. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of `calldata` that the delegate is allowed to call.                                                                                                    |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The `calldata` that the delegate is allowed to call.                                                                                                            |
 
 #### Example
 
@@ -173,6 +239,12 @@ const delegation = createDelegation({
 ## Ownership transfer scope
 
 Restricts a delegation to ownership transfer calls only.
+
+#### Parameters
+
+| Name              | Type      | Required | Description                                                            |
+| ----------------- | --------- | -------- | -----------------------------------------------------------------------|
+| `contractAddress` | `Address` | Yes      | The target contract address for which ownership transfers are allowed. |
 
 #### Example
 
