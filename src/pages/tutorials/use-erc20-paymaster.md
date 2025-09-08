@@ -152,5 +152,5 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 ## Next steps
 
-- See [Create a MetaMask smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account) to learn more about smart account implementations. 
-- See [Send a gasless transaction](/delegation-toolkit/development/guides/smart-accounts/send-gasless-transaction) to learn how to use gasless paymaster.
+- Learn more about [smart account implementations](/delegation-toolkit/development/guides/smart-accounts/create-smart-account).
+- To sponsor gas for end users, see how to [send a gasless transaction](/delegation-toolkit/development/guides/smart-accounts/send-gasless-transaction).

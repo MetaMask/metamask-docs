@@ -58,6 +58,7 @@ const sidebar = {
           collapsed: false,
           items: [
             'guides/smart-accounts/create-smart-account',
+            'guides/smart-accounts/deploy-smart-account',
             'guides/smart-accounts/send-user-operation',
             'guides/smart-accounts/send-gasless-transaction',
             'guides/smart-accounts/generate-multisig-signature',

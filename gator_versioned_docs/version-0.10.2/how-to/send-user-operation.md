@@ -91,7 +91,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
 
 export const bundlerClient = createBundlerClient({
   publicClient,
-  transport: http("https://public.pimlico.io/v2/1/rpc")
+  transport: http("https://public.pimlico.io/v2/59141/rpc")
 });
 ```
 
