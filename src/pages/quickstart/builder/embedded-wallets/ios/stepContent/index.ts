@@ -8,12 +8,10 @@ import * as installation from './installation.mdx'
 import * as login from './login.mdx'
 import * as logout from './logout.mdx'
 
-import * as prerequisites from './prerequisites.mdx'
 import * as iOSQuickStart from './iOSQuickStart.mdx'
 
 const STEPS = toSteps({
   iOSQuickStart,
-  prerequisites,
   installation,
   registerApp,
   whitelist,
