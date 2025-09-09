@@ -19,8 +19,10 @@ Caveat enforcer contract: [`AllowedCalldataEnforcer.sol`](https://github.com/Met
 
 ### Parameters
 
-1. Index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts
-2. Expected calldata as a hex string
+| Name         | Type     | Required | Description                                                                                                          |
+| ------------ | -------- | -------- | -------------------------------------------------------------------------------------------------------------------- |
+| `startIndex` | `number` | Yes      | The index in the `calldata` byte array (including the 4-byte method selector) where the expected `calldata` starts.  |
+| `value`      | `Hex`    | Yes      | The expected `calldata` that must match at the specified index.                                                      |
 
 ### Example
 
@@ -49,7 +51,9 @@ Caveat enforcer contract: [`AllowedMethodsEnforcer.sol`](https://github.com/Meta
 
 ### Parameters
 
-1. An array of methods as 4-byte hex strings, ABI function signatures, or `ABIFunction` objects
+| Name        | Type               | Required |Description |
+| ----------- | ------------------ | -------- | ---------- |
+| `selectors` | `MethodSelector[]` | Yes      | The list of method selectors that the delegate is allowed to call. The selector value can be 4-byte hex string, ABI function signature, or ABI function object. |
 
 ### Example
 
@@ -82,7 +86,9 @@ Caveat enforcer contract: [`AllowedTargetsEnforcer.sol`](https://github.com/Meta
 
 ### Parameters
 
-1. An array of addresses as hex strings
+| Name      | Type        | Required | Description                                                 |
+| --------- | ----------- | -------- | ----------------------------------------------------------- |
+| `targets` | `Address[]` | Yes      | The list of addresses that the delegate is allowed to call. |
 
 ### Example
 
@@ -101,7 +107,9 @@ Caveat enforcer contract: [`ArgsEqualityCheckEnforcer.sol`](https://github.com/M
 
 ### Parameters
 
-1. The expected `args` as a hex string
+| Name   | Type  | Required | Description                                                              |
+| ------ | ----- | -------- | ------------------------------------------------------------------------ |
+| `args` | `Hex` | Yes      | The expected args that must match exactly when redeeming the delegation. |
 
 ### Example
 
@@ -119,10 +127,10 @@ Caveat enforcer contract: [`BlockNumberEnforcer.sol`](https://github.com/MetaMas
 
 ### Parameters
 
-1. After threshold block number as a `bigint`
-2. Before threshold block number as a `bigint`
-
-You can specify `0n` to indicate that there is no limitation on a threshold.
+| Name              | Type     | Required | Description                                                                                             |
+| ----------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `afterThreshold`  | `bigint` | Yes      | The block number after which the delegation is valid. Set the value to `0n` to disable this threshold.  |
+| `beforeThreshold` | `bigint` | Yes      | The block number before which the delegation is valid. Set the value to `0n` to disable this threshold. |
 
 ### Example
 
@@ -141,9 +149,11 @@ Caveat enforcer contract: [`DeployedEnforcer.sol`](https://github.com/MetaMask/d
 
 ### Parameters
 
-1. A contract address as a hex string
-2. The salt to use with the contract, as a hex string
-3. The bytecode of the contract as a hex string
+| Name              | Type      | Required | Description                          |
+| ----------------- | --------- | -------- | ------------------------------------ |
+| `contractAddress` | `Address` | Yes      | The contract address.                |
+| `salt`            | `Hex`     | Yes      | The salt to use with the deployment. |
+| `bytecode`        | `Hex`     | Yes      | The bytecode of the contract.        |
 
 ### Example
 
@@ -163,13 +173,13 @@ Caveat enforcer contract: [`ERC1155BalanceBalanceEnforcer.sol`](https://github.c
 
 ### Parameters
 
-1. An ERC-1155 contract address as a hex string
-2. The recipient's address as a hex string
-3. The ID of the ERC-1155 token as a bigint
-4. The amount by which the balance must have changed as a `bigint`
-5. The balance change type for the ERC-1155 token. Specifies whether the
-   balance should have increased or decreased. Valid parameters are
-   `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
+| Name | Type | Required | Description   |
+| ---- | ---- | -------- | ------------- |
+| `tokenAddress` | `Address`           | Yes      | The ERC-1155 token contract address. |
+| `recipient`    | `Address`           | Yes      | The address on which the checks will be applied. |
+| `tokenId`      | `bigint`            | Yes      | The ID of the ERC-1155 token. |
+| `balance`      | `bigint`            | Yes      | The amount by which the balance must be changed. |
+| `changeType`   | `BalanceChangeType` | Yes      | The balance change type for the ERC-1155 token. Specifies whether the balance should have increased or decreased. Valid parameters are `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`. |
 
 ### Example
 
@@ -191,12 +201,12 @@ Caveat enforcer contract: [`ERC20BalanceChangeEnforcer.sol`](https://github.com/
 
 ### Parameters
 
-1. An ERC-20 contract address as a hex string
-2. The recipient's address as a hex string
-3. The amount by which the balance must have changed as a `bigint`
-4. The balance change type for the ERC-20 token. Specifies whether the
-   balance should have increased or decreased. Valid parameters are
-   `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
+| Name | Type | Required | Description   |
+| ---- | ---- | -------- | ------------- |
+| `tokenAddress` | `Address`           | Yes      | The ERC-20 token contract addres. |
+| `recipient`    | `Address`           | Yes      | The address on which the checks will be applied. |
+| `balance`      | `bigint`            | Yes      | The amount by which the balance must be changed. |
+| `changeType`   | `BalanceChangeType` | Yes      | The balance change type for the ERC-20 token. Specifies whether the balance should have increased or decreased. Valid parameters are `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`. |
 
 ### Example
 
@@ -220,10 +230,12 @@ Caveat enforcer contract: [`ERC20PeriodTransferEnforcer.sol`](https://github.com
 
 ### Parameters
 
-1. The address of the ERC-20 token contract.
-2. The maximum amount of tokens that can be transferred per period, in wei.
-3. The duration of each period in seconds.
-4. The timestamp when the first period begins.
+| Name             | Type      | Required | Description                                                      |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------- |
+| `tokenAddress`   | `Address` | Yes      | The ERC-20 token contract address as a hex string.               |
+| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
+| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
+| `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
 
 ### Example
 
@@ -244,11 +256,13 @@ Caveat enforcer contract: [`ERC20StreamingEnforcer.sol`](https://github.com/Meta
 
 ### Parameters
 
-1. An ERC-20 contract address as a hex string
-2. Initial amount available at start time as a `bigint`
-3. Maximum total amount that can be unlocked as a `bigint`
-4. Rate at which tokens accrue per second as a `bigint`
-5. Start timestamp as a number
+| Name              | Type      | Required | Description                                               |
+| ----------------- | --------- | -------- | --------------------------------------------------------- |
+| `tokenAddress`    | `Address` | Yes      | The ERC-20 token contract address.                        |
+| `initialAmount`   | `bigint`  | Yes      | The initial amount that can be transferred at start time. |
+| `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
+| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
+| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
 
 ### Example
 
@@ -270,8 +284,10 @@ Caveat enforcer contract: [`ERC20TransferAmountEnforcer.sol`](https://github.com
 
 ### Parameters
 
-1. An ERC-20 contract address as a hex string
-2. Amount as a `bigint`
+| Name           | Type      | Required | Description                                                       |
+| -------------- | --------- | -------- | ----------------------------------------------------------------- |
+| `tokenAddress` | `Address` | Yes      | The ERC-20 token contract address.                                |
+| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
 
 ### Example
 
@@ -289,6 +305,14 @@ Ensures that the recipient's ERC-721 token balance has changed within the allowe
 Caveat enforcer contract: [`ERC721BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721BalanceChangeEnforcer.sol)
 
 ### Parameters
+
+| Name | Type | Required | Description   |
+| ---- | ---- | -------- | ------------- |
+| `tokenAddress` | `Address`           | Yes      | The ERC-721 token contract addres. |
+| `recipient`    | `Address`           | Yes      | The address on which the checks will be applied. |
+| `balance`      | `bigint`            | Yes      | The amount by which the balance must be changed. |
+| `changeType`   | `BalanceChangeType` | Yes      | The balance change type for the ERC-721 token. Specifies whether the balance should have increased or decreased. Valid parameters are `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`. |
+
 
 1. An ERC-721 contract address as a hex string
 2. The recipient's address as a hex string
@@ -316,8 +340,10 @@ Caveat enforcer contract: [`ERC721TransferEnforcer.sol`](https://github.com/Meta
 
 ### Parameters
 
-1. The permitted ERC-721 contract address as a hex string
-2. The permitted ID of the ERC-721 token as a `bigint`
+| Name           | Type      | Required | Description                                                                  |
+| -------------- | --------- | -------- | ---------------------------------------------------------------------------- |
+| `tokenAddress` | `Address` | Yes      | The ERC-721 token contract address.                                          |
+| `tokenId`      | `bigint`  | Yes      | The ID of the ERC-721 token that can be transferred by delegate.             |
 
 ### Example
 
@@ -337,7 +363,9 @@ Caveat enforcer contract: [`ExactCalldataEnforcer.sol`](https://github.com/MetaM
 
 ### Parameters
 
-1. A hex value for calldata.
+| Name              | Type                             | Required | Description                                           |
+| ----------------- | -------------------------------- | -------- | ----------------------------------------------------- |
+| `exactCalldata`   | `calldata`                       | Yes      | The `calldata` that the delegate is allowed to call.  |
 
 ### Example
 
@@ -356,7 +384,9 @@ Caveat enforcer contract: [`ExactCalldataBatchEnforcer.sol`](https://github.com/
 
 ### Parameters
 
-1. Array of expected `ExecutionStruct`, each containing target address, value, and calldata.
+| Name              | Type                    | Required | Description                                           |
+| ----------------- | ------------------------| -------- | ----------------------------------------------------- |
+| `executions`      | `ExecutionStruct[]`     | Yes      | The list of executions that must be matched exactly in the batch. Each execution specifies a target address, value, and calldata.  |
 
 ### Example
 
@@ -388,7 +418,9 @@ Caveat enforcer contract: [`ExactExecutionEnforcer.sol`](https://github.com/Meta
 
 ### Parameters
 
-1. `ExecutionStruct` to be expected.
+| Name              | Type              | Required | Description                                           |
+| ----------------- | ------------------| -------- | ----------------------------------------------------- |
+| `execution`       | `ExecutionStruct` | Yes      | The execution that must be matched exactly. Specifies the target address, value, and calldata. |
 
 ### Example
 
@@ -409,7 +441,9 @@ Caveat enforcer contract: [`ExactExecutionBatchEnforcer.sol`](https://github.com
 
 ### Parameters
 
-1. Array of expected `ExecutionStruct`, each containing target address, value, and calldata.
+| Name              | Type                    | Required | Description                                           |
+| ----------------- | ------------------------| -------- | ----------------------------------------------------- |
+| `executions`      | `ExecutionStruct[]`     | Yes      | The list of executions that must be matched exactly in the batch. Each execution specifies a target address, value, and calldata.  |
 
 ### Example
 
@@ -440,7 +474,9 @@ Caveat enforcer contract: [`IdEnforcer.sol`](https://github.com/MetaMask/delegat
 
 ### Parameters
 
-1. An ID as a number
+| Name      | Type                    | Required | Description                                                                      |
+| ----------| ------------------------| -------- | -------------------------------------------------------------------------------- |
+| `id`      | `bigint` | `number`     | Yes      | An ID for the delegation. Only one delegation may be redeemed with any given ID. |
 
 ### Example
 
@@ -458,7 +494,9 @@ Caveat enforcer contract: [`LimitedCallsEnforcer.sol`](https://github.com/MetaMa
 
 ### Parameters
 
-1. A count as a number
+| Name      | Type                    | Required | Description                                                  |
+| ----------| ------------------------| -------- | ------------------------------------------------------------ |
+| `limit`   | `number`                | Yes      | The maximum number of times this delegation may be redeemed. |
 
 ### Example
 
@@ -480,11 +518,14 @@ Caveat enforcer contract: [`MultiTokenPeriodEnforcer.sol`](https://github.com/Me
 
 ### Parameters
 
-An array of token period configuration objects, where each object contains:
-- `token`: The address of the token contract as a hex string.
-- `periodAmount`: The maximum amount of tokens that can be transferred per period, in wei.
-- `periodDuration`: The duration of each period in seconds.
-- `startDate`: A Unix epoch timestamp (in seconds) representing when the first period begins.
+The list of `TokenPeriodConfig` objects, where each object contains:
+
+| Name             | Type      | Required | Description                                                      |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------- |
+| `token`          | `Address` | Yes      | The ERC-20 token contract address as a hex string.               |
+| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
+| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
+| `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
 
 ### Example
 
@@ -513,11 +554,11 @@ Caveat enforcer contract: [`NativeBalanceChangeEnforcer.sol`](https://github.com
 
 ### Parameters
 
-1. The recipient's address as a hex string
-2. The amount by which the balance must have changed as a `bigint`
-3. The balance change type for the native token. Specifies whether the
-   balance should have increased or decreased. Valid parameters are
-   `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
+| Name | Type | Required | Description   |
+| ---- | ---- | -------- | ------------- |
+| `recipient`    | `Address`           | Yes      | The address on which the checks will be applied. |
+| `balance`      | `bigint`            | Yes      | The amount by which the balance must be changed. |
+| `changeType`   | `BalanceChangeType` | Yes      | The balance change type for the native token. Specifies whether the balance should have increased or decreased. Valid parameters are `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`. |
 
 ### Example
 
@@ -539,8 +580,10 @@ Caveat enforcer contract: [`NativeTokenPaymentEnforcer.sol`](https://github.com/
 
 ### Parameters
 
-1. The recipient's address as a hex string
-2. The amount that must be paid as a `bigint`
+| Name | Type | Required | Description   |
+| ---- | ---- | -------- | ------------- |
+| `recipient`    | `Address`           | Yes      | The recipient address who receives the payment.  |
+| `amount`       | `bigint`            | Yes      | The amount that must be paid.                    |
 
 ### Example
 
@@ -562,9 +605,11 @@ Caveat enforcer contract: [`NativeTokenPeriodTransferEnforcer.sol`](https://gith
 
 ### Parameters
 
-1. The maximum amount of tokens that can be transferred per period, in wei.
-2. The duration of each period in seconds.
-3. The timestamp when the first period begins.
+| Name             | Type      | Required | Description                                                      |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------- |
+| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
+| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
+| `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
 
 ### Example
 
@@ -584,10 +629,12 @@ Caveat enforcer contract: [`NativeTokenStreamingEnforcer.sol`](https://github.co
 
 ### Parameters
 
-1. Initial amount available at start time as a `bigint`
-2. Maximum total amount that can be unlocked as a `bigint`
-3. Rate at which tokens accrue per second as a `bigint`
-4. Start timestamp as a number
+| Name              | Type      | Required | Description                                               |
+| ----------------- | --------- | -------- | --------------------------------------------------------- |
+| `initialAmount`   | `bigint`  | Yes      | The initial amount that can be transferred at start time. |
+| `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
+| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
+| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
 
 ### Example
 
@@ -608,7 +655,9 @@ Caveat enforcer contract: [`NativeTokenTransferAmountEnforcer.sol`](https://gith
 
 ### Parameters
 
-1. The allowance as a `bigint`
+| Name           | Type      | Required | Description                                                       |
+| -------------- | --------- | -------- | ----------------------------------------------------------------- |
+| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
 
 ### Example
 
@@ -626,7 +675,10 @@ Caveat enforcer contract: [`NonceEnforcer.sol`](https://github.com/MetaMask/dele
 
 ### Parameters
 
-1. A nonce as a hex string
+| Name           | Type      | Required | Description                                                       |
+| -------------- | --------- | -------- | ----------------------------------------------------------------- |
+| `nonce`        | `Hex`     | Yes      | The nonce to allow bulk revocation of delegations.                |
+
 
 ### Example
 
@@ -644,7 +696,9 @@ Caveat enforcer contract: [`OwnershipTransferEnforcer.sol`](https://github.com/M
 
 ### Parameters
 
-1. The target contract address as a hex string
+| Name              | Type      | Required | Description                                                            |
+| ----------------- | --------- | -------- | -----------------------------------------------------------------------|
+| `contractAddress` | `Address` | Yes      | The target contract address for which ownership transfers are allowed. |
 
 ### Example
 
@@ -672,7 +726,9 @@ Caveat enforcer contract: [`RedeemerEnforcer.sol`](https://github.com/MetaMask/d
 
 ### Parameters
 
-1. An array of addresses as hex strings
+| Name              | Type        | Required | Description                                                            |
+| ----------------- | ----------- | -------- | -----------------------------------------------------------------------|
+| `redeemers`       | `Address[]` | Yes      | The list of addresses that are allowed to redeem the delegation.       |
 
 ### Example
 
@@ -696,11 +752,13 @@ Caveat enforcer contract: [`SpecificActionERC20TransferBatchEnforcer.sol`](https
 
 ### Parameters
 
-1. The address of the ERC-20 token contract.
-2. The address that will receive the tokens.
-3. The amount of tokens to transfer, in wei.
-4. The target address for the first transaction.
-5. The calldata for the first transaction.
+| Name           | Type      | Required | Description                                   |
+| -------------- | --------- | -------- | --------------------------------------------- |
+| `tokenAddress` | `Address` | Yes      | The ERC-20 token contract address.            |
+| `recipient`    | `Address` | Yes      | The address that will receive the tokens.     |
+| `amount`       | `bigint`  | Yes      | The amount of tokens to transfer.             |
+| `target`       | `Address` | Yes      | The target address for the first transaction. |
+| `calldata`     | `Hex`     | Yes      | The `calldata` for the first transaction.     |
 
 ### Example
 
@@ -722,10 +780,10 @@ Caveat enforcer contract: [`TimestampEnforcer.sol`](https://github.com/MetaMask/
 
 ### Parameters
 
-1. After threshold timestamp as a number
-2. Before threshold timestamp as a number
-
-You can specify `0` to indicate that there is no limitation on a threshold.
+| Name              | Type     | Required | Description                                                                                                    |
+| ----------------- | -------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| `afterThreshold`  | `number` | Yes      | The timestamp after which the delegation is valid in seconds. Set the value to `0` to disable this threshold.  |
+| `beforeThreshold` | `number` | Yes      | The timestamp before which the delegation is valid in seconds. Set the value to `0` to disable this threshold. |
 
 ### Example
 
@@ -743,6 +801,11 @@ Limits the value of native tokens that the delegate can spend.
 Caveat enforcer contract: [`ValueLteEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ValueLteEnforcer.sol)
 
 ### Parameters
+
+| Name              | Type        | Required | Description                                                            |
+| ----------------- | ----------- | -------- | -----------------------------------------------------------------------|
+| `maxValue`        | `bigint`    | Yes      | The maximum value that may be specified when redeeming this delegation.|
+
 
 1. A value as a `bigint`
 
