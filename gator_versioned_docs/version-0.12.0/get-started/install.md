@@ -20,7 +20,7 @@ This page provides instructions to install and set up the MetaMask Delegation To
   [create a custom caveat enforcer](../how-to/create-delegation/create-custom-caveat-enforcer.md)), install
   [Foundry](https://book.getfoundry.sh/getting-started/installation).
 
-## Steps
+## Steps 
 
 ### 1. Install the toolkit
 
