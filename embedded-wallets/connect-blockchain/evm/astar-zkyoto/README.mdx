@@ -1,0 +1,66 @@
+---
+title: Integrate Embedded Wallets with the Astar zKyoto Testnet
+sidebar_label: Astar zKyoto
+hide_table_of_contents: true
+
+image: 'img/embedded-wallets/banners/zkevm.png'
+description: 'Integrate Embedded Wallets with the Astar zKyoto Testnet | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import ChainDetailsAstarZkyoto from '../../_general-connect-blockchain/_astar-zkyoto.mdx'
+
+Integrate Web3Auth seamlessly with EVM-based Astar zKyoto Testnet. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+
+This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
+
+## Chain Details for Astar zkYoto
+
+<ChainDetailsAstarZkyoto />
+
+export const zKyoto = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'web',
+        title: 'Web',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkyoto/web',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkyoto/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkyoto/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkyoto/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkyoto/react-native',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkyoto/unity',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={zKyoto} />

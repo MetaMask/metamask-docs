@@ -14,7 +14,7 @@ Fixes #
 
 ## Checklist
 
-Complete this checklist before merging your PR:
+<!-- Complete the following checklist before merging your PR. -->
 
-- [ ] If this PR contains a major change to the documentation content, I have added an entry to the top of the ["What's new?"](https://github.com/MetaMask/metamask-docs/blob/main/docs/whats-new.md) page.
-- [ ] The proposed changes have been reviewed and approved by a member of the documentation team.
+- [ ] If this PR updates or adds documentation content that changes or adds technical meaning, it has received an approval from an engineer or DevRel from the relevant team.
+- [ ] If this PR updates or adds documentation content, it has received an approval from a technical writer.

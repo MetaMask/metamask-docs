@@ -1,0 +1,571 @@
+/* Overlay Container - Covers builder area only */
+.overlayContainer {
+  position: absolute;
+  inset: 0;
+  background: var(--ifm-background-surface-color);
+  z-index: 100;
+  animation: fade-in 0.3s ease-out;
+  overflow: hidden;
+}
+
+/* Dark mode: Use darker background for better contrast with cards */
+html[data-theme='dark'] .overlayContainer {
+  background: var(--general-gray-dark);
+}
+
+.overlayContent {
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .overlayContent {
+    padding: 1.6rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .overlayContent {
+    padding: 2.4rem;
+  }
+}
+
+/* Header */
+.header {
+  position: relative;
+  padding: 1.6rem 0 0.8rem;
+  margin-bottom: 0;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .header {
+    padding: 2.4rem 0 1.2rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .header {
+    padding: 4rem 0 1.6rem;
+  }
+}
+
+.title {
+  color: var(--ifm-heading-color);
+  font-family: var(--ifm-heading-font-family);
+  font-size: 2.4rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 0.8rem;
+}
+
+.subtitle {
+  color: var(--ifm-color-content-secondary);
+  font-family: var(--ifm-font-family-base);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 600px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1.6rem;
+  right: 0;
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  font-size: 1.4rem;
+  color: var(--ifm-color-content);
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  border-radius: 0.6rem;
+  font-family: var(--ifm-font-family-base);
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .closeButton {
+    top: 2.4rem;
+    font-size: 1.5rem;
+    padding: 0.7rem 1.1rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .closeButton {
+    font-size: 1.6rem;
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+.closeButton:hover {
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+/* Flow Container */
+.flowContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepHeader {
+  margin-bottom: 0;
+  padding: 1.6rem 0 2rem;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .stepHeader {
+    padding: 2rem 0 3rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .stepHeader {
+    padding: 2rem 0 4rem;
+  }
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0 0 1.6rem;
+  color: var(--color-text-heading);
+  line-height: 1.4;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .sectionTitle {
+    font-size: 2.2rem;
+    margin: 0 0 2rem;
+    line-height: 1.3;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .sectionTitle {
+    font-size: 2.4rem;
+    line-height: 1.2;
+  }
+}
+
+.sectionDescription {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin: 0;
+  color: var(--color-text-paragraph);
+  line-height: 1.5;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .sectionDescription {
+    font-size: 1.5rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .sectionDescription {
+    font-size: 1.6rem;
+  }
+}
+
+
+
+/* Cards Wrapper - mimics CardSection layout */
+.cardsWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+@media (width >=997px) {
+  .cardsWrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >=1440px) {
+  .cardsWrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cardColumn {
+  display: flex;
+}
+
+/* Card Items - mimics Card component */
+.cardItem {
+  margin-bottom: 1.6rem;
+  transition: filter calc(var(--motion) * var(--motion-speed)) ease;
+  flex: 1;
+}
+
+.cardItem>div {
+  background-color: var(--general-gray-light);
+  position: relative;
+  transition: background-color calc(var(--motion) * var(--motion-speed) * 0.5) ease;
+}
+
+.cardItem.cardActive {
+  filter: drop-shadow(0 0.8rem 2rem rgb(0 0 0 / 10%));
+}
+
+.cardItem.cardActive>div {
+  background-color: var(--general-white);
+}
+
+.cardItem>div>div:not(.cardHolder) {
+  position: absolute;
+  top: 0.1rem;
+  left: 0.1rem;
+  width: calc(100% - 0.2rem);
+  height: calc(100% - 0.2rem);
+  background-color: var(--general-white);
+}
+
+.cardHolder {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  cursor: pointer;
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  gap: 0.5rem;
+  height: 20rem;
+  position: relative;
+  color: var(--general-black);
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .cardInner {
+    padding: 2.4rem;
+    height: 22rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .cardInner {
+    padding: 3.2rem;
+    height: 24rem;
+  }
+}
+
+.cardInner::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 1rem;
+  height: 100%;
+  opacity: 0;
+  transition: opacity calc(var(--motion) * var(--motion-speed)) ease;
+  background-color: var(--color-palette, var(--general-gray-mid));
+}
+
+.cardHolder:hover .cardInner::before {
+  opacity: 1;
+}
+
+.cardShape {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 18.8rem;
+  color: var(--color-palette, var(--general-gray-mid));
+}
+
+@media (width >=997px) {
+  .cardShape {
+    width: 14.2rem;
+  }
+}
+
+@media (width >=1440px) {
+  .cardShape {
+    width: 13rem;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  position: relative;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.6rem;
+  position: relative;
+}
+
+@media (width <=996px) {
+  .cardFooter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.4rem;
+  }
+}
+
+.cardIcon {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  color: var(--color-palette, var(--general-gray-mid));
+  transition: color calc(var(--motion) * var(--motion-speed)) ease;
+}
+
+.cardTitle {
+  color: var(--general-black);
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .cardTitle {
+    font-size: 2rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .cardTitle {
+    font-size: 2.4rem;
+  }
+}
+
+.cardDescription {
+  color: var(--general-black);
+  font-size: 1.4rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .cardDescription {
+    font-size: 1.5rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .cardDescription {
+    font-size: 1.7rem;
+  }
+}
+
+@media (width >=997px) {
+  .cardDescription {
+    max-width: 82%;
+  }
+}
+
+.cardButton {
+  flex: 0 0 auto;
+}
+
+/* Dark theme support */
+html[data-theme='dark'] .cardItem>div {
+  background-color: var(--general-black-light);
+}
+
+html[data-theme='dark'] .cardItem.cardActive>div {
+  background-color: var(--general-black);
+}
+
+html[data-theme='dark'] .cardItem>div>div:not(.cardHolder) {
+  display: none;
+}
+
+html[data-theme='dark'] .cardShape {
+  color: var(--general-black);
+  transition: color calc(var(--motion) * var(--motion-speed)) ease;
+}
+
+html[data-theme='dark'] .cardItem.cardActive .cardShape {
+  color: var(--color-palette, var(--general-gray-mid));
+}
+
+html[data-theme='dark'] .cardInner {
+  color: var(--general-white);
+}
+
+html[data-theme='dark'] .cardTitle {
+  color: var(--general-white);
+}
+
+html[data-theme='dark'] .cardDescription {
+  color: var(--general-white);
+}
+
+.quickLink {
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-content);
+  text-decoration: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.6rem;
+  font-size: 1.3rem;
+  font-family: var(--ifm-font-family-base);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.quickLink:hover {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-content);
+  text-decoration: none;
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Quick links responsive */
+.quickLinks {
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  padding-top: 1.6rem;
+  margin-top: auto;
+  margin-bottom: 1.6rem;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .quickLinks {
+    padding-top: 2rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .quickLinks {
+    padding-top: 2.4rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.quickLinksTitle {
+  color: var(--color-text-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0 0 1.2rem;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .quickLinksTitle {
+    font-size: 1.5rem;
+    margin: 0 0 1.4rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .quickLinksTitle {
+    font-size: 1.6rem;
+    margin: 0 0 1.6rem;
+  }
+}
+
+.linkGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* Tablet and up */
+@media (width >=768px) {
+  .linkGrid {
+    flex-flow: row wrap;
+    gap: 1rem;
+  }
+}
+
+/* Desktop and up */
+@media (width >=997px) {
+  .linkGrid {
+    gap: 1.2rem;
+  }
+}
+
+/* .quickLink selector moved above to fix specificity */
+
+/* Desktop and up */
+@media (width >=997px) {
+  .quickLink {
+    padding: 1rem 1.6rem;
+    font-size: 1.4rem;
+    justify-content: flex-start;
+  }
+}
+
+/* Mobile specific scrolling improvements */
+@media (width <=768px) {
+  .overlayContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .overlayContent {
+    height: 100vh;
+    padding: 1rem;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .cardsWrapper {
+    margin-bottom: 4rem;
+  }
+}

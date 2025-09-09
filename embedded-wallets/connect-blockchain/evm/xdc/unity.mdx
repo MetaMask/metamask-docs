@@ -1,0 +1,97 @@
+---
+title: Integrate Embedded Wallets with the XDC Network in Unity
+sidebar_label: Unity
+image: 'img/embedded-wallets/banners/unity.png'
+keywords: [unity, xdc, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the XDC Network in Unity | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Installation
+
+<InstallationSnippet />
+
+## Chain Details for XDC Network
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet (Apothem)", value: "apothem", },
+    { label: "Devnet", value: "devnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: `0x32`
+- Public RPC URL: `https://erpc.xinfin.network` (Avoid using public rpcTarget in production, use services like Infura)
+- Display Name: XDC Network Mainnet
+- Block Explorer Link: https://xdcscan.io
+- Ticker: XDC
+- Ticker Name: XDC
+
+</TabItem>
+
+<TabItem
+  value="apothem"
+>
+
+- Chain ID: `0x33`
+- Public RPC URL: `https://rpc.apothem.network` (Avoid using public rpcTarget in production, use services like Infura)
+- Display Name: Apothem Testnet
+- Block Explorer Link: `https://apothem.xdcscan.io`
+- Ticker: XDC
+- Ticker Name: XDC
+
+</TabItem>
+
+<TabItem
+  value="devnet"
+>
+
+- Chain ID: `0x227`
+- Public RPC URL: `https://devnetstats.apothem.network/devnet` (Avoid using public rpcTarget in production, use services like Infura)
+- Display Name: XDC Network Devnet
+- Block Explorer Link: `https://devnet.xdcscan.io`
+- Ticker: XDC
+- Ticker Name: XDC
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />

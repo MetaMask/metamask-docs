@@ -1,0 +1,604 @@
+---
+title: Create a chain-agnostic web3 wallet with Web3Auth
+image: 'img/tutorials/tutorials-banners/multi.png'
+description: Create a chain-agnostic web3 wallet with Web3Auth, connecting embedded wallets with multiple blockchains.
+tags: [embedded wallets, multichain, polkadot, evm, cosmos, web3auth]
+date: February 9, 2024
+author: MetaMask Developer Relations
+---
+
+import SEO from '@site/src/components/SEO'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+<SEO
+  title="Create a Chain Agnostic Web3 Wallet with Web3Auth"
+  description="Learn how to create a chain-agnostic Web3 wallet using Web3Auth"
+  image="https://docs.metamask.io/img/tutorials/tutorials-banners/multi.png"
+  slug="/tutorials/pnp-no-modal-multichain"
+/>
+
+This guide will cover the basics of how to integrate Web3Auth with different blockchains at the same time. In this demo, you will be able to authenticate with different social logins and get different addresses from each blockchain. Of course, you can interact and sign transactions with any of them.
+
+You will be able to make calls like get the user's `account`, fetch `balance`, `sign message`, `send transaction`, `read` from and `write` to smart contracts, etc.
+
+**Web3Auth is designed to support any blockchain that follows the `secp256k1` & `ed25519` curves**. This means it works seamlessly with all EVMs such as Ethereum, Polygon, Binance Smart Chain, and others. Additionally, it supports non-EVM blockchains like Aptos, Cosmos, Polkadot, Solana, Tezos, Bitcoin, among many others. Web3Auth is not limited to these examples and is capable of integrating with any blockchain that adheres to these cryptographic standards, offering a wide range of compatibility to suit various needs and preferences in the blockchain ecosystem.
+
+## Quick Start
+
+You can run the following command or you can check the [full example](https://github.com/Web3Auth/web3auth-pnp-examples/tree/main/custom-authentication/multi-chain-example) in our Github.
+
+```bash
+npx degit Web3Auth/web3auth-pnp-examples/custom-authentication/multi-chain-example/ w3a-multi-chain-demo && cd w3a-multi-chain-demo && npm install && npm run dev
+```
+
+## Prerequisites
+
+- For Web Apps: A basic knowledge of JavaScript is required to use Web3Auth SDK.
+
+- For Mobile Apps: For the Web3Auth Mobile SDKs, you have a choice between iOS, Android, React Native & Flutter. Please refer to the [Web3Auth SDK Reference](/sdk) for more information.
+
+- Create a Web3Auth account on the [Web3Auth Dashboard](https://dashboard.web3auth.io)
+
+## How to set up Web3Auth Dashboard
+
+If you haven't already, sign up on the Web3Auth platform. It is free and gives you access to the Web3Auth's base plan. After the basic setup, explore other features and functionalities offered by the Web3Auth Dashboard. It includes custom verifiers, whitelabeling, analytics, and more. Head to [Web3Auth's documentation](/embedded-wallets/dashboard/) page for detailed instructions on setting up the Web3Auth Dashboard.
+
+## Using Web3Auth with Multiple Blockchains
+
+To use Web3Auth with multiple blockchains, you need to set up your React application with the Web3Auth SDK. This guide will walk you through the setup and implementation.
+
+#### Setting up your base project for using Web3 libraries:
+
+If you are starting from scratch, to set up this project locally, you will need to create a base Web application, where you can install the required dependencies. However, while working with Web3, there are a few base libraries, which need additional configuration. This is because certain packages are not available in the browser environment, and we need to polyfill them manually. You can follow [this documentation](/embedded-wallets/troubleshooting/webpack-issues) where we have mentioned the configuration changes for some popular frameworks for your reference.
+
+### Installation
+
+We need several dependencies to make this work with multiple blockchains:
+
+```bash npm2yarn
+npm install @web3auth/modal @solana/web3.js ethers @taquito/signer @taquito/taquito @taquito/utils @polkadot/api @polkadot/util-crypto tweetnacl
+```
+
+### Setting up Web3Auth Provider
+
+First, create a configuration file for Web3Auth (e.g., `web3authContext.tsx`):
+
+```tsx
+import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
+
+// Get your client ID from https://dashboard.web3auth.io
+const clientId = import.meta.env.VITE_WEB3AUTH_CLIENT_ID || ''
+
+// Instantiate SDK
+const web3AuthOptions: Web3AuthOptions = {
+  clientId,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+}
+
+const web3AuthContextConfig = {
+  web3AuthOptions,
+}
+
+export default web3AuthContextConfig
+```
+
+Then, set up the Web3Auth provider in your application entry point (`index.tsx` or similar):
+
+```tsx
+import ReactDOM from 'react-dom/client'
+// Setup Web3Auth Provider
+import { Web3AuthProvider } from '@web3auth/modal/react'
+import web3AuthContextConfig from './web3authContext'
+
+import App from './App'
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+root.render(
+  <Web3AuthProvider config={web3AuthContextConfig}>
+    <App />
+  </Web3AuthProvider>
+)
+```
+
+### Implementing the Multi-Chain Wallet
+
+Now, let's implement the main application with support for multiple blockchains. We'll create RPC modules for each blockchain and use them in our app.
+
+#### Setting up the Main App Component
+
+```tsx
+import './App.css'
+import {
+  useWeb3AuthConnect,
+  useWeb3AuthDisconnect,
+  useWeb3AuthUser,
+  useWeb3Auth,
+} from '@web3auth/modal/react'
+
+// Import RPC functions
+import {
+  getEthereumAccounts,
+  getEthereumBalance,
+  signEthereumMessage,
+  sendEthereumTransaction,
+} from './RPC/ethersRPC'
+import {
+  getSolanaAccount,
+  getSolanaBalance,
+  signSolanaMessage,
+  sendSolanaTransaction,
+} from './RPC/solanaRPC'
+import {
+  getTezosAccount,
+  getTezosBalance,
+  signTezosMessage,
+  signAndSendTezosTransaction,
+} from './RPC/tezosRPC'
+import {
+  getPolkadotAccounts,
+  getPolkadotBalance,
+  signAndSendPolkadotTransaction,
+} from './RPC/polkadotRPC'
+
+function App() {
+  const {
+    connect,
+    isConnected,
+    loading: connectLoading,
+    error: connectError,
+  } = useWeb3AuthConnect()
+  const { disconnect, loading: disconnectLoading, error: disconnectError } = useWeb3AuthDisconnect()
+  const { userInfo } = useWeb3AuthUser()
+  const { provider } = useWeb3Auth()
+
+  const getAllAccounts = async () => {
+    if (!provider) {
+      uiConsole('provider not initialized yet')
+      return
+    }
+    const eth_address = await getEthereumAccounts(provider)
+    const solana_address = await getSolanaAccount(provider)
+    const tezos_address = await getTezosAccount(provider)
+    const polkadot_address = await getPolkadotAccounts(provider)
+
+    uiConsole(
+      'Ethereum Address: ' + eth_address,
+      'Solana Address: ' + solana_address,
+      'Tezos Address: ' + tezos_address,
+      'Polkadot Address: ' + polkadot_address
+    )
+  }
+
+  const getAllBalances = async () => {
+    if (!provider) {
+      uiConsole('provider not initialized yet')
+      return
+    }
+
+    const eth_balance = await getEthereumBalance(provider)
+    const solana_balance = await getSolanaBalance(provider)
+    const tezos_balance = await getTezosBalance(provider)
+    const polkadot_balance = await getPolkadotBalance(provider)
+
+    uiConsole(
+      'Ethereum Balance: ' + eth_balance,
+      'Solana Balance: ' + solana_balance,
+      'Tezos Balance: ' + tezos_balance,
+      'Polkadot Balance: ' + polkadot_balance
+    )
+  }
+
+  function uiConsole(...args: any[]): void {
+    const el = document.querySelector('#console>p')
+    if (el) {
+      el.innerHTML = JSON.stringify(args || {}, null, 2)
+    }
+  }
+
+  const loggedInView = (
+    <div className="grid">
+      <div className="flex-container">
+        <div>
+          <button onClick={() => uiConsole(userInfo)} className="card">
+            Get User Info
+          </button>
+        </div>
+        <div>
+          <button onClick={() => disconnect()} className="card">
+            Log Out
+          </button>
+          {disconnectLoading && <div className="loading">Disconnecting...</div>}
+          {disconnectError && <div className="error">{disconnectError.message}</div>}
+        </div>
+        <div>
+          <h3>Account Operations</h3>
+        </div>
+        <div>
+          <button onClick={getAllAccounts} className="card">
+            Get All Accounts
+          </button>
+        </div>
+        <div>
+          <button onClick={getAllBalances} className="card">
+            Get All Balances
+          </button>
+        </div>
+        {/* Additional blockchain operations buttons */}
+      </div>
+      <div id="console" style={{ whiteSpace: 'pre-line' }}>
+        <p style={{ whiteSpace: 'pre-line' }}></p>
+      </div>
+    </div>
+  )
+
+  const unloggedInView = (
+    <div className="grid">
+      <button onClick={() => connect()} className="card">
+        Login
+      </button>
+      {connectLoading && <div className="loading">Connecting...</div>}
+      {connectError && <div className="error">{connectError.message}</div>}
+    </div>
+  )
+
+  return (
+    <div className="container">
+      <h1 className="title">
+        <a target="_blank" href="https://docs.metamask.io" rel="noreferrer">
+          Web3Auth{' '}
+        </a>
+        & React Multi-chain Example
+      </h1>
+
+      <div className="grid">{isConnected ? loggedInView : unloggedInView}</div>
+
+      <footer className="footer">
+        <a
+          href="https://github.com/Web3Auth/web3auth-pnp-examples/tree/main/custom-authentication/multi-chain-example"
+          target="_blank"
+          rel="noopener noreferrer">
+          Source code
+        </a>
+      </footer>
+    </div>
+  )
+}
+
+export default App
+```
+
+### Implementing Blockchain RPC Modules
+
+Let's implement the RPC modules for each blockchain. These modules will interact with the respective blockchain networks.
+
+## EVM (Ethereum)
+
+Here's how to implement the Ethereum RPC module:
+
+```tsx
+// ethersRPC.ts
+import type { IProvider } from '@web3auth/modal'
+import { ethers } from 'ethers'
+
+export async function getEthereumAccounts(provider: IProvider): Promise<any> {
+  try {
+    const ethersProvider = new ethers.BrowserProvider(provider)
+    const signer = await ethersProvider.getSigner()
+    // Get user's Ethereum public address
+    const address = signer.getAddress()
+    return await address
+  } catch (error) {
+    return error
+  }
+}
+
+export async function getEthereumBalance(provider: IProvider): Promise<string> {
+  try {
+    const ethersProvider = new ethers.BrowserProvider(provider)
+    const signer = await ethersProvider.getSigner()
+    // Get user's Ethereum public address
+    const address = signer.getAddress()
+    // Get user's balance in ether
+    const balance = ethers.formatEther(
+      await ethersProvider.getBalance(address) // Balance is in wei
+    )
+    return balance
+  } catch (error) {
+    return error as string
+  }
+}
+
+export async function signEthereumMessage(provider: IProvider): Promise<any> {
+  try {
+    const ethersProvider = new ethers.BrowserProvider(provider)
+    const signer = await ethersProvider.getSigner()
+    const originalMessage = 'YOUR_MESSAGE'
+    // Sign the message
+    const signedMessage = await signer.signMessage(originalMessage)
+    return signedMessage
+  } catch (error) {
+    return error as string
+  }
+}
+
+export async function sendEthereumTransaction(provider: IProvider): Promise<any> {
+  try {
+    const ethersProvider = new ethers.BrowserProvider(provider)
+    const signer = await ethersProvider.getSigner()
+    const destination = '0x40e1c367Eca34250cAF1bc8330E9EddfD403fC56'
+    // Convert 1 ether to wei
+    const amount = ethers.parseEther('0.001')
+    // Submit transaction to the blockchain
+    const tx = await signer.sendTransaction({
+      to: destination,
+      value: amount,
+      maxPriorityFeePerGas: '5000000000', // Max priority fee per gas
+      maxFeePerGas: '6000000000000', // Max fee per gas
+    })
+    // Wait for transaction to be mined
+    const receipt = await tx.wait()
+    return receipt
+  } catch (error) {
+    return error as string
+  }
+}
+```
+
+## Solana
+
+Here's how to implement the Solana RPC module:
+
+```tsx
+// solanaRPC.ts
+import { Keypair, Connection } from '@solana/web3.js'
+import { IProvider, getED25519Key } from '@web3auth/modal'
+import nacl from 'tweetnacl'
+
+export async function getSolanaAccount(ethProvider: IProvider): Promise<string> {
+  const ethPrivateKey = await ethProvider.request({
+    method: 'private_key',
+  })
+
+  const privateKey = getED25519Key(ethPrivateKey as string).sk.toString('hex')
+  const secretKey = new Uint8Array(Buffer.from(privateKey, 'hex'))
+  const keypair = Keypair.fromSecretKey(secretKey)
+  return keypair.publicKey.toBase58()
+}
+
+export async function getSolanaBalance(ethProvider: IProvider): Promise<string> {
+  const ethPrivateKey = await ethProvider.request({
+    method: 'private_key',
+  })
+  const privateKey = getED25519Key(ethPrivateKey as string).sk.toString('hex')
+  const secretKey = new Uint8Array(Buffer.from(privateKey, 'hex'))
+  const keypair = Keypair.fromSecretKey(secretKey)
+  const connection = new Connection('https://api.devnet.solana.com')
+  const balance = await connection.getBalance(keypair.publicKey)
+  return balance.toString()
+}
+
+export async function signSolanaMessage(ethProvider: IProvider): Promise<string> {
+  try {
+    const ethPrivateKey = await ethProvider.request({
+      method: 'private_key',
+    })
+    const privateKey = getED25519Key(ethPrivateKey as string).sk.toString('hex')
+    const secretKey = new Uint8Array(Buffer.from(privateKey, 'hex'))
+    const keypair = Keypair.fromSecretKey(secretKey)
+
+    // Convert message to Uint8Array
+    const messageBytes = new TextEncoder().encode('Hello Solana')
+
+    // Sign the message
+    const signature = nacl.sign.detached(messageBytes, keypair.secretKey)
+
+    return Buffer.from(signature).toString('base64')
+  } catch (error) {
+    console.error('Error signing Solana message:', error)
+    throw error
+  }
+}
+
+export async function sendSolanaTransaction(ethProvider: IProvider): Promise<string> {
+  try {
+    const ethPrivateKey = await ethProvider.request({
+      method: 'private_key',
+    })
+    const privateKey = getED25519Key(ethPrivateKey as string).sk.toString('hex')
+    const secretKey = new Uint8Array(Buffer.from(privateKey, 'hex'))
+    const keypair = Keypair.fromSecretKey(secretKey)
+
+    const connection = new Connection('https://api.devnet.solana.com')
+
+    // Import required modules for transaction
+    const { SystemProgram, Transaction, PublicKey, sendAndConfirmTransaction } = await import(
+      '@solana/web3.js'
+    )
+
+    // Create a test recipient address
+    const toAccount = new PublicKey('7C4jsPZpht1JHMWmwDF5ZEVfGSBViXCKbQEcm2GKHtKQ')
+
+    // Create a transfer instruction
+    const transferInstruction = SystemProgram.transfer({
+      fromPubkey: keypair.publicKey,
+      toPubkey: toAccount,
+      lamports: 100000, // 0.0001 SOL
+    })
+
+    // Create a transaction and add the instruction
+    const transaction = new Transaction().add(transferInstruction)
+
+    // Set a recent blockhash
+    transaction.recentBlockhash = (await connection.getRecentBlockhash()).blockhash
+    transaction.feePayer = keypair.publicKey
+
+    // Sign and send the transaction
+    const signature = await sendAndConfirmTransaction(connection, transaction, [keypair])
+
+    return signature
+  } catch (error) {
+    console.error('Error sending Solana transaction:', error)
+    throw error
+  }
+}
+```
+
+## Tezos
+
+Here's how to implement the Tezos RPC module:
+
+```tsx
+// tezosRPC.ts
+import { InMemorySigner } from '@taquito/signer'
+import { TezosToolkit } from '@taquito/taquito'
+import { hex2buf } from '@taquito/utils'
+// @ts-ignore
+import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
+import type { IProvider } from '@web3auth/modal'
+
+const tezos = new TezosToolkit('https://rpc.tzbeta.net/')
+
+export async function getTezosKeyPair(provider: IProvider): Promise<any> {
+  try {
+    const privateKey = (await provider.request({ method: 'private_key' })) as string
+    const keyPair = tezosCrypto.utils.seedToKeyPair(hex2buf(privateKey))
+    return keyPair
+  } catch (error) {
+    console.error(error)
+    return null
+  }
+}
+
+export async function setProvider(provider: IProvider): Promise<void> {
+  const keyPair = await getTezosKeyPair(provider)
+  tezos.setSignerProvider(await InMemorySigner.fromSecretKey(keyPair?.sk as string))
+}
+
+export async function getTezosAccount(provider: IProvider): Promise<any> {
+  try {
+    const keyPair = await getTezosKeyPair(provider)
+    return keyPair?.pkh
+  } catch (error) {
+    console.error('Error', error)
+    return error
+  }
+}
+
+export async function getTezosBalance(provider: IProvider): Promise<any> {
+  try {
+    const keyPair = await getTezosKeyPair(provider)
+    const balance = await tezos.tz.getBalance(keyPair?.pkh as string)
+    return balance.toString()
+  } catch (error) {
+    console.error('Error', error)
+    return error
+  }
+}
+
+export async function signTezosMessage(provider: IProvider): Promise<any> {
+  try {
+    const keyPair = await getTezosKeyPair(provider)
+    const signer = new InMemorySigner(keyPair.sk)
+    const message = '0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad'
+    const signature = await signer.sign(message)
+    return signature
+  } catch (error) {
+    return error
+  }
+}
+
+export async function signAndSendTezosTransaction(provider: IProvider): Promise<any> {
+  try {
+    await setProvider(provider)
+    // example address
+    const address = 'tz1dHzQTA4PGBk2igZ3kBrDsVXuvHdN8kvTQ'
+
+    const op = await tezos.wallet
+      .transfer({
+        to: address,
+        amount: 0.00005,
+      })
+      .send()
+
+    const txRes = await op.confirmation()
+    return txRes
+  } catch (error) {
+    return error
+  }
+}
+```
+
+## Polkadot
+
+Here's how to implement the Polkadot RPC module:
+
+```tsx
+// polkadotRPC.ts
+import { ApiPromise, Keyring, WsProvider } from '@polkadot/api'
+import { cryptoWaitReady } from '@polkadot/util-crypto'
+import type { IProvider } from '@web3auth/modal'
+
+export async function makeClient(): Promise<any> {
+  console.log('Establishing connection to Rococo Relay Chain RPC...')
+  const provider = new WsProvider('wss://rococo-rpc.polkadot.io') // roccoco testnet relay chain
+  const api = await ApiPromise.create({ provider })
+  const resp = await api.isReady
+  console.log('Polkadot RPC is ready', resp)
+  return api
+}
+
+export async function getPolkadotKeyPair(provider: IProvider): Promise<any> {
+  await cryptoWaitReady()
+  const privateKey = (await provider.request({
+    method: 'private_key',
+  })) as string
+  const keyring = new Keyring({ ss58Format: 42, type: 'sr25519' })
+  const keyPair = keyring.addFromUri(`0x${privateKey}`)
+  return keyPair
+}
+
+export async function getPolkadotAccounts(provider: IProvider): Promise<any> {
+  const keyPair = await getPolkadotKeyPair(provider)
+  return keyPair.address
+}
+
+export async function getPolkadotBalance(provider: IProvider): Promise<any> {
+  const keyPair = await getPolkadotKeyPair(provider)
+  const api = await makeClient()
+  const data = await api.query.system.account(keyPair.address)
+  const accountData = data.toHuman()
+  return accountData.data.free
+}
+
+export async function signAndSendPolkadotTransaction(provider: IProvider): Promise<any> {
+  try {
+    const keyPair = await getPolkadotKeyPair(provider)
+    const api = await makeClient()
+    const txHash = await api.tx.balances
+      .transferKeepAlive('5Gzhnn1MsDUjMi7S4cN41CfggEVzSyM58LkTYPFJY3wt7o3d', 12345)
+      .signAndSend(keyPair)
+    return txHash.toHuman()
+  } catch (err: any) {
+    return err.toString()
+  }
+}
+```
+
+## Conclusion
+
+This guide has shown you how to create a multi-chain wallet application using Web3Auth. With this setup, you can:
+
+1. Authenticate users with their social accounts
+2. Generate blockchain addresses for multiple chains (Ethereum, Solana, Tezos, Polkadot)
+3. Check balances across different blockchains
+4. Sign messages and send transactions on various networks
+
+The power of Web3Auth lies in its ability to derive keys for multiple blockchains from a single authentication session, providing users with a seamless experience across the web3 ecosystem.
+
+If you want to integrate with a specific blockchain and you're having trouble with the code, please contact us in our [community portal](https://web3auth.io/community/).
+
+## References
+
+- [Web3Auth Documentation](https://docs.metamask.io/)
+- [Web3Auth Examples](https://github.com/Web3Auth/web3auth-pnp-examples/)

@@ -1089,7 +1089,3 @@
 - [Snaps permissions | MetaMask developer documentation](https://docs.metamask.io/snaps/reference/permissions/): See the Snaps permissions reference.
 - [Snaps API | MetaMask developer documentation](https://docs.metamask.io/snaps/reference/snaps-api/): See the Snaps API reference.
 - [Wallet API for Snaps | MetaMask developer documentation](https://docs.metamask.io/snaps/reference/wallet-api-for-snaps/): See the Wallet API for Snaps reference.
-
-## Whats-new
-
-- [What's new in the documentation? | MetaMask developer documentation](https://docs.metamask.io/whats-new/): Summary of the latest updates to this documentation.

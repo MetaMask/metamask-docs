@@ -1,0 +1,90 @@
+---
+title: Integrate Embedded Wallets with the Avalanche (C-Chain) Blockchain in iOS/Swift Applications
+sidebar_label: iOS
+image: 'img/embedded-wallets/banners/avalanche.png'
+
+keywords: [ios, swift, avalanche, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Avalanche (C-Chain) Blockchain in iOS/Swift Applications | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_ios-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_ios-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_ios-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_ios-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_ios-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_ios-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_ios-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) on iOS, the private key is available in the SDK state. Use it to derive the user's address and interact with the [Avalanche (C-Chain)](https://www.avax.network/) blockchain for signing and JSON-RPC calls.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Installation
+
+<InstallationSnippet />
+
+## Chain Details for Avalanche (C-Chain)
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0xA86A
+- Public RPC URL: https://api.avax.network/ext/bc/C/rpc (Avoid using public rpcTarget in production, use services like Infura)
+- Display Name: Avalanche C-Chain Mainnet
+- Block Explorer Link: https://subnets.avax.network/c-chain
+- Ticker: AVAX
+- Ticker Name: AVAX
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0xA869
+- Public RPC URL: https://api.avax-test.network/ext/bc/C/rpc (Avoid using public rpcTarget in production, use services like Infura)
+- Display Name: Avalanche C-Chain Testnet
+- Block Explorer Link: https://subnets-test.avax.network/c-chain
+- Ticker: AVAX
+- Ticker Name: AVAX
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

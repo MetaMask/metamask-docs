@@ -1,0 +1,99 @@
+---
+title: SMS OTP Login with Embedded Wallets
+sidebar_label: SMS OTP
+description: 'SMS OTP Login with Embedded Wallets | Embedded Wallets'
+---
+
+import SMSOTPToggle from '@site/static/img/embedded-wallets/w3a-dashboard/sms-otp-toggle.png'
+import SMSOTPAddConnection from '@site/static/img/embedded-wallets/w3a-dashboard/sms-otp-add-connection.png'
+import SMSOTPOnboarding from '@site/static/img/embedded-wallets/w3a-dashboard/email-passwordless-onboarding.gif'
+
+Web3Auth provides built-in support for email and SMS-based authentication, allowing users to log in seamlessly using a one-time passcode (OTP) sent to their email address or phone number. This form of passwordless authentication simplifies the onboarding process, removes friction for end users, and expands accessibility—especially in regions where social login options may be limited.
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={SMSOTPOnboarding}
+    style={{
+      maxWidth: '600px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="SMS OTP Onboarding"
+  />
+</div>
+
+## Set Up a Custom SMS OTP Connection
+
+:::success Enable on Dashboard
+
+To use this feature, developers must first enable `SMS OTP` from the Social Connections section in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+
+> By default, Web3Auth uses its own pre-configured credentials for SMS OTP login.
+
+:::
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={SMSOTPToggle}
+    style={{
+      maxWidth: '600px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="SMS OTP Toggle"
+  />
+</div>
+
+For enhanced control and branding, developers are encouraged to configure a custom SMS OTP connection. Follow these steps:
+
+1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+2. Go to the `Social Connections` section.
+3. Click the `Settings` icon next to the toggle for `SMS OTP`.
+4. Enter your custom `Auth Connection ID`.
+5. Click `Add Connection` to complete the setup.
+
+<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
+  <img
+    src={SMSOTPAddConnection}
+    style={{
+      maxWidth: '600px',
+      borderRadius: '8px',
+      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+    }}
+    alt="SMS OTP Add Connection"
+  />
+</div>
+
+## Usage
+
+```tsx title="web3authContext.tsx"
+import { WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
+import { type Web3AuthContextConfig } from '@web3auth/modal/react'
+
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID',
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    modalConfig: {
+      connectors: {
+        [WALLET_CONNECTORS.AUTH]: {
+          label: 'auth',
+          // focus-start
+          loginMethods: {
+            sms_passwordless: {
+              name: 'SMS Passwordless',
+              authConnection: AUTH_CONNECTION.SMS_PASSWORDLESS,
+              authConnectionId: 'sms-test-demo', // Replace with your custom SMS OTP Auth Connection ID
+            },
+          },
+          // focus-end
+        },
+      },
+    },
+  },
+}
+
+export default web3AuthContextConfig
+```
+
+Follow our [Quick Starts](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to setup the basic flow.

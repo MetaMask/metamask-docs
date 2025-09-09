@@ -1,0 +1,102 @@
+---
+title: Integrate Embedded Wallets with the Klaytn Blockchain in React Native
+sidebar_label: React Native
+image: 'img/embedded-wallets/banners/klaytn.png'
+
+keywords: [react-native, klaytn, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Klaytn Blockchain in React Native | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Klaytn](https://klaytn.foundation) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x2019', // hex of 8217, Klaytn mainnet
+  rpcTarget: '`https://public-node-api.klaytnapi.com/v1/cypress`',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'Klaytn Mainnet',
+  blockExplorer: 'https://scope.klaytn.com',
+  ticker: 'KLAY',
+  tickerName: 'KLAY',
+}
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x3e9', // hex of 1001, Klaytn Boabab testnet
+  rpcTarget: 'https://api.baobab.klaytn.net:8651',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'Klaytn Testnet',
+  blockExplorer: 'https://baobab.scope.klaytn.com/',
+  ticker: 'KLAY',
+  tickerName: 'KLAY',
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

@@ -1,0 +1,87 @@
+---
+title: Troubleshooting with MetaMask Embedded Wallets
+sidebar_label: Overview
+image: 'img/metamaskog.jpg'
+
+description: 'Troubleshooting with MetaMask Embedded Wallets | Documentation - MetaMask Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+
+MetaMask Embedded Wallets (formerly Web3Auth) offers SDKs for various libraries across multiple platforms and devices. Thanks to our vibrant community of developers and their various implementations, we have collated some top-asked questions as guides to help you quickly understand and figure out some edge cases in the implementations.
+
+If you're still facing errors, you can always ask for help via the following channels:
+
+- Look at our [Embedded Wallets Community](https://web3auth.io/community/) to see if anyone has any questions or issues you might be having.
+- Join our [Discord](https://discord.gg/web3auth) to join our community and get private integration support or help with your integration.
+
+export const GeneralErrors = [
+  {
+    name: 'Explore solutions to common challenges.',
+    description: '',
+    tiles: [
+      {
+        key: 'sdk-errors-warnings',
+        title: 'SDK Errors & Warnings',
+        path: 'sdk-errors-warnings',
+      },
+      {
+        key: 'different-private-key',
+        title: 'Different Private Keys/ Wallets across Integrations',
+        path: 'different-private-key',
+      },
+      {
+        key: 'jwt',
+        title: 'Custom Authentication JWT Errors',
+        path: 'jwt-errors',
+      },
+      {
+        key: 'big-int',
+        title: 'React Big Int error',
+        path: 'react-big-int-error',
+      },
+      {
+        key: 'popup-blocked-issue',
+        title: 'Popup blocked issue',
+        path: 'popup-blocked-issue',
+      },
+    ],
+  },
+]
+
+export const PolyfillIssues = [
+  {
+    name: 'Polyfill Issues with different bundlers',
+    description: '',
+    tiles: [
+      {
+        key: 'vite-issues',
+        title: 'Vite',
+        path: 'vite-issues',
+      },
+      {
+        key: 'svelte-issues',
+        title: 'Svelte',
+        path: 'svelte-issues',
+      },
+      {
+        key: 'nuxt-issues',
+        title: 'Nuxt',
+        path: 'nuxt-issues',
+      },
+      {
+        key: 'webpack-issues',
+        title: 'Webpack 5',
+        path: 'webpack-issues',
+      },
+      {
+        key: 'metro-issues',
+        title: 'React Native Metro',
+        path: 'metro-issues',
+      },
+    ],
+  },
+]
+
+<Tiles tileGroups={GeneralErrors} />
+<Tiles tileGroups={PolyfillIssues} />

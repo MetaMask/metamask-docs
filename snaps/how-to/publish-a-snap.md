@@ -19,14 +19,14 @@ The following details are specific to Snaps:
   installing the Snap, in custom dialogs, and in the settings menu.
   - This icon should be a valid SVG.
   - The icon will be cropped in a circle when displayed in MetaMask; you do not need to make the icon circular.
+  - The icon should only have a transparent background if the icon is clearly visible on both light and dark backgrounds.
 
 After publishing the Snap, any dapp can connect to the Snap by using the Snap ID `npm:[packageName]`.
+You can use the [Snap Install Tester](https://montoya.github.io/snap-install-tester/) with [MetaMask Flask](../get-started/install-flask.md) to verify that your Snap package was published correctly.
 
 :::caution
 If you are using the Snap monorepo project generated in the [quickstart](../get-started/quickstart.md),
 make sure to only publish the Snap package in `/packages/snap`.
-You can use the [Snaps sandbox](test-a-snap.md#test-in-the-sandbox) to verify
-that your Snap was published correctly: in the sandbox settings, disable **Use current Snap ID** and specify the npm ID of your Snap.
 
 Also, make sure to update the manifest file, icon file, and README to differentiate your Snap from the template.
 :::

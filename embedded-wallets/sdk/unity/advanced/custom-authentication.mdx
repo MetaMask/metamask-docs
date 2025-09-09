@@ -1,0 +1,268 @@
+---
+title: Using Custom Authentication in PnP Unity SDK
+sidebar_label: Custom Authentication
+description: 'Web3Auth PnP Unity SDK - Using Custom Authentication | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+
+Custom Authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
+
+This feature, with MFA turned off, can even make Web3Auth invisible to the end user.
+
+<GrowthPlanNote />
+
+## Getting an Auth Connection ID
+
+:::info prerequisite
+
+To enable this, you need to [Create a Connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io) with your desired configuration.
+
+:::
+
+To configure a connection, you need to provide the particular details of the connection into our Web3Auth Dashboard. This enables us to map a `authConnectionId` with your connection details. This `authConnectionId` helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
+
+:::tip
+
+Visit the [Auth Provider Setup](/embedded-wallets/authentication) page to learn more about to setup the different configurations available for each connection.
+
+:::
+
+## Configuration
+
+:::warning
+
+_**"Auth Connection"**_ is called _**"Verifier"**_ in the Android SDK. It is the older terminology which we will be updating in the upcoming releases.
+
+Consequentially, you will see the terms _**"Verifier ID"**_ and _**"Aggregate Verifier"**_ used in the codebase and documentation referring to _**"Auth Connection ID"**_ and _**"Grouped Auth Connection"**_ respectively.
+
+:::
+
+To use custom authentication (Using Social providers or Login providers like Auth0, AWS Cognito, Firebase etc. or even your own custom JWT login) you can add the configuration using `loginConfig` parameter during the initialization.
+
+The `loginConfig` parameter is a key value map. The key should be one of the `Web3AuthProvider` in its string form, and the value should be a `LoginConfigItem` instance.
+
+### Parameters
+
+#### `LoginConfigItem`
+
+The `LoginConfigItem` struct contains various parameters that define the behavior of the custom authentication process. Below are the details of the `LoginConfigItem` struct:
+
+| Parameter                | Description                                                                                                                                                                                                                                                                                                       |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `verifier`               | The name of the verifier that you have registered on the Web3Auth Dashboard. It's a mandatory field, and accepts `string` as a value.                                                                                                                                                                             |
+| `typeOfLogin`            | Type of login for this verifier. This value will affect the login flow. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should provide your own JWT token, and no sign-in flow will be presented. It's a mandatory field, and accepts `TypeOfLogin` as a value. |
+| `clientId`               | Client ID provided by your login provider, e.g., Google's Client ID or Web3Auth's client ID if using `jwt` as `TypeOfLogin`. It's a mandatory field, and accepts `string` as a value.                                                                                                                             |
+| `name?`                  | Display name for the verifier. If null, the default name is used. It accepts `string` as a value.                                                                                                                                                                                                                 |
+| `description?`           | Description for the button. If provided, it renders as a full-length button; otherwise, an icon button is shown. It accepts `string` as a value.                                                                                                                                                                  |
+| `verifierSubIdentifier?` | The field in the JWT token that maps to the verifier ID. Ensure you selected the correct JWT verifier ID in the developer dashboard. It accepts `string` as a value.                                                                                                                                              |
+| `logoHover?`             | Logo to be shown on mouse hover. It accepts `string` as a value.                                                                                                                                                                                                                                                  |
+| `logoLight?`             | Light logo for dark backgrounds. It accepts `string` as a value.                                                                                                                                                                                                                                                  |
+| `logoDark?`              | Dark logo for light backgrounds. It accepts `string` as a value.                                                                                                                                                                                                                                                  |
+| `mainOption?`            | Shows the login button on the main list. It accepts `bool` as a value. The default value is `false`.                                                                                                                                                                                                              |
+| `showOnModal?`           | Whether to show the login button on the modal. The default value is `true`.                                                                                                                                                                                                                                       |
+| `showOnDesktop?`         | Whether to show the login button on the desktop. The default value is `true`.                                                                                                                                                                                                                                     |
+| `showOnMobile?`          | Whether to show the login button on mobile. The default value is `true`.                                                                                                                                                                                                                                          |
+
+#### `TypeOfLogin`
+
+```csharp
+public enum TypeOfLogin
+{
+    [EnumMember(Value = "google")]
+    GOOGLE,
+    [EnumMember(Value = "facebook")]
+    FACEBOOK,
+    [EnumMember(Value = "reddit")]
+    REDDIT,
+    [EnumMember(Value = "discord")]
+    DISCORD,
+    [EnumMember(Value = "twitch")]
+    TWITCH,
+    [EnumMember(Value = "apple")]
+    APPLE,
+    [EnumMember(Value = "line")]
+    LINE,
+    [EnumMember(Value = "github")]
+    GITHUB,
+    [EnumMember(Value = "kakao")]
+    KAKAO,
+    [EnumMember(Value = "linkedin")]
+    LINKEDIN,
+    [EnumMember(Value = "twitter")]
+    TWITTER,
+    [EnumMember(Value = "weibo")]
+    WEIBO,
+    [EnumMember(Value = "wechat")]
+    WECHAT,
+    [EnumMember(Value = "email_passwordless")]
+    EMAIL_PASSWORDLESS,
+    [EnumMember(Value = "email_password")]
+    EMAIL_PASSWORD,
+    [EnumMember(Value = "jwt")]
+    JWT
+}
+```
+
+#### `extraLoginOptions`
+
+The `extraLoginOptions` parameter can be used to pass additional options required by specific login providers.
+
+| Parameter                    | Description                                                                                                                                                 |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `domain?`                    | Your custom authentication domain in `string` format. For example, if you are using Auth0, it can be `example.auth0.com`.                                   |
+| `client_id?`                 | Client ID in `string` format, provided by your login provider and used for the custom verifier.                                                             |
+| `verifierIdField?`           | The field in JWT token which maps to verifier ID. Ensure you select the correct JWT verifier ID in the developer dashboard. It takes a `string` as a value. |
+| `isVerifierIdCaseSensitive?` | Boolean to confirm whether the verifier ID field is case-sensitive or not.                                                                                  |
+| `prompt?`                    | Prompt shown to the user during the authentication process. It takes a `string` as a value.                                                                 |
+| `id_token?`                  | JWT (ID Token) to be passed for login.                                                                                                                      |
+| `login_hint?`                | It is used to send the user's email address during Email Passwordless login. It takes a `string` as a value.                                                |
+
+## Single Verifier
+
+To use custom authentication with a single verifier, configure the `loginConfig` parameter of the `Web3AuthOptions` class. The `loginConfig` parameter is a key-value map where the key should be one of the `Web3AuthProvider` in its string form, and the value should be a `LoginConfigItem` struct instance.
+
+```csharp
+void Start()
+{
+    web3Auth = GetComponent<Web3Auth>();
+
+    var loginConfigItem = new LoginConfigItem()
+    {
+        verifier = "google-verifier", // Get this from the Web3Auth Dashboard
+        typeOfLogin = TypeOfLogin.GOOGLE,
+        clientId = "YOUR_GOOGLE_CLIENT_ID" // Google's client ID
+    };
+
+    web3Auth.setOptions(new Web3AuthOptions()
+    {
+        redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+        clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Web3Auth's client ID
+        network = Web3Auth.Network.TESTNET, // or other networks
+        loginConfig = new Dictionary<string, LoginConfigItem>
+        {
+            {"google", loginConfigItem}
+        }
+    });
+}
+```
+
+### Example Implementations
+
+#### Using Google Login
+
+```csharp
+public void loginGoogle()
+{
+    var selectedProvider = Provider.GOOGLE;
+
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider,
+    };
+
+    web3Auth.login(options);
+}
+```
+
+#### Using JWT Login (e.g., Auth0)
+
+```csharp
+public void loginJWT()
+{
+    var selectedProvider = Provider.JWT;
+
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider,
+        extraLoginOptions = new ExtraLoginOptions()
+        {
+            domain = "https://example.auth0.com", // Auth0 domain
+            verifierIdField = "sub", // The field in JWT token mapping to verifier ID
+            id_token = "YOUR_JWT_ID_TOKEN" // JWT ID token
+        }
+    };
+
+    web3Auth.login(options);
+}
+```
+
+## Aggregate Verifier
+
+You can use an aggregate verifier to combine multiple login methods, allowing users to log in using different providers but receive the same address.
+
+To use aggregate verifiers, set up the `loginConfig` object with multiple providers under a single verifier.
+
+```csharp
+void Start()
+{
+    web3Auth = GetComponent<Web3Auth>();
+
+    var googleConfig = new LoginConfigItem()
+    {
+        verifier = "aggregate-sapphire",
+        verifierSubIdentifier = "google-sub-id",
+        clientId = "YOUR_GOOGLE_CLIENT_ID",
+        typeOfLogin = TypeOfLogin.GOOGLE,
+    };
+
+    var auth0GitHubConfig = new LoginConfigItem()
+    {
+        verifier = "aggregate-sapphire",
+        verifierSubIdentifier = "github-sub-id",
+        clientId = "YOUR_GITHUB_CLIENT_ID",
+        typeOfLogin = TypeOfLogin.JWT,
+    };
+
+    web3Auth.setOptions(new Web3AuthOptions()
+    {
+        clientId = "YOUR_WEB3AUTH_CLIENT_ID",
+        redirectUrl = new System.Uri("w3aexample://com.web3auth.unityaggregateexample"),
+        network = Web3Auth.Network.SAPPHIRE_MAINNET,
+        loginConfig = new Dictionary<string, LoginConfigItem>
+        {
+            {"google", googleConfig},
+            {"github", auth0GitHubConfig}
+        }
+    });
+}
+```
+
+### Example Implementations
+
+#### Using Google and GitHub Combined Login
+
+```csharp
+public void loginGoogle()
+{
+    var selectedProvider = Provider.GOOGLE;
+
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider,
+    };
+
+    web3Auth.login(options);
+}
+
+public void loginGitHub()
+{
+    var selectedProvider = Provider.GITHUB;
+
+    var options = new LoginParams()
+    {
+        loginProvider = selectedProvider,
+        extraLoginOptions = new ExtraLoginOptions()
+        {
+            domain = "https://example.auth0.com",
+            verifierIdField = "email",
+            isVerifierIdCaseSensitive = false,
+            prompt = Prompt.LOGIN,
+        }
+    };
+
+    web3Auth.login(options);
+}
+```
