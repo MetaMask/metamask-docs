@@ -114,13 +114,13 @@ const caveatBuilder = createCaveatBuilder(environment)
 
 const tenAM = 10 * 60 * 60 // 10:00 AM as seconds since midnight.
 
-const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', 1_000_000).addCaveat({
+const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', 1000000n).addCaveat({
   enforcer: afterTimestampEnforcer,
-  terms: toHex(tenAm),
+  terms: toHex(tenAM),
 })
 
 const delegation = createDelegation({
-  to: delegate,
+  to: "DELEGATE_ADDRESS",
   from: delegatorSmartAccount.address,
   caveats,
 })
