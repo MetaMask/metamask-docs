@@ -27,16 +27,22 @@ Caveat enforcer contract: [`AllowedCalldataEnforcer.sol`](https://github.com/Met
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("allowedCalldata",
-  4,
-  encodeAbiParameters([
+const value = encodeAbiParameters(
+  [
     { type: "string" },
     { type: "uint256" }
-  ], [
+  ], 
+  [
     "Hello Gator",
     12345n
-  ])
+  ]
 );
+
+const caveats = [{
+  type: "allowedCalldata",
+  startIndex: 4,
+  value,
+}];
 ```
 
 :::note
@@ -58,20 +64,26 @@ Caveat enforcer contract: [`AllowedMethodsEnforcer.sol`](https://github.com/Meta
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("allowedMethods", [
-  "0xa9059cbb",
-  "transfer(address,uint256)",
-  {
-    name: 'transfer',
-    type: 'function',
-    inputs: [
-      { name: 'recipient', type: 'address' },
-      { name: 'amount', type: 'uint256' }
-    ],
-    outputs: [],
-    stateMutability: 'nonpayable',
-  }
-]);
+const caveats = [{
+  type: "allowedMethods",
+  selectors: [
+    // 4-byte Hex string.
+    "0xa9059cbb",
+    // ABI function signature.
+    "transfer(address,uint256)",
+    // ABI function object.
+    {
+      name: 'transfer',
+      type: 'function',
+      inputs: [
+        { name: 'recipient', type: 'address' },
+        { name: 'amount', type: 'uint256' }
+      ],
+      outputs: [],
+      stateMutability: 'nonpayable',
+    },
+  ]
+}];
 ```
 
 :::note
@@ -93,10 +105,13 @@ Caveat enforcer contract: [`AllowedTargetsEnforcer.sol`](https://github.com/Meta
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("allowedTargets", [
-  "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-  "0xB2880E3862f1024cAC05E66095148C0a9251718b"
-]);
+const caveats = [{
+  type: "allowedTargets",
+  targets: [
+    "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+    "0xB2880E3862f1024cAC05E66095148C0a9251718b",
+  ]
+}];
 ```
 
 ## `argsEqualityCheck`
@@ -114,9 +129,10 @@ Caveat enforcer contract: [`ArgsEqualityCheckEnforcer.sol`](https://github.com/M
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("argsEqualityCheck",
-  "0xf2bef872456302645b7c0bb59dcd96ffe6d4a844f311ebf95e7cf439c9393de2"
-);
+const caveats = [{
+  type: "argsEqualityCheck",
+  args: "0xf2bef872456302645b7c0bb59dcd96ffe6d4a844f311ebf95e7cf439c9393de2",
+}];
 ```
 
 ## `blockNumber`
@@ -135,10 +151,11 @@ Caveat enforcer contract: [`BlockNumberEnforcer.sol`](https://github.com/MetaMas
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("blocknumber",
-  19426587n,
-  0n
-);
+const caveats = [{
+  type: "blockNumber",
+  afterThreshold: 19426587n,
+  beforeThreshold: 0n,
+}];
 ```
 
 ## `deployed`
@@ -158,11 +175,12 @@ Caveat enforcer contract: [`DeployedEnforcer.sol`](https://github.com/MetaMask/d
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("deployed",
-  "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-  "0x0e3e8e2381fde0e8515ed47ec9caec8ba2bc12603bc2b36133fa3e3fa4d88587",
-  "0x..." // The deploy bytecode for the contract at 0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92
-);
+const caveats = [{
+  type: "deployed",
+  contractAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+  salt: "0x0e3e8e2381fde0e8515ed47ec9caec8ba2bc12603bc2b36133fa3e3fa4d88587",
+  bytecode: "0x..." // The deploy bytecode for the contract at 0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92
+}];
 ```
 
 ## `erc1155BalanceChange`
@@ -184,13 +202,14 @@ Caveat enforcer contract: [`ERC1155BalanceBalanceEnforcer.sol`](https://github.c
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("erc1155BalanceChange",
-  "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-  "0x3fF528De37cd95b67845C1c55303e7685c72F319",
-  1n,
-  1_000_000n,
-  BalanceChangeType.Increase,
-);
+const caveats = [{
+  type: "erc1155BalanceChange",
+  tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+  recipient: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
+  tokenId: 1n,
+  balance: 1000000n,
+  changeType: BalanceChangeType.Increase,
+}];
 ```
 
 ## `erc20BalanceChange`
@@ -211,12 +230,13 @@ Caveat enforcer contract: [`ERC20BalanceChangeEnforcer.sol`](https://github.com/
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("erc20BalanceChange",
-  "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-  "0x3fF528De37cd95b67845C1c55303e7685c72F319",
-  1_000_000n,
-  BalanceChangeType.Increase,
-);
+const caveats = [{
+  type: "erc20BalanceChange",
+  tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+  recipient: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
+  balance: 1000000n,
+  changeType: BalanceChangeType.Increase,
+}];
 ```
 
 ## `erc20PeriodTransfer`
@@ -240,12 +260,20 @@ Caveat enforcer contract: [`ERC20PeriodTransferEnforcer.sol`](https://github.com
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("erc20PeriodTransfer",
-  "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da", // Address of the ERC-20 token
-  1000000000000000000n, // 1 ERC-20 token - 18 decimals, in wei
-  86400, // 1 day in seconds
-  1743763600, // April 4th, 2025, at 00:00:00 UTC
-);
+// Current time as start date. 
+// Since startDate is in seconds, we need to convert milliseconds to seconds.
+const startDate = Math.floor(Date.now() / 1000);
+
+const caveats = [{
+  type: "erc20BalanceChange",
+  // Address of the ERC-20 token.
+  tokenAddress: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
+  // 1 ERC-20 token - 18 decimals, in wei.
+  periodAmount: 1000000000000000000n,
+  // 1 day in seconds.
+  periodDuration: 86400,
+  startDate,
+}];
 ```
 
 ## `erc20Streaming`
@@ -267,13 +295,22 @@ Caveat enforcer contract: [`ERC20StreamingEnforcer.sol`](https://github.com/Meta
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("erc20Streaming",
-  "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-  1_000_000n,
-  10_000_000n,
-  100n,
-  1703980800
-);
+// Current time as start date. 
+// Since startDate is in seconds, we need to convert milliseconds to seconds.
+const startDate = Math.floor(Date.now() / 1000);
+
+const caveats = [{
+  type: "erc20Streaming",
+  // Address of the ERC-20 token.
+  tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+  // 1 ERC-20 token - 18 decimals, in wei.
+  initialAmount: 1000000000000000000n,
+  // 10 ERC-20 token - 18 decimals, in wei.
+  maxAmount: 10000000000000000000n
+  // 0.00001 ERC-20 token - 18 decimals, in wei.
+  amountPerSecond: 10000000000000n,
+  startDate,
+}];
 ```
 
 ## `erc20TransferAmount`
@@ -292,10 +329,12 @@ Caveat enforcer contract: [`ERC20TransferAmountEnforcer.sol`](https://github.com
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("erc20TransferAmount",
-  "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-  1_000_000n
-);
+const caveats = [{
+  type: "erc20TransferAmount",
+  tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+  // 1 ERC-20 token - 18 decimals, in wei.
+  maxAmount: 1000000000000000000n
+}];
 ```
 
 ## `erc721BalanceChange`
@@ -313,23 +352,16 @@ Caveat enforcer contract: [`ERC721BalanceChangeEnforcer.sol`](https://github.com
 | `balance`      | `bigint`            | Yes      | The amount by which the balance must be changed. |
 | `changeType`   | `BalanceChangeType` | Yes      | The balance change type for the ERC-721 token. Specifies whether the balance should have increased or decreased. Valid parameters are `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`. |
 
-
-1. An ERC-721 contract address as a hex string
-2. The recipient's address as a hex string
-3. The amount by which the balance must have changed as a `bigint`
-4. The balance change type for the ERC-721 token. Specifies whether the
-   balance should have increased or decreased. Valid parameters are
-   `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`.
-
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("erc721BalanceChange",
-  "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-  "0x3fF528De37cd95b67845C1c55303e7685c72F319",
-  1_000_000n,
-  BalanceChangeType.Increase,
-);
+const caveats = [{
+  type: "erc721BalanceChange",
+  tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+  recipient: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
+  balance: 1000000n,
+  changeType: BalanceChangeType.Increase,
+}];
 ```
 
 ## `erc721Transfer`
@@ -348,10 +380,11 @@ Caveat enforcer contract: [`ERC721TransferEnforcer.sol`](https://github.com/Meta
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("erc721Transfer",
-  "0x3fF528De37cd95b67845C1c55303e7685c72F319",
-  1n
-);
+const caveats = [{
+  type: "erc721Transfer",
+  tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+  tokenId: 1n
+}];
 ```
 
 ## `exactCalldata`
@@ -370,9 +403,10 @@ Caveat enforcer contract: [`ExactCalldataEnforcer.sol`](https://github.com/MetaM
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("exactCalldata", 
-  "0x1234567890abcdef" // Calldata to be matched
-);
+const caveats = [{
+  type: "exactCalldata",
+  exactCalldata: "0x1234567890abcdef",
+}];
 ```
 
 ## `exactCalldataBatch`
@@ -404,9 +438,10 @@ const executions = [
   },
 ];
 
-caveatBuilder.addCaveat("exactCalldataBatch",
-  executions
-);
+const caveats = [{
+  type: "exactCalldataBatch",
+  executions,
+}];
 ```
 
 ## `exactExecution`
@@ -425,11 +460,12 @@ Caveat enforcer contract: [`ExactExecutionEnforcer.sol`](https://github.com/Meta
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("exactExecution", {
+const caveats = [{
+  type: "exactExecution",
   target: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
-  value: 1000000000000000000n, // 1 ETH
+  value: 1000000000000000000n,
   callData: "0x",
-})
+}];
 ```
 
 ## `exactExecutionBatch`
@@ -461,9 +497,10 @@ const executions = [
   },
 ];
 
-caveatBuilder.addCaveat("exactExecutionBatch",
-  executions
-);
+const caveats = [{
+  type: "exactExecutionBatch",
+  executions,
+}];
 ```
 
 ## `id`
@@ -481,9 +518,10 @@ Caveat enforcer contract: [`IdEnforcer.sol`](https://github.com/MetaMask/delegat
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("id",
-  123456
-);
+const caveats = [{
+  type: "id",
+  id: 123456,
+}];
 ```
 
 ## `limitedCalls`
@@ -501,9 +539,10 @@ Caveat enforcer contract: [`LimitedCallsEnforcer.sol`](https://github.com/MetaMa
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("limitedCalls",
-  1
-);
+const caveats = [{
+  type: "limitedCalls",
+  limit: 1,
+}];
 ```
 
 ## `multiTokenPeriod`
@@ -530,7 +569,7 @@ The list of `TokenPeriodConfig` objects, where each object contains:
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("multiTokenPeriod", [
+const tokenPeriodConfigs = [
   {
     token: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da", // First token contract
     periodAmount: 1000000000000000000n, // 1 token with 18 decimals
@@ -543,7 +582,12 @@ caveatBuilder.addCaveat("multiTokenPeriod", [
     periodDuration: 3600, // 1 hour in seconds
     startDate: 1743763600, // April 4th, 2025, at 00:00:00 UTC
   }
-]);
+]
+// TODO: Update
+const caveats = [{
+  type: "multiTokenPeriod",
+  tokenPeriodConfigs,
+}];
 ```
 
 ## `nativeBalanceChange`
@@ -563,11 +607,12 @@ Caveat enforcer contract: [`NativeBalanceChangeEnforcer.sol`](https://github.com
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("nativeBalanceChange",
-  "0x3fF528De37cd95b67845C1c55303e7685c72F319",
-  1_000_000n,
-  BalanceChangeType.Increase,
-);
+const caveats = [{
+  type: "nativeBalanceChange",
+  recipient: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
+  balance: 1000000n,
+  changeType: BalanceChangeType.Increase,
+}];
 ```
 
 ## `nativeTokenPayment`
@@ -588,10 +633,11 @@ Caveat enforcer contract: [`NativeTokenPaymentEnforcer.sol`](https://github.com/
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("nativeTokenPayment",
-  "0x3fF528De37cd95b67845C1c55303e7685c72F319",
-    1_000_000n
-);
+const caveats = [{
+  type: "nativeTokenPayment",
+  recipient: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
+  amount: 1000000n,
+}];
 ```
 
 ## `nativeTokenPeriodTransfer`
@@ -614,11 +660,18 @@ Caveat enforcer contract: [`NativeTokenPeriodTransferEnforcer.sol`](https://gith
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("nativeTokenPeriodTransfer",
-  1000000000000000000n, // 1 ETH in wei
-  86400, // 1 day in seconds
-  1743763600, // April 4th, 2025, at 00:00:00 UTC
-)
+// Current time as start date. 
+// Since startDate is in seconds, we need to convert milliseconds to seconds.
+const startDate = Math.floor(Date.now() / 1000);
+
+const caveats = [{
+  type: "nativeTokenPeriodTransfer",
+  // 1 ETH in wei.
+  periodAmount: 1000000000000000000n,
+  // 1 day in seconds.
+  periodDuration: 86400,
+  startDate,
+}];
 ```
 
 ## `nativeTokenStreaming`
@@ -639,12 +692,20 @@ Caveat enforcer contract: [`NativeTokenStreamingEnforcer.sol`](https://github.co
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("nativeTokenStreaming",
-  1_000_000n,
-  10_000_000n,
-  100n,
-  1703980800
-);
+// Current time as start date. 
+// Since startDate is in seconds, we need to convert milliseconds to seconds.
+const startDate = Math.floor(Date.now() / 1000);
+
+const caveats = [{
+  type: "nativeTokenStreaming",
+  // 0.01 ETH in wei.
+  initialAmount: 10000000000000000,
+  // 0.5 ETH in wei.
+  maxAmount: 500000000000000000n
+  // 0.00001 ETH in wei.
+  amountPerSecond: 10000000000000n,
+  startDate,
+}];
 ```
 
 ## `nativeTokenTransferAmount`
@@ -662,9 +723,11 @@ Caveat enforcer contract: [`NativeTokenTransferAmountEnforcer.sol`](https://gith
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("nativeTokenTransferAmount",
-  1_000_000n
-);
+const caveats = [{
+  type: "nativeTokenTransferAmount",
+  // 0.00001 ETH in wei.
+  maxAmount: 10000000000000000n
+}];
 ```
 
 ## `nonce`
@@ -683,9 +746,10 @@ Caveat enforcer contract: [`NonceEnforcer.sol`](https://github.com/MetaMask/dele
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("nonce",
-  "0x1"
-);
+const caveats = [{
+  type: "nonce",
+  nonce: "0x1"
+}];
 ```
 
 ## `ownershipTransfer`
@@ -703,9 +767,10 @@ Caveat enforcer contract: [`OwnershipTransferEnforcer.sol`](https://github.com/M
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("ownershipTransfer",
-  "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92"
-);
+const caveats = [{
+  type: "ownershipTransfer",
+  contractAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92"
+}];
 ```
 
 ## `redeemer`
@@ -733,12 +798,13 @@ Caveat enforcer contract: [`RedeemerEnforcer.sol`](https://github.com/MetaMask/d
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("redeemer",
-  [
+const caveats = [{
+  type: "redeemer",
+  redeemers: [
     "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
     "0x6be97c23596ECed7170fdFb28e8dA1Ca5cdc54C5"
-  ]
-);
+  ],
+}];
 ```
 
 ## `specificActionERC20TransferBatch`
@@ -763,13 +829,15 @@ Caveat enforcer contract: [`SpecificActionERC20TransferBatchEnforcer.sol`](https
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("specificActionERC20TransferBatch",
-  "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da" // Address of ERC-20 token contract
-  "0x027aeAFF3E5C33c4018FDD302c20a1B83aDCD96C", // Address that will receive the tokens
-  1000000000000000000n, // 1 ERC-20 token - 18 decimals, in wei
-  "0xb49830091403f1Aa990859832767B39c25a8006B", // Target address for first transaction
-  "0x1234567890abcdef" // Calldata to be matched for first transaction
-)
+const caveats = [{
+  type: "specificActionERC20TransferBatch",
+  tokenAddress: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
+  recipient: "0x027aeAFF3E5C33c4018FDD302c20a1B83aDCD96C",
+  // 1 ERC-20 token - 18 decimals, in wei
+  amount: 1000000000000000000n,
+  target: "0xb49830091403f1Aa990859832767B39c25a8006B",
+  calldata: "0x1234567890abcdef"
+}];
 ```
 
 ## `timestamp`
@@ -788,10 +856,18 @@ Caveat enforcer contract: [`TimestampEnforcer.sol`](https://github.com/MetaMask/
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("timestamp",
-   499165200,
-  1445412480
-);
+// We need to convert milliseconds to seconds.
+const currentTime = Math.floor(Date.now() / 1000);
+// 1 hour after current time.
+const afterThreshold = currentTime + 3600;
+// 1 day after afterThreshold
+const beforeThreshold = afterThreshold + 86400;
+
+const caveats = [{
+  type: "specificActionERC20TransferBatch",
+  afterThreshold,
+  beforeThreshold,
+}];
 ```
 
 ## `valueLte`
@@ -806,13 +882,12 @@ Caveat enforcer contract: [`ValueLteEnforcer.sol`](https://github.com/MetaMask/d
 | ----------------- | ----------- | -------- | -----------------------------------------------------------------------|
 | `maxValue`        | `bigint`    | Yes      | The maximum value that may be specified when redeeming this delegation.|
 
-
-1. A value as a `bigint`
-
 ### Example
 
 ```typescript
-caveatBuilder.addCaveat("valueLte",
-  1_000_000_000_000_000_000n // 1 ETH in wei
-);
+const caveats = [{
+  type: "valueLte",
+  // 0.01 ETH in wei.
+  maxValue: 10000000000000000n
+}];
 ```
