@@ -155,14 +155,14 @@ The Delegation Toolkit supports the following execution modes, based on [ERC-757
 
 | Execution mode | Number of delegation chains passed to `redeemDelegations` | Processing method | Does user operation continue execution if redemption reverts? |
 |--|--|--|--|
-| `SINGLE_DEFAULT_MODE` | One      | Sequential  | No  |
-| `SINGLE_TRY_MODE`     | One      | Sequential  | Yes |
-| `BATCH_DEFAULT_MODE`  | Multiple | Interleaved | No  |
-| `BATCH_TRY_MODE`      | Multiple | Interleaved | Yes |
+| `SingleDefault` | One      | Sequential  | No  |
+| `SingleTry`     | One      | Sequential  | Yes |
+| `BatchDefault`  | Multiple | Interleaved | No  |
+| `BatchTry`      | Multiple | Interleaved | Yes |
 
 ### Sequential processing
 
-In `SINGLE` modes, processing is sequential:
+In `Single` modes, processing is sequential:
 
 1. For each delegation in the chain, all caveats' `before` hooks are called.
 2. The single redeemed action is executed.
@@ -170,10 +170,10 @@ In `SINGLE` modes, processing is sequential:
 
 ### Interleaved processing
 
-In `BATCH` modes, processing is interleaved:
+In `Batch` modes, processing is interleaved:
 
 1. For each chain in the batch, and each delegation in the chain, all caveats' `before` hooks are called.
 2. Each redeemed action is executed.
 3. For each chain in the batch, and each delegation in the chain, all caveats' `after` hooks are called.
 
-`BATCH` mode allows for powerful use cases, but the Delegation Framework currently does not include any `BATCH` compatible caveat enforcers.
+`Batch` mode allows for powerful use cases, but the Delegation Framework currently does not include any `Batch` compatible caveat enforcers.

@@ -172,7 +172,7 @@ const signedDelegation = {
 Bob can now redeem the delegation. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on Alice's behalf.
 
 To prepare the calldata for the redeem transaction, use the [`redeemDelegations`](../../reference/api/delegation.md#redeemdelegations) method from `DelegationManager`.
-Since Bob is redeeming a single delegation chain, use the [`SINGLE_DEFAULT_MODE`](../../concepts/delegation/index.md#execution-modes) execution mode.
+Since Bob is redeeming a single delegation chain, use the [`SingleDefault`](../../concepts/delegation/index.md#execution-modes) execution mode.
 
 Bob can redeem the delegation by submitting a user operation if his account is a smart account, or a regular transaction if his account is an EOA:
 
@@ -180,9 +180,8 @@ Bob can redeem the delegation by submitting a user operation if his account is a
 <TabItem value="Redeem with a smart account">
 
 ```typescript
-import { createExecution } from "@metamask/delegation-toolkit"
+import { createExecution, ExecutionMode } from "@metamask/delegation-toolkit"
 import { DelegationManager } from "@metamask/delegation-toolkit/contracts"
-import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils"
 import { zeroAddress } from "viem"
 
 const delegations = [signedDelegation]
@@ -191,7 +190,7 @@ const executions = createExecution({ target: zeroAddress })
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
-  modes: [SINGLE_DEFAULT_MODE],
+  modes: [ExecutionMode.SingleDefault],
   executions: [executions],
 })
 
@@ -212,9 +211,8 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 <TabItem value="Redeem with an EOA">
 
 ```typescript
-import { createExecution, getDeleGatorEnvironment } from "@metamask/delegation-toolkit"
+import { createExecution, getDeleGatorEnvironment, ExecutionMode } from "@metamask/delegation-toolkit"
 import { DelegationManager } from "@metamask/delegation-toolkit/contracts"
-import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils"
 import { zeroAddress } from "viem"
 
 const delegations = [signedDelegation]
@@ -223,7 +221,7 @@ const executions = createExecution({ target: zeroAddress })
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
-  modes: [SINGLE_DEFAULT_MODE],
+  modes: [ExecutionMode.SingleDefault],
   executions: [executions]
 });
 

@@ -388,7 +388,7 @@ This method supports batch redemption, allowing multiple delegations to be proce
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
 | `delegations` | `Delegation[][]` | Yes | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed. |
-| `modes` | `ExecutionMode[]` | Yes | A collection specifying the [execution mode](../../concepts/delegation/index.md#execution-modes) for each corresponding delegation chain. Supported execution modes are `SINGLE_DEFAULT_MODE`, `SINGLE_TRY_MODE`, `BATCH_DEFAULT_MODE`, and `BATCH_TRY_MODE`. |
+| `modes` | `ExecutionMode[]` | Yes | A collection specifying the [execution mode](../../concepts/delegation/index.md#execution-modes) for each corresponding delegation chain. Supported execution modes are `SingleDefault`, `SingleTry`, `BatchDefault`, and `BatchTry`. |
 | `executions` | `ExecutionStruct[][]` | Yes | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain. |
 
 ### Example
@@ -396,14 +396,13 @@ This method supports batch redemption, allowing multiple delegations to be proce
 This example assumes you have a delegation signed by the delegator.
 
 ```ts
-import { createExecution } from "@metamask/delegation-toolkit";
+import { createExecution, ExecutionMode } from "@metamask/delegation-toolkit";
 import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
-import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils";
 import { zeroAddress } from "viem";
 
 const data = DelegationManager.encode.redeemDelegations({
   delegations: [[ signedDelegation ]],
-  modes: [ SINGLE_DEFAULT_MODE ],
+  modes: [ ExecutionMode.SingleDefault ],
   executions: [[ execution ]],
 });
 ```
