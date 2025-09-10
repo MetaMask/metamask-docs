@@ -746,7 +746,7 @@ const sidebar = {
       label: 'Usage',
       items: [
         'sdk/android/usage/README',
-        'sdk/android/usage/login',
+        'sdk/android/usage/connect-to',
         'sdk/android/usage/get-user-info',
         'sdk/android/usage/get-private-key',
         'sdk/android/usage/get-ed25519-private-key',

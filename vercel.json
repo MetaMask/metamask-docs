@@ -873,6 +873,31 @@
       "permanent": true
     },
     {
+      "source": "/embedded-wallets/sdk/android/usage/login/",
+      "destination": "/embedded-wallets/sdk/android/usage/connect-to/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/usage/connectTo/",
+      "destination": "/embedded-wallets/sdk/android/usage/connect-to/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/usage/getPrivateKey/",
+      "destination": "/embedded-wallets/sdk/android/usage/get-private-key/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/usage/getEd25519PrivateKey/",
+      "destination": "/embedded-wallets/sdk/android/usage/get-ed25519-private-key/",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/android/usage/showWalletUI/",
+      "destination": "/embedded-wallets/sdk/android/usage/launch-wallet-services/",
+      "permanent": true
+    },
+    {
       "source": "/embedded-wallets/sdk/flutter/usage/enableMFA/",
       "destination": "/embedded-wallets/sdk/flutter/usage/enable-mfa/",
       "permanent": true
