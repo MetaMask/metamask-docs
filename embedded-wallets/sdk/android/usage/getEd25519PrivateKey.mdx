@@ -1,0 +1,19 @@
+---
+title: Ed25519 Private Key
+sidebar_label: getEd25519PrivateKey
+description: 'Web3Auth Android SDK - getEd25519PrivateKey Function | Embedded Wallets'
+---
+
+To retrieve the Ed25519 private key of the user, use `getEd25519PrivateKey` method. This private key can be used to sign transactions on Solana, Near, Algorand, and other chains that use the ed25519 curve.
+
+## Usage
+
+```kotlin
+val privateKey = web3Auth.getEd25519PrivateKey()
+```
+
+:::note
+
+Web3Auth supports two widely used cryptographic curves, Secp256k1 and Ed25519, making it chain-agnostic and compatible with multiple blockchain networks. [Learn more about how to connect different blockchains](/embedded-wallets/connect-blockchain).
+
+:::

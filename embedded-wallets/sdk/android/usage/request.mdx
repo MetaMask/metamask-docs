@@ -14,9 +14,15 @@ Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/refe
 
 | Parameter       | Description                                                                                                                                                                                             |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chainConifg`   | Defines the chain to be used for signature request.                                                                                                                                                     |
-| `method`        | JSON RPC method name in `String`. Currently, the request method only supports the singing methods.                                                                                                      |
+| `method`        | JSON RPC method name in `String`. Currently, the request method only supports the signing methods.                                                                                                      |
 | `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/) to know more. |
+| `appState?`     | It can be used to keep track of the app state. Default is `null`, and accepts `String` as a value.                                                                                                      |
+
+:::warning
+
+The chain configuration is now automatically retrieved from your project settings in the Web3Auth Dashboard. The request will use the appropriate chain based on your project configuration.
+
+:::
 
 ## Usage
 
@@ -28,16 +34,8 @@ val params = JsonArray().apply {
     add(address)
 }
 
-val chainConfig = ChainConfig(
-    chainId = "0x1",
-    rpcTarget = "https://rpc.ethereum.org",
-    ticker = "ETH",
-    chainNamespace = ChainNamespace.EIP155
-)
-
 // focus-start
 val signMsgCompletableFuture = web3Auth.request(
-    chainConfig = chainConfig,
     "personal_sign",
     requestParams = params
 )

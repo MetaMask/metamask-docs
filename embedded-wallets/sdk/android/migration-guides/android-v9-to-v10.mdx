@@ -1,0 +1,414 @@
+---
+title: Migrating from v9.x to v10.x
+sidebar_label: v9.x to v10.x
+description: 'Web3Auth Android SDK - Migrating from v9.x to v10.x | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+This migration guide provides a step-by-step walkthrough for upgrading your Web3Auth Android SDK implementation from v9.x to v10.x. This is a major release with significant API changes, new features, and improvements.
+
+## Overview of Changes
+
+Web3Auth Android SDK v10.x introduces several major changes:
+
+- **Combined PnP and SFA SDK**: Unified authentication flow supporting both Plug and Play (PnP) and Single Factor Auth (SFA) in one SDK
+- **Updated Authentication API**: `login()` method replaced with `connectTo()` for better clarity and SFA support
+- **Simplified Wallet Services**: Automatic chain configuration from dashboard settings
+- **Enhanced Type Safety**: Updated enums and parameter structures
+- **Analytics Integration**: Built-in analytics for better insights
+- **Performance Improvements**: Optimized parameter handling and reduced configuration complexity
+
+## Breaking Changes
+
+### 1. Update Dependencies
+
+First, update your dependency to the latest version:
+
+```groovy
+dependencies {
+    // Old
+    implementation 'com.github.web3auth:web3auth-android-sdk:9.1.2'
+
+    // New
+    implementation 'com.github.web3auth:web3auth-android-sdk:10.0.0'
+}
+```
+
+### 2. Import Changes
+
+Add the new required import for Web3AuthNetwork:
+
+<Tabs
+  defaultValue="old"
+  values={[
+    { label: "Before (v9.x)", value: "old" },
+    { label: "After (v10.x)", value: "new" },
+  ]}
+>
+
+<TabItem value="old">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import com.web3auth.core.types.Network
+import com.web3auth.core.types.Provider
+import com.web3auth.core.types.LoginConfigItem
+import com.web3auth.core.types.TypeOfLogin
+```
+
+</TabItem>
+
+<TabItem value="new">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import com.web3auth.core.types.AuthConnection
+import com.web3auth.core.types.AuthConnectionConfig
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+```
+
+</TabItem>
+</Tabs>
+
+### 3. Enum Changes
+
+Several enums have been renamed for better clarity:
+
+| v9.x              | v10.x                   |
+| ----------------- | ----------------------- |
+| `Provider`        | `AuthConnection`        |
+| `TypeOfLogin`     | `AuthConnection`        |
+| `Network`         | `Web3AuthNetwork`       |
+| `LoginConfigItem` | `AuthConnectionConfig`  |
+| `Provider.JWT`    | `AuthConnection.CUSTOM` |
+
+### 4. Web3AuthOptions Configuration
+
+The configuration object has been updated with new parameter names:
+
+<Tabs
+  defaultValue="old"
+  values={[
+    { label: "Before (v9.x)", value: "old" },
+    { label: "After (v10.x)", value: "new" },
+  ]}
+>
+
+<TabItem value="old">
+
+```kotlin
+val web3Auth = Web3Auth(
+    Web3AuthOptions(
+        context = this,
+        clientId = "YOUR_CLIENT_ID",
+        network = Network.SAPPHIRE_MAINNET,
+        redirectUrl = Uri.parse("your-app://auth"),
+        loginConfig = hashMapOf("google" to LoginConfigItem(
+            verifier = "verifier-name",
+            typeOfLogin = TypeOfLogin.GOOGLE,
+            clientId = "google-client-id"
+        )),
+        buildEnv = BuildEnv.PRODUCTION
+    )
+)
+```
+
+</TabItem>
+
+<TabItem value="new">
+
+```kotlin
+val web3Auth = Web3Auth(
+    Web3AuthOptions(
+        context = this,
+        clientId = "YOUR_CLIENT_ID",
+        web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+        redirectUrl = "your-app://auth", // Now a String instead of Uri
+        authConnectionConfig = listOf(AuthConnectionConfig(
+            authConnectionId = "verifier-name",
+            authConnection = AuthConnection.GOOGLE,
+            clientId = "google-client-id"
+        )),
+        authBuildEnv = BuildEnv.PRODUCTION // Renamed from buildEnv
+    )
+)
+```
+
+</TabItem>
+</Tabs>
+
+### 5. Authentication Method Changes
+
+The main authentication method has been renamed and enhanced:
+
+<Tabs
+  defaultValue="old"
+  values={[
+    { label: "Before (v9.x)", value: "old" },
+    { label: "After (v10.x)", value: "new" },
+  ]}
+>
+
+<TabItem value="old">
+
+```kotlin
+// Simple social login
+val loginCompletableFuture = web3Auth.login(
+    LoginParams(Provider.GOOGLE)
+)
+
+// Email passwordless
+val loginCompletableFuture = web3Auth.login(
+    LoginParams(
+        Provider.EMAIL_PASSWORDLESS,
+        extraLoginOptions = ExtraLoginOptions(login_hint = "user@example.com")
+    )
+)
+
+// JWT login
+val loginCompletableFuture = web3Auth.login(
+    LoginParams(
+        Provider.JWT,
+        extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+    )
+)
+```
+
+</TabItem>
+
+<TabItem value="new">
+
+```kotlin
+// Simple social login (PnP mode)
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(AuthConnection.GOOGLE)
+)
+
+// Email passwordless (PnP mode)
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.EMAIL_PASSWORDLESS,
+        loginHint = "user@example.com" // Simplified parameter
+    )
+)
+
+// JWT login (SFA mode)
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.CUSTOM,
+        authConnectionId = "your_auth_connection_id",
+        idToken = "your_jwt_token" // Dedicated parameter for SFA
+    )
+)
+```
+
+</TabItem>
+</Tabs>
+
+### 6. Private Key Method Names
+
+The private key retrieval methods have been renamed for clarity:
+
+<Tabs
+  defaultValue="old"
+  values={[
+    { label: "Before (v9.x)", value: "old" },
+    { label: "After (v10.x)", value: "new" },
+  ]}
+>
+
+<TabItem value="old">
+
+```kotlin
+val privateKey = web3Auth.getPrivKey()
+val ed25519Key = web3Auth.getEd25519PrivKey()
+```
+
+</TabItem>
+
+<TabItem value="new">
+
+```kotlin
+val privateKey = web3Auth.getPrivateKey()
+val ed25519Key = web3Auth.getEd25519PrivateKey()
+```
+
+</TabItem>
+</Tabs>
+
+### 7. Wallet Services Simplification
+
+Wallet services methods have been simplified with automatic chain configuration:
+
+<Tabs
+  defaultValue="old"
+  values={[
+    { label: "Before (v9.x)", value: "old" },
+    { label: "After (v10.x)", value: "new" },
+  ]}
+>
+
+<TabItem value="old">
+
+```kotlin
+// Launch wallet services
+val chainConfig = ChainConfig(
+    chainId = "0x1",
+    rpcTarget = "https://rpc.ethereum.org",
+    ticker = "ETH",
+    chainNamespace = ChainNamespace.EIP155
+)
+
+val launchWalletCF = web3Auth.launchWalletServices(chainConfig)
+
+// Request signing
+val signCF = web3Auth.request(
+    chainConfig = chainConfig,
+    method = "personal_sign",
+    requestParams = params
+)
+```
+
+</TabItem>
+
+<TabItem value="new">
+
+```kotlin
+// Launch wallet services (automatic chain config from dashboard)
+val launchWalletCF = web3Auth.showWalletUI()
+
+// Request signing (automatic chain config from dashboard)
+val signCF = web3Auth.request(
+    method = "personal_sign",
+    requestParams = params
+)
+```
+
+</TabItem>
+</Tabs>
+
+## New Features
+
+### 1. Single Factor Auth (SFA) Support
+
+v10.x introduces built-in SFA support. You can now use SFA by providing an `idToken`:
+
+```kotlin
+// SFA login with custom JWT
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.CUSTOM,
+        authConnectionId = "your_verifier_id",
+        idToken = "your_jwt_token"
+    )
+)
+
+// SFA with aggregate verifier
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.CUSTOM,
+        authConnectionId = "aggregate_verifier_id",
+        groupedAuthConnectionId = "sub_verifier_id",
+        idToken = "your_jwt_token"
+    )
+)
+```
+
+### 2. Enhanced Parameter Handling
+
+v10.x provides better parameter organization:
+
+```kotlin
+val loginCompletableFuture = web3Auth.connectTo(
+    LoginParams(
+        authConnection = AuthConnection.EMAIL_PASSWORDLESS,
+        loginHint = "user@example.com", // Direct parameter
+        dappUrl = "https://your-dapp.com", // For analytics
+        appState = "custom_state" // App state tracking
+    )
+)
+```
+
+### 3. Automatic Chain Configuration
+
+Chain configuration is now managed automatically from your Web3Auth Dashboard:
+
+1. Configure chains in your [Web3Auth Dashboard](https://dashboard.web3auth.io)
+2. The SDK automatically uses these configurations
+3. No need to manually pass `ChainConfig` to wallet services
+
+## Migration Steps
+
+### Step 1: Update Dependencies
+
+```groovy
+// In your app-level build.gradle
+dependencies {
+    implementation 'com.github.web3auth:web3auth-android-sdk:10.0.0'
+}
+```
+
+### Step 2: Update Imports
+
+Replace old imports with new ones as shown in the [Import Changes](#2-import-changes) section.
+
+### Step 3: Update Initialization
+
+1. Replace `network` with `web3AuthNetwork`
+2. Replace `redirectUrl` Uri with String
+3. Update `loginConfig` to `authConnectionConfig`
+4. Replace `buildEnv` with `authBuildEnv`
+
+### Step 4: Update Authentication Calls
+
+1. Replace `login()` with `connectTo()`
+2. Replace `Provider` with `AuthConnection`
+3. Update parameter names in `LoginParams`
+
+### Step 5: Update Private Key Calls
+
+1. Replace `getPrivKey()` with `getPrivateKey()`
+2. Replace `getEd25519PrivKey()` with `getEd25519PrivateKey()`
+
+### Step 6: Update Wallet Services
+
+1. Replace `launchWalletServices()` with `showWalletUI()`
+2. Remove `ChainConfig` parameters from both `showWalletUI()` and `request()`
+
+### Step 7: Configure Dashboard
+
+Ensure your Web3Auth Dashboard has the necessary chain configurations since they're now automatically managed.
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Chain Configuration Missing**: Ensure your Web3Auth Dashboard has the required chains configured
+2. **Import Errors**: Make sure to import `Web3AuthNetwork` from the correct package
+3. **Parameter Mismatch**: Double-check that you're using the new parameter names
+
+### Migration Checklist
+
+- [ ] Dependencies updated to v10.x
+- [ ] Imports updated with new package references
+- [ ] `Web3AuthOptions` configuration updated
+- [ ] `login()` calls replaced with `connectTo()`
+- [ ] Private key method names updated
+- [ ] Wallet services methods updated
+- [ ] Dashboard chain configuration verified
+- [ ] Testing completed for all authentication flows
+
+## Support
+
+If you encounter any issues during migration, please:
+
+1. Check this migration guide thoroughly
+2. Review the [updated documentation](/embedded-wallets/sdk/android)
+3. Visit our [Support Forum](https://web3auth.io/community/c/help-pnp/pnp-sdk/android/16)
+4. Check the [GitHub repository](https://github.com/Web3Auth/web3auth-android-sdk) for known issues
+
+The v10.x release provides a more robust, feature-rich, and developer-friendly experience while maintaining the core Web3Auth functionality you rely on.
