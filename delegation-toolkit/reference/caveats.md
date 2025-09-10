@@ -265,7 +265,7 @@ Caveat enforcer contract: [`ERC20PeriodTransferEnforcer.sol`](https://github.com
 const startDate = Math.floor(Date.now() / 1000);
 
 const caveats = [{
-  type: "erc20BalanceChange",
+  type: "erc20PeriodTransfer",
   // Address of the ERC-20 token.
   tokenAddress: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
   // 1 ERC-20 token - 18 decimals, in wei.
@@ -864,7 +864,7 @@ const afterThreshold = currentTime + 3600;
 const beforeThreshold = afterThreshold + 86400;
 
 const caveats = [{
-  type: "specificActionERC20TransferBatch",
+  type: "timestamp",
   afterThreshold,
   beforeThreshold,
 }];

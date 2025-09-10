@@ -102,7 +102,7 @@ a 1,000,000 wei allowance that becomes spendable one hour after it is created:
 
 ```typescript
 import { createDelegation, ROOT_AUTHORITY } from '@metamask/delegation-toolkit'
-import { createCaveatBuilder, } from "@metamask/delegation-toolkit/utils";
+import { createCaveatBuilder } from '@metamask/delegation-toolkit/utils'
 import { toHex } from 'viem'
 import { delegatorSmartAccount } from './config.ts'
 

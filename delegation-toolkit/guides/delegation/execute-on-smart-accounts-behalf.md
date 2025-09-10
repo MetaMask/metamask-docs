@@ -211,7 +211,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 <TabItem value="Redeem with an EOA">
 
 ```typescript
-import { createExecution, getDeleGatorEnvironmen, ExecutionMode } from "@metamask/delegation-toolkit"
+import { createExecution, getDeleGatorEnvironment, ExecutionMode } from "@metamask/delegation-toolkit"
 import { DelegationManager } from "@metamask/delegation-toolkit/contracts"
 import { zeroAddress } from "viem"
 
