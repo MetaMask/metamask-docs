@@ -569,18 +569,29 @@ The list of `TokenPeriodConfig` objects, where each object contains:
 ### Example
 
 ```typescript
+import { zeroAddress } from 'viem';
+
+// Current time as start date. 
+// Since startDate is in seconds, we need to convert milliseconds to seconds.
+const startDate = Math.floor(Date.now() / 1000);
+
 const tokenPeriodConfigs = [
   {
-    token: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da", // First token contract
-    periodAmount: 1000000000000000000n, // 1 token with 18 decimals
-    periodDuration: 86400, // 1 day in seconds
-    startDate: 1743763600, // April 4th, 2025, at 00:00:00 UTC
+    token: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
+    // 1 token with 18 decimals.
+    periodAmount: 1000000000000000000n,
+     // 1 day in seconds.
+    periodDuration: 86400,
+    startDate
   },
   {
-    token: "0x6be97c23596ECed7170fdFb28e8dA1Ca5cdc54C5", // Second token contract
-    periodAmount: 500000000n, // 0.5 tokens with 9 decimals
-    periodDuration: 3600, // 1 hour in seconds
-    startDate: 1743763600, // April 4th, 2025, at 00:00:00 UTC
+    // For native token use zeroAddress
+    token: zeroAddress,
+    // 0.01 ETH in wei.
+    periodAmount: 10000000000000000n,
+    // 1 hour in seconds.
+    periodDuration: 3600,
+    startDate
   }
 ]
 // TODO: Update
