@@ -24,7 +24,7 @@ can determine how much of the allowance is still available for transfer.
 - [Create a delegate account.](execute-on-smart-accounts-behalf.mdexecute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
 - [Create a delegation with ERC-20 periodic scope.](./use-delegation-scopes/spending-limit.md#erc-20-periodic-scope)
 
-## Create a CaveatEnfocerClient
+## Create a CaveatEnforcerClient
 
 To check the delegation states, create a `CaveatEnforcerClient`. This client allows you to interact with the caveat enforcers contract used while creating a delegation and read the required state.
 
