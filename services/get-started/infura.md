@@ -168,7 +168,7 @@ The decimal conversion of the result is `11392978000069000000000069` wei, which 
 
 ## 4. Secure your API key
 
-[Configure security settings](/developer-tools/dashboard/how-to/secure-an-api/api-key) in the **Settings** tab.
+[Configure security settings](/developer-tools/dashboard/how-to/secure-an-api/api-key) by selecting **Configure**.
 This is optional.
 
 For example, you can force API requests to include the API key secret and/or
@@ -221,4 +221,3 @@ You can do the following:
 - [Set notifications for daily limits](../how-to/avoid-rate-limiting.md#tips-to-avoid-rate-limiting)
   from the **Account** option.
 - Manage your billing information in the **Billing** option.
-- Manage [shared API keys](../../../developer-tools/dashboard/how-to/project-sharing) in the **Key Sharing** option.
