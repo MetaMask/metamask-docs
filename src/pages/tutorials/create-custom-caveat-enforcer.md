@@ -92,7 +92,7 @@ The Forge CLI will display the address of the deployed caveat enforcer.
 ### 3. Apply the caveat enforcer
 
 Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the caveat builder, and create a delegation.
-Learn more about [applying caveats to a delegation](/delegation-toolkit/development/guides/delegation/restrict-delegation).
+Learn more about [applying caveats to a delegation](/delegation-toolkit/development/guides/delegation/use-delegation-scopes/constrain-scope).
 
 The following code snippet uses the custom caveat enforcer to create a delegation granting
 a 1,000,000 wei allowance that becomes spendable one hour after it is created:

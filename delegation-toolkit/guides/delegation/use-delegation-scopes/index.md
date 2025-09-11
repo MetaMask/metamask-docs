@@ -5,7 +5,7 @@ description: Learn how to use the delegation scopes.
 # Use delegation scopes
 
 When [creating a delegation](../execute-on-smart-accounts-behalf.md), you can configure a scope to define the delegation's initial authority and help prevent delegation misuse.
-You can further refine this initial authority by [adding caveats to a delegation](refine-scope.md).
+You can further constrain this initial authority by [adding caveats to a delegation](refine-scope.md).
 
 The Delegation Toolkit currently supports three categories of scopes:
 

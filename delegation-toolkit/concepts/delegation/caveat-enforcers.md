@@ -118,7 +118,7 @@ This "all-or-nothing" approach ensures that delegations only execute exactly as 
 
 ## Caveat builder
 
-While caveat enforcers operate at the smart contract level, most developers interact with them through the [`CaveatBuilder`](../../guides/delegation/restrict-delegation.md) interface in the MetaMask Delegation Toolkit.
+While caveat enforcers operate at the smart contract level, most developers interact with them through the `CaveatBuilder` interface in the MetaMask Delegation Toolkit.
 
 The `CaveatBuilder` provides a developer-friendly TypeScript API that:
 
