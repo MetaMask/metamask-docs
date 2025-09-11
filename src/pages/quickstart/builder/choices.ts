@@ -23,7 +23,7 @@ export const FLUTTER = 'FLUTTER'
 
 export const LANGS_EMBEDDED_WALLETS: DisplayChoice[] = [
   { key: REACT, displayName: 'React' },
-  { key: NEXTJS, displayName: 'Next JS' },
+  { key: NEXTJS, displayName: 'Next.js' },
   { key: VUE, displayName: 'Vue' },
   { key: ANGULAR, displayName: 'Angular' },
   { key: ANDROID, displayName: 'Android' },
