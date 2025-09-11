@@ -1,0 +1,483 @@
+---
+title: Embedded Wallets SDK for Node.js
+sidebar_label: Getting Started
+description: 'MetaMask Embedded Wallets SDK for Node.js | Backend Documentation'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
+
+## Overview
+
+The MetaMask Embedded Wallets Node.js SDK (formerly Web3Auth Node SDK) is a backend solution designed for server-side authentication and key management. This SDK enables seamless integration of Web3 authentication into backend applications, AI agents, and programmatic use cases.
+
+Unlike frontend SDKs, the Node.js SDK is **stateless and sessionless**, making it ideal for:
+
+- Backend AI agents
+- Server-side wallet operations
+- Programmatic blockchain interactions
+- Custodial wallet services
+
+## Key Features
+
+- **Stateless Architecture**: No session management required
+- **Multi-Chain Support**: EVM chains, Solana, and other blockchains
+- **Custom Authentication**: Mandatory custom auth with single key share
+- **Private Key Access**: Direct access to private keys for any blockchain
+- **Backend-Optimized**: Designed specifically for server environments
+
+## Requirements
+
+- Node.js 18+
+- Custom authentication setup (mandatory)
+- Web3Auth Dashboard project configuration
+
+## Installation
+
+Install the Web3Auth Node SDK and required providers:
+
+```bash npm2yarn
+npm install --save @web3auth/node-sdk
+```
+
+### Additional Dependencies
+
+For blockchain providers:
+
+```bash npm2yarn
+# For EVM chains (Ethereum, Polygon, etc.)
+npm install --save @web3auth/ethereum-provider
+
+# For Solana blockchain
+npm install --save @web3auth/solana-provider
+
+# Base package for types
+npm install --save @web3auth/base
+```
+
+## Setup
+
+:::info Prerequisites
+
+Before you start, make sure you have:
+
+1. Registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/)
+2. Set up a project with **custom authentication** (mandatory for Node.js SDK)
+3. Configured your custom verifier settings
+
+You can refer to the [Dashboard Setup](/embedded-wallets/dashboard/) guide to learn more.
+
+:::
+
+### 1. Custom Verifier Setup (Required)
+
+The Node.js SDK **only supports custom authentication**. You must create a custom verifier in the Web3Auth Dashboard:
+
+1. Go to [Web3Auth Dashboard](https://dashboard.web3auth.io/)
+2. Select your project
+3. Navigate to **Auth Connectors** → **Custom Authentication**
+4. Click **Create Verifier**
+5. Configure your verifier with these settings:
+
+```json
+{
+  "name": "my-backend-verifier",
+  "description": "Custom verifier for Node.js backend",
+  "verifierType": "custom",
+  "clientId": "your-auth-client-id",
+  "issuer": "https://your-auth-domain.com",
+  "jwks_endpoint": "https://your-auth-domain.com/.well-known/jwks.json"
+}
+```
+
+### 2. JWT Token Requirements
+
+Your authentication system must generate JWT tokens with these required claims:
+
+```json
+{
+  "iss": "https://your-auth-domain.com", // Issuer (must match verifier)
+  "aud": "your-web3auth-client-id", // Audience
+  "sub": "user-unique-identifier", // Subject (user ID)
+  "iat": 1640995200, // Issued at
+  "exp": 1641081600, // Expiration
+  "email": "user@example.com", // User email (optional)
+  "name": "John Doe" // User name (optional)
+}
+```
+
+### 3. Provider Configuration
+
+Configure the blockchain provider for your target network:
+
+```javascript
+const { Web3Auth } = require('@web3auth/node-sdk')
+const { EthereumPrivateKeyProvider } = require('@web3auth/ethereum-provider')
+
+// Configure Ethereum provider
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: {
+    chainConfig: {
+      chainNamespace: 'eip155',
+      chainId: '0x1', // Ethereum Mainnet
+      rpcTarget: 'https://rpc.ankr.com/eth',
+      displayName: 'Ethereum Mainnet',
+      blockExplorerUrl: 'https://etherscan.io/',
+      ticker: 'ETH',
+      tickerName: 'Ethereum',
+    },
+  },
+})
+```
+
+### 4. SDK Configuration
+
+Create a Web3Auth instance with your client ID, network configuration, and provider:
+
+```javascript
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID', // Get your Client ID from Web3Auth Dashboard
+  web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
+  privateKeyProvider,
+})
+```
+
+### 5. Initialize Web3Auth
+
+Initialize the Web3Auth instance during your application startup:
+
+```javascript
+await web3auth.init()
+```
+
+### 6. Authenticate Users
+
+Use the connect method with your custom authentication parameters:
+
+```javascript
+const provider = await web3auth.connect({
+  verifier: 'YOUR_VERIFIER_NAME', // Your custom verifier name
+  verifierId: 'USER_VERIFIER_ID', // User's unique identifier
+  idToken: 'USER_ID_TOKEN', // JWT token from your auth system
+})
+```
+
+## Configuration Options
+
+<Tabs
+  defaultValue="basic-config"
+  values={[
+    { label: "Basic Configuration", value: "basic-config" },
+    { label: "Production Configuration", value: "production-config" },
+    { label: "Environment-Specific", value: "env-config" },
+  ]}
+>
+
+<TabItem value="basic-config">
+
+```javascript
+const { Web3Auth } = require('@web3auth/node-sdk')
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
+})
+
+await web3auth.init()
+```
+
+</TabItem>
+
+<TabItem value="production-config">
+
+```javascript
+const { Web3Auth } = require('@web3auth/node-sdk')
+const { EthereumPrivateKeyProvider } = require('@web3auth/ethereum-provider')
+
+// Configure provider
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: {
+    chainConfig: {
+      chainNamespace: 'eip155',
+      chainId: process.env.CHAIN_ID || '0x1',
+      rpcTarget: process.env.RPC_URL || 'https://rpc.ankr.com/eth',
+      displayName: 'Ethereum',
+      blockExplorerUrl: 'https://etherscan.io/',
+      ticker: 'ETH',
+      tickerName: 'Ethereum',
+    },
+  },
+})
+
+// Production configuration
+const web3auth = new Web3Auth({
+  clientId: process.env.WEB3AUTH_CLIENT_ID,
+  web3AuthNetwork: process.env.NODE_ENV === 'production' ? 'sapphire_mainnet' : 'sapphire_devnet',
+  privateKeyProvider,
+})
+
+await web3auth.init()
+```
+
+</TabItem>
+
+<TabItem value="env-config">
+
+```javascript
+// Provider configuration
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: {
+    chainConfig: {
+      chainNamespace: 'eip155',
+      chainId: '0x1',
+      rpcTarget: 'https://rpc.ankr.com/eth',
+      displayName: 'Ethereum',
+      blockExplorerUrl: 'https://etherscan.io/',
+      ticker: 'ETH',
+      tickerName: 'Ethereum',
+    },
+  },
+})
+
+// Development
+const devConfig = {
+  clientId: 'dev-client-id',
+  web3AuthNetwork: 'sapphire_devnet',
+  privateKeyProvider,
+}
+
+// Production
+const prodConfig = {
+  clientId: process.env.WEB3AUTH_CLIENT_ID,
+  web3AuthNetwork: 'sapphire_mainnet',
+  privateKeyProvider,
+}
+
+// Testing
+const testConfig = {
+  clientId: 'test-client-id',
+  web3AuthNetwork: 'sapphire_devnet',
+  privateKeyProvider,
+}
+
+const web3auth = new Web3Auth(process.env.NODE_ENV === 'production' ? prodConfig : devConfig)
+```
+
+</TabItem>
+
+</Tabs>
+
+## Configuration Parameters
+
+### Web3Auth Configuration
+
+| Parameter            | Type     | Default  | Description                                         |
+| -------------------- | -------- | -------- | --------------------------------------------------- |
+| `clientId`           | `string` | Required | Your Web3Auth client ID                             |
+| `web3AuthNetwork`    | `string` | Required | Network: 'sapphire_mainnet' or 'sapphire_devnet'    |
+| `privateKeyProvider` | `object` | Required | Blockchain provider configuration (Ethereum/Solana) |
+
+### Provider Configuration Parameters
+
+| Parameter          | Type     | Description                                             |
+| ------------------ | -------- | ------------------------------------------------------- |
+| `chainNamespace`   | `string` | Blockchain namespace ('eip155' for EVM, 'solana')       |
+| `chainId`          | `string` | Chain ID (e.g., '0x1' for Ethereum, '0x89' for Polygon) |
+| `rpcTarget`        | `string` | RPC endpoint URL for blockchain communication           |
+| `displayName`      | `string` | Human-readable chain name                               |
+| `blockExplorerUrl` | `string` | Block explorer URL for the chain                        |
+| `ticker`           | `string` | Native token symbol (e.g., 'ETH', 'SOL')                |
+| `tickerName`       | `string` | Full name of the native token                           |
+
+## Best Practices
+
+### Environment Variables
+
+Store sensitive configuration in environment variables:
+
+```bash
+# .env file
+WEB3AUTH_CLIENT_ID=your_client_id_here
+WEB3AUTH_NETWORK=sapphire_mainnet
+SESSION_TIMEOUT=3600
+ENABLE_LOGGING=false
+```
+
+### Configuration Validation
+
+```javascript
+function validateConfig(config) {
+  if (!config.clientId) {
+    throw new Error('Client ID is required')
+  }
+
+  if (!['sapphire_mainnet', 'sapphire_devnet'].includes(config.web3AuthNetwork)) {
+    throw new Error('Invalid Web3Auth network')
+  }
+
+  if (config.sessionTime < 300) {
+    throw new Error('Session time must be at least 5 minutes')
+  }
+
+  return config
+}
+
+const config = validateConfig({
+  clientId: process.env.WEB3AUTH_CLIENT_ID,
+  web3AuthNetwork: process.env.WEB3AUTH_NETWORK,
+  sessionTime: parseInt(process.env.SESSION_TIMEOUT),
+})
+```
+
+### Dynamic Configuration Manager
+
+```javascript
+class Web3AuthConfigManager {
+  constructor() {
+    this.config = this.loadConfig()
+  }
+
+  loadConfig() {
+    const baseConfig = {
+      clientId: process.env.WEB3AUTH_CLIENT_ID,
+      web3AuthNetwork: process.env.WEB3AUTH_NETWORK || 'sapphire_devnet',
+      usePnPKey: false,
+    }
+
+    // Environment-specific overrides
+    switch (process.env.NODE_ENV) {
+      case 'production':
+        return {
+          ...baseConfig,
+          enableLogging: false,
+          sessionTime: 86400,
+        }
+      case 'staging':
+        return {
+          ...baseConfig,
+          enableLogging: true,
+          sessionTime: 3600,
+        }
+      default:
+        return {
+          ...baseConfig,
+          enableLogging: true,
+          sessionTime: 1800,
+        }
+    }
+  }
+
+  getConfig() {
+    return this.config
+  }
+
+  updateConfig(updates) {
+    this.config = { ...this.config, ...updates }
+  }
+}
+
+// Usage
+const configManager = new Web3AuthConfigManager()
+const web3auth = new Web3Auth(configManager.getConfig())
+```
+
+## Blockchain Integration
+
+Web3Auth Node SDK supports multiple blockchain networks through different integration methods:
+
+### EVM Chains (Ethereum, Polygon, BSC, etc.)
+
+Use the provider with ethers.js or convert to viem:
+
+```javascript
+// With ethers.js
+const { ethers } = require('ethers')
+const ethProvider = new ethers.providers.Web3Provider(provider)
+const signer = ethProvider.getSigner()
+
+// Get private key directly
+const privateKey = await provider.request({ method: 'eth_private_key' })
+```
+
+### Solana Integration
+
+Access Solana wallet functionality:
+
+```javascript
+// Get Solana account info
+const solanaWallet = await provider.request({ method: 'solanaWallet' })
+const publicKey = solanaWallet.publicKey
+
+// Get private key for Solana
+const privateKey = await provider.request({ method: 'solanaPrivateKey' })
+```
+
+### Other Blockchains
+
+Access the raw private key for any blockchain integration:
+
+```javascript
+// Get the raw private key
+const privateKey = await provider.request({ method: 'private_key' })
+
+// Use with your preferred blockchain library
+// Example: Bitcoin, Cosmos, etc.
+```
+
+## Key Features
+
+### Custom Authentication Only
+
+The Node.js SDK **only supports custom authentication**. You must:
+
+1. Set up a custom verifier in the Web3Auth Dashboard
+2. Configure your authentication flow
+3. Generate valid ID tokens for users
+4. Use the verifier name and ID token in the connect method
+
+### Single Key Share
+
+The SDK operates with a single key share, making it:
+
+- **Custodial**: You have direct access to user private keys
+- **Stateless**: No session state management required
+- **Backend-optimized**: Perfect for server-side operations
+
+### Private Key Export
+
+Private key export can be controlled through the Web3Auth Dashboard:
+
+- Enable/disable private key export
+- Control which methods return private keys
+- Set up additional security measures
+
+## Security Considerations
+
+### Client ID Protection
+
+- Store client ID in environment variables
+- Use different client IDs for different environments
+- Rotate client IDs regularly in production
+
+### Network Configuration
+
+- Use `sapphire_mainnet` for production
+- Use `sapphire_devnet` for development and testing
+- Never use mainnet for testing
+
+### Session Management
+
+- Set appropriate session timeouts
+- Implement session cleanup
+- Monitor for unusual session patterns
+
+## Next Steps
+
+- **[Usage Guide](./usage)**: Learn about stateless authentication and blockchain operations
+- **[Connect Method](./usage/connect)**: Detailed authentication implementation
+- **[Private Key Access](./usage/private-key)**: Extract keys for blockchain operations
+- **[EVM Integration](./usage/evm-integration)**: Ethereum and EVM-compatible chains
+- **[Examples](./examples)**: Complete implementation examples and production patterns
+
+<SdkTroubleshootingIntro />
