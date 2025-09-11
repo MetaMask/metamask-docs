@@ -8,13 +8,17 @@ author: MetaMask Developer Relations
 toc_max_heading_level: 4
 ---
 
-This tutorial walks you through creating an invite link to enable users to refer their friends to your dapp with minimal friction.
+This tutorial walks you through creating an invite link so users can refer their friends to your dapp with minimal friction.
 
 For example, Alice (the inviter) wants Bob (the invitee) to try out your dapp.
 She sends him a link that allows him to claim 0.001 ETH from her wallet within a time limit.
 Bob can start using your dapp right away, without installing a wallet or paying gas fees.
 
-You'll enable this by adding an [embedded wallet](/embedded-wallets) for instant onboarding, creating a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts) to create and redeem an invitation, and creating an [open delegation](/delegation-toolkit/concepts/delegation) to represent an invitation.
+You'll enable this by:
+
+- Adding an [embedded wallet](/embedded-wallets) for instant onboarding.
+- Creating a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts) to create and redeem an invitation.
+- Creating an [open delegation](/delegation-toolkit/concepts/delegation) to represent an invitation.
 
 ## Prerequisites
 
@@ -41,7 +45,7 @@ npm install @metamask/delegation-toolkit @web3auth/modal wagmi @tanstack/react-q
 
 #### 1.2. Set up Embedded Wallets (Web3Auth)
 
-Configure [Embedded Wallets (Web3Auth)](/embedded-wallets/) to enable users to instantly connect to your dapp using familiar login methods, like social accounts or email.
+Configure [MetaMask Embedded Wallets (Web3Auth)](/embedded-wallets/) to enable users to instantly connect to your dapp using familiar login methods, like social accounts or email.
 
 1. Add a `WEB3AUTH_CLIENT_ID` environment variable, replacing `<YOUR-CLIENT-ID>` with your Web3Auth Client ID:
 
@@ -155,7 +159,7 @@ const bundlerClient = createBundlerClient({
 
 #### 3.1. Configure the account
 
-Configure an account in order to create and redeem an invitation.
+Configure an account to create and redeem an invitation.
 This account will create a delegation, and must be a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts).
 This example uses a [Hybrid smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account), which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
 
