@@ -24,17 +24,17 @@ Select one of the cards below to learn more about using the dashboard.
 <CardList
   items={[
     {
-      href: "dashboard/get-started/create-api",
+      href: "./get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create an API key that allows you to make API calls."
     },
     {
-      href: "dashboard/how-to/secure-an-api/api-key",
+      href: "./how-to/secure-an-api/api-key",
       title: "Secure your API key",
       description: "Learn how to secure your API key to avoid unwanted costs and unauthorized access."
     },
     {
-      href: "dashboard/how-to/dashboard-stats",
+      href: "./how-to/dashboard-stats",
       title: "Monitor API call stats",
       description: "Learn how to use the dashboard to view API call stats."
     }
