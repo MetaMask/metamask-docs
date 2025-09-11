@@ -82,6 +82,7 @@ const sidebar = {
                 'guides/delegation/use-delegation-scopes/refine-scope',
               ],
             },
+            'guides/delegation/check-delegation-state',
           ],
         },
       ],
