@@ -47,7 +47,7 @@ See the [official Unichain documentation](https://docs.unichain.org/docs) for mo
     {
       href: "../../../developer-tools/dashboard/get-started/create-api/",
       title: "Create an API key",
-      description: "Learn how to create an API key and secure and share it with your team."
+      description: "Learn how to create and secure an API key."
     }
   ]}
 />
