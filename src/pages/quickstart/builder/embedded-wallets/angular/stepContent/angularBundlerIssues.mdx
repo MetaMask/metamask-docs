@@ -1,5 +1,7 @@
-### Fixing Bundler Issues
+### Fix bundler issues
 
-While using any web3 library in Angular, you may run into issues building. This issue occurs because some core packages like `eccrypto` have certain dependencies which are not present within the browser build environment.
+Some web3 packages (for example, `eccrypto`) rely on Node.js modules that aren't available in the
+browser.
 
-To solve this, please have a look at our troubleshooting pages about [Webpack 5 Issues](/troubleshooting/webpack-issues)
+To resolve this, see the
+[Webpack 5 troubleshooting issues](/embedded-wallets/troubleshooting/webpack-issues#angular) page.

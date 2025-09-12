@@ -1,9 +1,12 @@
-### Setup Wagmi Provider
+### Set up the Wagmi provider
 
-Since we're using `wagmi` for this example, we need to setup the `WagmiProvider` component. Please use the `WagmiProvider` component from `@web3auth/modal/react/wagmi` to wrap your application.
+Since this example uses `wagmi`, wrap your app with the `WagmiProvider` from
+`@web3auth/modal/react/wagmi`.
 
 ```tsx
 import { WagmiProvider } from '@web3auth/modal/react/wagmi'
 ```
 
-> Apart from that, the standard wagmi setup is being used. You do not need to create any wagmi config, since the Web3Auth config is being used directly. Refer to the [wagmi docs](https://wagmi.sh/react/getting-started) for more information.
+This example uses the standard Wagmi setup. You don't need to create a Wagmi config; the Web3Auth
+config is used directly. See the [Wagmi docs](https://wagmi.sh/react/getting-started) for more
+information.

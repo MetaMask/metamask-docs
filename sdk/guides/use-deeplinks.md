@@ -23,14 +23,14 @@ This page highlights deeplinks available for the MetaMask mobile app.
 <TabItem value="Deeplink">
 
 ```text
-https://metamask.app.link/dapp/{dappUrl}
+https://link.metamask.io/dapp/{dappUrl}
 ```
 
 </TabItem>
 <TabItem value="Example">
 
 ```text
-https://metamask.app.link/dapp/app.uniswap.org
+https://link.metamask.io/dapp/app.uniswap.org
 ```
 
 </TabItem>
@@ -51,14 +51,14 @@ The example navigates to `app.uniswap.org` in the in-app browser.
 <TabItem value="Deeplink">
 
 ```text
-https://metamask.app.link/send/{recipient}@{chainId}
+https://link.metamask.io/send/{recipient}@{chainId}
 ```
 
 </TabItem>
 <TabItem value="Example">
 
 ```text
-https://metamask.app.link/send/0x0000000@137?value=1e16
+https://link.metamask.io/send/0x0000000@137?value=1e16
 ```
 
 </TabItem>
@@ -84,14 +84,14 @@ The example displays the confirmation screen to send 0.01 POL (`1e16` wei) in Po
 <TabItem value="Deeplink">
 
 ```text
-https://metamask.app.link/send/{contractAddress}@{chainId}/transfer
+https://link.metamask.io/send/{contractAddress}@{chainId}/transfer
 ```
 
 </TabItem>
 <TabItem value="Example">
 
 ```text
-https://metamask.app.link/send/0x176211869cA2b568f2A7D4EE941E073a821EE1ff@59144/transfer?address=0x0000000&uint256=1e6
+https://link.metamask.io/send/0x176211869cA2b568f2A7D4EE941E073a821EE1ff@59144/transfer?address=0x0000000&uint256=1e6
 ```
 
 </TabItem>
@@ -118,14 +118,14 @@ The example displays the confirmation screen to send 1 USDC (`1e6` units, contra
 <TabItem value="Deeplink">
 
 ```text
-https://metamask.app.link/buy
+https://link.metamask.io/buy
 ```
 
 </TabItem>
 <TabItem value="Example">
 
 ```text
-https://metamask.app.link/buy?chainId=59144&address=0x176211869cA2b568f2A7D4EE941E073a821EE1ff&amount=100
+https://link.metamask.io/buy?chainId=59144&address=0x176211869cA2b568f2A7D4EE941E073a821EE1ff&amount=100
 ```
 
 </TabItem>
@@ -154,14 +154,14 @@ You can use the `/buy` or `/buy-crypto` path for this deeplink.
 <TabItem value="Deeplink">
 
 ```text
-https://metamask.app.link/sell
+https://link.metamask.io/sell
 ```
 
 </TabItem>
 <TabItem value="Example">
 
 ```text
-https://metamask.app.link/sell?chainId=59144&amount=125
+https://link.metamask.io/sell?chainId=59144&amount=125
 ```
 
 </TabItem>
