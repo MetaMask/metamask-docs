@@ -16,14 +16,15 @@ When setting up Web3Auth, you'll pass in the options to the constructor. This co
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 // focus-start
 var web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
   )
 )
 // focus-end
@@ -50,21 +51,22 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `context`         | Android context to launch Web-based authentication, usually is the current activity. It's a mandatory field, and accepts `android.content.Context` as a value.       |
 | `clientId`        | Your Web3Auth Client ID. You can get it from Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `String`     |
-| `network`         | Defines the Web3Auth Network. It's a mandatory field of type Network.                                                                                                |
-| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type `Uri`.                                     |
+| `web3AuthNetwork` | Defines the Web3Auth Network. It's a mandatory field of type `Web3AuthNetwork`.                                                                                      |
+| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type `String`.                                  |
 | `sessionTime?`    | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days |
-| `useCoreKitKey?`  | Use CoreKit (or SFA) Key to get core kit key given by SFA SDKs. It's an optional field with default value as `false`. Useful for Wallet Pregeneration.               |
-| `chainNamespace?` | Chain Namespace [`EIP155` and `SOLANA`]. It takes `ChainNamespace` as a value.                                                                                       |
+| `useSFAKey?`      | Use SFA Key to get single factor auth key. It's an optional field with default value as `false`. Useful for Wallet Pregeneration and SFA mode.                       |
+| `chains?`         | Custom chain configuration for blockchain networks. It takes `Chains` as a value.                                                                                    |
 
 </TabItem>
 
 <TabItem value="advanced">
 
-| Parameter      | Description                                                                                                                                          |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `whiteLabel?`  | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabelData` as a value. |
-| `loginConfig?` | Login config for the custom verifiers. It takes `HashMap<String, LoginConfigItem>` as a value.                                                       |
-| `mfaSettings?` | Allows developers to configure the Mfa settings for authentication. It takes `MfaSettings` as a value.                                               |
+| Parameter               | Description                                                                                                                                          |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `whiteLabel?`           | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabelData` as a value. |
+| `authConnectionConfig?` | Auth connection config for the custom auth connections. It takes `List<AuthConnectionConfig>` as a value.                                            |
+| `mfaSettings?`          | Allows developers to configure the MFA settings for authentication. It takes `MfaSettings` as a value.                                               |
+| `walletServicesConfig?` | Configuration for wallet services including whitelabel options. It takes `WalletServicesConfig` as a value.                                          |
 
 </TabItem>
 
@@ -74,16 +76,19 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 data class Web3AuthOptions(
     var context: Context,
     val clientId: String,
-    val network: Network,
-    var buildEnv: BuildEnv? = BuildEnv.PRODUCTION,
-    @Transient var redirectUrl: Uri,
-    var sdkUrl: String = getSdkUrl(buildEnv),
+    val web3AuthNetwork: Web3AuthNetwork,
+    var authBuildEnv: BuildEnv? = BuildEnv.PRODUCTION,
+    var redirectUrl: String,
+    var sdkUrl: String = getSdkUrl(authBuildEnv),
     val whiteLabel: WhiteLabelData? = null,
-    val loginConfig: HashMap<String, LoginConfigItem>? = null,
-    val useCoreKitKey: Boolean? = false,
-    val chainNamespace: ChainNamespace? = ChainNamespace.EIP155,
+    val authConnectionConfig: List<AuthConnectionConfig>? = null,
+    val useSFAKey: Boolean? = false,
+    val chains: Chains? = null,
     val mfaSettings: MfaSettings? = null,
-    val sessionTime: Int? = 86400
+    val sessionTime: Int = 86400,
+    val walletServicesConfig: WalletServicesConfig? = null,
+    val defaultChainId: String? = null,
+    val enableLogging: Boolean? = false
 )
 ```
 
@@ -106,9 +111,9 @@ var web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     sessionTime = 86400 * 7, // 7 days (in seconds)
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
   )
 )
 ```

@@ -16,10 +16,10 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### Authentication Functions
 
-| Function Name | Description                                        |
-| ------------- | -------------------------------------------------- |
-| `login()`     | Logs in the user with the selected login provider. |
-| `logout()`    | Logs out the user from the current session.        |
+| Function Name | Description                                                                                         |
+| ------------- | --------------------------------------------------------------------------------------------------- |
+| `connectTo()` | Logs in the user with the selected auth connection. Supports both PnP and SFA authentication modes. |
+| `logout()`    | Logs out the user from the current session.                                                         |
 
 ### User Management Functions
 
@@ -29,10 +29,10 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### Private Key Functions
 
-| Function Name | Description |
-| --- | --- |
-| `getPrivKey()` | Retrieve the user's secp256k1 private key for EVM-compatible chains. |
-| `getEd25519PrivKey()` | Retrieve the user's ed25519 private key for chains like Solana, Near, Algorand. |
+| Function Name            | Description                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| `getPrivateKey()`        | Retrieve the user's secp256k1 private key for EVM-compatible chains.            |
+| `getEd25519PrivateKey()` | Retrieve the user's ed25519 private key for chains like Solana, Near, Algorand. |
 
 ### Security Functions
 
@@ -43,7 +43,7 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### Wallet Services Functions
 
-| Function Name            | Description                                                       |
-| ------------------------ | ----------------------------------------------------------------- |
-| `launchWalletServices()` | Launches the templated wallet UI in WebView.                      |
-| `request()`              | Opens templated transaction screens for signing EVM transactions. |
+| Function Name    | Description                                                                                    |
+| ---------------- | ---------------------------------------------------------------------------------------------- |
+| `showWalletUI()` | Launches the templated wallet UI in WebView with automatic chain configuration from dashboard. |
+| `request()`      | Opens templated transaction screens for signing EVM transactions with simplified parameters.   |
