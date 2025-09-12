@@ -126,7 +126,7 @@ The `CaveatBuilder` provides a developer-friendly TypeScript API that:
 - Provides type-checking and validation for caveat parameters.
 - Handles the creation of the `caveats` array needed when creating a delegation.
 
-Each [caveat type](../../reference/caveats.md) in the `CaveatBuilder`
+Each [caveat type](../../reference/delegation/caveats.md) in the `CaveatBuilder`
 corresponds to a specific caveat enforcer contract. For example, when you use:
 
 ```typescript
@@ -134,7 +134,7 @@ caveatBuilder.addCaveat("allowedTargets", ["0xc11F3a8E5C7D16b75c9E2F60d26f5321C6
 ```
 
 The builder is creating a caveat that references the
-[`AllowedTargetsEnforcer`](../../reference/caveats.md#allowedtargets) contract address and
+[`AllowedTargetsEnforcer`](../../reference/delegation/caveats.md#allowedtargets) contract address and
 properly encodes the provided addresses as terms for that enforcer.
 
 ## Caveat enforcer best practices
@@ -144,14 +144,14 @@ When designing delegations with caveats, consider these best practices:
 - **Combine caveat enforcers appropriately** - Use multiple caveat enforcers to create comprehensive restrictions.
    
 - **Consider caveat enforcer order** - When using caveat enforcers that modify external contract states, the order matters.
-  For example, using [`NativeTokenPaymentEnforcer`](../../reference/caveats.md#nativetokenpayment) before
-  [`NativeBalanceChangeEnforcer`](../../reference/caveats.md#nativebalancechange) might cause validation failures.
+  For example, using [`NativeTokenPaymentEnforcer`](../../reference/delegation/caveats.md#nativetokenpayment) before
+  [`NativeBalanceChangeEnforcer`](../../reference/delegation/caveats.md#nativebalancechange) might cause validation failures.
 
 - **Be careful with unbounded delegations** - Always include appropriate caveat enforcers to limit what a delegate can do.
 
 ## Available caveat enforcers
 
-The Delegation Toolkit provides [out-of-the-box caveat enforcers](../../reference/caveats.md)
+The Delegation Toolkit provides [out-of-the-box caveat enforcers](../../reference/delegation/caveats.md)
 for common restriction patterns, including:
 
 - Limiting target addresses and methods.

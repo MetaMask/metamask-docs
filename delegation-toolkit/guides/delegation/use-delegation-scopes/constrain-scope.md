@@ -23,9 +23,9 @@ You can further constrain these scopes and limit the delegation's authority by a
 
 For example, Alice creates a delegation with an [ERC-20 transfer scope](spending-limit.md#erc-20-transfer-scope) that allows Bob to spend up to 10 USDC.
 If Alice wants to further constrain the scope so that Bob can use the delegation only once,
-she can apply the [`limitedCalls`](../../../reference/caveats.md#limitedcalls) caveat enforcer.
+she can apply the [`limitedCalls`](../../../reference/delegation/caveats.md#limitedcalls) caveat enforcer.
 
-The following example creates a delegation using [`createDelegation`](../../../reference/api/delegation.md#createdelegation), applies the ERC-20 transfer scope with a spending limit of 10 USDC, and applies the `limitedCalls` caveat enforcer to constrain the delegation to a one-time use:
+The following example creates a delegation using [`createDelegation`](../../../reference/delegation/delegation-api.md#createdelegation), applies the ERC-20 transfer scope with a spending limit of 10 USDC, and applies the `limitedCalls` caveat enforcer to constrain the delegation to a one-time use:
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
@@ -52,6 +52,6 @@ const delegation = createDelegation({
 
 ## Next steps
 
-- See the [caveats reference](../../../reference/caveats.md) for the full list of caveat types and their parameters.
+- See the [caveats reference](../../../reference/delegation/caveats.md) for the full list of caveat types and their parameters.
 - For more specific or custom control, you can also [create custom caveat enforcers](/tutorials/create-custom-caveat-enforcer)
 and apply them to delegations.  

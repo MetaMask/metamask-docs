@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Check the delegation state
 
-When using [spending limit delegation scopes](use-delegation-scopes/spending-limit.md) or relevant [caveat enforcers](../../reference/caveats.md),
+When using [spending limit delegation scopes](use-delegation-scopes/spending-limit.md) or relevant [caveat enforcers](../../reference/delegation/caveats.md),
 you might need to check the remaining transferrable amount in a delegation.
 For example, if a delegation allows a user to spend 10 USDC per week and they have already spent 10 - n USDC in the current period,
 you can determine how much of the allowance is still available for transfer.

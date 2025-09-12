@@ -7,8 +7,8 @@ description: Learn how to use the function call scope for a delegation.
 The function call scope defines the specific methods, contract addresses, and calldata that are allowed for the delegation.
 For example, Alice delegates to Bob the ability to call the `approve` function on the USDC contract, with the approval amount set to `0`.
 
-Internally, this scope uses the [`allowedTargets`](../../../reference/caveats.md#allowedtargets) and [`allowedMethods`](../../../reference/caveats.md#allowedmethods) caveat enforcers, and 
-optionally uses the [`allowedCalldata`](../../../reference/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
+Internally, this scope uses the [`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets) and [`allowedMethods`](../../../reference/delegation/caveats.md#allowedmethods) caveat enforcers, and 
+optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
 
 ## Prerequisites
 
