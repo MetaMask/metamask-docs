@@ -9,24 +9,24 @@ import TabItem from "@theme/TabItem";
 
 # Check the delegation state
 
-When using [spending limit delegation scopes](./use-delegation-scopes/spending-limit.md) or relevant [caveat enforcers](../../reference/caveats.md), there 
-may be scenarios where you need to check the remaining amount available for transfer. You can use `CaveatEnforcerClient` to check the available balances for specific scopes or caveats.
+When using [spending limit delegation scopes](use-delegation-scopes/spending-limit.md) or relevant [caveat enforcers](../../reference/caveats.md),
+you might need to check the remaining transferrable amount in a delegation.
+For example, if a delegation allows a user to spend 10 USDC per week and they have already spent 10 - n USDC in the current period,
+you can determine how much of the allowance is still available for transfer.
 
-In this guide, you will learn how to check the remaining transferable amount in a delegation. For example, if a 
-delegation allows a user to spend 10 USDC per week and they have already spent 10 - n USDC in the current period, you 
-can determine how much of the allowance is still available for transfer.
+Use the `CaveatEnforcerClient` to check the available balances for specific scopes or caveats.
 
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../../configure.md)
 - [Create a delegator account.](execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
 - [Create a delegate account.](execute-on-smart-accounts-behalf.mdexecute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
-- [Create a delegation with ERC-20 periodic scope.](./use-delegation-scopes/spending-limit.md#erc-20-periodic-scope)
+- [Create a delegation with an ERC-20 periodic scope.](use-delegation-scopes/spending-limit.md#erc-20-periodic-scope)
 
-## Create a CaveatEnforcerClient
+## Create a `CaveatEnforcerClient`
 
-To check the delegation states, create a `CaveatEnforcerClient`. This client allows you to interact with the caveat enforcers contract used while creating a delegation and read the required state.
+To check the delegation state, create a `CaveatEnforcerClient`.
+This client allows you to interact with the caveat enforcers of the delegation, and read the required state.
 
 <Tabs>
 <TabItem value="example.ts">
