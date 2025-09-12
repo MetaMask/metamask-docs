@@ -98,3 +98,8 @@ export const delegation = createDelegation({
 
 </TabItem>
 </Tabs>
+
+
+## Next steps
+
+- See the [Caveat Enforcer Client reference](../../reference/delegation/caveat-enforcer-client.md) for the full list of available methods.

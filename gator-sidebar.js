@@ -132,6 +132,7 @@ const sidebar = {
             'reference/delegation/delegation-api',
             'reference/delegation/delegation-scopes',
             'reference/delegation/caveats',
+            'reference/delegation/caveat-enforcer-client',
           ],
         },
         {
