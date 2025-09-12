@@ -79,7 +79,7 @@ const sidebar = {
                 'guides/delegation/use-delegation-scopes/spending-limit',
                 'guides/delegation/use-delegation-scopes/function-call',
                 'guides/delegation/use-delegation-scopes/ownership-transfer',
-                'guides/delegation/use-delegation-scopes/refine-scope',
+                'guides/delegation/use-delegation-scopes/constrain-scope',
               ],
             },
             'guides/delegation/check-delegation-state',

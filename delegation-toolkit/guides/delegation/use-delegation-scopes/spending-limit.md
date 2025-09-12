@@ -204,4 +204,4 @@ const delegation = createDelegation({
 
 ## Next steps
 
-See [how to further refine the authority of a delegation](refine-scope.md) using caveat enforcers.
+See [how to further constrain the authority of a delegation](constrain-scope.md) using caveat enforcers.

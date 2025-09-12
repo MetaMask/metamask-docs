@@ -1,0 +1,57 @@
+---
+description: Learn how to constrain a delegation scope using caveat enforcers.
+sidebar_label: Constrain a scope
+toc_max_heading_level: 3
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# Constrain a delegation scope
+
+[Delegation scopes](index.md) define the delegation's initial authority and help prevent delegation misuse.
+You can further constrain these scopes and limit the delegation's authority by applying [caveat enforcers](../../../concepts/delegation/caveat-enforcers.md). 
+
+## Prerequisites
+
+- [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
+- [Create a delegator account.](../execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
+- [Create a delegate account.](../execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
+- [Configure a delegation scope.](index.md)
+
+## Apply a caveat enforcer
+
+For example, Alice creates a delegation with an [ERC-20 transfer scope](spending-limit.md#erc-20-transfer-scope) that allows Bob to spend up to 10 USDC.
+If Alice wants to further constrain the scope so that Bob can use the delegation only once,
+she can apply the [`limitedCalls`](../../../reference/caveats.md#limitedcalls) caveat enforcer.
+
+The following example creates a delegation using [`createDelegation`](../../../reference/api/delegation.md#createdelegation), applies the ERC-20 transfer scope with a spending limit of 10 USDC, and applies the `limitedCalls` caveat enforcer to constrain the delegation to a one-time use:
+
+```typescript
+import { createDelegation } from "@metamask/delegation-toolkit";
+
+// Constrains the delegation to one-time use.
+const caveats = [{
+  type: "limitedCalls",
+  limit: 1,
+}];
+
+const delegation = createDelegation({
+  scope: {
+    type: "erc20TransferAmount",
+    tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+    maxAmount: 10000n,
+  },
+  // Apply caveats to the delegation.
+  caveats,
+  to: delegateAccount,
+  from: delegatorAccount,
+  environment: delegatorAccount.environment,
+});
+```
+
+## Next steps
+
+- See the [caveats reference](../../../reference/caveats.md) for the full list of caveat types and their parameters.
+- For more specific or custom control, you can also [create custom caveat enforcers](/tutorials/create-custom-caveat-enforcer)
+and apply them to delegations.  
