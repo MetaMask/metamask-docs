@@ -128,8 +128,8 @@ const sidebar = {
           type: 'category',
           label: 'Delegation',
           collapsed: false,
+          link: { type: "doc", id: "reference/delegation/index" },
           items: [
-            'reference/delegation/delegation-api',
             'reference/delegation/delegation-scopes',
             'reference/delegation/caveats',
             'reference/delegation/caveat-enforcer-client',

@@ -25,7 +25,7 @@ For example, Alice creates a delegation with an [ERC-20 transfer scope](spending
 If Alice wants to further constrain the scope so that Bob can use the delegation only once,
 she can apply the [`limitedCalls`](../../../reference/delegation/caveats.md#limitedcalls) caveat enforcer.
 
-The following example creates a delegation using [`createDelegation`](../../../reference/delegation/delegation-api.md#createdelegation), applies the ERC-20 transfer scope with a spending limit of 10 USDC, and applies the `limitedCalls` caveat enforcer to constrain the delegation to a one-time use:
+The following example creates a delegation using [`createDelegation`](../../../reference/delegation/index.md#createdelegation), applies the ERC-20 transfer scope with a spending limit of 10 USDC, and applies the `limitedCalls` caveat enforcer to constrain the delegation to a one-time use:
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";

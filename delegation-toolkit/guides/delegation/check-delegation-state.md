@@ -20,12 +20,12 @@ Use the `CaveatEnforcerClient` to check the available balances for specific scop
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
 - [Create a delegator account.](execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
-- [Create a delegate account.](execute-on-smart-accounts-behalf.mdexecute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
+- [Create a delegate account.](execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
 - [Create a delegation with an ERC-20 periodic scope.](use-delegation-scopes/spending-limit.md#erc-20-periodic-scope)
 
 ## Create a `CaveatEnforcerClient`
 
-To check the delegation state, create a `CaveatEnforcerClient`.
+To check the delegation state, create a [`CaveatEnforcerClient`](../../reference/delegation/caveat-enforcer-client.md).
 This client allows you to interact with the caveat enforcers of the delegation, and read the required state.
 
 <Tabs>
@@ -62,7 +62,7 @@ export const publicClient = createPublicClient({
 
 ## Read the caveat enforcer state
 
-This example uses the `getErc20PeriodTransferEnforcerAvailableAmount` method to read the state and retrieve the remaining amount for the current transfer period. 
+This example uses the [`getErc20PeriodTransferEnforcerAvailableAmount`](../../reference/delegation/caveat-enforcer-client.md#geterc20periodtransferenforceravailableamount) method to read the state and retrieve the remaining amount for the current transfer period.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -99,7 +99,6 @@ export const delegation = createDelegation({
 </TabItem>
 </Tabs>
 
-
 ## Next steps
 
-- See the [Caveat Enforcer Client reference](../../reference/delegation/caveat-enforcer-client.md) for the full list of available methods.
+See the [Caveat Enforcer Client reference](../../reference/delegation/caveat-enforcer-client.md) for the full list of available methods.

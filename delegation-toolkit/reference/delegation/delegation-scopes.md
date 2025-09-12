@@ -4,8 +4,8 @@ description: Delegation scopes reference.
 
 # Delegation scopes
 
-When [creating a delegation](../guides/delegation/execute-on-smart-accounts-behalf.md), you can configure the following scopes to define the delegation's initial authority.
-Learn [how to use delegation scopes](../guides/delegation/use-delegation-scopes/index.md).
+When [creating a delegation](../../guides/delegation/execute-on-smart-accounts-behalf.md), you can configure the following scopes to define the delegation's initial authority.
+Learn [how to use delegation scopes](../../guides/delegation/use-delegation-scopes/index.md).
 
 ## Spending limit scopes
 
