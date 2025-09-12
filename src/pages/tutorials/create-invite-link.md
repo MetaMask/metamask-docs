@@ -28,14 +28,14 @@ You'll enable this by:
 - Get a [Client ID](/embedded-wallets/dashboard) from the Embedded Wallets (Web3Auth) dashboard.
 - [Create a Pimlico API key](https://docs.pimlico.io/guides/create-api-key#create-api-key).
   :::note
-  This tutorial uses Pimlico's paymaster, but you can use any paymaster of your choice.
+  This tutorial uses Pimlico's bundler and paymaster, but you can use any bundler and paymaster of your choice.
   :::
  
 ## Steps
 
 ### 1. Set up the project
 
-#### 1.1. Install the Delegation Toolkit
+#### 1.1. Install dependencies
 
 Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) and other dependencies in your project:
 
@@ -113,7 +113,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 #### 2.1. Create a Public Client
 
 Create a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function.
-You will configure a smart account and Bundler Client with the Public Client, which you can use to query the signer's account state and interact with the blockchain network.
+You will configure a Bundler Client with the Public Client, which you can use to query the signer's account state and interact with the blockchain network.
 
 ```tsx
 import { createPublicClient, http } from 'viem';
@@ -125,62 +125,51 @@ const publicClient = createPublicClient({
 });
 ```
 
-#### 2.2. Create a Paymaster Client
-
-Create a [Viem Paymaster Client](https://viem.sh/account-abstraction/clients/paymaster) using Viem's `createPaymasterClient` function.
-This client interacts with the paymaster service.
-Replace `<YOUR-API-KEY>` with your Pimlico API key:
-
-```tsx
-import { createPaymasterClient } from 'viem/account-abstraction';
-
-const paymasterClient = createPaymasterClient({
-  transport: http('https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>'),
-});
-```
-
-#### 2.3. Create a Bundler Client
+#### 2.2. Create a Bundler Client
 
 Create a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function.
-Pass the `paymasterClient` to the `paymaster` property.
 You can use the bundler service to estimate gas for user operations and submit transactions to the network.
+
+Set `paymaster` to `true` to use the Pimlico paymaster with the Bundler Client, and replace `<YOUR-API-KEY>` with your Pimlico API key:
 
 ```tsx
 import { createBundlerClient } from 'viem/account-abstraction';
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http('https://your-bundler-rpc.com'),
-  paymaster: paymasterClient,
+  transport: http('https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>'),
+  paymaster: true, // The same Pimlico URL will be used for bundler and paymaster.
 });
 ```
 
 ### 3. Create a smart account
 
-#### 3.1. Configure the account
-
-Configure an account to create and redeem an invitation.
+Create an account to create and redeem an invitation.
 This account will create a delegation, and must be a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts).
 This example uses a [Hybrid smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account), which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
 
 ```tsx
 import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit';
-import { privateKeyToAccount } from 'viem/accounts';
+import { useAccount, usePublicClient, useWalletClient } from "wagmi";
 
-const account = privateKeyToAccount('0x...');
+const { address } = useAccount();
+const publicClient = usePublicClient();
+const { data: walletClient } = useWalletClient();
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
-  deployParams: [account.address, [], [], []],
+  deployParams: [address, [], [], []],
   deploySalt: '0x',
-  signatory: { account },
+  signatory: { walletClient },
 });
 ```
 
-#### 3.2. Deploy the account
+### 4. Create an invitation
 
-Deploy the smart account by sending a user operation:
+#### 4.1. Deploy the account
+
+To create an invitation, first deploy the smart account by sending a user operation:
 
 ```ts
 import { zeroAddress } from 'viem';
@@ -197,7 +186,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 });
 ```
 
-#### 3.3. Fund the account
+#### 4.2. Fund the account
 
 Fund the deployed smart account with some Sepolia ETH to enable the invitee to spend funds when they redeem the invitation.
 
@@ -205,21 +194,18 @@ Fund the deployed smart account with some Sepolia ETH to enable the invitee to s
 You can use the [MetaMask faucet](/developer-tools/faucet) to get Sepolia ETH.
 :::
 
-### 4. Create an invitation
-
-#### 4.1. Create an open root delegation
+#### 4.3. Create an open root delegation
 
 Create an [open root delegation](/delegation-toolkit/concepts/delegation) to represent an invitation.
 A root delegation is the first delegation in a chain of delegations, and an open root delegation grants permission to any account.
 In this example, the inviter creates an invitation that can be redeemed by any invitee, allowing the invitee to spend up to 0.001 ETH.
 
 ```ts
-import { createOpenDelegation, getDelegatorEnvironment } from '@metamask/delegation-toolkit';
-import { sepolia as chain } from 'viem/chains';
+import { createOpenDelegation } from '@metamask/delegation-toolkit';
 
 const delegation = createOpenDelegation({
   from: smartAccount.address,
-  environment: getDelegatorEnvironment(chain.id);
+  environment: smartAccount.environment;
   scope: {
     type: 'nativeTokenTransferAmount',
     // 0.001 ETH in wei format.
@@ -228,9 +214,9 @@ const delegation = createOpenDelegation({
 });
 ```
 
-#### 4.2. Sign the delegation
+#### 4.4. Sign the delegation
 
-Sign the delegation to enable the invitee to redeem it in the future:
+Sign the delegation to enable the invitee to redeem the invitation in the future:
 
 ```tsx
 const signature = await smartAccount.signDelegation({
@@ -243,11 +229,13 @@ const signedDelegation = {
 }
 ```
 
-#### 4.3. Share the invitation
+#### 4.5. Share the invitation
 
-Encode the delegation into a shareable URL:
+Encode the delegation into a shareable invite link:
 
 ```tsx
+import { Delegation } from '@metamask/delegation-toolkit';
+
 export function encodeDelegation(delegation: Delegation): string {
   const delegationJson = JSON.stringify(delegation);
   return Buffer.from(delegationJson, 'utf-8').toString('base64');
@@ -260,15 +248,17 @@ url.searchParams.set("delegation", encoded);
 const shareableUrl = url.toString();
 ```
 
-The inviter can now share the URL with anyone.
+The inviter can now share the link with anyone.
 
 ### 5. Redeem the invitation
 
 #### 5.1. Decode the shared invitation
 
-When the invitee opens the shared URL, decode the delegation:
+When the invitee opens the shared invite link, decode the delegation:
 
 ```tsx
+import { Delegation } from '@metamask/delegation-toolkit';
+
 const urlParams = new URLSearchParams(window.location.search);
 const encodedDelegation = urlParams.get('delegation');
 
@@ -282,18 +272,19 @@ const decodedDelegation = decodeDelegation(encodedDelegation);
 
 #### 5.2. Redeem the delegation
 
-[Redeem the delegation](/delegation-toolkit/development/guides/delegation/execute-on-smart-accounts-behalf/#7-redeem-the-delegation) by submitting a user operation from the smart account created in [Step 3](#3-create-a-smart-account) to the `DelegationManager` contract.
+[Redeem the delegation](/delegation-toolkit/development/guides/delegation/execute-on-smart-accounts-behalf/#7-redeem-the-delegation) by submitting a user operation from the smart account to the `DelegationManager` contract.
+Submitting the user operation deploys the account for first-time users.
+
 The delegation manager validates the delegation and executes delegated actions.
 In this case, the invitee can spend up to 0.001 ETH when using your dapp.
 
 ```ts
 import { createExecution, getDeleGatorEnvironment, ExecutionMode } from '@metamask/delegation-toolkit';
 import { DelegationManager } from '@metamask/delegation-toolkit/contracts';
-import { zeroAddress } from 'viem';
 
 const delegations = [decodedDelegation];
 
-const executions = createExecution({ target: zeroAddress });
+const executions = createExecution(smartAccount.address, 1000000000000000n);
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
