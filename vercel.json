@@ -736,7 +736,7 @@
     },
     {
       "source": "/delegation-toolkit/development/how-to/create-delegation/restrict-delegation/",
-      "destination": "/delegation-toolkit/development/guides/delegation/use-delegation-scope/constrain-scope/"
+      "destination": "/delegation-toolkit/development/guides/delegation/use-delegation-scopes/constrain-scope/"
     },
     {
       "source": "/delegation-toolkit/development/how-to/redeem-delegation/",
