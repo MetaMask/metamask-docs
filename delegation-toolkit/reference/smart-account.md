@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # MetaMask Smart Accounts API reference
 
-The following API methods are related to creating, managing, and signing with [MetaMask Smart Accounts](../../concepts/smart-accounts.md).
+The following API methods are related to creating, managing, and signing with [MetaMask Smart Accounts](../concepts/smart-accounts.md).
 
 ## `aggregateSignature`
 

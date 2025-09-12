@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 
 This tutorial walks you through creating a custom [caveat enforcer](/delegation-toolkit/development/concepts/delegation/caveat-enforcers) and applying it to a [delegation](/delegation-toolkit/concepts/delegation/).
 
-The MetaMask Delegation Toolkit includes [out-of-the-box caveat enforcers](/delegation-toolkit/reference/caveats) that define rules and restrictions for common use cases.
+The MetaMask Delegation Toolkit includes [out-of-the-box caveat enforcers](/delegation-toolkit/reference/delegation/caveats) that define rules and restrictions for common use cases.
 For more specific control or other use cases, you can create custom caveat enforcers.
 In this tutorial, you'll create and apply a caveat enforcer that only allows a delegation to be redeemed after a specific timestamp.
 
@@ -91,7 +91,7 @@ The Forge CLI will display the address of the deployed caveat enforcer.
 
 ### 3. Apply the caveat enforcer
 
-Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the [caveat builder](/delegation-toolkit/reference/api/delegation.md#createcaveatbuilder), and create a delegation.
+Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the [caveat builder](/delegation-toolkit/reference/delegation/delegation-api.md#createcaveatbuilder), and create a delegation.
 
 The following code snippet uses the custom caveat enforcer to create a delegation granting
 a 1,000,000 wei allowance that becomes spendable one hour after it is created:

@@ -123,24 +123,25 @@ const sidebar = {
       label: 'Reference',
       collapsed: false,
       items: [
-        'reference/delegation-scopes',
-        'reference/caveats',
+        'reference/smart-account',
         {
           type: 'category',
-          label: 'Delegation Toolkit API',
+          label: 'Delegation',
+          collapsed: false,
+          link: { type: "doc", id: "reference/delegation/index" },
+          items: [
+            'reference/delegation/delegation-scopes',
+            'reference/delegation/caveats',
+            'reference/delegation/caveat-enforcer-client',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'ERC-7715',
           collapsed: false,
           items: [
-            'reference/api/delegation',
-            'reference/api/smart-account',
-            {
-              type: 'category',
-              label: 'Experimental actions',
-              collapsed: false,
-              items: [
-                'reference/api/experimental-actions/bundler-client',
-                'reference/api/experimental-actions/wallet-client',
-              ],
-            },
+            'reference/erc7715/wallet-client',
+            'reference/erc7715/bundler-client',
           ],
         },
       ],

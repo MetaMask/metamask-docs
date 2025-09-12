@@ -39,20 +39,20 @@ You can create the following delegation types:
   In a chain of delegations, the first delegation is the root delegation.
   For example, Alice delegates the ability to spend her USDC to Bob, limiting the amount to 100 USDC.
 
-  Use [`createDelegation`](../../reference/api/delegation.md#createdelegation) to create a root delegation.
+  Use [`createDelegation`](../../reference/delegation/index.md#createdelegation) to create a root delegation.
 
 - **Open root delegation** - An open root delegation is a root delegation that doesn't specify a delegate.
   This means that any account can redeem the delegation.
   For example, Alice delegates the ability to spend 100 of her USDC to anyone.
 
   You must create open root delegations carefully, to ensure that they are not misused.
-  Use [`createOpenDelegation`](../../reference/api/delegation.md#createopendelegation) to create an open root delegation.
+  Use [`createOpenDelegation`](../../reference/delegation/index.md#createopendelegation) to create an open root delegation.
 
 - **Redelegation** - A delegate can redelegate permissions that have been granted to them, creating a chain of delegations across trusted parties.
   For example, Alice delegates the ability to spend 100 of her USDC to Bob.
   Bob redelegates the ability to spend 50 of Alice's 100 USDC to Carol.
 
-  Use [`createDelegation`](../../reference/api/delegation.md#createdelegation) to create a redelegation.
+  Use [`createDelegation`](../../reference/delegation/index.md#createdelegation) to create a redelegation.
 
 - **Open redelegation** - An open redelegation is a redelegation that doesn't specify a delegate.
   This means that any account can redeem the redelegation.
@@ -60,7 +60,7 @@ You can create the following delegation types:
   Bob redelegates the ability to spend 50 of Alice's 100 USDC to anyone.
 
   As with open root delegations, you must create open redelegations carefully, to ensure that they are not misused.
-  Use [`createOpenDelegation`](../../reference/api/delegation.md#createopendelegation) to create an open redelegation.
+  Use [`createOpenDelegation`](../../reference/delegation/index.md#createopendelegation) to create an open redelegation.
 
 ## Delegation Framework
 
@@ -79,7 +79,7 @@ It consists of the following components:
 - **Delegation Manager** - The Delegation Manager validates delegations and triggers executions
   on behalf of the delegator, ensuring tasks are executed accurately and securely.
 
-  When you redeem a delegation using [`redeemDelegations`](../../reference/api/delegation.md#redeemdelegations), the Delegation Manager performs the following steps.
+  When you redeem a delegation using [`redeemDelegations`](../../reference/delegation/index.md#redeemdelegations), the Delegation Manager performs the following steps.
   It processes a single step for all redemptions before proceeding to the next one:
   
   1. Validates the input data by ensuring the lengths of `delegations`, `modes`, and
@@ -150,7 +150,7 @@ sequenceDiagram
 
 ## Execution modes
 
-When redeeming a delegation using [`redeemDelegations`](../../reference/api/delegation.md#redeemdelegations), you must pass an execution mode for each delegation chain you pass to the method.
+When redeeming a delegation using [`redeemDelegations`](../../reference/delegation/index.md#redeemdelegations), you must pass an execution mode for each delegation chain you pass to the method.
 The Delegation Toolkit supports the following execution modes, based on [ERC-7579](https://erc7579.com/):
 
 | Execution mode | Number of delegation chains passed to `redeemDelegations` | Processing method | Does user operation continue execution if redemption reverts? |

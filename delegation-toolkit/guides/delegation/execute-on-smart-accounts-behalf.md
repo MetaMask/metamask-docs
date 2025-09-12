@@ -51,7 +51,7 @@ const bundlerClient = createBundlerClient({
 ### 3. Create a delegator account
 
 Create an account to represent Alice, the delegator who will create a delegation.
-The delegator must be a MetaMask smart account; use the toolkit's [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) method to create the delegator account.
+The delegator must be a MetaMask smart account; use the toolkit's [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmartaccount) method to create the delegator account.
 
 A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers.
 This examples configures a [Hybrid smart account with an Account signatory](../smart-accounts/create-smart-account.md#create-a-hybrid-smart-account-with-an-account-signatory):
@@ -122,10 +122,10 @@ export const delegateWalletClient = createWalletClient({
 Create a [root delegation](../../concepts/delegation/index.md#delegation-types) from Alice to Bob.
 With a root delegation, Alice is delegating her own authority away, as opposed to *redelegating* permissions she received from a previous delegation.
 
-Use the toolkit's [`createDelegation`](../../reference/api/delegation.md#createdelegation) method to create a root delegation. When creating 
+Use the toolkit's [`createDelegation`](../../reference/delegation/index.md#createdelegation) method to create a root delegation. When creating 
 delegation, you need to configure the scope of the delegation to define the initial authority. 
 
-This example uses the [`erc20TransferAmount`](./use-delegation-scopes/spending-limit#erc-20-transfer-scope) scope, allowing Alice to delegate to Bob the ability to spend her USDC, with a 
+This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing Alice to delegate to Bob the ability to spend her USDC, with a 
 specified limit on the total amount.
 
 :::warning Important
@@ -154,7 +154,7 @@ const delegation = createDelegation({
 
 ### 6. Sign the delegation
 
-Sign the delegation with Alice's account, using the [`signDelegation`](../../reference/api/smart-account.md#signdelegation) method from `MetaMaskSmartAccount`. Alternatively, you can use the toolkit's [`signDelegation`](../../reference/api/delegation.md#signdelegation) utility method. Bob will later use the signed delegation to perform actions on Alice's behalf.
+Sign the delegation with Alice's account, using the [`signDelegation`](../../reference/smart-account.md#signdelegation) method from `MetaMaskSmartAccount`. Alternatively, you can use the toolkit's [`signDelegation`](../../reference/delegation/index.md#signdelegation) utility method. Bob will later use the signed delegation to perform actions on Alice's behalf.
 
 ```typescript
 const signature = await delegatorSmartAccount.signDelegation({
@@ -171,7 +171,7 @@ const signedDelegation = {
 
 Bob can now redeem the delegation. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on Alice's behalf.
 
-To prepare the calldata for the redeem transaction, use the [`redeemDelegations`](../../reference/api/delegation.md#redeemdelegations) method from `DelegationManager`.
+To prepare the calldata for the redeem transaction, use the [`redeemDelegations`](../../reference/delegation/index.md#redeemdelegations) method from `DelegationManager`.
 Since Bob is redeeming a single delegation chain, use the [`SingleDefault`](../../concepts/delegation/index.md#execution-modes) execution mode.
 
 Bob can redeem the delegation by submitting a user operation if his account is a smart account, or a regular transaction if his account is an EOA:
@@ -238,4 +238,4 @@ const transactionHash = await delegateWalletClient.sendTransaction({
 ## Next steps
 
 - See [how to configure different scopes](use-delegation-scopes/index.md) to define the initial authority of a delegation.
-- See [how to further refine the authority of a delegation](use-delegation-scopes/refine-scope.md) using caveat enforcers.
+- See [how to further refine the authority of a delegation](use-delegation-scopes/constrain-scope.md) using caveat enforcers.

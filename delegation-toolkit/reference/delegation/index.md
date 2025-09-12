@@ -1,6 +1,5 @@
 ---
 description: Delegation-related API methods reference.
-sidebar_label: Delegation
 toc_max_heading_level: 2
 ---
 
