@@ -13,8 +13,7 @@ An account's supported *signatories* can sign data on behalf of the smart accoun
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../configure.md)
+[Install and set up the Delegation Toolkit.](../../get-started/install.md)
 
 ## Create a Hybrid smart account
 

@@ -25,7 +25,6 @@ This tutorial walks you through adding a passkey signer to an already deployed s
 
 - [Install and set up the Delegation Toolkit](/delegation-toolkit/get-started/install) in your project.
 - [Install Ox SDK](https://oxlib.sh/#installation).
-- [Configure the Delegation Toolkit](/delegation-toolkit/development/guides/configure).
 - [Create and deploy a Hybrid smart account,](/delegation-toolkit/development/guides/smart-accounts/create-smart-account) with a signatory from a private key.
 
 ## Steps
