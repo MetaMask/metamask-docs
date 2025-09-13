@@ -1,11 +1,11 @@
 ---
-description: Learn about the delegator environment object `DeleGatorEnvironment` and how to use it.
+description: Learn how to configure the toolkit environment to interact with the Delegation Framework.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Delegator environment
+# Configure the toolkit environment
 
 The `DeleGatorEnvironment` object is a component of the MetaMask Delegation Toolkit that defines the contract addresses necessary for interacting with the [Delegation Framework](delegation/index.md#delegation-framework) on a specific network.
 

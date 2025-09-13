@@ -25,7 +25,6 @@ If a user operation is sent from a MetaMask smart account that has not been depl
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a MetaMask smart account.](create-smart-account.md)
 
 ## Send a user operation

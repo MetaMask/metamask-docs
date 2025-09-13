@@ -13,7 +13,6 @@ You can use any paymaster service provider, such as [Pimlico](https://docs.pimli
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a MetaMask smart account.](create-smart-account.md)
 
 ## Send a gasless transaction

@@ -19,7 +19,6 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit](/delegation-toolkit/get-started/install) in your project.
-- [Configure the Delegation Toolkit.](/delegation-toolkit/development/guides/configure)
 - [Install Foundry and Forge.](https://getfoundry.sh/introduction/installation)
 - Get an [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 - Have a MetaMask account with some Sepolia ETH to deploy your contract.
