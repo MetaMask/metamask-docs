@@ -58,7 +58,7 @@
     "ethers": "^6.13.5",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
-    "launchdarkly-js-client-sdk": "^3.3.0",
+    "launchdarkly-js-client-sdk": "^3.9.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.debounce": "^4.0.8",
     "lodash.isplainobject": "^4.0.6",
