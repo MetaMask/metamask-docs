@@ -360,10 +360,5 @@ export const API_COSTS = {
     pimlico_getUserOperationGasPrice: 100,
     pimlico_getUserOperationStatus: 50,
     pimlico_simulateAssetChanges: 4950,
-    pimlico_getTokenQuotes: 990,
-    pm_sponsorUserOperation: 4950,
-    pm_getPaymasterData: 4950,
-    pm_getPaymasterStubData: 4950,
-    pm_validateSponsorshipPolicies: 4950,
   },
 }
