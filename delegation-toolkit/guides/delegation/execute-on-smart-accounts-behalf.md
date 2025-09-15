@@ -54,7 +54,7 @@ Create an account to represent Alice, the delegator who will create a delegation
 The delegator must be a MetaMask smart account; use the toolkit's [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmartaccount) method to create the delegator account.
 
 A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers.
-This examples configures a [Hybrid smart account with an Account signatory](../smart-accounts/create-smart-account.md#create-a-hybrid-smart-account-with-an-account-signatory):
+This examples configures a [Hybrid smart account with an Account signer](../smart-accounts/create-smart-account.md#create-a-hybrid-smart-account-with-an-account-signer):
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit"
@@ -67,7 +67,7 @@ const delegatorSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account: delegatorAccount },
+  signer: { account: delegatorAccount },
 })
 ```
 
@@ -93,7 +93,7 @@ const delegateSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid, // Hybrid smart account
   deployParams: [delegateAccount.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account: delegateAccount },
+  signer: { account: delegateAccount },
 })
 ```
 

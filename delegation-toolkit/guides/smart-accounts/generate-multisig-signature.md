@@ -99,7 +99,7 @@ export const aliceSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
   deploySalt: "0x",
-  signatory: [ { account: aliceAccount } ],
+  signer: [ { account: aliceAccount } ],
 });
 
 export const bobSmartAccount = await toMetaMaskSmartAccount({
@@ -107,7 +107,7 @@ export const bobSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
   deploySalt: "0x",
-  signatory: [ { account: bobAccount } ],
+  signer: [ { account: bobAccount } ],
 });
 
 export const bundlerClient = createBundlerClient({
