@@ -50,15 +50,7 @@ const sidebar = {
       label: 'Guides',
       collapsed: false,
       items: [
-        {
-          type: 'category',
-          label: 'Configure the toolkit',
-          collapsed: false,
-          items: [
-            'guides/configure/bundler',
-            'guides/configure/environment',
-          ],
-        },
+        'guides/configure-toolkit',
         {
           type: 'category',
           label: 'MetaMask Smart Accounts',
