@@ -10,7 +10,7 @@ Hemi is a modular protocol that brings together the security of Bitcoin and the 
 
 :::info See also
 
-- The [official Hemi documentation](https://docs.heminetwork.xyz/) for more information.
+- The [official Hemi documentation](https://docs.hemi.xyz/) for more information.
 
 :::
 

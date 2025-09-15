@@ -25,7 +25,7 @@ Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/c
 Run the following command in your terminal, replacing `<YOUR-API-KEY>` with your actual Infura API key:
 
 ```bash
-curl https://base-sepolia.infura.io/v3/<YOUR-API-KEY> \
+curl https://hemi-testnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "eth_blockNumber", "params": [], "id": 1}'
@@ -50,7 +50,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    ```javascript title="index.js"
    import fetch from "node-fetch"
 
-   fetch("https://base-sepolia.infura.io/v3/<YOUR-API-KEY>", {
+   fetch("https://hemi-testnet.infura.io/v3/<YOUR-API-KEY>", {
      method: "POST",
      headers: {
        "Content-Type": "application/json",
@@ -93,7 +93,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    const axios = require("axios")
 
    axios
-     .post("https://base-sepolia.infura.io/v3/<YOUR-API-KEY>", {
+     .post("https://hemi-testnet.infura.io/v3/<YOUR-API-KEY>", {
        jsonrpc: "2.0",
        method: "eth_blockNumber",
        params: [],
@@ -129,7 +129,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    const ethers = require("ethers")
 
    const provider = new ethers.providers.JsonRpcProvider(
-     "https://base-sepolia.infura.io/v3/<YOUR-API-KEY>"
+     "https://hemi-testnet.infura.io/v3/<YOUR-API-KEY>"
    )
 
    provider
@@ -164,7 +164,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
    import requests
    import json
 
-   url = "https://base-sepolia.infura.io/v3/<YOUR-API-KEY>"
+   url = "https://hemi-testnet.infura.io/v3/<YOUR-API-KEY>"
 
    payload = {
      "jsonrpc": "2.0",
