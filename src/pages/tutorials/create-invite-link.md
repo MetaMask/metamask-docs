@@ -108,24 +108,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 }
 ```
 
-### 2. Create Viem clients
-
-#### 2.1. Create a Public Client
-
-Create a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function.
-You will configure a Bundler Client with the Public Client, which you can use to query the signer's account state and interact with the blockchain network.
-
-```tsx
-import { createPublicClient, http } from 'viem';
-import { sepolia as chain } from 'viem/chains';
-
-const publicClient = createPublicClient({
-  chain,
-  transport: http(),
-});
-```
-
-#### 2.2. Create a Bundler Client
+### 2. Create a Bundler Client
 
 Create a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function.
 You can use the bundler service to estimate gas for user operations and submit transactions to the network.
@@ -134,6 +117,9 @@ Set `paymaster` to `true` to use the Pimlico paymaster with the Bundler Client, 
 
 ```tsx
 import { createBundlerClient } from 'viem/account-abstraction';
+import { usePublicClient } from "wagmi";
+
+const publicClient = usePublicClient();
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
@@ -292,6 +278,10 @@ const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   executions: [executions]
 });
 
+// Appropriate fee per gas must be determined for the specific bundler being used.
+const maxFeePerGas = 1n;
+const maxPriorityFeePerGas = 1n;
+
 const userOperationHash = await bundlerClient.sendUserOperation({
   account: smartAccount,
   calls: [
@@ -300,8 +290,8 @@ const userOperationHash = await bundlerClient.sendUserOperation({
       data: redeemDelegationCalldata,
     },
   ],
-  maxFeePerGas: 1n,
-  maxPriorityFeePerGas: 1n,
+  maxFeePerGas,
+  maxPriorityFeePerGas,
 });
 ```
 
