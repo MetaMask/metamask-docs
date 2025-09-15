@@ -19,7 +19,7 @@ An account's supported *signatories* can sign data on behalf of the smart accoun
 ## Create a Hybrid smart account
 
 A Hybrid smart account supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
-You can create a Hybrid smart account with the following types of signatories.
+You can create a Hybrid smart account with the following types of signers.
 
 ### Create a Hybrid smart account with an Account signer
 
