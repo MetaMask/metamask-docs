@@ -116,6 +116,11 @@ const sidebar = {
           label: "Create a custom caveat enforcer",
           href: "/tutorials/create-custom-caveat-enforcer"
         },
+        {
+          type: "link",
+          label: "Create a social invite link",
+          href: "/tutorials/create-invite-link"
+        },
       ],
     },
     {
