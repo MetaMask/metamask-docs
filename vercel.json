@@ -732,7 +732,7 @@
     },
     {
       "source": "/delegation-toolkit/development/how-to/configure/",
-      "destination": "/delegation-toolkit/development/guides/configure-environment/"
+      "destination": "/delegation-toolkit/development/guides/configure/bundler/"
     },
     {
       "source": "/delegation-toolkit/development/how-to/create-delegation/",
@@ -768,7 +768,7 @@
     },
     {
       "source": "/delegation-toolkit/development/concepts/environment/",
-      "destination": "/delegation-toolkit/development/guides/configure-environment/"
+      "destination": "/delegation-toolkit/development/guides/configure/environment/"
     },
     {
       "source": "/developer-tools/faucet/sepolia/",
