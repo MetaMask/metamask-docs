@@ -26,10 +26,7 @@ export const AlertFailedPoh = () => (
     <AlertText>
       <span>
         Free users are required to complete Proof of Humanity to access the faucet. Learn more{' '}
-        <a
-          data-testid="alert-poh"
-          target="_blank"
-          href="https://poh.linea.build/">
+        <a data-testid="alert-poh" target="_blank" href="https://poh.linea.build/">
           here
         </a>
         .
@@ -92,10 +89,7 @@ export const AlertSuccess = ({ url }: { url: string }) => (
       <span>
         Your transaction has been sent to the Ethereum/Sepolia network. You will receive your ETH
         shortly.{' '}
-        <a
-          data-testid="alert-success-etherscan"
-          target="_blank"
-          href={url}>
+        <a data-testid="alert-success-etherscan" target="_blank" href={url}>
           View on Etherscan
         </a>
         .

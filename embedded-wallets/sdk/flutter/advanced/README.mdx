@@ -1,0 +1,159 @@
+---
+title: Advanced Configuration
+sidebar_label: Overview
+description: 'Web3Auth Flutter SDK - Advanced Configuration | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
+
+## Configuration Structure
+
+When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
+
+```dart
+import 'package:web3auth_flutter/web3auth_flutter.dart';
+import 'package:web3auth_flutter/enums.dart';
+import 'package:web3auth_flutter/input.dart';
+import 'package:web3auth_flutter/output.dart';
+import 'dart:io';
+
+Future<void> initWeb3Auth() async {
+
+  late final Uri redirectUrl;
+
+  if (Platform.isAndroid) {
+    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
+    // w3a://com.example.w3aflutter/auth
+  } else {
+    redirectUrl = Uri.parse('{bundleId}://auth');
+    // com.example.w3aflutter://auth
+  }
+
+  // focus-start
+
+  await Web3AuthFlutter.init(Web3AuthOptions(
+    clientId: "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+    network: Network.sapphire_mainnet, // or Network.sapphire_devnet
+    redirectUrl: redirectUrl,
+  ));
+
+  // focus-end
+}
+```
+
+### `Web3AuthOptions`
+
+The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter      | Description                                                                                                                         |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `String`.              |
+| `network`      | Web3Auth Network: `sapphire_mainnet`, `sapphire_devnet`, `mainnet`, `cyan`, `aqua` or `testnet`. Mandatory field of type `Network`. |
+| `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `Uri`.                 |
+| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                    |
+| `loginConfig?` | Login config for custom verifiers. Takes `HashMap<String, LoginConfigItem>` as a value.                                             |
+| `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                          |
+| `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                        |
+
+</TabItem>
+
+<TabItem value="class">
+
+```dart
+class Web3AuthOptions {
+  final String clientId;
+  final Network network;
+  final BuildEnv? buildEnv;
+  final String? sdkUrl;
+  final Uri redirectUrl;
+  final WhiteLabelData? whiteLabel;
+  final HashMap<String, LoginConfigItem>? loginConfig;
+  final bool? useCoreKitKey;
+  final ChainNamespace? chainNamespace;
+  final MfaSettings? mfaSettings;
+  final int? sessionTime;
+
+  Web3AuthOptions({
+    required this.clientId,
+    required this.network,
+    this.buildEnv = BuildEnv.production,
+    String? sdkUrl,
+    required this.redirectUrl,
+    this.whiteLabel,
+    this.loginConfig,
+    this.useCoreKitKey,
+    this.chainNamespace = ChainNamespace.eip155,
+    this.sessionTime = 86400,
+    this.mfaSettings,
+  }): sdkUrl = sdkUrl ?? getSdkUrl(buildEnv ?? BuildEnv.production);
+
+  Map<String, dynamic> toJson() {
+    return {
+      'clientId': clientId,
+      'network': network.name,
+      'sdkUrl': sdkUrl,
+      'buildEnv': buildEnv?.name,
+      'redirectUrl': redirectUrl.toString(),
+      'whiteLabel': whiteLabel?.toJson(),
+      'loginConfig': loginConfig,
+      'useCoreKitKey': useCoreKitKey,
+      'chainNamespace': chainNamespace?.name,
+      'mfaSettings': mfaSettings,
+      'sessionTime': sessionTime,
+    };
+  }
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Session Management
+
+Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keystore.
+
+**Key Configuration Options:**
+
+- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
+  - Minimum: 1 second (`1`).
+  - Maximum: 30 days (`86400 * 30`).
+  - Default: 7 days (`86400 * 7`).
+
+```dart
+await Web3AuthFlutter.init(Web3AuthOptions(
+    clientId: "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+    network: Network.sapphire_mainnet, // or Network.sapphire_devnet
+    sessionTime: 86400 * 7, // 7 days (in seconds)
+    redirectUrl: redirectUrl,
+));
+```
+
+## Custom Authentication Methods
+
+Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication) section.
+
+## UI Customization
+
+Create a seamless brand experience by customizing the Web3Auth Login Screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel) section.
+
+## Multi-Factor Authentication (MFA)
+
+Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa) section.
+
+**Key Configuration Options:**
+
+- `mfaSettings` - Configure MFA settings for different authentication flows
+- `mfaLevel` - Control when users are prompted to set up MFA

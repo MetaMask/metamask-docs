@@ -1,0 +1,38 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x89
+- Public RPC URL: https://polygon-rpc.com (Avoid using public rpcTarget in production, use services
+  like Infura)
+- Display Name: Polygon Mainnet
+- Block Explorer Link: https://polygonscan.com
+- Ticker: MATIC
+- Ticker Name: Polygon
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x13881
+- Public RPC URL: https://rpc-mumbai.maticvigil.com (Avoid using public rpcTarget in production, use
+  services like Infura)
+- Display Name: Polygon Mumbai Testnet
+- Block Explorer Link: https://mumbai.polygonscan.com
+- Ticker: MATIC
+- Ticker Name: Polygon
+
+</TabItem>
+</Tabs>

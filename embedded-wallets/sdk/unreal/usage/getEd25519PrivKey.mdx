@@ -1,0 +1,19 @@
+---
+title: Get Ed25519 Private Key
+sidebar_label: getEd25519PrivKey
+description: 'Web3Auth Unreal SDK - getEd25519PrivKey | Embedded Wallets'
+---
+
+To retrieve the Ed25519 private key of the user, you can get it using the `GetEd25519PrivKey` method. This private key can be used to sign transactions on Solana, Near, Algorand, and other chains that use the ed25519 curve.
+
+## Usage
+
+```cpp
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FString& PublicAddress)
+{
+    // Get Ed25519 private key for Solana
+    FString Ed25519PrivKey = UWeb3AuthSDK::GetInstance()->GetEd25519PrivKey();
+    UE_LOG(LogTemp, Warning, TEXT("Solana Ed25519 Private Key: %s"), *Ed25519PrivKey);
+}
+```

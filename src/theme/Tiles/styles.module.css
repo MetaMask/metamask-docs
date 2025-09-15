@@ -1,0 +1,70 @@
+.tileGroup {
+  margin: 30px 0;
+}
+
+.tileGroupContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-flow: row wrap;
+  gap: 2%;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  background: var(--ifm-background-surface-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 15px;
+  margin-bottom: 2%;
+  flex-basis: 32%;
+  min-height: 60px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--ifm-color-emphasis-200);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+  text-decoration: none;
+}
+
+.tile:hover {
+  text-decoration: none !important;
+  border-color: var(--ifm-color-primary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tile:focus {
+  outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 2px;
+}
+
+.tileIcon {
+  height: 25px;
+  width: 25px;
+  margin-right: 15px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.tileText {
+  color: var(--ifm-color-content);
+  font-weight: 500;
+  flex: 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.4;
+}
+
+@media (width <=996px) {
+  .tile {
+    flex-basis: 49%;
+  }
+}
+
+@media (width <=600px) {
+  .tile {
+    flex-basis: 100%;
+  }
+}

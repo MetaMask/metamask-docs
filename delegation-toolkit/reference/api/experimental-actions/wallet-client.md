@@ -1,7 +1,6 @@
 ---
 description: Wallet Client API methods reference.
 sidebar_label: Wallet Client
-sidebar_position: 2
 toc_max_heading_level: 2
 ---
 
@@ -101,7 +100,7 @@ This function has the same parameters, and it also requires the following parame
 | Name | Type | Required | Description                                                                                                                                                                                               |
 | ---- | ---- | -------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `delegationManager` | `0x${string}` | Yes | The address of the Delegation Manager.                                                                                                                                                                    |
-| `permissionsContext` | `0x${string}` | Yes | Encoded calldata for redeeming delegations. If you're not using ERC-7715, you can use the [`redeemDelegation`](../delegation.md#redeemdelegation) utility function to generate the calldata manually. |
+| `permissionsContext` | `0x${string}` | Yes | Encoded calldata for redeeming delegations. If you're not using ERC-7715, you can use the [`redeemDelegations`](../delegation.md#redeemdelegations) utility function to generate the calldata manually. |
 
 ### Example
 

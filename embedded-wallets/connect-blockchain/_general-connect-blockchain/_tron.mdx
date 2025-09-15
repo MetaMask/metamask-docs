@@ -1,0 +1,39 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+<Tabs
+ defaultValue="testnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet (Shasta)", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain ID: 0x2b6653dc
+- Public RPC URL: https://api.trongrid.io (Avoid using public rpcTarget in production)
+- Display Name: TRON Mainnet
+- Block Explorer Link: https://tronscan.org
+- Ticker: TRX
+- Ticker Name: TRON
+- Logo: https://cryptologos.cc/logos/tron-trx-logo.png
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain ID: 0x94a9059e
+- Public RPC URL: https://api.shasta.trongrid.io/jsonrpc (Avoid using public rpcTarget in
+  production)
+- Display Name: TRON Shasta Testnet
+- Block Explorer Link: https://shasta.tronscan.org
+- Ticker: TRX
+- Ticker Name: TRON
+- Logo: https://cryptologos.cc/logos/tron-trx-logo.png
+
+</TabItem>
+</Tabs>

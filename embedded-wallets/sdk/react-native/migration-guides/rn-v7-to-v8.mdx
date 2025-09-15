@@ -1,0 +1,152 @@
+---
+title: PnP React Native - v7 to v8
+sidebar_label: PnP React Native - v7 to v8
+description: 'PnP React Native SDK - v7 to v8 | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+This migration guide provides steps for upgrading from version v7 to v8 of the Web3Auth React Native SDK.
+
+## Package Updates
+
+Update your dependencies in `package.json`:
+
+```typescript
+// remove-next-line
+"@web3auth/react-native-sdk": "^7.x.x"
+// add-next-line
+"@web3auth/react-native-sdk": "^8.0.0"
+
+// remove-next-line
+"@web3auth/ethereum-provider": "^8.x.x"
+// add-next-line
+"@web3auth/ethereum-provider": "^9.3.0"
+
+// add-next-line
+"react-native-quick-crypto": "^0.7.6"
+```
+
+## Breaking Changes
+
+### Network Enum Update
+
+The `OPENLOGIN_NETWORK` enum has been replaced with `WEB3AUTH_NETWORK`:
+
+```typescript
+// remove-next-line
+import { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from "@web3auth/react-native-sdk";
+// add-next-line
+import { LOGIN_PROVIDER, WEB3AUTH_NETWORK } from "@web3auth/react-native-sdk";
+
+// remove-next-line
+network: OPENLOGIN_NETWORK.SAPPHIRE_MAINNET,
+// add-next-line
+network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+```
+
+### Mandatory privateKeyProvider in Constructor
+
+The `privateKeyProvider` parameter must now be provided in the Web3Auth constructor:
+
+<Tabs>
+<TabItem value="bare" label="Bare React Native" default>
+
+```typescript
+const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
+  clientId: 'YOUR_CLIENT_ID',
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  redirectUrl: redirectUrl,
+  // add-next-line
+  privateKeyProvider: ethereumPrivateKeyProvider,
+})
+```
+
+</TabItem>
+<TabItem value="expo" label="Expo">
+
+```typescript
+const web3auth = new Web3Auth(WebBrowser, SecureStore, {
+  clientId: 'YOUR_CLIENT_ID',
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  redirectUrl: redirectUrl,
+  // add-next-line
+  privateKeyProvider: ethereumPrivateKeyProvider,
+})
+```
+
+</TabItem>
+</Tabs>
+
+### Connection Status Changes
+
+The `privKey` property has been removed. Use the `connected` property instead. Additionally, since the private key provider is taken as a parameter in the constructor, the `setupProvider` method is no longer needed, you can directly use the `provider` property from the Web3Auth instance.
+
+```typescript
+// remove-start
+if (web3auth.privKey) {
+  await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey);
+  setProvider(ethereumPrivateKeyProvider);
+// remove-end
+// add-next-line
+if (web3auth.connected) {
+  // add-next-line
+  setProvider(web3auth.provider);
+  setLoggedIn(true);
+}
+```
+
+### Authentication URL Change
+
+Update the redirect URL pattern:
+
+```typescript
+// remove-next-line
+const redirectUrl = `${scheme}://openlogin`
+// add-next-line
+const redirectUrl = `${scheme}://auth`
+```
+
+### globals.js Updates
+
+Update your globals.js file with react-native-quick-crypto. This is required for polyfilling the `crypto` module.
+
+```typescript
+global.Buffer = require('buffer').Buffer
+
+// add-start
+// eslint-disable-next-line import/first
+import { install } from 'react-native-quick-crypto'
+
+install()
+// add-end
+
+// Needed so that 'stream-http' chooses the right default protocol.
+global.location = {
+  protocol: 'file:',
+}
+
+global.process.version = 'v16.0.0'
+if (!global.process.version) {
+  global.process = require('process')
+  console.log({ process: global.process })
+}
+
+process.browser = true
+```
+
+Make sure to import required files in your entry point:
+
+```typescript
+import './globals'
+import '@ethersproject/shims'
+import '@expo/metro-runtime'
+```
+
+## Need Help?
+
+If you encounter any issues during migration, please:
+
+- Refer to our [official documentation](https://web3auth.io/embedded-wallets/sdk/react-native/)
+- Open a new thread in our [community forum with the react-native tag](https://web3auth.io/community/tag/react-native)

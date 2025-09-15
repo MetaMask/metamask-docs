@@ -1,0 +1,116 @@
+---
+title: Request Signature
+sidebar_label: request
+description: 'Web3Auth React Native SDK - request | Embedded Wallets'
+---
+
+The `request` method facilitates the use of templated transaction screens for signing transactions. This function returns a promise of the signature that can be used to broadcast the transaction.
+
+Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
+
+## Method
+
+`request(chainConfig: ChainConfig, method: string, params: unknown[], path?: string): Promise<string>;`
+
+## Parameters
+
+| Arguments | Description |
+| --- | --- |
+| `chainConfig` | Defines the chain to be used for signature. |
+| `method` | JSON RPC method name in `string`. Currently, the request method only supports the singing methods. |
+| `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api) to know more. |
+
+## Examples
+
+### Personal Sign
+
+```tsx
+const params = [
+  {
+    challenge: 'Hello World',
+    address,
+  },
+  null,
+]
+const res = await web3auth.request(chainConfig, 'personal_sign', params)
+```
+
+### Personal Sign Shorthand
+
+```tsx
+const params = ['Hello World', address]
+const res = await web3auth.request(chainConfig, 'personal_sign', params)
+```
+
+### Sign Type 4
+
+```tsx
+const params = [
+  address,
+  {
+    types: {
+      EIP712Domain: [
+        {
+          name: 'name',
+          type: 'string',
+        },
+        {
+          name: 'version',
+          type: 'string',
+        },
+        {
+          name: 'chainId',
+          type: 'uint256',
+        },
+        {
+          name: 'verifyingContract',
+          type: 'address',
+        },
+      ],
+      Person: [
+        {
+          name: 'name',
+          type: 'string',
+        },
+        {
+          name: 'wallet',
+          type: 'address',
+        },
+      ],
+      Mail: [
+        {
+          name: 'from',
+          type: 'Person',
+        },
+        {
+          name: 'to',
+          type: 'Person',
+        },
+        {
+          name: 'contents',
+          type: 'string',
+        },
+      ],
+    },
+    primaryType: 'Mail',
+    domain: {
+      name: 'Ether Mail',
+      version: '1',
+      chainId: 4,
+      verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
+    },
+    message: {
+      from: {
+        name: 'Cow',
+        wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+      },
+      to: {
+        name: 'Bob',
+        wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+      },
+      contents: 'Hello, Bob!',
+    },
+  },
+]
+const res = await web3auth.request(chainConfig, 'eth_signTypedData_v4', params)
+```

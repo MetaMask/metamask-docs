@@ -1,0 +1,48 @@
+To send a transaction, you can use the `Web3j` instance we created earlier. It has
+`ethSendRawTransaction` method which helps to send the raw transaction to the network. To create a
+raw transaction, you need to retrieve nonce, gas price, gas limit, and the value of the transaction.
+The nonce is the number of transactions sent from the sender's address. The gas price is the price
+of the gas, which is the unit of account for the transaction. The gas limit is the maximum amount of
+gas that the sender is willing to pay for the transaction. The value is the amount of ether to send.
+
+The default gas limit for a transfer ETH transaction is 21000, but you can also estimate the gas
+limit explicitly using `ethEstimateGas` method.
+
+```kotlin
+import org.web3j.protocol.core.methods.response.EthGetTransactionCount
+import org.web3j.protocol.core.methods.response.EthSendTransaction
+import org.web3j.crypto.TransactionEncoder
+import org.web3j.crypto.RawTransaction
+import org.web3j.utils.Numeric
+
+val ethGetTransactionCount: EthGetTransactionCount = web3.ethGetTransactionCount(
+  address, DefaultBlockParameterName.LATEST
+).sendAsync().get()
+
+val nonce: BigInteger = ethGetTransactionCount.transactionCount
+// Convert the amount to wei
+val value: BigInteger = Convert.toWei("0.0001", Convert.Unit.ETHER).toBigInteger()
+val gasLimit: BigInteger = BigInteger.valueOf(21000)
+val gasPrice = web3.ethGasPrice().sendAsync().get()
+
+
+val rawTransaction: RawTransaction = RawTransaction.createEtherTransaction(
+  nonce,
+  gasPrice.gasPrice,
+  gasLimit,
+  "RECEIVER_ADDRESS_IN_HEX",
+  value
+)
+
+val signedMessage: ByteArray = TransactionEncoder.signMessage(rawTransaction, credentials)
+val hexValue: String = Numeric.toHexString(signedMessage)
+
+val ethSendTransaction: EthSendTransaction = web3.ethSendRawTransaction(hexValue).sendAsync().get()
+
+if (ethSendTransaction.error != null) {
+  // Handle error
+  throw Exception(ethSendTransaction.error.message)
+}
+
+val transactionHash = ethSendTransaction.transactionHash
+```

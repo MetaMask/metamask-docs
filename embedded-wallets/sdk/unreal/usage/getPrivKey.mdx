@@ -1,0 +1,19 @@
+---
+title: Get Secp256k1 Private Key
+sidebar_label: getPrivKey
+description: 'Web3Auth Unreal SDK - getPrivKey | Embedded Wallets'
+---
+
+To retrieve the secp256k1 private key of the user, you can access it from the login success callback. The method returns an EVM compatible private key which can be used to sign transactions on EVM compatible chains.
+
+## Usage
+
+```cpp
+UFUNCTION()
+void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FString& PublicAddress)
+{
+    // Use private key for EVM transactions
+    UE_LOG(LogTemp, Warning, TEXT("Ethereum Private Key: %s"), *PrivateKey);
+    UE_LOG(LogTemp, Warning, TEXT("Ethereum Address: %s"), *PublicAddress);
+}
+```

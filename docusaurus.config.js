@@ -12,23 +12,23 @@ const {
   MM_RPC_URL,
 } = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
-const helpDropdown = fs.readFileSync('./src/components/NavDropdown/DeveloperTools.html', 'utf-8')
-const connectDropdown = fs.readFileSync(
-  './src/components/NavDropdown/ConnectMetaMask.html',
-  'utf-8'
-)
-const embedDropdown = fs.readFileSync('./src/components/NavDropdown/EmbedMetaMask.html', 'utf-8')
-const extendDropdown = fs.readFileSync('./src/components/NavDropdown/ExtendScale.html', 'utf-8')
-const npm2yarnPlugin = [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
-/** @type {import('@docusaurus/types').Config} */
-const siteUrl = 'https://docs.metamask.io'
+const productsDropdown = fs.readFileSync('./src/components/NavDropdown/Products.html', 'utf-8')
 const baseUrl = process.env.DEST || '/'
+const siteUrl = 'https://docs.metamask.io'
+
+const remarkPlugins = [
+  require('remark-math'),
+  [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]
+]
+
+const rehypePlugins = [[require('rehype-katex'), { strict: false }]]
+/** @type {import('@docusaurus/types').Config} */
 const fullUrl = new URL(baseUrl, siteUrl).toString()
 const config = {
   title: 'MetaMask developer documentation',
   // tagline: '',
   url: 'https://docs.metamask.io',
-  baseUrl: process.env.DEST || '/', // overwritten in github action for staging / latest
+  baseUrl, // overwritten in github action for staging / latest
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicons/favicon-96x96.png',
@@ -111,6 +111,16 @@ const config = {
 
   scripts: [
     {
+      src: baseUrl + 'js/fix-trailing-slash.js',
+      async: false,
+      defer: false,
+    },
+    {
+      src: baseUrl + 'js/code-focus.js',
+      async: false,
+      defer: true,
+    },
+    {
       src: 'https://cmp.osano.com/AzZMxHTbQDOQD8c1J/84e64bce-4a70-4dcc-85cb-7958f22b2371/osano.js',
     },
   ],
@@ -131,7 +141,22 @@ const config = {
           editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
           sidebarPath: false,
           breadcrumbs: false,
-          remarkPlugins: [npm2yarnPlugin],
+          remarkPlugins,
+          rehypePlugins,
+        },
+        pages: {
+          path: 'src/pages',
+          routeBasePath: '/',
+          include: ['**/**.{js,jsx,ts,tsx,md,mdx}'],
+          exclude: [
+            '**/_*.{js,jsx,ts,tsx,md,mdx}',
+            '**/_*/**',
+            '**/*.test.{js,jsx,ts,tsx}',
+            '**/__tests__/**',
+          ],
+          mdxPageComponent: '@theme/MDXPage',
+          remarkPlugins,
+          rehypePlugins,
         },
         theme: {
           customCss: require.resolve('./src/scss/custom.scss'),
@@ -140,6 +165,8 @@ const config = {
     ],
   ],
   plugins: [
+    ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache' }],
+    './src/plugins/docusaurus-plugin-tutorials',
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',
     [
@@ -151,7 +178,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./snaps-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
         admonitions: {
           keywords: [
             'info',
@@ -177,7 +205,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./gator-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
@@ -205,7 +234,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./services-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
       },
     ],
     [
@@ -217,7 +247,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./dashboard-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
       },
     ],
     [
@@ -229,7 +260,8 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./wallet-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
         sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
           const sidebarItems = await defaultSidebarItemsGenerator(args)
           const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
@@ -253,7 +285,22 @@ const config = {
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./sdk-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins: [npm2yarnPlugin],
+        remarkPlugins,
+        rehypePlugins,
+      },
+    ],
+
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'embedded-wallets',
+        path: 'embedded-wallets',
+        routeBasePath: 'embedded-wallets',
+        editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
+        sidebarPath: require.resolve('./ew-sidebar.js'),
+        breadcrumbs: false,
+        remarkPlugins,
+        rehypePlugins,
       },
     ],
     './src/plugins/plugin-json-rpc.ts',
@@ -276,7 +323,7 @@ const config = {
         {
           name: 'keywords',
           content:
-            'MetaMask, SDK, Wallet, API, Dapp, App, Connect, Delegation, Toolkit, Documentation, Smart, Account, Snaps, Infura, Services, Dashboard',
+            'MetaMask, Embedded Wallets, Quickstart, Web3 Development, SDK, Wallet Integration, API, Dapp Development, Blockchain Development, Ethereum Development, Smart Contract, Account Abstraction, Snaps, Crypto Wallet, DeFi, NFT, Infura, Services, Dashboard',
         },
         // Twitter-specific meta tags
         {
@@ -285,7 +332,7 @@ const config = {
         },
         {
           name: 'twitter:image',
-          content: 'https://docs.metamask.io/img/metamaskog.jpeg',
+          content: 'https://docs.metamask.io/img/metamaskog.jpg',
         },
         {
           name: 'twitter:image:alt',
@@ -302,7 +349,7 @@ const config = {
         // Open Graph meta tags for better social sharing
         {
           property: 'og:image',
-          content: 'https://docs.metamask.io/img/metamaskog.jpeg',
+          content: 'https://docs.metamask.io/img/metamaskog.jpg',
         },
         {
           property: 'og:image:width',
@@ -321,7 +368,7 @@ const config = {
           content: 'website',
         },
       ],
-      image: '/img/metamaskog.jpeg',
+      image: '/img/metamaskog.jpg',
       colorMode: {
         respectPrefersColorScheme: true,
       },
@@ -332,58 +379,43 @@ const config = {
           srcDark: 'img/metamask-logo-dark.svg',
           width: 150,
         },
-        hideOnScroll: true,
+        hideOnScroll: false,
         items: [
           {
             type: 'dropdown',
-            label: 'Connect to MetaMask',
+            label: 'Products',
             items: [
               {
                 type: 'html',
-                value: connectDropdown,
+                value: productsDropdown,
               },
             ],
           },
           {
-            type: 'dropdown',
-            label: 'Embed MetaMask',
-            items: [
-              {
-                type: 'html',
-                value: embedDropdown,
-              },
-            ],
+            label: 'Quickstart',
+            to: '/quickstart',
+            position: 'left',
           },
           {
-            type: 'dropdown',
-            label: 'Extend and scale',
-            items: [
-              {
-                type: 'html',
-                value: extendDropdown,
-              },
-            ],
+            label: 'Tutorials',
+            to: '/tutorials',
+            position: 'left',
           },
           {
-            type: 'dropdown',
-            label: 'Developer tools',
-            items: [
-              {
-                type: 'html',
-                value: helpDropdown,
-              },
-            ],
-          },
-          {
-            to: 'whats-new',
-            label: "What's new?",
+            to: 'developer-tools/faucet/',
+            label: 'Faucet',
             position: 'right',
           },
           {
-            type: 'custom-navbarWallet',
+            to: 'https://community.metamask.io/',
+            label: 'Help ↗',
             position: 'right',
-            includeUrl: REF_ALLOW_LOGIN_PATH,
           },
+          // {
+          //   type: 'custom-navbarWallet',
+          //   position: 'right',
+          //   includeUrl: REF_ALLOW_LOGIN_PATH,
+          // },
           /* Language drop down
           {
             type: "localeDropdown",
@@ -420,6 +452,10 @@ const config = {
               {
                 label: 'Delegation Toolkit',
                 to: '/delegation-toolkit',
+              },
+              {
+                label: 'Embedded Wallets',
+                to: '/embedded-wallets',
               },
               {
                 label: 'Snaps',
@@ -522,8 +558,23 @@ const config = {
       },
       prism: {
         theme: codeTheme,
-        additionalLanguages: ['csharp', 'gradle', 'bash', 'json'],
+        additionalLanguages: ['csharp', 'gradle', 'bash', 'json', 'java', 'kotlin', 'swift', 'groovy', 'dart'],
         magicComments: [
+          {
+            className: 'theme-code-block-highlighted-line',
+            line: 'highlight-next-line',
+            block: { start: 'highlight-start', end: 'highlight-end' },
+          },
+          {
+            className: 'code-unfocus',
+            line: 'unfocus-next-line',
+            block: { start: 'unfocus-start', end: 'unfocus-end' },
+          },
+          {
+            className: 'code-focus',
+            line: 'focus-next-line',
+            block: { start: 'focus-start', end: 'focus-end' },
+          },
           {
             className: 'git-diff-remove',
             line: 'remove-next-line',
@@ -554,7 +605,7 @@ const config = {
         // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
         replaceSearchResultPathname: {
           from: '/',
-          to: process.env.DEST || '/',
+          to: baseUrl,
         },
 
         // Optional: Algolia search parameters

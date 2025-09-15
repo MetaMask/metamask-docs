@@ -1,0 +1,107 @@
+---
+title: Integrate Embedded Wallets with the BitKub Blockchain in React Native
+sidebar_label: React Native
+image: 'img/embedded-wallets/banners/bitkub.png'
+keywords: [react-native, bitkub, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the BitKub Blockchain in React Native | Embedded Wallets'
+---
+
+import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
+import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
+import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
+import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
+import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
+import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
+import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) in React Native, the private key is available in the SDK state. Use it with EVM libraries to derive accounts, sign, and make JSON-RPC calls to the [BitKub](https://developers.bitkubchain.com/) network.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x60', // hex of 96
+  rpcTarget: 'https://rpc.bitkubchain.io',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'BitKub',
+  blockExplorer: 'https://www.bkcscan.com',
+  ticker: 'KUB',
+  tickerName: 'KUB',
+}
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+const chainConfig = {
+  chainNamespace: ChainNamespace.EIP155,
+  chainId: '0x6545', // hex of 25925
+  rpcTarget: 'https://rpc-testnet.bitkubchain.io',
+  // Avoid using public rpcTarget in production.
+  // Use services like Infura
+  displayName: 'BitKub Testnet',
+  blockExplorer: 'https://testnet.bkcscan.com',
+  ticker: 'tKUB',
+  tickerName: 'tKUB',
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

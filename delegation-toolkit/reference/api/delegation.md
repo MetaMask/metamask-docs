@@ -1,7 +1,6 @@
 ---
 description: Delegation-related API methods reference.
 sidebar_label: Delegation
-sidebar_position: 1
 toc_max_heading_level: 2
 ---
 
@@ -10,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Delegation API reference
 
-The following API methods are related to creating and managing [delegations](../../concepts/delegation.md).
+The following API methods are related to creating and managing [delegations](../../concepts/delegation/index.md).
 
 ## `createCaveatBuilder`
 
@@ -250,6 +249,47 @@ overrideDeployedEnvironment(
 // add-end
 ```
 
+## `disableDelegation`
+
+Encodes the calldata for disabling a delegation.
+
+### Parameters
+
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| `delegation` | `Delegation` | Yes | The delegation to be disabled. |
+
+### Example
+
+<Tabs>
+<TabItem value="example.ts">
+
+```ts
+import { DelegationManager } from "@metamask/delegation-toolkit/contracts";
+import { delegation } from "./delegation.ts";
+
+const disableDelegationData = DelegationManager.encode.disableDelegation({
+  delegation,
+});
+```
+
+</TabItem>
+<TabItem value="delegation.ts">
+
+```ts
+import { createDelegation } from "@metamask/delegation-toolkit";
+
+export const delegation = createDelegation({
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Empty caveats array - we recommend adding appropriate restrictions
+  caveats: [],
+});
+```
+
+</TabItem>
+</Tabs>
+
 ## `getDeleGatorEnvironment`
 
 Resolves the `DeleGatorEnvironment` for a chain.
@@ -317,16 +357,17 @@ export const environment: DeleGatorEnvironment = {
 </TabItem>
 </Tabs>
 
-## `redeemDelegation`
+## `redeemDelegations`
 
 Encodes calldata for redeeming delegations.
+This method supports batch redemption, allowing multiple delegations to be processed within a single transaction.
 
 ### Parameters
 
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
 | `delegations` | `Delegation[][]` | Yes | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed. |
-| `modes` | `ExecutionMode[]` | Yes | A collection specifying the execution mode for each corresponding delegation chain. |
+| `modes` | `ExecutionMode[]` | Yes | A collection specifying the [execution mode](../../concepts/delegation/index.md#execution-modes) for each corresponding delegation chain. Supported execution modes are `SINGLE_DEFAULT_MODE`, `SINGLE_TRY_MODE`, `BATCH_DEFAULT_MODE`, and `BATCH_TRY_MODE`. |
 | `executions` | `ExecutionStruct[][]` | Yes | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain. |
 
 ### Example

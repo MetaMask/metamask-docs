@@ -1,0 +1,65 @@
+---
+title: Bundler Polyfill Issues - Svelte with Vite
+image: 'img/metamaskog.jpg'
+sidebar_label: Svelte with Vite Polyfill Issues
+description: 'Bundler Polyfill Issues - Svelte with Vite | Embedded Wallets'
+---
+
+When developing a new web3 project with Svelte and Vite, you may encounter bundler issues due to missing polyfills. This commonly occurs with packages like `eccrypto` which rely on node modules not present in the browser environment. Directly adding these modules to your package can solve the issue but may lead to a larger bundle size, affecting load times and user experience.
+
+It's essential to recognize that the required node polyfills should only be included during development and testing, and the bundler should be instructed to exclude them from the production build.
+
+The following guide provides instructions for adding the necessary polyfills in a Svelte project using Vite.
+
+## Install the missing modules
+
+First, identify the missing libraries in your build. For integrating Web3Auth with Svelte, you will need to polyfill `buffer` and `process`. For other libraries, use an alternative like the `empty-module` to prevent build warnings.
+
+```bash npm2yarn
+npm install --save-dev buffer process vite-plugin-node-polyfills
+```
+
+:::warning
+
+You may need to polyfill additional libraries depending on the other blockchain libraries you are using with Web3Auth. Common polyfills include crypto-browserify, stream-browserify, and others listed in the previous guide.
+
+:::
+
+## Update your `vite.config.js`
+
+Modify your Vite configuration to integrate the polyfills with Svelte as follows:
+
+```tsx
+import { sveltekit } from '@sveltejs/kit/vite'
+import { defineConfig } from 'vitest/config'
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
+
+export default defineConfig({
+  plugins: [
+    nodePolyfills({
+      exclude: ['fs'],
+      globals: {
+        Buffer: true,
+        global: true,
+        process: true,
+      },
+      protocolImports: true,
+    }),
+    sveltekit(),
+  ],
+  optimizeDeps: {
+    include: ['dayjs/plugin/relativeTime.js', 'dayjs', '@web3auth/ethereum-provider'],
+  },
+  test: {
+    include: ['src/**/*.{test,spec}.{js,ts}'],
+  },
+})
+```
+
+This configuration sets up the necessary aliases and defines globals for the browser environment, ensuring compatibility and reducing bundle size.
+
+## Address additional dependency issues
+
+If there are additional dependencies that need to be polyfilled, consider adding them to the include array in the optimizeDeps section of the Vite config. Test your application thoroughly to ensure that all functionalities work as expected after the polyfills are added.
+
+By following these steps, you should be able to resolve bundler polyfill issues in your Svelte and Vite web3 project, leading to a more efficient build and a smoother user experience.

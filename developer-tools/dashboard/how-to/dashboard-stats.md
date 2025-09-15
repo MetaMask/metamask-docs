@@ -27,7 +27,7 @@ This data is crucial for optimizing your applications and ensuring they run smoo
    - **Last 24 Hours** - The last fully completed 24 consecutive hours.
      This is the default.
    - **Last 7 Days** - The last fully completed seven consecutive days.
-     A day appears once it has completed.
+     A day appears once it has been completed.
    - **Last 30 Days** - The last fully completed 30 days.
      A day appears once it has completed.
 

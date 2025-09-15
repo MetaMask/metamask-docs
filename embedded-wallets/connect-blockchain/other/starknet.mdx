@@ -1,0 +1,116 @@
+---
+title: Integrate Embedded Wallets with the StarkNet Blockchain
+sidebar_label: StarkNet
+image: 'img/embedded-wallets/banners/starknet.png'
+
+keywords: [starknet, embedded-wallets, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the StarkNet Blockchain | Embedded Wallets'
+---
+
+import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [StarkNet](https://starkware.co/starknet/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting a user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few methods here to get you started quickly.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Installation
+
+```bash npm2yarn
+npm install --save web3 starknet elliptic bn.js @starkware-industries/starkware-crypto-utils
+```
+
+## Initializing Provider
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0x1
+- Public RPC URL: https://rpc.ethereum.org (Avoid using public rpcTarget in production)
+- Display Name: StarkNet Mainnet
+- Block Explorer Link: https://explorer.immutable.com
+- Ticker: STRK
+- Ticker Name: StarkNet
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain Namespace: other
+- Chain ID: 0xaa36a7
+- Public RPC URL: https://rpc.sepolia.org (Avoid using public rpcTarget in production)
+- Display Name: StarkNet Testnet
+- Block Explorer Link: https://sepolia.etherscan.io
+- Ticker: STRK
+- Ticker Name: StarkNet
+
+</TabItem>
+</Tabs>
+
+## Get Account and Key
+
+Once a user logs in, the Embedded Wallets SDK returns a provider. Even though StarkNet is a layer 2 on Ethereum, it is not EVM compatible. Therefore, you cannot use the native [`EIP-1193`](https://eips.ethereum.org/EIPS/eip-1193) provider used for EVM blockchains; instead, use the private key directly to make calls.
+
+Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with StarkNet EC Curve specific signing functions, hence, we first derive the Stark Key using the `getStarkKey()` function.
+
+On the underhood, it uses the `starkwareCrypto.ec.keyFromPrivate()` function, where we pass our Private key with the `hex` argument since it is hex encoded. Further, we get the public key from this using the `starkwareCrypto.ec.keyFromPublic()` function, and we take its X-coordinate using `.pub.getX()` which is our `starkKey`. We use this `starkKey` on StarkNet transactions.
+
+For the `deployAccount()`, we use the file `ArgentAccount.json` which gives us the ABI of the compiled contract. We use that contract in Starknet's `defaultProvider.deployContract()` function to deploy the contract.
+
+[Get ArgentAccount.json from this gist.](https://gist.githubusercontent.com/yashovardhan/27e622a0f8de5acb3686674cd10fe0c8/raw/c1b2f70996083d2c3e85330464f71735aecf58a8/ArgentAccount.json)
+
+```tsx
+import starkwareCrypto from '@starkware-industries/starkware-crypto-utils'
+import { ec as elliptic } from 'elliptic'
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+const keyPair = starkwareCrypto.ec.keyFromPrivate(privateKey, 'hex')
+// get the account address from the public key
+const account = starkwareCrypto.ec.keyFromPublic(keyPair.getPublic(true, 'hex'), 'hex')
+
+// Use this key for the StarkNet transactions
+const startKey = account.pub.getX().toString('hex')
+```
+
+## Deploy Account
+
+```tsx
+import { AddTransactionResponse, defaultProvider } from 'starknet'
+import starkwareCrypto from '@starkware-industries/starkware-crypto-utils'
+import { ec as elliptic } from 'elliptic'
+import CompiledAccountContractAbi from './ArgentAccount.json'
+/*
+  Use code from the above Initializing Provider here
+*/
+
+// web3authProvider is web3auth.provider from above
+const privateKey = await web3authProvider.request({ method: 'private_key' })
+const keyPair = starkwareCrypto.ec.keyFromPrivate(privateKey, 'hex')
+// get the account address from the public key
+const account = starkwareCrypto.ec.keyFromPublic(keyPair.getPublic(true, 'hex'), 'hex')
+
+const contract = JSON.parse(JSON.stringify(CompiledAccountContractAbi))
+const response = await defaultProvider.deployContract({ contract })
+```

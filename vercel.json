@@ -3,6 +3,10 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "source": "/developer-tools/dashboard/how-to/project-sharing/",
+      "destination": "/developer-tools/dashboard/"
+    },
+    {
       "source": "/guide/",
       "destination": "/wallet/"
     },
@@ -709,6 +713,62 @@
     {
       "source": "/services/reference/:path*/json-rpc-methods/eth_coinbase/",
       "destination": "/services/get-started/infura/"
+    },
+    {
+      "source": "/delegation-toolkit/development/how-to/create-smart-account/configure-accounts-signers/",
+      "destination": "/delegation-toolkit/development/guides/smart-accounts/create-smart-account/"
+    },
+    {
+      "source": "/delegation-toolkit/development/how-to/create-smart-account/",
+      "destination": "/delegation-toolkit/development/guides/smart-accounts/create-smart-account/"
+    },
+    {
+      "source": "/delegation-toolkit/development/how-to/send-user-operation/",
+      "destination": "/delegation-toolkit/development/guides/smart-accounts/send-user-operation/"
+    },
+    {
+      "source": "/delegation-toolkit/development/how-to/generate-multisig-signature/",
+      "destination": "/delegation-toolkit/development/guides/smart-accounts/generate-multisig-signature/"
+    },
+    {
+      "source": "/delegation-toolkit/development/how-to/configure/",
+      "destination": "/delegation-toolkit/development/guides/configure/"
+    },
+    {
+      "source": "/delegation-toolkit/development/how-to/create-delegation/",
+      "destination": "/delegation-toolkit/development/guides/delegation/execute-on-smart-accounts-behalf/"
+    },
+    {
+      "source": "/delegation-toolkit/development/how-to/create-delegation/restrict-delegation/",
+      "destination": "/delegation-toolkit/development/guides/delegation/restrict-delegation/"
+    },
+    {
+      "source": "/delegation-toolkit/development/how-to/redeem-delegation/",
+      "destination": "/delegation-toolkit/development/guides/delegation/execute-on-smart-accounts-behalf/"
+    },
+    {
+      "source": "/delegation-toolkit/development/get-started/quickstart/",
+      "destination": "/delegation-toolkit/development/get-started/smart-account-quickstart/"
+    },
+    {
+      "source": "/delegation-toolkit/development/get-started/eip7702-quickstart/",
+      "destination": "/delegation-toolkit/development/get-started/smart-account-quickstart/eip7702/"
+    },
+    {
+      "source": "/delegation-toolkit/development/get-started/cli-quickstart/",
+      "destination": "/delegation-toolkit/development/get-started/use-the-cli/"
+    },
+    {
+      "source": "/delegation-toolkit/development/how-to/create-delegation/create-custom-caveat-enforcer/",
+      "destination": "/tutorials/create-custom-caveat-enforcer/"
+    },
+    {
+      "source": "/delegation-toolkit/development/concepts/caveat-enforcers/",
+      "destination": "/delegation-toolkit/development/concepts/delegation/caveat-enforcers/"
+    },
+    {
+      "source": "/developer-tools/faucet/sepolia/",
+      "destination": "/developer-tools/faucet/"
     }
   ]
 }

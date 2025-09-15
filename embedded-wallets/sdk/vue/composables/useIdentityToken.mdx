@@ -1,0 +1,63 @@
+---
+title: useIdentityToken
+sidebar_label: useIdentityToken
+description: '@web3auth/modal Vue Composable useIdentityToken | Embedded Wallets'
+---
+
+Composable to retrieve and manage the identity token from Web3Auth in Vue.
+
+### Import
+
+```ts
+import { useIdentityToken } from '@web3auth/modal/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useIdentityToken } from '@web3auth/modal/vue'
+
+  const { getIdentityToken, loading, error, token } = useIdentityToken()
+</script>
+
+<template>
+  <div>
+    <button @click="getIdentityToken" :disabled="loading">
+      {{ loading ? "Authenticating..." : "Get Identity Token" }}
+    </button>
+    <div v-if="token">Token: {{ token }}</div>
+    <div v-if="error">Error: {{ error.message }}</div>
+  </div>
+</template>
+```
+
+### Return Type
+
+```ts
+import type { IUseIdentityToken } from '@web3auth/modal/vue'
+```
+
+#### loading
+
+`Ref<boolean>`
+
+Whether the authentication process is in progress.
+
+#### error
+
+`Ref<Web3AuthError | null>`
+
+Error that occurred during the authentication process.
+
+#### token
+
+`Ref<string | null>`
+
+The identity token returned after successful authentication.
+
+#### getIdentityToken
+
+`() => Promise<string | null>`
+
+Function to initiate the authentication process and retrieve the identity token.

@@ -1,0 +1,161 @@
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+<Tabs
+  defaultValue="basic"
+  values={[
+    { label: "Basic parameters", value: "basic" },
+    { label: "Advanced parameters", value: "advanced" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="basic">
+
+| Parameter                         | Description                                                                                                                                                                              |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`                        | [Mandatory] Client Id for web3auth. You can obtain your client id from the web3auth developer dashboard.                                                                                 |
+| `web3AuthNetwork`                 | [Mandatory] Web3Auth Network to use for the session & the issued `idToken`. Default is `sapphire_mainnet`.                                                                               |
+| `enableLogging?`                  | Setting to true will enable logs. Default is false.                                                                                                                                      |
+| `sessionTime?`                    | Session Time (in seconds) for `idToken` issued by Web3Auth for server side verification. Default is 7 days (7 \* 86400). Max value can be 30 days (86400 \* 30) and min can be 1 sec (1) |
+| `useSFAKey?`                      | Uses Single Factor Auth SDK key with web3auth provider. Default is false.                                                                                                                |
+| `storageType?`                    | Setting to `local` will persist social login session across browser tabs. Default is `local`.                                                                                            |
+| `defaultChainId?`                 | Default chain Id to use. Your first chain will be used as default.                                                                                                                       |
+| `multiInjectedProviderDiscovery?` | Whether to enable discovery of injected wallets in the browser. Default is true.                                                                                                         |
+
+</TabItem>
+
+<TabItem value="advanced">
+
+| Parameter                   | Description                                                                                              |
+| --------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `chains?`                   | [Fetched automatically from Dashboard] Multiple chain configurations, only provided chains will be used. |
+| `uiConfig?`                 | [Fetched automatically from Dashboard] Config for configuring UI display properties.                     |
+| `modalConfig?`              | Helps you customize the modal UI elements and authentication methods.                                    |
+| `accountAbstractionConfig?` | [Fetched automatically from Dashboard] Account abstraction config for your chain namespace.              |
+| `useAAWithExternalWallet?`  | [Fetched automatically from Dashboard] Whether to use AA with external wallet.                           |
+| `walletServicesConfig?`     | [Fetched automatically from Dashboard] Configure any parameter related to Wallet Services Plugin         |
+| `ssr?`                      | Whether to enable SSR mode.                                                                              |
+| `mfaSettings?`              | MFA settings for the auth connector.                                                                     |
+| `mfaLevel?`                 | MFA level for the auth connector.                                                                        |
+| `privateKeyProvider?`       | Private key provider for your chain namespace.                                                           |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```tsx
+export interface Web3AuthOptions extends IWeb3AuthCoreOptions {
+  /**
+   * Config for configuring modal ui display properties
+   */
+  uiConfig?: Omit<UIConfig, "connectorListener">;
+  /**
+   * Config for configuring modal ui display properties
+   */
+  modalConfig?: ConnectorsModalConfig;
+}
+
+export interface IWeb3AuthCoreOptions {
+  /**
+   * Client id for web3auth.
+   * You can obtain your client id from the web3auth developer dashboard.
+   * You can set any random string for this on localhost.
+   */
+  clientId: string;
+  /**
+   * multiple chain configurations,
+   * only provided chains will be used
+   */
+  chains?: CustomChainConfig[];
+  /**
+   * default chain Id to use
+   */
+  defaultChainId?: string;
+  /**
+   * setting to true will enable logs
+   *
+   * @defaultValue false
+   */
+  enableLogging?: boolean;
+  /**
+   * setting to "local" will persist social login session across browser tabs.
+   *
+   * @defaultValue "local"
+   */
+  storageType?: "session" | "local" | "cookies";
+  /**
+   * sessionTime (in seconds) for idToken issued by Web3Auth for server side verification.
+   * @defaultValue 7 * 86400
+   *
+   * Note: max value can be 30 days (86400 * 30) and min can be  1 sec (1)
+   */
+  sessionTime?: number;
+  /**
+   * Web3Auth Network to use for the session.
+   */
+  web3AuthNetwork: WEB3AUTH_NETWORK_TYPE;
+  /**
+   * Uses core-kit key with web3auth provider
+   * @defaultValue false
+   */
+  useSFAKey?: boolean;
+  /**
+   * WhiteLabel options for web3auth
+   */
+  uiConfig?: UIConfig;
+  /**
+   * Account abstraction config for your chain namespace
+   */
+  accountAbstractionConfig?: AccountAbstractionMultiChainConfig;
+  /**
+   * Whether to use AA with external wallet
+   */
+  useAAWithExternalWallet?: boolean;
+  /**
+   * Connectors to use
+   */
+  connectors?: ConnectorFn[];
+  /**
+   * Plugins to use
+   */
+  plugins?: PluginFn[];
+  /**
+   * Whether to enable multi injected provider discovery
+   * @defaultValue true
+   */
+  multiInjectedProviderDiscovery?: boolean;
+  /**
+   * Wallet services config
+   */
+  walletServicesConfig?: WalletServicesConfig;
+  /**
+   * Private key provider for xrpl, mpc cases
+   */
+  privateKeyProvider?: IBaseProvider<string>;
+  /**
+   * Whether to enable SSR mode
+   *
+   * @defaultValue false
+   */
+  ssr?: boolean;
+  /**
+   * Build environment for Auth connector
+   * @internal
+   * @defaultValue BUILD_ENV.PRODUCTION
+   */
+  authBuildEnv?: BUILD_ENV_TYPE;
+  /**
+   * MFA settings for the auth connector
+   */
+  mfaSettings?: MfaSettings;
+  /**
+   * MFA level for the auth connector
+   */
+  mfaLevel?: MfaLevelType;
+}
+```
+
+</TabItem>
+
+</Tabs>
