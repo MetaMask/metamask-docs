@@ -6,9 +6,15 @@ import CardList from '@site/src/components/CardList'
 
 # Monad
 
-:::info Testnet only
+:::note Decentralized Infrastructure Network (DIN)
+
 Monad network support is for the testnet only, as the Monad mainnet has not yet launched.
+
+Monad is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
+meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
+
 :::
+
 
 Monad is a high-performance Ethereum-compatible L1 blockchain with a throughput of over 10,000
 transactions per second.
