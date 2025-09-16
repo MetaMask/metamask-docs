@@ -3,6 +3,10 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "source": "/developer-tools/dashboard/how-to/project-sharing/",
+      "destination": "/developer-tools/dashboard/"
+    },
+    {
       "source": "/guide/",
       "destination": "/wallet/"
     },
