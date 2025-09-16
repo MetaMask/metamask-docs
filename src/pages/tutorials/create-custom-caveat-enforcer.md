@@ -18,9 +18,7 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](/delegation-toolkit/get-started/install) in your project.
-- [Configure the Delegation Toolkit.](/delegation-toolkit/development/guides/configure)
-- [Install Foundry and Forge.](https://getfoundry.sh/introduction/installation)
+- [Install Foundry and Forge](https://getfoundry.sh/introduction/installation) in your project.
 - Get an [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 - Have a MetaMask account with some Sepolia ETH to deploy your contract.
   :::note
@@ -29,7 +27,15 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 
 ## Steps
 
-### 1. Create the caveat enforcer
+### 1. Install the toolkit
+
+Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) in your project:
+
+```bash npm2yarn
+npm install @metamask/delegation-toolkit
+```
+
+### 2. Create the caveat enforcer
 
 At the root of your project, create a `contracts` directory.
 In that directory, create a new contract named `AfterTimestampEnforcer.sol`.
@@ -75,7 +81,7 @@ contract AfterTimestampEnforcer is CaveatEnforcer {
 }
 ```
 
-### 2. Deploy the caveat enforcer
+### 3. Deploy the caveat enforcer
 
 Deploy your custom caveat enforcer using [Forge](https://book.getfoundry.sh/forge/deploying) to obtain its contract address.
 Replace `<YOUR-API-KEY>` with your Infura API key, and `<YOUR-PRIVATE-KEY>` with the private key of your MetaMask account:
@@ -89,7 +95,7 @@ forge create src/AfterTimestampEnforcer.sol:AfterTimestampEnforcer \
 
 The Forge CLI will display the address of the deployed caveat enforcer.
 
-### 3. Apply the caveat enforcer
+### 4. Apply the caveat enforcer
 
 Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the caveat builder, and create a delegation.
 Learn more about [applying caveats to a delegation](/delegation-toolkit/development/guides/delegation/restrict-delegation).
