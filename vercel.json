@@ -732,7 +732,7 @@
     },
     {
       "source": "/delegation-toolkit/development/how-to/configure/",
-      "destination": "/delegation-toolkit/development/guides/configure/"
+      "destination": "/delegation-toolkit/development/guides/configure-toolkit/"
     },
     {
       "source": "/delegation-toolkit/development/how-to/create-delegation/",
@@ -785,6 +785,10 @@
     {
       "source": "/delegation-toolkit/development/reference/api/experimental-actions/wallet-client",
       "destination": "/delegation-toolkit/development/reference/erc7715/wallet-client/"
+    },
+    {
+      "source": "/delegation-toolkit/development/concepts/environment/",
+      "destination": "/delegation-toolkit/development/guides/configure-toolkit/"
     },
     {
       "source": "/developer-tools/faucet/sepolia/",

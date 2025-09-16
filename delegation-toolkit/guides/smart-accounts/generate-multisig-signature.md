@@ -17,7 +17,6 @@ into a single aggregated signature.
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a Multisig smart account.](create-smart-account.md#create-a-multisig-smart-account)
 
 ## Generate a multisig signature

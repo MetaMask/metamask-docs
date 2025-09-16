@@ -13,7 +13,6 @@ the first user operation, or manually deploy the account.
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a MetaMask smart account.](create-smart-account.md) 
 
 ## Deploy with the first user operation
