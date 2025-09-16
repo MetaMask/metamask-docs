@@ -22,20 +22,18 @@ You can further constrain these scopes and limit the delegation's authority by a
 ## Apply a caveat enforcer
 
 For example, Alice creates a delegation with an [ERC-20 transfer scope](spending-limit.md#erc-20-transfer-scope) that allows Bob to spend up to 10 USDC.
-If Alice wants to further restrict the scope, she can limit Bob’s delegation to be valid only for a 7 day period,
+If Alice wants to further restrict the scope to limit Bob's delegation to be valid for only seven days,
 she can apply the [`timestamp`](../../../reference/delegation/caveats.md#timestamp) caveat enforcer.
 
-The following example creates a delegation using [`createDelegation`](../../../reference/delegation/index.md#createdelegation), applies the ERC-20 transfer scope with a spending limit of 10 USDC, and applies the `timestamp` caveat enforcer to restrict the delegation’s validity to a 7 day period:
+The following example creates a delegation using [`createDelegation`](../../../reference/delegation/index.md#createdelegation), applies the ERC-20 transfer scope with a spending limit of 10 USDC, and applies the `timestamp` caveat enforcer to restrict the delegation's validity to a seven-day period:
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
 
-// Constrains the delegation to one-time use.
-
-// We need to convert milliseconds to seconds.
+// Convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
 
-// 7 day after current time
+// Seven days after current time.
 const beforeThreshold = currentTime + 604800;
 
 const caveats = [{
