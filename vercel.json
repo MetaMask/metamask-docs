@@ -732,7 +732,7 @@
     },
     {
       "source": "/delegation-toolkit/development/how-to/configure/",
-      "destination": "/delegation-toolkit/development/guides/configure/"
+      "destination": "/delegation-toolkit/development/guides/configure-toolkit/"
     },
     {
       "source": "/delegation-toolkit/development/how-to/create-delegation/",
@@ -765,6 +765,10 @@
     {
       "source": "/delegation-toolkit/development/concepts/caveat-enforcers/",
       "destination": "/delegation-toolkit/development/concepts/delegation/caveat-enforcers/"
+    },
+    {
+      "source": "/delegation-toolkit/development/concepts/environment/",
+      "destination": "/delegation-toolkit/development/guides/configure-toolkit/"
     },
     {
       "source": "/developer-tools/faucet/sepolia/",

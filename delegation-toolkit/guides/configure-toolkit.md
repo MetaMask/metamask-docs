@@ -1,23 +1,71 @@
 ---
-description: Learn about the delegator environment object `DeleGatorEnvironment` and how to use it.
+description: Learn how to configure the bundler client, paymaster client, and toolkit environment.
+sidebar_label: Configure the toolkit
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Delegator environment
+# Configure the Delegation Toolkit
 
-The `DeleGatorEnvironment` object is a component of the MetaMask Delegation Toolkit that defines the contract addresses necessary for interacting with the [Delegation Framework](delegation/index.md#delegation-framework) on a specific network.
+The MetaMask Delegation toolkit is highly configurable, providing support for custom [bundlers and paymasters](#configure-the-bundler).
+You can also configure the [toolkit environment](#configure-the-toolkit-environment) to interact with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework).
 
-The delegator environment serves several key purposes:
+## Prerequisites
+
+[Install and set up the Delegation Toolkit.](../get-started/install.md)
+
+## Configure the bundler
+
+The toolkit uses Viem's Account Abstraction API to configure custom bundlers and paymasters.
+This provides a robust and flexible foundation for creating and managing [MetaMask Smart Accounts](../concepts/smart-accounts.md).
+See Viem's [account abstraction documentation](https://viem.sh/account-abstraction) for more information on the API's features, methods, and best practices.
+
+To use the bundler and paymaster clients with the toolkit, create instances of these clients and configure them as follows:
+
+```typescript
+import {
+  createPaymasterClient,
+  createBundlerClient,
+} from "viem/account-abstraction";
+import { http } from "viem";
+import { sepolia as chain } from "viem/chains"; 
+
+// Replace these URLs with your actual bundler and paymaster endpoints.
+const bundlerUrl = "https://your-bundler-url.com";
+const paymasterUrl = "https://your-paymaster-url.com";
+
+// The paymaster is optional.
+const paymasterClient = createPaymasterClient({
+  transport: http(paymasterUrl),
+});
+
+const bundlerClient = createBundlerClient({
+  transport: http(bundlerUrl),
+  paymaster: paymasterClient,
+  chain,
+});
+```
+
+Replace the bundler and paymaster URLs with your bundler and paymaster endpoints.
+For example, you can use endpoints from [Pimlico](https://docs.pimlico.io/references/bundler), [Infura](/services), or [ZeroDev](https://docs.zerodev.app/meta-infra/intro).
+
+:::note
+Providing a paymaster is optional when configuring your bundler client. However, if you choose not to use a paymaster, the smart contract account must have enough funds to pay gas fees.
+:::
+
+## (Optional) Configure the toolkit environment
+
+The toolkit environment (`DeleGatorEnvironment`) defines the contract addresses necessary for interacting with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework) on a specific network.
+It serves several key purposes:
 
 - It provides a centralized configuration for all the contract addresses required by the Delegation Framework.
 - It enables easy switching between different networks (for example, Mainnet and testnet) or custom deployments.
 - It ensures consistency across different parts of the application that interact with the Delegation Framework.
 
-## Resolve the delegator environment
+### Resolve the environment
 
-When you create a [MetaMask smart account](smart-accounts.md), the Delegation Toolkit automatically
+When you create a [MetaMask smart account](../concepts/smart-accounts.md), the toolkit automatically
 resolves the environment based on the version it requires and the chain configured.
 If no environment is found for the specified chain, it throws an error.
 
@@ -70,7 +118,7 @@ See the changelog of the toolkit version you are using (in the left sidebar) for
 
 Alternatively, you can use the [`getDelegatorEnvironment`](../reference/api/delegation.md#getdelegatorenvironment) function to resolve the environment.
 This function is especially useful if your delegator is not a smart account when
-creating a [redelegation](delegation/index.md#delegation-types).
+creating a [redelegation](../concepts/delegation/index.md#delegation-types).
 
 ```typescript
 import { 
@@ -82,7 +130,7 @@ import {
 const environment: DeleGatorEnvironment = getDelegatorEnvironment(11155111);
 ```
 
-## Deploy custom delegator environment
+### Deploy a custom environment
 
 You can deploy the contracts using any method, but the toolkit provides a convenient [`deployDelegatorEnvironment`](../reference/api/delegation.md#deploydelegatorenvironment) function. This function simplifies deploying the Delegation Framework contracts to your desired EVM chain.
 
@@ -154,11 +202,11 @@ const environment = await deployDeleGatorEnvironment(
 );
 ```
 
-Once the contracts are deployed, you can use them to override the delegator environment.
+Once the contracts are deployed, you can use them to override the environment.
 
-## Override delegator environment
+### Override the environment
 
-To override the delegator environment, the toolkit provides an [`overrideDeployedEnvironment`](../reference/api/delegation.md#overridedeployedenvironment) function to resolve
+To override the environment, the toolkit provides an [`overrideDeployedEnvironment`](../reference/api/delegation.md#overridedeployedenvironment) function to resolve
 `DeleGatorEnvironment` with specified contracts for the given chain and contract version. 
 
 ```typescript

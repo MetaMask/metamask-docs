@@ -43,7 +43,6 @@ const sidebar = {
             'concepts/delegation/caveat-enforcers',
           ],
         },
-        'concepts/environment',
       ],
     },
     {
@@ -51,7 +50,7 @@ const sidebar = {
       label: 'Guides',
       collapsed: false,
       items: [
-        'guides/configure',
+        'guides/configure-toolkit',
         {
           type: 'category',
           label: 'MetaMask Smart Accounts',
