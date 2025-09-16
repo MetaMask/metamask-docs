@@ -1,6 +1,7 @@
 // @ts-check
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
+
 const sidebar = {
   gatorSidebar: [
     {
@@ -23,7 +24,7 @@ const sidebar = {
             'get-started/smart-account-quickstart/eip7702',
           ],
         },
-        'get-started/erc7715-quickstart',
+        // 'get-started/erc7715-quickstart',
         'get-started/use-the-cli',
         'get-started/supported-networks',
       ],
@@ -87,15 +88,15 @@ const sidebar = {
         },
       ],
     },
-    {
-      type: 'category',
-      label: 'Experimental',
-      collapsed: false,
-      items: [
-        'experimental/erc-7715-request-permissions',
-        'experimental/erc-7710-redeem-delegations',
-      ],
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Experimental',
+    //   collapsed: false,
+    //   items: [
+    //     'experimental/erc-7715-request-permissions',
+    //     'experimental/erc-7710-redeem-delegations',
+    //   ],
+    // },
     {
       type: 'category',
       label: 'Tutorials',
@@ -140,15 +141,15 @@ const sidebar = {
             'reference/delegation/caveat-enforcer-client',
           ],
         },
-        {
-          type: 'category',
-          label: 'ERC-7715',
-          collapsed: false,
-          items: [
-            'reference/erc7715/wallet-client',
-            'reference/erc7715/bundler-client',
-          ],
-        },
+        // {
+        //   type: 'category',
+        //   label: 'ERC-7715',
+        //   collapsed: false,
+        //   items: [
+        //     'reference/erc7715/wallet-client',
+        //     'reference/erc7715/bundler-client',
+        //   ],
+        // },
       ],
     },
   ],
