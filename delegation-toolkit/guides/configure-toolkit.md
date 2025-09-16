@@ -54,7 +54,7 @@ For example, you can use endpoints from [Pimlico](https://docs.pimlico.io/refere
 Providing a paymaster is optional when configuring your bundler client. However, if you choose not to use a paymaster, the smart contract account must have enough funds to pay gas fees.
 :::
 
-## Configure the toolkit environment
+## (Optional) Configure the toolkit environment
 
 The toolkit environment (`DeleGatorEnvironment`) defines the contract addresses necessary for interacting with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework) on a specific network.
 It serves several key purposes:
