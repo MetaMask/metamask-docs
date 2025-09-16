@@ -147,7 +147,7 @@ const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [address, [], [], []],
   deploySalt: '0x',
-  signatory: { walletClient },
+  signer: { walletClient },
 });
 ```
 
