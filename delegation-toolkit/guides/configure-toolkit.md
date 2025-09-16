@@ -51,7 +51,7 @@ Replace the bundler and paymaster URLs with your bundler and paymaster endpoints
 For example, you can use endpoints from [Pimlico](https://docs.pimlico.io/references/bundler), [Infura](/services), or [ZeroDev](https://docs.zerodev.app/meta-infra/intro).
 
 :::note
-Providing a paymaster is optional when configuring your bundler client. However, if you choose not to use a paymaster, the smart contract account must have sufficient funds to pay for gas fees directly.
+Providing a paymaster is optional when configuring your bundler client. However, if you choose not to use a paymaster, the smart contract account must have enough funds to pay gas fees.
 :::
 
 ## Configure the toolkit environment
