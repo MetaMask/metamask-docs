@@ -164,8 +164,8 @@ At the start of each new period, the allowance resets.
 | `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
 | `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
 | `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
@@ -203,8 +203,8 @@ At the start, a specified initial amount is released, after which tokens accrue 
 | `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
 | `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
 | `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
@@ -239,8 +239,8 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 | Name              | Type      | Required | Description                                                       |
 | ----------------- | --------- | -------- | ----------------------------------------------------------------- |
 | `maxAmount`       | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
@@ -273,8 +273,8 @@ Defines the specific methods, contract addresses, and calldata that are allowed 
 | ----------------- | -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `targets`         | `Address[]`                      | Yes      | The list of addresses that the delegate is allowed to call.                                                                                                     |
 | `selectors`       | `MethodSelector[]`               | Yes      | The list of method selectors that the delegate is allowed to call. The selector value can be 4-byte hex string, ABI function signature, or ABI function object. |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of `calldata` that the delegate is allowed to call.                                                                                                    |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The `calldata` that the delegate is allowed to call.                                                                                                            |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The `calldata` that the delegate is allowed to call. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
