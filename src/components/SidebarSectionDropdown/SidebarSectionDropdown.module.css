@@ -29,7 +29,7 @@
   align-items: center;
   cursor: pointer;
   user-select: none;
-  padding: 1rem 2.4rem;
+  padding: 1rem 2.4rem !important;
   margin: 0;
   background: var(--ifm-background-color);
   transition: all 0.2s ease-in-out;
