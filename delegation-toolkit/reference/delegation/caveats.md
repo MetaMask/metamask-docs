@@ -594,7 +594,7 @@ const tokenPeriodConfigs = [
     startDate
   }
 ]
-// TODO: Update
+
 const caveats = [{
   type: "multiTokenPeriod",
   tokenPeriodConfigs,
