@@ -23,7 +23,7 @@
   font-size: 2rem;
   font-weight: 500;
   line-height: 1.3;
-  color: var(--ifm-color-emphasis-600);
+  color: var(--ifm-color-emphasis-1000);
   white-space: nowrap;
   border-right: 1px solid var(--ifm-toc-border-color);
   width: var(--doc-sidebar-width);
@@ -131,7 +131,7 @@
 }
 
 [data-theme='dark'] .sectionHeading {
-  color: var(--ifm-color-emphasis-600);
+  color: var(--ifm-color-emphasis-800);
   border-right-color: var(--ifm-color-emphasis-300);
 }
 
