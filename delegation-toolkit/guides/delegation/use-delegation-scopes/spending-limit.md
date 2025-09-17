@@ -128,7 +128,7 @@ At the start of each new period, the allowance resets.
 For example, Alice creates a delegation that lets Bob spend up to 0.01 ETH on her behalf each day.
 Bob can transfer a total of 0.01 ETH per day; the limit resets at the beginning of the next day.
 
-When this scope is applied, the toolkit automatically disables ERC-20 and ERC-721 token transfers (sets the allowed calldata to `0x`).
+When this scope is applied, the toolkit disables ERC-20 and ERC-721 token transfers by default, setting the allowed `calldata` to `0x`.
 
 Internally, this scope uses the [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) and [`nativeTokenPeriodTransfer`](../../../reference/delegation/caveats.md#nativetokenperiodtransfer) caveat enforcers.
 
@@ -155,7 +155,7 @@ Token transfers are blocked until the defined start timestamp.
 At the start, a specified initial amount is released, after which tokens accrue linearly at the configured rate, up to the maximum allowed amount.
 For example, Alice creates delegation that allows Bob to spend 0.001 ETH per second, starting with an initial amount of 0.01 ETH, up to a maximum of 0.1 ETH.
 
-When this scope is applied, the toolkit automatically disables ERC-20 and ERC-721 token transfers (sets the allowed calldata to `0x`).
+When this scope is applied, the toolkit disables ERC-20 and ERC-721 token transfers by default, setting the allowed `calldata` to `0x`.
 
 Internally, this scope uses the [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) and [`nativeTokenStreaming`](../../../reference/delegation/caveats.md#nativetokenstreaming) caveat enforcers.
 
@@ -183,7 +183,7 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 For example, Alice creates a delegation that allows Bob to spend up to 0.1 ETH without any conditions.
 Bob may use the 0.1 ETH in a single transaction or make multiple transactions, as long as the total does not exceed 0.1 ETH.
 
-When this scope is applied, the toolkit automatically disables ERC-20 and ERC-721 token transfers (sets the allowed calldata to `0x`).
+When this scope is applied, the toolkit disables ERC-20 and ERC-721 token transfers by default, setting the allowed `calldata` to `0x`.
 
 Internally, this scope uses the [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) and [`nativeTokenTransferAmount`](../../../reference/delegation/caveats.md#nativetokentransferamount) caveat enforcers.
 

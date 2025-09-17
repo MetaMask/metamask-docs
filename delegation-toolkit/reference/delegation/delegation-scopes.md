@@ -164,6 +164,8 @@ At the start of each new period, the allowance resets.
 | `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
 | `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
 | `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. |
 
 #### Example
 
@@ -201,6 +203,8 @@ At the start, a specified initial amount is released, after which tokens accrue 
 | `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
 | `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
 | `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. |
 
 #### Example
 
@@ -232,9 +236,11 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 
 #### Parameters
 
-| Name           | Type      | Required | Description                                                       |
-| -------------- | --------- | -------- | ----------------------------------------------------------------- |
-| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
+| Name              | Type      | Required | Description                                                       |
+| ----------------- | --------- | -------- | ----------------------------------------------------------------- |
+| `maxAmount`       | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. |
 
 #### Example
 
