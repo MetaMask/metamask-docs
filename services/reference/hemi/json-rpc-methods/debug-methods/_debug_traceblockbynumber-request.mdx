@@ -1,0 +1,13 @@
+```bash
+curl https://hemi-mainnet.infura.io/v3/YOUR-API-KEY \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "debug_traceBlockByNumber",
+    "params": [
+      "latest"
+    ],
+    "id": 1
+  }'
+```

@@ -8,7 +8,12 @@ import Banner from '@site/src/components/Banner'
 
 # Hemi quickstart
 
-This quickstart guide will help you set up and make calls on the Hemi network using the Infura endpoints.
+This quickstart guide will help you set up and make JSON-RPC API calls on the Hemi network using the Infura endpoints.
+
+:::info
+Use the [Hemi Bitcoin Kit (hBK)](https://docs.hemi.xyz/building-bitcoin-apps/hemi-bitcoin-kit-hbk)
+to build Bitcoin-aware smart contracts. The Hemi Bitcoin Kit smart contract provides utilities for interacting with Bitcoin data on the Hemi network.
+:::
 
 <Banner>
 Don't have an Infura account? Sign up for our free plan and start using the Hemi network!
@@ -188,8 +193,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 ## Next steps
 
-Now that you have successfully made a call to the Hemi network, you can explore more functionalities and APIs provided
-by Infura. Here are some suggestions:
+Now that you have successfully made a call to the Hemi network, you can explore more functionalities and APIs provided by Infura. Here are some suggestions:
 
 - **Explore other Hemi APIs**: Infura supports a wide range of APIs. You can find more information in the
   [JSON-RPC API method documentation](json-rpc-methods/index.md).

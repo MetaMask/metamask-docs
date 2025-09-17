@@ -1,0 +1,21 @@
+An object containing synchronization status information with the following fields:
+
+- `current_l1`: Current L1 block being processed
+- `current_l1_finalized`: Current finalized L1 block
+- `head_l1`: Head L1 block
+- `safe_l1`: Safe L1 block
+- `finalized_l1`: Finalized L1 block
+- `unsafe_l2`: Unsafe L2 block
+- `safe_l2`: Safe L2 block
+- `finalized_l2`: Finalized L2 block
+- `pending_safe_l2`: Pending safe L2 block
+- `queued_unsafe_l2`: Queued unsafe L2 block
+- `engine_sync_target`: Engine synchronization target
+
+Each block object contains:
+- `hash`: Block hash
+- `number`: Block number
+- `parentHash`: Parent block hash
+- `timestamp`: Block timestamp
+- `l1origin`: (L2 blocks only) L1 origin information with hash and number
+- `sequenceNumber`: (L2 blocks only) Sequence number
