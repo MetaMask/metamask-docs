@@ -2,7 +2,7 @@
   position: relative;
   font-family: var(--ifm-font-family-base);
   border-bottom: 1px solid var(--ifm-toc-border-color);
-  padding: 0.4rem 0;
+  padding: 0.2rem 0;
 }
 
 .versionItem {
