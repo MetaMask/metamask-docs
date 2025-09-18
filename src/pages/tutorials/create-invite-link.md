@@ -298,6 +298,6 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 ## Next steps
 
 - See [`invitation-link-example`](https://github.com/MetaMask/gator-examples/tree/feat/invitation-link-example/examples/invitation-link-example) on GitHub for a complete example dapp.
-- When creating an invitation, you can add more rules and restrictions using [delegation scopes](/delegation-toolkit/development/guides/delegation/use-delegation-scopes) and [caveat enforcers](/delegation-toolkit/development/guides/delegation/use-delegation-scopes/refine-scope).
+- When creating an invitation, you can add more rules and restrictions using [delegation scopes](/delegation-toolkit/development/guides/delegation/use-delegation-scopes) and [caveat enforcers](/delegation-toolkit/guides/delegation/use-delegation-scopes/constrain-scope.md).
 - Learn more about [smart account implementations](/delegation-toolkit/development/guides/smart-accounts/create-smart-account).
 - Learn more about [delegation types](/delegation-toolkit/development/concepts/delegation/#delegation-types).
