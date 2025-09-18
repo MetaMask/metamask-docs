@@ -1,5 +1,6 @@
 ---
 description: Learn how to deploy a MetaMask smart account.
+keywords: [deploy, smart account, user operation]
 ---
 
 import Tabs from "@theme/Tabs";

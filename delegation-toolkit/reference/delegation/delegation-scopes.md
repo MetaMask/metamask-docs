@@ -1,5 +1,6 @@
 ---
 description: Delegation scopes reference.
+keywords: [delegation scopes, configuration, reference]
 ---
 
 # Delegation scopes

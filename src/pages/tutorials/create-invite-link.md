@@ -3,6 +3,7 @@ title: Create a social invite link
 image: 'img/tutorials/tutorials-banners/create-invite-link.png'
 description: Allow users to refer their friends to your dapp using an invite link.
 tags: [delegation toolkit, embedded wallets, social, invite, referral, link]
+keywords: [delegation toolkit, social, invite, referral, link]
 date: Sep 8, 2025
 author: MetaMask Developer Relations
 toc_max_heading_level: 4

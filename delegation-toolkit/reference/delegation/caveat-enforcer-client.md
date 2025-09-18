@@ -2,6 +2,7 @@
 description: Caveat Enforcer Client API reference.
 sidebar_label: Caveat Enforcer Client
 toc_max_heading_level: 2
+keywords: [delegation state, caveat enforcer client, API, methods, reference]
 ---
 
 import Tabs from "@theme/Tabs";

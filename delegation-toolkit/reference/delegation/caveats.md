@@ -1,6 +1,7 @@
 ---
 description: Caveat enforcers reference.
 toc_max_heading_level: 2
+keywords: [caveats, caveat enforcers, configuration, smart contracts, reference]
 ---
 
 # Caveats

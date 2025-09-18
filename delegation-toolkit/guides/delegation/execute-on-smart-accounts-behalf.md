@@ -1,6 +1,7 @@
 ---
 description: Use delegations to perform executions on a smart account's behalf.
 sidebar_label: Execute on a smart account's behalf
+keywords: [execution, smart account, create, redeem, delegation, delegator, delegate]
 ---
 
 import Tabs from "@theme/Tabs"; 

@@ -1,5 +1,6 @@
 ---
 description: Learn how to use the delegation scopes.
+keywords: [delegation scope, delegation, restrict, authority]
 ---
 
 # Use delegation scopes

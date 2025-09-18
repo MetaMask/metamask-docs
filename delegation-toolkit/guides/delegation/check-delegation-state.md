@@ -2,6 +2,7 @@
 description: Learn how to check the delegation state.
 sidebar_label: Check the delegation state
 toc_max_heading_level: 3
+keywords: [delegation, state, caveat enforcer, delegation scope]
 ---
 
 import Tabs from "@theme/Tabs";
