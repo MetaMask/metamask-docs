@@ -1,9 +1,9 @@
 ---
-description: Hemi Network JSON-RPC APIs
+description: Hemi Network JSON-RPC API
 sidebar_position: 3
 ---
 
-# JSON-RPC APIs
+# JSON-RPC API
 
 Interact with the Hemi network using the standard Ethereum JSON-RPC API methods.
 
