@@ -55,11 +55,6 @@ title: "EIP-7702 quickstart",
 description: "Upgrade an externally owned account to a smart account.",
 },
 {
-href: "get-started/erc7715-quickstart",
-title: "ERC-7715 quickstart",
-description: "Request permissions from MetaMask and execute transactions on a user's behalf.",
-},
-{
 href: "get-started/use-the-cli",
 title: "Use the CLI",
 description: "Use the Delegation Toolkit CLI to bootstrap a project.",

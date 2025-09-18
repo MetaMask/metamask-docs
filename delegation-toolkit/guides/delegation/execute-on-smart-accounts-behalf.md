@@ -51,10 +51,10 @@ const bundlerClient = createBundlerClient({
 ### 3. Create a delegator account
 
 Create an account to represent Alice, the delegator who will create a delegation.
-The delegator must be a MetaMask smart account; use the toolkit's [`toMetaMaskSmartAccount`](../../reference/api/smart-account.md#tometamasksmartaccount) method to create the delegator account.
+The delegator must be a MetaMask smart account; use the toolkit's [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmartaccount) method to create the delegator account.
 
 A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of P256 (passkey) signers.
-This examples configures a [Hybrid smart account with an Account signatory](../smart-accounts/create-smart-account.md#create-a-hybrid-smart-account-with-an-account-signatory):
+This examples configures a [Hybrid smart account with an Account signer](../smart-accounts/create-smart-account.md#create-a-hybrid-smart-account-with-an-account-signer):
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit"
@@ -67,7 +67,7 @@ const delegatorSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account: delegatorAccount },
+  signer: { account: delegatorAccount },
 })
 ```
 
@@ -93,7 +93,7 @@ const delegateSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid, // Hybrid smart account
   deployParams: [delegateAccount.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account: delegateAccount },
+  signer: { account: delegateAccount },
 })
 ```
 
@@ -122,9 +122,11 @@ export const delegateWalletClient = createWalletClient({
 Create a [root delegation](../../concepts/delegation/index.md#delegation-types) from Alice to Bob.
 With a root delegation, Alice is delegating her own authority away, as opposed to *redelegating* permissions she received from a previous delegation.
 
-Use the toolkit's [`createDelegation`](../../reference/api/delegation.md#createdelegation) method to create a root delegation.
-This example passes an empty `caveats` array, which means Bob can perform any action on Alice's behalf. We recommend [restricting the delegation](restrict-delegation.md) by adding caveat enforcers.
-For example, Alice can delegate the ability to spend her USDC to Bob, limiting the amount to 100 USDC.
+Use the toolkit's [`createDelegation`](../../reference/delegation/index.md#createdelegation) method to create a root delegation. When creating 
+delegation, you need to configure the scope of the delegation to define the initial authority. 
+
+This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing Alice to delegate to Bob the ability to spend her USDC, with a 
+specified limit on the total amount.
 
 :::warning Important
 
@@ -135,16 +137,24 @@ Before creating a delegation, ensure that the delegator account (in this example
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit"
 
+// USDC address on Ethereum Sepolia.
+const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+
 const delegation = createDelegation({
   to: delegateSmartAccount.address, // This example uses a delegate smart account
   from: delegatorSmartAccount.address,
-  caveats: [], // Empty caveats array - we recommend adding appropriate restrictions.
+  environment: delegatorSmartAccount.environment
+  scope: {
+    type: "erc20TransferAmount",
+    tokenAddress,
+    maxAmount: 10000000n,
+  },
 })
 ```
 
 ### 6. Sign the delegation
 
-Sign the delegation with Alice's account, using the [`signDelegation`](../../reference/api/smart-account.md#signdelegation) method from `MetaMaskSmartAccount`. Alternatively, you can use the toolkit's [`signDelegation`](../../reference/api/delegation.md#signdelegation) utility method. Bob will later use the signed delegation to perform actions on Alice's behalf.
+Sign the delegation with Alice's account, using the [`signDelegation`](../../reference/smart-account.md#signdelegation) method from `MetaMaskSmartAccount`. Alternatively, you can use the toolkit's [`signDelegation`](../../reference/delegation/index.md#signdelegation) utility method. Bob will later use the signed delegation to perform actions on Alice's behalf.
 
 ```typescript
 const signature = await delegatorSmartAccount.signDelegation({
@@ -161,8 +171,8 @@ const signedDelegation = {
 
 Bob can now redeem the delegation. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on Alice's behalf.
 
-To prepare the calldata for the redeem transaction, use the [`redeemDelegations`](../../reference/api/delegation.md#redeemdelegations) method from `DelegationManager`.
-Since Bob is redeeming a single delegation chain, use the [`SINGLE_DEFAULT_MODE`](../../concepts/delegation/index.md#execution-modes) execution mode.
+To prepare the calldata for the redeem transaction, use the [`redeemDelegations`](../../reference/delegation/index.md#redeemdelegations) method from `DelegationManager`.
+Since Bob is redeeming a single delegation chain, use the [`SingleDefault`](../../concepts/delegation/index.md#execution-modes) execution mode.
 
 Bob can redeem the delegation by submitting a user operation if his account is a smart account, or a regular transaction if his account is an EOA:
 
@@ -170,9 +180,8 @@ Bob can redeem the delegation by submitting a user operation if his account is a
 <TabItem value="Redeem with a smart account">
 
 ```typescript
-import { createExecution } from "@metamask/delegation-toolkit"
+import { createExecution, ExecutionMode } from "@metamask/delegation-toolkit"
 import { DelegationManager } from "@metamask/delegation-toolkit/contracts"
-import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils"
 import { zeroAddress } from "viem"
 
 const delegations = [signedDelegation]
@@ -181,7 +190,7 @@ const executions = createExecution({ target: zeroAddress })
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
-  modes: [SINGLE_DEFAULT_MODE],
+  modes: [ExecutionMode.SingleDefault],
   executions: [executions],
 })
 
@@ -202,9 +211,8 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 <TabItem value="Redeem with an EOA">
 
 ```typescript
-import { createExecution, getDeleGatorEnvironment } from "@metamask/delegation-toolkit"
+import { createExecution, getDeleGatorEnvironment, ExecutionMode } from "@metamask/delegation-toolkit"
 import { DelegationManager } from "@metamask/delegation-toolkit/contracts"
-import { SINGLE_DEFAULT_MODE } from "@metamask/delegation-toolkit/utils"
 import { zeroAddress } from "viem"
 
 const delegations = [signedDelegation]
@@ -213,7 +221,7 @@ const executions = createExecution({ target: zeroAddress })
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
-  modes: [SINGLE_DEFAULT_MODE],
+  modes: [ExecutionMode.SingleDefault],
   executions: [executions]
 });
 
@@ -226,3 +234,8 @@ const transactionHash = await delegateWalletClient.sendTransaction({
 
 </TabItem>
 </Tabs>
+
+## Next steps
+
+- See [how to configure different scopes](use-delegation-scopes/index.md) to define the initial authority of a delegation.
+- See [how to further refine the authority of a delegation](use-delegation-scopes/constrain-scope.md) using caveat enforcers.

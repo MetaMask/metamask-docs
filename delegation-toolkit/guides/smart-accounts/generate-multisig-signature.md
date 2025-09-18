@@ -11,7 +11,7 @@ The MetaMask Delegation Toolkit supports [Multisig smart accounts](../../concept
 allowing you to add multiple externally owned accounts (EOA) 
 signers with a configurable execution threshold. When the threshold 
 is greater than 1, you can collect signatures from the required signers 
-and use the [`aggregateSignature`](../../reference/api/smart-account.md#aggregatesignature) function to combine them 
+and use the [`aggregateSignature`](../../reference/smart-account.md#aggregatesignature) function to combine them 
 into a single aggregated signature.
 
 ## Prerequisites
@@ -98,7 +98,7 @@ export const aliceSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
   deploySalt: "0x",
-  signatory: [ { account: aliceAccount } ],
+  signer: [ { account: aliceAccount } ],
 });
 
 export const bobSmartAccount = await toMetaMaskSmartAccount({
@@ -106,7 +106,7 @@ export const bobSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
   deploySalt: "0x",
-  signatory: [ { account: bobAccount } ],
+  signer: [ { account: bobAccount } ],
 });
 
 export const bundlerClient = createBundlerClient({

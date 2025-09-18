@@ -84,7 +84,7 @@ const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: '0x',
-  signatory: { account },
+  signer: { account },
 })
 
 // Deploy the smart account by sending a user operation.
@@ -178,7 +178,7 @@ const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [owner, [credential.id], [publicKey.x], [publicKey.y]],
   deploySalt: '0x',
-  signatory: { webAuthnAccount, keyId: toHex(credential.id) },
+  signer: { webAuthnAccount, keyId: toHex(credential.id) },
 })
 ```
 

@@ -740,7 +740,7 @@
     },
     {
       "source": "/delegation-toolkit/development/how-to/create-delegation/restrict-delegation/",
-      "destination": "/delegation-toolkit/development/guides/delegation/restrict-delegation/"
+      "destination": "/delegation-toolkit/development/guides/delegation/use-delegation-scopes/constrain-scope/"
     },
     {
       "source": "/delegation-toolkit/development/how-to/redeem-delegation/",
@@ -765,6 +765,26 @@
     {
       "source": "/delegation-toolkit/development/concepts/caveat-enforcers/",
       "destination": "/delegation-toolkit/development/concepts/delegation/caveat-enforcers/"
+    },
+    {
+      "source": "/delegation-toolkit/development/reference/caveats/",
+      "destination": "/delegation-toolkit/development/reference/delegation/caveats/"
+    },
+    {
+      "source": "/delegation-toolkit/development/reference/api/delegation/",
+      "destination": "/delegation-toolkit/development/reference/delegation/"
+    },
+    {
+      "source": "/delegation-toolkit/development/reference/api/smart-account/",
+      "destination": "/delegation-toolkit/development/reference/smart-account/"
+    },
+    {
+      "source": "/delegation-toolkit/development/reference/api/experimental-actions/bundler-client",
+      "destination": "/delegation-toolkit/development/reference/erc7715/bundler-client/"
+    },
+    {
+      "source": "/delegation-toolkit/development/reference/api/experimental-actions/wallet-client",
+      "destination": "/delegation-toolkit/development/reference/erc7715/wallet-client/"
     },
     {
       "source": "/delegation-toolkit/development/concepts/environment/",
