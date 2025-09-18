@@ -1,0 +1,129 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="v0.7-token" label="v0.7/v0.8 with token payment">
+
+  ```bash
+  curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "method": "pm_getPaymasterData",
+      "params": [
+        {
+          "sender": "0x5a6b47F4131bf1feAFA56A05573314BcF44C9149",
+          "nonce": "0x845ADB2C711129D4F3966735ED98A9F09FC4CE5700000000000000000000",
+          "factory": "0xd703aaE79538628d27099B8c4f621bE4CCd142d5",
+          "factoryData": "0xc5265d5d0000000000000000...",
+          "callData": "0xe9ae5c53",
+          "callGasLimit": "0x13880",
+          "verificationGasLimit": "0x60B01",
+          "preVerificationGas": "0xD3E3",
+          "maxPriorityFeePerGas": "0x3B9ACA00",
+          "maxFeePerGas": "0x7A5CF70D5",
+          "paymaster": null,
+          "paymasterVerificationGasLimit": null,
+          "paymasterPostOpGasLimit": null,
+          "paymasterData": null,
+          "eip7702Auth": {
+            "address": "0x1234567890123456789012345678901234567890",
+            "chainId": "0x1",
+            "nonce": "0x1",
+            "r": "0x1234567890123456789012345678901234567890123456789012345678901234",
+            "s": "0x1234567890123456789012345678901234567890123456789012345678901234",
+            "v": "0x1b",
+            "yParity": "0x1"
+          }
+        },
+        "0x0000000071727De22E5E9d8BAf0edAc6f37da032",
+        "0x1",
+        {
+          "token": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        }
+      ],
+      "id": 4337
+    }'
+  ```
+
+  </TabItem>
+  <TabItem value="v0.7-policy" label="v0.7/v0.8 with sponsorship policy">
+
+  ```bash
+  curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "method": "pm_getPaymasterData",
+      "params": [
+        {
+          "sender": "0x5a6b47F4131bf1feAFA56A05573314BcF44C9149",
+          "nonce": "0x845ADB2C711129D4F3966735ED98A9F09FC4CE5700000000000000000000",
+          "factory": "0xd703aaE79538628d27099B8c4f621bE4CCd142d5",
+          "factoryData": "0xc5265d5d0000000000000000...",
+          "callData": "0xe9ae5c53",
+          "callGasLimit": "0x13880",
+          "verificationGasLimit": "0x60B01",
+          "preVerificationGas": "0xD3E3",
+          "maxPriorityFeePerGas": "0x3B9ACA00",
+          "maxFeePerGas": "0x7A5CF70D5",
+          "paymaster": null,
+          "paymasterVerificationGasLimit": null,
+          "paymasterPostOpGasLimit": null,
+          "paymasterData": null
+        },
+        "0x0000000071727De22E5E9d8BAf0edAc6f37da032",
+        "0x1",
+        {
+          "sponsorshipPolicyId": "policy-123456"
+        }
+      ],
+      "id": 4337
+    }'
+  ```
+
+  </TabItem>
+  <TabItem value="v0.6-token" label="v0.6 with token payment">
+
+  ```bash
+  curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "method": "pm_getPaymasterData",
+      "params": [
+        {
+          "sender": "0xb341FEAFaF71b09089d03B7D114599f8F491EE45",
+          "nonce": "0x0",
+          "initCode": "0x5de4839a76cf55d0c90e2061ef4386d962E15ae3296601cd000000...",
+          "callData": "0x51945447",
+          "eip7702Auth": {
+            "address": "0x1234567890123456789012345678901234567890",
+            "chainId": "0x1",
+            "nonce": "0x1",
+            "r": "0x1234567890123456789012345678901234567890123456789012345678901234",
+            "s": "0x1234567890123456789012345678901234567890123456789012345678901234",
+            "v": "0x1b",
+            "yParity": "0x1"
+          },
+          "callGasLimit": "0x115b5c0",
+          "verificationGasLimit": "0x249f0",
+          "preVerificationGas": "0xeb11",
+          "maxPriorityFeePerGas": "0x12a05f200",
+          "maxFeePerGas": "0x5b08082fa"
+        },
+        "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789",
+        "0x1",
+        {
+          "token": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        }
+      ],
+      "id": 4337
+    }'
+  ```
+
+  </TabItem>
+</Tabs>

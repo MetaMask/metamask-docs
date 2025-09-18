@@ -1,0 +1,71 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="v0.7" label="v0.7 and v0.8">
+
+  ```bash
+  curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "method": "pm_validateSponsorshipPolicies",
+      "params": [
+        {
+          "sender": "0x1234567890123456789012345678901234567890",
+          "nonce": "0x1",
+          "factory": "0xd703aaE79538628d27099B8c4f621bE4CCd142d5",
+          "factoryData": "0x",
+          "callData": "0x",
+          "callGasLimit": "0x100000",
+          "verificationGasLimit": "0x20000",
+          "preVerificationGas": "0x10000",
+          "maxFeePerGas": "0x3b9aca00",
+          "maxPriorityFeePerGas": "0x3b9aca00",
+          "paymaster": null,
+          "paymasterVerificationGasLimit": null,
+          "paymasterPostOpGasLimit": null,
+          "paymasterData": null,
+          "signature": "0x"
+        },
+        "0x0000000071727De22E5E9d8BAf0edAc6f37da032",
+        ["sp_crazy_kangaroo", "sp_talented_turtle"]
+      ],
+      "id": 1
+    }'
+  ```
+
+  </TabItem>
+  <TabItem value="v0.6" label="v0.6">
+
+  ```bash
+  curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "method": "pm_validateSponsorshipPolicies",
+      "params": [
+        {
+          "sender": "0x1234567890123456789012345678901234567890",
+          "nonce": "0x1",
+          "initCode": "0x",
+          "callData": "0x",
+          "callGasLimit": "0x100000",
+          "verificationGasLimit": "0x20000",
+          "preVerificationGas": "0x10000",
+          "maxFeePerGas": "0x3b9aca00",
+          "maxPriorityFeePerGas": "0x3b9aca00",
+          "paymasterAndData": "0x",
+          "signature": "0x"
+        },
+        "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789",
+        ["sp_crazy_kangaroo", "sp_talented_turtle"]
+      ],
+      "id": 1
+    }'
+  ```
+
+  </TabItem>
+</Tabs>
