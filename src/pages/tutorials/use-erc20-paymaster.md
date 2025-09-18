@@ -88,7 +88,7 @@ const bundlerClient = createBundlerClient({
 
 ### 5. Create and fund a smart account
 
-Create a [Hybrid smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account).
+Create a [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account).
 A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 
 ```typescript
@@ -126,7 +126,7 @@ In a production dapp, you should first check the existing token allowance and on
 :::
 
 Batch the approve call with other onchain actions you want to perform using the ERC-20 paymaster.
-Pass the `paymasterClient` from [Step 2](#2-create-a-paymaster-client) to the `paymaster` property.
+Pass the `paymasterClient` from [Step 3](#3-create-a-paymaster-client) to the `paymaster` property.
 
 ```typescript
 // Appropriate fee per gas must be determined for the bundler being used.
@@ -163,5 +163,5 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 ## Next steps
 
-- Learn more about [smart account implementations](/delegation-toolkit/development/guides/smart-accounts/create-smart-account).
-- To sponsor gas for end users, see how to [send a gasless transaction](/delegation-toolkit/development/guides/smart-accounts/send-gasless-transaction).
+- Learn more about [smart account implementations](/delegation-toolkit/guides/smart-accounts/create-smart-account).
+- To sponsor gas for end users, see how to [send a gasless transaction](/delegation-toolkit/guides/smart-accounts/send-gasless-transaction).
