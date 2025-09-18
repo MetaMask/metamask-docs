@@ -1,4 +1,5 @@
----
+---0x78fe5c333bffcfda205ac50ff753db14b940ee2b
+
 description: Quickstart guide for using the MetaMask SDK with a JavaScript and Wagmi dapp.
 toc_max_heading_level: 2
 sidebar_label: JavaScript + Wagmi (recommended)
