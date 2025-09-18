@@ -132,11 +132,11 @@ const bundlerClient = createBundlerClient({
 
 Create an account to create and redeem an invitation.
 This account will create a delegation, and must be a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts).
-This example uses a [Hybrid smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account), which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
+This example uses a [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account), which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
 
 ```tsx
 import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit';
-import { useAccount, usePublicClient, useWalletClient } from "wagmi";
+import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
 
 const { address } = useAccount();
 const publicClient = usePublicClient();
@@ -230,7 +230,7 @@ export function encodeDelegation(delegation: Delegation): string {
 const encoded = encodeDelegation(signedDelegation);
 
 const url = new URL(window.location.href);
-url.searchParams.set("delegation", encoded);
+url.searchParams.set('delegation', encoded);
 const shareableUrl = url.toString();
 ```
 
@@ -258,7 +258,7 @@ const decodedDelegation = decodeDelegation(encodedDelegation);
 
 #### 5.2. Redeem the delegation
 
-[Redeem the delegation](/delegation-toolkit/development/guides/delegation/execute-on-smart-accounts-behalf/#7-redeem-the-delegation) by submitting a user operation from the smart account to the `DelegationManager` contract.
+[Redeem the delegation](/delegation-toolkit/guides/delegation/execute-on-smart-accounts-behalf/#7-redeem-the-delegation) by submitting a user operation from the smart account to the `DelegationManager` contract.
 Submitting the user operation deploys the account for first-time users.
 
 The delegation manager validates the delegation and executes delegated actions.
@@ -298,6 +298,6 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 ## Next steps
 
 - See [`invitation-link-example`](https://github.com/MetaMask/gator-examples/tree/feat/invitation-link-example/examples/invitation-link-example) on GitHub for a complete example dapp.
-- When creating an invitation, you can add more rules and restrictions using [delegation scopes](/delegation-toolkit/development/guides/delegation/use-delegation-scopes) and [caveat enforcers](/delegation-toolkit/guides/delegation/use-delegation-scopes/constrain-scope.md).
-- Learn more about [smart account implementations](/delegation-toolkit/development/guides/smart-accounts/create-smart-account).
-- Learn more about [delegation types](/delegation-toolkit/development/concepts/delegation/#delegation-types).
+- When creating an invitation, you can add more rules and restrictions using [delegation scopes](/delegation-toolkit/guides/delegation/use-delegation-scopes) and [caveat enforcers](/delegation-toolkit/guides/delegation/use-delegation-scopes/constrain-scope).
+- Learn more about [smart account implementations](/delegation-toolkit/guides/smart-accounts/create-smart-account).
+- Learn more about [delegation types](/delegation-toolkit/concepts/delegation/#delegation-types).

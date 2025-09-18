@@ -68,7 +68,7 @@ const bundlerClient = createBundlerClient({
 
 ### 4. Create and deploy a smart account
 
-Create and deploy a [Hybrid smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account), with a private key signer.
+Create and deploy a [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account), with a private key signer.
 The Hybrid implementation supports adding additional passkey signers.
 
 ```typescript
@@ -122,7 +122,7 @@ Once the calldata is prepared, send it to your smart account address to register
 
 ```ts
 import { PublicKey } from 'ox'
-import { HybridDeleGator, P256Owner } from '@metamask//delegation-toolkit/contracts'
+import { HybridDeleGator, P256Owner } from '@metamask/delegation-toolkit/contracts'
 
 // Deserialize the compressed public key.
 const publicKey = PublicKey.fromHex(credential.publicKey)
@@ -157,7 +157,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 ### 7. (Optional) Use the passkey signer
 
 You can now use the passkey signer to access your smart account and sign transactions.
-If you ever lose your primary signer (private key) used in [Step 3](#3-create-a-hybrid-smart-account), you can use the passkey as a secure backup method to retain access to your smart account.
+If you ever lose your primary signer (private key) used in [Step 4](#4-create-and-deploy-a-smart-account), you can use the passkey as a secure backup method to retain access to your smart account.
 
 Use the [Viem WebAuthn Account](https://viem.sh/account-abstraction/accounts/webauthn) to configure your passkey as a MetaMask smart account signer.
 
@@ -184,5 +184,5 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ## Next steps
 
-- Learn more about [smart account implementations](/delegation-toolkit/development/guides/smart-accounts/create-smart-account).
-- To sponsor gas fees when adding a passkey as a backup signer, see how to [send a gasless transaction](/delegation-toolkit/development/guides/smart-accounts/send-gasless-transaction).
+- Learn more about [smart account implementations](/delegation-toolkit/guides/smart-accounts/create-smart-account).
+- To sponsor gas fees when adding a passkey as a backup signer, see how to [send a gasless transaction](/delegation-toolkit/guides/smart-accounts/send-gasless-transaction).

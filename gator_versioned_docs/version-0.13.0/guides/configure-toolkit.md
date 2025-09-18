@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 # Configure the Delegation Toolkit
 
 The MetaMask Delegation toolkit is highly configurable, providing support for custom [bundlers and paymasters](#configure-the-bundler).
-You can also configure the [toolkit environment](#configure-the-toolkit-environment) to interact with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework).
+You can also configure the [toolkit environment](#optional-configure-the-toolkit-environment) to interact with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework).
 
 ## Prerequisites
 
@@ -206,7 +206,7 @@ Once the contracts are deployed, you can use them to override the environment.
 
 ### Override the environment
 
-To override the environment, the toolkit provides an [`overrideDeployedEnvironment`](../reference/api/delegation.md#overridedeployedenvironment) function to resolve
+To override the environment, the toolkit provides an [`overrideDeployedEnvironment`](../reference/delegation/index.md#overridedeployedenvironment) function to resolve
 `DeleGatorEnvironment` with specified contracts for the given chain and contract version. 
 
 ```typescript
