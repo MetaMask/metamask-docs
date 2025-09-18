@@ -81,6 +81,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-eth.svg`,
   },
   {
+    name: 'Hemi',
+    href: '/services/reference/hemi',
+    logo: `${LOGO_PATH}/logo-hemi.svg`,
+  },
+  {
     name: 'Linea',
     href: '/services/reference/linea',
     logo: `${LOGO_PATH}/logo-linea.svg`,

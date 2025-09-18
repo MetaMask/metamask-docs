@@ -75,6 +75,13 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
+## Hemi
+
+| Network | Description         | URL                                                  |
+|---------|---------------------|------------------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS | `https://hemi-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Testnet | JSON-RPC over HTTPS | `https://hemi-testnet.infura.io/v3/<YOUR-API-KEY>`  |
+
 ## IPFS
 
 :::caution Restricted access

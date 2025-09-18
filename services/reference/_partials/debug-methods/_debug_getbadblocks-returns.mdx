@@ -1,0 +1,24 @@
+An array of bad block objects. Each bad block object contains:
+
+- `author`: The address of the block author/miner
+- `difficulty`: The difficulty value for this block
+- `extraData`: Arbitrary data included by the miner
+- `gasLimit`: The maximum gas allowed in this block
+- `gasUsed`: The total used gas by all transactions in this block
+- `hash`: The hash of the block
+- `logsBloom`: The bloom filter for the logs of the block
+- `miner`: The address of the beneficiary to whom the mining rewards were given
+- `number`: The block number
+- `parentHash`: The hash of the parent block
+- `reason`: The reason why this block was considered "bad"
+- `receiptsRoot`: The root of the receipts trie of the block
+- `rlp`: The RLP encoding of the block
+- `sealFields`: Array of seal fields
+- `sha3Uncles`: The SHA3 of the uncles data in the block
+- `size`: The size of this block in bytes
+- `stateRoot`: The root of the final state trie of the block
+- `timestamp`: The unix timestamp for when the block was collated
+- `totalDifficulty`: The total difficulty of the chain until this block
+- `transactions`: Array of transaction objects
+- `transactionsRoot`: The root of the transaction trie of the block
+- `uncles`: Array of uncle hashes
