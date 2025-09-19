@@ -1,5 +1,6 @@
 ---
 description: Learn how to use the ownership transfer scope for a delegation.
+keywords: [delegation scope, ownership transfer, restrict, delegation]
 ---
 
 # Use the ownership transfer scope

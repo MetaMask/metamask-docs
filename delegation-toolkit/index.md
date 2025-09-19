@@ -2,6 +2,7 @@
 title: Delegation Toolkit introduction
 sidebar_label: Introduction
 description: High-level overview of Smart Accounts and the Delegation Toolkit.
+keywords: [MetaMask, delegation toolkit, smart accounts]
 ---
 
 import CardList from "@site/src/components/CardList"
