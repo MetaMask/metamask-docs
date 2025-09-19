@@ -1,5 +1,6 @@
 ---
 description: Learn how to send an ERC-4337 user operation using Viem.
+keywords: [ERC-4337, send, user operation, smart account]
 ---
 
 import Tabs from "@theme/Tabs";

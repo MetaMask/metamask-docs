@@ -1,6 +1,7 @@
 ---
 description: Learn how to configure the bundler client, paymaster client, and toolkit environment.
 sidebar_label: Configure the toolkit
+keywords: [configure, delegation toolkit, bundler, paymaster, delegator environment]
 ---
 
 import Tabs from "@theme/Tabs";
