@@ -28,6 +28,7 @@ Upon installation, you'll be asked the following prompts:
 ? Pick a template: (Use arrow keys)
 ❯ MetaMask Smart Accounts Starter
   MetaMask Smart Accounts & Delegation Starter
+  Farcaster Mini App Delegation Starter 
   Experimental: ERC7715 Permissions starter
 ? Pick a package manager: (Use arrow keys)
 ❯ npm 
@@ -94,4 +95,5 @@ Currently, only Cursor and Windsurf are supported.
 |----------------------------------------------------|---------|------------|
 | MetaMask Smart Accounts Starter                    | ✅       | ✅         |
 | MetaMask Smart Accounts &amp; Delegation Starter   | ✅       | ✅         | 
+| Farcaster Mini App Delegation Starter              | ✅       |            | 
 | Experimental: ERC7715 Permissions starter          | ✅       |            |
