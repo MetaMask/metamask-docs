@@ -1,0 +1,40 @@
+---
+title: Show Wallet UI
+sidebar_label: showWalletUI
+description: 'Web3Auth Android SDK - showWalletUI Function | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The `showWalletUI` method launches a WebView which allows you to use the templated wallet UI services. The method automatically uses the chain configuration from your project settings and no longer requires manual `ChainConfig` parameter. Wallet Services is currently only available for EVM chains.
+
+:::note
+
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+
+:::
+
+![Wallet Services](/img/embedded-wallets/wallet-services/mobile-wallet-services.png)
+
+:::warning
+
+The chain configuration is now automatically retrieved from your project settings in the Web3Auth Dashboard. Make sure your project has the appropriate chains configured in the dashboard.
+
+:::
+
+## Usage
+
+```kotlin
+// focus-start
+val completableFuture = web3Auth.showWalletUI()
+// focus-end
+```
+
+You can also specify a custom path:
+
+```kotlin
+// focus-start
+val completableFuture = web3Auth.showWalletUI("custom-wallet-path")
+// focus-end
+```
