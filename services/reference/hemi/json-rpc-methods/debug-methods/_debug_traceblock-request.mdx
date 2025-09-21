@@ -1,3 +1,9 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+<TabItem value="curl" label="curl">
+
 ```bash
 curl https://hemi-mainnet.infura.io/v3/YOUR-API-KEY \
   -X POST \
@@ -11,3 +17,13 @@ curl https://hemi-mainnet.infura.io/v3/YOUR-API-KEY \
     "id": 1
   }'
 ```
+
+</TabItem>
+<TabItem value="WSS" label="WSS">
+
+```bash
+wscat -c wss://hemi-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "debug_traceBlock", "params": ["0xblock_rlp"], "id": 1}'
+```
+
+</TabItem>
+</Tabs>

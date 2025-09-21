@@ -23,4 +23,11 @@ curl https://hemi-mainnet.infura.io/v3/YOUR-API-KEY \
 ```
 
 </TabItem>
+<TabItem value="WSS" label="WSS">
+
+```bash
+wscat -c wss://hemi-mainnet.infura.io/ws/v3/YOUR-API-KEY -x '{"jsonrpc": "2.0", "method": "debug_storageRangeAt", "params": ["0x01", 0, "0x295a70b2de5e3953354a6a8344e616ed314d7251", "0x0000000000000000000000000000000000000000000000000000000000000000", 1], "id": 1}'
+```
+
+</TabItem>
 </Tabs>
