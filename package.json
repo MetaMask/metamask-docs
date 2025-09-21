@@ -40,7 +40,7 @@
     "@docusaurus/theme-mermaid": "3.8.1",
     "@intercom/messenger-js-sdk": "^0.0.14",
     "@lottiefiles/react-lottie-player": "^3.6.0",
-    "@mdx-js/react": "^3.1.0",
+    "@mdx-js/react": "^3.1.1",
     "@metamask/design-tokens": "^7.1.0",
     "@metamask/eth-sig-util": "^7.0.3",
     "@metamask/profile-sync-controller": "^16.0.0",
