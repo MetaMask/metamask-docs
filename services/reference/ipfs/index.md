@@ -33,7 +33,7 @@ See the [official IPFS documentation](https://docs.ipfs.io) for more information
       description: "Learn how to quickly connect and make calls to the IPFS network."
     },
     {
-      href: "http-api-methods",
+      href: "./http-api-methods",
       title: "HTTP APIs",
       description: "View the APIs available for communicating with the IPFS network."
     },
