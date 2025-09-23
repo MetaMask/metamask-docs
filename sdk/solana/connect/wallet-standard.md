@@ -2,7 +2,7 @@
 description: Interact with users' Solana accounts in MetaMask.
 ---
 
-# Solana
+# Connect to Solana
 
 [Solana](https://solana.com/) is a high-performance, non-EVM network that provides fast transaction speeds and low fees.
 You can interact with users' Solana accounts in MetaMask using the [Wallet Standard](#wallet-standard) or [third-party libraries](#third-party-libraries) for Solana dapps.

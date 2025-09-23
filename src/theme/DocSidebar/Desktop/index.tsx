@@ -11,7 +11,6 @@ import SidebarSectionDropdown, {
 } from '@site/src/components/SidebarSectionDropdown/SidebarSectionDropdown'
 import {
   SERVICES_DASHBOARD_CONFIG,
-  SDK_WALLET_CONFIG,
   SNAPS_CONFIG,
   DELEGATION_TOOLKIT_CONFIG,
   isPathInSections,
@@ -40,7 +39,6 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
     location.pathname,
     SERVICES_DASHBOARD_CONFIG.sections
   )
-  const isSDKOrWallet = isPathInSections(location.pathname, SDK_WALLET_CONFIG.sections)
   const isSnaps = location.pathname.startsWith('/snaps')
 
   let delegationToolkitTitle = null
@@ -75,19 +73,6 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
     console.error('Failed to render services dropdown:', e)
   }
 
-  let sdkDropdown = null
-  try {
-    if (isSDKOrWallet) {
-      sdkDropdown = (
-        <div className={styles.versionDropdownContainer}>
-          <SidebarSectionDropdown {...SDK_WALLET_CONFIG} />
-        </div>
-      )
-    }
-  } catch (e) {
-    console.error('Failed to render SDK dropdown:', e)
-  }
-
   let snapsTitle = null
   try {
     if (isSnaps) {
@@ -112,7 +97,6 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
       {delegationToolkitTitle}
       {versionDropdown}
       {servicesDropdown}
-      {sdkDropdown}
       {snapsTitle}
       <Content path={path} sidebar={sidebar} />
       {hideable && <CollapseButton onClick={onCollapse} />}

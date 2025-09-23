@@ -5,7 +5,7 @@ import DocSidebar from '@theme/DocSidebar'
 import { useLocation } from '@docusaurus/router'
 import { prepareLinkItems, MM_REF_PATH } from '@site/src/plugins/plugin-json-rpc'
 import styles from './styles.module.css'
-const sidebar = require('../../../wallet-sidebar.js')
+const sidebar = require('../../../sdk-sidebar.js')
 
 function transformItems(items, dynamicItems) {
   return items.map(item => {
@@ -36,9 +36,9 @@ function transformItems(items, dynamicItems) {
         newItem.href = newItem.href.slice(0, -5)
       }
       if (newItem.href === '/') {
-        newItem.href = '/wallet/'
+        newItem.href = '/sdk/'
       } else {
-        newItem.href = `/wallet${newItem.href}`
+        newItem.href = `/sdk${newItem.href}`
       }
     }
     return newItem
@@ -50,9 +50,9 @@ const CustomReferencePage = props => {
   const { pathname } = useLocation()
   const refItems = prepareLinkItems(props.methodsData, MM_REF_PATH).map(item => ({
     ...item,
-    href: item.href.replace('/wallet', ''),
+    href: item.href.replace('/sdk', ''),
   }))
-  const updatedSidebar = transformItems(sidebar.walletSidebar, refItems)
+  const updatedSidebar = transformItems(sidebar.sdkSidebar, refItems)
   return (
     <Layout>
       <div className={styles.pageWrapper}>

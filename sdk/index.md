@@ -1,6 +1,5 @@
 ---
-slug: /
-title: SDK introduction
+sidebar_label: Introduction
 description: Introduction page for MetaMask SDK documentation.
 keywords: [connect, sdk, integrate, dapp]
 ---

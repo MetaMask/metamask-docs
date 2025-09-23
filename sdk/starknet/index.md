@@ -1,4 +1,5 @@
 ---
+sidebar_label: Introduction
 description: Interact with users' Starknet accounts in MetaMask.
 ---
 

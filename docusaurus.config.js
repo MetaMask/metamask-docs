@@ -254,31 +254,6 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'wallet',
-        path: 'wallet',
-        routeBasePath: 'wallet',
-        editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
-        sidebarPath: require.resolve('./wallet-sidebar.js'),
-        breadcrumbs: false,
-        remarkPlugins,
-        rehypePlugins,
-        sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
-          const sidebarItems = await defaultSidebarItemsGenerator(args)
-          const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
-            MM_RPC_URL,
-            MM_REF_PATH,
-            NETWORK_NAMES.metamask
-          )
-          if (args.item.dirName === 'reference/json-rpc-methods') {
-            return [...sidebarItems, ...dynamicItems]
-          }
-          return sidebarItems
-        },
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
         id: 'sdk',
         path: 'sdk',
         routeBasePath: 'sdk',
