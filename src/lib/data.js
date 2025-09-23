@@ -207,6 +207,7 @@ export const API_COSTS = {
     trace_transaction: 300,
   },
   evm_debug: {
+    debug_getBadBlocks: 1000,
     debug_storageRangeAt: 1000,
     debug_traceBlock: 1000,
     debug_traceBlockByHash: 1000,

@@ -1,6 +1,7 @@
 ---
 description: Hemi network debug methods
 sidebar_position: 2
+sidebar_label: Debug methods
 ---
 
 # Hemi debug methods
