@@ -494,4 +494,4 @@ You have successfully used the SDK to upgrade a MetaMask EOA to a MetaMask smart
 
 - View the `feat-mm-sdk-final` branch of the [`MetaMask/7702-livestream-demo`](https://github.com/MetaMask/7702-livestream-demo/tree/feat-mm-sdk-final) repository for the completed implementation of this tutorial.
 - Watch the [live coding session](https://www.youtube.com/watch?v=crMqCb8RPEE) on YouTube, in which the MetaMask DevRel team walks through setting up EIP-7702 functionality from the initial template.
-- See the [Delegation Toolkit EIP-7702 quickstart](/delegation-toolkit/get-started/eip7702-quickstart) to learn how to use the Delegation Toolkit to upgrade an EOA to a MetaMask smart account.
+- See the [Delegation Toolkit EIP-7702 quickstart](/delegation-toolkit/get-started/smart-account-quickstart/eip7702.md) to learn how to use the Delegation Toolkit to upgrade an EOA to a MetaMask smart account.

@@ -1,6 +1,7 @@
 ---
 description: Get started quickly with the MetaMask Smart Accounts
 sidebar_label: Smart account quickstart
+keywords: [quickstart, smart accounts, user operation]
 ---
 
 # MetaMask Smart Accounts quickstart
@@ -9,11 +10,21 @@ You can get started quickly with [MetaMask Smart Accounts](../../concepts/smart-
 
 ## Prerequisites
 
-[Install and set up the Delegation Toolkit.](../install.md)
+- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
+- Install [Yarn](https://yarnpkg.com/),
+    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 
 ## Steps
 
-### 1. Set up a Public Client
+### 1. Install the toolkit
+
+Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit):
+
+```bash npm2yarn
+npm install @metamask/delegation-toolkit
+```
+
+### 2. Set up a Public Client
 
 Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. This client will let the smart account query the signer's account state and interact with blockchain network.
 
@@ -27,7 +38,7 @@ const publicClient = createPublicClient({
 });
 ```
 
-### 2. Set up a Bundler Client
+### 3. Set up a Bundler Client
 
 Set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function. This lets you use the bundler service to estimate gas for user operations and submit transactions to the network.
 
@@ -40,7 +51,7 @@ const bundlerClient = createBundlerClient({
 });
 ```
 
-### 3. Create a MetaMask smart account
+### 4. Create a MetaMask smart account
 
 [Create a MetaMask smart account](../../guides/smart-accounts/create-smart-account.md) to send the first user operation.
 
@@ -58,11 +69,11 @@ const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 ```
 
-### 4. Send a user operation
+### 5. Send a user operation
 
 Send a user operation using Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
 

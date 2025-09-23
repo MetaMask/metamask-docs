@@ -1,5 +1,6 @@
 ---
 description: Learn how to send an ERC-4337 user operation using Viem.
+keywords: [ERC-4337, send, user operation, smart account]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -25,7 +26,6 @@ If a user operation is sent from a MetaMask smart account that has not been depl
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a MetaMask smart account.](create-smart-account.md)
 
 ## Send a user operation
@@ -88,7 +88,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 
 export const bundlerClient = createBundlerClient({

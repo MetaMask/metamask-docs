@@ -2,6 +2,7 @@
 title: Delegation Toolkit introduction
 sidebar_label: Introduction
 description: High-level overview of Smart Accounts and the Delegation Toolkit.
+keywords: [MetaMask, delegation toolkit, smart accounts]
 ---
 
 import CardList from "@site/src/components/CardList"
@@ -53,11 +54,6 @@ description: "Create a MetaMask smart account and send a user operation.",
 href: "get-started/smart-account-quickstart/eip7702",
 title: "EIP-7702 quickstart",
 description: "Upgrade an externally owned account to a smart account.",
-},
-{
-href: "get-started/erc7715-quickstart",
-title: "ERC-7715 quickstart",
-description: "Request permissions from MetaMask and execute transactions on a user's behalf.",
 },
 {
 href: "get-started/use-the-cli",

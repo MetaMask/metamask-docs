@@ -3,6 +3,7 @@ title: Create a custom caveat enforcer
 image: 'img/tutorials/tutorials-banners/create-custom-caveat-enforcer.png'
 description: Define custom rules for a delegation by creating, deploying, and applying a custom caveat enforcer.
 tags: [delegation toolkit, caveat enforcer, smart contracts]
+keywords: [delegation toolkit, create, custom, caveat enforcer, smart contracts]
 date: Aug 27, 2025
 author: MetaMask Developer Relations
 ---
@@ -12,15 +13,16 @@ import TabItem from "@theme/TabItem";
 
 This tutorial walks you through creating a custom [caveat enforcer](/delegation-toolkit/concepts/delegation/caveat-enforcers) and applying it to a [delegation](/delegation-toolkit/concepts/delegation/).
 
-The MetaMask Delegation Toolkit includes [out-of-the-box caveat enforcers](/delegation-toolkit/reference/caveats) that define rules and restrictions for common use cases.
+The MetaMask Delegation Toolkit includes [out-of-the-box caveat enforcers](/delegation-toolkit/reference/delegation/caveats) that define rules and restrictions for common use cases.
 For more specific control or other use cases, you can create custom caveat enforcers.
 In this tutorial, you'll create and apply a caveat enforcer that only allows a delegation to be redeemed after a specific timestamp.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](/delegation-toolkit/get-started/install) in your project.
-- [Configure the Delegation Toolkit.](/delegation-toolkit/guides/configure)
-- [Install Foundry and Forge.](https://getfoundry.sh/introduction/installation)
+- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
+- Install [Yarn](https://yarnpkg.com/),
+    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+- [Install Foundry and Forge](https://getfoundry.sh/introduction/installation).
 - Get an [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 - Have a MetaMask account with some Sepolia ETH to deploy your contract.
   :::note
@@ -29,7 +31,15 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 
 ## Steps
 
-### 1. Create the caveat enforcer
+### 1. Install the toolkit
+
+Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) in your project:
+
+```bash npm2yarn
+npm install @metamask/delegation-toolkit
+```
+
+### 2. Create the caveat enforcer
 
 At the root of your project, create a `contracts` directory.
 In that directory, create a new contract named `AfterTimestampEnforcer.sol`.
@@ -75,7 +85,7 @@ contract AfterTimestampEnforcer is CaveatEnforcer {
 }
 ```
 
-### 2. Deploy the caveat enforcer
+### 3. Deploy the caveat enforcer
 
 Deploy your custom caveat enforcer using [Forge](https://book.getfoundry.sh/forge/deploying) to obtain its contract address.
 Replace `<YOUR-API-KEY>` with your Infura API key, and `<YOUR-PRIVATE-KEY>` with the private key of your MetaMask account:
@@ -89,10 +99,9 @@ forge create src/AfterTimestampEnforcer.sol:AfterTimestampEnforcer \
 
 The Forge CLI will display the address of the deployed caveat enforcer.
 
-### 3. Apply the caveat enforcer
+### 4. Apply the caveat enforcer
 
-Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the caveat builder, and create a delegation.
-Learn more about [applying caveats to a delegation](/delegation-toolkit/guides/delegation/restrict-delegation).
+Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the [caveat builder](/delegation-toolkit/reference/delegation/#createcaveatbuilder), and create a delegation.
 
 The following code snippet uses the custom caveat enforcer to create a delegation granting
 a 1,000,000 wei allowance that becomes spendable one hour after it is created:
@@ -101,7 +110,8 @@ a 1,000,000 wei allowance that becomes spendable one hour after it is created:
 <TabItem value="delegation.ts">
 
 ```typescript
-import { createCaveatBuilder, createDelegation } from '@metamask/delegation-toolkit'
+import { createDelegation, ROOT_AUTHORITY } from '@metamask/delegation-toolkit'
+import { createCaveatBuilder } from '@metamask/delegation-toolkit/utils'
 import { toHex } from 'viem'
 import { delegatorSmartAccount } from './config.ts'
 
@@ -114,16 +124,18 @@ const caveatBuilder = createCaveatBuilder(environment)
 
 const tenAM = 10 * 60 * 60 // 10:00 AM as seconds since midnight.
 
-const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', 1_000_000).addCaveat({
+const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', 1000000n).addCaveat({
   enforcer: afterTimestampEnforcer,
-  terms: toHex(tenAm),
+  terms: toHex(tenAM),
 })
 
-const delegation = createDelegation({
-  to: delegate,
-  from: delegatorSmartAccount.address,
-  caveats,
-})
+const delegation: Delegation =  {
+  delegate: "DELEGATE_ADDRESS",
+  delegator: delegatorSmartAccount.address,
+  authority: ROOT_AUTHORITY,
+  caveats: caveats.build(),
+  salt: '0x',
+};
 ```
 
 </TabItem>
@@ -148,7 +160,7 @@ export const delegatorSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: '0x',
-  signatory: { account },
+  signer: { account },
 })
 ```
 

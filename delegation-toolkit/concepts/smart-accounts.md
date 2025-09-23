@@ -1,5 +1,6 @@
 ---
 description: Learn about MetaMask Smart Accounts.
+keywords: [MetaMask, smart accounts, account abstraction, ERC-4337]
 ---
 
 # MetaMask Smart Accounts
@@ -43,7 +44,7 @@ See [Create a smart account](../guides/smart-accounts/create-smart-account.md) t
 ### Hybrid smart account
 
 The Hybrid smart account is a flexible implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
-You can configure any of these signers as the signatory, and use them to sign any data, including user operations, on behalf of the smart account.
+You can configure any of these signers, and use them to sign any data, including user operations, on behalf of the smart account.
 
 This type is referenced in the toolkit as `Implementation.Hybrid`.
 
@@ -79,7 +80,7 @@ The MetaMask Smart Accounts flow is as follows:
       tokens or third-party sponsorship.
 
 2. **User operation creation** - For actions such as sending transactions, a user operation is created with
-   necessary details and signed by the configured signatory.
+   necessary details and signed by the configured signers.
 
 3. **Bundlers and mempool** - The signed user operation is submitted to a special mempool, where bundlers
    collect and package multiple user operations into a single transaction to save on gas costs.

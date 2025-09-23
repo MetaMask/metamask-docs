@@ -1,6 +1,7 @@
 ---
 sidebar_label: Install and set up
 description: Learn how to install and set up the MetaMask Delegation Toolkit.
+keywords: [install, MetaMask, delegation, toolkit, smart, accounts]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -23,7 +24,7 @@ This page provides instructions to install and set up the MetaMask Delegation To
 
 ### 1. Install the toolkit
 
-Install the [MetaMask Delegation Toolkit](https://github.com/MetaMask/delegation-toolkit) dependencies:
+Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit):
 
 ```bash npm2yarn
 npm install @metamask/delegation-toolkit

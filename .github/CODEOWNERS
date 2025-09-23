@@ -3,21 +3,3 @@
 
 # Default owner for all other files
 * @MetaMask/dashboard @MetaMask/tech-writers @MetaMask/delegation-devrel @MetaMask/embedded-wallets-devrel @MetaMask/sdk-devrel
-
-# Developer tools documentation
-/developer-tools/ @MetaMask/tech-writers
-
-# Services documentation
-/services/ @MetaMask/tech-writers
-
-# Snaps documentation
-/snaps/ @MetaMask/tech-writers @MetaMask/snaps
-
-# Delegation Toolkit documentation
-/delegation-toolkit/ @MetaMask/tech-writers @MetaMask/delegation @MetaMask/delegation-devrel
-
-# SDK documentation
-/sdk/ @MetaMask/tech-writers @MetaMask/sdk-devs @MetaMask/sdk-devrel
-
-# Wallet documentation
-/wallet/ @MetaMask/tech-writers @MetaMask/wallet-api-platform-engineers
