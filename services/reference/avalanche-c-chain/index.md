@@ -39,12 +39,12 @@ Select one of the following options to get started with the Avalanche C-Chain ne
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect to Avalanche C-Chain and make calls to the network."
     },
     {
-      href: "json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Avalanche C-Chain network."
     },
