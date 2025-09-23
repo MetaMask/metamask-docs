@@ -30,7 +30,7 @@ Objects in the `calls` array also require the following parameters:
 | Name | Type | Required | Description                                                                                                                                                                                        |
 | ---- | ---- | -------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `delegationManager` | `0x${string}` | Yes | The address of Delegation Manager.                                                                                                                                                                 |
-| `permissionsContext` | `0x${string}` | Yes | Encoded calldata for redeeming delegations. If you're not using ERC-7715, you can use the [`redeemDelegations`](../delegation.md#redeemdelegations) utility function to generate the calldata manually. |
+| `permissionsContext` | `0x${string}` | Yes | Encoded calldata for redeeming delegations. If you're not using ERC-7715, you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
 
 ### Example
 
@@ -91,7 +91,7 @@ export const sessionAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 
 export const bundlerClient = createBundlerClient({

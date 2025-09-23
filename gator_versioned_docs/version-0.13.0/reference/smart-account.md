@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # MetaMask Smart Accounts API reference
 
-The following API methods are related to creating, managing, and signing with [MetaMask Smart Accounts](../../concepts/smart-accounts.md).
+The following API methods are related to creating, managing, and signing with [MetaMask Smart Accounts](../concepts/smart-accounts.md).
 
 ## `aggregateSignature`
 
@@ -95,7 +95,7 @@ export const aliceSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
   deploySalt: "0x",
-  signatory: [ { account: aliceAccount } ],
+  signer: [ { account: aliceAccount } ],
 });
 
 export const bobSmartAccount = await toMetaMaskSmartAccount({
@@ -103,7 +103,7 @@ export const bobSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
   deploySalt: "0x",
-  signatory: [ { account: bobAccount } ],
+  signer: [ { account: bobAccount } ],
 });
 
 export const bundlerClient = createBundlerClient({
@@ -119,7 +119,7 @@ export const bundlerClient = createBundlerClient({
 
 Encodes calls for execution by a MetaMask smart account. If there's a single call directly to the smart account, it returns the call data directly. For multiple calls or calls to other addresses, it creates executions and encodes them for the smart account's `execute` function.
 
-The execution mode is set to `SINGLE_DEFAULT_MODE` for a single call to other address, or `BATCH_DEFAULT_MODE` for multiple calls.
+The execution mode is set to `SingleDefault` for a single call to other address, or `BatchDefault` for multiple calls.
 
 ### Parameters
 
@@ -169,7 +169,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account: delegatorAccount },
+  signer: { account: delegatorAccount },
 });
 ```
 
@@ -216,7 +216,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account: delegatorAccount },
+  signer: { account: delegatorAccount },
 });
 ```
 
@@ -264,7 +264,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account: delegatorAccount },
+  signer: { account: delegatorAccount },
 });
 ```
 
@@ -288,7 +288,7 @@ Signs the delegation and returns the delegation signature.
 <TabItem value ="example.ts">
 
 ```ts
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
 import { delegatorSmartAccount } from "./config.ts";
 
 // The address to which the delegation is granted. It can be an EOA address, or 
@@ -298,8 +298,12 @@ const delegate = "0x2FcB88EC2359fA635566E66415D31dD381CF5585";
 const delegation = createDelegation({
   to: delegate,
   from: account.address,
-  // Empty caveats array - we recommend adding appropriate restrictions.
-  caveats: [],
+  environment: delegatorSmartAccount.environment,
+  scope: {
+    type: "nativeTokenTransferAmount",
+    // 0.001 ETH in wei format.
+    maxAmount: 1000000000000000n,
+  },
 });
 
 const signature = delegatorSmartAccount.signDelegation({ delegation });
@@ -329,7 +333,7 @@ export const delegatorSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [delegatorAccount.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account: delegatorAccount },
+  signer: { account: delegatorAccount },
 });
 ```
 
@@ -339,7 +343,7 @@ export const delegatorSmartAccount = await toMetaMaskSmartAccount({
 ## `signMessage`
 
 Generates the [EIP-191](https://eips.ethereum.org/EIPS/eip-191) signature
-using the `MetaMaskSmartAccount` signatory. The Delegation Toolkit
+using the `MetaMaskSmartAccount` signer. The Delegation Toolkit
 uses Viem under the hood to provide this functionality.
 
 ### Parameters
@@ -383,7 +387,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 ```
 
@@ -393,7 +397,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
 ## `signTypedData`
 
 Generates the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) signature
-using the `MetaMaskSmartAccount` signatory. The Delegation Toolkit
+using the `MetaMaskSmartAccount` signer. The Delegation Toolkit
 uses Viem under the hood to provide this functionality.
 
 ### Parameters
@@ -450,7 +454,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 ```
 
@@ -459,7 +463,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
 
 ## `signUserOperation`
 
-Signs a user operation with the `MetaMaskSmartAccount` signatory. The Delegation
+Signs a user operation with the `MetaMaskSmartAccount` signer. The Delegation
 Toolkit uses Viem under the hood to provide this functionality.
 
 ### Parameters
@@ -511,7 +515,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 ```
 
@@ -528,7 +532,7 @@ Creates a `MetaMaskSmartAccount` instance.
 | ---- |-----------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `client` | `Client`                                            | Yes                                                          | Viem Client to retrieve smart account data.                                                                                                                                       |
 | `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be Hybrid, Multisig, or Stateless7702.                                                                                                             |
-| `signatory` | `SignatoryConfigByImplementation <TImplementation>` | Yes                                                          | Signers for the smart account. Can be a Viem Account, Viem Wallet Client, or a WebAuthnAccount. Web3AuthnAccounts are only supported for Hybrid implementations.                  |
+| `signer` | `SignerConfigByImplementation <TImplementation>` | Yes                                                          | Signers for the smart account. Can be a Viem Account, Viem Wallet Client, or a WebAuthnAccount. Web3AuthnAccounts are only supported for Hybrid implementations.                  |
 | `environment` | `DeleGatorEnvironment`                              | No                                                           | Environment to resolve the smart contracts.                                                                                                                                       |
 | `deployParams` | `DeployParams<TImplementation>`                     | Required if `address` is not provided                        | The parameters that will be used to deploy the smart account and generate its deterministic address.                                                                              |
 | `deploySalt` | `Hex`                                               | Required if `address` is not provided                        | The salt that will be used to deploy the smart account.                                                                                                                           |
@@ -564,7 +568,7 @@ const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account: account },
+  signer: { account: account },
 });
 ```
 
@@ -621,7 +625,7 @@ const aliceSmartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.MultiSig,
   deployParams: [signers, threshold],
   deploySalt: "0x",
-  signatory: [ { account: aliceAccount } ],
+  signer: [ { account: aliceAccount } ],
 });
 ```
 
@@ -664,7 +668,7 @@ const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Stateless7702,
   address: account.address,
-  signatory: { account },
+  signer: { account },
 });
 ```
 

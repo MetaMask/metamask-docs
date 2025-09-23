@@ -2,6 +2,7 @@
 title: Supported networks
 sidebar_label: Supported networks
 description: Supported networks for Delegation Toolkit.
+keywords: [MetaMask, delegation toolkit, supported networks, mainnet, testnet]
 ---
 
 The following tables display the networks supported by each version of the MetaMask Delegation Toolkit.
@@ -10,7 +11,7 @@ If you don't see the network you're looking for, you can request support by emai
 
 ## Mainnet networks
 
-| Network Name        | v0.10.2 | v0.11.0 | v0.12.0 |
+| Network Name        | v0.11.0 | v0.12.0 | v0.13.0 |
 | ------------------- | ------- | ------- | ------- |
 | Ethereum            | ✅      | ✅      | ✅      |
 | Polygon             | ✅      | ✅      | ✅      |
@@ -19,22 +20,22 @@ If you don't see the network you're looking for, you can request support by emai
 | Arbitrum One        | ✅      | ✅      | ✅      |
 | Base                | ✅      | ✅      | ✅      |
 | Gnosis Chain        | ✅      | ✅      | ✅      |
-| Unichain            | ❌      | ❌      | ✅      |
-| Arbitrum Nova       | ❌      | ❌      | ✅      |
-| Berachain           | ❌      | ❌      | ✅      |
+| Unichain            | ❌      | ✅      | ✅      |
+| Arbitrum Nova       | ❌      | ✅      | ✅      |
+| Berachain           | ❌      | ✅      | ✅      |
 
 ## Testnet networks
 
-| Network Name                | v0.10.2 | v0.11.0 | v0.12.0 |
+| Network Name                | v0.11.0 | v0.12.0 | v0.13.0 |
 | --------------------------- | ------- | ------- | ------- |
 | Ethereum Sepolia            | ✅      | ✅      | ✅      |
 | Base Sepolia                | ✅      | ✅      | ✅      |
 | MegaEth                     | ✅      | ✅      | ✅      |
-| Gnosis Chiado               | ❌      | ✅      | ✅      |
-| Arbitrum Sepolia            | ❌      | ❌      | ✅      |
-| Unichain Sepolia            | ❌      | ❌      | ✅      |
-| Berachain Bepolia           | ❌      | ❌      | ✅      |
-| Optimism Sepolia            | ❌      | ❌      | ✅      |
-| Binance Smart Chain         | ❌      | ❌      | ✅      |
-| Polygon Amoy                | ❌      | ❌      | ✅      |
-| Monad                       | ❌      | ❌      | ✅      |  
+| Gnosis Chiado               | ✅      | ✅      | ✅      |
+| Arbitrum Sepolia            | ❌      | ✅      | ✅      |
+| Unichain Sepolia            | ❌      | ✅      | ✅      |
+| Berachain Bepolia           | ❌      | ✅      | ✅      |
+| Optimism Sepolia            | ❌      | ✅      | ✅      |
+| Binance Smart Chain         | ❌      | ✅      | ✅      |
+| Polygon Amoy                | ❌      | ✅      | ✅      |
+| Monad                       | ❌      | ✅      | ✅      |  

@@ -29,12 +29,12 @@ The [official Polygon documentation](https://docs.polygon.technology) for more i
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Polygon network."
     },
     {
-      href: "json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Polygon network."
     },
