@@ -21,6 +21,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
+- A WalletConnect project ID from the [Reown dashboard](https://dashboard.reown.com/sign-in).
 
 ## Set up using a template
 
@@ -59,7 +60,19 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
    pnpm install
    ```
 
-4. Run the project:
+4. Create a `.env.local` file:
+
+   ```bash
+   touch .env.local
+   ```
+
+5. In `.env.local`, add a `VITE_WALLETCONNECT_PROJECT_ID` environment variable, replacing `<YOUR-PROJECT-ID>` with your WalletConnect project ID:
+
+   ```text title=".env.local"
+   VITE_WALLETCONNECT_PROJECT_ID=<YOUR-PROJECT-ID>
+   ```
+
+6. Run the project:
 
    ```bash
    pnpm dev
@@ -77,7 +90,7 @@ npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query
 
 ### 2. Import required dependencies
 
-In the root of your project, import the required RainbowKit, Wagmi and TanStack Query dependencies:
+In the root of your project, import the required RainbowKit, Wagmi, and TanStack Query dependencies:
 
 ```jsx
 import "@rainbow-me/rainbowkit/styles.css"
@@ -91,13 +104,12 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 ### 3. Configure your project
 
 Set up your configuration with the desired chains and wallets.
-
-For example:
+In the following example, replace `<YOUR-PROJECT-ID>` with your WalletConnect project ID:
 
 ```jsx
 const config = getDefaultConfig({
   appName: "MetaMask SDK RainbowKit Quickstart",
-  projectId: "WALLETCONNECT_PROJECT_ID",
+  projectId: "<YOUR-PROJECT-ID>",
   chains: [mainnet, linea, sepolia, lineaSepolia],
   wallets: [
     {
@@ -105,11 +117,9 @@ const config = getDefaultConfig({
       wallets: [metaMaskWallet],
     },
   ],
-  ssr: false, // true if your dApp uses SSR
+  ssr: false, // true if your dapp uses server-side rendering.
 })
 ```
-
-> **Note**: Don't forget to set the `projectId` to your WalletConnect project ID.
 
 ### 4. Set up providers
 
@@ -133,7 +143,7 @@ const App = () => {
 
 ### 5. Add the connect button
 
-Then, in your app, import and render the `ConnectButton` component.
+Import and render the `ConnectButton` component:
 
 ```jsx
 import { ConnectButton } from "@rainbow-me/rainbowkit"
@@ -145,7 +155,7 @@ function App() {
 export default App
 ```
 
-Once you've added the connect button, you can test your dapp by running `pnpm run dev`.
+You can now test your dapp by running `pnpm run dev`.
 
 ## Live example
 

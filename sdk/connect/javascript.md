@@ -23,6 +23,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 
 ## Set up using a template
 
@@ -61,7 +62,19 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
    pnpm install
    ```
 
-4. Run the project:
+4. Create a `.env.local` file:
+
+   ```bash
+   touch .env.local
+   ```
+
+5. In `.env.local`, add a `VITE_INFURA_API_KEY` environment variable, replacing `<YOUR-API-KEY>` with your Infura API key:
+
+   ```text title=".env.local"
+   VITE_INFURA_API_KEY=<YOUR-API-KEY>
+   ```
+
+6. Run the project:
 
    ```bash
    pnpm dev
@@ -124,8 +137,8 @@ const MMSDK = new MetaMaskSDK({
 These examples configure the SDK with the following options:
 
 - [`dappMetadata`](../reference/sdk-options.md#dappmetadata) - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
-
 - [`infuraAPIKey`](../reference/sdk-options.md#infuraapikey) - Enables read-only RPC and load‑balancing.
+  Set this option to your [Infura API key](/developer-tools/dashboard/get-started/create-api).
 
 ### 3. Connect and use provider
 
