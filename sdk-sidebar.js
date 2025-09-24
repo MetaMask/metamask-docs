@@ -2,8 +2,21 @@
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sdkSidebar = {
-  multichain: [
+  overview: [
     'index',
+    'about',
+    {
+      type: 'category',
+      label: 'Reference',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'reference/sdk-options',
+      ],
+    },
+  ],
+  multichain: [
+    'multichain/index',
     {
       type: 'category',
       label: 'Guides',
@@ -12,6 +25,7 @@ const sdkSidebar = {
       items: [
         'multichain/connect/guides/connect-to-multichain',
         'multichain/connect/guides/send-transactions',
+        'multichain/connect/guides/connector-libraries',
       ],
     },
     {
@@ -125,7 +139,6 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'evm/connect/reference/sdk-options',
         'evm/connect/reference/sdk-methods',
         'evm/connect/reference/provider-api',
         {
@@ -141,7 +154,6 @@ const sdkSidebar = {
   ],
   solana: [
     'solana/index',
-    'solana/connect/wallet-standard',
   ],
   starknet: [
     'starknet/index',

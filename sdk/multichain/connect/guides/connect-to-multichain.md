@@ -1,1 +1,1 @@
-# Connect to multiple chains
+# Connect to EVM and Solana

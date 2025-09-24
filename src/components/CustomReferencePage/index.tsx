@@ -35,10 +35,12 @@ function transformItems(items, dynamicItems) {
       if (newItem.href.endsWith('/index')) {
         newItem.href = newItem.href.slice(0, -5)
       }
-      if (newItem.href === '/') {
-        newItem.href = '/sdk/'
-      } else {
-        newItem.href = `/sdk${newItem.href}`
+      if (!newItem.href.startsWith('/sdk')) {
+        if (newItem.href === '/') {
+          newItem.href = '/sdk/'
+        } else {
+          newItem.href = `/sdk${newItem.href}`
+        }
       }
     }
     return newItem

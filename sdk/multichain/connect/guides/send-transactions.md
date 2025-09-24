@@ -1,1 +1,5 @@
-# Send multichain transactions
+---
+sidebar_label: Send transactions
+---
+
+# Send transactions to EVM and Solana

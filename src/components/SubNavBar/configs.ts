@@ -42,9 +42,14 @@ export const SDK_SUBNAV_CONFIG: SubNavBarConfig = {
   sectionName: 'MetaMask SDK',
   links: [
     {
+      key: 'overview',
+      label: 'Overview',
+      path: '/sdk',
+    },
+    {
       key: 'multichain',
       label: 'Multichain',
-      path: '/sdk',
+      path: '/sdk/multichain/',
     },
     {
       key: 'evm',

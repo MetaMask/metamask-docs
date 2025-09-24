@@ -3,9 +3,9 @@ sidebar_label: Introduction
 description: Interact with users' Starknet accounts in MetaMask.
 ---
 
-# Starknet
+# Connect to Starknet
 
-[Starknet](https://www.starknet.io/) is a non-EVM Layer 2 network.
+[Starknet](https://www.starknet.io/) is a Layer 2 network.
 You can interact with users' Starknet accounts in MetaMask by connecting to the
 [Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/).
 You can use the [`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
