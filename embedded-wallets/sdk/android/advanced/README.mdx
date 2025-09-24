@@ -56,6 +56,8 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 | `sessionTime?`    | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days |
 | `useSFAKey?`      | Use SFA Key to get single factor auth key. It's an optional field with default value as `false`. Useful for Wallet Pregeneration and SFA mode.                       |
 | `chains?`         | Custom chain configuration for blockchain networks. It takes `Chains` as a value.                                                                                    |
+| `defaultChainId?` | Default chain ID to use. It's an optional field with default value as `null`. The first chain in the list will be used if not provided.                              |
+| `enableLogging?`  | Setting to true will enable logs. It's an optional field with default value as `false`.                                                                              |
 
 </TabItem>
 
