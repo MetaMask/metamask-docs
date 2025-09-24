@@ -69,12 +69,12 @@ async function fetchMultipleData(
 }
 
 export const RPC_NETWORK_URL = 'https://sot-network-methods.vercel.app/specs'
-export const MM_RPC_URL = 'https://metamask.github.io/api-specs/latest/openrpc.json'
-export const MM_REF_PATH = 'sdk/evm/connect/reference/json-rpc-methods'
+// export const MM_RPC_URL = 'https://metamask.github.io/api-specs/latest/openrpc.json'
+// export const MM_REF_PATH = 'sdk/evm/connect/reference/json-rpc-methods'
 
 export enum NETWORK_NAMES {
   linea = 'linea',
-  metamask = 'metamask',
+//  metamask = 'metamask',
 }
 
 const requests = [
@@ -82,10 +82,10 @@ const requests = [
     url: `${RPC_NETWORK_URL}/${NETWORK_NAMES.linea}`,
     name: NETWORK_NAMES.linea,
   },
-  {
-    url: MM_RPC_URL,
-    name: NETWORK_NAMES.metamask,
-  },
+//  {
+//    url: MM_RPC_URL,
+//    name: NETWORK_NAMES.metamask,
+//  },
 ]
 
 export const prepareLinkItems = (
@@ -129,6 +129,7 @@ export default function useNetworksMethodPlugin() {
     async contentLoaded({ content, actions }) {
       const { addRoute, createData, setGlobalData } = actions
       setGlobalData({ netData: content })
+      /*
       const dynamicRoutes = content.find(item => item.name === NETWORK_NAMES.metamask)
       if (dynamicRoutes) {
         const methodsData = await createData(
@@ -147,6 +148,7 @@ export default function useNetworksMethodPlugin() {
           })
         }
       }
+      */
     },
     configureWebpack() {
       return {
