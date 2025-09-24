@@ -4,7 +4,7 @@ keywords: [SDK, Wagmi, JavaScript, send, transaction, transactions, status, esti
 toc_max_heading_level: 2
 ---
 
-# Handle transactions
+# Send transactions
 
 Handle EVM transactions in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
 With the SDK, you can:

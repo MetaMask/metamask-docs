@@ -4,7 +4,7 @@ keywords: [SDK, Wagmi, JavaScript, authenticate, connect, sign, accounts, wallet
 toc_max_heading_level: 3
 ---
 
-# Authenticate users
+# Manage user accounts
 
 Connect and manage user wallet sessions in your [Wagmi](#use-wagmi) or
 [Vanilla JavaScript](#use-vanilla-javascript) dapp.
