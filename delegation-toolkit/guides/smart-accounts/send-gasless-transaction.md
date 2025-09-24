@@ -1,5 +1,6 @@
 ---
 description: Learn how to send a gasless transaction
+keywords: [send, gasless transaction, smart account, sponsor, paymaster]
 ---
 
 import Tabs from "@theme/Tabs";

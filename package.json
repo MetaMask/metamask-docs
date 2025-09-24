@@ -81,7 +81,7 @@
     "remark-codesandbox": "^0.10.1",
     "remark-docusaurus-tabs": "^0.2.0",
     "remark-math": "^6.0.0",
-    "sass": "^1.89.2"
+    "sass": "^1.93.0"
   },
   "devDependencies": {
     "@docusaurus/eslint-plugin": "3.8.1",
@@ -93,7 +93,7 @@
     "@tsconfig/docusaurus": "^2.0.3",
     "@types/react-alert": "^7.0.6",
     "@types/react-modal": "^3.16.3",
-    "@typescript-eslint/parser": "^8.38.0",
+    "@typescript-eslint/parser": "^8.44.1",
     "eslint": "^9.35.0",
     "eslint-plugin-react": "^7.37.5",
     "stylelint": "^15.0.0 ",

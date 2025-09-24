@@ -2,6 +2,7 @@
 description: Learn how to constrain a delegation scope using caveat enforcers.
 sidebar_label: Constrain a scope
 toc_max_heading_level: 3
+keywords: [constrain, restrict, scope, caveat, caveat enforcer]
 ---
 
 import Tabs from "@theme/Tabs";

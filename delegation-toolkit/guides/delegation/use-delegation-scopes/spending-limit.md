@@ -1,5 +1,6 @@
 ---
 description: Learn how to use the spending limit scopes for a delegation.
+keywords: [delegation scope, spending limit, restrict, delegation]
 ---
 
 # Use spending limit scopes

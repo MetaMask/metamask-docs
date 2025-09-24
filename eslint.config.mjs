@@ -42,7 +42,7 @@ export default [{
             },
 
             project: ["./tsconfig.json"],
-            tsconfigRootDir: "./",
+            tsconfigRootDir: __dirname,
         },
     },
 

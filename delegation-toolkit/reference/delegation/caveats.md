@@ -1,6 +1,7 @@
 ---
 description: Caveat enforcers reference.
 toc_max_heading_level: 2
+keywords: [caveats, caveat enforcers, configuration, smart contracts, reference]
 ---
 
 # Caveats
@@ -398,14 +399,14 @@ Caveat enforcer contract: [`ExactCalldataEnforcer.sol`](https://github.com/MetaM
 
 | Name              | Type                             | Required | Description                                           |
 | ----------------- | -------------------------------- | -------- | ----------------------------------------------------- |
-| `exactCalldata`   | `calldata`                       | Yes      | The `calldata` that the delegate is allowed to call.  |
+| `calldata`        | `Hex`                            | Yes      | The `calldata` that the delegate is allowed to call.  |
 
 ### Example
 
 ```typescript
 const caveats = [{
   type: "exactCalldata",
-  exactCalldata: "0x1234567890abcdef",
+  calldata: "0x1234567890abcdef",
 }];
 ```
 

@@ -1,6 +1,7 @@
 ---
 description: Delegation-related API methods reference.
 toc_max_heading_level: 2
+keywords: [delegation, API, methods, reference]
 ---
 
 import Tabs from "@theme/Tabs";

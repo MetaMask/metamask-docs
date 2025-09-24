@@ -35,12 +35,12 @@ See the [official Unichain documentation](https://docs.unichain.org/docs) for mo
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Unichain network."
     },
     {
-      href: "json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Unichain network."
     },

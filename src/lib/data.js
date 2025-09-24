@@ -81,6 +81,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-eth.svg`,
   },
   {
+    name: 'Hemi',
+    href: '/services/reference/hemi',
+    logo: `${LOGO_PATH}/logo-hemi.svg`,
+  },
+  {
     name: 'Linea',
     href: '/services/reference/linea',
     logo: `${LOGO_PATH}/logo-linea.svg`,
@@ -202,6 +207,7 @@ export const API_COSTS = {
     trace_transaction: 300,
   },
   evm_debug: {
+    //debug_getBadBlocks: 1000,
     debug_storageRangeAt: 1000,
     debug_traceBlock: 1000,
     debug_traceBlockByHash: 1000,

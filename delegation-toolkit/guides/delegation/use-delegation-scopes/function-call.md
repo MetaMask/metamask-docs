@@ -1,5 +1,6 @@
 ---
 description: Learn how to use the function call scope for a delegation.
+keywords: [delegation scope, function call, restrict, delegation]
 ---
 
 # Use the function call scope
