@@ -9,7 +9,14 @@ import Tabs from '@theme/Tabs'
 
 The `showWalletUI` method launches a WebView which allows you to use the templated wallet UI services.
 The method automatically uses the chain configuration from your project settings and no longer requires a manual `ChainConfig` parameter.
-Wallet Services is currently only available for EVM chains.
+
+### Supported features
+
+- **EVM chains**: Full support for all EVM-compatible chains
+- **Account abstraction**: Built-in support for smart accounts (ERC-4337)
+- **Gas sponsorship**: Cover transaction fees for your users
+- **Batch transactions**: Execute multiple transactions in one go
+- **Custom spending limits**: Set transaction limits for enhanced security
 
 :::note
 
@@ -47,3 +54,31 @@ You can also specify a custom path:
 val completableFuture = web3Auth.showWalletUI("custom-wallet-path")
 // focus-end
 ```
+
+## Smart accounts configuration
+
+When smart accounts are enabled in your Embedded Wallets dashboard, the wallet UI automatically provides account abstraction features.
+
+### Dashboard configuration
+
+1. Navigate to your project in the [Embedded Wallets dashboard](https://developer.metamask.io)
+2. Enable Smart Accounts in your project settings
+3. Configure your preferred bundler and paymaster providers
+
+### Features available
+
+Once configured, users can:
+
+- **Send gasless transactions**: Transactions can be sponsored by your paymaster
+- **Batch operations**: Multiple transactions can be bundled and executed as one
+- **ERC-20 token payments**: Users can pay gas fees using ERC-20 tokens instead of native tokens
+- **Automated transaction policies**: Set up rules for automatic transaction execution
+
+### User experience
+
+When smart accounts are enabled:
+
+1. Users will see a smart account address instead of an EOA address
+2. Transaction confirmation screens will show sponsorship details
+3. Batch transaction options will be available in the wallet UI
+4. Gas payment options will include ERC-20 tokens if configured
