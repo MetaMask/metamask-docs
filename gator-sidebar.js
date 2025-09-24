@@ -24,7 +24,6 @@ const sidebar = {
             'get-started/smart-account-quickstart/eip7702',
           ],
         },
-        // 'get-started/erc7715-quickstart',
         'get-started/use-the-cli',
         'get-started/supported-networks',
       ],
@@ -83,6 +82,14 @@ const sidebar = {
               ],
             },
             'guides/delegation/check-delegation-state',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'ERC-7715',
+          collapsed: false,
+          items: [
+            'guides/erc7715/execute-on-metamask-user-behalf',
           ],
         },
       ],
