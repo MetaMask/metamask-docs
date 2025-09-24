@@ -1,14 +1,13 @@
 ---
-title: Ethereum bundler methods
+title: opBNB bundler methods
 sidebar_label: Bundler methods
-description: Ethereum bundler methods
+description: opBNB bundler methods
 ---
 
 Infura integrates with the Pimlico account abstraction bundler infrastructure, enabling
 developers to access [ERC-4337](https://docs.erc4337.io/) smart account features.
 
-The following [bundler methods](../../../../concepts/bundler.md) are supported on Ethereum Mainnet
-and Sepolia:
+The following [bundler methods](../../../../concepts/bundler.md) are supported on opBNB mainnet:
 
 - [`eth_sendUserOperation`](./eth_senduseroperation):
     Submits a user operation to be included onchain.
