@@ -34,14 +34,14 @@ After a successful login from a user, the user details are returned as a respons
     "email": "w3a-heroes@web3auth.com",
     "name": "Web3Auth Heroes",
     "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
-    "verifier": "torus",
-    "verifierId": "w3a-heroes@web3auth.com",
-    "typeOfLogin": "google",
-    "aggregateVerifier": "w3a-google-sapphire",
-    "dappShare": "", // 24 words of seed phrase will be sent only incase of custom verifiers
+    "authConnectionId": "torus",
+    "userId": "w3a-heroes@web3auth.com",
+    "authConnection": "google",
+    "groupedAuthConnectionId": "w3a-google-sapphire",
+    "dappShare": "", // 24 words of seed phrase will be sent only incase of custom auth connections
     "idToken": "<jwtToken issued by Web3Auth>",
-    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom auth connections
+    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom auth connections
     "isMfaEnabled": false // Returns whether the user has enabled MFA or not
   }
 }
@@ -53,12 +53,12 @@ Now, while logging in, the user can use their social accounts to obtain one shar
 
 :::note
 
-One major thing to note here is that the `dappShare` is only available for custom verifiers and not the standard web3auth verifiers. This is done to make sure that an application only has access to the corresponding share to the private key of their application's user. Hence, to use dApp Share, one has to use the custom authentication feature of Web3Auth. Also, the dApp Share is only returned to users who have enabled 2FA to their account.
+One major thing to note here is that the `dappShare` is only available for custom auth connections and not the standard web3auth auth connections. This is done to make sure that an application only has access to the corresponding share to the private key of their application's user. Hence, to use dApp Share, one has to use the custom authentication feature of Web3Auth. Also, the dApp Share is only returned to users who have enabled 2FA to their account.
 
 :::
 
 ```kotlin
-web3Auth.login(LoginParams(selectedLoginProvider, dappShare = "<24 words seed phrase>"))
+web3Auth.connectTo(LoginParams(selectedLoginProvider, dappShare = "<24 words seed phrase>"))
 ```
 
 ## Example
@@ -73,10 +73,10 @@ class MainActivity : AppCompatActivity() {
 	private lateinit var web3Auth: Web3Auth
 
 	private fun signIn() {
-		val selectedLoginProvider = Provider.GOOGLE
+		val selectedLoginProvider = AuthConnection.GOOGLE
 		// Can be GOOGLE, FACEBOOK, TWITCH etc.
 		val loginCompletableFuture: CompletableFuture<Web3AuthResponse> =
-				web3Auth.login(LoginParams(selectedLoginProvider,
+				web3Auth.connectTo(LoginParams(selectedLoginProvider,
 						// focus-next-line
 						dappShare = "<24 words seed phrase>"))
 		loginCompletableFuture.whenComplete { loginResponse, error ->

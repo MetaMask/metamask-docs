@@ -34,9 +34,9 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 ### Usage
 
 ```kotlin
-val loginResponse = web3Auth.login(
+val loginResponse = web3Auth.connectTo(
   LoginParams(
-    Proider.GOOGLE,
+    AuthConnection.GOOGLE,
     // focus-next-line
     mfaLevel = MFALevel.MANDATORY
   )
@@ -104,8 +104,8 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
 
      private fun enableMFA() {
         val loginParams = LoginParams(
-            Provider.JWT,
-            extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+            AuthConnection.CUSTOM,
+            idToken = "your_jwt_token"
         )
 
         // focus-next-line
@@ -166,13 +166,13 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 
 <TabItem value="table">
 
-| Parameter | Description |
-| --- | --- |
-| `deviceShareFactor?` | MFA setting for deviceShareFactor. It accepts `MfaSetting` as a value. |
-| `backUpShareFactor?` | MFA setting for backUpShareFactor. It accepts `MfaSetting` as a value. |
-| `socialBackupFactor?` | MFA setting for socialBackupFactor. It accepts `MfaSetting` as a value. |
-| `passwordFactor?` | MFA setting for passwordFactor. It accepts `MfaSetting` as a value. |
-| `passkeysFactor?` | MFA setting for passkeysFactor. It accepts `MfaSetting` as a value. |
+| Parameter              | Description                                                              |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `deviceShareFactor?`   | MFA setting for deviceShareFactor. It accepts `MfaSetting` as a value.   |
+| `backUpShareFactor?`   | MFA setting for backUpShareFactor. It accepts `MfaSetting` as a value.   |
+| `socialBackupFactor?`  | MFA setting for socialBackupFactor. It accepts `MfaSetting` as a value.  |
+| `passwordFactor?`      | MFA setting for passwordFactor. It accepts `MfaSetting` as a value.      |
+| `passkeysFactor?`      | MFA setting for passkeysFactor. It accepts `MfaSetting` as a value.      |
 | `authenticatorFactor?` | MFA setting for authenticatorFactor. It accepts `MfaSetting` as a value. |
 
 </TabItem>
@@ -233,13 +233,14 @@ data class MfaSetting(
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
     // focus-start
     mfaSettings = MfaSettings(
       deviceShareFactor = MfaSetting(true, 1, true),
@@ -253,9 +254,9 @@ val web3Auth = Web3Auth(
   )
 )
 
-val loginResponse = web3Auth.login(
+val loginResponse = web3Auth.connectTo(
   LoginParams(
-    Proider.GOOGLE,
+    AuthConnection.GOOGLE,
     // focus-next-line
     mfaLevel = MFALevel.MANDATORY
   )

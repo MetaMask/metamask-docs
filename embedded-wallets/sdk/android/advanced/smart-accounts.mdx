@@ -1,0 +1,320 @@
+---
+title: Smart Accounts (Account Abstraction)
+sidebar_label: Smart Accounts
+description: 'Web3Auth Android SDK - Smart Accounts | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+
+Effortlessly create and manage smart accounts for your users with Web3Auth's native Account Abstraction support. Smart accounts offer enhanced control and programmability, enabling powerful features that traditional wallets can't provide.
+
+<GrowthPlanNote />
+
+## Overview
+
+Web3Auth Android SDK v10.x includes built-in support for ERC-4337 smart accounts. When enabled, your users automatically get smart contract wallets with advanced features like:
+
+- **Gas Sponsorship**: Cover transaction fees for your users
+- **Batch Transactions**: Execute multiple operations in a single transaction
+- **ERC-20 Token Gas Payments**: Let users pay gas fees with any ERC-20 token
+- **Transaction Policies**: Set spending limits and automated rules
+- **Account Recovery**: Enhanced security with social recovery options
+
+## Dashboard Configuration
+
+To enable smart accounts for your Android application:
+
+1. Navigate to your project in the [Web3Auth Dashboard](https://dashboard.web3auth.io)
+2. Go to **Project Settings** → **Smart Accounts**
+3. Enable smart accounts by toggling the switch
+4. Configure your preferred providers:
+   - **Bundler**: Automatically configured (powered by Pimlico)
+   - **Paymaster**: Choose between sponsored transactions or ERC-20 payments
+   - **Smart Account Type**: Select your preferred implementation
+
+## Implementation
+
+### Checking Smart Account Status
+
+Once configured in the dashboard, smart accounts are automatically used when users authenticate:
+
+```kotlin
+// After successful authentication
+val userInfo = web3Auth.getUserInfo()
+val isSmartAccount = userInfo?.isSmartAccountEnabled ?: false
+
+if (isSmartAccount) {
+    // User has a smart account
+    val smartAccountAddress = userInfo?.smartAccountAddress
+    Log.d("Smart Account", "Address: $smartAccountAddress")
+}
+```
+
+### Getting Smart Account Address
+
+The smart account address is different from the EOA address:
+
+```kotlin
+// Get EOA address (traditional wallet)
+val eoaAddress = web3Auth.getAddress()
+
+// Get smart account address (from user info)
+val userInfo = web3Auth.getUserInfo()
+val smartAccountAddress = userInfo?.smartAccountAddress
+
+Log.d("Addresses", "EOA: $eoaAddress, Smart Account: $smartAccountAddress")
+```
+
+### Sending User Operations
+
+With smart accounts enabled, you can send user operations through the `request` method:
+
+```kotlin
+// Prepare user operation
+val userOp = JsonObject().apply {
+    addProperty("sender", smartAccountAddress)
+    addProperty("nonce", "0x0")
+    addProperty("initCode", "0x")
+    addProperty("callData", encodedCallData)
+    addProperty("callGasLimit", "0x5208")
+    addProperty("verificationGasLimit", "0x5208")
+    addProperty("preVerificationGas", "0x5208")
+    addProperty("maxFeePerGas", "0x3b9aca00")
+    addProperty("maxPriorityFeePerGas", "0x3b9aca00")
+    addProperty("paymasterAndData", "0x") // Auto-filled by dashboard config
+    addProperty("signature", "0x")
+}
+
+val params = JsonArray().apply {
+    add(userOp)
+}
+
+// Send user operation
+val userOpResult = web3Auth.request(
+    "eth_sendUserOperation",
+    requestParams = params
+)
+
+userOpResult.whenComplete { result, error ->
+    if (error == null) {
+        val userOpHash = result?.get("result")?.asString
+        Log.d("UserOp", "Hash: $userOpHash")
+    } else {
+        Log.e("UserOp", "Error: ${error.message}")
+    }
+}
+```
+
+### Batch Transactions
+
+Execute multiple transactions in a single user operation:
+
+```kotlin
+// Prepare multiple calls
+val calls = JsonArray().apply {
+    // First call: Transfer ETH
+    add(JsonObject().apply {
+        addProperty("to", "0x...")
+        addProperty("value", "0x1")
+        addProperty("data", "0x")
+    })
+
+    // Second call: ERC20 transfer
+    add(JsonObject().apply {
+        addProperty("to", erc20Address)
+        addProperty("value", "0x0")
+        addProperty("data", encodedTransferData)
+    })
+}
+
+// Encode batch call
+val batchCallData = encodeBatchCall(calls)
+
+// Send as user operation
+val userOp = JsonObject().apply {
+    addProperty("sender", smartAccountAddress)
+    addProperty("callData", batchCallData)
+    // ... other fields
+}
+```
+
+### Gas Sponsorship
+
+When configured in the dashboard, gas sponsorship is automatically handled:
+
+```kotlin
+// Transaction with sponsored gas
+val sponsoredTx = JsonObject().apply {
+    addProperty("to", recipientAddress)
+    addProperty("value", "0x1000")
+    addProperty("data", "0x")
+}
+
+// The paymasterAndData field is automatically populated
+val result = web3Auth.request(
+    "eth_sendTransaction",
+    requestParams = JsonArray().apply { add(sponsoredTx) }
+)
+
+// User pays nothing for gas!
+```
+
+### ERC-20 Gas Payments
+
+Allow users to pay gas fees with ERC-20 tokens:
+
+```kotlin
+// Configure ERC-20 paymaster in dashboard first
+// Then transactions automatically use ERC-20 for gas
+
+val transaction = JsonObject().apply {
+    addProperty("to", recipientAddress)
+    addProperty("value", amount)
+    addProperty("data", "0x")
+    // Specify the token for gas payment (optional)
+    addProperty("paymasterData", JsonObject().apply {
+        addProperty("token", "USDC")
+    })
+}
+
+val result = web3Auth.request(
+    "eth_sendTransaction",
+    requestParams = JsonArray().apply { add(transaction) }
+)
+```
+
+## Wallet UI Integration
+
+The `showWalletUI()` method automatically supports smart account features:
+
+```kotlin
+// Launch wallet UI with smart account support
+val walletResult = web3Auth.showWalletUI()
+
+walletResult.whenComplete { _, error ->
+    if (error == null) {
+        // Wallet UI will show:
+        // - Smart account address
+        // - Batch transaction options
+        // - Gas sponsorship status
+        // - ERC-20 gas payment options
+    }
+}
+```
+
+## Best Practices
+
+### 1. Address Management
+
+Always distinguish between EOA and smart account addresses:
+
+```kotlin
+class WalletManager(private val web3Auth: Web3Auth) {
+
+    fun getActiveAddress(): String {
+        val userInfo = web3Auth.getUserInfo()
+        return if (userInfo?.isSmartAccountEnabled == true) {
+            userInfo.smartAccountAddress ?: getEOAAddress()
+        } else {
+            getEOAAddress()
+        }
+    }
+
+    private fun getEOAAddress(): String {
+        return web3Auth.getAddress()
+    }
+}
+```
+
+### 2. Error Handling
+
+Handle smart account-specific errors:
+
+```kotlin
+web3Auth.request(method, params).whenComplete { result, error ->
+    when {
+        error?.message?.contains("insufficient paymaster funds") == true -> {
+            // Handle paymaster balance issues
+            showError("Transaction sponsorship unavailable")
+        }
+        error?.message?.contains("user operation") == true -> {
+            // Handle user operation errors
+            showError("Smart account operation failed")
+        }
+        error != null -> {
+            // Generic error handling
+            showError(error.message ?: "Transaction failed")
+        }
+        else -> {
+            // Success
+            handleSuccess(result)
+        }
+    }
+}
+```
+
+### 3. Feature Detection
+
+Check for smart account features before using them:
+
+```kotlin
+class SmartAccountFeatures(private val web3Auth: Web3Auth) {
+
+    fun isAvailable(): Boolean {
+        val projectConfig = web3Auth.getProjectConfiguration()
+        return projectConfig?.smartAccounts?.enabled == true
+    }
+
+    fun isGasSponsorshipEnabled(): Boolean {
+        val projectConfig = web3Auth.getProjectConfiguration()
+        return projectConfig?.smartAccounts?.sponsorshipEnabled == true
+    }
+
+    fun supportsBatchTransactions(): Boolean {
+        return isAvailable() // All smart accounts support batching
+    }
+}
+```
+
+## Migration from EOA
+
+If you're migrating from EOA to smart accounts:
+
+```kotlin
+// Before (EOA)
+val address = web3Auth.getAddress()
+val privateKey = web3Auth.getPrivateKey()
+
+// After (Smart Account)
+val userInfo = web3Auth.getUserInfo()
+val address = userInfo?.smartAccountAddress ?: web3Auth.getAddress()
+// Private key is managed by the smart account contract
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Smart account not created**: Ensure smart accounts are enabled in dashboard
+2. **User operation failing**: Check bundler and paymaster configuration
+3. **Gas sponsorship not working**: Verify paymaster balance and limits
+4. **Wrong address used**: Always use `smartAccountAddress` for transactions
+
+### Debug Mode
+
+Enable verbose logging for smart account operations:
+
+```kotlin
+val web3AuthOptions = Web3AuthOptions(
+    // ... other options
+    enableLogging = true
+)
+```
+
+## Learn More
+
+- [Account Abstraction Overview](/embedded-wallets/features/smart-accounts)
+- [ERC-4337 Specification](https://eips.ethereum.org/EIPS/eip-4337)
+- [Web3Auth Dashboard Guide](https://dashboard.web3auth.io)
