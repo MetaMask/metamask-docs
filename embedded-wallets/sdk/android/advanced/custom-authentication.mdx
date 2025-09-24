@@ -302,7 +302,8 @@ Additional to the `LoginConfig` you can pass extra options to the `login` functi
 | `ui_locales?`            | The space separated list of language tags, ordered by preference. For instance `fr-CA fr en`.                                                                                                                                    |
 | `id_token_hint?`         | It denotes the previously issued ID token. It takes `String` as a value.                                                                                                                                                         |
 | `id_token?`              | JWT (ID Token) to be passed for login.                                                                                                                                                                                           |
-| `login_hint?`            | Used to specify the user's email address or phone number for Email/SMS Passwordless login flows. Takes a `String` value. For the SMS, the format should be: `+{country_code}-{phone_number}` (e.g. `+1-1234567890`)              |
+| `access_token?`          | Access token for OAuth flows. It takes `String` as a value.                                                                                                                                                                      |
+| `flow_type?`             | Specifies the email passwordless flow type. It takes `EmailFlowType` as a value (`CODE` or `LINK`).                                                                                                                              |
 | `acr_values?`            | acc_values                                                                                                                                                                                                                       |
 | `scope?`                 | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. It takes `String` as a value.                                                            |
 | `audience?`              | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It takes `String` as a value.                                                                                          |
@@ -330,7 +331,8 @@ data class ExtraLoginOptions(
   private var ui_locales : String? = null,
   private var id_token : String? = null,
   private var id_token_hint : String? = null,
-  private var login_hint : String? = null,
+  private var access_token : String? = null,
+  private var flow_type : EmailFlowType? = null,
   private var acr_values : String? = null,
   private var scope : String? = null,
   private var audience : String? = null,
@@ -340,6 +342,13 @@ data class ExtraLoginOptions(
   private var nonce : String? = null,
   private var redirect_uri : String? = null
 )
+
+enum class EmailFlowType {
+    @SerializedName("code")
+    CODE,
+    @SerializedName("link")
+    LINK
+}
 ```
 
 </TabItem>
@@ -434,6 +443,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
 </TabItem>
 
 <TabItem value="email-passwordless">
+
 To use the Email Passwordless login, you need to put the email into the `loginHint` parameter of
 the `LoginParams`. By default, the login flow will be `code` flow, if you want to use the
 `link` flow, you need to put `flow_type` into the `extraLoginOptions` parameter.
@@ -455,8 +465,12 @@ val web3Auth = Web3Auth(
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
   LoginParams(
     AuthConnection.EMAIL_PASSWORDLESS,
-    // focus-next-line
-    loginHint = "hello@web3auth.io"
+    // focus-start
+    loginHint = "hello@web3auth.io",
+    extraLoginOptions = ExtraLoginOptions(
+      flow_type = EmailFlowType.CODE // Use CODE for OTP flow or LINK for magic link flow
+    )
+    // focus-end
   )
 )
 ```
@@ -464,6 +478,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.conne
 </TabItem>
 
 <TabItem value="sms-passwordless">
+
 To use the SMS Passwordless login, send the phone number as the `loginHint` parameter of the
 `LoginParams`. Please make sure the phone number is in the format of
 +\{country_code}-\{phone_number}, i.e. (+91-09xx901xx1).

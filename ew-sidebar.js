@@ -503,6 +503,7 @@ const sidebar = {
       label: "Advanced",
       items: [
         "sdk/android/advanced/README",
+        "sdk/android/advanced/smart-accounts",
         "sdk/android/advanced/custom-authentication",
         "sdk/android/advanced/whitelabel",
         "sdk/android/advanced/mfa",

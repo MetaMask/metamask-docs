@@ -78,9 +78,9 @@ class Web3AuthHelperImpl(
     private val web3Auth: Web3Auth
 ): Web3AuthHelper {
 
-    // Performs the login to authenticate the user with Web3Auth netowrk.
-    override suspend fun login(loginParams: LoginParams): CompletableFuture<Web3AuthResponse> {
-        return web3Auth.login(loginParams)
+    // Connects to authenticate the user with Web3Auth network.
+    override suspend fun connectTo(loginParams: LoginParams): CompletableFuture<Web3AuthResponse> {
+        return web3Auth.connectTo(loginParams)
     }
 
     // Logout of the current active session.
@@ -90,7 +90,12 @@ class Web3AuthHelperImpl(
 
     // Returns the Ethereum compatible private key.
     override fun getPrivateKey(): String {
-      return web3Auth.getPrivkey()
+      return web3Auth.getPrivateKey()
+    }
+
+    // Returns the Ed25519 private key for Solana and other chains.
+    override fun getEd25519PrivateKey(): String {
+      return web3Auth.getEd25519PrivateKey()
     }
 
     // Returns the user information such as name, email, profile image, and etc.
@@ -112,7 +117,17 @@ class Web3AuthHelperImpl(
     }
 
     override suspend fun isUserAuthenticated(): Boolean {
-        return web3Auth.getPrivkey().isNotEmpty()
+        return web3Auth.getPrivateKey().isNotEmpty()
+    }
+
+    // Shows the Wallet UI with smart account support
+    override suspend fun showWalletUI(): CompletableFuture<Void> {
+        return web3Auth.showWalletUI()
+    }
+
+    // Makes a blockchain request
+    override suspend fun request(method: String, params: JsonArray): CompletableFuture<SignResponse> {
+        return web3Auth.request(method, params)
     }
 }
 ```
@@ -120,6 +135,10 @@ class Web3AuthHelperImpl(
 Once we have the created `Web3AuthHelper`, the next is to initialize the `Web3Auth` instance in the Koin module and make it a singleton component.
 
 ```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+
 val appModule = module {
     // focus-start
     single {
@@ -138,8 +157,8 @@ private fun getWeb3AuthHelper(context: Context): Web3AuthHelper {
         Web3AuthOptions(
             clientId = "WEB3AUTH_CLIENT_ID",
             context = context,
-            network = Network.SAPPHIRE_MAINNET,
-            redirectUrl = Uri.parse("w3a://com.example.android_playground/auth")
+            web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+            redirectUrl = "w3a://com.example.android_playground/auth"
         )
     )
     // focus-end
@@ -150,7 +169,7 @@ private fun getWeb3AuthHelper(context: Context): Web3AuthHelper {
 
 ### Session Management
 
-To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivKey` method. For a user already authenticated, the result would be a non-empty `String`. You can navigate to different views based on the result. If the user is already authenticated, we'll generate and prepare the `Credentials`, important to interact with the blockchain. Along with that, we'll retrieve user info, and navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again. [Learn more about Web3Auth session management](/embedded-wallets/features/session-management).
+To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivateKey` method. For a user already authenticated, the result would be a non-empty `String`. You can navigate to different views based on the result. If the user is already authenticated, we'll generate and prepare the `Credentials`, important to interact with the blockchain. Along with that, we'll retrieve user info, and navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again. [Learn more about Web3Auth session management](/embedded-wallets/features/session-management).
 
 Since we are using the MVVM architecture, we'll create a `ViewModel` class to encapsulate the business logic for Web3Auth and Ethereum chain interaction.
 
@@ -214,9 +233,9 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
 
 ### Authentication
 
-If the user is not authenticated, we can utilize the `login` method to authenticate the user. For the Wallet, we will add an Email Passwordless login. We'll create a helper function, `login` inside `MainViewModel`. The login method is pretty straightforward in Web3Auth and takes `LoginParams` as input. After successfully logging in, we'll generate and prepare the `Credentials`, important to interact with the blockchain. Along with that, we'll retrieve user info, and navigate them to `HomeScreen`.
+If the user is not authenticated, we can utilize the `connectTo` method to authenticate the user. For the Wallet, we will add an Email Passwordless login. We'll create a helper function, `login` inside `MainViewModel`. The connectTo method is pretty straightforward in Web3Auth and takes `LoginParams` as input. After successfully authenticating, we'll generate and prepare the `Credentials`, important to interact with the blockchain. Along with that, we'll retrieve user info, and navigate them to `HomeScreen`.
 
-Learn more about [Web3Auth LoginParams](/embedded-wallets/sdk/android/usage/login#parameters).
+Learn more about [Web3Auth LoginParams](/embedded-wallets/sdk/android/usage/connectTo#parameters).
 
 ```kotlin
 class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
@@ -225,14 +244,14 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
     fun login(email: String) {
         // focus-start
         val loginParams = LoginParams(
-            loginProvider = Provider.EMAIL_PASSWORDLESS,
-            extraLoginOptions = ExtraLoginOptions(login_hint = email)
+            authConnection = AuthConnection.EMAIL_PASSWORDLESS,
+            loginHint = email
         )
         // focus-end
         viewModelScope.launch {
             try {
                 // focus-next-line
-                web3AuthHelper.login(loginParams = loginParams).await()
+                web3AuthHelper.connectTo(loginParams = loginParams).await()
                 // Functions from Session Management code snippets
                 prepareCredentials()
                 prepareUserInfo()
@@ -432,20 +451,20 @@ val appModule = module {
     // Additional code
 
     // focus-next-line
-    factory<EthereumUseCase> { EthereumUseCaseImpl(Web3j.build(HttpService(chainConfigList.first().rpcTarget))) }
+    factory<EthereumUseCase> { EthereumUseCaseImpl(Web3j.build(HttpService(chainsList.first().rpcTarget))) }
 
     // Additonal code
 ```
 
 ## Set up Supported Chains
 
-After having our blockchain UseCase in place, the next step on the list is to define the supported chains. To keep things simple, we'll simply create a new file `ChainConfigList` with an array of ChainConfig to define the supported chains.
+After having our blockchain UseCase in place, the next step on the list is to define the supported chains. To keep things simple, we'll simply create a new file `ChainsList` with an array of Chains to define the supported chains.
 
 For the guide, we have added the support for Ethereum Sepolia, and Arbitrum Sepolia. If you wish to support more chains in your wallet, you can simply add the config with the required details in the list below. Along with that, you can also add the desired chain using the add custom chain feature in the app.
 
 ```kotlin
-var chainConfigList = arrayOf(
-    ChainConfig(
+var chainsList = arrayOf(
+    Chains(
         chainNamespace = ChainNamespace.EIP155,
         decimals = 18,
         blockExplorerUrl = "https://sepolia.etherscan.io/",
@@ -455,7 +474,7 @@ var chainConfigList = arrayOf(
         ticker = "ETH",
         tickerName = "Ethereum"
     ),
-    ChainConfig(
+    Chains(
         chainNamespace = ChainNamespace.EIP155,
         decimals = 18,
         blockExplorerUrl = "https://sepolia.etherscan.io/",
@@ -489,25 +508,25 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
     private val _isAccountLoaded: MutableStateFlow<Boolean> = MutableStateFlow(false)
     val isAccountLoaded: StateFlow<Boolean> = _isAccountLoaded
 
-    // _balance holds the user's balance for the selected ChainConfig.
+    // _balance holds the user's balance for the selected Chains.
     private val _balance: MutableStateFlow<String> = MutableStateFlow("0.0")
     val balance: StateFlow<String> = _balance
 
 
-    // Currently selected ChainConfig by the user. By default, it would be the first ChainConfig
+    // Currently selected Chains by the user. By default, it would be the first Chains
     // in the list.
-    private val _selectedChain: MutableStateFlow<ChainConfig> = MutableStateFlow(chainConfigList[0])
-    val selectedChain: StateFlow<ChainConfig> = _selectedChain
+    private val _selectedChain: MutableStateFlow<Chains> = MutableStateFlow(chainsList[0])
+    val selectedChain: StateFlow<Chains> = _selectedChain
 
     // Credentials will be used to retrive user's EOA address, and sign the transactions.
     lateinit var credentials: Credentials
     lateinit var userInfo: UserInfo
 
-    // EthereumUseCaseImpl to interact with the selected Ethereum ChainConfig.
+    // EthereumUseCaseImpl to interact with the selected Ethereum Chains.
     private var ethereumUseCase: EthereumUseCase = EthereumUseCaseImpl(
         Web3j.build(
             HttpService(
-                chainConfigList.first().rpcTarget
+                chainsList.first().rpcTarget
             )
         )
     )
@@ -537,7 +556,7 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
         // Defined previously
     }
 
-    // Retrieves user's balance for the currently selected ChainConfig.
+    // Retrieves user's balance for the currently selected Chains.
     fun getBalance() {
         viewModelScope.launch {
             _isAccountLoaded.emit(false)
@@ -589,8 +608,8 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
         }
     }
 
-    // Changes the currently selected ChainConfig.
-    fun changeChainConfig(config: ChainConfig) {
+    // Changes the currently selected Chains.
+    fun changeChainConfig(config: Chains) {
         _selectedChain.value = config
         ethereumUseCase = EthereumUseCaseImpl(
             Web3j.build(
@@ -775,7 +794,7 @@ fun AccountView(viewModel: MainViewModel) {
                             expanded = expanded,
                             onDismissRequest = { expanded = false }
                         ) {
-                            chainConfigList.forEach { item ->
+                            chainsList.forEach { item ->
                                 DropdownMenuItem(
                                     text = { Text(text = item.displayName!!) },
                                     onClick = {
@@ -1083,8 +1102,62 @@ fun WriteContractView(viewModel: MainViewModel) {
 }
 ```
 
+## Advanced Features
+
+### Smart Accounts (ERC-4337)
+
+Web3Auth Android SDK v10.x includes built-in support for smart accounts. When enabled in your dashboard, users automatically get smart contract wallets with advanced features:
+
+```kotlin
+// Check if smart accounts are enabled
+val userInfo = web3AuthHelper.getUserInfo()
+if (userInfo.isSmartAccountEnabled) {
+    val smartAccountAddress = userInfo.smartAccountAddress
+    Log.d("Smart Account", "Address: $smartAccountAddress")
+
+    // Use smart account for gasless transactions
+    val userOp = buildUserOperation(smartAccountAddress, transaction)
+    web3AuthHelper.request("eth_sendUserOperation", userOp)
+}
+```
+
+### Using Web3Auth Wallet Services
+
+The SDK also provides access to Web3Auth's built-in wallet UI:
+
+```kotlin
+// Show the wallet UI with smart account support
+fun showWallet() {
+    viewModelScope.launch {
+        try {
+            web3AuthHelper.showWalletUI().await()
+            // Wallet UI will handle transactions, gas sponsorship, and more
+        } catch (e: Exception) {
+            Log.e("Wallet", "Error showing wallet: ${e.message}")
+        }
+    }
+}
+
+// Request signatures through wallet services
+fun requestSignature(method: String, params: JsonArray) {
+    viewModelScope.launch {
+        val result = web3AuthHelper.request(method, params).await()
+        if (result.success) {
+            Log.d("Signature", result.result ?: "")
+        }
+    }
+}
+```
+
 ## Conclusion
 
-Voila, you have build a Ethereum Web3 wallet. This guide only gives you an overview of how to create your wallet with Ethereum ecosystem support. The general idea of the guide can be used for any of the blockchain ecosystem.
+Voila, you have built an Ethereum Web3 wallet using Web3Auth Android SDK v10.x! This guide gives you an overview of how to create your wallet with Ethereum ecosystem support, including the latest features like smart accounts and simplified wallet services. The general idea of the guide can be used for any blockchain ecosystem.
+
+### Key Takeaways
+
+- **Simplified Authentication**: The new `connectTo` method supports both PnP and SFA modes
+- **Smart Account Support**: Automatic ERC-4337 account abstraction when enabled
+- **Improved Developer Experience**: Cleaner APIs and better type safety
+- **Built-in Wallet UI**: Access to Web3Auth's wallet services without additional configuration
 
 If you are interested in learning more about Web3Auth, please checkout our [documentation for Android](/embedded-wallets/sdk/android). You can find the code used for the guide on our [examples repo](https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-playground).

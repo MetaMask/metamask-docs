@@ -7,7 +7,15 @@ description: 'Web3Auth Android SDK - showWalletUI Function | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `showWalletUI` method launches a WebView which allows you to use the templated wallet UI services. The method automatically uses the chain configuration from your project settings and no longer requires manual `ChainConfig` parameter. Wallet Services is currently only available for EVM chains.
+The `showWalletUI` method launches a WebView which allows you to use the templated wallet UI services. The method automatically uses the chain configuration from your project settings and no longer requires manual `ChainConfig` parameter.
+
+### Supported Features
+
+- **EVM Chains**: Full support for all EVM-compatible chains
+- **Account Abstraction**: Built-in support for smart accounts (ERC-4337)
+- **Gas Sponsorship**: Cover transaction fees for your users
+- **Batch Transactions**: Execute multiple transactions in one go
+- **Custom Spending Limits**: Set transaction limits for enhanced security
 
 :::note
 
@@ -38,3 +46,31 @@ You can also specify a custom path:
 val completableFuture = web3Auth.showWalletUI("custom-wallet-path")
 // focus-end
 ```
+
+## Smart Accounts Configuration
+
+When smart accounts are enabled in your Web3Auth Dashboard, the wallet UI will automatically provide account abstraction features:
+
+### Dashboard Configuration
+
+1. Navigate to your project in the [Web3Auth Dashboard](https://dashboard.web3auth.io)
+2. Enable Smart Accounts in your project settings
+3. Configure your preferred bundler and paymaster providers
+
+### Features Available
+
+Once configured, users can:
+
+- **Send Gasless Transactions**: Transactions can be sponsored by your paymaster
+- **Batch Operations**: Multiple transactions can be bundled and executed as one
+- **ERC-20 Token Payments**: Users can pay gas fees using ERC-20 tokens instead of native tokens
+- **Automated Transaction Policies**: Set up rules for automatic transaction execution
+
+### User Experience
+
+When smart accounts are enabled:
+
+1. Users will see a smart account address instead of an EOA address
+2. Transaction confirmation screens will show sponsorship details
+3. Batch transaction options will be available in the wallet UI
+4. Gas payment options will include ERC-20 tokens if configured

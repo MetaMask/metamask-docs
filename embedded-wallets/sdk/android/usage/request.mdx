@@ -14,8 +14,9 @@ Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/refe
 
 | Parameter       | Description                                                                                                                                                                                             |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `method`        | JSON RPC method name in `String`. Currently, the request method only supports the signing methods.                                                                                                      |
+| `method`        | JSON RPC method name in `String`. Supports signing methods and smart account operations (see supported methods below).                                                                                  |
 | `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/) to know more. |
+| `path?`         | The path where the signing service is located. Default value is `"wallet/request"`. This is an internal routing path for the wallet services infrastructure.                                            |
 | `appState?`     | It can be used to keep track of the app state. Default is `null`, and accepts `String` as a value.                                                                                                      |
 
 :::warning
@@ -24,7 +25,27 @@ The chain configuration is now automatically retrieved from your project setting
 
 :::
 
+## Supported Methods
+
+### Standard Signing Methods
+
+- `personal_sign` - Sign a message
+- `eth_sign` - Sign data
+- `eth_signTypedData` - Sign typed structured data
+- `eth_signTypedData_v4` - Sign typed structured data (v4)
+- `eth_sendTransaction` - Send a transaction
+
+### Smart Account Operations
+
+When smart accounts are enabled in your dashboard, additional methods are available:
+
+- `eth_sendUserOperation` - Send a user operation for account abstraction
+- `eth_estimateUserOperationGas` - Estimate gas for a user operation
+- `wallet_showUserOperation` - Display user operation details in wallet UI
+
 ## Usage
+
+### Standard Transaction Signing
 
 ```kotlin
 val params = JsonArray().apply {
@@ -51,6 +72,57 @@ signMsgCompletableFuture.whenComplete { signResult, error ->
     }
 }
 ```
+
+### Smart Account User Operation
+
+When smart accounts are enabled, you can send user operations:
+
+```kotlin
+// Build user operation parameters
+val userOp = JsonObject().apply {
+    addProperty("sender", smartAccountAddress)
+    addProperty("nonce", "0x0")
+    addProperty("initCode", "0x")
+    addProperty("callData", encodedCallData)
+    addProperty("callGasLimit", "0x5208")
+    addProperty("verificationGasLimit", "0x5208")
+    addProperty("preVerificationGas", "0x5208")
+    addProperty("maxFeePerGas", "0x3b9aca00")
+    addProperty("maxPriorityFeePerGas", "0x3b9aca00")
+    addProperty("paymasterAndData", "0x")
+    addProperty("signature", "0x")
+}
+
+val params = JsonArray().apply {
+    add(userOp)
+}
+
+// focus-start
+val userOpCompletableFuture = web3Auth.request(
+    "eth_sendUserOperation",
+    requestParams = params
+)
+// focus-end
+
+userOpCompletableFuture.whenComplete { result, error ->
+    if (error == null) {
+        // focus-next-line
+        Log.d("UserOp Hash", result.toString())
+    } else {
+        Log.d("UserOp Error", error.message ?: "Failed to send user operation")
+    }
+}
+```
+
+:::tip
+
+For smart account operations, the Web3Auth dashboard will automatically handle:
+
+- Bundler URL configuration
+- Paymaster integration for sponsored transactions
+- User operation validation
+
+:::
 
 ## SignResponse
 
