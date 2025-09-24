@@ -3,6 +3,7 @@ title: Use a passkey as a backup signer
 image: 'img/tutorials/tutorials-banners/use-passkey-as-backup-signer.png'
 description: Use a passkey as a backup signer for a MetaMask smart account.
 tags: [delegation toolkit, passkey, backup signer, smart account]
+keywords: [delegation toolkit, passkey, webauthn, P-256, backup signer, smart account]
 date: Aug 27, 2025
 author: MetaMask Developer Relations
 ---
@@ -23,14 +24,21 @@ This tutorial walks you through adding a passkey signer to an already deployed s
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](/delegation-toolkit/get-started/install) in your project.
-- [Install Ox SDK](https://oxlib.sh/#installation).
-- [Configure the Delegation Toolkit](/delegation-toolkit/development/guides/configure).
-- [Create and deploy a Hybrid smart account,](/delegation-toolkit/development/guides/smart-accounts/create-smart-account) with a signatory from a private key.
+- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
+- Install [Yarn](https://yarnpkg.com/),
+    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 
 ## Steps
 
-### 1. Create a Public Client
+### 1. Install dependencies
+
+Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) and [Ox SDK](https://oxlib.sh/#installation) in your project:
+
+```bash npm2yarn
+npm install @metamask/delegation-toolkit ox
+```
+
+### 2. Create a Public Client
 
 Create a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function.
 You will configure a smart account and Bundler Client with the Public Client, which you can use to query the signer's account state and interact with the blockchain network.
@@ -45,7 +53,7 @@ const publicClient = createPublicClient({
 })
 ```
 
-### 2. Create a Bundler Client
+### 3. Create a Bundler Client
 
 Create a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function.
 You can use the bundler service to estimate gas for user operations and submit transactions to the network.
@@ -59,27 +67,41 @@ const bundlerClient = createBundlerClient({
 })
 ```
 
-### 3. Create a Hybrid smart account
+### 4. Create and deploy a smart account
 
-Configure the same [Hybrid smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account) that you created and deployed as a [prerequisite](#prerequisites).
+Create and deploy a [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account), with a private key signer.
 The Hybrid implementation supports adding additional passkey signers.
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit'
 import { privateKeyToAccount } from 'viem/accounts'
+import { zeroAddress } from 'viem'
 
 const account = privateKeyToAccount('0x...')
 
+// Create the smart account.
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: '0x',
-  signatory: { account },
+  signer: { account },
+})
+
+// Deploy the smart account by sending a user operation.
+// Appropriate fee per gas must be determined for the bundler being used.
+const maxFeePerGas = 1n;
+const maxPriorityFeePerGas = 1n;
+
+const userOperationHash = await bundlerClient.sendUserOperation({
+  account: smartAccount,
+  calls: [{ to: zeroAddress }],
+  maxFeePerGas,
+  maxPriorityFeePerGas,
 })
 ```
 
-### 4. Create a passkey
+### 5. Create a passkey
 
 To add a passkey signer, use Viem's [`createWebAuthnCredential`](https://viem.sh/account-abstraction/accounts/webauthn/createWebAuthnCredential) function to securely register the passkey (WebAuthn credential).
 
@@ -91,7 +113,7 @@ const credential = await createWebAuthnCredential({
 })
 ```
 
-### 5. Add the passkey as a backup signer
+### 6. Add the passkey as a backup signer
 
 Use the `HybridDeleGator` contract namespace from the Delegation Toolkit to encode the calldata required to add the passkey signer.
 The encoding function needs the X and Y coordinates of the P-256 public key.
@@ -101,7 +123,7 @@ Once the calldata is prepared, send it to your smart account address to register
 
 ```ts
 import { PublicKey } from 'ox'
-import { HybridDeleGator, P256Owner } from '@metamask//delegation-toolkit/contracts'
+import { HybridDeleGator, P256Owner } from '@metamask/delegation-toolkit/contracts'
 
 // Deserialize the compressed public key.
 const publicKey = PublicKey.fromHex(credential.publicKey)
@@ -116,7 +138,7 @@ const data = HybridDeleGator.encode.addKey({
   p256Owner,
 })
 
-// Appropriate fee per gas must be determined for the specific bundler being used.
+// Appropriate fee per gas must be determined for the bundler being used.
 const maxFeePerGas = 1n
 const maxPriorityFeePerGas = 1n
 
@@ -133,10 +155,10 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 })
 ```
 
-### 6. (Optional) Use the passkey signer
+### 7. (Optional) Use the passkey signer
 
 You can now use the passkey signer to access your smart account and sign transactions.
-If you ever lose your primary signer (private key) used in [Step 3](#3-create-a-hybrid-smart-account), you can use the passkey as a secure backup method to retain access to your smart account.
+If you ever lose your primary signer (private key) used in [Step 4](#4-create-and-deploy-a-smart-account), you can use the passkey as a secure backup method to retain access to your smart account.
 
 Use the [Viem WebAuthn Account](https://viem.sh/account-abstraction/accounts/webauthn) to configure your passkey as a MetaMask smart account signer.
 
@@ -157,11 +179,11 @@ const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [owner, [credential.id], [publicKey.x], [publicKey.y]],
   deploySalt: '0x',
-  signatory: { webAuthnAccount, keyId: toHex(credential.id) },
+  signer: { webAuthnAccount, keyId: toHex(credential.id) },
 })
 ```
 
 ## Next steps
 
-- Learn more about [smart account implementations](/delegation-toolkit/development/guides/smart-accounts/create-smart-account).
-- To sponsor gas fees when adding a passkey as a backup signer, see how to [send a gasless transaction](/delegation-toolkit/development/guides/smart-accounts/send-gasless-transaction).
+- Learn more about [smart account implementations](/delegation-toolkit/guides/smart-accounts/create-smart-account).
+- To sponsor gas fees when adding a passkey as a backup signer, see how to [send a gasless transaction](/delegation-toolkit/guides/smart-accounts/send-gasless-transaction).

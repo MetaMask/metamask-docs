@@ -1,6 +1,7 @@
 ---
 description: Get started quickly with the MetaMask Smart Accounts
 sidebar_label: Smart account quickstart
+keywords: [quickstart, smart accounts, user operation]
 ---
 
 # MetaMask Smart Accounts quickstart
@@ -68,7 +69,7 @@ const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 ```
 

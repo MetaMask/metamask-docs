@@ -1,5 +1,6 @@
 ---
 description: Learn how to deploy a MetaMask smart account.
+keywords: [deploy, smart account, user operation]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -13,7 +14,6 @@ the first user operation, or manually deploy the account.
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a MetaMask smart account.](create-smart-account.md) 
 
 ## Deploy with the first user operation
@@ -74,7 +74,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 
 export const bundlerClient = createBundlerClient({
@@ -88,7 +88,7 @@ export const bundlerClient = createBundlerClient({
 
 ## Deploy manually
 
-To deploy a smart account manually, call the [`getFactoryArgs`](../../reference/api/smart-account.md#getfactoryargs)
+To deploy a smart account manually, call the [`getFactoryArgs`](../../reference/smart-account.md#getfactoryargs)
 method from the smart account to retrieve the `factory` and `factoryData`. This allows you to use a relay account to sponsor the deployment without needing a paymaster. 
 
 The `factory` represents the contract address responsible for deploying the smart account, while `factoryData` contains the 
@@ -138,7 +138,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 
 const relayAccountPrivateKey = "0x121..";

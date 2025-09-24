@@ -1,6 +1,7 @@
 // @ts-check
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
+
 const sidebar = {
   gatorSidebar: [
     {
@@ -23,7 +24,7 @@ const sidebar = {
             'get-started/smart-account-quickstart/eip7702',
           ],
         },
-        'get-started/erc7715-quickstart',
+        // 'get-started/erc7715-quickstart',
         'get-started/use-the-cli',
         'get-started/supported-networks',
       ],
@@ -43,7 +44,6 @@ const sidebar = {
             'concepts/delegation/caveat-enforcers',
           ],
         },
-        'concepts/environment',
       ],
     },
     {
@@ -51,7 +51,7 @@ const sidebar = {
       label: 'Guides',
       collapsed: false,
       items: [
-        'guides/configure',
+        'guides/configure-toolkit',
         {
           type: 'category',
           label: 'MetaMask Smart Accounts',
@@ -70,20 +70,32 @@ const sidebar = {
           collapsed: false,
           items: [
             'guides/delegation/execute-on-smart-accounts-behalf',
-            'guides/delegation/restrict-delegation',
+            {
+              type: 'category',
+              label: 'Use delegation scopes',
+              collapsed: false,
+              link: { type: "doc", id: "guides/delegation/use-delegation-scopes/index" },
+              items: [
+                'guides/delegation/use-delegation-scopes/spending-limit',
+                'guides/delegation/use-delegation-scopes/function-call',
+                'guides/delegation/use-delegation-scopes/ownership-transfer',
+                'guides/delegation/use-delegation-scopes/constrain-scope',
+              ],
+            },
+            'guides/delegation/check-delegation-state',
           ],
         },
       ],
     },
-    {
-      type: 'category',
-      label: 'Experimental',
-      collapsed: false,
-      items: [
-        'experimental/erc-7715-request-permissions',
-        'experimental/erc-7710-redeem-delegations',
-      ],
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Experimental',
+    //   collapsed: false,
+    //   items: [
+    //     'experimental/erc-7715-request-permissions',
+    //     'experimental/erc-7710-redeem-delegations',
+    //   ],
+    // },
     {
       type: 'category',
       label: 'Tutorials',
@@ -104,6 +116,11 @@ const sidebar = {
           label: "Create a custom caveat enforcer",
           href: "/tutorials/create-custom-caveat-enforcer"
         },
+        {
+          type: "link",
+          label: "Create a social invite link",
+          href: "/tutorials/create-invite-link"
+        },
       ],
     },
     {
@@ -111,25 +128,27 @@ const sidebar = {
       label: 'Reference',
       collapsed: false,
       items: [
-        'reference/caveats',
+        'reference/smart-account',
         {
           type: 'category',
-          label: 'Delegation Toolkit API',
+          label: 'Delegation',
           collapsed: false,
+          link: { type: "doc", id: "reference/delegation/index" },
           items: [
-            'reference/api/delegation',
-            'reference/api/smart-account',
-            {
-              type: 'category',
-              label: 'Experimental actions',
-              collapsed: false,
-              items: [
-                'reference/api/experimental-actions/bundler-client',
-                'reference/api/experimental-actions/wallet-client',
-              ],
-            },
+            'reference/delegation/delegation-scopes',
+            'reference/delegation/caveats',
+            'reference/delegation/caveat-enforcer-client',
           ],
         },
+        // {
+        //   type: 'category',
+        //   label: 'ERC-7715',
+        //   collapsed: false,
+        //   items: [
+        //     'reference/erc7715/wallet-client',
+        //     'reference/erc7715/bundler-client',
+        //   ],
+        // },
       ],
     },
   ],

@@ -1,11 +1,7 @@
-### Logging in your User
+### Sign in the user
 
-Use the `login` function in the Web3Auth Instance to log in the user. Just create a button that triggers the `login` for the user of the login method of their choice.
+Use the [`login`](/embedded-wallets/sdk/ios/usage/login) function of the
+`web3Auth` instance to sign in the user. You can trigger it from a button or other user action.
 
-After a successful user login, Web3Auth will redirect back to your app, with a payload stored in the state of the Web3Auth Instance.
-
-:::info SDK Reference
-
-- [`login()` function](/embedded-wallets/sdk/react-native/usage#logging-in-a-user).
-
-:::
+After a successful user sign-in, Web3Auth returns the user to your app, with a payload stored in the
+state of the `web3Auth` instance.
