@@ -89,11 +89,11 @@ import { metaMask } from "wagmi/connectors"
 ### 3. Configure your project
 
 Set up your configuration with the desired chains and connectors.
-For example:
+In the following example, set the [`infuraAPIKey`](../reference/sdk-options.md#infuraapikey) option to your [Infura API key](/developer-tools/dashboard/get-started/create-api) to use for RPC requests:
 
 ```jsx
 const config = createConfig({
-  ssr: true, // Make sure to enable this for server-side rendering (SSR) applications.
+  ssr: true, // Enable this if your dapp uses server-side rendering.
   chains: [mainnet, linea, lineaSepolia],
   connectors: [
     metaMask({
@@ -163,7 +163,7 @@ For production deployments, it's important to use reliable RPC providers instead
 We recommend using services like [MetaMask Developer](https://developer.metamask.io/) to ensure better reliability and performance.
 :::
 
-You can configure your RPC endpoints in the Wagmi configuration as follows:
+You can configure your RPC endpoints in the Wagmi configuration as follows, replacing `<YOUR-API-KEY>` with your [Infura API key](/developer-tools/dashboard/get-started/create-api):
 
 ```jsx
 const config = createConfig({
@@ -174,8 +174,6 @@ const config = createConfig({
   },
 })
 ```
-
-Sign up to [MetaMask Developer](https://developer.metamask.io/) for a free account and get your API key.
 
 ## Next steps
 
