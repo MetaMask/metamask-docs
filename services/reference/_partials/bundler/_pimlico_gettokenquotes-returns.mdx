@@ -1,0 +1,10 @@
+An object containing an array of token quotes. Each quote includes information about the token, exchange rates, and storage slots.
+
+- `quotes`: (array) - An array of quote objects, each containing:
+  - `paymaster`: (string) - The address of the paymaster contract.
+  - `token`: (string) - The address of the token.
+  - `postOpGas`: (string) - The amount of gas required for post-operation processing.
+  - `exchangeRate`: (string) - The exchange rate between the token and the native gas token.
+  - `exchangeRateNativeToUsd`: (string) - The exchange rate between the native gas token and USD with 6 decimals of precision.
+  - `balanceSlot`: (string) - The storage slot for the token balance.
+  - `allowanceSlot`: (string) - The storage slot for the token allowance.

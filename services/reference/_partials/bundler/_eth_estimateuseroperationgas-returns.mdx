@@ -1,0 +1,30 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+**Type:** `Object`
+
+An object containing the estimated gas values for the user operation.
+
+<Tabs>
+<TabItem value="v0.7" label="v0.7 and v0.8">
+
+- `preVerificationGas`: (string) - The amount of gas to pay for to compensate the bundler for
+    pre-verification execution and `calldata`.
+- `verificationGasLimit`: (string) - The amount of gas to allocate for the verification step.
+- `callGasLimit`: (string) - The amount of gas to allocate the main execution call.
+- `paymasterVerificationGasLimit`: (string) - The amount of gas to allocate for the verification step
+    of the paymaster, or `null` if no paymaster.
+- `paymasterPostOpGasLimit`: (string) - The amount of gas to allocate for the post-operation step of
+    the paymaster, or `null` if no paymaster.
+
+</TabItem>
+<TabItem value="v0.6" label="v0.6">
+
+- `preVerificationGas`: (string) - The amount of gas to pay for to compensate the bundler for
+    pre-verification execution and `calldata`.
+- `verificationGas`: (string) - The amount of gas used for verification (legacy field from v0.6).
+- `verificationGasLimit`: (string) - The amount of gas to allocate for the verification step.
+- `callGasLimit`: (string) - The amount of gas to allocate the main execution call.
+
+</TabItem>
+</Tabs>
