@@ -13,7 +13,7 @@ MetaMask parses the message and gives the user a friendly interface prompting th
 your dapp:
 
 <p align="center">
-    <img src={require("../../assets/siwe.png").default} alt="Sign-in with Ethereum request" class="appScreen" />
+    <img src={require("../../_assets/siwe.png").default} alt="Sign-in with Ethereum request" class="appScreen" />
 </p>
 
 ## Domain binding
@@ -31,10 +31,10 @@ This is to not break existing dapps that may have use cases for mismatched domai
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../../assets/siwe-bad-domain.png").default} alt="Sign-in bad domain" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain.png").default} alt="Sign-in bad domain" class="appScreen" />
     </div>
     <div class="imgCol">
-        <img src={require("../../assets/siwe-bad-domain-2.png").default} alt="Sign-in bad domain pop-up" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain-2.png").default} alt="Sign-in bad domain pop-up" class="appScreen" />
     </div>
 </div>
 

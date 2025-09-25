@@ -8,7 +8,7 @@ import CardList from '@site/src/components/CardList'
 
 ## Supported platforms and libraries
 
-MetaMask SDK is available in a variety of ways to make integration as easy as possible.
+MetaMask Wallet SDK is available in a variety of ways to make integration as easy as possible.
 You can access it directly via npm, through popular developer libraries like Wagmi, or as part of popular convenience libraries.
 
 <CardList

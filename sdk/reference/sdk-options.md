@@ -8,7 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # SDK options
 
-MetaMask SDK takes the following configuration options.
+MetaMask Wallet SDK takes the following configuration options.
 
 ### `checkInstallationImmediately`
 

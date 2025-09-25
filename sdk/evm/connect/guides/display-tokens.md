@@ -97,10 +97,10 @@ The add NFT interfaces look like the following:
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../assets/watchasset-nft.png").default} alt="NFT confirmation" class="appScreen" />
+        <img src={require("../_assets/watchasset-nft.png").default} alt="NFT confirmation" class="appScreen" />
     </div>
     <div class="imgCol">
-        <img src={require("../assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
+        <img src={require("../_assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
     </div>
 </div>
 

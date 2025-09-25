@@ -39,7 +39,7 @@ export const EMBEDDED_WALLETS_SUBNAV_CONFIG: SubNavBarConfig = {
 
 export const SDK_SUBNAV_CONFIG: SubNavBarConfig = {
   pathPattern: '/sdk',
-  sectionName: 'MetaMask SDK',
+  sectionName: 'MetaMask Wallet SDK',
   links: [
     {
       key: 'overview',
@@ -49,22 +49,22 @@ export const SDK_SUBNAV_CONFIG: SubNavBarConfig = {
     {
       key: 'multichain',
       label: 'Multichain',
-      path: '/sdk/multichain/',
+      path: '/sdk/multichain',
     },
     {
       key: 'evm',
       label: 'EVM',
-      path: '/sdk/evm/',
+      path: '/sdk/evm',
     },
     {
       key: 'solana',
       label: 'Solana',
-      path: '/sdk/solana/',
+      path: '/sdk/solana',
     },
     {
       key: 'starknet',
       label: 'Starknet',
-      path: '/sdk/starknet/',
+      path: '/sdk/starknet',
     },
   ],
 }

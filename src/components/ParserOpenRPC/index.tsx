@@ -170,7 +170,7 @@ export default function ParserOpenRPC({
 
   if (currentMethodData === null) return null
 
-  const isMetamaskNetwork = network === NETWORK_NAMES.metamask
+ // const isMetamaskNetwork = network === NETWORK_NAMES.metamask
 
   useEffect(() => {
     const example = currentMethodData?.examples?.[0]
@@ -212,7 +212,7 @@ export default function ParserOpenRPC({
 
     setParamsData(Object.values(data))
   }
-
+/*
   const handleMetaMaskRequest = async () => {
     if (!metaMaskProvider) return
     setIsLoading(true)
@@ -232,7 +232,7 @@ export default function ParserOpenRPC({
       setIsLoading(false)
     }
   }
-
+*/
   const INIT_URL =
     currentMethodData.servers !== null ? currentMethodData.servers : `${LINEA_REQUEST_URL}/v3/`
 
@@ -270,11 +270,11 @@ export default function ParserOpenRPC({
   }
 
   const onSubmitRequestHandle = async () => {
-    if (isMetamaskNetwork) {
-      await handleMetaMaskRequest()
-    } else {
-      await handleServiceRequest()
-    }
+    //if (isMetamaskNetwork) {
+    //  await handleMetaMaskRequest()
+    //} else {
+    await handleServiceRequest()
+    //}
   }
 
   const closeComplexTypeView = () => {
@@ -359,8 +359,7 @@ export default function ParserOpenRPC({
         </div>
         <div className={global.colRight}>
           <div className={global.stickyCol}>
-            {!isMetamaskNetwork && <ProjectsBox />}
-            {isMetamaskNetwork && !metaMaskAccount && <AuthBox theme={colorMode} />}
+            {<ProjectsBox />}
             <RequestBox
               colorMode={colorMode}
               isMetamaskInstalled={!!metaMaskAccount}
@@ -370,7 +369,6 @@ export default function ParserOpenRPC({
               response={reqResult}
               openModal={openModal}
               submitRequest={onSubmitRequestHandle}
-              isMetamaskNetwork={isMetamaskNetwork}
               defExampleResponse={defExampleResponse}
               resetResponseHandle={resetResponseHandle}
               requestURL={INIT_URL}

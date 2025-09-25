@@ -34,7 +34,7 @@ account names in place of addresses).
 
 <p align="center">
 
-![eth_signTypedData_v4](../../assets/signTypedData.png)
+![eth_signTypedData_v4](../../_assets/signTypedData.png)
 
 </p>
 
@@ -190,7 +190,7 @@ It's often used for signature challenges that are authenticated on a web server,
 
 <p align="center">
 
-![Personal sign](../../assets/personal_sign.png)
+![Personal sign](../../_assets/personal_sign.png)
 
 </p>
 
