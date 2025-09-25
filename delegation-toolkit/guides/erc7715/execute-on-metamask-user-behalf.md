@@ -9,17 +9,17 @@ import TabItem from "@theme/TabItem";
 
 # Perform executions on a MetaMask user's behalf
 
-ERC-7715 permissions let you request fine grained permissions from a MetaMask user to execute transactions on their 
-behalf. For example, a user can grant your dApp permission to spend 10 USDC per day to buy ETH over the course 
-of a month. Once the permission is granted, your dApp can use the allocated 10 USDC each day to 
-purchase ETH directly from the MetaMask user’s account.
+The Delegation Toolkit supports [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715), which lets you request fine-grained permissions from a MetaMask user to execute transactions on their 
+behalf. For example, a user can grant your dapp permission to spend 10 USDC per day to buy ETH over the course 
+of a month. Once the permission is granted, your dapp can use the allocated 10 USDC each day to 
+purchase ETH directly from the MetaMask user's account.
 
-In this guide, you'll request ERC-20 periodic transfer permission from MetaMask user to transfer 1 USDC every day on their behalf.
+In this guide, you'll request an ERC-20 periodic transfer permission from a MetaMask user to transfer 1 USDC every day on their behalf.
 
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Install MetaMask Flask 12.14.2 or later](/snaps/get-started/install-flask).
+- [Install MetaMask Flask 12.14.2 or later.](/snaps/get-started/install-flask)
 
 ### 1. Set up a Wallet Client
 
@@ -134,21 +134,21 @@ const grantedPermissions = await walletClient.grantPermissions([{
 }]);
 ```
 
-### 5. Set up Viem Clients
+### 5. Set up a Viem client
 
 Set up a Viem client depending on your session account type.
 
-For smart account, set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) 
+For a smart account, set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) 
 using Viem's `createBundlerClient` function. This lets you use the bundler service 
 to estimate gas for user operations and submit transactions to the network.
 
-For EOA, set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) 
+For an EOA, set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) 
 using Viem's `createWalletClient` function. This lets you send transactions directly to the network.
 
 The toolkit provides public actions for both of the clients which can be used to redeem ERC-7715 permissions, and execute transactions on a user's behalf. 
 
 <Tabs>
-<TabItem value="Smart Account">
+<TabItem value="Smart account">
 
 ```typescript
 import { createBundlerClient } from "viem/account-abstraction";
@@ -188,7 +188,7 @@ The session account can now [redeem the delegation](../experimental/erc-7710-red
 To redeem the permissions, use the appropriate client action based on your session account type:
 
 <Tabs>
-<TabItem value="Smart Account">
+<TabItem value="Smart account">
 
 ```typescript
 import { calldata } from "./config.ts";
