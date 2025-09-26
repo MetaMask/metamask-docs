@@ -7,8 +7,9 @@ import TabItem from "@theme/TabItem";
 
 # Multichain API
 
-:::tip Experimental
-The Multichain API is an experimental feature.
+:::tip Notes
+- The Multichain API is an experimental feature.
+- MetaMask implements an older version of the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) Multichain API specification.
 :::
 
 Dapps can call Multichain API [methods](#methods) to create and manage
