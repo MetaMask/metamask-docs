@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Perform executions on a MetaMask user's behalf
 
-The Delegation Toolkit supports [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715), which lets you request fine-grained permissions from a MetaMask user to execute transactions on their 
+[ERC-7715 permissions](../../concepts/erc7715.md) are fine-grained permissions that your dapp can request from a MetaMask user to execute transactions on their 
 behalf. For example, a user can grant your dapp permission to spend 10 USDC per day to buy ETH over the course 
 of a month. Once the permission is granted, your dapp can use the allocated 10 USDC each day to 
 purchase ETH directly from the MetaMask user's account.
@@ -41,7 +41,7 @@ const walletClient = createWalletClient({
 ### 2. Set up a Public Client
 
 Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. 
-This client will help you query the account state and interact with blockchain network.
+This client will help you query the account state and interact with the blockchain network.
 
 ```typescript
 import { createPublicClient, http } from "viem";
@@ -60,7 +60,7 @@ to request ERC-7715 permissions. This account is responsible for executing trans
 on behalf of the user. 
 
 <Tabs>
-<TabItem value="Smart Account">
+<TabItem value="Smart account">
 
 ```typescript
 import { privateKeyToAccount } from "viem/accounts";
@@ -183,7 +183,7 @@ const sessionAccountWalletClient = createWalletClient({
 
 ### 6. Redeem ERC-7715 permissions
 
-The session account can now [redeem the delegation](../experimental/erc-7710-redeem-delegations.md). The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
+The session account can now redeem the delegation. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 
 To redeem the permissions, use the appropriate client action based on your session account type:
 

@@ -43,6 +43,7 @@ const sidebar = {
             'concepts/delegation/caveat-enforcers',
           ],
         },
+        'concepts/erc7715',
       ],
     },
     {
