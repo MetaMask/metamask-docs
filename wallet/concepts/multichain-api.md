@@ -28,7 +28,7 @@ Key benefits include:
 
 ## Technical overview
 
-The Multichain API follows the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md)
+The Multichain API follows the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md)
 standard for dapps to interface with multichain wallets.
 See [MIP-5](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-5.md) and
 [MIP-6](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-6.md) for

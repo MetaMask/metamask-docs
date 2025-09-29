@@ -9,11 +9,11 @@ import TabItem from "@theme/TabItem";
 
 :::tip Notes
 - The Multichain API is an experimental feature.
-- MetaMask implements an older version of the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) Multichain API specification.
+- MetaMask implements an older version of the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md) Multichain API specification.
 :::
 
 Dapps can call Multichain API [methods](#methods) to create and manage
-[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) multichain connections with MetaMask.
+[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md) multichain connections with MetaMask.
 The API also provides [events](#events) that wallets can send to dapps to notify them of onchain or connection changes.
 
 :::note See also
@@ -27,7 +27,7 @@ The API also provides [events](#events) that wallets can send to dapps to notify
 
 Creates a multichain connection with a wallet, authorizing that wallet with the specified set of scopes
 and properties.
-This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
+This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md).
 
 #### Parameters
 
