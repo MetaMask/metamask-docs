@@ -47,7 +47,7 @@ extensionPort.onMessage.addListener((msg) => {
 ### 2. Manage multichain connections
 
 To interact with multiple networks simultaneously, you'll create and manage
-[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) multichain connections
+[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md) multichain connections
 with MetaMask.
 
 #### 2.1. Check existing connections
