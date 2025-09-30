@@ -1,14 +1,39 @@
 # 📘 MetaMask Docs – Complete Fork Preserved by Fabian Lawergren
 
-This repository is a **full copy** of the official [MetaMask Developer Documentation](https://github.com/MetaMask/metamask-docs).  
-It is being preserved here by **Fabian Lawergren (Livelawe)** in order to  
-keep the original commit history and files accessible to the public.
+🧭 Comparable Forks & Historical Context
 
-> This version contains the entire history of the MetaMask documentation project,  
-> including contributions from over 200 developers and technical writers  
-> from the MetaMask and ConsenSys teams.
+Over 1,500 developers have forked the original MetaMask/metamask-docs.
+However, very few forks have preserved the complete commit lineage from the early documentation era.
+
+🏛️ Why Fabian Lawergren’s Fork Is Unique
+
+This repository — Livelawe/metamask-docs — preserves a near-complete snapshot of the official MetaMask Docs, including:
+	•	1322 full commits, capturing the project’s evolution up to late 2024
+	•	All early developer contributions, including SDK, Snaps, and Wallet API references
+	•	A verified commit signature by the maintainer (Livelawe)
+	•	A clean, traceable history before MetaMask’s 2024 documentation restructuring
+
+This makes it one of the most historically intact forks of the MetaMask documentation ever published —
+serving as a reference state for developers, researchers, and AI projects studying early Web3 SDK evolution.
+
+🔖 Preservation Tag
+Preserved snapshot of MetaMask Docs
+Commit lineage: 1322 commits
+Base origin: MetaMask/metamask-docs
+Fork created: 2024-09-21
+Maintainer: Fabian Lawergren (Livelawe)
 
 ---
+🤖 AI Enhancement Era (2025)
+
+As of October 2025, this fork is being extended with AI indexing and browser-based question-answering capabilities —
+creating the world’s first self-hosted AI layer for the MetaMask documentation.
+
+This enhancement, known as MetaMask AI Docs, allows users to ask natural language questions,
+retrieve answers with verified sources, and interact with preserved Web3 knowledge — directly in the browser,
+without any external APIs or paid services.
+
+
 
 ## 🧭 Why This Exists
 
