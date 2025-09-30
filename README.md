@@ -1,48 +1,54 @@
-# MetaMask developer documentation
+# 📘 MetaMask Docs – Complete Fork Preserved by Fabian Lawergren
 
-This is the MetaMask developer documentation repository.
-The documentation site is hosted at [`docs.metamask.io`](https://docs.metamask.io), and it's
-built using [Docusaurus](https://docusaurus.io/), a static site generator purpose-built for
-technical documentation.
+This repository is a **full copy** of the official [MetaMask Developer Documentation](https://github.com/MetaMask/metamask-docs).  
+It is being preserved here by **Fabian Lawergren (Livelawe)** in order to  
+keep the original commit history and files accessible to the public.
 
-## Build locally
+> This version contains the entire history of the MetaMask documentation project,  
+> including contributions from over 200 developers and technical writers  
+> from the MetaMask and ConsenSys teams.
 
-Build the documentation site locally using the following steps.
+---
 
-### Prerequisites
+## 🧭 Why This Exists
 
-- [Node.js](https://nodejs.org/) version 18+
-- [Git](https://git-scm.com/)
+This fork was originally created in an attempt to understand and trace technical issues  
+related to my own digital security situation.  
+By coincidence, it turned out to include one of the most complete and intact versions  
+of the MetaMask Docs repository.
 
-### Steps
+I decided to leave it public because it may be useful for others who want  
+to explore how large-scale Web3 documentation is built and maintained.
 
-1. Clone the repository.
+---
 
-   ```bash
-   git clone https://github.com/MetaMask/metamask-docs.git
-   cd metamask-docs
-   ```
+## ⚖️ License
 
-   > **Note:** If you don't have write access to this repository, you must [fork the repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) to your personal account and clone your forked repository instead. [Add an upstream remote](https://docs.github.com/en/get-started/quickstart/fork-a-repo#configuring-git-to-sync-your-fork-with-the-upstream-repository) to be able to pull from and push to the original repository.
-   >
-   > ```bash
-   > git clone https://github.com/<YOUR-USERNAME>/metamask-docs.git
-   > cd metamask-docs
-   > git remote add upstream https://github.com/MetaMask/metamask-docs.git
-   > ```
+- **Base Project:** MetaMask Docs – MIT License (© ConsenSys)  
+- **Preserved Copy Maintained by:** Fabian Lawergren (Livelawe)  
+- **Additional Files or Notes (after 2025-10-01):**  
+  Livelawe Additions License © 2025 Fabian Lawergren
 
-2. Install dependencies.
+This repository does **not** represent official MetaMask work.  
+It simply preserves their publicly available, open-source documentation.
 
-   ```bash
-   npm install
-   ```
+---
 
-3. Start the development server.
+## 👤 Maintainer
 
-   ```bash
-   npm start
-   ```
+**Fabian Lawergren (Livelawe)**  
+🇸🇪 Sweden  
 
-   Once the server starts, you can view the documentation at `http://localhost:3000`.
+Maintainer of this preserved fork.  
+Not affiliated with MetaMask or ConsenSys.
 
-For more information on contributing to the documentation, see the [full contribution guidelines](CONTRIBUTING.md).
+---
+
+## 🔗 Original Source
+
+Official Repository: [MetaMask/metamask-docs](https://github.com/MetaMask/metamask-docs)
+
+---
+
+© 2025 **Fabian Lawergren**  
+Preserved Fork – MetaMask Developer Documentation
