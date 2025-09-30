@@ -1,12 +1,12 @@
 ---
-description: Methods reference for MetaMask SDK.
+description: Methods reference for MetaMask Wallet SDK.
 keywords: [SDK, method, methods, dapp]
 toc_max_heading_level: 2
 ---
 
 # SDK methods
 
-MetaMask SDK provides several convenience methods for connecting to and interacting with MetaMask, including the following.
+MetaMask Wallet SDK provides several convenience methods for connecting to and interacting with MetaMask, including the following.
 
 ## `connect`
 

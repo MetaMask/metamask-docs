@@ -1,5 +1,5 @@
 ---
-description: Quickstart guide for using the MetaMask SDK with a JavaScript and Wagmi dapp.
+description: Quickstart guide for using MetaMask Wallet SDK with a JavaScript and Wagmi dapp.
 toc_max_heading_level: 2
 sidebar_label: JavaScript + Wagmi (recommended)
 keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp, Wallet SDK]
@@ -7,7 +7,7 @@ keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp, Wallet SDK]
 
 # Connect to MetaMask using JavaScript + Wagmi
 
-Get started with MetaMask SDK in a JavaScript and Wagmi dapp.
+Get started with MetaMask Wallet SDK in a JavaScript and Wagmi dapp.
 You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDK](#set-up-manually) in an existing dapp.
 
 <p align="center">
@@ -24,7 +24,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up using a template
 
-1. Download the [MetaMask SDK Wagmi template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/wagmi):
+1. Download the [MetaMask Wallet SDK Wagmi template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/wagmi):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/quickstarts/wagmi metamask-wagmi
@@ -43,7 +43,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
     `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
     
     Alternatively, you can use `git clone`, which will download the entire repository.
-    To do so, clone the MetaMask SDK examples repository and navigate into the `quickstarts/wagmi` directory:
+    To do so, clone the MetaMask Wallet SDK examples repository and navigate into the `quickstarts/wagmi` directory:
 
     ```bash
     git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -69,7 +69,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ### 1. Install the SDK
 
-Install MetaMask SDK along with its peer dependencies to an existing React project:
+Install MetaMask Wallet SDK along with its peer dependencies to an existing React project:
 
 ```bash npm2yarn
 npm install @metamask/sdk wagmi viem@2.x @tanstack/react-query
@@ -89,7 +89,7 @@ import { metaMask } from "wagmi/connectors"
 ### 3. Configure your project
 
 Set up your configuration with the desired chains and connectors.
-In the following example, set the [`infuraAPIKey`](../reference/sdk-options.md#infuraapikey) option to your [Infura API key](/developer-tools/dashboard/get-started/create-api) to use for RPC requests:
+In the following example, set the [`infuraAPIKey`](../../../reference/options.md#infuraapikey) option to your [Infura API key](/developer-tools/dashboard/get-started/create-api) to use for RPC requests:
 
 ```jsx
 const config = createConfig({
@@ -179,9 +179,9 @@ const config = createConfig({
 
 After completing the basic setup, you can follow these guides to add your own functionality:
 
-- [Authenticate users](../guides/authenticate-users.md)
+- [Manage user accounts](../guides/manage-user-accounts.md)
 - [Manage networks](../guides/manage-networks.md)
-- [Handle transactions](../guides/handle-transactions.md)
+- [Send transactions](../guides/send-transactions/index.md)
 - [Interact with smart contracts](../guides/interact-with-contracts.md)
 
 ## Live example

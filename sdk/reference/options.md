@@ -1,5 +1,5 @@
 ---
-description: Configuration options reference for MetaMask SDK.
+description: Configuration options reference for MetaMask Wallet SDK.
 keywords: [SDK, configure, configuration, option, options, dapp]
 ---
 

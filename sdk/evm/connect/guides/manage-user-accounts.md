@@ -88,8 +88,8 @@ function WatchAccount() {
 ## Use Vanilla JavaScript
 
 You can implement user authentication directly in Vanilla JavaScript, using the
-[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts) RPC method
-and [`accountsChanged`](/wallet/reference/provider-api/#accountschanged) provider event.
+[`eth_requestAccounts`](../reference/json-rpc-api/index.md) RPC method
+and [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event.
 For example:
 
 ```javascript
@@ -164,7 +164,7 @@ Display connect and disconnect buttons in HTML:
 
 ### Connect and sign
 
-If you're not using Wagmi, you can access MetaMask SDK's [`connectAndSign`](../reference/sdk-methods.md#connectandsign) method,
+If you're not using Wagmi, you can access MetaMask Wallet SDK's [`connectAndSign`](../reference/methods.md#connectandsign) method,
 which requests wallet access and signs the message in a single user interaction.
 For example:
 
@@ -195,7 +195,7 @@ The following HTML displays a **Connect & Sign** button:
 ```
 
 :::tip
-This one-step flow is unique to MetaMask SDK's `connectAndSign` method.
+This one-step flow is unique to MetaMask Wallet SDK's `connectAndSign` method.
 It's not part of Wagmi or other wallet libraries.
 :::
 
@@ -244,5 +244,5 @@ The following table lists common authentication errors and their codes:
 See the following guides to add more functionality to your dapp:
 
 - [Manage networks](manage-networks.md)
-- [Handle transactions](handle-transactions.md)
+- [Send transactions](send-transactions/index.md)
 - [Interact with smart contracts](interact-with-contracts.md)

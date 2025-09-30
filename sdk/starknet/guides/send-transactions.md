@@ -5,7 +5,7 @@ description: Send Starknet transactions in MetaMask.
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Send Starknet transactions
+# Send transactions
 
 You can send Starknet transactions using the
 [`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
@@ -20,7 +20,7 @@ You can send Starknet transactions using the
 Send a transaction using the
 [`starknet.account.execute()`](https://starknetjs.com/docs/api/classes/accountinterface/#execute)
 function (with `get-starknet`) or the
-[`starknet_executeTxn`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_executetxn)
+[`starknet_executeTxn`](../reference/snap-api.md#starknet_executetxn)
 method (with `wallet_invokeSnap`):
 
 <Tabs>

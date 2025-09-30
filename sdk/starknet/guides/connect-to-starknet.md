@@ -15,14 +15,14 @@ Connect your dapp to Starknet in MetaMask by using the
 
 We recommend using the `get-starknet` library for most use cases due to its ease of configuration
 and multi-wallet support.
-See [a comparison of the connection options](index.md).
+See [a comparison of the connection options](../index.md).
 
 :::
 
 :::tip
 
 If you're new to Starknet, you can also follow the
-[Create a simple Starknet dapp tutorial](create-a-simple-starknet-dapp.md).
+[Create a simple Starknet dapp tutorial](../tutorials/create-simple-starknet-dapp.md).
 
 :::
 
@@ -208,24 +208,24 @@ When a user connects to MetaMask, `get-starknet` requests the user to connect to
 
 <div class="imgRow">
   <div class="imgCol">
-    <img src={require("../assets/starknet-wallet-modal.png").default} alt="Starknet wallet modal" width="360" class="appScreen" />
+    <img src={require("../_assets/starknet-wallet-modal.png").default} alt="Starknet wallet modal" width="360" class="appScreen" />
   </div>
   <div class="imgCol">
-    <img src={require("../assets/starknet-metamask-connection.png").default} alt="Starknet MetaMask connection request" width="360" class="appScreen" />
+    <img src={require("../_assets/starknet-metamask-connection.png").default} alt="Starknet MetaMask connection request" width="360" class="appScreen" />
   </div>
 </div>
 
 After the user connects to Starknet, the dapp displays the user's connected wallet and wallet address:
 
 <p align="center">
-  <img src={require("../assets/starknet-dapp-connected.png").default} alt="Connected Starknet dapp" width="850" class="appScreen" />
+  <img src={require("../_assets/starknet-dapp-connected.png").default} alt="Connected Starknet dapp" width="850" class="appScreen" />
 </p>
 
 :::note
 
 An account can submit transactions only after it's deployed.
 It does not deploy immediately upon creation. 
-Deployment happens during the first [transaction](send-starknet-transactions.md).
+Deployment happens during the first [transaction](send-transactions.md).
 
 :::
 
@@ -237,7 +237,7 @@ method to directly interact with the Starknet Snap.
 
 :::warning Important
 
-We recommend using [EIP-6963](../../../concepts/wallet-interoperability.md) for detecting MetaMask when using the `wallet_invokeSnap` approach.
+We recommend using [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) for detecting MetaMask when using the `wallet_invokeSnap` approach.
 This ensures you can connect to MetaMask and other installed wallets without conflict.
 
 :::
@@ -299,7 +299,7 @@ To connect to Starknet, the dapp user must add the Starknet Snap to MetaMask.
 ### 2. Call a specific Snap method
 
 Use the `callSnap` function to call a specific Snap method.
-The following example calls [`starkNet_createAccount`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_createaccount):
+The following example calls [`starkNet_createAccount`](../reference/snap-api.md#starknet_createaccount):
 
 ```javascript
 const deploy = false; // Set to true to deploy the actual account.
@@ -313,7 +313,7 @@ const accountInfo = await callSnap("starkNet_createAccount", { addressIndex, dep
 
 An account can submit transactions only after it's deployed.
 It does not deploy immediately upon creation.
-Deployment happens during the first [transaction](send-starknet-transactions.md).
+Deployment happens during the first [transaction](send-transactions.md).
 
 :::
 
@@ -464,6 +464,6 @@ See how to [troubleshoot](troubleshoot.md) connection issues when configuring yo
 
 After connecting your dapp to Starknet in MetaMask, you can follow these next steps:
 
-- [Manage Starknet accounts](manage-starknet-accounts.md).
-- [Manage Starknet networks](manage-starknet-networks.md).
-- Explore the [Starknet Snap API reference](../../../reference/non-evm-apis/starknet-snap-api.md).
+- [Manage users' Starknet accounts](manage-user-accounts.md).
+- [Manage Starknet networks](manage-networks.md).
+- Explore the [Starknet Snap API reference](../reference/snap-api.md).

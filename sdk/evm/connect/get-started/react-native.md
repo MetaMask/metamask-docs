@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Connect to MetaMask using React Native
 
-Get started with MetaMask SDK in your React Native or Expo dapp.
+Get started with MetaMask Wallet SDK in your React Native or Expo dapp.
 
 ## Steps
 

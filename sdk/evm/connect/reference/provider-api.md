@@ -4,16 +4,16 @@ description: See the MetaMask Ethereum provider API reference.
 
 # Ethereum provider API
 
-This page is a reference for the Ethereum provider API of MetaMask's [Wallet API](../concepts/wallet-api.md).
+This page is a reference for the Ethereum provider API of MetaMask's Wallet API.
 MetaMask injects the provider API into websites visited by its users using the `window.ethereum` provider object.
 You can use the provider [properties](#properties), [methods](#methods), and [events](#events) in your dapp.
 
 :::info Note
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
 alternative wallet detection mechanism to the `window.ethereum` injected provider.
-This alternative mechanism enables dapps to support [wallet interoperability](../concepts/wallet-interoperability.md)
+This alternative mechanism enables dapps to support wallet interoperability
 by discovering multiple injected wallet providers in a user's browser.
-We recommend [using this mechanism to connect to MetaMask](../how-to/connect-extension.md).
+We recommend [using this mechanism to connect to MetaMask](../guides/connect-extension.md).
 
 You can access the provider API using the selected EIP-6963 provider object.
 Throughout this documentation, we refer to the selected provider using `provider`.
@@ -45,7 +45,7 @@ If the provider isn't connected, the page must be reloaded to re-establish the c
 See the [`connect`](#connect) and [`disconnect`](#disconnect) events for more information.
 
 :::note
-This method is unrelated to [accessing a user's accounts](../how-to/access-accounts.md).
+This method is unrelated to [managing user accounts](../guides/manage-user-accounts.md).
 In the provider interface, "connected" and "disconnected" refer to whether the provider can make RPC
 requests to the current chain.
 :::
@@ -66,7 +66,7 @@ provider.isConnected() // Or window.ethereum.isConnected() if you don't support 
 
 ### `request()`
 
-This method is used to submit [JSON-RPC API requests](/wallet/reference/json-rpc-methods) to Ethereum using MetaMask.
+This method is used to submit [JSON-RPC API requests](json-rpc-api/index.md) to Ethereum using MetaMask.
 
 #### Parameters
 
@@ -84,7 +84,7 @@ If the request fails, the promise rejects with an [error](#errors).
 #### Example
 
 The following is an example of using `request()` to call
-[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction):
+[`eth_sendTransaction`](json-rpc-api/index.md):
 
 ```javascript
 provider // Or window.ethereum if you don't support EIP-6963.
@@ -166,7 +166,7 @@ provider // Or window.ethereum if you don't support EIP-6963.
 ```
 
 The provider emits this event when the return value of the
-[`eth_accounts`](/wallet/reference/json-rpc-methods/eth_accounts) RPC
+[`eth_accounts`](json-rpc-api/index.md) RPC
 method changes.
 `eth_accounts` returns either an empty array, or an array that contains the addresses of the accounts
 the caller is permitted to access with the most recently used account first.
@@ -174,7 +174,7 @@ Callers are identified by their URL origin, which means that all sites with the 
 the same permissions.
 
 This means that the provider emits `accountsChanged` when the user's exposed account address changes.
-Listen to this event to [handle accounts](../how-to/access-accounts.md#handle-accounts).
+Listen to this event to [handle accounts](../guides/manage-user-accounts.md).
 
 ### `chainChanged`
 
@@ -184,7 +184,7 @@ provider // Or window.ethereum if you don't support EIP-6963.
 ```
 
 The provider emits this event when the currently connected chain changes.
-Listen to this event to [detect a user's network](../how-to/manage-networks/detect-network.md).
+Listen to this event to [detect a user's network](../guides/manage-networks.md).
 
 ### `connect`
 
@@ -234,7 +234,7 @@ The `type` property identifies the kind of message.
 
 RPC subscription updates are a common use case for this event.
 For example, if you create a subscription using
-[`eth_subscribe`](/wallet/reference/json-rpc-methods/eth_subscribe), each
+[`eth_subscribe`](json-rpc-api/index.md), each
 subscription update is emitted as a `message` event with a `type` of `eth_subscription`.
 
 ### Remove event listeners

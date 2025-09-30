@@ -5,7 +5,7 @@ description: Sign Starknet transactions in MetaMask.
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Sign Starknet transactions
+# Sign data
 
 You can sign Starknet transactions using the
 [`get-starknet`](https://github.com/starknet-io/get-starknet) library or the

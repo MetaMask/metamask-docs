@@ -11,7 +11,7 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'reference/sdk-options',
+        'reference/options',
       ],
     },
   ],
@@ -43,7 +43,7 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'multichain/connect/reference/multichain-api',
+        'multichain/connect/reference/api',
       ],
     },
   ],
@@ -55,9 +55,9 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'evm/connect/get-started/javascript-wagmi',
+        'evm/connect/get-started/wagmi',
         'evm/connect/get-started/javascript',
-        'evm/connect/get-started/javascript-rainbowkit',
+        'evm/connect/get-started/rainbowkit',
         'evm/connect/get-started/react-native',
       ],
     },
@@ -76,7 +76,7 @@ const sdkSidebar = {
           collapsed: true,
           link: { type: "doc", id: "evm/connect/guides/send-transactions/index" },
           items: [
-            'evm/connect/guides/send-transactions/send-batch-transactions',
+            'evm/connect/guides/send-transactions/batch-transactions',
           ],
         },
         {
@@ -93,6 +93,7 @@ const sdkSidebar = {
         'evm/connect/guides/interact-with-contracts',
         'evm/connect/guides/use-deeplinks',
         'evm/connect/guides/display-tokens',
+        'evm/connect/guides/connect-extension',
         {
           type: 'category',
           label: 'Best practices',
@@ -140,14 +141,14 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'evm/connect/reference/sdk-methods',
+        'evm/connect/reference/methods',
         'evm/connect/reference/provider-api',
         {
           type: "category",
           label: "JSON-RPC API",
           collapsible: true,
           collapsed: true,
-          link: { type: "doc",  id: "evm/connect/reference/json-rpc-methods/index" },
+          link: { type: "doc",  id: "evm/connect/reference/json-rpc-api/index" },
           items: [],
         },
       ],
@@ -165,10 +166,10 @@ const sdkSidebar = {
       collapsed: false,
       items: [
         'starknet/guides/connect-to-starknet',
-        'starknet/guides/manage-starknet-accounts',
-        'starknet/guides/manage-starknet-networks',
-        'starknet/guides/send-starknet-transactions',
-        'starknet/guides/sign-starknet-data',
+        'starknet/guides/manage-user-accounts',
+        'starknet/guides/manage-networks',
+        'starknet/guides/send-transactions',
+        'starknet/guides/sign-data',
         'starknet/guides/troubleshoot',
       ],
     },
@@ -187,7 +188,7 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'starknet/tutorials/create-a-simple-starknet-dapp',
+        'starknet/tutorials/create-simple-starknet-dapp',
       ],
     },
     {
@@ -196,7 +197,7 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'starknet/reference/starknet-snap-api',
+        'starknet/reference/snap-api',
       ],
     },
   ],

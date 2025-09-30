@@ -95,8 +95,8 @@ function NetworkWatcher() {
 You can implement network management directly in Vanilla JavaScript.
 
 The following example detects the current network using the
-[`eth_chainId`](/wallet/reference/json-rpc-methods/eth_chainid) RPC method and
-[`chainChanged`](/wallet/reference/provider-api/#chainchanged) provider event:
+[`eth_chainId`](../reference/json-rpc-api/index.md) RPC method and
+[`chainChanged`](../reference/provider-api.md#chainchanged) provider event:
 
 ```javascript
 // Get current chain ID
@@ -121,8 +121,8 @@ ethereum.on("chainChanged", (chainId) => {
 ```
 
 The following example switches networks using the
-[`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchethereumchain)
-and [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain)
+[`wallet_switchEthereumChain`](../reference/json-rpc-api/index.md)
+and [`wallet_addEthereumChain`](../reference/json-rpc-api/index.md)
 RPC methods:
 
 ```javascript
@@ -211,7 +211,7 @@ The following table lists common network management errors and their codes:
 
 | Error code | Description | Solution |
 |------------|-------------|----------|
-| `4902`   | Network not added       | Use [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain) to add the network first. |
+| `4902`   | Network not added       | Use [`wallet_addEthereumChain`](../reference/json-rpc-api/index.md) to add the network first. |
 | `4001`   | User rejected request   | Show a message asking the user to approve the network switch. |
 | `-32002` | Request already pending | Disable the switch network button while the request is pending. |
 
@@ -219,6 +219,6 @@ The following table lists common network management errors and their codes:
 
 See the following guides to add more functionality to your dapp:
 
-- [Authenticate users](authenticate-users.md)
-- [Handle transactions](handle-transactions.md)
+- [Manage user accounts](manage-user-accounts.md)
+- [Send transactions](send-transactions/index.md)
 - [Interact with smart contracts](interact-with-contracts.md)

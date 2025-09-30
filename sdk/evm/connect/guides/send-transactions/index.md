@@ -112,9 +112,9 @@ The following are examples of sending a [basic transaction](#basic-transaction-1
 
 ### Basic transaction
 
-The basic transaction uses the [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts),
-[`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction), and
-[`eth_getTransactionReceipt`](/wallet/reference/json-rpc-methods/eth_gettransactionreceipt)
+The basic transaction uses the [`eth_requestAccounts`](../../reference/json-rpc-api/index.md),
+[`eth_sendTransaction`](../../reference/json-rpc-api/index.md), and
+[`eth_getTransactionReceipt`](../../reference/json-rpc-api/index.md)
 RPC methods.
 
 ```javascript
@@ -215,7 +215,7 @@ async function handleSend() {
 
 ### Advanced transaction with gas estimation
 
-To add gas estimation, use the [`eth_estimateGas`](/wallet/reference/json-rpc-methods/eth_estimategas)
+To add gas estimation, use the [`eth_estimateGas`](../../reference/json-rpc-api/index.md)
 RPC method.
 
 ```javascript
@@ -270,6 +270,6 @@ Follow these best practices when handling transactions.
 
 See the following guides to add more functionality to your dapp:
 
-- [Authenticate users](authenticate-users.md)
-- [Manage networks](manage-networks.md)
-- [Interact with smart contracts](interact-with-contracts.md)
+- [Manage user accounts](../manage-user-accounts.md)
+- [Manage networks](../manage-networks.md)
+- [Interact with smart contracts](../interact-with-contracts.md)

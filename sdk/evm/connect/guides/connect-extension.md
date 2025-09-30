@@ -1,5 +1,6 @@
 ---
 description: Connect to the MetaMask extension using the Wallet API and EIP-6963.
+sidebar_label: Connect to the extension
 toc_max_heading_level: 4
 keywords: [extension, API]
 ---
@@ -8,13 +9,13 @@ keywords: [extension, API]
 
 :::tip Building a cross-platform or mobile dapp?
 For cross-platform development, mobile integration, or advanced features like QR codes and 
-deeplinking, connect to MetaMask using [**MetaMask SDK**](/sdk) instead.
+deeplinking, connect to MetaMask using [**MetaMask Wallet SDK**](../get-started/wagmi.md) instead.
 :::
 
 You can connect your dapp to users' MetaMask wallets by detecting MetaMask in their browsers and
 connecting to their accounts.
 This page provides instructions for connecting to MetaMask using the wallet detection mechanism
-introduced by [EIP-6963](../concepts/wallet-interoperability.md).
+introduced by [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963).
 This approach allows you to detect multiple installed wallets and connect to them without conflicts.
 
 You can connect to the MetaMask browser extension [using third-party libraries](#connect-to-metamask-using-third-party-libraries)
@@ -22,7 +23,7 @@ or [directly using Vite](#connect-to-metamask-directly-using-vite).
 
 :::note
 Using the Wallet API enables your dapp to work both with the MetaMask extension and in the in-app browser of the MetaMask mobile app.
-However, we recommend using the [SDK](/sdk) for a more consistent mobile connection.
+However, we recommend using the SDK for a more consistent mobile connection.
 :::
 
 ## Connect to MetaMask using third-party libraries
@@ -57,8 +58,7 @@ npm create vite@latest vanilla-ts-6963 -- --template vanilla-ts
 
 #### 2. Set up the project
 
-In your Vite project, update `src/vite-env.d.ts` with the
-[EIP-6963 interfaces](../concepts/wallet-interoperability.md#eip-6963-interfaces):
+In your Vite project, update `src/vite-env.d.ts` with the EIP-6963 interfaces:
 
 ```typescript title="vite-env.d.ts"
 /// <reference types="vite/client" />
@@ -179,7 +179,7 @@ export function listProviders(element: HTMLDivElement) {
 ```
 
 The `connectWithProvider` function connects the user to the selected provider using
-[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts).
+[`eth_requestAccounts`](../reference/json-rpc-api/index.md).
 The `wallet` object is passed as an argument to the function, indicating the argument type.
 
 The `listProviders` function uses a simplified approach.
@@ -214,8 +214,7 @@ npm create vite@latest react-ts-6963 -- --template react-ts
 
 #### 2. Set up the project
 
-In your Vite project, update `src/vite-env.d.ts` with the
-[EIP-6963 interfaces](../concepts/wallet-interoperability.md#eip-6963-interfaces):
+In your Vite project, update `src/vite-env.d.ts` with the EIP-6963 interfaces:
 
 ```typescript title="vite-env.d.ts"
 /// <reference types="vite/client" />
@@ -355,7 +354,7 @@ In this code:
 
 The `handleConnect` function takes a `providerWithInfo`, which is an `EIP6963ProviderDetail` object.
 That object is used to request the user's accounts from the provider using
-[`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts).
+[`eth_requestAccounts`](../reference/json-rpc-api/index.md).
 
 If the request succeeds, the `selectedWallet` and `userAccount` local state variables are set.
 
@@ -442,12 +441,3 @@ This example only uses the `formatAddress` function, but the others might be use
 
 See the [React TypeScript example](https://github.com/MetaMask/vite-react-ts-eip-6963) for more information.
 You can clone the repository and run the example locally using `npm i && npm run dev`.
-
-### Next steps
-
-After connecting to MetaMask directly, you can:
-
-- [Detect, add, and switch networks](manage-networks/detect-network.md).
-- [Send transactions](send-transactions/index.md).
-- [Sign data](sign-data/index.md).
-- [Display tokens, contract methods, and icons in MetaMask](display/tokens.md).

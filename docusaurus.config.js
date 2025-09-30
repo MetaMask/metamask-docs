@@ -417,20 +417,16 @@ const config = {
             title: 'Documentation',
             items: [
               {
-                label: 'SDK',
+                label: 'MetaMask Wallet SDK',
                 to: '/sdk',
-              },
-              {
-                label: 'Wallet API',
-                to: '/wallet',
-              },
-              {
-                label: 'Delegation Toolkit',
-                to: '/delegation-toolkit',
               },
               {
                 label: 'Embedded Wallets',
                 to: '/embedded-wallets',
+              },
+              {
+                label: 'Delegation Toolkit',
+                to: '/delegation-toolkit',
               },
               {
                 label: 'Snaps',
@@ -458,7 +454,7 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-extension/',
               },
               {
-                label: 'MetaMask SDK GitHub',
+                label: 'MetaMask Wallet SDK GitHub',
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {

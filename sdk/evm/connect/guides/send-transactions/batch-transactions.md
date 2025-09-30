@@ -7,9 +7,9 @@ description: Send atomic batch transactions using `wallet_sendCalls`.
 You can send and manage batch transactions in MetaMask, using the methods specified by
 [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792):
 
-- [`wallet_getCapabilities`](/wallet/reference/json-rpc-methods/wallet_getcapabilities) - Query whether support for atomic batch transactions is available.
-- [`wallet_sendCalls`](/wallet/reference/json-rpc-methods/wallet_sendcalls) - Submit multiple transactions to be processed atomically by MetaMask.
-- [`wallet_getCallsStatus`](/wallet/reference/json-rpc-methods/wallet_getcallsstatus) - Track the status of your transaction batch.
+- [`wallet_getCapabilities`](../../reference/json-rpc-api/index.md) - Query whether support for atomic batch transactions is available.
+- [`wallet_sendCalls`](../../reference/json-rpc-api/index.md) - Submit multiple transactions to be processed atomically by MetaMask.
+- [`wallet_getCallsStatus`](../../reference/json-rpc-api/index.md) - Track the status of your transaction batch.
 
 ## About atomic batch transactions
 
@@ -45,7 +45,7 @@ You can send batch transactions using the following third-party libraries that s
 
 ### 1. Query whether atomic batch is supported
 
-Use [`wallet_getCapabilities`](/wallet/reference/json-rpc-methods/wallet_getcapabilities) to query 
+Use [`wallet_getCapabilities`](../../reference/json-rpc-api/index.md) to query 
 whether MetaMask supports atomic batch transactions for a specific address and specific chain IDs.
 For example:
 
@@ -109,14 +109,14 @@ MetaMask will support this feature on more networks as they adopt EIP-7702.
 :::note Atomic batch unsupported
 - If the user has already upgraded their account to a third-party smart contract account, MetaMask does not currently support atomic batch transactions for that account.
 - If atomic batch is not supported, fall back to [`eth_sendTransaction`](index.md) instead of 
-  [`wallet_sendCalls`](/wallet/reference/json-rpc-methods/wallet_sendcalls),
-  and [`eth_getTransactionReceipt`](/wallet/reference/json-rpc-methods/eth_gettransactionreceipt)
-  instead of [`wallet_getCallsStatus`](/wallet/reference/json-rpc-methods/wallet_getcallsstatus).
+  [`wallet_sendCalls`](../../reference/json-rpc-api/index.md),
+  and [`eth_getTransactionReceipt`](../../reference/json-rpc-api/index.md)
+  instead of [`wallet_getCallsStatus`](../../reference/json-rpc-api/index.md).
 :::
 
 ### 2. Submit a batch of transactions
 
-Use [`wallet_sendCalls`](/wallet/reference/json-rpc-methods/wallet_sendcalls) to submit a batch of transactions.
+Use [`wallet_sendCalls`](../../reference/json-rpc-api/index.md) to submit a batch of transactions.
 For example:
 
 ```js title="index.js"
@@ -161,7 +161,7 @@ For example:
 
 ### 3. Track the status of the batch of transactions
 
-Use [`wallet_getCallsStatus`](/wallet/reference/json-rpc-methods/wallet_getcallsstatus) to track 
+Use [`wallet_getCallsStatus`](../../reference/json-rpc-api/index.md) to track 
 the status of the submitted batch of transactions, using the batch ID returned by `wallet_sendCalls`.
 For example:
 

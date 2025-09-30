@@ -5,7 +5,7 @@ description: Manage Starknet networks in MetaMask.
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Manage Starknet networks
+# Manage networks
 
 You can detect a user's Starknet network and prompt them to switch Starknet networks in MetaMask,
 using the
@@ -82,7 +82,7 @@ Detect the Starknet network a user is currently connected to using the following
 
 Starknet currently supports two public networks, Mainnet and Sepolia testnet.
 Prompt users to switch between networks by setting the
-[chain ID](../../../reference/non-evm-apis/starknet-snap-api.md#supported-networks) of the target network:
+[chain ID](../reference/snap-api.md#supported-networks) of the target network:
 
 <Tabs>
   <TabItem value="get-starknet" default>

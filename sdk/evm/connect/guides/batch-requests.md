@@ -1,11 +1,11 @@
 ---
-description: Batch multiple JSON-RPC requests using MetaMask SDK or Wagmi.
+description: Batch multiple JSON-RPC requests using MetaMask Wallet SDK or Wagmi.
 keywords: [SDK, Wagmi, batch, JSON-RPC, RPC, requests, methods, dapp]
 ---
 
 # Batch requests
 
-MetaMask SDK provides mechanisms to send multiple JSON-RPC requests in a single call.
+MetaMask Wallet SDK provides mechanisms to send multiple JSON-RPC requests in a single call.
 However, "batching" can be used in a few different contexts:
 
 - [**Wagmi batching for contract reads**](#use-wagmi-usereadcontracts) - Wagmi does not support MetaMask's generic batching mechanism.
@@ -14,11 +14,11 @@ However, "batching" can be used in a few different contexts:
    `useReadContracts` does not support batching JSON-RPC methods.
 
 - [**Vanilla JavaScript batching with `metamask_batch`**](#use-vanilla-javascript-metamask_batch) -
-   This approach uses MetaMask SDK's `metamask_batch` method to group any JSON-RPC requests together, whether they are contract calls or other JSON-RPC methods (for example, signing messages or sending transactions).
+   This approach uses MetaMask Wallet SDK's `metamask_batch` method to group any JSON-RPC requests together, whether they are contract calls or other JSON-RPC methods (for example, signing messages or sending transactions).
    Despite being batched into one HTTP request, each call still requires individual user approval, and if any request is rejected, the entire batch fails.
 
 :::info
-"Batching" can also refer to [sending atomic batch transactions](/wallet/how-to/send-transactions/send-batch-transactions) in MetaMask.
+"Batching" can also refer to [sending atomic batch transactions](send-transactions/batch-transactions.md) in MetaMask.
 Use the methods introduced by EIP-5792 to send atomic batches.
 :::
 
@@ -94,7 +94,7 @@ We recommend using services like [MetaMask Developer](https://developer.metamask
 
 ## Use Vanilla JavaScript (`metamask_batch`)
 
-If you're not using Wagmi, you can directly use MetaMask SDK's `metamask_batch` method to group multiple JSON-RPC requests into a single HTTP call.
+If you're not using Wagmi, you can directly use MetaMask Wallet SDK's `metamask_batch` method to group multiple JSON-RPC requests into a single HTTP call.
 
 Use cases include:
 

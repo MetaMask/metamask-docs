@@ -257,7 +257,7 @@ yarn start
 You are directed to the default dapp display. 
 
 <p align="center">
-  <img src={require("../assets/starknet-tutorial-start-dapp.png").default} alt="Starknet dapp start" width="750" class="appScreen" />
+  <img src={require("../_assets/starknet-tutorial-start-dapp.png").default} alt="Starknet dapp start" width="750" class="appScreen" />
 </p>
 
 When you select **Connect**, `get-starknet` displays a modal that detects MetaMask and allows you to
@@ -265,13 +265,13 @@ choose which Starknet wallet to connect to.
 Follow the on-screen prompts to connect your MetaMask wallet to Starknet.
 
 <p align="center">
-  <img src={require("../assets/starknet-tutorial-modal.png").default} alt="Starknet dapp select wallet" width="750" class="appScreen" />
+  <img src={require("../_assets/starknet-tutorial-modal.png").default} alt="Starknet dapp select wallet" width="750" class="appScreen" />
 </p>
 
 After you accept the terms in the prompts, your wallet is connected and its information is displayed.
 
 <p align="center">
-  <img src={require("../assets/starknet-tutorial-connected.png").default} alt="Starknet dapp connected" width="750" class="appScreen" />
+  <img src={require("../_assets/starknet-tutorial-connected.png").default} alt="Starknet dapp connected" width="750" class="appScreen" />
 </p>
 
 ## 4. Display the balance of and transfer an ERC-20 token
@@ -284,7 +284,7 @@ token, such as STRK, and perform a transfer using the `AccountInterface` instanc
 Use the [Starknet Snap companion dapp](https://snaps.consensys.io/starknet) to generate a Starknet address and switch to the
 Starknet Sepolia testnet.
 
-Obtain testnet ETH (for gas) and at least 1 STRK token from the [Starknet faucet]( https://starknet-faucet.vercel.app/).
+Obtain testnet ETH (for gas) and at least 1 STRK token from the [Starknet faucet](https://starknet-faucet.vercel.app/).
 
 ### 4.2. Configure the TypeScript compiler 
 
@@ -1613,7 +1613,7 @@ yarn start
 After connecting to MetaMask, the dapp should display your STRK token balance:
 
 <p align="center">
-  <img src={require("../assets/starknet-tutorial-transfer-token.png").default} alt="Starknet transfer token" width="750" class="appScreen" />
+  <img src={require("../_assets/starknet-tutorial-transfer-token.png").default} alt="Starknet transfer token" width="750" class="appScreen" />
 </p>
 
 You can select **Transfer 1 STRK** to make a transfer to the recipient address specified in [Step 4.5](#45-transfer-tokens).
@@ -1624,6 +1624,6 @@ You've set up a simple React dapp that connects to MetaMask, displays an ERC-20 
 
 You can follow these next steps:
 
-- [Manage Starknet accounts](manage-starknet-accounts.md).
-- [Manage Starknet networks](manage-starknet-networks.md).
-- Explore the [Starknet Snap API reference](../../../reference/non-evm-apis/starknet-snap-api.md).
+- [Manage users' Starknet accounts](../guides/manage-user-accounts.md).
+- [Manage Starknet networks](../guides/manage-networks.md).
+- Explore the [Starknet Snap API reference](../reference/snap-api.md).

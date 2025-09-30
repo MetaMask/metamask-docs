@@ -7,7 +7,7 @@ import TabItem from "@theme/TabItem";
 
 # Starknet Snap API
 
-When connected to the [Starknet Snap](../../how-to/use-non-evm-networks/starknet/index.md), dapps
+When connected to the Starknet Snap, dapps
 can use the Starknet Snap API to interact with users' Starknet accounts (for example, to send transactions).
 
 The examples on this page use the
@@ -16,7 +16,8 @@ which supports all Starknet Snap API methods.
 
 :::note
 
-We recommend using [EIP-6963](../../concepts/wallet-interoperability.md#eip-6963-interfaces) for detecting the MetaMask wallet when using the `wallet_invokeSnap` approach. This ensures better interoperability and improved wallet integration.
+We recommend using [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) for detecting the MetaMask wallet when using the `wallet_invokeSnap` approach. This ensures better interoperability and improved wallet integration.
+
 :::
 
 :::note

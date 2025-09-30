@@ -1,13 +1,13 @@
 ---
-description: Manage Starknet accounts in MetaMask.
+description: Manage users' Starknet accounts in MetaMask.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Manage Starknet accounts
+# Manage user accounts
 
-You can manage Starknet accounts in MetaMask using the
+You can manage users' Starknet accounts in MetaMask using the
 [`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
 [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method.
 

@@ -90,16 +90,8 @@ Follow these steps to connect MetaMask to Hardhat Network.
 ## Reset your local nonce calculation
 
 If you restart your development network, you can accidentally confuse MetaMask
-because it calculates the next [nonce](./send-transactions/index.md#nonce) based on both the
+because it calculates the next nonce based on both the
 network state _and_ the known sent transactions.
 
 To clear MetaMask's transaction queue and reset its nonce calculation, go to **Settings > Advanced**
 and select **Reset account**.
-
-## Next steps
-
-Once you have your development environment set up and development network running, you can
-[connect your dapp to MetaMask](/sdk) by setting up MetaMask SDK.
-
-For an end-to-end example, you can also follow the
-[Create a simple React dapp](../tutorials/react-dapp-local-state.md) tutorial.

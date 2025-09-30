@@ -1,6 +1,6 @@
 ---
 sidebar_label: Introduction
-description: Introduction page for MetaMask SDK documentation.
+description: Introduction page for MetaMask Wallet SDK documentation.
 keywords: [connect, sdk, integrate, dapp]
 ---
 
