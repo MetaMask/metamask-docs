@@ -57,6 +57,7 @@ const sdkSidebar = {
       items: [
         'evm/connect/get-started/javascript-wagmi',
         'evm/connect/get-started/javascript',
+        'evm/connect/get-started/javascript-rainbowkit',
         'evm/connect/get-started/react-native',
       ],
     },
