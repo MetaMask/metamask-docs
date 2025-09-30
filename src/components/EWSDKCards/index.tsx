@@ -50,8 +50,8 @@ export const pnpweb = (
             <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=REACT&stepIndex=0`}>
               Quick Start{chevron}
             </a>
-            <a href={`embedded-wallets/sdk/react`}>SDK Reference{chevron}</a>
-            <a href={`embedded-wallets/sdk/react/examples`}>Examples{chevron}</a>
+            <a href={`/embedded-wallets/sdk/react`}>SDK Reference{chevron}</a>
+            <a href={`/embedded-wallets/sdk/react/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -78,8 +78,8 @@ export const pnpweb = (
             <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=VUE&stepIndex=0`}>
               Quick Start{chevron}
             </a>
-            <a href={`embedded-wallets/sdk/vue`}>SDK Reference{chevron}</a>
-            <a href={`embedded-wallets/sdk/vue/examples`}>Examples{chevron}</a>
+            <a href={`/embedded-wallets/sdk/vue`}>SDK Reference{chevron}</a>
+            <a href={`/embedded-wallets/sdk/vue/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -102,8 +102,8 @@ export const pnpweb = (
             <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=ANGULAR&stepIndex=0`}>
               Quick Start{chevron}
             </a>
-            <a href={`embedded-wallets/sdk/js`}>SDK Reference{chevron}</a>
-            <a href={`embedded-wallets/sdk/js/examples`}>Examples{chevron}</a>
+            <a href={`/embedded-wallets/sdk/js`}>SDK Reference{chevron}</a>
+            <a href={`/embedded-wallets/sdk/js/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -143,8 +143,8 @@ export const pnpmobile = (
             <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=ANDROID&stepIndex=0`}>
               Quick Start{chevron}
             </a>
-            <a href={`embedded-wallets/sdk/android`}>SDK Reference{chevron}</a>
-            <a href={`embedded-wallets/sdk/android/examples`}>Examples{chevron}</a>
+            <a href={`/embedded-wallets/sdk/android`}>SDK Reference{chevron}</a>
+            <a href={`/embedded-wallets/sdk/android/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -169,8 +169,8 @@ export const pnpmobile = (
             <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=IOS&stepIndex=0`}>
               Quick Start{chevron}
             </a>
-            <a href={`embedded-wallets/sdk/ios`}>SDK Reference{chevron}</a>
-            <a href={`embedded-wallets/sdk/ios/examples`}>Examples{chevron}</a>
+            <a href={`/embedded-wallets/sdk/ios`}>SDK Reference{chevron}</a>
+            <a href={`/embedded-wallets/sdk/ios/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -193,8 +193,8 @@ export const pnpmobile = (
             <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=FLUTTER&stepIndex=0`}>
               Quick Start{chevron}
             </a>
-            <a href={`embedded-wallets/sdk/flutter`}>SDK Reference{chevron}</a>
-            <a href={`embedded-wallets/sdk/flutter/examples`}>Examples{chevron}</a>
+            <a href={`/embedded-wallets/sdk/flutter`}>SDK Reference{chevron}</a>
+            <a href={`/embedded-wallets/sdk/flutter/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -217,8 +217,8 @@ export const pnpmobile = (
             <a href={`/quickstart/?product=EMBEDDED_WALLETS&framework=REACT_NATIVE&stepIndex=0`}>
               Quick Start{chevron}
             </a>
-            <a href={`embedded-wallets/sdk/react-native`}>SDK Reference{chevron}</a>
-            <a href={`embedded-wallets/sdk/react-native/examples`}>Examples{chevron}</a>
+            <a href={`/embedded-wallets/sdk/react-native`}>SDK Reference{chevron}</a>
+            <a href={`/embedded-wallets/sdk/react-native/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -261,8 +261,8 @@ export const pnpgaming = (
         <div className={styles.cardContentText}>
           <h3>Unity SDK</h3>
           <div className={styles.links}>
-            <a href={`embedded-wallets/sdk/unity`}>SDK Reference{chevron}</a>
-            <a href={`embedded-wallets/sdk/unity/examples`}>Examples{chevron}</a>
+            <a href={`/embedded-wallets/sdk/unity`}>SDK Reference{chevron}</a>
+            <a href={`/embedded-wallets/sdk/unity/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>
@@ -284,8 +284,8 @@ export const pnpgaming = (
             <h3>Unreal SDK</h3>
           </div>
           <div className={styles.links}>
-            <a href={`embedded-wallets/sdk/unreal`}>SDK Reference{chevron}</a>
-            <a href={`embedded-wallets/sdk/unreal/examples`}>Examples{chevron}</a>
+            <a href={`/embedded-wallets/sdk/unreal`}>SDK Reference{chevron}</a>
+            <a href={`/embedded-wallets/sdk/unreal/examples`}>Examples{chevron}</a>
           </div>
         </div>
       </div>

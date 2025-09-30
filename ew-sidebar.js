@@ -137,6 +137,19 @@ const sidebar = {
           label: "Configuration",
           items: [
             "dashboard/project-settings",
+            "dashboard/whitelist",
+            {
+              type: "category",
+              label: "Advanced Settings",
+              collapsible: true,
+              collapsed: false,
+              items: [
+                "dashboard/advanced/session-management",
+                "dashboard/advanced/test-accounts",
+                "dashboard/advanced/user-details",
+                "dashboard/advanced/key-export",
+              ],
+            },
             "dashboard/chains-and-networks",
             "dashboard/authentication",
             "dashboard/wallet-services",
