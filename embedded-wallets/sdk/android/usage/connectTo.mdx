@@ -1,0 +1,348 @@
+---
+title: Logging in a User
+sidebar_label: connectTo
+description: 'Web3Auth Android SDK - connectTo Function | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+To login a user, you can use the `connectTo` method. It will trigger the login flow and navigate the user to a browser modal allowing the user to login into the service. You can pass in the supported auth connections to the connectTo method for specific social logins such as GOOGLE, APPLE, FACEBOOK, etc., and do whitelabel login.
+
+## Parameters
+
+The `connectTo` method takes in `LoginParams` as a required input.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter                  | Description                                                                                                                                                                                                                                                                                                                                                                    |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `authConnection`           | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `CUSTOM`, `SMS_PASSWORDLESS`, and `FARCASTER`.                                                                                 |
+| `authConnectionId?`        | The connection ID for custom authentication. This is optional for social logins but required for custom JWT-based authentication.                                                                                                                                                                                                                                              |
+| `groupedAuthConnectionId?` | Used for aggregate verifiers. When multiple auth connections are grouped under a single verifier, this specifies the aggregate verifier ID.                                                                                                                                                                                                                                    |
+| `loginHint?`               | Provides a hint for the login process. For email passwordless, this should be the email address. For SMS passwordless, this should be the phone number.                                                                                                                                                                                                                        |
+| `idToken?`                 | JWT token for SFA (Single Factor Auth) login. When provided, the login will use SFA mode.                                                                                                                                                                                                                                                                                      |
+| `extraLoginOptions?`       | It can be used to set the OAuth login options for corresponding `authConnection`. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                                                                                        |
+| `appState?`                | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `String` as a value.                                                                                                                                                                                                                             |
+| `mfaLevel?`                | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value.                                                                                                                                                                               |
+| `dappShare?`               | Custom verifier logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `String` as a value.                                                                                                                                                                     |
+| `curve?`                   | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change format of private key returned by Web3Auth. Private key returned by `getPrivateKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivateKey` method. The default value is `Curve.SECP256K1`. |
+| `dappUrl?`                 | URL of the dapp. This is used for analytics and debugging purposes.                                                                                                                                                                                                                                                                                                            |
+
+</TabItem>
+
+<TabItem value="class">
+
+```kotlin
+data class LoginParams(
+    val authConnection: AuthConnection,
+    val authConnectionId: String? = null,
+    val groupedAuthConnectionId: String? = null,
+    val appState: String? = null,
+    val mfaLevel: MFALevel? = null,
+    val extraLoginOptions: ExtraLoginOptions? = null,
+    var dappShare: String? = null,
+    val curve: Curve? = Curve.SECP256K1,
+    var dappUrl: String? = null,
+    var loginHint: String? = null,
+    val idToken: String? = null,
+)
+
+enum class AuthConnection {
+    @SerializedName("google")
+    GOOGLE,
+    @SerializedName("facebook")
+    FACEBOOK,
+    @SerializedName("reddit")
+    REDDIT,
+    @SerializedName("discord")
+    DISCORD,
+    @SerializedName("twitch")
+    TWITCH,
+    @SerializedName("apple")
+    APPLE,
+    @SerializedName("line")
+    LINE,
+    @SerializedName("github")
+    GITHUB,
+    @SerializedName("kakao")
+    KAKAO,
+    @SerializedName("linkedin")
+    LINKEDIN,
+    @SerializedName("twitter")
+    TWITTER,
+    @SerializedName("weibo")
+    WEIBO,
+    @SerializedName("wechat")
+    WECHAT,
+    @SerializedName("email_passwordless")
+    EMAIL_PASSWORDLESS,
+    @SerializedName("custom")
+    CUSTOM, //for jwt
+    @SerializedName("sms_passwordless")
+    SMS_PASSWORDLESS,
+    @SerializedName("farcaster")
+    FARCASTER
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    web3AuthNetwork = Web3AuthNetwork.MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+    LoginParams(AuthConnection.GOOGLE)
+)
+// focus-end
+```
+
+## Examples
+
+<Tabs
+  defaultValue="google"
+  values={[
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
+    { label: "Discord", value: "discord" },
+    { label: "Twitch", value: "twitch" },
+    { label: "Email Passwordless", value: "email_passwordless" },
+    { label: "SMS Passwordless", value: "sms_passwordless" },
+    { label: "Farcaster", value: "farcaster" },
+    { label: "JWT", value: "jwt" },
+  ]}
+>
+
+<TabItem value="google">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    web3AuthNetwork = Web3AuthNetwork.MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+    LoginParams(AuthConnection.GOOGLE)
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="facebook">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    web3AuthNetwork = Web3AuthNetwork.MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+    LoginParams(AuthConnection.FACEBOOK)
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="discord">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    web3AuthNetwork = Web3AuthNetwork.MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+    LoginParams(AuthConnection.DISCORD)
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="twitch">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    web3AuthNetwork = Web3AuthNetwork.MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+    LoginParams(AuthConnection.TWITCH)
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="email_passwordless">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    web3AuthNetwork = Web3AuthNetwork.MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.EMAIL_PASSWORDLESS,
+        loginHint = "hello@web3auth.io"
+    )
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="sms_passwordless">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    web3AuthNetwork = Web3AuthNetwork.MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.SMS_PASSWORDLESS,
+        loginHint = "+91-9911223344"
+    )
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="farcaster">
+
+```kotlin
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    web3AuthNetwork = Web3AuthNetwork.MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+  LoginParams(AuthConnection.FARCASTER)
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="jwt">
+
+```kotlin title="Usage"
+import com.web3auth.core.Web3Auth
+import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
+
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    context = this,
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    web3AuthNetwork = Web3AuthNetwork.MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
+  )
+)
+
+// focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+    LoginParams(
+        AuthConnection.CUSTOM,
+        authConnectionId = "your_auth_connection_id",
+        idToken = "your_jwt_token"
+    )
+)
+// focus-end
+```
+
+</TabItem>
+</Tabs>
