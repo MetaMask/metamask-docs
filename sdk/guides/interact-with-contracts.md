@@ -26,7 +26,7 @@ Read contract data:
 ```tsx
 import { useReadContract } from "wagmi"
 
-function TokenBalance() {
+function TokenBalance(1) {
   const { 
     data: balance,
     isError,
