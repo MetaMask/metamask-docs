@@ -1,0 +1,206 @@
+---
+description: ERC-7715 permissions reference.
+sidebar_label: Permissions
+keywords: [ERC-7715, permissions, ERC-20 token, native token, reference]
+---
+
+# ERC-7715 permissions
+
+When [executing on a MetaMask user's behalf](../../guides/erc7715/execute-on-metamask-users-behalf.md), you can request the following permission types for ERC-20 token and native token transfers.
+Learn [how to use ERC-7715 permissions](../../guides/erc7715/use-permissions/erc20-token.md).
+
+## ERC-20 token permissions
+
+### ERC-20 periodic permission
+
+Ensures a per-period limit for ERC-20 token transfers.
+At the start of each new period, the allowance resets.
+
+#### Parameters
+
+| Name             | Type      | Required | Description                                                      |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------- |
+| `tokenAddress`   | `Address` | Yes      | The ERC-20 token contract address as a hex string.               |
+| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
+| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
+| `justification`  | `string`  | No       | A description of the permission to display to the user.          |
+
+#### Example
+
+```typescript
+import { sepolia as chain } from "viem/chains";
+import { parseUnits } from "viem";
+import { walletClient } from "./client.ts"
+
+const currentTime = Math.floor(Date.now() / 1000);
+const expiry = currentTime + 604800;
+
+const grantedPermissions = await walletClient.requestExecutionPermissions([{
+  chainId: chain.id,
+  expiry,
+  signer: {
+    type: "account",
+    data: {
+      address: sessionAccountAddress,
+    },
+  },
+  permission: {
+    type: "erc20-token-periodic",
+    data: {
+      tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+      periodAmount: parseUnits("10", 6),
+      periodDuration: 86400,
+      justification?: "Permission to transfer 1 USDC every day",
+    },
+  },
+}]);
+```
+
+### ERC-20 stream permission
+
+Ensures a linear streaming transfer limit for ERC-20 tokens.
+Token transfers are blocked until the defined start timestamp.
+At the start, a specified initial amount is released, after which tokens accrue linearly at the configured rate, up to the maximum allowed amount.
+
+#### Parameters
+
+| Name              | Type      | Required | Description                                               |
+| ----------------- | --------- | -------- | --------------------------------------------------------- |
+| `tokenAddress`    | `Address` | Yes      | The ERC-20 token contract address.                        |
+| `initialAmount`   | `bigint`  | Yes      | The initial amount that can be transferred at start time. |
+| `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
+| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
+| `duration`        | `number`  | Yes      | The duration of the stream in seconds.                    |
+| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
+| `justification`   | `string`  | No       | A description of the permission to display to the user.   |
+
+#### Example
+
+```typescript
+import { sepolia as chain } from "viem/chains";
+import { parseUnits } from "viem";
+import { walletClient } from "./client.ts"
+
+const currentTime = Math.floor(Date.now() / 1000);
+const expiry = currentTime + 604800;
+
+const grantedPermissions = await walletClient.requestExecutionPermissions([{
+  chainId: chain.id,
+  expiry,
+  signer: {
+    type: "account",
+    data: {
+      address: sessionAccountAddress,
+    },
+  },
+  permission: {
+    type: "erc20-token-stream",
+    data: {
+      tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+      amountPerSecond: parseUnits("0.1", 6),
+      initialAmount: parseUnits("1", 6),
+      maxAmount: parseUnits("2", 6),
+      duration: 3600,
+      startTime: currentTime,
+      justification: "Permission to use 0.1 USDC per second",
+    },
+  },
+}]);
+```
+
+## Native token permissions
+
+### Native token periodic permission
+
+Ensures a per-period limit for native token transfers.
+At the start of each new period, the allowance resets.
+
+#### Parameters
+
+| Name             | Type      | Required | Description                                                      |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------- |
+| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
+| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
+| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                                 |
+| `justification`   | `string`  | No       | A description of the permission to display to the user.         |
+
+#### Example
+
+```typescript
+import { sepolia as chain } from "viem/chains";
+import { parseEther } from "viem";
+import { walletClient } from "./client.ts"
+
+const currentTime = Math.floor(Date.now() / 1000);
+const expiry = currentTime + 604800;
+
+const grantedPermissions = await walletClient.requestExecutionPermissions([{
+  chainId: chain.id,
+  expiry,
+  signer: {
+    type: "account",
+    data: {
+      address: sessionAccountAddress,
+    },
+  },
+  permission: {
+    type: "native-token-periodic",
+    data: {
+      periodAmount: parseEther("0.001"),
+      periodDuration: 86400,
+      startTime: currentTime,
+      justification: "Permission to use 0.001 ETH every day",
+    },
+  },
+}]);
+```
+
+### Native token stream permission
+
+Ensures a linear streaming transfer limit for native tokens.
+Token transfers are blocked until the defined start timestamp.
+At the start, a specified initial amount is released, after which tokens accrue linearly at the configured rate, up to the maximum allowed amount.
+
+#### Parameters
+
+| Name              | Type      | Required | Description                                               |
+| ----------------- | --------- | -------- | --------------------------------------------------------- |
+| `initialAmount`   | `bigint`  | Yes      | The initial amount that can be transferred at start time. |
+| `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
+| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
+| `duration`        | `number`  | Yes      | The duration of the stream in seconds.                    |
+| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
+| `justification`   | `string`  | No       | A description of the permission to display to the user.   |
+
+#### Example
+
+```typescript
+import { sepolia as chain } from "viem/chains";
+import { parseEther } from "viem";
+import { walletClient } from "./client.ts"
+
+const currentTime = Math.floor(Date.now() / 1000);
+const expiry = currentTime + 604800;
+
+const grantedPermissions = await walletClient.requestExecutionPermissions([{
+  chainId: chain.id,
+  expiry,
+  signer: {
+    type: "account",
+    data: {
+      address: sessionAccountAddress,
+    },
+  },
+   permission: {
+      type: "native-token-stream",
+      data: {
+        amountPerSecond: parseEther("0.0001"),
+        initialAmount: parseEther("0.1"),
+        maxAmount: parseEther("1"),
+        duration: 3600,
+        startTime: currentTime,
+        justification: "Permission to use 0.0001 ETH per second",
+      },
+    },
+}]);
+```
