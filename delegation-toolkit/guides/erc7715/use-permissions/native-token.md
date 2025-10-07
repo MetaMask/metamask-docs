@@ -1,15 +1,15 @@
 ---
-description: Learn how to use the ERC-20 token permissions with ERC-7715.
-keywords: [permissions, spending limit, restrict, 7715, erc-7715, erc20-permissions]
+description: Learn how to use the native token permissions with ERC-7715.
+keywords: [permissions, spending limit, restrict, 7715, erc-7715, native-token-permissions]
 ---
 
 import Tabs from "@theme/Tabs"; 
 import TabItem from "@theme/TabItem";
 
-# Use ERC-20 token permissions
+# Use native token permissions
  
-The [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) supports ERC-20 token permission types that allow you to request fine-grained
-permissions for ERC-20 token transfers with time-based (periodic) or streaming conditions, depending on your use case.
+[ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) supports native token permission types that allow you to request fine-grained
+permissions for native token transfers with time-based (periodic) or streaming conditions, depending on your use case.
 
 ## Prerequisites
 
@@ -17,28 +17,25 @@ permissions for ERC-20 token transfers with time-based (periodic) or streaming c
 - [Configure the Delegation Toolkit.](../../configure-toolkit.md)
 - [Create a session account.](../execute-on-metamask-user-behalf.md#3-set-up-a-session-account)
 
-## ERC-20 periodic permission
+## Native token periodic permission
 
-This permission types ensures a per-period limit for ERC-20 token transfers. At the start of each new period, the allowance resets.
+This permission types ensures a per-period limit for native token transfers. At the start of each new period, the allowance resets.
 
-For example, user signs a ERC-7715 permission that lets dapp spend up to 10 USDC on their behalf each day. Dapp can transfer a total of
-10 USDC per day; the limit resets at the beginning of the next day.
+For example, a user signs an ERC-7715 permission that lets a dapp spend up to 0.001 ETH on their behalf each day. The dapp can transfer a total of
+0.001 USDC per day; the limit resets at the beginning of the next day.
 
 <Tabs>
 <TabItem value="example.ts">
 
 ```typescript
 import { sepolia as chain } from "viem/chains";
-import { parseUnits } from "viem";
+import { parseEther } from "viem";
 import { walletClient } from "./client.ts"
 
 // Since current time is in seconds, we need to convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
 // 1 week from now.
 const expiry = currentTime + 604800;
-
-// USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
@@ -51,14 +48,14 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     },
   },
   permission: {
-    type: "erc20-token-periodic",
+    type: "native-token-periodic",
     data: {
-      tokenAddress,
-      // 10 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
-      periodAmount: parseUnits("10", 6),
-      // 1 day in seconds
+      // 0.001 ETH in wei format.
+      periodAmount: parseEther("0.001"),
+      // 1 hour in seconds.
       periodDuration: 86400,
-      justification?: "Permission to transfer 1 USDC every day",
+      startTime: currentTime,
+      justification: "Permission to use 0.001 ETH every day",
     },
   },
 }]);
@@ -79,30 +76,27 @@ export const walletClient = createWalletClient({
 </TabItem>
 </Tabs>
 
-## ERC-20 stream permission
+## Native token stream permission
 
-This permission type ensures a linear streaming transfer limit for ERC-20 tokens. Token transfers are blocked until the 
+This permission type ensures a linear streaming transfer limit for native tokens. Token transfers are blocked until the 
 defined start timestamp. At the start, a specified initial amount is released, after which tokens accrue linearly at the
 configured rate, up to the maximum allowed amount.
 
-For example, user signs a ERC-7715 permission that allows dapp to spend 0.1 USDC every hour, starting with an initial amount
-of 1 USDC, up to a maximum of 2 USDC.
+For example, a user signs an ERC-7715 permission that allows a dapp to spend 0.0001 ETH every hour, starting with an initial amount
+of 0.1 ETH, up to a maximum of 1 ETH.
 
 <Tabs>
 <TabItem value="example.ts">
 
 ```typescript
 import { sepolia as chain } from "viem/chains";
-import { parseUnits } from "viem";
+import { parseEther } from "viem";
 import { walletClient } from "./client.ts"
 
 // Since current time is in seconds, we need to convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
 // 1 week from now.
 const expiry = currentTime + 604800;
-
-// USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
@@ -114,22 +108,21 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       address: sessionAccountAddress,
     },
   },
-  permission: {
-    type: "erc20-token-stream",
-    data: {
-      tokenAddress,
-      // 0.1 USDC in WEI format. Since USDC has 6 decimals, 0.1 * 10^6
-      amountPerSecond: parseUnits("0.1", 6),
-      // 1 USDC in WEI format. Since USDC has 6 decimals, 1 * 10^6
-      initialAmount: parseUnits("1", 6),
-      // 2 USDC in WEI format. Since USDC has 6 decimals, 2 * 10^6
-      maxAmount: parseUnits("2", 6),
-      // 1 hour in seconds
-      duration: 3600,
-      startTime: currentTime,
-      justification: "Permission to use 0.1 USDC every hour",
+   permission: {
+      type: "native-token-stream",
+      data: {
+        // 0.0001 ETH in wei format.
+        amountPerSecond: parseEther("0.0001"),
+        // 0.1 ETH in wei format.
+        initialAmount: parseEther("0.1"),
+        // 1 ETH in wei format.
+        maxAmount: parseEther("1"),
+        // 1 hour in seconds
+        duration: 3600,
+        startTime: currentTime,
+        justification: "Permission to use 0.0001 ETH every hour",
+      },
     },
-  },
 }]);
 ```
 
