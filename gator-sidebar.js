@@ -90,6 +90,15 @@ const sidebar = {
           collapsed: false,
           items: [
             'guides/erc7715/execute-on-metamask-user-behalf',
+            {
+              type: 'category',
+              label: 'Use permissions',
+              collapsed: false,
+              items: [
+                'guides/erc7715/use-permissions/erc20-token-permissions',
+                'guides/erc7715/use-permissions/native-token-permissions',
+              ],
+            },
           ],
         },
       ],
