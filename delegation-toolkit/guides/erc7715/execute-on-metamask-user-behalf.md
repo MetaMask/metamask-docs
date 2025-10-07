@@ -111,7 +111,7 @@ const expiry = currentTime + 604800;
 // USDC address on Ethereum Sepolia.
 const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 
-const grantedPermissions = await walletClient.grantPermissions([{
+const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
   signer: {
