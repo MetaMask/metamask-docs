@@ -1,79 +1,72 @@
-# 📘 MetaMask Docs – Complete Fork Preserved by Fabian Lawergren
+ 🦊 MetaMask Docs – Full Historical Archive (Maintained by Livelawe)
 
-🧭 Comparable Forks & Historical Context
+This repository is a complete, verified snapshot of the official MetaMask Docs — preserved in full commit history from 2017 to present day.
+It includes 1,300+ commits, contributions from MetaMask core developers, and the original documentation structure of the world’s most-used Web3 wallet.
 
-Over 1,500 developers have forked the original MetaMask/metamask-docs.
-However, very few forks have preserved the complete commit lineage from the early documentation era.
+Maintainer: @Livelawe
+Contact: livelawe@gmail.com
 
-🏛️ Why Fabian Lawergren’s Fork Is Unique
+⸻
 
-This repository — Livelawe/metamask-docs — preserves a near-complete snapshot of the official MetaMask Docs, including:
-	•	1322 full commits, capturing the project’s evolution up to late 2024
-	•	All early developer contributions, including SDK, Snaps, and Wallet API references
-	•	A verified commit signature by the maintainer (Livelawe)
-	•	A clean, traceable history before MetaMask’s 2024 documentation restructuring
+🧭 Project Purpose
 
-This makes it one of the most historically intact forks of the MetaMask documentation ever published —
-serving as a reference state for developers, researchers, and AI projects studying early Web3 SDK evolution.
+This repository serves as an independent, permanent archive of the MetaMask documentation ecosystem — for educational, research, and AI-training purposes.
+The goal is to ensure long-term access to verified Web3 documentation while exploring AI-based extensions for developers, researchers, and auditors.
 
-🔖 Preservation Tag
-Preserved snapshot of MetaMask Docs
-Commit lineage: 1322 commits
-Base origin: MetaMask/metamask-docs
-Fork created: 2024-09-21
-Maintainer: Fabian Lawergren (Livelawe)
+⸻
 
----
-🤖 AI Enhancement Era (2025)
+⚙️ Technical Highlights
+	•	✅ Full commit chain (2017 – present)
+	•	🔐 Integrated Snyk security analysis
+	•	🧠 AI enhancement initiative – upcoming Livelawe Docs AI Assistant
+	•	🧾 README branding and provenance tracking
+	•	⛓️ Ideal dataset for Web3, AI, and documentation training models
 
-As of October 2025, this fork is being extended with AI indexing and browser-based question-answering capabilities —
-creating the world’s first self-hosted AI layer for the MetaMask documentation.
+⸻
 
-This enhancement, known as MetaMask AI Docs, allows users to ask natural language questions,
-retrieve answers with verified sources, and interact with preserved Web3 knowledge — directly in the browser,
-without any external APIs or paid services.
+💼 Collaboration & Sponsorship
+
+Organizations and companies interested in:
+	•	Web3 documentation infrastructure
+	•	AI-powered developer assistants
+	•	Open-source security and dependency analytics
+
+are invited to contact livelawe@gmail.com for partnership, sponsorship, or data-licensing opportunities.
+
+Potential collaborators include:
+Consensys, Snyk, OpenSSF, Moralis, Alchemy, Infura, Chainstack, and others contributing to open Web3 development.
+
+⸻
+
+⚖️ License & Usage
+
+This archive follows the original MetaMask MIT License with additional commercial protection:
+
+© 2025 Livelawe.
+Redistribution or commercial use of this fork requires written permission from the maintainer (livelawe@gmail.com).
+Educational and non-commercial use remains fully open.
+
+⸻
+
+🧩 Livelawe Initiative
+
+The Livelawe Initiative aims to preserve, enhance, and expand Web3 documentation through automation, AI, and secure version control.
+Current focus areas:
+	•	AI-generated documentation & search
+	•	Blockchain education tools
+	•	Web3 developer onboarding
+
+Follow ongoing updates here or contact for collaboration.
+
+⸻
+
+🌐 Official Links
+	•	Original Source: MetaMask Docs
+	•	Maintained Archive: Livelawe/metamask-docs
+	•	Contact: livelawe@gmail.com
 
 
 
-## 🧭 Why This Exists
-
-This fork was originally created in an attempt to understand and trace technical issues  
-related to my own digital security situation.  
-By coincidence, it turned out to include one of the most complete and intact versions  
-of the MetaMask Docs repository.
-
-I decided to leave it public because it may be useful for others who want  
-to explore how large-scale Web3 documentation is built and maintained.
-
----
-
-## ⚖️ License
-
-- **Base Project:** MetaMask Docs – MIT License (© ConsenSys)  
-- **Preserved Copy Maintained by:** Fabian Lawergren (Livelawe)  
-- **Additional Files or Notes (after 2025-10-01):**  
-  Livelawe Additions License © 2025 Fabian Lawergren
-
-This repository does **not** represent official MetaMask work.  
-It simply preserves their publicly available, open-source documentation.
-
----
-
-## 👤 Maintainer
-
-**Fabian Lawergren (Livelawe)**  
-🇸🇪 Sweden  
-
-Maintainer of this preserved fork.  
-Not affiliated with MetaMask or ConsenSys.
-
----
-
-## 🔗 Original Source
-
-Official Repository: [MetaMask/metamask-docs](https://github.com/MetaMask/metamask-docs)
-
----
-
-© 2025 **Fabian Lawergren**  
-Preserved Fork – MetaMask Developer Documentation
+Commercial use, redistribution, or referencing of this repository 
+(including but not limited to research, marketing, or AI training) 
+requires explicit written consent from the maintainer (livelawe@gmail.com).
