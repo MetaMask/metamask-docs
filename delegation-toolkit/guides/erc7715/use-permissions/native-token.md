@@ -82,7 +82,7 @@ This permission type ensures a linear streaming transfer limit for native tokens
 defined start timestamp. At the start, a specified initial amount is released, after which tokens accrue linearly at the
 configured rate, up to the maximum allowed amount.
 
-For example, a user signs an ERC-7715 permission that allows a dapp to spend 0.0001 ETH every hour, starting with an initial amount
+For example, a user signs an ERC-7715 permission that allows a dapp to spend 0.0001 ETH per second, starting with an initial amount
 of 0.1 ETH, up to a maximum of 1 ETH.
 
 <Tabs>
@@ -120,7 +120,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
         // 1 hour in seconds.
         duration: 3600,
         startTime: currentTime,
-        justification: "Permission to use 0.0001 ETH every hour",
+        justification: "Permission to use 0.0001 ETH per second",
       },
     },
 }]);
