@@ -19,7 +19,7 @@ permissions for native token transfers with time-based (periodic) or streaming c
 
 ## Native token periodic permission
 
-This permission types ensures a per-period limit for native token transfers. At the start of each new period, the allowance resets.
+This permission type ensures a per-period limit for native token transfers. At the start of each new period, the allowance resets.
 
 For example, a user signs an ERC-7715 permission that lets a dapp spend up to 0.001 ETH on their behalf each day. The dapp can transfer a total of
 0.001 USDC per day; the limit resets at the beginning of the next day.
