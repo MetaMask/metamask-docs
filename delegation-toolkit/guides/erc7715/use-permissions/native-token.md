@@ -32,7 +32,7 @@ import { sepolia as chain } from "viem/chains";
 import { parseEther } from "viem";
 import { walletClient } from "./client.ts"
 
-// Since current time is in seconds, we need to convert milliseconds to seconds.
+// Since current time is in seconds, convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
 // 1 week from now.
 const expiry = currentTime + 604800;
@@ -43,7 +43,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
   signer: {
     type: "account",
     data: {
-      // Check the prerequisites for session account.
+      // Session account created as a prerequisite.
       address: sessionAccountAddress,
     },
   },
@@ -93,7 +93,7 @@ import { sepolia as chain } from "viem/chains";
 import { parseEther } from "viem";
 import { walletClient } from "./client.ts"
 
-// Since current time is in seconds, we need to convert milliseconds to seconds.
+// Since current time is in seconds, convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
 // 1 week from now.
 const expiry = currentTime + 604800;
@@ -104,7 +104,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
   signer: {
     type: "account",
     data: {
-      // Check the prerequisites for session account.
+      // Session account created as a prerequisite.
       address: sessionAccountAddress,
     },
   },
@@ -117,7 +117,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
         initialAmount: parseEther("0.1"),
         // 1 ETH in wei format.
         maxAmount: parseEther("1"),
-        // 1 hour in seconds
+        // 1 hour in seconds.
         duration: 3600,
         startTime: currentTime,
         justification: "Permission to use 0.0001 ETH every hour",

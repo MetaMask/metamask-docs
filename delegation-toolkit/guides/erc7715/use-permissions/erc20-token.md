@@ -32,7 +32,7 @@ import { sepolia as chain } from "viem/chains";
 import { parseUnits } from "viem";
 import { walletClient } from "./client.ts"
 
-// Since current time is in seconds, we need to convert milliseconds to seconds.
+// Since current time is in seconds, convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
 // 1 week from now.
 const expiry = currentTime + 604800;
@@ -46,7 +46,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
   signer: {
     type: "account",
     data: {
-      // Check the prerequisites for session account.
+      // Session account created as a prerequisite.
       address: sessionAccountAddress,
     },
   },
@@ -54,9 +54,9 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     type: "erc20-token-periodic",
     data: {
       tokenAddress,
-      // 10 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
+      // 10 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6.
       periodAmount: parseUnits("10", 6),
-      // 1 day in seconds
+      // 1 day in seconds.
       periodDuration: 86400,
       justification?: "Permission to transfer 1 USDC every day",
     },
@@ -96,7 +96,7 @@ import { sepolia as chain } from "viem/chains";
 import { parseUnits } from "viem";
 import { walletClient } from "./client.ts"
 
-// Since current time is in seconds, we need to convert milliseconds to seconds.
+// Since current time is in seconds, convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
 // 1 week from now.
 const expiry = currentTime + 604800;
@@ -110,7 +110,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
   signer: {
     type: "account",
     data: {
-      // Check the prerequisites for session account.
+      // Session account created as a prerequisite.
       address: sessionAccountAddress,
     },
   },
@@ -118,13 +118,13 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     type: "erc20-token-stream",
     data: {
       tokenAddress,
-      // 0.1 USDC in WEI format. Since USDC has 6 decimals, 0.1 * 10^6
+      // 0.1 USDC in WEI format. Since USDC has 6 decimals, 0.1 * 10^6.
       amountPerSecond: parseUnits("0.1", 6),
-      // 1 USDC in WEI format. Since USDC has 6 decimals, 1 * 10^6
+      // 1 USDC in WEI format. Since USDC has 6 decimals, 1 * 10^6.
       initialAmount: parseUnits("1", 6),
-      // 2 USDC in WEI format. Since USDC has 6 decimals, 2 * 10^6
+      // 2 USDC in WEI format. Since USDC has 6 decimals, 2 * 10^6.
       maxAmount: parseUnits("2", 6),
-      // 1 hour in seconds
+      // 1 hour in seconds.
       duration: 3600,
       startTime: currentTime,
       justification: "Permission to use 0.1 USDC every hour",
