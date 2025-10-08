@@ -1,16 +1,16 @@
 ---
-description: Wallet Client API reference.
-sidebar_label: Wallet Client
+description: Wallet Client actions reference.
+sidebar_label: Wallet Client actions
 toc_max_heading_level: 2
-keywords: [ERC-7715, Viem, wallet client, API methods, actions, reference]
+keywords: [ERC-7715, Viem, wallet client, actions, reference]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Wallet Client reference
+# Wallet Client actions reference
 
-The following API methods are related to the [Viem Wallet Client](https://viem.sh/docs/clients/wallet) used to [execute on a MetaMask user's behalf](../../guides/erc7715/execute-on-metamask-users-behalf.md).
+The following actions are related to the [Viem Wallet Client](https://viem.sh/docs/clients/wallet) used to [execute on a MetaMask user's behalf](../../guides/erc7715/execute-on-metamask-users-behalf.md).
 
 ## `requestExecutionPermissions`
 
