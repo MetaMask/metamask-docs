@@ -29,32 +29,20 @@ At the start of each new period, the allowance resets.
 #### Example
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
 import { parseUnits } from "viem";
-import { walletClient } from "./client.ts"
 
 const currentTime = Math.floor(Date.now() / 1000);
 const expiry = currentTime + 604800;
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  signer: {
-    type: "account",
-    data: {
-      address: sessionAccountAddress,
-    },
+const permission = {
+  type: "erc20-token-periodic",
+  data: {
+    tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+    periodAmount: parseUnits("10", 6),
+    periodDuration: 86400,
+    justification?: "Permission to transfer 1 USDC every day",
   },
-  permission: {
-    type: "erc20-token-periodic",
-    data: {
-      tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
-      periodAmount: parseUnits("10", 6),
-      periodDuration: 86400,
-      justification?: "Permission to transfer 1 USDC every day",
-    },
-  },
-}]);
+};
 ```
 
 ### ERC-20 stream permission
@@ -77,34 +65,22 @@ At the start, a specified initial amount is released, after which tokens accrue 
 #### Example
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
 import { parseUnits } from "viem";
-import { walletClient } from "./client.ts"
 
 const currentTime = Math.floor(Date.now() / 1000);
 const expiry = currentTime + 604800;
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  signer: {
-    type: "account",
-    data: {
-      address: sessionAccountAddress,
-    },
+const permission = {
+  type: "erc20-token-stream",
+  data: {
+    tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+    amountPerSecond: parseUnits("0.1", 6),
+    initialAmount: parseUnits("1", 6),
+    maxAmount: parseUnits("2", 6),
+    startTime: currentTime,
+    justification: "Permission to use 0.1 USDC per second",
   },
-  permission: {
-    type: "erc20-token-stream",
-    data: {
-      tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
-      amountPerSecond: parseUnits("0.1", 6),
-      initialAmount: parseUnits("1", 6),
-      maxAmount: parseUnits("2", 6),
-      startTime: currentTime,
-      justification: "Permission to use 0.1 USDC per second",
-    },
-  },
-}]);
+};
 ```
 
 ## Native token permissions
@@ -126,32 +102,20 @@ At the start of each new period, the allowance resets.
 #### Example
 
 ```typescript
-import { sepolia as chain } from "viem/chains";
 import { parseEther } from "viem";
-import { walletClient } from "./client.ts"
 
 const currentTime = Math.floor(Date.now() / 1000);
 const expiry = currentTime + 604800;
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  signer: {
-    type: "account",
-    data: {
-      address: sessionAccountAddress,
-    },
+const permission = {
+  type: "native-token-periodic",
+  data: {
+    periodAmount: parseEther("0.001"),
+    periodDuration: 86400,
+    startTime: currentTime,
+    justification: "Permission to use 0.001 ETH every day",
   },
-  permission: {
-    type: "native-token-periodic",
-    data: {
-      periodAmount: parseEther("0.001"),
-      periodDuration: 86400,
-      startTime: currentTime,
-      justification: "Permission to use 0.001 ETH every day",
-    },
-  },
-}]);
+};
 ```
 
 ### Native token stream permission
@@ -180,24 +144,14 @@ import { walletClient } from "./client.ts"
 const currentTime = Math.floor(Date.now() / 1000);
 const expiry = currentTime + 604800;
 
-const grantedPermissions = await walletClient.requestExecutionPermissions([{
-  chainId: chain.id,
-  expiry,
-  signer: {
-    type: "account",
-    data: {
-      address: sessionAccountAddress,
-    },
+const permission = {
+  type: "native-token-stream",
+  data: {
+    amountPerSecond: parseEther("0.0001"),
+    initialAmount: parseEther("0.1"),
+    maxAmount: parseEther("1"),
+    startTime: currentTime,
+    justification: "Permission to use 0.0001 ETH per second",
   },
-   permission: {
-      type: "native-token-stream",
-      data: {
-        amountPerSecond: parseEther("0.0001"),
-        initialAmount: parseEther("0.1"),
-        maxAmount: parseEther("1"),
-        startTime: currentTime,
-        justification: "Permission to use 0.0001 ETH per second",
-      },
-    },
-}]);
+};
 ```
