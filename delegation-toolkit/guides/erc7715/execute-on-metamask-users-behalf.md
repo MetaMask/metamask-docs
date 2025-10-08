@@ -102,6 +102,7 @@ permission using the `grantPermissions` method.
 
 ```typescript
 import { sepolia as chain } from "viem/chains";
+import { parseUnits } from "viem";
 
 // Since current time is in seconds, we need to convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
@@ -125,12 +126,13 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     data: {
       tokenAddress,
       // 1 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
-      periodAmount: 1000000n,
+      periodAmount: parseUnits("10", 6),
       // 1 day in seconds
       periodDuration: 86400,
       justification?: "Permission to transfer 1 USDC every day",
     },
   },
+  isAdjustmentAllowed: true,
 }]);
 ```
 

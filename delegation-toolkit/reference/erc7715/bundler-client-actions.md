@@ -1,19 +1,19 @@
 ---
 description: Bundler Client API methods reference.
-sidebar_label: Bundler Client
+sidebar_label: Bundler Client Actions
 toc_max_heading_level: 2
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Bundler Client API reference
+# Bundler Client Actions
 
 The following API methods are related to the [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler).
 
 ## `sendUserOperationWithDelegation`
 
-Sends a user operation to redeem delegated permissions according to the [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710) specifications.
+Sends a user operation with redeem permissions according to the [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710) specifications.
 
 :::info
 To use `sendUserOperationWithDelegation`, the Viem Bundler Client must be
@@ -29,8 +29,8 @@ Objects in the `calls` array also require the following parameters:
 
 | Name | Type | Required | Description                                                                                                                                                                                        |
 | ---- | ---- | -------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `delegationManager` | `0x${string}` | Yes | The address of Delegation Manager.                                                                                                                                                                 |
-| `permissionsContext` | `0x${string}` | Yes | Encoded calldata for redeeming delegations. If you're not using ERC-7715, you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
+| `delegationManager` | `Address` | Yes | The address of Delegation Manager.                                                                                                                                                                 |
+| `permissionsContext` | `Hex` | Yes | Encoded calldata for redeeming permissions. If you're not using ERC-7715, you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
 
 ### Example
 
@@ -38,7 +38,7 @@ Objects in the `calls` array also require the following parameters:
 <TabItem value ="example.ts">
 
 ```ts
-import { sessionAccount, bundlerClient, publicClient } from "./config.ts";
+import { sessionAccount, bundlerClient, publicClient } from "./client.ts";
 
 // These properties must be extracted from the permission response.
 const permissionsContext = permissionsResponse[0].context;
@@ -67,7 +67,7 @@ const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
 ```
 
 </TabItem>
-<TabItem value ="config.ts">
+<TabItem value ="client.ts">
 
 ```ts
 import { createPublicClient, http, createBundlerClient } from "viem";
