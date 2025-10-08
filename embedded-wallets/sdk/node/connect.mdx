@@ -1,16 +1,25 @@
 ---
-title: connect
+title: Connect
 description: 'Authenticate users and establish provider connection'
 ---
 
 ## Overview
 
-The `connect` method is the primary authentication method for the Node.js SDK. It authenticates users using custom authentication and returns a provider for blockchain operations.
+The `connect` method is the primary authentication method for the Node.js SDK. It authenticates users using custom authentication and returns a result object containing the provider/ signer for blockchain operations.
+
+:::warning Prerequisites
+
+- You need to have a custom authentication setup on the dashboard.
+- You need to have a freshly generated JWT token from your authentication system in your backend.
+
+Read more about [Custom Authentication](/embedded-wallets/authentication/custom-connections/custom-jwt/).
+
+:::
 
 ## Usage
 
 ```javascript
-const provider = await web3auth.connect(loginParams)
+const result = await web3auth.connect(loginParams)
 ```
 
 ## Parameters
@@ -18,465 +27,145 @@ const provider = await web3auth.connect(loginParams)
 ### LoginParams
 
 ```typescript
-interface LoginParams {
-  verifier: string // Your custom verifier name
-  verifierId: string // User's unique identifier
-  idToken: string // Valid JWT token
-  chainId?: string // Optional chain ID to connect to
+export type LoginParams = {
+  idToken: string
+  authConnectionId: string
+  userId?: string
+  userIdField?: string
+  isUserIdCaseSensitive?: boolean
+  groupedAuthConnectionId?: string
 }
 ```
 
-| Parameter    | Type     | Description                                           | Required |
-| ------------ | -------- | ----------------------------------------------------- | -------- |
-| `verifier`   | `string` | Custom verifier name from Web3Auth Dashboard          | ✅       |
-| `verifierId` | `string` | Unique identifier for the user (email, user ID, etc.) | ✅       |
-| `idToken`    | `string` | Valid JWT token from your authentication system       | ✅       |
-| `chainId`    | `string` | Blockchain chain ID to connect to                     | ❌       |
+| Parameter                  | Type      | Description                                                                               |
+| -------------------------- | --------- | ----------------------------------------------------------------------------------------- |
+| `authConnectionId`         | `string`  | Custom verifier name from Web3Auth Dashboard                                              |
+| `userId`                   | `string`  | Unique identifier for the user (email, user ID, etc.)                                     |
+| `idToken?`                 | `string`  | Valid JWT token from your authentication system                                           |
+| `groupedAuthConnectionId?` | `string`  | Grouped auth connection ID                                                                |
+| `userIdField?`             | `string`  | User's unique identifier field name. Add here if not set on the dashboard.                |
+| `isUserIdCaseSensitive?`   | `boolean` | Whether the user id field is case sensitive or not. Add here if not set on the dashboard. |
 
 ## Return Value
 
-Returns a `SafeEventEmitterProvider` that can be used for blockchain operations.
+Returns a `result` object containing the provider/ signer for blockchain operations. By default you get the standard Web3Auth provider, with the ability to get the private key, if enabled from the dashboard. You additionally get the signer for EVM and Solana chains, to be able to do transactions without the need to use the private key provider directly.
+
+### Object Structure
+
+```typescript
+import type { TransactionSigner } from '@solana/signers'
+import type { Wallet } from 'ethers'
+import type { CHAIN_NAMESPACES, IBaseProvider } from '@web3auth/no-modal'
+export type PrivateKeyProvider = IBaseProvider<string>
+
+export type WalletResult =
+  | {
+      chainNamespace: typeof CHAIN_NAMESPACES.SOLANA
+      provider: PrivateKeyProvider
+      signer: TransactionSigner
+    }
+  | {
+      chainNamespace: typeof CHAIN_NAMESPACES.EIP155
+      provider: PrivateKeyProvider
+      signer: Wallet
+    }
+  | {
+      chainNamespace: typeof CHAIN_NAMESPACES.OTHER
+      provider: PrivateKeyProvider
+      signer: null
+    }
+```
 
 ## Examples
 
-### Basic Authentication
+### Custom JWT Token Authentication
 
 ```javascript
 const { Web3Auth } = require('@web3auth/node-sdk')
 
+// Dashboard Registration
+const clientId =
+  'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
+
+// focus-start
+// Auth Connection
+const authConnectionId = 'w3a-node-demo'
+// focus-end
+
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_CLIENT_ID',
+  clientId,
   web3AuthNetwork: 'sapphire_mainnet',
 })
 
 await web3auth.init()
 
-// Authenticate user
-const provider = await web3auth.connect({
-  verifier: 'my-custom-verifier',
-  verifierId: 'user@example.com',
-  idToken: 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...',
-})
+// focus-start
+const privateKey = await fs.readFile('privateKey.pem', 'utf8')
 
-console.log('User authenticated successfully')
-```
-
-### Authentication with Specific Chain
-
-```javascript
-// Connect to Polygon mainnet
-const provider = await web3auth.connect({
-  verifier: 'my-custom-verifier',
-  verifierId: 'user123',
-  idToken: 'JWT_TOKEN_HERE',
-  chainId: '0x89', // Polygon mainnet
-})
-```
-
-### Authentication with Error Handling
-
-```javascript
-async function authenticateUser(userToken, userId) {
-  try {
-    const provider = await web3auth.connect({
-      verifier: 'my-auth-verifier',
-      verifierId: userId,
-      idToken: userToken,
-    })
-
-    console.log('Authentication successful')
-    return provider
-  } catch (error) {
-    console.error('Authentication failed:', error.message)
-
-    // Handle specific error types
-    if (error.message.includes('Invalid token')) {
-      throw new Error('Invalid authentication token')
-    } else if (error.message.includes('User not found')) {
-      throw new Error('User not found in verifier')
-    } else {
-      throw new Error('Authentication service unavailable')
-    }
-  }
-}
-```
-
-## ID Token Requirements
-
-The `idToken` must be a valid JWT token that includes:
-
-### Required Claims
-
-```json
-{
-  "iss": "your-issuer", // Token issuer
-  "aud": "your-audience", // Token audience
-  "sub": "user-subject-id", // Subject (user ID)
-  "iat": 1234567890, // Issued at time
-  "exp": 1234567999 // Expiration time
-}
-```
-
-### Example JWT Payload
-
-```json
-{
-  "iss": "https://auth.yourapp.com",
-  "aud": "your-web3auth-client-id",
-  "sub": "user123",
-  "email": "user@example.com",
-  "name": "John Doe",
-  "iat": 1640995200,
-  "exp": 1641081600
-}
-```
-
-## Chain ID Options
-
-If no `chainId` is specified, the SDK will use the default chain configured in your Web3Auth Dashboard.
-
-### Popular Chain IDs
-
-| Blockchain | Chain ID  | Network        |
-| ---------- | --------- | -------------- |
-| Ethereum   | `0x1`     | Mainnet        |
-| Ethereum   | `0x5`     | Goerli Testnet |
-| Polygon    | `0x89`    | Mainnet        |
-| Polygon    | `0x80001` | Mumbai Testnet |
-| BSC        | `0x38`    | Mainnet        |
-| BSC        | `0x61`    | Testnet        |
-| Arbitrum   | `0xa4b1`  | Mainnet        |
-| Optimism   | `0xa`     | Mainnet        |
-
-## Working with the Provider
-
-Once connected, use the provider for blockchain operations:
-
-```javascript
-// Get private key
-const privateKey = await provider.request({ method: 'eth_private_key' })
-
-// Get account address
-const accounts = await provider.request({ method: 'eth_accounts' })
-const address = accounts[0]
-
-// Sign a message
-const signature = await provider.request({
-  method: 'personal_sign',
-  params: ['Hello Web3Auth!', address],
-})
-```
-
-## Error Types
-
-The `connect` method can throw various errors:
-
-| Error                | Description                       | Solution                               |
-| -------------------- | --------------------------------- | -------------------------------------- |
-| `Invalid token`      | JWT token is malformed or expired | Refresh and provide a new token        |
-| `Verifier not found` | Verifier name doesn't exist       | Check verifier name in dashboard       |
-| `User not found`     | VerifierId not found in verifier  | Ensure user exists in your auth system |
-| `Network error`      | Connection to Web3Auth failed     | Check network connectivity             |
-| `Invalid client ID`  | Client ID is incorrect            | Verify client ID in dashboard          |
-
-## Next Steps
-
-After successful authentication:
-
-- [Access private keys](./private-key)
-- [Integrate with blockchains](./evm-integration)
-
-## Custom Authentication Implementation
-
-Since the Node.js SDK only supports custom authentication, here are detailed implementation examples for different scenarios:
-
-### Creating JWT Tokens
-
-```javascript
-const jwt = require('jsonwebtoken')
-
-function createJWTForUser(userId, userEmail, userName) {
-  const payload = {
-    iss: process.env.JWT_ISSUER, // Your issuer URL
-    aud: process.env.WEB3AUTH_CLIENT_ID, // Your Web3Auth client ID
-    sub: userId, // User's unique identifier
-    email: userEmail,
-    name: userName,
+var idToken = jwt.sign(
+  {
+    sub: '9fcd68c4-af50-4dd7-adf6-abd12a13cb32',
+    name: 'Web3Auth DevRel Team',
+    email: 'devrel@web3auth.io',
+    aud: 'urn:api-web3auth-io', // -> to be used in Custom Authentication as JWT Field
+    iss: 'https://web3auth.io', // -> to be used in Custom Authentication as JWT Field
     iat: Math.floor(Date.now() / 1000),
-    exp: Math.floor(Date.now() / 1000) + 60 * 60, // 1 hour expiration
-  }
+    exp: Math.floor(Date.now() / 1000) + 60 * 60,
+  },
+  privateKey,
+  { algorithm: 'RS256', keyid: '2ma4enu1kdvw5bo9xsfpi3gcjzrt6q78yl0h' }
+)
 
-  return jwt.sign(payload, process.env.JWT_SECRET, { algorithm: 'HS256' })
-}
+console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
+
+const result = await web3auth.connect({
+  authConnectionId,
+  idToken,
+})
+// focus-end
 ```
 
-### Auth0 Integration
+### Firebase Authentication
 
 ```javascript
-const { auth0 } = require('auth0')
+const { Web3Auth } = require('@web3auth/node-sdk')
 
-class Auth0Web3AuthIntegration {
-  constructor(auth0Config, web3authConfig) {
-    this.auth0 = new auth0.AuthenticationApi({
-      domain: auth0Config.domain,
-      clientId: auth0Config.clientId,
-      clientSecret: auth0Config.clientSecret,
-    })
+// Dashboard Registration
+const clientId =
+  'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
 
-    this.web3auth = new Web3Auth(web3authConfig)
-  }
+// focus-start
+// Auth Connection
+const authConnectionId = 'w3a-firebase-demo'
+// focus-end
 
-  async initialize() {
-    await this.web3auth.init()
-  }
-
-  async authenticateWithAuth0Token(auth0Token) {
-    try {
-      // Verify Auth0 token
-      const userInfo = await this.auth0.getProfile(auth0Token)
-
-      // Create custom JWT for Web3Auth
-      const customJWT = this.createCustomJWT(userInfo)
-
-      // Authenticate with Web3Auth
-      const provider = await this.web3auth.connect({
-        verifier: 'auth0-verifier',
-        verifierId: userInfo.sub,
-        idToken: customJWT,
-      })
-
-      return { provider, userInfo }
-    } catch (error) {
-      console.error('Auth0 authentication failed:', error)
-      throw error
-    }
-  }
-
-  createCustomJWT(auth0UserInfo) {
-    const payload = {
-      iss: process.env.CUSTOM_JWT_ISSUER,
-      aud: process.env.WEB3AUTH_CLIENT_ID,
-      sub: auth0UserInfo.sub,
-      email: auth0UserInfo.email,
-      name: auth0UserInfo.name,
-      picture: auth0UserInfo.picture,
-      iat: Math.floor(Date.now() / 1000),
-      exp: Math.floor(Date.now() / 1000) + 3600,
-    }
-
-    return jwt.sign(payload, process.env.JWT_SECRET)
-  }
-}
-```
-
-### Firebase Integration
-
-```javascript
-const admin = require('firebase-admin')
-
-class FirebaseWeb3AuthIntegration {
-  constructor(firebaseConfig, web3authConfig) {
-    admin.initializeApp({
-      credential: admin.credential.cert(firebaseConfig.serviceAccount),
-      databaseURL: firebaseConfig.databaseURL,
-    })
-
-    this.web3auth = new Web3Auth(web3authConfig)
-  }
-
-  async initialize() {
-    await this.web3auth.init()
-  }
-
-  async authenticateWithFirebaseToken(firebaseToken) {
-    try {
-      // Verify Firebase ID token
-      const decodedToken = await admin.auth().verifyIdToken(firebaseToken)
-
-      // Get user record for additional info
-      const userRecord = await admin.auth().getUser(decodedToken.uid)
-
-      // Create custom JWT for Web3Auth
-      const customJWT = this.createCustomJWT(decodedToken, userRecord)
-
-      // Authenticate with Web3Auth
-      const provider = await this.web3auth.connect({
-        verifier: 'firebase-verifier',
-        verifierId: decodedToken.uid,
-        idToken: customJWT,
-      })
-
-      return { provider, firebaseUser: userRecord }
-    } catch (error) {
-      console.error('Firebase authentication failed:', error)
-      throw error
-    }
-  }
-
-  createCustomJWT(decodedToken, userRecord) {
-    const payload = {
-      iss: process.env.CUSTOM_JWT_ISSUER,
-      aud: process.env.WEB3AUTH_CLIENT_ID,
-      sub: decodedToken.uid,
-      email: userRecord.email,
-      name: userRecord.displayName,
-      picture: userRecord.photoURL,
-      email_verified: userRecord.emailVerified,
-      firebase: {
-        sign_in_provider: decodedToken.firebase.sign_in_provider,
-        identities: decodedToken.firebase.identities,
-      },
-      iat: Math.floor(Date.now() / 1000),
-      exp: Math.floor(Date.now() / 1000) + 3600,
-    }
-
-    return jwt.sign(payload, process.env.JWT_SECRET)
-  }
-}
-```
-
-### Express.js API Integration
-
-```javascript
-const express = require('express')
-
-const app = express()
-app.use(express.json())
-
-// Store Web3Auth instances per user (use proper session store in production)
-const userSessions = new Map()
-
-// Initialize Web3Auth
 const web3auth = new Web3Auth({
-  clientId: process.env.WEB3AUTH_CLIENT_ID,
+  clientId,
   web3AuthNetwork: 'sapphire_mainnet',
 })
 
 await web3auth.init()
 
-// Authentication endpoint
-app.post('/api/auth/web3auth', async (req, res) => {
-  try {
-    const { userId, userEmail, userName } = req.body
-
-    // Validate user (implement your validation logic)
-    const isValidUser = await validateUser(userId, userEmail)
-    if (!isValidUser) {
-      return res.status(401).json({ error: 'Invalid user credentials' })
-    }
-
-    // Create JWT
-    const idToken = createJWTForUser(userId, userEmail, userName)
-
-    // Authenticate with Web3Auth
-    const provider = await web3auth.connect({
-      verifier: 'api-verifier',
-      verifierId: userId,
-      idToken: idToken,
-    })
-
-    // Store session
-    userSessions.set(userId, { provider, timestamp: Date.now() })
-
-    // Access blockchain operations
-    const privateKey = await provider.request({ method: 'eth_private_key' })
-
-    res.json({
-      success: true,
-      address: await provider.request({ method: 'eth_accounts' }),
-      sessionId: userId,
-    })
-  } catch (error) {
-    console.error('Authentication error:', error)
-    res.status(500).json({ error: 'Authentication failed' })
-  }
+// focus-start
+const app = initializeApp({
+  apiKey: 'AIzaSyB0nd9YsPLu-tpdCrsXn8wgsWVAiYEpQ_E',
+  authDomain: 'web3auth-oauth-logins.firebaseapp.com',
+  projectId: 'web3auth-oauth-logins',
+  storageBucket: 'web3auth-oauth-logins.appspot.com',
+  messagingSenderId: '461819774167',
+  appId: '1:461819774167:web:e74addfb6cc88f3b5b9c92',
 })
 
-// Get wallet address endpoint
-app.get('/api/wallet/:userId/address', async (req, res) => {
-  try {
-    const { userId } = req.params
-    const session = userSessions.get(userId)
+const auth = getAuth(app)
+const res = await signInWithEmailAndPassword(auth, 'custom+jwt@firebase.login', 'Testing@123')
+console.log(res)
+const idToken = await res.user.getIdToken(true)
 
-    if (!session) {
-      return res.status(401).json({ error: 'No active session' })
-    }
+console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
 
-    const accounts = await session.provider.request({ method: 'eth_accounts' })
-
-    res.json({
-      address: accounts[0],
-      userId: userId,
-    })
-  } catch (error) {
-    console.error('Address retrieval error:', error)
-    res.status(500).json({ error: 'Failed to get address' })
-  }
+const result = await web3auth.connect({
+  authConnectionId,
+  idToken,
 })
-
-app.listen(3000, () => {
-  console.log('Server running on port 3000')
-})
-```
-
-### JWT Validation
-
-```javascript
-function validateJWTPayload(payload) {
-  // Required fields
-  if (!payload.sub) throw new Error('Subject (sub) is required')
-  if (!payload.iss) throw new Error('Issuer (iss) is required')
-  if (!payload.aud) throw new Error('Audience (aud) is required')
-
-  // Expiration check
-  if (payload.exp && payload.exp < Math.floor(Date.now() / 1000)) {
-    throw new Error('Token has expired')
-  }
-
-  // Issuer validation
-  if (payload.iss !== process.env.JWT_ISSUER) {
-    throw new Error('Invalid token issuer')
-  }
-
-  return true
-}
-```
-
-### Error Handling for Authentication
-
-```javascript
-async function robustAuthentication(userId, userInfo) {
-  const maxRetries = 3
-  let lastError
-
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    try {
-      const idToken = createJWTForUser(userId, userInfo.email, userInfo.name)
-
-      const provider = await web3auth.connect({
-        verifier: 'robust-verifier',
-        verifierId: userId,
-        idToken: idToken,
-      })
-
-      console.log(`Authentication successful on attempt ${attempt}`)
-      return provider
-    } catch (error) {
-      lastError = error
-      console.log(`Authentication attempt ${attempt} failed:`, error.message)
-
-      // Don't retry on certain errors
-      if (error.message.includes('Invalid verifier') || error.message.includes('Malformed token')) {
-        throw error
-      }
-
-      // Wait before retry
-      if (attempt < maxRetries) {
-        await new Promise(resolve => setTimeout(resolve, 1000 * attempt))
-      }
-    }
-  }
-
-  throw new Error(`Authentication failed after ${maxRetries} attempts: ${lastError.message}`)
-}
+// focus-end
 ```

@@ -5,7 +5,7 @@ description: 'Extract private keys for blockchain operations'
 
 ## Overview
 
-The Node.js SDK provides direct access to user private keys, enabling integration with any blockchain network. This is a key feature that makes the SDK suitable for backend and programmatic use cases.
+The Node.js SDK provides direct access to user private keys, enabling integration with any blockchain network. This is a key feature that makes the SDK suitable for backend and programmatic use cases. Note that if the private key export is disabled in the dashboard, the methods will throw an error.
 
 :::warning Security Notice
 
@@ -172,125 +172,6 @@ const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey })
 console.log('Bitcoin Address:', address)
 ```
 
-## Complete Integration Example
-
-Here's a comprehensive example showing multi-chain support:
-
-```javascript
-const { Web3Auth } = require('@web3auth/node-sdk')
-const { ethers } = require('ethers')
-
-class MultiChainWallet {
-  constructor(clientId) {
-    this.web3auth = new Web3Auth({
-      clientId,
-      web3AuthNetwork: 'sapphire_mainnet',
-    })
-  }
-
-  async initialize() {
-    await this.web3auth.init()
-  }
-
-  async authenticate(verifier, verifierId, idToken) {
-    this.provider = await this.web3auth.connect({
-      verifier,
-      verifierId,
-      idToken,
-    })
-  }
-
-  async getEthereumWallet() {
-    const privateKey = await this.provider.request({ method: 'eth_private_key' })
-    return new ethers.Wallet(privateKey)
-  }
-
-  async getSolanaKeypair() {
-    const { Keypair } = require('@solana/web3.js')
-    const bs58 = require('bs58')
-
-    const solanaPrivateKey = await this.provider.request({ method: 'solanaPrivateKey' })
-    const secretKey = bs58.decode(solanaPrivateKey)
-    return Keypair.fromSecretKey(secretKey)
-  }
-
-  async getRawPrivateKey() {
-    return await this.provider.request({ method: 'private_key' })
-  }
-
-  async getAddresses() {
-    const [ethWallet, solanaKeypair] = await Promise.all([
-      this.getEthereumWallet(),
-      this.getSolanaKeypair(),
-    ])
-
-    return {
-      ethereum: ethWallet.address,
-      solana: solanaKeypair.publicKey.toString(),
-    }
-  }
-}
-
-// Usage
-const wallet = new MultiChainWallet('YOUR_CLIENT_ID')
-await wallet.initialize()
-await wallet.authenticate('verifier', 'user@example.com', 'jwt_token')
-
-const addresses = await wallet.getAddresses()
-console.log('Addresses:', addresses)
-```
-
-## Security Best Practices
-
-### 1. Secure Memory Handling
-
-```javascript
-// Use Buffer.alloc for sensitive data
-function securePrivateKeyHandling(privateKey) {
-  const keyBuffer = Buffer.from(privateKey.slice(2), 'hex')
-
-  try {
-    // Use the private key
-    const wallet = new ethers.Wallet(keyBuffer)
-    return wallet.address
-  } finally {
-    // Clear the buffer
-    keyBuffer.fill(0)
-  }
-}
-```
-
-### 2. Environment-based Key Access
-
-```javascript
-// Only allow private key access in specific environments
-function getPrivateKeySecurely() {
-  if (process.env.NODE_ENV === 'production' && !process.env.ALLOW_PRIVATE_KEY_ACCESS) {
-    throw new Error('Private key access not allowed in production')
-  }
-
-  return provider.request({ method: 'eth_private_key' })
-}
-```
-
-### 3. Audit Logging
-
-```javascript
-async function auditedPrivateKeyAccess(userId, purpose) {
-  console.log(`Private key accessed by ${userId} for ${purpose} at ${new Date().toISOString()}`)
-
-  // Log to audit system
-  await logAuditEvent({
-    action: 'private_key_access',
-    userId,
-    purpose,
-    timestamp: new Date(),
-  })
-
-  return provider.request({ method: 'eth_private_key' })
-}
-```
-
 ## Disabling Private Key Export
 
 Private key export can be disabled in the Web3Auth Dashboard:
@@ -309,8 +190,3 @@ try {
   console.error('Private key export disabled:', error.message)
 }
 ```
-
-## Next Steps
-
-- [EVM Integration Guide](./evm-integration)
-- [User authentication](./connect)

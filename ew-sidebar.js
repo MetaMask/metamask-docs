@@ -801,7 +801,7 @@ const sidebar = {
     },
     "sdk/node/README",
     "sdk/node/connect",
-    "sdk/node/evm-integration",
+    "sdk/node/blockchain-connection",
     "sdk/node/private-key",
     "sdk/node/examples",
     {

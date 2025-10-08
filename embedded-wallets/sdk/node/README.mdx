@@ -10,14 +10,14 @@ import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
 
 ## Overview
 
-The MetaMask Embedded Wallets Node.js SDK (formerly Web3Auth Node SDK) is a backend solution designed for server-side authentication and key management. This SDK enables seamless integration of Web3 authentication into backend applications, AI agents, and programmatic use cases.
+The MetaMask Embedded Wallets Node.js SDK is a backend solution designed for server-side authentication and key management. This SDK enables seamless integration of Web3 authentication into backend applications, AI agents, and programmatic use cases.
 
 Unlike frontend SDKs, the Node.js SDK is **stateless and sessionless**, making it ideal for:
 
 - Backend AI agents
 - Server-side wallet operations
 - Programmatic blockchain interactions
-- Custodial wallet services
+- Custodial wallet services, without key management and recovery worries.
 
 ## Key Features
 
@@ -62,7 +62,11 @@ The Node.js SDK **only supports custom authentication**. You must create a custo
 4. Click **Create connections**
 5. Configure your auth connection with your custom JWT details
 
-> You can refer to the [Custom JWT Setup](/embedded-wallets/authentication/custom-connections/custom-jwt/) guide to learn more.
+:::info
+
+You can refer to the [Custom JWT Setup](/embedded-wallets/authentication/custom-connections/custom-jwt/) guide to learn more.
+
+:::
 
 ### 2. SDK Configuration
 
@@ -72,7 +76,6 @@ Create a Web3Auth instance with your client ID, web3auth network name, and chain
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID', // Get your Client ID from Web3Auth Dashboard
   web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
-  defaultChainId: '0x1', // or '0x89' for Polygon
 })
 ```
 
@@ -86,14 +89,13 @@ Initialize the Web3Auth instance during your application startup:
 await web3auth.init()
 ```
 
-### 6. Authenticate Users
+### 4. Authenticate Users
 
 Use the connect method with your custom authentication parameters:
 
 ```javascript
-const provider = await web3auth.connect({
-  verifier: 'YOUR_VERIFIER_NAME', // Your custom verifier name
-  verifierId: 'USER_VERIFIER_ID', // User's unique identifier
+const result = await web3auth.connect({
+  authConnectionId: 'YOUR_AUTH_CONNECTION_ID', // Your custom authentication connection name
   idToken: 'USER_ID_TOKEN', // JWT token from your auth system
 })
 ```
@@ -126,6 +128,8 @@ await web3auth.init()
 <TabItem value="advanced-config">
 
 ```javascript
+const { Web3Auth } = require('@web3auth/node-sdk')
+
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
@@ -153,23 +157,16 @@ await web3auth.init()
 
 <TabItem value="table">
 
-#### Web3Auth Configuration
-
-| Parameter         | Type     | Default  | Description                                                      |
-| ----------------- | -------- | -------- | ---------------------------------------------------------------- |
-| `clientId`        | `string` | Required | Your Web3Auth client ID                                          |
-| `web3AuthNetwork` | `string` | Required | Network: 'sapphire_mainnet' or 'sapphire_devnet'                 |
-| `defaultChainId`  | `string` | Optional | Chain ID to use for the default chain (e.g., '0x1' for Ethereum) |
-
-#### Advanced Configuration Parameters
-
-| Parameter         | Type      | Description |
-| ----------------- | --------- | ----------- | ------------------------------------------------------------------- |
-| `chains`          | `object`  | Optional    | Chains to use for the authentication. It takes `Chains` as a value. |
-| `enableLogging`   | `boolean` | Optional    | Setting to true will enable logs. Default is false.                 |
-| `usePnPKey`       | `boolean` | Optional    | Setting to true will use the PnP key. Default is false.             |
-| `useDKG`          | `boolean` | Optional    | Setting to true will use the DKG. Default is false.                 |
-| `checkCommitment` | `boolean` | Optional    | Setting to true will check the commitment. Default is true.         |
+| Parameter         | Type      | Default  | Description                                                                                                                  |
+| ----------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`        | `string`  | Required | Your Web3Auth client ID                                                                                                      |
+| `web3AuthNetwork` | `string`  | Required | Network: 'sapphire_mainnet' or 'sapphire_devnet'                                                                             |
+| `defaultChainId`  | `string`  | Optional | Chain ID to use for the default chain (e.g., '0x1' for Ethereum). If not provided, the first chain in the list will be used. |
+| `chains`          | `object`  | Optional | Chains to use for the authentication. It takes `Chains` as a value.                                                          |
+| `enableLogging`   | `boolean` | Optional | Setting to true will enable logs. Default is false.                                                                          |
+| `usePnPKey`       | `boolean` | Optional | Setting to true will use the PnP key. Default is false.                                                                      |
+| `useDKG`          | `boolean` | Optional | Setting to true will use the DKG. Default is false.                                                                          |
+| `checkCommitment` | `boolean` | Optional | Setting to true will check the commitment. Default is true.                                                                  |
 
 </TabItem>
 
@@ -235,292 +232,51 @@ export interface Web3AuthOptions {
 
 </Tabs>
 
-## Best Practices
-
-### Environment Variables
-
-Store sensitive configuration in environment variables:
-
-```bash
-# .env file
-WEB3AUTH_CLIENT_ID=your_client_id_here
-WEB3AUTH_NETWORK=sapphire_mainnet
-SESSION_TIMEOUT=3600
-ENABLE_LOGGING=false
-```
-
-### Configuration Validation
+## Usage
 
 ```javascript
-function validateConfig(config) {
-  if (!config.clientId) {
-    throw new Error('Client ID is required')
-  }
-
-  if (!['sapphire_mainnet', 'sapphire_devnet'].includes(config.web3AuthNetwork)) {
-    throw new Error('Invalid Web3Auth network')
-  }
-
-  if (config.sessionTime < 300) {
-    throw new Error('Session time must be at least 5 minutes')
-  }
-
-  return config
-}
-
-const config = validateConfig({
-  clientId: process.env.WEB3AUTH_CLIENT_ID,
-  web3AuthNetwork: process.env.WEB3AUTH_NETWORK,
-  sessionTime: parseInt(process.env.SESSION_TIMEOUT),
-})
-```
-
-### Dynamic Configuration Manager
-
-```javascript
-class Web3AuthConfigManager {
-  constructor() {
-    this.config = this.loadConfig()
-  }
-
-  loadConfig() {
-    const baseConfig = {
-      clientId: process.env.WEB3AUTH_CLIENT_ID,
-      web3AuthNetwork: process.env.WEB3AUTH_NETWORK || 'sapphire_devnet',
-      usePnPKey: false,
-    }
-
-    // Environment-specific overrides
-    switch (process.env.NODE_ENV) {
-      case 'production':
-        return {
-          ...baseConfig,
-          enableLogging: false,
-          sessionTime: 86400,
-        }
-      case 'staging':
-        return {
-          ...baseConfig,
-          enableLogging: true,
-          sessionTime: 3600,
-        }
-      default:
-        return {
-          ...baseConfig,
-          enableLogging: true,
-          sessionTime: 1800,
-        }
-    }
-  }
-
-  getConfig() {
-    return this.config
-  }
-
-  updateConfig(updates) {
-    this.config = { ...this.config, ...updates }
-  }
-}
-
-// Usage
-const configManager = new Web3AuthConfigManager()
-const web3auth = new Web3Auth(configManager.getConfig())
-```
-
-## Blockchain Integration
-
-Web3Auth Node SDK supports multiple blockchain networks through different integration methods:
-
-### EVM Chains (Ethereum, Polygon, BSC, etc.)
-
-Use the provider with ethers.js or convert to viem:
-
-```javascript
-// With ethers.js
-const { ethers } = require('ethers')
-const ethProvider = new ethers.providers.Web3Provider(provider)
-const signer = ethProvider.getSigner()
-
-// Get private key directly
-const privateKey = await provider.request({ method: 'eth_private_key' })
-```
-
-### Solana Integration
-
-Access Solana wallet functionality:
-
-```javascript
-// Get Solana account info
-const solanaWallet = await provider.request({ method: 'solanaWallet' })
-const publicKey = solanaWallet.publicKey
-
-// Get private key for Solana
-const privateKey = await provider.request({ method: 'solanaPrivateKey' })
-```
-
-### Other Blockchains
-
-Access the raw private key for any blockchain integration:
-
-```javascript
-// Get the raw private key
-const privateKey = await provider.request({ method: 'private_key' })
-
-// Use with your preferred blockchain library
-// Example: Bitcoin, Cosmos, etc.
-```
-
-## Key Features
-
-### Custom Authentication Only
-
-The Node.js SDK **only supports custom authentication**. You must:
-
-1. Set up a custom verifier in the Web3Auth Dashboard
-2. Configure your authentication flow
-3. Generate valid ID tokens for users
-4. Use the verifier name and ID token in the connect method
-
-### Single Key Share
-
-The SDK operates with a single key share, making it:
-
-- **Custodial**: You have direct access to user private keys
-- **Stateless**: No session state management required
-- **Backend-optimized**: Perfect for server-side operations
-
-### Private Key Export
-
-Private key export can be controlled through the Web3Auth Dashboard:
-
-- Enable/disable private key export
-- Control which methods return private keys
-- Set up additional security measures
-
-## Security Considerations
-
-### Client ID Protection
-
-- Store client ID in environment variables
-- Use different client IDs for different environments
-- Rotate client IDs regularly in production
-
-### Network Configuration
-
-- Use `sapphire_mainnet` for production
-- Use `sapphire_devnet` for development and testing
-- Never use mainnet for testing
-
-### Session Management
-
-- Set appropriate session timeouts
-- Implement session cleanup
-- Monitor for unusual session patterns
-
-## Next Steps
-
-- **[Usage Guide](./usage)**: Learn about stateless authentication and blockchain operations
-- **[Connect Method](./usage/connect)**: Detailed authentication implementation
-- **[Private Key Access](./usage/private-key)**: Extract keys for blockchain operations
-- **[EVM Integration](./usage/evm-integration)**: Ethereum and EVM-compatible chains
-- **[Examples](./examples)**: Complete implementation examples and production patterns
-
-<SdkTroubleshootingIntro />
-
-
-## Usage Overview
-
-The MetaMask Embedded Wallets Node.js SDK provides stateless authentication and blockchain operations for backend applications. Unlike frontend SDKs, this is designed for **per-request authentication** without persistent sessions.
-
-## Core Methods
-
-### Authentication & Connection
-
-- **[connect](./connect)** - Authenticate users and establish provider connection (stateless)
-
-### Blockchain Operations
-
-- **[Private Key Access](./private-key)** - Extract private keys for blockchain operations
-- **[EVM Integration](./evm-integration)** - Work with Ethereum and EVM-compatible chains
-
-## Important Notes
-
-### Stateless Design
-
-The Node.js SDK is **stateless** and **sessionless** by design:
-
-- No persistent user sessions
-- No `getUserInfo()` or `logout()` methods
-- Each request requires re-authentication
-- Perfect for backend APIs and microservices
-
-## Common Usage Pattern
-
-The typical flow when using the Node.js SDK:
-
-```javascript
+// focus-start
 const { Web3Auth } = require('@web3auth/node-sdk')
-const { EthereumPrivateKeyProvider } = require('@web3auth/ethereum-provider')
+// focus-end
 
-// 1. Configure provider (once, during app startup)
-const privateKeyProvider = new EthereumPrivateKeyProvider({
-  config: {
-    chainConfig: {
-      chainNamespace: 'eip155',
-      chainId: '0x1',
-      rpcTarget: 'https://rpc.ankr.com/eth',
-    },
-  },
-})
+// Dashboard Registration
+const clientId =
+  'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
 
-// 2. Initialize Web3Auth (once, during app startup)
+// Auth Connection
+const authConnectionId = 'w3a-node-demo'
+
+// focus-start
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_CLIENT_ID',
+  clientId,
   web3AuthNetwork: 'sapphire_mainnet',
-  privateKeyProvider,
 })
 
 await web3auth.init()
+// focus-end
 
-// 3. Connect user (per request)
-const provider = await web3auth.connect({
-  verifier: 'YOUR_VERIFIER',
-  verifierId: 'user@example.com',
-  idToken: 'JWT_TOKEN',
+const privateKey = await fs.readFile('privateKey.pem', 'utf8')
+
+var idToken = jwt.sign(
+  {
+    sub: '9fcd68c4-af50-4dd7-adf6-abd12a13cb32',
+    name: 'Web3Auth DevRel Team',
+    email: 'devrel@web3auth.io',
+    aud: 'urn:api-web3auth-io', // -> to be used in Custom Authentication as JWT Field
+    iss: 'https://web3auth.io', // -> to be used in Custom Authentication as JWT Field
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + 60 * 60,
+  },
+  privateKey,
+  { algorithm: 'RS256', keyid: '2ma4enu1kdvw5bo9xsfpi3gcjzrt6q78yl0h' }
+)
+
+console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
+
+// focus-start
+const result = await web3auth.connect({
+  authConnectionId,
+  idToken,
 })
-
-// 4. Use provider for blockchain operations
-const privateKey = await provider.request({ method: 'eth_private_key' })
-
-// 5. Perform blockchain operations with preferred library
+// focus-end
 ```
-
-## Error Handling
-
-Always implement proper error handling when using the SDK:
-
-```javascript
-try {
-  const provider = await web3auth.connect({
-    verifier: 'YOUR_VERIFIER',
-    verifierId: 'user@example.com',
-    idToken: 'JWT_TOKEN',
-  })
-
-  // Success - proceed with blockchain operations
-  const privateKey = await provider.request({ method: 'eth_private_key' })
-} catch (error) {
-  console.error('Authentication failed:', error.message)
-  // Handle authentication errors
-}
-```
-
-## Best Practices
-
-1. **Initialize once**: Call `init()` during application startup, not per request
-2. **Stateless requests**: Each user authentication is independent
-3. **Handle errors**: Always wrap SDK calls in try-catch blocks
-4. **Secure storage**: Protect private keys and never log them
-5. **Rate limiting**: Implement rate limiting for authentication endpoints
-6. **Token validation**: Validate JWT tokens before passing to connect method
-7. **Provider reuse**: Create providers once, reuse for multiple users
