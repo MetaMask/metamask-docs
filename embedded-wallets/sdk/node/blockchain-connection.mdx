@@ -1,0 +1,139 @@
+---
+title: Blockchain Connection
+description: 'Integrate with Blockchain Networks'
+---
+
+Web3Auth Node SDK supports multiple blockchain networks through different integration methods. On a successful connection, it returns a `result` object containing the provider/ signer for blockchain operations.
+
+By default you get the standard Web3Auth provider, with the ability to get the private key, if enabled from the dashboard. You additionally get the signer for EVM and Solana chains, to be able to do transactions without the need to use the private key provider directly.
+
+### Object Structure
+
+```typescript
+import type { TransactionSigner } from '@solana/signers'
+import type { Wallet } from 'ethers'
+import type { CHAIN_NAMESPACES, IBaseProvider } from '@web3auth/no-modal'
+export type PrivateKeyProvider = IBaseProvider<string>
+
+export type WalletResult =
+  | {
+      chainNamespace: typeof CHAIN_NAMESPACES.SOLANA
+      provider: PrivateKeyProvider
+      signer: TransactionSigner
+    }
+  | {
+      chainNamespace: typeof CHAIN_NAMESPACES.EIP155
+      provider: PrivateKeyProvider
+      signer: Wallet
+    }
+  | {
+      chainNamespace: typeof CHAIN_NAMESPACES.OTHER
+      provider: PrivateKeyProvider
+      signer: null
+    }
+```
+
+### EVM Chains (Ethereum, Polygon, BSC, etc.)
+
+Use the provider with ethers.js or convert to viem:
+
+```javascript
+// focus-next-line
+const { ethers } = require('ethers')
+
+// Get Ethereum Accounts
+const getAccounts = async signer => {
+  try {
+    // focus-next-line
+    const address = await signer.getAddress()
+    console.log('\x1b[33m%s\x1b[0m', 'Accounts:', address)
+  } catch (error) {
+    console.error('\x1b[33m%s\x1b[0m', 'Error fetching accounts:', error)
+  }
+}
+
+// Get Ethereum Balance
+const getBalance = async signer => {
+  try {
+    // focus-start
+    const address = await signer.getAddress()
+    const balance = ethers.formatEther(
+      await signer.provider.getBalance(address) // Balance is in wei
+    )
+    // focus-end
+    console.log('\x1b[33m%s\x1b[0m', 'Balance:', balance, 'ETH')
+  } catch (error) {
+    console.error('\x1b[33m%s\x1b[0m', 'Error fetching balance:', error)
+  }
+}
+
+// Sign Ethereum Message
+const signMessage = async (signer, message) => {
+  try {
+    // focus-next-line
+    const signature = await signer.signMessage(message)
+    console.log('\x1b[33m%s\x1b[0m', 'Signed Message:', signature)
+  } catch (error) {
+    console.error('\x1b[33m%s\x1b[0m', 'Error signing message:', error)
+  }
+}
+
+await getAccounts(result.signer) // Get Ethereum Accounts
+await getBalance(result.signer) // Get Ethereum Balance
+await signMessage(result.signer, 'Hello Web3Auth!') // Sign a Message
+```
+
+### Solana Integration
+
+Access Solana wallet functionality:
+
+```javascript
+const { LAMPORTS_PER_SOL, Connection, PublicKey } = require('@solana/web3.js')
+const { createSignableMessage } = require('@solana/signers')
+
+// Get Solana Accounts
+const getAccounts = async signer => {
+  try {
+    // focus-next-line
+    const publicKey = signer.address
+    console.log('\x1b[33m%s\x1b[0m', 'Public Key:', publicKey)
+  } catch (error) {
+    console.error('\x1b[33m%s\x1b[0m', 'Error fetching accounts:', error)
+  }
+}
+
+// Get Solana Balance
+const getBalance = async signer => {
+  try {
+    // focus-start
+    const publicKey = new PublicKey(signer.address)
+    const connection = new Connection('https://api.devnet.solana.com')
+    const balance = (await connection.getBalance(publicKey)) / LAMPORTS_PER_SOL
+    // focus-end
+    console.log('\x1b[33m%s\x1b[0m', 'Balance:', balance, 'SOL')
+  } catch (error) {
+    console.error('\x1b[33m%s\x1b[0m', 'Error fetching balance:', error)
+  }
+}
+
+// Sign Solana Message
+const signMessage = async (signer, message) => {
+  try {
+    // focus-start
+    const messageBytes = new TextEncoder().encode(message)
+
+    // Create a SignableMessage object from Uint8Array
+    const signableMessage = createSignableMessage(messageBytes)
+
+    const [signature] = await signer.signMessages([signableMessage])
+    // focus-end
+    console.log('\x1b[33m%s\x1b[0m', 'Signed Message:', signature)
+  } catch (error) {
+    console.error('\x1b[33m%s\x1b[0m', 'Error signing message:', error)
+  }
+}
+
+await getAccounts(result.signer) // Get Solana Accounts
+await getBalance(result.signer) // Get Solana Balance
+await signMessage(result.signer, 'Hello Web3Auth!') // Sign a Message
+```
