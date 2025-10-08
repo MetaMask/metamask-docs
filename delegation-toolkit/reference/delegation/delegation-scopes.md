@@ -179,15 +179,15 @@ const delegation = createDelegation({
     periodAmount: 1000000000000000000n,
     periodDuration: 86400,
     startDate: 1743763600,
-    // allowedCallData can only be used WITHOUT exactCallData.
-    allowedCallData: [
+    // allowedCalldata can only be used WITHOUT exactCalldata.
+    allowedCalldata: [
       {
         startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
         value: "0x1234567890abcdef", // The expected calldata.
       }
     ],
-    // exactCallData can only be used WITHOUT allowedCallData.
-    exactCallData: {
+    // exactCalldata can only be used WITHOUT allowedCalldata.
+    exactCalldata: {
       calldata: "0x1234567890abcdef",
     },
   },
@@ -230,15 +230,15 @@ const delegation = createDelegation({
     initialAmount: 1000000n,
     maxAmount: 10000000n,
     startTime: 1703980800,
-    // allowedCallData can only be used WITHOUT exactCallData.
-    allowedCallData: [
+    // allowedCalldata can only be used WITHOUT exactCalldata.
+    allowedCalldata: [
       {
         startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
         value: "0x1234567890abcdef", // The expected calldata.
       }
     ],
-    // exactCallData can only be used WITHOUT allowedCallData.
-    exactCallData: {
+    // exactCalldata can only be used WITHOUT allowedCalldata.
+    exactCalldata: {
       calldata: "0x1234567890abcdef",
     },
   },
@@ -275,15 +275,15 @@ const delegation = createDelegation({
     type: "nativeTokenTransferAmount",
     // 0.001 ETH in wei format.
     maxAmount: 1000000000000000n,
-    // allowedCallData can only be used WITHOUT exactCallData.
-    allowedCallData: [
+    // allowedCalldata can only be used WITHOUT exactCalldata.
+    allowedCalldata: [
       {
         startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
         value: "0x1234567890abcdef", // The expected calldata.
       }
     ],
-    // exactCallData can only be used WITHOUT allowedCallData.
-    exactCallData: {
+    // exactCalldata can only be used WITHOUT allowedCalldata.
+    exactCalldata: {
       calldata: "0x1234567890abcdef",
     },
   },
@@ -322,15 +322,15 @@ const delegation = createDelegation({
     type: "functionCall",
     targets: ["0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"], // USDC address on Sepolia.
     selectors: ["approve(address, uint256)"]
-    // allowedCallData can only be used WITHOUT exactCallData.
-    allowedCallData: [
+    // allowedCalldata can only be used WITHOUT exactCalldata.
+    allowedCalldata: [
       {
         startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
         value: "0x1234567890abcdef", // The expected calldata.
       }
     ],
-    // exactCallData can only be used WITHOUT allowedCallData.
-    exactCallData: {
+    // exactCalldata can only be used WITHOUT allowedCalldata.
+    exactCalldata: {
       calldata: "0x1234567890abcdef",
     },
   },

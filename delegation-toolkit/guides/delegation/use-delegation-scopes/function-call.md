@@ -18,7 +18,7 @@ For example, Alice delegates to Bob the ability to call the `approve` function o
 ## Function call scope
 
 This scope requires `targets`, which specifies the permitted contract addresses, and `selectors`, which specifies the allowed methods.
-You can optionally specify `allowedCallData` or `exactCallData`.
+You can optionally specify `allowedCalldata` or `exactCalldata`.
 
 Internally, this scope uses the [`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets) and [`allowedMethods`](../../../reference/delegation/caveats.md#allowedmethods) caveat enforcers, and 
 optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
