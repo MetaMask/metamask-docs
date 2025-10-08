@@ -9,8 +9,8 @@ Infura supports [ERC-4337](https://docs.erc4337.io/) bundler JSON-RPC methods th
 account abstraction (AA) experiences like gas sponsorship (paymasters), ERC-20 gas payment, session keys, or
 batched actions using smart accounts.
 
-Use the bundler JSON-RPC methods if your app or wallet uses smart accounts, if you use an externally
-owned account (EOA) only, use standard Ethereum JSON-RPC methods.
+If your dapp or wallet uses smart accounts, use the bundler JSON-RPC methods. If you use externally
+owned accounts (EOAs) only, use standard Ethereum JSON-RPC methods.
 
 :::info
 AA moves validation and fee-payment logic into smart contracts. Instead of sending raw transactions
