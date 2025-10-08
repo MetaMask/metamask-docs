@@ -1,22 +1,23 @@
 ---
-description: Wallet Client API methods reference.
-sidebar_label: Wallet Client
+description: Wallet Client actions reference.
+sidebar_label: Wallet Client actions
 toc_max_heading_level: 2
+keywords: [ERC-7715, Viem, wallet client, actions, reference]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Wallet Client API reference
+# Wallet Client actions reference
 
-The following API methods are related to the [Viem Wallet Client](https://viem.sh/docs/clients/wallet).
+The following actions are related to the [Viem Wallet Client](https://viem.sh/docs/clients/wallet) used to [execute on a MetaMask user's behalf](../../guides/erc7715/execute-on-metamask-users-behalf.md).
 
-## `grantPermissions`
+## `requestExecutionPermissions`
 
 Requests permissions from the MetaMask extension account according to the [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) specifications.
 
 :::info
-To use `grantPermissions`, the Viem Wallet Client must be extended with `erc7715ProviderActions`.
+To use `requestExecutionPermissions`, the Viem Wallet Client must be extended with `erc7715ProviderActions`.
 :::
 
 ### Parameters
@@ -26,9 +27,9 @@ To use `grantPermissions`, the Viem Wallet Client must be extended with `erc7715
 | `chainId` | `number` | Yes | The chain ID on which the permission is being requested. |
 | `address` | `Address` | No | Address of the wallet to which the permission is being requested. |
 | `expiry` | `number` | Yes | The timestamp (in seconds) by which the permission must expire. |
-| `permission` | `Permission` | Yes | The permission to grant to the user. |
-| `signer` | `Signer` | Yes | The account to which the permission will be assigned. |
-| `isAdjustmentAllowed` | `boolean` | No | Whether the user is allowed to modify the requested permission. The default is `true`. |
+| `permission` | `SupportedPermissionParams` | Yes | The permission to be requested. The toolkit supports multiple [ERC-7715 permissions](permissions.md). |
+| `signer` | `SignerParam` | Yes | The account to which the permission will be assigned. |
+| `isAdjustmentAllowed` | `boolean` | Yes | Defines whether the user is allowed to modify the requested permission. |
 
 ### Example
 
@@ -37,39 +38,36 @@ To use `grantPermissions`, the Viem Wallet Client must be extended with `erc7715
 
 ```ts
 import { sepolia as chain } from "viem/chains";
-import { walletClient } from "./config.ts";
+import { parseUnits } from "viem";
+import { walletClient } from "./client.ts";
 
-const expiry = Math.floor(Date.now() / 1000 + 604_800); // 1 week from now.
-const currentTime = Math.floor(Date.now() / 1000); // now
+const currentTime = Math.floor(Date.now() / 1000);
+const expiry = currentTime + 604800;
 
-// Address of the wallet that will manage the session. It can 
-// be either a smart account or an externally owned account (EOA)
-const sessionAccount = "0x1431..";
-
-const grantedPermissions = await walletClient.grantPermissions([{
+const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
   signer: {
     type: "account",
     data: {
-      address: sessionAccount,
+      address: "0x0955fFD7b83e5493a8c1FD5dC87e2CF37Eacc44a",
     },
   },
   permission: {
-    type: "native-token-stream",
+    type: "erc20-token-periodic",
     data: {
-      initialAmount: 1n, // 1 wei
-      amountPerSecond: 1n, // 1 wei per second
-      maxAmount: 10n, // 10 wei
-      startTime: currentTime,
-      justification: "Payment for a week long subscription",
+      tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+      periodAmount: parseUnits("10", 6),
+      periodDuration: 86400,
+      justification?: "Permission to transfer 1 USDC every day",
     },
   },
+  isAdjustmentAllowed: true,
 }]);
 ```
 
 </TabItem>
-<TabItem value ="config.ts">
+<TabItem value ="client.ts">
 
 ```ts
 import { createWalletClient, custom } from "viem";
@@ -99,8 +97,8 @@ This function has the same parameters, and it also requires the following parame
 
 | Name | Type | Required | Description                                                                                                                                                                                               |
 | ---- | ---- | -------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `delegationManager` | `0x${string}` | Yes | The address of the Delegation Manager.                                                                                                                                                                    |
-| `permissionsContext` | `0x${string}` | Yes | Encoded calldata for redeeming delegations. If you're not using ERC-7715, you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
+| `delegationManager` | `Address` | Yes | The address of the Delegation Manager.                                                                                                                                                                    |
+| `permissionsContext` | `Hex` | Yes | Encoded calldata for redeeming delegations. If you're not using ERC-7715, you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
 
 ### Example
 
@@ -108,7 +106,7 @@ This function has the same parameters, and it also requires the following parame
 <TabItem value ="example.ts">
 
 ```ts
-import { walletClient, publicClient } from "./config.ts";
+import { walletClient, publicClient } from "./client.ts";
 
 // These properties must be extracted from the permission response. See
 // `grantPermissions` action to learn how to request permissions.
@@ -141,7 +139,7 @@ const hash = walletClient.sendTransactionWithDelegation({
 ```
 
 </TabItem>
-<TabItem value ="config.ts">
+<TabItem value ="client.ts">
 
 ```ts
 import { http, createPublicClient, createWalletClient } from "viem";
