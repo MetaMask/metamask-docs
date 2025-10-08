@@ -32,19 +32,11 @@ Visit the [Auth Provider Setup](/embedded-wallets/authentication) page to learn 
 
 ## Configuration
 
-:::warning
+To use custom authentication (Using Social providers or Login providers like Auth0, AWS Cognito, Firebase etc. or even your own custom JWT login) you can add the configuration using `authConnectionConfig` parameter during the initialization.
 
-_**"Auth Connection"**_ is called _**"Verifier"**_ in the Android SDK. It is the older terminology which we will be updating in the upcoming releases.
+The `authConnectionConfig` parameter is a list of `AuthConnectionConfig` instances, each defining a specific authentication connection.
 
-Consequentially, you will see the terms _**"Verifier ID"**_ and _**"Aggregate Verifier"**_ used in the codebase and documentation referring to _**"Auth Connection ID"**_ and _**"Grouped Auth Connection"**_ respectively.
-
-:::
-
-To use custom authentication (Using Social providers or Login providers like Auth0, AWS Cognito, Firebase etc. or even your own custom JWT login) you can add the configuration using `loginConfig` parameter during the initialization.
-
-The `loginConfig` parameter is a key value map. The key should be one of the `Web3AuthProvider` in its string form, and the value should be a `LoginConfigItem` instance.
-
-After creating the verifier, you can use the following parameters in the `LoginConfigItem`.
+After creating the auth connection from the [Web3Auth Dashboard](https://dashboard.web3auth.io), you can use the following parameters in the `AuthConnectionConfig`.
 
 <Tabs
   defaultValue="table"
@@ -56,34 +48,34 @@ After creating the verifier, you can use the following parameters in the `LoginC
 
 <TabItem value="table">
 
-| Parameter                | Description                                                                                                                                                                                                                                                                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `verifier`               | The name of the verifier that you have registered on the Web3Auth Dashboard. It's a mandatory field, and accepts `String` as a value.                                                                                                                                                                                             |
-| `typeOfLogin`            | Type of login of this verifier, this value will affect the login flow that is adapted. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should be providing your own JWT token, no sign-in flow will be presented. It's a mandatory field, and accepts `TypeOfLogin` as a value. |
-| `clientId`               | Client id provided by your login provider used for custom verifier. e.g. Google's Client ID or Web3Auth's client Id if using 'jwt' as TypeOfLogin. It's a mandatory field, and accepts `String` as a value.                                                                                                                       |
-| `name?`                  | Display name for the verifier. If null, the default name is used. It accepts `String` as a value.                                                                                                                                                                                                                                 |
-| `description?`           | Description for the button. If provided, it renders as a full length button. else, icon button. It accepts `String` as a value.                                                                                                                                                                                                   |
-| `verifierSubIdentifier?` | The field in JWT token which maps to verifier id. Please make sure you selected correct JWT verifier id in the developer dashboard. It accepts `String` as a value.                                                                                                                                                               |
-| `logoHover?`             | Logo to be shown on mouse hover. It accepts `String` as a value.                                                                                                                                                                                                                                                                  |
-| `logoLight?`             | Light logo for dark background. It accepts `String` as a value.                                                                                                                                                                                                                                                                   |
-| `logoDark?`              | Dark logo for light background. It accepts `String` as a value.                                                                                                                                                                                                                                                                   |
-| `mainOption?`            | Show login button on the main list. It accepts `Boolean` as a value. Default value is false.                                                                                                                                                                                                                                      |
-| `showOnModal?`           | Whether to show the login button on modal or not. Default value is true.                                                                                                                                                                                                                                                          |
-| `showOnDesktop?`         | Whether to show the login button on desktop. Default value is true.                                                                                                                                                                                                                                                               |
-| `showOnMobile?`          | Whether to show the login button on mobile. Default value is true.                                                                                                                                                                                                                                                                |
+| Parameter                  | Description                                                                                                                                                                                                                                                                                                                                    |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `authConnectionId`         | The name of the auth connection that you have registered on the Web3Auth Dashboard. It's a mandatory field, and accepts `String` as a value.                                                                                                                                                                                                   |
+| `authConnection`           | Type of login of this auth connection, this value will affect the login flow that is adapted. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `custom`, you should be providing your own JWT token, no sign-in flow will be presented. It's a mandatory field, and accepts `AuthConnection` as a value. |
+| `clientId`                 | Client id provided by your login provider used for custom auth connection. e.g. Google's Client ID or Web3Auth's client Id if using 'custom' as AuthConnection. It's a mandatory field, and accepts `String` as a value.                                                                                                                       |
+| `name?`                    | Display name for the auth connection. If null, the default name is used. It accepts `String` as a value.                                                                                                                                                                                                                                       |
+| `description?`             | Description for the button. If provided, it renders as a full length button. else, icon button. It accepts `String` as a value.                                                                                                                                                                                                                |
+| `groupedAuthConnectionId?` | The field in JWT token which maps to grouped auth connection id. Please make sure you selected correct JWT auth connection id in the developer dashboard. It accepts `String` as a value.                                                                                                                                                      |
+| `logoHover?`               | Logo to be shown on mouse hover. It accepts `String` as a value.                                                                                                                                                                                                                                                                               |
+| `logoLight?`               | Light logo for dark background. It accepts `String` as a value.                                                                                                                                                                                                                                                                                |
+| `logoDark?`                | Dark logo for light background. It accepts `String` as a value.                                                                                                                                                                                                                                                                                |
+| `mainOption?`              | Show login button on the main list. It accepts `Boolean` as a value. Default value is false.                                                                                                                                                                                                                                                   |
+| `showOnModal?`             | Whether to show the login button on modal or not. Default value is true.                                                                                                                                                                                                                                                                       |
+| `showOnDesktop?`           | Whether to show the login button on desktop. Default value is true.                                                                                                                                                                                                                                                                            |
+| `showOnMobile?`            | Whether to show the login button on mobile. Default value is true.                                                                                                                                                                                                                                                                             |
 
 </TabItem>
 
 <TabItem value="interface">
 
 ```kotlin
-data class LoginConfigItem(
-    var verifier: String,
-    private var typeOfLogin: TypeOfLogin,
+data class AuthConnectionConfig(
+    var authConnectionId: String,
+    private var authConnection: AuthConnection,
     private var name: String? = null,
     private var description: String? = null,
     private var clientId: String,
-    private var verifierSubIdentifier: String? = null,
+    private var groupedAuthConnectionId: String? = null,
     private var logoHover: String? = null,
     private var logoLight: String? = null,
     private var logoDark: String? = null,
@@ -93,7 +85,7 @@ data class LoginConfigItem(
     private var showOnMobile: Boolean? = true,
 )
 
-enum class TypeOfLogin {
+enum class AuthConnection {
     @SerializedName("google")
     GOOGLE,
     @SerializedName("facebook")
@@ -122,10 +114,12 @@ enum class TypeOfLogin {
     WECHAT,
     @SerializedName("email_passwordless")
     EMAIL_PASSWORDLESS,
-    @SerializedName("email_password")
-    EMAIL_PASSWORD,
-    @SerializedName("jwt")
-    JWT
+    @SerializedName("custom")
+    CUSTOM, // for jwt
+    @SerializedName("sms_passwordless")
+    SMS_PASSWORDLESS,
+    @SerializedName("farcaster")
+    FARCASTER
 }
 ```
 
@@ -149,17 +143,18 @@ enum class TypeOfLogin {
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
     // focus-start
-    loginConfig = hashMapOf("google" to LoginConfigItem(
-      verifier = "verifier-name", // Get it from Web3Auth dashboard
-      typeOfLogin = TypeOfLogin.GOOGLE,
+    authConnectionConfig = listOf(AuthConnectionConfig(
+      authConnectionId = "auth-connection-id", // Get it from Web3Auth dashboard
+      authConnection = AuthConnection.GOOGLE,
       clientId = getString(R.string.google_client_id) // Google's client id
     ))
     // focus-end
@@ -167,8 +162,8 @@ val web3Auth = Web3Auth(
 )
 
 // focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-    LoginParams(Provider.GOOGLE)
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+    LoginParams(AuthConnection.GOOGLE)
 )
 // focus-end
 ```
@@ -180,18 +175,19 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
     // focus-start
-    loginConfig = hashMapOf(
-      "facebook" to LoginConfigItem(
-        verifier = "verifier-name", // Get it from Web3Auth dashboard
-        typeOfLogin = TypeOfLogin.FACEBOOK,
+    authConnectionConfig = listOf(
+      AuthConnectionConfig(
+        authConnectionId = "auth-connection-id", // Get it from Web3Auth dashboard
+        authConnection = AuthConnection.FACEBOOK,
         clientId = getString(R.string.facebook_client_id) // Facebook's client id
       )
     )
@@ -200,8 +196,8 @@ val web3Auth = Web3Auth(
 )
 
 // focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-  LoginParams(Provider.Facebook)
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+  LoginParams(AuthConnection.FACEBOOK)
 )
 // focus-end
 
@@ -214,17 +210,18 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
     // focus-start
-    loginConfig = hashMapOf("jwt" to LoginConfigItem(
-      verifier = "verifier-name", // Get it from Web3Auth dashboard
-      typeOfLogin = TypeOfLogin.JWT,
+    authConnectionConfig = listOf(AuthConnectionConfig(
+      authConnectionId = "auth-connection-id", // Get it from Web3Auth dashboard
+      authConnection = AuthConnection.CUSTOM,
       clientId = getString (R.string.auth0_project_id) // Auth0's client id
     ))
     // focus-end
@@ -232,8 +229,8 @@ val web3Auth = Web3Auth(
 )
 
 // focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-    LoginParams(Provider.JWT)
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+    LoginParams(AuthConnection.CUSTOM)
 )
 // focus-end
 ```
@@ -245,18 +242,19 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
     // focus-start
-    loginConfig = hashMapOf(
-      "jwt" to LoginConfigItem(
-        verifier = "verifier-name", // Get it from Web3Auth dashboard
-        typeOfLogin = TypeOfLogin.JWT,
+    authConnectionConfig = listOf(
+      AuthConnectionConfig(
+        authConnectionId = "auth-connection-id", // Get it from Web3Auth dashboard
+        authConnection = AuthConnection.CUSTOM,
       )
     )
     // focus-end
@@ -264,8 +262,8 @@ val web3Auth = Web3Auth(
 )
 
 // focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-  LoginParams(Provider.JWT)
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
+  LoginParams(AuthConnection.CUSTOM)
 )
 // focus-end
 
@@ -290,29 +288,30 @@ Additional to the `LoginConfig` you can pass extra options to the `login` functi
 
 <TabItem value="table">
 
-| Parameter                    | Description                                                                                                                                                                                                                      |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `additionalParams?`          | Additional params in `HashMap` format for OAuth login, use id_token(JWT) to authenticate with web3auth.                                                                                                                          |
-| `domain?`                    | Your custom authentication domain in `String` format. For example, if you are using Auth0, it can be example.au.auth0.com.                                                                                                       |
-| `client_id?`                 | Client id in `String` format, provided by your login provider used for custom verifier.                                                                                                                                          |
-| `leeway?`                    | The value used to account for clock skew in JWT expirations. The value is in the seconds, and ideally should no more than 60 seconds or 120 seconds at max. It takes `String` as a value.                                        |
-| `verifierIdField?`           | The field in JWT token which maps to verifier id. Please make sure you selected correct JWT verifier id in the developer dashboard. It takes `String` as a value.                                                                |
-| `isVerifierIdCaseSensitive?` | Boolean to confirm Whether the verifier id field is case sensitive or not.                                                                                                                                                       |
-| `display?`                   | Allows developers the configure the display of UI. It takes `Display` as a value.                                                                                                                                                |
-| `prompt?`                    | Prompt shown to the user during authentication process. It takes `Prompt` as a value.                                                                                                                                            |
-| `max_age?`                   | Max time allowed without reauthentication. If the last time user authenticated is greater than this value, then user must reauthenticate. It takes `String` as a value.                                                          |
-| `ui_locales?`                | The space separated list of language tags, ordered by preference. For instance `fr-CA fr en`.                                                                                                                                    |
-| `id_token_hint?`             | It denotes the previously issued ID token. It takes `String` as a value.                                                                                                                                                         |
-| `id_token?`                  | JWT (ID Token) to be passed for login.                                                                                                                                                                                           |
-| `login_hint?`                | Used to specify the user's email address or phone number for Email/SMS Passwordless login flows. Takes a `String` value. For the SMS, the format should be: `+{country_code}-{phone_number}` (e.g. `+1-1234567890`)              |
-| `acr_values?`                | acc_values                                                                                                                                                                                                                       |
-| `scope?`                     | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. It takes `String` as a value.                                                            |
-| `audience?`                  | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It takes `String` as a value.                                                                                          |
-| `connection?`                | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. It takes `String` as a value.                                                           |
-| `state?`                     | state                                                                                                                                                                                                                            |
-| `response_type?`             | Defines which grant to execute for the authorization server. It takes `String` as a value.                                                                                                                                       |
-| `nonce?`                     | nonce                                                                                                                                                                                                                            |
-| `redirect_uri?`              | It can be used to specify the default url, where your custom jwt verifier can redirect your browser to with the result. If you are using Auth0, it must be whitelisted in the Allowed Callback URLs in your Auth0's application. |
+| Parameter                | Description                                                                                                                                                                                                                      |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `additionalParams?`      | Additional params in `HashMap` format for OAuth login, use id_token(JWT) to authenticate with web3auth.                                                                                                                          |
+| `domain?`                | Your custom authentication domain in `String` format. For example, if you are using Auth0, it can be example.au.auth0.com.                                                                                                       |
+| `client_id?`             | Client id in `String` format, provided by your login provider used for custom verifier.                                                                                                                                          |
+| `leeway?`                | The value used to account for clock skew in JWT expirations. The value is in the seconds, and ideally should no more than 60 seconds or 120 seconds at max. It takes `String` as a value.                                        |
+| `userIdField?`           | The field in JWT token which maps to user id. Please make sure you selected correct JWT user id in the developer dashboard. It takes `String` as a value.                                                                        |
+| `isUserIdCaseSensitive?` | Boolean to confirm Whether the user id field is case sensitive or not.                                                                                                                                                           |
+| `display?`               | Allows developers the configure the display of UI. It takes `Display` as a value.                                                                                                                                                |
+| `prompt?`                | Prompt shown to the user during authentication process. It takes `Prompt` as a value.                                                                                                                                            |
+| `max_age?`               | Max time allowed without reauthentication. If the last time user authenticated is greater than this value, then user must reauthenticate. It takes `String` as a value.                                                          |
+| `ui_locales?`            | The space separated list of language tags, ordered by preference. For instance `fr-CA fr en`.                                                                                                                                    |
+| `id_token_hint?`         | It denotes the previously issued ID token. It takes `String` as a value.                                                                                                                                                         |
+| `id_token?`              | JWT (ID Token) to be passed for login.                                                                                                                                                                                           |
+| `access_token?`          | Access token for OAuth flows. It takes `String` as a value.                                                                                                                                                                      |
+| `flow_type?`             | Specifies the email passwordless flow type. It takes `EmailFlowType` as a value (`CODE` or `LINK`).                                                                                                                              |
+| `acr_values?`            | acc_values                                                                                                                                                                                                                       |
+| `scope?`                 | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. It takes `String` as a value.                                                            |
+| `audience?`              | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It takes `String` as a value.                                                                                          |
+| `connection?`            | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. It takes `String` as a value.                                                           |
+| `state?`                 | state                                                                                                                                                                                                                            |
+| `response_type?`         | Defines which grant to execute for the authorization server. It takes `String` as a value.                                                                                                                                       |
+| `nonce?`                 | nonce                                                                                                                                                                                                                            |
+| `redirect_uri?`          | It can be used to specify the default url, where your custom jwt verifier can redirect your browser to with the result. If you are using Auth0, it must be whitelisted in the Allowed Callback URLs in your Auth0's application. |
 
 </TabItem>
 
@@ -324,15 +323,16 @@ data class ExtraLoginOptions(
   private var domain : String? = null,
   private var client_id : String? = null,
   private var leeway : String? = null,
-  private var verifierIdField : String? =null,
-  private var isVerifierIdCaseSensitive : Boolean? = null,
+  private var userIdField : String? = null,
+  private var isUserIdCaseSensitive : Boolean? = null,
   private var display : Display? = null,
   private var prompt : Prompt? = null,
   private var max_age : String? = null,
   private var ui_locales : String? = null,
   private var id_token : String? = null,
   private var id_token_hint : String? = null,
-  private var login_hint : String? = null,
+  private var access_token : String? = null,
+  private var flow_type : EmailFlowType? = null,
   private var acr_values : String? = null,
   private var scope : String? = null,
   private var audience : String? = null,
@@ -342,6 +342,13 @@ data class ExtraLoginOptions(
   private var nonce : String? = null,
   private var redirect_uri : String? = null
 )
+
+enum class EmailFlowType {
+    @SerializedName("code")
+    CODE,
+    @SerializedName("link")
+    LINK
+}
 ```
 
 </TabItem>
@@ -366,30 +373,31 @@ Auth0 has a special login flow, called the SPA flow. This flow requires a `clien
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
     // focus-start
-    loginConfig = hashMapOf("jwt" to LoginConfigItem(
-      verifier = "verifier-name", // Get it from Web3Auth dashboard
-      typeOfLogin = TypeOfLogin.JWT,
+    authConnectionConfig = listOf(AuthConnectionConfig(
+      authConnectionId = "auth-connection-id", // Get it from Web3Auth dashboard
+      authConnection = AuthConnection.CUSTOM,
       clientId = getString (R.string.auth0_project_id) // Auth0's client id
     ))
     // focus-end
   )
 )
 
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
   LoginParams(
-    Provider.JWT,
+    AuthConnection.CUSTOM,
     // focus-start
     extraLoginOptions = ExtraLoginOptions(
-      domain: "https://username.us.auth0.com", // Domain of your Auth0 app
-      verifierIdField: "sub", // The field in jwt token which maps to verifier id.
+      domain = "https://username.us.auth0.com", // Domain of your Auth0 app
+      userIdField = "sub", // The field in jwt token which maps to user id.
     )
     // focus-end
   )
@@ -400,36 +408,33 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 
 <TabItem value="byoj">
 If you're using any other provider like Firebase/ AWS Cognito or deploying your own Custom JWT
-server, you need to put the jwt token into the `id_token` field of the `extraLoginOptions`,
-additionally, you need to pass over the `domain` field as well, which is mandatory. If you don't
-have a domain, just passover a string in that field.
+server, you need to put the jwt token into the `idToken` field of the `LoginParams`. For SFA (Single Factor Auth) mode, this enables direct authentication without additional login flows.
 
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
     // focus-start
-    loginConfig = hashMapOf("jwt" to LoginConfigItem(
-      verifier = "verifier-name", // Get it from Web3Auth dashboard
-      typeOfLogin = TypeOfLogin.JWT,
+    authConnectionConfig = listOf(AuthConnectionConfig(
+      authConnectionId = "auth-connection-id", // Get it from Web3Auth dashboard
+      authConnection = AuthConnection.CUSTOM,
     ))
     // focus-end
   )
 )
 
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
   LoginParams(
-    Provider.JWT,
+    AuthConnection.CUSTOM,
     // focus-start
-    extraLoginOptions = ExtraLoginOptions(
-      id_token: "Your JWT id token",
-    )
+    idToken = "Your JWT id token",
     // focus-end
   )
 )
@@ -438,29 +443,34 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 </TabItem>
 
 <TabItem value="email-passwordless">
-To use the Email Passwordless login, you need to put the email into the `login_hint` parameter of
-the `ExtraLoginOptions`. By default, the login flow will be `code` flow, if you want to use the
-`link` flow, you need to put `flow_type` into the `additionalParams` parameter of the
-`ExtraLoginOptions`.
+
+To use the Email Passwordless login, you need to put the email into the `loginHint` parameter of
+the `LoginParams`. By default, the login flow will be `code` flow, if you want to use the
+`link` flow, you need to put `flow_type` into the `extraLoginOptions` parameter.
 
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
   )
 )
 
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
   LoginParams(
-    Provider.EMAIL_PASSWORDLESS,
-    // focus-next-line
-    extraLoginOptions = ExtraLoginOptions(login_hint = "hello@web3auth.io")
+    AuthConnection.EMAIL_PASSWORDLESS,
+    // focus-start
+    loginHint = "hello@web3auth.io",
+    extraLoginOptions = ExtraLoginOptions(
+      flow_type = EmailFlowType.CODE // Use CODE for OTP flow or LINK for magic link flow
+    )
+    // focus-end
   )
 )
 ```
@@ -468,28 +478,30 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 </TabItem>
 
 <TabItem value="sms-passwordless">
-To use the SMS Passwordless login, send the phone number as the `login_hint` parameter of the
-`ExtraLoginOptions`. Please make sure the phone number is in the format of
+
+To use the SMS Passwordless login, send the phone number as the `loginHint` parameter of the
+`LoginParams`. Please make sure the phone number is in the format of
 +\{country_code}-\{phone_number}, i.e. (+91-09xx901xx1).
 
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
   )
 )
 
 // focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
   LoginParams(
-    Provider.SMS_PASSWORDLESS,
-    extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344")
+    AuthConnection.SMS_PASSWORDLESS,
+    loginHint = "+91-9911223344"
   )
 )
 // focus-end
@@ -499,33 +511,34 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 </TabItem>
 </Tabs>
 
-### Aggregate Verifier Usage
+### Grouped Auth Connection Usage
 
-You can use aggregate verifier to combine multiple login methods to get the same address for the users regardless of their login providers. For example, combining a Google and Email Passwordless login, or Google and GitHub via Auth0 to access the same address for your user.
+You can use grouped auth connections to combine multiple login methods to get the same address for the users regardless of their login providers. For example, combining a Google and Email Passwordless login, or Google and GitHub via Auth0 to access the same address for your user.
 
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
+import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-    network = Network.MAINNET,
-    redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
     // focus-start
-    loginConfig = hashMapOf(
-      "google" to LoginConfigItem(
-        verifier = "aggregate-sapphire",
-        verifierSubIdentifier= "w3a-google",
-        typeOfLogin = TypeOfLogin.GOOGLE,
+    authConnectionConfig = listOf(
+      AuthConnectionConfig(
+        authConnectionId = "aggregate-sapphire",
+        groupedAuthConnectionId = "w3a-google",
+        authConnection = AuthConnection.GOOGLE,
         name = "Aggregate Login",
         clientId = getString(R.string.web3auth_google_client_id)
       ),
-      "jwt" to LoginConfigItem(
-        verifier = "aggregate-sapphire",
-        verifierSubIdentifier= "w3a-a0-email-passwordless",
-        typeOfLogin = TypeOfLogin.JWT,
+      AuthConnectionConfig(
+        authConnectionId = "aggregate-sapphire",
+        groupedAuthConnectionId = "w3a-a0-email-passwordless",
+        authConnection = AuthConnection.CUSTOM,
         name = "Aggregate Login",
         clientId = getString(R.string.web3auth_auth0_client_id)
       )
@@ -536,17 +549,17 @@ val web3Auth = Web3Auth(
 
 // focus-start
 // Google Login
-web3Auth.login(LoginParams(Provider.GOOGLE))
+web3Auth.connectTo(LoginParams(AuthConnection.GOOGLE))
 // focus-end
 
 // focus-start
 // Auth0 Login
-web3Auth.login(LoginParams(
-  Provider.JWT,
+web3Auth.connectTo(LoginParams(
+  AuthConnection.CUSTOM,
   extraLoginOptions = ExtraLoginOptions(
     domain = "https://web3auth.au.auth0.com",
-    verifierIdField = "email",
-    isVerifierIdCaseSensitive = false
+    userIdField = "email",
+    isUserIdCaseSensitive = false
   )
 ))
 // focus-end
