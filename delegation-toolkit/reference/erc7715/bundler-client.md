@@ -1,15 +1,16 @@
 ---
-description: Bundler Client API methods reference.
-sidebar_label: Bundler Client Actions
+description: Bundler Client API reference.
+sidebar_label: Bundler Client
 toc_max_heading_level: 2
+keywords: [ERC-7715, Viem, bundler client, API methods, actions, reference]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Bundler Client Actions
+# Bundler Client
 
-The following API methods are related to the [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler).
+The following API methods are related to the [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) used to [execute on a MetaMask user's behalf](../../guides/erc7715/execute-on-metamask-users-behalf.md).
 
 ## `sendUserOperationWithDelegation`
 

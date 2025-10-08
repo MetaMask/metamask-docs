@@ -98,7 +98,7 @@ const sessionAccount = privateKeyToAccount("0x...");
 ### 4. Request ERC-7715 permissions
 
 Request ERC-7715 permissions from the user. In this example, you'll request an ERC-20 periodic 
-permission using the `grantPermissions` method.
+permission using the Wallet Client's [`requestExecutionPermissions`](../../reference/erc7715/wallet-client.md#requestexecutionpermissions) method.
 
 ```typescript
 import { sepolia as chain } from "viem/chains";
@@ -185,9 +185,11 @@ const sessionAccountWalletClient = createWalletClient({
 
 ### 6. Redeem ERC-7715 permissions
 
-The session account can now [redeem the delegation](../experimental/erc-7710-redeem-delegations.md). The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
+The session account can now redeem the permissions. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 
-To redeem the permissions, use the appropriate client action based on your session account type:
+To redeem the permissions, use the client action based on your session account type.
+A smart account uses the Bundler Client's [`sendUserOperationWithDelegation`](../../reference/erc7715/bundler-client.md#senduseroperationwithdelegation) method,
+and an EOA uses the Wallet Client's [`sendTransactionWithDelegation`](../../reference/erc7715/wallet-client.md#sendtransactionwithdelegation) method:
 
 <Tabs>
 <TabItem value="Smart account">

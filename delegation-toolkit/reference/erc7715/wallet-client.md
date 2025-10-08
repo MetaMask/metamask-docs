@@ -1,22 +1,23 @@
 ---
-description: Wallet Client API methods reference.
-sidebar_label: Wallet Client Actions
+description: Wallet Client API reference.
+sidebar_label: Wallet Client
 toc_max_heading_level: 2
+keywords: [ERC-7715, Viem, wallet client, API methods, actions, reference]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Wallet Client Actions
+# Wallet Client reference
 
-The following API methods are related to the [Viem Wallet Client](https://viem.sh/docs/clients/wallet).
+The following API methods are related to the [Viem Wallet Client](https://viem.sh/docs/clients/wallet) used to [execute on a MetaMask user's behalf](../../guides/erc7715/execute-on-metamask-users-behalf.md).
 
 ## `requestExecutionPermissions`
 
 Requests permissions from the MetaMask extension account according to the [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) specifications.
 
 :::info
-To use `grantPermissions`, the Viem Wallet Client must be extended with `erc7715ProviderActions`.
+To use `requestExecutionPermissions`, the Viem Wallet Client must be extended with `erc7715ProviderActions`.
 :::
 
 ### Parameters
@@ -26,7 +27,7 @@ To use `grantPermissions`, the Viem Wallet Client must be extended with `erc7715
 | `chainId` | `number` | Yes | The chain ID on which the permission is being requested. |
 | `address` | `Address` | No | Address of the wallet to which the permission is being requested. |
 | `expiry` | `number` | Yes | The timestamp (in seconds) by which the permission must expire. |
-| `permission` | `SupportedPermissionParams` | Yes | The permission to be requested. The toolkit currently supports four types of permissions; see [ERC-7715 permissions](./permissions.md) to learn more. |
+| `permission` | `SupportedPermissionParams` | Yes | The permission to be requested. The toolkit supports multiple [ERC-7715 permissions](permissions.md). |
 | `signer` | `SignerParam` | Yes | The account to which the permission will be assigned. |
 | `isAdjustmentAllowed` | `boolean` | Yes | Defines whether the user is allowed to modify the requested permission. |
 
@@ -40,13 +41,8 @@ import { sepolia as chain } from "viem/chains";
 import { parseUnits } from "viem";
 import { walletClient } from "./client.ts";
 
-// Since current time is in seconds, we need to convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
-// 1 week from now.
 const expiry = currentTime + 604800;
-
-// USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
@@ -60,10 +56,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
   permission: {
     type: "erc20-token-periodic",
     data: {
-      tokenAddress,
-      // 1 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
+      tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
       periodAmount: parseUnits("10", 6),
-      // 1 day in seconds
       periodDuration: 86400,
       justification?: "Permission to transfer 1 USDC every day",
     },
