@@ -97,8 +97,8 @@ const sessionAccount = privateKeyToAccount("0x...");
 
 ### 4. Request ERC-7715 permissions
 
-Request ERC-7715 permissions from the user. In this example, you'll request an ERC-20 periodic 
-permission using the `grantPermissions` method.
+Request ERC-7715 permissions from the user. In this example, you'll request an
+[ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission) using the `grantPermissions` method.
 
 ```typescript
 import { sepolia as chain } from "viem/chains";
@@ -258,3 +258,8 @@ export const calldata = encodeFunctionData({
 
 </TabItem>
 </Tabs>
+
+## Next steps
+
+See how to configure different [ERC-20 token permissions](use-permissions/erc20-token.md) and
+[native token permissions](use-permissions/native-token.md).
