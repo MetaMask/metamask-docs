@@ -15,7 +15,6 @@ Learn [how to use delegation scopes](../../guides/delegation/use-delegation-scop
 Ensures a per-period limit for ERC-20 token transfers.
 At the start of each new period, the allowance resets.
 
-
 #### Parameters
 
 | Name             | Type      | Required | Description                                                      |
@@ -165,8 +164,8 @@ At the start of each new period, the allowance resets.
 | `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
 | `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
 | `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
@@ -180,10 +179,21 @@ const delegation = createDelegation({
     periodAmount: 1000000000000000000n,
     periodDuration: 86400,
     startDate: 1743763600,
+    // allowedCallData can only be used WITHOUT exactCallData.
+    allowedCallData: [
+      {
+        startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
+        value: "0x1234567890abcdef", // The expected calldata.
+      }
+    ],
+    // exactCallData can only be used WITHOUT allowedCallData.
+    exactCallData: {
+      calldata: "0x1234567890abcdef",
+    },
   },
-  // Address that is granting the delegation
+  // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Address to which the delegation is being granted
+  // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getDelegatorEnvironment(sepolia.id);
@@ -204,8 +214,8 @@ At the start, a specified initial amount is released, after which tokens accrue 
 | `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
 | `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
 | `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
@@ -220,10 +230,21 @@ const delegation = createDelegation({
     initialAmount: 1000000n,
     maxAmount: 10000000n,
     startTime: 1703980800,
+    // allowedCallData can only be used WITHOUT exactCallData.
+    allowedCallData: [
+      {
+        startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
+        value: "0x1234567890abcdef", // The expected calldata.
+      }
+    ],
+    // exactCallData can only be used WITHOUT allowedCallData.
+    exactCallData: {
+      calldata: "0x1234567890abcdef",
+    },
   },
-  // Address that is granting the delegation
+  // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Address to which the delegation is being granted
+  // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getDelegatorEnvironment(sepolia.id);
@@ -240,8 +261,8 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 | Name              | Type      | Required | Description                                                       |
 | ----------------- | --------- | -------- | ----------------------------------------------------------------- |
 | `maxAmount`       | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
@@ -254,10 +275,21 @@ const delegation = createDelegation({
     type: "nativeTokenTransferAmount",
     // 0.001 ETH in wei format.
     maxAmount: 1000000000000000n,
+    // allowedCallData can only be used WITHOUT exactCallData.
+    allowedCallData: [
+      {
+        startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
+        value: "0x1234567890abcdef", // The expected calldata.
+      }
+    ],
+    // exactCallData can only be used WITHOUT allowedCallData.
+    exactCallData: {
+      calldata: "0x1234567890abcdef",
+    },
   },
-  // Address that is granting the delegation
+  // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Address to which the delegation is being granted
+  // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getDelegatorEnvironment(sepolia.id);
@@ -274,8 +306,8 @@ Defines the specific methods, contract addresses, and calldata that are allowed 
 | ----------------- | -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `targets`         | `Address[]`                      | Yes      | The list of addresses that the delegate is allowed to call.                                                                                                     |
 | `selectors`       | `MethodSelector[]`               | Yes      | The list of method selectors that the delegate is allowed to call. The selector value can be 4-byte hex string, ABI function signature, or ABI function object. |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The `calldata` that the delegate is allowed to call. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The calldata that the delegate is allowed to call. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
@@ -290,10 +322,21 @@ const delegation = createDelegation({
     type: "functionCall",
     targets: ["0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"], // USDC address on Sepolia.
     selectors: ["approve(address, uint256)"]
+    // allowedCallData can only be used WITHOUT exactCallData.
+    allowedCallData: [
+      {
+        startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
+        value: "0x1234567890abcdef", // The expected calldata.
+      }
+    ],
+    // exactCallData can only be used WITHOUT allowedCallData.
+    exactCallData: {
+      calldata: "0x1234567890abcdef",
+    },
   },
-  // Address that is granting the delegation
+  // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Address to which the delegation is being granted
+  // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getDelegatorEnvironment(sepolia.id);
@@ -323,9 +366,9 @@ const delegation = createDelegation({
     type: "ownershipTransfer",
     contractAddress,
   },
-  // Address that is granting the delegation
+  // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Address to which the delegation is being granted
+  // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getDelegatorEnvironment(sepolia.id);

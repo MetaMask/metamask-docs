@@ -8,9 +8,6 @@ keywords: [delegation scope, function call, restrict, delegation]
 The function call scope defines the specific methods, contract addresses, and calldata that are allowed for the delegation.
 For example, Alice delegates to Bob the ability to call the `approve` function on the USDC contract, with the approval amount set to `0`.
 
-Internally, this scope uses the [`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets) and [`allowedMethods`](../../../reference/delegation/caveats.md#allowedmethods) caveat enforcers, and 
-optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
-
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
@@ -20,10 +17,14 @@ optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md
 
 ## Function call scope
 
-This scope requires `targets` and `selectors` as mandatory parameters for the configuration.
-You can specify the allowed methods in `selectors` and the permitted contract addresses in `targets`. 
+This scope requires `targets`, which specifies the permitted contract addresses, and `selectors`, which specifies the allowed methods.
+You can optionally specify `allowedCallData` or `exactCallData`.
 
-The following example sets the delegation scope to allow the delegate to call the `approve` function on the USDC token contract.
+Internally, this scope uses the [`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets) and [`allowedMethods`](../../../reference/delegation/caveats.md#allowedmethods) caveat enforcers, and 
+optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
+See the [function call scope reference](../../../reference/delegation/delegation-scopes.md#function-call-scope) for more details.
+
+The following example sets the delegation scope to allow the delegate to call the `approve` function on the USDC token contract:
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";

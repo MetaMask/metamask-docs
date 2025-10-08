@@ -26,6 +26,7 @@ Bob can transfer a total of 10 USDC per day; the limit resets at the beginning o
 When this scope is applied, the toolkit automatically disallows native token transfers (sets the native token transfer limit to `0`). 
 
 Internally, this scope uses the [`erc20PeriodTransfer`](../../../reference/delegation/caveats.md#erc20periodtransfer) and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) caveat enforcers.
+See the [ERC-20 periodic scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-periodic-scope) for more details.
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
@@ -54,6 +55,7 @@ For example, Alice creates a delegation that allows Bob to spend 0.1 USDC per se
 When this scope is applied, the toolkit automatically disallows native token transfers (sets the native token transfer limit to `0`).
 
 Internally, this scope uses the [`erc20Streaming`](../../../reference/delegation/caveats.md#erc20streaming) and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) caveat enforcers.
+See the [ERC-20 streaming scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-streaming-scope) for more details.
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
@@ -83,6 +85,7 @@ Bob may use the 10 USDC in a single transaction or make multiple transactions, a
 When this scope is applied, the toolkit automatically disallows native token transfers (sets the native token transfer limit to `0`).
 
 Internally, this scope uses the [`erc20TransferAmount`](../../../reference/delegation/caveats.md#erc20transferamount) and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) caveat enforcers.
+See the [ERC-20 transfer scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-transfer-scope) for more details.
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
@@ -105,6 +108,7 @@ This scope limits the delegation to ERC-721 token transfers only.
 For example, Alice creates a delegation that allows Bob to transfer an NFT she owns on her behalf.
 
 Internally, this scope uses the [`erc721Transfer`](../../../reference/delegation/caveats.md#erc721transfer) caveat enforcer. 
+See the [ERC-721 scope reference](../../../reference/delegation/delegation-scopes.md#erc-721-scope) for more details.
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
@@ -131,7 +135,9 @@ Bob can transfer a total of 0.01 ETH per day; the limit resets at the beginning 
 
 When this scope is applied, the toolkit disallows ERC-20 and ERC-721 token transfers by default, setting the allowed `calldata` to `0x`.
 
-Internally, this scope uses the [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) and [`nativeTokenPeriodTransfer`](../../../reference/delegation/caveats.md#nativetokenperiodtransfer) caveat enforcers.
+Internally, this scope uses the [`nativeTokenPeriodTransfer`](../../../reference/delegation/caveats.md#nativetokenperiodtransfer) caveat enforcer, and 
+optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
+See the [native token periodic scope reference](../../../reference/delegation/delegation-scopes.md#native-token-periodic-scope) for more details.
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
@@ -158,7 +164,9 @@ For example, Alice creates delegation that allows Bob to spend 0.001 ETH per sec
 
 When this scope is applied, the toolkit disallows ERC-20 and ERC-721 token transfers by default, setting the allowed `calldata` to `0x`.
 
-Internally, this scope uses the [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) and [`nativeTokenStreaming`](../../../reference/delegation/caveats.md#nativetokenstreaming) caveat enforcers.
+Internally, this scope uses the [`nativeTokenStreaming`](../../../reference/delegation/caveats.md#nativetokenstreaming) caveat enforcer, and
+optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
+See the [native token streaming scope reference](../../../reference/delegation/delegation-scopes.md#native-token-streaming-scope) for more details.
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
@@ -186,7 +194,9 @@ Bob may use the 0.1 ETH in a single transaction or make multiple transactions, a
 
 When this scope is applied, the toolkit disallows ERC-20 and ERC-721 token transfers by default, setting the allowed `calldata` to `0x`.
 
-Internally, this scope uses the [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) and [`nativeTokenTransferAmount`](../../../reference/delegation/caveats.md#nativetokentransferamount) caveat enforcers.
+Internally, this scope uses the [`nativeTokenTransferAmount`](../../../reference/delegation/caveats.md#nativetokentransferamount) caveat enforcer, and
+optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
+See the [native token transfer scope reference](../../../reference/delegation/delegation-scopes.md#native-token-transfer-scope) for more details.
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
