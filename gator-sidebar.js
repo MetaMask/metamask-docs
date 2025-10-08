@@ -90,7 +90,7 @@ const sidebar = {
           label: 'ERC-7715',
           collapsed: true,
           items: [
-            'guides/erc7715/execute-on-metamask-user-behalf',
+            'guides/erc7715/execute-on-metamask-users-behalf',
             {
               type: 'category',
               label: 'Use permissions',
@@ -157,15 +157,16 @@ const sidebar = {
             'reference/delegation/caveat-enforcer-client',
           ],
         },
-        // {
-        //   type: 'category',
-        //   label: 'ERC-7715',
-        //   collapsed: false,
-        //   items: [
+        {
+          type: 'category',
+          label: 'ERC-7715',
+          collapsed: true,
+          items: [
+            'reference/erc7715/permissions',
         //     'reference/erc7715/wallet-client',
         //     'reference/erc7715/bundler-client',
-        //   ],
-        // },
+          ],
+        },
       ],
     },
   ],

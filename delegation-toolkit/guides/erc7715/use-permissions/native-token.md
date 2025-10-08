@@ -117,8 +117,6 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
         initialAmount: parseEther("0.1"),
         // 1 ETH in wei format.
         maxAmount: parseEther("1"),
-        // 1 hour in seconds.
-        duration: 3600,
         startTime: currentTime,
         justification: "Permission to use 0.0001 ETH per second",
       },
