@@ -18,12 +18,13 @@ At the start of each new period, the allowance resets.
 
 #### Parameters
 
-| Name             | Type      | Required | Description                                                      |
-| ---------------- | --------- | -------- | ---------------------------------------------------------------- |
-| `tokenAddress`   | `Address` | Yes      | The ERC-20 token contract address as a hex string.               |
-| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
-| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
-| `justification`  | `string`  | No       | A description of the permission to display to the user.          |
+| Name             | Type      | Required | Description                                                            |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------------- |
+| `tokenAddress`   | `Address` | Yes      | The ERC-20 token contract address as a hex string.                     |
+| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period.       |
+| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                                |
+| `startTime`      | `number`  | No       | The start timestamp in seconds. The default is the current time.       |
+| `justification`  | `string`  | No       | A human-readable explanation of why the permission is being requested. |
 
 #### Example
 
@@ -64,15 +65,14 @@ At the start, a specified initial amount is released, after which tokens accrue 
 
 #### Parameters
 
-| Name              | Type      | Required | Description                                               |
-| ----------------- | --------- | -------- | --------------------------------------------------------- |
-| `tokenAddress`    | `Address` | Yes      | The ERC-20 token contract address.                        |
-| `initialAmount`   | `bigint`  | Yes      | The initial amount that can be transferred at start time. |
-| `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
-| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
-| `duration`        | `number`  | Yes      | The duration of the stream in seconds.                    |
-| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
-| `justification`   | `string`  | No       | A description of the permission to display to the user.   |
+| Name              | Type      | Required | Description                                                                   |
+| ----------------- | --------- | -------- | ----------------------------------------------------------------------------- |
+| `tokenAddress`    | `Address` | Yes      | The ERC-20 token contract address.                                            |
+| `initialAmount`   | `bigint`  | No       | The initial amount that can be transferred at start time. The default is `0`. |
+| `maxAmount`       | `bigint`  | No       | The maximum total amount that can be unlocked. The default is no limit.       |
+| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.                                   |
+| `startTime`       | `number`  | No       | The start timestamp in seconds. The default is the current time.              |
+| `justification`   | `string`  | No       | A human-readable explanation of why the permission is being requested.        |
 
 #### Example
 
@@ -117,12 +117,12 @@ At the start of each new period, the allowance resets.
 
 #### Parameters
 
-| Name             | Type      | Required | Description                                                      |
-| ---------------- | --------- | -------- | ---------------------------------------------------------------- |
-| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
-| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
-| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                                 |
-| `justification`   | `string`  | No       | A description of the permission to display to the user.         |
+| Name             | Type      | Required | Description                                                            |
+| ---------------- | --------- | -------- | ---------------------------------------------------------------------- |
+| `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period.       |
+| `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                                |
+| `startTime`      | `number`  | No       | The start timestamp in seconds. The default is the current time.       |
+| `justification`  | `string`  | No       | A human-readable explanation of why the permission is being requested. |
 
 #### Example
 
@@ -163,14 +163,13 @@ At the start, a specified initial amount is released, after which tokens accrue 
 
 #### Parameters
 
-| Name              | Type      | Required | Description                                               |
-| ----------------- | --------- | -------- | --------------------------------------------------------- |
-| `initialAmount`   | `bigint`  | Yes      | The initial amount that can be transferred at start time. |
-| `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
-| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
-| `duration`        | `number`  | Yes      | The duration of the stream in seconds.                    |
-| `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
-| `justification`   | `string`  | No       | A description of the permission to display to the user.   |
+| Name              | Type      | Required | Description                                                                   |
+| ----------------- | --------- | -------- | ----------------------------------------------------------------------------- |
+| `initialAmount`   | `bigint`  | No       | The initial amount that can be transferred at start time. The default is `0`. |
+| `maxAmount`       | `bigint`  | No       | The maximum total amount that can be unlocked. The default is no limit.       |
+| `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.                                   |
+| `startTime`       | `number`  | No       | The start timestamp in seconds. The default is the current time.              |
+| `justification`   | `string`  | No       | A human-readable explanation of why the permission is being requested.        |
 
 #### Example
 
