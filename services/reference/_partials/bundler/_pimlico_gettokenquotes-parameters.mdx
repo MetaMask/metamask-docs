@@ -1,0 +1,10 @@
+:::warning
+If a token in the request input is not supported by the ERC-20 Paymaster, the request will still succeed but it will not be included in the `quotes` array in the response.
+:::
+
+- `Object`: An object containing:
+  - `tokens`: (array) - An array of token addresses to get quotes for.
+
+- `entryPoint`: (string) - The EntryPoint contract address.
+
+- `chainId`: (string) - The chain ID in hexadecimal format.
