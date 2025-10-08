@@ -16,7 +16,7 @@ Smart accounts support programmable account behavior and advanced features like 
 Delegation is powered by the toolkit's Delegation Framework, which defines how
 permissions are created, shared, and enforced.
 
-MetaMask Smart Accounts also support [ERC-7715 permissions](concepts/erc7715.md), which are fine-grained permissions dapps can request from MetaMask users.
+MetaMask Smart Accounts also support [ERC-7715 permissions](concepts/erc7715.md), which are fine-grained permissions dapps can request from users directly via the MetaMask browser extension.
 
 ## Why use the toolkit?
 
