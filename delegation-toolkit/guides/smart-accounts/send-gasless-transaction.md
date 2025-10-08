@@ -1,5 +1,6 @@
 ---
 description: Learn how to send a gasless transaction
+keywords: [send, gasless transaction, smart account, sponsor, paymaster]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -13,7 +14,6 @@ You can use any paymaster service provider, such as [Pimlico](https://docs.pimli
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../configure.md)
 - [Create a MetaMask smart account.](create-smart-account.md)
 
 ## Send a gasless transaction
@@ -76,7 +76,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 
 export const bundlerClient = createBundlerClient({

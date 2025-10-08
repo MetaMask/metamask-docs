@@ -167,7 +167,11 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
               </div>
               {MDXPageContent.toc && (
                 <div className="col col--3" style={{ paddingRight: '30px' }}>
-                  <TOC toc={MDXPageContent.toc} />
+                  <TOC
+                    toc={MDXPageContent.toc}
+                    minHeadingLevel={(frontMatter as any).toc_min_heading_level ?? 2}
+                    maxHeadingLevel={(frontMatter as any).toc_max_heading_level ?? 3}
+                  />
                 </div>
               )}
             </div>
