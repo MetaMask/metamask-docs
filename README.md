@@ -4,7 +4,7 @@ This repository is a complete, verified snapshot of the official MetaMask Docs �
 It includes 1,300+ commits, contributions from MetaMask core developers, and the original documentation structure of the world’s most-used Web3 wallet.
 
 Maintainer: @Livelawe
-Contact: livelawe@gmail.com
+Contact: lawe_fabbe@hotmail.com
 
 ⸻
 
@@ -31,7 +31,7 @@ Organizations and companies interested in:
 	•	AI-powered developer assistants
 	•	Open-source security and dependency analytics
 
-are invited to contact livelawe@gmail.com for partnership, sponsorship, or data-licensing opportunities.
+are invited to contact Contact: lawe_fabbe@hotmail.com for partnership, sponsorship, or data-licensing opportunities.
 
 Potential collaborators include:
 Consensys, Snyk, OpenSSF, Moralis, Alchemy, Infura, Chainstack, and others contributing to open Web3 development.
@@ -63,7 +63,7 @@ Follow ongoing updates here or contact for collaboration.
 🌐 Official Links
 	•	Original Source: MetaMask Docs
 	•	Maintained Archive: Livelawe/metamask-docs
-	•	Contact: livelawe@gmail.com
+	•	Contact: lawe_fabbe@hotmail.com
 
 
 
