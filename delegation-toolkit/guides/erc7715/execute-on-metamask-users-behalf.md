@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Perform executions on a MetaMask user's behalf
 
-The Delegation Toolkit supports [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715), which lets you request fine-grained permissions from a MetaMask user to execute transactions on their 
+[ERC-7715 permissions](../../concepts/erc7715.md) are fine-grained permissions that your dapp can request from a MetaMask user to execute transactions on their 
 behalf. For example, a user can grant your dapp permission to spend 10 USDC per day to buy ETH over the course 
 of a month. Once the permission is granted, your dapp can use the allocated 10 USDC each day to 
 purchase ETH directly from the MetaMask user's account.
@@ -41,7 +41,7 @@ const walletClient = createWalletClient({
 ### 2. Set up a Public Client
 
 Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. 
-This client will help you query the account state and interact with blockchain network.
+This client will help you query the account state and interact with the blockchain network.
 
 ```typescript
 import { createPublicClient, http } from "viem";
@@ -60,7 +60,7 @@ to request ERC-7715 permissions. This account is responsible for executing trans
 on behalf of the user. 
 
 <Tabs>
-<TabItem value="Smart Account">
+<TabItem value="Smart account">
 
 ```typescript
 import { privateKeyToAccount } from "viem/accounts";
@@ -97,8 +97,9 @@ const sessionAccount = privateKeyToAccount("0x...");
 
 ### 4. Request ERC-7715 permissions
 
-Request ERC-7715 permissions from the user. In this example, you'll request an ERC-20 periodic 
-permission using the Wallet Client's [`requestExecutionPermissions`](../../reference/erc7715/wallet-client.md#requestexecutionpermissions) action.
+Request ERC-7715 permissions from the user. In this example, you'll request an
+[ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission) using the Wallet Client's 
+[`requestExecutionPermissions`](../../reference/erc7715/wallet-client.md#requestexecutionpermissions) action.
 
 ```typescript
 import { sepolia as chain } from "viem/chains";
@@ -262,3 +263,8 @@ export const calldata = encodeFunctionData({
 
 </TabItem>
 </Tabs>
+
+## Next steps
+
+See how to configure different [ERC-20 token permissions](use-permissions/erc20-token.md) and
+[native token permissions](use-permissions/native-token.md).
