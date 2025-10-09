@@ -4,7 +4,7 @@ sidebar_label: Permissions
 keywords: [ERC-7715, permissions, ERC-20 token, native token, reference]
 ---
 
-# ERC-7715 permissions
+# ERC-7715 permissions reference
 
 When [executing on a MetaMask user's behalf](../../guides/erc7715/execute-on-metamask-users-behalf.md), you can request the following permission types for ERC-20 token and native token transfers.
 Learn [how to use ERC-7715 permissions](../../guides/erc7715/use-permissions/erc20-token.md).

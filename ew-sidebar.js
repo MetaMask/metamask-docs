@@ -3,6 +3,7 @@ import {
   vue,
   android,
   ios,
+  node,
   reactnative,
   flutter,
   unity,
@@ -40,24 +41,23 @@ function webTopNavButton(selectedSDK) {
         </div>
       </div>
       <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/android">
-        Mobile
+        Mobile & Gaming
       </a>
-      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/unity">
-        Gaming
+      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/node">
+        Backend
       </a>
     </div>`;
 }
 
-function gamingTopNavButton(selectedSDK) {
-  var gamingSDKs = {
-    [unity]: `/embedded-wallets/sdk/unity`,
-    [unreal]: `/embedded-wallets/sdk/unreal`,
+function backendTopNavButton(selectedSDK) {
+  var backendSDKs = {
+    [node]: `/embedded-wallets/sdk/node`,
   };
-  if (gamingSDKs.hasOwnProperty(selectedSDK)) {
-    delete gamingSDKs[selectedSDK];
+  if (backendSDKs.hasOwnProperty(selectedSDK)) {
+    delete backendSDKs[selectedSDK];
   }
-  var sdkNames = Object.keys(gamingSDKs);
-  var sdkLinks = Object.values(gamingSDKs);
+  // var sdkNames = Object.keys(backendSDKs);
+  // var sdkLinks = Object.values(backendSDKs);
   var sdkVersion = getPnPVersion(selectedSDK);
 
   return `
@@ -66,14 +66,13 @@ function gamingTopNavButton(selectedSDK) {
         Web
       </a>
       <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/android">
-        Mobile
+        Mobile & Gaming
       </a>
       <div class="sdk-sidebar-option-selected">
-        Gaming
+        Backend
         <div class="sdk-sidebar-dropdown-container">
           <select class="sdk-sidebar-dropdown" onchange="location.href=this.value">
               <option value="">${selectedSDK}</option>
-              <option value="${sdkLinks[0]}">${sdkNames[0]}</option>
           </select>
           v${sdkVersion}
         </div>
@@ -87,6 +86,8 @@ function mobileTopNavButton(selectedSDK) {
     [ios]: `/embedded-wallets/sdk/ios`,
     [reactnative]: `/embedded-wallets/sdk/react-native`,
     [flutter]: `/embedded-wallets/sdk/flutter`,
+    [unity]: `/embedded-wallets/sdk/unity`,
+    [unreal]: `/embedded-wallets/sdk/unreal`,
   };
   if (mobileSDKs.hasOwnProperty(selectedSDK)) {
     delete mobileSDKs[selectedSDK];
@@ -101,19 +102,21 @@ function mobileTopNavButton(selectedSDK) {
         Web
       </a>
       <div class="sdk-sidebar-option-selected">
-        Mobile
+        Mobile & Gaming
         <div class="sdk-sidebar-dropdown-container">
           <select class="sdk-sidebar-dropdown" onchange="location.href=this.value">
               <option value="">${selectedSDK}</option>
               <option value="${sdkLinks[0]}">${sdkNames[0]}</option>
               <option value="${sdkLinks[1]}">${sdkNames[1]}</option>
               <option value="${sdkLinks[2]}">${sdkNames[2]}</option>
+              <option value="${sdkLinks[3]}">${sdkNames[3]}</option>
+              <option value="${sdkLinks[4]}">${sdkNames[4]}</option>
           </select>
           v${sdkVersion}
         </div>
       </div>
-      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/unity">
-        Gaming
+      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/node">
+        Backend
       </a>
     </div>`;
 }
@@ -168,6 +171,7 @@ const sidebar = {
         { type: "link", label: "React", href: "/embedded-wallets/sdk/react" },
         { type: "link", label: "Vue", href: "/embedded-wallets/sdk/vue" },
         { type: "link", label: "JavaScript", href: "/embedded-wallets/sdk/js" },
+        { type: "link", label: "Node.js", href: "/embedded-wallets/sdk/node" },
         { type: "link", label: "Android", href: "/embedded-wallets/sdk/android" },
         { type: "link", label: "iOS", href: "/embedded-wallets/sdk/ios" },
         { type: "link", label: "React Native", href: "/embedded-wallets/sdk/react-native" },
@@ -745,7 +749,7 @@ const sidebar = {
   sdk_unity: [
     {
       type: "html",
-      value: gamingTopNavButton(unity),
+      value: mobileTopNavButton(unity),
       defaultStyle: true,
     },
     "sdk/unity/README",
@@ -789,10 +793,32 @@ const sidebar = {
       href: "https://github.com/Web3Auth/web3auth-unity-sdk/releases",
     },
   ],
+  sdk_node: [
+    {
+      type: "html",
+      value: backendTopNavButton(node),
+      defaultStyle: true,
+    },
+    "sdk/node/README",
+    "sdk/node/connect",
+    "sdk/node/blockchain-connection",
+    "sdk/node/private-key",
+    "sdk/node/examples",
+    {
+      type: "link",
+      label: "Support Forum",
+      href: "https://web3auth.io/community/c/help-pnp/pnp-node/21",
+    },
+    {
+      type: "link",
+      label: "Release Notes",
+      href: "https://github.com/Web3Auth/web3auth-backend/releases",
+    },
+  ],
   sdk_unreal: [
     {
       type: "html",
-      value: gamingTopNavButton(unreal),
+      value: mobileTopNavButton(unreal),
       defaultStyle: true,
     },
     "sdk/unreal/README",

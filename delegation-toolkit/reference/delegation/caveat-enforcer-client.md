@@ -8,7 +8,7 @@ keywords: [delegation state, caveat enforcer client, API, methods, reference]
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Caveat Enforcer Client
+# Caveat Enforcer Client reference
 
 The following API methods are related to `CaveatEnforcerClient` used to [check the delegation state](../../guides/delegation/check-delegation-state.md).
 

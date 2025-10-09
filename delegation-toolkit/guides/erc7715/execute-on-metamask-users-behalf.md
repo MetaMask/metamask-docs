@@ -98,10 +98,12 @@ const sessionAccount = privateKeyToAccount("0x...");
 ### 4. Request ERC-7715 permissions
 
 Request ERC-7715 permissions from the user. In this example, you'll request an
-[ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission) using the `grantPermissions` method.
+[ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission) using the Wallet Client's 
+[`requestExecutionPermissions`](../../reference/erc7715/wallet-client.md#requestexecutionpermissions) action.
 
 ```typescript
 import { sepolia as chain } from "viem/chains";
+import { parseUnits } from "viem";
 
 // Since current time is in seconds, we need to convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
@@ -125,12 +127,13 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     data: {
       tokenAddress,
       // 1 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
-      periodAmount: 1000000n,
+      periodAmount: parseUnits("10", 6),
       // 1 day in seconds
       periodDuration: 86400,
       justification?: "Permission to transfer 1 USDC every day",
     },
   },
+  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -183,9 +186,11 @@ const sessionAccountWalletClient = createWalletClient({
 
 ### 6. Redeem ERC-7715 permissions
 
-The session account can now redeem the delegation. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
+The session account can now redeem the permissions. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 
-To redeem the permissions, use the appropriate client action based on your session account type:
+To redeem the permissions, use the client action based on your session account type.
+A smart account uses the Bundler Client's [`sendUserOperationWithDelegation`](../../reference/erc7715/bundler-client.md#senduseroperationwithdelegation) action,
+and an EOA uses the Wallet Client's [`sendTransactionWithDelegation`](../../reference/erc7715/wallet-client.md#sendtransactionwithdelegation) action:
 
 <Tabs>
 <TabItem value="Smart account">

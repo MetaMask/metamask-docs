@@ -163,8 +163,8 @@ const sidebar = {
           collapsed: true,
           items: [
             'reference/erc7715/permissions',
-        //     'reference/erc7715/wallet-client',
-        //     'reference/erc7715/bundler-client',
+            'reference/erc7715/wallet-client',
+            'reference/erc7715/bundler-client',
           ],
         },
       ],
