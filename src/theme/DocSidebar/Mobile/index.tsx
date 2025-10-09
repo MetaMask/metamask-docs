@@ -14,7 +14,6 @@ import SidebarSectionDropdown, {
 } from '@site/src/components/SidebarSectionDropdown/SidebarSectionDropdown'
 import {
   SERVICES_DASHBOARD_CONFIG,
-  SDK_WALLET_CONFIG,
   SNAPS_CONFIG,
   DELEGATION_TOOLKIT_CONFIG,
   isPathInSections,
@@ -31,7 +30,6 @@ const DocSidebarMobileSecondaryMenu: NavbarSecondaryMenuComponent<Props> = ({ si
     location.pathname,
     SERVICES_DASHBOARD_CONFIG.sections
   )
-  const isSDKOrWallet = isPathInSections(location.pathname, SDK_WALLET_CONFIG.sections)
   const isSnaps = location.pathname.startsWith('/snaps')
 
   return (
@@ -49,11 +47,6 @@ const DocSidebarMobileSecondaryMenu: NavbarSecondaryMenuComponent<Props> = ({ si
       {isServicesOrDashboard && (
         <li className={styles.versionDropdownContainer}>
           <SidebarSectionDropdown {...SERVICES_DASHBOARD_CONFIG} />
-        </li>
-      )}
-      {isSDKOrWallet && (
-        <li className={styles.versionDropdownContainer}>
-          <SidebarSectionDropdown {...SDK_WALLET_CONFIG} />
         </li>
       )}
       {isSnaps && (
