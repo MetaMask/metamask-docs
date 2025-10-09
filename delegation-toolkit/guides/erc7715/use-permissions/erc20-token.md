@@ -15,7 +15,7 @@ permissions for ERC-20 token transfers with time-based (periodic) or streaming c
 
 - [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
 - [Configure the Delegation Toolkit.](../../configure-toolkit.md)
-- [Create a session account.](../execute-on-metamask-user-behalf.md#3-set-up-a-session-account)
+- [Create a session account.](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
 
 ## ERC-20 periodic permission
 
@@ -124,8 +124,6 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       initialAmount: parseUnits("1", 6),
       // 2 USDC in WEI format. Since USDC has 6 decimals, 2 * 10^6.
       maxAmount: parseUnits("2", 6),
-      // 1 hour in seconds.
-      duration: 3600,
       startTime: currentTime,
       justification: "Permission to use 0.1 USDC per second",
     },

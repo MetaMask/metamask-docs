@@ -15,7 +15,7 @@ permissions for native token transfers with time-based (periodic) or streaming c
 
 - [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
 - [Configure the Delegation Toolkit.](../../configure-toolkit.md)
-- [Create a session account.](../execute-on-metamask-user-behalf.md#3-set-up-a-session-account)
+- [Create a session account.](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
 
 ## Native token periodic permission
 

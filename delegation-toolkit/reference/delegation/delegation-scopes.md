@@ -1,5 +1,6 @@
 ---
 description: Delegation scopes reference.
+sidebar_label: Delegation scopes
 keywords: [delegation scopes, configuration, reference]
 ---
 
