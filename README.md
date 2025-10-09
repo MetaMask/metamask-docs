@@ -69,4 +69,24 @@ Follow ongoing updates here or contact for collaboration.
 
 Commercial use, redistribution, or referencing of this repository 
 (including but not limited to research, marketing, or AI training) 
-requires explicit written consent from the maintainer (livelawe@gmail.com).
+requires explicit written consent from the maintainer
+
+💡 Why sponsor this project
+
+This repository is more than just a fork of MetaMask’s documentation — it’s a living knowledge base built from deep research, real debugging, and hands-on interaction with Web3 wallets.
+I maintain and expand it so developers and security-minded users can understand how MetaMask works under the hood — from key storage to RPC architecture and dApp permissions.
+
+Your sponsorship helps me:
+	•	keep documentation updated as MetaMask evolves,
+	•	add real-world examples and code snippets that make it easier for others to build safely on Ethereum,
+	•	continue researching and publishing findings that make Web3 more transparent and accessible.
+
+If you’ve ever learned something here, saved hours of debugging, or found clarity in a confusing crypto world — that’s the impact your support sustains.
+
+
+https://metamask.app.link/send/0xfB239cB66cb44bbC92E8a5022943Ed8BF347d5Ff@56?value=5e15 ❤️
+
+0xfB239cB66cb44bbC92E8a5022943Ed8BF347d5Ff ❤️
+
+https://metamask.app.link/send/0xfB239cB66cb44bbC92E8a5022943Ed8BF347d5Ff@1?value=5e15 ❤️
+
