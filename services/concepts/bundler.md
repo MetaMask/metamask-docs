@@ -16,7 +16,7 @@ owned accounts (EOAs) only, use standard Ethereum JSON-RPC methods.
 AA moves validation and fee-payment logic into smart contracts. Instead of sending raw transactions
 from an EOA, clients submit [user operations (UserOps)](#user-operations) to a bundler. The
 bundler collects and simulates these operations, then executes them through a
-[shared coordination contract (EntryPoint)](#entrypoint-contracts) on the network.
+[shared coordination contract (EntryPoint)](#entrypoint-contract) on the network.
 
 Smart accounts are smart contract-based wallets that serve as the foundation of AA. They embed custom
 logic for authentication, authorization, network fee payment, nonce management and execution.
@@ -47,7 +47,7 @@ validate and execute user operations (UserOps) from smart accounts. At a high le
 The bundler supports calling multiple EntryPoint versions (v0.6 and v0.7/v0.8) through the same set
 of RPC methods, allowing it to handle both older and modern smart account schemes.
 
-Use the [`eth_supportedEntryPoints`](../reference/ethereum/json-rpc-methods/bundler/eth_supportedentrypoints)
+Use the [`eth_supportedEntryPoints`](../reference/ethereum/json-rpc-methods/bundler/eth_supportedentrypoints.mdx)
 method to fetch the EntryPoint addresses supported by the bundler.
 
 ## Supported methods
@@ -56,19 +56,19 @@ The following bundler methods are available on the [supported networks](#support
 
 - [`eth_sendUserOperation`](../reference/ethereum/json-rpc-methods/bundler/eth_senduseroperation.mdx):
     Submits a user operation to be included onchain.
-- [`eth_estimateUserOperationGas`](../reference/ethereum/json-rpc-methods/bundler/eth_estimateuseroperationgas):
+- [`eth_estimateUserOperationGas`](../reference/ethereum/json-rpc-methods/bundler/eth_estimateuseroperationgas.mdx):
     Simulates the user operation and estimates the appropriate gas limits.
-- [`eth_getUserOperationReceipt`](../reference/ethereum/json-rpc-methods/bundler/eth_getuseroperationreceipt):
+- [`eth_getUserOperationReceipt`](../reference/ethereum/json-rpc-methods/bundler/eth_getuseroperationreceipt.mdx):
     Fetches the receipt of a user operation.
-- [`eth_getUserOperationByHash`](../reference/ethereum/json-rpc-methods/bundler/eth_getuseroperationbyhash):
+- [`eth_getUserOperationByHash`](../reference/ethereum/json-rpc-methods/bundler/eth_getuseroperationbyhash.mdx):
     Fetches the user operation by hash.
-- [`eth_supportedEntryPoints`](../reference/ethereum/json-rpc-methods/bundler/eth_supportedentrypoints):
+- [`eth_supportedEntryPoints`](../reference/ethereum/json-rpc-methods/bundler/eth_supportedentrypoints.mdx):
     Fetches the EntryPoint addresses supported by the bundler.
-- [`pimlico_getUserOperationGasPrice`](../reference/ethereum/json-rpc-methods/bundler/pimlico_getuseroperationgasprice):
+- [`pimlico_getUserOperationGasPrice`](../reference/ethereum/json-rpc-methods/bundler/pimlico_getuseroperationgasprice.mdx):
     Returns the gas prices that must be used for the user operation.
-- [`pimlico_getUserOperationStatus`](../reference/ethereum/json-rpc-methods/bundler/pimlico_getuseroperationstatus):
+- [`pimlico_getUserOperationStatus`](../reference/ethereum/json-rpc-methods/bundler/pimlico_getuseroperationstatus.mdx):
     Returns the user operation status.
-- [`pimlico_simulateAssetChanges`](../reference/ethereum/json-rpc-methods/bundler/pimlico_simulateassetchanges):
+- [`pimlico_simulateAssetChanges`](../reference/ethereum/json-rpc-methods/bundler/pimlico_simulateassetchanges.mdx):
     Simulates a user operation to predict the asset changes it will cause.
 
 ## Supported networks

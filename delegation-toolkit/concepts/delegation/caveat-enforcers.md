@@ -6,7 +6,7 @@ keywords: [caveats, caveat enforcers, delegation]
 # Caveat enforcers
 
 The MetaMask Delegation Toolkit provides *caveat enforcers*, which are smart contracts that implement rules and restrictions (*caveats*) on delegations.
-They serve as the underlying mechanism that enables conditional execution within the [Delegation Framework](index.md#delegation-framework).
+They serve as the underlying mechanism that enables conditional execution within the [Delegation Framework](./index.md#delegation-framework).
 
 A caveat enforcer acts as a gate that validates whether a delegation can be used for a particular execution. When a delegate attempts to execute an action on behalf of a delegator, each caveat enforcer specified in the delegation evaluates whether the execution meets its defined criteria.
 
@@ -164,7 +164,7 @@ For other restriction patterns, you can also [create custom caveat enforcers](/t
 
 ## Attenuating authority with redelegations
 
-When creating chains of delegations via [redelegations](index.md#delegation-types), it's important to understand how authority flows and can be restricted.
+When creating chains of delegations via [redelegations](./index.md#delegation-types), it's important to understand how authority flows and can be restricted.
 
 Caveats applied to a chain of delegations are *accumulative*—they stack on top of each other:
 
