@@ -4,6 +4,9 @@ sidebar_label: Delegation scopes
 keywords: [delegation scopes, configuration, reference]
 ---
 
+import Tabs from "@theme/Tabs"; 
+import TabItem from "@theme/TabItem";
+
 # Delegation scopes
 
 When [creating a delegation](../../guides/delegation/execute-on-smart-accounts-behalf.md), you can configure the following scopes to define the delegation's initial authority.
@@ -15,7 +18,6 @@ Learn [how to use delegation scopes](../../guides/delegation/use-delegation-scop
 
 Ensures a per-period limit for ERC-20 token transfers.
 At the start of each new period, the allowance resets.
-
 
 #### Parameters
 
@@ -166,10 +168,13 @@ At the start of each new period, the allowance resets.
 | `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
 | `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
 | `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
 #### Example
+
+<Tabs>
+<TabItem value="With allowedCalldata">
 
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
@@ -181,15 +186,52 @@ const delegation = createDelegation({
     periodAmount: 1000000000000000000n,
     periodDuration: 86400,
     startDate: 1743763600,
+    // allowedCalldata is optional and can only be used WITHOUT exactCalldata.
+    allowedCalldata: [
+      {
+        startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
+        value: "0x1234567890abcdef", // The expected calldata.
+      }
+    ],
   },
-  // Address that is granting the delegation
+  // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Address to which the delegation is being granted
+  // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
+
+</TabItem>
+<TabItem value="With exactCalldata">
+
+```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
+const delegation = createDelegation({
+  scope: {
+    type: "nativeTokenPeriodTransfer",
+    periodAmount: 1000000000000000000n,
+    periodDuration: 86400,
+    startDate: 1743763600,
+    // exactCalldata is optional and can only be used WITHOUT allowedCalldata.
+    exactCalldata: {
+      calldata: "0x1234567890abcdef",
+    },
+  },
+  // Address that is granting the delegation.
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted.
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
+});
+```
+
+</TabItem>
+</Tabs>
 
 ### Native token streaming scope
 
@@ -205,10 +247,13 @@ At the start, a specified initial amount is released, after which tokens accrue 
 | `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
 | `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
 | `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
 #### Example
+
+<Tabs>
+<TabItem value="With allowedCalldata">
 
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
@@ -221,15 +266,53 @@ const delegation = createDelegation({
     initialAmount: 1000000n,
     maxAmount: 10000000n,
     startTime: 1703980800,
+    // allowedCalldata is optional and can only be used WITHOUT exactCalldata.
+    allowedCalldata: [
+      {
+        startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
+        value: "0x1234567890abcdef", // The expected calldata.
+      }
+    ],
   },
-  // Address that is granting the delegation
+  // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Address to which the delegation is being granted
+  // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
+
+</TabItem>
+<TabItem value="With exactCalldata">
+
+```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
+const delegation = createDelegation({
+  scope: {
+    type: "nativeTokenStreaming",
+    amountPerSecond: 100n,
+    initialAmount: 1000000n,
+    maxAmount: 10000000n,
+    startTime: 1703980800,
+    // exactCalldata is optional and can only be used WITHOUT allowedCalldata.
+    exactCalldata: {
+      calldata: "0x1234567890abcdef",
+    },
+  },
+  // Address that is granting the delegation.
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted.
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
+});
+```
+
+</TabItem>
+</Tabs>
 
 ### Native token transfer scope
 
@@ -241,10 +324,13 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 | Name              | Type      | Required | Description                                                       |
 | ----------------- | --------- | -------- | ----------------------------------------------------------------- |
 | `maxAmount`       | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The `calldata` that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
 #### Example
+
+<Tabs>
+<TabItem value="With allowedCalldata">
 
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
@@ -255,15 +341,51 @@ const delegation = createDelegation({
     type: "nativeTokenTransferAmount",
     // 0.001 ETH in wei format.
     maxAmount: 1000000000000000n,
+    // allowedCalldata is optional and can only be used WITHOUT exactCalldata.
+    allowedCalldata: [
+      {
+        startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
+        value: "0x1234567890abcdef", // The expected calldata.
+      }
+    ],
   },
-  // Address that is granting the delegation
+  // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Address to which the delegation is being granted
+  // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
+
+</TabItem>
+<TabItem value="With exactCalldata">
+
+```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
+const delegation = createDelegation({
+  scope: {
+    type: "nativeTokenTransferAmount",
+    // 0.001 ETH in wei format.
+    maxAmount: 1000000000000000n,
+    // exactCalldata is optional and can only be used WITHOUT allowedCalldata.
+    exactCalldata: {
+      calldata: "0x1234567890abcdef",
+    },
+  },
+  // Address that is granting the delegation.
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted.
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
+});
+```
+
+</TabItem>
+</Tabs>
 
 ## Function call scope
 
@@ -275,12 +397,15 @@ Defines the specific methods, contract addresses, and calldata that are allowed 
 | ----------------- | -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `targets`         | `Address[]`                      | Yes      | The list of addresses that the delegate is allowed to call.                                                                                                     |
 | `selectors`       | `MethodSelector[]`               | Yes      | The list of method selectors that the delegate is allowed to call. The selector value can be 4-byte hex string, ABI function signature, or ABI function object. |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of `calldata` that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The `calldata` that the delegate is allowed to call. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The calldata that the delegate is allowed to call. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
-This example sets the delegation scope to allow the delegate to call the `approve` function on the USDC token contract.
+This example sets the delegation scope to allow the delegate to call the `approve` function on the USDC token contract:
+
+<Tabs>
+<TabItem value="With allowedCalldata">
 
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
@@ -291,15 +416,51 @@ const delegation = createDelegation({
     type: "functionCall",
     targets: ["0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"], // USDC address on Sepolia.
     selectors: ["approve(address, uint256)"]
+    // allowedCalldata is optional and can only be used WITHOUT exactCalldata.
+    allowedCalldata: [
+      {
+        startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
+        value: "0x1234567890abcdef", // The expected calldata.
+      }
+    ],
   },
-  // Address that is granting the delegation
+  // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Address to which the delegation is being granted
+  // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getDelegatorEnvironment(sepolia.id);
 });
 ```
+
+</TabItem>
+<TabItem value="With exactCalldata">
+
+```typescript
+import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia } from "viem/chains";
+
+const delegation = createDelegation({
+  scope: {
+    type: "functionCall",
+    targets: ["0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"], // USDC address on Sepolia.
+    selectors: ["approve(address, uint256)"]
+    // exactCalldata is optional and can only be used WITHOUT allowedCalldata.
+    exactCalldata: {
+      calldata: "0x1234567890abcdef",
+    },
+  },
+  // Address that is granting the delegation.
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  // Address to which the delegation is being granted.
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  // Alternatively you can use environment property of MetaMask smart account.
+  environment: getDelegatorEnvironment(sepolia.id);
+});
+```
+
+</TabItem>
+</Tabs>
 
 ## Ownership transfer scope
 
@@ -324,9 +485,9 @@ const delegation = createDelegation({
     type: "ownershipTransfer",
     contractAddress,
   },
-  // Address that is granting the delegation
+  // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
-  // Address to which the delegation is being granted
+  // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getDelegatorEnvironment(sepolia.id);
