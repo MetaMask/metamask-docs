@@ -165,7 +165,7 @@ At the start of each new period, the allowance resets.
 | `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
 | `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
 | `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
@@ -215,7 +215,7 @@ At the start, a specified initial amount is released, after which tokens accrue 
 | `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
 | `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
 | `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
@@ -262,7 +262,7 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 | ----------------- | --------- | -------- | ----------------------------------------------------------------- |
 | `maxAmount`       | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
 | `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata that the delegate is allowed to call. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. By default, the value is set to `0x`. Cannot be used together with `allowedCalldata`. |
+| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata that the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
