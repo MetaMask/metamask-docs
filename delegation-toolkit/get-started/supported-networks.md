@@ -23,6 +23,7 @@ If you don't see the network you're looking for, you can request support by emai
 | Unichain            | ❌      | ✅      | ✅      |
 | Arbitrum Nova       | ❌      | ✅      | ✅      |
 | Berachain           | ❌      | ✅      | ✅      |
+| Ink                 | ❌      | ❌      | ✅      |
 
 ## Testnet networks
 
@@ -38,4 +39,6 @@ If you don't see the network you're looking for, you can request support by emai
 | Optimism Sepolia            | ❌      | ✅      | ✅      |
 | Binance Smart Chain         | ❌      | ✅      | ✅      |
 | Polygon Amoy                | ❌      | ✅      | ✅      |
-| Monad                       | ❌      | ✅      | ✅      |  
+| Monad                       | ❌      | ✅      | ✅      |
+| Ink Sepolia                 | ❌      | ❌      | ✅      | 
+| Citrea                      | ❌      | ❌      | ✅      |
