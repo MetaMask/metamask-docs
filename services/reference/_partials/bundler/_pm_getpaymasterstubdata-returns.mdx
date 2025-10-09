@@ -1,0 +1,22 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+An object containing stub paymaster-related fields for gas estimation.
+
+<Tabs>
+<TabItem value="v0.7" label="v0.7 and v0.8">
+
+- `paymaster`: (string) - The address of the paymaster contract.
+- `paymasterData`: (string) - The data to be used in the `paymasterData` field of the user operation.
+- `paymasterVerificationGasLimit`: (string) - The amount of gas to allocate for the verification step
+    of the paymaster.
+- `paymasterPostOpGasLimit`: (string) - The amount of gas to allocate for the post-operation step of
+    the paymaster.
+
+</TabItem>
+<TabItem value="v0.6" label="v0.6">
+
+- `paymasterAndData`: (string) - The combined paymaster address and data to be used in the user operation.
+
+</TabItem>
+</Tabs>

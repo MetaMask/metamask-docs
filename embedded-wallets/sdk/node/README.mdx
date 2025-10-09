@@ -1,0 +1,282 @@
+---
+title: Embedded Wallets SDK for Node.js
+sidebar_label: Getting Started
+description: 'MetaMask Embedded Wallets SDK for Node.js | Backend Documentation'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
+
+## Overview
+
+The MetaMask Embedded Wallets Node.js SDK is a backend solution designed for server-side authentication and key management. This SDK enables seamless integration of Web3 authentication into backend applications, AI agents, and programmatic use cases.
+
+Unlike frontend SDKs, the Node.js SDK is **stateless and sessionless**, making it ideal for:
+
+- Backend AI agents
+- Server-side wallet operations
+- Programmatic blockchain interactions
+- Custodial wallet services, without key management and recovery worries.
+
+## Key Features
+
+- **Stateless Architecture**: No session management required
+- **Multi-Chain Support**: EVM chains, Solana, and other blockchains
+- **Custom Authentication**: Mandatory custom auth with single key share
+- **Private Key Access**: Direct access to private keys for any blockchain
+- **Backend-Optimized**: Designed specifically for server environments
+
+## Requirements
+
+- Node.js 18+
+- Custom authentication setup (mandatory)
+- Web3Auth Dashboard project configuration
+
+## Installation
+
+Install the Web3Auth Node SDK
+
+```bash npm2yarn
+npm install --save @web3auth/node-sdk
+```
+
+## Setup
+
+:::info Prerequisites
+
+Before you start, make sure you have:
+
+1. Registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/)
+2. Set up a project with a custom **Auth Connection** (mandatory for Node.js SDK)
+
+:::
+
+### 1. Custom Authentication Setup (Required)
+
+The Node.js SDK **only supports custom authentication**. You must create a custom auth connection in the Web3Auth Dashboard:
+
+1. Go to [Web3Auth Dashboard](https://dashboard.web3auth.io/)
+2. Select your project
+3. Navigate to **Authentication** → **Custom Connections**
+4. Click **Create connections**
+5. Configure your auth connection with your custom JWT details
+
+:::info
+
+You can refer to the [Custom JWT Setup](/embedded-wallets/authentication/custom-connections/custom-jwt/) guide to learn more.
+
+:::
+
+### 2. SDK Configuration
+
+Create a Web3Auth instance with your client ID, web3auth network name, and chain information:
+
+```javascript
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID', // Get your Client ID from Web3Auth Dashboard
+  web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
+})
+```
+
+> The chain information is optional and will be used to setup the provider for connecting to the chain. If not provided, the first chain in the list will be used.
+
+### 3. Initialize Web3Auth
+
+Initialize the Web3Auth instance during your application startup:
+
+```javascript
+await web3auth.init()
+```
+
+### 4. Authenticate Users
+
+Use the connect method with your custom authentication parameters:
+
+```javascript
+const result = await web3auth.connect({
+  authConnectionId: 'YOUR_AUTH_CONNECTION_ID', // Your custom authentication connection name
+  idToken: 'USER_ID_TOKEN', // JWT token from your auth system
+})
+```
+
+## Configuration Options
+
+<Tabs
+  defaultValue="basic-config"
+  values={[
+    { label: "Basic Configuration", value: "basic-config" },
+    { label: "Advanced Configuration", value: "advanced-config" },
+  ]}
+>
+
+<TabItem value="basic-config">
+
+```javascript
+const { Web3Auth } = require('@web3auth/node-sdk')
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
+})
+
+await web3auth.init()
+```
+
+</TabItem>
+
+<TabItem value="advanced-config">
+
+```javascript
+const { Web3Auth } = require('@web3auth/node-sdk')
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
+  defaultChainId: '0x1', // or '0x89' for Polygon
+  enableLogging: true,
+  sessionTime: 3600,
+})
+
+await web3auth.init()
+```
+
+</TabItem>
+
+</Tabs>
+
+## Configuration Parameters
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter         | Type      | Default  | Description                                                                                                                  |
+| ----------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`        | `string`  | Required | Your Web3Auth client ID                                                                                                      |
+| `web3AuthNetwork` | `string`  | Required | Network: 'sapphire_mainnet' or 'sapphire_devnet'                                                                             |
+| `defaultChainId`  | `string`  | Optional | Chain ID to use for the default chain (e.g., '0x1' for Ethereum). If not provided, the first chain in the list will be used. |
+| `chains`          | `object`  | Optional | Chains to use for the authentication. It takes `Chains` as a value.                                                          |
+| `enableLogging`   | `boolean` | Optional | Setting to true will enable logs. Default is false.                                                                          |
+| `usePnPKey`       | `boolean` | Optional | Setting to true will use the PnP key. Default is false.                                                                      |
+| `useDKG`          | `boolean` | Optional | Setting to true will use the DKG. Default is false.                                                                          |
+| `checkCommitment` | `boolean` | Optional | Setting to true will check the commitment. Default is true.                                                                  |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```javascript
+export interface Web3AuthOptions {
+  /**
+   * Client id for web3auth.
+   * You can obtain your client id from the web3auth developer dashboard.
+   * You can set any random string for this on localhost.
+   */
+  clientId: string;
+
+  /**
+   * Web3Auth Network to use for login
+   * @defaultValue mainnet
+   */
+  web3AuthNetwork?: WEB3AUTH_NETWORK_TYPE;
+
+  /**
+   * multiple chain configurations,
+   * only provided chains will be used
+   */
+  chains?: CustomChainConfig[];
+
+  /**
+   * default chain Id to use
+   */
+  defaultChainId?: string;
+
+  /**
+   * setting to true will enable logs
+   *
+   * @defaultValue false
+   */
+  enableLogging?: boolean;
+
+  /**
+   * setting this to true returns the same key as web sdk (i.e., plug n play key)
+   * By default, this sdk returns SFAKey
+   */
+  usePnPKey?: boolean;
+
+  /**
+   * set this to true when you wants keys/shares to be generated by a dkg network
+   *
+   * Default:- false for sapphire network and always true for legacy networks.
+   * Legacy networks doesnt support non dkg flow. So this is always true for legacy networks.
+   */
+  useDKG?: boolean;
+
+  /**
+   * setting this to true will check the commitment of the shares
+   *
+   * @defaultValue true
+   */
+  checkCommitment?: boolean;
+}
+```
+
+</TabItem>
+
+</Tabs>
+
+## Usage
+
+```javascript
+// focus-start
+const { Web3Auth } = require('@web3auth/node-sdk')
+// focus-end
+
+// Dashboard Registration
+const clientId =
+  'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
+
+// Auth Connection
+const authConnectionId = 'w3a-node-demo'
+
+// focus-start
+const web3auth = new Web3Auth({
+  clientId,
+  web3AuthNetwork: 'sapphire_mainnet',
+})
+
+await web3auth.init()
+// focus-end
+
+const privateKey = await fs.readFile('privateKey.pem', 'utf8')
+
+var idToken = jwt.sign(
+  {
+    sub: '9fcd68c4-af50-4dd7-adf6-abd12a13cb32',
+    name: 'Web3Auth DevRel Team',
+    email: 'devrel@web3auth.io',
+    aud: 'urn:api-web3auth-io', // -> to be used in Custom Authentication as JWT Field
+    iss: 'https://web3auth.io', // -> to be used in Custom Authentication as JWT Field
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + 60 * 60,
+  },
+  privateKey,
+  { algorithm: 'RS256', keyid: '2ma4enu1kdvw5bo9xsfpi3gcjzrt6q78yl0h' }
+)
+
+console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
+
+// focus-start
+const result = await web3auth.connect({
+  authConnectionId,
+  idToken,
+})
+// focus-end
+```

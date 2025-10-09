@@ -1,0 +1,11 @@
+An object containing gas price recommendations for different priority levels:
+
+- `slow`: (object) - Lower gas prices for non-urgent transactions:
+  - `maxFeePerGas`: (string) - Maximum fee per gas for slow priority.
+  - `maxPriorityFeePerGas`: (string) - Maximum priority fee per gas for slow priority.
+- `standard`: (object) - Standard gas prices for normal transactions:
+  - `maxFeePerGas`: (string) - Maximum fee per gas for standard priority.
+  - `maxPriorityFeePerGas`: (string) - Maximum priority fee per gas for standard priority.
+- `fast`: (object) - Higher gas prices for urgent transactions:
+  - `maxFeePerGas`: (string) - Maximum fee per gas for fast priority.
+  - `maxPriorityFeePerGas`: (string) - Maximum priority fee per gas for fast priority.
