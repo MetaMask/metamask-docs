@@ -83,6 +83,7 @@ const sidebar = {
               ],
             },
             'guides/delegation/check-delegation-state',
+            'guides/delegation/disable-delegation',
           ],
         },
         {
