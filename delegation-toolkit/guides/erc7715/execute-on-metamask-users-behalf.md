@@ -252,11 +252,11 @@ const transactionHash = await sessionAccountWalletClient.sendTransactionWithDele
 <TabItem value="config.ts">
 
 ```typescript
-import { encodeFunctionData, erc20Abi } from "viem";
+import { encodeFunctionData, erc20Abi, parseUnits } from "viem";
 
 export const calldata = encodeFunctionData({
   abi: erc20Abi,
-  args: [ sessionAccount.address, 1000000n ],
+  args: [ sessionAccount.address, parseUnits("1", 6) ],
   functionName: 'transfer',
 });
 ```

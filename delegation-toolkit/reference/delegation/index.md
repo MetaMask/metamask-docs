@@ -101,6 +101,7 @@ Creates a delegation with a specific delegate.
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
 import { sepolia } from "viem/chains";
+import { parseEther } from "viem";
 
 const delegation = createDelegation({
   // Address that is granting the delegation
@@ -112,7 +113,7 @@ const delegation = createDelegation({
   scope: {
     type: "nativeTokenTransferAmount",
     // 0.001 ETH in wei format.
-    maxAmount: 1000000000000000n,
+    maxAmount: parseEther("0.001"),
   },
 });
 ```
@@ -138,6 +139,7 @@ Creates an open delegation that can be redeemed by any delegate.
 ```typescript
 import { createOpenDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
 import { sepolia } from "viem/chains";
+import { parseEther } from "viem";
 
 const delegation = createOpenDelegation({
   // Address that is granting the delegation
@@ -147,7 +149,7 @@ const delegation = createOpenDelegation({
   scope: {
     type: "nativeTokenTransferAmount",
     // 0.001 ETH in wei format.
-    maxAmount: 1000000000000000n,
+    maxAmount: parseEther("0.001"),
   },
 });
 ```
@@ -168,13 +170,14 @@ Creates an `ExecutionStruct` instance.
 
 ```ts
 import { createExecution } from "@metamask/delegation-toolkit";
+import { parseEther } from "viem";
 
 // Creates an ExecutionStruct to transfer 0.01 ETH to
 // 0xe3C818389583fDD5cAC32f548140fE26BcEaE907 address.
 const execution = createExecution({
   target: "0xe3C818389583fDD5cAC32f548140fE26BcEaE907",
   // 0.01 ETH in wei
-  value: 10000000000000000n,
+  value: parseEther("0.01"),
   callData: "0x",
 });
 ```
@@ -295,6 +298,7 @@ const disableDelegationData = DelegationManager.encode.disableDelegation({
 ```ts
 import { createDelegation } from "@metamask/delegation-toolkit";
 import { sepolia } from "viem/chains";
+import { parseEther } from "viem";
 
 export const delegation = createDelegation({
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
@@ -303,7 +307,7 @@ export const delegation = createDelegation({
   scope: {
     type: "nativeTokenTransferAmount",
     // 0.001 ETH in wei format.
-    maxAmount: 1000000000000000n,
+    maxAmount: parseEther("0.001"),
   },
 });
 ```
@@ -448,7 +452,7 @@ import {
   getDeleGatorEnvironment,
   createDelegation,
 } from "@metamask/delegation-toolkit";
-import { createWalletClient } from "viem";
+import { createWalletClient, parseEther } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia } from "viem/chains";
 
@@ -474,7 +478,7 @@ export const delegation = createDelegation({
   scope: {
     type: "nativeTokenTransferAmount",
     // 0.001 ETH in wei format.
-    maxAmount: 1000000000000000n,
+    maxAmount: parseEther("0.001"),
   },
 });
 ```
