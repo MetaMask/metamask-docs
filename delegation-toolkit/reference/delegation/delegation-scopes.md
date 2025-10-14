@@ -33,14 +33,19 @@ At the start of each new period, the allowance resets.
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
 import { sepolia } from "viem/chains";
+import { parseUnits } from "viem";
+
+// Since current time is in seconds, convert milliseconds to seconds.
+const startDate = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
     type: "erc20PeriodTransfer",
     tokenAddress: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
-    periodAmount: 1000000000000000000n,
+    // 10 ERC-20 token with 6 decimals
+    periodAmount: parseUnits("10", 6),
     periodDuration: 86400,
-    startDate: 1743763600,
+    startDate,
   },
   // Address that is granting the delegation
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
@@ -72,15 +77,22 @@ At the start, a specified initial amount is released, after which tokens accrue 
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
 import { sepolia } from "viem/chains";
+import { parseUnits } from "viem";
+
+// Since current time is in seconds, convert milliseconds to seconds.
+const startTime = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
     type: "erc20Streaming",
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-    amountPerSecond: 100n,
-    initialAmount: 1000000n,
-    maxAmount: 10000000n,
-    startTime: 1703980800,
+    // 0.1 ERC-20 token with 6 decimals
+    amountPerSecond: parseUnits("0.1", 6),
+    // 1 ERC-20 token with 6 decimals
+    initialAmount: parseUnits("1", 6),
+    // 10 ERC-20 token with 6 decimals
+    maxAmount: parseUnits("10", 6),
+    startTime,
   },
   // Address that is granting the delegation
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
@@ -108,12 +120,14 @@ This scope is useful for setting simple, fixed transfer limits without any time-
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
 import { sepolia } from "viem/chains";
+import { parseUnits } from "viem";
 
 const delegation = createDelegation({
   scope: {
     type: "erc20TransferAmount",
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-    maxAmount: 10000n,
+    // 1 ERC-20 token with 6 decimals
+    maxAmount: parseUnits("1", 6),
   },
   // Address that is granting the delegation
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
@@ -176,13 +190,17 @@ At the start of each new period, the allowance resets.
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
 import { sepolia } from "viem/chains";
+import { parseEther } from "viem";
+
+// Since current time is in seconds, convert milliseconds to seconds.
+const startDate = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
     type: "nativeTokenPeriodTransfer",
-    periodAmount: 1000000000000000000n,
+    periodAmount: parseEther("0.01"),
     periodDuration: 86400,
-    startDate: 1743763600,
+    startDate,
   },
   // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
@@ -215,14 +233,18 @@ At the start, a specified initial amount is released, after which tokens accrue 
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
 import { sepolia } from "viem/chains";
+import { parseEther } from "viem";
+
+// Since current time is in seconds, convert milliseconds to seconds.
+const startTime = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
     type: "nativeTokenStreaming",
-    amountPerSecond: 100n,
-    initialAmount: 1000000n,
-    maxAmount: 10000000n,
-    startTime: 1703980800,
+    amountPerSecond: parseEther("0.0001"),
+    initialAmount: parseEther("0.01"),
+    maxAmount: parseEther("0.1"),
+    startTime,
   },
   // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
@@ -251,19 +273,13 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 ```typescript
 import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
 import { sepolia } from "viem/chains";
+import { parseEther } from "viem";
 
 const delegation = createDelegation({
   scope: {
     type: "nativeTokenTransferAmount",
     // 0.001 ETH in wei format.
-    maxAmount: 1000000000000000n,
-    // allowedCalldata is optional and can only be used WITHOUT exactCalldata.
-    allowedCalldata: [
-      {
-        startIndex: 4, // The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.
-        value: "0x1234567890abcdef", // The expected calldata.
-      }
-    ],
+    maxAmount: parseEther("0.001"),
   },
   // Address that is granting the delegation.
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",

@@ -82,14 +82,18 @@ const { availableAmount } = await caveatEnforcerClient.getErc20PeriodTransferEnf
 
 ```typescript
 import { createDelegation } from '@metamask/delegation-toolkit'
+import { parseUnits } from 'viem'
+
+// startDate should be in seconds.
+const startDate = Math.floor(Date.now() / 1000);
 
 export const delegation = createDelegation({
   scope: {
     type: 'erc20PeriodTransfer',
     tokenAddress: '0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da',
-    periodAmount: 1000000000000000000n,
+    periodAmount: parseUnits('10', 6),
     periodDuration: 86400,
-    startDate: 1743763600,
+    startDate,
   },
   to: delegateAccount,
   from: delegatorAccount,

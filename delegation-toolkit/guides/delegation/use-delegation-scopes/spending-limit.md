@@ -30,14 +30,19 @@ See the [ERC-20 periodic scope reference](../../../reference/delegation/delegati
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
+import { parseUnits } from "viem";
+
+// startDate should be in seconds.
+const startDate = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
     type: "erc20PeriodTransfer",
     tokenAddress: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
-    periodAmount: 1000000000000000000n,
+    // USDC has 6 decimal places.
+    periodAmount: parseUnits("10", 6),
     periodDuration: 86400,
-    startDate: 1743763600,
+    startDate,
   },
   to: delegateAccount,
   from: delegatorAccount,
@@ -59,15 +64,20 @@ See the [ERC-20 streaming scope reference](../../../reference/delegation/delegat
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
+import { parseUnits } from "viem";
+
+// startTime should be in seconds.
+const startTime = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
     type: "erc20Streaming",
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-    amountPerSecond: 100n,
-    initialAmount: 1000000n,
-    maxAmount: 10000000n,
-    startTime: 1703980800,
+    // USDC has 6 decimal places.
+    amountPerSecond: parseUnits("0.1", 6),
+    initialAmount: parseUnits("10", 6),
+    maxAmount: parseUnits("100", 6),
+    startTime,
   },
   to: delegateAccount,
   from: delegatorAccount,
@@ -89,12 +99,14 @@ See the [ERC-20 transfer scope reference](../../../reference/delegation/delegati
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
+import { parseUnits } from "viem";
 
 const delegation = createDelegation({
   scope: {
     type: "erc20TransferAmount",
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
-    maxAmount: 10000n,
+    // USDC has 6 decimal places.
+    maxAmount: parseUnits("10", 6),
   },
   to: delegateAccount,
   from: delegatorAccount,
@@ -143,13 +155,17 @@ See the [native token periodic scope reference](../../../reference/delegation/de
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
+import { parseEther } from "viem";
+
+// startDate should be in seconds.
+const startDate = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
     type: "nativeTokenPeriodTransfer",
-    periodAmount: 1000000000000000000n,
+    periodAmount: parseEther("0.01"),
     periodDuration: 86400,
-    startDate: 1743763600,
+    startDate,
   },
   to: delegateAccount,
   from: delegatorAccount,
@@ -174,14 +190,18 @@ See the [native token streaming scope reference](../../../reference/delegation/d
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
+import { parseEther } from "viem";
+
+// startTime should be in seconds.
+const startTime = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
     type: "nativeTokenStreaming",
-    amountPerSecond: 100n,
-    initialAmount: 1000000n,
-    maxAmount: 10000000n,
-    startTime: 1703980800,
+    amountPerSecond: parseEther("0.001"),
+    initialAmount: parseEther("0.01"),
+    maxAmount: parseEther("0.1"),
+    startTime,
   },
   to: delegateAccount,
   from: delegatorAccount,
@@ -206,12 +226,12 @@ See the [native token transfer scope reference](../../../reference/delegation/de
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit";
+import { parseEther } from "viem";
 
 const delegation = createDelegation({
   scope: {
     type: "nativeTokenTransferAmount",
-    // 0.001 ETH in wei format.
-    maxAmount: 1000000000000000n,
+    maxAmount: parseEther("0.001"),
   },
   to: delegateAccount,
   from: delegatorAccount,
