@@ -49,7 +49,7 @@ const delegation = createDelegation({
 ### Define allowed calldata
 
 You can further restrict the scope by defining the `allowedCalldata`. For example, you can set 
-`allowedCalldata` so that the delegate is only permitted to call the `approve` function on the
+`allowedCalldata` so the delegate is only permitted to call the `approve` function on the
 USDC token contract with an allowance value of `0`. This effectively limits the delegate to 
 revoking ERC-20 approvals.
 
@@ -93,9 +93,9 @@ const delegation = createDelegation({
 
 ### Define exact calldata
 
-Instead of defining the `allowedCalldata`, you can specify the `exactCalldata`. For example, you can
-set `exactCalldata` so that the delegate is permitted to call only the `approve` function on the USDC token
-contract, with the spender address and an allowance value of 0. This effectively limits the delegate further to
+You can define the `exactCalldata` instead of the `allowedCalldata`. For example, you can
+set `exactCalldata` so the delegate is permitted to call only the `approve` function on the USDC token
+contract, with a specific spender address and an allowance value of 0. This effectively limits the delegate to
 revoking ERC-20 approvals for a specific spender.
 
 ```typescript
