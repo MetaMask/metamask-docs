@@ -48,8 +48,8 @@ Add the following code to `AfterTimestampEnforcer.sol`. This contract implements
 extends the `ICaveatEnforcer.sol` interface and ensures that a delegation can only be redeemed after
 a specific timestamp.
 
-In this example, we override only the `beforeHook` function, as it’s responsible for enforcing
-conditions before a delegation’s execution during the redemption process. Here, it verifies that
+This contract overrides the `beforeHook` function, which is responsible for enforcing
+conditions before a delegation's execution during the redemption process. In this example, it verifies that
 the current block timestamp is later than the defined allowed timestamp.
 
 ```solidity title="AfterTimestampEnforcer.sol"
