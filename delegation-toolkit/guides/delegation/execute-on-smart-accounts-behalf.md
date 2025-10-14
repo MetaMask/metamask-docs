@@ -137,9 +137,10 @@ Before creating a delegation, ensure that the delegator account (in this example
 
 ```typescript
 import { createDelegation } from "@metamask/delegation-toolkit"
+import { parseUnits } from "viem"
 
 // USDC address on Ethereum Sepolia.
-const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
+const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
 const delegation = createDelegation({
   to: delegateSmartAccount.address, // This example uses a delegate smart account
@@ -148,7 +149,8 @@ const delegation = createDelegation({
   scope: {
     type: "erc20TransferAmount",
     tokenAddress,
-    maxAmount: 10000000n,
+    // 10 USDC 
+    maxAmount: parseUnits("10", 6),
   },
 })
 ```
@@ -175,7 +177,7 @@ Bob can now redeem the delegation. The redeem transaction is sent to the `Delega
 To prepare the calldata for the redeem transaction, use the [`redeemDelegations`](../../reference/delegation/index.md#redeemdelegations) method from `DelegationManager`.
 Since Bob is redeeming a single delegation chain, use the [`SingleDefault`](../../concepts/delegation/index.md#execution-modes) execution mode.
 
-Bob can redeem the delegation by submitting a user operation if his account is a smart account, or a regular transaction if his account is an EOA:
+Bob can redeem the delegation by submitting a user operation if his account is a smart account, or a regular transaction if his account is an EOA. In this example, Bob transfers 1 USDC from Alice’s account to his own.
 
 <Tabs>
 <TabItem value="Redeem with a smart account">
@@ -184,10 +186,14 @@ Bob can redeem the delegation by submitting a user operation if his account is a
 import { createExecution, ExecutionMode } from "@metamask/delegation-toolkit"
 import { DelegationManager } from "@metamask/delegation-toolkit/contracts"
 import { zeroAddress } from "viem"
+import { callData } from "./config.ts"
 
 const delegations = [signedDelegation]
 
-const executions = createExecution({ target: zeroAddress })
+// USDC address on Ethereum Sepolia.
+const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+
+const executions = createExecution({ target: tokenAddress, callData })
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
@@ -215,10 +221,14 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 import { createExecution, getDeleGatorEnvironment, ExecutionMode } from "@metamask/delegation-toolkit"
 import { DelegationManager } from "@metamask/delegation-toolkit/contracts"
 import { zeroAddress } from "viem"
+import { callData } from "./config.ts"
 
 const delegations = [signedDelegation]
 
-const executions = createExecution({ target: zeroAddress })
+// USDC address on Ethereum Sepolia.
+const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+
+const executions = createExecution({ target: tokenAddress, callData })
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
@@ -230,6 +240,21 @@ const transactionHash = await delegateWalletClient.sendTransaction({
   to: getDeleGatorEnvironment(chain.id).DelegationManager,
   data: redeemDelegationCalldata,
   chain,
+})
+```
+
+</TabItem>
+
+<TabItem value="config.ts">
+
+```typescript
+import { encodeFunctionData, erc20Abi, parseUnits } from "viem"
+
+// calldata to transfer 1 USDC to delegate address.
+export const callData = encodeFunctionData({
+  abi: erc20Abi,
+  args: [ delegateSmartAccount.address, parseUnits("1", 6) ],
+  functionName: 'transfer',
 })
 ```
 
