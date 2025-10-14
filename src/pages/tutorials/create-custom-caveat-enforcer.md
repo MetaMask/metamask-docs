@@ -42,11 +42,15 @@ npm install @metamask/delegation-toolkit
 ### 2. Create the caveat enforcer
 
 At the root of your project, create a `contracts` directory.
-In that directory, create a new contract named `AfterTimestampEnforcer.sol`.
+Inside that directory, create a new contract named `AfterTimestampEnforcer.sol`.
 
-Add the following code to `AfterTimestampEnforcer.sol`, which creates a caveat enforcer that extends the
-[`ICaveatEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/interfaces/ICaveatEnforcer.sol)
-interface and only allows a delegation to be redeemed after a specific timestamp:
+Add the following code to `AfterTimestampEnforcer.sol`. This contract implements a caveat enforcer that 
+extends the `ICaveatEnforcer.sol` interface and ensures that a delegation can only be redeemed after
+a specific timestamp.
+
+This contract overrides the `beforeHook` function, which is responsible for enforcing
+conditions before a delegation's execution during the redemption process. In this example, it verifies that
+the current block timestamp is later than the defined allowed timestamp.
 
 ```solidity title="AfterTimestampEnforcer.sol"
 // SPDX-License-Identifier: MIT
@@ -77,7 +81,10 @@ contract AfterTimestampEnforcer is CaveatEnforcer {
     // This function MUST revert if the conditions are not met.
     // Get the current timestamp
     uint256 timestamp = block.timestamp;
-
+    
+    // Convert the encoded `terms` into a uint256 timestamp.
+    // Casting to bytes32 ensures the data is exactly 32 bytes, matching
+    // the size of a uint256.
     uint256 validAfter = uint256(bytes32(_terms));
 
     require(timestamp > validAfter, "AfterTimestampEnforcer:cannot-redeem-too-early");
@@ -104,7 +111,7 @@ The Forge CLI will display the address of the deployed caveat enforcer.
 Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the [caveat builder](/delegation-toolkit/reference/delegation/#createcaveatbuilder), and create a delegation.
 
 The following code snippet uses the custom caveat enforcer to create a delegation granting
-a 1,000,000 wei allowance that becomes spendable one hour after it is created:
+a 0.01 ETH allowance that becomes spendable one hour after it is created:
 
 <Tabs>
 <TabItem value="delegation.ts">
@@ -112,7 +119,7 @@ a 1,000,000 wei allowance that becomes spendable one hour after it is created:
 ```typescript
 import { createDelegation, ROOT_AUTHORITY } from '@metamask/delegation-toolkit'
 import { createCaveatBuilder } from '@metamask/delegation-toolkit/utils'
-import { toHex } from 'viem'
+import { toHex, parseEther } from 'viem'
 import { delegatorSmartAccount } from './config.ts'
 
 const environment = delegatorSmartAccount.environment
@@ -122,11 +129,15 @@ const afterTimestampEnforcer = '0x22Ae4c4919C3aB4B5FC309713Bf707569B74876F'
 
 const caveatBuilder = createCaveatBuilder(environment)
 
-const tenAM = 10 * 60 * 60 // 10:00 AM as seconds since midnight.
+// Since block.timestamp is in seconds, convert milliseconds to seconds.
+const currentTime = Math.floor(Date.now() / 1000)
 
-const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', 1000000n).addCaveat({
+// Add an hour to the currentTime
+const validTimestamp = currentTime + 3600
+
+const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', parseEther('0.01')).addCaveat({
   enforcer: afterTimestampEnforcer,
-  terms: toHex(tenAM),
+  terms: toHex(validTimestamp),
 })
 
 const delegation: Delegation =  {
