@@ -23,8 +23,8 @@ Caveat enforcer contract: [`AllowedCalldataEnforcer.sol`](https://github.com/Met
 
 | Name         | Type     | Required | Description                                                                                                          |
 | ------------ | -------- | -------- | -------------------------------------------------------------------------------------------------------------------- |
-| `startIndex` | `number` | Yes      | The index in the `calldata` byte array (including the 4-byte method selector) where the expected `calldata` starts.  |
-| `value`      | `Hex`    | Yes      | The expected `calldata` that must match at the specified index.                                                      |
+| `startIndex` | `number` | Yes      | The index in the calldata byte array (including the 4-byte method selector) where the expected calldata starts.  |
+| `value`      | `Hex`    | Yes      | The expected calldata that must match at the specified index.                                                      |
 
 ### Example
 
@@ -400,7 +400,7 @@ Caveat enforcer contract: [`ExactCalldataEnforcer.sol`](https://github.com/MetaM
 
 | Name              | Type                             | Required | Description                                           |
 | ----------------- | -------------------------------- | -------- | ----------------------------------------------------- |
-| `calldata`        | `Hex`                            | Yes      | The `calldata` that the delegate is allowed to call.  |
+| `calldata`        | `Hex`                            | Yes      | The calldata that the delegate is allowed to call.  |
 
 ### Example
 
