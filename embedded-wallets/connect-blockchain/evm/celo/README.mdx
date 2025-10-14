@@ -1,8 +1,20 @@
 ---
 title: Integrate Embedded Wallets with the Celo Blockchain
-sidebar_label: Celo
-hide_table_of_contents: true
+sidebar_label: Overview
 
+keywords:
+  [
+    celo,
+    wallet,
+    integration,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
 image: 'img/embedded-wallets/banners/celo.png'
 description: 'Integrate Embedded Wallets with the Celo Blockchain | Embedded Wallets'
 ---
@@ -10,13 +22,7 @@ description: 'Integrate Embedded Wallets with the Celo Blockchain | Embedded Wal
 import Tiles from '@theme/Tiles'
 import ChainDetailsCelo from '../../_general-connect-blockchain/_celo.mdx'
 
-Integrate Embedded Wallets (formerly Web3Auth) seamlessly with the EVM-based Celo blockchain. For Web SDKs, you get a MetaMask-style EIP-1193 provider compatible with ethers.js and web3.js. For Embedded Wallets Mobile SDKs (Android, iOS, React Native), the private key is available in the SDK state for direct signing and JSON-RPC calls.
-
-::::note
-
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
-
-::::
+Integrate Web3Auth seamlessly with EVM-based Celo blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
 
 This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
 
@@ -30,10 +36,23 @@ export const Celo = [
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/celo/react',
+      },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/celo/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/celo/web',
+        path: '/embedded-wallets/connect-blockchain/evm/celo/javascript',
       },
       {
         key: 'android',
@@ -66,7 +85,8 @@ export const Celo = [
         path: '/embedded-wallets/connect-blockchain/evm/celo/unity',
       },
     ],
-  },
+
+},
 ]
 
 <Tiles tileGroups={Celo} />

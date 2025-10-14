@@ -1,33 +1,58 @@
 ---
-title: Integrate Embedded Wallets with the BNB Optimistic Rolllup
-sidebar_label: opBNB
-hide_table_of_contents: true
+title: Integrate Embedded Wallets with the OpBNB Blockchain
+sidebar_label: Overview
 
+keywords:
+  [
+    opbnb,
+    wallet,
+    integration,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
 image: 'img/embedded-wallets/banners/opbnb.png'
-description: 'Integrate Embedded Wallets with the BNB Optimistic Rolllup | Embedded Wallets'
+description: 'Integrate Embedded Wallets with the OpBNB Blockchain | Embedded Wallets'
 ---
 
 import Tiles from '@theme/Tiles'
-import ChainDetailsOpBNB from '../../_general-connect-blockchain/_opbnb.mdx'
+import ChainDetailsOpBnb from '../../_general-connect-blockchain/_opbnb.mdx'
 
-Integrate Web3Auth seamlessly with EVM-based BNB Optimistic Rollup. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+Integrate Web3Auth seamlessly with EVM-based OpBNB blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
 
 This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
 
-## Chain Details for opBNB
+## Chain Details for OpBNB
 
-<ChainDetailsOpBNB />
+<ChainDetailsOpBnb />
 
-export const opBNB = [
+export const OpBnb = [
   {
     name: '',
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/opbnb/react',
+      },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/opbnb/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/opbnb/web',
+        path: '/embedded-wallets/connect-blockchain/evm/opbnb/javascript',
       },
       {
         key: 'android',
@@ -60,7 +85,8 @@ export const opBNB = [
         path: '/embedded-wallets/connect-blockchain/evm/opbnb/unity',
       },
     ],
-  },
+
+},
 ]
 
-<Tiles tileGroups={opBNB} />
+<Tiles tileGroups={OpBnb} />

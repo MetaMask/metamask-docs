@@ -16,8 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsOptimism from '../../_general-connect-blockchain/_optimism.mdx'
 
-While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Optimism](https://optimism.io/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Optimism](https://www.optimism.io/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for Optimism
+
+<ChainDetailsOptimism />
 
 ## Installation
 
@@ -43,7 +48,7 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 ```typescript
 import { getEvmChainConfig } from '@web3auth/base'
 
-const chainConfig = getEvmChainConfig(10, 'your_web3auth_client_id')
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
 ```
 
 </TabItem>
@@ -53,17 +58,9 @@ const chainConfig = getEvmChainConfig(10, 'your_web3auth_client_id')
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0xAA37DC', // hex of 11155420
-  rpcTarget: 'https://sepolia.optimism.io',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'OP Sepolia',
-  blockExplorer: '`https://sepolia-optimistic.etherscan.io`',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

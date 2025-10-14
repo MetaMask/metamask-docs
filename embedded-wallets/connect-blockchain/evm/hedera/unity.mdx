@@ -14,61 +14,19 @@ import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.
 import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
 import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
 import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import ChainDetailsHedera from '../../_general-connect-blockchain/_hedera.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
+
+## Chain Details for Hedera
+
+<ChainDetailsHedera />
 
 ## Installation
 
 <InstallationSnippet />
-
-## Chain Details for Hedera
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-    { label: "Previewnet", value: "previewnet", },
-  ]}
->
-
-<TabItem
-  value="mainnet"
->
-
-- Chain ID: 0x127
-- Public RPC URL: https://mainnet.hashio.io/api
-- Display Name: Hedera Mainnet
-- Block Explorer Link: https://hashscan.io/mainnet/
-- Ticker: HBAR
-- Ticker Name: HBAR
-
-</TabItem>
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0x128
-- Public RPC URL: https://testnet.hashio.io/api
-- Display Name: Hedera Testnet
-- Block Explorer Link: https://hashscan.io/testnet/
-- Ticker: HBAR
-- Ticker Name: HBAR
-
-</TabItem>
-<TabItem
-  value="previewnet"
->
-
-- Chain ID: 0x129
-- Public RPC URL: https://previewnet.hashio.io/api
-- Display Name: Hedera Previewnet
-- Block Explorer Link: https://hashscan.io/previewnet/
-- Ticker: HBAR
-- Ticker Name: HBAR
-
-</TabItem>
-</Tabs>
 
 ## Initialize
 

@@ -1,7 +1,7 @@
 ---
 title: Integrate Embedded Wallets with the Ethereum Blockchain
-sidebar_label: Ethereum
-hide_table_of_contents: true
+sidebar_label: Overview
+
 keywords:
   [
     ethereum,
@@ -36,10 +36,23 @@ export const Ethereum = [
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/ethereum/react',
+      },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/ethereum/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/ethereum/web',
+        path: '/embedded-wallets/connect-blockchain/evm/ethereum/javascript',
       },
       {
         key: 'android',
@@ -72,7 +85,8 @@ export const Ethereum = [
         path: '/embedded-wallets/connect-blockchain/evm/ethereum/unity',
       },
     ],
-  },
+
+},
 ]
 
 <Tiles tileGroups={Ethereum} />

@@ -16,6 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsHedera from '../../_general-connect-blockchain/_hedera.mdx'
+
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Hedera](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for Hedera
+
+<ChainDetailsHedera />
 
 ## Installation
 
@@ -32,62 +39,28 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
   values={[
     { label: "Mainnet", value: "mainnet", },
     { label: "Testnet", value: "testnet", },
-    { label: "Previewnet", value: "previewnet", },
-]}
-
+  ]}
 >
-
 <TabItem
   value="mainnet"
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x127',
-  rpcTarget: 'https://mainnet.hashio.io/api',
-  displayName: 'Hedera Mainnet',
-  blockExplorerUrl: 'https://hashscan.io/mainnet/',
-  ticker: 'HBAR',
-  tickerName: 'HBAR',
-  logo: 'https://cryptologos.cc/logos/hedera-hbar-logo.png?v=033',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
 ```
 
 </TabItem>
+
 <TabItem
   value="testnet"
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x128',
-  rpcTarget: 'https://testnet.hashio.io/api',
-  displayName: 'Hedera Testnet',
-  blockExplorerUrl: 'https://hashscan.io/testnet/',
-  ticker: 'HBAR',
-  tickerName: 'HBAR',
-  logo: 'https://cryptologos.cc/logos/hedera-hbar-logo.png?v=033',
-}
-```
+import { getEvmChainConfig } from '@web3auth/base'
 
-</TabItem>
-<TabItem
-  value="previewnet"
->
-
-```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x129',
-  rpcTarget: 'https://previewnet.hashio.io/api',
-  displayName: 'Hedera Previewnet',
-  blockExplorerUrl: 'https://hashscan.io/previewnet/',
-  ticker: 'HBAR',
-  tickerName: 'HBAR',
-  logo: 'https://cryptologos.cc/logos/hedera-hbar-logo.png?v=033',
-}
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

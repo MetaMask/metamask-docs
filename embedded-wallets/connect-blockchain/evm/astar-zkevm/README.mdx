@@ -1,22 +1,28 @@
 ---
 title: Integrate Embedded Wallets with the Astar zkEVM Blockchain
-sidebar_label: Astar zkEVM
-hide_table_of_contents: true
+sidebar_label: Overview
 
-image: 'img/embedded-wallets/banners/zkevm.png'
+keywords:
+  [
+    astar-zkevm,
+    wallet,
+    integration,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
+image: 'img/embedded-wallets/banners/astar-zkevm.png'
 description: 'Integrate Embedded Wallets with the Astar zkEVM Blockchain | Embedded Wallets'
 ---
 
 import Tiles from '@theme/Tiles'
 import ChainDetailsAstarZkevm from '../../_general-connect-blockchain/_astar-zkevm.mdx'
 
-Integrate Embedded Wallets (formerly Web3Auth) seamlessly with the EVM-based Astar zkEVM blockchain. For Web SDKs, you get a MetaMask-style EIP-1193 provider compatible with ethers.js and web3.js. For Embedded Wallets Mobile SDKs (Android, iOS, React Native), the private key is available in the SDK state for direct signing and JSON-RPC calls.
-
-::::note
-
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
-
-::::
+Integrate Web3Auth seamlessly with EVM-based Astar zkEVM blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
 
 This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
 
@@ -24,16 +30,29 @@ This documentation provides a straightforward guide for developers looking to im
 
 <ChainDetailsAstarZkevm />
 
-export const zkEVM = [
+export const AstarZkevm = [
   {
     name: '',
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/react',
+      },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/web',
+        path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/javascript',
       },
       {
         key: 'android',
@@ -66,7 +85,8 @@ export const zkEVM = [
         path: '/embedded-wallets/connect-blockchain/evm/astar-zkevm/unity',
       },
     ],
-  },
+
+},
 ]
 
-<Tiles tileGroups={zkEVM} />
+<Tiles tileGroups={AstarZkevm} />

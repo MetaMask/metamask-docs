@@ -16,8 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsNibiru from '../../_general-connect-blockchain/_nibiru.mdx'
 
-While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Nibiru](https://nibiru.fi/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Nibiru](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for Nibiru
+
+<ChainDetailsNibiru />
 
 ## Installation
 
@@ -27,24 +32,13 @@ While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.et
 
 Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
 
-:::note
-
-Nibiru is EVM compatible only for localnet for now. Kindly refer to the [Nibiru documentation](https://nibiru.fi/docs/dev/evm/) and [Nibiru Networks](https://nibiru.fi/docs/dev/networks/#evm-network-configs) for the latest updates and EVM-related configs.
-
-:::
-
-:::info
-
-For Nibiru, the steps for creating a local block explorer are mentioned [here](https://nibiru.fi/docs/dev/evm/quickstart.html#_4-local-explorer-optional).
-
-:::
-
 ### Getting the `chainConfig`
 
 <Tabs
  defaultValue="mainnet"
   values={[
     { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
   ]}
 >
 <TabItem
@@ -52,15 +46,21 @@ For Nibiru, the steps for creating a local block explorer are mentioned [here](h
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x1AF4',
-  rpcTarget: 'https://evm-rpc.nibiru.fi',
-  displayName: 'Nibiru Mainnet',
-  blockExplorer: 'https://nibiru.fi/explorer', // See the info placard above
-  ticker: 'NIBI',
-  tickerName: 'Nibiru',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

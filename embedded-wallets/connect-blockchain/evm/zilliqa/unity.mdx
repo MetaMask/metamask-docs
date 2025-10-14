@@ -14,36 +14,19 @@ import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.
 import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
 import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
 import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import ChainDetailsZilliqa from '../../_general-connect-blockchain/_zilliqa.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
+
+## Chain Details for Zilliqa
+
+<ChainDetailsZilliqa />
 
 ## Installation
 
 <InstallationSnippet />
-
-## Chain Details for Zilliqa
-
-<Tabs
- defaultValue="testnet"
-  values={[
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0x814f
-- Public RPC URL: https://api.zq2-prototestnet.zilliqa.com (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Zilliqa 2 EVM Testnet
-- Block Explorer Link: https://explorer.zq2-prototestnet.zilliqa.com
-- Ticker: ZIL
-- Ticker Name: Zilliqa
-
-</TabItem>
-</Tabs>
 
 ## Initialize
 

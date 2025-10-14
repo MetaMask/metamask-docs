@@ -1,39 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet (Coston2)", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Coston2 Testnet", value: "coston2" },
   ]}
 >
-<TabItem
-  value="mainnet"
->
+<TabItem value="mainnet">
 
-- Chain ID: 0xE (hex of 14)
-- Public RPC URL: https://flare-api.flare.network/ext/C/rpc (Avoid using public rpcTarget in
-  production, use services provided by Flare or other node providers)
-- Display Name: Flare Mainnet
-- Block Explorer Link: https://flare-explorer.flare.network/
-- Ticker: FLR
-- Ticker Name: FLR
-- Logo: https://cryptologos.cc/logos/flare-flr-logo.png
+- **Chain ID:** 0xE
+- **Public RPC URL:** https://flare-api.flare.network/ext/C/rpc
+- **Display Name:** Flare Mainnet
+- **Block Explorer Link:** https://flare-explorer.flare.network
+- **Ticker:** FLR
+- **Ticker Name:** Flare
 
 </TabItem>
-<TabItem
-  value="testnet"
->
 
-- Chain ID: 0x72 (hex of 114)
-- Public RPC URL: https://coston2-api.flare.network/ext/C/rpc (Avoid using public rpcTarget in
-  production, use services provided by Flare or other node providers)
-- Display Name: Coston2 testnet
-- Block Explorer Link: https://coston2-explorer.flare.network/
-- Ticker: C2FLR
-- Ticker Name: C2FLR
-- Logo: https://cryptologos.cc/logos/flare-flr-logo.png
+<TabItem value="coston2">
+
+- **Chain ID:** 0x72
+- **Public RPC URL:** https://coston2-api.flare.network/ext/C/rpc
+- **Display Name:** Flare Coston2 Testnet
+- **Block Explorer Link:** https://coston2-explorer.flare.network
+- **Ticker:** C2FLR
+- **Ticker Name:** Coston2 Flare
 
 </TabItem>
 </Tabs>

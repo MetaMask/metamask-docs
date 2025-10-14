@@ -1,7 +1,20 @@
 ---
 title: Integrate Embedded Wallets with the Soneium Blockchain
-hide_table_of_contents: true
-sidebar_label: Soneium
+sidebar_label: Overview
+
+keywords:
+  [
+    soneium,
+    wallet,
+    integration,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
 image: 'img/embedded-wallets/banners/soneium.png'
 description: 'Integrate Embedded Wallets with the Soneium Blockchain | Embedded Wallets'
 ---
@@ -9,7 +22,7 @@ description: 'Integrate Embedded Wallets with the Soneium Blockchain | Embedded 
 import Tiles from '@theme/Tiles'
 import ChainDetailsSoneium from '../../_general-connect-blockchain/_soneium.mdx'
 
-Integrate Web3Auth seamlessly with EVM-based Soneium Blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+Integrate Web3Auth seamlessly with EVM-based Soneium blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
 
 This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
 
@@ -23,10 +36,23 @@ export const Soneium = [
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/soneium/react',
+      },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/soneium/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/soneium/web',
+        path: '/embedded-wallets/connect-blockchain/evm/soneium/javascript',
       },
       {
         key: 'android',
@@ -59,7 +85,8 @@ export const Soneium = [
         path: '/embedded-wallets/connect-blockchain/evm/soneium/unity',
       },
     ],
-  },
+
+},
 ]
 
 <Tiles tileGroups={Soneium} />

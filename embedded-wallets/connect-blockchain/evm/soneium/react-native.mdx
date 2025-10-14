@@ -16,8 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsSoneium from '../../_general-connect-blockchain/_soneium.mdx'
 
-While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Soneium](https://soneium.org) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Soneium](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for Soneium
+
+<ChainDetailsSoneium />
 
 ## Installation
 
@@ -32,27 +37,18 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Testnet (Minato)", value: "testnet", },
-    { label: "Mainnet", value: "mainnet",   },
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
   ]}
-
 >
-
 <TabItem
   value="mainnet"
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: '0x74c', // hex of 1868
-  rpcTarget: 'https://rpc.soneium.org',
-  displayName: 'Soneium',
-  blockExplorerUrl: 'https://www.okx.com/web3/explorer/soneium',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-  logo: 'https://iili.io/2i5xce2.png',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
 ```
 
 </TabItem>
@@ -62,17 +58,9 @@ const chainConfig = {
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: '0x79a', // hex of 1946
-  rpcTarget: 'https://rpc.minato.soneium.org',
-  displayName: 'Soneium Minato Testnet',
-  blockExplorerUrl: 'https://explorer-testnet.soneium.org',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-  logo: 'https://iili.io/2i5xce2.png',
-  // faucet- "https://bridge.soneium.org/en/testnet" bridge the sepolia ETH to Soneium
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

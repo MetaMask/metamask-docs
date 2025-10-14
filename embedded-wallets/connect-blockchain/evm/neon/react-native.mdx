@@ -16,8 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsNeon from '../../_general-connect-blockchain/_neon.mdx'
 
-While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/), [`viem`](https://viem.sh/docs/getting-started) etc. to make [Neon](https://neonevm.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Neon](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for Neon
+
+<ChainDetailsNeon />
 
 ## Installation
 
@@ -41,17 +46,9 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0xe9ac0d6', // hex of 245022934, Neon mainnet
-  rpcTarget: 'https://neon-proxy-mainnet.solana.p2p.org',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'Neon Mainnet',
-  blockExplorer: 'https://neonscan.org/',
-  ticker: 'NEON',
-  tickerName: 'NEON',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
 ```
 
 </TabItem>
@@ -61,17 +58,9 @@ const chainConfig = {
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0xe9ac0ce', // hex of 245022926, neon testnet
-  rpcTarget: 'https://devnet.neonevm.org',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'Neon Mainnet',
-  blockExplorer: 'https://devnet.neonscan.org/',
-  ticker: 'NEON',
-  tickerName: 'NEON',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

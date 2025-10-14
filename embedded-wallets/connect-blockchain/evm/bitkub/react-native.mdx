@@ -1,9 +1,10 @@
 ---
-title: Integrate Embedded Wallets with the BitKub Blockchain in React Native
+title: Integrate Embedded Wallets with the Bitkub Blockchain in React Native
 sidebar_label: React Native
 image: 'img/embedded-wallets/banners/bitkub.png'
+
 keywords: [react-native, bitkub, web3auth, authentication, blockchain]
-description: 'Integrate Embedded Wallets with the BitKub Blockchain in React Native | Embedded Wallets'
+description: 'Integrate Embedded Wallets with the Bitkub Blockchain in React Native | Embedded Wallets'
 ---
 
 import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
@@ -15,14 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsBitkub from '../../_general-connect-blockchain/_bitkub.mdx'
 
-While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) in React Native, the private key is available in the SDK state. Use it with EVM libraries to derive accounts, sign, and make JSON-RPC calls to the [BitKub](https://developers.bitkubchain.com/) network.
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Bitkub](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
 
-::::note
+## Chain Details for Bitkub
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
-
-::::
+<ChainDetailsBitkub />
 
 ## Installation
 
@@ -46,17 +46,9 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x60', // hex of 96
-  rpcTarget: 'https://rpc.bitkubchain.io',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'BitKub',
-  blockExplorer: 'https://www.bkcscan.com',
-  ticker: 'KUB',
-  tickerName: 'KUB',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
 ```
 
 </TabItem>
@@ -66,17 +58,9 @@ const chainConfig = {
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x6545', // hex of 25925
-  rpcTarget: 'https://rpc-testnet.bitkubchain.io',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'BitKub Testnet',
-  blockExplorer: 'https://testnet.bkcscan.com',
-  ticker: 'tKUB',
-  tickerName: 'tKUB',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

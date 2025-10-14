@@ -16,6 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsFhenix from '../../_general-connect-blockchain/_fhenix.mdx'
+
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Fhenix](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for Fhenix
+
+<ChainDetailsFhenix />
 
 ## Installation
 
@@ -28,28 +35,32 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 ### Getting the `chainConfig`
 
 <Tabs
- defaultValue="helium"
+ defaultValue="mainnet"
   values={[
-    { label: "Helium", value: "helium", },
-]}
-
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+  ]}
 >
-
 <TabItem
-  value="helium"
+  value="mainnet"
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x7a31c7',
-  rpcTarget: 'https://api.helium.fhenix.zone',
-  displayName: 'Fhenix Helium',
-  blockExplorerUrl: 'https://explorer.helium.fhenix.zone',
-  ticker: 'tFHE',
-  tickerName: 'tFHE',
-  logo: 'https://img.cryptorank.io/coins/fhenix1695737384486.png',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
+```
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+```typescript
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

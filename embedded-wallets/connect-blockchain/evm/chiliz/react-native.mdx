@@ -16,8 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsChiliz from '../../_general-connect-blockchain/_chiliz.mdx'
 
-While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Chiliz Blockchain](https://www.chiliz.com) blockchain calls like getting the user's `account`, fetching `balance`, signing transactions, sending transactions, and interacting with smart contracts. We have highlighted a few key examples to get you started quickly on that.
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Chiliz](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for Chiliz
+
+<ChainDetailsChiliz />
 
 ## Installation
 
@@ -41,17 +46,9 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x15B38', // hex of 88888, Chiliz Mainnet
-  rpcTarget: 'https://rpc.chiliz.com',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura, Quicknode, etc.
-  displayName: 'Chiliz Mainnet',
-  blockExplorer: 'https://chiliscan.com',
-  ticker: 'CHZ',
-  tickerName: 'Chiliz',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
 ```
 
 </TabItem>
@@ -61,17 +58,9 @@ const chainConfig = {
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x15B42', // hex of 88882, Chiliz Spicy Testnet
-  rpcTarget: 'https://spicy-rpc.chiliz.com/',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura, Quicknode, etc.
-  displayName: 'Chiliz Spicy Testnet',
-  blockExplorer: 'https://testnet.chiliscan.com/',
-  ticker: 'CHZ',
-  tickerName: 'Chiliz (Testnet)',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

@@ -16,6 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsKinto from '../../_general-connect-blockchain/_kinto.mdx'
+
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Kinto](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for Kinto
+
+<ChainDetailsKinto />
 
 ## Installation
 
@@ -34,40 +41,26 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
     { label: "Testnet", value: "testnet", },
   ]}
 >
-
 <TabItem
   value="mainnet"
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x1ecf',
-  rpcTarget: 'https://rpc.kinto.xyz/http',
-  displayName: 'Kinto Testnet',
-  blockExplorerUrl: 'https://explorer.kinto.xyz',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-  logo: 'https://pbs.twimg.com/profile_images/1658109577081044992/ZBpLvGSb_400x400.jpg',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
 ```
 
 </TabItem>
+
 <TabItem
   value="testnet"
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0xa788',
-  rpcTarget: 'http://35.215.120.180:8545',
-  displayName: 'Kinto Mainnet',
-  blockExplorerUrl: 'https://explorer.kinto.xyz',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-  logo: 'https://pbs.twimg.com/profile_images/1658109577081044992/ZBpLvGSb_400x400.jpg',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

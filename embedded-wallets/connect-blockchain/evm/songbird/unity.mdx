@@ -1,10 +1,10 @@
 ---
 title: Integrate Embedded Wallets with the Songbird Blockchain in Unity
 sidebar_label: Unity
-image: 'img/embedded-wallets/banners/unity.png'
+image: 'img/embedded-wallets/banners/songbird.png'
 
 keywords: [unity, songbird, web3auth, authentication, blockchain]
-description: 'Integrate Embedded Wallets with the Songbird Blockchain in Unity'
+description: 'Integrate Embedded Wallets with the Songbird Blockchain in Unity | Embedded Wallets'
 ---
 
 import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
@@ -14,7 +14,40 @@ import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.
 import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
 import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
 import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import ChainDetailsSongbird from '../../_general-connect-blockchain/_songbird.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
+
+## Chain Details for Songbird
+
+<ChainDetailsSongbird />
+
+## Installation
+
+<InstallationSnippet />
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get User Info
+
+<UserInfoSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />

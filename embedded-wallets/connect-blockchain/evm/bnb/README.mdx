@@ -1,28 +1,34 @@
 ---
 title: Integrate Embedded Wallets with the BNB Blockchain
-sidebar_label: BNB
-hide_table_of_contents: true
+sidebar_label: Overview
 
+keywords:
+  [
+    bnb,
+    wallet,
+    integration,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
 image: 'img/embedded-wallets/banners/bnb.png'
 description: 'Integrate Embedded Wallets with the BNB Blockchain | Embedded Wallets'
 ---
 
 import Tiles from '@theme/Tiles'
-import ChainDetailsBNB from '../../_general-connect-blockchain/_bnb.mdx'
+import ChainDetailsBnb from '../../_general-connect-blockchain/_bnb.mdx'
 
-Integrate Embedded Wallets (formerly Web3Auth) seamlessly with the EVM-based BNB blockchain. For Web SDKs, you get a MetaMask-style EIP-1193 provider compatible with ethers.js and web3.js. For Embedded Wallets Mobile SDKs (Android, iOS, React Native), the private key is available in the SDK state for direct signing and JSON-RPC calls.
-
-::::note
-
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
-
-::::
+Integrate Web3Auth seamlessly with EVM-based BNB blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
 
 This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
 
 ## Chain Details for BNB
 
-<ChainDetailsBNB />
+<ChainDetailsBnb />
 
 export const Bnb = [
   {
@@ -30,10 +36,23 @@ export const Bnb = [
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/react',
+      },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/bnb/web',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/javascript',
       },
       {
         key: 'android',
@@ -66,7 +85,8 @@ export const Bnb = [
         path: '/embedded-wallets/connect-blockchain/evm/bnb/unity',
       },
     ],
-  },
+
+},
 ]
 
 <Tiles tileGroups={Bnb} />

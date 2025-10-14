@@ -1,38 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Amoy Testnet", value: "amoy" },
   ]}
 >
-<TabItem
-  value="mainnet"
->
+<TabItem value="mainnet">
 
-- Chain ID: 0x89
-- Public RPC URL: https://polygon-rpc.com (Avoid using public rpcTarget in production, use services
-  like Infura)
-- Display Name: Polygon Mainnet
-- Block Explorer Link: https://polygonscan.com
-- Ticker: MATIC
-- Ticker Name: Polygon
+- **Chain ID:** 0x89
+- **RPC URL:** You can use our bundled RPC service from Infura, or your own choice of RPC service for production.
+- **Display Name:** Polygon Mainnet
+- **Block Explorer Link:** https://polygonscan.com
+- **Ticker:** MATIC
+- **Ticker Name:** Polygon
 
 </TabItem>
 
-<TabItem
-  value="testnet"
->
+<TabItem value="amoy">
 
-- Chain ID: 0x13881
-- Public RPC URL: https://rpc-mumbai.maticvigil.com (Avoid using public rpcTarget in production, use
-  services like Infura)
-- Display Name: Polygon Mumbai Testnet
-- Block Explorer Link: https://mumbai.polygonscan.com
-- Ticker: MATIC
-- Ticker Name: Polygon
+- **Chain ID:** 0x13882
+- **Public RPC URL:** https://rpc-amoy.polygon.technology
+- **Display Name:** Polygon Amoy Testnet
+- **Block Explorer Link:** https://amoy.polygonscan.com
+- **Ticker:** MATIC
+- **Ticker Name:** Polygon
 
 </TabItem>
 </Tabs>

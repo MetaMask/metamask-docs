@@ -1,10 +1,10 @@
 ---
-title: Integrate Embedded Wallets with the BNB Optimistic Rolllup in Unity
+title: Integrate Embedded Wallets with the OpBNB Blockchain in Unity
 sidebar_label: Unity
-image: 'img/embedded-wallets/banners/unity.png'
+image: 'img/embedded-wallets/banners/opbnb.png'
 
 keywords: [unity, opbnb, web3auth, authentication, blockchain]
-description: 'Integrate Embedded Wallets with the BNB Optimistic Rolllup in Unity | Embedded Wallets'
+description: 'Integrate Embedded Wallets with the OpBNB Blockchain in Unity | Embedded Wallets'
 ---
 
 import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
@@ -14,52 +14,19 @@ import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.
 import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
 import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
 import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import ChainDetailsOpBnb from '../../_general-connect-blockchain/_opbnb.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
+
+## Chain Details for OpBNB
+
+<ChainDetailsOpBnb />
 
 ## Installation
 
 <InstallationSnippet />
-
-## Chain Details for opBNB
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-
-<TabItem
-  value="mainnet"
->
-
-- Chain ID: 0xCC
-- Public RPC URL: `https://opbnb-mainnet-rpc.bnbchain.org` (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: opBNB Mainnet
-- Block Explorer Link: https://opbnbscan.com
-- Ticker: BNB
-- Ticker Name: opBNB
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0x15EB
-- Public RPC URL: https://opbnb-testnet-rpc.bnbchain.org/ (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: opBNB Testnet
-- Block Explorer Link: https://testnet.opbnbscan.com
-- Ticker: tBNB
-- Ticker Name: opBNB
-
-</TabItem>
-
-</Tabs>
 
 ## Initialize
 

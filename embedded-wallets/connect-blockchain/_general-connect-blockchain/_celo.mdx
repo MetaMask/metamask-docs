@@ -1,38 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Alfajores Testnet", value: "alfajores" },
   ]}
 >
-<TabItem
-  value="mainnet"
->
+<TabItem value="mainnet">
 
-- Chain ID: 0xa4ec
-- Public RPC URL: https://forno.celo.org (Avoid using public rpcTarget in production, use services
-  like Infura)
-- Display Name: Celo Mainnet
-- Block Explorer Link: https://explorer.celo.org
-- Ticker: CELO
-- Ticker Name: Celo
+- **Chain ID:** 0xa4ec
+- **Public RPC URL:** https://forno.celo.org
+- **Display Name:** Celo Mainnet
+- **Block Explorer Link:** https://explorer.celo.org
+- **Ticker:** CELO
+- **Ticker Name:** Celo
 
 </TabItem>
 
-<TabItem
-  value="testnet"
->
+<TabItem value="alfajores">
 
-- Chain ID: 0xaef3
-- Public RPC URL: https://alfajores-forno.celo-testnet.org (Avoid using public rpcTarget in
-  production, use services like Infura)
-- Display Name: Celo Alfajores Testnet
-- Block Explorer Link: https://alfajores-blockscout.celo-testnet.org
-- Ticker: CELO
-- Ticker Name: Celo
+- **Chain ID:** 0xaef3
+- **Public RPC URL:** https://alfajores-forno.celo-testnet.org
+- **Display Name:** Celo Alfajores Testnet
+- **Block Explorer Link:** https://alfajores-blockscout.celo-testnet.org
+- **Ticker:** CELO
+- **Ticker Name:** Celo
 
 </TabItem>
 </Tabs>

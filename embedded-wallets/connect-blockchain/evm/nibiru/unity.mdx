@@ -1,7 +1,7 @@
 ---
 title: Integrate Embedded Wallets with the Nibiru Blockchain in Unity
 sidebar_label: Unity
-image: 'img/embedded-wallets/banners/unity.png'
+image: 'img/embedded-wallets/banners/nibiru.png'
 
 keywords: [unity, nibiru, web3auth, authentication, blockchain]
 description: 'Integrate Embedded Wallets with the Nibiru Blockchain in Unity | Embedded Wallets'
@@ -14,48 +14,19 @@ import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.
 import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
 import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
 import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import ChainDetailsNibiru from '../../_general-connect-blockchain/_nibiru.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
+
+## Chain Details for Nibiru
+
+<ChainDetailsNibiru />
 
 ## Installation
 
 <InstallationSnippet />
-
-## Chain Details for Nibiru
-
-:::note
-
-Nibiru is EVM compatible only for localnet for now. Kindly refer to the [Nibiru documentation](https://nibiru.fi/docs/dev/evm/) and [Nibiru Networks](https://nibiru.fi/docs/dev/networks/#evm-network-configs) for the latest updates and EVM-related configs.
-
-:::
-
-:::info
-
-For Nibiru, the steps for creating a local block explorer are mentioned [here](https://nibiru.fi/docs/dev/evm/quickstart.html#_4-local-explorer-optional).
-
-:::
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
-
-- Chain ID: 0x1AF4
-- Public RPC URL: https://evm-rpc.nibiru.fi
-- Display Name: Nibiru Mainnet
-- Block Explorer Link: https://nibiru.fi/explorer
-- Ticker: NIBI
-- Ticker Name: Nibiru
-
-</TabItem>
-</Tabs>
 
 ## Initialize
 

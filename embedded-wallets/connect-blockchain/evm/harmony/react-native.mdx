@@ -16,8 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsHarmony from '../../_general-connect-blockchain/_harmony.mdx'
 
-While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Harmony](https://www.harmony.one/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Harmony](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for Harmony
+
+<ChainDetailsHarmony />
 
 ## Installation
 
@@ -41,17 +46,9 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x63564c40', // hex of 1666600000, Harmony mainnet
-  rpcTarget: 'https://api.harmony.one',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'Harmony Mainnet',
-  blockExplorer: 'https://explorer.harmony.one',
-  ticker: 'ONE',
-  tickerName: 'ONE',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
 ```
 
 </TabItem>
@@ -61,17 +58,9 @@ const chainConfig = {
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x6357d2e0', // hex of 1666700000
-  rpcTarget: 'https://api.s0.b.hmny.io',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'Harmony Testnet',
-  blockExplorer: 'https://explorer.testnet.harmony.one',
-  ticker: 'ONE',
-  tickerName: 'ONE',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

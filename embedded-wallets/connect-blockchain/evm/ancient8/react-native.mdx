@@ -16,14 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsAncient8 from '../../_general-connect-blockchain/_ancient8.mdx'
 
-While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) in React Native, the private key is available in the SDK state. Use it with your preferred EVM libraries to derive accounts, sign, and make JSON-RPC calls to the [Ancient8](https://ancient8.gg) network.
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Ancient8](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
 
-::::note
+## Chain Details for Ancient8
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
-
-::::
+<ChainDetailsAncient8 />
 
 ## Installation
 
@@ -47,18 +46,9 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x34BC6B8', // hex of 888888888, Ancient8 Mainnet
-  rpcTarget: 'https://rpc.ancient8.gg',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'Ancient8 Mainnet',
-  blockExplorer: 'https://scan.ancient8.gg',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-  logo: 'https://blog.ancient8.gg/content/images/2023/09/A8_PFP.png',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
 ```
 
 </TabItem>
@@ -68,18 +58,9 @@ const chainConfig = {
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x1AD4150', // hex of 28122024, Ancient8 Testnet V2
-  rpcTarget: 'https://rpcv2-testnet.ancient8.gg',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'Ancient8 Testnet V2',
-  blockExplorer: 'https://scanv2-testnet.ancient8.gg',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-  logo: 'https://blog.ancient8.gg/content/images/2023/09/A8_PFP.png',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

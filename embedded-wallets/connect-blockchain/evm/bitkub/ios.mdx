@@ -1,89 +1,21 @@
 ---
-title: Integrate Embedded Wallets with the BitKub Blockchain in iOS/Swift Applications
+title: Integrate Embedded Wallets with the Bitkub Blockchain in iOS/Swift Applications
 sidebar_label: iOS
 image: 'img/embedded-wallets/banners/bitkub.png'
+
 keywords: [ios, swift, bitkub, web3auth, authentication, blockchain]
-description: 'Integrate Embedded Wallets with the BitKub Blockchain in iOS/Swift Applications | Embedded Wallets'
+description: 'Integrate Embedded Wallets with the Bitkub Blockchain in iOS/Swift Applications | Embedded Wallets'
 ---
 
-import InstallationSnippet from '../../_ios-connect-blockchain/_evm-installation.mdx'
-import GetAccountSnippet from '../../_ios-connect-blockchain/_evm-get-account.mdx'
-import UserInfoSnippet from '../../_ios-connect-blockchain/_evm-user-info.mdx'
-import GetBalanceSnippet from '../../_ios-connect-blockchain/_evm-get-balance.mdx'
-import InitialisationSnippet from '../../_ios-connect-blockchain/_evm-initialisation.mdx'
-import SignMessageSnippet from '../../_ios-connect-blockchain/_evm-sign-message.mdx'
-import SendTransactionSnippet from '../../_ios-connect-blockchain/_evm-send-transaction.mdx'
+import EVMInteraction from '../../_ios-connect-blockchain/_evm-interaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsBitkub from '../../_general-connect-blockchain/_bitkub.mdx'
 
-While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) on iOS, the private key is available in the SDK state. Use it to derive the user's address and interact with the [BitKub](https://developers.bitkubchain.com/) network for signing and JSON-RPC calls.
+While using the Web3Auth iOS SDK, you get the private key within the user scope after successful authorization. This private key can be used to retrieve the user's address, and interact with [Bitkub](https://ethereum.org/) to make any blockchain calls. We have highlighted a few here for getting you started quickly on that.
 
-::::note
+## Chain Details for Bitkub
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+<ChainDetailsBitkub />
 
-::::
-
-## Installation
-
-<InstallationSnippet />
-
-## Chain Details for BitKub
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
-
-- Chain ID: `0x60`
-- Public RPC URL: `https://rpc.bitkubchain.io`
-- Display Name: BitKub Mainnet
-- Block Explorer Link: `https://www.bkcscan.com`
-- Ticker: KUB
-- Ticker Name: KUB
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-- Chain ID: `0x6545`
-- Public RPC URL: `https://rpc-testnet.bitkubchain.io/`
-- Display Name: BitKub Testnet
-- Block Explorer Link: `https://testnet.bkcscan.com`
-- Ticker: tKUB
-- Ticker Name: tKUB
-
-</TabItem>
-</Tabs>
-
-## Initialize
-
-<InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
-
-## Get Account
-
-<GetAccountSnippet />
-
-## Get Balance
-
-<GetBalanceSnippet />
-
-## Send Transaction
-
-<SendTransactionSnippet />
-
-## Sign a message
-
-<SignMessageSnippet />
+<EVMInteraction />

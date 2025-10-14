@@ -1,20 +1,19 @@
 ---
-title: Integrate Embedded Wallets with the Astar zKyoto Testnet in Android
+title: Integrate Embedded Wallets with the Astar Zkyoto Blockchain in Android
 sidebar_label: Android
-image: 'img/embedded-wallets/banners/zkevm.png'
+image: 'img/embedded-wallets/banners/astar-zkyoto.png'
 
-keywords: [android, zkyoto, astar, web3auth, authentication, blockchain]
-description: 'Integrate Embedded Wallets with the Astar zKyoto Testnet in Android | Embedded Wallets'
+keywords: [android, astar-zkyoto, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Astar Zkyoto Blockchain in Android | Embedded Wallets'
 ---
 
 import EVMInteraction from '../../_android-connect-blockchain/_evm-interaction.mdx'
+import ChainDetailsAstarZkyoto from '../../_general-connect-blockchain/_astar-zkyoto.mdx'
 
-While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) on Android, the private key is available in the SDK state after successful authorization. Use it to derive the user's address and interact with the [Astar zKyoto](https://docs.astar.network/docs/build/zkEVM/quickstart) testnet for signing and JSON-RPC calls.
+While using the Web3Auth Android SDK, you get the private key within the user scope after successful authorization. This private key can be used to retrieve the user's address, and interact with [Astar Zkyoto](https://ethereum.org/) to make any blockchain calls. We have highlighted a few here for getting you started quickly on that.
 
-::::note
+## Chain Details for Astar Zkyoto
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
-
-::::
+<ChainDetailsAstarZkyoto />
 
 <EVMInteraction />

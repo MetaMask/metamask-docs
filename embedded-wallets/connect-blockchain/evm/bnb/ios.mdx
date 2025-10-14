@@ -1,91 +1,21 @@
 ---
-title: Integrate Embedded Wallets with the BNB (Binance) Blockchain in iOS/Swift Applications
+title: Integrate Embedded Wallets with the BNB Blockchain in iOS/Swift Applications
 sidebar_label: iOS
 image: 'img/embedded-wallets/banners/bnb.png'
 
-keywords:
-  [ios, swift, binance, bnb, bsc, binanace smart chain, web3auth, authentication, blockchain]
-description: 'Integrate Embedded Wallets with the BNB (Binance) Blockchain in iOS/Swift Applications | Embedded Wallets'
+keywords: [ios, swift, bnb, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the BNB Blockchain in iOS/Swift Applications | Embedded Wallets'
 ---
 
-import InstallationSnippet from '../../_ios-connect-blockchain/_evm-installation.mdx'
-import GetAccountSnippet from '../../_ios-connect-blockchain/_evm-get-account.mdx'
-import UserInfoSnippet from '../../_ios-connect-blockchain/_evm-user-info.mdx'
-import GetBalanceSnippet from '../../_ios-connect-blockchain/_evm-get-balance.mdx'
-import InitialisationSnippet from '../../_ios-connect-blockchain/_evm-initialisation.mdx'
-import SignMessageSnippet from '../../_ios-connect-blockchain/_evm-sign-message.mdx'
-import SendTransactionSnippet from '../../_ios-connect-blockchain/_evm-send-transaction.mdx'
+import EVMInteraction from '../../_ios-connect-blockchain/_evm-interaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsBnb from '../../_general-connect-blockchain/_bnb.mdx'
 
-While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) on iOS, the private key is available in the SDK state. Use it to derive the user's address and interact with the [BNB (Binance) Chain](https://www.bnbchain.org/) for signing and JSON-RPC calls.
+While using the Web3Auth iOS SDK, you get the private key within the user scope after successful authorization. This private key can be used to retrieve the user's address, and interact with [BNB](https://www.bnbchain.org/) to make any blockchain calls. We have highlighted a few here for getting you started quickly on that.
 
-::::note
+## Chain Details for BNB
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+<ChainDetailsBnb />
 
-::::
-
-## Installation
-
-<InstallationSnippet />
-
-## Chain Details for BNB (Binance) Chain
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
-
-- Chain ID: 0x38
-- Public RPC URL: https://bsc-dataseed.bnbchain.org (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Binance SmartChain Mainnet
-- Block Explorer Link: https://bscscan.com/
-- Ticker: BNB
-- Ticker Name: BNB
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0x61
-- Public RPC URL: https://bsc-testnet.bnbchain.org (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Binance SmartChain Testnet
-- Block Explorer Link: https://testnet.bscscan.com
-- Ticker: BNB
-- Ticker Name: BNB
-
-</TabItem>
-</Tabs>
-
-## Initialize
-
-<InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
-
-## Get Account
-
-<GetAccountSnippet />
-
-## Get Balance
-
-<GetBalanceSnippet />
-
-## Send Transaction
-
-<SendTransactionSnippet />
-
-## Sign a message
-
-<SignMessageSnippet />
+<EVMInteraction />

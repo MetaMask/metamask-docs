@@ -14,48 +14,19 @@ import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.
 import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
 import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
 import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import ChainDetailsKinto from '../../_general-connect-blockchain/_kinto.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
+
+## Chain Details for Kinto
+
+<ChainDetailsKinto />
 
 ## Installation
 
 <InstallationSnippet />
-
-## Chain Details for Kinto
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-
-<TabItem
-  value="mainnet"
->
-
-- Chain ID: 0x1ecf
-- Public RPC URL: https://rpc.kinto.xyz/http
-- Display Name: Kinto Mainnet
-- Block Explorer Link: https://explorer.kinto.xyz
-- Ticker: ETH
-- Ticker Name: ETH
-
-</TabItem>
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0xa788
-- Public RPC URL: http://35.215.120.180:8545
-- Display Name: Kinto Testnet
-- Block Explorer Link: https://explorer.kinto.xyz
-- Ticker: ETH
-- Ticker Name: ETH
-
-</TabItem>
-</Tabs>
 
 ## Initialize
 

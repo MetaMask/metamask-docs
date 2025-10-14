@@ -16,6 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsMorph from '../../_general-connect-blockchain/_morph.mdx'
+
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Morph](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for Morph
+
+<ChainDetailsMorph />
 
 ## Installation
 
@@ -28,46 +35,32 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 ### Getting the `chainConfig`
 
 <Tabs
- defaultValue="testnet"
+ defaultValue="mainnet"
   values={[
+    { label: "Mainnet", value: "mainnet", },
     { label: "Testnet", value: "testnet", },
-    { label: "Holesky", value: "holesky", },
   ]}
 >
+<TabItem
+  value="mainnet"
+>
+
+```typescript
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
+```
+
+</TabItem>
 
 <TabItem
   value="testnet"
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0xa96',
-  rpcTarget: 'https://rpc-testnet.morphl2.io',
-  displayName: 'Morph Testnet',
-  blockExplorerUrl: 'https://explorer-testnet.morphl2.io/',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-  logo: 'https://morphl2brand.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Ffcab2c10-8da9-4414-aa63-4998ddf62e78%2F64fbcffc-0e7c-45e1-8900-1bb36dc90924%2FFrame_1597882262.png?table=block&id=0e6a22c3-ed4e-4c25-9575-11b95b1eade9&spaceId=fcab2c10-8da9-4414-aa63-4998ddf62e78&width=2000&userId=&cache=v2',
-}
-```
+import { getEvmChainConfig } from '@web3auth/base'
 
-</TabItem>
-<TabItem
-  value="holesky"
->
-
-```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0xafa',
-  rpcTarget: 'https://rpc-holesky.morphl2.io',
-  displayName: 'Morph Holesky',
-  blockExplorerUrl: 'https://explorer-holesky.morphl2.io/',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-  logo: 'https://morphl2brand.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Ffcab2c10-8da9-4414-aa63-4998ddf62e78%2F64fbcffc-0e7c-45e1-8900-1bb36dc90924%2FFrame_1597882262.png?table=block&id=0e6a22c3-ed4e-4c25-9575-11b95b1eade9&spaceId=fcab2c10-8da9-4414-aa63-4998ddf62e78&width=2000&userId=&cache=v2',
-}
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>

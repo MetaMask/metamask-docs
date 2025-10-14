@@ -14,50 +14,19 @@ import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.
 import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
 import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
 import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import ChainDetailsZircuit from '../../_general-connect-blockchain/_zircuit.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, like getting the user's `account`, fetching `balance`, signing transactions, sending transactions, reading from and writing to smart contracts. We have highlighted a few examples to get you started.
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
+
+## Chain Details for Zircuit
+
+<ChainDetailsZircuit />
 
 ## Installation
 
 <InstallationSnippet />
-
-## Chain Details for Zircuit
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
-
-- Chain ID: 0xBF04
-- Public RPC URL: https://zircuit1-mainnet.p2pify.com/ (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Zircuit Mainnet
-- Block Explorer Link: https://explorer.zircuit.com
-- Ticker: ETH
-- Ticker Name: ETH
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0xBF03
-- Public RPC URL: https://zircuit1.p2pify.com/ (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Zircuit Testnet
-- Block Explorer Link: https://explorer.testnet.zircuit.com
-- Ticker: ETH
-- Ticker Name: ETH
-
-</TabItem>
-</Tabs>
 
 ## Initialize
 

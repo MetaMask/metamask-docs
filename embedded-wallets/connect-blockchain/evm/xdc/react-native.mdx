@@ -1,9 +1,10 @@
 ---
-title: Integrate Embedded Wallets with the XDC Network in React Native
+title: Integrate Embedded Wallets with the XDC Blockchain in React Native
 sidebar_label: React Native
 image: 'img/embedded-wallets/banners/xdc.png'
+
 keywords: [react-native, xdc, web3auth, authentication, blockchain]
-description: 'Integrate Embedded Wallets with the XDC Network in React Native | Embedded Wallets'
+description: 'Integrate Embedded Wallets with the XDC Blockchain in React Native | Embedded Wallets'
 ---
 
 import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
@@ -15,8 +16,13 @@ import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign
 import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsXdc from '../../_general-connect-blockchain/_xdc.mdx'
 
-While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [XDC Network](https://xinfin.org) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [XDC](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+
+## Chain Details for XDC
+
+<ChainDetailsXdc />
 
 ## Installation
 
@@ -32,8 +38,7 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
  defaultValue="mainnet"
   values={[
     { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet (Apothem)", value: "apothem", },
-    { label: "Devnet", value: "devnet", },
+    { label: "Testnet", value: "testnet", },
   ]}
 >
 <TabItem
@@ -41,52 +46,21 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: 'eip155',
-  chainId: '0x32', // XDC Network Mainnet Chain ID, hex of 50
-  rpcTarget: 'https://erpc.xinfin.network',
-  displayName: 'XDC Network Mainnet',
-  blockExplorerUrl: 'https://xdcscan.io/',
-  ticker: 'XDC',
-  tickerName: 'XDC',
-  logo: 'https://docs.xdc.network/assets/logo.svg',
-}
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, 'your_web3auth_client_id')
 ```
 
 </TabItem>
 
 <TabItem
-  value="apothem"
+  value="testnet"
 >
 
 ```typescript
-const chainConfig = {
-  chainNamespace: 'eip155',
-  chainId: '0x33', // XDC Network Apothem Network Chain ID
-  rpcTarget: 'https://rpc.apothem.network',
-  displayName: 'XDC Network Apothem Network',
-  blockExplorerUrl: 'https://apothem.xdcscan.io',
-  ticker: 'XDC',
-  tickerName: 'XDC',
-  logo: 'https://docs.xdc.network/assets/logo.svg',
-}
-```
+import { getEvmChainConfig } from '@web3auth/base'
 
-</TabItem>
-
-<TabItem value="devnet" label="Devnet">
-
-```typescript
-const chainConfig = {
-  chainNamespace: 'eip155',
-  chainId: '0x227', // XDC Network Devnet Chain ID
-  rpcTarget: 'https://devnetstats.apothem.network/devnet',
-  displayName: 'XDC Network Devnet',
-  blockExplorerUrl: 'https://devnet.xdcscan.io',
-  ticker: 'XDC',
-  tickerName: 'XDC',
-  logo: 'https://docs.xdc.network/assets/logo.svg',
-}
+const chainConfig = getEvmChainConfig(11155111, 'your_web3auth_client_id')
 ```
 
 </TabItem>
