@@ -265,3 +265,4 @@ export const callData = encodeFunctionData({
 
 - See [how to configure different scopes](use-delegation-scopes/index.md) to define the initial authority of a delegation.
 - See [how to further refine the authority of a delegation](use-delegation-scopes/constrain-scope.md) using caveat enforcers.
+- See [how to disable a delegation](disable-delegation.md) to revoke permissions.
