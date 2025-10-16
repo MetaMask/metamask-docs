@@ -31,3 +31,4 @@ Several third-party libraries for Solana dapps detect and handle MetaMask out-of
 - [Dynamic](https://docs.dynamic.xyz/introduction/welcome)
 - [Privy](https://docs.privy.io/welcome)
 - [Reown](https://docs.reown.com/overview)
+- [Web3Auth](https://web3auth.io/docs)

@@ -18,7 +18,7 @@ const sidebar = {
         {
           type: 'category',
           label: 'Smart account quickstart',
-          collapsed: false,
+          collapsed: true,
           link: { type: "doc", id: "get-started/smart-account-quickstart/index" },
           items: [
             'get-started/smart-account-quickstart/eip7702',
@@ -37,12 +37,13 @@ const sidebar = {
         {
           type: 'category',
           label: 'Delegation',
-          collapsed: false,
+          collapsed: true,
           link: { type: "doc", id: "concepts/delegation/index" },
           items: [
             'concepts/delegation/caveat-enforcers',
           ],
         },
+        'concepts/erc7715',
       ],
     },
     {
@@ -54,7 +55,7 @@ const sidebar = {
         {
           type: 'category',
           label: 'MetaMask Smart Accounts',
-          collapsed: false,
+          collapsed: true,
           items: [
             'guides/smart-accounts/create-smart-account',
             'guides/smart-accounts/deploy-smart-account',
@@ -66,13 +67,13 @@ const sidebar = {
         {
           type: 'category',
           label: 'Delegation',
-          collapsed: false,
+          collapsed: true,
           items: [
             'guides/delegation/execute-on-smart-accounts-behalf',
             {
               type: 'category',
               label: 'Use delegation scopes',
-              collapsed: false,
+              collapsed: true,
               link: { type: "doc", id: "guides/delegation/use-delegation-scopes/index" },
               items: [
                 'guides/delegation/use-delegation-scopes/spending-limit',
@@ -82,14 +83,24 @@ const sidebar = {
               ],
             },
             'guides/delegation/check-delegation-state',
+            'guides/delegation/disable-delegation',
           ],
         },
         {
           type: 'category',
           label: 'ERC-7715',
-          collapsed: false,
+          collapsed: true,
           items: [
-            'guides/erc7715/execute-on-metamask-user-behalf',
+            'guides/erc7715/execute-on-metamask-users-behalf',
+            {
+              type: 'category',
+              label: 'Use permissions',
+              collapsed: true,
+              items: [
+                'guides/erc7715/use-permissions/erc20-token',
+                'guides/erc7715/use-permissions/native-token',
+              ],
+            },
           ],
         },
       ],
@@ -139,7 +150,7 @@ const sidebar = {
         {
           type: 'category',
           label: 'Delegation',
-          collapsed: false,
+          collapsed: true,
           link: { type: "doc", id: "reference/delegation/index" },
           items: [
             'reference/delegation/delegation-scopes',
@@ -147,15 +158,16 @@ const sidebar = {
             'reference/delegation/caveat-enforcer-client',
           ],
         },
-        // {
-        //   type: 'category',
-        //   label: 'ERC-7715',
-        //   collapsed: false,
-        //   items: [
-        //     'reference/erc7715/wallet-client',
-        //     'reference/erc7715/bundler-client',
-        //   ],
-        // },
+        {
+          type: 'category',
+          label: 'ERC-7715',
+          collapsed: true,
+          items: [
+            'reference/erc7715/permissions',
+            'reference/erc7715/wallet-client',
+            'reference/erc7715/bundler-client',
+          ],
+        },
       ],
     },
   ],

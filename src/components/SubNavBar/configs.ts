@@ -34,6 +34,16 @@ export const EMBEDDED_WALLETS_SUBNAV_CONFIG: SubNavBarConfig = {
       label: 'Troubleshooting',
       path: '/embedded-wallets/troubleshooting/',
     },
+    {
+      key: 'dashboard',
+      label: 'Dashboard ↗',
+      path: 'https://dashboard.web3auth.io/',
+    },
+    {
+      key: 'demo',
+      label: 'Demo ↗',
+      path: 'https://demo.web3auth.io/',
+    },
   ],
 }
 

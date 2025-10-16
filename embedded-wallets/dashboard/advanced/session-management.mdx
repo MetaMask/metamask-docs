@@ -1,0 +1,360 @@
+---
+title: Session Management
+sidebar_label: Session Management
+image: 'img/metamaskog.jpg'
+description: 'Configure session duration and behavior in Web3Auth Dashboard | Embedded Wallets'
+---
+
+import ProjectSettingsAdvanced from '@site/static/img/embedded-wallets/w3a-dashboard/project-settings-advanced.png'
+
+The **Session Management** settings allow you to customize session lifetime and behavior for your Web3Auth integration. These settings determine how long user sessions remain active before requiring re-authentication, providing flexibility to balance security requirements with user experience.
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={ProjectSettingsAdvanced}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Session Management Settings"
+  />
+</div>
+
+## Session Duration Overview
+
+Session duration controls how long a user's authentication session remains valid before automatic expiration. This setting directly impacts both security posture and user convenience, making it a critical configuration for production applications.
+
+### Default Configuration
+
+- **Default Duration**: 1 day (24 hours)
+- **Minimum Duration**: 1 second
+- **Maximum Duration**: 30 days (720 hours)
+- **Granularity**: Configurable down to the second
+
+## Configuring Session Duration
+
+### Setting Session Lifetime
+
+1. **Navigate to Project Settings** → **Advanced** → **Session Management**
+2. **Locate Session Duration** setting
+3. **Enter desired duration** in the provided format
+4. **Save configuration** to apply changes
+
+### Duration Format Options
+
+**Time Units Supported:**
+
+- **Seconds**: 1s, 30s, 60s
+- **Minutes**: 1m, 30m, 60m
+- **Hours**: 1h, 12h, 24h
+- **Days**: 1d, 7d, 30d
+
+**Example Configurations:**
+
+```
+30m    # 30 minutes
+2h     # 2 hours
+1d     # 1 day (default)
+7d     # 7 days
+30d    # 30 days (maximum)
+```
+
+## Security Considerations
+
+### Short Session Durations
+
+**Benefits:**
+
+- **Enhanced Security**: Reduced exposure window if credentials are compromised
+- **Compliance**: Meets strict security requirements for sensitive applications
+- **Risk Mitigation**: Limits potential damage from unauthorized access
+- **Regular Validation**: Ensures users are actively using the application
+
+**Use Cases:**
+
+- Financial applications
+- Healthcare systems
+- Administrative interfaces
+- High-security environments
+
+**Recommended Durations:**
+
+- **High Security**: 30m - 2h
+- **Financial Apps**: 1h - 4h
+- **Admin Panels**: 2h - 8h
+
+### Long Session Durations
+
+**Benefits:**
+
+- **Improved UX**: Reduces authentication friction for users
+- **Productivity**: Minimizes workflow interruptions
+- **User Retention**: Decreases abandonment due to re-authentication
+- **Convenience**: Better for applications with frequent usage
+
+**Use Cases:**
+
+- Consumer applications
+- Gaming platforms
+- Content consumption apps
+- Productivity tools
+
+**Recommended Durations:**
+
+- **Consumer Apps**: 7d - 30d
+- **Gaming**: 14d - 30d
+- **Content Apps**: 7d - 30d
+
+## Application-Specific Recommendations
+
+### Web Applications
+
+**Standard Web Apps:**
+
+```
+Session Duration: 1d - 7d
+Rationale: Balance between security and convenience
+```
+
+**Single Page Applications (SPAs):**
+
+```
+Session Duration: 4h - 1d
+Rationale: Active browsing sessions with automatic renewal
+```
+
+**Progressive Web Apps (PWAs):**
+
+```
+Session Duration: 7d - 30d
+Rationale: App-like experience with persistent sessions
+```
+
+### Mobile Applications
+
+**Native Mobile Apps:**
+
+```
+Session Duration: 14d - 30d
+Rationale: Device-based security with biometric re-authentication
+```
+
+**Mobile Games:**
+
+```
+Session Duration: 30d
+Rationale: Seamless gaming experience with maximum convenience
+```
+
+**Financial Mobile Apps:**
+
+```
+Session Duration: 1h - 4h
+Rationale: High security requirements with biometric backup
+```
+
+### Gaming Applications
+
+**Casual Games:**
+
+```
+Session Duration: 30d
+Rationale: Minimal friction for entertainment applications
+```
+
+**Competitive Games:**
+
+```
+Session Duration: 14d - 30d
+Rationale: Balance between convenience and account security
+```
+
+**Gaming Platforms:**
+
+```
+Session Duration: 7d - 30d
+Rationale: Platform-level access with game-specific security
+```
+
+## Advanced Session Behaviors
+
+### Session Renewal
+
+Web3Auth sessions can be renewed through various mechanisms:
+
+**Automatic Renewal:**
+
+- Sessions automatically extend on user activity
+- Background refresh maintains active sessions
+- Seamless experience without user intervention
+
+**Manual Renewal:**
+
+- Explicit user action required for session extension
+- Greater control over session lifecycle
+- Suitable for high-security environments
+
+### Session Termination
+
+**Automatic Termination Events:**
+
+- Session duration expiry
+- Extended inactivity periods
+- Security-triggered logout
+- Device/browser changes
+
+**Manual Termination:**
+
+- User-initiated logout
+- Administrative session termination
+- Forced logout from dashboard
+
+## Implementation Considerations
+
+### Frontend Integration
+
+**Session Status Monitoring:**
+
+```javascript
+// Check session status
+const isAuthenticated = await web3auth.status
+
+// Handle session expiry
+web3auth.on('session_expired', () => {
+  // Redirect to login or show re-authentication modal
+  handleSessionExpiry()
+})
+```
+
+**Graceful Session Handling:**
+
+```javascript
+// Monitor session state
+setInterval(async () => {
+  const sessionValid = await web3auth.isLoggedIn()
+  if (!sessionValid) {
+    // Handle session expiry gracefully
+    await handleSessionExpiry()
+  }
+}, 60000) // Check every minute
+```
+
+### Backend Validation
+
+**Token Validation:**
+
+```javascript
+import jwt from 'jsonwebtoken'
+
+// Validate session token
+function validateSession(token) {
+  try {
+    const decoded = jwt.verify(token, publicKey)
+    const now = Math.floor(Date.now() / 1000)
+
+    if (decoded.exp < now) {
+      throw new Error('Session expired')
+    }
+
+    return decoded
+  } catch (error) {
+    // Handle session validation failure
+    throw new Error('Invalid session')
+  }
+}
+```
+
+## Security Best Practices
+
+### Session Security Guidelines
+
+**Token Management:**
+
+- Store session tokens securely (HttpOnly cookies for web)
+- Implement proper token rotation
+- Use secure transmission (HTTPS only)
+- Clear tokens on logout
+
+**Monitoring and Alerting:**
+
+- Track unusual session patterns
+- Monitor concurrent sessions
+- Alert on suspicious activity
+- Log session events for audit
+
+**Multi-Device Considerations:**
+
+- Limit concurrent sessions per user
+- Implement device fingerprinting
+- Provide session management UI
+- Enable remote session termination
+
+### Compliance Requirements
+
+**Industry Standards:**
+
+- **PCI DSS**: Maximum 15-minute idle timeout for payment systems
+- **HIPAA**: Regular session timeouts for healthcare data
+- **SOX**: Documented session management for financial systems
+- **GDPR**: User control over session data and duration
+
+**Risk Assessment Matrix:**
+
+| Risk Level | Max Session Duration | Re-auth Frequency |
+| ---------- | -------------------- | ----------------- |
+| Critical   | 1-2 hours            | Every action      |
+| High       | 2-8 hours            | Daily             |
+| Medium     | 1-7 days             | Weekly            |
+| Low        | 7-30 days            | Monthly           |
+
+## Troubleshooting Session Issues
+
+### Common Session Problems
+
+**Premature Session Expiry:**
+
+- Check system clock synchronization
+- Verify session duration configuration
+- Review token validation logic
+- Check for timezone issues
+
+**Sessions Not Expiring:**
+
+- Confirm session duration settings
+- Check automatic renewal behavior
+- Verify backend token validation
+- Review frontend session monitoring
+
+**Inconsistent Session Behavior:**
+
+- Check cross-device synchronization
+- Verify token storage mechanisms
+- Review session renewal logic
+- Test different browser/app configurations
+
+### Debugging Tools
+
+**Session Inspection:**
+
+```javascript
+// Debug session information
+console.log('Session Duration:', web3auth.sessionDuration)
+console.log('Session Start:', web3auth.sessionStartTime)
+console.log('Session Expires:', web3auth.sessionExpiryTime)
+console.log('Time Remaining:', web3auth.sessionTimeRemaining)
+```
+
+**Token Analysis:**
+
+```javascript
+// Decode and inspect session token
+const jwt = require('jsonwebtoken')
+const decoded = jwt.decode(sessionToken, { complete: true })
+console.log('Token Header:', decoded.header)
+console.log('Token Payload:', decoded.payload)
+console.log('Issued At:', new Date(decoded.payload.iat * 1000))
+console.log('Expires At:', new Date(decoded.payload.exp * 1000))
+```
+
+## Next Steps
+
+- **[Key Export Settings](../key-export)** - Configure private key export permissions
+- **[User Details in ID Token](../user-details)** - Manage user data in JWT tokens
+- **[Project Settings](../../project-settings)** - Configure basic project information

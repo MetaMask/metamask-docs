@@ -357,4 +357,14 @@ export const API_COSTS = {
     busyThreshold: 80,
     suggestedGasFees: 80,
   },
+  bundler: {
+    eth_estimateUserOperationGas: 1980,
+    eth_getUserOperationByHash: 100,
+    eth_getUserOperationReceipt: 100,
+    eth_sendUserOperation: 4950,
+    eth_supportedEntryPoints: 10,
+    pimlico_getUserOperationGasPrice: 100,
+    pimlico_getUserOperationStatus: 50,
+    pimlico_simulateAssetChanges: 4950,
+  },
 }
