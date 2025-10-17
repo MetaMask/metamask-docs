@@ -1,5 +1,6 @@
 ---
 description: Learn how to deploy a MetaMask smart account.
+keywords: [deploy, smart account, user operation]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -37,7 +38,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   calls: [
     {
       to: "0x1234567890123456789012345678901234567890",
-      value: parseEther("1")
+      value: parseEther("0.001"),
     }
   ],
   maxFeePerGas,

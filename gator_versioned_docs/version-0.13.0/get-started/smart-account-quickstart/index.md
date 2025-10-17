@@ -1,6 +1,7 @@
 ---
 description: Get started quickly with the MetaMask Smart Accounts
 sidebar_label: Smart account quickstart
+keywords: [quickstart, smart accounts, user operation]
 ---
 
 # MetaMask Smart Accounts quickstart

@@ -1,5 +1,6 @@
 ---
 description: Learn about caveat enforcers and how they restrict delegations.
+keywords: [caveats, caveat enforcers, delegation]
 ---
 
 # Caveat enforcers

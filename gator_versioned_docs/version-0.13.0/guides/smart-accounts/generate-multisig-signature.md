@@ -1,5 +1,6 @@
 ---
 description: Learn how to generate a Multisig signature.
+keywords: [generate, multsig, signature, smart account]
 ---
 
 import Tabs from "@theme/Tabs";

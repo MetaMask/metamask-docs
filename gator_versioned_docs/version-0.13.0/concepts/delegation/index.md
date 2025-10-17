@@ -1,6 +1,7 @@
 ---
 description: Learn about delegation, the delegation lifecycle, and the Delegation Framework.
 toc_max_heading_level: 2
+keywords: [delegation toolkit, delegation, delegator, delegate, delegation framework]
 ---
 
 import Tabs from "@theme/Tabs"; 

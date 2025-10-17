@@ -1,5 +1,6 @@
 ---
 description: Learn about MetaMask Smart Accounts.
+keywords: [MetaMask, smart accounts, account abstraction, ERC-4337]
 ---
 
 # MetaMask Smart Accounts

@@ -1,5 +1,6 @@
 ---
 description: Learn how to create a MetaMask smart account using Delegation Toolkit.
+keywords: [create, smart account, signer, hybrid, multisig, 7702]
 ---
 
 import Tabs from "@theme/Tabs";
