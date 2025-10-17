@@ -19,7 +19,7 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 ## Prerequisites
 
 - [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Install MetaMask Flask 12.14.2 or later.](/snaps/get-started/install-flask)
+- [Install MetaMask Flask 13.5.0 or later.](/snaps/get-started/install-flask)
 
 ### 1. Set up a Wallet Client
 

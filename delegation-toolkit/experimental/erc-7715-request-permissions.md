@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 :::caution Experimental
 This is an experimental feature.
-It requires MetaMask Flask 12.14.2 or later, and may change in future releases.
+It requires MetaMask Flask 13.5.0 or later, and may change in future releases.
 :::
 
 [ERC-7715](https://eip.tools/eip/7715) introduces a standard way for dapps to request permissions from a wallet to execute
