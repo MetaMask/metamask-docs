@@ -149,7 +149,10 @@ const sdkSidebar = {
           collapsible: true,
           collapsed: true,
           link: { type: "doc",  id: "evm/connect/reference/json-rpc-api/index" },
-          items: [],
+          items: [
+            "evm/connect/reference/json-rpc-api/wallet_sendCalls",
+            "evm/connect/reference/json-rpc-api/eth_signTypedData_v4",
+          ],
         },
       ],
     },
