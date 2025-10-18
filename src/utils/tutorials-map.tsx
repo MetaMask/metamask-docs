@@ -1,7 +1,7 @@
 export const tags = {
   web3Auth: 'web3auth',
   embeddedWallet: 'embedded wallets',
-  metamaskSdk: 'metamask sdk',
+  metamaskSdk: 'metamask wallet sdk',
   delegationToolkit: 'delegation toolkit',
   infura: 'infura',
   snaps: 'snaps',
@@ -90,7 +90,7 @@ export const platformMap = [
 
 export const productMap = [
   {
-    label: 'Metamask SDK',
+    label: 'MetaMask Wallet SDK',
     value: tags.metamaskSdk,
   },
   {
