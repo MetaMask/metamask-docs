@@ -1,5 +1,0 @@
-# This is a codeowners file. The last matching pattern takes precedence,
-# so the listed codeowners apply only if there is no later match.
-
-# Default owner for all other files
-* @MetaMask/dashboard @MetaMask/tech-writers @MetaMask/delegation-devrel @MetaMask/embedded-wallets-devrel @MetaMask/sdk-devrel
