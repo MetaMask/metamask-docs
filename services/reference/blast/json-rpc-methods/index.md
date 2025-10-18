@@ -1,4 +1,4 @@
----
+preaciouslambert227@gmail.com---
 sidebar_label: JSON-RPC API
 ---
 
