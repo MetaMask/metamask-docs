@@ -37,7 +37,7 @@
     "@docusaurus/preset-classic": "3.8.1",
     "@docusaurus/remark-plugin-npm2yarn": "^3.8.1",
     "@docusaurus/theme-common": "3.8.1",
-    "@docusaurus/theme-mermaid": "3.8.1",
+    "@docusaurus/theme-mermaid": "3.9.2",
     "@intercom/messenger-js-sdk": "^0.0.14",
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "@mdx-js/react": "^3.1.0",
