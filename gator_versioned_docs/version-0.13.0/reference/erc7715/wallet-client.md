@@ -112,22 +112,6 @@ import { walletClient, publicClient } from "./client.ts";
 // `grantPermissions` action to learn how to request permissions.
 const permissionsContext = permissionsResponse[0].context;
 const delegationManager = permissionsResponse[0].signerMeta.delegationManager;
-const accountMetadata = permissionsResponse[0].accountMeta;
-
-if (accountMetadata?.length !== 0) {
-  // If the granted permission contains accountMetadata, this must be executed before attempting to 
-  // redeem the delegation.
-
-  // This transaction will deploy the delegator account.
-  const hash = walletClient.sendTransaction({
-    to: accountMetadata[0].factory,
-    data: accountMetadata[0].factoryData,
-  });
-  
-  // You should wait for the transaction to be successfully executed.
-  // You can use the TransactionReceipt.status to verify the state.
-  await publicClient.waitForTransactionReceipt( { hash });
-}
 
 const hash = walletClient.sendTransactionWithDelegation({
   chain,
