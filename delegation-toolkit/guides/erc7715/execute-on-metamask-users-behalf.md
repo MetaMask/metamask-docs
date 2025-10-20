@@ -201,7 +201,6 @@ import { calldata } from "./config.ts";
 // These properties must be extracted from the permission response.
 const permissionsContext = grantedPermissions[0].context;
 const delegationManager = grantedPermissions[0].signerMeta.delegationManager;
-const accountMetadata = grantedPermissions[0].accountMeta;
 
 // USDC address on Ethereum Sepolia.
 const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
@@ -222,7 +221,6 @@ const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
   // Appropriate values must be used for fee-per-gas. 
   maxFeePerGas: 1n,
   maxPriorityFeePerGas: 1n,
-  accountMetadata,
 });
 ```
 
