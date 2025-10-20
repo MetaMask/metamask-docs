@@ -1,5 +1,6 @@
 ---
 description: Learn how to send a gasless transaction
+keywords: [send, gasless transaction, smart account, sponsor, paymaster]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -38,7 +39,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   calls: [
     {
       to: "0x1234567890123456789012345678901234567890",
-      value: parseEther("1")
+      value: parseEther("0.001")
     }
   ],
   maxFeePerGas,

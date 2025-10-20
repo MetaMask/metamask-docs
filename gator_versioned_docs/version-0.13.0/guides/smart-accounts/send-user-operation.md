@@ -1,5 +1,6 @@
 ---
 description: Learn how to send an ERC-4337 user operation using Viem.
+keywords: [ERC-4337, send, user operation, smart account]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -51,7 +52,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   calls: [
     {
       to: "0x1234567890123456789012345678901234567890",
-      value: parseEther("1")
+      value: parseEther("0.001")
     }
   ],
   maxFeePerGas,
