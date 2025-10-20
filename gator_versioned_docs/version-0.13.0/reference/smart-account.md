@@ -2,6 +2,7 @@
 description: MetaMask Smart Accounts-related API methods reference.
 sidebar_label: MetaMask Smart Accounts
 toc_max_heading_level: 2
+keywords: [smart accounts, API, methods, reference]
 ---
 
 import Tabs from "@theme/Tabs";

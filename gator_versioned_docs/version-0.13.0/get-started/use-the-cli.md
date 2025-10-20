@@ -1,6 +1,7 @@
 ---
 description: Get started with the MetaMask Delegation Toolkit using the `@metamask/create-gator-app` CLI.
 sidebar_label: Use the CLI
+keywords: [CLI, delegation, smart accounts, template]
 ---
 
 # Use the Delegation Toolkit CLI
