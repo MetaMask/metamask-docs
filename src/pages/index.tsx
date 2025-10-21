@@ -22,31 +22,10 @@ export default function Home(): JSX.Element {
         description="Build with the world's leading self-custodial crypto wallet."
       />
 
-      <SectionIntro description="Get started with the following resources:" />
-
-      <CardSection
-        colorPalette="purple"
-        cards={[
-          {
-            title: 'Quickstart',
-            description: 'Choose a quickstart guide that matches your project goals.',
-            href: '/quickstart',
-            buttonIcon: 'arrow-right',
-          },
-          {
-            title: 'Tutorials',
-            description:
-              'Explore use cases and follow the hands-on tutorials to build end-to-end dapps.',
-            href: '/tutorials/',
-            buttonIcon: 'arrow-right',
-          },
-        ]}
-      />
-
       <SectionIntro description="What do you want to do with MetaMask?" />
 
       <CardSection
-        colorPalette="blue"
+        colorPalette="purple"
         cards={[
           {
             title: 'Connect to MetaMask',
@@ -81,6 +60,27 @@ export default function Home(): JSX.Element {
             description:
               'Create a custom mini app that runs inside the MetaMask extension. Add support for custom networks, accounts types, and APIs.',
             href: '/snaps',
+            buttonIcon: 'arrow-right',
+          },
+        ]}
+      />
+
+      <SectionIntro description="Get started with the following resources:" />
+
+      <CardSection
+        colorPalette="blue"
+        cards={[
+          {
+            title: 'Quickstart',
+            description: 'Choose a quickstart guide that matches your project goals.',
+            href: '/quickstart',
+            buttonIcon: 'arrow-right',
+          },
+          {
+            title: 'Tutorials',
+            description:
+              'Explore use cases and follow the hands-on tutorials to build end-to-end dapps.',
+            href: '/tutorials/',
             buttonIcon: 'arrow-right',
           },
         ]}
