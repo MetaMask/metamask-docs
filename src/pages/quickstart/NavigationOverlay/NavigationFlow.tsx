@@ -58,7 +58,7 @@ const navigationOptions: NavigationOption[] = [
   },
   {
     id: 'delegation-toolkit-2',
-    title: "I want to perform executions on behalf of MetaMask users'",
+    title: 'I want to perform executions on behalf of MetaMask users',
     description: 'Delegation Toolkit',
     link: '/delegation-toolkit/guides/erc7715/execute-on-metamask-users-behalf',
   },
