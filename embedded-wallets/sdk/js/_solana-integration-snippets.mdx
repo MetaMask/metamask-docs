@@ -1,39 +1,51 @@
----
-title: Integrate Embedded Wallets with the Solana Blockchain in Javascript
-sidebar_label: Web
-image: 'img/embedded-wallets/banners/solana.png'
-keywords:
-  [
-    solana,
-    wallet,
-    integration,
-    embedded-wallets,
-    API,
-    SDK,
-    authentication,
-    blockchain,
-    solution,
-    development,
-  ]
-description: 'Integrate Embedded Wallets with the Solana Blockchain in Javascript | Embedded Wallets'
----
-
-import SolanaProviderSetup from '../_solana-provider-setup.mdx'
-import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
-
-While using the Embedded Wallets Web SDK (formerly Web3Auth) for [Solana](https://solana.com/), you get a Solana provider with functions to help you make blockchain calls via the [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) library. We’ve highlighted a few methods here to get you started quickly.
-
-::::note
-
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
-
-::::
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
 ## Installation
 
 To interact with the Solana blockchain, you can use [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) library with Web3Auth along with `@web3auth/solana-provider` package.
 
-<SolanaProviderSetup />
+```bash npm2yarn
+npm install --save @solana/web3.js @web3auth/solana-provider
+```
+
+## Initializing Provider
+
+Using `solana` as `chainNamespace` while initializing `web3auth` will provide a Solana provider as **`web3auth.provider`** after successful authentication.
+
+### Initializing and instantiating the Web3Auth SDK
+
+```tsx
+import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const web3AuthOptions: Web3AuthOptions = {
+  clientId,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+}
+```
+
+## Getting the Web3Auth provider
+
+After initializing Web3Auth, the next step is to initialize the provider and use it for your operations.
+
+```tsx
+import { SolanaWallet } from '@web3auth/solana-provider'
+
+// Initialize for PnP Web SDK
+await web3auth.init()
+
+// Trigger the login
+await web3auth.connect()
+// await web3auth.connectTo(); // For custom flow
+
+// Get the provider
+const provider = web3auth.provider
+
+// Initialize Solana Wallet
+const solanaWallet = new SolanaWallet(provider)
+
+// Continue using the `solanaWallet`
+```
 
 ## Get Account and Balance
 
@@ -62,7 +74,7 @@ const connection = new Connection(connectionConfig.rpcTarget)
 const balance = await connection.getBalance(new PublicKey(accounts[0]))
 ```
 
-## Sign a Transaction
+## Sign Transaction
 
 ```tsx
 import {
@@ -74,11 +86,6 @@ import {
 } from '@solana/web3.js'
 
 // solanaWallet is from above
-const connectionConfig = await solanaWallet.request({
-  method: 'solana_provider_config',
-  params: [],
-})
-
 const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>({
   method: 'solana_provider_config',
   params: [],
@@ -104,7 +111,7 @@ const signedTx = await solanaWallet.signTransaction(transaction)
 console.log(signedTx.signature)
 ```
 
-## Sign all Transactions
+## Sign All Transactions
 
 ```tsx
 import {
@@ -153,7 +160,7 @@ const signedTx = await solanaWallet.signAllTransactions([transaction1, transacti
 console.log(signedTx)
 ```
 
-## Sign and Send a Transaction
+## Sign and Send Transaction
 
 ```tsx
 import {
@@ -222,16 +229,4 @@ async getPrivateKey() {
 
   // Do something with privateKey
 }
-```
-
-## Gasless Transactions
-
-To do gasless transactions in Solana, use [Solana labs's Octane](https://github.com/solana-labs/octane).
-
-Octane is a gasless transaction relayer for Solana. Octane accepts transactions via an HTTP API, signs them if they satisfy certain conditions and broadcasts to the network.
-
-Follow [this guide](https://github.com/solana-labs/octane/blob/master/docs/example-integration.md) to run your first transaction through Octane.
-
-```
-
 ```
