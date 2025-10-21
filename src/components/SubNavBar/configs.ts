@@ -71,11 +71,6 @@ export const SDK_SUBNAV_CONFIG: SubNavBarConfig = {
       label: 'Solana',
       path: '/sdk/solana',
     },
-    {
-      key: 'starknet',
-      label: 'Starknet',
-      path: '/sdk/starknet',
-    },
   ],
 }
 

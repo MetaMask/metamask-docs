@@ -160,50 +160,6 @@ const sdkSidebar = {
   solana: [
     'solana/index',
   ],
-  starknet: [
-    'starknet/index',
-    {
-      type: "category",
-      label: "Guides",
-      collapsible: false,
-      collapsed: false,
-      items: [
-        'starknet/guides/connect-to-starknet',
-        'starknet/guides/manage-user-accounts',
-        'starknet/guides/manage-networks',
-        'starknet/guides/send-transactions',
-        'starknet/guides/sign-data',
-        'starknet/guides/troubleshoot',
-      ],
-    },
-    {
-      type: "category",
-      label: "Concepts",
-      collapsible: false,
-      collapsed: false,
-      items: [
-        'starknet/concepts/about-get-starknet',
-      ],
-    },
-    {
-      type: "category",
-      label: "Tutorials",
-      collapsible: false,
-      collapsed: false,
-      items: [
-        'starknet/tutorials/create-simple-starknet-dapp',
-      ],
-    },
-    {
-      type: "category",
-      label: "Reference",
-      collapsible: false,
-      collapsed: false,
-      items: [
-        'starknet/reference/snap-api',
-      ],
-    },
-  ],
 }
 
 module.exports = sdkSidebar

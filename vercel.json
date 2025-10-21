@@ -547,12 +547,12 @@
       "destination": "/sdk/"
     },
     {
-      "source": "/wallet/how-to/use-non-evm-networks/solana",
+      "source": "/wallet/how-to/use-non-evm-networks/solana/",
       "destination": "/sdk/solana/"
     },
     {
-      "source": "/wallet/how-to/use-non-evm-networks/starknet",
-      "destination": "/sdk/starknet/"
+      "source": "/wallet/how-to/use-non-evm-networks/starknet/",
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/how-to/onboard-users/",
@@ -624,7 +624,7 @@
     },
     {
       "source": "/wallet/reference/non-evm-apis/starknet-snap-api/",
-      "destination": "/sdk/starknet/reference/snap-api/"
+      "destination": "/sdk/"
     },
     {
       "source": "/wallet/reference/provider-api/",
@@ -639,36 +639,8 @@
       "destination": "/sdk/evm/connect/reference/json-rpc-api/"
     },
     {
-      "source": "/wallet/how-to/use-non-evm-networks/starknet/connect-to-starknet/",
-      "destination": "/sdk/starknet/guides/connect-to-starknet/"
-    },
-    {
-      "source": "/wallet/how-to/use-non-evm-networks/starknet/manage-starknet-accounts/",
-      "destination": "/sdk/starknet/guides/manage-user-accounts/"
-    },
-    {
-      "source": "/wallet/how-to/use-non-evm-networks/starknet/manage-starknet-networks/",
-      "destination": "/sdk/starknet/guides/manage-networks/"
-    },
-    {
-      "source": "/wallet/how-to/use-non-evm-networks/starknet/send-starknet-transactions/",
-      "destination": "/sdk/starknet/guides/send-transactions/"
-    },
-    {
-      "source": "/wallet/how-to/use-non-evm-networks/starknet/sign-starknet-data/",
-      "destination": "/sdk/starknet/guides/sign-data/"
-    },
-    {
-      "source": "/wallet/how-to/use-non-evm-networks/starknet/create-a-simple-starknet-dapp/",
-      "destination": "/sdk/starknet/tutorials/create-simple-starknet-dapp/"
-    },
-    {
-      "source": "/wallet/how-to/use-non-evm-networks/starknet/troubleshoot/",
-      "destination": "/sdk/starknet/guides/troubleshoot/"
-    },
-    {
-      "source": "/wallet/how-to/use-non-evm-networks/starknet/about-get-starknet/",
-      "destination": "/sdk/starknet/concepts/about-get-starknet/"
+      "source": "/wallet/how-to/use-non-evm-networks/starknet/:path*/",
+      "destination": "/sdk/"
     },
     {
       "source": "/guide/snaps/",
