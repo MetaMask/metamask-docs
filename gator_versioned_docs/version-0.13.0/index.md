@@ -2,11 +2,12 @@
 title: Delegation Toolkit introduction
 sidebar_label: Introduction
 description: High-level overview of Smart Accounts and the Delegation Toolkit.
+keywords: [MetaMask, delegation toolkit, smart accounts]
 ---
 
 import CardList from "@site/src/components/CardList"
 
-# Embed MetaMask Smart Accounts using the Delegation Toolkit
+# Create MetaMask Smart Accounts using the Delegation Toolkit
 
 The MetaMask Delegation Toolkit is a [Viem](https://viem.sh/)-based collection of tools for embedding [MetaMask Smart Accounts](concepts/smart-accounts.md) into dapps.
 Smart accounts support programmable account behavior and advanced features like delegated permissions, multi-signature approvals, and gas abstraction.
@@ -14,6 +15,8 @@ Smart accounts support programmable account behavior and advanced features like 
 [Delegation](concepts/delegation/index.md) is a core feature of MetaMask Smart Accounts, enabling secure, rule-based permission sharing.
 Delegation is powered by the toolkit's Delegation Framework, which defines how
 permissions are created, shared, and enforced.
+
+MetaMask Smart Accounts also support [ERC-7715 permissions](concepts/erc7715.md), which are fine-grained permissions dapps can request from users directly via the MetaMask browser extension.
 
 ## Why use the toolkit?
 
@@ -40,22 +43,22 @@ Check out the following guides to get started with the MetaMask Delegation Toolk
 <CardList
 items={[
 {
-href: "/delegation-toolkit/get-started/install",
+href: "get-started/install",
 title: "Install and set up",
 description: "Install and set up the MetaMask Delegation Toolkit.",
 },
 {
-href: "/delegation-toolkit/get-started/smart-account-quickstart",
+href: "get-started/smart-account-quickstart",
 title: "MetaMask Smart Accounts quickstart",
 description: "Create a MetaMask smart account and send a user operation.",
 },
 {
-href: "/delegation-toolkit/get-started/smart-account-quickstart/eip7702",
+href: "get-started/smart-account-quickstart/eip7702",
 title: "EIP-7702 quickstart",
 description: "Upgrade an externally owned account to a smart account.",
 },
 {
-href: "/delegation-toolkit/get-started/use-the-cli",
+href: "get-started/use-the-cli",
 title: "Use the CLI",
 description: "Use the Delegation Toolkit CLI to bootstrap a project.",
 }

@@ -123,13 +123,14 @@ Once the calldata is prepared, send it to your smart account address to register
 
 ```ts
 import { PublicKey } from 'ox'
+import { toHex } from 'viem'
 import { HybridDeleGator, P256Owner } from '@metamask/delegation-toolkit/contracts'
 
 // Deserialize the compressed public key.
 const publicKey = PublicKey.fromHex(credential.publicKey)
 
 const p256Owner: P256Owner = {
-  keyId: credential.id,
+  keyId: toHex(credential.id),
   x: publicKey.x,
   y: publicKey.y,
 }

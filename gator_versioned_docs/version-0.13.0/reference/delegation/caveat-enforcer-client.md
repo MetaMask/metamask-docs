@@ -2,12 +2,13 @@
 description: Caveat Enforcer Client API reference.
 sidebar_label: Caveat Enforcer Client
 toc_max_heading_level: 2
+keywords: [delegation state, caveat enforcer client, API, methods, reference]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Caveat Enforcer Client
+# Caveat Enforcer Client reference
 
 The following API methods are related to `CaveatEnforcerClient` used to [check the delegation state](../../guides/delegation/check-delegation-state.md).
 
@@ -91,13 +92,16 @@ import { getDeleGatorEnvironment } from '@metamask/delegation-toolkit'
 
 const environment = getDeleGatorEnvironment(chain.id)
 
+// Since current time is in seconds, we need to convert milliseconds to seconds.
+const startDate = Math.floor(Date.now() / 1000)
+
 export const delegation = createDelegation({
   scope: {
     type: 'erc20PeriodTransfer',
     tokenAddress: '0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da',
-    periodAmount: 1000000000000000000n,
+    periodAmount: parseUnits('10', 6),
     periodDuration: 86400,
-    startDate: 1743763600,
+    startDate,
   },
   to: 'DELEGATE_ADDRESS',
   from: 'DELEGATOR_ADDRESS',
@@ -139,17 +143,21 @@ const { availableAmount } = await caveatEnforcerClient.getErc20StreamingEnforcer
 import { createDelegation } from '@metamask/delegation-toolkit'
 import { sepolia as chain } from 'viem/chains'
 import { getDeleGatorEnvironment } from '@metamask/delegation-toolkit'
+import { parseUnits } from 'viem'
 
 const environment = getDeleGatorEnvironment(chain.id)
+
+// Since current time is in seconds, we need to convert milliseconds to seconds.
+const startTime = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {
     type: 'erc20Streaming',
     tokenAddress: '0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92',
-    amountPerSecond: 100n,
-    initialAmount: 1000000n,
-    maxAmount: 10000000n,
-    startTime: 1703980800,
+    amountPerSecond: parseUnits('0.1', 6),
+    initialAmount: parseUnits('1', 6),
+    maxAmount: parseUnits('10', 6),
+    startTime,
   },
   to: 'DELEGATE_ADDRESS',
   from: 'DELEGATOR_ADDRESS',
@@ -190,16 +198,20 @@ const { availableAmount } = await caveatEnforcerClient.getNativeTokenPeriodTrans
 ```typescript
 import { createDelegation } from '@metamask/delegation-toolkit'
 import { sepolia as chain } from 'viem/chains'
+import { parseEther } from 'viem'
 import { getDeleGatorEnvironment } from '@metamask/delegation-toolkit'
 
 const environment = getDeleGatorEnvironment(chain.id)
 
+// Since current time is in seconds, we need to convert milliseconds to seconds.
+const startDate = Math.floor(Date.now() / 1000)
+
 export const delegation = createDelegation({
   scope: {
     type: 'nativeTokenPeriodTransfer',
-    periodAmount: 1000000000000000000n,
+    periodAmount: parseEther('0.01', 6),
     periodDuration: 86400,
-    startDate: 1743763600,
+    startDate,
   },
   to: 'DELEGATE_ADDRESS',
   from: 'DELEGATOR_ADDRESS',
@@ -244,13 +256,16 @@ import { getDeleGatorEnvironment } from '@metamask/delegation-toolkit'
 
 const environment = getDeleGatorEnvironment(chain.id)
 
+// Since current time is in seconds, we need to convert milliseconds to seconds.
+const startTime = Math.floor(Date.now() / 1000)
+
 export const delegation = createDelegation({
   scope: {
     type: "nativeTokenStreaming",
-    amountPerSecond: 100n,
-    initialAmount: 1000000n,
-    maxAmount: 10000000n,
-    startTime: 1703980800,
+    amountPerSecond: parseEther('0.001'),
+    initialAmount: parseEther('0.01'),
+    maxAmount: parseEther('0.1'),
+    startTime,
   },
   to: 'DELEGATE_ADDRESS',
   from: 'DELEGATOR_ADDRESS',
@@ -299,6 +314,7 @@ const { availableAmount } = await caveatEnforcerClient.getMultiTokenPeriodEnforc
 import { createDelegation, getDeleGatorEnvironment, ROOT_AUTHORITY } from '@metamask/delegation-toolkit'
 import { createCaveatBuilder } from '@metamask/delegation-toolkit/utils'
 import { sepolia as chain } from 'viem/chains'
+import { parseUnits, parseEther } from 'viem'
 
 const environment = getDeleGatorEnvironment(chain.id)
 const caveatBuilder = createCaveatBuilder(environment)
@@ -310,8 +326,8 @@ const startDate = Math.floor(Date.now() / 1000);
 const tokenConfigs = [
   {
     token: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
-    // 1 token with 18 decimals.
-    periodAmount: 1000000000000000000n,
+    // 1 token with 6 decimals.
+    periodAmount: parseUnits('1', 6),
      // 1 day in seconds.
     periodDuration: 86400,
     startDate
@@ -320,14 +336,14 @@ const tokenConfigs = [
     // For native token use zeroAddress
     token: zeroAddress,
     // 0.01 ETH in wei.
-    periodAmount: 10000000000000000n,
+    periodAmount: parseEther('0.01'),
     // 1 hour in seconds.
     periodDuration: 3600,
     startDate
   }
 ]
 
-const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', 1000000n).addCaveat({
+const caveats = caveatBuilder.addCaveat({
   'multiTokenPeriod',
    tokenConfigs
 })

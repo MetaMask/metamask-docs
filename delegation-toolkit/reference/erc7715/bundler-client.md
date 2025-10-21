@@ -44,7 +44,6 @@ import { sessionAccount, bundlerClient, publicClient } from "./client.ts";
 // These properties must be extracted from the permission response.
 const permissionsContext = permissionsResponse[0].context;
 const delegationManager = permissionsResponse[0].signerMeta.delegationManager;
-const accountMetadata = permissionsResponse[0].accountMeta;
 
 // Calls without permissionsContext and delegationManager will be executed 
 // as a normal user operation.
@@ -63,7 +62,6 @@ const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
   // Appropriate values must be used for fee-per-gas. 
   maxFeePerGas: 1n,
   maxPriorityFeePerGas: 1n
-  accountMetadata,
 });
 ```
 
