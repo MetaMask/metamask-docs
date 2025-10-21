@@ -159,6 +159,17 @@ const sdkSidebar = {
   ],
   solana: [
     'solana/index',
+    {
+      type: 'category',
+      label: 'Guides',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'solana/connect/guides/use-wallet-adapter',
+        'solana/connect/guides/send-legacy-transaction',
+        'solana/connect/guides/send-versioned-transaction',
+      ],
+    },
   ],
 }
 
