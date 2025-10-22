@@ -55,7 +55,7 @@
     "copy-to-clipboard": "^3.3.3",
     "docusaurus-plugin-sass": "^0.2.5",
     "dotenv": "^17.2.1",
-    "ethers": "^6.13.5",
+    "ethers": "^6.15.0",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "launchdarkly-js-client-sdk": "^3.9.0",
