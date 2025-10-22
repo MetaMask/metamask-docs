@@ -29,7 +29,7 @@ Upon installation, you'll be asked the following prompts:
 ❯ MetaMask Smart Accounts Starter
   MetaMask Smart Accounts & Delegation Starter
   Farcaster Mini App Delegation Starter 
-  Experimental: ERC7715 Permissions starter
+  ERC-7715 Permissions Starter
 ? Pick a package manager: (Use arrow keys)
 ❯ npm 
   yarn 
@@ -96,4 +96,4 @@ Currently, only Cursor and Windsurf are supported.
 | MetaMask Smart Accounts Starter                    | ✅       | ✅         |
 | MetaMask Smart Accounts &amp; Delegation Starter   | ✅       | ✅         | 
 | Farcaster Mini App Delegation Starter              | ✅       |            | 
-| Experimental: ERC7715 Permissions starter          | ✅       |            |
+| ERC-7715 Permissions Starter                       | ✅       |            |
