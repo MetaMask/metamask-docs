@@ -1,6 +1,7 @@
 ---
 title: BNB Smart Chain subscription methods
 sidebar_label: Subscription methods
+sidebar_key: bnb-smart-chain-subscription-methods
 description: BNB Smart Chain subscription methods
 ---
 

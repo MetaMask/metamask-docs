@@ -1,5 +1,6 @@
 ---
 sidebar_label: JSON-RPC API
+sidebar_key: linea-json-rpc-api
 ---
 
 # Linea JSON-RPC API

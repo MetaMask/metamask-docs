@@ -1,6 +1,7 @@
 ---
 title: Base bundler methods
 sidebar_label: Bundler methods
+sidebar_key: base-bundler-methods
 description: Base bundler methods
 ---
 

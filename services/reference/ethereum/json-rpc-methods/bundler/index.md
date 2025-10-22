@@ -1,6 +1,7 @@
 ---
 title: Ethereum bundler methods
 sidebar_label: Bundler methods
+sidebar_key: ethereum-bundler-methods
 description: Ethereum bundler methods
 ---
 

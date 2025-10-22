@@ -1,6 +1,7 @@
 ---
 title: Celo subscription methods
 sidebar_label: Subscription methods
+sidebar_key: celo-subscription-methods
 description: Celo subscription methods
 ---
 

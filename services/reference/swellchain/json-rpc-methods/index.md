@@ -2,6 +2,7 @@
 title: Swellchain JSON-RPC API
 description: Supported standard Ethereum methods on the Swellchain network.
 sidebar_label: JSON-RPC API
+sidebar_key: swellchain-json-rpc-api
 ---
 
 # Swellchain JSON-RPC API

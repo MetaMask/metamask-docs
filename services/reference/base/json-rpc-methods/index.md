@@ -2,6 +2,7 @@
 title: Base JSON-RPC API
 description: Supported standard Ethereum methods on Base network.
 sidebar_label: JSON-RPC API
+sidebar_key: base-json-rpc-api
 ---
 
 # Base JSON-RPC API

@@ -1,6 +1,7 @@
 ---
 title: Optimism filter methods
 sidebar_label: Filter methods
+sidebar_key: optimism-filter-methods
 description: Optimism filter methods
 ---
 

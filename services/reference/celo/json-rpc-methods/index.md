@@ -1,5 +1,6 @@
 ---
 sidebar_label: JSON-RPC API
+sidebar_key: celo-json-rpc-api
 ---
 
 # Celo JSON-RPC API

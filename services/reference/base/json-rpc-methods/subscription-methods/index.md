@@ -1,6 +1,7 @@
 ---
 title: Base subscription methods
 sidebar_label: Subscription methods
+sidebar_key: base-subscription-methods
 description: Base subscription methods
 ---
 

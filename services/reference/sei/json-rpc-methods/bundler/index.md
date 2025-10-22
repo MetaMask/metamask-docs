@@ -1,6 +1,7 @@
 ---
 title: Sei bundler methods
 sidebar_label: Bundler methods
+sidebar_key: sei-bundler-methods
 description: Sei bundler methods
 ---
 
