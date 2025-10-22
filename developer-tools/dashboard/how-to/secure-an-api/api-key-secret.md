@@ -1,4 +1,4 @@
----
+https://mainnet.infura.io/v3/ <N/A-Satoshinakamoto-NguyenNamAnh>-
 description: Authenticate all requests to Infura with an API key secret.
 ---
 
