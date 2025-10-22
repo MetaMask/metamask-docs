@@ -29,8 +29,8 @@ const config = {
   // tagline: '',
   url: 'https://docs.metamask.io',
   baseUrl, // overwritten in github action for staging / latest
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenAnchors: 'throw',
   favicon: 'img/favicons/favicon-96x96.png',
 
   headTags: [
@@ -90,7 +90,7 @@ const config = {
   organizationName: 'metamask', // Usually your GitHub org/user name.
   projectName: 'metamask-docs', // Usually your repo name.
 
-  // Even if you don't use internalization, you can use this field to set useful
+  // Even if you don't use internationalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
@@ -127,6 +127,9 @@ const config = {
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
 

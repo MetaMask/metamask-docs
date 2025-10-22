@@ -1,6 +1,7 @@
 ---
 title: BNB Smart Chain bundler methods
 sidebar_label: Bundler methods
+sidebar_key: bnb-smart-chain-bundler-methods
 description: BNB Smart Chain bundler methods
 ---
 

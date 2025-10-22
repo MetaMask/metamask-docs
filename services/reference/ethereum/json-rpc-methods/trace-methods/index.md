@@ -1,6 +1,7 @@
 ---
 title: Ethereum trace methods
 sidebar_label: Trace methods
+sidebar_key: ethereum-trace-methods
 description: Ethereum trace methods
 ---
 

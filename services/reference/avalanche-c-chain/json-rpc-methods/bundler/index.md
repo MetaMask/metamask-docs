@@ -1,7 +1,8 @@
 ---
-title: Avalanche bundler methods
+title: Avalanche (C-Chain) bundler methods
 sidebar_label: Bundler methods
-description: Avalanche bundler methods
+sidebar_key: avalanche-c-chain-bundler-methods
+description: Avalanche (C-Chain) bundler methods
 ---
 
 Infura integrates with the Pimlico account abstraction bundler infrastructure, enabling

@@ -34,6 +34,7 @@
           "type": "category",
           "label": "Delegation",
           "collapsed": false,
+          "key": "delegation-concepts",
           "link": { "type": "doc", "id": "concepts/delegation/index" },
           "items": [
             "concepts/delegation/caveat-enforcers"
@@ -64,6 +65,7 @@
           "type": "category",
           "label": "Delegation",
           "collapsed": true,
+          "key": "delegation-guides",
           "items": [
             "guides/delegation/execute-on-smart-accounts-behalf",
             {
@@ -85,6 +87,7 @@
           "type": "category",
           "label": "ERC-7715",
           "collapsed": true,
+          "key": "erc7715-guides",
           "items": [
             "guides/erc7715/execute-on-metamask-users-behalf",
             {
@@ -137,6 +140,7 @@
           "type": "category",
           "label": "Delegation",
           "collapsed": true,
+          "key": "delegation-reference",
           "link": { "type": "doc", "id": "reference/delegation/index" },
           "items": [
             "reference/delegation/delegation-scopes",
@@ -148,6 +152,7 @@
           "type": "category",
           "label": "ERC-7715",
           "collapsed": true,
+          "key": "erc7715-reference",
           "items": [
             "reference/erc7715/permissions",
             "reference/erc7715/wallet-client",

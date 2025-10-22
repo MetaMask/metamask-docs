@@ -1,6 +1,7 @@
 ---
 title: Blast bundler methods
 sidebar_label: Bundler methods
+sidebar_key: blast-bundler-methods
 description: Blast bundler methods
 ---
 

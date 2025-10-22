@@ -1,7 +1,8 @@
 ---
-title: ZKsync Era subscription methods
+title: ZkSync subscription methods
 sidebar_label: Subscription methods
-description: ZKsync Era subscription methods
+sidebar_key: zksync-subscription-methods
+description: ZkSync subscription methods
 ---
 
 # ZKsync Era subscription methods
