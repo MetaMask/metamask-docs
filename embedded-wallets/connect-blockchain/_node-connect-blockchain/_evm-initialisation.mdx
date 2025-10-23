@@ -1,0 +1,15 @@
+```typescript
+const { Web3Auth } = require('@web3auth/node-sdk')
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
+})
+
+await web3auth.init()
+
+const result = await web3auth.connect({
+  authConnectionId: 'YOUR_AUTH_CONNECTION_ID', // Your custom authentication connection name
+  idToken: 'USER_ID_TOKEN', // JWT token from your auth system
+})
+```

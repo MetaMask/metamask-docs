@@ -7,78 +7,15 @@ keywords: [unity, metis, web3auth, authentication, blockchain]
 description: 'Integrate Embedded Wallets with the Metis Blockchain in Unity | Embedded Wallets'
 ---
 
-import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
-import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
-import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
-import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
-import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
-import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
-import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import EVMInteraction from '../../_unity-connect-blockchain/_evm-interaction.mdx'
+import ChainDetailsMetis from '../../_general-connect-blockchain/_metis.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, like getting the user's `account`, fetching `balance`, `signing transaction`, `sending transactions`, `reading` from and `writing` to smart contracts. We have highlighted a few examples to get you started.
-
-## Installation
-
-<InstallationSnippet />
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
 
 ## Chain Details for Metis
 
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
+<ChainDetailsMetis />
 
-- Chain ID: 0x440
-- Public RPC URL: https://andromeda.metis.io/?owner=1088 (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Andromeda Mainnet
-- Block Explorer Link: https://andromeda-explorer.metis.io
-- Ticker: METIS
-- Ticker Name: Metis
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0xEA6E
-- Public RPC URL: https://sepolia.metisdevops.link (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Sepolia Testnet
-- Block Explorer Link: https://sepolia-explorer.metisdevops.link/
-- Ticker: tMetis
-- Ticker Name: tMetis
-
-</TabItem>
-</Tabs>
-
-## Initialize
-
-<InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
-
-## Get Account
-
-<GetAccountSnippet />
-
-## Get Balance
-
-<GetBalanceSnippet />
-
-## Sign a message
-
-<SignMessageSnippet />
-
-## Send Transaction
-
-<SendTransactionSnippet />
+<EVMInteraction />

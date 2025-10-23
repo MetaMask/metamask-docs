@@ -21,18 +21,18 @@ export const EMBEDDED_WALLETS_SUBNAV_CONFIG: SubNavBarConfig = {
     },
     {
       key: 'connect-blockchain',
-      label: 'Connect Blockchain',
-      path: '/embedded-wallets/connect-blockchain/',
+      label: 'EVM',
+      path: '/embedded-wallets/connect-blockchain/evm/',
     },
     {
-      key: 'infrastructure',
-      label: 'Infrastructure',
-      path: '/embedded-wallets/infrastructure/',
+      key: 'connect-blockchain',
+      label: 'Solana',
+      path: '/embedded-wallets/connect-blockchain/solana/',
     },
     {
-      key: 'troubleshooting',
-      label: 'Troubleshooting',
-      path: '/embedded-wallets/troubleshooting/',
+      key: 'connect-blockchain',
+      label: 'Other Blockchains',
+      path: '/embedded-wallets/connect-blockchain/other/',
     },
     {
       key: 'dashboard',

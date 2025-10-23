@@ -18,6 +18,56 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 ::::
 
+## Chain Details for Solana
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
+    { label: "Devnet", value: "devnet" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x1
+- Public RPC URL: https://api.mainnet-beta.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Mainnet
+- Block Explorer Link: https://explorer.solana.com
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+
+<TabItem value="testnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x2
+- Public RPC URL: https://api.testnet.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Testnet
+- Block Explorer Link: https://explorer.solana.com
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+
+<TabItem value="devnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x3
+- Public RPC URL: https://api.devnet.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Devnet
+- Block Explorer Link: https://explorer.solana.com?cluster=devnet
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+</Tabs>
+
 ## Installation
 
 To interact with the Solana blockchain in Android, you can use any Solana compatible SDK. Here, we're using [sol4k](https://github.com/sol4k/sol4k) to demonstrate how to interact with Solana chain using Web3Auth.
@@ -98,22 +148,9 @@ val isUserAuthenticated = web3Auth.getPrivkey().isNotEmpty()
 // Customize your logic to perform operations or navigation
 ```
 
-## Get User Info
-
-After logging in, the Web3Auth instance will provide you with information regarding the user that is logged in. This information is obtained directly from the JWT token and is not stored by Web3Auth. Therefore, this information can only be accessed through social logins after the user has logged into your application. You can get the user information using `getUserInfo` function. The function will throw error in case if user is not authenticated.
-
-```kotlin
-try {
-    // focus-next-line
-    val userInfo = web3Auth.getUserInfo()!!
-} catch(e: Exception) {
-    // Perform suitable error handling
-}
-```
-
 ## Get Account
 
-We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retive user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
+We can use `getEd25519PrivKey` method in Web3Auth to retrieve the private key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retrieve user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
 
 ```kotlin
 val ed25519PrivateKey = web3Auth.getEd25519PrivKey()
@@ -123,14 +160,14 @@ val solanaKeyPair = Keypair.fromSecretKey(ed25519PrivateKey.hexToByteArray())
 val userAccount = solanaKeyPair.publicKey.toBase58()
 ```
 
-## Get User balance
+## Get User Balance
 
-Once we have retrived userAccount, we can use it to fetch user balance. We'll use `getBalance` method from `Connection` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is BigInteger, we will need to divide it by by 10^9, because Solana's token decimals is 9.
+Once we have retrieved userAccount, we can use it to fetch user balance. We'll use `getBalance` method from `Connection` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is BigInteger, we will need to divide it by by 10^9, because Solana's token decimals is 9.
 
 ```kotlin
 try {
-    // Use solanaPrivateKey from above
-    val publicKey = solanaPrivateKey.publicKey;
+    // Use solanaKeyPair from above
+    val publicKey = solanaKeyPair.publicKey
 
     // focus-next-line
     val balanceResponse = connection.getBalance(publicKey).toBigDecimal()
@@ -145,7 +182,7 @@ try {
 
 ## Sign Transaction
 
-Let's now go through how can we sign the transaction. In the below codeblock, we'll create a new function `prepareSignedTransaction` which can be used to retrive the Base58 signature as well as broadcast transaction to the cluster. We'll use `TransferInstruction` to create the transaction to self transfer 0.01 Sol and sign it.
+Let's now go through how can we sign the transaction. In the below codeblock, we'll create a new function `prepareSignedTransaction` which can be used to retrieve the Base58 signature as well as broadcast transaction to the cluster. We'll use `TransferInstruction` to create the transaction to self transfer 0.01 Sol and sign it.
 
 ```kotlin
 private suspend fun prepareSignedTransaction(sender: Keypair) : Transaction = withContext(Dispatchers.IO) {

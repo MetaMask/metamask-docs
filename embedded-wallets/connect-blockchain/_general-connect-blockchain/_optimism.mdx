@@ -1,40 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Sepolia Testnet", value: "sepolia" },
   ]}
 >
-<TabItem
-  value="mainnet"
->
+<TabItem value="mainnet">
 
-- Chain ID: 0xA (hex of 10)
-- Public RPC URL: https://mainnet.optimism.io (Avoid using public rpcTarget in production, use
-  services like Infura)
-- Display Name: Optimism Mainnet
-- Block Explorer Link: https://optimistic.etherscan.io
-- Ticker: ETH
-- Ticker Name: ETH
-- Logo: https://cryptologos.cc/logos/optimism-ethereum-op-logo.png
+- **Chain ID:** 0xA
+- **RPC URL:** You can use our bundled RPC service from Infura, or your own choice of RPC service for production.
+- **Display Name:** Optimism Mainnet
+- **Block Explorer Link:** https://optimistic.etherscan.io
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
 
 </TabItem>
 
-<TabItem
-  value="testnet"
->
+<TabItem value="sepolia">
 
-- Chain ID: 0xAA37DC (hex of 11155420)
-- Public RPC URL: https://sepolia.optimism.io (Avoid using public rpcTarget in production, use
-  services like Infura)
-- Display Name: OP Sepolia
-- Block Explorer Link: https://sepolia-optimistic.etherscan.io
-- Ticker: ETH
-- Ticker Name: ETH
-- Logo: https://cryptologos.cc/logos/optimism-ethereum-op-logo.png
+- **Chain ID:** 0xAA37DC
+- **Public RPC URL:** https://sepolia.optimism.io
+- **Display Name:** OP Sepolia
+- **Block Explorer Link:** https://sepolia-optimistic.etherscan.io
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
 
 </TabItem>
 </Tabs>

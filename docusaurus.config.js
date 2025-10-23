@@ -410,7 +410,7 @@ const config = {
             position: 'right',
           },
           {
-            to: 'https://community.metamask.io/',
+            to: 'https://builder.metamask.io/',
             label: 'Help ↗',
             position: 'right',
           },

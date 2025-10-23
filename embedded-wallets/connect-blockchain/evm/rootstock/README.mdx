@@ -1,8 +1,20 @@
 ---
 title: Integrate Embedded Wallets with the Rootstock Blockchain
-sidebar_label: Rootstock
-hide_table_of_contents: true
+sidebar_label: Overview
 
+keywords:
+  [
+    rootstock,
+    wallet,
+    integration,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
 image: 'img/embedded-wallets/banners/rootstock.png'
 description: 'Integrate Embedded Wallets with the Rootstock Blockchain | Embedded Wallets'
 ---
@@ -10,7 +22,7 @@ description: 'Integrate Embedded Wallets with the Rootstock Blockchain | Embedde
 import Tiles from '@theme/Tiles'
 import ChainDetailsRootstock from '../../_general-connect-blockchain/_rootstock.mdx'
 
-Integrate Web3Auth seamlessly with EVM-based Rootstock Blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+Integrate Web3Auth seamlessly with EVM-based Rootstock blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
 
 This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
 
@@ -24,10 +36,23 @@ export const Rootstock = [
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/rootstock/react',
+          },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/rootstock/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/rootstock/web',
+        path: '/embedded-wallets/connect-blockchain/evm/rootstock/javascript',
       },
       {
         key: 'android',
@@ -52,6 +77,12 @@ export const Rootstock = [
         title: 'React Native',
         icon: 'logo-react.png',
         path: '/embedded-wallets/connect-blockchain/evm/rootstock/react-native',
+          },
+          {
+            key: 'node',
+            title: 'Node',
+            icon: 'logo-nodejs.png',
+            path: '/embedded-wallets/connect-blockchain/evm/rootstock/node',
       },
       {
         key: 'unity',
@@ -60,7 +91,8 @@ export const Rootstock = [
         path: '/embedded-wallets/connect-blockchain/evm/rootstock/unity',
       },
     ],
-  },
+
+},
 ]
 
 <Tiles tileGroups={Rootstock} />

@@ -1,5 +1,5 @@
 ---
-title: Connect Embedded Wallets with Other Blockchains
+title: Connect Embedded Wallets with any Blockchain
 sidebar_label: Non EVM Blockchains
 image: 'img/metamaskog.jpg'
 
@@ -16,6 +16,18 @@ With the Embedded Wallets SDKs (formerly Web3Auth), we can export the private ke
 The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
 ::::
+
+## Embedded Wallets are Chain Agnostic
+
+By default, Embedded Wallets supports the `secp256k1` and `ed25519` key curves. While these key curves serve the majority of blockchains out there, certain blockchains have different curve implementations of their own. With **Embedded Wallets you can interact with any blockchain of your choice**.
+
+In Embedded Wallets the ability to export the user's private key comes in handy. This private key can be utilized by the dApp to interact with the chain.
+
+:::info
+
+Embedded Wallets is composable - you can combine it with meta-transaction flows, multisigs, and other cryptographic protocols. It is easy to build on top of, and generally fits in with most other technology stacks, including but not limited to; your favorite scalability solutions, meta transactions, smart contract wallets, different elliptic curve pairs and even RSA.
+
+:::
 
 ## Standard Approach for connecting with Non EVM Chains
 
