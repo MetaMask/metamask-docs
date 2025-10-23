@@ -1,6 +1,7 @@
 ---
 title: Linea bundler methods
 sidebar_label: Bundler methods
+sidebar_key: linea-bundler-methods
 description: Linea bundler methods
 ---
 

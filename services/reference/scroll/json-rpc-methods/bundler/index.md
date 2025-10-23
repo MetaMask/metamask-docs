@@ -1,6 +1,7 @@
 ---
 title: Scroll bundler methods
 sidebar_label: Bundler methods
+sidebar_key: scroll-bundler-methods
 description: Scroll bundler methods
 ---
 

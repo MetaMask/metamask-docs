@@ -1,5 +1,6 @@
 ---
 sidebar_label: JSON-RPC API
+sidebar_key: polygon-pos-json-rpc-api
 ---
 
 # Polygon PoS JSON-RPC API

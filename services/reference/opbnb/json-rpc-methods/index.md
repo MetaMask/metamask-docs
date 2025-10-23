@@ -1,5 +1,6 @@
 ---
 sidebar_label: JSON-RPC API
+sidebar_key: opbnb-json-rpc-api
 ---
 
 # opBNB JSON-RPC API

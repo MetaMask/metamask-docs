@@ -1,6 +1,7 @@
 ---
 title: Optimism bundler methods
 sidebar_label: Bundler methods
+sidebar_key: optimism-bundler-methods
 description: Optimism bundler methods
 ---
 

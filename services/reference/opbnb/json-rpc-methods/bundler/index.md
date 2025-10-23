@@ -1,6 +1,7 @@
 ---
 title: opBNB bundler methods
 sidebar_label: Bundler methods
+sidebar_key: opbnb-bundler-methods
 description: opBNB bundler methods
 ---
 

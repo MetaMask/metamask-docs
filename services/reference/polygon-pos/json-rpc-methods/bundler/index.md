@@ -1,7 +1,8 @@
 ---
-title: Polygon bundler methods
+title: Polygon PoS bundler methods
 sidebar_label: Bundler methods
-description: Polygon bundler methods
+sidebar_key: polygon-pos-bundler-methods
+description: Polygon PoS bundler methods
 ---
 
 Infura integrates with the Pimlico account abstraction bundler infrastructure, enabling

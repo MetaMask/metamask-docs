@@ -2,6 +2,7 @@
 title: Optimism JSON-RPC API
 description: Supported standard Ethereum methods on Optimism network.
 sidebar_label: JSON-RPC API
+sidebar_key: optimism-json-rpc-api
 ---
 
 # Optimism JSON-RPC API
