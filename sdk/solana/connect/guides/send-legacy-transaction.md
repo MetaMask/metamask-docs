@@ -69,7 +69,7 @@ await connection.getSignatureStatuses(signatures);
 The following methods are also supported, but are not recommended over `signAndSendTransaction`. It is safer for users, and a simpler API for developers, for Phantom to submit the transaction immediately after signing it instead of relying on the application to do so.
 
 :::warning
-The following methods are not supported in the [wallet standard](#) implementation and may be removed in a future release. These methods are only available via the [window.solana object](/solana/detecting-the-provider).
+The following methods are not supported in the [wallet standard](#) implementation and may be removed in a future release. These methods are only available via the [window.solana object].
 :::
 
 ## Sign a transaction (without sending)

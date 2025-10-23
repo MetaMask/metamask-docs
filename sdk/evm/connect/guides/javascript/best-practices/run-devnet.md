@@ -83,8 +83,7 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
    :::tip
    Alternatively, you can add Hardhat Network to MetaMask using
-   [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain/?AddEthereumChainParameter[rpcUrls][0]=http://127.0.0.1:8545&AddEthereumChainParameter[chainId]=0x539&AddEthereumChainParameter[chainName]=Hardhat&AddEthereumChainParameter[nativeCurrency][name]=testEth&AddEthereumChainParameter[nativeCurrency][symbol]=testEth&AddEthereumChainParameter[nativeCurrency][decimals]=18)
-   in the interactive API playground.
+   [`wallet_addEthereumChain`](../../../reference/json-rpc-api/index.md).
    :::
 
 ## Reset your local nonce calculation

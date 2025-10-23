@@ -7,7 +7,7 @@ date: Aug 22, 2025
 author: MetaMask Developer Relations
 ---
 
-This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
+This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/sdk/evm/connect/guides/javascript/send-transactions/batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
 You will use a provided template, which sets up MM Connect with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
 
 ## Prerequisites
@@ -199,7 +199,7 @@ When connected, the interface displays your connected wallet address:
 
 ### 4. Handle and send batch transactions
 
-In `src/app/page.tsx`, use the [`useSendCalls`](https://wagmi.sh/react/api/hooks/useSendCalls) hook from Wagmi to handle and send [atomic batch transactions](/wallet/how-to/send-transactions/send-batch-transactions).
+In `src/app/page.tsx`, use the [`useSendCalls`](https://wagmi.sh/react/api/hooks/useSendCalls) hook from Wagmi to handle and send [atomic batch transactions](/sdk/evm/connect/guides/javascript/send-transactions/batch-transactions).
 Also use React's `useState` hook to handle the transaction state.
 The following example sends 0.001 and 0.0001 ETH in a batch transaction.
 Replace `<YOUR-RECIPIENT-ADDRESS>` with recipient addresses of your choice:

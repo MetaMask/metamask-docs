@@ -15,14 +15,13 @@ This is possible because Snaps can expose a [custom JSON-RPC API](../learn/about
 ## Detect wallet
 
 To connect to a Snap, dapps must first detect MetaMask in the user's browser.
-See the Wallet API documentation on [how to connect to the MetaMask extension](/wallet/how-to/connect-extension).
 
 ### Detect MetaMask Flask
 
 When developing your Snap, you might need to require
 [MetaMask Flask](../get-started/install-flask.md) in your dapp.
 We recommend detecting MetaMask Flask using the
-[multi-wallet detection mechanism](/wallet/concepts/wallet-interoperability) specified by EIP-6963.
+multi-wallet detection mechanism specified by EIP-6963.
 Alternatively, you can use the `window.ethereum` injected provider, but this might fail if the user
 is running multiple wallet extensions simultaneously.
 

@@ -46,7 +46,7 @@ console.log("Signature:", signature);
 
 ## `connectWith`
 
-Connects to MetaMask and executes a specific [JSON-RPC method](/wallet/reference/json-rpc-methods).
+Connects to MetaMask and executes a specific [JSON-RPC method](json-rpc-api/index.md).
 
 ### Parameters
 

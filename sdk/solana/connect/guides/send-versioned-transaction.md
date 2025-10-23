@@ -1,6 +1,6 @@
 # Send a versioned transaction
 
-The Solana runtime supports two types of transactions: `legacy` (see [Send a legacy transaction](/solana/sending-a-transaction)) and `v0` (transactions that can include Address Lookup Tables or LUTs).
+The Solana runtime supports two types of transactions: `legacy` (see [Send a legacy transaction]) and `v0` (transactions that can include Address Lookup Tables or LUTs).
 
 The goal of `v0` is to increase the maximum size of a transaction, and hence the number of accounts that can fit in a single atomic transaction. With LUTs, developers can now build transactions with a maximum of 256 accounts, as compared to the limit of 35 accounts in legacy transactions that do not utilize LUTs.
 
@@ -18,7 +18,7 @@ On this page, we'll go over the following:
 
 ## Build a versioned transaction
 
-Versioned transactions are built in a very similar fashion to [legacy transactions](sending-a-transaction). The only difference is that developers should use the `VersionedTransaction` class rather than the `Transaction` class.
+Versioned transactions are built in a very similar fashion to [legacy transactions](send-legacy-transaction.md). The only difference is that developers should use the `VersionedTransaction` class rather than the `Transaction` class.
 
 The following example shows how to build a simple transfer instruction. Once the transfer instruction is made, a `MessageV0` formatted transaction message is constructed with the transfer instruction. Finally, a new `VersionedTransaction` is created, parsing in the `v0` compatible message.
 

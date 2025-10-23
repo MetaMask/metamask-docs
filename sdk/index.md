@@ -28,11 +28,6 @@ description: 'Connect to Ethereum and other EVM networks.',
 href: '/sdk/solana',
 title: 'Solana',
 description: 'Connect to Solana.',
-},
-{
-href: '/sdk/starknet',
-title: 'Starknet',
-description: 'Connect to Starknet.',
 }
 ]}
 />
