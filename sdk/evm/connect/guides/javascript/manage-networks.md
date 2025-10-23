@@ -1,12 +1,12 @@
 ---
-description: Manage networks with the SDK in your Wagmi or Vanilla JavaScript dapp.
-keywords: [SDK, Wagmi, JavaScript, detect, switch, add, network, networks, dapp]
+description: Manage networks with the SDK in your JavaScript dapp.
+keywords: [SDK, JavaScript, detect, switch, add, network, networks, dapp]
 toc_max_heading_level: 2
 ---
 
 # Manage networks
 
-Manage networks in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
+Manage networks in your JavaScript dapp.
 With the SDK, you can:
 
 - **Detect the current network** and monitor network changes.
@@ -16,87 +16,17 @@ With the SDK, you can:
 
 <p align="center">
   <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require("../_assets/network.gif").default} alt="Switch Networks" width="450px" />
+    <img src={require("../../_assets/network.gif").default} alt="Switch Networks" width="450px" />
   </a>
 </p>
 
-## Use Wagmi
+## Detect and switch networks
 
-Wagmi provides intuitive hooks for several network-related operations.
-The following are examples of using these hooks.
-
-Detect the current network:
-
-```tsx
-import { useChainId, useChains } from "wagmi"
-
-function NetworkStatus() {
-  const chainId = useChainId()
-  const chains = useChains()
-  
-  const currentChain = chains.find(c => c.id === chainId)
-  
-  if (!currentChain) {
-    return <div>Not connected to any network</div>
-  }
-
-  return (
-    <div>
-      <div>Connected to {currentChain.name}</div>
-      <div>Chain ID: {chainId}</div>
-      <div>Supported chains: {chains.map(c => c.name).join(", ")}</div>
-    </div>
-  )
-}
-```
-
-Switch networks:
-
-```tsx
-import { useSwitchChain } from "wagmi"
-
-function NetworkSwitcher() {
-  const { chains, switchChain } = useSwitchChain()
-  
-  return (
-    <div>
-      {chains.map((chain) => (
-        <button
-          key={chain.id}
-          onClick={() => switchChain({ chainId: chain.id })}
-        >
-          Switch to {chain.name}
-        </button>
-      ))}
-    </div>
-  )
-}
-```
-
-Handle network changes:
-
-```tsx
-import { useChainId } from "wagmi"
-import { useEffect } from "react"
-
-function NetworkWatcher() {
-  const chainId = useChainId()
-  
-  useEffect(() => {
-    console.log("Chain ID changed:", chainId)
-  }, [chainId])
-  
-  return null
-}
-```
-
-## Use Vanilla JavaScript
-
-You can implement network management directly in Vanilla JavaScript.
+You can implement network management directly in JavaScript.
 
 The following example detects the current network using the
-[`eth_chainId`](../reference/json-rpc-api/index.md) RPC method and
-[`chainChanged`](../reference/provider-api.md#chainchanged) provider event:
+[`eth_chainId`](../../reference/json-rpc-api/index.md) RPC method and
+[`chainChanged`](../../reference/provider-api.md#chainchanged) provider event:
 
 ```javascript
 // Get current chain ID
@@ -121,8 +51,8 @@ ethereum.on("chainChanged", (chainId) => {
 ```
 
 The following example switches networks using the
-[`wallet_switchEthereumChain`](../reference/json-rpc-api/index.md)
-and [`wallet_addEthereumChain`](../reference/json-rpc-api/index.md)
+[`wallet_switchEthereumChain`](../../reference/json-rpc-api/index.md)
+and [`wallet_addEthereumChain`](../../reference/json-rpc-api/index.md)
 RPC methods:
 
 ```javascript
@@ -211,7 +141,7 @@ The following table lists common network management errors and their codes:
 
 | Error code | Description | Solution |
 |------------|-------------|----------|
-| `4902`   | Network not added       | Use [`wallet_addEthereumChain`](../reference/json-rpc-api/index.md) to add the network first. |
+| `4902`   | Network not added       | Use [`wallet_addEthereumChain`](../../reference/json-rpc-api/index.md) to add the network first. |
 | `4001`   | User rejected request   | Show a message asking the user to approve the network switch. |
 | `-32002` | Request already pending | Disable the switch network button while the request is pending. |
 

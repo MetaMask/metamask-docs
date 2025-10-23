@@ -14,7 +14,7 @@ Manually adding tokens involves the user interacting with contract addresses, an
 
 You can improve the security and experience of displaying your
 [ERC-20 token](#display-an-erc-20-token) or users' [NFTs](#display-nfts) in MetaMask by using the
-[`wallet_watchAsset`](../reference/json-rpc-api/index.md) RPC method.
+[`wallet_watchAsset`](../../reference/json-rpc-api/index.md) RPC method.
 `wallet_watchAsset` provides a friendly interface that prompts users to register tokens to their
 MetaMask wallet, without having to interact with contract addresses.
 
@@ -97,10 +97,10 @@ The add NFT interfaces look like the following:
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../_assets/watchasset-nft.png").default} alt="NFT confirmation" class="appScreen" />
+        <img src={require("../../_assets/watchasset-nft.png").default} alt="NFT confirmation" class="appScreen" />
     </div>
     <div class="imgCol">
-        <img src={require("../_assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
+        <img src={require("../../_assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
     </div>
 </div>
 

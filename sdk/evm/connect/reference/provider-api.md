@@ -13,7 +13,7 @@ MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which int
 alternative wallet detection mechanism to the `window.ethereum` injected provider.
 This alternative mechanism enables dapps to support wallet interoperability
 by discovering multiple injected wallet providers in a user's browser.
-We recommend [using this mechanism to connect to MetaMask](../guides/connect-extension.md).
+We recommend using this mechanism to connect to MetaMask.
 
 You can access the provider API using the selected EIP-6963 provider object.
 Throughout this documentation, we refer to the selected provider using `provider`.
@@ -45,7 +45,7 @@ If the provider isn't connected, the page must be reloaded to re-establish the c
 See the [`connect`](#connect) and [`disconnect`](#disconnect) events for more information.
 
 :::note
-This method is unrelated to [managing user accounts](../guides/manage-user-accounts.md).
+This method is unrelated to [managing user accounts](../guides/javascript/manage-user-accounts.md).
 In the provider interface, "connected" and "disconnected" refer to whether the provider can make RPC
 requests to the current chain.
 :::
@@ -174,7 +174,7 @@ Callers are identified by their URL origin, which means that all sites with the 
 the same permissions.
 
 This means that the provider emits `accountsChanged` when the user's exposed account address changes.
-Listen to this event to [handle accounts](../guides/manage-user-accounts.md).
+Listen to this event to [handle accounts](../guides/javascript/manage-user-accounts.md).
 
 ### `chainChanged`
 
@@ -184,7 +184,7 @@ provider // Or window.ethereum if you don't support EIP-6963.
 ```
 
 The provider emits this event when the currently connected chain changes.
-Listen to this event to [detect a user's network](../guides/manage-networks.md).
+Listen to this event to [detect a user's network](../guides/javascript/manage-networks.md).
 
 ### `connect`
 

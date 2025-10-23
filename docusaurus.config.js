@@ -301,7 +301,7 @@ const config = {
         {
           name: 'keywords',
           content:
-            'MetaMask, Embedded Wallets, Quickstart, Web3 Development, SDK, Wallet Integration, API, Dapp Development, Blockchain Development, Ethereum Development, Smart Contract, Account Abstraction, Snaps, Crypto Wallet, DeFi, NFT, Infura, Services, Dashboard',
+            'MetaMask, Embedded Wallets, Quickstart, Web3 Development, SDK, MM Connect, Wallet Integration, API, Dapp Development, Blockchain Development, Ethereum Development, Smart Contract, Account Abstraction, Snaps, Crypto Wallet, DeFi, NFT, Infura, Services, Dashboard',
         },
         // Twitter-specific meta tags
         {
@@ -420,7 +420,7 @@ const config = {
             title: 'Documentation',
             items: [
               {
-                label: 'MetaMask Wallet SDK',
+                label: 'MM Connect',
                 to: '/sdk',
               },
               {
@@ -457,7 +457,7 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-extension/',
               },
               {
-                label: 'MetaMask Wallet SDK GitHub',
+                label: 'MM Connect GitHub',
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {

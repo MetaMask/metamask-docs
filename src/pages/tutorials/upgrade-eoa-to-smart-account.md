@@ -1,14 +1,14 @@
 ---
 title: Upgrade an EOA to a smart account
-description: Upgrade a MetaMask EOA to a smart account using MetaMask Wallet SDK and Wagmi.
+description: Upgrade a MetaMask EOA to a smart account using MM Connect and Wagmi.
 image: 'img/tutorials/tutorials-banners/upgrade-eoa-to-smart-account.png'
-tags: [metamask wallet sdk, wagmi, EOA, smart account, EIP-7702, EIP-5792]
+tags: [mm connect, wagmi, EOA, smart account, EIP-7702, EIP-5792]
 date: Aug 22, 2025
 author: MetaMask Developer Relations
 ---
 
 This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
-You will use a provided template, which sets up MetaMask Wallet SDK with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
+You will use a provided template, which sets up MM Connect with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
 
 ## Prerequisites
 
@@ -62,7 +62,7 @@ Add a `NEXT_PUBLIC_INFURA_API_KEY` environment variable, replacing `<YOUR-API-KE
 NEXT_PUBLIC_INFURA_API_KEY=<YOUR-API-KEY>
 ```
 
-In `src/providers/AppProvider.tsx`, configure the Wagmi [MetaMask Wallet SDK connector](https://wagmi.sh/react/api/connectors/metaMask) using your Infura API key:
+In `src/providers/AppProvider.tsx`, configure the Wagmi [MetaMask connector](https://wagmi.sh/react/api/connectors/metaMask) using your Infura API key:
 
 ```tsx title="AppProvider.tsx"
 "use client";
@@ -88,7 +88,7 @@ import { metaMask } from "wagmi/connectors";
 
 ### 3. Create a connect and disconnect button
 
-In `src/app/page.tsx`, use the `useAccount`, `useConnect`, and `useDisconnect` hooks from Wagmi, along with the MetaMask Wallet SDK connector, to create a button to connect and disconnect your MetaMask wallet, and display the connection status:
+In `src/app/page.tsx`, use the `useAccount`, `useConnect`, and `useDisconnect` hooks from Wagmi, along with the MetaMask connector, to create a button to connect and disconnect your MetaMask wallet, and display the connection status:
 
 ```tsx title="page.tsx"
 "use client";

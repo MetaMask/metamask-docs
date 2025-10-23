@@ -1,13 +1,13 @@
 ---
-description: Interact with contracts with the SDK in your Wagmi or Vanilla JavaScript dapp.
-keywords: [SDK, Wagmi, JavaScript, read, write, smart, contract, contracts, dapp]
+description: Interact with contracts with the SDK in your JavaScript dapp.
+keywords: [SDK, JavaScript, read, write, smart, contract, contracts, dapp]
 sidebar_label: Interact with contracts
 toc_max_heading_level: 2
 ---
 
 # Interact with smart contracts 
 
-Interact with smart contracts in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
+Interact with smart contracts in your JavaScript dapp.
 With the SDK, you can:
 
 - **Read data** from smart contracts.
@@ -16,108 +16,11 @@ With the SDK, you can:
 - **Manage transaction states**.
 - **Handle contract errors**.
 
-## Use Wagmi
+## Read and write to contracts
 
-Wagmi provides dedicated hooks for smart contract interactions.
-The following are examples of using these hooks.
+You can implement smart contract interactions directly in JavaScript.
 
-Read contract data:
-
-```tsx
-import { useReadContract } from "wagmi"
-
-function TokenBalance() {
-  const { 
-    data: balance,
-    isError,
-    isLoading 
-  } = useReadContract({
-    address: "0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2",
-    abi: [
-      {
-        name: "balanceOf",
-        type: "function",
-        stateMutability: "view",
-        inputs: [{ name: "owner", type: "address" }],
-        outputs: [{ name: "balance", type: "uint256" }],
-      },
-    ],
-    functionName: "balanceOf",
-    args: ["0x03A71968491d55603FFe1b11A9e23eF013f75bCF"],
-  })
-
-  if (isLoading) return <div>Loading balance...</div>
-  if (isError) return <div>Error fetching balance</div>
-  
-  return <div>Balance: {balance?.toString()}</div>
-}
-```
-
-Write to contracts:
-
-```tsx
-import { useWriteContract, useWaitForTransactionReceipt } from "wagmi"
-
-function MintNFT() {
-  const { 
-    writeContract,
-    data: hash,
-    error,
-    isPending 
-  } = useWriteContract()
-
-  const {
-    isLoading: isConfirming,
-    isSuccess: isConfirmed
-  } = useWaitForTransactionReceipt({
-    hash
-  })
-  
-  function mint() {
-    writeContract({
-      address: "0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2",
-      abi: [
-        {
-          name: "mint",
-          type: "function",
-          stateMutability: "nonpayable",
-          inputs: [{ name: "tokenId", type: "uint256" }],
-          outputs: [],
-        },
-      ],
-      functionName: "mint",
-      args: [123n], // Token ID
-    })
-  }
-  
-  return (
-    <div>
-      <button 
-        onClick={mint}
-        disabled={isPending || isConfirming}
-      >
-        {isPending ? "Confirming..." : "Mint NFT"}
-      </button>
-
-      {hash && (
-        <div>
-          Transaction Hash: {hash}
-          {isConfirming && <div>Waiting for confirmation...</div>}
-          {isConfirmed && <div>NFT Minted Successfully!</div>}
-        </div>
-      )}
-
-      {error && <div>Error: {error.message}</div>}
-    </div>
-  )
-}
-```
-
-## Use Vanilla JavaScript
-
-You can implement smart contract interactions directly in Vanilla JavaScript.
-
-The following example reads contract data using the [`eth_call`](../reference/json-rpc-api/index.md) RPC method:
+The following example reads contract data using the [`eth_call`](../../reference/json-rpc-api/index.md) RPC method:
 
 ```javascript
 async function getBalance(contractAddress, userAddress) {
@@ -157,9 +60,9 @@ async function displayBalance() {
 }
 ```
 
-The following example writes to contracts using the [`eth_requestAccounts`](../reference/json-rpc-api/index.md),
-[`eth_sendTransaction`](../reference/json-rpc-api/index.md), and
-[`eth_getTransactionReceipt`](../reference/json-rpc-api/index.md)
+The following example writes to contracts using the [`eth_requestAccounts`](../../reference/json-rpc-api/index.md),
+[`eth_sendTransaction`](../../reference/json-rpc-api/index.md), and
+[`eth_getTransactionReceipt`](../../reference/json-rpc-api/index.md)
 RPC methods:
 
 ```javascript

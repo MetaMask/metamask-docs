@@ -1,12 +1,12 @@
 ---
-description: Methods reference for MetaMask Wallet SDK.
+description: Methods reference for MM Connect.
 keywords: [SDK, method, methods, dapp]
 toc_max_heading_level: 2
 ---
 
-# SDK methods
+# MM Connect methods
 
-MetaMask Wallet SDK provides several convenience methods for connecting to and interacting with MetaMask, including the following.
+MM Connect provides several convenience methods for connecting to and interacting with MetaMask, including the following.
 
 ## `connect`
 

@@ -1,13 +1,12 @@
 ---
-description: Authenticate users with the SDK in your Wagmi or Vanilla JavaScript dapp.
-keywords: [SDK, Wagmi, JavaScript, authenticate, connect, sign, accounts, wallet, dapp]
+description: Authenticate users with the SDK in your JavaScript dapp.
+keywords: [SDK, JavaScript, authenticate, connect, sign, accounts, wallet, dapp]
 toc_max_heading_level: 3
 ---
 
 # Manage user accounts
 
-Connect and manage user wallet sessions in your [Wagmi](#use-wagmi) or
-[Vanilla JavaScript](#use-vanilla-javascript) dapp.
+Connect and manage user wallet sessions in your JavaScript dapp.
 With the SDK, you can:
 
 - **Connect users' wallets** to your dapp.
@@ -20,76 +19,15 @@ With the SDK, you can:
 
 <p align="center">
   <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require("../_assets/connect.gif").default} alt="Connect to MetaMask" width="450px" />
+    <img src={require("../../_assets/connect.gif").default} alt="Connect to MetaMask" width="450px" />
   </a>
 </p>
 
-## Use Wagmi
+## Connect wallet
 
-Wagmi provides a simple, hook-based approach for handling wallet connections.
-For example:
-
-```tsx title="Handle wallet connections"
-import { useAccount, useConnect, useDisconnect } from "wagmi"
-
-function ConnectWallet() {
-  const { address, isConnected } = useAccount()
-  const { connectors, connect, isPending } = useConnect()
-  const { disconnect } = useDisconnect()
-
-  if (isConnected) {
-    return (
-      <div>
-        <div>Connected to {address}</div>
-        <button onClick={() => disconnect()}>Disconnect</button>
-      </div>
-    )
-  }
-
-  return (
-    <div>
-      {connectors.map((connector) => (
-        <button
-          key={connector.uid}
-          onClick={() => connect({ connector })}
-          disabled={isPending}
-        >
-          {isPending ? "Connecting..." : `Connect ${connector.name}`}
-        </button>
-      ))}
-    </div>
-  )
-}
-```
-
-Wagmi provides a dedicated hook for handling account lifecycle events:
-
-```tsx
-import { useAccountEffect } from "wagmi"
-
-function WatchAccount() {
-  useAccountEffect({
-    onConnect(data) {
-      console.log("Connected!", {
-        address: data.address,
-        chainId: data.chainId,
-        isReconnected: data.isReconnected
-      })
-    },
-    onDisconnect() {
-      console.log("Disconnected!")
-    }
-  })
-  
-  return <div>Watching for account changes...</div>
-}
-```
-
-## Use Vanilla JavaScript
-
-You can implement user authentication directly in Vanilla JavaScript, using the
-[`eth_requestAccounts`](../reference/json-rpc-api/index.md) RPC method
-and [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event.
+You can implement user authentication directly in JavaScript, using the
+[`eth_requestAccounts`](../../reference/json-rpc-api/index.md) RPC method
+and [`accountsChanged`](../../reference/provider-api.md#accountschanged) provider event.
 For example:
 
 ```javascript
@@ -162,10 +100,9 @@ Display connect and disconnect buttons in HTML:
 </div>
 ```
 
-### Connect and sign
+## Connect and sign
 
-If you're not using Wagmi, you can access MetaMask Wallet SDK's [`connectAndSign`](../reference/methods.md#connectandsign) method,
-which requests wallet access and signs the message in a single user interaction.
+You can use MM Connect's [`connectAndSign`](../../reference/methods.md#connectandsign) method to request wallet access and sign a message in a single user interaction.
 For example:
 
 ```js
@@ -195,7 +132,7 @@ The following HTML displays a **Connect & Sign** button:
 ```
 
 :::tip
-This one-step flow is unique to MetaMask Wallet SDK's `connectAndSign` method.
+This one-step flow is unique to MM Connect's `connectAndSign` method.
 It's not part of Wagmi or other wallet libraries.
 :::
 

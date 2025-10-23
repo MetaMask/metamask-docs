@@ -1,14 +1,14 @@
 ---
 sidebar_label: Dynamic SDK
-description: Quickstart guide for using MetaMask Wallet SDK and Dynamic SDK.
+description: Quickstart guide for using MM Connect and Dynamic SDK.
 toc_max_heading_level: 2
 keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 ---
 
 # Connect to MetaMask using Dynamic SDK
 
-Get started with MetaMask Wallet SDK and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
-You can use MetaMask Wallet SDK features directly within Dynamic SDK.
+Get started with MM Connect and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
+You can use MM Connect features directly within Dynamic SDK.
 You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
 
 <p align="center">
@@ -26,7 +26,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up using a template
 
-1. Download the [MetaMask Wallet SDK + Dynamic SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/dynamic):
+1. Download the [MM Connect + Dynamic SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/dynamic):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/partners/dynamic metamask-dynamic
@@ -45,7 +45,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
     `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
     
     Alternatively, you can use `git clone`, which will download the entire repository.
-    To do so, clone the MetaMask Wallet SDK examples repository and navigate into the `partners/dynamic` directory:
+    To do so, clone the MM Connect examples repository and navigate into the `partners/dynamic` directory:
 
     ```bash
     git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -79,7 +79,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
    pnpm dev
    ```
 
-You've successfully set up MetaMask Wallet SDK and Dynamic SDK.
+You've successfully set up MM Connect and Dynamic SDK.
 See how to [use the combined SDKs](#usage).
 
 ## Set up manually
@@ -191,7 +191,7 @@ Before deploying your project to production:
 1. Update your `next.config.ts` with production domains.
 2. Set up proper environment variables.
 3. Configure your Dynamic SDK environment ID.
-4. Ensure MetaMask Wallet SDK is properly initialized.
+4. Ensure MM Connect is properly initialized.
 
 ## Troubleshoot
 

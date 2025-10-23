@@ -1,12 +1,12 @@
 ---
-description: Handle transactions with the SDK in your Wagmi or Vanilla JavaScript dapp.
-keywords: [SDK, Wagmi, JavaScript, send, transaction, transactions, status, estimate, gas, dapp]
+description: Handle transactions with the SDK in your JavaScript dapp.
+keywords: [SDK, JavaScript, send, transaction, transactions, status, estimate, gas, dapp]
 toc_max_heading_level: 2
 ---
 
 # Send transactions
 
-Handle EVM transactions in your [Wagmi](#use-wagmi) or [Vanilla JavaScript](#use-vanilla-javascript) dapp.
+Handle EVM transactions in your JavaScript dapp.
 With the SDK, you can:
 
 - **Send transactions**.
@@ -15,106 +15,15 @@ With the SDK, you can:
 - **Handle transaction errors** gracefully.
 - **Manage complex transaction patterns**.
 
-## Use Wagmi
+You can implement transaction handling directly in JavaScript.
+The following are examples of sending a [basic transaction](#send-a-basic-transaction) and an
+[advanced transaction with gas estimation](#send-an-advanced-transaction-with-gas-estimation).
 
-Wagmi provides hooks for sending transactions and tracking their status.
-The following are examples of sending a [basic transaction](#basic-transaction) and an
-[advanced transaction with gas estimation](#advanced-transaction-with-gas-estimation).
+## Send a basic transaction
 
-### Basic transaction
-
-```tsx
-import { parseEther } from "viem"
-import { useSendTransaction, useWaitForTransactionReceipt } from "wagmi"
-
-function SendTransaction() {
-  const { 
-    data: hash,
-    error,
-    isPending,
-    sendTransaction
-  } = useSendTransaction()
-
-  const { 
-    isLoading: isConfirming,
-    isSuccess: isConfirmed 
-  } = useWaitForTransactionReceipt({
-    hash
-  })
-
-  async function handleSend() {
-    sendTransaction({
-      to: "0x...", 
-      value: parseEther("0.1")  // 0.1 ETH
-    })
-  }
-
-  return (
-    <div>
-      <button 
-        onClick={handleSend}
-        disabled={isPending}
-      >
-        {isPending ? "Confirming..." : "Send 0.1 ETH"}
-      </button>
-
-      {hash && (
-        <div>
-          Transaction Hash: {hash}
-          {isConfirming && <div>Waiting for confirmation...</div>}
-          {isConfirmed && <div>Transaction confirmed!</div>}
-        </div>
-      )}
-
-      {error && <div>Error: {error.message}</div>}
-    </div>
-  )
-}
-```
-
-### Advanced transaction with gas estimation
-
-```tsx
-import { parseEther } from "viem"
-import { 
-  useSendTransaction, 
-  useWaitForTransactionReceipt,
-  useEstimateGas
-} from "wagmi"
-
-function AdvancedTransaction() {
-  const transaction = {
-    to: "0x...",
-    value: parseEther("0.1"),
-    data: "0x..." // Optional contract interaction data
-  }
-
-  // Estimate gas
-  const { data: gasEstimate } = useEstimateGas(transaction)
-
-  const { sendTransaction } = useSendTransaction({
-    ...transaction,
-    gas: gasEstimate,
-    onSuccess: (hash) => {
-      console.log("Transaction sent:", hash)
-    }
-  })
-
-  return <button onClick={() => sendTransaction()}>Send with Gas Estimate</button>
-}
-```
-
-## Use Vanilla JavaScript
-
-You can implement transaction handling directly in Vanilla JavaScript.
-The following are examples of sending a [basic transaction](#basic-transaction-1) and an
-[advanced transaction with gas estimation](#advanced-transaction-with-gas-estimation-1).
-
-### Basic transaction
-
-The basic transaction uses the [`eth_requestAccounts`](../../reference/json-rpc-api/index.md),
-[`eth_sendTransaction`](../../reference/json-rpc-api/index.md), and
-[`eth_getTransactionReceipt`](../../reference/json-rpc-api/index.md)
+The basic transaction uses the [`eth_requestAccounts`](../../../reference/json-rpc-api/index.md),
+[`eth_sendTransaction`](../../../reference/json-rpc-api/index.md), and
+[`eth_getTransactionReceipt`](../../../reference/json-rpc-api/index.md)
 RPC methods.
 
 ```javascript
@@ -213,9 +122,9 @@ async function handleSend() {
 </script>
 ```
 
-### Advanced transaction with gas estimation
+## Send an advanced transaction with gas estimation
 
-To add gas estimation, use the [`eth_estimateGas`](../../reference/json-rpc-api/index.md)
+To add gas estimation, use the [`eth_estimateGas`](../../../reference/json-rpc-api/index.md)
 RPC method.
 
 ```javascript

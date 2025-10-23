@@ -1,14 +1,14 @@
 ---
-description: Configuration options reference for MetaMask Wallet SDK.
+description: Configuration options reference for MM Connect.
 keywords: [SDK, configure, configuration, option, options, dapp]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# SDK options
+# MM Connect options
 
-MetaMask Wallet SDK takes the following configuration options.
+MM Connect takes the following configuration options.
 
 ### `checkInstallationImmediately`
 
