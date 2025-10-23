@@ -1,6 +1,7 @@
 ---
 title: Unichain bundler methods
 sidebar_label: Bundler methods
+sidebar_key: unichain-bundler-methods
 description: Unichain bundler methods
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Celo bundler methods
 sidebar_label: Bundler methods
+sidebar_key: celo-bundler-methods
 description: Celo bundler methods
 ---
 

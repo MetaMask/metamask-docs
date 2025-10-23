@@ -1,6 +1,7 @@
 ---
 title: Mantle bundler methods
 sidebar_label: Bundler methods
+sidebar_key: mantle-bundler-methods
 description: Mantle bundler methods
 ---
 

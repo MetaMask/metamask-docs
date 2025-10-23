@@ -1,6 +1,7 @@
 ---
 title: Linea subscription methods
 sidebar_label: Subscription methods
+sidebar_key: linea-subscription-methods
 ---
 
 # Linea subscription methods

@@ -1,6 +1,7 @@
 ---
 title: Scroll subscription methods
 sidebar_label: Subscription methods
+sidebar_key: scroll-subscription-methods
 ---
 
 import Tabs from "@theme/Tabs";

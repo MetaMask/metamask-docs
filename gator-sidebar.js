@@ -38,6 +38,7 @@ const sidebar = {
           type: 'category',
           label: 'Delegation',
           collapsed: true,
+          key: 'delegation-concepts',
           link: { type: "doc", id: "concepts/delegation/index" },
           items: [
             'concepts/delegation/caveat-enforcers',
@@ -68,6 +69,7 @@ const sidebar = {
           type: 'category',
           label: 'Delegation',
           collapsed: true,
+          key: 'delegation-guides',
           items: [
             'guides/delegation/execute-on-smart-accounts-behalf',
             {
@@ -90,6 +92,7 @@ const sidebar = {
           type: 'category',
           label: 'ERC-7715',
           collapsed: true,
+          key: 'erc7715-guides',
           items: [
             'guides/erc7715/execute-on-metamask-users-behalf',
             {
@@ -152,6 +155,7 @@ const sidebar = {
           label: 'Delegation',
           collapsed: true,
           link: { type: "doc", id: "reference/delegation/index" },
+          key: 'delegation-reference',
           items: [
             'reference/delegation/delegation-scopes',
             'reference/delegation/caveats',
@@ -162,6 +166,7 @@ const sidebar = {
           type: 'category',
           label: 'ERC-7715',
           collapsed: true,
+          key: 'erc7715-reference',
           items: [
             'reference/erc7715/permissions',
             'reference/erc7715/wallet-client',

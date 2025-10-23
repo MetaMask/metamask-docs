@@ -1,6 +1,7 @@
 ---
 description: Hemi Network JSON-RPC API
 sidebar_position: 3
+sidebar_key: hemi-json-rpc-api
 ---
 
 # JSON-RPC API

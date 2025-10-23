@@ -1,6 +1,7 @@
 ---
 title: Arbitrum bundler methods
 sidebar_label: Bundler methods
+sidebar_key: arbitrum-bundler-methods
 description: Arbitrum bundler methods
 ---
 
