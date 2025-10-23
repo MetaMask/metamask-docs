@@ -1,0 +1,47 @@
+.sectionHeading {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0;
+}
+
+.paramContainer {
+  margin-bottom: 1rem;
+}
+
+.paramTable {
+  margin-top: 1rem !important;
+}
+
+.noParams {
+  padding: 1rem 0;
+  color: var(--ifm-color-emphasis-700);
+  font-style: italic;
+}
+
+.paramFields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.returnsInfo {
+  padding-bottom: 1rem;
+}
+
+.returnsInfo p {
+  margin: 0.5rem 0;
+}
+
+.returnsInfo p:first-child {
+  margin-top: 0;
+}
+
+.returnsInfo p:last-child {
+  margin-bottom: 0;
+}
+
+html[data-theme='dark'] {
+  .paramTable th {
+    background: var(--ifm-color-emphasis-200);
+  }
+}

@@ -45,7 +45,7 @@ of MetaMask core unless given permission to do so.
 ### APIs
 
 A Snap can communicate with MetaMask using the [Snaps API](../../reference/snaps-api.md) and some
-[MetaMask JSON-RPC API](/wallet/reference/json-rpc-methods) methods.
+[MetaMask JSON-RPC API](/sdk/evm/connect/reference/json-rpc-api) methods.
 The Snaps API allows Snaps to extend or modify the functionality of MetaMask, and communicate with
 other Snaps.
 
