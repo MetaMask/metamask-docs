@@ -111,6 +111,7 @@ the hood. ERC-7710 delegation is one of the core feature supported only by MetaM
 
 ```typescript
 import { getDeleGatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia as chain } from "viem/chains";
 
 const addresses = await walletClient.requestAddresses();
 const address = addresses[0];
@@ -120,17 +121,21 @@ const code = await publicClient.getCode({
   address,
 });
 
-// The address to which EOA has delegated. According to EIP-7702, 0xef0100 || address
-// represents the delegation. 
-// 
-// You need to remove the first 8 characters (0xef0100) to get the delegator address.
-const delegatorAddress = `0x${code?.substring(8)}`;
+if (code) {
+  // The address to which EOA has delegated. According to EIP-7702, 0xef0100 || address
+  // represents the delegation. 
+  // 
+  // You need to remove the first 8 characters (0xef0100) to get the delegator address.
+  const delegatorAddress = `0x${code.substring(8)}`;
 
-const statelessDelegatorAddress = getDeleGatorEnvironment(sepolia.id).implementations.EIP7702StatelessDeleGatorImpl;
+  const statelessDelegatorAddress = getDeleGatorEnvironment(chain.id)
+  .implementations
+  .EIP7702StatelessDeleGatorImpl;
 
-// If account is not upgraded to MetaMask smart account, you can
-// either upgrade programmatically or ask the user to switch to a smart account manually.
-const isAccountUpgraded = delegatorAddress.toLowerCase() === statelessDelegatorAddress.toLowerCase();
+  // If account is not upgraded to MetaMask smart account, you can
+  // either upgrade programmatically or ask the user to switch to a smart account manually.
+  const isAccountUpgraded = delegatorAddress.toLowerCase() === statelessDelegatorAddress.toLowerCase();
+}
 ```
 
 ### 5. Request ERC-7715 permissions
