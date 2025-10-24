@@ -10,8 +10,8 @@ sidebar_key: solana-json-rpc-api
 Solana is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
 meaning calls to the network are routed to [partner infrastructure providers](../../solana/index.md#partners-and-privacy-policies).
 
-Solana access is currently limited to paid accounts.
-To get expedited access, upgrade to a paid tier. Solana support will be available to all account tiers in the future.
+Solana access is currently limited to select customers. [Contact us](https://www.infura.io/contact)
+if you're interested in accessing these methods.
 :::
 
 Infura supports the standard Solana API methods and the
