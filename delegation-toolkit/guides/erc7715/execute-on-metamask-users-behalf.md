@@ -95,7 +95,50 @@ const sessionAccount = privateKeyToAccount("0x...");
 </TabItem>
 </Tabs>
 
-### 4. Request ERC-7715 permissions
+### 4. Check the EOA account code
+
+Currently, ERC-7715 does not support automatically upgrading a user's account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
+ensure that the user is upgraded to a smart account before requesting ERC-7715 permissions.
+
+If the user has not yet been upgraded, you can handle the upgrade [programmatically](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) or ask the 
+user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
+
+:::info Why is a Smart Account upgrade is required?
+MetaMask's ERC-7715 implementation requires the user to be upgraded to a MetaMask 
+Smart Account because, under the hood, you're requesting a signature for an [ERC-7710 delegation](../../concepts/delegation/index.md).
+ERC-7710 delegation is one of the core features supported only by MetaMask Smart Accounts.
+:::
+
+```typescript
+import { getDeleGatorEnvironment } from "@metamask/delegation-toolkit";
+import { sepolia as chain } from "viem/chains";
+
+const addresses = await walletClient.requestAddresses();
+const address = addresses[0];
+
+// Get the EOA account code
+const code = await publicClient.getCode({
+  address,
+});
+
+if (code) {
+  // The address to which EOA has delegated. According to EIP-7702, 0xef0100 || address
+  // represents the delegation. 
+  // 
+  // You need to remove the first 8 characters (0xef0100) to get the delegator address.
+  const delegatorAddress = `0x${code.substring(8)}`;
+
+  const statelessDelegatorAddress = getDeleGatorEnvironment(chain.id)
+  .implementations
+  .EIP7702StatelessDeleGatorImpl;
+
+  // If account is not upgraded to MetaMask smart account, you can
+  // either upgrade programmatically or ask the user to switch to a smart account manually.
+  const isAccountUpgraded = delegatorAddress.toLowerCase() === statelessDelegatorAddress.toLowerCase();
+}
+```
+
+### 5. Request ERC-7715 permissions
 
 Request ERC-7715 permissions from the user. In this example, you'll request an
 [ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission) using the Wallet Client's 
@@ -137,7 +180,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 }]);
 ```
 
-### 5. Set up a Viem client
+### 6. Set up a Viem client
 
 Set up a Viem client depending on your session account type.
 
@@ -184,7 +227,7 @@ const sessionAccountWalletClient = createWalletClient({
 </Tabs>
 
 
-### 6. Redeem ERC-7715 permissions
+### 7. Redeem ERC-7715 permissions
 
 The session account can now redeem the permissions. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 
