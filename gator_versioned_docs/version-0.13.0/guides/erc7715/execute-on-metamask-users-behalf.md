@@ -97,16 +97,16 @@ const sessionAccount = privateKeyToAccount("0x...");
 
 ### 4. Check the EOA account code
 
-Currently, ERC-7715 does not support automatically upgrading a user’s account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
+Currently, ERC-7715 does not support automatically upgrading a user's account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
 ensure that the user is upgraded to a smart account before requesting ERC-7715 permissions.
 
-If the user has not yet been upgraded, you can either handle the upgrade [programmatically](https://docs.metamask.io/wallet/how-to/send-transactions/send-batch-transactions#about-atomic-batch-transactions) or ask the 
-user to [switch to a smart account manually.](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
+If the user has not yet been upgraded, you can handle the upgrade [programmatically](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) or ask the 
+user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
 
-:::info Why Smart Account upgrade is required?
-MetaMask's ERC-7715 implementation requires the MetaMask user to be upgraded to a MetaMask 
-smart account, as ERC-7715 permission requests signature for[ ERC-7710 delegation](../../concepts/delegation/index.md) under
-the hood. ERC-7710 delegation is one of the core feature supported only by MetaMask Smart Accounts.
+:::info Why is a Smart Account upgrade is required?
+MetaMask's ERC-7715 implementation requires the user to be upgraded to a MetaMask 
+Smart Account because, under the hood, you're requesting a signature for an [ERC-7710 delegation](../../concepts/delegation/index.md).
+ERC-7710 delegation is one of the core features supported only by MetaMask Smart Accounts.
 :::
 
 ```typescript
