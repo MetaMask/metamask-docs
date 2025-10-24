@@ -124,7 +124,7 @@ You can test the AI functionality by sending messages in the chat:
 
 ### 3. Create a Public Client
 
-In `wagmi.config.ts`, initialize a [Viem Public Client](https://viem.sh/docs/clients/public.html)
+In `wagmi.config.ts`, initialize a [Viem Public Client](https://viem.sh/docs/clients/public)
 with the Linea Sepolia chain.
 This Public Client will enable the AI agent to access public JSON-RPC API methods such as retrieving balances:
 
