@@ -151,7 +151,7 @@ export function getConfig() {
 Use the AI SDK's [tools](https://sdk.vercel.ai/docs/foundations/tools) feature to enable the AI agent to perform specific tasks.
 
 In `ai/tools.ts`, update or remove the example tool.
-Use the [`getBalance`](https://viem.sh/docs/actions/public/getBalance) method of your configured Public Client, and Viem's [`formatEther`](https://viem.sh/docs/utilities/formatEther.html) function to create a tool that retrieves the ether balance of the connected wallet:
+Use the [`getBalance`](https://viem.sh/docs/actions/public/getBalance) method of your configured Public Client, and Viem's [`formatEther`](https://viem.sh/docs/utilities/formatEther) function to create a tool that retrieves the ether balance of the connected wallet:
 
 ```ts title="tools.ts"
 // add-start
