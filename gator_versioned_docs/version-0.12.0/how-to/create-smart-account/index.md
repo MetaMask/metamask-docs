@@ -22,7 +22,7 @@ The following is an example of creating a smart account using Viem Core SDK.
 Viem Core SDK provides low-level interfaces to offer flexibility and control over the smart
 account creation lifecycle.
 
-In the example, the Viem [`privateKeyToAccount`](https://viem.sh/docs/accounts/privateKey.html)
+In the example, the Viem [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount)
 function creates an externally owned account as the owner of the smart account.
 
 <Tabs>
