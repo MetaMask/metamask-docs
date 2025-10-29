@@ -127,7 +127,7 @@ import { bundlerClient, smartAccount } from "./config.ts" // The config.ts is th
 
 // add-start
 + const pimlicoClient = createPimlicoClient({
-+   transport: http("https://api.pimlico.io/v2/11155111/rpc"), // You can get the API Key from the Pimlico dashboard.
++   transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>"), // You can get the API Key from the Pimlico dashboard.
 + });
 +
 + const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();
@@ -159,7 +159,7 @@ import { createPimlicoClient } from "permissionless/clients/pimlico";
 import { bundlerClient, smartAccount } from "./config.ts" // The config.ts is the same as in the previous example.
 
 const pimlicoClient = createPimlicoClient({
-  transport: http("https://api.pimlico.io/v2/11155111/rpc"), // You can get the API Key from the Pimlico dashboard.
+  transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>"), // You can get the API Key from the Pimlico dashboard.
 });
 
 const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();
