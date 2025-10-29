@@ -20,6 +20,7 @@ If you don't see the network you're looking for, you can request support by emai
 | Arbitrum One        | ✅      | ✅      | ✅      |
 | Base                | ✅      | ✅      | ✅      |
 | Gnosis Chain        | ✅      | ✅      | ✅      |
+| Linea               | ✅      | ✅      | ✅      |
 | Unichain            | ❌      | ✅      | ✅      |
 | Arbitrum Nova       | ❌      | ✅      | ✅      |
 | Berachain           | ❌      | ✅      | ✅      |
