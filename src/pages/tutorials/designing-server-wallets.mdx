@@ -2,7 +2,7 @@
 title: Designing Server Wallets for AI Agents with ERC 8004
 image: 'img/tutorials/tutorials-banners/designing-server-wallets.png'
 description: Designing Server Wallets for AI Agents with ERC 8004.
-tags: [AI agent, ERC 8004, server wallet, embedded wallets, ethereum, solana]
+tags: [AI agent, ERC 8004, server wallet, embedded wallets, ethereum, solana, node]
 date: October 28, 2025
 author: MetaMask Developer Relations
 ---
@@ -95,8 +95,19 @@ With ERC 8004 in action, every AI agent needs a signing identity that can regist
 
 Hence server wallets by default become an integral part of making AI agents with ERC 8004.
 
+## Using Node SDK from Embedded Wallets
+
+While we work on the production-ready server wallet solution described above, you can leverage MetaMask's Embedded Wallets Node SDK as an immediate alternative for building AI agent backends. This approach provides a practical path forward with several key advantages:
+
+- **Direct Signer Access**: The Node SDK gives an EVM & Solana Signer directly to your agent's backend environment, enabling seamless transaction signing without complex infrastructure setup.
+- **Granular Backend Rules**: You can position and enforce fine-grained policy rules within your backend logic to control exactly what operations your AI agent can execute, providing a layer of programmatic safety before transactions are signed.
+- **Non-Custodial by Default**: The solution maintains a non-custodial architecture, the key export can be disabled in the dashboard and the signer is only accessible once the authentication is complete.
+- **No Key Management Required**: By default, key management complexity is abstracted away, allowing you to focus on building your agent's core functionality rather than implementing secure key storage and rotation.
+
+You can find the documentation for the Node SDK [here](https://docs.metamask.io/embedded-wallets/sdk/node/).
+
 :::info Coming soon
 
-MetaMask Embedded Wallets is packaging this architecture into a one‑click server wallet experience so teams can go from idea to production with attestation, policy, and secure signing out of the box, with optional ERC‑8004 alignment for interop when you need it. Watch this space for early access details as we finalize SDKs, tutorials, and reference deployments.
+MetaMask is packaging this architecture into a one‑click server wallet experience so teams can go from idea to production with attestation, policy, and secure signing out of the box, with optional ERC‑8004 alignment for interop when you need it. Watch this space for early access details as we finalize SDKs, tutorials, and reference deployments.
 
 :::
