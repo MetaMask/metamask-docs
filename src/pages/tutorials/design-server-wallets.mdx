@@ -24,15 +24,44 @@ The signing key lives in a secure environment, so it is never exposed directly t
 
 You can refer to the following high-level architecture when designing a server wallet:
 
-- The client holds an *agent key* used to authenticate who is asking to sign; separate from the onchain account key that actually controls funds.​
-- The backend exposes minimal APIs that forward requests into a trusted execution environment (TEE) — for example, [AWS Nitro Enclaves](https://aws.amazon.com/ec2/nitro/nitro-enclaves/).
+- The client holds an *agent key* used to authenticate who is asking to sign; this is separate from the onchain account key that controls funds.​
+- The backend exposes minimal APIs that forward requests to a trusted execution environment (TEE) — for example, [AWS Nitro Enclaves](https://aws.amazon.com/ec2/nitro/nitro-enclaves/).
 - The TEE enclave is the only environment allowed to verify agent keys, generate account keys, decrypt keys, apply policy, and produce signatures.
   It has no external networking and no persistent storage.
 - The encrypted key and metadata live in a database outside the enclave, encrypted by the agent key.
 
-## Request flow
+<p align="center">
 
-The following is an example request flow:
+```mermaid
+---
+config:
+  layout: elk
+---
+flowchart LR
+  subgraph c[Client]
+    a[Agent key]
+  end
+  c -->|"Create request,
+  sign with
+  agent key"| b
+  subgraph b[Backend]
+    APIs
+  end
+  b -->|Forward request| t[TEE enclave]
+  subgraph t[TEE enclave]
+    v["Manage keys
+    Apply policies
+    Sign requests"]
+  end
+  t -->|"Return signature
+  and decision"| b
+  t <--> d@{ shape: cyl, label: "Database
+  Encrypted key" }
+```
+
+</p>
+
+This is an example request flow:
 
 1. The client creates a request describing the action and signs it with the agent key to prove origin and integrity.
 2. The backend passes the request into the enclave, which has no external networking, SSH, or persistent storage to reduce exposure.
