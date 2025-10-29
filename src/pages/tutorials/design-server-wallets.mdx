@@ -10,21 +10,20 @@ toc_max_heading_level: 2
 
 MetaMask has specialized in creating fast and secure non-custodial wallets across the web3 ecosystem.
 With [ERC‑8004](https://eips.ethereum.org/EIPS/eip-8004) standardizing how AI agents express what they intend to do, there is a clear need for a fast, safe, multichain signing backend, more commonly known as a *server wallet*.
-In the near future, server wallets will even be a requirement for non-web2-native developers.
-This necessitates thinking about an ideal architecture for server wallets.
+In the near future, even non-web3-native developers will require server wallets, so it's important to outline an ideal architecture.
 
-This page outlines an opinionated, production‑oriented architecture you can adopt today and hints at where MetaMask is going next with a one-click ERC‑8004 server wallet experience.
+This page describes a production‑oriented architecture you can adopt today and hints at where MetaMask is going next with a one-click ERC‑8004 server wallet experience.
 
 ## What is a server wallet?
 
-A server wallet is a backend signer that holds and uses private keys on behalf of an app or AI agent, while clients authenticate requests and receive signatures to submit onchain.
+A server wallet is a backend signer that manages private keys on behalf of an app or AI agent, while clients authenticate requests and receive signatures to submit onchain.
 The signing key lives in a secure environment, so it is never exposed directly to the AI agent and is protected by certain policies set for its execution.
 
 ## Reference architecture
 
-You can refer to the following high-level architecture when designing a server wallet:
+The following is a high-level server wallet architecture:
 
-- The client holds an *agent key* used to authenticate who is asking to sign; this is separate from the onchain account key that controls funds.​
+- The client holds an *agent key* used to authenticate who is asking to sign; this is separate from the onchain *account key* that controls funds.​
 - The backend exposes minimal APIs that forward requests to a trusted execution environment (TEE) — for example, [AWS Nitro Enclaves](https://aws.amazon.com/ec2/nitro/nitro-enclaves/).
 - The TEE enclave is the only environment allowed to verify agent keys, generate account keys, decrypt keys, apply policy, and produce signatures.
   It has no external networking and no persistent storage.
@@ -69,7 +68,7 @@ This is an example request flow:
 
 ## Core security operations
 
-The following are descriptions of security operations related to managing and using keys.
+The following describes security operations related to managing and using keys:
 
 ### Generate an account key
 
@@ -93,7 +92,7 @@ The following are descriptions of security operations related to managing and us
 
 1. The client sends an export request with the agent key.
 2. The TEE validates the request, enforces policy, and signs the request.
-3. The TEE returns the encrypted blog stored in the database, which can be decrypted on the client side with the agent key.​
+3. The TEE returns the encrypted blob stored in the database, which can be decrypted on the client side with the agent key.​
 
 ### Rotate the agent key
 
@@ -103,7 +102,7 @@ The following are descriptions of security operations related to managing and us
 
 ### Reference TEE policies
 
-You can refer to following TEE policies when implementing security operations:
+The following are important TEE policies for security operations:
 
 - **Spend limits** - Limit the value per transaction and per day.
 - **Scope limits** - Limit the scope to allowlisted contracts, methods, and tokens.
@@ -143,7 +142,7 @@ General trading bots are also used for high-frequency trading, which is where th
 With [ERC‑8004](https://eips.ethereum.org/EIPS/eip-8004) in action, every AI agent needs a signing identity that can register itself onchain and prove control of that identity when it interacts, so others can discover, trust, and audit the agent's actions across ecosystems.
 In practice, this means pairing a signer with the ERC‑8004 identity registry entry and the agent's offchain registration file so requests are attributable and verifiable end to end.
 
-Hence, server wallets by default become an integral part of making AI agents with ERC-8004.
+Server wallets, by default, are an integral part of making AI agents with ERC-8004.
 
 ## Next steps
 
