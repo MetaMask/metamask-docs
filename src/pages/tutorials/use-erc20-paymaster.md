@@ -107,7 +107,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 });
 ```
 
-Fund the account with some Sepolia USDC to pay gas fees.
+Fund the smart account with some Sepolia USDC to pay gas fees.
 
 :::note
 You can use [Circle's faucet](https://faucet.circle.com/) to get Sepolia USDC.

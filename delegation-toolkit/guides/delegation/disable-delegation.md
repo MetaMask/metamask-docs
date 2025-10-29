@@ -91,7 +91,7 @@ const publicClient = createPublicClient({
 
 export const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http('https://api.pimlico.io/v2/11155111/rpc')
+  transport: http('https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>')
 });
 ```
 
