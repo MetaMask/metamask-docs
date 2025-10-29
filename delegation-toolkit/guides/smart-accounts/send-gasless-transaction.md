@@ -81,12 +81,12 @@ export const smartAccount = await toMetaMaskSmartAccount({
 
 export const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http("https://api.pimlico.io/v2/11155111/rpc")
+  transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>")
 });
 
 export const paymasterClient = createPaymasterClient({
   // You can use the paymaster of your choice
-  transport: http("https://api.pimlico.io/v2/11155111/rpc")
+  transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>")
 });
 ```
 
