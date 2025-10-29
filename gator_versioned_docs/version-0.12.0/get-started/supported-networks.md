@@ -31,6 +31,7 @@ If you don't see the network you're looking for, you can request support by emai
 | Ethereum Sepolia            | ✅      | ✅      | ✅      |
 | Base Sepolia                | ✅      | ✅      | ✅      |
 | MegaEth                     | ✅      | ✅      | ✅      |
+| Linea Sepolia               | ✅      | ✅      | ✅      |
 | Gnosis Chiado               | ❌      | ✅      | ✅      |
 | Arbitrum Sepolia            | ❌      | ❌      | ✅      |
 | Unichain Sepolia            | ❌      | ❌      | ✅      |

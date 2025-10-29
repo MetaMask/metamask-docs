@@ -33,6 +33,7 @@ If you don't see the network you're looking for, you can request support by emai
 | Base Sepolia                | ✅      | ✅      | ✅      |
 | MegaEth                     | ✅      | ✅      | ✅      |
 | Gnosis Chiado               | ✅      | ✅      | ✅      |
+| Linea Sepolia               | ✅      | ✅      | ✅      |
 | Arbitrum Sepolia            | ❌      | ✅      | ✅      |
 | Unichain Sepolia            | ❌      | ✅      | ✅      |
 | Berachain Bepolia           | ❌      | ✅      | ✅      |
