@@ -98,7 +98,7 @@ After instantiation, within your `Start()` function, set up the Web3Auth Options
 
 ```cs
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
     network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
     redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
 });
@@ -114,7 +114,7 @@ void Start()
     web3Auth = GetComponent<Web3Auth>();
     web3Auth.setOptions(new Web3AuthOptions()
     {
-        clientId = "YOUR_CLIENT_ID",
+        clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
         network = Web3Auth.Network.SAPPHIRE_MAINNET,
         redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
     });
@@ -166,7 +166,7 @@ web3Auth = GetComponent<Web3Auth>();
 
 //focus-start
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_CLIENT_ID",
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
     redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
 });
@@ -189,7 +189,7 @@ var loginConfigItem = new LoginConfigItem()
 
 //focus-start
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_CLIENT_ID",
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
     redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
     loginConfig = new Dictionary<string, LoginConfigItem>
