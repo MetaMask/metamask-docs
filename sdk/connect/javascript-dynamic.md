@@ -13,7 +13,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 <p align="center">
   <a href="https://metamask-dynamic-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-dynamic.png").default} alt="Dynamic SDK Quickstart" width="600px" />
+    <img src={require("../_assets/quickstart-dynamic.png").default} alt="Dynamic SDK Quickstart" width="600px" class="appScreen" />
   </a>
 </p>
 

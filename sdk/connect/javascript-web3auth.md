@@ -14,7 +14,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 <p align="center">
   <a href="https://metamask-web3auth-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-web3auth.png").default} alt="Web3Auth SDK Quickstart" width="600px" />
+    <img src={require("../_assets/quickstart-web3auth.png").default} alt="Web3Auth SDK Quickstart" width="600px" class="appScreen" />
   </a>
 </p>
 

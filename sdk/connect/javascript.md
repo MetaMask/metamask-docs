@@ -14,7 +14,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-javascript.png").default} alt="JavaScript SDK Quickstart" width="600px" />
+    <img src={require("../_assets/quickstart-javascript.png").default} alt="JavaScript SDK Quickstart" width="600px" class="appScreen" />
   </a>
 </p>
 
