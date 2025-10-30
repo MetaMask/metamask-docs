@@ -1,7 +1,7 @@
 ---
 sidebar_label: Dynamic SDK
 description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 ---
 
@@ -42,15 +42,15 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
     <summary>Degit vs. Git clone</summary>
     <div>
 
-    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-    
-    Alternatively, you can use `git clone`, which will download the entire repository.
-    To do so, clone the MetaMask SDK examples repository and navigate into the `partners/dynamic` directory:
+   `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-sdk-examples
-    cd metamask-sdk-examples/partners/dynamic
-    ```
+   Alternatively, you can use `git clone`, which will download the entire repository.
+   To do so, clone the MetaMask SDK examples repository and navigate into the `partners/dynamic` directory:
+
+   ```bash
+   git clone https://github.com/MetaMask/metamask-sdk-examples
+   cd metamask-sdk-examples/partners/dynamic
+   ```
 
     </div>
     </details>

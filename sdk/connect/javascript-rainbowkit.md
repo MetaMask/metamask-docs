@@ -1,6 +1,6 @@
 ---
 description: Quickstart guide for using the MetaMask SDK with a JavaScript and RainbowKit dapp.
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 sidebar_label: JavaScript + RainbowKit
 keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK]
 ---
@@ -93,12 +93,12 @@ npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query
 In the root of your project, import the required RainbowKit, Wagmi, and TanStack Query dependencies:
 
 ```jsx
-import "@rainbow-me/rainbowkit/styles.css"
-import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit"
-import { WagmiProvider } from "wagmi"
-import { metaMaskWallet } from "@rainbow-me/rainbowkit/wallets"
-import { mainnet, linea, sepolia, lineaSepolia } from "wagmi/chains"
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
+import '@rainbow-me/rainbowkit/styles.css'
+import { getDefaultConfig, RainbowKitProvider } from '@rainbow-me/rainbowkit'
+import { WagmiProvider } from 'wagmi'
+import { metaMaskWallet } from '@rainbow-me/rainbowkit/wallets'
+import { mainnet, linea, sepolia, lineaSepolia } from 'wagmi/chains'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 ```
 
 ### 3. Configure your project
@@ -108,12 +108,12 @@ In the following example, replace `<YOUR-PROJECT-ID>` with your WalletConnect pr
 
 ```jsx
 const config = getDefaultConfig({
-  appName: "MetaMask SDK RainbowKit Quickstart",
-  projectId: "<YOUR-PROJECT-ID>",
+  appName: 'MetaMask SDK RainbowKit Quickstart',
+  projectId: '<YOUR-PROJECT-ID>',
   chains: [mainnet, linea, sepolia, lineaSepolia],
   wallets: [
     {
-      groupName: "Preferred",
+      groupName: 'Preferred',
       wallets: [metaMaskWallet],
     },
   ],
@@ -123,7 +123,7 @@ const config = getDefaultConfig({
 
 ### 4. Set up providers
 
-Wrap your application with the `RainbowKitProvider`, `WagmiProvider`, and `QueryClientProvider` providers:
+Wrap your application with the `WagmiProvider`, `QueryClientProvider`, and `RainbowKitProvider` providers:
 
 ```jsx
 const queryClient = new QueryClient()
@@ -146,7 +146,7 @@ const App = () => {
 Import and render the `ConnectButton` component:
 
 ```jsx
-import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 
 function App() {
   return <ConnectButton />

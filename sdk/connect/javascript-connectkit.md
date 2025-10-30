@@ -1,6 +1,6 @@
 ---
 description: Quickstart guide for using the MetaMask SDK with a JavaScript and ConnectKit dapp.
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 sidebar_label: JavaScript + ConnectKit
 keywords: [connect, MetaMask, JavaScript, ConnectKit, SDK, dapp, Wallet SDK]
 ---
