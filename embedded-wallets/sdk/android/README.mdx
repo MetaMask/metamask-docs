@@ -153,7 +153,7 @@ import com.web3auth.core.types.Web3AuthOptions
 var web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
@@ -234,7 +234,7 @@ Head over to the advanced configuration sections to learn more about each config
 val web3Auth = Web3Auth(
     Web3AuthOptions(
         context = this,
-        clientId = "YOUR_CLIENT_ID",
+        clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
         network = Network.SAPPHIRE_MAINNET, // or Network.SAPPHIRE_DEVNET
         redirectUrl = "YOUR_APP_SCHEME://auth"
     )
@@ -249,7 +249,7 @@ val web3Auth = Web3Auth(
 val web3Auth = Web3Auth(
     Web3AuthOptions(
         context = this,
-        clientId = "YOUR_CLIENT_ID",
+        clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
         network = Network.SAPPHIRE_MAINNET, // or Network.SAPPHIRE_DEVNET
         redirectUrl = "YOUR_APP_SCHEME://auth"
         loginConfig = hashMapOf("google" to LoginConfigItem(

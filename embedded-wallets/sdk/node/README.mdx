@@ -73,8 +73,10 @@ You can refer to the [Custom JWT Setup](/embedded-wallets/authentication/custom-
 Create a Web3Auth instance with your client ID, web3auth network name, and chain information:
 
 ```javascript
+const { Web3Auth } = require('@web3auth/node-sdk')
+
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_CLIENT_ID', // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
 })
 ```
@@ -116,7 +118,7 @@ const result = await web3auth.connect({
 const { Web3Auth } = require('@web3auth/node-sdk')
 
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_CLIENT_ID',
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
   web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
 })
 
@@ -131,7 +133,7 @@ await web3auth.init()
 const { Web3Auth } = require('@web3auth/node-sdk')
 
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_CLIENT_ID',
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
   web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
   defaultChainId: '0x1', // or '0x89' for Polygon
   enableLogging: true,
