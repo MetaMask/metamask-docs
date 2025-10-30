@@ -130,8 +130,8 @@ Wrap your application with the `WagmiProvider`, `QueryClientProvider`, and `Conn
 ```jsx
 const queryClient = new QueryClient()
 
-const App = () => {
-  return (
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <ConnectKitProvider theme="rounded">
@@ -139,8 +139,8 @@ const App = () => {
         </ConnectKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
-  )
-}
+  </StrictMode>
+);
 ```
 
 ### 5. Add the connect button
