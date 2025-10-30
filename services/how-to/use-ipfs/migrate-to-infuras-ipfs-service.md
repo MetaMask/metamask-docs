@@ -7,7 +7,7 @@ sidebar_position: 4
 
 The updated Infura IPFS service offers:
 
-- A [project dashboard](../../../../../developer-tools/dashboard/how-to/dashboard-stats/) with essential statistics.
+- A [project dashboard](/developer-tools/dashboard/how-to/dashboard-stats) with essential statistics.
 - [Pinning](manage-files.md#pin-a-file) and [unpinning](manage-files.md#unpin-a-file) API access.
 - Publishing files in the background to the IPFS P2P network, so that content is globally accessible.
 

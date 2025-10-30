@@ -10,8 +10,8 @@ Infura supports a subset of these which are detailed in this section.
 
 :::info
 
-All Infura IPFS methods require including your [API key](../../../../../developer-tools/dashboard/get-started/create-api/) and
-[API key secret](../../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret) in the request.
+All Infura IPFS methods require including your [API key](/developer-tools/dashboard/get-started/create-api) and
+[API key secret](/developer-tools/dashboard/how-to/secure-an-api/api-key-secret) in the request.
 
 :::
 

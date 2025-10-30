@@ -48,7 +48,7 @@ curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
 
 :::info
 
-Replace `<YOUR-API-KEY>` with a specific [API key](../../../developer-tools/dashboard/get-started/create-api/).
+Replace `<YOUR-API-KEY>` with a specific [API key](/developer-tools/dashboard/get-started/create-api).
 
 :::
 

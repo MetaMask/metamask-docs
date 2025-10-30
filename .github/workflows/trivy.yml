@@ -1,18 +1,17 @@
-# ---
-# name: Trivy
-#
-# on:
-#   pull_request:
-#     branches:
-#       - main
-#
-# jobs:
-#   trivy:
-#     name: Run trivy scanner
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v5
-#       - name: Trivy
-#         uses: ConsenSys/github-actions/trivy@main
-#         with:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+---
+name: Trivy
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  trivy:
+    name: Run trivy scanner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Trivy
+        uses: ConsenSys/github-actions/trivy@main
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

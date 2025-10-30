@@ -30,7 +30,7 @@ See the [official Linea documentation](https://docs.linea.build/) for more infor
       description: "View the APIs available for communicating with the Linea network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create and secure an API key."
     }

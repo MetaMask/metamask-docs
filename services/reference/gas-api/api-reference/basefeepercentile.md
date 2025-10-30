@@ -34,8 +34,8 @@ less than or equal to the provided amount.
 
 ### Request
 
-Include your [API key](../../../../../developer-tools/dashboard/get-started/create-api)
-and optional [API key secret](../../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/)
+Include your [API key](/developer-tools/dashboard/get-started/create-api)
+and optional [API key secret](/developer-tools/dashboard/how-to/secure-an-api/api-key-secret)
 to authorize your account to use the APIs.
 
 :::tip

@@ -71,7 +71,7 @@ title: 'React Native',
 description: 'Set up the SDK in a React Native or Expo dapp.',
 },
 {
-href: 'https://onboard.blocknative.com',
+href: 'https://web3onboard.thirdweb.com/',
 title: 'Web3-Onboard',
 description: 'Use SDK features with Web3-Onboard.',
 buttonIcon: 'external-arrow',

@@ -58,15 +58,12 @@ jobs:
         with:
           FILEPATHS: 'snaps,services,wallet,developer-tools,docs'
 
-  # linkCheck:
-  #   name: Link Checking
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       file-extensions: ['.md', '.mdx']
-  #   steps:
-  #     - uses: actions/checkout@v5
-  #     - name: LinkCheck
-  #       uses: ConsenSys/github-actions/docs-link-check@main
-  #       with:
-  #         FILE_EXTENSION: ${{ matrix.file-extensions }}
+  linkCheck:
+    name: Link Checking
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: LinkCheck
+        uses: ConsenSys/github-actions/docs-link-check@main
+        with:
+          CONFIG_FILE: '.linkspector.yml'

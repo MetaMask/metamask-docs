@@ -42,7 +42,7 @@ Select one of the following options to get started with the Blast network:
       description: "View the APIs available for communicating with the Blast network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create and secure an API key."
     }

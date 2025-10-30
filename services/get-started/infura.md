@@ -30,7 +30,7 @@ For more information refer to the [Infura pricing information](https://www.infur
 
 ## 2. View your API key
 
-After verification, you'll be directed to the [MetaMask Developer dashboard](../../../developer-tools/dashboard)
+After verification, you'll be directed to the [MetaMask Developer dashboard](/developer-tools/dashboard)
 where you can view or configure your API key. Infura automatically generates the **My First Key** API key.
 
 Select **My First Key** or the **Configure** link to view your API key settings.

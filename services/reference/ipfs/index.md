@@ -38,7 +38,7 @@ See the [official IPFS documentation](https://docs.ipfs.io) for more information
       description: "View the APIs available for communicating with the IPFS network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create and secure an API key."
     }
