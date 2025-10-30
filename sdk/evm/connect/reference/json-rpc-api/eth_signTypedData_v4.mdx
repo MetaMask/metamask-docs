@@ -1,0 +1,142 @@
+---
+title: eth_signTypedData_v4
+description: Sign structured data according to EIP-712
+hide_title: true
+hide_table_of_contents: true
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_signTypedData_v4"
+  description="Signs structured data according to EIP-712, which provides a more secure way to sign data by providing context and structure to the data being signed."
+  parameters={[
+    {
+      name: "address",
+      type: "string",
+      required: true,
+      description: "The address that should sign the data (20 bytes)."
+    },
+    {
+      name: "typedData",
+      type: "object",
+      required: true,
+      description: "The typed structured data to be signed.",
+      children: [
+        {
+          name: "types",
+          type: "object",
+          required: true,
+          description: "An object containing type definitions for the structured data."
+        },
+        {
+          name: "primaryType",
+          type: "string",
+          required: true,
+          description: "The primary type from the types object that will be signed."
+        },
+        {
+          name: "domain",
+          type: "object",
+          required: true,
+          description: "The domain separator as defined by EIP-712.",
+          children: [
+            {
+              name: "name",
+              type: "string",
+              required: false,
+              description: "The user-readable name of the signing domain."
+            },
+            {
+              name: "version",
+              type: "string",
+              required: false,
+              description: "The current major version of the signing domain."
+            },
+            {
+              name: "chainId",
+              type: "number",
+              required: false,
+              description: "The chain ID of the network."
+            },
+            {
+              name: "verifyingContract",
+              type: "string",
+              required: false,
+              description: "The address of the contract that will verify the signature."
+            },
+            {
+              name: "salt",
+              type: "string",
+              required: false,
+              description: "A disambiguating salt for the protocol."
+            }
+          ]
+        },
+        {
+          name: "message",
+          type: "object",
+          required: true,
+          description: "The data object to be signed according to the primary type."
+        }
+      ]
+    }
+  ]}
+  returns={{
+    type: "string",
+    description: "The signature as a hexadecimal string."
+  }}
+  errors={[
+    {
+      code: 4001,
+      message: "User rejected the request",
+      description: "User denied the signing request"
+    },
+    {
+      code: 4100,
+      message: "Requested method not supported",
+      description: "The method is not supported by the wallet"
+    },
+    {
+      code: -32602,
+      message: "Invalid params",
+      description: "Invalid typed data structure"
+    }
+  ]}
+  exampleRequest={`await window.ethereum.request({
+  "method": "eth_signTypedData_v4",
+  "params": [
+    "0x3b7252d007059ffc82d16d022da3cbf9992d2f70",
+    {
+      "types": {
+        "EIP712Domain": [
+          { "name": "name", "type": "string" },
+          { "name": "version", "type": "string" },
+          { "name": "chainId", "type": "uint256" },
+          { "name": "verifyingContract", "type": "address" }
+        ],
+        "Person": [
+          { "name": "name", "type": "string" },
+          { "name": "wallet", "type": "address" }
+        ]
+      },
+      "primaryType": "Person",
+      "domain": {
+        "name": "Example App",
+        "version": "1",
+        "chainId": 1,
+        "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
+      },
+      "message": {
+        "name": "Alice",
+        "wallet": "0x3b7252d007059ffc82d16d022da3cbf9992d2f70"
+      }
+    }
+  ]
+});`}
+  exampleResponse={`{
+  "id": 1,
+  "jsonrpc": "2.0",
+  "result": "0x4355c47d63924e8a72e509b65029052eb6c299d53a04e167c5775fd466751c9d07299936d304c153f6443dfa05f40ff007d72911b6f72307f996231605b915621c"
+}`}
+/>
