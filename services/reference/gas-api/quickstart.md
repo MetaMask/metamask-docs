@@ -19,8 +19,8 @@ View the [API reference content](api-reference/index.md) to view the `curl` comm
 
 ## Prerequisites
 
-- A valid [Web3 API key](../../../../developer-tools/dashboard/get-started/create-api)
-  and optional [API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).
+- A valid [Web3 API key](/developer-tools/dashboard/get-started/create-api)
+  and optional [API key secret](/developer-tools/dashboard/how-to/secure-an-api/api-key-secret).
 - [Node.js and npm installed](https://nodejs.org/en/download).
 
 ## Initialize a new project directory

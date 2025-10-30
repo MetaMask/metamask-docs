@@ -160,7 +160,7 @@ caveatBuilder.addCaveat("deployed",
 
 Ensures that the recipient's ERC-1155 token balance has changed within the allowed bounds — either increased by a minimum or decreased by a maximum specified amount.
 
-Caveat enforcer contract: [`ERC1155BalanceBalanceEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC1155BalanceBalanceEnforcer.sol)
+Caveat enforcer contract: [`ERC1155BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC1155BalanceChangeEnforcer.sol)
 
 ### Parameters
 

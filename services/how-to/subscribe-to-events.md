@@ -27,7 +27,7 @@ You need to be aware of the following when sending HTTP RPC requests:
   retrying failed HTTP requests often is automatic, or easy to configure.
 - Status codes - WebSockets use its own set of [status codes](https://pkg.go.dev/github.com/gorilla/websocket#pkg-constants)
   to provide users with a disconnection reason. The service will respond with the standard
-  [EVM response codes](../reference/ethereum/json-rpc-methods/index.md#error-codes) for each JSON-RPC request.
+  [EVM response codes](../reference/ethereum/json-rpc-methods/index.md) for each JSON-RPC request.
 
 ## Example event subscription
 
