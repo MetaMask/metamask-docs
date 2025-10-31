@@ -48,17 +48,17 @@ Check out the following sections to get started with the MetaMask Delegation Too
 <CardList
   items={[
     {
-      href: "/delegation-toolkit/0.12.0/get-started",
+      href: "/smart-accounts-kit/0.12.0/get-started",
       title: "🏁 Get started",
       description: "If you're ready to get started building, install the Toolkit and follow a quickstart.",
     },
     {
-      href: "/delegation-toolkit/0.12.0/how-to",
+      href: "/smart-accounts-kit/0.12.0/how-to",
       title: "🛠️ How-to guides",
       description: "To complete specific tasks with the Delegation Toolkit, follow the how-to guides.",
     },
     {
-      href: "/delegation-toolkit/0.12.0/concepts",
+      href: "/smart-accounts-kit/0.12.0/concepts",
       title: "💭 Concepts",
       description: "If you're new to the Delegation Toolkit, learn about some key concepts.",
     }
