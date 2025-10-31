@@ -132,7 +132,7 @@ export type MFA_SETTINGS = {
 import { Web3Auth, MFA_FACTOR, WEB3AUTH_NETWORK } from '@web3auth/modal'
 
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_CLIENT_ID',
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // focus-start
   mfaSettings: {

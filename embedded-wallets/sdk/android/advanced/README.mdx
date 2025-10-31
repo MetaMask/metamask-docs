@@ -21,7 +21,7 @@ import com.web3auth.core.types.Web3AuthOptions
 var web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
@@ -105,7 +105,7 @@ Control how long users stay authenticated and how sessions persist. The session 
 var web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     sessionTime = 86400 * 7, // 7 days (in seconds)
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),

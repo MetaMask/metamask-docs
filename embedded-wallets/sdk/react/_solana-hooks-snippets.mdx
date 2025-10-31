@@ -26,7 +26,7 @@ npm install @solana/web3.js
 ### Get Solana Wallet
 
 ```tsx
-import { useSolanaWallet } from '@web3auth/modal/react'
+import { useSolanaWallet } from '@web3auth/modal/react/solana'
 
 function SolanaWallet() {
   const { address, connected } = useSolanaWallet()
@@ -44,7 +44,7 @@ function SolanaWallet() {
 ### Sign Message
 
 ```tsx
-import { useSignMessage } from '@web3auth/modal/react'
+import { useSignMessage } from '@web3auth/modal/react/solana'
 
 function SignMessage() {
   const { signMessage, isPending, error } = useSignMessage()
@@ -74,7 +74,7 @@ function SignMessage() {
 ### Sign Transaction
 
 ```tsx
-import { useSignTransaction } from '@web3auth/modal/react'
+import { useSignTransaction } from '@web3auth/modal/react/solana'
 import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
 
 function SignTransaction() {
@@ -113,7 +113,7 @@ function SignTransaction() {
 ### Sign and Send Transaction
 
 ```tsx
-import { useSignAndSendTransaction } from '@web3auth/modal/react'
+import { useSignAndSendTransaction } from '@web3auth/modal/react/solana'
 import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
 
 function SignAndSendTransaction() {
