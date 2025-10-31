@@ -22,7 +22,7 @@ delegation, and read the required state.
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
 | `client`      | `Client`               | Yes      | The Viem Client to interact with the caveat enforcer contracts and read their state. |
-| `environment` | `DeleGatorEnvironment` | Yes      | Environment to resolve the smart contracts for the current chain.       |
+| `environment` | `SmartAccountsEnvironment` | Yes      | Environment to resolve the smart contracts for the current chain.       |
 
 ### Example
 
@@ -45,9 +45,9 @@ const caveatEnforcerClient = createCaveatEnforcerClient({
 ```typescript
 import { sepolia as chain } from 'viem/chains'
 import { createPublicClient, http } from 'viem'
-import { getDeleGatorEnvironment } from '@metamask/smart-accounts-kit'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 
-export const environment = getDeleGatorEnvironment(chain.id)
+export const environment = getSmartAccountsEnvironment(chain.id)
 
 export const publicClient = createPublicClient({
   chain,
@@ -88,9 +88,9 @@ const { availableAmount } = await caveatEnforcerClient.getErc20PeriodTransferEnf
 ```typescript
 import { createDelegation } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
-import { getDeleGatorEnvironment } from '@metamask/smart-accounts-kit'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 
-const environment = getDeleGatorEnvironment(chain.id)
+const environment = getSmartAccountsEnvironment(chain.id)
 
 // Since current time is in seconds, we need to convert milliseconds to seconds.
 const startDate = Math.floor(Date.now() / 1000)
@@ -142,10 +142,10 @@ const { availableAmount } = await caveatEnforcerClient.getErc20StreamingEnforcer
 ```typescript
 import { createDelegation } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
-import { getDeleGatorEnvironment } from '@metamask/smart-accounts-kit'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 import { parseUnits } from 'viem'
 
-const environment = getDeleGatorEnvironment(chain.id)
+const environment = getSmartAccountsEnvironment(chain.id)
 
 // Since current time is in seconds, we need to convert milliseconds to seconds.
 const startTime = Math.floor(Date.now() / 1000)
@@ -199,9 +199,9 @@ const { availableAmount } = await caveatEnforcerClient.getNativeTokenPeriodTrans
 import { createDelegation } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
 import { parseEther } from 'viem'
-import { getDeleGatorEnvironment } from '@metamask/smart-accounts-kit'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 
-const environment = getDeleGatorEnvironment(chain.id)
+const environment = getSmartAccountsEnvironment(chain.id)
 
 // Since current time is in seconds, we need to convert milliseconds to seconds.
 const startDate = Math.floor(Date.now() / 1000)
@@ -252,9 +252,9 @@ const { availableAmount } = await caveatEnforcerClient.getNativeTokenStreamingEn
 ```typescript
 import { createDelegation } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
-import { getDeleGatorEnvironment } from '@metamask/smart-accounts-kit'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 
-const environment = getDeleGatorEnvironment(chain.id)
+const environment = getSmartAccountsEnvironment(chain.id)
 
 // Since current time is in seconds, we need to convert milliseconds to seconds.
 const startTime = Math.floor(Date.now() / 1000)
@@ -311,12 +311,12 @@ const { availableAmount } = await caveatEnforcerClient.getMultiTokenPeriodEnforc
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation, getDeleGatorEnvironment, ROOT_AUTHORITY } from '@metamask/smart-accounts-kit'
+import { createDelegation, getSmartAccountsEnvironment, ROOT_AUTHORITY } from '@metamask/smart-accounts-kit'
 import { createCaveatBuilder } from '@metamask/smart-accounts-kit/utils'
 import { sepolia as chain } from 'viem/chains'
 import { parseUnits, parseEther } from 'viem'
 
-const environment = getDeleGatorEnvironment(chain.id)
+const environment = getSmartAccountsEnvironment(chain.id)
 const caveatBuilder = createCaveatBuilder(environment)
 
 // Current time as start date. 

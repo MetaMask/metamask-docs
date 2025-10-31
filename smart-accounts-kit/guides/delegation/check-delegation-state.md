@@ -48,9 +48,9 @@ const caveatEnforcerClient = createCaveatEnforcerClient({
 ```typescript
 import { sepolia as chain } from 'viem/chains'
 import { createPublicClient, http } from 'viem'
-import { getDeleGatorEnvironment } from '@metamask/smart-accounts-kit'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 
-export const environment = getDeleGatorEnvironment(chain.id)
+export const environment = getSmartAccountsEnvironment(chain.id)
 
 export const publicClient = createPublicClient({
   chain,

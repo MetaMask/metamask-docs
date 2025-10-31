@@ -218,7 +218,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 <TabItem value="Redeem with an EOA">
 
 ```typescript
-import { createExecution, getDeleGatorEnvironment, ExecutionMode } from "@metamask/smart-accounts-kit"
+import { createExecution, getSmartAccountsEnvironment, ExecutionMode } from "@metamask/smart-accounts-kit"
 import { DelegationManager } from "@metamask/smart-accounts-kit/contracts"
 import { zeroAddress } from "viem"
 import { callData } from "./config.ts"
@@ -237,7 +237,7 @@ const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
 });
 
 const transactionHash = await delegateWalletClient.sendTransaction({
-  to: getDeleGatorEnvironment(chain.id).DelegationManager,
+  to: getSmartAccountsEnvironment(chain.id).DelegationManager,
   data: redeemDelegationCalldata,
   chain,
 })

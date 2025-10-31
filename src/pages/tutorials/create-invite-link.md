@@ -266,7 +266,7 @@ The delegation manager validates the delegation and executes delegated actions.
 In this case, the invitee can spend up to 0.001 ETH when using your dapp.
 
 ```ts
-import { createExecution, getDeleGatorEnvironment, ExecutionMode } from '@metamask/smart-accounts-kit';
+import { createExecution, getSmartAccountsEnvironment, ExecutionMode } from '@metamask/smart-accounts-kit';
 import { DelegationManager } from '@metamask/smart-accounts-kit/contracts';
 
 const delegations = [decodedDelegation];

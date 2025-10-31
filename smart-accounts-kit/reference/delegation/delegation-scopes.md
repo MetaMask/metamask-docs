@@ -31,7 +31,7 @@ At the start of each new period, the allowance resets.
 #### Example
 
 ```typescript
-import { createDelegation, getDelegatorEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseUnits } from "viem";
 
@@ -52,7 +52,7 @@ const delegation = createDelegation({
   // Address to which the delegation is being granted
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
-  environment: getDelegatorEnvironment(sepolia.id);
+  environment: getSmartAccountsEnvironment(sepolia.id);
 });
 ```
 
@@ -75,7 +75,7 @@ At the start, a specified initial amount is released, after which tokens accrue 
 #### Example
 
 ```typescript
-import { createDelegation, getDelegatorEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseUnits } from "viem";
 
@@ -99,7 +99,7 @@ const delegation = createDelegation({
   // Address to which the delegation is being granted
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
-  environment: getDelegatorEnvironment(sepolia.id);
+  environment: getSmartAccountsEnvironment(sepolia.id);
 });
 ```
 
@@ -118,7 +118,7 @@ This scope is useful for setting simple, fixed transfer limits without any time-
 #### Example
 
 ```typescript
-import { createDelegation, getDelegatorEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseUnits } from "viem";
 
@@ -134,7 +134,7 @@ const delegation = createDelegation({
   // Address to which the delegation is being granted
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
-  environment: getDelegatorEnvironment(sepolia.id);
+  environment: getSmartAccountsEnvironment(sepolia.id);
 });
 ```
 
@@ -152,7 +152,7 @@ Limits the delegation to ERC-721 token (NFT) transfers only.
 #### Example
 
 ```typescript
-import { createDelegation, getDelegatorEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 
 const delegation = createDelegation({
@@ -166,7 +166,7 @@ const delegation = createDelegation({
   // Address to which the delegation is being granted
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
-  environment: getDelegatorEnvironment(sepolia.id);
+  environment: getSmartAccountsEnvironment(sepolia.id);
 });
 ```
 
@@ -188,7 +188,7 @@ At the start of each new period, the allowance resets.
 #### Example
 
 ```typescript
-import { createDelegation, getDelegatorEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem";
 
@@ -207,7 +207,7 @@ const delegation = createDelegation({
   // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
-  environment: getDelegatorEnvironment(sepolia.id);
+  environment: getSmartAccountsEnvironment(sepolia.id);
 });
 ```
 
@@ -231,7 +231,7 @@ At the start, a specified initial amount is released, after which tokens accrue 
 #### Example
 
 ```typescript
-import { createDelegation, getDelegatorEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem";
 
@@ -251,7 +251,7 @@ const delegation = createDelegation({
   // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
-  environment: getDelegatorEnvironment(sepolia.id);
+  environment: getSmartAccountsEnvironment(sepolia.id);
 });
 ```
 
@@ -271,7 +271,7 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 #### Example
 
 ```typescript
-import { createDelegation, getDelegatorEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem";
 
@@ -286,7 +286,7 @@ const delegation = createDelegation({
   // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
-  environment: getDelegatorEnvironment(sepolia.id);
+  environment: getSmartAccountsEnvironment(sepolia.id);
 });
 ```
 
@@ -308,7 +308,7 @@ Defines the specific methods, contract addresses, and calldata that are allowed 
 This example sets the delegation scope to allow the delegate to call the `approve` function on the USDC token contract:
 
 ```typescript
-import { createDelegation, getDelegatorEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 
 const delegation = createDelegation({
@@ -322,7 +322,7 @@ const delegation = createDelegation({
   // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
-  environment: getDelegatorEnvironment(sepolia.id);
+  environment: getSmartAccountsEnvironment(sepolia.id);
 });
 ```
 
@@ -339,7 +339,7 @@ Restricts a delegation to ownership transfer calls only.
 #### Example
 
 ```typescript
-import { createDelegation, getDelegatorEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 
 const contractAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
@@ -354,6 +354,6 @@ const delegation = createDelegation({
   // Address to which the delegation is being granted.
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   // Alternatively you can use environment property of MetaMask smart account.
-  environment: getDelegatorEnvironment(sepolia.id);
+  environment: getSmartAccountsEnvironment(sepolia.id);
 });
 ```

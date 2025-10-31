@@ -66,9 +66,9 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 import { sepolia as chain } from 'viem/chains'
 import { createPublicClient, http, parseEther } from 'viem'
 import { createBundlerClient } from 'viem/account-abstraction'
-import { getDeleGatorEnvironment, createDelegation } from '@metamask/smart-accounts-kit'
+import { getSmartAccountsEnvironment, createDelegation } from '@metamask/smart-accounts-kit'
 
-export const environment = getDeleGatorEnvironment(chain.id)
+export const environment = getSmartAccountsEnvironment(chain.id)
 
 const currentTime = Math.floor(Date.now() / 1000)
 

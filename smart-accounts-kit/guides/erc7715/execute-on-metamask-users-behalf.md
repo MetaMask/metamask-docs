@@ -110,7 +110,7 @@ ERC-7710 delegation is one of the core features supported only by MetaMask Smart
 :::
 
 ```typescript
-import { getDeleGatorEnvironment } from "@metamask/smart-accounts-kit";
+import { getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia as chain } from "viem/chains";
 
 const addresses = await walletClient.requestAddresses();
@@ -128,7 +128,7 @@ if (code) {
   // You need to remove the first 8 characters (0xef0100) to get the delegator address.
   const delegatorAddress = `0x${code.substring(8)}`;
 
-  const statelessDelegatorAddress = getDeleGatorEnvironment(chain.id)
+  const statelessDelegatorAddress = getSmartAccountsEnvironment(chain.id)
   .implementations
   .EIP7702StatelessDeleGatorImpl;
 
