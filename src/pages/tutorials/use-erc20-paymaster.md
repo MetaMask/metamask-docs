@@ -2,18 +2,18 @@
 title: Use an ERC-20 paymaster with a smart account
 image: 'img/tutorials/tutorials-banners/use-erc20-paymaster.png'
 description: Enable users to pay gas fees with an ERC-20 token using a smart account and paymaster.
-tags: [delegation toolkit, ERC-20 paymaster, smart accounts]
-keywords: [delegation toolkit, ERC-20 paymaster, smart accounts, USDC, ERC-4337]
+tags: [delegation, smart accounts kit, ERC-20 paymaster, smart accounts]
+keywords: [delegation, smart accounts kit, ERC-20 paymaster, smart accounts, USDC, ERC-4337]
 date: Sep 2, 2025
 author: MetaMask Developer Relations
 ---
 
-This tutorial walks you through using an ERC-20 paymaster with [MetaMask Smart Accounts](/delegation-toolkit/concepts/smart-accounts), enabling users to pay gas fees in USDC.
+This tutorial walks you through using an ERC-20 paymaster with [MetaMask Smart Accounts](/smart-accounts-kit/concepts/smart-accounts), enabling users to pay gas fees in USDC.
 This tutorial uses Pimlico's paymaster, but you can use any paymaster of your choice.
 
 ## About paymasters
 
-A paymaster is an important component of the [account abstraction (ERC-4337)](/delegation-toolkit/concepts/smart-accounts) standard, responsible for abstracting gas fees for end users. 
+A paymaster is an important component of the [account abstraction (ERC-4337)](/smart-accounts-kit/concepts/smart-accounts) standard, responsible for abstracting gas fees for end users. 
 There are different types of paymasters, such as gasless paymasters and ERC-20 paymasters. 
 While a gasless paymaster covers the transaction on behalf of the user, an ERC-20 paymaster allows users to pay gas fees using a supported ERC-20 token.
 This removes the need for users to hold native tokens, allowing them to perform onchain actions using only stablecoins.
@@ -29,10 +29,10 @@ This removes the need for users to hold native tokens, allowing them to perform 
 
 ### 1. Install the toolkit
 
-Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) in your project:
+Install the [MetaMask Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) in your project:
 
 ```bash npm2yarn
-npm install @metamask/delegation-toolkit
+npm install @metamask/smart-accounts-kit
 ```
 
 ### 2. Create a Public Client
@@ -89,11 +89,11 @@ const bundlerClient = createBundlerClient({
 
 ### 5. Create and fund a smart account
 
-Create a [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account).
+Create a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account).
 A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit";
+import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
 import { privateKeyToAccount } from "viem/accounts";
 
 const account = privateKeyToAccount("0x...");
@@ -164,5 +164,5 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 ## Next steps
 
-- Learn more about [smart account implementations](/delegation-toolkit/guides/smart-accounts/create-smart-account).
-- To sponsor gas for end users, see how to [send a gasless transaction](/delegation-toolkit/guides/smart-accounts/send-gasless-transaction).
+- Learn more about [smart account implementations](/smart-accounts-kit/guides/smart-accounts/create-smart-account).
+- To sponsor gas for end users, see how to [send a gasless transaction](/smart-accounts-kit/guides/smart-accounts/send-gasless-transaction).

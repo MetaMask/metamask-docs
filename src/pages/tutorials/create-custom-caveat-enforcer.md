@@ -2,8 +2,8 @@
 title: Create a custom caveat enforcer
 image: 'img/tutorials/tutorials-banners/create-custom-caveat-enforcer.png'
 description: Define custom rules for a delegation by creating, deploying, and applying a custom caveat enforcer.
-tags: [delegation toolkit, caveat enforcer, smart contracts]
-keywords: [delegation toolkit, create, custom, caveat enforcer, smart contracts]
+tags: [smart accounts kit, delegation, caveat enforcer, smart contracts]
+keywords: [delegation, smart accounts kit, create, custom, caveat enforcer, smart contracts]
 date: Aug 27, 2025
 author: MetaMask Developer Relations
 ---
@@ -11,9 +11,9 @@ author: MetaMask Developer Relations
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This tutorial walks you through creating a custom [caveat enforcer](/delegation-toolkit/concepts/delegation/caveat-enforcers) and applying it to a [delegation](/delegation-toolkit/concepts/delegation/).
+This tutorial walks you through creating a custom [caveat enforcer](/smart-accounts-kit/concepts/delegation/caveat-enforcers) and applying it to a [delegation](/smart-accounts-kit/concepts/delegation/).
 
-The MetaMask Delegation Toolkit includes [out-of-the-box caveat enforcers](/delegation-toolkit/reference/delegation/caveats) that define rules and restrictions for common use cases.
+The MetaMask Smart Accounts Kit includes [out-of-the-box caveat enforcers](/smart-accounts-kit/reference/delegation/caveats) that define rules and restrictions for common use cases.
 For more specific control or other use cases, you can create custom caveat enforcers.
 In this tutorial, you'll create and apply a caveat enforcer that only allows a delegation to be redeemed after a specific timestamp.
 
@@ -33,10 +33,10 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 
 ### 1. Install the toolkit
 
-Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) in your project:
+Install the [MetaMask Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) in your project:
 
 ```bash npm2yarn
-npm install @metamask/delegation-toolkit
+npm install @metamask/smart-accounts-kit
 ```
 
 ### 2. Create the caveat enforcer
@@ -108,7 +108,7 @@ The Forge CLI will display the address of the deployed caveat enforcer.
 
 ### 4. Apply the caveat enforcer
 
-Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the [caveat builder](/delegation-toolkit/reference/delegation/#createcaveatbuilder), and create a delegation.
+Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the [caveat builder](/smart-accounts-kit/reference/delegation/#createcaveatbuilder), and create a delegation.
 
 The following code snippet uses the custom caveat enforcer to create a delegation granting
 a 0.01 ETH allowance that becomes spendable one hour after it is created:
@@ -117,8 +117,8 @@ a 0.01 ETH allowance that becomes spendable one hour after it is created:
 <TabItem value="delegation.ts">
 
 ```typescript
-import { createDelegation, ROOT_AUTHORITY } from '@metamask/delegation-toolkit'
-import { createCaveatBuilder } from '@metamask/delegation-toolkit/utils'
+import { createDelegation, ROOT_AUTHORITY } from '@metamask/smart-accounts-kit'
+import { createCaveatBuilder } from '@metamask/smart-accounts-kit/utils'
 import { toHex, parseEther } from 'viem'
 import { delegatorSmartAccount } from './config.ts'
 
@@ -156,7 +156,7 @@ const delegation: Delegation =  {
 ```typescript
 import { createPublicClient, http } from 'viem'
 import { sepolia as chain } from 'viem/chains'
-import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
@@ -181,4 +181,4 @@ export const delegatorSmartAccount = await toMetaMaskSmartAccount({
 You've successfully created, deployed, and applied a custom caveat enforcer!
 
 For production use cases, you might need to add additional caveats to restrict the delegation further.
-Learn more about [caveat enforcers](/delegation-toolkit/concepts/delegation/caveat-enforcers).
+Learn more about [caveat enforcers](/smart-accounts-kit/concepts/delegation/caveat-enforcers).
