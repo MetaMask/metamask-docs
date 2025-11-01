@@ -1,12 +1,12 @@
 ---
-description: Get started with the MetaMask Delegation Toolkit using the `@metamask/create-gator-app` CLI.
+description: Get started with the MetaMask Smart Accounts Kit using the `@metamask/create-gator-app` CLI.
 sidebar_label: Use the CLI
 keywords: [CLI, delegation, smart accounts, template]
 ---
 
-# Use the Delegation Toolkit CLI
+# Use the Smart Accounts Kit CLI
 
-Use the `@metamask/create-gator-app` interactive CLI to bootstrap a project with the MetaMask Delegation Toolkit in under two minutes. 
+Use the `@metamask/create-gator-app` interactive CLI to bootstrap a project with the Smart Accounts Kit in under two minutes. 
 The CLI automatically installs the required dependencies and sets up a project structure using a selected template,
 allowing you to focus on building your dapp.
 

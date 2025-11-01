@@ -29,7 +29,7 @@ Create the `DelegationStorageClient` instance, and configure it using your API k
 import { 
   DelegationStorageClient, 
   DelegationStorageEnvironment 
-} from "@metamask/delegation-toolkit/experimental";
+} from "@metamask/smart-accounts-kit/experimental";
 
 const delegationStorageClient = new DelegationStorageClient({
   apiKey: "<YOUR-API-KEY>",
@@ -62,7 +62,7 @@ const delegationHash = await delegationStorageClient.storeDelegation(delegation)
 import { 
   DelegationStorageClient, 
   DelegationStorageEnvironment 
-} from "@metamask/delegation-toolkit/experimental";
+} from "@metamask/smart-accounts-kit/experimental";
 
 export const delegationStorageClient = new DelegationStorageClient({
   apiKey: "<YOUR-API-KEY>",
@@ -90,7 +90,7 @@ A delegation can be a root delegation, where its `authority` is `0xfffffffffffff
 
 ```typescript
 import { delegationStorageClient } from "./config.ts";
-import { getDelegationHashOffchain } from "@metamask/delegation-toolkit";
+import { getDelegationHashOffchain } from "@metamask/smart-accounts-kit";
 
 // Assuming you have the leaf delegation
 const delegationHash = getDelegationHashOffchain(leafDelegation);
@@ -107,7 +107,7 @@ const delegationChain: Delegation[] = await delegationStorageClient.getDelegatio
 import { 
   DelegationStorageClient, 
   DelegationStorageEnvironment 
-} from "@metamask/delegation-toolkit/experimental";
+} from "@metamask/smart-accounts-kit/experimental";
 
 export const delegationStorageClient = new DelegationStorageClient({
   apiKey: "<YOUR-API-KEY>",
@@ -158,7 +158,7 @@ const receivedDelegations = await delegationStore.fetchDelegations(
 import { 
   DelegationStorageClient, 
   DelegationStorageEnvironment 
-} from "@metamask/delegation-toolkit/experimental";
+} from "@metamask/smart-accounts-kit/experimental";
 
 export const delegationStorageClient = new DelegationStorageClient({
   apiKey: "<YOUR-API-KEY>",

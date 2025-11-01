@@ -2,8 +2,8 @@
 title: Create a social invite link
 image: 'img/tutorials/tutorials-banners/create-invite-link.png'
 description: Allow users to refer their friends to your dapp using an invite link.
-tags: [delegation toolkit, embedded wallets, social, invite, referral, link]
-keywords: [delegation toolkit, social, invite, referral, link]
+tags: [delegation toolkit, smart accounts kit, embedded wallets, social, invite, referral, link]
+keywords: [delegation, smart accounts kit, social, invite, referral, link]
 date: Sep 8, 2025
 author: MetaMask Developer Relations
 toc_max_heading_level: 4
@@ -38,10 +38,10 @@ You'll enable this by:
 
 #### 1.1. Install dependencies
 
-Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) and other dependencies in your project:
+Install the [Delegation Toolkit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) and other dependencies in your project:
 
 ```bash npm2yarn
-npm install @metamask/delegation-toolkit @web3auth/modal wagmi @tanstack/react-query
+npm install @metamask/smart-accounts-kit @web3auth/modal wagmi @tanstack/react-query
 ```
 
 #### 1.2. Set up Embedded Wallets (Web3Auth)
@@ -136,7 +136,7 @@ This account will create a delegation, and must be a [MetaMask smart account](/d
 This example uses a [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account), which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
 
 ```tsx
-import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit';
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit';
 import { useAccount, usePublicClient, useWalletClient } from 'wagmi';
 
 const { address } = useAccount();
@@ -188,7 +188,7 @@ A root delegation is the first delegation in a chain of delegations, and an open
 In this example, the inviter creates an invitation that can be redeemed by any invitee, allowing the invitee to spend up to 0.001 ETH.
 
 ```ts
-import { createOpenDelegation } from '@metamask/delegation-toolkit';
+import { createOpenDelegation } from '@metamask/smart-accounts-kit';
 
 const delegation = createOpenDelegation({
   from: smartAccount.address,
@@ -221,7 +221,7 @@ const signedDelegation = {
 Encode the delegation into a shareable invite link:
 
 ```tsx
-import { Delegation } from '@metamask/delegation-toolkit';
+import { Delegation } from '@metamask/smart-accounts-kit';
 
 export function encodeDelegation(delegation: Delegation): string {
   const delegationJson = JSON.stringify(delegation);
@@ -244,7 +244,7 @@ The inviter can now share the link with anyone.
 When the invitee opens the shared invite link, decode the delegation:
 
 ```tsx
-import { Delegation } from '@metamask/delegation-toolkit';
+import { Delegation } from '@metamask/smart-accounts-kit';
 
 const urlParams = new URLSearchParams(window.location.search);
 const encodedDelegation = urlParams.get('delegation');
@@ -266,8 +266,8 @@ The delegation manager validates the delegation and executes delegated actions.
 In this case, the invitee can spend up to 0.001 ETH when using your dapp.
 
 ```ts
-import { createExecution, getDeleGatorEnvironment, ExecutionMode } from '@metamask/delegation-toolkit';
-import { DelegationManager } from '@metamask/delegation-toolkit/contracts';
+import { createExecution, getSmartAccountsEnvironment, ExecutionMode } from '@metamask/smart-accounts-kit';
+import { DelegationManager } from '@metamask/smart-accounts-kit/contracts';
 
 const delegations = [decodedDelegation];
 

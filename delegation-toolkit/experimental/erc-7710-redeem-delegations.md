@@ -14,7 +14,7 @@ This is an experimental feature and may change in future releases.
 [ERC-7710](https://eip.tools/eip/7710) introduces a standard way for MetaMask Smart Accounts to delegate capabilities to other
 smart accounts or externally owned accounts (EOAs).
 
-The MetaMask Delegation Toolkit provides two experimental functions, `erc7710BundlerActions()` and `erc7710WalletActions()`, that let
+The MetaMask Smart Accounts Kit provides two experimental functions, `erc7710BundlerActions()` and `erc7710WalletActions()`, that let
 a caller redeem delegations granted by MetaMask's permissions system.
 
 ## Extract relevant data
@@ -128,8 +128,8 @@ import { createPublicClient, http, createBundlerClient } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
 import { createBundlerClient } from "viem/account-abstraction";
-import { erc7710BundlerActions } from "@metamask/delegation-toolkit/experimental";
-import { toMetaMaskSmartAccount, Implementation } from "@metamask/delegation-toolkit";
+import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/experimental";
+import { toMetaMaskSmartAccount, Implementation } from "@metamask/smart-accounts-kit";
 
 export const publicClient = createPublicClient({
   chain: chain,
@@ -212,7 +212,7 @@ const hash = walletClient.sendTransactionWithDelegation({
 import { http, createPublicClient, createWalletClient } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
-import { erc7710WalletActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7710WalletActions } from "@metamask/smart-accounts-kit/experimental";
 
 export const publicClient = createPublicClient({
   chain,

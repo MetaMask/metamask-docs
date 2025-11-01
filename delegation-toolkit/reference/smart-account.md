@@ -35,7 +35,7 @@ import {
   aliceAccount,
   bobAccount,
 } from "./config.ts";
-import { aggregateSignature } from "@metamask/delegation-toolkit";
+import { aggregateSignature } from "@metamask/smart-accounts-kit";
 
 const userOperation = await bundlerClient.prepareUserOperation({
   account: aliceSmartAccount,
@@ -75,7 +75,7 @@ import { sepolia as chain } from "viem/chains";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain,
@@ -156,7 +156,7 @@ import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain,
@@ -203,7 +203,7 @@ import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain,
@@ -251,7 +251,7 @@ import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain,
@@ -289,7 +289,7 @@ Signs the delegation and returns the delegation signature.
 <TabItem value ="example.ts">
 
 ```ts
-import { createDelegation, getDelegatorEnvironment } from "@metamask/delegation-toolkit";
+import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { delegatorSmartAccount } from "./config.ts";
 
 // The address to which the delegation is granted. It can be an EOA address, or 
@@ -320,7 +320,7 @@ import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain,
@@ -344,7 +344,7 @@ export const delegatorSmartAccount = await toMetaMaskSmartAccount({
 ## `signMessage`
 
 Generates the [EIP-191](https://eips.ethereum.org/EIPS/eip-191) signature
-using the `MetaMaskSmartAccount` signer. The Delegation Toolkit
+using the `MetaMaskSmartAccount` signer. The Smart Accounts Kit
 uses Viem under the hood to provide this functionality.
 
 ### Parameters
@@ -374,7 +374,7 @@ import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain,
@@ -398,7 +398,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
 ## `signTypedData`
 
 Generates the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) signature
-using the `MetaMaskSmartAccount` signer. The Delegation Toolkit
+using the `MetaMaskSmartAccount` signer. The Smart Accounts Kit
 uses Viem under the hood to provide this functionality.
 
 ### Parameters
@@ -441,7 +441,7 @@ import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain,
@@ -502,7 +502,7 @@ import { sepolia as chain } from "viem/chains";
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain,
@@ -534,7 +534,7 @@ Creates a `MetaMaskSmartAccount` instance.
 | `client` | `Client`                                            | Yes                                                          | Viem Client to retrieve smart account data.                                                                                                                                       |
 | `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be Hybrid, Multisig, or Stateless7702.                                                                                                             |
 | `signer` | `SignerConfigByImplementation <TImplementation>` | Yes                                                          | Signers for the smart account. Can be a Viem Account, Viem Wallet Client, or a WebAuthnAccount. Web3AuthnAccounts are only supported for Hybrid implementations.                  |
-| `environment` | `DeleGatorEnvironment`                              | No                                                           | Environment to resolve the smart contracts.                                                                                                                                       |
+| `environment` | `SmartAccountsEnvironment`                              | No                                                           | Environment to resolve the smart contracts.                                                                                                                                       |
 | `deployParams` | `DeployParams<TImplementation>`                     | Required if `address` is not provided                        | The parameters that will be used to deploy the smart account and generate its deterministic address.                                                                              |
 | `deploySalt` | `Hex`                                               | Required if `address` is not provided                        | The salt that will be used to deploy the smart account.                                                                                                                           |
 | `address` | `Address`                                           | Required if `deployParams` and `deploySalt` are not provided, or if the implementation is `Stateless7702`. | The address of the smart account. If an address is provided, the smart account will not be deployed. This should be used if you intend to interact with an existing smart account. |
@@ -561,7 +561,7 @@ All Hybrid deploy parameters are required:
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 import { publicClient, account } from "./config.ts";
 
 const smartAccount = await toMetaMaskSmartAccount({
@@ -616,7 +616,7 @@ import {
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const signers = [ aliceAccount.address, bobAccount.address ];
 const threshold = 2n
@@ -662,7 +662,7 @@ export const bobAccount = privateKeyToAccount(bobPrivateKey);
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 import { publicClient, account } from "./config.ts";
 
 const smartAccount = await toMetaMaskSmartAccount({

@@ -30,25 +30,6 @@ const sidebar = {
     },
     {
       type: 'category',
-      label: 'Concepts',
-      collapsed: false,
-      items: [
-        'concepts/smart-accounts',
-        {
-          type: 'category',
-          label: 'Delegation',
-          collapsed: true,
-          key: 'delegation-concepts',
-          link: { type: "doc", id: "concepts/delegation/index" },
-          items: [
-            'concepts/delegation/caveat-enforcers',
-          ],
-        },
-        'concepts/erc7715',
-      ],
-    },
-    {
-      type: 'category',
       label: 'Guides',
       collapsed: false,
       items: [
@@ -108,19 +89,29 @@ const sidebar = {
         },
       ],
     },
-    // {
-    //   type: 'category',
-    //   label: 'Experimental',
-    //   collapsed: false,
-    //   items: [
-    //     'experimental/erc-7715-request-permissions',
-    //     'experimental/erc-7710-redeem-delegations',
-    //   ],
-    // },
+    {
+      type: 'category',
+      label: 'Concepts',
+      collapsed: true,
+      items: [
+        'concepts/smart-accounts',
+        {
+          type: 'category',
+          label: 'Delegation',
+          collapsed: true,
+          key: 'delegation-concepts',
+          link: { type: "doc", id: "concepts/delegation/index" },
+          items: [
+            'concepts/delegation/caveat-enforcers',
+          ],
+        },
+        'concepts/erc7715',
+      ],
+    },
     {
       type: 'category',
       label: 'Tutorials',
-      collapsed: false,
+      collapsed: true,
       items: [
         {
           type: "link",
@@ -147,7 +138,7 @@ const sidebar = {
     {
       type: 'category',
       label: 'Reference',
-      collapsed: false,
+      collapsed: true,
       items: [
         'reference/smart-account',
         {

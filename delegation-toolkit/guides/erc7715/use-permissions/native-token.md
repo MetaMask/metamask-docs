@@ -13,8 +13,8 @@ permissions for native token transfers with time-based (periodic) or streaming c
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../../configure-toolkit.md)
+- [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
+- [Configure the Smart Accounts Kit.](../../configure-toolkit.md)
 - [Create a session account.](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
 
 ## Native token periodic permission
@@ -66,7 +66,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
@@ -129,7 +129,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),

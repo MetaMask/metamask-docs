@@ -13,7 +13,7 @@ You can use any paymaster service provider, such as [Pimlico](https://docs.pimli
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
 - [Create a MetaMask smart account.](create-smart-account.md)
 
 ## Send a gasless transaction
@@ -60,7 +60,7 @@ import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 
 const publicClient = createPublicClient({

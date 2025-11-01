@@ -8,7 +8,7 @@ keywords: [delegation scope, delegation, restrict, authority]
 When [creating a delegation](../execute-on-smart-accounts-behalf.md), you can configure a scope to define the delegation's initial authority and help prevent delegation misuse.
 You can further constrain this initial authority by [adding caveats to a delegation](constrain-scope.md).
 
-The Delegation Toolkit currently supports three categories of scopes:
+The Smart Accounts Kit currently supports three categories of scopes:
 
 | Scope type | Description |
 |------------|-------------|

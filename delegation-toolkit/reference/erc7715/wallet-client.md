@@ -71,7 +71,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 ```ts
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
@@ -129,7 +129,7 @@ const hash = walletClient.sendTransactionWithDelegation({
 import { http, createPublicClient, createWalletClient } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
-import { erc7710WalletActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7710WalletActions } from "@metamask/smart-accounts-kit/experimental";
 
 export const publicClient = createPublicClient({
   chain,

@@ -10,8 +10,8 @@ For example, Alice has deployed a smart contract, and she delegates to Bob the a
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../../configure-toolkit.md)
+- [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
+- [Configure the Smart Accounts Kit.](../../configure-toolkit.md)
 - [Create a delegator account.](../execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
 - [Create a delegate account.](../execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
 
@@ -23,7 +23,7 @@ Internally, this scope uses the [`ownershipTransfer`](../../../reference/delegat
 See the [ownership transfer scope reference](../../../reference/delegation/delegation-scopes.md#ownership-transfer-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 
 const contractAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 

@@ -2,8 +2,8 @@
 title: Use a passkey as a backup signer
 image: 'img/tutorials/tutorials-banners/use-passkey-as-backup-signer.png'
 description: Use a passkey as a backup signer for a MetaMask smart account.
-tags: [delegation toolkit, passkey, backup signer, smart account]
-keywords: [delegation toolkit, passkey, webauthn, P-256, backup signer, smart account]
+tags: [delegation toolkit, smart accounts kit, passkey, backup signer, smart account]
+keywords: [delegation, smart accounts kit, passkey, webauthn, P-256, backup signer, smart account]
 date: Aug 27, 2025
 author: MetaMask Developer Relations
 ---
@@ -32,10 +32,10 @@ This tutorial walks you through adding a passkey signer to an already deployed s
 
 ### 1. Install dependencies
 
-Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) and [Ox SDK](https://oxlib.sh/#installation) in your project:
+Install the [Delegation Toolkit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) and [Ox SDK](https://oxlib.sh/#installation) in your project:
 
 ```bash npm2yarn
-npm install @metamask/delegation-toolkit ox
+npm install @metamask/smart-accounts-kit ox
 ```
 
 ### 2. Create a Public Client
@@ -73,7 +73,7 @@ Create and deploy a [Hybrid smart account](/delegation-toolkit/guides/smart-acco
 The Hybrid implementation supports adding additional passkey signers.
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 import { privateKeyToAccount } from 'viem/accounts'
 import { zeroAddress } from 'viem'
 
@@ -115,7 +115,7 @@ const credential = await createWebAuthnCredential({
 
 ### 6. Add the passkey as a backup signer
 
-Use the `HybridDeleGator` contract namespace from the Delegation Toolkit to encode the calldata required to add the passkey signer.
+Use the `HybridDeleGator` contract namespace from the Smart Accounts Kit to encode the calldata required to add the passkey signer.
 The encoding function needs the X and Y coordinates of the P-256 public key.
 Since WebAuthn credentials store a compressed public key, you need to use the [Ox SDK](https://oxlib.sh/#installation) to deserialize it, and extract the X and Y coordinates.
 
@@ -124,7 +124,7 @@ Once the calldata is prepared, send it to your smart account address to register
 ```ts
 import { PublicKey } from 'ox'
 import { toHex } from 'viem'
-import { HybridDeleGator, P256Owner } from '@metamask/delegation-toolkit/contracts'
+import { HybridDeleGator, P256Owner } from '@metamask/smart-accounts-kit/contracts'
 
 // Deserialize the compressed public key.
 const publicKey = PublicKey.fromHex(credential.publicKey)
@@ -167,7 +167,7 @@ Use the [Viem WebAuthn Account](https://viem.sh/account-abstraction/accounts/web
 import { Address } from 'ox'
 import { toWebAuthnAccount } from 'viem/account-abstraction'
 import { toHex } from 'viem'
-import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 // Use the deserialized public key from the previous step.
 const owner = Address.fromPublicKey(publicKey)

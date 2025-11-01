@@ -5,7 +5,7 @@ keywords: [caveats, caveat enforcers, delegation]
 
 # Caveat enforcers
 
-The MetaMask Delegation Toolkit provides *caveat enforcers*, which are smart contracts that implement rules and restrictions (*caveats*) on delegations.
+The Smart Accounts Kit provides *caveat enforcers*, which are smart contracts that implement rules and restrictions (*caveats*) on delegations.
 They serve as the underlying mechanism that enables conditional execution within the [Delegation Framework](./index.md#delegation-framework).
 
 A caveat enforcer acts as a gate that validates whether a delegation can be used for a particular execution. When a delegate attempts to execute an action on behalf of a delegator, each caveat enforcer specified in the delegation evaluates whether the execution meets its defined criteria.
@@ -119,7 +119,7 @@ This "all-or-nothing" approach ensures that delegations only execute exactly as 
 
 ## Caveat builder
 
-While caveat enforcers operate at the smart contract level, most developers interact with them through the `CaveatBuilder` interface in the MetaMask Delegation Toolkit.
+While caveat enforcers operate at the smart contract level, most developers interact with them through the `CaveatBuilder` interface in the Smart Accounts Kit.
 
 The `CaveatBuilder` provides a developer-friendly TypeScript API that:
 
@@ -152,7 +152,7 @@ When designing delegations with caveats, consider these best practices:
 
 ## Available caveat enforcers
 
-The Delegation Toolkit provides [out-of-the-box caveat enforcers](../../reference/delegation/caveats.md)
+The Smart Accounts Kit provides [out-of-the-box caveat enforcers](../../reference/delegation/caveats.md)
 for common restriction patterns, including:
 
 - Limiting target addresses and methods.

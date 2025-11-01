@@ -10,8 +10,8 @@ You can set transfer limits with or without time-based (periodic) or streaming c
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../../configure-toolkit.md)
+- [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
+- [Configure the Smart Accounts Kit.](../../configure-toolkit.md)
 - [Create a delegator account.](../execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
 - [Create a delegate account.](../execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
 
@@ -29,7 +29,7 @@ Internally, this scope uses the [`erc20PeriodTransfer`](../../../reference/deleg
 See the [ERC-20 periodic scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-periodic-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 import { parseUnits } from "viem";
 
 // startDate should be in seconds.
@@ -63,7 +63,7 @@ Internally, this scope uses the [`erc20Streaming`](../../../reference/delegation
 See the [ERC-20 streaming scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-streaming-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 import { parseUnits } from "viem";
 
 // startTime should be in seconds.
@@ -98,7 +98,7 @@ Internally, this scope uses the [`erc20TransferAmount`](../../../reference/deleg
 See the [ERC-20 transfer scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-transfer-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 import { parseUnits } from "viem";
 
 const delegation = createDelegation({
@@ -123,7 +123,7 @@ Internally, this scope uses the [`erc721Transfer`](../../../reference/delegation
 See the [ERC-721 scope reference](../../../reference/delegation/delegation-scopes.md#erc-721-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 
 const delegation = createDelegation({
   scope: {
@@ -154,7 +154,7 @@ optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md
 See the [native token periodic scope reference](../../../reference/delegation/delegation-scopes.md#native-token-periodic-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 import { parseEther } from "viem";
 
 // startDate should be in seconds.
@@ -189,7 +189,7 @@ optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md
 See the [native token streaming scope reference](../../../reference/delegation/delegation-scopes.md#native-token-streaming-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 import { parseEther } from "viem";
 
 // startTime should be in seconds.
@@ -225,7 +225,7 @@ optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md
 See the [native token transfer scope reference](../../../reference/delegation/delegation-scopes.md#native-token-transfer-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 import { parseEther } from "viem";
 
 const delegation = createDelegation({

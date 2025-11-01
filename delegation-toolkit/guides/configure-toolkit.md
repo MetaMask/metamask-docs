@@ -1,20 +1,20 @@
 ---
 description: Learn how to configure the bundler client, paymaster client, and toolkit environment.
 sidebar_label: Configure the toolkit
-keywords: [configure, delegation toolkit, bundler, paymaster, delegator environment]
+keywords: [configure, smart accounts kit, bundler, paymaster, delegator environment]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Configure the Delegation Toolkit
+# Configure the Smart Accounts Kit
 
-The MetaMask Delegation toolkit is highly configurable, providing support for custom [bundlers and paymasters](#configure-the-bundler).
+The Smart Accounts Kit is highly configurable, providing support for custom [bundlers and paymasters](#configure-the-bundler).
 You can also configure the [toolkit environment](#optional-configure-the-toolkit-environment) to interact with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework).
 
 ## Prerequisites
 
-[Install and set up the Delegation Toolkit.](../get-started/install.md)
+[Install and set up the Smart Accounts Kit.](../get-started/install.md)
 
 ## Configure the bundler
 
@@ -57,7 +57,7 @@ Providing a paymaster is optional when configuring your bundler client. However,
 
 ## (Optional) Configure the toolkit environment
 
-The toolkit environment (`DeleGatorEnvironment`) defines the contract addresses necessary for interacting with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework) on a specific network.
+The toolkit environment (`SmartAccountsEnvironment`) defines the contract addresses necessary for interacting with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework) on a specific network.
 It serves several key purposes:
 
 - It provides a centralized configuration for all the contract addresses required by the Delegation Framework.
@@ -74,10 +74,10 @@ If no environment is found for the specified chain, it throws an error.
 <TabItem value="example.ts">
 
 ```typescript
-import { DeleGatorEnvironment } from "@metamask/delegation-toolkit";
+import { SmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { delegatorSmartAccount } from "./config.ts";
 
-const environment: DeleGatorEnvironment = delegatorSmartAccount.environment; 
+const environment: SmartAccountsEnvironment = delegatorSmartAccount.environment; 
 ```
 
 </TabItem>
@@ -87,7 +87,7 @@ const environment: DeleGatorEnvironment = delegatorSmartAccount.environment;
 import {
   Implementation,
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 import { privateKeyToAccount } from "viem/accounts";
 import { createPublicClient, http } from "viem";
 import { sepolia as chain } from "viem/chains";
@@ -117,18 +117,18 @@ export delegatorSmartAccount;
 See the changelog of the toolkit version you are using (in the left sidebar) for supported chains.
 :::
 
-Alternatively, you can use the [`getDelegatorEnvironment`](../reference/delegation/index.md#getdelegatorenvironment) function to resolve the environment.
+Alternatively, you can use the [`getSmartAccountsEnvironment`](../reference/delegation/index.md#getsmartaccountsenvironment) function to resolve the environment.
 This function is especially useful if your delegator is not a smart account when
 creating a [redelegation](../concepts/delegation/index.md#delegation-types).
 
 ```typescript
 import { 
-  getDeleGatorEnvironment, 
-  DeleGatorEnvironment, 
-} from "@metamask/delegation-toolkit"; 
+  getSmartAccountsEnvironment, 
+  SmartAccountsEnvironment, 
+} from "@metamask/smart-accounts-kit"; 
 
-// Resolves the DeleGatorEnvironment for Sepolia
-const environment: DeleGatorEnvironment = getDelegatorEnvironment(11155111);
+// Resolves the SmartAccountsEnvironment for Sepolia
+const environment: SmartAccountsEnvironment = getSmartAccountsEnvironment(11155111);
 ```
 
 ### Deploy a custom environment
@@ -136,7 +136,7 @@ const environment: DeleGatorEnvironment = getDelegatorEnvironment(11155111);
 You can deploy the contracts using any method, but the toolkit provides a convenient [`deployDelegatorEnvironment`](../reference/delegation/index.md#deploydelegatorenvironment) function. This function simplifies deploying the Delegation Framework contracts to your desired EVM chain.
 
 This function requires a Viem [Public Client](https://viem.sh/docs/clients/public), [Wallet Client](https://viem.sh/docs/clients/wallet), and [Chain](https://viem.sh/docs/glossary/types#chain)
-to deploy the contracts and resolve the `DeleGatorEnvironment`. 
+to deploy the contracts and resolve the `SmartAccountsEnvironment`. 
 
 Your wallet must have a sufficient native token balance to deploy the contracts.
 
@@ -146,7 +146,7 @@ Your wallet must have a sufficient native token balance to deploy the contracts.
 ```typescript
 import { walletClient, publicClient } from "./config.ts";
 import { sepolia as chain } from "viem/chains";
-import { deployDeleGatorEnvironment } from "@metamask/delegation-toolkit/utils";
+import { deployDeleGatorEnvironment } from "@metamask/smart-accounts-kit/utils";
 
 const environment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -189,7 +189,7 @@ For example, if you've already deployed the `EntryPoint` contract on the target 
 // The config.ts is the same as in the previous example.
 import { walletClient, publicClient } from "./config.ts";
 import { sepolia as chain } from "viem/chains";
-import { deployDeleGatorEnvironment } from "@metamask/delegation-toolkit/utils";
+import { deployDeleGatorEnvironment } from "@metamask/smart-accounts-kit/utils";
 
 const environment = await deployDeleGatorEnvironment(
   walletClient, 
@@ -208,19 +208,19 @@ Once the contracts are deployed, you can use them to override the environment.
 ### Override the environment
 
 To override the environment, the toolkit provides an [`overrideDeployedEnvironment`](../reference/delegation/index.md#overridedeployedenvironment) function to resolve
-`DeleGatorEnvironment` with specified contracts for the given chain and contract version. 
+`SmartAccountsEnvironment` with specified contracts for the given chain and contract version. 
 
 ```typescript
 // The config.ts is the same as in the previous example.
 import { walletClient, publicClient } from "./config.ts";
 import { sepolia as chain } from "viem/chains";
-import { DeleGatorEnvironment } from "@metamask/delegation-toolkit";
+import { SmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { 
   overrideDeployedEnvironment,
   deployDeleGatorEnvironment 
-} from "@metamask/delegation-toolkit/utils";
+} from "@metamask/smart-accounts-kit";
 
-const environment: DeleGatorEnvironment = await deployDeleGatorEnvironment(
+const environment: SmartAccountsEnvironment = await deployDeleGatorEnvironment(
   walletClient, 
   publicClient, 
   chain
@@ -240,15 +240,15 @@ If you've already deployed the contracts using a different method, you can creat
 - import { walletClient, publicClient } from "./config.ts";
 - import { sepolia as chain } from "viem/chains";
 // remove-end
-import { DeleGatorEnvironment } from "@metamask/delegation-toolkit";
+import { SmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { 
   overrideDeployedEnvironment,
   // remove-next-line
 - deployDeleGatorEnvironment
-} from "@metamask/delegation-toolkit/utils";
+} from "@metamask/smart-accounts-kit";
 
 // remove-start
-- const environment: DeleGatorEnvironment = await deployDeleGatorEnvironment(
+- const environment: SmartAccountsEnvironment = await deployDeleGatorEnvironment(
 -  walletClient, 
 -  publicClient, 
 -  chain
@@ -256,7 +256,7 @@ import {
 // remove-end
 
 // add-start
-+ const environment: DeleGatorEnvironment = {
++ const environment: SmartAccountsEnvironment = {
 +  SimpleFactory: "0x124..",
 +  // ...
 +  implementations: {
