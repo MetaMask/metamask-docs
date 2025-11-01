@@ -20,7 +20,7 @@ If the user accepts, MetaMask proceeds to upgrade the account and process the re
 :::note MetaMask Smart Accounts
 MetaMask Smart Accounts are [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) smart contract accounts that support programmable account behavior and advanced features such as multi-signature approvals, transaction batching, and custom security policies.
 
-See the [Smart Accounts Kit documentation](/delegation-toolkit) for more information about smart accounts and their capabilities.
+See the [Delegation Toolkit documentation](/delegation-toolkit) for more information about smart accounts and their capabilities.
 :::
 
 The key benefits of atomic batch transactions include:
@@ -223,7 +223,7 @@ In these cases, `atomic` is `true` but multiple receipts are returned.
 ## Resources
 
 - See the [MetaMask 7702/5792 Readiness dapp](https://7702playground.metamask.io/) to quickly test sending batch transactions.
-- See the [MetaMask Smart Accounts Kit documentation](/delegation-toolkit) for more information about MetaMask Smart Accounts and their capabilities.
+- See the [MetaMask Delegation Toolkit documentation](/delegation-toolkit) for more information about MetaMask Smart Accounts and their capabilities.
 - See the following topics in the MetaMask end user documentation:
   - [What is a smart account?](https://support.metamask.io/configure/accounts/what-is-a-smart-account/)
   - [How to switch to or revert from a smart account](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/)

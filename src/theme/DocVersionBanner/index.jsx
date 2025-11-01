@@ -31,7 +31,7 @@ function UnmaintainedVersionLabel({ siteTitle, versionMetadata }) {
         versionLabel: <b>{versionMetadata.label}</b>,
       }}>
       {
-        'This is documentation for the MetaMask Smart Accounts Kit version {versionLabel}, which is no longer actively maintained.'
+        'This is documentation for the Delegation Toolkit version {versionLabel}, which is no longer actively maintained.'
       }
     </Translate>
   )
