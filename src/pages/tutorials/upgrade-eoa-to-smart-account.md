@@ -7,7 +7,7 @@ date: Aug 22, 2025
 author: MetaMask Developer Relations
 ---
 
-This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
+This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](delegation-toolkit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
 You will use a provided template, which sets up MetaMask SDK with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
 
 ## Prerequisites
@@ -494,4 +494,4 @@ You have successfully used the SDK to upgrade a MetaMask EOA to a MetaMask smart
 
 - View the `feat-mm-sdk-final` branch of the [`MetaMask/7702-livestream-demo`](https://github.com/MetaMask/7702-livestream-demo/tree/feat-mm-sdk-final) repository for the completed implementation of this tutorial.
 - Watch the [live coding session](https://www.youtube.com/watch?v=crMqCb8RPEE) on YouTube, in which the MetaMask DevRel team walks through setting up EIP-7702 functionality from the initial template.
-- See the [Smart Accounts Kit EIP-7702 quickstart](/smart-accounts-kit/get-started/smart-account-quickstart/eip7702) to learn how to use the Smart Accounts Kit to upgrade an EOA to a MetaMask smart account.
+- See the [Smart Accounts Kit EIP-7702 quickstart](/delegation-toolkit/get-started/smart-account-quickstart/eip7702) to learn how to use the Smart Accounts Kit to upgrade an EOA to a MetaMask smart account.

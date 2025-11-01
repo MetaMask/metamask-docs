@@ -7,9 +7,9 @@ keywords: [install, MetaMask, delegation, smart accounts kit, smart, accounts]
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Install and set up the MetaMask Smart Accounts Kit
+# Install and set up the Smart Accounts Kit
 
-This page provides instructions to install and set up the MetaMask Smart Accounts Kit, enabling you to create and interact with [MetaMask Smart Accounts](../concepts/smart-accounts.md) into your dapp.
+This page provides instructions to install and set up the Smart Accounts Kit, enabling you to create and interact with [MetaMask Smart Accounts](../concepts/smart-accounts.md) into your dapp.
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ This page provides instructions to install and set up the MetaMask Smart Account
 
 ### 1. Install the Smart Accounts Kit
 
-Install the [MetaMask Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit):
+Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit):
 
 ```bash npm2yarn
 npm install @metamask/smart-accounts-kit
@@ -44,5 +44,5 @@ Add `@metamask/delegation-framework/=lib/metamask/delegation-framework/` in your
 
 ### 3. Get started
 
-You're now ready to start using the MetaMask Smart Accounts Kit.
+You're now ready to start using the Smart Accounts Kit.
 See the [MetaMask Smart Accounts quickstart](smart-account-quickstart/index.md) to walk through a simple example.

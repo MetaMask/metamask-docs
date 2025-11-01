@@ -35,7 +35,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
   } = useThemeConfig()
 
   const location = useLocation()
-  const isSmartAccountsKitDocs = location.pathname.startsWith('/smart-accounts-kit')
+  const isSmartAccountsKitDocs = location.pathname.startsWith('/delegation-toolkit')
   const isServicesOrDashboard = isPathInSections(
     location.pathname,
     SERVICES_DASHBOARD_CONFIG.sections
@@ -54,7 +54,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
       )
       versionDropdown = (
         <div className={styles.versionDropdownContainer}>
-          <SidebarVersionDropdown path="smart-accounts-kit" />
+          <SidebarVersionDropdown path="delegation-toolkit" />
         </div>
       )
     }

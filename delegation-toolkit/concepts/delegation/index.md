@@ -14,7 +14,7 @@ or externally owned account (EOA) to perform specific executions on its behalf.
 The account that grants the permission is called the *delegator account*, while the account that receives the permission
 is called the *delegate account*.
 
-The MetaMask Smart Accounts Kit follows the [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710) standard for smart contract delegation.
+The Smart Accounts Kit follows the [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710) standard for smart contract delegation.
 In addition, users can use [caveat enforcers](caveat-enforcers.md) to apply rules and restrictions to delegations.
 For example: Alice delegates the ability to spend her USDC to Bob, limiting the amount to 100 USDC.
 
@@ -65,7 +65,7 @@ You can create the following delegation types:
 
 ## Delegation Framework
 
-The MetaMask Smart Accounts Kit includes the Delegation Framework, which is a
+The Smart Accounts Kit includes the Delegation Framework, which is a
 [set of comprehensively audited smart contracts](https://github.com/MetaMask/delegation-framework) that
 collectively handle delegator account creation, the delegation lifecycle,
 and caveat enforcement.

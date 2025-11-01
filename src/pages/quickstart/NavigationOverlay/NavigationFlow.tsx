@@ -47,32 +47,32 @@ const navigationOptions: NavigationOption[] = [
   {
     id: 'smart-accounts-kit-1',
     title: 'I want to create a smart account',
-    description: 'Smart Accounts Kit',
-    link: '/smart-accounts-kit/get-started/smart-account-quickstart/',
+    description: 'Delegation Toolkit',
+    link: '/delegation-toolkit/get-started/smart-account-quickstart/',
   },
   {
     id: 'smart-accounts-kit-4',
     title: 'I want to perform executions on behalf of smart accounts',
-    description: 'Smart Accounts Kit',
-    link: '/smart-accounts-kit/guides/delegation/execute-on-smart-accounts-behalf',
+    description: 'Delegation Toolkit',
+    link: '/delegation-toolkit/guides/delegation/execute-on-smart-accounts-behalf',
   },
   {
     id: 'smart-accounts-kit-2',
     title: 'I want to perform executions on behalf of MetaMask users',
-    description: 'Smart Accounts Kit',
-    link: '/smart-accounts-kit/guides/erc7715/execute-on-metamask-users-behalf',
+    description: 'Delegation Toolkit',
+    link: '/delegation-toolkit/guides/erc7715/execute-on-metamask-users-behalf',
   },
   {
     id: 'smart-accounts-kit-3',
     title: 'I want to send gasless transactions',
-    description: 'Smart Accounts Kit',
-    link: '/smart-accounts-kit/guides/smart-accounts/send-gasless-transaction',
+    description: 'Delegation Toolkit',
+    link: '/delegation-toolkit/guides/smart-accounts/send-gasless-transaction',
   },
   {
     id: 'smart-accounts-kit-5',
     title: 'I want to convert EOAs to smart accounts',
-    description: 'Smart Accounts Kit',
-    link: '/smart-accounts-kit/get-started/smart-account-quickstart/eip7702',
+    description: 'Delegation Toolkit',
+    link: '/delegation-toolkit/get-started/smart-account-quickstart/eip7702',
   },
 ]
 
@@ -153,7 +153,7 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
           <Link href="/wallet" className={styles.quickLink}>
             💳 Embedded Wallets Docs
           </Link>
-          <Link href="/smart-accounts-kit" className={styles.quickLink}>
+          <Link href="/delegation-toolkit" className={styles.quickLink}>
             ⚡ Delegation Toolkit Docs
           </Link>
         </div>

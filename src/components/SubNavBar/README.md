@@ -95,7 +95,7 @@ That's it! The SubNavBar will automatically appear on pages matching your path p
 - **Wallet API** (`/wallet`) - Shows Wallet API sections
 - **Snaps** (`/snaps`) - Shows Snaps development sections
 - **Services** (`/services`) - Shows Infura services sections
-- **MetaMask Smart Accounts Kit** (`/smart-accounts-kit`) - Shows MetaMask Smart Accounts Kit sections
+- **Smart Accounts Kit** (`/delegation-toolkit`) - Shows MetaMask Smart Accounts Kit sections
 
 ## Styling
 

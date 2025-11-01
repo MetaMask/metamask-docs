@@ -8,7 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # Generate a multisig signature
 
-The MetaMask Smart Accounts Kit supports [Multisig smart accounts](../../concepts/smart-accounts.md#multisig-smart-account),
+The Smart Accounts Kit supports [Multisig smart accounts](../../concepts/smart-accounts.md#multisig-smart-account),
 allowing you to add multiple externally owned accounts (EOA) 
 signers with a configurable execution threshold. When the threshold 
 is greater than 1, you can collect signatures from the required signers 

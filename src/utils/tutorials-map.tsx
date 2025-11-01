@@ -2,7 +2,7 @@ export const tags = {
   web3Auth: 'web3auth',
   embeddedWallet: 'embedded wallets',
   metamaskSdk: 'metamask sdk',
-  smartAccountsKit: 'smart accounts kit',
+  delegationToolkit: 'delegation toolkit',
   infura: 'infura',
   snaps: 'snaps',
   web: 'web',
@@ -98,7 +98,7 @@ export const productMap = [
     value: tags.embeddedWallet,
   },
   {
-    label: 'Smart Accounts Kit',
-    value: tags.smartAccountsKit,
+    label: 'Delegation Toolkit',
+    value: tags.delegationToolkit,
   },
 ]

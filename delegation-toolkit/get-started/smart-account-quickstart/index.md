@@ -16,9 +16,9 @@ You can get started quickly with [MetaMask Smart Accounts](../../concepts/smart-
 
 ## Steps
 
-### 1. Install the toolkit
+### 1. Install the Smart Accounts Kit
 
-Install the [MetaMask Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit):
+Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit):
 
 ```bash npm2yarn
 npm install @metamask/smart-accounts-kit

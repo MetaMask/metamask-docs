@@ -7,9 +7,9 @@ keywords: [configure, smart accounts kit, bundler, paymaster, delegator environm
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Configure the MetaMask Smart Accounts Kit
+# Configure the Smart Accounts Kit
 
-The MetaMask Smart Accounts kit is highly configurable, providing support for custom [bundlers and paymasters](#configure-the-bundler).
+The Smart Accounts Kit is highly configurable, providing support for custom [bundlers and paymasters](#configure-the-bundler).
 You can also configure the [toolkit environment](#optional-configure-the-toolkit-environment) to interact with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework).
 
 ## Prerequisites

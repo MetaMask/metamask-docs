@@ -26,7 +26,7 @@ import styles from './styles.module.css'
 const DocSidebarMobileSecondaryMenu: NavbarSecondaryMenuComponent<Props> = ({ sidebar, path }) => {
   const mobileSidebar = useNavbarMobileSidebar()
   const location = useLocation()
-  const isSmartAccountsKitDocs = location.pathname.startsWith('/smart-accounts-kit')
+  const isSmartAccountsKitDocs = location.pathname.startsWith('/delegation-toolkit')
   const isServicesOrDashboard = isPathInSections(
     location.pathname,
     SERVICES_DASHBOARD_CONFIG.sections
@@ -42,7 +42,7 @@ const DocSidebarMobileSecondaryMenu: NavbarSecondaryMenuComponent<Props> = ({ si
             <SidebarStaticTitle title={DELEGATION_TOOLKIT_CONFIG.title} />
           </li>
           <li className={styles.versionDropdownContainer}>
-            <SidebarVersionDropdown path="smart-accounts-kit" />
+            <SidebarVersionDropdown path="delegation-toolkit" />
           </li>
         </>
       )}

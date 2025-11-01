@@ -52,8 +52,8 @@ export const SNAPS_CONFIG: SidebarStaticTitleProps = {
 }
 
 export const DELEGATION_TOOLKIT_CONFIG: SidebarStaticTitleProps = {
-  title: 'Smart Accounts Kit',
-  pathPattern: '/smart-accounts-kit',
+  title: 'Delegation Toolkit',
+  pathPattern: '/delegation-toolkit',
 }
 
 export function isPathInSections(

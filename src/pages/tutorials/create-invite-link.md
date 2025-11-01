@@ -2,7 +2,7 @@
 title: Create a social invite link
 image: 'img/tutorials/tutorials-banners/create-invite-link.png'
 description: Allow users to refer their friends to your dapp using an invite link.
-tags: [delegation, smart accounts kit, embedded wallets, social, invite, referral, link]
+tags: [delegation toolkit, smart accounts kit, embedded wallets, social, invite, referral, link]
 keywords: [delegation, smart accounts kit, social, invite, referral, link]
 date: Sep 8, 2025
 author: MetaMask Developer Relations
@@ -18,8 +18,8 @@ Bob can start using your dapp right away, without installing a wallet or paying 
 You'll enable this by:
 
 - Adding an [embedded wallet](/embedded-wallets) for instant onboarding.
-- Creating a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts) to create and redeem an invitation.
-- Creating an [open delegation](/smart-accounts-kit/concepts/delegation) to represent an invitation.
+- Creating a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts) to create and redeem an invitation.
+- Creating an [open delegation](/delegation-toolkit/concepts/delegation) to represent an invitation.
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ You'll enable this by:
 
 #### 1.1. Install dependencies
 
-Install the [MetaMask Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) and other dependencies in your project:
+Install the [Delegation Toolkit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) and other dependencies in your project:
 
 ```bash npm2yarn
 npm install @metamask/smart-accounts-kit @web3auth/modal wagmi @tanstack/react-query
@@ -132,8 +132,8 @@ const bundlerClient = createBundlerClient({
 ### 3. Create a smart account
 
 Create an account to create and redeem an invitation.
-This account will create a delegation, and must be a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts).
-This example uses a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account), which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
+This account will create a delegation, and must be a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts).
+This example uses a [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account), which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
 
 ```tsx
 import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit';
@@ -183,7 +183,7 @@ You can use the [MetaMask faucet](/developer-tools/faucet) to get Sepolia ETH.
 
 #### 4.3. Create an open root delegation
 
-Create an [open root delegation](/smart-accounts-kit/concepts/delegation) to represent an invitation.
+Create an [open root delegation](/delegation-toolkit/concepts/delegation) to represent an invitation.
 A root delegation is the first delegation in a chain of delegations, and an open root delegation grants permission to any account.
 In this example, the inviter creates an invitation that can be redeemed by any invitee, allowing the invitee to spend up to 0.001 ETH.
 
@@ -259,7 +259,7 @@ const decodedDelegation = decodeDelegation(encodedDelegation);
 
 #### 5.2. Redeem the delegation
 
-[Redeem the delegation](/smart-accounts-kit/guides/delegation/execute-on-smart-accounts-behalf/#7-redeem-the-delegation) by submitting a user operation from the smart account to the `DelegationManager` contract.
+[Redeem the delegation](/delegation-toolkit/guides/delegation/execute-on-smart-accounts-behalf/#7-redeem-the-delegation) by submitting a user operation from the smart account to the `DelegationManager` contract.
 Submitting the user operation deploys the account for first-time users.
 
 The delegation manager validates the delegation and executes delegated actions.
@@ -299,6 +299,6 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 ## Next steps
 
 - See [`invitation-link-example`](https://github.com/MetaMask/gator-examples/tree/feat/invitation-link-example/examples/invitation-link-example) on GitHub for a complete example dapp.
-- When creating an invitation, you can add more rules and restrictions using [delegation scopes](/smart-accounts-kit/guides/delegation/use-delegation-scopes) and [caveat enforcers](/smart-accounts-kit/guides/delegation/use-delegation-scopes/constrain-scope).
-- Learn more about [smart account implementations](/smart-accounts-kit/guides/smart-accounts/create-smart-account).
-- Learn more about [delegation types](/smart-accounts-kit/concepts/delegation/#delegation-types).
+- When creating an invitation, you can add more rules and restrictions using [delegation scopes](/delegation-toolkit/guides/delegation/use-delegation-scopes) and [caveat enforcers](/delegation-toolkit/guides/delegation/use-delegation-scopes/constrain-scope).
+- Learn more about [smart account implementations](/delegation-toolkit/guides/smart-accounts/create-smart-account).
+- Learn more about [delegation types](/delegation-toolkit/concepts/delegation/#delegation-types).
