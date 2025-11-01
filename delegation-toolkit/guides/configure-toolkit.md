@@ -117,7 +117,7 @@ export delegatorSmartAccount;
 See the changelog of the toolkit version you are using (in the left sidebar) for supported chains.
 :::
 
-Alternatively, you can use the [`getSmartAccountsEnvironment`](../reference/delegation/index.md#getdelegatorenvironment) function to resolve the environment.
+Alternatively, you can use the [`getSmartAccountsEnvironment`](../reference/delegation/index.md#getsmartaccountsenvironment) function to resolve the environment.
 This function is especially useful if your delegator is not a smart account when
 creating a [redelegation](../concepts/delegation/index.md#delegation-types).
 
