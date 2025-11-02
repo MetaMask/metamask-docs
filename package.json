@@ -94,7 +94,7 @@
     "@tsconfig/docusaurus": "^2.0.3",
     "@types/react-alert": "^7.0.6",
     "@types/react-modal": "^3.16.3",
-    "@typescript-eslint/parser": "^8.44.1",
+    "@typescript-eslint/parser": "^8.46.2",
     "eslint": "^9.35.0",
     "eslint-plugin-react": "^7.37.5",
     "stylelint": "^15.0.0 ",
