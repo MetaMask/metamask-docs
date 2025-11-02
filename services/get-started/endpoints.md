@@ -115,6 +115,7 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 
 | Network           | Description             | URL                                              |
 |-------------------|-------------------------|--------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://monad-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Testnet           | JSON-RPC over HTTPS     | `https://monad-testnet.infura.io/v3/<YOUR-API-KEY>`  |
 
 ## opBNB
