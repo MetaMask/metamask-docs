@@ -13,8 +13,8 @@ For example, Alice delegates to Bob the ability to call the `approve` function o
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../../configure-toolkit.md)
+- [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
+- [Configure the Smart Accounts Kit.](../../configure-toolkit.md)
 - [Create a delegator account.](../execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
 - [Create a delegate account.](../execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
 
@@ -29,7 +29,7 @@ See the [function call scope reference](../../../reference/delegation/delegation
 The following example sets the delegation scope to allow the delegate to call the `approve` function on the USDC token contract:
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 
 // USDC address on Sepolia.
 const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
@@ -61,7 +61,7 @@ You can include or exclude specific parameters to precisely define what parts of
 :::
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 import { encodeAbiParameters, erc20Abi } from "viem";
 
 // USDC address on Sepolia.
@@ -99,7 +99,7 @@ contract, with a specific spender address and an allowance value of 0. This effe
 revoking ERC-20 approvals for a specific spender.
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit";
+import { createDelegation } from "@metamask/smart-accounts-kit";
 import { encodeFunctionData, erc20Abi } from "viem";
 
 // USDC address on Sepolia.
