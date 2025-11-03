@@ -57,27 +57,113 @@ export default function CopyPageButton() {
       // Extract text content from the article
       let markdown = `# ${title}\n\n`;
 
+      // Helper to decode HTML entities
+      const decodeHTML = (html) => {
+        const txt = document.createElement('textarea');
+        txt.innerHTML = html;
+        return txt.value;
+      };
+
+      // Helper to extract text with inline code
+      const extractText = (element) => {
+        let result = '';
+        element.childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            result += node.textContent;
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            // Handle inline code
+            if (node.tagName === 'CODE' && node.parentElement.tagName !== 'PRE') {
+              result += `\`${decodeHTML(node.innerHTML)}\``;
+            } else if (node.tagName === 'STRONG' || node.tagName === 'B') {
+              result += `**${node.textContent}**`;
+            } else if (node.tagName === 'EM' || node.tagName === 'I') {
+              result += `*${node.textContent}*`;
+            } else if (node.tagName === 'A') {
+              result += `[${node.textContent}](${node.href})`;
+            } else if (node.tagName === 'BR') {
+              result += '\n';
+            } else {
+              result += extractText(node);
+            }
+          }
+        });
+        return result;
+      };
+
       // Get all content sections
-      const sections = article.querySelectorAll('h2, h3, p, ul, ol, pre, table');
+      const sections = article.querySelectorAll('h2, h3, h4, p, ul, ol, pre, blockquote');
+      const sectionsArray = Array.from(sections);
+      
       sections.forEach(section => {
         const tag = section.tagName.toLowerCase();
-        const text = section.textContent.trim();
+
+        // Skip hidden tab panels
+        if (section.hidden || section.closest('[hidden]')) {
+          return;
+        }
+        
+        // Skip elements inside tab buttons/navigation
+        if (section.closest('[role="tablist"]')) {
+          return;
+        }
+        
+        // Skip elements that are nested inside other sections we'll process
+        // For example, skip <p> or <pre> if they're inside an <ol>/<ul> we'll handle
+        if (tag === 'p' || tag === 'pre' || tag === 'blockquote') {
+          const parentList = section.closest('ol, ul');
+          if (parentList && sectionsArray.includes(parentList)) {
+            return; // Skip, we'll get this when we process the parent list
+          }
+        }
+        
+        // Skip elements inside closed details
+        const parentDetails = section.closest('details');
+        if (parentDetails && !parentDetails.open) {
+          return;
+        }
 
         if (tag === 'h2') {
+          const text = decodeHTML(section.innerHTML).replace(/<[^>]+>/g, '').trim();
           markdown += `\n## ${text}\n\n`;
         } else if (tag === 'h3') {
+          const text = decodeHTML(section.innerHTML).replace(/<[^>]+>/g, '').trim();
           markdown += `\n### ${text}\n\n`;
+        } else if (tag === 'h4') {
+          const text = decodeHTML(section.innerHTML).replace(/<[^>]+>/g, '').trim();
+          markdown += `\n#### ${text}\n\n`;
         } else if (tag === 'pre') {
-          const code = section.querySelector('code')?.textContent || text;
-          markdown += `\`\`\`\n${code}\n\`\`\`\n\n`;
-        } else if (tag === 'ul' || tag === 'ol') {
-          const items = section.querySelectorAll('li');
-          items.forEach(item => {
-            markdown += `- ${item.textContent.trim()}\n`;
+          // Use innerText to get the formatted code as displayed
+          const codeElement = section.querySelector('code');
+          if (codeElement) {
+            // Get language from class
+            const languageClass = codeElement.className.match(/language-(\w+)/);
+            const language = languageClass ? languageClass[1] : '';
+            const code = codeElement.innerText;
+            markdown += `\`\`\`${language}\n${code}\n\`\`\`\n\n`;
+          } else {
+            markdown += `\`\`\`\n${section.innerText}\n\`\`\`\n\n`;
+          }
+        } else if (tag === 'blockquote') {
+          const text = section.textContent.trim().split('\n');
+          text.forEach(line => {
+            if (line.trim()) {
+              markdown += `> ${line.trim()}\n`;
+            }
           });
           markdown += '\n';
-        } else {
-          markdown += `${text}\n\n`;
+        } else if (tag === 'ul' || tag === 'ol') {
+          const items = section.querySelectorAll(':scope > li');
+          items.forEach((item, index) => {
+            const prefix = tag === 'ol' ? `${index + 1}.` : '-';
+            const text = extractText(item);
+            markdown += `${prefix} ${text.trim()}\n`;
+          });
+          markdown += '\n';
+        } else if (tag === 'p') {
+          const text = extractText(section);
+          if (text.trim() && text.trim() !== 'Copy') {
+            markdown += `${text.trim()}\n\n`;
+          }
         }
       });
 
@@ -139,8 +225,35 @@ export default function CopyPageButton() {
 
       // Get all content sections
       const sections = article.querySelectorAll('h2, h3, h4, p, ul, ol, pre, blockquote');
+      const sectionsArray = Array.from(sections);
+      
       sections.forEach(section => {
         const tag = section.tagName.toLowerCase();
+
+        // Skip hidden tab panels
+        if (section.hidden || section.closest('[hidden]')) {
+          return;
+        }
+        
+        // Skip elements inside tab buttons/navigation
+        if (section.closest('[role="tablist"]')) {
+          return;
+        }
+        
+        // Skip elements that are nested inside other sections we'll process
+        // For example, skip <p> or <pre> if they're inside an <ol>/<ul> we'll handle
+        if (tag === 'p' || tag === 'pre' || tag === 'blockquote') {
+          const parentList = section.closest('ol, ul');
+          if (parentList && sectionsArray.includes(parentList)) {
+            return; // Skip, we'll get this when we process the parent list
+          }
+        }
+        
+        // Skip elements inside closed details
+        const parentDetails = section.closest('details');
+        if (parentDetails && !parentDetails.open) {
+          return;
+        }
 
         if (tag === 'h2') {
           const text = decodeHTML(section.innerHTML).replace(/<[^>]+>/g, '').trim();
