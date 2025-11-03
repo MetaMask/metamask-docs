@@ -93,10 +93,25 @@
 }
 
 @media (max-width: 996px) {
-  .dropdown { min-width: 260px; max-width: 90vw; }
-  .alignCenter { right: auto; left: 50%; transform: translateX(-50%); }
-  .alignRight { right: 0; left: auto; transform: none; }
-  .alignLeft { left: 0; right: auto; transform: none; }
+  .dropdown {
+    min-width: 260px;
+    max-width: 90vw;
+  }
+  .alignCenter {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .alignRight {
+    right: 0;
+    left: auto;
+    transform: none;
+  }
+  .alignLeft {
+    left: 0;
+    right: auto;
+    transform: none;
+  }
 }
 
 .dropdownItem {
