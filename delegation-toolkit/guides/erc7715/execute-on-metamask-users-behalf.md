@@ -18,7 +18,7 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
 - [Install MetaMask Flask 13.5.0 or later.](/snaps/get-started/install-flask)
 
 ### 1. Set up a Wallet Client
@@ -31,7 +31,7 @@ permissions from the user.
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
 
 const walletClient = createWalletClient({
   transport: custom(window.ethereum),
@@ -67,7 +67,7 @@ import { privateKeyToAccount } from "viem/accounts";
 import { 
   toMetaMaskSmartAccount, 
   Implementation 
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const privateKey = "0x...";
 const account = privateKeyToAccount(privateKey);
@@ -110,7 +110,7 @@ ERC-7710 delegation is one of the core features supported only by MetaMask Smart
 :::
 
 ```typescript
-import { getDeleGatorEnvironment } from "@metamask/delegation-toolkit";
+import { getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { sepolia as chain } from "viem/chains";
 
 const addresses = await walletClient.requestAddresses();
@@ -128,7 +128,7 @@ if (code) {
   // You need to remove the first 8 characters (0xef0100) to get the delegator address.
   const delegatorAddress = `0x${code.substring(8)}`;
 
-  const statelessDelegatorAddress = getDeleGatorEnvironment(chain.id)
+  const statelessDelegatorAddress = getSmartAccountsEnvironment(chain.id)
   .implementations
   .EIP7702StatelessDeleGatorImpl;
 
@@ -198,7 +198,7 @@ The toolkit provides public actions for both of the clients which can be used to
 
 ```typescript
 import { createBundlerClient } from "viem/account-abstraction";
-import { erc7710BundlerActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/experimental";
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
@@ -213,7 +213,7 @@ const bundlerClient = createBundlerClient({
 
 ```typescript
 import { createWalletClient, http } from "viem";
-import { erc7710WalletActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7710WalletActions } from "@metamask/smart-accounts-kit/experimental";
 import { sepolia as chain } from "viem/chains";
 
 const sessionAccountWalletClient = createWalletClient({

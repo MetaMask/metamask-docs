@@ -129,14 +129,6 @@ Even with a DKLS19 solution, it takes 4-5 seconds to sign with 5 nodes holding t
 You can reduce the number of nodes and use a high quality server, but that still cannot match the speed of single key signing.
 MPC's decentralization benefits are real, but for this product goal — fast server-side signing with tight policy and attestation — the latency and complexity tradeoffs are unnecessary.
 
-### Why not smart accounts?
-
-[Smart accounts](/delegation-toolkit) with ERC-7715 permissions can resolve most of these issues, but they have their limitations.
-Currently, smart accounts cannot work cross-chain and with non-EVM networks like Solana.
-The operations to update policies would be significantly more expensive than a TEE policy engine.
-Performance would also be a bottleneck for different chains.
-General trading bots are also used for high-frequency trading, which is where the issue lies.
-
 ## Server wallets and ERC-8004
 
 With [ERC‑8004](https://eips.ethereum.org/EIPS/eip-8004) in action, every AI agent needs a signing identity that can register itself onchain and prove control of that identity when it interacts, so others can discover, trust, and audit the agent's actions across ecosystems.
