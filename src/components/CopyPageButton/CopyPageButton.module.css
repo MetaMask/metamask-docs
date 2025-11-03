@@ -5,10 +5,12 @@
   min-height: 48px; /* Ensure minimum height for button */
 }
 
-.h1Wrapper h1 {
-  /* Don't override the default H1 margin-bottom */
-  /* Add padding-right to prevent text from going under the button */
-  padding-right: 180px;
+@media (min-width: 997px) {
+  .h1Wrapper h1 {
+    /* Don't override the default H1 margin-bottom */
+    /* Add padding-right to prevent text from going under the button */
+    padding-right: 180px;
+  }
 }
 
 /* Button container styles */
