@@ -73,8 +73,8 @@ import { createPublicClient, http, createBundlerClient } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
 import { createBundlerClient } from "viem/account-abstraction";
-import { erc7710BundlerActions } from "@metamask/delegation-toolkit/experimental";
-import { toMetaMaskSmartAccount, Implementation } from "@metamask/delegation-toolkit";
+import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/experimental";
+import { toMetaMaskSmartAccount, Implementation } from "@metamask/smart-accounts-kit";
 
 export const publicClient = createPublicClient({
   chain: chain,

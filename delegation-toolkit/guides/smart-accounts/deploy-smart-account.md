@@ -13,12 +13,12 @@ the first user operation, or manually deploy the account.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
 - [Create a MetaMask smart account.](create-smart-account.md) 
 
 ## Deploy with the first user operation
 
-When you send the first user operation from a smart account, the Delegation Toolkit checks whether the account is already deployed. If the account 
+When you send the first user operation from a smart account, the Smart Accounts Kit checks whether the account is already deployed. If the account 
 is not deployed, the toolkit adds the `initCode` to the user operation to deploy the account within the 
 same operation. Internally, the `initCode` is encoded using the `factory` and `factoryData`. 
 
@@ -58,7 +58,7 @@ import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 
 const publicClient = createPublicClient({
@@ -122,7 +122,7 @@ import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 
 const publicClient = createPublicClient({
