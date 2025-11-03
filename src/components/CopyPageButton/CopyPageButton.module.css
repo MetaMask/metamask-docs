@@ -11,6 +11,12 @@
   padding-right: 180px;
 }
 
+/* Button container styles */
+.container {
+  position: relative;
+  display: inline-block;
+}
+
 .h1Wrapper .container {
   position: absolute;
   top: 0;
@@ -22,12 +28,6 @@
     /* Less padding on tablet/mobile since button is icon-only */
     padding-right: 60px;
   }
-}
-
-/* Button container styles */
-.container {
-  position: relative;
-  display: inline-block;
 }
 
 .mainButton {
@@ -93,14 +93,10 @@
 }
 
 @media (max-width: 996px) {
-  .dropdown {
-    /* Center the dropdown on mobile/tablet */
-    right: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: 260px;
-    max-width: 90vw;
-  }
+  .dropdown { min-width: 260px; max-width: 90vw; }
+  .alignCenter { right: auto; left: 50%; transform: translateX(-50%); }
+  .alignRight { right: 0; left: auto; transform: none; }
+  .alignLeft { left: 0; right: auto; transform: none; }
 }
 
 .dropdownItem {
