@@ -92,6 +92,17 @@
   backdrop-filter: blur(10px);
 }
 
+@media (max-width: 996px) {
+  .dropdown {
+    /* Center the dropdown on mobile/tablet */
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 260px;
+    max-width: 90vw;
+  }
+}
+
 .dropdownItem {
   display: flex;
   align-items: flex-start;

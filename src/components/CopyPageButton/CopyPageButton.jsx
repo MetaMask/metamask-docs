@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './CopyPageButton.module.css';
 
-export default function CopyPageButton() {
+export default function CopyPageButton({ standalone = false }) {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const containerRef = useRef(null);
@@ -23,7 +23,12 @@ export default function CopyPageButton() {
   }, [isOpen]);
 
   useEffect(() => {
-    // Find the H1 element and wrap it with positioning
+    // Skip H1 wrapping if standalone mode (for tutorial pages)
+    if (standalone) {
+      return;
+    }
+
+    // Find the H1 element and wrap it with positioning (for doc pages)
     const h1 = document.querySelector('article h1');
     if (!h1 || h1.parentElement?.classList.contains(styles.h1Wrapper)) {
       return;
@@ -43,12 +48,12 @@ export default function CopyPageButton() {
     if (containerRef.current) {
       wrapper.appendChild(containerRef.current);
     }
-  }, []);
+  }, [standalone]);
 
   const handleCopyMarkdown = async () => {
     try {
-      // Get the main article content
-      const article = document.querySelector('article');
+      // Get the main content area (article for docs, .markdown for tutorials)
+      const article = document.querySelector('article') || document.querySelector('.markdown');
       if (!article) return;
 
       // Get the page title
@@ -180,8 +185,8 @@ export default function CopyPageButton() {
 
   const handleViewMarkdown = () => {
     try {
-      // Get the main article content
-      const article = document.querySelector('article');
+      // Get the main content area (article for docs, .markdown for tutorials)
+      const article = document.querySelector('article') || document.querySelector('.markdown');
       if (!article) return;
 
       // Get the page title
