@@ -1,0 +1,136 @@
+/* H1 Wrapper styles */
+.h1Wrapper {
+  position: relative;
+  margin-bottom: 1.5rem; /* Maintain spacing after H1 */
+  min-height: 48px; /* Ensure minimum height for button */
+}
+
+.h1Wrapper h1 {
+  /* Don't override the default H1 margin-bottom */
+  /* Add padding-right to prevent text from going under the button */
+  padding-right: 180px;
+}
+
+.h1Wrapper .container {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@media (max-width: 996px) {
+  .h1Wrapper h1 {
+    /* Less padding on tablet/mobile since button is icon-only */
+    padding-right: 60px;
+  }
+}
+
+/* Button container styles */
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.mainButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: rgb(255 255 255 / 5%);
+  border: 1px solid rgb(255 255 255 / 15%);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ifm-font-color-base);
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  min-width: 160px;
+}
+
+@media (max-width: 996px) {
+  .mainButton {
+    min-width: auto;
+    padding: 12px;
+    gap: 0;
+  }
+  
+  .mainButton span {
+    display: none;
+  }
+  
+  .mainButton .arrow {
+    display: none;
+  }
+}
+
+.mainButton:hover {
+  background: rgb(255 255 255 / 10%);
+  border-color: rgb(255 255 255 / 25%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+}
+
+.arrow {
+  transition: transform 0.2s ease;
+}
+
+.mainButton:hover .arrow {
+  transform: translateY(1px);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 280px;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid rgb(255 255 255 / 15%);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 25%);
+  z-index: 1000;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  color: var(--ifm-font-color-base);
+}
+
+.dropdownItem:last-child {
+  border-bottom: none;
+}
+
+.dropdownItem:hover {
+  background: rgb(255 255 255 / 5%);
+  transform: translateX(2px);
+}
+
+.dropdownItem svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.itemTitle {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+  color: var(--ifm-font-color-base);
+}
+
+.itemDescription {
+  font-size: 12px;
+  color: var(--ifm-color-emphasis-700);
+  opacity: 0.7;
+}
+
