@@ -5,7 +5,7 @@
   justify-content: center;
   overflow: visible;
   width: 95%;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
   gap: 10px;
 }
 
@@ -169,7 +169,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 1rem;
   position: relative;
   z-index: 100;
   overflow: visible;
