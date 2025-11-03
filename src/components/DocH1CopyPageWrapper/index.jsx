@@ -1,3 +1,20 @@
+/**
+ * DocH1CopyPageWrapper
+ *
+ * Purpose:
+ * - Positions the CopyPageButton next to the document H1 on docs pages.
+ *
+ * Rationale:
+ * - Keeps CopyPageButton focused on presentation + markdown extraction only.
+ * - Avoids doc-vs-tutorial branching or DOM mutations inside the button.
+ * - Runs only on Doc pages (wired in DocItem/Layout), so timing/targets are reliable.
+ *
+ * Behavior:
+ * - Wraps the first `article h1` in a container and moves the button into it.
+ * - Enables absolute positioning via CSS without affecting tutorials.
+ * - No UI is rendered; this component only performs safe DOM positioning and
+ *   guards against double wrapping.
+ */
 import React, { useEffect, useRef } from 'react'
 import styles from '../CopyPageButton/CopyPageButton.module.css'
 
