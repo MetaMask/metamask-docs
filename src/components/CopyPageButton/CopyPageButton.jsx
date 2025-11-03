@@ -93,38 +93,110 @@ export default function CopyPageButton() {
   };
 
   const handleViewMarkdown = () => {
-    const article = document.querySelector('article');
-    if (!article) return;
+    try {
+      // Get the main article content
+      const article = document.querySelector('article');
+      if (!article) return;
 
-    const title = document.querySelector('h1')?.textContent || 'Documentation';
-    let markdown = `# ${title}\n\n`;
+      // Get the page title
+      const title = document.querySelector('h1')?.textContent || 'Documentation';
 
-    const sections = article.querySelectorAll('h2, h3, p, ul, ol, pre, table');
-    sections.forEach(section => {
-      const tag = section.tagName.toLowerCase();
-      const text = section.textContent.trim();
+      // Extract text content from the article
+      let markdown = `# ${title}\n\n`;
 
-      if (tag === 'h2') {
-        markdown += `\n## ${text}\n\n`;
-      } else if (tag === 'h3') {
-        markdown += `\n### ${text}\n\n`;
-      } else if (tag === 'pre') {
-        const code = section.querySelector('code')?.textContent || text;
-        markdown += `\`\`\`\n${code}\n\`\`\`\n\n`;
-      } else if (tag === 'ul' || tag === 'ol') {
-        const items = section.querySelectorAll('li');
-        items.forEach(item => {
-          markdown += `- ${item.textContent.trim()}\n`;
+      // Helper to decode HTML entities
+      const decodeHTML = (html) => {
+        const txt = document.createElement('textarea');
+        txt.innerHTML = html;
+        return txt.value;
+      };
+
+      // Helper to extract text with inline code
+      const extractText = (element) => {
+        let result = '';
+        element.childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            result += node.textContent;
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            // Handle inline code
+            if (node.tagName === 'CODE' && node.parentElement.tagName !== 'PRE') {
+              result += `\`${decodeHTML(node.innerHTML)}\``;
+            } else if (node.tagName === 'STRONG' || node.tagName === 'B') {
+              result += `**${node.textContent}**`;
+            } else if (node.tagName === 'EM' || node.tagName === 'I') {
+              result += `*${node.textContent}*`;
+            } else if (node.tagName === 'A') {
+              result += `[${node.textContent}](${node.href})`;
+            } else if (node.tagName === 'BR') {
+              result += '\n';
+            } else {
+              result += extractText(node);
+            }
+          }
         });
-        markdown += '\n';
-      } else {
-        markdown += `${text}\n\n`;
-      }
-    });
+        return result;
+      };
 
-    // Open in new window
-    const win = window.open('', '_blank');
-    win.document.write(`<pre style="white-space: pre-wrap; word-wrap: break-word; font-family: monospace; padding: 20px;">${markdown}</pre>`);
+      // Get all content sections
+      const sections = article.querySelectorAll('h2, h3, h4, p, ul, ol, pre, blockquote');
+      sections.forEach(section => {
+        const tag = section.tagName.toLowerCase();
+
+        if (tag === 'h2') {
+          const text = decodeHTML(section.innerHTML).replace(/<[^>]+>/g, '').trim();
+          markdown += `\n## ${text}\n\n`;
+        } else if (tag === 'h3') {
+          const text = decodeHTML(section.innerHTML).replace(/<[^>]+>/g, '').trim();
+          markdown += `\n### ${text}\n\n`;
+        } else if (tag === 'h4') {
+          const text = decodeHTML(section.innerHTML).replace(/<[^>]+>/g, '').trim();
+          markdown += `\n#### ${text}\n\n`;
+        } else if (tag === 'pre') {
+          // Use innerText to get the formatted code as displayed
+          const codeElement = section.querySelector('code');
+          if (codeElement) {
+            // Get language from class
+            const languageClass = codeElement.className.match(/language-(\w+)/);
+            const language = languageClass ? languageClass[1] : '';
+            const code = codeElement.innerText;
+            markdown += `\`\`\`${language}\n${code}\n\`\`\`\n\n`;
+          } else {
+            markdown += `\`\`\`\n${section.innerText}\n\`\`\`\n\n`;
+          }
+        } else if (tag === 'blockquote') {
+          const text = section.textContent.trim().split('\n');
+          text.forEach(line => {
+            if (line.trim()) {
+              markdown += `> ${line.trim()}\n`;
+            }
+          });
+          markdown += '\n';
+        } else if (tag === 'ul' || tag === 'ol') {
+          const items = section.querySelectorAll(':scope > li');
+          items.forEach((item, index) => {
+            const prefix = tag === 'ol' ? `${index + 1}.` : '-';
+            const text = extractText(item);
+            markdown += `${prefix} ${text.trim()}\n`;
+          });
+          markdown += '\n';
+        } else if (tag === 'p') {
+          const text = extractText(section);
+          if (text.trim() && text.trim() !== 'Copy') {
+            markdown += `${text.trim()}\n\n`;
+          }
+        }
+      });
+
+      // Open in new window with escaped HTML
+      const win = window.open('', '_blank');
+      const escapedMarkdown = markdown
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      win.document.write(`<pre style="white-space: pre-wrap; word-wrap: break-word; font-family: monospace; padding: 20px;">${escapedMarkdown}</pre>`);
+    } catch (err) {
+      console.error('Failed to view markdown:', err);
+    }
   };
 
   return (
