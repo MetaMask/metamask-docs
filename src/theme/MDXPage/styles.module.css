@@ -3,9 +3,9 @@
   flex-flow: column wrap;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
   width: 95%;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
   gap: 10px;
 }
 
@@ -162,6 +162,16 @@
   border-top: 1px solid var(--w3a-border-light-color);
   border-bottom: 1px solid var(--w3a-border-light-color);
   gap: 10px;
+}
+
+.copyButtonWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 100;
+  overflow: visible;
 }
 
 .authorName {
