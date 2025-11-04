@@ -6,6 +6,7 @@ tags: [delegation toolkit, smart accounts kit, passkey, backup signer, smart acc
 keywords: [delegation, smart accounts kit, passkey, webauthn, P-256, backup signer, smart account]
 date: Aug 27, 2025
 author: MetaMask Developer Relations
+discourseTopicId: 2612
 ---
 
 This tutorial walks you through using a passkey as a backup signer for your [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts).
@@ -26,7 +27,7 @@ This tutorial walks you through adding a passkey signer to an already deployed s
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 
 ## Steps
 
@@ -90,8 +91,8 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 // Deploy the smart account by sending a user operation.
 // Appropriate fee per gas must be determined for the bundler being used.
-const maxFeePerGas = 1n;
-const maxPriorityFeePerGas = 1n;
+const maxFeePerGas = 1n
+const maxPriorityFeePerGas = 1n
 
 const userOperationHash = await bundlerClient.sendUserOperation({
   account: smartAccount,

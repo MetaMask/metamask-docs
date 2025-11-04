@@ -37,6 +37,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
     date,
     wrapperClassName,
     communityPortalTopicId,
+    discourse_topic_id,
   } = frontMatter
   const url = `https://metamask.io${permalink}`
   const facebookLink = `https://www.facebook.com/sharer/sharer.php?${url}`
@@ -59,7 +60,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
             <div className="row">
               <div className="col col--8 col--offset-1">
                 <div className={styles.titleContainer}>
-                  {/* <img className={styles.cover} src={baseUrl + image} alt="Cover" /> */}
+                  <img className={styles.cover} src={"https://docs.metamask.io/" + image} alt="Cover" />
                   <div className={styles.titleContainer}>
                     <h1 className={styles.title}>{title}</h1>
                     <div className={styles.topMenu}>
@@ -163,7 +164,11 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
                     )}
                   </BrowserOnly>
                 </div>
-                <DiscourseComment postUrl={url} />
+                <DiscourseComment 
+                  postUrl={url}
+                  discourseTopicId={discourse_topic_id}
+                  metadata={{ title, image, description, tags, author, date }}
+                />
               </div>
               {MDXPageContent.toc && (
                 <div className="col col--3" style={{ paddingRight: '30px' }}>

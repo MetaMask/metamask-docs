@@ -6,6 +6,7 @@ tags: [delegation toolkit, smart accounts kit, ERC-20 paymaster, smart accounts]
 keywords: [delegation, smart accounts kit, ERC-20 paymaster, smart accounts, USDC, ERC-4337]
 date: Sep 2, 2025
 author: MetaMask Developer Relations
+discourseTopicId: 2602
 ---
 
 This tutorial walks you through using an ERC-20 paymaster with [MetaMask Smart Accounts](/delegation-toolkit/concepts/smart-accounts), enabling users to pay gas fees in USDC.
