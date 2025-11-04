@@ -81,7 +81,7 @@ export default function DiscourseComment(props) {
               const metaWords = new Set(metaTitleNorm.split(' ').filter(w => w.length > 3))
               const commonWords = [...topicWords].filter(w => metaWords.has(w))
               const wordOverlap =
-                topicWords.size > 0
+                topicWords.size > 0 && metaWords.size > 0
                   ? commonWords.length / Math.min(topicWords.size, metaWords.size)
                   : 0
 
