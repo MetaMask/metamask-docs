@@ -385,7 +385,7 @@ const config = {
             position: 'right',
           },
           {
-            to: 'https://community.metamask.io/',
+            to: 'https://builder.metamask.io/',
             label: 'Help ↗',
             position: 'right',
           },
@@ -462,7 +462,7 @@ const config = {
               },
               {
                 label: 'Delegation Toolkit GitHub',
-                href: 'https://github.com/MetaMask/delegation-toolkit',
+                href: 'https://github.com/MetaMask/smart-accounts-kit',
               },
               {
                 label: 'MetaMask mobile GitHub',

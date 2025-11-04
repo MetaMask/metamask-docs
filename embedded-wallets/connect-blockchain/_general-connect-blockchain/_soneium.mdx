@@ -1,37 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet (Minato)", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Minato Testnet", value: "minato" },
   ]}
 >
+<TabItem value="mainnet">
 
-<TabItem
-  value="mainnet"
->
-
-- Chain ID: 0x74c (hex of 1868)
-- Public RPC URL: https://mainnet-rpc.soneium.org (Avoid using public rpcTarget in production)
-- Display Name: Soneium Mainnet
-- Block Explorer Link: https://mainnet-explorer.soneium.org
-- Ticker: SONE
-- Ticker Name: Soneium
+- **Chain ID:** 0x74c
+- **Public RPC URL:** https://mainnet-rpc.soneium.org
+- **Display Name:** Soneium Mainnet
+- **Block Explorer Link:** https://mainnet-explorer.soneium.org
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
 
 </TabItem>
 
-<TabItem
-  value="testnet"
->
+<TabItem value="minato">
 
-- Chain ID: 0x79a (hex of 1946)
-- Public RPC URL: https://testnet-rpc.soneium.org (Avoid using public rpcTarget in production)
-- Display Name: Soneium Testnet (Minato)
-- Block Explorer Link: https://testnet-explorer.soneium.org
-- Ticker: SONE
-- Ticker Name: Soneium
+- **Chain ID:** 0x79a
+- **Public RPC URL:** https://testnet-rpc.soneium.org
+- **Display Name:** Soneium Minato Testnet
+- **Block Explorer Link:** https://testnet-explorer.soneium.org
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
 
 </TabItem>
 </Tabs>

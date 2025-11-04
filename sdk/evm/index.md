@@ -29,6 +29,11 @@ title: 'RainbowKit',
 description: 'Set up the SDK in a JavaScript and RainbowKit dapp.',
 },
 {
+href: '/sdk/evm/connect/guides/connectkit',
+title: 'ConnectKit',
+description: 'Set up the SDK in a JavaScript and ConnectKit dapp.',
+},
+{
 href: '/sdk/evm/connect/guides/react-native',
 title: 'React Native',
 description: 'Set up the SDK in a React Native or Expo dapp.',

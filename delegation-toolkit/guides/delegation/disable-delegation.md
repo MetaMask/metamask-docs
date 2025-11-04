@@ -20,7 +20,7 @@ delegation, the transaction will revert, preventing him from spending Alice's US
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
 - [Create a delegator account.](execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
 - [Create a delegate account.](execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
 
@@ -35,7 +35,7 @@ Delegation Manager to disable the delegation.
 <TabItem value="example.ts">
 
 ```typescript
-import { DelegationManager } from '@metamask/delegation-toolkit/contracts';
+import { DelegationManager } from '@metamask/smart-accounts-kit/contracts';
 import { environment, delegation, bundlerClient } from "./config.ts";
 
 const disableDelegationData = DelegationManager.encode.disableDelegation({
@@ -66,9 +66,9 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 import { sepolia as chain } from 'viem/chains'
 import { createPublicClient, http, parseEther } from 'viem'
 import { createBundlerClient } from 'viem/account-abstraction'
-import { getDeleGatorEnvironment, createDelegation } from '@metamask/delegation-toolkit'
+import { getSmartAccountsEnvironment, createDelegation } from '@metamask/smart-accounts-kit'
 
-export const environment = getDeleGatorEnvironment(chain.id)
+export const environment = getSmartAccountsEnvironment(chain.id)
 
 const currentTime = Math.floor(Date.now() / 1000)
 
@@ -91,7 +91,7 @@ const publicClient = createPublicClient({
 
 export const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http('https://api.pimlico.io/v2/11155111/rpc')
+  transport: http('https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>')
 });
 ```
 

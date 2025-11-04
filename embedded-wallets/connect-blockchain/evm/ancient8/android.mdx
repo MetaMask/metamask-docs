@@ -8,13 +8,12 @@ description: 'Integrate Embedded Wallets with the Ancient8 Blockchain in Android
 ---
 
 import EVMInteraction from '../../_android-connect-blockchain/_evm-interaction.mdx'
+import ChainDetailsAncient8 from '../../_general-connect-blockchain/_ancient8.mdx'
 
-While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) on Android, the private key is available in the SDK state after successful authorization. Use it to derive the user's address and interact with the [Ancient8](https://ancient8.gg) blockchain for signing and JSON-RPC calls.
+While using the Web3Auth Android SDK, you get the private key within the user scope after successful authorization. This private key can be used to retrieve the user's address, and interact with [Ancient8](https://ethereum.org/) to make any blockchain calls. We have highlighted a few here for getting you started quickly on that.
 
-::::note
+## Chain Details for Ancient8
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
-
-::::
+<ChainDetailsAncient8 />
 
 <EVMInteraction />

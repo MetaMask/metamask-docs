@@ -13,7 +13,7 @@ They incorporate significant enhancements that improve user experience and provi
 flexibility in account management and transaction execution.
 
 Viem's Account Abstraction API allows a developer to specify an array of `Calls` that will be executed as a user operation via Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
-The MetaMask Delegation Toolkit encodes and executes the provided calls.
+The MetaMask Smart Accounts Kit encodes and executes the provided calls.
 
 User operations are not directly sent to the network.
 Instead, they are sent to a bundler, which validates, optimizes, and aggregates them before network submission.
@@ -25,7 +25,7 @@ If a user operation is sent from a MetaMask smart account that has not been depl
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
 - [Create a MetaMask smart account.](create-smart-account.md)
 
 ## Send a user operation
@@ -72,7 +72,7 @@ import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 
 const publicClient = createPublicClient({
@@ -127,7 +127,7 @@ import { bundlerClient, smartAccount } from "./config.ts" // The config.ts is th
 
 // add-start
 + const pimlicoClient = createPimlicoClient({
-+   transport: http("https://api.pimlico.io/v2/11155111/rpc"), // You can get the API Key from the Pimlico dashboard.
++   transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>"), // You can get the API Key from the Pimlico dashboard.
 + });
 +
 + const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();
@@ -159,7 +159,7 @@ import { createPimlicoClient } from "permissionless/clients/pimlico";
 import { bundlerClient, smartAccount } from "./config.ts" // The config.ts is the same as in the previous example.
 
 const pimlicoClient = createPimlicoClient({
-  transport: http("https://api.pimlico.io/v2/11155111/rpc"), // You can get the API Key from the Pimlico dashboard.
+  transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>"), // You can get the API Key from the Pimlico dashboard.
 });
 
 const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();

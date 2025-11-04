@@ -2,8 +2,8 @@
 title: Use an ERC-20 paymaster with a smart account
 image: 'img/tutorials/tutorials-banners/use-erc20-paymaster.png'
 description: Enable users to pay gas fees with an ERC-20 token using a smart account and paymaster.
-tags: [delegation toolkit, ERC-20 paymaster, smart accounts]
-keywords: [delegation toolkit, ERC-20 paymaster, smart accounts, USDC, ERC-4337]
+tags: [delegation toolkit, smart accounts kit, ERC-20 paymaster, smart accounts]
+keywords: [delegation, smart accounts kit, ERC-20 paymaster, smart accounts, USDC, ERC-4337]
 date: Sep 2, 2025
 author: MetaMask Developer Relations
 ---
@@ -27,12 +27,12 @@ This removes the need for users to hold native tokens, allowing them to perform 
 
 ## Steps
 
-### 1. Install the toolkit
+### 1. Install the Delegation Toolkit
 
-Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) in your project:
+Install the [Delegation Toolkit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) in your project:
 
 ```bash npm2yarn
-npm install @metamask/delegation-toolkit
+npm install @metamask/smart-accounts-kit
 ```
 
 ### 2. Create a Public Client
@@ -93,7 +93,7 @@ Create a [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create
 A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit";
+import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
 import { privateKeyToAccount } from "viem/accounts";
 
 const account = privateKeyToAccount("0x...");
@@ -107,7 +107,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 });
 ```
 
-Fund the account with some Sepolia USDC to pay gas fees.
+Fund the smart account with some Sepolia USDC to pay gas fees.
 
 :::note
 You can use [Circle's faucet](https://faucet.circle.com/) to get Sepolia USDC.

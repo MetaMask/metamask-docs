@@ -1,76 +1,21 @@
 ---
-title: Integrate Embedded Wallets with the Astar zKyoto Testnet in iOS/Swift Applications
+title: Integrate Embedded Wallets with the Astar Zkyoto Blockchain in iOS/Swift Applications
 sidebar_label: iOS
-image: 'img/embedded-wallets/banners/zkevm.png'
+image: 'img/embedded-wallets/banners/astar-zkyoto.png'
 
-keywords: [ios, swift, zkyoto, astar, web3auth, authentication, blockchain]
-description: 'Integrate Embedded Wallets with the Astar zKyoto Testnet in iOS/Swift Applications | Embedded Wallets'
+keywords: [ios, swift, astar-zkyoto, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the Astar Zkyoto Blockchain in iOS/Swift Applications | Embedded Wallets'
 ---
 
-import InstallationSnippet from '../../_ios-connect-blockchain/_evm-installation.mdx'
-import GetAccountSnippet from '../../_ios-connect-blockchain/_evm-get-account.mdx'
-import UserInfoSnippet from '../../_ios-connect-blockchain/_evm-user-info.mdx'
-import GetBalanceSnippet from '../../_ios-connect-blockchain/_evm-get-balance.mdx'
-import InitialisationSnippet from '../../_ios-connect-blockchain/_evm-initialisation.mdx'
-import SignMessageSnippet from '../../_ios-connect-blockchain/_evm-sign-message.mdx'
-import SendTransactionSnippet from '../../_ios-connect-blockchain/_evm-send-transaction.mdx'
+import EVMInteraction from '../../_ios-connect-blockchain/_evm-interaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsAstarZkyoto from '../../_general-connect-blockchain/_astar-zkyoto.mdx'
 
-While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) on iOS, the private key is available in the SDK state. Use it to derive the user's address and interact with the [Astar zKyoto](https://docs.astar.network/docs/build/zkEVM/quickstart) testnet for signing and JSON-RPC calls.
+While using the Web3Auth iOS SDK, you get the private key within the user scope after successful authorization. This private key can be used to retrieve the user's address, and interact with [Astar Zkyoto](https://ethereum.org/) to make any blockchain calls. We have highlighted a few here for getting you started quickly on that.
 
-::::note
+## Chain Details for Astar Zkyoto
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+<ChainDetailsAstarZkyoto />
 
-::::
-
-## Installation
-
-<InstallationSnippet />
-
-## Chain Details for zKyoto
-
-<Tabs
- defaultValue="testnet"
-  values={[
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0x5C2359
-- Public RPC URL: https://rpc.startale.com/astar-zkyoto (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Astar zKyoto
-- Block Explorer Link: https://zkyoto.explorer.startale.com/
-- Ticker: ETH
-- Ticker Name: ETH
-
-</TabItem>
-</Tabs>
-
-## Initialize
-
-<InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
-
-## Get Account
-
-<GetAccountSnippet />
-
-## Get Balance
-
-<GetBalanceSnippet />
-
-## Send Transaction
-
-<SendTransactionSnippet />
-
-## Sign a message
-
-<SignMessageSnippet />
+<EVMInteraction />

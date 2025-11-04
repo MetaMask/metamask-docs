@@ -16,12 +16,12 @@ You can get started quickly with [MetaMask Smart Accounts](../../concepts/smart-
 
 ## Steps
 
-### 1. Install the toolkit
+### 1. Install the Smart Accounts Kit
 
-Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit):
+Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit):
 
 ```bash npm2yarn
-npm install @metamask/delegation-toolkit
+npm install @metamask/smart-accounts-kit
 ```
 
 ### 2. Set up a Public Client
@@ -59,7 +59,7 @@ This example configures a Hybrid smart account,
 which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit";
+import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
 import { privateKeyToAccount } from "viem/accounts";
 
 const account = privateKeyToAccount("0x...");

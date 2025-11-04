@@ -9,9 +9,10 @@ import Banner from '@site/src/components/Banner'
 
 This quickstart guide will help you set up and make calls on the Solana network using the Infura endpoints.
 
-<Banner>
-Don't have an Infura account? Sign up for a paid plan to start using the Solana network!
-</Banner>
+:::note limited access
+Solana access is currently limited to select customers. [Contact us](https://www.infura.io/contact)
+if you're interested in accessing these methods.
+:::
 
 ## Prerequisites
 

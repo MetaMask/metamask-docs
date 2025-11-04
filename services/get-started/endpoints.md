@@ -165,6 +165,18 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Mainnet | JSON-RPC over HTTPS     | `https://sei-mainnet.infura.io/v3/<YOUR-API-KEY>`     |
 | Testnet | JSON-RPC over HTTPS     | `https://sei-testnet.infura.io/v3/<YOUR-API-KEY>`     |
 
+## Solana
+
+:::note limited access
+Solana access is currently limited to select customers. [Contact us](https://www.infura.io/contact)
+if you're interested in accessing these methods.
+:::
+
+| Network           | Description         | URL                                                    |
+|-------------------|---------------------|--------------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS | `https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Testnet (Devnet)  | JSON-RPC over HTTPS | `https://solana-devnet.infura.io/v3/<YOUR-API-KEY>`   |
+
 ## Starknet
 
 | Network           | Description         | URL                                                    |

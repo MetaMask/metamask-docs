@@ -115,6 +115,7 @@ const sdkSidebar = {
           ],
         },
         'evm/connect/guides/rainbowkit',
+        'evm/connect/guides/connectkit',
         'evm/connect/guides/react-native',
         'evm/connect/guides/dynamic',
         'evm/connect/guides/web3auth',

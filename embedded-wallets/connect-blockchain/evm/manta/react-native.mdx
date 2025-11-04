@@ -7,96 +7,13 @@ keywords: [react-native, manta, web3auth, authentication, blockchain]
 description: 'Integrate Embedded Wallets with the Manta Blockchain in React Native | Embedded Wallets'
 ---
 
-import InstallationSnippet from '../../_react-native-connect-blockchain/_evm-installation.mdx'
-import GetAccountSnippet from '../../_react-native-connect-blockchain/_evm-get-account.mdx'
-import UserInfoSnippet from '../../_react-native-connect-blockchain/_evm-user-info.mdx'
-import GetBalanceSnippet from '../../_react-native-connect-blockchain/_evm-get-balance.mdx'
-import InitialisationSnippet from '../../_react-native-connect-blockchain/_evm-initialisation.mdx'
-import SignMessageSnippet from '../../_react-native-connect-blockchain/_evm-sign-message.mdx'
-import SendTransactionSnippet from '../../_react-native-connect-blockchain/_evm-send-transaction.mdx'
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
+import EVMInteraction from '../../_react-native-connect-blockchain/_evm-interaction.mdx'
+import ChainDetailsManta from '../../_general-connect-blockchain/_manta.mdx'
 
-While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Manta Blockchain](https://manta.network/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
+While using the Web3Auth React Native SDK, you get a [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) provider, similar to the [Metamask Provider](https://docs.metamask.io/guide/ethereum-provider.html). This provider can be used with libraries like [`web3.js`](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), [`ethers.js`](https://docs.ethers.io/v5/getting-started/) etc. to make [Manta](https://ethereum.org/) blockchain calls like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
 
-## Installation
+## Chain Details for Manta
 
-<InstallationSnippet />
+<ChainDetailsManta />
 
-## Initializing Provider
-
-Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
-
-### Getting the `chainConfig`
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
-
-```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0xA9', // hex of 169, Manta Pacific Mainnet
-  rpcTarget: 'https://pacific-rpc.manta.network/http',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'Manta Pacific Mainnet',
-  blockExplorer: 'https://pacific-explorer.manta.network',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-}
-```
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0x34816E', // hex of 3441006, Manta Pacific Sepolia Testnet
-  rpcTarget: 'https://pacific-rpc.sepolia-testnet.manta.network/http',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'Manta Pacific Sepolia Testnet',
-  blockExplorer: 'https://pacific-explorer.sepolia-testnet.manta.network',
-  ticker: 'ETH',
-  tickerName: 'ETH',
-}
-```
-
-</TabItem>
-</Tabs>
-
-## Initialize
-
-<InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
-
-## Get Account
-
-<GetAccountSnippet />
-
-## Get Balance
-
-<GetBalanceSnippet />
-
-## Send Transaction
-
-<SendTransactionSnippet />
-
-## Sign a message
-
-<SignMessageSnippet />
+<EVMInteraction />

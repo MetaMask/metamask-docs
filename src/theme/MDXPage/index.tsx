@@ -10,6 +10,7 @@ import { ComponentProps, useState } from 'react'
 import Bookmark from 'react-bookmark'
 
 import DiscourseComment from '../../components/DiscourseComment'
+import CopyPageButton from '../../components/CopyPageButton'
 import styles from './styles.module.css'
 
 export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
@@ -76,6 +77,9 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
                       <span className={styles.date}>
                         {author} | {date}
                       </span>
+                    </div>
+                    <div className={styles.copyButtonWrapper}>
+                      <CopyPageButton standalone={true} />
                     </div>
                   </div>
                 </div>

@@ -8,7 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # Generate a multisig signature
 
-The MetaMask Delegation Toolkit supports [Multisig smart accounts](../../concepts/smart-accounts.md#multisig-smart-account),
+The Smart Accounts Kit supports [Multisig smart accounts](../../concepts/smart-accounts.md#multisig-smart-account),
 allowing you to add multiple externally owned accounts (EOA) 
 signers with a configurable execution threshold. When the threshold 
 is greater than 1, you can collect signatures from the required signers 
@@ -17,7 +17,7 @@ into a single aggregated signature.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
 - [Create a Multisig smart account.](create-smart-account.md#create-a-multisig-smart-account)
 
 ## Generate a multisig signature
@@ -37,7 +37,7 @@ import {
   aliceAccount,
   bobAccount,
 } from "./config.ts";
-import { aggregateSignature } from "@metamask/delegation-toolkit";
+import { aggregateSignature } from "@metamask/smart-accounts-kit";
 
 const userOperation = await bundlerClient.prepareUserOperation({
   account: aliceSmartAccount,
@@ -78,7 +78,7 @@ import { sepolia as chain } from "viem/chains";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain,

@@ -16,7 +16,7 @@ You'll complete the delegation lifecycle (create, sign, and redeem a delegation)
 
 ## Prerequisites
 
-[Install and set up the Delegation Toolkit.](../../get-started/install.md)
+[Install and set up the Smart Accounts Kit.](../../get-started/install.md)
 
 ## Steps
 
@@ -58,7 +58,7 @@ A Hybrid smart account is a flexible smart account implementation that supports 
 This examples configures a [Hybrid smart account with an Account signer](../smart-accounts/create-smart-account.md#create-a-hybrid-smart-account-with-an-account-signer):
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit"
+import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit"
 import { privateKeyToAccount } from "viem/accounts"
 
 const delegatorAccount = privateKeyToAccount("0x...")
@@ -84,7 +84,7 @@ Create an account to represent Bob, the delegate who will receive the delegation
 <TabItem value="Smart account">
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit"
+import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit"
 import { privateKeyToAccount } from "viem/accounts"
 
 const delegateAccount = privateKeyToAccount("0x...")
@@ -136,7 +136,7 @@ Before creating a delegation, ensure that the delegator account (in this example
 :::
 
 ```typescript
-import { createDelegation } from "@metamask/delegation-toolkit"
+import { createDelegation } from "@metamask/smart-accounts-kit"
 import { parseUnits } from "viem"
 
 // USDC address on Ethereum Sepolia.
@@ -183,8 +183,8 @@ Bob can redeem the delegation by submitting a user operation if his account is a
 <TabItem value="Redeem with a smart account">
 
 ```typescript
-import { createExecution, ExecutionMode } from "@metamask/delegation-toolkit"
-import { DelegationManager } from "@metamask/delegation-toolkit/contracts"
+import { createExecution, ExecutionMode } from "@metamask/smart-accounts-kit"
+import { DelegationManager } from "@metamask/smart-accounts-kit/contracts"
 import { zeroAddress } from "viem"
 import { callData } from "./config.ts"
 
@@ -218,8 +218,8 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 <TabItem value="Redeem with an EOA">
 
 ```typescript
-import { createExecution, getDeleGatorEnvironment, ExecutionMode } from "@metamask/delegation-toolkit"
-import { DelegationManager } from "@metamask/delegation-toolkit/contracts"
+import { createExecution, getSmartAccountsEnvironment, ExecutionMode } from "@metamask/smart-accounts-kit"
+import { DelegationManager } from "@metamask/smart-accounts-kit/contracts"
 import { zeroAddress } from "viem"
 import { callData } from "./config.ts"
 
@@ -237,7 +237,7 @@ const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
 });
 
 const transactionHash = await delegateWalletClient.sendTransaction({
-  to: getDeleGatorEnvironment(chain.id).DelegationManager,
+  to: getSmartAccountsEnvironment(chain.id).DelegationManager,
   data: redeemDelegationCalldata,
   chain,
 })

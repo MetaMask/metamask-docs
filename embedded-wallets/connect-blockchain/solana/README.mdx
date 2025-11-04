@@ -1,18 +1,14 @@
 ---
 title: Integrate Embedded Wallets with the Solana Blockchain
 sidebar_label: Overview
-hide_table_of_contents: true
+
 image: 'img/embedded-wallets/banners/solana.png'
 description: 'Integrate Embedded Wallets with the Solana Blockchain | Embedded Wallets'
 ---
 
 import Tiles from '@theme/Tiles'
 
-For Solana integration, Embedded Wallets (formerly Web3Auth) offers an `ed25519` private key specifically tailored for the Solana blockchain. This cryptographic key conforms to the standards required for secure authentication and transaction signing on Solana's network.
-
-Integrating Embedded Wallets with Solana is straightforward and efficient. Developers can leverage the SDK to establish secure connections with Solana nodes, enabling seamless interaction with the blockchain. This includes tasks such as submitting transactions, querying blockchain data, and managing user authentication within Solana-based applications.
-
-With native support for Solana and the `ed25519` curve, you can streamline development and harness the full potential of blockchain technology within Solana-based projects.
+Embedded Wallets (formerly Web3Auth) SDKs have native support for Solana. Users authenticate and receive an `ed25519` private key suitable for Solana, enabling secure transaction signing and JSON-RPC interactions (submit transactions, query data, manage sessions) across Solana networks.
 
 ::::note
 
@@ -20,7 +16,9 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 ::::
 
-This documentation provides a straightforward guide for developers looking to implement Solana connection quickly and effortlessly across various platforms.
+## Platform Guides
+
+You can check out the following guides we've written for Solana across platforms.
 
 export const Solana = [
   {
@@ -28,10 +26,34 @@ export const Solana = [
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/solana/react',
+      },
+      {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/solana/vue',
+      },
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/solana/web',
+        path: '/embedded-wallets/connect-blockchain/solana/javascript',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/solana/react-native',
+      },
+      {
+        key: 'node',
+        title: 'Node.js',
+        icon: 'logo-nodejs.png',
+        path: '/embedded-wallets/connect-blockchain/solana/node',
       },
       {
         key: 'flutter',
@@ -51,8 +73,26 @@ export const Solana = [
         icon: 'logo-apple.png',
         path: '/embedded-wallets/connect-blockchain/solana/ios',
       },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/solana/unity',
+      },
     ],
   },
 ]
 
 <Tiles tileGroups={Solana} />
+
+## Dashboard Configuration
+
+:::::info
+
+With Embedded Wallets v10 onwards, chains are already added to the Dashboard. You can use any chain from the extensive list of predefined chains and add more if needed by toggling them on. See our guide to [add custom chains](/embedded-wallets/dashboard/chains-and-networks/#adding-custom-networks) for more details.
+
+:::::
+
+The Embedded Wallets Web SDK(`@web3auth/modal`) from v10 onwards does not need any additional setup on the code side for blockchain connections. All of it is handled on the Dashboard. We can use any chain from the extensive list of predefined chains and add more if we need.
+
+![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)

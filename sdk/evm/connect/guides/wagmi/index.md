@@ -1,6 +1,6 @@
 ---
 description: Quickstart guide for using MM Connect with a JavaScript and Wagmi dapp.
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 sidebar_label: Wagmi
 keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp, Wallet SDK]
 ---
@@ -11,9 +11,9 @@ Get started with MM Connect in a JavaScript and Wagmi dapp.
 You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDK](#set-up-manually) in an existing dapp.
 
 <p align="center">
-  <a href="https://metamask-wagmi-demo.vercel.app/" target="_blank">
-    <img src={require("../../_assets/quickstart.jpg").default} alt="Quickstart" width="600px" />
-  </a>
+  <!-- a href="https://metamask-wagmi-demo.vercel.app/" target="_blank" -->
+    <img src={require("../../_assets/quickstart.jpg").default} alt="Quickstart" width="600px" class="appScreen" />
+  <!-- /a -->
 </p>
 
 ## Prerequisites
@@ -41,7 +41,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
     <div>
 
     `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-    
+
     Alternatively, you can use `git clone`, which will download the entire repository.
     To do so, clone the MM Connect examples repository and navigate into the `quickstarts/wagmi` directory:
 
@@ -80,10 +80,10 @@ npm install @metamask/sdk wagmi viem@2.x @tanstack/react-query
 In the root of your project, import the required dependencies:
 
 ```jsx
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { http, WagmiProvider, createConfig } from "wagmi"
-import { mainnet, linea, lineaSepolia } from "wagmi/chains"
-import { metaMask } from "wagmi/connectors"
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { http, WagmiProvider, createConfig } from 'wagmi'
+import { mainnet, linea, lineaSepolia } from 'wagmi/chains'
+import { metaMask } from 'wagmi/connectors'
 ```
 
 ### 3. Configure your project
@@ -131,7 +131,7 @@ const App = () => {
 Add the wallet connect and disconnect buttons to your application:
 
 ```jsx
-import { useAccount, useConnect, useDisconnect } from "wagmi"
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 export const ConnectButton = () => {
   const { address } = useAccount()
@@ -169,8 +169,8 @@ You can configure your RPC endpoints in the Wagmi configuration as follows, repl
 const config = createConfig({
   // ... other config options
   transports: {
-    [mainnet.id]: http("https://mainnet.infura.io/v3/<YOUR-API-KEY>"),
-    [sepolia.id]: http("https://sepolia.infura.io/v3/<YOUR-API-KEY>"),
+    [mainnet.id]: http('https://mainnet.infura.io/v3/<YOUR-API-KEY>'),
+    [sepolia.id]: http('https://sepolia.infura.io/v3/<YOUR-API-KEY>'),
   },
 })
 ```

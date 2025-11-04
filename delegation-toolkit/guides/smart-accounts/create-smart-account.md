@@ -1,5 +1,5 @@
 ---
-description: Learn how to create a MetaMask smart account using Delegation Toolkit.
+description: Learn how to create a MetaMask smart account using Smart Accounts Kit.
 keywords: [create, smart account, signer, hybrid, multisig, 7702]
 ---
 
@@ -14,7 +14,7 @@ An account's supported *signatories* can sign data on behalf of the smart accoun
 
 ## Prerequisites
 
-[Install and set up the Delegation Toolkit.](../../get-started/install.md)
+[Install and set up the Smart Accounts Kit.](../../get-started/install.md)
 
 ## Create a Hybrid smart account
 
@@ -34,7 +34,7 @@ import { account } from "./signer.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
@@ -87,7 +87,7 @@ import { walletClient } from "./signer.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const addresses = await walletClient.getAddresses();
 const owner = addresses[0];
@@ -155,7 +155,7 @@ import { webAuthnAccount, credential } from "./signer.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 import { Address, PublicKey } from "ox";
 import { toHex } from "viem";
 
@@ -223,7 +223,7 @@ import { account, walletClient } from "./signers.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const owners = [ account.address, walletClient.address ];
 const signer = [ { account }, { walletClient } ];
@@ -307,7 +307,7 @@ import { account } from "./signer.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
@@ -359,7 +359,7 @@ import { walletClient } from "./signer.ts";
 import { 
   Implementation, 
   toMetaMaskSmartAccount,
-} from "@metamask/delegation-toolkit";
+} from "@metamask/smart-accounts-kit";
 
 const addresses = await walletClient.getAddresses();
 const address = addresses[0];

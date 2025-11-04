@@ -34,18 +34,18 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
   } = useThemeConfig()
 
   const location = useLocation()
-  const isGatorDocs = location.pathname.startsWith('/delegation-toolkit')
+  const isSmartAccountsKitDocs = location.pathname.startsWith('/delegation-toolkit')
   const isServicesOrDashboard = isPathInSections(
     location.pathname,
     SERVICES_DASHBOARD_CONFIG.sections
   )
   const isSnaps = location.pathname.startsWith('/snaps')
 
-  let delegationToolkitTitle = null
+  let smartAccountsKitTitle = null
   let versionDropdown = null
   try {
-    if (isGatorDocs) {
-      delegationToolkitTitle = (
+    if (isSmartAccountsKitDocs) {
+      smartAccountsKitTitle = (
         <div className={styles.versionDropdownContainer}>
           <SidebarStaticTitle title={DELEGATION_TOOLKIT_CONFIG.title} />
         </div>
@@ -57,7 +57,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
       )
     }
   } catch (e) {
-    console.error('Failed to render delegation toolkit components:', e)
+    console.error('Failed to render smart accounts kit components:', e)
   }
 
   let servicesDropdown = null
@@ -94,7 +94,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
         isHidden && styles.sidebarHidden
       )}>
       {hideOnScroll && <Logo tabIndex={-1} className={styles.sidebarLogo} />}
-      {delegationToolkitTitle}
+      {smartAccountsKitTitle}
       {versionDropdown}
       {servicesDropdown}
       {snapsTitle}

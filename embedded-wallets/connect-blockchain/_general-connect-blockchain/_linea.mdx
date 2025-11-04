@@ -1,40 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Sepolia Testnet", value: "sepolia" },
   ]}
 >
-<TabItem
-  value="mainnet"
->
+<TabItem value="mainnet">
 
-- Chain ID: 0xe708 (hex of 59144)
-- Public RPC URL: https://linea-mainnet.infura.io/v3/ (Avoid using public rpcTarget in production,
-  use services like Infura)
-- Display Name: Linea Mainnet
-- Block Explorer Link: https://lineascan.build/
-- Ticker: ETH
-- Ticker Name: ETH
-- Logo: https://cryptologos.cc/logos/ethereum-eth-logo.png
+- **Chain ID:** 0xe708
+- **RPC URL:** You can use our bundled RPC service from Infura, or your own choice of RPC service for production.
+- **Display Name:** Linea Mainnet
+- **Block Explorer Link:** https://lineascan.build
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
 
 </TabItem>
 
-<TabItem
-  value="testnet"
->
+<TabItem value="sepolia">
 
-- Chain ID: 0xe705 (hex of 59141)
-- Public RPC URL: https://rpc.sepolia.linea.build (Avoid using public rpcTarget in production, use
-  services like Infura)
-- Display Name: Linea Sepolia Testnet
-- Block Explorer Link: https://sepolia.lineascan.build/
-- Ticker: ETH
-- Ticker Name: ETH
-- Logo: https://cryptologos.cc/logos/ethereum-eth-logo.png
+- **Chain ID:** 0xe705
+- **Public RPC URL:** https://rpc.sepolia.linea.build
+- **Display Name:** Linea Sepolia Testnet
+- **Block Explorer Link:** https://sepolia.lineascan.build
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
 
 </TabItem>
 </Tabs>

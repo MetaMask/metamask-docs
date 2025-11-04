@@ -15,7 +15,7 @@ It requires MetaMask Flask 13.5.0 or later, and may change in future releases.
 [ERC-7715](https://eip.tools/eip/7715) introduces a standard way for dapps to request permissions from a wallet to execute
 transactions on a user's behalf.
 
-The MetaMask Delegation Toolkit provides the experimental actions for ERC-7715 that lets a caller request permissions from MetaMask's permissions system.
+The MetaMask Smart Accounts Kit provides the experimental actions for ERC-7715 that lets a caller request permissions from MetaMask's permissions system.
 
 ## Request permissions
 
@@ -63,8 +63,8 @@ const grantedPermissions = await walletClient.grantPermissions([{
 import { createWalletClient, custom, createPublicClient, http } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
-import { toMetaMaskSmartAccount, Implementation } from "@metamask/delegation-toolkit";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
+import { toMetaMaskSmartAccount, Implementation } from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain: chain,
