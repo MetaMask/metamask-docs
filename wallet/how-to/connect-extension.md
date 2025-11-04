@@ -1,3 +1,4 @@
+tab
 ---
 description: Connect to the MetaMask extension using the Wallet API and EIP-6963.
 toc_max_heading_level: 4
