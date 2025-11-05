@@ -26,7 +26,7 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 Set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) using Viem's `createWalletClient` function. This client will
 help you interact with MetaMask Flask. 
 
-Then, extend the Wallet Client functionality using `erc7715ProviderActions`. These actions enable you to request Advanced Permissions (ERC-7115) from the user.
+Then, extend the Wallet Client functionality using `erc7715ProviderActions`. These actions enable you to request Advanced Permissions from the user.
 
 ```typescript
 import { createWalletClient, custom } from "viem";
@@ -55,7 +55,7 @@ const publicClient = createPublicClient({
 ### 3. Set up a session account
 
 Set up a session account which can either be a smart account or an externally owned account (EOA)
-to request Advanced Permissions (ERC-7115). The requested permissions are granted to the session account, which
+to request Advanced Permissions. The requested permissions are granted to the session account, which
 is responsible for executing transactions on behalf of the user.
 
 <Tabs>
@@ -96,8 +96,8 @@ const sessionAccount = privateKeyToAccount("0x...");
 
 ### 4. Check the EOA account code
 
-Currently, Advanced Permissions (ERC-7115) does not support automatically upgrading a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
-ensure that the user is upgraded to a smart account before requesting Advanced Permissions (ERC-7115).
+Currently, Advanced Permissions do not support automatically upgrading a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
+ensure that the user is upgraded to a smart account before requesting Advanced Permissions.
 
 If the user has not yet been upgraded, you can handle the upgrade [programmatically](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) or ask the 
 user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
@@ -137,9 +137,9 @@ if (code) {
 }
 ```
 
-### 5. Request Advanced Permissions (ERC-7115)
+### 5. Request Advanced Permissions
 
-Request Advanced Permissions (ERC-7115) from the user. In this example, you'll request an
+Request Advanced Permissions from the user. In this example, you'll request an
 [ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission) using the Wallet Client's 
 [`requestExecutionPermissions`](../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) action.
 
@@ -192,7 +192,7 @@ to estimate gas for user operations and submit transactions to the network.
 For an EOA, set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) 
 using Viem's `createWalletClient` function. This lets you send transactions directly to the network.
 
-The toolkit provides public actions for both of the clients which can be used to redeem Advanced Permissions (ERC-7115), and execute transactions on a user's behalf. 
+The toolkit provides public actions for both of the clients which can be used to redeem Advanced Permissions, and execute transactions on a user's behalf. 
 
 <Tabs>
 <TabItem value="Smart account">
@@ -228,7 +228,7 @@ const sessionAccountWalletClient = createWalletClient({
 </Tabs>
 
 
-### 7. Redeem Advanced Permissions (ERC-7115)
+### 7. Redeem Advanced Permissions
 
 The session account can now redeem the permissions. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 

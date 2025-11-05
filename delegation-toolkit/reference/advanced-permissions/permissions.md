@@ -4,10 +4,10 @@ sidebar_label: Permissions
 keywords: [ERC-7715, permissions, ERC-20 token, native token, reference, advanced permissions]
 ---
 
-# Advanced Permissions (ERC-7715) reference
+# Advanced Permissions reference
 
 When [executing on a MetaMask user's behalf](../../guides/advanced-permissions/execute-on-metamask-users-behalf.md), you can request the following permission types for ERC-20 token and native token transfers.
-Learn [how to use Advanced Permissions (ERC-7715)](../../guides/advanced-permissions/use-permissions/erc20-token.md).
+Learn [how to use Advanced Permissions types](../../guides/advanced-permissions/use-permissions/erc20-token.md).
 
 ## ERC-20 token permissions
 

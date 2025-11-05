@@ -71,7 +71,7 @@ const sidebar = {
         },
         {
           type: 'category',
-          label: 'Advanced permissions (ERC-7715)',
+          label: 'Advanced Permissions (ERC-7715)',
           collapsed: true,
           key: 'advanced-permissions-guides',
           items: [
