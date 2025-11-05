@@ -44,6 +44,9 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     type: "account",
     data: {
       // Session account created as a prerequisite.
+      //
+      // The requested permissions will granted to the
+      // session account.
       address: sessionAccountAddress,
     },
   },
@@ -106,6 +109,9 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     type: "account",
     data: {
       // Session account created as a prerequisite.
+      //
+      // The requested permissions will granted to the
+      // session account.
       address: sessionAccountAddress,
     },
   },
