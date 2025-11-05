@@ -65,7 +65,7 @@ This data encodes the authority that lets the delegate redeem the permission.
 ### Security considerations for `accountMeta`
 
 When a user grants a permission, they can provide `accountMeta` which is an array of `factory` and `factoryData` values.
-These calls must be executed before redeeming the permission (this is handled for you in [`sendUserOperationWithDelegation`](../reference/erc7715/bundler-client.md#senduseroperationwithdelegation)).
+These calls must be executed before redeeming the permission (this is handled for you in [`sendUserOperationWithDelegation`](../reference/advanced-permissions/bundler-client.md#senduseroperationwithdelegation)).
 
 Because each `accountMeta` is an arbitrary call specified by the granter, it is important that these are executed carefully.
 We recommend taking the following precautions:
@@ -86,7 +86,7 @@ Redeem a delegation with a [MetaMask smart account](#redeem-with-a-metamask-smar
 To redeem a delegation with a MetaMask smart account, [create a smart account](../guides/smart-accounts/create-smart-account.md)
 and a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler).
 
-After setting up your Bundler Client, you can extend its functionality with `erc7710BundlerActions` actions to support ERC-7710. Once extended, use [`sendUserOperationWithDelegation`](../reference/erc7715/bundler-client.md#senduseroperationwithdelegation) to redeem the permission.
+After setting up your Bundler Client, you can extend its functionality with `erc7710BundlerActions` actions to support ERC-7710. Once extended, use [`sendUserOperationWithDelegation`](../reference/advanced-permissions/bundler-client.md#senduseroperationwithdelegation) to redeem the permission.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -168,7 +168,7 @@ export const bundlerClient = createBundlerClient({
 
 To redeem a delegation with an EOA, create a [Viem Wallet Client](https://viem.sh/docs/clients/wallet).
 
-After creating your Wallet Client, you can extend its functionality with `erc7710WalletActions` actions to support ERC-7710. Once extended, use [`sendTransactionWithDelegation`](../reference/erc7715/wallet-client.md#sendtransactionwithdelegation) to redeem the permission.
+After creating your Wallet Client, you can extend its functionality with `erc7710WalletActions` actions to support ERC-7710. Once extended, use [`sendTransactionWithDelegation`](../reference/advanced-permissions/wallet-client.md#sendtransactionwithdelegation) to redeem the permission.
 
 <Tabs>
 <TabItem value="example.ts">

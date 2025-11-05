@@ -33,15 +33,15 @@ Delegation is powered by the [Delegation Framework](https://github.com/metamask/
   }
 ]}/>
 
-## Request ERC-7715 Permissions
+## Request Advanced Permissions (ERC-7715)
 
-The toolkit supports [ERC-7715 permissions](concepts/erc7715.md), which are fine-grained permissions dapps can request from users directly via the MetaMask browser extension.
-ERC-7715 permissions allow you to perform executions on the behalf of MetaMask users.
+The toolkit supports [Advanced Permissions (ERC-7715)](concepts/advanced-permissions.md), which are fine-grained permissions dapps can request from users directly via the MetaMask browser extension.
+Advanced Permissions (ERC-7715) permissions allow you to perform executions on the behalf of MetaMask users.
 
 <CardList items={[
   {
-    href: "guides/erc7715/execute-on-metamask-users-behalf",
-    title: "ERC-7715 guide",
+    href: "guides/advanced-permissions/execute-on-metamask-users-behalf",
+    title: "Advanced Permissions (ERC-7715) guide",
     description: "Execute on the behalf of MetaMask users.",
   }
 ]}/>

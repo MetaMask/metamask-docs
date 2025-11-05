@@ -71,18 +71,18 @@ const sidebar = {
         },
         {
           type: 'category',
-          label: 'ERC-7715',
+          label: 'Advanced permissions (ERC-7715)',
           collapsed: true,
-          key: 'erc7715-guides',
+          key: 'advanced-permissions-guides',
           items: [
-            'guides/erc7715/execute-on-metamask-users-behalf',
+            'guides/advanced-permissions/execute-on-metamask-users-behalf',
             {
               type: 'category',
               label: 'Use permissions',
               collapsed: true,
               items: [
-                'guides/erc7715/use-permissions/erc20-token',
-                'guides/erc7715/use-permissions/native-token',
+                'guides/advanced-permissions/use-permissions/erc20-token',
+                'guides/advanced-permissions/use-permissions/native-token',
               ],
             },
           ],
@@ -105,7 +105,7 @@ const sidebar = {
             'concepts/delegation/caveat-enforcers',
           ],
         },
-        'concepts/erc7715',
+        'concepts/advanced-permissions',
       ],
     },
     {
@@ -155,13 +155,13 @@ const sidebar = {
         },
         {
           type: 'category',
-          label: 'ERC-7715',
+          label: 'Advanced Permissions (ERC-7715)',
           collapsed: true,
-          key: 'erc7715-reference',
+          key: 'advanced-permissions-reference',
           items: [
-            'reference/erc7715/permissions',
-            'reference/erc7715/wallet-client',
-            'reference/erc7715/bundler-client',
+            'reference/advanced-permissions/permissions',
+            'reference/advanced-permissions/wallet-client',
+            'reference/advanced-permissions/bundler-client',
           ],
         },
       ],

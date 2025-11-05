@@ -165,7 +165,7 @@ You should always verify the granted permissions and adjust your dapp's behavior
 ## Security considerations for `accountMeta`
 
 When a user grants a permission, they can provide [`accountMeta`](erc-7710-redeem-delegations.md#extract-relevant-data) which is an array of `factory` and `factoryData` values.
-These calls must be executed before redeeming the permission (this is handled for you in [`sendUserOperationWithDelegation`](../reference/erc7715/bundler-client.md#senduseroperationwithdelegation)).
+These calls must be executed before redeeming the permission (this is handled for you in [`sendUserOperationWithDelegation`](../reference/advanced-permissions/bundler-client.md#senduseroperationwithdelegation)).
 
 Because each `accountMeta` is an arbitrary call specified by the granter, it is important that these are executed carefully.
 We recommend taking the following precautions:
