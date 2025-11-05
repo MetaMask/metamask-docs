@@ -6,16 +6,11 @@ import CardList from '@site/src/components/CardList'
 
 # Celo
 
-Celo is a fully EVM-compatible, Proof of Stake (PoS), layer-1 protocol that features a mobile-first platform, built-in
-stablecoins, collateralized by crypto and natural assets.
-
-Celo is a platform that acts as a global payment infrastructure for cryptocurrencies targeting mobile users. Celo operates
-native, ERC20-like stable tokens like [cUSD, cEUR, and cREAL](https://celoreserve.org/).
+Celo is an Ethereum layer-2 network designed for fast, low-cost payments. It offers low fees and fast finality while letting you reuse familiar Ethereum tools and contracts with little or no change.
 
 :::info See also
 
 - The [official Celo documentation](https://docs.celo.org/) for more information.
-- The [key differences between building on Celo and Ethereum](https://docs.celo.org/developer/migrate/from-ethereum).
 
 :::
 
