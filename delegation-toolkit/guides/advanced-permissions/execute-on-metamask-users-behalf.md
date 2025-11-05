@@ -30,7 +30,7 @@ Then, extend the Wallet Client functionality using `erc7715ProviderActions`. The
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 
 const walletClient = createWalletClient({
   transport: custom(window.ethereum),
@@ -199,7 +199,7 @@ The toolkit provides public actions for both of the clients which can be used to
 
 ```typescript
 import { createBundlerClient } from "viem/account-abstraction";
-import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/actions";
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
@@ -214,7 +214,7 @@ const bundlerClient = createBundlerClient({
 
 ```typescript
 import { createWalletClient, http } from "viem";
-import { erc7710WalletActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7710WalletActions } from "@metamask/smart-accounts-kit/actions";
 import { sepolia as chain } from "viem/chains";
 
 const sessionAccountWalletClient = createWalletClient({

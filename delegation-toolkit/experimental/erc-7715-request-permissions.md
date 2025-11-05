@@ -63,7 +63,7 @@ const grantedPermissions = await walletClient.grantPermissions([{
 import { createWalletClient, custom, createPublicClient, http } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 import { toMetaMaskSmartAccount, Implementation } from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({

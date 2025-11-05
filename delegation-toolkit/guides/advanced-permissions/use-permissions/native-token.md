@@ -70,7 +70,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
@@ -137,7 +137,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
