@@ -5,7 +5,7 @@ const DISCOURSE_URL = 'https://builder.metamask.io'
 
 export default function DiscourseComment(props) {
   // eslint-disable-next-line react/prop-types
-  const { postUrl, discourseTopicId, metadata = {} } = props
+  const { postUrl, discourseTopicId, metadata = {}, teaserContent } = props
   const { siteConfig } = useDocusaurusContext()
   const { customFields } = siteConfig
 
@@ -130,6 +130,7 @@ export default function DiscourseComment(props) {
       discourseUrl: `${DISCOURSE_URL}/`,
       discourseEmbedUrl: normalizeEmbedUrl(postUrl),
       topicId: topicId,
+      embedContentSelector: '#discourse-embed-content',
     }
 
     // Load embed script without monitoring or error handling
@@ -172,6 +173,43 @@ export default function DiscourseComment(props) {
     initializeEmbed()
   }, [postUrl, discourseTopicId, DISCOURSE_API_KEY])
 
-  // Minimal component return - just the comments div
-  return <div id="discourse-comments" />
+  // Render teaser content and comments div
+  return (
+    <>
+      {teaserContent && teaserContent.length > 0 && (
+        <div
+          className="discourse-teaser"
+          id="discourse-embed-content"
+          data-discourse-content="true"
+          style={{
+            marginBottom: '2rem',
+            padding: '1.5rem',
+            backgroundColor: '#f8f9fa',
+            borderRadius: '8px',
+            border: '1px solid #e0e6ed',
+          }}>
+          {teaserContent.map((paragraph, index) => (
+            <p key={index} style={{ marginBottom: '1rem', lineHeight: '1.6' }}>
+              {paragraph}
+            </p>
+          ))}
+          <p style={{ marginTop: '1.5rem', marginBottom: '0' }}>
+            <a
+              href={normalizeEmbedUrl(postUrl)}
+              style={{
+                color: '#1976d2',
+                textDecoration: 'none',
+                fontWeight: '500',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}>
+              Continue reading the complete tutorial →
+            </a>
+          </p>
+        </div>
+      )}
+      <div id="discourse-comments" />
+    </>
+  )
 }
