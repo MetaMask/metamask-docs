@@ -58,6 +58,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       justification: "Permission to use 0.001 ETH every day",
     },
   },
+  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -108,19 +109,20 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       address: sessionAccountAddress,
     },
   },
-   permission: {
-      type: "native-token-stream",
-      data: {
-        // 0.0001 ETH in wei format.
-        amountPerSecond: parseEther("0.0001"),
-        // 0.1 ETH in wei format.
-        initialAmount: parseEther("0.1"),
-        // 1 ETH in wei format.
-        maxAmount: parseEther("1"),
-        startTime: currentTime,
-        justification: "Permission to use 0.0001 ETH per second",
-      },
+  permission: {
+    type: "native-token-stream",
+    data: {
+      // 0.0001 ETH in wei format.
+      amountPerSecond: parseEther("0.0001"),
+      // 0.1 ETH in wei format.
+      initialAmount: parseEther("0.1"),
+      // 1 ETH in wei format.
+      maxAmount: parseEther("1"),
+      startTime: currentTime,
+      justification: "Permission to use 0.0001 ETH per second",
     },
+  },
+  isAdjustmentAllowed: true,
 }]);
 ```
 

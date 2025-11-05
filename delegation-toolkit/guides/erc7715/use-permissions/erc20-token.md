@@ -61,6 +61,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       justification?: "Permission to transfer 1 USDC every day",
     },
   },
+  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -128,6 +129,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       justification: "Permission to use 0.1 USDC per second",
     },
   },
+  isAdjustmentAllowed: true,
 }]);
 ```
 
