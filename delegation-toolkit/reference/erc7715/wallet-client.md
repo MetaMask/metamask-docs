@@ -50,6 +50,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
   signer: {
     type: "account",
     data: {
+      // The requested permissions will granted to the address.
       address: "0x0955fFD7b83e5493a8c1FD5dC87e2CF37Eacc44a",
     },
   },

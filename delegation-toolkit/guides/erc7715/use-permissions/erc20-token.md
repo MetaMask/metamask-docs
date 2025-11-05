@@ -47,6 +47,9 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     type: "account",
     data: {
       // Session account created as a prerequisite.
+      //
+      // The requested permissions will granted to the
+      // session account.
       address: sessionAccountAddress,
     },
   },
@@ -61,6 +64,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       justification?: "Permission to transfer 1 USDC every day",
     },
   },
+  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -111,6 +115,9 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     type: "account",
     data: {
       // Session account created as a prerequisite.
+      //
+      // The requested permissions will granted to the
+      // session account.
       address: sessionAccountAddress,
     },
   },
@@ -128,6 +135,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       justification: "Permission to use 0.1 USDC per second",
     },
   },
+  isAdjustmentAllowed: true,
 }]);
 ```
 
