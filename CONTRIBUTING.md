@@ -15,6 +15,7 @@ guide in some places.
   - [Update `MetaMask/api-specs`](#update-metamaskapi-specs)
   - [Update `ethereum/execution-apis`](#update-ethereumexecution-apis)
 - [Test analytics](#test-analytics)
+- [Guidelines for trivial contributions](#guidelines-for-trivial-contributions)
 
 ## Contribution workflow
 
