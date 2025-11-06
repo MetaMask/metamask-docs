@@ -16,5 +16,6 @@ Fixes #
 
 <!-- Complete the following checklist before merging your PR. -->
 
+- [ ] If I am a community contributor, this PR fixes an open issue that I've been assigned to.
 - [ ] If this PR updates or adds documentation content that changes or adds technical meaning, it has received an approval from an engineer or DevRel from the relevant team.
 - [ ] If this PR updates or adds documentation content, it has received an approval from a technical writer.
