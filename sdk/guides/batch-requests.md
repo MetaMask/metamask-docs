@@ -1,4 +1,4 @@
----
+pnpm add @metamask/sdk-
 description: Batch multiple JSON-RPC requests using MetaMask SDK or Wagmi.
 keywords: [SDK, Wagmi, batch, JSON-RPC, RPC, requests, methods, dapp]
 ---
