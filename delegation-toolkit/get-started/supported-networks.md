@@ -57,13 +57,13 @@ If you don't see the network you're looking for, you can request support by emai
 | Arbitrum One        | ❌      | ❌      | ✅      |
 | Base                | ❌      | ❌      | ✅      |
 | Berachain           | ❌      | ❌      | ✅      |
-| BNB                 | ❌      | ❌      | ✅      |
+| Binance Smart Chain | ❌      | ❌      | ✅      |
 | Ethereum            | ❌      | ❌      | ✅      |
 | Gnosis              | ❌      | ❌      | ✅      |
 | Optimism            | ❌      | ❌      | ✅      |
 | Polygon             | ❌      | ❌      | ✅      |
-| Sonic Mainnet       | ❌      | ❌      | ✅      |
-| Unichain Mainnet    | ❌      | ❌      | ✅      |
+| Sonic               | ❌      | ❌      | ✅      |
+| Unichain            | ❌      | ❌      | ✅      |
 
 ### Testnet networks
 
@@ -71,14 +71,14 @@ If you don't see the network you're looking for, you can request support by emai
 | ------------------- | ------- | ------- | ------- |
 | Arbitrum Sepolia    | ❌      | ❌      | ✅      |
 | Base Sepolia        | ❌      | ❌      | ✅      |
-| Berachain Testnet   | ❌      | ❌      | ✅      |
-| BNB Testnet         | ❌      | ❌      | ✅      |
+| Berachain Bepolia   | ❌      | ❌      | ✅      |
+| Binance Smart Chain | ❌      | ❌      | ✅      |
 | Chiado              | ❌      | ❌      | ✅      |
-| Citrea Testnet      | ❌      | ❌      | ✅      |
-| Hoodi Testnet       | ❌      | ❌      | ✅      |
-| MegaEth Testnet     | ❌      | ❌      | ✅      |
+| Citrea              | ❌      | ❌      | ✅      |
+| Hoodi               | ❌      | ❌      | ✅      |
+| MegaEth             | ❌      | ❌      | ✅      |
 | Optimism Sepolia    | ❌      | ❌      | ✅      |
 | Polygon Amoy        | ❌      | ❌      | ✅      |
 | Sepolia             | ✅      | ✅      | ✅      |
-| Sonic Testnet       | ❌      | ❌      | ✅      |
+| Sonic               | ❌      | ❌      | ✅      |
 | Unichain Sepolia    | ❌      | ❌      | ✅      |
