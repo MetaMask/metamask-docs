@@ -46,3 +46,39 @@ If you don't see the network you're looking for, you can request support by emai
 | Optimism Sepolia            | ❌      | ✅      | ✅      |
 | Polygon Amoy                | ❌      | ✅      | ✅      |
 | Unichain Sepolia            | ❌      | ✅      | ✅      |
+
+## Advanced Permissions (ERC-7715)
+
+### Mainnet networks
+
+| Network Name        | v0.11.0 | v0.12.0 | v0.13.0 |
+| ------------------- | ------- | ------- | ------- |
+| Arbitrum Nova       | ❌      | ❌      | ✅      |
+| Arbitrum One        | ❌      | ❌      | ✅      |
+| Base                | ❌      | ❌      | ✅      |
+| Berachain           | ❌      | ❌      | ✅      |
+| BNB                 | ❌      | ❌      | ✅      |
+| Ethereum            | ❌      | ❌      | ✅      |
+| Gnosis              | ❌      | ❌      | ✅      |
+| Optimism            | ❌      | ❌      | ✅      |
+| Polygon             | ❌      | ❌      | ✅      |
+| Sonic Mainnet       | ❌      | ❌      | ✅      |
+| Unichain Mainnet    | ❌      | ❌      | ✅      |
+
+### Testnet networks
+
+| Network Name        | v0.11.0 | v0.12.0 | v0.13.0 |
+| ------------------- | ------- | ------- | ------- |
+| Arbitrum Sepolia    | ❌      | ❌      | ✅      |
+| Base Sepolia        | ❌      | ❌      | ✅      |
+| Berachain Testnet   | ❌      | ❌      | ✅      |
+| BNB Testnet         | ❌      | ❌      | ✅      |
+| Chiado              | ❌      | ❌      | ✅      |
+| Citrea Testnet      | ❌      | ❌      | ✅      |
+| Hoodi Testnet       | ❌      | ❌      | ✅      |
+| MegaEth Testnet     | ❌      | ❌      | ✅      |
+| Optimism Sepolia    | ❌      | ❌      | ✅      |
+| Polygon Amoy        | ❌      | ❌      | ✅      |
+| Sepolia             | ✅      | ✅      | ✅      |
+| Sonic Testnet       | ❌      | ❌      | ✅      |
+| Unichain Sepolia    | ❌      | ❌      | ✅      |
