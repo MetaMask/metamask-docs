@@ -250,3 +250,9 @@ Then build the project in production mode using the following command:
 ```bash
 npm run build && npm run serve
 ```
+
+## Guidelines for trivial contributions
+
+The MetaMask documentation maintainers typically do not accept trivial contributions like fixing one or a few typos, links, or code comments.
+Although we appreciate the helpful intention, managing a lot of these small contributions is unfeasible, and puts extra pressure on our CI/CD system.
+If you detect an error that may be trivial, feel free to [open an issue](https://github.com/MetaMask/metamask-docs/issues) for it, and we will batch multiple fixes into a single contribution.
