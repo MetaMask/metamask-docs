@@ -23,9 +23,8 @@ Dapps can use this method to request a wallet to grant the dapp permission to ex
 `wallet_grantPermissions` requires a `signer` parameter, which identifies the entity requesting or managing the permission.
 Common signer implementations include wallet signers, single key and multisig signers, and account signers.
 
-The Smart Accounts Kit supports multiple types of signers, but [an account signer is used in this documentation's examples](../guides/advanced-permissions/execute-on-metamask-users-behalf.md) as a common implementation.
-With an account signer, a session account is created and used for the single purpose of requesting and redeeming
-Advanced Permissions, and does not contain tokens.
+Smart Accounts Kit supports multiple signer types. The documentation uses [an account signer](../guides/advanced-permissions/execute-on-metamask-users-behalf.md) as a common implementation example.
+When you use an account signer, a session account is created solely to request and redeem Advanced Permissions, and doesn't contain tokens
 The session account can be granted with permissions and redeem them as specified in [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710).
 The session account can be a smart account or an externally owned account (EOA).
 
