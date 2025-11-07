@@ -1,56 +1,88 @@
----
-sidebar_label: Use the Wallet Adapter
----
+# Use the Wallet Adapter
 
-# Use the Solana Wallet Adapter
+To connect to Solana in MetaMask from your dapp, set up Solana's [Wallet Adapter](https://github.com/solana-labs/wallet-adapter).
 
-If your dApp uses the [Solana Wallet Adapter](https://github.com/solana-labs/wallet-adapter), you just have to add the Solflare Wallet Adapter to the list of supported wallets.
+You can use the [`create-solana-dapp`](https://github.com/solana-foundation/create-solana-dapp) CLI tool to quickly generate a Solana dapp with the Wallet Adapter built in, or follow this guide to manually set up the Wallet Adapter in an existing React dapp.
 
-Install the latest *wallets* package with
+:::info
+See the [Solana documentation](https://solana.com/developers/cookbook/wallets/connect-wallet-react) for more information.
+:::
 
-```sh
-npm install @solana/wallet-adapter-wallets@latest
+## Steps
+
+### 1. Install dependencies
+
+Install the following dependencies:
+
+```bash
+npm install @solana/web3.js       \
+  @solana/wallet-adapter-base     \
+  @solana/wallet-adapter-react    \
+  @solana/wallet-adapter-react-ui \
+  @solana/wallet-adapter-wallets
 ```
 
-Then update the code to look like this:
+### 2. Create the Solana provider
 
-```javascript
-import {
-  SolflareWalletAdapter,
-  /* ... other adapters ... */
-} from '@solana/wallet-adapter-wallets';
+Create a `SolanaProvider` that will be used to provide the Solana context to the application:
 
-const wallets = useMemo(
-  () => [
-    new SolflareWalletAdapter(),
-    // ... other adapters ...
-  ],
-  []
-);
+```typescript title='components/SolanaProvider.tsx'
+'use client';
 
-<WalletProvider autoConnect wallets={wallets}>
+import React, { FC, ReactNode, useMemo } from 'react';
+import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
+import { clusterApiUrl } from '@solana/web3.js';
+
+// Default styles that can be overridden by your dapp.
+import '@solana/wallet-adapter-react-ui/styles.css';
+
+interface SolanaProviderProps {
+  children: ReactNode;
+}
+
+export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
+  // The network can be set to devnet, testnet, or mainnet-beta.
+  const network = WalletAdapterNetwork.Devnet;
+
+  // You can also provide a custom RPC endpoint.
+  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+
+  return (
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={[]} autoConnect>
+        <WalletModalProvider>{children}</WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  );
+};
 ```
 
-Alternatively, you can install only the Solflare adapter directly
+### 3. Wrap the application in the Solana Provider
 
-```sh
-npm install @solana/wallet-adapter-solflare@latest
+Add the `SolanaProvider` to the `RootLayout` in the `app` directory:
+
+```typescript
+import './globals.css';
+import '@solana/wallet-adapter-react-ui/styles.css';
+import { SolanaProvider } from '@/components/SolanaProvider';
+
+export default function RootLayout({
+  children
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html>
+      <body>
+        <SolanaProvider>{children}</SolanaProvider>
+      </body>
+    </html>
+  );
+}
 ```
 
-Then update the code:
+## Next steps
 
-```javascript
-import { SolflareWalletAdapter } from '@solana/wallet-adapter-solflare';
-import { /* ... other adapters ... */ } from '@solana/wallet-adapter-wallets';
-
-
-const wallets = useMemo(
-  () => [
-    new SolflareWalletAdapter(),
-    // ... other adapters ...
-  ],
-  []
-);
-
-<WalletProvider autoConnect wallets={wallets}>
-```
+See how to send a [legacy transaction](send-legacy-transaction.md) and a [versioned transaction](send-versioned-transaction.md).

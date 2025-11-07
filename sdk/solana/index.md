@@ -15,9 +15,7 @@ After adding Solana to MetaMask Flask, [show test networks](https://support.meta
 
 ## Wallet Standard
 
-MetaMask implements the [Wallet Standard](https://github.com/wallet-standard/wallet-standard), so MetaMask is supported out-of-the-box for Solana dapps that use the Wallet Standard or that integrate Solana's [Wallet Adapter](https://github.com/anza-xyz/wallet-adapter/blob/master/APP.md).
-
-Learn more in Solana's [Interact With Wallets](https://solana.com/developers/courses/intro-to-solana/interact-with-wallets) documentation.
+MetaMask implements the [Wallet Standard](https://github.com/wallet-standard/wallet-standard), so MetaMask is supported out-of-the-box for Solana dapps that use the Wallet Standard or that integrate Solana's [Wallet Adapter](https://github.com/anza-xyz/wallet-adapter).
 
 :::note
 With the Wallet Standard, MetaMask does not appear as a connection option for users that don't already have MetaMask installed.
@@ -31,4 +29,4 @@ Several third-party libraries for Solana dapps detect and handle MetaMask out-of
 - [Dynamic](https://docs.dynamic.xyz/introduction/welcome)
 - [Privy](https://docs.privy.io/welcome)
 - [Reown](https://docs.reown.com/overview)
-- [Web3Auth](https://web3auth.io/docs)
+- [Embedded Wallets](/embedded-wallets)
