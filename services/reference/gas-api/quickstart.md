@@ -51,8 +51,7 @@ Create a `.env` file at the project root and add the following data:
 
 :::caution warning
 Do not commit the `.env` file to your repository if it contains sensitive data.
-You can [create a `.gitignore`
-file](https://docs.infura.io/tutorials/developer-tools/javascript-dotenv#create-a-.gitignore-file)
+You can [create a `.gitignore` file](../../how-to/javascript-dotenv.md#create-a-gitignore-file)
 to prevent accidentally committing the file.
 :::
 
@@ -65,7 +64,7 @@ Replace the Infura project credential placeholders with your own.
 
 :::note
 The `INFURA_API_KEY_SECRET` is optional and only necessary if you are using an
-[API key secret](https://docs.infura.io/dashboard/secure-an-api/api-key-secret) to authenticate requests.
+[API key secret](/developer-tools/dashboard/how-to/secure-an-api/api-key-secret) to authenticate requests.
 :::
 
 ## Create your script
