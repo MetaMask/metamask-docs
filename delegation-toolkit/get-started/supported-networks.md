@@ -9,38 +9,76 @@ The following tables display the networks supported by each version of the Smart
 
 If you don't see the network you're looking for, you can request support by emailing hellogators@consensys.net.
 
-## Mainnet networks
+## MetaMask Smart Accounts
+
+### Mainnet networks
 
 | Network Name        | v0.11.0 | v0.12.0 | v0.13.0 |
 | ------------------- | ------- | ------- | ------- |
-| Ethereum            | ✅      | ✅      | ✅      |
-| Polygon             | ✅      | ✅      | ✅      |
-| Binance Smart Chain | ✅      | ✅      | ✅      |
-| Optimism            | ✅      | ✅      | ✅      |
+| Arbitrum Nova       | ❌      | ✅      | ✅      |
 | Arbitrum One        | ✅      | ✅      | ✅      |
 | Base                | ✅      | ✅      | ✅      |
-| Gnosis Chain        | ✅      | ✅      | ✅      |
-| Linea               | ✅      | ✅      | ✅      |
-| Unichain            | ❌      | ✅      | ✅      |
-| Arbitrum Nova       | ❌      | ✅      | ✅      |
 | Berachain           | ❌      | ✅      | ✅      |
+| Binance Smart Chain | ✅      | ✅      | ✅      |
+| Ethereum            | ✅      | ✅      | ✅      |
+| Gnosis Chain        | ✅      | ✅      | ✅      |
 | Ink                 | ❌      | ❌      | ✅      |
+| Linea               | ✅      | ✅      | ✅      |
+| Optimism            | ✅      | ✅      | ✅      |
+| Polygon             | ✅      | ✅      | ✅      |
+| Unichain            | ❌      | ✅      | ✅      |
 
-## Testnet networks
+### Testnet networks
 
 | Network Name                | v0.11.0 | v0.12.0 | v0.13.0 |
 | --------------------------- | ------- | ------- | ------- |
-| Ethereum Sepolia            | ✅      | ✅      | ✅      |
-| Base Sepolia                | ✅      | ✅      | ✅      |
-| MegaEth                     | ✅      | ✅      | ✅      |
-| Gnosis Chiado               | ✅      | ✅      | ✅      |
-| Linea Sepolia               | ✅      | ✅      | ✅      |
 | Arbitrum Sepolia            | ❌      | ✅      | ✅      |
-| Unichain Sepolia            | ❌      | ✅      | ✅      |
+| Base Sepolia                | ✅      | ✅      | ✅      |
 | Berachain Bepolia           | ❌      | ✅      | ✅      |
-| Optimism Sepolia            | ❌      | ✅      | ✅      |
 | Binance Smart Chain         | ❌      | ✅      | ✅      |
-| Polygon Amoy                | ❌      | ✅      | ✅      |
-| Monad                       | ❌      | ✅      | ✅      |
-| Ink Sepolia                 | ❌      | ❌      | ✅      | 
 | Citrea                      | ❌      | ❌      | ✅      |
+| Ethereum Sepolia            | ✅      | ✅      | ✅      |
+| Gnosis Chiado               | ✅      | ✅      | ✅      |
+| Ink Sepolia                 | ❌      | ❌      | ✅      |
+| Linea Sepolia               | ✅      | ✅      | ✅      |
+| MegaEth                     | ✅      | ✅      | ✅      |
+| Monad                       | ❌      | ✅      | ✅      |
+| Optimism Sepolia            | ❌      | ✅      | ✅      |
+| Polygon Amoy                | ❌      | ✅      | ✅      |
+| Unichain Sepolia            | ❌      | ✅      | ✅      |
+
+## Advanced Permissions (ERC-7715)
+
+### Mainnet networks
+
+| Network Name        | v0.11.0 | v0.12.0 | v0.13.0 |
+| ------------------- | ------- | ------- | ------- |
+| Arbitrum Nova       | ❌      | ❌      | ✅      |
+| Arbitrum One        | ❌      | ❌      | ✅      |
+| Base                | ❌      | ❌      | ✅      |
+| Berachain           | ❌      | ❌      | ✅      |
+| Binance Smart Chain | ❌      | ❌      | ✅      |
+| Ethereum            | ❌      | ❌      | ✅      |
+| Gnosis              | ❌      | ❌      | ✅      |
+| Optimism            | ❌      | ❌      | ✅      |
+| Polygon             | ❌      | ❌      | ✅      |
+| Sonic               | ❌      | ❌      | ✅      |
+| Unichain            | ❌      | ❌      | ✅      |
+
+### Testnet networks
+
+| Network Name        | v0.11.0 | v0.12.0 | v0.13.0 |
+| ------------------- | ------- | ------- | ------- |
+| Arbitrum Sepolia    | ❌      | ❌      | ✅      |
+| Base Sepolia        | ❌      | ❌      | ✅      |
+| Berachain Bepolia   | ❌      | ❌      | ✅      |
+| Binance Smart Chain | ❌      | ❌      | ✅      |
+| Chiado              | ❌      | ❌      | ✅      |
+| Citrea              | ❌      | ❌      | ✅      |
+| Hoodi               | ❌      | ❌      | ✅      |
+| MegaEth             | ❌      | ❌      | ✅      |
+| Optimism Sepolia    | ❌      | ❌      | ✅      |
+| Polygon Amoy        | ❌      | ❌      | ✅      |
+| Sepolia             | ✅      | ✅      | ✅      |
+| Sonic               | ❌      | ❌      | ✅      |
+| Unichain Sepolia    | ❌      | ❌      | ✅      |
