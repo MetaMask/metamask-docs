@@ -15,7 +15,7 @@ It requires MetaMask Flask 13.5.0 or later, and may change in future releases.
 [ERC-7715](https://eip.tools/eip/7715) introduces a standard way for dapps to request permissions from a wallet to execute
 transactions on a user's behalf.
 
-The MetaMask Delegation Toolkit provides the experimental actions for ERC-7715 that lets a caller request permissions from MetaMask's permissions system.
+The MetaMask Smart Accounts Kit provides the experimental actions for ERC-7715 that lets a caller request permissions from MetaMask's permissions system.
 
 ## Request permissions
 
@@ -63,8 +63,8 @@ const grantedPermissions = await walletClient.grantPermissions([{
 import { createWalletClient, custom, createPublicClient, http } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
-import { toMetaMaskSmartAccount, Implementation } from "@metamask/delegation-toolkit";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+import { toMetaMaskSmartAccount, Implementation } from "@metamask/smart-accounts-kit";
 
 const publicClient = createPublicClient({
   chain: chain,
@@ -165,7 +165,7 @@ You should always verify the granted permissions and adjust your dapp's behavior
 ## Security considerations for `accountMeta`
 
 When a user grants a permission, they can provide [`accountMeta`](erc-7710-redeem-delegations.md#extract-relevant-data) which is an array of `factory` and `factoryData` values.
-These calls must be executed before redeeming the permission (this is handled for you in [`sendUserOperationWithDelegation`](../reference/erc7715/bundler-client.md#senduseroperationwithdelegation)).
+These calls must be executed before redeeming the permission (this is handled for you in [`sendUserOperationWithDelegation`](../reference/advanced-permissions/bundler-client.md#senduseroperationwithdelegation)).
 
 Because each `accountMeta` is an arbitrary call specified by the granter, it is important that these are executed carefully.
 We recommend taking the following precautions:

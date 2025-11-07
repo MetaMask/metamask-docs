@@ -22,6 +22,3 @@ The following methods are supported by Celo, but not supported by Infura using a
 - `eth_newFilter`
 - `eth_newBlockFilter`
 - `eth_uninstallFilter`
-
-Infura is also compatible with the [Celo ContractKit](https://docs.celo.org/developer/contractkit), a library of tools
-designed to integrate applications with Celo.

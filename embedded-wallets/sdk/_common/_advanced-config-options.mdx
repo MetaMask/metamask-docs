@@ -15,13 +15,13 @@ Control how long users stay authenticated and how sessions persist.
 
 ```tsx
 const web3AuthOptions = {
-  clientId: "YOUR_CLIENT_ID",
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
 
   // Session configuration
   sessionTime: 86400 * 7, // 7 days (in seconds)
-  storageType: "local", // 'local' (persistent across tabs) or 'session' (single tab only)
-};
+  storageType: 'local', // 'local' (persistent across tabs) or 'session' (single tab only)
+}
 ```
 
 ## Multi-Factor Authentication (MFA)

@@ -1,6 +1,6 @@
 ---
-description: Learn how to use the native token permissions with ERC-7715.
-keywords: [permissions, spending limit, restrict, 7715, erc-7715, native-token-permissions]
+description: Learn how to use the native token permissions with Advanced Permissions (ERC-7115).
+keywords: [permissions, spending limit, restrict, 7715, erc-7715, native-token-permissions, advanced permissions]
 ---
 
 import Tabs from "@theme/Tabs"; 
@@ -8,13 +8,13 @@ import TabItem from "@theme/TabItem";
 
 # Use native token permissions
  
-[ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) supports native token permission types that allow you to request fine-grained
+[Advanced Permissions (ERC-7115)](../../../concepts/advanced-permissions.md) supports native token permission types that allow you to request fine-grained
 permissions for native token transfers with time-based (periodic) or streaming conditions, depending on your use case.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../../configure-toolkit.md)
+- [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
+- [Configure the Smart Accounts Kit.](../../configure-toolkit.md)
 - [Create a session account.](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
 
 ## Native token periodic permission
@@ -44,6 +44,9 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     type: "account",
     data: {
       // Session account created as a prerequisite.
+      //
+      // The requested permissions will granted to the
+      // session account.
       address: sessionAccountAddress,
     },
   },
@@ -58,6 +61,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       justification: "Permission to use 0.001 ETH every day",
     },
   },
+  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -66,7 +70,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
@@ -105,22 +109,26 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     type: "account",
     data: {
       // Session account created as a prerequisite.
+      //
+      // The requested permissions will granted to the
+      // session account.
       address: sessionAccountAddress,
     },
   },
-   permission: {
-      type: "native-token-stream",
-      data: {
-        // 0.0001 ETH in wei format.
-        amountPerSecond: parseEther("0.0001"),
-        // 0.1 ETH in wei format.
-        initialAmount: parseEther("0.1"),
-        // 1 ETH in wei format.
-        maxAmount: parseEther("1"),
-        startTime: currentTime,
-        justification: "Permission to use 0.0001 ETH per second",
-      },
+  permission: {
+    type: "native-token-stream",
+    data: {
+      // 0.0001 ETH in wei format.
+      amountPerSecond: parseEther("0.0001"),
+      // 0.1 ETH in wei format.
+      initialAmount: parseEther("0.1"),
+      // 1 ETH in wei format.
+      maxAmount: parseEther("1"),
+      startTime: currentTime,
+      justification: "Permission to use 0.0001 ETH per second",
     },
+  },
+  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -129,7 +137,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/delegation-toolkit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),

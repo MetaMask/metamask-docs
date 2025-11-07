@@ -57,6 +57,14 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 
 ## Celo
 
+:::info Celo Alfajores Deprecation Notice
+
+As communicated by the
+[Celo Foundation](https://forum.celo.org/t/introducing-celo-sepolia-celo-s-new-ethereum-l2-testnet/12155)
+and Ethereum Foundation, the Holesky testnet has reached end of life as of September 30th, 2025. Celo Alfajores builds upon Holesky, which means it has also reached its end of life.
+
+:::
+
 | Network             | Description             | URL                                                   |
 |---------------------|-------------------------|-------------------------------------------------------|
 | Mainnet             | JSON-RPC over HTTPS     | `https://celo-mainnet.infura.io/v3/<YOUR-API-KEY>`    |

@@ -23,15 +23,15 @@ The `login` method takes in `LoginParams` as a required input.
 
 <TabItem value="table">
 
-| Parameter | Description |
-| --- | --- |
-| `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `JWT`, `SMS_PASSWORDLESS`, and `FARCASTER`. |
-| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
-| `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `Uri` as a value. |
-| `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `String` as a value. |
-| `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value. |
-| `dappShare?` | Custom verifier logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `String` as a value. |
-| `curve?` | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivKey` method. The default value is `Curve.SECP256K1`. |
+| Parameter            | Description                                                                                                                                                                                                                                                                                                                                                             |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `loginProvider`      | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `JWT`, `SMS_PASSWORDLESS`, and `FARCASTER`.                                                                             |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                       |
+| `redirectUrl?`       | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `Uri` as a value.                                                                                                                                                          |
+| `appState?`          | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `String` as a value.                                                                                                                                                                                                                      |
+| `mfaLevel?`          | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value.                                                                                                                                                                        |
+| `dappShare?`         | Custom verifier logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `String` as a value.                                                                                                                                                              |
+| `curve?`             | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivKey` method. The default value is `Curve.SECP256K1`. |
 
 </TabItem>
 
@@ -98,7 +98,7 @@ import com.web3auth.core.types.Web3AuthOptions
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
@@ -136,7 +136,7 @@ import com.web3auth.core.types.Web3AuthOptions
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
@@ -160,7 +160,7 @@ import com.web3auth.core.types.Web3AuthOptions
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
@@ -184,7 +184,7 @@ import com.web3auth.core.types.Web3AuthOptions
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
@@ -208,7 +208,7 @@ import com.web3auth.core.types.Web3AuthOptions
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
@@ -232,7 +232,7 @@ import com.web3auth.core.types.Web3AuthOptions
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
@@ -255,7 +255,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth( Web3AuthOptions( context = this, clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard network = Network.MAINNET, redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), ) )
+val web3Auth = Web3Auth( Web3AuthOptions( context = this, clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable network = Network.MAINNET, redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), ) )
 
 // focus-start val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login( LoginParams( Provider.SMS_PASSWORDLESS, extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344") ) ) // focus-end
 
@@ -272,7 +272,7 @@ import com.web3auth.core.types.Web3AuthOptions
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
@@ -296,7 +296,7 @@ import com.web3auth.core.types.Web3AuthOptions
 val web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )

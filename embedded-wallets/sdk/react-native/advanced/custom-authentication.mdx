@@ -138,7 +138,7 @@ import * as WebBrowser from '@toruslabs/react-native-web-browser'
 import Web3Auth, { WEB3AUTH_NETWORK, LOGIN_PROVIDER, TypeOfLogin } from '@web3auth/react-native-sdk'
 
 const web3auth = new Web3Auth(WebBrowser, {
-  clientId: 'YOUR_CLIENT_ID', // web3auth's client id
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // web3auth's client id
   network: WEB3AUTH_NETWORK.MAINNET, // or other networks
   loginConfig: {
     google: {
@@ -191,7 +191,7 @@ To use aggregate verifiers, set up the `loginConfig` object with multiple provid
 
 ```javascript
 const web3auth = new Web3Auth(WebBrowser, {
-  clientId: 'YOUR_CLIENT_ID', // Web3Auth's client id
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Web3Auth's client id
   network: WEB3AUTH_NETWORK.MAINNET, // or other networks
   loginConfig: {
     google: {

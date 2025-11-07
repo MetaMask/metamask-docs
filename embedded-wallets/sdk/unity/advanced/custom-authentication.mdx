@@ -139,7 +139,7 @@ void Start()
     web3Auth.setOptions(new Web3AuthOptions()
     {
         redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
-        clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Web3Auth's client ID
+        clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Web3Auth's client ID
         network = Web3Auth.Network.TESTNET, // or other networks
         loginConfig = new Dictionary<string, LoginConfigItem>
         {
@@ -218,7 +218,7 @@ void Start()
 
     web3Auth.setOptions(new Web3AuthOptions()
     {
-        clientId = "YOUR_WEB3AUTH_CLIENT_ID",
+        clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
         redirectUrl = new System.Uri("w3aexample://com.web3auth.unityaggregateexample"),
         network = Web3Auth.Network.SAPPHIRE_MAINNET,
         loginConfig = new Dictionary<string, LoginConfigItem>
