@@ -9,7 +9,7 @@ import React, {type ReactNode} from 'react'
 import {useThemeConfig} from '@docusaurus/theme-common'
 import {useNavbarMobileSidebar} from '@docusaurus/theme-common/internal'
 import NavbarItem, {type Props as NavbarItemConfig} from '@theme/NavbarItem'
-import ProductsMenuMobile from '@theme/Navbar/MobileSidebar/ProductsMenu'
+import ProductsMenuMobile from '../ProductsMenu'
 
 function useNavbarItems() {
   // TODO temporary casting until ThemeConfig type is improved
