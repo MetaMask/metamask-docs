@@ -25,14 +25,12 @@ export default function NavbarMobilePrimaryMenu(): ReactNode {
     <ul className="menu__list">
       {items.map((item, i) => {
         // Check if this is the Products dropdown
-        // We identify it by checking if it's a dropdown with label "Products"
-        // and if it contains an HTML item (which is our Products.html)
         const isProductsDropdown =
           item.type === 'dropdown' &&
           item.label === 'Products' &&
           item.items?.some((subItem) => subItem.type === 'html')
 
-        // If it's the Products dropdown, render our custom component
+        // If it's the Products dropdown, render custom component
         if (isProductsDropdown) {
           return (
             <ProductsMenuMobile
