@@ -34,7 +34,7 @@ The [official Ethereum documentation](https://ethereum.org/en/) for more informa
       description: "View the APIs available for communicating with the Ethereum network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create and secure an API key."
     }
