@@ -31,11 +31,10 @@ and [`accountsChanged`](../../reference/provider-api.md#accountschanged) provide
 For example:
 
 ```javascript
-import { MetaMaskSDK } from "@metamask/sdk";
+import { createEVMClient } from "@metamask/connect/evm";
 
 // Initialize SDK
-const MMSDK = new MetaMaskSDK();
-const provider = MMSDK.getProvider();
+const evmClient = createEVMClient();
 
 // Connect wallet
 async function connectWallet() {
@@ -43,7 +42,7 @@ async function connectWallet() {
     // Disable button while request is pending
     document.getElementById("connectBtn").disabled = true;
     
-    const accounts = await provider.request({ 
+    const accounts = await evmClient.request({ 
       method: "eth_requestAccounts" 
     });
     
@@ -68,14 +67,14 @@ async function connectWallet() {
 // Disconnect wallet
 async function disconnectWallet() {
   try {
-    await MMSDK.terminate()
+    await evmClient.terminate()
   } catch (err) {
     console.error("Error with disconnecting:", err)
   }
 }
 
 // Handle account changes
-provider.on("accountsChanged", (accounts) => {
+provider.on("accountsChanged", (accounts) => { // TO DO: Update with MM Connect usage
   if (accounts.length === 0) {
     // User disconnected
     document.getElementById("status").textContent = "Not connected";
@@ -106,14 +105,13 @@ You can use MM Connect's [`connectAndSign`](../../reference/methods.md#connectan
 For example:
 
 ```js
-import { MetaMaskSDK } from "@metamask/sdk"
+import { createEVMClient } from "@metamask/connect/evm"
 
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = createEVMClient()
 
 async function handleConnectAndSign() {
   try {
-    const signature = await MMSDK.connectAndSign({ msg: "Hello in one go!" })
+    const signature = await evmClient.connectAndSign({ msg: "Hello in one go!" })
     console.log("Signature:", signature)
   } catch (err) {
     console.error("Error with connectAndSign:", err)

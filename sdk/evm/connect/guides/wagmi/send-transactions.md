@@ -19,6 +19,11 @@ Wagmi provides hooks for sending transactions and tracking their status.
 The following are examples of sending a [basic transaction](#send-a-basic-transaction) and an
 [advanced transaction with gas estimation](#send-an-advanced-transaction-with-gas-estimation).
 
+:::info Send batch transactions
+This page describes how to send one transaction at a time using Wagmi.
+You can also follow [this tutorial to send atomic batch transactions](/tutorials/upgrade-eoa-to-smart-account) with Wagmi and MM Connect, upgrading an externally owned account to a smart account (specified by [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792) and [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702)).
+:::
+
 ## Send a basic transaction
 
 ```tsx

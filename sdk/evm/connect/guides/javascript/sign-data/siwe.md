@@ -44,15 +44,19 @@ The following is an example of setting up SIWE with MetaMask using
 [`personal_sign`](../../../reference/json-rpc-api/index.md):
 
 ```javascript title="index.js"
+import { createEVMClient } from "@metamask/connect/evm";
+
+// Initialize SDK
+const evmClient = createEVMClient();
+
 const siweSign = async (siweMessage) => {
   try {
     const from = accounts[0]
     const msg = `0x${Buffer.from(siweMessage, "utf8").toString("hex")}`
-    const sign = await provider // Or window.ethereum if you don't support EIP-6963.
-      .request({
-        method: "personal_sign",
-        params: [msg, from],
-      })
+    const sign = await evmClient.request({
+      method: "personal_sign",
+      params: [msg, from],
+    })
     siweResult.innerHTML = sign
   } catch (err) {
     console.error(err)

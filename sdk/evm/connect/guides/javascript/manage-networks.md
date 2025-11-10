@@ -29,10 +29,15 @@ The following example detects the current network using the
 [`chainChanged`](../../reference/provider-api.md#chainchanged) provider event:
 
 ```javascript
+import { createEVMClient } from "@metamask/connect/evm";
+
+// Initialize SDK
+const evmClient = createEVMClient();
+
 // Get current chain ID
 async function getCurrentChain() {
   try {
-    const chainId = await ethereum.request({ 
+    const chainId = await evmClient.request({ 
       method: "eth_chainId" 
     });
     console.log("Current chain ID:", chainId);
@@ -43,7 +48,7 @@ async function getCurrentChain() {
 }
 
 // Listen for network changes
-ethereum.on("chainChanged", (chainId) => {
+ethereum.on("chainChanged", (chainId) => { // TO DO: Update with MM Connect usage
   console.log("Network changed to:", chainId);
   // We recommend reloading the page
   window.location.reload();
@@ -80,7 +85,7 @@ async function switchNetwork(networkKey) {
   
   try {
     // Try to switch to the network
-    await ethereum.request({
+    await evmClient.request({
       method: "wallet_switchEthereumChain",
       params: [{ chainId: network.chainId }]
     });
@@ -88,7 +93,7 @@ async function switchNetwork(networkKey) {
     // If the error code is 4902, the network needs to be added
     if (err.code === 4902) {
       try {
-        await ethereum.request({
+        await evmClient.request({
           method: "wallet_addEthereumChain",
           params: [{
             chainId: network.chainId,

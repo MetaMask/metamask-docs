@@ -67,12 +67,12 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up manually
 
-### 1. Install the SDK
+### 1. Install MM Connect
 
 Install MM Connect along with its peer dependencies to an existing React project:
 
 ```bash npm2yarn
-npm install @metamask/sdk wagmi viem@2.x @tanstack/react-query
+npm install @metamask/connect/evm wagmi viem@2.x @tanstack/react-query
 ```
 
 ### 2. Import required dependencies

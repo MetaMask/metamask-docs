@@ -19,7 +19,7 @@ A promise that resolves to an array of account addresses.
 ### Example
 
 ```javascript
-const accounts = await sdk.connect();
+const accounts = await evmClient.connect();
 console.log("Connected accounts:", accounts);
 ```
 
@@ -38,7 +38,7 @@ A promise that resolves to the signature of the signed message.
 ### Example
 
 ```javascript
-const signature = await sdk.connectAndSign({ 
+const signature = await evmClient.connectAndSign({ 
   msg: "Hello from my dapp!" 
 });
 console.log("Signature:", signature);
@@ -61,7 +61,7 @@ A promise that resolves to the result of the RPC call.
 ### Example
 
 ```javascript
-const result = await sdk.connectWith({
+const result = await evmClient.connectWith({
   rpc: {
     method: "eth_getBalance",
     params: ["0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6", "latest"]
@@ -81,7 +81,7 @@ The active provider, or undefined if no provider is found.
 ### Example
 
 ```javascript
-const provider = sdk.getProvider();
+const provider = evmClient.getProvider();
 if (provider) {
   // Use the provider for RPC calls
   const accounts = await provider.request({
@@ -92,16 +92,16 @@ if (provider) {
 
 ## `isInitialized`
 
-Checks if the SDK has been initialized.
+Checks if MM Connect has been initialized.
 
 ### Returns
 
-`True` if the SDK is initialized, `false` otherwise.
+`True` if MM Connect is initialized, `false` otherwise.
 
 ### Example
 
 ```javascript
-if (sdk.isInitialized()) {
+if (evmClient.isInitialized()) {
   console.log("SDK is ready to use");
 }
 ```
@@ -118,6 +118,6 @@ Use `terminate()` instead.
 ### Example
 
 ```javascript
-await sdk.terminate();
+await evmClient.terminate();
 console.log("Connection terminated");
 ```

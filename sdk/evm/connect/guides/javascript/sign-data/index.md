@@ -63,6 +63,11 @@ Ensure your contract is as readable as possible to the user.
 The following is an example of using `eth_signTypedData_v4` with MetaMask:
 
 ```javascript title="index.js"
+import { createEVMClient } from "@metamask/connect/evm";
+
+// Initialize SDK
+const evmClient = createEVMClient();
+
 signTypedDataV4Button.addEventListener("click", async function (event) {
   event.preventDefault()
 
@@ -137,38 +142,37 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
   var params = [from[0], msgParams]
   var method = "eth_signTypedData_v4"
 
-  provider // Or window.ethereum if you don't support EIP-6963.
-    .sendAsync(
-      {
-        method,
-        params,
-        from: from[0],
-      },
-      function (err, result) {
-        if (err) return console.dir(err)
-        if (result.error) {
-          alert(result.error.message)
-        }
-        if (result.error) return console.error("ERROR", result)
-        console.log("TYPED SIGNED:" + JSON.stringify(result.result))
-
-        const recovered = sigUtil.recoverTypedSignature_v4({
-          data: JSON.parse(msgParams),
-          sig: result.result,
-        })
-
-        if (
-          ethUtil.toChecksumAddress(recovered) ===
-          ethUtil.toChecksumAddress(from)
-        ) {
-          alert("Successfully recovered signer as " + from)
-        } else {
-          alert(
-            "Failed to verify signer when comparing " + result + " to " + from
-          )
-        }
+  evmClient.sendAsync( // TO DO: Confirm if MM Connect supports sendAsync
+    {
+      method,
+      params,
+      from: from[0],
+    },
+    function (err, result) {
+      if (err) return console.dir(err)
+      if (result.error) {
+        alert(result.error.message)
       }
-    )
+      if (result.error) return console.error("ERROR", result)
+      console.log("TYPED SIGNED:" + JSON.stringify(result.result))
+
+      const recovered = sigUtil.recoverTypedSignature_v4({
+        data: JSON.parse(msgParams),
+        sig: result.result,
+      })
+
+      if (
+        ethUtil.toChecksumAddress(recovered) ===
+        ethUtil.toChecksumAddress(from)
+      ) {
+        alert("Successfully recovered signer as " + from)
+      } else {
+        alert(
+          "Failed to verify signer when comparing " + result + " to " + from
+        )
+      }
+    }
+  )
 })
 ```
 
@@ -210,6 +214,11 @@ It's often used for signature challenges that are authenticated on a web server,
 The following is an example of using `personal_sign` with MetaMask:
 
 ```javascript title="index.js"
+import { createEVMClient } from "@metamask/connect/evm";
+
+// Initialize SDK
+const evmClient = createEVMClient();
+
 personalSignButton.addEventListener("click", async function (event) {
   event.preventDefault()
   const exampleMessage = "Example `personal_sign` message."
@@ -218,7 +227,7 @@ personalSignButton.addEventListener("click", async function (event) {
     // For historical reasons, you must submit the message to sign in hex-encoded UTF-8.
     // This uses a Node.js-style buffer shim in the browser.
     const msg = `0x${Buffer.from(exampleMessage, "utf8").toString("hex")}`
-    const sign = await ethereum.request({
+    const sign = await evmClient.request({
       method: "personal_sign",
       params: [msg, from],
     })

@@ -103,40 +103,40 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
       description: "Invalid typed data structure"
     }
   ]}
-  exampleRequest={`await window.ethereum.request({
-  "method": "eth_signTypedData_v4",
-  "params": [
-    "0x3b7252d007059ffc82d16d022da3cbf9992d2f70",
-    {
-      "types": {
-        "EIP712Domain": [
-          { "name": "name", "type": "string" },
-          { "name": "version", "type": "string" },
-          { "name": "chainId", "type": "uint256" },
-          { "name": "verifyingContract", "type": "address" }
-        ],
-        "Person": [
-          { "name": "name", "type": "string" },
-          { "name": "wallet", "type": "address" }
-        ]
-      },
-      "primaryType": "Person",
-      "domain": {
-        "name": "Example App",
-        "version": "1",
-        "chainId": 1,
-        "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
-      },
-      "message": {
-        "name": "Alice",
-        "wallet": "0x3b7252d007059ffc82d16d022da3cbf9992d2f70"
+  exampleRequest={`await evmClient.request({
+    method: "eth_signTypedData_v4",
+    params: [
+      "0x3b7252d007059ffc82d16d022da3cbf9992d2f70",
+      {
+        "types": {
+          "EIP712Domain": [
+            { "name": "name", "type": "string" },
+            { "name": "version", "type": "string" },
+            { "name": "chainId", "type": "uint256" },
+            { "name": "verifyingContract", "type": "address" }
+          ],
+          "Person": [
+            { "name": "name", "type": "string" },
+            { "name": "wallet", "type": "address" }
+          ]
+        },
+        "primaryType": "Person",
+        "domain": {
+          "name": "Example App",
+          "version": "1",
+          "chainId": 1,
+          "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
+        },
+        "message": {
+          "name": "Alice",
+          "wallet": "0x3b7252d007059ffc82d16d022da3cbf9992d2f70"
+        }
       }
-    }
-  ]
+    ]
 });`}
   exampleResponse={`{
-  "id": 1,
-  "jsonrpc": "2.0",
-  "result": "0x4355c47d63924e8a72e509b65029052eb6c299d53a04e167c5775fd466751c9d07299936d304c153f6443dfa05f40ff007d72911b6f72307f996231605b915621c"
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x4355c47d63924e8a72e509b65029052eb6c299d53a04e167c5775fd466751c9d07299936d304c153f6443dfa05f40ff007d72911b6f72307f996231605b915621c"
 }`}
 />
