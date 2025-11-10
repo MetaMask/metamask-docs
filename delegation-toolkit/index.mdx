@@ -33,15 +33,15 @@ Delegation is powered by the [Delegation Framework](https://github.com/metamask/
   }
 ]}/>
 
-## Request ERC-7715 Permissions
+## Request Advanced Permissions (ERC-7715)
 
-The toolkit supports [ERC-7715 permissions](concepts/erc7715.md), which are fine-grained permissions dapps can request from users directly via the MetaMask browser extension.
-ERC-7715 permissions allow you to perform executions on the behalf of MetaMask users.
+The toolkit supports [Advanced Permissions (ERC-7715)](concepts/advanced-permissions.md), which are fine-grained permissions dapps can request from users directly via the MetaMask browser extension.
+Advanced Permissions allow you to perform executions on the behalf of MetaMask users.
 
 <CardList items={[
   {
-    href: "guides/erc7715/execute-on-metamask-users-behalf",
-    title: "ERC-7715 guide",
+    href: "guides/advanced-permissions/execute-on-metamask-users-behalf",
+    title: "Advanced Permissions (ERC-7715) guide",
     description: "Execute on the behalf of MetaMask users.",
   }
 ]}/>
@@ -51,35 +51,37 @@ ERC-7715 permissions allow you to perform executions on the behalf of MetaMask u
 The Smart Accounts Kit is integrated with multiple ecosystem partners.
 Check out the following documentation from these partners:
 
-<CardList items={[
-  {
-    href: "https://scaffoldeth.io/extensions",
-    title: "Scaffold-ETH 2",
-    description: "Install the MetaMask Smart Accounts Kit extension for Scaffold-ETH 2.",
-    buttonIcon: 'external-arrow',
-  },
-  {
-    href: "https://viem.sh/account-abstraction/accounts/smart/toMetaMaskSmartAccount",
-    title: "Viem",
-    description: "Use MetaMask Smart Accounts with Viem.",
-    buttonIcon: 'external-arrow',
-  },
-  {
-    href: "https://docs.arbitrum.io/for-devs/third-party-docs/MetaMask/",
-    title: "Arbitrum",
-    description: "Use MetaMask Smart Accounts with Arbitrum.",
-    buttonIcon: 'external-arrow',
-  },
-  {
-    href: "https://docs.pimlico.io/guides/how-to/accounts/use-metamask-account",
-    title: "permissionless.js",
-    description: "Use MetaMask Smart Accounts with permissionless.js.",
-    buttonIcon: 'external-arrow',
-  },
-  {
-    href: "https://docs.monad.xyz/tooling-and-infra/account-abstraction/wallet-providers#metamask-delegation-toolkit",
-    title: "Monad",
-    description: "Use MetaMask Smart Accounts with Monad Testnet.",
-    buttonIcon: 'external-arrow',
-  }
-]}/>
+<CardList
+  items={[
+    {
+      href: "https://scaffoldeth.io/extensions",
+      title: "Scaffold-ETH 2",
+      description: "Install the MetaMask Delegation Toolkit extension for Scaffold-ETH 2.",
+      buttonIcon: "external-arrow",
+    },
+    {
+      href: "https://viem.sh/account-abstraction/accounts/smart/toMetaMaskSmartAccount",
+      title: "Viem",
+      description: "Use MetaMask Smart Accounts with Viem.",
+      buttonIcon: "external-arrow",
+    },
+    {
+      href: "https://docs.arbitrum.io/for-devs/third-party-docs/MetaMask",
+      title: "Arbitrum",
+      description: "Use MetaMask Smart Accounts with Arbitrum.",
+      buttonIcon: "external-arrow",
+    },
+    {
+      href: "https://docs.pimlico.io/guides/how-to/accounts/use-metamask-account",
+      title: "permissionless.js",
+      description: "Use MetaMask Smart Accounts with permissionless.js.",
+      buttonIcon: "external-arrow",
+    },
+    {
+      href: "https://docs.monad.xyz/tooling-and-infra/account-abstraction/wallet-providers#metamask-delegation-toolkit",
+      title: "Monad",
+      description: "Use MetaMask Smart Accounts with Monad Testnet.",
+      buttonIcon: "external-arrow",
+    }
+  ]}
+/>

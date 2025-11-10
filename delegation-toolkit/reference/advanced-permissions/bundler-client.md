@@ -2,7 +2,7 @@
 description: Bundler Client actions reference.
 sidebar_label: Bundler Client actions
 toc_max_heading_level: 2
-keywords: [ERC-7715, Viem, bundler client, actions, reference]
+keywords: [ERC-7715, Viem, bundler client, actions, reference, advanced permissions]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 # Bundler Client actions reference
 
-The following actions are related to the [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) used to [execute on a MetaMask user's behalf](../../guides/erc7715/execute-on-metamask-users-behalf.md).
+The following actions are related to the [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) used to [execute on a MetaMask user's behalf](../../guides/advanced-permissions/execute-on-metamask-users-behalf.md).
 
 ## `sendUserOperationWithDelegation`
 
@@ -31,7 +31,7 @@ Objects in the `calls` array also require the following parameters:
 | Name | Type | Required | Description                                                                                                                                                                                        |
 | ---- | ---- | -------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `delegationManager` | `Address` | Yes | The address of Delegation Manager.                                                                                                                                                                 |
-| `permissionsContext` | `Hex` | Yes | Encoded calldata for redeeming permissions. If you're not using ERC-7715, you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
+| `permissionsContext` | `Hex` | Yes | Encoded calldata for redeeming permissions. If you're not using Advanced Permissions (ERC-7715), you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
 
 ### Example
 
@@ -73,7 +73,7 @@ import { createPublicClient, http, createBundlerClient } from "viem";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
 import { createBundlerClient } from "viem/account-abstraction";
-import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/actions";
 import { toMetaMaskSmartAccount, Implementation } from "@metamask/smart-accounts-kit";
 
 export const publicClient = createPublicClient({

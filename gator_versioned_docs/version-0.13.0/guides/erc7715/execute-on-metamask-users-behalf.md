@@ -56,8 +56,8 @@ const publicClient = createPublicClient({
 ### 3. Set up a session account
 
 Set up a session account which can either be a smart account or an externally owned account (EOA)
-to request ERC-7715 permissions. This account is responsible for executing transactions
-on behalf of the user. 
+to request ERC-7715 permissions. The requested permissions are granted to the session account, which
+is responsible for executing transactions on behalf of the user.
 
 <Tabs>
 <TabItem value="Smart account">
@@ -97,7 +97,7 @@ const sessionAccount = privateKeyToAccount("0x...");
 
 ### 4. Check the EOA account code
 
-Currently, ERC-7715 does not support automatically upgrading a user's account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
+Currently, ERC-7715 does not support automatically upgrading a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
 ensure that the user is upgraded to a smart account before requesting ERC-7715 permissions.
 
 If the user has not yet been upgraded, you can handle the upgrade [programmatically](/sdk/evm/connect/guides/javascript/send-transactions/batch-transactions) or ask the 
@@ -162,6 +162,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
   signer: {
     type: "account",
     data: {
+      // The requested permissions will granted to the
+      // session account.
       address: sessionAccount.address,
     },
   },

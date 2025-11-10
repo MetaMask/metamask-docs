@@ -40,7 +40,7 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
      :::tip
      Alternatively, to prevent committing your seed phrase, we recommend adding your seed phrase to a
-     [`.env` file](https://docs.infura.io/tutorials/developer-tools/javascript-dotenv) and using the
+     [`.env` file](/services/how-to/javascript-dotenv) and using the
      `process.env` global variable in `hardhat.config.js`.
      :::
 
