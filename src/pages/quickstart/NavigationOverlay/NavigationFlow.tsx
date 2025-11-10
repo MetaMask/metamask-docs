@@ -60,7 +60,7 @@ const navigationOptions: NavigationOption[] = [
     id: 'smart-accounts-kit-2',
     title: 'I want to perform executions on behalf of MetaMask users',
     description: 'Smart Accounts Kit',
-    link: '/smart-accounts-kit/guides/erc7715/execute-on-metamask-users-behalf',
+    link: '/smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf',
   },
   {
     id: 'smart-accounts-kit-3',
