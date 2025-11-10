@@ -33,7 +33,6 @@ For example:
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 // Connect wallet

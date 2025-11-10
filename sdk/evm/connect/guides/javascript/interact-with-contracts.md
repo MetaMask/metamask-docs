@@ -25,7 +25,6 @@ The following example reads contract data using the [`eth_call`](../../reference
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 async function getBalance(contractAddress, userAddress) {

@@ -31,7 +31,6 @@ The following example detects the current network using the
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 // Get current chain ID

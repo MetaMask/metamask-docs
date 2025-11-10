@@ -65,7 +65,6 @@ The following is an example of using `eth_signTypedData_v4` with MetaMask:
 ```javascript title="index.js"
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 signTypedDataV4Button.addEventListener("click", async function (event) {
@@ -216,7 +215,6 @@ The following is an example of using `personal_sign` with MetaMask:
 ```javascript title="index.js"
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 personalSignButton.addEventListener("click", async function (event) {

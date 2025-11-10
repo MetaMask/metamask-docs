@@ -46,7 +46,6 @@ The following is an example of setting up SIWE with MetaMask using
 ```javascript title="index.js"
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 const siweSign = async (siweMessage) => {

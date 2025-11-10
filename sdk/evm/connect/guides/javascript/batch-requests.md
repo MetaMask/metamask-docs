@@ -36,7 +36,6 @@ The following is an example of batching JSON-RPC requests using `metamask_batch`
 ```js
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 async function handleBatchRequests() {

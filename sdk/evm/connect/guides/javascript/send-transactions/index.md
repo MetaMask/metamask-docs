@@ -29,7 +29,6 @@ RPC methods.
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 async function sendTransaction(recipientAddress, amount) {
@@ -135,7 +134,6 @@ RPC method.
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 async function estimateGas(transaction) {

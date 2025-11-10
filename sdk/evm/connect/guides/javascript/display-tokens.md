@@ -40,7 +40,6 @@ To prompt users to add an ERC-20 token, you can add something like the following
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 const tokenAddress = "0xd00981105e61274c8a5cd5a88fe7e037d935b513"
@@ -116,7 +115,6 @@ To prompt users to add a single NFT, add something like the following to your pr
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 try {

@@ -52,7 +52,6 @@ For example:
 ```js title="index.js"
 import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
 const evmClient = createEVMClient();
 
 const capabilities = await evmClient.request({
