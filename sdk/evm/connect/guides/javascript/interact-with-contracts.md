@@ -107,7 +107,7 @@ async function watchTransaction(txHash) {
   return new Promise((resolve, reject) => {
     const checkTransaction = async () => {
       try {
-        const tx = await evmClient.request({
+        const tx = await provider.request({
           method: "eth_getTransactionReceipt",
           params: [txHash],
         });
