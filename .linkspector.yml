@@ -1,5 +1,5 @@
 dirs:
-  - ./delegation-toolkit
+  - ./smart-accounts-kit
   - ./developer-tools
   - ./embedded-wallets
   - ./sdk
@@ -24,7 +24,7 @@ ignorePatterns:
 - pattern: '^http(s)?://metamask.io'
 - pattern: '^http(s)?://rivet.cloud'
 - pattern: '^/img/'
-- pattern: '^/delegation-toolkit/'
+- pattern: '^/smart-accounts-kit/'
 - pattern: '^/developer-tools/'
 - pattern: '^/embedded-wallets/'
 - pattern: '^/sdk/'
