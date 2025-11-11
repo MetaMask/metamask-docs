@@ -36,7 +36,7 @@ Select an option below to get started with the Sei network.
       description: "View the APIs available for communicating with the Sei network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create and secure an API key."
     }

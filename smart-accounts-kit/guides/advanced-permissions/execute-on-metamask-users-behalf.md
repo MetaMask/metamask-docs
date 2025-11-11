@@ -1,7 +1,7 @@
 ---
-description: Use ERC-7715 permissions to perform executions on a MetaMask user's behalf.
+description: Use Advanced Permissions (ERC-7115) to perform executions on a MetaMask user's behalf.
 sidebar_label: Execute on a MetaMask user's behalf
-keywords: [execution, smart account, create, redeem, delegation, erc 7715, 7715, session account]
+keywords: [execution, smart account, create, redeem, delegation, erc 7715, 7715, session account, advanced permissions]
 ---
 
 import Tabs from "@theme/Tabs"; 
@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Perform executions on a MetaMask user's behalf
 
-[ERC-7715 permissions](../../concepts/erc7715.md) are fine-grained permissions that your dapp can request from a MetaMask user to execute transactions on their 
+[Advanced Permissions (ERC-7115)](../../concepts/advanced-permissions.md) are fine-grained permissions that your dapp can request from a MetaMask user to execute transactions on their 
 behalf. For example, a user can grant your dapp permission to spend 10 USDC per day to buy ETH over the course 
 of a month. Once the permission is granted, your dapp can use the allocated 10 USDC each day to 
 purchase ETH directly from the MetaMask user's account.
@@ -26,12 +26,11 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 Set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) using Viem's `createWalletClient` function. This client will
 help you interact with MetaMask Flask. 
 
-Then, extend the Wallet Client functionality using `erc7715ProviderActions`. These actions enable you to request ERC-7715
-permissions from the user.
+Then, extend the Wallet Client functionality using `erc7715ProviderActions`. These actions enable you to request Advanced Permissions from the user.
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 
 const walletClient = createWalletClient({
   transport: custom(window.ethereum),
@@ -56,7 +55,7 @@ const publicClient = createPublicClient({
 ### 3. Set up a session account
 
 Set up a session account which can either be a smart account or an externally owned account (EOA)
-to request ERC-7715 permissions. The requested permissions are granted to the session account, which
+to request Advanced Permissions. The requested permissions are granted to the session account, which
 is responsible for executing transactions on behalf of the user.
 
 <Tabs>
@@ -97,14 +96,14 @@ const sessionAccount = privateKeyToAccount("0x...");
 
 ### 4. Check the EOA account code
 
-Currently, ERC-7715 does not support automatically upgrading a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
-ensure that the user is upgraded to a smart account before requesting ERC-7715 permissions.
+Currently, Advanced Permissions do not support automatically upgrading a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
+ensure that the user is upgraded to a smart account before requesting Advanced Permissions.
 
 If the user has not yet been upgraded, you can handle the upgrade [programmatically](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) or ask the 
 user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
 
 :::info Why is a Smart Account upgrade is required?
-MetaMask's ERC-7715 implementation requires the user to be upgraded to a MetaMask 
+MetaMask's Advanced Permissions (ERC-7115) implementation requires the user to be upgraded to a MetaMask 
 Smart Account because, under the hood, you're requesting a signature for an [ERC-7710 delegation](../../concepts/delegation/index.md).
 ERC-7710 delegation is one of the core features supported only by MetaMask Smart Accounts.
 :::
@@ -138,11 +137,11 @@ if (code) {
 }
 ```
 
-### 5. Request ERC-7715 permissions
+### 5. Request Advanced Permissions
 
-Request ERC-7715 permissions from the user. In this example, you'll request an
+Request Advanced Permissions from the user. In this example, you'll request an
 [ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission) using the Wallet Client's 
-[`requestExecutionPermissions`](../../reference/erc7715/wallet-client.md#requestexecutionpermissions) action.
+[`requestExecutionPermissions`](../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) action.
 
 ```typescript
 import { sepolia as chain } from "viem/chains";
@@ -193,14 +192,14 @@ to estimate gas for user operations and submit transactions to the network.
 For an EOA, set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) 
 using Viem's `createWalletClient` function. This lets you send transactions directly to the network.
 
-The toolkit provides public actions for both of the clients which can be used to redeem ERC-7715 permissions, and execute transactions on a user's behalf. 
+The toolkit provides public actions for both of the clients which can be used to redeem Advanced Permissions, and execute transactions on a user's behalf. 
 
 <Tabs>
 <TabItem value="Smart account">
 
 ```typescript
 import { createBundlerClient } from "viem/account-abstraction";
-import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7710BundlerActions } from "@metamask/smart-accounts-kit/actions";
 
 const bundlerClient = createBundlerClient({
   client: publicClient,
@@ -215,7 +214,7 @@ const bundlerClient = createBundlerClient({
 
 ```typescript
 import { createWalletClient, http } from "viem";
-import { erc7710WalletActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7710WalletActions } from "@metamask/smart-accounts-kit/actions";
 import { sepolia as chain } from "viem/chains";
 
 const sessionAccountWalletClient = createWalletClient({
@@ -229,13 +228,13 @@ const sessionAccountWalletClient = createWalletClient({
 </Tabs>
 
 
-### 7. Redeem ERC-7715 permissions
+### 7. Redeem Advanced Permissions
 
 The session account can now redeem the permissions. The redeem transaction is sent to the `DelegationManager` contract, which validates the delegation and executes actions on the user's behalf.
 
 To redeem the permissions, use the client action based on your session account type.
-A smart account uses the Bundler Client's [`sendUserOperationWithDelegation`](../../reference/erc7715/bundler-client.md#senduseroperationwithdelegation) action,
-and an EOA uses the Wallet Client's [`sendTransactionWithDelegation`](../../reference/erc7715/wallet-client.md#sendtransactionwithdelegation) action:
+A smart account uses the Bundler Client's [`sendUserOperationWithDelegation`](../../reference/advanced-permissions/bundler-client.md#senduseroperationwithdelegation) action,
+and an EOA uses the Wallet Client's [`sendTransactionWithDelegation`](../../reference/advanced-permissions/wallet-client.md#sendtransactionwithdelegation) action:
 
 <Tabs>
 <TabItem value="Smart account">

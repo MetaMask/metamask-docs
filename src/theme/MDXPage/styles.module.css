@@ -134,6 +134,12 @@
   gap: 8px;
 }
 
+@media only screen and (width < 768px) {
+  .bookmarkButton {
+    display: none;
+  }
+}
+
 .bottomMenu {
   display: flex;
   flex-direction: row;

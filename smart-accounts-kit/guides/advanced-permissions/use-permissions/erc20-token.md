@@ -1,5 +1,5 @@
 ---
-description: Learn how to use the ERC-20 token permissions with ERC-7715.
+description: Learn how to use the ERC-20 token permissions with Advanced Permissions (ERC-7715).
 keywords: [permissions, spending limit, restrict, 7715, erc-7715, erc20-permissions]
 ---
 
@@ -8,7 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # Use ERC-20 token permissions
  
-[ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) supports ERC-20 token permission types that allow you to request fine-grained
+[Advanced Permissions (ERC-7715)](../../../concepts/advanced-permissions.md) supports ERC-20 token permission types that allow you to request fine-grained
 permissions for ERC-20 token transfers with time-based (periodic) or streaming conditions, depending on your use case.
 
 ## Prerequisites
@@ -73,7 +73,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
@@ -144,7 +144,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 ```typescript
 import { createWalletClient, custom } from "viem";
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/experimental";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),

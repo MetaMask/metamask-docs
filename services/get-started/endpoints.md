@@ -10,7 +10,7 @@ import GasApiNetworks from "@site/src/components/GasApiNetworks.tsx";
 
 The following lists all the network endpoints supported by Infura.
 
-Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](../../../developer-tools/dashboard/).
+Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](/developer-tools/dashboard).
 
 ## Arbitrum
 
@@ -105,7 +105,7 @@ to have access to the IPFS network.
 
 :::info
 
-Include your authentication details when [making IPFS requests](/reference/ipfs/quickstart.md).
+Include your authentication details when [making IPFS requests](../reference/ipfs/quickstart.md).
 
 :::
 

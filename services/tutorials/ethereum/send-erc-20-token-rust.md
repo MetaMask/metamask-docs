@@ -5,7 +5,7 @@ sidebar_position: 7
 
 # Send an ERC-20 token
 
-In this tutorial we'll use Rust and the [ethers-rs library](https://www.gakonst.com/ethers-rs/getting-started/intro.html) to send an ERC-20 token from one address to another. This tutorial uses the Sepolia testnet and sends the [Chainlink token (LINK)](https://sepolia.etherscan.io/token/0x779877a7b0d9e8603169ddbd7836e478b4624789#code).
+In this tutorial we'll use Rust and the [ethers-rs library](https://docs.rs/ethers/latest/ethers/) to send an ERC-20 token from one address to another. This tutorial uses the Sepolia testnet and sends the [Chainlink token (LINK)](https://sepolia.etherscan.io/token/0x779877a7b0d9e8603169ddbd7836e478b4624789#code).
 
 ## Prerequisites
 

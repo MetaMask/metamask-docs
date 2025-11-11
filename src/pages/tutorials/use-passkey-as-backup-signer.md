@@ -9,7 +9,7 @@ author: MetaMask Developer Relations
 discourseTopicId: 2612
 ---
 
-This tutorial walks you through using a passkey as a backup signer for your [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts).
+This tutorial walks you through using a passkey as a backup signer for your [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts).
 
 ## About passkeys
 
@@ -17,7 +17,7 @@ An externally owned account (EOA) uses the secp256k1 elliptic curve to generate 
 In contrast, a passkey (WebAuthn credential) uses the secp256r1 (P-256) elliptic curve to generate key pairs and signatures.
 Passkeys eliminate the need for traditional seed phrases that are difficult to remember, enabling a more seamless and secure way for users to access their web3 wallets.
 
-MetaMask Smart Accounts offer a [Hybrid implementation](/delegation-toolkit/concepts/smart-accounts/#hybrid-smart-account), which supports signature validation for both secp256k1 and secp256r1 curves.
+MetaMask Smart Accounts offer a [Hybrid implementation](/smart-accounts-kit/concepts/smart-accounts/#hybrid-smart-account), which supports signature validation for both secp256k1 and secp256r1 curves.
 This allows you to add a passkey as a backup signer for your smart account.
 
 You can add passkeys during smart account creation or after the account has been deployed.
@@ -33,7 +33,7 @@ This tutorial walks you through adding a passkey signer to an already deployed s
 
 ### 1. Install dependencies
 
-Install the [Delegation Toolkit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) and [Ox SDK](https://oxlib.sh/#installation) in your project:
+Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) and [Ox SDK](https://oxlib.sh/#installation) in your project:
 
 ```bash npm2yarn
 npm install @metamask/smart-accounts-kit ox
@@ -70,7 +70,7 @@ const bundlerClient = createBundlerClient({
 
 ### 4. Create and deploy a smart account
 
-Create and deploy a [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account), with a private key signer.
+Create and deploy a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create-smart-account), with a private key signer.
 The Hybrid implementation supports adding additional passkey signers.
 
 ```typescript
@@ -187,5 +187,5 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ## Next steps
 
-- Learn more about [smart account implementations](/delegation-toolkit/guides/smart-accounts/create-smart-account).
-- To sponsor gas fees when adding a passkey as a backup signer, see how to [send a gasless transaction](/delegation-toolkit/guides/smart-accounts/send-gasless-transaction).
+- Learn more about [smart account implementations](/smart-accounts-kit/guides/smart-accounts/create-smart-account).
+- To sponsor gas fees when adding a passkey as a backup signer, see how to [send a gasless transaction](/smart-accounts-kit/guides/smart-accounts/send-gasless-transaction).
