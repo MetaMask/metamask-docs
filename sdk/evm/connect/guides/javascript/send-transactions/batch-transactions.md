@@ -53,8 +53,9 @@ For example:
 import { createEVMClient } from "@metamask/connect/evm";
 
 const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
-const capabilities = await evmClient.request({
+const capabilities = await provider.request({
   method: "wallet_getCapabilities",
   params: [
     "0xd46e8dd67c5d32be8058bb8eb970870f07244567", // The user's wallet address.
@@ -123,7 +124,7 @@ Use [`wallet_sendCalls`](../../../reference/json-rpc-api/index.md) to submit a b
 For example:
 
 ```js title="index.js"
-const result = await evmClient.request({
+const result = await provider.request({
   method: "wallet_sendCalls",
   params: [
     {
@@ -168,7 +169,7 @@ the status of the submitted batch of transactions, using the batch ID returned b
 For example:
 
 ```js title="index.js"
-const status = await evmClient.request({
+const status = await provider.request({
   method: "wallet_getCallsStatus",
   params: [
     "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331" // Batch ID.

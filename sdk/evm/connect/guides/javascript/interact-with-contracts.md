@@ -26,6 +26,7 @@ The following example reads contract data using the [`eth_call`](../../reference
 import { createEVMClient } from "@metamask/connect/evm";
 
 const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
 async function getBalance(contractAddress, userAddress) {
   try {
@@ -34,7 +35,7 @@ async function getBalance(contractAddress, userAddress) {
     // Pad address to 32 bytes
     const encodedAddress = userAddress.slice(2).padStart(64, "0");
     
-    const result = await evmClient.request({
+    const result = await provider.request({
       method: "eth_call",
       params: [{
         to: contractAddress,
@@ -73,7 +74,7 @@ RPC methods:
 async function mintNFT(contractAddress, tokenId) {
   try {
     // Get user's account
-    const accounts = await evmClient.request({ 
+    const accounts = await provider.request({ 
       method: "eth_requestAccounts" 
     });
     
@@ -83,7 +84,7 @@ async function mintNFT(contractAddress, tokenId) {
     const encodedTokenId = tokenId.toString(16).padStart(64, "0");
     
     // Send transaction
-    const txHash = await evmClient.request({
+    const txHash = await provider.request({
       method: "eth_sendTransaction",
       params: [{
         from: accounts[0],

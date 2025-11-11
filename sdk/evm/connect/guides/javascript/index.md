@@ -145,10 +145,12 @@ These examples configure the SDK with the following options:
 Connect to MetaMask and get the provider for RPC requests:
 
 ```javascript
+const provider = evmClient.getProvider()
+
 const accounts = await evmClient.connect()
 console.log("Connected account:", accounts[0])
 
-const result = await evmClient.request({
+const result = await provider.request({
   method: "eth_accounts",
   params: [],
 })
@@ -157,7 +159,7 @@ console.log("eth_accounts result:", result)
 
 `evmClient.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
 
-Use `evmClient.request()` for arbitrary [JSON-RPC requests](../../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](batch-requests.md) via `metamask_batch`.
+Use `provider.request()` for arbitrary [JSON-RPC requests](../../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](batch-requests.md) via `metamask_batch`.
 
 ## Common SDK methods at a glance
 
@@ -180,14 +182,17 @@ const signResult = await evmClient.connectAndSign({
   msg: "Sign in to the dapp",
 })
 
-// 3. Make an RPC request
-const result = await evmClient.request({
+// 3. Get provider for RPC requests
+const provider = evmClient.getProvider()
+
+// 4. Make an RPC request
+const result = await provider.request({
   method: "eth_accounts",
   params: [],
 })
 
-// 4. Batch multiple RPC requests
-const batchResults = await evmClient.request({
+// 5. Batch multiple RPC requests
+const batchResults = await provider.request({
   method: "metamask_batch",
   params: [{ method: "eth_accounts" }, { method: "eth_chainId" }],
 })

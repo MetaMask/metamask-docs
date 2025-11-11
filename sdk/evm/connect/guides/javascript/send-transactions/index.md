@@ -30,11 +30,12 @@ RPC methods.
 import { createEVMClient } from "@metamask/connect/evm";
 
 const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
 async function sendTransaction(recipientAddress, amount) {
   try {
     // Get current account
-    const accounts = await evmClient.request({ 
+    const accounts = await provider.request({ 
       method: "eth_requestAccounts" 
     });
     const from = accounts[0];
@@ -51,7 +52,7 @@ async function sendTransaction(recipientAddress, amount) {
     };
 
     // Send transaction
-    const txHash = await evmClient.request({
+    const txHash = await provider.request({
       method: "eth_sendTransaction",
       params: [transaction],
     });
@@ -70,7 +71,7 @@ function watchTransaction(txHash) {
   return new Promise((resolve, reject) => {
     const checkTransaction = async () => {
       try {
-        const tx = await evmClient.request({
+        const tx = await provider.request({
           method: "eth_getTransactionReceipt",
           params: [txHash],
         });
@@ -135,10 +136,11 @@ RPC method.
 import { createEVMClient } from "@metamask/connect/evm";
 
 const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
 async function estimateGas(transaction) {
   try {
-    const gasEstimate = await evmClient.request({
+    const gasEstimate = await provider.request({
       method: "eth_estimateGas",
       params: [transaction]
     });

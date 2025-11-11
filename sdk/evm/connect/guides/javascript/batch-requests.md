@@ -37,6 +37,7 @@ The following is an example of batching JSON-RPC requests using `metamask_batch`
 import { createEVMClient } from "@metamask/connect/evm";
 
 const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
 async function handleBatchRequests() {
   // Example batch: one personal_sign call and one eth_sendTransaction call.
@@ -55,7 +56,7 @@ async function handleBatchRequests() {
   ];
 
   try {
-    const results = await evmClient.request({
+    const results = await provider.request({
       method: "metamask_batch",
       params: [requests],
     });

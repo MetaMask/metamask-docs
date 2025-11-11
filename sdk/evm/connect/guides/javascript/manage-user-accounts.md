@@ -34,6 +34,7 @@ For example:
 import { createEVMClient } from "@metamask/connect/evm";
 
 const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
 // Connect wallet
 async function connectWallet() {
@@ -41,7 +42,7 @@ async function connectWallet() {
     // Disable button while request is pending
     document.getElementById("connectBtn").disabled = true;
     
-    const accounts = await evmClient.request({ 
+    const accounts = await provider.request({ 
       method: "eth_requestAccounts" 
     });
     
@@ -66,14 +67,14 @@ async function connectWallet() {
 // Disconnect wallet
 async function disconnectWallet() {
   try {
-    await evmClient.terminate()
+    await provider.terminate()
   } catch (err) {
     console.error("Error with disconnecting:", err)
   }
 }
 
 // Handle account changes
-provider.on("accountsChanged", (accounts) => { // TO DO: Update with MM Connect usage
+provider.on("accountsChanged", (accounts) => {
   if (accounts.length === 0) {
     // User disconnected
     document.getElementById("status").textContent = "Not connected";
@@ -104,9 +105,9 @@ You can use MM Connect's [`connectAndSign`](../../reference/methods.md#connectan
 For example:
 
 ```js
-import { createEVMClient } from "@metamask/connect/evm"
+import { createEVMClient } from "@metamask/connect/evm";
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient();
 
 async function handleConnectAndSign() {
   try {

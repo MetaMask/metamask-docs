@@ -47,12 +47,13 @@ The following is an example of setting up SIWE with MetaMask using
 import { createEVMClient } from "@metamask/connect/evm";
 
 const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
 const siweSign = async (siweMessage) => {
   try {
     const from = accounts[0]
     const msg = `0x${Buffer.from(siweMessage, "utf8").toString("hex")}`
-    const sign = await evmClient.request({
+    const sign = await provider.request({
       method: "personal_sign",
       params: [msg, from],
     })

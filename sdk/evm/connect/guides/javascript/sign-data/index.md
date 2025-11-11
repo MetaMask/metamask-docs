@@ -66,6 +66,7 @@ The following is an example of using `eth_signTypedData_v4` with MetaMask:
 import { createEVMClient } from "@metamask/connect/evm";
 
 const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
 signTypedDataV4Button.addEventListener("click", async function (event) {
   event.preventDefault()
@@ -141,7 +142,7 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
   var params = [from[0], msgParams]
   var method = "eth_signTypedData_v4"
 
-  evmClient.sendAsync( // TO DO: Confirm if MM Connect supports sendAsync
+  provider.sendAsync(
     {
       method,
       params,
@@ -216,6 +217,7 @@ The following is an example of using `personal_sign` with MetaMask:
 import { createEVMClient } from "@metamask/connect/evm";
 
 const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
 personalSignButton.addEventListener("click", async function (event) {
   event.preventDefault()
@@ -225,7 +227,7 @@ personalSignButton.addEventListener("click", async function (event) {
     // For historical reasons, you must submit the message to sign in hex-encoded UTF-8.
     // This uses a Node.js-style buffer shim in the browser.
     const msg = `0x${Buffer.from(exampleMessage, "utf8").toString("hex")}`
-    const sign = await evmClient.request({
+    const sign = await provider.request({
       method: "personal_sign",
       params: [msg, from],
     })
