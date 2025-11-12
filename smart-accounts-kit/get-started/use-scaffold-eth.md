@@ -43,7 +43,7 @@ This extension demonstrates the end-to-end flow for initializing a MetaMask smar
 
     Fill in the `NEXT_PUBLIC_PIMLICO_API_KEY` environment variable with your [Pimlico API key](https://docs.pimlico.io/guides/create-api-key#create-api-key).
 
-5. In root of your project, start the development server:
+5. In the root of your project, start the development server:
 
     ```bash
     yarn start
@@ -58,3 +58,7 @@ This extension demonstrates the end-to-end flow for initializing a MetaMask smar
 6. Connect your MetaMask wallet on the Sepolia testnet.
    In the **MetaMask Smart Accounts & Delegation** section, follow the prompts to deploy a delegator account, create a delegate wallet, create a delegation, and redeem a delegation.
    You can view the completed transaction on Etherscan.
+
+## Next steps
+
+Learn more about [MetaMask Smart Accounts](../concepts/smart-accounts.md) and [delegation](../concepts/delegation/index.md).
