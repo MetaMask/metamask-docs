@@ -29,7 +29,7 @@ Upon installation, you'll be asked the following prompts:
 ❯ MetaMask Smart Accounts Starter
   MetaMask Smart Accounts & Delegation Starter
   Farcaster Mini App Delegation Starter 
-  ERC-7715 Permissions Starter
+  Advanced Permissions (ERC-7715) Starter
 ? Pick a package manager: (Use arrow keys)
 ❯ npm 
   yarn 
@@ -50,7 +50,6 @@ The CLI provides the following options to display CLI details, and further custo
 | `-h` or `--help`    | Display the available options.                                                                                                                              |
 | `--skip-install`    | Skip the installation of dependencies.                                                                                                                      |
 | `--add-web3auth` | Add [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets) as a signer for the delegator account.<br/>Supported templates:<br/>- MetaMask Smart Accounts Starter<br/>- MetaMask Smart Accounts & Delegation Starter |
-| `--add-llm-rules`   | Add LLM rules for your IDE. Supported in the Experimental: ERC7715 Permissions Starter template.                                                                 |
 
 ## Examples
 
@@ -71,24 +70,6 @@ You'll be prompted to provide additional Web3Auth configuration details:
   Sapphire Mainnet 
 ```
 
-### LLM rules
-
-To create a project with LLM rules tailored to your preferred IDE, use the `--add-llm-rules` option with `@metamask/create-gator-app`:
-
-```bash
-npx @metamask/create-gator-app --add-llm-rules
-```
-
-You'll be prompted to select your IDE.
-Currently, only Cursor and Windsurf are supported.
-
-```bash
-? Which IDE's LLM rules would you like to copy? (Use arrow keys)
-  Cursor 
-  Windsurf 
-❯ Both 
-```
-
 ## Supported templates
 
 | Template                                           | Next.js | Vite React |
@@ -96,4 +77,4 @@ Currently, only Cursor and Windsurf are supported.
 | MetaMask Smart Accounts Starter                    | ✅       | ✅         |
 | MetaMask Smart Accounts &amp; Delegation Starter   | ✅       | ✅         | 
 | Farcaster Mini App Delegation Starter              | ✅       |            | 
-| ERC-7715 Permissions Starter                       | ✅       |            |
+| Advanced Permissions (ERC-7715) Starter            | ✅       |            |
