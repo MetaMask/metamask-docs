@@ -25,6 +25,7 @@ const sidebar = {
           ],
         },
         'get-started/use-the-cli',
+        'get-started/use-scaffold-eth',
         'get-started/supported-networks',
       ],
     },
