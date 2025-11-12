@@ -36,7 +36,7 @@ npx create-expo-app devexpo --template
 
 ### 2. Install dependencies
 
-Install the SDK and its dependencies using the following commands:
+Install MM Connect and its dependencies using the following commands:
 
 <Tabs>
   <TabItem value="React Native">

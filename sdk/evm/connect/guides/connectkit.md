@@ -80,7 +80,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up manually
 
-### 1. Install the SDK
+### 1. Install MM Connect
 
 Install MM Connect along with its peer dependencies to an existing React project:
 

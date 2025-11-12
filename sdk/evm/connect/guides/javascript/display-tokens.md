@@ -38,6 +38,11 @@ extension (not on mobile).
 To prompt users to add an ERC-20 token, you can add something like the following to your project script:
 
 ```javascript
+import { createEVMClient } from "@metamask/connect/evm";
+
+const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
+
 const tokenAddress = "0xd00981105e61274c8a5cd5a88fe7e037d935b513"
 const tokenSymbol = "TUT"
 const tokenDecimals = 18
@@ -45,23 +50,22 @@ const tokenImage = "http://placekitten.com/200/300"
 
 try {
   // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
-  const wasAdded = await provider // Or window.ethereum if you don't support EIP-6963.
-    .request({
-      method: "wallet_watchAsset",
-      params: {
-        type: "ERC20",
-        options: {
-          // The address of the token.
-          address: tokenAddress,
-          // A ticker symbol or shorthand, up to 5 characters.
-          symbol: tokenSymbol,
-          // The number of decimals in the token.
-          decimals: tokenDecimals,
-          // A string URL of the token logo.
-          image: tokenImage,
-        },
+  const wasAdded = await provider.request({
+    method: "wallet_watchAsset",
+    params: {
+      type: "ERC20",
+      options: {
+        // The address of the token.
+        address: tokenAddress,
+        // A ticker symbol or shorthand, up to 5 characters.
+        symbol: tokenSymbol,
+        // The number of decimals in the token.
+        decimals: tokenDecimals,
+        // A string URL of the token logo.
+        image: tokenImage,
       },
-    })
+    },
+  })
 
   if (wasAdded) {
     console.log("Thanks for your interest!")
@@ -110,21 +114,25 @@ To prompt users to add a single NFT, add something like the following to your pr
 `wallet_watchAsset` supports both ERC-721 and ERC-1155 NFT standards.
 
 ```javascript
+import { createEVMClient } from "@metamask/connect/evm";
+
+const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
+
 try {
   // wasAdded is a boolean. Like any RPC method, an error can be thrown.
-  const wasAdded = await provider // Or window.ethereum if you don't support EIP-6963.
-    .request({
-      method: "wallet_watchAsset",
-      params: {
-        type: "ERC721", // Or "ERC1155".
-        options: {
-          // The address of the token.
-          address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
-          // ERC-721 or ERC-1155 token ID.
-          tokenId: "1",
-        },
+  const wasAdded = await provider.request({
+    method: "wallet_watchAsset",
+    params: {
+      type: "ERC721", // Or "ERC1155".
+      options: {
+        // The address of the token.
+        address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+        // ERC-721 or ERC-1155 token ID.
+        tokenId: "1",
       },
-    })
+    },
+  })
 
   if (wasAdded) {
     console.log("User successfully added the token!")
@@ -143,8 +151,7 @@ To prompt users to add multiple NFTs, use `sendAsync()` instead of
 For example:
 
 ```javascript
-provider // Or window.ethereum if you don't support EIP-6963.
-  .sendAsync([{
+provider.sendAsync([{
     method: "wallet_watchAsset",
     params: {
       type: "ERC721",
@@ -164,5 +171,5 @@ provider // Or window.ethereum if you don't support EIP-6963.
     },
   },
   ...
-  ])
+])
 ```

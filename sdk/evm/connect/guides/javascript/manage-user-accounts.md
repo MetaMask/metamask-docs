@@ -31,11 +31,10 @@ and [`accountsChanged`](../../reference/provider-api.md#accountschanged) provide
 For example:
 
 ```javascript
-import { MetaMaskSDK } from "@metamask/sdk";
+import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK();
-const provider = MMSDK.getProvider();
+const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
 // Connect wallet
 async function connectWallet() {
@@ -68,7 +67,7 @@ async function connectWallet() {
 // Disconnect wallet
 async function disconnectWallet() {
   try {
-    await MMSDK.terminate()
+    await evmClient.terminate()
   } catch (err) {
     console.error("Error with disconnecting:", err)
   }
@@ -106,14 +105,13 @@ You can use MM Connect's [`connectAndSign`](../../reference/methods.md#connectan
 For example:
 
 ```js
-import { MetaMaskSDK } from "@metamask/sdk"
+import { createEVMClient } from "@metamask/connect/evm";
 
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = createEVMClient();
 
 async function handleConnectAndSign() {
   try {
-    const signature = await MMSDK.connectAndSign({ msg: "Hello in one go!" })
+    const signature = await evmClient.connectAndSign({ msg: "Hello in one go!" })
     console.log("Signature:", signature)
   } catch (err) {
     console.error("Error with connectAndSign:", err)

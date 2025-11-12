@@ -86,7 +86,7 @@ See how to [use the combined SDKs](#usage).
 
 ### 1. Install dependencies
 
-Install the SDK and the required dependencies to an existing project:
+Install MM Connect and the required dependencies to an existing project:
 
 ```bash npm2yarn
 npm install @dynamic-labs/sdk-react-core @dynamic-labs/ethereum @dynamic-labs/wagmi-connector wagmi viem @tanstack/react-query

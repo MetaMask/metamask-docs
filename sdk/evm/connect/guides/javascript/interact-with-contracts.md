@@ -23,6 +23,11 @@ You can implement smart contract interactions directly in JavaScript.
 The following example reads contract data using the [`eth_call`](../../reference/json-rpc-api/index.md) RPC method:
 
 ```javascript
+import { createEVMClient } from "@metamask/connect/evm";
+
+const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
+
 async function getBalance(contractAddress, userAddress) {
   try {
     // Create function signature for balanceOf(address)
@@ -30,7 +35,7 @@ async function getBalance(contractAddress, userAddress) {
     // Pad address to 32 bytes
     const encodedAddress = userAddress.slice(2).padStart(64, "0");
     
-    const result = await ethereum.request({
+    const result = await provider.request({
       method: "eth_call",
       params: [{
         to: contractAddress,
@@ -69,7 +74,7 @@ RPC methods:
 async function mintNFT(contractAddress, tokenId) {
   try {
     // Get user's account
-    const accounts = await ethereum.request({ 
+    const accounts = await provider.request({ 
       method: "eth_requestAccounts" 
     });
     
@@ -79,7 +84,7 @@ async function mintNFT(contractAddress, tokenId) {
     const encodedTokenId = tokenId.toString(16).padStart(64, "0");
     
     // Send transaction
-    const txHash = await ethereum.request({
+    const txHash = await provider.request({
       method: "eth_sendTransaction",
       params: [{
         from: accounts[0],
@@ -102,7 +107,7 @@ async function watchTransaction(txHash) {
   return new Promise((resolve, reject) => {
     const checkTransaction = async () => {
       try {
-        const tx = await ethereum.request({
+        const tx = await provider.request({
           method: "eth_getTransactionReceipt",
           params: [txHash],
         });

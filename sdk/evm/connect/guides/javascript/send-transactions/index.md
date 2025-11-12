@@ -27,10 +27,15 @@ The basic transaction uses the [`eth_requestAccounts`](../../../reference/json-r
 RPC methods.
 
 ```javascript
+import { createEVMClient } from "@metamask/connect/evm";
+
+const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
+
 async function sendTransaction(recipientAddress, amount) {
   try {
     // Get current account
-    const accounts = await ethereum.request({ 
+    const accounts = await provider.request({ 
       method: "eth_requestAccounts" 
     });
     const from = accounts[0];
@@ -47,7 +52,7 @@ async function sendTransaction(recipientAddress, amount) {
     };
 
     // Send transaction
-    const txHash = await ethereum.request({
+    const txHash = await provider.request({
       method: "eth_sendTransaction",
       params: [transaction],
     });
@@ -66,7 +71,7 @@ function watchTransaction(txHash) {
   return new Promise((resolve, reject) => {
     const checkTransaction = async () => {
       try {
-        const tx = await ethereum.request({
+        const tx = await provider.request({
           method: "eth_getTransactionReceipt",
           params: [txHash],
         });
@@ -128,9 +133,14 @@ To add gas estimation, use the [`eth_estimateGas`](../../../reference/json-rpc-a
 RPC method.
 
 ```javascript
+import { createEVMClient } from "@metamask/connect/evm";
+
+const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
+
 async function estimateGas(transaction) {
   try {
-    const gasEstimate = await ethereum.request({
+    const gasEstimate = await provider.request({
       method: "eth_estimateGas",
       params: [transaction]
     });

@@ -34,10 +34,10 @@ When using `metamask_batch`, keep in mind the following:
 The following is an example of batching JSON-RPC requests using `metamask_batch`:
 
 ```js
-import { MetaMaskSDK } from "@metamask/sdk";
+import { createEVMClient } from "@metamask/connect/evm";
 
-const MMSDK = new MetaMaskSDK();
-const provider = MMSDK.getProvider();
+const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
 async function handleBatchRequests() {
   // Example batch: one personal_sign call and one eth_sendTransaction call.
