@@ -1,0 +1,39 @@
+dirs:
+  - ./smart-accounts-kit
+  - ./developer-tools
+  - ./embedded-wallets
+  - ./sdk
+  - ./services
+  - ./snaps
+  - ./wallet
+excludedDirs:
+  - ./build
+  - ./.vercel
+  - ./.docusaurus
+  - ./node_modules
+useGitIgnore: true
+
+ignorePatterns:
+- pattern: '^http(s)?://localhost'
+- pattern: '^http(s)?://127.0.0.1'
+- pattern: '^http(s)?://gitlab.com/ConsenSys/'
+- pattern: '^http(s)?://consensys.net'
+- pattern: '^http(s)?://.+.zendesk.com'
+- pattern: '^http(s)?://.+.etherscan.io'
+- pattern: '^http(s)?://help.figma.com'
+- pattern: '^http(s)?://metamask.io'
+- pattern: '^http(s)?://rivet.cloud'
+- pattern: '^/img/'
+- pattern: '^/smart-accounts-kit/'
+- pattern: '^/developer-tools/'
+- pattern: '^/embedded-wallets/'
+- pattern: '^/sdk/'
+- pattern: '^/services/'
+- pattern: '^/snaps/'
+- pattern: '^/wallet/'
+- pattern: '^/tutorials/'
+aliveStatusCodes:
+- 200
+- 206
+- 400
+- 403

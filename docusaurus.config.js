@@ -29,8 +29,8 @@ const config = {
   // tagline: '',
   url: 'https://docs.metamask.io',
   baseUrl, // overwritten in github action for staging / latest
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenAnchors: 'throw',
   favicon: 'img/favicons/favicon-96x96.png',
 
   headTags: [
@@ -90,7 +90,7 @@ const config = {
   organizationName: 'metamask', // Usually your GitHub org/user name.
   projectName: 'metamask-docs', // Usually your repo name.
 
-  // Even if you don't use internalization, you can use this field to set useful
+  // Even if you don't use internationalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
@@ -127,6 +127,9 @@ const config = {
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
 
@@ -200,8 +203,8 @@ const config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'gator',
-        path: 'delegation-toolkit',
-        routeBasePath: 'delegation-toolkit',
+        path: 'smart-accounts-kit',
+        routeBasePath: 'smart-accounts-kit',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./gator-sidebar.js'),
         breadcrumbs: false,
@@ -210,7 +213,7 @@ const config = {
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
-        lastVersion: '0.12.0',
+        lastVersion: '0.13.0',
         versions: {
           // Defaults to the ./docs folder.
           // Using "development" instead of "next" as path.
@@ -219,8 +222,8 @@ const config = {
             path: 'development',
           },
           // The latest release.
-          '0.12.0': {
-            label: 'latest (0.12.0)',
+          '0.13.0': {
+            label: 'latest (0.13.0)',
           },
         },
       },
@@ -407,7 +410,7 @@ const config = {
             position: 'right',
           },
           {
-            to: 'https://community.metamask.io/',
+            to: 'https://builder.metamask.io/',
             label: 'Help ↗',
             position: 'right',
           },
@@ -450,8 +453,8 @@ const config = {
                 to: '/wallet',
               },
               {
-                label: 'Delegation Toolkit',
-                to: '/delegation-toolkit',
+                label: 'Smart Accounts Kit',
+                to: '/smart-accounts-kit',
               },
               {
                 label: 'Embedded Wallets',
@@ -487,8 +490,8 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {
-                label: 'Delegation Toolkit GitHub',
-                href: 'https://github.com/MetaMask/delegation-toolkit',
+                label: 'Smart Accounts Kit GitHub',
+                href: 'https://github.com/MetaMask/smart-accounts-kit',
               },
               {
                 label: 'MetaMask mobile GitHub',

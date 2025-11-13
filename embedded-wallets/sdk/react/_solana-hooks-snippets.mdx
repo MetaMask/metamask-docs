@@ -1,0 +1,152 @@
+You need to install the `@solana/web3.js` package to interact with the Solana blockchain using the Web3Auth React hooks.
+
+:::info
+
+Web3Auth provides a set of React hooks for basic Solana wallet operations. These hooks are designed to simplify common Solana interactions in your React app.
+
+For advanced Solana features, you should use [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) on top of the hooks provided.
+
+:::
+
+```bash npm2yarn
+npm install @solana/web3.js
+```
+
+## Solana Hooks
+
+| Hook Name                   | Description                                  |
+| --------------------------- | -------------------------------------------- |
+| `useSignAndSendTransaction` | Sign and send a Solana transaction.          |
+| `useSignMessage`            | Sign a message with the Solana wallet.       |
+| `useSignTransaction`        | Sign a Solana transaction (without sending). |
+| `useSolanaWallet`           | Access Solana wallet state and utilities.    |
+
+## Hook Usage Examples
+
+### Get Solana Wallet
+
+```tsx
+import { useSolanaWallet } from '@web3auth/modal/react/solana'
+
+function SolanaWallet() {
+  const { address, connected } = useSolanaWallet()
+
+  return (
+    <div>
+      <h2>Solana Wallet</h2>
+      <p>Connected: {connected ? 'Yes' : 'No'}</p>
+      {address && <p>Address: {address}</p>}
+    </div>
+  )
+}
+```
+
+### Sign Message
+
+```tsx
+import { useSignMessage } from '@web3auth/modal/react/solana'
+
+function SignMessage() {
+  const { signMessage, isPending, error } = useSignMessage()
+
+  const handleSignMessage = async () => {
+    try {
+      const message = new TextEncoder().encode('Hello Solana!')
+      const signature = await signMessage(message)
+      console.log('Signature:', signature)
+    } catch (err) {
+      console.error('Error signing message:', err)
+    }
+  }
+
+  return (
+    <div>
+      <h2>Sign Message</h2>
+      <button onClick={handleSignMessage} disabled={isPending}>
+        {isPending ? 'Signing...' : 'Sign Message'}
+      </button>
+      {error && <p>Error: {error.message}</p>}
+    </div>
+  )
+}
+```
+
+### Sign Transaction
+
+```tsx
+import { useSignTransaction } from '@web3auth/modal/react/solana'
+import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
+
+function SignTransaction() {
+  const { signTransaction, isPending, error } = useSignTransaction()
+
+  const handleSignTransaction = async () => {
+    try {
+      // Create a simple transfer transaction
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: new PublicKey('YOUR_PUBLIC_KEY'),
+          toPubkey: new PublicKey('DESTINATION_PUBLIC_KEY'),
+          lamports: 0.01 * LAMPORTS_PER_SOL,
+        })
+      )
+
+      const signedTransaction = await signTransaction(transaction)
+      console.log('Signed Transaction:', signedTransaction)
+    } catch (err) {
+      console.error('Error signing transaction:', err)
+    }
+  }
+
+  return (
+    <div>
+      <h2>Sign Transaction</h2>
+      <button onClick={handleSignTransaction} disabled={isPending}>
+        {isPending ? 'Signing...' : 'Sign Transaction'}
+      </button>
+      {error && <p>Error: {error.message}</p>}
+    </div>
+  )
+}
+```
+
+### Sign and Send Transaction
+
+```tsx
+import { useSignAndSendTransaction } from '@web3auth/modal/react/solana'
+import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
+
+function SignAndSendTransaction() {
+  const { signAndSendTransaction, isPending, error } = useSignAndSendTransaction()
+
+  const handleSignAndSend = async () => {
+    try {
+      // Create a simple transfer transaction
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: new PublicKey('YOUR_PUBLIC_KEY'),
+          toPubkey: new PublicKey('DESTINATION_PUBLIC_KEY'),
+          lamports: 0.01 * LAMPORTS_PER_SOL,
+        })
+      )
+
+      const signature = await signAndSendTransaction(transaction)
+      console.log('Transaction Signature:', signature)
+    } catch (err) {
+      console.error('Error signing and sending transaction:', err)
+    }
+  }
+
+  return (
+    <div>
+      <h2>Sign and Send Transaction</h2>
+      <button onClick={handleSignAndSend} disabled={isPending}>
+        {isPending ? 'Processing...' : 'Sign and Send'}
+      </button>
+      {error && <p>Error: {error.message}</p>}
+    </div>
+  )
+}
+```
+
+Further code and advanced usage should be implemented using Solana's web3.js library as needed.

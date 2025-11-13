@@ -1,38 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
   ]}
 >
-<TabItem
-  value="mainnet"
->
+<TabItem value="mainnet">
 
-- Chain ID: 0x1b5
-- Public RPC URL: https://rpc.azero.dev (Avoid using public rpcTarget in production, use services
-  like Infura)
-- Display Name: Aleph Zero Mainnet
-- Block Explorer Link: https://alephzero.subscan.io
-- Ticker: AZERO
-- Ticker Name: Aleph Zero
+- **Chain ID:** 0x1b5
+- **Public RPC URL:** https://rpc.azero.dev
+- **Display Name:** Aleph Zero Mainnet
+- **Block Explorer Link:** https://alephzero.subscan.io
+- **Ticker:** AZERO
+- **Ticker Name:** Aleph Zero
 
 </TabItem>
 
-<TabItem
-  value="testnet"
->
+<TabItem value="testnet">
 
-- Chain ID: 0x1b6
-- Public RPC URL: https://rpc.test.azero.dev (Avoid using public rpcTarget in production, use
-  services like Infura)
-- Display Name: Aleph Zero Testnet
-- Block Explorer Link: https://test.azero.subscan.io
-- Ticker: AZERO
-- Ticker Name: Aleph Zero
+- **Chain ID:** 0x1b6
+- **Public RPC URL:** https://rpc.test.azero.dev
+- **Display Name:** Aleph Zero Testnet
+- **Block Explorer Link:** https://test.azero.subscan.io
+- **Ticker:** AZERO
+- **Ticker Name:** Aleph Zero
 
 </TabItem>
 </Tabs>

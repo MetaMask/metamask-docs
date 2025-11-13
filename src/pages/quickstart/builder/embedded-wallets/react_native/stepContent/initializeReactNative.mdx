@@ -1,12 +1,8 @@
-### Initialize Web3Auth
+### Initialize the `Web3Auth` instance
 
-Web3Auth needs to be initialized as soon as your app loads up to enable the user to log in. Preferably done within a constructor, initialization is the step where you can pass on all the configurations for Web3Auth you want.
+[Initialize the `Web3Auth` instance](/embedded-wallets/sdk/react-native#initialize-web3auth) when your
+app starts so users can sign in. During this step you'll pass the configuration options you need.
 
-For initializing Web3Auth React Native SDK, you need to provide your Client ID, the Web3Auth Network of your project and the `redirectUrl` for your application. Make sure to set up Deep Linking so that the Web3Auth SDK can redirect the user back to your application after authentication.
-
-:::tip SDK Reference
-
-- [Initializing Web3Auth React Native SDK](/embedded-wallets/sdk/react-native#initialize-web3auth).
-- [DeepLinking In React Native](/embedded-wallets/sdk/react-native/install#configuration).
-
-:::
+You'll need your client ID, the network you want to use, and the `redirectUrl` for your application.
+Set up [deep linking](/embedded-wallets/sdk/react-native#setup) so the MetaMask Embedded
+Wallets SDK can redirect users back to your app after authentication.

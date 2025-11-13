@@ -1,6 +1,7 @@
 ---
 title: Polygon PoS filter methods
 sidebar_label: Filter methods
+sidebar_key: polygon-pos-filter-methods
 description: Polygon PoS filter methods
 ---
 

@@ -2,34 +2,40 @@
 title: Use an ERC-20 paymaster with a smart account
 image: 'img/tutorials/tutorials-banners/use-erc20-paymaster.png'
 description: Enable users to pay gas fees with an ERC-20 token using a smart account and paymaster.
-tags: [delegation toolkit, ERC-20 paymaster, smart accounts]
+tags: [delegation toolkit, smart accounts kit, ERC-20 paymaster, smart accounts]
+keywords: [delegation, smart accounts kit, ERC-20 paymaster, smart accounts, USDC, ERC-4337]
 date: Sep 2, 2025
 author: MetaMask Developer Relations
 ---
 
-This tutorial walks you through using an ERC-20 paymaster with [MetaMask Smart Accounts](/delegation-toolkit/concepts/smart-accounts), enabling users to pay gas fees in USDC.
+This tutorial walks you through using an ERC-20 paymaster with [MetaMask Smart Accounts](/smart-accounts-kit/concepts/smart-accounts), enabling users to pay gas fees in USDC.
 This tutorial uses Pimlico's paymaster, but you can use any paymaster of your choice.
 
 ## About paymasters
 
-A paymaster is an important component of the [account abstraction (ERC-4337)](/delegation-toolkit/concepts/smart-accounts) standard, responsible for abstracting gas fees for end users. 
+A paymaster is an important component of the [account abstraction (ERC-4337)](/smart-accounts-kit/concepts/smart-accounts) standard, responsible for abstracting gas fees for end users. 
 There are different types of paymasters, such as gasless paymasters and ERC-20 paymasters. 
 While a gasless paymaster covers the transaction on behalf of the user, an ERC-20 paymaster allows users to pay gas fees using a supported ERC-20 token.
 This removes the need for users to hold native tokens, allowing them to perform onchain actions using only stablecoins.
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](/delegation-toolkit/get-started/install) in your project.
-- [Configure the Delegation Toolkit](/delegation-toolkit/development/guides/configure).
-- [Create a Hybrid smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account), and fund it with some Sepolia USDC to pay gas fees.
-  :::note
-  You can use [Circle's faucet](https://faucet.circle.com/) to get Sepolia USDC.
-  :::
+- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
+- Install [Yarn](https://yarnpkg.com/),
+    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 - [Create a Pimlico API key](https://docs.pimlico.io/guides/create-api-key#create-api-key).
 
 ## Steps
 
-### 1. Create a Public Client
+### 1. Install the Smart Accounts Kit
+
+Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) in your project:
+
+```bash npm2yarn
+npm install @metamask/smart-accounts-kit
+```
+
+### 2. Create a Public Client
 
 Create a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function.
 You will configure a smart account and Bundler Client with the Public Client, which you can use to query the signer's account state and interact with the blockchain network.
@@ -44,7 +50,7 @@ const publicClient = createPublicClient({
 });
 ```
 
-### 2. Create a Paymaster Client
+### 3. Create a Paymaster Client
 
 Create a [Viem Paymaster Client](https://viem.sh/account-abstraction/clients/paymaster)
 using Viem's `createPaymasterClient` function. This client interacts with the paymaster service, enabling users to pay gas fees in USDC.
@@ -59,7 +65,7 @@ const paymasterClient = createPaymasterClient({
 });
 ```
 
-### 3. Create a Bundler Client
+### 4. Create a Bundler Client
 
 Create a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function. You can use the bundler service to estimate gas for user operations and submit transactions to the network.
 
@@ -81,13 +87,13 @@ const bundlerClient = createBundlerClient({
 });
 ```
 
-### 4. Create a Hybrid smart account
+### 5. Create and fund a smart account
 
-Configure the same [Hybrid smart account](/delegation-toolkit/development/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account) that you created and funded as a [prerequisite](#prerequisites).
+Create a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account).
 A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from "@metamask/delegation-toolkit";
+import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
 import { privateKeyToAccount } from "viem/accounts";
 
 const account = privateKeyToAccount("0x...");
@@ -97,11 +103,17 @@ const smartAccount = await toMetaMaskSmartAccount({
   implementation: Implementation.Hybrid,
   deployParams: [account.address, [], [], []],
   deploySalt: "0x",
-  signatory: { account },
+  signer: { account },
 });
 ```
 
-### 5. Send a user operation
+Fund the smart account with some Sepolia USDC to pay gas fees.
+
+:::note
+You can use [Circle's faucet](https://faucet.circle.com/) to get Sepolia USDC.
+:::
+
+### 6. Send a user operation
 
 The ERC-20 paymaster works by transferring the token from the smart account, and reimbursing itself for paying the gas fees on the user's behalf.
 
@@ -115,10 +127,10 @@ In a production dapp, you should first check the existing token allowance and on
 :::
 
 Batch the approve call with other onchain actions you want to perform using the ERC-20 paymaster.
-Pass the `paymasterClient` from [Step 2](#2-create-a-paymaster-client) to the `paymaster` property.
+Pass the `paymasterClient` from [Step 3](#3-create-a-paymaster-client) to the `paymaster` property.
 
 ```typescript
-// Appropriate fee per gas must be determined for the specific bundler being used.
+// Appropriate fee per gas must be determined for the bundler being used.
 const maxFeePerGas = 1n;
 const maxPriorityFeePerGas = 1n;
 
@@ -152,5 +164,5 @@ const userOperationHash = await bundlerClient.sendUserOperation({
 
 ## Next steps
 
-- Learn more about [smart account implementations](/delegation-toolkit/development/guides/smart-accounts/create-smart-account).
-- To sponsor gas for end users, see how to [send a gasless transaction](/delegation-toolkit/development/guides/smart-accounts/send-gasless-transaction).
+- Learn more about [smart account implementations](/smart-accounts-kit/guides/smart-accounts/create-smart-account).
+- To sponsor gas for end users, see how to [send a gasless transaction](/smart-accounts-kit/guides/smart-accounts/send-gasless-transaction).

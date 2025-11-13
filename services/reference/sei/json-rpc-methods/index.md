@@ -1,6 +1,7 @@
 ---
 title: "JSON-RPC methods"
 description: Supported standard Ethereum methods on Sei network.
+sidebar_key: sei-json-rpc-api
 ---
 
 # JSON-RPC API

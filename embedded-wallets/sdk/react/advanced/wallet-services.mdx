@@ -36,12 +36,12 @@ walletServicesConfig?: WalletServicesConfig;
 <Tabs>
   <TabItem value="Table">
 
-| Property | Type | Description |
-| --- | --- | --- |
-| `confirmationStrategy` | CONFIRMATION_STRATEGY_TYPE | How to display confirmation screens |
-| `modalZIndex` | number | Z-index for modal windows |
-| `enableKeyExport` | boolean | Enable private key export functionality |
-| `whiteLabel` | Object | Customization options for the widget appearance |
+| Property               | Type                       | Description                                     |
+| ---------------------- | -------------------------- | ----------------------------------------------- |
+| `confirmationStrategy` | CONFIRMATION_STRATEGY_TYPE | How to display confirmation screens             |
+| `modalZIndex`          | number                     | Z-index for modal windows                       |
+| `enableKeyExport`      | boolean                    | Enable private key export functionality         |
+| `whiteLabel`           | Object                     | Customization options for the widget appearance |
 
 #### Confirmation Strategy Options
 
@@ -237,7 +237,7 @@ import {
 } from '@web3auth/modal'
 
 const web3AuthOptions: Web3AuthOptions = {
-  clientId: 'YOUR_CLIENT_ID',
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // focus-start
   walletServicesConfig: {

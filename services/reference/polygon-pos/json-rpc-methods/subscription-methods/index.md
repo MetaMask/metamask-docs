@@ -1,6 +1,8 @@
 ---
 title: Polygon PoS subscription methods
 sidebar_label: Subscription methods
+sidebar_key: polygon-pos-subscription-methods
+description: Polygon PoS subscription methods
 ---
 
 import Tabs from "@theme/Tabs";

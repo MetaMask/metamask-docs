@@ -1,0 +1,34 @@
+import InstallationSnippet from './_evm-installation.mdx'
+import GetAccountSnippet from './_evm-get-account.mdx'
+import GetBalanceSnippet from './_evm-get-balance.mdx'
+import InitialisationSnippet from './_evm-initialisation.mdx'
+import SignMessageSnippet from './_evm-sign-message.mdx'
+import SendTransactionSnippet from './_evm-send-transaction.mdx'
+
+## Installation
+
+<InstallationSnippet />
+
+## Initializing Provider
+
+Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`** after successful authentication.
+
+## Initialize
+
+<InitialisationSnippet />
+
+## Get Account
+
+<GetAccountSnippet />
+
+## Get Balance
+
+<GetBalanceSnippet />
+
+## Send Transaction
+
+<SendTransactionSnippet />
+
+## Sign a message
+
+<SignMessageSnippet />

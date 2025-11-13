@@ -8,11 +8,10 @@ import CardList from '@site/src/components/CardList'
 
 :::note Decentralized Infrastructure Network (DIN)
 
-Solana is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
-meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
+Solana is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service, meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
-Solana access is currently limited to paid accounts.
-To get expedited access, upgrade to a paid tier. Solana support will be available to all account tiers in the future.
+Solana access is currently limited to select customers. [Contact us](https://www.infura.io/contact)
+if you're interested in accessing these methods.
 
 :::
 
@@ -28,17 +27,17 @@ Select an option below to get started with the Solana network.
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Solana network."
     },
     {
-      href: "json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Solana network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create and secure an API key."
     }

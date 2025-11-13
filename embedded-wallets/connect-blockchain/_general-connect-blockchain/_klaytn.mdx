@@ -1,40 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Baobab Testnet", value: "baobab" },
   ]}
 >
-<TabItem
-  value="mainnet"
->
+<TabItem value="mainnet">
 
-- Chain ID: 0x2019 (hex of 8217)
-- Public RPC URL: https://public-node-api.klaytnapi.com/v1/cypress (Avoid using public rpcTarget in
-  production, use services like Infura)
-- Display Name: Klaytn Mainnet
-- Block Explorer Link: https://scope.klaytn.com/
-- Ticker: KLAY
-- Ticker Name: KLAY
-- Logo: https://cryptologos.cc/logos/klaytn-klay-logo.png
+- **Chain ID:** 0x2019
+- **Public RPC URL:** https://public-node-api.klaytnapi.com/v1/cypress
+- **Display Name:** Klaytn Mainnet
+- **Block Explorer Link:** https://scope.klaytn.com
+- **Ticker:** KLAY
+- **Ticker Name:** Klaytn
 
 </TabItem>
 
-<TabItem
-  value="testnet"
->
+<TabItem value="baobab">
 
-- Chain ID: 0x3e9 (hex of 1001)
-- Public RPC URL: https://api.baobab.klaytn.net:8651 (Avoid using public rpcTarget in production,
-  use services like Infura)
-- Display Name: Klaytn Testnet
-- Block Explorer Link: https://baobab.scope.klaytn.com/
-- Ticker: KLAY
-- Ticker Name: KLAY
-- Logo: https://cryptologos.cc/logos/klaytn-klay-logo.png
+- **Chain ID:** 0x3e9
+- **Public RPC URL:** https://api.baobab.klaytn.net:8651
+- **Display Name:** Klaytn Baobab Testnet
+- **Block Explorer Link:** https://baobab.scope.klaytn.com
+- **Ticker:** KLAY
+- **Ticker Name:** Klaytn
 
 </TabItem>
 </Tabs>

@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { CSSProperties, JSX, useState, useEffect } from 'react'
+import { CSSProperties, JSX } from 'react'
 import { useColorMode } from '@docusaurus/theme-common'
 import Card, { CardItem } from '@site/src/components/Card'
 
@@ -19,11 +19,7 @@ export default function CardSection({
   colorPalette,
 }: CardSectionProps): JSX.Element {
   const { colorMode } = useColorMode()
-  const [theme, setTheme] = useState('')
-
-  useEffect(() => {
-    setTheme(colorMode)
-  }, [colorMode])
+  const theme = colorMode
 
   return (
     <section className={styles.wrapper}>

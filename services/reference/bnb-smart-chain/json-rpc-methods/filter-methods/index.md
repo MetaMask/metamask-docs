@@ -1,6 +1,7 @@
 ---
 title: BNB Smart Chain filter methods
 sidebar_label: Filter methods
+sidebar_key: bnb-smart-chain-filter-methods
 description: BNB Smart Chain filter methods
 ---
 

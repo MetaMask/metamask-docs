@@ -1,7 +1,20 @@
 ---
 title: Integrate Embedded Wallets with the Flow Blockchain
-sidebar_label: Flow
-hide_table_of_contents: true
+sidebar_label: Overview
+
+keywords:
+  [
+    flow,
+    wallet,
+    integration,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
 image: 'img/embedded-wallets/banners/flow.png'
 description: 'Integrate Embedded Wallets with the Flow Blockchain | Embedded Wallets'
 ---
@@ -23,10 +36,23 @@ export const Flow = [
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/flow/react',
+          },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/flow/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/flow/web',
+        path: '/embedded-wallets/connect-blockchain/evm/flow/javascript',
       },
       {
         key: 'android',
@@ -51,6 +77,12 @@ export const Flow = [
         title: 'React Native',
         icon: 'logo-react.png',
         path: '/embedded-wallets/connect-blockchain/evm/flow/react-native',
+          },
+          {
+            key: 'node',
+            title: 'Node',
+            icon: 'logo-nodejs.png',
+            path: '/embedded-wallets/connect-blockchain/evm/flow/node',
       },
       {
         key: 'unity',
@@ -59,7 +91,8 @@ export const Flow = [
         path: '/embedded-wallets/connect-blockchain/evm/flow/unity',
       },
     ],
-  },
+
+},
 ]
 
 <Tiles tileGroups={Flow} />

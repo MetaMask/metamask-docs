@@ -16,6 +16,8 @@ const sidebar = {
       items: [
         'connect/javascript-wagmi',
         'connect/javascript',
+        'connect/javascript-rainbowkit',
+        'connect/javascript-connectkit',
         'connect/javascript-dynamic',
         'connect/javascript-web3auth',
         'connect/react-native',
@@ -47,7 +49,7 @@ const sidebar = {
           label: "Create a wallet AI agent",
           href: "/tutorials/create-wallet-ai-agent"
         },
-        { 
+        {
           type: "link",
           label: "Upgrade an EOA to a smart account",
           href: "/tutorials/upgrade-eoa-to-smart-account"

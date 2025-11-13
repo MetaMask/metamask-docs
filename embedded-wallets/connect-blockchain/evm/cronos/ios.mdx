@@ -7,78 +7,15 @@ keywords: [ios, swift, cronos, web3auth, authentication, blockchain]
 description: 'Integrate Embedded Wallets with the Cronos Blockchain in iOS/Swift Applications | Embedded Wallets'
 ---
 
-import InstallationSnippet from '../../_ios-connect-blockchain/_evm-installation.mdx'
-import GetAccountSnippet from '../../_ios-connect-blockchain/_evm-get-account.mdx'
-import UserInfoSnippet from '../../_ios-connect-blockchain/_evm-user-info.mdx'
-import GetBalanceSnippet from '../../_ios-connect-blockchain/_evm-get-balance.mdx'
-import InitialisationSnippet from '../../_ios-connect-blockchain/_evm-initialisation.mdx'
-import SignMessageSnippet from '../../_ios-connect-blockchain/_evm-sign-message.mdx'
-import SendTransactionSnippet from '../../_ios-connect-blockchain/_evm-send-transaction.mdx'
+import EVMInteraction from '../../_ios-connect-blockchain/_evm-interaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsCronos from '../../_general-connect-blockchain/_cronos.mdx'
 
-While using the Web3Auth iOS SDK, you get the private key within the user scope. This private key can interact with [Cronos](https://cronos.org/) to make any blockchain calls, like getting the user's `account`, fetching `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
-
-## Installation
-
-<InstallationSnippet />
+While using the Web3Auth iOS SDK, you get the private key within the user scope after successful authorization. This private key can be used to retrieve the user's address, and interact with [Cronos](https://ethereum.org/) to make any blockchain calls. We have highlighted a few here for getting you started quickly on that.
 
 ## Chain Details for Cronos
 
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
+<ChainDetailsCronos />
 
-- Chain ID: 0x19
-- Public RPC URL: https://rpc.cronos.org (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Cronos Mainnet
-- Block Explorer Link: https://cronoscan.com
-- Ticker: CRO
-- Ticker Name: CRO
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0x152
-- Public RPC URL: https://rpc-t3.cronos.org (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Cronos Testnet
-- Block Explorer Link: https://cronoscan.com
-- Ticker: CRO
-- Ticker Name: CRO
-
-</TabItem>
-</Tabs>
-
-## Initialize
-
-<InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
-
-## Get Account
-
-<GetAccountSnippet />
-
-## Get Balance
-
-<GetBalanceSnippet />
-
-## Send Transaction
-
-<SendTransactionSnippet />
-
-## Sign a message
-
-<SignMessageSnippet />
+<EVMInteraction />

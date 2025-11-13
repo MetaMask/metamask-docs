@@ -1,0 +1,452 @@
+---
+title: Key Export Settings
+sidebar_label: Key Export
+image: 'img/metamaskog.jpg'
+description: 'Configure private key export permissions in Web3Auth Dashboard | Embedded Wallets'
+---
+
+import ProjectSettingsAdvanced from '@site/static/img/embedded-wallets/w3a-dashboard/project-settings-advanced.png'
+
+The **Key Export Settings** allow you to control whether users can programmatically export their private keys using the Web3Auth SDK. This setting provides flexibility for advanced use cases while maintaining security control over sensitive cryptographic material.
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={ProjectSettingsAdvanced}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Key Export Settings"
+  />
+</div>
+
+## Key Export Overview
+
+Private key export functionality allows applications to retrieve users' private keys programmatically through the Web3Auth SDK. This capability enables advanced use cases such as wallet migration, multi-platform support, and integration with external services, while requiring careful consideration of security implications.
+
+### Export Methods
+
+**Programmatic Export (Configurable):**
+
+- Access via `eth_private_key` JSON-RPC method
+- Requires explicit user consent
+- Can be enabled/disabled per project
+- Controlled through dashboard settings
+
+**Manual Export (Always Available):**
+
+- Built-in Web3Auth wallet interface
+- User-initiated through wallet UI
+- Cannot be disabled
+- Provides user autonomy over their keys
+
+## Configuring Key Export
+
+### Enabling Programmatic Export
+
+1. **Navigate to Project Settings** → **Advanced** → **Key Export**
+2. **Locate "Enable Key Export"** toggle
+3. **Enable the setting** to allow programmatic access
+4. **Save configuration** to apply changes
+
+### Disabling Programmatic Export
+
+When disabled:
+
+- Applications cannot retrieve private keys via SDK
+- Users can still export manually through wallet interface
+- Enhanced security for applications that don't require key access
+- Recommended for most consumer applications
+
+## Implementation Guide
+
+### Programmatic Key Retrieval
+
+**Basic Implementation:**
+
+```javascript
+// Ensure user is authenticated
+if ((await web3auth.status) !== 'connected') {
+  throw new Error('User not authenticated')
+}
+
+// Request private key (requires user consent)
+try {
+  const privateKey = await web3auth.provider.request({
+    method: 'eth_private_key',
+  })
+
+  // Handle the private key securely
+  console.log('Private key retrieved successfully')
+  return privateKey
+} catch (error) {
+  // Handle export rejection or failure
+  console.error('Key export failed:', error)
+  throw error
+}
+```
+
+**Secure Implementation Pattern:**
+
+```javascript
+class SecureKeyManager {
+  async exportKey() {
+    // Validate authentication state
+    await this.validateAuthentication()
+
+    // Show user confirmation dialog
+    const userConsent = await this.getUserConsent()
+    if (!userConsent) {
+      throw new Error('User declined key export')
+    }
+
+    // Retrieve private key
+    const privateKey = await web3auth.provider.request({
+      method: 'eth_private_key',
+    })
+
+    // Process key securely (encrypt, transmit, etc.)
+    return await this.processKeySecurely(privateKey)
+  }
+
+  async processKeySecurely(privateKey) {
+    // Implement your secure processing logic
+    // Examples: encryption, secure transmission, temporary storage
+
+    // Always clear sensitive data from memory
+    setTimeout(() => {
+      privateKey = null
+    }, 0)
+  }
+}
+```
+
+### User Consent Flow
+
+**Best Practices for User Consent:**
+
+```javascript
+async function requestKeyExport() {
+  // Show clear explanation to user
+  const consent = await showConsentDialog({
+    title: 'Export Private Key',
+    message:
+      'Your private key will be exported for wallet migration. ' +
+      'Keep this key secure and never share it with others.',
+    risks: [
+      'Anyone with your private key can access your funds',
+      'Store the key in a secure location',
+      'Consider using a hardware wallet for long-term storage',
+    ],
+    confirmText: 'I understand the risks and want to export my key',
+    cancelText: 'Cancel',
+  })
+
+  if (consent) {
+    return await exportPrivateKey()
+  }
+
+  throw new Error('User declined key export')
+}
+```
+
+## Use Cases for Key Export
+
+### Wallet Migration
+
+**Cross-Platform Migration:**
+
+```javascript
+// Export from Web3Auth for import into other wallets
+async function migrateToExternalWallet() {
+  try {
+    const privateKey = await exportPrivateKey()
+
+    // Generate wallet formats for different platforms
+    const walletFormats = {
+      metamask: generateMetaMaskFormat(privateKey),
+      trustwallet: generateTrustWalletFormat(privateKey),
+      hardware: generateHardwareWalletFormat(privateKey),
+    }
+
+    return walletFormats
+  } catch (error) {
+    console.error('Migration failed:', error)
+    throw error
+  }
+}
+```
+
+### Multi-Chain Support
+
+**Cross-Chain Key Derivation:**
+
+```javascript
+async function deriveKeysForMultipleChains() {
+  const basePrivateKey = await exportPrivateKey()
+
+  // Derive keys for different blockchain networks
+  const chainKeys = {
+    ethereum: deriveEthereumKey(basePrivateKey),
+    polygon: derivePolygonKey(basePrivateKey),
+    solana: deriveSolanaKey(basePrivateKey),
+    bitcoin: deriveBitcoinKey(basePrivateKey),
+  }
+
+  return chainKeys
+}
+```
+
+### Advanced Integrations
+
+**DeFi Protocol Integration:**
+
+```javascript
+async function integrateDeFiProtocol() {
+  // Export key for direct protocol interaction
+  const privateKey = await exportPrivateKey()
+
+  // Create wallet instance for advanced operations
+  const wallet = new ethers.Wallet(privateKey, provider)
+
+  // Perform complex DeFi operations
+  await performAdvancedDeFiOperations(wallet)
+
+  // Clear sensitive data
+  wallet.privateKey = null
+}
+```
+
+### Backup and Recovery
+
+**Secure Backup Creation:**
+
+```javascript
+async function createSecureBackup() {
+  const privateKey = await exportPrivateKey()
+
+  // Encrypt private key for backup
+  const encryptedBackup = await encryptKey(privateKey, userPassword)
+
+  // Store encrypted backup securely
+  await storeEncryptedBackup(encryptedBackup)
+
+  // Provide recovery instructions to user
+  showBackupInstructions(encryptedBackup)
+}
+```
+
+## Security Considerations
+
+### Application Security
+
+**Key Handling Best Practices:**
+
+- **Minimize Exposure**: Retrieve keys only when necessary
+- **Secure Transmission**: Use HTTPS and encrypted channels
+- **Memory Management**: Clear private keys from memory immediately after use
+- **No Persistent Storage**: Never store private keys in databases or local storage
+- **Audit Logging**: Log key export events for security monitoring
+
+**Implementation Security:**
+
+```javascript
+class SecureKeyHandler {
+  constructor() {
+    this.keyBuffer = null
+  }
+
+  async handleKeyExport() {
+    try {
+      // Secure key retrieval
+      this.keyBuffer = await this.getPrivateKey()
+
+      // Process immediately
+      const result = await this.processKey(this.keyBuffer)
+
+      return result
+    } finally {
+      // Always clear sensitive data
+      this.clearKeyBuffer()
+    }
+  }
+
+  clearKeyBuffer() {
+    if (this.keyBuffer) {
+      // Overwrite memory with random data
+      crypto.getRandomValues(new Uint8Array(this.keyBuffer.length))
+      this.keyBuffer = null
+    }
+  }
+}
+```
+
+### User Education
+
+**Security Awareness:**
+
+- Educate users about private key security
+- Explain the implications of key export
+- Provide secure storage recommendations
+- Warn against sharing private keys
+
+**User Interface Guidelines:**
+
+```javascript
+const securityWarnings = {
+  beforeExport: [
+    'Your private key controls access to your wallet and funds',
+    'Never share your private key with anyone',
+    'Store your key in a secure, offline location',
+    'Consider using a hardware wallet for long-term storage',
+  ],
+
+  afterExport: [
+    'Your private key has been exported',
+    'Ensure it is stored securely and never shared',
+    'Delete any temporary copies or screenshots',
+    'Consider this key compromised if viewed by others',
+  ],
+}
+```
+
+### Regulatory Compliance
+
+**Compliance Considerations:**
+
+- **Data Protection**: Ensure key export complies with privacy regulations
+- **Audit Requirements**: Maintain records of key export events
+- **User Consent**: Obtain explicit consent for key export operations
+- **Jurisdictional Laws**: Consider local regulations regarding cryptographic material
+
+## Monitoring and Analytics
+
+### Export Event Tracking
+
+**Analytics Implementation:**
+
+```javascript
+async function trackKeyExport(userId, exportReason) {
+  await analytics.track('private_key_exported', {
+    user_id: userId,
+    timestamp: new Date().toISOString(),
+    reason: exportReason,
+    user_agent: navigator.userAgent,
+    ip_address: await getUserIP(),
+    session_id: getSessionId(),
+  })
+}
+```
+
+**Security Monitoring:**
+
+```javascript
+class KeyExportMonitor {
+  constructor() {
+    this.exportAttempts = new Map()
+  }
+
+  async monitorExport(userId) {
+    const attempts = this.exportAttempts.get(userId) || 0
+
+    // Flag suspicious activity
+    if (attempts > 5) {
+      await this.flagSuspiciousActivity(userId)
+    }
+
+    // Track export attempt
+    this.exportAttempts.set(userId, attempts + 1)
+
+    // Reset counter after 24 hours
+    setTimeout(
+      () => {
+        this.exportAttempts.delete(userId)
+      },
+      24 * 60 * 60 * 1000
+    )
+  }
+}
+```
+
+## Alternative Approaches
+
+### When to Disable Key Export
+
+**Recommended for:**
+
+- Consumer-facing applications
+- Applications handling high-value assets
+- Regulated financial services
+- Applications with strict security requirements
+
+**Alternative Solutions:**
+
+- Use Web3Auth's built-in wallet interface
+- Implement transaction signing without key exposure
+- Use multi-signature schemes
+- Leverage Web3Auth's session-based authentication
+
+### Transaction-Only Access
+
+**Secure Transaction Pattern:**
+
+```javascript
+// Sign transactions without exposing private key
+async function signTransaction(transactionData) {
+  // Use Web3Auth's provider directly
+  const signedTransaction = await web3auth.provider.request({
+    method: 'eth_signTransaction',
+    params: [transactionData],
+  })
+
+  return signedTransaction
+}
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**Key Export Disabled:**
+
+- Verify setting is enabled in dashboard
+- Check project configuration
+- Confirm user permissions
+
+**Export Method Not Available:**
+
+- Ensure Web3Auth SDK is properly initialized
+- Verify user is authenticated
+- Check for browser compatibility issues
+
+**User Consent Failures:**
+
+- Implement proper consent flow
+- Provide clear security information
+- Handle user rejection gracefully
+
+### Error Handling
+
+**Robust Error Management:**
+
+```javascript
+async function safeKeyExport() {
+  try {
+    await validateExportPermissions()
+    const key = await exportPrivateKey()
+    return key
+  } catch (error) {
+    if (error.code === 'EXPORT_DISABLED') {
+      throw new Error('Key export is disabled for this project')
+    } else if (error.code === 'USER_REJECTED') {
+      throw new Error('User declined key export')
+    } else {
+      console.error('Unexpected error:', error)
+      throw new Error('Key export failed')
+    }
+  }
+}
+```
+
+## Next Steps
+
+- **[User Details in ID Token](../user-details)** - Configure user data in JWT tokens
+- **[Session Management](../session-management)** - Control session duration and behavior
+- **[Project Settings](../../project-settings)** - Configure basic project information

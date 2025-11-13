@@ -1,76 +1,21 @@
 ---
 title: Integrate Embedded Wallets with the Astar zkEVM Blockchain in iOS/Swift Applications
 sidebar_label: iOS
-image: 'img/embedded-wallets/banners/zkevm.png'
+image: 'img/embedded-wallets/banners/astar-zkevm.png'
 
-keywords: [ios, swift, zkevm, astar, web3auth, authentication, blockchain]
+keywords: [ios, swift, astar-zkevm, web3auth, authentication, blockchain]
 description: 'Integrate Embedded Wallets with the Astar zkEVM Blockchain in iOS/Swift Applications | Embedded Wallets'
 ---
 
-import InstallationSnippet from '../../_ios-connect-blockchain/_evm-installation.mdx'
-import GetAccountSnippet from '../../_ios-connect-blockchain/_evm-get-account.mdx'
-import UserInfoSnippet from '../../_ios-connect-blockchain/_evm-user-info.mdx'
-import GetBalanceSnippet from '../../_ios-connect-blockchain/_evm-get-balance.mdx'
-import InitialisationSnippet from '../../_ios-connect-blockchain/_evm-initialisation.mdx'
-import SignMessageSnippet from '../../_ios-connect-blockchain/_evm-sign-message.mdx'
-import SendTransactionSnippet from '../../_ios-connect-blockchain/_evm-send-transaction.mdx'
+import EVMInteraction from '../../_ios-connect-blockchain/_evm-interaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsAstarZkevm from '../../_general-connect-blockchain/_astar-zkevm.mdx'
 
-While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) on iOS, the private key is available in the SDK state. Use it to derive the user's address and interact with the [Astar zkEVM](https://docs.astar.network/docs/build/zkEVM/) blockchain for signing and JSON-RPC calls.
+While using the Web3Auth iOS SDK, you get the private key within the user scope after successful authorization. This private key can be used to retrieve the user's address, and interact with [Astar zkEVM](https://ethereum.org/) to make any blockchain calls. We have highlighted a few here for getting you started quickly on that.
 
-::::note
+## Chain Details for Astar zkEVM
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+<ChainDetailsAstarZkevm />
 
-::::
-
-## Installation
-
-<InstallationSnippet />
-
-## Chain Details for zkEVM
-
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
-
-- Chain ID: 0xEC0
-- Public RPC URL: https://rpc.startale.com/astar-zkevm (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Astar zkEVM
-- Block Explorer Link: https://astar-zkevm.explorer.startale.com/
-- Ticker: ETH
-- Ticker Name: ETH
-
-</TabItem>
-</Tabs>
-
-## Initialize
-
-<InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
-
-## Get Account
-
-<GetAccountSnippet />
-
-## Get Balance
-
-<GetBalanceSnippet />
-
-## Send Transaction
-
-<SendTransactionSnippet />
-
-## Sign a message
-
-<SignMessageSnippet />
+<EVMInteraction />

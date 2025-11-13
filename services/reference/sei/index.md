@@ -26,17 +26,17 @@ Select an option below to get started with the Sei network.
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Sei network."
     },
     {
-      href: "json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Sei network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create and secure an API key."
     }

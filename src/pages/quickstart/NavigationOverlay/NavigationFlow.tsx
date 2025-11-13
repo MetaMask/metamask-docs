@@ -45,28 +45,34 @@ const navigationOptions: NavigationOption[] = [
     walletAggregatorOnly: YES,
   },
   {
-    id: 'delegation-toolkit-1',
+    id: 'smart-accounts-kit-1',
     title: 'I want to create a smart account',
-    description: 'Delegation Toolkit',
-    link: '/delegation-toolkit/development/get-started/smart-account-quickstart',
+    description: 'Smart Accounts Kit',
+    link: '/smart-accounts-kit/get-started/smart-account-quickstart/',
   },
   {
-    id: 'delegation-toolkit-2',
+    id: 'smart-accounts-kit-4',
+    title: 'I want to perform executions on behalf of smart accounts',
+    description: 'Smart Accounts Kit',
+    link: '/smart-accounts-kit/guides/delegation/execute-on-smart-accounts-behalf',
+  },
+  {
+    id: 'smart-accounts-kit-2',
+    title: 'I want to perform executions on behalf of MetaMask users',
+    description: 'Smart Accounts Kit',
+    link: '/smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf',
+  },
+  {
+    id: 'smart-accounts-kit-3',
     title: 'I want to send gasless transactions',
-    description: 'Delegation Toolkit',
-    link: '/delegation-toolkit/development/guides/smart-accounts/send-gasless-transaction',
+    description: 'Smart Accounts Kit',
+    link: '/smart-accounts-kit/guides/smart-accounts/send-gasless-transaction',
   },
   {
-    id: 'delegation-toolkit-3',
-    title: 'I want to perform executions on behalf of users',
-    description: 'Delegation Toolkit',
-    link: '/delegation-toolkit/development/guides/delegation/execute-on-smart-accounts-behalf',
-  },
-  {
-    id: 'delegation-toolkit-4',
+    id: 'smart-accounts-kit-5',
     title: 'I want to convert EOAs to smart accounts',
-    description: 'Delegation Toolkit',
-    link: '/delegation-toolkit/development/get-started/smart-account-quickstart/eip7702',
+    description: 'Smart Accounts Kit',
+    link: '/smart-accounts-kit/get-started/smart-account-quickstart/eip7702',
   },
 ]
 
@@ -147,8 +153,8 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
           <Link href="/wallet" className={styles.quickLink}>
             💳 Embedded Wallets Docs
           </Link>
-          <Link href="/delegation-toolkit" className={styles.quickLink}>
-            ⚡ Delegation Toolkit Docs
+          <Link href="/smart-accounts-kit" className={styles.quickLink}>
+            ⚡ Smart Accounts Kit Docs
           </Link>
         </div>
       </div> */}

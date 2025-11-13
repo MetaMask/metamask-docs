@@ -1,36 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
   ]}
 >
-<TabItem
-  value="mainnet"
->
+<TabItem value="mainnet">
 
-- Chain ID: 0xBF04 (hex of 48900)
-- Public RPC URL: https://zircuit1-mainnet.p2pify.com/ (Avoid using public rpcTarget in production)
-- Display Name: Zircuit Mainnet
-- Block Explorer Link: https://explorer.zircuit.com
-- Ticker: ETH
-- Ticker Name: ETH
+- **Chain ID:** 0xBF04
+- **Public RPC URL:** https://zircuit1-mainnet.p2pify.com
+- **Display Name:** Zircuit Mainnet
+- **Block Explorer Link:** https://explorer.zircuit.com
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
 
 </TabItem>
 
-<TabItem
-  value="testnet"
->
+<TabItem value="testnet">
 
-- Chain ID: 0xBF03 (hex of 48899)
-- Public RPC URL: https://zircuit1.p2pify.com/ (Avoid using public rpcTarget in production)
-- Display Name: Zircuit Testnet
-- Block Explorer Link: https://explorer.testnet.zircuit.com
-- Ticker: ETH
-- Ticker Name: ETH
+- **Chain ID:** 0xBF03
+- **Public RPC URL:** https://zircuit1.p2pify.com
+- **Display Name:** Zircuit Testnet
+- **Block Explorer Link:** https://explorer.testnet.zircuit.com
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
 
 </TabItem>
 </Tabs>
