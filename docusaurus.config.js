@@ -203,8 +203,8 @@ const config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'gator',
-        path: 'delegation-toolkit',
-        routeBasePath: 'delegation-toolkit',
+        path: 'smart-accounts-kit',
+        routeBasePath: 'smart-accounts-kit',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./gator-sidebar.js'),
         breadcrumbs: false,
@@ -428,8 +428,8 @@ const config = {
                 to: '/embedded-wallets',
               },
               {
-                label: 'Delegation Toolkit',
-                to: '/delegation-toolkit',
+                label: 'Smart Accounts Kit',
+                to: '/smart-accounts-kit',
               },
               {
                 label: 'Snaps',
@@ -461,7 +461,7 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {
-                label: 'Delegation Toolkit GitHub',
+                label: 'Smart Accounts Kit GitHub',
                 href: 'https://github.com/MetaMask/smart-accounts-kit',
               },
               {

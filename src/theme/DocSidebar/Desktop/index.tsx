@@ -12,7 +12,7 @@ import SidebarSectionDropdown, {
 import {
   SERVICES_DASHBOARD_CONFIG,
   SNAPS_CONFIG,
-  DELEGATION_TOOLKIT_CONFIG,
+  SMART_ACCOUNTS_KIT_CONFIG,
   isPathInSections,
 } from '@site/src/components/SidebarSectionDropdown/configs'
 import type { PropSidebar } from '@docusaurus/plugin-content-docs'
@@ -34,7 +34,7 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
   } = useThemeConfig()
 
   const location = useLocation()
-  const isSmartAccountsKitDocs = location.pathname.startsWith('/delegation-toolkit')
+  const isSmartAccountsKitDocs = location.pathname.startsWith('/smart-accounts-kit')
   const isServicesOrDashboard = isPathInSections(
     location.pathname,
     SERVICES_DASHBOARD_CONFIG.sections
@@ -47,12 +47,12 @@ function DocSidebarDesktop({ path, sidebar, onCollapse, isHidden }: Props) {
     if (isSmartAccountsKitDocs) {
       smartAccountsKitTitle = (
         <div className={styles.versionDropdownContainer}>
-          <SidebarStaticTitle title={DELEGATION_TOOLKIT_CONFIG.title} />
+          <SidebarStaticTitle title={SMART_ACCOUNTS_KIT_CONFIG.title} />
         </div>
       )
       versionDropdown = (
         <div className={styles.versionDropdownContainer}>
-          <SidebarVersionDropdown path="delegation-toolkit" />
+          <SidebarVersionDropdown path="smart-accounts-kit" />
         </div>
       )
     }

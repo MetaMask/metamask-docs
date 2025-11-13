@@ -20,8 +20,8 @@ export const mobileProductsMenu: MobileProductItem[] = [
     href: '/embedded-wallets',
   },
   {
-    label: 'Delegation Toolkit',
-    href: '/delegation-toolkit',
+    label: 'Smart Accounts Kit',
+    href: '/smart-accounts-kit',
   },
   {
     label: 'Snaps',
