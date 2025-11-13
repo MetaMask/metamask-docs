@@ -1,4 +1,33 @@
----
+-import { useSDK } from "@metamask/sdk-react"
+
+function App() {
+  const { account, chainId, ethereum, sdk } = useSDK()
+
+  // Connect to MetaMask
+  const connectWallet = async () => {
+    try {
+      await sdk?.connect()
+    } catch (error) {
+      console.error("Failed to connect wallet:", error)
+    }
+  }
+
+  // Handle state changes
+  useEffect(() => {
+    if (account && chainId) {
+      // Handle account and network changes
+    }
+  }, [account, chainId])
+
+  // Disconnect wallet
+  const disconnectWallet = async () => {
+    await sdk?.terminate()
+  }
+
+  return (
+    // Your app UI
+  )
+}--
 description: Quickstart guide for using the SDK with a React Native dapp.
 sidebar_label: React Native
 keywords: [connect, MetaMask, React, Native, SDK, dapp]
