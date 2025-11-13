@@ -71,6 +71,10 @@
       "destination": "/sdk/"
     },
     {
+      "source": "/sdk/tutorials/:path*/",
+      "destination": "/tutorials/:path*/"
+    },
+    {
       "source": "/wallet/how-to/use-3rd-party-integrations/",
       "destination": "/sdk/"
     },
@@ -311,11 +315,11 @@
       "destination": "/sdk/"
     },
     {
-      "source": "/wallet/concepts/sdk-connections",
+      "source": "/wallet/concepts/sdk-connections/",
       "destination": "/sdk/"
     },
     {
-      "source": "/wallet/concepts/android-sdk",
+      "source": "/wallet/concepts/android-sdk/",
       "destination": "/sdk/"
     },
     {
@@ -643,6 +647,14 @@
       "destination": "/snaps/reference/config-options/"
     },
     {
+      "source": "/snaps/tags/",
+      "destination": "/snaps/"
+    },
+    {
+      "source": "/snaps/tags/keyring-api/",
+      "destination": "/snaps/features/custom-evm-accounts/"
+    },
+    {
       "source": "/services/get-started/",
       "destination": "/services/get-started/infura"
     },
@@ -723,8 +735,40 @@
       "destination": "/services/get-started/pricing/credit-cost/"
     },
     {
+      "source": "/services/reference/:path*/eth_newpendingtransactionfilter/",
+      "destination": "/services/reference/:path*/"
+    },
+    {
+      "source": "/services/reference/ethereum/how-to/secure-a-project/project-secret/",
+      "destination": "/developer-tools/dashboard/how-to/secure-an-api/api-key-secret/"
+    },
+    {
+      "source": "/services/reference/ipfs/how-to/:path*/",
+      "destination": "/services/how-to/use-ipfs/:path*/"
+    },
+    {
       "source": "/delegation-toolkit/:path*/",
       "destination": "/smart-accounts-kit/"
+    },
+    {
+      "source": "/developer-tools/dashboard/how-to/",
+      "destination": "/developer-tools/dashboard/"
+    },
+    {
+      "source": "/developer-tools/dashboard/how-to/secure-an-api/",
+      "destination": "/developer-tools/dashboard/how-to/secure-an-api/api-key-secret/"
+    },
+    {
+      "source": "/embedded-wallets/connect-blockchain/custom-chains/",
+      "destination": "/embedded-wallets/connect-blockchain/other/"
+    },
+    {
+      "source": "/embedded-wallets/connect-blockchain/evm/:path*/web/",
+      "destination": "/embedded-wallets/connect-blockchain/evm/:path*/"
+    },
+    {
+      "source": "/embedded-wallets/connect-blockchain/xrpl/",
+      "destination": "/embedded-wallets/connect-blockchain/"
     }
   ]
 }
