@@ -7,7 +7,7 @@ keywords: [scaffold-eth, delegation, smart accounts, template]
 # Use MetaMask Smart Accounts with Scaffold-ETH 2
 
 Use the [MetaMask Smart Accounts extension](https://github.com/metamask/gator-extension) for [Scaffold-ETH 2](https://docs.scaffoldeth.io/) to bootstrap a project in 
-under two minutes. This extensions helps you quickly generate the boilerplate code to create an embedded smart account, and complete
+under two minutes. This extension helps you quickly generate the boilerplate code to create an embedded smart account, and complete
 the delegation lifecycle (create, sign, and redeem a delegation).
 
 ## Prerequisites
@@ -17,7 +17,9 @@ the delegation lifecycle (create, sign, and redeem a delegation).
 - Install [Git](https://git-scm.com/install/).
 - [Create a Pimlico API key](https://docs.pimlico.io/guides/create-api-key#create-api-key).
 
-### 1. Install extension
+## Steps
+
+### 1. Install the extension
 
 Run the following command to install the Smart Accounts Kit extension:
 
@@ -25,7 +27,7 @@ Run the following command to install the Smart Accounts Kit extension:
 npx create-eth@latest -e metamask/gator-extension your-project-name
 ```
 
-### 2. Set up enviroment variable
+### 2. Set up enviroment variables
 
 Navigate into the project's `nextjs` package, and create a `.env.local` file. Once created, update the
 `NEXT_PUBLIC_PIMLICO_API_KEY` environment variable with your Pimlico API Key.
@@ -52,7 +54,7 @@ account, create a delegate wallet, create a delegation, and redeem a delegation.
 You can view the completed transaction on Etherscan.
 
 <p align="center">
-    <img src={require("../../assets/scaffold-eth-smart-accounts.png").default} alt="Scaffold-ETH 2 Smart Accounts & Delegation Page" class="appScreen" />
+    <img src={require("../../assets/scaffold-eth-smart-accounts.png").default} alt="Scaffold-ETH 2 Smart Accounts & Delegation Page" />
 </p>
 
 ## Next steps
