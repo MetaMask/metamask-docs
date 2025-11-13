@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import styles from './SidebarVersionDropdown.module.css'
 
 // Supported versions for the @metamask/delegation-toolkit.
-const delegationToolkitVersions = ['0.13.0', '0.12.0', '0.11.0']
+const delegationToolkitVersions = ['0.13.0', '0.12.0']
 
 export default function SidebarVersionDropdown({ path = 'smart-accounts-kit' }: { path?: string }) {
   const history = useHistory()
