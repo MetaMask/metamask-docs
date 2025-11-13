@@ -25,7 +25,15 @@ const sidebar = {
           ],
         },
         'get-started/use-the-cli',
-        'get-started/use-scaffold-eth',
+        {
+          type: 'category',
+          label: 'Use Scaffold-ETH 2',
+          collapsed: true,
+          items: [
+            'get-started/use-scaffold-eth/smart-accounts-extension',
+            'get-started/use-scaffold-eth/advanced-permissions',
+          ],
+        },
         'get-started/supported-networks',
       ],
     },
