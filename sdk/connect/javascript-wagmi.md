@@ -1,4 +1,11 @@
----
+--mainnet.id
+const config = createConfig({
+  // ... other config options
+  transports: {
+    [mainnet.id]: http('https://mainnet.infura.io/v3/<YOUR-API-KEY>'),
+    [sepolia.id]: http('https://sepolia.infura.io/v3/<YOUR-API-KEY>'),
+  },
+})-
 description: Quickstart guide for using the MetaMask SDK with a JavaScript and Wagmi dapp.
 toc_max_heading_level: 3
 sidebar_label: JavaScript + Wagmi (recommended)
