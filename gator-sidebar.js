@@ -30,7 +30,7 @@ const sidebar = {
           label: 'Use Scaffold-ETH 2',
           collapsed: true,
           items: [
-            'get-started/use-scaffold-eth/smart-accounts-extension',
+            'get-started/use-scaffold-eth/smart-accounts',
             'get-started/use-scaffold-eth/advanced-permissions',
           ],
         },
