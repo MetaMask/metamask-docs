@@ -168,7 +168,7 @@ const owner = Address.fromPublicKey(publicKey);
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
-  deployParams: [owner, [credential.id], [publicKey.x], [publicKey.y]],
+  deployParams: [owner, [toHex(credential.id)], [publicKey.x], [publicKey.y]],
   deploySalt: "0x",
   signer: { webAuthnAccount, keyId: toHex(credential.id) },
 });
