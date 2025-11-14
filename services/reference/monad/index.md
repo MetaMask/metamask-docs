@@ -46,3 +46,14 @@ Select an option below to get started with the Monad network.
     }
   ]}
 />
+
+## Partners and privacy policies
+
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
+The following partners provide access to the Monad network:
+<!-- markdown-link-check-disable -->
+- 0xFury ([Privacy policy](https://0xfury.com/privacy.php))
+- Alchemy ([Privacy Policy](https://legal.alchemy.com/#contract-sblyf8eub))
+- Monad foundation ([Privacy policy](https://www.monad.xyz/privacy-policy))
+<!-- markdown-link-check-enable -->
