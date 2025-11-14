@@ -7,27 +7,24 @@ description: Ethereum trace methods
 
 # Ethereum trace methods
 
-Infura provides access to the following trace API methods to allow users to gain insights into the execution of smart contracts and transactions:
-
-- [`trace_block`](trace_block.mdx)
-- [`trace_call`](trace_call.mdx)
-- [`trace_callMany`](trace_callmany.mdx)
-- [`trace_transaction`](trace_transaction.mdx)
-- [`trace_filter`](trace_filter.mdx)
-
 :::info
 
-Trace API is currently an open beta feature, available to paying Infura customers.
-
+Trace API is an open beta feature, available to paying Infura customers. 
 :::
 
-When tracing transactions, the trace diagnostic options are [`trace`](#trace) and [`stateDiff`](#statediff).
+Infura provides access to trace API methods that provide insights into the execution of smart contracts and transactions.
 
-:::info
+| Method                  | Diagnostic options         |
+|-----------------------|-------------------------------------------|
+|[`trace_block`](trace_block.mdx)|[`trace`](#trace)|
+|[`trace_call`](trace_call.mdx)|[`trace`](#trace), [`stateDiff`](#statediff)|
+|[`trace_callMany`](trace_callmany.mdx)|[`trace`](#trace), [`stateDiff`](#statediff)|
+|[`trace_transaction`](trace_transaction.mdx)|[`trace`](#trace)|
+|[`trace_filter`](trace_filter.mdx)|[`trace`](#trace)|
 
-`trace_block, trace_filter`, and `trace_transaction` returns `trace` information, whereas `trace_call` and `trace_callMany`
-allow you to use the `trace` or `stateDiff` diagnostic options when tracing calls or transactions.
-
+:::caution
+Trace responses are handled generically to enable support of additional fields beyond 
+those documented here. This requires graceful handling.
 :::
 
 ## `trace`
@@ -72,19 +69,21 @@ smart contract transaction. Excludes precompiled contracts.
 | `output`              | Return value of the contract call. Contains only the actual value sent by a `RETURN` operation. If a `RETURN` was not executed, the output is empty bytes. |
 | `subTraces`           | Traces of contract calls made by the transaction.                                                               |
 | `traceAddress`        | Tree list address of where the call occurred, address of the parents, and order of the current sub call.        |
-| `transactionHash`     | Hash of the transaction.                                                                                        |
+| `transactionHash`     | Hash of the tansaction.                                                                                         |
 | `transactionPosition` | Transaction position.                                                                                           |
-| `type`                | Whether the transaction is a `CALL` or `CREATE` series operation.                                               |
+| `type`                | Whether the transaction is a `call` or `create` series operation.                                               |
+| `creationMethod`      | Opcode used during contract creation `create` or `create2`.                                                     |
 
+<!-- Not yet tested to see position of creationMethod in response body -->
 
 ## `stateDiff`
 
 Displays state changes in the requested block for each transaction, represented as a map of accounts to an object. Lists
 the balance, code, nonce, and storage changes from immediately before the transaction to after the transaction. For the `key:value` pairs:
 
-- `+` indicates the field didn’t exist before and now has the specified value.
-- `-` indicates a deleted value.
-- `*` has a `from` and a `to` value.
+- `+` indicates the field didn’t exist before and now has the specified value
+- `-` indicates a deleted value
+- `*` has a `from` and a `to` value
 
 An absent value is distinct from zero when creating accounts or clearing storage. For example, when clearing storage, an absent value means that a particular storage slot has not yet been assigned a value, while a zero value means that the storage slot has been assigned and set to zero.
 
