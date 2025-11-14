@@ -16,7 +16,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Mona
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Monad network enabled.
+Ensure you have an [API key](/developer-tools/dashboard/get-started/create-api/) with the Monad network enabled.
 
 ## Make calls
 
