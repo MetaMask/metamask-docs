@@ -5,12 +5,6 @@ import fs from 'fs'
 require('dotenv').config()
 const { themes } = require('prism-react-renderer')
 const { REF_ALLOW_LOGIN_PATH } = require('./src/lib/constants')
-const {
-  fetchAndGenerateDynamicSidebarItems,
-  NETWORK_NAMES,
-  MM_REF_PATH,
-  MM_RPC_URL,
-} = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
 const productsDropdown = fs.readFileSync('./src/components/NavDropdown/Products.html', 'utf-8')
 const baseUrl = process.env.DEST || '/'
