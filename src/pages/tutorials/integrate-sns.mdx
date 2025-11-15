@@ -1,0 +1,480 @@
+---
+title: Integrate SNS with Embedded Wallets
+image: 'img/tutorials/tutorials-banners/integrate-sns.png'
+description: Integrate Solana Name Service (SNS) Identity with MetaMask Embedded Wallets.
+tags: [embedded wallets, solana, sns, metamask]
+date: November 15, 2025
+author: MetaMask Developer Relations
+toc_max_heading_level: 4
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+This tutorial demonstrates how to integrate core functionalities of the Solana Name Service (SNS) with [MetaMask Embedded Wallets](/embedded-wallets).
+Create a seamless onboarding experience by pairing simple social logins with a powerful, human-readable onchain identity layer.
+
+As an overview, this integration allows users to:
+
+- Log in using familiar web2 social providers (Google, Apple, etc.).
+- Register new `.sol` domains with their embedded wallet.
+- Resolve domain names to wallet addresses for easy transfers.
+- Fetch and display their primary domain as a user identity.
+- Manage domain records for social media integration.
+
+This tutorial follows the implementation demonstrated in the following live stream:
+
+<p align='center'>
+  <iframe
+    width='560'
+    height='315'
+    src='https://www.youtube.com/embed/_sbhREszVGs'
+    title='Web3Auth SNS Integration Livestream'
+    frameBorder='0'
+    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+    allowFullScreen></iframe>
+</p>
+
+:::info
+A [complete implementation example](https://github.com/Web3Auth/web3auth-examples/tree/main/other/sns-example) is available on GitHub.
+:::
+
+## Steps
+
+### 1. Set up the dashboard
+
+MetaMask Embedded Wallets enable users to log in with familiar web2 socials by using Shamir
+Secret Sharing (MPC) to ensure the wallet key is distributed and non-custodial.
+Follow these steps to set up and configure your Embedded Wallets (Web3Auth) dashboard:
+
+1. Sign up for a free account on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/login).
+2. Create a new project.
+3. Copy your Client ID from the dashboard.
+   This ID is crucial for initializing the SDK.
+4. Navigate to **Chains & Networks** and enable Solana, Solana Devnet, and Solana Testnet.
+   Ensure all the RPC URLs are configured.
+
+See the [Embedded Wallets dashboard documentation](/embedded-wallets/dashboard) for more information.
+You can explore other dashboard features, including custom verifiers, whitelabeling, and analytics.
+
+### 2. Install dependencies
+
+Install the following dependencies in your project:
+
+```bash npm2yarn
+npm install @web3auth/modal @solana/web3.js @bonfida/spl-name-service @solana/spl-token
+```
+
+- `@web3auth/modal` enables the embedded wallet integration with social logins.
+- `@solana/web3.js` enables interacting with the Solana blockchain and constructing transactions.
+- `@bonfida/spl-name-service` enables SNS domain registration, resolution, and management.
+- `@solana/spl-token` handles token operations when processing domain registration payments.
+
+### 3. Integrate MetaMask Embedded Wallets in React
+
+Use the `@web3auth/modal` SDK to integrate and manage Embedded Wallets in your React application.
+
+#### 3.1. Initialize the provider
+
+Wrap your application components with a `Web3AuthProvider` to configure the SDK with your Client ID:
+
+```typescript title='src/main.tsx'
+import './index.css';
+
+import ReactDOM from 'react-dom/client';
+// focus-start
+import { Web3AuthProvider } from '@web3auth/modal/react';
+import web3AuthContextConfig from './web3authContext';
+// focus-end
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  // focus-start
+  <Web3AuthProvider config={web3AuthContextConfig}>
+    <App />
+  </Web3AuthProvider>
+  // focus-end
+);
+```
+
+```typescript title='src/web3authContext.tsx'
+import { WEB3AUTH_NETWORK } from '@web3auth/modal'
+import { type Web3AuthContextConfig } from '@web3auth/modal/react'
+
+// Dashboard Registration
+const clientId =
+  'BFcLTVqWlTSpBBaELDPSz4_LFgG8Nf8hEltPlf3QeUG_88GDrQSw82fSjjYj5x4F3ys3ghMq8-InU7Azx7NbFSs' // get from https://dashboard.web3auth.io
+
+// focus-start
+// Instantiate the SDK.
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId,
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+  },
+}
+// focus-end
+
+export default web3AuthContextConfig
+```
+
+#### 3.2. Access wallet and user information
+
+Access wallet information and user details using the [Solana hooks](/embedded-wallets/sdk/react/solana-hooks):
+
+```typescript title='src/components/walletInfo.tsx'
+// focus-next-line
+import { useSolanaWallet } from '@web3auth/modal/react/solana';
+import { PublicKey } from '@solana/web3.js';
+import { useEffect, useState } from 'react';
+
+export function WalletInfo() {
+  // focus-next-line
+  const { accounts, connection } = useSolanaWallet();
+  const [userAddress, setUserAddress] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (accounts && accounts.length > 0) {
+      // focus-next-line
+      setUserAddress(accounts[0]);
+    }
+  }, [accounts]);
+
+  return (
+    <div>
+      <h2>Wallet Information</h2>
+      <div>
+        {userAddress && (
+          <div>
+            <p><strong>Address:</strong> {userAddress}</p>
+            <p><strong>Public Key:</strong> {new PublicKey(userAddress).toBase58()}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+```
+
+### 4. Integrate Solana Name Service (SNS)
+
+SNS enables users to register human-readable domain names that map to Solana wallet addresses.
+Follow these steps to implement the core SNS functionalities: domain resolution, registration, and management.
+
+#### 4.1. Import components
+
+Import the necessary components from the installed libraries:
+
+```typescript
+// focus-start
+import { resolveDomainName, registerDomainName, getPrimaryDomain } from '@bonfida/spl-name-service'
+import { Connection, PublicKey, Transaction, SystemProgram } from '@solana/web3.js'
+import { useSolanaWallet } from '@web3auth/modal/react/solana'
+// focus-end
+```
+
+#### 4.2. Resolve domains
+
+Domain resolution converts a `.sol` domain name to its corresponding wallet address.
+This is useful for enabling users to send payments using human-readable names instead of long wallet addresses.
+
+```typescript title='src/components/domainResolver.tsx'
+import { Connection, PublicKey } from '@solana/web3.js';
+import { resolveDomainName } from '@bonfida/spl-name-service';
+import { useSolanaWallet } from '@web3auth/modal/react/solana';
+import { useState } from 'react';
+
+export function DomainResolver() {
+  const { connection } = useSolanaWallet();
+  const [domainInput, setDomainInput] = useState('');
+  const [resolvedAddress, setResolvedAddress] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const resolveDomain = async () => {
+    if (!connection || !domainInput.trim()) {
+      setError('Please enter a domain name');
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      // focus-start
+      // Normalize domain input (remove .sol if present, convert to lowercase)
+      const normalizedDomain = domainInput.toLowerCase().replace('.sol', '');
+
+      // Resolve the domain to get the owner's public key
+      const ownerKey = await resolveDomainName(connection, normalizedDomain);
+      // focus-end
+
+      setResolvedAddress(ownerKey.toBase58());
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Failed to resolve domain. Domain may not exist or be listed for sale.'
+      );
+      setResolvedAddress(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Domain Resolver</h2>
+      <div className='flex flex-col gap-4'>
+        <input
+          type='text'
+          placeholder='Enter domain (e.g., mydomain.sol)'
+          value={domainInput}
+          onChange={(e) => setDomainInput(e.target.value)}
+          className='px-4 py-2 border rounded-lg text-black'
+        />
+        <button
+          onClick={resolveDomain}
+          disabled={isLoading || !domainInput.trim()}
+          className='px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50'
+        >
+          {isLoading ? 'Resolving...' : 'Resolve Domain'}
+        </button>
+
+        {resolvedAddress && (
+          <div className='p-4 bg-green-100 rounded-lg'>
+            <p className='text-green-800'>
+              <strong>Resolved Address:</strong> {resolvedAddress}
+            </p>
+          </div>
+        )}
+
+        {error && (
+          <div className='p-4 bg-red-100 rounded-lg'>
+            <p className='text-red-800'>Error: {error}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+```
+
+#### 4.3. Register domains
+
+Domain registration allows users to claim new `.sol` domains.
+The registration process involves creating and sending a transaction with the appropriate instructions.
+
+```typescript title='src/components/domainRegistration.tsx'
+import { Connection, PublicKey, Transaction } from '@solana/web3.js';
+import { registerDomainName } from '@bonfida/spl-name-service';
+import { useSolanaWallet } from '@web3auth/modal/react/solana';
+import { useState } from 'react';
+
+export function DomainRegistration() {
+  const { accounts, connection, signAndSendTransaction } = useSolanaWallet();
+  const [domainInput, setDomainInput] = useState('');
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const registerDomain = async () => {
+    if (!connection || !accounts?.[0] || !domainInput.trim()) {
+      setError('Please connect wallet and enter a domain name');
+      return;
+    }
+
+    try {
+      setIsRegistering(true);
+      setError(null);
+      setSuccess(null);
+
+      // focus-start
+      // Normalize and validate domain input
+      const normalizedDomain = domainInput.toLowerCase().replace('.sol', '');
+
+      if (normalizedDomain.length < 1 || normalizedDomain.length > 32) {
+        setError('Domain must be between 1 and 32 characters');
+        return;
+      }
+
+      const buyerPublicKey = new PublicKey(accounts[0]);
+
+      // Create registration instruction
+      const instruction = await registerDomainName(
+        connection,
+        normalizedDomain,
+        buyerPublicKey,
+        buyerPublicKey // buyer pays for the domain
+      );
+
+      // Create and send transaction
+      const transaction = new Transaction().add(instruction);
+      const signature = await signAndSendTransaction(transaction);
+      // focus-end
+
+      setSuccess(`Domain registered successfully! Transaction: ${signature}`);
+      setDomainInput(''); // Clear input on success
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Failed to register domain. Domain may already exist or you may have insufficient funds.'
+      );
+    } finally {
+      setIsRegistering(false);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Domain Registration</h2>
+      <div className='flex flex-col gap-4'>
+        <input
+          type='text'
+          placeholder='Enter domain name (without .sol)'
+          value={domainInput}
+          onChange={(e) => setDomainInput(e.target.value)}
+          className='px-4 py-2 border rounded-lg text-black'
+        />
+        <button
+          onClick={registerDomain}
+          disabled={isRegistering || !domainInput.trim() || !accounts?.[0]}
+          className='px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:opacity-50'
+        >
+          {isRegistering ? 'Registering...' : 'Register Domain'}
+        </button>
+
+        {success && (
+          <div className='p-4 bg-green-100 rounded-lg'>
+            <p className='text-green-800'>{success}</p>
+          </div>
+        )}
+
+        {error && (
+          <div className='p-4 bg-red-100 rounded-lg'>
+            <p className='text-red-800'>Error: {error}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+```
+
+#### 4.4. Display the primary domain
+
+A primary domain serves as the user's main identity.
+This component fetches and displays the user's primary domain, providing instant personalization for your application.
+
+```typescript title='src/components/primaryDomain.tsx'
+import { Connection, PublicKey } from '@solana/web3.js';
+import { getPrimaryDomain } from '@bonfida/spl-name-service';
+import { useSolanaWallet } from '@web3auth/modal/react/solana';
+import { useState, useEffect } from 'react';
+
+export function PrimaryDomain() {
+  const { accounts, connection } = useSolanaWallet();
+  const [primaryDomain, setPrimaryDomain] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchPrimaryDomain = async () => {
+    if (!connection || !accounts?.[0]) {
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+
+      // focus-start
+      const ownerPublicKey = new PublicKey(accounts[0]);
+
+      // Fetch the user's primary domain
+      const domain = await getPrimaryDomain(connection, ownerPublicKey);
+      // focus-end
+
+      setPrimaryDomain(domain ? `${domain}.sol` : null);
+    } catch (err) {
+      // No primary domain set is not really an error, just no domain
+      setPrimaryDomain(null);
+      setError('No primary domain set');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPrimaryDomain();
+  }, [connection, accounts]);
+
+  return (
+    <div>
+      <h2>Primary Domain</h2>
+      <div className='flex flex-col gap-4'>
+        {isLoading && <span className='text-gray-500'>Loading primary domain...</span>}
+
+        {primaryDomain && (
+          <div className='p-4 bg-blue-100 rounded-lg'>
+            <p className='text-blue-800'>
+              <strong>Your Primary Domain:</strong> {primaryDomain}
+            </p>
+          </div>
+        )}
+
+        {error && !isLoading && (
+          <div className='p-4 bg-yellow-100 rounded-lg'>
+            <p className='text-yellow-800'>{error}</p>
+          </div>
+        )}
+
+        <button
+          onClick={fetchPrimaryDomain}
+          disabled={isLoading || !accounts?.[0]}
+          className='px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 disabled:opacity-50'
+        >
+          {isLoading ? 'Loading...' : 'Refresh Primary Domain'}
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+## Testing and best practices
+
+### Development environment
+
+- **Devnet for testing** - Always develop and test on devnet or testnet.
+  You can use the [Solana Faucet](https://faucet.solana.com/) to get test SOL for your new account.
+- **Environment variables** - Store your Client ID and other sensitive configuration in environment variables.
+
+### User experience
+
+- **Input validation** - Always validate and normalize domain input (lowercase, trim `.sol` extension).
+- **Loading states** - Implement proper loading states while processing domain operations.
+- **Error handling** - Provide clear error messages when operations fail or when domains don't exist.
+- **Fallback for listed domains** - When resolving domains that are listed for sale, implement fallback
+  functionality to prevent incorrect transfers.
+
+### Production readiness
+
+- **Domain availability** - Before registration, check domain availability using SNS APIs or SDK methods.
+- **Transaction confirmation** - Implement proper transaction confirmation handling to ensure operations complete successfully.
+- **Rate limiting** - Consider implementing rate limiting for domain operations to prevent spam.
+- **Security** - Always validate domain operations server-side when dealing with financial transactions.
+
+## Conclusion
+
+This tutorial demonstrates how to integrate MetaMask Embedded Wallets with Solana Name Service (SNS) to create a seamless domain management experience.
+By combining Embedded Wallets' familiar web2 social logins with SNS's human-readable domain functionality, 
+you can enable users to register, resolve, and manage `.sol` domains directly from their embedded wallet.
+
+The integration provides a smooth, familiar experience for your users while leveraging the power of
+decentralized identity and human-readable addresses on Solana.
+
+For more advanced SNS features like domain records, subdomains, and social integrations, see the [SNS SDK documentation](https://docs.sns.id/dev/sns-sdk).
+
+To learn more about Embedded Wallets, see the [Web SDK documentation](/embedded-wallets/sdk/react/) and the
+[SNS integration example](https://github.com/Web3Auth/web3auth-examples/tree/main/other/sns-example).

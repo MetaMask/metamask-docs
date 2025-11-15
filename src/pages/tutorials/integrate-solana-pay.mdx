@@ -1,0 +1,348 @@
+---
+title: Integrate Solana Pay with Embedded Wallets
+image: 'img/tutorials/tutorials-banners/integrate-solana-pay.png'
+description:
+  Integrate Solana Pay QR code payments with MetaMask Embedded Wallets in your React
+  application.
+type: tutorial
+tags: [embedded wallets, plug and play, web, solana, solana pay, react, ed25519]
+date: November 15, 2025
+author: MetaMask Developer Relations
+toc_max_heading_level: 4
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+This tutorial demonstrates how to integrate Solana Pay with [MetaMask Embedded Wallets](/embedded-wallets) to create a seamless payment experience for your users.
+By combining Embedded Wallets' familiar web2-like social logins with Solana Pay's QR code functionality, you can enable users to make payments directly from their social login wallet.
+
+As an overview, this integration allows users to:
+
+- Log in using familiar web2 social providers (Google, Apple, etc.).
+- Generate Solana Pay QR codes for transactions.
+- Make payments using their embedded wallet.
+
+This tutorial follows the implementation demonstrated in the following live stream:
+
+<p align='center'>
+  <iframe
+    width='560'
+    height='315'
+    src='https://www.youtube.com/embed/_wRWlUWpBng'
+    title='MetaMask Embedded Wallets Solana Pay Integration Livestream'
+    frameBorder='0'
+    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+    allowFullScreen></iframe>
+</p>
+
+:::info
+A [complete implementation example](https://github.com/Web3Auth/web3auth-examples/tree/main/other/solana-pay-example) is available on GitHub.
+:::
+
+## Steps
+
+### 1. Set up the dashboard
+
+MetaMask Embedded Wallets enable users to log in with familiar web2 socials by using Shamir
+Secret Sharing (MPC) to ensure the wallet key is distributed and non-custodial.
+Follow these steps to set up and configure your Embedded Wallets (Web3Auth) dashboard:
+
+1. Sign up for a free account on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/login).
+2. Create a new project.
+3. Copy your Client ID from the dashboard.
+   This ID is crucial for initializing the SDK.
+4. Navigate to **Chains & Networks** and enable Solana, Solana Devnet, and Solana Testnet.
+   Ensure all the RPC URLs are configured.
+
+See the [Embedded Wallets dashboard documentation](/embedded-wallets/dashboard) for more information.
+You can explore other dashboard features, including custom verifiers, whitelabeling, and analytics.
+
+### 2. Install dependencies
+
+Install the following dependencies in your project:
+
+```bash npm2yarn
+npm install @solana/pay bignumber.js @solana/web3.js
+```
+
+- `@solana/pay` is the core Solana Pay protocol library.
+- `bignumber.js` enables accurate handling of large numbers, especially when dealing with token amounts.
+- `@solana/web3.js` enables interacting with the Solana blockchain, such as fetching balances or constructing transactions.
+
+### 3. Integrate MetaMask Embedded Wallets in React
+
+Use the `@web3auth/modal` SDK to integrate and manage Embedded Wallets in your React application.
+
+#### 3.1. Initialize the provider
+
+Wrap your application components with a `Web3AuthProvider` to configure the SDK with your Client ID:
+
+```typescript title='src/main.tsx'
+import './index.css';
+
+import ReactDOM from 'react-dom/client';
+// focus-start
+import { Web3AuthProvider } from '@web3auth/modal/react';
+import web3AuthContextConfig from './web3authContext';
+// focus-end
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  // focus-start
+  <Web3AuthProvider config={web3AuthContextConfig}>
+    <App />
+  </Web3AuthProvider>
+  // focus-end
+);
+```
+
+```typescript title='src/web3authContext.tsx'
+import { WEB3AUTH_NETWORK } from '@web3auth/modal'
+import { type Web3AuthContextConfig } from '@web3auth/modal/react'
+
+// Dashboard Registration
+const clientId =
+  'BFcLTVqWlTSpBBaELDPSz4_LFgG8Nf8hEltPlf3QeUG_88GDrQSw82fSjjYj5x4F3ys3ghMq8-InU7Azx7NbFSs' // get from https://dashboard.web3auth.io
+
+// focus-start
+// Instantiate the SDK.
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId,
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+  },
+}
+// focus-end
+
+export default web3AuthContextConfig
+```
+
+#### 3.2. Access wallet information and fetch user balance
+
+Access wallet information and user details using the [Solana hooks](/embedded-wallets/sdk/react/solana-hooks):
+
+```typescript title='src/components/getBalance.tsx'
+// focus-next-line
+import { useSolanaWallet } from '@web3auth/modal/react/solana';
+import {
+  LAMPORTS_PER_SOL,
+  PublicKey,
+} from '@solana/web3.js';
+import { useEffect, useState } from 'react';
+
+export function Balance() {
+  // focus-next-line
+  const { accounts, connection } = useSolanaWallet();
+  const [balance, setBalance] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchBalance = async () => {
+    if (connection && accounts && accounts.length > 0) {
+      try {
+        setIsLoading(true);
+        setError(null);
+        // focus-start
+        const publicKey = new PublicKey(accounts[0]);
+        const balance = await connection.getBalance(publicKey);
+        // focus-end
+        setBalance(balance);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Unknown error');
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchBalance();
+  }, [connection, accounts]);
+
+  return (
+    <div>
+      <h2>Balance</h2>
+      <div>
+        {balance !== null && `${balance / LAMPORTS_PER_SOL} SOL`}
+      </div>
+        {isLoading && <span className='loading'>Loading...</span>}
+        {error && <span className='error'>Error: {error}</span>}
+      <button onClick={fetchBalance} type='submit' className='card'>
+          Fetch Balance
+      </button>
+    </div>
+  )
+}
+```
+
+### 4. Integrate Solana Pay
+
+Solana Pay enables the generation of transaction requests, typically as QR codes, for direct payments from Solana wallets.
+Follow these steps to create and display Solana Pay QR codes for payments.
+
+#### 4.1. Import components
+
+Import the necessary components from the installed libraries:
+
+```typescript
+// focus-start
+import { createQR } from '@solana/pay'
+import { Keypair, PublicKey } from '@solana/web3.js'
+import BigNumber from 'bignumber.js'
+import { useSolanaWallet } from '@web3auth/modal/react/solana'
+// focus-end
+```
+
+#### 4.2. Generate QR codes
+
+The core of the Solana Pay integration involves creating a payment request URL and then rendering it as a QR code.
+First, define the following:
+
+- **Recipient and amount** - Define the `recipient` (a `PublicKey` of the merchant/receiver) and the
+  `amount` (a `BigNumber` representing the payment value, for example, 0.001 SOL).
+- **Reference** - Generate a unique `reference` for the payment.
+  This acts as a unique identifier for the transaction.
+- **Optional fields** - Include `label`, `message`, and `memo` for enhanced user experience.
+
+The following is an example implementation of a Solana Pay QR code generator:
+
+```typescript title='src/components/solanaPay.tsx'
+import { Keypair, PublicKey } from '@solana/web3.js';
+import { createQR, encodeURL } from '@solana/pay';
+import BigNumber from 'bignumber.js';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { useSolanaWallet } from '@web3auth/modal/react/solana';
+
+export function SolanaPay() {
+  const { accounts } = useSolanaWallet();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [amountToSend, setAmountToSend] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [qrUrl, setQrUrl] = useState<string>('');
+  const qrRef = useRef<HTMLDivElement>(null);
+
+  const generateQrCode = () => {
+    try {
+      if (!accounts?.[0]) {
+        setError('No wallet connected');
+        return;
+      }
+
+      setIsLoading(true);
+      setError(null);
+      // focus-start
+      // set the parameter of the transfer
+      const recipient = new PublicKey(accounts?.[0]!);
+      const amount = new BigNumber(amountToSend);
+      // reference should be a unique ID for the payment
+      const reference = new Keypair().publicKey;
+      // Label and message are optional. They will be shown in wallets when users scan it but won't show on chain
+      const label = 'MetaMask Embedded Wallet x Solana Pay Demo';
+      const message = 'Thanks for Trying Solana Pay!';
+      // memo is optional and will be included in the onchain transaction
+      const memo = 'Thanks for Trying Solana Pay!';
+      // create the URL
+      const url = encodeURL({
+        recipient,
+        amount,
+        reference,
+        label,
+        message,
+        memo,
+      });
+
+      setQrUrl(url.toString());
+      // focus-end
+      setShowModal(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to generate QR code');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  // Generate QR code when modal opens and URL is available
+  useEffect(() => {
+    if (showModal && qrUrl && qrRef.current) {
+      qrRef.current.innerHTML = '';
+      try {
+        const qr = createQR(qrUrl, 300, 'white');
+        qr.append(qrRef.current);
+      } catch (err) {
+        setError('Failed to create QR code');
+      }
+    }
+  }, [showModal, qrUrl]);
+
+  const closeModal = () => {
+    setShowModal(false);
+    setQrUrl('');
+    setError(null);
+  };
+
+  return (
+    <>
+      <div>
+        <h2>Solana Pay QR</h2>
+        <div className='flex flex-col items-center gap-4'>
+          <input
+            type='number'
+            placeholder='Enter SOL amount'
+            onChange={(e) => setAmountToSend(Number(e.target.value))}
+            className='px-4 py-2 border rounded-lg text-black'
+            step='0.01'
+            min='0'
+          />
+          <button
+            onClick={generateQrCode}
+            className='px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600'
+            disabled={isLoading || amountToSend <= 0}
+          >
+            {isLoading ? 'Generating...' : 'Generate Payment QR'}
+          </button>
+
+          {/* Error Display */}
+          {error && !showModal && (
+            <div className='text-red-500 text-sm mt-2'>
+              Error: {error}
+            </div>
+          )}
+        </div>
+      </div>
+...
+```
+
+## Testing and best practices
+
+### Development environment
+
+- **Devnet for testing** - Always develop and test on devnet or testnet.
+  You can use the [Solana Faucet](https://faucet.solana.com/) to get test SOL for your new account.
+- **Environment variables** - Store your Client ID and other sensitive configuration in environment variables.
+
+### User experience
+
+- **User interface** - For better user experience, display the QR code within a modal or a dedicated
+  confirmation page, providing clear messages to the user.
+- **Loading states** - Implement proper loading states while generating QR codes and processing transactions.
+- **Error handling** - Provide clear error messages when transactions fail or when the user's wallet doesn't have sufficient balance.
+
+### Production readiness
+
+- **Tracking payments** - Implement a server-side solution to track the unique payment `reference` and poll for transaction confirmation using websockets.
+  This allows you to update your application's state and perform reconciliation in your database.
+- **Production RPCs** - For scalable production usage, use dedicated Solana RPC services from providers like [MetaMask](/services/reference/solana), as public RPCs may have rate limits.
+- **Security** - Validate all payment parameters server-side before processing transactions.
+
+## Conclusion
+
+This tutorial demonstrates how to integrate MetaMask Embedded Wallets with Solana Pay to create a seamless payment experience.
+By combining Embedded Wallets' familiar web2 social logins with Solana Pay's QR code functionality, you can enable users to make payments directly from their social login wallets.
+
+The integration provides a smooth, familiar experience for your users while leveraging the power of
+the Solana blockchain for fast and low-cost transactions.
+
+To learn more about Embedded Wallets, see the [Web SDK documentation](http://localhost:3000/docs/sdk/web/react) and the
+[Solana Pay integration example](https://github.com/Web3Auth/web3auth-examples/blob/main/other/solana-pay-example).
