@@ -1,5 +1,5 @@
 ---
-description: Manage networks with the SDK in your JavaScript dapp.
+description: Manage networks with MM Connect in your JavaScript dapp.
 keywords: [SDK, JavaScript, detect, switch, add, network, networks, dapp]
 toc_max_heading_level: 2
 ---
@@ -7,7 +7,7 @@ toc_max_heading_level: 2
 # Manage networks
 
 Manage networks in your JavaScript dapp.
-With the SDK, you can:
+With MM Connect, you can:
 
 - **Detect the current network** and monitor network changes.
 - **Switch between networks** programmatically.

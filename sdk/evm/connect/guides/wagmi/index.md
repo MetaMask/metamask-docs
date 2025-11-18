@@ -8,7 +8,7 @@ keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp, Wallet SDK]
 # Connect to MetaMask using JavaScript + Wagmi
 
 Get started with MM Connect in a JavaScript and Wagmi dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDK](#set-up-manually) in an existing dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up MM Connect](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <!-- a href="https://metamask-wagmi-demo.vercel.app/" target="_blank" -->

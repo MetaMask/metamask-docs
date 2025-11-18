@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 # Connect to MetaMask using JavaScript
 
 Get started with MM Connect in your JavaScript dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDK](#set-up-manually) in an existing dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up MM Connect](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
@@ -106,7 +106,7 @@ const evmClient = createEVMClient({
   dappMetadata: {
     name: "Example JavaScript dapp",
     url: window.location.href,
-    // iconUrl: "https://mydapp.com/icon.png" // Optional
+    iconUrl: "https://mydapp.com/icon.png" // Optional
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
 })
@@ -123,7 +123,7 @@ const evmClient = createEVMClient({
       dappMetadata: {
         name: "Example JavaScript dapp",
         url: window.location.href,
-        // iconUrl: "https://mydapp.com/icon.png" // Optional
+        iconUrl: "https://mydapp.com/icon.png" // Optional
       },
       infuraAPIKey: process.env.INFURA_API_KEY,
     })
@@ -134,7 +134,7 @@ const evmClient = createEVMClient({
 </TabItem>
 </Tabs>
 
-These examples configure the SDK with the following options:
+These examples configure MM Connect with the following options:
 
 - [`dappMetadata`](../../../../reference/options.md#dappmetadata) - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
 - [`infuraAPIKey`](../../../../reference/options.md#infuraapikey) - Enables read-only RPC and load‑balancing.
@@ -161,7 +161,7 @@ console.log("eth_accounts result:", result)
 
 Use `provider.request()` for arbitrary [JSON-RPC requests](../../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](batch-requests.md) via `metamask_batch`.
 
-## Common SDK methods at a glance
+## Common MM Connect methods at a glance
 
 | Method                                                                            | Description                                              |
 | --------------------------------------------------------------------------------- | -------------------------------------------------------- |

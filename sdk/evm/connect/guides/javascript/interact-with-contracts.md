@@ -1,5 +1,5 @@
 ---
-description: Interact with contracts with the SDK in your JavaScript dapp.
+description: Interact with contracts with MM Connect in your JavaScript dapp.
 keywords: [SDK, JavaScript, read, write, smart, contract, contracts, dapp]
 sidebar_label: Interact with contracts
 toc_max_heading_level: 2
@@ -8,7 +8,7 @@ toc_max_heading_level: 2
 # Interact with smart contracts 
 
 Interact with smart contracts in your JavaScript dapp.
-With the SDK, you can:
+With MM Connect, you can:
 
 - **Read data** from smart contracts.
 - **Write data** to smart contracts.
