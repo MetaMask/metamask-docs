@@ -6,37 +6,36 @@ import CardList from '@site/src/components/CardList'
 
 # Connect to EVM networks
 
-## Supported platforms and libraries
-
+Connect to EVM networks in MetaMask using MM Connect.
 MM Connect is available in a variety of ways to make integration as easy as possible.
-You can access it directly via npm, through popular developer libraries like Wagmi, or as part of popular convenience libraries.
+You can access it directly via npm, through popular developer libraries like Wagmi, or as part of popular convenience libraries:
 
 <CardList
 items={[
 {
 href: '/sdk/evm/connect/guides/javascript',
 title: 'JavaScript',
-description: 'Set up the SDK in a JavaScript dapp.',
+description: 'Set up MM Connect in a JavaScript dapp.',
 },
 {
 href: '/sdk/evm/connect/guides/wagmi',
 title: 'Wagmi',
-description: 'Set up the SDK in a Next.js and Wagmi dapp.',
+description: 'Set up MM Connect in a Next.js and Wagmi dapp.',
 },
 {
 href: '/sdk/evm/connect/guides/rainbowkit',
 title: 'RainbowKit',
-description: 'Set up the SDK in a JavaScript and RainbowKit dapp.',
+description: 'Set up MM Connect in a JavaScript and RainbowKit dapp.',
 },
 {
 href: '/sdk/evm/connect/guides/connectkit',
 title: 'ConnectKit',
-description: 'Set up the SDK in a JavaScript and ConnectKit dapp.',
+description: 'Set up MM Connect in a JavaScript and ConnectKit dapp.',
 },
 {
 href: '/sdk/evm/connect/guides/react-native',
 title: 'React Native',
-description: 'Set up the SDK in a React Native or Expo dapp.',
+description: 'Set up MM Connect in a React Native or Expo dapp.',
 },
 {
 href: '/sdk/evm/connect/guides/dynamic',

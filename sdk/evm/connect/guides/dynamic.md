@@ -9,7 +9,7 @@ keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 
 Get started with MM Connect and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
 You can use MM Connect features directly within Dynamic SDK.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up MM Connects](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-dynamic-demo.vercel.app/" target="_blank">

@@ -30,9 +30,9 @@ checkInstallationImmediately: true
 </Tabs>
 
 Enables or disables immediately checking if MetaMask is installed on the user's browser.
-If `true`, the SDK checks for installation upon page load and sends a connection request, prompting
+If `true`, MM Connect checks for installation upon page load and sends a connection request, prompting
 the user to install MetaMask if it's not already installed.
-If `false`, the SDK waits for the connect method to be called to check for installation.
+If `false`, MM Connect waits for the connect method to be called to check for installation.
 
 The default is `false`.
 
@@ -78,7 +78,7 @@ communicationServerUrl: "https://metamask-sdk-socket.metafi.codefi.network/"
 </Tabs>
 
 The URL of the communication server to use.
-This option is mainly used for debugging and testing the SDK.
+This option is mainly used for debugging and testing MM Connect.
 
 ### `dappMetadata`
 
@@ -107,7 +107,7 @@ dappMetadata: {
 </TabItem>
 </Tabs>
 
-Metadata about the dapp using the SDK.
+Metadata about the dapp using MM Connect.
 The metadata options are:
 
 - `name` - Name of the dapp
@@ -140,7 +140,7 @@ enableAnalytics: true
 </TabItem>
 </Tabs>
 
-Enables or disables sending anonymous analytics to MetaMask to help improve the SDK.
+Enables or disables sending anonymous analytics to MetaMask to help improve MM Connect.
 The default is `true`.
 
 ### `extensionOnly`
@@ -285,6 +285,6 @@ shouldShimWeb3: false
 </TabItem>
 </Tabs>
 
-Enables or disables shimming the `window.web3` object with the Ethereum provider returned by the SDK
+Enables or disables shimming the `window.web3` object with the Ethereum provider returned by MM Connect
 (useful for compatibility with older browsers).
 The default is `true`.

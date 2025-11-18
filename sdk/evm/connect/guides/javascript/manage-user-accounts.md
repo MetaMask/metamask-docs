@@ -1,5 +1,5 @@
 ---
-description: Authenticate users with the SDK in your JavaScript dapp.
+description: Authenticate users with MM Connect in your JavaScript dapp.
 keywords: [SDK, JavaScript, authenticate, connect, sign, accounts, wallet, dapp]
 toc_max_heading_level: 3
 ---
@@ -7,7 +7,7 @@ toc_max_heading_level: 3
 # Manage user accounts
 
 Connect and manage user wallet sessions in your JavaScript dapp.
-With the SDK, you can:
+With MM Connect, you can:
 
 - **Connect users' wallets** to your dapp.
 - **Access user accounts** (addresses).

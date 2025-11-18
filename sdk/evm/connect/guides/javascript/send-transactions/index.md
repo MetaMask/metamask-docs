@@ -1,5 +1,5 @@
 ---
-description: Handle transactions with the SDK in your JavaScript dapp.
+description: Handle transactions with MM Connect in your JavaScript dapp.
 keywords: [SDK, JavaScript, send, transaction, transactions, status, estimate, gas, dapp]
 toc_max_heading_level: 2
 ---
@@ -7,7 +7,7 @@ toc_max_heading_level: 2
 # Send transactions
 
 Handle EVM transactions in your JavaScript dapp.
-With the SDK, you can:
+With MM Connect, you can:
 
 - **Send transactions**.
 - **Track transaction status** in real time.
