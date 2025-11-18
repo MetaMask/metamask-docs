@@ -44,7 +44,7 @@ export default function SidebarVersionDropdown({ path = 'smart-accounts-kit' }: 
     if (version === 'current') {
       versionPath = `/${path}/development/`
     } else if (version === latestVersion) {
-      versionPath = `/${path}/`
+      versionPath = `/${path}`
     } else {
       versionPath = `/${path}/${version}/`
     }
