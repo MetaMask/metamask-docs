@@ -58,23 +58,26 @@ smart contract transaction. Excludes precompiled contracts.
 | Key                   | Value                                                                                                           |
 |-----------------------|-----------------------------------------------------------------------------------------------------------------|
 | `action`              | Transaction details.                                                                                            |
-| `callType`            | Whether the transaction is `call` or `create`.                                                                  |
-| `from`                | Address of the transaction sender.                                                                              |
-| `gas`                 | Gas provided by sender.                                                                                         |
-| `input`               | Transaction data.                                                                                               |
-| `to`                  | Target of the transaction.                                                                                      |
-| `value`               | Value transferred in the transaction.                                                                           |
+| &nbsp;&nbsp;- `creationMethod` | Opcode used during contract creation: `create` or `create2`. Returned for `create` operations. |
+| &nbsp;&nbsp;- `callType` | Whether the transaction is `call`, `staticcall`, `delegatecall`. Returned for `call` operations. |
+| &nbsp;&nbsp;- `from`    | Address of the transaction sender.                                                                              |
+| &nbsp;&nbsp;- `gas`     | Gas provided by sender.                                                                                         |
+| &nbsp;&nbsp;- `input`   | Transaction data. Returned for `call` operations.                                                             |
+| &nbsp;&nbsp;- `init`    | Contract initialization code. Returned for `create` operations.                                               |
+| &nbsp;&nbsp;- `to`      | Target of the transaction. Returned for `call` operations.                                                   |
+| &nbsp;&nbsp;- `value`   | Value transferred in the transaction.                                                                           |
+| `blockHash`           | Hash of the block containing this trace.                                                                        |
+| `blockNumber`         | Block number containing this trace.                                                                              |
 | `result`              | Transaction result.                                                                                             |
-| `gasUsed`             | Gas used by the transaction. Includes any refunds of unused gas.                                                |
-| `output`              | Return value of the contract call. Contains only the actual value sent by a `RETURN` operation. If a `RETURN` was not executed, the output is empty bytes. |
-| `subTraces`           | Traces of contract calls made by the transaction.                                                               |
+| &nbsp;&nbsp;- `address` | Address of the newly created contract. Returned for `create` operations.                                       |
+| &nbsp;&nbsp;- `code`    | Bytecode of the newly created contract. Returned for `create` operations.                                    |
+| &nbsp;&nbsp;- `gasUsed` | Gas used by the transaction. Includes any refunds of unused gas.                                                |
+| &nbsp;&nbsp;- `output`  | Return value of the contract call. Contains only the actual value sent by a `RETURN` operation. If a `RETURN` was not executed, the output is empty bytes. Returned for `call` operations. |
+| `subtraces`           | Number of sub-traces (nested contract calls) made by the transaction.                                          |
 | `traceAddress`        | Tree list address of where the call occurred, address of the parents, and order of the current sub call.        |
-| `transactionHash`     | Hash of the tansaction.                                                                                         |
-| `transactionPosition` | Transaction position.                                                                                           |
-| `type`                | Whether the transaction is a `call` or `create` series operation.                                               |
-| `creationMethod`      | Opcode used during contract creation `create` or `create2`.                                                     |
-
-<!-- Not yet tested to see position of creationMethod in response body -->
+| `transactionHash`     | Hash of the transaction.                                                                                         |
+| `transactionPosition` | Transaction position within the block.                                                                          |
+| `type`                | Whether the transaction is a `call` or `create` operation.                                               |
 
 ## `stateDiff`
 

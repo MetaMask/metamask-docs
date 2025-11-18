@@ -29,7 +29,7 @@ The [official Ethereum documentation](https://ethereum.org/en/) for more informa
       description: "Learn how to quickly connect and make calls to the Ethereum network."
     },
     {
-      href: "./json-rpc-methods",
+      href: "./json-rpc-methods/",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Ethereum network."
     },
