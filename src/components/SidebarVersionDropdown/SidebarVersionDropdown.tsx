@@ -4,6 +4,9 @@ import versions from '@site/gator_versions.json'
 import clsx from 'clsx'
 import styles from './SidebarVersionDropdown.module.css'
 
+// Supported versions for the @metamask/delegation-toolkit.
+const delegationToolkitVersions = ['0.13.0', '0.12.0']
+
 export default function SidebarVersionDropdown({ path = 'smart-accounts-kit' }: { path?: string }) {
   const history = useHistory()
   const location = useLocation()
@@ -17,6 +20,9 @@ export default function SidebarVersionDropdown({ path = 'smart-accounts-kit' }: 
   const getVersionLabel = (version: string) => {
     if (version === 'current') return 'development'
     if (version === latestVersion) return `latest (${version})`
+    if (delegationToolkitVersions.includes(version)) {
+      return `Delegation Toolkit (${version})`
+    }
     return version
   }
 
