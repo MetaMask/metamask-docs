@@ -1,6 +1,7 @@
 ---
 description: Get started with the MetaMask Delegation Toolkit using the `@metamask/create-gator-app` CLI.
 sidebar_label: Use the CLI
+keywords: [CLI, delegation, smart accounts, template]
 ---
 
 # Use the Delegation Toolkit CLI
@@ -28,7 +29,7 @@ Upon installation, you'll be asked the following prompts:
 ❯ MetaMask Smart Accounts Starter
   MetaMask Smart Accounts & Delegation Starter
   Farcaster Mini App Delegation Starter 
-  Experimental: ERC7715 Permissions starter
+  ERC-7715 Permissions Starter
 ? Pick a package manager: (Use arrow keys)
 ❯ npm 
   yarn 
@@ -95,4 +96,4 @@ Currently, only Cursor and Windsurf are supported.
 | MetaMask Smart Accounts Starter                    | ✅       | ✅         |
 | MetaMask Smart Accounts &amp; Delegation Starter   | ✅       | ✅         | 
 | Farcaster Mini App Delegation Starter              | ✅       |            | 
-| Experimental: ERC7715 Permissions starter          | ✅       |            |
+| ERC-7715 Permissions Starter                       | ✅       |            |

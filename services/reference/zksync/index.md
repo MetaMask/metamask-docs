@@ -21,7 +21,7 @@ ZKsync Era is a zero-knowledge Ethereum Virtual Machine (zkEVM) that scales Ethe
 
 :::info see also
 
-See the [official ZKsync Era documentation](https://docs.zksync.io/build) for more information.
+See the [official ZKsync Era documentation](https://docs.zksync.io) for more information.
 
 :::
 
@@ -38,7 +38,7 @@ See the [official ZKsync Era documentation](https://docs.zksync.io/build) for mo
       description: "View the APIs available for communicating with the ZKsync Era network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create an API key, secure it, and share it with your team."
     }

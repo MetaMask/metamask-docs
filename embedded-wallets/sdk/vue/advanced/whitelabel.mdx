@@ -49,20 +49,20 @@ The `LoginMethodConfig` interface provides extensive customization options for e
 <Tabs>
   <TabItem value="Table">
 
-| Property | Type | Description |
-| --- | --- | --- |
-| `name` | `string` | Custom display name (defaults to auth app's default if not provided) |
-| `description` | `string` | Button description (renders as full-length button if provided; otherwise as an icon) |
-| `logoHover` | `string` | Logo shown on mouse hover (defaults to auth app's default) |
-| `logoLight` | `string` | Logo for dark theme/background (defaults to auth app's default) |
-| `logoDark` | `string` | Logo for light theme/background (defaults to auth app's default) |
-| `mainOption` | `boolean` | Whether to show login button on the main list |
-| `showOnModal` | `boolean` | Controls visibility of the login button on modal |
-| `authConnectionId` | `string` | Auth connection ID of the provider |
-| `groupedAuthConnectionId` | `string` | Grouped auth connection ID of the provider |
-| `extraLoginOptions` | `ExtraLoginOptions` | Additional parameters for social login |
-| `authConnection` | `AUTH_CONNECTION_TYPE` | Auth connection type (useful for customizing login buttons with custom connectors) |
-| `isDefault` | `boolean` | Whether it's the default connector _(internal)_ |
+| Property                  | Type                   | Description                                                                          |
+| ------------------------- | ---------------------- | ------------------------------------------------------------------------------------ |
+| `name`                    | `string`               | Custom display name (defaults to auth app's default if not provided)                 |
+| `description`             | `string`               | Button description (renders as full-length button if provided; otherwise as an icon) |
+| `logoHover`               | `string`               | Logo shown on mouse hover (defaults to auth app's default)                           |
+| `logoLight`               | `string`               | Logo for dark theme/background (defaults to auth app's default)                      |
+| `logoDark`                | `string`               | Logo for light theme/background (defaults to auth app's default)                     |
+| `mainOption`              | `boolean`              | Whether to show login button on the main list                                        |
+| `showOnModal`             | `boolean`              | Controls visibility of the login button on modal                                     |
+| `authConnectionId`        | `string`               | Auth connection ID of the provider                                                   |
+| `groupedAuthConnectionId` | `string`               | Grouped auth connection ID of the provider                                           |
+| `extraLoginOptions`       | `ExtraLoginOptions`    | Additional parameters for social login                                               |
+| `authConnection`          | `AUTH_CONNECTION_TYPE` | Auth connection type (useful for customizing login buttons with custom connectors)   |
+| `isDefault`               | `boolean`              | Whether it's the default connector _(internal)_                                      |
 
   </TabItem>
 
@@ -172,7 +172,7 @@ import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 
 const web3AuthContextConfig: Web3AuthContextConfig = {
   web3AuthOptions: {
-    clientId: 'YOUR_CLIENT_ID',
+    clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
     web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
     // focus-start
     modalConfig: {
@@ -218,7 +218,7 @@ import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 
 const web3AuthContextConfig: Web3AuthContextConfig = {
   web3AuthOptions: {
-    clientId: 'YOUR_CLIENT_ID',
+    clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
     web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
     // focus-start
     modalConfig: {

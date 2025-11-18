@@ -1,6 +1,7 @@
 ---
 description: Mantle debug methods.
 sidebar_label: Debug methods
+sidebar_key: mantle-debug-methods
 ---
 
 # Mantle debug methods

@@ -1,33 +1,58 @@
 ---
-title: Integrate Embedded Wallets with the ZetaChain Blockchain
-sidebar_label: ZetaChain
-hide_table_of_contents: true
+title: Integrate Embedded Wallets with the Zetachain Blockchain
+sidebar_label: Overview
 
+keywords:
+  [
+    zetachain,
+    wallet,
+    integration,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
 image: 'img/embedded-wallets/banners/zetachain.png'
-description: 'Integrate Embedded Wallets with the ZetaChain Blockchain | Embedded Wallets'
+description: 'Integrate Embedded Wallets with the Zetachain Blockchain | Embedded Wallets'
 ---
 
 import Tiles from '@theme/Tiles'
-import ChainDetailsZetaChain from '../../_general-connect-blockchain/_zetachain.mdx'
+import ChainDetailsZetachain from '../../_general-connect-blockchain/_zetachain.mdx'
 
-Integrate Web3Auth seamlessly with EVM-based ZetaChain Blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+Integrate Web3Auth seamlessly with EVM-based Zetachain blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
 
 This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
 
-## Chain Details for ZetaChain
+## Chain Details for Zetachain
 
-<ChainDetailsZetaChain />
+<ChainDetailsZetachain />
 
-export const ZetaChain = [
+export const Zetachain = [
   {
     name: '',
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/zetachain/react',
+          },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/zetachain/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/zetachain/web',
+        path: '/embedded-wallets/connect-blockchain/evm/zetachain/javascript',
       },
       {
         key: 'android',
@@ -52,6 +77,12 @@ export const ZetaChain = [
         title: 'React Native',
         icon: 'logo-react.png',
         path: '/embedded-wallets/connect-blockchain/evm/zetachain/react-native',
+          },
+          {
+            key: 'node',
+            title: 'Node',
+            icon: 'logo-nodejs.png',
+            path: '/embedded-wallets/connect-blockchain/evm/zetachain/node',
       },
       {
         key: 'unity',
@@ -60,7 +91,8 @@ export const ZetaChain = [
         path: '/embedded-wallets/connect-blockchain/evm/zetachain/unity',
       },
     ],
-  },
+
+},
 ]
 
-<Tiles tileGroups={ZetaChain} />
+<Tiles tileGroups={Zetachain} />

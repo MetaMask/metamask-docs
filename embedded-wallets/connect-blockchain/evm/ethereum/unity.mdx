@@ -9,7 +9,6 @@ description: 'Integrate Embedded Wallets with the Ethereum Blockchain in Unity |
 
 import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
 import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
-import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
 import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
 import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
 import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
@@ -19,6 +18,10 @@ import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
 While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
+
+## Chain Details for Ethereum
+
+<ChainDetailsEthereum />
 
 ## Installation
 
@@ -31,10 +34,6 @@ While using the Web3Auth Unity SDK, you get the private key within the user scop
 ## Initialize
 
 <InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
 
 ## Get Account
 

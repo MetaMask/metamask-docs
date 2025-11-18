@@ -55,7 +55,7 @@ The `privateKeyProvider` parameter must now be provided in the Web3Auth construc
 
 ```typescript
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
-  clientId: 'YOUR_CLIENT_ID',
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   redirectUrl: redirectUrl,
   // add-next-line
@@ -68,7 +68,7 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
 
 ```typescript
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId: 'YOUR_CLIENT_ID',
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   redirectUrl: redirectUrl,
   // add-next-line

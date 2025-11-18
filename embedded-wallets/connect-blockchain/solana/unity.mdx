@@ -1,0 +1,202 @@
+---
+title: Integrate Embedded Wallets with the Solana Blockchain in Unity
+sidebar_label: Unity
+image: 'img/embedded-wallets/banners/unity.png'
+description: 'Integrate Embedded Wallets with the Solana Blockchain in Unity | Embedded Wallets'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+While using the Web3Auth Unity SDK, you can retrieve the Ed25519 private key within the user scope after authentication. Use this key with a Solana Unity integration to perform blockchain operations.
+
+## Chain Details for Solana
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
+    { label: "Devnet", value: "devnet" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x1
+- Public RPC URL: https://api.mainnet-beta.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Mainnet
+- Block Explorer Link: https://explorer.solana.com
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+
+<TabItem value="testnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x2
+- Public RPC URL: https://api.testnet.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Testnet
+- Block Explorer Link: https://explorer.solana.com
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+
+<TabItem value="devnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x3
+- Public RPC URL: https://api.devnet.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Devnet
+- Block Explorer Link: https://explorer.solana.com?cluster=devnet
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+</Tabs>
+
+## Installation
+
+For Unity Solana integration, we recommend using the **Solana Unity SDK by Magicblock**, which is available on the Unity Asset Store. This SDK provides comprehensive Solana functionality including JSON RPC API coverage, wallet management, transaction handling, and NFT operations.
+
+### Installing Solana Unity SDK
+
+1. Open Unity Asset Store in your Unity Editor
+2. Search for "Solana Unity SDK" by Magicblock
+3. Import the verified package into your project
+
+Alternatively, you can use other Solana Unity SDKs or create custom C# bindings for Solana libraries.
+
+## Initialize
+
+First, initialize the Web3Auth Unity SDK and retrieve the Ed25519 private key after successful authentication:
+
+```csharp
+using Web3Auth;
+
+public class SolanaIntegration : MonoBehaviour
+{
+    private Web3Auth web3Auth;
+    private string ed25519PrivateKey;
+
+    async void Start()
+    {
+        // Initialize Web3Auth
+        web3Auth = GetComponent<Web3Auth>();
+
+        // After successful login
+        await web3Auth.login();
+
+        // Get Ed25519 private key for Solana
+        ed25519PrivateKey = await web3Auth.GetEd25519PrivKey();
+
+        Debug.Log("Ed25519 Private Key retrieved for Solana");
+    }
+}
+```
+
+## Get Ed25519 Private Key
+
+```csharp
+// After successful Web3Auth login
+string ed25519PrivateKey = await web3auth.GetEd25519PrivKey();
+
+// Convert to byte array if needed for Solana SDK
+byte[] privateKeyBytes = Convert.FromHexString(ed25519PrivateKey);
+```
+
+## Create Solana Keypair
+
+Using the Magicblock Solana Unity SDK, you can create a keypair from the private key:
+
+```csharp
+using Solana.Unity.SDK;
+using Solana.Unity.Wallet;
+
+// Create Account from private key
+var account = new Account(privateKeyBytes);
+
+// Get public key
+var publicKey = account.PublicKey;
+Debug.Log($"Solana Public Key: {publicKey}");
+```
+
+## Get Account Balance
+
+```csharp
+using Solana.Unity.Rpc;
+using Solana.Unity.Rpc.Builders;
+
+// Initialize RPC client
+var rpcClient = new RpcClient("https://api.devnet.solana.com");
+
+// Get balance
+var balance = await rpcClient.GetBalanceAsync(account.PublicKey);
+var balanceInSOL = balance.Result.Value / 1_000_000_000.0; // Convert lamports to SOL
+
+Debug.Log($"Balance: {balanceInSOL} SOL");
+```
+
+## Sign Transaction
+
+```csharp
+using Solana.Unity.Rpc.Models;
+using Solana.Unity.Programs;
+
+// Create a simple transfer transaction
+var fromPublicKey = account.PublicKey;
+var toPublicKey = new PublicKey("DESTINATION_PUBLIC_KEY_HERE");
+var lamports = 10_000_000; // 0.01 SOL
+
+// Get recent blockhash
+var blockHash = await rpcClient.GetRecentBlockHashAsync();
+
+// Create transaction
+var transaction = new TransactionBuilder()
+    .SetRecentBlockHash(blockHash.Result.Value.Blockhash)
+    .SetFeePayer(fromPublicKey)
+    .AddInstruction(SystemProgram.Transfer(fromPublicKey, toPublicKey, lamports))
+    .Build(account);
+
+Debug.Log($"Transaction signature: {transaction.Signatures[0]}");
+```
+
+## Send Transaction
+
+```csharp
+// Sign and send the transaction
+var result = await rpcClient.SendTransactionAsync(transaction);
+
+if (result.WasSuccessful)
+{
+    Debug.Log($"Transaction sent successfully: {result.Result}");
+}
+else
+{
+    Debug.LogError($"Transaction failed: {result.Reason}");
+}
+```
+
+## Sign Message
+
+```csharp
+// Sign a message with the private key
+string message = "Hello Solana from Unity!";
+byte[] messageBytes = System.Text.Encoding.UTF8.GetBytes(message);
+
+// Sign the message using the account
+var signature = account.Sign(messageBytes);
+
+Debug.Log($"Message signature: {Convert.ToBase64String(signature)}");
+```
+
+:::note
+
+The Solana Unity SDK by Magicblock provides additional features like NFT management, token operations, and program interactions. Refer to their documentation for advanced usage patterns.
+
+:::

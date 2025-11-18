@@ -1,20 +1,19 @@
 ---
-title: Integrate Embedded Wallets with the BNB (Binance) Blockchain in Android
+title: Integrate Embedded Wallets with the BNB Blockchain in Android
 sidebar_label: Android
 image: 'img/embedded-wallets/banners/bnb.png'
 
-keywords: [android, binance, bnb, bsc, binanace smart chain, web3auth, authentication, blockchain]
-description: 'Integrate Embedded Wallets with the BNB (Binance) Blockchain in Android | Embedded Wallets'
+keywords: [android, bnb, web3auth, authentication, blockchain]
+description: 'Integrate Embedded Wallets with the BNB Blockchain in Android | Embedded Wallets'
 ---
 
 import EVMInteraction from '../../_android-connect-blockchain/_evm-interaction.mdx'
+import ChainDetailsBnb from '../../_general-connect-blockchain/_bnb.mdx'
 
-While using the Embedded Wallets Mobile SDKs (formerly Web3Auth) on Android, the private key is available in the SDK state after successful authorization. Use it to derive the user's address and interact with the [BNB (Binance) Chain](https://www.bnbchain.org/) for signing and JSON-RPC calls.
+While using the Web3Auth Android SDK, you get the private key within the user scope after successful authorization. This private key can be used to retrieve the user's address, and interact with [BNB](https://www.bnbchain.org/) to make any blockchain calls. We have highlighted a few here for getting you started quickly on that.
 
-::::note
+## Chain Details for BNB
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
-
-::::
+<ChainDetailsBnb />
 
 <EVMInteraction />

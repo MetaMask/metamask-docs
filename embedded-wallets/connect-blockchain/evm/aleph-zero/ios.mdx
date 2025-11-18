@@ -7,78 +7,15 @@ keywords: [ios, swift, aleph-zero, web3auth, authentication, blockchain]
 description: 'Integrate Embedded Wallets with the Aleph Zero Blockchain in iOS/Swift Applications | Embedded Wallets'
 ---
 
-import InstallationSnippet from '../../_ios-connect-blockchain/_evm-installation.mdx'
-import GetAccountSnippet from '../../_ios-connect-blockchain/_evm-get-account.mdx'
-import UserInfoSnippet from '../../_ios-connect-blockchain/_evm-user-info.mdx'
-import GetBalanceSnippet from '../../_ios-connect-blockchain/_evm-get-balance.mdx'
-import InitialisationSnippet from '../../_ios-connect-blockchain/_evm-initialisation.mdx'
-import SignMessageSnippet from '../../_ios-connect-blockchain/_evm-sign-message.mdx'
-import SendTransactionSnippet from '../../_ios-connect-blockchain/_evm-send-transaction.mdx'
+import EVMInteraction from '../../_ios-connect-blockchain/_evm-interaction.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
+import ChainDetailsAlephZero from '../../_general-connect-blockchain/_aleph-zero.mdx'
 
-While using the Embedded Wallets iOS SDK (formerly Web3Auth), you get the private key within the user scope. This private key can interact with the [Aleph Zero Blockchain](https://alephzero.org) to make blockchain calls like getting the user's `account`, fetching `balance`, signing transactions, sending transactions, and interacting with smart contracts. We have highlighted a few examples to get you started quickly.
-
-## Installation
-
-<InstallationSnippet />
+While using the Web3Auth iOS SDK, you get the private key within the user scope after successful authorization. This private key can be used to retrieve the user's address, and interact with [Aleph Zero](https://ethereum.org/) to make any blockchain calls. We have highlighted a few here for getting you started quickly on that.
 
 ## Chain Details for Aleph Zero
 
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
+<ChainDetailsAlephZero />
 
-- Chain ID: 0xA1EF
-- Public RPC URL: https://rpc.alephzero.raas.gelato.cloud (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Aleph Zero Mainnet
-- Block Explorer Link: https://evm-explorer.alephzero.org
-- Ticker: AZERO
-- Ticker Name: Aleph Zero
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0x7F7
-- Public RPC URL: https://rpc.alephzero-testnet.gelato.digital (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Aleph Zero Testnet
-- Block Explorer Link: https://evm-explorer-testnet.alephzero.org/
-- Ticker: AZERO
-- Ticker Name: Aleph Zero
-
-</TabItem>
-</Tabs>
-
-## Initialize
-
-<InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
-
-## Get Account
-
-<GetAccountSnippet />
-
-## Get Balance
-
-<GetBalanceSnippet />
-
-## Send Transaction
-
-<SendTransactionSnippet />
-
-## Sign a message
-
-<SignMessageSnippet />
+<EVMInteraction />

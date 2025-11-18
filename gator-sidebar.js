@@ -25,25 +25,16 @@ const sidebar = {
           ],
         },
         'get-started/use-the-cli',
-        'get-started/supported-networks',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Concepts',
-      collapsed: false,
-      items: [
-        'concepts/smart-accounts',
         {
           type: 'category',
-          label: 'Delegation',
+          label: 'Use Scaffold-ETH 2',
           collapsed: true,
-          link: { type: "doc", id: "concepts/delegation/index" },
           items: [
-            'concepts/delegation/caveat-enforcers',
+            'get-started/use-scaffold-eth/smart-accounts',
+            'get-started/use-scaffold-eth/advanced-permissions',
           ],
         },
-        'concepts/erc7715',
+        'get-started/supported-networks',
       ],
     },
     {
@@ -68,6 +59,7 @@ const sidebar = {
           type: 'category',
           label: 'Delegation',
           collapsed: true,
+          key: 'delegation-guides',
           items: [
             'guides/delegation/execute-on-smart-accounts-behalf',
             {
@@ -83,40 +75,52 @@ const sidebar = {
               ],
             },
             'guides/delegation/check-delegation-state',
+            'guides/delegation/disable-delegation',
           ],
         },
         {
           type: 'category',
-          label: 'ERC-7715',
+          label: 'Advanced Permissions (ERC-7715)',
           collapsed: true,
+          key: 'advanced-permissions-guides',
           items: [
-            'guides/erc7715/execute-on-metamask-users-behalf',
+            'guides/advanced-permissions/execute-on-metamask-users-behalf',
             {
               type: 'category',
               label: 'Use permissions',
               collapsed: true,
               items: [
-                'guides/erc7715/use-permissions/erc20-token',
-                'guides/erc7715/use-permissions/native-token',
+                'guides/advanced-permissions/use-permissions/erc20-token',
+                'guides/advanced-permissions/use-permissions/native-token',
               ],
             },
           ],
         },
       ],
     },
-    // {
-    //   type: 'category',
-    //   label: 'Experimental',
-    //   collapsed: false,
-    //   items: [
-    //     'experimental/erc-7715-request-permissions',
-    //     'experimental/erc-7710-redeem-delegations',
-    //   ],
-    // },
+    {
+      type: 'category',
+      label: 'Concepts',
+      collapsed: true,
+      items: [
+        'concepts/smart-accounts',
+        {
+          type: 'category',
+          label: 'Delegation',
+          collapsed: true,
+          key: 'delegation-concepts',
+          link: { type: "doc", id: "concepts/delegation/index" },
+          items: [
+            'concepts/delegation/caveat-enforcers',
+          ],
+        },
+        'concepts/advanced-permissions',
+      ],
+    },
     {
       type: 'category',
       label: 'Tutorials',
-      collapsed: false,
+      collapsed: true,
       items: [
         {
           type: "link",
@@ -143,7 +147,7 @@ const sidebar = {
     {
       type: 'category',
       label: 'Reference',
-      collapsed: false,
+      collapsed: true,
       items: [
         'reference/smart-account',
         {
@@ -151,6 +155,7 @@ const sidebar = {
           label: 'Delegation',
           collapsed: true,
           link: { type: "doc", id: "reference/delegation/index" },
+          key: 'delegation-reference',
           items: [
             'reference/delegation/delegation-scopes',
             'reference/delegation/caveats',
@@ -159,12 +164,13 @@ const sidebar = {
         },
         {
           type: 'category',
-          label: 'ERC-7715',
+          label: 'Advanced Permissions (ERC-7715)',
           collapsed: true,
+          key: 'advanced-permissions-reference',
           items: [
-            'reference/erc7715/permissions',
-            'reference/erc7715/wallet-client',
-            'reference/erc7715/bundler-client',
+            'reference/advanced-permissions/permissions',
+            'reference/advanced-permissions/wallet-client',
+            'reference/advanced-permissions/bundler-client',
           ],
         },
       ],

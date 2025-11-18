@@ -135,7 +135,7 @@ import Web3Auth
 
 let web3Auth = try await Web3Auth(
   W3AInitParams(
-    clientId: "YOUR_CLIENT_ID",
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .sapphire_mainnet,
     // focus-start
     loginConfig: [
@@ -159,7 +159,7 @@ import Web3Auth
 
 let web3Auth = try await Web3Auth(
   W3AInitParams(
-    clientId: "YOUR_CLIENT_ID",
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .sapphire_mainnet,
     // focus-start
     loginConfig: [
@@ -184,14 +184,14 @@ import Web3Auth
 
 let web3Auth = try await Web3Auth(
   W3AInitParams(
-    clientId:"YOUR_CLIENT_ID",
+    clientId:"YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .sapphire_mainnet,
     // focus-start
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
         verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.jwt,
-        clientId: "YOUR_CLIENT_ID",
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
       )
     ]
     // focus-end
@@ -295,7 +295,7 @@ import
 
 let web3Auth = try await Web3Auth(
   W3AInitParams(
-    clientId:"YOUR_CLIENT_ID",
+    clientId:"YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .sapphire_mainnet,
     // Optional loginConfig object
     //focus-start
@@ -338,7 +338,7 @@ import Web3Auth
 
 let web3Auth = try await Web3Auth(
   W3AInitParams(
-    clientId:"YOUR_CLIENT_ID",
+    clientId:"YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .testnet,
     // Optional loginConfig object
     // focus-start
@@ -346,7 +346,7 @@ let web3Auth = try await Web3Auth(
       Web3AuthProvider.JWT.rawValue: .init(
         verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.jwt,
-        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
       )
     ]
     //focus-end
@@ -375,7 +375,7 @@ the `ExtraLoginOptions`. By default, the login flow will be `code` flow, if you 
 import Web3Auth
 
 let web3auth = try await Web3Auth(W3AInitParams(
-  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
   network: .sapphire_mainnet,
   redirectUrl: "bundleId://auth"
 ))
@@ -399,7 +399,7 @@ To use the SMS Passwordless login, send the phone number as the `login_hint` par
 import Web3Auth
 
 let web3auth = try await Web3Auth(W3AInitParams(
-  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
   network: .sapphire_mainnet,
   redirectUrl: "bundleId://auth"
 ))

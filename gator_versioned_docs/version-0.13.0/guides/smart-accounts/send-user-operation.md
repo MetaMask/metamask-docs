@@ -1,5 +1,6 @@
 ---
 description: Learn how to send an ERC-4337 user operation using Viem.
+keywords: [ERC-4337, send, user operation, smart account]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -51,7 +52,7 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   calls: [
     {
       to: "0x1234567890123456789012345678901234567890",
-      value: parseEther("1")
+      value: parseEther("0.001")
     }
   ],
   maxFeePerGas,
@@ -126,7 +127,7 @@ import { bundlerClient, smartAccount } from "./config.ts" // The config.ts is th
 
 // add-start
 + const pimlicoClient = createPimlicoClient({
-+   transport: http("https://api.pimlico.io/v2/11155111/rpc"), // You can get the API Key from the Pimlico dashboard.
++   transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>"), // You can get the API Key from the Pimlico dashboard.
 + });
 +
 + const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();
@@ -158,7 +159,7 @@ import { createPimlicoClient } from "permissionless/clients/pimlico";
 import { bundlerClient, smartAccount } from "./config.ts" // The config.ts is the same as in the previous example.
 
 const pimlicoClient = createPimlicoClient({
-  transport: http("https://api.pimlico.io/v2/11155111/rpc"), // You can get the API Key from the Pimlico dashboard.
+  transport: http("https://api.pimlico.io/v2/11155111/rpc?apikey=<YOUR-API-KEY>"), // You can get the API Key from the Pimlico dashboard.
 });
 
 const { fast: fee } = await pimlicoClient.getUserOperationGasPrice();

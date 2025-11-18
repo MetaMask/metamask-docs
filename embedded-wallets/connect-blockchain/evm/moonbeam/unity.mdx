@@ -1,84 +1,21 @@
 ---
 title: Integrate Embedded Wallets with the Moonbeam Blockchain in Unity
 sidebar_label: Unity
-image: 'img/embedded-wallets/banners/unity.png'
+image: 'img/embedded-wallets/banners/moonbeam.png'
 
 keywords: [unity, moonbeam, web3auth, authentication, blockchain]
 description: 'Integrate Embedded Wallets with the Moonbeam Blockchain in Unity | Embedded Wallets'
 ---
 
-import InstallationSnippet from '../../_unity-connect-blockchain/_evm-installation.mdx'
-import GetAccountSnippet from '../../_unity-connect-blockchain/_evm-get-account.mdx'
-import UserInfoSnippet from '../../_unity-connect-blockchain/_evm-user-info.mdx'
-import GetBalanceSnippet from '../../_unity-connect-blockchain/_evm-get-balance.mdx'
-import InitialisationSnippet from '../../_unity-connect-blockchain/_evm-initialisation.mdx'
-import SignMessageSnippet from '../../_unity-connect-blockchain/_evm-sign-message.mdx'
-import SendTransactionSnippet from '../../_unity-connect-blockchain/_evm-send-transaction.mdx'
+import EVMInteraction from '../../_unity-connect-blockchain/_evm-interaction.mdx'
+import ChainDetailsMoonbeam from '../../_general-connect-blockchain/_moonbeam.mdx'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM-based blockchain calls, like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here to get you started quickly on that.
-
-## Installation
-
-<InstallationSnippet />
+While using the Web3Auth Unity SDK, you get the private key within the user scope. This private key can interact with the [Nethereum Library](https://nethereum.com/) to make EVM based blockchain calls, like getting user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc. We have highlighted a few here for getting you started quickly on that.
 
 ## Chain Details for Moonbeam
 
-<Tabs
- defaultValue="mainnet"
-  values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
-  ]}
->
-<TabItem
-  value="mainnet"
->
+<ChainDetailsMoonbeam />
 
-- Chain ID: 0x504
-- Public RPC URL: https://rpc.api.moonbeam.network​ (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Moonbeam Mainnet
-- Block Explorer Link: https://moonbeam.moonscan.io
-- Ticker: GLMR
-- Ticker Name: GLMR
-
-</TabItem>
-
-<TabItem
-  value="testnet"
->
-
-- Chain ID: 0x507
-- Public RPC URL: https://rpc.api.moonbase.moonbeam.network​ (Avoid using public rpcTarget in production, use services like Infura)
-- Display Name: Moonbeam Testnet
-- Block Explorer Link: https://moonbase.moonscan.io
-- Ticker: GLMR
-- Ticker Name: GLMR
-
-</TabItem>
-</Tabs>
-
-## Initialize
-
-<InitialisationSnippet />
-
-## Get User Info
-
-<UserInfoSnippet />
-
-## Get Account
-
-<GetAccountSnippet />
-
-## Get Balance
-
-<GetBalanceSnippet />
-
-## Sign a message
-
-<SignMessageSnippet />
-
-## Send Transaction
-
-<SendTransactionSnippet />
+<EVMInteraction />

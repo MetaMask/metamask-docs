@@ -17,6 +17,7 @@ const sidebar = {
         'connect/javascript-wagmi',
         'connect/javascript',
         'connect/javascript-rainbowkit',
+        'connect/javascript-connectkit',
         'connect/javascript-dynamic',
         'connect/javascript-web3auth',
         'connect/react-native',

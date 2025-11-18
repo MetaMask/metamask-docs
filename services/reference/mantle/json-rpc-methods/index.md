@@ -1,5 +1,6 @@
 ---
 sidebar_label: JSON-RPC API
+sidebar_key: mantle-json-rpc-api
 ---
 
 # Mantle JSON-RPC API

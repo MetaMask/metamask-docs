@@ -1,6 +1,7 @@
 ---
 title: Optimism subscription methods
 sidebar_label: Subscription methods
+sidebar_key: optimism-subscription-methods
 description: Optimism subscription methods
 ---
 

@@ -20,33 +20,24 @@ export default function Home(): JSX.Element {
       <Hero
         title={siteConfig.title}
         description="Build with the world's leading self-custodial crypto wallet."
-      />
-
-      <SectionIntro description="Get started with the following resources:" />
-
-      <CardSection
-        colorPalette="purple"
-        cards={[
+        buttons={[
           {
-            title: 'Quickstart',
-            description: 'Choose a quickstart guide that matches your project goals.',
+            label: 'Quickstart',
             href: '/quickstart',
-            buttonIcon: 'arrow-right',
+            icon: 'arrow-right'
           },
           {
-            title: 'Tutorials',
-            description:
-              'Explore use cases and follow the hands-on tutorials to build end-to-end dapps.',
+            label: 'Tutorials',
             href: '/tutorials/',
-            buttonIcon: 'arrow-right',
-          },
+            icon: 'arrow-right'
+          }
         ]}
       />
 
       <SectionIntro description="What do you want to do with MetaMask?" />
 
       <CardSection
-        colorPalette="blue"
+        colorPalette="purple"
         cards={[
           {
             title: 'Connect to MetaMask',
@@ -66,7 +57,7 @@ export default function Home(): JSX.Element {
             title: 'Create smart accounts',
             description:
               'Integrate MetaMask Smart Accounts into your dapp. Create smart wallets that support delegated permissions, gas abstraction, and secure execution.',
-            href: '/delegation-toolkit',
+            href: '/smart-accounts-kit',
             buttonIcon: 'arrow-right',
           },
           {

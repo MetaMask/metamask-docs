@@ -2,8 +2,8 @@
 title: Create a custom caveat enforcer
 image: 'img/tutorials/tutorials-banners/create-custom-caveat-enforcer.png'
 description: Define custom rules for a delegation by creating, deploying, and applying a custom caveat enforcer.
-tags: [delegation toolkit, caveat enforcer, smart contracts]
-keywords: [delegation toolkit, create, custom, caveat enforcer, smart contracts]
+tags: [smart accounts kit, delegation toolkit, caveat enforcer, smart contracts]
+keywords: [delegation, smart accounts kit, create, custom, caveat enforcer, smart contracts]
 date: Aug 27, 2025
 author: MetaMask Developer Relations
 ---
@@ -11,9 +11,9 @@ author: MetaMask Developer Relations
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This tutorial walks you through creating a custom [caveat enforcer](/delegation-toolkit/concepts/delegation/caveat-enforcers) and applying it to a [delegation](/delegation-toolkit/concepts/delegation/).
+This tutorial walks you through creating a custom [caveat enforcer](/smart-accounts-kit/concepts/delegation/caveat-enforcers) and applying it to a [delegation](/smart-accounts-kit/concepts/delegation/).
 
-The MetaMask Delegation Toolkit includes [out-of-the-box caveat enforcers](/delegation-toolkit/reference/delegation/caveats) that define rules and restrictions for common use cases.
+The Smart Accounts Kit includes [out-of-the-box caveat enforcers](/smart-accounts-kit/reference/delegation/caveats) that define rules and restrictions for common use cases.
 For more specific control or other use cases, you can create custom caveat enforcers.
 In this tutorial, you'll create and apply a caveat enforcer that only allows a delegation to be redeemed after a specific timestamp.
 
@@ -31,29 +31,33 @@ In this tutorial, you'll create and apply a caveat enforcer that only allows a d
 
 ## Steps
 
-### 1. Install the toolkit
+### 1. Install the Smart Accounts Kit
 
-Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) in your project:
+Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) in your project:
 
 ```bash npm2yarn
-npm install @metamask/delegation-toolkit
+npm install @metamask/smart-accounts-kit
 ```
 
 ### 2. Create the caveat enforcer
 
 At the root of your project, create a `contracts` directory.
-In that directory, create a new contract named `AfterTimestampEnforcer.sol`.
+Inside that directory, create a new contract named `AfterTimestampEnforcer.sol`.
 
-Add the following code to `AfterTimestampEnforcer.sol`, which creates a caveat enforcer that extends the
-[`ICaveatEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/interfaces/ICaveatEnforcer.sol)
-interface and only allows a delegation to be redeemed after a specific timestamp:
+Add the following code to `AfterTimestampEnforcer.sol`. This contract implements a caveat enforcer that 
+extends the `ICaveatEnforcer.sol` interface and ensures that a delegation can only be redeemed after
+a specific timestamp.
+
+This contract overrides the `beforeHook` function, which is responsible for enforcing
+conditions before a delegation's execution during the redemption process. In this example, it verifies that
+the current block timestamp is later than the defined allowed timestamp.
 
 ```solidity title="AfterTimestampEnforcer.sol"
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.23;
 
 import { CaveatEnforcer } from "@delegator/src/enforcers/CaveatEnforcer.sol";
-import { ModeCode } from "/delegation-toolkit/utils/Types.sol";
+import { ModeCode } from "/smart-accounts-kit/utils/Types.sol";
 
 contract AfterTimestampEnforcer is CaveatEnforcer {
   /**
@@ -77,7 +81,10 @@ contract AfterTimestampEnforcer is CaveatEnforcer {
     // This function MUST revert if the conditions are not met.
     // Get the current timestamp
     uint256 timestamp = block.timestamp;
-
+    
+    // Convert the encoded `terms` into a uint256 timestamp.
+    // Casting to bytes32 ensures the data is exactly 32 bytes, matching
+    // the size of a uint256.
     uint256 validAfter = uint256(bytes32(_terms));
 
     require(timestamp > validAfter, "AfterTimestampEnforcer:cannot-redeem-too-early");
@@ -101,18 +108,18 @@ The Forge CLI will display the address of the deployed caveat enforcer.
 
 ### 4. Apply the caveat enforcer
 
-Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the [caveat builder](/delegation-toolkit/reference/delegation/#createcaveatbuilder), and create a delegation.
+Specify the address of the deployed `AfterTimestampEnforcer.sol` contract, add it to the [caveat builder](/smart-accounts-kit/reference/delegation/#createcaveatbuilder), and create a delegation.
 
 The following code snippet uses the custom caveat enforcer to create a delegation granting
-a 1,000,000 wei allowance that becomes spendable one hour after it is created:
+a 0.01 ETH allowance that becomes spendable one hour after it is created:
 
 <Tabs>
 <TabItem value="delegation.ts">
 
 ```typescript
-import { createDelegation, ROOT_AUTHORITY } from '@metamask/delegation-toolkit'
-import { createCaveatBuilder } from '@metamask/delegation-toolkit/utils'
-import { toHex } from 'viem'
+import { createDelegation, ROOT_AUTHORITY } from '@metamask/smart-accounts-kit'
+import { createCaveatBuilder } from '@metamask/smart-accounts-kit/utils'
+import { toHex, parseEther } from 'viem'
 import { delegatorSmartAccount } from './config.ts'
 
 const environment = delegatorSmartAccount.environment
@@ -122,11 +129,15 @@ const afterTimestampEnforcer = '0x22Ae4c4919C3aB4B5FC309713Bf707569B74876F'
 
 const caveatBuilder = createCaveatBuilder(environment)
 
-const tenAM = 10 * 60 * 60 // 10:00 AM as seconds since midnight.
+// Since block.timestamp is in seconds, convert milliseconds to seconds.
+const currentTime = Math.floor(Date.now() / 1000)
 
-const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', 1000000n).addCaveat({
+// Add an hour to the currentTime
+const validTimestamp = currentTime + 3600
+
+const caveats = caveatBuilder.addCaveat('nativeTokenTransferAmount', parseEther('0.01')).addCaveat({
   enforcer: afterTimestampEnforcer,
-  terms: toHex(tenAM),
+  terms: toHex(validTimestamp),
 })
 
 const delegation: Delegation =  {
@@ -145,7 +156,7 @@ const delegation: Delegation =  {
 ```typescript
 import { createPublicClient, http } from 'viem'
 import { sepolia as chain } from 'viem/chains'
-import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 const publicClient = createPublicClient({
   chain,
@@ -170,4 +181,4 @@ export const delegatorSmartAccount = await toMetaMaskSmartAccount({
 You've successfully created, deployed, and applied a custom caveat enforcer!
 
 For production use cases, you might need to add additional caveats to restrict the delegation further.
-Learn more about [caveat enforcers](/delegation-toolkit/concepts/delegation/caveat-enforcers).
+Learn more about [caveat enforcers](/smart-accounts-kit/concepts/delegation/caveat-enforcers).
