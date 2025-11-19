@@ -58,7 +58,5 @@ No personal information is sent as part of partner requests, only information ne
 
 The following partners provide access to the Unichain network:
 
-<!-- markdown-link-check-disable -->
 - InfStones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
-- 0xFury ([Privacy policy](https://0xfury.com/privacy.php))
-<!-- markdown-link-check-enable -->
+- 0xFury ([Privacy policy](https://0xfury.com/privacy))
