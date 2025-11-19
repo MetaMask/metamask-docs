@@ -34,12 +34,12 @@ Select an option below to get started with the opBNB network.
 <CardList
   items={[
     {
-      href: "./quickstart",
+      href: "/services/reference/opbnb/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the opBNB network."
     },
     {
-      href: "./json-rpc-methods",
+      href: "/services/reference/opbnb/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the opBNB network."
     },
