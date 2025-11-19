@@ -10,6 +10,7 @@ guide in some places.
 - [Contribution workflow](#contribution-workflow)
 - [Preview locally](#preview-locally)
 - [Style guide](#style-guide)
+- [Format links](#format-links)
 - [Add images](#add-images)
 - [Update the interactive API reference](#update-the-interactive-api-reference)
   - [Update `MetaMask/api-specs`](#update-metamaskapi-specs)
@@ -120,17 +121,18 @@ Refer to the [Consensys documentation style guide](https://docs-template.consens
 
 Most links in the Markdown pages use *relative file paths*, for example:
 
-```md title="Relative file path in Smart Accounts Kit docs"
+```md
 You can enable users to create a [MetaMask smart account](../../concepts/smart-accounts.md) directly in your dapp.
 ```
 
 However, when linking between different product sections or using the `CardList` component, use *absolute URL paths*. For example:
 
-```md title="Absolute URL path in Wallet API docs"
-When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts).
+```md
+When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their
+externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts).
 ```
 
-```md title="Absolute URL path in Snaps docs"
+```md
 <CardList
   items={[
     {
