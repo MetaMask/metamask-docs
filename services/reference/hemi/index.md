@@ -30,12 +30,12 @@ Select an option below to get started with the Hemi network.
 <CardList
   items={[
     {
-      href: "./quickstart",
+      href: "/services/reference/hemi/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Hemi network."
     },
     {
-      href: "./json-rpc-methods",
+      href: "/services/reference/hemi/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Hemi network."
     },
