@@ -1,5 +1,5 @@
 ---
-description: Quickstart guide for using the SDK with a React Native dapp.
+description: Quickstart guide for using MM Connect with a React Native dapp.
 sidebar_label: React Native
 keywords: [connect, MetaMask, React, Native, SDK, dapp]
 ---
@@ -36,7 +36,7 @@ npx create-expo-app devexpo --template
 
 ### 2. Install dependencies
 
-Install the SDK and its dependencies using the following commands:
+Install MM Connect and its dependencies using the following commands:
 
 <Tabs>
   <TabItem value="React Native">
@@ -167,9 +167,9 @@ npx expo run:ios
   </TabItem>
 </Tabs>
 
-### 6. Use the SDK
+### 6. Use MM Connect
 
-Initialize and use the SDK in your React Native or Expo project using the `useSDK` hook.
+Initialize and use MM Connect in your React Native or Expo project using the `useSDK` hook.
 For example:
 
 ```javascript

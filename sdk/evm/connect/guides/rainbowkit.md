@@ -8,7 +8,7 @@ keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK]
 # Connect to MetaMask using JavaScript + RainbowKit
 
 Get started with MM Connect in a JavaScript and RainbowKit dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDK](#set-up-manually) in an existing dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up MM Connect](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-rainbowkit-demo.vercel.app/" target="_blank">
@@ -80,7 +80,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up manually
 
-### 1. Install the SDK
+### 1. Install MM Connect
 
 Install MM Connect along with its peer dependencies to an existing React project:
 

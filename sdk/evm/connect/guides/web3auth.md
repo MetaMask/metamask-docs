@@ -87,7 +87,7 @@ See how to [use Embedded Wallets](#usage).
 
 ### 1. Install dependencies
 
-Install the SDK and the required dependencies to an existing project:
+Install MM Connect and the required dependencies to an existing project:
 
 ```bash npm2yarn
 npm install viem wagmi @tanstack/react-query @web3auth/modal@10

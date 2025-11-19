@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 # Connect to MetaMask using JavaScript
 
 Get started with MM Connect in your JavaScript dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDK](#set-up-manually) in an existing dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up MM Connect](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
@@ -84,29 +84,29 @@ You've successfully set up MM Connect.
 
 ## Set up manually
 
-### 1. Install the SDK
+### 1. Install MM Connect
 
-Install the SDK in an existing JavaScript project:
+Install MM Connect in an existing JavaScript project:
 
 ```bash npm2yarn
-npm install @metamask/sdk
+npm install @metamask/connect/evm
 ```
 
-### 2. Initialize the SDK
+### 2. Initialize MM Connect
 
-The following are examples of using the SDK in various JavaScript environments:
+The following are examples of using MM Connect in various JavaScript environments:
 
 <Tabs>
 <TabItem value="Web dapps">
 
 ```javascript
-import { MetaMaskSDK } from "@metamask/sdk"
+import { createEVMClient } from "@metamask/connect/evm"
 
-const MMSDK = new MetaMaskSDK({
+const evmClient = createEVMClient({
   dappMetadata: {
     name: "Example JavaScript dapp",
     url: window.location.href,
-    // iconUrl: "https://mydapp.com/icon.png" // Optional
+    iconUrl: "https://mydapp.com/icon.png" // Optional
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
 })
@@ -119,11 +119,11 @@ const MMSDK = new MetaMaskSDK({
 <head>
   <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
   <script>
-    const MMSDK = new MetaMaskSDK.MetaMaskSDK({
+    const evmClient = createEVMClient({
       dappMetadata: {
         name: "Example JavaScript dapp",
         url: window.location.href,
-        // iconUrl: "https://mydapp.com/icon.png" // Optional
+        iconUrl: "https://mydapp.com/icon.png" // Optional
       },
       infuraAPIKey: process.env.INFURA_API_KEY,
     })
@@ -134,7 +134,7 @@ const MMSDK = new MetaMaskSDK({
 </TabItem>
 </Tabs>
 
-These examples configure the SDK with the following options:
+These examples configure MM Connect with the following options:
 
 - [`dappMetadata`](../../../../reference/options.md#dappmetadata) - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
 - [`infuraAPIKey`](../../../../reference/options.md#infuraapikey) - Enables read-only RPC and load‑balancing.
@@ -145,9 +145,9 @@ These examples configure the SDK with the following options:
 Connect to MetaMask and get the provider for RPC requests:
 
 ```javascript
-const provider = MMSDK.getProvider()
+const provider = evmClient.getProvider()
 
-const accounts = await MMSDK.connect()
+const accounts = await evmClient.connect()
 console.log("Connected account:", accounts[0])
 
 const result = await provider.request({
@@ -157,11 +157,11 @@ const result = await provider.request({
 console.log("eth_accounts result:", result)
 ```
 
-`MMSDK.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
+`evmClient.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
 
 Use `provider.request()` for arbitrary [JSON-RPC requests](../../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](batch-requests.md) via `metamask_batch`.
 
-## Common SDK methods at a glance
+## Common MM Connect methods at a glance
 
 | Method                                                                            | Description                                              |
 | --------------------------------------------------------------------------------- | -------------------------------------------------------- |
@@ -175,15 +175,15 @@ Use `provider.request()` for arbitrary [JSON-RPC requests](../../reference/json-
 
 ```javascript
 // 1. Connect and get accounts
-const accounts = await MMSDK.connect()
+const accounts = await evmClient.connect()
 
 // 2. Connect and sign in one step
-const signResult = await MMSDK.connectAndSign({
+const signResult = await evmClient.connectAndSign({
   msg: "Sign in to the dapp",
 })
 
 // 3. Get provider for RPC requests
-const provider = MMSDK.getProvider()
+const provider = evmClient.getProvider()
 
 // 4. Make an RPC request
 const result = await provider.request({

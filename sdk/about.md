@@ -29,6 +29,6 @@ We recommend using services like [MetaMask Developer](https://developer.metamask
 
 <p align="center">
 
-![SDK architecture](_assets/architecture.png)
+![MM Connect architecture](_assets/architecture.png)
 
 </p>

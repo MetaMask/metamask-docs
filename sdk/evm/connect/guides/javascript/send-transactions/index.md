@@ -1,5 +1,5 @@
 ---
-description: Handle transactions with the SDK in your JavaScript dapp.
+description: Handle transactions with MM Connect in your JavaScript dapp.
 keywords: [SDK, JavaScript, send, transaction, transactions, status, estimate, gas, dapp]
 toc_max_heading_level: 2
 ---
@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Send transactions
 
 Handle EVM transactions in your JavaScript dapp.
-With the SDK, you can:
+With MM Connect, you can:
 
 - **Send transactions**.
 - **Track transaction status** in real time.
@@ -33,39 +33,72 @@ The following are examples of sending a [basic transaction](#send-a-basic-transa
 <TabItem value="eth_api">
 
 ```javascript
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from "@metamask/connect/evm";
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
 
-// Get current account
-const accounts = await provider.request({
-  method: 'eth_requestAccounts',
-})
-const from = accounts[0]
+async function sendTransaction(recipientAddress, amount) {
+  try {
+    // Get current account
+    const accounts = await provider.request({ 
+      method: "eth_requestAccounts" 
+    });
+    const from = accounts[0];
 
-// Convert ETH amount to wei (hex)
-const value = `0x${(0.0001 * 1e18).toString(16)}`
+    // Convert ETH amount to wei (hex)
+    const value = `0x${(amount * 1e18).toString(16)}`;
 
-// Prepare transaction
-const transaction = {
-  from,
-  to: '0xRECIPIENT_ADDRESS',
-  value,
-  // Gas fields are optional - MetaMask will estimate
+    // Prepare transaction
+    const transaction = {
+      from,
+      to: recipientAddress,
+      value,
+      // Gas fields are optional - MetaMask will estimate
+    };
+
+    // Send transaction
+    const txHash = await provider.request({
+      method: "eth_sendTransaction",
+      params: [transaction],
+    });
+
+    return txHash;
+  } catch (error) {
+    if (error.code === 4001) {
+      throw new Error("Transaction rejected by user");
+    }
+    throw error;
+  }
 }
 
-// Send transaction
-const txHash = await provider.request({
-  method: 'eth_sendTransaction',
-  params: [transaction],
-})
+// Track transaction status
+function watchTransaction(txHash) {
+  return new Promise((resolve, reject) => {
+    const checkTransaction = async () => {
+      try {
+        const tx = await provider.request({
+          method: "eth_getTransactionReceipt",
+          params: [txHash],
+        });
 
-const tx = await provider.request({
-  method: 'eth_getTransactionReceipt',
-  params: [txHash],
-})
+        if (tx) {
+          if (tx.status === "0x1") {
+            resolve(tx);
+          } else {
+            reject(new Error("Transaction failed"));
+          }
+        } else {
+          setTimeout(checkTransaction, 2000); // Check every 2 seconds
+        }
+      } catch (error) {
+        reject(error);
+      }
+    };
+
+    checkTransaction();
+  });
+}
 ```
 
 </TabItem>
@@ -162,13 +195,18 @@ To add gas estimation, use the [`eth_estimateGas`](../../../reference/json-rpc-a
 RPC method.
 
 ```javascript
+import { createEVMClient } from "@metamask/connect/evm";
+
+const evmClient = createEVMClient();
+const provider = evmClient.getProvider();
+
 async function estimateGas(transaction) {
   try {
-    const gasEstimate = await ethereum.request({
-      method: 'eth_estimateGas',
-      params: [transaction],
-    })
-
+    const gasEstimate = await provider.request({
+      method: "eth_estimateGas",
+      params: [transaction]
+    });
+    
     // Add 20% buffer for safety
     return (BigInt(gasEstimate) * 120n) / 100n
   } catch (error) {

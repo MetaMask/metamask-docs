@@ -5,12 +5,6 @@ import fs from 'fs'
 require('dotenv').config()
 const { themes } = require('prism-react-renderer')
 const { REF_ALLOW_LOGIN_PATH } = require('./src/lib/constants')
-const {
-  fetchAndGenerateDynamicSidebarItems,
-  NETWORK_NAMES,
-  MM_REF_PATH,
-  MM_RPC_URL,
-} = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
 const productsDropdown = fs.readFileSync('./src/components/NavDropdown/Products.html', 'utf-8')
 const baseUrl = process.env.DEST || '/'
@@ -203,8 +197,8 @@ const config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'gator',
-        path: 'delegation-toolkit',
-        routeBasePath: 'delegation-toolkit',
+        path: 'smart-accounts-kit',
+        routeBasePath: 'smart-accounts-kit',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./gator-sidebar.js'),
         breadcrumbs: false,
@@ -213,7 +207,7 @@ const config = {
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
-        lastVersion: '0.13.0',
+        lastVersion: '0.1.0',
         versions: {
           // Defaults to the ./docs folder.
           // Using "development" instead of "next" as path.
@@ -222,8 +216,8 @@ const config = {
             path: 'development',
           },
           // The latest release.
-          '0.13.0': {
-            label: 'latest (0.13.0)',
+          '0.1.0': {
+            label: 'latest (0.1.0)',
           },
         },
       },
@@ -428,8 +422,8 @@ const config = {
                 to: '/embedded-wallets',
               },
               {
-                label: 'Delegation Toolkit',
-                to: '/delegation-toolkit',
+                label: 'Smart Accounts Kit',
+                to: '/smart-accounts-kit',
               },
               {
                 label: 'Snaps',
@@ -461,7 +455,7 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {
-                label: 'Delegation Toolkit GitHub',
+                label: 'Smart Accounts Kit GitHub',
                 href: 'https://github.com/MetaMask/smart-accounts-kit',
               },
               {

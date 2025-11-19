@@ -13,7 +13,7 @@ This tutorial uses the Ethereum Web3 JavaScript library to send a transaction be
 
 ## Prerequisites
 
-- An Infura [API key](../../../../developer-tools/dashboard/get-started/create-api/)
+- An Infura [API key](/developer-tools/dashboard/get-started/create-api)
 - [Node.js installed](https://nodejs.org/en/download/)
 - [MetaMask installed](https://metamask.io) and an account for testing purposes
 

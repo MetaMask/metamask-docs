@@ -1,5 +1,5 @@
 ---
-description: Handle transactions with the SDK in your Wagmi dapp.
+description: Handle transactions with MM Connect in your Wagmi dapp.
 keywords: [SDK, Wagmi, JavaScript, send, transaction, transactions, status, estimate, gas, dapp]
 toc_max_heading_level: 2
 ---
@@ -7,7 +7,7 @@ toc_max_heading_level: 2
 # Send transactions
 
 Handle EVM transactions in your Wagmi dapp.
-With the SDK, you can:
+With MM Connect, you can:
 
 - **Send transactions**.
 - **Track transaction status** in real time.
@@ -18,6 +18,11 @@ With the SDK, you can:
 Wagmi provides hooks for sending transactions and tracking their status.
 The following are examples of sending a [basic transaction](#send-a-basic-transaction) and an
 [advanced transaction with gas estimation](#send-an-advanced-transaction-with-gas-estimation).
+
+:::info Send batch transactions
+This page describes how to send one transaction at a time using Wagmi.
+You can also follow [this tutorial to send atomic batch transactions](/tutorials/upgrade-eoa-to-smart-account) with Wagmi and MM Connect, upgrading an externally owned account to a smart account (specified by [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792) and [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702)).
+:::
 
 ## Send a basic transaction
 

@@ -57,7 +57,7 @@ export default function Home(): JSX.Element {
             title: 'Create smart accounts',
             description:
               'Integrate MetaMask Smart Accounts into your dapp. Create smart wallets that support delegated permissions, gas abstraction, and secure execution.',
-            href: '/delegation-toolkit',
+            href: '/smart-accounts-kit',
             buttonIcon: 'arrow-right',
           },
           {

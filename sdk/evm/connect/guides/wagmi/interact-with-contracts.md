@@ -1,5 +1,5 @@
 ---
-description: Interact with contracts with the SDK in your Wagmi dapp.
+description: Interact with contracts with MM Connect in your Wagmi dapp.
 keywords: [SDK, Wagmi, JavaScript, batch, read, write, smart, contract, contracts, dapp]
 sidebar_label: Interact with contracts
 ---
@@ -7,7 +7,7 @@ sidebar_label: Interact with contracts
 # Interact with smart contracts 
 
 Interact with smart contracts in your Wagmi dapp.
-With the SDK, you can:
+With MM Connect, you can:
 
 - **Read data** from smart contracts.
 - **Batch contract reads**.
