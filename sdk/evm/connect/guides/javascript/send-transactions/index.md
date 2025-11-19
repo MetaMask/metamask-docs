@@ -4,6 +4,9 @@ keywords: [SDK, JavaScript, send, transaction, transactions, status, estimate, g
 toc_max_heading_level: 2
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Send transactions
 
 Handle EVM transactions in your JavaScript dapp.
@@ -21,10 +24,13 @@ The following are examples of sending a [basic transaction](#send-a-basic-transa
 
 ## Send a basic transaction
 
-The basic transaction uses the [`eth_requestAccounts`](../../../reference/json-rpc-api/index.md),
-[`eth_sendTransaction`](../../../reference/json-rpc-api/index.md), and
-[`eth_getTransactionReceipt`](../../../reference/json-rpc-api/index.md)
-RPC methods.
+<Tabs defaultValue="viem" values={[
+{ label: "viem", value: "viem" },
+{ label: "web3.js", value: "web3" },
+{ label: "ethers.js", value: "ethers" },
+{ label: "Ethereum API", value: "eth_api" },
+]}>
+<TabItem value="eth_api">
 
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
@@ -95,37 +101,93 @@ function watchTransaction(txHash) {
 }
 ```
 
-The following is an example implementation of the basic transaction:
+</TabItem>
+<TabItem value="viem">
 
-```html
-<div class="transaction-form">
-  <input type="text" id="recipient" placeholder="Recipient Address">
-  <input type="number" id="amount" placeholder="Amount in ETH">
-  <button onclick="handleSend()">Send ETH</button>
-  <div id="status"></div>
-</div>
+```tsx
+import { MetaMaskSDK } from '@metamask/sdk'
+import { createPublicClient, createWalletClient, custom } from 'viem'
+import { mainnet } from 'viem/chains'
 
-<script>
-async function handleSend() {
-  const recipient = document.getElementById("recipient").value;
-  const amount = document.getElementById("amount").value;
-  const status = document.getElementById("status");
-  
-  try {
-    status.textContent = "Sending transaction...";
-    const txHash = await sendTransaction(recipient, amount);
-    status.textContent = `Transaction sent: ${txHash}`;
+// Initialize SDK
+const MMSDK = new MetaMaskSDK()
+const provider = MMSDK.getProvider()
 
-    // Watch for confirmation
-    status.textContent = "Waiting for confirmation...";
-    await watchTransaction(txHash);
-    status.textContent = "Transaction confirmed!";
-  } catch (error) {
-    status.textContent = `Error: ${error.message}`;
-  }
-}
-</script>
+const publicClient = createPublicClient({ chain: mainnet, transport: custom(provider) })
+const walletClient = createWalletClient({ chain: mainnet, transport: custom(provider) })
+
+// data for the transaction
+const destination = '0xRECIPIENT_ADDRESS'
+const amount = parseEther('0.0001')
+const address = await walletClient.getAddresses()
+
+// Submit transaction to the blockchain
+const hash = await walletClient.sendTransaction({
+  account: address[0],
+  to: destination,
+  value: amount,
+})
+
+const receipt = await publicClient.waitForTransactionReceipt({ hash })
 ```
+
+</TabItem>
+<TabItem value="ethers">
+
+```tsx
+import { MetaMaskSDK } from '@metamask/sdk'
+import { ethers } from 'ethers'
+import { BrowserProvider, parseUnits } from 'ethers'
+
+// Initialize SDK
+const MMSDK = new MetaMaskSDK()
+const provider = MMSDK.getProvider()
+
+const ethersProvider = new ethers.BrowserProvider(provider)
+const signer = await ethersProvider.getSigner()
+
+const destination = '0xRECIPIENT_ADDRESS'
+const amount = parseUnits('0.0001', 'ether')
+
+// Submit transaction to the blockchain
+const tx = await signer.sendTransaction({
+  to: destination,
+  value: amount,
+})
+
+// Wait for the transaction to be mined
+const receipt = await tx.wait()
+```
+
+</TabItem>
+<TabItem value="web3">
+
+```tsx
+import { MetaMaskSDK } from '@metamask/sdk'
+import { Web3 } from 'web3'
+
+// Initialize SDK
+const MMSDK = new MetaMaskSDK()
+const provider = MMSDK.getProvider()
+
+const web3 = new Web3(provider)
+
+// Get user's Ethereum public address
+const fromAddress = (await web3.eth.getAccounts())[0]
+
+const destination = '0xRECIPIENT_ADDRESS'
+const amount = web3.utils.toWei('0.0001') // Convert 0.0001 ether to wei
+
+// Submit transaction to the blockchain and wait for it to be mined
+const receipt = await web3.eth.sendTransaction({
+  from: fromAddress,
+  to: destination,
+  value: amount,
+})
+```
+
+</TabItem>
+</Tabs>
 
 ## Send an advanced transaction with gas estimation
 
@@ -146,10 +208,10 @@ async function estimateGas(transaction) {
     });
     
     // Add 20% buffer for safety
-    return BigInt(gasEstimate) * 120n / 100n;
+    return (BigInt(gasEstimate) * 120n) / 100n
   } catch (error) {
-    console.error("Gas estimation failed:", error);
-    throw error;
+    console.error('Gas estimation failed:', error)
+    throw error
   }
 }
 ```
@@ -176,14 +238,15 @@ Follow these best practices when handling transactions.
 - Display **clear loading states** during transactions.
 - Show **transaction progress** in real time.
 - Provide **detailed transaction information**.
+
 ## Common errors
 
-| Error code | Description | Solution |
-|------------|-------------|----------|
-| `4001`   | User rejected transaction | Show a retry option and a clear error message.  |
-| `-32603` | Insufficient funds        | Check the balance before sending a transaction. |
-| `-32000` | Gas too low               | Increase the gas limit or add a buffer to the estimation. |
-| `-32002` | Request already pending   | Prevent multiple concurrent transactions.       |
+| Error code | Description               | Solution                                                  |
+| ---------- | ------------------------- | --------------------------------------------------------- |
+| `4001`     | User rejected transaction | Show a retry option and a clear error message.            |
+| `-32603`   | Insufficient funds        | Check the balance before sending a transaction.           |
+| `-32000`   | Gas too low               | Increase the gas limit or add a buffer to the estimation. |
+| `-32002`   | Request already pending   | Prevent multiple concurrent transactions.                 |
 
 ## Next steps
 
