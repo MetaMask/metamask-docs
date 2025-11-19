@@ -1,4 +1,4 @@
----
+tab---
 description: Configuration options reference for MetaMask SDK.
 keywords: [SDK, configure, configuration, option, options, dapp]
 ---
