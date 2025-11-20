@@ -1,4 +1,4 @@
----
+https://base-mainnet.infura.io/v3/<YOUR-API-KEY>--
 description: Get started with the Gas APIs.
 sidebar_label: Quickstart
 sidebar_position: 1
