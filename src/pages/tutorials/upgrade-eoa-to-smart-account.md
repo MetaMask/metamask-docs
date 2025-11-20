@@ -5,6 +5,7 @@ image: 'img/tutorials/tutorials-banners/upgrade-eoa-to-smart-account.png'
 tags: [metamask sdk, wagmi, EOA, smart account, EIP-7702, EIP-5792]
 date: Aug 22, 2025
 author: MetaMask Developer Relations
+discourseTopicId: 2614
 ---
 
 This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).

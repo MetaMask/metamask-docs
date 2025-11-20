@@ -105,6 +105,9 @@ const config = {
     SENTRY_KEY: process.env.SENTRY_KEY,
     LINEA_ENS_URL: process.env.LINEA_ENS_URL,
     SEGMENT_ANALYTICS_KEY: process.env.SEGMENT_ANALYTICS_KEY,
+    DISCOURSE_API_KEY: process.env.DISCOURSE_API_KEY,
+    DISCOURSE_API_USERNAME: process.env.DISCOURSE_API_USERNAME,
+    DISCOURSE_CATEGORY_ID: process.env.DISCOURSE_CATEGORY_ID,
   },
 
   trailingSlash: true,

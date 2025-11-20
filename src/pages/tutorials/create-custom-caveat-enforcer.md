@@ -6,6 +6,7 @@ tags: [smart accounts kit, delegation toolkit, caveat enforcer, smart contracts]
 keywords: [delegation, smart accounts kit, create, custom, caveat enforcer, smart contracts]
 date: Aug 27, 2025
 author: MetaMask Developer Relations
+discourseTopicId: 2613
 ---
 
 import Tabs from "@theme/Tabs";
