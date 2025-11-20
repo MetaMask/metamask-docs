@@ -84,9 +84,9 @@ smart contract transaction. Excludes precompiled contracts.
 Displays state changes in the requested block for each transaction, represented as a map of accounts to an object. Lists
 the balance, code, nonce, and storage changes from immediately before the transaction to after the transaction. For the `key:value` pairs:
 
-- `+` indicates the field didn’t exist before and now has the specified value
-- `-` indicates a deleted value
-- `*` has a `from` and a `to` value
+- `+` indicates the field didn't exist before and now has the specified value.
+- `-` indicates a deleted value.
+- `*` has a `from` and a `to` value.
 
 An absent value is distinct from zero when creating accounts or clearing storage. For example, when clearing storage, an absent value means that a particular storage slot has not yet been assigned a value, while a zero value means that the storage slot has been assigned and set to zero.
 
