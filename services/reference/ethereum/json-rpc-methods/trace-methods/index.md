@@ -59,7 +59,7 @@ smart contract transaction. Excludes precompiled contracts.
 |-----------------------|-----------------------------------------------------------------------------------------------------------------|
 | `action`              | Transaction details.                                                                                            |
 | &nbsp;&nbsp;- `creationMethod` | Opcode used during contract creation: `create` or `create2`. Returned for `create` operations. |
-| &nbsp;&nbsp;- `callType` | Whether the transaction is `call`, `staticcall`, `delegatecall`. Returned for `call` operations. |
+| &nbsp;&nbsp;- `callType` | Whether the transaction is `call`, `staticcall`, or `delegatecall`. Returned for `call` operations. |
 | &nbsp;&nbsp;- `from`    | Address of the transaction sender.                                                                              |
 | &nbsp;&nbsp;- `gas`     | Gas provided by sender.                                                                                         |
 | &nbsp;&nbsp;- `input`   | Transaction data. Returned for `call` operations.                                                             |
