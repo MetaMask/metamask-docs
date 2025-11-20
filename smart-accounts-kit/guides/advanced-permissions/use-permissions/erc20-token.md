@@ -94,7 +94,7 @@ configured rate, up to the maximum allowed amount.
 For example, a user signs an ERC-7715 permission that allows a dapp to spend 0.1 USDC per second, starting with an initial amount
 of 1 USDC, up to a maximum of 2 USDC.
 
-See [`erc20-token-stream`](../../../reference/advanced-permissions/permissions.md#erc-20-token-stream) API reference to learn more.
+See [`erc20-token-stream`](../../../reference/advanced-permissions/permissions.md#erc-20-stream-permission) API reference to learn more.
 
 <Tabs>
 <TabItem value="example.ts">
