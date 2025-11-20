@@ -12,15 +12,15 @@ description: Ethereum trace methods
 Trace API is an open beta feature, available to paying Infura customers. 
 :::
 
-Infura provides access to trace API methods that provide insights into the execution of smart contracts and transactions.
+Infura provides access to the following trace API methods that provide insights into the execution of smart contracts and transactions. 
 
-| Method                  | Diagnostic options         |
-|-----------------------|-------------------------------------------|
-|[`trace_block`](trace_block.mdx)|[`trace`](#trace)|
-|[`trace_call`](trace_call.mdx)|[`trace`](#trace), [`stateDiff`](#statediff)|
-|[`trace_callMany`](trace_callmany.mdx)|[`trace`](#trace), [`stateDiff`](#statediff)|
-|[`trace_transaction`](trace_transaction.mdx)|[`trace`](#trace)|
-|[`trace_filter`](trace_filter.mdx)|[`trace`](#trace)|
+- [`trace_block`](trace_block.mdx)
+- [`trace_call`](trace_call.mdx)
+- [`trace_callMany`](trace_callmany.mdx)
+- [`trace_transaction`](trace_transaction.mdx)
+- [`trace_filter`](trace_filter.mdx)
+
+When tracing transactions, the trace diagnostic options are [`trace`](#trace) and [`stateDiff`](#statediff).
 
 :::caution
 Trace responses are handled generically to enable support of additional fields beyond 
