@@ -96,8 +96,9 @@ const sessionAccount = privateKeyToAccount("0x...");
 
 ### 4. Check the EOA account code
 
-Currently, Advanced Permissions do not support automatically upgrading a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
-ensure that the user is upgraded to a smart account before requesting Advanced Permissions.
+Advanced Permissions support automatically upgrading a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md) 
+from MetaMask Flask version 13.9.0 onwards. If you're using a version below 13.9.0, you must ensure that the 
+user is upgraded to a smart account before requesting Advanced Permissions.
 
 If the user has not yet been upgraded, you can handle the upgrade [programmatically](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) or ask the 
 user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
@@ -140,8 +141,9 @@ if (code) {
 ### 5. Request Advanced Permissions
 
 Request Advanced Permissions from the user. In this example, you'll request an
-[ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission) using the Wallet Client's 
-[`requestExecutionPermissions`](../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) action.
+[ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission) using the Wallet Client's `requestExecutionPermissions` action. 
+
+See [`requestExecutionPermissions`](../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) API reference to learn more.
 
 ```typescript
 import { sepolia as chain } from "viem/chains";
@@ -236,6 +238,7 @@ To redeem the permissions, use the client action based on your session account t
 A smart account uses the Bundler Client's [`sendUserOperationWithDelegation`](../../reference/advanced-permissions/bundler-client.md#senduseroperationwithdelegation) action,
 and an EOA uses the Wallet Client's [`sendTransactionWithDelegation`](../../reference/advanced-permissions/wallet-client.md#sendtransactionwithdelegation) action:
 
+See [`sendUserOperationWithDelegation`](../../reference/advanced-permissions/bundler-client.md#senduseroperationwithdelegation) and [`sendTransactionWithDelegation`](../../reference/advanced-permissions/wallet-client.md#sendtransactionwithdelegation) API reference to learn more.
 <Tabs>
 <TabItem value="Smart account">
 
