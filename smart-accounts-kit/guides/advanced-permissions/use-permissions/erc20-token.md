@@ -19,12 +19,10 @@ permissions for ERC-20 token transfers with time-based (periodic) or streaming c
 
 ## ERC-20 periodic permission
 
-This permission type ensures a per-period limit for ERC-20 token transfers. At the start of each new period, the allowance resets.
+The [ERC-20 periodic permission](../../../reference/advanced-permissions/permissions.md#erc-20-periodic-permission) ensures a per-period limit for ERC-20 token transfers. At the start of each new period, the allowance resets.
 
 For example, a user signs an ERC-7715 permission that lets a dapp spend up to 10 USDC on their behalf each day. The dapp can transfer a total of
 10 USDC per day; the limit resets at the beginning of the next day.
-
-See [`erc20-token-periodic`](../../../reference/advanced-permissions/permissions.md#erc-20-periodic-permission) API reference to learn more.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -87,14 +85,12 @@ export const walletClient = createWalletClient({
 
 ## ERC-20 stream permission
 
-This permission type ensures a linear streaming transfer limit for ERC-20 tokens. Token transfers are blocked until the 
+The [ERC-20 stream permission](../../../reference/advanced-permissions/permissions.md#erc-20-stream-permission) ensures a linear streaming transfer limit for ERC-20 tokens. Token transfers are blocked until the 
 defined start timestamp. At the start, a specified initial amount is released, after which tokens accrue linearly at the
 configured rate, up to the maximum allowed amount.
 
 For example, a user signs an ERC-7715 permission that allows a dapp to spend 0.1 USDC per second, starting with an initial amount
 of 1 USDC, up to a maximum of 2 USDC.
-
-See [`erc20-token-stream`](../../../reference/advanced-permissions/permissions.md#erc-20-stream-permission) API reference to learn more.
 
 <Tabs>
 <TabItem value="example.ts">

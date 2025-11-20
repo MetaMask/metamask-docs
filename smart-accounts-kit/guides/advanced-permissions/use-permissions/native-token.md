@@ -19,12 +19,10 @@ permissions for native token transfers with time-based (periodic) or streaming c
 
 ## Native token periodic permission
 
-This permission type ensures a per-period limit for native token transfers. At the start of each new period, the allowance resets.
+The [native token periodic permission](../../../reference/advanced-permissions/permissions.md#native-token-periodic-permission) ensures a per-period limit for native token transfers. At the start of each new period, the allowance resets.
 
 For example, a user signs an ERC-7715 permission that lets a dapp spend up to 0.001 ETH on their behalf each day. The dapp can transfer a total of
 0.001 USDC per day; the limit resets at the beginning of the next day.
-
-See [`native-token-periodic`](../../../reference/advanced-permissions/permissions.md#native-token-periodic-permission) API reference to learn more.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -84,14 +82,12 @@ export const walletClient = createWalletClient({
 
 ## Native token stream permission
 
-This permission type ensures a linear streaming transfer limit for native tokens. Token transfers are blocked until the 
+The [native token stream permission](../../../reference/advanced-permissions/permissions.md#native-token-stream-permission) type ensures a linear streaming transfer limit for native tokens. Token transfers are blocked until the 
 defined start timestamp. At the start, a specified initial amount is released, after which tokens accrue linearly at the
 configured rate, up to the maximum allowed amount.
 
 For example, a user signs an ERC-7715 permission that allows a dapp to spend 0.0001 ETH per second, starting with an initial amount
 of 0.1 ETH, up to a maximum of 1 ETH.
-
-See [`native-token-stream`](../../../reference/advanced-permissions/permissions.md#native-token-stream-permission) API reference to learn more.
 
 <Tabs>
 <TabItem value="example.ts">
