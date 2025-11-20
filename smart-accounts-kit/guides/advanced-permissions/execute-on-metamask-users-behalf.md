@@ -96,7 +96,7 @@ const sessionAccount = privateKeyToAccount("0x...");
 
 ### 4. Check the EOA account code
 
-Advanced Permissions support automatically upgrading a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md) 
+Advanced Permissions support the automatic upgrading of a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md) 
 from MetaMask Flask version 13.9.0 onwards. If you're using a version below 13.9.0, you must ensure that the 
 user is upgraded to a smart account before requesting Advanced Permissions.
 
