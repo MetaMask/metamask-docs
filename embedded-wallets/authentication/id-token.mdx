@@ -12,15 +12,15 @@ The **Identity Token** (ID Token) issued by Web3Auth is a JSON Web Token (JWT) t
 
 Once a user successfully authenticates via Web3Auth, the platform issues an ID token which can then be used to authorize client-to-server requests or verify ownership of associated wallet addresses.
 
-#### Purpose of the ID Token
+#### Purpose of the ID token
 
-- **User Identity Verification**: Ensures that the client user is indeed who they claim to be.
-- **Secure Backend Requests**: The token should be passed in API requests to validate sessions server-side.
-- **Wallet Ownership Proof**: Includes public wallet keys to prove a user owns a particular wallet.
+- **User identity verification**: Ensures that the client user is indeed who they claim to be.
+- **Secure backend requests**: The token should be passed in API requests to validate sessions server-side.
+- **Wallet ownership proof**: Includes public wallet keys to prove a user owns a particular wallet.
 
 When making a backend request from the frontend, the client must include this ID token to ensure the backend can verify the authenticated user.
 
-## ID Token Format
+## ID Token format
 
 Web3Auth tokens are ES256-signed JWTs containing various identity claims about the user.
 
@@ -130,7 +130,7 @@ try {
 
 To validate an ID token server-side, use Web3Auth's JWKS endpoint or project-specific verification key. This process ensures the JWT was issued by Web3Auth and its contents have not been tampered with.
 
-### Using JWKS Endpoint
+### Using JWKS endpoint
 
 <Tabs>
 <TabItem value="Social Login">
@@ -318,7 +318,7 @@ const validateIdToken = async () => {
 </TabItem>
 </Tabs>
 
-### Using Verification Key
+### Using the verification key
 
 To manually verify the token, use your **Verification Key** available on the **Project Settings** page in the Embedded Wallets Dashboard.
 
@@ -384,7 +384,7 @@ If the token is valid, the payload will contain identity claims (e.g., userId). 
 
 :::
 
-## Things to Remember
+## Things to remember
 
 - The `iss` field in the token must be `https://api-auth.web3auth.io`.
 - The `aud` field must match your **Project Client ID**.

@@ -12,13 +12,13 @@ import CustomConnectionOptions from '@site/static/img/embedded-wallets/w3a-dashb
 import CustomJWTConnection from '@site/static/img/embedded-wallets/w3a-dashboard/custom-connection.png'
 import JwtLoginCustom from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_custom.mdx'
 
-Web3Auth supports integration with custom login providers through JWT-based authentication schemes, allowing developers to maintain their existing authentication infrastructure while leveraging Web3Auth’s wallet and key management capabilities. Custom authentication can be implemented using industry-standard cryptographic algorithms such as RSA or ECDSA signatures.
+Web3Auth supports integration with custom login providers through [JWT-based](https://www.jwt.io/introduction#what-is-json-web-token) authentication schemes, allowing developers to maintain their existing authentication infrastructure while leveraging Web3Auth’s wallet and key management capabilities. Custom authentication can be implemented using industry-standard cryptographic algorithms such as RSA or ECDSA signatures.
 
 To use this feature, developers must ensure that their JWTs adhere to the [JWT specification](https://datatracker.ietf.org/doc/html/rfc7519). Each JWT must be signed using a private key, and its corresponding public key must be accessible via a [JWKS (JSON Web Key Set)](https://datatracker.ietf.org/doc/html/rfc7517) endpoint. Web3Auth will use this endpoint to verify the integrity and authenticity of incoming tokens during login.
 
-Once the Custom JWT login is working, developers can proceed to add it as a custom connection in the Embedded Wallets Dashboard.
+Once the custom JWT login is working, developers can proceed to add it as a custom connection in the Embedded Wallets Dashboard.
 
-## Set up Custom JWT Connection
+## Set up Custom JWT connection
 
 :::success Create Custom Connection on Dashboard
 
@@ -38,7 +38,7 @@ To use this feature, developers must go to the `Custom Connections` tab in the [
   />
 </div>
 
-Follow these steps to create a AWS Cognito connection:
+Follow these steps to create a JWT custom connection:
 
 1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
 1. Go to the `Custom Connections` section.
@@ -69,7 +69,7 @@ Follow these steps to create a AWS Cognito connection:
 
 To generate the JWT, developers may use a package of their choice. Web3Auth provides documentation and examples using both the `jsonwebtoken` and `jose` libraries.
 
-### Generate Private Key
+### Generate a private key
 
 Developers can generate a private key using the `openssl` command-line tool. This private key will be used to sign the ID token.
 
@@ -113,7 +113,7 @@ openssl ec -in ec-secp256k1-privateKey.pem -pubout -out ec-secp256k1-publicKey.p
 </TabItem>
 </Tabs>
 
-### Install JWT Library
+### Install the JWT library
 
 Developers can install a JWT library of their choice. Following are the documentation and examples using both the `jsonwebtoken` and `jose` libraries.
 
@@ -251,7 +251,7 @@ Since, the `Custom Connection` details are available from Dashboard, developers 
 
 > Follow our [Quick Starts](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to setup the basic flow.
 
-### Login with JWT
+### Log in with JWT
 
 <JwtLoginCustom />
 
