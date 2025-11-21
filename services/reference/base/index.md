@@ -25,12 +25,12 @@ Select an option below to get started with the Base network.
 <CardList
   items={[
     {
-      href: "./quickstart",
+      href: "/services/reference/base/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Base network."
     },
     {
-      href: "./json-rpc-methods",
+      href: "/services/reference/base/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Base network."
     },

@@ -19,12 +19,12 @@ Select an option below to get started with the Celo network.
 <CardList
   items={[
     {
-      href: "./quickstart",
+      href: "/services/reference/celo/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Celo network."
     },
     {
-      href: "./json-rpc-methods",
+      href: "/services/reference/celo/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Celo network."
     },
