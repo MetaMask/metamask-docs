@@ -96,6 +96,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-mantle.svg`,
   },
   {
+    name: 'Monad',
+    href: '/services/reference/monad',
+    logo: `${LOGO_PATH}/logo-monad.svg`,
+  },
+  {
     name: 'opBNB',
     href: '/services/reference/opbnb',
     logo: `${LOGO_PATH}/logo-bnb.svg`,
