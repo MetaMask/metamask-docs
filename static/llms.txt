@@ -1,23 +1,26 @@
 See the following LLM-readable files:
 
 - MetaMask SDK
-  - [`llms-sdk.txt`](/llms-sdk.txt)
-  - [`llms-sdk-full.txt`](/llms-sdk-full.txt)
+  - https://docs.metamask.io/llms-sdk.txt
+  - https://docs.metamask.io/llms-sdk-full.txt
 - Wallet API
-  - [`llms-wallet.txt`](/llms-wallet.txt)
-  - [`llms-wallet-full.txt`](/llms-wallet-full.txt)
+  - https://docs.metamask.io/llms-wallet.txt
+  - https://docs.metamask.io/llms-wallet-full.txt
 - Embedded Wallets
-  - [`llms-embedded-wallets.txt`](/llms-embedded-wallets.txt)
-  - [`llms-embedded-wallets-full.txt`](/llms-embedded-wallets-full.txt)
+  - https://docs.metamask.io/llms-embedded-wallets.txt
+  - https://docs.metamask.io/llms-embedded-wallets-full.txt
 - Smart Accounts Kit
-  - [`llms-smart-accounts-kit.txt`](/llms-smart-accounts-kit.txt)
-  - [`llms-smart-accounts-kit-full.txt`](/llms-smart-accounts-kit-full.txt)
+  - https://docs.metamask.io/llms-smart-accounts-kit.txt
+  - https://docs.metamask.io/llms-smart-accounts-kit-full.txt
 - Services
-  - [`llms-services.txt`](/llms-services.txt)
-  - [`llms-services-full.txt`](/llms-services-full.txt)
+  - https://docs.metamask.io/llms-services.txt
+  - https://docs.metamask.io/llms-services-full.txt
 - MetaMask Developer Dashboard
-  - [`llms-dashboard.txt`](/llms-dashboard.txt)
-  - [`llms-dashboard-full.txt`](/llms-dashboard-full.txt)
+  - https://docs.metamask.io/llms-dashboard.txt
+  - https://docs.metamask.io/llms-dashboard-full.txt
 - Snaps
-  - [`llms-snaps.txt`](/llms-snaps.txt)
-  - [`llms-snaps-full.txt`](/llms-snaps-full.txt)
+  - https://docs.metamask.io/llms-snaps.txt
+  - https://docs.metamask.io/llms-snaps-full.txt
+- Tutorials
+  - https://docs.metamask.io/llms-tutorials.txt
+  - https://docs.metamask.io/llms-tutorials-full.txt
