@@ -1,4 +1,4 @@
----
+tab---
 description: Quickstart guide for using the MetaMask SDK with a JavaScript and Wagmi dapp.
 toc_max_heading_level: 3
 sidebar_label: JavaScript + Wagmi (recommended)
