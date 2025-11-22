@@ -6,7 +6,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start -p 3003",
-    "build": "docusaurus build && node scripts/organize-llms-files.js",
+    "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
