@@ -347,11 +347,10 @@ const config = {
           '*.config.js',
           '*.json',
           '*.lock',
-          'README.md', // Ignore root-level README
-          'CONTRIBUTING.md', // Ignore root-level CONTRIBUTING
-          'gator_versioned_docs/**', // Versioned docs handled separately
+          'README.md',
+          'CONTRIBUTING.md',
+          'gator_versioned_docs/**',
         ],
-        // Content cleaning options
         excludeImports: true,
         removeDuplicateHeadings: true,
         // Path transformation to fix URL construction
@@ -360,127 +359,118 @@ const config = {
           ignorePaths: ['docs', 'src/pages'],
         },
         // Generate separate files for each section
-        // Files will be organized into subdirectories by the post-build script
         customLLMFiles: [
-          // Embedded Wallets
           {
             filename: 'llms-embedded-wallets.txt',
             includePatterns: ['embedded-wallets/**/*.{md,mdx}'],
             fullContent: false,
-            title: 'MetaMask Embedded Wallets Documentation',
+            title: 'MetaMask Embedded Wallets documentation',
             description: 'Documentation links for MetaMask Embedded Wallets',
           },
           {
             filename: 'llms-embedded-wallets-full.txt',
             includePatterns: ['embedded-wallets/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask Embedded Wallets Documentation',
+            title: 'MetaMask Embedded Wallets documentation',
             description: 'Complete documentation for MetaMask Embedded Wallets',
           },
-          // SDK
           {
             filename: 'llms-sdk.txt',
             includePatterns: ['sdk/**/*.{md,mdx}'],
             fullContent: false,
-            title: 'MetaMask SDK Documentation',
+            title: 'MetaMask SDK documentation',
             description: 'Documentation links for MetaMask SDK',
           },
           {
             filename: 'llms-sdk-full.txt',
             includePatterns: ['sdk/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask SDK Documentation',
+            title: 'MetaMask SDK documentation',
             description: 'Complete documentation for MetaMask SDK',
           },
-          // Smart Accounts Kit
           {
             filename: 'llms-smart-accounts-kit.txt',
             includePatterns: ['smart-accounts-kit/**/*.{md,mdx}'],
             fullContent: false,
-            title: 'MetaMask Smart Accounts Kit Documentation',
+            title: 'MetaMask Smart Accounts Kit documentation',
             description: 'Documentation links for MetaMask Smart Accounts Kit',
           },
           {
             filename: 'llms-smart-accounts-kit-full.txt',
             includePatterns: ['smart-accounts-kit/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask Smart Accounts Kit Documentation',
+            title: 'MetaMask Smart Accounts Kit documentation',
             description: 'Complete documentation for MetaMask Smart Accounts Kit',
           },
-          // Snaps
           {
             filename: 'llms-snaps.txt',
             includePatterns: ['snaps/**/*.{md,mdx}'],
             fullContent: false,
-            title: 'MetaMask Snaps Documentation',
-            description: 'Documentation links for MetaMask Snaps',
+            title: 'Snaps documentation',
+            description: 'Documentation links for Snaps',
           },
           {
             filename: 'llms-snaps-full.txt',
             includePatterns: ['snaps/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask Snaps Documentation',
-            description: 'Complete documentation for MetaMask Snaps',
+            title: 'Snaps documentation',
+            description: 'Complete documentation for Snaps',
           },
-          // Wallet
           {
             filename: 'llms-wallet.txt',
             includePatterns: ['wallet/**/*.{md,mdx}'],
             fullContent: false,
-            title: 'MetaMask Wallet API Documentation',
-            description: 'Documentation links for MetaMask Wallet API',
+            title: 'Wallet API documentation',
+            description: 'Documentation links for Wallet API',
           },
           {
             filename: 'llms-wallet-full.txt',
             includePatterns: ['wallet/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask Wallet API Documentation',
-            description: 'Complete documentation for MetaMask Wallet API',
+            title: 'Wallet API documentation',
+            description: 'Complete documentation for Wallet API',
           },
-          // Tutorials
           {
             filename: 'llms-tutorials.txt',
             includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
             fullContent: false,
-            title: 'MetaMask Tutorials',
+            title: 'Tutorials',
             description: 'Documentation links for MetaMask tutorials',
           },
           {
             filename: 'llms-tutorials-full.txt',
             includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask Tutorials',
-            description: 'Complete MetaMask tutorials documentation',
+            title: 'Tutorials',
+            description: 'Complete documentation for MetaMask tutorials',
           },
-          // Dashboard
           {
             filename: 'llms-dashboard.txt',
             includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
             fullContent: false,
-            title: 'MetaMask Developer Dashboard Documentation',
-            description: 'Documentation links for MetaMask Developer Dashboard',
+            title: 'Developer dashboard documentation',
+            description: 'Documentation links for MetaMask Developer dashboard',
           },
           {
             filename: 'llms-dashboard-full.txt',
             includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask Developer Dashboard Documentation',
-            description: 'Complete documentation for MetaMask Developer Dashboard',
+            title: 'Developer dashboard documentation',
+            description: 'Complete documentation for MetaMask Developer dashboard',
           },
-          // Services
           {
             filename: 'llms-services.txt',
             includePatterns: ['services/**/*.{md,mdx}'],
             fullContent: false,
-            title: 'MetaMask Services Documentation',
-            description: 'Documentation links for MetaMask Services',
+            title: 'Services documentation',
+            description: 'Documentation links for MetaMask services',
           },
           {
             filename: 'llms-services-full.txt',
             includePatterns: ['services/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask Services Documentation',
-            description: 'Complete documentation for MetaMask Services',
+            title: 'Services documentation',
+            description: 'Complete documentation for MetaMask services',
           },
         ],
       },
