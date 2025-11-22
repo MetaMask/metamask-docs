@@ -84,7 +84,7 @@ The following third-party libraries support EIP-6963:
 - [MIPD Store](https://github.com/wevm/mipd)
 - [RainbowKit](https://www.rainbowkit.com)
 - [Web3-Onboard](https://web3onboard.thirdweb.com)
-- [ConnectKit](https://family.co/docs/connectkit)
+- [ConnectKit](https://docs.family.co/connectkit)
 
 ### MIPD Store
 

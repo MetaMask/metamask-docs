@@ -28,12 +28,12 @@ See the [official ZKsync Era documentation](https://docs.zksync.io) for more inf
 <CardList
   items={[
     {
-      href: "/services/reference/zksync/quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the ZKsync Era network."
     },
     {
-      href: "/services/reference/zksync/json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the ZKsync Era network."
     },

@@ -32,12 +32,12 @@ Select one of the following options to get started with the Blast network:
 <CardList
   items={[
     {
-      href: "/services/reference/blast/quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Blast network."
     },
     {
-      href: "/services/reference/blast/json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Blast network."
     },

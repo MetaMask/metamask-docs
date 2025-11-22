@@ -29,12 +29,12 @@ occur on Optimism are posted and validated on Ethereum mainnet using Optimistic 
 <CardList
   items={[
     {
-      href: "/services/reference/optimism/quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Optimism network."
     },
     {
-      href: "/services/reference/optimism/json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Optimism network."
     },

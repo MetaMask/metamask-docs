@@ -20,12 +20,12 @@ See the [official Linea documentation](https://docs.linea.build/) for more infor
 <CardList
   items={[
     {
-      href: "/services/reference/linea/quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Linea network."
     },
     {
-      href: "/services/reference/linea/json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Linea network."
     },

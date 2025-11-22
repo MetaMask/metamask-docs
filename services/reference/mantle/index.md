@@ -34,12 +34,12 @@ Select one of the following options to get started with the Mantle network:
 <CardList
   items={[
     {
-      href: "/services/reference/mantle/quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Mantle network."
     },
     {
-      href: "/services/reference/mantle/json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Mantle network."
     },
@@ -57,5 +57,5 @@ No personal information is sent as part of partner requests, only information ne
 
 The following partner provides access to the Mantle network:
 
-- 0xFury ([Privacy policy](https://0xfury.com/privacy))
+- 0xFury ([Privacy policy](https://0xfury.com/privacy.php))
 - Bware Labs ([Terms of Use](https://bwarelabs.com/terms), [Privacy Policy](https://bwarelabs.com/privacy))

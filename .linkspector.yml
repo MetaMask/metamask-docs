@@ -32,8 +32,6 @@ ignorePatterns:
 - pattern: '^/snaps/'
 - pattern: '^/wallet/'
 - pattern: '^/tutorials/'
-- pattern: 'https://web3onboard.thirdweb.com'
-- pattern: 'https://0xfury.com/privacy'
 aliveStatusCodes:
 - 200
 - 206

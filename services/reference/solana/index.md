@@ -27,12 +27,12 @@ Select an option below to get started with the Solana network.
 <CardList
   items={[
     {
-      href: "/services/reference/solana/quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Solana network."
     },
     {
-      href: "/services/reference/solana/json-rpc-methods",
+      href: "./json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Solana network."
     },

@@ -15,12 +15,12 @@ See the [list of supported Gas API networks](../../get-started/endpoints.md#gas-
 <CardList
   items={[
     {
-      href: "/services/reference/gas-api/quickstart",
+      href: "./quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Gas API."
     },
     {
-      href: "/services/reference/gas-api/api-reference",
+      href: "./api-reference",
       title: "REST APIs",
       description: "View the APIs available for communicating with the Gas API."
     },

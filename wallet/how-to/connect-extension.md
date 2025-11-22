@@ -34,7 +34,7 @@ You can connect to MetaMask using the following third-party libraries that suppo
 - [MIPD Store](https://github.com/wevm/mipd)
 - [RainbowKit](https://rainbowkit.com/docs/introduction)
 - [Web3-Onboard](https://web3onboard.thirdweb.com)
-- [ConnectKit](https://family.co/docs/connectkit)
+- [ConnectKit](https://docs.family.co/connectkit)
 
 ## Connect to MetaMask directly using Vite
 
