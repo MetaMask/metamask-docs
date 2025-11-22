@@ -354,6 +354,11 @@ const config = {
         // Content cleaning options
         excludeImports: true,
         removeDuplicateHeadings: true,
+        // Path transformation to fix URL construction
+        // Since docsDir is '.', we need to remove 'docs/' prefix and handle src/pages paths
+        pathTransformation: {
+          ignorePaths: ['docs', 'src/pages'],
+        },
         // Generate separate files for each section
         // Files will be organized into subdirectories by the post-build script
         customLLMFiles: [
