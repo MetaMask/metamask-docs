@@ -22,6 +22,13 @@ Infura provides access to the following trace API methods that provide insights 
 
 When tracing transactions, the trace diagnostic options are [`trace`](#trace) and [`stateDiff`](#statediff).
 
+:::note
+
+`trace_block`, `trace_filter`, and `trace_transaction` return [`trace`](#trace) information, while
+`trace_call` and `trace_callMany`
+allow you to use the [`trace`](#trace) or [`stateDiff`](#statediff) diagnostic options when tracing calls or transactions.
+:::
+
 :::caution
 Trace responses are handled generically to enable support of additional fields beyond 
 those documented here. This requires graceful handling.
