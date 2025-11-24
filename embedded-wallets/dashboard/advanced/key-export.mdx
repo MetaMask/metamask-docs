@@ -25,7 +25,7 @@ Private key export functionality allows applications to retrieve users' private 
 
 **Programmatic Export (Configurable):**
 
-- Access via `eth_private_key` JSON-RPC method
+- Access via `private_key` JSON-RPC method
 - Requires explicit user consent
 - Can be enabled/disabled per project
 - Controlled through dashboard settings
@@ -70,7 +70,7 @@ if ((await web3auth.status) !== 'connected') {
 // Request private key (requires user consent)
 try {
   const privateKey = await web3auth.provider.request({
-    method: 'eth_private_key',
+    method: 'private_key',
   })
 
   // Handle the private key securely
@@ -99,7 +99,7 @@ class SecureKeyManager {
 
     // Retrieve private key
     const privateKey = await web3auth.provider.request({
-      method: 'eth_private_key',
+      method: 'private_key',
     })
 
     // Process key securely (encrypt, transmit, etc.)
