@@ -1,16 +1,28 @@
 ---
 title: Integrate Embedded Wallets with the Songbird Blockchain
-sidebar_label: Songbird
-hide_table_of_contents: true
+sidebar_label: Overview
 
+keywords:
+  [
+    songbird,
+    wallet,
+    integration,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
 image: 'img/embedded-wallets/banners/songbird.png'
-description: 'Integrate Embedded Wallets with the Songbird Blockchain'
+description: 'Integrate Embedded Wallets with the Songbird Blockchain | Embedded Wallets'
 ---
 
 import Tiles from '@theme/Tiles'
 import ChainDetailsSongbird from '../../_general-connect-blockchain/_songbird.mdx'
 
-Integrate Embedded Wallets seamlessly with the EVM-based Songbird blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+Integrate Web3Auth seamlessly with EVM-based Songbird blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
 
 This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
 
@@ -24,10 +36,23 @@ export const Songbird = [
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/songbird/react',
+          },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/songbird/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/songbird/web',
+        path: '/embedded-wallets/connect-blockchain/evm/songbird/javascript',
       },
       {
         key: 'android',
@@ -52,6 +77,12 @@ export const Songbird = [
         title: 'React Native',
         icon: 'logo-react.png',
         path: '/embedded-wallets/connect-blockchain/evm/songbird/react-native',
+          },
+          {
+            key: 'node',
+            title: 'Node',
+            icon: 'logo-nodejs.png',
+            path: '/embedded-wallets/connect-blockchain/evm/songbird/node',
       },
       {
         key: 'unity',
@@ -60,7 +91,8 @@ export const Songbird = [
         path: '/embedded-wallets/connect-blockchain/evm/songbird/unity',
       },
     ],
-  },
+
+},
 ]
 
 <Tiles tileGroups={Songbird} />

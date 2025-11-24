@@ -1,40 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Sepolia Testnet", value: "sepolia" },
   ]}
 >
-<TabItem
-  value="mainnet"
->
+<TabItem value="mainnet">
 
-- Chain ID: 0xB9 (hex of 185)
-- Public RPC URL: https://rpc.mintchain.io (Avoid using public rpcTarget in production, use services
-  like Infura)
-- Display Name: Mint Mainnet
-- Block Explorer Link: https://explorer.mintchain.io
-- Ticker: ETH
-- Ticker Name: ETH
-- Logo: https://i.ibb.co/yp6y4jy/logo-mint.png
+- **Chain ID:** 0xB9
+- **Public RPC URL:** https://rpc.mintchain.io
+- **Display Name:** Mint Mainnet
+- **Block Explorer Link:** https://explorer.mintchain.io
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
 
 </TabItem>
 
-<TabItem
-  value="testnet"
->
+<TabItem value="sepolia">
 
-- Chain ID: 0x697 (hex of 1687)
-- Public RPC URL: https://sepolia-testnet-rpc.mintchain.io (Avoid using public rpcTarget in
-  production, use services like Infura)
-- Display Name: Mint Sepolia Testnet
-- Block Explorer Link: https://sepolia-testnet-explorer.mintchain.io
-- Ticker: ETH
-- Ticker Name: ETH
-- Logo: https://i.ibb.co/yp6y4jy/logo-mint.png
+- **Chain ID:** 0x697
+- **Public RPC URL:** https://sepolia-testnet-rpc.mintchain.io
+- **Display Name:** Mint Sepolia Testnet
+- **Block Explorer Link:** https://sepolia-testnet-explorer.mintchain.io
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
 
 </TabItem>
 </Tabs>

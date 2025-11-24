@@ -33,8 +33,8 @@ You can connect to MetaMask using the following third-party libraries that suppo
 - [Reown AppKit](https://docs.reown.com/appkit/overview)
 - [MIPD Store](https://github.com/wevm/mipd)
 - [RainbowKit](https://rainbowkit.com/docs/introduction)
-- [Web3-Onboard](https://onboard.blocknative.com)
-- [ConnectKit](https://docs.family.co/connectkit)
+- [Web3-Onboard](https://web3onboard.thirdweb.com)
+- [ConnectKit](https://family.co/docs/connectkit)
 
 ## Connect to MetaMask directly using Vite
 

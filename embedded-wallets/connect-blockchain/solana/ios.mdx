@@ -12,11 +12,61 @@ import Tabs from '@theme/Tabs'
 
 While using the Embedded Wallets iOS SDK (formerly Web3Auth), you can retrieve the Ed25519 private key upon successful authentication. This private key can be used to derive the user's public address and interact with the [Solana](https://solana.org/) chain. We’ve highlighted a few methods here to get you started quickly.
 
-::::note
+:::note
 
 The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
 
-::::
+:::
+
+## Chain Details for Solana
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
+    { label: "Devnet", value: "devnet" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x1
+- Public RPC URL: https://api.mainnet-beta.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Mainnet
+- Block Explorer Link: https://explorer.solana.com
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+
+<TabItem value="testnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x2
+- Public RPC URL: https://api.testnet.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Testnet
+- Block Explorer Link: https://explorer.solana.com
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+
+<TabItem value="devnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x3
+- Public RPC URL: https://api.devnet.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Devnet
+- Block Explorer Link: https://explorer.solana.com?cluster=devnet
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+</Tabs>
 
 ## Installation
 
@@ -110,14 +160,6 @@ let web3Auth = await Web3Auth(
 let isUserAuthenticated = web3Auth.state != nil
 
 // Customize your logic to perform operations or navigation
-```
-
-## Get User Info
-
-After logging in, the Web3Auth instance will provide you with information regarding the user that is logged in. This information is obtained directly from the JWT token and is not stored by Web3Auth. Therefore, this information can only be accessed through social logins after the user has logged into your application. You can get the user information using `getUserInfo` function. The function will throw error in case if user is not authenticated.
-
-```swift
-let userInfo: Web3AuthUserInfo = try web3Auth.getUserInfo()
 ```
 
 ## Get Account

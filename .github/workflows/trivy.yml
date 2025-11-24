@@ -1,6 +1,5 @@
 ---
 name: Trivy
-
 on:
   pull_request:
     branches:

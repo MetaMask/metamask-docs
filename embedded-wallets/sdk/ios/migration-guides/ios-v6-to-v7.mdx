@@ -59,29 +59,29 @@ In v7, the whiteLabel parameter type and configuration has changed. And, as ment
 
 <TabItem value="v6">
 
-| Parameter | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| `name` | `String` | No | Name of your application |
-| `logoLight` | `String` | No | Light logo for dark background |
-| `logoDark` | `String` | No | Dark logo for light background |
-| `defaultLanguage` | `String` | No | Default translation language to be used |
-| `dark` | `Boolean` | No | If true, enables dark mode. Default is light mode |
-| `theme` | `[String, String]` | No | Whitelabel theme |
+| Parameter         | Type               | Mandatory | Description                                       |
+| ----------------- | ------------------ | --------- | ------------------------------------------------- |
+| `name`            | `String`           | No        | Name of your application                          |
+| `logoLight`       | `String`           | No        | Light logo for dark background                    |
+| `logoDark`        | `String`           | No        | Dark logo for light background                    |
+| `defaultLanguage` | `String`           | No        | Default translation language to be used           |
+| `dark`            | `Boolean`          | No        | If true, enables dark mode. Default is light mode |
+| `theme`           | `[String, String]` | No        | Whitelabel theme                                  |
 
 </TabItem>
 
 <TabItem value="v7">
 
-| Parameter | Type | Description | Default | Mandatory |
-| --- | --- | --- | --- | --- |
-| `appName` | `String` | App name to be displayed in the User Flow Screens. | dApp's Website URL | No |
-| `logoLight` | `String` | App logo to be shown on the dark background (dark theme) | [web3auth-logo.svg](https://images.web3auth.io/web3auth-logo.svg) | No |
-| `logoDark` | `String` | App logo to be shown on the light background (light theme) | [web3auth-logo.svg](https://images.web3auth.io/web3auth-logo.svg) | No |
-| `defaultLanguage` | `Language` | Default Language to use. <br/> Choose from: <ul><li>`en` - English</li><li>`de` - German</li><li>`ja` - Japanese</li><li>`ko` - Korean</li><li>`zh` - Mandarin</li><li>`es` - Spanish</li><li>`fr` - French</li><li>`pt` - Portuguese</li><li>`nl` - Dutch</li></ul> | en - English | No |
-| `mode` | `ThemeModes` | Choose between `auto`, `light` or `dark` modes. | `auto` | No |
-| `theme` | `[String: String]` | Used to customize the theme of the login modal with the following options <br /> `'primary'` - To customize the primary color of the modal's content | `#0364FF` | No |
-| `appUrl` | `String` | App URL to be displayed in the User Flow Screens. | dApp's Website URL | No |
-| `useLogoLoader` | `Bool` | Loads the logo when loading | false | No |
+| Parameter         | Type               | Description                                                                                                                                                                                                                                                          | Default                                                           | Mandatory |
+| ----------------- | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | --------- |
+| `appName`         | `String`           | App name to be displayed in the User Flow Screens.                                                                                                                                                                                                                   | dApp's Website URL                                                | No        |
+| `logoLight`       | `String`           | App logo to be shown on the dark background (dark theme)                                                                                                                                                                                                             | [web3auth-logo.svg](https://images.web3auth.io/web3auth-logo.svg) | No        |
+| `logoDark`        | `String`           | App logo to be shown on the light background (light theme)                                                                                                                                                                                                           | [web3auth-logo.svg](https://images.web3auth.io/web3auth-logo.svg) | No        |
+| `defaultLanguage` | `Language`         | Default Language to use. <br/> Choose from: <ul><li>`en` - English</li><li>`de` - German</li><li>`ja` - Japanese</li><li>`ko` - Korean</li><li>`zh` - Mandarin</li><li>`es` - Spanish</li><li>`fr` - French</li><li>`pt` - Portuguese</li><li>`nl` - Dutch</li></ul> | en - English                                                      | No        |
+| `mode`            | `ThemeModes`       | Choose between `auto`, `light` or `dark` modes.                                                                                                                                                                                                                      | `auto`                                                            | No        |
+| `theme`           | `[String: String]` | Used to customize the theme of the login modal with the following options <br /> `'primary'` - To customize the primary color of the modal's content                                                                                                                 | `#0364FF`                                                         | No        |
+| `appUrl`          | `String`           | App URL to be displayed in the User Flow Screens.                                                                                                                                                                                                                    | dApp's Website URL                                                | No        |
+| `useLogoLoader`   | `Bool`             | Loads the logo when loading                                                                                                                                                                                                                                          | false                                                             | No        |
 
 </TabItem>
 
@@ -90,7 +90,7 @@ In v7, the whiteLabel parameter type and configuration has changed. And, as ment
 ```swift title="Usage"
 web3Auth = await Web3Auth(
   W3AInitParams(
-    clientId:"YOUR_CLIENT_ID",
+    clientId:"YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .testnet,
     // focus-start
     whiteLabel: W3AWhiteLabelData(
@@ -118,34 +118,34 @@ The `Web3Auth` constructor takes an object called `W3AInitParams` as input. Belo
 
 <TabItem value="v6">
 
-| Parameter | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| `clientId` | String | Yes | Your Web3Auth project ID |
-| `network` | Network | Yes | Web3Auth Network to run the authentication on, either `.mainnet`,`.aqua`, `.testnet` or `.cyan` |
-| `sdkUrl` | URL | No | Web3Auth sdk frontend to be used. This field is for advanced usage only and should not be changed. |
-| `redirectUrl` | String | No | redirectUrl to be passed to the SDK frontend. This field is for advanced usage only and should not be changed. |
-| `whiteLabel` | W3AWhiteLabelData | No | A configuration optional object to customize UI, branding, and translations for your brand. Refer to the WhiteLabeling section for more info. |
-| `loginConfig` | `[String : W3ALoginConfig]` | No | A configuration optional object to customize login flow. |
-| `useCoreKitKey` | `bool` | No | Use CoreKit Key to get core kit key. |
-| `chainNamespace` | `ChainNamespace` | No | Chain Namespace [`eip155` and `solana`] |
+| Parameter        | Type                        | Mandatory | Description                                                                                                                                   |
+| ---------------- | --------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`       | String                      | Yes       | Your Web3Auth project ID                                                                                                                      |
+| `network`        | Network                     | Yes       | Web3Auth Network to run the authentication on, either `.mainnet`,`.aqua`, `.testnet` or `.cyan`                                               |
+| `sdkUrl`         | URL                         | No        | Web3Auth sdk frontend to be used. This field is for advanced usage only and should not be changed.                                            |
+| `redirectUrl`    | String                      | No        | redirectUrl to be passed to the SDK frontend. This field is for advanced usage only and should not be changed.                                |
+| `whiteLabel`     | W3AWhiteLabelData           | No        | A configuration optional object to customize UI, branding, and translations for your brand. Refer to the WhiteLabeling section for more info. |
+| `loginConfig`    | `[String : W3ALoginConfig]` | No        | A configuration optional object to customize login flow.                                                                                      |
+| `useCoreKitKey`  | `bool`                      | No        | Use CoreKit Key to get core kit key.                                                                                                          |
+| `chainNamespace` | `ChainNamespace`            | No        | Chain Namespace [`eip155` and `solana`]                                                                                                       |
 
 </TabItem>
 
 <TabItem value="v7">
 
-| Parameter | Type | Mandatory | Description |
-| --- | --- | --- | --- |
-| `clientId` | String | Yes | Your Web3Auth project ID |
-| `network` | Network | Yes | Web3Auth Network to run the authentication on, either `.mainnet`,`.aqua`, `.testnet`, `.cyan`, or `.sapphire_devnet` or `.sapphire_mainnet` |
-| `buildEnv` | BuildEnv | No | Option for auth service, `production`, `staging`, `testing` available |
-| `sdkUrl` | URL | No | Web3Auth sdk frontend to be used. This field is for advanced usage only and should not be changed. |
-| `redirectUrl` | String | No | redirectUrl to be passed to the sdk frontend. This field is for advanced usage only and should not be changed. |
-| `whiteLabel` | W3AWhiteLabelData | No | A configuration optional object to customize UI, branding, and translations for your brand. Refer to the WhiteLabeling section for more info. |
-| `loginConfig` | `[String : W3ALoginConfig]` | No | A configuration optional object to customize login flow. |
-| `useCoreKitKey` | `bool` | No | Use CoreKit Key to get core kit key. |
-| `chainNamespace` | `ChainNamespace` | No | Chain Namespace [`eip155` and `solana`] |
-| `MfaSettings` | `MfaSettings` | No | Settings for Multi factor authentication |
-| `sessionTime` | Int | No | Session maintenance time |
+| Parameter        | Type                        | Mandatory | Description                                                                                                                                   |
+| ---------------- | --------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`       | String                      | Yes       | Your Web3Auth project ID                                                                                                                      |
+| `network`        | Network                     | Yes       | Web3Auth Network to run the authentication on, either `.mainnet`,`.aqua`, `.testnet`, `.cyan`, or `.sapphire_devnet` or `.sapphire_mainnet`   |
+| `buildEnv`       | BuildEnv                    | No        | Option for auth service, `production`, `staging`, `testing` available                                                                         |
+| `sdkUrl`         | URL                         | No        | Web3Auth sdk frontend to be used. This field is for advanced usage only and should not be changed.                                            |
+| `redirectUrl`    | String                      | No        | redirectUrl to be passed to the sdk frontend. This field is for advanced usage only and should not be changed.                                |
+| `whiteLabel`     | W3AWhiteLabelData           | No        | A configuration optional object to customize UI, branding, and translations for your brand. Refer to the WhiteLabeling section for more info. |
+| `loginConfig`    | `[String : W3ALoginConfig]` | No        | A configuration optional object to customize login flow.                                                                                      |
+| `useCoreKitKey`  | `bool`                      | No        | Use CoreKit Key to get core kit key.                                                                                                          |
+| `chainNamespace` | `ChainNamespace`            | No        | Chain Namespace [`eip155` and `solana`]                                                                                                       |
+| `MfaSettings`    | `MfaSettings`               | No        | Settings for Multi factor authentication                                                                                                      |
+| `sessionTime`    | Int                         | No        | Session maintenance time                                                                                                                      |
 
 </TabItem>
 
@@ -263,14 +263,14 @@ With V7, ExtraLoginOptions now has one more parameter which is `additionalParams
 
 <TabItem value="table">
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| `domain` | `string` | Your Auth0 account domain such as `example.auth0.com` or `example.mycompany.com` etc. **Use any random string in case of custom JWT login.** |
-| `client_id` | `string` | The Client ID found on your Auth0 Application settings page. **Use web3auth client id in case of custom JWT login.** |
-| `redirect_uri` | `string` | The default URL where Auth0 will redirect your browser to with the authentication result. |
-| `leeway` | `number` | The value in seconds used to account for clock skew in JWT expirations. |
-| `verifierIdField` | `string` | The field in jwt token which maps to verifier id. |
-| `isVerifierIdCaseSensitive` | `boolean` | Whether the verifier id field is case sensitive. Defaults to `true` |
+| Parameter                   | Type      | Description                                                                                                                                  |
+| --------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `domain`                    | `string`  | Your Auth0 account domain such as `example.auth0.com` or `example.mycompany.com` etc. **Use any random string in case of custom JWT login.** |
+| `client_id`                 | `string`  | The Client ID found on your Auth0 Application settings page. **Use web3auth client id in case of custom JWT login.**                         |
+| `redirect_uri`              | `string`  | The default URL where Auth0 will redirect your browser to with the authentication result.                                                    |
+| `leeway`                    | `number`  | The value in seconds used to account for clock skew in JWT expirations.                                                                      |
+| `verifierIdField`           | `string`  | The field in jwt token which maps to verifier id.                                                                                            |
+| `isVerifierIdCaseSensitive` | `boolean` | Whether the verifier id field is case sensitive. Defaults to `true`                                                                          |
 
 </TabItem>
 

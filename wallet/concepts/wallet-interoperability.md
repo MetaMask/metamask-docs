@@ -83,14 +83,14 @@ The following third-party libraries support EIP-6963:
 - [Reown AppKit](https://docs.reown.com/appkit/overview)
 - [MIPD Store](https://github.com/wevm/mipd)
 - [RainbowKit](https://www.rainbowkit.com)
-- [Web3-Onboard](https://onboard.blocknative.com)
-- [ConnectKit](https://docs.family.co/connectkit)
+- [Web3-Onboard](https://web3onboard.thirdweb.com)
+- [ConnectKit](https://family.co/docs/connectkit)
 
 ### MIPD Store
 
 The [MIPD Store](https://github.com/wevm/mipd) stores the wallet providers and enables you to
 subscribe to the store and retrieve the providers.
-Unlike [Wagmi](https://wagmi.sh) and [Web3-Onboard](https://onboard.blocknative.com/), which are
+Unlike [Wagmi](https://wagmi.sh) and [Web3-Onboard](https://web3onboard.thirdweb.com/), which are
 libraries that provide components and connectors for multiple wallets and depend on MetaMask SDK for
 integration, the MIPD Store is a utility library that makes it easier to work with EIP-6963 and
 supports TypeScript types.
