@@ -1,4 +1,4 @@
----
+tab---
 name: Trivy
 on:
   pull_request:
