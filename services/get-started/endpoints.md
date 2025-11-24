@@ -126,6 +126,13 @@ Include your authentication details when [making IPFS requests](../reference/ipf
 | Mainnet           | JSON-RPC over WebSocket | `wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://mantle-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 
+## Monad
+
+| Network           | Description             | URL                                              |
+|-------------------|-------------------------|--------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://monad-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Testnet           | JSON-RPC over HTTPS     | `https://monad-testnet.infura.io/v3/<YOUR-API-KEY>`  |
+
 ## opBNB
 
 | Network           | Transport type          | URL                                             |
