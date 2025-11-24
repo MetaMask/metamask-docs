@@ -32,7 +32,7 @@ Always do your own research before installing a Snap.
 
 - Remove any `console` logs, "to-do" comments, and unused permissions or methods.
 
-- Scan your Snap for security vulnerabilities using [Snapper](https://github.com/sayfer-io/Snapper) and
+- Scan your Snap for security vulnerabilities using [Snapper](https://.com/sayfer-io/Snapper) and
   resolve any reported issues.
 
 - If your Snap uses any of the following API methods related to key management, you must provide
