@@ -4,6 +4,8 @@ keywords: [SDK, Wagmi, JavaScript, authenticate, connect, sign, accounts, wallet
 toc_max_heading_level: 3
 ---
 
+import connectGif from '../../\_assets/connect.gif';
+
 # Manage user accounts
 
 Connect and manage user wallet sessions in your Wagmi dapp.
@@ -18,7 +20,7 @@ With MM Connect, you can:
 
 <p align="center">
   <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require("../../_assets/connect.gif").default} alt="Connect to MetaMask" width="450px" />
+    <img src={require(connectGif).default} alt="Connect to MetaMask" width="450px" />
   </a>
 </p>
 
@@ -28,7 +30,7 @@ Wagmi provides a simple, hook-based approach for handling wallet connections.
 For example:
 
 ```tsx title="Handle wallet connections"
-import { useAccount, useConnect, useDisconnect } from "wagmi"
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 function ConnectWallet() {
   const { address, isConnected } = useAccount()
@@ -46,13 +48,9 @@ function ConnectWallet() {
 
   return (
     <div>
-      {connectors.map((connector) => (
-        <button
-          key={connector.uid}
-          onClick={() => connect({ connector })}
-          disabled={isPending}
-        >
-          {isPending ? "Connecting..." : `Connect ${connector.name}`}
+      {connectors.map(connector => (
+        <button key={connector.uid} onClick={() => connect({ connector })} disabled={isPending}>
+          {isPending ? 'Connecting...' : `Connect ${connector.name}`}
         </button>
       ))}
     </div>
@@ -63,22 +61,22 @@ function ConnectWallet() {
 Wagmi provides a dedicated hook for handling account lifecycle events:
 
 ```tsx
-import { useAccountEffect } from "wagmi"
+import { useAccountEffect } from 'wagmi'
 
 function WatchAccount() {
   useAccountEffect({
     onConnect(data) {
-      console.log("Connected!", {
+      console.log('Connected!', {
         address: data.address,
         chainId: data.chainId,
-        isReconnected: data.isReconnected
+        isReconnected: data.isReconnected,
       })
     },
     onDisconnect() {
-      console.log("Disconnected!")
-    }
+      console.log('Disconnected!')
+    },
   })
-  
+
   return <div>Watching for account changes...</div>
 }
 ```
@@ -117,11 +115,11 @@ Learn how to [manage networks](manage-networks.md).
 
 The following table lists common authentication errors and their codes:
 
-| Error code | Description | Solution |
-|------------|-------------|----------|
-| `4001`   | User rejected request   | Show a message asking the user to approve the connection. |
-| `-32002` | Request already pending | Disable the connect button while the request is pending. |
-| `-32603` | Internal JSON-RPC error | Check if MetaMask is properly installed. |
+| Error code | Description             | Solution                                                  |
+| ---------- | ----------------------- | --------------------------------------------------------- |
+| `4001`     | User rejected request   | Show a message asking the user to approve the connection. |
+| `-32002`   | Request already pending | Disable the connect button while the request is pending.  |
+| `-32603`   | Internal JSON-RPC error | Check if MetaMask is properly installed.                  |
 
 ## Next steps
 

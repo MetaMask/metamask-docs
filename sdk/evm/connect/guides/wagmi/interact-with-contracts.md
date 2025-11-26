@@ -4,7 +4,7 @@ keywords: [SDK, Wagmi, JavaScript, batch, read, write, smart, contract, contract
 sidebar_label: Interact with contracts
 ---
 
-# Interact with smart contracts 
+# Interact with smart contracts
 
 Interact with smart contracts in your Wagmi dapp.
 With MM Connect, you can:
@@ -22,31 +22,31 @@ Wagmi provides dedicated hooks for smart contract interactions.
 The following example reads contract data using the [`useReadContract`](https://wagmi.sh/react/api/hooks/useReadContract) hook:
 
 ```tsx
-import { useReadContract } from "wagmi"
+import { useReadContract } from 'wagmi'
 
 function TokenBalance() {
-  const { 
+  const {
     data: balance,
     isError,
-    isLoading 
+    isLoading,
   } = useReadContract({
-    address: "0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2",
+    address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
     abi: [
       {
-        name: "balanceOf",
-        type: "function",
-        stateMutability: "view",
-        inputs: [{ name: "owner", type: "address" }],
-        outputs: [{ name: "balance", type: "uint256" }],
+        name: 'balanceOf',
+        type: 'function',
+        stateMutability: 'view',
+        inputs: [{ name: 'owner', type: 'address' }],
+        outputs: [{ name: 'balance', type: 'uint256' }],
       },
     ],
-    functionName: "balanceOf",
-    args: ["0x03A71968491d55603FFe1b11A9e23eF013f75bCF"],
+    functionName: 'balanceOf',
+    args: ['0x03A71968491d55603FFe1b11A9e23eF013f75bCF'],
   })
 
   if (isLoading) return <div>Loading balance...</div>
   if (isError) return <div>Error fetching balance</div>
-  
+
   return <div>Balance: {balance?.toString()}</div>
 }
 ```
@@ -113,7 +113,7 @@ In this example, four contract read calls are batched together.
 The results are returned as an array in the same order as the calls, allowing you to process each result accordingly.
 
 :::info
-"Batching" can also refer to [batching JSON-RPC requests](../javascript/batch-requests.md) using MM Connect's `metamask_batch` method, or [sending atomic batch transactions](../javascript/send-transactions/batch-transactions.md) in MetaMask.
+"Batching" can also refer to [batching JSON-RPC requests](../batch-requests.md) using MM Connect's `metamask_batch` method, or [sending atomic batch transactions](../send-transactions/batch-transactions.md) in MetaMask.
 :::
 
 ## Write to contracts
@@ -121,47 +121,36 @@ The results are returned as an array in the same order as the calls, allowing yo
 The following example writes to contracts using the [`useWriteContract`](https://wagmi.sh/react/api/hooks/useWriteContract) hook:
 
 ```tsx
-import { useWriteContract, useWaitForTransactionReceipt } from "wagmi"
+import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 
 function MintNFT() {
-  const { 
-    writeContract,
-    data: hash,
-    error,
-    isPending 
-  } = useWriteContract()
+  const { writeContract, data: hash, error, isPending } = useWriteContract()
 
-  const {
-    isLoading: isConfirming,
-    isSuccess: isConfirmed
-  } = useWaitForTransactionReceipt({
-    hash
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash,
   })
-  
+
   function mint() {
     writeContract({
-      address: "0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2",
+      address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
       abi: [
         {
-          name: "mint",
-          type: "function",
-          stateMutability: "nonpayable",
-          inputs: [{ name: "tokenId", type: "uint256" }],
+          name: 'mint',
+          type: 'function',
+          stateMutability: 'nonpayable',
+          inputs: [{ name: 'tokenId', type: 'uint256' }],
           outputs: [],
         },
       ],
-      functionName: "mint",
+      functionName: 'mint',
       args: [123n], // Token ID
     })
   }
-  
+
   return (
     <div>
-      <button 
-        onClick={mint}
-        disabled={isPending || isConfirming}
-      >
-        {isPending ? "Confirming..." : "Mint NFT"}
+      <button onClick={mint} disabled={isPending || isConfirming}>
+        {isPending ? 'Confirming...' : 'Mint NFT'}
       </button>
 
       {hash && (
@@ -205,17 +194,17 @@ Follow these best practices when interacting with smart contracts.
 
 ## Common errors
 
-| Error code | Description | Solution |
-|------------|-------------|----------|
-| `4001`   | User rejected transaction   | Show a retry option and a clear error message. |
-| `-32000` | Invalid input               | Validate the input data before sending.        |
-| `-32603` | Contract execution reverted | Check the contract conditions and handle the error gracefully. |
-| `-32002` | Request already pending     | Prevent multiple concurrent transactions.      |
+| Error code | Description                 | Solution                                                       |
+| ---------- | --------------------------- | -------------------------------------------------------------- |
+| `4001`     | User rejected transaction   | Show a retry option and a clear error message.                 |
+| `-32000`   | Invalid input               | Validate the input data before sending.                        |
+| `-32603`   | Contract execution reverted | Check the contract conditions and handle the error gracefully. |
+| `-32002`   | Request already pending     | Prevent multiple concurrent transactions.                      |
 
 ## Next steps
 
 See the following guides to add more functionality to your dapp:
 
-- [Manage user accounts](manage-user-accounts.md)
-- [Manage networks](manage-networks.md)
-- [Send transactions](send-transactions.md)
+- [Manage user accounts](../../guides/manage-user-accounts.md)
+- [Manage networks](../../guides/manage-networks.md)
+- [Send transactions](../../guides/send-transactions/index.md)

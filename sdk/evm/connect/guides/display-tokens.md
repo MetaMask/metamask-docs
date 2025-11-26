@@ -38,22 +38,22 @@ extension (not on mobile).
 To prompt users to add an ERC-20 token, you can add something like the following to your project script:
 
 ```javascript
-import { createEVMClient } from "@metamask/connect/evm";
+import { createEVMClient } from '@metamask/connect/evm'
 
-const evmClient = createEVMClient();
-const provider = evmClient.getProvider();
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
-const tokenAddress = "0xd00981105e61274c8a5cd5a88fe7e037d935b513"
-const tokenSymbol = "TUT"
+const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513'
+const tokenSymbol = 'TUT'
 const tokenDecimals = 18
-const tokenImage = "http://placekitten.com/200/300"
+const tokenImage = 'http://placekitten.com/200/300'
 
 try {
   // 'wasAdded' is a boolean. Like any RPC method, an error can be thrown.
   const wasAdded = await provider.request({
-    method: "wallet_watchAsset",
+    method: 'wallet_watchAsset',
     params: {
-      type: "ERC20",
+      type: 'ERC20',
       options: {
         // The address of the token.
         address: tokenAddress,
@@ -68,9 +68,9 @@ try {
   })
 
   if (wasAdded) {
-    console.log("Thanks for your interest!")
+    console.log('Thanks for your interest!')
   } else {
-    console.log("Your loss!")
+    console.log('Your loss!')
   }
 } catch (error) {
   console.log(error)
@@ -83,7 +83,7 @@ We recommend [detecting the user's network chain ID](manage-networks.md) and
 prompting them to switch chains, if necessary.
 :::
 
-For another example, [WatchToken](https://vittominacori.github.io/watch-token/create/) is a 
+For another example, [WatchToken](https://vittominacori.github.io/watch-token/create/) is a
 live web dapp that lets you enter your token details and share them using a web link.
 
 ## Display NFTs
@@ -101,10 +101,10 @@ The add NFT interfaces look like the following:
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../../_assets/watchasset-nft.png").default} alt="NFT confirmation" class="appScreen" />
+        <img src={require("../_assets/watchasset-nft.png").default} alt="NFT confirmation" class="appScreen" />
     </div>
     <div class="imgCol">
-        <img src={require("../../_assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
+        <img src={require("../_assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
     </div>
 </div>
 
@@ -114,30 +114,30 @@ To prompt users to add a single NFT, add something like the following to your pr
 `wallet_watchAsset` supports both ERC-721 and ERC-1155 NFT standards.
 
 ```javascript
-import { createEVMClient } from "@metamask/connect/evm";
+import { createEVMClient } from '@metamask/connect/evm'
 
-const evmClient = createEVMClient();
-const provider = evmClient.getProvider();
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
 try {
   // wasAdded is a boolean. Like any RPC method, an error can be thrown.
   const wasAdded = await provider.request({
-    method: "wallet_watchAsset",
+    method: 'wallet_watchAsset',
     params: {
-      type: "ERC721", // Or "ERC1155".
+      type: 'ERC721', // Or "ERC1155".
       options: {
         // The address of the token.
-        address: "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+        address: '0x742d35Cc6634C0532925a3b844Bc454e4438f44e',
         // ERC-721 or ERC-1155 token ID.
-        tokenId: "1",
+        tokenId: '1',
       },
     },
   })
 
   if (wasAdded) {
-    console.log("User successfully added the token!")
+    console.log('User successfully added the token!')
   } else {
-    console.log("User did not add the token.")
+    console.log('User did not add the token.')
   }
 } catch (error) {
   console.log(error)
