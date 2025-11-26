@@ -22,11 +22,11 @@ Private keys provide full control over user assets. Handle them securely:
 
 The provider offers different methods to access private keys depending on your blockchain needs:
 
-| Method             | Description                    | Use Case                                  |
-| ------------------ | ------------------------------ | ----------------------------------------- |
-| `private_key`      | Ethereum-formatted private key | EVM chains (Ethereum, Polygon, BSC, etc.) |
-| `solanaPrivateKey` | Solana private key             | Solana blockchain                         |
-| `private_key`      | Raw private key                | Any blockchain                            |
+| Method              | Description                    | Use Case                                  |
+| ------------------- | ------------------------------ | ----------------------------------------- |
+| `private_key`       | Ethereum-formatted private key | EVM chains (Ethereum, Polygon, BSC, etc.) |
+| `solana_privateKey` | Solana private key             | Solana blockchain                         |
+| `private_key`       | Raw private key                | Any blockchain                            |
 
 ## EVM Chains (Ethereum, Polygon, BSC, etc.)
 
@@ -104,8 +104,8 @@ const hash = await walletClient.sendTransaction({
 ### Get Solana Private Key
 
 ```javascript
-const solanaPrivateKey = await provider.request({ method: 'solanaPrivateKey' })
-console.log('Solana Private Key:', solanaPrivateKey) // Base58 encoded
+const solana_privateKey = await provider.request({ method: 'solana_privateKey' })
+console.log('Solana Private Key:', solana_privateKey) // Base58 encoded
 ```
 
 ### Use with Solana Web3.js
@@ -122,10 +122,10 @@ const {
 const bs58 = require('bs58')
 
 // Get private key
-const solanaPrivateKey = await provider.request({ method: 'solanaPrivateKey' })
+const solana_privateKey = await provider.request({ method: 'solana_privateKey' })
 
 // Create keypair from private key
-const secretKey = bs58.decode(solanaPrivateKey)
+const secretKey = bs58.decode(solana_privateKey)
 const keypair = Keypair.fromSecretKey(secretKey)
 
 // Connect to Solana
