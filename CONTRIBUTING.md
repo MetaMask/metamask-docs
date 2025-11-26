@@ -10,6 +10,7 @@ guide in some places.
 - [Contribution workflow](#contribution-workflow)
 - [Preview locally](#preview-locally)
 - [Style guide](#style-guide)
+- [Format links](#format-links)
 - [Add images](#add-images)
 - [Update the interactive API reference](#update-the-interactive-api-reference)
   - [Update `MetaMask/api-specs`](#update-metamaskapi-specs)
@@ -71,10 +72,10 @@ To contribute changes:
 
    > **Notes:**
    >
-   > - All documentation content is located in the `wallet`, `sdk`, `snaps`, `services`, and
-   >   `developer-tools` directories.
-   > - If you add a new documentation page, edit `wallet-sidebar.js`, `sdk-sidebar.js`, `snaps-sidebar.js`,
-   >   `services-sidebar.js`, or `dashboard-sidebar.js` to add the page to the
+   > - All documentation content is located in the `sdk`, `wallet`, `embedded-wallets`, `smart-accounts-kit`, `services`,
+   >   `developer-tools`, `snaps`, and `src/pages` directories.
+   > - If you add a new documentation page, edit `sdk-sidebar.js`, `wallet-sidebar.js`, `ew-sidebar.js`, `gator-sidebar.js`,
+   >   `services-sidebar.js`, `dashboard-sidebar.js`, or `snaps-sidebar.js` to add the page to the
    >   [sidebar](https://docs-template.consensys.io/create/configure-docusaurus#sidebar).
    > - If you delete, rename, or move a documentation file, add a
    >   [redirect](https://vercel.com/docs/edge-network/redirects#configuration-redirects).
@@ -116,10 +117,38 @@ To contribute changes:
 
 Refer to the [Consensys documentation style guide](https://docs-template.consensys.net/contribute/style-guide).
 
+## Format links
+
+Most links in the Markdown pages use *relative file paths*, for example:
+
+```md
+You can enable users to create a [MetaMask smart account](../../concepts/smart-accounts.md) directly in your dapp.
+```
+
+However, when linking between different product sections or using the `CardList` component, use *absolute URL paths*. For example:
+
+```md
+When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their
+externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts).
+```
+
+```md
+<CardList
+  items={[
+    {
+      href: '/snaps/learn/about-snaps',
+      title: 'About Snaps',
+      description: 'See a high-level, technical overview of the Snaps system.',
+    },
+    ...
+  ]}
+/>
+```
+
 ## Add images
 
-All images are located in the `wallet/assets`, `sdk/_assets`, `snaps/assets`, `services/images`, and
-`developer-tools/images` directories.
+All images are located in the `sdk/_assets`, `wallet/assets`, `smart-accounts-kit/assets`, `services/images`,
+`developer-tools/images`, `snaps/assets`, and `static/img` directories.
 When adding a new image, such as a screenshot or diagram, make sure the image has a white or
 `#1b1b1d` color background in order for it to be compatible with the site's light and dark modes.
 

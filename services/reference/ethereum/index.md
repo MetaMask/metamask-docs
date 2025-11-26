@@ -24,12 +24,12 @@ The [official Ethereum documentation](https://ethereum.org/en/) for more informa
 <CardList
   items={[
     {
-      href: "./quickstart",
+      href: "/services/reference/ethereum/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Ethereum network."
     },
     {
-      href: "./json-rpc-methods",
+      href: "/services/reference/ethereum/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Ethereum network."
     },

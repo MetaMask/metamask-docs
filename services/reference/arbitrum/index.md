@@ -33,12 +33,12 @@ Select one of the following options to get started with the Arbitrum network:
 <CardList
   items={[
     {
-      href: "./quickstart",
+      href: "/services/reference/arbitrum/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect to Arbitrum and make calls to the network."
     },
     {
-      href: "./json-rpc-methods",
+      href: "/services/reference/arbitrum/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Arbitrum network."
     },

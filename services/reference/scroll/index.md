@@ -32,12 +32,12 @@ See the [official Scroll documentation](https://docs.scroll.io/en/home/) for mor
 <CardList
   items={[
     {
-      href: "./quickstart",
+      href: "/services/reference/scroll/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Scroll network."
     },
     {
-      href: "./json-rpc-methods",
+      href: "/services/reference/scroll/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Scroll network."
     },

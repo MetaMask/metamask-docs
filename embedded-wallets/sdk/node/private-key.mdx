@@ -24,7 +24,7 @@ The provider offers different methods to access private keys depending on your b
 
 | Method             | Description                    | Use Case                                  |
 | ------------------ | ------------------------------ | ----------------------------------------- |
-| `eth_private_key`  | Ethereum-formatted private key | EVM chains (Ethereum, Polygon, BSC, etc.) |
+| `private_key`      | Ethereum-formatted private key | EVM chains (Ethereum, Polygon, BSC, etc.) |
 | `solanaPrivateKey` | Solana private key             | Solana blockchain                         |
 | `private_key`      | Raw private key                | Any blockchain                            |
 
@@ -33,7 +33,7 @@ The provider offers different methods to access private keys depending on your b
 ### Get Ethereum Private Key
 
 ```javascript
-const privateKey = await provider.request({ method: 'eth_private_key' })
+const privateKey = await provider.request({ method: 'private_key' })
 console.log('Private Key:', privateKey) // 0x1234567890abcdef...
 ```
 
@@ -43,7 +43,7 @@ console.log('Private Key:', privateKey) // 0x1234567890abcdef...
 const { ethers } = require('ethers')
 
 // Get private key
-const privateKey = await provider.request({ method: 'eth_private_key' })
+const privateKey = await provider.request({ method: 'private_key' })
 
 // Create wallet instance
 const wallet = new ethers.Wallet(privateKey)
@@ -74,7 +74,7 @@ const { privateKeyToAccount } = require('viem/accounts')
 const { mainnet } = require('viem/chains')
 
 // Get private key
-const privateKey = await provider.request({ method: 'eth_private_key' })
+const privateKey = await provider.request({ method: 'private_key' })
 
 // Create account from private key
 const account = privateKeyToAccount(privateKey)
@@ -185,7 +185,7 @@ When disabled, private key methods will throw an error:
 
 ```javascript
 try {
-  const privateKey = await provider.request({ method: 'eth_private_key' })
+  const privateKey = await provider.request({ method: 'private_key' })
 } catch (error) {
   console.error('Private key export disabled:', error.message)
 }

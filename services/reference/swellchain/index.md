@@ -31,12 +31,12 @@ Select an option below to get started with the Swellchain network.
 <CardList
   items={[
     {
-      href: "./quickstart",
+      href: "/services/reference/swellchain/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to Swellchain."
     },
     {
-      href: "./json-rpc-methods",
+      href: "/services/reference/swellchain/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with Swellchain."
     },
