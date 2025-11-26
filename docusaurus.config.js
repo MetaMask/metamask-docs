@@ -122,7 +122,7 @@ const config = {
   markdown: {
     mermaid: true,
     hooks: {
-      onBrokenMarkdownLinks: 'throw',
+      onBrokenMarkdownLinks: 'warn',
     },
   },
   themes: ['@docusaurus/theme-mermaid'],

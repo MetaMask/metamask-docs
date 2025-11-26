@@ -12,7 +12,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 <p align="center">
   <!-- a href="https://metamask-wagmi-demo.vercel.app/" target="_blank" -->
-    <img src={require("../../_assets/quickstart.jpg").default} alt="Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart.jpg").default} alt="Quickstart" width="600px" class="appScreen" />
   <!-- /a -->
 </p>
 
@@ -40,15 +40,15 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
     <summary>Degit vs. Git clone</summary>
     <div>
 
-    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
+   `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-    Alternatively, you can use `git clone`, which will download the entire repository.
-    To do so, clone the MM Connect examples repository and navigate into the `quickstarts/wagmi` directory:
+   Alternatively, you can use `git clone`, which will download the entire repository.
+   To do so, clone the MM Connect examples repository and navigate into the `quickstarts/wagmi` directory:
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-sdk-examples
-    cd metamask-sdk-examples/quickstarts/wagmi
-    ```
+   ```bash
+   git clone https://github.com/MetaMask/metamask-sdk-examples
+   cd metamask-sdk-examples/quickstarts/wagmi
+   ```
 
     </div>
     </details>
@@ -89,7 +89,7 @@ import { metaMask } from 'wagmi/connectors'
 ### 3. Configure your project
 
 Set up your configuration with the desired chains and connectors.
-In the following example, set the [`infuraAPIKey`](../../../../reference/options.md#infuraapikey) option to your [Infura API key](/developer-tools/dashboard/get-started/create-api) to use for RPC requests:
+In the following example, set the `infuraAPIKey` option to your [Infura API key](/developer-tools/dashboard/get-started/create-api) to use for RPC requests:
 
 ```jsx
 const config = createConfig({
@@ -179,10 +179,10 @@ const config = createConfig({
 
 After completing the basic setup, you can follow these guides to add your own functionality:
 
-- [Manage user accounts](manage-user-accounts.md)
-- [Manage networks](manage-networks.md)
-- [Send transactions](send-transactions.md)
-- [Interact with smart contracts](interact-with-contracts.md)
+- [Manage user accounts](../guides/manage-user-accounts.md)
+- [Manage networks](../guides/manage-networks.md)
+- [Send transactions](../guides/send-transactions/index.md)
+- [Interact with smart contracts](../guides/interact-with-contracts.md)
 
 ## Live example
 

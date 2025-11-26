@@ -13,7 +13,7 @@ MetaMask parses the message and gives the user a friendly interface prompting th
 your dapp:
 
 <p align="center">
-    <img src={require("../../../_assets/siwe.png").default} alt="Sign-in with Ethereum request" class="appScreen" />
+    <img height="500" src={require("../../_assets/siwe.png").default} alt="Sign-in with Ethereum request" class="appScreen" />
 </p>
 
 ## Domain binding
@@ -31,10 +31,10 @@ This is to not break existing dapps that may have use cases for mismatched domai
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../../../_assets/siwe-bad-domain.png").default} alt="Sign-in bad domain" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain.png").default} alt="Sign-in bad domain" class="appScreen" />
     </div>
     <div class="imgCol">
-        <img src={require("../../../_assets/siwe-bad-domain-2.png").default} alt="Sign-in bad domain pop-up" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain-2.png").default} alt="Sign-in bad domain pop-up" class="appScreen" />
     </div>
 </div>
 
@@ -44,17 +44,17 @@ The following is an example of setting up SIWE with MetaMask using
 [`personal_sign`](../../../reference/json-rpc-api/index.md):
 
 ```javascript title="index.js"
-import { createEVMClient } from "@metamask/connect/evm";
+import { createEVMClient } from '@metamask/connect/evm'
 
-const evmClient = createEVMClient();
-const provider = evmClient.getProvider();
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
-const siweSign = async (siweMessage) => {
+const siweSign = async siweMessage => {
   try {
     const from = accounts[0]
-    const msg = `0x${Buffer.from(siweMessage, "utf8").toString("hex")}`
+    const msg = `0x${Buffer.from(siweMessage, 'utf8').toString('hex')}`
     const sign = await provider.request({
-      method: "personal_sign",
+      method: 'personal_sign',
       params: [msg, from],
     })
     siweResult.innerHTML = sign

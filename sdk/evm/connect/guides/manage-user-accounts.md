@@ -19,7 +19,7 @@ With MM Connect, you can:
 
 <p align="center">
   <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require("../../_assets/connect.gif").default} alt="Connect to MetaMask" width="450px" />
+    <img src={require("../_assets/connect.gif").default} alt="Connect to MetaMask" width="450px" />
   </a>
 </p>
 
@@ -31,36 +31,36 @@ and [`accountsChanged`](../../reference/provider-api.md#accountschanged) provide
 For example:
 
 ```javascript
-import { createEVMClient } from "@metamask/connect/evm";
+import { createEVMClient } from '@metamask/connect/evm'
 
-const evmClient = createEVMClient();
-const provider = evmClient.getProvider();
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
 // Connect wallet
 async function connectWallet() {
   try {
     // Disable button while request is pending
-    document.getElementById("connectBtn").disabled = true;
-    
-    const accounts = await provider.request({ 
-      method: "eth_requestAccounts" 
-    });
-    
-    const account = accounts[0];
-    console.log("Connected:", account);
-    
+    document.getElementById('connectBtn').disabled = true
+
+    const accounts = await provider.request({
+      method: 'eth_requestAccounts',
+    })
+
+    const account = accounts[0]
+    console.log('Connected:', account)
+
     // Update UI
-    document.getElementById("status").textContent = `Connected: ${account}`;
-    document.getElementById("connectBtn").style.display = "none";
-    document.getElementById("disconnectBtn").style.display = "block";
+    document.getElementById('status').textContent = `Connected: ${account}`
+    document.getElementById('connectBtn').style.display = 'none'
+    document.getElementById('disconnectBtn').style.display = 'block'
   } catch (err) {
     if (err.code === 4001) {
-      console.log("User rejected connection");
+      console.log('User rejected connection')
     } else {
-      console.error(err);
+      console.error(err)
     }
   } finally {
-    document.getElementById("connectBtn").disabled = false;
+    document.getElementById('connectBtn').disabled = false
   }
 }
 
@@ -69,22 +69,22 @@ async function disconnectWallet() {
   try {
     await evmClient.terminate()
   } catch (err) {
-    console.error("Error with disconnecting:", err)
+    console.error('Error with disconnecting:', err)
   }
 }
 
 // Handle account changes
-provider.on("accountsChanged", (accounts) => {
+provider.on('accountsChanged', accounts => {
   if (accounts.length === 0) {
     // User disconnected
-    document.getElementById("status").textContent = "Not connected";
-    document.getElementById("connectBtn").style.display = "block";
-    document.getElementById("disconnectBtn").style.display = "none";
+    document.getElementById('status').textContent = 'Not connected'
+    document.getElementById('connectBtn').style.display = 'block'
+    document.getElementById('disconnectBtn').style.display = 'none'
   } else {
     // Account changed
-    document.getElementById("status").textContent = `Connected: ${accounts[0]}`;
+    document.getElementById('status').textContent = `Connected: ${accounts[0]}`
   }
-});
+})
 ```
 
 Display connect and disconnect buttons in HTML:
@@ -93,9 +93,7 @@ Display connect and disconnect buttons in HTML:
 <div>
   <div id="status">Not connected</div>
   <button id="connectBtn" onclick="connectWallet()">Connect MetaMask</button>
-  <button id="disconnectBtn" style="display: none" onclick="disconnectWallet()">
-    Disconnect
-  </button>
+  <button id="disconnectBtn" style="display: none" onclick="disconnectWallet()">Disconnect</button>
 </div>
 ```
 
@@ -105,22 +103,20 @@ You can use MM Connect's [`connectAndSign`](../../reference/methods.md#connectan
 For example:
 
 ```js
-import { createEVMClient } from "@metamask/connect/evm";
+import { createEVMClient } from '@metamask/connect/evm'
 
-const evmClient = createEVMClient();
+const evmClient = createEVMClient()
 
 async function handleConnectAndSign() {
   try {
-    const signature = await evmClient.connectAndSign({ msg: "Hello in one go!" })
-    console.log("Signature:", signature)
+    const signature = await evmClient.connectAndSign({ msg: 'Hello in one go!' })
+    console.log('Signature:', signature)
   } catch (err) {
-    console.error("Error with connectAndSign:", err)
+    console.error('Error with connectAndSign:', err)
   }
 }
 
-document
-  .getElementById("connectSignBtn")
-  .addEventListener("click", handleConnectAndSign)
+document.getElementById('connectSignBtn').addEventListener('click', handleConnectAndSign)
 ```
 
 The following HTML displays a **Connect & Sign** button:
@@ -168,11 +164,11 @@ Learn how to [manage networks](manage-networks.md).
 
 The following table lists common authentication errors and their codes:
 
-| Error code | Description | Solution |
-|------------|-------------|----------|
-| `4001`   | User rejected request   | Show a message asking the user to approve the connection. |
-| `-32002` | Request already pending | Disable the connect button while the request is pending. |
-| `-32603` | Internal JSON-RPC error | Check if MetaMask is properly installed. |
+| Error code | Description             | Solution                                                  |
+| ---------- | ----------------------- | --------------------------------------------------------- |
+| `4001`     | User rejected request   | Show a message asking the user to approve the connection. |
+| `-32002`   | Request already pending | Disable the connect button while the request is pending.  |
+| `-32603`   | Internal JSON-RPC error | Check if MetaMask is properly installed.                  |
 
 ## Next steps
 
