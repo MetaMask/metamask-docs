@@ -100,7 +100,7 @@ const sessionAccount = privateKeyToAccount("0x...");
 Currently, ERC-7715 does not support automatically upgrading a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md). Therefore, you must 
 ensure that the user is upgraded to a smart account before requesting ERC-7715 permissions.
 
-If the user has not yet been upgraded, you can handle the upgrade [programmatically](/sdk/evm/connect/guides/javascript/send-transactions/batch-transactions) or ask the 
+If the user has not yet been upgraded, you can handle the upgrade [programmatically](/sdk/evm/connect/guides/send-transactions/batch-transactions) or ask the 
 user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
 
 :::info Why is a Smart Account upgrade is required?

@@ -45,7 +45,7 @@ If the provider isn't connected, the page must be reloaded to re-establish the c
 See the [`connect`](#connect) and [`disconnect`](#disconnect) events for more information.
 
 :::note
-This method is unrelated to [managing user accounts](../guides/javascript/manage-user-accounts.md).
+This method is unrelated to [managing user accounts](../guides/manage-user-accounts.md).
 In the provider interface, "connected" and "disconnected" refer to whether the provider can make RPC
 requests to the current chain.
 :::
@@ -89,23 +89,23 @@ The following is an example of using `request()` to call
 ```javascript
 provider // Or window.ethereum if you don't support EIP-6963.
   .request({
-    method: "eth_sendTransaction",
+    method: 'eth_sendTransaction',
     params: [
       {
-        from: "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
-        to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-        gas: "0x76c0", // 30400
-        gasPrice: "0x9184e72a000", // 10000000000000
-        value: "0x9184e72a", // 2441406250
-        data: "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675",
+        from: '0xb60e8dd61c5d32be8058bb8eb970870f07233155',
+        to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+        gas: '0x76c0', // 30400
+        gasPrice: '0x9184e72a000', // 10000000000000
+        value: '0x9184e72a', // 2441406250
+        data: '0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675',
       },
     ],
   })
-  .then((result) => {
+  .then(result => {
     // The result varies by RPC method.
     // For example, this method returns a transaction hash hexadecimal string upon success.
   })
-  .catch((error) => {
+  .catch(error => {
     // If the request fails, the Promise rejects with an error.
   })
 ```
@@ -150,12 +150,12 @@ function handleAccountsChanged(accounts) {
 }
 
 provider // Or window.ethereum if you don't support EIP-6963.
-  .on("accountsChanged", handleAccountsChanged)
+  .on('accountsChanged', handleAccountsChanged)
 
 // Later
 
 provider // Or window.ethereum if you don't support EIP-6963.
-  .removeListener("accountsChanged", handleAccountsChanged)
+  .removeListener('accountsChanged', handleAccountsChanged)
 ```
 
 ### `accountsChanged`
@@ -174,7 +174,7 @@ Callers are identified by their URL origin, which means that all sites with the 
 the same permissions.
 
 This means that the provider emits `accountsChanged` when the user's exposed account address changes.
-Listen to this event to [handle accounts](../guides/javascript/manage-user-accounts.md).
+Listen to this event to [handle accounts](../guides/manage-user-accounts.md).
 
 ### `chainChanged`
 
@@ -184,7 +184,7 @@ provider // Or window.ethereum if you don't support EIP-6963.
 ```
 
 The provider emits this event when the currently connected chain changes.
-Listen to this event to [detect a user's network](../guides/javascript/manage-networks.md).
+Listen to this event to [detect a user's network](../guides/manage-networks.md).
 
 ### `connect`
 
@@ -248,15 +248,15 @@ In the following example `removeListener` is used to remove the `connect` and `a
 // Use window.ethereum instead of provider if EIP-6963 is not supported.
 
 // Add listeners
-provider.on("_initialized", updateWalletAndAccounts)
-provider.on("connect", updateWalletAndAccounts)
-provider.on("accountsChanged", updateWallet)
-provider.on("chainChanged", updateWalletAndAccounts)
-provider.on("disconnect", disconnectWallet)
+provider.on('_initialized', updateWalletAndAccounts)
+provider.on('connect', updateWalletAndAccounts)
+provider.on('accountsChanged', updateWallet)
+provider.on('chainChanged', updateWalletAndAccounts)
+provider.on('disconnect', disconnectWallet)
 
 // Remove individual listeners
-provider.removeListener("connect", updateWalletAndAccounts)
-provider.removeListener("accountsChanged", updateWallet)
+provider.removeListener('connect', updateWalletAndAccounts)
+provider.removeListener('accountsChanged', updateWallet)
 ```
 
 The first argument of `removeListener` is the event name, and the second argument is
@@ -279,11 +279,11 @@ You can use the `removeListener` method to safely remove specific listeners.
 // Use window.ethereum instead of provider if EIP-6963 is not supported.
 
 // Add listeners
-provider.on("_initialized", updateWalletAndAccounts)
-provider.on("connect", updateWalletAndAccounts)
-provider.on("accountsChanged", updateWallet)
-provider.on("chainChanged", updateWalletAndAccounts)
-provider.on("disconnect", disconnectWallet)
+provider.on('_initialized', updateWalletAndAccounts)
+provider.on('connect', updateWalletAndAccounts)
+provider.on('accountsChanged', updateWallet)
+provider.on('chainChanged', updateWalletAndAccounts)
+provider.on('disconnect', disconnectWallet)
 
 // Remove all listeners
 provider.removeAllListeners()

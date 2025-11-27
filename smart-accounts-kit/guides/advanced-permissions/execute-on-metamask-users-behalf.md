@@ -100,7 +100,7 @@ Advanced Permissions support the automatic upgrading of a MetaMask user's accoun
 when using MetaMask Flask version 13.9.0 or later. For earlier versions, you must ensure that the 
 user is upgraded to a smart account before requesting Advanced Permissions.
 
-If the user has not yet been upgraded, you can handle the upgrade [programmatically](/sdk/evm/connect/guides/javascript/send-transactions/batch-transactions) or ask the 
+If the user has not yet been upgraded, you can handle the upgrade [programmatically](/sdk/evm/connect/guides/send-transactions/batch-transactions) or ask the 
 user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
 
 :::info Why is a Smart Account upgrade is required?

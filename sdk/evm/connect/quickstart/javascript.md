@@ -14,7 +14,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
-    <img src={require("../../_assets/quickstart-javascript.png").default} alt="JavaScript SDK Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-javascript.png").default} alt="JavaScript SDK Quickstart" width="600px" class="appScreen" />
   </a>
 </p>
 
@@ -43,15 +43,15 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
     <summary>Degit vs. Git clone</summary>
     <div>
 
-    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-    
-    Alternatively, you can use `git clone`, which will download the entire repository.
-    To do so, clone the MM Connect examples repository and navigate into the `quickstarts/javascript` directory:
+   `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-sdk-examples
-    cd metamask-sdk-examples/quickstarts/javascript
-    ```
+   Alternatively, you can use `git clone`, which will download the entire repository.
+   To do so, clone the MM Connect examples repository and navigate into the `quickstarts/javascript` directory:
+
+   ```bash
+   git clone https://github.com/MetaMask/metamask-sdk-examples
+   cd metamask-sdk-examples/quickstarts/javascript
+   ```
 
     </div>
     </details>
@@ -100,13 +100,13 @@ The following are examples of using MM Connect in various JavaScript environment
 <TabItem value="Web dapps">
 
 ```javascript
-import { createEVMClient } from "@metamask/connect/evm"
+import { createEVMClient } from '@metamask/connect/evm'
 
 const evmClient = createEVMClient({
   dappMetadata: {
-    name: "Example JavaScript dapp",
+    name: 'Example JavaScript dapp',
     url: window.location.href,
-    iconUrl: "https://mydapp.com/icon.png" // Optional
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
   infuraAPIKey: process.env.INFURA_API_KEY,
 })
@@ -121,9 +121,9 @@ const evmClient = createEVMClient({
   <script>
     const evmClient = createEVMClient({
       dappMetadata: {
-        name: "Example JavaScript dapp",
+        name: 'Example JavaScript dapp',
         url: window.location.href,
-        iconUrl: "https://mydapp.com/icon.png" // Optional
+        iconUrl: 'https://mydapp.com/icon.png', // Optional
       },
       infuraAPIKey: process.env.INFURA_API_KEY,
     })
@@ -136,8 +136,8 @@ const evmClient = createEVMClient({
 
 These examples configure MM Connect with the following options:
 
-- [`dappMetadata`](../../../../reference/options.md#dappmetadata) - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
-- [`infuraAPIKey`](../../../../reference/options.md#infuraapikey) - Enables read-only RPC and load‑balancing.
+- `dappMetadata` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
+- `infuraAPIKey` - Enables read-only RPC and load‑balancing.
   Set this option to your [Infura API key](/developer-tools/dashboard/get-started/create-api).
 
 ### 3. Connect and use provider
@@ -148,28 +148,28 @@ Connect to MetaMask and get the provider for RPC requests:
 const provider = evmClient.getProvider()
 
 const accounts = await evmClient.connect()
-console.log("Connected account:", accounts[0])
+console.log('Connected account:', accounts[0])
 
 const result = await provider.request({
-  method: "eth_accounts",
+  method: 'eth_accounts',
   params: [],
 })
-console.log("eth_accounts result:", result)
+console.log('eth_accounts result:', result)
 ```
 
 `evmClient.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
 
-Use `provider.request()` for arbitrary [JSON-RPC requests](../../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](batch-requests.md) via `metamask_batch`.
+Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
 
 ## Common MM Connect methods at a glance
 
-| Method                                                                            | Description                                              |
-| --------------------------------------------------------------------------------- | -------------------------------------------------------- |
-| [`connect()`](../../reference/methods.md#connect)                                | Triggers wallet connection flow                          |
-| [`connectAndSign({ msg: "..." })`](../../reference/methods.md#connectandsign)    | Connects and prompts user to sign a message              |
-| [`getProvider()`](../../reference/methods.md#getprovider)                        | Returns the provider object for RPC requests             |
-| [`provider.request({ method, params })`](../../reference/provider-api.md#request) | Calls any Ethereum JSON‑RPC method                       |
-| [Batched RPC](batch-requests.md)                                        | Use `metamask_batch` to group multiple JSON-RPC requests |
+| Method                                                                         | Description                                              |
+| ------------------------------------------------------------------------------ | -------------------------------------------------------- |
+| [`connect()`](../reference/methods.md#connect)                                 | Triggers wallet connection flow                          |
+| [`connectAndSign({ msg: "..." })`](../reference/methods.md#connectandsign)     | Connects and prompts user to sign a message              |
+| [`getProvider()`](../reference/methods.md#getprovider)                         | Returns the provider object for RPC requests             |
+| [`provider.request({ method, params })`](../reference/provider-api.md#request) | Calls any Ethereum JSON‑RPC method                       |
+| [Batched RPC](../guides/metamask-exclusive/batch-requests.md)                                     | Use `metamask_batch` to group multiple JSON-RPC requests |
 
 ## Usage example
 
@@ -179,7 +179,7 @@ const accounts = await evmClient.connect()
 
 // 2. Connect and sign in one step
 const signResult = await evmClient.connectAndSign({
-  msg: "Sign in to the dapp",
+  msg: 'Sign in to the dapp',
 })
 
 // 3. Get provider for RPC requests
@@ -187,14 +187,14 @@ const provider = evmClient.getProvider()
 
 // 4. Make an RPC request
 const result = await provider.request({
-  method: "eth_accounts",
+  method: 'eth_accounts',
   params: [],
 })
 
 // 5. Batch multiple RPC requests
 const batchResults = await provider.request({
-  method: "metamask_batch",
-  params: [{ method: "eth_accounts" }, { method: "eth_chainId" }],
+  method: 'metamask_batch',
+  params: [{ method: 'eth_accounts' }, { method: 'eth_chainId' }],
 })
 ```
 
