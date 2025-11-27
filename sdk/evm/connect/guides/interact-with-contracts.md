@@ -19,9 +19,7 @@ With MM Connect, you can:
 - **Manage transaction states**.
 - **Handle contract errors**.
 
-## Smart Contract
-
-### Solidity Contract
+## Solidity smart contract
 
 In this example, we'll be demonstrating how to use MetaMask Connect SDK with viem, web3.js, ethers.js or with ETH APIs to interact with Solidity smart contracts.
 
@@ -45,7 +43,7 @@ contract HelloWorld {
 }
 ```
 
-### Read From Contract
+## Read from contracts
 
 <Tabs
 defaultValue="viem"
@@ -59,12 +57,11 @@ values={[
 <TabItem value="ethers">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from '@metamask/connect/evm'
 import { ethers } from 'ethers'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
 const ethersProvider = new ethers.BrowserProvider(provider)
 const signer = await ethersProvider.getSigner()
@@ -105,12 +102,11 @@ const message = await contract.message()
 <TabItem value="web3">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from '@metamask/connect/evm'
 import { Web3 } from 'web3'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
 const web3 = new Web3(provider)
 
@@ -146,13 +142,12 @@ const message = await contract.methods.message().call()
 <TabItem value="viem">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from '@metamask/connect/evm'
 import { createPublicClient, custom } from 'viem'
 import { sepolia } from 'viem/chains'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
 const publicClient = createPublicClient({
   chain: sepolia,
@@ -181,11 +176,6 @@ const contractABI = [
   },
 ]
 
-const publicClient = createPublicClient({
-  chain: sepolia,
-  transport: custom(provider),
-})
-
 const contractAddress = '0x8AA6820B3F197384874fAdb355361758258cb981' // On Sepolia testnet, replace with your contract address
 
 // Read message from smart contract
@@ -200,19 +190,17 @@ const message = await publicClient.readContract({
 <TabItem value="eth_api">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
 import { createEVMClient } from '@metamask/connect/evm'
-
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
 
 const evmClient = createEVMClient()
 const provider = evmClient.getProvider()
 
 async function getMessage(contractAddress, userAddress) {
   try {
+    // Create function signature for balanceOf(address)
     const functionSignature = '0x06fdde03'
+    // Pad address to 32 bytes
+    const encodedAddress = userAddress.slice(2).padStart(64, '0')
     const result = await provider.request({
       method: 'eth_call',
       params: [
@@ -244,7 +232,7 @@ async function displayMessage() {
 </TabItem>
 </Tabs>
 
-### Write to Contract
+## Write to contracts
 
 <Tabs
 defaultValue="viem"
@@ -258,12 +246,11 @@ values={[
 <TabItem value="ethers">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from '@metamask/connect/evm'
 import { ethers } from 'ethers'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
 const ethersProvider = new ethers.BrowserProvider(provider)
 const signer = await ethersProvider.getSigner()
@@ -307,12 +294,11 @@ const receipt = await tx.wait()
 <TabItem value="web3">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from '@metamask/connect/evm'
 import { Web3 } from 'web3'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
 const web3 = new Web3(provider)
 
@@ -337,9 +323,12 @@ const receipt = await tx.wait()
 <TabItem value="viem">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from '@metamask/connect/evm'
 import { createPublicClient, custom } from 'viem'
 import { sepolia } from 'viem/chains'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
 const contractABI = [
   {
@@ -364,16 +353,16 @@ const contractABI = [
 ]
 const publicClient = createPublicClient({
   chain: sepolia,
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const walletClient = createWalletClient({
   chain: sepolia,
-  transport: custom(this.provider),
+  transport: custom(provider),
 })
 
 const contractAddress = '0x8AA6820B3F197384874fAdb355361758258cb981' // On Sepolia, replace with your contract address
-address = await walletClient.getAddresses()
+const address = await walletClient.getAddresses()
 
 // Submit transaction to the blockchain
 const hash = await walletClient.writeContract({
@@ -392,12 +381,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 <TabItem value="eth_api">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
 import { createEVMClient } from '@metamask/connect/evm'
-
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
 
 const evmClient = createEVMClient()
 const provider = evmClient.getProvider()

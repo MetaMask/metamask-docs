@@ -4,8 +4,6 @@ keywords: [SDK, Wagmi, JavaScript, authenticate, connect, sign, accounts, wallet
 toc_max_heading_level: 3
 ---
 
-import connectGif from '../../\_assets/connect.gif';
-
 # Manage user accounts
 
 Connect and manage user wallet sessions in your Wagmi dapp.
@@ -17,12 +15,6 @@ With MM Connect, you can:
 - **Listen for account changes** in real time.
 - **Manage wallet sessions** (connect/disconnect).
 - **Support multiple wallet types** (extension, mobile app).
-
-<p align="center">
-  <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require(connectGif).default} alt="Connect to MetaMask" width="450px" />
-  </a>
-</p>
 
 ## Connect wallet
 

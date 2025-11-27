@@ -4,8 +4,6 @@ keywords: [SDK, Wagmi, JavaScript, detect, switch, add, network, networks, dapp]
 toc_max_heading_level: 2
 ---
 
-import networkGif from '../../\_assets/network.gif';
-
 # Manage networks
 
 Manage networks in your Wagmi dapp.
@@ -15,12 +13,6 @@ With MM Connect, you can:
 - **Switch between networks** programmatically.
 - **Add new networks** to MetaMask.
 - **Handle common network-related errors**.
-
-<p align="center">
-  <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require(networkGif).default} alt="Switch Networks" width="450px" />
-  </a>
-</p>
 
 ## Detect and switch networks
 
