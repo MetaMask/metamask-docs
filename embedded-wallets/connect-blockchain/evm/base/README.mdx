@@ -1,15 +1,19 @@
 ---
-title: Integrate Embedded Wallets with the Base Chain (Coinbase) Blockchain
-sidebar_label: Base
-hide_table_of_contents: true
+title: Integrate Embedded Wallets with the Base Blockchain
+sidebar_label: Overview
+
+keywords:
+  [base, wallet, integration, web3auth, API, SDK, authentication, blockchain, solution, development]
 image: 'img/embedded-wallets/banners/base.png'
-description: 'Integrate Embedded Wallets with the Base Chain (Coinbase) Blockchain'
+description: 'Integrate Embedded Wallets with the Base Blockchain | Embedded Wallets'
 ---
 
 import Tiles from '@theme/Tiles'
 import ChainDetailsBase from '../../_general-connect-blockchain/_base.mdx'
 
-The Base Chain (Coinbase) blockchain's integration helps you get started in a matter of minutes. The integration is available for the following platforms: Web, Android, iOS, Flutter, React Native, and Unity.
+Integrate Web3Auth seamlessly with EVM-based Base blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+
+This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
 
 ## Chain Details for Base
 
@@ -21,10 +25,23 @@ export const Base = [
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/base/react',
+          },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/base/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/base/web',
+        path: '/embedded-wallets/connect-blockchain/evm/base/javascript',
       },
       {
         key: 'android',
@@ -49,6 +66,12 @@ export const Base = [
         title: 'React Native',
         icon: 'logo-react.png',
         path: '/embedded-wallets/connect-blockchain/evm/base/react-native',
+          },
+          {
+            key: 'node',
+            title: 'Node',
+            icon: 'logo-nodejs.png',
+            path: '/embedded-wallets/connect-blockchain/evm/base/node',
       },
       {
         key: 'unity',
@@ -57,7 +80,8 @@ export const Base = [
         path: '/embedded-wallets/connect-blockchain/evm/base/unity',
       },
     ],
-  },
+
+},
 ]
 
 <Tiles tileGroups={Base} />

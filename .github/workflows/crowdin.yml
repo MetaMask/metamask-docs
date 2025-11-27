@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Synchronize with Crowdin
-        uses: crowdin/github-action@v1
+        uses: crowdin/github-action@v2
         with:
           upload_sources: true
           upload_translations: true

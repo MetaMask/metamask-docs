@@ -19,7 +19,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Build
         uses: ConsenSys/github-actions/docs-build@main
 
@@ -30,7 +30,7 @@ jobs:
       matrix:
         folder: ['docs']
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Case check action
         uses: ConsenSys/github-actions/docs-case-check@main
         with:
@@ -41,7 +41,7 @@ jobs:
     name: Lint Code Base
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Lint
         uses: ConsenSys/github-actions/docs-lint-all@main
 
@@ -52,7 +52,7 @@ jobs:
       matrix:
         file-extensions: ['.md', '.mdx']
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Vale
         uses: Consensys/github-actions/docs-spelling-check@main
         with:
@@ -61,12 +61,9 @@ jobs:
   linkCheck:
     name: Link Checking
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        file-extensions: ['.md', '.mdx']
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: LinkCheck
         uses: ConsenSys/github-actions/docs-link-check@main
         with:
-          FILE_EXTENSION: ${{ matrix.file-extensions }}
+          CONFIG_FILE: '.linkspector.yml'

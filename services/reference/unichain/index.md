@@ -35,17 +35,17 @@ See the [official Unichain documentation](https://docs.unichain.org/docs) for mo
 <CardList
   items={[
     {
-      href: "./quickstart",
+      href: "/services/reference/unichain/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Unichain network."
     },
     {
-      href: "./json-rpc-methods",
+      href: "/services/reference/unichain/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Unichain network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create and secure an API key."
     }
@@ -58,7 +58,5 @@ No personal information is sent as part of partner requests, only information ne
 
 The following partners provide access to the Unichain network:
 
-<!-- markdown-link-check-disable -->
 - InfStones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
-- 0xFury ([Privacy policy](https://0xfury.com/privacy.php))
-<!-- markdown-link-check-enable -->
+- 0xFury ([Privacy policy](https://0xfury.com/privacy))

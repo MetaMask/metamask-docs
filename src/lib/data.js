@@ -96,6 +96,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-mantle.svg`,
   },
   {
+    name: 'Monad',
+    href: '/services/reference/monad',
+    logo: `${LOGO_PATH}/logo-monad.svg`,
+  },
+  {
     name: 'opBNB',
     href: '/services/reference/opbnb',
     logo: `${LOGO_PATH}/logo-bnb.svg`,
@@ -356,5 +361,15 @@ export const API_COSTS = {
     baseFeePercentile: 80,
     busyThreshold: 80,
     suggestedGasFees: 80,
+  },
+  bundler: {
+    eth_estimateUserOperationGas: 1980,
+    eth_getUserOperationByHash: 100,
+    eth_getUserOperationReceipt: 100,
+    eth_sendUserOperation: 4950,
+    eth_supportedEntryPoints: 10,
+    pimlico_getUserOperationGasPrice: 100,
+    pimlico_getUserOperationStatus: 50,
+    pimlico_simulateAssetChanges: 4950,
   },
 }

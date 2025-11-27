@@ -1,5 +1,6 @@
 ---
 sidebar_label: JSON-RPC API
+sidebar_key: arbitrum-json-rpc-api
 description: Supported standard Ethereum methods on Arbitrum network.
 ---
 

@@ -1,0 +1,16 @@
+An object containing the status information:
+
+- `status`: (string) - The current status of the user operation. Possible values:
+
+    | Result | Response includes transaction hash | Description |
+    | :------- | :-------------------------------- | :---------- |
+    | `not_found` | false | The operation hash is not known to the bundler or has been rejected during validation and has never entered the mempool. |
+    | `not_submitted` | false | The operation hash is known to the bundler but is sitting in the mempool and has not been bundled into a transaction yet. |
+    | `submitted` | true | The operation hash is known to the bundler, has been bundled into a transaction which is currently pending in the mempool. |
+    | `rejected` | false | The operation hash has entered the mempool but as it was being bundled into a bundle transaction the re-simulation failed and it was never submitted. |
+    | `included` | true | The operation hash is known to the bundler and has been included onchain. |
+    | `failed` | true | The operation hash is known to the bundler and the transaction bundling it has been included onchain but the bundle transaction reverted. |
+    | `queued` | false | The operation hash is known to the bundler but is waiting in a queue before being sent to the mempool due to its nonce being too high. |
+
+- `transactionHash`: (string) - The transaction hash bundling the user operation, or `null` if
+    not applicable for the current status.

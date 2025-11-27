@@ -2,13 +2,14 @@
 title: Use a passkey as a backup signer
 image: 'img/tutorials/tutorials-banners/use-passkey-as-backup-signer.png'
 description: Use a passkey as a backup signer for a MetaMask smart account.
-tags: [delegation toolkit, passkey, backup signer, smart account]
-keywords: [delegation toolkit, passkey, webauthn, P-256, backup signer, smart account]
+tags: [delegation toolkit, smart accounts kit, passkey, backup signer, smart account]
+keywords: [delegation, smart accounts kit, passkey, webauthn, P-256, backup signer, smart account]
 date: Aug 27, 2025
 author: MetaMask Developer Relations
+discourseTopicId: 2612
 ---
 
-This tutorial walks you through using a passkey as a backup signer for your [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts).
+This tutorial walks you through using a passkey as a backup signer for your [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts).
 
 ## About passkeys
 
@@ -16,7 +17,7 @@ An externally owned account (EOA) uses the secp256k1 elliptic curve to generate 
 In contrast, a passkey (WebAuthn credential) uses the secp256r1 (P-256) elliptic curve to generate key pairs and signatures.
 Passkeys eliminate the need for traditional seed phrases that are difficult to remember, enabling a more seamless and secure way for users to access their web3 wallets.
 
-MetaMask Smart Accounts offer a [Hybrid implementation](/delegation-toolkit/concepts/smart-accounts/#hybrid-smart-account), which supports signature validation for both secp256k1 and secp256r1 curves.
+MetaMask Smart Accounts offer a [Hybrid implementation](/smart-accounts-kit/concepts/smart-accounts/#hybrid-smart-account), which supports signature validation for both secp256k1 and secp256r1 curves.
 This allows you to add a passkey as a backup signer for your smart account.
 
 You can add passkeys during smart account creation or after the account has been deployed.
@@ -26,16 +27,16 @@ This tutorial walks you through adding a passkey signer to an already deployed s
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+  [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
 
 ## Steps
 
 ### 1. Install dependencies
 
-Install the [MetaMask Delegation Toolkit](https://www.npmjs.com/package/@metamask/delegation-toolkit) and [Ox SDK](https://oxlib.sh/#installation) in your project:
+Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) and [Ox SDK](https://oxlib.sh/#installation) in your project:
 
 ```bash npm2yarn
-npm install @metamask/delegation-toolkit ox
+npm install @metamask/smart-accounts-kit ox
 ```
 
 ### 2. Create a Public Client
@@ -69,11 +70,11 @@ const bundlerClient = createBundlerClient({
 
 ### 4. Create and deploy a smart account
 
-Create and deploy a [Hybrid smart account](/delegation-toolkit/guides/smart-accounts/create-smart-account), with a private key signer.
+Create and deploy a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create-smart-account), with a private key signer.
 The Hybrid implementation supports adding additional passkey signers.
 
 ```typescript
-import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 import { privateKeyToAccount } from 'viem/accounts'
 import { zeroAddress } from 'viem'
 
@@ -90,8 +91,8 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 // Deploy the smart account by sending a user operation.
 // Appropriate fee per gas must be determined for the bundler being used.
-const maxFeePerGas = 1n;
-const maxPriorityFeePerGas = 1n;
+const maxFeePerGas = 1n
+const maxPriorityFeePerGas = 1n
 
 const userOperationHash = await bundlerClient.sendUserOperation({
   account: smartAccount,
@@ -115,7 +116,7 @@ const credential = await createWebAuthnCredential({
 
 ### 6. Add the passkey as a backup signer
 
-Use the `HybridDeleGator` contract namespace from the Delegation Toolkit to encode the calldata required to add the passkey signer.
+Use the `HybridDeleGator` contract namespace from the Smart Accounts Kit to encode the calldata required to add the passkey signer.
 The encoding function needs the X and Y coordinates of the P-256 public key.
 Since WebAuthn credentials store a compressed public key, you need to use the [Ox SDK](https://oxlib.sh/#installation) to deserialize it, and extract the X and Y coordinates.
 
@@ -123,13 +124,14 @@ Once the calldata is prepared, send it to your smart account address to register
 
 ```ts
 import { PublicKey } from 'ox'
-import { HybridDeleGator, P256Owner } from '@metamask/delegation-toolkit/contracts'
+import { toHex } from 'viem'
+import { HybridDeleGator, P256Owner } from '@metamask/smart-accounts-kit/contracts'
 
 // Deserialize the compressed public key.
 const publicKey = PublicKey.fromHex(credential.publicKey)
 
 const p256Owner: P256Owner = {
-  keyId: credential.id,
+  keyId: toHex(credential.id),
   x: publicKey.x,
   y: publicKey.y,
 }
@@ -166,7 +168,7 @@ Use the [Viem WebAuthn Account](https://viem.sh/account-abstraction/accounts/web
 import { Address } from 'ox'
 import { toWebAuthnAccount } from 'viem/account-abstraction'
 import { toHex } from 'viem'
-import { Implementation, toMetaMaskSmartAccount } from '@metamask/delegation-toolkit'
+import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
 
 // Use the deserialized public key from the previous step.
 const owner = Address.fromPublicKey(publicKey)
@@ -177,7 +179,7 @@ const webAuthnAccount = toWebAuthnAccount({ credential })
 const smartAccount = await toMetaMaskSmartAccount({
   client: publicClient,
   implementation: Implementation.Hybrid,
-  deployParams: [owner, [credential.id], [publicKey.x], [publicKey.y]],
+  deployParams: [owner, [toHex(credential.id)], [publicKey.x], [publicKey.y]],
   deploySalt: '0x',
   signer: { webAuthnAccount, keyId: toHex(credential.id) },
 })
@@ -185,5 +187,5 @@ const smartAccount = await toMetaMaskSmartAccount({
 
 ## Next steps
 
-- Learn more about [smart account implementations](/delegation-toolkit/guides/smart-accounts/create-smart-account).
-- To sponsor gas fees when adding a passkey as a backup signer, see how to [send a gasless transaction](/delegation-toolkit/guides/smart-accounts/send-gasless-transaction).
+- Learn more about [smart account implementations](/smart-accounts-kit/guides/smart-accounts/create-smart-account).
+- To sponsor gas fees when adding a passkey as a backup signer, see how to [send a gasless transaction](/smart-accounts-kit/guides/smart-accounts/send-gasless-transaction).

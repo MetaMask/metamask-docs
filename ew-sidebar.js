@@ -3,6 +3,7 @@ import {
   vue,
   android,
   ios,
+  node,
   reactnative,
   flutter,
   unity,
@@ -40,24 +41,23 @@ function webTopNavButton(selectedSDK) {
         </div>
       </div>
       <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/android">
-        Mobile
+        Mobile & Gaming
       </a>
-      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/unity">
-        Gaming
+      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/node">
+        Backend
       </a>
     </div>`;
 }
 
-function gamingTopNavButton(selectedSDK) {
-  var gamingSDKs = {
-    [unity]: `/embedded-wallets/sdk/unity`,
-    [unreal]: `/embedded-wallets/sdk/unreal`,
+function backendTopNavButton(selectedSDK) {
+  var backendSDKs = {
+    [node]: `/embedded-wallets/sdk/node`,
   };
-  if (gamingSDKs.hasOwnProperty(selectedSDK)) {
-    delete gamingSDKs[selectedSDK];
+  if (backendSDKs.hasOwnProperty(selectedSDK)) {
+    delete backendSDKs[selectedSDK];
   }
-  var sdkNames = Object.keys(gamingSDKs);
-  var sdkLinks = Object.values(gamingSDKs);
+  // var sdkNames = Object.keys(backendSDKs);
+  // var sdkLinks = Object.values(backendSDKs);
   var sdkVersion = getPnPVersion(selectedSDK);
 
   return `
@@ -66,14 +66,13 @@ function gamingTopNavButton(selectedSDK) {
         Web
       </a>
       <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/android">
-        Mobile
+        Mobile & Gaming
       </a>
       <div class="sdk-sidebar-option-selected">
-        Gaming
+        Backend
         <div class="sdk-sidebar-dropdown-container">
           <select class="sdk-sidebar-dropdown" onchange="location.href=this.value">
               <option value="">${selectedSDK}</option>
-              <option value="${sdkLinks[0]}">${sdkNames[0]}</option>
           </select>
           v${sdkVersion}
         </div>
@@ -87,6 +86,8 @@ function mobileTopNavButton(selectedSDK) {
     [ios]: `/embedded-wallets/sdk/ios`,
     [reactnative]: `/embedded-wallets/sdk/react-native`,
     [flutter]: `/embedded-wallets/sdk/flutter`,
+    [unity]: `/embedded-wallets/sdk/unity`,
+    [unreal]: `/embedded-wallets/sdk/unreal`,
   };
   if (mobileSDKs.hasOwnProperty(selectedSDK)) {
     delete mobileSDKs[selectedSDK];
@@ -101,19 +102,21 @@ function mobileTopNavButton(selectedSDK) {
         Web
       </a>
       <div class="sdk-sidebar-option-selected">
-        Mobile
+        Mobile & Gaming
         <div class="sdk-sidebar-dropdown-container">
           <select class="sdk-sidebar-dropdown" onchange="location.href=this.value">
               <option value="">${selectedSDK}</option>
               <option value="${sdkLinks[0]}">${sdkNames[0]}</option>
               <option value="${sdkLinks[1]}">${sdkNames[1]}</option>
               <option value="${sdkLinks[2]}">${sdkNames[2]}</option>
+              <option value="${sdkLinks[3]}">${sdkNames[3]}</option>
+              <option value="${sdkLinks[4]}">${sdkNames[4]}</option>
           </select>
           v${sdkVersion}
         </div>
       </div>
-      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/unity">
-        Gaming
+      <a class="sdk-sidebar-option" href="/embedded-wallets/sdk/node">
+        Backend
       </a>
     </div>`;
 }
@@ -137,6 +140,19 @@ const sidebar = {
           label: "Configuration",
           items: [
             "dashboard/project-settings",
+            "dashboard/whitelist",
+            {
+              type: "category",
+              label: "Advanced Settings",
+              collapsible: true,
+              collapsed: false,
+              items: [
+                "dashboard/advanced/session-management",
+                "dashboard/advanced/test-accounts",
+                "dashboard/advanced/user-details",
+                "dashboard/advanced/key-export",
+              ],
+            },
             "dashboard/chains-and-networks",
             "dashboard/authentication",
             "dashboard/wallet-services",
@@ -155,6 +171,7 @@ const sidebar = {
         { type: "link", label: "React", href: "/embedded-wallets/sdk/react" },
         { type: "link", label: "Vue", href: "/embedded-wallets/sdk/vue" },
         { type: "link", label: "JavaScript", href: "/embedded-wallets/sdk/js" },
+        { type: "link", label: "Node.js", href: "/embedded-wallets/sdk/node" },
         { type: "link", label: "Android", href: "/embedded-wallets/sdk/android" },
         { type: "link", label: "iOS", href: "/embedded-wallets/sdk/ios" },
         { type: "link", label: "React Native", href: "/embedded-wallets/sdk/react-native" },
@@ -181,6 +198,29 @@ const sidebar = {
         "features/mpc",
       ],
     },
+    {
+      type: "category",
+      label: "Infrastructure",
+      items: [
+        "infrastructure/README",
+        "infrastructure/mpc-architecture",
+        "infrastructure/sss-architecture",
+        "infrastructure/nodes-and-dkg",
+        "infrastructure/glossary",
+        {
+          type: "link",
+          label: "Compliance, Audits and Trust",
+          href: "https://trust.web3auth.io",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Troubleshooting",
+      items: [
+        { type: "autogenerated", dirName: "troubleshooting" },
+      ],
+    }
   ],
   authentication: [
     "authentication/README",
@@ -225,46 +265,336 @@ const sidebar = {
     "authentication/group-connections",
     "authentication/id-token",
   ],
-  connect_blockchain: [
+  other_blockchains: [
     "connect-blockchain/README",
+    { type: "autogenerated", dirName: "connect-blockchain/other" },
+  ],
+  evm: [
+    "connect-blockchain/evm/README",
+    {
+      type: "html",
+      value: "<strong style='font-size:1.1em;display:block;margin:12px 0;'>Popular Chains</strong>",
+      defaultStyle: true,
+    },
     {
       type: "category",
-      label: "EVM Based Chains",
+      label: "Ethereum",
       items: [
-        { type: "autogenerated", dirName: "connect-blockchain/evm" },
+        { type: "autogenerated", dirName: "connect-blockchain/evm/ethereum" },
       ],
     },
     {
       type: "category",
-      label: "Solana",
-      items: [{ type: "autogenerated", dirName: "connect-blockchain/solana" }],
+      label: "Linea",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/linea" },
+      ],
+    },
+
+    {
+      type: "category",
+      label: "Arbitrum",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/arbitrum" },
+      ],
     },
     {
       type: "category",
-      label: "Other Chains",
+      label: "Avalanche",
       items: [
-        { type: "autogenerated", dirName: "connect-blockchain/other" },
+        { type: "autogenerated", dirName: "connect-blockchain/evm/avalanche" },
       ],
-      collapsible: true,
-      collapsed: false,
     },
-    "connect-blockchain/custom-chains",
-    "connect-blockchain/rpc-headers",
-  ],
-  infrastructure: [
-    "infrastructure/README",
-    "infrastructure/mpc-architecture",
-    "infrastructure/sss-architecture",
-    "infrastructure/nodes-and-dkg",
-    "infrastructure/glossary",
     {
-      type: "link",
-      label: "Compliance, Audits and Trust",
-      href: "https://trust.web3auth.io",
+      type: "category",
+      label: "Base",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/base" },
+      ],
     },
+    {
+      type: "category",
+      label: "BNB Chain",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/bnb" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Optimism",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/optimism" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Polygon",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/polygon" },
+      ],
+    },
+    {
+      type: "html",
+      value: "<strong style='font-size:1.1em;display:block;margin:12px 0;'>EVM Compatible Chains</strong>",
+      defaultStyle: true,
+    },
+    {
+      type: "category",
+      label: "Aleph Zero",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/aleph-zero" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Ancient8",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/ancient8" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Astar zKyoto",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/astar-zkyoto" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Astar zkEVM",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/astar-zkevm" },
+      ],
+    },
+    {
+      type: "category",
+      label: "BitKub",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/bitkub" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Celo",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/celo" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Chiliz",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/chiliz" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Cronos",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/cronos" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Fhenix",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/fhenix" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Flare",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/flare" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Flow",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/flow" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Harmony",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/harmony" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Hedera",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/hedera" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Kinto",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/kinto" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Klaytn",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/klaytn" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Manta",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/manta" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Metis",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/metis" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Mint",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/mint" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Moonbeam",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/moonbeam" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Moonriver",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/moonriver" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Morph",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/morph" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Neon",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/neon" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Nibiru",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/nibiru" },
+      ],
+    },
+    {
+      type: "category",
+      label: "opBNB",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/opbnb" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Rootstock",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/rootstock" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Saakuru",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/saakuru" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Shardeum",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/shardeum" },
+      ],
+    },
+    {
+      type: "category",
+      label: "SKALE",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/skale" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Songbird",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/songbird" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Soneium",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/soneium" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Unichain",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/unichain" },
+      ],
+    },
+    {
+      type: "category",
+      label: "XDC Network",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/xdc" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Zetachain",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/zetachain" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Zilliqa",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/zilliqa" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Zircuit",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/zircuit" },
+      ],
+    },
+    {
+      type: "category",
+      label: "Tron",
+      items: [
+        { type: "autogenerated", dirName: "connect-blockchain/evm/tron" },
+      ],
+    },
+    "connect-blockchain/evm/rpc-headers",
+
   ],
-  troubleshooting: [
-    { type: "autogenerated", dirName: "troubleshooting" },
+  solana: [
+    { type: "autogenerated", dirName: "connect-blockchain/solana" },
   ],
   sdk_react: [
     {
@@ -329,8 +659,8 @@ const sidebar = {
     },
     {
       type: "link",
-      label: "Playground",
-      href: "https://web3auth-playground.vercel.app/",
+      label: "Troubleshooting",
+      href: "/embedded-wallets/troubleshooting/",
     },
     {
       type: "link",
@@ -407,6 +737,11 @@ const sidebar = {
     },
     {
       type: "link",
+      label: "Troubleshooting",
+      href: "/embedded-wallets/troubleshooting/",
+    },
+    {
+      type: "link",
       label: "Support Forum",
       href: "https://web3auth.io/community/c/help-pnp/pnp-web/7",
     },
@@ -480,6 +815,11 @@ const sidebar = {
     },
     {
       type: "link",
+      label: "Troubleshooting",
+      href: "/embedded-wallets/troubleshooting/",
+    },
+    {
+      type: "link",
       label: "Support Forum",
       href: "https://web3auth.io/community/c/help-pnp/pnp-web/7",
     },
@@ -535,8 +875,8 @@ const sidebar = {
     },
     {
       type: "link",
-      label: "Playground",
-      href: "https://w3a.link/pnp-android-playground",
+      label: "Troubleshooting",
+      href: "/embedded-wallets/troubleshooting/",
     },
     {
       type: "link",
@@ -595,8 +935,8 @@ const sidebar = {
     },
     {
       type: "link",
-      label: "Playground",
-      href: "https://w3a.link/pnp-ios-playground",
+      label: "Troubleshooting",
+      href: "/embedded-wallets/troubleshooting/",
     },
     {
       type: "link",
@@ -655,6 +995,11 @@ const sidebar = {
     },
     {
       type: "link",
+      label: "Troubleshooting",
+      href: "/embedded-wallets/troubleshooting/",
+    },
+    {
+      type: "link",
       label: "Support Forum",
       href: "https://web3auth.io/community/c/help-pnp/pnp-rn/19",
     },
@@ -710,13 +1055,8 @@ const sidebar = {
     },
     {
       type: "link",
-      label: "Playground Android",
-      href: "https://w3a.link/pnp-flutter-android-playground",
-    },
-    {
-      type: "link",
-      label: "Playground iOS",
-      href: "https://w3a.link/pnp-flutter-ios-playground",
+      label: "Troubleshooting",
+      href: "/embedded-wallets/troubleshooting/",
     },
     {
       type: "link",
@@ -732,7 +1072,7 @@ const sidebar = {
   sdk_unity: [
     {
       type: "html",
-      value: gamingTopNavButton(unity),
+      value: mobileTopNavButton(unity),
       defaultStyle: true,
     },
     "sdk/unity/README",
@@ -767,6 +1107,11 @@ const sidebar = {
     "sdk/unity/examples",
     {
       type: "link",
+      label: "Troubleshooting",
+      href: "/embedded-wallets/troubleshooting/",
+    },
+    {
+      type: "link",
       label: "Support Forum",
       href: "https://web3auth.io/community/c/help-pnp/pnp-unity/20",
     },
@@ -776,10 +1121,37 @@ const sidebar = {
       href: "https://github.com/Web3Auth/web3auth-unity-sdk/releases",
     },
   ],
+  sdk_node: [
+    {
+      type: "html",
+      value: backendTopNavButton(node),
+      defaultStyle: true,
+    },
+    "sdk/node/README",
+    "sdk/node/connect",
+    "sdk/node/blockchain-connection",
+    "sdk/node/private-key",
+    "sdk/node/examples",
+    {
+      type: "link",
+      label: "Troubleshooting",
+      href: "/embedded-wallets/troubleshooting/",
+    },
+    {
+      type: "link",
+      label: "Support Forum",
+      href: "https://web3auth.io/community/c/help-pnp/pnp-node/21",
+    },
+    {
+      type: "link",
+      label: "Release Notes",
+      href: "https://github.com/Web3Auth/web3auth-backend/releases",
+    },
+  ],
   sdk_unreal: [
     {
       type: "html",
-      value: gamingTopNavButton(unreal),
+      value: mobileTopNavButton(unreal),
       defaultStyle: true,
     },
     "sdk/unreal/README",
@@ -808,6 +1180,11 @@ const sidebar = {
       ],
     },
     "sdk/unreal/examples",
+    {
+      type: "link",
+      label: "Troubleshooting",
+      href: "/embedded-wallets/troubleshooting/",
+    },
     {
       type: "link",
       label: "Support Forum",

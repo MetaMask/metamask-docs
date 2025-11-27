@@ -10,7 +10,7 @@ import GasApiNetworks from "@site/src/components/GasApiNetworks.tsx";
 
 The following lists all the network endpoints supported by Infura.
 
-Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](../../../developer-tools/dashboard/).
+Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](/developer-tools/dashboard).
 
 ## Arbitrum
 
@@ -57,6 +57,14 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 
 ## Celo
 
+:::info Celo Alfajores Deprecation Notice
+
+As communicated by the
+[Celo Foundation](https://forum.celo.org/t/introducing-celo-sepolia-celo-s-new-ethereum-l2-testnet/12155)
+and Ethereum Foundation, the Holesky testnet has reached end of life as of September 30th, 2025. Celo Alfajores builds upon Holesky, which means it has also reached its end of life.
+
+:::
+
 | Network             | Description             | URL                                                   |
 |---------------------|-------------------------|-------------------------------------------------------|
 | Mainnet             | JSON-RPC over HTTPS     | `https://celo-mainnet.infura.io/v3/<YOUR-API-KEY>`    |
@@ -97,7 +105,7 @@ to have access to the IPFS network.
 
 :::info
 
-Include your authentication details when [making IPFS requests](/reference/ipfs/quickstart.md).
+Include your authentication details when [making IPFS requests](../reference/ipfs/quickstart.md).
 
 :::
 
@@ -117,6 +125,13 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Mainnet           | JSON-RPC over HTTPS     | `https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://mantle-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
+
+## Monad
+
+| Network           | Description             | URL                                              |
+|-------------------|-------------------------|--------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://monad-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Testnet           | JSON-RPC over HTTPS     | `https://monad-testnet.infura.io/v3/<YOUR-API-KEY>`  |
 
 ## opBNB
 
@@ -164,6 +179,18 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 |---------|-------------------------|-------------------------------------------------------|
 | Mainnet | JSON-RPC over HTTPS     | `https://sei-mainnet.infura.io/v3/<YOUR-API-KEY>`     |
 | Testnet | JSON-RPC over HTTPS     | `https://sei-testnet.infura.io/v3/<YOUR-API-KEY>`     |
+
+## Solana
+
+:::note limited access
+Solana access is currently limited to select customers. [Contact us](https://www.infura.io/contact)
+if you're interested in accessing these methods.
+:::
+
+| Network           | Description         | URL                                                    |
+|-------------------|---------------------|--------------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS | `https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Testnet (Devnet)  | JSON-RPC over HTTPS | `https://solana-devnet.infura.io/v3/<YOUR-API-KEY>`   |
 
 ## Starknet
 

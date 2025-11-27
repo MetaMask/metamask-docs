@@ -1,0 +1,43 @@
+---
+description: Learn how to use the ownership transfer scope for a delegation.
+keywords: [delegation scope, ownership transfer, restrict, delegation]
+---
+
+# Use the ownership transfer scope
+ 
+The ownership transfer scope restricts a delegation to ownership transfer calls only.
+For example, Alice has deployed a smart contract, and she delegates to Bob the ability to transfer ownership of that contract.
+
+## Prerequisites
+
+- [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
+- [Configure the Smart Accounts Kit.](../../configure-toolkit.md)
+- [Create a delegator account.](../execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
+- [Create a delegate account.](../execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
+
+## Ownership transfer scope
+
+This scope requires a `contractAddress`, which represents the address of the deployed contract.
+
+Internally, this scope uses the [`ownershipTransfer`](../../../reference/delegation/caveats.md#ownershiptransfer) caveat enforcer.
+See the [ownership transfer scope reference](../../../reference/delegation/delegation-scopes.md#ownership-transfer-scope) for more details.
+
+```typescript
+import { createDelegation } from "@metamask/smart-accounts-kit";
+
+const contractAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+
+const delegation = createDelegation({
+  scope: {
+    type: "ownershipTransfer",
+    contractAddress,
+  },
+  to: delegateAccount,
+  from: delegatorAccount,
+  environment: delegatorAccount.environment,
+});
+```
+
+## Next steps
+
+See [how to further constrain the authority of a delegation](constrain-scope.md) using caveat enforcers.

@@ -5,6 +5,7 @@ description: Enable users to pay gas fees with ERC-20 tokens using a paymaster w
 tags: [embedded wallets, account abstraction, erc-20 paymaster, erc-4337, web3auth]
 date: October 29, 2024
 author: MetaMask Developer Relations
+discourseTopicId: 2602
 ---
 
 import SEO from '@site/src/components/SEO'
@@ -121,7 +122,7 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
 });
 
 const web3auth = new Web3Auth({
-  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
   // Use the account abstraction provider we configured earlier
@@ -147,7 +148,7 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
 });
 
 const web3auth = new Web3AuthNoModal({
-  clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
   // Use the account abstraction provider we configured earlier

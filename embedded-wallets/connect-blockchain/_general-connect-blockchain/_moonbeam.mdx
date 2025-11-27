@@ -1,40 +1,32 @@
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 <Tabs
  defaultValue="mainnet"
   values={[
-    { label: "Mainnet", value: "mainnet", },
-    { label: "Testnet", value: "testnet", },
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Moonbase Alpha Testnet", value: "moonbase" },
   ]}
 >
-<TabItem
-  value="mainnet"
->
+<TabItem value="mainnet">
 
-- Chain ID: 0x504 (hex of 1284)
-- Public RPC URL: https://rpc.api.moonbeam.network (Avoid using public rpcTarget in production, use
-  services like Infura)
-- Display Name: Moonbeam Mainnet
-- Block Explorer Link: https://moonbeam.moonscan.io
-- Ticker: GLMR
-- Ticker Name: GLMR
-- Logo: https://cryptologos.cc/logos/moonbeam-glmr-logo.png
+- **Chain ID:** 0x504
+- **Public RPC URL:** https://rpc.api.moonbeam.network
+- **Display Name:** Moonbeam Mainnet
+- **Block Explorer Link:** https://moonbeam.moonscan.io
+- **Ticker:** GLMR
+- **Ticker Name:** Glimmer
 
 </TabItem>
 
-<TabItem
-  value="testnet"
->
+<TabItem value="moonbase">
 
-- Chain ID: 0x507 (hex of 1287)
-- Public RPC URL: https://rpc.api.moonbase.moonbeam.network (Avoid using public rpcTarget in
-  production, use services like Infura)
-- Display Name: Moonbeam Testnet
-- Block Explorer Link: https://moonbase.moonscan.io
-- Ticker: GLMR
-- Ticker Name: GLMR
-- Logo: https://cryptologos.cc/logos/moonbeam-glmr-logo.png
+- **Chain ID:** 0x507
+- **Public RPC URL:** https://rpc.api.moonbase.moonbeam.network
+- **Display Name:** Moonbase Alpha Testnet
+- **Block Explorer Link:** https://moonbase.moonscan.io
+- **Ticker:** DEV
+- **Ticker Name:** DEV Token
 
 </TabItem>
 </Tabs>

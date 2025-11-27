@@ -1,0 +1,171 @@
+---
+title: Connect
+description: 'Authenticate users and establish provider connection'
+---
+
+## Overview
+
+The `connect` method is the primary authentication method for the Node.js SDK. It authenticates users using custom authentication and returns a result object containing the provider/ signer for blockchain operations.
+
+:::warning Prerequisites
+
+- You need to have a custom authentication setup on the dashboard.
+- You need to have a freshly generated JWT token from your authentication system in your backend.
+
+Read more about [Custom Authentication](/embedded-wallets/authentication/custom-connections/custom-jwt/).
+
+:::
+
+## Usage
+
+```javascript
+const result = await web3auth.connect(loginParams)
+```
+
+## Parameters
+
+### LoginParams
+
+```typescript
+export type LoginParams = {
+  idToken: string
+  authConnectionId: string
+  userId?: string
+  userIdField?: string
+  isUserIdCaseSensitive?: boolean
+  groupedAuthConnectionId?: string
+}
+```
+
+| Parameter                  | Type      | Description                                                                               |
+| -------------------------- | --------- | ----------------------------------------------------------------------------------------- |
+| `authConnectionId`         | `string`  | Custom verifier name from Web3Auth Dashboard                                              |
+| `userId`                   | `string`  | Unique identifier for the user (email, user ID, etc.)                                     |
+| `idToken?`                 | `string`  | Valid JWT token from your authentication system                                           |
+| `groupedAuthConnectionId?` | `string`  | Grouped auth connection ID                                                                |
+| `userIdField?`             | `string`  | User's unique identifier field name. Add here if not set on the dashboard.                |
+| `isUserIdCaseSensitive?`   | `boolean` | Whether the user id field is case sensitive or not. Add here if not set on the dashboard. |
+
+## Return Value
+
+Returns a `result` object containing the provider/ signer for blockchain operations. By default you get the standard Web3Auth provider, with the ability to get the private key, if enabled from the dashboard. You additionally get the signer for EVM and Solana chains, to be able to do transactions without the need to use the private key provider directly.
+
+### Object Structure
+
+```typescript
+import type { TransactionSigner } from '@solana/signers'
+import type { Wallet } from 'ethers'
+import type { CHAIN_NAMESPACES, IBaseProvider } from '@web3auth/no-modal'
+export type PrivateKeyProvider = IBaseProvider<string>
+
+export type WalletResult =
+  | {
+      chainNamespace: typeof CHAIN_NAMESPACES.SOLANA
+      provider: PrivateKeyProvider
+      signer: TransactionSigner
+    }
+  | {
+      chainNamespace: typeof CHAIN_NAMESPACES.EIP155
+      provider: PrivateKeyProvider
+      signer: Wallet
+    }
+  | {
+      chainNamespace: typeof CHAIN_NAMESPACES.OTHER
+      provider: PrivateKeyProvider
+      signer: null
+    }
+```
+
+## Examples
+
+### Custom JWT Token Authentication
+
+```javascript
+const { Web3Auth } = require('@web3auth/node-sdk')
+
+// Dashboard Registration
+const clientId =
+  'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
+
+// focus-start
+// Auth Connection
+const authConnectionId = 'w3a-node-demo'
+// focus-end
+
+const web3auth = new Web3Auth({
+  clientId,
+  web3AuthNetwork: 'sapphire_mainnet',
+})
+
+await web3auth.init()
+
+// focus-start
+const privateKey = await fs.readFile('privateKey.pem', 'utf8')
+
+var idToken = jwt.sign(
+  {
+    sub: '9fcd68c4-af50-4dd7-adf6-abd12a13cb32',
+    name: 'Web3Auth DevRel Team',
+    email: 'devrel@web3auth.io',
+    aud: 'urn:api-web3auth-io', // -> to be used in Custom Authentication as JWT Field
+    iss: 'https://web3auth.io', // -> to be used in Custom Authentication as JWT Field
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + 60 * 60,
+  },
+  privateKey,
+  { algorithm: 'RS256', keyid: '2ma4enu1kdvw5bo9xsfpi3gcjzrt6q78yl0h' }
+)
+
+console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
+
+const result = await web3auth.connect({
+  authConnectionId,
+  idToken,
+})
+// focus-end
+```
+
+### Firebase Authentication
+
+```javascript
+const { Web3Auth } = require('@web3auth/node-sdk')
+
+// Dashboard Registration
+const clientId =
+  'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
+
+// focus-start
+// Auth Connection
+const authConnectionId = 'w3a-firebase-demo'
+// focus-end
+
+const web3auth = new Web3Auth({
+  clientId,
+  web3AuthNetwork: 'sapphire_mainnet',
+})
+
+await web3auth.init()
+
+// focus-start
+const app = initializeApp({
+  apiKey: 'AIzaSyB0nd9YsPLu-tpdCrsXn8wgsWVAiYEpQ_E',
+  authDomain: 'web3auth-oauth-logins.firebaseapp.com',
+  projectId: 'web3auth-oauth-logins',
+  storageBucket: 'web3auth-oauth-logins.appspot.com',
+  messagingSenderId: '461819774167',
+  appId: '1:461819774167:web:e74addfb6cc88f3b5b9c92',
+})
+
+const auth = getAuth(app)
+const res = await signInWithEmailAndPassword(auth, 'custom+jwt@firebase.login', 'Testing@123')
+console.log(res)
+const idToken = await res.user.getIdToken(true)
+
+console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
+
+const result = await web3auth.connect({
+  authConnectionId,
+  idToken,
+})
+// focus-end
+```

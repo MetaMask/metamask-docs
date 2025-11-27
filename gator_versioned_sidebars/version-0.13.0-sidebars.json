@@ -34,11 +34,13 @@
           "type": "category",
           "label": "Delegation",
           "collapsed": false,
+          "key": "delegation-concepts",
           "link": { "type": "doc", "id": "concepts/delegation/index" },
           "items": [
             "concepts/delegation/caveat-enforcers"
           ]
-        }
+        },
+        "concepts/erc7715"
       ]
     },
     {
@@ -50,7 +52,7 @@
         {
           "type": "category",
           "label": "MetaMask Smart Accounts",
-          "collapsed": false,
+          "collapsed": true,
           "items": [
             "guides/smart-accounts/create-smart-account",
             "guides/smart-accounts/deploy-smart-account",
@@ -62,13 +64,14 @@
         {
           "type": "category",
           "label": "Delegation",
-          "collapsed": false,
+          "collapsed": true,
+          "key": "delegation-guides",
           "items": [
             "guides/delegation/execute-on-smart-accounts-behalf",
             {
               "type": "category",
               "label": "Use delegation scopes",
-              "collapsed": false,
+              "collapsed": true,
               "link": { "type": "doc", "id": "guides/delegation/use-delegation-scopes/index" },
               "items": [
                 "guides/delegation/use-delegation-scopes/spending-limit",
@@ -78,6 +81,24 @@
               ]
             },
             "guides/delegation/check-delegation-state"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "ERC-7715",
+          "collapsed": true,
+          "key": "erc7715-guides",
+          "items": [
+            "guides/erc7715/execute-on-metamask-users-behalf",
+            {
+              "type": "category",
+              "label": "Use permissions",
+              "collapsed": true,
+              "items": [
+                "guides/erc7715/use-permissions/erc20-token",
+                "guides/erc7715/use-permissions/native-token"
+              ]
+            }
           ]
         }
       ]
@@ -118,12 +139,24 @@
         {
           "type": "category",
           "label": "Delegation",
-          "collapsed": false,
+          "collapsed": true,
+          "key": "delegation-reference",
           "link": { "type": "doc", "id": "reference/delegation/index" },
           "items": [
             "reference/delegation/delegation-scopes",
             "reference/delegation/caveats",
             "reference/delegation/caveat-enforcer-client"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "ERC-7715",
+          "collapsed": true,
+          "key": "erc7715-reference",
+          "items": [
+            "reference/erc7715/permissions",
+            "reference/erc7715/wallet-client",
+            "reference/erc7715/bundler-client"
           ]
         }
       ]
@@ -134,8 +167,7 @@
       "collapsed": false,
       "items": [
         "changelog/0.13.0",
-        "changelog/0.12.0",
-        "changelog/0.11.0"
+        "changelog/0.12.0"
       ]
     }
   ]

@@ -1,6 +1,7 @@
 ---
 title: Linea trace methods
 sidebar_label: Trace methods
+sidebar_key: linea-trace-methods
 ---
 
 # Linea trace methods

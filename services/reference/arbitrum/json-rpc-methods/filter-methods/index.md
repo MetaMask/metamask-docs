@@ -1,5 +1,6 @@
 ---
 sidebar_label: "Filter methods"
+sidebar_key: arbitrum-filter-methods
 ---
 
 # Arbitrum filter methods

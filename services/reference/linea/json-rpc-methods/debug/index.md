@@ -1,6 +1,7 @@
 ---
 description: Linea debug methods.
 sidebar_label: Debug methods
+sidebar_key: linea-debug-methods
 ---
 
 # Linea debug methods

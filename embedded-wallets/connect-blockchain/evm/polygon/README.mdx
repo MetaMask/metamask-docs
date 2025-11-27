@@ -1,7 +1,7 @@
 ---
 title: Integrate Embedded Wallets with the Polygon Blockchain
-sidebar_label: Polygon
-hide_table_of_contents: true
+sidebar_label: Overview
+
 keywords:
   [
     polygon,
@@ -36,10 +36,23 @@ export const Polygon = [
     description: '',
     tiles: [
       {
-        key: 'web',
-        title: 'Web',
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/polygon/react',
+          },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/polygon/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
         icon: 'logo-js.png',
-        path: '/embedded-wallets/connect-blockchain/evm/polygon/web',
+        path: '/embedded-wallets/connect-blockchain/evm/polygon/javascript',
       },
       {
         key: 'android',
@@ -64,6 +77,12 @@ export const Polygon = [
         title: 'React Native',
         icon: 'logo-react.png',
         path: '/embedded-wallets/connect-blockchain/evm/polygon/react-native',
+          },
+          {
+            key: 'node',
+            title: 'Node',
+            icon: 'logo-nodejs.png',
+            path: '/embedded-wallets/connect-blockchain/evm/polygon/node',
       },
       {
         key: 'unity',
@@ -72,7 +91,8 @@ export const Polygon = [
         path: '/embedded-wallets/connect-blockchain/evm/polygon/unity',
       },
     ],
-  },
+
+},
 ]
 
 <Tiles tileGroups={Polygon} />

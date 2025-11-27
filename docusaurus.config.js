@@ -29,8 +29,8 @@ const config = {
   // tagline: '',
   url: 'https://docs.metamask.io',
   baseUrl, // overwritten in github action for staging / latest
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenAnchors: 'throw',
   favicon: 'img/favicons/favicon-96x96.png',
 
   headTags: [
@@ -90,7 +90,7 @@ const config = {
   organizationName: 'metamask', // Usually your GitHub org/user name.
   projectName: 'metamask-docs', // Usually your repo name.
 
-  // Even if you don't use internalization, you can use this field to set useful
+  // Even if you don't use internationalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
   i18n: {
@@ -105,6 +105,9 @@ const config = {
     SENTRY_KEY: process.env.SENTRY_KEY,
     LINEA_ENS_URL: process.env.LINEA_ENS_URL,
     SEGMENT_ANALYTICS_KEY: process.env.SEGMENT_ANALYTICS_KEY,
+    DISCOURSE_API_KEY: process.env.DISCOURSE_API_KEY,
+    DISCOURSE_API_USERNAME: process.env.DISCOURSE_API_USERNAME,
+    DISCOURSE_CATEGORY_ID: process.env.DISCOURSE_CATEGORY_ID,
   },
 
   trailingSlash: true,
@@ -127,6 +130,9 @@ const config = {
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
   },
   themes: ['@docusaurus/theme-mermaid'],
 
@@ -200,8 +206,8 @@ const config = {
       '@docusaurus/plugin-content-docs',
       {
         id: 'gator',
-        path: 'delegation-toolkit',
-        routeBasePath: 'delegation-toolkit',
+        path: 'smart-accounts-kit',
+        routeBasePath: 'smart-accounts-kit',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
         sidebarPath: require.resolve('./gator-sidebar.js'),
         breadcrumbs: false,
@@ -210,7 +216,7 @@ const config = {
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
-        lastVersion: '0.13.0',
+        lastVersion: '0.1.0',
         versions: {
           // Defaults to the ./docs folder.
           // Using "development" instead of "next" as path.
@@ -219,8 +225,8 @@ const config = {
             path: 'development',
           },
           // The latest release.
-          '0.13.0': {
-            label: 'latest (0.13.0)',
+          '0.1.0': {
+            label: 'latest (0.1.0)',
           },
         },
       },
@@ -312,6 +318,164 @@ const config = {
       '@docusaurus/plugin-google-tag-manager',
       {
         containerId: 'GTM-5FGPLC2Q',
+      },
+    ],
+    [
+      'docusaurus-plugin-llms',
+      {
+        // Set docsDir to site root to collect from all directories
+        docsDir: '.',
+        // Disable default files since we're generating section-specific files
+        generateLLMsTxt: false,
+        generateLLMsFullTxt: false,
+        // Ignore common non-doc directories
+        // Note: src/pages/** is not ignored so tutorials can be collected
+        // Each customLLMFiles entry filters by includePatterns, so only matching files are included
+        ignoreFiles: [
+          'node_modules/**',
+          'build/**',
+          '.docusaurus/**',
+          'static/**',
+          'src/components/**',
+          'src/theme/**',
+          'src/lib/**',
+          'src/config/**',
+          'src/hooks/**',
+          'src/utils/**',
+          'src/plugins/**',
+          'src/specs/**',
+          'src/client/**',
+          'src/scss/**',
+          'i18n/**',
+          '*.config.js',
+          '*.json',
+          '*.lock',
+          'README.md',
+          'CONTRIBUTING.md',
+          'gator_versioned_docs/**',
+        ],
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+        // Path transformation to fix URL construction
+        // Since docsDir is '.', we need to remove 'docs/' prefix and handle src/pages paths
+        pathTransformation: {
+          ignorePaths: ['docs', 'src/pages'],
+        },
+        // Generate separate files for each section
+        customLLMFiles: [
+          {
+            filename: 'llms-embedded-wallets.txt',
+            includePatterns: ['embedded-wallets/**/*.{md,mdx}'],
+            fullContent: false,
+            title: 'MetaMask Embedded Wallets documentation',
+            description: 'Documentation links for MetaMask Embedded Wallets',
+          },
+          {
+            filename: 'llms-embedded-wallets-full.txt',
+            includePatterns: ['embedded-wallets/**/*.{md,mdx}'],
+            fullContent: true,
+            title: 'MetaMask Embedded Wallets documentation',
+            description: 'Complete documentation for MetaMask Embedded Wallets',
+          },
+          {
+            filename: 'llms-sdk.txt',
+            includePatterns: ['sdk/**/*.{md,mdx}'],
+            fullContent: false,
+            title: 'MetaMask SDK documentation',
+            description: 'Documentation links for MetaMask SDK',
+          },
+          {
+            filename: 'llms-sdk-full.txt',
+            includePatterns: ['sdk/**/*.{md,mdx}'],
+            fullContent: true,
+            title: 'MetaMask SDK documentation',
+            description: 'Complete documentation for MetaMask SDK',
+          },
+          {
+            filename: 'llms-smart-accounts-kit.txt',
+            includePatterns: ['smart-accounts-kit/**/*.{md,mdx}'],
+            fullContent: false,
+            title: 'MetaMask Smart Accounts Kit documentation',
+            description: 'Documentation links for MetaMask Smart Accounts Kit',
+          },
+          {
+            filename: 'llms-smart-accounts-kit-full.txt',
+            includePatterns: ['smart-accounts-kit/**/*.{md,mdx}'],
+            fullContent: true,
+            title: 'MetaMask Smart Accounts Kit documentation',
+            description: 'Complete documentation for MetaMask Smart Accounts Kit',
+          },
+          {
+            filename: 'llms-snaps.txt',
+            includePatterns: ['snaps/**/*.{md,mdx}'],
+            fullContent: false,
+            title: 'Snaps documentation',
+            description: 'Documentation links for Snaps',
+          },
+          {
+            filename: 'llms-snaps-full.txt',
+            includePatterns: ['snaps/**/*.{md,mdx}'],
+            fullContent: true,
+            title: 'Snaps documentation',
+            description: 'Complete documentation for Snaps',
+          },
+          {
+            filename: 'llms-wallet.txt',
+            includePatterns: ['wallet/**/*.{md,mdx}'],
+            fullContent: false,
+            title: 'Wallet API documentation',
+            description: 'Documentation links for Wallet API',
+          },
+          {
+            filename: 'llms-wallet-full.txt',
+            includePatterns: ['wallet/**/*.{md,mdx}'],
+            fullContent: true,
+            title: 'Wallet API documentation',
+            description: 'Complete documentation for Wallet API',
+          },
+          {
+            filename: 'llms-tutorials.txt',
+            includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
+            fullContent: false,
+            title: 'Tutorials',
+            description: 'Documentation links for MetaMask tutorials',
+          },
+          {
+            filename: 'llms-tutorials-full.txt',
+            includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
+            fullContent: true,
+            title: 'Tutorials',
+            description: 'Complete documentation for MetaMask tutorials',
+          },
+          {
+            filename: 'llms-dashboard.txt',
+            includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
+            fullContent: false,
+            title: 'Developer dashboard documentation',
+            description: 'Documentation links for MetaMask Developer dashboard',
+          },
+          {
+            filename: 'llms-dashboard-full.txt',
+            includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
+            fullContent: true,
+            title: 'Developer dashboard documentation',
+            description: 'Complete documentation for MetaMask Developer dashboard',
+          },
+          {
+            filename: 'llms-services.txt',
+            includePatterns: ['services/**/*.md'],
+            fullContent: false,
+            title: 'Services documentation',
+            description: 'Documentation links for MetaMask services',
+          },
+          {
+            filename: 'llms-services-full.txt',
+            includePatterns: ['services/**/*.md'],
+            fullContent: true,
+            title: 'Services documentation',
+            description: 'Complete documentation for MetaMask services',
+          },
+        ],
       },
     ],
   ],
@@ -407,7 +571,7 @@ const config = {
             position: 'right',
           },
           {
-            to: 'https://community.metamask.io/',
+            to: 'https://builder.metamask.io/',
             label: 'Help ↗',
             position: 'right',
           },
@@ -450,8 +614,8 @@ const config = {
                 to: '/wallet',
               },
               {
-                label: 'Delegation Toolkit',
-                to: '/delegation-toolkit',
+                label: 'Smart Accounts Kit',
+                to: '/smart-accounts-kit',
               },
               {
                 label: 'Embedded Wallets',
@@ -487,8 +651,8 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {
-                label: 'Delegation Toolkit GitHub',
-                href: 'https://github.com/MetaMask/delegation-toolkit',
+                label: 'Smart Accounts Kit GitHub',
+                href: 'https://github.com/MetaMask/smart-accounts-kit',
               },
               {
                 label: 'MetaMask mobile GitHub',
