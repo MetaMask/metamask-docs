@@ -100,7 +100,7 @@
     },
     {
       "source": "/wallet/connect/3rd-party-libraries/wagmi/",
-      "destination": "/sdk/evm/connect/get-started/wagmi/"
+      "destination": "/sdk/evm/connect/quickstart/wagmi/"
     },
     {
       "source": "/wallet/connect/3rd-party-libraries/web3-onboard/",
@@ -212,19 +212,19 @@
     },
     {
       "source": "/wallet/how-to/batch-json-rpc-requests/",
-      "destination": "/sdk/evm/connect/guides/batch-requests/"
+      "destination": "/sdk/evm/connect/guides/metamask-exclusive/batch-requests/"
     },
     {
       "source": "/wallet/how-to/display/",
-      "destination": "/sdk/evm/connect/guides/display-tokens/"
+      "destination": "/sdk/evm/connect/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/guide/registering-your-token/",
-      "destination": "/sdk/evm/connect/guides/display-tokens/"
+      "destination": "/sdk/evm/connect/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/wallet/how-to/register-token/",
-      "destination": "/sdk/evm/connect/guides/display-tokens/"
+      "destination": "/sdk/evm/connect/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/guide/registering-function-names/",
@@ -440,7 +440,7 @@
     },
     {
       "source": "/sdk/guides/advanced/batch-requests/",
-      "destination": "/sdk/evm/connect/guides/batch-requests/"
+      "destination": "/sdk/evm/connect/guides/metamask-exclusive/batch-requests/"
     },
     {
       "source": "/sdk/guides/advanced/production-readiness/",
@@ -452,19 +452,19 @@
     },
     {
       "source": "/sdk/connect/javascript-wagmi/",
-      "destination": "/sdk/evm/connect/get-started/wagmi/"
+      "destination": "/sdk/evm/connect/quickstart/wagmi/"
     },
     {
       "source": "/sdk/connect/javascript/",
-      "destination": "/sdk/evm/connect/get-started/javascript/"
+      "destination": "/sdk/evm/connect/quickstart/javascript/"
     },
     {
       "source": "/sdk/connect/javascript-rainbowkit/",
-      "destination": "/sdk/evm/connect/get-started/rainbowkit/"
+      "destination": "/sdk/evm/connect/quickstart/rainbowkit/"
     },
     {
       "source": "/sdk/connect/react-native/",
-      "destination": "/sdk/evm/connect/get-started/react-native/"
+      "destination": "/sdk/evm/connect/quickstart/react-native/"
     },
     {
       "source": "/sdk/guides/authenticate-users/",
@@ -484,11 +484,11 @@
     },
     {
       "source": "/sdk/guides/use-deeplinks/",
-      "destination": "/sdk/evm/connect/guides/use-deeplinks/"
+      "destination": "/sdk/evm/connect/guides/metamask-exclusive/use-deeplinks/"
     },
     {
       "source": "/sdk/guides/batch-requests/",
-      "destination": "/sdk/evm/connect/guides/batch-requests/"
+      "destination": "/sdk/evm/connect/guides/metamask-exclusive/batch-requests/"
     },
     {
       "source": "/sdk/guides/production-readiness/",
@@ -532,7 +532,7 @@
     },
     {
       "source": "/wallet/how-to/display/tokens/",
-      "destination": "/sdk/evm/connect/guides/display-tokens/"
+      "destination": "/sdk/evm/connect/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/wallet/how-to/display/method-names/",
