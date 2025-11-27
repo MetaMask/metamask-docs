@@ -379,7 +379,7 @@ const config = {
           },
           {
             filename: 'llms-sdk.txt',
-            includePatterns: ['sdk/**/*.md'],
+            includePatterns: ['sdk/**/*.{md,mdx}'],
             fullContent: false,
             title: 'MetaMask SDK documentation',
             description: 'Documentation links for MetaMask SDK',
@@ -463,7 +463,7 @@ const config = {
           },
           {
             filename: 'llms-services.txt',
-            includePatterns: ['services/**/*.{md,mdx}'],
+            includePatterns: ['services/**/*.md'],
             fullContent: false,
             title: 'Services documentation',
             description: 'Documentation links for MetaMask services',
