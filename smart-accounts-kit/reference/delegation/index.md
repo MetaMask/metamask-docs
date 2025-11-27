@@ -333,7 +333,7 @@ export const delegation = createDelegation({
 </TabItem>
 </Tabs>
 
-## encodeDelegations
+## `encodeDelegations`
 
 Encodes an array of delegations to ABI encoded hex string.
 
@@ -345,14 +345,16 @@ Encodes an array of delegations to ABI encoded hex string.
 
 ### Example
 
+### Example
+
 <Tabs>
 <TabItem value="example.ts">
 
 ```ts
-import { encodeDelegations } from "@metamask/smart-accounts-kit/utils";
+import { enocdeDelegations } from "@metamask/smart-accounts-kit/utils";
 import { delegation } from "./delegation.ts";
 
-const encodedDelegations = encodeDelegations([ delegation ]);
+const encodedDelegations = encodeDelegations([delegation]);
 ```
 
 </TabItem>
@@ -374,6 +376,62 @@ export const delegation = createDelegation({
   },
 });
 ```
+
+</TabItem>
+</Tabs>
+
+## `getDelegationHashOffchain`
+
+Returns the delegation hash. 
+
+### Parameters
+
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| `input` | `Delegation` | Yes | The delegation object to hash. |
+
+### Example
+
+<Tabs>
+<TabItem value ="example.ts">
+
+```ts
+import { getDelegationHashOffchain } from "@metamask/smart-accounts-kit/utils";
+import { delegation } from "./config.ts";
+
+const delegationHash = getDelegationHashOffchain(delegation);
+```
+
+</TabItem>
+<TabItem value ="config.ts">
+
+```ts
+import { 
+  getSmartAccountsEnvironment,
+  createDelegation,
+} from "@metamask/smart-accounts-kit";
+import { parseEther } from "viem";
+import { sepolia } from "viem/chains";
+
+const environment = getSmartAccountsEnvironment(sepolia.id);
+
+// The address to which the delegation is granted. It can be an EOA address, or
+// smart account address.
+const delegate = "0x2FcB88EC2359fA635566E66415D31dD381CF5585";
+
+export const delegation = createDelegation({
+  to: delegate,
+  // Address that is granting the delegation.
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  environment,
+  scope: {
+    type: "nativeTokenTransferAmount",
+    // 0.001 ETH in wei format.
+    maxAmount: parseEther("0.001"),
+  },
+});
+```
+
 </TabItem>
 </Tabs>
 
@@ -481,12 +539,13 @@ Signs the delegation and returns the delegation signature.
 
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
-| `signer` | `WalletClient` | Yes | [Viem Wallet Client](https://viem.sh/docs/clients/wallet#wallet-client) to sign the delegation. |
+| `privateKey` | `Hex` | Yes | The private key to use for signing the delegation. |
 | `delegation` | `Omit<Delegation, "signature">` | Yes | The unsigned delegation object to sign. |
 | `chainId` | `number` | Yes | The chain ID on which the delegation manager is deployed. |
 | `delegationManager` | `0x${string}` | Yes | The address of the Delegation Manager. |
 | `name` | `string` | No | The name of the domain of the Delegation Manager. The default is `DelegationManager`. |
 | `version` | `string` | No | The version of the domain of the Delegation Manager. The default is `1`. |
+| `allowInsecureUnrestrictedDelegation` | `boolean` | No | Whether to allow insecure unrestricted delegation with no caveats. The default is `false`. |
 
 ### Example
 
@@ -495,11 +554,11 @@ Signs the delegation and returns the delegation signature.
 
 ```ts
 import { signDelegation } from "@metamask/smart-accounts-kit";
-import { walletClient, delegation, delegationManager } from "./config.ts";
+import { privateKey, delegation, delegationManager } from "./config.ts";
 import { sepolia } from "viem/chains";
 
 const signature = signDelegation({
-  signer: walletClient,
+  privateKey,
   delegation,
   chainId: sepolia.id,
   delegationManager,
@@ -521,13 +580,8 @@ import { sepolia } from "viem/chains";
 const environment = getSmartAccountsEnvironment(sepolia.id);
 export const delegationManager = environment.DelegationManager;
 
-const account = privateKeyToAccount(delegateWallet as `0x${string}`);
-
-export const walletClient = createWalletClient({
-  account,
-  transport: http(),
-  chain: sepolia,
-});
+export const privateKey = `0x12141..`;
+const account = privateKeyToAccount(privateKey);
 
 // The address to which the delegation is granted. It can be an EOA address, or
 // smart account address.
