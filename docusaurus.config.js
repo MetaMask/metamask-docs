@@ -470,7 +470,7 @@ const config = {
           },
           {
             filename: 'llms-services-full.txt',
-            includePatterns: ['services/**/*.{md,mdx}'],
+            includePatterns: ['services/**/*.md'],
             fullContent: true,
             title: 'Services documentation',
             description: 'Complete documentation for MetaMask services',
