@@ -483,6 +483,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      announcementBar: {
+        id: 'delegation-toolkit-rename-announcement-bar',
+        content: 'Delegation Toolkit is now renamed to Smart Accounts Kit.',
+        backgroundColor: '#eac2ff',
+        textColor: '#0a0a0a',
+        isCloseable: false,
+      },
       metadata: [
         {
           name: 'keywords',
