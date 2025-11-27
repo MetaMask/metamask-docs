@@ -2,6 +2,9 @@
 description: Send atomic batch transactions using `wallet_sendCalls`.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Send batch transactions
 
 You can send and manage batch transactions in MetaMask, using the methods specified by
@@ -33,36 +36,73 @@ The key benefits of atomic batch transactions include:
 You can send batch transactions using [third-party libraries](#use-third-party-libraries)
 or [directly in your dapp](#send-batch-transactions-1).
 
-## Use third-party libraries
-
-You can send batch transactions using the following third-party libraries that support EIP-5792:
-
-- [Wagmi](https://wagmi.sh/react/api/hooks/useCapabilities)
-- [Viem](https://viem.sh/docs/actions/wallet/getCapabilities)
-- [thirdweb](https://portal.thirdweb.com/references/typescript/v5/hooks#eip5792)
-
 ## Send batch transactions
 
 ### 1. Query whether atomic batch is supported
 
-Use [`wallet_getCapabilities`](../../reference/json-rpc-api/index.md) to query 
+Use [`wallet_getCapabilities`](../../reference/json-rpc-api/index.md) to query
 whether MetaMask supports atomic batch transactions for a specific address and specific chain IDs.
 For example:
 
-```js title="index.js"
-import { createEVMClient } from "@metamask/connect/evm";
+<Tabs>
 
-const evmClient = createEVMClient();
-const provider = evmClient.getProvider();
+<TabItem value="Ethereum API">
+
+```js
+import { createEVMClient } from '@metamask/connect/evm'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
 
 const capabilities = await provider.request({
-  method: "wallet_getCapabilities",
+  method: 'wallet_getCapabilities',
   params: [
-    "0xd46e8dd67c5d32be8058bb8eb970870f07244567", // The user's wallet address.
-    ["0x1", "0xaa36a7"] // (Optional) A list of chain IDs to query for.
+    '0xd46e8dd67c5d32be8058bb8eb970870f07244567', // The user's wallet address.
+    ['0x1', '0xaa36a7'], // (Optional) A list of chain IDs to query for.
   ],
-});
+})
 ```
+
+</TabItem>
+
+<TabItem value="viem">
+
+```tsx
+import { createEVMClient } from '@metamask/connect/evm'
+import { createWalletClient, custom } from 'viem'
+import { mainnet } from 'viem/chains'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
+
+const walletClient = createWalletClient({ chain: mainnet, transport: custom(provider) })
+
+const address = await walletClient.getAddresses()
+
+const capabilities = await walletClient.getCapabilities({
+  account: address[0],
+})
+```
+
+</TabItem>
+
+<TabItem value="wagmi">
+
+```tsx
+import { createEVMClient } from '@metamask/connect/evm'
+import { useCapabilities } from 'wagmi'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
+
+const status = await useCapabilities({
+  account: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+})
+```
+
+</TabItem>
+
+</Tabs>
 
 This method returns the status of the `atomic` capability for each chain ID.
 For example:
@@ -107,45 +147,95 @@ MetaMask's support for atomic batch transactions includes the following networks
 - Berachain Mainnet and Bepolia
 
 MetaMask will support this feature on more networks as they adopt EIP-7702.
+
 </div>
 </details>
 
 :::note Atomic batch unsupported
+
 - If the user has already upgraded their account to a third-party smart contract account, MetaMask does not currently support atomic batch transactions for that account.
-- If atomic batch is not supported, fall back to [`eth_sendTransaction`](index.md) instead of 
+- If atomic batch is not supported, fall back to [`eth_sendTransaction`](index.md) instead of
   [`wallet_sendCalls`](../../reference/json-rpc-api/index.md),
   and [`eth_getTransactionReceipt`](../../reference/json-rpc-api/index.md)
   instead of [`wallet_getCallsStatus`](../../reference/json-rpc-api/index.md).
-:::
+  :::
 
 ### 2. Submit a batch of transactions
 
 Use [`wallet_sendCalls`](../../reference/json-rpc-api/index.md) to submit a batch of transactions.
 For example:
 
-```js title="index.js"
+<Tabs>
+<TabItem value="Ethereum API">
+
+```js
 const result = await provider.request({
-  method: "wallet_sendCalls",
+  method: 'wallet_sendCalls',
   params: [
     {
-      version: "2.0.0", // The version of the API format. This must be 2.0.0.
-      from: "0xd46e8dd67c5d32be8058bb8eb970870f07244567", // The sender's address.
-      chainId: "0xaa36a7", // The chain ID, which must match the currently selected network.
+      version: '2.0.0', // The version of the API format. This must be 2.0.0.
+      from: '0xd46e8dd67c5d32be8058bb8eb970870f07244567', // The sender's address.
+      chainId: '0xaa36a7', // The chain ID, which must match the currently selected network.
       atomicRequired: true, // Whether or not atomicity is required.
-      calls: [ // The list of calls to send as a batch.
+      calls: [
+        // The list of calls to send as a batch.
         {
-          to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-          value: "0x0"
+          to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+          value: '0x0',
         },
         {
-          to: "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
-          value: "0x0"
-        }
-      ]
-    }
+          to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+          value: '0x0',
+        },
+      ],
+    },
   ],
-});
+})
 ```
+
+</TabItem>
+<TabItem value="viem">
+
+```tsx
+const { id } = await walletClient.sendCalls({
+  account: address[0],
+  calls: [
+    {
+      to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+      value: '0x0',
+    },
+    {
+      to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+      value: '0x0',
+    },
+  ],
+})
+```
+
+</TabItem>
+<TabItem value="wagmi">
+
+```tsx
+import { useSendCalls } from 'wagmi'
+
+const { sendCalls, data } = useSendCalls()
+
+sendCalls({
+  calls: [
+    {
+      to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+      value: '0x0',
+    },
+    {
+      to: '0xd46e8dd67c5d32be8058bb8eb970870f07244567',
+      value: '0x0',
+    },
+  ],
+})
+```
+
+</TabItem>
+</Tabs>
 
 :::note Atomic required parameter
 MetaMask only supports using `wallet_sendCalls` to send atomic batch transactions (not sequential batch transactions),
@@ -164,18 +254,44 @@ For example:
 
 ### 3. Track the status of the batch of transactions
 
-Use [`wallet_getCallsStatus`](../../reference/json-rpc-api/index.md) to track 
+Use [`wallet_getCallsStatus`](../../reference/json-rpc-api/index.md) to track
 the status of the submitted batch of transactions, using the batch ID returned by `wallet_sendCalls`.
 For example:
 
-```js title="index.js"
+<Tabs>
+
+<TabItem value="Ethereum API">
+
+```js
 const status = await provider.request({
-  method: "wallet_getCallsStatus",
+  method: 'wallet_getCallsStatus',
   params: [
-    "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331" // Batch ID.
+    '0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331', // Batch ID.
   ],
-});
+})
 ```
+
+</TabItem>
+<TabItem value="viem">
+
+```tsx
+const { result } = await walletClient.getCallsStatus({
+  id: '0x1234567890abcdef',
+})
+```
+
+</TabItem>
+<TabItem value="wagmi">
+
+```tsx
+import { getCallsStatus } from 'wagmi'
+
+const status = await getCallsStatus(config, { id: data.id })
+```
+
+</TabItem>
+
+</Tabs>
 
 This method returns status information about the batch of transactions, including:
 
@@ -193,14 +309,13 @@ For example:
   "id": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
   "status": 200, // Status code. 200 means confirmed.
   "atomic": true, // Whether the calls were executed atomically.
-  "receipts": [ // List of transaction receipts.
+  "receipts": [
+    // List of transaction receipts.
     {
       "logs": [
         {
           "address": "0xa922b54716264130634d6ff183747a8ead91a40b",
-          "topics": [
-            "0x5a2a90727cc9d000dd060b1132a5c977c9702bb3a52afe360c9c22f0e9451a68"
-          ],
+          "topics": ["0x5a2a90727cc9d000dd060b1132a5c977c9702bb3a52afe360c9c22f0e9451a68"],
           "data": "0xabcd"
         }
       ],
@@ -221,6 +336,14 @@ In some cases, calls can be executed atomically but in multiple transactions (fo
 `eth_bundle` on an L2 network resistant to reorgs).
 In these cases, `atomic` is `true` but multiple receipts are returned.
 :::
+
+## Use third-party libraries
+
+You can send batch transactions using the following third-party libraries that support EIP-5792:
+
+- [Wagmi](https://wagmi.sh/react/api/hooks/useCapabilities)
+- [Viem](https://viem.sh/docs/actions/wallet/getCapabilities)
+- [thirdweb](https://portal.thirdweb.com/references/typescript/v5/hooks#eip5792)
 
 ## Resources
 
