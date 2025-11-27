@@ -374,7 +374,8 @@ export const delegation = createDelegation({
   },
 });
 ```
-
+</TabItem>
+</Tabs>
 
 ## `getSmartAccountsEnvironment`
 
