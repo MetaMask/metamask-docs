@@ -34,6 +34,11 @@ const sidebar = {
             'get-started/use-scaffold-eth/advanced-permissions',
           ],
         },
+        {
+          type: "link",
+          label: "LLM context",
+          href: "https://docs.metamask.io/llms-smart-accounts-kit-full.txt"
+        },
         'get-started/supported-networks',
       ],
     },
