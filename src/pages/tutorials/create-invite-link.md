@@ -7,6 +7,7 @@ keywords: [delegation, smart accounts kit, social, invite, referral, link]
 date: Sep 8, 2025
 author: MetaMask Developer Relations
 toc_max_heading_level: 4
+discourseTopicId: 2601
 ---
 
 This tutorial walks you through creating an invite link so users can refer their friends to your dapp with minimal friction.
