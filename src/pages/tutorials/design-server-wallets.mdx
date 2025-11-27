@@ -6,10 +6,11 @@ tags: [AI agent, ERC-8004, server wallet, embedded wallets, ethereum, solana, no
 date: October 28, 2025
 author: MetaMask Developer Relations
 toc_max_heading_level: 2
+discourseTopicId: 2600
 ---
 
 MetaMask has specialized in creating fast and secure non-custodial wallets across the web3 ecosystem.
-With [ERC‑8004](https://eips.ethereum.org/EIPS/eip-8004) standardizing how AI agents express what they intend to do, there is a clear need for a fast, safe, multichain signing backend, more commonly known as a *server wallet*.
+With [ERC‑8004](https://eips.ethereum.org/EIPS/eip-8004) standardizing how AI agents express what they intend to do, there is a clear need for a fast, safe, multichain signing backend, more commonly known as a _server wallet_.
 In the near future, even non-web3-native developers will require server wallets, so it's important to outline an ideal architecture.
 
 This page describes a production‑oriented architecture you can adopt today and hints at where MetaMask is going next with a one-click ERC‑8004 server wallet experience.
@@ -23,7 +24,7 @@ The signing key lives in a secure environment, so it is never exposed directly t
 
 The following is a high-level server wallet architecture:
 
-- The client holds an *agent key* used to authenticate who is asking to sign; this is separate from the onchain *account key* that controls funds.​
+- The client holds an _agent key_ used to authenticate who is asking to sign; this is separate from the onchain _account key_ that controls funds.​
 - The backend exposes minimal APIs that forward requests to a trusted execution environment (TEE) — for example, [AWS Nitro Enclaves](https://aws.amazon.com/ec2/nitro/nitro-enclaves/).
 - The TEE enclave is the only environment allowed to verify agent keys, generate account keys, decrypt keys, apply policy, and produce signatures.
   It has no external networking and no persistent storage.
