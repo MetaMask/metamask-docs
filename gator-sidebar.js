@@ -37,7 +37,7 @@ const sidebar = {
         {
           type: "link",
           label: "LLM context",
-          href: "/llms-smart-accounts-kit-full.txt"
+          href: "https://docs.metamask.io/llms-smart-accounts-kit-full.txt"
         },
         'get-started/supported-networks',
       ],
