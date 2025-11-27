@@ -191,7 +191,7 @@ const receipt = await web3.eth.sendTransaction({
 
 ## Send an advanced transaction with gas estimation
 
-To add gas estimation, use the [`eth_estimateGas`](../../../reference/json-rpc-api/index.md)
+To add gas estimation, use the [`eth_estimateGas`](../../reference/json-rpc-api/index.md)
 RPC method.
 
 ```javascript

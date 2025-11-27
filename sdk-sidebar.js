@@ -95,13 +95,21 @@ const sdkSidebar = {
         'evm/connect/guides/interact-with-contracts',
         {
           type: 'category',
-          label: 'MetaMask Exclusive',
+          label: 'MetaMask exclusive',
           collapsible: true,
           collapsed: true,
           items: [
-            'evm/connect/guides/batch-requests',
-            'evm/connect/guides/use-deeplinks',
-            'evm/connect/guides/display-tokens',
+            'evm/connect/guides/metamask-exclusive/batch-requests',
+            'evm/connect/guides/metamask-exclusive/use-deeplinks',
+            'evm/connect/guides/metamask-exclusive/display-tokens',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Best practices',
+          collapsible: true,
+          collapsed: true,
+          items: [
             'evm/connect/guides/best-practices/display',
             'evm/connect/guides/best-practices/run-devnet',
             'evm/connect/guides/best-practices/production-readiness',

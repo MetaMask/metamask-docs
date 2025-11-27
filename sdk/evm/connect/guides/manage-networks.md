@@ -25,8 +25,8 @@ With MM Connect, you can:
 You can implement network management directly in JavaScript.
 
 The following example detects the current network using the
-[`eth_chainId`](../../reference/json-rpc-api/index.md) RPC method and
-[`chainChanged`](../../reference/provider-api.md#chainchanged) provider event:
+[`eth_chainId`](../reference/json-rpc-api/index.md) RPC method and
+[`chainChanged`](../reference/provider-api.md#chainchanged) provider event:
 
 ```javascript
 import { createEVMClient } from '@metamask/connect/evm'
@@ -56,8 +56,8 @@ provider.on('chainChanged', chainId => {
 ```
 
 The following example switches networks using the
-[`wallet_switchEthereumChain`](../../reference/json-rpc-api/index.md)
-and [`wallet_addEthereumChain`](../../reference/json-rpc-api/index.md)
+[`wallet_switchEthereumChain`](../reference/json-rpc-api/index.md)
+and [`wallet_addEthereumChain`](../reference/json-rpc-api/index.md)
 RPC methods:
 
 ```javascript
@@ -148,7 +148,7 @@ The following table lists common network management errors and their codes:
 
 | Error code | Description             | Solution                                                                                         |
 | ---------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
-| `4902`     | Network not added       | Use [`wallet_addEthereumChain`](../../reference/json-rpc-api/index.md) to add the network first. |
+| `4902`     | Network not added       | Use [`wallet_addEthereumChain`](../reference/json-rpc-api/index.md) to add the network first. |
 | `4001`     | User rejected request   | Show a message asking the user to approve the network switch.                                    |
 | `-32002`   | Request already pending | Disable the switch network button while the request is pending.                                  |
 

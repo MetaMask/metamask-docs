@@ -199,7 +199,7 @@ When connected, the interface displays your connected wallet address:
 
 ### 4. Handle and send batch transactions
 
-In `src/app/page.tsx`, use the [`useSendCalls`](https://wagmi.sh/react/api/hooks/useSendCalls) hook from Wagmi to handle and send [atomic batch transactions](/sdk/evm/connect/guides/javascript/send-transactions/batch-transactions).
+In `src/app/page.tsx`, use the [`useSendCalls`](https://wagmi.sh/react/api/hooks/useSendCalls) hook from Wagmi to handle and send [atomic batch transactions](/sdk/evm/connect/guides/send-transactions/batch-transactions).
 Also use React's `useState` hook to handle the transaction state.
 The following example sends 0.001 and 0.0001 ETH in a batch transaction.
 Replace `<YOUR-RECIPIENT-ADDRESS>` with recipient addresses of your choice:

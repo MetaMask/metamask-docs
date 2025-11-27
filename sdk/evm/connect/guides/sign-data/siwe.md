@@ -41,7 +41,7 @@ This is to not break existing dapps that may have use cases for mismatched domai
 ## Example
 
 The following is an example of setting up SIWE with MetaMask using
-[`personal_sign`](../../../reference/json-rpc-api/index.md):
+[`personal_sign`](../../reference/json-rpc-api/index.md):
 
 ```javascript title="index.js"
 import { createEVMClient } from '@metamask/connect/evm'

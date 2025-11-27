@@ -26,8 +26,8 @@ With MM Connect, you can:
 ## Connect wallet
 
 You can implement user authentication directly in JavaScript, using the
-[`eth_requestAccounts`](../../reference/json-rpc-api/index.md) RPC method
-and [`accountsChanged`](../../reference/provider-api.md#accountschanged) provider event.
+[`eth_requestAccounts`](../reference/json-rpc-api/index.md) RPC method
+and [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event.
 For example:
 
 ```javascript
@@ -99,7 +99,7 @@ Display connect and disconnect buttons in HTML:
 
 ## Connect and sign
 
-You can use MM Connect's [`connectAndSign`](../../reference/methods.md#connectandsign) method to request wallet access and sign a message in a single user interaction.
+You can use MM Connect's [`connectAndSign`](../reference/methods.md#connectandsign) method to request wallet access and sign a message in a single user interaction.
 For example:
 
 ```js

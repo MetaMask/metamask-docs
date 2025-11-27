@@ -113,7 +113,7 @@ In this example, four contract read calls are batched together.
 The results are returned as an array in the same order as the calls, allowing you to process each result accordingly.
 
 :::info
-"Batching" can also refer to [batching JSON-RPC requests](../batch-requests.md) using MM Connect's `metamask_batch` method, or [sending atomic batch transactions](../send-transactions/batch-transactions.md) in MetaMask.
+"Batching" can also refer to [batching JSON-RPC requests](../metamask-exclusive/batch-requests.md) using MM Connect's `metamask_batch` method, or [sending atomic batch transactions](../send-transactions/batch-transactions.md) in MetaMask.
 :::
 
 ## Write to contracts

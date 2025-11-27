@@ -44,6 +44,6 @@ For example:
 
 - **Clear feedback** - Display user friendly messages when wallet connection or transaction errors occur (for example, network switch failures or user rejections).
 
-- **Event management** - If you're using Vanilla JavaScript, handle MetaMask events such as [`chainChanged`](../../../reference/provider-api.md#chainchanged)
-  and [`accountsChanged`](../../../reference/provider-api.md#accountschanged) to promptly update the UI and internal state.
+- **Event management** - If you're using Vanilla JavaScript, handle MetaMask events such as [`chainChanged`](../../reference/provider-api.md#chainchanged)
+  and [`accountsChanged`](../../reference/provider-api.md#accountschanged) to promptly update the UI and internal state.
   If you're using Wagmi, you generally don't need to handle MetaMask events, because the hooks will handle the events for you.

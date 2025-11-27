@@ -79,7 +79,7 @@ try {
 
 :::note
 If the chain ID of your token doesn't match the user's network, they can get unexpected results.
-We recommend [detecting the user's network chain ID](manage-networks.md) and
+We recommend [detecting the user's network chain ID](../manage-networks.md) and
 prompting them to switch chains, if necessary.
 :::
 
@@ -101,10 +101,10 @@ The add NFT interfaces look like the following:
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../_assets/watchasset-nft.png").default} alt="NFT confirmation" class="appScreen" />
+        <img src={require("../../_assets/watchasset-nft.png").default} alt="NFT confirmation" class="appScreen" />
     </div>
     <div class="imgCol">
-        <img src={require("../_assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
+        <img src={require("../../_assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
     </div>
 </div>
 

@@ -29,7 +29,7 @@ sign data using an unsupported method, in which case we recommend using your sta
 
 ## Use `eth_signTypedData_v4`
 
-[`eth_signTypedData_v4`](../../../reference/json-rpc-api/index.md)
+[`eth_signTypedData_v4`](../../reference/json-rpc-api/index.md)
 provides the most human-readable signatures that are efficient to process onchain.
 It follows the [EIP-712](https://eips.ethereum.org/EIPS/eip-712) specification to allow users to sign
 typed structured data that can be verified onchain.
@@ -422,7 +422,7 @@ const signature = await web3.eth.sendAsync(method, params)
 
 ## Use `personal_sign`
 
-[`personal_sign`](../../../reference/json-rpc-api/index.md) is the
+[`personal_sign`](../../reference/json-rpc-api/index.md) is the
 easiest way to request human-readable signatures that don't need to be efficiently processed onchain.
 It's often used for signature challenges that are authenticated on a web server, such as
 [Sign-In with Ethereum](siwe.md).

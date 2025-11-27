@@ -159,7 +159,7 @@ console.log('eth_accounts result:', result)
 
 `evmClient.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
 
-Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/batch-requests.md) via `metamask_batch`.
+Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
 
 ## Common MM Connect methods at a glance
 
@@ -169,7 +169,7 @@ Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc
 | [`connectAndSign({ msg: "..." })`](../reference/methods.md#connectandsign)     | Connects and prompts user to sign a message              |
 | [`getProvider()`](../reference/methods.md#getprovider)                         | Returns the provider object for RPC requests             |
 | [`provider.request({ method, params })`](../reference/provider-api.md#request) | Calls any Ethereum JSON‑RPC method                       |
-| [Batched RPC](../guides/batch-requests.md)                                     | Use `metamask_batch` to group multiple JSON-RPC requests |
+| [Batched RPC](../guides/metamask-exclusive/batch-requests.md)                                     | Use `metamask_batch` to group multiple JSON-RPC requests |
 
 ## Usage example
 

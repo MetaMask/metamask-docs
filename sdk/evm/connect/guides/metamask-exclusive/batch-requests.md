@@ -10,8 +10,8 @@ These requests can be contract calls or other JSON-RPC methods (for example, sig
 Despite being batched into one HTTP request, each call still requires individual user approval, and if any request is rejected, the entire batch fails.
 
 :::info
-"Batching" can also refer to [Wagmi contract read batching](./wagmi/interact-with-contracts.md#batch-contract-reads) or
-[sending atomic batch transactions](send-transactions/batch-transactions.md) in MetaMask.
+"Batching" can also refer to [Wagmi contract read batching](../wagmi/interact-with-contracts.md#batch-contract-reads) or
+[sending atomic batch transactions](../send-transactions/batch-transactions.md) in MetaMask.
 :::
 
 ## Batch JSON-RPC requests

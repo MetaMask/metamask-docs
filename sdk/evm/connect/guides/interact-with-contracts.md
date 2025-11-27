@@ -419,7 +419,7 @@ async function updateMessageExample() {
 
 You can implement smart contract interactions directly in JavaScript.
 
-The following example reads contract data using the [`eth_call`](../../reference/json-rpc-api/index.md) RPC method:
+The following example reads contract data using the [`eth_call`](../reference/json-rpc-api/index.md) RPC method:
 
 ```javascript
 import { createEVMClient } from '@metamask/connect/evm'
@@ -463,9 +463,9 @@ async function displayBalance() {
 }
 ```
 
-The following example writes to contracts using the [`eth_requestAccounts`](../../reference/json-rpc-api/index.md),
-[`eth_sendTransaction`](../../reference/json-rpc-api/index.md), and
-[`eth_getTransactionReceipt`](../../reference/json-rpc-api/index.md)
+The following example writes to contracts using the [`eth_requestAccounts`](../reference/json-rpc-api/index.md),
+[`eth_sendTransaction`](../reference/json-rpc-api/index.md), and
+[`eth_getTransactionReceipt`](../reference/json-rpc-api/index.md)
 RPC methods:
 
 ```javascript
