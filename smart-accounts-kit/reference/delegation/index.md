@@ -184,7 +184,7 @@ const execution = createExecution({
 
 ## `decodeDelegations`
 
-Decodes a ABI encoded hex string to an array of delegations.
+Decodes an ABI-encoded hex string to an array of delegations.
 
 ### Parameters
 
@@ -335,15 +335,13 @@ export const delegation = createDelegation({
 
 ## `encodeDelegations`
 
-Encodes an array of delegations to ABI encoded hex string.
+Encodes an array of delegations to an ABI-encoded hex string.
 
 ### Parameters
 
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
 | `delegations` | `Delegation[]` | Yes | The delegation array to be encoded. |
-
-### Example
 
 ### Example
 
