@@ -225,6 +225,7 @@ In these cases, `atomic` is `true` but multiple receipts are returned.
 ## Resources
 
 - See the [MetaMask 7702/5792 Readiness dapp](https://7702playground.metamask.io/) to quickly test sending batch transactions.
+- Follow the [tutorial to send atomic batch transactions using Wagmi](/tutorials/upgrade-eoa-to-smart-account), upgrading an externally owned account to a smart account.
 - See the [MetaMask Smart Accounts Kit documentation](/smart-accounts-kit) for more information about MetaMask Smart Accounts and their capabilities.
 - See the following topics in the MetaMask end user documentation:
   - [What is a smart account?](https://support.metamask.io/configure/accounts/what-is-a-smart-account/)

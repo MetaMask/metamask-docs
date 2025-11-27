@@ -1,12 +1,15 @@
 ---
-description: Authenticate users with MM Connect in your JavaScript dapp.
-keywords: [SDK, JavaScript, authenticate, connect, sign, accounts, wallet, dapp]
+description: Authenticate users with MM Connect in your Vanilla JS or Wagmi dapp.
+keywords: [SDK, JavaScript, wagmi, authenticate, connect, sign, accounts, wallet, dapp]
 toc_max_heading_level: 3
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Manage user accounts
 
-Connect and manage user wallet sessions in your JavaScript dapp.
+Connect and manage user wallet sessions in your Vanilla JavaScript or Wagmi dapp.
 With MM Connect, you can:
 
 - **Connect users' wallets** to your dapp.
@@ -25,10 +28,14 @@ With MM Connect, you can:
 
 ## Connect wallet
 
-You can implement user authentication directly in JavaScript, using the
+With Vanilla JavaScript, you can implement user authentication directly using the
 [`eth_requestAccounts`](../reference/json-rpc-api/index.md) RPC method
 and [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event.
-For example:
+
+With Wagmi, you can use provided hooks for handling wallet connections.
+
+<Tabs>
+<TabItem value="Vanilla JavaScript">
 
 ```javascript
 import { createEVMClient } from '@metamask/connect/evm'
@@ -96,6 +103,64 @@ Display connect and disconnect buttons in HTML:
   <button id="disconnectBtn" style="display: none" onclick="disconnectWallet()">Disconnect</button>
 </div>
 ```
+
+</TabItem>
+<TabItem value="Wagmi">
+
+```tsx
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+
+function ConnectWallet() {
+  const { address, isConnected } = useAccount()
+  const { connectors, connect, isPending } = useConnect()
+  const { disconnect } = useDisconnect()
+
+  if (isConnected) {
+    return (
+      <div>
+        <div>Connected to {address}</div>
+        <button onClick={() => disconnect()}>Disconnect</button>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      {connectors.map(connector => (
+        <button key={connector.uid} onClick={() => connect({ connector })} disabled={isPending}>
+          {isPending ? 'Connecting...' : `Connect ${connector.name}`}
+        </button>
+      ))}
+    </div>
+  )
+}
+```
+
+Wagmi provides a dedicated hook for handling account lifecycle events:
+
+```tsx
+import { useAccountEffect } from 'wagmi'
+
+function WatchAccount() {
+  useAccountEffect({
+    onConnect(data) {
+      console.log('Connected!', {
+        address: data.address,
+        chainId: data.chainId,
+        isReconnected: data.isReconnected,
+      })
+    },
+    onDisconnect() {
+      console.log('Disconnected!')
+    },
+  })
+
+  return <div>Watching for account changes...</div>
+}
+```
+
+</TabItem>
+</Tabs>
 
 ## Connect and sign
 

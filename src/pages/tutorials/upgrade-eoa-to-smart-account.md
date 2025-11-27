@@ -8,7 +8,7 @@ author: MetaMask Developer Relations
 discourseTopicId: 2614
 ---
 
-This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/sdk/evm/connect/guides/javascript/send-transactions/batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
+This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/sdk/evm/connect/guides/send-transactions/batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
 You will use a provided template, which sets up MetaMask SDK with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
 
 ## Prerequisites

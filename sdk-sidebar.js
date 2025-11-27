@@ -115,19 +115,6 @@ const sdkSidebar = {
             'evm/connect/guides/best-practices/production-readiness',
           ],
         },
-        // {
-        //   type: 'category',
-        //   label: 'Wagmi',
-        //   collapsible: true,
-        //   collapsed: true,
-        //   link: { type: "doc", id: "evm/connect/guides/wagmi/index" },
-        //   items: [
-        //     'evm/connect/guides/wagmi/manage-user-accounts',
-        //     'evm/connect/guides/wagmi/manage-networks',
-        //     'evm/connect/guides/wagmi/send-transactions',
-        //     'evm/connect/guides/wagmi/interact-with-contracts',
-        //   ],
-        // },
       ],
     },
     {

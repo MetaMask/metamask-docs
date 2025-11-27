@@ -1,6 +1,6 @@
 ---
 description: Interact with contracts with MM Connect in your JavaScript dapp.
-keywords: [SDK, JavaScript, read, write, smart, contract, contracts, dapp]
+keywords: [SDK, JavaScript, wagmi, read, write, smart, contract, contracts, dapp]
 sidebar_label: Interact with contracts
 toc_max_heading_level: 3
 ---
@@ -19,11 +19,9 @@ With MM Connect, you can:
 - **Manage transaction states**.
 - **Handle contract errors**.
 
-## Solidity smart contract
+The following examples demonstrate how to use MM Connect with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to interact with Solidity smart contracts.
 
-In this example, we'll be demonstrating how to use MetaMask Connect SDK with viem, web3.js, ethers.js or with ETH APIs to interact with Solidity smart contracts.
-
-The simple Hello World contract allows anyone to read and write a message to it.
+This simple Hello World contract allows anyone to read and write a message to it.
 
 ```tsx
 // SPDX-License-Identifier: GPL-3.0
@@ -45,100 +43,7 @@ contract HelloWorld {
 
 ## Read from contracts
 
-<Tabs
-defaultValue="viem"
-values={[
-{ label: "viem", value: "viem" },
-{ label: "web3.js", value: "web3" },
-{ label: "ethers.js", value: "ethers" },
-{ label: "ETH APIs", value: "eth_api" },
-]}>
-
-<TabItem value="ethers">
-
-```tsx
-import { createEVMClient } from '@metamask/connect/evm'
-import { ethers } from 'ethers'
-
-const evmClient = createEVMClient()
-const provider = evmClient.getProvider()
-
-const ethersProvider = new ethers.BrowserProvider(provider)
-const signer = await ethersProvider.getSigner()
-
-const contractABI = [
-  {
-    inputs: [{ internalType: 'string', name: 'initMessage', type: 'string' }],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
-  },
-  {
-    inputs: [],
-    name: 'message',
-    outputs: [{ internalType: 'string', name: '', type: 'string' }],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [{ internalType: 'string', name: 'newMessage', type: 'string' }],
-    name: 'update',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-]
-const contractAddress = '0x04cA407965D60C2B39d892a1DFB1d1d9C30d0334'
-const contract = new ethers.Contract(
-  contractAddress,
-  JSON.parse(JSON.stringify(contractABI)),
-  signer
-)
-
-// Read message from smart contract
-const message = await contract.message()
-```
-
-</TabItem>
-<TabItem value="web3">
-
-```tsx
-import { createEVMClient } from '@metamask/connect/evm'
-import { Web3 } from 'web3'
-
-const evmClient = createEVMClient()
-const provider = evmClient.getProvider()
-
-const web3 = new Web3(provider)
-
-const contractABI = [
-  {
-    inputs: [{ internalType: 'string', name: 'initMessage', type: 'string' }],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
-  },
-  {
-    inputs: [],
-    name: 'message',
-    outputs: [{ internalType: 'string', name: '', type: 'string' }],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [{ internalType: 'string', name: 'newMessage', type: 'string' }],
-    name: 'update',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-]
-const contractAddress = '0x04cA407965D60C2B39d892a1DFB1d1d9C30d0334'
-const contract = new web3.eth.Contract(contractABI, contractAddress)
-
-// Read message from smart contract
-const message = await contract.methods.message().call()
-```
-
-</TabItem>
+<Tabs>
 <TabItem value="viem">
 
 ```tsx
@@ -187,7 +92,92 @@ const message = await publicClient.readContract({
 ```
 
 </TabItem>
-<TabItem value="eth_api">
+<TabItem value="web3.js">
+
+```tsx
+import { createEVMClient } from '@metamask/connect/evm'
+import { Web3 } from 'web3'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
+
+const web3 = new Web3(provider)
+
+const contractABI = [
+  {
+    inputs: [{ internalType: 'string', name: 'initMessage', type: 'string' }],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+  },
+  {
+    inputs: [],
+    name: 'message',
+    outputs: [{ internalType: 'string', name: '', type: 'string' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'string', name: 'newMessage', type: 'string' }],
+    name: 'update',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+const contractAddress = '0x04cA407965D60C2B39d892a1DFB1d1d9C30d0334'
+const contract = new web3.eth.Contract(contractABI, contractAddress)
+
+// Read message from smart contract
+const message = await contract.methods.message().call()
+```
+
+</TabItem>
+<TabItem value="ethers.js">
+
+```tsx
+import { createEVMClient } from '@metamask/connect/evm'
+import { ethers } from 'ethers'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
+
+const ethersProvider = new ethers.BrowserProvider(provider)
+const signer = await ethersProvider.getSigner()
+
+const contractABI = [
+  {
+    inputs: [{ internalType: 'string', name: 'initMessage', type: 'string' }],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+  },
+  {
+    inputs: [],
+    name: 'message',
+    outputs: [{ internalType: 'string', name: '', type: 'string' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'string', name: 'newMessage', type: 'string' }],
+    name: 'update',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+const contractAddress = '0x04cA407965D60C2B39d892a1DFB1d1d9C30d0334'
+const contract = new ethers.Contract(
+  contractAddress,
+  JSON.parse(JSON.stringify(contractABI)),
+  signer
+)
+
+// Read message from smart contract
+const message = await contract.message()
+```
+
+</TabItem>
+<TabItem value="Ethereum API">
 
 ```tsx
 import { createEVMClient } from '@metamask/connect/evm'
@@ -230,96 +220,109 @@ async function displayMessage() {
 ```
 
 </TabItem>
+<TabItem value="Wagmi">
+
+```tsx
+import { useReadContract } from 'wagmi'
+
+function TokenBalance() {
+  const {
+    data: balance,
+    isError,
+    isLoading,
+  } = useReadContract({
+    address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
+    abi: [
+      {
+        name: 'balanceOf',
+        type: 'function',
+        stateMutability: 'view',
+        inputs: [{ name: 'owner', type: 'address' }],
+        outputs: [{ name: 'balance', type: 'uint256' }],
+      },
+    ],
+    functionName: 'balanceOf',
+    args: ['0x03A71968491d55603FFe1b11A9e23eF013f75bCF'],
+  })
+
+  if (isLoading) return <div>Loading balance...</div>
+  if (isError) return <div>Error fetching balance</div>
+
+  return <div>Balance: {balance?.toString()}</div>
+}
+```
+
+</TabItem>
 </Tabs>
+
+### Batch contract reads
+
+With Wagmi, you can perform multiple contract read operations using the [`useReadContracts`](https://wagmi.sh/react/api/hooks/useReadContracts) hook.
+This hook batches contract calls internally, returning the results as an array.
+For example:
+
+```js
+import { useReadContracts } from "wagmi";
+
+// Example contract definitions with their address and ABI
+const contractA = {
+  address: "0xContractAddress1",
+  abi: contractABI1,
+} as const;
+
+const contractB = {
+  address: "0xContractAddress2",
+  abi: contractABI2,
+} as const;
+
+function MyBatchReadComponent() {
+  const { data, isError, isLoading } = useReadContracts({
+    contracts: [
+      {
+        ...contractA,
+        functionName: "getValueA",
+      },
+      {
+        ...contractA,
+        functionName: "getValueB",
+      },
+      {
+        ...contractB,
+        functionName: "getValueX",
+        args: [42],
+      },
+      {
+        ...contractB,
+        functionName: "getValueY",
+        args: [42],
+      },
+    ],
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching data.</div>;
+
+  return (
+    <div>
+      <p>getValueA: {data?.[0]?.toString()}</p>
+      <p>getValueB: {data?.[1]?.toString()}</p>
+      <p>getValueX: {data?.[2]?.toString()}</p>
+      <p>getValueY: {data?.[3]?.toString()}</p>
+    </div>
+  );
+}
+```
+
+In this example, four contract read calls are batched together.
+The results are returned as an array in the same order as the calls, allowing you to process each result accordingly.
+
+:::info
+"Batching" can also refer to [batching JSON-RPC requests](metamask-exclusive/batch-requests.md) using MM Connect's `metamask_batch` method, or [sending atomic batch transactions](send-transactions/batch-transactions.md) in MetaMask.
+:::
 
 ## Write to contracts
 
-<Tabs
-defaultValue="viem"
-values={[
-{ label: "viem", value: "viem" },
-{ label: "web3.js", value: "web3" },
-{ label: "ethers.js", value: "ethers" },
-{ label: "ETH APIs", value: "eth_api" },
-]}>
-
-<TabItem value="ethers">
-
-```tsx
-import { createEVMClient } from '@metamask/connect/evm'
-import { ethers } from 'ethers'
-
-const evmClient = createEVMClient()
-const provider = evmClient.getProvider()
-
-const ethersProvider = new ethers.BrowserProvider(provider)
-const signer = await ethersProvider.getSigner()
-
-const contractABI = [
-  {
-    inputs: [{ internalType: 'string', name: 'initMessage', type: 'string' }],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
-  },
-  {
-    inputs: [],
-    name: 'message',
-    outputs: [{ internalType: 'string', name: '', type: 'string' }],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [{ internalType: 'string', name: 'newMessage', type: 'string' }],
-    name: 'update',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-]
-const contractAddress = '0x04cA407965D60C2B39d892a1DFB1d1d9C30d0334'
-const contract = new ethers.Contract(
-  contractAddress,
-  JSON.parse(JSON.stringify(contractABI)),
-  signer
-)
-
-// Send transaction to smart contract to update message
-const tx = await contract.update('NEW_MESSAGE')
-
-// Wait for transaction to finish
-const receipt = await tx.wait()
-```
-
-</TabItem>
-<TabItem value="web3">
-
-```tsx
-import { createEVMClient } from '@metamask/connect/evm'
-import { Web3 } from 'web3'
-
-const evmClient = createEVMClient()
-const provider = evmClient.getProvider()
-
-const web3 = new Web3(provider)
-
-const contractABI = [
-  {
-    inputs: [{ internalType: 'string', name: 'initMessage', type: 'string' }],
-    stateMutability: 'nonpayable',
-    type: 'constructor',
-  },
-]
-const contractAddress = '0x04cA407965D60C2B39d892a1DFB1d1d9C30d0334'
-const contract = new web3.eth.Contract(contractABI, contractAddress)
-
-// Send transaction to smart contract to update message
-const tx = await contract.methods.update('NEW_MESSAGE').send({ from: signer.getAddress() })
-
-// Wait for transaction to finish
-const receipt = await tx.wait()
-```
-
-</TabItem>
+<Tabs>
 <TabItem value="viem">
 
 ```tsx
@@ -378,7 +381,84 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 ```
 
 </TabItem>
-<TabItem value="eth_api">
+<TabItem value="web3.js">
+
+```tsx
+import { createEVMClient } from '@metamask/connect/evm'
+import { Web3 } from 'web3'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
+
+const web3 = new Web3(provider)
+
+const contractABI = [
+  {
+    inputs: [{ internalType: 'string', name: 'initMessage', type: 'string' }],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+  },
+]
+const contractAddress = '0x04cA407965D60C2B39d892a1DFB1d1d9C30d0334'
+const contract = new web3.eth.Contract(contractABI, contractAddress)
+
+// Send transaction to smart contract to update message
+const tx = await contract.methods.update('NEW_MESSAGE').send({ from: signer.getAddress() })
+
+// Wait for transaction to finish
+const receipt = await tx.wait()
+```
+
+</TabItem>
+<TabItem value="ethers.js">
+
+```tsx
+import { createEVMClient } from '@metamask/connect/evm'
+import { ethers } from 'ethers'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
+
+const ethersProvider = new ethers.BrowserProvider(provider)
+const signer = await ethersProvider.getSigner()
+
+const contractABI = [
+  {
+    inputs: [{ internalType: 'string', name: 'initMessage', type: 'string' }],
+    stateMutability: 'nonpayable',
+    type: 'constructor',
+  },
+  {
+    inputs: [],
+    name: 'message',
+    outputs: [{ internalType: 'string', name: '', type: 'string' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'string', name: 'newMessage', type: 'string' }],
+    name: 'update',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+]
+const contractAddress = '0x04cA407965D60C2B39d892a1DFB1d1d9C30d0334'
+const contract = new ethers.Contract(
+  contractAddress,
+  JSON.parse(JSON.stringify(contractABI)),
+  signer
+)
+
+// Send transaction to smart contract to update message
+const tx = await contract.update('NEW_MESSAGE')
+
+// Wait for transaction to finish
+const receipt = await tx.wait()
+```
+
+</TabItem>
+<TabItem value="Ethereum API">
 
 ```tsx
 import { createEVMClient } from '@metamask/connect/evm'
@@ -412,151 +492,57 @@ async function updateMessageExample() {
 ```
 
 </TabItem>
+<TabItem value="Wagmi">
 
-</Tabs>
+```tsx
+import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 
-## Read and write to contracts
+function MintNFT() {
+  const { writeContract, data: hash, error, isPending } = useWriteContract()
 
-You can implement smart contract interactions directly in JavaScript.
-
-The following example reads contract data using the [`eth_call`](../reference/json-rpc-api/index.md) RPC method:
-
-```javascript
-import { createEVMClient } from '@metamask/connect/evm'
-
-const evmClient = createEVMClient()
-const provider = evmClient.getProvider()
-
-async function getBalance(contractAddress, userAddress) {
-  try {
-    // Create function signature for balanceOf(address)
-    const functionSignature = '0x70a08231'
-    // Pad address to 32 bytes
-    const encodedAddress = userAddress.slice(2).padStart(64, '0')
-
-    const result = await provider.request({
-      method: 'eth_call',
-      params: [
-        {
-          to: contractAddress,
-          data: functionSignature + encodedAddress,
-        },
-      ],
-    })
-
-    return BigInt(result)
-  } catch (error) {
-    console.error('Error reading balance:', error)
-    throw error
-  }
-}
-
-// Example usage
-async function displayBalance() {
-  const status = document.getElementById('status')
-  try {
-    const balance = await getBalance('0xContractAddress', '0xUserAddress')
-    status.textContent = `Balance: ${balance.toString()}`
-  } catch (error) {
-    status.textContent = `Error: ${error.message}`
-  }
-}
-```
-
-The following example writes to contracts using the [`eth_requestAccounts`](../reference/json-rpc-api/index.md),
-[`eth_sendTransaction`](../reference/json-rpc-api/index.md), and
-[`eth_getTransactionReceipt`](../reference/json-rpc-api/index.md)
-RPC methods:
-
-```javascript
-async function mintNFT(contractAddress, tokenId) {
-  try {
-    // Get user's account
-    const accounts = await provider.request({
-      method: 'eth_requestAccounts',
-    })
-
-    // Create function signature for mint(uint256)
-    const functionSignature = '0x6a627842'
-    // Pad tokenId to 32 bytes
-    const encodedTokenId = tokenId.toString(16).padStart(64, '0')
-
-    // Send transaction
-    const txHash = await provider.request({
-      method: 'eth_sendTransaction',
-      params: [
-        {
-          from: accounts[0],
-          to: contractAddress,
-          data: functionSignature + encodedTokenId,
-        },
-      ],
-    })
-
-    return txHash
-  } catch (error) {
-    if (error.code === 4001) {
-      throw new Error('Transaction rejected by user')
-    }
-    throw error
-  }
-}
-
-// Track transaction status
-async function watchTransaction(txHash) {
-  return new Promise((resolve, reject) => {
-    const checkTransaction = async () => {
-      try {
-        const tx = await provider.request({
-          method: 'eth_getTransactionReceipt',
-          params: [txHash],
-        })
-
-        if (tx) {
-          if (tx.status === '0x1') {
-            resolve(tx)
-          } else {
-            reject(new Error('Transaction failed'))
-          }
-        } else {
-          setTimeout(checkTransaction, 2000)
-        }
-      } catch (error) {
-        reject(error)
-      }
-    }
-
-    checkTransaction()
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+    hash,
   })
+
+  function mint() {
+    writeContract({
+      address: '0xFBA3912Ca04dd458c843e2EE08967fC04f3579c2',
+      abi: [
+        {
+          name: 'mint',
+          type: 'function',
+          stateMutability: 'nonpayable',
+          inputs: [{ name: 'tokenId', type: 'uint256' }],
+          outputs: [],
+        },
+      ],
+      functionName: 'mint',
+      args: [123n], // Token ID
+    })
+  }
+
+  return (
+    <div>
+      <button onClick={mint} disabled={isPending || isConfirming}>
+        {isPending ? 'Confirming...' : 'Mint NFT'}
+      </button>
+
+      {hash && (
+        <div>
+          Transaction Hash: {hash}
+          {isConfirming && <div>Waiting for confirmation...</div>}
+          {isConfirmed && <div>NFT Minted Successfully!</div>}
+        </div>
+      )}
+
+      {error && <div>Error: {error.message}</div>}
+    </div>
+  )
 }
 ```
 
-The following is an example implementation of contract interaction:
-
-```html
-<div class="contract-interaction">
-  <button onclick="handleMint()">Mint NFT</button>
-  <div id="status"></div>
-</div>
-
-<script>
-  async function handleMint() {
-    const status = document.getElementById('status')
-
-    try {
-      status.textContent = 'Sending transaction...'
-      const txHash = await mintNFT('0xContractAddress', 123)
-      status.textContent = `Transaction sent: ${txHash}`
-
-      status.textContent = 'Waiting for confirmation...'
-      await watchTransaction(txHash)
-      status.textContent = 'NFT Minted Successfully!'
-    } catch (error) {
-      status.textContent = `Error: ${error.message}`
-    }
-  }
-</script>
-```
+</TabItem>
+</Tabs>
 
 ## Best practices
 

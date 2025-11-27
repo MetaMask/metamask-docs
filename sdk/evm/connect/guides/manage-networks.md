@@ -1,12 +1,15 @@
 ---
-description: Manage networks with MM Connect in your JavaScript dapp.
-keywords: [SDK, JavaScript, detect, switch, add, network, networks, dapp]
+description: Manage networks with MM Connect in your Vanilla JS or Wagmi dapp.
+keywords: [SDK, JavaScript, wagmi, detect, switch, add, network, networks, dapp]
 toc_max_heading_level: 2
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Manage networks
 
-Manage networks in your JavaScript dapp.
+Manage networks in your Vanilla JavaScript or Wagmi dapp.
 With MM Connect, you can:
 
 - **Detect the current network** and monitor network changes.
@@ -22,11 +25,16 @@ With MM Connect, you can:
 
 ## Detect and switch networks
 
-You can implement network management directly in JavaScript.
-
-The following example detects the current network using the
+Wtih Vanilla JavaScript, you can implement network management directly using the
 [`eth_chainId`](../reference/json-rpc-api/index.md) RPC method and
-[`chainChanged`](../reference/provider-api.md#chainchanged) provider event:
+[`chainChanged`](../reference/provider-api.md#chainchanged) provider event.
+
+With Wagmi, you can use provided hooks for several network-related operations.
+
+Start by detecting the current network:
+
+<Tabs>
+<TabItem value="Vanilla JavaScript">
 
 ```javascript
 import { createEVMClient } from '@metamask/connect/evm'
@@ -55,7 +63,7 @@ provider.on('chainChanged', chainId => {
 })
 ```
 
-The following example switches networks using the
+Switch networks using the
 [`wallet_switchEthereumChain`](../reference/json-rpc-api/index.md)
 and [`wallet_addEthereumChain`](../reference/json-rpc-api/index.md)
 RPC methods:
@@ -124,6 +132,72 @@ Display the current network and a switch network button in HTML:
   <button onclick="switchNetwork("optimism")">Switch to Optimism</button>
 </div>
 ```
+
+</TabItem>
+<TabItem value="Wagmi">
+
+```tsx
+import { useChainId, useChains } from 'wagmi'
+
+function NetworkStatus() {
+  const chainId = useChainId()
+  const chains = useChains()
+
+  const currentChain = chains.find(c => c.id === chainId)
+
+  if (!currentChain) {
+    return <div>Not connected to any network</div>
+  }
+
+  return (
+    <div>
+      <div>Connected to {currentChain.name}</div>
+      <div>Chain ID: {chainId}</div>
+      <div>Supported chains: {chains.map(c => c.name).join(', ')}</div>
+    </div>
+  )
+}
+```
+
+Switch networks:
+
+```tsx
+import { useSwitchChain } from 'wagmi'
+
+function NetworkSwitcher() {
+  const { chains, switchChain } = useSwitchChain()
+
+  return (
+    <div>
+      {chains.map(chain => (
+        <button key={chain.id} onClick={() => switchChain({ chainId: chain.id })}>
+          Switch to {chain.name}
+        </button>
+      ))}
+    </div>
+  )
+}
+```
+
+Handle network changes:
+
+```tsx
+import { useChainId } from 'wagmi'
+import { useEffect } from 'react'
+
+function NetworkWatcher() {
+  const chainId = useChainId()
+
+  useEffect(() => {
+    console.log('Chain ID changed:', chainId)
+  }, [chainId])
+
+  return null
+}
+```
+
+</TabItem>
+</Tabs>
 
 ## Best practices
 

@@ -1,6 +1,6 @@
 ---
 description: Handle transactions with MM Connect in your JavaScript dapp.
-keywords: [SDK, JavaScript, send, transaction, transactions, status, estimate, gas, dapp]
+keywords: [SDK, JavaScript, wagmi, send, transaction, transactions, status, estimate, gas, dapp]
 toc_max_heading_level: 2
 ---
 
@@ -18,19 +18,95 @@ With MM Connect, you can:
 - **Handle transaction errors** gracefully.
 - **Manage complex transaction patterns**.
 
-You can implement transaction handling directly in JavaScript.
-The following are examples of sending a [basic transaction](#send-a-basic-transaction) and an
+The following examples demonstrate how to use MM Connect with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to send a [basic transaction](#send-a-basic-transaction) and an
 [advanced transaction with gas estimation](#send-an-advanced-transaction-with-gas-estimation).
 
 ## Send a basic transaction
 
-<Tabs defaultValue="viem" values={[
-{ label: "viem", value: "viem" },
-{ label: "web3.js", value: "web3" },
-{ label: "ethers.js", value: "ethers" },
-{ label: "Ethereum API", value: "eth_api" },
-]}>
-<TabItem value="eth_api">
+<Tabs>
+<TabItem value="viem">
+
+```tsx
+import { createEVMClient } from '@metamask/connect/evm'
+import { createPublicClient, createWalletClient, custom } from 'viem'
+import { mainnet } from 'viem/chains'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
+
+const publicClient = createPublicClient({ chain: mainnet, transport: custom(provider) })
+const walletClient = createWalletClient({ chain: mainnet, transport: custom(provider) })
+
+// data for the transaction
+const destination = '0xRECIPIENT_ADDRESS'
+const amount = parseEther('0.0001')
+const address = await walletClient.getAddresses()
+
+// Submit transaction to the blockchain
+const hash = await walletClient.sendTransaction({
+  account: address[0],
+  to: destination,
+  value: amount,
+})
+
+const receipt = await publicClient.waitForTransactionReceipt({ hash })
+```
+
+</TabItem>
+<TabItem value="web3.js">
+
+```tsx
+import { createEVMClient } from '@metamask/connect/evm'
+import { Web3 } from 'web3'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
+
+const web3 = new Web3(provider)
+
+// Get user's Ethereum public address
+const fromAddress = (await web3.eth.getAccounts())[0]
+
+const destination = '0xRECIPIENT_ADDRESS'
+const amount = web3.utils.toWei('0.0001') // Convert 0.0001 ether to wei
+
+// Submit transaction to the blockchain and wait for it to be mined
+const receipt = await web3.eth.sendTransaction({
+  from: fromAddress,
+  to: destination,
+  value: amount,
+})
+```
+
+</TabItem>
+<TabItem value="ethers.js">
+
+```tsx
+import { createEVMClient } from '@metamask/connect/evm'
+import { ethers } from 'ethers'
+import { BrowserProvider, parseUnits } from 'ethers'
+
+const evmClient = createEVMClient()
+const provider = evmClient.getProvider()
+
+const ethersProvider = new ethers.BrowserProvider(provider)
+const signer = await ethersProvider.getSigner()
+
+const destination = '0xRECIPIENT_ADDRESS'
+const amount = parseUnits('0.0001', 'ether')
+
+// Submit transaction to the blockchain
+const tx = await signer.sendTransaction({
+  to: destination,
+  value: amount,
+})
+
+// Wait for the transaction to be mined
+const receipt = await tx.wait()
+```
+
+</TabItem>
+<TabItem value="Ethereum API">
 
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
@@ -102,88 +178,55 @@ function watchTransaction(txHash) {
 ```
 
 </TabItem>
-<TabItem value="viem">
+<TabItem value="Wagmi">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
-import { createPublicClient, createWalletClient, custom } from 'viem'
-import { mainnet } from 'viem/chains'
+import { parseEther } from "viem"
+import { useSendTransaction, useWaitForTransactionReceipt } from "wagmi"
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+function SendTransaction() {
+  const { 
+    data: hash,
+    error,
+    isPending,
+    sendTransaction
+  } = useSendTransaction()
 
-const publicClient = createPublicClient({ chain: mainnet, transport: custom(provider) })
-const walletClient = createWalletClient({ chain: mainnet, transport: custom(provider) })
+  const { 
+    isLoading: isConfirming,
+    isSuccess: isConfirmed 
+  } = useWaitForTransactionReceipt({
+    hash
+  })
 
-// data for the transaction
-const destination = '0xRECIPIENT_ADDRESS'
-const amount = parseEther('0.0001')
-const address = await walletClient.getAddresses()
+  async function handleSend() {
+    sendTransaction({
+      to: "0x...", 
+      value: parseEther("0.1")  // 0.1 ETH
+    })
+  }
 
-// Submit transaction to the blockchain
-const hash = await walletClient.sendTransaction({
-  account: address[0],
-  to: destination,
-  value: amount,
-})
+  return (
+    <div>
+      <button 
+        onClick={handleSend}
+        disabled={isPending}
+      >
+        {isPending ? "Confirming..." : "Send 0.1 ETH"}
+      </button>
 
-const receipt = await publicClient.waitForTransactionReceipt({ hash })
-```
+      {hash && (
+        <div>
+          Transaction Hash: {hash}
+          {isConfirming && <div>Waiting for confirmation...</div>}
+          {isConfirmed && <div>Transaction confirmed!</div>}
+        </div>
+      )}
 
-</TabItem>
-<TabItem value="ethers">
-
-```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
-import { ethers } from 'ethers'
-import { BrowserProvider, parseUnits } from 'ethers'
-
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
-
-const ethersProvider = new ethers.BrowserProvider(provider)
-const signer = await ethersProvider.getSigner()
-
-const destination = '0xRECIPIENT_ADDRESS'
-const amount = parseUnits('0.0001', 'ether')
-
-// Submit transaction to the blockchain
-const tx = await signer.sendTransaction({
-  to: destination,
-  value: amount,
-})
-
-// Wait for the transaction to be mined
-const receipt = await tx.wait()
-```
-
-</TabItem>
-<TabItem value="web3">
-
-```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
-import { Web3 } from 'web3'
-
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
-
-const web3 = new Web3(provider)
-
-// Get user's Ethereum public address
-const fromAddress = (await web3.eth.getAccounts())[0]
-
-const destination = '0xRECIPIENT_ADDRESS'
-const amount = web3.utils.toWei('0.0001') // Convert 0.0001 ether to wei
-
-// Submit transaction to the blockchain and wait for it to be mined
-const receipt = await web3.eth.sendTransaction({
-  from: fromAddress,
-  to: destination,
-  value: amount,
-})
+      {error && <div>Error: {error.message}</div>}
+    </div>
+  )
+}
 ```
 
 </TabItem>
@@ -191,8 +234,8 @@ const receipt = await web3.eth.sendTransaction({
 
 ## Send an advanced transaction with gas estimation
 
-To add gas estimation, use the [`eth_estimateGas`](../../reference/json-rpc-api/index.md)
-RPC method.
+<Tabs>
+<TabItem value="Ethereum API">
 
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
@@ -215,6 +258,42 @@ async function estimateGas(transaction) {
   }
 }
 ```
+
+</TabItem>
+<TabItem value="Wagmi">
+
+```tsx
+import { parseEther } from "viem"
+import { 
+  useSendTransaction, 
+  useWaitForTransactionReceipt,
+  useEstimateGas
+} from "wagmi"
+
+function AdvancedTransaction() {
+  const transaction = {
+    to: "0x...",
+    value: parseEther("0.1"),
+    data: "0x..." // Optional contract interaction data
+  }
+
+  // Estimate gas
+  const { data: gasEstimate } = useEstimateGas(transaction)
+
+  const { sendTransaction } = useSendTransaction({
+    ...transaction,
+    gas: gasEstimate,
+    onSuccess: (hash) => {
+      console.log("Transaction sent:", hash)
+    }
+  })
+
+  return <button onClick={() => sendTransaction()}>Send with Gas Estimate</button>
+}
+```
+
+</TabItem>
+</Tabs>
 
 ## Best practices
 
