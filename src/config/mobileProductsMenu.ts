@@ -12,12 +12,8 @@ export interface MobileProductItem {
 
 export const mobileProductsMenu: MobileProductItem[] = [
   {
-    label: 'MetaMask SDK',
-    href: '/sdk/',
-  },
-  {
-    label: 'Wallet API',
-    href: '/wallet/',
+    label: 'MM Connect',
+    href: '/sdk',
   },
   {
     label: 'Embedded Wallets',
