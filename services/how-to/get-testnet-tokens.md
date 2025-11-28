@@ -18,7 +18,7 @@ Use [testnet endpoints](../get-started/endpoints.md) during development and init
 | Testnet     | Faucet URL        | Bridge URL                    |                             
 |-------------|-------------------|-------------------------------|
 | [Arbitrum Sepolia](https://docs.arbitrum.io/launch-orbit-chain/how-tos/add-orbit-chain-to-bridge-ui)| [Arbitrum Sepolia faucet](https://faucet.quicknode.com/arbitrum/sepolia)| [Arbitrum bridge](https://bridge.arbitrum.io/)|
-| [Avalanche Fuji](https://docs.avax.network/learn/networks/fuji-testnet)| [Avalanche Fuji faucet](https://faucet.avax.network)| [Avalanche bridge](https://bridge.avax.network/)|
+| [Avalanche Fuji](https://build.avax.network/academy/avalanche-l1/interchain-messaging/03-avalanche-starter-kit/04-networks)| [Avalanche Fuji faucet](https://faucet.avax.network)| [Avalanche bridge](https://bridge.avax.network/)|
 | [Base Sepolia](https://docs.base.org/chain/using-base#metamask-1)| [Base Sepolia faucet](https://faucet.quicknode.com/base/sepolia)| [Base bridge](https://bridge.base.org/deposit)|
 | [Blast Sepolia](https://docs.blast.io/using-blast)| [Blast Sepolia faucet](https://faucet.quicknode.com/blast/sepolia)|     |
 | [Binance Smart Chain (BSC) Sepolia](https://academy.binance.com/en/articles/connecting-metamask-to-binance-smart-chain)| [BSC Sepolia faucet](https://www.bnbchain.org/en/testnet-faucet)| [BSC bridge](https://www.bnbchain.org/en/bnb-chain-bridge)|

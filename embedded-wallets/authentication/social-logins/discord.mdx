@@ -7,7 +7,7 @@ description: 'Discord Social Login with Embedded Wallets | Embedded Wallets'
 import DiscordToggle from '@site/static/img/embedded-wallets/w3a-dashboard/authentication-social-connections.png'
 import DiscordConnection from '@site/static/img/embedded-wallets/w3a-dashboard/discord-connection.png'
 
-Discord Login is a social login provider that allows users to sign in using their Discord credentials. Web3Auth supports Discord as a social login provider, allowing developers to offer a familiar and quick authentication method for users with Discord accounts.
+[Discord Login](https://discord.com/developers/docs/topics/oauth2) is a social login provider that allows users to sign in using their Discord credentials. Web3Auth supports Discord as a social login provider, allowing developers to offer a familiar and quick authentication method for users with Discord accounts.
 
 To integrate Discord with Web3Auth, developers must first create a Discord App via the [Discord Developer Portal](https://discord.com/developers/applications).
 
@@ -26,7 +26,7 @@ To integrate Discord with Web3Auth, developers must first create a Discord App v
 
    ![Discord OAuth2.0 App Client ID and Secret](/img/embedded-wallets/authentication/discord/discord-clientid-secret.png)
 
-## Create a Discord Connection
+## Create a Discord connection
 
 :::success Enable on Dashboard
 
@@ -73,9 +73,9 @@ Follow these steps to create a Discord connection:
 
 Since, the `Discord Connection` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
-> Follow our [Quick Starts](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to setup the basic flow.
+> Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
 
-### Login with Discord
+### Log in with Discord
 
 ```jsx
 await connectTo(WALLET_CONNECTORS.AUTH, {
