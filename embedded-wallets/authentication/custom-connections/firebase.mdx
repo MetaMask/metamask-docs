@@ -10,11 +10,11 @@ import CustomConnectionOptions from '@site/static/img/embedded-wallets/w3a-dashb
 import FirebaseConnection from '@site/static/img/embedded-wallets/w3a-dashboard/firebase-connection.png'
 import JwtLoginFirebase from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_firebase.mdx'
 
-Firebase is a popular backend platform that enables developers to seamlessly integrate authentication, databases, and other services into their applications. Web3Auth supports Firebase as an authentication provider, allowing developers to leverage Firebase Authentication within the Web3Auth framework for secure user login and key management.
+[Firebase](https://firebase.google.com/) is a popular backend platform that enables developers to seamlessly integrate authentication, databases, and other services into their applications. Web3Auth supports Firebase as an authentication provider, allowing developers to leverage Firebase Authentication within the Web3Auth framework for secure user login and key management.
 
 [Take a look at the supported social logins on Firebase](https://firebase.google.com/docs/auth)
 
-## Create a Firebase Project
+## Create a Firebase project
 
 To get started, developers must first create a Firebase project in the Firebase Console. This is a required step before integrating Firebase with Web3Auth. Once the Firebase project is set up, developers can proceed to configure a Firebase connection in the Embedded Wallets Dashboard.
 
@@ -63,7 +63,7 @@ export const FirebaseSetup = [
 
 <Tiles tileGroups={FirebaseSetup} />
 
-## Create a Firebase Connection
+## Create a Firebase connection
 
 :::success Create Firebase Connection on Dashboard
 
@@ -114,7 +114,7 @@ Follow these steps to create a Firebase connection:
 
 Since, the `Firebase Connection` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
-> Follow our [Quick Starts](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to setup the basic flow.
+> Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
 
 ### Web
 
@@ -122,7 +122,7 @@ Since, the `Firebase Connection` details are available from Dashboard, developer
 
 ### Android
 
-##### Create Web3Auth Instance
+##### Create a Web3Auth instance
 
 In your activity, create a `Web3Auth` instance with your Web3Auth project's configurations.
 
@@ -204,7 +204,7 @@ When connecting, the `login` function takes the LoginParams arguments for the lo
 
 ### Flutter
 
-##### Create Web3Auth Instance
+##### Create a Web3Auth instance
 
 In your `main.dart` file, initialize the `Web3AuthFlutter` plugin at the very beginning such as in the overriden `initState` function
 

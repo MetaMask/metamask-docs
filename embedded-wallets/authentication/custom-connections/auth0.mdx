@@ -15,11 +15,11 @@ import JwtLoginAuth0 from '../../sdk/react/advanced/_custom-authentication-snipp
 import ImplicitLoginAuth0Google from '../../sdk/react/advanced/_custom-authentication-snippets/_implicit_login_auth0_google.mdx'
 import ImplicitLoginAuth0Spa from '../../sdk/react/advanced/_custom-authentication-snippets/_implicit_login_auth0_spa.mdx'
 
-Auth0 is a powerful authentication and authorization platform that enables developers to securely manage user identities. Web3Auth offers native support for integrating Auth0 as a service provider, allowing projects to leverage Auth0’s robust authentication mechanisms within the Web3Auth ecosystem.
+[Auth0](https://auth0.com/docs/get-started/auth0-overview) is a powerful authentication and authorization platform that enables developers to securely manage user identities. Web3Auth offers native support for integrating Auth0 as a service provider, allowing projects to leverage Auth0’s robust authentication mechanisms within the Web3Auth ecosystem.
 
 [Take a look at the supported social logins on Auth0](https://marketplace.auth0.com/categories/social-login)
 
-## Create an Auth0 Application
+## Create an Auth0 application
 
 To begin, developers must first create an Auth0 application specific to their project. This initial setup is essential before configuring the connection with Web3Auth. Once the Auth0 application is created, developers can proceed to establish an Auth0 connection within the Embedded Wallets Dashboard.
 
@@ -66,7 +66,7 @@ export const Auth0Setup = [
 
 <Tiles tileGroups={Auth0Setup} />
 
-## Create an Auth0 Connection
+## Create an Auth0 connection
 
 :::success Create Auth0 Connection on Dashboard
 
@@ -114,7 +114,7 @@ Follow these steps to create an Auth0 connection:
 
 Since, the `Auth0 Connection` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
-> Follow our [Quick Starts](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to setup the basic flow.
+> Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
 
 ### Web
 
@@ -132,7 +132,7 @@ Since, the `Auth0 Connection` details are available from Dashboard, developers d
 
 ### Android
 
-##### Create Web3Auth Instance
+##### Create a Web3Auth instance
 
 In your activity, create a `Web3Auth` instance with your Web3Auth project's configurations.
 
@@ -184,7 +184,7 @@ When connecting, the `login` function takes the LoginParams arguments for the lo
 
 ### Flutter
 
-##### Create Web3Auth Instance
+##### Create a Web3Auth instance
 
 In your `main.dart` file, initialize the `Web3AuthFlutter` plugin at the very beginning such as in the overriden `initState` function
 
