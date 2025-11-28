@@ -17,7 +17,7 @@ export default function AnnouncementBar(): JSX.Element | null {
   return (
     <div className="theme-announcement-bar" role="banner" data-announcement-bar="true">
       <div style={{ textAlign: 'center' }}>
-        <strong>Delegation Toolkit is now renamed to Smart Accounts Kit.</strong>
+        <strong>Delegation Toolkit is now renamed to <a href="/smart-accounts-kit">Smart Accounts Kit</a>.</strong>
       </div>
     </div>
   )
