@@ -44,7 +44,7 @@
     "@mermaid-js/layout-elk": "^0.1.9",
     "@metamask/design-tokens": "^7.1.0",
     "@metamask/eth-sig-util": "^7.0.3",
-    "@metamask/profile-sync-controller": "^16.0.0",
+    "@metamask/profile-sync-controller": "^27.0.0",
     "@metamask/sdk": "^0.33.1",
     "@rjsf/core": "^5.24.12",
     "@rjsf/utils": "^5.24.13",
