@@ -9,7 +9,7 @@ image: 'img/metamaskog.jpg'
 import EVMChains from './\_evm-chains.mdx'
 import OtherChains from './\_other-chains.mdx'
 
-Embedded Wallets (formerly Web3Auth) is the frontend authentication system for your dApp. Once the user is authenticated, the SDK returns a way to interact with the blockchain. A provider is how libraries like web3.js & ethers.js talk to the blockchain by sending JSON-RPC requests and receiving responses.
+Embedded Wallets is the frontend authentication system for your dApp. Once the user is authenticated, the SDK returns a way to interact with the blockchain. A provider is how libraries like web3.js & ethers.js talk to the blockchain by sending JSON-RPC requests and receiving responses.
 
 With Embedded Wallets, you can connect in two ways:
 
@@ -22,7 +22,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 ::::
 
-## Dashboard Configuration
+## Dashboard configuration
 
 The Embedded Wallets Web SDK (`@web3auth/modal`) from v10 onwards does not need any additional setup on the code side for blockchain connections. All of it is handled on the Dashboard. We can use any chain from the extensive list of predefined chains and add more if we need.
 

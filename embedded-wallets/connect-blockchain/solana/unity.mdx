@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem'
 
 While using the Web3Auth Unity SDK, you can retrieve the Ed25519 private key within the user scope after authentication. Use this key with a Solana Unity integration to perform blockchain operations.
 
-## Chain Details for Solana
+## Chain details for Solana
 
 <Tabs
  defaultValue="mainnet"
@@ -126,7 +126,7 @@ var publicKey = account.PublicKey;
 Debug.Log($"Solana Public Key: {publicKey}");
 ```
 
-## Get Account Balance
+## Get account Balance
 
 ```csharp
 using Solana.Unity.Rpc;
@@ -166,7 +166,7 @@ var transaction = new TransactionBuilder()
 Debug.Log($"Transaction signature: {transaction.Signatures[0]}");
 ```
 
-## Send Transaction
+## Send transaction
 
 ```csharp
 // Sign and send the transaction
