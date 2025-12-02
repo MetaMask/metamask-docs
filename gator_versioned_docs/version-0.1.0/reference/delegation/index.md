@@ -200,7 +200,7 @@ import { decodeDelegations } from "@metamask/smart-accounts-kit/utils";
 const delegations = decodeDelegations("0x7f0db33d..c06aeeac");
 ```
 
-## `deployDeleGatorEnvironment`
+## `deploySmartAccountsEnvironment`
 
 Deploys the Delegation Framework contracts to an EVM chain.
 
@@ -219,11 +219,11 @@ Deploys the Delegation Framework contracts to an EVM chain.
 <TabItem value="example.ts">
 
 ```ts
-import { deployDeleGatorEnvironment } from "@metamask/smart-accounts-kit/utils";
+import { deploySmartAccountsEnvironment } from "@metamask/smart-accounts-kit/utils";
 import { walletClient, publicClient } from "./config.ts";
 import { sepolia as chain } from "viem/chains";
 
-const environment = await deployDeleGatorEnvironment(
+const environment = await deploySmartAccountsEnvironment(
   walletClient, 
   publicClient, 
   chain
@@ -268,10 +268,10 @@ import { sepolia as chain } from "viem/chains";
 import { SmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
 import { 
   overrideDeployedEnvironment,
-  deployDeleGatorEnvironment,
+  deploySmartAccountsEnvironment,
 } from "@metamask/smart-accounts-kit/utils";
 
-const environment: SmartAccountsEnvironment = await deployDeleGatorEnvironment(
+const environment: SmartAccountsEnvironment = await deploySmartAccountsEnvironment(
   walletClient, 
   publicClient, 
   chain
