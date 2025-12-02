@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 # Create a redelegation
 
-Redelegation is a core feature that sets Delegations apart from other permission sharing frameworks.
+Redelegation is a core feature that sets delegations apart from other permission sharing frameworks.
 It allows a delegate to create a delegation chain, passing on the same or reduced level of authority 
 from the root delegator.
 
@@ -44,8 +44,8 @@ const delegation = createDelegation({
     // USDC has 6 decimal places.
     maxAmount: parseUnits("10", 6),
   },
-  to: bobSmartAccount,
-  from: aliceSmartAccount,
+  to: bobSmartAccount.address,
+  from: aliceSmartAccount.address,
   environment: aliceSmartAccount.environment,
 })
 
@@ -111,8 +111,8 @@ const redelegation = createDelegation({
     // USDC has 6 decimal places.
     maxAmount: parseUnits("5", 6),
   },
-  to: carolSmartAccount,
-  from: bobSmartAccount,
+  to: carolSmartAccoun.address,
+  from: bobSmartAccount.address,
   // Signed root delegation from previous step.
   parentDelegation: signedDelegation,
   environment: bobSmartAccount.environment,
