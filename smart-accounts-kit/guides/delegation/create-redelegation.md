@@ -15,8 +15,8 @@ It allows a delegate to create a delegation chain, passing on the same or reduce
 from the root delegator.
 
 For example, if Alice grants Bob permission to spend 10 USDC on her behalf, Bob can further grant Carol
-permission to spend up to 5 USDC on Alice's behalf. This creates a delegation chain where the root
-permissions are reshared with additional parties.
+permission to spend up to 5 USDC on Alice's behalf-that is, Bob can redelegate. This creates a delegation 
+chain where the root permissions are reshared with additional parties.
 
 ## Prerequisites
 
