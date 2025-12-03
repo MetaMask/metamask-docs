@@ -79,6 +79,7 @@ const sidebar = {
                 'guides/delegation/use-delegation-scopes/constrain-scope',
               ],
             },
+            'guides/delegation/create-redelegation',
             'guides/delegation/check-delegation-state',
             'guides/delegation/disable-delegation',
           ],
