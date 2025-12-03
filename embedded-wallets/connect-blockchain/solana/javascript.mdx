@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem'
 
 While using the Embedded Wallets Web SDK, you get a Solana provider with functions to help you make blockchain calls via [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/). Use this page for VanillaJS, Angular, and other frameworks.
 
-## Chain Details for Solana
+## Chain details for Solana
 
 <Tabs
  defaultValue="mainnet"
@@ -70,7 +70,7 @@ To interact with the Solana blockchain, you can use [`@solana/web3.js`](https://
 npm install --save @solana/web3.js @web3auth/solana-provider
 ```
 
-## Initializing Provider
+## Initializing provider
 
 Using `solana` as `chainNamespace` while initializing `web3auth` will provide a Solana provider as **`web3auth.provider`** after successful authentication.
 
@@ -108,7 +108,7 @@ const solanaWallet = new SolanaWallet(provider)
 // Continue using the `solanaWallet`
 ```
 
-## Get Account and Balance
+## Get account and Balance
 
 ```tsx
 import {
