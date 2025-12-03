@@ -12,15 +12,18 @@ import JwtLoginFirebase from '../../sdk/react/advanced/_custom-authentication-sn
 
 [Firebase](https://firebase.google.com/) is a popular backend platform that enables developers to seamlessly integrate authentication, databases, and other services into their applications. Web3Auth supports Firebase as an authentication provider, allowing developers to leverage Firebase Authentication within the Web3Auth framework for secure user login and key management.
 
-[Take a look at the supported social logins on Firebase](https://firebase.google.com/docs/auth)
+Firebase [supports a wide set of social logins](https://firebase.google.com/docs/auth).
 
 ## Create a Firebase project
 
-To get started, developers must first create a Firebase project in the Firebase Console. This is a required step before integrating Firebase with Web3Auth. Once the Firebase project is set up, developers can proceed to configure a Firebase connection in the Embedded Wallets Dashboard.
+To get started, developers must first create a Firebase project in the Firebase Console. This is a required step before integrating Firebase with Web3Auth. Once the Firebase project is set up, developers can proceed to configure a Firebase connection in the dashboard.
 
 Web3Auth’s Firebase integration enables the use of Firebase-issued ID tokens to authenticate users, combining Firebase’s authentication flexibility with Web3Auth’s decentralized key infrastructure.
 
+:::tip
+
 For detailed implementation steps and platform-specific instructions, developers can follow the [Firebase documentation](https://firebase.google.com/docs).
+:::
 
 export const FirebaseSetup = [
   {
@@ -65,9 +68,9 @@ export const FirebaseSetup = [
 
 ## Create a Firebase connection
 
-:::success Create Firebase Connection on Dashboard
+:::success Create Firebase Connection
 
-To use this feature, developers must go to the `Custom Connections` tab in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+To use this feature, developers must go to the **Custom Connections** tab in the [dashboard](https://dashboard.web3auth.io).
 
 :::
 
@@ -85,18 +88,18 @@ To use this feature, developers must go to the `Custom Connections` tab in the [
 
 Follow these steps to create a Firebase connection:
 
-1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
-1. Go to the `Custom Connections` section.
-1. Click on the `Settings` icon near the Firebase connection.
+1. Visit the [dashboard](https://dashboard.web3auth.io).
+1. Go to the **Custom Connections** section.
+1. Click on the **Settings** icon near the Firebase connection.
 1. Enter the `Firebase Connection ID`.
 1. Paste `https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com` as `JWKS Endpoint`.
 1. Paste a sample `JWT Token` to auto populate the best **JWT validations** possible.
 1. Select the `JWT user identifier`: `email`, `sub` or `custom`.
 1. Toggle the Case Sensitivity of `User Identifier`. (Optional)
-1. Click on `Add Custom Validations` to add validations manually.
+1. Click on **Add Custom Validations** to add validations manually.
    1. Type iss as a field and `https://securetoken.google.com/FIREBASE-PROJECT-ID` as a value.
    1. Next, type aud as a field and `FIREBASE-PROJECT-ID` as a value.
-1. Finally, click on the `Add Connection` button.
+1. Finally, click on the **Add Connection** button.
 
 <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
   <img
@@ -112,7 +115,7 @@ Follow these steps to create a Firebase connection:
 
 ## Usage
 
-Since, the `Firebase Connection` details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+Since, the **Firebase Connection** details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
 > Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
 

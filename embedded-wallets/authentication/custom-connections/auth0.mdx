@@ -17,11 +17,11 @@ import ImplicitLoginAuth0Spa from '../../sdk/react/advanced/_custom-authenticati
 
 [Auth0](https://auth0.com/docs/get-started/auth0-overview) is a powerful authentication and authorization platform that enables developers to securely manage user identities. Web3Auth offers native support for integrating Auth0 as a service provider, allowing projects to leverage Auth0’s robust authentication mechanisms within the Web3Auth ecosystem.
 
-[Take a look at the supported social logins on Auth0](https://marketplace.auth0.com/categories/social-login)
+Auth0 supports a [wide set of social logins](https://marketplace.auth0.com/categories/social-login).
 
 ## Create an Auth0 application
 
-To begin, developers must first create an Auth0 application specific to their project. This initial setup is essential before configuring the connection with Web3Auth. Once the Auth0 application is created, developers can proceed to establish an Auth0 connection within the Embedded Wallets Dashboard.
+To begin, developers must first create an Auth0 application specific to their project. This initial setup is essential before configuring the connection with Web3Auth. Once the Auth0 application is created, developers can proceed to establish an Auth0 connection within the [dashboard](https://dashboard.web3auth.io).
 
 This integration allows users to authenticate through Auth0, while still benefiting from Web3Auth’s key management and wallet abstraction features. For platform-specific implementation details or additional customization, developers are encouraged to refer to the [official Auth0 documentation](https://auth0.com/docs/quickstart/native#webapp).
 
@@ -68,9 +68,9 @@ export const Auth0Setup = [
 
 ## Create an Auth0 connection
 
-:::success Create Auth0 Connection on Dashboard
+:::success Connect Auth0
 
-To use this feature, developers must go to the `Custom Connections` tab in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+To use this feature, developers must go to the **Custom Connections** tab in the [dashboard](https://dashboard.web3auth.io).
 
 :::
 
@@ -88,15 +88,15 @@ To use this feature, developers must go to the `Custom Connections` tab in the [
 
 Follow these steps to create an Auth0 connection:
 
-1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
-2. Go to the `Custom Connections` section.
-3. Click on the `Settings` icon near the Auth0 connection.
+1. Visit the [dashboard](https://dashboard.web3auth.io).
+2. Go to the **Custom Connections** section.
+3. Click on the **Settings** icon near the Auth0 connection.
 4. Enter the `Auth Connection ID`.
-5. Select the `JWT user identifier`: `email`, `sub` or `custom`.
-6. Toggle the Case Sensitivity of `User Identifier`. (Optional)
+5. Select the **JWT user identifier**: `email`, `sub` or `custom`.
+6. (Optional) Toggle the case sensitivity of **User Identifier**.
 7. Enter `Auth0 Client ID`.
 8. Enter `Auth0 Domain`.
-9. Finally, click on the `Add Connection` button.
+9. Click on the **Add Connection** button to save the settings.
 
 <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
   <img
