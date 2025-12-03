@@ -113,7 +113,7 @@ const redelegation = createDelegation({
     // USDC has 6 decimal places.
     maxAmount: parseUnits("5", 6),
   },
-  to: carolSmartAccoun.address,
+  to: carolSmartAccount.address,
   from: bobSmartAccount.address,
   // Signed root delegation from previous step.
   parentDelegation: signedDelegation,
