@@ -17,11 +17,11 @@ The **User Details in ID Token** setting determines whether Personally Identifia
   />
 </div>
 
-## User Data Overview
+## User data overview
 
 JWT identity tokens can include various types of user information, ranging from minimal identifiers to comprehensive profile data. The configuration of this setting impacts both functionality and privacy considerations for your application.
 
-### Available User Data Types
+### Available user data types
 
 **Basic Identifier Information:**
 
@@ -37,9 +37,9 @@ JWT identity tokens can include various types of user information, ranging from 
 - Social login provider data
 - Custom user metadata
 
-## Configuration Options
+## Configuration options
 
-### Enable User Data in Tokens
+### Enable user data in tokens
 
 When **enabled**, the identity token includes comprehensive user profile information:
 
@@ -62,7 +62,7 @@ When **enabled**, the identity token includes comprehensive user profile informa
 }
 ```
 
-### Disable User Data in Tokens
+### Disable user data in tokens
 
 When **disabled**, the identity token contains only essential identification information:
 
@@ -77,7 +77,7 @@ When **disabled**, the identity token contains only essential identification inf
 }
 ```
 
-### Email-Only Mode
+### Email-only mode
 
 When **userIdentifier is set to email**, only the user's email is included in the token:
 
@@ -93,9 +93,9 @@ When **userIdentifier is set to email**, only the user's email is included in th
 }
 ```
 
-## Implementation Patterns
+## Implementation patterns
 
-### Token Parsing and Validation
+### Token parsing and validation
 
 **Complete Token Processing:**
 
@@ -161,7 +161,7 @@ function extractUserData(decodedToken) {
 }
 ```
 
-### Frontend Integration
+### Frontend integration
 
 **React Implementation:**
 
@@ -239,9 +239,9 @@ function UserProfile() {
 </script>
 ```
 
-## Use Cases and Benefits
+## Use cases and benefits
 
-### Streamlined User Onboarding
+### Streamlined user onboarding
 
 **Profile Pre-population:**
 
@@ -266,7 +266,7 @@ async function setupUserAccount(idToken) {
 }
 ```
 
-### Personalized User Experience
+### Personalized user experience
 
 **Dynamic UI Customization:**
 
@@ -290,7 +290,7 @@ function personalizeInterface(userProfile) {
 }
 ```
 
-### Session Management
+### Session management
 
 **Enhanced Session Context:**
 
@@ -327,9 +327,9 @@ class SessionManager {
 }
 ```
 
-## Privacy and Compliance Considerations
+## Privacy and compliance considerations
 
-### Data Minimization Principles
+### Data minimization principles
 
 **GDPR Compliance:**
 
@@ -363,7 +363,7 @@ class PrivacyCompliantTokenHandler {
 }
 ```
 
-### Regional Compliance
+### Regional compliance
 
 **Multi-Jurisdictional Considerations:**
 
@@ -394,9 +394,9 @@ function getRegionSpecificTokenHandling(userRegion) {
 }
 ```
 
-## Security Considerations
+## Security considerations
 
-### Token Security Best Practices
+### Token security best practices
 
 **Secure Token Handling:**
 
@@ -445,7 +445,7 @@ class SecureTokenProcessor {
 }
 ```
 
-### Data Validation
+### Data validation
 
 **Input Validation and Sanitization:**
 
@@ -482,9 +482,9 @@ function validateUserData(userData) {
 }
 ```
 
-## Performance Considerations
+## Performance considerations
 
-### Token Size Management
+### Token size management
 
 **Optimizing Token Size:**
 
@@ -523,7 +523,7 @@ function analyzeTokenSize(idToken) {
 }
 ```
 
-### Caching Strategies
+### Caching strategies
 
 **Efficient User Data Caching:**
 
@@ -568,9 +568,9 @@ class UserDataCache {
 }
 ```
 
-## Decision Framework
+## Decision framework
 
-### When to Enable User Data in Tokens
+### When to enable user data in tokens
 
 **Recommended for:**
 
@@ -586,7 +586,7 @@ class UserDataCache {
 - Session management benefits from user context
 - Reduced API calls for user data improve performance
 
-### When to Disable User Data in Tokens
+### When to disable user data in tokens
 
 **Recommended for:**
 
@@ -602,7 +602,7 @@ class UserDataCache {
 - User data is managed separately
 - Security requirements prefer minimal token content
 
-### Email-Only Configuration
+### Email-only configuration
 
 **Optimal for:**
 
@@ -611,7 +611,7 @@ class UserDataCache {
 - Privacy-focused applications
 - Minimal PII exposure scenarios
 
-## Next Steps
+## Next steps
 
 - **[Session Management](../session-management)** - Configure session duration and behavior
 - **[Key Export Settings](../key-export)** - Control private key export permissions

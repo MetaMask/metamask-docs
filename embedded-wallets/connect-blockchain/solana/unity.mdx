@@ -100,7 +100,7 @@ public class SolanaIntegration : MonoBehaviour
 }
 ```
 
-## Get Ed25519 Private Key
+## Get Ed25519 private key
 
 ```csharp
 // After successful Web3Auth login
@@ -110,7 +110,7 @@ string ed25519PrivateKey = await web3auth.GetEd25519PrivKey();
 byte[] privateKeyBytes = Convert.FromHexString(ed25519PrivateKey);
 ```
 
-## Create Solana Keypair
+## Create a Solana keypair
 
 Using the Magicblock Solana Unity SDK, you can create a keypair from the private key:
 
@@ -142,7 +142,7 @@ var balanceInSOL = balance.Result.Value / 1_000_000_000.0; // Convert lamports t
 Debug.Log($"Balance: {balanceInSOL} SOL");
 ```
 
-## Sign Transaction
+## Sign a transaction
 
 ```csharp
 using Solana.Unity.Rpc.Models;
@@ -182,7 +182,7 @@ else
 }
 ```
 
-## Sign Message
+## Sign a message
 
 ```csharp
 // Sign a message with the private key

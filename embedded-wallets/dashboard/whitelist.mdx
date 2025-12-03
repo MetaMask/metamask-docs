@@ -6,6 +6,8 @@ description: 'Configure domain whitelisting in Web3Auth Dashboard | Embedded Wal
 ---
 
 import ProjectSettingsDomain from '@site/static/img/embedded-wallets/w3a-dashboard/project-settings-domain.png'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 The **Whitelist Settings** section allows you to configure domain and URL authorization for enhanced security. Web3Auth requires explicit whitelisting of domains and URLs that are authorized to use your project's Web3Auth SDK, providing protection against unauthorized usage and potential security threats.
 
@@ -17,24 +19,25 @@ The **Whitelist Settings** section allows you to configure domain and URL author
   />
 </div>
 
-## Domain Authorization Overview
+## Domain authorization overview
 
 Domain whitelisting is a critical security feature that prevents unauthorized applications from using your Web3Auth project credentials. Only domains and URLs explicitly added to your whitelist can successfully authenticate users through your Web3Auth configuration.
 
-### Security Benefits
+### Security benefits
 
-- **Prevents Credential Theft**: Unauthorized sites cannot use your Client ID
-- **Protects User Data**: Ensures authentication flows only occur on approved domains
-- **Compliance Ready**: Meets security standards for production applications
-- **Fraud Prevention**: Blocks malicious sites from impersonating your application
+- **Prevents credential theft**: Unauthorized sites cannot use your Client ID
+- **Protects user data**: Ensures authentication flows only occur on approved domains
+- **Compliance ready**: Meets security standards for production applications
+- **Fraud prevention**: Blocks malicious sites from impersonating your application
 
-## Web Application Whitelisting
+## Web application whitelisting
 
-### Supported URL Formats
+### Supported URL formats
 
 Web3Auth supports various URL formats for comprehensive domain coverage:
 
-**Standard Domains:**
+<Tabs>
+<TabItem value="standard" label="Standard domains">
 
 ```
 https://myapp.com
@@ -42,7 +45,8 @@ https://www.myapp.com
 https://app.mycompany.com
 ```
 
-**Development Environments:**
+</TabItem>
+<TabItem value="development" label="Development environments">
 
 ```
 http://localhost:3000
@@ -51,14 +55,16 @@ https://dev.myapp.com
 https://staging.myapp.com
 ```
 
-**Subdomain Patterns:**
+</TabItem>
+<TabItem value="subdomain" label="Subdomain patterns">
 
 ```
 https://*.myapp.com (covers all subdomains)
 https://feature-*.myapp.com (wildcard patterns)
 ```
 
-**Port-Specific URLs:**
+</TabItem>
+<TabItem value="port" label="Port-specific URLs">
 
 ```
 https://myapp.com:8443
@@ -66,67 +72,83 @@ http://localhost:3000
 http://127.0.0.1:8080
 ```
 
-### Adding Web Domains
+</TabItem>
+</Tabs>
 
-1. **Navigate to Project Settings** → **Whitelist**
-2. **Click "Add Domain"** or similar button
-3. **Enter the complete URL** including protocol (http:// or https://)
-4. **Verify the domain** if required
-5. **Save the configuration**
+### Adding web domains
 
-**Best Practices:**
+1. Navigate to **Project Settings** → **Whitelist**.
+2. Click **Add Domain** or similar button.
+3. Enter the complete URL including protocol (http:// or https://).
+4. Verify the domain (if required).
+5. Save the configuration.
+
+:::tip Best Practices
 
 - Always use HTTPS for production domains
 - Include all necessary subdomains
 - Add development and staging environments
 - Test authentication after adding domains
 
-## Mobile Application Whitelisting
+:::
 
-### Bundle Identifiers
+## Mobile application whitelisting
+
+### Bundle identifiers
 
 For mobile applications, whitelist the app's bundle identifier or package name:
 
-**iOS Bundle IDs:**
+<Tabs>
+<TabItem value="ios" label="iOS Bundle IDs">
 
 ```
 com.yourcompany.yourapp
 com.yourcompany.yourapp.staging
 ```
 
-**Android Package Names:**
+</TabItem>
+<TabItem value="android" label="Android Package Names">
 
 ```
 com.yourcompany.yourapp
 com.yourcompany.yourapp.debug
 ```
 
-### Deep Link Schemes
+</TabItem>
+</Tabs>
 
-Mobile applications using deep links should whitelist their custom URL schemes:
+### Deep link schemes
 
-**Custom Schemes:**
+Mobile applications using deep links should allowlist their custom URL schemes:
+
+<Tabs>
+<TabItem value="custom" label="Custom schemes">
 
 ```
 yourapp://auth
 com.yourcompany.yourapp://callback
 ```
 
-**Universal Links (iOS):**
+</TabItem>
+<TabItem value="ios-links" label="iOS: universal links">
 
 ```
 https://yourapp.com/auth/callback
 ```
 
-**App Links (Android):**
+</TabItem>
+<TabItem value="android-links" label="Android: app links">
 
 ```
 https://yourapp.com/auth/callback
 ```
 
-## Environment-Specific Configuration
+</TabItem>
+</Tabs>
 
-### Development Environment
+## Environment-specific configuration
+
+### Development environment
 
 For development and testing:
 
@@ -145,7 +167,7 @@ https://staging.yourapp.com
 - Add staging and testing environments
 - Use HTTP for local development (HTTPS for staging)
 
-### Production Environment
+### Production environment
 
 :::warning Production Requirements
 
@@ -162,13 +184,14 @@ For Sapphire Mainnet projects, **at least one domain must be whitelisted** befor
 - ✅ Deep link schemes configured
 - ✅ Remove development URLs
 
-## Wildcard Domains
+## Wildcard domains
 
-### Subdomain Wildcards
+### Subdomain wildcards
 
 Use wildcard patterns to cover multiple subdomains efficiently:
 
-**Single-level wildcard:**
+<Tabs>
+<TabItem value="single" label="Single-level wildcard">
 
 ```
 https://*.myapp.com
@@ -176,7 +199,8 @@ https://*.myapp.com
 
 Covers: `https://api.myapp.com`, `https://admin.myapp.com`, `https://user.myapp.com`
 
-**Multi-level wildcards:**
+</TabItem>
+<TabItem value="multi" label="Multi-level wildcards">
 
 ```
 https://*.*.myapp.com
@@ -184,7 +208,10 @@ https://*.*.myapp.com
 
 Covers: `https://api.v1.myapp.com`, `https://admin.staging.myapp.com`
 
-### Dynamic Subdomains
+</TabItem>
+</Tabs>
+
+### Dynamic subdomains
 
 For applications with dynamic subdomains (multi-tenant apps):
 
@@ -194,9 +221,9 @@ https://tenant-*.myapp.com
 https://*.saas.myapp.com
 ```
 
-## Verification Process
+## Verification process
 
-### Domain Verification
+### Domain verification
 
 Some domains may require verification to ensure ownership:
 
@@ -204,7 +231,7 @@ Some domains may require verification to ensure ownership:
 2. **File Upload**: Upload a verification file to your web server
 3. **HTML Meta Tag**: Add a meta tag to your website's homepage
 
-### Verification Status
+### Verification status
 
 Monitor the verification status in your dashboard:
 
@@ -212,9 +239,9 @@ Monitor the verification status in your dashboard:
 - ⏳ **Pending**: Verification in progress
 - ❌ **Failed**: Verification unsuccessful, requires attention
 
-## Common Issues and Solutions
+## Common issues and solutions
 
-### Authentication Failures
+### Authentication failures
 
 **Problem**: Users cannot authenticate on your domain
 **Solutions:**
@@ -224,7 +251,7 @@ Monitor the verification status in your dashboard:
 - Ensure protocol (http/https) matches exactly
 - Confirm subdomain patterns are correct
 
-### Development Environment Issues
+### Development environment issues
 
 **Problem**: Local development not working
 **Solutions:**
@@ -234,7 +261,7 @@ Monitor the verification status in your dashboard:
 - Check if your development server uses a different port
 - Verify protocol matches (http vs https)
 
-### Mobile App Issues
+### Mobile app issues
 
 **Problem**: Mobile authentication failing
 **Solutions:**
@@ -244,32 +271,33 @@ Monitor the verification status in your dashboard:
 - Ensure URL schemes are properly whitelisted
 - Test with both debug and release builds
 
-## Security Best Practices
+## Security best practices
 
-### Regular Audits
+### Regular audits
 
-- **Monthly Reviews**: Check whitelist for unused domains
-- **Remove Stale Entries**: Delete old development or staging URLs
-- **Monitor Access**: Review authentication patterns for anomalies
-- **Update Documentation**: Keep domain lists current for your team
+- **Monthly reviews**: Check whitelist for unused domains
+- **Remove stale entries**: Delete old development or staging URLs
+- **Monitor access**: Review authentication patterns for anomalies
+- **Update documentation**: Keep domain lists current for your team
 
-### Principle of Least Privilege
+### Principle of least privilege
 
-- **Minimal Domains**: Only whitelist necessary domains
-- **Specific Patterns**: Avoid overly broad wildcard patterns
-- **Environment Separation**: Use different projects for dev/staging/prod
-- **Regular Cleanup**: Remove domains when no longer needed
+- **Minimal domains**: Only whitelist necessary domains
+- **Specific patterns**: Avoid overly broad wildcard patterns
+- **Environment separation**: Use different projects for dev/staging/prod
+- **Regular cleanup**: Remove domains when no longer needed
 
-### Compliance Considerations
+### Compliance considerations
 
-- **Data Residency**: Consider where authentication occurs
-- **Privacy Regulations**: Ensure whitelisted domains comply with privacy laws
-- **Security Standards**: Meet industry requirements for domain authorization
-- **Audit Trails**: Maintain records of domain modifications
+- **Data residency**: Consider where authentication occurs
+- **Privacy regulations**: Ensure whitelisted domains comply with privacy laws
+- **Security standards**: Meet industry requirements for domain authorization
+- **Audit trails**: Maintain records of domain modifications
 
-## Advanced Configuration
+## Advanced configuration
 
-### CDN and Load Balancer Support
+<Tabs>
+<TabItem value="cdn" label="CDN and load balancer support">
 
 For applications using CDNs or load balancers:
 
@@ -279,7 +307,8 @@ https://lb.myapp.com
 https://edge-*.myapp.com
 ```
 
-### Multi-Region Deployments
+</TabItem>
+<TabItem value="multi-region" label="Multi-region deployments">
 
 For global applications with regional domains:
 
@@ -290,7 +319,8 @@ https://asia.myapp.com
 https://*.global.myapp.com
 ```
 
-### API Gateway Integration
+</TabItem>
+<TabItem value="api-gateway" label="API gateway integration">
 
 For applications behind API gateways:
 
@@ -300,7 +330,10 @@ https://gateway.myapp.com
 https://*.api.myapp.com
 ```
 
-## Next Steps
+</TabItem>
+</Tabs>
+
+## Next steps
 
 - **[Project Settings](../project-settings)** - Configure basic project information
 - **[Advanced Project Settings](../advanced/session-management)** - Access advanced configuration options

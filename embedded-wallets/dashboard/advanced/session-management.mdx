@@ -6,8 +6,10 @@ description: 'Configure session duration and behavior in Web3Auth Dashboard | Em
 ---
 
 import ProjectSettingsAdvanced from '@site/static/img/embedded-wallets/w3a-dashboard/project-settings-advanced.png'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
-The **Session Management** settings allow you to customize session lifetime and behavior for your Web3Auth integration. These settings determine how long user sessions remain active before requiring re-authentication, providing flexibility to balance security requirements with user experience.
+The session management settings allow you to customize session lifetime and behavior for your Web3Auth integration. These settings determine how long user sessions remain active before requiring re-authentication, providing flexibility to balance security requirements with user experience.
 
 <div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
   <img
@@ -17,198 +19,208 @@ The **Session Management** settings allow you to customize session lifetime and 
   />
 </div>
 
-## Session Duration Overview
+## Session duration overview
 
 Session duration controls how long a user's authentication session remains valid before automatic expiration. This setting directly impacts both security posture and user convenience, making it a critical configuration for production applications.
 
-### Default Configuration
+### Default configuration
 
-- **Default Duration**: 1 day (24 hours)
-- **Minimum Duration**: 1 second
-- **Maximum Duration**: 30 days (720 hours)
-- **Granularity**: Configurable down to the second
+You may configure the session duration down to the second:
 
-## Configuring Session Duration
+- Default duration: 1 day (24 hours)
+- Minimum duration: 1 second
+- Maximum duration: 30 days (720 hours)
 
-### Setting Session Lifetime
+## Configuring session duration
 
-1. **Navigate to Project Settings** → **Advanced** → **Session Management**
-2. **Locate Session Duration** setting
-3. **Enter desired duration** in the provided format
-4. **Save configuration** to apply changes
+### Setting session lifetime
 
-### Duration Format Options
+1. Navigate to **Project Settings** → **Advanced** → **Session Management**.
+2. At the **Session Duration** setting, enter the desired duration in the provided format:
 
-**Time Units Supported:**
+<Tabs>
+<TabItem value="time-units" label="Supported time units">
 
-- **Seconds**: 1s, 30s, 60s
-- **Minutes**: 1m, 30m, 60m
-- **Hours**: 1h, 12h, 24h
-- **Days**: 1d, 7d, 30d
+- Seconds: 1s, 30s, 60s
+- Minutes: 1m, 30m, 60m
+- Hours: 1h, 12h, 24h
+- Days: 1d, 7d, 30d
 
-**Example Configurations:**
+</TabItem>
+<TabItem value="examples" label="Example configurations">
 
 ```
 30m    # 30 minutes
 2h     # 2 hours
 1d     # 1 day (default)
 7d     # 7 days
-30d    # 30 days (maximum)
+30d     # 30 days (maximum)
 ```
 
-## Security Considerations
+</TabItem>
+</Tabs>
 
-### Short Session Durations
+3. Save the configuration to apply your changes.
 
-**Benefits:**
+## Security considerations
 
-- **Enhanced Security**: Reduced exposure window if credentials are compromised
-- **Compliance**: Meets strict security requirements for sensitive applications
-- **Risk Mitigation**: Limits potential damage from unauthorized access
-- **Regular Validation**: Ensures users are actively using the application
+### Short session durations
 
-**Use Cases:**
+Maintaining short sessions supports:
 
-- Financial applications
-- Healthcare systems
-- Administrative interfaces
-- High-security environments
+- Enhanced security: Reduced exposure window if credentials are compromised
+- Compliance: Meets strict security requirements for sensitive applications
+- Risk mitigation: Limits potential damage from unauthorized access
+- Regular validation: Ensures users are actively using the application
 
-**Recommended Durations:**
+The following durations are typical for the stated use cases:
 
-- **High Security**: 30m - 2h
-- **Financial Apps**: 1h - 4h
-- **Admin Panels**: 2h - 8h
+- High security: 30m-2h
+- Financial apps: 1-4h
+- Admin panels: 2-8h
 
-### Long Session Durations
+### Long session durations
 
-**Benefits:**
+In some use cases longer session durations can benefit the user:
 
-- **Improved UX**: Reduces authentication friction for users
-- **Productivity**: Minimizes workflow interruptions
-- **User Retention**: Decreases abandonment due to re-authentication
-- **Convenience**: Better for applications with frequent usage
+- Improved UX: Reduces authentication friction for users
+- Productivity: Minimizes workflow interruptions
+- Retention: Decreases abandonment due to re-authentication
+- Convenience: Better for applications with frequent usage
 
-**Use Cases:**
+The following durations are typical for the stated use cases:
 
-- Consumer applications
-- Gaming platforms
-- Content consumption apps
-- Productivity tools
+- Consumer Apps: 7-30d
+- Gaming: 14-30d
+- Content apps: 7-30d
 
-**Recommended Durations:**
+#### Application-specific recommendations
 
-- **Consumer Apps**: 7d - 30d
-- **Gaming**: 14d - 30d
-- **Content Apps**: 7d - 30d
+##### Web applications
 
-## Application-Specific Recommendations
-
-### Web Applications
-
-**Standard Web Apps:**
+<Tabs>
+<TabItem value="standard" label="Standard web apps">
 
 ```
-Session Duration: 1d - 7d
+Session Duration: 1-7d
 Rationale: Balance between security and convenience
 ```
 
-**Single Page Applications (SPAs):**
+</TabItem>
+<TabItem value="spa" label="Single page applications (SPAs)">
 
 ```
-Session Duration: 4h - 1d
+Session Duration: 4h-1d
 Rationale: Active browsing sessions with automatic renewal
 ```
 
-**Progressive Web Apps (PWAs):**
+</TabItem>
+<TabItem value="pwa" label="Progressive web apps (PWAs)">
 
 ```
-Session Duration: 7d - 30d
+Session Duration: 7-30d
 Rationale: App-like experience with persistent sessions
 ```
 
-### Mobile Applications
+</TabItem>
+</Tabs>
 
-**Native Mobile Apps:**
+##### Mobile applications
+
+<Tabs>
+<TabItem value="native" label="Native mobile apps">
 
 ```
-Session Duration: 14d - 30d
+Session Duration: 14-30d
 Rationale: Device-based security with biometric re-authentication
 ```
 
-**Mobile Games:**
+</TabItem>
+<TabItem value="mobile-games" label="Mobile games">
 
 ```
 Session Duration: 30d
 Rationale: Seamless gaming experience with maximum convenience
 ```
 
-**Financial Mobile Apps:**
+</TabItem>
+<TabItem value="financial" label="Financial mobile apps">
 
 ```
-Session Duration: 1h - 4h
+Session Duration: 1-4h
 Rationale: High security requirements with biometric backup
 ```
 
-### Gaming Applications
+</TabItem>
+</Tabs>
 
-**Casual Games:**
+##### Gaming applications
+
+<Tabs>
+<TabItem value="casual" label="Casual games">
 
 ```
 Session Duration: 30d
 Rationale: Minimal friction for entertainment applications
 ```
 
-**Competitive Games:**
+</TabItem>
+<TabItem value="competitive" label="Competitive games">
 
 ```
-Session Duration: 14d - 30d
+Session Duration: 14-30d
 Rationale: Balance between convenience and account security
 ```
 
-**Gaming Platforms:**
+</TabItem>
+<TabItem value="platforms" label="Gaming platforms">
 
 ```
-Session Duration: 7d - 30d
+Session Duration: 7-30d
 Rationale: Platform-level access with game-specific security
 ```
 
-## Advanced Session Behaviors
+</TabItem>
+</Tabs>
 
-### Session Renewal
+## Advanced session behaviors
+
+### Session renewal
 
 Web3Auth sessions can be renewed through various mechanisms:
 
-**Automatic Renewal:**
+#### Automatic Renewal
 
 - Sessions automatically extend on user activity
 - Background refresh maintains active sessions
 - Seamless experience without user intervention
 
-**Manual Renewal:**
+#### Manual Renewal
 
 - Explicit user action required for session extension
 - Greater control over session lifecycle
 - Suitable for high-security environments
 
-### Session Termination
+### Session termination
 
-**Automatic Termination Events:**
+Sessions may be terminated automatically, or manually. 
+
+#### Automatic Termination Events
 
 - Session duration expiry
 - Extended inactivity periods
 - Security-triggered logout
 - Device/browser changes
 
-**Manual Termination:**
+#### Manual Termination
 
 - User-initiated logout
 - Administrative session termination
 - Forced logout from dashboard
 
-## Implementation Considerations
+## Implementation considerations
 
-### Frontend Integration
+### Frontend integration
 
 **Session Status Monitoring:**
 
@@ -236,7 +248,7 @@ setInterval(async () => {
 }, 60000) // Check every minute
 ```
 
-### Backend Validation
+### Backend validation
 
 **Token Validation:**
 
@@ -261,13 +273,13 @@ function validateSession(token) {
 }
 ```
 
-## Security Best Practices
+## Security best practices
 
-### Session Security Guidelines
+### Session security guidelines
 
 **Token Management:**
 
-- Store session tokens securely (HttpOnly cookies for web)
+- Store session tokens securely (HTTPOnly cookies for web)
 - Implement proper token rotation
 - Use secure transmission (HTTPS only)
 - Clear tokens on logout
@@ -286,7 +298,7 @@ function validateSession(token) {
 - Provide session management UI
 - Enable remote session termination
 
-### Compliance Requirements
+### Compliance requirements
 
 **Industry Standards:**
 
@@ -304,9 +316,9 @@ function validateSession(token) {
 | Medium     | 1-7 days             | Weekly            |
 | Low        | 7-30 days            | Monthly           |
 
-## Troubleshooting Session Issues
+## Troubleshooting session issues
 
-### Common Session Problems
+### Common session problems
 
 **Premature Session Expiry:**
 
@@ -329,7 +341,7 @@ function validateSession(token) {
 - Review session renewal logic
 - Test different browser/app configurations
 
-### Debugging Tools
+### Debugging tools
 
 **Session Inspection:**
 
@@ -353,7 +365,7 @@ console.log('Issued At:', new Date(decoded.payload.iat * 1000))
 console.log('Expires At:', new Date(decoded.payload.exp * 1000))
 ```
 
-## Next Steps
+## Next steps
 
 - **[Key Export Settings](../key-export)** - Configure private key export permissions
 - **[User Details in ID Token](../user-details)** - Manage user data in JWT tokens

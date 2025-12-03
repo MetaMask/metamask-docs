@@ -112,7 +112,7 @@ Follow these steps to create an Auth0 connection:
 
 ## Usage
 
-Since, the `Auth0 Connection` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+Since, the `Auth0 Connection` details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
 > Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
 
@@ -140,7 +140,7 @@ In your activity, create a `Web3Auth` instance with your Web3Auth project's conf
 web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Developer Dashboard
+    clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Web3Auth Dashboard
     network = Network.SAPPHIRE_MAINNET
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), // your app's redirect URL
     // focus-start

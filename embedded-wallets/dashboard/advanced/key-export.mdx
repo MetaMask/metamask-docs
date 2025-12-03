@@ -7,7 +7,7 @@ description: 'Configure private key export permissions in Web3Auth Dashboard | E
 
 import ProjectSettingsAdvanced from '@site/static/img/embedded-wallets/w3a-dashboard/project-settings-advanced.png'
 
-The **Key Export Settings** allow you to control whether users can programmatically export their private keys using the Web3Auth SDK. This setting provides flexibility for advanced use cases while maintaining security control over sensitive cryptographic material.
+The key export settings allow you to control whether users can programmatically export their private keys using the Web3Auth SDK. This setting provides flexibility for advanced use cases while maintaining security control over sensitive cryptographic material.
 
 <div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
   <img
@@ -17,36 +17,37 @@ The **Key Export Settings** allow you to control whether users can programmatica
   />
 </div>
 
-## Key Export Overview
+## Key export overview
 
 Private key export functionality allows applications to retrieve users' private keys programmatically through the Web3Auth SDK. This capability enables advanced use cases such as wallet migration, multi-platform support, and integration with external services, while requiring careful consideration of security implications.
 
-### Export Methods
+### Export methods
 
-**Programmatic Export (Configurable):**
+Manual export is always supported to ensure that users retain autonomy over their keys while programmatic export may be configured.
 
-- Access via `private_key` JSON-RPC method
+#### Manual export
+
+- **Can't be disabled**
+- Built into the Web3Auth wallet interface
+- User-initiated through wallet UI
+
+### Programmatic export
+
+Programmatic export is configurable, providing: 
+
+- Access via the `private_key` JSON-RPC method
 - Requires explicit user consent
 - Can be enabled/disabled per project
 - Controlled through dashboard settings
 
-**Manual Export (Always Available):**
+#### Enabling programmatic key export
 
-- Built-in Web3Auth wallet interface
-- User-initiated through wallet UI
-- Cannot be disabled
-- Provides user autonomy over their keys
+1. Navigate to **Project Settings** → **Advanced** → **Key Export**.
+2. Locate **Enable Key Export** toggle.
+3. Enable the setting to allow programmatic access.
+4. Save configuration to apply changes.
 
-## Configuring Key Export
-
-### Enabling Programmatic Export
-
-1. **Navigate to Project Settings** → **Advanced** → **Key Export**
-2. **Locate "Enable Key Export"** toggle
-3. **Enable the setting** to allow programmatic access
-4. **Save configuration** to apply changes
-
-### Disabling Programmatic Export
+#### Disabling programmatic export
 
 When disabled:
 
@@ -55,11 +56,11 @@ When disabled:
 - Enhanced security for applications that don't require key access
 - Recommended for most consumer applications
 
-## Implementation Guide
+## Implementation guide
 
-### Programmatic Key Retrieval
+### Programmatic key retrieval
 
-**Basic Implementation:**
+Basic Implementation:
 
 ```javascript
 // Ensure user is authenticated
@@ -83,7 +84,7 @@ try {
 }
 ```
 
-**Secure Implementation Pattern:**
+Secure Implementation Pattern:
 
 ```javascript
 class SecureKeyManager {
@@ -118,9 +119,9 @@ class SecureKeyManager {
 }
 ```
 
-### User Consent Flow
+### User consent flow
 
-**Best Practices for User Consent:**
+Best Practices for User Consent:
 
 ```javascript
 async function requestKeyExport() {
@@ -147,11 +148,11 @@ async function requestKeyExport() {
 }
 ```
 
-## Use Cases for Key Export
+## Use cases for key export
 
-### Wallet Migration
+### Wallet migration
 
-**Cross-Platform Migration:**
+Cross-Platform Migration:
 
 ```javascript
 // Export from Web3Auth for import into other wallets
@@ -174,9 +175,9 @@ async function migrateToExternalWallet() {
 }
 ```
 
-### Multi-Chain Support
+### Multi-chain support
 
-**Cross-Chain Key Derivation:**
+Cross-chain key derivation:
 
 ```javascript
 async function deriveKeysForMultipleChains() {
@@ -194,9 +195,9 @@ async function deriveKeysForMultipleChains() {
 }
 ```
 
-### Advanced Integrations
+### Advanced integrations
 
-**DeFi Protocol Integration:**
+DeFi protocol integration:
 
 ```javascript
 async function integrateDeFiProtocol() {
@@ -214,9 +215,9 @@ async function integrateDeFiProtocol() {
 }
 ```
 
-### Backup and Recovery
+### Backup and recovery
 
-**Secure Backup Creation:**
+Secure backup creation:
 
 ```javascript
 async function createSecureBackup() {
@@ -233,19 +234,19 @@ async function createSecureBackup() {
 }
 ```
 
-## Security Considerations
+## Security considerations
 
-### Application Security
+### Application security
 
-**Key Handling Best Practices:**
+Key handling best practices:
 
-- **Minimize Exposure**: Retrieve keys only when necessary
-- **Secure Transmission**: Use HTTPS and encrypted channels
-- **Memory Management**: Clear private keys from memory immediately after use
-- **No Persistent Storage**: Never store private keys in databases or local storage
-- **Audit Logging**: Log key export events for security monitoring
+- Minimize exposure: Retrieve keys only when necessary
+- Secure transmission: Use HTTPS and encrypted channels
+- Memory management: Clear private keys from memory immediately after use
+- No persistent storage: **Never** store private keys in databases or local storage
+- Audit logging: Log key export events for security monitoring
 
-**Implementation Security:**
+#### Implementation security
 
 ```javascript
 class SecureKeyHandler {
@@ -278,16 +279,16 @@ class SecureKeyHandler {
 }
 ```
 
-### User Education
+### User education
 
-**Security Awareness:**
+Security awareness is vital:
 
 - Educate users about private key security
 - Explain the implications of key export
 - Provide secure storage recommendations
 - Warn against sharing private keys
 
-**User Interface Guidelines:**
+#### User interface guidelines
 
 ```javascript
 const securityWarnings = {
@@ -307,20 +308,22 @@ const securityWarnings = {
 }
 ```
 
-### Regulatory Compliance
+### Regulatory compliance
 
-**Compliance Considerations:**
+It's vital to comply with regulations, always consider:
 
-- **Data Protection**: Ensure key export complies with privacy regulations
-- **Audit Requirements**: Maintain records of key export events
-- **User Consent**: Obtain explicit consent for key export operations
-- **Jurisdictional Laws**: Consider local regulations regarding cryptographic material
+- Data protection: Ensure key export complies with privacy regulations
+- Audit requirements: Maintain records of key export events
+- User consent: Obtain explicit consent for key export operations
+- Jurisdictional laws: Consider local regulations regarding cryptographic material
 
-## Monitoring and Analytics
+## Monitoring and analytics
 
-### Export Event Tracking
+### Export event tracking
 
-**Analytics Implementation:**
+#### Analytics implementation
+
+Consider sending a structured analytics event whenever a user exports a private key:
 
 ```javascript
 async function trackKeyExport(userId, exportReason) {
@@ -335,7 +338,9 @@ async function trackKeyExport(userId, exportReason) {
 }
 ```
 
-**Security Monitoring:**
+#### Security monitoring
+
+Consider monitoring key export attempts to flag suspicious patterns such as repeated exports:
 
 ```javascript
 class KeyExportMonitor {
@@ -365,27 +370,27 @@ class KeyExportMonitor {
 }
 ```
 
-## Alternative Approaches
+## Alternative approaches
 
-### When to Disable Key Export
+### Disable key export
 
-**Recommended for:**
+Consider disabling key export for:
 
 - Consumer-facing applications
 - Applications handling high-value assets
 - Regulated financial services
 - Applications with strict security requirements
 
-**Alternative Solutions:**
+These alternative approaches can be leveraged to enable users to sign transactions without exposing or exporting private keys:
 
-- Use Web3Auth's built-in wallet interface
-- Implement transaction signing without key exposure
+- Web3Auth's built-in wallet interface
 - Use multi-signature schemes
 - Leverage Web3Auth's session-based authentication
+- Implement transaction signing without key exposure (see example below)
 
-### Transaction-Only Access
+### Transaction-only access
 
-**Secure Transaction Pattern:**
+Use `web3auth.provider.request` to sign transactions directly through Embedded Wallets without exposing the private key:
 
 ```javascript
 // Sign transactions without exposing private key
@@ -402,29 +407,27 @@ async function signTransaction(transactionData) {
 
 ## Troubleshooting
 
-### Common Issues
-
-**Key Export Disabled:**
+### Key export disabled
 
 - Verify setting is enabled in dashboard
 - Check project configuration
 - Confirm user permissions
 
-**Export Method Not Available:**
+### Export method not available
 
 - Ensure Web3Auth SDK is properly initialized
 - Verify user is authenticated
 - Check for browser compatibility issues
 
-**User Consent Failures:**
+### User consent failures
 
 - Implement proper consent flow
 - Provide clear security information
 - Handle user rejection gracefully
 
-### Error Handling
+### Error handling
 
-**Robust Error Management:**
+Troubleshooting is more quickly resolved with robust error management:
 
 ```javascript
 async function safeKeyExport() {
@@ -445,8 +448,8 @@ async function safeKeyExport() {
 }
 ```
 
-## Next Steps
+## Next steps
 
-- **[User Details in ID Token](../user-details)** - Configure user data in JWT tokens
-- **[Session Management](../session-management)** - Control session duration and behavior
-- **[Project Settings](../../project-settings)** - Configure basic project information
+- [User details in ID token](../user-details): Configure user data in JWT tokens
+- [Session management](../session-management): Control session duration and behavior
+- [Project settings](../../project-settings): Configure basic project information
