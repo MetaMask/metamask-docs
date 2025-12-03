@@ -21,6 +21,7 @@ chain where the root permissions are reshared with additional parties.
 ## Prerequisites
 
 - [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
+- [Learn how to create a delegation.](execute-on-smart-accounts-behalf.md)
 
 ## Create a delegation
 
@@ -93,8 +94,9 @@ export const bobSmartAccount = await toMetaMaskSmartAccount({
 
 Create a [redelegation](../../concepts/delegation/index.md#delegation-types) from Bob to Carol. When creating a redelegation, you can only narrow the scope of the original authority, not expand it. 
 
+To create a redelegation, provide the signed delegation as the `parentDelegation` argument when calling [createDelegation](../../reference/delegation/index.md#createdelegation).
 This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing 
-Bob to delegate to Carol the ability to spend 5 USDC on Alice's behalf. 
+Bob to delegate to Carol the ability to spend 5 USDC on Alice's behalf.
 
 <Tabs>
 <TabItem value="redelegation.ts">
