@@ -140,7 +140,7 @@ In your activity, create a `Web3Auth` instance with your Web3Auth project's conf
 web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
-    clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Web3Auth Dashboard
+    clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Embedded Wallets dashboard
     network = Network.SAPPHIRE_MAINNET
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), // your app's redirect URL
     // focus-start

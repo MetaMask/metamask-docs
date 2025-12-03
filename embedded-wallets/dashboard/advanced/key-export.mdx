@@ -240,11 +240,11 @@ async function createSecureBackup() {
 
 Key handling best practices:
 
-- Minimize exposure: Retrieve keys only when necessary
-- Secure transmission: Use HTTPS and encrypted channels
-- Memory management: Clear private keys from memory immediately after use
-- No persistent storage: **Never** store private keys in databases or local storage
-- Audit logging: Log key export events for security monitoring
+- **Minimize exposure**: Retrieve keys only when necessary
+- **Secure transmission**: Use HTTPS and encrypted channels
+- **Memory management**: Clear private keys from memory immediately after use
+- **No persistent storage**: **Never** store private keys in databases or local storage
+- **Audit logging**: Log key export events for security monitoring
 
 #### Implementation security
 
@@ -312,10 +312,10 @@ const securityWarnings = {
 
 It's vital to comply with regulations, always consider:
 
-- Data protection: Ensure key export complies with privacy regulations
-- Audit requirements: Maintain records of key export events
-- User consent: Obtain explicit consent for key export operations
-- Jurisdictional laws: Consider local regulations regarding cryptographic material
+- **Data protection**: Ensure key export complies with privacy regulations
+- **Audit requirements**: Maintain records of key export events
+- **User consent**: Obtain explicit consent for key export operations
+- **Jurisdictional laws**: Consider local regulations regarding cryptographic material
 
 ## Monitoring and analytics
 

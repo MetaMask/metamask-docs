@@ -7,7 +7,7 @@ description: 'Configure project settings in Web3Auth Dashboard | Embedded Wallet
 
 import ProjectSettingsGeneral from '@site/static/img/embedded-wallets/w3a-dashboard/project-settings-general.png'
 
-The project settings section of the Web3Auth dashboard allows developers to manage core configuration options for each project. These settings determine how the project integrates with the Web3Auth SDK and how it behaves across different environments.
+The project settings section of the Embedded Wallets dashboard allows developers to manage core configuration options for each project. These settings determine how the project integrates with the Embedded Wallets SDK and how it behaves across different environments.
 
 <div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
   <img
@@ -75,12 +75,12 @@ Each platform offers specific features:
 
 A unique identifier automatically generated for each project. This is the primary credential used to authenticate your application with Web3Auth services. This ID is: 
 
-- Publicly safe: Can be exposed in client-side code
-- Required for integration: Essential for all SDK implementations
-- Unique per project: Each project receives a distinct Client ID
-- Immutable: Cannot be changed after generation
+- **Publicly safe**: Can be exposed in client-side code
+- **Required for integration**: Essential for all SDK implementations
+- **Unique per project**: Each project receives a distinct Client ID
+- **Immutable**: Cannot be changed after generation
 
-**Implementation Example:**
+#### Implementation example
 
 ```javascript
 import { Web3Auth } from '@web3auth/modal'
@@ -97,14 +97,13 @@ A **confidential** key used for authenticating server-side API requests and adva
 
 :::danger Security Warning
 
-The client secret must never be exposed in client-side code, mobile applications, or any publicly accessible environment. Exposure could compromise your project's security.
+The client secret must never be exposed in frontend or client-side code, mobile applications, or any publicly accessible environment. Exposure could compromise your project's security.
 
 :::
 
-- Never expose in frontend code or client-side environments
-- Server-side only: Use exclusively in backend services
-- Secure storage: Store in environment variables or secure vaults
-- Rotation capability: Can be regenerated if compromised
+- **Server-side only**: Use exclusively in backend services
+- **Secure storage**: Store in environment variables or secure vaults
+- **Rotation capability**: Can be regenerated if compromised
 
 The client secret is used for:
 
@@ -119,10 +118,10 @@ The client secret is used for:
 
 A public endpoint that exposes the JSON Web Key Set (JWKS) used by Web3Auth to sign JWTs. This endpoint enables you to verify the authenticity of identity tokens issued by Web3Auth, providing the following benefits:
 
-- Dynamic key rotation: Automatically receives updated signing keys
-- Industry standard: JWKS is a widely adopted standard for JWT verification
-- High availability: Backed by Web3Auth's global infrastructure
-- Real-time updates: Always provides current verification keys
+- **Dynamic key rotation**: Automatically receives updated signing keys
+- **Industry standard**: JWKS is a widely adopted standard for JWT verification
+- **High availability**: Backed by Web3Auth's global infrastructure
+- **Real-time updates**: Always provides current verification keys
 
 #### Using the JWKS endpoint
 
@@ -132,7 +131,7 @@ Pass the request to the JWKS endpoint with your project ID as the identifier:
 https://api.web3auth.io/jwks?project_id=<YOUR_PROJECT_ID>
 ```
 
-**Implementation Example:**
+##### Implementation example
 
 ```javascript
 import jwt from 'jsonwebtoken'
@@ -163,10 +162,10 @@ jwt.verify(token, getKey, options, (err, decoded) => {
 
 An alternative to using the JWKS endpoint, this static key allows for token verification without depending on external JWKS URL calls. While providing less security, this offers the following advantages:
 
-- Offline Verification: No external API calls required
-- Reduced Latency: Faster token verification process
-- Network Independence: Works in environments with limited connectivity
-- Simplified Implementation: Single key verification logic
+- **Offline verification**: No external API calls required
+- **Reduced latency**: Faster token verification process
+- **Network independence**: Works in environments with limited connectivity
+- **Simplified implementation**: Single key verification logic
 
 The project verification key is suitable for:
 
@@ -175,7 +174,7 @@ The project verification key is suitable for:
 - Simplified verification workflows
 - Backup verification method
 
-**Implementation Example:**
+#### Implementation example
 
 ```javascript
 import jwt from 'jsonwebtoken'
@@ -202,10 +201,10 @@ The archive project feature allows you to deactivate a project while preserving 
 
 **Archive Effects:**
 
-- Read-Only Mode: Project becomes non-functional but viewable
-- Authentication Disabled: Users cannot log in to archived projects
-- Data Preservation: All configuration and user data is retained
-- Reversible: Projects can be restored from archived state
+- **Read-only mode**: Project becomes non-functional but viewable
+- **Authentication disabled**: Users cannot log in to archived projects
+- **Data preservation**: All configuration and user data is retained
+- **Reversible**: Projects can be restored from archived state
 
 **When to Archive:**
 
@@ -223,7 +222,7 @@ The archive project feature allows you to deactivate a project while preserving 
 
 :::info Archive vs. Delete
 
-Archiving preserves all project data and allows for restoration. If you need to permanently remove a project, contact Web3Auth support for assistance with proper data deletion procedures.
+Archiving preserves all project data and allows for restoration. If you need to permanently remove a project, contact Embedded Wallets support for assistance with proper data deletion procedures.
 
 :::
 
