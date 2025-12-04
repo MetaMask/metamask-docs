@@ -18,7 +18,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 ::::
 
-## Chain Details for Solana
+## Chain details for Solana
 
 <Tabs
  defaultValue="mainnet"
@@ -148,7 +148,7 @@ val isUserAuthenticated = web3Auth.getPrivkey().isNotEmpty()
 // Customize your logic to perform operations or navigation
 ```
 
-## Get Account
+## Get account
 
 We can use `getEd25519PrivKey` method in Web3Auth to retrieve the private key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retrieve user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
 
@@ -212,7 +212,7 @@ Once we have created `prepareSignedTransaction` function, we'll use it to prepar
 }
 ```
 
-## Send Transaction
+## Send transaction
 
 For the send transaction, we'll use `sendTransaction` method from `Connection` instance to broadcast the result of `prepareSignedTransaction` to the cluster.
 

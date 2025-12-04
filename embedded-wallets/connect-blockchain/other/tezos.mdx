@@ -25,7 +25,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 npm install --save @taquito/signer @taquito/taquito @taquito/utils @tezos-core-tools/crypto-utils
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -65,7 +65,7 @@ npm install --save @taquito/signer @taquito/taquito @taquito/utils @tezos-core-t
 </TabItem>
 </Tabs>
 
-## Get Account, Balance and Key
+## Get account, Balance and Key
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Tezos, we directly use the private key to make RPC calls.
 
@@ -98,7 +98,7 @@ const account = keyPair?.pkh
 const balance = await tezos.tz.getBalance(account)
 ```
 
-## Send Transaction
+## Send transaction
 
 ```tsx
 import * as tezosCrypto from '@tezos-core-tools/crypto-utils'

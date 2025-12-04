@@ -25,7 +25,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 npm install --save algosdk
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -65,7 +65,7 @@ npm install --save algosdk
 </TabItem>
 </Tabs>
 
-## Get Account and KeyPair
+## Get account and keypair
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Algorand, we use the private key directly to make RPC calls.
 
@@ -92,7 +92,7 @@ var keyPair = algosdk.mnemonicToSecretKey(passphrase)
 const account = keyPair.addr
 ```
 
-## Get Balance
+## Get balance
 
 ```tsx
 import { IProvider } from '@web3auth/base'
@@ -122,7 +122,7 @@ const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort)
 const balance = await client.accountInformation(keyPair.addr).do()
 ```
 
-## Send Transaction
+## Send transaction
 
 ```tsx
 import { IProvider } from '@web3auth/base'

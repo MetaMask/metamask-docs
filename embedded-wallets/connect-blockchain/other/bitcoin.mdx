@@ -37,7 +37,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 npm install --save bitcoinjs-lib ecpair axios
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -77,7 +77,7 @@ npm install --save bitcoinjs-lib ecpair axios
 </TabItem>
 </Tabs>
 
-## Get Bitcoin Account and KeyPair
+## Get Bitcoin account and keypair
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Bitcoin, we use the private key directly to create the KeyPair using the necessary Bitcoin libraries.
 
@@ -121,7 +121,7 @@ The code above uses the `privateKey` to create a `keyPair` using the `ECPair` cl
 
 - **`output`**: This is the output script associated with the address. In Bitcoin transactions, an output script (also known as a scriptPubKey) defines the conditions that must be met to spend the funds sent to an address. For Taproot addresses, the output script enforces the spending conditions defined by the Taproot upgrade.
 
-## Get Balance
+## Get balance
 
 ```tsx
 /*
@@ -137,7 +137,7 @@ console.log('Bitcoin Balance: ', balance)
 
 The code above fetches the UTXOs for the given `address` and filters out the unconfirmed UTXOs. The balance is then calculated by summing the value of the UTXOs.
 
-## Send Transaction
+## Send transaction
 
 ```tsx
 /*
