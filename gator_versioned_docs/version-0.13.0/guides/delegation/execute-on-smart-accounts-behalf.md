@@ -16,7 +16,7 @@ You'll complete the delegation lifecycle (create, sign, and redeem a delegation)
 
 ## Prerequisites
 
-[Install and set up the Delegation Toolkit](../../get-started/install.md)
+- [Install and set up the Delegation Toolkit](../../get-started/install.md)
 
 ## Steps
 

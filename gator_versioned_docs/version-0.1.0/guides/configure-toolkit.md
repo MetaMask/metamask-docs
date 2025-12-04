@@ -14,7 +14,7 @@ You can also configure the [toolkit environment](#optional-configure-the-toolkit
 
 ## Prerequisites
 
-[Install and set up the Smart Accounts Kit](../get-started/install.md)
+- [Install and set up the Smart Accounts Kit](../get-started/install.md)
 
 ## Configure the bundler
 
