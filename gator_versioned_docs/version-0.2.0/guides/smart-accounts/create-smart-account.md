@@ -14,14 +14,14 @@ An account's supported *signatories* can sign data on behalf of the smart accoun
 
 ## Prerequisites
 
-[Install and set up the Smart Accounts Kit.](../../get-started/install.md)
+[Install and set up the Smart Accounts Kit](../../get-started/install.md)
 
 ## Create a Hybrid smart account
 
 A Hybrid smart account supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 You can create a Hybrid smart account with the following types of signers.
 
-### Create a Hybrid smart account with an Account signer
+### Create a Hybrid smart account with an account signer
 
 Use [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmartaccount), and Viem's [`privateKeyToAccount` and `generatePrivateKey`](https://viem.sh/docs/accounts/local/privateKeyToAccount), to create a Hybrid smart account with a signer from a randomly generated private key:
 

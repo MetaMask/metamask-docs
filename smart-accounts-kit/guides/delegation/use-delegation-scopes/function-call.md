@@ -13,10 +13,10 @@ For example, Alice delegates to Bob the ability to call the `approve` function o
 
 ## Prerequisites
 
-- [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
-- [Configure the Smart Accounts Kit.](../../configure-toolkit.md)
-- [Create a delegator account.](../execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
-- [Create a delegate account.](../execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
+- [Install and set up the Smart Accounts Kit](../../../get-started/install.md)
+- [Configure the Smart Accounts Kit](../../configure-toolkit.md)
+- [Create a delegator account](../execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
+- [Create a delegate account](../execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
 
 ## Function call scope
 

@@ -11,7 +11,7 @@ by creating a delegator account and completing the delegation lifecycle (creatin
 
 ## Prerequisites
 
-[Install and set up the Delegation Toolkit.](install.md)
+[Install and set up the Delegation Toolkit](install.md)
 
 ## Steps
 
