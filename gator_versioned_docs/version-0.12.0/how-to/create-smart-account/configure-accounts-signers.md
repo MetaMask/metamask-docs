@@ -15,9 +15,9 @@ You can create flexible and secure delegator accounts tailored to your specific 
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](../../get-started/install.md)
-- [Configure the Delegation Toolkit](../configure.md)
-- [Create a smart account](index.md)
+- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Configure the Delegation Toolkit.](../configure.md)
+- [Create a smart account.](index.md)
 
 ## Configure a Hybrid smart account
 

@@ -10,10 +10,10 @@ For example, Alice has deployed a smart contract, and she delegates to Bob the a
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](../../../get-started/install.md)
-- [Configure the Delegation Toolkit](../../configure-toolkit.md)
-- [Create a delegator account](../execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
-- [Create a delegate account](../execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
+- [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
+- [Configure the Delegation Toolkit.](../../configure-toolkit.md)
+- [Create a delegator account.](../execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
+- [Create a delegate account.](../execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
 
 ## Ownership transfer scope
 

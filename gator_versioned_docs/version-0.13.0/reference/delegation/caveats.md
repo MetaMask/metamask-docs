@@ -89,7 +89,7 @@ const caveats = [{
 ```
 
 :::note
-This example adds the `transfer` function to the allowed methods in three different ways—as the 4-byte function selector, the ABI function signature, and the `ABIFunction` object.
+This example adds the `transfer` function to the allowed methods in three different ways - as the 4-byte function selector, the ABI function signature, and the `ABIFunction` object.
 :::
 
 ## `allowedTargets`
@@ -187,7 +187,7 @@ const caveats = [{
 
 ## `erc1155BalanceChange`
 
-Ensures that the recipient's ERC-1155 token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
+Ensures that the recipient's ERC-1155 token balance has changed within the allowed bounds — either increased by a minimum or decreased by a maximum specified amount.
 
 Caveat enforcer contract: [`ERC1155BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC1155BalanceChangeEnforcer.sol)
 
@@ -216,7 +216,7 @@ const caveats = [{
 
 ## `erc20BalanceChange`
 
-Ensures that the recipient's ERC-20 token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
+Ensures that the recipient's ERC-20 token balance has changed within the allowed bounds — either increased by a minimum or decreased by a maximum specified amount.
 
 Caveat enforcer contract: [`ERC20BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20BalanceChangeEnforcer.sol)
 
@@ -341,7 +341,7 @@ const caveats = [{
 
 ## `erc721BalanceChange`
 
-Ensures that the recipient's ERC-721 token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
+Ensures that the recipient's ERC-721 token balance has changed within the allowed bounds — either increased by a minimum or decreased by a maximum specified amount.
 
 Caveat enforcer contract: [`ERC721BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721BalanceChangeEnforcer.sol)
 
@@ -473,7 +473,7 @@ const caveats = [{
 ## `exactExecutionBatch`
 
 Verifies that each execution in the batch matches the expected
-execution parameters—including target, value, and calldata.
+execution parameters - including target, value, and calldata.
 
 Caveat enforcer contract: [`ExactExecutionBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionBatchEnforcer.sol)
 
@@ -605,7 +605,7 @@ const caveats = [{
 
 ## `nativeBalanceChange`
 
-Ensures that the recipient's native token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
+Ensures that the recipient's native token balance has changed within the allowed bounds — either increased by a minimum or decreased by a maximum specified amount.
 
 Caveat enforcer contract: [`NativeBalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeBalanceChangeEnforcer.sol)
 

@@ -13,8 +13,8 @@ Enable users to create a [smart account](../../concepts/smart-accounts.md) direc
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit](../../get-started/install.md)
-- [Configure the Delegation Toolkit](../configure.md)
+- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
+- [Configure the Delegation Toolkit.](../configure.md)
 
 ## Create a `MetaMaskSmartAccount`
 
