@@ -20,63 +20,33 @@ Builds an array of caveats.
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
 | `environment` | `SmartAccountsEnvironment` | Yes | Environment to resolve the smart contracts for the current chain. |
-| `config` | `CaveatBuilderConfig` | No | Configuration for `CaveatBuilder`. |
+| `config` | `CaveatBuilderConfig` | No | Configuration for `CoreCaveatBuilder`. |
 
 ### Example
 
-<Tabs>
-<TabItem value ="example.ts">
 
 ```ts
-import { createCaveatBuilder } from "@metamask/smart-accounts-kit";
-import { delegatorSmartAccount } from "./config.ts";
+import { createCaveatBuilder } from "@metamask/smart-accounts-kit/utils";
+import { getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { sepolia } from "viem/chains";
 
-const caveats = createCaveatBuilder(delegatorSmartAccount.environment)
+const environment = getSmartAccountsEnvironment(sepolia.id);
+const caveatBuilder = createCaveatBuilder(environment);
 ```
-
-</TabItem>
-<TabItem value ="config.ts">
-
-```ts
-import {
-  Implementation,
-  toMetaMaskSmartAccount,
-} from "@metamask/smart-accounts-kit";
-import { createWalletClient, createPublicClient, http } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
-import { sepolia as chain } from "viem/chains";
- 
-const publicClient = createPublicClient({
-  chain,
-  transport: http(),
-});
-
-const delegatorAccount = privateKeyToAccount("0x...");
-
-export const delegatorSmartAccount = await toMetaMaskSmartAccount({
-  client: publicClient,
-  implementation: Implementation.Hybrid,
-  deployParams: [delegatorAccount.address, [], [], []],
-  deploySalt: "0x",
-  signer: { account: delegatorAccount },
-});
-```
-
-</TabItem>
-</Tabs>
 
 ### Allow empty caveats
 
-To create an empty caveat collection, set the `CaveatBuilderConfig.allowEmptyCaveats` to `true`.
+To create an empty caveat collection, set the `CaveatBuilderConfig.allowInsecureUnrestrictedDelegation` to `true`.
 
 ```ts title="example.ts"
-import { createCaveatBuilder } from "@metamask/smart-accounts-kit";
-// The config.ts is the same as in the previous example.
-import { delegatorSmartAccount } from "./config.ts";
+import { createCaveatBuilder } from "@metamask/smart-accounts-kit/utils";
+import { getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { sepolia } from "viem/chains";
 
-const caveats = createCaveatBuilder(delegatorSmartAccount.environment, {
+const environment = getSmartAccountsEnvironment(sepolia.id);
+const caveatBuilder = createCaveatBuilder(environment, {
   // add-next-line 
-  allowEmptyCaveats: true,
+  allowInsecureUnrestrictedDelegation: true,
 });
 ```
 

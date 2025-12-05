@@ -15,7 +15,7 @@ You can further constrain these scopes and limit the delegation's authority by a
 
 ## Prerequisites
 
-[Configure a delegation scope.](index.md)
+- [Configure a delegation scope](index.md)
 
 ## Apply a caveat enforcer
 
