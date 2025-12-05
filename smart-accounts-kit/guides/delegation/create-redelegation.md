@@ -20,8 +20,8 @@ chain where the root permissions are reshared with additional parties.
 
 ## Prerequisites
 
-- [Install and set up the Smart Accounts Kit](../../get-started/install.md).
-- [Learn how to create a delegation](execute-on-smart-accounts-behalf.md).
+- [Install and set up the Smart Accounts Kit](../../get-started/install.md)
+- [Learn how to create a delegation](execute-on-smart-accounts-behalf.md)
 
 ## Create a delegation
 
