@@ -13,8 +13,8 @@ You can use any paymaster service provider, such as [Pimlico](https://docs.pimli
 
 ## Prerequisites
 
-- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
-- [Create a MetaMask smart account.](create-smart-account.md)
+- [Install and set up the Smart Accounts Kit](../../get-started/install.md)
+- [Create a MetaMask smart account](create-smart-account.md)
 
 ## Send a gasless transaction
 
