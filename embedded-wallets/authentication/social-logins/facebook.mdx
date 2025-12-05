@@ -8,11 +8,11 @@ import FacebookToggle from '@site/static/img/embedded-wallets/w3a-dashboard/auth
 import FacebookConnection from '@site/static/img/embedded-wallets/w3a-dashboard/facebook-connection.png'
 import ImplicitLoginFacebook from '../../sdk/react/advanced/_custom-authentication-snippets/_implicit_login_facebook.mdx'
 
-[Facebook Login](https://developers.facebook.com/docs/facebook-login/) enables users to sign in using their Facebook credentials. Web3Auth supports Facebook as a social login provider, allowing developers to offer a familiar and quick authentication method for users with Facebook accounts.
+[Facebook login](https://developers.facebook.com/docs/facebook-login/) enables users to sign in using their Facebook credentials. Embedded Wallets supports Facebook as a social login provider, allowing developers to offer a familiar and quick authentication method for users with Facebook accounts.
 
 To integrate Facebook with Web3Auth, developers must first create a Facebook App via the [Meta for Developers Console](https://developers.facebook.com/).
 
-## Create a Facebook app
+## Step 1: Create a Facebook app
 
 1. Follow Facebook's instructions to [create a new app](https://developers.facebook.com/docs/development/create-an-app).
 2. When creating an app, make sure to select `Consumer` from this screen to use Facebook Login. ![Facebook OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/facebook/facebook-app.png)
@@ -30,11 +30,11 @@ To integrate Facebook with Web3Auth, developers must first create a Facebook App
 
    ![Facebook OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/facebook/facebook-app-id-secret.png)
 
-## Create a Facebook connection
+## Step 2: Create a Facebook connection
 
 :::success Enable on Dashboard
 
-To use this feature, please enable `Facebook` from the Social Connections section in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+To use this feature, enable `Facebook` from the Social Connections section in the [dashboard](https://dashboard.web3auth.io).
 
 > By default, Web3Auth uses its own pre-configured credentials for Facebook login.
 
@@ -55,12 +55,12 @@ To use this feature, please enable `Facebook` from the Social Connections sectio
 Follow these steps to create a Facebook connection:
 
 1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
-1. Go to the `Social Connections` section.
-1. Click on the `Settings` icon near the Facebook connection.
+1. Go to the **Social Connections** section.
+1. Click the **Settings** icon near the Facebook connection.
 1. Enter the `Auth Connection ID`.
 1. Enter the `Facebook App ID`.
 1. Enter the `Facebook App Secret`.
-1. Finally, click on the `Add Connection` button.
+1. Click the **Add Connection** button to save the settings.
 
 <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
   <img
@@ -76,10 +76,10 @@ Follow these steps to create a Facebook connection:
 
 ## Usage
 
-Since, the `Facebook Connection` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+Since, the Facebook connection details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
 > Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
 
-### Implicit Login with Facebook
+### Implicit login with Facebook
 
 <ImplicitLoginFacebook />

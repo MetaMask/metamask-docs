@@ -141,7 +141,7 @@ const balanceInSOL = balance / LAMPORTS_PER_SOL
 console.log(`Balance: ${balanceInSOL} SOL`)
 ```
 
-## Sign Transaction
+## Sign a transaction
 
 ```tsx
 import {
@@ -222,7 +222,7 @@ const { signature } = await solanaWallet.signAndSendTransaction(transaction)
 console.log('Transaction signature', signature)
 ```
 
-## Sign Message
+## Sign a message
 
 ```tsx
 const solanaWallet = new SolanaWallet(web3auth.provider)

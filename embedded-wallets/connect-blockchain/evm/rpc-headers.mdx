@@ -6,7 +6,7 @@ image: 'img/metamaskog.jpg'
 description: 'How to securely attach API keys to blockchain RPC requests | Embedded Wallets'
 ---
 
-### Adding API Keys in RPC Headers
+### Adding API keys in RPC headers
 
 MetaMask Embedded Wallets allows you to specify the RPC endpoint URL, but it doesn't directly provide an option to set custom HTTP headers such as API keys required by certain blockchain providers. To accommodate blockchain APIs that require authentication headers, you need to manually intercept and attach these headers to your application's outgoing RPC requests.
 
@@ -24,16 +24,16 @@ If you're using TRON's mainnet RPC endpoint (`https://api.trongrid.io`), you may
 
 :::
 
-### Identifying RPC Host URL
+### Identifying the RPC host URL
 
 First, identify the hostname for your RPC provider by checking the network logs in your browser:
 
 1. Open your browser's Developer Tools (`Network` tab).
-2. Execute a blockchain-related action (e.g., fetching balance).
-3. Locate the RPC request URL (e.g., `https://api.trongrid.io/jsonrpc`).
-4. Note the hostname (e.g., `api.trongrid.io`).
+2. Execute a blockchain-related action (for example, fetching balance).
+3. Locate the RPC request URL (for example, `https://api.trongrid.io/jsonrpc`).
+4. Note the hostname (for example, `api.trongrid.io`).
 
-### Adding Headers via Global `fetch` Patch
+### Adding headers via global `fetch` patch
 
 Create a file named `globals.js` and include the following code snippet:
 
@@ -75,7 +75,7 @@ globalThis.fetch = (...args) => {
 
 Replace `"YOUR_TRON_API_KEY"` with the actual API key provided by your blockchain RPC provider.
 
-### Importing the Patch into Your Application
+### Importing the patch into your application
 
 Make sure to import this file at the very beginning of your application's entry point (`index.tsx` or `main.ts`):
 
@@ -89,7 +89,7 @@ Perform this operation with caution. Avoid exposing sensitive API keys within cl
 
 :::
 
-### Why This Approach Works
+### Why this approach works
 
 - MetaMask Embedded Wallets SDK uses the provided RPC URL configured via the developer dashboard.
 - Blockchain SDKs like `TronWeb` internally use the global `fetch` API.

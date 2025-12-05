@@ -12,17 +12,17 @@ import CustomConnectionOptions from '@site/static/img/embedded-wallets/w3a-dashb
 import CustomJWTConnection from '@site/static/img/embedded-wallets/w3a-dashboard/custom-connection.png'
 import JwtLoginCustom from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_custom.mdx'
 
-Web3Auth supports integration with custom login providers through [JWT-based](https://www.jwt.io/introduction#what-is-json-web-token) authentication schemes, allowing developers to maintain their existing authentication infrastructure while leveraging Web3Auth’s wallet and key management capabilities. Custom authentication can be implemented using industry-standard cryptographic algorithms such as RSA or ECDSA signatures.
+Embedded Wallets supports integration with custom login providers through [JWT-based](https://www.jwt.io/introduction#what-is-json-web-token) authentication schemes, allowing developers to maintain their existing authentication infrastructure while leveraging Web3Auth’s wallet and key management capabilities. Custom authentication can be implemented using industry-standard cryptographic algorithms such as RSA or ECDSA signatures.
 
 To use this feature, developers must ensure that their JWTs adhere to the [JWT specification](https://datatracker.ietf.org/doc/html/rfc7519). Each JWT must be signed using a private key, and its corresponding public key must be accessible via a [JWKS (JSON Web Key Set)](https://datatracker.ietf.org/doc/html/rfc7517) endpoint. Web3Auth will use this endpoint to verify the integrity and authenticity of incoming tokens during login.
 
-Once the custom JWT login is working, developers can proceed to add it as a custom connection in the Embedded Wallets Dashboard.
+Once the custom JWT login is working, developers can proceed to add it as a custom connection in the dashboard.
 
 ## Set up a custom JWT connection
 
-:::success Create Custom Connection on Dashboard
+:::success Create Custom Connection
 
-To use this feature, developers must go to the `Custom Connections` tab in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+To use this feature, developers must go to the **Custom Connections** tab in the [dashboard](https://dashboard.web3auth.io).
 
 :::
 
@@ -41,17 +41,17 @@ To use this feature, developers must go to the `Custom Connections` tab in the [
 Follow these steps to create a custom JWT connection:
 
 1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
-1. Go to the `Custom Connections` section.
-1. Click on the `Settings` icon near the `Custom Connection`.
+1. Go to the **Custom Connections** section.
+1. Click on the **Settings** icon near the **Custom Connection**.
 1. Enter the `Auth Connection ID`.
 1. Paste the `JWKS Endpoint`.
 1. Paste a sample `JWT Token` to auto populate the best **JWT validations** possible.
 1. Select the `JWT user identifier`: `email`, `sub` or `custom`.
-1. Toggle the Case Sensitivity of `User Identifier`. (Optional)
-1. Click on `Add Custom Validations` to add validations manually.
+1. (Optional) Toggle the case sensitivity of `User Identifier`. 
+1. Click on **Add Custom Validations** to add validations manually.
    1. Type iss as a field and `your-issuer` as a value.
-   1. Next, type aud as a field and `your-audience` as a value.
-1. Finally, click on the `Add Connection` button.
+   1. Type aud as a field and `your-audience` as a value.
+1. Click the **Add Connection** button to save the settings.
 
 <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
   <img
@@ -65,7 +65,7 @@ Follow these steps to create a custom JWT connection:
   />
 </div>
 
-## Create JWT
+## Create a JWT
 
 To generate the JWT, developers may use a package of their choice. Web3Auth provides documentation and examples using both the `jsonwebtoken` and `jose` libraries.
 
@@ -123,7 +123,7 @@ npm i jsonwebtoken
 npm i jose
 ```
 
-### Generate JWT
+### Generate a JWT
 
 <Tabs
 defaultValue="jsonwebtoken"
@@ -241,13 +241,13 @@ console.log(payload)
 
 :::warning Facing issue with JWT?
 
-Check out [**this troubleshooting page to fix those.**](/embedded-wallets/troubleshooting/jwt-errors)
+Check out the [troubleshooting page](/embedded-wallets/troubleshooting/jwt-errors).
 
 :::
 
 ## Usage
 
-Since, the `Custom Connection` details are available from Dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+Since, the **Custom Connection** details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
 > Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
 
@@ -297,10 +297,10 @@ If you're using `jose` or `jsonwebtoken` library, you can use the following step
      - Select Public Key Use: `Signing`
      - Key ID: `paste-yours` or leave it blank to generate a random one.
      - PEM encoded key: `{paste-the-publicKey-pem-file-s-content-here}`
-   - Click on the `Convert to JWK` button.
+   - Click on the **Convert to JWK** button.
 
      ![JWKS Convert Tool](https://web3auth.io/community/uploads/default/optimized/2X/3/3e58a3b7378b9778b0b2d646ec2a3cf47c56ee5e_2_690x448.jpeg)
 
 4. To complete the process, you need to save the output as a `.json` file, host it on your server, and make sure it's publicly accessible.
 
-   This will give you the `JWKS Endpoint`, which is required when setting up a `Custom JWT Verifier` on the Embedded Wallets Dashboard.
+   This will give you the `JWKS Endpoint`, which is required when setting up a **Custom JWT Verifier** on the Embedded Wallets Dashboard.

@@ -90,7 +90,7 @@ const account = starkwareCrypto.ec.keyFromPublic(keyPair.getPublic(true, 'hex'),
 const startKey = account.pub.getX().toString('hex')
 ```
 
-## Mint Request
+## Mint request
 
 ```tsx
 import StarkExAPI from '@starkware-industries/starkex-js/dist/browser'
@@ -126,7 +126,7 @@ const request = {
 const response = await starkExAPI.gateway.mint(request)
 ```
 
-## Deposit Request
+## Deposit request
 
 ```tsx
 import StarkExAPI from '@starkware-industries/starkex-js/dist/browser'
@@ -162,7 +162,7 @@ const request = {
 const response = await starkExAPI.gateway.deposit(request)
 ```
 
-## Withdraw Request
+## Withdraw request
 
 ```tsx
 import StarkExAPI from '@starkware-industries/starkex-js/dist/browser'
