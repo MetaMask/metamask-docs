@@ -16,7 +16,7 @@ You can use any paymaster service provider, such as [Pimlico](https://docs.pimli
 - [Install and set up the Smart Accounts Kit](../../get-started/install.md)
 - [Create a MetaMask smart account](create-smart-account.md)
 
-## How to send a gasless transaction
+## Send a gasless transaction
 
 The following example demonstrates how to use Viem's [Paymaster Client](https://viem.sh/account-abstraction/clients/paymaster) to send gasless transactions.
 You can provide the paymaster client using the paymaster property in the [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation#paymaster-optional) method, or in the [Bundler Client](https://viem.sh/account-abstraction/clients/bundler#paymaster-optional).

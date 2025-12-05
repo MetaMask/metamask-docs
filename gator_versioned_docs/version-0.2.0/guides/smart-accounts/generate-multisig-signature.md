@@ -20,7 +20,7 @@ into a single aggregated signature.
 - [Install and set up the Smart Accounts Kit](../../get-started/install.md)
 - [Create a Multisig smart account](create-smart-account.md#create-a-multisig-smart-account)
 
-## How to generate a multisig signature
+## Generate a multisig signature
 
 The following example configures a Multisig smart account with two different signers: Alice 
 and Bob. The account has a threshold of 2, meaning that signatures from 
