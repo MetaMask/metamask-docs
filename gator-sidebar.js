@@ -63,7 +63,7 @@ const sidebar = {
               label: 'Configure signers',
               collapsed: true,
               items: [
-                'guides/smart-accounts/signers/web3auth',
+                'guides/smart-accounts/signers/embedded-wallets',
               ],
             },
           ],
