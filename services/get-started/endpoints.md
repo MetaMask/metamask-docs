@@ -60,9 +60,7 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 | Network             | Description             | URL                                                   |
 |---------------------|-------------------------|-------------------------------------------------------|
 | Mainnet             | JSON-RPC over HTTPS     | `https://celo-mainnet.infura.io/v3/<YOUR-API-KEY>`    |
-| Mainnet             | JSON-RPC over WebSocket | `wss://celo-mainnet.infura.io/ws/v3/<YOUR-API-KEY>`   |
 | Testnet (Sepolia)   | JSON-RPC over HTTPS     | `https://celo-sepolia.infura.io/v3/<YOUR-API-KEY>`    |
-| Testnet (Sepolia)   | JSON-RPC over WebSocket | `wss://celo-sepolia.infura.io/ws/v3/<YOUR-API-KEY>`   |
 
 ## Ethereum
 
