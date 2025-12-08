@@ -16,7 +16,7 @@ View the complete code for this guide at [gator-examples repository](https://git
 
 - Install [Yarn](https://yarnpkg.com/),
     [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
-- [Create a Dynamic Environment ID](https://www.dynamic.xyz/docs/developer-dashboard/tokens-api-keys#environment-id)
+- A [Dynamic Environment ID](https://www.dynamic.xyz/docs/developer-dashboard/tokens-api-keys#environment-id)
 
 ## Steps
 
@@ -56,7 +56,7 @@ export function DynamicProvider({ children }: { children: ReactNode }) {
     <DynamicContextProvider
       settings={{
         // Get your environment id at https://app.dynamic.xyz/dashboard/developer
-        environmentId: "YOUR_DYNAMIC_ENVIRONMENT_ID",
+        environmentId: "<YOUR_DYNAMIC_ENVIRONMENT_ID>",
         walletConnectors: [EthereumWalletConnectors],
       }}
     >
@@ -124,5 +124,6 @@ const smartAccount = await toMetaMaskSmartAccount({
 ```
 
 ## Next steps
-- See how to [send a user operations](../send-user-operation.md).
+
+- See how to [send a user operation](../send-user-operation.md).
 - To sponsor gas for end users, see how to [send a gasless transaction](../send-gasless-transaction.md).
