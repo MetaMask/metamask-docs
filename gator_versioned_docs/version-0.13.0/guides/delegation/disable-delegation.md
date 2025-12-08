@@ -20,9 +20,9 @@ delegation, the transaction will revert, preventing him from spending Alice's US
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Create a delegator account.](execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
-- [Create a delegate account.](execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
+- [Install and set up the Delegation Toolkit](../../get-started/install.md)
+- [Create a delegator account](execute-on-smart-accounts-behalf.md#3-create-a-delegator-account)
+- [Create a delegate account](execute-on-smart-accounts-behalf.md#4-create-a-delegate-account)
 
 
 ## Disable a delegation

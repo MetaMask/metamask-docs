@@ -14,7 +14,7 @@ You can also configure the [toolkit environment](#optional-configure-the-toolkit
 
 ## Prerequisites
 
-[Install and set up the Smart Accounts Kit.](../get-started/install.md)
+- [Install and set up the Smart Accounts Kit](../get-started/install.md)
 
 ## Configure the bundler
 
@@ -125,10 +125,11 @@ creating a [redelegation](../concepts/delegation/index.md#delegation-types).
 import { 
   getSmartAccountsEnvironment, 
   SmartAccountsEnvironment, 
-} from "@metamask/smart-accounts-kit"; 
+} from "@metamask/smart-accounts-kit";
+import { sepolia } from "viem/chains";
 
 // Resolves the SmartAccountsEnvironment for Sepolia
-const environment: SmartAccountsEnvironment = getSmartAccountsEnvironment(11155111);
+const environment: SmartAccountsEnvironment = getSmartAccountsEnvironment(sepolia.id);
 ```
 
 ### Deploy a custom environment
