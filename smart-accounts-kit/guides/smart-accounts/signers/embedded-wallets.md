@@ -12,8 +12,6 @@ users to access Web3 applications through familiar authentication methods in und
 
 MetaMask Smart Accounts is a signer agnostic implementation that allows you to use Embedded Wallets (Web3Auth) as a signer for MetaMask Smart Accounts.
 
-View the complete code for this guide at [gator-examples repository](https://github.com/MetaMask/gator-examples/tree/main/examples/smart-accounts/signers/dynamic).
-
 ## Prerequisites
 
 - Install [Yarn](https://yarnpkg.com/),
