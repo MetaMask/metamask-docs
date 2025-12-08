@@ -14,6 +14,7 @@ View the complete code for this guide at [gator-examples repository](https://git
 
 ## Prerequisites
 
+- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
     [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
 - A [Dynamic Environment ID](https://www.dynamic.xyz/docs/developer-dashboard/tokens-api-keys#environment-id)
