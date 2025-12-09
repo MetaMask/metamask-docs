@@ -64,6 +64,7 @@ const sidebar = {
               collapsed: true,
               items: [
                 'guides/smart-accounts/signers/dynamic',
+                'guides/smart-accounts/signers/embedded-wallets',
               ],
             },
           ],
