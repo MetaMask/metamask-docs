@@ -1,10 +1,10 @@
 ---
 description: Learn how to use MetaMask Embedded Wallets (Web3Auth) with MetaMask Smart Accounts.
 sidebar_label: Embedded Wallets
-keywords: [web3auth, smart account, signer, metamask samrt account]
+keywords: [web3auth, smart account, signer, metamask smart account]
 ---
 
-# Use MetaMask Embdeded Wallets (Web3Auth) with MetaMask Smart Accounts
+# Use MetaMask Embedded Wallets (Web3Auth) with MetaMask Smart Accounts
 
 [MetaMask Embedded Wallets (Web3Auth)](/embedded-wallets/) provides a pluggable embedded wallet 
 infrastructure to simplify Web3 wallet integration and user onboarding. It supports social logins allowing 
@@ -30,11 +30,11 @@ npm install @metamask/smart-accounts-kit @web3auth/modal wagmi @tanstack/react-q
 
 ### 2. Create the Web3Auth provider
 
-In this step, you'll configure the `Web3AuthProvider` component to provide the Embedded Wallets (Web3Auth) 
+Configure the `Web3AuthProvider` component to provide the Embedded Wallets (Web3Auth) 
 context to your application. You'll also use the `WagmiProvider` to integrate Embedded Wallets (Web3Auth) with Wagmi. 
 This connector enables you to use Wagmi hooks with Embedded Wallets (Web3Auth). 
 
-Once you have created the `Web3AuthAppProvider`, you must wrap it at the root of your application so
+Once you've created the `Web3AuthAppProvider`, wrap it at the root of your application so
 that the rest of your application has access to the Embedded Wallets (Web3Auth) context. 
 
 For the advance configuration, see [Embedded Wallets guide](https://docs.metamask.io/embedded-wallets/sdk/react/advanced/).
@@ -85,7 +85,7 @@ export const web3authConfig = {
 
 ### 3. Create a smart account
 
-Once the user has connected their wallet, you can use the [Wallet Client](https://viem.sh/docs/clients/wallet) from Wagmi as the signer to create a
+Once the user has connected their wallet, use the [Wallet Client](https://viem.sh/docs/clients/wallet) from Wagmi as the signer to create a
 MetaMask smart account.
 
 ```ts
