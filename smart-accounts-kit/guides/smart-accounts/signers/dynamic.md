@@ -1,7 +1,7 @@
 ---
 description: Learn how to use Dynamic signer with MetaMask Smart Accounts.
 sidebar_label: Dynamic
-keywords: [dynamic, smart account, signer, metamask samrt account]
+keywords: [dynamic, smart account, signer, metamask smart account]
 ---
 
 # Use Dynamic with MetaMask Smart Accounts
@@ -13,7 +13,7 @@ that allows you to use Dynamic's EOA wallet as a signer for MetaMask Smart Accou
 View the complete code for this guide at [gator-examples repository](https://github.com/MetaMask/gator-examples/tree/main/examples/smart-accounts/signers/dynamic).
 
 :::info
-Please note, this guide is targeted towards React and React-based frameworks.
+This guide is targeted towards React and React-based frameworks.
 :::
 
 ## Prerequisites
@@ -102,7 +102,7 @@ export const wagmiConfig = createConfig({
 
 ### 3. Create a smart account
 
-Once the user has connected their wallet, you can use the [Wallet Client](https://viem.sh/docs/clients/wallet) from Wagmi as the signer to create a
+Once the user has connected their wallet, use the [Wallet Client](https://viem.sh/docs/clients/wallet) from Wagmi as the signer to create a
 MetaMask smart account.
 
 ```ts
