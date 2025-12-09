@@ -1,6 +1,6 @@
 ---
 description: Learn how to use MetaMask Embedded Wallets (Web3Auth) with MetaMask Smart Accounts.
-sidebar_label: Embedded Wallets
+sidebar_label: MetaMask Embedded Wallets
 keywords: [web3auth, smart account, signer, metamask smart account]
 ---
 
@@ -10,13 +10,18 @@ keywords: [web3auth, smart account, signer, metamask smart account]
 infrastructure to simplify Web3 wallet integration and user onboarding. It supports social logins allowing 
 users to access Web3 applications through familiar authentication methods in under a minute. 
 
-MetaMask Smart Accounts is a signer agnostic implementation that allows you to use Embedded Wallets (Web3Auth) as a signer for MetaMask Smart Accounts.
+MetaMask Smart Accounts is a signer agnostic implementation that allows you to use Embedded Wallets as a signer for MetaMask Smart Accounts.
+
+:::info
+This guide is targeted towards React and React-based frameworks.
+:::
 
 ## Prerequisites
 
+- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later
 - Install [Yarn](https://yarnpkg.com/),
     [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
-- Get a [Client ID](/embedded-wallets/dashboard) from the Embedded Wallets (Web3Auth) dashboard.
+- A [Embedded Wallets (Web3Auth) Client ID](/embedded-wallets/dashboard)
  
 ## Steps
 
@@ -30,12 +35,12 @@ npm install @metamask/smart-accounts-kit @web3auth/modal wagmi @tanstack/react-q
 
 ### 2. Create the Web3Auth provider
 
-Configure the `Web3AuthProvider` component to provide the Embedded Wallets (Web3Auth) 
-context to your application. You'll also use the `WagmiProvider` to integrate Embedded Wallets (Web3Auth) with Wagmi. 
-This connector enables you to use Wagmi hooks with Embedded Wallets (Web3Auth). 
+Configure the `Web3AuthProvider` component to provide the Embedded Wallets context to your application. 
+You'll also use the `WagmiProvider` to integrate Embedded Wallets with Wagmi. 
+This connector enables you to use Wagmi hooks with Embedded Wallets. 
 
 Once you've created the `Web3AuthAppProvider`, wrap it at the root of your application so
-that the rest of your application has access to the Embedded Wallets (Web3Auth) context. 
+that the rest of your application has access to the Embedded Wallets context. 
 
 For the advance configuration, see [Embedded Wallets guide](https://docs.metamask.io/embedded-wallets/sdk/react/advanced/).
 
@@ -112,5 +117,6 @@ const smartAccount = await toMetaMaskSmartAccount({
 ```
 
 ## Next steps
+
 - See how to [send a user operations](../send-user-operation.md).
 - To sponsor gas for end users, see how to [send a gasless transaction](../send-gasless-transaction.md).
