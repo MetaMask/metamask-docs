@@ -65,6 +65,7 @@ const sidebar = {
               items: [
                 'guides/smart-accounts/signers/dynamic',
                 'guides/smart-accounts/signers/embedded-wallets',
+                'guides/smart-accounts/signers/privy',
               ],
             },
           ],
