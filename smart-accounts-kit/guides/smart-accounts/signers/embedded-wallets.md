@@ -21,7 +21,7 @@ This guide is targeted towards React and React-based frameworks.
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later
 - Install [Yarn](https://yarnpkg.com/),
     [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
-- A [Embedded Wallets Client ID](/embedded-wallets/dashboard)
+- An [Embedded Wallets Client ID](/embedded-wallets/dashboard)
  
 ## Steps
 

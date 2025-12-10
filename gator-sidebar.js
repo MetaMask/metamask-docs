@@ -61,6 +61,7 @@ const sidebar = {
             {
               type: 'category',
               label: 'Configure signers',
+              link: { type: "doc", id: "guides/smart-accounts/signers/index" },
               collapsed: true,
               items: [
                 'guides/smart-accounts/signers/dynamic',
