@@ -35,7 +35,7 @@ npm install @dynamic-labs/ethereum @dynamic-labs/sdk-react-core @dynamic-labs/wa
 
 ### 2. Create the Dynamic provider
 
-In this step, you'll configure the [`DynamicContextProvider`](https://www.dynamic.xyz/docs/react-sdk/providers/providers-introduction#dynamic-context-provider) component to provide the Dynamic's context
+In this step, you'll configure the [`DynamicContextProvider`](https://www.dynamic.xyz/docs/react-sdk/providers/providers-introduction#dynamic-context-provider) component to provide Dynamic's context
 to your application. You'll also use the [`DynamicWagmiConnector`](https://www.dynamic.xyz/docs/react-sdk/providers/providers-introduction#dynamic-wagmi-connector) to integrate Dynamic with Wagmi. This 
 connector enables you to use Wagmi hooks with Dynamic. 
 
