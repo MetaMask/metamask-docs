@@ -13,9 +13,9 @@ permissions for ERC-20 token transfers with time-based (periodic) or streaming c
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../../configure-toolkit.md)
-- [Create a session account.](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
+- [Install and set up the Delegation Toolkit](../../../get-started/install.md)
+- [Configure the Delegation Toolkit](../../configure-toolkit.md)
+- [Create a session account](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
 
 ## ERC-20 periodic permission
 
