@@ -21,6 +21,8 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 - [Install and set up the Smart Accounts Kit](../../get-started/install.md)
 - [Install MetaMask Flask 13.5.0 or later](/snaps/get-started/install-flask)
 
+## Steps
+
 ### 1. Set up a Wallet Client
 
 Set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) using Viem's `createWalletClient` function. This client will
