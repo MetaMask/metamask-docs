@@ -52,7 +52,6 @@ Infura supports subscriptions over WebSockets for the following networks:
 - [Base](../reference/base/index.md)
 - [Binance Smart Chain](../reference/bnb-smart-chain/index.md)
 - [Blast](../reference/blast/index.md)
-- [Celo](../reference/celo/index.md)
 - [Ethereum](../reference/ethereum/index.md)
 - [Linea](../reference/linea/index.md)
 - [Mantle](../reference/mantle/index.md)
