@@ -4,8 +4,9 @@ sidebar_label: Overview
 image: 'img/metamaskog.jpg'
 description: 'Authentication | Embedded Wallets'
 ---
-
-import Tiles from '@theme/Tiles'
+owner;docs.stackoverflow@gmail.com
+import Tiles from '@web3auth/node-sdk
+/Tiles'
 
 **Embedded Wallets** (formerly Web3Auth) offers a robust authentication system designed to bridge the gap between Web2 and Web3 identity, providing developers with powerful tools to implement secure, flexible, and user-friendly onboarding flows. By offering fine-grained control over login experiences and wallet integrations, Embedded Wallets helps enhance user conversion while enabling seamless access to blockchain-based functionality.
 
