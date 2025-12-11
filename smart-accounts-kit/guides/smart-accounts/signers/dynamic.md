@@ -35,12 +35,12 @@ npm install @dynamic-labs/ethereum @dynamic-labs/sdk-react-core @dynamic-labs/wa
 
 ### 2. Create the Dynamic provider
 
-In this step, you'll configure the [`DynamicContextProvider`](https://www.dynamic.xyz/docs/react-sdk/providers/providers-introduction#dynamic-context-provider) component to provide the Dynamic context
+In this step, you'll configure the [`DynamicContextProvider`](https://www.dynamic.xyz/docs/react-sdk/providers/providers-introduction#dynamic-context-provider) component to provide Dynamic's context
 to your application. You'll also use the [`DynamicWagmiConnector`](https://www.dynamic.xyz/docs/react-sdk/providers/providers-introduction#dynamic-wagmi-connector) to integrate Dynamic with Wagmi. This 
 connector enables you to use Wagmi hooks with Dynamic. 
 
 Once you have created the `DynamicProvider`, you must wrap it at the root of your application so
-that the rest of your application has access to the Dynamic context. 
+that the rest of your application has access to the Dynamic's context. 
 
 For the advance configuration, see how to [configure Dynamic & Wagmi](https://www.dynamic.xyz/docs/react-sdk/using-wagmi).
 
@@ -113,7 +113,7 @@ const { address } = useAccount();
 const publicClient = usePublicClient();
 const { data: walletClient } = useWalletClient();
 
-// Additional check to make sure the Dyanmic wallet is connected
+// Additional check to make sure the Dyanmic is connected
 // and values are available.
 if (!address || !walletClient || !publicClient ) {
   // Handle the error case

@@ -21,7 +21,7 @@ This guide is targeted towards React and React-based frameworks.
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later
 - Install [Yarn](https://yarnpkg.com/),
     [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
-- A [Embedded Wallets (Web3Auth) Client ID](/embedded-wallets/dashboard)
+- An [Embedded Wallets Client ID](/embedded-wallets/dashboard)
  
 ## Steps
 
@@ -37,7 +37,7 @@ npm install @metamask/smart-accounts-kit @web3auth/modal wagmi @tanstack/react-q
 
 Configure the `Web3AuthProvider` component to provide the Embedded Wallets context to your application. 
 You'll also use the `WagmiProvider` to integrate Embedded Wallets with Wagmi. 
-This connector enables you to use Wagmi hooks with Embedded Wallets. 
+This provider enables you to use Wagmi hooks with Embedded Wallets. 
 
 Once you've created the `Web3AuthAppProvider`, wrap it at the root of your application so
 that the rest of your application has access to the Embedded Wallets context. 
@@ -51,6 +51,7 @@ For the advance configuration, see [Embedded Wallets guide](https://docs.metamas
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { Web3AuthProvider } from "@web3auth/modal/react";
+// Make sure to import `WagmiProvider` from `@web3auth/modal/react/wagmi`, not `wagmi`
 import { WagmiProvider } from "@web3auth/modal/react/wagmi";
 import { web3authConfig } from "./config.ts";
 
@@ -72,12 +73,11 @@ export function Web3AuthAppProvider({ children }: { children: ReactNode }) {
 <TabItem value = "config.ts">
 
 ```ts
-import { WEB3AUTH_NETWORK_TYPE, Web3AuthOptions } from "@web3auth/modal";
+import { Web3AuthOptions } from "@web3auth/modal";
 
 const web3AuthOptions: Web3AuthOptions = {
-  clientId: process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID as string,
-  web3AuthNetwork: process.env
-    .NEXT_PUBLIC_WEB3AUTH_NETWORK as WEB3AUTH_NETWORK_TYPE,
+  clientId: "<YOUR_WEB3AUTH_CLIENT_ID>",
+  web3AuthNetwork: "<YOUR_WEB3AUTH_NETWORK>",
 };
 
 export const web3authConfig = {
@@ -101,7 +101,7 @@ const { address } = useAccount();
 const publicClient = usePublicClient();
 const { data: walletClient } = useWalletClient();
 
-// Additional check to make sure the Dyanmic wallet is connected
+// Additional check to make sure the Embedded Wallets is connected
 // and values are available.
 if (!address || !walletClient || !publicClient ) {
   // Handle the error case
