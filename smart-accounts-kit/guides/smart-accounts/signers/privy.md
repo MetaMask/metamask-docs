@@ -51,11 +51,11 @@ import { PrivyProvider } from '@privy-io/react-auth';
 // Make sure to import `WagmiProvider` from `@privy-io/wagmi`, not `wagmi`
 import { WagmiProvider } from '@privy-io/wagmi';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { wagmiConfig, queryClient, privyConfig } from "./config.ts"
+import { wagmiConfig, queryClient } from "./config.ts"
 
 export function PrivyAppProvider({ children }: { children: ReactNode }) {
   return (
-    <PrivyProvider appId="<YOUR_PRIVY_APP_ID>" config={privyConfig}>
+    <PrivyProvider appId="<YOUR_PRIVY_APP_ID>">
       <QueryClientProvider client={queryClient}>
         <WagmiProvider config={wagmiConfig}>
           {children}
@@ -71,7 +71,6 @@ export function PrivyAppProvider({ children }: { children: ReactNode }) {
 <TabItem value = "config.ts">
 
 ```ts
-import type { PrivyClientConfig } from '@privy-io/react-auth';
 import { QueryClient } from "@tanstack/react-query";
 import { createConfig, http } from "wagmi";
 import { sepolia } from "viem/chains";
@@ -85,17 +84,6 @@ export const wagmiConfig = createConfig({
     [sepolia.id]: http(),
   },
 });
-
-export const privyConfig: PrivyClientConfig = {
-  embeddedWallets: {
-    createOnLogin: 'users-without-wallets',
-    showWalletUIs: true
-  },
-  loginMethods: ['wallet', 'email', 'sms'],
-  appearance: {
-    showWalletLoginFirst: true
-  }
-};
 ```
 
 </TabItem>
