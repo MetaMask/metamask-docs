@@ -6,12 +6,12 @@ keywords: [metamask, smart account, signer, metamask smart account]
 
 # Use Externally Owned Account (EOA) with MetaMask Smart Accounts
 
-Externally Owned Account (EOA) are one of the most widely used wallet (e.g. MetaMask, Phantom, and more) whcih consists of public
+Externally Owned Accounts (EOAs) are one of the most widely used wallet (such as MetaMask, Phantom, and more). They consist of a public and private 
 keypair where the private key is only known to the user. MetaMask Smart Accounts is a signer agnostic implementation that allows you
-to use EOA as a signer for MetaMask Smart Accounts.
+to use an EOA as a signer for MetaMask Smart Accounts.
 
 :::info
-This guide is targeted towards React and React-based frameworks. For Vue, see [Wagmi docs](https://wagmi.sh/vue/getting-started).
+This guide supports React and React-based frameworks. For Vue, see [Wagmi docs](https://wagmi.sh/vue/getting-started).
 :::
 
 ## Prerequisites
