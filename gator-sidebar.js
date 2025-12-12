@@ -34,6 +34,11 @@ const sidebar = {
             'get-started/use-scaffold-eth/advanced-permissions',
           ],
         },
+        {
+          type: "link",
+          label: "LLM context",
+          href: "https://docs.metamask.io/llms-smart-accounts-kit-full.txt"
+        },
         'get-started/supported-networks',
       ],
     },
@@ -53,6 +58,17 @@ const sidebar = {
             'guides/smart-accounts/send-user-operation',
             'guides/smart-accounts/send-gasless-transaction',
             'guides/smart-accounts/generate-multisig-signature',
+            {
+              type: 'category',
+              label: 'Configure signers',
+              link: { type: "doc", id: "guides/smart-accounts/signers/index" },
+              collapsed: true,
+              items: [
+                'guides/smart-accounts/signers/dynamic',
+                'guides/smart-accounts/signers/embedded-wallets',
+                'guides/smart-accounts/signers/privy',
+              ],
+            },
           ],
         },
         {
@@ -74,6 +90,7 @@ const sidebar = {
                 'guides/delegation/use-delegation-scopes/constrain-scope',
               ],
             },
+            'guides/delegation/create-redelegation',
             'guides/delegation/check-delegation-state',
             'guides/delegation/disable-delegation',
           ],

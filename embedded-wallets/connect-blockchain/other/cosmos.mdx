@@ -25,7 +25,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 npm install --save @web3auth/no-modal @web3auth/auth-adapter @web3auth/base @cosmjs/stargate @cosmjs/proto-signing
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -115,7 +115,7 @@ export default class CosmosRPC {
 }
 ```
 
-## Get Account
+## Get account
 
 Using `DirectSecp256k1Wallet.fromKey()` we can get the accounts via the private key we get through the provider.
 
@@ -144,7 +144,7 @@ export default class CosmosRPC {
 }
 ```
 
-## Get Balance
+## Get balance
 
 Using the account address we received in the previous step, we can fetch the balance using an RPC call to `client.getAllBalances(address)`.
 

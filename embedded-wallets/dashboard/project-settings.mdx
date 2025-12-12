@@ -7,7 +7,7 @@ description: 'Configure project settings in Web3Auth Dashboard | Embedded Wallet
 
 import ProjectSettingsGeneral from '@site/static/img/embedded-wallets/w3a-dashboard/project-settings-general.png'
 
-The **Project Settings** section of the Web3Auth Dashboard allows developers to manage core configuration options for each project. These settings determine how the project integrates with the Web3Auth SDK and how it behaves across different environments.
+The project settings section of the Web3Auth Dashboard allows developers to manage core configuration options for each project. These settings determine how the project integrates with the Web3Auth SDK and how it behaves across different environments.
 
 <div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
   <img
@@ -17,9 +17,9 @@ The **Project Settings** section of the Web3Auth Dashboard allows developers to 
   />
 </div>
 
-## Project Information
+## Project information
 
-### Project Name
+### Project name
 
 This is the name of the project that will be displayed to users during the Web3Auth login flow and in any related email communication. The project name serves as your application's identity in the Web3Auth ecosystem.
 
@@ -53,7 +53,7 @@ This indicates the Web3Auth environment selected during project creation. The en
 - Each environment has separate user bases and data isolation
 - Production applications should use Sapphire Mainnet
 
-### Project Platform
+### Project platform
 
 Developers can select from a wide range of platform options depending on the nature of their application. This setting helps optimize the SDK behavior and available features for your specific platform.
 
@@ -70,7 +70,7 @@ Developers can select from a wide range of platform options depending on the nat
 - Tailored documentation and examples
 - Specific security considerations
 
-## Authentication Credentials
+## Authentication credentials
 
 ### Client ID
 
@@ -94,7 +94,7 @@ const web3auth = new Web3Auth({
 })
 ```
 
-### Client Secret
+### Client secret
 
 A confidential key used for authenticating server-side API requests and advanced integrations. This credential provides elevated access to Web3Auth services.
 
@@ -120,7 +120,7 @@ The Client Secret must never be exposed in client-side code, mobile applications
 
 ## Token Verification
 
-### JWKS Endpoint
+### JWKS endpoint
 
 A public endpoint that exposes the JSON Web Key Set (JWKS) used by Web3Auth to sign JWTs. This endpoint enables you to verify the authenticity of identity tokens issued by Web3Auth.
 
@@ -164,7 +164,7 @@ jwt.verify(token, getKey, options, (err, decoded) => {
 })
 ```
 
-### Project Verification Key
+### Project verification key
 
 An alternative to using the JWKS endpoint, this static key allows for token verification without depending on external JWKS URL calls.
 
@@ -201,9 +201,9 @@ jwt.verify(token, PROJECT_VERIFICATION_KEY, { algorithms: ['RS256'] }, (err, dec
 })
 ```
 
-## Project Management
+## Project management
 
-### Archive Project
+### Archive project
 
 The Archive Project feature allows you to deactivate a project while preserving its configuration and data. This is useful for temporarily disabling projects or maintaining historical records.
 
@@ -234,14 +234,14 @@ Archiving preserves all project data and allows for restoration. If you need to 
 
 :::
 
-## Next Steps
+## Next steps
 
 For comprehensive project configuration, explore these related settings:
 
 - **[Whitelist Settings](../whitelist)** - Configure domain and URL authorization for enhanced security
 - **[Advanced Project Settings](../advanced/session-management)** - Access session management, key export, user data, and testing configurations
 
-### Quick Start Guide
+### Quick start guide
 
 **Essential Configuration Steps:**
 
@@ -251,9 +251,9 @@ For comprehensive project configuration, explore these related settings:
 4. Set up token verification method
 5. Review advanced settings as needed
 
-### Production Deployment Checklist
+### Production deployment checklist
 
-- ✅ All production domains whitelisted
+- ✅ All production domains allowlisted
 - ✅ Token verification configured
 - ✅ Advanced settings reviewed
 - ✅ Test accounts disabled

@@ -1,4 +1,4 @@
-To retrieve the user's Ethereum address, you can use the `EthereumAccount` class. This account can
+Use the `EthereumAccount` class to retrieve the user's Ethereum address. This account can
 also be used to sign transactions and messages.
 
 The package doesn't provides any direct way to consume the the private key and create an account.
@@ -24,7 +24,7 @@ extension Web3AuthState: EthereumSingleKeyStorageProtocol {
 }
 ```
 
-Once we have created the extension, we can use the Web3AuthState to create an EthereumAccount.
+Once we have created the extension, we can use the Web3AuthState to create an `EthereumAccount`.
 Please note, that this assumes that the user has already logged in and the state is available.
 
 ```swift

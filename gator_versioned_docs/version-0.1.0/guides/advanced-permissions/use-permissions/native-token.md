@@ -13,9 +13,9 @@ permissions for native token transfers with time-based (periodic) or streaming c
 
 ## Prerequisites
 
-- [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
-- [Configure the Smart Accounts Kit.](../../configure-toolkit.md)
-- [Create a session account.](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
+- [Install and set up the Smart Accounts Kit](../../../get-started/install.md)
+- [Configure the Smart Accounts Kit](../../configure-toolkit.md)
+- [Create a session account](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
 
 ## Native token periodic permission
 
@@ -23,6 +23,8 @@ This permission type ensures a per-period limit for native token transfers. At t
 
 For example, a user signs an ERC-7715 permission that lets a dapp spend up to 0.001 ETH on their behalf each day. The dapp can transfer a total of
 0.001 USDC per day; the limit resets at the beginning of the next day.
+
+See the [native token periodic permission API reference](../../../reference/advanced-permissions/permissions.md#native-token-periodic-permission) for more information.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -88,6 +90,8 @@ configured rate, up to the maximum allowed amount.
 
 For example, a user signs an ERC-7715 permission that allows a dapp to spend 0.0001 ETH per second, starting with an initial amount
 of 0.1 ETH, up to a maximum of 1 ETH.
+
+See the [native token stream permission API reference](../../../reference/advanced-permissions/permissions.md#native-token-stream-permission) for more information.
 
 <Tabs>
 <TabItem value="example.ts">

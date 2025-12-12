@@ -27,7 +27,7 @@ For Polymesh, we will use the libraries `@polymeshassociation/polymesh-sdk` and 
 npm install --save @polymeshassociation/polymesh-sdk @polymeshassociation/local-signing-manager
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -68,7 +68,7 @@ npm install --save @polymeshassociation/polymesh-sdk @polymeshassociation/local-
 </TabItem>
 </Tabs>
 
-## Get Account and KeyPair
+## Get account and keypair
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Polymesh, we directly use the private key to make RPC calls.
 
@@ -148,7 +148,7 @@ console.log(`Public Key: ${signingAccount.address}`)
 </TabItem>
 </Tabs>
 
-## Get Balance
+## Get balance
 
 ```tsx
 /*
@@ -173,7 +173,7 @@ const identity = await polymeshApi.getSigningIdentity()
 console.log(`Signing Identity: ${identity?.did || 'No identity found'}`)
 ```
 
-## Send Transaction
+## Send transaction
 
 ```tsx
 /*

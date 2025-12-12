@@ -9,7 +9,7 @@ To interact with the Solana blockchain, you can use [`@solana/web3.js`](https://
 npm install --save @solana/web3.js @web3auth/solana-provider
 ```
 
-## Initializing Provider
+## Initializing provider
 
 Using `solana` as `chainNamespace` while initializing `web3auth` will provide a Solana provider as **`web3auth.provider`** after successful authentication.
 
@@ -218,13 +218,13 @@ console.log(result.toString())
 
 ## Fetch User's Private Key
 
-`solanaPrivateKey` is used to fetch the private key of the logged in user. It is only available for `in-app` adapters like `auth`.
+`solana_privateKey` is used to fetch the private key of the logged in user. It is only available for `in-app` adapters like `auth`.
 
 ```tsx
 // Assuming user is already logged in.
 async getPrivateKey() {
   const privateKey = await web3auth.provider.request({
-    method: "solanaPrivateKey"
+    method: "solana_privateKey"
   });
 
   // Do something with privateKey

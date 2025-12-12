@@ -13,9 +13,9 @@ permissions for ERC-20 token transfers with time-based (periodic) or streaming c
 
 ## Prerequisites
 
-- [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
-- [Configure the Smart Accounts Kit.](../../configure-toolkit.md)
-- [Create a session account.](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
+- [Install and set up the Smart Accounts Kit](../../../get-started/install.md)
+- [Configure the Smart Accounts Kit](../../configure-toolkit.md)
+- [Create a session account](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
 
 ## ERC-20 periodic permission
 
@@ -23,6 +23,8 @@ This permission type ensures a per-period limit for ERC-20 token transfers. At t
 
 For example, a user signs an ERC-7715 permission that lets a dapp spend up to 10 USDC on their behalf each day. The dapp can transfer a total of
 10 USDC per day; the limit resets at the beginning of the next day.
+
+See the [ERC-20 periodic permission API reference](../../../reference/advanced-permissions/permissions.md#erc-20-periodic-permission) for more information.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -91,6 +93,8 @@ configured rate, up to the maximum allowed amount.
 
 For example, a user signs an ERC-7715 permission that allows a dapp to spend 0.1 USDC per second, starting with an initial amount
 of 1 USDC, up to a maximum of 2 USDC.
+
+See the [ERC-20 stream permission API reference](../../../reference/advanced-permissions/permissions.md#erc-20-stream-permission) for more information.
 
 <Tabs>
 <TabItem value="example.ts">

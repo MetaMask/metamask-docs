@@ -1,12 +1,13 @@
 To send a transaction, you can use the `Web3j` instance we created earlier. It has
-`ethSendRawTransaction` method which helps to send the raw transaction to the network. To create a
-raw transaction, you need to retrieve nonce, gas price, gas limit, and the value of the transaction.
-The nonce is the number of transactions sent from the sender's address. The gas price is the price
-of the gas, which is the unit of account for the transaction. The gas limit is the maximum amount of
-gas that the sender is willing to pay for the transaction. The value is the amount of ether to send.
+`ethSendRawTransaction` method which sends the raw transaction to the network. To create a
+raw transaction, you need to retrieve nonce, gas price, gas limit, and the value of the transaction:
 
-The default gas limit for a transfer ETH transaction is 21000, but you can also estimate the gas
-limit explicitly using `ethEstimateGas` method.
+- nonce is the number of transactions sent from the sender's address
+- gas price is the unit of account for the transaction
+- gas limit is the maximum amount of gas that the sender is willing to pay for the transaction
+
+The gas values are in ether. The default gas limit for a transfer ETH transaction is 21000, but you can 
+also estimate the gas limit explicitly using `ethEstimateGas` method.
 
 ```kotlin
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount

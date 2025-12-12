@@ -20,6 +20,74 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
   const { frontMatter, metadata } = MDXPageContent
   const { permalink } = metadata
 
+  // Extract teaser content (first two paragraphs) from MDX content
+  const extractTeaserContent = () => {
+    try {
+      // Access the raw content if available
+      const rawContent = (MDXPageContent as any).__rawContent || (MDXPageContent as any).rawContent || (MDXPageContent as any).content
+
+      if (!rawContent) return null
+
+      // Remove frontmatter (everything before the first paragraph)
+      const contentWithoutFrontmatter = rawContent.split('---').slice(2).join('---').trim()
+
+      // Remove imports and other non-content lines
+      const lines = contentWithoutFrontmatter.split('\n')
+      const contentLines = lines.filter(line => {
+        const trimmed = line.trim()
+        return !trimmed.startsWith('import ') &&
+          !trimmed.startsWith('export ') &&
+          trimmed !== ''
+      })
+
+      // Extract paragraphs (non-empty lines that don't start with #, -, *, etc.)
+      const paragraphs = []
+      let currentParagraph = ''
+
+      for (const line of contentLines) {
+        const trimmed = line.trim()
+
+        // Skip headers, lists, code blocks, and other markdown syntax
+        if (trimmed.startsWith('#') ||
+          trimmed.startsWith('-') ||
+          trimmed.startsWith('*') ||
+          trimmed.startsWith('```') ||
+          trimmed.startsWith(':::') ||
+          trimmed.startsWith('1.') ||
+          trimmed.startsWith('2.') ||
+          trimmed.startsWith('3.')) {
+          if (currentParagraph.trim()) {
+            paragraphs.push(currentParagraph.trim())
+            currentParagraph = ''
+          }
+          continue
+        }
+
+        if (trimmed === '') {
+          if (currentParagraph.trim()) {
+            paragraphs.push(currentParagraph.trim())
+            currentParagraph = ''
+          }
+        } else {
+          currentParagraph += (currentParagraph ? ' ' : '') + trimmed
+        }
+      }
+
+      // Add any remaining paragraph
+      if (currentParagraph.trim()) {
+        paragraphs.push(currentParagraph.trim())
+      }
+
+      // Return first two paragraphs
+      return paragraphs.slice(0, 2)
+    } catch (error) {
+      console.warn('Could not extract teaser content:', error)
+      return null
+    }
+  }
+
+  const teaserContent = extractTeaserContent()
+
   if (!permalink.includes(`/tutorials/`)) {
     return <OriginalMDXPage {...props} />
   }
@@ -38,6 +106,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
     date,
     wrapperClassName,
     communityPortalTopicId,
+    discourse_topic_id,
   } = frontMatter
   const url = `https://metamask.io${permalink}`
   const facebookLink = `https://www.facebook.com/sharer/sharer.php?${url}`
@@ -60,7 +129,7 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
             <div className="row">
               <div className="col col--8 col--offset-1">
                 <div className={styles.titleContainer}>
-                  {/* <img className={styles.cover} src={baseUrl + image} alt="Cover" /> */}
+                  {/* <img className={styles.cover} src={"https://docs.metamask.io/" + image} alt="Cover" /> */}
                   <div className={styles.titleContainer}>
                     <h1 className={styles.title}>{title}</h1>
                     <div className={styles.topMenu}>
@@ -167,7 +236,12 @@ export default function MDXPage(props: ComponentProps<typeof OriginalMDXPage>) {
                     )}
                   </BrowserOnly>
                 </div>
-                <DiscourseComment postUrl={url} />
+                <DiscourseComment
+                  postUrl={url}
+                  discourseTopicId={discourse_topic_id}
+                  metadata={{ title, image, description, tags, author, date }}
+                  teaserContent={teaserContent}
+                />
               </div>
               {MDXPageContent.toc && (
                 <div className="col col--3" style={{ paddingRight: '30px' }}>

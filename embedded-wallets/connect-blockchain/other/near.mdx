@@ -24,7 +24,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 npm install --save near-api-js@4.0.4
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -64,7 +64,7 @@ npm install --save near-api-js@4.0.4
 </TabItem>
 </Tabs>
 
-## Get Key Pair and Account
+## Get keypair and account
 
 After a user logs in, they receive a provider from the Embedded Wallets SDK. However, there is no native provider for Near, so we use the private key to make RPC calls directly.
 
@@ -101,7 +101,7 @@ const publicAddress = keyPair?.getPublicKey().data || []
 const accountId = Buffer.from(pk58 || []).toString('hex')
 ```
 
-## Get Balance
+## Get balance
 
 ```tsx
 import { connect, keyStores, utils } from 'near-api-js'
@@ -124,7 +124,7 @@ const accountBalance = await account.getAccountBalance()
 const availableBalance = utils.format.formatNearAmount(accountBalance.available)
 ```
 
-## Send Transaction
+## Send transaction
 
 ```tsx
 import { connect, keyStores, utils } from 'near-api-js'

@@ -53,7 +53,7 @@ To begin, install the Aptos SDK:
 npm install --save @aptos-labs/ts-sdk
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -93,7 +93,7 @@ npm install --save @aptos-labs/ts-sdk
 </TabItem>
 </Tabs>
 
-## Get Account and Key
+## Get account and Key
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Aptos, we use the private key directly for making RPC calls.
 
@@ -116,7 +116,7 @@ const aptosAccount = Account.fromPrivateKey({ privateKey: privateKeyUint8Array }
 const aptosAccountAddress = aptosAccount.accountAddress.toString()
 ```
 
-## Get Balance
+## Get balance
 
 ```tsx
 import { Account, Aptos, AptosConfig, Network } from '@aptos-labs/ts-sdk'
@@ -139,7 +139,7 @@ let coinResource = resources.find(resource => resource.type.includes('0x1::coin:
 let balance = parseInt(coinResource.data.coin.value)
 ```
 
-## Send Transaction
+## Send transaction
 
 ```tsx
 import { Account, Aptos, AptosConfig, Network } from '@aptos-labs/ts-sdk'

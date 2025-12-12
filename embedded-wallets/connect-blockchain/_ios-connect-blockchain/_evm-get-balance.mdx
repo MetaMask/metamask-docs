@@ -1,6 +1,6 @@
-To retrieve the balance of an Ethereum address, you can use the `EthereumClient.eth_getBalance`
-method. The response we get from this method is in Wei, so we need to convert it to Ether. The get
-the ether value, you can divide the wei value with `1 / 10^18`.
+Use the `EthereumClient.eth_getBalance` method to retrieve the balance of an Ethereum address. 
+
+The result we get from Web3Client is in wei, the smallest unit of ether. To convert wei to ether, divide by 10^18, where 18 denotes the decimals for wei.
 
 ```swift
 import web3

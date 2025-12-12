@@ -105,6 +105,9 @@ const config = {
     SENTRY_KEY: process.env.SENTRY_KEY,
     LINEA_ENS_URL: process.env.LINEA_ENS_URL,
     SEGMENT_ANALYTICS_KEY: process.env.SEGMENT_ANALYTICS_KEY,
+    DISCOURSE_API_KEY: process.env.DISCOURSE_API_KEY,
+    DISCOURSE_API_USERNAME: process.env.DISCOURSE_API_USERNAME,
+    DISCOURSE_CATEGORY_ID: process.env.DISCOURSE_CATEGORY_ID,
   },
 
   trailingSlash: true,
@@ -213,7 +216,7 @@ const config = {
         sidebarCollapsed: false,
         includeCurrentVersion: true,
         // Set to the latest release.
-        lastVersion: '0.1.0',
+        lastVersion: '0.2.0',
         versions: {
           // Defaults to the ./docs folder.
           // Using "development" instead of "next" as path.
@@ -222,8 +225,8 @@ const config = {
             path: 'development',
           },
           // The latest release.
-          '0.1.0': {
-            label: 'latest (0.1.0)',
+          '0.2.0': {
+            label: 'latest (0.2.0)',
           },
         },
       },
@@ -460,14 +463,14 @@ const config = {
           },
           {
             filename: 'llms-services.txt',
-            includePatterns: ['services/**/*.{md,mdx}'],
+            includePatterns: ['services/**/*.md'],
             fullContent: false,
             title: 'Services documentation',
             description: 'Documentation links for MetaMask services',
           },
           {
             filename: 'llms-services-full.txt',
-            includePatterns: ['services/**/*.{md,mdx}'],
+            includePatterns: ['services/**/*.md'],
             fullContent: true,
             title: 'Services documentation',
             description: 'Complete documentation for MetaMask services',

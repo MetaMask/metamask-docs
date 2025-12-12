@@ -2,7 +2,6 @@
 title: Connect Embedded Wallets with any Blockchain
 sidebar_label: Non EVM Blockchains
 image: 'img/metamaskog.jpg'
-
 keywords: [web3auth, authentication, blockchain, agnostic]
 description: 'Connect Embedded Wallets with any Blockchain - Chain Agnostic'
 ---
@@ -17,7 +16,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 ::::
 
-## Embedded Wallets are Chain Agnostic
+## Embedded Wallets are chain agnostic
 
 By default, Embedded Wallets supports the `secp256k1` and `ed25519` key curves. While these key curves serve the majority of blockchains out there, certain blockchains have different curve implementations of their own. With **Embedded Wallets you can interact with any blockchain of your choice**.
 
@@ -29,7 +28,7 @@ Embedded Wallets is composable - you can combine it with meta-transaction flows,
 
 :::
 
-## Standard Approach for connecting with Non EVM Chains
+## Standard approach for connecting with non EVM chains
 
 For connecting with different blockchains to make blockchain calls like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc., you need to find particular libraries that can help you achieve the following:
 
@@ -109,7 +108,7 @@ export const OtherChains = [
       },
       {
         key: "starknet",
-        title: "StarkNet",
+        title: "Starknet",
         icon: "logo-starknet.png",
         path: "/embedded-wallets/connect-blockchain/other/starknet",
       },
@@ -130,8 +129,8 @@ export const OtherChains = [
 
 }, ];
 
-## Non EVM Chain guides
+## Non EVM chain guides
 
-You can checkout the following guides we've written for certain non evm blockchains. The approach mentioned in this doc is very similar to the one followed in each one of them.
+You can checkout the following guides we've written for certain non EVM blockchains. The approach mentioned in this doc is very similar to the one followed in each one of them.
 
 <Tiles tileGroups={OtherChains} />

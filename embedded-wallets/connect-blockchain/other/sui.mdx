@@ -27,7 +27,7 @@ For Sui, we will use the [@mysten/sui.js](https://www.npmjs.com/package/@mysten/
 npm install --save @mysten/sui.js
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -68,7 +68,7 @@ npm install --save @mysten/sui.js
 </TabItem>
 </Tabs>
 
-## Get Account and KeyPair
+## Get account and keypair
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Sui, we directly use the private key to create the account.
 
@@ -92,7 +92,7 @@ const address = keyPair.toSuiAddress()
 console.log(`Sui account: ${address}`)
 ```
 
-## Get Balance
+## Get balance
 
 ```tsx
 import { CoinBalance, getFullnodeUrl, SuiClient } from '@mysten/sui.js/client';
@@ -114,7 +114,7 @@ private balance = (balance: CoinBalance) => {
 }
 ```
 
-## Send Transaction
+## Send transaction
 
 ```tsx
 import { TransactionBlock } from '@mysten/sui.js/transactions'
