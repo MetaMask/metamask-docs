@@ -13,7 +13,7 @@ users to access Web3 applications through familiar authentication methods in und
 MetaMask Smart Accounts is a signer agnostic implementation that allows you to use Embedded Wallets as a signer for MetaMask Smart Accounts.
 
 :::info
-This guide is targeted towards React and React-based frameworks.
+This guide supports React and React-based frameworks.
 :::
 
 ## Prerequisites

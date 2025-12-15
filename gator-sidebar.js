@@ -67,6 +67,7 @@ const sidebar = {
                 'guides/smart-accounts/signers/dynamic',
                 'guides/smart-accounts/signers/embedded-wallets',
                 'guides/smart-accounts/signers/eoa-wallets',
+                'guides/smart-accounts/signers/passkey',
                 'guides/smart-accounts/signers/privy',
               ],
             },
