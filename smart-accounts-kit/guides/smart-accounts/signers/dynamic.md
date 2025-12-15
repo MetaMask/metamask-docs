@@ -13,7 +13,7 @@ that allows you to use Dynamic's EOA wallet as a signer for MetaMask Smart Accou
 View the complete code for this guide at [gator-examples repository](https://github.com/MetaMask/gator-examples/tree/main/examples/smart-accounts/signers/dynamic).
 
 :::info
-This guide is targeted towards React and React-based frameworks.
+This guide supports React and React-based frameworks.
 :::
 
 ## Prerequisites
