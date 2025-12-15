@@ -43,7 +43,7 @@ Checkout the following guides to learn how to configure different signers:
   {
     href: "/smart-accounts-kit/development/guides/smart-accounts/signers/passkey",
     title: "Passkey",
-    description: "Learn how to use Passkey with MetaMask Smart Accounts.",
+    description: "Learn how to use a passkey with MetaMask Smart Accounts.",
   },
   {
     href: "/smart-accounts-kit/development/guides/smart-accounts/signers/privy",

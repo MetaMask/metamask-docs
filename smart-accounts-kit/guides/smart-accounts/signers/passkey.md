@@ -4,14 +4,14 @@ sidebar_label: Passkey
 keywords: [passkey, smart account, signer, metamask smart account]
 ---
 
-# Use Passkey with MetaMask Smart Accounts
+# Use a passkey with MetaMask Smart Accounts
 
 Passkeys eliminate the need for traditional seed phrases that are difficult to remember, enabling a more seamless 
-and secure way for users to access their Externally Owned Accounts (EOAs). Compared to traditional EOAs which uses 
-secp256k1 elliptic curve to generate key pairs and signatures, a passkey based EOA uses the 
+and secure way for users to access their Externally Owned Accounts (EOAs). Compared to traditional EOAs which use 
+secp256k1 elliptic curve to generate key pairs and signatures, a passkey-based EOA uses the 
 secp256r1 (P-256) elliptic curve.
 
-MetaMask Smart Accounts is signer agnostic and natively supports passkeys (P-256 elliptic curve signatures), so you can use passkey as the signer.
+MetaMask Smart Accounts is signer agnostic and natively supports passkeys (P-256 elliptic curve signatures), so you can use a passkey as the signer.
 
 ## Prerequisites
 
