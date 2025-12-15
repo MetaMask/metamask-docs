@@ -58,6 +58,18 @@ const sidebar = {
             'guides/smart-accounts/send-user-operation',
             'guides/smart-accounts/send-gasless-transaction',
             'guides/smart-accounts/generate-multisig-signature',
+            {
+              type: 'category',
+              label: 'Configure signers',
+              link: { type: "doc", id: "guides/smart-accounts/signers/index" },
+              collapsed: true,
+              items: [
+                'guides/smart-accounts/signers/dynamic',
+                'guides/smart-accounts/signers/embedded-wallets',
+                'guides/smart-accounts/signers/eoa-wallets',
+                'guides/smart-accounts/signers/privy',
+              ],
+            },
           ],
         },
         {

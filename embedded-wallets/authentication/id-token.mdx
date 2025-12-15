@@ -59,7 +59,7 @@ A sample decoded token is shown below:
 
 :::warning NOTE
 
-If the `Return user data in identity token` setting is disabled on the Embedded Wallets Dashboard, personally identifiable information (PII) such as **email**, **name**, and **profileImage** will be omitted from the token.
+If the `Return user data in identity token` setting is disabled on the dashboard, personally identifiable information (PII) such as **email**, **name**, and **profileImage** will be omitted from the token.
 
 :::
 
@@ -320,7 +320,7 @@ const validateIdToken = async () => {
 
 ### Using the verification key
 
-To manually verify the token, use your **Verification Key** available on the **Project Settings** page in the Embedded Wallets Dashboard.
+To manually verify the token, use your **Verification Key** available on the **Project Settings** page in the dashboard.
 
 <Tabs
 defaultValue="jose"
@@ -380,7 +380,7 @@ try {
 
 :::info
 
-If the token is valid, the payload will contain identity claims (e.g., userId). If invalid, an error is thrown.
+If the token is valid, the payload will contain identity claims (such as, userId). If invalid, an error is thrown.
 
 :::
 
