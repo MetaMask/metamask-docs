@@ -17,15 +17,19 @@ import GroupConnectionAuth0Implicit from '../sdk/react/advanced/_custom-authenti
 import GroupConnectionAuth0JWT from '../sdk/react/advanced/_custom-authentication-snippets/_grouped_auth_jwt_auth0.mdx'
 import GroupModal from '../sdk/react/advanced/_custom-authentication-snippets/_grouped_modal_connections.mdx'
 
-Group Connections enable multiple login methods to be linked to the same on-chain user identity. This means that users logging in with different authentication providers (for example, **_Google and Email Passwordless_**) can still access the **same wallet address**—ensuring a unified user experience.
+Group connections enable multiple login methods to be linked to the same on-chain user identity. This means that users logging in with different authentication providers (for example, **_Google and Email Passwordless_**) can still access the **same wallet address**—ensuring a unified user experience.
 
-> _Before setting up a group connection, developers must first configure individual login connections that are eligible._
+:::note
+
+Before setting up a group connection, developers must first configure individual login connections that are eligible.
+
+:::
 
 ## Set up a group connection
 
-:::success Create Group Connection on Dashboard
+:::success Create a group connection
 
-To use this feature, developers must go to the `Group Connections` tab in the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+To use this feature, developers use the **Group Connections** tab in the [dashboard](https://dashboard.web3auth.io).
 
 :::
 
@@ -43,12 +47,12 @@ To use this feature, developers must go to the `Group Connections` tab in the [E
 
 Follow these steps:
 
-1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
-2. Go to the `Group Connections` section.
-3. Click on the `Create Group` button.
+1. Visit the [dashboard](https://dashboard.web3auth.io).
+2. Go to the **Group Connections** section.
+3. Click on the **Create Group** button.
 4. Enter your custom `Group Name`.
 5. Select `1st social connection` and `2nd social connection`.
-6. Click `Create Group`.
+6. Click **Create Group**.
 
 <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
   <img
@@ -76,7 +80,7 @@ Follow these steps:
 
 ## Usage
 
-Since, the `Group Connections` details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+Since, the group connections details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
 > Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
 

@@ -172,7 +172,7 @@ let signedTxn = algosdk.signTransaction(txn, keyPair.sk)
 const txHash = await client.sendRawTransaction(signedTxn.blob).do()
 ```
 
-## Sign Message
+## Sign a message
 
 ```tsx
 import { IProvider } from '@web3auth/base'
