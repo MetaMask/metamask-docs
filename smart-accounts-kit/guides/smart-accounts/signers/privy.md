@@ -10,7 +10,7 @@ keywords: [privy, smart account, signer, metamask smart account]
 that allows you to use Privy's EOA wallet as a signer for MetaMask Smart Accounts.
 
 :::info
-This guide is targeted towards React and React-based frameworks.
+This guide supports React and React-based frameworks.
 :::
 
 ## Prerequisites
