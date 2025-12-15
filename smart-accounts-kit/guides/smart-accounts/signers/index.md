@@ -41,6 +41,11 @@ Checkout the following guides to learn how to configure different signers:
     description: "Learn how to use EOAs like MetaMask with MetaMask Smart Accounts.",
   },
   {
+    href: "/smart-accounts-kit/development/guides/smart-accounts/signers/passkey",
+    title: "Passkey",
+    description: "Learn how to use Passkey with MetaMask Smart Accounts.",
+  },
+  {
     href: "/smart-accounts-kit/development/guides/smart-accounts/signers/privy",
     title: "Privy",
     description: "Learn how to use Privy with MetaMask Smart Accounts.",
