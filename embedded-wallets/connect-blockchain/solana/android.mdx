@@ -106,7 +106,7 @@ dependencies {
 
 To Initialize the `Connection` we require rpc url. The `Connection` object will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response.The `sol4k` SDK also provides `RpcUrl` constant for all the supported clusters. For this example, we are using `RpcUrl.DEVNET` for Devnet-beta. To interact with Testnet or Mainnet, you can simply change the `RpcUrl`.
 
-### Initializing Solana SDK
+### Initializing the Solana SDK
 
 In the below code block, we'll create the `Connection` instance using the Devnet-beta rpc.
 
@@ -117,7 +117,7 @@ import org.sol4k.RpcUrl
 val connection = Connection(RpcUrl.DEVNET)
 ```
 
-### Initializing Web3Auth SDK
+### Initializing the Web3Auth SDK
 
 In the below code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. For checking, if user is already authenticated, we can check whether private key is empty or not.
 
@@ -160,7 +160,7 @@ val solanaKeyPair = Keypair.fromSecretKey(ed25519PrivateKey.hexToByteArray())
 val userAccount = solanaKeyPair.publicKey.toBase58()
 ```
 
-## Get User Balance
+## Get user balance
 
 Once we have retrieved userAccount, we can use it to fetch user balance. We'll use `getBalance` method from `Connection` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is BigInteger, we will need to divide it by by 10^9, because Solana's token decimals is 9.
 
@@ -180,7 +180,7 @@ try {
 }
 ```
 
-## Sign Transaction
+## Sign a transaction
 
 Let's now go through how can we sign the transaction. In the below codeblock, we'll create a new function `prepareSignedTransaction` which can be used to retrieve the Base58 signature as well as broadcast transaction to the cluster. We'll use `TransferInstruction` to create the transaction to self transfer 0.01 Sol and sign it.
 

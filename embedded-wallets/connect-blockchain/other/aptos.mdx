@@ -11,7 +11,7 @@ import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [Aptos](https://aptos.dev/), you can obtain the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make calls like fetching the user's `account`, retrieving `balance`, `signing transactions`, `sending transactions`, or interacting with smart contracts. We will focus on Testnet for this guide.
+While using the Embedded Wallets Web SDK for a non-EVM chain like [Aptos](https://aptos.dev/), you can obtain the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make calls like fetching the user's `account`, retrieving `balance`, `signing transactions`, `sending transactions`, or interacting with smart contracts. We will focus on testnet for this guide.
 
 ::::note
 
@@ -19,9 +19,9 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 ::::
 
-## Aptos Configuration and Enums
+## Aptos configuration and enums
 
-For configuring Aptos, we will use the `AptosConfig` class from the `@aptos-labs/ts-sdk` package. The network parameter in `AptosConfig` uses an enum, which allows us to select the network environment (e.g., **Testnet**).
+For configuring Aptos, we will use the `AptosConfig` class from the `@aptos-labs/ts-sdk` package. The network parameter in `AptosConfig` uses an enum, which allows us to select the network environment (such as, 'testnet').
 
 Here are the available networks in the enum:
 
@@ -93,7 +93,7 @@ npm install --save @aptos-labs/ts-sdk
 </TabItem>
 </Tabs>
 
-## Get account and Key
+## Get account and key
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Aptos, we use the private key directly for making RPC calls.
 
@@ -179,7 +179,7 @@ const committedTxn = await aptos.transaction.submit.simple({
 await aptos.waitForTransaction({ transactionHash: committedTxn.hash })
 ```
 
-## Airdrop Request
+## Airdrop request
 
 You can request test tokens (Aptos coins) for your account by using the `getAirdrop` method in the testnet environment. This allows you to receive a certain amount of AptosCoin for testing purposes.
 
@@ -217,4 +217,4 @@ This method will provide your account with test APT from Aptos Testnet, which ca
 
 ## Conclusion
 
-With Web3Auth and Aptos integration, you can easily set up authentication for your Aptos dApps, get account information, check balances, and even send transactions.
+With Web3Auth and Aptos integration, you can easily set up authentication for your Aptos dapps, get account information, check balances, and even send transactions.
