@@ -22,7 +22,7 @@ For example, Alice delegates to Bob the ability to call the `approve` function o
 
 This scope requires `targets`, which specifies the permitted contract addresses, and `selectors`, which specifies the allowed methods.
 
-Internally, this scope uses the [`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets) and [`allowedMethods`](../../../reference/delegation/caveats.md#allowedmethods) caveat enforcers, and 
+Internally, this scope uses the [`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets), [`allowedMethods`](../../../reference/delegation/caveats.md#allowedmethods), [`valueLte`](../../../reference/delegation/caveats.md#valuelte) caveat enforcers, and 
 optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
 See the [function call scope reference](../../../reference/delegation/delegation-scopes.md#function-call-scope) for more details.
 
@@ -117,6 +117,31 @@ const delegation = createDelegation({
         functionName: 'approve',
       })
     }
+  },
+  to: delegateAccount,
+  from: delegatorAccount,
+  environment: delegatorAccount.environment,
+});
+```
+
+### Allow native token transfer
+
+You can define `valueLte` to allow native token transfer. By default, this value is set to `0`. For example, Alice can allow Bob
+to take `0.00001` ETH as a fee each time he revokes a token approval on her behalf.
+
+```ts
+import { createDelegation } from "@metamask/smart-accounts-kit";
+import { parseEther } from "viem";
+
+// USDC address on Sepolia.
+const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+
+const delegation = createDelegation({
+  scope: {
+    type: "functionCall",
+    targets: [USDC_ADDRESS],
+    selectors: ["approve(address, uint256)"],
+    valueLte: { maxValue: parseEther("0.00001") },
   },
   to: delegateAccount,
   from: delegatorAccount,
