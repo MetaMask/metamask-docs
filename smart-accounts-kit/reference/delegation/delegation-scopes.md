@@ -302,7 +302,7 @@ Defines the specific methods, contract addresses, and calldata that are allowed 
 | `selectors`       | `MethodSelector[]`               | Yes      | The list of method selectors that the delegate is allowed to call. The selector value can be 4-byte hex string, ABI function signature, or ABI function object. |
 | `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
 | `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The calldata the delegate is allowed to call. Cannot be used together with `allowedCalldata`. |
-| `valueLte`        | `ValueLteBuilderConfig`          | No       | The maximum amount of native tokens that can be transferred by delegate. By default, the amount is set to `0`. |
+| `valueLte`        | `ValueLteBuilderConfig`          | No       | The maximum native token amount the delegate can transfer. By default, the amount is set to `0`. |
 
 #### Example
 
