@@ -24,15 +24,15 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 ## Dashboard configuration
 
-The Embedded Wallets Web SDK (`@web3auth/modal`) from v10 onwards does not need any additional setup on the code side for blockchain connections. All of it is handled on the Dashboard. We can use any chain from the extensive list of predefined chains and add more if we need.
+The Embedded Wallets Web SDK (`@web3auth/modal`) from v10 onwards does not need any additional setup on the code side for blockchain connections. All of it is handled on the dashboard. We can use any chain from the extensive list of predefined chains and add more if we need.
 
 ![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)
 
-## Reference Guides for Blockchain Connections
+## Reference guides for blockchain connections
 
 You can check out the following guides we've written for certain blockchains. We have covered a wide variety of EVM and EVM Chains, supported by multiple Embedded Wallets providers.
 
-### Non EVM Chain guides
+### Non-EVM chain guides
 
 <OtherChains />
 
