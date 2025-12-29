@@ -19,24 +19,27 @@ The only difference between the [Shamir Secret Sharing-based](./glossary.mdx#sha
 
 Embedded Wallets supports the most popular blockchains and elliptic curves:
 
-- `secp256k1` | Ethereum (EVM) chains (Base, Linea, Polygon, and other L2s), Bitcoin
+- `secp256k1` | Ethereum (EVM) chains (including Base, Linea, Polygon, and other L2s), Bitcoin
 - `ed25519` | Solana, Polkadot, NEAR
 
 :::tip
 
-For enquiries regarding additional elliptic curve/chain support, [ask/request](https://web3auth.io/contact-us.html) as we may already support them.
+For enquiries regarding additional elliptic curve/chain support, [ask/request](https://web3auth.io/contact-us.html) as 
+we may already support them.
 
 :::
 
-### Distributed key generation and Pro-active Secret Sharing schemes
+### Distributed key generation and Proactive Secret Sharing schemes
 
-There are many schemes and variants for [DKGs](./glossary.mdx#distributed-key-generation) and [PSSs](./glossary.mdx#proactive-secret-sharing-pss). Embedded wallets uses an asynchronous variant, [Kate12](https://eprint.iacr.org/2012/377.pdf), derived from Asynchronous Verifiable Secret Sharing (AVSS) [Cachin02](https://eprint.iacr.org/2002/134.pdf).
+There are many schemes and variants for [Distributed Key Generation](./glossary.mdx#distributed-key-generation) (DKG) 
+and [Proactive Secret Sharing](./glossary.mdx#proactive-secret-sharing) schemes (PSSs). Embedded wallets uses an asynchronous variant, [Kate12](https://eprint.iacr.org/2012/377.pdf), derived from Asynchronous Verifiable Secret 
+Sharing (AVSS) [Cachin02](https://eprint.iacr.org/2002/134.pdf).
 
 ### Threshold signature schemes
 
 [Threshold signature schemes](./glossary.mdx#threshold-signature-schemes) (TSS) vary in their approach to creating shared cryptographic material in a distributed manner. Embedded Wallets supports threshold EdDSA and threshold ECDSA using the [DKLS19](https://eprint.iacr.org/2019/523.pdf), covering both Ed25519 and secp256k1 elliptic curves.
 
-Note that the TSS signing is largely decoupled from Embedded Wallets's infrastucture allowing the implementation to be agnostic to the underlying TSS protocol. This design enables support for multiple signature schemes, including:
+Note that the TSS signing is largely decoupled from Embedded Wallets' infrastructure allowing the implementation to be agnostic to the underlying TSS protocol. This design enables support for multiple signature schemes, including:
 
 - [ECDSA](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm) or its ElGamal variants
 - EDDSA or its [Schnorr variants](https://en.wikipedia.org/wiki/Schnorr_signature)
@@ -45,9 +48,13 @@ Note that the TSS signing is largely decoupled from Embedded Wallets's infrastuc
 
 ## User key overview
 
-Embedded Wallets uses MPC to manage user wallets in a distributed fashion, leveraging various factors or shares managed by users, including their devices, private inputs, backup locations, and cloud service providers. As long as a user can access 2 out of n (2/n) of these shares, they can access their key. This distributedly secure key is called the $TSSKey$.
+Embedded Wallets uses MPC to manage user wallets in a distributed fashion, leveraging various factors or shares 
+managed by users, including their devices, private inputs, backup locations, and cloud service providers. As long 
+as a user can access 2 out of n (2/n) of these shares, they can access their key. This secure key, generated using 
+DKG is called the $TSSKey$.
 
-One of the lost functionalities of a distributedly secure key is the loss of efficient encryption/decryption capabilities. As such the $TSSKey$ is supported by another cryptographic key whose main purpose is to manage metadata pertaining to the user's account, the **metadataKey**. User metadata is strictly supplementary, helping to facilitate and govern user flows. Importantly, metadata does not leak information about the shares of the $TSSKey$ being used to sign transactions.
+One of disadvantages of a DKG-generated keys is the loss of efficient encryption/decryption capabilities. As such, 
+the $TSSKey$ is supported by another cryptographic key whose main purpose is to manage metadata pertaining to the user's account, the **metadataKey**. User metadata is strictly supplementary, helping to facilitate and govern user flows. Importantly, metadata does not leak information about the shares of the $TSSKey$ being used to sign transactions.
 
 ### Threshold signature scheme key
 
@@ -61,15 +68,19 @@ One of the lost functionalities of a distributedly secure key is the loss of eff
   />
 </picture>
 
-The user's setup starts by distributedly key generating (DKG) a 2 out of 3 (2/3) sharing, $f_0(x) = a_0 + a_1x$, with three shares: $f_0(1), f_0(z_1), f_0(z_2)$ where $z_1,z_2 \in \mathbb{Z}_q$.
+The user's setup uses DKG to instantiate 2 out of 3 (2/3) sharing, $f_0(x) = a_0 + a_1x$, with three 
+shares: $f_0(1), f_0(z_1), f_0(z_2)$ where $z_1,z_2 \in \mathbb{Z}_q$.
 
 1. $f_0(z_1)$ **ShareA** is managed by the Embedded Wallets infrastructure: This share is kept and managed by authentication flows (for example, OAuth login from an existing account) in a distributed security model.
 2. **$f_0(1)$ **ShareB** is stored on the user's device: Implementation is device and system specific. For example, on mobile devices, the share could be stored in device storage secured via biometrics.
-3. **$f_0(z_2)$ **ShareC** is a backup share: An extra share to be kept by the user, possibly kept on a seperate device (such as a hardware device), downloaded, or based on user input with enough entropy (such as a password or security questions).
+3. **$f_0(z_2)$ **ShareC** is a backup share: An extra share to be kept by the user, possibly kept on a separate 
+device (such as a hardware device), downloaded, or based on user input with enough entropy (such as a password or 
+security questions).
 
 ### The metadata key
 
-This key's storage process mirrors that of the $TSSKey$, with the primary difference being that the metadataKey is always reconstructed and used for encryption/decryption tasks. It's based on the fundamental [SSS](./glossary.mdx#shamir-secret-sharing) scheme and initially generated on the user's frontend.
+This key's storage process mirrors that of the $TSSKey$, with the primary difference being that the metadataKey is 
+always reconstructed and used for encryption/decryption tasks. It's based on the fundamental [SSS](./glossary.mdx#shamir-secret-sharing) scheme and initially generated on the user's frontend.
 
 ## Other components
 
@@ -79,32 +90,42 @@ Factor keys enable refreshing, setting up multiple keys, deletion, and rotation 
 
 ### User metadata
 
-User metadata is strictly supplementary and only helps to facilitate and govern user flows. As noted above, metadata does not leak information about the shares of the private key being used to sign transactions.
+User metadata is strictly supplementary and only helps to facilitate and govern user flows. As noted above, metadata 
+does not leak information about the shares of the private key being used to sign transactions.
 
-Metadata uses an encrypted storage layer that serves as a persistent data store for storing encrypted information about the user’s keys (for example, public key, preferences, device information, and thresholds). This information is stored in a replicated fashion across the set of nodes that are involved in facilitating the user login.
+Metadata uses an encrypted storage layer that serves as a persistent data store for storing encrypted information 
+about the user’s keys (for example, public key, preferences, device information, and thresholds). This information is stored in a replicated fashion across the set of nodes that are involved in facilitating the user login.
 
 During operation, when the user achieves threshold shares, they can read and write to metadata. Writing to metadata requires encrypting the data and signing it with the shares / private key.
 
 ## Flows
 
-Embedded Wallets flows manage how authentication, device storage, and backup factors work together during wallet creation, signing, and recovery. Three key elements are involved:
+Embedded Wallets flows manage how authentication, device storage, and backup factors work together during wallet 
+creation, signing, and recovery. Three key elements are involved:
 
-- **ShareA:** Embedded Wallets' infrasturcture provides a user-specific share/factor based on some form of attestation from the user. This attestation could come in the form of an OAuth login from an existing account, a traditional email account login, or even biometrics. It also serves as a persistent data store for storing encrypted metadata: the "metadata layer" in the following diagrams.
+- **ShareA:** Embedded Wallets' infrastructure provides a user-specific share/factor based on some form of attestation 
+from the user. This attestation could come in the form of an OAuth login from an existing account, a traditional email account login, or even biometrics. It also serves as a persistent data store for storing encrypted metadata: the 
+"metadata layer" in the following diagrams.
 
-- **ShareB:** $TSSKey$ relies on user devices to store shares. The base flow accomodates a single device, but users can use multiple devices to increase the threshold once they have an initial setup. Access to device storage on the user's device is implementation specific. For example, for native applications on mobile, they can make use of the device keychain.
+- **ShareB:** $TSSKey$ relies on user devices to store shares. The base flow accommodates a single device, but users can use multiple devices to increase the threshold once they have an initial setup. Access to device storage on the user's device is implementation specific. For example, for native applications on mobile, they can make use of the device 
+keychain.
 
-- **ShareC**, the **Backup factor/share:** This is generally _not_ used during normal operation, and is intended for use in key recovery / share refresh if the user loses his/her device or shares.
+- **ShareC**, the **Backup factor/share:** This is generally _not_ used during normal operation, and is intended for 
+use in key recovery / share refresh if the user loses his/her device or shares.
 
+### Key handling on user login
 
-### Key initialization
+Key handling begins in response to a user-triggered action, such as logging in. At this stage, the system attempts to retrieve any existing encrypted metadata associated with the user.
 
-A key is initialized upon a user-triggered action (eg. login to nodes). We then attempt to retrieve associated metadata for the user. If none exists, the user is a new one and we generate a corresponding SSS 2/3 polynomial with its respective key and shares. If it exists, we decrypt the metadata using the nodes $encKey$ and read the metadata to verify user information and associated secret sharing parameters.
+If metadata is found, the user is an existing user. The metadata is decrypted using the nodes’ $encKey$ , and the stored information is used to validate the user and load the existing secret-sharing parameters. No new key material is generated in this path.
+
+If no metadata is found, the user is treated as a new user, and a new key is initialized. In this case, a 2-of-3 Shamir’s Secret Sharing (SSS) polynomial is generated, producing a private key and its corresponding shares.
 
 We select a polynomial $f(z)$ over $Z_q$ where: $$f(z) = a_1z + \sigma$$
 
 - $f(0) = \sigma$ denotes the private key scalar to be used by the user
-- $a_1$ is a coefficient to $z$
-- $f(z_1),f(z_2)$ and $f(z_3)$ are ShareA, ShareB and ShareC respectively
+- $a_1$ is a polynomial coefficient to $z$
+- $f(z_1),f(z_2)$ and $f(z_3)$ are ShareA, ShareB, and ShareC respectively
 
 <img
   alt="Key Initialisation Flow"
@@ -112,11 +133,10 @@ We select a polynomial $f(z)$ over $Z_q$ where: $$f(z) = a_1z + \sigma$$
   src={KeyInitialisationFlow}
 />
 
-ShareA is stored on the user’s device, ShareB stored on Embedded Wallets Infrastructure, and ShareC dependent on user input or handled as a recovery share.
-
 ### Key usage, access and signing
 
-If a user has logged in previously, he/she access their key by accessing ShareB via a session token handshake and utilzing it with ShareA on the user’s current device using to sign Threshold Signaures.
+For returning users, key access is established by retrieving ShareB via a session token handshake and combining it 
+with the locally stored ShareA on the user’s device to produce threshold signatures.
 
 <img
   alt="Key Usage Flow"
@@ -124,24 +144,30 @@ If a user has logged in previously, he/she access their key by accessing ShareB 
   src={KeyUsageFlow}
 />
 
-#### Threshold Signature Scheme (TSS)
+#### Threshold Signature Scheme
 
-The TSS signing requires information from two sections:
+The [TSS](./glossary.mdx#threshold-signature-schemes) signing requires information from two sections:
 
-- shared information (eg. public key, share commitments, theeshold, unique identifiers)
-- local information (eg. TSS key share).
+- shared information (such as public key, share commitments, threshold, unique identifiers)
+- local information (such as TSS key share)
 
-The shared information is stored on metadata and replicated, whereas the local information is kept locally on the user's device. This ensures that metadata for shared operations can be easily replicated and accessed without computationally expensive calls, while for local operations the TSS key shares never leave the local context.
+The shared information is stored as metadata and replicated, whereas the local information is kept on the user's device. This ensures that metadata for shared operations can be easily replicated and accessed without computationally expensive calls, while for local operations the TSS key shares never leave the local context.
 
-Constructing a threshold signature requires a session token which we can get via the session request. This then allows us to set up a threshold signature session. The threshold signature session consists of an offline signing phase and an online signing phase (GG20, GG19, Doerner19).
+Constructing a threshold signature requires a session token which we can get via the session request. This then allows us to set up a threshold signature session. The threshold signature session consists of an offline signing phase and an 
+online signing phase (GG20, GG19, Doerner19).
 
-The offline signing phase consists of 6 rounds of interaction between the device and nodes and can be pre-computed before the transaction signing request is received. The online signing phase requires the transaction to be present and is non-interactive.
+The offline signing phase consists of 6 rounds of interaction between the device and nodes and can be precomputed before the transaction signing request is received. The online signing phase requires the transaction to be present and is non-interactive.
 
-This means that although the threshold signature generation takes a substantial amount of time, most of it can be precomputed via a background process, before the user even needs to sign a transaction. When the user decides to sign a message in the online phase, only one round of noninteractive communication is required, which is very fast (\<0.2 seconds).
+This means that although the threshold signature generation takes a substantial amount of time, most of it can be precomputed via a background process, before the user even needs to sign a transaction. When the user decides to sign 
+a message in the online phase, only one round of noninteractive communication is required, which is very fast 
+(\<0.2 seconds).
 
 ### Expanding the number of shares (adding a device)
 
-In the case of a new device the user needs to conduct a [PSS](./glossary.mdx#proactive-secret-sharing-pss), a refresh scheme to generate a new factor in a distributed manner. This example goes through the setup on a new user's device with an existing device in hand. This can also be conducted with a user's backup factor, such as ShareC.
+In the case of adding a new device, the user needs to conduct a [PSS](./glossary.mdx#proactive-secret-sharing) to 
+trigger a refresh protocol that derives an additional share in a distributed manner, without changing the 
+underlying secret. The following example goes through the setup on a user's device with an existing device in hand. 
+This can also be conducted with a user's backup factor, such as ShareC.
 
 <img
   alt="Expanding Shares Flow"
@@ -151,21 +177,29 @@ In the case of a new device the user needs to conduct a [PSS](./glossary.mdx#pro
 
 ### Share resharing and revocability
 
-Utilizing the metadata layer, we are able to generate new shares for all devices, regardless if they are online or offline. This allows us to remove devices from the sharing, allow the user to change their security questions and/or adjust their security threshold. The key concept here is utilizing published Share commitments as encryption keys to retrieve shares on the most updated SSS polynomial.
+Utilizing the metadata layer, we are able to generate new shares for all devices, regardless if they are online or 
+offline. This allows us to remove devices from the sharing, allow the user to change their security questions 
+and/or adjust their security threshold. The key concept here is utilizing published share commitments as 
+encryption keys to retrieve shares on the most updated SSS polynomial.
 
-This is illustrated from a 2/4 SSS sharing $f(z)$ with shares $s_a, s_b, s_c, s_d$ kept on 3 user devices and the nodes. Let $g$ be a generator of a multiplicative subgroup where the discrete log problem is assumed hard to solve. During initialization of the key we create share commitments $g^{s_a}, g^{s_b}, g^{s_c}, g^{s_d}$ to be stored on the metadata layer. These share commitments are analogous to public keys derived from the share scalars.
+This is illustrated from a 2/4 SSS sharing $f(z)$ with shares $s_a, s_b, s_c, s_d$ kept on 3 user devices and the nodes. Let $g$ be a generator of a multiplicative subgroup where the discrete log problem is assumed to be hard to solve. During initialization of the key, we create share commitments $g^{s_a}, g^{s_b}, g^{s_c}, g^{s_d}$ to be stored on the metadata layer. These share commitments are analogous to public keys derived from the share scalars.
 
-Given the user loses device D holding $s_d$, and wants to make that share redundant. He/she first reconstructs their key on device A. We utilize a public key based encryption scheme (eg. ECIES).
+Given the user loses device D holding $s_d$, and wants to make that share redundant. They first reconstruct their key on device A. We utilize a public key based encryption scheme (such as ECIES).
 
-The user generates a new 2/3 SSS polynomial $h(z)$ on the same $\sigma$ with shares $s_1, s_2, s_3$ and encrypts the newly generated shares for each respective share commitment, except for the lost $g^{s_d}$ commitment.
+The user generates a new 2/3 SSS polynomial $h(z)$ on the same $\sigma$ with shares $s_1, s_2, s_3$ and encrypts the 
+newly generated shares for each respective share commitment, except for the lost $g^{s_d}$ commitment.
 
 $$
 \text{for }i = \{1,2,3\}  \text{ and } v = \{a,b,c\} \\   encrypt(s_iu,g^{s_v}) \Rightarrow c_{nv} \\
 \text{where } nv = \{1a,2b,2c\}
 $$
 
-$c_{nv}$, the resulting ciphertext from the encryption, is then stored on the metadata layer for retrieval on other devices.
+$c_{nv}$, the resulting ciphertext from the encryption, is then stored on the metadata layer for retrieval on other 
+devices.
 
-On login to device B, the user retrieves $c_{2b}$ is able to use $s_b$ to decrypt the new $s_2$ and reconstruct their key with $s_1$ derived from the nodes in a similar fashion. Using the $h(z)$ allows $s^d$ to also be deprecated as a share.
+On login to device B, the user retrieves $c_{2b}$ is able to use $s_b$ to decrypt the new $s_2$ and reconstruct their 
+key with $s_1$ derived from the nodes in a similar fashion. Using the $h(z)$ allows $s^d$ to also be deprecated as a 
+share.
 
-Resharing allows us to share a key on a new polynomial with a different degree/threshold, allowing us to also increase a user's security/factor devices or inputs to reconstruct their key as they require it. This can be incrementally implemented as needed.
+Resharing allows us to share a key on a new polynomial with a different degree/threshold, allowing us to also increase 
+a user's security/factor devices or inputs to reconstruct their key as they require it. This can be incrementally implemented as needed.
