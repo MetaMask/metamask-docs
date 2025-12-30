@@ -11,9 +11,11 @@ import KeyUsageFlow from '@site/static/img/embedded-wallets/infrastructure/key-u
 import TkeyMpcFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/tkey-mpc-flow-dark.png'
 import TkeyMpcFlowLight from '@site/static/img/embedded-wallets/flow-diagrams/tkey-mpc-flow-light.png'
 
-This document provides an in-depth exploration of the technical architecture of the MPC-based SDK, this includes the MPC Core Kit SDK.
+This document provides an in-depth exploration of the technical architecture of the Multi-Party Computation (MPC)-based SDK, this includes the MPC Core Kit SDK.
 
-The only difference between the [Shamir Secret Sharing-based](./glossary.mdx#shamir-secret-sharing) (SSS-based) SDKs and MPC SDKs are that during usage/login MPC SDKs do not reconstruct user private keys.
+<!-- This deserves link to the SDK: which of these docs pages covers the Core Kit SDK? Alt is this is enterprise grade option only, in which case consider importing ./_partials/_sdk-key-model-table.mdx-->
+
+The only difference between the [Shamir Secret Sharing](./glossary.mdx#shamir-secret-sharing) (SSS)-based SDKs and MPC SDKs are that during usage/login MPC SDKs do not reconstruct user private keys.
 
 ## Overview of cryptographic and blockchain support (compatibility and implementations)
 
@@ -35,9 +37,9 @@ There are many schemes and variants for [Distributed Key Generation](./glossary.
 and [Proactive Secret Sharing](./glossary.mdx#proactive-secret-sharing) schemes (PSSs). Embedded wallets uses an asynchronous variant, [Kate12](https://eprint.iacr.org/2012/377.pdf), derived from Asynchronous Verifiable Secret 
 Sharing (AVSS) [Cachin02](https://eprint.iacr.org/2002/134.pdf).
 
-### Threshold signature schemes
+### Threshold Signature Schemes
 
-[Threshold signature schemes](./glossary.mdx#threshold-signature-schemes) (TSS) vary in their approach to creating shared cryptographic material in a distributed manner. Embedded Wallets supports threshold EdDSA and threshold ECDSA using the [DKLS19](https://eprint.iacr.org/2019/523.pdf), covering both Ed25519 and secp256k1 elliptic curves.
+[Threshold Signature Schemes](./glossary.mdx#threshold-signature-schemes) (TSS) vary in their approach to creating shared cryptographic material in a distributed manner. Embedded Wallets supports threshold EdDSA and threshold ECDSA using the [DKLS19](https://eprint.iacr.org/2019/523.pdf), covering both Ed25519 and secp256k1 elliptic curves.
 
 Note that the TSS signing is largely decoupled from Embedded Wallets' infrastructure allowing the implementation to be agnostic to the underlying TSS protocol. This design enables support for multiple signature schemes, including:
 
@@ -133,7 +135,7 @@ We select a polynomial $f(z)$ over $Z_q$ where: $$f(z) = a_1z + \sigma$$
   src={KeyInitialisationFlow}
 />
 
-### Key usage, access and signing
+### Key usage, access, and signing
 
 For returning users, key access is established by retrieving ShareB via a session token handshake and combining it 
 with the locally stored ShareA on the user’s device to produce threshold signatures.

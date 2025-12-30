@@ -1,16 +1,16 @@
 ---
 title: Nodes and DKG
 sidebar_label: Nodes and DKG
-description: 'DKG Nodes in Wallet Management | Embedded Wallets'
+description: 'DKG Nodes in Wallet Management | Embedded Wallets | Torus Network'
 ---
 
-:::tip
+:::note
 
 MetaMask Embedded Wallets is built on the Torus Network, which provides the distributed key-generation, verifier-based identity mapping, and threshold security guarantees described below.
 
 :::
 
-The Torus Node Network runs a [Distributed Key Generation](./glossary.mdx#distributed-key-generation) (DKG) protocol among themselves to assign, store and return secrets/keys to users. The nodes manage a share retrieved via conventional authentication flows (such as OAuth, password, or other supported authentication).
+The Torus Node Network runs a [Distributed Key Generation](./glossary.mdx#distributed-key-generation) (DKG) protocol to assign, store and return secrets/keys to users. The nodes manage a key share, retrieved via conventional authentication flows (such as OAuth, password, or other supported authentication).
 
 The architecture consists of four parts:
 
@@ -21,7 +21,7 @@ The architecture consists of four parts:
 
 ![Architecture](/img/tutorials/graph-6-final.png)
 
-A smart contract is used for node discovery. Nodes are selected, operate for a fixed period, and generate a set of keys via DKG.
+A smart contract is used for node discovery. Nodes are selected, [operate for a fixed period](./glossary.mdx#epochs), and generate a set of keys via DKG.
 
 When a user arrives at a dapp, the client is loaded. From there, a user logs in and provides proof that they are logged in. This proof is conveyed to the nodes as a verifiable authentication token, which may be derived for example, from OAuth. The proof is verified by each node individually.
 
@@ -29,7 +29,7 @@ For new users, nodes assign a new key share from the pregenerated set of key sha
 
 The client then assembles these shares and reconstructs the user's key in the frontend.
 
-<!-- The phrase "reconstructs the user's key in the frontend" sounds incorrect and potentially misleading. In an MPC/TSS design, the private key should never be reconstructed client-side. Should this instead say something like: "The client combines the required shares as part of a threshold signing protocol, ensuring that the full private key is never reconstructed or exposed"? Also, can we clarify whether "frontend" refers to the dApp client or a Torus-controlled client environment? -->
+<!-- The phrase "reconstructs the user's key in the frontend" suggests that this section is talking about SSS (reconstruction is expected), not the TSS/MPC flow. Let's make clear which flow. In an MPC/TSS design, the private key should never be reconstructed client-side. IF this is TSS flow perhaps should say something like: "The client combines the required shares as part of a threshold signing protocol, ensuring that the full private key is never reconstructed or exposed"? Also, can we clarify whether "frontend" refers to the dApp client or a Torus-controlled client environment? -->
 
 ## Lifecycle
 
@@ -57,7 +57,7 @@ The DKG process primarily uses libp2p for communication between nodes, and gener
 
 The share retrieval process starts when a user wishes to retrieve their keys. They individually submit their authentication token via a commit-reveal scheme to the nodes, and once this authentication token is checked for uniqueness and validity, each node returns the user's \(encrypted\) key share. This does not require communication between the nodes.
 
-Assignments of keys to new users only require interaction with the mapping process, assuming that there is at least one unassigned key in the buffer. As such, we are able to assign keys to accounts ahead of time, before that accounts' owner decides to login and reconstruct the key. This forms the basis for our account resolver APIs.
+Assignments of keys to new users only require interaction with the mapping process, assuming that there is at least one unassigned key in the buffer. As a result, keys can be assigned to accounts ahead of time, before the account owner logs in and reconstructs the key. This behavior forms the basis of the account resolution logic used by the SDK during authentication (handled by the internal account resolver APIs).
 
 ### Migration
 
@@ -71,30 +71,30 @@ While most other secret sharing schemes use ⅔ honest majority with a &gt;⅓ r
 
 ## Key assignments
 
-The keys are assigned to a combination of `verifier` (for example, an authentication provider configuration, such as OAuth-based logins via Google) and `verifier_id` (such as, email, username), which is a unique identifier respective to and provided by the `verifier`. This assignment can be triggered by any node and is decided through the nodes consensus layer.
+The keys are assigned to a combination of `verifier` (for example, an authentication provider configuration, such as OAuth-based logins via Google) and `verifier_id` (such as, email, username), which is a unique identifier respective to, and provided by, the `verifier`. This assignment can be triggered by any node and is decided through the nodes consensus layer.
 
 ### Verifiers and key retrieval
 
-The key retrieval flow for an Embedded Wallets sign-in uses the Torus Node Network as described below:
+The key retrieval flow for an Embedded Wallets sign in uses the Torus Node Network as described below:
 
 ![Standard login with OAuth2 (Google, Facebook, Apple, Reddit, Discord, Twitch)](/img/tutorials/login-key-assignments.png)
 
-1. Your application prompts the user to sign in using their preferred authentication method (for example, OAuth/OIDC).
+1. Your application prompts the user to sign in using their preferred authentication method (for example, OAuth).
 
 2. After the user successfully authenticates, the Embedded Wallets SDK (client-side) receives a verifiable authentication token. From this token, the SDK derives the user’s `verifier_id` (or retrieves it from the authentication provider’s user profile) and uses the (`verifier`, `verifier_id`) pair to identify or assign the user’s key.
 
-3. The SDK communicates with the Embedded Wallets network (Torus Network) to retrieve the user’s corresponding key share from the Torus network and makes it available to the application to complete the sign-in flow, without exposing the full private key.
+3. The SDK communicates with the Embedded Wallets Network (Torus Network) to retrieve the user’s corresponding key share from the Torus network and makes it available to the application to complete the sign in flow, without exposing the full private key.
 
 4. Using the authentication context, the application determines whether the user already has profile data associated with the dapp:
    1. If it does, the user is signed in.
    2. If it does not, the user can create a new account using the same login method.
 
-In order to allow for general verifiers to be used instead of only allowing OAuth, we typically need at least two of these APIs to be implemented by the external verifier:
+To support general verifiers beyond OAuth-based authentication, an external verifier must implement at least two of the following:
 
 1. An API that issues unique tokens when a user is logged in.
-2. An API that consumes these tokens and returns user information as well as when the token was issued.
+2. An API that consumes these tokens and returns user information and when the token was issued.
 
-The first API must be accessible from the browser (must be CORS-enabled and restrict headers), in order to ensure that the Torus servers are not able to intercept the user's token (perform front-running).
+The first API must be securely accessible from the browser (must be CORS-enabled and restrict headers), in order to ensure that the Torus servers are not able to intercept the user's token (perform front-running).
 
 Typically any entity that fulfills these two APIs and provides signatures on unique ID strings and timestamp can be a verifier. This is extendable to several authentication schemes, including existing authentication standards like OAuth Token flow and OpenID Connect.
 
@@ -105,6 +105,8 @@ To prevent token front-running and user impersonation by a rogue node or the Tor
 The general approach is as follows: the frontend obtains an authentication token, creates a commitment to the token (hashes the token), and generates a temporary public–private key pair. It sends the token commitment and temporary public key to the nodes. If nodes have not seen the token before, they acknowledge the commitment by returning a signature.
 
 Once a threshold of acknowledgements/signatures is collected, the frontend reveals the authentication token along with the signatures. After verification, each node encrypts its key share using the temporary public key and returns it to the frontend. 
+
+<!-- Per comment on text at line 30, this wording could imply that encrypted key shares are returned to the frontend in a way that allows full key reconstruction. Can we clarify whether or not the private key is reconstructed SSS (reconstruction is expected) vs. the TSS/MPC flow and, if it is, how it is protected from exposure, and again confirm what "frontend" refers to in this context (the dapp/sdk runtime)? -->
 
 ### Attack 1: Front-runner intercepts the original commitment request and sends a modified public key
 
