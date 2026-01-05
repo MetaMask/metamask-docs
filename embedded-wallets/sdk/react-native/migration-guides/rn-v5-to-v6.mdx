@@ -30,7 +30,7 @@ config.resolver.extraNodeModules = {
   os: require.resolve('empty-module'), // os-browserify can be polyfilled here if needed
   url: require.resolve('empty-module'), // url can be polyfilled here if needed
   zlib: require.resolve('empty-module'), // browserify-zlib can be polyfilled here if needed
-  Path: require.resolve('empty-module'),
+  path: require.resolve('empty-module'),
   crypto: require.resolve('crypto-browserify'),
   stream: require.resolve('readable-stream'),
   buffer: require.resolve('buffer'),
@@ -61,12 +61,12 @@ config.resolver.extraNodeModules = {
   os: require.resolve('empty-module'), // os-browserify can be polyfilled here if needed
   url: require.resolve('empty-module'), // url can be polyfilled here if needed
   zlib: require.resolve('empty-module'), // browserify-zlib can be polyfilled here if needed
-  Path: require.resolve('empty-module'),
+  path: require.resolve('empty-module'),
   stream: require.resolve('readable-stream'),
   buffer: require.resolve('buffer'),
 }
 
-// Focus-start
+// focus-start
 config.resolver.resolveRequest = (context, moduleName, platform) => {
   if (moduleName === 'crypto') {
     // when importing crypto, resolve to react-native-quick-crypto
@@ -75,7 +75,7 @@ config.resolver.resolveRequest = (context, moduleName, platform) => {
   // otherwise chain to the standard Metro resolver.
   return context.resolveRequest(context, moduleName, platform)
 }
-// Focus-end
+// focus-end
 
 config.transformer.getTransformOptions = () => ({
   transform: {

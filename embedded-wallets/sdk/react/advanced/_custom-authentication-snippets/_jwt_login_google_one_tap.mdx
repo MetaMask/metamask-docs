@@ -1,24 +1,24 @@
 ```tsx title="App.tsx"
 const loginWithGoogle = async (response: CredentialResponse) => {
-  const idToken = response.credential;
+  const idtoken = response.credential;
 
-  // Focus-start
-  await ConnectTo(WALLET_CONNECTORS.AUTH, {
-    authConnectionId: "w3a-google-demo",
-    authConnection: AUTH_CONNECTION.GOOGLE,
-    idToken,
+  // focus-start
+  await connectTo(WALLET_CONNECTORS.AUTH, {
+    authconnectionId: "w3a-google-demo",
+    authconnection: AUTH_CONNECTION.GOOGLE,
+    idtoken,
     extraLoginOptions: {
       isUserIdCaseSensitive: false,
     },
   });
-  // Focus-end
+  // focus-end
 };
 
 ...
 
 <GoogleLogin
   onSuccess={loginWithGoogle}
-  onError={() => {
+  onerror={() => {
     console.log("Login Failed");
   }}
   useOneTap

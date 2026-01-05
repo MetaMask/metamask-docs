@@ -18,14 +18,14 @@ import { useEnableMFA } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useEnableMFA } from '@web3auth/modal/vue'
 
-  const { Enablemfa, Loading, Error } = useEnableMFA()
+  const { enableMFA, loading, error } = useEnableMFA()
 </script>
 
 <template>
-  <button @click="Enablemfa" :disabled="Loading">
-    {{ Loading ? "Enabling MFA..." : "Enable MFA" }}
+  <button @click="enableMFA" :disabled="loading">
+    {{ loading ? "Enabling MFA..." : "Enable MFA" }}
   </button>
-  <div v-if="Error">{{ Error.message }}</div>
+  <div v-if="error">{{ error.message }}</div>
 </template>
 ```
 
@@ -35,19 +35,19 @@ import { useEnableMFA } from '@web3auth/modal/vue'
 import type { UseEnableMFA } from '@web3auth/modal/vue'
 ```
 
-#### Loading
+#### loading
 
 `Ref<boolean>`
 
 Whether the MFA enabling process is in progress.
 
-#### Error
+#### error
 
-`Ref<Web3AuthError | null>`
+`Ref<Web3Autherror | null>`
 
-Error that occurred during the MFA enabling process.
+error that occurred during the MFA enabling process.
 
-#### Enablemfa
+#### enableMFA
 
 `<T>(params?: T) => Promise<void>`
 

@@ -18,28 +18,28 @@ import { useWeb3Auth } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useWeb3Auth } from '@web3auth/modal/vue'
 
-  const { web3Auth, IsConnected, Isinitializing, Provider, Status, Initerror } = useWeb3Auth()
+  const { web3Auth, isConnected, isInitializing, provider, status, initError } = useWeb3Auth()
 
   watchEffect(() => {
-    if (IsConnected.value) {
-      // User is Connected
-      console.log('Connected with Provider:', Provider.value)
+    if (isConnected.value) {
+      // User is connected
+      console.log('connected with provider:', provider.value)
     }
-    if (Isinitializing.value) {
+    if (isInitializing.value) {
       // Web3Auth is initializing
       console.log('Web3Auth is initializing')
     }
-    if (Provider.value) {
-      // Web3Auth Provider is Connected
-      console.log('Web3Auth Provider is Connected')
+    if (provider.value) {
+      // Web3Auth provider is connected
+      console.log('Web3Auth provider is connected')
     }
-    if (Status.value) {
-      // Web3Auth Status
-      console.log('Web3Auth Status:', Status.value)
+    if (status.value) {
+      // Web3Auth status
+      console.log('Web3Auth status:', status.value)
     }
-    if (Initerror.value) {
-      // Web3Auth initialization Error
-      console.log('Web3Auth initialization Error:', Initerror.value)
+    if (initError.value) {
+      // Web3Auth initialization error
+      console.log('Web3Auth initialization error:', initError.value)
     }
   })
 </script>
@@ -51,48 +51,48 @@ import { useWeb3Auth } from '@web3auth/modal/vue'
 import type { IUseWeb3Auth } from '@web3auth/modal/vue'
 ```
 
-#### Initerror
+#### initError
 
-`Ref<Error | null>`
+`Ref<error | null>`
 
-Error that occurred during Web3Auth initialization.
+error that occurred during Web3Auth initialization.
 
-#### IsConnected
+#### Isconnected
 `Ref<boolean>`
 
-Whether the user is Connected to Web3Auth.
+Whether the user is connected to Web3Auth.
 
-#### Isinitialized
+#### isInitialized
 
 `Ref<boolean>`
 
 Whether Web3Auth has completed initialization.
 
-#### Isinitializing
+#### isInitializing
 
 `Ref<boolean>`
 
 Whether Web3Auth is currently initializing.
 
-#### Provider
+#### provider
 
-`Ref<IProvider | null>`
+`Ref<Iprovider | null>`
 
-Connected Provider from Web3Auth.
+connected provider from Web3Auth.
 
-#### Status
+#### status
 
 `Ref<string>`
 
-Current Status of the Web3Auth Connection.
+Current status of the Web3Auth connection.
 
-#### Web3auth
+#### web3Auth
 
 `Ref<Web3Auth>`
 
 The Web3Auth instance.
 
-#### Getplugin
+#### getPlugin
 
 `(pluginName: PLUGIN_NAME) => IPlugin | null`
 

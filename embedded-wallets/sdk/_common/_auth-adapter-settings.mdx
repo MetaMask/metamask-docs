@@ -16,10 +16,10 @@ import Tabs from "@theme/Tabs";
 | `network`              | The Web3Auth Network to be used.                                                                                                                                                                                                                                                                                                                         |
 | `buildEnv`             | This parameter will be used to change the build environment of auth sdk, mainly for testing purposes. default is `production`.                                                                                                                                                                                                                           |
 | `redirectUrl`          | The URL where users will be redirected after login.                                                                                                                                                                                                                                                                                                      |
-| `uxMode`               | Two uxModes supported are:- `'popup'`: In this uxMode, a popup will be Shown to user for login. Use `'redirect'`: In this uxMode, user will be redirected to a new window tab for login. Use of `'redirect'` mode is recommended in browsers where popups might get blocked.                                                                             |
+| `uxMode`               | Two uxModes supported are:- `'popup'`: In this uxMode, a popup will be shown to user for login. Use `'redirect'`: In this uxMode, user will be redirected to a new window tab for login. Use of `'redirect'` mode is recommended in browsers where popups might get blocked.                                                                             |
 | `replaceUrlOnRedirect` | replaceUrlOnRedirect removes the params from the redirected url after login                                                                                                                                                                                                                                                                              |
-| `originData`           | originData is used to verify the origin of dapp by iframe. You don't have to pass originData explicitly if you have registered your dapp at [developer dashboard](https://dashboard.web3auth.io). originData contains a signature of dapp's origin url which is generated using project's secret.                                                        |
-| `loginConfig`          | loginConfig enables you to pass your own login verifiers configuration for various loginProviders. loginConfig is key value map where each key should be a valid loginProvider and value should be custom configuration for that loginProvider. You can deploy your own verifiers from [developer dashboard](https://dashboard.web3auth.io) to use here. |
+| `origindata`           | origindata is used to verify the origin of dapp by iframe. You don't have to pass origindata explicitly if you have registered your dapp at [developer dashboard](https://dashboard.web3auth.io). origindata contains a signature of dapp's origin url which is generated using project's secret.                                                        |
+| `loginConfig`          | loginConfig enables you to pass your own login verifiers configuration for various loginproviders. loginConfig is key value map where each key should be a valid loginprovider and value should be custom configuration for that loginprovider. You can deploy your own verifiers from [developer dashboard](https://dashboard.web3auth.io) to use here. |
 | `whiteLabel`           | options for whitelabling default auth modal screens.                                                                                                                                                                                                                                                                                                     |
 | `storageServerUrl`     | Specify a custom storage server url                                                                                                                                                                                                                                                                                                                      |
 | `storageKey`           | setting to "local" will persist social login session across browser tabs.                                                                                                                                                                                                                                                                                |
@@ -56,12 +56,12 @@ export type AuthOptions = {
      *
      * @remarks
      * Register this url at {@link "https://dashboard.web3auth.io"| developer dashboard}
-     * else initialization will give Error.
+     * else initialization will give error.
      */
     redirectUrl?: string;
     /**
      * two uxModes are supported:-
-     * - `'POPUP'`: In this uxMode, a popup will be Shown to user for login.
+     * - `'POPUP'`: In this uxMode, a popup will be shown to user for login.
      * - `'REDIRECT'`: In this uxMode, user will be redirected to a new window tab for login.
      *
      * @defaultValue `'POPUP'`
@@ -77,23 +77,23 @@ export type AuthOptions = {
      */
     replaceUrlOnRedirect?: boolean;
     /**
-     * originData is used to verify the origin of dapp by iframe.
+     * origindata is used to verify the origin of dapp by iframe.
      *
      * @internal
      * @remarks
-     * You don't have to pass originData explicitly if you have registered your dapp at
+     * You don't have to pass origindata explicitly if you have registered your dapp at
      * {@link "https://dashboard.web3auth.io"| developer dashboard}.
      *
-     * originData contains a signature of dapp's origin url which is generated using
+     * origindata contains a signature of dapp's origin url which is generated using
      * project's secret.
      */
-    originData?: OriginData;
+    origindata?: Origindata;
     /**
      * loginConfig enables you to pass your own login verifiers configuration for various
-     * loginProviders.
+     * loginproviders.
      *
-     * loginConfig is key value map where each key should be a valid loginProvider and value
-     * should be custom configuration for that loginProvider
+     * loginConfig is key value map where each key should be a valid loginprovider and value
+     * should be custom configuration for that loginprovider
      *
      * @remarks
      * You can deploy your own verifiers from {@link "https://dashboard.web3auth.io"| developer dashboard}
@@ -126,7 +126,7 @@ export type AuthOptions = {
     /**
      * options for whitelabling default auth modal.
      */
-    whiteLabel?: WhiteLabelData;
+    whiteLabel?: WhiteLabeldata;
     /**
      * Specify a custom storage server url
      * @defaultValue https://session.web3auth.io
@@ -191,46 +191,46 @@ export type LoginConfig = Record<string, {
     clientId?: string;
     verifierSubIdentifier?: string;
     /**
-     * Logo to be Shown on mouse hover. If not provided, we use the default for auth app
+     * Logo to be shown on mouse hover. If not provided, we use the default for auth app
      */
     logoHover?: string;
     /**
-     * Logo to be Shown on dark background (dark theme). If not provided, we use the default for auth app
+     * Logo to be shown on dark background (dark theme). If not provided, we use the default for auth app
      */
     logoLight?: string;
     /**
-     * Logo to be Shown on light background (light theme). If not provided, we use the default for auth app
+     * Logo to be shown on light background (light theme). If not provided, we use the default for auth app
      */
     logoDark?: string;
     /**
-     * Show login button on the main list
+     * show login button on the main list
      */
     mainOption?: boolean;
     /**
-     * Whether to Show the login button on modal or not
+     * Whether to show the login button on modal or not
      */
-    ShowOnModal?: boolean;
+    showOnModal?: boolean;
     /**
-     * Whether to Show the login button on desktop
+     * Whether to show the login button on desktop
      */
-    ShowOnDesktop?: boolean;
+    showOnDesktop?: boolean;
     /**
-     * Whether to Show the login button on mobile
+     * Whether to show the login button on mobile
      */
-    ShowOnMobile?: boolean;
+    showOnMobile?: boolean;
     /**
      * If we are using social logins as a backup factor,
-     * then this option will be used to Show the type of social login
+     * then this option will be used to show the type of social login
      * on the social backup login screen.
      */
-    ShowOnSocialBackupFactor?: boolean;
+    showOnSocialBackupFactor?: boolean;
     /**
      * Custom jwt parameters to configure the login. Useful for Auth0 configuration
      */
     jwtParameters?: JwtParameters;
 }>;
 
-export type WhiteLabelData = {
+export type WhiteLabeldata = {
     /**
      * App name to display in the UI
      */

@@ -1,13 +1,13 @@
 ---
 title: Enable MFA for a User
-sidebar_label: Enablemfa
-description: 'Web3Auth Android SDK - Enablemfa Function | Embedded Wallets'
+sidebar_label: enableMFA
+description: 'Web3Auth Android SDK - enableMFA Function | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `Enablemfa` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login Providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT Token in `Loginparams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
 
 ## Usage
 
@@ -27,19 +27,19 @@ import com.web3auth.core.Web3Auth
 import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var Web3auth: Web3Auth
+    private lateinit var web3Auth: Web3Auth
 
-     private fun Enablemfa() {
-       // Focus-next-line
-       val completableFuture = Web3auth.Enablemfa()
+     private fun enableMFA() {
+       // focus-next-line
+       val completableFuture = web3Auth.enableMFA()
 
-        completableFuture.whenComplete{_, Error ->
-            if (Error == null) {
+        completableFuture.whenComplete{_, error ->
+            if (error == null) {
                 Log.d("MainActivity_Web3Auth", "Launched successfully")
                 // Add your logic
             } else {
-                // Add your logic on Error
-                Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
+                // Add your logic on error
+                Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
             }
         }
     }
@@ -47,8 +47,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         ...
         // Setup UI and event handlers
-        val EnablemfaButton = findViewById<Button>(R.id.EnablemfaButton)
-        EnablemfaButton.setOnClickListener { Enablemfa() }
+        val enableMFAButton = findViewById<Button>(R.id.enableMFAButton)
+        enableMFAButton.setOnClickListener { enableMFA() }
         ...
     }
     ...
@@ -64,24 +64,24 @@ import android.widget.Button
 import com.web3auth.core.Web3Auth
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() { private lateinit var Web3auth: Web3Auth
+class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Auth
 
-     private fun Enablemfa() {
-        val Loginparams = LoginParams(
-            Provider.JWT,
-            extraLoginOptions = Extraloginoptions(id_Token = "your_jwt_Token")
+     private fun enableMFA() {
+        val loginParams = LoginParams(
+            provider.JWT,
+            extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
         )
 
-        // Focus-next-line
-        val completableFuture = Web3auth.Enablemfa(Loginparams)
+        // focus-next-line
+        val completableFuture = web3Auth.enableMFA(loginParams)
 
-        completableFuture.whenComplete{_, Error ->
-            if (Error == null) {
+        completableFuture.whenComplete{_, error ->
+            if (error == null) {
                 Log.d("MainActivity_Web3Auth", "Launched successfully")
                 // Add your logic
             } else {
-                // Add your logic on Error
-                Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
+                // Add your logic on error
+                Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
             }
         }
     }
@@ -89,8 +89,8 @@ class MainActivity : AppCompatActivity() { private lateinit var Web3auth: Web3Au
     override fun onCreate(savedInstanceState: Bundle?) {
         ...
         // Setup UI and event handlers
-        val EnablemfaButton = findViewById<Button>(R.id.EnablemfaButton)
-        EnablemfaButton.setOnClickListener { Enablemfa() }
+        val enableMFAButton = findViewById<Button>(R.id.enableMFAButton)
+        enableMFAButton.setOnClickListener { enableMFA() }
         ...
     }
     ...

@@ -1,13 +1,13 @@
 You need to install the `wagmi` and `@tanstack/react-query` packages and use the **Web3Auth
-implementation of `WagmiProvider`** for configuration.
+implementation of `Wagmiprovider`** for configuration.
 
 :::info
 
-The Web3Auth implementation of `WagmiProvider` is a custom implementation that is used to integrate
-with the Web3Auth Modal SDK. It is a wrapper around the `WagmiProvider` that makes it compatible.
+The Web3Auth implementation of `Wagmiprovider` is a custom implementation that is used to integrate
+with the Web3Auth Modal SDK. It is a wrapper around the `Wagmiprovider` that makes it compatible.
 
-With this implementation, you can use the Wagmi hooks, however **no external Connectors are
-supported**. Web3Auth provides a whole suite of Connectors which you can use directly for a better
+With this implementation, you can use the Wagmi hooks, however **no external connectors are
+supported**. Web3Auth provides a whole suite of connectors which you can use directly for a better
 experience with external wallets.
 
 :::
@@ -20,28 +20,28 @@ npm install wagmi @tanstack/react-query
 import "./index.css";
 
 import ReactDOM from "react-dom/client";
-import { Web3AuthProvider } from "@web3auth/modal/react";
-import Web3authContextConfig from "./web3authContext";
-// Focus-start
-import { WagmiProvider } from "@web3auth/modal/react/wagmi";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// Focus-end
+import { Web3Authprovider } from "@web3auth/modal/react";
+import web3AuthContextConfig from "./web3authContext";
+// focus-start
+import { Wagmiprovider } from "@web3auth/modal/react/wagmi";
+import { QueryClient, QueryClientprovider } from "@tanstack/react-query";
+// focus-end
 
 import App from "./App";
 
-// Focus-next-line
+// focus-next-line
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <Web3AuthProvider config={Web3authContextConfig}>
-    {/* Focus-start */}
-    <QueryClientProvider client={queryClient}>
-      <WagmiProvider>
+  <Web3Authprovider config={web3AuthContextConfig}>
+    {/* focus-start */}
+    <QueryClientprovider client={queryClient}>
+      <Wagmiprovider>
         <App />
-      </WagmiProvider>
-    </QueryClientProvider>
-    {/* Focus-end */}
-  </Web3AuthProvider>,
+      </Wagmiprovider>
+    </QueryClientprovider>
+    {/* focus-end */}
+  </Web3Authprovider>,
 );
 ```
 
@@ -65,14 +65,14 @@ import { formatUnits } from "viem";
 
 export function Balance() {
   const { address } = useAccount();
-  const { Data, isLoading, Error } = useBalance({ address });
+  const { data, isloading, error } = useBalance({ address });
 
   return (
     <div>
       <h2>Balance</h2>
       <div>
-        {Data?.value !== undefined && `${formatUnits(Data.value, Data.decimals)} ${Data.symbol}`}{" "}
-        {isLoading && "Loading..."} {Error && "Error: " + Error.message}
+        {data?.value !== undefined && `${formatUnits(data.value, data.decimals)} ${data.symbol}`}{" "}
+        {isloading && "loading..."} {error && "error: " + error.message}
       </div>
     </div>
   );
@@ -83,21 +83,21 @@ export function Balance() {
 
 ```tsx
 import { FormEvent } from "react";
-import { useWaitForTransactionReceipt, useSendTransaction, BaseError } from "wagmi";
+import { useWaitForTransactionReceipt, useSendTransaction, Baseerror } from "wagmi";
 import { Hex, parseEther } from "viem";
 
 export function SendTransaction() {
-  const { Data: hash, Error, isPending, sendTransaction } = useSendTransaction();
+  const { data: hash, error, isPending, sendTransaction } = useSendTransaction();
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const to = formData.get("address") as Hex;
-    const value = formData.get("value") as string;
+    const formdata = new Formdata(e.target as HTMLFormElement);
+    const to = formdata.get("address") as Hex;
+    const value = formdata.get("value") as string;
     sendTransaction({ to, value: parseEther(value) });
   }
 
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+  const { isloading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
     hash,
   });
 
@@ -114,7 +114,7 @@ export function SendTransaction() {
       {hash && <div>Transaction Hash: {hash}</div>}
       {isConfirming && "Waiting for confirmation..."}
       {isConfirmed && "Transaction confirmed."}
-      {Error && <div>Error: {(Error as BaseError).shortMessage || Error.message}</div>}
+      {error && <div>error: {(error as Baseerror).shortMessage || error.message}</div>}
     </div>
   );
 }
@@ -127,24 +127,24 @@ import { useChainId, useSwitchChain } from "wagmi";
 
 export function SwitchChain() {
   const chainId = useChainId();
-  const { chains, Switchchain, Error } = useSwitchChain();
+  const { chains, switchChain, error } = useSwitchChain();
 
   return (
     <div>
       <h2>Switch Chain</h2>
-      <h3>Connected to {chainId}</h3>
+      <h3>connected to {chainId}</h3>
       {chains.map((chain) => (
         <button
           disabled={chainId === chain.id}
           key={chain.id}
-          onClick={() => Switchchain({ chainId: chain.id })}
+          onClick={() => switchChain({ chainId: chain.id })}
           type="button"
           className="card"
         >
           {chain.name}
         </button>
       ))}
-      {Error?.message}
+      {error?.message}
     </div>
   );
 }

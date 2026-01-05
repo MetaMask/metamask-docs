@@ -18,17 +18,17 @@ import { useWeb3AuthUser } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useWeb3AuthUser } from '@web3auth/modal/vue'
 
-  const { Userinfo, Loading, Error, Ismfaenabled, Getuserinfo } = useWeb3AuthUser()
+  const { userInfo, loading, error, isMFAEnabled, getUserInfo } = useWeb3AuthUser()
 </script>
 
 <template>
-  <div v-if="Loading">Loading user info...</div>
-  <div v-else-if="Error">Error: {{ Error.message }}</div>
-  <div v-else-if="!Userinfo">No user info available.</div>
+  <div v-if="loading">loading user info...</div>
+  <div v-else-if="error">error: {{ error.message }}</div>
+  <div v-else-if="!userInfo">No user info available.</div>
   <div v-else>
-    <pre>{{ JSON.stringify(Userinfo, null, 2) }}</pre>
-    <div>MFA Enabled: {{ Ismfaenabled ? "Yes" : "No" }}</div>
-    <button @click="Getuserinfo">Refresh User Info</button>
+    <pre>{{ JSON.stringify(userInfo, null, 2) }}</pre>
+    <div>MFA Enabled: {{ isMFAEnabled ? "Yes" : "No" }}</div>
+    <button @click="getUserInfo">Refresh User Info</button>
   </div>
 </template>
 ```
@@ -39,31 +39,31 @@ import { useWeb3AuthUser } from '@web3auth/modal/vue'
 import type { IUseWeb3AuthUser } from '@web3auth/modal/vue'
 ```
 
-#### Loading
+#### loading
 
 `boolean`
 
 Whether the user info fetching process is in progress.
 
-#### Error
+#### error
 
-`Web3AuthError | null`
+`Web3Autherror | null`
 
-Error that occurred during the user info fetching process.
+error that occurred during the user info fetching process.
 
-#### Userinfo
+#### userInfo
 
 `Partial<UserInfo> | null`
 
 The current user's information, or null if not available.
 
-#### Ismfaenabled
+#### isMFAEnabled
 
 `boolean`
 
 Whether Multi-Factor Authentication (MFA) is enabled for the user.
 
-#### Getuserinfo
+#### getUserInfo
 
 `() => Promise<Partial<UserInfo> | null>`
 

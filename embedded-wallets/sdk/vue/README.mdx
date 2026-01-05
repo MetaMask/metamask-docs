@@ -18,7 +18,7 @@ Embedded Wallets SDKs were previously known as Web3Auth Plug and Play SDKs. Pack
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provide a seamless authentication experience for Vue applications with social logins, external wallets, and more. Using our Vue Composables, you can easily Connect users to their preferred wallets and manage authentication state.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provide a seamless authentication experience for Vue applications with social logins, external wallets, and more. Using our Vue Composables, you can easily connect users to their preferred wallets and manage authentication state.
 
 ## Requirements
 
@@ -51,46 +51,46 @@ Create a configuration file for Web3Auth. This file will contain your Web3Auth C
 import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
 
-const Web3authOptions: Web3AuthOptions = {
+const web3AuthOptions: Web3AuthOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
 }
 
-const Web3authContextConfig: Web3AuthContextConfig = {
-  Web3authOptions,
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions,
 }
 
-export default Web3authContextConfig
+export default web3AuthContextConfig
 ```
 
 ### 2. Setup Web3Auth provider
 
-In your main component (e.g. `App.vue`), import the `Web3AuthProvider` component and wrap your application with it:
+In your main component (e.g. `App.vue`), import the `Web3Authprovider` component and wrap your application with it:
 
 ```html title="App.vue"
 <script setup lang="ts">
   import Home from './Home.vue'
-  // Focus-next-line
-  import { Web3AuthProvider } from '@web3auth/modal/vue'
-  import Web3authContextConfig from './web3authContext'
+  // focus-next-line
+  import { Web3Authprovider } from '@web3auth/modal/vue'
+  import web3AuthContextConfig from './web3authContext'
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col">
-    <!-- Focus-start -->
-    <Web3AuthProvider :config="Web3authContextConfig">
+    <!-- focus-start -->
+    <Web3Authprovider :config="web3AuthContextConfig">
       <Home />
-    </Web3AuthProvider>
-    <!-- Focus-end -->
+    </Web3Authprovider>
+    <!-- focus-end -->
   </div>
 </template>
 ```
 
-## Advanced configuration
+## Advanced Configuration
 
 The Web3Auth Modal SDK offers a rich set of advanced configuration options:
 
-- **[Smart Accounts](./advanced/smart-accounts.mdx)**: Configure account abstraction parameters.
+- **[Smart accounts](./advanced/smart-accounts.mdx)**: Configure account abstraction parameters.
 - **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
 - **[Whitelabeling & UI customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
 - **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
@@ -98,15 +98,15 @@ The Web3Auth Modal SDK offers a rich set of advanced configuration options:
 
 :::tip
 
-Head over to the [**Advanced configuration**](./advanced/README.mdx) section to learn more about each configuration option.
+Head over to the [**Advanced Configuration**](./advanced/README.mdx) section to learn more about each configuration option.
 
 :::
 
 <Tabs
   defaultValue="basic-config"
   values={[
-    { label: "Basic configuration", value: "basic-config" },
-    { label: "Advanced configuration", value: "advanced-config" },
+    { label: "Basic Configuration", value: "basic-config" },
+    { label: "Advanced Configuration", value: "advanced-config" },
   ]}
 >
 
@@ -116,13 +116,13 @@ Head over to the [**Advanced configuration**](./advanced/README.mdx) section to 
 import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
 
-const Web3authOptions: Web3AuthOptions = {
+const web3AuthOptions: Web3AuthOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
 }
 
-const Web3authContextConfig: Web3AuthContextConfig = {
-  Web3authOptions,
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions,
 }
 ```
 
@@ -139,34 +139,34 @@ import {
   type Web3AuthOptions,
 } from '@web3auth/modal'
 
-const Web3authOptions: Web3AuthOptions = {
+const web3AuthOptions: Web3AuthOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   modalConfig: {
-    Connectors: {
+    connectors: {
       [WALLET_CONNECTORS.AUTH]: {
         label: 'auth',
         loginMethods: {
           google: {
             name: 'google login',
-            // logoDark: "url to your custom logo which will Shown in dark mode",
+            // logoDark: "url to your custom logo which will shown in dark mode",
           },
           facebook: {
             name: 'facebook login',
-            ShowOnModal: false, // hides the facebook option
+            showOnModal: false, // hides the facebook option
           },
           email_passwordless: {
             name: 'email passwordless login',
-            ShowOnModal: true,
-            authConnectionId: 'w3a-email_passwordless-demo',
+            showOnModal: true,
+            authconnectionId: 'w3a-email_passwordless-demo',
           },
           sms_passwordless: {
             name: 'sms passwordless login',
-            ShowOnModal: true,
-            authConnectionId: 'w3a-sms_passwordless-demo',
+            showOnModal: true,
+            authconnectionId: 'w3a-sms_passwordless-demo',
           },
         },
-        ShowOnModal: true, // set to false to hide all social login methods
+        showOnModal: true, // set to false to hide all social login methods
       },
     },
     hideWalletDiscovery: true, // set to true to hide external wallets discovery
@@ -174,8 +174,8 @@ const Web3authOptions: Web3AuthOptions = {
   mfaLevel: MFA_LEVELS.MANDATORY,
 }
 
-const Web3authContextConfig: Web3AuthContextConfig = {
-  Web3authOptions,
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions,
 }
 ```
 

@@ -14,7 +14,7 @@ This is a supplementary guide to the main [v7 to v10 migration guide](README.mdx
 
 ## Overview
 
-In v7, Wallet services (Checkout, Swap, WalletConnect Scanner, Embedded Wallet UI) required
+In v7, Wallet services (Checkout, Swap, Walletconnect Scanner, Embedded Wallet UI) required
 installing and configuring a separate `@web3auth/wallet-services-plugin` package. V10 integrates
 these services directly into the main SDK.
 
@@ -34,9 +34,9 @@ web3auth.addPlugin(walletServicesPlugin)
 await web3auth.initModal()
 
 // Usage
-await walletServicesPlugin.ShowWalletUi()
-await walletServicesPlugin.ShowCheckout()
-await walletServicesPlugin.ShowWalletConnectScanner()
+await walletServicesPlugin.showWalletUi()
+await walletServicesPlugin.showCheckout()
+await walletServicesPlugin.showWalletconnectScanner()
 // remove-end
 
 // add-start
@@ -45,13 +45,13 @@ import { EVM_PLUGINS } from '@web3auth/modal'
 await web3auth.init()
 
 // Get the built-in wallet services plugin
-const walletServicesPlugin = web3auth.Getplugin(EVM_PLUGINS.WALLET_SERVICES)
+const walletServicesPlugin = web3auth.getPlugin(EVM_PLUGINS.WALLET_SERVICES)
 
-// Usage (methods now require { Show: true } parameter)
-await walletServicesPlugin.ShowWalletUi({ Show: true })
-await walletServicesPlugin.ShowCheckout({ Show: true })
-await walletServicesPlugin.ShowSwap({ Show: true })
-await walletServicesPlugin.ShowWalletConnectScanner({ Show: true })
+// Usage (methods now require { show: true } parameter)
+await walletServicesPlugin.showWalletUi({ show: true })
+await walletServicesPlugin.showCheckout({ show: true })
+await walletServicesPlugin.showSwap({ show: true })
+await walletServicesPlugin.showWalletconnectScanner({ show: true })
 // add-end
 ```
 
@@ -59,8 +59,8 @@ await walletServicesPlugin.ShowWalletConnectScanner({ Show: true })
 
 - **Package Removal**: Remove `@web3auth/wallet-services-plugin` package
 - **Built-in Integration**: Wallet services are now automatically included in the main SDK
-- **Plugin Access**: Use `web3auth.Getplugin(EVM_PLUGINS.WALLET_SERVICES)` to access functionality
-- **Parameter Updates**: Methods now require a `{ Show: true }` parameter
+- **Plugin Access**: Use `web3auth.getPlugin(EVM_PLUGINS.WALLET_SERVICES)` to access functionality
+- **Parameter Updates**: Methods now require a `{ show: true }` parameter
 
 ## Package removal
 

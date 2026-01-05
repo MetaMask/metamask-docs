@@ -18,27 +18,27 @@ import { useWeb3Auth } from '@web3auth/modal/react'
 import { useWeb3Auth } from '@web3auth/modal/react'
 
 function App() {
-  const { web3Auth, IsConnected, Isinitializing, Provider, Status, Initerror } = useWeb3Auth()
+  const { web3Auth, isConnected, isInitializing, provider, status, initError } = useWeb3Auth()
 
-  if (IsConnected) {
-    // User is Connected
-    console.log('Connected with Provider:', Provider)
+  if (isConnected) {
+    // User is connected
+    console.log('connected with provider:', provider)
   }
-  if (Isinitializing) {
+  if (isInitializing) {
     // Web3Auth is initializing
     console.log('Web3Auth is initializing')
   }
-  if (Provider) {
-    // Web3Auth Provider is Connected
-    console.log('Web3Auth Provider is Connected')
+  if (provider) {
+    // Web3Auth provider is connected
+    console.log('Web3Auth provider is connected')
   }
-  if (Status) {
-    // Web3Auth Status
-    console.log('Web3Auth Status:', Status)
+  if (status) {
+    // Web3Auth status
+    console.log('Web3Auth status:', status)
   }
-  if (Initerror) {
-    // Web3Auth initialization Error
-    console.log('Web3Auth initialization Error:', Initerror)
+  if (initError) {
+    // Web3Auth initialization error
+    console.log('Web3Auth initialization error:', initError)
   }
 }
 ```
@@ -49,48 +49,48 @@ function App() {
 import { type IUseWeb3Auth } from '@web3auth/modal/react'
 ```
 
-#### Initerror
+#### initError
 
-`Error | null`
+`error | null`
 
-Error that occurred during Web3Auth initialization.
+error that occurred during Web3Auth initialization.
 
-#### IsConnected
+#### Isconnected
 `boolean`
 
-Whether the user is Connected to Web3Auth.
+Whether the user is connected to Web3Auth.
 
-#### Isinitialized
+#### isInitialized
 
 `boolean`
 
 Whether Web3Auth has completed initialization.
 
-#### Isinitializing
+#### isInitializing
 
 `boolean`
 
 Whether Web3Auth is currently initializing.
 
-#### Provider
+#### provider
 
-`IProvider | null`
+`Iprovider | null`
 
-Connected Provider from Web3Auth.
+connected provider from Web3Auth.
 
-#### Status
+#### status
 
 `string`
 
-Current Status of the Web3Auth Connection.
+Current status of the Web3Auth connection.
 
-#### Web3auth
+#### web3Auth
 
 `Web3Auth`
 
 The Web3Auth instance.
 
-#### Getplugin
+#### getPlugin
 
 `(pluginName: PLUGIN_NAME) => IPlugin | null`
 

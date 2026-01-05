@@ -19,7 +19,7 @@ Key improvements from v8 to v10:
 
 - **Unified SDK Package:** Single `@web3auth/modal` package replaces multiple adapter packages
 - **Dashboard-Centric Configuration:** Chain configurations managed via Web3Auth Developer Dashboard
-- **Simplified Integration:** No more manual `Openloginadapter` registration
+- **Simplified Integration:** No more manual `OpenLoginAdapter` registration
 - **Enhanced Developer Experience:** Cleaner API with better TypeScript support
 
 ## Installation
@@ -34,7 +34,7 @@ npm install @web3auth/modal
 For custom blockchain configurations:
 
 ```bash npm2yarn
-npm install @web3auth/ethereum-Provider
+npm install @web3auth/ethereum-provider
 ```
 
 ## Breaking changes from v8 to v10
@@ -60,7 +60,7 @@ import { Web3Auth } from '@web3auth/modal'
 // add-end
 ```
 
-### 2. Openloginadapter → AuthAdapter → Built-in (v8→v9→v10)
+### 2. OpenLoginAdapter → AuthAdapter → Built-in (v8→v9→v10)
 
 In v8, authentication used `OpenloginAdapter`. V9 renamed it to `AuthAdapter`. V10 eliminates the need for separate adapters in most cases.
 
@@ -89,32 +89,32 @@ import { WEB3AUTH_NETWORK, MFA_LEVELS } from '@web3auth/modal'
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // MFA and branding now configured here or via dashboard
   mfaLevel: MFA_LEVELS.OPTIONAL,
 })
 // add-end
 ```
 
-### 3. Chain configuration centralization
+### 3. Chain Configuration Centralization
 
-**v8 required manual chain and Provider configuration:**
+**v8 required manual chain and provider configuration:**
 
 ```typescript
 // remove-start
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-Provider'
+import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
 import { getEvmChainConfig } from '@web3auth/base'
 
 const chainConfig = getEvmChainConfig(1, 'YOUR_CLIENT_ID')
 
-const privateKeyProvider = new EthereumPrivateKeyProvider({
+const privateKeyprovider = new EthereumPrivateKeyprovider({
   config: { chainConfig },
 })
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  privateKeyProvider,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  privateKeyprovider,
 })
 // remove-end
 ```
@@ -125,7 +125,7 @@ const web3auth = new Web3Auth({
 // add-start
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // Chain configuration managed via Web3Auth Developer Dashboard
 })
 // add-end
@@ -149,9 +149,9 @@ const web3auth = new Web3Auth({
 const userAuthInfo = await web3auth.authenticateUser()
 // remove-end
 // add-start
-const userAuthInfo = await web3auth.Getidentitytoken()
+const userAuthInfo = await web3auth.getIdentityToken()
 // add-end
-const idToken = userAuthInfo.idToken
+const idtoken = userAuthInfo.idtoken
 ```
 
 **External Wallet Adapters:** If you used external wallet adapters (MetaMask, Phantom, Solflare, etc.) in v8, see the 🔌 **[External Wallet Adapters Migration Guide](./external-wallets.mdx)** for migrating to the automatic detection system.
@@ -160,11 +160,11 @@ const idToken = userAuthInfo.idToken
 
 **Whitelabeling and UI customization:** If you had whitelabeling configurations in v8, see the 📋 **[Whitelabeling Migration Guide](./whitelabeling.mdx)** for detailed steps.
 
-**Custom Authentication:** If you used custom verifiers in v8, see the 🔐 **[Custom Authentication Migration Guide](./custom-authentication.mdx)** for migrating to the new Connections system.
+**Custom Authentication:** If you used custom verifiers in v8, see the 🔐 **[Custom Authentication Migration Guide](./custom-authentication.mdx)** for migrating to the new connections system.
 
 ## Complete migration example
 
-Here's a complete before/after example Showing the migration from v8 to v10:
+Here's a complete before/after example showing the migration from v8 to v10:
 
 <Tabs>
 <TabItem value="v8" label="v8 Configuration">
@@ -172,20 +172,20 @@ Here's a complete before/after example Showing the migration from v8 to v10:
 ```typescript
 import { Web3Auth } from '@web3auth/modal'
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-Provider'
+import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
 import { getEvmChainConfig } from '@web3auth/base'
 
 const clientId = 'YOUR_CLIENT_ID'
 const chainConfig = getEvmChainConfig(1, clientId)
 
-const privateKeyProvider = new EthereumPrivateKeyProvider({
+const privateKeyprovider = new EthereumPrivateKeyprovider({
   config: { chainConfig },
 })
 
 const web3auth = new Web3Auth({
   clientId,
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  privateKeyProvider,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  privateKeyprovider,
 })
 
 const openloginAdapter = new OpenloginAdapter({
@@ -212,7 +212,7 @@ import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // Chain configuration managed via dashboard
   // Branding configured via dashboard
   // No adapters needed for basic functionality
@@ -230,7 +230,7 @@ With v10, configurations that were previously done in code are now managed throu
 
 1. **Chain Configurations:** Add and configure your blockchain networks
 2. **Branding & UI:** Set app name, logos, colors, and themes
-3. **Login Methods:** Enable/disable social login Providers
+3. **Login Methods:** Enable/disable social login providers
 
 Visit the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io) to configure these settings.
 

@@ -10,7 +10,7 @@ Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/refe
 
 ## Method
 
-`request(chainConfig: ChainConfig, method: string, params: unknown[], Path?: string): Promise<string>;`
+`request(chainConfig: ChainConfig, method: string, params: unknown[], path?: string): Promise<string>;`
 
 ## Parameters
 
@@ -112,5 +112,5 @@ const params = [
     },
   },
 ]
-const res = await web3auth.request(chainConfig, 'eth_signTypedData_v4', params)
+const res = await web3auth.request(chainConfig, 'eth_signTypeddata_v4', params)
 ```

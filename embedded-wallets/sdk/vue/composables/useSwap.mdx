@@ -18,14 +18,14 @@ import { useSwap } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useSwap } from '@web3auth/modal/vue'
 
-  const { ShowSwap, Loading, Error } = useSwap()
+  const { showSwap, loading, error } = useSwap()
 </script>
 
 <template>
-  <button @click="ShowSwap()" :disabled="Loading">
-    {{ Loading ? "Opening Swap..." : "Open Swap" }}
+  <button @click="showSwap()" :disabled="loading">
+    {{ loading ? "Opening Swap..." : "Open Swap" }}
   </button>
-  <div v-if="Error">Error: {{ Error.message }}</div>
+  <div v-if="error">error: {{ error.message }}</div>
 </template>
 ```
 
@@ -35,20 +35,20 @@ import { useSwap } from '@web3auth/modal/vue'
 import { type IUseSwap } from '@web3auth/modal/vue'
 ```
 
-#### Loading
+#### loading
 
 `boolean`
 
 Whether the swap interface is being opened.
 
-#### Error
+#### error
 
-`Web3AuthError | null`
+`Web3Autherror | null`
 
-Error that occurred while opening the swap interface.
+error that occurred while opening the swap interface.
 
-#### ShowSwap
+#### showSwap
 
-`(ShowSwapParams?: BaseEmbedControllerState["ShowSwap"]) => Promise<void>`
+`(showSwapParams?: BaseEmbedControllerState["showSwap"]) => Promise<void>`
 
 Function to open the swap interface. Accepts optional parameters for customizing the swap view.

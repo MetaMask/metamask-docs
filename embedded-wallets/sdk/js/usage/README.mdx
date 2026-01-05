@@ -18,36 +18,36 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 | Function Name | Description                                 |
 | ------------- | ------------------------------------------- |
-| `Connect()`   | Displays the Modal and logs in the user.    |
+| `connect()`   | Displays the Modal and logs in the user.    |
 | `logout()`    | Logs out the user from the current session. |
 
 ### User management functions
 
 | Function Name        | Description                                                 |
 | -------------------- | ----------------------------------------------------------- |
-| `Getuserinfo()`      | Retrieves the authenticated user's information.             |
-| `Getidentitytoken()` | Gets the idToken from Web3Auth for authentication purposes. |
+| `getUserInfo()`      | Retrieves the authenticated user's information.             |
+| `getIdentityToken()` | Gets the idtoken from Web3Auth for authentication purposes. |
 
 ### Security functions
 
 | Function Name | Description |
 | --- | --- |
-| `Enablemfa()` | Enables Multi-Factor Authentication for the user. |
-| `Managemfa()` | Redirects the user to manage their MFA settings in the Web3Auth Account Dashboard. |
+| `enableMFA()` | Enables Multi-Factor Authentication for the user. |
+| `manageMFA()` | Redirects the user to manage their MFA settings in the Web3Auth Account Dashboard. |
 
 ### Blockchain functions
 
 | Function Name | Description |
 | --- | --- |
-| `addChain()` | Adds chain configuration details to the Connected adapter. |
-| `Switchchain()` | Switches to a different blockchain network as per chainId already added to chain config. |
+| `addChain()` | Adds chain configuration details to the connected adapter. |
+| `switchChain()` | Switches to a different blockchain network as per chainId already added to chain config. |
 
 ### Wallet services Plugin Functions
 
 | Function Name                   | Description                                   |
 | ------------------------------- | --------------------------------------------- |
-| `ShowCheckout()`                | Initiates cryptocurrency top-up for the user. |
-| `ShowWalletConnectScanner()`    | Displays the WalletConnect QR Code Scanner.   |
-| `ShowWalletUI()`                | Shows the Embedded Wallet UI.                 |
-| `ShowSwap()`                    | Displays the Swap UI for Token exchanges.     |
-| `ShowTransactionConfirmation()` | Shows the Transaction Confirmation UI.        |
+| `showCheckout()`                | Initiates cryptocurrency top-up for the user. |
+| `showWalletconnectScanner()`    | Displays the Walletconnect QR Code Scanner.   |
+| `showWalletUI()`                | shows the Embedded Wallet UI.                 |
+| `showSwap()`                    | Displays the Swap UI for token exchanges.     |
+| `showTransactionConfirmation()` | shows the Transaction Confirmation UI.        |

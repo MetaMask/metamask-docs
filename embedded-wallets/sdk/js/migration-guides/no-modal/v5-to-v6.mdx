@@ -7,33 +7,33 @@ sidebar_label: v5 to v6
 
 ## General
 
-### `web3auth.Connected` is introduced
+### `web3auth.connected` is introduced
 
-#### Manage session using `web3auth.Connected` instead of `web3auth.Provider`
+#### Manage session using `web3auth.connected` instead of `web3auth.provider`
 
-With V6, users can manage their session using `web3auth.Connected` instead of `web3auth.Provider`.
+With V6, users can manage their session using `web3auth.connected` instead of `web3auth.provider`.
 
 ```tsx
 // With V6
-// Focus-start
-if (web3auth.Connected) {
+// focus-start
+if (web3auth.connected) {
   setLoggedIn(true)
 }
-// Focus-end
+// focus-end
 ```
 
-### `Provider` is now always available
+### `provider` is now always available
 
-In V5, we used to add a check for setting the `Provider` only if the `web3auth.Provider` was present. But now with V6 we always have a Provider available even if the user is not logged in.
+In V5, we used to add a check for setting the `provider` only if the `web3auth.provider` was present. But now with V6 we always have a provider available even if the user is not logged in.
 
 ```tsx
 // With V5
-if (web3auth.Provider) {
-  setProvider(web3auth.Provider)
+if (web3auth.provider) {
+  setprovider(web3auth.provider)
 }
 // With V6
-// Focus-next-line
-setProvider(web3auth.Provider) // before the Connect() or ConnectTo(), Provider is available.
+// focus-next-line
+setprovider(web3auth.provider) // before the connect() or connectTo(), provider is available.
 ```
 
 ### `rpcTarget` and `chainId` is now a mandatory parameter
@@ -45,27 +45,27 @@ const web3auth = new Web3Auth({
   clientId,
   chainConfig: {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
-    // Focus-start
+    // focus-start
     chainId: '0x1',
     rpcTarget: 'https://rpc.ethereum.org', // This is the public RPC we have added, please pass on your own custom endpoint while creating an app
-    // Focus-end
+    // focus-end
   },
-  Web3authNetwork: 'sapphire_mainnet',
+  web3AuthNetwork: 'sapphire_mainnet',
 })
 ```
 
-### `privateKeyProvider` is introduced
+### `privateKeyprovider` is introduced
 
-#### `privateKeyProvider` is now a mandatory parameter to be passed into the `Openloginadapter`
+#### `privateKeyprovider` is now a mandatory parameter to be passed into the `OpenLoginAdapter`
 
-With V6, we have added a new parameter `privateKeyProvider` which is mandatory to be passed into the `Openloginadapter`.
+With V6, we have added a new parameter `privateKeyprovider` which is mandatory to be passed into the `OpenLoginAdapter`.
 
 #### For EVM chains
 
-For EVM chains use the `EthereumPrivateKeyProvider` from the `@web3auth/ethereum-Provider`package. Please note that`EthereumPrivateKeyProvider`requires`chainConfig`as the `config` parameter at the time of initialization.
+For EVM chains use the `EthereumPrivateKeyprovider` from the `@web3auth/ethereum-provider`package. Please note that`EthereumPrivateKeyprovider`requires`chainConfig`as the `config` parameter at the time of initialization.
 
 ```tsx
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-Provider'
+import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -76,21 +76,21 @@ const chainConfig = {
   ticker: 'ETH',
   tickerName: 'Ethereum',
 }
-// Focus-next-line
-const privateKeyProvider = new EthereumPrivateKeyProvider({ config: { chainConfig } })
+// focus-next-line
+const privateKeyprovider = new EthereumPrivateKeyprovider({ config: { chainConfig } })
 const openloginAdapter = new OpenloginAdapter({
-  // Focus-next-line
-  privateKeyProvider,
+  // focus-next-line
+  privateKeyprovider,
 })
 web3authInstance.configureAdapter(openloginAdapter)
 ```
 
 #### For Solana
 
-For Solana use the `SolanaPrivateKeyProvider` from the `@web3auth/solana-Provider`package. Please note that `SolanaPrivateKeyProvider` requires `chainConfig` as the `config` parameter at the time of initialization.
+For Solana use the `SolanaPrivateKeyprovider` from the `@web3auth/solana-provider`package. Please note that `SolanaPrivateKeyprovider` requires `chainConfig` as the `config` parameter at the time of initialization.
 
 ```tsx
-import { SolanaPrivateKeyProvider } from '@web3auth/solana-Provider'
+import { SolanaPrivateKeyprovider } from '@web3auth/solana-provider'
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.SOLANA,
@@ -101,21 +101,21 @@ const chainConfig = {
   ticker: 'SOL',
   tickerName: 'Solana',
 }
-// Focus-next-line
-const privateKeyProvider = new SolanaPrivateKeyProvider({ config: { chainConfig } })
+// focus-next-line
+const privateKeyprovider = new SolanaPrivateKeyprovider({ config: { chainConfig } })
 const openloginAdapter = new OpenloginAdapter({
-  // Focus-next-line
-  privateKeyProvider,
+  // focus-next-line
+  privateKeyprovider,
 })
 web3auth.configureAdapter(openloginAdapter)
 ```
 
 #### For all other chains
 
-For all Non-EVM & Non-Solana chains use the `CommonPrivateKeyProvider` from the `@web3auth/base-Provider`package. Please note that `CommonPrivateKeyProvider` requires `chainConfig` as the `config` parameter at the time of initialization.
+For all Non-EVM & Non-Solana chains use the `CommonPrivateKeyprovider` from the `@web3auth/base-provider`package. Please note that `CommonPrivateKeyprovider` requires `chainConfig` as the `config` parameter at the time of initialization.
 
 ```tsx
-import { CommonPrivateKeyProvider } from '@web3auth/base-Provider'
+import { CommonPrivateKeyprovider } from '@web3auth/base-provider'
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.SOLANA,
@@ -126,12 +126,12 @@ const chainConfig = {
   ticker: 'SOL',
   tickerName: 'Solana',
 }
-// Focus-next-line
-const privateKeyProvider = new CommonPrivateKeyProvider({ config: { chainConfig } })
+// focus-next-line
+const privateKeyprovider = new CommonPrivateKeyprovider({ config: { chainConfig } })
 
 const openloginAdapter = new OpenloginAdapter({
-  // Focus-next-line
-  privateKeyProvider,
+  // focus-next-line
+  privateKeyprovider,
 })
 web3authInstance.configureAdapter(openloginAdapter)
 ```

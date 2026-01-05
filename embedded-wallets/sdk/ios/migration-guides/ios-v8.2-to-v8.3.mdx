@@ -12,13 +12,13 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 8.2(v8.2) to version 8.3(v8.3) of the Web3Auth PnP iOS SDK. The guide outlines significant changes and enhancements, including the introduction of new login Providers, and changes in `request` method.
+This migration guide provides steps for upgrading from version 8.2(v8.2) to version 8.3(v8.3) of the Web3Auth PnP iOS SDK. The guide outlines significant changes and enhancements, including the introduction of new login providers, and changes in `request` method.
 
 ## Changes in detail
 
 ### `request` method updates
 
-From v8.3, developers can pass the `chainConfig` to request the signature for specific chain. To further improve developer experience, we have removed the `Loginparams` from the `request` method.
+From v8.3, developers can pass the `chainConfig` to request the signature for specific chain. To further improve developer experience, we have removed the `loginParams` from the `request` method.
 
 #### Before (v8.2)
 
@@ -29,15 +29,15 @@ params.append("0x764dd67c0420b43a39ab337463d8995622f226a2")
 params.append("Web3Auth")
 
 do {
-  // Focus-start
-  try await self.Web3auth?.request(
-    W3ALoginParams(loginProvider: .GOOGLE, mfaLevel: .NONE),
+  // focus-start
+  try await self.web3Auth?.request(
+    W3ALoginParams(loginprovider: .GOOGLE, mfaLevel: .NONE),
     method: "personal_sign",
     requestParams: params
   )
-  // Focus-end
+  // focus-end
 } catch {
-  // Handle Error
+  // Handle error
 }
 ```
 
@@ -57,21 +57,21 @@ var chainConfig = ChainConfig(
 )
 
 do {
-  // Focus-start
-  try await self.Web3auth?.request(
+  // focus-start
+  try await self.web3Auth?.request(
     chainConfig: chainConfig
     method: "personal_sign",
     requestParams: params,
   )
-  // Focus-end
+  // focus-end
 } catch {
-  // Handle Error
+  // Handle error
 }
 ```
 
-### New login providers
+### New Login providers
 
-v8.3 update brings two new Providers. Now developers can use the SMS Passwordless and Farcaster login options.
+v8.3 update brings two new providers. Now developers can use the SMS Passwordless and Farcaster login options.
 
 #### SMS passwordless
 
@@ -84,20 +84,20 @@ let web3auth = try await Web3Auth(W3AInitParams(
   redirectUrl: "bundleId://auth"
 ))
 
- // Focus-start
-let result = try await Web3auth.login(W3ALoginParams(
-  Web3AuthProvider.SMS_PASSWORDLESS,
+ // focus-start
+let result = try await web3Auth.login(W3ALoginParams(
+  Web3Authprovider.SMS_PASSWORDLESS,
   // The phone number should be in format of +{country_code}-{phone_number}
   extraLoginOptions: .init(loginHint: "+91-9911223344")
 ))
- // Focus-end
+ // focus-end
 ```
 
 #### Farcaster
 
 ```swift title="Usage"
 let result = try await Web3Auth().login(
-    // Focus-next-line
-    W3ALoginParams(loginProvider: .Farcaster)
+    // focus-next-line
+    W3ALoginParams(loginprovider: .Farcaster)
 )
 ```

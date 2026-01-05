@@ -14,22 +14,22 @@ The Web3Auth SDK provides extensive configuration options that allow you to cust
 
 ## Configuration structure
 
-When setting up Web3Auth, you'll create a configuration object that is passed to the `Web3AuthProvider`. This consists of:
+When setting up Web3Auth, you'll create a configuration object that is passed to the `Web3Authprovider`. This consists of:
 
 ```tsx title="web3authContext.tsx"
 import { type Web3AuthContextConfig } from '@web3auth/modal/react'
 import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
 
-// Focus-start
-const Web3authOptions: Web3AuthOptions = {
+// focus-start
+const web3AuthOptions: Web3AuthOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   // Core and advanced options go here
 }
-// Focus-end
+// focus-end
 
-const Web3authContextConfig: Web3AuthContextConfig = {
-  Web3authOptions,
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions,
 }
 ```
 
@@ -41,7 +41,7 @@ const Web3authContextConfig: Web3AuthContextConfig = {
 
 Control how long users stay authenticated and how sessions persist.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before
   needing to log in again.
@@ -53,9 +53,9 @@ Control how long users stay authenticated and how sessions persist.
   - `"session"`: Persists only in current tab, cleared when tab closes (sessionStorage)
 
 ```tsx
-const Web3authOptions = {
+const web3AuthOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
 
   // Session configuration
   sessionTime: 86400 * 7, // 7 days (in seconds)
@@ -65,13 +65,13 @@ const Web3authOptions = {
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user Accounts with two-factor authentication. For detailed
+Add additional security layers to protect user accounts with two-factor authentication. For detailed
 configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx)
 section.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
-- `mfaSettings` - Configure MFA settings for different authentication flows
+- `mfaSettings` - Configure MFA Settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA
 
 ## Custom authentication methods
@@ -80,7 +80,7 @@ Control the login options presented to your users and how they're displayed in t
 detailed configuration options and implementation examples, see the
 [Custom Authentication](./custom-authentication.mdx) section.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `modalConfig` - Define which authentication methods are available and customize their appearance
 
@@ -90,19 +90,19 @@ Create a seamless brand experience by customizing the Web3Auth Modal to match yo
 design. For complete customization options, refer to the
 [Whitelabeling & UI Customization](./whitelabel.mdx) section.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `uiConfig` - Personalize the modal's look and feel with custom colors, logos, themes, and more
 - `modalConfig` - Control the visibility and arrangement of authentication options
 
-## Smart Accounts (account abstraction)
+## Smart accounts (account abstraction)
 Improve user experience with gasless transactions and advanced account features. Learn more in the
-[Smart Accounts](./smart-accounts.mdx) documentation.
+[Smart accounts](./smart-accounts.mdx) documentation.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `accountAbstractionConfig` - Fine-tune parameters for smart account implementation
-- `useAAWithExternalWallet` - Enable account abstraction functionality even when users Connect with
+- `useAAWithExternalWallet` - Enable account abstraction functionality even when users connect with
   external wallets
 
 ## Wallet services
@@ -110,6 +110,6 @@ Improve user experience with gasless transactions and advanced account features.
 Extend your application with enhanced wallet functionality. See the
 [Wallet Services](./wallet-services.mdx) documentation for complete configuration options.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `walletServicesConfig` - Integrate additional wallet services and features

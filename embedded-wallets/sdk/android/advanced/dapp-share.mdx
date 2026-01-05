@@ -18,7 +18,7 @@ Similar to existing 2FA systems, a user needs to prove ownership of at least 2 o
 
 The user experience on mobile platforms is very different from the web platforms. This is because the user has to be redirected to a browser where they can login using their socials and then back to the app once they have been successfully authenticated. This user experience shifts the context between two applications, whereas, in the web platforms, the context remains within the browser only.
 
-For the seamless login flow, we need to reconstruct the Shares `A` and `B`. `Share B` is managed by the login service and is provided on successful authentication. Whereas in web platforms, `Share A` is stored in the browser context. We can still store it in the browser context for mobile devices, but this has a few risks like users accidentally deleting browser Data. This is a bigger problem in mobile devices since the user doesn't realize that the browser is being used to login within the app and clearing the browser Data can cause their logins to fail. Hence, to tackle this issue, Web3Auth issues a dApp Share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
+For the seamless login flow, we need to reconstruct the Shares `A` and `B`. `Share B` is managed by the login service and is provided on successful authentication. Whereas in web platforms, `Share A` is stored in the browser context. We can still store it in the browser context for mobile devices, but this has a few risks like users accidentally deleting browser data. This is a bigger problem in mobile devices since the user doesn't realize that the browser is being used to login within the app and clearing the browser data can cause their logins to fail. Hence, to tackle this issue, Web3Auth issues a dApp Share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
 
 ## dApp share in Android
 
@@ -30,7 +30,7 @@ After a successful login from a user, the user details are returned as a respons
 
 ```json
 {
-  "Userinfo": {
+  "userInfo": {
     "email": "w3a-heroes@web3auth.com",
     "name": "Web3Auth Heroes",
     "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
@@ -39,9 +39,9 @@ After a successful login from a user, the user details are returned as a respons
     "typeOfLogin": "google",
     "aggregateVerifier": "w3a-google-sapphire",
     "dappShare": "", // 24 words of seed phrase will be sent only incase of custom verifiers
-    "idToken": "<jwtToken issued by Web3Auth>",
-    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "idtoken": "<jwttoken issued by Web3Auth>",
+    "oAuthIdtoken": "<jwttoken issued by OAuth provider>", // will be sent only incase of custom verifiers
+    "oAuthAccesstoken": "<accesstoken issued by OAuth provider>", // will be sent only incase of custom verifiers
     "isMfaEnabled": false // Returns whether the user has enabled MFA or not
   }
 }
@@ -49,7 +49,7 @@ After a successful login from a user, the user details are returned as a respons
 
 If you notice, the reponses has a field called `dappShare` which is a 24 words seed phrase that can be used to reconstruct the private key. This dappShare is a suplement to the `Share A` and represents half of the private key. The application can store the dApp share in their own application local storage safely.
 
-Now, while logging in, the user can use their social Accounts to obtain one share, and the application provides the dApp Share, removing the need to store the share in the browser context and enabling user to login seamlessly. This can be done by passing over the stored dApp share value in the login function.
+Now, while logging in, the user can use their social accounts to obtain one share, and the application provides the dApp Share, removing the need to store the share in the browser context and enabling user to login seamlessly. This can be done by passing over the stored dApp share value in the login function.
 
 :::note
 
@@ -58,7 +58,7 @@ One major thing to note here is that the `dappShare` is only available for custo
 :::
 
 ```kotlin
-Web3auth.login(LoginParams(selectedLoginProvider, dappShare = "<24 words seed phrase>"))
+web3Auth.login(LoginParams(selectedLoginprovider, dappShare = "<24 words seed phrase>"))
 ```
 
 ## Example
@@ -70,20 +70,20 @@ import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
 
-	private lateinit var Web3auth: Web3Auth
+	private lateinit var web3Auth: Web3Auth
 
 	private fun signIn() {
-		val selectedLoginProvider = Provider.GOOGLE
+		val selectedLoginprovider = provider.GOOGLE
 		// Can be GOOGLE, FACEBOOK, TWITCH etc.
 		val loginCompletableFuture: CompletableFuture<Web3AuthResponse> =
-				Web3auth.login(LoginParams(selectedLoginProvider,
-						// Focus-next-line
+				web3Auth.login(LoginParams(selectedLoginprovider,
+						// focus-next-line
 						dappShare = "<24 words seed phrase>"))
-		loginCompletableFuture.whenComplete { loginResponse, Error ->
-			if (Error == null) {
+		loginCompletableFuture.whenComplete { loginResponse, error ->
+			if (error == null) {
 				// render logged in UI
 			} else {
-				// render Error UI
+				// render error UI
 			}
 
 		}

@@ -1,7 +1,7 @@
 ---
 title: Migrating to the Web3Auth PnP Web SDK v10 from v9 (No-Modal)
 description:
-  Learn how to migrate from Web3Auth No-Modal v9 to the unified v10 SDK with ConnectTo functionality
+  Learn how to migrate from Web3Auth No-Modal v9 to the unified v10 SDK with connectTo functionality
   for custom UI implementations.
 sidebar_label: v9 to v10
 ---
@@ -18,7 +18,7 @@ internal SDK to power the modal SDK. **We strongly recommend migrating to the `@
 package** for the best developer experience.
 
 The Modal SDK offers everything you need: pre-built UI components for quick integration AND full
-custom UI control via `ConnectTo` for advanced use cases. Plus, you'll get priority documentation,
+custom UI control via `connectTo` for advanced use cases. Plus, you'll get priority documentation,
 examples, and community support.
 
 :::
@@ -31,7 +31,7 @@ package.
 
 Web3Auth v10 unifies the modal and no-modal SDKs into a single powerful package. Whether you want a
 pre-built modal UI or a custom implementation, you now use the same `@web3auth/modal` package with
-`ConnectTo` for no-modal-like functionality.
+`connectTo` for no-modal-like functionality.
 
 Key improvements from v9 no-modal to v10:
 
@@ -39,7 +39,7 @@ Key improvements from v9 no-modal to v10:
 - **Dashboard-Centric Configuration:** Chain configurations managed via Web3Auth Developer Dashboard
 - **Simplified Integration:** No more manual adapter registration and configuration
 - **Enhanced Developer Experience:** Cleaner API with better TypeScript support
-- **Custom UI Support:** Use `ConnectTo` for seamless custom UI implementations
+- **Custom UI Support:** Use `connectTo` for seamless custom UI implementations
 
 ## Installation
 
@@ -53,7 +53,7 @@ npm install @web3auth/modal
 For custom blockchain configurations:
 
 ```bash npm2yarn
-npm install @web3auth/ethereum-Provider
+npm install @web3auth/ethereum-provider
 ```
 
 ## Breaking changes from v9 to v10
@@ -89,9 +89,9 @@ import { Web3AuthNoModal } from '@web3auth/no-modal'
 
 const web3auth = new Web3AuthNoModal({
   clientId: 'YOUR_CLIENT_ID',
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   chainConfig,
-  privateKeyProvider,
+  privateKeyprovider,
 })
 // remove-end
 ```
@@ -104,13 +104,13 @@ import { Web3Auth } from '@web3auth/modal'
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // Chain configuration managed via Web3Auth Developer Dashboard
 })
 // add-end
 ```
 
-### 3. No-modal functionality: direct Connection → Connectto
+### 3. No-modal functionality: direct connection → connectto
 **v9 approach for custom UI:**
 
 ```typescript
@@ -130,9 +130,9 @@ const authAdapter = new AuthAdapter({
 web3auth.configureAdapter(authAdapter)
 await web3auth.init()
 
-// Custom UI - Connect directly
-await web3auth.ConnectTo('auth', {
-  loginProvider: 'google',
+// Custom UI - connect directly
+await web3auth.connectTo('auth', {
+  loginprovider: 'google',
 })
 // remove-end
 ```
@@ -143,26 +143,26 @@ await web3auth.ConnectTo('auth', {
 // add-start
 await web3auth.init()
 
-// Custom UI - use ConnectTo
-await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
-  authConnection: AUTH_CONNECTION.GOOGLE,
+// Custom UI - use connectTo
+await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  authconnection: AUTH_CONNECTION.GOOGLE,
 })
 
-// Or with custom verifiers/Connections
-await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
-  authConnection: AUTH_CONNECTION.GOOGLE,
-  authConnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID',
+// Or with custom verifiers/connections
+await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  authconnection: AUTH_CONNECTION.GOOGLE,
+  authconnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID',
 })
 // add-end
 ```
 
-### 4. Chain configuration centralization
+### 4. Chain Configuration Centralization
 
-**v9 required manual chain and Provider configuration:**
+**v9 required manual chain and provider configuration:**
 
 ```typescript
 // remove-start
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-Provider'
+import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
 
 const chainConfig = {
   chainNamespace: 'eip155',
@@ -174,14 +174,14 @@ const chainConfig = {
   tickerName: 'Ethereum',
 }
 
-const privateKeyProvider = new EthereumPrivateKeyProvider({
+const privateKeyprovider = new EthereumPrivateKeyprovider({
   config: { chainConfig },
 })
 
 const web3auth = new Web3AuthNoModal({
   clientId: 'YOUR_CLIENT_ID',
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  privateKeyProvider,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  privateKeyprovider,
 })
 // remove-end
 ```
@@ -192,7 +192,7 @@ const web3auth = new Web3AuthNoModal({
 // add-start
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // Chain configuration managed via Web3Auth Developer Dashboard
 })
 // add-end
@@ -205,6 +205,6 @@ of in code.
 
 1. Update your package dependencies
 2. Migrate your initialization code to use `Web3Auth` from `@web3auth/modal`
-3. Replace direct adapter methods with `ConnectTo` calls
+3. Replace direct adapter methods with `connectTo` calls
 4. Configure your chains and branding on the Web3Auth Developer Dashboard
-5. Test your custom UI implementation with the new `ConnectTo` API
+5. Test your custom UI implementation with the new `connectTo` API

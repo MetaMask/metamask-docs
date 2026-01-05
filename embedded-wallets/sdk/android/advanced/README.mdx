@@ -17,8 +17,8 @@ When setting up Embedded Wallets, you'll pass in the options to the constructor.
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-// Focus-start
-var Web3auth = Web3Auth(
+// focus-start
+var web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -26,10 +26,10 @@ var Web3auth = Web3Auth(
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
 )
-// Focus-end
+// focus-end
 
 // Handle user signing in when app is in background
-Web3auth.setResultUrl(intent?.Data)
+web3Auth.setResultUrl(intent?.data)
 ```
 
 ### `Web3AuthOptions`
@@ -62,7 +62,7 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 | Parameter      | Description                                                                                                                                          |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `whiteLabel?`  | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabelData` as a value. |
+| `whiteLabel?`  | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabeldata` as a value. |
 | `loginConfig?` | Login config for the custom verifiers. It takes `HashMap<String, LoginConfigItem>` as a value.                                                       |
 | `mfaSettings?` | Allows developers to configure the Mfa settings for authentication. It takes `MfaSettings` as a value.                                               |
 
@@ -71,14 +71,14 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 <TabItem value="interface">
 
 ```kotlin
-Data class Web3AuthOptions(
+data class Web3AuthOptions(
     var context: Context,
     val clientId: String,
     val network: Network,
     var buildEnv: BuildEnv? = BuildEnv.PRODUCTION,
     @Transient var redirectUrl: Uri,
     var sdkUrl: String = getSdkUrl(buildEnv),
-    val whiteLabel: WhiteLabelData? = null,
+    val whiteLabel: WhiteLabeldata? = null,
     val loginConfig: HashMap<String, LoginConfigItem>? = null,
     val useCoreKitKey: Boolean? = false,
     val chainNamespace: ChainNamespace? = ChainNamespace.EIP155,
@@ -94,7 +94,7 @@ Data class Web3AuthOptions(
 
 Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keystore.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -102,7 +102,7 @@ Control how long users stay authenticated and how sessions persist. The session 
   - Default: 7 days (`86400 * 7`).
 
 ```kotlin
-var Web3auth = Web3Auth(
+var web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -123,9 +123,9 @@ Create a seamless brand experience by customizing the Web3Auth Login Screens to 
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
-- `mfaSettings` - Configure MFA settings for different authentication flows
+- `mfaSettings` - Configure MFA Settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA

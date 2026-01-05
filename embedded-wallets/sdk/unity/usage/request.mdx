@@ -18,25 +18,25 @@ Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/refe
 
 :::tip
 
-Additionally you can associate a `getSignresponse` function to retrieve the signature for the request.
+Additionally you can associate a `getSignResponse` function to retrieve the signature for the request.
 
 ```cs
 void Start()
 {
-    Web3auth = GetComponent<Web3Auth>();
-    Web3auth.setOptions(new Web3AuthOptions()
+    web3Auth = GetComponent<Web3Auth>();
+    web3Auth.setOptions(new Web3AuthOptions()
     {
 
     });
-    // Focus-next-line
-    Web3auth.onSignresponse += onSignresponse;
+    // focus-next-line
+    web3Auth.onSignResponse += onSignResponse;
 }
-//Focus-start
-private void onSignresponse(Signresponse signResponse)
+//focus-start
+private void onSignResponse(SignResponse signResponse)
 {
     // Functions to be called after receiving sign response
 }
-//Focus-end
+//focus-end
 ```
 
 :::
@@ -60,15 +60,15 @@ private void onSignresponse(Signresponse signResponse)
             "Android"
     };
 
-    Web3auth.request(chainConfig, "personal_sign", paramsArray);
+    web3Auth.request(chainConfig, "personal_sign", paramsArray);
 }
 
 
-private void onSignresponse(Signresponse signResponse)
+private void onSignResponse(SignResponse signResponse)
 
 {
-    Debug.Log("Retrieved Signresponse: " + signResponse);
-    updateConsole("Retrieved Signresponse: " + signResponse);
+    Debug.Log("Retrieved SignResponse: " + signResponse);
+    updateConsole("Retrieved SignResponse: " + signResponse);
 }
 
 ```

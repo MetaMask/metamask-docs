@@ -16,7 +16,7 @@ to v10. This is a supplementary guide to the main
 ## Overview
 
 In v8, external wallets required manual adapter configuration. V10 simplifies this by using MIPD
-(Multiple Injected Provider Discovery) to automatically detect and provide access to external
+(Multiple Injected provider Discovery) to automatically detect and provide access to external
 wallets without manual setup.
 
 ## Migration steps
@@ -40,7 +40,7 @@ web3auth.configureAdapter(metamaskAdapter)
 web3auth.configureAdapter(phantomAdapter)
 
 // Or using helper functions
-const adapters = await getDefaultExternalAdapters({ options: Web3authOptions })
+const adapters = await getDefaultExternalAdapters({ options: web3AuthOptions })
 adapters.forEach(adapter => {
   web3auth.configureAdapter(adapter)
 })
@@ -59,9 +59,9 @@ await web3auth.init()
 
 - **Package Removal**: Remove all external wallet adapter packages
 - **MIPD Integration**: External wallets are automatically detected using MIPD (Multiple Injected
-  Provider Discovery)
+  provider Discovery)
 - **No Configuration**: No need to manually configure or register external adapters
-- **WalletConnect Support**: WalletConnect-compatible wallets are automatically available
+- **Walletconnect Support**: Walletconnect-compatible wallets are automatically available
 
 ## Package removal
 
@@ -74,11 +74,11 @@ npm uninstall @web3auth/metamask-adapter @web3auth/phantom-adapter @web3auth/sol
 
 ## How it works in v10
 
-V10 uses MIPD (Multiple Injected Provider Discovery) to automatically detect injected wallets in the
-browser. When users attempt to Connect, they'll see:
+V10 uses MIPD (Multiple Injected provider Discovery) to automatically detect injected wallets in the
+browser. When users attempt to connect, they'll see:
 
 1. **Installed Wallets**: Any injected wallets found in the browser
-2. **WalletConnect Options**: Popular wallets available via WalletConnect
+2. **Walletconnect Options**: Popular wallets available via Walletconnect
 3. **Install Prompts**: Options to install wallets if none are found
 
 This provides a better user experience with no configuration required from developers.

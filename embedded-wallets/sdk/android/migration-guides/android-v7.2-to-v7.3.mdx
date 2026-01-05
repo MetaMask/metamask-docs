@@ -18,7 +18,7 @@ This migration guide provides steps for upgrading from version 7.2(v7.2) to vers
 
 ### `request` method updates
 
-From v7.2, `Loginparams` is removed from the `request` method. To further improve developer experience, developers can now pass the `chainConfig` to request signature for specific chain.
+From v7.2, `loginParams` is removed from the `request` method. To further improve developer experience, developers can now pass the `chainConfig` to request signature for specific chain.
 
 #### Before (v7.2)
 
@@ -29,23 +29,23 @@ val params = JsonArray().apply {
     add("Android")
 }
 
-// Focus-start
-val signMsgCompletableFuture = Web3auth.request(
-    Loginparams = LoginParams(
-        selectedLoginProvider,
+// focus-start
+val signMsgCompletableFuture = web3Auth.request(
+    loginParams = LoginParams(
+        selectedLoginprovider,
         extraLoginOptions = null,
         mfaLevel = MFALevel.NONE,
     ),
     "personal_sign",
     requestParams = params
 )
-// Focus-end
+// focus-end
 
-signMsgCompletableFuture.whenComplete { _, Error ->
-    if (Error == null) {
+signMsgCompletableFuture.whenComplete { _, error ->
+    if (error == null) {
         Log.d("MainActivity_Web3Auth", "Message signed successfully")
     } else {
-        Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
+        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
     }
 }
 ```
@@ -59,8 +59,8 @@ val params = JsonArray().apply {
     add("Android")
 }
 
-// Focus-start
-val signMsgCompletableFuture = Web3auth.request(
+// focus-start
+val signMsgCompletableFuture = web3Auth.request(
      chainConfig = ChainConfig(
         chainId = "0x1",
         rpcTarget = "https://mainnet.infura.io/v3/$key",
@@ -68,13 +68,13 @@ val signMsgCompletableFuture = Web3auth.request(
     "personal_sign",
     requestParams = params
 )
-// Focus-end
+// focus-end
 
-signMsgCompletableFuture.whenComplete { _, Error ->
-    if (Error == null) {
+signMsgCompletableFuture.whenComplete { _, error ->
+    if (error == null) {
         Log.d("MainActivity_Web3Auth", "Message signed successfully")
     } else {
-        Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
+        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
     }
 }
 ```

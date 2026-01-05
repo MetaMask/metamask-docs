@@ -31,21 +31,21 @@ do {
     ticker: "ETH"
   )
 
-  val Web3auth = await Web3Auth(.init(
+  val web3Auth = await Web3Auth(.init(
     clientId: clientID,
     network: network,
     buildEnv: buildEnv,
-    // Focus-start
+    // focus-start
     chainConfig: chainConfig
   ))
 
-  // Focus-start
-  try await Web3auth?.launchWalletServices(
-    W3ALoginParams(loginProvider: .GOOGLE),
+  // focus-start
+  try await web3Auth?.launchWalletServices(
+    W3ALoginParams(loginprovider: .GOOGLE),
   )
-  // Focus-end
+  // focus-end
 } catch {
-  // Handle Error
+  // Handle error
 }
 ```
 
@@ -60,13 +60,13 @@ do {
     ticker: "ETH"
   )
 
-  // Focus-start
-  try await Web3auth?.launchWalletServices(
-    W3ALoginParams(loginProvider: .GOOGLE),
+  // focus-start
+  try await web3Auth?.launchWalletServices(
+    W3ALoginParams(loginprovider: .GOOGLE),
     chainConfig: chainConfig
   )
-  // Focus-end
+  // focus-end
 } catch {
-  // Handle Error
+  // Handle error
 }
 ```

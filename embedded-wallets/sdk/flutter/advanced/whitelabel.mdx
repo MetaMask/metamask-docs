@@ -6,7 +6,7 @@ description: 'Web3Auth Flutter SDK - Whitelabel | Embedded Wallets'
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import WhiteLabelShowcase from '../../_common/_whitelabel_Showcase.mdx'
+import WhiteLabelshowcase from '../../_common/_whitelabel_showcase.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
@@ -22,13 +22,13 @@ Web3Auth allows complete whitelabeling with application branding for a consisten
 
 ## Customizing the Web3Auth login screens
 
-For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `WhiteLabelData`. `WhiteLabelData` can be definied during initialization of the SDK in `Web3AuthOptions` object.
+For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `WhiteLabeldata`. `WhiteLabeldata` can be definied during initialization of the SDK in `Web3AuthOptions` object.
 
 <GrowthPlanNote />
 
 ### Arguments
 
-`WhiteLabelData`
+`WhiteLabeldata`
 
 <Tabs
   defaultValue="table"
@@ -55,7 +55,7 @@ For defining custom UI, branding, and translations for your brand app, you just 
 <TabItem value="class">
 
 ```dart
-class WhiteLabelData {
+class WhiteLabeldata {
   final String? appName;
   final String? logoLight;
   final String? logoDark;
@@ -65,7 +65,7 @@ class WhiteLabelData {
   final String? appUrl;
   final bool? useLogoLoader;
 
-  WhiteLabelData({
+  WhiteLabeldata({
     this.appName,
     this.logoLight,
     this.logoDark,
@@ -94,17 +94,17 @@ class WhiteLabelData {
 </TabItem>
 </Tabs>
 
-<WhiteLabelShowcase />
+<WhiteLabelshowcase />
 
 ### Example
 
 ```dart title="Usage"
 Future<void> initWeb3Auth() async {
 
-  // Focus-start
+  // focus-start
   final themeMap = HashMap<String, String>();
   themeMap['primary'] = "#229954";
-  // Focus-end
+  // focus-end
 
   Uri redirectUrl;
   if (Platform.isAndroid) {
@@ -122,8 +122,8 @@ Future<void> initWeb3Auth() async {
       clientId: "WEB3AUTH_CLIENT_ID",
       network: Network.sapphire_mainnet,
       redirectUrl: redirectUrl,
-      // Focus-start
-      whiteLabel: WhiteLabelData(
+      // focus-start
+      whiteLabel: WhiteLabeldata(
         appName: "Web3Auth Flutter App",
         logoLight:
           "https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg",
@@ -135,7 +135,7 @@ Future<void> initWeb3Auth() async {
         useLogoLoader: true,
         theme: themeMap,
       ),
-    // Focus-end
+    // focus-end
     ),
   );
 }

@@ -20,13 +20,13 @@ In Vue applications, Web3Auth is typically initialized as a plugin. The setup pr
 import { createApp } from 'vue'
 import { createWeb3AuthPlugin } from '@web3auth/modal/vue'
 import App from './App.vue'
-import Web3authConfig from './web3authConfig' // see config file below
+import web3AuthConfig from './web3authConfig' // see config file below
 
 const app = createApp(App)
 
 // Create and use the Web3Auth plugin
-const Web3authPlugin = createWeb3AuthPlugin(Web3authConfig)
-app.use(Web3authPlugin)
+const web3AuthPlugin = createWeb3AuthPlugin(web3AuthConfig)
+app.use(web3AuthPlugin)
 
 app.mount('#app')
 ```
@@ -37,14 +37,14 @@ import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 
 const clientId = 'YOUR_V10_CLIENT_ID' // Get from https://dashboard.web3auth.io
 
-const Web3authConfig: Web3AuthContextConfig = {
-  Web3authOptions: {
+const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
     clientId,
-    Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   },
 }
 
-export default Web3authConfig
+export default web3AuthConfig
 ```
 
 ### Vue composables path and walletservicesplugin updates
@@ -58,11 +58,11 @@ All composables are now streamlined under `@web3auth/modal/vue`:
 ```vue title="App.vue"
 <template>
   <div>
-    <button v-if="!IsConnected" @click="Connect">Connect Wallet</button>
+    <button v-if="!isConnected" @click="connect">connect Wallet</button>
     <div v-else>
-      <p>Connected as: {{ Userinfo?.name || 'Unknown' }}</p>
-      <button @click="DisConnect">DisConnect</button>
-      <button @click="ShowWallet">Show Wallet UI</button>
+      <p>connected as: {{ userInfo?.name || 'Unknown' }}</p>
+      <button @click="disconnect">disconnect</button>
+      <button @click="showWallet">show Wallet UI</button>
     </div>
   </div>
 </template>
@@ -70,31 +70,31 @@ All composables are now streamlined under `@web3auth/modal/vue`:
 <script setup lang="ts">
   import {
     useWeb3Auth,
-    useWeb3AuthConnect,
-    useWeb3AuthDisConnect,
-    useIdentityToken,
+    useWeb3Authconnect,
+    useWeb3AuthDisconnect,
+    useIdentitytoken,
     useWeb3AuthUser,
     useSwitchChain,
     useEnableMFA,
     useManageMFA,
-    useWalletConnectScanner, // Wallet services
+    useWalletconnectScanner, // Wallet services
     useWalletUI, // Wallet services
     useCheckout, // Wallet services
     useSwap, // Wallet services
     useWalletServicesPlugin, // Wallet services
   } from '@web3auth/modal/vue'
 
-  const { IsConnected, Isinitialized } = useWeb3Auth()
-  const { Connect } = useWeb3AuthConnect()
-  const { DisConnect } = useWeb3AuthDisConnect()
-  const { Userinfo } = useWeb3AuthUser()
-  const { ShowWalletUI } = useWalletUI()
+  const { isConnected, isInitialized } = useWeb3Auth()
+  const { connect } = useWeb3Authconnect()
+  const { disconnect } = useWeb3AuthDisconnect()
+  const { userInfo } = useWeb3AuthUser()
+  const { showWalletUI } = useWalletUI()
 
-  const ShowWallet = async () => {
+  const showWallet = async () => {
     try {
-      await ShowWalletUI()
-    } catch (Error) {
-      console.Error('Error Showing wallet UI:', Error)
+      await showWalletUI()
+    } catch (error) {
+      console.error('error showing wallet UI:', error)
     }
   }
 </script>
@@ -107,10 +107,10 @@ The new composable structure is more granular:
 - **Core Web3Auth:**
   - `useWeb3Auth`: Core composable for Web3Auth initialization and state management.
 - **Authentication:**
-  - `useWeb3AuthConnect`: Handles Web3Auth Connection processes.
-  - `useWeb3AuthDisConnect`: Manages DisConnection from Web3Auth.
+  - `useWeb3Authconnect`: Handles Web3Auth connection processes.
+  - `useWeb3AuthDisconnect`: Manages Disconnection from Web3Auth.
 - **Identity:**
-  - `useIdentityToken`: Retrieves and manages identity Tokens.
+  - `useIdentitytoken`: Retrieves and manages identity tokens.
   - `useWeb3AuthUser`: Provides access to the authenticated user's information.
 - **Blockchain:**
   - `useSwitchChain`: Allows switching between different blockchain networks.
@@ -119,10 +119,10 @@ The new composable structure is more granular:
   - `useManageMFA`: Provides functionality to manage MFA settings.
 - **Wallet services Plugin (now integrated):**
   - `useWalletServicesPlugin`: Composable to access the Wallet services Plugin context and its functions.
-  - `useWalletConnectScanner`: Integrates WalletConnect scanner functionality.
+  - `useWalletconnectScanner`: Integrates Walletconnect scanner functionality.
   - `useWalletUI`: Manages wallet UI components and user interactions.
   - `useCheckout`: Facilitates cryptocurrency checkout processes.
-  - `useSwap`: Enables Token swapping capabilities.
+  - `useSwap`: Enables token swapping capabilities.
 
 Please refer to the [Vue Modal SDK documentation](/embedded-wallets/sdk/vue/) for the SDK reference.
 
@@ -141,8 +141,8 @@ If you have existing Vue components using v9 composables, here's how to migrate 
   import { useWeb3Auth } from '@web3auth/modal-vue-composables'
   import { useWalletServicesPlugin } from '@web3auth/wallet-services-plugin-vue-composables'
 
-  const { Web3auth, IsConnected, Connect, DisConnect } = useWeb3Auth()
-  const { IspluginConnected, ShowWalletUI } = useWalletServicesPlugin()
+  const { web3Auth, isConnected, connect, disconnect } = useWeb3Auth()
+  const { isPluginConnected, showWalletUI } = useWalletServicesPlugin()
 </script>
 ```
 
@@ -152,62 +152,62 @@ If you have existing Vue components using v9 composables, here's how to migrate 
 <script setup lang="ts">
   import {
     useWeb3Auth,
-    useWeb3AuthConnect,
-    useWeb3AuthDisConnect,
+    useWeb3Authconnect,
+    useWeb3AuthDisconnect,
     useWalletUI,
   } from '@web3auth/modal/vue'
 
-  const { IsConnected } = useWeb3Auth()
-  const { Connect } = useWeb3AuthConnect()
-  const { DisConnect } = useWeb3AuthDisConnect()
-  const { ShowWalletUI } = useWalletUI()
+  const { isConnected } = useWeb3Auth()
+  const { connect } = useWeb3Authconnect()
+  const { disconnect } = useWeb3AuthDisconnect()
+  const { showWalletUI } = useWalletUI()
 </script>
 ```
 
-#### Error handling and Loading States
+#### error handling and loading States
 
-v10 composables provide better Error handling and Loading state management:
+v10 composables provide better error handling and loading state management:
 
 ```vue
 <template>
   <div>
-    <button v-if="!IsConnected" @click="handleConnect" :disabled="isConnecting">
-      {{ isConnecting ? 'Connecting...' : 'Connect Wallet' }}
+    <button v-if="!isConnected" @click="handleconnect" :disabled="isconnecting">
+      {{ isconnecting ? 'connecting...' : 'connect Wallet' }}
     </button>
     <div v-else>
-      <p>Connected!</p>
-      <button @click="handleDisConnect" :disabled="isDisConnecting">
-        {{ isDisConnecting ? 'DisConnecting...' : 'DisConnect' }}
+      <p>connected!</p>
+      <button @click="handleDisconnect" :disabled="isDisconnecting">
+        {{ isDisconnecting ? 'Disconnecting...' : 'disconnect' }}
       </button>
     </div>
 
-    <div v-if="Error" class="Error">Error: {{ Error.message }}</div>
+    <div v-if="error" class="error">error: {{ error.message }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
   import { computed } from 'vue'
-  import { useWeb3Auth, useWeb3AuthConnect, useWeb3AuthDisConnect } from '@web3auth/modal/vue'
+  import { useWeb3Auth, useWeb3Authconnect, useWeb3AuthDisconnect } from '@web3auth/modal/vue'
 
-  const { IsConnected } = useWeb3Auth()
-  const { Connect, isConnecting, Error: ConnectError } = useWeb3AuthConnect()
-  const { DisConnect, isDisConnecting, Error: DisConnectError } = useWeb3AuthDisConnect()
+  const { isConnected } = useWeb3Auth()
+  const { connect, isconnecting, error: connecterror } = useWeb3Authconnect()
+  const { disconnect, isDisconnecting, error: Disconnecterror } = useWeb3AuthDisconnect()
 
-  const Error = computed(() => ConnectError.value || DisConnectError.value)
+  const error = computed(() => connecterror.value || Disconnecterror.value)
 
-  const handleConnect = async () => {
+  const handleconnect = async () => {
     try {
-      await Connect()
+      await connect()
     } catch (err) {
-      console.Error('Connection failed:', err)
+      console.error('connection failed:', err)
     }
   }
 
-  const handleDisConnect = async () => {
+  const handleDisconnect = async () => {
     try {
-      await DisConnect()
+      await disconnect()
     } catch (err) {
-      console.Error('DisConnection failed:', err)
+      console.error('Disconnection failed:', err)
     }
   }
 </script>

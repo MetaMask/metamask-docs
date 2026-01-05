@@ -3,24 +3,24 @@ const loginWithFirebaseGithub = async () => {
   try {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const githubProvider = new GithubAuthProvider();
+    const githubprovider = new GithubAuthprovider();
 
-    const result = await signInWithPopup(auth, githubProvider);
+    const result = await signInWithPopup(auth, githubprovider);
 
-    const idToken = await result.user.getIdToken(true);
+    const idtoken = await result.user.getIdtoken(true);
 
-    // Focus-start
-    ConnectTo(WALLET_CONNECTORS.AUTH, {
-      authConnectionId: "w3a-firebase-demo",
-      authConnection: AUTH_CONNECTION.CUSTOM,
-      idToken,
+    // focus-start
+    connectTo(WALLET_CONNECTORS.AUTH, {
+      authconnectionId: "w3a-firebase-demo",
+      authconnection: AUTH_CONNECTION.CUSTOM,
+      idtoken,
       extraLoginOptions: {
         isUserIdCaseSensitive: false,
       },
     });
-    // Focus-end
-  } catch (Error) {
-    console.Error("Firebase authentication Error:", Error);
+    // focus-end
+  } catch (error) {
+    console.error("Firebase authentication error:", error);
   }
 };
 ```

@@ -1,13 +1,13 @@
 You need to install the `wagmi` & `@tanstack/vue-query` packages and use the **Web3Auth
-implementation of `WagmiProvider`** for configuration.
+implementation of `Wagmiprovider`** for configuration.
 
 :::info
 
-The Web3Auth implementation of `WagmiProvider` is a custom implementation that is used to integrate
-with the Web3Auth Modal SDK. It is a wrapper around the `WagmiProvider` that makes it compatible.
+The Web3Auth implementation of `Wagmiprovider` is a custom implementation that is used to integrate
+with the Web3Auth Modal SDK. It is a wrapper around the `Wagmiprovider` that makes it compatible.
 
-With this implementation, you can use the Wagmi composables, however **no external Connectors are
-supported**. Web3Auth provides a whole suite of Connectors which you can use directly for a better
+With this implementation, you can use the Wagmi composables, however **no external connectors are
+supported**. Web3Auth provides a whole suite of connectors which you can use directly for a better
 experience with external wallets.
 
 :::
@@ -19,36 +19,36 @@ npm install wagmi @tanstack/vue-query
 Update your `main.ts` to use the Vue Query plugin **only if you are using Wagmi**:
 
 ```ts title="main.ts"
-// Focus-next-line
+// focus-next-line
 import { VueQueryPlugin } from "@tanstack/vue-query";
 import { createApp } from "vue";
 import App from "./App.vue";
 import "./style.css";
 
-// Focus-next-line
+// focus-next-line
 createApp(App).use(VueQueryPlugin).mount("#app");
 ```
 
-Then, in your `App.vue`, wrap your app with both Providers:
+Then, in your `App.vue`, wrap your app with both providers:
 
 ```html title="App.vue"
 <script setup lang="ts">
   import Home from "./Home.vue";
-  import { Web3AuthProvider } from "@web3auth/modal/vue";
-  // Focus-next-line
-  import { WagmiProvider } from "@web3auth/modal/vue/wagmi";
-  import Web3authContextConfig from "./web3authContext";
+  import { Web3Authprovider } from "@web3auth/modal/vue";
+  // focus-next-line
+  import { Wagmiprovider } from "@web3auth/modal/vue/wagmi";
+  import web3AuthContextConfig from "./web3authContext";
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col">
-    <Web3AuthProvider :config="Web3authContextConfig">
-      <!-- Focus-start -->
-      <WagmiProvider>
+    <Web3Authprovider :config="web3AuthContextConfig">
+      <!-- focus-start -->
+      <Wagmiprovider>
         <Home />
-      </WagmiProvider>
-      <!-- Focus-end -->
-    </Web3AuthProvider>
+      </Wagmiprovider>
+      <!-- focus-end -->
+    </Web3Authprovider>
   </div>
 </template>
 ```
@@ -74,18 +74,18 @@ can use any Wagmi composable as you would in a standard Wagmi application.
   import { computed } from "vue";
 
   const { address } = useAccount();
-  const { Data, isLoading, Error } = useBalance(computed(() => ({ address: address.value })));
+  const { data, isloading, error } = useBalance(computed(() => ({ address: address.value })));
 </script>
 
 <template>
   <div>
     <h2>Balance</h2>
     <div>
-      <span v-if="Data && Data.value !== undefined">
-        {{ formatUnits(Data.value, Data.decimals) }} {{ Data.symbol }}
+      <span v-if="data && data.value !== undefined">
+        {{ formatUnits(data.value, data.decimals) }} {{ data.symbol }}
       </span>
-      <span v-if="isLoading">Loading...</span>
-      <span v-if="Error">Error: {{ Error.message }}</span>
+      <span v-if="isloading">loading...</span>
+      <span v-if="error">error: {{ error.message }}</span>
     </div>
   </div>
 </template>
@@ -101,7 +101,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
 
   const address = ref("");
   const value = ref("");
-  const { Data: hash, Error, isPending, sendTransaction } = useSendTransaction();
+  const { data: hash, error, isPending, sendTransaction } = useSendTransaction();
 
   function submit() {
     sendTransaction({
@@ -110,7 +110,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
     });
   }
 
-  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+  const { isloading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
     hash,
   });
 </script>
@@ -135,7 +135,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
     <div v-if="hash">Transaction Hash: {{ hash }}</div>
     <div v-if="isConfirming">Waiting for confirmation...</div>
     <div v-if="isConfirmed">Transaction confirmed.</div>
-    <div v-if="Error">Error: {{ Error.shortMessage || Error.message }}</div>
+    <div v-if="error">error: {{ error.shortMessage || error.message }}</div>
   </div>
 </template>
 ```
@@ -147,26 +147,26 @@ can use any Wagmi composable as you would in a standard Wagmi application.
   import { useChainId, useSwitchChain } from "wagmi";
 
   const chainId = useChainId();
-  const { chains, Switchchain, Error } = useSwitchChain();
+  const { chains, switchChain, error } = useSwitchChain();
 </script>
 
 <template>
   <div>
     <h2>Switch Chain</h2>
-    <h3>Connected to {{ chainId }}</h3>
+    <h3>connected to {{ chainId }}</h3>
     <div>
       <button
         v-for="chain in chains"
         :key="chain.id"
         :disabled="chainId === chain.id"
-        @click="Switchchain({ chainId: chain.id })"
+        @click="switchChain({ chainId: chain.id })"
         type="button"
         class="card"
       >
         {{ chain.name }}
       </button>
     </div>
-    <div v-if="Error">{{ Error.message }}</div>
+    <div v-if="error">{{ error.message }}</div>
   </div>
 </template>
 ```

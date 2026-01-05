@@ -1,22 +1,22 @@
 ---
 title: Retrieve User Information
-sidebar_label: Getuserinfo
-description: 'Web3Auth Android SDK - Getuserinfo Function | Embedded Wallets'
+sidebar_label: getUserInfo
+description: 'Web3Auth Android SDK - getUserInfo Function | Embedded Wallets'
 ---
 
-You can use the `Getuserinfo` method to retrieve various details about the user, such as their login type, whether multi-factor authentication (MFA) is enabled, profile image, name, and other relevant information.
+You can use the `getUserInfo` method to retrieve various details about the user, such as their login type, whether multi-factor authentication (MFA) is enabled, profile image, name, and other relevant information.
 
 ## Usage
 
 ```kotlin
-val Userinfo = Web3auth.Getuserinfo()
+val userInfo = web3Auth.getUserInfo()
 ```
 
-## Userinfo response
+## userInfo response
 
 ```json
 {
-  "Userinfo": {
+  "userInfo": {
     "email": "w3a-heroes@web3auth.com",
     "name": "Web3Auth Heroes",
     "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
@@ -25,9 +25,9 @@ val Userinfo = Web3auth.Getuserinfo()
     "typeOfLogin": "google",
     "aggregateVerifier": "w3a-google-sapphire",
     "dappShare": "", // 24 words of seed phrase will be sent only incase of custom verifiers
-    "idToken": "<jwtToken issued by Web3Auth>",
-    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "idtoken": "<jwttoken issued by Web3Auth>",
+    "oAuthIdtoken": "<jwttoken issued by OAuth provider>", // will be sent only incase of custom verifiers
+    "oAuthAccesstoken": "<accesstoken issued by OAuth provider>", // will be sent only incase of custom verifiers
     "isMfaEnabled": false // Returns whether the user has enabled MFA or not
   }
 }

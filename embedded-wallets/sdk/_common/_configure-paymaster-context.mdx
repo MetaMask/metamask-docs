@@ -1,6 +1,6 @@
-You can send additional metaData in the paymaster context to supply whatever information the
+You can send additional metadata in the paymaster context to supply whatever information the
 Paymaster needs to process user operations. For instance, you might include the type of Paymaster
-(e.g., a Sponsored paymaster versus an ERC-20-based Paymaster), references to specific Tokens used
+(e.g., a Sponsored paymaster versus an ERC-20-based Paymaster), references to specific tokens used
 for gas sponsorship, custom gas policies or limits, and any other parameters relevant to your
 sponsorship logic.
 
@@ -9,9 +9,9 @@ To configure the paymaster context, you can use the `paymasterContext` property 
 
 ```ts
 import {
-  AccountAbstractionProvider,
+  AccountAbstractionprovider,
   SafeSmartAccount,
-} from "@web3auth/account-abstraction-Provider";
+} from "@web3auth/account-abstraction-provider";
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -24,21 +24,21 @@ const chainConfig = {
   logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
 };
 
-const accountAbstractionProvider = new AccountAbstractionProvider({
+const accountAbstractionprovider = new AccountAbstractionprovider({
   config: {
     chainConfig,
     bundlerConfig: {
       // Get the pimlico API Key from dashboard.pimlico.io
       url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
-      // Focus-start
+      // focus-start
       // This is just an example of how you can configure the paymaster context.
       // Please refer to the documentation of the paymaster you are using
       // to understand the required parameters.
       paymasterContext: {
-        Token: "SUPPORTED_TOKEN_CONTRACT_ADDRESS",
+        token: "SUPPORTED_TOKEN_CONTRACT_ADDRESS",
         sponsorshipPolicyId: "sp_my_policy_id",
       },
-      // Focus-end
+      // focus-end
     },
     smartAccountInit: new SafeSmartAccount(),
     paymasterConfig: {

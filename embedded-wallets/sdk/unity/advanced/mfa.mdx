@@ -57,13 +57,13 @@ public enum MFALevel
 ```cs title="Usage"
 public void login()
 {
-    var selectedProvider = Provider.GOOGLE;
+    var selectedprovider = provider.GOOGLE;
     var options = new LoginParams()
     {
-        loginProvider = selectedProvider,
+        loginprovider = selectedprovider,
 		mfaLevel = MFALevel.MANDATORY
     };
-    Web3auth.login(options);
+    web3Auth.login(options);
 }
 ```
 
@@ -126,13 +126,13 @@ using Newtonsoft.Json;
 
 public class Web3custom : MonoBehaviour
 {
-  Web3Auth Web3auth;
+  Web3Auth web3Auth;
 
   // Start is called before the first frame update
   void Start()
   {
-    Web3auth = GetComponent<Web3Auth>();
-    Web3auth.setOptions(new Web3AuthOptions()
+    web3Auth = GetComponent<Web3Auth>();
+    web3Auth.setOptions(new Web3AuthOptions()
     {
       redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
       clientId = "BAwFgL-r7wzQKmtcdiz2uHJKNZdK7gzEf2q-m55xfzSZOw8jLOyIi4AVvvzaEQO5nv2dFLEmf9LBkF8kaq3aErg",
@@ -146,8 +146,8 @@ public class Web3custom : MonoBehaviour
         new MfaSetting(true, 1, true)
       )
     });
-    Web3auth.onLogin += onLogin;
-    Web3auth.onLogout += onLogout;
+    web3Auth.onLogin += onLogin;
+    web3Auth.onLogout += onLogout;
   }
   public void login() {}
   private void onLogin(Web3AuthResponse response) {}

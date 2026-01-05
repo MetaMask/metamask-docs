@@ -6,7 +6,7 @@ description: 'Web3Auth PnP Unity SDK - Whitelabel | Embedded Wallets'
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import WhiteLabelShowcase from '../../_common/_whitelabel_Showcase.mdx'
+import WhiteLabelshowcase from '../../_common/_whitelabel_showcase.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
@@ -22,9 +22,9 @@ Web3Auth allows complete whitelabeling with application branding for a consisten
 
 ## Customizing the Web3Auth login screens
 
-For defining custom UI, branding, and translations for your branded app, you just need to add an additional parameter within the `Web3AuthOptions` class called `whiteLabel`. This parameter takes another object called `WhiteLabelData`.
+For defining custom UI, branding, and translations for your branded app, you just need to add an additional parameter within the `Web3AuthOptions` class called `whiteLabel`. This parameter takes another object called `WhiteLabeldata`.
 
-### `WhiteLabelData`
+### `WhiteLabeldata`
 
 <Tabs
   defaultValue="table"
@@ -52,7 +52,7 @@ For defining custom UI, branding, and translations for your branded app, you jus
 <TabItem value="interface">
 
 ```cs
-public class WhiteLabelData {
+public class WhiteLabeldata {
   public string? appName { get; set; }
   public string? logoLight { get; set; }
   public string? logoDark { get; set; }
@@ -67,21 +67,21 @@ public class WhiteLabelData {
 </TabItem>
 </Tabs>
 
-<WhiteLabelShowcase />
+<WhiteLabelshowcase />
 
 ### Example
 
 ```cs
 void Start()
 {
-  Web3auth = GetComponent<Web3Auth>();
-  Web3auth.setOptions(new Web3AuthOptions()
+  web3Auth = GetComponent<Web3Auth>();
+  web3Auth.setOptions(new Web3AuthOptions()
   {
     redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
     clientId = "BAwFgL-r7wzQKmtcdiz2uHJKNZdK7gzEf2q-m55xfzSZOw8jLOyIi4AVvvzaEQO5nv2dFLEmf9LBkF8kaq3aErg",
     network = Web3Auth.Network.TESTNET,
-    // Focus-start
-    whiteLabel = new WhiteLabelData() {
+    // focus-start
+    whiteLabel = new WhiteLabeldata() {
       appName = "Web3Auth Sample App",
       logoLight = null,
       logoDark = null,
@@ -94,7 +94,7 @@ void Start()
         }
       }
     }
-    // Focus-end
+    // focus-end
 
   });
 }

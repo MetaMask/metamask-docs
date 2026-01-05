@@ -4,15 +4,15 @@ import Tabs from "@theme/Tabs";
 When using an ERC-20 paymaster, ensure you include the approval transaction, as Web3Auth does not
 handle the approval internally.
 
-For Pimlico, you can specify the Token you want to use in the paymasterContext. If you want to set
+For Pimlico, you can specify the token you want to use in the paymasterContext. If you want to set
 up sponsorship policies, you can define those in the paymasterContext as well.
-[Checkout the supported Tokens for ERC-20 paymaster on Pimlico](https://docs.pimlico.io/infra/paymaster/erc20-paymaster/supported-Tokens).
+[Checkout the supported tokens for ERC-20 paymaster on Pimlico](https://docs.pimlico.io/infra/paymaster/erc20-paymaster/supported-tokens).
 
 ```ts
 import {
-  AccountAbstractionProvider,
+  AccountAbstractionprovider,
   SafeSmartAccount,
-} from "@web3auth/account-abstraction-Provider";
+} from "@web3auth/account-abstraction-provider";
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -25,25 +25,25 @@ const chainConfig = {
   logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
 };
 
-const accountAbstractionProvider = new AccountAbstractionProvider({
+const accountAbstractionprovider = new AccountAbstractionprovider({
   config: {
     chainConfig,
     bundlerConfig: {
       // Get the pimlico API Key from dashboard.pimlico.io
       url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
-      // Focus-start
+      // focus-start
       paymasterContext: {
-        Token: "SUPPORTED_TOKEN_CONTRACT_ADDRESS",
+        token: "SUPPORTED_TOKEN_CONTRACT_ADDRESS",
       },
-      // Focus-end
+      // focus-end
     },
     smartAccountInit: new SafeSmartAccount(),
-    // Focus-start
+    // focus-start
     paymasterConfig: {
       // Get the pimlico API Key from dashboard.pimlico.io
       url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
     },
-    // Focus-end
+    // focus-end
   },
 });
 ```

@@ -18,14 +18,14 @@ import { useSwap } from '@web3auth/modal/react'
 import { useSwap } from '@web3auth/modal/react'
 
 function SwapButton() {
-  const { ShowSwap, Loading, Error } = useSwap()
+  const { showSwap, loading, error } = useSwap()
 
   return (
     <div>
-      <button onClick={() => ShowSwap()} disabled={Loading}>
-        {Loading ? 'Opening Swap...' : 'Open Swap'}
+      <button onClick={() => showSwap()} disabled={loading}>
+        {loading ? 'Opening Swap...' : 'Open Swap'}
       </button>
-      {Error && <div>Error: {Error.message}</div>}
+      {error && <div>error: {error.message}</div>}
     </div>
   )
 }
@@ -37,20 +37,20 @@ function SwapButton() {
 import { type IUseSwap } from '@web3auth/modal/react'
 ```
 
-#### Loading
+#### loading
 
 `boolean`
 
 Whether the swap interface is being opened.
 
-#### Error
+#### error
 
-`Web3AuthError | null`
+`Web3Autherror | null`
 
-Error that occurred while opening the swap interface.
+error that occurred while opening the swap interface.
 
-#### ShowSwap
+#### showSwap
 
-`(ShowSwapParams?: BaseEmbedControllerState["ShowSwap"]) => Promise<void>`
+`(showSwapParams?: BaseEmbedControllerState["showSwap"]) => Promise<void>`
 
 Function to open the swap interface. Accepts optional parameters for customizing the swap view.

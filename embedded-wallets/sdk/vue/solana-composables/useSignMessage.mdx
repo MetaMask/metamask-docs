@@ -4,7 +4,7 @@ sidebar_label: useSignMessage
 description: '@web3auth/modal Vue Composable useSignMessage | Embedded Wallets'
 ---
 
-Composable to sign a message using the Connected Solana wallet from Web3Auth in Vue.
+Composable to sign a message using the connected Solana wallet from Web3Auth in Vue.
 
 ### Import
 
@@ -20,14 +20,14 @@ import { useSignMessage } from '@web3auth/modal/vue/solana'
   import { useSignMessage } from '@web3auth/modal/vue/solana'
 
   const message = ref('')
-  const { Signmessage, Loading, Error, Data } = useSignMessage()
+  const { signMessage, loading, error, data } = useSignMessage()
 
   const handleSign = async () => {
     try {
-      await Signmessage(message.value)
-      // Do something with Data.value
+      await signMessage(message.value)
+      // Do something with data.value
     } catch (e) {
-      // Handle Error
+      // Handle error
     }
   }
 </script>
@@ -35,11 +35,11 @@ import { useSignMessage } from '@web3auth/modal/vue/solana'
 <template>
   <div>
     <input v-model="message" placeholder="Message" />
-    <button @click="handleSign" :disabled="Loading">
-      {{ Loading ? "Signing..." : "Sign message" }}
+    <button @click="handleSign" :disabled="loading">
+      {{ loading ? "Signing..." : "Sign message" }}
     </button>
-    <div v-if="Error">Error: {{ Error.message }}</div>
-    <div v-if="Data">Signature: {{ Data }}</div>
+    <div v-if="error">error: {{ error.message }}</div>
+    <div v-if="data">Signature: {{ data }}</div>
   </div>
 </template>
 ```
@@ -48,32 +48,32 @@ import { useSignMessage } from '@web3auth/modal/vue/solana'
 
 ```ts
 export type IUseSignMessage = {
-  Loading: boolean
-  Error: Web3AuthError | null
-  Data: string | null
-  Signmessage: (message: string) => Promise<string>
+  loading: boolean
+  error: Web3Autherror | null
+  data: string | null
+  signMessage: (message: string) => Promise<string>
 }
 ```
 
-#### Loading
+#### loading
 
 `boolean`
 
 Indicates if the message signing is in progress.
 
-#### Error
+#### error
 
-`Web3AuthError | null`
+`Web3Autherror | null`
 
-Error object if signing fails, otherwise null.
+error object if signing fails, otherwise null.
 
-#### Data
+#### data
 
 `string | null`
 
 The signature as a string, or null if not signed yet.
 
-#### Signmessage
+#### signMessage
 
 `(message: string) => Promise<string>`
 
@@ -85,13 +85,13 @@ Function to sign a message. Returns the signature as a string.
 <script setup lang="ts">
   import { useSignMessage } from '@web3auth/modal/vue/solana'
 
-  const { Data: hash, Error, Loading: isPending, Signmessage } = useSignMessage()
+  const { data: hash, error, loading: isPending, signMessage } = useSignMessage()
 
   function submit(event: Event) {
     event.preventDefault()
-    const formData = new FormData(event.target as HTMLFormElement)
-    const message = formData.get('message')
-    Signmessage(message!.toString())
+    const formdata = new Formdata(event.target as HTMLFormElement)
+    const message = formdata.get('message')
+    signMessage(message!.toString())
   }
 </script>
 
@@ -103,7 +103,7 @@ Function to sign a message. Returns the signature as a string.
       <button :disabled="isPending" type="submit">{{ isPending ? "Signing..." : "Sign" }}</button>
     </form>
     <div v-if="hash" class="hash">Message Hash: {{ hash }}</div>
-    <div v-if="Error" class="Error">Error: {{ Error.message }}</div>
+    <div v-if="error" class="error">error: {{ error.message }}</div>
   </div>
 </template>
 ```

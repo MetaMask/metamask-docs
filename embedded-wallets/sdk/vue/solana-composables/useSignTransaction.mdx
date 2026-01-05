@@ -7,7 +7,7 @@ description: '@web3auth/modal Vue Composable useSignTransaction | Embedded Walle
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-Composable to sign a Solana transaction using the Connected wallet from Web3Auth.
+Composable to sign a Solana transaction using the connected wallet from Web3Auth.
 
 ### Import
 
@@ -24,26 +24,26 @@ import { useSignTransaction } from '@web3auth/modal/vue/solana'
   import { Transaction } from '@solana/web3.js'
 
   const transaction = ref<Transaction | null>(null) // Your transaction object
-  const { Signtransaction, Loading, Error, Data } = useSignTransaction()
+  const { signTransaction, loading, error, data } = useSignTransaction()
 
   const handleSign = async () => {
     if (!transaction.value) return
     try {
-      await Signtransaction(transaction.value)
-      // Do something with Data.value (signed transaction)
+      await signTransaction(transaction.value)
+      // Do something with data.value (signed transaction)
     } catch (e) {
-      // Handle Error
+      // Handle error
     }
   }
 </script>
 
 <template>
   <div>
-    <button @click="handleSign" :disabled="Loading">
-      {{ Loading ? "Signing..." : "Sign transaction" }}
+    <button @click="handleSign" :disabled="loading">
+      {{ loading ? "Signing..." : "Sign transaction" }}
     </button>
-    <div v-if="Error">Error: {{ Error.message }}</div>
-    <div v-if="Data">Signed Transaction: {{ Data }}</div>
+    <div v-if="error">error: {{ error.message }}</div>
+    <div v-if="data">Signed Transaction: {{ data }}</div>
   </div>
 </template>
 ```
@@ -52,32 +52,32 @@ import { useSignTransaction } from '@web3auth/modal/vue/solana'
 
 ```ts
 export type IUseSignTransaction = {
-  Loading: Ref<boolean>
-  Error: Ref<Web3AuthError | null>
-  Data: Ref<string | null>
-  Signtransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+  loading: Ref<boolean>
+  error: Ref<Web3Autherror | null>
+  data: Ref<string | null>
+  signTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
 }
 ```
 
-#### Loading
+#### loading
 
 `Ref<boolean>`
 
 Indicates if the transaction signing is in progress.
 
-#### Error
+#### error
 
-`Ref<Web3AuthError | null>`
+`Ref<Web3Autherror | null>`
 
-Error object if signing fails, otherwise null.
+error object if signing fails, otherwise null.
 
-#### Data
+#### data
 
 `Ref<string | null>`
 
 The signed transaction as a string, or null if not signed yet.
 
-#### Signtransaction
+#### signTransaction
 
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
@@ -91,24 +91,24 @@ Function to sign a Solana transaction. Returns the signed transaction as a strin
   import { useSolanaWallet, useSignTransaction } from '@web3auth/modal/vue/solana'
 
   const {
-    Data: signedTransaction,
-    Error,
-    Loading: isPending,
-    Signtransaction,
+    data: signedTransaction,
+    error,
+    loading: isPending,
+    signTransaction,
   } = useSignTransaction()
-  const { Accounts, Connection } = useSolanaWallet()
+  const { accounts, connection } = useSolanaWallet()
 
   async function submit(event: Event) {
     event.preventDefault()
-    const formData = new FormData(event.target as HTMLFormElement)
-    const to = formData.get('address') as string
-    const value = formData.get('value') as string
+    const formdata = new Formdata(event.target as HTMLFormElement)
+    const to = formdata.get('address') as string
+    const value = formdata.get('value') as string
 
-    if (!Connection.value || !Accounts.value || Accounts.value.length === 0) return
+    if (!connection.value || !accounts.value || accounts.value.length === 0) return
 
-    const block = await Connection.value.getLatestBlockhash()
+    const block = await connection.value.getLatestBlockhash()
     const TransactionInstruction = SystemProgram.transfer({
-      fromPubkey: new PublicKey(Accounts.value[0]),
+      fromPubkey: new PublicKey(accounts.value[0]),
       toPubkey: new PublicKey(to),
       lamports: Number(value) * LAMPORTS_PER_SOL,
     })
@@ -116,10 +116,10 @@ Function to sign a Solana transaction. Returns the signed transaction as a strin
     const transaction = new Transaction({
       blockhash: block.blockhash,
       lastValidBlockHeight: block.lastValidBlockHeight,
-      feePayer: new PublicKey(Accounts.value[0]),
+      feePayer: new PublicKey(accounts.value[0]),
     }).add(TransactionInstruction)
 
-    Signtransaction(transaction)
+    signTransaction(transaction)
   }
 </script>
 
@@ -133,7 +133,7 @@ Function to sign a Solana transaction. Returns the signed transaction as a strin
         <button type="submit" :disabled="isPending">{{ isPending ? "Signing..." : "Sign" }}</button>
       </form>
       <div v-if="signedTransaction">Signed Transaction: {{ signedTransaction }}</div>
-      <div v-if="Error">Error: {{ Error.message }}</div>
+      <div v-if="error">error: {{ error.message }}</div>
     </div>
   </div>
 </template>

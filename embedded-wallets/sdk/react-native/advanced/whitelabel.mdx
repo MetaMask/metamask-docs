@@ -6,7 +6,7 @@ description: 'Web3Auth PnP React Native SDK - Whitelabel | Embedded Wallets'
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import WhiteLabelShowcase from '../../_common/_whitelabel_Showcase.mdx'
+import WhiteLabelshowcase from '../../_common/_whitelabel_showcase.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
 import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
@@ -23,9 +23,9 @@ Web3Auth allows complete whitelabeling with application branding for a consisten
 
 ## Customizing the Web3Auth login screens
 
-For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `WhiteLabelData`.
+For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `WhiteLabeldata`.
 
-### `WhiteLabelData`
+### `WhiteLabeldata`
 
 <Tabs
   defaultValue="table"
@@ -55,7 +55,7 @@ For defining custom UI, branding, and translations for your brand app, you just 
 <TabItem value="interface">
 
 ```tsx
-export type WhiteLabelData = {
+export type WhiteLabeldata = {
   /**
    * App name to display in the UI
    */
@@ -110,7 +110,7 @@ export type WhiteLabelData = {
     green?: string
     success?: string
     warning?: string
-    Error?: string
+    error?: string
     info?: string
     white?: string
   }
@@ -138,7 +138,7 @@ export type WhiteLabelData = {
 </TabItem>
 </Tabs>
 
-<WhiteLabelShowcase />
+<WhiteLabelshowcase />
 
 ### Example
 
@@ -162,7 +162,7 @@ const clientId = 'YOUR WEB3AUTH CLIENT ID'
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   clientId,
   network: WEB3AUTH_NETWORK.TESTNET, // or other networks
-  // Focus-start
+  // focus-start
   whiteLabel: {
     appName: 'My App',
     logoLight: 'https://web3auth.io/img/logo-light.png',
@@ -173,7 +173,7 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
       primary: '#cddc39',
     },
   },
-  // Focus-end
+  // focus-end
 })
 ```
 
@@ -191,7 +191,7 @@ const clientId = 'YOUR WEB3AUTH CLIENT ID'
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   clientId,
   network: WEB3AUTH_NETWORK.TESTNET, // or other networks
-  // Focus-start
+  // focus-start
   whiteLabel: {
     appName: 'My App',
     logoLight: 'https://web3auth.io/img/logo-light.png',
@@ -202,7 +202,7 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
       primary: '#cddc39',
     },
   },
-  // Focus-end
+  // focus-end
 })
 ```
 

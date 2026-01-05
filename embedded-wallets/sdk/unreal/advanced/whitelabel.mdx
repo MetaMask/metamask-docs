@@ -6,7 +6,7 @@ description: 'Web3Auth PnP Unreal Engine SDK - Whitelabel | Embedded Wallets'
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import WhiteLabelShowcase from '../../_common/_whitelabel_Showcase.mdx'
+import WhiteLabelshowcase from '../../_common/_whitelabel_showcase.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
@@ -22,9 +22,9 @@ Web3Auth allows complete whitelabeling with application branding for a consisten
 
 ## Customizing the Web3Auth login screens
 
-For defining custom UI, branding, and translations for your brand during Web3Auth instantiation, you just need to specify an additional parameter within the `Web3AuthOptions` object called `whiteLabel`. This parameter takes object called `WhiteLabelData`.
+For defining custom UI, branding, and translations for your brand during Web3Auth instantiation, you just need to specify an additional parameter within the `Web3AuthOptions` object called `whiteLabel`. This parameter takes object called `WhiteLabeldata`.
 
-### `WhiteLabelData`
+### `WhiteLabeldata`
 
 <Tabs
   defaultValue="table"
@@ -52,7 +52,7 @@ For defining custom UI, branding, and translations for your brand during Web3Aut
 
 ```cs
 USTRUCT(BlueprintType)
-struct FWhiteLabelData
+struct FWhiteLabeldata
 {
 	GENERATED_BODY()
 
@@ -80,9 +80,9 @@ struct FWhiteLabelData
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     	bool useLogoLoader;
 
-	FWhiteLabelData() {};
+	FWhiteLabeldata() {};
 
-	void operator= (const FWhiteLabelData& other) {
+	void operator= (const FWhiteLabeldata& other) {
 		appName = other.appName;
 		logoLight = other.logoLight;
 		logoDark = other.logoDark;
@@ -99,8 +99,8 @@ struct FWhiteLabelData
 </TabItem>
 </Tabs>
 
-<WhiteLabelShowcase />
+<WhiteLabelshowcase />
 
 ## Example
 
-![Unreal Whitelabel](/img/embedded-wallets/unreal/unreal-whitelable-Data.png)
+![Unreal Whitelabel](/img/embedded-wallets/unreal/unreal-whitelable-data.png)

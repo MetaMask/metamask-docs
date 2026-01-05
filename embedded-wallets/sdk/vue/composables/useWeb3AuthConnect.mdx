@@ -1,31 +1,31 @@
 ---
-title: useWeb3AuthConnect
-sidebar_label: useWeb3AuthConnect
-description: '@web3auth/modal Vue Composable useWeb3AuthConnect | Embedded Wallets'
+title: useWeb3Authconnect
+sidebar_label: useWeb3Authconnect
+description: '@web3auth/modal Vue Composable useWeb3Authconnect | Embedded Wallets'
 ---
 
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-Composable to Connect to Web3Auth in Vue.
+Composable to connect to Web3Auth in Vue.
 
 ### Import
 
 ```ts
-import { useWeb3AuthConnect } from '@web3auth/modal/vue'
+import { useWeb3Authconnect } from '@web3auth/modal/vue'
 ```
 
-### Choosing the right Connection method
-You can Connect users to Web3Auth in two main ways, depending on your application's needs:
+### Choosing the right connection method
+You can connect users to Web3Auth in two main ways, depending on your application's needs:
 
-- **Use `Connect()`** when you want to display the default Web3Auth modal. This is ideal if you want to provide users with a pre-built, user-friendly interface where they can choose from all available login options (social logins, wallets, etc.) with minimal setup.
+- **Use `connect()`** when you want to display the default Web3Auth modal. This is ideal if you want to provide users with a pre-built, user-friendly interface where they can choose from all available login options (social logins, wallets, etc.) with minimal setup.
 
-- **Use `ConnectTo(Connector, params)`** when you want to build a fully custom login experience. This method lets you bypass the Web3Auth modal and Connect directly to a specific wallet Connector (such as Google, Facebook, or a particular wallet). Choose this if you want to design your own UI for login options, or if you want to restrict users to a specific authentication method. This method also allows you to use JWT based login configurations.
+- **Use `connectTo(connector, params)`** when you want to build a fully custom login experience. This method lets you bypass the Web3Auth modal and connect directly to a specific wallet connector (such as Google, Facebook, or a particular wallet). Choose this if you want to design your own UI for login options, or if you want to restrict users to a specific authentication method. This method also allows you to use JWT based login configurations.
 
 **Summary:**
 
-- Use `Connect()` for the standard modal experience.
-- Use `ConnectTo()` for custom UIs or direct Connection to a specific login method.
+- Use `connect()` for the standard modal experience.
+- Use `connectTo()` for custom UIs or direct connection to a specific login method.
 
 ### Usage
 
@@ -41,24 +41,24 @@ You can Connect users to Web3Auth in two main ways, depending on your applicatio
 
 :::info
 
-This is the most common way to Connect to Web3Auth. It opens the Web3Auth modal UI, allowing users to select from available login options.
+This is the most common way to connect to Web3Auth. It opens the Web3Auth modal UI, allowing users to select from available login options.
 
 :::
 
 ```html
 <script setup lang="ts">
-  import { useWeb3AuthConnect } from '@web3auth/modal/vue'
+  import { useWeb3Authconnect } from '@web3auth/modal/vue'
 
-  const { Connect, Loading, IsConnected, Error } = useWeb3AuthConnect()
+  const { connect, loading, isConnected, error } = useWeb3Authconnect()
 </script>
 
 <template>
-  <button @click="Connect" :disabled="Loading || IsConnected">
-    <span v-if="Loading">Connecting...</span>
-    <span v-else-if="IsConnected">Connected</span>
-    <span v-else>Connect</span>
+  <button @click="connect" :disabled="loading || isConnected">
+    <span v-if="loading">connecting...</span>
+    <span v-else-if="isConnected">connected</span>
+    <span v-else>connect</span>
   </button>
-  <div v-if="Error">{{ Error.message }}</div>
+  <div v-if="error">{{ error.message }}</div>
 </template>
 ```
 
@@ -68,25 +68,25 @@ This is the most common way to Connect to Web3Auth. It opens the Web3Auth modal 
 
 :::info
 
-This method allows you to build your own custom Connection UI. It bypasses the Web3Auth modal UI, allowing you to create your own custom UI for login options. This can be useful if you want to hide Web3Auth from your end users.
+This method allows you to build your own custom connection UI. It bypasses the Web3Auth modal UI, allowing you to create your own custom UI for login options. This can be useful if you want to hide Web3Auth from your end users.
 
 :::
 
 ```html
 <script setup lang="ts">
-  import { useWeb3AuthConnect } from '@web3auth/modal/vue'
+  import { useWeb3Authconnect } from '@web3auth/modal/vue'
   import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
 
-  const { ConnectTo, Loading, IsConnected, Error } = useWeb3AuthConnect()
+  const { connectTo, loading, isConnected, error } = useWeb3Authconnect()
 
   const loginWithGoogle = () => {
-    ConnectTo(WALLET_CONNECTORS.AUTH, { authConnection: AUTH_CONNECTION.GOOGLE })
+    connectTo(WALLET_CONNECTORS.AUTH, { authconnection: AUTH_CONNECTION.GOOGLE })
   }
 </script>
 
 <template>
-  <button @click="loginWithGoogle" :disabled="Loading || IsConnected">Login with Google</button>
-  <div v-if="Error">{{ Error.message }}</div>
+  <button @click="loginWithGoogle" :disabled="loading || isConnected">Login with Google</button>
+  <div v-if="error">{{ error.message }}</div>
 </template>
 ```
 
@@ -97,40 +97,40 @@ This method allows you to build your own custom Connection UI. It bypasses the W
 ### Return type
 
 ```ts
-import type { IUseWeb3AuthConnect } from '@web3auth/modal/vue'
+import type { IUseWeb3Authconnect } from '@web3auth/modal/vue'
 ```
 
-#### IsConnected
+#### Isconnected
 `boolean`
 
-Whether the user is Connected to Web3Auth.
+Whether the user is connected to Web3Auth.
 
-#### Loading
+#### loading
 
 `boolean`
 
-Whether the Connection process is in progress.
+Whether the connection process is in progress.
 
-#### Error
+#### error
 
-`Web3AuthError | null`
+`Web3Autherror | null`
 
-Error that occurred during the Connection process.
+error that occurred during the connection process.
 
-#### Connectorname
+#### connectorName
 
 `WALLET_CONNECTOR_TYPE | null`
 
-Name of the Connected Connector.
+Name of the connected connector.
 
-#### Connect
+#### connect
 
-`() => Promise<IProvider | null>`
+`() => Promise<Iprovider | null>`
 
-Function to initiate the Connection process. Opens the Web3Auth modal UI.
+Function to initiate the connection process. Opens the Web3Auth modal UI.
 
-#### ConnectTo
+#### connectTo
 
-`<T extends WALLET_CONNECTOR_TYPE>(Connector: T, params?: LoginParamMap[T]) => Promise<IProvider | null>`
+`<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]) => Promise<Iprovider | null>`
 
-Function to Connect directly to a specific wallet Connector. This bypasses the Web3Auth modal UI, allowing you to build custom interfaces. This method also allows you to use JWT based login configurations.
+Function to connect directly to a specific wallet connector. This bypasses the Web3Auth modal UI, allowing you to build custom interfaces. This method also allows you to use JWT based login configurations.

@@ -1,32 +1,32 @@
 ---
-title: useIdentityToken
-sidebar_label: useIdentityToken
-description: '@web3auth/modal React Hooks useIdentityToken | Embedded Wallets'
+title: useIdentitytoken
+sidebar_label: useIdentitytoken
+description: '@web3auth/modal React Hooks useIdentitytoken | Embedded Wallets'
 ---
 
-Hook to retrieve and manage the identity Token from Web3Auth.
+Hook to retrieve and manage the identity token from Web3Auth.
 
 ### Import
 
 ```tsx
-import { useIdentityToken } from '@web3auth/modal/react'
+import { useIdentitytoken } from '@web3auth/modal/react'
 ```
 
 ### Usage
 
 ```tsx
-import { useIdentityToken } from '@web3auth/modal/react'
+import { useIdentitytoken } from '@web3auth/modal/react'
 
-function IdentityTokenButton() {
-  const { Getidentitytoken, Loading, Error, Token } = useIdentityToken()
+function IdentitytokenButton() {
+  const { getIdentityToken, loading, error, token } = useIdentitytoken()
 
   return (
     <div>
-      <button onClick={() => Getidentitytoken()} disabled={Loading}>
-        {Loading ? 'Authenticating...' : 'Get Identity Token'}
+      <button onClick={() => getIdentityToken()} disabled={loading}>
+        {loading ? 'Authenticating...' : 'Get Identity token'}
       </button>
-      {Token && <div>Token: {Token}</div>}
-      {Error && <div>Error: {Error.message}</div>}
+      {token && <div>token: {token}</div>}
+      {error && <div>error: {error.message}</div>}
     </div>
   )
 }
@@ -35,29 +35,29 @@ function IdentityTokenButton() {
 ### Return type
 
 ```tsx
-import { type IUseIdentityToken } from '@web3auth/modal/react'
+import { type IUseIdentitytoken } from '@web3auth/modal/react'
 ```
 
-#### Loading
+#### loading
 
 `boolean`
 
 Whether the authentication process is in progress.
 
-#### Error
+#### error
 
-`Web3AuthError | null`
+`Web3Autherror | null`
 
-Error that occurred during the authentication process.
+error that occurred during the authentication process.
 
-#### Token
+#### token
 
 `string | null`
 
-The identity Token returned after successful authentication.
+The identity token returned after successful authentication.
 
-#### Getidentitytoken
+#### getIdentityToken
 
 `() => Promise<string | null>`
 
-Function to initiate the authentication process and retrieve the identity Token.
+Function to initiate the authentication process and retrieve the identity token.

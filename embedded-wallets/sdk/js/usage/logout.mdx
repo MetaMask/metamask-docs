@@ -4,7 +4,7 @@ sidebar_label: logout
 description: '@web3auth/modal Usage | Embedded Wallets'
 ---
 
-Function to DisConnect from Web3Auth.
+Function to disconnect from Web3Auth.
 
 ### Usage
 
@@ -14,8 +14,8 @@ function LogoutButton() {
     try {
       await web3auth.logout()
       console.log('Logged out successfully')
-    } catch (Error) {
-      console.Error('Error logging out:', Error)
+    } catch (error) {
+      console.error('error logging out:', error)
     }
   }
 
@@ -32,7 +32,7 @@ logout(options?: { cleanup: boolean }): Promise<void>;
 #### Parameters
 
 - **options** (optional)
-- **cleanup** (`boolean`): Whether to remove all user Data during logout.
+- **cleanup** (`boolean`): Whether to remove all user data during logout.
 
 #### Return value
 

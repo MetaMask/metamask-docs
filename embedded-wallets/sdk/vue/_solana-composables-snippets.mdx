@@ -29,7 +29,7 @@ npm install @solana/web3.js
 <template>
   <div>
     <h2>Solana Wallet</h2>
-    <p>Connected: {{ Connected ? 'Yes' : 'No' }}</p>
+    <p>connected: {{ connected ? 'Yes' : 'No' }}</p>
     <p v-if="address">Address: {{ address }}</p>
   </div>
 </template>
@@ -37,7 +37,7 @@ npm install @solana/web3.js
 <script setup>
   import { useSolanaWallet } from '@web3auth/modal/vue'
 
-  const { address, Connected } = useSolanaWallet()
+  const { address, connected } = useSolanaWallet()
 </script>
 ```
 
@@ -50,22 +50,22 @@ npm install @solana/web3.js
     <button @click="handleSignMessage" :disabled="isPending">
       {{ isPending ? 'Signing...' : 'Sign message' }}
     </button>
-    <p v-if="Error">Error: {{ Error.message }}</p>
+    <p v-if="error">error: {{ error.message }}</p>
   </div>
 </template>
 
 <script setup>
   import { useSignMessage } from '@web3auth/modal/vue'
 
-  const { Signmessage, isPending, Error } = useSignMessage()
+  const { signMessage, isPending, error } = useSignMessage()
 
   const handleSignMessage = async () => {
     try {
       const message = new TextEncoder().encode('Hello Solana!')
-      const signature = await Signmessage(message)
+      const signature = await signMessage(message)
       console.log('Signature:', signature)
     } catch (err) {
-      console.Error('Error signing message:', err)
+      console.error('error signing message:', err)
     }
   }
 </script>
@@ -80,7 +80,7 @@ npm install @solana/web3.js
     <button @click="handleSignTransaction" :disabled="isPending">
       {{ isPending ? 'Signing...' : 'Sign transaction' }}
     </button>
-    <p v-if="Error">Error: {{ Error.message }}</p>
+    <p v-if="error">error: {{ error.message }}</p>
   </div>
 </template>
 
@@ -88,7 +88,7 @@ npm install @solana/web3.js
   import { useSignTransaction } from '@web3auth/modal/vue'
   import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
 
-  const { Signtransaction, isPending, Error } = useSignTransaction()
+  const { signTransaction, isPending, error } = useSignTransaction()
 
   const handleSignTransaction = async () => {
     try {
@@ -101,10 +101,10 @@ npm install @solana/web3.js
         })
       )
 
-      const signedTransaction = await Signtransaction(transaction)
+      const signedTransaction = await signTransaction(transaction)
       console.log('Signed Transaction:', signedTransaction)
     } catch (err) {
-      console.Error('Error signing transaction:', err)
+      console.error('error signing transaction:', err)
     }
   }
 </script>
@@ -119,7 +119,7 @@ npm install @solana/web3.js
     <button @click="handleSignAndSend" :disabled="isPending">
       {{ isPending ? 'Processing...' : 'Sign and Send' }}
     </button>
-    <p v-if="Error">Error: {{ Error.message }}</p>
+    <p v-if="error">error: {{ error.message }}</p>
   </div>
 </template>
 
@@ -127,7 +127,7 @@ npm install @solana/web3.js
   import { useSignAndSendTransaction } from '@web3auth/modal/vue'
   import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
 
-  const { Signandsendtransaction, isPending, Error } = useSignAndSendTransaction()
+  const { signAndSendTransaction, isPending, error } = useSignAndSendTransaction()
 
   const handleSignAndSend = async () => {
     try {
@@ -140,10 +140,10 @@ npm install @solana/web3.js
         })
       )
 
-      const signature = await Signandsendtransaction(transaction)
+      const signature = await signAndSendTransaction(transaction)
       console.log('Transaction Signature:', signature)
     } catch (err) {
-      console.Error('Error signing and sending transaction:', err)
+      console.error('error signing and sending transaction:', err)
     }
   }
 </script>

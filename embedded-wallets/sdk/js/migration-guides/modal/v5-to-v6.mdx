@@ -7,33 +7,33 @@ sidebar_label: v5 to v6
 
 ## General
 
-### `web3auth.Connected` is introduced
+### `web3auth.connected` is introduced
 
-#### Manage session using `web3auth.Connected` instead of `web3auth.Provider`
+#### Manage session using `web3auth.connected` instead of `web3auth.provider`
 
-With V6, users can manage their session using `web3auth.Connected` instead of `web3auth.Provider`.
+With V6, users can manage their session using `web3auth.connected` instead of `web3auth.provider`.
 
 ```tsx
 // With V6
-// Focus-start
-if (web3auth.Connected) {
+// focus-start
+if (web3auth.connected) {
   setLoggedIn(true)
 }
-// Focus-end
+// focus-end
 ```
 
-### `Provider` is now always available
+### `provider` is now always available
 
-In V5, we used to add a check for setting the `Provider` only if the `web3auth.Provider` was present. But now with V6 we always have a Provider available even if the user is not logged in.
+In V5, we used to add a check for setting the `provider` only if the `web3auth.provider` was present. But now with V6 we always have a provider available even if the user is not logged in.
 
 ```tsx
 // With V5
-if (web3auth.Provider) {
-  setProvider(web3auth.Provider)
+if (web3auth.provider) {
+  setprovider(web3auth.provider)
 }
 // With V6
-// Focus-next-line
-setProvider(web3auth.Provider) // before the Connect() or ConnectTo(), Provider is available.
+// focus-next-line
+setprovider(web3auth.provider) // before the connect() or connectTo(), provider is available.
 ```
 
 ### `rpcTarget` and `chainId` is now a mandatory parameter
@@ -45,11 +45,11 @@ const web3auth = new Web3Auth({
   clientId,
   chainConfig: {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
-    // Focus-start
+    // focus-start
     chainId: '0x1',
     rpcTarget: 'https://rpc.ethereum.org', // This is the public RPC we have added, please pass on your own custom endpoint while creating an app
-    // Focus-end
+    // focus-end
   },
-  Web3authNetwork: 'sapphire_mainnet',
+  web3AuthNetwork: 'sapphire_mainnet',
 })
 ```

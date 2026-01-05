@@ -1,13 +1,13 @@
 ---
 title: Enable MFA
-sidebar_label: Enablemfa
-description: 'Web3Auth iOS SDK - Enablemfa | Embedded Wallets'
+sidebar_label: enableMFA
+description: 'Web3Auth iOS SDK - enableMFA | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `Enablemfa` method is used to trigger MFA setup flow for users. The method takes `W3ALoginParams` which will used during custom verifiers. If you are using default login Providers, you don't need to pass `W3ALoginParams`. If you are using custom jwt verifiers, you need to pass the valid JWT Token in `W3ALoginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `W3ALoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `W3ALoginParams`. If you are using custom jwt verifiers, you need to pass the valid JWT token in `W3ALoginParams` as well.
 
 ## Usage
 
@@ -23,11 +23,11 @@ The `Enablemfa` method is used to trigger MFA setup flow for users. The method t
 
 ```swift
 do {
-	// Focus-next-line
-  let Ismfaenabled = try await Web3auth.Enablemfa()
+	// focus-next-line
+  let isMFAEnabled = try await web3Auth.enableMFA()
 } catch {
-  print(Error.localizedDescription)
-  // Handle Error
+  print(error.localizedDescription)
+  // Handle error
 }
 ```
 
@@ -37,16 +37,16 @@ do {
 
 ```swift
 do {
-  let Loginparams = W3ALoginParams(
-    loginProvider: .JWT,
-    extraLoginOptions: .init(id_Token: "your_jwt_Token")
+  let loginParams = W3ALoginParams(
+    loginprovider: .JWT,
+    extraLoginOptions: .init(id_token: "your_jwt_token")
    )
 
-  let Ismfaenabled = try await Web3auth.Enablemfa(Loginparams)
+  let isMFAEnabled = try await web3Auth.enableMFA(loginParams)
 
 } catch {
-  print(Error.localizedDescription)
-  // Handle Error
+  print(error.localizedDescription)
+  // Handle error
 }
 
 ```

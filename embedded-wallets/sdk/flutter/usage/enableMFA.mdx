@@ -1,13 +1,13 @@
 ---
 title: Enable MFA for a user
-sidebar_label: Enablemfa
-description: 'Web3Auth Flutter SDK - Enablemfa Function | Embedded Wallets'
+sidebar_label: enableMFA
+description: 'Web3Auth Flutter SDK - enableMFA Function | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `Enablemfa` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login Providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT Token in `Loginparams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
 
 ## Usage
 
@@ -23,8 +23,8 @@ The `Enablemfa` method is used to trigger MFA setup flow for users. The method t
 
 ```dart title="Usage"
 try {
-  // Focus-next-line
-  await Web3AuthFlutter.Enablemfa();
+  // focus-next-line
+  await Web3AuthFlutter.enableMFA();
 } on UserCancelledException {
   log("User cancelled.");
 } catch(e) {
@@ -38,15 +38,15 @@ try {
 
 ```dart title="Usage"
 try {
-    final Loginparams = LoginParams(
-        loginProvider: Provider.jwt,
-        extraLoginOptions: Extraloginoptions(
-            id_Token: "YOUR_JWT_TOKEN",
+    final loginParams = LoginParams(
+        loginprovider: provider.jwt,
+        extraLoginOptions: ExtraLoginOptions(
+            id_token: "YOUR_JWT_TOKEN",
         ),
     );
 
-    // Focus-next-line
-    await Web3AuthFlutter.Enablemfa(Loginparams);
+    // focus-next-line
+    await Web3AuthFlutter.enableMFA(loginParams);
 } on UserCancelledException {
   log("User cancelled.");
 } catch(e) {

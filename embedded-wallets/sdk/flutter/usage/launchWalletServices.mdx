@@ -7,7 +7,7 @@ description: 'Web3Auth Flutter SDK - launchWalletServices Function | Embedded Wa
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `launchWalletServices` method launches the templated wallet UI in WebView. The template wallet allows the user to view their account details, Tokens, and additional features to interact with Connected blockchain network.
+The `launchWalletServices` method launches the templated wallet UI in WebView. The template wallet allows the user to view their account details, tokens, and additional features to interact with connected blockchain network.
 
 ## Parameters
 
@@ -72,14 +72,14 @@ class ChainConfig {
 
 ```dart title="Usage"
 try {
-  // Focus-start
+  // focus-start
   await Web3AuthFlutter.launchWalletServices(
     ChainConfig(
       chainId: "0x1",
       rpcTarget: "https://mainnet.infura.io/v3/$key",
     ),
   );
-  // Focus-end
+  // focus-end
 } on UserCancelledException {
   log("User cancelled.");
 } catch(e) {

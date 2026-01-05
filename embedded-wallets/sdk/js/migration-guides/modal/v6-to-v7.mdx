@@ -7,22 +7,22 @@ sidebar_label: v6 to v7
 
 ## General
 
-### `web3auth.Connect()` now returns a Provider of type `IProvider`
+### `web3auth.connect()` now returns a provider of type `Iprovider`
 
-#### The new Provider object now works with the latest version of `web3.js`.
+#### The new provider object now works with the latest version of `web3.js`.
 
-With V7, the `Connect()` method now returns a Provider of type `IProvider` which is a hard-coded Provider, ensuring compatibility with the latest version of web3.js. Previously, we had been using a proxy Provider i.e. `SafeEventEmitterProvider` which gave Errors with the breaking changes that came with web3.js v4. Remember, you can import the type `IProvider` from the `@web3auth/base` package.
+With V7, the `connect()` method now returns a provider of type `Iprovider` which is a hard-coded provider, ensuring compatibility with the latest version of web3.js. Previously, we had been using a proxy provider i.e. `SafeEventEmitterprovider` which gave errors with the breaking changes that came with web3.js v4. Remember, you can import the type `Iprovider` from the `@web3auth/base` package.
 
 ```tsx
 // With V7
-// Focus-start
-Connect(): Promise<IProvider | null>;
-// Focus-end
+// focus-start
+connect(): Promise<Iprovider | null>;
+// focus-end
 ```
 
 ### `appLogo` is replaced by `logoLight` and `logoDark`
 
-#### `uiConfig` is in line with the `whitelabel` object in `Openloginadapter`.
+#### `uiConfig` is in line with the `whitelabel` object in `OpenLoginAdapter`.
 
 With v7, the `uiConfig` object now accepts `logoLight` and `logoDark` instead of `appLogo`. This is done to bring consistency to the naming convention.
 
@@ -42,21 +42,21 @@ const web3auth = new Web3Auth({
       primary: 'red',
     },
     mode: 'dark',
-    // Focus-start
+    // focus-start
     logoLight: 'https://web3auth.io/images/web3auth-logo.svg',
     logoDark: 'https://web3auth.io/images/web3auth-logo---Dark.svg',
-    // Focus-end
+    // focus-end
     defaultLanguage: 'en', // en, de, ja, ko, zh, es, fr, pt, nl
     loginGridCol: 3,
     primaryButton: 'externalLogin', // "externalLogin" | "socialLogin" | "emailLogin"
   },
-  Web3authNetwork: 'sapphire_mainnet',
+  web3AuthNetwork: 'sapphire_mainnet',
 })
 ```
 
-## Openloginadapter
+## OpenLoginAdapter
 
-### Change in the naming of some whitelabel parameters for `Openloginadapter`
+### Change in the naming of some whitelabel parameters for `OpenLoginAdapter`
 
 #### `name` and `url` are now `appName` and `appUrl`, respectively.
 
@@ -70,14 +70,14 @@ In `adapterSettings`, the `whitelabel` object now accepts `appName` and `appUrl`
 const openloginAdapter = new OpenloginAdapter({
   adapterSettings: {
     whiteLabel: {
-      // Focus-start
+      // focus-start
       appName: 'W3A Heroes',
       appUrl: 'https://web3auth.io',
-      // Focus-end
+      // focus-end
       logoLight: 'https://web3auth.io/images/web3auth-logo.svg',
       logoDark: 'https://web3auth.io/images/web3auth-logo---Dark.svg',
       defaultLanguage: 'en', // en, de, ja, ko, zh, es, fr, pt, nl
-      // Focus-next-line
+      // focus-next-line
       mode: 'auto', // whether to enable dark mode. defaultValue: false
       theme: {
         primary: '#768729',
@@ -85,66 +85,66 @@ const openloginAdapter = new OpenloginAdapter({
       useLogoLoader: true,
     },
   },
-  privateKeyProvider,
+  privateKeyprovider,
 })
 ```
 
 ## Other changes
 
-### Extra parameters for `solana-Provider` and `xrpl-Provider`
+### Extra parameters for `solana-provider` and `xrpl-provider`
 
 #### For Solana
 
-For Solana, SolanaWallet in package "@web3auth/solana-Provider", the request typings require both input and output now use `string[]` when input placeholder is needed
+For Solana, SolanaWallet in package "@web3auth/solana-provider", the request typings require both input and output now use `string[]` when input placeholder is needed
 
 ```tsx
 // With V7
-const ConnectionConfig = await Solanawallet.request<string[], CustomChainConfig>({
-  method: 'solana_Provider_config',
+const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>({
+  method: 'solana_provider_config',
   params: [],
 })
-const conn = new Connection(ConnectionConfig.rpcTarget)
+const conn = new connection(connectionConfig.rpcTarget)
 ```
 
 #### For XRPL
 
-For XRPL, after the change of "@web3auth/xrpl-Provider" version to v7, the request typings require both input and output now so use `never` when input or output placeholder is needed
+For XRPL, after the change of "@web3auth/xrpl-provider" version to v7, the request typings require both input and output now so use `never` when input or output placeholder is needed
 
 ```tsx
 // With V7
-const txSign = await this.Provider.request<{ signature: string }, never>({
-  method: 'xrpl_Signmessage',
+const txSign = await this.provider.request<{ signature: string }, never>({
+  method: 'xrpl_signMessage',
   params: {
     signature: hexMsg,
   },
 })
 
-const Accounts = await this.Provider.request<never, string[]>({
-  method: 'xrpl_getAccounts',
+const accounts = await this.provider.request<never, string[]>({
+  method: 'xrpl_getaccounts',
 })
 ```
 
-### `wallet-Connect-v2-adapter` requires different parameters
+### `wallet-connect-v2-adapter` requires different parameters
 
-#### With the deprecation of `@wallet-Connect/qr-code-modal`, `wallet-Connect-v2-adapter` now requires `@walletConnect/modal`.
+#### With the deprecation of `@wallet-connect/qr-code-modal`, `wallet-connect-v2-adapter` now requires `@walletconnect/modal`.
 
 ```tsx
-import { WalletConnectModal } from '@walletConnect/modal'
+import { WalletconnectModal } from '@walletconnect/modal'
 import {
-  getWalletConnectV2Settings,
-  WalletConnectV2Adapter,
-} from '@web3auth/wallet-Connect-v2-adapter'
+  getWalletconnectV2Settings,
+  WalletconnectV2Adapter,
+} from '@web3auth/wallet-connect-v2-adapter'
 
-const defaultWcSettings = await getWalletConnectV2Settings(
+const defaultWcSettings = await getWalletconnectV2Settings(
   'eip155',
   [1],
   '04309ed1007e77d1f119b85205bb779d'
 )
-const walletConnectModal = new WalletConnectModal({
+const walletconnectModal = new WalletconnectModal({
   projectId: '04309ed1007e77d1f119b85205bb779d',
 })
-const walletConnectV2Adapter = new WalletConnectV2Adapter({
-  adapterSettings: { qrcodeModal: walletConnectModal, ...defaultWcSettings.adapterSettings },
+const walletconnectV2Adapter = new WalletconnectV2Adapter({
+  adapterSettings: { qrcodeModal: walletconnectModal, ...defaultWcSettings.adapterSettings },
   loginSettings: { ...defaultWcSettings.loginSettings },
 })
 ```

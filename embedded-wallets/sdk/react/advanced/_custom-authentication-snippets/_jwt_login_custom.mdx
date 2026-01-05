@@ -1,32 +1,32 @@
 ```tsx title="App.tsx"
-const getIdToken = async () => {
-  // Get ID Token from server
-  const res = await fetch("http://localhost:8080/api/Token", {
+const getIdtoken = async () => {
+  // Get ID token from server
+  const res = await fetch("http://localhost:8080/api/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
   });
-  const Data = await res.json();
-  return Data?.Token;
+  const data = await res.json();
+  return data?.token;
 };
 
 const loginWithJWT = async () => {
   try {
-    const idToken = await getIdToken();
+    const idtoken = await getIdtoken();
 
-    // Focus-start
-    await ConnectTo(WALLET_CONNECTORS.AUTH, {
-      authConnection: AUTH_CONNECTION.CUSTOM,
-      authConnectionId: "w3a-node-demo",
-      idToken,
+    // focus-start
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      authconnection: AUTH_CONNECTION.CUSTOM,
+      authconnectionId: "w3a-node-demo",
+      idtoken,
       extraLoginOptions: {
         isUserIdCaseSensitive: false,
       },
     });
-    // Focus-end
+    // focus-end
   } catch (err) {
-    console.Error(err);
+    console.error(err);
   }
 };
 ```

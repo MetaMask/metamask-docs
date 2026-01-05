@@ -1,37 +1,37 @@
 ```tsx title="App.tsx"
 const loginWithGoogle = async () => {
-  // Focus-start
-  await ConnectTo(WALLET_CONNECTORS.AUTH, {
-    groupedAuthConnectionId: "aggregate-sapphire",
-    authConnectionId: "w3a-google",
-    authConnection: AUTH_CONNECTION.GOOGLE,
+  // focus-start
+  await connectTo(WALLET_CONNECTORS.AUTH, {
+    groupedAuthconnectionId: "aggregate-sapphire",
+    authconnectionId: "w3a-google",
+    authconnection: AUTH_CONNECTION.GOOGLE,
   });
-  // Focus-end
+  // focus-end
 };
 
 const loginWithAuth0Google = async () => {
-  // Focus-start
-  await ConnectTo(WALLET_CONNECTORS.AUTH, {
-    groupedAuthConnectionId: "aggregate-sapphire",
-    authConnectionId: "w3a-a0-google",
-    authConnection: AUTH_CONNECTION.CUSTOM,
+  // focus-start
+  await connectTo(WALLET_CONNECTORS.AUTH, {
+    groupedAuthconnectionId: "aggregate-sapphire",
+    authconnectionId: "w3a-a0-google",
+    authconnection: AUTH_CONNECTION.CUSTOM,
     extraLoginOptions: {
-      Connection: "google-oauth2",
+      connection: "google-oauth2",
     },
   });
-  // Focus-end
+  // focus-end
 };
 
 const loginWithAuth0GitHub = async () => {
-  // Focus-start
-  await ConnectTo(WALLET_CONNECTORS.AUTH, {
-    groupedAuthConnectionId: "aggregate-sapphire",
-    authConnectionId: "w3a-a0-github",
-    authConnection: AUTH_CONNECTION.CUSTOM,
+  // focus-start
+  await connectTo(WALLET_CONNECTORS.AUTH, {
+    groupedAuthconnectionId: "aggregate-sapphire",
+    authconnectionId: "w3a-a0-github",
+    authconnection: AUTH_CONNECTION.CUSTOM,
     extraLoginOptions: {
-      Connection: "github",
+      connection: "github",
     },
   });
-  // Focus-end
+  // focus-end
 };
 ```

@@ -1,15 +1,15 @@
 ---
-title: Smart Accounts
-sidebar_label: Smart Accounts
-description: '@web3auth/react-native-sdk Native Smart Accounts | Embedded Wallets'
+title: Smart accounts
+sidebar_label: Smart accounts
+description: '@web3auth/react-native-sdk Native Smart accounts | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import AccountAbstractionDescription from '../_account-abstraction-description.mdx'
-import AccountAbstractionProviderInstallation from '../_aa-Provider-installation.mdx'
-import AAProviderConfiguration from '../_aa-Provider-configuration.mdx'
-import ConfigureSmartAccountProvider from '../_smart-account-Provider-configuration.mdx'
+import AccountAbstractionproviderInstallation from '../_aa-provider-installation.mdx'
+import AAproviderConfiguration from '../_aa-provider-configuration.mdx'
+import ConfigureSmartAccountprovider from '../_smart-account-provider-configuration.mdx'
 import ConfigureBundler from '../_bundler-configuration.mdx'
 import ConfigureSponsoredPaymaster from '../_sponsored-paymaster-configuration.mdx'
 import ConfigureERC20Paymaster from '../_erc20-paymaster-configuration.mdx'
@@ -19,51 +19,51 @@ import SmartAccountSendTransaction from '../../_common/_aa-send-transaction.mdx'
 
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
-Effortlessly create and manage smart Accounts for your users with just a few lines of code, using our Smart Account feature. Smart Accounts offer enhanced control and programmability, enabling powerful features that traditional wallets can't provide.
+Effortlessly create and manage smart accounts for your users with just a few lines of code, using our Smart Account feature. Smart accounts offer enhanced control and programmability, enabling powerful features that traditional wallets can't provide.
 
-**Key features of Smart Accounts include:**
+**Key features of Smart accounts include:**
 
-- **Gas Abstraction:** Cover transaction fees for users, or allow users to pay for their own transactions using ERC-20 Tokens.
+- **Gas Abstraction:** Cover transaction fees for users, or allow users to pay for their own transactions using ERC-20 tokens.
 - **Batch Transactions:** Perform multiple transactions in a single call.
 - **Automated Transactions:** Allow users to automate actions, like swapping ETH to USDT when ETH hits a specific price.
 - **Custom Spending Limits:** Allow users to set tailored spending limits.
 
 > For more information about ERC-4337 and its components, [check out our detailed blog post](https://blog.web3auth.io/an-ultimate-guide-to-web3-wallets-externally-owned-account-and-smart-contract-wallet/#introduction-to-eip-4337).
 
-Our smart account integration streamlines your setup, allowing you to create and manage smart Accounts using your favorite libraries like Viem, Ethers, and Wagmi. You don't need to rely on third-party packages to effortlessly create ERC-4337 compatible Smart contract Wallets (SCWs), giving users the ability to perform batch transactions and efficiently manage gas sponsorship.
+Our smart account integration streamlines your setup, allowing you to create and manage smart accounts using your favorite libraries like Viem, Ethers, and Wagmi. You don't need to rely on third-party packages to effortlessly create ERC-4337 compatible Smart contract Wallets (SCWs), giving users the ability to perform batch transactions and efficiently manage gas sponsorship.
 
 <GrowthPlanNote />
 
-## Enabling smart Accounts
+## Enabling smart accounts
 :::info prerequisite
 
-To enable this feature, you need to configure Smart Accounts from your project in the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io).
+To enable this feature, you need to configure Smart accounts from your project in the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io).
 
 :::
 
 ### Dashboard configuration
 
-To enable Smart Accounts, navigate to the Smart Accounts section in the Web3Auth dashboard, and enable the "Set up Smart Accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account Provider.
+To enable Smart accounts, navigate to the Smart accounts section in the Web3Auth dashboard, and enable the "Set up Smart accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
 
-![Enable Smart Accounts](/img/embedded-wallets/w3a-dashboard/smart-account/enable-smart-account.png)
+![Enable Smart accounts](/img/embedded-wallets/w3a-dashboard/smart-account/enable-smart-account.png)
 
 ## Installation
 
-<AccountAbstractionProviderInstallation />
+<AccountAbstractionproviderInstallation />
 
 ## Configure
 
-<AAProviderConfiguration />
+<AAproviderConfiguration />
 
-Please note this is the important step for setting the Web3Auth account abstraction Provider.
+Please note this is the important step for setting the Web3Auth account abstraction provider.
 
-- [Configure Smart Account Provider](#configure-smart-account-Provider)
+- [Configure Smart Account provider](#configure-smart-account-provider)
 - [Configure Bundler](#configure-bundler)
 - [Configure Sponsored Paymaster](#sponsored-paymaster)
 - [Configure ERC-20 Paymaster](#erc-20-paymaster)
 
-## Configure smart account Provider
-<ConfigureSmartAccountProvider />
+## Configure smart account provider
+<ConfigureSmartAccountprovider />
 
 ## Configure bundler
 
@@ -71,7 +71,7 @@ Please note this is the important step for setting the Web3Auth account abstract
 
 ## Configure paymaster
 
-You can configure the paymaster of your choice to sponsor gas fees for your users, along with the paymaster context. The paymaster context lets you set additional parameters, such as choosing the Token for ERC-20 paymasters, defining gas policies, and more.
+You can configure the paymaster of your choice to sponsor gas fees for your users, along with the paymaster context. The paymaster context lets you set additional parameters, such as choosing the token for ERC-20 paymasters, defining gas policies, and more.
 
 ### Sponsored paymaster
 
@@ -94,13 +94,13 @@ You can configure the paymaster of your choice to sponsor gas fees for your user
 <TabItem value="rn-bare" default>
 
 ```ts
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-Provider'
-// Focus-start
+import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+// focus-start
 import {
-  AccountAbstractionProvider,
+  AccountAbstractionprovider,
   SafeSmartAccount,
-} from '@web3auth/account-abstraction-Provider'
-//Focus-end
+} from '@web3auth/account-abstraction-provider'
+//focus-end
 import Web3Auth, { WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
 import * as WebBrowser from '@toruslabs/react-native-web-browser'
 import EncryptedStorage from 'react-native-encrypted-storage'
@@ -117,8 +117,8 @@ const chainConfig = {
   logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
 }
 
-// Focus-start
-const accountAbstractionProvider = new AccountAbstractionProvider({
+// focus-start
+const accountAbstractionprovider = new AccountAbstractionprovider({
   config: {
     chainConfig,
     bundlerConfig: {
@@ -128,9 +128,9 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
     smartAccountInit: new SafeSmartAccount(),
   },
 })
-// Focus-end
+// focus-end
 
-const privateKeyProvider = new EthereumPrivateKeyProvider({
+const privateKeyprovider = new EthereumPrivateKeyprovider({
   config: { chainConfig },
 })
 
@@ -138,9 +138,9 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   clientId,
   redirectUrl,
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
-  privateKeyProvider,
-  // Focus-next-line
-  accountAbstractionProvider: aaProvider,
+  privateKeyprovider,
+  // focus-next-line
+  accountAbstractionprovider: aaprovider,
 })
 ```
 
@@ -148,13 +148,13 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
 <TabItem value="rn-expo">
 
 ```ts
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-Provider'
-// Focus-start
+import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+// focus-start
 import {
-  AccountAbstractionProvider,
+  AccountAbstractionprovider,
   SafeSmartAccount,
-} from '@web3auth/account-abstraction-Provider'
-//Focus-end
+} from '@web3auth/account-abstraction-provider'
+//focus-end
 import Web3Auth, { WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
 import * as WebBrowser from 'expo-web-browser'
 import * as SecureStore from 'expo-secure-store'
@@ -171,8 +171,8 @@ const chainConfig = {
   logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
 }
 
-// Focus-start
-const accountAbstractionProvider = new AccountAbstractionProvider({
+// focus-start
+const accountAbstractionprovider = new AccountAbstractionprovider({
   config: {
     chainConfig,
     bundlerConfig: {
@@ -182,9 +182,9 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
     smartAccountInit: new SafeSmartAccount(),
   },
 })
-// Focus-end
+// focus-end
 
-const privateKeyProvider = new EthereumPrivateKeyProvider({
+const privateKeyprovider = new EthereumPrivateKeyprovider({
   config: { chainConfig },
 })
 
@@ -192,9 +192,9 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   clientId,
   redirectUrl,
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
-  privateKeyProvider,
-  // Focus-next-line
-  accountAbstractionProvider: aaProvider,
+  privateKeyprovider,
+  // focus-next-line
+  accountAbstractionprovider: aaprovider,
 })
 ```
 
@@ -215,4 +215,4 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
 
 ## Advanced smart account operations
 
-To learn more about supported transaction methods, and how to perform batch transactions, [checkout our detailed documentation of AccountAbstractionProvider](/embedded-wallets/sdk/react).
+To learn more about supported transaction methods, and how to perform batch transactions, [checkout our detailed documentation of AccountAbstractionprovider](/embedded-wallets/sdk/react).

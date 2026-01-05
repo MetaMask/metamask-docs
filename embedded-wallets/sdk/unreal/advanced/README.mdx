@@ -16,14 +16,14 @@ When setting up Web3Auth, you'll pass in the options to the constructor. This co
 ```cpp
 #include "Web3AuthSDK.h"
 
-// Focus-start
+// focus-start
 FWeb3AuthOptions Options;
 Options.ClientId = TEXT("YOUR_CLIENT_ID"); // Get your Client ID from Web3Auth Dashboard
 Options.Network = TEXT("sapphire_mainnet"); // or "sapphire_devnet"
 Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
 
 UWeb3AuthSDK::GetInstance()->Initialize(Options);
-// Focus-end
+// focus-end
 ```
 
 ### `FWeb3AuthOptions`
@@ -82,7 +82,7 @@ struct FWeb3AuthOptions
 
 Control how long users stay authenticated and how sessions persist in Unreal Engine.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `SessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -109,9 +109,9 @@ Create a seamless brand experience by customizing the Web3Auth Login Screens to 
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
-- `MfaSettings` - Configure MFA settings for different authentication flows
+- `MfaSettings` - Configure MFA Settings for different authentication flows
 - `MfaLevel` - Control when users are prompted to set up MFA

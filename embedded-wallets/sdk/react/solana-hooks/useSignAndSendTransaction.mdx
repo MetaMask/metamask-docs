@@ -4,7 +4,7 @@ sidebar_label: useSignAndSendTransaction
 description: '@web3auth/modal React Hook useSignAndSendTransaction | Embedded Wallets'
 ---
 
-Hook to sign and send a Solana transaction using the Connected Solana wallet from Web3Auth.
+Hook to sign and send a Solana transaction using the connected Solana wallet from Web3Auth.
 
 ### Import
 
@@ -23,24 +23,24 @@ function SignAndSendTransactionButton({
 }: {
   transaction: TransactionOrVersionedTransaction
 }) {
-  const { Signandsendtransaction, Loading, Error, Data } = useSignAndSendTransaction()
+  const { signAndSendTransaction, loading, error, data } = useSignAndSendTransaction()
 
   const handleSignAndSend = async () => {
     try {
-      const signature = await Signandsendtransaction(transaction)
+      const signature = await signAndSendTransaction(transaction)
       // Do something with signature
     } catch (e) {
-      // Handle Error
+      // Handle error
     }
   }
 
   return (
     <div>
-      <button onClick={handleSignAndSend} disabled={Loading}>
-        {Loading ? 'Signing & Sending...' : 'Sign & Send transaction'}
+      <button onClick={handleSignAndSend} disabled={loading}>
+        {loading ? 'Signing & Sending...' : 'Sign & Send transaction'}
       </button>
-      {Error && <div>Error: {Error.message}</div>}
-      {Data && <div>Signature: {Data}</div>}
+      {error && <div>error: {error.message}</div>}
+      {data && <div>Signature: {data}</div>}
     </div>
   )
 }
@@ -50,32 +50,32 @@ function SignAndSendTransactionButton({
 
 ```ts
 export type IUseSignAndSendTransaction = {
-  Loading: boolean
-  Error: Web3AuthError | null
-  Data: string | null
-  Signandsendtransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+  loading: boolean
+  error: Web3Autherror | null
+  data: string | null
+  signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
 }
 ```
 
-#### Loading
+#### loading
 
 `boolean`
 
 Indicates if the transaction signing and sending is in progress.
 
-#### Error
+#### error
 
-`Web3AuthError | null`
+`Web3Autherror | null`
 
-Error object if signing or sending fails, otherwise null.
+error object if signing or sending fails, otherwise null.
 
-#### Data
+#### data
 
 `string | null`
 
 The transaction signature as a string, or null if not signed yet.
 
-#### Signandsendtransaction
+#### signAndSendTransaction
 
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
@@ -96,22 +96,22 @@ import {
 
 export function SendVersionedTransaction() {
   const {
-    Data: hash,
-    Error,
-    Loading: isPending,
-    Signandsendtransaction,
+    data: hash,
+    error,
+    loading: isPending,
+    signAndSendTransaction,
   } = useSignAndSendTransaction()
-  const { Accounts, Connection } = useSolanaWallet()
+  const { accounts, connection } = useSolanaWallet()
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const formData = new FormData(e.target as HTMLFormElement)
-    const to = formData.get('address') as string
-    const value = formData.get('value') as string
+    const formdata = new Formdata(e.target as HTMLFormElement)
+    const to = formdata.get('address') as string
+    const value = formdata.get('value') as string
 
-    const block = await Connection!.getLatestBlockhash()
+    const block = await connection!.getLatestBlockhash()
     const TransactionInstruction = SystemProgram.transfer({
-      fromPubkey: new PublicKey(Accounts![0]),
+      fromPubkey: new PublicKey(accounts![0]),
       toPubkey: new PublicKey(to),
       lamports: Number(value) * LAMPORTS_PER_SOL,
     })
@@ -119,11 +119,11 @@ export function SendVersionedTransaction() {
     const transactionMessage = new TransactionMessage({
       recentBlockhash: block.blockhash,
       instructions: [TransactionInstruction],
-      payerKey: new PublicKey(Accounts![0]),
+      payerKey: new PublicKey(accounts![0]),
     })
 
     const transaction = new VersionedTransaction(transactionMessage.compileToV0Message())
-    Signandsendtransaction(transaction)
+    signAndSendTransaction(transaction)
   }
 
   return (
@@ -137,7 +137,7 @@ export function SendVersionedTransaction() {
         </button>
       </form>
       {hash && <div>Transaction Hash: {hash}</div>}
-      {Error && <div>Error: {Error.message}</div>}
+      {error && <div>error: {error.message}</div>}
     </div>
   )
 }

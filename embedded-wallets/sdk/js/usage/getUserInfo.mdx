@@ -1,17 +1,17 @@
 ---
-title: Getuserinfo
-sidebar_label: Getuserinfo
-description: '@web3auth/modal Function Getuserinfo | Embedded Wallets'
+title: getUserInfo
+sidebar_label: getUserInfo
+description: '@web3auth/modal Function getUserInfo | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-Function to retrieve information about the Connected user.
+Function to retrieve information about the connected user.
 
 :::note
 
-This function will only return information based on the Connected adapter. These details are not stored anywhere and are fetched from the adapter during the Connection and remain in the session.
+This function will only return information based on the connected adapter. These details are not stored anywhere and are fetched from the adapter during the connection and remain in the session.
 
 :::
 
@@ -19,8 +19,8 @@ This function will only return information based on the Connected adapter. These
 
 ```javascript
 // After successful login
-const Userinfo = await web3auth.Getuserinfo()
-console.log(Userinfo)
+const userInfo = await web3auth.getUserInfo()
+console.log(userInfo)
 ```
 
 ### Return type
@@ -43,11 +43,11 @@ console.log(Userinfo)
 | `aggregateVerifier` | string | Aggregate verifier of the user. |
 | `verifier` | string | Verifier of the user. |
 | `verifierId` | string | Verifier ID of the user. |
-| `typeOfLogin` | string | Type of login Provider. |
+| `typeOfLogin` | string | Type of login provider. |
 | `dappShare` | string | Dapp share of the user. |
-| `idToken` | string | Token issued by Web3Auth. |
-| `oAuthIdToken` | string | Token issued by OAuth Provider. Will be available only if you are using custom verifiers. |
-| `oAuthAccessToken` | string | Access Token issued by OAuth Provider. Will be available only if you are using custom verifiers. |
+| `idtoken` | string | token issued by Web3Auth. |
+| `oAuthIdtoken` | string | token issued by OAuth provider. Will be available only if you are using custom verifiers. |
+| `oAuthAccesstoken` | string | Access token issued by OAuth provider. Will be available only if you are using custom verifiers. |
 | `appState` | string | App state of the user. |
 | `touchIDPreference` | string | Touch ID preference of the user. |
 | `isMfaEnabled` | boolean | Whether Multi Factor Authentication is enabled for the user. |
@@ -57,7 +57,7 @@ console.log(Userinfo)
 <TabItem value="type">
 
 ```typescript
-Getuserinfo(): Promise<Partial<AuthUserInfo>>;
+getUserInfo(): Promise<Partial<AuthUserInfo>>;
 
 type AuthUserInfo = {
   email?: string;
@@ -69,19 +69,19 @@ type AuthUserInfo = {
   typeOfLogin: LOGIN_PROVIDER_TYPE | CUSTOM_LOGIN_PROVIDER_TYPE;
   dappShare?: string;
   /**
-   * Token issued by Web3Auth.
+   * token issued by Web3Auth.
    */
-  idToken?: string;
+  idtoken?: string;
   /**
-   * Token issued by OAuth Provider. Will be available only if you are using
+   * token issued by OAuth provider. Will be available only if you are using
    * custom verifiers.
    */
-  oAuthIdToken?: string;
+  oAuthIdtoken?: string;
   /**
-   * Access Token issued by OAuth Provider. Will be available only if you are using
+   * Access token issued by OAuth provider. Will be available only if you are using
    * custom verifiers.
    */
-  oAuthAccessToken?: string;
+  oAuthAccesstoken?: string;
   appState?: string;
   touchIDPreference?: string;
   isMfaEnabled?: boolean;
@@ -103,8 +103,8 @@ type AuthUserInfo = {
   "verifierId": "john@gmail.com",
   "typeOfLogin": "google",
   "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
-  "idToken": "<jwtToken issued by Web3Auth>",
-  "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-  "oAuthAccessToken": "<accessToken issued by OAuth Provider>" // will be sent only incase of custom verifiers
+  "idtoken": "<jwttoken issued by Web3Auth>",
+  "oAuthIdtoken": "<jwttoken issued by OAuth provider>", // will be sent only incase of custom verifiers
+  "oAuthAccesstoken": "<accesstoken issued by OAuth provider>" // will be sent only incase of custom verifiers
 }
 ```

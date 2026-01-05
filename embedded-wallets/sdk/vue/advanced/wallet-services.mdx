@@ -10,7 +10,7 @@ import AuthAdapterSettings from '../../_common/_auth-adapter-settings.mdx'
 import AuthLoginSettings from '../../_common/_auth-login-settings.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
-Web3Auth Wallet services provides a comprehensive suite of wallet functionality including Fiat on Ramp, Swaps, and Wallet UI Interoperability with WalletConnect. These services enhance your application by offering a complete wallet experience without building these features from scratch.
+Web3Auth Wallet services provides a comprehensive suite of wallet functionality including Fiat on Ramp, Swaps, and Wallet UI Interoperability with Walletconnect. These services enhance your application by offering a complete wallet experience without building these features from scratch.
 
 :::tip
 
@@ -28,7 +28,7 @@ The `walletServicesConfig` option allows you to customize the wallet services ex
 walletServicesConfig?: WalletServicesConfig;
 ```
 
-### Configuration options
+### Configuration Options
 
 <Tabs>
   <TabItem value="Table">
@@ -40,31 +40,31 @@ walletServicesConfig?: WalletServicesConfig;
 | `enableKeyExport`      | boolean                    | Enable private key export functionality         |
 | `whiteLabel`           | Object                     | Customization options for the widget appearance |
 
-#### Confirmation strategy options
+#### Confirmation Strategy Options
 
 | Strategy       | Description                                                    |
 | -------------- | -------------------------------------------------------------- |
-| `default`      | Uses auto-approve by default, modal for WalletConnect requests |
+| `default`      | Uses auto-approve by default, modal for Walletconnect requests |
 | `modal`        | Always uses modal for confirmations                            |
 | `auto-approve` | Automatically approves transactions without confirmation       |
 
-#### Whitelabel options
+#### WhiteLabel Options
 
 | Property            | Type                 | Description                               |
 | ------------------- | -------------------- | ----------------------------------------- |
-| `ShowWidgetButton`  | boolean              | Whether to Show the widget button         |
+| `showWidgetButton`  | boolean              | Whether to show the widget button         |
 | `buttonPosition`    | BUTTON_POSITION_TYPE | Position of the widget button on the page |
 | `hideNftDisplay`    | boolean              | Hide NFT display in the wallet            |
-| `hideTokenDisplay`  | boolean              | Hide Token display in the wallet          |
+| `hidetokenDisplay`  | boolean              | Hide token display in the wallet          |
 | `hideTransfers`     | boolean              | Hide transfer functionality               |
 | `hideTopup`         | boolean              | Hide top-up (fiat on-ramp) functionality  |
 | `hideReceive`       | boolean              | Hide receive address functionality        |
-| `hideSwap`          | boolean              | Hide Token swap functionality             |
-| `hideShowAllTokens` | boolean              | Hide the "Show all Tokens" option         |
-| `hideWalletConnect` | boolean              | Hide WalletConnect integration            |
-| `defaultPortfolio`  | "Token" \| "nft"     | Default portfolio view                    |
+| `hideSwap`          | boolean              | Hide token swap functionality             |
+| `hideshowAlltokens` | boolean              | Hide the "show all tokens" option         |
+| `hideWalletconnect` | boolean              | Hide Walletconnect integration            |
+| `defaultPortfolio`  | "token" \| "nft"     | Default portfolio view                    |
 
-#### Button position options
+#### Button Position Options
 
 | Position       | Description                     |
 | -------------- | ------------------------------- |
@@ -88,12 +88,12 @@ export type WalletServicesConfig = Omit<
   | 'accountAbstractionConfig'
 > & {
   /**
-   * Determines how to Show confirmation screens
+   * Determines how to show confirmation screens
    * @defaultValue default
    *
    * default & auto-approve
    * - use auto-approve as default
-   * - if wallet Connect request use modal
+   * - if wallet connect request use modal
    *
    * modal
    * - use modal always
@@ -106,9 +106,9 @@ export interface WsEmbedParams {
   /**
    * Supported chains
    */
-  chains: ProviderConfig[]
+  chains: providerConfig[]
   /**
-   * Chain to Connect with
+   * Chain to connect with
    */
   chainId: string
   /**
@@ -139,12 +139,12 @@ export interface WsEmbedParams {
    */
   walletUrls?: Partial<Record<WS_EMBED_BUILD_ENV_TYPE, WalletUrlConfig>>
   /**
-   * Determines how to Show confirmation screens
+   * Determines how to show confirmation screens
    * @defaultValue default
    *
    * default & popup
    * - use popop as default
-   * - if wallet Connect request use modal
+   * - if wallet connect request use modal
    *
    * modal
    * - use modal always
@@ -169,27 +169,27 @@ export interface WsEmbedParams {
    */
   whiteLabel?: {
     /**
-     * whether to Show/hide ws-embed widget.
+     * whether to show/hide ws-embed widget.
      *
      * Defaults to true
      * @defaultValue true
      */
-    ShowWidgetButton?: boolean
+    showWidgetButton?: boolean
     /**
      * Determines where the wsEmbed widget is visible on the page.
      * @defaultValue bottom-left
      */
     buttonPosition?: BUTTON_POSITION_TYPE
     hideNftDisplay?: boolean
-    hideTokenDisplay?: boolean
+    hidetokenDisplay?: boolean
     hideTransfers?: boolean
     hideTopup?: boolean
     hideReceive?: boolean
     hideSwap?: boolean
-    hideShowAllTokens?: boolean
-    hideWalletConnect?: boolean
-    defaultPortfolio?: 'Token' | 'nft'
-  } & WhiteLabelData
+    hideshowAlltokens?: boolean
+    hideWalletconnect?: boolean
+    defaultPortfolio?: 'token' | 'nft'
+  } & WhiteLabeldata
 }
 
 export declare const CONFIRMATION_STRATEGY: {
@@ -234,34 +234,34 @@ import {
 } from '@web3auth/modal'
 import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 
-const Web3authOptions: Web3AuthOptions = {
+const web3AuthOptions: Web3AuthOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  // Focus-start
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // focus-start
   walletServicesConfig: {
     confirmationStrategy: CONFIRMATION_STRATEGY.MODAL,
     modalZIndex: 99999,
     enableKeyExport: false,
     whiteLabel: {
-      ShowWidgetButton: true,
+      showWidgetButton: true,
       buttonPosition: BUTTON_POSITION.BOTTOM_RIGHT,
       hideNftDisplay: false,
-      hideTokenDisplay: false,
+      hidetokenDisplay: false,
       hideTransfers: false,
       hideTopup: false,
       hideReceive: false,
       hideSwap: false,
-      hideShowAllTokens: false,
-      hideWalletConnect: false,
-      defaultPortfolio: 'Token',
+      hideshowAlltokens: false,
+      hideWalletconnect: false,
+      defaultPortfolio: 'token',
     },
   },
-  // Focus-end
+  // focus-end
 }
 
-const Web3authContextConfig: Web3AuthContextConfig = {
-  Web3authOptions,
+const web3AuthContextConfig: Web3AuthContextConfig = {
+  web3AuthOptions,
 }
 
-export default Web3authContextConfig
+export default web3AuthContextConfig
 ```

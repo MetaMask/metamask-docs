@@ -1,7 +1,7 @@
 ---
-title: ShowSwap
-sidebar_label: ShowSwap
-description: '@web3auth/modal ShowSwap Function | Embedded Wallets'
+title: showSwap
+sidebar_label: showSwap
+description: '@web3auth/modal showSwap Function | Embedded Wallets'
 ---
 
 Function to open the Swap interface using the Wallet services Plugin.
@@ -9,8 +9,8 @@ Function to open the Swap interface using the Wallet services Plugin.
 ### Usage
 
 ```ts
-await web3auth.ShowSwap({
-  Show: true,
+await web3auth.showSwap({
+  show: true,
 }) // Opens the Swap Modal
 ```
 
@@ -18,11 +18,11 @@ await web3auth.ShowSwap({
 
 | Name | Type | Description |
 | --- | --- | --- |
-| `Show` | `boolean` | Controls whether the Swap UI is visible. Set to `true` to display the Swap interface, or `false` to hide it. |
-| `fromToken?` | `string` | Specifies the Token being swapped from. Optional field. |
-| `toToken?` | `string` | Specifies the Token being swapped to. Optional field. |
-| `fromValue?` | `string` | The amount of the `fromToken` to be swapped. Optional field. |
-| `toAddress?` | `string` | The recipient's address for the `toToken`. Optional field. |
+| `show` | `boolean` | Controls whether the Swap UI is visible. Set to `true` to display the Swap interface, or `false` to hide it. |
+| `fromtoken?` | `string` | Specifies the token being swapped from. Optional field. |
+| `totoken?` | `string` | Specifies the token being swapped to. Optional field. |
+| `fromValue?` | `string` | The amount of the `fromtoken` to be swapped. Optional field. |
+| `toAddress?` | `string` | The recipient's address for the `totoken`. Optional field. |
 
 ### Return type
 

@@ -29,7 +29,7 @@ try {
   // User's EOA address
   params.add("<User Address in Hex>");
 
-  // Focus-start
+  // focus-start
   final response = await Web3AuthFlutter.request(
     ChainConfig(
       chainId: "0x1",
@@ -40,7 +40,7 @@ try {
   );
 
   log(response.toString());
-  // Focus-end
+  // focus-end
 } on UserCancelledException {
   log("User cancelled.");
 } catch(e) {
@@ -48,10 +48,10 @@ try {
 }
 ```
 
-## Signresponse
+## SignResponse
 
 | Name      | Description                                                   |
 | --------- | ------------------------------------------------------------- |
 | `success` | Determines whether the request was successful or not.         |
 | `result?` | Holds the signature for the request when `success` is `true`. |
-| `Error?`  | Holds the Error for the request when `success` is `false`.    |
+| `error?`  | Holds the error for the request when `success` is `false`.    |

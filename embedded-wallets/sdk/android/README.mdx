@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for Android applications with social logins, external wallets, and more. Using our Android SDK written in Kotlin, you can easily Connect users to their preferred wallets and manage authentication state natively.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for Android applications with social logins, external wallets, and more. Using our Android SDK written in Kotlin, you can easily connect users to their preferred wallets and manage authentication state natively.
 
 ## Requirements
 
@@ -41,7 +41,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        // Focus-next-line
+        // focus-next-line
         maven { url "https://jitpack.io" } // <-- Add this line
     }
 }
@@ -54,7 +54,7 @@ Then, in your app-level `build.gradle` dependencies section, add the following:
 ```groovy
 dependencies {
     // ...
-    // Focus-next-line
+    // focus-next-line
     implementation 'com.github.web3auth:web3auth-android-sdk:9.1.2'
 }
 ```
@@ -85,7 +85,7 @@ From version **7.1.2**, set `android:allowBackup` to `false` and add `tools:repl
 <application
         android:allowBackup="false"
         tools:replace="android:fullBackupContent"
-        android:DataExtractionRules="@xml/Data_extraction_rules"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher">
 </application>
@@ -100,7 +100,7 @@ Once the gradles and permission has been updated, you need to configure your Emb
 - Go to [Web3Auth Developer Dashboard](https://dashboard.web3auth.io), and create or open an existing Web3Auth project.
 - Whitelist `{SCHEME}://{YOUR_APP_PACKAGE_NAME}` in the developer dashboard. This step is mandatory for the redirect to work.
 
-#### Configure deep link
+#### Configure Deep Link
 
 Open your app's `AndroidManifest.xml` file and add the following deep link intent filter to your main activity:
 
@@ -111,7 +111,7 @@ Open your app's `AndroidManifest.xml` file and add the following deep link inten
   <category android:name="android.intent.category.DEFAULT" />
   <category android:name="android.intent.category.BROWSABLE" />
 
-  <Data android:scheme="{scheme}" android:host="{YOUR_APP_PACKAGE_NAME}"/>
+  <data android:scheme="{scheme}" android:host="{YOUR_APP_PACKAGE_NAME}"/>
   <!-- Accept URIs: w3a://com.example.w3aflutter -->
 </intent-filter>
 ```
@@ -132,13 +132,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Focus-start
+        // focus-start
         if (Web3Auth.getCustomTabsClosed()) {
-            Toast.makeText(this, "User closed the browser.", Toast.LENGTH_SHORT).Show()
-            Web3auth.setResultUrl(null)
+            Toast.makeText(this, "User closed the browser.", Toast.LENGTH_SHORT).show()
+            web3Auth.setResultUrl(null)
             Web3Auth.setCustomTabsClosed(false)
         }
-        // Focus-end
+        // focus-end
     }
 
     // Additional code
@@ -155,8 +155,8 @@ Create an Embedded Wallets instance and configure it with your project settings:
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-// Focus-start
-var Web3auth = Web3Auth(
+// focus-start
+var web3Auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -164,10 +164,10 @@ var Web3auth = Web3Auth(
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
 )
-// Focus-end
+// focus-end
 
 // Handle user signing in when app is in background
-Web3auth.setResultUrl(intent?.Data)
+web3Auth.setResultUrl(intent?.data)
 ```
 
 ### 2. Set result URL
@@ -179,7 +179,7 @@ override fun onNewIntent(intent: Intent?) {
   super.onNewIntent(intent)
 
   // Handle user signing in when app is active
-  Web3auth.setResultUrl(intent.Data)
+  web3Auth.setResultUrl(intent.data)
 }
 ```
 
@@ -191,27 +191,27 @@ Once the `initialize` method executes successfully, you can use the `getPrivKey`
 
 :::note
 
-If the API call to fetch the project configuration fails, the method will throw an Error.
+If the API call to fetch the project configuration fails, the method will throw an error.
 
 :::
 
 ```kotlin
-val initializeCF: CompletableFuture<Void> = Web3auth.initialize()
-initializeCF.whenComplete { _, Error ->
-  if (Error == null) {
+val initializeCF: CompletableFuture<Void> = web3Auth.initialize()
+initializeCF.whenComplete { _, error ->
+  if (error == null) {
     // Check for the active session
-    if(Web3auth.getPrivKey()isNotEmpty()) {
+    if(web3Auth.getPrivKey()isNotEmpty()) {
       // Active session found
     }
     // No active session is not present
 
   } else {
-    // Handle the Error
+    // Handle the error
   }
 }
 ```
 
-## Advanced configuration
+## Advanced Configuration
 
 The Web3Auth Android SDK offers a rich set of advanced configuration options:
 
@@ -229,7 +229,7 @@ Head over to the advanced configuration sections to learn more about each config
 <Tabs
   defaultValue="basic-config"
   values={[
-    { label: "Basic configuration", value: "basic-config" },
+    { label: "Basic Configuration", value: "basic-config" },
     { label: "Advanced Configuration", value: "advanced-config" },
   ]}
 >
@@ -237,7 +237,7 @@ Head over to the advanced configuration sections to learn more about each config
 <TabItem value="basic-config">
 
 ```kotlin
-val Web3auth = Web3Auth(
+val web3Auth = Web3Auth(
     Web3AuthOptions(
         context = this,
         clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -252,7 +252,7 @@ val Web3auth = Web3Auth(
 <TabItem value="advanced-config">
 
 ```kotlin
-val Web3auth = Web3Auth(
+val web3Auth = Web3Auth(
     Web3AuthOptions(
         context = this,
         clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -294,7 +294,7 @@ import org.web3j.protocol.Web3j
 import org.web3j.protocol.http.HttpService
 
 // Use your Web3Auth instance to get the private key
-val privateKey = Web3auth.getPrivKey()
+val privateKey = web3Auth.getPrivKey()
 
 // Generate the Credentials
 val credentials = Credentials.create(privateKey)
@@ -317,13 +317,13 @@ val ethBalance = BigDecimal.valueOf(balanceResponse.balance.toDouble()).divide(B
 For Solana integration, you can get the Ed25519 private key using the `getEd25519PrivKey` method and use it with sol4k or any other Solana libraries:
 
 ```kotlin
-import org.sol4k.Connection
+import org.sol4k.connection
 import org.sol4k.Keypair
 
-val Connection = Connection(RpcUrl.DEVNET)
+val connection = connection(RpcUrl.DEVNET)
 
 // Use your Web3Auth instance to get the private key
-val ed25519PrivateKey = Web3auth.getEd25519PrivKey()
+val ed25519PrivateKey = web3Auth.getEd25519PrivKey()
 
 // Generate the Solana KeyPair
 val solanaKeyPair = Keypair.fromSecretKey(ed25519PrivateKey.hexToByteArray())
@@ -332,5 +332,5 @@ val solanaKeyPair = Keypair.fromSecretKey(ed25519PrivateKey.hexToByteArray())
 val userAccount = solanaKeyPair.publicKey.toBase58()
 
 // Get the user balance
-val userBalance = Connection.getBalance(userAccount).toBigDecimal()
+val userBalance = connection.getBalance(userAccount).toBigDecimal()
 ```

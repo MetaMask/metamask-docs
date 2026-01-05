@@ -1,33 +1,33 @@
 ---
-title: useIdentityToken
-sidebar_label: useIdentityToken
-description: '@web3auth/modal Vue Composable useIdentityToken | Embedded Wallets'
+title: useIdentitytoken
+sidebar_label: useIdentitytoken
+description: '@web3auth/modal Vue Composable useIdentitytoken | Embedded Wallets'
 ---
 
-Composable to retrieve and manage the identity Token from Web3Auth in Vue.
+Composable to retrieve and manage the identity token from Web3Auth in Vue.
 
 ### Import
 
 ```ts
-import { useIdentityToken } from '@web3auth/modal/vue'
+import { useIdentitytoken } from '@web3auth/modal/vue'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { useIdentityToken } from '@web3auth/modal/vue'
+  import { useIdentitytoken } from '@web3auth/modal/vue'
 
-  const { Getidentitytoken, Loading, Error, Token } = useIdentityToken()
+  const { getIdentityToken, loading, error, token } = useIdentitytoken()
 </script>
 
 <template>
   <div>
-    <button @click="Getidentitytoken" :disabled="Loading">
-      {{ Loading ? "Authenticating..." : "Get Identity Token" }}
+    <button @click="getIdentityToken" :disabled="loading">
+      {{ loading ? "Authenticating..." : "Get Identity token" }}
     </button>
-    <div v-if="Token">Token: {{ Token }}</div>
-    <div v-if="Error">Error: {{ Error.message }}</div>
+    <div v-if="token">token: {{ token }}</div>
+    <div v-if="error">error: {{ error.message }}</div>
   </div>
 </template>
 ```
@@ -35,29 +35,29 @@ import { useIdentityToken } from '@web3auth/modal/vue'
 ### Return type
 
 ```ts
-import type { IUseIdentityToken } from '@web3auth/modal/vue'
+import type { IUseIdentitytoken } from '@web3auth/modal/vue'
 ```
 
-#### Loading
+#### loading
 
 `Ref<boolean>`
 
 Whether the authentication process is in progress.
 
-#### Error
+#### error
 
-`Ref<Web3AuthError | null>`
+`Ref<Web3Autherror | null>`
 
-Error that occurred during the authentication process.
+error that occurred during the authentication process.
 
-#### Token
+#### token
 
 `Ref<string | null>`
 
-The identity Token returned after successful authentication.
+The identity token returned after successful authentication.
 
-#### Getidentitytoken
+#### getIdentityToken
 
 `() => Promise<string | null>`
 
-Function to initiate the authentication process and retrieve the identity Token.
+Function to initiate the authentication process and retrieve the identity token.

@@ -3,98 +3,98 @@ import Tabs from '@theme/Tabs'
 
 ## Installation
 
-To interact with the Solana blockchain, you can use [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) library with Web3Auth along with `@web3auth/solana-Provider` package.
+To interact with the Solana blockchain, you can use [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) library with Web3Auth along with `@web3auth/solana-provider` package.
 
 ```bash npm2yarn
-npm install --save @solana/web3.js @web3auth/solana-Provider
+npm install --save @solana/web3.js @web3auth/solana-provider
 ```
 
-## Initializing Provider
+## Initializing provider
 
-Using `solana` as `chainNamespace` while initializing `web3auth` will provide a Solana Provider as **`web3auth.Provider`** after successful authentication.
+Using `solana` as `chainNamespace` while initializing `web3auth` will provide a Solana provider as **`web3auth.provider`** after successful authentication.
 
 ### Initializing and instantiating the Embedded Wallets SDK
 
 ```tsx
 import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
 
-const Web3authOptions: Web3AuthOptions = {
+const web3AuthOptions: Web3AuthOptions = {
   clientId,
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
 }
 ```
 
-## Getting the Web3Auth Provider
+## Getting the Web3Auth provider
 
-After initializing Web3Auth, the next step is to initialize the Provider and use it for your operations.
+After initializing Web3Auth, the next step is to initialize the provider and use it for your operations.
 
 ```tsx
-import { SolanaWallet } from '@web3auth/solana-Provider'
+import { SolanaWallet } from '@web3auth/solana-provider'
 
 // Initialize for PnP Web SDK
 await web3auth.init()
 
 // Trigger the login
-await web3auth.Connect()
-// await web3auth.ConnectTo(); // For custom flow
+await web3auth.connect()
+// await web3auth.connectTo(); // For custom flow
 
-// Get the Provider
-const Provider = web3auth.Provider
+// Get the provider
+const provider = web3auth.provider
 
 // Initialize Solana Wallet
-const Solanawallet = new SolanaWallet(Provider)
+const solanaWallet = new SolanaWallet(provider)
 
-// Continue using the `Solanawallet`
+// Continue using the `solanaWallet`
 ```
 
 ## Get account and balance
 
 ```tsx
 import {
-  Connection,
+  connection,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
   Transaction,
 } from '@solana/web3.js'
 
-const Solanawallet = new SolanaWallet(web3auth.Provider)
+const solanaWallet = new SolanaWallet(web3auth.provider)
 
 // Get user's Solana public address
-const Accounts = await Solanawallet.requestAccounts()
+const accounts = await solanaWallet.requestaccounts()
 
-const ConnectionConfig = await Solanawallet.request<string[], CustomChainConfig>({
-  method: 'solana_Provider_config',
+const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>({
+  method: 'solana_provider_config',
   params: [],
 })
 
-const Connection = new Connection(ConnectionConfig.rpcTarget)
+const connection = new connection(connectionConfig.rpcTarget)
 
 // Fetch the balance for the specified public key
-const balance = await Connection.getBalance(new PublicKey(Accounts[0]))
+const balance = await connection.getBalance(new PublicKey(accounts[0]))
 ```
 
 ## Sign transaction
 
 ```tsx
 import {
-  Connection,
+  connection,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
   Transaction,
 } from '@solana/web3.js'
 
-// Solanawallet is from above
-const ConnectionConfig = await Solanawallet.request<string[], CustomChainConfig>({
-  method: 'solana_Provider_config',
+// solanaWallet is from above
+const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>({
+  method: 'solana_provider_config',
   params: [],
 })
 
-const Connection = new Connection(ConnectionConfig.rpcTarget)
+const connection = new connection(connectionConfig.rpcTarget)
 
-const pubKey = await Solanawallet.requestAccounts()
-const { blockhash } = await Connection.getRecentBlockhash('finalized')
+const pubKey = await solanaWallet.requestaccounts()
+const { blockhash } = await connection.getRecentBlockhash('finalized')
 
 const TransactionInstruction = SystemProgram.transfer({
   fromPubkey: new PublicKey(pubKey[0]),
@@ -107,7 +107,7 @@ const transaction = new Transaction({
   feePayer: new PublicKey(pubKey[0]),
 }).add(TransactionInstruction)
 
-const signedTx = await Solanawallet.Signtransaction(transaction)
+const signedTx = await solanaWallet.signTransaction(transaction)
 console.log(signedTx.signature)
 ```
 
@@ -115,23 +115,23 @@ console.log(signedTx.signature)
 
 ```tsx
 import {
-  Connection,
+  connection,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
   Transaction,
 } from '@solana/web3.js'
 
-// Solanawallet is from above
-const ConnectionConfig = await Solanawallet.request<string[], CustomChainConfig>({
-  method: 'solana_Provider_config',
+// solanaWallet is from above
+const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>({
+  method: 'solana_provider_config',
   params: [],
 })
 
-const Connection = new Connection(ConnectionConfig.rpcTarget)
+const connection = new connection(connectionConfig.rpcTarget)
 
-const pubKey = await Solanawallet.requestAccounts()
-const { blockhash } = await Connection.getRecentBlockhash('finalized')
+const pubKey = await solanaWallet.requestaccounts()
+const { blockhash } = await connection.getRecentBlockhash('finalized')
 
 // First transaction
 const TransactionInstruction1 = SystemProgram.transfer({
@@ -156,7 +156,7 @@ const transaction2 = new Transaction({
   feePayer: new PublicKey(pubKey[0]),
 }).add(TransactionInstruction2)
 
-const signedTx = await Solanawallet.signAllTransactions([transaction1, transaction2])
+const signedTx = await solanaWallet.signAllTransactions([transaction1, transaction2])
 console.log(signedTx)
 ```
 
@@ -164,37 +164,37 @@ console.log(signedTx)
 
 ```tsx
 import {
-  Connection,
+  connection,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
   Transaction,
 } from '@solana/web3.js'
 
-// Solanawallet is from above
-const ConnectionConfig = await Solanawallet.request<string[], CustomChainConfig>({
-  method: 'solana_Provider_config',
+// solanaWallet is from above
+const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>({
+  method: 'solana_provider_config',
   params: [],
 })
 
-const Connection = new Connection(ConnectionConfig.rpcTarget)
+const connection = new connection(connectionConfig.rpcTarget)
 
-const Accounts = await Solanawallet.requestAccounts()
-const block = await Connection.getLatestBlockhash('finalized')
+const accounts = await solanaWallet.requestaccounts()
+const block = await connection.getLatestBlockhash('finalized')
 
 const TransactionInstruction = SystemProgram.transfer({
-  fromPubkey: new PublicKey(Accounts[0]),
-  toPubkey: new PublicKey(Accounts[0]),
+  fromPubkey: new PublicKey(accounts[0]),
+  toPubkey: new PublicKey(accounts[0]),
   lamports: 0.01 * LAMPORTS_PER_SOL,
 })
 
 const transaction = new Transaction({
   blockhash: block.blockhash,
   lastValidBlockHeight: block.lastValidBlockHeight,
-  feePayer: new PublicKey(Accounts[0]),
+  feePayer: new PublicKey(accounts[0]),
 }).add(TransactionInstruction)
 
-const { signature } = await Solanawallet.Signandsendtransaction(transaction)
+const { signature } = await solanaWallet.signAndSendTransaction(transaction)
 
 console.log(signature)
 ```
@@ -203,16 +203,16 @@ console.log(signature)
 
 ```tsx
 import {
-  Connection,
+  connection,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
   Transaction,
 } from '@solana/web3.js'
 
-// Solanawallet is from above
+// solanaWallet is from above
 const msg = Buffer.from('Test Signing Message', 'utf8')
-const result = await Solanawallet.Signmessage(msg)
+const result = await solanaWallet.signMessage(msg)
 console.log(result.toString())
 ```
 
@@ -223,7 +223,7 @@ console.log(result.toString())
 ```tsx
 // Assuming user is already logged in.
 async getPrivateKey() {
-  const privateKey = await web3auth.Provider.request({
+  const privateKey = await web3auth.provider.request({
     method: "solana_privateKey"
   });
 

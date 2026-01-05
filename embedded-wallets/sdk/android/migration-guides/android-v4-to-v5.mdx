@@ -16,12 +16,12 @@ With V5, Users can now log in from sapphire mainnet and sapphire testnet.
 
 ```tsx
 // With V5
-// Focus-start
-Web3auth = Web3Auth(
+// focus-start
+web3Auth = Web3Auth(
            Web3AuthOptions(
                ...
-               // Focus-start
-network = Network.SAPPHIRE_MAINNET, // pass over the network you want to use (MAINNET or TESTNET or CYAN, AQUA, SAPPHIRE_MAINNET or SAPPHIRE_TESTNET)               // Focus-end
+               // focus-start
+network = Network.SAPPHIRE_MAINNET, // pass over the network you want to use (MAINNET or TESTNET or CYAN, AQUA, SAPPHIRE_MAINNET or SAPPHIRE_TESTNET)               // focus-end
                ...
            )
 )
@@ -48,7 +48,7 @@ android {
 }
 ```
 
-### Web3authoptions param configuration changed
+### Web3AuthOptions param configuration changed
 
 In v5, the way parameters are configured has changed. The buildEnv parameter must be included. The whiteLabel parameter type and configuration has changed. And, as mentioned earlier, the network type has been added.
 
@@ -86,7 +86,7 @@ In v5, the way parameters are configured has changed. The buildEnv parameter mus
 | `defaultLanguage` | `String`           | No        | Default translation language to be used |
 | `mode`            | `Boolean`          | No        | 3 Theme modes of the application        |
 | `theme`           | `Map<String, Any>` | No        | Whitelabel theme                        |
-| `useLogoLoader`   | `Boolean`          | No        | Loads the logo when Loading             |
+| `useLogoLoader`   | `Boolean`          | No        | Loads the logo when loading             |
 
 </TabItem>
 
@@ -95,24 +95,24 @@ In v5, the way parameters are configured has changed. The buildEnv parameter mus
 Here's the example configuration of Web3AuthOptions.
 
 ```tsx
-Web3auth = Web3Auth(
+web3Auth = Web3Auth(
            Web3AuthOptions(
                context = this,
                clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Developer Dashboard
                network = Network.CYAN, // pass over the network you want to use (MAINNET or TESTNET or CYAN or AQUA or SAPPHIRE_MAINNET or SAPPHIRE_TESTNET)
-               // Focus-start
+               // focus-start
                buildEnv = BuildEnv.TESTING, // 3 options available: PRODUCTION, STAGING, TESTING
-               // Focus-end
+               // focus-end
                redirectUrl = Uri.parse("com.sbz.web3authdemoapp://auth"), // your app's redirect URL
                // Optional parameters
-               // Focus-start
-               whiteLabel = WhiteLabelData(
+               // focus-start
+               whiteLabel = WhiteLabeldata(
                    "Web3Auth Android Auth0 Example", null, null, null, Language.EN, ThemeModes.LIGHT, true,
                    hashMapOf(
                        "primary" to "#eb5424"
                    )
                ),
-               // Focus-end
+               // focus-end
                loginConfig = hashMapOf("jwt" to LoginConfigItem(
                    verifier = "web3auth-auth0-demo",
                    typeOfLogin = TypeOfLogin.JWT,

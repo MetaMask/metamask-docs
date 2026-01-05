@@ -18,9 +18,9 @@ values={[
 
 ```ts
 import {
-  AccountAbstractionProvider,
+  AccountAbstractionprovider,
   SafeSmartAccount,
-} from "@web3auth/account-abstraction-Provider";
+} from "@web3auth/account-abstraction-provider";
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -33,16 +33,16 @@ const chainConfig = {
   logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
 };
 
-const accountAbstractionProvider = new AccountAbstractionProvider({
+const accountAbstractionprovider = new AccountAbstractionprovider({
   config: {
     chainConfig,
     smartAccountInit: new SafeSmartAccount(),
-    // Focus-start
+    // focus-start
     bundlerConfig: {
       // Get the pimlico API Key from dashboard.pimlico.io
       url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
     },
-    // Focus-end
+    // focus-end
   },
 });
 ```
@@ -53,9 +53,9 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 
 ```ts
 import {
-  AccountAbstractionProvider,
+  AccountAbstractionprovider,
   KernelSmartAccount,
-} from "@web3auth/account-abstraction-Provider";
+} from "@web3auth/account-abstraction-provider";
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -68,16 +68,16 @@ const chainConfig = {
   logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
 };
 
-const accountAbstractionProvider = new AccountAbstractionProvider({
+const accountAbstractionprovider = new AccountAbstractionprovider({
   config: {
     chainConfig,
     smartAccountInit: new KernelSmartAccount(),
-    // Focus-start
+    // focus-start
     bundlerConfig: {
       // Get the ZeroDev API from https://dashboard.zerodev.app/
       url: `https://rpc.zerodev.app/api/v2/bundler/${projectId}`,
     },
-    // Focus-end
+    // focus-end
   },
 });
 ```

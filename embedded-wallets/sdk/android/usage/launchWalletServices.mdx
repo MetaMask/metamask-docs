@@ -46,7 +46,7 @@ Access to Wallet services is gated. You can use this feature in `sapphire_devnet
 <TabItem value="class">
 
 ```kotlin
-Data class ChainConfig(
+data class ChainConfig(
     val chainNamespace: ChainNamespace = ChainNamespace.EIP155,
     val decimals: Int? = 18,
     val blockExplorerUrl: String? = null,
@@ -72,9 +72,9 @@ val chainConfig = ChainConfig(
     chainNamespace = ChainNamespace.EIP155
 )
 
-// Focus-start
-val completableFuture = Web3auth.launchWalletServices(
+// focus-start
+val completableFuture = web3Auth.launchWalletServices(
     chainConfig
 )
-// Focus-end
+// focus-end
 ```

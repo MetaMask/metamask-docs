@@ -5,7 +5,7 @@ description: 'Extract private keys for blockchain operations'
 
 ## Overview
 
-The Node.js SDK provides direct access to user private keys, enabling integration with any blockchain network. This is a key feature that makes the SDK suitable for backend and programmatic use cases. Note that if the private key export is disabled in the dashboard, the methods will throw an Error.
+The Node.js SDK provides direct access to user private keys, enabling integration with any blockchain network. This is a key feature that makes the SDK suitable for backend and programmatic use cases. Note that if the private key export is disabled in the dashboard, the methods will throw an error.
 
 :::warning Security Notice
 
@@ -20,7 +20,7 @@ Private keys provide full control over user assets. Handle them securely:
 
 ## Available methods
 
-The Provider offers different methods to access private keys depending on your blockchain needs:
+The provider offers different methods to access private keys depending on your blockchain needs:
 
 | Method              | Description                    | Use Case                                  |
 | ------------------- | ------------------------------ | ----------------------------------------- |
@@ -33,7 +33,7 @@ The Provider offers different methods to access private keys depending on your b
 ### Get Ethereum private key
 
 ```javascript
-const privateKey = await Provider.request({ method: 'private_key' })
+const privateKey = await provider.request({ method: 'private_key' })
 console.log('Private Key:', privateKey) // 0x1234567890abcdef...
 ```
 
@@ -43,17 +43,17 @@ console.log('Private Key:', privateKey) // 0x1234567890abcdef...
 const { ethers } = require('ethers')
 
 // Get private key
-const privateKey = await Provider.request({ method: 'private_key' })
+const privateKey = await provider.request({ method: 'private_key' })
 
 // Create wallet instance
 const wallet = new ethers.Wallet(privateKey)
 
-// Connect to a Provider
-const rpcProvider = new ethers.Providers.JsonRpcProvider('https://rpc.ankr.com/eth')
-const ConnectedWallet = wallet.Connect(rpcProvider)
+// connect to a provider
+const rpcprovider = new ethers.providers.JsonRpcprovider('https://rpc.ankr.com/eth')
+const connectedWallet = wallet.connect(rpcprovider)
 
 // Get address
-const address = await ConnectedWallet.getAddress()
+const address = await connectedWallet.getAddress()
 console.log('Wallet Address:', address)
 
 // Sign a transaction
@@ -62,19 +62,19 @@ const tx = {
   value: ethers.utils.parseEther('0.1'),
 }
 
-const signedTx = await ConnectedWallet.Signtransaction(tx)
-const receipt = await ConnectedWallet.sendTransaction(tx)
+const signedTx = await connectedWallet.signTransaction(tx)
+const receipt = await connectedWallet.sendTransaction(tx)
 ```
 
 ### Use with Viem
 
 ```javascript
 const { createWalletClient, createPublicClient, http } = require('viem')
-const { privateKeyToAccount } = require('viem/Accounts')
+const { privateKeyToAccount } = require('viem/accounts')
 const { mainnet } = require('viem/chains')
 
 // Get private key
-const privateKey = await Provider.request({ method: 'private_key' })
+const privateKey = await provider.request({ method: 'private_key' })
 
 // Create account from private key
 const account = privateKeyToAccount(privateKey)
@@ -104,7 +104,7 @@ const hash = await walletClient.sendTransaction({
 ### Get Solana private key
 
 ```javascript
-const solana_privateKey = await Provider.request({ method: 'solana_privateKey' })
+const solana_privateKey = await provider.request({ method: 'solana_privateKey' })
 console.log('Solana Private Key:', solana_privateKey) // Base58 encoded
 ```
 
@@ -112,7 +112,7 @@ console.log('Solana Private Key:', solana_privateKey) // Base58 encoded
 
 ```javascript
 const {
-  Connection,
+  connection,
   Keypair,
   PublicKey,
   Transaction,
@@ -122,17 +122,17 @@ const {
 const bs58 = require('bs58')
 
 // Get private key
-const solana_privateKey = await Provider.request({ method: 'solana_privateKey' })
+const solana_privateKey = await provider.request({ method: 'solana_privateKey' })
 
 // Create keypair from private key
 const secretKey = bs58.decode(solana_privateKey)
 const keypair = Keypair.fromSecretKey(secretKey)
 
-// Connect to Solana
-const Connection = new Connection('https://api.mainnet-beta.solana.com')
+// connect to Solana
+const connection = new connection('https://api.mainnet-beta.solana.com')
 
 // Get balance
-const balance = await Connection.getBalance(keypair.publicKey)
+const balance = await connection.getBalance(keypair.publicKey)
 console.log('Balance:', balance / LAMPORTS_PER_SOL, 'SOL')
 
 // Send transaction
@@ -144,7 +144,7 @@ const transaction = new Transaction().add(
   })
 )
 
-const signature = await Connection.sendTransaction(transaction, [keypair])
+const signature = await connection.sendTransaction(transaction, [keypair])
 ```
 
 ## Other blockchains
@@ -152,7 +152,7 @@ const signature = await Connection.sendTransaction(transaction, [keypair])
 ### Get raw private key
 
 ```javascript
-const rawPrivateKey = await Provider.request({ method: 'private_key' })
+const rawPrivateKey = await provider.request({ method: 'private_key' })
 console.log('Raw Private Key:', rawPrivateKey) // Hex string
 ```
 
@@ -162,7 +162,7 @@ console.log('Raw Private Key:', rawPrivateKey) // Hex string
 const bitcoin = require('bitcoinjs-lib')
 
 // Get raw private key
-const rawPrivateKey = await Provider.request({ method: 'private_key' })
+const rawPrivateKey = await provider.request({ method: 'private_key' })
 
 // Create Bitcoin keypair
 const keyPair = bitcoin.ECPair.fromPrivateKey(Buffer.from(rawPrivateKey.slice(2), 'hex'))
@@ -181,12 +181,12 @@ Private key export can be disabled in the Web3Auth Dashboard:
 3. Toggle "Disable Private Key Export"
 4. Save changes
 
-When disabled, private key methods will throw an Error:
+When disabled, private key methods will throw an error:
 
 ```javascript
 try {
-  const privateKey = await Provider.request({ method: 'private_key' })
-} catch (Error) {
-  console.Error('Private key export disabled:', Error.message)
+  const privateKey = await provider.request({ method: 'private_key' })
+} catch (error) {
+  console.error('Private key export disabled:', error.message)
 }
 ```

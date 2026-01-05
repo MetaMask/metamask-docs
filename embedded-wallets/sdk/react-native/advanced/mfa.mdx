@@ -10,7 +10,7 @@ The Multi-Factor Authentication feature refers to the ability of the user to cre
 
 <MFAMinimumPlan />
 
-You can set the `mfaLevel` within the `web3auth.login()` to customize when the mfa screen should be Shown to the user. It currently accepts 4 values:
+You can set the `mfaLevel` within the `web3auth.login()` to customize when the mfa screen should be shown to the user. It currently accepts 4 values:
 
 - **`default`** - Setting the mfaLevel to default will present the MFA screen to the user on every third login. `mfaLevel = MFALevel.DEFAULT`
 - **`optional`** - Setting mfaLevel to optional will present the MFA screen to the user on every login but the user will have the option to skip it. `mfaLevel = MFALevel.OPTIONAL`
@@ -71,9 +71,9 @@ export type MfaSettings = Partial<Record<MFA_FACTOR_TYPE, MFA_SETTINGS>>
 
 ```tsx
 const state = await web3auth.login({
-  loginProvider: LoginProvider.GOOGLE,
+  loginprovider: Loginprovider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
-  // Focus-next-line
+  // focus-next-line
   mfaLevel: MFALevel.MANDATORY, // MFALevel.DEFAULT, MFALevel.OPTIONAL, MFALevel.MANDATORY, MFALevel.NONE
   // SCALE and above plan only feature
   mfaSettings: {

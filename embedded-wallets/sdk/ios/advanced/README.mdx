@@ -16,13 +16,13 @@ When setting up Web3Auth, you'll pass in the options to the constructor. This co
 ```swift
 import Web3Auth
 
-// Focus-start
-Web3auth = Web3Auth(W3AInitParams(
+// focus-start
+web3Auth = Web3Auth(W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
     network: .sapphire_mainnet, // or .sapphire_devnet
     redirectUrl: "com.yourapp.bundleid://auth"
 ))
-// Focus-end
+// focus-end
 ```
 
 ### `W3AInitParams`
@@ -44,9 +44,9 @@ The Web3Auth Constructor takes an object with `W3AInitParams` as input.
 | `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `String`.                    |
 | `network`      | Web3Auth Network: `.sapphire_mainnet`, `.sapphire_devnet`, `.mainnet`, `.cyan`, `.aqua` or `.testnet`. Mandatory field of type `Network`. |
 | `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `String`.                    |
-| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `W3AWhiteLabelData` as a value.                                       |
+| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `W3AWhiteLabeldata` as a value.                                       |
 | `loginConfig?` | Login config for custom verifiers. Takes `[String: W3ALoginConfig]` as a value.                                                           |
-| `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                                |
+| `mfaSettings?` | Configure MFA Settings for authentication. Takes `MfaSettings` as a value.                                                                |
 | `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                              |
 
 </TabItem>
@@ -58,7 +58,7 @@ public struct W3AInitParams {
     public let clientId: String
     public let network: Network
     public let redirectUrl: String
-    public let whiteLabel: W3AWhiteLabelData?
+    public let whiteLabel: W3AWhiteLabeldata?
     public let loginConfig: [String: W3ALoginConfig]?
     public let useCoreKitKey: Bool?
     public let chainNamespace: ChainNamespace?
@@ -69,7 +69,7 @@ public struct W3AInitParams {
         clientId: String,
         network: Network,
         redirectUrl: String,
-        whiteLabel: W3AWhiteLabelData? = nil,
+        whiteLabel: W3AWhiteLabeldata? = nil,
         loginConfig: [String: W3ALoginConfig]? = nil,
         useCoreKitKey: Bool? = nil,
         chainNamespace: ChainNamespace? = .eip155,
@@ -86,7 +86,7 @@ public struct W3AInitParams {
 
 Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keychain.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -94,7 +94,7 @@ Control how long users stay authenticated and how sessions persist. The session 
   - Default: 7 days (`86400 * 7`).
 
 ```swift
-Web3auth = Web3Auth(W3AInitParams(
+web3Auth = Web3Auth(W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
     network: .sapphire_mainnet, // or .sapphire_devnet
     sessionTime: 86400 * 7, // 7 days (in seconds)
@@ -112,9 +112,9 @@ Create a seamless brand experience by customizing the Web3Auth Login Screens to 
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
-- `mfaSettings` - Configure MFA settings for different authentication flows
+- `mfaSettings` - Configure MFA Settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA

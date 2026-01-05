@@ -17,7 +17,7 @@ This migration guide provides steps for upgrading from version 6(v6) to version 
 
 ### `request` method
 
-Now, developers can use the `request` method to use the templated transaction confirmation screens for signing transactions. To retrive the signature for the request, developers can use the `getSignresponse` static method.
+Now, developers can use the `request` method to use the templated transaction confirmation screens for signing transactions. To retrive the signature for the request, developers can use the `getSignResponse` static method.
 
 ```kotlin title="Usage"
 val params = JsonArray().apply {
@@ -26,23 +26,23 @@ val params = JsonArray().apply {
     add("Android")
 }
 
-// Focus-start
-val signMsgCompletableFuture = Web3auth.request(
-    Loginparams = LoginParams(
-        selectedLoginProvider,
+// focus-start
+val signMsgCompletableFuture = web3Auth.request(
+    loginParams = LoginParams(
+        selectedLoginprovider,
         extraLoginOptions = null,
         mfaLevel = MFALevel.NONE,
     ),
     "personal_sign",
     requestParams = params
 )
-// Focus-end
+// focus-end
 
-signMsgCompletableFuture.whenComplete { _, Error ->
-    if (Error == null) {
+signMsgCompletableFuture.whenComplete { _, error ->
+    if (error == null) {
         Log.d("MainActivity_Web3Auth", "Message signed successfully")
     } else {
-        Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
+        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
     }
 }
 ```

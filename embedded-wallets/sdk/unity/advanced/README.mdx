@@ -14,15 +14,15 @@ The Web3Auth SDK provides extensive configuration options that allow you to cust
 When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
 
 ```cs
-Web3auth = GetComponent<Web3Auth>();
+web3Auth = GetComponent<Web3Auth>();
 
-// Focus-start
-Web3auth.setOptions(new Web3AuthOptions(){
+// focus-start
+web3Auth.setOptions(new Web3AuthOptions(){
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
     network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
     redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
 });
-// Focus-end
+// focus-end
 ```
 
 ### `Web3AuthOptions`
@@ -44,9 +44,9 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 | `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `string`.                       |
 | `network`      | Web3Auth Network: `SAPPHIRE_MAINNET`, `SAPPHIRE_DEVNET`, `MAINNET`, `CYAN`, `AQUA` or `TESTNET`. Mandatory field of type `Web3Auth.Network`. |
 | `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `Uri`.                          |
-| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                             |
+| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabeldata` as a value.                                             |
 | `loginConfig?` | Login config for custom verifiers. Takes `LoginConfigItem` as a value.                                                                       |
-| `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                                   |
+| `mfaSettings?` | Configure MFA Settings for authentication. Takes `MfaSettings` as a value.                                                                   |
 | `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                                 |
 
 </TabItem>
@@ -59,7 +59,7 @@ public class Web3AuthOptions
     public string clientId { get; set; }
     public Web3Auth.Network network { get; set; }
     public Uri redirectUrl { get; set; }
-    public WhiteLabelData whiteLabel { get; set; }
+    public WhiteLabeldata whiteLabel { get; set; }
     public LoginConfigItem loginConfig { get; set; }
     public MfaSettings mfaSettings { get; set; }
     public int sessionTime { get; set; } = 86400;
@@ -73,7 +73,7 @@ public class Web3AuthOptions
 
 Control how long users stay authenticated and how sessions persist in Unity.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -81,7 +81,7 @@ Control how long users stay authenticated and how sessions persist in Unity.
   - Default: 1 day (`86400`).
 
 ```cs
-Web3auth.setOptions(new Web3AuthOptions(){
+web3Auth.setOptions(new Web3AuthOptions(){
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Web3Auth.Network.SAPPHIRE_MAINNET,
     sessionTime = 86400 * 7, // 7 days (in seconds)
@@ -99,11 +99,11 @@ Create a seamless brand experience by customizing the Web3Auth Login Screens to 
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
-- `mfaSettings` - Configure MFA settings for different authentication flows
+- `mfaSettings` - Configure MFA Settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA
 
 ## Dapp share

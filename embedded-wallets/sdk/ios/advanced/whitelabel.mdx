@@ -6,7 +6,7 @@ description: 'Web3Auth PnP iOS SDK - Whitelabel | Embedded Wallets'
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import WhiteLabelShowcase from '../../_common/_whitelabel_Showcase.mdx'
+import WhiteLabelshowcase from '../../_common/_whitelabel_showcase.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
@@ -22,7 +22,7 @@ Web3Auth allows complete whitelabeling with application branding for a consisten
 
 ## Customizing the Web3Auth login screens
 
-For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `W3AWhiteLabelData`. `W3AWhiteLabelData` can be definied during initialization of the SDK in `W3AInitParams` object.
+For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `W3AWhiteLabeldata`. `W3AWhiteLabeldata` can be definied during initialization of the SDK in `W3AInitParams` object.
 
 <GrowthPlanNote />
 
@@ -56,7 +56,7 @@ The parameters which can be used to customize the User Flow Screens are given be
 <TabItem value="interface">
 
 ```swift
-public struct W3AWhiteLabelData: Codable {
+public struct W3AWhiteLabeldata: Codable {
     let appName: String?
     let logoLight: String?
     let logoDark: String?
@@ -71,17 +71,17 @@ public struct W3AWhiteLabelData: Codable {
 </TabItem>
 </Tabs>
 
-<WhiteLabelShowcase />
+<WhiteLabelshowcase />
 
 ### Example
 
 ```swift title="Usage"
-Web3auth = await Web3Auth(
+web3Auth = await Web3Auth(
   W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .testnet,
-    // Focus-start
-    whiteLabel: W3AWhiteLabelData(
+    // focus-start
+    whiteLabel: W3AWhiteLabeldata(
       appName: "Web3Auth Stub",
       logoLight: "https://images.web3auth.io/web3auth-logo-w.svg",
       logoDark: "https://images.web3auth.io/web3auth-logo-w.svg",
@@ -90,5 +90,5 @@ Web3auth = await Web3Auth(
       theme: ["primary": "#d53f8c"]
     )
   ))
-    // Focus-end
+    // focus-end
 ```

@@ -4,7 +4,7 @@ sidebar_label: useSolanaWallet
 description: '@web3auth/modal React Hooks useSolanaWallet | Embedded Wallets'
 ---
 
-Hook to retrieve and manage Solana wallet, Accounts, and Connection from Web3Auth.
+Hook to retrieve and manage Solana wallet, accounts, and connection from Web3Auth.
 
 ### Import
 
@@ -18,13 +18,13 @@ import { useSolanaWallet } from '@web3auth/modal/react'
 import { useSolanaWallet } from '@web3auth/modal/react'
 
 function SolanaWalletInfo() {
-  const { Solanawallet, Accounts, Connection } = useSolanaWallet()
+  const { solanaWallet, accounts, connection } = useSolanaWallet()
 
   return (
     <div>
-      <div>Accounts: {Accounts ? Accounts.join(', ') : 'No Accounts'}</div>
-      <div>SolanaWallet: {Solanawallet ? 'Available' : 'Not available'}</div>
-      <div>Connection: {Connection ? 'Connected' : 'Not Connected'}</div>
+      <div>accounts: {accounts ? accounts.join(', ') : 'No accounts'}</div>
+      <div>SolanaWallet: {solanaWallet ? 'Available' : 'Not available'}</div>
+      <div>connection: {connection ? 'connected' : 'Not connected'}</div>
     </div>
   )
 }
@@ -36,23 +36,23 @@ function SolanaWalletInfo() {
 import { type IUseSolanaWallet } from '@web3auth/modal/react'
 ```
 
-#### Accounts
+#### accounts
 
 `string[] | null`
 
 The list of Solana account addresses, or null if not available.
 
-#### Solanawallet
+#### solanaWallet
 
 `SolanaWallet | null`
 
 The SolanaWallet instance for interacting with the Solana blockchain, or null if not available.
 
-#### Connection
+#### connection
 
-`Connection | null`
+`connection | null`
 
-The Solana Connection instance for making RPC calls, or null if not available.
+The Solana connection instance for making RPC calls, or null if not available.
 
 ### Example: fetching SOL balance
 
@@ -62,37 +62,37 @@ import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js'
 import { useEffect, useState } from 'react'
 
 export function Balance() {
-  const { Accounts, Connection } = useSolanaWallet()
+  const { accounts, connection } = useSolanaWallet()
   const [balance, setBalance] = useState<number | null>(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [Error, setError] = useState<string | null>(null)
+  const [isloading, setIsloading] = useState(false)
+  const [error, seterror] = useState<string | null>(null)
 
   const fetchBalance = async () => {
-    if (Connection && Accounts && Accounts.length > 0) {
+    if (connection && accounts && accounts.length > 0) {
       try {
-        setIsLoading(true)
-        setError(null)
-        const publicKey = new PublicKey(Accounts[0])
-        const balance = await Connection.getBalance(publicKey)
+        setIsloading(true)
+        seterror(null)
+        const publicKey = new PublicKey(accounts[0])
+        const balance = await connection.getBalance(publicKey)
         setBalance(balance)
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown Error')
+        seterror(err instanceof error ? err.message : 'Unknown error')
       } finally {
-        setIsLoading(false)
+        setIsloading(false)
       }
     }
   }
 
   useEffect(() => {
     fetchBalance()
-  }, [Connection, Accounts])
+  }, [connection, accounts])
 
   return (
     <div>
       <h2>Balance</h2>
       <div>{balance !== null && `${balance / LAMPORTS_PER_SOL} SOL`}</div>
-      {isLoading && <span className="Loading">Loading...</span>}
-      {Error && <span className="Error">Error: {Error}</span>}
+      {isloading && <span className="loading">loading...</span>}
+      {error && <span className="error">error: {error}</span>}
       <button onClick={fetchBalance} type="submit" className="card">
         Fetch Balance
       </button>

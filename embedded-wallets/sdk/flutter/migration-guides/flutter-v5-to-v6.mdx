@@ -8,11 +8,11 @@ This migration guide provides steps for upgrading from version v5 to v6 of the P
 
 ## Breaking changes
 
-### `getSignresponse` is now removed.
+### `getSignResponse` is now removed.
 
-In v6, we try to improve the developer experience by removing the `getSignresponse` method and returning the result in the `request` method itself.
+In v6, we try to improve the developer experience by removing the `getSignResponse` method and returning the result in the `request` method itself.
 
-Previously, after calling the `request` method, developers had to use the `getSignresponse` method to retrieve the `Signresponse`. In the latest version v6, the `request` method will return the `Signresponse` directly.
+Previously, after calling the `request` method, developers had to use the `getSignResponse` method to retrieve the `SignResponse`. In the latest version v6, the `request` method will return the `SignResponse` directly.
 
 ```dart
 try {
@@ -33,7 +33,7 @@ try {
   );
 
   // remove-next-line
-  final response = await Web3AuthFlutter.getSignresponse();
+  final response = await Web3AuthFlutter.getSignResponse();
 
   log(response.toString());
 } on UserCancelledException {
@@ -60,4 +60,4 @@ defaultConfig {
 
 ## Enhancements
 
-In the latest version v6, we have added support for the Web3Auth Auth Service version v9, and Wallet services v3. In Wallet services v3, the prebuilt wallet UI now supports the swap functionality allowing users to swap to their favorite Token from the app itself.
+In the latest version v6, we have added support for the Web3Auth Auth Service version v9, and Wallet services v3. In Wallet services v3, the prebuilt wallet UI now supports the swap functionality allowing users to swap to their favorite token from the app itself.

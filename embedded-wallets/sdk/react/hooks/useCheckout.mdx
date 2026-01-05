@@ -4,7 +4,7 @@ sidebar_label: useCheckout
 description: '@web3auth/modal React Hooks useCheckout | Embedded Wallets'
 ---
 
-Hook to Show the cryptocurrency checkout modal using Wallet services Plugin.
+Hook to show the cryptocurrency checkout modal using Wallet services Plugin.
 
 ### Import
 
@@ -18,14 +18,14 @@ import { useCheckout } from '@web3auth/modal/react'
 import { useCheckout } from '@web3auth/modal/react'
 
 function CheckoutButton() {
-  const { ShowCheckout, Loading, Error } = useCheckout()
+  const { showCheckout, loading, error } = useCheckout()
 
   return (
     <div>
-      <button onClick={() => ShowCheckout()} disabled={Loading}>
-        {Loading ? 'Opening Checkout...' : 'Show Checkout'}
+      <button onClick={() => showCheckout()} disabled={loading}>
+        {loading ? 'Opening Checkout...' : 'show Checkout'}
       </button>
-      {Error && <div>{Error.message}</div>}
+      {error && <div>{error.message}</div>}
     </div>
   )
 }
@@ -37,20 +37,20 @@ function CheckoutButton() {
 import { type IUseCheckout } from '@web3auth/modal/react'
 ```
 
-#### Loading
+#### loading
 
 `boolean`
 
 Whether the checkout process is in progress.
 
-#### Error
+#### error
 
-`Web3AuthError | null`
+`Web3Autherror | null`
 
-Error that occurred during the checkout process.
+error that occurred during the checkout process.
 
-#### ShowCheckout
+#### showCheckout
 
-`(ShowCheckoutParams?: BaseEmbedControllerState["ShowCheckout"]) => Promise<void>`
+`(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
 
-Function to initiate the checkout modal. Optional `ShowCheckoutParams` can be passed to customize the modal.
+Function to initiate the checkout modal. Optional `showCheckoutParams` can be passed to customize the modal.

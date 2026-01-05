@@ -4,7 +4,7 @@ sidebar_label: useSolanaWallet
 description: '@web3auth/modal Vue Composables useSolanaWallet | Embedded Wallets'
 ---
 
-Composable to retrieve and manage Solana wallet, Accounts, and Connection from Web3Auth in Vue.
+Composable to retrieve and manage Solana wallet, accounts, and connection from Web3Auth in Vue.
 
 ### Import
 
@@ -18,14 +18,14 @@ import { useSolanaWallet } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useSolanaWallet } from '@web3auth/modal/vue'
 
-  const { Solanawallet, Accounts, Connection } = useSolanaWallet()
+  const { solanaWallet, accounts, connection } = useSolanaWallet()
 </script>
 
 <template>
   <div>
-    <div>Accounts: {{ Accounts?.length ? Accounts.join(", ") : "No Accounts" }}</div>
-    <div>SolanaWallet: {{ Solanawallet ? "Available" : "Not available" }}</div>
-    <div>Connection: {{ Connection ? "Connected" : "Not Connected" }}</div>
+    <div>accounts: {{ accounts?.length ? accounts.join(", ") : "No accounts" }}</div>
+    <div>SolanaWallet: {{ solanaWallet ? "Available" : "Not available" }}</div>
+    <div>connection: {{ connection ? "connected" : "Not connected" }}</div>
   </div>
 </template>
 ```
@@ -36,23 +36,23 @@ import { useSolanaWallet } from '@web3auth/modal/vue'
 import type { IUseSolanaWallet } from '@web3auth/modal/vue'
 ```
 
-#### Accounts
+#### accounts
 
 `string[] | null`
 
 The list of Solana account addresses, or null if not available.
 
-#### Solanawallet
+#### solanaWallet
 
 `SolanaWallet | null`
 
 The SolanaWallet instance for interacting with the Solana blockchain, or null if not available.
 
-#### Connection
+#### connection
 
-`Connection | null`
+`connection | null`
 
-The Solana Connection instance for making RPC calls, or null if not available.
+The Solana connection instance for making RPC calls, or null if not available.
 
 ### Example: fetching SOL balance
 
@@ -63,47 +63,47 @@ The Solana Connection instance for making RPC calls, or null if not available.
   import { useWeb3Auth } from '@web3auth/modal/vue'
   import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js'
 
-  const { Web3auth } = useWeb3Auth()
-  const { Accounts, Connection } = useSolanaWallet()
+  const { web3Auth } = useWeb3Auth()
+  const { accounts, connection } = useSolanaWallet()
   const balance = ref<number | null>(null)
-  const isLoading = ref(false)
-  const Error = ref<string | null>(null)
+  const isloading = ref(false)
+  const error = ref<string | null>(null)
 
   const fetchBalance = async () => {
-    if (!Web3auth.value?.Connected) {
-      Error.value = 'Please Connect your wallet first'
+    if (!web3Auth.value?.connected) {
+      error.value = 'Please connect your wallet first'
       return
     }
     try {
-      isLoading.value = true
-      Error.value = null
-      // Check if Accounts exist and have values before creating PublicKey
-      if (!Accounts.value || Accounts.value.length === 0) {
-        console.Error('No Accounts found. Please Connect your wallet.', Accounts.value)
-        throw new Error('No Accounts found. Please Connect your wallet.')
+      isloading.value = true
+      error.value = null
+      // Check if accounts exist and have values before creating PublicKey
+      if (!accounts.value || accounts.value.length === 0) {
+        console.error('No accounts found. Please connect your wallet.', accounts.value)
+        throw new error('No accounts found. Please connect your wallet.')
       }
-      const publicKey = new PublicKey(Accounts.value[0])
-      const balanceResult = await Connection.value!.getBalance(publicKey)
+      const publicKey = new PublicKey(accounts.value[0])
+      const balanceResult = await connection.value!.getBalance(publicKey)
       balance.value = balanceResult
     } catch (err) {
-      console.Error('Error fetching balance:', err)
-      Error.value = err instanceof Error ? err.message : 'Unknown Error'
+      console.error('error fetching balance:', err)
+      error.value = err instanceof error ? err.message : 'Unknown error'
       balance.value = null
     } finally {
-      isLoading.value = false
+      isloading.value = false
     }
   }
 
-  // Fetch balance when Connection or Accounts change
-  watch([Connection, Accounts], () => {
-    if (Web3auth.value?.Connected) {
+  // Fetch balance when connection or accounts change
+  watch([connection, accounts], () => {
+    if (web3Auth.value?.connected) {
       fetchBalance()
     }
   })
 
   // Initial fetch on component mount
   onMounted(() => {
-    if (Web3auth.value?.Connected) {
+    if (web3Auth.value?.connected) {
       fetchBalance()
     }
   })
@@ -115,9 +115,9 @@ The Solana Connection instance for making RPC calls, or null if not available.
     <div v-if="balance !== null">
       <span>{{ balance / LAMPORTS_PER_SOL }} SOL</span>
     </div>
-    <div v-if="isLoading" class="Loading">Loading...</div>
-    <div v-if="Error" class="Error">Error: {{ Error }}</div>
-    <button @click="fetchBalance" type="button" class="card" :disabled="isLoading">
+    <div v-if="isloading" class="loading">loading...</div>
+    <div v-if="error" class="error">error: {{ error }}</div>
+    <button @click="fetchBalance" type="button" class="card" :disabled="isloading">
       Fetch Balance
     </button>
   </div>

@@ -16,7 +16,7 @@ to v10. This is a supplementary guide to the main
 ## Overview
 
 In v7, external wallets required manual adapter configuration. V10 simplifies this by using MIPD
-(Multiple Injected Provider Discovery) to automatically detect and provide access to external
+(Multiple Injected provider Discovery) to automatically detect and provide access to external
 wallets without manual setup.
 
 ## Migration steps
@@ -29,10 +29,10 @@ wallets without manual setup.
 import { MetamaskAdapter } from '@web3auth/metamask-adapter'
 import { PhantomAdapter } from '@web3auth/phantom-adapter'
 import {
-  WalletConnectV2Adapter,
-  getWalletConnectV2Settings,
-} from '@web3auth/wallet-Connect-v2-adapter'
-import { WalletConnectModal } from '@walletConnect/modal'
+  WalletconnectV2Adapter,
+  getWalletconnectV2Settings,
+} from '@web3auth/wallet-connect-v2-adapter'
+import { WalletconnectModal } from '@walletconnect/modal'
 
 // Manual adapter configuration
 const metamaskAdapter = new MetamaskAdapter()
@@ -41,12 +41,12 @@ web3auth.configureAdapter(metamaskAdapter)
 const phantomAdapter = new PhantomAdapter()
 web3auth.configureAdapter(phantomAdapter)
 
-const defaultWcSettings = await getWalletConnectV2Settings('eip155', ['1'], 'PROJECT_ID')
-const walletConnectV2Adapter = new WalletConnectV2Adapter({
-  adapterSettings: { qrcodeModal: WalletConnectModal, ...defaultWcSettings.adapterSettings },
+const defaultWcSettings = await getWalletconnectV2Settings('eip155', ['1'], 'PROJECT_ID')
+const walletconnectV2Adapter = new WalletconnectV2Adapter({
+  adapterSettings: { qrcodeModal: WalletconnectModal, ...defaultWcSettings.adapterSettings },
   loginSettings: { ...defaultWcSettings.loginSettings },
 })
-web3auth.configureAdapter(walletConnectV2Adapter)
+web3auth.configureAdapter(walletconnectV2Adapter)
 
 await web3auth.initModal()
 // remove-end
@@ -62,9 +62,9 @@ await web3auth.init()
 
 - **Package Removal**: Remove all external wallet adapter packages
 - **MIPD Integration**: External wallets are automatically detected using MIPD (Multiple Injected
-  Provider Discovery)
+  provider Discovery)
 - **No Configuration**: No need to manually configure or register external adapters
-- **WalletConnect Support**: WalletConnect-compatible wallets are automatically available
+- **Walletconnect Support**: Walletconnect-compatible wallets are automatically available
 
 ## Package removal
 
@@ -72,16 +72,16 @@ Remove these deprecated packages from your project:
 
 ```bash npm2yarn
 # Remove all external wallet adapter packages
-npm uninstall @web3auth/metamask-adapter @web3auth/phantom-adapter @web3auth/solflare-adapter @web3auth/wallet-Connect-v2-adapter @walletConnect/modal
+npm uninstall @web3auth/metamask-adapter @web3auth/phantom-adapter @web3auth/solflare-adapter @web3auth/wallet-connect-v2-adapter @walletconnect/modal
 ```
 
 ## How it works in v10
 
-V10 uses MIPD (Multiple Injected Provider Discovery) to automatically detect injected wallets in the
-browser. When users attempt to Connect, they'll see:
+V10 uses MIPD (Multiple Injected provider Discovery) to automatically detect injected wallets in the
+browser. When users attempt to connect, they'll see:
 
 1. **Detected Wallets**: All installed browser extension wallets
-2. **WalletConnect**: For mobile and other wallet Connections
+2. **Walletconnect**: For mobile and other wallet connections
 3. **Social Logins**: Built-in Web3Auth authentication methods
 
 No configuration needed - everything works out of the box!

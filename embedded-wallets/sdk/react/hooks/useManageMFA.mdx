@@ -18,14 +18,14 @@ import { useManageMFA } from '@web3auth/modal/react'
 import { useManageMFA } from '@web3auth/modal/react'
 
 function ManageMFAButton() {
-  const { Managemfa, Loading, Error } = useManageMFA()
+  const { manageMFA, loading, error } = useManageMFA()
 
   return (
     <div>
-      <button onClick={() => Managemfa()} disabled={Loading}>
-        {Loading ? 'Managing MFA...' : 'Manage MFA'}
+      <button onClick={() => manageMFA()} disabled={loading}>
+        {loading ? 'Managing MFA...' : 'Manage MFA'}
       </button>
-      {Error && <div>{Error.message}</div>}
+      {error && <div>{error.message}</div>}
     </div>
   )
 }
@@ -37,19 +37,19 @@ function ManageMFAButton() {
 import { type IUseManageMFA } from '@web3auth/modal/react'
 ```
 
-#### Loading
+#### loading
 
 `boolean`
 
 Whether the MFA management process is in progress.
 
-#### Error
+#### error
 
-`Web3AuthError | null`
+`Web3Autherror | null`
 
-Error that occurred during the MFA management process.
+error that occurred during the MFA management process.
 
-#### Managemfa
+#### manageMFA
 
 `<T>(params?: T) => Promise<void>`
 

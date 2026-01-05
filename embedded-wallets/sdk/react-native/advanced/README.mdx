@@ -31,13 +31,13 @@ import * as SecureStore from 'expo-secure-store'
 const scheme = 'web3authrnexample'
 const resolvedRedirectUrl = `${scheme}://auth`
 
-// Focus-start
+// focus-start
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
-// Focus-end
+// focus-end
 ```
 
 </TabItem>
@@ -52,13 +52,13 @@ import EncryptedStorage from 'react-native-encrypted-storage'
 const scheme = 'web3authrnexample'
 const resolvedRedirectUrl = `${scheme}://auth`
 
-// Focus-start
+// focus-start
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
-// Focus-end
+// focus-end
 ```
 
 </TabItem>
@@ -83,7 +83,7 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 | `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `string`.                       |
 | `network`      | Web3Auth Network: `SAPPHIRE_MAINNET`, `SAPPHIRE_DEVNET`, `MAINNET`, `CYAN`, `AQUA` or `TESTNET`. Mandatory field of type `WEB3AUTH_NETWORK`. |
 | `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `string`.                       |
-| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                             |
+| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabeldata` as a value.                                             |
 | `loginConfig?` | Login config for custom verifiers. Takes `LoginConfig` as a value.                                                                           |
 | `mfaLevel?`    | Configure MFA level for authentication. Takes `MFA_LEVELS` as a value.                                                                       |
 | `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                                 |
@@ -97,7 +97,7 @@ export interface Web3AuthOptions {
   clientId: string
   network: WEB3AUTH_NETWORK
   redirectUrl?: string
-  whiteLabel?: WhiteLabelData
+  whiteLabel?: WhiteLabeldata
   loginConfig?: LoginConfig
   mfaLevel?: MFA_LEVELS
   sessionTime?: number
@@ -111,7 +111,7 @@ export interface Web3AuthOptions {
 
 Control how long users stay authenticated and how sessions persist in React Native.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -137,7 +137,7 @@ Create a seamless brand experience by customizing the Web3Auth Login Screens to 
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
 ## Dapp share
 

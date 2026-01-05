@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for iOS applications with social logins, external wallets, and more. Using our iOS SDK written in Swift, you can easily Connect users to their preferred wallets and manage authentication state natively.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for iOS applications with social logins, external wallets, and more. Using our iOS SDK written in Swift, you can easily connect users to their preferred wallets and manage authentication state natively.
 
 ## Requirements
 
@@ -44,7 +44,7 @@ Install the Web3Auth iOS SDK using one of the following methods:
 
    From the `Dependency Rule` dropdown, select `Exact Version` and enter `11.1.0` as the version.
 
-3. When finished, Xcode will automatically begin resolving and downLoading your dependencies in the background.
+3. When finished, Xcode will automatically begin resolving and downloading your dependencies in the background.
 
 ### Cocoapods
 
@@ -58,7 +58,7 @@ pod 'Web3Auth', '~> 11.1.0'
 
 2. Once added, use `pod install` command to download the Web3Auth dependency.
 
-### Configure redirection
+### Configure Redirection
 
 To use Web3Auth for iOS you need to Whitelist your `bundleId` in your Web3Auth project.
 
@@ -75,13 +75,13 @@ Import and configure Web3Auth in your application:
 import Web3Auth
 
 class ViewController: UIViewController {
-    var Web3auth: Web3Auth?
+    var web3Auth: Web3Auth?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Configure Web3Auth
-        Web3auth = Web3Auth(W3AInitParams(
+        web3Auth = Web3Auth(W3AInitParams(
             clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
             network: .sapphire_mainnet, // or .sapphire_devnet
             redirectUrl: "com.yourapp.bundleid://auth"
@@ -100,10 +100,10 @@ override func viewDidLoad() {
 
     Task {
         do {
-            try await Web3auth?.initialize()
+            try await web3Auth?.initialize()
             print("Web3Auth initialized successfully")
         } catch {
-            print("Error initializing Web3Auth: \(Error)")
+            print("error initializing Web3Auth: \(error)")
         }
     }
 }
@@ -131,7 +131,7 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplication.Op
 }
 ```
 
-## Advanced configuration
+## Advanced Configuration
 
 The Web3Auth iOS SDK offers a rich set of advanced configuration options:
 
@@ -149,7 +149,7 @@ Head over to the advanced configuration sections to learn more about each config
 <Tabs
   defaultValue="basic-config"
   values={[
-    { label: "Basic configuration", value: "basic-config" },
+    { label: "Basic Configuration", value: "basic-config" },
     { label: "Advanced Configuration", value: "advanced-config" },
   ]}
 >
@@ -157,7 +157,7 @@ Head over to the advanced configuration sections to learn more about each config
 <TabItem value="basic-config">
 
 ```swift
-Web3auth = Web3Auth(W3AInitParams(
+web3Auth = Web3Auth(W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .sapphire_mainnet, // or .sapphire_devnet
     redirectUrl: "com.yourapp.bundleid://auth"
@@ -169,12 +169,12 @@ Web3auth = Web3Auth(W3AInitParams(
 <TabItem value="advanced-config">
 
 ```swift
-Web3auth = Web3Auth(W3AInitParams(
+web3Auth = Web3Auth(W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .sapphire_mainnet, // or .sapphire_devnet
     redirectUrl: "com.yourapp.bundleid://auth",
     loginConfig: [
-      Web3AuthProvider.JWT.rawValue: .init(
+      Web3Authprovider.JWT.rawValue: .init(
         verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.google,
         clientId: "YOUR_GOOGLE_CLIENT_ID",
@@ -218,7 +218,7 @@ import web3
 import Web3Auth
 
 // Use your Web3Auth instance to get the private key
-val privateKey = Web3auth.getPrivKey()
+val privateKey = web3Auth.getPrivKey()
 
 // Generate the Ethereum Account
 let account = try EthereumAccount(privateKey)
@@ -231,7 +231,7 @@ let client = EthereumHttpClient(
     // Please avoid using public RPC URL in production, use services
     // like Infura, Quicknode, etc.
     url: URL.init(string: rpcUrl)!,
-    // Replace with the chain id of the network you want to Connect to
+    // Replace with the chain id of the network you want to connect to
     network: .custom(chainId)
 )
 
@@ -254,10 +254,10 @@ For Solana integration, you can get the Ed25519 private key:
 import SolanaSwift
 
 // Use your Web3Auth instance to get the private key
-let ed25519PrivateKey = Web3auth.getEd25519PrivKey()
+let ed25519PrivateKey = web3Auth.getEd25519PrivKey()
 
 // Generate the KeyPair
-let keyPair = try KeyPair(secretKey: Data(hex: ed25519PrivateKey))
+let keyPair = try KeyPair(secretKey: data(hex: ed25519PrivateKey))
 
 // Get the user account
 let userAccount = keyPair.publicKey.base58EncodedString
@@ -275,6 +275,6 @@ let balanceResponse = try await solanaJSONRPCClient.getBalance(
     account: userAccount
 )
 
-// We are dividing the balance by 10^9, because Solana's Token decimals is set to be 9;
+// We are dividing the balance by 10^9, because Solana's token decimals is set to be 9;
 let userBalance = return balanceResponse.convertToBalance(decimals: 9)
 ```

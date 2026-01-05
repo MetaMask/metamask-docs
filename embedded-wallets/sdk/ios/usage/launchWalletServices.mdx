@@ -69,16 +69,16 @@ public struct ChainConfig: Codable {
 
 ```swift
 do {
-	// Focus-start
-  try await Web3auth!.launchWalletServices(
+	// focus-start
+  try await web3Auth!.launchWalletServices(
     chainConfig: ChainConfig(
       chainId: "0xaa36a7",
       rpcTarget: "https://eth-sepolia.public.blastapi.io"
     )
    )
-	// Focus-end
+	// focus-end
 } catch {
-  print(Error.localizedDescription)
-  // Handle Error
+  print(error.localizedDescription)
+  // Handle error
 }
 ```

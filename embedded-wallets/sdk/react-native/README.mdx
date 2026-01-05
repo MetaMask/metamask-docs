@@ -12,7 +12,7 @@ import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for React Native applications with social logins, external wallets, and more. Using our React Native SDK, you can easily Connect users to their preferred wallets and manage authentication state across both iOS and Android platforms.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for React Native applications with social logins, external wallets, and more. Using our React Native SDK, you can easily connect users to their preferred wallets and manage authentication state across both iOS and Android platforms.
 
 ## Requirements
 
@@ -98,10 +98,10 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
   ```gradle title="build.gradle"
   buildToolsVersion = "31.0.0"
   minSdkVersion = 21
-  // Focus-start
+  // focus-start
   compileSdkVersion = 31
   targetSdkVersion = 31
-  // Focus-end
+  // focus-end
   ```
 
 - Add the intent filter with scheme defined in your `AndroidManifest.xml`
@@ -111,10 +111,10 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
     <action android:name="android.intent.action.VIEW" />
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
-    # Focus-start
+    # focus-start
     # Replace with your own scheme
-    <Data android:scheme="web3authrnexample" />
-    # Focus-end
+    <data android:scheme="web3authrnexample" />
+    # focus-end
   </intent-filter>
   ```
 
@@ -127,7 +127,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
     android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
     android:launchMode="singleTask"
     android:windowSoftInputMode="adjustResize"
-    # Focus-next-line
+    # focus-next-line
     android:exported="true">
   ```
 
@@ -202,13 +202,13 @@ import * as SecureStore from 'expo-secure-store'
 const scheme = 'web3authrnexample' // Or your desired app redirection scheme
 const resolvedRedirectUrl = `${scheme}://auth`
 
-// Focus-start
+// focus-start
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
-// Focus-end
+// focus-end
 ```
 
 </TabItem>
@@ -223,13 +223,13 @@ import EncryptedStorage from 'react-native-encrypted-storage'
 const scheme = 'web3authrnexample' // Or your desired app redirection scheme
 const resolvedRedirectUrl = `${scheme}://auth`
 
-// Focus-start
+// focus-start
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
-// Focus-end
+// focus-end
 ```
 
 </TabItem>
@@ -247,15 +247,15 @@ useEffect(() => {
     try {
       await web3auth.init()
       console.log('Web3Auth initialized successfully')
-    } catch (Error) {
-      console.Error('Error initializing Web3Auth:', Error)
+    } catch (error) {
+      console.error('error initializing Web3Auth:', error)
     }
   }
   init()
 }, [])
 ```
 
-## Advanced configuration
+## Advanced Configuration
 
 The Web3Auth React Native SDK offers a rich set of advanced configuration options:
 
@@ -274,7 +274,7 @@ Head over to the advanced configuration sections to learn more about each config
 <Tabs
   defaultValue="basic-config"
   values={[
-    { label: "Basic configuration", value: "basic-config" },
+    { label: "Basic Configuration", value: "basic-config" },
     { label: "Advanced Configuration", value: "advanced-config" },
   ]}
 >
@@ -328,15 +328,15 @@ Web3Auth is blockchain agnostic, enabling integration with any blockchain networ
 
 ### Ethereum integration
 
-For Ethereum integration, you can get the Provider and use it with ethers or viem:
+For Ethereum integration, you can get the provider and use it with ethers or viem:
 
 ```typescript
 // Import the required shims
 import '@ethersproject/shims'
 // Import the ethers library
 import { ethers } from 'ethers'
-// Import the Web3Auth Ethereum Provider
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-Provider'
+// Import the Web3Auth Ethereum provider
+import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
 
 // Define the chain config for the EVM network
 chainConfig = {
@@ -349,28 +349,28 @@ chainConfig = {
   tickerName: 'Ethereum',
 }
 
-// Create an instance of the Web3Auth Ethereum Provider
-const ethereumPrivateKeyProvider = new EthereumPrivateKeyProvider({
+// Create an instance of the Web3Auth Ethereum provider
+const ethereumPrivateKeyprovider = new EthereumPrivateKeyprovider({
   config: {
     chainConfig,
   },
 })
 
-// Setup the Provider with the Web3Auth Private Key
-await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey)
+// Setup the provider with the Web3Auth Private Key
+await ethereumPrivateKeyprovider.setupprovider(web3auth.privKey)
 
-// Create an instance of the ethers BrowserProvider using the Web3Auth Ethereum Provider
-const ethersProvider = new ethers.BrowserProvider(ethereumPrivateKeyProvider)
+// Create an instance of the ethers Browserprovider using the Web3Auth Ethereum provider
+const ethersprovider = new ethers.Browserprovider(ethereumPrivateKeyprovider)
 
 // Get the signer for ethers
-const signer = await ethersProvider.getSigner()
+const signer = await ethersprovider.getSigner()
 
 // Get the address of the user
 const address = signer.getAddress()
 
 // Get the balance of the user
 const balance = ethers.formatEther(
-  await ethersProvider.getBalance(address) // Balance is in wei
+  await ethersprovider.getBalance(address) // Balance is in wei
 )
 ```
 
@@ -384,8 +384,8 @@ const getSolanaAccount = async () => {
     const privateKey = await web3auth.getPrivKey()
     // Use private key with Solana libraries
     console.log('Solana private key:', privateKey)
-  } catch (Error) {
-    console.Error('Error getting private key:', Error)
+  } catch (error) {
+    console.error('error getting private key:', error)
   }
 }
 ```

@@ -1,15 +1,15 @@
-When instantiating the Account Abstraction Provider, you can pass configuration objects to the
+When instantiating the Account Abstraction provider, you can pass configuration objects to the
 constructor. These configuration options allow you to select the desired Account Abstraction (AA)
-Provider, as well as configure the bundler and paymaster, giving you flexibility and control over
-the Provider.
+provider, as well as configure the bundler and paymaster, giving you flexibility and control over
+the provider.
 
 ```tsx
-// Focus-start
+// focus-start
 import {
-  AccountAbstractionProvider,
+  AccountAbstractionprovider,
   SafeSmartAccount,
-} from "@web3auth/account-abstraction-Provider";
-// Focus-end
+} from "@web3auth/account-abstraction-provider";
+// focus-end
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -22,8 +22,8 @@ const chainConfig = {
   logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
 };
 
-// Focus-start
-const accountAbstractionProvider = new AccountAbstractionProvider({
+// focus-start
+const accountAbstractionprovider = new AccountAbstractionprovider({
   config: {
     chainConfig,
     smartAccountInit: new SafeSmartAccount(),
@@ -33,5 +33,5 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
     },
   },
 });
-// Focus-end
+// focus-end
 ```

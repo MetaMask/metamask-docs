@@ -7,16 +7,16 @@ description: 'PnP React Native SDK - v4 to v5 | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-## Changes to the `WhiteLabelData` object
+## Changes to the `WhiteLabeldata` object
 
 ### Addition and modifications to parameters
 
 - With v5, when sending the whitelabel object while initialization, please keep in mind that the `name` parameter signifying the name of the app has been changed to `appName`.
 - The `dark` parameter that used to accept a boolean value to switch between dark or light mode has been changed to `mode` that accepts a string value of either `light` or `dark` or `auto`.
 - The `theme` parameter now accepts an object with key-value pairs, where the value corresponds to the color for a specific set of keys.
-- Other than the above modifications, new parameters have been added to the `WhiteLabelData` object, like, `appUrl`, `useLogoLoader`, `tncLink` and `privacyPolicy`.
+- Other than the above modifications, new parameters have been added to the `WhiteLabeldata` object, like, `appUrl`, `useLogoLoader`, `tncLink` and `privacyPolicy`.
 
-Please look at the [whitelabel](/embedded-wallets/sdk/react-native/advanced/whitelabel) section for `WhiteLabelData` interface.
+Please look at the [whitelabel](/embedded-wallets/sdk/react-native/advanced/whitelabel) section for `WhiteLabeldata` interface.
 
 <Tabs
   defaultValue="expo"
@@ -38,7 +38,7 @@ const clientId = 'YOUR WEB3AUTH CLIENT ID'
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   clientId,
   network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-  // Focus-start
+  // focus-start
   whiteLabel: {
     appName: 'My App',
     logoLight: 'https://web3auth.io/images/logo-light.png',
@@ -49,7 +49,7 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
       primary: '#cddc39',
     },
   },
-  // Focus-end
+  // focus-end
 })
 ```
 
@@ -67,7 +67,7 @@ const clientId = 'YOUR WEB3AUTH CLIENT ID'
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   clientId,
   network: OPENLOGIN_NETWORK.TESTNET, // or other networks
-  // Focus-start
+  // focus-start
   whiteLabel: {
     appName: 'My App',
     logoLight: 'https://web3auth.io/images/logo-light.png',
@@ -78,7 +78,7 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
       primary: '#cddc39',
     },
   },
-  // Focus-end
+  // focus-end
 })
 ```
 

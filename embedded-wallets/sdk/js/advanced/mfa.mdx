@@ -25,7 +25,7 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 There are two ways to configure MFA in your application:
 
 1. **Using the `mfaLevel` setting**: Controls the frequency of the MFA setup request screen.
-2. **Using the `mfaSettings` setting**: Provides granular control over each factor, with their priority level, enable/disable Status, and mandatory/optional settings.
+2. **Using the `mfaSettings` setting**: Provides granular control over each factor, with their priority level, enable/disable status, and mandatory/optional settings.
 
 ## `mfaLevel`
 
@@ -61,10 +61,10 @@ export declare const MFA_LEVELS: {
 ```ts
 import { WALLET_CONNECTORS, AUTH_CONNECTION, MFA_LEVELS } from '@web3auth/modal'
 
-await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
-  authConnection: AUTH_CONNECTION.GOOGLE,
-  authConnectionId: 'w3a-google-demo',
-  // Focus-next-line
+await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  authconnection: AUTH_CONNECTION.GOOGLE,
+  authconnectionId: 'w3a-google-demo',
+  // focus-next-line
   mfaLevel: MFA_LEVELS.MANDATORY,
 })
 ```
@@ -89,7 +89,7 @@ mfaSettings?: MfaSettings;
 | `PASSWORD`      | "passwordFactor"      | Password-based authentication        |
 | `AUTHENTICATOR` | "authenticatorFactor" | Authenticator app (TOTP)             |
 
-### Multi-Factor Authentication settings properties
+### MFA Settings Properties
 
 | Property    | Type    | Description                                            |
 | ----------- | ------- | ------------------------------------------------------ |
@@ -132,8 +132,8 @@ import { Web3Auth, MFA_FACTOR, WEB3AUTH_NETWORK } from '@web3auth/modal'
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  // Focus-start
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // focus-start
   mfaSettings: {
     [MFA_FACTOR.DEVICE]: {
       enable: true,
@@ -166,7 +166,7 @@ const web3auth = new Web3Auth({
       mandatory: false,
     },
   },
-  // Focus-end
+  // focus-end
 })
 
 // Initialize web3auth

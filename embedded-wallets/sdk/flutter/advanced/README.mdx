@@ -32,7 +32,7 @@ Future<void> initWeb3Auth() async {
     // com.example.w3aflutter://auth
   }
 
-  // Focus-start
+  // focus-start
 
   await Web3AuthFlutter.init(Web3AuthOptions(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
@@ -40,7 +40,7 @@ Future<void> initWeb3Auth() async {
     redirectUrl: redirectUrl,
   ));
 
-  // Focus-end
+  // focus-end
 }
 ```
 
@@ -63,9 +63,9 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 | `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `String`.              |
 | `network`      | Web3Auth Network: `sapphire_mainnet`, `sapphire_devnet`, `mainnet`, `cyan`, `aqua` or `testnet`. Mandatory field of type `Network`. |
 | `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `Uri`.                 |
-| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                    |
+| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabeldata` as a value.                                    |
 | `loginConfig?` | Login config for custom verifiers. Takes `HashMap<String, LoginConfigItem>` as a value.                                             |
-| `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                          |
+| `mfaSettings?` | Configure MFA Settings for authentication. Takes `MfaSettings` as a value.                                                          |
 | `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                        |
 
 </TabItem>
@@ -79,7 +79,7 @@ class Web3AuthOptions {
   final BuildEnv? buildEnv;
   final String? sdkUrl;
   final Uri redirectUrl;
-  final WhiteLabelData? whiteLabel;
+  final WhiteLabeldata? whiteLabel;
   final HashMap<String, LoginConfigItem>? loginConfig;
   final bool? useCoreKitKey;
   final ChainNamespace? chainNamespace;
@@ -125,7 +125,7 @@ class Web3AuthOptions {
 
 Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keystore.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -151,9 +151,9 @@ Create a seamless brand experience by customizing the Web3Auth Login Screens to 
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
-**Key Configuration options:**
+**Key Configuration Options:**
 
-- `mfaSettings` - Configure MFA settings for different authentication flows
+- `mfaSettings` - Configure MFA Settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA

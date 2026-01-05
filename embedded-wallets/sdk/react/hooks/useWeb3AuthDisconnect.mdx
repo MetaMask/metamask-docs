@@ -1,31 +1,31 @@
 ---
-title: useWeb3AuthDisConnect
-sidebar_label: useWeb3AuthDisConnect
-description: '@web3auth/modal React Hooks useWeb3AuthDisConnect | Embedded Wallets'
+title: useWeb3AuthDisconnect
+sidebar_label: useWeb3AuthDisconnect
+description: '@web3auth/modal React Hooks useWeb3AuthDisconnect | Embedded Wallets'
 ---
 
-Hook to DisConnect from Web3Auth.
+Hook to disconnect from Web3Auth.
 
 ### Import
 
 ```tsx
-import { useWeb3AuthDisConnect } from '@web3auth/modal/react'
+import { useWeb3AuthDisconnect } from '@web3auth/modal/react'
 ```
 
 ### Usage
 
 ```tsx
-import { useWeb3AuthDisConnect } from '@web3auth/modal/react'
+import { useWeb3AuthDisconnect } from '@web3auth/modal/react'
 
-function DisConnectButton() {
-  const { DisConnect, Loading, Error } = useWeb3AuthDisConnect()
+function DisconnectButton() {
+  const { disconnect, loading, error } = useWeb3AuthDisconnect()
 
   return (
     <div>
-      <button onClick={() => DisConnect()} disabled={Loading}>
-        {Loading ? 'DisConnecting...' : 'DisConnect'}
+      <button onClick={() => disconnect()} disabled={loading}>
+        {loading ? 'Disconnecting...' : 'disconnect'}
       </button>
-      {Error && <div>{Error.message}</div>}
+      {error && <div>{error.message}</div>}
     </div>
   )
 }
@@ -34,22 +34,22 @@ function DisConnectButton() {
 ### Return type
 
 ```tsx
-import { type IUseWeb3AuthDisConnect } from '@web3auth/modal/react'
+import { type IUseWeb3AuthDisconnect } from '@web3auth/modal/react'
 ```
 
-#### Loading
+#### loading
 
 `boolean`
 
-Whether the DisConnection process is in progress.
+Whether the Disconnection process is in progress.
 
-#### Error
+#### error
 
-`Web3AuthError | null`
+`Web3Autherror | null`
 
-Error that occurred during the DisConnection process.
+error that occurred during the Disconnection process.
 
-#### DisConnect
+#### Disconnect
 `(options?: { cleanup: boolean }) => Promise<void>`
 
-Function to initiate the DisConnection process. Optional `cleanup` parameter controls whether to remove all user Data.
+Function to initiate the Disconnection process. Optional `cleanup` parameter controls whether to remove all user data.
