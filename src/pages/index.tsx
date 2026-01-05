@@ -49,14 +49,14 @@ export default function Home(): JSX.Element {
           {
             title: 'Create embedded wallets',
             description:
-              'Onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
+              'Onboard power users and first-time users in seconds via social logins, or by integrating your own authentication providers.',
             href: '/embedded-wallets',
             buttonIcon: 'arrow-right',
           },
           {
             title: 'Create smart accounts',
             description:
-              'Integrate MetaMask Smart Accounts into your dapp. Create smart wallets that support delegated permissions, gas abstraction, and secure execution.',
+              'Create and interact with MetaMask Smart Accounts, unlocking new programmable account behaviors and granular permission sharing.',
             href: '/smart-accounts-kit',
             buttonIcon: 'arrow-right',
           },

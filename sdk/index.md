@@ -91,5 +91,5 @@ buttonIcon: 'external-arrow',
 
 :::tip Build embedded wallet experiences that work seamlessly with MetaMask
 Introducing our latest [Embedded Wallets SDK](connect/javascript-web3auth.md) (Web3Auth), you can now onboard users
-instantly and design seamless onchain experiences with social logins, passkeys and more.
+instantly and design seamless onchain experiences with social logins and more.
 :::

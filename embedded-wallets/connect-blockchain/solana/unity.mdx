@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem'
 
 While using the Web3Auth Unity SDK, you can retrieve the Ed25519 private key within the user scope after authentication. Use this key with a Solana Unity integration to perform blockchain operations.
 
-## Chain Details for Solana
+## Chain details for Solana
 
 <Tabs
  defaultValue="mainnet"
@@ -64,7 +64,7 @@ While using the Web3Auth Unity SDK, you can retrieve the Ed25519 private key wit
 
 For Unity Solana integration, we recommend using the **Solana Unity SDK by Magicblock**, which is available on the Unity Asset Store. This SDK provides comprehensive Solana functionality including JSON RPC API coverage, wallet management, transaction handling, and NFT operations.
 
-### Installing Solana Unity SDK
+### Installing the Solana Unity SDK
 
 1. Open Unity Asset Store in your Unity Editor
 2. Search for "Solana Unity SDK" by Magicblock
@@ -100,7 +100,7 @@ public class SolanaIntegration : MonoBehaviour
 }
 ```
 
-## Get Ed25519 Private Key
+## Get Ed25519 private key
 
 ```csharp
 // After successful Web3Auth login
@@ -110,7 +110,7 @@ string ed25519PrivateKey = await web3auth.GetEd25519PrivKey();
 byte[] privateKeyBytes = Convert.FromHexString(ed25519PrivateKey);
 ```
 
-## Create Solana Keypair
+## Create a Solana keypair
 
 Using the Magicblock Solana Unity SDK, you can create a keypair from the private key:
 
@@ -126,7 +126,7 @@ var publicKey = account.PublicKey;
 Debug.Log($"Solana Public Key: {publicKey}");
 ```
 
-## Get Account Balance
+## Get account Balance
 
 ```csharp
 using Solana.Unity.Rpc;
@@ -142,7 +142,7 @@ var balanceInSOL = balance.Result.Value / 1_000_000_000.0; // Convert lamports t
 Debug.Log($"Balance: {balanceInSOL} SOL");
 ```
 
-## Sign Transaction
+## Sign a transaction
 
 ```csharp
 using Solana.Unity.Rpc.Models;
@@ -166,7 +166,7 @@ var transaction = new TransactionBuilder()
 Debug.Log($"Transaction signature: {transaction.Signatures[0]}");
 ```
 
-## Send Transaction
+## Send transaction
 
 ```csharp
 // Sign and send the transaction
@@ -182,7 +182,7 @@ else
 }
 ```
 
-## Sign Message
+## Sign a message
 
 ```csharp
 // Sign a message with the private key

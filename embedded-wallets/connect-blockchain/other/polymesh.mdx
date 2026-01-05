@@ -11,7 +11,7 @@ import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While using the Embedded Wallets Web SDK (formerly Web3Auth) for a non-EVM chain like [Polymesh](https://www.polymesh.network/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's public `signing key`, fetching `balance`, and `sign & send transaction`. We have highlighted a few methods here to get you started quickly.
+While using the Embedded Wallets Web SDK for a non-EVM chain like [Polymesh](https://www.polymesh.network/), you can get the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make blockchain calls like getting the user's public `signing key`, fetching `balance`, and `sign & send transaction`. We have highlighted a few methods here to get you started quickly.
 
 ::::note
 
@@ -27,7 +27,7 @@ For Polymesh, we will use the libraries `@polymeshassociation/polymesh-sdk` and 
 npm install --save @polymeshassociation/polymesh-sdk @polymeshassociation/local-signing-manager
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -68,7 +68,7 @@ npm install --save @polymeshassociation/polymesh-sdk @polymeshassociation/local-
 </TabItem>
 </Tabs>
 
-## Get Account and KeyPair
+## Get account and keypair
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Polymesh, we directly use the private key to make RPC calls.
 
@@ -91,7 +91,7 @@ const localSigningManager = await LocalSigningManager.create({
 })
 ```
 
-At this point if we were to query the public key derived from the private key by calling `localSigningManager.getAccounts()` the function would throw an error as a SS58 prefix for the chain has not been set. The SS58 prefix can be set manually by calling e.g. `localSigningManager.setSs58Format(12)`, or by attaching the signing manager to an instance of the Polymesh SDK which will automatically read the correct SS58 prefix from the chain and set it in the signing manager.
+At this point if we were to query the public key derived from the private key by calling `localSigningManager.getAccounts()` the function would throw an error as a SS58 prefix for the chain has not been set. The SS58 prefix can be set manually, for example, by calling `localSigningManager.setSs58Format(12)`, or by attaching the signing manager to an instance of the Polymesh SDK which will automatically read the correct SS58 prefix from the chain and set it in the signing manager.
 
 <Tabs
  groupId="chain"
@@ -148,7 +148,7 @@ console.log(`Public Key: ${signingAccount.address}`)
 </TabItem>
 </Tabs>
 
-## Get Balance
+## Get balance
 
 ```tsx
 /*
@@ -159,7 +159,7 @@ console.log(`Public Key: ${signingAccount.address}`)
 const balance = await polymeshApi.accountManagement.getAccountBalance()
 ```
 
-## Get The Associated Identity ID
+## Get the associated identity ID
 
 Before a key on Polymesh can receive tokens or transact on chain it must be associated with an onchain identity. A new identity can be assigned by a permissioned Certified Due Diligence (CDD) provider or you can add the key to an existing identity. Individuals can onboard their key by visiting https://testnet-onboarding.polymesh.live/ or https://mainnet-onboarding.polymesh.network/.
 
@@ -173,7 +173,7 @@ const identity = await polymeshApi.getSigningIdentity()
 console.log(`Signing Identity: ${identity?.did || 'No identity found'}`)
 ```
 
-## Send Transaction
+## Send transaction
 
 ```tsx
 /*

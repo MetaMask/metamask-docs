@@ -25,7 +25,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 npm install --save web3 bn.js elliptic @starkware-industries/starkex-js @starkware-industries/starkware-crypto-utils
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -65,7 +65,7 @@ npm install --save web3 bn.js elliptic @starkware-industries/starkex-js @starkwa
 </TabItem>
 </Tabs>
 
-## Get Account and Key
+## Get account and Key
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Even though StarkEx is a layer 2 on Ethereum, it is not EVM compatible. Therefore, you cannot use the native [`EIP-1193`](https://eips.ethereum.org/EIPS/eip-1193) provider used for EVM blockchains; instead, use the private key directly to make calls.
 
@@ -90,7 +90,7 @@ const account = starkwareCrypto.ec.keyFromPublic(keyPair.getPublic(true, 'hex'),
 const startKey = account.pub.getX().toString('hex')
 ```
 
-## Mint Request
+## Mint request
 
 ```tsx
 import StarkExAPI from '@starkware-industries/starkex-js/dist/browser'
@@ -126,7 +126,7 @@ const request = {
 const response = await starkExAPI.gateway.mint(request)
 ```
 
-## Deposit Request
+## Deposit request
 
 ```tsx
 import StarkExAPI from '@starkware-industries/starkex-js/dist/browser'
@@ -162,7 +162,7 @@ const request = {
 const response = await starkExAPI.gateway.deposit(request)
 ```
 
-## Withdraw Request
+## Withdraw request
 
 ```tsx
 import StarkExAPI from '@starkware-industries/starkex-js/dist/browser'

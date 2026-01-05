@@ -18,7 +18,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-## Chain Details for Solana
+## Chain details for Solana
 
 <Tabs
  defaultValue="mainnet"
@@ -82,7 +82,7 @@ flutter pub add solana get_it hex
 
 To Initialize the `SolanaClient` we require `rpcUrl` and `websocketUrl`. The `rpcUrl` will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response. For this example, we are using `rpcUrl` & `websocketUrl` for Devnet-beta. To interact with Testnet or Mainnet, you can simply change the `rpcUrl` and `websocketUrl`.
 
-### Initializing Solana SDK
+### Initializing the Solana SDK
 
 In the below code block, we'll initialize the `SolanaClient` using the Devnet-beta rpc and websocket urls. We'll also register the instance in GetIt for it to be accessed anywhere using service locator.
 
@@ -196,11 +196,11 @@ class _MainAppState extends State<MainApp> {
 }
 ```
 
-## Get Account and Balance
+## Get account and Balance
 
 We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retive user's public address, and solana balance. We'll use `SolanaProvider` class to interact with Solana cluster and fetch user balance.
 
-### Setup Solana Provider
+### Set up Solana provider
 
 In the below code block, we'll create Solana provider to interact and perform solana operations.
 
@@ -337,7 +337,7 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 ```
 
-## Sign Transaction
+## Sign a transaction
 
 Let's now go through how can we sign the transaction. In the below code block, we'll add a new method inside `SolanaProvider` we setup earlier to help us sign a transfer transaction. After successful implementation, we can use the method in `HomeScreen`.
 
@@ -458,7 +458,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 ```
 
-## Send Transaction
+## Send transaction
 
 For the send transaction, we'll create a new method `sendSol` in the `SolanaProvider`.
 
