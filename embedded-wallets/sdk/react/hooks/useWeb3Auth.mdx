@@ -18,80 +18,79 @@ import { useWeb3Auth } from '@web3auth/modal/react'
 import { useWeb3Auth } from '@web3auth/modal/react'
 
 function App() {
-  const { web3Auth, isConnected, isInitializing, provider, status, initError } = useWeb3Auth()
+  const { web3Auth, IsConnected, Isinitializing, Provider, Status, Initerror } = useWeb3Auth()
 
-  if (isConnected) {
-    // User is connected
-    console.log('Connected with provider:', provider)
+  if (IsConnected) {
+    // User is Connected
+    console.log('Connected with Provider:', Provider)
   }
-  if (isInitializing) {
+  if (Isinitializing) {
     // Web3Auth is initializing
     console.log('Web3Auth is initializing')
   }
-  if (provider) {
-    // Web3Auth provider is connected
-    console.log('Web3Auth provider is connected')
+  if (Provider) {
+    // Web3Auth Provider is Connected
+    console.log('Web3Auth Provider is Connected')
   }
-  if (status) {
-    // Web3Auth status
-    console.log('Web3Auth status:', status)
+  if (Status) {
+    // Web3Auth Status
+    console.log('Web3Auth Status:', Status)
   }
-  if (initError) {
-    // Web3Auth initialization error
-    console.log('Web3Auth initialization error:', initError)
+  if (Initerror) {
+    // Web3Auth initialization Error
+    console.log('Web3Auth initialization Error:', Initerror)
   }
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IUseWeb3Auth } from '@web3auth/modal/react'
 ```
 
-#### initError
+#### Initerror
 
 `Error | null`
 
 Error that occurred during Web3Auth initialization.
 
-#### isConnected
-
+#### IsConnected
 `boolean`
 
-Whether the user is connected to Web3Auth.
+Whether the user is Connected to Web3Auth.
 
-#### isInitialized
+#### Isinitialized
 
 `boolean`
 
 Whether Web3Auth has completed initialization.
 
-#### isInitializing
+#### Isinitializing
 
 `boolean`
 
 Whether Web3Auth is currently initializing.
 
-#### provider
+#### Provider
 
 `IProvider | null`
 
-Connected provider from Web3Auth.
+Connected Provider from Web3Auth.
 
-#### status
+#### Status
 
 `string`
 
-Current status of the Web3Auth connection.
+Current Status of the Web3Auth Connection.
 
-#### web3Auth
+#### Web3auth
 
 `Web3Auth`
 
 The Web3Auth instance.
 
-#### getPlugin
+#### Getplugin
 
 `(pluginName: PLUGIN_NAME) => IPlugin | null`
 

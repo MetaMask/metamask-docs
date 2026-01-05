@@ -6,7 +6,7 @@ description: 'Web3Auth Flutter SDK - Whitelabel | Embedded Wallets'
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import WhiteLabelShowcase from '../../_common/_whitelabel_showcase.mdx'
+import WhiteLabelShowcase from '../../_common/_whitelabel_Showcase.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
@@ -20,7 +20,7 @@ Web3Auth allows complete whitelabeling with application branding for a consisten
 
 <GrowthPlanNote />
 
-## Customizing the Web3Auth Login Screens
+## Customizing the Web3Auth login screens
 
 For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `WhiteLabelData`. `WhiteLabelData` can be definied during initialization of the SDK in `Web3AuthOptions` object.
 
@@ -101,10 +101,10 @@ class WhiteLabelData {
 ```dart title="Usage"
 Future<void> initWeb3Auth() async {
 
-  // focus-start
+  // Focus-start
   final themeMap = HashMap<String, String>();
   themeMap['primary'] = "#229954";
-  // focus-end
+  // Focus-end
 
   Uri redirectUrl;
   if (Platform.isAndroid) {
@@ -122,7 +122,7 @@ Future<void> initWeb3Auth() async {
       clientId: "WEB3AUTH_CLIENT_ID",
       network: Network.sapphire_mainnet,
       redirectUrl: redirectUrl,
-      // focus-start
+      // Focus-start
       whiteLabel: WhiteLabelData(
         appName: "Web3Auth Flutter App",
         logoLight:
@@ -135,7 +135,7 @@ Future<void> initWeb3Auth() async {
         useLogoLoader: true,
         theme: themeMap,
       ),
-    // focus-end
+    // Focus-end
     ),
   );
 }

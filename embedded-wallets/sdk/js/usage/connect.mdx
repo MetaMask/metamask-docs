@@ -1,13 +1,13 @@
 ---
-title: connect & connectTo
-sidebar_label: connect & connectTo
+title: Connect & ConnectTo
+sidebar_label: Connect & ConnectTo
 description: '@web3auth/modal Connect Functions | Embedded Wallets'
 ---
 
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-Functions to connect users to Web3Auth in the browser.
+Functions to Connect users to Web3Auth in the browser.
 
 ### Import
 
@@ -15,18 +15,17 @@ Functions to connect users to Web3Auth in the browser.
 import { Web3Auth } from '@web3auth/modal'
 ```
 
-### Choosing the Right Connection Method
+### Choosing the right Connection method
+You can Connect users to Web3Auth in two main ways, depending on your application's needs:
 
-You can connect users to Web3Auth in two main ways, depending on your application's needs:
+- **Use `Connect()`** when you want to display the default Web3Auth modal. This is ideal if you want to provide users with a pre-built, user-friendly interface where they can choose from all available login options (social logins, wallets, etc.) with minimal setup.
 
-- **Use `connect()`** when you want to display the default Web3Auth modal. This is ideal if you want to provide users with a pre-built, user-friendly interface where they can choose from all available login options (social logins, wallets, etc.) with minimal setup.
-
-- **Use `connectTo(connector, params)`** when you want to build a fully custom login experience. This method lets you bypass the Web3Auth modal and connect directly to a specific wallet connector (such as Google, Facebook, or a particular wallet). Choose this if you want to design your own UI for login options, or if you want to restrict users to a specific authentication method. This method also allows you to use JWT based login configurations.
+- **Use `ConnectTo(Connector, params)`** when you want to build a fully custom login experience. This method lets you bypass the Web3Auth modal and Connect directly to a specific wallet Connector (such as Google, Facebook, or a particular wallet). Choose this if you want to design your own UI for login options, or if you want to restrict users to a specific authentication method. This method also allows you to use JWT based login configurations.
 
 **Summary:**
 
-- Use `connect()` for the standard modal experience.
-- Use `connectTo()` for custom UIs or direct connection to a specific login method.
+- Use `Connect()` for the standard modal experience.
+- Use `ConnectTo()` for custom UIs or direct Connection to a specific login method.
 
 ### Usage
 
@@ -42,7 +41,7 @@ You can connect users to Web3Auth in two main ways, depending on your applicatio
 
 :::info
 
-This is the most common way to connect to Web3Auth. It opens the Web3Auth modal UI, allowing users to select from available login options.
+This is the most common way to Connect to Web3Auth. It opens the Web3Auth modal UI, allowing users to select from available login options.
 
 :::
 
@@ -54,8 +53,8 @@ const web3auth = new Web3Auth({
 
 await web3auth.init()
 
-// Show the modal and connect
-const provider = await web3auth.connect()
+// Show the modal and Connect
+const Provider = await web3auth.Connect()
 ```
 
 </TabItem>
@@ -64,7 +63,7 @@ const provider = await web3auth.connect()
 
 :::info
 
-This method allows you to build your own custom connection UI. It bypasses the Web3Auth modal UI, allowing you to create your own custom UI for login options. This can be useful if you want to hide Web3Auth from your end users.
+This method allows you to build your own custom Connection UI. It bypasses the Web3Auth modal UI, allowing you to create your own custom UI for login options. This can be useful if you want to hide Web3Auth from your end users.
 
 :::
 
@@ -79,7 +78,7 @@ const web3auth = new Web3Auth({
 await web3auth.init()
 
 // Connect directly to Google
-const provider = await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+const Provider = await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.GOOGLE,
 })
 ```
@@ -88,21 +87,21 @@ const provider = await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
 
 </Tabs>
 
-### Return Types
+### Return types
 
 ```tsx
-connect(): Promise<IProvider | null>;
-connectTo<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]): Promise<IProvider | null>;
+Connect(): Promise<IProvider | null>;
+ConnectTo<T extends WALLET_CONNECTOR_TYPE>(Connector: T, params?: LoginParamMap[T]): Promise<IProvider | null>;
 ```
 
-#### Return Values
+#### Return values
 
 - **IProvider | null**
-  - On successful login, returns an `IProvider` instance containing the respective provider corresponding to your selected blockchain.
+  - On successful login, returns an `IProvider` instance containing the respective Provider corresponding to your selected blockchain.
   - On unsuccessful login, returns `null`.
 
 :::tip
 
-Read more about connecting your users with the selected blockchain in the [Providers SDK Reference](/embedded-wallets/sdk/react).
+Read more about Connecting your users with the selected blockchain in the [Providers SDK Reference](/embedded-wallets/sdk/react).
 
 :::

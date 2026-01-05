@@ -1,18 +1,18 @@
 ---
-title: Advanced Configuration
+title: Advanced configuration
 sidebar_label: Overview
-description: '@web3auth/modal Advanced Configuration | Embedded Wallets'
+description: '@web3auth/modal Advanced configuration | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import Web3AuthOptions from '../../_common/_web3auth-options.mdx'
 
-# Advanced Configuration
+# Advanced configuration
 
 The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
 
-## Configuration Structure
+## Configuration structure
 
 When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
 
@@ -20,13 +20,13 @@ When setting up Web3Auth, you'll pass in the options to the constructor. This co
 import { Component } from "@angular/core";
 import { Web3Auth, WEB3AUTH_NETWORK } from "@web3auth/modal";
 
-// focus-start
+// Focus-start
 const web3auth = new Web3Auth({
   clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   // Core and advanced options go here
 });
-// focus-end
+// Focus-end
 
 @Component({
   selector: "app-root",
@@ -37,7 +37,7 @@ export class AppComponent {
 
   async ngOnInit() {
     const init = async () => {
-      // focus-next-line
+      // Focus-next-line
       await web3auth.init();
     };
 
@@ -51,11 +51,11 @@ export class AppComponent {
 
 <Web3AuthOptions />
 
-## Session Management
+## Session management
 
 Control how long users stay authenticated and how sessions persist.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before
   needing to log in again.
@@ -67,9 +67,9 @@ Control how long users stay authenticated and how sessions persist.
   - `"session"`: Persists only in current tab, cleared when tab closes (sessionStorage)
 
 ```tsx
-const web3AuthOptions = {
+const Web3authOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
 
   // Session configuration
   sessionTime: 86400 * 7, // 7 days (in seconds)
@@ -79,52 +79,51 @@ const web3AuthOptions = {
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user accounts with two-factor authentication. For detailed
+Add additional security layers to protect user Accounts with two-factor authentication. For detailed
 configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx)
 section.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `mfaSettings` - Configure MFA settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA
 
-## Custom Authentication Methods
+## Custom authentication methods
 
 Control the login options presented to your users and how they're displayed in the modal. For
 detailed configuration options and implementation examples, see the
 [Custom Authentication](./custom-authentication.mdx) section.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `modalConfig` - Define which authentication methods are available and customize their appearance
 
-## UI Customization
+## UI customization
 
 Create a seamless brand experience by customizing the Web3Auth Modal to match your application's
 design. For complete customization options, refer to the
 [Whitelabeling & UI Customization](./whitelabel.mdx) section.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `uiConfig` - Personalize the modal's look and feel with custom colors, logos, themes, and more
 - `modalConfig` - Control the visibility and arrangement of authentication options
 
-## Smart Accounts (Account Abstraction)
-
+## Smart Accounts (account abstraction)
 Improve user experience with gasless transactions and advanced account features. Learn more in the
 [Smart Accounts](./smart-accounts.mdx) documentation.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `accountAbstractionConfig` - Fine-tune parameters for smart account implementation
-- `useAAWithExternalWallet` - Enable account abstraction functionality even when users connect with
+- `useAAWithExternalWallet` - Enable account abstraction functionality even when users Connect with
   external wallets
 
-## Wallet Services
+## Wallet services
 
 Extend your application with enhanced wallet functionality. See the
 [Wallet Services](./wallet-services.mdx) documentation for complete configuration options.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `walletServicesConfig` - Integrate additional wallet services and features

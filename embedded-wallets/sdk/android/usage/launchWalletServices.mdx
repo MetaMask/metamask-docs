@@ -1,5 +1,5 @@
 ---
-title: Launch Wallet Services
+title: Launch Wallet services
 sidebar_label: launchWalletServices
 description: 'Web3Auth Android SDK - launchWalletServices Function | Embedded Wallets'
 ---
@@ -7,15 +7,15 @@ description: 'Web3Auth Android SDK - launchWalletServices Function | Embedded Wa
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `launchWalletServices` method launches a WebView which allows you to use the templated wallet UI services. The method takes`ChainConfig` as the required input. Wallet Services is currently only available for EVM chains.
+The `launchWalletServices` method launches a WebView which allows you to use the templated wallet UI services. The method takes`ChainConfig` as the required input. Wallet services is currently only available for EVM chains.
 
 :::note
 
-Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+Access to Wallet services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
 
 :::
 
-![Wallet Services](/img/embedded-wallets/wallet-services/mobile-wallet-services.png)
+![Wallet services](/img/embedded-wallets/wallet-services/mobile-wallet-services.png)
 
 ## Parameters
 
@@ -46,7 +46,7 @@ Access to Wallet Services is gated. You can use this feature in `sapphire_devnet
 <TabItem value="class">
 
 ```kotlin
-data class ChainConfig(
+Data class ChainConfig(
     val chainNamespace: ChainNamespace = ChainNamespace.EIP155,
     val decimals: Int? = 18,
     val blockExplorerUrl: String? = null,
@@ -72,9 +72,9 @@ val chainConfig = ChainConfig(
     chainNamespace = ChainNamespace.EIP155
 )
 
-// focus-start
-val completableFuture = web3Auth.launchWalletServices(
+// Focus-start
+val completableFuture = Web3auth.launchWalletServices(
     chainConfig
 )
-// focus-end
+// Focus-end
 ```

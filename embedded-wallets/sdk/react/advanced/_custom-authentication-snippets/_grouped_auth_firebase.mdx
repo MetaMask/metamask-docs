@@ -1,12 +1,12 @@
 ```tsx title="App.tsx"
 const loginWithGoogle = async () => {
-  // focus-start
-  await connectTo(WALLET_CONNECTORS.AUTH, {
+  // Focus-start
+  await ConnectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: "aggregate-sapphire",
     authConnectionId: "w3a-google",
     authConnection: AUTH_CONNECTION.GOOGLE,
   });
-  // focus-end
+  // Focus-end
 };
 
 const loginWithFirebaseGithub = async () => {
@@ -18,8 +18,8 @@ const loginWithFirebaseGithub = async () => {
 
   const idToken = await result.user.getIdToken(true);
 
-  // focus-start
-  connectTo(WALLET_CONNECTORS.AUTH, {
+  // Focus-start
+  ConnectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: "aggregate-sapphire",
     authConnectionId: "w3a-firebase",
     authConnection: AUTH_CONNECTION.CUSTOM,
@@ -28,6 +28,6 @@ const loginWithFirebaseGithub = async () => {
       isUserIdCaseSensitive: false,
     },
   });
-  // focus-end
+  // Focus-end
 };
 ```

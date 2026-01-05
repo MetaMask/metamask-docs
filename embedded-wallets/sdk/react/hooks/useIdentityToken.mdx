@@ -4,7 +4,7 @@ sidebar_label: useIdentityToken
 description: '@web3auth/modal React Hooks useIdentityToken | Embedded Wallets'
 ---
 
-Hook to retrieve and manage the identity token from Web3Auth.
+Hook to retrieve and manage the identity Token from Web3Auth.
 
 ### Import
 
@@ -18,46 +18,46 @@ import { useIdentityToken } from '@web3auth/modal/react'
 import { useIdentityToken } from '@web3auth/modal/react'
 
 function IdentityTokenButton() {
-  const { getIdentityToken, loading, error, token } = useIdentityToken()
+  const { Getidentitytoken, Loading, Error, Token } = useIdentityToken()
 
   return (
     <div>
-      <button onClick={() => getIdentityToken()} disabled={loading}>
-        {loading ? 'Authenticating...' : 'Get Identity Token'}
+      <button onClick={() => Getidentitytoken()} disabled={Loading}>
+        {Loading ? 'Authenticating...' : 'Get Identity Token'}
       </button>
-      {token && <div>Token: {token}</div>}
-      {error && <div>Error: {error.message}</div>}
+      {Token && <div>Token: {Token}</div>}
+      {Error && <div>Error: {Error.message}</div>}
     </div>
   )
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IUseIdentityToken } from '@web3auth/modal/react'
 ```
 
-#### loading
+#### Loading
 
 `boolean`
 
 Whether the authentication process is in progress.
 
-#### error
+#### Error
 
 `Web3AuthError | null`
 
 Error that occurred during the authentication process.
 
-#### token
+#### Token
 
 `string | null`
 
-The identity token returned after successful authentication.
+The identity Token returned after successful authentication.
 
-#### getIdentityToken
+#### Getidentitytoken
 
 `() => Promise<string | null>`
 
-Function to initiate the authentication process and retrieve the identity token.
+Function to initiate the authentication process and retrieve the identity Token.

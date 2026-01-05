@@ -12,7 +12,7 @@ At Web3Auth, we prioritize your security by offering Multi-Factor Authentication
 
 <MFAMinimumPlan />
 
-## Enable using the MFA Level
+## Enable using the Multi-Factor Authentication level
 
 For a dApp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
 
@@ -22,7 +22,7 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 
 :::
 
-### MFA Level Options
+### MFA level options
 
 | MFA Level | Description                                                |
 | --------- | ---------------------------------------------------------- |
@@ -37,7 +37,7 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 Web3AuthFlutter.login(
   LoginParams(
     loginProvider: Provider.google,
-    // focus-next-line
+    // Focus-next-line
     mfaLevel: MFALevel.MANDATORY,
   ),
 );
@@ -45,7 +45,7 @@ Web3AuthFlutter.login(
 
 ## Explicitly enable MFA
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
+The `Enablemfa` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login Providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT Token in `Loginparams` as well.
 
 <Tabs
   defaultValue="default-verifier"
@@ -59,8 +59,8 @@ The `enableMFA` method is used to trigger MFA setup flow for users. The method t
 
 ```dart title="Usage"
 try {
-  // focus-next-line
-  await Web3AuthFlutter.enableMFA();
+  // Focus-next-line
+  await Web3AuthFlutter.Enablemfa();
 } on UserCancelledException {
   log("User cancelled.");
 } catch(e) {
@@ -74,15 +74,15 @@ try {
 
 ```dart title="Usage"
 try {
-    final loginParams = LoginParams(
+    final Loginparams = LoginParams(
         loginProvider: Provider.jwt,
-        extraLoginOptions: ExtraLoginOptions(
-            id_token: "YOUR_JWT_TOKEN",
+        extraLoginOptions: Extraloginoptions(
+            id_Token: "YOUR_JWT_TOKEN",
         ),
     );
 
-    // focus-next-line
-    await Web3AuthFlutter.enableMFA(loginParams);
+    // Focus-next-line
+    await Web3AuthFlutter.Enablemfa(Loginparams);
 
 } on UserCancelledException { log("User cancelled."); } catch(e) { log("Unknown exception
 occurred"); }
@@ -92,7 +92,7 @@ occurred"); }
 </ TabItem>
 </ Tabs>
 
-## Configure MFA Settings
+## Configure MFA settings
 
 You can configure the order of MFA, and enable or disable MFA type by passing the `mfaSettings` parameter in `Web3AuthOptions` during initialization.
 
@@ -106,7 +106,7 @@ You can configure the order of MFA, and enable or disable MFA type by passing th
 
 :::
 
-### Parameters - MfaSettings
+### Parameters - MFAsettings
 
 `MfaSettings` allows you to set the type of the MFA.
 
@@ -167,7 +167,7 @@ class MfaSettings {
 </TabItem>
 </Tabs>
 
-### Parameters - MfaSetting
+### Parameters - MFAsetting
 
 `MfaSetting` allows you to setup MFA setting for a particular MFA type.
 
@@ -227,7 +227,7 @@ Future<void> initWeb3Auth() async {
     clientId: "WEB3AUTH_CLIENT_ID",
     network: Network.sapphire_mainnet,
     redirectUrl: redirectUrl,
-    // focus-start
+    // Focus-start
     mfaSettings: MfaSettings(
       deviceShareFactor: MfaSetting(
         enable: true,
@@ -260,7 +260,7 @@ Future<void> initWeb3Auth() async {
         mandatory: true,
       ),
     ),
-    // focus-end
+    // Focus-end
   );
 
   await Web3AuthFlutter.initialize();

@@ -6,8 +6,8 @@ implementation of `WagmiProvider`** for configuration.
 The Web3Auth implementation of `WagmiProvider` is a custom implementation that is used to integrate
 with the Web3Auth Modal SDK. It is a wrapper around the `WagmiProvider` that makes it compatible.
 
-With this implementation, you can use the Wagmi hooks, however **no external connectors are
-supported**. Web3Auth provides a whole suite of connectors which you can use directly for a better
+With this implementation, you can use the Wagmi hooks, however **no external Connectors are
+supported**. Web3Auth provides a whole suite of Connectors which you can use directly for a better
 experience with external wallets.
 
 :::
@@ -21,26 +21,26 @@ import "./index.css";
 
 import ReactDOM from "react-dom/client";
 import { Web3AuthProvider } from "@web3auth/modal/react";
-import web3AuthContextConfig from "./web3authContext";
-// focus-start
+import Web3authContextConfig from "./web3authContext";
+// Focus-start
 import { WagmiProvider } from "@web3auth/modal/react/wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-// focus-end
+// Focus-end
 
 import App from "./App";
 
-// focus-next-line
+// Focus-next-line
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <Web3AuthProvider config={web3AuthContextConfig}>
-    {/* focus-start */}
+  <Web3AuthProvider config={Web3authContextConfig}>
+    {/* Focus-start */}
     <QueryClientProvider client={queryClient}>
       <WagmiProvider>
         <App />
       </WagmiProvider>
     </QueryClientProvider>
-    {/* focus-end */}
+    {/* Focus-end */}
   </Web3AuthProvider>,
 );
 ```
@@ -57,7 +57,7 @@ Below are some examples of using Wagmi hooks in your dApp after Web3Auth and Wag
 can note these functions work directly with Wagmi. Once you have set up Wagmi with Web3Auth, you can
 use any Wagmi hook as you would in a standard Wagmi application.
 
-### Get Account Balance
+### Get account balance
 
 ```tsx
 import { useAccount, useBalance } from "wagmi";
@@ -65,21 +65,21 @@ import { formatUnits } from "viem";
 
 export function Balance() {
   const { address } = useAccount();
-  const { data, isLoading, error } = useBalance({ address });
+  const { Data, isLoading, Error } = useBalance({ address });
 
   return (
     <div>
       <h2>Balance</h2>
       <div>
-        {data?.value !== undefined && `${formatUnits(data.value, data.decimals)} ${data.symbol}`}{" "}
-        {isLoading && "Loading..."} {error && "Error: " + error.message}
+        {Data?.value !== undefined && `${formatUnits(Data.value, Data.decimals)} ${Data.symbol}`}{" "}
+        {isLoading && "Loading..."} {Error && "Error: " + Error.message}
       </div>
     </div>
   );
 }
 ```
 
-### Send Transaction
+### Send transaction
 
 ```tsx
 import { FormEvent } from "react";
@@ -87,7 +87,7 @@ import { useWaitForTransactionReceipt, useSendTransaction, BaseError } from "wag
 import { Hex, parseEther } from "viem";
 
 export function SendTransaction() {
-  const { data: hash, error, isPending, sendTransaction } = useSendTransaction();
+  const { Data: hash, Error, isPending, sendTransaction } = useSendTransaction();
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -114,20 +114,20 @@ export function SendTransaction() {
       {hash && <div>Transaction Hash: {hash}</div>}
       {isConfirming && "Waiting for confirmation..."}
       {isConfirmed && "Transaction confirmed."}
-      {error && <div>Error: {(error as BaseError).shortMessage || error.message}</div>}
+      {Error && <div>Error: {(Error as BaseError).shortMessage || Error.message}</div>}
     </div>
   );
 }
 ```
 
-### Switch Chain
+### Switch chain
 
 ```tsx
 import { useChainId, useSwitchChain } from "wagmi";
 
 export function SwitchChain() {
   const chainId = useChainId();
-  const { chains, switchChain, error } = useSwitchChain();
+  const { chains, Switchchain, Error } = useSwitchChain();
 
   return (
     <div>
@@ -137,14 +137,14 @@ export function SwitchChain() {
         <button
           disabled={chainId === chain.id}
           key={chain.id}
-          onClick={() => switchChain({ chainId: chain.id })}
+          onClick={() => Switchchain({ chainId: chain.id })}
           type="button"
           className="card"
         >
           {chain.name}
         </button>
       ))}
-      {error?.message}
+      {Error?.message}
     </div>
   );
 }

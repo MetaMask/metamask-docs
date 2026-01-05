@@ -4,7 +4,7 @@ sidebar_label: logout
 description: 'Web3Auth Unity SDK - logout | Embedded Wallets'
 ---
 
-Trigger logout flow. This function doesn't take parameters. A completable future containing a void object will be returned on successfull logout otherwise an error response is returned.
+Trigger logout flow. This function doesn't take parameters. A completable future containing a void object will be returned on successfull logout otherwise an Error response is returned.
 
 :::tip
 
@@ -13,20 +13,20 @@ Additionally you can associate a function to be triggered on successful logout.
 ```cs
 void Start()
 {
-    web3Auth = GetComponent<Web3Auth>();
-    web3Auth.setOptions(new Web3AuthOptions()
+    Web3auth = GetComponent<Web3Auth>();
+    Web3auth.setOptions(new Web3AuthOptions()
     {
 
     });
-    // focus-next-line
-    web3Auth.onLogout += onLogout;
+    // Focus-next-line
+    Web3auth.onLogout += onLogout;
 }
-//focus-start
+//Focus-start
 private void onLogout()
 {
     // Functions to be called after user logs out
 }
-//focus-end
+//Focus-end
 ```
 
 :::
@@ -36,7 +36,7 @@ private void onLogout()
 ```cs
 public void logout()
 {
-    web3Auth.logout();
+    Web3auth.logout();
     Debug.Log("Logged out!");
 }
 ```

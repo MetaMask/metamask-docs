@@ -6,7 +6,7 @@ description: 'Web3Auth PnP iOS SDK - Whitelabel | Embedded Wallets'
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import WhiteLabelShowcase from '../../_common/_whitelabel_showcase.mdx'
+import WhiteLabelShowcase from '../../_common/_whitelabel_Showcase.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
@@ -20,7 +20,7 @@ Web3Auth allows complete whitelabeling with application branding for a consisten
 
 <GrowthPlanNote />
 
-## Customizing the Web3Auth Login Screens
+## Customizing the Web3Auth login screens
 
 For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `W3AWhiteLabelData`. `W3AWhiteLabelData` can be definied during initialization of the SDK in `W3AInitParams` object.
 
@@ -76,11 +76,11 @@ public struct W3AWhiteLabelData: Codable {
 ### Example
 
 ```swift title="Usage"
-web3Auth = await Web3Auth(
+Web3auth = await Web3Auth(
   W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .testnet,
-    // focus-start
+    // Focus-start
     whiteLabel: W3AWhiteLabelData(
       appName: "Web3Auth Stub",
       logoLight: "https://images.web3auth.io/web3auth-logo-w.svg",
@@ -90,5 +90,5 @@ web3Auth = await Web3Auth(
       theme: ["primary": "#d53f8c"]
     )
   ))
-    // focus-end
+    // Focus-end
 ```

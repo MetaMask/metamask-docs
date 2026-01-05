@@ -18,36 +18,36 @@ import { useSwitchChain } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useSwitchChain } from '@web3auth/modal/vue'
 
-  const { switchChain, loading, error } = useSwitchChain()
+  const { Switchchain, Loading, Error } = useSwitchChain()
 </script>
 
 <template>
-  <button @click="switchChain('0x1')" :disabled="loading">
-    {{ loading ? "Switching..." : "Switch to Ethereum Mainnet" }}
+  <button @click="Switchchain('0x1')" :disabled="Loading">
+    {{ Loading ? "Switching..." : "Switch to Ethereum Mainnet" }}
   </button>
-  <div v-if="error">Error: {{ error.message }}</div>
+  <div v-if="Error">Error: {{ Error.message }}</div>
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 import { type IUseSwitchChain } from '@web3auth/modal/vue'
 ```
 
-#### loading
+#### Loading
 
 `boolean`
 
 Whether the chain switching process is in progress.
 
-#### error
+#### Error
 
 `Web3AuthError | null`
 
 Error that occurred during the chain switching process.
 
-#### switchChain
+#### Switchchain
 
 `(chainId: string) => Promise<void>`
 
@@ -55,31 +55,31 @@ Function to initiate the chain switch. Pass the target `chainId` as a string (e.
 
 ## Example
 
-```html title="switchChain.vue"
+```html title="Switchchain.vue"
 <script setup lang="ts">
   import { useWeb3Auth, useSwitchChain } from '@web3auth/modal/vue'
   import { computed } from 'vue'
 
-  const { web3Auth } = useWeb3Auth()
-  const { switchChain, error } = useSwitchChain()
+  const { Web3auth } = useWeb3Auth()
+  const { Switchchain, Error } = useSwitchChain()
 
-  const currentChainName = computed(() => web3Auth.value?.currentChain?.displayName || '')
+  const currentChainName = computed(() => Web3auth.value?.currentChain?.displayName || '')
 </script>
 
 <template>
   <div>
-    <h2>Switch Chain</h2>
+    <h2>Switch chain</h2>
     <h3>Connected to {{ currentChainName }}</h3>
     <button
-      v-for="chain in web3Auth.value?.coreOptions?.chains"
+      v-for="chain in Web3auth.value?.coreOptions?.chains"
       :key="chain.chainId"
-      :disabled="web3Auth?.currentChain?.chainId === chain.chainId"
-      @click="switchChain({ chainId: chain.chainId })"
+      :disabled="Web3auth?.currentChain?.chainId === chain.chainId"
+      @click="Switchchain({ chainId: chain.chainId })"
       type="button"
       class="card">
       {{ chain.displayName }}
     </button>
-    <div v-if="error" class="error">{{ error.message }}</div>
+    <div v-if="Error" class="Error">{{ Error.message }}</div>
   </div>
 </template>
 ```

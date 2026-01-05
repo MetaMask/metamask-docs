@@ -1,7 +1,7 @@
 ---
-title: Advanced Configuration
+title: Advanced configuration
 sidebar_label: Overview
-description: 'Web3Auth Unity SDK - Advanced Configuration | Embedded Wallets'
+description: 'Web3Auth Unity SDK - Advanced configuration | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -9,20 +9,20 @@ import Tabs from '@theme/Tabs'
 
 The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your Unity application's specific requirements.
 
-## Configuration Structure
+## Configuration structure
 
 When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
 
 ```cs
-web3Auth = GetComponent<Web3Auth>();
+Web3auth = GetComponent<Web3Auth>();
 
-// focus-start
-web3Auth.setOptions(new Web3AuthOptions(){
+// Focus-start
+Web3auth.setOptions(new Web3AuthOptions(){
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
     network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
     redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
 });
-// focus-end
+// Focus-end
 ```
 
 ### `Web3AuthOptions`
@@ -69,11 +69,11 @@ public class Web3AuthOptions
 </TabItem>
 </Tabs>
 
-## Session Management
+## Session management
 
 Control how long users stay authenticated and how sessions persist in Unity.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -81,7 +81,7 @@ Control how long users stay authenticated and how sessions persist in Unity.
   - Default: 1 day (`86400`).
 
 ```cs
-web3Auth.setOptions(new Web3AuthOptions(){
+Web3auth.setOptions(new Web3AuthOptions(){
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Web3Auth.Network.SAPPHIRE_MAINNET,
     sessionTime = 86400 * 7, // 7 days (in seconds)
@@ -89,23 +89,23 @@ web3Auth.setOptions(new Web3AuthOptions(){
 });
 ```
 
-## Custom Authentication Methods
+## Custom authentication methods
 
 Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication.mdx) section.
 
-## UI Customization
+## UI customization
 
 Create a seamless brand experience by customizing the Web3Auth Login Screens to match your Unity application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `mfaSettings` - Configure MFA settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA
 
-## DApp Share
+## Dapp share
 
 Share authentication sessions across different applications. For detailed configuration options and implementation examples, see the [DApp Share](./dapp-share.mdx) section.

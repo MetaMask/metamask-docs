@@ -6,7 +6,7 @@ description: '@web3auth/modal Functions | Embedded Wallets'
 
 Web3Auth provides a comprehensive set of functions to handle authentication, user management, and blockchain interactions in your applications. These functions allow you to implement features like user login, multi-factor authentication, chain switching, and wallet services with minimal effort. Each function is designed to handle a specific aspect of Web3Auth functionality, making it easy to integrate into your projects.
 
-## List of Functions
+## List of functions
 
 :::tip
 
@@ -14,40 +14,40 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 :::
 
-### Authentication Functions
+### Authentication functions
 
 | Function Name | Description                                 |
 | ------------- | ------------------------------------------- |
-| `connect()`   | Displays the Modal and logs in the user.    |
+| `Connect()`   | Displays the Modal and logs in the user.    |
 | `logout()`    | Logs out the user from the current session. |
 
-### User Management Functions
+### User management functions
 
 | Function Name        | Description                                                 |
 | -------------------- | ----------------------------------------------------------- |
-| `getUserInfo()`      | Retrieves the authenticated user's information.             |
-| `getIdentityToken()` | Gets the idToken from Web3Auth for authentication purposes. |
+| `Getuserinfo()`      | Retrieves the authenticated user's information.             |
+| `Getidentitytoken()` | Gets the idToken from Web3Auth for authentication purposes. |
 
-### Security Functions
-
-| Function Name | Description |
-| --- | --- |
-| `enableMFA()` | Enables Multi-Factor Authentication for the user. |
-| `manageMFA()` | Redirects the user to manage their MFA settings in the Web3Auth Account Dashboard. |
-
-### Blockchain Functions
+### Security functions
 
 | Function Name | Description |
 | --- | --- |
-| `addChain()` | Adds chain configuration details to the connected adapter. |
-| `switchChain()` | Switches to a different blockchain network as per chainId already added to chain config. |
+| `Enablemfa()` | Enables Multi-Factor Authentication for the user. |
+| `Managemfa()` | Redirects the user to manage their MFA settings in the Web3Auth Account Dashboard. |
 
-### Wallet Services Plugin Functions
+### Blockchain functions
+
+| Function Name | Description |
+| --- | --- |
+| `addChain()` | Adds chain configuration details to the Connected adapter. |
+| `Switchchain()` | Switches to a different blockchain network as per chainId already added to chain config. |
+
+### Wallet services Plugin Functions
 
 | Function Name                   | Description                                   |
 | ------------------------------- | --------------------------------------------- |
-| `showCheckout()`                | Initiates cryptocurrency top-up for the user. |
-| `showWalletConnectScanner()`    | Displays the WalletConnect QR Code Scanner.   |
-| `showWalletUI()`                | Shows the Embedded Wallet UI.                 |
-| `showSwap()`                    | Displays the Swap UI for token exchanges.     |
-| `showTransactionConfirmation()` | Shows the Transaction Confirmation UI.        |
+| `ShowCheckout()`                | Initiates cryptocurrency top-up for the user. |
+| `ShowWalletConnectScanner()`    | Displays the WalletConnect QR Code Scanner.   |
+| `ShowWalletUI()`                | Shows the Embedded Wallet UI.                 |
+| `ShowSwap()`                    | Displays the Swap UI for Token exchanges.     |
+| `ShowTransactionConfirmation()` | Shows the Transaction Confirmation UI.        |

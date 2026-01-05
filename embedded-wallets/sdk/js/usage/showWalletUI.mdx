@@ -1,17 +1,17 @@
 ---
-title: showWalletUI
-sidebar_label: showWalletUI
-description: '@web3auth/modal showWalletUI | Embedded Wallets'
+title: ShowWalletUI
+sidebar_label: ShowWalletUI
+description: '@web3auth/modal ShowWalletUI | Embedded Wallets'
 ---
 
-Function to show the templated wallet UI services modal using the Wallet Services Plugin.
+Function to Show the templated wallet UI services modal using the Wallet services Plugin.
 
 ### Usage
 
 ```javascript
 // Open the Wallet UI modal
-await web3auth.showWalletUi({
-  show: true,
+await web3auth.ShowWalletUi({
+  Show: true,
 })
 ```
 
@@ -19,19 +19,19 @@ await web3auth.showWalletUi({
 
 ```javascript
 interface ShowWalletUIParams {
-  show: boolean;
-  path?: string;
+  Show: boolean;
+  Path?: string;
 }
 ```
 
-#### show
+#### Show
 
 `boolean`
 
 Determines whether the wallet UI is displayed. This can be used to programmatically control its visibility.
 
-#### path
+#### Path
 
 `string?` (optional)
 
-Specifies the path for the wallet services.
+Specifies the Path for the wallet services.

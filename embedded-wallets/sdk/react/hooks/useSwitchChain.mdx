@@ -18,38 +18,38 @@ import { useSwitchChain } from '@web3auth/modal/react'
 import { useSwitchChain } from '@web3auth/modal/react'
 
 function SwitchChainButton() {
-  const { switchChain, loading, error } = useSwitchChain()
+  const { Switchchain, Loading, Error } = useSwitchChain()
 
   return (
     <div>
-      <button onClick={() => switchChain('0x1')} disabled={loading}>
-        {loading ? 'Switching...' : 'Switch to Ethereum Mainnet'}
+      <button onClick={() => Switchchain('0x1')} disabled={Loading}>
+        {Loading ? 'Switching...' : 'Switch to Ethereum Mainnet'}
       </button>
-      {error && <span>Error: {error.message}</span>}
+      {Error && <span>Error: {Error.message}</span>}
     </div>
   )
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IUseSwitchChain } from '@web3auth/modal/react'
 ```
 
-#### loading
+#### Loading
 
 `boolean`
 
 Whether the chain switching process is in progress.
 
-#### error
+#### Error
 
 `Web3AuthError | null`
 
 Error that occurred during the chain switching process.
 
-#### switchChain
+#### Switchchain
 
 `(chainId: string) => Promise<void>`
 
@@ -57,24 +57,24 @@ Function to initiate the chain switch. Pass the target `chainId` as a string (e.
 
 ## Example
 
-```tsx title="switchChain.tsx"
+```tsx title="Switchchain.tsx"
 import { useSwitchChain, useWeb3Auth } from '@web3auth/modal/react'
 
 export function SwitchChain() {
-  const { web3Auth } = useWeb3Auth()
+  const { Web3auth } = useWeb3Auth()
 
-  const { switchChain, error } = useSwitchChain()
+  const { Switchchain, Error } = useSwitchChain()
 
   return (
     <div>
-      <h2>Switch Chain</h2>
-      <h3>Connected to {web3Auth?.currentChain?.displayName}</h3>
-      {web3Auth?.coreOptions.chains?.map(chain => {
+      <h2>Switch chain</h2>
+      <h3>Connected to {Web3auth?.currentChain?.displayName}</h3>
+      {Web3auth?.coreOptions.chains?.map(chain => {
         return (
           <button
-            disabled={web3Auth?.currentChain?.chainId === chain.chainId}
+            disabled={Web3auth?.currentChain?.chainId === chain.chainId}
             key={chain.chainId}
-            onClick={() => switchChain(chain.chainId)}
+            onClick={() => Switchchain(chain.chainId)}
             type="button"
             className="card">
             {chain.displayName}
@@ -82,7 +82,7 @@ export function SwitchChain() {
         )
       })}
 
-      {error?.message}
+      {Error?.message}
     </div>
   )
 }

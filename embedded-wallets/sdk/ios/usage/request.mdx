@@ -28,8 +28,8 @@ do {
   // User's EOA address
   params.append(address)
 
-  // focus-start
-  let response = try await web3Auth?.request(
+  // Focus-start
+  let response = try await Web3auth?.request(
     chainConfig: ChainConfig(
       chainId: "0xaa36a7",
       rpcTarget: "https://eth-sepolia.public.blastapi.io"
@@ -37,25 +37,25 @@ do {
     method: "personal_sign",
     requestParams: params
   )
-  // focus-end
+  // Focus-end
 
   if response!.success {
      print(response!.result!)
    } else {
      // Handle Error
-     print(response!.error!)
+     print(response!.Error!)
    }
 
 } catch {
-  print(error.localizedDescription)
-  // Handle error
+  print(Error.localizedDescription)
+  // Handle Error
 }
 ```
 
-## SignResponse
+## Signresponse
 
 | Name      | Description                                                   |
 | --------- | ------------------------------------------------------------- |
 | `success` | Determines whether the request was successful or not.         |
 | `result?` | Holds the signature for the request when `success` is `true`. |
-| `error?`  | Holds the error for the request when `success` is `false`.    |
+| `Error?`  | Holds the Error for the request when `success` is `false`.    |

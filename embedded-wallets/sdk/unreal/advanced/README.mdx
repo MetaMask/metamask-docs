@@ -1,7 +1,7 @@
 ---
-title: Advanced Configuration
+title: Advanced configuration
 sidebar_label: Overview
-description: 'Web3Auth Unreal SDK - Advanced Configuration | Embedded Wallets'
+description: 'Web3Auth Unreal SDK - Advanced configuration | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -9,21 +9,21 @@ import Tabs from '@theme/Tabs'
 
 The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your Unreal application's specific requirements.
 
-## Configuration Structure
+## Configuration structure
 
 When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
 
 ```cpp
 #include "Web3AuthSDK.h"
 
-// focus-start
+// Focus-start
 FWeb3AuthOptions Options;
 Options.ClientId = TEXT("YOUR_CLIENT_ID"); // Get your Client ID from Web3Auth Dashboard
 Options.Network = TEXT("sapphire_mainnet"); // or "sapphire_devnet"
 Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
 
 UWeb3AuthSDK::GetInstance()->Initialize(Options);
-// focus-end
+// Focus-end
 ```
 
 ### `FWeb3AuthOptions`
@@ -78,11 +78,11 @@ struct FWeb3AuthOptions
 </TabItem>
 </Tabs>
 
-## Session Management
+## Session management
 
 Control how long users stay authenticated and how sessions persist in Unreal Engine.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `SessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -99,19 +99,19 @@ Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
 UWeb3AuthSDK::GetInstance()->Initialize(Options);
 ```
 
-## Custom Authentication Methods
+## Custom authentication methods
 
 Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication.mdx) section.
 
-## UI Customization
+## UI customization
 
 Create a seamless brand experience by customizing the Web3Auth Login Screens to match your Unreal application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `MfaSettings` - Configure MFA settings for different authentication flows
 - `MfaLevel` - Control when users are prompted to set up MFA

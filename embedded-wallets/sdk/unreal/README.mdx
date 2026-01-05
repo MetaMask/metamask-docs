@@ -1,7 +1,7 @@
 ---
 title: Embedded Wallets SDK for Unreal Engine
 sidebar_label: Getting Started
-description: 'MetaMask Embedded Wallets SDK for Unreal Engine | Documentation'
+description: 'MetaMask Embedded Wallets SDK for Unreal Engine | Web3Auth Plug and Play'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provides a seamless authentication experience for Unreal Engine game applications with social logins, external wallets, and more. Using our Unreal SDK written in C++, you can easily connect users to their preferred wallets and manage authentication state across all mobile platforms.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for Unreal Engine game applications with social logins, external wallets, and more. Using our Unreal SDK written in C++, you can easily Connect users to their preferred wallets and manage authentication state across all mobile platforms.
 
 ## Requirements
 
@@ -17,11 +17,21 @@ MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provide
 - [Epic Game Launcher](https://www.unrealengine.com/en-US/download) to download Unreal library
 - Basic knowledge of C++ and Unreal Engine Development
 
+## Prerequisites
+
+- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+
+:::tip
+
+See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
+
+:::
+
 ## Installation
 
 Install the Web3Auth Unreal Engine SDK using one of the following methods:
 
-### Git Clone Installation
+### Git clone installation
 
 Follow these instructions to install the `web3auth-unreal-sdk` plugin:
 
@@ -36,38 +46,30 @@ git clone https://github.com/Web3Auth/web3auth-unreal-sdk/tree/main/Plugins/Web3
 4. Open UE5 Editor, navigator to `Menu` → `Edit` → `Plugins`, check the option to enable Web3AuthSDK.
 5. Start your app & it will ask to compile the plugin. Proceed with that.
 
-### Manual Installation
+### Manual installation
 
 Download the [Unreal Package](https://github.com/Web3Auth/web3auth-unreal-sdk/releases) from our latest release and import the package file into your existing Unreal Engine project.
 
-## Setup
-
-:::info
-
-Prerequisites Before you start, make sure you have registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/) and have set up your project. You can look into the [Dashboard Setup](../../dashboard/README.mdx) guide to learn more.
-
-:::
-
-### 1. Configure Web3Auth Project
+### 1. Configure Embedded Wallets project
 
 - Go to [Developer Dashboard](https://dashboard.web3auth.io/), create or select an Web3Auth project:
 - Add `{{SCHEMA}}://{YOUR_APP_PACKAGE_NAME}` to **Whitelist URLs**.
 - Copy the `Client ID` for usage later.
 
-### 2. Configure Deep Link for Android
+### 2. Configure deep link for Android
 
 To setup Android sdk and ndk for unreal editor. Please [see the unreal documentation](https://docs.unrealengine.com/5.0/en-US/how-to-set-up-android-sdk-and-ndk-for-your-unreal-engine-development-environment).
 
 - To add redirect URI into your Android app, open the `<Project-Path>/Plugins/Web3AuthSDK/Source/Web3AuthSDK_Android.xml` file.
-- Find the `<androidManifestUpdates>` tag and inside that, will be a `<data>` tag element. Replace the existing redirect URI with one that you have registered on your Web3Auth Dashboard.
+- Find the `<androidManifestUpdates>` tag and inside that, will be a `<Data>` tag element. Replace the existing redirect URI with one that you have registered on your Web3Auth Dashboard.
 
-### 3. Configure Deep Link for iOS
+### 3. Configure deep link for iOS
 
 Configure your iOS deep link settings in the appropriate configuration files. Make sure the redirect URI matches what you have registered in your Web3Auth Dashboard.
 
 ## Initialize Web3Auth
 
-### 1. Initialize Web3Auth Instance
+### 1. Initialize Embedded Wallets instance
 
 Initialize the Web3Auth SDK in your Unreal project:
 
@@ -88,7 +90,7 @@ void AYourGameMode::BeginPlay()
 }
 ```
 
-### 2. Setup Authentication Callbacks
+### 2. Setup authentication callbacks
 
 Set up callbacks to handle authentication responses:
 
@@ -98,7 +100,7 @@ void AYourGameMode::SetupWeb3AuthCallbacks()
     // Bind login success callback
     UWeb3AuthSDK::GetInstance()->OnLoginSuccess.AddDynamic(this, &AYourGameMode::OnWeb3AuthLoginSuccess);
 
-    // Bind login error callback
+    // Bind login Error callback
     UWeb3AuthSDK::GetInstance()->OnLoginError.AddDynamic(this, &AYourGameMode::OnWeb3AuthLoginError);
 
     // Bind logout callback
@@ -124,12 +126,12 @@ void AYourGameMode::OnWeb3AuthLogout()
 }
 ```
 
-## Advanced Configuration
+## Advanced configuration
 
 The Web3Auth Unreal SDK offers a rich set of advanced configuration options:
 
 - **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
-- **[Whitelabeling & UI Customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
+- **[Whitelabeling & UI customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
 - **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
 
 :::tip
@@ -141,7 +143,7 @@ Head over to the advanced configuration sections to learn more about each config
 <Tabs
   defaultValue="basic-config"
   values={[
-    { label: "Basic Configuration", value: "basic-config" },
+    { label: "Basic configuration", value: "basic-config" },
     { label: "Advanced Configuration", value: "advanced-config" },
   ]}
 >
@@ -184,11 +186,11 @@ UWeb3AuthSDK::GetInstance()->Initialize(Options);
 
 </Tabs>
 
-## Blockchain Integration
+## Blockchain integration
 
 Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
 
-### Ethereum Integration
+### Ethereum integration
 
 For Ethereum integration, you can get the private key and use it with Ethereum libraries:
 
@@ -202,7 +204,7 @@ void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FStr
 }
 ```
 
-### Solana Integration
+### Solana integration
 
 For Solana integration, you can get the Ed25519 private key:
 

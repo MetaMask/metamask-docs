@@ -4,15 +4,15 @@ description: 'PnP Flutter SDK - v5 to v6 | Embedded Wallets'
 sidebar_label: v5 to v6
 ---
 
-This migration guide provides steps for upgrading from version v5 to v6 of the PnP Flutter SDK. The guide outlines significant changes and enhancements, including the support of Web3Auth OpenLogin version v9, and Wallet Services v3.
+This migration guide provides steps for upgrading from version v5 to v6 of the PnP Flutter SDK. The guide outlines significant changes and enhancements, including the support of Web3Auth OpenLogin version v9, and Wallet services v3.
 
-## Breaking Changes
+## Breaking changes
 
-### `getSignResponse` is now removed.
+### `getSignresponse` is now removed.
 
-In v6, we try to improve the developer experience by removing the `getSignResponse` method and returning the result in the `request` method itself.
+In v6, we try to improve the developer experience by removing the `getSignresponse` method and returning the result in the `request` method itself.
 
-Previously, after calling the `request` method, developers had to use the `getSignResponse` method to retrieve the `SignResponse`. In the latest version v6, the `request` method will return the `SignResponse` directly.
+Previously, after calling the `request` method, developers had to use the `getSignresponse` method to retrieve the `Signresponse`. In the latest version v6, the `request` method will return the `Signresponse` directly.
 
 ```dart
 try {
@@ -33,7 +33,7 @@ try {
   );
 
   // remove-next-line
-  final response = await Web3AuthFlutter.getSignResponse();
+  final response = await Web3AuthFlutter.getSignresponse();
 
   log(response.toString());
 } on UserCancelledException {
@@ -43,7 +43,7 @@ try {
 }
 ```
 
-## Minimum Android SDK Version
+## Minimum Android SDK version
 
 The minimum Android SDK version for the PnP Flutter SDK is now 26. Please update your app level gradle file to set the minimum SDK version to 26.
 
@@ -60,4 +60,4 @@ defaultConfig {
 
 ## Enhancements
 
-In the latest version v6, we have added support for the Web3Auth Auth Service version v9, and Wallet Services v3. In Wallet Services v3, the prebuilt wallet UI now supports the swap functionality allowing users to swap to their favorite token from the app itself.
+In the latest version v6, we have added support for the Web3Auth Auth Service version v9, and Wallet services v3. In Wallet services v3, the prebuilt wallet UI now supports the swap functionality allowing users to swap to their favorite Token from the app itself.

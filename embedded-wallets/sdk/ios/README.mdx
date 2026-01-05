@@ -1,7 +1,7 @@
 ---
 title: Embedded Wallets SDK for iOS
 sidebar_label: Getting Started
-description: 'MetaMask Embedded Wallets SDK for iOS | Documentation'
+description: 'MetaMask Embedded Wallets SDK for iOS | Web3Auth Plug and Play for iOS'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provides a seamless authentication experience for iOS applications with social logins, external wallets, and more. Using our iOS SDK written in Swift, you can easily connect users to their preferred wallets and manage authentication state natively.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for iOS applications with social logins, external wallets, and more. Using our iOS SDK written in Swift, you can easily Connect users to their preferred wallets and manage authentication state natively.
 
 ## Requirements
 
@@ -18,11 +18,21 @@ MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provide
 - Swift 5.x
 - Basic knowledge of Swift and iOS Development
 
+## Prerequisites
+
+- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+
+:::tip
+
+See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
+
+:::
+
 ## Installation
 
 Install the Web3Auth iOS SDK using one of the following methods:
 
-### Swift Package Manager
+### Swift package manager
 
 1. In Xcode, with your app project open, navigate to **File > Add Package Dependencies**.
 
@@ -34,7 +44,7 @@ Install the Web3Auth iOS SDK using one of the following methods:
 
    From the `Dependency Rule` dropdown, select `Exact Version` and enter `11.1.0` as the version.
 
-3. When finished, Xcode will automatically begin resolving and downloading your dependencies in the background.
+3. When finished, Xcode will automatically begin resolving and downLoading your dependencies in the background.
 
 ### Cocoapods
 
@@ -48,15 +58,7 @@ pod 'Web3Auth', '~> 11.1.0'
 
 2. Once added, use `pod install` command to download the Web3Auth dependency.
 
-## Setup
-
-:::info
-
-Prerequisites Before you start, make sure you have registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/) and have set up your project. You can look into the [Dashboard Setup](../../dashboard/README.mdx) guide to learn more.
-
-:::
-
-### Configure Redirection
+### Configure redirection
 
 To use Web3Auth for iOS you need to Whitelist your `bundleId` in your Web3Auth project.
 
@@ -65,7 +67,7 @@ To use Web3Auth for iOS you need to Whitelist your `bundleId` in your Web3Auth p
 
 ## Initialize Web3Auth
 
-### 1. Create a Web3Auth Instance
+### 1. Create an Embedded Wallets instance
 
 Import and configure Web3Auth in your application:
 
@@ -73,13 +75,13 @@ Import and configure Web3Auth in your application:
 import Web3Auth
 
 class ViewController: UIViewController {
-    var web3Auth: Web3Auth?
+    var Web3auth: Web3Auth?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Configure Web3Auth
-        web3Auth = Web3Auth(W3AInitParams(
+        Web3auth = Web3Auth(W3AInitParams(
             clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
             network: .sapphire_mainnet, // or .sapphire_devnet
             redirectUrl: "com.yourapp.bundleid://auth"
@@ -88,7 +90,7 @@ class ViewController: UIViewController {
 }
 ```
 
-### 2. Initialize the Web3Auth Instance
+### 2. Initialize the Embedded Wallets instance
 
 Initialize the Web3Auth instance:
 
@@ -98,16 +100,16 @@ override func viewDidLoad() {
 
     Task {
         do {
-            try await web3Auth?.initialize()
+            try await Web3auth?.initialize()
             print("Web3Auth initialized successfully")
         } catch {
-            print("Error initializing Web3Auth: \(error)")
+            print("Error initializing Web3Auth: \(Error)")
         }
     }
 }
 ```
 
-### 3. Handle URL Callbacks
+### 3. Handle URL callbacks
 
 Configure your application to handle URL callbacks in your `SceneDelegate`:
 
@@ -129,14 +131,14 @@ func application(_ app: UIApplication, open url: URL, options: [UIApplication.Op
 }
 ```
 
-## Advanced Configuration
+## Advanced configuration
 
 The Web3Auth iOS SDK offers a rich set of advanced configuration options:
 
 - **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
-- **[Whitelabeling & UI Customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
+- **[Whitelabeling & UI customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
 - **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
-- **[DApp Share](./advanced/dapp-share.mdx)**: Share DApp sessions across devices.
+- **[Dapp share](./advanced/dapp-share.mdx)**: Share DApp sessions across devices.
 
 :::tip
 
@@ -147,7 +149,7 @@ Head over to the advanced configuration sections to learn more about each config
 <Tabs
   defaultValue="basic-config"
   values={[
-    { label: "Basic Configuration", value: "basic-config" },
+    { label: "Basic configuration", value: "basic-config" },
     { label: "Advanced Configuration", value: "advanced-config" },
   ]}
 >
@@ -155,7 +157,7 @@ Head over to the advanced configuration sections to learn more about each config
 <TabItem value="basic-config">
 
 ```swift
-web3Auth = Web3Auth(W3AInitParams(
+Web3auth = Web3Auth(W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .sapphire_mainnet, // or .sapphire_devnet
     redirectUrl: "com.yourapp.bundleid://auth"
@@ -167,7 +169,7 @@ web3Auth = Web3Auth(W3AInitParams(
 <TabItem value="advanced-config">
 
 ```swift
-web3Auth = Web3Auth(W3AInitParams(
+Web3auth = Web3Auth(W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .sapphire_mainnet, // or .sapphire_devnet
     redirectUrl: "com.yourapp.bundleid://auth",
@@ -203,11 +205,11 @@ web3Auth = Web3Auth(W3AInitParams(
 
 </Tabs>
 
-## Blockchain Integration
+## Blockchain integration
 
 Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
 
-### Ethereum Integration
+### Ethereum integration
 
 For Ethereum integration, you can get the private key and use it with web3.swift or other Ethereum libraries:
 
@@ -216,7 +218,7 @@ import web3
 import Web3Auth
 
 // Use your Web3Auth instance to get the private key
-val privateKey = web3Auth.getPrivKey()
+val privateKey = Web3auth.getPrivKey()
 
 // Generate the Ethereum Account
 let account = try EthereumAccount(privateKey)
@@ -229,7 +231,7 @@ let client = EthereumHttpClient(
     // Please avoid using public RPC URL in production, use services
     // like Infura, Quicknode, etc.
     url: URL.init(string: rpcUrl)!,
-    // Replace with the chain id of the network you want to connect to
+    // Replace with the chain id of the network you want to Connect to
     network: .custom(chainId)
 )
 
@@ -244,7 +246,7 @@ let balanceResponse = try await client.eth_getBalance(
 let balance = toEther(wei: balanceResponse)
 ```
 
-### Solana Integration
+### Solana integration
 
 For Solana integration, you can get the Ed25519 private key:
 
@@ -252,7 +254,7 @@ For Solana integration, you can get the Ed25519 private key:
 import SolanaSwift
 
 // Use your Web3Auth instance to get the private key
-let ed25519PrivateKey = web3Auth.getEd25519PrivKey()
+let ed25519PrivateKey = Web3auth.getEd25519PrivKey()
 
 // Generate the KeyPair
 let keyPair = try KeyPair(secretKey: Data(hex: ed25519PrivateKey))
@@ -273,6 +275,6 @@ let balanceResponse = try await solanaJSONRPCClient.getBalance(
     account: userAccount
 )
 
-// We are dividing the balance by 10^9, because Solana's token decimals is set to be 9;
+// We are dividing the balance by 10^9, because Solana's Token decimals is set to be 9;
 let userBalance = return balanceResponse.convertToBalance(decimals: 9)
 ```

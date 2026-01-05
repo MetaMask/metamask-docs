@@ -7,24 +7,24 @@ sidebar_label: v7.1.2 to v7.2
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-# Migration Guide from v7.1.2 to v7.2 for Web3Auth Android SDK
+# Migration guide from v7.1.2 to v7.2 for Embedded Wallets Android SDK
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 7.1.2(v7.1.2) to version 7.2(v7.2) of the Web3Auth Android SDK. The guide outlines significant changes and enhancements, including the introduction of new login providers, and `launchWalletServices` updates.
+This migration guide provides steps for upgrading from version 7.1.2(v7.1.2) to version 7.2(v7.2) of the Web3Auth Android SDK. The guide outlines significant changes and enhancements, including the introduction of new login Providers, and `launchWalletServices` updates.
 
-## Changes in Detail
+## Changes in detail
 
 ### `launchWalletServices` method updates
 
-From v7.2, the `loginParams` is removed from the `launchWalletServices` method. Developers only need to pass the `chainConfig` as the required parameter.
+From v7.2, the `Loginparams` is removed from the `launchWalletServices` method. Developers only need to pass the `chainConfig` as the required parameter.
 
 #### Before (v7.1.2)
 
 ```kotlin title="Usage"
-// focus-start
-val launchWalletCompletableFuture = web3Auth.launchWalletServices(
-    loginParams = LoginParams(
+// Focus-start
+val launchWalletCompletableFuture = Web3auth.launchWalletServices(
+    Loginparams = LoginParams(
         selectedLoginProvider,
         extraLoginOptions = null,
         mfaLevel = MFALevel.NONE,
@@ -37,13 +37,13 @@ val launchWalletCompletableFuture = web3Auth.launchWalletServices(
         chainNamespace = ChainNamespace.EIP155
     )
 )
-// focus-end
+// Focus-end
 
-launchWalletCompletableFuture.whenComplete { _, error ->
-    if (error == null) {
+launchWalletCompletableFuture.whenComplete { _, Error ->
+    if (Error == null) {
         Log.d("MainActivity_Web3Auth", "Wallet launched successfully")
     } else {
-        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+        Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
     }
 }
 ```
@@ -52,8 +52,8 @@ launchWalletCompletableFuture.whenComplete { _, error ->
 
 ```kotlin title="Usage"
 
-// focus-start
-val launchWalletCompletableFuture = web3Auth.launchWalletServices(
+// Focus-start
+val launchWalletCompletableFuture = Web3auth.launchWalletServices(
     chainConfig = ChainConfig(
         chainId = "0x1",
         rpcTarget = "https://mainnet.infura.io/v3/$key",
@@ -61,28 +61,28 @@ val launchWalletCompletableFuture = web3Auth.launchWalletServices(
         chainNamespace = ChainNamespace.EIP155
     )
 )
-// focus-end
+// Focus-end
 
-launchWalletCompletableFuture.whenComplete { _, error ->
-    if (error == null) {
+launchWalletCompletableFuture.whenComplete { _, Error ->
+    if (Error == null) {
         Log.d("MainActivity_Web3Auth", "Wallet launched successfully")
     } else {
-        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+        Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
     }
 }
 ```
 
-### New Login Providers
+### New login providers
 
-v4 update brings two new providers. Now developers can use the SMS Passwordless and Farcaster login options.
+v4 update brings two new Providers. Now developers can use the SMS Passwordless and Farcaster login options.
 
-#### SMS Passwordless
+#### SMS passwordless
 
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth(
+val Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -91,23 +91,23 @@ val web3Auth = Web3Auth(
   )
 )
 
-// focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+// Focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login(
   LoginParams(
     Provider.SMS_PASSWORDLESS,
-    extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344")
+    extraLoginOptions = Extraloginoptions(login_hint = "+91-9911223344")
   )
 )
-// focus-end
+// Focus-end
 
 ```
 
 #### Farcaster
 
 ```kotlin title="Usage"
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login(
   LoginParams(
-    // focus-next-line
+    // Focus-next-line
     Provider.farcaster,
   )
 )

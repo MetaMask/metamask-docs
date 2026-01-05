@@ -10,24 +10,24 @@ import Tabs from '@theme/Tabs'
 
 ## General
 
-### openlogin v5 is supported
+### Openlogin v5 is supported
 
 With V5, Users can now log in from sapphire mainnet and sapphire testnet.
 
 ```tsx
 // With V5
-// focus-start
-web3Auth = Web3Auth(
+// Focus-start
+Web3auth = Web3Auth(
            Web3AuthOptions(
                ...
-               // focus-start
-network = Network.SAPPHIRE_MAINNET, // pass over the network you want to use (MAINNET or TESTNET or CYAN, AQUA, SAPPHIRE_MAINNET or SAPPHIRE_TESTNET)               // focus-end
+               // Focus-start
+network = Network.SAPPHIRE_MAINNET, // pass over the network you want to use (MAINNET or TESTNET or CYAN, AQUA, SAPPHIRE_MAINNET or SAPPHIRE_TESTNET)               // Focus-end
                ...
            )
 )
 ```
 
-### Android Compile and Target SDK: `34`.
+### Android compile and target SDK: `34`.
 
 In V5, android compile target sdk is changed from 33 to 34. If you previously used the target SDK with 33, update your build.gradle file.
 
@@ -48,11 +48,11 @@ android {
 }
 ```
 
-### Web3AuthOptions param configuration changed
+### Web3authoptions param configuration changed
 
 In v5, the way parameters are configured has changed. The buildEnv parameter must be included. The whiteLabel parameter type and configuration has changed. And, as mentioned earlier, the network type has been added.
 
-#### change of WhiteLabel parameter configuration
+#### Change of whitelabel parameter configuration
 
 <Tabs
   defaultValue="v5"
@@ -86,7 +86,7 @@ In v5, the way parameters are configured has changed. The buildEnv parameter mus
 | `defaultLanguage` | `String`           | No        | Default translation language to be used |
 | `mode`            | `Boolean`          | No        | 3 Theme modes of the application        |
 | `theme`           | `Map<String, Any>` | No        | Whitelabel theme                        |
-| `useLogoLoader`   | `Boolean`          | No        | Loads the logo when loading             |
+| `useLogoLoader`   | `Boolean`          | No        | Loads the logo when Loading             |
 
 </TabItem>
 
@@ -95,24 +95,24 @@ In v5, the way parameters are configured has changed. The buildEnv parameter mus
 Here's the example configuration of Web3AuthOptions.
 
 ```tsx
-web3Auth = Web3Auth(
+Web3auth = Web3Auth(
            Web3AuthOptions(
                context = this,
                clientId = getString(R.string.web3auth_project_id), // pass over your Web3Auth Client ID from Developer Dashboard
                network = Network.CYAN, // pass over the network you want to use (MAINNET or TESTNET or CYAN or AQUA or SAPPHIRE_MAINNET or SAPPHIRE_TESTNET)
-               // focus-start
+               // Focus-start
                buildEnv = BuildEnv.TESTING, // 3 options available: PRODUCTION, STAGING, TESTING
-               // focus-end
+               // Focus-end
                redirectUrl = Uri.parse("com.sbz.web3authdemoapp://auth"), // your app's redirect URL
                // Optional parameters
-               // focus-start
+               // Focus-start
                whiteLabel = WhiteLabelData(
                    "Web3Auth Android Auth0 Example", null, null, null, Language.EN, ThemeModes.LIGHT, true,
                    hashMapOf(
                        "primary" to "#eb5424"
                    )
                ),
-               // focus-end
+               // Focus-end
                loginConfig = hashMapOf("jwt" to LoginConfigItem(
                    verifier = "web3auth-auth0-demo",
                    typeOfLogin = TypeOfLogin.JWT,

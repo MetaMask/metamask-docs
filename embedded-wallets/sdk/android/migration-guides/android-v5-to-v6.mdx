@@ -8,17 +8,17 @@ sidebar_label: v5 to v6
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-# Migration Guide from v5 to v6 for Web3Auth Android SDK
+# Migration guide from v5 to v6 for Embedded Wallets Android SDK
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 5(v5) to version 6(v6) of the Web3Auth Android SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate MFA setup flow, and `launchWalletServices` method for template wallet interface.
+This migration guide provides steps for upgrading from version 5(v5) to version 6(v6) of the Web3Auth Android SDK. The guide outlines significant changes and enhancements, including the introduction of `Enablemfa` method to initiate MFA setup flow, and `launchWalletServices` method for template wallet interface.
 
-## Changes in Detail
+## Changes in detail
 
-### `enableMFA` method
+### `Enablemfa` method
 
-From v6, developers can use the `enableMFA` method to initiate MFA setup flow for already logged in users.
+From v6, developers can use the `Enablemfa` method to initiate MFA setup flow for already logged in users.
 
 <Tabs
   defaultValue="default-verifier"
@@ -35,19 +35,19 @@ import android.widget.Button
 import com.web3auth.core.Web3Auth
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Auth
+class MainActivity : AppCompatActivity() { private lateinit var Web3auth: Web3Auth
 
-     private fun enableMFA() {
-       // focus-next-line
-       val completableFuture = web3Auth.enableMFA()
+     private fun Enablemfa() {
+       // Focus-next-line
+       val completableFuture = Web3auth.Enablemfa()
 
-        completableFuture.whenComplete{_, error ->
-            if (error == null) {
+        completableFuture.whenComplete{_, Error ->
+            if (Error == null) {
                 Log.d("MainActivity_Web3Auth", "Launched successfully")
                 // Add your logic
             } else {
-                // Add your logic on error
-                Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+                // Add your logic on Error
+                Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
             }
         }
     }
@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
     override fun onCreate(savedInstanceState: Bundle?) {
         ...
         // Setup UI and event handlers
-        val enableMFAButton = findViewById<Button>(R.id.enableMFAButton)
-        enableMFAButton.setOnClickListener { enableMFA() }
+        val EnablemfaButton = findViewById<Button>(R.id.EnablemfaButton)
+        EnablemfaButton.setOnClickListener { Enablemfa() }
         ...
     }
     ...
@@ -74,24 +74,24 @@ import android.widget.Button
 import com.web3auth.core.Web3Auth
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Auth
+class MainActivity : AppCompatActivity() { private lateinit var Web3auth: Web3Auth
 
-     private fun enableMFA() {
-        val loginParams = LoginParams(
+     private fun Enablemfa() {
+        val Loginparams = LoginParams(
             Provider.JWT,
-            extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+            extraLoginOptions = Extraloginoptions(id_Token = "your_jwt_Token")
         )
 
-        // focus-next-line
-        val completableFuture = web3Auth.enableMFA(loginParams)
+        // Focus-next-line
+        val completableFuture = Web3auth.Enablemfa(Loginparams)
 
-        completableFuture.whenComplete{_, error ->
-            if (error == null) {
+        completableFuture.whenComplete{_, Error ->
+            if (Error == null) {
                 Log.d("MainActivity_Web3Auth", "Launched successfully")
                 // Add your logic
             } else {
-                // Add your logic on error
-                Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+                // Add your logic on Error
+                Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
             }
         }
     }
@@ -99,8 +99,8 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
     override fun onCreate(savedInstanceState: Bundle?) {
         ...
         // Setup UI and event handlers
-        val enableMFAButton = findViewById<Button>(R.id.enableMFAButton)
-        enableMFAButton.setOnClickListener { enableMFA() }
+        val EnablemfaButton = findViewById<Button>(R.id.EnablemfaButton)
+        EnablemfaButton.setOnClickListener { Enablemfa() }
         ...
     }
     ...
@@ -117,11 +117,11 @@ From v6, developers can use the `launchWalletServices` to launches a WebView whi
 
 :::note
 
-Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+Access to Wallet services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
 
 :::
 
-#### ChainConfig Arguments
+#### Chainconfig arguments
 
 | Parameter | Description |
 | --- | --- |
@@ -138,9 +138,9 @@ Access to Wallet Services is gated. You can use this feature in `sapphire_devnet
 #### Usage
 
 ```kotlin title="Usage"
-// focus-start
-val launchWalletCompletableFuture = web3Auth.launchWalletServices(
-    loginParams = LoginParams(
+// Focus-start
+val launchWalletCompletableFuture = Web3auth.launchWalletServices(
+    Loginparams = LoginParams(
         selectedLoginProvider,
         extraLoginOptions = null,
         mfaLevel = MFALevel.NONE,
@@ -153,13 +153,13 @@ val launchWalletCompletableFuture = web3Auth.launchWalletServices(
         chainNamespace = ChainNamespace.EIP155
     )
 )
-// focus-end
+// Focus-end
 
-launchWalletCompletableFuture.whenComplete { _, error ->
-    if (error == null) {
+launchWalletCompletableFuture.whenComplete { _, Error ->
+    if (Error == null) {
         Log.d("MainActivity_Web3Auth", "Wallet launched successfully")
     } else {
-        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+        Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
     }
 }
 ```

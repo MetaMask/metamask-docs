@@ -9,8 +9,8 @@ const loginWithFirebaseGithub = async () => {
 
     const idToken = await result.user.getIdToken(true);
 
-    // focus-start
-    connectTo(WALLET_CONNECTORS.AUTH, {
+    // Focus-start
+    ConnectTo(WALLET_CONNECTORS.AUTH, {
       authConnectionId: "w3a-firebase-demo",
       authConnection: AUTH_CONNECTION.CUSTOM,
       idToken,
@@ -18,9 +18,9 @@ const loginWithFirebaseGithub = async () => {
         isUserIdCaseSensitive: false,
       },
     });
-    // focus-end
-  } catch (error) {
-    console.error("Firebase authentication error:", error);
+    // Focus-end
+  } catch (Error) {
+    console.Error("Firebase authentication Error:", Error);
   }
 };
 ```

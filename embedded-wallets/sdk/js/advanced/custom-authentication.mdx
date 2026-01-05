@@ -14,29 +14,28 @@ Custom Authentication is a way to authenticate users with your custom authentica
 
 <GrowthPlanNote />
 
-## Getting an Auth Connection ID
-
+## Getting an auth Connection ID
 :::info prerequisite
 
 To enable this, you need to [Create a Connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io) with your desired configuration.
 
 :::
 
-To configure a connection, you need to provide the particular details of the connection into our Web3Auth Dashboard. This enables us to map a `authConnectionId` with your connection details. This `authConnectionId` helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
+To configure a Connection, you need to provide the particular details of the Connection into our Web3Auth Dashboard. This enables us to map a `authConnectionId` with your Connection details. This `authConnectionId` helps us to identify the Connection details while initializing the SDK. You can configure multiple Connections for the same project, and you can also update the Connection details anytime.
 
 :::tip
 
-Visit the [Auth Provider Setup](/embedded-wallets/authentication) page to learn more about to setup the different configurations available for each connection.
+Visit the [Auth Provider Setup](/embedded-wallets/authentication) page to learn more about to setup the different configurations available for each Connection.
 
 :::
 
-## Modal Custom Authentication
+## Modal custom authentication
 
-The basic custom authentication is available directly in the modal. You can configure each of the auth providers in the modal to direct to your `authConnectionId`.
+The basic custom authentication is available directly in the modal. You can configure each of the auth Providers in the modal to direct to your `authConnectionId`.
 
 :::note
 
-You can only configure implicit login via modal, for JWT based logins, you need to create your own UI and use the `connectTo` function.
+You can only configure implicit login via modal, for JWT based logins, you need to create your own UI and use the `ConnectTo` function.
 
 :::
 
@@ -54,10 +53,10 @@ import { Web3Auth, WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  // focus-start
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // Focus-start
   modalConfig: {
-    connectors: {
+    Connectors: {
       [WALLET_CONNECTORS.AUTH]: {
         label: 'auth',
         loginMethods: {
@@ -80,7 +79,7 @@ const web3auth = new Web3Auth({
           twitter: {
             name: 'twitter login',
             // it will hide the twitter option from the Web3Auth modal.
-            showOnModal: false,
+            ShowOnModal: false,
           },
           email_passwordless: {
             name: 'email passwordless login',
@@ -92,11 +91,11 @@ const web3auth = new Web3Auth({
           },
         },
         // setting it to false will hide all social login methods from modal.
-        showOnModal: true,
+        ShowOnModal: true,
       },
     },
   },
-  // focus-end
+  // Focus-end
 })
 
 // Initialize web3auth
@@ -111,10 +110,10 @@ import { Web3Auth, WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  // focus-start
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // Focus-start
   modalConfig: {
-    connectors: {
+    Connectors: {
       [WALLET_CONNECTORS.AUTH]: {
         label: 'auth',
         loginMethods: {
@@ -137,7 +136,7 @@ const web3auth = new Web3Auth({
       },
     },
   },
-  // focus-end
+  // Focus-end
 })
 
 // Initialize web3auth
@@ -147,22 +146,22 @@ await web3auth.init()
   </TabItem>
 </Tabs>
 
-## Advanced Custom Authentication
+## Advanced custom authentication
 
-The more advanced custom authentication is available via the `connectTo` function. This allows you to any service you want and tie it to your Web3Auth Integration. **This method allows you to make Web3Auth totally invisible to your end users and have a fully whitelabeled experience all across.**
+The more advanced custom authentication is available via the `ConnectTo` function. This allows you to any service you want and tie it to your Web3Auth Integration. **This method allows you to make Web3Auth totally invisible to your end users and have a fully whitelabeled experience all across.**
 
-You can utilise this function to enable multiple types of connections like:
+You can utilise this function to enable multiple types of Connections like:
 
 - Implicit Login Connections
-- JWT Login Connections
-- Grouped Auth Connections
+- JWT login Connections
+- Grouped auth Connections
 
 <details>
-  <summary>`connectTo` Function Reference</summary>
+  <summary>`ConnectTo` Function Reference</summary>
 
 ```ts
-connectTo<T extends WALLET_CONNECTOR_TYPE>(
-  connector: T,
+ConnectTo<T extends WALLET_CONNECTOR_TYPE>(
+  Connector: T,
   params?: LoginParamMap[T]
 ): Promise<IProvider | null>;
 
@@ -179,11 +178,11 @@ export type LoginParamMap = {
 
 | Parameter                  | Description                                                                                                                        |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `loginHint?`               | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` & `sms_passwordless` logins. |
+| `loginHint?`               | Helps pass over the login hint to the auth Provider. This is used especially for `email_passwordless` & `sms_passwordless` logins. |
 | `idToken?`                 | Pass over the JWT ID Token directly to Web3Auth for JWT authentication.                                                            |
-| `authConnection?`          | The auth provider to use for login (e.g., "google", "facebook").                                                                   |
-| `authConnectionId?`        | The ID configured in your Web3Auth Dashboard for the connection.                                                                   |
-| `groupedAuthConnectionId?` | The grouped auth connection ID to be used for login.                                                                               |
+| `authConnection?`          | The auth Provider to use for login (e.g., "google", "facebook").                                                                   |
+| `authConnectionId?`        | The ID configured in your Web3Auth Dashboard for the Connection.                                                                   |
+| `groupedAuthConnectionId?` | The grouped auth Connection ID to be used for login.                                                                               |
 | `extraLoginOptions?`       | Custom OAuth options (e.g., login_hint, domain, etc.).                                                                             |
 
   </TabItem>
@@ -197,23 +196,23 @@ export type LoginParamMap = {
     export type LoginParams = {
   /**
    * Any custom state you wish to pass along. This will be returned to you post redirect.
-   * Use this to store data that you want to be available to the dapp after login.
+   * Use this to store Data that you want to be available to the dapp after login.
    */
   appState?: string;
   /**
-   * The auth connection to be used for login.
+   * The auth Connection to be used for login.
    */
   authConnection: AUTH_CONNECTION_TYPE | CUSTOM_AUTH_CONNECTION_TYPE;
   /**
-   * The auth connection id to be used for login.
+   * The auth Connection id to be used for login.
    */
   authConnectionId?: string;
   /**
-   * The grouped auth connection id to be used for login.
+   * The grouped auth Connection id to be used for login.
    */
   groupedAuthConnectionId?: string;
   /**
-   * You can set the `mfaLevel` to customize when mfa screen should be shown to user.
+   * You can set the `mfaLevel` to customize when mfa screen should be Shown to user.
    * It currently accepts 4 values:-
    * - `'default'`: Setting mfa level to `default` will present mfa screen to user on every third login.
    * - `'optional'`: Setting mfa level to `default` will present mfa screen to user on every login but user can skip it.
@@ -241,7 +240,7 @@ export type LoginParamMap = {
    * as your app domain in `extraLoginOptions` while using `email_passwordless`
    * loginProvider
    */
-  extraLoginOptions?: ExtraLoginOptions;
+  extraLoginOptions?: Extraloginoptions;
   /**
    * Custom Logins can get a dapp share returned to them post successful login.
    * This is useful if the dapps want to use this share to allow users to login seamlessly
@@ -249,12 +248,12 @@ export type LoginParamMap = {
    */
   dappShare?: string;
   /**
-   * This curve will be used to determine the public key encoded in the jwt token which returned in
-   * `getUserInfo` function after user login.
-   * You can use that public key from jwt token as a unique user identifier in your backend.
+   * This curve will be used to determine the public key encoded in the jwt Token which returned in
+   * `Getuserinfo` function after user login.
+   * You can use that public key from jwt Token as a unique user identifier in your backend.
    *
-   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in jwt token to use.
-   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in jwt token to use.
+   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in jwt Token to use.
+   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in jwt Token to use.
    *
    * Note: This parameter won't change format of private key returned by auth. Private key returned
    * by auth is always `secp256k1`.
@@ -273,8 +272,7 @@ export type LoginParamMap = {
   </TabItem>
 </Tabs>
 
-#### Auth Connection Types
-
+#### Auth Connection types
 ```ts
 export const AUTH_CONNECTION = {
   GOOGLE: 'google',
@@ -297,7 +295,7 @@ export const AUTH_CONNECTION = {
 }
 ```
 
-#### Advanced Options (`extraLoginOptions`)
+#### Advanced options (`extraLoginOptions`)
 
 For custom integrations (like Auth0, AWS Cognito), you can provide additional options:
 
@@ -307,8 +305,8 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
 | Parameter               | Description                                                 |
 | ----------------------- | ----------------------------------------------------------- |
 | `isUserIdCaseSensitive` | Whether the user id field is case sensitive [Default: true] |
-| `domain`                | Auth provider domain (e.g., "example.auth0.com")            |
-| `client_id`             | Client ID from your auth provider                           |
+| `domain`                | Auth Provider domain (e.g., "example.auth0.com")            |
+| `client_id`             | Client ID from your auth Provider                           |
 | `scope`                 | OAuth scopes (e.g., "email profile openid")                 |
 | `response_type`         | Response type for OAuth flow                                |
 | `login_hint`            | Pre-fill user identifier                                    |
@@ -316,7 +314,7 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
   </TabItem>
   <TabItem value="Interface">
     ```ts
-    export type ExtraLoginOptions = Auth0ClientOptions;
+    export type Extraloginoptions = Auth0ClientOptions;
 
     export interface Auth0ClientOptions extends BaseLoginOptions {
     /**
@@ -330,7 +328,7 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
      */
     client_id?: string;
     /**
-     * The field in jwt token which maps to user id
+     * The field in jwt Token which maps to user id
      */
     userIdField?: string;
     /**
@@ -338,8 +336,8 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
      * @defaultValue true
      */
     isUserIdCaseSensitive?: boolean;
-    id_token?: string;
-    access_token?: string;
+    id_Token?: string;
+    access_Token?: string;
     /**
      * The route for user info endpoint. This will be padded to domain
      * @defaultValue userinfo
@@ -359,7 +357,7 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
 
 ### Implicit logins
 
-Implicit logins are the easiest way to authenticate users with your custom authentication services. Web3Auth currently supports implicit logins for the following providers directly:
+Implicit logins are the easiest way to authenticate users with your custom authentication services. Web3Auth currently supports implicit logins for the following Providers directly:
 
 - Google
 - Facebook
@@ -367,7 +365,7 @@ Implicit logins are the easiest way to authenticate users with your custom authe
 - Twitch
 - Auth0 (Custom)
 
-In addition to these you can also use any other provider like Auth0, AWS Cognito, Azure AD, etc. by providing the particular details of their login within the `extraLoginOptions` object within the `connectTo` function.
+In addition to these you can also use any other Provider like Auth0, AWS Cognito, Azure AD, etc. by providing the particular details of their login within the `extraLoginOptions` object within the `ConnectTo` function.
 
 #### Usage
 
@@ -375,7 +373,7 @@ In addition to these you can also use any other provider like Auth0, AWS Cognito
   <TabItem value="Google">
 ```ts
 // web3auth instance already initialized
-await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.GOOGLE,
   authConnectionId: "w3a-google-demo",
 });
@@ -384,7 +382,7 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   <TabItem value="Facebook">
 ```ts
 // web3auth instance already initialized
-await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.FACEBOOK,
   authConnectionId: "w3a-facebook-demo",
 });
@@ -393,7 +391,7 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   <TabItem value="Discord">
 ```ts
 // web3auth instance already initialized
-await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.DISCORD,
   authConnectionId: "w3a-discord-demo",
 });
@@ -402,7 +400,7 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   <TabItem value="Twitch">
 ```ts
 // web3auth instance already initialized
-await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.TWITCH,
   authConnectionId: "w3a-twitch-demo",
 });
@@ -411,11 +409,11 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   <TabItem value="Auth0 Google">
 ```ts
 // web3auth instance already initialized
-await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.CUSTOM,
   authConnectionId: "w3a-auth0-demo",
   extraLoginOptions: {
-    connection: "google-oauth2",
+    Connection: "google-oauth2",
   },
 });
 ```
@@ -423,7 +421,7 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   <TabItem value="Auth0 SPA">
 ```ts
 // web3auth instance already initialized
-await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.CUSTOM,
   authConnectionId: "w3a-auth0-demo",
 });
@@ -432,14 +430,14 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   <TabItem value="AWS Cognito">
 ```ts
 // web3auth instance already initialized
-await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.CUSTOM,
   authConnectionId: "w3a-cognito-demo",
   extraLoginOptions: {
     clientId: import.meta.env.VITE_COGNITO_CLIENT_ID,
     domain: "https://shahbaz-web3auth.auth.ap-south-1.amazoncognito.com",
     verifierIdField: "email",
-    response_type: "token",
+    response_type: "Token",
     scope: "email profile openid",
   },
 });
@@ -447,9 +445,9 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   </TabItem>
 </Tabs>
 
-### JWT Login
+### JWT login
 
-JWT Login is a way to authenticate users with your custom authentication services. With this method, Web3Auth just takes into account the `idToken` passed over to the `connectTo` function and uses it to authenticate the user. You can utilise this method with any authentication service that is OAuth 2.0 Compatible.
+JWT login is a way to authenticate users with your custom authentication services. With this method, Web3Auth just takes into account the `idToken` passed over to the `ConnectTo` function and uses it to authenticate the user. You can utilise this method with any authentication service that is OAuth 2.0 Compatible.
 
 :::warning
 
@@ -466,8 +464,8 @@ If you have not configured on the dashboard, whether you user id is case sensiti
 const loginWithGoogle = async (response: CredentialResponse) => {
   const idToken = response.credential;
 
-  // focus-start
-  await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  // Focus-start
+  await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
     authConnectionId: "w3a-google-demo",
     authConnection: AUTH_CONNECTION.GOOGLE,
     idToken,
@@ -475,7 +473,7 @@ const loginWithGoogle = async (response: CredentialResponse) => {
       isUserIdCaseSensitive: false,
     },
   });
-  // focus-end
+  // Focus-end
 };
 
 ...
@@ -490,7 +488,7 @@ const loginWithGoogle = async (response: CredentialResponse) => {
 ```
 
   </TabItem>
-  <TabItem value="Auth0 JWT Login">
+  <TabItem value="Auth0 JWT login">
 
 ```ts
 const { getIdTokenClaims, loginWithPopup } = useAuth0()
@@ -501,11 +499,11 @@ const loginWithAuth0 = async () => {
 
     const idToken = (await getIdTokenClaims())?.__raw.toString()
     if (!idToken) {
-      throw new Error('No id token found')
+      throw new Error('No id Token found')
     }
 
-    // focus-start
-    await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+    // Focus-start
+    await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
       authConnectionId: 'w3a-auth0-demo',
       authConnection: AUTH_CONNECTION.CUSTOM,
       idToken,
@@ -513,15 +511,15 @@ const loginWithAuth0 = async () => {
         isUserIdCaseSensitive: false,
       },
     })
-    // focus-end
+    // Focus-end
   } catch (err) {
-    console.error(err)
+    console.Error(err)
   }
 }
 ```
 
 </TabItem>
-<TabItem value="Firebase JWT Login">
+<TabItem value="Firebase JWT login">
 
 ```ts
 const loginWithFirebaseGithub = async () => {
@@ -534,8 +532,8 @@ const loginWithFirebaseGithub = async () => {
 
     const idToken = await result.user.getIdToken(true)
 
-    // focus-start
-    await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+    // Focus-start
+    await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
       authConnectionId: 'w3a-firebase-demo',
       authConnection: AUTH_CONNECTION.CUSTOM,
       idToken,
@@ -543,35 +541,35 @@ const loginWithFirebaseGithub = async () => {
         isUserIdCaseSensitive: false,
       },
     })
-    // focus-end
-  } catch (error) {
-    console.error('Firebase authentication error:', error)
+    // Focus-end
+  } catch (Error) {
+    console.Error('Firebase authentication Error:', Error)
   }
 }
 ```
 
 </TabItem>
-<TabItem value="Custom JWT Login">
+<TabItem value="Custom JWT login">
 
 ```ts
 const getIdToken = async () => {
   // Get ID Token from server
-  const res = await fetch('http://localhost:8080/api/token', {
+  const res = await fetch('http://localhost:8080/api/Token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
   })
-  const data = await res.json()
-  return data?.token
+  const Data = await res.json()
+  return Data?.Token
 }
 
 const loginWithJWT = async () => {
   try {
     const idToken = await getIdToken()
 
-    // focus-start
-    await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+    // Focus-start
+    await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
       authConnection: AUTH_CONNECTION.CUSTOM,
       authConnectionId: 'w3a-node-demo',
       idToken,
@@ -579,9 +577,9 @@ const loginWithJWT = async () => {
         isUserIdCaseSensitive: false,
       },
     })
-    // focus-end
+    // Focus-end
   } catch (err) {
-    console.error(err)
+    console.Error(err)
   }
 }
 ```
@@ -589,15 +587,14 @@ const loginWithJWT = async () => {
   </TabItem>
 </Tabs>
 
-### Grouped Auth Connections
+### Grouped auth Connections
+Grouped auth Connections allows you to group multiple auth Connections together and use them as a single Connection. This is useful when you want to authenticate the user with multiple Providers and require the same user wallet address to be generated.
 
-Grouped Auth Connections allows you to group multiple auth connections together and use them as a single connection. This is useful when you want to authenticate the user with multiple providers and require the same user wallet address to be generated.
-
-For example, you can group Google & Email Passwordless providers together and use them as a single connection. Now, if your user logs in with Google Auth or even with Email Passwordless using the same email, they will get the same wallet address.
+For example, you can group Google & Email Passwordless Providers together and use them as a single Connection. Now, if your user logs in with Google Auth or even with Email Passwordless using the same email, they will get the same wallet address.
 
 :::info Prerequisites
 
-You need to configure a grouped connection, by combining your single connections in the Web3Auth Dashboard before using this feature.
+You need to configure a grouped Connection, by combining your single Connections in the Web3Auth Dashboard before using this feature.
 
 :::
 
@@ -606,39 +603,39 @@ You need to configure a grouped connection, by combining your single connections
 
 ```ts
 const loginWithGoogle = async () => {
-  // focus-start
-  await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  // Focus-start
+  await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: 'aggregate-sapphire',
     authConnectionId: 'w3a-google',
     authConnection: AUTH_CONNECTION.GOOGLE,
   })
-  // focus-end
+  // Focus-end
 }
 
 const loginWithAuth0Google = async () => {
-  // focus-start
-  await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  // Focus-start
+  await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: 'aggregate-sapphire',
     authConnectionId: 'w3a-a0-google',
     authConnection: AUTH_CONNECTION.CUSTOM,
     extraLoginOptions: {
-      connection: 'google-oauth2',
+      Connection: 'google-oauth2',
     },
   })
-  // focus-end
+  // Focus-end
 }
 
 const loginWithAuth0GitHub = async () => {
-  // focus-start
-  await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  // Focus-start
+  await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: 'aggregate-sapphire',
     authConnectionId: 'w3a-a0-github',
     authConnection: AUTH_CONNECTION.CUSTOM,
     extraLoginOptions: {
-      connection: 'github',
+      Connection: 'github',
     },
   })
-  // focus-end
+  // Focus-end
 }
 ```
 
@@ -649,8 +646,8 @@ const loginWithAuth0GitHub = async () => {
 const loginWithGoogle = async (response: CredentialResponse) => {
   const idToken = response.credential
 
-  // focus-start
-  await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  // Focus-start
+  await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: 'aggregate-sapphire',
     authConnectionId: 'w3a-google',
     authConnection: AUTH_CONNECTION.GOOGLE,
@@ -660,7 +657,7 @@ const loginWithGoogle = async (response: CredentialResponse) => {
       verifierIdField: 'email',
     },
   })
-  // focus-end
+  // Focus-end
 }
 
 const loginWithAuth0 = async () => {
@@ -668,11 +665,11 @@ const loginWithAuth0 = async () => {
     await loginWithPopup()
     const idToken = (await getIdTokenClaims())?.__raw.toString()
     if (!idToken) {
-      throw new Error('No id token found')
+      throw new Error('No id Token found')
     }
 
-    // focus-start
-    await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+    // Focus-start
+    await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
       groupedAuthConnectionId: 'aggregate-sapphire',
       authConnectionId: 'w3a-a0-github',
       authConnection: AUTH_CONNECTION.CUSTOM,
@@ -682,9 +679,9 @@ const loginWithAuth0 = async () => {
         verifierIdField: 'email',
       },
     })
-    // focus-end
+    // Focus-end
   } catch (err) {
-    console.error(err)
+    console.Error(err)
   }
 }
 ```
@@ -694,13 +691,13 @@ const loginWithAuth0 = async () => {
 
 ```ts
 const loginWithGoogle = async () => {
-  // focus-start
-  await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  // Focus-start
+  await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: 'aggregate-sapphire',
     authConnectionId: 'w3a-google',
     authConnection: AUTH_CONNECTION.GOOGLE,
   })
-  // focus-end
+  // Focus-end
 }
 
 const loginWithFirebaseGithub = async () => {
@@ -712,8 +709,8 @@ const loginWithFirebaseGithub = async () => {
 
   const idToken = await result.user.getIdToken(true)
 
-  // focus-start
-  await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  // Focus-start
+  await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: 'aggregate-sapphire',
     authConnectionId: 'w3a-firebase',
     authConnection: AUTH_CONNECTION.CUSTOM,
@@ -722,7 +719,7 @@ const loginWithFirebaseGithub = async () => {
       isUserIdCaseSensitive: false,
     },
   })
-  // focus-end
+  // Focus-end
 }
 ```
 

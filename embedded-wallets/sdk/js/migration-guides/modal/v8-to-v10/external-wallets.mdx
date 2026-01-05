@@ -7,7 +7,7 @@ sidebar_label: External Wallets Migration
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# Web3Auth v10 External Wallet Adapters Migration Guide
+# Web3Auth v10 external wallet adapters migration guide
 
 This guide focuses specifically on migrating external wallet adapter configurations from Web3Auth v8
 to v10. This is a supplementary guide to the main
@@ -19,9 +19,9 @@ In v8, external wallets required manual adapter configuration. V10 simplifies th
 (Multiple Injected Provider Discovery) to automatically detect and provide access to external
 wallets without manual setup.
 
-## Migration Steps
+## Migration steps
 
-### External Wallet Adapter Migration
+### External wallet adapter migration
 
 ```typescript
 // remove-start
@@ -40,7 +40,7 @@ web3auth.configureAdapter(metamaskAdapter)
 web3auth.configureAdapter(phantomAdapter)
 
 // Or using helper functions
-const adapters = await getDefaultExternalAdapters({ options: web3AuthOptions })
+const adapters = await getDefaultExternalAdapters({ options: Web3authOptions })
 adapters.forEach(adapter => {
   web3auth.configureAdapter(adapter)
 })
@@ -55,7 +55,7 @@ await web3auth.init()
 // add-end
 ```
 
-## Key Changes
+## Key changes
 
 - **Package Removal**: Remove all external wallet adapter packages
 - **MIPD Integration**: External wallets are automatically detected using MIPD (Multiple Injected
@@ -63,7 +63,7 @@ await web3auth.init()
 - **No Configuration**: No need to manually configure or register external adapters
 - **WalletConnect Support**: WalletConnect-compatible wallets are automatically available
 
-## Package Removal
+## Package removal
 
 Remove these deprecated packages from your project:
 
@@ -72,10 +72,10 @@ Remove these deprecated packages from your project:
 npm uninstall @web3auth/metamask-adapter @web3auth/phantom-adapter @web3auth/solflare-adapter @web3auth/slope-adapter @web3auth/default-evm-adapter @web3auth/default-solana-adapter
 ```
 
-## How It Works in v10
+## How it works in v10
 
 V10 uses MIPD (Multiple Injected Provider Discovery) to automatically detect injected wallets in the
-browser. When users attempt to connect, they'll see:
+browser. When users attempt to Connect, they'll see:
 
 1. **Installed Wallets**: Any injected wallets found in the browser
 2. **WalletConnect Options**: Popular wallets available via WalletConnect
@@ -83,7 +83,7 @@ browser. When users attempt to connect, they'll see:
 
 This provides a better user experience with no configuration required from developers.
 
-## Next Steps
+## Next steps
 
 Return to the main [v8 to v10 migration guide](README.mdx) to continue with other
 migration aspects.

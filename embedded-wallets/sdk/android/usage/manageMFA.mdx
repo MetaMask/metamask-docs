@@ -1,13 +1,13 @@
 ---
 title: Manage MFA for a User
-sidebar_label: manageMFA
-description: 'Web3Auth Android SDK - manageMFA Function | Embedded Wallets'
+sidebar_label: Managemfa
+description: 'Web3Auth Android SDK - Managemfa Function | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `manageMFA` method is used to trigger manage MFA flow for users, allowing users to update their MFA settings. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
+The `Managemfa` method is used to trigger manage MFA flow for users, allowing users to update their MFA settings. The method takes `LoginParams` which will used during custom verifiers. If you are using default login Providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT Token in `Loginparams` as well.
 
 ## Usage
 
@@ -22,13 +22,13 @@ The `manageMFA` method is used to trigger manage MFA flow for users, allowing us
 <TabItem value = "default-verifier">
 
 ```kotlin
-val manageMFACF = web3Auth.manageMFA()
+val ManagemfaCF = Web3auth.Managemfa()
 
-manageMFACF.whenComplete{_, error ->
-  if (error == null) {
+ManagemfaCF.whenComplete{_, Error ->
+  if (Error == null) {
      // Handle success
   } else {
-     // Handle error
+     // Handle Error
   }
 }
 ```
@@ -38,18 +38,18 @@ manageMFACF.whenComplete{_, error ->
 <TabItem value="custom-jwt-verifier">
 
 ```kotlin title="Usage"
-val loginParams = LoginParams(
+val Loginparams = LoginParams(
   Provider.JWT,
-  extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+  extraLoginOptions = Extraloginoptions(id_Token = "your_jwt_Token")
 )
 
-val manageMFACF = web3Auth.manageMFA(loginParams)
+val ManagemfaCF = Web3auth.Managemfa(Loginparams)
 
-manageMFACF.whenComplete{_, error ->
-  if (error == null) {
+ManagemfaCF.whenComplete{_, Error ->
+  if (Error == null) {
      // Handle success
   } else {
-     // Handle error
+     // Handle Error
   }
 }
 

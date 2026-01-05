@@ -7,7 +7,7 @@ sidebar_label: Whitelabeling Migration
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# Web3Auth v10 Whitelabeling Migration Guide
+# Web3Auth v10 whitelabeling migration guide
 
 This guide focuses specifically on migrating whitelabeling and UI customization configurations from Web3Auth v9 to v10. This is a supplementary guide to the main [v9 to v10 migration guide](README.mdx).
 
@@ -15,7 +15,7 @@ This guide focuses specifically on migrating whitelabeling and UI customization 
 
 Whitelabeling and UI customization have been significantly streamlined in v10, focusing on dashboard configurations and a more direct approach to modal customization.
 
-## Migration Steps
+## Migration steps
 
 ### 1. Branding (v9 `uiConfig`): Moves to Dashboard
 
@@ -25,14 +25,14 @@ Whitelabeling and UI customization have been significantly streamlined in v10, f
 ### 2. Modal Login Method Display (v9 `modalConfig` in `initModal()`): New Structure in `Web3AuthOptions`
 
 - **Previously (v9):** Customizing which login methods appear in the modal (and their appearance/order) was done via `modalConfig` in `initModal()` in v9.
-- **Now (v10):** This moves to `modalConfig` within `Web3AuthOptions` (at SDK instantiation). The structure is new, utilizing `connectors` (e.g., `WALLET_CONNECTORS.AUTH` for social/email, `WALLET_CONNECTORS.WALLET` for external wallets) and a `loginMethods` object within each connector.
-- Each login method (e.g., `google`, `email_passwordless`, `metamask`) is an object conforming to `LoginMethodConfig`, allowing you to set `name`, `showOnModal`, `authConnectionId` (for custom auth), etc.
+- **Now (v10):** This moves to `modalConfig` within `Web3AuthOptions` (at SDK instantiation). The structure is new, utilizing `Connectors` (e.g., `WALLET_CONNECTORS.AUTH` for social/email, `WALLET_CONNECTORS.WALLET` for external wallets) and a `loginMethods` object within each Connector.
+- Each login method (e.g., `google`, `email_passwordless`, `metamask`) is an object conforming to `LoginMethodConfig`, allowing you to set `name`, `ShowOnModal`, `authConnectionId` (for custom auth), etc.
   ```typescript
   // v10: modalConfig in Web3AuthOptions
-  const web3AuthOptions: Web3AuthOptions = {
+  const Web3authOptions: Web3AuthOptions = {
     // ... other options
     modalConfig: {
-      connectors: {
+      Connectors: {
         [WALLET_CONNECTORS.AUTH]: {
           /* ... config for social/email ... */
         },
@@ -45,7 +45,7 @@ Whitelabeling and UI customization have been significantly streamlined in v10, f
   ```
 - **Action:** Rebuild your modal display logic using the new `modalConfig` structure in `Web3AuthOptions`. Refer to the v10 `LoginMethodConfig` type definition for all properties. Deprecated v9 `WALLET_ADAPTERS` enum is replaced by `WALLET_CONNECTORS` and specific login method keys.
 
-### 3. Auth Adapter Whitelabeling in v9: No longer supported
+### 3. Auth adapter whitelabeling in v9: no longer supported
 
 - In v9, `whiteLabel` settings in an `@web3auth/auth-adapter` instance could customize intermediate auth screens (e.g., social login pop-ups).
 - **In v10, passing this `whiteLabel` configuration is no longer supported since there is no way to configure auth adapter settings.**
@@ -55,6 +55,6 @@ Whitelabeling and UI customization have been significantly streamlined in v10, f
 
 This shift centralizes UI control on the dashboard and simplifies client-side SDK configuration for whitelabeling. The new approach provides better consistency across applications and easier maintenance of branding configurations.
 
-## Next Steps
+## Next steps
 
 Return to the main [v9 to v10 migration guide](README.mdx) to continue with other migration aspects like Smart Account functionality, custom authentication, and MFA configurations.

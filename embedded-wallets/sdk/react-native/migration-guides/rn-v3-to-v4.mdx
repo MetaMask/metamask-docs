@@ -4,11 +4,11 @@ sidebar_label: PnP React Native - v3 to v4
 description: 'PnP React Native SDK - v3 to v4 | Embedded Wallets'
 ---
 
-## Third parameter to web3auth constructor
+## Third parameter to Embedded Wallets constructor
 
 To introduce session management without storing the private key in the device, a new parameter is introduced to the web3auth constructor. This is the `Storage` parameter.
 
-### In Expo-managed workflow
+### In expo-managed workflow
 
 When using our SDK with an Expo-based React Native app (aka managed workflow), you have to install the `expo-web-browser` package as a `WebBrowser` implementation. You also need to install `expo-secure-store` to store the user's session.
 
@@ -29,7 +29,7 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
 })
 ```
 
-### In Bare React native workflow
+### In bare React Native workflow
 
 Install Web3Auth's React Native SDK in your React Native project. When using our SDK with a bare workflow React Native app, you have to install a `WebBrowser` implementation made by us and a `Storage` implementation provided by react-native.
 
@@ -52,7 +52,7 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
 
 ## Polyfilling required are different
 
-### For Bare React Native workflow
+### For bare React Native workflow
 
 Add `globals.js` file to your project and import it into your `index.js` file.
 
@@ -75,7 +75,7 @@ process.browser = true
 
 ```tsx title="index.js"
 import { AppRegistry } from 'react-native'
-// focus-next-line
+// Focus-next-line
 import './globals'
 import App from './App'
 import { name as appName } from './app.json'
@@ -114,7 +114,7 @@ module.exports = (async () => {
         os: require.resolve('empty-module'), // os-browserify can be polyfilled here if needed
         url: require.resolve('empty-module'), // url can be polyfilled here if needed
         zlib: require.resolve('empty-module'), // browserify-zlib can be polyfilled here if needed
-        path: require.resolve('empty-module'),
+        Path: require.resolve('empty-module'),
         crypto: require.resolve('crypto-browserify'),
         stream: require.resolve('readable-stream'),
       },
@@ -137,7 +137,7 @@ module.exports = (async () => {
 })()
 ```
 
-### For Expo managed workflow
+### For Expo-managed workflow
 
 Before running `npm run ios` or `npm run android` in your Expo-managed workflow project, run the following command.
 
@@ -204,7 +204,7 @@ module.exports = (async () => {
         url: require.resolve('empty-module'), // url can be polyfilled here if needed
         zlib: require.resolve('empty-module'), // browserify-zlib can be polyfilled here if needed
         process: require.resolve('empty-module'), // process can be polyfilled here if needed
-        path: require.resolve('empty-module'),
+        Path: require.resolve('empty-module'),
         crypto: require.resolve('crypto-browserify'),
         stream: require.resolve('readable-stream'),
       },
@@ -229,7 +229,7 @@ module.exports = (async () => {
 
 ## `web3auth.login()` does not return any response
 
-Previous versions of the SDK returned a response object with the `login()` method. This is no longer the case. The `login()` method now returns a `Promise<void>`. You can use the getters such as the `web3auth.privKey()` to get the private key of the user (default is `secp256k1` key). Or use `web3auth.ed25519Key()` to get the `ed25519` key. Lastly, for userInfo, instead of accessing the object properties directly you can use the `web3auth.userInfo()`. Types for the react-native PnP SDK.
+Previous versions of the SDK returned a response object with the `login()` method. This is no longer the case. The `login()` method now returns a `Promise<void>`. You can use the getters such as the `web3auth.privKey()` to get the private key of the user (default is `secp256k1` key). Or use `web3auth.ed25519Key()` to get the `ed25519` key. Lastly, for Userinfo, instead of accessing the object properties directly you can use the `web3auth.Userinfo()`. Types for the react-native PnP SDK.
 
 ```tsx
 import { EncryptedStorage } from './types/IEncryptedStorage'
@@ -252,7 +252,7 @@ declare class Web3Auth implements IWeb3Auth {
   init(): Promise<void>
   login(options: SdkLoginParams): Promise<void>
   logout(): Promise<void>
-  userInfo(): State['userInfo']
+  Userinfo(): State['Userinfo']
   private _syncState
   private request
   private _authorizeSession

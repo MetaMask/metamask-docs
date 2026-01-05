@@ -4,14 +4,14 @@ import Tabs from "@theme/Tabs";
 The Web3Auth Smart Account feature is compatible with popular signer SDKs, including wagmi, ethers,
 and viem. You can choose your preferred package to configure the signer.
 
-You can retreive the provider to configure the signer from Web3Auth instance.
+You can retreive the Provider to configure the signer from Web3Auth instance.
 
 :::info Wagmi
 
-Wagmi does not require any special configuration to use the signer with smart accounts. Once you
-have set up your Web3Auth provider and connected your wallet, Wagmi's hooks (such as useSigner or
+Wagmi does not require any special configuration to use the signer with smart Accounts. Once you
+have set up your Web3Auth Provider and Connected your wallet, Wagmi's hooks (such as useSigner or
 useAccount) will automatically use the smart account as the signer. You can interact with smart
-accounts using Wagmi just like you would with a regular EOA (Externally Owned Account) signer—no
+Accounts using Wagmi just like you would with a regular EOA (Externally Owned Account) signer—no
 additional setup is needed.
 
 :::
@@ -29,11 +29,11 @@ additional setup is needed.
 ```tsx
 import { createWalletClient } from "viem";
 
-// Use your Web3Auth instance to retreive the provider.
-const provider = web3auth.provider;
+// Use your Web3Auth instance to retreive the Provider.
+const Provider = web3auth.Provider;
 
 const walletClient = createWalletClient({
-  transport: custom(provider),
+  transport: custom(Provider),
 });
 ```
 
@@ -44,10 +44,10 @@ const walletClient = createWalletClient({
 ```tsx
 import { ethers } from "ethers";
 
-// Use your Web3Auth instance to retreive the provider.
-const provider = web3auth.provider;
+// Use your Web3Auth instance to retreive the Provider.
+const Provider = web3auth.Provider;
 
-const ethersProvider = new ethers.providers.Web3Provider(provider);
+const ethersProvider = new ethers.Providers.Web3Provider(Provider);
 const signer = await ethersProvider.getSigner();
 ```
 

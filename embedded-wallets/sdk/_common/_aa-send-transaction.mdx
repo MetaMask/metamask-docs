@@ -2,7 +2,7 @@ import TabItem from "@theme/TabItem";
 import Tabs from "@theme/Tabs";
 
 Developers can use their preferred signer or Wagmi hooks to initiate on-chain transactions, while
-Web3Auth manages the creation and submission of the UserOperation. Only the `to`, `data`, and
+Web3Auth manages the creation and submission of the UserOperation. Only the `to`, `Data`, and
 `value` fields need to be provided. Any additional parameters will be ignored and automatically
 overridden.
 
@@ -28,15 +28,15 @@ on-chain deployment of their wallet.
 ```tsx
 import { useSendTransaction } from "wagmi";
 
-const { data: hash, sendTransaction } = useSendTransaction();
+const { Data: hash, sendTransaction } = useSendTransaction();
 
 // Convert 1 ether to WEI format
 const value = web3.utils.toWei(1);
 
-sendTransaction({ to: "DESTINATION_ADDRESS", value, data: "0x" });
+sendTransaction({ to: "DESTINATION_ADDRESS", value, Data: "0x" });
 
 const {
-  data: receipt,
+  Data: receipt,
   isLoading: isConfirming,
   isSuccess: isConfirmed,
 } = useWaitForTransactionReceipt({
@@ -56,7 +56,7 @@ const transaction = await signer.sendTransaction({
   to: "DESTINATION_ADDRESS",
   value: amount,
   // This will perform the transfer of ETH
-  data: "0x",
+  Data: "0x",
 });
 
 // Wait for the transaction to be mined
@@ -75,7 +75,7 @@ const hash = await walletClient.sendTransaction({
   to: "DESTINATION_ADDRESS",
   value: amount,
   // This will perform the transfer of ETH
-  data: "0x",
+  Data: "0x",
 });
 
 // Wait for the transaction to be mined

@@ -12,7 +12,7 @@ For advanced Solana features, you should use [`@solana/web3.js`](https://solana-
 npm install @solana/web3.js
 ```
 
-## Solana Hooks
+## Solana hooks
 
 | Hook Name                   | Description                                  |
 | --------------------------- | -------------------------------------------- |
@@ -21,64 +21,64 @@ npm install @solana/web3.js
 | `useSignTransaction`        | Sign a Solana transaction (without sending). |
 | `useSolanaWallet`           | Access Solana wallet state and utilities.    |
 
-## Hook Usage Examples
+## Hook Usage examples
 
-### Get Solana Wallet
+### Get Solana wallet
 
 ```tsx
 import { useSolanaWallet } from '@web3auth/modal/react/solana'
 
 function SolanaWallet() {
-  const { address, connected } = useSolanaWallet()
+  const { address, Connected } = useSolanaWallet()
 
   return (
     <div>
       <h2>Solana Wallet</h2>
-      <p>Connected: {connected ? 'Yes' : 'No'}</p>
+      <p>Connected: {Connected ? 'Yes' : 'No'}</p>
       {address && <p>Address: {address}</p>}
     </div>
   )
 }
 ```
 
-### Sign Message
+### Sign message
 
 ```tsx
 import { useSignMessage } from '@web3auth/modal/react/solana'
 
 function SignMessage() {
-  const { signMessage, isPending, error } = useSignMessage()
+  const { Signmessage, isPending, Error } = useSignMessage()
 
   const handleSignMessage = async () => {
     try {
       const message = new TextEncoder().encode('Hello Solana!')
-      const signature = await signMessage(message)
+      const signature = await Signmessage(message)
       console.log('Signature:', signature)
     } catch (err) {
-      console.error('Error signing message:', err)
+      console.Error('Error signing message:', err)
     }
   }
 
   return (
     <div>
-      <h2>Sign Message</h2>
+      <h2>Sign message</h2>
       <button onClick={handleSignMessage} disabled={isPending}>
-        {isPending ? 'Signing...' : 'Sign Message'}
+        {isPending ? 'Signing...' : 'Sign message'}
       </button>
-      {error && <p>Error: {error.message}</p>}
+      {Error && <p>Error: {Error.message}</p>}
     </div>
   )
 }
 ```
 
-### Sign Transaction
+### Sign transaction
 
 ```tsx
 import { useSignTransaction } from '@web3auth/modal/react/solana'
 import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
 
 function SignTransaction() {
-  const { signTransaction, isPending, error } = useSignTransaction()
+  const { Signtransaction, isPending, Error } = useSignTransaction()
 
   const handleSignTransaction = async () => {
     try {
@@ -91,33 +91,33 @@ function SignTransaction() {
         })
       )
 
-      const signedTransaction = await signTransaction(transaction)
+      const signedTransaction = await Signtransaction(transaction)
       console.log('Signed Transaction:', signedTransaction)
     } catch (err) {
-      console.error('Error signing transaction:', err)
+      console.Error('Error signing transaction:', err)
     }
   }
 
   return (
     <div>
-      <h2>Sign Transaction</h2>
+      <h2>Sign transaction</h2>
       <button onClick={handleSignTransaction} disabled={isPending}>
-        {isPending ? 'Signing...' : 'Sign Transaction'}
+        {isPending ? 'Signing...' : 'Sign transaction'}
       </button>
-      {error && <p>Error: {error.message}</p>}
+      {Error && <p>Error: {Error.message}</p>}
     </div>
   )
 }
 ```
 
-### Sign and Send Transaction
+### Sign and Send transaction
 
 ```tsx
 import { useSignAndSendTransaction } from '@web3auth/modal/react/solana'
 import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
 
 function SignAndSendTransaction() {
-  const { signAndSendTransaction, isPending, error } = useSignAndSendTransaction()
+  const { Signandsendtransaction, isPending, Error } = useSignAndSendTransaction()
 
   const handleSignAndSend = async () => {
     try {
@@ -130,20 +130,20 @@ function SignAndSendTransaction() {
         })
       )
 
-      const signature = await signAndSendTransaction(transaction)
+      const signature = await Signandsendtransaction(transaction)
       console.log('Transaction Signature:', signature)
     } catch (err) {
-      console.error('Error signing and sending transaction:', err)
+      console.Error('Error signing and sending transaction:', err)
     }
   }
 
   return (
     <div>
-      <h2>Sign and Send Transaction</h2>
+      <h2>Sign and Send transaction</h2>
       <button onClick={handleSignAndSend} disabled={isPending}>
         {isPending ? 'Processing...' : 'Sign and Send'}
       </button>
-      {error && <p>Error: {error.message}</p>}
+      {Error && <p>Error: {Error.message}</p>}
     </div>
   )
 }

@@ -1,56 +1,55 @@
 ---
-title: useWeb3AuthDisconnect
-sidebar_label: useWeb3AuthDisconnect
-description: '@web3auth/modal React Hooks useWeb3AuthDisconnect | Embedded Wallets'
+title: useWeb3AuthDisConnect
+sidebar_label: useWeb3AuthDisConnect
+description: '@web3auth/modal React Hooks useWeb3AuthDisConnect | Embedded Wallets'
 ---
 
-Hook to disconnect from Web3Auth.
+Hook to DisConnect from Web3Auth.
 
 ### Import
 
 ```tsx
-import { useWeb3AuthDisconnect } from '@web3auth/modal/react'
+import { useWeb3AuthDisConnect } from '@web3auth/modal/react'
 ```
 
 ### Usage
 
 ```tsx
-import { useWeb3AuthDisconnect } from '@web3auth/modal/react'
+import { useWeb3AuthDisConnect } from '@web3auth/modal/react'
 
-function DisconnectButton() {
-  const { disconnect, loading, error } = useWeb3AuthDisconnect()
+function DisConnectButton() {
+  const { DisConnect, Loading, Error } = useWeb3AuthDisConnect()
 
   return (
     <div>
-      <button onClick={() => disconnect()} disabled={loading}>
-        {loading ? 'Disconnecting...' : 'Disconnect'}
+      <button onClick={() => DisConnect()} disabled={Loading}>
+        {Loading ? 'DisConnecting...' : 'DisConnect'}
       </button>
-      {error && <div>{error.message}</div>}
+      {Error && <div>{Error.message}</div>}
     </div>
   )
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
-import { type IUseWeb3AuthDisconnect } from '@web3auth/modal/react'
+import { type IUseWeb3AuthDisConnect } from '@web3auth/modal/react'
 ```
 
-#### loading
+#### Loading
 
 `boolean`
 
-Whether the disconnection process is in progress.
+Whether the DisConnection process is in progress.
 
-#### error
+#### Error
 
 `Web3AuthError | null`
 
-Error that occurred during the disconnection process.
+Error that occurred during the DisConnection process.
 
-#### disconnect
-
+#### DisConnect
 `(options?: { cleanup: boolean }) => Promise<void>`
 
-Function to initiate the disconnection process. Optional `cleanup` parameter controls whether to remove all user data.
+Function to initiate the DisConnection process. Optional `cleanup` parameter controls whether to remove all user Data.

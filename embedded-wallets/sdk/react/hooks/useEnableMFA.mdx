@@ -18,38 +18,38 @@ import { useEnableMFA } from '@web3auth/modal/react'
 import { useEnableMFA } from '@web3auth/modal/react'
 
 function EnableMFAButton() {
-  const { enableMFA, loading, error } = useEnableMFA()
+  const { Enablemfa, Loading, Error } = useEnableMFA()
 
   return (
     <div>
-      <button onClick={() => enableMFA()} disabled={loading}>
-        {loading ? 'Enabling MFA...' : 'Enable MFA'}
+      <button onClick={() => Enablemfa()} disabled={Loading}>
+        {Loading ? 'Enabling MFA...' : 'Enable MFA'}
       </button>
-      {error && <div>{error.message}</div>}
+      {Error && <div>{Error.message}</div>}
     </div>
   )
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IUseEnableMFA } from '@web3auth/modal/react'
 ```
 
-#### loading
+#### Loading
 
 `boolean`
 
 Whether the MFA enabling process is in progress.
 
-#### error
+#### Error
 
 `Web3AuthError | null`
 
 Error that occurred during the MFA enabling process.
 
-#### enableMFA
+#### Enablemfa
 
 `<T>(params?: T) => Promise<void>`
 

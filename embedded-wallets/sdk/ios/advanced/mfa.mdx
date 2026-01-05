@@ -12,7 +12,7 @@ At Web3Auth, we prioritize your security by offering Multi-Factor Authentication
 
 <MFAMinimumPlan />
 
-## Enable using the MFA Level
+## Enable using the Multi-Factor Authentication level
 
 For a dApp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
 
@@ -22,7 +22,7 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 
 :::
 
-### MFA Level Options
+### MFA level options
 
 | MFA Level | Description                                                |
 | --------- | ---------------------------------------------------------- |
@@ -42,10 +42,10 @@ let web3auth = Web3Auth(W3AInitParams(
   redirectUrl: "bundleId://auth"
 ))
 
-let result = try await web3Auth.login(
+let result = try await Web3auth.login(
   W3ALoginParams(
     loginProvider: .GOOGLE,
-    // focus-next-line
+    // Focus-next-line
     mfaLevel: .MANDATORY
   )
 )
@@ -53,7 +53,7 @@ let result = try await web3Auth.login(
 
 ## Explicitly enable MFA
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `W3ALoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `W3ALoginParams`. If you are using custom jwt verifiers, you need to pass the valid JWT token in `W3ALoginParams` as well.
+The `Enablemfa` method is used to trigger MFA setup flow for users. The method takes `W3ALoginParams` which will used during custom verifiers. If you are using default login Providers, you don't need to pass `W3ALoginParams`. If you are using custom jwt verifiers, you need to pass the valid JWT Token in `W3ALoginParams` as well.
 
 <Tabs
   defaultValue="default-verifier"
@@ -67,10 +67,10 @@ The `enableMFA` method is used to trigger MFA setup flow for users. The method t
 
 ```swift
 do {
-	// focus-next-line
-  let isMFAEnabled = try await web3Auth.enableMFA()
+	// Focus-next-line
+  let Ismfaenabled = try await Web3auth.Enablemfa()
 } catch {
-  print(error.localizedDescription)
+  print(Error.localizedDescription)
   // Handle Error
 }
 ```
@@ -81,15 +81,15 @@ do {
 
 ```swift
 do {
-  let loginParams = W3ALoginParams(
+  let Loginparams = W3ALoginParams(
     loginProvider: .JWT,
-    extraLoginOptions: .init(id_token: "your_jwt_token")
+    extraLoginOptions: .init(id_Token: "your_jwt_Token")
    )
 
-  let isMFAEnabled = try await web3Auth.enableMFA(loginParams)
+  let Ismfaenabled = try await Web3auth.Enablemfa(Loginparams)
 
 } catch {
-  print(error.localizedDescription)
+  print(Error.localizedDescription)
   // Handle Error
 }
 
@@ -98,7 +98,7 @@ do {
 </TabItem>
 </Tabs>
 
-## Configure MFA Settings
+## Configure MFA settings
 
 You can configure the order of MFA or enable/disable MFA type by passing the `mfaSettings` object in `Web3AuthOptions`.
 
@@ -112,7 +112,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 
 :::
 
-### Parameters - MfaSettings
+### Parameters - MFAsettings
 
 `MfaSettings` allows you to set the type of the MFA.
 
@@ -162,7 +162,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 </TabItem>
 </Tabs>
 
-### Parameters - MfaSetting
+### Parameters - MFAsetting
 
 `MfaSetting` allows you to setup MFA setting for a particular MFA type.
 
@@ -214,7 +214,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
   clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
   network: .sapphire_mainnet,
   redirectUrl: "bundleId://auth",
-  // focus-start
+  // Focus-start
   whiteLabel: W3AWhiteLabelData(
     mfaSettings: MfaSettings(
       deviceShareFactor: MfaSetting(enable: true, priority: 1),
@@ -225,13 +225,13 @@ let web3auth = try await Web3Auth(W3AInitParams(
       authenticatorFactor: MfaSetting(enable: true, priority: 6)
     )
   )
-  // focus-end
+  // Focus-end
 ))
 
-let result = try await web3Auth.login(
+let result = try await Web3auth.login(
   W3ALoginParams(
     loginProvider: .GOOGLE,
-    // focus-next-line
+    // Focus-next-line
     mfaLevel: .MANDATORY
   )
 )

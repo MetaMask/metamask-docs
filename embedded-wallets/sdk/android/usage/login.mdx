@@ -7,7 +7,7 @@ description: 'Web3Auth Android SDK - Login Function | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-To login in a user, you can use the `login` method. It will trigger login flow will navigate the user to a browser model allowing the user to login into the service. You can pass in the supported providers to the login method for specific social logins such as GOOGLE, APPLE, FACEBOOK, etc., and do whitelabel login.
+To login in a user, you can use the `login` method. It will trigger login flow will navigate the user to a browser model allowing the user to login into the service. You can pass in the supported Providers to the login method for specific social logins such as GOOGLE, APPLE, FACEBOOK, etc., and do whitelabel login.
 
 ## Parameters
 
@@ -26,22 +26,22 @@ The `login` method takes in `LoginParams` as a required input.
 | Parameter            | Description                                                                                                                                                                                                                                                                                                                                                             |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `loginProvider`      | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `JWT`, `SMS_PASSWORDLESS`, and `FARCASTER`.                                                                             |
-| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                       |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `Extraloginoptions` as a value.                                                                                                                                       |
 | `redirectUrl?`       | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `Uri` as a value.                                                                                                                                                          |
 | `appState?`          | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `String` as a value.                                                                                                                                                                                                                      |
-| `mfaLevel?`          | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value.                                                                                                                                                                        |
+| `mfaLevel?`          | Customize the MFA screen Shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which Shows MFA screen every 3rd login. It accepts `MFALevel` as a value.                                                                                                                                                                        |
 | `dappShare?`         | Custom verifier logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `String` as a value.                                                                                                                                                              |
-| `curve?`             | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivKey` method. The default value is `Curve.SECP256K1`. |
+| `curve?`             | It will be used to determine the public key encoded in the jwt Token which returned in `Getuserinfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivKey` method. The default value is `Curve.SECP256K1`. |
 
 </TabItem>
 
 <TabItem value="class">
 
 ```kotlin
-data class LoginParams(
+Data class LoginParams(
     val loginProvider: Provider,
     var dappShare: String? = null,
-    val extraLoginOptions: ExtraLoginOptions? = null,
+    val extraLoginOptions: Extraloginoptions? = null,
     @Transient var redirectUrl: Uri? = null,
     val appState: String? = null,
     val mfaLevel: MFALevel? = null,
@@ -95,7 +95,7 @@ enum class Provider {
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth(
+val Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -104,11 +104,11 @@ val web3Auth = Web3Auth(
   )
 )
 
-// focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+// Focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login(
     LoginParams(Provider.GOOGLE)
 )
-// focus-end
+// Focus-end
 ```
 
 ## Examples
@@ -121,7 +121,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
     { label: "Discord", value: "discord" },
     { label: "Twitch", value: "twitch" },
     { label: "Email Passwordless", value: "email_passwordless" },
-    { label: "SMS Passwordless", value: "sms_passwordless" },
+    { label: "SMS passwordless", value: "sms_passwordless" },
     { label: "Farcaster", value: "farcaster" },
     { label: "JWT", value: "jwt" },
   ]}
@@ -133,7 +133,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth(
+val Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -142,11 +142,11 @@ val web3Auth = Web3Auth(
   )
 )
 
-// focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+// Focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login(
     LoginParams(Provider.GOOGLE)
 )
-// focus-end
+// Focus-end
 ```
 
 </TabItem>
@@ -157,7 +157,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth(
+val Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -166,11 +166,11 @@ val web3Auth = Web3Auth(
   )
 )
 
-// focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+// Focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login(
     LoginParams(Provider.FACEBOOK)
 )
-// focus-end
+// Focus-end
 ```
 
 </TabItem>
@@ -181,7 +181,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth(
+val Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -190,11 +190,11 @@ val web3Auth = Web3Auth(
   )
 )
 
-// focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+// Focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login(
     LoginParams(Provider.DISCORD)
 )
-// focus-end
+// Focus-end
 ```
 
 </TabItem>
@@ -205,7 +205,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth(
+val Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -214,11 +214,11 @@ val web3Auth = Web3Auth(
   )
 )
 
-// focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+// Focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login(
     LoginParams(Provider.TWITCH)
 )
-// focus-end
+// Focus-end
 ```
 
 </TabItem>
@@ -229,7 +229,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth(
+val Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -238,14 +238,14 @@ val web3Auth = Web3Auth(
   )
 )
 
-// focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+// Focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login(
     LoginParams(
         Provider.EMAIL_PASSWORDLESS,
-        extraLoginOptions = ExtraLoginOptions(login_hint = "hello@web3auth.io")
+        extraLoginOptions = Extraloginoptions(login_hint = "hello@web3auth.io")
     )
 )
-// focus-end
+// Focus-end
 ```
 
 </TabItem>
@@ -255,9 +255,9 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth( Web3AuthOptions( context = this, clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable network = Network.MAINNET, redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), ) )
+val Web3auth = Web3Auth( Web3AuthOptions( context = this, clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable network = Network.MAINNET, redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), ) )
 
-// focus-start val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login( LoginParams( Provider.SMS_PASSWORDLESS, extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344") ) ) // focus-end
+// Focus-start val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login( LoginParams( Provider.SMS_PASSWORDLESS, extraLoginOptions = Extraloginoptions(login_hint = "+91-9911223344") ) ) // Focus-end
 
 ````
 
@@ -269,7 +269,7 @@ val web3Auth = Web3Auth( Web3AuthOptions( context = this, clientId = "YOUR_WEB3A
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth(
+val Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -278,11 +278,11 @@ val web3Auth = Web3Auth(
   )
 )
 
-// focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+// Focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login(
   LoginParams(Provider.Farcaster)
 )
-// focus-end
+// Focus-end
 ````
 
 </TabItem>
@@ -293,7 +293,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth(
+val Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -302,14 +302,14 @@ val web3Auth = Web3Auth(
   )
 )
 
-// focus-start
-val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+// Focus-start
+val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = Web3auth.login(
     LoginParams(
         Provider.JWT,
-        extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+        extraLoginOptions = Extraloginoptions(id_Token = "your_jwt_Token")
     )
 )
-// focus-end
+// Focus-end
 ```
 
 </TabItem>

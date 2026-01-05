@@ -1,13 +1,13 @@
 ---
 title: Enable MFA
-sidebar_label: enableMFA
-description: 'Web3Auth Unity SDK - enableMFA | Embedded Wallets'
+sidebar_label: Enablemfa
+description: 'Web3Auth Unity SDK - Enablemfa | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
+The `Enablemfa` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login Providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT Token in `Loginparams` as well.
 
 :::tip
 
@@ -16,20 +16,20 @@ Additionally you can associate a function to be triggered on successful MFA Enab
 ```cs
 void Start()
 {
-    web3Auth = GetComponent<Web3Auth>();
-    web3Auth.setOptions(new Web3AuthOptions()
+    Web3auth = GetComponent<Web3Auth>();
+    Web3auth.setOptions(new Web3AuthOptions()
     {
 
     });
-    // focus-next-line
-    web3Auth.onMFASetup += onMFASetup;
+    // Focus-next-line
+    Web3auth.onMFASetup += onMFASetup;
 }
-//focus-start
+//Focus-start
 private void onMFASetup(bool response)
 {
     // Functions to be called after MFA setup
 }
-//focus-end
+//Focus-end
 ```
 
 :::
@@ -55,7 +55,7 @@ private void onMFASetup(bool response)
         loginProvider = selectedProvider,
     };
 
-    web3Auth.enableMFA(options);
+    Web3auth.Enablemfa(options);
 }
 ```
 
@@ -70,7 +70,7 @@ private void onMFASetup(bool response)
     var options = new LoginParams()
     {
         loginProvider = selectedProvider,
-        extraLoginOptions = new ExtraLoginOptions()
+        extraLoginOptions = new Extraloginoptions()
         {
             domain = "https://web3auth.au.auth0.com",
             verifierIdField = "sub",
@@ -78,7 +78,7 @@ private void onMFASetup(bool response)
         }
     };
 
-    web3Auth.enableMFA(options);
+    Web3auth.Enablemfa(options);
 }
 
 ```

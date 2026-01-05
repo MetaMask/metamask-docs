@@ -4,7 +4,7 @@ sidebar_label: useSignMessage
 description: '@web3auth/modal React Hook useSignMessage | Embedded Wallets'
 ---
 
-Hook to sign a message using the connected Solana wallet from Web3Auth.
+Hook to sign a message using the Connected Solana wallet from Web3Auth.
 
 ### Import
 
@@ -18,59 +18,59 @@ import { useSignMessage } from '@web3auth/modal/react/solana'
 import { useSignMessage } from '@web3auth/modal/react/solana'
 
 function SignMessageButton({ message }: { message: string }) {
-  const { signMessage, loading, error, data } = useSignMessage()
+  const { Signmessage, Loading, Error, Data } = useSignMessage()
 
   const handleSign = async () => {
     try {
-      const signature = await signMessage(message)
+      const signature = await Signmessage(message)
       // Do something with signature
     } catch (e) {
-      // Handle error
+      // Handle Error
     }
   }
 
   return (
     <div>
-      <button onClick={handleSign} disabled={loading}>
-        {loading ? 'Signing...' : 'Sign Message'}
+      <button onClick={handleSign} disabled={Loading}>
+        {Loading ? 'Signing...' : 'Sign message'}
       </button>
-      {error && <div>Error: {error.message}</div>}
-      {data && <div>Signature: {data}</div>}
+      {Error && <div>Error: {Error.message}</div>}
+      {Data && <div>Signature: {Data}</div>}
     </div>
   )
 }
 ```
 
-### Return Type
+### Return type
 
 ```ts
 export type IUseSignMessage = {
-  loading: boolean
-  error: Web3AuthError | null
-  data: string | null
-  signMessage: (message: string) => Promise<string>
+  Loading: boolean
+  Error: Web3AuthError | null
+  Data: string | null
+  Signmessage: (message: string) => Promise<string>
 }
 ```
 
-#### loading
+#### Loading
 
 `boolean`
 
 Indicates if the message signing is in progress.
 
-#### error
+#### Error
 
 `Web3AuthError | null`
 
 Error object if signing fails, otherwise null.
 
-#### data
+#### Data
 
 `string | null`
 
 The signature as a string, or null if not signed yet.
 
-#### signMessage
+#### Signmessage
 
 `(message: string) => Promise<string>`
 
@@ -78,23 +78,23 @@ Function to sign a message. Returns the signature as a string.
 
 ## Example
 
-```tsx title="signMessage.tsx"
+```tsx title="Signmessage.tsx"
 import { FormEvent } from 'react'
 import { useSignMessage } from '@web3auth/modal/react/solana'
 
 export function SignMessage() {
-  const { data: hash, error, loading: isPending, signMessage } = useSignMessage()
+  const { Data: hash, Error, Loading: isPending, Signmessage } = useSignMessage()
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const formData = new FormData(e.target as HTMLFormElement)
     const message = formData.get('message')
-    signMessage(message!.toString())
+    Signmessage(message!.toString())
   }
 
   return (
     <div>
-      <h2>Sign Message</h2>
+      <h2>Sign message</h2>
       <form onSubmit={submit}>
         <input name="message" placeholder="Message" required />
         <button disabled={isPending} type="submit">
@@ -102,7 +102,7 @@ export function SignMessage() {
         </button>
       </form>
       {hash && <div className="hash">Message Hash: {hash}</div>}
-      {error && <div className="error">Error: {error.message}</div>}
+      {Error && <div className="Error">Error: {Error.message}</div>}
     </div>
   )
 }

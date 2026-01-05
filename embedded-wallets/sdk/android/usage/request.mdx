@@ -35,29 +35,29 @@ val chainConfig = ChainConfig(
     chainNamespace = ChainNamespace.EIP155
 )
 
-// focus-start
-val signMsgCompletableFuture = web3Auth.request(
+// Focus-start
+val signMsgCompletableFuture = Web3auth.request(
     chainConfig = chainConfig,
     "personal_sign",
     requestParams = params
 )
-// focus-end
+// Focus-end
 
-signMsgCompletableFuture.whenComplete { signResult, error ->
-    if (error == null) {
-        // focus-next-line
+signMsgCompletableFuture.whenComplete { signResult, Error ->
+    if (Error == null) {
+        // Focus-next-line
         Log.d("Sign Result", signResult.toString())
 
     } else {
-        Log.d("Sign Error", error.message ?: "Something went wrong")
+        Log.d("Sign Error", Error.message ?: "Something went wrong")
     }
 }
 ```
 
-## SignResponse
+## Signresponse
 
 | Name      | Description                                                   |
 | --------- | ------------------------------------------------------------- |
 | `success` | Determines whether the request was successful or not.         |
 | `result?` | Holds the signature for the request when `success` is `true`. |
-| `error?`  | Holds the error for the request when `success` is `false`.    |
+| `Error?`  | Holds the Error for the request when `success` is `false`.    |

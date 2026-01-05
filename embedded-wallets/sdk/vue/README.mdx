@@ -10,16 +10,30 @@ import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
 
-> Embedded Wallets SDKs were previously marketed as Web3Auth Plug and Play SDKs. Package names and APIs remain Web3Auth (for example, `@web3auth/modal`).
+:::note[Naming]
+
+Embedded Wallets SDKs were previously known as Web3Auth Plug and Play SDKs. Package names and APIs remain Web3Auth (for example, `@web3auth/modal`).
+
+::: 
 
 ## Overview
 
-Embedded Wallets provide a seamless authentication experience for Vue applications with social logins, external wallets, and more. Using our Vue Composables, you can easily connect users to their preferred wallets and manage authentication state.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provide a seamless authentication experience for Vue applications with social logins, external wallets, and more. Using our Vue Composables, you can easily Connect users to their preferred wallets and manage authentication state.
 
 ## Requirements
 
 - This is a frontend SDK and must be used in a browser environment.
 - Basic knowledge of JavaScript and Vue.
+
+## Prerequisites
+
+- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+
+:::tip
+
+See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
+
+:::
 
 ## Installation
 
@@ -29,14 +43,6 @@ Install the Web3Auth Modal SDK using npm or yarn:
 npm install --save @web3auth/modal
 ```
 
-## Setup
-
-:::info
-
-Prerequisites Before you start, make sure you have registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/) and have set up your project. You can look into the [Dashboard Setup](../../dashboard/README.mdx) guide to learn more.
-
-:::
-
 ### 1. Configuration
 
 Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Web3Auth Dashboard](https://dashboard.web3auth.io/).
@@ -45,62 +51,62 @@ Create a configuration file for Web3Auth. This file will contain your Web3Auth C
 import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
 
-const web3AuthOptions: Web3AuthOptions = {
+const Web3authOptions: Web3AuthOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
 }
 
-const web3AuthContextConfig: Web3AuthContextConfig = {
-  web3AuthOptions,
+const Web3authContextConfig: Web3AuthContextConfig = {
+  Web3authOptions,
 }
 
-export default web3AuthContextConfig
+export default Web3authContextConfig
 ```
 
-### 2. Setup Web3Auth Provider
+### 2. Setup Web3Auth provider
 
 In your main component (e.g. `App.vue`), import the `Web3AuthProvider` component and wrap your application with it:
 
 ```html title="App.vue"
 <script setup lang="ts">
   import Home from './Home.vue'
-  // focus-next-line
+  // Focus-next-line
   import { Web3AuthProvider } from '@web3auth/modal/vue'
-  import web3AuthContextConfig from './web3authContext'
+  import Web3authContextConfig from './web3authContext'
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col">
-    <!-- focus-start -->
-    <Web3AuthProvider :config="web3AuthContextConfig">
+    <!-- Focus-start -->
+    <Web3AuthProvider :config="Web3authContextConfig">
       <Home />
     </Web3AuthProvider>
-    <!-- focus-end -->
+    <!-- Focus-end -->
   </div>
 </template>
 ```
 
-## Advanced Configuration
+## Advanced configuration
 
 The Web3Auth Modal SDK offers a rich set of advanced configuration options:
 
 - **[Smart Accounts](./advanced/smart-accounts.mdx)**: Configure account abstraction parameters.
 - **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
-- **[Whitelabeling & UI Customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
+- **[Whitelabeling & UI customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
 - **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
-- **[Wallet Services](./advanced/wallet-services.mdx)**: Integrate additional wallet services.
+- **[Wallet services](./advanced/wallet-services.mdx)**: Integrate additional wallet services.
 
 :::tip
 
-Head over to the [**Advanced Configuration**](./advanced/README.mdx) section to learn more about each configuration option.
+Head over to the [**Advanced configuration**](./advanced/README.mdx) section to learn more about each configuration option.
 
 :::
 
 <Tabs
   defaultValue="basic-config"
   values={[
-    { label: "Basic Configuration", value: "basic-config" },
-    { label: "Advanced Configuration", value: "advanced-config" },
+    { label: "Basic configuration", value: "basic-config" },
+    { label: "Advanced configuration", value: "advanced-config" },
   ]}
 >
 
@@ -110,13 +116,13 @@ Head over to the [**Advanced Configuration**](./advanced/README.mdx) section to 
 import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
 
-const web3AuthOptions: Web3AuthOptions = {
+const Web3authOptions: Web3AuthOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
 }
 
-const web3AuthContextConfig: Web3AuthContextConfig = {
-  web3AuthOptions,
+const Web3authContextConfig: Web3AuthContextConfig = {
+  Web3authOptions,
 }
 ```
 
@@ -133,34 +139,34 @@ import {
   type Web3AuthOptions,
 } from '@web3auth/modal'
 
-const web3AuthOptions: Web3AuthOptions = {
+const Web3authOptions: Web3AuthOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   modalConfig: {
-    connectors: {
+    Connectors: {
       [WALLET_CONNECTORS.AUTH]: {
         label: 'auth',
         loginMethods: {
           google: {
             name: 'google login',
-            // logoDark: "url to your custom logo which will shown in dark mode",
+            // logoDark: "url to your custom logo which will Shown in dark mode",
           },
           facebook: {
             name: 'facebook login',
-            showOnModal: false, // hides the facebook option
+            ShowOnModal: false, // hides the facebook option
           },
           email_passwordless: {
             name: 'email passwordless login',
-            showOnModal: true,
+            ShowOnModal: true,
             authConnectionId: 'w3a-email_passwordless-demo',
           },
           sms_passwordless: {
             name: 'sms passwordless login',
-            showOnModal: true,
+            ShowOnModal: true,
             authConnectionId: 'w3a-sms_passwordless-demo',
           },
         },
-        showOnModal: true, // set to false to hide all social login methods
+        ShowOnModal: true, // set to false to hide all social login methods
       },
     },
     hideWalletDiscovery: true, // set to true to hide external wallets discovery
@@ -168,8 +174,8 @@ const web3AuthOptions: Web3AuthOptions = {
   mfaLevel: MFA_LEVELS.MANDATORY,
 }
 
-const web3AuthContextConfig: Web3AuthContextConfig = {
-  web3AuthOptions,
+const Web3authContextConfig: Web3AuthContextConfig = {
+  Web3authOptions,
 }
 ```
 
@@ -177,17 +183,17 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
 
 </Tabs>
 
-## Blockchain Integration
+## Blockchain integration
 
 Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**, each with dedicated Vue composables.
 
-### Solana Integration
+### Solana integration
 
 Solana composables are included natively within the `@web3auth/modal` package. No additional setup is required—simply use the provided composables to interact with Solana networks.
 
-For detailed usage and examples, visit the [**Solana Composables**](./solana-composables/README.mdx) section.
+For detailed usage and examples, visit the [**Solana composables**](./solana-composables/README.mdx) section.
 
-### Ethereum Integration
+### Ethereum integration
 
 Ethereum composables are provided through the popular `wagmi` library, which works seamlessly with Web3Auth. This allows you to leverage a wide range of Ethereum composables for account management, transactions, and more.
 

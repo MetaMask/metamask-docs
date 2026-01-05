@@ -7,7 +7,7 @@ description: '@web3auth/modal Vue Composable useSignTransaction | Embedded Walle
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-Composable to sign a Solana transaction using the connected wallet from Web3Auth.
+Composable to sign a Solana transaction using the Connected wallet from Web3Auth.
 
 ### Import
 
@@ -24,60 +24,60 @@ import { useSignTransaction } from '@web3auth/modal/vue/solana'
   import { Transaction } from '@solana/web3.js'
 
   const transaction = ref<Transaction | null>(null) // Your transaction object
-  const { signTransaction, loading, error, data } = useSignTransaction()
+  const { Signtransaction, Loading, Error, Data } = useSignTransaction()
 
   const handleSign = async () => {
     if (!transaction.value) return
     try {
-      await signTransaction(transaction.value)
-      // Do something with data.value (signed transaction)
+      await Signtransaction(transaction.value)
+      // Do something with Data.value (signed transaction)
     } catch (e) {
-      // Handle error
+      // Handle Error
     }
   }
 </script>
 
 <template>
   <div>
-    <button @click="handleSign" :disabled="loading">
-      {{ loading ? "Signing..." : "Sign Transaction" }}
+    <button @click="handleSign" :disabled="Loading">
+      {{ Loading ? "Signing..." : "Sign transaction" }}
     </button>
-    <div v-if="error">Error: {{ error.message }}</div>
-    <div v-if="data">Signed Transaction: {{ data }}</div>
+    <div v-if="Error">Error: {{ Error.message }}</div>
+    <div v-if="Data">Signed Transaction: {{ Data }}</div>
   </div>
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 export type IUseSignTransaction = {
-  loading: Ref<boolean>
-  error: Ref<Web3AuthError | null>
-  data: Ref<string | null>
-  signTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+  Loading: Ref<boolean>
+  Error: Ref<Web3AuthError | null>
+  Data: Ref<string | null>
+  Signtransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
 }
 ```
 
-#### loading
+#### Loading
 
 `Ref<boolean>`
 
 Indicates if the transaction signing is in progress.
 
-#### error
+#### Error
 
 `Ref<Web3AuthError | null>`
 
 Error object if signing fails, otherwise null.
 
-#### data
+#### Data
 
 `Ref<string | null>`
 
 The signed transaction as a string, or null if not signed yet.
 
-#### signTransaction
+#### Signtransaction
 
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
@@ -91,12 +91,12 @@ Function to sign a Solana transaction. Returns the signed transaction as a strin
   import { useSolanaWallet, useSignTransaction } from '@web3auth/modal/vue/solana'
 
   const {
-    data: signedTransaction,
-    error,
-    loading: isPending,
-    signTransaction,
+    Data: signedTransaction,
+    Error,
+    Loading: isPending,
+    Signtransaction,
   } = useSignTransaction()
-  const { accounts, connection } = useSolanaWallet()
+  const { Accounts, Connection } = useSolanaWallet()
 
   async function submit(event: Event) {
     event.preventDefault()
@@ -104,11 +104,11 @@ Function to sign a Solana transaction. Returns the signed transaction as a strin
     const to = formData.get('address') as string
     const value = formData.get('value') as string
 
-    if (!connection.value || !accounts.value || accounts.value.length === 0) return
+    if (!Connection.value || !Accounts.value || Accounts.value.length === 0) return
 
-    const block = await connection.value.getLatestBlockhash()
+    const block = await Connection.value.getLatestBlockhash()
     const TransactionInstruction = SystemProgram.transfer({
-      fromPubkey: new PublicKey(accounts.value[0]),
+      fromPubkey: new PublicKey(Accounts.value[0]),
       toPubkey: new PublicKey(to),
       lamports: Number(value) * LAMPORTS_PER_SOL,
     })
@@ -116,24 +116,24 @@ Function to sign a Solana transaction. Returns the signed transaction as a strin
     const transaction = new Transaction({
       blockhash: block.blockhash,
       lastValidBlockHeight: block.lastValidBlockHeight,
-      feePayer: new PublicKey(accounts.value[0]),
+      feePayer: new PublicKey(Accounts.value[0]),
     }).add(TransactionInstruction)
 
-    signTransaction(transaction)
+    Signtransaction(transaction)
   }
 </script>
 
 <template>
   <div class="container">
     <div class="stack">
-      <h2>Sign Transaction</h2>
+      <h2>Sign transaction</h2>
       <form class="set" @submit.prevent="submit">
         <input name="address" placeholder="Address" required />
         <input name="value" placeholder="Amount (SOL)" type="number" step="0.01" required />
         <button type="submit" :disabled="isPending">{{ isPending ? "Signing..." : "Sign" }}</button>
       </form>
       <div v-if="signedTransaction">Signed Transaction: {{ signedTransaction }}</div>
-      <div v-if="error">Error: {{ error.message }}</div>
+      <div v-if="Error">Error: {{ Error.message }}</div>
     </div>
   </div>
 </template>

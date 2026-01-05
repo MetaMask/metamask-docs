@@ -4,7 +4,7 @@ sidebar_label: useSignAndSendTransaction
 description: '@web3auth/modal Vue Composable useSignAndSendTransaction | Embedded Wallets'
 ---
 
-Composable to sign and send a Solana transaction using the connected Solana wallet from Web3Auth in Vue.
+Composable to sign and send a Solana transaction using the Connected Solana wallet from Web3Auth in Vue.
 
 ### Import
 
@@ -21,60 +21,60 @@ import { useSignAndSendTransaction } from '@web3auth/modal/vue/solana'
   import type { TransactionOrVersionedTransaction } from '@web3auth/modal'
 
   const transaction = ref<TransactionOrVersionedTransaction | null>(null) // Provide your transaction here
-  const { signAndSendTransaction, loading, error, data } = useSignAndSendTransaction()
+  const { Signandsendtransaction, Loading, Error, Data } = useSignAndSendTransaction()
 
   const handleSignAndSend = async () => {
     if (!transaction.value) return
     try {
-      await signAndSendTransaction(transaction.value)
-      // Do something with data.value (signature)
+      await Signandsendtransaction(transaction.value)
+      // Do something with Data.value (signature)
     } catch (e) {
-      // Handle error
+      // Handle Error
     }
   }
 </script>
 
 <template>
   <div>
-    <button @click="handleSignAndSend" :disabled="loading">
-      {{ loading ? "Signing & Sending..." : "Sign & Send Transaction" }}
+    <button @click="handleSignAndSend" :disabled="Loading">
+      {{ Loading ? "Signing & Sending..." : "Sign & Send transaction" }}
     </button>
-    <div v-if="error">Error: {{ error.message }}</div>
-    <div v-if="data">Signature: {{ data }}</div>
+    <div v-if="Error">Error: {{ Error.message }}</div>
+    <div v-if="Data">Signature: {{ Data }}</div>
   </div>
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 export type IUseSignAndSendTransaction = {
-  loading: boolean
-  error: Web3AuthError | null
-  data: string | null
-  signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+  Loading: boolean
+  Error: Web3AuthError | null
+  Data: string | null
+  Signandsendtransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
 }
 ```
 
-#### loading
+#### Loading
 
 `boolean`
 
 Indicates if the transaction signing and sending is in progress.
 
-#### error
+#### Error
 
 `Web3AuthError | null`
 
 Error object if signing or sending fails, otherwise null.
 
-#### data
+#### Data
 
 `string | null`
 
 The transaction signature as a string, or null if not signed yet.
 
-#### signAndSendTransaction
+#### Signandsendtransaction
 
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
@@ -94,12 +94,12 @@ Function to sign and send a transaction. Returns the transaction signature as a 
   import { useSolanaWallet, useSignAndSendTransaction } from '@web3auth/modal/vue/solana'
 
   const {
-    data: hash,
-    error,
-    loading: isPending,
-    signAndSendTransaction,
+    Data: hash,
+    Error,
+    Loading: isPending,
+    Signandsendtransaction,
   } = useSignAndSendTransaction()
-  const { accounts, connection } = useSolanaWallet()
+  const { Accounts, Connection } = useSolanaWallet()
 
   async function submit(event: Event) {
     event.preventDefault()
@@ -107,17 +107,17 @@ Function to sign and send a transaction. Returns the transaction signature as a 
     const to = formData.get('address') as string
     const value = formData.get('value') as string
 
-    const connectionValue = connection.value
-    const accountsValue = accounts.value
+    const ConnectionValue = Connection.value
+    const AccountsValue = Accounts.value
 
-    if (!connectionValue || !accountsValue || accountsValue.length === 0) {
-      console.error('Connection or accounts not available')
+    if (!ConnectionValue || !AccountsValue || AccountsValue.length === 0) {
+      console.Error('Connection or Accounts not available')
       return
     }
 
-    const block = await connectionValue.getLatestBlockhash()
+    const block = await ConnectionValue.getLatestBlockhash()
     const TransactionInstruction = SystemProgram.transfer({
-      fromPubkey: new PublicKey(accountsValue[0]),
+      fromPubkey: new PublicKey(AccountsValue[0]),
       toPubkey: new PublicKey(to),
       lamports: Number(value) * LAMPORTS_PER_SOL,
     })
@@ -125,11 +125,11 @@ Function to sign and send a transaction. Returns the transaction signature as a 
     const transactionMessage = new TransactionMessage({
       recentBlockhash: block.blockhash,
       instructions: [TransactionInstruction],
-      payerKey: new PublicKey(accountsValue[0]),
+      payerKey: new PublicKey(AccountsValue[0]),
     })
 
     const transaction = new VersionedTransaction(transactionMessage.compileToV0Message())
-    signAndSendTransaction(transaction)
+    Signandsendtransaction(transaction)
   }
 </script>
 
@@ -144,7 +144,7 @@ Function to sign and send a transaction. Returns the transaction signature as a 
       </button>
     </form>
     <div v-if="hash">Transaction Hash: {{ hash }}</div>
-    <div v-if="error">Error: {{ error.message }}</div>
+    <div v-if="Error">Error: {{ Error.message }}</div>
   </div>
 </template>
 ```

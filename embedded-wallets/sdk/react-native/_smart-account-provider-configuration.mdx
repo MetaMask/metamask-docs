@@ -1,7 +1,7 @@
 import TabItem from "@theme/TabItem";
 import Tabs from "@theme/Tabs";
 
-Web3Auth offers the flexibility to choose your preferred Account Abstraction (AA) provider.
+Web3Auth offers the flexibility to choose your preferred Account Abstraction (AA) Provider.
 Currently, we support Safe, Kernel, Biconomy, and Trust.
 
 <Tabs
@@ -17,12 +17,12 @@ values={[
 <TabItem value="safe">
 
 ```ts
-// focus-start
+// Focus-start
 import {
   AccountAbstractionProvider,
   SafeSmartAccount,
-} from "@web3auth/account-abstraction-provider";
-// focus-end
+} from "@web3auth/account-abstraction-Provider";
+// Focus-end
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -38,7 +38,7 @@ const chainConfig = {
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
-    // focus-next-line
+    // Focus-next-line
     smartAccountInit: new SafeSmartAccount(),
     bundlerConfig: {
       // Get the pimlico API Key from dashboard.pimlico.io
@@ -53,12 +53,12 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 <TabItem value="kernel">
 
 ```ts
-// focus-start
+// Focus-start
 import {
   AccountAbstractionProvider,
   KernelSmartAccount,
-} from "@web3auth/account-abstraction-provider";
-// focus-end
+} from "@web3auth/account-abstraction-Provider";
+// Focus-end
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: "0xaa36a7",
@@ -73,7 +73,7 @@ const chainConfig = {
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
-    // focus-next-line
+    // Focus-next-line
     smartAccountInit: new KernelSmartAccount(),
     bundlerConfig: {
       // Get the pimlico API Key from dashboard.pimlico.io
@@ -88,12 +88,12 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 <TabItem value="biconomy">
 
 ```ts
-// focus-start
+// Focus-start
 import {
   AccountAbstractionProvider,
   BiconomySmartAccount,
-} from "@web3auth/account-abstraction-provider";
-// focus-end
+} from "@web3auth/account-abstraction-Provider";
+// Focus-end
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -109,7 +109,7 @@ const chainConfig = {
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
-    // focus-next-line
+    // Focus-next-line
     smartAccountInit: new BiconomySmartAccount(),
     bundlerConfig: {
       // Get the pimlico API Key from dashboard.pimlico.io
@@ -124,12 +124,12 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 <TabItem value="trust">
 
 ```ts
-// focus-start
+// Focus-start
 import {
   AccountAbstractionProvider,
   TrustSmartAccount,
-} from "@web3auth/account-abstraction-provider";
-// focus-end
+} from "@web3auth/account-abstraction-Provider";
+// Focus-end
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: "0xaa36a7",
@@ -144,7 +144,7 @@ const chainConfig = {
 const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
-    // focus-next-line
+    // Focus-next-line
     smartAccountInit: new TrustSmartAccount(),
     bundlerConfig: {
       // Get the pimlico API Key from dashboard.pimlico.io

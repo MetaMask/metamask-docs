@@ -8,17 +8,17 @@ sidebar_label: v7.2 to v7.3
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-# Migration Guide from v7.2 to v7.3 for Web3Auth Android SDK
+# Migration guide from v7.2 to v7.3 for Embedded Wallets Android SDK
 
 ## Overview
 
 This migration guide provides steps for upgrading from version 7.2(v7.2) to version 7.3(v7.3) of the Web3Auth Android SDK. The guide outlines significant changes in the `request` method.
 
-## Changes in Detail
+## Changes in detail
 
 ### `request` method updates
 
-From v7.2, `loginParams` is removed from the `request` method. To further improve developer experience, developers can now pass the `chainConfig` to request signature for specific chain.
+From v7.2, `Loginparams` is removed from the `request` method. To further improve developer experience, developers can now pass the `chainConfig` to request signature for specific chain.
 
 #### Before (v7.2)
 
@@ -29,9 +29,9 @@ val params = JsonArray().apply {
     add("Android")
 }
 
-// focus-start
-val signMsgCompletableFuture = web3Auth.request(
-    loginParams = LoginParams(
+// Focus-start
+val signMsgCompletableFuture = Web3auth.request(
+    Loginparams = LoginParams(
         selectedLoginProvider,
         extraLoginOptions = null,
         mfaLevel = MFALevel.NONE,
@@ -39,13 +39,13 @@ val signMsgCompletableFuture = web3Auth.request(
     "personal_sign",
     requestParams = params
 )
-// focus-end
+// Focus-end
 
-signMsgCompletableFuture.whenComplete { _, error ->
-    if (error == null) {
+signMsgCompletableFuture.whenComplete { _, Error ->
+    if (Error == null) {
         Log.d("MainActivity_Web3Auth", "Message signed successfully")
     } else {
-        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+        Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
     }
 }
 ```
@@ -59,8 +59,8 @@ val params = JsonArray().apply {
     add("Android")
 }
 
-// focus-start
-val signMsgCompletableFuture = web3Auth.request(
+// Focus-start
+val signMsgCompletableFuture = Web3auth.request(
      chainConfig = ChainConfig(
         chainId = "0x1",
         rpcTarget = "https://mainnet.infura.io/v3/$key",
@@ -68,13 +68,13 @@ val signMsgCompletableFuture = web3Auth.request(
     "personal_sign",
     requestParams = params
 )
-// focus-end
+// Focus-end
 
-signMsgCompletableFuture.whenComplete { _, error ->
-    if (error == null) {
+signMsgCompletableFuture.whenComplete { _, Error ->
+    if (Error == null) {
         Log.d("MainActivity_Web3Auth", "Message signed successfully")
     } else {
-        Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+        Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
     }
 }
 ```

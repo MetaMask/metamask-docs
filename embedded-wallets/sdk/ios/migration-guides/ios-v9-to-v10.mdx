@@ -4,21 +4,21 @@ description: 'PnP iOS SDK - v9 to v10 | Embedded Wallets'
 sidebar_label: v9 to v10
 ---
 
-This migration guide provides steps for upgrading from version v9 to v10 of the PnP iOS SDK. The guide outlines significant changes and enhancements, including the support of Web3Auth OpenLogin version v9, and Wallet Services v3.
+This migration guide provides steps for upgrading from version v9 to v10 of the PnP iOS SDK. The guide outlines significant changes and enhancements, including the support of Web3Auth OpenLogin version v9, and Wallet services v3.
 
-## Breaking Changes
+## Breaking changes
 
-### `getSignResponse` is now removed.
+### `getSignresponse` is now removed.
 
-In v10, we try to improve the developer experience by removing the `getSignResponse` method and returning the result in the `request` method itself.
+In v10, we try to improve the developer experience by removing the `getSignresponse` method and returning the result in the `request` method itself.
 
-Previously, after calling the `request` method, developers had to use the `getSignResponse` method to retrieve the `SignResponse`. In the latest version v10, the `request` method will return the `SignResponse` directly.
+Previously, after calling the `request` method, developers had to use the `getSignresponse` method to retrieve the `Signresponse`. In the latest version v10, the `request` method will return the `Signresponse` directly.
 
 ```swift
 // remove-next-line
-try await self.web3Auth?.request(
+try await self.Web3auth?.request(
 // add-next-line
-let response = try await self.web3Auth?.request(
+let response = try await self.Web3auth?.request(
     chainConfig: ChainConfig(
         chainId: "0x89",
         rpcTarget: "https://polygon.llamarpc.com"
@@ -29,15 +29,15 @@ let response = try await self.web3Auth?.request(
 
 
 // remove-next-line
-let response = try Web3Auth.getSignResponse()
+let response = try Web3Auth.getSignresponse()
 if response!.success {
   print(response!.result!)
 } else {
-  print(response!.error!)
+  print(response!.Error!)
 }
 
 ```
 
 ## Enhancements
 
-In the latest version v10, we have added support for the Web3Auth Auth Service version v9, and Wallet Services v3. In Wallet Services v3, the prebuilt wallet UI now supports the swap functionality allowing users to swap to their favorite token from the app itself.
+In the latest version v10, we have added support for the Web3Auth Auth Service version v9, and Wallet services v3. In Wallet services v3, the prebuilt wallet UI now supports the swap functionality allowing users to swap to their favorite Token from the app itself.

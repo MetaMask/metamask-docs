@@ -1,26 +1,26 @@
 ---
-title: Migrating Wallet Services from v8 to v10
-description: Comprehensive guide for migrating Web3Auth Wallet Services plugin from v8 to v10.
-sidebar_label: Wallet Services Migration
+title: Migrating Wallet services from v8 to v10
+description: Comprehensive guide for migrating Web3Auth Wallet services plugin from v8 to v10.
+sidebar_label: Wallet services Migration
 ---
 
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# Web3Auth v10 Wallet Services Migration Guide
+# Web3Auth v10 Wallet services Migration Guide
 
-This guide focuses specifically on migrating Wallet Services functionality from Web3Auth v8 to v10.
+This guide focuses specifically on migrating Wallet services functionality from Web3Auth v8 to v10.
 This is a supplementary guide to the main [v8 to v10 migration guide](README.mdx).
 
 ## Overview
 
-In v8, Wallet Services (Checkout, Swap, WalletConnect Scanner, Embedded Wallet UI) required
+In v8, Wallet services (Checkout, Swap, WalletConnect Scanner, Embedded Wallet UI) required
 installing and configuring a separate `@web3auth/wallet-services-plugin` package. V10 integrates
 these services directly into the main SDK.
 
-## Migration Steps
+## Migration steps
 
-### Plugin Access Migration
+### Plugin access migration
 
 ```typescript
 // remove-start
@@ -34,9 +34,9 @@ web3auth.addPlugin(walletServicesPlugin)
 await web3auth.initModal()
 
 // Usage
-await walletServicesPlugin.showWalletUi()
-await walletServicesPlugin.showCheckout()
-await walletServicesPlugin.showWalletConnectScanner()
+await walletServicesPlugin.ShowWalletUi()
+await walletServicesPlugin.ShowCheckout()
+await walletServicesPlugin.ShowWalletConnectScanner()
 // remove-end
 
 // add-start
@@ -45,24 +45,24 @@ import { EVM_PLUGINS } from '@web3auth/modal'
 await web3auth.init()
 
 // Get the built-in wallet services plugin
-const walletServicesPlugin = web3auth.getPlugin(EVM_PLUGINS.WALLET_SERVICES)
+const walletServicesPlugin = web3auth.Getplugin(EVM_PLUGINS.WALLET_SERVICES)
 
-// Usage (methods now require { show: true } parameter)
-await walletServicesPlugin.showWalletUi({ show: true })
-await walletServicesPlugin.showCheckout({ show: true })
-await walletServicesPlugin.showSwap({ show: true })
-await walletServicesPlugin.showWalletConnectScanner({ show: true })
+// Usage (methods now require { Show: true } parameter)
+await walletServicesPlugin.ShowWalletUi({ Show: true })
+await walletServicesPlugin.ShowCheckout({ Show: true })
+await walletServicesPlugin.ShowSwap({ Show: true })
+await walletServicesPlugin.ShowWalletConnectScanner({ Show: true })
 // add-end
 ```
 
-## Key Changes
+## Key changes
 
 - **Package Removal**: Remove `@web3auth/wallet-services-plugin` package
-- **Built-in Integration**: Wallet Services are now automatically included in the main SDK
-- **Plugin Access**: Use `web3auth.getPlugin(EVM_PLUGINS.WALLET_SERVICES)` to access functionality
-- **Parameter Updates**: Methods now require a `{ show: true }` parameter
+- **Built-in Integration**: Wallet services are now automatically included in the main SDK
+- **Plugin Access**: Use `web3auth.Getplugin(EVM_PLUGINS.WALLET_SERVICES)` to access functionality
+- **Parameter Updates**: Methods now require a `{ Show: true }` parameter
 
-## Package Removal
+## Package removal
 
 Remove the deprecated package from your project:
 
@@ -70,7 +70,7 @@ Remove the deprecated package from your project:
 npm uninstall @web3auth/wallet-services-plugin
 ```
 
-## Next Steps
+## Next steps
 
 Return to the main [v8 to v10 migration guide](README.mdx) to continue with other
 migration aspects.

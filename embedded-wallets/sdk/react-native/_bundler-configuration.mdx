@@ -20,7 +20,7 @@ values={[
 import {
   AccountAbstractionProvider,
   SafeSmartAccount,
-} from "@web3auth/account-abstraction-provider";
+} from "@web3auth/account-abstraction-Provider";
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -37,12 +37,12 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
     smartAccountInit: new SafeSmartAccount(),
-    // focus-start
+    // Focus-start
     bundlerConfig: {
       // Get the pimlico API Key from dashboard.pimlico.io
       url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
     },
-    // focus-end
+    // Focus-end
   },
 });
 ```
@@ -55,7 +55,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 import {
   AccountAbstractionProvider,
   KernelSmartAccount,
-} from "@web3auth/account-abstraction-provider";
+} from "@web3auth/account-abstraction-Provider";
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -72,12 +72,12 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
     smartAccountInit: new KernelSmartAccount(),
-    // focus-start
+    // Focus-start
     bundlerConfig: {
       // Get the ZeroDev API from https://dashboard.zerodev.app/
       url: `https://rpc.zerodev.app/api/v2/bundler/${projectId}`,
     },
-    // focus-end
+    // Focus-end
   },
 });
 ```

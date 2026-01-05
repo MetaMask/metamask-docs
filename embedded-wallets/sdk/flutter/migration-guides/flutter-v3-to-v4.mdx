@@ -8,13 +8,13 @@ sidebar_label: v3 to v4
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-# Migration Guide from v3 to v4 for Web3Auth Flutter SDK
+# Migration guide from v3 to v4 for Web3Auth Flutter SDK
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 3(v3) to version 4(v4) of the Web3Auth Flutter SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate MFA setup flow, `request` method for transaction confirmation screens, `launchWalletServices` method for template wallet interface, updates to the `Provider` and the `TypeOfLogin` enum.
+This migration guide provides steps for upgrading from version 3(v3) to version 4(v4) of the Web3Auth Flutter SDK. The guide outlines significant changes and enhancements, including the introduction of `Enablemfa` method to initiate MFA setup flow, `request` method for transaction confirmation screens, `launchWalletServices` method for template wallet interface, updates to the `Provider` and the `TypeOfLogin` enum.
 
-## Changes in Detail
+## Changes in detail
 
 ### `setResultUrl` is now removed
 
@@ -22,9 +22,9 @@ With the new v4 update, there's a breaking change with the removal of the `setRe
 
 From v4, developers won't be able to use the `setResultUrl` method.
 
-### `enableMFA` method
+### `Enablemfa` method
 
-From v4, developers can now use the `enableMFA` method to initiate MFA setup flow for already logged in users.
+From v4, developers can now use the `Enablemfa` method to initiate MFA setup flow for already logged in users.
 
 <Tabs
   defaultValue="default-verifier"
@@ -38,8 +38,8 @@ From v4, developers can now use the `enableMFA` method to initiate MFA setup flo
 
 ```dart title="Usage"
 try {
-  // focus-next-line
-  await Web3AuthFlutter.enableMFA();
+  // Focus-next-line
+  await Web3AuthFlutter.Enablemfa();
 } on UserCancelledException {
   log("User cancelled.");
 } catch(e) {
@@ -53,15 +53,15 @@ try {
 
 ```dart title="Usage"
 try {
-    final loginParams = LoginParams(
+    final Loginparams = LoginParams(
         loginProvider: Provider.jwt,
-        extraLoginOptions: ExtraLoginOptions(
-            id_token: "YOUR_JWT_TOKEN",
+        extraLoginOptions: Extraloginoptions(
+            id_Token: "YOUR_JWT_TOKEN",
         ),
     );
 
-    // focus-next-line
-    await Web3AuthFlutter.enableMFA(loginParams);
+    // Focus-next-line
+    await Web3AuthFlutter.Enablemfa(Loginparams);
 
 } on UserCancelledException {
   log("User cancelled.");
@@ -80,11 +80,11 @@ From v4, developers can use the `launchWalletServices` to launches a WebView whi
 
 :::note
 
-Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+Access to Wallet services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
 
 :::
 
-#### ChainConfig Arguments
+#### Chainconfig arguments
 
 | Parameter | Description |
 | --- | --- |
@@ -102,14 +102,14 @@ Access to Wallet Services is gated. You can use this feature in `sapphire_devnet
 
 ```dart title="Usage"
 try {
-  // focus-start
+  // Focus-start
   await Web3AuthFlutter.launchWalletServices(
     ChainConfig(
       chainId: "0x1",
       rpcTarget: "https://mainnet.infura.io/v3/$key",
     ),
   );
-  // focus-end
+  // Focus-end
 } on UserCancelledException {
   log("User cancelled.");
 } catch(e) {
@@ -119,7 +119,7 @@ try {
 
 ### `request` method
 
-Now, developers can use the `request` method to use the templated transaction confirmation screens for signing transactions. To retrive the signature for the request, developers can use the `getSignResponse` static method.
+Now, developers can use the `request` method to use the templated transaction confirmation screens for signing transactions. To retrive the signature for the request, developers can use the `getSignresponse` static method.
 
 ```dart title="Usage"
 try {
@@ -129,7 +129,7 @@ try {
   // User's EOA address
   params.add("<User Address in Hex>");
 
-  // focus-start
+  // Focus-start
   await Web3AuthFlutter.request(
     ChainConfig(
       chainId: "0x1",
@@ -138,23 +138,23 @@ try {
     "personal_sign",
     params,
   );
-  // focus-end
+  // Focus-end
 } on UserCancelledException {
   log("User cancelled.");
 } catch(e) {
   log("Unknown exception occurred");
 }
 
-// focus-next-line
-final signResponse = await Web3AuthFlutter.getSignResponse();
+// Focus-next-line
+final signResponse = await Web3AuthFlutter.getSignresponse();
 log(signResponse.toString())
 ```
 
-### New Login Providers
+### New login providers
 
-v4 update brings two new providers. Now developers can use the SMS Passwordless and Farcaster login options.
+v4 update brings two new Providers. Now developers can use the SMS Passwordless and Farcaster login options.
 
-#### SMS Passwordless
+#### SMS passwordless
 
 ```dart title="Usage"
 Future<void> initWeb3Auth() async {
@@ -181,12 +181,12 @@ Future<void> initWeb3Auth() async {
 // Login
 final Web3AuthResponse response = await Web3AuthFlutter.login(
   LoginParams(loginProvider: Provider.sms_passwordless,
-    // focus-start
-    extraLoginOptions: ExtraLoginOptions(
+    // Focus-start
+    extraLoginOptions: Extraloginoptions(
       // The phone number should be in format of +{country_code}-{phone_number}
       login_hint: "+91-9911223311",
     ),
-    // focus-end
+    // Focus-end
   ),
 );
 ```
@@ -195,7 +195,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
 
 ```dart title="Usage"
 final Web3AuthResponse response = await Web3AuthFlutter.login(
-  // focus-next-line
+  // Focus-next-line
   LoginParams(loginProvider: Provider.farcaster)
 );
 ```

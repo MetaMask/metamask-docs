@@ -1,24 +1,24 @@
 ---
-title: Advanced Configuration
+title: Advanced configuration
 sidebar_label: Overview
-description: 'Web3Auth Android SDK - Advanced Configuration | Embedded Wallets'
+description: 'Web3Auth Android SDK - Advanced configuration | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
+The Embedded Wallets SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
 
-## Configuration Structure
+## Configuration structure
 
-When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
+When setting up Embedded Wallets, you'll pass in the options to the constructor. This consists of:
 
 ```kotlin
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-// focus-start
-var web3Auth = Web3Auth(
+// Focus-start
+var Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -26,10 +26,10 @@ var web3Auth = Web3Auth(
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
   )
 )
-// focus-end
+// Focus-end
 
 // Handle user signing in when app is in background
-web3Auth.setResultUrl(intent?.data)
+Web3auth.setResultUrl(intent?.Data)
 ```
 
 ### `Web3AuthOptions`
@@ -48,12 +48,12 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 | Parameter         | Description                                                                                                                                                          |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `context`         | Android context to launch Web-based authentication, usually is the current activity. It's a mandatory field, and accepts `android.content.Context` as a value.       |
-| `clientId`        | Your Web3Auth Client ID. You can get it from Web3Auth [Dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `String`     |
-| `network`         | Defines the Web3Auth Network. It's a mandatory field of type Network.                                                                                                |
-| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication from browser. It's a mandatory field of type `Uri`.                                     |
-| `sessionTime?`    | It allows developers to configure the session management time. Session Time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days |
-| `useCoreKitKey?`  | Use CoreKit (or SFA) Key to get core kit key given by SFA SDKs. It's an optional field with default value as `false`. Useful for Wallet Pregeneration.               |
+| `context`         | Android context to launch web-based authentication, usually is the current activity. It's a mandatory field, and accepts `android.content.Context` as a value.       |
+| `clientId`        | Your Embedded Wallets Client ID. You can get it from Embedded Wallets [dashboard](https://dashboard.web3auth.io/) under project details. It's a mandatory field of type `String`     |
+| `network`         | Defines the Embedded Wallets Network. It's a mandatory field of type Network.                                                                                                |
+| `redirectUrl`     | URL that Embedded Wallets will redirect API responses upon successful authentication from browser. It's a mandatory field of type `Uri`.                                     |
+| `sessionTime?`    | Allows developers to configure the session management time. Session time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days. |
+| `useCoreKitKey?`  | Use CoreKit (or SFA) key to get core kit key given by SFA SDKs. It's an optional field with default value as `false`. Useful for Wallet Pregeneration.               |
 | `chainNamespace?` | Chain Namespace [`EIP155` and `SOLANA`]. It takes `ChainNamespace` as a value.                                                                                       |
 
 </TabItem>
@@ -71,7 +71,7 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 <TabItem value="interface">
 
 ```kotlin
-data class Web3AuthOptions(
+Data class Web3AuthOptions(
     var context: Context,
     val clientId: String,
     val network: Network,
@@ -90,11 +90,11 @@ data class Web3AuthOptions(
 </TabItem>
 </Tabs>
 
-## Session Management
+## Session management
 
 Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keystore.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -102,7 +102,7 @@ Control how long users stay authenticated and how sessions persist. The session 
   - Default: 7 days (`86400 * 7`).
 
 ```kotlin
-var web3Auth = Web3Auth(
+var Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -113,19 +113,19 @@ var web3Auth = Web3Auth(
 )
 ```
 
-## Custom Authentication Methods
+## Custom authentication methods
 
 Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication.mdx) section.
 
-## UI Customization
+## UI customization
 
 Create a seamless brand experience by customizing the Web3Auth Login Screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `mfaSettings` - Configure MFA settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA

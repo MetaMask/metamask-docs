@@ -1,25 +1,25 @@
 ---
 title: Connect
-description: 'Authenticate users and establish provider connection'
+description: 'Authenticate users and establish Provider Connection'
 ---
 
 ## Overview
 
-The `connect` method is the primary authentication method for the Node.js SDK. It authenticates users using custom authentication and returns a result object containing the provider/ signer for blockchain operations.
+The `Connect` method is the primary authentication method for the Node.js SDK. It authenticates users using custom authentication and returns a result object containing the Provider/ signer for blockchain operations.
 
 :::warning Prerequisites
 
 - You need to have a custom authentication setup on the dashboard.
-- You need to have a freshly generated JWT token from your authentication system in your backend.
+- You need to have a freshly generated JWT Token from your authentication system in your backend.
 
-Read more about [Custom Authentication](/embedded-wallets/authentication/custom-connections/custom-jwt/).
+Read more about [Custom Authentication](/embedded-wallets/authentication/custom-Connections/custom-jwt/).
 
 :::
 
 ## Usage
 
 ```javascript
-const result = await web3auth.connect(loginParams)
+const result = await web3auth.Connect(Loginparams)
 ```
 
 ## Parameters
@@ -41,16 +41,16 @@ export type LoginParams = {
 | -------------------------- | --------- | ----------------------------------------------------------------------------------------- |
 | `authConnectionId`         | `string`  | Custom verifier name from Web3Auth Dashboard                                              |
 | `userId`                   | `string`  | Unique identifier for the user (email, user ID, etc.)                                     |
-| `idToken?`                 | `string`  | Valid JWT token from your authentication system                                           |
-| `groupedAuthConnectionId?` | `string`  | Grouped auth connection ID                                                                |
+| `idToken?`                 | `string`  | Valid JWT Token from your authentication system                                           |
+| `groupedAuthConnectionId?` | `string`  | Grouped auth Connection ID                                                                |
 | `userIdField?`             | `string`  | User's unique identifier field name. Add here if not set on the dashboard.                |
 | `isUserIdCaseSensitive?`   | `boolean` | Whether the user id field is case sensitive or not. Add here if not set on the dashboard. |
 
-## Return Value
+## Return value
 
-Returns a `result` object containing the provider/ signer for blockchain operations. By default you get the standard Web3Auth provider, with the ability to get the private key, if enabled from the dashboard. You additionally get the signer for EVM and Solana chains, to be able to do transactions without the need to use the private key provider directly.
+Returns a `result` object containing the Provider/ signer for blockchain operations. By default you get the standard Web3Auth Provider, with the ability to get the private key, if enabled from the dashboard. You additionally get the signer for EVM and Solana chains, to be able to do transactions without the need to use the private key Provider directly.
 
-### Object Structure
+### Object structure
 
 ```typescript
 import type { TransactionSigner } from '@solana/signers'
@@ -61,24 +61,24 @@ export type PrivateKeyProvider = IBaseProvider<string>
 export type WalletResult =
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.SOLANA
-      provider: PrivateKeyProvider
+      Provider: PrivateKeyProvider
       signer: TransactionSigner
     }
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.EIP155
-      provider: PrivateKeyProvider
+      Provider: PrivateKeyProvider
       signer: Wallet
     }
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.OTHER
-      provider: PrivateKeyProvider
+      Provider: PrivateKeyProvider
       signer: null
     }
 ```
 
 ## Examples
 
-### Custom JWT Token Authentication
+### Custom JWT token authentication
 
 ```javascript
 const { Web3Auth } = require('@web3auth/node-sdk')
@@ -87,19 +87,19 @@ const { Web3Auth } = require('@web3auth/node-sdk')
 const clientId =
   'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
 
-// focus-start
+// Focus-start
 // Auth Connection
 const authConnectionId = 'w3a-node-demo'
-// focus-end
+// Focus-end
 
 const web3auth = new Web3Auth({
   clientId,
-  web3AuthNetwork: 'sapphire_mainnet',
+  Web3authNetwork: 'sapphire_mainnet',
 })
 
 await web3auth.init()
 
-// focus-start
+// Focus-start
 const privateKey = await fs.readFile('privateKey.pem', 'utf8')
 
 var idToken = jwt.sign(
@@ -118,14 +118,14 @@ var idToken = jwt.sign(
 
 console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
 
-const result = await web3auth.connect({
+const result = await web3auth.Connect({
   authConnectionId,
   idToken,
 })
-// focus-end
+// Focus-end
 ```
 
-### Firebase Authentication
+### Firebase authentication
 
 ```javascript
 const { Web3Auth } = require('@web3auth/node-sdk')
@@ -134,19 +134,19 @@ const { Web3Auth } = require('@web3auth/node-sdk')
 const clientId =
   'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
 
-// focus-start
+// Focus-start
 // Auth Connection
 const authConnectionId = 'w3a-firebase-demo'
-// focus-end
+// Focus-end
 
 const web3auth = new Web3Auth({
   clientId,
-  web3AuthNetwork: 'sapphire_mainnet',
+  Web3authNetwork: 'sapphire_mainnet',
 })
 
 await web3auth.init()
 
-// focus-start
+// Focus-start
 const app = initializeApp({
   apiKey: 'AIzaSyB0nd9YsPLu-tpdCrsXn8wgsWVAiYEpQ_E',
   authDomain: 'web3auth-oauth-logins.firebaseapp.com',
@@ -163,9 +163,9 @@ const idToken = await res.user.getIdToken(true)
 
 console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
 
-const result = await web3auth.connect({
+const result = await web3auth.Connect({
   authConnectionId,
   idToken,
 })
-// focus-end
+// Focus-end
 ```

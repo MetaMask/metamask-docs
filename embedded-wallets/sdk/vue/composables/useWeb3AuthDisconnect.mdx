@@ -1,54 +1,53 @@
 ---
-title: useWeb3AuthDisconnect
-sidebar_label: useWeb3AuthDisconnect
-description: '@web3auth/modal Vue Composables useWeb3AuthDisconnect | Embedded Wallets'
+title: useWeb3AuthDisConnect
+sidebar_label: useWeb3AuthDisConnect
+description: '@web3auth/modal Vue Composables useWeb3AuthDisConnect | Embedded Wallets'
 ---
 
-Hook to disconnect from Web3Auth.
+Hook to DisConnect from Web3Auth.
 
 ### Import
 
 ```ts
-import { useWeb3AuthDisconnect } from '@web3auth/modal/vue'
+import { useWeb3AuthDisConnect } from '@web3auth/modal/vue'
 ```
 
 ### Usage
 
 ```html
 <script setup lang="ts">
-  import { useWeb3AuthDisconnect } from '@web3auth/modal/vue'
+  import { useWeb3AuthDisConnect } from '@web3auth/modal/vue'
 
-  const { disconnect, loading, error } = useWeb3AuthDisconnect()
+  const { DisConnect, Loading, Error } = useWeb3AuthDisConnect()
 </script>
 
 <template>
-  <button @click="disconnect()" :disabled="loading">
-    {{ loading ? "Disconnecting..." : "Disconnect" }}
+  <button @click="DisConnect()" :disabled="Loading">
+    {{ Loading ? "DisConnecting..." : "DisConnect" }}
   </button>
-  <div v-if="error">{{ error.message }}</div>
+  <div v-if="Error">{{ Error.message }}</div>
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
-import type { IUseWeb3AuthDisconnect } from '@web3auth/modal/vue'
+import type { IUseWeb3AuthDisConnect } from '@web3auth/modal/vue'
 ```
 
-#### loading
+#### Loading
 
 `Ref<boolean>`
 
-Whether the disconnection process is in progress.
+Whether the DisConnection process is in progress.
 
-#### error
+#### Error
 
 `Ref<Web3AuthError | null>`
 
-Error that occurred during the disconnection process.
+Error that occurred during the DisConnection process.
 
-#### disconnect
-
+#### DisConnect
 `(options?: { cleanup: boolean }) => Promise<void>`
 
-Function to initiate the disconnection process. Optional `cleanup` parameter controls whether to remove all user data.
+Function to initiate the DisConnection process. Optional `cleanup` parameter controls whether to remove all user Data.

@@ -8,17 +8,17 @@ sidebar_label: v8.1 to v8.2
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-# Migration Guide from v8.1 to v8.2 for Web3Auth PnP iOS SDK
+# Migration guide from v8.1 to v8.2 for Web3Auth PnP iOS SDK
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 8.1(v8.1) to version 8.2(v8.2) of the Web3Auth PnP iOS SDK. The guide outlines significant breaking change with the removal of `loginParams` from `launchWalletServices`.
+This migration guide provides steps for upgrading from version 8.1(v8.1) to version 8.2(v8.2) of the Web3Auth PnP iOS SDK. The guide outlines significant breaking change with the removal of `Loginparams` from `launchWalletServices`.
 
-## Changes in Detail
+## Changes in detail
 
 ### `launchWalletServices` method updates
 
-From v8.2, `loginParams` is removed from the `launchWalletServices` method. Developers now only need to pass the `chainConfig` as the required argument.
+From v8.2, `Loginparams` is removed from the `launchWalletServices` method. Developers now only need to pass the `chainConfig` as the required argument.
 
 #### Before (v8.1)
 
@@ -31,14 +31,14 @@ do {
     ticker: "ETH"
   )
 
-  // focus-start
-  try await web3Auth?.launchWalletServices(
+  // Focus-start
+  try await Web3auth?.launchWalletServices(
     W3ALoginParams(loginProvider: .GOOGLE),
     chainConfig: chainConfig
   )
-  // focus-end
+  // Focus-end
 } catch {
-  // Handle error
+  // Handle Error
 }
 ```
 
@@ -53,12 +53,12 @@ do {
     ticker: "ETH"
   )
 
-  // focus-start
-  try await web3Auth?.launchWalletServices(
+  // Focus-start
+  try await Web3auth?.launchWalletServices(
     chainConfig: chainConfig
   )
-  // focus-end
+  // Focus-end
 } catch {
-  // Handle error
+  // Handle Error
 }
 ```

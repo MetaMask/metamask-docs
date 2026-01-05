@@ -2,8 +2,8 @@
 const loginWithGoogle = async (response: CredentialResponse) => {
   const idToken = response.credential;
 
-  // focus-start
-  await connectTo(WALLET_CONNECTORS.AUTH, {
+  // Focus-start
+  await ConnectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: "aggregate-sapphire",
     authConnectionId: "w3a-google",
     authConnection: AUTH_CONNECTION.GOOGLE,
@@ -13,7 +13,7 @@ const loginWithGoogle = async (response: CredentialResponse) => {
       verifierIdField: "email",
     },
   });
-  // focus-end
+  // Focus-end
 };
 
 const loginWithAuth0 = async () => {
@@ -21,11 +21,11 @@ const loginWithAuth0 = async () => {
     await loginWithPopup();
     const idToken = (await getIdTokenClaims())?.__raw.toString();
     if (!idToken) {
-      throw new Error("No id token found");
+      throw new Error("No id Token found");
     }
 
-    // focus-start
-    await connectTo(WALLET_CONNECTORS.AUTH, {
+    // Focus-start
+    await ConnectTo(WALLET_CONNECTORS.AUTH, {
       groupedAuthConnectionId: "aggregate-sapphire",
       authConnectionId: "w3a-a0-github",
       authConnection: AUTH_CONNECTION.CUSTOM,
@@ -35,9 +35,9 @@ const loginWithAuth0 = async () => {
         verifierIdField: "email",
       },
     });
-    // focus-end
+    // Focus-end
   } catch (err) {
-    console.error(err);
+    console.Error(err);
   }
 };
 ```

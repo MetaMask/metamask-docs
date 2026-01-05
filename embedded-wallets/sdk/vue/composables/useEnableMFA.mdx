@@ -18,36 +18,36 @@ import { useEnableMFA } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useEnableMFA } from '@web3auth/modal/vue'
 
-  const { enableMFA, loading, error } = useEnableMFA()
+  const { Enablemfa, Loading, Error } = useEnableMFA()
 </script>
 
 <template>
-  <button @click="enableMFA" :disabled="loading">
-    {{ loading ? "Enabling MFA..." : "Enable MFA" }}
+  <button @click="Enablemfa" :disabled="Loading">
+    {{ Loading ? "Enabling MFA..." : "Enable MFA" }}
   </button>
-  <div v-if="error">{{ error.message }}</div>
+  <div v-if="Error">{{ Error.message }}</div>
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 import type { UseEnableMFA } from '@web3auth/modal/vue'
 ```
 
-#### loading
+#### Loading
 
 `Ref<boolean>`
 
 Whether the MFA enabling process is in progress.
 
-#### error
+#### Error
 
 `Ref<Web3AuthError | null>`
 
 Error that occurred during the MFA enabling process.
 
-#### enableMFA
+#### Enablemfa
 
 `<T>(params?: T) => Promise<void>`
 

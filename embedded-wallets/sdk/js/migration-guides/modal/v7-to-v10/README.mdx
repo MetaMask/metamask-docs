@@ -9,12 +9,12 @@ sidebar_label: v7 to v10
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# Web3Auth PnP Web SDK v7 to v10 Migration Guide
+# Web3Auth PnP web SDK v7 to v10 migration guide
 
 This guide will help you upgrade your Web3Auth PnP SDK integration from v7 directly to the **unified
 Web3Auth PnP Web SDK v10**, focusing on core package and initialization changes.
 
-## Why Migrate to v10?
+## Why migrate to v10?
 
 Web3Auth v10 consolidates functionality into a single powerful SDK that centralizes configuration in
 the Dashboard and eliminates frontend adapter complexity.
@@ -23,7 +23,7 @@ Key improvements from v7 to v10:
 
 - **Unified SDK Package:** Single `@web3auth/modal` package replaces multiple adapter packages
 - **Dashboard-Centric Configuration:** Chain configurations managed via Web3Auth Developer Dashboard
-- **Simplified Integration:** No more manual `OpenLoginAdapter` registration or `privateKeyProvider`
+- **Simplified Integration:** No more manual `Openloginadapter` registration or `privateKeyProvider`
   setup
 - **Enhanced Developer Experience:** Cleaner API with better TypeScript support
 
@@ -32,19 +32,19 @@ Key improvements from v7 to v10:
 Update to the unified v10 SDK package:
 
 ```bash npm2yarn
-npm uninstall @web3auth/modal @web3auth/openlogin-adapter @web3auth/wallet-connect-v2-adapter @web3auth/metamask-adapter @web3auth/phantom-adapter @web3auth/wallet-services-plugin
+npm uninstall @web3auth/modal @web3auth/openlogin-adapter @web3auth/wallet-Connect-v2-adapter @web3auth/metamask-adapter @web3auth/phantom-adapter @web3auth/wallet-services-plugin
 npm install @web3auth/modal
 ```
 
 For custom blockchain configurations:
 
 ```bash npm2yarn
-npm install @web3auth/ethereum-provider
+npm install @web3auth/ethereum-Provider
 ```
 
-## Breaking Changes from v7 to v10
+## Breaking changes from v7 to v10
 
-### 1. Unified SDK Package Structure
+### 1. Unified SDK package structure
 
 **v7 used separate packages:**
 
@@ -53,7 +53,7 @@ npm install @web3auth/ethereum-provider
 import { Web3Auth } from '@web3auth/modal'
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
 import { MetamaskAdapter } from '@web3auth/metamask-adapter'
-import { WalletConnectV2Adapter } from '@web3auth/wallet-connect-v2-adapter'
+import { WalletConnectV2Adapter } from '@web3auth/wallet-Connect-v2-adapter'
 // remove-end
 ```
 
@@ -66,7 +66,7 @@ import { Web3Auth } from '@web3auth/modal'
 // add-end
 ```
 
-### 2. OpenLoginAdapter → Built-in (v7→v10)
+### 2. Openloginadapter → Built-in (v7→v10)
 
 In v7, authentication required `OpenloginAdapter`. V10 eliminates the need for adapter registration:
 
@@ -97,13 +97,13 @@ await web3auth.init()
 // add-end
 ```
 
-### 3. Chain Configuration Centralization
+### 3. Chain configuration centralization
 
-**v7 required manual chain and provider configuration:**
+**v7 required manual chain and Provider configuration:**
 
 ```typescript
 // remove-start
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-Provider'
 
 const chainConfig = {
   chainNamespace: 'eip155',
@@ -122,7 +122,7 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
   uiConfig: {
     appName: 'W3A Heroes',
@@ -135,7 +135,7 @@ const web3auth = new Web3Auth({
 // add-start
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // Chain configuration and branding managed via Web3Auth Developer Dashboard
 })
 // add-end
@@ -144,27 +144,27 @@ const web3auth = new Web3Auth({
 Configure your chains and branding on the
 [Web3Auth Developer Dashboard](https://dashboard.web3auth.io) instead of in code.
 
-### 4. Method Name Changes
+### 4. Method name changes
 
 **Key method updates:**
 
 ```typescript
 // remove-start
 // v7 method names
-await web3auth.authenticateUser() // Get ID token
+await web3auth.authenticateUser() // Get ID Token
 await web3auth.addChain(newChain) // Add new chain
-await web3auth.switchChain({ chainId: '0x1' }) // Switch chains
+await web3auth.Switchchain({ chainId: '0x1' }) // Switch chains
 // remove-end
 
 // add-start
 // v10 method names
-await web3auth.getIdentityToken() // Get ID token
+await web3auth.Getidentitytoken() // Get ID Token
 await web3auth.addChain(newChain) // Add new chain (unchanged)
-await web3auth.switchChain({ chainId: '0x1' }) // Switch chains (unchanged)
+await web3auth.Switchchain({ chainId: '0x1' }) // Switch chains (unchanged)
 // add-end
 ```
 
-## Additional Migration Guides
+## Additional migration guides
 
 For specific functionality migrations, refer to these supplementary guides:
 
@@ -172,20 +172,20 @@ For specific functionality migrations, refer to these supplementary guides:
 **[External Wallet Adapters Migration Guide](./external-wallets.mdx)** for migrating
 to automatic detection.
 
-**Wallet Services:** If you used the `@web3auth/wallet-services-plugin` in v7, see the 🛠️
-**[Wallet Services Migration Guide](./wallet-services.mdx)** for migrating to the
+**Wallet services:** If you used the `@web3auth/wallet-services-plugin` in v7, see the 🛠️
+**[Wallet services Migration Guide](./wallet-services.mdx)** for migrating to the
 built-in integration.
 
-**Whitelabeling and UI Customization:** If you had whitelabeling configurations in v7, see the 📋
+**Whitelabeling and UI customization:** If you had whitelabeling configurations in v7, see the 📋
 **[Whitelabeling Migration Guide](./whitelabeling.mdx)** for detailed steps.
 
 **Custom Authentication:** If you used custom verifiers in v7, see the 🔐
 **[Custom Authentication Migration Guide](./custom-authentication.mdx)** for
 migrating to the new Connections system.
 
-## Complete Migration Example
+## Complete migration example
 
-Here's a complete before/after example showing the migration from v7 to v10:
+Here's a complete before/after example Showing the migration from v7 to v10:
 
 <Tabs>
 <TabItem value="v7" label="v7 Implementation">
@@ -193,12 +193,12 @@ Here's a complete before/after example showing the migration from v7 to v10:
 ```typescript
 import { Web3Auth } from '@web3auth/modal'
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-Provider'
 import { MetamaskAdapter } from '@web3auth/metamask-adapter'
 import {
   WalletConnectV2Adapter,
   getWalletConnectV2Settings,
-} from '@web3auth/wallet-connect-v2-adapter'
+} from '@web3auth/wallet-Connect-v2-adapter'
 
 // Chain configuration
 const chainConfig = {
@@ -220,7 +220,7 @@ const privateKeyProvider = new EthereumPrivateKeyProvider({
 // SDK initialization
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
   uiConfig: {
     appName: 'W3A Heroes',
@@ -258,7 +258,7 @@ web3auth.configureAdapter(walletConnectV2Adapter)
 await web3auth.initModal()
 
 // Usage
-await web3auth.connect()
+await web3auth.Connect()
 const idToken = await web3auth.authenticateUser()
 ```
 
@@ -271,15 +271,15 @@ import { Web3Auth } from '@web3auth/modal'
 // SDK initialization - much simpler!
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // Chain config and branding managed via dashboard
 })
 
 await web3auth.init()
 
 // Usage
-await web3auth.connect()
-const idToken = await web3auth.getIdentityToken()
+await web3auth.Connect()
+const idToken = await web3auth.Getidentitytoken()
 
 // External wallets automatically detected - no manual setup needed
 ```
@@ -287,7 +287,7 @@ const idToken = await web3auth.getIdentityToken()
 </TabItem>
 </Tabs>
 
-## Key Differences Summary
+## Key differences summary
 
 | Feature              | v7                                          | v10                     |
 | -------------------- | ------------------------------------------- | ----------------------- |
@@ -296,9 +296,9 @@ const idToken = await web3auth.getIdentityToken()
 | **Chain Config**     | Manual `chainConfig` + `privateKeyProvider` | Dashboard configuration |
 | **External Wallets** | Manual adapter setup                        | Automatic detection     |
 | **Branding**         | `uiConfig` + `OpenloginAdapter` whiteLabel  | Dashboard configuration |
-| **ID Token**         | `authenticateUser()`                        | `getIdentityToken()`    |
+| **ID Token**         | `authenticateUser()`                        | `Getidentitytoken()`    |
 
-## Benefits of v10 Migration
+## Benefits of v10 migration
 
 1. **Unified Architecture**: Single package handles all use cases
 2. **Reduced Complexity**: No manual adapter configuration or chain setup
@@ -306,10 +306,10 @@ const idToken = await web3auth.getIdentityToken()
 4. **Better Developer Experience**: Cleaner API with improved TypeScript support
 5. **Future-Proof**: Aligned with Web3Auth's long-term architectural direction
 
-## Next Steps
+## Next steps
 
 1. Update your package dependencies
 2. Remove adapter configurations and use the unified SDK
 3. Configure your chains and branding on the Web3Auth Developer Dashboard
-4. Update method names (`authenticateUser` → `getIdentityToken`)
+4. Update method names (`authenticateUser` → `Getidentitytoken`)
 5. Test your application with the new unified architecture

@@ -20,12 +20,12 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 
 :::
 
-## MFA Configuration Options
+## Multi-Factor Authentication configuration options
 
 There are two ways to configure MFA in your application:
 
 1. **Using the `mfaLevel` setting**: Controls the frequency of the MFA setup request screen.
-2. **Using the `mfaSettings` setting**: Provides granular control over each factor, with their priority level, enable/disable status, and mandatory/optional settings.
+2. **Using the `mfaSettings` setting**: Provides granular control over each factor, with their priority level, enable/disable Status, and mandatory/optional settings.
 
 ## `mfaLevel`
 
@@ -35,7 +35,7 @@ The `mfaLevel` setting allows you to control when and how the MFA setup screen a
 mfaLevel?: MfaLevelType;
 ```
 
-### MFA Level Types
+### Multi-Factor Authentication level types
 
 | Level       | Value       | Description                                        |
 | ----------- | ----------- | -------------------------------------------------- |
@@ -44,7 +44,7 @@ mfaLevel?: MfaLevelType;
 | `MANDATORY` | "mandatory" | MFA setup is required after login                  |
 | `NONE`      | "none"      | MFA setup is skipped entirely                      |
 
-### Type Definition
+### Type definition
 
 ```tsx
 export type MfaLevelType = (typeof MFA_LEVELS)[keyof typeof MFA_LEVELS]
@@ -56,17 +56,17 @@ export declare const MFA_LEVELS: {
 }
 ```
 
-### Usage Examples
+### Usage examples
 
 ### Usage
 
 ```tsx
 import { WALLET_CONNECTORS, AUTH_CONNECTION, MFA_LEVELS } from '@web3auth/modal'
 
-await connectTo(WALLET_CONNECTORS.AUTH, {
+await ConnectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.GOOGLE,
   authConnectionId: 'w3a-google-demo',
-  // focus-next-line
+  // Focus-next-line
   mfaLevel: MFA_LEVELS.MANDATORY,
 })
 ```
@@ -81,7 +81,7 @@ The `mfaSettings` option provides granular control over each individual MFA fact
 mfaSettings?: MfaSettings;
 ```
 
-### MFA Factors
+### Multi-Factor Authentication factors
 
 | Factor          | Key                   | Description                          |
 | --------------- | --------------------- | ------------------------------------ |
@@ -91,7 +91,7 @@ mfaSettings?: MfaSettings;
 | `PASSWORD`      | "passwordFactor"      | Password-based authentication        |
 | `AUTHENTICATOR` | "authenticatorFactor" | Authenticator app (TOTP)             |
 
-### MFA Settings Properties
+### Multi-Factor Authentication settings properties
 
 | Property    | Type    | Description                                            |
 | ----------- | ------- | ------------------------------------------------------ |
@@ -99,7 +99,7 @@ mfaSettings?: MfaSettings;
 | `priority`  | number  | Order in which factors are presented (lower = earlier) |
 | `mandatory` | boolean | Whether this factor is required                        |
 
-### Type Definitions
+### Type definitions
 
 ```tsx
 export type MfaSettings = Partial<Record<MFA_FACTOR_TYPE, MFA_SETTINGS>>
@@ -119,7 +119,7 @@ export type MFA_SETTINGS = {
 }
 ```
 
-### Important Rules
+### Important rules
 
 - At least two factors must be enabled when setting up MFA
 - If you set `mandatory: true` for all factors, the user must set up all enabled factors
@@ -129,13 +129,13 @@ export type MFA_SETTINGS = {
 
 ### Usage
 
-```tsx title="web3AuthContext.tsx"
+```tsx title="Web3authContext.tsx"
 import { MFA_FACTORWEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
 
-const web3AuthOptions: Web3AuthOptions = {
+const Web3authOptions: Web3AuthOptions = {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  // focus-start
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // Focus-start
   mfaSettings: {
     [MFA_FACTOR.DEVICE]: {
       enable: true,
@@ -168,10 +168,10 @@ const web3AuthOptions: Web3AuthOptions = {
       mandatory: false,
     },
   },
-  // focus-end
+  // Focus-end
 }
 
-const web3AuthContextConfig = {
-  web3AuthOptions,
+const Web3authContextConfig = {
+  Web3authOptions,
 }
 ```

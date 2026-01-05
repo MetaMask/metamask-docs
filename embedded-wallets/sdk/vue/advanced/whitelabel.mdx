@@ -31,7 +31,7 @@ The `modalConfig` option in the constructor lets you configure the modal UI and 
 modalConfig?: ConnectorsModalConfig;
 
 export interface ConnectorsModalConfig {
-    connectors?: Partial<Record<WALLET_CONNECTOR_TYPE, ModalConfig>>;
+    Connectors?: Partial<Record<WALLET_CONNECTOR_TYPE, ModalConfig>>;
     hideWalletDiscovery?: boolean;
 }
 
@@ -53,16 +53,16 @@ The `LoginMethodConfig` interface provides extensive customization options for e
 | ------------------------- | ---------------------- | ------------------------------------------------------------------------------------ |
 | `name`                    | `string`               | Custom display name (defaults to auth app's default if not provided)                 |
 | `description`             | `string`               | Button description (renders as full-length button if provided; otherwise as an icon) |
-| `logoHover`               | `string`               | Logo shown on mouse hover (defaults to auth app's default)                           |
+| `logoHover`               | `string`               | Logo Shown on mouse hover (defaults to auth app's default)                           |
 | `logoLight`               | `string`               | Logo for dark theme/background (defaults to auth app's default)                      |
 | `logoDark`                | `string`               | Logo for light theme/background (defaults to auth app's default)                     |
-| `mainOption`              | `boolean`              | Whether to show login button on the main list                                        |
-| `showOnModal`             | `boolean`              | Controls visibility of the login button on modal                                     |
-| `authConnectionId`        | `string`               | Auth connection ID of the provider                                                   |
-| `groupedAuthConnectionId` | `string`               | Grouped auth connection ID of the provider                                           |
-| `extraLoginOptions`       | `ExtraLoginOptions`    | Additional parameters for social login                                               |
-| `authConnection`          | `AUTH_CONNECTION_TYPE` | Auth connection type (useful for customizing login buttons with custom connectors)   |
-| `isDefault`               | `boolean`              | Whether it's the default connector _(internal)_                                      |
+| `mainOption`              | `boolean`              | Whether to Show login button on the main list                                        |
+| `ShowOnModal`             | `boolean`              | Controls visibility of the login button on modal                                     |
+| `authConnectionId`        | `string`               | Auth Connection ID of the Provider                                                   |
+| `groupedAuthConnectionId` | `string`               | Grouped auth Connection ID of the Provider                                           |
+| `extraLoginOptions`       | `Extraloginoptions`    | Additional parameters for social login                                               |
+| `authConnection`          | `AUTH_CONNECTION_TYPE` | Auth Connection type (useful for customizing login buttons with custom Connectors)   |
+| `isDefault`               | `boolean`              | Whether it's the default Connector _(internal)_                                      |
 
   </TabItem>
 
@@ -82,15 +82,15 @@ export type LoginMethodConfig = Partial<
        */
       description?: string
       /**
-       * Logo to be shown on mouse hover. If not provided, we use the default for auth app
+       * Logo to be Shown on mouse hover. If not provided, we use the default for auth app
        */
       logoHover?: string
       /**
-       * Logo to be shown on dark background (dark theme). If not provided, we use the default for auth app
+       * Logo to be Shown on dark background (dark theme). If not provided, we use the default for auth app
        */
       logoLight?: string
       /**
-       * Logo to be shown on light background (light theme). If not provided, we use the default for auth app
+       * Logo to be Shown on light background (light theme). If not provided, we use the default for auth app
        */
       logoDark?: string
       /**
@@ -98,30 +98,30 @@ export type LoginMethodConfig = Partial<
        */
       mainOption?: boolean
       /**
-       * Whether to show the login button on modal or not
+       * Whether to Show the login button on modal or not
        */
-      showOnModal?: boolean
+      ShowOnModal?: boolean
       /**
-       * Auth connection id of the provider.
+       * Auth Connection id of the Provider.
        */
       authConnectionId?: string
       /**
-       * Grouped auth connection id of the provider.
+       * Grouped auth Connection id of the Provider.
        */
       groupedAuthConnectionId?: string
       /**
        * ExtraLoginOption params to be used for social login.
        */
-      extraLoginOptions?: ExtraLoginOptions
+      extraLoginOptions?: Extraloginoptions
       /**
-       * Auth connection type of the auth connector.
+       * Auth Connection type of the auth Connector.
        * Can be different from the original key.
        *
-       * Example: This helps in customizing the google login button with auth0 custom connector.
+       * Example: This helps in customizing the google login button with auth0 custom Connector.
        */
       authConnection?: AUTH_CONNECTION_TYPE
       /**
-       * Whether is it default connector.
+       * Whether is it default Connector.
        *
        * @internal
        */
@@ -134,9 +134,9 @@ export type LoginMethodConfig = Partial<
   </TabItem>
 </Tabs>
 
-## Common Customization Examples
+## Common customization examples
 
-### Disabling Specific Social Login Methods
+### Disabling specific social login methods
 
 Web3Auth provides the following social login methods:
 
@@ -163,45 +163,45 @@ export declare const AUTH_CONNECTION: {
 }
 ```
 
-To disable specific login methods, set `showOnModal` to `false` for the corresponding auth connection:
+To disable specific login methods, set `ShowOnModal` to `false` for the corresponding auth Connection:
 
-```ts title="web3AuthContextConfig.ts"
+```ts title="Web3authContextConfig.ts"
 import { AUTH_CONNECTION, WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
 import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 
-const web3AuthContextConfig: Web3AuthContextConfig = {
-  web3AuthOptions: {
+const Web3authContextConfig: Web3AuthContextConfig = {
+  Web3authOptions: {
     clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-    // focus-start
+    Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    // Focus-start
     modalConfig: {
-      connectors: {
+      Connectors: {
         [WALLET_CONNECTORS.AUTH]: {
           label: 'auth',
           loginMethods: {
             // Disable Facebook and Reddit
             facebook: {
               name: 'facebook',
-              showOnModal: false,
+              ShowOnModal: false,
             },
             reddit: {
               name: 'reddit',
-              showOnModal: false,
+              ShowOnModal: false,
             },
           },
           // Setting to false will hide all social login methods from modal
-          showOnModal: true,
+          ShowOnModal: true,
         },
       },
     },
-    // focus-end
+    // Focus-end
   },
 }
 
-export default web3AuthContextConfig
+export default Web3authContextConfig
 ```
 
-### Enhancing Email and SMS Login Experience
+### Enhancing email and SMS login experience
 
 By specifying a custom `authConnectionId` for email or SMS login methods, you can ensure the entire authentication flow takes place seamlessly within the modal, eliminating the need for external popups.
 
@@ -211,17 +211,17 @@ In the default setup, users are redirected to a separate popup to enter their em
 
 :::
 
-```ts title="web3AuthContextConfig.ts"
+```ts title="Web3authContextConfig.ts"
 import { WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
 import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
 
-const web3AuthContextConfig: Web3AuthContextConfig = {
-  web3AuthOptions: {
+const Web3authContextConfig: Web3AuthContextConfig = {
+  Web3authOptions: {
     clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-    // focus-start
+    Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    // Focus-start
     modalConfig: {
-      connectors: {
+      Connectors: {
         [WALLET_CONNECTORS.AUTH]: {
           label: 'auth',
           loginMethods: {
@@ -237,15 +237,15 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
         },
       },
     },
-    // focus-end
+    // Focus-end
   },
 }
 
-export default web3AuthContextConfig
+export default Web3authContextConfig
 ```
 
-## Creating a Fully Custom UI
+## Creating a fully custom UI
 
-For complete control over the authentication interface, you can bypass the Web3Auth modal entirely and use the `connectTo` function. This allows you to create custom buttons that connect directly to specific auth providers.
+For complete control over the authentication interface, you can bypass the Web3Auth modal entirely and use the `ConnectTo` function. This allows you to create custom buttons that Connect directly to specific auth Providers.
 
 See the [Custom Authentication](./custom-authentication.mdx) section for detailed implementation instructions.

@@ -8,17 +8,17 @@ sidebar_label: v7 to v8
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-# Migration Guide from v7 to v8 for Web3Auth PnP iOS SDK
+# Migration guide from v7 to v8 for Web3Auth PnP iOS SDK
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 7(v7) to version 8(v8) of the Web3Auth PnP iOS SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate MFA setup flow, `request` method for transaction confirmation screens, and `launchWalletServices` method for template wallet interface.
+This migration guide provides steps for upgrading from version 7(v7) to version 8(v8) of the Web3Auth PnP iOS SDK. The guide outlines significant changes and enhancements, including the introduction of `Enablemfa` method to initiate MFA setup flow, `request` method for transaction confirmation screens, and `launchWalletServices` method for template wallet interface.
 
-## Changes in Detail
+## Changes in detail
 
-### `enableMFA` method
+### `Enablemfa` method
 
-From v8, developers can now use the `enableMFA` method to initiate MFA setup flow for already logged in users.
+From v8, developers can now use the `Enablemfa` method to initiate MFA setup flow for already logged in users.
 
 <Tabs
   defaultValue="default-verifier"
@@ -31,10 +31,10 @@ From v8, developers can now use the `enableMFA` method to initiate MFA setup flo
 <TabItem value = "default-verifier">
 ```swift title="Usage"
 do {
-	// focus-next-line
-	let isMFAEnabled = try await self.web3Auth.enableMFA()
+	// Focus-next-line
+	let Ismfaenabled = try await self.Web3auth.Enablemfa()
 } catch {
-	print(error.localizedDescription)
+	print(Error.localizedDescription)
 	// Handle Error
 }
 ```
@@ -44,16 +44,16 @@ do {
 
 ```swift title="Usage"
 do {
-	let loginParams = W3ALoginParams(
+	let Loginparams = W3ALoginParams(
 		.JWT,
-		extraLoginOptions: .init(id_token: "your_jwt_token")
+		extraLoginOptions: .init(id_Token: "your_jwt_Token")
   	)
 
-    // focus-next-line
-    let isMFAEnabled = try await self.web3Auth.enableMFA(loginParams)
+    // Focus-next-line
+    let Ismfaenabled = try await self.Web3auth.Enablemfa(Loginparams)
 
 } catch {
-  print(error.localizedDescription)
+  print(Error.localizedDescription)
   // Handle Error
 }
 
@@ -68,11 +68,11 @@ From v8, developers can use the `launchWalletServices` to launches a WebView whi
 
 :::note
 
-Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+Access to Wallet services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
 
 :::
 
-#### ChainConfig Arguments
+#### Chainconfig arguments
 
 | Parameter | Description |
 | --- | --- |
@@ -97,27 +97,27 @@ do {
     ticker: "ETH"
   )
 
-  val web3Auth = await Web3Auth(.init(
+  val Web3auth = await Web3Auth(.init(
     clientId: clientID,
     network: network,
     buildEnv: buildEnv,
-    // focus-start
+    // Focus-start
     chainConfig: chainConfig
   ))
 
-  // focus-start
-  try await web3Auth?.launchWalletServices(
+  // Focus-start
+  try await Web3auth?.launchWalletServices(
     W3ALoginParams(loginProvider: .GOOGLE),
   )
-  // focus-end
+  // Focus-end
 } catch {
-  // Handle error
+  // Handle Error
 }
 ```
 
 ### `request` method
 
-Now, developers can use the `request` method to use the templated transaction confirmation screens for signing transactions. To retrive the signature for the request, developers can use the `getSignResponse` static method.
+Now, developers can use the `request` method to use the templated transaction confirmation screens for signing transactions. To retrive the signature for the request, developers can use the `getSignresponse` static method.
 
 ```swift title="Usage"
 var params = [Any]()
@@ -126,14 +126,14 @@ params.append("0x764dd67c0420b43a39ab337463d8995622f226a2")
 params.append("Web3Auth")
 
 do {
-  // focus-start
-  try await self.web3Auth?.request(
+  // Focus-start
+  try await self.Web3auth?.request(
     W3ALoginParams(loginProvider: .GOOGLE, mfaLevel: .NONE),
     method: "personal_sign",
     requestParams: params
   )
-  // focus-end
+  // Focus-end
 } catch {
-  // Handle error
+  // Handle Error
 }
 ```

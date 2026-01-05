@@ -4,7 +4,7 @@ sidebar_label: useSignAndSendTransaction
 description: '@web3auth/modal React Hook useSignAndSendTransaction | Embedded Wallets'
 ---
 
-Hook to sign and send a Solana transaction using the connected Solana wallet from Web3Auth.
+Hook to sign and send a Solana transaction using the Connected Solana wallet from Web3Auth.
 
 ### Import
 
@@ -23,59 +23,59 @@ function SignAndSendTransactionButton({
 }: {
   transaction: TransactionOrVersionedTransaction
 }) {
-  const { signAndSendTransaction, loading, error, data } = useSignAndSendTransaction()
+  const { Signandsendtransaction, Loading, Error, Data } = useSignAndSendTransaction()
 
   const handleSignAndSend = async () => {
     try {
-      const signature = await signAndSendTransaction(transaction)
+      const signature = await Signandsendtransaction(transaction)
       // Do something with signature
     } catch (e) {
-      // Handle error
+      // Handle Error
     }
   }
 
   return (
     <div>
-      <button onClick={handleSignAndSend} disabled={loading}>
-        {loading ? 'Signing & Sending...' : 'Sign & Send Transaction'}
+      <button onClick={handleSignAndSend} disabled={Loading}>
+        {Loading ? 'Signing & Sending...' : 'Sign & Send transaction'}
       </button>
-      {error && <div>Error: {error.message}</div>}
-      {data && <div>Signature: {data}</div>}
+      {Error && <div>Error: {Error.message}</div>}
+      {Data && <div>Signature: {Data}</div>}
     </div>
   )
 }
 ```
 
-### Return Type
+### Return type
 
 ```ts
 export type IUseSignAndSendTransaction = {
-  loading: boolean
-  error: Web3AuthError | null
-  data: string | null
-  signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
+  Loading: boolean
+  Error: Web3AuthError | null
+  Data: string | null
+  Signandsendtransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
 }
 ```
 
-#### loading
+#### Loading
 
 `boolean`
 
 Indicates if the transaction signing and sending is in progress.
 
-#### error
+#### Error
 
 `Web3AuthError | null`
 
 Error object if signing or sending fails, otherwise null.
 
-#### data
+#### Data
 
 `string | null`
 
 The transaction signature as a string, or null if not signed yet.
 
-#### signAndSendTransaction
+#### Signandsendtransaction
 
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
@@ -96,12 +96,12 @@ import {
 
 export function SendVersionedTransaction() {
   const {
-    data: hash,
-    error,
-    loading: isPending,
-    signAndSendTransaction,
+    Data: hash,
+    Error,
+    Loading: isPending,
+    Signandsendtransaction,
   } = useSignAndSendTransaction()
-  const { accounts, connection } = useSolanaWallet()
+  const { Accounts, Connection } = useSolanaWallet()
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -109,9 +109,9 @@ export function SendVersionedTransaction() {
     const to = formData.get('address') as string
     const value = formData.get('value') as string
 
-    const block = await connection!.getLatestBlockhash()
+    const block = await Connection!.getLatestBlockhash()
     const TransactionInstruction = SystemProgram.transfer({
-      fromPubkey: new PublicKey(accounts![0]),
+      fromPubkey: new PublicKey(Accounts![0]),
       toPubkey: new PublicKey(to),
       lamports: Number(value) * LAMPORTS_PER_SOL,
     })
@@ -119,11 +119,11 @@ export function SendVersionedTransaction() {
     const transactionMessage = new TransactionMessage({
       recentBlockhash: block.blockhash,
       instructions: [TransactionInstruction],
-      payerKey: new PublicKey(accounts![0]),
+      payerKey: new PublicKey(Accounts![0]),
     })
 
     const transaction = new VersionedTransaction(transactionMessage.compileToV0Message())
-    signAndSendTransaction(transaction)
+    Signandsendtransaction(transaction)
   }
 
   return (
@@ -137,7 +137,7 @@ export function SendVersionedTransaction() {
         </button>
       </form>
       {hash && <div>Transaction Hash: {hash}</div>}
-      {error && <div>Error: {error.message}</div>}
+      {Error && <div>Error: {Error.message}</div>}
     </div>
   )
 }

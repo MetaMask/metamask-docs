@@ -8,13 +8,13 @@ sidebar_label: v8 to v8.1
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-# Migration Guide from v8 to v8.1 for Web3Auth PnP iOS SDK
+# Migration guide from v8 to v8.1 for Web3Auth PnP iOS SDK
 
 ## Overview
 
 This migration guide provides steps for upgrading from version 8(v8) to version 8.1(v8.1) of the Web3Auth PnP iOS SDK. The guide outlines significant changes and enhancements, including the removal of `chainConfig` parameter from `W3AInitParams`, and addition of `chainConfig` parameter in `launchWalletServices` method.
 
-## Changes in Detail
+## Changes in detail
 
 ### `chainConfig` parameter changes
 
@@ -31,21 +31,21 @@ do {
     ticker: "ETH"
   )
 
-  val web3Auth = await Web3Auth(.init(
+  val Web3auth = await Web3Auth(.init(
     clientId: clientID,
     network: network,
     buildEnv: buildEnv,
-    // focus-start
+    // Focus-start
     chainConfig: chainConfig
   ))
 
-  // focus-start
-  try await web3Auth?.launchWalletServices(
+  // Focus-start
+  try await Web3auth?.launchWalletServices(
     W3ALoginParams(loginProvider: .GOOGLE),
   )
-  // focus-end
+  // Focus-end
 } catch {
-  // Handle error
+  // Handle Error
 }
 ```
 
@@ -60,13 +60,13 @@ do {
     ticker: "ETH"
   )
 
-  // focus-start
-  try await web3Auth?.launchWalletServices(
+  // Focus-start
+  try await Web3auth?.launchWalletServices(
     W3ALoginParams(loginProvider: .GOOGLE),
     chainConfig: chainConfig
   )
-  // focus-end
+  // Focus-end
 } catch {
-  // Handle error
+  // Handle Error
 }
 ```

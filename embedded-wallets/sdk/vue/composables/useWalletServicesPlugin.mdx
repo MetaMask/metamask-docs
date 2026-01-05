@@ -4,7 +4,7 @@ sidebar_label: useWalletServicesPlugin
 description: '@web3auth/modal Vue Composables useWalletServicesPlugin | Embedded Wallets'
 ---
 
-Hook to access the Wallet Services Plugin context, enabling wallet-related features such as WalletConnect, Checkout, Swap, and Wallet UI.
+Hook to access the Wallet services Plugin context, enabling wallet-related features such as WalletConnect, Checkout, Swap, and Wallet UI.
 
 ### Import
 
@@ -18,45 +18,44 @@ import { useWalletServicesPlugin } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useWalletServicesPlugin } from '@web3auth/modal/vue'
 
-  const { isPluginConnected, showWalletConnectScanner, showCheckout, showWalletUI } =
+  const { IspluginConnected, ShowWalletConnectScanner, ShowCheckout, ShowWalletUI } =
     useWalletServicesPlugin()
 </script>
 
 <template>
-  <button @click="showWalletConnectScanner()" :disabled="!isPluginConnected">
+  <button @click="ShowWalletConnectScanner()" :disabled="!IspluginConnected">
     Show WalletConnect Scanner
   </button>
-  <button @click="showCheckout()" :disabled="!isPluginConnected">Show Checkout</button>
-  <button @click="showWalletUI()" :disabled="!isPluginConnected">Show Wallet UI</button>
+  <button @click="ShowCheckout()" :disabled="!IspluginConnected">Show Checkout</button>
+  <button @click="ShowWalletUI()" :disabled="!IspluginConnected">Show Wallet UI</button>
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 import type { IWalletServicesContext } from '@web3auth/modal/vue'
 ```
 
-#### isPluginConnected
-
+#### IspluginConnected
 `boolean`
 
-Whether the Wallet Services Plugin is connected and ready to use.
+Whether the Wallet services Plugin is Connected and ready to use.
 
-#### showWalletConnectScanner
+#### ShowWalletConnectScanner
 
-`(showWalletConnectParams?: BaseEmbedControllerState["showWalletConnect"]) => Promise<void>`
+`(ShowWalletConnectParams?: BaseEmbedControllerState["ShowWalletConnect"]) => Promise<void>`
 
 Shows the WalletConnect QR scanner. Accepts optional parameters for customizing the scanner behavior.
 
-#### showCheckout
+#### ShowCheckout
 
-`(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
+`(ShowCheckoutParams?: BaseEmbedControllerState["ShowCheckout"]) => Promise<void>`
 
 Shows the TopUp modal for fiat-to-crypto checkout. Accepts optional parameters for customizing the checkout experience.
 
-#### showWalletUI
+#### ShowWalletUI
 
-`(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
+`(ShowWalletUiParams?: BaseEmbedControllerState["ShowWalletUi"]) => Promise<void>`
 
-Shows the Wallet Services modal UI. Accepts optional parameters for customizing the wallet UI experience.
+Shows the Wallet services modal UI. Accepts optional parameters for customizing the wallet UI experience.

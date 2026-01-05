@@ -7,11 +7,11 @@ description: 'Web3Auth React Native SDK - login | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-Trigger the login flow that navigates the user to a browser model that allows them to log in with the selected login provider.
+Trigger the login flow that navigates the user to a browser model that allows them to log in with the selected login Provider.
 
 ## Method
 
-`login(loginParams: SdkLoginParams): Promise<void>;`
+`login(Loginparams: SdkLoginParams): Promise<void>;`
 
 ## Parameters
 
@@ -28,12 +28,12 @@ Trigger the login flow that navigates the user to a browser model that allows th
 | Parameter | Description |
 | --- | --- |
 | `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`. |
-| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `Extraloginoptions` as a value. |
 | `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `string` as a value. |
 | `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `string` as a value. |
-| `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MfaLevelType.default`, which shows MFA screen every 3rd login. It accepts `MfaLevelType` as a value. |
+| `mfaLevel?` | Customize the MFA screen Shown to the user during OAuth authentication. Default value for field is `MfaLevelType.default`, which Shows MFA screen every 3rd login. It accepts `MfaLevelType` as a value. |
 | `dappShare?` | Custom verifier logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `string` as a value. |
-| `curve?` | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `ed25519Key` method. The default value is `SUPPORTED_KEY_CURVES_TYPE.secp256k1`. |
+| `curve?` | It will be used to determine the public key encoded in the jwt Token which returned in `Getuserinfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `ed25519Key` method. The default value is `SUPPORTED_KEY_CURVES_TYPE.secp256k1`. |
 
 </TabItem>
 
@@ -49,12 +49,12 @@ export type BaseRedirectParams = {
    *
    * @remarks
    * Register this url at {@link "https://dashboard.web3auth.io"| developer dashboard}
-   * else initialization will give error.
+   * else initialization will give Error.
    */
   redirectUrl?: string;
   /**
    * Any custom state you wish to pass along. This will be returned to you post redirect.
-   * Use this to store data that you want to be available to the dapp after login.
+   * Use this to store Data that you want to be available to the dapp after login.
    */
   appState?: string;
 };
@@ -64,14 +64,14 @@ export type LoginParams = BaseRedirectParams & {
    * loginProvider sets the oauth login method to be used.
    * You can use any of the valid loginProvider from the supported list.
    *
-   * If this param is not passed then it will show all the available
+   * If this param is not passed then it will Show all the available
    * login methods to user in a modal.
    *
    */
   loginProvider: LOGIN_PROVIDER_TYPE | CUSTOM_LOGIN_PROVIDER_TYPE;
 
   /**
-   * You can set the `mfaLevel` to customize when mfa screen should be shown to user.
+   * You can set the `mfaLevel` to customize when mfa screen should be Shown to user.
    * It currently accepts 4 values:-
    * - `'default'`: Setting mfa level to `default` will present mfa screen to user on every third login.
    * - `'optional'`: Setting mfa level to `default` will present mfa screen to user on every login but user can skip it.
@@ -91,7 +91,7 @@ export type LoginParams = BaseRedirectParams & {
    * as your app domain in `extraLoginOptions` while using `email_passwordless`
    * loginProvider
    */
-  extraLoginOptions?: ExtraLoginOptions;
+  extraLoginOptions?: Extraloginoptions;
 
   /**
    * Custom Logins can get a dapp share returned to them post successful login.
@@ -109,16 +109,16 @@ export type LoginParams = BaseRedirectParams & {
   sessionTime?: number;
 
   /**
-   * This curve will be used to determine the public key encoded in the jwt token which returned in
-   * `getUserInfo` function after user login.
-   * You can use that public key from jwt token as a unique user identifier in your backend.
+   * This curve will be used to determine the public key encoded in the jwt Token which returned in
+   * `Getuserinfo` function after user login.
+   * You can use that public key from jwt Token as a unique user identifier in your backend.
    *
-   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in jwt token to use.
-   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in jwt token to use.
+   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in jwt Token to use.
+   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in jwt Token to use.
    *
    * Note: This parameter won't change format of private key returned by auth service. Private key returned
    * by auth service is always `secp256k1`. As of now you have to convert it to `'ed25519'` if you want.
-   * You can use `@web3auth/base-provider` npm package for this purpose.
+   * You can use `@web3auth/base-Provider` npm package for this purpose.
    *
    *
    * @defaultValue secp256k1
@@ -131,7 +131,7 @@ export type LoginParams = BaseRedirectParams & {
 
 </Tabs>
 
-## Basic Usage
+## Basic usage
 
 ```typescript title="example.tsx"
 await web3auth.login({
@@ -140,7 +140,7 @@ await web3auth.login({
 })
 ```
 
-## Selecting Curve
+## Selecting curve
 
 The `web3auth.login()` method accepts a `curve` parameter. This parameter can be used to select the elliptic curve to use for deriving the address of the key within the jwt returned by Web3Auth for Server Side Verification.
 
@@ -148,7 +148,7 @@ The `web3auth.login()` method accepts a `curve` parameter. This parameter can be
 await web3auth.login({
   loginProvider: LoginProvider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
-  // focus-next-line
+  // Focus-next-line
   curve: 'secp256k1', // `secp256k1` and `ed25519` are supported
 })
 ```
@@ -169,7 +169,7 @@ await web3auth.login({
 await web3auth.login({
   loginProvider: LoginProvider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
-  // focus-next-line
+  // Focus-next-line
   curve: 'secp256k1',
 })
 ```
@@ -182,7 +182,7 @@ await web3auth.login({
 await web3auth.login({
   loginProvider: LoginProvider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
-  // focus-next-line
+  // Focus-next-line
   curve: 'ed25519',
 })
 ```

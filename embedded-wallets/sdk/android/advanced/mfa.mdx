@@ -12,7 +12,7 @@ At Web3Auth, we prioritize your security by offering Multi-Factor Authentication
 
 <MFAMinimumPlan />
 
-## Enable using the MFA Level
+## Enable using the Multi-Factor Authentication level
 
 For a dApp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
 
@@ -22,7 +22,7 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 
 :::
 
-### MFA Level Options
+### Multi-Factor Authentication level options
 
 | MFA Level | Description                                                |
 | --------- | ---------------------------------------------------------- |
@@ -34,18 +34,18 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 ### Usage
 
 ```kotlin
-val loginResponse = web3Auth.login(
+val loginResponse = Web3auth.login(
   LoginParams(
     Proider.GOOGLE,
-    // focus-next-line
+    // Focus-next-line
     mfaLevel = MFALevel.MANDATORY
   )
 )
 ```
 
-## Explicitly Enable MFA
+## Explicitly enable Multi-Factor Authentication
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
+The `Enablemfa` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login Providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT Token in `Loginparams` as well.
 
 <Tabs
   defaultValue="default-verifier"
@@ -63,19 +63,19 @@ import com.web3auth.core.Web3Auth
 import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var web3Auth: Web3Auth
+    private lateinit var Web3auth: Web3Auth
 
-     private fun enableMFA() {
-       // focus-next-line
-       val completableFuture = web3Auth.enableMFA()
+     private fun Enablemfa() {
+       // Focus-next-line
+       val completableFuture = Web3auth.Enablemfa()
 
-        completableFuture.whenComplete{_, error ->
-            if (error == null) {
+        completableFuture.whenComplete{_, Error ->
+            if (Error == null) {
                 Log.d("MainActivity_Web3Auth", "Launched successfully")
                 // Add your logic
             } else {
-                // Add your logic on error
-                Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+                // Add your logic on Error
+                Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
             }
         }
     }
@@ -83,8 +83,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         ...
         // Setup UI and event handlers
-        val enableMFAButton = findViewById<Button>(R.id.enableMFAButton)
-        enableMFAButton.setOnClickListener { enableMFA() }
+        val EnablemfaButton = findViewById<Button>(R.id.EnablemfaButton)
+        EnablemfaButton.setOnClickListener { Enablemfa() }
         ...
     }
     ...
@@ -100,24 +100,24 @@ import android.widget.Button
 import com.web3auth.core.Web3Auth
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Auth
+class MainActivity : AppCompatActivity() { private lateinit var Web3auth: Web3Auth
 
-     private fun enableMFA() {
-        val loginParams = LoginParams(
+     private fun Enablemfa() {
+        val Loginparams = LoginParams(
             Provider.JWT,
-            extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+            extraLoginOptions = Extraloginoptions(id_Token = "your_jwt_Token")
         )
 
-        // focus-next-line
-        val completableFuture = web3Auth.enableMFA(loginParams)
+        // Focus-next-line
+        val completableFuture = Web3auth.Enablemfa(Loginparams)
 
-        completableFuture.whenComplete{_, error ->
-            if (error == null) {
+        completableFuture.whenComplete{_, Error ->
+            if (Error == null) {
                 Log.d("MainActivity_Web3Auth", "Launched successfully")
                 // Add your logic
             } else {
-                // Add your logic on error
-                Log.d("MainActivity_Web3Auth", error.message ?: "Something went wrong")
+                // Add your logic on Error
+                Log.d("MainActivity_Web3Auth", Error.message ?: "Something went wrong")
             }
         }
     }
@@ -125,8 +125,8 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
     override fun onCreate(savedInstanceState: Bundle?) {
         ...
         // Setup UI and event handlers
-        val enableMFAButton = findViewById<Button>(R.id.enableMFAButton)
-        enableMFAButton.setOnClickListener { enableMFA() }
+        val EnablemfaButton = findViewById<Button>(R.id.EnablemfaButton)
+        EnablemfaButton.setOnClickListener { Enablemfa() }
         ...
     }
     ...
@@ -138,7 +138,7 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
 </TabItem>
 </Tabs>
 
-## Configure MFA Settings
+## Configure MFA settings
 
 You can configure the order of MFA or enable/disable MFA type by passing the `mfaSettings` parameter in `Web3AuthOptions`.
 
@@ -152,7 +152,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 
 :::
 
-### Parameters - MfaSettings
+### Parameters - MFAsettings
 
 `MfaSettings` allows you to set the type of the MFA.
 
@@ -180,7 +180,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 <TabItem value="class">
 
 ```kotlin
-	data class MfaSettings(
+	Data class MfaSettings(
 		private var deviceShareFactor: MfaSetting? = null,
 		private var backUpShareFactor: MfaSetting? = null,
 		private var socialBackupFactor: MfaSetting? = null,
@@ -193,7 +193,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 </TabItem>
 </Tabs>
 
-### Parameters - MfaSetting
+### Parameters - MFAsetting
 
 `MfaSetting` allows you to setup MFA setting for a particular MFA type.
 
@@ -218,7 +218,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 <TabItem value="class">
 
 ```kotlin
-data class MfaSetting(
+Data class MfaSetting(
 	var enable: Boolean,
 	var priority: Int?,
 	var mandatory: Boolean?
@@ -234,13 +234,13 @@ data class MfaSetting(
 import com.web3auth.core.Web3Auth
 import com.web3auth.core.types.Web3AuthOptions
 
-val web3Auth = Web3Auth(
+val Web3auth = Web3Auth(
   Web3AuthOptions(
     context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network = Network.MAINNET,
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
-    // focus-start
+    // Focus-start
     mfaSettings = MfaSettings(
       deviceShareFactor = MfaSetting(true, 1, true),
       socialBackupFactor = MfaSetting(true, 2, true),
@@ -249,14 +249,14 @@ val web3Auth = Web3Auth(
       passkeysFactor = MfaSetting(true, 5, true),
       authenticatorFactor = MfaSetting(true, 6, true),
     )
-    // focus-end
+    // Focus-end
   )
 )
 
-val loginResponse = web3Auth.login(
+val loginResponse = Web3auth.login(
   LoginParams(
     Proider.GOOGLE,
-    // focus-next-line
+    // Focus-next-line
     mfaLevel = MFALevel.MANDATORY
   )
 )

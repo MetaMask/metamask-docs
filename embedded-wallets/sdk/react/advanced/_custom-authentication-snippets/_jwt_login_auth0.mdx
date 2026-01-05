@@ -7,11 +7,11 @@ const loginWithAuth0 = async () => {
 
     const idToken = (await getIdTokenClaims())?.__raw.toString();
     if (!idToken) {
-      throw new Error("No id token found");
+      throw new Error("No id Token found");
     }
 
-    // focus-start
-    await connectTo(WALLET_CONNECTORS.AUTH, {
+    // Focus-start
+    await ConnectTo(WALLET_CONNECTORS.AUTH, {
       authConnectionId: "w3a-auth0-demo",
       authConnection: AUTH_CONNECTION.CUSTOM,
       idToken,
@@ -19,9 +19,9 @@ const loginWithAuth0 = async () => {
         isUserIdCaseSensitive: false,
       },
     });
-    // focus-end
+    // Focus-end
   } catch (err) {
-    console.error(err);
+    console.Error(err);
   }
 };
 ```

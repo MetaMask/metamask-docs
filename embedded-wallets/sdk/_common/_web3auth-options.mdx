@@ -15,10 +15,10 @@ import Tabs from "@theme/Tabs";
 | Parameter                         | Description                                                                                                                                                                              |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `clientId`                        | [Mandatory] Client Id for web3auth. You can obtain your client id from the web3auth developer dashboard.                                                                                 |
-| `web3AuthNetwork`                 | [Mandatory] Web3Auth Network to use for the session & the issued `idToken`. Default is `sapphire_mainnet`.                                                                               |
+| `Web3authNetwork`                 | [Mandatory] Web3Auth Network to use for the session & the issued `idToken`. Default is `sapphire_mainnet`.                                                                               |
 | `enableLogging?`                  | Setting to true will enable logs. Default is false.                                                                                                                                      |
 | `sessionTime?`                    | Session Time (in seconds) for `idToken` issued by Web3Auth for server side verification. Default is 7 days (7 \* 86400). Max value can be 30 days (86400 \* 30) and min can be 1 sec (1) |
-| `useSFAKey?`                      | Uses Single Factor Auth SDK key with web3auth provider. Default is false.                                                                                                                |
+| `useSFAKey?`                      | Uses Single Factor Auth SDK key with web3auth Provider. Default is false.                                                                                                                |
 | `storageType?`                    | Setting to `local` will persist social login session across browser tabs. Default is `local`.                                                                                            |
 | `defaultChainId?`                 | Default chain Id to use. Your first chain will be used as default.                                                                                                                       |
 | `multiInjectedProviderDiscovery?` | Whether to enable discovery of injected wallets in the browser. Default is true.                                                                                                         |
@@ -34,11 +34,11 @@ import Tabs from "@theme/Tabs";
 | `modalConfig?`              | Helps you customize the modal UI elements and authentication methods.                                    |
 | `accountAbstractionConfig?` | [Fetched automatically from Dashboard] Account abstraction config for your chain namespace.              |
 | `useAAWithExternalWallet?`  | [Fetched automatically from Dashboard] Whether to use AA with external wallet.                           |
-| `walletServicesConfig?`     | [Fetched automatically from Dashboard] Configure any parameter related to Wallet Services Plugin         |
+| `walletServicesConfig?`     | [Fetched automatically from Dashboard] Configure any parameter related to Wallet services Plugin         |
 | `ssr?`                      | Whether to enable SSR mode.                                                                              |
-| `mfaSettings?`              | MFA settings for the auth connector.                                                                     |
-| `mfaLevel?`                 | MFA level for the auth connector.                                                                        |
-| `privateKeyProvider?`       | Private key provider for your chain namespace.                                                           |
+| `mfaSettings?`              | MFA settings for the auth Connector.                                                                     |
+| `mfaLevel?`                 | MFA level for the auth Connector.                                                                        |
+| `privateKeyProvider?`       | Private key Provider for your chain namespace.                                                           |
 
 </TabItem>
 
@@ -49,7 +49,7 @@ export interface Web3AuthOptions extends IWeb3AuthCoreOptions {
   /**
    * Config for configuring modal ui display properties
    */
-  uiConfig?: Omit<UIConfig, "connectorListener">;
+  uiConfig?: Omit<UIConfig, "ConnectorListener">;
   /**
    * Config for configuring modal ui display properties
    */
@@ -94,9 +94,9 @@ export interface IWeb3AuthCoreOptions {
   /**
    * Web3Auth Network to use for the session.
    */
-  web3AuthNetwork: WEB3AUTH_NETWORK_TYPE;
+  Web3authNetwork: WEB3AUTH_NETWORK_TYPE;
   /**
-   * Uses core-kit key with web3auth provider
+   * Uses core-kit key with web3auth Provider
    * @defaultValue false
    */
   useSFAKey?: boolean;
@@ -115,13 +115,13 @@ export interface IWeb3AuthCoreOptions {
   /**
    * Connectors to use
    */
-  connectors?: ConnectorFn[];
+  Connectors?: ConnectorFn[];
   /**
    * Plugins to use
    */
   plugins?: PluginFn[];
   /**
-   * Whether to enable multi injected provider discovery
+   * Whether to enable multi injected Provider discovery
    * @defaultValue true
    */
   multiInjectedProviderDiscovery?: boolean;
@@ -130,7 +130,7 @@ export interface IWeb3AuthCoreOptions {
    */
   walletServicesConfig?: WalletServicesConfig;
   /**
-   * Private key provider for xrpl, mpc cases
+   * Private key Provider for xrpl, mpc cases
    */
   privateKeyProvider?: IBaseProvider<string>;
   /**
@@ -140,17 +140,17 @@ export interface IWeb3AuthCoreOptions {
    */
   ssr?: boolean;
   /**
-   * Build environment for Auth connector
+   * Build environment for Auth Connector
    * @internal
    * @defaultValue BUILD_ENV.PRODUCTION
    */
   authBuildEnv?: BUILD_ENV_TYPE;
   /**
-   * MFA settings for the auth connector
+   * MFA settings for the auth Connector
    */
   mfaSettings?: MfaSettings;
   /**
-   * MFA level for the auth connector
+   * MFA level for the auth Connector
    */
   mfaLevel?: MfaLevelType;
 }

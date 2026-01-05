@@ -2,14 +2,14 @@
 title: Migrating Custom Authentication from v7 to v10
 description:
   Comprehensive guide for migrating Web3Auth custom authentication configurations from verifiers to
-  connections in v10.
+  Connections in v10.
 sidebar_label: Custom Authentication Migration
 ---
 
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# Web3Auth v10 Custom Authentication Migration Guide
+# Web3Auth v10 custom authentication migration guide
 
 This guide focuses specifically on migrating custom authentication configurations from Web3Auth v7
 to v10. This covers the transition from "Verifiers" to "Connections" and "Grouped Connections". This
@@ -18,15 +18,15 @@ is a supplementary guide to the main [v7 to v10 migration guide](README.mdx).
 ## Overview
 
 In v7, custom authentication used `verifier` and `aggregate verifier` configurations for linking
-accounts from different social providers to the same underlying user wallet. In v10, this system is
+Accounts from different social Providers to the same underlying user wallet. In v10, this system is
 streamlined with "Connections" and "Grouped Connections" configured on the Web3Auth Developer
 Dashboard, significantly reducing client-side code complexity.
 
-## Key Changes & Mapping
+## Key changes & Mapping
 
-### 1. Single Verifiers (v7) to Single Connections (v10)
+### 1. Single verifiers (v7) to Single Connections (v10)
 
-Single verifiers in v7 become connections in v10:
+Single verifiers in v7 become Connections in v10:
 
 ```typescript
 // remove-start
@@ -47,16 +47,16 @@ await web3auth.initModal()
 // remove-end
 
 // add-start
-const web3AuthOptions: Web3AuthOptions = {
+const Web3authOptions: Web3AuthOptions = {
   clientId: 'YOUR_CLIENT_ID',
   // ...
   modalConfig: {
-    connectors: {
+    Connectors: {
       [WALLET_CONNECTORS.AUTH]: {
         loginMethods: {
           google: {
             name: 'Google Login',
-            authConnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID', // v10 connection ID
+            authConnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID', // v10 Connection ID
           },
         },
       },
@@ -64,8 +64,8 @@ const web3AuthOptions: Web3AuthOptions = {
   },
 }
 
-// OR v10: connectTo with a single connection
-// await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+// OR v10: ConnectTo with a single Connection
+// await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
 //   authConnection: AUTH_CONNECTION.GOOGLE,
 //   authConnectionId: "YOUR_GOOGLE_AUTH_CONNECTION_ID",
 // });
@@ -76,12 +76,12 @@ const web3AuthOptions: Web3AuthOptions = {
 
 Your existing v7 single verifiers will be automatically migrated to "Connections" on the new
 Web3Auth Developer Dashboard. Locate your migrated Connection, note its `authConnectionId`, and use
-this ID in your v10 client code (`modalConfig` or `connectTo`). Remove any v7 `OpenloginAdapter`
+this ID in your v10 client code (`modalConfig` or `ConnectTo`). Remove any v7 `OpenloginAdapter`
 configuration previously used for this verifier.
 
-### 2. Aggregate Verifiers (v7) to Grouped Connections (v10)
+### 2. Aggregate verifiers (v7) to Grouped Connections (v10)
 
-Aggregate verifiers in v7 become grouped connections in v10:
+Aggregate verifiers in v7 become grouped Connections in v10:
 
 ```typescript
 // remove-start
@@ -114,16 +114,16 @@ await web3auth.initModal()
 // remove-end
 
 // add-start
-const web3AuthOptions: Web3AuthOptions = {
+const Web3authOptions: Web3AuthOptions = {
   clientId: 'YOUR_CLIENT_ID',
   // ...
   modalConfig: {
-    connectors: {
+    Connectors: {
       [WALLET_CONNECTORS.AUTH]: {
         loginMethods: {
           google: {
             name: 'Google Login',
-            authConnectionId: 'YOUR_INDIVIDUAL_GOOGLE_CONNECTION_ID', // ID of the individual Google connection
+            authConnectionId: 'YOUR_INDIVIDUAL_GOOGLE_CONNECTION_ID', // ID of the individual Google Connection
             groupedAuthConnectionId: 'YOUR_GROUPED_CONNECTION_ID_FROM_DASHBOARD', // ID of the group
           },
           myCustomJWT: {
@@ -137,9 +137,9 @@ const web3AuthOptions: Web3AuthOptions = {
   },
 }
 
-// OR v10: connectTo with a grouped connection
+// OR v10: ConnectTo with a grouped Connection
 // For Google login part of the group:
-// await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+// await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
 //   authConnection: AUTH_CONNECTION.GOOGLE,
 //   authConnectionId: "YOUR_INDIVIDUAL_GOOGLE_CONNECTION_ID",
 //   groupedAuthConnectionId: "YOUR_GROUPED_CONNECTION_ID_FROM_DASHBOARD",
@@ -147,7 +147,7 @@ const web3AuthOptions: Web3AuthOptions = {
 
 // For Custom JWT login part of the group:
 // const idToken = await getMyIdToken();
-// await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+// await web3auth.ConnectTo(WALLET_CONNECTORS.AUTH, {
 //   authConnection: AUTH_CONNECTION.CUSTOM,
 //   idToken: idToken,
 //   authConnectionId: "YOUR_INDIVIDUAL_CUSTOM_JWT_CONNECTION_ID",
@@ -156,13 +156,13 @@ const web3AuthOptions: Web3AuthOptions = {
 // add-end
 ```
 
-You first create individual "Connections" on the dashboard for each auth provider (e.g., one for
+You first create individual "Connections" on the dashboard for each auth Provider (e.g., one for
 Google, one for your custom JWT). Then, you create a "Grouped Connection" on the dashboard,
-selecting the individual connections you want to group.
+selecting the individual Connections you want to group.
 
 #### Action
 
-1. Your existing v7 Aggregate Verifiers (and their sub-verifiers) will be automatically migrated to
+1. Your existing v7 Aggregate verifiers (and their sub-verifiers) will be automatically migrated to
    the new v10 dashboard. They will appear as individual "Connections" that are part of a "Grouped
    Connection".
 2. On the v10 dashboard, locate your migrated Grouped Connection. Note its
@@ -171,14 +171,14 @@ selecting the individual connections you want to group.
    and note its specific `authConnectionId`.
 4. Update your v10 client code to use both the `groupedAuthConnectionId` (for the group) and the
    specific `authConnectionId` (for the particular login method being invoked) in `modalConfig` or
-   `connectTo` calls. The v7 `verifierSubIdentifier` is no longer used in the client.
+   `ConnectTo` calls. The v7 `verifierSubIdentifier` is no longer used in the client.
 
 ## Summary
 
 This dashboard-centric approach, with automatic migration of existing verifiers, simplifies
 client-side logic and provides a more robust way to manage authentication methods.
 
-## Next Steps
+## Next steps
 
 Return to the main [v7 to v10 migration guide](README.mdx) to continue with other
 migration aspects like method name changes and initialization updates.

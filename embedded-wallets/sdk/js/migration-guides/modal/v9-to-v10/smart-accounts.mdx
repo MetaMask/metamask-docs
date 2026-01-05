@@ -7,22 +7,22 @@ sidebar_label: Smart Account Migration
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# Web3Auth v10 Smart Account Migration Guide
+# Web3Auth v10 smart account migration guide
 
 This guide focuses specifically on migrating Smart Account configurations from Web3Auth v9 to v10. This is a supplementary guide to the main [v9 to v10 migration guide](README.mdx).
 
 ## Overview
 
-Smart Account integration has been significantly streamlined in v10. The primary configuration is now managed on the dashboard, and the functionality is built directly into the main SDK, eliminating the need for separate provider packages.
+Smart Account integration has been significantly streamlined in v10. The primary configuration is now managed on the dashboard, and the functionality is built directly into the main SDK, eliminating the need for separate Provider packages.
 
-## Migration Steps
+## Migration steps
 
 ```typescript
 // remove-start
 import {
   AccountAbstractionProvider,
   SafeSmartAccount,
-} from '@web3auth/account-abstraction-provider'
+} from '@web3auth/account-abstraction-Provider'
 
 const chainConfig = {
   // Chain config
@@ -41,7 +41,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   privateKeyProvider,
   accountAbstractionProvider,
 })
@@ -50,9 +50,9 @@ const web3auth = new Web3Auth({
 // add-start
 import { WEB3AUTH_NETWORK, Web3AuthOptions } from '@web3auth/modal'
 
-const web3AuthOptions: Web3AuthOptions = {
+const Web3authOptions: Web3AuthOptions = {
   clientId: 'YOUR_CLIENT_ID',
-  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+  Web3authNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
   // Optional: Custom Smart Account configuration
   accountAbstractionConfig: {
     smartAccountType: 'SMART_ACCOUNT_TYPE',
@@ -65,7 +65,7 @@ const web3AuthOptions: Web3AuthOptions = {
           // Please refer to the documentation of the paymaster you are using
           // to understand the required parameters.
           paymasterContext: {
-            token: 'SUPPORTED_TOKEN_CONTRACT_ADDRESS',
+            Token: 'SUPPORTED_TOKEN_CONTRACT_ADDRESS',
             sponsorshipPolicyId: 'sp_my_policy_id',
           },
         },
@@ -79,21 +79,21 @@ const web3AuthOptions: Web3AuthOptions = {
 // add-end
 ```
 
-The `@web3auth/account-abstraction-provider` has been deprecated. You can now enable Smart Accounts and configure the bundler and paymaster directly from the Web3Auth Dashboard.
+The `@web3auth/account-abstraction-Provider` has been deprecated. You can now enable Smart Accounts and configure the bundler and paymaster directly from the Web3Auth Dashboard.
 
-![Smart Accounts Section](https://i.ibb.co/gZYNwVyy/smart-accounts.gif)
+![Smart Accounts Section](https://i.ibb.co/gZYNwVyy/smart-Accounts.gif)
 
 See [Web3Auth React Smart Accounts](/embedded-wallets/sdk/react/advanced/smart-accounts) to learn more.
 
-If you want to override the Smart Account provider, bundler, paymaster, or paymaster context, you can now pass the custom configuration directly to `Web3AuthOptions` as shown above.
+If you want to override the Smart Account Provider, bundler, paymaster, or paymaster context, you can now pass the custom configuration directly to `Web3AuthOptions` as Shown above.
 
-## Key Changes
+## Key changes
 
-- **Package Removal**: Remove `@web3auth/account-abstraction-provider` package
-- **Dashboard Configuration**: Primary Smart Account settings are now managed on the Web3Auth Developer Dashboard
+- **Package removal**: Remove `@web3auth/account-abstraction-Provider` package
+- **Dashboard configuration**: Primary Smart Account settings are now managed on the Web3Auth Developer Dashboard
 - **Simplified Integration**: Smart Account functionality is built directly into the main SDK
 - **Optional Override**: Use `accountAbstractionConfig` in `Web3AuthOptions` for custom configurations
 
-## Next Steps
+## Next steps
 
 Return to the main [v9 to v10 migration guide](README.mdx) to continue with other migration aspects like MFA configurations and method renames.

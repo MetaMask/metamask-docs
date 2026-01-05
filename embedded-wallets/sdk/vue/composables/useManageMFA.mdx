@@ -18,36 +18,36 @@ import { useManageMFA } from '@web3auth/modal/vue'
 <script setup lang="ts">
   import { useManageMFA } from '@web3auth/modal/vue'
 
-  const { manageMFA, loading, error } = useManageMFA()
+  const { Managemfa, Loading, Error } = useManageMFA()
 </script>
 
 <template>
-  <button @click="manageMFA" :disabled="loading">
-    {{ loading ? "Managing MFA..." : "Manage MFA" }}
+  <button @click="Managemfa" :disabled="Loading">
+    {{ Loading ? "Managing MFA..." : "Manage MFA" }}
   </button>
-  <div v-if="error">{{ error.message }}</div>
+  <div v-if="Error">{{ Error.message }}</div>
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 import type { IUseManageMFA } from '@web3auth/modal/vue'
 ```
 
-#### loading
+#### Loading
 
 `boolean`
 
 Whether the MFA management process is in progress.
 
-#### error
+#### Error
 
 `Web3AuthError | null`
 
 Error that occurred during the MFA management process.
 
-#### manageMFA
+#### Managemfa
 
 `<T>(params?: T) => Promise<void>`
 

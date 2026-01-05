@@ -1,7 +1,7 @@
 ---
-title: Advanced Configuration
+title: Advanced configuration
 sidebar_label: Overview
-description: 'Web3Auth React Native SDK - Advanced Configuration | Embedded Wallets'
+description: 'Web3Auth React Native SDK - Advanced configuration | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -9,15 +9,15 @@ import Tabs from '@theme/Tabs'
 
 The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your React Native application's specific requirements.
 
-## Configuration Structure
+## Configuration structure
 
 When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
 
 <Tabs
   defaultValue="expo"
   values={[
-    { label: "Expo Managed Workflow", value: "expo" },
-    { label: "Bare React Native Workflow", value: "bare" },
+    { label: "Expo-managed workflow", value: "expo" },
+    { label: "Bare React Native workflow", value: "bare" },
   ]}
 >
 
@@ -31,13 +31,13 @@ import * as SecureStore from 'expo-secure-store'
 const scheme = 'web3authrnexample'
 const resolvedRedirectUrl = `${scheme}://auth`
 
-// focus-start
+// Focus-start
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
-// focus-end
+// Focus-end
 ```
 
 </TabItem>
@@ -52,13 +52,13 @@ import EncryptedStorage from 'react-native-encrypted-storage'
 const scheme = 'web3authrnexample'
 const resolvedRedirectUrl = `${scheme}://auth`
 
-// focus-start
+// Focus-start
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
-// focus-end
+// Focus-end
 ```
 
 </TabItem>
@@ -107,11 +107,11 @@ export interface Web3AuthOptions {
 </TabItem>
 </Tabs>
 
-## Session Management
+## Session management
 
 Control how long users stay authenticated and how sessions persist in React Native.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -127,18 +127,18 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
 })
 ```
 
-## Custom Authentication Methods
+## Custom authentication methods
 
 Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication.mdx) section.
 
-## UI Customization
+## UI customization
 
 Create a seamless brand experience by customizing the Web3Auth Login Screens to match your React Native application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
-## DApp Share
+## Dapp share
 
 Share authentication sessions across different applications. For detailed configuration options and implementation examples, see the [DApp Share](./dapp-share.mdx) section.

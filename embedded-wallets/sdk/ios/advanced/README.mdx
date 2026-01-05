@@ -1,7 +1,7 @@
 ---
-title: Advanced Configuration
+title: Advanced configuration
 sidebar_label: Overview
-description: 'Web3Auth iOS SDK - Advanced Configuration | Embedded Wallets'
+description: 'Web3Auth iOS SDK - Advanced configuration | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -9,20 +9,20 @@ import Tabs from '@theme/Tabs'
 
 The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
 
-## Configuration Structure
+## Configuration structure
 
 When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
 
 ```swift
 import Web3Auth
 
-// focus-start
-web3Auth = Web3Auth(W3AInitParams(
+// Focus-start
+Web3auth = Web3Auth(W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
     network: .sapphire_mainnet, // or .sapphire_devnet
     redirectUrl: "com.yourapp.bundleid://auth"
 ))
-// focus-end
+// Focus-end
 ```
 
 ### `W3AInitParams`
@@ -82,11 +82,11 @@ public struct W3AInitParams {
 </TabItem>
 </Tabs>
 
-## Session Management
+## Session management
 
 Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keychain.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
@@ -94,7 +94,7 @@ Control how long users stay authenticated and how sessions persist. The session 
   - Default: 7 days (`86400 * 7`).
 
 ```swift
-web3Auth = Web3Auth(W3AInitParams(
+Web3auth = Web3Auth(W3AInitParams(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
     network: .sapphire_mainnet, // or .sapphire_devnet
     sessionTime: 86400 * 7, // 7 days (in seconds)
@@ -102,19 +102,19 @@ web3Auth = Web3Auth(W3AInitParams(
 ))
 ```
 
-## Custom Authentication Methods
+## Custom authentication methods
 
 Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication.mdx) section.
 
-## UI Customization
+## UI customization
 
 Create a seamless brand experience by customizing the Web3Auth Login Screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user Accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 
-**Key Configuration Options:**
+**Key Configuration options:**
 
 - `mfaSettings` - Configure MFA settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA

@@ -3,11 +3,11 @@ title: Blockchain Connection
 description: 'Integrate with Blockchain Networks'
 ---
 
-Web3Auth Node SDK supports multiple blockchain networks through different integration methods. On a successful connection, it returns a `result` object containing the provider/ signer for blockchain operations.
+Web3Auth Node SDK supports multiple blockchain networks through different integration methods. On a successful Connection, it returns a `result` object containing the Provider/ signer for blockchain operations.
 
-By default you get the standard Web3Auth provider, with the ability to get the private key, if enabled from the dashboard. You additionally get the signer for EVM and Solana chains, to be able to do transactions without the need to use the private key provider directly.
+By default you get the standard Web3Auth Provider, with the ability to get the private key, if enabled from the dashboard. You additionally get the signer for EVM and Solana chains, to be able to do transactions without the need to use the private key Provider directly.
 
-### Object Structure
+### Object structure
 
 ```typescript
 import type { TransactionSigner } from '@solana/signers'
@@ -18,72 +18,72 @@ export type PrivateKeyProvider = IBaseProvider<string>
 export type WalletResult =
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.SOLANA
-      provider: PrivateKeyProvider
+      Provider: PrivateKeyProvider
       signer: TransactionSigner
     }
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.EIP155
-      provider: PrivateKeyProvider
+      Provider: PrivateKeyProvider
       signer: Wallet
     }
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.OTHER
-      provider: PrivateKeyProvider
+      Provider: PrivateKeyProvider
       signer: null
     }
 ```
 
-### EVM Chains (Ethereum, Polygon, BSC, etc.)
+### EVM chains (Ethereum, Polygon, BSC)
 
-Use the provider with ethers.js or convert to viem:
+Use the Provider with ethers.js or convert to viem:
 
 ```javascript
-// focus-next-line
+// Focus-next-line
 const { ethers } = require('ethers')
 
 // Get Ethereum Accounts
 const getAccounts = async signer => {
   try {
-    // focus-next-line
+    // Focus-next-line
     const address = await signer.getAddress()
     console.log('\x1b[33m%s\x1b[0m', 'Accounts:', address)
-  } catch (error) {
-    console.error('\x1b[33m%s\x1b[0m', 'Error fetching accounts:', error)
+  } catch (Error) {
+    console.Error('\x1b[33m%s\x1b[0m', 'Error fetching Accounts:', Error)
   }
 }
 
 // Get Ethereum Balance
 const getBalance = async signer => {
   try {
-    // focus-start
+    // Focus-start
     const address = await signer.getAddress()
     const balance = ethers.formatEther(
-      await signer.provider.getBalance(address) // Balance is in wei
+      await signer.Provider.getBalance(address) // Balance is in wei
     )
-    // focus-end
+    // Focus-end
     console.log('\x1b[33m%s\x1b[0m', 'Balance:', balance, 'ETH')
-  } catch (error) {
-    console.error('\x1b[33m%s\x1b[0m', 'Error fetching balance:', error)
+  } catch (Error) {
+    console.Error('\x1b[33m%s\x1b[0m', 'Error fetching balance:', Error)
   }
 }
 
 // Sign Ethereum Message
-const signMessage = async (signer, message) => {
+const Signmessage = async (signer, message) => {
   try {
-    // focus-next-line
-    const signature = await signer.signMessage(message)
+    // Focus-next-line
+    const signature = await signer.Signmessage(message)
     console.log('\x1b[33m%s\x1b[0m', 'Signed Message:', signature)
-  } catch (error) {
-    console.error('\x1b[33m%s\x1b[0m', 'Error signing message:', error)
+  } catch (Error) {
+    console.Error('\x1b[33m%s\x1b[0m', 'Error signing message:', Error)
   }
 }
 
 await getAccounts(result.signer) // Get Ethereum Accounts
 await getBalance(result.signer) // Get Ethereum Balance
-await signMessage(result.signer, 'Hello Web3Auth!') // Sign a Message
+await Signmessage(result.signer, 'Hello Web3Auth!') // Sign a Message
 ```
 
-### Solana Integration
+### Solana integration
 
 Access Solana wallet functionality:
 
@@ -94,46 +94,46 @@ const { createSignableMessage } = require('@solana/signers')
 // Get Solana Accounts
 const getAccounts = async signer => {
   try {
-    // focus-next-line
+    // Focus-next-line
     const publicKey = signer.address
     console.log('\x1b[33m%s\x1b[0m', 'Public Key:', publicKey)
-  } catch (error) {
-    console.error('\x1b[33m%s\x1b[0m', 'Error fetching accounts:', error)
+  } catch (Error) {
+    console.Error('\x1b[33m%s\x1b[0m', 'Error fetching Accounts:', Error)
   }
 }
 
 // Get Solana Balance
 const getBalance = async signer => {
   try {
-    // focus-start
+    // Focus-start
     const publicKey = new PublicKey(signer.address)
-    const connection = new Connection('https://api.devnet.solana.com')
-    const balance = (await connection.getBalance(publicKey)) / LAMPORTS_PER_SOL
-    // focus-end
+    const Connection = new Connection('https://api.devnet.solana.com')
+    const balance = (await Connection.getBalance(publicKey)) / LAMPORTS_PER_SOL
+    // Focus-end
     console.log('\x1b[33m%s\x1b[0m', 'Balance:', balance, 'SOL')
-  } catch (error) {
-    console.error('\x1b[33m%s\x1b[0m', 'Error fetching balance:', error)
+  } catch (Error) {
+    console.Error('\x1b[33m%s\x1b[0m', 'Error fetching balance:', Error)
   }
 }
 
 // Sign Solana Message
-const signMessage = async (signer, message) => {
+const Signmessage = async (signer, message) => {
   try {
-    // focus-start
+    // Focus-start
     const messageBytes = new TextEncoder().encode(message)
 
     // Create a SignableMessage object from Uint8Array
     const signableMessage = createSignableMessage(messageBytes)
 
-    const [signature] = await signer.signMessages([signableMessage])
-    // focus-end
+    const [signature] = await signer.Signmessages([signableMessage])
+    // Focus-end
     console.log('\x1b[33m%s\x1b[0m', 'Signed Message:', signature)
-  } catch (error) {
-    console.error('\x1b[33m%s\x1b[0m', 'Error signing message:', error)
+  } catch (Error) {
+    console.Error('\x1b[33m%s\x1b[0m', 'Error signing message:', Error)
   }
 }
 
 await getAccounts(result.signer) // Get Solana Accounts
 await getBalance(result.signer) // Get Solana Balance
-await signMessage(result.signer, 'Hello Web3Auth!') // Sign a Message
+await Signmessage(result.signer, 'Hello Web3Auth!') // Sign a Message
 ```
