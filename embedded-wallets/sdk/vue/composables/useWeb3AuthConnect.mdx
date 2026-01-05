@@ -105,32 +105,27 @@ import type { IUseWeb3Authconnect } from '@web3auth/modal/vue'
 
 Whether the user is connected to Web3Auth.
 
-#### loading
-
+#### Loading
 `boolean`
 
 Whether the connection process is in progress.
 
-#### error
-
+#### Error
 `Web3Autherror | null`
 
 error that occurred during the connection process.
 
-#### connectorName
-
+#### Connectorname
 `WALLET_CONNECTOR_TYPE | null`
 
 Name of the connected connector.
 
-#### connect
-
+#### Connect
 `() => Promise<Iprovider | null>`
 
 Function to initiate the connection process. Opens the Web3Auth modal UI.
 
-#### connectTo
-
+#### Connectto
 `<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]) => Promise<Iprovider | null>`
 
 Function to connect directly to a specific wallet connector. This bypasses the Web3Auth modal UI, allowing you to build custom interfaces. This method also allows you to use JWT based login configurations.

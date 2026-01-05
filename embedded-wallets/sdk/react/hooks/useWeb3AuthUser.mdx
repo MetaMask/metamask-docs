@@ -43,32 +43,27 @@ function UserInfo() {
 import { type IUseWeb3AuthUser } from '@web3auth/modal/react'
 ```
 
-#### loading
-
+#### Loading
 `boolean`
 
 Whether the user info fetching process is in progress.
 
-#### error
-
+#### Error
 `Web3Autherror | null`
 
 error that occurred during the user info fetching process.
 
-#### userInfo
-
+#### Userinfo
 `Partial<UserInfo> | null`
 
 The current user's information, or null if not available.
 
-#### isMFAEnabled
-
+#### Ismfaenabled
 `boolean`
 
 Whether Multi-Factor Authentication (MFA) is enabled for the user.
 
-#### getUserInfo
-
+#### Getuserinfo
 `() => Promise<Partial<UserInfo> | null>`
 
 Function to fetch the latest user information from Web3Auth.

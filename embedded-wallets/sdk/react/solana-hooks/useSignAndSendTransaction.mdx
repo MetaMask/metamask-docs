@@ -57,26 +57,22 @@ export type IUseSignAndSendTransaction = {
 }
 ```
 
-#### loading
-
+#### Loading
 `boolean`
 
 Indicates if the transaction signing and sending is in progress.
 
-#### error
-
+#### Error
 `Web3Autherror | null`
 
 error object if signing or sending fails, otherwise null.
 
-#### data
-
+#### Data
 `string | null`
 
 The transaction signature as a string, or null if not signed yet.
 
-#### signAndSendTransaction
-
+#### Signandsendtransaction
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
 Function to sign and send a transaction. Returns the transaction signature as a string.

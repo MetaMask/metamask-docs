@@ -48,8 +48,7 @@ Add `web3auth_flutter` using `flutter pub add` command:
 flutter pub add web3auth_flutter
 ```
 
-### 1. Android Configuration
-
+### 1. Android configuration
 Once we have installed Web3Auth Flutter SDK, we also need to add the configuration for Android.
 
 #### Update compilesdkversion
@@ -89,8 +88,7 @@ Open your app's `AndroidManifest.xml` file and add the following permission. Ple
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-#### Configure Deep Link
-
+#### Configure deep link
 Open your app's `AndroidManifest.xml` file and add the following deep link intent filter to your Main activity:
 
 ```xml
@@ -142,8 +140,7 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
 }
 ```
 
-### 2. iOS Configuration
-
+### 2. iOS configuration
 #### Update global iOS platform
 
 For iOS build global platform needs to be 14.0. Check `Podfile` in your project to change the global platform:
@@ -152,15 +149,13 @@ For iOS build global platform needs to be 14.0. Check `Podfile` in your project 
 platform :ios, '14.0'
 ```
 
-### 3. Configure Redirection
-
+### 3. Configure redirection
 - Go to [Web3Auth Developer Dashboard](https://dashboard.web3auth.io), and create or open an existing Web3Auth project.
 - For iOS, whitelist `{bundleId}://auth` in the developer dashboard. This step is mandatory for the redirect to work.
 
 ## Initialize Web3Auth
 
-### 1. Configure Web3Auth Instance
-
+### 1. Configure Web3Auth instance
 Import and configure Web3Auth in your Flutter application:
 
 ```dart title="main.dart"
@@ -237,8 +232,7 @@ If the API call to fetch the project configuration fails, the method will throw 
 
 :::
 
-## Advanced Configuration
-
+## Advanced configuration
 The Web3Auth Flutter SDK offers a rich set of advanced configuration options:
 
 - **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.

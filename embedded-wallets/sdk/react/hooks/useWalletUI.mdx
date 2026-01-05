@@ -37,20 +37,17 @@ function WalletUIButton() {
 import { type IUseWalletUI } from '@web3auth/modal/react'
 ```
 
-#### loading
-
+#### Loading
 `boolean`
 
 Whether the Wallet UI opening process is in progress.
 
-#### error
-
+#### Error
 `Web3Autherror | null`
 
 error that occurred during the Wallet UI opening process.
 
-#### showWalletUI
-
+#### Showwalletui
 `(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
 
 Function to show the Wallet services modal UI. Accepts optional parameters for customizing the wallet UI experience.

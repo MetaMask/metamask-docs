@@ -38,26 +38,22 @@ import { useIdentitytoken } from '@web3auth/modal/vue'
 import type { IUseIdentitytoken } from '@web3auth/modal/vue'
 ```
 
-#### loading
-
+#### Loading
 `Ref<boolean>`
 
 Whether the authentication process is in progress.
 
-#### error
-
+#### Error
 `Ref<Web3Autherror | null>`
 
 error that occurred during the authentication process.
 
-#### token
-
+#### Token
 `Ref<string | null>`
 
 The identity token returned after successful authentication.
 
-#### getIdentityToken
-
+#### Getidentitytoken
 `() => Promise<string | null>`
 
 Function to initiate the authentication process and retrieve the identity token.

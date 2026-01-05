@@ -37,20 +37,17 @@ function EnableMFAButton() {
 import { type IUseEnableMFA } from '@web3auth/modal/react'
 ```
 
-#### loading
-
+#### Loading
 `boolean`
 
 Whether the MFA enabling process is in progress.
 
-#### error
-
+#### Error
 `Web3Autherror | null`
 
 error that occurred during the MFA enabling process.
 
-#### enableMFA
-
+#### Enablemfa
 `<T>(params?: T) => Promise<void>`
 
 Function to initiate the MFA enabling process. Accepts optional parameters depending on the MFA method or configuration required by your implementation.

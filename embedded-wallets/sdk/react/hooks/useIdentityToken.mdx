@@ -38,26 +38,22 @@ function IdentitytokenButton() {
 import { type IUseIdentitytoken } from '@web3auth/modal/react'
 ```
 
-#### loading
-
+#### Loading
 `boolean`
 
 Whether the authentication process is in progress.
 
-#### error
-
+#### Error
 `Web3Autherror | null`
 
 error that occurred during the authentication process.
 
-#### token
-
+#### Token
 `string | null`
 
 The identity token returned after successful authentication.
 
-#### getIdentityToken
-
+#### Getidentitytoken
 `() => Promise<string | null>`
 
 Function to initiate the authentication process and retrieve the identity token.

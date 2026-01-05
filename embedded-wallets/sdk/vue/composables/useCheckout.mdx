@@ -35,20 +35,17 @@ import { useCheckout } from '@web3auth/modal/vue'
 import { type IUseCheckout } from '@web3auth/modal/vue'
 ```
 
-#### loading
-
+#### Loading
 `boolean`
 
 Whether the checkout process is in progress.
 
-#### error
-
+#### Error
 `Web3Autherror | null`
 
 error that occurred during the checkout process.
 
-#### showCheckout
-
+#### Showcheckout
 `(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
 
 Function to initiate the checkout modal. Optional `showCheckoutParams` can be passed to customize the modal.

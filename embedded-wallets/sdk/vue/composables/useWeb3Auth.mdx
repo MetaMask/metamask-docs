@@ -51,8 +51,7 @@ import { useWeb3Auth } from '@web3auth/modal/vue'
 import type { IUseWeb3Auth } from '@web3auth/modal/vue'
 ```
 
-#### initError
-
+#### Initerror
 `Ref<error | null>`
 
 error that occurred during Web3Auth initialization.
@@ -62,38 +61,32 @@ error that occurred during Web3Auth initialization.
 
 Whether the user is connected to Web3Auth.
 
-#### isInitialized
-
+#### Isinitialized
 `Ref<boolean>`
 
 Whether Web3Auth has completed initialization.
 
-#### isInitializing
-
+#### Isinitializing
 `Ref<boolean>`
 
 Whether Web3Auth is currently initializing.
 
-#### provider
-
+#### Provider
 `Ref<Iprovider | null>`
 
 connected provider from Web3Auth.
 
-#### status
-
+#### Status
 `Ref<string>`
 
 Current status of the Web3Auth connection.
 
-#### web3Auth
-
+#### Web3auth
 `Ref<Web3Auth>`
 
 The Web3Auth instance.
 
-#### getPlugin
-
+#### Getplugin
 `(pluginName: PLUGIN_NAME) => IPlugin | null`
 
 Helper function to get a plugin by name.

@@ -35,20 +35,17 @@ import { useSwitchChain } from '@web3auth/modal/vue'
 import { type IUseSwitchChain } from '@web3auth/modal/vue'
 ```
 
-#### loading
-
+#### Loading
 `boolean`
 
 Whether the chain switching process is in progress.
 
-#### error
-
+#### Error
 `Web3Autherror | null`
 
 error that occurred during the chain switching process.
 
-#### switchChain
-
+#### Switchchain
 `(chainId: string) => Promise<void>`
 
 Function to initiate the chain switch. Pass the target `chainId` as a string (e.g., "0x1" for Ethereum Mainnet).

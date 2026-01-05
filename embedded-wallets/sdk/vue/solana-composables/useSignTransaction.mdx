@@ -59,26 +59,22 @@ export type IUseSignTransaction = {
 }
 ```
 
-#### loading
-
+#### Loading
 `Ref<boolean>`
 
 Indicates if the transaction signing is in progress.
 
-#### error
-
+#### Error
 `Ref<Web3Autherror | null>`
 
 error object if signing fails, otherwise null.
 
-#### data
-
+#### Data
 `Ref<string | null>`
 
 The signed transaction as a string, or null if not signed yet.
 
-#### signTransaction
-
+#### Signtransaction
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
 Function to sign a Solana transaction. Returns the signed transaction as a string.

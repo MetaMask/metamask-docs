@@ -52,26 +52,22 @@ export type IUseSignMessage = {
 }
 ```
 
-#### loading
-
+#### Loading
 `boolean`
 
 Indicates if the message signing is in progress.
 
-#### error
-
+#### Error
 `Web3Autherror | null`
 
 error object if signing fails, otherwise null.
 
-#### data
-
+#### Data
 `string | null`
 
 The signature as a string, or null if not signed yet.
 
-#### signMessage
-
+#### Signmessage
 `(message: string) => Promise<string>`
 
 Function to sign a message. Returns the signature as a string.
