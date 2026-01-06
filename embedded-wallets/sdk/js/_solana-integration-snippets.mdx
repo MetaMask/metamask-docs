@@ -51,7 +51,7 @@ const solanaWallet = new SolanaWallet(provider)
 
 ```tsx
 import {
-  connection,
+  Connection,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
@@ -128,7 +128,7 @@ const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>
   params: [],
 })
 
-const connection = new connection(connectionConfig.rpcTarget)
+const connection = new Connection(connectionConfig.rpcTarget)
 
 const pubKey = await solanaWallet.requestAccounts()
 const { blockhash } = await connection.getRecentBlockhash('finalized')

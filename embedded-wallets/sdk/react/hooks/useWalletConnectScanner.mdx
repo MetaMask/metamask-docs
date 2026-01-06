@@ -1,29 +1,29 @@
 ---
-title: useWalletconnectScanner
-sidebar_label: useWalletconnectScanner
-description: '@web3auth/modal React Hooks useWalletconnectScanner | Embedded Wallets'
+title: useWalletConnectScanner
+sidebar_label: useWalletConnectScanner
+description: '@web3auth/modal React Hooks useWalletConnectScanner | Embedded Wallets'
 ---
 
-Hook to show the Walletconnect QR scanner using the Wallet Services Plugin.
+Hook to show the WalletConnect QR scanner using the Wallet Services Plugin.
 
 ### Import
 
 ```tsx
-import { useWalletconnectScanner } from '@web3auth/modal/react'
+import { useWalletConnectScanner } from '@web3auth/modal/react'
 ```
 
 ### Usage
 
 ```tsx
-import { useWalletconnectScanner } from '@web3auth/modal/react'
+import { useWalletConnectScanner } from '@web3auth/modal/react'
 
-function WalletconnectScannerButton() {
-  const { showWalletconnectScanner, loading, error } = useWalletconnectScanner()
+function WalletConnectScannerButton() {
+  const { showWalletConnectScanner, loading, error } = useWalletConnectScanner()
 
   return (
     <div>
-      <button onClick={() => showWalletconnectScanner()} disabled={loading}>
-        {loading ? 'Opening Scanner...' : 'show Walletconnect Scanner'}
+      <button onClick={() => showWalletConnectScanner()} disabled={loading}>
+        {loading ? 'Opening Scanner...' : 'show WalletConnect Scanner'}
       </button>
       {error && <div>{error.message}</div>}
     </div>
@@ -34,7 +34,7 @@ function WalletconnectScannerButton() {
 ### Return type
 
 ```tsx
-import { type IUseWalletconnectScanner } from '@web3auth/modal/react'
+import { type IUseWalletConnectScanner } from '@web3auth/modal/react'
 ```
 
 #### Loading
@@ -48,8 +48,8 @@ Whether the scanner opening process is in progress.
 
 error that occurred during the scanner opening process.
 
-#### showWalletconnectScanner
+#### showWalletConnectScanner
 
-`(showWalletconnectScannerParams?: BaseEmbedControllerState["showWalletconnect"]) => Promise<void>`
+`(showWalletConnectScannerParams?: BaseEmbedControllerState["showWalletConnect"]) => Promise<void>`
 
-Function to show the Walletconnect QR scanner. Accepts optional parameters for customizing the scanner behavior.
+Function to show the WalletConnect QR scanner. Accepts optional parameters for customizing the scanner behavior.

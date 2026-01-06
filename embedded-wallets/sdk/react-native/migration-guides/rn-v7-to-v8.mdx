@@ -47,7 +47,7 @@ network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
 ```
 
 ### Mandatory privatekeyprovider in constructor
-The `privateKeyprovider` parameter must now be provided in the Web3Auth constructor:
+The `privateKeyProvider` parameter must now be provided in the Web3Auth constructor:
 
 <Tabs>
 <TabItem value="bare" label="Bare React Native" default>
@@ -58,7 +58,7 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   redirectUrl: redirectUrl,
   // add-next-line
-  privateKeyprovider: ethereumPrivateKeyprovider,
+  privateKeyProvider: ethereumPrivateKeyprovider,
 })
 ```
 
@@ -71,7 +71,7 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   redirectUrl: redirectUrl,
   // add-next-line
-  privateKeyprovider: ethereumPrivateKeyprovider,
+  privateKeyProvider: ethereumPrivateKeyprovider,
 })
 ```
 

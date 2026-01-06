@@ -94,7 +94,7 @@ You can configure the paymaster of your choice to sponsor gas fees for your user
 <TabItem value="rn-bare" default>
 
 ```ts
-import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 // focus-start
 import {
   AccountAbstractionprovider,
@@ -118,7 +118,7 @@ const chainConfig = {
 }
 
 // focus-start
-const accountAbstractionprovider = new AccountAbstractionprovider({
+const accountAbstractionProvider = new AccountAbstractionprovider({
   config: {
     chainConfig,
     bundlerConfig: {
@@ -130,7 +130,7 @@ const accountAbstractionprovider = new AccountAbstractionprovider({
 })
 // focus-end
 
-const privateKeyprovider = new EthereumPrivateKeyprovider({
+const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 })
 
@@ -138,9 +138,9 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   clientId,
   redirectUrl,
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
-  privateKeyprovider,
+  privateKeyProvider,
   // focus-next-line
-  accountAbstractionprovider: aaprovider,
+  accountAbstractionProvider: aaProvider,
 })
 ```
 
@@ -148,7 +148,7 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
 <TabItem value="rn-expo">
 
 ```ts
-import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 // focus-start
 import {
   AccountAbstractionprovider,
@@ -172,7 +172,7 @@ const chainConfig = {
 }
 
 // focus-start
-const accountAbstractionprovider = new AccountAbstractionprovider({
+const accountAbstractionProvider = new AccountAbstractionprovider({
   config: {
     chainConfig,
     bundlerConfig: {
@@ -184,7 +184,7 @@ const accountAbstractionprovider = new AccountAbstractionprovider({
 })
 // focus-end
 
-const privateKeyprovider = new EthereumPrivateKeyprovider({
+const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 })
 
@@ -192,9 +192,9 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   clientId,
   redirectUrl,
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
-  privateKeyprovider,
+  privateKeyProvider,
   // focus-next-line
-  accountAbstractionprovider: aaprovider,
+  accountAbstractionProvider: aaProvider,
 })
 ```
 

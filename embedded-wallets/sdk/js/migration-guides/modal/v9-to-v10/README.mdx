@@ -22,7 +22,7 @@ Building on the foundation of v9, key areas of evolution in v10 include:
 - **A Unified & Versatile SDK (`@web3auth/modal`):** Consolidates all functionalities into a single SDK supporting both pre-built modal UIs and custom user interfaces with one consistent API.
 - **Dashboard-Centric Configuration:** Login methods, connections (formerly verifiers), Smart Account settings, and chain configurations are now managed through the Web3Auth Developer Dashboard.
 - **Streamlined Login & connection Management:** Moves to a declarative approach with login methods defined on the dashboard and more direct client-side connection calls.
-- **Automated Blockchain Setup:** Standard blockchains no longer require manual `chainConfig` and `privateKeyprovider` setup as these are handled automatically via dashboard settings.
+- **Automated Blockchain Setup:** Standard blockchains no longer require manual `chainConfig` and `privateKeyProvider` setup as these are handled automatically via dashboard settings.
 - **Integrated Smart Account Functionality:** Smart Account configuration is managed on the dashboard with functionality built directly into the main SDK, eliminating separate provider packages.
 - **Simplified Multi-Factor Authentication (MFA):** MFA setup is streamlined with key settings configured directly during SDK initialization.
 - **Modernized Framework Support:** React and Vue applications now use streamlined hooks/composables with automatic SDK initialization.
@@ -43,12 +43,12 @@ npm install @web3auth/modal
 ```typescript
 import { Web3Auth } from '@web3auth/modal'
 // remove-start
-import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 import { getEvmChainConfig } from '@web3auth/base'
 
 const chainConfig = getEvmChainConfig(1, WEB3AUTH_CLIENT_ID)
 
-const ethereumPrivateKeyprovider = EthereumPrivateKeyprovider({
+const ethereumPrivateKeyprovider = EthereumPrivateKeyProvider({
   config: { chainConfig },
 })
 // remove-end
@@ -57,15 +57,15 @@ const web3auth = new Web3Auth({
   clientId: WEB3AUTH_CLIENT_ID, // Get your Client ID from the Embedded Wallets dashboard
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // remove-next-line
-  privateKeyprovider: ethereumPrivateKeyprovider,
+  privateKeyProvider: ethereumPrivateKeyprovider,
 })
 ```
 
-**In v10, chain configurations for standard EVM chains and passing of private key providers are not needed anymore. You will be able to switch chains in your dapp among the chains you've toggled on from the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io).**
+**In v10, chain configurations for standard EVM chains and passing of private key providers are not needed anymore. You will be able to switch chains in your dapp among the chains you've toggled on from the [Embedded Wallets dashboard](https://dashboard.web3auth.io).**
 
 ![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)
 
-This means the `chainConfig` and `privateKeyprovider` properties in `Web3AuthOptions` are not needed for v10 if you're using standard chains configured on your dashboard.
+This means the `chainConfig` and `privateKeyProvider` properties in `Web3AuthOptions` are not needed for v10 if you're using standard chains configured on your dashboard.
 
 You can also add custom chains on the dashboard and use them in your dapp.
 

@@ -46,8 +46,8 @@ console.log(userInfo)
 | `typeOfLogin` | string | Type of login provider. |
 | `dappShare` | string | Dapp share of the user. |
 | `idToken` | string | token issued by Web3Auth. |
-| `oAuthIdtoken` | string | token issued by OAuth provider. Will be available only if you are using custom verifiers. |
-| `oAuthAccesstoken` | string | Access token issued by OAuth provider. Will be available only if you are using custom verifiers. |
+| `oAuthIdToken` | string | token issued by OAuth provider. Will be available only if you are using custom verifiers. |
+| `oAuthAccessToken` | string | Access token issued by OAuth provider. Will be available only if you are using custom verifiers. |
 | `appState` | string | App state of the user. |
 | `touchIDPreference` | string | Touch ID preference of the user. |
 | `isMfaEnabled` | boolean | Whether Multi Factor Authentication is enabled for the user. |
@@ -76,12 +76,12 @@ type AuthUserInfo = {
    * token issued by OAuth provider. Will be available only if you are using
    * custom verifiers.
    */
-  oAuthIdtoken?: string;
+  oAuthIdToken?: string;
   /**
    * Access token issued by OAuth provider. Will be available only if you are using
    * custom verifiers.
    */
-  oAuthAccesstoken?: string;
+  oAuthAccessToken?: string;
   appState?: string;
   touchIDPreference?: string;
   isMfaEnabled?: boolean;
@@ -104,7 +104,7 @@ type AuthUserInfo = {
   "typeOfLogin": "google",
   "dappShare": "<24 words seed phrase>", // will be sent only in case of custom verifiers
   "idToken": "<JWT token issued by Web3Auth>",
-  "oAuthIdtoken": "<JWT token issued by OAuth provider>", // will be sent only in case of custom verifiers
-  "oAuthAccesstoken": "<Access token issued by OAuth provider>" // will be sent only in case of custom verifiers
+  "oAuthIdToken": "<JWT token issued by OAuth provider>", // will be sent only in case of custom verifiers
+  "oAuthAccessToken": "<Access token issued by OAuth provider>" // will be sent only in case of custom verifiers
 }
 ```

@@ -248,7 +248,7 @@ useEffect(() => {
       await web3auth.init()
       console.log('Web3Auth initialized successfully')
     } catch (error) {
-      console.error('error initializing Web3Auth:', error)
+      console.error('Error initializing Web3Auth:', error)
     }
   }
   init()
@@ -336,7 +336,7 @@ import '@ethersproject/shims'
 // Import the ethers library
 import { ethers } from 'ethers'
 // Import the Web3Auth Ethereum provider
-import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 
 // Define the chain config for the EVM network
 chainConfig = {
@@ -350,7 +350,7 @@ chainConfig = {
 }
 
 // Create an instance of the Web3Auth Ethereum provider
-const ethereumPrivateKeyprovider = new EthereumPrivateKeyprovider({
+const ethereumPrivateKeyprovider = new EthereumPrivateKeyProvider({
   config: {
     chainConfig,
   },
@@ -360,10 +360,10 @@ const ethereumPrivateKeyprovider = new EthereumPrivateKeyprovider({
 await ethereumPrivateKeyprovider.setupprovider(web3auth.privKey)
 
 // Create an instance of the ethers Browserprovider using the Web3Auth Ethereum provider
-const ethersprovider = new ethers.Browserprovider(ethereumPrivateKeyprovider)
+const ethersprovider = new ethers.BrowserProvider(ethereumPrivateKeyprovider)
 
 // Get the signer for ethers
-const signer = await ethersprovider.getSigner()
+const signer = await ethersProvider.getSigner()
 
 // Get the address of the user
 const address = signer.getAddress()
@@ -385,7 +385,7 @@ const getSolanaAccount = async () => {
     // Use private key with Solana libraries
     console.log('Solana private key:', privateKey)
   } catch (error) {
-    console.error('error getting private key:', error)
+    console.error('Error getting private key:', error)
   }
 }
 ```

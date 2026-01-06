@@ -254,10 +254,10 @@ To perform batch transactions, you must use the `BundlerClient` provided by Web3
 
 ```ts
 // Use your Web3Auth instance
-const accountAbstractionprovider = web3auth.accountAbstractionprovider
-// Use the same accountAbstractionprovider we created earlier.
-const bundlerClient = accountAbstractionprovider.bundlerClient!
-const smartAccount = accountAbstractionprovider.smartAccount!
+const accountAbstractionProvider = web3auth.accountAbstractionProvider
+// Use the same accountAbstractionProvider we created earlier.
+const bundlerClient = accountAbstractionProvider.bundlerClient!
+const smartAccount = accountAbstractionProvider.smartAccount!
 
 // 0.00001 ETH in WEI format
 const amount = 10000000000000n
@@ -298,11 +298,11 @@ You can use ERC-20 tokens to pay for transaction fees instead of the native toke
 
 ```ts
 // Use your Web3Auth instance
-const accountAbstractionprovider = web3auth.accountAbstractionprovider
+const accountAbstractionProvider = web3auth.accountAbstractionProvider
 
-// Use the same accountAbstractionprovider we created earlier.
-const bundlerClient = accountAbstractionprovider.bundlerClient!
-const smartAccount = accountAbstractionprovider.smartAccount!
+// Use the same accountAbstractionProvider we created earlier.
+const bundlerClient = accountAbstractionProvider.bundlerClient!
+const smartAccount = accountAbstractionProvider.smartAccount!
 
 // Pimlico's ERC-20 paymaster address
 const pimlicoPaymasterAddress = '0x0000000000000039cd5e8aE05257CE51C473ddd1'

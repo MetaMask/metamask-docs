@@ -486,10 +486,10 @@ const loginWithGoogle = async (idToken: string) => {
 ```html
 <script setup lang="ts">
   import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
-  import { useWeb3Authconnect } from '@web3auth/modal/vue'
+  import { useWeb3AuthConnect } from '@web3auth/modal/vue'
   import { Auth0Client } from '@auth0/auth0-spa-js'
 
-  const { connectTo } = useWeb3Authconnect()
+  const { connectTo } = useWeb3AuthConnect()
   const auth0Client = new Auth0Client({
     domain: 'YOUR_AUTH0_DOMAIN',
     clientId: 'YOUR_AUTH0_CLIENT_ID',
@@ -500,7 +500,7 @@ const loginWithGoogle = async (idToken: string) => {
 
   const loginWithAuth0 = async () => {
     await auth0Client.loginWithPopup()
-    const idToken = await auth0Client.getIdtokenClaims()
+    const idToken = await auth0Client.getIdTokenClaims()
 
     // focus-start
     await connectTo(WALLET_CONNECTORS.AUTH, {
@@ -528,9 +528,9 @@ const loginWithFirebaseGithub = async () => {
   try {
     const app = initializeApp(firebaseConfig)
     const auth = getAuth(app)
-    const githubprovider = new GithubAuthprovider()
+    const githubProvider = new GithubAuthProvider()
 
-    const result = await signInWithPopup(auth, githubprovider)
+    const result = await signInWithPopup(auth, githubProvider)
 
     const idToken = await result.user.getIdtoken(true)
 
@@ -647,7 +647,7 @@ const loginWithAuth0GitHub = async () => {
 ```ts
 import { Auth0Client } from '@auth0/auth0-spa-js'
 
-const { connectTo } = useWeb3Authconnect()
+const { connectTo } = useWeb3AuthConnect()
 
 const loginWithGoogle = async (idToken: string) => {
   // focus-start
@@ -675,9 +675,9 @@ const auth0Client = new Auth0Client({
 const loginWithAuth0 = async () => {
   try {
     await auth0Client.loginWithPopup()
-    const idToken = (await getIdtokenClaims())?.__raw.toString()
+    const idToken = (await getIdTokenClaims())?.__raw.toString()
     if (!idToken) {
-      throw new error('No id token found')
+      throw new Error('No id token found')
     }
 
     // focus-start
@@ -715,9 +715,9 @@ const loginWithGoogle = async () => {
 const loginWithFirebaseGithub = async () => {
   const app = initializeApp(firebaseConfig)
   const auth = getAuth(app)
-  const githubprovider = new GithubAuthprovider()
+  const githubProvider = new GithubAuthProvider()
 
-  const result = await signInWithPopup(auth, githubprovider)
+  const result = await signInWithPopup(auth, githubProvider)
 
   const idToken = await result.user.getIdtoken(true)
 

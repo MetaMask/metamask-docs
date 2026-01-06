@@ -14,7 +14,7 @@ This is a supplementary guide to the main [v7 to v10 migration guide](README.mdx
 
 ## Overview
 
-In v7, Wallet Services (checkout, Swap, Walletconnect Scanner, Embedded Wallet UI) required
+In v7, Wallet Services (checkout, Swap, WalletConnect Scanner, Embedded Wallet UI) required
 installing and configuring a separate `@web3auth/wallet-services-plugin` package. V10 integrates
 these services directly into the main SDK.
 
@@ -36,7 +36,7 @@ await web3auth.initModal()
 // Usage
 await walletServicesPlugin.showWalletUi()
 await walletServicesPlugin.showCheckout()
-await walletServicesPlugin.showWalletconnectScanner()
+await walletServicesPlugin.showWalletConnectScanner()
 // remove-end
 
 // add-start
@@ -51,7 +51,7 @@ const walletServicesPlugin = web3auth.getPlugin(EVM_PLUGINS.WALLET_SERVICES)
 await walletServicesPlugin.showWalletUi({ show: true })
 await walletServicesPlugin.showCheckout({ show: true })
 await walletServicesPlugin.showSwap({ show: true })
-await walletServicesPlugin.showWalletconnectScanner({ show: true })
+await walletServicesPlugin.showWalletConnectScanner({ show: true })
 // add-end
 ```
 

@@ -84,8 +84,8 @@ values={[
 // provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
 // For ethers v5
-// const signer = ethersprovider.getSigner();
-const signer = await ethersprovider.getSigner()
+// const signer = ethersProvider.getSigner();
+const signer = await ethersProvider.getSigner()
 
 // Get user's Ethereum public address
 const address = signer.getAddress()
@@ -179,7 +179,7 @@ const walletClient = createWalletClient({
 // data for the transaction
 const destination = '<ADDRESS>'
 const amount = parseEther('0.0001')
-const address = await this.getaccounts()
+const address = await this.getAccounts()
 
 const address = await walletClient.getAddresses()
 
@@ -250,7 +250,7 @@ const walletClient = createWalletClient({
 // data for the transaction
 const destination = '<ADDRESS>'
 const amount = parseEther('0.0001')
-const address = await this.getaccounts()
+const address = await this.getAccounts()
 
 const address = await walletClient.getAddresses()
 
@@ -417,7 +417,7 @@ const originalMessage = JSON.stringify({
     /*
            - Anything you want. Just a JSON Blob that encodes the data you want to send
            - No required fields
-           - This is DApp Specific
+           - This is dapp Specific
            - Be as explicit as possible when building out the message schema.
           */
     contents: 'Hello, Bob!',
@@ -830,7 +830,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 ```tsx
 //Assuming user is already logged in.
 async getPrivateKey() {
-  const privateKey = await web3auth.Provider.request({
+  const privateKey = await web3auth.provider.request({
     method: "private_key"
   });
   //Do something with privateKey

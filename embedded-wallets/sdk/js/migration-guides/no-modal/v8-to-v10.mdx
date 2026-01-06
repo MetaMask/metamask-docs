@@ -91,7 +91,7 @@ const web3auth = new Web3AuthNoModal({
   clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   chainConfig,
-  privateKeyprovider,
+  privateKeyProvider,
 })
 // remove-end
 ```
@@ -161,19 +161,19 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
 
 ```typescript
 // remove-start
-import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 import { getEvmChainConfig } from '@web3auth/base'
 
 const chainConfig = getEvmChainConfig(1, 'YOUR_CLIENT_ID')
 
-const privateKeyprovider = new EthereumPrivateKeyprovider({
+const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 })
 
 const web3auth = new Web3AuthNoModal({
   clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  privateKeyprovider,
+  privateKeyProvider,
 })
 // remove-end
 ```
@@ -222,7 +222,7 @@ Here's a complete before/after example showing the migration from v8 no-modal to
 ```typescript
 import { Web3AuthNoModal } from '@web3auth/no-modal'
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
-import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 import { getDefaultExternalAdapters } from '@web3auth/default-evm-adapter'
 
 // Chain configuration
@@ -237,7 +237,7 @@ const chainConfig = {
 }
 
 // provider setup
-const privateKeyprovider = new EthereumPrivateKeyprovider({
+const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 })
 
@@ -245,7 +245,7 @@ const privateKeyprovider = new EthereumPrivateKeyprovider({
 const web3auth = new Web3AuthNoModal({
   clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: 'sapphire_mainnet',
-  privateKeyprovider,
+  privateKeyProvider,
   uiConfig: {
     appName: 'My App',
     logoLight: 'https://example.com/logo-light.png',
@@ -321,7 +321,7 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
 | **Package**          | `@web3auth/no-modal`                        | `@web3auth/modal`       |
 | **Class**            | `Web3AuthNoModal`                           | `Web3Auth`              |
 | **Custom UI**        | Direct adapter methods                      | `connectTo` method      |
-| **Chain Config**     | Manual `chainConfig` + `privateKeyprovider` | Dashboard Configuration |
+| **Chain Config**     | Manual `chainConfig` + `privateKeyProvider` | Dashboard Configuration |
 | **External Wallets** | Manual adapter setup                        | Automatic detection     |
 | **Verifiers**        | Manual `loginConfig`                        | Dashboard connections   |
 | **Branding**         | `uiConfig` in SDK                           | Dashboard Configuration |

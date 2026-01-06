@@ -166,7 +166,7 @@ For Ethereum integration, you can get the provider and use it with ethers or vie
 ```javascript
 await web3auth.connect()
 // Use with ethers.js
-const ethprovider = new ethers.Browserprovider(web3auth.provider)
+const ethprovider = new ethers.BrowserProvider(web3auth.provider)
 // OR
 // Use with viem
 const walletClient = createWalletClient({

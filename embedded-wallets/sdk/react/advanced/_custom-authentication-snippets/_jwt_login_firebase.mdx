@@ -3,9 +3,9 @@ const loginWithFirebaseGithub = async () => {
   try {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const githubprovider = new GithubAuthprovider();
+    const githubProvider = new GithubAuthProvider();
 
-    const result = await signInWithPopup(auth, githubprovider);
+    const result = await signInWithPopup(auth, githubProvider);
 
     const idToken = await result.user.getIdtoken(true);
 

@@ -34,7 +34,7 @@ Returns the current provider instance if connected.
 #### Interface
 
 ```ts
-get provider(): Iprovider | null;
+get provider(): IProvider | null;
 ```
 
 #### Usage
@@ -43,14 +43,14 @@ get provider(): Iprovider | null;
 const provider = web3auth.provider
 ```
 
-## `connectedconnectorName`
+## `connectedConnectorName`
 
 Name of the currently connected wallet connector, or `null` if not connected.
 
 #### Interface
 
 ```ts
-connectedconnectorName: WALLET_CONNECTOR_TYPE | null
+connectedConnectorName: WALLET_CONNECTOR_TYPE | null
 ```
 
 ##### `WALLET_CONNECTOR_TYPE`
@@ -84,7 +84,7 @@ export declare const WALLET_CONNECTORS: {
 #### Usage
 
 ```js
-const connectorName = web3auth.connectedconnectorName
+const connectorName = web3auth.connectedConnectorName
 ```
 
 ## `status`
@@ -122,8 +122,8 @@ export declare const CONNECTOR_STATUS: {
   readonly READY: 'ready'
   readonly CONNECTING: 'connecting'
   readonly CONNECTED: 'connected'
-  readonly DISCONNECTING: 'Disconnecting'
-  readonly DISCONNECTED: 'Disconnected'
+  readonly DISCONNECTING: 'disconnecting'
+  readonly DISCONNECTED: 'disconnected'
   readonly ERRORED: 'errored'
 }
 ```
@@ -157,36 +157,36 @@ get currentChain(): CustomChainConfig | undefined;
 const chain = web3auth.currentChain
 ```
 
-## `connectedconnector`
+## `connectedConnector`
 
 Returns the connector instance for the connected wallet, or `null`.
 
 #### Interface
 
 ```ts
-get connectedconnector(): Iconnector<unknown> | null;
+get connectedConnector(): IConnector<unknown> | null;
 ```
 
 #### Usage
 
 ```js
-const connector = web3auth.connectedconnector
+const connector = web3auth.connectedConnector
 ```
 
-## `accountAbstractionprovider`
+## `accountAbstractionProvider`
 
 Returns the account abstraction provider if available.
 
 #### Interface
 
 ```ts
-get accountAbstractionprovider(): AccountAbstractionprovider | null;
+get accountAbstractionProvider(): AccountAbstractionprovider | null;
 ```
 
 #### Usage
 
 ```js
-const aaprovider = web3auth.accountAbstractionprovider
+const aaProvider = web3auth.accountAbstractionProvider
 ```
 
 ## `getconnector`
@@ -196,7 +196,7 @@ Returns a connector instance for a given connector name and chain namespace.
 #### Interface
 
 ```ts
-getconnector(connectorName: WALLET_CONNECTOR_TYPE, chainNamespace?: ChainNamespaceType): Iconnector<unknown> | null;
+getConnector(connectorName: WALLET_CONNECTOR_TYPE, chainNamespace?: ChainNamespaceType): IConnector<unknown> | null;
 
 export type WALLET_CONNECTOR_TYPE = (typeof WALLET_CONNECTORS)[keyof typeof WALLET_CONNECTORS];
 export declare const WALLET_CONNECTORS: {
@@ -211,7 +211,7 @@ export type ChainNamespaceType = (typeof CHAIN_NAMESPACES)[keyof typeof CHAIN_NA
 #### Usage
 
 ```js
-const connector = web3auth.getconnector('WALLET_CONNECT_V2', 'eip155')
+const connector = web3auth.getConnector('WALLET_CONNECT_V2', 'eip155')
 ```
 
 ## `getPlugin`

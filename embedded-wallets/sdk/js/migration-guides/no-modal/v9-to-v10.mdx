@@ -91,7 +91,7 @@ const web3auth = new Web3AuthNoModal({
   clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   chainConfig,
-  privateKeyprovider,
+  privateKeyProvider,
 })
 // remove-end
 ```
@@ -163,7 +163,7 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
 
 ```typescript
 // remove-start
-import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 
 const chainConfig = {
   chainNamespace: 'eip155',
@@ -175,14 +175,14 @@ const chainConfig = {
   tickerName: 'Ethereum',
 }
 
-const privateKeyprovider = new EthereumPrivateKeyprovider({
+const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 })
 
 const web3auth = new Web3AuthNoModal({
   clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  privateKeyprovider,
+  privateKeyProvider,
 })
 // remove-end
 ```

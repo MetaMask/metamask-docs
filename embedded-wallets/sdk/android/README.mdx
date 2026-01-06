@@ -33,7 +33,7 @@ Install the Web3Auth Android SDK by adding it to your project dependencies:
 
 ### 1. Add JitPack repository
 
-In your project-level gradle file add JitPack repository:
+In your project-level Gradle file add JitPack repository:
 
 ```groovy
 dependencyResolutionManagement {
@@ -101,6 +101,7 @@ Once the gradles and permission has been updated, you need to configure your Emb
 - Whitelist `{SCHEME}://{YOUR_APP_PACKAGE_NAME}` in the developer dashboard. This step is mandatory for the redirect to work.
 
 #### Configure deep link
+
 Open your app's `AndroidManifest.xml` file and add the following deep link intent filter to your main activity:
 
 ```xml
@@ -211,6 +212,7 @@ initializeCF.whenComplete { _, error ->
 ```
 
 ## Advanced configuration
+
 The Web3Auth Android SDK offers a rich set of advanced configuration options:
 
 - **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
@@ -315,7 +317,7 @@ val ethBalance = BigDecimal.valueOf(balanceResponse.balance.toDouble()).divide(B
 For Solana integration, you can get the Ed25519 private key using the `getEd25519PrivKey` method and use it with sol4k or any other Solana libraries:
 
 ```kotlin
-import org.sol4k.connection
+import org.sol4k.Connection
 import org.sol4k.Keypair
 
 val connection = connection(RpcUrl.DEVNET)

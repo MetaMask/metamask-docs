@@ -1,7 +1,7 @@
 ---
-title: useWeb3Authconnect
-sidebar_label: useWeb3Authconnect
-description: '@web3auth/modal React Hooks useWeb3Authconnect | Embedded Wallets'
+title: useWeb3AuthConnect
+sidebar_label: useWeb3AuthConnect
+description: '@web3auth/modal React Hooks useWeb3AuthConnect | Embedded Wallets'
 ---
 
 import Tabs from '@theme/Tabs'
@@ -12,10 +12,11 @@ Hook to connect to Web3Auth.
 ### Import
 
 ```tsx
-import { useWeb3Authconnect } from '@web3auth/modal/react'
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
 ```
 
 ### Choosing the right connection method
+
 You can connect users to Web3Auth in two main ways, depending on your application's needs:
 
 - **Use `connect()`** when you want to display the default Web3Auth modal. This is ideal if you want to provide users with a pre-built, user-friendly interface where they can choose from all available login options (social logins, wallets, etc.) with minimal setup.
@@ -46,10 +47,10 @@ This is the most common way to connect to Web3Auth. It opens the Web3Auth modal 
 :::
 
 ```tsx
-import { useWeb3Authconnect } from '@web3auth/modal/react'
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
 
 function connectButton() {
-  const { connect, loading, isConnected, error } = useWeb3Authconnect()
+  const { connect, loading, isConnected, error } = useWeb3AuthConnect()
 
   return (
     <div>
@@ -73,11 +74,11 @@ This method allows you to build your own custom connection UI. It bypasses the W
 :::
 
 ```tsx
-import { useWeb3Authconnect } from '@web3auth/modal/react'
+import { useWeb3AuthConnect } from '@web3auth/modal/react'
 import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
 
 function Customconnectors() {
-  const { connectTo, loading, isConnected, error } = useWeb3Authconnect()
+  const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
 
   const loginWithGoogle = () => {
     connectTo(WALLET_CONNECTORS.AUTH, { authConnection: AUTH_CONNECTION.GOOGLE })
@@ -104,37 +105,37 @@ function Customconnectors() {
 import { type IUseWeb3Authconnect } from '@web3auth/modal/react'
 ```
 
-#### Isconnected
+#### `isConnected`
 
 `boolean`
 
 Whether the user is connected to Web3Auth.
 
-#### Loading
+#### `loading`
 
 `boolean`
 
 Whether the connection process is in progress.
 
-#### Error
+#### `error`
 
 `Web3Autherror | null`
 
 error that occurred during the connection process.
 
-#### Connectorname
+#### `connectorName`
 
 `WALLET_CONNECTOR_TYPE | null`
 
 Name of the connected connector.
 
-#### Connect
+#### `connect`
 
 `() => Promise<IProvider | null>`
 
 Function to initiate the connection process. Opens the Web3Auth modal UI.
 
-#### Connectto
+#### `connectTo`
 
 `<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]) => Promise<IProvider | null>`
 

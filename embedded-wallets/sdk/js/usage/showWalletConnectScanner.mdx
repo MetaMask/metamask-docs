@@ -1,10 +1,10 @@
 ---
-title: showWalletconnectScanner
-sidebar_label: showWalletconnectScanner
-description: '@web3auth/modal showWalletconnectScanner | Embedded Wallets'
+title: showWalletConnectScanner
+sidebar_label: showWalletConnectScanner
+description: '@web3auth/modal showWalletConnectScanner | Embedded Wallets'
 ---
 
-Function to show the Walletconnect QR scanner using the Wallet Services Plugin.
+Function to show the WalletConnect QR scanner using the Wallet Services Plugin.
 
 ### Usage
 
@@ -12,13 +12,13 @@ Function to show the Walletconnect QR scanner using the Wallet Services Plugin.
 import { Web3Auth } from '@web3auth/modal'
 
 // After initializing and logging in with Web3Auth
-async function openWalletconnectScanner() {
+async function openWalletConnectScanner() {
   try {
-    await web3auth.showWalletconnectScanner({
+    await web3auth.showWalletConnectScanner({
       show: true,
     })
   } catch (error) {
-    console.error('error opening Walletconnect scanner:', error)
+    console.error('Error opening WalletConnect scanner:', error)
   }
 }
 ```
@@ -26,7 +26,7 @@ async function openWalletconnectScanner() {
 ### Parameters
 
 ```ts
-interface showWalletconnectScannerParams {
+interface showWalletConnectScannerParams {
   show: boolean
 }
 ```
@@ -41,4 +41,4 @@ Determines whether the Wallet connect UI is displayed. This can be used to progr
 
 `Promise<void>`
 
-The function returns a promise that resolves when the Walletconnect scanner has been displayed or hidden.
+The function returns a promise that resolves when the WalletConnect scanner has been displayed or hidden.

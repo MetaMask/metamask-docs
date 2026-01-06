@@ -54,18 +54,18 @@ const web3auth = new Web3Auth({
 })
 ```
 
-### `privateKeyprovider` is introduced
+### `privateKeyProvider` is introduced
 
-#### `privateKeyprovider` is now a mandatory parameter to be passed into the `OpenLoginAdapter`
+#### `privateKeyProvider` is now a mandatory parameter to be passed into the `OpenLoginAdapter`
 
-With V6, we have added a new parameter `privateKeyprovider` which is mandatory to be passed into the `OpenLoginAdapter`.
+With V6, we have added a new parameter `privateKeyProvider` which is mandatory to be passed into the `OpenLoginAdapter`.
 
 #### For EVM chains
 
-For EVM chains use the `EthereumPrivateKeyprovider` from the `@web3auth/ethereum-provider`package. Please note that`EthereumPrivateKeyprovider`requires`chainConfig`as the `config` parameter at the time of initialization.
+For EVM chains use the `EthereumPrivateKeyProvider` from the `@web3auth/ethereum-provider`package. Please note that`EthereumPrivateKeyProvider`requires`chainConfig`as the `config` parameter at the time of initialization.
 
 ```tsx
-import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -77,10 +77,10 @@ const chainConfig = {
   tickerName: 'Ethereum',
 }
 // focus-next-line
-const privateKeyprovider = new EthereumPrivateKeyprovider({ config: { chainConfig } })
+const privateKeyProvider = new EthereumPrivateKeyProvider({ config: { chainConfig } })
 const openloginAdapter = new OpenloginAdapter({
   // focus-next-line
-  privateKeyprovider,
+  privateKeyProvider,
 })
 web3authInstance.configureAdapter(openloginAdapter)
 ```
@@ -102,17 +102,17 @@ const chainConfig = {
   tickerName: 'Solana',
 }
 // focus-next-line
-const privateKeyprovider = new SolanaPrivateKeyprovider({ config: { chainConfig } })
+const privateKeyProvider = new SolanaPrivateKeyprovider({ config: { chainConfig } })
 const openloginAdapter = new OpenloginAdapter({
   // focus-next-line
-  privateKeyprovider,
+  privateKeyProvider,
 })
 web3auth.configureAdapter(openloginAdapter)
 ```
 
 #### For all other chains
 
-For all Non-EVM & Non-Solana chains use the `CommonPrivateKeyprovider` from the `@web3auth/base-provider`package. Please note that `CommonPrivateKeyprovider` requires `chainConfig` as the `config` parameter at the time of initialization.
+For all non-EVM and non-Solana chains, use the `CommonPrivateKeyprovider` from the `@web3auth/base-provider`package. Please note that `CommonPrivateKeyprovider` requires `chainConfig` as the `config` parameter at the time of initialization.
 
 ```tsx
 import { CommonPrivateKeyprovider } from '@web3auth/base-provider'
@@ -127,11 +127,11 @@ const chainConfig = {
   tickerName: 'Solana',
 }
 // focus-next-line
-const privateKeyprovider = new CommonPrivateKeyprovider({ config: { chainConfig } })
+const privateKeyProvider = new CommonPrivateKeyprovider({ config: { chainConfig } })
 
 const openloginAdapter = new OpenloginAdapter({
   // focus-next-line
-  privateKeyprovider,
+  privateKeyProvider,
 })
 web3authInstance.configureAdapter(openloginAdapter)
 ```

@@ -29,11 +29,11 @@ In V5, we used to add a check for setting the `provider` only if the `web3auth.p
 ```tsx
 // With V5
 if (web3auth.provider) {
-  setprovider(web3auth.provider)
+  setProvider(web3auth.provider)
 }
 // With V6
 // focus-next-line
-setprovider(web3auth.provider) // before the connect() or connectTo(), provider is available.
+setProvider(web3auth.provider) // before the connect() or connectTo(), provider is available.
 ```
 
 ### `rpcTarget` and `chainId` is now a mandatory parameter

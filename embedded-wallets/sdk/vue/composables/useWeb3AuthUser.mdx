@@ -22,8 +22,8 @@ import { useWeb3AuthUser } from '@web3auth/modal/vue'
 </script>
 
 <template>
-  <div v-if="loading">loading user info...</div>
-  <div v-else-if="error">error: {{ error.message }}</div>
+  <div v-if="loading">Loading user info...</div>
+  <div v-else-if="error">Error: {{ error.message }}</div>
   <div v-else-if="!userInfo">No user info available.</div>
   <div v-else>
     <pre>{{ JSON.stringify(userInfo, null, 2) }}</pre>
@@ -39,27 +39,32 @@ import { useWeb3AuthUser } from '@web3auth/modal/vue'
 import type { IUseWeb3AuthUser } from '@web3auth/modal/vue'
 ```
 
-#### Loading
+#### `loading`
+
 `boolean`
 
 Whether the user info fetching process is in progress.
 
-#### Error
-`Web3Autherror | null`
+#### `error`
 
-error that occurred during the user info fetching process.
+`Web3AuthError | null`
 
-#### Userinfo
+Error that occurred during the user info fetching process.
+
+#### `userInfo`
+
 `Partial<UserInfo> | null`
 
 The current user's information, or null if not available.
 
-#### Ismfaenabled
+#### `isMFAEnabled`
+
 `boolean`
 
 Whether Multi-Factor Authentication (MFA) is enabled for the user.
 
-#### Getuserinfo
+#### `getUserInfo`
+
 `() => Promise<Partial<UserInfo> | null>`
 
 Function to fetch the latest user information from Web3Auth.

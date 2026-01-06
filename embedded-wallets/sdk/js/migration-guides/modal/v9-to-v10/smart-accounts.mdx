@@ -28,7 +28,7 @@ const chainConfig = {
   // Chain config
 }
 
-const accountAbstractionprovider = new AccountAbstractionprovider({
+const accountAbstractionProvider = new AccountAbstractionprovider({
   config: {
     chainConfig,
     smartAccountInit: new SafeSmartAccount(),
@@ -42,8 +42,8 @@ const accountAbstractionprovider = new AccountAbstractionprovider({
 const web3auth = new Web3Auth({
   clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  privateKeyprovider,
-  accountAbstractionprovider,
+  privateKeyProvider,
+  accountAbstractionProvider,
 })
 // remove-end
 

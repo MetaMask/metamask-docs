@@ -57,7 +57,7 @@ try {
   await web3auth.switchChain({ chainId: '0xaa36a7' })
   console.log('Successfully switched to Sepolia Testnet')
 } catch (error) {
-  console.error('error switching chain:', error)
+  console.error('Error switching chain:', error)
 }
 
 // Later, switch to Ethereum Mainnet
@@ -65,6 +65,6 @@ try {
   await web3auth.switchChain({ chainId: '0x1' })
   console.log('Successfully switched to Ethereum Mainnet')
 } catch (error) {
-  console.error('error switching chain:', error)
+  console.error('Error switching chain:', error)
 }
 ```

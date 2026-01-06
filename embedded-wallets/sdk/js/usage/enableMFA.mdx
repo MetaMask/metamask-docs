@@ -6,14 +6,12 @@ description: '@web3auth/modal Function enableMFA | Embedded Wallets'
 
 Function to enable Multi-Factor Authentication (MFA) for users with Web3Auth.
 
-ge
-
 ```javascript
 try {
   await web3auth.enableMFA()
   console.log('MFA setup process initiated')
 } catch (error) {
-  console.error('error enabling MFA:', error)
+  console.error('Error enabling MFA:', error)
 }
 ```
 
@@ -24,6 +22,7 @@ enableMFA<T>(loginParams?: T): Promise<void>;
 ```
 
 #### Loginparams
+
 Optional parameters for the login process when setting up MFA.
 
 #### Return value

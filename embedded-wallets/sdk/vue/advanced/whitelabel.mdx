@@ -28,7 +28,7 @@ While basic modal appearance can be configured directly on the dashboard, the fo
 The `modalConfig` option in the constructor lets you configure the modal UI and customize authentication:
 
 ```ts
-modalConfig?: connectorsModalConfig;
+modalConfig?: ConnectorsModalConfig;
 
 export interface connectorsModalConfig {
     connectors?: Partial<Record<WALLET_CONNECTOR_TYPE, ModalConfig>>;
@@ -37,7 +37,7 @@ export interface connectorsModalConfig {
 
 export type WALLET_CONNECTOR_TYPE = (typeof WALLET_CONNECTORS)[keyof typeof WALLET_CONNECTORS];
 
-export interface ModalConfig extends Omit<BaseconnectorConfig, "isInjected" | "chainNamespaces"> {
+export interface ModalConfig extends Omit<BaseConnectorConfig, "isInjected" | "chainNamespaces"> {
     loginMethods?: LoginMethodConfig;
 }
 ```

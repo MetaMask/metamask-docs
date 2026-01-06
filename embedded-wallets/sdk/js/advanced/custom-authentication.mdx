@@ -197,7 +197,7 @@ export type LoginParamMap = {
     ```tsx
     export type AuthLoginParams = LoginParams & {
       loginHint?: string;
-      idtoken?: string;
+      idToken?: string;
   };
     export type LoginParams = {
   /**
@@ -453,7 +453,7 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
 
 ### JWT login
 
-JWT login is a way to authenticate users with your custom authentication services. With this method, Web3Auth just takes into account the `idtoken` passed over to the `connectTo` function and uses it to authenticate the user. You can utilise this method with any authentication service that is OAuth 2.0 Compatible.
+JWT login is a way to authenticate users with your custom authentication services. With this method, Web3Auth just takes into account the `idToken` passed over to the `connectTo` function and uses it to authenticate the user. You can utilise this method with any authentication service that is OAuth 2.0 Compatible.
 
 :::warning
 
@@ -468,13 +468,13 @@ If you have not configured on the dashboard, whether you user id is case sensiti
 
 ```ts
 const loginWithGoogle = async (response: CredentialResponse) => {
-  const idtoken = response.credential;
+  const idToken = response.credential;
 
   // focus-start
   await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
     authConnectionId: "w3a-google-demo",
     authConnection: AUTH_CONNECTION.GOOGLE,
-    idtoken,
+    idToken,
     extraLoginOptions: {
       isUserIdCaseSensitive: false,
     },
@@ -486,7 +486,7 @@ const loginWithGoogle = async (response: CredentialResponse) => {
 
 <GoogleLogin
   onSuccess={loginWithGoogle}
-  onerror={() => {
+  onError={() => {
     console.log("Login Failed");
   }}
   useOneTap
@@ -497,22 +497,22 @@ const loginWithGoogle = async (response: CredentialResponse) => {
   <TabItem value="Auth0 JWT login">
 
 ```ts
-const { getIdtokenClaims, loginWithPopup } = useAuth0()
+const { getIdTokenClaims, loginWithPopup } = useAuth0()
 
 const loginWithAuth0 = async () => {
   try {
     await loginWithPopup()
 
-    const idtoken = (await getIdtokenClaims())?.__raw.toString()
-    if (!idtoken) {
-      throw new error('No id token found')
+    const idToken = (await getIdTokenClaims())?.__raw.toString()
+    if (!idToken) {
+      throw new Error('No id token found')
     }
 
     // focus-start
     await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
       authConnectionId: 'w3a-auth0-demo',
       authConnection: AUTH_CONNECTION.CUSTOM,
-      idtoken,
+      idToken,
       extraLoginOptions: {
         isUserIdCaseSensitive: false,
       },
@@ -532,17 +532,17 @@ const loginWithFirebaseGithub = async () => {
   try {
     const app = initializeApp(firebaseConfig)
     const auth = getAuth(app)
-    const githubprovider = new GithubAuthprovider()
+    const githubProvider = new GithubAuthProvider()
 
-    const result = await signInWithPopup(auth, githubprovider)
+    const result = await signInWithPopup(auth, githubProvider)
 
-    const idtoken = await result.user.getIdtoken(true)
+    const idToken = await result.user.getIdtoken(true)
 
     // focus-start
     await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
       authConnectionId: 'w3a-firebase-demo',
       authConnection: AUTH_CONNECTION.CUSTOM,
-      idtoken,
+      idToken,
       extraLoginOptions: {
         isUserIdCaseSensitive: false,
       },
@@ -572,13 +572,13 @@ const getIdtoken = async () => {
 
 const loginWithJWT = async () => {
   try {
-    const idtoken = await getIdtoken()
+    const idToken = await getIdtoken()
 
     // focus-start
     await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
       authConnection: AUTH_CONNECTION.CUSTOM,
       authConnectionId: 'w3a-node-demo',
-      idtoken,
+      idToken,
       extraLoginOptions: {
         isUserIdCaseSensitive: false,
       },
@@ -650,14 +650,14 @@ const loginWithAuth0GitHub = async () => {
 
 ```ts
 const loginWithGoogle = async (response: CredentialResponse) => {
-  const idtoken = response.credential
+  const idToken = response.credential
 
   // focus-start
   await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: 'aggregate-sapphire',
     authConnectionId: 'w3a-google',
     authConnection: AUTH_CONNECTION.GOOGLE,
-    idtoken,
+    idToken,
     extraLoginOptions: {
       isUserIdCaseSensitive: false,
       verifierIdField: 'email',
@@ -669,9 +669,9 @@ const loginWithGoogle = async (response: CredentialResponse) => {
 const loginWithAuth0 = async () => {
   try {
     await loginWithPopup()
-    const idtoken = (await getIdtokenClaims())?.__raw.toString()
-    if (!idtoken) {
-      throw new error('No id token found')
+    const idToken = (await getIdTokenClaims())?.__raw.toString()
+    if (!idToken) {
+      throw new Error('No id token found')
     }
 
     // focus-start
@@ -679,7 +679,7 @@ const loginWithAuth0 = async () => {
       groupedAuthConnectionId: 'aggregate-sapphire',
       authConnectionId: 'w3a-a0-github',
       authConnection: AUTH_CONNECTION.CUSTOM,
-      idtoken,
+      idToken,
       extraLoginOptions: {
         isUserIdCaseSensitive: false,
         verifierIdField: 'email',
@@ -709,18 +709,18 @@ const loginWithGoogle = async () => {
 const loginWithFirebaseGithub = async () => {
   const app = initializeApp(firebaseConfig)
   const auth = getAuth(app)
-  const githubprovider = new GithubAuthprovider()
+  const githubProvider = new GithubAuthProvider()
 
-  const result = await signInWithPopup(auth, githubprovider)
+  const result = await signInWithPopup(auth, githubProvider)
 
-  const idtoken = await result.user.getIdtoken(true)
+  const idToken = await result.user.getIdtoken(true)
 
   // focus-start
   await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
     groupedAuthConnectionId: 'aggregate-sapphire',
     authConnectionId: 'w3a-firebase',
     authConnection: AUTH_CONNECTION.CUSTOM,
-    idtoken,
+    idToken,
     extraLoginOptions: {
       isUserIdCaseSensitive: false,
     },

@@ -23,7 +23,7 @@ import { useWeb3AuthDisconnect } from '@web3auth/modal/vue'
 
 <template>
   <button @click="disconnect()" :disabled="loading">
-    {{ loading ? "Disconnecting..." : "disconnect" }}
+    {{ loading ? "Disconnecting..." : "Disconnect" }}
   </button>
   <div v-if="error">{{ error.message }}</div>
 </template>
@@ -35,17 +35,20 @@ import { useWeb3AuthDisconnect } from '@web3auth/modal/vue'
 import type { IUseWeb3AuthDisconnect } from '@web3auth/modal/vue'
 ```
 
-#### Loading
+#### `loading`
+
 `Ref<boolean>`
 
-Whether the Disconnection process is in progress.
+Whether the disconnection process is in progress.
 
-#### Error
-`Ref<Web3Autherror | null>`
+#### `error`
 
-error that occurred during the Disconnection process.
+`Ref<Web3AuthError | null>`
 
-#### Disconnect
+Error that occurred during the disconnection process.
+
+#### `disconnect`
+
 `(options?: { cleanup: boolean }) => Promise<void>`
 
-Function to initiate the Disconnection process. Optional `cleanup` parameter controls whether to remove all user data.
+Function to initiate the disconnection process. Optional `cleanup` parameter controls whether to remove all user data.

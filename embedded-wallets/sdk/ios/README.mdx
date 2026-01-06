@@ -257,7 +257,7 @@ import SolanaSwift
 let ed25519PrivateKey = web3Auth.getEd25519PrivKey()
 
 // Generate the KeyPair
-let keyPair = try KeyPair(secretKey: data(hex: ed25519PrivateKey))
+let keyPair = try KeyPair(secretKey: Data(hex: ed25519PrivateKey))
 
 // Get the user account
 let userAccount = keyPair.publicKey.base58EncodedString

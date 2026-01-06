@@ -69,14 +69,14 @@ All hooks are now streamlined under `@web3auth/modal/react`:
 ```typescript title="App.tsx"
 import {
   useWeb3Auth,
-  useWeb3Authconnect,
+  useWeb3AuthConnect,
   useWeb3AuthDisconnect,
   useIdentitytoken,
   useWeb3AuthUser,
   useSwitchChain,
   useEnableMFA,
   useManageMFA,
-  useWalletconnectScanner, // Wallet Services
+  useWalletConnectScanner, // Wallet Services
   useWalletUI, // Wallet Services
   useCheckout, // Wallet Services
   useSwap, // Wallet Services
@@ -91,7 +91,7 @@ The new hook structure is more granular:
 - **Core Web3Auth:**
   - `useWeb3Auth`: Core hook for initialization status and overall SDK state.
 - **Authentication:**
-  - `useWeb3Authconnect`: Handles connection.
+  - `useWeb3AuthConnect`: Handles connection.
   - `useWeb3AuthDisconnect`: Manages Disconnection.
 - **Identity:**
   - `useIdentitytoken`: Retrieves identity tokens.
@@ -104,7 +104,7 @@ The new hook structure is more granular:
 - **Wallet Services Plugin (now integrated):**
   - `useWalletServicesPlugin`: Hook to access the Wallet Services Plugin context.
     - `isPluginConnected`: `boolean`
-    - `showWalletconnectScanner(params?)`: `Promise<void>`
+    - `showWalletConnectScanner(params?)`: `Promise<void>`
     - `showCheckout(params?)`: `Promise<void>`
     - `showWalletUI(params?)`: `Promise<void>`
     - `showSwap(params?)`: `Promise<void>`

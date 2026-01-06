@@ -100,19 +100,19 @@ const web3auth = new Web3Auth({
 
 ```typescript
 // remove-start
-import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 import { getEvmChainConfig } from '@web3auth/base'
 
 const chainConfig = getEvmChainConfig(1, 'YOUR_CLIENT_ID')
 
-const privateKeyprovider = new EthereumPrivateKeyprovider({
+const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 })
 
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  privateKeyprovider,
+  privateKeyProvider,
 })
 // remove-end
 ```
@@ -170,20 +170,20 @@ Here's a complete before/after example showing the migration from v8 to v10:
 ```typescript
 import { Web3Auth } from '@web3auth/modal'
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter'
-import { EthereumPrivateKeyprovider } from '@web3auth/ethereum-provider'
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 import { getEvmChainConfig } from '@web3auth/base'
 
 const clientId = 'YOUR_CLIENT_ID'
 const chainConfig = getEvmChainConfig(1, clientId)
 
-const privateKeyprovider = new EthereumPrivateKeyprovider({
+const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 })
 
 const web3auth = new Web3Auth({
   clientId,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  privateKeyprovider,
+  privateKeyProvider,
 })
 
 const openloginAdapter = new OpenloginAdapter({

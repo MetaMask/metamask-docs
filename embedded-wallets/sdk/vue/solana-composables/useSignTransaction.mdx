@@ -40,9 +40,9 @@ import { useSignTransaction } from '@web3auth/modal/vue/solana'
 <template>
   <div>
     <button @click="handleSign" :disabled="loading">
-      {{ loading ? "Signing..." : "Sign transaction" }}
+      {{ loading ? "Signing..." : "Sign Transaction" }}
     </button>
-    <div v-if="error">error: {{ error.message }}</div>
+    <div v-if="error">Error: {{ error.message }}</div>
     <div v-if="data">Signed Transaction: {{ data }}</div>
   </div>
 </template>
@@ -53,28 +53,32 @@ import { useSignTransaction } from '@web3auth/modal/vue/solana'
 ```ts
 export type IUseSignTransaction = {
   loading: Ref<boolean>
-  error: Ref<Web3Autherror | null>
+  error: Ref<Web3AuthError | null>
   data: Ref<string | null>
   signTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
 }
 ```
 
-#### Loading
+#### loading
+
 `Ref<boolean>`
 
 Indicates if the transaction signing is in progress.
 
 #### Error
-`Ref<Web3Autherror | null>`
 
-error object if signing fails, otherwise null.
+`Ref<Web3AuthError | null>`
+
+Error object if signing fails, otherwise null.
 
 #### Data
+
 `Ref<string | null>`
 
 The signed transaction as a string, or null if not signed yet.
 
-#### Signtransaction
+#### Sign transaction
+
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
 Function to sign a Solana transaction. Returns the signed transaction as a string.
@@ -96,9 +100,9 @@ Function to sign a Solana transaction. Returns the signed transaction as a strin
 
   async function submit(event: Event) {
     event.preventDefault()
-    const formdata = new Formdata(event.target as HTMLFormElement)
-    const to = formdata.get('address') as string
-    const value = formdata.get('value') as string
+    const formData = new FormData(event.target as HTMLFormElement)
+    const to = formData.get('address') as string
+    const value = formData.get('value') as string
 
     if (!connection.value || !accounts.value || accounts.value.length === 0) return
 
@@ -122,14 +126,14 @@ Function to sign a Solana transaction. Returns the signed transaction as a strin
 <template>
   <div class="container">
     <div class="stack">
-      <h2>Sign transaction</h2>
+      <h2>Sign Transaction</h2>
       <form class="set" @submit.prevent="submit">
         <input name="address" placeholder="Address" required />
         <input name="value" placeholder="Amount (SOL)" type="number" step="0.01" required />
         <button type="submit" :disabled="isPending">{{ isPending ? "Signing..." : "Sign" }}</button>
       </form>
       <div v-if="signedTransaction">Signed Transaction: {{ signedTransaction }}</div>
-      <div v-if="error">error: {{ error.message }}</div>
+      <div v-if="error">Error: {{ error.message }}</div>
     </div>
   </div>
 </template>
