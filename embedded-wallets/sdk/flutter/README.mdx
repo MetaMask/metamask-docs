@@ -49,9 +49,10 @@ flutter pub add web3auth_flutter
 ```
 
 ### 1. Android configuration
+
 Once we have installed Web3Auth Flutter SDK, we also need to add the configuration for Android.
 
-#### Update compilesdkversion
+#### Update `compileSdkVersion`
 
 For Android build `compileSdkVersion` needs to be `34`. Check your app module gradle file in your project to change it:
 
@@ -178,7 +179,7 @@ Future<void> initWeb3Auth() async {
 
   // focus-start
   await Web3AuthFlutter.init(Web3AuthOptions(
-    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
     network: Network.sapphire_mainnet, // or Network.sapphire_devnet
     redirectUrl: redirectUrl,
   ));
@@ -186,9 +187,9 @@ Future<void> initWeb3Auth() async {
 }
 ```
 
-### 2. Initialize Embedded Wallets Instance
+### 2. Initialize an Embedded Wallets instance
 
-Initialize the Web3Auth instance and check for existing sessions:
+Initialize the Embedded Wallets instance and check for existing sessions:
 
 ```dart
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
@@ -218,7 +219,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         });
       }
     } catch (e) {
-      print('error: $e');
+      print('Error: $e');
     }
   }
 }
@@ -226,19 +227,20 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
 :::note
 
-After configuring Web3Auth, the next step is to initialize it using the `initialize` method. This method is essential for setting up the SDK, checking for any active sessions, and fetching the whitelabel configuration from your dashboard.
+After configuring Embedded Wallets, the next step is to initialize it using the `initialize` method. This method is essential for setting up the SDK, checking for any active sessions, and fetching the whitelabel configuration from your dashboard.
 
 If the API call to fetch the project configuration fails, the method will throw an error.
 
 :::
 
 ## Advanced configuration
-The Web3Auth Flutter SDK offers a rich set of advanced configuration options:
 
-- **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
-- **[Whitelabeling & UI customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
-- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
-- **[Dapp share](./advanced/dapp-share.mdx)**: Share DApp sessions across devices.
+The Embedded Wallets Flutter SDK offers a rich set of advanced configuration options:
+
+- **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
+- **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx):** Set up and manage MFA.
+- **[Dapp Share](./advanced/dapp-share.mdx):** Share dapp sessions across devices.
 
 :::tip
 

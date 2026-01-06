@@ -111,6 +111,7 @@ const web3auth = new Web3Auth({
 ```
 
 ### 3. No-modal functionality: direct connection → connectto
+
 **v9 approach for custom UI:**
 
 ```typescript
@@ -145,18 +146,19 @@ await web3auth.init()
 
 // Custom UI - use connectTo
 await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
-  authconnection: AUTH_CONNECTION.GOOGLE,
+  authConnection: AUTH_CONNECTION.GOOGLE,
 })
 
 // Or with custom verifiers/connections
 await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
-  authconnection: AUTH_CONNECTION.GOOGLE,
-  authconnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID',
+  authConnection: AUTH_CONNECTION.GOOGLE,
+  authConnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID',
 })
 // add-end
 ```
 
 ### 4. Chain configuration centralization
+
 **v9 required manual chain and provider configuration:**
 
 ```typescript

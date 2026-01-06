@@ -14,11 +14,11 @@ At Web3Auth, we prioritize your security by offering Multi-Factor Authentication
 
 ## Enable using the Multi-Factor Authentication level
 
-For a dApp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
+For a dapp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
 
 :::caution Note
 
-If you are using default verifiers, your users may have set up MFA on other dApps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dApps. This is because MFA cannot be turned off once it is enabled.
+If you are using default verifiers, your users may have set up MFA on other dapps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
 
 :::
 
@@ -53,7 +53,7 @@ let result = try await web3Auth.login(
 
 ## Explicitly enable MFA
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `W3ALoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `W3ALoginParams`. If you are using custom jwt verifiers, you need to pass the valid JWT token in `W3ALoginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `W3ALoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `W3ALoginParams`. If you are using custom JWT verifiers, you need to pass the valid JWT token in `W3ALoginParams` as well.
 
 <Tabs
   defaultValue="default-verifier"
@@ -83,7 +83,7 @@ do {
 do {
   let loginParams = W3ALoginParams(
     loginProvider: .JWT,
-    extraLoginOptions: .init(id_token: "your_jwt_token")
+    extraLoginOptions: .init(id_token: "<your JWT token>")
    )
 
   let isMFAEnabled = try await web3Auth.enableMFA(loginParams)
@@ -112,7 +112,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 
 :::
 
-### Parameters - Mfasettings
+### Parameters - `MfaSettings`
 
 `MfaSettings` allows you to set the type of the MFA.
 
@@ -162,7 +162,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 </TabItem>
 </Tabs>
 
-### Parameters - `Mfasetting`
+### Parameters - `MfaSetting`
 
 `MfaSetting` allows you to configure the behavior of an individual MFA factor.
 
@@ -215,7 +215,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
   network: .sapphire_mainnet,
   redirectUrl: "bundleId://auth",
   // focus-start
-  whiteLabel: W3AWhiteLabeldata(
+  whiteLabel: W3AWhiteLabelData(
     mfaSettings: MfaSettings(
       deviceShareFactor: MfaSetting(enable: true, priority: 1),
       backUpShareFactor: MfaSetting(enable: true, priority: 2),

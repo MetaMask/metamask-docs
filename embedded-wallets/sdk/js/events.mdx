@@ -228,7 +228,7 @@ export interface IPlugin extends SafeEventEmitter {
   status: PLUGIN_STATUS_TYPE;
   SUPPORTED_CONNECTORS: WALLET_CONNECTOR_TYPE[];
   pluginNamespace: PluginNamespace;
-  initWithWeb3Auth(web3auth: IWeb3AuthCore, whiteLabel?: WhiteLabeldata): Promise<void>;
+  initWithWeb3Auth(web3auth: IWeb3AuthCore, whiteLabel?: WhiteLabelData): Promise<void>;
   connect(): Promise<void>;
   disconnect(): Promise<void>;
   cleanup(): Promise<void>;

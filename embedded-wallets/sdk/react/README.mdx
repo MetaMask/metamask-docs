@@ -39,14 +39,14 @@ npm install --save @web3auth/modal
 
 ### 1. Configuration
 
-Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Web3Auth Dashboard](https://dashboard.web3auth.io/).
+Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
 
 ```tsx title="web3authContext.tsx"
 import { type Web3AuthContextConfig } from '@web3auth/modal/react'
 import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
 
 const web3AuthOptions: Web3AuthOptions = {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
 }
 
@@ -66,32 +66,33 @@ import './index.css'
 
 import ReactDOM from 'react-dom/client'
 // focus-start
-import { Web3Authprovider } from '@web3auth/modal/react'
+import { Web3AuthProvider } from '@web3auth/modal/react'
 import web3AuthContextConfig from './web3authContext'
 // focus-end
 import App from './App'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   // focus-start
-  <Web3Authprovider config={web3AuthContextConfig}>
+  <Web3AuthProvider config={web3AuthContextConfig}>
     <App />
-  </Web3Authprovider>
+  </Web3AuthProvider>
   // focus-end
 )
 ```
 
 ## Advanced configuration
+
 The Web3Auth Modal SDK offers a rich set of advanced configuration options:
 
-- **[Smart accounts](./advanced/smart-accounts.mdx)**: Configure account abstraction parameters.
-- **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
-- **[Whitelabeling & UI customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
-- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
-- **[Wallet Services](./advanced/wallet-services.mdx)**: Integrate additional Wallet Services.
+- **[Smart accounts](./advanced/smart-accounts.mdx):** Configure account abstraction parameters.
+- **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
+- **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx):** Set up and manage MFA.
+- **[Wallet Services](./advanced/wallet-services.mdx):** Integrate additional Wallet Services.
 
 :::tip
 
-Head over to the [Advanced Configuration](./advanced/README.mdx) section to learn more about each configuration option.
+Head over to the [advanced configuration](./advanced/README.mdx) section to learn more about each configuration option.
 
 :::
 
@@ -151,12 +152,12 @@ const web3AuthOptions: Web3AuthOptions = {
           email_passwordless: {
             name: 'email passwordless login',
             showOnModal: true,
-            authconnectionId: 'w3a-email_passwordless-demo',
+            authConnectionId: 'w3a-email_passwordless-demo',
           },
           sms_passwordless: {
             name: 'sms passwordless login',
             showOnModal: true,
-            authconnectionId: 'w3a-sms_passwordless-demo',
+            authConnectionId: 'w3a-sms_passwordless-demo',
           },
         },
         showOnModal: true, // set to false to hide all social login methods

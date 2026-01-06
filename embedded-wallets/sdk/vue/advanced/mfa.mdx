@@ -16,7 +16,7 @@ Web3Auth supports Multi-Factor Authentication (MFA) for enhanced security. MFA r
 
 :::caution
 
-If you are using default verifiers, your users may have set up MFA on other dApps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dApps. This is because MFA cannot be turned off once it is enabled.
+If you are using default verifiers, your users may have set up MFA on other dapps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
 
 :::
 
@@ -24,8 +24,8 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 
 There are two ways to configure MFA in your application:
 
-1. **Using the `mfaLevel` setting**: Controls the frequency of the MFA setup request screen.
-2. **Using the `mfaSettings` setting**: Provides granular control over each factor, with their priority level, enable/disable status, and mandatory/optional settings.
+1. **Using the `mfaLevel` setting:** Controls the frequency of the MFA setup request screen.
+2. **Using the `mfaSettings` setting:** Provides granular control over each factor, with their priority level, enable/disable status, and mandatory/optional settings.
 
 ## `mfaLevel`
 
@@ -39,10 +39,10 @@ mfaLevel?: MfaLevelType;
 
 | Level       | Value       | Description                                        |
 | ----------- | ----------- | -------------------------------------------------- |
-| `DEFAULT`   | "default"   | MFA screen appears every 10th login                |
-| `OPTIONAL`  | "optional"  | MFA screen appears every login, but can be skipped |
-| `MANDATORY` | "mandatory" | MFA setup is required after login                  |
-| `NONE`      | "none"      | MFA setup is skipped entirely                      |
+| `DEFAULT`   | "default"   | MFA screen appears every 10th login.               |
+| `OPTIONAL`  | "optional"  | MFA screen appears every login, but can be skipped.|
+| `MANDATORY` | "mandatory" | MFA setup is required after login.                 |
+| `NONE`      | "none"      | MFA setup is skipped entirely.                     |
 
 ### Type definition
 
@@ -64,8 +64,8 @@ export declare const MFA_LEVELS: {
 import { WALLET_CONNECTORS, AUTH_CONNECTION, MFA_LEVELS } from '@web3auth/modal'
 
 await connectTo(WALLET_CONNECTORS.AUTH, {
-  authconnection: AUTH_CONNECTION.GOOGLE,
-  authconnectionId: 'w3a-google-demo',
+  authConnection: AUTH_CONNECTION.GOOGLE,
+  authConnectionId: 'w3a-google-demo',
   // focus-next-line
   mfaLevel: MFA_LEVELS.MANDATORY,
 })
@@ -85,18 +85,19 @@ mfaSettings?: MfaSettings;
 
 | Factor          | Key                   | Description                          |
 | --------------- | --------------------- | ------------------------------------ |
-| `DEVICE`        | "deviceShareFactor"   | Device-based authentication          |
-| `BACKUP_SHARE`  | "backUpShareFactor"   | Backup share (typically seed phrase) |
-| `SOCIAL_BACKUP` | "socialBackupFactor"  | Social account backup                |
-| `PASSWORD`      | "passwordFactor"      | Password-based authentication        |
-| `AUTHENTICATOR` | "authenticatorFactor" | Authenticator app (TOTP)             |
+| `DEVICE`        | "deviceShareFactor"   | Device-based authentication.         |
+| `BACKUP_SHARE`  | "backUpShareFactor"   | Backup share (typically seed phrase).|
+| `SOCIAL_BACKUP` | "socialBackupFactor"  | Social account backup.               |
+| `PASSWORD`      | "passwordFactor"      | Password-based authentication.       |
+| `AUTHENTICATOR` | "authenticatorFactor" | Authenticator app (TOTP).            |
 
 ### Multi-Factor Authentication settings properties
+
 | Property    | Type    | Description                                            |
 | ----------- | ------- | ------------------------------------------------------ |
-| `enable`    | boolean | Whether this factor is enabled                         |
-| `priority`  | number  | Order in which factors are presented (lower = earlier) |
-| `mandatory` | boolean | Whether this factor is required                        |
+| `enable`    | boolean | Whether this factor is enabled.                        |
+| `priority`  | number  | Order in which factors are presented (lower = earlier).|
+| `mandatory` | boolean | Whether this factor is required.                       |
 
 ### Type definitions
 
@@ -120,11 +121,11 @@ export type MFA_SETTINGS = {
 
 ### Important rules
 
-- At least two factors must be enabled when setting up MFA
-- If you set `mandatory: true` for all factors, the user must set up all enabled factors
-- If you set `mandatory: false` for all factors, the user can skip setting up MFA, but at least two factors are still required
-- If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can optionally set up the others
-- The `priority` field determines the order of setup - lower priority values appear first
+- At least two factors must be enabled when setting up MFA.
+- If you set `mandatory: true` for all factors, the user must set up all enabled factors.
+- If you set `mandatory: false` for all factors, the user can skip setting up MFA, but at least two factors are still required.
+- If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can optionally set up the others.
+- The `priority` field determines the order of setup - lower priority values appear first.
 
 ### Usage
 

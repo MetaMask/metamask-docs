@@ -12,7 +12,7 @@ You can use the `getUserInfo` method to retrieve various details about the user,
 let web3AuthUserInfo = web3Auth.getUserInfo();
 ```
 
-## userInfo response
+## UserInfo response
 
 ```json
 {
@@ -24,10 +24,10 @@ let web3AuthUserInfo = web3Auth.getUserInfo();
     "verifierId": "w3a-heroes@web3auth.com",
     "typeOfLogin": "google",
     "aggregateVerifier": "w3a-google-sapphire",
-    "dappShare": "", // 24 words of seed phrase will be sent only incase of custom verifiers
-    "idtoken": "<jwttoken issued by Web3Auth>",
-    "oAuthIdtoken": "<jwttoken issued by OAuth provider>", // will be sent only incase of custom verifiers
-    "oAuthAccesstoken": "<accesstoken issued by OAuth provider>", // will be sent only incase of custom verifiers
+    "dappShare": "", // 24 words of seed phrase will be sent only in case of custom verifiers
+    "idToken": "<JWT token issued by Web3Auth>",
+    "oAuthIdtoken": "<JWT token issued by OAuth provider>", // will be sent only in case of custom verifiers
+    "oAuthAccesstoken": "<Access token issued by OAuth provider>", // will be sent only in case of custom verifiers
     "isMfaEnabled": false // Returns whether the user has enabled MFA or not
   }
 }

@@ -80,7 +80,7 @@ function Customconnectors() {
   const { connectTo, loading, isConnected, error } = useWeb3Authconnect()
 
   const loginWithGoogle = () => {
-    connectTo(WALLET_CONNECTORS.AUTH, { authconnection: AUTH_CONNECTION.GOOGLE })
+    connectTo(WALLET_CONNECTORS.AUTH, { authConnection: AUTH_CONNECTION.GOOGLE })
   }
 
   return (
@@ -130,12 +130,12 @@ Name of the connected connector.
 
 #### Connect
 
-`() => Promise<Iprovider | null>`
+`() => Promise<IProvider | null>`
 
 Function to initiate the connection process. Opens the Web3Auth modal UI.
 
 #### Connectto
 
-`<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]) => Promise<Iprovider | null>`
+`<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]) => Promise<IProvider | null>`
 
 Function to connect directly to a specific wallet connector. This bypasses the Web3Auth modal UI, allowing you to build custom interfaces. This method also allows you to use JWT-based login configurations.

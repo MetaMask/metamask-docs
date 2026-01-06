@@ -18,7 +18,7 @@ web3Auth = GetComponent<Web3Auth>();
 
 // focus-start
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
     network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
     redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
 });
@@ -46,7 +46,7 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 | `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `Uri`.                          |
 | `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                             |
 | `loginConfig?` | Login config for custom verifiers. Takes `LoginConfigItem` as a value.                                                                       |
-| `mfaSettings?` | Configure MFA Settings for authentication. Takes `MfaSettings` as a value.                                                                   |
+| `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                                   |
 | `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                                 |
 
 </TabItem>
@@ -59,7 +59,7 @@ public class Web3AuthOptions
     public string clientId { get; set; }
     public Web3Auth.Network network { get; set; }
     public Uri redirectUrl { get; set; }
-    public WhiteLabeldata whiteLabel { get; set; }
+    public WhiteLabelData whiteLabel { get; set; }
     public LoginConfigItem loginConfig { get; set; }
     public MfaSettings mfaSettings { get; set; }
     public int sessionTime { get; set; } = 86400;
@@ -91,11 +91,11 @@ web3Auth.setOptions(new Web3AuthOptions(){
 
 ## Custom authentication methods
 
-Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication.mdx) section.
+Control the login options presented to your users. For detailed configuration options and implementation examples, see the [custom authentication](./custom-authentication.mdx) section.
 
 ## UI customization
 
-Create a seamless brand experience by customizing the Web3Auth Login Screens to match your Unity application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
+Create a seamless brand experience by customizing the Embedded Wallets login screens to match your Unity application's design. For complete customization options, refer to the [whitelabeling and UI customization](./whitelabel.mdx) section.
 
 ## Multi-Factor Authentication (MFA)
 
@@ -103,9 +103,9 @@ Add additional security layers to protect user accounts with two-factor authenti
 
 **Key Configuration Options:**
 
-- `mfaSettings` - Configure MFA Settings for different authentication flows
+- `mfaSettings` - Configure MFA settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA
 
 ## Dapp share
 
-Share authentication sessions across different applications. For detailed configuration options and implementation examples, see the [DApp Share](./dapp-share.mdx) section.
+Share authentication sessions across different applications. For detailed configuration options and implementation examples, see the [dapp share](./dapp-share.mdx) section.

@@ -12,9 +12,10 @@ import SmartAccountAddress from '../../_common/_aa-address.mdx'
 import SmartAccountSendTransaction from '../../_common/_aa-send-transaction.mdx'
 
 # Smart accounts
+
 Effortlessly create and manage smart accounts for your users with just a few lines of code, using our Smart Account feature. Smart accounts offer enhanced control and programmability, enabling powerful features that traditional wallets can't provide.
 
-**Key features of Smart accounts include:**
+**Key features of smart accounts include:**
 
 - **Gas Abstraction:** Cover transaction fees for users, or allow users to pay for their own transactions using ERC-20 tokens.
 - **Batch Transactions:** Perform multiple transactions in a single call.
@@ -29,21 +30,21 @@ Our smart account integration streamlines your setup, allowing you to create and
 ## Enabling smart accounts
 :::info prerequisite
 
-To enable this feature, you need to configure Smart accounts from your project in the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io).
+To enable this feature, you need to configure smart accounts from your project in the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io).
 
 :::
 
 ### Dashboard configuration
 
-To enable Smart accounts, navigate to the Smart accounts section in the Web3Auth dashboard, and enable the "Set up Smart accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
+To enable smart accounts, navigate to the smart accounts section in the Web3Auth dashboard, and enable the "Set up Smart accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
 
 ![Enable Smart accounts](/img/embedded-wallets/w3a-dashboard/smart-account/enable-smart-account.png)
 
 #### Wallet configuration
 
-Once Smart accounts are enabled, you can customize the wallet configurations:
+Once smart accounts are enabled, you can customize the wallet configurations:
 
-- **All supported wallets (default):** Allows users to create Smart accounts using both embedded and external wallets.
+- **All supported wallets (default):** Allows users to create smart accounts using both embedded and external wallets.
 - **Embedded wallets only:** Restricts Smart Account creation to only embedded wallets.
 
 #### Configure bundler and paymaster
@@ -64,11 +65,11 @@ Currently, the sponsored paymaster can only be configured via the dashboard. For
 
 ### Optional: SDK configuration
 
-While the dashboard provides a convenient way to configure Smart accounts, the SDK offers greater flexibility by allowing you to override these settings.
+While the dashboard provides a convenient way to configure smart accounts, the SDK offers greater flexibility by allowing you to override these settings.
 
 ### Basic configuration
 
-To enable Smart accounts in your application, add the `accountAbstractionConfig` to your Web3Auth options:
+To enable smart accounts in your application, add the `accountAbstractionConfig` to your Web3Auth options:
 
 ```ts
 import { WEB3AUTH_NETWORK, Web3AuthOptions } from '@web3auth/modal'
@@ -283,7 +284,7 @@ const signedMessage = await walletClient.signMessage({
 
 ### Send batch transaction
 
-One of the key advantages of Smart accounts is the ability to execute multiple operations in a single transaction. For example, instead of requiring separate transactions for token approval and then swapping, both operations can be combined into a single UserOperation.
+One of the key advantages of smart accounts is the ability to execute multiple operations in a single transaction. For example, instead of requiring separate transactions for token approval and then swapping, both operations can be combined into a single UserOperation.
 
 To perform batch transactions, you must use the `BundlerClient` provided by Web3Auth:
 

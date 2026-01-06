@@ -21,17 +21,17 @@ Unlike frontend SDKs, the Node.js SDK is **stateless and sessionless**, making i
 
 ## Key features
 
-- **Stateless Architecture**: No session management required
-- **Multi-Chain Support**: EVM chains, Solana, and other blockchains
-- **Custom Authentication**: Mandatory custom auth with single key share
-- **Private Key Access**: Direct access to private keys for any blockchain
-- **Backend-Optimized**: Designed specifically for server environments
+- **Stateless architecture:** No session management required
+- **Multi-chain support:** Support for EVM chains, Solana, and other blockchains
+- **Custom authentication:** Mandatory custom auth with single key share
+- **Private key access:** Direct access to private keys for any blockchain
+- **Backend-optimized:** Designed specifically for server environments
 
 ## Requirements
 
 - Node.js 18+
 - Custom authentication setup (mandatory)
-- Web3Auth Dashboard project configuration
+- Embedded Wallets dashboard project configuration
 
 ## Prerequisites
 
@@ -54,13 +54,13 @@ npm install --save @web3auth/node-sdk
 
 ### 1. Custom authentication setup (required)
 
-The Node.js SDK **only supports custom authentication**. You must create a custom auth connection in the Web3Auth Dashboard:
+The Node.js SDK **only supports custom authentication**. You must create a custom auth connection:
 
-1. Go to [Web3Auth Dashboard](https://dashboard.web3auth.io/)
-2. Select your project
-3. Navigate to **Authentication** → **Custom connections**
-4. Click **Create connections**
-5. Configure your auth connection with your custom JWT details
+1. Go to the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+2. Select your project.
+3. Navigate to **Authentication** → **Custom connections**.
+4. Click **Create connections**.
+5. Configure your auth connection with your custom JWT details.
 
 :::info
 
@@ -75,7 +75,7 @@ Create a Web3Auth instance with your client ID, web3auth network name, and chain
 const { Web3Auth } = require('@web3auth/node-sdk')
 
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
   web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
 })
 ```
@@ -96,8 +96,8 @@ Use the connect method with your custom authentication parameters:
 
 ```javascript
 const result = await web3auth.connect({
-  authconnectionId: 'YOUR_AUTH_CONNECTION_ID', // Your custom authentication connection name
-  idtoken: 'USER_ID_TOKEN', // JWT token from your auth system
+  authConnectionId: 'YOUR_AUTH_CONNECTION_ID', // Your custom authentication connection name
+  idToken: 'USER_ID_TOKEN', // JWT token from your auth system
 })
 ```
 
@@ -245,7 +245,7 @@ const clientId =
   'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
 
 // Auth connection
-const authconnectionId = 'w3a-node-demo'
+const authConnectionId = 'w3a-node-demo'
 
 // focus-start
 const web3auth = new Web3Auth({
@@ -258,13 +258,13 @@ await web3auth.init()
 
 const privateKey = await fs.readFile('privateKey.pem', 'utf8')
 
-var idtoken = jwt.sign(
+var idToken = jwt.sign(
   {
     sub: '9fcd68c4-af50-4dd7-adf6-abd12a13cb32',
     name: 'Web3Auth DevRel Team',
     email: 'devrel@web3auth.io',
-    aud: 'urn:api-web3auth-io', // -> to be used in Custom Authentication as JWT Field
-    iss: 'https://web3auth.io', // -> to be used in Custom Authentication as JWT Field
+    aud: 'urn:api-web3auth-io', // -> to be used in custom authentication as JWT Field
+    iss: 'https://web3auth.io', // -> to be used in custom authentication as JWT Field
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 60 * 60,
   },
@@ -272,12 +272,12 @@ var idtoken = jwt.sign(
   { algorithm: 'RS256', keyid: '2ma4enu1kdvw5bo9xsfpi3gcjzrt6q78yl0h' }
 )
 
-console.log('\x1b[33m%s\x1b[0m', 'JWT token:', idtoken)
+console.log('\x1b[33m%s\x1b[0m', 'JWT token:', idToken)
 
 // focus-start
 const result = await web3auth.connect({
-  authconnectionId,
-  idtoken,
+  authConnectionId,
+  idToken,
 })
 // focus-end
 ```

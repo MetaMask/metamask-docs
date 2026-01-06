@@ -20,8 +20,8 @@ This function will only return information based on the connected adapter. These
 ```ts
 // Later in your code:
 try {
-  const idtoken = await web3auth.getIdentityToken()
-  console.log(idtoken)
+  const idToken = await web3auth.getIdentityToken()
+  console.log(idToken)
 } catch (error) {
   console.error('error authenticating user:', error)
 }
@@ -32,12 +32,12 @@ try {
 ```typescript
 getIdentityToken(): Promise<UserAuthInfo>
 
-type UserAuthInfo = { idtoken: string };
+type UserAuthInfo = { idToken: string };
 ```
 
 ### Response format
 
-The `idtoken` is a JWT that can be decoded to get user information.
+The `idToken` is a JWT that can be decoded to get user information.
 
 <Tabs
   defaultValue="social-login"
@@ -80,7 +80,7 @@ The `idtoken` is a JWT that can be decoded to get user information.
 `getIdentityToken(): Promise<UserAuthInfo>`
 
 ```tsx
-export type UserAuthInfo = { idtoken: string }
+export type UserAuthInfo = { idToken: string }
 ```
 
 </TabItem>
@@ -139,7 +139,7 @@ export type UserAuthInfo = { idtoken: string }
 `getIdentityToken(): Promise<UserAuthInfo>`
 
 ```tsx
-export type UserAuthInfo = { idtoken: string }
+export type UserAuthInfo = { idToken: string }
 ```
 
 </TabItem>

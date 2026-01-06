@@ -13,13 +13,13 @@ const getIdtoken = async () => {
 
 const loginWithJWT = async () => {
   try {
-    const idtoken = await getIdtoken();
+    const idToken = await getIdtoken();
 
     // focus-start
     await connectTo(WALLET_CONNECTORS.AUTH, {
-      authconnection: AUTH_CONNECTION.CUSTOM,
-      authconnectionId: "w3a-node-demo",
-      idtoken,
+      authConnection: AUTH_CONNECTION.CUSTOM,
+      authConnectionId: "w3a-node-demo",
+      idToken,
       extraLoginOptions: {
         isUserIdCaseSensitive: false,
       },

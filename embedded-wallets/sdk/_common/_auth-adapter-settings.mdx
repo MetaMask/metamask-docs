@@ -12,7 +12,7 @@ import Tabs from "@theme/Tabs";
 
 | Variable               | Description                                                                                                                                                                                                                                                                                                                                              |
 | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`             | The unique identifier for your application. Obtain this by registering your dapp in the [Web3Auth Dashboard](https://dashboard.web3auth.io)                                                                                                                                                                                                              |
+| `clientId`             | The unique identifier for your application. Obtain this by registering your dapp in the [Embedded Wallets dashboard](https://dashboard.web3auth.io)                                                                                                                                                                                                              |
 | `network`              | The Web3Auth Network to be used.                                                                                                                                                                                                                                                                                                                         |
 | `buildEnv`             | This parameter will be used to change the build environment of auth sdk, mainly for testing purposes. default is `production`.                                                                                                                                                                                                                           |
 | `redirectUrl`          | The URL where users will be redirected after login.                                                                                                                                                                                                                                                                                                      |
@@ -225,7 +225,7 @@ export type LoginConfig = Record<string, {
      */
     showOnSocialBackupFactor?: boolean;
     /**
-     * Custom jwt parameters to configure the login. Useful for Auth0 configuration
+     * Custom JWT parameters to configure the login. Useful for Auth0 configuration
      */
     jwtParameters?: JwtParameters;
 }>;

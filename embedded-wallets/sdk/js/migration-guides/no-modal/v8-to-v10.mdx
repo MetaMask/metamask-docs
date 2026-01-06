@@ -145,13 +145,13 @@ await web3auth.init()
 
 // Custom UI - use connectTo
 await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
-  authconnection: AUTH_CONNECTION.GOOGLE,
+  authConnection: AUTH_CONNECTION.GOOGLE,
 })
 
 // Or with custom verifiers/connections
 await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
-  authconnection: AUTH_CONNECTION.GOOGLE,
-  authconnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID',
+  authConnection: AUTH_CONNECTION.GOOGLE,
+  authConnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID',
 })
 // add-end
 ```
@@ -198,18 +198,18 @@ of in code.
 For specific functionality migrations, refer to these supplementary guides:
 
 **External Wallet Adapters:** If you used external wallet adapters in v8, see the 🔌
-**[External Wallet Adapters Migration Guide](../modal/v8-to-v10/external-wallets.mdx)** for migrating
+[External wallet adapters migration guide](../modal/v8-to-v10/external-wallets.mdx) for migrating
 to automatic detection.
 
 **Wallet Services:** If you used the `@web3auth/wallet-services-plugin` in v8, see the 🛠️
-**[Wallet Services Migration Guide](../modal/v8-to-v10/wallet-services.mdx)** for migrating to the
+[wallet services migration guide](../modal/v8-to-v10/wallet-services.mdx) for migrating to the
 built-in integration.
 
 **Whitelabeling and UI customization:** If you had whitelabeling configurations in v8, see the 📋
-**[Whitelabeling Migration Guide](../modal/v8-to-v10/whitelabeling.mdx)** for detailed steps.
+[whitelabeling migration guide](../modal/v8-to-v10/whitelabeling.mdx) for detailed steps.
 
-**Custom Authentication:** If you used custom verifiers in v8, see the 🔐
-**[Custom Authentication Migration Guide](../modal/v8-to-v10/custom-authentication.mdx)** for
+**Custom authentication:** If you used custom verifiers in v8, see the 🔐
+[custom authentication migration guide](../modal/v8-to-v10/custom-authentication.mdx) for
 migrating to the new connections system.
 
 ## Complete migration example
@@ -301,8 +301,8 @@ await web3auth.init()
 
 // connect with custom UI using connectTo
 await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
-  authconnection: AUTH_CONNECTION.GOOGLE,
-  authconnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID', // From dashboard
+  authConnection: AUTH_CONNECTION.GOOGLE,
+  authConnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID', // From dashboard
 })
 
 // External wallets automatically detected - no manual setup needed
@@ -328,16 +328,16 @@ await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
 
 ## Benefits of v10 migration
 
-1. **Unified Architecture**: Single package handles both modal and custom UI use cases
-2. **Reduced Complexity**: No manual adapter configuration or chain setup
-3. **Dashboard Control**: Centralized configuration management
-4. **Better Developer Experience**: Cleaner API with improved TypeScript support
-5. **Future-Proof**: Aligned with Web3Auth's long-term architectural direction
+1. **Unified Architecture:** Single package handles both modal and custom UI use cases.
+2. **Reduced Complexity:** No manual adapter configuration or chain setup.
+3. **Dashboard Control:** Centralized configuration management.
+4. **Better Developer Experience:** Cleaner API with improved TypeScript support.
+5. **Future-Proof:** Aligned with Embedded Wallets' long-term architectural direction.
 
 ## Next steps
 
-1. Update your package dependencies
-2. Migrate your initialization code to use `Web3Auth` from `@web3auth/modal`
-3. Replace direct adapter methods with `connectTo` calls
-4. Configure your chains and branding on the Web3Auth Developer Dashboard
-5. Test your custom UI implementation with the new `connectTo` API
+1. Update your package dependencies.
+2. Migrate your initialization code to use `Web3Auth` from `@web3auth/modal`.
+3. Replace direct adapter methods with `connectTo` calls.
+4. Configure your chains and branding on the Embedded Wallets developer dashboard.
+5. Test your custom UI implementation with the new `connectTo` API.

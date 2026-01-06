@@ -8,9 +8,9 @@ import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
-Custom Authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
+Custom authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
 
-This feature, with MFA turned off, can even make Embedded Wallets invisible to the end user.
+This feature, with Multi-Factor Authentication turned off, can make Embedded Wallets invisible to the end user.
 
 <GrowthPlanNote />
 
@@ -18,7 +18,7 @@ This feature, with MFA turned off, can even make Embedded Wallets invisible to t
 
 :::info prerequisite
 
-To enable this, you need to [Create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
 
 :::
 
@@ -26,7 +26,7 @@ To configure a connection, you need to provide the particular details of the con
 
 :::tip
 
-Learn more about the [Auth provider setup](/embedded-wallets/authentication) and the different configurations available for each connection.
+Learn more about the [auth provider setup](/embedded-wallets/authentication) and the different configurations available for each connection.
 
 :::
 
@@ -34,13 +34,13 @@ Learn more about the [Auth provider setup](/embedded-wallets/authentication) and
 
 :::warning
 
-_**"Auth Connection"**_ is called _**"Verifier"**_ in the Android SDK. It is the older terminology which we will be updating in the upcoming releases.
+**"Auth Connection"** is called **"Verifier"** in the Android SDK. It is the older terminology which we will be updating in the upcoming releases.
 
-Consequentially, you will see the terms _**"Verifier ID"**_ and _**"Aggregate Verifier"**_ used in the codebase and documentation referring to _**"Auth Connection ID"**_ and _**"Grouped Auth Connection"**_ respectively.
+Consequentially, you will see the terms **"Verifier ID"** and **"Aggregate Verifier"** used in the codebase and documentation referring to **"Auth Connection ID"** and **"Grouped Auth Connection"** respectively.
 
 :::
 
-To use custom authentication (Using Social providers or Login providers like Auth0, AWS Cognito, Firebase etc. or even your own custom JWT login) you can add the configuration using `loginConfig` parameter during the initialization.
+To use custom authentication (using supported Social providers or Login providers like Auth0, AWS Cognito, Firebase, or your own custom JWT login) you can add the configuration using `loginConfig` parameter during the initialization.
 
 The `loginConfig` parameter is a key value map. The key should be one of the `Web3AuthProvider` in its string form, and the value should be a `LoginConfigItem` instance.
 
@@ -50,7 +50,7 @@ The `loginConfig` parameter is a key value map. The key should be one of the `We
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                   |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `verifier`               | The name of the verifier that you have registered on the Web3Auth Dashboard. It's a mandatory field and accepts a `string` as a value.                                                                                                                                                                        |
+| `verifier`               | The name of the verifier that you have registered on the Embedded Wallets dashboard. It's a mandatory field and accepts a `string` as a value.                                                                                                                                                                        |
 | `typeOfLogin`            | Type of login for this verifier. This value will affect the login flow. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should provide your own JWT token, and no sign-in flow will be presented. It's a mandatory field and accepts a `TypeOfLogin` value. |
 | `clientId`               | The client ID provided by your login provider, e.g., Google's Client ID or Web3Auth's client ID if using `jwt` as `typeOfLogin`. It's a mandatory field and accepts a `string` as a value.                                                                                                                    |
 | `name?`                  | Display name for the verifier. If null, the default name is used. It accepts a `string` as a value.                                                                                                                                                                                                           |
@@ -142,12 +142,12 @@ const web3auth = new Web3Auth(WebBrowser, {
   network: WEB3AUTH_NETWORK.MAINNET, // or other networks
   loginConfig: {
     google: {
-      verifier: 'google-verifier', // Get this from the Web3Auth Dashboard
+      verifier: 'google-verifier', // Get this from the Embedded Wallets dashboard
       typeOfLogin: TypeOfLogin.GOOGLE,
       clientId: 'GOOGLE_CLIENT_ID', // Google's client id
     },
     jwt: {
-      verifier: 'jwt-verifier', // Get this from the Web3Auth Dashboard
+      verifier: 'jwt-verifier', // Get this from the Embedded Wallets dashboard
       typeOfLogin: TypeOfLogin.JWT,
       clientId: 'JWT_CLIENT_ID', // Custom JWT client id
     },

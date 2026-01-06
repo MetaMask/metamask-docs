@@ -54,7 +54,7 @@ const ethereumPrivateKeyprovider = EthereumPrivateKeyprovider({
 // remove-end
 
 const web3auth = new Web3Auth({
-  clientId: WEB3AUTH_CLIENT_ID, // Get your Client ID from the Web3Auth Dashboard
+  clientId: WEB3AUTH_CLIENT_ID, // Get your Client ID from the Embedded Wallets dashboard
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // remove-next-line
   privateKeyprovider: ethereumPrivateKeyprovider,
@@ -146,30 +146,30 @@ The purpose and the structure of the returned ID token (a JWT containing user in
 // remove-next-line
 const userAuthInfo = await web3auth.authenticateUser()
 // add-next-line
-const userAuthInfo = await web3auth.getIdentityToken() // Returns { idtoken: string }
+const userAuthInfo = await web3auth.getIdentityToken() // Returns { idToken: string }
 
-const idtoken = userAuthInfo.idtoken
+const idToken = userAuthInfo.idToken
 ```
 
-**Wallet Services:** If you used the `@web3auth/wallet-services-plugin` in v9, see the 🛠️ **[Wallet Services Migration Guide](./wallet-services.mdx)** for migrating to the built-in integration.
+**Wallet Services:** If you used the `@web3auth/wallet-services-plugin` in v9, see the 🛠️ [Wallet Services migration guide](./wallet-services.mdx) for migrating to the built-in integration.
 
 ## Additional migration guides
 
 For specific functionality or frameworks, refer to these dedicated migration guides:
 
-**📋 Whitelabeling and UI customization:** If you had whitelabeling configurations (`uiConfig`, `modalConfig`, or `AuthAdapter` whitelabel settings) in v9, see the **[Whitelabeling Migration Guide](./whitelabeling.mdx)** for detailed steps.
+**📋 Whitelabeling and UI customization:** If you had whitelabeling configurations (`uiConfig`, `modalConfig`, or `AuthAdapter` whitelabel settings) in v9, see the [whitelabeling migration guide](./whitelabeling.mdx) for detailed steps.
 
-**🔧 Smart Account Functionality:** If you used Smart accounts in v9 with `@web3auth/account-abstraction-provider`, see the **[Smart Account Migration Guide](./smart-accounts.mdx)** for the new dashboard-centric approach.
+**🔧 Smart account functionality:** If you used smart accounts in v9 with `@web3auth/account-abstraction-provider`, see the [smart account migration guide](./smart-accounts.mdx) for the new dashboard-centric approach.
 
-**🔐 Custom Authentication:** If you used custom verifiers or aggregate verifiers in v9, see the **[Custom Authentication Migration Guide](./custom-authentication.mdx)** for migrating to the new connections system.
+**🔐 Custom authentication:** If you used custom verifiers or aggregate verifiers in v9, see the [custom authentication migration guide](./custom-authentication.mdx) for migrating to the new connections system.
 
-**⚛️ React & Vue Applications:** If you're using React or Vue with Web3Auth, see the framework-specific migration guides:
+**⚛️ React and Vue applications:** If you're using React or Vue with Embedded Wallets, see the framework-specific migration guides:
 
-- [React Migration Guide](../../../../react/migration-guides/modal-v9-to-v10-react.mdx)
-- [Vue Migration Guide](../../../../vue/migration-guides/modal-v9-to-v10-vue.mdx)
+- [React migration guide](../../../../react/migration-guides/modal-v9-to-v10-react.mdx)
+- [Vue migration guide](../../../../vue/migration-guides/modal-v9-to-v10-vue.mdx)
 
 ## Further reading
 
-- [Web3Auth Documentation - Web SDK v10](https://web3auth.io/embedded-wallets/sdk/js)
-- [Web3Auth v10 Examples on GitHub](https://github.com/Web3Auth/web3auth-examples)
-- [Join the Community](https://web3auth.io/community)
+- [Embedded wallets documentation - Web SDK v10](https://web3auth.io/embedded-wallets/sdk/js)
+- [Web3Auth v10 examples on GitHub](https://github.com/Web3Auth/web3auth-examples)
+- [Join the community](https://web3auth.io/community)

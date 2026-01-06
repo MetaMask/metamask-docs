@@ -46,9 +46,9 @@ const web3AuthOptions: Web3AuthOptions = {
 }
 ```
 
-## Getting the Web3Auth provider
+## Getting the Embedded Wallets provider
 
-After initializing Web3Auth, the next step is to initialize the provider and use it for your
+After initializing Embedded Wallets, the next step is to initialize the provider and use it for your
 operations.
 
 ```tsx
@@ -78,10 +78,10 @@ values={[
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
-// provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
 // For ethers v5
 // const signer = ethersprovider.getSigner();
@@ -96,7 +96,7 @@ const address = signer.getAddress()
 // await ethersprovider.getBalance(address) // Balance is in wei
 // );
 const balance = ethers.utils.formatEther(
-  await Provider.getBalance(address) // Balance is in wei
+  await provider.getBalance(address) // Balance is in wei
 )
 ```
 
@@ -138,12 +138,12 @@ const balance = await publicClient.getBalance({ address: address[0] })
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
-// provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
-const signer = await Provider.getSigner()
+const signer = await provider.getSigner()
 
 const destination = '0x7aFac68875d2841dc16F1730Fba43974060b907A'
 const amount = ethers.parseEther('1.0') // Convert 1 ether to wei
@@ -163,7 +163,7 @@ const receipt = await tx.wait()
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
 const publicClient = createPublicClient({
@@ -209,12 +209,12 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
-// provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
-const signer = await Provider.getSigner()
+const signer = await provider.getSigner()
 
 const destination = '0x7aFac68875d2841dc16F1730Fba43974060b907A'
 const amount = ethers.parseEther('1.0') // Convert 1 ether to wei
@@ -234,7 +234,7 @@ const receipt = await tx.wait()
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
 const publicClient = createPublicClient({
@@ -282,12 +282,12 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
-const provider = new ethers.providers.Web3provider(web3Auth.provider)
+const provider = new ethers.providers.Web3Provider(web3Auth.provider)
 
-const signer = await Provider.getSigner()
+const signer = await provider.getSigner()
 
 const originalMessage = 'YOUR_MESSAGE'
 
@@ -299,7 +299,7 @@ const signedMessage = await signer.signMessage(originalMessage)
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
 const publicClient = createPublicClient({
@@ -337,11 +337,11 @@ const hash = await walletClient.signMessage({
 <TabItem value="viem">
 
 ```tsx
-// SignTypeddata in viem
-// https://viem.sh/docs/actions/wallet/signTypeddata
+// SignTypedData in viem
+// https://viem.sh/docs/actions/wallet/signTypedData
 
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
 const walletClient = createWalletClient({
@@ -351,7 +351,7 @@ const walletClient = createWalletClient({
 
 const address = await walletClient.getAddresses()
 
-const signature = await walletClient.signTypeddata({
+const signature = await walletClient.signTypedData({
   account: address[0],
   domain: {
     name: 'Ether Mail',
@@ -390,12 +390,12 @@ const signature = await walletClient.signTypeddata({
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
-// provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
-const signer = await Provider.getSigner()
+const signer = await provider.getSigner()
 
 // Get user's Ethereum public address
 const fromAddress = await signer.getAddress()
@@ -469,9 +469,9 @@ const originalMessage = JSON.stringify({
   },
 })
 const params = [fromAddress, originalMessage]
-const method = 'eth_signTypeddata_v4'
+const method = 'eth_signTypedData_v4'
 
-const signedMessage = await signer.Provider.send(method, params)
+const signedMessage = await signer.provider.send(method, params)
 ```
 
 </TabItem>
@@ -482,7 +482,7 @@ const signedMessage = await signer.Provider.send(method, params)
 #### Solidity contract
 
 In this example, we'll be demonstrating how to use Web3Auth with web3.js or ethers.js to interact
-with Solidity smart contracts. The simple Hello World contract allows anyone to read and write a
+with Solidity smart contracts. The simple _Hello World_ contract allows anyone to read and write a
 message to it.
 
 ```tsx
@@ -517,12 +517,12 @@ contract HelloWorld {
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
-// provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
-const signer = Provider.getSigner();
+const signer = provider.getSigner();
 
 const contractABI = [
   { inputs: [{ internalType: "string", name: "initMessage", type: "string" }], stateMutability: "nonpayable", type: "constructor" },
@@ -555,7 +555,7 @@ const deployedContractAddress = receipt.contractAddress;
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 const publicClient = createPublicClient({
   chain: this.getViewChain(),
@@ -621,12 +621,12 @@ const deployedContractAddress = receipt.contractAddress
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
-// provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
-const signer = await Provider.getSigner()
+const signer = await provider.getSigner()
 
 const contractABI = [
   {
@@ -665,7 +665,7 @@ const message = await contract.message()
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
 const contractABI = [
@@ -722,12 +722,12 @@ const message = await publicClient.readContract({
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
-// provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
-const signer = await Provider.getSigner()
+const signer = await provider.getSigner()
 
 const contractABI = [
   {
@@ -769,7 +769,7 @@ const receipt = await tx.wait()
 
 ```tsx
 /*
-  Use code from the above Initializing provider here
+  Use code from the above initializing provider here
 */
 
 const contractABI = [

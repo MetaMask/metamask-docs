@@ -177,7 +177,7 @@ built-in integration.
 **Whitelabeling and UI customization:** If you had whitelabeling configurations in v7, see the 📋
 **[Whitelabeling Migration Guide](./whitelabeling.mdx)** for detailed steps.
 
-**Custom Authentication:** If you used custom verifiers in v7, see the 🔐
+**Custom authentication:** If you used custom verifiers in v7, see the 🔐
 **[Custom Authentication Migration Guide](./custom-authentication.mdx)** for
 migrating to the new connections system.
 
@@ -257,7 +257,7 @@ await web3auth.initModal()
 
 // Usage
 await web3auth.connect()
-const idtoken = await web3auth.authenticateUser()
+const idToken = await web3auth.authenticateUser()
 ```
 
 </TabItem>
@@ -277,7 +277,7 @@ await web3auth.init()
 
 // Usage
 await web3auth.connect()
-const idtoken = await web3auth.getIdentityToken()
+const idToken = await web3auth.getIdentityToken()
 
 // External wallets automatically detected - no manual setup needed
 ```
@@ -298,16 +298,16 @@ const idtoken = await web3auth.getIdentityToken()
 
 ## Benefits of v10 migration
 
-1. **Unified Architecture**: Single package handles all use cases
-2. **Reduced Complexity**: No manual adapter configuration or chain setup
-3. **Dashboard Control**: Centralized configuration management
-4. **Better Developer Experience**: Cleaner API with improved TypeScript support
-5. **Future-Proof**: Aligned with Web3Auth's long-term architectural direction
+1. **Unified Architecture:** Single package handles all use cases
+2. **Reduced Complexity:** No manual adapter configuration or chain setup
+3. **Dashboard Control:** Centralized configuration management
+4. **Better Developer Experience:** Cleaner API with improved TypeScript support
+5. **Future-Proof:** Aligned with Web3Auth's long-term architectural direction
 
 ## Next steps
 
-1. Update your package dependencies
-2. Remove adapter configurations and use the unified SDK
-3. Configure your chains and branding on the Web3Auth Developer Dashboard
-4. Update method names (`authenticateUser` → `getIdentityToken`)
-5. Test your application with the new unified architecture
+1. Update your package dependencies.
+2. Remove adapter configurations and use the unified SDK.
+3. Configure your chains and branding on the Web3Auth Developer Dashboard.
+4. Update method names (`authenticateUser` → `getIdentityToken`).
+5. Test your application with the new unified architecture.

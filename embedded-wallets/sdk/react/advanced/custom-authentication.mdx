@@ -24,9 +24,9 @@ import GroupedAuthImplicitAuth0 from './_custom-authentication-snippets/_grouped
 import GroupedAuthJwtAuth0 from './_custom-authentication-snippets/_grouped_auth_jwt_auth0.mdx'
 import GroupedAuthFirebase from './_custom-authentication-snippets/_grouped_auth_firebase.mdx'
 
-Custom Authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
+Custom authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
 
-**This feature, with MFA turned off, can even make Web3Auth invisible to the end user.**
+This feature, with MFA turned off, can make Embedded Wallets invisible to the end user.
 
 <GrowthPlanNote />
 
@@ -34,15 +34,15 @@ Custom Authentication is a way to authenticate users with your custom authentica
 
 :::info prerequisite
 
-To enable this, you need to [Create a connection](../../../dashboard/authentication.mdx) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](../../../dashboard/authentication.mdx) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
 
 :::
 
-To configure a connection, you need to provide the particular details of the connection into our Web3Auth Dashboard. This enables us to map a `authConnectionId with your connection details. This `authConnectionId helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
+To configure a connection, you need to provide the particular details of the connection into our Embedded Wallets dashboard. This enables us to map a `authConnectionId with your connection details. This `authConnectionId helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
 
 :::tip
 
-Learn more about the [Auth provider setup](../../../authentication/README.mdx) and the different configurations available for each connection.
+Learn more about the [auth provider setup](../../../authentication/README.mdx) and the different configurations available for each connection.
 
 :::
 
@@ -88,7 +88,7 @@ You can utilise this function to enable multiple types of connections like:
 connectTo<T extends WALLET_CONNECTOR_TYPE>(
   connector: T,
   params?: LoginParamMap[T]
-): Promise<Iprovider | null>;
+): Promise<IProvider | null>;
 
 export type LoginParamMap = {
     [WALLET_CONNECTORS.AUTH]: Partial<AuthLoginParams>;
@@ -104,10 +104,10 @@ export type LoginParamMap = {
 | Parameter                  | Description                                                                                                                        |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `loginHint?`               | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` & `sms_passwordless` logins. |
-| `idtoken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                            |
-| `authconnection?`          | The auth provider to use for login (e.g., "google", "facebook").                                                                   |
-| `authconnectionId?`        | The ID configured in your Web3Auth Dashboard for the connection.                                                                   |
-| `groupedAuthconnectionId?` | The grouped Auth Connection ID to be used for login.                                                                               |
+| `idToken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                            |
+| `authConnection?`          | The auth provider to use for login (e.g., "google", "facebook").                                                                   |
+| `authConnectionId?`        | The ID configured in your Embedded Wallets dashboard for the connection.                                                                   |
+| `groupedAuthConnectionId?` | The grouped Auth Connection ID to be used for login.                                                                               |
 | `extraLoginOptions?`       | Custom OAuth options (e.g., login_hint, domain, etc.).                                                                             |
 
   </TabItem>
@@ -116,7 +116,7 @@ export type LoginParamMap = {
     ```tsx
     export type AuthLoginParams = LoginParams & {
       loginHint?: string;
-      idtoken?: string;
+      idToken?: string;
   };
     export type LoginParams = {
   /**
@@ -127,15 +127,15 @@ export type LoginParamMap = {
   /**
    * The auth connection to be used for login.
    */
-  authconnection: AUTH_CONNECTION_TYPE | CUSTOM_AUTH_CONNECTION_TYPE;
+  authConnection: AUTH_CONNECTION_TYPE | CUSTOM_AUTH_CONNECTION_TYPE;
   /**
    * The auth connection id to be used for login.
    */
-  authconnectionId?: string;
+  authConnectionId?: string;
   /**
    * The grouped auth connection id to be used for login.
    */
-  groupedAuthconnectionId?: string;
+  groupedAuthConnectionId?: string;
   /**
    * You can set the `mfaLevel` to customize when mfa screen should be shown to user.
    * It currently accepts 4 values:-
@@ -173,12 +173,12 @@ export type LoginParamMap = {
    */
   dappShare?: string;
   /**
-   * This curve will be used to determine the public key encoded in the jwt token which returned in
+   * This curve will be used to determine the public key encoded in the JWT token which returned in
    * `getUserInfo` function after user login.
-   * You can use that public key from jwt token as a unique user identifier in your backend.
+   * You can use that public key from JWT token as a unique user identifier in your backend.
    *
-   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in jwt token to use.
-   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in jwt token to use.
+   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in JWT token to use.
+   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in JWT token to use.
    *
    * Note: This parameter won't change format of private key returned by auth. Private key returned
    * by auth is always `secp256k1`.
@@ -253,7 +253,7 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
      */
     client_id?: string;
     /**
-     * The field in jwt token which maps to user id
+     * The field in JWT token which maps to user id
      */
     userIdField?: string;
     /**
@@ -320,7 +320,7 @@ In addition to these you can also use any other provider like Auth0, AWS Cognito
 
 ### JWT login
 
-JWT login is a way to authenticate users with your custom authentication services. With this method, Web3Auth just takes into account the `idtoken` passed over to the `connectTo` function and uses it to authenticate the user. You can utilise this method with any authentication service that is OAuth 2.0 Compatible.
+JWT login is a way to authenticate users with your custom authentication services. With this method, Web3Auth just takes into account the `idToken` passed over to the `connectTo` function and uses it to authenticate the user. You can utilise this method with any authentication service that is OAuth 2.0 Compatible.
 
 :::warning
 
@@ -352,7 +352,7 @@ For example, you can group Google & Email Passwordless providers together and us
 
 :::info Prerequisites
 
-You need to configure a grouped connection, by combining your single connections in the Web3Auth Dashboard before using this feature.
+You need to configure a grouped connection, by combining your single connections in the Embedded Wallets dashboard before using this feature.
 
 :::
 

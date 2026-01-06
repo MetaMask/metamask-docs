@@ -1,13 +1,13 @@
 ```tsx title="App.tsx"
 const loginWithGoogle = async (response: CredentialResponse) => {
-  const idtoken = response.credential;
+  const idToken = response.credential;
 
   // focus-start
   await connectTo(WALLET_CONNECTORS.AUTH, {
-    groupedAuthconnectionId: "aggregate-sapphire",
-    authconnectionId: "w3a-google",
-    authconnection: AUTH_CONNECTION.GOOGLE,
-    idtoken,
+    groupedAuthConnectionId: "aggregate-sapphire",
+    authConnectionId: "w3a-google",
+    authConnection: AUTH_CONNECTION.GOOGLE,
+    idToken,
     extraLoginOptions: {
       isUserIdCaseSensitive: false,
       verifierIdField: "email",
@@ -19,17 +19,17 @@ const loginWithGoogle = async (response: CredentialResponse) => {
 const loginWithAuth0 = async () => {
   try {
     await loginWithPopup();
-    const idtoken = (await getIdtokenClaims())?.__raw.toString();
-    if (!idtoken) {
+    const idToken = (await getIdtokenClaims())?.__raw.toString();
+    if (!idToken) {
       throw new error("No id token found");
     }
 
     // focus-start
     await connectTo(WALLET_CONNECTORS.AUTH, {
-      groupedAuthconnectionId: "aggregate-sapphire",
-      authconnectionId: "w3a-a0-github",
-      authconnection: AUTH_CONNECTION.CUSTOM,
-      idtoken,
+      groupedAuthConnectionId: "aggregate-sapphire",
+      authConnectionId: "w3a-a0-github",
+      authConnection: AUTH_CONNECTION.CUSTOM,
+      idToken,
       extraLoginOptions: {
         isUserIdCaseSensitive: false,
         verifierIdField: "email",

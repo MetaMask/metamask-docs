@@ -24,7 +24,7 @@ Dashboard, significantly reducing client-side code complexity.
 
 ## Key changes & Mapping
 
-### 1. Single verifiers (v9) to Single connections (v10)
+### 1. Single verifiers (v9) to single connections (v10)
 
 Single verifiers in v9 become connections in v10:
 
@@ -59,7 +59,7 @@ const web3AuthOptions: Web3AuthOptions = {
         loginMethods: {
           google: {
             name: 'Google Login',
-            authconnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID', // v10 connection ID
+            authConnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID', // v10 connection ID
           },
         },
       },
@@ -69,8 +69,8 @@ const web3AuthOptions: Web3AuthOptions = {
 
 // OR v10: connectTo with a single connection
 // await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
-//   authconnection: AUTH_CONNECTION.GOOGLE,
-//   authconnectionId: "YOUR_GOOGLE_AUTH_CONNECTION_ID",
+//   authConnection: AUTH_CONNECTION.GOOGLE,
+//   authConnectionId: "YOUR_GOOGLE_AUTH_CONNECTION_ID",
 // });
 // add-end
 ```
@@ -82,7 +82,7 @@ Web3Auth Developer Dashboard. Locate your migrated connection, note its `authCon
 this ID in your v10 client code (`modalConfig` or `connectTo`). Remove any v9 `AuthAdapter`
 configuration previously used for this verifier.
 
-### 2. Aggregate verifiers (v9) to Grouped connections (v10)
+### 2. Aggregate verifiers (v9) to grouped connections (v10)
 
 Aggregate verifiers in v9 become grouped connections in v10:
 
@@ -123,13 +123,13 @@ const web3AuthOptions: Web3AuthOptions = {
         loginMethods: {
           google: {
             name: 'Google Login',
-            authconnectionId: 'YOUR_INDIVIDUAL_GOOGLE_CONNECTION_ID', // ID of the individual Google connection
-            groupedAuthconnectionId: 'YOUR_GROUPED_CONNECTION_ID_FROM_DASHBOARD', // ID of the group
+            authConnectionId: 'YOUR_INDIVIDUAL_GOOGLE_CONNECTION_ID', // ID of the individual Google connection
+            groupedAuthConnectionId: 'YOUR_GROUPED_CONNECTION_ID_FROM_DASHBOARD', // ID of the group
           },
           myCustomJWT: {
             name: 'Login with Corp Email',
-            authconnectionId: 'YOUR_INDIVIDUAL_CUSTOM_JWT_CONNECTION_ID',
-            groupedAuthconnectionId: 'YOUR_GROUPED_CONNECTION_ID_FROM_DASHBOARD',
+            authConnectionId: 'YOUR_INDIVIDUAL_CUSTOM_JWT_CONNECTION_ID',
+            groupedAuthConnectionId: 'YOUR_GROUPED_CONNECTION_ID_FROM_DASHBOARD',
           },
         },
       },
@@ -140,24 +140,24 @@ const web3AuthOptions: Web3AuthOptions = {
 // OR v10: connectTo with a grouped connection
 // For Google login part of the group:
 // await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
-//   authconnection: AUTH_CONNECTION.GOOGLE,
-//   authconnectionId: "YOUR_INDIVIDUAL_GOOGLE_CONNECTION_ID",
-//   groupedAuthconnectionId: "YOUR_GROUPED_CONNECTION_ID_FROM_DASHBOARD",
+//   authConnection: AUTH_CONNECTION.GOOGLE,
+//   authConnectionId: "YOUR_INDIVIDUAL_GOOGLE_CONNECTION_ID",
+//   groupedAuthConnectionId: "YOUR_GROUPED_CONNECTION_ID_FROM_DASHBOARD",
 // });
 
 // For Custom JWT login part of the group:
-// const idtoken = await getMyIdtoken();
+// const idToken = await getMyIdtoken();
 // await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
-//   authconnection: AUTH_CONNECTION.CUSTOM,
-//   idtoken: idtoken,
-//   authconnectionId: "YOUR_INDIVIDUAL_CUSTOM_JWT_CONNECTION_ID",
-//   groupedAuthconnectionId: "YOUR_GROUPED_CONNECTION_ID_FROM_DASHBOARD",
+//   authConnection: AUTH_CONNECTION.CUSTOM,
+//   idToken: idToken,
+//   authConnectionId: "YOUR_INDIVIDUAL_CUSTOM_JWT_CONNECTION_ID",
+//   groupedAuthConnectionId: "YOUR_GROUPED_CONNECTION_ID_FROM_DASHBOARD",
 // });
 // add-end
 ```
 
-You first create individual "connections" on the dashboard for each auth provider (e.g., one for
-Google, one for your custom JWT). Then, you create a "Grouped connection" on the dashboard,
+First create individual "connections" on the dashboard for each auth provider (e.g., one for
+Google, one for your custom JWT). Then, create a "Grouped connection" on the dashboard,
 selecting the individual connections you want to group.
 
 #### Action
@@ -166,10 +166,10 @@ selecting the individual connections you want to group.
    the new v10 dashboard. They will appear as individual "connections" that are part of a "Grouped
    connection".
 2. On the v10 dashboard, locate your migrated Grouped connection. Note its
-   `groupedAuthconnectionId`.
+   `groupedAuthConnectionId`.
 3. For each login method within that group, find the corresponding individual migrated connection
    and note its specific `authConnectionId.
-4. Update your v10 client code to use both the `groupedAuthconnectionId` (for the group) and the
+4. Update your v10 client code to use both the `groupedAuthConnectionId` (for the group) and the
    specific `authConnectionId (for the particular login method being invoked) in `modalConfig` or
    `connectTo` calls. The v9 `verifierSubIdentifier` is no longer used in the client.
 

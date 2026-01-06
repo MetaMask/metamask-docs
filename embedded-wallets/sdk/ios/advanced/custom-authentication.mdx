@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
-Custom Authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
+Custom authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
 
 This feature, with MFA turned off, can even make Embedded Wallets invisible to the end user.
 
@@ -18,7 +18,7 @@ This feature, with MFA turned off, can even make Embedded Wallets invisible to t
 
 :::info prerequisite
 
-To enable this, you need to [Create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
 
 :::
 
@@ -26,7 +26,7 @@ To configure a connection, you need to provide the particular details of the con
 
 :::tip
 
-Learn more about the [Auth provider setup](/embedded-wallets/authentication) and the different configurations available for each connection.
+Learn more about the [auth provider setup](/embedded-wallets/authentication) and the different configurations available for each connection.
 
 :::
 
@@ -34,13 +34,13 @@ Learn more about the [Auth provider setup](/embedded-wallets/authentication) and
 
 :::warning
 
-_**"Auth Connection"**_ is called _**"Verifier"**_ in the Android SDK. It is the older terminology which we will be updating in the upcoming releases.
+**"Auth Connection"** is called **"Verifier"** in the Android SDK. It is the older terminology which we will be updating in the upcoming releases.
 
-Consequentially, you will see the terms _**"Verifier ID"**_ and _**"Aggregate verifier"**_ used in the codebase and documentation referring to _**"Auth Connection ID"**_ and _**"Grouped Auth Connection"**_ respectively.
+Consequentially, you will see the terms **"Verifier ID"** and **"Aggregate Verifier"** used in the codebase and documentation referring to **"Auth Connection ID"** and **"Grouped Auth Connection"** respectively.
 
 :::
 
-To use custom authentication (Using Social providers or Login providers like Auth0, AWS Cognito, Firebase etc. or even your own custom JWT login) you can add the configuration using the `loginConfig` parameter during the initialization.
+To use custom authentication (using supported Social providers or Login providers like Auth0, AWS Cognito, Firebase, or your own custom JWT login), you can add the configuration using the `loginConfig` parameter during the initialization.
 
 The `loginConfig` parameter is a key value map. The key should be one of the `Web3AuthProvider` in its string form, and the value should be a `W3ALoginConfig` struct.
 
@@ -60,7 +60,7 @@ After creating the verifier, you can use the following parameters in the `W3ALog
 
 | Parameter                | Description                                                                                                                                                                                                                                                                                                                       |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `verifier`               | The name of the verifier that you have registered on the Web3Auth Dashboard. It's a mandatory field, and accepts `String` as a value.                                                                                                                                                                                             |
+| `verifier`               | The name of the verifier that you have registered on the Embedded Wallets dashboard. It's a mandatory field, and accepts `String` as a value.                                                                                                                                                                                             |
 | `typeOfLogin`            | Type of login of this verifier, this value will affect the login flow that is adapted. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should be providing your own JWT token, no sign-in flow will be presented. It's a mandatory field, and accepts `TypeOfLogin` as a value. |
 | `clientId`               | Client id provided by your login provider used for custom verifier. e.g. Google's Client ID or Web3Auth's client Id if using 'jwt' as TypeOfLogin. It's a mandatory field, and accepts `String` as a value.                                                                                                                       |
 | `name?`                  | Display name for the verifier. If null, the default name is used. It accepts `String` as a value.                                                                                                                                                                                                                                 |
@@ -69,7 +69,7 @@ After creating the verifier, you can use the following parameters in the `W3ALog
 | `logoHover?`             | Logo to be shown on mouse hover. It accepts `String` as a value.                                                                                                                                                                                                                                                                  |
 | `logoLight?`             | Light logo for dark background. It accepts `String` as a value.                                                                                                                                                                                                                                                                   |
 | `logoDark?`              | Dark logo for light background. It accepts `String` as a value.                                                                                                                                                                                                                                                                   |
-| `mainOption?`            | show login button on the main list. It accepts `Bool` as a value. Default value is false.                                                                                                                                                                                                                                         |
+| `mainOption?`            | Show login button on the main list. It accepts `Bool` as a value. Default value is false.                                                                                                                                                                                                                                         |
 | `showOnModal?`           | Whether to show the login button on modal or not. Default value is true.                                                                                                                                                                                                                                                          |
 | `showOnDesktop?`         | Whether to show the login button on desktop. Default value is true.                                                                                                                                                                                                                                                               |
 | `showOnMobile?`          | Whether to show the login button on mobile. Default value is true.                                                                                                                                                                                                                                                                |
@@ -139,7 +139,7 @@ let web3Auth = try await Web3Auth(
     network: .sapphire_mainnet,
     // focus-start
     loginConfig: [
-      Web3Authprovider.JWT.rawValue: .init(
+      Web3AuthProvider.JWT.rawValue: .init(
         verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.google,
         clientId: "YOUR_GOOGLE_CLIENT_ID",
@@ -163,7 +163,7 @@ let web3Auth = try await Web3Auth(
     network: .sapphire_mainnet,
     // focus-start
     loginConfig: [
-      Web3Authprovider.JWT.rawValue: .init(
+      Web3AuthProvider.JWT.rawValue: .init(
         verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.facebook,
         clientId: "YOUR_FACEBOOK_CLIENT_ID",
@@ -188,7 +188,7 @@ let web3Auth = try await Web3Auth(
     network: .sapphire_mainnet,
     // focus-start
     loginConfig: [
-      Web3Authprovider.JWT.rawValue: .init(
+      Web3AuthProvider.JWT.rawValue: .init(
         verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.jwt,
         clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -273,7 +273,7 @@ public struct ExtraLoginOptions: Codable {
 
 </Tabs>
 
-### Single verifier Example
+### Single verifier example
 
 <Tabs defaultValue="auth0"
   values={[
@@ -299,7 +299,7 @@ let web3Auth = try await Web3Auth(
     // Optional loginConfig object
     //focus-start
     loginConfig: [
-      Web3Authprovider.JWT.rawValue: .init(
+      Web3AuthProvider.JWT.rawValue: .init(
         verifier: "YOUR_VERIFIER_NAME", // Get it from Web3Auth dashboard
         typeOfLogin: TypeOfLogin.jwt,
         clientId: "YOUR_AUTH0_CLIENT_ID",
@@ -328,7 +328,7 @@ let result = try await web3Auth.login(
 
 <TabItem value="byoj">
 If you're using any other provider like Firebase, AWS Cognito or deploying your own Custom JWT
-server, you need to put the jwt token into the `id_token` field of the `extraLoginOptions`,
+server, you need to put the JWT token into the `id_token` field of the `extraLoginOptions`,
 additionally, you need to pass over the `domain` field as well, which is mandatory. If you don't
 have a domain, just passover a string in that field.
 
@@ -342,7 +342,7 @@ let web3Auth = try await Web3Auth(
     // Optional loginConfig object
     // focus-start
     loginConfig: [
-      Web3Authprovider.JWT.rawValue: .init(
+      Web3AuthProvider.JWT.rawValue: .init(
         verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.jwt,
         clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
@@ -355,8 +355,8 @@ let web3Auth = try await Web3Auth(
  // focus-start
 let result = await web3Auth.login(
   W3ALoginParams(
-    Web3Authprovider.JWT,
-    extraLoginOptions: .init(domain:"your-domain", id_token: "your_jwt_token")
+    Web3AuthProvider.JWT,
+    extraLoginOptions: .init(domain:"your-domain", id_token: "<your JWT token>")
   )
 )
 // focus-end
@@ -382,7 +382,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
  // focus-start
 let result = try await web3Auth.login(
   W3ALoginParams(
-    Web3Authprovider.EMAIL_PASSWORDLESS,
+    Web3AuthProvider.EMAIL_PASSWORDLESS,
     extraLoginOptions: .init(loginHint: "hello@web3auth.io")
 ))
 // focus-end
@@ -405,7 +405,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
 
  // focus-start
 let result = try await web3Auth.login(W3ALoginParams(
-  Web3Authprovider.SMS_PASSWORDLESS,
+  Web3AuthProvider.SMS_PASSWORDLESS,
   // The phone number should be in format of +{country_code}-{phone_number}
   extraLoginOptions: .init(loginHint: "+91-9911223344")
 ))

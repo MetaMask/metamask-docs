@@ -2,9 +2,9 @@
 const loginWithGoogle = async () => {
   // focus-start
   await connectTo(WALLET_CONNECTORS.AUTH, {
-    groupedAuthconnectionId: "aggregate-sapphire",
-    authconnectionId: "w3a-google",
-    authconnection: AUTH_CONNECTION.GOOGLE,
+    groupedAuthConnectionId: "aggregate-sapphire",
+    authConnectionId: "w3a-google",
+    authConnection: AUTH_CONNECTION.GOOGLE,
   });
   // focus-end
 };
@@ -16,14 +16,14 @@ const loginWithFirebaseGithub = async () => {
 
   const result = await signInWithPopup(auth, githubprovider);
 
-  const idtoken = await result.user.getIdtoken(true);
+  const idToken = await result.user.getIdtoken(true);
 
   // focus-start
   connectTo(WALLET_CONNECTORS.AUTH, {
-    groupedAuthconnectionId: "aggregate-sapphire",
-    authconnectionId: "w3a-firebase",
-    authconnection: AUTH_CONNECTION.CUSTOM,
-    idtoken,
+    groupedAuthConnectionId: "aggregate-sapphire",
+    authConnectionId: "w3a-firebase",
+    authConnection: AUTH_CONNECTION.CUSTOM,
+    idToken,
     extraLoginOptions: {
       isUserIdCaseSensitive: false,
     },

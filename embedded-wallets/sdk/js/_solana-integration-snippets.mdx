@@ -61,14 +61,14 @@ import {
 const solanaWallet = new SolanaWallet(web3auth.provider)
 
 // Get user's Solana public address
-const accounts = await solanaWallet.requestaccounts()
+const accounts = await solanaWallet.requestAccounts()
 
 const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>({
   method: 'solana_provider_config',
   params: [],
 })
 
-const connection = new connection(connectionConfig.rpcTarget)
+const connection = new Connection(connectionConfig.rpcTarget)
 
 // Fetch the balance for the specified public key
 const balance = await connection.getBalance(new PublicKey(accounts[0]))
@@ -78,7 +78,7 @@ const balance = await connection.getBalance(new PublicKey(accounts[0]))
 
 ```tsx
 import {
-  connection,
+  Connection,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
@@ -91,9 +91,9 @@ const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>
   params: [],
 })
 
-const connection = new connection(connectionConfig.rpcTarget)
+const connection = new Connection(connectionConfig.rpcTarget)
 
-const pubKey = await solanaWallet.requestaccounts()
+const pubKey = await solanaWallet.requestAccounts()
 const { blockhash } = await connection.getRecentBlockhash('finalized')
 
 const TransactionInstruction = SystemProgram.transfer({
@@ -115,7 +115,7 @@ console.log(signedTx.signature)
 
 ```tsx
 import {
-  connection,
+  Connection,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
@@ -130,7 +130,7 @@ const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>
 
 const connection = new connection(connectionConfig.rpcTarget)
 
-const pubKey = await solanaWallet.requestaccounts()
+const pubKey = await solanaWallet.requestAccounts()
 const { blockhash } = await connection.getRecentBlockhash('finalized')
 
 // First transaction
@@ -164,7 +164,7 @@ console.log(signedTx)
 
 ```tsx
 import {
-  connection,
+  Connection,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
@@ -177,9 +177,9 @@ const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>
   params: [],
 })
 
-const connection = new connection(connectionConfig.rpcTarget)
+const connection = new Connection(connectionConfig.rpcTarget)
 
-const accounts = await solanaWallet.requestaccounts()
+const accounts = await solanaWallet.requestAccounts()
 const block = await connection.getLatestBlockhash('finalized')
 
 const TransactionInstruction = SystemProgram.transfer({
@@ -203,7 +203,7 @@ console.log(signature)
 
 ```tsx
 import {
-  connection,
+  Connection,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,

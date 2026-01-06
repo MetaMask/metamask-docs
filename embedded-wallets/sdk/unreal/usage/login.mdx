@@ -33,7 +33,7 @@ This function helps your user to trigger the login process. The login flow will 
 | `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `FString` as a value. |
 | `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `FMFALevel` as a value. |
 | `dappShare?` | Custom verifier logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `FString` as a value. |
-| `curve?` | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. The default value is `FCurve::speck256k1`. |
+| `curve?` | It will be used to determine the public key encoded in the JWT token which returned in `getUserInfo` function after user login. The default value is `FCurve::speck256k1`. |
 
 </TabItem>
 
@@ -77,7 +77,7 @@ struct FLoginParams
 ## Provider
 ```cpp
 UENUM(BlueprintType)
-enum class EWeb3Authprovider : uint8
+enum class EWeb3AuthProvider : uint8
 {
     GOOGLE UMETA(DisplayName = "Google"),
     FACEBOOK UMETA(DisplayName = "Facebook"),

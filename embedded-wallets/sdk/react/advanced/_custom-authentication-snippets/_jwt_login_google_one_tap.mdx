@@ -1,12 +1,12 @@
 ```tsx title="App.tsx"
 const loginWithGoogle = async (response: CredentialResponse) => {
-  const idtoken = response.credential;
+  const idToken = response.credential;
 
   // focus-start
   await connectTo(WALLET_CONNECTORS.AUTH, {
-    authconnectionId: "w3a-google-demo",
-    authconnection: AUTH_CONNECTION.GOOGLE,
-    idtoken,
+    authConnectionId: "w3a-google-demo",
+    authConnection: AUTH_CONNECTION.GOOGLE,
+    idToken,
     extraLoginOptions: {
       isUserIdCaseSensitive: false,
     },

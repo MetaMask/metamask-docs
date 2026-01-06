@@ -79,7 +79,7 @@ await web3auth.init()
 
 // connect directly to Google
 const provider = await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
-  authconnection: AUTH_CONNECTION.GOOGLE,
+  authConnection: AUTH_CONNECTION.GOOGLE,
 })
 ```
 
@@ -90,14 +90,14 @@ const provider = await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
 ### Return types
 
 ```tsx
-connect(): Promise<Iprovider | null>;
-connectTo<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]): Promise<Iprovider | null>;
+connect(): Promise<IProvider | null>;
+connectTo<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]): Promise<IProvider | null>;
 ```
 
 #### Return values
 
-- **Iprovider | null**
-  - On successful login, returns an `Iprovider` instance containing the respective provider corresponding to your selected blockchain.
+- **IProvider | null**
+  - On successful login, returns an `IProvider` instance containing the respective provider corresponding to your selected blockchain.
   - On unsuccessful login, returns `null`.
 
 :::tip

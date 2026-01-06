@@ -17,9 +17,9 @@ Previously, React hooks were at `@web3auth/modal-react-hooks`. Now, they are con
 
 The `Web3AuthProvider` component remains essential for initializing the Web3Auth SDK and providing its context. Key changes include:
 
-- **Import path**: `Web3AuthProvider` is imported from `@web3auth/modal/react`.
-- **Configuration Prop**: `Web3AuthProvider` in v10 typically takes a single `config` prop. This `config` object (e.g., `web3AuthContextConfig`) will contain your `web3AuthOptions` and any client-side SDK configurations.
-- **Dashboard configuration**: Many configurations (like chain details for standard EVM chains, and verifier/connection settings) are now primarily managed through the Web3Auth Developer Dashboard.
+- **Import path:** `Web3AuthProvider` is imported from `@web3auth/modal/react`.
+- **Configuration Prop:** `Web3AuthProvider` in v10 typically takes a single `config` prop. This `config` object (e.g., `web3AuthContextConfig`) will contain your `web3AuthOptions` and any client-side SDK configurations.
+- **Dashboard configuration:** Many configurations (like chain details for standard EVM chains, and verifier/connection settings) are now primarily managed through the Web3Auth Developer Dashboard.
 
 ### v10 `Web3AuthProvider` and Hook Usage
 
@@ -27,24 +27,24 @@ The `Web3AuthProvider` component remains essential for initializing the Web3Auth
 
 ```typescript title="main.tsx / index.tsx"
 import ReactDOM from "react-dom/client";
-import { Web3Authprovider } from "@web3auth/modal/react"; // v10 import
+import { Web3AuthProvider } from "@web3auth/modal/react"; // v10 import
 import web3AuthContextConfig from "./web3authContext"; // see context file below
 import App from "./App";
 
-// Example with Wagmi, though not strictly necessary for Web3Authprovider
+// Example with Wagmi, though not strictly necessary for Web3AuthProvider
 import { Wagmiprovider } from "@web3auth/modal/react/wagmi";
 import { QueryClient, QueryClientprovider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <Web3Authprovider config={web3AuthContextConfig}>
+  <Web3AuthProvider config={web3AuthContextConfig}>
     <QueryClientprovider client={queryClient}>
       <Wagmiprovider>
         <App />
       </Wagmiprovider>
     </QueryClientprovider>
-  </Web3Authprovider>
+  </Web3AuthProvider>
 );
 ```
 

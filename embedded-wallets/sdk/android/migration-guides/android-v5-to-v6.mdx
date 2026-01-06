@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
      private fun enableMFA() {
         val loginParams = LoginParams(
             Provider.JWT,
-            extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+            extraLoginOptions = ExtraLoginOptions(id_token = "<your JWT token>")
         )
 
         // focus-next-line
@@ -121,7 +121,7 @@ Access to Wallet Services is gated. You can use this feature in `sapphire_devnet
 
 :::
 
-#### Chainconfig arguments
+#### ChainConfig arguments
 
 | Parameter | Description |
 | --- | --- |

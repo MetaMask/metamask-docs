@@ -11,9 +11,9 @@ import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
 Web3Auth allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
 
-- **UI elements**: Customize the appearance of modals and components
-- **Branding**: Apply your brand colors, logos, and themes
-- **Translations**: Localize the interface for your users
+- **UI elements:** Customize the appearance of modals and components
+- **Branding:** Apply your brand colors, logos, and themes
+- **Translations:** Localize the interface for your users
 
 <WhitelabelingNote />
 
@@ -59,9 +59,9 @@ The `LoginMethodConfig` interface provides extensive customization options for e
 | `mainOption`              | `boolean`              | Whether to show login button on the main list                                        |
 | `showOnModal`             | `boolean`              | Controls visibility of the login button on modal                                     |
 | `authConnectionId        | `string`               | Auth connection ID of the provider                                                   |
-| `groupedAuthconnectionId` | `string`               | Grouped Auth Connection ID of the provider                                           |
+| `groupedAuthConnectionId` | `string`               | Grouped Auth Connection ID of the provider                                           |
 | `extraLoginOptions`       | `ExtraLoginOptions`    | Additional parameters for social login                                               |
-| `authconnection`          | `AUTH_CONNECTION_TYPE` | Auth connection type (useful for customizing login buttons with custom connectors)   |
+| `authConnection`          | `AUTH_CONNECTION_TYPE` | Auth connection type (useful for customizing login buttons with custom connectors)   |
 | `isDefault`               | `boolean`              | Whether it's the default connector _(internal)_                                      |
 
   </TabItem>
@@ -94,7 +94,7 @@ export type LoginMethodConfig = Partial<
        */
       logoDark?: string
       /**
-       * show login button on the main list
+       * Show login button on the main list
        */
       mainOption?: boolean
       /**
@@ -102,13 +102,13 @@ export type LoginMethodConfig = Partial<
        */
       showOnModal?: boolean
       /**
-       * Auth connection id of the provider.
+       * Auth Connection ID of the provider.
        */
-      authconnectionId?: string
+      authConnectionId?: string
       /**
-       * Grouped auth connection id of the provider.
+       * Grouped Auth Connection ID of the provider.
        */
-      groupedAuthconnectionId?: string
+      groupedAuthConnectionId?: string
       /**
        * ExtraLoginOption params to be used for social login.
        */
@@ -117,9 +117,9 @@ export type LoginMethodConfig = Partial<
        * Auth connection type of the auth connector.
        * Can be different from the original key.
        *
-       * Example: This helps in customizing the google login button with auth0 custom connector.
+       * Example: This helps in customizing the Google login button with auth0 custom connector.
        */
-      authconnection?: AUTH_CONNECTION_TYPE
+      authConnection?: AUTH_CONNECTION_TYPE
       /**
        * Whether is it default connector.
        *
@@ -223,11 +223,11 @@ const web3auth = new Web3Auth({
         loginMethods: {
           email_passwordless: {
             name: 'email passwordless login',
-            authconnectionId: 'w3a-email_passwordless-demo',
+            authConnectionId: 'w3a-email_passwordless-demo',
           },
           sms_passwordless: {
             name: 'sms passwordless login',
-            authconnectionId: 'w3a-sms_passwordless-demo',
+            authConnectionId: 'w3a-sms_passwordless-demo',
           },
         },
       },
@@ -244,4 +244,4 @@ await web3auth.init()
 
 For complete control over the authentication interface, you can bypass the Web3Auth modal entirely and use the `connectTo` function. This allows you to create custom buttons that connect directly to specific auth providers.
 
-See the [Custom Authentication](custom-authentication.mdx) section for detailed implementation instructions.
+See the [custom authentication](custom-authentication.mdx) section for detailed implementation instructions.

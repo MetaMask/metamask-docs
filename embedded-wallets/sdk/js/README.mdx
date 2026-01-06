@@ -45,13 +45,13 @@ npm install --save @web3auth/modal
 
 ### 1. Configuration
 
-Create an instance of Web3Auth containing the basic needed configuration. These configuration will contain your Web3Auth Client ID and Network details from the [Web3Auth Dashboard](https://dashboard.web3auth.io/).
+Create an instance of Web3Auth containing the basic needed configuration. These configuration will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
 
 ```javascript
 import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
 
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
 })
 ```
@@ -67,15 +67,15 @@ await web3auth.init()
 ## Advanced configuration
 The Web3Auth Modal SDK offers a rich set of advanced configuration options:
 
-- **[Smart accounts](./advanced/smart-accounts.mdx)**: Configure account abstraction parameters.
-- **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
-- **[Whitelabeling & UI customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
-- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
-- **[Wallet Services](./advanced/wallet-services.mdx)**: Integrate additional Wallet Services.
+- **[Smart accounts](./advanced/smart-accounts.mdx):** Configure account abstraction parameters.
+- **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
+- **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx):** Set up and manage MFA.
+- **[Wallet Services](./advanced/wallet-services.mdx):** Integrate additional Wallet Services.
 
 :::tip
 
-Head over to the [Advanced Configuration](./advanced/README.mdx) section to learn more about each configuration option.
+Head over to the [advanced configuration](./advanced/README.mdx) section to learn more about each configuration option.
 
 :::
 
@@ -124,12 +124,12 @@ const web3auth = new Web3Auth({
           email_passwordless: {
             name: 'email passwordless login',
             showOnModal: true,
-            authconnectionId: 'w3a-email_passwordless-demo',
+            authConnectionId: 'w3a-email_passwordless-demo',
           },
           sms_passwordless: {
             name: 'sms passwordless login',
             showOnModal: true,
-            authconnectionId: 'w3a-sms_passwordless-demo',
+            authConnectionId: 'w3a-sms_passwordless-demo',
           },
         },
         showOnModal: true, // set to false to hide all social login methods

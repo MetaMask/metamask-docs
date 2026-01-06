@@ -9,10 +9,10 @@ The `connect` method is the primary authentication method for the Node.js SDK. I
 
 :::warning Prerequisites
 
-- You need to have a custom authentication setup on the dashboard.
+- You need to have a custom authentication set up on the dashboard.
 - You need to have a freshly generated JWT token from your authentication system in your backend.
 
-Read more about [Custom Authentication](/embedded-wallets/authentication/custom-connections/custom-jwt/).
+Read more about [custom authentication](/embedded-wallets/authentication/custom-connections/custom-jwt/).
 
 :::
 
@@ -28,12 +28,12 @@ const result = await web3auth.connect(loginParams)
 
 ```typescript
 export type LoginParams = {
-  idtoken: string
-  authconnectionId: string
+  idToken: string
+  authConnectionId: string
   userId?: string
   userIdField?: string
   isUserIdCaseSensitive?: boolean
-  groupedAuthconnectionId?: string
+  groupedAuthConnectionId?: string
 }
 ```
 
@@ -41,8 +41,8 @@ export type LoginParams = {
 | -------------------------- | --------- | ----------------------------------------------------------------------------------------- |
 | `authConnectionId         | `string`  | Custom verifier name from Embedded Wallets dashboard.                                              |
 | `userId`                   | `string`  | Unique identifier for the user (email, user ID, etc.).                                     |
-| `idtoken?`                 | `string`  | Valid JWT token from your authentication system.                                           |
-| `groupedAuthconnectionId?` | `string`  | Grouped Auth Connection ID.                                                                |
+| `idToken?`                 | `string`  | Valid JWT token from your authentication system.                                           |
+| `groupedAuthConnectionId?` | `string`  | Grouped Auth Connection ID.                                                                |
 | `userIdField?`             | `string`  | User's unique identifier field name. Add here if not set on the dashboard.                |
 | `isUserIdCaseSensitive?`   | `boolean` | Whether the user id field is case sensitive or not. Add here if not set on the dashboard. |
 
@@ -89,7 +89,7 @@ const clientId =
 
 // focus-start
 // Auth connection
-const authconnectionId = 'w3a-node-demo'
+const authConnectionId = 'w3a-node-demo'
 // focus-end
 
 const web3auth = new Web3Auth({
@@ -102,13 +102,13 @@ await web3auth.init()
 // focus-start
 const privateKey = await fs.readFile('privateKey.pem', 'utf8')
 
-var idtoken = jwt.sign(
+var idToken = jwt.sign(
   {
     sub: '9fcd68c4-af50-4dd7-adf6-abd12a13cb32',
     name: 'Web3Auth DevRel Team',
     email: 'devrel@web3auth.io',
-    aud: 'urn:api-web3auth-io', // -> to be used in Custom Authentication as JWT Field
-    iss: 'https://web3auth.io', // -> to be used in Custom Authentication as JWT Field
+    aud: 'urn:api-web3auth-io', // -> to be used in custom authentication as JWT Field
+    iss: 'https://web3auth.io', // -> to be used in custom authentication as JWT Field
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 60 * 60,
   },
@@ -116,11 +116,11 @@ var idtoken = jwt.sign(
   { algorithm: 'RS256', keyid: '2ma4enu1kdvw5bo9xsfpi3gcjzrt6q78yl0h' }
 )
 
-console.log('\x1b[33m%s\x1b[0m', 'JWT token:', idtoken)
+console.log('\x1b[33m%s\x1b[0m', 'JWT token:', idToken)
 
 const result = await web3auth.connect({
-  authconnectionId,
-  idtoken,
+  authConnectionId,
+  idToken,
 })
 // focus-end
 ```
@@ -136,7 +136,7 @@ const clientId =
 
 // focus-start
 // Auth connection
-const authconnectionId = 'w3a-firebase-demo'
+const authConnectionId = 'w3a-firebase-demo'
 // focus-end
 
 const web3auth = new Web3Auth({
@@ -159,13 +159,13 @@ const app = initializeApp({
 const auth = getAuth(app)
 const res = await signInWithEmailAndPassword(auth, 'custom+jwt@firebase.login', 'Testing@123')
 console.log(res)
-const idtoken = await res.user.getIdtoken(true)
+const idToken = await res.user.getIdtoken(true)
 
-console.log('\x1b[33m%s\x1b[0m', 'JWT token:', idtoken)
+console.log('\x1b[33m%s\x1b[0m', 'JWT token:', idToken)
 
 const result = await web3auth.connect({
-  authconnectionId,
-  idtoken,
+  authConnectionId,
+  idToken,
 })
 // focus-end
 ```

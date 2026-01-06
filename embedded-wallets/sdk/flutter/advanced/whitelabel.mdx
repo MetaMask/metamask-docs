@@ -12,9 +12,9 @@ import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
 Embedded Wallets allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
 
-- **UI elements**: Customize the appearance of modals and components
-- **Branding**: Apply your brand colors, logos, and themes
-- **Translations**: Localize the interface for your users
+- **UI elements:** Customize the appearance of modals and components
+- **Branding:** Apply your brand colors, logos, and themes
+- **Translations:** Localize the interface for your users
 
 <WhitelabelingNote />
 
@@ -55,7 +55,7 @@ For defining custom UI, branding, and translations for your brand app, you just 
 <TabItem value="class">
 
 ```dart
-class WhiteLabeldata {
+class WhiteLabelData {
   final String? appName;
   final String? logoLight;
   final String? logoDark;
@@ -65,7 +65,7 @@ class WhiteLabeldata {
   final String? appUrl;
   final bool? useLogoLoader;
 
-  WhiteLabeldata({
+  WhiteLabelData({
     this.appName,
     this.logoLight,
     this.logoDark,
@@ -123,7 +123,7 @@ Future<void> initWeb3Auth() async {
       network: Network.sapphire_mainnet,
       redirectUrl: redirectUrl,
       // focus-start
-      whiteLabel: WhiteLabeldata(
+      whiteLabel: WhiteLabelData(
         appName: "Web3Auth Flutter App",
         logoLight:
           "https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg",

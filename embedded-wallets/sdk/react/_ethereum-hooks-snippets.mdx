@@ -20,7 +20,7 @@ npm install wagmi @tanstack/react-query
 import "./index.css";
 
 import ReactDOM from "react-dom/client";
-import { Web3Authprovider } from "@web3auth/modal/react";
+import { Web3AuthProvider } from "@web3auth/modal/react";
 import web3AuthContextConfig from "./web3authContext";
 // focus-start
 import { Wagmiprovider } from "@web3auth/modal/react/wagmi";
@@ -33,7 +33,7 @@ import App from "./App";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <Web3Authprovider config={web3AuthContextConfig}>
+  <Web3AuthProvider config={web3AuthContextConfig}>
     {/* focus-start */}
     <QueryClientprovider client={queryClient}>
       <Wagmiprovider>
@@ -41,7 +41,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       </Wagmiprovider>
     </QueryClientprovider>
     {/* focus-end */}
-  </Web3Authprovider>,
+  </Web3AuthProvider>,
 );
 ```
 
@@ -53,7 +53,7 @@ integrates seamlessly with Wagmi, so you can use hooks like `useAccount`, `useBa
 
 :::
 
-Below are some examples of using Wagmi hooks in your dApp after Web3Auth and Wagmi are set up. You
+Below are some examples of using Wagmi hooks in your dapp after Web3Auth and Wagmi are set up. You
 can note these functions work directly with Wagmi. Once you have set up Wagmi with Web3Auth, you can
 use any Wagmi hook as you would in a standard Wagmi application.
 

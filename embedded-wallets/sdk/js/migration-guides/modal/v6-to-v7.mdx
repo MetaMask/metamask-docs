@@ -7,16 +7,16 @@ sidebar_label: v6 to v7
 
 ## General
 
-### `web3auth.connect()` now returns a provider of type `Iprovider`
+### `web3auth.connect()` now returns a provider of type `IProvider`
 
 #### The new provider object now works with the latest version of `web3.js`.
 
-With V7, the `connect()` method now returns a provider of type `Iprovider` which is a hard-coded provider, ensuring compatibility with the latest version of web3.js. Previously, we had been using a proxy provider i.e. `SafeEventEmitterprovider` which gave errors with the breaking changes that came with web3.js v4. Remember, you can import the type `Iprovider` from the `@web3auth/base` package.
+With V7, the `connect()` method now returns a provider of type `IProvider` which is a hard-coded provider, ensuring compatibility with the latest version of web3.js. Previously, we had been using a proxy provider i.e. `SafeEventEmitterprovider` which gave errors with the breaking changes that came with web3.js v4. Remember, you can import the type `IProvider` from the `@web3auth/base` package.
 
 ```tsx
 // With V7
 // focus-start
-connect(): Promise<Iprovider | null>;
+connect(): Promise<IProvider | null>;
 // focus-end
 ```
 

@@ -183,7 +183,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
 
 ### 1. Create an Embedded Wallets instance
 
-Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Web3Auth Dashboard](https://dashboard.web3auth.io/).
+Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
 
 <Tabs
   values={[
@@ -204,7 +204,7 @@ const resolvedRedirectUrl = `${scheme}://auth`
 
 // focus-start
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
@@ -225,7 +225,7 @@ const resolvedRedirectUrl = `${scheme}://auth`
 
 // focus-start
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
@@ -256,13 +256,14 @@ useEffect(() => {
 ```
 
 ## Advanced configuration
+
 The Web3Auth React Native SDK offers a rich set of advanced configuration options:
 
-- **[Account Abstraction](./advanced/smart-accounts.mdx)**: Configure smart account parameters.
-- **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
-- **[Whitelabeling & UI customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
-- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
-- **[Dapp share](./advanced/dapp-share.mdx)**: Share DApp sessions across devices.
+- **[Account Abstraction](./advanced/smart-accounts.mdx):** Configure smart account parameters.
+- **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
+- **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx):** Set up and manage MFA.
+- **[Dapp share](./advanced/dapp-share.mdx):** Share dapp sessions across devices.
 
 :::tip
 
@@ -304,12 +305,12 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   mfaLevel: MFA_LEVELS.MANDATORY,
   loginConfig: {
     google: {
-      verifier: 'google-verifier', // Get this from the Web3Auth Dashboard
+      verifier: 'google-verifier', // Get this from the Embedded Wallets dashboard
       typeOfLogin: TypeOfLogin.GOOGLE,
       clientId: 'GOOGLE_CLIENT_ID', // Google's client id
     },
     jwt: {
-      verifier: 'jwt-verifier', // Get this from the Web3Auth Dashboard
+      verifier: 'jwt-verifier', // Get this from the Embedded Wallets dashboard
       typeOfLogin: TypeOfLogin.JWT,
       clientId: 'JWT_CLIENT_ID', // Custom JWT client id
     },

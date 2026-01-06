@@ -18,7 +18,7 @@ For a dapp, we provide various options to set up MFA. You can customize the MFA 
 
 :::caution Note
 
-If you are using default verifiers, your users may have set up MFA on other dApps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dApps. This is because MFA cannot be turned off once it is enabled.
+If you are using default verifiers, your users may have set up MFA on other dapps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
 
 :::
 
@@ -45,7 +45,7 @@ Web3AuthFlutter.login(
 
 ## Explicitly enable Multi-Factor Authentication
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
 
 <Tabs
   defaultValue="default-verifier"
@@ -105,7 +105,7 @@ You can configure the order of MFA, and enable or disable MFA type by passing th
 
 :::
 
-### Parameters - Mfasettings
+### Parameters - `MfaSettings`
 
 `MfaSettings` allows you to set the type of the MFA.
 
@@ -166,7 +166,7 @@ class MfaSettings {
 </TabItem>
 </Tabs>
 
-### Parameters - Mfasetting
+### Parameters - `MfaSetting`
 
 `MfaSetting` allows you to configure the behavior of an individual MFA factor.
 

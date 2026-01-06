@@ -58,7 +58,7 @@ public struct W3ALoginParams: Codable {
 	let curve: SUPPORTED_KEY_CURVES
 }
 
-public enum Web3Authprovider: String, Codable {
+public enum Web3AuthProvider: String, Codable {
     case GOOGLE = "google"
     case FACEBOOK = "facebook"
     case REDDIT = "reddit"
@@ -212,7 +212,7 @@ import Web3Auth
 
 let web3auth = try await Web3Auth(W3AInitParams( clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable network: .sapphire_mainnet, redirectUrl: "bundleId://auth" ))
 
-// focus-start let result = try await web3Auth.login(W3ALoginParams( Web3Authprovider.SMS_PASSWORDLESS, // The phone number should be in format of +{country_code}-{phone_number} extraLoginOptions: .init(loginHint: "+91-9911223344") )) // focus-end
+// focus-start let result = try await web3Auth.login(W3ALoginParams( Web3AuthProvider.SMS_PASSWORDLESS, // The phone number should be in format of +{country_code}-{phone_number} extraLoginOptions: .init(loginHint: "+91-9911223344") )) // focus-end
 
 ````
 

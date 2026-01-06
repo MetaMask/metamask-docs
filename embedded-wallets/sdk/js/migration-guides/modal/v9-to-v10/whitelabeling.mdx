@@ -17,12 +17,12 @@ Whitelabeling and UI customization have been significantly streamlined in v10, f
 
 ## Migration steps
 
-### 1. Branding (v9 `uiConfig`): Moves to Dashboard
+### 1. Branding (v9 `uiConfig`): Moves to dashboard
 
-- Most general branding settings previously in the client-side `uiConfig` (e.g., `appName`, `logoLight`, `logoDark`, `theme` colors) are **now primarily configured on the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io)**. ![Branding customizations on Web3Auth Dashboard](/img/embedded-wallets/whitelabel/modal/branding.gif)
+- Most general branding settings previously in the client-side `uiConfig` (e.g., `appName`, `logoLight`, `logoDark`, `theme` colors) are **now primarily configured on the [Embedded Wallets dashboard](https://dashboard.web3auth.io)**. ![Branding customizations on Web3Auth / Embedded Wallets Dashboard](/img/embedded-wallets/whitelabel/modal/branding.gif)
 - **Action:** Transfer v9 `uiConfig` branding to the dashboard. Client-side `uiConfig` in v10 `Web3AuthOptions` is minimal, for overrides not covered by the dashboard.
 
-### 2. Modal Login Method Display (v9 `modalConfig` in `initModal()`): New Structure in `Web3AuthOptions`
+### 2. Modal login method display (v9 `modalConfig` in `initModal()`): New structure in `Web3AuthOptions`
 
 - **Previously (v9):** Customizing which login methods appear in the modal (and their appearance/order) was done via `modalConfig` in `initModal()` in v9.
 - **Now (v10):** This moves to `modalConfig` within `Web3AuthOptions` (at SDK instantiation). The structure is new, utilizing `connectors` (e.g., `WALLET_CONNECTORS.AUTH` for social/email, `WALLET_CONNECTORS.WALLET` for external wallets) and a `loginMethods` object within each connector.

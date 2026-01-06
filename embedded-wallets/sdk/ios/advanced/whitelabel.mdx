@@ -12,9 +12,9 @@ import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
 Web3Auth allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
 
-- **UI elements**: Customize the appearance of modals and components
-- **Branding**: Apply your brand colors, logos, and themes
-- **Translations**: Localize the interface for your users
+- **UI elements:** Customize the appearance of modals and components
+- **Branding:** Apply your brand colors, logos, and themes
+- **Translations:** Localize the interface for your users
 
 <WhitelabelingNote />
 
@@ -28,7 +28,7 @@ For defining custom UI, branding, and translations for your brand app, you just 
 
 ### Arguments
 
-The parameters which can be used to customize the User flow screens are given below:
+The parameters which can be used to customize the user flow screens are given below:
 
 <Tabs
   defaultValue="table"
@@ -56,7 +56,7 @@ The parameters which can be used to customize the User flow screens are given be
 <TabItem value="interface">
 
 ```swift
-public struct W3AWhiteLabeldata: Codable {
+public struct W3AWhiteLabelData: Codable {
     let appName: String?
     let logoLight: String?
     let logoDark: String?
@@ -81,7 +81,7 @@ web3Auth = await Web3Auth(
     clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
     network: .testnet,
     // focus-start
-    whiteLabel: W3AWhiteLabeldata(
+    whiteLabel: W3AWhiteLabelData(
       appName: "Web3Auth Stub",
       logoLight: "https://images.web3auth.io/web3auth-logo-w.svg",
       logoDark: "https://images.web3auth.io/web3auth-logo-w.svg",

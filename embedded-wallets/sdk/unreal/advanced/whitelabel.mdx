@@ -12,9 +12,9 @@ import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
 Embedded Wallets supports whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
 
-- **UI elements**: Customize the appearance of modals and components
-- **Branding**: Apply your brand colors, logos, and themes
-- **Translations**: Localize the interface for your users
+- **UI elements:** Customize the appearance of modals and components
+- **Branding:** Apply your brand colors, logos, and themes
+- **Translations:** Localize the interface for your users
 
 <WhitelabelingNote />
 
@@ -52,7 +52,7 @@ For defining custom UI, branding, and translations for your brand during Embedde
 
 ```cs
 USTRUCT(BlueprintType)
-struct FWhiteLabeldata
+struct FWhiteLabelData
 {
 	GENERATED_BODY()
 
@@ -80,9 +80,9 @@ struct FWhiteLabeldata
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
     	bool useLogoLoader;
 
-	FWhiteLabeldata() {};
+	FWhiteLabelData() {};
 
-	void operator= (const FWhiteLabeldata& other) {
+	void operator= (const FWhiteLabelData& other) {
 		appName = other.appName;
 		logoLight = other.logoLight;
 		logoDark = other.logoDark;

@@ -16,7 +16,7 @@ experience with external wallets.
 npm install wagmi @tanstack/vue-query
 ```
 
-Update your `main.ts` to use the Vue Query plugin **only if you are using Wagmi**:
+Update your `main.ts` to use the Vue Query plugin **only if you are using Wagmi:**
 
 ```ts title="main.ts"
 // focus-next-line
@@ -34,7 +34,7 @@ Then, in your `App.vue`, wrap your app with both providers:
 ```html title="App.vue"
 <script setup lang="ts">
   import Home from "./Home.vue";
-  import { Web3Authprovider } from "@web3auth/modal/vue";
+  import { Web3AuthProvider } from "@web3auth/modal/vue";
   // focus-next-line
   import { Wagmiprovider } from "@web3auth/modal/vue/wagmi";
   import web3AuthContextConfig from "./web3authContext";
@@ -42,13 +42,13 @@ Then, in your `App.vue`, wrap your app with both providers:
 
 <template>
   <div class="min-h-screen flex flex-col">
-    <Web3Authprovider :config="web3AuthContextConfig">
+    <Web3AuthProvider :config="web3AuthContextConfig">
       <!-- focus-start -->
       <Wagmiprovider>
         <Home />
       </Wagmiprovider>
       <!-- focus-end -->
-    </Web3Authprovider>
+    </Web3AuthProvider>
   </div>
 </template>
 ```
@@ -61,7 +61,7 @@ Web3Auth integrates seamlessly with Wagmi, so you can use composables like `useA
 
 :::
 
-Below are some examples of using Wagmi composables in your dApp after Web3Auth and Wagmi are set up.
+Below are some examples of using Wagmi composables in your dapp after Web3Auth and Wagmi are set up.
 You can note these functions work directly with Wagmi. Once you have set up Wagmi with Web3Auth, you
 can use any Wagmi composable as you would in a standard Wagmi application.
 

@@ -45,7 +45,7 @@ console.log(userInfo)
 | `verifierId` | string | Verifier ID of the user. |
 | `typeOfLogin` | string | Type of login provider. |
 | `dappShare` | string | Dapp share of the user. |
-| `idtoken` | string | token issued by Web3Auth. |
+| `idToken` | string | token issued by Web3Auth. |
 | `oAuthIdtoken` | string | token issued by OAuth provider. Will be available only if you are using custom verifiers. |
 | `oAuthAccesstoken` | string | Access token issued by OAuth provider. Will be available only if you are using custom verifiers. |
 | `appState` | string | App state of the user. |
@@ -71,7 +71,7 @@ type AuthUserInfo = {
   /**
    * token issued by Web3Auth.
    */
-  idtoken?: string;
+  idToken?: string;
   /**
    * token issued by OAuth provider. Will be available only if you are using
    * custom verifiers.
@@ -102,9 +102,9 @@ type AuthUserInfo = {
   "verifier": "torus",
   "verifierId": "john@gmail.com",
   "typeOfLogin": "google",
-  "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
-  "idtoken": "<jwttoken issued by Web3Auth>",
-  "oAuthIdtoken": "<jwttoken issued by OAuth provider>", // will be sent only incase of custom verifiers
-  "oAuthAccesstoken": "<accesstoken issued by OAuth provider>" // will be sent only incase of custom verifiers
+  "dappShare": "<24 words seed phrase>", // will be sent only in case of custom verifiers
+  "idToken": "<JWT token issued by Web3Auth>",
+  "oAuthIdtoken": "<JWT token issued by OAuth provider>", // will be sent only in case of custom verifiers
+  "oAuthAccesstoken": "<Access token issued by OAuth provider>" // will be sent only in case of custom verifiers
 }
 ```

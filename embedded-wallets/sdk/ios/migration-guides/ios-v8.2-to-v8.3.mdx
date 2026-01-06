@@ -86,7 +86,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
 
  // focus-start
 let result = try await web3Auth.login(W3ALoginParams(
-  Web3Authprovider.SMS_PASSWORDLESS,
+  Web3AuthProvider.SMS_PASSWORDLESS,
   // The phone number should be in format of +{country_code}-{phone_number}
   extraLoginOptions: .init(loginHint: "+91-9911223344")
 ))

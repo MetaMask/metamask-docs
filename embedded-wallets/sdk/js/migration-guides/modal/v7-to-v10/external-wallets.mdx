@@ -60,11 +60,11 @@ await web3auth.init()
 
 ## Key changes
 
-- **Package Removal**: Remove all external wallet adapter packages
-- **MIPD Integration**: External wallets are automatically detected using MIPD (Multiple Injected
+- **Package Removal:** Remove all external wallet adapter packages
+- **MIPD Integration:** External wallets are automatically detected using MIPD (Multiple Injected
   provider Discovery)
-- **No Configuration**: No need to manually configure or register external adapters
-- **Walletconnect Support**: Walletconnect-compatible wallets are automatically available
+- **No Configuration:** No need to manually configure or register external adapters
+- **Walletconnect Support:** Walletconnect-compatible wallets are automatically available
 
 ## Package removal
 
@@ -80,9 +80,9 @@ npm uninstall @web3auth/metamask-adapter @web3auth/phantom-adapter @web3auth/sol
 V10 uses MIPD (Multiple Injected provider Discovery) to automatically detect injected wallets in the
 browser. When users attempt to connect, they'll see:
 
-1. **Detected Wallets**: All installed browser extension wallets
-2. **Walletconnect**: For mobile and other wallet connections
-3. **Social Logins**: Built-in Web3Auth authentication methods
+1. **Detected Wallets:** All installed browser extension wallets.
+2. **Walletconnect:** For mobile and other wallet connections.
+3. **Social Logins:** Built-in Web3Auth authentication methods.
 
 No configuration needed - everything works out of the box!
 
