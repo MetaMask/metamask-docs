@@ -55,23 +55,23 @@ Returns a `result` object containing the provider/ signer for blockchain operati
 ```typescript
 import type { TransactionSigner } from '@solana/signers'
 import type { Wallet } from 'ethers'
-import type { CHAIN_NAMESPACES, IBaseprovider } from '@web3auth/no-modal'
-export type PrivateKeyprovider = IBaseprovider<string>
+import type { CHAIN_NAMESPACES, IBaseProvider } from '@web3auth/no-modal'
+export type PrivateKeyProvider = IBaseProvider<string>
 
 export type WalletResult =
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.SOLANA
-      provider: PrivateKeyprovider
+      provider: PrivateKeyProvider
       signer: TransactionSigner
     }
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.EIP155
-      provider: PrivateKeyprovider
+      provider: PrivateKeyProvider
       signer: Wallet
     }
   | {
       chainNamespace: typeof CHAIN_NAMESPACES.OTHER
-      provider: PrivateKeyprovider
+      provider: PrivateKeyProvider
       signer: null
     }
 ```
@@ -159,7 +159,7 @@ const app = initializeApp({
 const auth = getAuth(app)
 const res = await signInWithEmailAndPassword(auth, 'custom+jwt@firebase.login', 'Testing@123')
 console.log(res)
-const idToken = await res.user.getIdtoken(true)
+const idToken = await res.user.getIdToken(true)
 
 console.log('\x1b[33m%s\x1b[0m', 'JWT token:', idToken)
 

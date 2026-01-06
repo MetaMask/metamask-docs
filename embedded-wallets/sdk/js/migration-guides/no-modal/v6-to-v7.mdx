@@ -11,7 +11,7 @@ sidebar_label: v6 to v7
 
 #### The new provider object now works with the latest version of `web3.js`.
 
-With V7, the `connectTo()` method now returns a provider of type `IProvider` which is a hard-coded provider, ensuring compatibility with the latest version of web3.js. Previously, we had been using a proxy provider i.e. `SafeEventEmitterprovider` which gave errors with the breaking changes that came with web3.js v4. Remember, you can import the type `IProvider` from the `@web3auth/base` package.
+With V7, the `connectTo()` method now returns a provider of type `IProvider` which is a hard-coded provider, ensuring compatibility with the latest version of web3.js. Previously, we had been using a proxy provider i.e. `SafeEventEmitterProvider` which gave errors with the breaking changes that came with web3.js v4. Remember, you can import the type `IProvider` from the `@web3auth/base` package.
 
 ```tsx
 // With V7
@@ -85,7 +85,7 @@ const txSign = await this.provider.request<{ signature: string }, never>({
 })
 
 const accounts = await this.provider.request<never, string[]>({
-  method: 'xrpl_getaccounts',
+  method: 'xrpl_getAccounts',
 })
 ```
 
@@ -105,11 +105,11 @@ const defaultWcSettings = await getWalletConnectV2Settings(
   [1],
   '04309ed1007e77d1f119b85205bb779d'
 )
-const walletconnectModal = new WalletConnectModal({
+const walletConnectModal = new WalletConnectModal({
   projectId: '04309ed1007e77d1f119b85205bb779d',
 })
 const walletConnectV2Adapter = new WalletConnectV2Adapter({
-  adapterSettings: { qrcodeModal: walletconnectModal, ...defaultWcSettings.adapterSettings },
+  adapterSettings: { qrcodeModal: walletConnectModal, ...defaultWcSettings.adapterSettings },
   loginSettings: { ...defaultWcSettings.loginSettings },
 })
 ```

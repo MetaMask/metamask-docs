@@ -350,17 +350,17 @@ chainConfig = {
 }
 
 // Create an instance of the Web3Auth Ethereum provider
-const ethereumPrivateKeyprovider = new EthereumPrivateKeyProvider({
+const ethereumPrivateKeyProvider = new EthereumPrivateKeyProvider({
   config: {
     chainConfig,
   },
 })
 
 // Setup the provider with the Web3Auth Private Key
-await ethereumPrivateKeyprovider.setupprovider(web3auth.privKey)
+await ethereumPrivateKeyProvider.setupprovider(web3auth.privKey)
 
-// Create an instance of the ethers Browserprovider using the Web3Auth Ethereum provider
-const ethersprovider = new ethers.BrowserProvider(ethereumPrivateKeyprovider)
+// Create an instance of the ethers BrowserProvider using the Web3Auth Ethereum provider
+const ethersProvider = new ethers.BrowserProvider(ethereumPrivateKeyProvider)
 
 // Get the signer for ethers
 const signer = await ethersProvider.getSigner()
@@ -370,7 +370,7 @@ const address = signer.getAddress()
 
 // Get the balance of the user
 const balance = ethers.formatEther(
-  await ethersprovider.getBalance(address) // Balance is in wei
+  await ethersProvider.getBalance(address) // Balance is in wei
 )
 ```
 

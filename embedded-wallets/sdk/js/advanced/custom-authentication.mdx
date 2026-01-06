@@ -536,7 +536,7 @@ const loginWithFirebaseGithub = async () => {
 
     const result = await signInWithPopup(auth, githubProvider)
 
-    const idToken = await result.user.getIdtoken(true)
+    const idToken = await result.user.getIdToken(true)
 
     // focus-start
     await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
@@ -558,7 +558,7 @@ const loginWithFirebaseGithub = async () => {
 <TabItem value="Custom JWT login">
 
 ```ts
-const getIdtoken = async () => {
+const getIdToken = async () => {
   // Get ID token from server
   const res = await fetch('http://localhost:8080/api/token', {
     method: 'POST',
@@ -572,7 +572,7 @@ const getIdtoken = async () => {
 
 const loginWithJWT = async () => {
   try {
-    const idToken = await getIdtoken()
+    const idToken = await getIdToken()
 
     // focus-start
     await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
@@ -713,7 +713,7 @@ const loginWithFirebaseGithub = async () => {
 
   const result = await signInWithPopup(auth, githubProvider)
 
-  const idToken = await result.user.getIdtoken(true)
+  const idToken = await result.user.getIdToken(true)
 
   // focus-start
   await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {

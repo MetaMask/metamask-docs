@@ -48,7 +48,7 @@ import { getEvmChainConfig } from '@web3auth/base'
 
 const chainConfig = getEvmChainConfig(1, WEB3AUTH_CLIENT_ID)
 
-const ethereumPrivateKeyprovider = EthereumPrivateKeyProvider({
+const ethereumPrivateKeyProvider = EthereumPrivateKeyProvider({
   config: { chainConfig },
 })
 // remove-end
@@ -57,7 +57,7 @@ const web3auth = new Web3Auth({
   clientId: WEB3AUTH_CLIENT_ID, // Get your Client ID from the Embedded Wallets dashboard
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // remove-next-line
-  privateKeyProvider: ethereumPrivateKeyprovider,
+  privateKeyProvider: ethereumPrivateKeyProvider,
 })
 ```
 

@@ -99,7 +99,7 @@ class ViewModel: ObservableObject {
             do {
                 let result = try await web3Auth.login(
 					W3ALoginParams(
-                        // provider can be .GOOGLE, .FACEBOOK, .APPLE etc
+                        // Provider can be .GOOGLE, .FACEBOOK, .APPLE etc
 						loginProvider: provider,
 						// focus-next-line
                         dappShare: "<24 words seed phrase>"

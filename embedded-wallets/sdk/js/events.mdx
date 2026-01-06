@@ -61,7 +61,7 @@ connectedConnectorName: WALLET_CONNECTOR_TYPE | null
 | Event               | Description                  |
 | ------------------- | ---------------------------- |
 | `AUTH`              | Web3Auth connector.          |
-| `WALLET_CONNECT_V2` | Wallet connect V2 connector. |
+| `WALLET_CONNECT_V2` | WalletConnect V2 connector. |
 | `COINBASE`          | Coinbase connector.          |
 | `METAMASK`          | MetaMask connector.          |
 
@@ -180,7 +180,7 @@ Returns the account abstraction provider if available.
 #### Interface
 
 ```ts
-get accountAbstractionProvider(): AccountAbstractionprovider | null;
+get accountAbstractionProvider(): AccountAbstractionProvider | null;
 ```
 
 #### Usage

@@ -20,7 +20,7 @@ Smart Account integration has been significantly streamlined in v10. The primary
 ```typescript
 // remove-start
 import {
-  AccountAbstractionprovider,
+  AccountAbstractionProvider,
   SafeSmartAccount,
 } from '@web3auth/account-abstraction-provider'
 
@@ -28,7 +28,7 @@ const chainConfig = {
   // Chain config
 }
 
-const accountAbstractionProvider = new AccountAbstractionprovider({
+const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
     smartAccountInit: new SafeSmartAccount(),

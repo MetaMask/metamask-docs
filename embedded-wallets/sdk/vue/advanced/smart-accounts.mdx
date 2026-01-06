@@ -24,10 +24,12 @@ Effortlessly create and manage smart accounts for your users with just a few lin
 
 > For more information about ERC-4337 and its components, [check out our detailed blog post](https://blog.web3auth.io/an-ultimate-guide-to-web3-wallets-externally-owned-account-and-smart-contract-wallet/#introduction-to-eip-4337).
 
-Our smart account integration streamlines your setup, allowing you to create and manage smart accounts using your favorite libraries like Viem, Ethers, and Wagmi. You don't need to rely on third-party packages to effortlessly create ERC-4337 compatible Smart contract Wallets (SCWs), giving users the ability to perform batch transactions and efficiently manage gas sponsorship.
+Our smart account integration streamlines your setup, allowing you to create and manage smart accounts using your favorite libraries like Viem, Ethers, and Wagmi. You don't need to rely on third-party packages to effortlessly create ERC-4337 compatible Smart Contract Wallets (SCWs), giving users the ability to perform batch transactions and efficiently manage gas sponsorship.
 
 <GrowthPlanNote />
+
 ## Enabling smart accounts
+
 :::info prerequisite
 
 To enable this feature, you need to configure smart accounts from your project in the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io).
@@ -101,6 +103,7 @@ export default web3AuthContextConfig
 ```
 
 ### Advanced configuration: override paymaster context
+
 You can override the paymaster context defined in the dashboard for specific chains. This is particularly useful when your paymaster requires custom settings or parameters.
 
 ```ts
@@ -146,7 +149,9 @@ The paymaster context must be manually configured for each chain that needs to b
 :::
 
 ## Using smart accounts
+
 ### Configure signer
+
 <ConfigureSigners />
 
 ### Get Smart account address

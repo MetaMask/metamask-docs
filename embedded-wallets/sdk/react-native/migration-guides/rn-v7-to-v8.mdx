@@ -58,7 +58,7 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   redirectUrl: redirectUrl,
   // add-next-line
-  privateKeyProvider: ethereumPrivateKeyprovider,
+  privateKeyProvider: ethereumPrivateKeyProvider,
 })
 ```
 
@@ -71,7 +71,7 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   redirectUrl: redirectUrl,
   // add-next-line
-  privateKeyProvider: ethereumPrivateKeyprovider,
+  privateKeyProvider: ethereumPrivateKeyProvider,
 })
 ```
 
@@ -84,13 +84,13 @@ The `privKey` property has been removed. Use the `connected` property instead. A
 ```typescript
 // remove-start
 if (web3auth.privKey) {
-  await ethereumPrivateKeyprovider.setupprovider(web3auth.privKey);
-  setprovider(ethereumPrivateKeyprovider);
+  await ethereumPrivateKeyProvider.setupprovider(web3auth.privKey);
+  setProvider(ethereumPrivateKeyProvider);
 // remove-end
 // add-next-line
 if (web3auth.connected) {
   // add-next-line
-  setprovider(web3auth.provider);
+  setProvider(web3auth.provider);
   setLoggedIn(true);
 }
 ```

@@ -1,11 +1,11 @@
 ```tsx title="App.tsx"
-const { getIdtokenClaims, loginWithPopup } = useAuth0();
+const { getIdTokenClaims, loginWithPopup } = useAuth0();
 
 const loginWithAuth0 = async () => {
   try {
     await loginWithPopup();
 
-    const idToken = (await getIdtokenClaims())?.__raw.toString();
+    const idToken = (await getIdTokenClaims())?.__raw.toString();
     if (!idToken) {
       throw new error("No id token found");
     }

@@ -71,7 +71,7 @@ export type MfaSettings = Partial<Record<MFA_FACTOR_TYPE, MFA_SETTINGS>>
 
 ```tsx
 const state = await web3auth.login({
-  loginProvider: Loginprovider.GOOGLE,
+  loginProvider: LoginProvider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
   // focus-next-line
   mfaLevel: MFALevel.MANDATORY, // MFALevel.DEFAULT, MFALevel.OPTIONAL, MFALevel.MANDATORY, MFALevel.NONE

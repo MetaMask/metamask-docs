@@ -135,7 +135,7 @@ export type LoginParams = BaseRedirectParams & {
 
 ```typescript title="example.tsx"
 await web3auth.login({
-  loginProvider: Loginprovider.GOOGLE,
+  loginProvider: LoginProvider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
 })
 ```
@@ -146,7 +146,7 @@ The `web3auth.login()` method accepts a `curve` parameter. This parameter can be
 
 ```typescript
 await web3auth.login({
-  loginProvider: Loginprovider.GOOGLE,
+  loginProvider: LoginProvider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
   // focus-next-line
   curve: 'secp256k1', // `secp256k1` and `ed25519` are supported
@@ -167,7 +167,7 @@ await web3auth.login({
 
 ```typescript
 await web3auth.login({
-  loginProvider: Loginprovider.GOOGLE,
+  loginProvider: LoginProvider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
   // focus-next-line
   curve: 'secp256k1',
@@ -180,7 +180,7 @@ await web3auth.login({
 
 ```typescript
 await web3auth.login({
-  loginProvider: Loginprovider.GOOGLE,
+  loginProvider: LoginProvider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
   // focus-next-line
   curve: 'ed25519',

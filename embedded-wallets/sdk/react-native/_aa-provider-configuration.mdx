@@ -6,7 +6,7 @@ the provider.
 ```tsx
 // focus-start
 import {
-  AccountAbstractionprovider,
+  AccountAbstractionProvider,
   SafeSmartAccount,
 } from "@web3auth/account-abstraction-provider";
 // focus-end
@@ -23,7 +23,7 @@ const chainConfig = {
 };
 
 // focus-start
-const accountAbstractionProvider = new AccountAbstractionprovider({
+const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
     smartAccountInit: new SafeSmartAccount(),

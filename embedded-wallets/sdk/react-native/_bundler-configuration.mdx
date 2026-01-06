@@ -18,7 +18,7 @@ values={[
 
 ```ts
 import {
-  AccountAbstractionprovider,
+  AccountAbstractionProvider,
   SafeSmartAccount,
 } from "@web3auth/account-abstraction-provider";
 
@@ -33,7 +33,7 @@ const chainConfig = {
   logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
 };
 
-const accountAbstractionProvider = new AccountAbstractionprovider({
+const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
     smartAccountInit: new SafeSmartAccount(),
@@ -53,7 +53,7 @@ const accountAbstractionProvider = new AccountAbstractionprovider({
 
 ```ts
 import {
-  AccountAbstractionprovider,
+  AccountAbstractionProvider,
   KernelSmartAccount,
 } from "@web3auth/account-abstraction-provider";
 
@@ -68,7 +68,7 @@ const chainConfig = {
   logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
 };
 
-const accountAbstractionProvider = new AccountAbstractionprovider({
+const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
     smartAccountInit: new KernelSmartAccount(),

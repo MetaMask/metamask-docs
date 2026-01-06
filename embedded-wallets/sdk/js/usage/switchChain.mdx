@@ -37,7 +37,7 @@ await web3auth.switchChain({ chainId: '0xaa36a7' })
 
 ```tsx
 async switchChain(params: { chainId: string }): Promise<void> {
-    if (this.status !== ADAPTER_STATUS.CONNECTED || !this.connectedAdapterName) throw WalletLoginerror.notconnectederror(`No wallet is connected`);
+    if (this.status !== ADAPTER_STATUS.CONNECTED || !this.connectedAdapterName) throw WalletLoginError.notConnectedError(`No wallet is connected`);
     return this.walletAdapters[this.connectedAdapterName].switchChain(params);
 }
 ```

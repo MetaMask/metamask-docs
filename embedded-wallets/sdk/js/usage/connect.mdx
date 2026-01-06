@@ -53,7 +53,7 @@ const web3auth = new Web3Auth({
 
 await web3auth.init()
 
-// show the modal and connect
+// Show the modal and connect
 const provider = await web3auth.connect()
 ```
 
@@ -77,7 +77,7 @@ const web3auth = new Web3Auth({
 
 await web3auth.init()
 
-// connect directly to Google
+// Connect directly to Google
 const provider = await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
   authConnection: AUTH_CONNECTION.GOOGLE,
 })

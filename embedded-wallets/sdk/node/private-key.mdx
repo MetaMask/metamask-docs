@@ -28,7 +28,9 @@ The provider offers different methods to access private keys depending on your b
 | `solana_privateKey` | Solana private key             | Solana blockchain                         |
 | `private_key`       | Raw private key                | Any blockchain                            |
 
-## EVM chains (Ethereum, Polygon, BSC)
+## EVM chains 
+
+For EVM-compatible chains such as Ethereum, Polygon, BSC.
 
 ### Get Ethereum private key
 
@@ -48,9 +50,9 @@ const privateKey = await provider.request({ method: 'private_key' })
 // Create wallet instance
 const wallet = new ethers.Wallet(privateKey)
 
-// connect to a provider
-const rpcprovider = new ethers.providers.JsonRpcprovider('https://rpc.ankr.com/eth')
-const connectedWallet = wallet.connect(rpcprovider)
+// Connect to a provider
+const rpcProvider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth')
+const connectedWallet = wallet.connect(rpcProvider)
 
 // Get address
 const address = await connectedWallet.getAddress()
@@ -112,7 +114,7 @@ console.log('Solana Private Key:', solana_privateKey) // Base58 encoded
 
 ```javascript
 const {
-  connection,
+  Connection,
   Keypair,
   PublicKey,
   Transaction,
@@ -128,8 +130,8 @@ const solana_privateKey = await provider.request({ method: 'solana_privateKey' }
 const secretKey = bs58.decode(solana_privateKey)
 const keypair = Keypair.fromSecretKey(secretKey)
 
-// connect to Solana
-const connection = new connection('https://api.mainnet-beta.solana.com')
+// Connect to Solana
+const connection = new Connection('https://api.mainnet-beta.solana.com')
 
 // Get balance
 const balance = await connection.getBalance(keypair.publicKey)
@@ -174,12 +176,12 @@ console.log('Bitcoin Address:', address)
 
 ## Disabling private key export
 
-Private key export can be disabled in the Embedded Wallets dashboard:
+Private key export can be disabled in the Web3Auth Dashboard:
 
-1. Go to your project settings.
-2. Navigate to **Advanced Settings**.
-3. Toggle **Disable Private Key Export**.
-4. Save changes.
+1. Go to your project settings
+2. Navigate to "Advanced Settings"
+3. Toggle "Disable Private Key Export"
+4. Save changes
 
 When disabled, private key methods will throw an error:
 

@@ -29,11 +29,11 @@ In V5, we used to add a check for setting the `provider` only if the `web3auth.p
 ```tsx
 // With V5
 if (web3auth.provider) {
-  setprovider(web3auth.provider)
+  setProvider(web3auth.provider)
 }
 // With V6
 // focus-next-line
-setprovider(web3auth.provider) // before the connect() or connectTo(), provider is available.
+setProvider(web3auth.provider) // before the connect() or connectTo(), provider is available.
 ```
 
 ### `rpcTarget` and `chainId` is now a mandatory parameter
@@ -87,10 +87,10 @@ web3authInstance.configureAdapter(openloginAdapter)
 
 #### For Solana
 
-For Solana use the `SolanaPrivateKeyprovider` from the `@web3auth/solana-provider`package. Please note that `SolanaPrivateKeyprovider` requires `chainConfig` as the `config` parameter at the time of initialization.
+For Solana use the `SolanaPrivateKeyProvider` from the `@web3auth/solana-provider`package. Please note that `SolanaPrivateKeyProvider` requires `chainConfig` as the `config` parameter at the time of initialization.
 
 ```tsx
-import { SolanaPrivateKeyprovider } from '@web3auth/solana-provider'
+import { SolanaPrivateKeyProvider } from '@web3auth/solana-provider'
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.SOLANA,
@@ -102,7 +102,7 @@ const chainConfig = {
   tickerName: 'Solana',
 }
 // focus-next-line
-const privateKeyProvider = new SolanaPrivateKeyprovider({ config: { chainConfig } })
+const privateKeyProvider = new SolanaPrivateKeyProvider({ config: { chainConfig } })
 const openloginAdapter = new OpenloginAdapter({
   // focus-next-line
   privateKeyProvider,
@@ -112,10 +112,10 @@ web3auth.configureAdapter(openloginAdapter)
 
 #### For all other chains
 
-For all non-EVM and non-Solana chains, use the `CommonPrivateKeyprovider` from the `@web3auth/base-provider`package. Please note that `CommonPrivateKeyprovider` requires `chainConfig` as the `config` parameter at the time of initialization.
+For all non-EVM and non-Solana chains, use the `CommonPrivateKeyProvider` from the `@web3auth/base-provider`package. Please note that `CommonPrivateKeyProvider` requires `chainConfig` as the `config` parameter at the time of initialization.
 
 ```tsx
-import { CommonPrivateKeyprovider } from '@web3auth/base-provider'
+import { CommonPrivateKeyProvider } from '@web3auth/base-provider'
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.SOLANA,
@@ -127,7 +127,7 @@ const chainConfig = {
   tickerName: 'Solana',
 }
 // focus-next-line
-const privateKeyProvider = new CommonPrivateKeyprovider({ config: { chainConfig } })
+const privateKeyProvider = new CommonPrivateKeyProvider({ config: { chainConfig } })
 
 const openloginAdapter = new OpenloginAdapter({
   // focus-next-line

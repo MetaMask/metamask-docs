@@ -7,7 +7,7 @@ const loginWithFirebaseGithub = async () => {
 
     const result = await signInWithPopup(auth, githubProvider);
 
-    const idToken = await result.user.getIdtoken(true);
+    const idToken = await result.user.getIdToken(true);
 
     // focus-start
     connectTo(WALLET_CONNECTORS.AUTH, {

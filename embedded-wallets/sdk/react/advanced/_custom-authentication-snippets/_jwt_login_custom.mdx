@@ -1,5 +1,5 @@
 ```tsx title="App.tsx"
-const getIdtoken = async () => {
+const getIdToken = async () => {
   // Get ID token from server
   const res = await fetch("http://localhost:8080/api/token", {
     method: "POST",
@@ -13,7 +13,7 @@ const getIdtoken = async () => {
 
 const loginWithJWT = async () => {
   try {
-    const idToken = await getIdtoken();
+    const idToken = await getIdToken();
 
     // focus-start
     await connectTo(WALLET_CONNECTORS.AUTH, {
