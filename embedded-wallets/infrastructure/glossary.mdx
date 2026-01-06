@@ -1,61 +1,55 @@
 ---
 title: Important Terms and Definitions
 sidebar_label: Glossary
-
-description:
-  "Important Terms and Definitions - Web3Auth Wallet Management Infrastructure | Documentation -
-  Web3Auth"
+description: "Important Terms and Definitions - Embedded Wallets' Cryptographic Protocol | Web3Auth"
 ---
 
-### Shamir Secret Sharing (SSS)
+### Shamir Secret Sharing 
 
-Shamir’s secret sharing scheme is a polynomial threshold $[(t,n)]$ secret sharing scheme where a
-dealer divides a secret into n multiple shares and each participant is given a share by evaluating a
+[Shamir’s Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing) (SSS) scheme is a polynomial 
+threshold $(t,n)$ secret sharing scheme where the secret holder divides a secret into n multiple shares and each participant is given a share by evaluating a
 polynomial of order $t$ . To reconstruct the secret, $t + 1$ shares are required.
 
-SSS is a base fundemental in a lot of MPC cryptography and in Web3Auth’s infrastucture. More can be
-read [here](https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing).
+SSS is often applied in MPC cryptography and is fundamental to Embedded Wallet’s infrastructure.
 
-### Verifiable Secret Sharing (VSS)
+### Verifiable Secret Sharing
 
-Verifiable secret sharing refers to Shamir secret sharing schemes where even in the presence of
-malicious dealers, there is a well-defined secret that the participants can later reconstruct.
+Verifiable secret sharing (VSS) refers to a class of secret-sharing schemes—often built on top of Shamir’s Secret Sharing—that ensure a well-defined secret can be reconstructed, even if the party distributing the shares behaves maliciously.
 
-### Threshold Signature Schemes (TSS)
+### Threshold Signature Schemes 
 
-Threshold signature schemes refer to signing schemes that allow a qualified set of parties involved
+Threshold signature schemes (TSS) refer to signing schemes that allow a qualified set of parties involved
 in a secret sharing scheme to generate a signature on a message without reconstructing the private
-key. The most well-known signature scheme is [GG19](https://eprint.iacr.org/2019/114.pdf) and an
-implementation can be found [here](https://github.com/ZenGo-X/multi-party-ecdsa). In particular
-Web3Auth supports and utilizes GG19, GG20, its EDDSA variants, and DKLS19.
+key. The most well-known signature scheme is [GG19](https://eprint.iacr.org/2019/114.pdf) (with a reference 
+implementation available in the [ZenGo-X repository](https://github.com/ZenGo-X/multi-party-ecdsa)). In particular,
+Embedded Wallets supports and utilizes GG19, GG20, its EDDSA variants, and DKLS19.
 
-### Distributed Key Generation (DKG)
+### Distributed Key Generation
 
-Distributed key generation was introduced by Pedersen, and the key idea involves using n parallel
-runs of SSS or VSS to ensure that there is no dealer who knows the secret. We generally use a
-varient of [Async Verifiable Secret Sharing](https://eprint.iacr.org/2002/134.pdf) in our DKG.
+Distributed Key Generation (DKG) was introduced by Pedersen, who demonstrated that using n parallel
+runs of SSS or VSS ensures that there is no single party who knows the secret. Embedded wallets applies a
+varient of [Async Verifiable Secret Sharing](https://eprint.iacr.org/2002/134.pdf) (AVSS) in our DKG.
 
 <details>
   <summary>Async Verifiable Secret Sharing</summary>
   <div>
     <div>
-      The main advantage Async Verifiable Secret Sharing DKG has over the other well-known DKGs like
-      Pedersen DKG, Feldman's VSS and its variants is that it is fully asynchronous and thus does
+      The main advantage Async Verifiable Secret Sharing (AVSS) DKG has over the other well-known DKGs like
+      Pedersen DKG, Feldman's VSS, and its variants is that it is fully asynchronous. This means it does
       not require a complaint phase when we consider the allowance for a small zero-knowledge proof.
       This results in a simpler implementation (with constant communication rounds even during
       malicious scenarios), but at the expense of message size.
     </div>
     <br />
     <div>
-      In brief, this scheme generates a random bivariate polynomial (i.e. 2D surface) and creates
-      horizontal (X) and vertical (Y) slices at the appropriate indices as sharings. We then get
-      sub-sharings (points) on these horizontal and vertical sharings at the appropriate indices and
-      echo them to other nodes. As a node, the polynomial reconstructed from the sub-sharings
-      received from other nodes should match up with the initial sharing that the node received from
-      the dealer, and even if they do not, the node can always interpolate the correct sharing via
-      these echoed sub-sharings. This eliminates the dealer complaint phase. We then we restrict
-      ourselves to just the horizontal (X) domain such that our final sharings are still on that of
-      a univariate polynomial, which is what a typical DKG does.‌
+      In brief, this scheme generates a random bivariate polynomial (a 2D surface) and creates horizontal (X) and 
+      vertical (Y) slices at the appropriate indices as shares. From these slices, nodes derive sub-shares (evaluation points) and exchange them with other nodes.
+
+      Each node reconstructs a polynomial from the sub-shares received from other nodes and verifies that it is 
+      consistent with the initial share it received from the originating node. If inconsistencies are detected, the node can interpolate the correct share using the exchanged sub-shares, which eliminates the need for a separate 
+      complaint phase.
+
+      Finally, the scheme restricts itself to the horizontal (X) domain so that the resulting shares lie on a univariate polynomial, which matches the structure used by standard DKG protocols.
     </div>
     <br />
     <div>
@@ -70,20 +64,20 @@ varient of [Async Verifiable Secret Sharing](https://eprint.iacr.org/2002/134.pd
   </div>
 </details>
 
-### Proactive Secret Sharing (PSS)
+### Proactive Secret Sharing
 
-Proactive secret sharing allows participants to “refresh” shares, so that all participants receive
-new shares, but the secret remains unchanged. This allows the secret sharing to be secure against
+Proactive Secret Sharing (PSS) allows participants to “refresh” shares, so that all participants receive
+new shares, while the secret remains unchanged. This allows the secret sharing to be secure against
 mobile adversaries who may be able to compromise all participants over the lifetime of the secret
-(eg. adversary hacks a random participant’s server every month).
+(for example, an adversary hacks a random participant’s server every month).
 
 Simply copying shares across epochs is a bad idea, since a single node operator operating in two
-separate epochs would get access to two shares, and it also makes it not possible to increase or
-decrease the number of operators in each epoch. Hence, we use PSS to migrate shares across epochs.
+separate epochs would get access to two shares, and it also makes it impossible to increase or
+decrease the number of operators in each epoch. This is why we use PSS to migrate shares across epochs.
 
 We refer the user to a [Proactive Secret Sharing Scheme](https://eprint.iacr.org/2002/134.pdf) that
 supports dynamic sets of participants, which we use for share refresh. In brief, the key idea is
-that we create polynomial sharings of the existing key shares and add these polynomials in a
+that we create polynomial sharing of the existing key shares and add these polynomials in a
 specific way such that the coefficient of the master polynomial is the Lagrange interpolation of the
 existing key shares. Much like how DKGs are the sum of several secret sharings, where the master
 secret is the sum of all of the secrets from each of the N-parallel secret sharing protocols, we can
@@ -93,8 +87,8 @@ nodes, with their "secret" as their share. The resulting shares of shares, if ad
 
 ### Epochs
 
-Torus nodes operate within a certain time period, called an epoch. Nodes within the same epoch are
-part of the same BFT (Byzantine Fault Tolerance) network and hold key shares that are compatible
+The underlying node network operates within chunks of time, called an epoch. Nodes within the same epoch are
+part of the same BFT (Byzantine Fault Tolerant) network and hold key shares that are compatible
 with each others' key shares. Nodes within different epochs do not. The main purpose of epochs is to
 ensure that node operators can be removed and added, and to minimize the impact of loss of key
 shares or node failures over time.
