@@ -78,7 +78,7 @@ const web3AuthOptions: Web3AuthOptions = {
 #### Action
 
 Your existing v9 single verifiers will be automatically migrated to "connections" on the new
-Web3Auth Developer Dashboard. Locate your migrated connection, note its `authconnectionId`, and use
+Web3Auth Developer Dashboard. Locate your migrated connection, note its `authConnectionId, and use
 this ID in your v10 client code (`modalConfig` or `connectTo`). Remove any v9 `AuthAdapter`
 configuration previously used for this verifier.
 
@@ -168,9 +168,9 @@ selecting the individual connections you want to group.
 2. On the v10 dashboard, locate your migrated Grouped connection. Note its
    `groupedAuthconnectionId`.
 3. For each login method within that group, find the corresponding individual migrated connection
-   and note its specific `authconnectionId`.
+   and note its specific `authConnectionId.
 4. Update your v10 client code to use both the `groupedAuthconnectionId` (for the group) and the
-   specific `authconnectionId` (for the particular login method being invoked) in `modalConfig` or
+   specific `authConnectionId (for the particular login method being invoked) in `modalConfig` or
    `connectTo` calls. The v9 `verifierSubIdentifier` is no longer used in the client.
 
 ## Summary

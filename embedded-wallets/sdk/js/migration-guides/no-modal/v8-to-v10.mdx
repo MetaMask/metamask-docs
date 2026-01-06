@@ -132,7 +132,7 @@ await web3auth.init()
 
 // Custom UI - connect directly
 await web3auth.connectTo('openlogin', {
-  loginprovider: 'google',
+  loginProvider: 'google',
 })
 // remove-end
 ```
@@ -201,8 +201,8 @@ For specific functionality migrations, refer to these supplementary guides:
 **[External Wallet Adapters Migration Guide](../modal/v8-to-v10/external-wallets.mdx)** for migrating
 to automatic detection.
 
-**Wallet services:** If you used the `@web3auth/wallet-services-plugin` in v8, see the 🛠️
-**[Wallet services Migration Guide](../modal/v8-to-v10/wallet-services.mdx)** for migrating to the
+**Wallet Services:** If you used the `@web3auth/wallet-services-plugin` in v8, see the 🛠️
+**[Wallet Services Migration Guide](../modal/v8-to-v10/wallet-services.mdx)** for migrating to the
 built-in integration.
 
 **Whitelabeling and UI customization:** If you had whitelabeling configurations in v8, see the 📋
@@ -280,7 +280,7 @@ await web3auth.init()
 
 // connect with custom UI
 await web3auth.connectTo('openlogin', {
-  loginprovider: 'google',
+  loginProvider: 'google',
 })
 ```
 

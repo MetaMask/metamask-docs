@@ -61,7 +61,7 @@ import { useEffect, useState } from 'react'
 export function Balance() {
   const { accounts, connection } = useSolanaWallet()
   const [balance, setBalance] = useState<number | null>(null)
-  const [isloading, setIsloading] = useState(false)
+  const [isLoading, setIsloading] = useState(false)
   const [error, seterror] = useState<string | null>(null)
 
   const fetchBalance = async () => {
@@ -88,7 +88,7 @@ export function Balance() {
     <div>
       <h2>Balance</h2>
       <div>{balance !== null && `${balance / LAMPORTS_PER_SOL} SOL`}</div>
-      {isloading && <span className="loading">loading...</span>}
+      {isLoading && <span className="loading">loading...</span>}
       {error && <span className="error">error: {error}</span>}
       <button onClick={fetchBalance} type="submit" className="card">
         Fetch Balance

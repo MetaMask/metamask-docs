@@ -10,11 +10,11 @@ import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
 Custom Authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
 
-This feature, with MFA turned off, can even make Web3Auth invisible to the end user.
+This feature, with Multi-Factor Authentication (MFA) turned off, can even make Embedded Wallets invisible to the end user.
 
 <GrowthPlanNote />
 
-## Getting an auth connection ID
+## Getting an Auth Connection ID
 
 :::info prerequisite
 
@@ -22,11 +22,11 @@ To enable this, you need to [Create a connection](/embedded-wallets/dashboard/au
 
 :::
 
-To configure a connection, you need to provide the particular details of the connection into our Web3Auth Dashboard. This enables us to map a `authconnectionId` with your connection details. This `authconnectionId` helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
+To configure a connection, you need to provide the particular details of the connection into our Web3Auth Dashboard. This enables us to map a `authConnectionId with your connection details. This `authConnectionId helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
 
 :::tip
 
-Visit the [Auth provider Setup](/embedded-wallets/authentication) page to learn more about to setup the different configurations available for each connection.
+Learn more about the [Auth provider setup](/embedded-wallets/authentication) and the different configurations available for each connection.
 
 :::
 
@@ -34,15 +34,15 @@ Visit the [Auth provider Setup](/embedded-wallets/authentication) page to learn 
 
 :::warning
 
-_**"Auth connection"**_ is called _**"Verifier"**_ in the Android SDK. It is the older terminology which we will be updating in the upcoming releases.
+_**"Auth Connection"**_ is called _**"Verifier"**_ in the Android SDK. It is the older terminology which we will be updating in the upcoming releases.
 
-Consequentially, you will see the terms _**"Verifier ID"**_ and _**"Aggregate verifier"**_ used in the codebase and documentation referring to _**"Auth connection ID"**_ and _**"Grouped Auth connection"**_ respectively.
+Consequentially, you will see the terms _**"Verifier ID"**_ and _**"Aggregate verifier"**_ used in the codebase and documentation referring to _**"Auth Connection ID"**_ and _**"Grouped Auth Connection"**_ respectively.
 
 :::
 
-To use custom authentication (Using Social providers or Login providers like Auth0, AWS Cognito, Firebase etc. or even your own custom JWT login) you can add the configuration using `loginConfig` parameter during the initialization.
+To use custom authentication (using Social providers or Login providers like Auth0, AWS Cognito, Firebase, and others, or even your own custom JWT login) you can add the configuration using `loginConfig` parameter during the initialization.
 
-The `loginConfig` parameter is a key value map. The key should be one of the `Web3Authprovider` in its string form, and the value should be a `LoginConfigItem` instance.
+The `loginConfig` parameter is a key value map. The key should be one of the `Web3AuthProvider` in its string form, and the value should be a `LoginConfigItem` instance.
 
 After creating the verifier, you can use the following parameters in the `LoginConfigItem`.
 
@@ -67,7 +67,7 @@ After creating the verifier, you can use the following parameters in the `LoginC
 | `logoHover?`             | Logo to be shown on mouse hover. It accepts `String` as a value.                                                                                                                                                                                                                                                                  |
 | `logoLight?`             | Light logo for dark background. It accepts `String` as a value.                                                                                                                                                                                                                                                                   |
 | `logoDark?`              | Dark logo for light background. It accepts `String` as a value.                                                                                                                                                                                                                                                                   |
-| `mainOption?`            | show login button on the main list. It accepts `Boolean` as a value. Default value is false.                                                                                                                                                                                                                                      |
+| `mainOption?`            | Show login button on the main list. It accepts `Boolean` as a value. Default value is false.                                                                                                                                                                                                                                      |
 | `showOnModal?`           | Whether to show the login button on modal or not. Default value is true.                                                                                                                                                                                                                                                          |
 | `showOnDesktop?`         | Whether to show the login button on desktop. Default value is true.                                                                                                                                                                                                                                                               |
 | `showOnMobile?`          | Whether to show the login button on mobile. Default value is true.                                                                                                                                                                                                                                                                |
@@ -168,7 +168,7 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-    LoginParams(provider.GOOGLE)
+    LoginParams(Provider.GOOGLE)
 )
 // focus-end
 ```
@@ -201,7 +201,7 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-  LoginParams(provider.Facebook)
+  LoginParams(Provider.Facebook)
 )
 // focus-end
 
@@ -233,7 +233,7 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-    LoginParams(provider.JWT)
+    LoginParams(Provider.JWT)
 )
 // focus-end
 ```
@@ -265,7 +265,7 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-  LoginParams(provider.JWT)
+  LoginParams(Provider.JWT)
 )
 // focus-end
 
@@ -303,7 +303,7 @@ Additional to the `LoginConfig` you can pass extra options to the `login` functi
 | `ui_locales?`                | The space separated list of language tags, ordered by preference. For instance `fr-CA fr en`.                                                                                                                                    |
 | `id_token_hint?`             | It denotes the previously issued ID token. It takes `String` as a value.                                                                                                                                                         |
 | `id_token?`                  | JWT (ID token) to be passed for login.                                                                                                                                                                                           |
-| `login_hint?`                | Used to specify the user's email address or phone number for Email/SMS passwordless login flows. Takes a `String` value. For the SMS, the format should be: `+{country_code}-{phone_number}` (e.g. `+1-1234567890`)              |
+| `login_hint?`                | Used to specify the user's email address or phone number for Email/SMS Passwordless login flows. Takes a `String` value. For the SMS, the format should be: `+{country_code}-{phone_number}` (e.g. `+1-1234567890`)              |
 | `acr_values?`                | acc_values                                                                                                                                                                                                                       |
 | `scope?`                     | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. It takes `String` as a value.                                                            |
 | `audience?`                  | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It takes `String` as a value.                                                                                          |
@@ -354,7 +354,7 @@ data class ExtraLoginOptions(
     { label: "Auth0", value: "auth0" },
     { label: "Custom JWT", value: "byoj" },
     { label: "Email Passwordless", value: "email-passwordless" },
-    { label: "SMS passwordless", value: "sms-passwordless" },
+    { label: "SMS Passwordless", value: "sms-passwordless" },
   ]}
 >
 
@@ -384,7 +384,7 @@ val web3Auth = Web3Auth(
 
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
   LoginParams(
-    provider.JWT,
+    Provider.JWT,
     // focus-start
     extraLoginOptions = ExtraLoginOptions(
       domain: "https://username.us.auth0.com", // Domain of your Auth0 app
@@ -424,7 +424,7 @@ val web3Auth = Web3Auth(
 
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
   LoginParams(
-    provider.JWT,
+    Provider.JWT,
     // focus-start
     extraLoginOptions = ExtraLoginOptions(
       id_token: "Your JWT id token",
@@ -457,7 +457,7 @@ val web3Auth = Web3Auth(
 
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
   LoginParams(
-    provider.EMAIL_PASSWORDLESS,
+    Provider.EMAIL_PASSWORDLESS,
     // focus-next-line
     extraLoginOptions = ExtraLoginOptions(login_hint = "hello@web3auth.io")
   )
@@ -467,7 +467,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 </TabItem>
 
 <TabItem value="sms-passwordless">
-To use the SMS passwordless login, send the phone number as the `login_hint` parameter of the
+To use the SMS Passwordless login, send the phone number as the `login_hint` parameter of the
 `ExtraLoginOptions`. Please make sure the phone number is in the format of
 +\{country_code}-\{phone_number}, i.e. (+91-09xx901xx1).
 
@@ -487,7 +487,7 @@ val web3Auth = Web3Auth(
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
   LoginParams(
-    provider.SMS_PASSWORDLESS,
+    Provider.SMS_PASSWORDLESS,
     extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344")
   )
 )
@@ -535,13 +535,13 @@ val web3Auth = Web3Auth(
 
 // focus-start
 // Google Login
-web3Auth.login(LoginParams(provider.GOOGLE))
+web3Auth.login(LoginParams(Provider.GOOGLE))
 // focus-end
 
 // focus-start
 // Auth0 Login
 web3Auth.login(LoginParams(
-  provider.JWT,
+  Provider.JWT,
   extraLoginOptions = ExtraLoginOptions(
     domain = "https://web3auth.au.auth0.com",
     verifierIdField = "email",

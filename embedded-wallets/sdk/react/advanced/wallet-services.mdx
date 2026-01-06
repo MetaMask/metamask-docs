@@ -1,5 +1,5 @@
 ---
-title: Wallet services
+title: Wallet Services
 sidebar_label: Wallet UI & Services
 description: '@web3auth/modal Wallet UI | Embedded Wallets'
 ---
@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem'
 import AuthAdapterSettings from '../../_common/_auth-adapter-settings.mdx'
 import AuthLoginSettings from '../../_common/_auth-login-settings.mdx'
 
-Web3Auth Wallet services provides a comprehensive suite of wallet functionality including Fiat on Ramp, Swaps, and Interoperability with Walletconnect. These services enhance your application by offering a complete wallet experience without building these features from scratch.
+Web3Auth Wallet Services provides a comprehensive suite of wallet functionality including Fiat on Ramp, Swaps, and Interoperability with Walletconnect. These services enhance your application by offering a complete wallet experience without building these features from scratch.
 
 :::tip
 
@@ -19,19 +19,20 @@ All these configurations can be directly accessed and managed through the Web3Au
 
 :::note
 
-Access to Wallet services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
 
 :::
 
 ## `walletServicesConfig`
 
-The `walletServicesConfig` option allows you to customize the wallet services experience for your users.
+The `walletServicesConfig` option allows you to customize the Wallet Services experience for your users.
 
 ```tsx
 walletServicesConfig?: WalletServicesConfig;
 ```
 
 ### Configuration options
+
 <Tabs>
   <TabItem value="Table">
 
@@ -43,6 +44,7 @@ walletServicesConfig?: WalletServicesConfig;
 | `whiteLabel`           | Object                     | Customization options for the widget appearance |
 
 #### Confirmation strategy options
+
 | Strategy       | Description                                                    |
 | -------------- | -------------------------------------------------------------- |
 | `default`      | Uses auto-approve by default, modal for Walletconnect requests |
@@ -50,6 +52,7 @@ walletServicesConfig?: WalletServicesConfig;
 | `auto-approve` | Automatically approves transactions without confirmation       |
 
 #### Whitelabel options
+
 | Property            | Type                 | Description                               |
 | ------------------- | -------------------- | ----------------------------------------- |
 | `showWidgetButton`  | boolean              | Whether to show the widget button         |
@@ -65,6 +68,7 @@ walletServicesConfig?: WalletServicesConfig;
 | `defaultPortfolio`  | "token" \| "nft"     | Default portfolio view                    |
 
 #### Button position options
+
 | Position       | Description                     |
 | -------------- | ------------------------------- |
 | `bottom-left`  | Bottom left corner of the page  |

@@ -49,12 +49,13 @@ signMsgCompletableFuture.whenComplete { signResult, error ->
         Log.d("Sign Result", signResult.toString())
 
     } else {
-        Log.d("Sign error", error.message ?: "Something went wrong")
+        Log.d("Sign Error", error.message ?: "Something went wrong")
     }
 }
 ```
 
-## Signresponse
+## SignResponse
+
 | Name      | Description                                                   |
 | --------- | ------------------------------------------------------------- |
 | `success` | Determines whether the request was successful or not.         |

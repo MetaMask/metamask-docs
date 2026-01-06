@@ -29,7 +29,7 @@ val params = JsonArray().apply {
 // focus-start
 val signMsgCompletableFuture = web3Auth.request(
     loginParams = LoginParams(
-        selectedLoginprovider,
+        selectedLoginProvider,
         extraLoginOptions = null,
         mfaLevel = MFALevel.NONE,
     ),

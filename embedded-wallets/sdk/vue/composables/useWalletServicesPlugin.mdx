@@ -4,7 +4,7 @@ sidebar_label: useWalletServicesPlugin
 description: '@web3auth/modal Vue Composables useWalletServicesPlugin | Embedded Wallets'
 ---
 
-Hook to access the Wallet services Plugin context, enabling wallet-related features such as Walletconnect, Checkout, Swap, and Wallet UI.
+Hook to access the Wallet Services Plugin context, enabling wallet-related features such as Walletconnect, Checkout, Swap, and Wallet UI.
 
 ### Import
 
@@ -38,9 +38,10 @@ import type { IWalletServicesContext } from '@web3auth/modal/vue'
 ```
 
 #### Ispluginconnected
+
 `boolean`
 
-Whether the Wallet services Plugin is connected and ready to use.
+Whether the Wallet Services Plugin is connected and ready to use.
 
 #### showWalletconnectScanner
 
@@ -49,11 +50,13 @@ Whether the Wallet services Plugin is connected and ready to use.
 shows the Walletconnect QR scanner. Accepts optional parameters for customizing the scanner behavior.
 
 #### Showcheckout
+
 `(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
 
 shows the TopUp modal for fiat-to-crypto checkout. Accepts optional parameters for customizing the checkout experience.
 
 #### Showwalletui
+
 `(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
 
-shows the Wallet services modal UI. Accepts optional parameters for customizing the wallet UI experience.
+shows the Wallet Services modal UI. Accepts optional parameters for customizing the wallet UI experience.

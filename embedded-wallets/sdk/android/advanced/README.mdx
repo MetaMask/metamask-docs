@@ -62,9 +62,9 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 | Parameter      | Description                                                                                                                                          |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `whiteLabel?`  | WhiteLabel options for web3auth. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabeldata` as a value. |
+| `whiteLabel?`  | Whitelabel options for Embedded Wallets. It helps you define custom UI, branding, and translations for your brand app. It takes `WhiteLabelData` as a value. |
 | `loginConfig?` | Login config for the custom verifiers. It takes `HashMap<String, LoginConfigItem>` as a value.                                                       |
-| `mfaSettings?` | Allows developers to configure the Mfa settings for authentication. It takes `MfaSettings` as a value.                                               |
+| `mfaSettings?` | Allows developers to configure the MFA settings for authentication. It takes `MfaSettings` as a value.                                               |
 
 </TabItem>
 
@@ -78,7 +78,7 @@ data class Web3AuthOptions(
     var buildEnv: BuildEnv? = BuildEnv.PRODUCTION,
     @Transient var redirectUrl: Uri,
     var sdkUrl: String = getSdkUrl(buildEnv),
-    val whiteLabel: WhiteLabeldata? = null,
+    val whiteLabel: WhiteLabelData? = null,
     val loginConfig: HashMap<String, LoginConfigItem>? = null,
     val useCoreKitKey: Boolean? = false,
     val chainNamespace: ChainNamespace? = ChainNamespace.EIP155,
@@ -119,9 +119,9 @@ Control the login options presented to your users. For detailed configuration op
 
 ## UI customization
 
-Create a seamless brand experience by customizing the Web3Auth Login Screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
+Create a seamless brand experience by customizing the Embedded Wallets login screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
 
-## Multi-Factor Authentication (MFA)
+## Multi-Factor Authentication
 
 Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
 

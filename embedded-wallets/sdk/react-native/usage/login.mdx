@@ -27,8 +27,8 @@ Trigger the login flow that navigates the user to a browser model that allows th
 
 | Parameter | Description |
 | --- | --- |
-| `loginprovider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`. |
-| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginprovider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
+| `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`. |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
 | `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `string` as a value. |
 | `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `string` as a value. |
 | `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MfaLevelType.default`, which shows MFA screen every 3rd login. It accepts `MfaLevelType` as a value. |
@@ -41,7 +41,7 @@ Trigger the login flow that navigates the user to a browser model that allows th
 
 ```typescript
 async login(options: SdkLoginParams): Promise<void>;
-export type SdkLoginParams = Omit<LoginParams, "fastLogin" | "skipTKey" | "getWalletKey"> & Required<Pick<LoginParams, "loginprovider">>;
+export type SdkLoginParams = Omit<LoginParams, "fastLogin" | "skipTKey" | "getWalletKey"> & Required<Pick<LoginParams, "loginProvider">>;
 
 export type BaseRedirectParams = {
   /**
@@ -61,14 +61,14 @@ export type BaseRedirectParams = {
 
 export type LoginParams = BaseRedirectParams & {
   /**
-   * loginprovider sets the oauth login method to be used.
-   * You can use any of the valid loginprovider from the supported list.
+   * loginProvider sets the oauth login method to be used.
+   * You can use any of the valid loginProvider from the supported list.
    *
    * If this param is not passed then it will show all the available
    * login methods to user in a modal.
    *
    */
-  loginprovider: LOGIN_PROVIDER_TYPE | CUSTOM_LOGIN_PROVIDER_TYPE;
+  loginProvider: LOGIN_PROVIDER_TYPE | CUSTOM_LOGIN_PROVIDER_TYPE;
 
   /**
    * You can set the `mfaLevel` to customize when mfa screen should be shown to user.
@@ -85,11 +85,11 @@ export type LoginParams = BaseRedirectParams & {
 
   /**
    * extraLoginOptions can be used to pass standard oauth login options to
-   * loginprovider.
+   * loginProvider.
    *
    * For ex: you will have to pass `login_hint` as user's email and `domain`
    * as your app domain in `extraLoginOptions` while using `email_passwordless`
-   * loginprovider
+   * loginProvider
    */
   extraLoginOptions?: ExtraLoginOptions;
 
@@ -135,7 +135,7 @@ export type LoginParams = BaseRedirectParams & {
 
 ```typescript title="example.tsx"
 await web3auth.login({
-  loginprovider: Loginprovider.GOOGLE,
+  loginProvider: Loginprovider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
 })
 ```
@@ -146,7 +146,7 @@ The `web3auth.login()` method accepts a `curve` parameter. This parameter can be
 
 ```typescript
 await web3auth.login({
-  loginprovider: Loginprovider.GOOGLE,
+  loginProvider: Loginprovider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
   // focus-next-line
   curve: 'secp256k1', // `secp256k1` and `ed25519` are supported
@@ -167,7 +167,7 @@ await web3auth.login({
 
 ```typescript
 await web3auth.login({
-  loginprovider: Loginprovider.GOOGLE,
+  loginProvider: Loginprovider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
   // focus-next-line
   curve: 'secp256k1',
@@ -180,7 +180,7 @@ await web3auth.login({
 
 ```typescript
 await web3auth.login({
-  loginprovider: Loginprovider.GOOGLE,
+  loginProvider: Loginprovider.GOOGLE,
   redirectUrl: resolvedRedirectUrl,
   // focus-next-line
   curve: 'ed25519',

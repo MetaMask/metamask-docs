@@ -4,7 +4,7 @@ sidebar_label: useWalletUI
 description: '@web3auth/modal React Hooks useWalletUI | Embedded Wallets'
 ---
 
-Hook to show the Wallet services UI modal using the Wallet services Plugin.
+Hook to show the Wallet Services UI modal using the Wallet Services Plugin.
 
 ### Import
 
@@ -38,16 +38,19 @@ import { type IUseWalletUI } from '@web3auth/modal/react'
 ```
 
 #### Loading
+
 `boolean`
 
 Whether the Wallet UI opening process is in progress.
 
 #### Error
+
 `Web3Autherror | null`
 
 error that occurred during the Wallet UI opening process.
 
 #### Showwalletui
+
 `(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
 
-Function to show the Wallet services modal UI. Accepts optional parameters for customizing the wallet UI experience.
+Function to show the Wallet Services modal UI. Accepts optional parameters for customizing the wallet UI experience.

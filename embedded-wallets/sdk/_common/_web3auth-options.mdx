@@ -15,13 +15,13 @@ import Tabs from "@theme/Tabs";
 | Parameter                         | Description                                                                                                                                                                              |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `clientId`                        | [Mandatory] Client Id for web3auth. You can obtain your client id from the web3auth developer dashboard.                                                                                 |
-| `web3AuthNetwork`                 | [Mandatory] Web3Auth Network to use for the session & the issued `idtoken`. Default is `sapphire_mainnet`.                                                                               |
+| `web3AuthNetwork`                 | [Mandatory] Web3Auth Network to use for the session & the issued `idToken`. Default is `sapphire_mainnet`.                                                                               |
 | `enableLogging?`                  | Setting to true will enable logs. Default is false.                                                                                                                                      |
-| `sessionTime?`                    | Session Time (in seconds) for `idtoken` issued by Web3Auth for server side verification. Default is 7 days (7 \* 86400). Max value can be 30 days (86400 \* 30) and min can be 1 sec (1) |
+| `sessionTime?`                    | Session Time (in seconds) for `idToken` issued by Web3Auth for server side verification. Default is 7 days (7 \* 86400). Max value can be 30 days (86400 \* 30) and min can be 1 sec (1) |
 | `useSFAKey?`                      | Uses Single Factor Auth SDK key with web3auth provider. Default is false.                                                                                                                |
 | `storageType?`                    | Setting to `local` will persist social login session across browser tabs. Default is `local`.                                                                                            |
 | `defaultChainId?`                 | Default chain Id to use. Your first chain will be used as default.                                                                                                                       |
-| `multiInjectedproviderDiscovery?` | Whether to enable discovery of injected wallets in the browser. Default is true.                                                                                                         |
+| `multiInjectedProviderDiscovery?` | Whether to enable discovery of injected wallets in the browser. Default is true.                                                                                                         |
 
 </TabItem>
 
@@ -34,11 +34,11 @@ import Tabs from "@theme/Tabs";
 | `modalConfig?`              | Helps you customize the modal UI elements and authentication methods.                                    |
 | `accountAbstractionConfig?` | [Fetched automatically from Dashboard] Account abstraction config for your chain namespace.              |
 | `useAAWithExternalWallet?`  | [Fetched automatically from Dashboard] Whether to use AA with external wallet.                           |
-| `walletServicesConfig?`     | [Fetched automatically from Dashboard] Configure any parameter related to Wallet services Plugin         |
+| `walletServicesConfig?`     | [Fetched automatically from Dashboard] Configure any parameter related to Wallet Services Plugin         |
 | `ssr?`                      | Whether to enable SSR mode.                                                                              |
 | `mfaSettings?`              | MFA settings for the auth connector.                                                                     |
 | `mfaLevel?`                 | MFA level for the auth connector.                                                                        |
-| `privateKeyprovider?`       | Private key provider for your chain namespace.                                                           |
+| `privateKeyProvider?`       | Private key provider for your chain namespace.                                                           |
 
 </TabItem>
 
@@ -53,7 +53,7 @@ export interface Web3AuthOptions extends IWeb3AuthCoreOptions {
   /**
    * Config for configuring modal ui display properties
    */
-  modalConfig?: connectorsModalConfig;
+  modalConfig?: ConnectorsModalConfig;
 }
 
 export interface IWeb3AuthCoreOptions {
@@ -85,7 +85,7 @@ export interface IWeb3AuthCoreOptions {
    */
   storageType?: "session" | "local" | "cookies";
   /**
-   * sessionTime (in seconds) for idtoken issued by Web3Auth for server side verification.
+   * sessionTime (in seconds) for idToken issued by Web3Auth for server side verification.
    * @defaultValue 7 * 86400
    *
    * Note: max value can be 30 days (86400 * 30) and min can be  1 sec (1)
@@ -113,9 +113,9 @@ export interface IWeb3AuthCoreOptions {
    */
   useAAWithExternalWallet?: boolean;
   /**
-   * connectors to use
+   * Connectors to use
    */
-  connectors?: connectorFn[];
+  connectors?: ConnectorFn[];
   /**
    * Plugins to use
    */
@@ -124,15 +124,15 @@ export interface IWeb3AuthCoreOptions {
    * Whether to enable multi injected provider discovery
    * @defaultValue true
    */
-  multiInjectedproviderDiscovery?: boolean;
+  multiInjectedProviderDiscovery?: boolean;
   /**
-   * Wallet services config
+   * Wallet Services config
    */
   walletServicesConfig?: WalletServicesConfig;
   /**
    * Private key provider for xrpl, mpc cases
    */
-  privateKeyprovider?: IBaseprovider<string>;
+  privateKeyProvider?: IBaseProvider<string>;
   /**
    * Whether to enable SSR mode
    *

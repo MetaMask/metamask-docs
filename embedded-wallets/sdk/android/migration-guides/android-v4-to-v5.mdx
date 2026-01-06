@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs'
 
 ### Openlogin v5 is supported
 
-With V5, Users can now log in from sapphire mainnet and sapphire testnet.
+With v5, Users can now log in from Sapphire Mainnet and Sapphire Testnet.
 
 ```tsx
 // With V5
@@ -29,7 +29,7 @@ network = Network.SAPPHIRE_MAINNET, // pass over the network you want to use (MA
 
 ### Android compile and target SDK: `34`.
 
-In V5, android compile target sdk is changed from 33 to 34. If you previously used the target SDK with 33, update your build.gradle file.
+In v5, Android compile target SDK is changed from 33 to 34. If you previously used the target SDK with 33, update your build.gradle file.
 
 ```tsx
 // With V5
@@ -49,9 +49,10 @@ android {
 ```
 
 ### Web3authoptions param configuration changed
-In v5, the way parameters are configured has changed. The buildEnv parameter must be included. The whiteLabel parameter type and configuration has changed. And, as mentioned earlier, the network type has been added.
 
-#### Change of whitelabel parameter configuration
+In v5, the way parameters are configured has changed. The `buildEnv` parameter must be included. The `whiteLabel` parameter type and configuration has changed. And, as mentioned earlier, the network type has been added.
+
+#### Change of `whiteLabel` parameter configuration
 
 <Tabs
   defaultValue="v5"
@@ -105,7 +106,7 @@ web3Auth = Web3Auth(
                redirectUrl = Uri.parse("com.sbz.web3authdemoapp://auth"), // your app's redirect URL
                // Optional parameters
                // focus-start
-               whiteLabel = WhiteLabeldata(
+               whiteLabel = WhiteLabelData(
                    "Web3Auth Android Auth0 Example", null, null, null, Language.EN, ThemeModes.LIGHT, true,
                    hashMapOf(
                        "primary" to "#eb5424"

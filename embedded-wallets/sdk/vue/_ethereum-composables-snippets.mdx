@@ -74,7 +74,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
   import { computed } from "vue";
 
   const { address } = useAccount();
-  const { data, isloading, error } = useBalance(computed(() => ({ address: address.value })));
+  const { data, isLoading, error } = useBalance(computed(() => ({ address: address.value })));
 </script>
 
 <template>
@@ -84,7 +84,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
       <span v-if="data && data.value !== undefined">
         {{ formatUnits(data.value, data.decimals) }} {{ data.symbol }}
       </span>
-      <span v-if="isloading">loading...</span>
+      <span v-if="isLoading">loading...</span>
       <span v-if="error">error: {{ error.message }}</span>
     </div>
   </div>
@@ -110,7 +110,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
     });
   }
 
-  const { isloading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
     hash,
   });
 </script>

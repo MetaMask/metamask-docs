@@ -52,7 +52,7 @@ private void onMFASetup(bool response)
 
     var options = new LoginParams()
     {
-        loginprovider = selectedprovider,
+        loginProvider = selectedprovider,
     };
 
     web3Auth.enableMFA(options);
@@ -69,7 +69,7 @@ private void onMFASetup(bool response)
 
     var options = new LoginParams()
     {
-        loginprovider = selectedprovider,
+        loginProvider = selectedprovider,
         extraLoginOptions = new ExtraLoginOptions()
         {
             domain = "https://web3auth.au.auth0.com",

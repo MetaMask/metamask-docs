@@ -6,11 +6,11 @@ description: 'Web3Auth - Whitelabel | Embedded Wallets'
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
-import WhiteLabelshowcase from '../../_common/_whitelabel_showcase.mdx'
+import WhiteLabelShowcase from '../../_common/_whitelabel_showcase.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
-Web3Auth allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
+Embedded Wallets supports whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
 
 - **UI elements**: Customize the appearance of modals and components
 - **Branding**: Apply your brand colors, logos, and themes
@@ -22,9 +22,9 @@ Web3Auth allows complete whitelabeling with application branding for a consisten
 
 ## Customizing the Web3Auth login screens
 
-For defining custom UI, branding, and translations for your brand during Web3Auth instantiation, you just need to specify an additional parameter within the `Web3AuthOptions` object called `whiteLabel`. This parameter takes object called `WhiteLabeldata`.
+For defining custom UI, branding, and translations for your brand during Embedded Wallets instantiation, you just need to specify an additional parameter within the `Web3AuthOptions` object called `whiteLabel`. This parameter takes object called `WhiteLabelData`.
 
-### `WhiteLabeldata`
+### `WhiteLabelData`
 
 <Tabs
   defaultValue="table"
@@ -52,7 +52,7 @@ For defining custom UI, branding, and translations for your brand during Web3Aut
 <TabItem value="interface">
 
 ```kotlin
-data class WhiteLabeldata(
+data class WhiteLabelData(
     private var appName: String? = null,
     private var appUrl: String? = null,
     private var logoLight: String? = null,
@@ -67,7 +67,7 @@ data class WhiteLabeldata(
 </TabItem>
 </Tabs>
 
-<WhiteLabelshowcase />
+<WhiteLabelShowcase />
 
 ### Example
 
@@ -80,7 +80,7 @@ web3Auth = Web3Auth (
     redirectUrl = Uri.parse ("{YOUR_APP_PACKAGE_NAME}://auth"),
     // Optional whitelabel object
     // focus-start
-    whiteLabel = WhiteLabeldata (
+    whiteLabel = WhiteLabelData (
       appName = "Web3Auth Sample App",
       appUrl = null,
       logoLight = null,

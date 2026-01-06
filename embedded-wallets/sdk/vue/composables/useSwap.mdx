@@ -4,7 +4,7 @@ sidebar_label: useSwap
 description: '@web3auth/modal Vue Composables useSwap | Embedded Wallets'
 ---
 
-Hook to open the Swap interface using the Wallet services Plugin.
+Hook to open the Swap interface using the Wallet Services Plugin.
 
 ### Import
 
@@ -36,16 +36,19 @@ import { type IUseSwap } from '@web3auth/modal/vue'
 ```
 
 #### Loading
+
 `boolean`
 
 Whether the swap interface is being opened.
 
 #### Error
+
 `Web3Autherror | null`
 
 error that occurred while opening the swap interface.
 
 #### Showswap
+
 `(showSwapParams?: BaseEmbedControllerState["showSwap"]) => Promise<void>`
 
 Function to open the swap interface. Accepts optional parameters for customizing the swap view.

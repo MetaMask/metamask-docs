@@ -27,7 +27,7 @@ let web3auth = Web3Auth(W3AInitParams(
 
 ### `Web3AuthState` now has more parameters
 
-In v7, you can configure additional `coreKitKey` and `coreKitEd25519PrivKey` fields when you initialize `web3AuthState`.
+In v7, you can configure additional `coreKitKey` and `coreKitEd25519PrivKey` fields when you initialize `Web3authState`.
 
 ```swift
 public struct Web3AuthState: Codable {
@@ -182,7 +182,7 @@ Here's the example configuration of `Web3AuthOptions`.
             )
         )).login(
             W3ALoginParams(
-            loginprovider: .GOOGLE,
+            loginProvider: .GOOGLE,
             dappShare: nil,
             extraLoginOptions: ExtraLoginOptions(display: nil, prompt: nil, max_age: nil, ui_locales: nil, id_token_hint: nil, id_token: nil, login_hint: nil, acr_values: nil, scope: nil, audience: nil, connection: nil, domain: nil, client_id: nil, redirect_uri: nil, leeway: nil, verifierIdField: nil, isVerifierIdCaseSensitive: nil, additionalParams: nil),
             mfaLevel: .DEFAULT,

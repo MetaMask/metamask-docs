@@ -27,8 +27,8 @@ This function helps your user to trigger the login process. The login flow will 
 
 | Parameter | Description |
 | --- | --- |
-| `loginprovider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`. |
-| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginprovider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `FExtraLoginOptions` as a value. |
+| `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`. |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `FExtraLoginOptions` as a value. |
 | `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `FString` as a value. |
 | `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `FString` as a value. |
 | `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `FMFALevel` as a value. |
@@ -46,7 +46,7 @@ struct FLoginParams
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FString loginprovider;
+		FString loginProvider;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FString dappShare;

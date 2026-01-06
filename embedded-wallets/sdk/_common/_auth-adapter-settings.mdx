@@ -18,8 +18,8 @@ import Tabs from "@theme/Tabs";
 | `redirectUrl`          | The URL where users will be redirected after login.                                                                                                                                                                                                                                                                                                      |
 | `uxMode`               | Two uxModes supported are:- `'popup'`: In this uxMode, a popup will be shown to user for login. Use `'redirect'`: In this uxMode, user will be redirected to a new window tab for login. Use of `'redirect'` mode is recommended in browsers where popups might get blocked.                                                                             |
 | `replaceUrlOnRedirect` | replaceUrlOnRedirect removes the params from the redirected url after login                                                                                                                                                                                                                                                                              |
-| `origindata`           | origindata is used to verify the origin of dapp by iframe. You don't have to pass origindata explicitly if you have registered your dapp at [developer dashboard](https://dashboard.web3auth.io). origindata contains a signature of dapp's origin url which is generated using project's secret.                                                        |
-| `loginConfig`          | loginConfig enables you to pass your own login verifiers configuration for various loginproviders. loginConfig is key value map where each key should be a valid loginprovider and value should be custom configuration for that loginprovider. You can deploy your own verifiers from [developer dashboard](https://dashboard.web3auth.io) to use here. |
+| `originData`           | originData is used to verify the origin of dapp by iframe. You don't have to pass originData explicitly if you have registered your dapp at [developer dashboard](https://dashboard.web3auth.io). originData contains a signature of dapp's origin url which is generated using project's secret.                                                        |
+| `loginConfig`          | loginConfig enables you to pass your own login verifiers configuration for various loginProviders. loginConfig is key value map where each key should be a valid loginProvider and value should be custom configuration for that loginProvider. You can deploy your own verifiers from [developer dashboard](https://dashboard.web3auth.io) to use here. |
 | `whiteLabel`           | options for whitelabling default auth modal screens.                                                                                                                                                                                                                                                                                                     |
 | `storageServerUrl`     | Specify a custom storage server url                                                                                                                                                                                                                                                                                                                      |
 | `storageKey`           | setting to "local" will persist social login session across browser tabs.                                                                                                                                                                                                                                                                                |
@@ -77,23 +77,23 @@ export type AuthOptions = {
      */
     replaceUrlOnRedirect?: boolean;
     /**
-     * origindata is used to verify the origin of dapp by iframe.
+     * originData is used to verify the origin of dapp by iframe.
      *
      * @internal
      * @remarks
-     * You don't have to pass origindata explicitly if you have registered your dapp at
+     * You don't have to pass originData explicitly if you have registered your dapp at
      * {@link "https://dashboard.web3auth.io"| developer dashboard}.
      *
-     * origindata contains a signature of dapp's origin url which is generated using
+     * originData contains a signature of dapp's origin url which is generated using
      * project's secret.
      */
-    origindata?: Origindata;
+    originData?: OriginData;
     /**
      * loginConfig enables you to pass your own login verifiers configuration for various
-     * loginproviders.
+     * loginProviders.
      *
-     * loginConfig is key value map where each key should be a valid loginprovider and value
-     * should be custom configuration for that loginprovider
+     * loginConfig is key value map where each key should be a valid loginProvider and value
+     * should be custom configuration for that loginProvider
      *
      * @remarks
      * You can deploy your own verifiers from {@link "https://dashboard.web3auth.io"| developer dashboard}
@@ -126,7 +126,7 @@ export type AuthOptions = {
     /**
      * options for whitelabling default auth modal.
      */
-    whiteLabel?: WhiteLabeldata;
+    whiteLabel?: WhiteLabelData;
     /**
      * Specify a custom storage server url
      * @defaultValue https://session.web3auth.io
@@ -203,7 +203,7 @@ export type LoginConfig = Record<string, {
      */
     logoDark?: string;
     /**
-     * show login button on the main list
+     * Show login button on the main list
      */
     mainOption?: boolean;
     /**
@@ -230,7 +230,7 @@ export type LoginConfig = Record<string, {
     jwtParameters?: JwtParameters;
 }>;
 
-export type WhiteLabeldata = {
+export type WhiteLabelData = {
     /**
      * App name to display in the UI
      */

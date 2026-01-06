@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 5(v5) to version 6(v6) of the Web3Auth Android SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate MFA setup flow, and `launchWalletServices` method for template wallet interface.
+This migration guide provides steps for upgrading from version 5 (v5) to version 6 (v6) of the Embedded Wallets Android SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate MFA setup flow, and `launchWalletServices` method for template wallet interface.
 
 ## Changes in detail
 
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
 
      private fun enableMFA() {
         val loginParams = LoginParams(
-            provider.JWT,
+            Provider.JWT,
             extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
         )
 
@@ -113,15 +113,16 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
 
 ### `launchWalletServices` method
 
-From v6, developers can use the `launchWalletServices` to launches a WebView which allows them to use the templated wallet UI services. Developers can pass the `ChainConfig` to open wallet services with a specific chain selected.
+From v6, developers can use the `launchWalletServices` to launches a WebView which allows them to use the templated wallet UI services. Developers can pass the `ChainConfig` to open Wallet Services with a specific chain selected.
 
 :::note
 
-Access to Wallet services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
 
 :::
 
 #### Chainconfig arguments
+
 | Parameter | Description |
 | --- | --- |
 | `chainNamespace` | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.EIP155`. |
@@ -140,7 +141,7 @@ Access to Wallet services is gated. You can use this feature in `sapphire_devnet
 // focus-start
 val launchWalletCompletableFuture = web3Auth.launchWalletServices(
     loginParams = LoginParams(
-        selectedLoginprovider,
+        selectedLoginProvider,
         extraLoginOptions = null,
         mfaLevel = MFALevel.NONE,
     ),

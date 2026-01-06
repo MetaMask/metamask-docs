@@ -47,8 +47,8 @@ import { ethers } from "ethers";
 // Use your Web3Auth instance to retreive the provider.
 const provider = web3auth.provider;
 
-const ethersprovider = new ethers.providers.Web3provider(provider);
-const signer = await ethersprovider.getSigner();
+const ethersProvider = new ethers.providers.Web3Provider(provider);
+const signer = await ethersProvider.getSigner();
 ```
 
 </TabItem>

@@ -1,7 +1,7 @@
 ---
-title: dApp Share
-sidebar_label: dApp Share
-description: 'Web3Auth PnP iOS SDK - dApp Share | Embedded Wallets'
+title: Dapp Share
+sidebar_label: Dapp Share
+description: 'Web3Auth PnP iOS SDK - dapp share | Embedded Wallets'
 ---
 
 ## Embedded Wallets infrastructure at a glance
@@ -18,11 +18,11 @@ Similar to existing 2FA systems, a user needs to prove ownership of at least 2 o
 
 The user experience on mobile platforms is very different from the web platforms. This is because the user has to be redirected to a browser where they can login using their socials and then back to the app once they have been successfully authenticated. This user experience shifts the context between two applications, whereas, in the web platforms, the context remains within the browser only.
 
-For the seamless login flow, we need to reconstruct the Shares `A` and `B`. `Share B` is managed by the login service and is provided on successful authentication. Whereas in web platforms, `Share A` is stored in the browser context. We can still store it in the browser context for mobile devices, but this has a few risks like users accidentally deleting browser data. This is a bigger problem in mobile devices since the user doesn't realize that the browser is being used to login within the app and clearing the browser data can cause their logins to fail. Hence, to tackle this issue, Web3Auth issues a dApp Share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
+For the seamless login flow, we need to reconstruct the Shares `A` and `B`. `Share B` is managed by the login service and is provided on successful authentication. Whereas in web platforms, `Share A` is stored in the browser context. We can still store it in the browser context for mobile devices, but this has a few risks like users accidentally deleting browser data. This is a bigger problem in mobile devices since the user doesn't realize that the browser is being used to login within the app and clearing the browser data can cause their logins to fail. Hence, to tackle this issue, Web3Auth issues a dapp share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
 
-## dApp share in iOS
+## Dapp share in iOS
 
-Web3Auth issues a dApp Share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
+Web3Auth issues a dapp share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
 
 After a successful login from a user, the user details are returned as a response to the application in mobile devices.
 
@@ -47,18 +47,18 @@ After a successful login from a user, the user details are returned as a respons
 }
 ```
 
-If you notice, the reponses has a field called `dappShare` which is a 24 words seed phrase that can be used to reconstruct the private key. This dappShare is a suplement to the `Share A` and represents half of the private key. The application can store the dApp share in their own application local storage safely.
+If you notice, the reponses has a field called `dappShare` which is a 24 words seed phrase that can be used to reconstruct the private key. This dappShare is a suplement to the `Share A` and represents half of the private key. The application can store the dapp share in their own application local storage safely.
 
-Now, while logging in, the user can use their social accounts to obtain one share, and the application provides the dApp Share, removing the need to store the share in the browser context and enabling user to login seamlessly. This can be done by passing over the stored dApp share value in the login function.
+Now, while logging in, the user can use their social accounts to obtain one share, and the application provides the dapp share, removing the need to store the share in the browser context and enabling user to login seamlessly. This can be done by passing over the stored dapp share value in the login function.
 
 :::note
 
-One major thing to note here is that the `dappShare` is only available for custom verifiers and not the standard Web3Auth verifiers. This is done to make sure that an application only has access to the corresponding share to the private key of their application's user. Hence, to use dApp Share, one has to use the custom authentication feature of Web3Auth. Also, the dApp Share is only returned to users who have enabled 2FA to their account.
+One major thing to note here is that the `dappShare` is only available for custom verifiers and not the standard Web3Auth verifiers. This is done to make sure that an application only has access to the corresponding share to the private key of their application's user. Hence, to use dapp share, one has to use the custom authentication feature of Web3Auth. Also, the dapp share is only returned to users who have enabled 2FA to their account.
 
 :::
 
 ```swift
-Web3Auth().login(W3ALoginParams(loginprovider: provider, dappShare = "<24 words seed phrase>"))
+Web3Auth().login(W3ALoginParams(loginProvider: provider, dappShare = "<24 words seed phrase>"))
 ```
 
 ## Example
@@ -71,14 +71,14 @@ class ViewModel: ObservableObject {
     var web3Auth: Web3Auth?
     @Published var loggedIn: Bool = false
     @Published var user: Web3AuthState?
-    @Published var isloading = false
+    @Published var isLoading = false
     @Published var navigationTitle: String = ""
 
     func setup() async {
         guard web3Auth == nil else { return }
         await MainActor.run(body: {
-            isloading = true
-            navigationTitle = "loading"
+            isLoading = true
+            navigationTitle = "Loading"
         })
         web3Auth = await Web3Auth(W3AInitParams(
             clientId: clientId, network: network
@@ -89,7 +89,7 @@ class ViewModel: ObservableObject {
                 user = web3Auth?.state
                 loggedIn = true
             }
-            isloading = false
+            isLoading = false
             navigationTitle = loggedIn ? "UserInfo" : "SignIn"
         })
     }
@@ -100,7 +100,7 @@ class ViewModel: ObservableObject {
                 let result = try await web3Auth.login(
 					W3ALoginParams(
                         // provider can be .GOOGLE, .FACEBOOK, .APPLE etc
-						loginprovider: provider,
+						loginProvider: provider,
 						// focus-next-line
                         dappShare: "<24 words seed phrase>"
 				))
@@ -111,7 +111,7 @@ class ViewModel: ObservableObject {
                 })
 
             } catch {
-                print("error")
+                print("Error")
             }
         }
     }

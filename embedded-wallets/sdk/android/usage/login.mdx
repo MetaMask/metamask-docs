@@ -25,8 +25,8 @@ The `login` method takes in `LoginParams` as a required input.
 
 | Parameter            | Description                                                                                                                                                                                                                                                                                                                                                             |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `loginprovider`      | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `JWT`, `SMS_PASSWORDLESS`, and `FARCASTER`.                                                                             |
-| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginprovider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                       |
+| `loginProvider`      | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `JWT`, `SMS_PASSWORDLESS`, and `FARCASTER`.                                                                             |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                       |
 | `redirectUrl?`       | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `Uri` as a value.                                                                                                                                                          |
 | `appState?`          | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `String` as a value.                                                                                                                                                                                                                      |
 | `mfaLevel?`          | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value.                                                                                                                                                                        |
@@ -39,7 +39,7 @@ The `login` method takes in `LoginParams` as a required input.
 
 ```kotlin
 data class LoginParams(
-    val loginprovider: provider,
+    val loginProvider: Provider,
     var dappShare: String? = null,
     val extraLoginOptions: ExtraLoginOptions? = null,
     @Transient var redirectUrl: Uri? = null,
@@ -48,7 +48,7 @@ data class LoginParams(
     val curve: Curve? = Curve.SECP256K1
 )
 
-enum class provider {
+enum class Provider {
     @SerializedName("google")
     GOOGLE,
     @SerializedName("facebook")
@@ -106,7 +106,7 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-    LoginParams(provider.GOOGLE)
+    LoginParams(Provider.GOOGLE)
 )
 // focus-end
 ```
@@ -121,7 +121,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
     { label: "Discord", value: "discord" },
     { label: "Twitch", value: "twitch" },
     { label: "Email Passwordless", value: "email_passwordless" },
-    { label: "SMS passwordless", value: "sms_passwordless" },
+    { label: "SMS Passwordless", value: "sms_passwordless" },
     { label: "Farcaster", value: "farcaster" },
     { label: "JWT", value: "jwt" },
   ]}
@@ -144,7 +144,7 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-    LoginParams(provider.GOOGLE)
+    LoginParams(Provider.GOOGLE)
 )
 // focus-end
 ```
@@ -168,7 +168,7 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-    LoginParams(provider.FACEBOOK)
+    LoginParams(Provider.FACEBOOK)
 )
 // focus-end
 ```
@@ -192,7 +192,7 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-    LoginParams(provider.DISCORD)
+    LoginParams(Provider.DISCORD)
 )
 // focus-end
 ```
@@ -216,7 +216,7 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-    LoginParams(provider.TWITCH)
+    LoginParams(Provider.TWITCH)
 )
 // focus-end
 ```
@@ -241,7 +241,7 @@ val web3Auth = Web3Auth(
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
     LoginParams(
-        provider.EMAIL_PASSWORDLESS,
+        Provider.EMAIL_PASSWORDLESS,
         extraLoginOptions = ExtraLoginOptions(login_hint = "hello@web3auth.io")
     )
 )
@@ -257,7 +257,7 @@ import com.web3auth.core.types.Web3AuthOptions
 
 val web3Auth = Web3Auth( Web3AuthOptions( context = this, clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable network = Network.MAINNET, redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"), ) )
 
-// focus-start val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login( LoginParams( provider.SMS_PASSWORDLESS, extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344") ) ) // focus-end
+// focus-start val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login( LoginParams( Provider.SMS_PASSWORDLESS, extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344") ) ) // focus-end
 
 ````
 
@@ -280,7 +280,7 @@ val web3Auth = Web3Auth(
 
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
-  LoginParams(provider.Farcaster)
+  LoginParams(Provider.Farcaster)
 )
 // focus-end
 ````
@@ -305,7 +305,7 @@ val web3Auth = Web3Auth(
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
     LoginParams(
-        provider.JWT,
+        Provider.JWT,
         extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
     )
 )

@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 7.1.2(v7.1.2) to version 7.2(v7.2) of the Web3Auth Android SDK. The guide outlines significant changes and enhancements, including the introduction of new login providers, and `launchWalletServices` updates.
+This migration guide provides steps for upgrading from version 7.1.2(v7.1.2) to version 7.2(v7.2) of the Embedded Wallets Android SDK. The guide outlines significant changes and enhancements, including the introduction of new login providers, and `launchWalletServices` updates.
 
 ## Changes in detail
 
@@ -25,7 +25,7 @@ From v7.2, the `loginParams` is removed from the `launchWalletServices` method. 
 // focus-start
 val launchWalletCompletableFuture = web3Auth.launchWalletServices(
     loginParams = LoginParams(
-        selectedLoginprovider,
+        selectedLoginProvider,
         extraLoginOptions = null,
         mfaLevel = MFALevel.NONE,
     ),
@@ -76,7 +76,7 @@ launchWalletCompletableFuture.whenComplete { _, error ->
 
 v4 update brings two new providers. Now developers can use the SMS Passwordless and Farcaster login options.
 
-#### SMS passwordless
+#### SMS Passwordless
 
 ```kotlin
 import com.web3auth.core.Web3Auth
@@ -94,7 +94,7 @@ val web3Auth = Web3Auth(
 // focus-start
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
   LoginParams(
-    provider.SMS_PASSWORDLESS,
+    Provider.SMS_PASSWORDLESS,
     extraLoginOptions = ExtraLoginOptions(login_hint = "+91-9911223344")
   )
 )
@@ -108,7 +108,7 @@ val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
   LoginParams(
     // focus-next-line
-    provider.farcaster,
+    Provider.farcaster,
   )
 )
 ```

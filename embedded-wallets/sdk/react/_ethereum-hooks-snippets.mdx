@@ -65,14 +65,14 @@ import { formatUnits } from "viem";
 
 export function Balance() {
   const { address } = useAccount();
-  const { data, isloading, error } = useBalance({ address });
+  const { data, isLoading, error } = useBalance({ address });
 
   return (
     <div>
       <h2>Balance</h2>
       <div>
         {data?.value !== undefined && `${formatUnits(data.value, data.decimals)} ${data.symbol}`}{" "}
-        {isloading && "loading..."} {error && "error: " + error.message}
+        {isLoading && "loading..."} {error && "error: " + error.message}
       </div>
     </div>
   );
@@ -97,7 +97,7 @@ export function SendTransaction() {
     sendTransaction({ to, value: parseEther(value) });
   }
 
-  const { isloading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
+  const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({
     hash,
   });
 

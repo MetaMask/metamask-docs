@@ -26,10 +26,10 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 
 | MFA Level | Description                                                |
 | --------- | ---------------------------------------------------------- |
-| DEFAULT   | shows the MFA screen every third login.                    |
-| OPTIONAL  | shows the MFA screen on every login, but user can skip it. |
+| DEFAULT   | Shows the MFA screen every third login.                    |
+| OPTIONAL  | Shows the MFA screen on every login, but user can skip it. |
 | MANDATORY | Makes it mandatory to set up MFA after first login.        |
-| NONE      | Skips the MFA setup screen                                 |
+| NONE      | Skips the MFA setup screen.                                |
 
 ### Usage
 
@@ -44,7 +44,7 @@ let web3auth = Web3Auth(W3AInitParams(
 
 let result = try await web3Auth.login(
   W3ALoginParams(
-    loginprovider: .GOOGLE,
+    loginProvider: .GOOGLE,
     // focus-next-line
     mfaLevel: .MANDATORY
   )
@@ -82,7 +82,7 @@ do {
 ```swift
 do {
   let loginParams = W3ALoginParams(
-    loginprovider: .JWT,
+    loginProvider: .JWT,
     extraLoginOptions: .init(id_token: "your_jwt_token")
    )
 
@@ -98,7 +98,8 @@ do {
 </TabItem>
 </Tabs>
 
-## Configure MFA settings
+## Configure Multi-Factor Authentication settings
+
 You can configure the order of MFA or enable/disable MFA type by passing the `mfaSettings` object in `Web3AuthOptions`.
 
 :::note Note
@@ -111,7 +112,8 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 
 :::
 
-### Parameters - MFAsettings
+### Parameters - Mfasettings
+
 `MfaSettings` allows you to set the type of the MFA.
 
 <Tabs
@@ -160,9 +162,9 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 </TabItem>
 </Tabs>
 
-### Parameters - MFAsetting
+### Parameters - `Mfasetting`
 
-`MfaSetting` allows you to setup MFA setting for a particular MFA type.
+`MfaSetting` allows you to configure the behavior of an individual MFA factor.
 
 <Tabs
   defaultValue="table"
@@ -228,7 +230,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
 
 let result = try await web3Auth.login(
   W3ALoginParams(
-    loginprovider: .GOOGLE,
+    loginProvider: .GOOGLE,
     // focus-next-line
     mfaLevel: .MANDATORY
   )

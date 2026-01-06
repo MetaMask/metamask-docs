@@ -1,6 +1,6 @@
 You can send additional metadata in the paymaster context to supply whatever information the
 Paymaster needs to process user operations. For instance, you might include the type of Paymaster
-(e.g., a Sponsored paymaster versus an ERC-20-based Paymaster), references to specific tokens used
+(e.g., a Sponsored Paymaster versus an ERC-20-based Paymaster), references to specific tokens used
 for gas sponsorship, custom gas policies or limits, and any other parameters relevant to your
 sponsorship logic.
 
@@ -9,7 +9,7 @@ To configure the paymaster context, you can use the `paymasterContext` property 
 
 ```ts
 import {
-  AccountAbstractionprovider,
+  AccountAbstractionProvider,
   SafeSmartAccount,
 } from "@web3auth/account-abstraction-provider";
 
@@ -24,7 +24,7 @@ const chainConfig = {
   logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
 };
 
-const accountAbstractionprovider = new AccountAbstractionprovider({
+const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
     bundlerConfig: {

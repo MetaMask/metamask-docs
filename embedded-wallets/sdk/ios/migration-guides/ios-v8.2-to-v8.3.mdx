@@ -31,7 +31,7 @@ params.append("Web3Auth")
 do {
   // focus-start
   try await self.web3Auth?.request(
-    W3ALoginParams(loginprovider: .GOOGLE, mfaLevel: .NONE),
+    W3ALoginParams(loginProvider: .GOOGLE, mfaLevel: .NONE),
     method: "personal_sign",
     requestParams: params
   )
@@ -73,7 +73,7 @@ do {
 
 v8.3 update brings two new providers. Now developers can use the SMS Passwordless and Farcaster login options.
 
-#### SMS passwordless
+#### SMS Passwordless
 
 ```swift
 import Web3Auth
@@ -98,6 +98,6 @@ let result = try await web3Auth.login(W3ALoginParams(
 ```swift title="Usage"
 let result = try await Web3Auth().login(
     // focus-next-line
-    W3ALoginParams(loginprovider: .Farcaster)
+    W3ALoginParams(loginProvider: .Farcaster)
 )
 ```

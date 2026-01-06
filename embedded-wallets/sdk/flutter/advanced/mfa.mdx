@@ -14,7 +14,7 @@ At Web3Auth, we prioritize your security by offering Multi-Factor Authentication
 
 ## Enable using the Multi-Factor Authentication level
 
-For a dApp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
+For a dapp, we provide various options to set up MFA. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
 
 :::caution Note
 
@@ -22,28 +22,28 @@ If you are using default verifiers, your users may have set up MFA on other dApp
 
 :::
 
-### MFA level options
+### Multi-Factor Authentication level options
 
 | MFA Level | Description                                                |
 | --------- | ---------------------------------------------------------- |
-| DEFAULT   | shows the MFA screen every third login.                    |
-| OPTIONAL  | shows the MFA screen on every login, but user can skip it. |
+| DEFAULT   | Shows the MFA screen every third login.                    |
+| OPTIONAL  | Shows the MFA screen on every login, but user can skip it. |
 | MANDATORY | Makes it mandatory to set up MFA after first login.        |
-| NONE      | Skips the MFA setup screen                                 |
+| NONE      | Skips the MFA setup screen.                                |
 
 ### Usage
 
 ```dart
 Web3AuthFlutter.login(
   LoginParams(
-    loginprovider: provider.google,
+    loginProvider: Provider.google,
     // focus-next-line
     mfaLevel: MFALevel.MANDATORY,
   ),
 );
 ```
 
-## Explicitly enable MFA
+## Explicitly enable Multi-Factor Authentication
 
 The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
 
@@ -75,7 +75,7 @@ try {
 ```dart title="Usage"
 try {
     final loginParams = LoginParams(
-        loginprovider: provider.jwt,
+        loginProvider: Provider.jwt,
         extraLoginOptions: ExtraLoginOptions(
             id_token: "YOUR_JWT_TOKEN",
         ),
@@ -84,15 +84,15 @@ try {
     // focus-next-line
     await Web3AuthFlutter.enableMFA(loginParams);
 
-} on UserCancelledException { log("User cancelled."); } catch(e) { log("Unknown exception
-occurred"); }
+} on UserCancelledException { log("User cancelled."); } catch(e) { log("Unknown exception occurred"); }
 
 ```
 
 </ TabItem>
 </ Tabs>
 
-## Configure MFA settings
+## Configure Multi-Factor Authentication settings
+
 You can configure the order of MFA, and enable or disable MFA type by passing the `mfaSettings` parameter in `Web3AuthOptions` during initialization.
 
 :::note Note
@@ -105,7 +105,8 @@ You can configure the order of MFA, and enable or disable MFA type by passing th
 
 :::
 
-### Parameters - MFAsettings
+### Parameters - Mfasettings
+
 `MfaSettings` allows you to set the type of the MFA.
 
 <Tabs
@@ -165,9 +166,9 @@ class MfaSettings {
 </TabItem>
 </Tabs>
 
-### Parameters - MFAsetting
+### Parameters - Mfasetting
 
-`MfaSetting` allows you to setup MFA setting for a particular MFA type.
+`MfaSetting` allows you to configure the behavior of an individual MFA factor.
 
 <Tabs
   defaultValue="table"

@@ -96,7 +96,7 @@ const address = signer.getAddress()
 // await ethersprovider.getBalance(address) // Balance is in wei
 // );
 const balance = ethers.utils.formatEther(
-  await provider.getBalance(address) // Balance is in wei
+  await Provider.getBalance(address) // Balance is in wei
 )
 ```
 
@@ -143,7 +143,7 @@ const balance = await publicClient.getBalance({ address: address[0] })
 
 // provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
 
-const signer = await provider.getSigner()
+const signer = await Provider.getSigner()
 
 const destination = '0x7aFac68875d2841dc16F1730Fba43974060b907A'
 const amount = ethers.parseEther('1.0') // Convert 1 ether to wei
@@ -214,7 +214,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 
 // provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
 
-const signer = await provider.getSigner()
+const signer = await Provider.getSigner()
 
 const destination = '0x7aFac68875d2841dc16F1730Fba43974060b907A'
 const amount = ethers.parseEther('1.0') // Convert 1 ether to wei
@@ -287,7 +287,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 
 const provider = new ethers.providers.Web3provider(web3Auth.provider)
 
-const signer = await provider.getSigner()
+const signer = await Provider.getSigner()
 
 const originalMessage = 'YOUR_MESSAGE'
 
@@ -395,7 +395,7 @@ const signature = await walletClient.signTypeddata({
 
 // provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
 
-const signer = await provider.getSigner()
+const signer = await Provider.getSigner()
 
 // Get user's Ethereum public address
 const fromAddress = await signer.getAddress()
@@ -471,7 +471,7 @@ const originalMessage = JSON.stringify({
 const params = [fromAddress, originalMessage]
 const method = 'eth_signTypeddata_v4'
 
-const signedMessage = await signer.provider.send(method, params)
+const signedMessage = await signer.Provider.send(method, params)
 ```
 
 </TabItem>
@@ -522,7 +522,7 @@ contract HelloWorld {
 
 // provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
 
-const signer = provider.getSigner();
+const signer = Provider.getSigner();
 
 const contractABI = [
   { inputs: [{ internalType: "string", name: "initMessage", type: "string" }], stateMutability: "nonpayable", type: "constructor" },
@@ -626,7 +626,7 @@ const deployedContractAddress = receipt.contractAddress
 
 // provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
 
-const signer = await provider.getSigner()
+const signer = await Provider.getSigner()
 
 const contractABI = [
   {
@@ -727,7 +727,7 @@ const message = await publicClient.readContract({
 
 // provider is const provider = new ethers.providers.Web3provider(web3Auth.provider); from above.
 
-const signer = await provider.getSigner()
+const signer = await Provider.getSigner()
 
 const contractABI = [
   {
@@ -830,7 +830,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 ```tsx
 //Assuming user is already logged in.
 async getPrivateKey() {
-  const privateKey = await web3auth.provider.request({
+  const privateKey = await web3auth.Provider.request({
     method: "private_key"
   });
   //Do something with privateKey

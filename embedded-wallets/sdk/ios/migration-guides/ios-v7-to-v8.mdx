@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 7(v7) to version 8(v8) of the Web3Auth PnP iOS SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate MFA setup flow, `request` method for transaction confirmation screens, and `launchWalletServices` method for template wallet interface.
+This migration guide provides steps for upgrading from version 7(v7) to version 8(v8) of the Web3Auth PnP iOS SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate Multi-Factor Authentication (MFA) setup flow, `request` method for transaction confirmation screens, and `launchWalletServices` method for template wallet interface.
 
 ## Changes in detail
 
@@ -64,15 +64,16 @@ do {
 
 ### `launchWalletServices` method
 
-From v8, developers can use the `launchWalletServices` to launches a WebView which allows them to use the templated wallet UI services. Developers can pass the `ChainConfig` in `W3AInitParams` to open wallet services with a specific chain selected.
+From v8, developers can use the `launchWalletServices` to launches a WebView which allows them to use the templated wallet UI services. Developers can pass the `ChainConfig` in `W3AInitParams` to open Wallet Services with a specific chain selected.
 
 :::note
 
-Access to Wallet services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
 
 :::
 
 #### Chainconfig arguments
+
 | Parameter | Description |
 | --- | --- |
 | `chainNamespace` | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.eip155`. |
@@ -106,7 +107,7 @@ do {
 
   // focus-start
   try await web3Auth?.launchWalletServices(
-    W3ALoginParams(loginprovider: .GOOGLE),
+    W3ALoginParams(loginProvider: .GOOGLE),
   )
   // focus-end
 } catch {
@@ -127,7 +128,7 @@ params.append("Web3Auth")
 do {
   // focus-start
   try await self.web3Auth?.request(
-    W3ALoginParams(loginprovider: .GOOGLE, mfaLevel: .NONE),
+    W3ALoginParams(loginProvider: .GOOGLE, mfaLevel: .NONE),
     method: "personal_sign",
     requestParams: params
   )

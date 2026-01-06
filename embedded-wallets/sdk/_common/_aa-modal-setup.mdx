@@ -1,8 +1,8 @@
 ```ts
-import { EthereumPrivateKeyprovider } from "@web3auth/ethereum-provider";
+import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 // focus-start
 import {
-  AccountAbstractionprovider,
+  AccountAbstractionProvider,
   SafeSmartAccount,
 } from "@web3auth/account-abstraction-provider";
 // focus-end
@@ -20,7 +20,7 @@ const chainConfig = {
 };
 
 // focus-start
-const accountAbstractionprovider = new AccountAbstractionprovider({
+const accountAbstractionProvider = new AccountAbstractionProvider({
   config: {
     chainConfig,
     bundlerConfig: {
@@ -32,7 +32,7 @@ const accountAbstractionprovider = new AccountAbstractionprovider({
 });
 // focus-end
 
-const privateKeyprovider = new EthereumPrivateKeyprovider({
+const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: { chainConfig },
 });
 
@@ -40,11 +40,11 @@ const privateKeyprovider = new EthereumPrivateKeyprovider({
 const web3auth = new Web3Auth({
   clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  privateKeyprovider,
+  privateKeyProvider,
   // focus-start
-  accountAbstractionprovider
-  // This will allow you to use EthereumPrivateKeyprovider for
-  // external wallets, while use the AccountAbstractionprovider
+  accountAbstractionProvider
+  // This will allow you to use EthereumPrivateKeyProvider for
+  // external wallets, while use the AccountAbstractionProvider
   // for Web3Auth embedded wallets.
   useAAWithExternalWallet: false,
   // focus-end

@@ -12,10 +12,10 @@ import Tabs from "@theme/Tabs";
 
 | Variable             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `loginprovider`      | Sets the OAuth login method to be used. You can use any of the valid loginprovider from the supported list.<br /><br /> The list of available options: `google`, `facebook`, `reddit`, `discord`, `twitch`, `apple`, `line`, `github`, `kakao`, `linkedin`, `twitter`, `weibo`, `wechat`, `email_passwordless`, `sms_passwordless`, `jwt`                                                                                                                                                                                                                                                                                      |
+| `loginProvider`      | Sets the OAuth login method to be used. You can use any of the valid loginProvider from the supported list.<br /><br /> The list of available options: `google`, `facebook`, `reddit`, `discord`, `twitch`, `apple`, `line`, `github`, `kakao`, `linkedin`, `twitter`, `weibo`, `wechat`, `email_passwordless`, `sms_passwordless`, `jwt`                                                                                                                                                                                                                                                                                      |
 | `mfaLevel?`          | You can set the `mfaLevel` to customize when mfa screen should be shown to user. It currently accepts 4 values: <ul><li> **`'default'`** Setting mfa level to `default` will present mfa screen to user on every third login. </li><li> **`'optional'`** Setting mfa level to `default` will present mfa screen to user on every login but user can skip it. </li><li> **`'mandatory'`** Setting mfa level to `mandatory` will make it mandatory for user to setup mfa after login. </li><li> **`'none'`** Setting mfa level to `none` will make the user skip the mfa setup screen</li></ul>                                  |
-| `extraLoginOptions?` | This can be used to pass standard oauth login options to loginprovider. For ex: you will have to pass `login_hint` as user's email or phone number and `domain` as your app domain in `extraLoginOptions` while using `email_passwordless` or `sms_passwordless` loginprovider. It accepts `ExtraLoginOptions` as a value.                                                                                                                                                                                                                                                                                                     |
-| `dappShare?`         | Custom logins can get a dApp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. `dappShare` is a 24 word seed phrase. It accepts `string` as a value.                                                                                                                                                                                                                                                                                                                                                                                        |
+| `extraLoginOptions?` | This can be used to pass standard oauth login options to loginProvider. For ex: you will have to pass `login_hint` as user's email or phone number and `domain` as your app domain in `extraLoginOptions` while using `email_passwordless` or `sms_passwordless` loginProvider. It accepts `ExtraLoginOptions` as a value.                                                                                                                                                                                                                                                                                                     |
+| `dappShare?`         | Custom logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. `dappShare` is a 24 word seed phrase. It accepts `string` as a value.                                                                                                                                                                                                                                                                                                                                                                                        |
 | `curve?`             | This curve will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. You can use that public key from jwt token as a unique user identifier in your backend. <ul><li>`'secp256k1'`: secp256k1 based pub key is added as a wallet public key in jwt token to use.</li><li>`'ed25519'`: ed25519 based pub key is added as a wallet public key in jwt token to use.</li></ul> Note: This parameter won't change format of private key returned by auth. Private key returned by auth is always `secp256k1`. It accepts `SUPPORTED_KEY_CURVES_TYPE` as a value. |
 | `appState?`          | Any custom state you wish to pass along. This will be returned to you post redirect. Use this to store data that you want to be available to the dApp after login. It accepts `string` as a value.                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | `redirectUrl?`       | App's URL where user will be redirected after login. Register this URL in the [developer dashboard](https://dashboard.web3auth.io), else initialization will give error. It accepts `string` as a value.                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -29,10 +29,10 @@ export type LoginSettings = Partial<LoginParams> & Partial<BaseRedirectParams>;
 
 export type LoginParams = BaseRedirectParams & {
   /**
-   * loginprovider sets the oauth login method to be used.
-   * You can use any of the valid loginprovider from the supported list.
+   * loginProvider sets the oauth login method to be used.
+   * You can use any of the valid loginProvider from the supported list.
    */
-  loginprovider: LOGIN_PROVIDER_TYPE | CUSTOM_LOGIN_PROVIDER_TYPE;
+  loginProvider: LOGIN_PROVIDER_TYPE | CUSTOM_LOGIN_PROVIDER_TYPE;
   /**
    * You can set the `mfaLevel` to customize when mfa screen should be shown to user.
    * It currently accepts 4 values:-
@@ -47,11 +47,11 @@ export type LoginParams = BaseRedirectParams & {
   mfaLevel?: MfaLevelType;
   /**
    * extraLoginOptions can be used to pass standard oauth login options to
-   * loginprovider.
+   * loginProvider.
    *
    * For ex: you will have to pass `login_hint` as user's email and `domain`
    * as your app domain in `extraLoginOptions` while using `email_passwordless`
-   * loginprovider
+   * loginProvider
    */
   extraLoginOptions?: ExtraLoginOptions;
   /**
@@ -95,7 +95,7 @@ export declare type BaseRedirectParams = {
 };
 
 /**
- * {@label loginproviderType}
+ * {@label loginProviderType}
  */
 export declare type LOGIN_PROVIDER_TYPE = (typeof LOGIN_PROVIDER)[keyof typeof LOGIN_PROVIDER];
 export declare const LOGIN_PROVIDER: {

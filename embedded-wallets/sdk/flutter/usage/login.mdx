@@ -25,8 +25,8 @@ The `login` method takes in `LoginParams` as a required input.
 
 | Parameter | Description |
 | --- | --- |
-| `loginprovider` | It sets the oAuth login method to be used. You can use any of the supported values are `google`, `facebook`, `reddit`, `discord`, `twitch`, `apple`, `line`, `github`, `kakao`, `linkedin`, `twitter`, `email_passwordless`, `jwt`, `sms_passwordless`, `email_password`, and `farcaster`. |
-| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginprovider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
+| `loginProvider` | It sets the oAuth login method to be used. You can use any of the supported values are `google`, `facebook`, `reddit`, `discord`, `twitch`, `apple`, `line`, `github`, `kakao`, `linkedin`, `twitter`, `email_passwordless`, `jwt`, `sms_passwordless`, `email_password`, and `farcaster`. |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
 | `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null` |
 | `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `String` as a value. |
 | `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value. |
@@ -39,7 +39,7 @@ The `login` method takes in `LoginParams` as a required input.
 
 ```dart
 class LoginParams {
-  final provider loginprovider;
+  final Provider loginProvider;
   final String? dappShare;
   final ExtraLoginOptions? extraLoginOptions;
   final String? redirectUrl;
@@ -48,7 +48,7 @@ class LoginParams {
   final Curve? curve;
 
   LoginParams({
-    required this.loginprovider,
+    required this.loginProvider,
     this.dappShare,
     this.extraLoginOptions,
     this.redirectUrl,
@@ -58,7 +58,7 @@ class LoginParams {
   });
 }
 
-enum provider {
+enum Provider {
   google,
   facebook,
   reddit,
@@ -86,7 +86,7 @@ enum provider {
 
 ```dart
 final Web3AuthResponse response = await Web3AuthFlutter.login(
-  LoginParams(loginprovider: provider.google)
+  LoginParams(loginProvider: Provider.google)
 );
 ```
 
@@ -100,7 +100,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
     { label: "Discord", value: "discord" },
     { label: "Twitch", value: "twitch" },
     { label: "Email Passwordless", value: "email_passwordless" },
-    { label: "SMS passwordless", value: "sms_passwordless" },
+    { label: "SMS Passwordless", value: "sms_passwordless" },
     { label: "Farcaster", value: "farcaster" },
     { label: "JWT", value: "jwt" },
   ]}
@@ -134,7 +134,7 @@ Future<void> initWeb3Auth() async {
 // Login
 final Web3AuthResponse response = await Web3AuthFlutter.login(
   // focus-next-line
-  LoginParams(loginprovider: provider.google)
+  LoginParams(loginProvider: Provider.google)
 );
 ```
 
@@ -145,7 +145,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
 ```dart title="Usage"
 final Web3AuthResponse response = await Web3AuthFlutter.login(
   // focus-next-line
-  LoginParams(loginprovider: provider.facebook)
+  LoginParams(loginProvider: Provider.facebook)
 );
 ```
 
@@ -156,7 +156,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
 ```dart title="Usage"
 final Web3AuthResponse response = await Web3AuthFlutter.login(
   // focus-next-line
-  LoginParams(loginprovider: provider.discord)
+  LoginParams(loginProvider: Provider.discord)
 );
 ```
 
@@ -167,7 +167,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
 ```dart title="Usage"
 final Web3AuthResponse response = await Web3AuthFlutter.login(
   // focus-next-line
-  LoginParams(loginprovider: provider.twitch)
+  LoginParams(loginProvider: Provider.twitch)
 );
 ```
 
@@ -178,7 +178,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
 ```dart title="Usage"
 final Web3AuthResponse response = await Web3AuthFlutter.login(
   LoginParams(
-    loginprovider: provider.email_passwordless,
+    loginProvider: Provider.email_passwordless,
     // focus-next-line
     extraLoginOptions: ExtraLoginOptions(login_hint: "hello@web3auth.io")
   )
@@ -192,7 +192,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
 ```dart title="Usage"
 final Web3AuthResponse response = await Web3AuthFlutter.login(
   LoginParams(
-    loginprovider: provider.sms_passwordless,
+    loginProvider: Provider.sms_passwordless,
     // focus-next-line
     extraLoginOptions: ExtraLoginOptions(login_hint: "+91-9911223344")
   )
@@ -206,7 +206,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
 ```dart title="Usage"
 final Web3AuthResponse response = await Web3AuthFlutter.login(
   // focus-next-line
-  LoginParams(loginprovider: provider.farcaster)
+  LoginParams(loginProvider: Provider.farcaster)
 );
 ```
 
@@ -217,7 +217,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
 ```dart title="Usage"
 final Web3AuthResponse response = await Web3AuthFlutter.login(
   LoginParams(
-    loginprovider: provider.jwt,
+    loginProvider: Provider.jwt,
     extraLoginOptions: ExtraLoginOptions(
       // focus-next-line
       id_token: "YOUR_JWT_TOKEN",

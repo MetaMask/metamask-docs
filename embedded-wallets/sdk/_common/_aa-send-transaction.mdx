@@ -11,7 +11,7 @@ If custom values are required, developers can use the
 [Viem's BundlerClient](https://viem.sh/account-abstraction/clients/bundler#bundler-client) to
 manually construct and send the user operation.
 
-Since Smart accounts are deployed smart contracts, the user's first transaction also triggers the
+Since Smart Accounts are deployed smart contracts, the user's first transaction also triggers the
 on-chain deployment of their wallet.
 
 <Tabs
@@ -37,7 +37,7 @@ sendTransaction({ to: "DESTINATION_ADDRESS", value, data: "0x" });
 
 const {
   data: receipt,
-  isloading: isConfirming,
+  isLoading: isConfirming,
   isSuccess: isConfirmed,
 } = useWaitForTransactionReceipt({
   hash,

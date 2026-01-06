@@ -25,8 +25,8 @@ The login method accepts `W3ALoginParams` as a required parameter.
 
 | Parameter            | Description                                                                                                                                                                                                                                                                                                                                                                            |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `loginprovider`      | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `SMS_PASSWORDLESS`, and `FARCASTER`.                                                                                                   |
-| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginprovider`. For instance, you'll need to pass user's email address as. Default value for the field is `nil`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                                       |
+| `loginProvider`      | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`, `SMS_PASSWORDLESS`, and `FARCASTER`.                                                                                                   |
+| `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `nil`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                                       |
 | `redirectUrl?`       | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `nil`, and accepts `URL` as a value.                                                                                                                                                                          |
 | `appState?`          | It can be used to keep track of the app state when user will be redirected to app after login. Default is `nil`, and accepts `String` as a value.                                                                                                                                                                                                                                      |
 | `mfaLevel?`          | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value.                                                                                                                                                                                       |
@@ -40,7 +40,7 @@ The login method accepts `W3ALoginParams` as a required parameter.
 ```swift
 public struct W3ALoginParams: Codable {
 	public init() {
-		loginprovider = nil
+		loginProvider = nil
 		dappShare = nil
 		extraLoginOptions = nil
 		redirectUrl = nil
@@ -49,7 +49,7 @@ public struct W3ALoginParams: Codable {
 		curve = .SECP256K1
 	}
 
-	let loginprovider: String?
+	let loginProvider: String?
 	var dappShare: String?
 	let extraLoginOptions: ExtraLoginOptions?
 	let redirectUrl: String?
@@ -94,7 +94,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
 ))
 
 // focus-next-line
-let result = try await web3Auth.login(W3ALoginParams(loginprovider: .GOOGLE))
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .GOOGLE))
 ```
 
 ## Examples
@@ -107,7 +107,7 @@ let result = try await web3Auth.login(W3ALoginParams(loginprovider: .GOOGLE))
     { label: "Discord", value: "discord" },
     { label: "Twitch", value: "twitch" },
     { label: "Email Passwordless", value: "email_passwordless" },
-	{ label: "SMS passwordless", value: "sms_passwordless" },
+	{ label: "SMS Passwordless", value: "sms_passwordless" },
 	{ label: "Farcaster", value: "farcaster" },
 	{ label: "JWT", value: "jwt" }
   ]}
@@ -125,7 +125,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
 ))
 
 // focus-next-line
-let result = try await web3Auth.login(W3ALoginParams(loginprovider: .GOOGLE))
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .GOOGLE))
 ```
 
 </TabItem>
@@ -142,7 +142,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
 ))
 
 // focus-next-line
-let result = try await web3Auth.login(W3ALoginParams(loginprovider: .FACEBOOK))
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .FACEBOOK))
 ```
 
 </TabItem>
@@ -159,7 +159,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
 ))
 
 // focus-next-line
-let result = try await web3Auth.login(W3ALoginParams(loginprovider: .DISCORD))
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .DISCORD))
 ```
 
 </TabItem>
@@ -176,7 +176,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
 ))
 
 // focus-next-line
-let result = try await web3Auth.login(W3ALoginParams(loginprovider: .TWITCH))
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .TWITCH))
 ```
 
 </TabItem>
@@ -197,7 +197,7 @@ let web3auth = try await Web3Auth(
 // focus-start
 let result = try await web3Auth.login(
   W3ALoginParams(
-    loginprovider: .EMAIL_PASSWORDLESS,
+    loginProvider: .EMAIL_PASSWORDLESS,
     extraLoginOptions: .init(loginHint: "hello@web3auth.io")
   )
 )
@@ -232,7 +232,7 @@ let web3auth = try await Web3Auth(
 )
 
 // focus-next-line
-let result = try await web3Auth.login(W3ALoginParams(loginprovider: .FARCASTER))
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .FARCASTER))
 
 ````
 
@@ -252,7 +252,7 @@ let web3auth = try await Web3Auth(W3AInitParams(
 // focus-start
 let result = try await web3Auth.login(
   W3ALoginParams(
-    loginprovider: .JWT,
+    loginProvider: .JWT,
     extraLoginOptions: .init(domain:"your-domain", id_token: "your_jwt_token")
   )
 )

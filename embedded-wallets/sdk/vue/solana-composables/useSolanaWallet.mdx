@@ -63,7 +63,7 @@ The Solana connection instance for making RPC calls, or null if not available.
   const { web3Auth } = useWeb3Auth()
   const { accounts, connection } = useSolanaWallet()
   const balance = ref<number | null>(null)
-  const isloading = ref(false)
+  const isLoading = ref(false)
   const error = ref<string | null>(null)
 
   const fetchBalance = async () => {
@@ -72,7 +72,7 @@ The Solana connection instance for making RPC calls, or null if not available.
       return
     }
     try {
-      isloading.value = true
+      isLoading.value = true
       error.value = null
       // Check if accounts exist and have values before creating PublicKey
       if (!accounts.value || accounts.value.length === 0) {
@@ -87,7 +87,7 @@ The Solana connection instance for making RPC calls, or null if not available.
       error.value = err instanceof error ? err.message : 'Unknown error'
       balance.value = null
     } finally {
-      isloading.value = false
+      isLoading.value = false
     }
   }
 
@@ -112,9 +112,9 @@ The Solana connection instance for making RPC calls, or null if not available.
     <div v-if="balance !== null">
       <span>{{ balance / LAMPORTS_PER_SOL }} SOL</span>
     </div>
-    <div v-if="isloading" class="loading">loading...</div>
+    <div v-if="isLoading" class="loading">loading...</div>
     <div v-if="error" class="error">error: {{ error }}</div>
-    <button @click="fetchBalance" type="button" class="card" :disabled="isloading">
+    <button @click="fetchBalance" type="button" class="card" :disabled="isLoading">
       Fetch Balance
     </button>
   </div>

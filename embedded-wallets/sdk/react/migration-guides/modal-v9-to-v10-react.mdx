@@ -15,15 +15,15 @@ This section focuses on changes specific to migrating a Web3Auth v9 React applic
 ### React hooks path and WalletServicesPlugin updates
 Previously, React hooks were at `@web3auth/modal-react-hooks`. Now, they are consolidated and imported from `@web3auth/modal/react`. Even WalletServicesPlugin is now integrated into the hooks. Previously, it was a separate package named `@web3auth/wallet-services-plugin-react-hooks`.
 
-The `Web3Authprovider` component remains essential for initializing the Web3Auth SDK and providing its context. Key changes include:
+The `Web3AuthProvider` component remains essential for initializing the Web3Auth SDK and providing its context. Key changes include:
 
-- **Import path**: `Web3Authprovider` is imported from `@web3auth/modal/react`.
-- **Configuration Prop**: `Web3Authprovider` in v10 typically takes a single `config` prop. This `config` object (e.g., `web3AuthContextConfig`) will contain your `web3AuthOptions` and any client-side SDK configurations.
+- **Import path**: `Web3AuthProvider` is imported from `@web3auth/modal/react`.
+- **Configuration Prop**: `Web3AuthProvider` in v10 typically takes a single `config` prop. This `config` object (e.g., `web3AuthContextConfig`) will contain your `web3AuthOptions` and any client-side SDK configurations.
 - **Dashboard configuration**: Many configurations (like chain details for standard EVM chains, and verifier/connection settings) are now primarily managed through the Web3Auth Developer Dashboard.
 
-### v10 `Web3Authprovider` and Hook Usage
+### v10 `Web3AuthProvider` and Hook Usage
 
-`Web3Authprovider` is configured with a `config` object, and all hooks are streamlined under `@web3auth/modal/react`.
+`Web3AuthProvider` is configured with a `config` object, and all hooks are streamlined under `@web3auth/modal/react`.
 
 ```typescript title="main.tsx / index.tsx"
 import ReactDOM from "react-dom/client";
@@ -76,11 +76,11 @@ import {
   useSwitchChain,
   useEnableMFA,
   useManageMFA,
-  useWalletconnectScanner, // Wallet services
-  useWalletUI, // Wallet services
-  useCheckout, // Wallet services
-  useSwap, // Wallet services
-  useWalletServicesPlugin, // Wallet services
+  useWalletconnectScanner, // Wallet Services
+  useWalletUI, // Wallet Services
+  useCheckout, // Wallet Services
+  useSwap, // Wallet Services
+  useWalletServicesPlugin, // Wallet Services
 } from '@web3auth/modal/react'
 ```
 
@@ -101,8 +101,8 @@ The new hook structure is more granular:
 - **MFA:**
   - `useEnableMFA`: Enables MFA.
   - `useManageMFA`: Manages MFA settings.
-- **Wallet services Plugin (now integrated):**
-  - `useWalletServicesPlugin`: Hook to access the Wallet services Plugin context.
+- **Wallet Services Plugin (now integrated):**
+  - `useWalletServicesPlugin`: Hook to access the Wallet Services Plugin context.
     - `isPluginConnected`: `boolean`
     - `showWalletconnectScanner(params?)`: `Promise<void>`
     - `showCheckout(params?)`: `Promise<void>`

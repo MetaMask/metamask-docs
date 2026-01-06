@@ -4,7 +4,7 @@ sidebar_label: useCheckout
 description: '@web3auth/modal Vue Composable useCheckout | Embedded Wallets'
 ---
 
-Composable to show the cryptocurrency checkout modal using Wallet services Plugin.
+Composable to show the cryptocurrency checkout modal using Wallet Services Plugin.
 
 ### Import
 
@@ -36,16 +36,19 @@ import { type IUseCheckout } from '@web3auth/modal/vue'
 ```
 
 #### Loading
+
 `boolean`
 
 Whether the checkout process is in progress.
 
 #### Error
+
 `Web3Autherror | null`
 
 error that occurred during the checkout process.
 
 #### Showcheckout
+
 `(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
 
 Function to initiate the checkout modal. Optional `showCheckoutParams` can be passed to customize the modal.

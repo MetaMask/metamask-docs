@@ -7,11 +7,11 @@ description: 'Web3Auth React Native SDK - Advanced configuration | Embedded Wall
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your React Native application's specific requirements.
+The Embedded Wallets SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your React Native application's specific requirements.
 
 ## Configuration structure
 
-When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
+When setting up Embedded Wallets, you'll pass in the options to the constructor. This consists of:
 
 <Tabs
   defaultValue="expo"
@@ -33,7 +33,7 @@ const resolvedRedirectUrl = `${scheme}://auth`
 
 // focus-start
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Embedded Wallets Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
@@ -83,7 +83,7 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 | `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `string`.                       |
 | `network`      | Web3Auth Network: `SAPPHIRE_MAINNET`, `SAPPHIRE_DEVNET`, `MAINNET`, `CYAN`, `AQUA` or `TESTNET`. Mandatory field of type `WEB3AUTH_NETWORK`. |
 | `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `string`.                       |
-| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabeldata` as a value.                                             |
+| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                             |
 | `loginConfig?` | Login config for custom verifiers. Takes `LoginConfig` as a value.                                                                           |
 | `mfaLevel?`    | Configure MFA level for authentication. Takes `MFA_LEVELS` as a value.                                                                       |
 | `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                                 |

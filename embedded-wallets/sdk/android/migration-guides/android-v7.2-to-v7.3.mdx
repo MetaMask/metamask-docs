@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 7.2(v7.2) to version 7.3(v7.3) of the Web3Auth Android SDK. The guide outlines significant changes in the `request` method.
+This migration guide provides steps for upgrading from version 7.2(v7.2) to version 7.3(v7.3) of the Embedded Wallets Android SDK. The guide outlines significant changes in the `request` method.
 
 ## Changes in detail
 
@@ -32,7 +32,7 @@ val params = JsonArray().apply {
 // focus-start
 val signMsgCompletableFuture = web3Auth.request(
     loginParams = LoginParams(
-        selectedLoginprovider,
+        selectedLoginProvider,
         extraLoginOptions = null,
         mfaLevel = MFALevel.NONE,
     ),

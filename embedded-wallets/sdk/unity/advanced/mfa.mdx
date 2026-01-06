@@ -60,7 +60,7 @@ public void login()
     var selectedprovider = provider.GOOGLE;
     var options = new LoginParams()
     {
-        loginprovider = selectedprovider,
+        loginProvider = selectedprovider,
 		mfaLevel = MFALevel.MANDATORY
     };
     web3Auth.login(options);

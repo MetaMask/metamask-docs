@@ -10,32 +10,33 @@ import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
 Custom Authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
 
-**This feature, with MFA turned off, can even make Web3Auth invisible to the end user.**
+This feature, with MFA turned off, can even make Web3Auth invisible to the end user.
 
 <GrowthPlanNote />
 
-## Getting an auth connection ID
+## Getting an Auth Connection ID
+
 :::info prerequisite
 
-To enable this, you need to [Create a connection](../../../dashboard/authentication.mdx) from the **Authentication** tab of your project from the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [Create a connection](../../../dashboard/authentication.mdx) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
 
 :::
 
-To configure a connection, you need to provide the particular details of the connection into our Web3Auth Dashboard. This enables us to map a `authconnectionId` with your connection details. This `authconnectionId` helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
+To configure a connection, you need to provide the particular details of the connection into our Embedded Wallets dashboard. This enables us to map a `authConnectionId with your connection details. This `authConnectionId helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
 
 :::tip
 
-Visit the [Auth provider Setup](../../../authentication/README.mdx) page to learn more about to setup the different configurations available for each connection.
+Learn more about the [Auth provider setup](../../../authentication/README.mdx) and the different configurations available for each connection.
 
 :::
 
 ## Modal custom authentication
 
-The basic custom authentication is available directly in the modal. You can configure each of the auth providers in the modal to direct to your `authconnectionId`.
+The basic custom authentication is available directly in the modal. You can configure each of the auth providers in the modal to direct to your `authConnectionId.
 
 :::note
 
-You can only configure implicit login via modal, for JWT based logins, you need to create your own UI and use the `connectTo` function.
+You can only configure implicit login via modal, for JWT-based logins, you need to create your own UI and use the `connectTo` function.
 
 :::
 
@@ -186,7 +187,7 @@ export type LoginParamMap = {
 | `idtoken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                            |
 | `authconnection?`          | The auth provider to use for login (e.g., "google", "facebook").                                                                   |
 | `authconnectionId?`        | The ID configured in your Web3Auth Dashboard for the connection.                                                                   |
-| `groupedAuthconnectionId?` | The grouped auth connection ID to be used for login.                                                                               |
+| `groupedAuthconnectionId?` | The grouped Auth Connection ID to be used for login.                                                                               |
 | `extraLoginOptions?`       | Custom OAuth options (e.g., login_hint, domain, etc.).                                                                             |
 
   </TabItem>
@@ -238,11 +239,11 @@ export type LoginParamMap = {
   getWalletKey?: boolean;
   /**
    * extraLoginOptions can be used to pass standard oauth login options to
-   * loginprovider.
+   * loginProvider.
    *
    * For ex: you will have to pass `login_hint` as user's email and `domain`
    * as your app domain in `extraLoginOptions` while using `email_passwordless`
-   * loginprovider
+   * loginProvider
    */
   extraLoginOptions?: ExtraLoginOptions;
   /**

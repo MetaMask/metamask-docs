@@ -18,7 +18,7 @@ Embedded Wallets SDKs were previously known as Web3Auth Plug and Play SDKs. Pack
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provide a seamless authentication experience for Vue applications with social logins, external wallets, and more. Using our Vue Composables, you can easily connect users to their preferred wallets and manage authentication state.
+MetaMask Embedded Wallets SDK provides a seamless authentication experience for Vue applications with social logins, external wallets, and more. Using our Vue Composables, you can easily connect users to their preferred wallets and manage authentication state.
 
 ## Requirements
 
@@ -65,7 +65,7 @@ export default web3AuthContextConfig
 
 ### 2. Setup Web3Auth provider
 
-In your main component (e.g. `App.vue`), import the `Web3Authprovider` component and wrap your application with it:
+In your main component (e.g. `App.vue`), import the `Web3AuthProvider` component and wrap your application with it:
 
 ```html title="App.vue"
 <script setup lang="ts">
@@ -87,17 +87,18 @@ In your main component (e.g. `App.vue`), import the `Web3Authprovider` component
 ```
 
 ## Advanced configuration
-The Web3Auth Modal SDK offers a rich set of advanced configuration options:
+
+The Embedded Wallets Modal SDK offers a rich set of advanced configuration options:
 
 - **[Smart accounts](./advanced/smart-accounts.mdx)**: Configure account abstraction parameters.
 - **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
 - **[Whitelabeling & UI customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
 - **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
-- **[Wallet services](./advanced/wallet-services.mdx)**: Integrate additional wallet services.
+- **[Wallet Services](./advanced/wallet-services.mdx)**: Integrate additional Wallet Services.
 
 :::tip
 
-Head over to the [**Advanced Configuration**](./advanced/README.mdx) section to learn more about each configuration option.
+Head over to the [Advanced Configuration](./advanced/README.mdx) section to learn more about each configuration option.
 
 :::
 
@@ -190,12 +191,12 @@ Web3Auth is blockchain agnostic, enabling integration with any blockchain networ
 
 Solana composables are included natively within the `@web3auth/modal` package. No additional setup is required—simply use the provided composables to interact with Solana networks.
 
-For detailed usage and examples, visit the [**Solana composables**](./solana-composables/README.mdx) section.
+For detailed usage and examples, visit the [Solana composables](./solana-composables/README.mdx) section.
 
 ### Ethereum integration
 
 Ethereum composables are provided through the popular `wagmi` library, which works seamlessly with Web3Auth. This allows you to leverage a wide range of Ethereum composables for account management, transactions, and more.
 
-For implementation details and examples, refer to the [**Ethereum Composables**](./ethereum-composables.mdx) section.
+For implementation details and examples, refer to the [Ethereum Composables](./ethereum-composables.mdx) section.
 
 <SdkTroubleshootingIntro />
