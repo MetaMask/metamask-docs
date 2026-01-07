@@ -4,7 +4,7 @@ sidebar_label: useWeb3Auth
 description: '@web3auth/modal/vue Composable useWeb3Auth | Embedded Wallets'
 ---
 
-Composable to access the Web3Auth context in Vue.
+Composable to access the Embedded Wallets/Web3Auth context in Vue.
 
 ### Import
 
@@ -23,7 +23,7 @@ import { useWeb3Auth } from '@web3auth/modal/vue'
   watchEffect(() => {
     if (isConnected.value) {
       // User is connected
-      console.log('connected with provider:', provider.value)
+      console.log('Connected with provider:', provider.value)
     }
     if (isInitializing.value) {
       // Web3Auth is initializing
@@ -51,9 +51,9 @@ import { useWeb3Auth } from '@web3auth/modal/vue'
 import type { IUseWeb3Auth } from '@web3auth/modal/vue'
 ```
 
-#### Initerror
+#### `initError`
 
-`Ref<error | null>`
+`Ref<Error | null>`
 
 Error that occurred during Web3Auth initialization.
 
@@ -75,25 +75,25 @@ Whether Web3Auth has completed initialization.
 
 Whether Web3Auth is currently initializing.
 
-#### Provider
+#### `provider`
 
 `Ref<IProvider | null>`
 
 Connected provider from Web3Auth.
 
-#### Status
+#### `status`
 
 `Ref<string>`
 
 Current status of the Web3Auth connection.
 
-#### Web3auth
+#### `web3Auth`
 
 `Ref<Web3Auth>`
 
 The Web3Auth instance.
 
-#### Getplugin
+#### `getPlugin`
 
 `(pluginName: PLUGIN_NAME) => IPlugin | null`
 

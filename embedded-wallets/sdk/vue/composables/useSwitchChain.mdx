@@ -4,7 +4,7 @@ sidebar_label: useSwitchChain
 description: '@web3auth/modal Vue Composables useSwitchChain | Embedded Wallets'
 ---
 
-Composable to switch blockchain networks with Web3Auth in Vue.
+Composable to switch blockchain networks with Embedded Wallets in Vue.
 
 ### Import
 
@@ -25,7 +25,7 @@ import { useSwitchChain } from '@web3auth/modal/vue'
   <button @click="switchChain('0x1')" :disabled="loading">
     {{ loading ? "Switching..." : "Switch to Ethereum Mainnet" }}
   </button>
-  <div v-if="error">error: {{ error.message }}</div>
+  <div v-if="error">Error: {{ error.message }}</div>
 </template>
 ```
 
@@ -35,20 +35,23 @@ import { useSwitchChain } from '@web3auth/modal/vue'
 import { type IUseSwitchChain } from '@web3auth/modal/vue'
 ```
 
-#### Loading
+#### `loading`
+
 `boolean`
 
 Whether the chain switching process is in progress.
 
-#### Error
-`Web3Autherror | null`
+#### `error`
 
-error that occurred during the chain switching process.
+`Web3AuthError | null`
 
-#### Switchchain
+Error that occurred during the chain switching process.
+
+#### `switchChain`
+
 `(chainId: string) => Promise<void>`
 
-Function to initiate the chain switch. Pass the target `chainId` as a string (e.g., "0x1" for Ethereum Mainnet).
+Function to initiate the chain switch. Pass the target `chainId` as a string (for example, "0x1" for Ethereum Mainnet).
 
 ## Example
 
@@ -65,8 +68,8 @@ Function to initiate the chain switch. Pass the target `chainId` as a string (e.
 
 <template>
   <div>
-    <h2>Switch chain</h2>
-    <h3>connected to {{ currentChainName }}</h3>
+    <h2>Switch Chain</h2>
+    <h3>Connected to {{ currentChainName }}</h3>
     <button
       v-for="chain in web3Auth.value?.coreOptions?.chains"
       :key="chain.chainId"

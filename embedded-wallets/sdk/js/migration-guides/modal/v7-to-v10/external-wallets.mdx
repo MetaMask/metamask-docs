@@ -39,7 +39,7 @@ const metamaskAdapter = new MetamaskAdapter()
 web3auth.configureAdapter(metamaskAdapter)
 
 const phantomAdapter = new PhantomAdapter()
-web3auth.configureAdapter (phantomAdapter)
+web3auth.configureAdapter(phantomAdapter)
 
 const defaultWcSettings = await getWalletConnectV2Settings('eip155', ['1'], 'PROJECT_ID')
 const walletConnectV2Adapter = new WalletConnectV2Adapter({

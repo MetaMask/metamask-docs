@@ -23,7 +23,7 @@ import { useWalletUI } from '@web3auth/modal/vue'
 
 <template>
   <button @click="showWalletUI" :disabled="loading">
-    {{ loading ? "Opening Wallet UI..." : "show Wallet UI" }}
+    {{ loading ? "Opening Wallet UI..." : "Show Wallet UI" }}
   </button>
   <div v-if="error">{{ error.message }}</div>
 </template>
@@ -35,19 +35,19 @@ import { useWalletUI } from '@web3auth/modal/vue'
 import type { IUseWalletUI } from '@web3auth/modal/vue'
 ```
 
-#### Loading
+#### `loading`
 
 `boolean`
 
 Whether the Wallet UI opening process is in progress.
 
-#### Error
+#### `error`
 
-`Web3Autherror | null`
+`Web3AuthError | null`
 
-error that occurred during the Wallet UI opening process.
+Error that occurred during the Wallet UI opening process.
 
-#### Showwalletui
+#### `showWalletUI`
 
 `(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
 

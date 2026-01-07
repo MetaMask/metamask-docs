@@ -37,9 +37,9 @@ import { useSignAndSendTransaction } from '@web3auth/modal/vue/solana'
 <template>
   <div>
     <button @click="handleSignAndSend" :disabled="loading">
-      {{ loading ? "Signing & Sending..." : "Sign & Send transaction" }}
+      {{ loading ? "Signing & Sending..." : "Sign & Send Transaction" }}
     </button>
-    <div v-if="error">error: {{ error.message }}</div>
+    <div v-if="error">Error: {{ error.message }}</div>
     <div v-if="data">Signature: {{ data }}</div>
   </div>
 </template>
@@ -50,28 +50,32 @@ import { useSignAndSendTransaction } from '@web3auth/modal/vue/solana'
 ```ts
 export type IUseSignAndSendTransaction = {
   loading: boolean
-  error: Web3Autherror | null
+  error: Web3AuthError | null
   data: string | null
   signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
 }
 ```
 
-#### Loading
+#### `loading`
+
 `boolean`
 
 Indicates if the transaction signing and sending is in progress.
 
-#### Error
-`Web3Autherror | null`
+#### `error`
 
-error object if signing or sending fails, otherwise null.
+`Web3AuthError | null`
 
-#### Data
+Error object if signing or sending fails, otherwise null.
+
+#### `data`
+
 `string | null`
 
 The transaction signature as a string, or null if not signed yet.
 
-#### Signandsendtransaction
+#### `signAndSendTransaction`
+
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
 Function to sign and send a transaction. Returns the transaction signature as a string.
@@ -99,15 +103,15 @@ Function to sign and send a transaction. Returns the transaction signature as a 
 
   async function submit(event: Event) {
     event.preventDefault()
-    const formdata = new Formdata(event.target as HTMLFormElement)
-    const to = formdata.get('address') as string
-    const value = formdata.get('value') as string
+    const formData = new FormData(event.target as HTMLFormElement)
+    const to = formData.get('address') as string
+    const value = formData.get('value') as string
 
     const connectionValue = connection.value
     const accountsValue = accounts.value
 
     if (!connectionValue || !accountsValue || accountsValue.length === 0) {
-      console.error('connection or accounts not available')
+      console.error('Connection or accounts not available')
       return
     }
 
@@ -140,7 +144,7 @@ Function to sign and send a transaction. Returns the transaction signature as a 
       </button>
     </form>
     <div v-if="hash">Transaction Hash: {{ hash }}</div>
-    <div v-if="error">error: {{ error.message }}</div>
+    <div v-if="error">Error: {{ error.message }}</div>
   </div>
 </template>
 ```
