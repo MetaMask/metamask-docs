@@ -1,12 +1,4 @@
-You need to install the `@solana/web3.js` package to interact with the Solana blockchain using the Web3Auth Vue composables.
 
-:::info
-
-Web3Auth provides a set of Vue composables for basic Solana wallet operations. These composables are designed to simplify common Solana interactions in your Vue app.
-
-For advanced Solana features, you should use [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) on top of the composables provided.
-
-:::
 
 ```bash npm2yarn
 npm install @solana/web3.js
@@ -16,10 +8,10 @@ npm install @solana/web3.js
 
 | Composable Name             | Description                                  |
 | --------------------------- | -------------------------------------------- |
-| `useSignAndSendTransaction` | Sign and send a Solana transaction.          |
-| `useSignMessage`            | Sign a message with the Solana wallet.       |
-| `useSignTransaction`        | Sign a Solana transaction (without sending). |
-| `useSolanaWallet`           | Access Solana wallet state and utilities.    |
+| [`useSignAndSendTransaction`](./solana-composables/useSignAndSendTransaction.mdx) | Sign and send a Solana transaction.          |
+| [`useSignMessage`](./solana-composables/useSignMessage.mdx)            | Sign a message with the Solana wallet.       |
+| [`useSignTransaction`](./solana-composables/useSignTransaction.mdx)        | Sign a Solana transaction (without sending). |
+| [`useSolanaWallet`](./solana-composables/useSolanaWallet.mdx)           | Access Solana wallet state and utilities.    |
 
 ## Composable usage examples
 
@@ -29,7 +21,7 @@ npm install @solana/web3.js
 <template>
   <div>
     <h2>Solana Wallet</h2>
-    <p>connected: {{ connected ? 'Yes' : 'No' }}</p>
+    <p>Connected: {{ connected ? 'Yes' : 'No' }}</p>
     <p v-if="address">Address: {{ address }}</p>
   </div>
 </template>
@@ -50,7 +42,7 @@ npm install @solana/web3.js
     <button @click="handleSignMessage" :disabled="isPending">
       {{ isPending ? 'Signing...' : 'Sign message' }}
     </button>
-    <p v-if="error">error: {{ error.message }}</p>
+    <p v-if="error">Error: {{ error.message }}</p>
   </div>
 </template>
 
@@ -80,7 +72,7 @@ npm install @solana/web3.js
     <button @click="handleSignTransaction" :disabled="isPending">
       {{ isPending ? 'Signing...' : 'Sign transaction' }}
     </button>
-    <p v-if="error">error: {{ error.message }}</p>
+    <p v-if="error">Error: {{ error.message }}</p>
   </div>
 </template>
 
@@ -110,7 +102,7 @@ npm install @solana/web3.js
 </script>
 ```
 
-### Sign and Send transaction
+### Sign and send transaction
 
 ```vue
 <template>
@@ -119,7 +111,7 @@ npm install @solana/web3.js
     <button @click="handleSignAndSend" :disabled="isPending">
       {{ isPending ? 'Processing...' : 'Sign and Send' }}
     </button>
-    <p v-if="error">error: {{ error.message }}</p>
+    <p v-if="error">Error: {{ error.message }}</p>
   </div>
 </template>
 
