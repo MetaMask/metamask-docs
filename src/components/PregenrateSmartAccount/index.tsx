@@ -123,10 +123,9 @@ export default function LookupSCWAPIPage() {
                 <code>verifier</code>
               </td>
               <td id="verifier-description">
-                The verifier name can be found on your Web3Auth dashboard. To learn more about
-                verifiers, click{' '}
-                <a href="/docs/authentication" target="_blank" rel="noopener noreferrer">
-                  here
+                The verifier name can be found on your Embedded Wallets dashboard.{' '}
+                <a href="/embedded-wallets/authentication" target="_blank" rel="noopener noreferrer">
+                  Learn more about verifiers
                 </a>
                 .
               </td>
@@ -147,7 +146,7 @@ export default function LookupSCWAPIPage() {
                 <code>verifierId</code>
               </td>
               <td id="verifierId-description">
-                The verifier ID value. One of the ways to get it is via the response to the{' '}
+                The verifier identifier. Returned in response to the{' '}
                 <code>getUserInfo()</code> method.
               </td>
               <td>
@@ -167,7 +166,7 @@ export default function LookupSCWAPIPage() {
                 <code>web3AuthNetwork</code>
               </td>
               <td id="web3AuthNetwork-description">
-                Name of the Web3Auth Network your project is deployed on.
+                Name of the Web3Auth (Embedded Wallets) network  your project is deployed on.
               </td>
               <td>
                 <select
@@ -190,7 +189,7 @@ export default function LookupSCWAPIPage() {
                 <code>clientId</code>
               </td>
               <td>
-                The client ID for your project. This can also be found on the Web3Auth dashboard.
+                The client identifier for your project. This can also be found on the Embedded Wallets dashboard.
               </td>
               <td>
                 <input
@@ -207,8 +206,8 @@ export default function LookupSCWAPIPage() {
                 <code>chainId</code>
               </td>
               <td>
-                Chain Id for the chain you want to pre-generate Smart account. The `chainId` should
-                be hex value.
+                Chain identifier for the chain you want to pre-generate Smart Account on. The <code>chainId</code> should
+                be a hex value.
               </td>
               <td>
                 <input
@@ -263,11 +262,10 @@ export default function LookupSCWAPIPage() {
             </tr>
             <tr>
               <td>
-                <code>smartAccountVersion?</code>
+                <code>smartAccountVersion</code>
               </td>
               <td>
-                Smart Account version for the Smart Account Provider contract. This parameter is
-                optional.
+                (Optional) Smart Account version for the Smart Account Provider contract.
               </td>
               <td>
                 <input
@@ -280,11 +278,11 @@ export default function LookupSCWAPIPage() {
             </tr>
             <tr>
               <td>
-                <code>saltNonce?</code>
+                <code>saltNonce</code>
               </td>
               <td>
-                Salt nonce for the Smart Account to add randomness or predictability when the
-                address is generated. This parameter is optional.
+                (Optional) Salt nonce for the Smart Account to add randomness or predictability when the
+                address is generated.
               </td>
               <td>
                 <input
@@ -297,12 +295,12 @@ export default function LookupSCWAPIPage() {
             </tr>
             <tr>
               <td>
-                <code>factoryAddress?</code>
+                <code>factoryAddress</code>
               </td>
               <td>
-                Specifies the address of the Factory Contract. While providers typically deploy the
+                (Optional) Specifies the address of the Factory Contract. While providers typically deploy the
                 factory contract on popular chains, you have the option to deploy your own factory
-                contract on any chain and pass its address. This parameter is optional.
+                contract on any chain and pass its address.
               </td>
               <td>
                 <input
