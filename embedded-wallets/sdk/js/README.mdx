@@ -45,13 +45,13 @@ npm install --save @web3auth/modal
 
 ### 1. Configuration
 
-Create an instance of Web3Auth containing the basic needed configuration. These configuration will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+Create an instance of Embedded Wallets containing the basic required configuration. This configuration will contain your Embedded Wallets Client ID and network details from the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
 
 ```javascript
 import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
 
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Embedded Wallets/Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
 })
 ```
@@ -65,6 +65,7 @@ await web3auth.init()
 ```
 
 ## Advanced configuration
+
 The Web3Auth Modal SDK offers a rich set of advanced configuration options:
 
 - **[Smart accounts](./advanced/smart-accounts.mdx):** Configure account abstraction parameters.

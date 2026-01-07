@@ -18,7 +18,7 @@ This feature, with Multi-Factor Authentication (MFA) turned off, can even make E
 
 :::info prerequisite
 
-To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets dashboard](https://dashboard.web3auth.io) with your desired configuration.
 
 :::
 
@@ -60,7 +60,7 @@ After creating the verifier, you can use the following parameters in the `LoginC
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `verifier`               | The name of the verifier that you have registered on the Embedded Wallets dashboard. It's a mandatory field, and accepts `String` as a value.                                                                                                                                                                                             |
 | `typeOfLogin`            | Type of login of this verifier, this value will affect the login flow that is adapted. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should be providing your own JWT token, no sign-in flow will be presented. It's a mandatory field, and accepts `TypeOfLogin` as a value. |
-| `clientId`               | Client id provided by your login provider used for custom verifier. e.g. Google's Client ID or Web3Auth's client Id if using 'jwt' as TypeOfLogin. It's a mandatory field, and accepts `String` as a value.                                                                                                                       |
+| `clientId`               | Client id provided by your login provider used for custom verifier. e.g. Google's Client ID or Web3Auth's client ID if using 'jwt' as TypeOfLogin. It's a mandatory field, and accepts `String` as a value.                                                                                                                       |
 | `name?`                  | Display name for the verifier. If null, the default name is used. It accepts `String` as a value.                                                                                                                                                                                                                                 |
 | `description?`           | Description for the button. If provided, it renders as a full length button. else, icon button. It accepts `String` as a value.                                                                                                                                                                                                   |
 | `verifierSubIdentifier?` | The field in JWT token which maps to verifier id. Please make sure you selected correct JWT verifier id in the developer dashboard. It accepts `String` as a value.                                                                                                                                                               |

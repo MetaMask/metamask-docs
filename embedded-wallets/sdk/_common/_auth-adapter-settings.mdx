@@ -38,7 +38,7 @@ adapterSettings?: MakeOptional<AuthOptions, "clientId" | "network"> & {
 
 export type AuthOptions = {
     /**
-     * You can get your clientId/projectId by registering your
+     * You can get your clientID/projectID by registering your
      * dapp on {@link "https://dashboard.web3auth.io"| developer dashboard}
      */
     clientId: string;
@@ -281,7 +281,7 @@ export type WhiteLabelData = {
     theme?: WHITE_LABEL_THEME;
     /**
      * Language specific link for terms and conditions on torus-website. See (examples/vue-app) to configure
-     * e.g.
+     * for example
      * tncLink: {
      *  en: "http://example.com/tnc/en",
      *  ja: "http://example.com/tnc/ja",
@@ -290,7 +290,7 @@ export type WhiteLabelData = {
     tncLink?: Partial<Record<LANGUAGE_TYPE, string>>;
     /**
      * Language specific link for privacy policy on torus-website. See (examples/vue-app) to configure
-     * e.g.
+     * for example
      * privacyPolicy: {
      *  en: "http://example.com/tnc/en",
      *  ja: "http://example.com/tnc/ja",

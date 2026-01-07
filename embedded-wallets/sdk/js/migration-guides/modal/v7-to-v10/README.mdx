@@ -22,7 +22,7 @@ the Dashboard and eliminates frontend adapter complexity.
 Key improvements from v7 to v10:
 
 - **Unified SDK Package:** Single `@web3auth/modal` package replaces multiple adapter packages
-- **Dashboard-Centric Configuration:** Chain configurations managed via Web3Auth Developer Dashboard
+- **Dashboard-Centric Configuration:** Chain configurations managed via Web3Auth Developer Dashboard (now the [Embedded Wallets dashboard](https://dashboard.web3auth.io/))
 - **Simplified Integration:** No more manual `OpenLoginAdapter` registration or `privateKeyProvider`
   setup
 - **Enhanced Developer Experience:** Cleaner API with better TypeScript support
@@ -67,6 +67,7 @@ import { Web3Auth } from '@web3auth/modal'
 ```
 
 ### 2. Openloginadapter → built-in (v7→v10)
+
 In v7, authentication required `OpenloginAdapter`. V10 eliminates the need for adapter registration:
 
 ```typescript
@@ -97,6 +98,7 @@ await web3auth.init()
 ```
 
 ### 3. Chain configuration centralization
+
 **v7 required manual chain and provider configuration:**
 
 ```typescript

@@ -20,7 +20,7 @@ The `Web3AuthProvider` component remains essential for initializing the Web3Auth
 
 - **Import path:** `Web3AuthProvider` is imported from `@web3auth/modal/react`.
 - **Configuration Prop:** `Web3AuthProvider` in v10 typically takes a single `config` prop. This `config` object (e.g., `web3AuthContextConfig`) will contain your `web3AuthOptions` and any client-side SDK configurations.
-- **Dashboard configuration:** Many configurations (like chain details for standard EVM chains, and verifier/connection settings) are now primarily managed through the Web3Auth Developer Dashboard.
+- **Dashboard configuration:** Many configurations (like chain details for standard EVM chains, and verifier/connection settings) are now primarily managed through the Web3Auth Developer Dashboard (now the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)).
 
 ### v10 `Web3AuthProvider` and hook usage
 
@@ -102,8 +102,8 @@ The new hook structure is more granular:
 - **MFA:**
   - `useEnableMFA`: Enables MFA.
   - `useManageMFA`: Manages MFA settings.
-- **Wallet Services Plugin (now integrated):**
-  - `useWalletServicesPlugin`: Hook to access the Wallet Services Plugin context.
+- **Wallet Services plugin (now integrated):**
+  - `useWalletServicesPlugin`: Hook to access the Wallet Services plugin context.
     - `isPluginConnected`: `boolean`
     - `showWalletConnectScanner(params?)`: `Promise<void>`
     - `showCheckout(params?)`: `Promise<void>`
