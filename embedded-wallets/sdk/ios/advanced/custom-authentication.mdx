@@ -356,7 +356,7 @@ let web3Auth = try await Web3Auth(
 let result = await web3Auth.login(
   W3ALoginParams(
     Web3AuthProvider.JWT,
-    extraLoginOptions: .init(domain:"your-domain", id_token: "<your JWT token>")
+    extraLoginOptions: .init(domain:"your-domain", id_token: "<Your-JWT-Token>")
   )
 )
 // focus-end

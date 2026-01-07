@@ -84,7 +84,7 @@ The `privKey` property has been removed. Use the `connected` property instead. A
 ```typescript
 // remove-start
 if (web3auth.privKey) {
-  await ethereumPrivateKeyProvider.setupprovider(web3auth.privKey);
+  await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey);
   setProvider(ethereumPrivateKeyProvider);
 // remove-end
 // add-next-line

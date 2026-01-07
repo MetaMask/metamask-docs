@@ -49,13 +49,13 @@ This is the most common way to connect to Web3Auth. It opens the Web3Auth modal 
 ```tsx
 import { useWeb3AuthConnect } from '@web3auth/modal/react'
 
-function connectButton() {
+function ConnectButton() {
   const { connect, loading, isConnected, error } = useWeb3AuthConnect()
 
   return (
     <div>
       <button onClick={() => connect()} disabled={loading || isConnected}>
-        {loading ? 'connecting...' : isConnected ? 'connected' : 'connect'}
+        {loading ? 'Connecting...' : isConnected ? 'Connected' : 'Connect'}
       </button>
       {error && <div>{error.message}</div>}
     </div>
@@ -77,7 +77,7 @@ This method allows you to build your own custom connection UI. It bypasses the W
 import { useWeb3AuthConnect } from '@web3auth/modal/react'
 import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
 
-function Customconnectors() {
+function CustomConnectors() {
   const { connectTo, loading, isConnected, error } = useWeb3AuthConnect()
 
   const loginWithGoogle = () => {
@@ -102,7 +102,7 @@ function Customconnectors() {
 ### Return type
 
 ```tsx
-import { type IUseWeb3Authconnect } from '@web3auth/modal/react'
+import { type IUseWeb3AuthConnect } from '@web3auth/modal/react'
 ```
 
 #### `isConnected`

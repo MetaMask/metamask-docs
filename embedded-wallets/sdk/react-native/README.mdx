@@ -357,7 +357,7 @@ const ethereumPrivateKeyProvider = new EthereumPrivateKeyProvider({
 })
 
 // Setup the provider with the Web3Auth Private Key
-await ethereumPrivateKeyProvider.setupprovider(web3auth.privKey)
+await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey)
 
 // Create an instance of the ethers BrowserProvider using the Web3Auth Ethereum provider
 const ethersProvider = new ethers.BrowserProvider(ethereumPrivateKeyProvider)

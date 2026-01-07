@@ -39,7 +39,7 @@ do {
 do {
   let loginParams = W3ALoginParams(
     loginProvider: .JWT,
-    extraLoginOptions: .init(id_token: "<your JWT token>")
+    extraLoginOptions: .init(id_token: "<Your-JWT-Token>")
    )
 
   let isMFAEnabled = try await web3Auth.enableMFA(loginParams)

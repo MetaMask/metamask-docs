@@ -72,7 +72,7 @@ export function Balance() {
       <h2>Balance</h2>
       <div>
         {data?.value !== undefined && `${formatUnits(data.value, data.decimals)} ${data.symbol}`}{" "}
-        {isLoading && "loading..."} {error && "error: " + error.message}
+        {isLoading && "loading..."} {error && "Error: " + error.message}
       </div>
     </div>
   );
@@ -83,7 +83,7 @@ export function Balance() {
 
 ```tsx
 import { FormEvent } from "react";
-import { useWaitForTransactionReceipt, useSendTransaction, Baseerror } from "wagmi";
+import { useWaitForTransactionReceipt, useSendTransaction, BaseError } from "wagmi";
 import { Hex, parseEther } from "viem";
 
 export function SendTransaction() {
@@ -91,9 +91,9 @@ export function SendTransaction() {
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const formdata = new Formdata(e.target as HTMLFormElement);
-    const to = formdata.get("address") as Hex;
-    const value = formdata.get("value") as string;
+    const formData = new FormData(e.target as HTMLFormElement);
+    const to = formData.get("address") as Hex;
+    const value = formData.get("value") as string;
     sendTransaction({ to, value: parseEther(value) });
   }
 
@@ -114,7 +114,7 @@ export function SendTransaction() {
       {hash && <div>Transaction Hash: {hash}</div>}
       {isConfirming && "Waiting for confirmation..."}
       {isConfirmed && "Transaction confirmed."}
-      {error && <div>error: {(error as Baseerror).shortMessage || error.message}</div>}
+      {error && <div>Error: {(error as BaseError).shortMessage || error.message}</div>}
     </div>
   );
 }
@@ -132,7 +132,7 @@ export function SwitchChain() {
   return (
     <div>
       <h2>Switch Chain</h2>
-      <h3>connected to {chainId}</h3>
+      <h3>Connected to {chainId}</h3>
       {chains.map((chain) => (
         <button
           disabled={chainId === chain.id}

@@ -23,7 +23,7 @@ import { useWalletConnectScanner } from '@web3auth/modal/vue'
 
 <template>
   <button @click="showWalletConnectScanner()" :disabled="loading">
-    {{ loading ? "Opening Scanner..." : "show WalletConnect Scanner" }}
+    {{ loading ? "Opening Scanner..." : "Show WalletConnect Scanner" }}
   </button>
   <div v-if="error">{{ error.message }}</div>
 </template>
@@ -43,7 +43,7 @@ Whether the scanner opening process is in progress.
 
 #### `error`
 
-`Web3Autherror | null`
+`Web3AuthError | null`
 
 Error that occurred during the scanner opening process.
 

@@ -17,7 +17,7 @@ import { useIdentityToken } from '@web3auth/modal/react'
 ```tsx
 import { useIdentityToken } from '@web3auth/modal/react'
 
-function IdentitytokenButton() {
+function IdentitytTkenButton() {
   const { getIdentityToken, loading, error, token } = useIdentityToken()
 
   return (
@@ -25,8 +25,8 @@ function IdentitytokenButton() {
       <button onClick={() => getIdentityToken()} disabled={loading}>
         {loading ? 'Authenticating...' : 'Get Identity token'}
       </button>
-      {token && <div>token: {token}</div>}
-      {error && <div>error: {error.message}</div>}
+      {token && <div>Token: {token}</div>}
+      {error && <div>Error: {error.message}</div>}
     </div>
   )
 }
@@ -35,7 +35,7 @@ function IdentitytokenButton() {
 ### Return type
 
 ```tsx
-import { type IUseIdentitytoken } from '@web3auth/modal/react'
+import { type IUseIdentityToken } from '@web3auth/modal/react'
 ```
 
 #### `loading`
@@ -46,7 +46,7 @@ Whether the authentication process is in progress.
 
 #### `error`
 
-`Web3Autherror | null`
+`Web3AuthError | null`
 
 Error that occurred during the authentication process.
 

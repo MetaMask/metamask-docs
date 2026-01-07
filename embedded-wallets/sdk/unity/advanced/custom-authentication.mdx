@@ -237,11 +237,11 @@ void Start()
 ```csharp
 public void loginGoogle()
 {
-    var selectedprovider = Provider.GOOGLE;
+    var selectedProvider = Provider.GOOGLE;
 
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
     };
 
     web3Auth.login(options);
@@ -249,11 +249,11 @@ public void loginGoogle()
 
 public void loginGitHub()
 {
-    var selectedprovider = Provider.GITHUB;
+    var selectedProvider = Provider.GITHUB;
 
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
         extraLoginOptions = new ExtraLoginOptions()
         {
             domain = "https://example.auth0.com",

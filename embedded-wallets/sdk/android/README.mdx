@@ -320,7 +320,7 @@ For Solana integration, you can get the Ed25519 private key using the `getEd2551
 import org.sol4k.Connection
 import org.sol4k.Keypair
 
-val connection = connection(RpcUrl.DEVNET)
+val connection = Connection(RpcUrl.DEVNET)
 
 // Use your Web3Auth instance to get the private key
 val ed25519PrivateKey = web3Auth.getEd25519PrivKey()

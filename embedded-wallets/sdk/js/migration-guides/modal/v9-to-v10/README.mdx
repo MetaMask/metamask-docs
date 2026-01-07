@@ -19,13 +19,13 @@ Web3Auth v9 offered separate modal and non-modal SDKs for flexibility. V10 conso
 
 Building on the foundation of v9, key areas of evolution in v10 include:
 
-- **A Unified & Versatile SDK (`@web3auth/modal`):** Consolidates all functionalities into a single SDK supporting both pre-built modal UIs and custom user interfaces with one consistent API.
-- **Dashboard-Centric Configuration:** Login methods, connections (formerly verifiers), Smart Account settings, and chain configurations are now managed through the Web3Auth Developer Dashboard.
-- **Streamlined Login & connection Management:** Moves to a declarative approach with login methods defined on the dashboard and more direct client-side connection calls.
+- **A unified and versatile SDK (`@web3auth/modal`):** Consolidates all functionalities into a single SDK supporting both pre-built modal UIs and custom user interfaces with one consistent API.
+- **Dashboard-centric configuration:** Login methods, connections (formerly verifiers), Smart Account settings, and chain configurations are now managed through the Web3Auth Developer Dashboard.
+- **Streamlined login and connection management:** Moves to a declarative approach with login methods defined on the dashboard and more direct client-side connection calls.
 - **Automated Blockchain Setup:** Standard blockchains no longer require manual `chainConfig` and `privateKeyProvider` setup as these are handled automatically via dashboard settings.
-- **Integrated Smart Account Functionality:** Smart Account configuration is managed on the dashboard with functionality built directly into the main SDK, eliminating separate provider packages.
+- **Integrated smart account functionality:** Smart account configuration is managed on the dashboard with functionality built directly into the main SDK, eliminating separate provider packages.
 - **Simplified Multi-Factor Authentication (MFA):** MFA setup is streamlined with key settings configured directly during SDK initialization.
-- **Modernized Framework Support:** React and Vue applications now use streamlined hooks/composables with automatic SDK initialization.
+- **Modernized framework support:** React and Vue applications now use streamlined hooks/composables with automatic SDK initialization.
 
 The result is a cleaner, more declarative, and more maintainable integration experience—especially for teams maintaining apps across multiple auth flows and chains, all using one SDK.
 
@@ -40,6 +40,7 @@ npm install @web3auth/modal
 ## General migration points (applicable to all frameworks)
 
 ### 1. Centralized chain configuration
+
 ```typescript
 import { Web3Auth } from '@web3auth/modal'
 // remove-start
@@ -168,7 +169,7 @@ For specific functionality or frameworks, refer to these dedicated migration gui
 - [React migration guide](../../../../react/migration-guides/modal-v9-to-v10-react.mdx)
 - [Vue migration guide](../../../../vue/migration-guides/modal-v9-to-v10-vue.mdx)
 
-## Further reading
+## Next steps
 
 - [Embedded wallets documentation - Web SDK v10](https://web3auth.io/embedded-wallets/sdk/js)
 - [Web3Auth v10 examples on GitHub](https://github.com/Web3Auth/web3auth-examples)

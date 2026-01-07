@@ -4,7 +4,7 @@ sidebar_label: useSwitchChain
 description: '@web3auth/modal React Hooks useSwitchChain | Embedded Wallets'
 ---
 
-Hook to switch blockchain networks with Web3Auth.
+Hook to switch blockchain networks with Embedded Wallets.
 
 ### Import
 
@@ -37,20 +37,23 @@ function SwitchChainButton() {
 import { type IUseSwitchChain } from '@web3auth/modal/react'
 ```
 
-#### Loading
+#### `loading`
+
 `boolean`
 
 Whether the chain switching process is in progress.
 
-#### Error
-`Web3Autherror | null`
+#### `error`
 
-error that occurred during the chain switching process.
+`Web3AuthError | null`
 
-#### Switchchain
+Error that occurred during the chain switching process.
+
+#### `switchChain`
+
 `(chainId: string) => Promise<void>`
 
-Function to initiate the chain switch. Pass the target `chainId` as a string (e.g., "0x1" for Ethereum Mainnet).
+Function to initiate the chain switch. Pass the target `chainId` as a string (for example, "0x1" for Ethereum Mainnet).
 
 ## Example
 
@@ -65,7 +68,7 @@ export function SwitchChain() {
   return (
     <div>
       <h2>Switch chain</h2>
-      <h3>connected to {web3Auth?.currentChain?.displayName}</h3>
+      <h3>Connected to {web3Auth?.currentChain?.displayName}</h3>
       {web3Auth?.coreOptions.chains?.map(chain => {
         return (
           <button

@@ -34,7 +34,7 @@ function SolanaWallet() {
   return (
     <div>
       <h2>Solana Wallet</h2>
-      <p>connected: {connected ? 'Yes' : 'No'}</p>
+      <p>Connected: {connected ? 'Yes' : 'No'}</p>
       {address && <p>Address: {address}</p>}
     </div>
   )
@@ -65,7 +65,7 @@ function SignMessage() {
       <button onClick={handleSignMessage} disabled={isPending}>
         {isPending ? 'Signing...' : 'Sign message'}
       </button>
-      {error && <p>error: {error.message}</p>}
+      {error && <p>Error: {error.message}</p>}
     </div>
   )
 }
@@ -104,7 +104,7 @@ function SignTransaction() {
       <button onClick={handleSignTransaction} disabled={isPending}>
         {isPending ? 'Signing...' : 'Sign transaction'}
       </button>
-      {error && <p>error: {error.message}</p>}
+      {error && <p>Error: {error.message}</p>}
     </div>
   )
 }
@@ -143,7 +143,7 @@ function SignAndSendTransaction() {
       <button onClick={handleSignAndSend} disabled={isPending}>
         {isPending ? 'Processing...' : 'Sign and Send'}
       </button>
-      {error && <p>error: {error.message}</p>}
+      {error && <p>Error: {error.message}</p>}
     </div>
   )
 }

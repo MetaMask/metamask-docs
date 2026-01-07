@@ -101,7 +101,7 @@ void AYourGameMode::SetupWeb3AuthCallbacks()
     UWeb3AuthSDK::GetInstance()->OnLoginSuccess.AddDynamic(this, &AYourGameMode::OnWeb3AuthLoginSuccess);
 
     // Bind login error callback
-    UWeb3AuthSDK::GetInstance()->OnLoginError.AddDynamic(this, &AYourGameMode::OnWeb3AuthLoginerror);
+    UWeb3AuthSDK::GetInstance()->OnLoginError.AddDynamic(this, &AYourGameMode::OnWeb3AuthLoginError);
 
     // Bind logout callback
     UWeb3AuthSDK::GetInstance()->OnLogout.AddDynamic(this, &AYourGameMode::OnWeb3AuthLogout);
@@ -114,9 +114,9 @@ void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FStr
 }
 
 UFUNCTION()
-void AYourGameMode::OnWeb3AuthLoginError(const FString& error)
+void AYourGameMode::OnWeb3AuthLoginError(const FString& Error)
 {
-    UE_LOG(LogTemp, error, TEXT("Web3Auth Login Error: %s"), *Error);
+    UE_LOG(LogTemp, Error, TEXT("Web3Auth Login Error: %s"), *Error);
 }
 
 UFUNCTION()

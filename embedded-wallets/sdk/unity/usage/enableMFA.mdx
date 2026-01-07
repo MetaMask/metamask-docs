@@ -48,11 +48,11 @@ private void onMFASetup(bool response)
 
 ```cs
 {
-    var selectedprovider = provider.GOOGLE;
+    var selectedProvider = Provider.GOOGLE;
 
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
     };
 
     web3Auth.enableMFA(options);
@@ -65,11 +65,11 @@ private void onMFASetup(bool response)
 
 ```cs
 {
-    var selectedprovider = provider.JWT;
+    var selectedProvider = Provider.JWT;
 
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
         extraLoginOptions = new ExtraLoginOptions()
         {
             domain = "https://web3auth.au.auth0.com",

@@ -22,7 +22,7 @@ function App() {
 
   if (isConnected) {
     // User is connected
-    console.log('connected with provider:', provider)
+    console.log('Connected with provider:', provider)
   }
   if (isInitializing) {
     // Web3Auth is initializing
@@ -49,11 +49,11 @@ function App() {
 import { type IUseWeb3Auth } from '@web3auth/modal/react'
 ```
 
-#### `Initerror`
+#### `initError`
 
 `error | null`
 
-error that occurred during Web3Auth initialization.
+Error that occurred during Web3Auth initialization.
 
 #### `isConnected`
 
@@ -73,26 +73,26 @@ Whether Web3Auth has completed initialization.
 
 Whether Web3Auth is currently initializing.
 
-#### Provider
+#### `provider`
 
 `IProvider | null`
 
 
 Connected provider from Web3Auth.
 
-#### `Status`
+#### `status`
 
 `string`
 
 Current status of the Web3Auth connection.
 
-#### `Web3auth`
+#### `web3auth`
 
 `Web3Auth`
 
 The Web3Auth instance.
 
-#### Getplugin
+#### `getPlugin`
 
 `(pluginName: PLUGIN_NAME) => IPlugin | null`
 
