@@ -4,7 +4,7 @@ sidebar_label: useWeb3AuthDisconnect
 description: '@web3auth/modal React Hooks useWeb3AuthDisconnect | Embedded Wallets'
 ---
 
-Hook to disconnect from Web3Auth.
+Hook to disconnect from Embedded Wallets.
 
 ### Import
 
@@ -23,7 +23,7 @@ function DisconnectButton() {
   return (
     <div>
       <button onClick={() => disconnect()} disabled={loading}>
-        {loading ? 'Disconnecting...' : 'disconnect'}
+        {loading ? 'Disconnecting...' : 'Disconnect'}
       </button>
       {error && <div>{error.message}</div>}
     </div>
@@ -37,17 +37,20 @@ function DisconnectButton() {
 import { type IUseWeb3AuthDisconnect } from '@web3auth/modal/react'
 ```
 
-#### Loading
+#### `loading`
+
 `boolean`
 
-Whether the Disconnection process is in progress.
+Whether the disconnection process is in progress.
 
-#### Error
-`Web3Autherror | null`
+#### `error`
 
-error that occurred during the Disconnection process.
+`Web3AuthError | null`
 
-#### Disconnect
+Error that occurred during the disconnection process.
+
+#### `disconnect`
+
 `(options?: { cleanup: boolean }) => Promise<void>`
 
-Function to initiate the Disconnection process. Optional `cleanup` parameter controls whether to remove all user data.
+Function to initiate the disconnection process. Optional `cleanup` parameter controls whether to remove all user data.

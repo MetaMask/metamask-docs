@@ -57,10 +57,10 @@ public enum MFALevel
 ```cs title="Usage"
 public void login()
 {
-    var selectedprovider = provider.GOOGLE;
+    var selectedProvider = Provider.GOOGLE;
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
 		mfaLevel = MFALevel.MANDATORY
     };
     web3Auth.login(options);

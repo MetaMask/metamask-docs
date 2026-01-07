@@ -4,7 +4,7 @@ sidebar_label: useSignMessage
 description: '@web3auth/modal React Hook useSignMessage | Embedded Wallets'
 ---
 
-Hook to sign a message using the connected Solana wallet from Web3Auth.
+Hook to sign a message using the connected Solana wallet from Embedded Wallets.
 
 ### Import
 
@@ -32,9 +32,9 @@ function SignMessageButton({ message }: { message: string }) {
   return (
     <div>
       <button onClick={handleSign} disabled={loading}>
-        {loading ? 'Signing...' : 'Sign message'}
+        {loading ? 'Signing...' : 'Sign Message'}
       </button>
-      {error && <div>error: {error.message}</div>}
+      {error && <div>Error: {error.message}</div>}
       {data && <div>Signature: {data}</div>}
     </div>
   )
@@ -46,28 +46,32 @@ function SignMessageButton({ message }: { message: string }) {
 ```ts
 export type IUseSignMessage = {
   loading: boolean
-  error: Web3Autherror | null
+  error: Web3AuthError | null
   data: string | null
   signMessage: (message: string) => Promise<string>
 }
 ```
 
-#### Loading
+#### `loading`
+
 `boolean`
 
 Indicates if the message signing is in progress.
 
-#### Error
-`Web3Autherror | null`
+#### `error`
 
-error object if signing fails, otherwise null.
+`Web3AuthError | null`
 
-#### Data
+Error object if signing fails, otherwise null.
+
+#### `data`
+
 `string | null`
 
 The signature as a string, or null if not signed yet.
 
-#### Signmessage
+#### `signMessage`
+
 `(message: string) => Promise<string>`
 
 Function to sign a message. Returns the signature as a string.
@@ -83,14 +87,14 @@ export function SignMessage() {
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const formdata = new Formdata(e.target as HTMLFormElement)
-    const message = formdata.get('message')
+    const formData = new FormData(e.target as HTMLFormElement)
+    const message = formData.get('message')
     signMessage(message!.toString())
   }
 
   return (
     <div>
-      <h2>Sign message</h2>
+      <h2>Sign Message</h2>
       <form onSubmit={submit}>
         <input name="message" placeholder="Message" required />
         <button disabled={isPending} type="submit">
@@ -98,7 +102,7 @@ export function SignMessage() {
         </button>
       </form>
       {hash && <div className="hash">Message Hash: {hash}</div>}
-      {error && <div className="error">error: {error.message}</div>}
+      {error && <div className="error">Error: {error.message}</div>}
     </div>
   )
 }

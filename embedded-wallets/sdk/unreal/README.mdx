@@ -101,7 +101,7 @@ void AYourGameMode::SetupWeb3AuthCallbacks()
     UWeb3AuthSDK::GetInstance()->OnLoginSuccess.AddDynamic(this, &AYourGameMode::OnWeb3AuthLoginSuccess);
 
     // Bind login error callback
-    UWeb3AuthSDK::GetInstance()->OnLoginerror.AddDynamic(this, &AYourGameMode::OnWeb3AuthLoginerror);
+    UWeb3AuthSDK::GetInstance()->OnLoginError.AddDynamic(this, &AYourGameMode::OnWeb3AuthLoginerror);
 
     // Bind logout callback
     UWeb3AuthSDK::GetInstance()->OnLogout.AddDynamic(this, &AYourGameMode::OnWeb3AuthLogout);
@@ -114,9 +114,9 @@ void AYourGameMode::OnWeb3AuthLoginSuccess(const FString& PrivateKey, const FStr
 }
 
 UFUNCTION()
-void AYourGameMode::OnWeb3AuthLoginerror(const FString& error)
+void AYourGameMode::OnWeb3AuthLoginError(const FString& error)
 {
-    UE_LOG(LogTemp, error, TEXT("Web3Auth Login error: %s"), *error);
+    UE_LOG(LogTemp, error, TEXT("Web3Auth Login Error: %s"), *Error);
 }
 
 UFUNCTION()
@@ -128,7 +128,7 @@ void AYourGameMode::OnWeb3AuthLogout()
 
 ## Advanced configuration
 
-The Web3Auth Unreal SDK offers a rich set of advanced configuration options:
+The Embedded Wallets Unreal SDK offers a rich set of advanced configuration options:
 
 - **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
 - **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
@@ -136,7 +136,7 @@ The Web3Auth Unreal SDK offers a rich set of advanced configuration options:
 
 :::tip
 
-Head over to the advanced configuration sections to learn more about each configuration option.
+See the advanced configuration sections to learn more about each configuration option.
 
 :::
 

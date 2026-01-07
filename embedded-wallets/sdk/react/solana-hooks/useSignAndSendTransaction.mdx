@@ -4,7 +4,7 @@ sidebar_label: useSignAndSendTransaction
 description: '@web3auth/modal React Hook useSignAndSendTransaction | Embedded Wallets'
 ---
 
-Hook to sign and send a Solana transaction using the connected Solana wallet from Web3Auth.
+Hook to sign and send a Solana transaction using the connected Solana wallet from Embedded Wallets.
 
 ### Import
 
@@ -37,9 +37,9 @@ function SignAndSendTransactionButton({
   return (
     <div>
       <button onClick={handleSignAndSend} disabled={loading}>
-        {loading ? 'Signing & Sending...' : 'Sign & Send transaction'}
+        {loading ? 'Signing & Sending...' : 'Sign & Send Transaction'}
       </button>
-      {error && <div>error: {error.message}</div>}
+      {error && <div>Error: {error.message}</div>}
       {data && <div>Signature: {data}</div>}
     </div>
   )
@@ -51,28 +51,32 @@ function SignAndSendTransactionButton({
 ```ts
 export type IUseSignAndSendTransaction = {
   loading: boolean
-  error: Web3Autherror | null
+  error: Web3AuthError | null
   data: string | null
   signAndSendTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
 }
 ```
 
-#### Loading
+#### `loading`
+
 `boolean`
 
 Indicates if the transaction signing and sending is in progress.
 
-#### Error
-`Web3Autherror | null`
+#### `error`
 
-error object if signing or sending fails, otherwise null.
+`Web3AuthError | null`
 
-#### Data
+Error object if signing or sending fails, otherwise null.
+
+#### `data`
+
 `string | null`
 
 The transaction signature as a string, or null if not signed yet.
 
-#### Signandsendtransaction
+#### `signAndSendTransaction`
+
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
 Function to sign and send a transaction. Returns the transaction signature as a string.
@@ -101,9 +105,9 @@ export function SendVersionedTransaction() {
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const formdata = new Formdata(e.target as HTMLFormElement)
-    const to = formdata.get('address') as string
-    const value = formdata.get('value') as string
+    const formData = new FormData(e.target as HTMLFormElement)
+    const to = formData.get('address') as string
+    const value = formData.get('value') as string
 
     const block = await connection!.getLatestBlockhash()
     const TransactionInstruction = SystemProgram.transfer({
@@ -133,7 +137,7 @@ export function SendVersionedTransaction() {
         </button>
       </form>
       {hash && <div>Transaction Hash: {hash}</div>}
-      {error && <div>error: {error.message}</div>}
+      {error && <div>Error: {error.message}</div>}
     </div>
   )
 }

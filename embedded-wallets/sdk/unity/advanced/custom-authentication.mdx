@@ -18,7 +18,7 @@ This feature, with MFA turned off, can make Embedded Wallets invisible to the en
 
 :::info prerequisite
 
-To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets dashboard](https://dashboard.web3auth.io) with your desired configuration.
 
 :::
 
@@ -156,11 +156,11 @@ void Start()
 ```csharp
 public void loginGoogle()
 {
-    var selectedprovider = provider.GOOGLE;
+    var selectedProvider = Provider.GOOGLE;
 
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
     };
 
     web3Auth.login(options);
@@ -172,11 +172,11 @@ public void loginGoogle()
 ```csharp
 public void loginJWT()
 {
-    var selectedprovider = provider.JWT;
+    var selectedProvider = Provider.JWT;
 
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
         extraLoginOptions = new ExtraLoginOptions()
         {
             domain = "https://example.auth0.com", // Auth0 domain
@@ -237,7 +237,7 @@ void Start()
 ```csharp
 public void loginGoogle()
 {
-    var selectedprovider = provider.GOOGLE;
+    var selectedprovider = Provider.GOOGLE;
 
     var options = new LoginParams()
     {
@@ -249,7 +249,7 @@ public void loginGoogle()
 
 public void loginGitHub()
 {
-    var selectedprovider = provider.GITHUB;
+    var selectedprovider = Provider.GITHUB;
 
     var options = new LoginParams()
     {

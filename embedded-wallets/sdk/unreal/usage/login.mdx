@@ -103,7 +103,7 @@ enum class EWeb3AuthProvider : uint8
 void AYourGameMode::LoginWithGoogle()
 {
     FWeb3AuthLoginParams LoginParams;
-    LoginParams.Loginprovider = TEXT("google");
+    LoginParams.LoginProvider = TEXT("google");
 
     UWeb3AuthSDK::GetInstance()->Login(LoginParams);
 }

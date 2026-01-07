@@ -22,9 +22,9 @@ function SolanaWalletInfo() {
 
   return (
     <div>
-      <div>accounts: {accounts ? accounts.join(', ') : 'No accounts'}</div>
+      <div>Accounts: {accounts ? accounts.join(', ') : 'No accounts'}</div>
       <div>SolanaWallet: {solanaWallet ? 'Available' : 'Not available'}</div>
-      <div>connection: {connection ? 'connected' : 'Not connected'}</div>
+      <div>Connection: {connection ? 'Connected' : 'Not connected'}</div>
     </div>
   )
 }
@@ -36,18 +36,21 @@ function SolanaWalletInfo() {
 import { type IUseSolanaWallet } from '@web3auth/modal/react'
 ```
 
-#### Accounts
+#### `accounts`
+
 `string[] | null`
 
 The list of Solana account addresses, or null if not available.
 
-#### Solanawallet
+#### `solanaWallet`
+
 `SolanaWallet | null`
 
 The SolanaWallet instance for interacting with the Solana blockchain, or null if not available.
 
-#### Connection
-`connection | null`
+#### `connection`
+
+`Connection | null`
 
 The Solana connection instance for making RPC calls, or null if not available.
 
@@ -61,21 +64,21 @@ import { useEffect, useState } from 'react'
 export function Balance() {
   const { accounts, connection } = useSolanaWallet()
   const [balance, setBalance] = useState<number | null>(null)
-  const [isLoading, setIsloading] = useState(false)
-  const [error, seterror] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const fetchBalance = async () => {
     if (connection && accounts && accounts.length > 0) {
       try {
-        setIsloading(true)
-        seterror(null)
+        setIsLoading(true)
+        setError(null)
         const publicKey = new PublicKey(accounts[0])
         const balance = await connection.getBalance(publicKey)
         setBalance(balance)
       } catch (err) {
-        seterror(err instanceof error ? err.message : 'Unknown error')
+        setError(err instanceof Error ? err.message : 'Unknown error')
       } finally {
-        setIsloading(false)
+        setIsLoading(false)
       }
     }
   }
@@ -88,8 +91,8 @@ export function Balance() {
     <div>
       <h2>Balance</h2>
       <div>{balance !== null && `${balance / LAMPORTS_PER_SOL} SOL`}</div>
-      {isLoading && <span className="loading">loading...</span>}
-      {error && <span className="error">error: {error}</span>}
+      {isLoading && <span className="loading">Loading...</span>}
+      {error && <span className="error">Error: {error}</span>}
       <button onClick={fetchBalance} type="submit" className="card">
         Fetch Balance
       </button>

@@ -7,7 +7,7 @@ description: '@web3auth/modal React Hook useSignTransaction | Embedded Wallets'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-Hook to sign a Solana transaction using the connected wallet from Web3Auth.
+Hook to sign a Solana transaction using the connected wallet from Embedded Wallets.
 
 ### Import
 
@@ -36,9 +36,9 @@ function SignTransactionButton({ transaction }: { transaction: Transaction }) {
   return (
     <div>
       <button onClick={handleSign} disabled={loading}>
-        {loading ? 'Signing...' : 'Sign transaction'}
+        {loading ? 'Signing...' : 'Sign Transaction'}
       </button>
-      {error && <div>error: {error.message}</div>}
+      {error && <div>Error: {error.message}</div>}
       {data && <div>Signed Transaction: {data}</div>}
     </div>
   )
@@ -50,28 +50,32 @@ function SignTransactionButton({ transaction }: { transaction: Transaction }) {
 ```ts
 export type IUseSignTransaction = {
   loading: boolean
-  error: Web3Autherror | null
+  error: Web3AuthError | null
   data: string | null
   signTransaction: (transaction: TransactionOrVersionedTransaction) => Promise<string>
 }
 ```
 
-#### Loading
+#### `loading`
+
 `boolean`
 
 Indicates if the transaction signing is in progress.
 
-#### Error
-`Web3Autherror | null`
+#### `error`
 
-error object if signing fails, otherwise null.
+`Web3AuthError | null`
 
-#### Data
+Error object if signing fails, otherwise null.
+
+#### `data`
+
 `string | null`
 
 The signed transaction as a string, or null if not signed yet.
 
-#### Signtransaction
+#### `signTransaction`
+
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
 Function to sign a Solana transaction. Returns the signed transaction as a string.
@@ -94,9 +98,9 @@ export function SignTransaction() {
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const formdata = new Formdata(e.target as HTMLFormElement)
-    const to = formdata.get('address') as string
-    const value = formdata.get('value') as string
+    const formData = new FormData(e.target as HTMLFormElement)
+    const to = formData.get('address') as string
+    const value = formData.get('value') as string
 
     const block = await connection!.getLatestBlockhash()
     const TransactionInstruction = SystemProgram.transfer({
@@ -116,7 +120,7 @@ export function SignTransaction() {
 
   return (
     <div>
-      <h2>Sign transaction</h2>
+      <h2>Sign Transaction</h2>
       <form onSubmit={submit}>
         <input name="address" placeholder="Address" required />
         <input name="value" placeholder="Amount (SOL)" type="number" step="0.01" required />
@@ -125,7 +129,7 @@ export function SignTransaction() {
         </button>
       </form>
       {signedTransaction && <div>Signed Trasaction: {signedTransaction}</div>}
-      {error && <div>error: {error.message}</div>}
+      {error && <div>Error: {error.message}</div>}
     </div>
   )
 }

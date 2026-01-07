@@ -1,13 +1,13 @@
-You need to install the `wagmi` and `@tanstack/react-query` packages and use the **Web3Auth
-implementation of `Wagmiprovider`** for configuration.
+You need to install the `wagmi` and `@tanstack/react-query` packages and use the Embedded Wallets
+implementation of `WagmiProvider` for configuration.
 
 :::info
 
-The Web3Auth implementation of `Wagmiprovider` is a custom implementation that is used to integrate
-with the Web3Auth Modal SDK. It is a wrapper around the `Wagmiprovider` that makes it compatible.
+The Embedded Wallets implementation of `WagmiProvider` is a custom implementation that is used to integrate
+with the Embedded Wallets/Web3Auth Modal SDK. It is a wrapper around the `WagmiProvider` that makes it compatible.
 
 With this implementation, you can use the Wagmi hooks, however **no external connectors are
-supported**. Web3Auth provides a whole suite of connectors which you can use directly for a better
+supported**. Embedded Wallets provides a whole suite of connectors which you can use directly for a better
 experience with external wallets.
 
 :::
@@ -23,8 +23,8 @@ import ReactDOM from "react-dom/client";
 import { Web3AuthProvider } from "@web3auth/modal/react";
 import web3AuthContextConfig from "./web3authContext";
 // focus-start
-import { Wagmiprovider } from "@web3auth/modal/react/wagmi";
-import { QueryClient, QueryClientprovider } from "@tanstack/react-query";
+import { WagmiProvider } from "@web3auth/modal/react/wagmi";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // focus-end
 
 import App from "./App";
@@ -35,11 +35,11 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Web3AuthProvider config={web3AuthContextConfig}>
     {/* focus-start */}
-    <QueryClientprovider client={queryClient}>
-      <Wagmiprovider>
+    <QueryClientProvider client={queryClient}>
+      <WagmiProvider>
         <App />
-      </Wagmiprovider>
-    </QueryClientprovider>
+      </WagmiProvider>
+    </QueryClientProvider>
     {/* focus-end */}
   </Web3AuthProvider>,
 );
@@ -47,14 +47,14 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
 :::info
 
-Wagmi provides a comprehensive set of React hooks for Ethereum and EVM-compatible chains. Web3Auth
+Wagmi provides a comprehensive set of React hooks for Ethereum and EVM-compatible chains. Embedded Wallets
 integrates seamlessly with Wagmi, so you can use hooks like `useAccount`, `useBalance`,
 `useSendTransaction`, and more, out of the box.
 
 :::
 
-Below are some examples of using Wagmi hooks in your dapp after Web3Auth and Wagmi are set up. You
-can note these functions work directly with Wagmi. Once you have set up Wagmi with Web3Auth, you can
+Below are some examples of using Wagmi hooks in your dapp after Embedded Wallets and Wagmi are set up. You
+can note these functions work directly with Wagmi. Once you have set up Wagmi with Embedded Wallets, you can
 use any Wagmi hook as you would in a standard Wagmi application.
 
 ### Get account balance

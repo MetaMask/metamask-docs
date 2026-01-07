@@ -7,7 +7,7 @@ description: 'Web3Auth Unity SDK - login | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-This function helps your users to trigger the login process. The login flow is triggered based on the selected provider.
+This function helps your users to trigger the login process. The login flow is triggered based on the selected Provider.
 
 :::tip
 
@@ -68,7 +68,7 @@ private void onLogin(Web3AuthResponse response)
 ```cs
 public class LoginParams
 {
-    public provider loginProvider { get; set; }
+    public Provider loginProvider { get; set; }
     public string dappShare { get; set; }
     public ExtraLoginOptions extraLoginOptions { get; set; }
     public Uri redirectUrl { get; set; }
@@ -83,10 +83,10 @@ public class LoginParams
 
 </Tabs>
 
-### `provider`
+### `Provider`
 
 ```cs
-public enum provider
+public enum Provider
 {
     [EnumMember(Value = "google")]
     GOOGLE,
@@ -130,7 +130,7 @@ public enum provider
 The `LoginParams` class accepts the `ExtraLoginOptions` as an optional input, containing advanced options for custom authentication, email passwordless login, etc. This parameter can be considered as advanced login options needed for specific cases.
 
 ```cs
-LoginParams() { selectedLoginprovider, extraLoginOptions = ExtraLoginOptions() }
+LoginParams() { selectedLoginProvider, extraLoginOptions = ExtraLoginOptions() }
 ```
 
 <Tabs
@@ -145,9 +145,9 @@ LoginParams() { selectedLoginprovider, extraLoginOptions = ExtraLoginOptions() }
 
 | Parameter | Description |
 | --- | --- |
-| `additionalParams?` | Additional params in `Dictionary<string, string>` format for OAuth login, use id_token(JWT) to authenticate with web3auth. |
+| `additionalParams?` | Additional params in `Dictionary<string, string>` format for OAuth login, use id_token(JWT) to authenticate with Embedded Wallets. |
 | `domain?` | Your custom authentication domain in `string` format. For example, if you are using Auth0, this could be example.au.auth0.com. |
-| `client_id?` | Client id in `string` format, provided by your login provider used for custom verifier. |
+| `client_id?` | Client ID in `string` format, provided by your login provider used for custom verifier. |
 | `leeway?` | The value used to account for clock skew in JWT expirations. The value is in the seconds, and ideally should be no more than 60 seconds, with a maxium of 120 seconds. It takes `string` as a value. |
 | `verifierIdField?` | The field in the JWT token that maps to verifier id. Please make sure you have selected the correct JWT verifier id in the Developer Dashboard. It takes `string` as a value. |
 | `isVerifierIdCaseSensitive?` | `bool` to confirm whether the verifier id field is case sensitive or not. |
@@ -206,7 +206,7 @@ public class ExtraLoginOptions {
 The `LoginParams` class accepts a `curve` parameter. This parameter can be used to select the elliptic curve to use for the signature.
 
 ```cs
-LoginParams() { selectedLoginprovider, curve = Curve.SECP256K1 }
+LoginParams() { selectedLoginProvider, curve = Curve.SECP256K1 }
 ```
 
 <Tabs
@@ -222,10 +222,10 @@ LoginParams() { selectedLoginprovider, curve = Curve.SECP256K1 }
 ```cs
 public void login()
 {
-    var selectedprovider = provider.GOOGLE;
+    var selectedProvider = Provider.GOOGLE;
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
         //focus-next-line
         curve = Curve.SECP256K1
     };
@@ -240,10 +240,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedprovider = provider.GOOGLE;
+    var selectedProvider = Provider.GOOGLE;
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
         //focus-next-line
         curve = Curve.ED25519
     };
@@ -301,10 +301,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedprovider = provider.GOOGLE;
+    var selectedProvider = Provider.GOOGLE;
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider
+        loginProvider = selectedProvider
     };
     web3Auth.login(options);
 }
@@ -317,10 +317,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedprovider = provider.FACEBOOK;
+    var selectedProvider = Provider.FACEBOOK;
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider
+        loginProvider = selectedProvider
     };
     web3Auth.login(options);
 }
@@ -333,10 +333,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedprovider = provider.DISCORD;
+    var selectedProvider = Provider.DISCORD;
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider
+        loginProvider = selectedProvider
     };
     web3Auth.login(options);
 }
@@ -349,10 +349,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedprovider = provider.TWITCH;
+    var selectedProvider = Provider.TWITCH;
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider
+        loginProvider = selectedProvider
     };
     web3Auth.login(options);
 }
@@ -365,10 +365,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedprovider = provider.EMAIL_PASSWORDLESS;
+    var selectedProvider = Provider.EMAIL_PASSWORDLESS;
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
         extraLoginOptions = new ExtraLoginOptions()
         {
             login_hint = "hello@web3auth.io"
@@ -385,10 +385,10 @@ public void login()
 ```cs
 public void login()
 {
-    var selectedprovider = provider.JWT;
+    var selectedProvider = Provider.JWT;
     var options = new LoginParams()
     {
-        loginProvider = selectedprovider,
+        loginProvider = selectedProvider,
         extraLoginOptions = new ExtraLoginOptions()
         {
             id_token = "<your JWT token>"
