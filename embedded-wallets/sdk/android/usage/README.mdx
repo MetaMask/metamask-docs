@@ -16,34 +16,34 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### Authentication functions
 
-| Function Name | Description                                        |
-| ------------- | -------------------------------------------------- |
-| `login()`     | Logs in the user with the selected login provider. |
-| `logout()`    | Logs out the user from the current session.        |
+| Function Name | Description                                                       |
+| ------------- | ----------------------------------------------------------------- |
+| [`login()`](./login.mdx)     | Logs in the user with the selected login provider. |
+| [`logout()`](./logout.mdx)   | Logs out the user from the current session.        |
 
 ### User management functions
 
-| Function Name   | Description                                     |
-| --------------- | ----------------------------------------------- |
-| `getUserInfo()` | Retrieves the authenticated user's information. |
+| Function Name   | Description                                                          |
+| --------------- | -------------------------------------------------------------------- |
+| [`getUserInfo()`](./getUserInfo.mdx) | Retrieves the authenticated user's information. |
 
 ### Private key functions
 
-| Function Name | Description |
-| --- | --- |
-| `getPrivKey()` | Retrieve the user's secp256k1 private key for EVM-compatible chains. |
-| `getEd25519PrivKey()` | Retrieve the user's ed25519 private key for chains like Solana, Near, Algorand. |
+| Function Name | Description                                                            |
+| --- | -------------------------------------------------------------------------------- |
+| [`getPrivKey()`](./getPrivKey.mdx) | Retrieve the user's secp256k1 private key for EVM-compatible chains. |
+| [`getEd25519PrivKey()`](./getEd25519PrivKey.mdx) | Retrieve the user's ed25519 private key for chains like Solana, Near, Algorand. |
 
 ### Security functions
 
-| Function Name | Description                                       |
-| ------------- | ------------------------------------------------- |
-| `enableMFA()` | Enables Multi-Factor Authentication for the user. |
-| `manageMFA()` | Allows users to manage their MFA settings.        |
+| Function Name | Description                                                          |
+| ------------- | -------------------------------------------------------------------- |
+| [`enableMFA()`](./enableMFA.mdx) | Enables Multi-Factor Authentication for the user. |
+| [`manageMFA()`](./manageMFA.mdx) | Allows users to manage their MFA settings.        |
 
 ### Wallet Services functions
 
 | Function Name            | Description                                                       |
 | ------------------------ | ----------------------------------------------------------------- |
-| `launchWalletServices()` | Launches the templated wallet UI in WebView.                      |
-| `request()`              | Opens templated transaction screens for signing EVM transactions. |
+| [`launchWalletServices()`](./launchWalletServices.mdx) | Launches the templated wallet UI in WebView.                      |
+| [`request()`](./request.mdx)                           | Opens templated transaction screens for signing EVM transactions. |

@@ -1,10 +1,10 @@
 You need to install the `wagmi` & `@tanstack/vue-query` packages and use the **Web3Auth
-implementation of `Wagmiprovider`** for configuration.
+implementation of `WagmiProvider`** for configuration.
 
 :::info
 
-The Web3Auth implementation of `Wagmiprovider` is a custom implementation that is used to integrate
-with the Web3Auth Modal SDK. It is a wrapper around the `Wagmiprovider` that makes it compatible.
+The Web3Auth implementation of `WagmiProvider` is a custom implementation that is used to integrate
+with the Web3Auth Modal SDK. It is a wrapper around the `WagmiProvider` that makes it compatible.
 
 With this implementation, you can use the Wagmi composables, however **no external connectors are
 supported**. Web3Auth provides a whole suite of connectors which you can use directly for a better
@@ -16,7 +16,7 @@ experience with external wallets.
 npm install wagmi @tanstack/vue-query
 ```
 
-Update your `main.ts` to use the Vue Query plugin **only if you are using Wagmi:**
+Update your `main.ts` to use the Vue Query plugin **only if you are using Wagmi**:
 
 ```ts title="main.ts"
 // focus-next-line
@@ -36,7 +36,7 @@ Then, in your `App.vue`, wrap your app with both providers:
   import Home from "./Home.vue";
   import { Web3AuthProvider } from "@web3auth/modal/vue";
   // focus-next-line
-  import { Wagmiprovider } from "@web3auth/modal/vue/wagmi";
+  import { WagmiProvider } from "@web3auth/modal/vue/wagmi";
   import web3AuthContextConfig from "./web3authContext";
 </script>
 
@@ -44,9 +44,9 @@ Then, in your `App.vue`, wrap your app with both providers:
   <div class="min-h-screen flex flex-col">
     <Web3AuthProvider :config="web3AuthContextConfig">
       <!-- focus-start -->
-      <Wagmiprovider>
+      <WagmiProvider>
         <Home />
-      </Wagmiprovider>
+      </WagmiProvider>
       <!-- focus-end -->
     </Web3AuthProvider>
   </div>
@@ -84,8 +84,8 @@ can use any Wagmi composable as you would in a standard Wagmi application.
       <span v-if="data && data.value !== undefined">
         {{ formatUnits(data.value, data.decimals) }} {{ data.symbol }}
       </span>
-      <span v-if="isLoading">loading...</span>
-      <span v-if="error">error: {{ error.message }}</span>
+      <span v-if="isLoading">Loading...</span>
+      <span v-if="error">Error: {{ error.message }}</span>
     </div>
   </div>
 </template>
@@ -135,7 +135,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
     <div v-if="hash">Transaction Hash: {{ hash }}</div>
     <div v-if="isConfirming">Waiting for confirmation...</div>
     <div v-if="isConfirmed">Transaction confirmed.</div>
-    <div v-if="error">error: {{ error.shortMessage || error.message }}</div>
+    <div v-if="error">Error: {{ error.shortMessage || error.message }}</div>
   </div>
 </template>
 ```
@@ -153,7 +153,7 @@ can use any Wagmi composable as you would in a standard Wagmi application.
 <template>
   <div>
     <h2>Switch Chain</h2>
-    <h3>connected to {{ chainId }}</h3>
+    <h3>Connected to {{ chainId }}</h3>
     <div>
       <button
         v-for="chain in chains"

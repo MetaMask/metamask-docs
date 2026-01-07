@@ -4,7 +4,7 @@ sidebar_label: Overview
 description: '@web3auth/modal React Hooks | Embedded Wallets'
 ---
 
-Web3Auth offers a comprehensive suite of React hooks to streamline integration and state management within your React applications. These hooks abstract away common authentication and wallet operations, enabling you to implement Web3Auth features with minimal boilerplate. Each hook is focused on a specific aspect of Web3Auth functionality, making it easy to implement authentication, wallet operations, and blockchain interactions in your React projects.
+Embedded Wallets offers a comprehensive suite of React hooks to streamline integration and state management within your React applications. These hooks abstract away common authentication and wallet operations, enabling you to implement Embedded Wallets' features with minimal boilerplate. Each hook is focused on a specific aspect of Embedded Wallets' functionality, making it easy to implement authentication, wallet operations, and blockchain interactions in your React projects.
 
 ## List of React hooks
 
@@ -16,43 +16,43 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### Web3Auth hooks
 
-| Hook Name     | Description                                                 |
-| ------------- | ----------------------------------------------------------- |
-| `useWeb3Auth` | Core hook for Web3Auth initialization and state management. |
+| Hook Name   					    | Description                                      |
+| --------------------------------- | ------------------------------------------------ |
+| [`useWeb3Auth`](./useWeb3Auth.mdx) | Core hook for Embedded Wallets initialization and state management. |
 
 ### Authentication hooks
 
-| Hook Name               | Description                            |
-| ----------------------- | -------------------------------------- |
-| `useWeb3AuthConnect`    | Handles Web3Auth connection processes. |
-| `useWeb3AuthDisconnect` | Manages Disconnection from Web3Auth.   |
+| Hook Name               								 | Description                            |
+| ------------------------------------------------------ | -------------------------------------- |
+| [`useWeb3AuthConnect`](./useWeb3AuthConnect.mdx)       | Handles Embedded Wallets connection processes. |
+| [`useWeb3AuthDisconnect`](./useWeb3AuthDisconnect.mdx) | Manages Disconnection from Embedded Wallets.   |
 
 ### Identity hooks
 
-| Hook Name          | Description                                              |
-| ------------------ | -------------------------------------------------------- |
-| `useIdentitytoken` | Retrieves and manages identity tokens.                   |
-| `useWeb3AuthUser`  | Provides access to the authenticated user's information. |
+| Hook Name  						           | Description                              |
+| -------------------------------------------- | ---------------------------------------- |
+| [`useIdentityToken`](./useIdentityToken.mdx) | Retrieves and manages identity tokens.   |
+| [`useWeb3AuthUser`](./useWeb3AuthUser.mdx)   | Provides access to the authenticated user's information. |
 
 ### Blockchain hooks
 
-| Hook Name        | Description                                             |
-| ---------------- | ------------------------------------------------------- |
-| `useSwitchChain` | Allows switching between different blockchain networks. |
+| Hook Name      						  | Description                                  |
+| ---------------------------------------- | ------------------------------------------- |
+| [`useSwitchChain`](./useSwitchChain.mdx) | Allows switching between different blockchain networks. |
 
 ### Multi-Factor Authentication hooks
 
 | Hook Name      | Description                                                      |
 | -------------- | ---------------------------------------------------------------- |
-| `useEnableMFA` | Enables Multi-Factor Authentication (MFA) for enhanced security. |
-| `useManageMFA` | Provides functionality to manage MFA settings.                   |
+| [`useEnableMFA`](./useEnableMFA.mdx) | Enables Multi-Factor Authentication (MFA) for enhanced security. |
+| [`useManageMFA`](./useManageMFA.mdx) | Provides functionality to manage MFA settings.                   |
 
 ### Wallet Services plugin hooks
 
-| Hook Name                 | Description                                         |
-| ------------------------- | --------------------------------------------------- |
-| `useWalletConnectScanner` | Integrates WalletConnect scanner functionality.     |
-| `useWalletUI`             | Manages wallet UI components and user interactions. |
-| `useCheckout`             | Facilitates cryptocurrency checkout processes.      |
-| `useSwap`                 | Enables token swapping capabilities.                |
-| `useWalletServicesPlugin` | Provides access to wallet service plugins.          |
+| Hook Name           								         | Description    				|
+| ---------------------------------------------------------- | ---------------------------- |
+| [`useWalletConnectScanner`](./useWalletConnectScanner.mdx) | Integrates WalletConnect scanner functionality.     |
+| [`useWalletUI`](./useWalletUI.mdx)            			 | Manages wallet UI components and user interactions. |
+| [`useCheckout`](./useCheckout.mdx)            			 | Facilitates cryptocurrency checkout processes. |
+| [`useSwap`](./useSwap.mdx)                 				 | Enables token swapping capabilities. |
+| [`useWalletServicesPlugin`](./useWalletServicesPlugin.mdx) | Provides access to wallet service plugins. |
