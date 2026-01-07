@@ -26,7 +26,7 @@ export const AlertFailedPoh = () => (
     <AlertText>
       <span>
         Free users are required to complete Proof of Humanity to access the faucet. Learn more{' '}
-        <a data-testid="alert-poh" target="_blank" href="https://poh.linea.build/">
+        <a data-testid="alert-poh" target="_blank" href="https://linea.build/hub?action=profile">
           here
         </a>
         .
