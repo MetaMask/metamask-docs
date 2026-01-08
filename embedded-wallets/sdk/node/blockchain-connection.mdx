@@ -3,11 +3,11 @@ title: Blockchain Connection
 description: 'Integrate with Blockchain Networks'
 ---
 
-Web3Auth Node SDK supports multiple blockchain networks through different integration methods. On a successful connection, it returns a `result` object containing the provider/ signer for blockchain operations.
+The Embedded Wallets Node SDK supports multiple blockchain networks through different integration methods. On a successful connection, it returns a `result` object containing the provider/ signer for blockchain operations.
 
 By default you get the standard Web3Auth provider, with the ability to get the private key, if enabled from the dashboard. You additionally get the signer for EVM and Solana chains, to be able to do transactions without the need to use the private key provider directly.
 
-### Object Structure
+### Object structure
 
 ```typescript
 import type { TransactionSigner } from '@solana/signers'
@@ -33,7 +33,9 @@ export type WalletResult =
     }
 ```
 
-### EVM Chains (Ethereum, Polygon, BSC, etc.)
+### EVM chains 
+
+For EVM-compatible chains such as Ethereum, Polygon, BSC.
 
 Use the provider with ethers.js or convert to viem:
 
@@ -83,7 +85,7 @@ await getBalance(result.signer) // Get Ethereum Balance
 await signMessage(result.signer, 'Hello Web3Auth!') // Sign a Message
 ```
 
-### Solana Integration
+### Solana integration
 
 Access Solana wallet functionality:
 

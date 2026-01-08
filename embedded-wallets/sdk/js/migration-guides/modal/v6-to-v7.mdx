@@ -11,7 +11,7 @@ sidebar_label: v6 to v7
 
 #### The new provider object now works with the latest version of `web3.js`.
 
-With V7, the `connect()` method now returns a provider of type `IProvider` which is a hard-coded provider, ensuring compatibility with the latest version of web3.js. Previously, we had been using a proxy provider i.e. `SafeEventEmitterProvider` which gave errors with the breaking changes that came with web3.js v4. Remember, you can import the type `IProvider` from the `@web3auth/base` package.
+With V7, the `connect()` method now returns a provider of type `IProvider` which is a hard-coded provider, ensuring compatibility with the latest version of web3.js. Previously, we had been using a proxy provider that is, `SafeEventEmitterProvider` which gave errors with the breaking changes that came with web3.js v4. Remember, you can import the type `IProvider` from the `@web3auth/base` package.
 
 ```tsx
 // With V7

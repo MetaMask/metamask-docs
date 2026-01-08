@@ -31,25 +31,25 @@ function EnableMFAButton() {
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IUseEnableMFA } from '@web3auth/modal/react'
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Whether the MFA enabling process is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error that occurred during the MFA enabling process.
 
-#### enableMFA
+#### `enableMFA`
 
 `<T>(params?: T) => Promise<void>`
 

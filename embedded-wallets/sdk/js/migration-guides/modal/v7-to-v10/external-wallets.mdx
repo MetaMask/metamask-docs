@@ -7,7 +7,7 @@ sidebar_label: External Wallet Adapters Migration
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# Web3Auth v10 External Wallet Adapters Migration Guide
+# Web3Auth v10 external wallet adapters migration guide
 
 This guide focuses specifically on migrating external wallet adapter configurations from Web3Auth v7
 to v10. This is a supplementary guide to the main
@@ -16,12 +16,12 @@ to v10. This is a supplementary guide to the main
 ## Overview
 
 In v7, external wallets required manual adapter configuration. V10 simplifies this by using MIPD
-(Multiple Injected Provider Discovery) to automatically detect and provide access to external
+(Multiple Injected provider Discovery) to automatically detect and provide access to external
 wallets without manual setup.
 
-## Migration Steps
+## Migration steps
 
-### External Wallet Adapter Migration
+### External wallet adapter migration
 
 ```typescript
 // remove-start
@@ -58,15 +58,15 @@ await web3auth.init()
 // add-end
 ```
 
-## Key Changes
+## Key changes
 
-- **Package Removal**: Remove all external wallet adapter packages
-- **MIPD Integration**: External wallets are automatically detected using MIPD (Multiple Injected
-  Provider Discovery)
-- **No Configuration**: No need to manually configure or register external adapters
-- **WalletConnect Support**: WalletConnect-compatible wallets are automatically available
+- **Package Removal:** Remove all external wallet adapter packages
+- **MIPD Integration:** External wallets are automatically detected using MIPD (Multiple Injected
+  provider Discovery)
+- **No Configuration:** No need to manually configure or register external adapters
+- **WalletConnect Support:** WalletConnect-compatible wallets are automatically available
 
-## Package Removal
+## Package removal
 
 Remove these deprecated packages from your project:
 
@@ -75,18 +75,18 @@ Remove these deprecated packages from your project:
 npm uninstall @web3auth/metamask-adapter @web3auth/phantom-adapter @web3auth/solflare-adapter @web3auth/wallet-connect-v2-adapter @walletconnect/modal
 ```
 
-## How It Works in v10
+## How it works in v10
 
-V10 uses MIPD (Multiple Injected Provider Discovery) to automatically detect injected wallets in the
+V10 uses MIPD (Multiple Injected provider Discovery) to automatically detect injected wallets in the
 browser. When users attempt to connect, they'll see:
 
-1. **Detected Wallets**: All installed browser extension wallets
-2. **WalletConnect**: For mobile and other wallet connections
-3. **Social Logins**: Built-in Web3Auth authentication methods
+1. **Detected Wallets:** All installed browser extension wallets.
+2. **WalletConnect:** For mobile and other wallet connections.
+3. **Social Logins:** Built-in Web3Auth authentication methods.
 
 No configuration needed - everything works out of the box!
 
-## Next Steps
+## Next steps
 
 Return to the main [v7 to v10 migration guide](README.mdx) to continue with other
 migration aspects.

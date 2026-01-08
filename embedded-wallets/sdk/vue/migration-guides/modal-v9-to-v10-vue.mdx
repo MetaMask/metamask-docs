@@ -6,13 +6,13 @@ sidebar_label: v9 to v10
 
 This guide focuses specifically on migrating Vue applications from Web3Auth v9 to v10. This is a supplementary guide to the main [v9 to v10 migration guide](../../js/migration-guides/modal/v9-to-v10/README.mdx).
 
-For general migration points (chain configuration, MFA, method renames, etc.), please refer to the main migration guide.
+For general migration points (for example, chain configuration, MFA, method renames), please refer to the main migration guide.
 
-## Migrating a Vue Application
+## Migrating a Vue application
 
 This section focuses on changes specific to migrating a Web3Auth v9 Vue application to v10 using `@web3auth/modal/vue`.
 
-### Vue Plugin Setup and Configuration
+### Vue plugin setup and configuration
 
 In Vue applications, Web3Auth is typically initialized as a plugin. The setup process involves creating a Web3Auth configuration and integrating it with your Vue application.
 
@@ -47,11 +47,11 @@ const web3AuthConfig: Web3AuthContextConfig = {
 export default web3AuthConfig
 ```
 
-### Vue Composables Path and WalletServicesPlugin Updates
+### Vue composables path and `WalletServicesPlugin` updates
 
-Previously, Vue composables were at `@web3auth/modal-vue-composables`. Now, they are consolidated and imported from `@web3auth/modal/vue`. WalletServicesPlugin functionality is also integrated into these composables, whereas previously with v9 it was imported via `@web3auth/wallet-services-plugin-vue-composables`.
+Previously, Vue composables were at `@web3auth/modal-vue-composables`. Now, they are consolidated and imported from `@web3auth/modal/vue`. `WalletServicesPlugin` functionality is also integrated into these composables, whereas previously with v9 it was imported via `@web3auth/wallet-services-plugin-vue-composables`.
 
-### v10 Vue Composables Usage
+### v10 Vue composables usage
 
 All composables are now streamlined under `@web3auth/modal/vue`:
 
@@ -100,7 +100,7 @@ All composables are now streamlined under `@web3auth/modal/vue`:
 </script>
 ```
 
-### Vue Composable Structure
+### Vue composable structure
 
 The new composable structure is more granular:
 
@@ -117,8 +117,8 @@ The new composable structure is more granular:
 - **MFA:**
   - `useEnableMFA`: Enables Multi-Factor Authentication (MFA) for enhanced security.
   - `useManageMFA`: Provides functionality to manage MFA settings.
-- **Wallet Services Plugin (now integrated):**
-  - `useWalletServicesPlugin`: Composable to access the Wallet Services Plugin context and its functions.
+- **Wallet Services plugin (now integrated):**
+  - `useWalletServicesPlugin`: Composable to access the Wallet Services plugin context and its functions.
   - `useWalletConnectScanner`: Integrates WalletConnect scanner functionality.
   - `useWalletUI`: Manages wallet UI components and user interactions.
   - `useCheckout`: Facilitates cryptocurrency checkout processes.
@@ -126,11 +126,11 @@ The new composable structure is more granular:
 
 Please refer to the [Vue Modal SDK documentation](/embedded-wallets/sdk/vue/) for the SDK reference.
 
-### Common Vue Migration Patterns
+### Common Vue migration patterns
 
 Here are some common migration patterns when updating your Vue application from v9 to v10:
 
-#### Updating Existing Vue Components
+#### Updating existing Vue components
 
 If you have existing Vue components using v9 composables, here's how to migrate them:
 
@@ -164,7 +164,7 @@ If you have existing Vue components using v9 composables, here's how to migrate 
 </script>
 ```
 
-#### Error Handling and Loading States
+#### Error handling and loading states
 
 v10 composables provide better error handling and loading state management:
 
@@ -213,13 +213,13 @@ v10 composables provide better error handling and loading state management:
 </script>
 ```
 
-## Package Removal
+## Package removal
 
 When migrating Vue applications, ensure you remove these deprecated packages:
 
 - `@web3auth/modal-vue-composables`
 - `@web3auth/wallet-services-plugin-vue-composables`
 
-## Next Steps
+## Next steps
 
 Return to the main [v9 to v10 migration guide](../../js/migration-guides/modal/v9-to-v10/README.mdx) to continue with other migration aspects like MFA configurations, method renames, and chain configuration changes.
