@@ -40,12 +40,12 @@ For defining custom UI, branding, and translations for your brand app, you just 
 | Parameter | Description |
 | --- | --- |
 | `appName?` | Display name for the app in the UI. |
-| `logoLight?` | App logo to be used in dark mode. It accepts url in `string` as a value. |
-| `logoDark?` | App logo to be used in light mode. It accepts url in `string` as a value. |
+| `logoLight?` | App logo to be used in dark mode. It accepts URL as string. |
+| `logoDark?` | App logo to be used in light mode. It accepts URL as string. |
 | `defaultLanguage?` | Language which will be used by Web3Auth, app will use browser language if not specified. Default language is `LANGUAGE_TYPE.en`. Checkout `LANGUAGE_TYPE` for supported languages. |
 | `mode?` | Theme mode for the login modal. Choose between `THEME_MODE_TYPE.auto`, `THEME_MODE_TYPE.light` or `THEME_MODE_TYPE.dark` background modes. Default value is `ThemeModes.auto`. |
 | `theme?` | Used to customize the theme of the login modal. It accepts `Record` as a value. |
-| `appUrl?` | Url to be used in the Modal. It accepts url in `string` as a value. |
+| `appUrl?` | URL to be used in the Modal. It accepts URL as string. |
 | `useLogoLoader?` | Use logo loader. If `logoDark` and `logoLight` are null, the default Web3Auth logo will be used for the loader. Default value is false. |
 | `tncLink` | Terms and conditions link in `Partial<Record<LANGUAGE_TYPE, string>>`. |
 | `privacyPolicy` | Privacy policy link in `Partial<Record<LANGUAGE_TYPE, string>>`. |
@@ -73,7 +73,7 @@ export type WhiteLabelData = {
    */
   logoDark?: string
   /**
-   * language which will be used by web3auth. app will use browser language if not specified. if language is not supported it will use "en"
+   * Language which will be used by web3auth. App will use browser language if not specified. if language is not supported it will use "en":
    * en: english
    * de: german
    * ja: japanese
@@ -116,7 +116,7 @@ export type WhiteLabelData = {
   }
   /**
    * Language specific link for terms and conditions on torus-website. See (examples/vue-app) to configure
-   * e.g.
+   * for example,
    * tncLink: {
    *  en: "http://example.com/tnc/en",
    *  ja: "http://example.com/tnc/ja",
@@ -125,7 +125,7 @@ export type WhiteLabelData = {
   tncLink?: Partial<Record<LANGUAGE_TYPE, string>>
   /**
    * Language specific link for privacy policy on torus-website. See (examples/vue-app) to configure
-   * e.g.
+   * for example,
    * privacyPolicy: {
    *  en: "http://example.com/tnc/en",
    *  ja: "http://example.com/tnc/ja",

@@ -17,12 +17,16 @@ Effortlessly create and manage smart accounts for your users with just a few lin
 
 **Key features of smart accounts include:**
 
-- **Gas Abstraction:** Cover transaction fees for users, or allow users to pay for their own transactions using ERC-20 tokens.
-- **Batch Transactions:** Perform multiple transactions in a single call.
-- **Automated Transactions:** Allow users to automate actions, like swapping ETH to USDT when ETH hits a specific price.
-- **Custom Spending Limits:** Allow users to set tailored spending limits.
+- **Gas abstraction:** Cover transaction fees for users, or allow users to pay for their own transactions using ERC-20 tokens.
+- **Batch transactions:** Perform multiple transactions in a single call.
+- **Automated transactions:** Allow users to automate actions, like swapping ETH to USDT when ETH hits a specific price.
+- **Custom spending limits:** Allow users to set tailored spending limits.
 
-> For more information about ERC-4337 and its components, [check out our detailed blog post](https://blog.web3auth.io/an-ultimate-guide-to-web3-wallets-externally-owned-account-and-smart-contract-wallet/#introduction-to-eip-4337).
+:::tip
+
+For more about ERC-4337 and its components, [check out our detailed blog post](https://blog.web3auth.io/an-ultimate-guide-to-web3-wallets-externally-owned-account-and-smart-contract-wallet/#introduction-to-eip-4337).
+
+:::
 
 Our smart account integration streamlines your setup, allowing you to create and manage smart accounts using your favorite libraries like Viem, Ethers, and Wagmi. You don't need to rely on third-party packages to effortlessly create ERC-4337 compatible Smart Contract Wallets (SCWs), giving users the ability to perform batch transactions and efficiently manage gas sponsorship.
 
@@ -294,7 +298,7 @@ When calling `sendUserOperation`, it returns a UserOperation hash, not the trans
 
 ### Send Transaction Using ERC-20 paymaster
 
-You can use ERC-20 tokens to pay for transaction fees instead of the native token (e.g., ETH). This requires approving the token for use by the paymaster:
+You can use ERC-20 tokens to pay for transaction fees instead of the native token (for example, ETH). This requires approving the token for use by the paymaster:
 
 ```ts
 // Use your Web3Auth instance

@@ -19,14 +19,14 @@ Whitelabeling and UI customization have been significantly streamlined in v10, f
 
 ### 1. Branding (v9 `uiConfig`): Moves to dashboard
 
-- Most general branding settings previously in the client-side `uiConfig` (e.g., `appName`, `logoLight`, `logoDark`, `theme` colors) are **now primarily configured on the [Embedded Wallets dashboard](https://dashboard.web3auth.io)**. ![Branding customizations on Web3Auth / Embedded Wallets Dashboard](/img/embedded-wallets/whitelabel/modal/branding.gif)
+- Most general branding settings previously in the client-side `uiConfig` (for example,, `appName`, `logoLight`, `logoDark`, `theme` colors) are **now primarily configured on the [Embedded Wallets dashboard](https://dashboard.web3auth.io)**. ![Branding customizations on Web3Auth / Embedded Wallets Dashboard](/img/embedded-wallets/whitelabel/modal/branding.gif)
 - **Action:** Transfer v9 `uiConfig` branding to the dashboard. Client-side `uiConfig` in v10 `Web3AuthOptions` is minimal, for overrides not covered by the dashboard.
 
 ### 2. Modal login method display (v9 `modalConfig` in `initModal()`): New structure in `Web3AuthOptions`
 
 - **Previously (v9):** Customizing which login methods appear in the modal (and their appearance/order) was done via `modalConfig` in `initModal()` in v9.
-- **Now (v10):** This moves to `modalConfig` within `Web3AuthOptions` (at SDK instantiation). The structure is new, utilizing `connectors` (e.g., `WALLET_CONNECTORS.AUTH` for social/email, `WALLET_CONNECTORS.WALLET` for external wallets) and a `loginMethods` object within each connector.
-- Each login method (e.g., `google`, `email_passwordless`, `metamask`) is an object conforming to `LoginMethodConfig`, allowing you to set `name`, `showOnModal`, `authConnectionId (for custom auth), etc.
+- **Now (v10):** This moves to `modalConfig` within `Web3AuthOptions` (at SDK instantiation). The structure is new, utilizing `connectors` (for example,, `WALLET_CONNECTORS.AUTH` for social/email, `WALLET_CONNECTORS.WALLET` for external wallets) and a `loginMethods` object within each connector.
+- Each login method (for example,, `google`, `email_passwordless`, `metamask`) is an object conforming to `LoginMethodConfig`, allowing you to set `name`, `showOnModal`, `authConnectionId (for custom auth), for example.
   ```typescript
   // v10: modalConfig in Web3AuthOptions
   const web3AuthOptions: Web3AuthOptions = {
@@ -47,7 +47,7 @@ Whitelabeling and UI customization have been significantly streamlined in v10, f
 
 ### 3. Auth adapter whitelabeling in v9: no longer supported
 
-- In v9, `whiteLabel` settings in an `@web3auth/auth-adapter` instance could customize intermediate auth screens (e.g., social login pop-ups).
+- In v9, `whiteLabel` settings in an `@web3auth/auth-adapter` instance could customize intermediate auth screens (for example,, social login pop-ups).
 - **In v10, passing this `whiteLabel` configuration is no longer supported since there is no way to configure auth adapter settings.**
 - **Action:** Remove v9 `AuthAdapter` `whiteLabel` configurations. Ensure your dashboard branding is comprehensive.
 

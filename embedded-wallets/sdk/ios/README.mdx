@@ -142,7 +142,7 @@ The Embedded Wallets iOS SDK offers a rich set of advanced configuration options
 
 :::tip
 
-Head over to the advanced configuration sections to learn more about each configuration option.
+See the advanced configuration sections to learn more about each configuration option.
 
 :::
 
@@ -175,7 +175,7 @@ web3Auth = Web3Auth(W3AInitParams(
     redirectUrl: "com.yourapp.bundleid://auth",
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from Embedded Wallets/Web3Auth dashboard
         typeOfLogin: TypeOfLogin.google,
         clientId: "YOUR_GOOGLE_CLIENT_ID",
       )
@@ -229,9 +229,9 @@ let address = account.address
 // Create a client
 let client = EthereumHttpClient(
     // Please avoid using public RPC URL in production, use services
-    // like Infura, Quicknode, etc.
+    // like Infura.
     url: URL.init(string: rpcUrl)!,
-    // Replace with the chain id of the network you want to connect to
+    // Replace with the chain ID of the network you want to connect to
     network: .custom(chainId)
 )
 
@@ -242,7 +242,7 @@ let balanceResponse = try await client.eth_getBalance(
     block: .Latest
 )
 
-// Convert the balance from Wei to Ether format
+// Convert the balance from wei to Ether format
 let balance = toEther(wei: balanceResponse)
 ```
 

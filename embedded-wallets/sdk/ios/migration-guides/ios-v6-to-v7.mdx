@@ -104,7 +104,7 @@ web3Auth = await Web3Auth(
     // focus-end
 ```
 
-#### change of `W3AInitParams` object
+#### Change of `W3AInitParams` object
 
 The `Web3Auth` constructor takes an object called `W3AInitParams` as input. Below are the available fields of the `W3AInitParams` object. With v7, additional 2 parameters, which are `MfaSettings` and `sessionTime` can be set.
 
@@ -258,18 +258,19 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 With V7, lots of package dependencies have been updated. Among that, version of package `web3.swift` is updated to v1.6.0. Ethereum-related calls from the client changed lot, so need to care about that.
 
 ### Extraloginoptions
+
 With V7, ExtraLoginOptions now has one more parameter which is `additionalParams: [String : String]?`
 
 <TabItem value="table">
 
-| Parameter                   | Type      | Description                                                                                                                                  |
-| --------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `domain`                    | `string`  | Your Auth0 account domain such as `example.auth0.com` or `example.mycompany.com` etc. **Use any random string in case of custom JWT login.** |
-| `client_id`                 | `string`  | The Client ID found on your Auth0 Application settings page. **Use web3auth client id in case of custom JWT login.**                         |
-| `redirect_uri`              | `string`  | The default URL where Auth0 will redirect your browser to with the authentication result.                                                    |
-| `leeway`                    | `number`  | The value in seconds used to account for clock skew in JWT expirations.                                                                      |
-| `verifierIdField`           | `string`  | The field in JWT token which maps to verifier id.                                                                                            |
-| `isVerifierIdCaseSensitive` | `boolean` | Whether the verifier id field is case sensitive. Defaults to `true`.                                                                          |
+| Parameter                   | Type      | Description                                       |
+| --------------------------- | --------- | ------------------------------------------------- |
+| `domain`                    | `string`  | Your Auth0 account domain such as `example.auth0.com` or `example.mycompany.com`. **Use any random string in case of custom JWT login.** |
+| `client_id`                 | `string`  | The Client ID found on your Auth0 Application settings page. **Use Web3Auth client ID in case of custom JWT login.**  |
+| `redirect_uri`              | `string`  | The default URL where Auth0 will redirect your browser to with the authentication result.  |
+| `leeway`                    | `number`  | The value in seconds used to account for clock skew in JWT expirations. |
+| `verifierIdField`           | `string`  | The field in JWT token which maps to verifier ID. |
+| `isVerifierIdCaseSensitive` | `boolean` | Whether the verifier ID field is case sensitive. Defaults to `true`. |
 
 </TabItem>
 

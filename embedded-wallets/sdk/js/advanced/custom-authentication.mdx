@@ -184,12 +184,12 @@ export type LoginParamMap = {
 
 | Parameter                  | Description                                                                                                                        |
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `loginHint?`               | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` & `sms_passwordless` logins. |
+| `loginHint?`               | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` and `sms_passwordless` logins. |
 | `idToken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                            |
-| `authConnection?`          | The auth provider to use for login (e.g., "google", "facebook").                                                                   |
+| `authConnection?`          | The auth provider to use for login (for example,, "google", "facebook").                                                                   |
 | `authConnectionId?`        | The ID configured in your Embedded Wallets dashboard for the connection.                                                                   |
 | `groupedAuthConnectionId?` | The grouped Auth Connection ID to be used for login.                                                                               |
-| `extraLoginOptions?`       | Custom OAuth options (e.g., login_hint, domain, etc.).                                                                             |
+| `extraLoginOptions?`       | Custom OAuth options (for example,, login_hint, domain).                                                                             |
 
   </TabItem>
 
@@ -210,11 +210,11 @@ export type LoginParamMap = {
    */
   authConnection: AUTH_CONNECTION_TYPE | CUSTOM_AUTH_CONNECTION_TYPE;
   /**
-   * The auth connection id to be used for login.
+   * The auth connection ID to be used for login.
    */
   authConnectionId?: string;
   /**
-   * The grouped auth connection id to be used for login.
+   * The grouped auth connection ID to be used for login.
    */
   groupedAuthConnectionId?: string;
   /**
@@ -269,7 +269,7 @@ export type LoginParamMap = {
    */
   curve?: SUPPORTED_KEY_CURVES_TYPE;
   /**
-   * Allows the dapp to set a custom redirect url for the manage mfa flow.
+   * Allows the dapp to set a custom redirect URL for the manage MFA flow.
    *
    */
   dappUrl?: string;
@@ -310,10 +310,10 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
 
 | Parameter               | Description                                                 |
 | ----------------------- | ----------------------------------------------------------- |
-| `isUserIdCaseSensitive` | Whether the user id field is case sensitive [Default: true] |
-| `domain`                | Auth provider domain (e.g., "example.auth0.com")            |
+| `isUserIdCaseSensitive` | Whether the user ID field is case sensitive [Default: true] |
+| `domain`                | Auth provider domain (for example,, "example.auth0.com")            |
 | `client_id`             | Client ID from your auth provider                           |
-| `scope`                 | OAuth scopes (e.g., "email profile openid")                 |
+| `scope`                 | OAuth scopes (for example,, "email profile openid")                 |
 | `response_type`         | Response type for OAuth flow                                |
 | `login_hint`            | Pre-fill user identifier                                    |
 
@@ -338,7 +338,7 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
      */
     userIdField?: string;
     /**
-     * Whether the user id field is case sensitive
+     * Whether the user IDfield is case sensitive
      * @defaultValue true
      */
     isUserIdCaseSensitive?: boolean;
@@ -371,7 +371,7 @@ Implicit logins are the easiest way to authenticate users with your custom authe
 - Twitch
 - Auth0 (Custom)
 
-In addition to these you can also use any other provider like Auth0, AWS Cognito, Azure AD, etc. by providing the particular details of their login within the `extraLoginOptions` object within the `connectTo` function.
+In addition to these you can also use any other provider (like Auth0, AWS Cognito, Azure AD) by providing the particular details of their login within the `extraLoginOptions` object within the `connectTo` function.
 
 #### Usage
 
@@ -457,7 +457,7 @@ JWT login is a way to authenticate users with your custom authentication service
 
 :::warning
 
-If you have not configured on the dashboard, whether you user id is case sensitive or not, then you need to pass the `isUserIdCaseSensitive` option to the `extraLoginOptions`.
+If you have not configured on the dashboard, whether you user ID is case sensitive or not, then you need to pass the `isUserIdCaseSensitive` option to the `extraLoginOptions`.
 
 :::
 
@@ -505,7 +505,7 @@ const loginWithAuth0 = async () => {
 
     const idToken = (await getIdTokenClaims())?.__raw.toString()
     if (!idToken) {
-      throw new Error('No id token found')
+      throw new Error('No ID token found')
     }
 
     // focus-start
@@ -594,9 +594,10 @@ const loginWithJWT = async () => {
 </Tabs>
 
 ### Grouped auth connections
+
 Grouped auth connections allows you to group multiple auth connections together and use them as a single connection. This is useful when you want to authenticate the user with multiple providers and require the same user wallet address to be generated.
 
-For example, you can group Google & Email Passwordless providers together and use them as a single connection. Now, if your user logs in with Google Auth or even with Email Passwordless using the same email, they will get the same wallet address.
+For example, you can group Google and email passwordless providers together and use them as a single connection. Now, if your user logs in with Google Auth or even with email passwordless using the same email, they will get the same wallet address.
 
 :::info Prerequisites
 
@@ -671,7 +672,7 @@ const loginWithAuth0 = async () => {
     await loginWithPopup()
     const idToken = (await getIdTokenClaims())?.__raw.toString()
     if (!idToken) {
-      throw new Error('No id token found')
+      throw new Error('No ID token found')
     }
 
     // focus-start

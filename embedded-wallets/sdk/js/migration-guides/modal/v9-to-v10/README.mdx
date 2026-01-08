@@ -82,7 +82,7 @@ import { AuthAdapter } from '@web3auth/auth-adapter'
 
 const authAdapter = new AuthAdapter({
   loginSettings: {
-    mfaLevel: 'mandatory', // e.g., default, optional, mandatory, none
+    mfaLevel: 'mandatory', // for example,, default, optional, mandatory, none
   },
   adapterSettings: {
     mfaSettings: {
@@ -121,7 +121,7 @@ const web3AuthOptions: Web3AuthOptions = {
 **Key changes:**
 
 - **Individual MFA Factor Settings:** Move from `AuthAdapter.adapterSettings.mfaSettings` to `Web3AuthOptions.mfaSettings`
-- **Factor Keys:** Change from descriptive strings (e.g., `deviceShareFactor`) to enum values (e.g., `[MFA_FACTOR.DEVICE]`)
+- **Factor Keys:** Change from descriptive strings (for example,, `deviceShareFactor`) to enum values (for example,, `[MFA_FACTOR.DEVICE]`)
 - **MFA Level:** Move from `AuthAdapter.loginSettings.mfaLevel` to `Web3AuthOptions.mfaLevel`
 
 ### 3. `useCoreKitKey` Renamed to `useSFAKey`
@@ -171,6 +171,6 @@ For specific functionality or frameworks, refer to these dedicated migration gui
 
 ## Next steps
 
-- [Embedded wallets documentation - Web SDK v10](https://web3auth.io/embedded-wallets/sdk/js)
+- See the [Embedded wallets documentation - Web SDK v10](https://web3auth.io/embedded-wallets/sdk/js)
 - [Web3Auth v10 examples on GitHub](https://github.com/Web3Auth/web3auth-examples)
 - [Join the community](https://web3auth.io/community)

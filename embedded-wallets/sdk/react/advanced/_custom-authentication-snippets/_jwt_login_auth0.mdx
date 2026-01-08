@@ -7,7 +7,7 @@ const loginWithAuth0 = async () => {
 
     const idToken = (await getIdTokenClaims())?.__raw.toString();
     if (!idToken) {
-      throw new Error("No id token found");
+      throw new Error("No ID token found");
     }
 
     // focus-start

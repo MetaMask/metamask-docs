@@ -18,7 +18,7 @@ import Tabs from "@theme/Tabs";
 | `web3AuthNetwork`                 | (Mandatory) Web3Auth network to use for the session and the issued `idToken`. Default is `sapphire_mainnet`.                                                                               |
 | `enableLogging?`                  | Setting to true enables logs. Default is false.                                                                                                                                      |
 | `sessionTime?`                    | Session Time (in seconds) for `idToken` issued by Web3Auth for server side verification. Default is 7 days (7 \* 86400). Max value can be 30 days (86400 \* 30) and min can be 1 sec (1) |
-| `useSFAKey?`                      | Uses Single Factor Auth SDK key with web3auth provider. Default is false.                                                                                                                |
+| `useSFAKey?`                      | Uses Single Factor Auth SDK key with Web3Auth provider. Default is false.                                                                                                                |
 | `storageType?`                    | Setting to `local` persists social login session across browser tabs. Default is `local`.                                                                                            |
 | `defaultChainId?`                 | Default chain ID to use. Your first chain will be used as default.                                                                                                                       |
 | `multiInjectedProviderDiscovery?` | Whether to enable discovery of injected wallets in the browser. Default is true.                                                                                                         |
@@ -58,8 +58,8 @@ export interface Web3AuthOptions extends IWeb3AuthCoreOptions {
 
 export interface IWeb3AuthCoreOptions {
   /**
-   * Client id for web3auth.
-   * You can obtain your client ID from the Embedded Wallets/web3auth developer dashboard.
+   * Client ID for Web3Auth.
+   * You can obtain your client ID from the Embedded Wallets/Web3Auth developer dashboard.
    * You can set any random string for this on localhost.
    */
   clientId: string;
@@ -96,12 +96,12 @@ export interface IWeb3AuthCoreOptions {
    */
   web3AuthNetwork: WEB3AUTH_NETWORK_TYPE;
   /**
-   * Uses core-kit key with web3auth provider
+   * Uses core-kit key with Web3Auth provider
    * @defaultValue false
    */
   useSFAKey?: boolean;
   /**
-   * Whitelabel options for web3auth
+   * Whitelabel options for Web3Auth
    */
   uiConfig?: UIConfig;
   /**

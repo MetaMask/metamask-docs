@@ -54,7 +54,7 @@ The `LoginConfigItem` struct contains various parameters that define the behavio
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `verifier`               | The name of the verifier that you have registered on the Embedded Wallets dashboard. It's a mandatory field, and accepts `string` as a value.                                                                                                                                                                             |
 | `typeOfLogin`            | Type of login for this verifier. This value will affect the login flow. For example, if you choose `google`, a Google sign-in flow will be used. If you choose `jwt`, you should provide your own JWT token, and no sign-in flow will be presented. It's a mandatory field, and accepts `TypeOfLogin` as a value. |
-| `clientId`               | Client ID provided by your login provider, e.g., Google's Client ID or Web3Auth's client ID if using `jwt` as `TypeOfLogin`. It's a mandatory field, and accepts `string` as a value.                                                                                                                             |
+| `clientId`               | Client ID provided by your login provider, e.g. Google's Client ID or Web3Auth's client ID if using `jwt` as `TypeOfLogin`. It's a mandatory field, and accepts `string` as a value.                                                                                                                             |
 | `name?`                  | Display name for the verifier. If null, the default name is used. It accepts `string` as a value.                                                                                                                                                                                                                 |
 | `description?`           | Description for the button. If provided, it renders as a full-length button; otherwise, an icon button is shown. It accepts `string` as a value.                                                                                                                                                                  |
 | `verifierSubIdentifier?` | The field in the JWT token that maps to the verifier ID. Ensure you selected the correct JWT verifier ID in the developer dashboard. It accepts `string` as a value.                                                                                                                                              |
@@ -110,15 +110,15 @@ public enum TypeOfLogin
 
 The `extraLoginOptions` parameter can be used to pass additional options required by specific login providers.
 
-| Parameter                    | Description                                                                                                                                                 |
-| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `domain?`                    | Your custom authentication domain in `string` format. For example, if you are using Auth0, it can be `example.auth0.com`.                                   |
-| `client_id?`                 | Client ID in `string` format, provided by your login provider and used for the custom verifier.                                                             |
+| Parameter                    | Description                                                |
+| ---------------------------- | ---------------------------------------------------------- |
+| `domain?`                    | Your custom authentication domain in `string` format. For example, if you are using Auth0, it can be `example.auth0.com`. |
+| `client_id?`                 | Client ID in `string` format, provided by your login provider and used for the custom verifier. |
 | `verifierIdField?`           | The field in JWT token which maps to verifier ID. Ensure you select the correct JWT verifier ID in the developer dashboard. It takes a `string` as a value. |
-| `isVerifierIdCaseSensitive?` | Boolean to confirm whether the verifier ID field is case-sensitive or not.                                                                                  |
-| `prompt?`                    | Prompt shown to the user during the authentication process. It takes a `string` as a value.                                                                 |
-| `id_token?`                  | JWT (ID token) to be passed for login.                                                                                                                      |
-| `login_hint?`                | It is used to send the user's email address during Email Passwordless login. It takes a `string` as a value.                                                |
+| `isVerifierIdCaseSensitive?` | Boolean to confirm whether the verifier ID field is case-sensitive or not. |
+| `prompt?`                    | Prompt shown to the user during the authentication process. Accepts a string value. |
+| `id_token?`                  | JWT (ID token) to be passed for login. |
+| `login_hint?`                | It is used to send the user's email address during email passwordless login. Accepts a string value. |
 
 ## Single verifier
 
@@ -167,7 +167,9 @@ public void loginGoogle()
 }
 ```
 
-#### Using JWT login (e.g., Auth0)
+#### Using JWT login 
+
+To use JWT login (for example, Auth0):
 
 ```csharp
 public void loginJWT()
