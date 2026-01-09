@@ -1,0 +1,49 @@
+---
+title: HyperEVM eth_getTransactionReceipt
+sidebar_label: eth_getTransactionReceipt
+description: Gets transaction receipt by transaction hash on HyperEVM.
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+import Description from "/services/reference/_partials/_eth_gettransactionreceipt-description.mdx"
+
+# `eth_getTransactionReceipt`
+
+<Description />
+
+:::info HyperEVM limitation
+HyperEVM only supports the **latest block** view. In practice, the transaction hash must exist in the latest block.
+Historical receipt lookups are not available.
+:::
+
+## Parameters
+
+import Params from "/services/reference/_partials/_eth_gettransactionreceipt-parameters.mdx"
+
+<Params />
+
+## Returns
+
+import Returns from "/services/reference/_partials/_eth_gettransactionreceipt-returns.mdx"
+
+<Returns />
+
+## Example
+
+import Example from "/services/reference/_partials/_eth_gettransactionreceipt-example.mdx"
+
+<Example />
+
+### Request
+
+import Request from "./_eth_gettransactionreceipt-request.mdx"
+
+<Request />
+
+### Response
+
+import Response from "/services/reference/_partials/_eth_gettransactionreceipt-response.mdx"
+
+<Response />

@@ -1,0 +1,14 @@
+- Transaction object with the following fields:
+  - `from`: (string) address (20 bytes) the transaction is sent from.
+  - `to`: (string) _[required]_ address (20 bytes) the transaction is directed to.
+  - `gas`: (string) hexadecimal value of the gas provided for the transaction execution.
+  - `gasPrice`: (string) hexadecimal value of the `gasPrice` used for each paid gas.
+  - `maxPriorityFeePerGas`: (string) maximum fee, in wei, the sender is willing to pay per gas above the base fee.
+  - `maxFeePerGas`: (string) maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
+  - `value`: (string) hexadecimal of the value sent with this transaction.
+  - `data`: (string) hash of the method signature and encoded parameters.
+- `block parameter`: (string) [_required_] must be `latest` on HyperEVM.
+- Optional tracing options object with the following fields:
+  - `tracer`: (string) _[optional]_ type of tracer. Supports `callTracer`.
+
+
