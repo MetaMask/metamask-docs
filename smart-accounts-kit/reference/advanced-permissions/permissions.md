@@ -40,7 +40,7 @@ const permission = {
     tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
     periodAmount: parseUnits("10", 6),
     periodDuration: 86400,
-    justification?: "Permission to transfer 1 USDC every day",
+    justification?: "Permission to transfer 10 USDC every day",
   },
 };
 ```

@@ -175,11 +175,11 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     type: "erc20-token-periodic",
     data: {
       tokenAddress,
-      // 1 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
+      // 10 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
       periodAmount: parseUnits("10", 6),
       // 1 day in seconds
       periodDuration: 86400,
-      justification?: "Permission to transfer 1 USDC every day",
+      justification?: "Permission to transfer 10 USDC every day",
     },
   },
   isAdjustmentAllowed: true,
