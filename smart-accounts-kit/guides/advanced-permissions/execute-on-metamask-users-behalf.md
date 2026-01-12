@@ -179,7 +179,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       periodAmount: parseUnits("10", 6),
       // 1 day in seconds
       periodDuration: 86400,
-      justification?: "Permission to transfer 10 USDC every day",
+      justification: "Permission to transfer 10 USDC every day",
     },
   },
   isAdjustmentAllowed: true,
