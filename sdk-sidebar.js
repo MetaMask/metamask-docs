@@ -161,13 +161,61 @@ const sdkSidebar = {
     'solana/index',
     {
       type: 'category',
+      label: 'Quickstart',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'solana/connect/quickstart/javascript',
+        'solana/connect/quickstart/dynamic',
+        'solana/connect/quickstart/web3auth',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Guides',
       collapsible: false,
       collapsed: false,
       items: [
+        'solana/connect/guides/use-framework-kit',
         'solana/connect/guides/use-wallet-adapter',
-        'solana/connect/guides/send-legacy-transaction',
-        'solana/connect/guides/send-versioned-transaction',
+        {
+          type: 'category',
+          label: 'Send transactions',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'solana/connect/guides/send-legacy-transaction',
+            'solana/connect/guides/send-versioned-transaction',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Sign data',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'solana/connect/guides/sign-data/sign-message',
+            'solana/connect/guides/sign-data/siws',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Tutorials',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        {
+          type: "link",
+          label: "Integrate SNS with MM Connect",
+          href: "/tutorials/"
+        },
+        {
+          type: "link",
+          label: "Integrate Solana Pay with MM Connect",
+          href: "/tutorials/"
+        },
       ],
     },
   ],
