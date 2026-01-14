@@ -44,6 +44,13 @@ const config = {
       },
     },
     {
+      tagName: 'meta',
+      attributes: {
+        name: 'algolia-site-verification',
+        content: '1AA18A875C92F2F7',
+      },
+    },
+    {
       tagName: 'link',
       attributes: {
         rel: 'icon',
