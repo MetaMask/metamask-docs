@@ -762,13 +762,10 @@ const config = {
         // The application ID provided by Algolia
         appId: 'W4ZOZ72ZFG',
         apiKey: 'b4e925aa9bf05e5bef2e40b3ee6ee431',
-        indexName: 'MetaMask Documentation',
-        contextualSearch: true,
+        indexName: 'mmdocs',
+        contextualSearch: false,
         askAi: {
           assistantId: 'REak1eiP5wfp',
-          indexName: 'MetaMask Documentation',
-          apiKey: 'b4e925aa9bf05e5bef2e40b3ee6ee431',
-          appId: 'W4ZOZ72ZFG',
         },
         // Optional: see doc section below
         // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
