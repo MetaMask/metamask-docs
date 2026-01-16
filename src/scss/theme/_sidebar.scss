@@ -64,13 +64,13 @@
 
     /* Reduce top-level category label size ("Get started", "Guides", etc.) */
     &.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 400;
     }
 
     /* Top-level doc pages (e.g. "Introduction") are link items, not categories */
     &.theme-doc-sidebar-item-link-level-1 > .menu__link {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 400;
     }
 
