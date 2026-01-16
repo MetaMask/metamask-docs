@@ -62,6 +62,26 @@
       border-radius: 0;
     }
 
+    /* Reduce top-level category label size ("Get started", "Guides", etc.) */
+    &.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link {
+      font-size: 1.6rem;
+      font-weight: 400;
+    }
+
+    /* Top-level doc pages (e.g. "Introduction") are link items, not categories */
+    &.theme-doc-sidebar-item-link-level-1 > .menu__link {
+      font-size: 1.6rem;
+      font-weight: 400;
+    }
+
+    /* Ensure active item + active parent path can override the level-1 "unbold" rules above */
+    &.theme-doc-sidebar-item-category-level-1
+      > .menu__list-item-collapsible
+      > .menu__link.menu__link--active,
+    &.theme-doc-sidebar-item-link-level-1 > .menu__link.menu__link--active {
+      font-weight: 700;
+    }
+
     &.theme-doc-sidebar-item-category-level-2,
     &.theme-doc-sidebar-item-category-level-3,
     &.theme-doc-sidebar-item-category-level-4,
@@ -76,6 +96,11 @@
         color: var(--ifm-menu-color);
         font-weight: 400;
         font-size: 1.5rem;
+
+        /* Ensure the selected page + active ancestor path can override the base weight */
+        &.menu__link--active {
+          font-weight: 600;
+        }
       }
 
       &:not(:first-child) {
@@ -109,8 +134,10 @@
       padding: 0.6rem 2.4rem;
     }
 
-    &--active {
+    /* Active page + active ancestor categories ("parent path") */
+    &.menu__link--active {
       color: var(--ifm-menu-color-active);
+      font-weight: 600;
 
       + .menu__caret {
         opacity: 1;
