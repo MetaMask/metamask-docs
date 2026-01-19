@@ -7,7 +7,7 @@
   --docsearch-modal-background: var(--ifm-color-secondary-lighter);
   /* Search box */
   --docsearch-searchbox-background: var(--ifm-color-secondary);
-  --docsearch-searchbox-focus-background: var(--ifm-color-white);
+  --docsearch-searchbox-focus-background: var(--general-gray-light);
   --docsearch-primary-color: var(--general-black);
   --docsearch-searchbox-shadow: 0 0 0 0.2rem var(--docsearch-primary-color);
   --docsearch-highlight-color: var(--general-black);
@@ -50,6 +50,20 @@
   --docsearch-modal-height: 60rem;
   --docsearch-searchbox-height: 5.6rem;
   --docsearch-footer-height: 4.4rem;
+
+  .DocSearch-Button {
+    border: 1px solid var(--docsearch-primary-color);
+    background-color: var(--docsearch-searchbox-focus-background);
+    box-shadow: 0 0 0 0.1rem var(--docsearch-primary-color);
+  }
+
+  .DocSearch-Button:hover {
+    box-shadow: 0 0 0 0.2rem var(--docsearch-primary-color);
+  }
+
+  .DocSearch-Button:focus-visible {
+    box-shadow: 0 0 0 0.3rem var(--docsearch-primary-color);
+  }
 
   .DocSearch-Modal {
     border-radius: 0;
