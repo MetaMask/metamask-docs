@@ -125,7 +125,7 @@
   }
 
   .DocSearch-Clear:hover::before {
-    color: var(--docsearch-highlight-color);
+    background-color: var(--docsearch-highlight-color);
   }
 
   .DocSearch-Input {
