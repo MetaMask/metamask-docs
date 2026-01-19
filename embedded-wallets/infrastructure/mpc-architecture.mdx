@@ -10,12 +10,17 @@ import KeyInitialisationFlow from '@site/static/img/embedded-wallets/infrastruct
 import KeyUsageFlow from '@site/static/img/embedded-wallets/infrastructure/key-usage-tss-flow.png'
 import TkeyMpcFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/tkey-mpc-flow-dark.png'
 import TkeyMpcFlowLight from '@site/static/img/embedded-wallets/flow-diagrams/tkey-mpc-flow-light.png'
+import Options from '../_partials/_sdk-key-model-table.mdx'
 
 This document provides an in-depth exploration of the technical architecture of the Multi-Party Computation (MPC)-based SDK, this includes the MPC Core Kit SDK.
 
-<!-- This deserves link to the SDK: which of these docs pages covers the Core Kit SDK? Alt is this is enterprise grade option only, in which case consider importing ./_partials/_sdk-key-model-table.mdx-->
+:::info
 
 The only difference between the [Shamir Secret Sharing](./glossary.mdx#shamir-secret-sharing) (SSS)-based SDKs and MPC SDKs are that during usage/login MPC SDKs do not reconstruct user private keys.
+
+<Options />
+
+:::
 
 ## Overview of cryptographic and blockchain support (compatibility and implementations)
 

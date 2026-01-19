@@ -9,6 +9,7 @@ import ExpandingSharesFlow from '@site/static/img/embedded-wallets/infrastructur
 import KeyInitialisationFlow from '@site/static/img/embedded-wallets/infrastructure/key-initialisation-sss-flow.png'
 import KeyReconstructionFlow from '@site/static/img/embedded-wallets/infrastructure/key-reconstruction-sss-flow.png'
 import SSSArchitectureFlow from '@site/static/img/embedded-wallets/infrastructure/sss-architecture-flow.png'
+import Options from '../_partials/_sdk-key-model-table.mdx'
 
 This document provides an in-depth exploration of the technical architecture of the [Shamir's Secret Sharing](./glossary.mdx#shamir-secret-sharing) (SSS)-based SDKs, this includes the current Plug and Play and Single Factor Auth Mobile SDKs.
 
@@ -16,7 +17,9 @@ SSS is a base form of Multi-Party Computation (MPC) that splits a secret into $n
 
 :::note
 
-Alternatively, consider the [MPC architecture ](/embedded-wallets/infrastructure/mpc-architecture/) which does not require the key to be reconstructed for usage.
+Alternatively, consider the [MPC architecture ](/embedded-wallets/infrastructure/mpc-architecture/) which does not fully-reconstruct the key.
+
+<Options />
 
 :::
 

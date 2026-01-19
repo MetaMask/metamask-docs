@@ -210,7 +210,7 @@ const sidebar = {
         {
           type: "link",
           label: "Compliance, Audits and Trust", 
-          href: "https://trust.web3auth.io", // needs proofing (landing page missing stop)
+          href: "https://trust.web3auth.io",
         },
       ],
     },
