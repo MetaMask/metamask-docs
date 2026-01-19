@@ -17,6 +17,20 @@
   --docsearch-hit-background: var(--ifm-color-white);
   /* Footer */
   --docsearch-footer-background: var(--ifm-color-white);
+
+  // Light mode: keep text/icons dark; use a light highlight background for hover/selection.
+  // We use !important here because DocSearch styles and our shared rules below
+  // set a dark background for hover/selection.
+  .DocSearch-Hit[aria-selected='true'] a,
+  .DocSearch-Hit[aria-selected='false'] a:hover {
+    background-color: var(--docsearch-hit-highlight-color) !important;
+    color: var(--general-black) !important;
+  }
+
+  .DocSearch-Hit[aria-selected='true'] a :is(.DocSearch-Hit-title, .DocSearch-Hit-path, .DocSearch-Hit-text),
+  .DocSearch-Hit[aria-selected='false'] a:hover :is(.DocSearch-Hit-title, .DocSearch-Hit-path, .DocSearch-Hit-text) {
+    color: var(--general-black) !important;
+  }
 }
 
 [data-theme='dark'] .DocSearch {
@@ -197,6 +211,11 @@
 
   .DocSearch-Hit[aria-selected='true'] a {
     background-color: var(--general-black);
+
+    .DocSearch-Hit-title,
+    .DocSearch-Hit-path {
+      color: var(--docsearch-hit-active-color);
+    }
   }
 
   .DocSearch-HitsFooter a {
