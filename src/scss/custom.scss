@@ -359,6 +359,30 @@ ol {
   font-size: 1.4rem !important;
 }
 
+.DocSearch-Button-Keys {
+  gap: 0 !important;
+}
+
+.DocSearch-Button-Key {
+  font-size: 1.6rem !important;
+}
+
+.DocSearch-Button-Key:last-child {
+  display: none !important;
+}
+
+.DocSearch-Button-Key:first-child {
+  width: auto !important;
+  padding: 0 0.35rem !important;
+  gap: 0.15rem;
+}
+
+.DocSearch-Button-Key:first-child::after {
+  content: 'K';
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
 /* Breadcrumbs */
 
 .breadcrumbs {
