@@ -4,9 +4,9 @@ sidebar_label: Overview
 description: '@web3auth/modal Vue Composables | Embedded Wallets'
 ---
 
-Web3Auth offers a comprehensive suite of Vue composables to streamline integration and state management within your Vue applications. These composables abstract away common authentication and wallet operations, enabling you to implement Web3Auth features with minimal boilerplate. Each composable is focused on a specific aspect of Web3Auth functionality, making it easy to implement authentication, wallet operations, and blockchain interactions in your Vue projects.
+Embedded Wallets offers a comprehensive suite of Vue composables to streamline integration and state management within your Vue applications. These composables abstract away common authentication and wallet operations, enabling you to implement Embedded Wallets features with minimal boilerplate. Each composable is focused on a specific aspect of Embedded Wallets functionality, making it easy to implement authentication, wallet operations, and blockchain interactions in your Vue projects.
 
-## List of Vue Composables
+## List of Vue composables
 
 :::tip
 
@@ -14,45 +14,45 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 :::
 
-### Web3Auth Composables
+### Embedded Wallets composables
 
 | Composable Name | Description                                                       |
 | --------------- | ----------------------------------------------------------------- |
-| `useWeb3Auth`   | Core composable for Web3Auth initialization and state management. |
+| [`useWeb3Auth` ](./useWeb3Auth.mdx)  | Core composable for Embedded Wallets/Web3Auth initialization and state management. |
 
-### Authentication Composables
+### Authentication composables
 
 | Composable Name         | Description                            |
 | ----------------------- | -------------------------------------- |
-| `useWeb3AuthConnect`    | Handles Web3Auth connection processes. |
-| `useWeb3AuthDisconnect` | Manages disconnection from Web3Auth.   |
+| [`useWeb3AuthConnect`](./useWeb3AuthConnect.mdx)       | Handles Embedded Wallets/Web3Auth connection processes. |
+| [`useWeb3AuthDisconnect`](./useWeb3AuthDisconnect.mdx) | Manages disconnection from Embedded Wallets/Web3Auth.   |
 
-### Identity Composables
+### Identity composables
 
-| Composable Name    | Description                                              |
-| ------------------ | -------------------------------------------------------- |
-| `useIdentityToken` | Retrieves and manages identity tokens.                   |
-| `useWeb3AuthUser`  | Provides access to the authenticated user's information. |
+| Composable Name    | Description                                              					      |
+| ------------------ | -----------------------------------------------------------------------------------|
+| [`useIdentityToken`](./useIdentityToken.mdx) | Retrieves and manages identity tokens.                   |
+| [`useWeb3AuthUser`](./useWeb3AuthUser.mdx)   | Provides access to the authenticated user's information. |
 
-### Blockchain Composables
+### Blockchain composables
 
-| Composable Name  | Description                                             |
-| ---------------- | ------------------------------------------------------- |
-| `useSwitchChain` | Allows switching between different blockchain networks. |
+| Composable Name  | Description                                    						         |
+| ---------------- | ------------------------------------------------------------------------------- |
+| [`useSwitchChain`](./useSwitchChain.mdx) | Allows switching between different blockchain networks. |
 
-### MFA Composables
+### MFA composables
 
-| Composable Name | Description                                                      |
-| --------------- | ---------------------------------------------------------------- |
-| `useEnableMFA`  | Enables Multi-Factor Authentication (MFA) for enhanced security. |
-| `useManageMFA`  | Provides functionality to manage MFA settings.                   |
+| Composable Name | Description                                             					           |
+| --------------- | -------------------------------------------------------------------------------------- |
+| [`useEnableMFA`](./useEnableMFA.mdx)  | Enables Multi-Factor Authentication (MFA) for enhanced security. |
+| [`useManageMFA`](./useManageMFA.mdx)  | Provides functionality to manage MFA settings.                   |
 
-### Wallet Services Plugin Composables
+### Wallet Services plugin composables
 
-| Composable Name           | Description                                         |
-| ------------------------- | --------------------------------------------------- |
-| `useWalletConnectScanner` | Integrates WalletConnect scanner functionality.     |
-| `useWalletUI`             | Manages wallet UI components and user interactions. |
-| `useCheckout`             | Facilitates cryptocurrency checkout processes.      |
-| `useSwap`                 | Enables token swapping capabilities.                |
-| `useWalletServicesPlugin` | Provides access to wallet service plugins.          |
+| Composable Name           | Description                                      							       |
+| ------------------------- | -------------------------------------------------------------------------------- |
+| [`useWalletConnectScanner`](./useWalletConnectScanner.mdx) | Integrates WalletConnect scanner functionality. |
+| [`useWalletUI`](./useWalletUI.mdx)       			         | Manages wallet UI components and user interactions. |
+| [`useCheckout` ](./useCheckout.mdx)          				 | Facilitates cryptocurrency checkout processes. |
+| [`useSwap` ](./useSwap.mdx)                			  	 | Enables token swapping capabilities.  |
+| [`useWalletServicesPlugin`](./useWalletServicesPlugin.mdx) | Provides access to wallet service plugins. |

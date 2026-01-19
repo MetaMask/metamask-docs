@@ -10,7 +10,7 @@ import MFAMinimumPlan from '../../_common/_scale_plan_note.mdx'
 
 MFA is an extra layer of protection that verifies your identity when accessing your account. To ensure ownership, you must provide two or more different backup factors. You have the option to choose from the device, social, backup factor (seed phrase), and password factors to guarantee access to your Web3 account. Once you create a recovery factor, MFA is enabled, and your keys are divided into three shares for off-chain multi-sig, making the key self-custodial. With backup factors, you can easily recover your account if you lose access to your original device or help login into a new device.
 
-For a dApp, we provide several options to set up Multi-Factor Authentication. You can customize the MFA screen by setting the `mfaLevel` argument. You can enable or disable a backup factor and change their order. Currently, there are four values for `mfaLevel`:
+For a dapp, we provide several options to set up Multi-Factor Authentication. You can customize the MFA screen by setting the `mfaLevel` argument. You can enable or disable a backup factor and change their order. Currently, there are four values for `mfaLevel`:
 
 - `default`: presents the MFA screen every third login
 - `optional`: presents the MFA screen on every login, but you can skip it
@@ -19,7 +19,7 @@ For a dApp, we provide several options to set up Multi-Factor Authentication. Yo
 
 :::caution Note
 
-If you are using default verifiers, your users may have set up MFA on other dApps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dApps. This is because MFA cannot be turned off once it is enabled.
+If you are using default verifiers, your users may have set up MFA on other dapps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
 
 :::
 

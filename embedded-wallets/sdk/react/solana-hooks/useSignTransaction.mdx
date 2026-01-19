@@ -7,7 +7,7 @@ description: '@web3auth/modal React Hook useSignTransaction | Embedded Wallets'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-Hook to sign a Solana transaction using the connected wallet from Web3Auth.
+Hook to sign a Solana transaction using the connected wallet from Embedded Wallets.
 
 ### Import
 
@@ -45,7 +45,7 @@ function SignTransactionButton({ transaction }: { transaction: Transaction }) {
 }
 ```
 
-### Return Type
+### Return type
 
 ```ts
 export type IUseSignTransaction = {
@@ -56,25 +56,25 @@ export type IUseSignTransaction = {
 }
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Indicates if the transaction signing is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error object if signing fails, otherwise null.
 
-#### data
+#### `data`
 
 `string | null`
 
 The signed transaction as a string, or null if not signed yet.
 
-#### signTransaction
+#### `signTransaction`
 
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 
