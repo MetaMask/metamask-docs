@@ -53,10 +53,21 @@ const sortMethods = (items: MethodItem[], sortConfig = METHOD_SORT_CONFIG) => {
 async function fetchData(url: string, name: string): Promise<ResponseItem> {
   try {
     const response = await fetch(url, { method: 'GET' })
+    if (!response.ok) {
+      return {
+        name,
+        data: null,
+        error: new Error(`HTTP error! status: ${response.status}`),
+      }
+    }
     const data = await response.json()
     return { name, data, error: false }
   } catch (error) {
-    return { name, data: null, error: true }
+    return {
+      name,
+      data: null,
+      error: error instanceof Error ? error : new Error(String(error)),
+    }
   }
 }
 
