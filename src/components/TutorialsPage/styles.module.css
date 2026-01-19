@@ -686,8 +686,7 @@ html[data-theme='dark'] mark {
 
   .buttonGroup {
     width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: auto hidden;
     -webkit-overflow-scrolling: touch;
   }
 

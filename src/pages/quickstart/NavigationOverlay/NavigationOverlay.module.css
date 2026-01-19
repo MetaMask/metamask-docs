@@ -548,10 +548,7 @@ html[data-theme='dark'] .cardDescription {
 @media (width <=768px) {
   .overlayContainer {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
