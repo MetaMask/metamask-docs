@@ -88,6 +88,32 @@
     border-radius: 0.4rem;
   }
 
+  // Make "Clear the query" less prominent: icon-only clear affordance.
+  // Keeps the accessible label/title intact, but visually renders a small "×" icon.
+  .DocSearch-Clear {
+    font-size: 0;
+    width: 2.8rem;
+    height: 2.8rem;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+  }
+
+  .DocSearch-Clear::before {
+    content: '';
+    width: 1.6rem;
+    height: 1.6rem;
+    background-color: var(--docsearch-icon-color);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 3h6l1 2h5v2H3V5h5l1-2Zm1 6h2v10h-2V9Zm4 0h2v10h-2V9ZM7 9h2v10H7V9Zm-1 12h12a2 2 0 0 0 2-2V7H4v12a2 2 0 0 0 2 2Z'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 3h6l1 2h5v2H3V5h5l1-2Zm1 6h2v10h-2V9Zm4 0h2v10h-2V9ZM7 9h2v10H7V9Zm-1 12h12a2 2 0 0 0 2-2V7H4v12a2 2 0 0 0 2 2Z'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+
+  .DocSearch-Clear:hover::before {
+    color: var(--docsearch-highlight-color);
+  }
+
   .DocSearch-Input {
     font-size: 2rem;
     font-weight: 400;
