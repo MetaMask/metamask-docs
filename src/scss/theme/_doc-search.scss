@@ -147,6 +147,19 @@
     padding: 3.6rem 0;
   }
 
+  // No results: render the query on its own line to avoid overlap when wrapping
+  .DocSearch-NoResults .DocSearch-Title {
+    line-height: 1.2;
+  }
+
+  .DocSearch-NoResults .DocSearch-Title > strong {
+    display: block;
+    margin-top: 0.2em;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
   .DocSearch-Dropdown {
     margin-top: 0.2rem;
   }
