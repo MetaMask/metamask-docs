@@ -764,6 +764,12 @@ const config = {
         apiKey: 'b4e925aa9bf05e5bef2e40b3ee6ee431',
         indexName: 'mmdocs',
         contextualSearch: false,
+        translations: {
+          button: {
+            buttonText: 'Search or Ask AI',
+            buttonAriaLabel: 'Search or Ask AI',
+          },
+        },
         askAi: {
           assistantId: 'REak1eiP5wfp',
         },
