@@ -130,7 +130,7 @@ function useAskAiConfig({
     ...askAi,
     searchParameters: {
       ...askAi.searchParameters,
-      facetFilters: mergeFacetFilters(askAiFacetFilters, contextualSearchFacetFilters),
+      facetFilters: mergeFacetFilters(contextualSearchFacetFilters, askAiFacetFilters),
     },
   }
 }
@@ -203,6 +203,9 @@ function DocSearchHybrid(props: ThemeConfigAlgolia) {
     ? translations.modal?.searchBox?.placeholderTextAskAi
     : translations.modal?.searchBox?.placeholderText || props.placeholder
 
+  // Destructure placeholder from props to prevent it from overriding the computed placeholder
+  const { placeholder: _, ...propsWithoutPlaceholder } = props
+
   return (
     <>
       <Head>
@@ -222,20 +225,22 @@ function DocSearchHybrid(props: ThemeConfigAlgolia) {
         translations={props.translations?.button ?? translations.button}
       />
 
-      {/* Floating Ask AI button (bottom-right icon) */}
-      <SidepanelButton variant="floating" translations={{ buttonAriaLabel: 'Ask AI' }} />
-
-      {/* Sidepanel is what Hybrid Mode transitions to on Ask AI initiation */}
+      {/* Floating Ask AI button (bottom-right icon) - only show when Ask AI is configured */}
       {askAi?.assistantId && (
-        <Sidepanel
-          appId={props.appId}
-          apiKey={props.apiKey}
-          indexName={props.indexName}
-          assistantId={askAi.assistantId}
-          searchParameters={askAi.searchParameters}
-          variant="floating"
-          side="right"
-        />
+        <>
+          <SidepanelButton variant="floating" translations={{ buttonAriaLabel: 'Ask AI' }} />
+
+          {/* Sidepanel is what Hybrid Mode transitions to on Ask AI initiation */}
+          <Sidepanel
+            appId={props.appId}
+            apiKey={props.apiKey}
+            indexName={props.indexName}
+            assistantId={askAi.assistantId}
+            searchParameters={askAi.searchParameters}
+            variant="floating"
+            side="right"
+          />
+        </>
       )}
 
       {isModalActive &&
@@ -251,7 +256,7 @@ function DocSearchHybrid(props: ThemeConfigAlgolia) {
             hitComponent={Hit}
             transformSearchClient={transformSearchClient}
             {...(props.searchPagePath && { resultsFooterComponent })}
-            {...props}
+            {...propsWithoutPlaceholder}
             placeholder={placeholder}
             translations={props.translations?.modal ?? translations.modal}
             searchParameters={searchParameters}
