@@ -125,7 +125,7 @@ function useAskAiConfig({
   if (!askAi) return undefined
   if (!contextualSearch) return askAi
 
-  const askAiFacetFilters = askAi.searchParameters?.facetFilters
+  const askAiFacetFilters = askAi.searchParameters?.facetFilters ?? []
   return {
     ...askAi,
     searchParameters: {
