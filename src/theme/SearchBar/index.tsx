@@ -151,7 +151,11 @@ function ResultsFooter({ state, onClose }: any) {
 }
 
 function useResultsFooterComponent({ closeModal }: { closeModal: () => void }) {
-  return useMemo(() => ({ state }: any) => <ResultsFooter state={state} onClose={closeModal} />, [closeModal])
+  return useMemo(
+    () =>
+      ({ state }: any) => <ResultsFooter state={state} onClose={closeModal} />,
+    [closeModal]
+  )
 }
 
 function DocSearchHybrid(props: ThemeConfigAlgolia) {
@@ -162,8 +166,15 @@ function DocSearchHybrid(props: ThemeConfigAlgolia) {
   const searchParameters = useSearchParameters(props)
   const askAi = useAskAiConfig(props)
 
-  const { isModalActive, openModal, closeModal, searchButtonRef, initialQuery, isAskAiActive, onAskAiToggle } =
-    useDocSearch()
+  const {
+    isModalActive,
+    openModal,
+    closeModal,
+    searchButtonRef,
+    initialQuery,
+    isAskAiActive,
+    onAskAiToggle,
+  } = useDocSearch()
 
   const searchContainer = useRef<HTMLDivElement | null>(null)
 
@@ -195,7 +206,11 @@ function DocSearchHybrid(props: ThemeConfigAlgolia) {
   return (
     <>
       <Head>
-        <link rel="preconnect" href={`https://${props.appId}-dsn.algolia.net`} crossOrigin="anonymous" />
+        <link
+          rel="preconnect"
+          href={`https://${props.appId}-dsn.algolia.net`}
+          crossOrigin="anonymous"
+        />
       </Head>
 
       <DocSearchButton
@@ -236,8 +251,8 @@ function DocSearchHybrid(props: ThemeConfigAlgolia) {
             hitComponent={Hit}
             transformSearchClient={transformSearchClient}
             {...(props.searchPagePath && { resultsFooterComponent })}
-            placeholder={placeholder}
             {...props}
+            placeholder={placeholder}
             translations={props.translations?.modal ?? translations.modal}
             searchParameters={searchParameters}
             askAi={askAi}
