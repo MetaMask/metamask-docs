@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Footer from '@theme-original/Footer'
-import { Intercom } from '@intercom/messenger-js-sdk'
 import useIsBrowser from '@docusaurus/useIsBrowser'
 
 export default function FooterWrapper(props) {
@@ -29,13 +28,9 @@ export default function FooterWrapper(props) {
     }
   }, [])
 
-  const isBrowser = useIsBrowser()
-  const isProd = process.env.NODE_ENV === 'production'
-  if (isBrowser && isProd) {
-    Intercom({
-      app_id: 'txttgas6',
-    })
-  }
+  // Intercom is intentionally disabled (it injected a floating chatbot in production).
+  // Keep `useIsBrowser()` for future client-only behavior here.
+  useIsBrowser()
 
   if (!canShowFooter) return null
 
