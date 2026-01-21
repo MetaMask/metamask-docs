@@ -1,4 +1,7 @@
 .menu {
+  /* Sidebar "guide line" (vertical tree line) color */
+  --doc-sidebar-guide-line-color: var(--ifm-toc-border-color);
+
   &.thin-scrollbar {
     padding: 1rem 0 0;
   }
@@ -49,6 +52,43 @@
       margin-bottom: 0.25rem;
       padding-left: var(--ifm-menu-link-padding-horizontal);
     }
+
+    /* Vertical guide lines (tree lines) for expanded category trees (level 1+). */
+    .menu__list-item.theme-doc-sidebar-item-category-level-1 > .menu__list,
+    .menu__list-item.theme-doc-sidebar-item-category-level-2 > .menu__list,
+    .menu__list-item.theme-doc-sidebar-item-category-level-3 > .menu__list,
+    .menu__list-item.theme-doc-sidebar-item-category-level-4 > .menu__list,
+    .menu__list-item.theme-doc-sidebar-item-category-level-5 > .menu__list,
+    .menu__list-item.theme-doc-sidebar-item-category-level-6 > .menu__list {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 1.6rem; /* align with default link text start */
+        width: 1px;
+        background: var(--doc-sidebar-guide-line-color);
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      @include bp('tablet') {
+        &::before {
+          left: 2.4rem; /* align with tablet link text start */
+        }
+      }
+    }
+
+    .menu__list-item.theme-doc-sidebar-item-category-level-1:not(.menu__list-item--collapsed) > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-2:not(.menu__list-item--collapsed) > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-3:not(.menu__list-item--collapsed) > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-4:not(.menu__list-item--collapsed) > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-5:not(.menu__list-item--collapsed) > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-6:not(.menu__list-item--collapsed) > .menu__list::before {
+      opacity: 1;
+    }
     .theme-doc-sidebar-item-link-level-1 {
       padding-bottom: 0.4rem;
     }
@@ -58,8 +98,32 @@
   }
 
   &__list-item {
+    position: relative;
+    z-index: 1;
+
     &-collapsible {
       border-radius: 0;
+    }
+
+    /* Hover: no background/bar (TOC-like). Only a subtle text emphasis. */
+    &-collapsible:hover {
+      background-image: none !important;
+      background-color: transparent !important;
+      background: transparent !important; /* override Infima `background:` shorthand */
+    }
+
+    /* Active (expanded category row): no bar, no filled background, just typography */
+    &-collapsible--active {
+      background-image: none !important;
+      background-color: transparent !important;
+      background: transparent !important; /* override Infima `background:` shorthand */
+    }
+
+    /* Apply the subtle hover emphasis to the text inside collapsible rows */
+    &-collapsible:hover .menu__link {
+      color: var(--ifm-menu-color-active);
+      /* Faux-bold without reflow (more stable than font-weight changes) */
+      text-shadow: 0 0 0 currentColor;
     }
 
     &.theme-doc-sidebar-item-category-level-2,
@@ -111,10 +175,25 @@
 
     &--active {
       color: var(--ifm-menu-color-active);
+      font-weight: 700;
+      /* Selected item: no bar / no filled background */
+      background-image: none !important;
+      background-color: transparent !important;
 
       + .menu__caret {
         opacity: 1;
       }
+    }
+
+    /* Hover: slight contrast, no "highlight bar" */
+    &:hover,
+    &:focus-visible {
+      background-image: none !important;
+      background-color: transparent !important;
+      background: transparent !important; /* override Infima `background:` shorthand */
+      color: var(--ifm-menu-color-active);
+      /* Faux-bold without reflow (more stable than font-weight changes) */
+      text-shadow: 0 0 0 currentColor;
     }
   }
 
@@ -141,6 +220,11 @@
   }
 
 
+}
+
+/* Dark mode: make tree lines more subtle */
+[data-theme='dark'] .menu {
+  --doc-sidebar-guide-line-color: rgba(255, 255, 255, 0.12);
 }
 
 .theme-doc-sidebar-container {
