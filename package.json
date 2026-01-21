@@ -28,9 +28,6 @@
     "**/*.{md,mdx,ts,js,tsx,jsx,json}": "npm run format"
   },
   "dependencies": {
-    "@docsearch/css": "4.4.0",
-    "@docsearch/react": "4.4.0",
-    "@docsearch/sidepanel": "4.4.0",
     "@apidevtools/json-schema-ref-parser": "^14.2.0",
     "@docusaurus/core": "3.9.2",
     "@docusaurus/plugin-content-docs": "3.9.2",
@@ -41,6 +38,7 @@
     "@docusaurus/remark-plugin-npm2yarn": "3.9.2",
     "@docusaurus/theme-common": "3.9.2",
     "@docusaurus/theme-mermaid": "3.9.2",
+    "@intercom/messenger-js-sdk": "^0.0.14",
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "@mdx-js/react": "^3.1.0",
     "@mermaid-js/layout-elk": "^0.1.9",
