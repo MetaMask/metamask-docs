@@ -43,7 +43,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
     smartAccountInit: new SafeSmartAccount(),
     paymasterConfig: {
       // Get the pimlico API Key from dashboard.pimlico.io
-      URL: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
+      url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
     },
   },
 });
