@@ -117,9 +117,8 @@
     &.menu__list-item--active > .menu__list-item-collapsible > .menu__link,
     &.menu__list-item--active > .menu__link {
       color: var(--ifm-menu-color-active);
-      font-weight: 700 !important;
-      /* Ensure it still *looks* bold even if the font doesn't ship a true 700 weight */
-      text-shadow: 0 0 0 currentColor;
+      /* Parent/ancestor path: keep it emphasized, but less prominent than the active page */
+      font-weight: 600 !important;
     }
 
     &-collapsible {
