@@ -101,6 +101,27 @@
     position: relative;
     z-index: 1;
 
+    /* Reduce top-level nav emphasis (level 1). */
+    &.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link {
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    /* Top-level doc pages (e.g. "Introduction") are link items, not categories. */
+    &.theme-doc-sidebar-item-link-level-1 > .menu__link {
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    /* Active page + active ancestor path: bold for clearer orientation. */
+    &.menu__list-item--active > .menu__list-item-collapsible > .menu__link,
+    &.menu__list-item--active > .menu__link {
+      color: var(--ifm-menu-color-active);
+      font-weight: 700 !important;
+      /* Ensure it still *looks* bold even if the font doesn't ship a true 700 weight */
+      text-shadow: 0 0 0 currentColor;
+    }
+
     &-collapsible {
       border-radius: 0;
     }
@@ -175,7 +196,9 @@
 
     &--active {
       color: var(--ifm-menu-color-active);
-      font-weight: 700;
+      font-weight: 700 !important;
+      /* Ensure it still *looks* bold even if the font doesn't ship a true 700 weight */
+      text-shadow: 0 0 0 currentColor;
       /* Selected item: no bar / no filled background */
       background-image: none !important;
       background-color: transparent !important;
