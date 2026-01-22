@@ -3,6 +3,9 @@
   --doc-sidebar-guide-line-color: var(--ifm-toc-border-color);
   /* Single source of truth for the tree-line X position (used by lines + selected highlight) */
   --doc-sidebar-line-x: 1.6rem;
+  /* Indentation step applied at each nesting level so line spacing + text spacing
+   * stay consistent for level 2/3/4/... */
+  --doc-sidebar-indent-step: calc(var(--ifm-menu-link-padding-horizontal) - 0.6rem);
   /* Selected item background tint (fallback first, then color-mix for nicer tinting) */
   --doc-sidebar-selected-bg: rgba(186, 242, 74, 0.10);
   --doc-sidebar-selected-bg: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
@@ -38,38 +41,14 @@
       padding-bottom: 1rem;
     }
 
-    .theme-doc-sidebar-item-category-level-1 & {
-      padding-left: calc(var(--ifm-menu-link-padding-horizontal) / 4);
-      --doc-sidebar-list-padding-left: calc(var(--ifm-menu-link-padding-horizontal) / 4);
-
-      @include bp('tablet') {
-        padding-left: var(--ifm-menu-link-padding-horizontal);
-        --doc-sidebar-list-padding-left: var(--ifm-menu-link-padding-horizontal);
-      }
-    }
-
-    .theme-doc-sidebar-item-category-level-2 &,
-    .theme-doc-sidebar-item-category-level-3 &,
-    .theme-doc-sidebar-item-category-level-4 &,
-    .theme-doc-sidebar-item-category-level-5 &,
-    .theme-doc-sidebar-item-category-level-6 & {
-      padding-left: calc(var(--ifm-menu-link-padding-horizontal) / 4);
-      --doc-sidebar-list-padding-left: calc(var(--ifm-menu-link-padding-horizontal) / 4);
-
-      @include bp('tablet') {
-        padding-left: calc(var(--ifm-menu-link-padding-horizontal) / 2);
-        --doc-sidebar-list-padding-left: calc(var(--ifm-menu-link-padding-horizontal) / 2);
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-    }
+    /* Consistent nesting indentation: every nested list adds the same step */
     .menu__list {
       flex: 0 0 100%;
       padding-top: 0rem;
       padding-bottom: 0rem;
       margin-bottom: 0.25rem;
-      padding-left: var(--ifm-menu-link-padding-horizontal);
-      --doc-sidebar-list-padding-left: var(--ifm-menu-link-padding-horizontal);
+      padding-left: var(--doc-sidebar-indent-step);
+      --doc-sidebar-list-padding-left: var(--doc-sidebar-indent-step);
     }
 
     /* Vertical guide lines (tree lines) for expanded category trees (level 1+). */
