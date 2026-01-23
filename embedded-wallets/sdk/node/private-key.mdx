@@ -34,7 +34,7 @@ The provider offers different methods to access private keys depending on your b
 
 ```javascript
 const privateKey = await provider.request({ method: 'private_key' })
-console.log('Private Key:', privateKey) // 0x1234567890abcdef...
+console.log('Private Key Length:', privateKey.length) // Only log metadata
 ```
 
 ### Use with Ethers.js
@@ -105,7 +105,7 @@ const hash = await walletClient.sendTransaction({
 
 ```javascript
 const solana_privateKey = await provider.request({ method: 'solana_privateKey' })
-console.log('Solana Private Key:', solana_privateKey) // Base58 encoded
+console.log('Solana Private Key Length:', solana_privateKey.length) // Only log metadata
 ```
 
 ### Use with Solana Web3.js
@@ -153,7 +153,7 @@ const signature = await connection.sendTransaction(transaction, [keypair])
 
 ```javascript
 const rawPrivateKey = await provider.request({ method: 'private_key' })
-console.log('Raw Private Key:', rawPrivateKey) // Hex string
+console.log('Raw Private Key Length:', rawPrivateKey.length) // Only log metadata
 ```
 
 ### Example: Bitcoin Integration
