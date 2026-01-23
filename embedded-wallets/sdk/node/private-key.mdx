@@ -49,7 +49,7 @@ const privateKey = await provider.request({ method: 'private_key' })
 const wallet = new ethers.Wallet(privateKey)
 
 // Connect to a provider
-const rpcProvider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth')
+const rpcProvider = new ethers.JsonRpcProvider('https://rpc.ankr.com/eth')
 const connectedWallet = wallet.connect(rpcProvider)
 
 // Get address
@@ -59,7 +59,7 @@ console.log('Wallet Address:', address)
 // Sign a transaction
 const tx = {
   to: '0x742d35Cc6635C0532925a3b8138341B0F7E8a4e8',
-  value: ethers.utils.parseEther('0.1'),
+  value: ethers.parseEther('0.1'),
 }
 
 const signedTx = await connectedWallet.signTransaction(tx)
