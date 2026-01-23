@@ -40,6 +40,7 @@ console.log('Private Key Length:', privateKey.length) // Only log metadata
 ### Use with Ethers.js
 
 ```javascript
+// Example using ethers.js v6
 const { ethers } = require('ethers')
 
 // Get private key
@@ -59,7 +60,7 @@ console.log('Wallet Address:', address)
 // Sign a transaction
 const tx = {
   to: '0x742d35Cc6635C0532925a3b8138341B0F7E8a4e8',
-  value: ethers.parseEther('0.1'),
+  value: ethers.parseEther('0.1'), 
 }
 
 const signedTx = await connectedWallet.signTransaction(tx)
