@@ -7,7 +7,7 @@
   - `maxFeePerGas`: (string) maximum total fee (base fee + priority fee), in wei, the sender is willing to pay per gas.
   - `value`: (string) hexadecimal of the value sent with this transaction.
   - `data`: (string) hash of the method signature and encoded parameters.
-- `block parameter`: (string) [_required_] must be `latest` on HyperEVM.
+- `block parameter`: (string) [_required_] A hexadecimal block number, or the tag `latest`. See the [default block parameter](https://ethereum.org/en/developers/docs/apis/json-rpc/#default-block).
 - Optional tracing options object with the following fields:
   - `tracer`: (string) _[optional]_ type of tracer. Supports `callTracer`.
 

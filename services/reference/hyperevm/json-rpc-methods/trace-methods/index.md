@@ -6,7 +6,7 @@ sidebar_key: hyperevm-trace-methods
 
 # HyperEVM trace methods
 
-Infura provides access to the following trace API method on HyperEVM mainnet:
+Infura provides access to the following trace API method on HyperEVM:
 
 - [`trace_block`](trace_block.mdx)
 

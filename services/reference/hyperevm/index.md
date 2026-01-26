@@ -12,19 +12,19 @@ HyperEVM is the EVM execution environment on the Hyperliquid blockchain, secured
 The [official HyperEVM documentation](https://hyperliquid.gitbook.io/hyperliquid-docs/hyperevm) for more information.
 ::::
 
-Select an option below to get started with HyperEVM **mainnet**.
+Select an option below to get started with HyperEVM.
 
 <CardList
   items={[
     {
       href: "quickstart",
       title: "Quickstart",
-      description: "Learn how to quickly connect and make calls to HyperEVM mainnet."
+      description: "Learn how to quickly connect and make calls to HyperEVM."
     },
     {
       href: "json-rpc-methods",
       title: "JSON-RPC APIs",
-      description: "View the JSON-RPC APIs available for communicating with HyperEVM mainnet."
+      description: "View the JSON-RPC APIs available for communicating with HyperEVM."
     },
     {
       href: "../../../developer-tools/dashboard/get-started/create-api/",
