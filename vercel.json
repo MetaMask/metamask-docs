@@ -769,6 +769,10 @@
     {
       "source": "/embedded-wallets/connect-blockchain/xrpl/",
       "destination": "/embedded-wallets/connect-blockchain/"
+    },
+    {
+      "source": "/embedded-wallets/dashboard/whitelist",
+      "destination": "/embedded-wallets/dashboard/allowlist"
     }
   ]
 }
