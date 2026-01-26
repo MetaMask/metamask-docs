@@ -69,16 +69,16 @@ type AuthUserInfo = {
   typeOfLogin: LOGIN_PROVIDER_TYPE | CUSTOM_LOGIN_PROVIDER_TYPE;
   dappShare?: string;
   /**
-   * token issued by Web3Auth.
+   * Token issued by Web3Auth.
    */
   idToken?: string;
   /**
-   * token issued by OAuth provider. Will be available only if you are using
+   * Token issued by OAuth provider. Will be available only if you are using
    * custom verifiers.
    */
   oAuthIdToken?: string;
   /**
-   * Access token issued by OAuth provider. Will be available only if you are using
+   * Access tTken issued by OAuth provider. Will be available only if you are using
    * custom verifiers.
    */
   oAuthAccessToken?: string;
@@ -102,9 +102,9 @@ type AuthUserInfo = {
   "verifier": "torus",
   "verifierId": "john@gmail.com",
   "typeOfLogin": "google",
-  "dappShare": "<24 words seed phrase>", // will be sent only in case of custom verifiers
-  "idToken": "<JWT token issued by Web3Auth>",
-  "oAuthIdToken": "<JWT token issued by OAuth provider>", // will be sent only in case of custom verifiers
-  "oAuthAccessToken": "<Access token issued by OAuth provider>" // will be sent only in case of custom verifiers
+  "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
+  "idToken": "<jwtToken issued by Web3Auth>",
+  "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+  "oAuthAccessToken": "<accessToken issued by OAuth Provider>" // will be sent only incase of custom verifiers
 }
 ```

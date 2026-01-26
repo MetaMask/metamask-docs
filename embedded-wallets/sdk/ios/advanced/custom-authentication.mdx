@@ -140,7 +140,7 @@ let web3Auth = try await Web3Auth(
     // focus-start
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from Embedded Wallets/Web3Auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.google,
         clientId: "YOUR_GOOGLE_CLIENT_ID",
       )
@@ -164,7 +164,7 @@ let web3Auth = try await Web3Auth(
     // focus-start
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from Embedded Wallets/Web3Auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.facebook,
         clientId: "YOUR_FACEBOOK_CLIENT_ID",
       )
@@ -189,7 +189,7 @@ let web3Auth = try await Web3Auth(
     // focus-start
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from Embedded Wallets/Web3Auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.jwt,
         clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
       )
@@ -344,7 +344,7 @@ let web3Auth = try await Web3Auth(
     // focus-start
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from Embedded Wallets/Web3Auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.jwt,
         clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
       )
@@ -357,7 +357,7 @@ let web3Auth = try await Web3Auth(
 let result = await web3Auth.login(
   W3ALoginParams(
     Web3AuthProvider.JWT,
-    extraLoginOptions: .init(domain:"your-domain", id_token: "<Your-JWT-Token>")
+    extraLoginOptions: .init(domain:"your-domain", id_token: "your_jwt_token")
   )
 )
 // focus-end
@@ -393,7 +393,8 @@ let result = try await web3Auth.login(
 
 <TabItem value="sms-passwordless">
 
-To use the SMS Passwordless login, send the phone number as the `login_hint` parameter of the `ExtraLoginOptions`. Please make sure the phone number is in the format of +\{country_code}-\{phone_number}, that is, (+91-09xx901xx1).
+To use the SMS Passwordless login, send the phone number as the `login_hint` parameter of the `ExtraLoginOptions`. Please ensure the phone number takes the format:
++\{country_code}-\{phone_number}, that is, (+91-09xx901xx1).
 
 ```swift
 import Web3Auth

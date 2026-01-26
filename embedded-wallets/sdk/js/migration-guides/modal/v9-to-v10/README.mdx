@@ -55,7 +55,7 @@ const ethereumPrivateKeyProvider = EthereumPrivateKeyProvider({
 // remove-end
 
 const web3auth = new Web3Auth({
-  clientId: WEB3AUTH_CLIENT_ID, // Get your Client ID from the Embedded Wallets dashboard
+  clientId: WEB3AUTH_CLIENT_ID, // Get your Client ID from the Web3Auth Dashboard
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
   // remove-next-line
   privateKeyProvider: ethereumPrivateKeyProvider,
@@ -82,7 +82,7 @@ import { AuthAdapter } from '@web3auth/auth-adapter'
 
 const authAdapter = new AuthAdapter({
   loginSettings: {
-    mfaLevel: 'mandatory', // for example,, default, optional, mandatory, none
+    mfaLevel: 'mandatory', // e.g., default, optional, mandatory, none
   },
   adapterSettings: {
     mfaSettings: {
@@ -121,7 +121,7 @@ const web3AuthOptions: Web3AuthOptions = {
 **Key changes:**
 
 - **Individual MFA Factor Settings:** Move from `AuthAdapter.adapterSettings.mfaSettings` to `Web3AuthOptions.mfaSettings`
-- **Factor Keys:** Change from descriptive strings (for example,, `deviceShareFactor`) to enum values (for example,, `[MFA_FACTOR.DEVICE]`)
+- **Factor Keys:** Change from descriptive strings (for example, `deviceShareFactor`) to enum values (for example, `[MFA_FACTOR.DEVICE]`)
 - **MFA Level:** Move from `AuthAdapter.loginSettings.mfaLevel` to `Web3AuthOptions.mfaLevel`
 
 ### 3. `useCoreKitKey` Renamed to `useSFAKey`

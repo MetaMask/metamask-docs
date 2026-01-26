@@ -177,9 +177,9 @@ Future<void> initWeb3Auth() async {
   // focus-start
   final loginConfig = new HashMap<String, LoginConfigItem>();
   loginConfig['google'] = LoginConfigItem(
-    verifier: "verifier-name", // get it from Embedded Wallets/Web3Auth dashboard
+    verifier: "verifier-name", // get it from web3auth dashboard
     typeOfLogin: TypeOfLogin.google,
-    clientId: "google_client_id" // Google's client ID
+    clientId: "google_client_id" // google's client id
   );
   // focus-end
 
@@ -224,9 +224,9 @@ Future<void> initWeb3Auth() async {
   // focus-start
   final loginConfig = new HashMap<String, LoginConfigItem>();
   loginConfig['facebook'] = LoginConfigItem(
-    verifier: "verifier-name", // get it from Embedded Wallets/Web3Auth dashboard
+    verifier: "verifier-name", // get it from web3auth dashboard
     typeOfLogin: TypeOfLogin.facebook,
-    clientId: "facebook_client_id" // Facebook's client ID
+    clientId: "facebook_client_id" // facebook's client id
   );
   // focus-end
 
@@ -271,9 +271,9 @@ Future<void> initWeb3Auth() async {
   // focus-start
   final loginConfig = new HashMap<String, LoginConfigItem>();
   loginConfig['jwt'] = LoginConfigItem(
-    verifier: "verifier-name", // get it from Embedded Wallets/Web3Auth dashboard
+    verifier: "verifier-name", // get it from web3auth dashboard
     typeOfLogin: TypeOfLogin.jwt,
-    clientId: "web3auth_client_id" // Web3Auth's plug and play Client ID
+    clientId: "web3auth_client_id" // web3auth's plug and play client id
   );
   // focus-end
 
@@ -461,7 +461,7 @@ Future<void> initWeb3Auth() async {
   // focus-start
   final loginConfig = new HashMap<String, LoginConfigItem>();
   loginConfig['jwt'] = LoginConfigItem(
-    verifier: "verifier-name", // get it from Embedded Wallets/Web3Auth dashboard for auth0 configuration
+    verifier: "verifier-name", // get it from web3auth dashboard for auth0 configuration
     typeOfLogin: TypeOfLogin.jwt,
     clientId: "auth0_client_id" // get it from auth0 dashboard
   );
@@ -496,7 +496,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
     loginProvider: Provider.jwt,
     extraLoginOptions: ExtraLoginOptions(
       domain: "https://tenant-name.us.auth0.com", // Domain of your auth0 app
-      verifierIdField: "sub", // The field in JWT token which maps to verifier ID.
+      verifierIdField: "sub", // The field in jwt token which maps to verifier id.
     )
     // focus-end
   )
@@ -517,7 +517,7 @@ Future<void> initWeb3Auth() async {
   // focus-start
   final loginConfig = new HashMap<String, LoginConfigItem>();
   loginConfig['jwt'] = LoginConfigItem(
-    verifier: "verifier-name", // get it from Embedded Wallets/Web3Auth dashboard
+    verifier: "verifier-name", // get it from web3auth dashboard
     typeOfLogin: TypeOfLogin.jwt,
   );
   // focus-end
@@ -610,7 +610,7 @@ final Web3AuthResponse response = await Web3AuthFlutter.login(
 
 <TabItem value="sms-passwordless">
 To use the SMS Passwordless login, send the phone number as the `login_hint` parameter of the
-`ExtraLoginOptions`. Please make sure the phone number is in the format of
+`ExtraLoginOptions`. Please ensure the phone number takes the format:
 +\{country_code}-\{phone_number}, that is, (+91-09xx901xx1).
 
 ```dart title="Usage"

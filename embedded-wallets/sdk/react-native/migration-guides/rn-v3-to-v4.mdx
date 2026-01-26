@@ -21,7 +21,7 @@ import * as WebBrowser from 'expo-web-browser'
 import * as SecureStore from 'expo-secure-store'
 import Web3Auth, { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from '@web3auth/react-native-sdk'
 
-const clientId = '<YOUR-EMBEDDED-WALLETS/WEB3AUTH-CLIENT-ID>'
+const clientId = 'YOUR WEB3AUTH CLIENT ID'
 
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   clientId,
@@ -112,7 +112,7 @@ module.exports = (async () => {
         http: require.resolve('empty-module'), // stream-http can be polyfilled here if needed
         https: require.resolve('empty-module'), // https-browserify can be polyfilled here if needed
         os: require.resolve('empty-module'), // os-browserify can be polyfilled here if needed
-        url: require.resolve('empty-module'), // URL can be polyfilled here if needed
+        url: require.resolve('empty-module'), // url can be polyfilled here if needed
         zlib: require.resolve('empty-module'), // browserify-zlib can be polyfilled here if needed
         path: require.resolve('empty-module'),
         crypto: require.resolve('crypto-browserify'),
@@ -201,7 +201,7 @@ module.exports = (async () => {
         http: require.resolve('empty-module'), // stream-http can be polyfilled here if needed
         https: require.resolve('empty-module'), // https-browserify can be polyfilled here if needed
         os: require.resolve('empty-module'), // os-browserify can be polyfilled here if needed
-        url: require.resolve('empty-module'), // URL can be polyfilled here if needed
+        url: require.resolve('empty-module'), // url can be polyfilled here if needed
         zlib: require.resolve('empty-module'), // browserify-zlib can be polyfilled here if needed
         process: require.resolve('empty-module'), // process can be polyfilled here if needed
         path: require.resolve('empty-module'),

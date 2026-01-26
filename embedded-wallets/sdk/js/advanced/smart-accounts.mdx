@@ -307,7 +307,7 @@ When calling `sendUserOperation`, it returns a UserOperation hash, not the trans
 
 ### Send Transaction Using ERC-20 paymaster
 
-You can use ERC-20 tokens to pay for transaction fees instead of the native token (for example,, ETH). This requires approving the token for use by the paymaster:
+You can use ERC-20 tokens to pay for transaction fees instead of the native token (for example, ETH). This requires approving the token for use by the paymaster:
 
 ```ts
 // Use your Web3Auth instance
@@ -317,7 +317,7 @@ const accountAbstractionProvider = web3auth.accountAbstractionProvider
 const bundlerClient = accountAbstractionProvider.bundlerClient!
 const smartAccount = accountAbstractionProvider.smartAccount!
 
-// Pimlico's ERC-20 paymaster address
+// Pimlico's ERC-20 Paymaster address
 const pimlicoPaymasterAddress = '0x0000000000000039cd5e8aE05257CE51C473ddd1'
 
 // USDC address on Ethereum Sepolia

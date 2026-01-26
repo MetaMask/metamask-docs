@@ -306,7 +306,7 @@ val web3Auth = Web3Auth(
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
     LoginParams(
         Provider.JWT,
-        extraLoginOptions = ExtraLoginOptions(id_token = "<Your-JWT-Token>")
+        extraLoginOptions = ExtraLoginOptions(id_token = "<your_jwt_token>")
     )
 )
 // focus-end

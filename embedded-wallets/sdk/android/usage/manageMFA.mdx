@@ -40,7 +40,7 @@ manageMFACF.whenComplete{_, error ->
 ```kotlin title="Usage"
 val loginParams = LoginParams(
   Provider.JWT,
-  extraLoginOptions = ExtraLoginOptions(id_token = "<Your-JWT-Token>")
+  extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
 )
 
 val manageMFACF = web3Auth.manageMFA(loginParams)

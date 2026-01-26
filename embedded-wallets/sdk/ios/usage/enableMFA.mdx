@@ -27,7 +27,7 @@ do {
   let isMFAEnabled = try await web3Auth.enableMFA()
 } catch {
   print(error.localizedDescription)
-  // Handle error
+  // Handle Error
 }
 ```
 
@@ -39,14 +39,14 @@ do {
 do {
   let loginParams = W3ALoginParams(
     loginProvider: .JWT,
-    extraLoginOptions: .init(id_token: "<Your-JWT-Token>")
+    extraLoginOptions: .init(id_token: "<our_jwt_token")
    )
 
   let isMFAEnabled = try await web3Auth.enableMFA(loginParams)
 
 } catch {
   print(error.localizedDescription)
-  // Handle error
+  // Handle Error
 }
 
 ```

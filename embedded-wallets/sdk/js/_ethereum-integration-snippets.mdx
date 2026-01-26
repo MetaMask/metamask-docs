@@ -78,10 +78,10 @@ values={[
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
-// Provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
 // For ethers v5
 // const signer = ethersProvider.getSigner();
@@ -138,10 +138,10 @@ const balance = await publicClient.getBalance({ address: address[0] })
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
-// Provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
 const signer = await provider.getSigner()
 
@@ -163,7 +163,7 @@ const receipt = await tx.wait()
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
 const publicClient = createPublicClient({
@@ -209,10 +209,10 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
-// Provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
 const signer = await provider.getSigner()
 
@@ -234,7 +234,7 @@ const receipt = await tx.wait()
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
 const publicClient = createPublicClient({
@@ -282,7 +282,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
 const provider = new ethers.providers.Web3Provider(web3Auth.provider)
@@ -299,7 +299,7 @@ const signedMessage = await signer.signMessage(originalMessage)
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
 const publicClient = createPublicClient({
@@ -341,7 +341,7 @@ const hash = await walletClient.signMessage({
 // https://viem.sh/docs/actions/wallet/signTypedData
 
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
 const walletClient = createWalletClient({
@@ -393,7 +393,7 @@ const signature = await walletClient.signTypedData({
   Use code from the above initializing provider here
 */
 
-// Provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
 const signer = await provider.getSigner()
 
@@ -520,7 +520,7 @@ contract HelloWorld {
   Use code from the above initializing provider here
 */
 
-// Provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
 const signer = provider.getSigner();
 
@@ -555,7 +555,7 @@ const deployedContractAddress = receipt.contractAddress;
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 const publicClient = createPublicClient({
   chain: this.getViewChain(),
@@ -621,10 +621,10 @@ const deployedContractAddress = receipt.contractAddress
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
-// Provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
 const signer = await provider.getSigner()
 
@@ -665,7 +665,7 @@ const message = await contract.message()
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
 const contractABI = [
@@ -722,10 +722,10 @@ const message = await publicClient.readContract({
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
-// Provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
+// provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
 
 const signer = await provider.getSigner()
 
@@ -769,7 +769,7 @@ const receipt = await tx.wait()
 
 ```tsx
 /*
-  Use code from the above initializing provider here
+  Use code from the above Initializing Provider here
 */
 
 const contractABI = [

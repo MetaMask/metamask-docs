@@ -20,7 +20,8 @@ connectTo<T>(walletName: WALLET_ADAPTER_TYPE, loginParams?: T): Promise<IProvide
 // focus-end
 ```
 
-## Openloginadapter
+## OpenLoginAdapter
+
 ### Change in the naming of some whitelabel parameters for `OpenLoginAdapter`
 
 #### `name` and `url` are now `appName` and `appUrl`, respectively.
@@ -91,7 +92,7 @@ const accounts = await this.provider.request<never, string[]>({
 
 ### `wallet-connect-v2-adapter` requires different parameters
 
-#### With the deprecation of `@wallet-connect/qr-code-modal`, `wallet-connect-v2-adapter` now requires `@walletconnect/modal`.
+With the deprecation of `@wallet-connect/qr-code-modal`, `wallet-connect-v2-adapter` now requires `@walletconnect/modal`.
 
 ```tsx
 import { WalletConnectModal } from '@walletconnect/modal'

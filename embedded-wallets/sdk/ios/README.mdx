@@ -82,7 +82,7 @@ class ViewController: UIViewController {
 
         // Configure Web3Auth
         web3Auth = Web3Auth(W3AInitParams(
-            clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
+            clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
             network: .sapphire_mainnet, // or .sapphire_devnet
             redirectUrl: "com.yourapp.bundleid://auth"
         ))
@@ -175,7 +175,7 @@ web3Auth = Web3Auth(W3AInitParams(
     redirectUrl: "com.yourapp.bundleid://auth",
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from Embedded Wallets/Web3Auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
         typeOfLogin: TypeOfLogin.google,
         clientId: "YOUR_GOOGLE_CLIENT_ID",
       )
@@ -231,7 +231,7 @@ let client = EthereumHttpClient(
     // Please avoid using public RPC URL in production, use services
     // like Infura.
     url: URL.init(string: rpcUrl)!,
-    // Replace with the chain ID of the network you want to connect to
+    // Replace with the chain id of the network you want to connect to
     network: .custom(chainId)
 )
 
@@ -242,7 +242,7 @@ let balanceResponse = try await client.eth_getBalance(
     block: .Latest
 )
 
-// Convert the balance from wei to Ether format
+// Convert the balance from Wei to Ether format
 let balance = toEther(wei: balanceResponse)
 ```
 

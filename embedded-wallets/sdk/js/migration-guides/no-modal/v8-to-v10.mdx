@@ -105,7 +105,7 @@ import { Web3Auth } from '@web3auth/modal'
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  // Chain configuration managed via Embedded Wallets/Web3Auth Developer Dashboard
+  // Chain configuration managed via Web3Auth Developer Dashboard
 })
 // add-end
 ```
@@ -185,7 +185,7 @@ const web3auth = new Web3AuthNoModal({
 const web3auth = new Web3Auth({
   clientId: 'YOUR_CLIENT_ID',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  // Chain configuration managed via Embedded Wallets/Web3Auth Developer Dashboard
+  // Chain configuration managed via /Web3Auth Developer Dashboard
 })
 // add-end
 ```
@@ -278,7 +278,7 @@ adapters.forEach(adapter => {
 
 await web3auth.init()
 
-// connect with custom UI
+// Connect with custom UI
 await web3auth.connectTo('openlogin', {
   loginProvider: 'google',
 })

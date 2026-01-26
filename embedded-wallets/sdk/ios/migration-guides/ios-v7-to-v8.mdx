@@ -35,7 +35,7 @@ do {
 	let isMFAEnabled = try await self.web3Auth.enableMFA()
 } catch {
 	print(error.localizedDescription)
-	// Handle error
+	// Handle Error
 }
 ```
 </TabItem>
@@ -46,7 +46,7 @@ do {
 do {
 	let loginParams = W3ALoginParams(
 		.JWT,
-		extraLoginOptions: .init(id_token: "<Your-JWT-Token>")
+		extraLoginOptions: .init(id_token: "your_jwt_token")
   	)
 
     // focus-next-line
@@ -54,7 +54,7 @@ do {
 
 } catch {
   print(error.localizedDescription)
-  // Handle error
+  // Handle Error
 }
 
 ```

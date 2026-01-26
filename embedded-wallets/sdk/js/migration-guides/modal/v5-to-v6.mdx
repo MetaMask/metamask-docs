@@ -27,11 +27,11 @@ if (web3auth.connected) {
 In v5, we used to add a check for setting the `provider` only if the `web3auth.provider` was present. But now with V6 we always have a provider available even if the user is not logged in.
 
 ```tsx
-// With v5
+// With V5
 if (web3auth.provider) {
   setProvider(web3auth.provider)
 }
-// With v6
+// With V6
 // focus-next-line
 setProvider(web3auth.provider) // before the connect() or connectTo(), provider is available.
 ```

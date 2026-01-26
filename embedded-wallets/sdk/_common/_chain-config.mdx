@@ -54,15 +54,15 @@ export type ChainNamespaceType = (typeof CHAIN_NAMESPACES)[keyof typeof CHAIN_NA
 export type CustomChainConfig = {
   chainNamespace: ChainNamespaceType;
   /**
-   * The chain ID of the chain
+   * The chain id of the chain
    */
   chainId: string;
   /**
-   * RPC target URL for the chain
+   * RPC target Url for the chain
    */
   rpcTarget: string;
   /**
-   * Web socket target URL for the chain
+   * Wwb socket target url for the chain
    */
   wsTarget?: string;
   /**
@@ -70,19 +70,19 @@ export type CustomChainConfig = {
    */
   displayName?: string;
   /**
-   * URL of the block explorer
+   * Url of the block explorer
    */
   blockExplorerUrl?: string;
   /**
-   * Default currency ticker of the network (for example, ETH)
+   * Default currency ticker of the network (e.g: ETH)
    */
   ticker?: string;
   /**
-   * Name for currency ticker (for example, `Ethereum`)
+   * Name for currency ticker (e.g: `Ethereum`)
    */
   tickerName?: string;
   /**
-   * Number of decimals for the currency ticker (for example, 18)
+   * Number of decimals for the currency ticker (e.g: 18)
    */
   decimals?: number;
   /**

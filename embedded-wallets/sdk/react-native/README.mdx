@@ -112,7 +112,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
     <category android:name="android.intent.category.DEFAULT" />
     <category android:name="android.intent.category.BROWSABLE" />
     # focus-start
-    # Replace with your own scheme
+    # replace with your own scheme
     <data android:scheme="web3authrnexample" />
     # focus-end
   </intent-filter>
@@ -131,7 +131,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
     android:exported="true">
   ```
 
-- Your `redirectUrl` is your defined scheme following some identifier or your choice. For example, if your scheme is `web3authrnexample`, you can define your `redirectUrl` as web3authrnexample://auth. Make sure you register this redirectUrl in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)).
+- Your `redirectUrl` is your defined scheme following some identifier or your choice. For example, if your scheme is `web3authrnexample`, you can define your `redirectUrl` as web3authrnexample://auth. Ensure you register this `redirectUrl` in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
 
   ```typescript
   const scheme = 'web3authrnexample' // Or your desired app redirection scheme
@@ -162,7 +162,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
   ```json title="app.json"
   {
     "expo": {
-      "scheme": "web3authexpoexample" // Replace with your own scheme
+      "scheme": "web3authexpoexample" // replace with your own scheme
     }
   }
   ```
@@ -176,7 +176,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
   const resolvedRedirectUrl =
     Constants.appOwnership == AppOwnership.Expo || Constants.appOwnership == AppOwnership.Guest
       ? Linking.createURL('web3auth', {})
-      : Linking.createURL('web3auth', { scheme: 'web3authexpoexample' }) // Replace with your own scheme
+      : Linking.createURL('web3auth', { scheme: 'web3authexpoexample' }) // replace with your own scheme
   ```
 
 ## Initialize Web3Auth
@@ -204,7 +204,7 @@ const resolvedRedirectUrl = `${scheme}://auth`
 
 // focus-start
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
@@ -225,7 +225,7 @@ const resolvedRedirectUrl = `${scheme}://auth`
 
 // focus-start
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
@@ -257,7 +257,7 @@ useEffect(() => {
 
 ## Advanced configuration
 
-The Web3Auth React Native SDK offers a rich set of advanced configuration options:
+The Embedded Wallets React Native SDK offers a rich set of advanced configuration options:
 
 - **[Account Abstraction](./advanced/smart-accounts.mdx):** Configure smart account parameters.
 - **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
@@ -305,12 +305,12 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   mfaLevel: MFA_LEVELS.MANDATORY,
   loginConfig: {
     google: {
-      verifier: 'google-verifier', // Get this from the Embedded Wallets dashboard
+      verifier: 'google-verifier', // Get this from the Web3Auth Dashboard
       typeOfLogin: TypeOfLogin.GOOGLE,
       clientId: 'GOOGLE_CLIENT_ID', // Google's client ID
     },
     jwt: {
-      verifier: 'jwt-verifier', // Get this from the Embedded Wallets dashboard
+      verifier: 'jwt-verifier', // Get this from the Web3Auth Dashboard
       typeOfLogin: TypeOfLogin.JWT,
       clientId: 'JWT_CLIENT_ID', // Custom JWT client ID
     },
@@ -335,7 +335,7 @@ For Ethereum integration, you can get the provider and use it with ethers or vie
 import '@ethersproject/shims'
 // Import the ethers library
 import { ethers } from 'ethers'
-// Import the Web3Auth Ethereum provider
+// Import the Web3Auth Ethereum Provider
 import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
 
 // Define the chain config for the EVM network
@@ -349,7 +349,7 @@ chainConfig = {
   tickerName: 'Ethereum',
 }
 
-// Create an instance of the Web3Auth Ethereum provider
+// Create an instance of the Web3Auth Ethereum Provider
 const ethereumPrivateKeyProvider = new EthereumPrivateKeyProvider({
   config: {
     chainConfig,
@@ -359,7 +359,7 @@ const ethereumPrivateKeyProvider = new EthereumPrivateKeyProvider({
 // Setup the provider with the Web3Auth Private Key
 await ethereumPrivateKeyProvider.setupProvider(web3auth.privKey)
 
-// Create an instance of the ethers BrowserProvider using the Web3Auth Ethereum provider
+// Create an instance of the ethers BrowserProvider using the Web3Auth Ethereum Provider
 const ethersProvider = new ethers.BrowserProvider(ethereumPrivateKeyProvider)
 
 // Get the signer for ethers
@@ -396,4 +396,4 @@ const getSolanaAccount = async () => {
 
 While using Web3Auth in React Native, you may run into issues building. This issue occurs because some core packages like `eccrypto` have certain dependencies which are not present within the Metro build environment.
 
-To solve this, please have a look at our troubleshooting page for [React Native Metro Bundler Issues](../../troubleshooting/metro-issues.mdx)
+To solve this, please have a look at our troubleshooting page for [React Native Metro bundler issues](../../troubleshooting/metro-issues.mdx)

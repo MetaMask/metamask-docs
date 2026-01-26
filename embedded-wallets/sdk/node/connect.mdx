@@ -88,7 +88,7 @@ const clientId =
   'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
 
 // focus-start
-// Auth connection
+// Auth Connection
 const authConnectionId = 'w3a-node-demo'
 // focus-end
 
@@ -107,8 +107,8 @@ var idToken = jwt.sign(
     sub: '9fcd68c4-af50-4dd7-adf6-abd12a13cb32',
     name: 'Web3Auth DevRel Team',
     email: 'devrel@web3auth.io',
-    aud: 'urn:api-web3auth-io', // -> to be used in custom authentication as JWT Field
-    iss: 'https://web3auth.io', // -> to be used in custom authentication as JWT Field
+    aud: 'urn:api-web3auth-io', // -> to be used in Custom Authentication as JWT Field
+    iss: 'https://web3auth.io', // -> to be used in Custom Authentication as JWT Field
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 60 * 60,
   },
@@ -116,7 +116,7 @@ var idToken = jwt.sign(
   { algorithm: 'RS256', keyid: '2ma4enu1kdvw5bo9xsfpi3gcjzrt6q78yl0h' }
 )
 
-console.log('\x1b[33m%s\x1b[0m', 'JWT token:', idToken)
+console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
 
 const result = await web3auth.connect({
   authConnectionId,
@@ -135,7 +135,7 @@ const clientId =
   'BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ'
 
 // focus-start
-// Auth connection
+// Auth Connection
 const authConnectionId = 'w3a-firebase-demo'
 // focus-end
 
@@ -161,7 +161,7 @@ const res = await signInWithEmailAndPassword(auth, 'custom+jwt@firebase.login', 
 console.log(res)
 const idToken = await res.user.getIdToken(true)
 
-console.log('\x1b[33m%s\x1b[0m', 'JWT token:', idToken)
+console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
 
 const result = await web3auth.connect({
   authConnectionId,

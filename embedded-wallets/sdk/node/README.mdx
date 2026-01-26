@@ -76,7 +76,7 @@ Create a Web3Auth instance with your client ID, web3auth network name, and chain
 const { Web3Auth } = require('@web3auth/node-sdk')
 
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
   web3AuthNetwork: 'sapphire_mainnet', // or 'sapphire_devnet'
 })
 ```
@@ -167,7 +167,7 @@ await web3auth.init()
 | ----------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `clientId`        | `string`  | Required | Your Web3Auth client ID                                                                                                      |
 | `web3AuthNetwork` | `string`  | Required | Network: 'sapphire_mainnet' or 'sapphire_devnet'                                                                             |
-| `defaultChainId`  | `string`  | Optional | Chain ID to use for the default chain (for example,, '0x1' for Ethereum). If not provided, the first chain in the list will be used. |
+| `defaultChainId`  | `string`  | Optional | Chain ID to use for the default chain (for example, '0x1' for Ethereum). If not provided, the first chain in the list will be used. |
 | `chains`          | `object`  | Optional | Chains to use for the authentication. It takes `Chains` as a value.                                                          |
 | `enableLogging`   | `boolean` | Optional | Setting to true will enable logs. Default is false.                                                                          |
 | `usePnPKey`       | `boolean` | Optional | Setting to true will use the PnP key. Default is false.                                                                      |
@@ -181,8 +181,8 @@ await web3auth.init()
 ```javascript
 export interface Web3AuthOptions {
   /**
-   * Client ID for Embedded Wallets/Web3Auth.
-   * You can obtain your client ID from the Embedded Wallets/web3auth developer dashboard.
+   * Client id for web3auth.
+   * You can obtain your client id from the web3auth developer dashboard.
    * You can set any random string for this on localhost.
    */
   clientId: string;
@@ -200,7 +200,7 @@ export interface Web3AuthOptions {
   chains?: CustomChainConfig[];
 
   /**
-   * default chain ID to use
+   * default chain id to use
    */
   defaultChainId?: string;
 
@@ -212,7 +212,7 @@ export interface Web3AuthOptions {
   enableLogging?: boolean;
 
   /**
-   * setting this to true returns the same key as web sdk (that is,, plug n play key)
+   * setting this to true returns the same key as web sdk (i.e., plug n play key)
    * By default, this sdk returns SFAKey
    */
   usePnPKey?: boolean;
@@ -268,8 +268,8 @@ var idToken = jwt.sign(
     sub: '9fcd68c4-af50-4dd7-adf6-abd12a13cb32',
     name: 'Web3Auth DevRel Team',
     email: 'devrel@web3auth.io',
-    aud: 'urn:api-web3auth-io', // -> to be used in custom authentication as JWT Field
-    iss: 'https://web3auth.io', // -> to be used in custom authentication as JWT Field
+    aud: 'urn:api-web3auth-io', // -> to be used in Custom Authentication as JWT Field
+    iss: 'https://web3auth.io', // -> to be used in Custom Authentication as JWT Field
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 60 * 60,
   },
@@ -277,7 +277,7 @@ var idToken = jwt.sign(
   { algorithm: 'RS256', keyid: '2ma4enu1kdvw5bo9xsfpi3gcjzrt6q78yl0h' }
 )
 
-console.log('\x1b[33m%s\x1b[0m', 'JWT token:', idToken)
+console.log('\x1b[33m%s\x1b[0m', 'JWT Token:', idToken)
 
 // focus-start
 const result = await web3auth.connect({
