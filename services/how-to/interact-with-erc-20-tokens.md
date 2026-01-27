@@ -45,7 +45,7 @@ The JSON-RPC format expects `eth_sendRawTransaction` to have a specific data fie
   <TabItem value="JavaScript" label="JavaScript" default>
 
 ```javascript
-web3.sha3("Transfer(address, address, uint256)")[0..4]
+web3.sha3("Transfer(address, address, uint256)").slice(0, 10)
 ```
 
   </TabItem>
