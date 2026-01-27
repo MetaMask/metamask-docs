@@ -381,7 +381,7 @@ const getSolanaAccount = async () => {
   try {
     const privateKey = await web3auth.getPrivKey()
     // Use private key with Solana libraries
-    console.log('Solana private key:', privateKey)
+    console.log('Solana private key length:', privateKey.length) // Only log metadata
   } catch (error) {
     console.error('Error getting private key:', error)
   }
