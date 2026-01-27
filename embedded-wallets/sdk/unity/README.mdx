@@ -100,7 +100,7 @@ After instantiation, within your `Start()` function, set up the Web3Auth Options
 
 ```cs
 web3Auth.setOptions(new Web3AuthOptions(){
-    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
     network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
     redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
 });
@@ -184,7 +184,7 @@ web3Auth = GetComponent<Web3Auth>();
 
 var loginConfigItem = new LoginConfigItem()
     {
-        verifier = "google-verifier", // Get this from the Embedded Wallets dashboard
+        verifier = "google-verifier", // Get this from the Web3Auth Dashboard
         typeOfLogin = TypeOfLogin.GOOGLE,
         clientId = "YOUR_GOOGLE_CLIENT_ID" // Google's client ID
     };

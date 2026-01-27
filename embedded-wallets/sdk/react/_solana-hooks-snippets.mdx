@@ -63,7 +63,7 @@ function SignMessage() {
     <div>
       <h2>Sign message</h2>
       <button onClick={handleSignMessage} disabled={isPending}>
-        {isPending ? 'Signing...' : 'Sign message'}
+        {isPending ? 'Signing...' : 'Sign Message'}
       </button>
       {error && <p>Error: {error.message}</p>}
     </div>
@@ -102,7 +102,7 @@ function SignTransaction() {
     <div>
       <h2>Sign transaction</h2>
       <button onClick={handleSignTransaction} disabled={isPending}>
-        {isPending ? 'Signing...' : 'Sign transaction'}
+        {isPending ? 'Signing...' : 'Sign Transaction'}
       </button>
       {error && <p>Error: {error.message}</p>}
     </div>

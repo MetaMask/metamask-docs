@@ -273,11 +273,11 @@ public void login()
     "typeOfLogin": "google",
     "verifier": "torus",
     "verifierId": "john@gmail.com",
-    "dappShare": "<24 words seed phrase>", // will be sent only in case of custom verifiers
-    "idToken": "<JWT token issued by Web3Auth>",
-    "oAuthIdToken": "<JWT token issued by OAuth provider>", // will be sent only in case of custom verifiers
-    "oAuthAccessToken": "<Access token issued by OAuth provider>", // will be sent only in case of custom verifiers
-    "isMfaEnabled": true // returns true if user has enabled MFA
+    "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
+    "idToken": "<jwtToken issued by Web3Auth>",
+    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "isMfaEnabled": true // returns true if user has enabled mfa
   }
 }
 ```
@@ -391,7 +391,7 @@ public void login()
         loginProvider = selectedProvider,
         extraLoginOptions = new ExtraLoginOptions()
         {
-            id_token = "<Your-JWT-Token>"
+            id_token = "your_jwt_token"
         }
     };
     web3Auth.login(options);

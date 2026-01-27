@@ -26,7 +26,7 @@ Whitelabeling and UI customization have been significantly streamlined in v10, f
 
 - **Previously (v9):** Customizing which login methods appear in the modal (and their appearance/order) was done via `modalConfig` in `initModal()` in v9.
 - **Now (v10):** This moves to `modalConfig` within `Web3AuthOptions` (at SDK instantiation). The structure is new, utilizing `connectors` (for example, `WALLET_CONNECTORS.AUTH` for social/email, `WALLET_CONNECTORS.WALLET` for external wallets) and a `loginMethods` object within each connector.
-- Each login method (for example, `google`, `email_passwordless`, `metamask`) is an object conforming to `LoginMethodConfig`, allowing you to set `name`, `showOnModal`, `authConnectionId (for custom auth), for example.
+- Each login method (for example, `google`, `email_passwordless`, `metamask`) is an object conforming to `LoginMethodConfig`, allowing you to set `name`, `showOnModal`, `authConnectionId` (for custom auth), for example.
   ```typescript
   // v10: modalConfig in Web3AuthOptions
   const web3AuthOptions: Web3AuthOptions = {

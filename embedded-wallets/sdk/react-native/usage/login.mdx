@@ -45,10 +45,10 @@ export type SdkLoginParams = Omit<LoginParams, "fastLogin" | "skipTKey" | "getWa
 
 export type BaseRedirectParams = {
   /**
-   * redirectUrl is the dapp's URL where user will be redirected after login.
+   * redirectUrl is the dapp's url where user will be redirected after login.
    *
    * @remarks
-   * Register this URL at {@link "https://dashboard.web3auth.io"| developer dashboard}
+   * Register this url at {@link "https://dashboard.web3auth.io"| developer dashboard}
    * else initialization will give error.
    */
   redirectUrl?: string;
@@ -109,12 +109,12 @@ export type LoginParams = BaseRedirectParams & {
   sessionTime?: number;
 
   /**
-   * This curve will be used to determine the public key encoded in the JWT token which returned in
+   * This curve will be used to determine the public key encoded in the jwt token which returned in
    * `getUserInfo` function after user login.
-   * You can use that public key from JWT token as a unique user identifier in your backend.
+   * You can use that public key from jwt token as a unique user identifier in your backend.
    *
-   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in JWT token to use.
-   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in JWT token to use.
+   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in jwt token to use.
+   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in jwt token to use.
    *
    * Note: This parameter won't change format of private key returned by auth service. Private key returned
    * by auth service is always `secp256k1`. As of now you have to convert it to `'ed25519'` if you want.

@@ -31,7 +31,9 @@ For more about ERC-4337 and its components, [check out our detailed blog post](h
 Our smart account integration streamlines your setup, allowing you to create and manage smart accounts using your favorite libraries like Viem, Ethers, and Wagmi. You don't need to rely on third-party packages to effortlessly create ERC-4337 compatible Smart Contract Wallets (SCWs), giving users the ability to perform batch transactions and efficiently manage gas sponsorship.
 
 <GrowthPlanNote />
+
 ## Enabling smart accounts
+
 :::info prerequisite
 
 To enable this feature, you need to configure smart accounts from your project in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
@@ -40,7 +42,7 @@ To enable this feature, you need to configure smart accounts from your project i
 
 ### Dashboard configuration
 
-To enable smart accounts, navigate to the smart accounts section in the Web3Auth dashboard, and enable the "Set up Smart accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
+To enable smart accounts, navigate to the smart accounts section in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/), and enable the **Set up Smart accounts** toggle. mbedded Wallets currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
 
 ![Enable Smart accounts](/img/embedded-wallets/w3a-dashboard/smart-account/enable-smart-account.png)
 
@@ -49,11 +51,11 @@ To enable smart accounts, navigate to the smart accounts section in the Web3Auth
 Once smart accounts are enabled, you can customize the wallet configurations:
 
 - **All supported wallets (default):** Allows users to create smart accounts using both embedded and external wallets.
-- **Embedded wallets only:** Restricts Smart Account creation to only embedded wallets.
+- **Embedded wallets only:** Restricts Smart Account creation to embedded wallets.
 
 #### Configure bundler and paymaster
 
-A bundler aggregates UserOperations and submits them on-chain via the global EntryPoint contract. To configure the bundler:
+A bundler aggregates UserOperations and submits them onchain via the global EntryPoint contract. To configure the bundler:
 
 ![Configure bundler and paymaster](/img/embedded-wallets/w3a-dashboard/smart-account/configure-paymaster.png)
 
@@ -98,6 +100,7 @@ const web3AuthOptions: Web3AuthOptions = {
 ```
 
 ### Advanced configuration: override paymaster context
+
 You can override the paymaster context defined in the dashboard for specific chains. This is particularly useful when your paymaster requires custom settings or parameters.
 
 ```ts
@@ -136,10 +139,12 @@ The paymaster context must be manually configured for each chain that needs to b
 :::
 
 ## Using smart accounts
+
 ### Configure signer
+
 <ConfigureSigners />
 
-### Get Smart account address
+### Get smart account address
 
 <SmartAccountAddress />
 
@@ -296,7 +301,7 @@ When calling `sendUserOperation`, it returns a UserOperation hash, not the trans
 
 :::
 
-### Send Transaction Using ERC-20 paymaster
+### Send transaction using ERC-20 paymaster
 
 You can use ERC-20 tokens to pay for transaction fees instead of the native token (for example, ETH). This requires approving the token for use by the paymaster:
 

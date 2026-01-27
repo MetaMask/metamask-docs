@@ -20,9 +20,9 @@ The user experience in gaming & native OS platforms is very different from the w
 
 For the seamless login flow, we need to reconstruct the Shares `A` and `B`. `Share A` is managed by the login service and is provided on successful authentication. Whereas in web platforms, `Share B` is stored in the browser context. We can still store it in the browser context for other devices, but this has a few risks, like user accidently deleting browser data. This is a bigger problem while using native platform application, since the user doesn't realise that the browser is being used to login within the app and clearing the browser data can cause their logins to fail. Hence, to tackle this issue, Web3Auth issues a dapp share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
 
-## dapp share in Unity
+## Dapp share in Unity
 
-Web3Auth issues a dapp share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
+Web3Auth issues a dapp share, that is, a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
 
 After a successful login from a user, the user details are returned as a response to the application on mobile devices.
 
@@ -44,10 +44,10 @@ After a successful login from a user, the user details are returned as a respons
     "typeOfLogin": "google",
     "verifier": "torus",
     "verifierId": "john@gmail.com",
-    "dappShare": "<24 words seed phrase>", // will be sent only in case of custom verifiers
-    "idToken": "<JWT token issued by Web3Auth>",
-    "oAuthIdToken": "<JWT token issued by OAuth provider>", // will be sent only in case of custom verifiers
-    "oAuthAccessToken": "<Access token issued by OAuth provider>", // will be sent only in case of custom verifiers
+    "dappShare": "<24 words seed phrase>", // will be sent only incase of custom verifiers
+    "idToken": "<jwtToken issued by Web3Auth>",
+    "oAuthIdToken": "<jwtToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
+    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
     "isMfaEnabled": true // returns true if user has enabled mfa
   }
 }

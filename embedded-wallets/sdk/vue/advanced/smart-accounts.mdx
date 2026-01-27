@@ -256,8 +256,8 @@ Smart accounts support message signing following the EIP-1271 standard for signa
       <pre>{{ data }}</pre>
     </div>
 
-    <div v-if="error">
-      <h3>error:</h3>
+    <div v-if="rror">
+      <h3>Error:</h3>
       <pre>{{ error.message }}</pre>
     </div>
   </div>
@@ -349,7 +349,7 @@ const accountAbstractionProvider = web3auth.accountAbstractionProvider
 const bundlerClient = accountAbstractionProvider.bundlerClient!
 const smartAccount = accountAbstractionProvider.smartAccount!
 
-// Pimlico's ERC-20 paymaster address
+// Pimlico's ERC-20 Paymaster address
 const pimlicoPaymasterAddress = '0x0000000000000039cd5e8aE05257CE51C473ddd1'
 
 // USDC address on Ethereum Sepolia

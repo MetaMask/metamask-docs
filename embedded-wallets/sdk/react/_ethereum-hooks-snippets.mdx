@@ -72,7 +72,7 @@ export function Balance() {
       <h2>Balance</h2>
       <div>
         {data?.value !== undefined && `${formatUnits(data.value, data.decimals)} ${data.symbol}`}{" "}
-        {isLoading && "loading..."} {error && "Error: " + error.message}
+        {isLoading && "Loading..."} {error && "Error: " + error.message}
       </div>
     </div>
   );

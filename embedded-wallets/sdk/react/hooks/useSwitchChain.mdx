@@ -25,7 +25,7 @@ function SwitchChainButton() {
       <button onClick={() => switchChain('0x1')} disabled={loading}>
         {loading ? 'Switching...' : 'Switch to Ethereum Mainnet'}
       </button>
-      {error && <span>error: {error.message}</span>}
+      {error && <span>Error: {error.message}</span>}
     </div>
   )
 }

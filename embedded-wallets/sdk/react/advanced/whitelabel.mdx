@@ -58,7 +58,7 @@ The `LoginMethodConfig` interface provides extensive customization options for e
 | `logoDark`                | `string`               | Logo for light theme/background (defaults to auth app's default)                     |
 | `mainOption`              | `boolean`              | Whether to show login button on the main list                                        |
 | `showOnModal`             | `boolean`              | Controls visibility of the login button on modal                                     |
-| `authConnectionId        | `string`               | Auth connection ID of the provider                                                   |
+| `authConnectionId`        | `string`               | Auth connection ID of the provider                                                   |
 | `groupedAuthConnectionId` | `string`               | Grouped Auth Connection ID of the provider                                           |
 | `extraLoginOptions`       | `ExtraLoginOptions`    | Additional parameters for social login                                               |
 | `authConnection`          | `AUTH_CONNECTION_TYPE` | Auth connection type (useful for customizing login buttons with custom connectors)   |
@@ -102,11 +102,11 @@ export type LoginMethodConfig = Partial<
        */
       showOnModal?: boolean
       /**
-       * Auth Connection ID of the provider.
+       * Auth connection id of the provider.
        */
       authConnectionId?: string
       /**
-       * Grouped Auth Connection ID of the provider.
+       * Grouped auth connection id of the provider.
        */
       groupedAuthConnectionId?: string
       /**
@@ -203,11 +203,11 @@ export default web3AuthContextConfig
 
 ### Enhancing email and SMS login experience
 
-By specifying a custom `authConnectionId for email or SMS login methods, you can ensure the entire authentication flow takes place seamlessly within the modal, eliminating the need for external popups.
+By specifying a custom `authConnectionId` for email or SMS login methods, you can ensure the entire authentication flow takes place seamlessly within the modal, eliminating the need for external popups.
 
 :::info
 
-In the default setup, users are redirected to a separate popup to enter their email or phone number for security purposes. However, with a custom `authConnectionId, this input step is securely embedded directly inside the modal, providing a smoother and more integrated user experience.
+In the default setup, users are redirected to a separate popup to enter their email or phone number for security purposes. However, with a custom `authConnectionId`, this input step is securely embedded directly inside the modal, providing a smoother and more integrated user experience.
 
 :::
 

@@ -32,7 +32,7 @@ Learn more about the [auth provider setup](../../../authentication/README.mdx) a
 
 ## Modal custom authentication
 
-The basic custom authentication is available directly in the modal. You can configure each of the auth providers in the modal to direct to your `authConnectionId.
+The basic custom authentication is available directly in the modal. You can configure each of the auth providers in the modal to direct to your `authConnectionId`.
 
 :::note
 
@@ -213,11 +213,11 @@ export type LoginParamMap = {
    */
   authConnection: AUTH_CONNECTION_TYPE | CUSTOM_AUTH_CONNECTION_TYPE;
   /**
-   * The auth connection ID to be used for login.
+   * The auth connection id to be used for login.
    */
   authConnectionId?: string;
   /**
-   * The grouped auth connection ID to be used for login.
+   * The grouped auth connection id to be used for login.
    */
   groupedAuthConnectionId?: string;
   /**
@@ -257,12 +257,12 @@ export type LoginParamMap = {
    */
   dappShare?: string;
   /**
-   * This curve will be used to determine the public key encoded in the JWT token which returned in
+   * This curve will be used to determine the public key encoded in the jwt token which returned in
    * `getUserInfo` function after user login.
-   * You can use that public key from JWT token as a unique user identifier in your backend.
+   * You can use that public key from jwt token as a unique user identifier in your backend.
    *
-   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in JWT token to use.
-   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in JWT token to use.
+   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in jwt token to use.
+   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in jwt token to use.
    *
    * Note: This parameter won't change format of private key returned by auth. Private key returned
    * by auth is always `secp256k1`.
@@ -272,7 +272,7 @@ export type LoginParamMap = {
    */
   curve?: SUPPORTED_KEY_CURVES_TYPE;
   /**
-   * Allows the dapp to set a custom redirect URL for the manage MFA flow.
+   * Allows the dapp to set a custom redirect url for the manage MFA flow.
    *
    */
   dappUrl?: string;
@@ -312,14 +312,14 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
 <Tabs>
   <TabItem value="Table">
 
-| Parameter               | Description                                                 |
-| ----------------------- | ----------------------------------------------------------- |
-| `isUserIdCaseSensitive` | Whether the user ID field is case sensitive [Default: true] |
-| `domain`                | Auth provider domain (for example, "example.auth0.com")     |
-| `client_id`             | Client ID from your auth provider                           |
-| `scope`                 | OAuth scopes (for example, "email profile openid")          |
-| `response_type`         | Response type for OAuth flow                                |
-| `login_hint`            | Pre-fill user identifier                                    |
+| Parameter               | Description                                                  |
+| ----------------------- | -------------------------------------------------------------|
+| `isUserIdCaseSensitive` | Whether the user ID field is case sensitive (Default: true). |
+| `domain`                | Auth provider domain (for example, "example.auth0.com") .    |
+| `client_id`             | Client ID from your auth provider.                           |
+| `scope`                 | OAuth scopes (for example, "email profile openid").          |
+| `response_type`         | Response type for OAuth flow.                                |
+| `login_hint`            | Pre-fill user identifier.                                    |
 
   </TabItem>
   <TabItem value="Interface">
@@ -338,11 +338,11 @@ For custom integrations (like Auth0, AWS Cognito), you can provide additional op
      */
     client_id?: string;
     /**
-     * The field in JWT token which maps to user id
+     * The field in jwt token which maps to user id
      */
     userIdField?: string;
     /**
-     * Whether the user ID field is case sensitive
+     * Whether the user id field is case sensitive
      * @defaultValue true
      */
     isUserIdCaseSensitive?: boolean;
@@ -373,9 +373,9 @@ Implicit logins are the easiest way to authenticate users with your custom authe
 - Facebook
 - Discord
 - Twitch
-- Auth0 (Custom)
+- Auth0 (custom)
 
-In addition to these you can also use any other provider like Auth0, AWS Cognito, Azure AD, etc. by providing the particular details of their login within the `extraLoginOptions` object within the `connectTo` function.
+In addition to these you can also use any other provider, for example Auth0, AWS Cognito, Azure AD. by providing the particular details of their login within the `extraLoginOptions` object within the `connectTo` function.
 
 #### Usage
 
@@ -560,7 +560,7 @@ const loginWithFirebaseGithub = async () => {
 
 ```ts
 const getIdToken = async () => {
-  // Get ID token from server
+  // Get ID Token from server
   const res = await fetch('http://localhost:8080/api/token', {
     method: 'POST',
     headers: {
@@ -683,7 +683,7 @@ const loginWithAuth0 = async () => {
     await auth0Client.loginWithPopup()
     const idToken = (await getIdTokenClaims())?.__raw.toString()
     if (!idToken) {
-      throw new Error('No ID token found')
+      throw new Error('No id token found')
     }
 
     // focus-start

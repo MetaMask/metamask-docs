@@ -125,7 +125,7 @@ export type WhiteLabelData = {
   tncLink?: Partial<Record<LANGUAGE_TYPE, string>>
   /**
    * Language specific link for privacy policy on torus-website. See (examples/vue-app) to configure
-   * for example,
+   * e.g.
    * privacyPolicy: {
    *  en: "http://example.com/tnc/en",
    *  ja: "http://example.com/tnc/ja",
@@ -157,7 +157,7 @@ import * as WebBrowser from 'expo-web-browser'
 import * as SecureStore from 'expo-secure-store'
 import Web3Auth, { LOGIN_PROVIDER, WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
 
-const clientId = '<YOUR-EMBEDDED-WALLETS/WEB3AUTH-CLIENT-ID>'
+const clientId = 'YOUR WEB3AUTH CLIENT ID'
 
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   clientId,
@@ -186,7 +186,7 @@ import * as WebBrowser from '@toruslabs/react-native-web-browser'
 import EncryptedStorage from 'react-native-encrypted-storage'
 import Web3Auth, { LOGIN_PROVIDER, WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
 
-const clientId = '<YOUR-EMBEDDED-WALLETS/WEB3AUTH-CLIENT-ID>'
+const clientId = 'YOUR WEB3AUTH CLIENT ID'
 
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   clientId,

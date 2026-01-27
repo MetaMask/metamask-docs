@@ -17,13 +17,13 @@ import { useIdentityToken } from '@web3auth/modal/react'
 ```tsx
 import { useIdentityToken } from '@web3auth/modal/react'
 
-function IdentitytTkenButton() {
+function IdentitytTokenButton() {
   const { getIdentityToken, loading, error, token } = useIdentityToken()
 
   return (
     <div>
       <button onClick={() => getIdentityToken()} disabled={loading}>
-        {loading ? 'Authenticating...' : 'Get Identity token'}
+        {loading ? 'Authenticating...' : 'Get Identity Token'}
       </button>
       {token && <div>Token: {token}</div>}
       {error && <div>Error: {error.message}</div>}
@@ -56,7 +56,7 @@ Error that occurred during the authentication process.
 
 The identity token returned after successful authentication.
 
-#### `Getidentitytoken`
+#### `getIdentityToken`
 
 `() => Promise<string | null>`
 
