@@ -1,4 +1,19 @@
 .menu {
+  /* Sidebar "guide line" (vertical tree line) color */
+  --doc-sidebar-guide-line-color: var(--ifm-toc-border-color);
+  /* Single source of truth for the tree-line X position (used by lines + selected highlight) */
+  --doc-sidebar-line-x: 1.6rem;
+  /* Indentation step applied at each nesting level so line spacing + text spacing
+   * stay consistent for level 2/3/4/... */
+  --doc-sidebar-indent-step: calc(var(--ifm-menu-link-padding-horizontal) - 0.6rem);
+  /* Selected item background tint (fallback first, then color-mix for nicer tinting) */
+  --doc-sidebar-selected-bg: rgba(186, 242, 74, 0.10);
+  --doc-sidebar-selected-bg: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
+
+  @include bp('tablet') {
+    --doc-sidebar-line-x: 2.4rem;
+  }
+
   &.thin-scrollbar {
     padding: 1rem 0 0;
   }
@@ -13,6 +28,11 @@
   }
 
   &__list {
+    /* The tree line is positioned relative to the list's padding box.
+     * We store the current list padding-left so selected-row highlights can
+     * compute a matching x-offset in the row coordinate space. */
+    --doc-sidebar-list-padding-left: 0px;
+
     padding-top: 0;
     padding-bottom: 0;
 
@@ -21,33 +41,45 @@
       padding-bottom: 1rem;
     }
 
-    .theme-doc-sidebar-item-category-level-1 & {
-      padding-left: calc(var(--ifm-menu-link-padding-horizontal) / 4);
-
-      @include bp('tablet') {
-        padding-left: var(--ifm-menu-link-padding-horizontal);
-      }
-    }
-
-    .theme-doc-sidebar-item-category-level-2 &,
-    .theme-doc-sidebar-item-category-level-3 &,
-    .theme-doc-sidebar-item-category-level-4 &,
-    .theme-doc-sidebar-item-category-level-5 &,
-    .theme-doc-sidebar-item-category-level-6 & {
-      padding-left: calc(var(--ifm-menu-link-padding-horizontal) / 4);
-
-      @include bp('tablet') {
-        padding-left: calc(var(--ifm-menu-link-padding-horizontal) / 2);
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-    }
+    /* Consistent nesting indentation: every nested list adds the same step */
     .menu__list {
       flex: 0 0 100%;
       padding-top: 0rem;
       padding-bottom: 0rem;
       margin-bottom: 0.25rem;
-      padding-left: var(--ifm-menu-link-padding-horizontal);
+      padding-left: var(--doc-sidebar-indent-step);
+      --doc-sidebar-list-padding-left: var(--doc-sidebar-indent-step);
+    }
+
+    /* Vertical guide lines (tree lines) for expanded category trees (level 1+). */
+    .menu__list-item.theme-doc-sidebar-item-category-level-1 > .menu__list,
+    .menu__list-item.theme-doc-sidebar-item-category-level-2 > .menu__list,
+    .menu__list-item.theme-doc-sidebar-item-category-level-3 > .menu__list,
+    .menu__list-item.theme-doc-sidebar-item-category-level-4 > .menu__list,
+    .menu__list-item.theme-doc-sidebar-item-category-level-5 > .menu__list,
+    .menu__list-item.theme-doc-sidebar-item-category-level-6 > .menu__list {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: var(--doc-sidebar-line-x);
+        width: 1px;
+        background: var(--doc-sidebar-guide-line-color);
+        pointer-events: none;
+        opacity: 0;
+      }
+    }
+
+    .menu__list-item.theme-doc-sidebar-item-category-level-1:not(.menu__list-item--collapsed) > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-2:not(.menu__list-item--collapsed) > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-3:not(.menu__list-item--collapsed) > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-4:not(.menu__list-item--collapsed) > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-5:not(.menu__list-item--collapsed) > .menu__list::before,
+    .menu__list-item.theme-doc-sidebar-item-category-level-6:not(.menu__list-item--collapsed) > .menu__list::before {
+      opacity: 1;
     }
     .theme-doc-sidebar-item-link-level-1 {
       padding-bottom: 0.4rem;
@@ -58,8 +90,47 @@
   }
 
   &__list-item {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+
+    /* Reduce top-level nav emphasis (level 1). */
+    &.theme-doc-sidebar-item-category-level-1 > .menu__list-item-collapsible > .menu__link {
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    /* Top-level doc pages (e.g. "Introduction") are link items, not categories. */
+    &.theme-doc-sidebar-item-link-level-1 > .menu__link {
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    /* Only the active page should be bold; keep ancestor path normal weight. */
+
     &-collapsible {
       border-radius: 0;
+    }
+
+    /* Hover: no background/bar (TOC-like). Only a subtle text emphasis. */
+    &-collapsible:hover {
+      background-image: none !important;
+      background-color: transparent !important;
+      background: transparent !important; /* override Infima `background:` shorthand */
+    }
+
+    /* Active (expanded category row): no bar, no filled background, just typography */
+    &-collapsible--active {
+      background-image: none !important;
+      background-color: transparent !important;
+      background: transparent !important; /* override Infima `background:` shorthand */
+    }
+
+    /* Apply the subtle hover emphasis to the text inside collapsible rows */
+    &-collapsible:hover .menu__link {
+      color: var(--ifm-menu-color-active);
+      /* Faux-bold without reflow (more stable than font-weight changes) */
+      text-shadow: 0 0 0 currentColor;
     }
 
     &.theme-doc-sidebar-item-category-level-2,
@@ -101,6 +172,10 @@
     line-height: 124%;
     text-decoration: none;
     font-weight: 500;
+    /* Ensure background fills the full row */
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
     padding: 0.6rem 1.6rem;
     border-radius: 0;
     text-decoration: none !important;
@@ -111,11 +186,94 @@
 
     &--active {
       color: var(--ifm-menu-color-active);
+      /* Docusaurus applies `menu__link--active` to the active page *and* its ancestor
+       * categories. Keep active color, but don't bold the whole ancestor path. */
+      font-weight: inherit;
+      text-shadow: none;
+      /* Selected item: no bar / no filled background */
+      background-image: none !important;
+      background-color: transparent !important;
 
       + .menu__caret {
         opacity: 1;
       }
     }
+
+    /* Only the actual selected page link should be bold. */
+    &[aria-current='page'] {
+      /* Selected page: keep the *normal* text color (no green), rely on highlight only */
+      font-weight: inherit;
+      text-shadow: none;
+      color: var(--ifm-menu-color) !important;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--ifm-menu-color) !important;
+        text-shadow: none;
+      }
+    }
+
+    /* Hover: slight contrast, no "highlight bar" */
+    &:hover:not([aria-current='page']),
+    &:focus-visible:not([aria-current='page']) {
+      background-image: none !important;
+      background-color: transparent !important;
+      background: transparent !important; /* override Infima `background:` shorthand */
+      color: var(--ifm-menu-color-active);
+      /* Faux-bold without reflow (more stable than font-weight changes) */
+      text-shadow: 0 0 0 currentColor;
+    }
+  }
+
+  /* Selected item highlight: apply to the *row header only* (not the whole <li>),
+   * otherwise expanded categories would tint their entire subtree. We also avoid
+   * relying on `:has()` by using `data-current-page` (stamped by our swizzled components). */
+
+  /* Link items: the row is the direct <a> child. */
+  .menu__list-item[data-current-page='true'] > a.menu__link {
+    position: relative;
+  }
+  .menu__list-item[data-current-page='true'] > a.menu__link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    /* Convert list-space line position to row-space by subtracting the list padding-left. */
+    left: calc(var(--doc-sidebar-line-x) - var(--doc-sidebar-list-padding-left) + 0.5px);
+    right: 0;
+    background: var(--doc-sidebar-selected-bg);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Top-level link items (level 1): no meaningful tree line on the row, so let the
+   * selected highlight run full-width. */
+  .menu__list-item.theme-doc-sidebar-item-link-level-1[data-current-page='true'] > a.menu__link::before {
+    left: 0;
+  }
+  .menu__list-item[data-current-page='true'] > a.menu__link > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Category items: the row header is the collapsible wrapper. */
+  .menu__list-item[data-current-page='true'] > .menu__list-item-collapsible {
+    position: relative;
+  }
+  .menu__list-item[data-current-page='true'] > .menu__list-item-collapsible::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--doc-sidebar-line-x) - var(--doc-sidebar-list-padding-left) + 0.5px);
+    right: 0;
+    background: var(--doc-sidebar-selected-bg);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .menu__list-item[data-current-page='true'] > .menu__list-item-collapsible > * {
+    position: relative;
+    z-index: 1;
   }
 
   &__caret {
@@ -141,6 +299,12 @@
   }
 
 
+}
+
+/* Dark mode: make tree lines more subtle */
+[data-theme='dark'] .menu {
+  --doc-sidebar-guide-line-color: rgba(255, 255, 255, 0.12);
+  --doc-sidebar-selected-bg: rgba(186, 242, 74, 0.14);
 }
 
 .theme-doc-sidebar-container {
