@@ -86,6 +86,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-hemi.svg`,
   },
   {
+    name: 'HyperEVM',
+    href: '/services/reference/hyperevm',
+    logo: `${LOGO_PATH}/logo-hyperevm.svg`,
+  },
+  {
     name: 'Linea',
     href: '/services/reference/linea',
     logo: `${LOGO_PATH}/logo-linea.svg`,
