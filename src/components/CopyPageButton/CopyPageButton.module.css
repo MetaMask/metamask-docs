@@ -5,9 +5,10 @@
   min-height: 48px; /* Ensure minimum height for button */
 }
 
-@media (min-width: 997px) {
+@media (width >= 997px) {
   .h1Wrapper h1 {
     /* Don't override the default H1 margin-bottom */
+
     /* Add padding-right to prevent text from going under the button */
     padding-right: 180px;
   }
@@ -71,7 +72,7 @@
   backdrop-filter: blur(10px);
 }
 
-@media (max-width: 996px) {
+@media (width <= 996px) {
   .container {
     display: none;
   }
