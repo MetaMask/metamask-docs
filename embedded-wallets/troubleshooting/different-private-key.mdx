@@ -1,33 +1,37 @@
 ---
 title: Different Private Keys/ Wallet Address across Integrations
 image: 'img/metamaskog.jpg'
-sidebar_label: Different Private Keys
+sidebar_label: Different private keys
 description: 'Different Private Keys across Integrations | Embedded Wallets'
 ---
 
 Developers and users frequently face confusion when they get different wallet addresses for multitudes of reasons. Here's our attempt to explain the possible reasons for different wallet addresses and what to keep in mind while designing your solutions.
 
-## Custom Connections
+## Custom connections
 
 A custom connection is configuration about the OAuth/OpenID provider your app uses, which the auth network validates against a smart contract to verify the JWT token.
 
 ::::tip
 
-To learn more about creating custom connections, see [Authentication](/embedded-wallets/authentication).
+To learn more about creating custom connections, see [authentication](/embedded-wallets/authentication).
 
 ::::
 
 If you use the same custom connection across every SDK your wallet address will not change, since all SDKs support the same connection information.
 
-> You might face errors where users using different social login credentials use different methods (like Google Login and Email Passwordless), and receive different wallet addresses/keys. This is because, when you use different login providers, connection details change, even though the id, sub, email etc fields remain the same. For such cases, you can use a Group Connection.
+:::tip
 
-### Group Connections
+You might face errors where users using different social login credentials use different methods (like Google login and email passwordless), and receive different wallet addresses/keys. This is because, when you use different login providers, connection details change, even though the id, sub, email, and other fields remain the same. For such cases, you can use a **group connection**.
 
-A group connection combines multiple login methods to create a single connection so the same wallet address is derived for the same email ID regardless of the login provider, for example, combining Google and Email Passwordless or Google and GitHub via Auth0 to access the same key for your user.
+:::
 
-::::tip
+### Group connections
 
-Refer to the docs [here](/embedded-wallets/authentication/group-connections) to learn more about creating a group connection.
+A group connection combines multiple login methods to create a single connection so the same wallet address is derived for the same email ID regardless of the login provider, for example, combining Google and email passwordless or Google and GitHub via Auth0 to access the same key for your user.
+
+::::info
+
+Learn more about [creating a group connection](/embedded-wallets/authentication/group-connections).
 
 ::::
 
