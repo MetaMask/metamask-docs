@@ -15,7 +15,7 @@ You can use the following RPC methods to request cryptographic signatures from u
 The following is an example of using `signMessage` with MetaMask:
 
 ```javascript
-import { createSolanaClient } from '@metamask/connect/solana'
+import { createSolanaClient } from '@metamask/connect-solana'
 
 const solanaClient = createSolanaClient()
 const provider = solanaClient.getProvider()

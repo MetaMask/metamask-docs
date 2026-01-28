@@ -89,7 +89,7 @@ You've successfully set up MetaMask Connect.
 Install MetaMask Connect in an existing JavaScript project:
 
 ```bash npm2yarn
-npm install @metamask/connect/evm
+npm install @metamask/connect-evm
 ```
 
 ### 2. Initialize MetaMask Connect
@@ -97,17 +97,18 @@ npm install @metamask/connect/evm
 The following is an example of using MetaMask Connect for an EVM dapp in a JavaScript project:
 
 ```javascript
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = createEVMClient({
   dapp: {
-    name: 'Example JavaScript dapp',
+    name: 'Metamask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
   api: {
     supportedNetworks: {
-      'eip155:1': process.env.INFURA_API_KEY,
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })

@@ -86,7 +86,7 @@ You've successfully set up MetaMask Connect.
 Install MetaMask Connect in an existing JavaScript project:
 
 ```bash npm2yarn
-npm install @metamask/connect/solana
+npm install @metamask/connect-solana
 ```
 
 ### 2. Initialize MetaMask Connect
@@ -94,7 +94,7 @@ npm install @metamask/connect/solana
 The following are examples of using MetaMask Connect in various JavaScript environments:
 
 ```javascript
-import { createSolanaClient } from '@metamask/connect/solana'
+import { createSolanaClient } from '@metamask/connect-solana'
 
 const solanaClient = createSolanaClient({
   dapp: {

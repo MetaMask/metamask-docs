@@ -41,7 +41,7 @@ The following is an example of setting up SIWS with MetaMask using
 [`solana_signMessage`](#):
 
 ```javascript title="index.js"
-import { createSolanaClient } from '@metamask/connect/solana'
+import { createSolanaClient } from '@metamask/connect-solana'
 
 const solanaClient = createSolanaClient()
 const provider = solanaClient.getProvider()
