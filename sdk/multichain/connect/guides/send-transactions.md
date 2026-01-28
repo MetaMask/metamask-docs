@@ -5,7 +5,7 @@ sidebar_label: Send transactions
 # Send EVM and Solana transactions
 
 Handle EVM and Solana transactions in your JavaScript dapp.
-With MM Connect, you can:
+With MetaMask Connect, you can:
 
 - Send transactions on EVM networks and Solana in sequence, without having to switch networks.
 - Track transaction status in real time.

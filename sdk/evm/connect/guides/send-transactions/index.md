@@ -1,5 +1,5 @@
 ---
-description: Handle transactions with MM Connect in your JavaScript dapp.
+description: Handle transactions with MetaMask Connect in your JavaScript dapp.
 keywords: [SDK, JavaScript, wagmi, send, transaction, transactions, status, estimate, gas, dapp]
 toc_max_heading_level: 2
 ---
@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Send transactions
 
 Handle EVM transactions in your JavaScript dapp.
-With MM Connect, you can:
+With MetaMask Connect, you can:
 
 - **Send transactions**.
 - **Track transaction status** in real time.
@@ -18,7 +18,7 @@ With MM Connect, you can:
 - **Handle transaction errors** gracefully.
 - **Manage complex transaction patterns**.
 
-The following examples demonstrate how to use MM Connect with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to send a [basic transaction](#send-a-basic-transaction) and an
+The following examples demonstrate how to use MetaMask Connect with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to send a [basic transaction](#send-a-basic-transaction) and an
 [advanced transaction with gas estimation](#send-an-advanced-transaction-with-gas-estimation).
 
 ## Send a basic transaction

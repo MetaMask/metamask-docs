@@ -1,5 +1,5 @@
 ---
-description: Manage networks with MM Connect in your Vanilla JS or Wagmi dapp.
+description: Manage networks with MetaMask Connect in your Vanilla JS or Wagmi dapp.
 keywords: [SDK, JavaScript, wagmi, detect, switch, add, network, networks, dapp]
 toc_max_heading_level: 2
 ---
@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Manage networks
 
 Manage networks in your Vanilla JavaScript or Wagmi dapp.
-With MM Connect, you can:
+With MetaMask Connect, you can:
 
 - **Detect the current network** and monitor network changes.
 - **Switch between networks** programmatically.

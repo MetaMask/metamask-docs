@@ -4,7 +4,7 @@ sidebar_label: Connect to EVM and Solana
 
 # Connect to EVM and Solana in MetaMask
 
-Get started with MM Connect in your multichain JavaScript dapp.
+Get started with MetaMask Connect in your multichain JavaScript dapp.
 You can connect to EVM networks and Solana in MetaMask at the same time, and make requests to each network without having to switch between them.
 
 ## Prerequisites
@@ -15,17 +15,17 @@ You can connect to EVM networks and Solana in MetaMask at the same time, and mak
 
 ## Steps
 
-### 1. Install MM Connect
+### 1. Install MetaMask Connect
 
-Install MM Connect in an existing JavaScript project:
+Install MetaMask Connect in an existing JavaScript project:
 
 ```bash npm2yarn
 npm install @metamask/connect/multichain
 ```
 
-### 2. Initialize MM Connect
+### 2. Initialize MetaMask Connect
 
-Initialize MM Connect with configuration options:
+Initialize MetaMask Connect with configuration options:
 
 ```javascript
 import { createMultichainClient } from "@metamask/connect/multichain"
@@ -40,7 +40,7 @@ const multichainClient = createMultichainClient({
 })
 ```
 
-This example configures MM Connect with the following options:
+This example configures MetaMask Connect with the following options:
 
 - [`dappMetadata`](../../../reference/options.md#dappmetadata) - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
 - [`infuraAPIKey`](../../../reference/options.md#infuraapikey) - Enables read-only RPC and load‑balancing.

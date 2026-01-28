@@ -1,13 +1,13 @@
 ---
-description: Quickstart guide for using MM Connect with a JavaScript dapp.
+description: Quickstart guide for using MetaMask Connect with a JavaScript dapp.
 sidebar_label: JavaScript
 keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK]
 ---
 
-# Connect to Solana using MM Connect
+# Connect to Solana using MetaMask Connect
 
-Get started with MM Connect in your JavaScript dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up MM Connect](#set-up-manually) in an existing dapp.
+Get started with MetaMask Connect in your JavaScript dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
 
 <!-- <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
@@ -24,7 +24,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up using a template
 
-1. Download the [MM Connect JavaScript template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript):
+1. Download the [MetaMask Connect JavaScript template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/quickstarts/javascript metamask-javascript
@@ -43,7 +43,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
    Alternatively, you can use `git clone`, which will download the entire repository.
-   To do so, clone the MM Connect examples repository and navigate into the `quickstarts/javascript` directory:
+   To do so, clone the MetaMask Connect examples repository and navigate into the `quickstarts/javascript` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -77,21 +77,21 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
    pnpm dev
    ```
 
-You've successfully set up MM Connect.
+You've successfully set up MetaMask Connect.
 
 ## Set up manually
 
-### 1. Install MM Connect
+### 1. Install MetaMask Connect
 
-Install MM Connect in an existing JavaScript project:
+Install MetaMask Connect in an existing JavaScript project:
 
 ```bash npm2yarn
 npm install @metamask/connect/solana
 ```
 
-### 2. Initialize MM Connect
+### 2. Initialize MetaMask Connect
 
-The following are examples of using MM Connect in various JavaScript environments:
+The following are examples of using MetaMask Connect in various JavaScript environments:
 
 ```javascript
 import { createSolanaClient } from '@metamask/connect/solana'
@@ -110,7 +110,7 @@ const solanaClient = createSolanaClient({
 })
 ```
 
-These examples configure MM Connect with the following options:
+These examples configure MetaMask Connect with the following options:
 
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
 - `api.supportedNetworks` - A map of caipChainIds -> RPC URLs for all networks supported by the app.
@@ -136,7 +136,7 @@ console.log('solana_accounts result:', result)
 
 Use `provider.request()` for arbitrary [JSON-RPC requests](#) like `solana_chainId` or `solana_getBalance`, or for [batching requests](#) via `metamask_batch`.
 
-## Common MM Connect methods at a glance
+## Common MetaMask Connect methods at a glance
 
 | Method                                      | Description                                              |
 | ------------------------------------------- | -------------------------------------------------------- |

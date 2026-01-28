@@ -1,11 +1,11 @@
 ---
-description: Batch multiple JSON-RPC requests using MM Connect.
+description: Batch multiple JSON-RPC requests using MetaMask Connect.
 keywords: [SDK, batch, JSON-RPC, RPC, requests, methods, dapp]
 ---
 
 # Batch requests
 
-MM Connect provides a `metamask_batch` method to send multiple JSON-RPC requests in a single call.
+MetaMask Connect provides a `metamask_batch` method to send multiple JSON-RPC requests in a single call.
 These requests can be contract calls or other JSON-RPC methods (for example, signing messages or sending transactions).
 Despite being batched into one HTTP request, each call still requires individual user approval, and if any request is rejected, the entire batch fails.
 
@@ -16,7 +16,7 @@ Despite being batched into one HTTP request, each call still requires individual
 
 ## Batch JSON-RPC requests
 
-You can directly use MM Connect's `metamask_batch` method to group multiple JSON-RPC requests into a single HTTP call.
+You can directly use MetaMask Connect's `metamask_batch` method to group multiple JSON-RPC requests into a single HTTP call.
 
 Use cases include:
 

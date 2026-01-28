@@ -1,15 +1,15 @@
 ---
 sidebar_label: Embedded Wallets SDK
-description: Quickstart guide for using MM Connect and Embedded Wallets SDK.
+description: Quickstart guide for using MetaMask Connect and Embedded Wallets SDK.
 toc_max_heading_level: 3
 keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
 ---
 
 # Connect to Solana using Embedded Wallets SDK
 
-Get started with MM Connect and [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets),
+Get started with MetaMask Connect and [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets),
 enabling users to sign in with an email or social media account.
-You can use MM Connect features directly within Embedded Wallets SDK.
+You can use MetaMask Connect features directly within Embedded Wallets SDK.
 You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
 
 <!-- <p align="center">
@@ -27,7 +27,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up using a template
 
-1. Download the [MM Connect + Web3Auth SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/web3auth):
+1. Download the [MetaMask Connect + Web3Auth SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/web3auth):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/partners/web3auth metamask-web3auth
@@ -46,7 +46,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
    Alternatively, you can use `git clone`, which will download the entire repository.
-   To do so, clone the MM Connect examples repository and navigate into the `partners/web3auth` directory:
+   To do so, clone the MetaMask Connect examples repository and navigate into the `partners/web3auth` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -80,14 +80,14 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
    pnpm dev
    ```
 
-You've successfully set up MM Connect and MetaMask Embedded Wallets.
+You've successfully set up MetaMask Connect and MetaMask Embedded Wallets.
 See how to [use Embedded Wallets](#usage).
 
 ## Set up manually
 
 ### 1. Install dependencies
 
-Install MM Connect and the required dependencies to an existing project:
+Install MetaMask Connect and the required dependencies to an existing project:
 
 ```bash npm2yarn
 npm install viem wagmi @tanstack/react-query @web3auth/modal@10
