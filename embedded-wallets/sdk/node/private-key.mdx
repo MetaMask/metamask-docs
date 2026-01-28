@@ -34,12 +34,13 @@ The provider offers different methods to access private keys depending on your b
 
 ```javascript
 const privateKey = await provider.request({ method: 'private_key' })
-console.log('Private Key:', privateKey) // 0x1234567890abcdef...
+console.log('Private Key Length:', privateKey.length) // Only log metadata
 ```
 
 ### Use with Ethers.js
 
 ```javascript
+// Example using ethers.js v6
 const { ethers } = require('ethers')
 
 // Get private key
@@ -49,7 +50,7 @@ const privateKey = await provider.request({ method: 'private_key' })
 const wallet = new ethers.Wallet(privateKey)
 
 // Connect to a provider
-const rpcProvider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth')
+const rpcProvider = new ethers.JsonRpcProvider('https://rpc.ankr.com/eth')
 const connectedWallet = wallet.connect(rpcProvider)
 
 // Get address
@@ -59,7 +60,7 @@ console.log('Wallet Address:', address)
 // Sign a transaction
 const tx = {
   to: '0x742d35Cc6635C0532925a3b8138341B0F7E8a4e8',
-  value: ethers.utils.parseEther('0.1'),
+  value: ethers.parseEther('0.1'), 
 }
 
 const signedTx = await connectedWallet.signTransaction(tx)
@@ -105,7 +106,7 @@ const hash = await walletClient.sendTransaction({
 
 ```javascript
 const solana_privateKey = await provider.request({ method: 'solana_privateKey' })
-console.log('Solana Private Key:', solana_privateKey) // Base58 encoded
+console.log('Solana Private Key Length:', solana_privateKey.length) // Only log metadata
 ```
 
 ### Use with Solana Web3.js
@@ -153,7 +154,7 @@ const signature = await connection.sendTransaction(transaction, [keypair])
 
 ```javascript
 const rawPrivateKey = await provider.request({ method: 'private_key' })
-console.log('Raw Private Key:', rawPrivateKey) // Hex string
+console.log('Raw Private Key Length:', rawPrivateKey.length) // Only log metadata
 ```
 
 ### Example: Bitcoin Integration
