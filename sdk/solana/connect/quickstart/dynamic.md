@@ -5,17 +5,17 @@ toc_max_heading_level: 3
 keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 ---
 
-# Connect to MetaMask using Dynamic SDK
+# Connect to Solana using Dynamic SDK
 
 Get started with MetaMask Connect and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
 You can use MetaMask Connect features directly within Dynamic SDK.
 You can [download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connects](#set-up-manually) in an existing dapp.
 
-<p align="center">
+<!-- <p align="center">
   <a href="https://metamask-dynamic-demo.vercel.app/" target="_blank">
     <img src={require("../_assets/quickstart-dynamic.png").default} alt="Dynamic SDK Quickstart" width="600px" class="appScreen" />
   </a>
-</p>
+</p> -->
 
 ## Prerequisites
 
@@ -42,15 +42,15 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
     <summary>Degit vs. Git clone</summary>
     <div>
 
-    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-    
-    Alternatively, you can use `git clone`, which will download the entire repository.
-    To do so, clone the MetaMask Connect examples repository and navigate into the `partners/dynamic` directory:
+   `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-sdk-examples
-    cd metamask-sdk-examples/partners/dynamic
-    ```
+   Alternatively, you can use `git clone`, which will download the entire repository.
+   To do so, clone the MetaMask Connect examples repository and navigate into the `partners/dynamic` directory:
+
+   ```bash
+   git clone https://github.com/MetaMask/metamask-sdk-examples
+   cd metamask-sdk-examples/partners/dynamic
+   ```
 
     </div>
     </details>

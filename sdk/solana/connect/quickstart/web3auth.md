@@ -5,18 +5,18 @@ toc_max_heading_level: 3
 keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
 ---
 
-# Connect to MetaMask using Embedded Wallets SDK
+# Connect to Solana using Embedded Wallets SDK
 
 Get started with MetaMask Connect and [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets),
 enabling users to sign in with an email or social media account.
 You can use MetaMask Connect features directly within Embedded Wallets SDK.
 You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
 
-<p align="center">
+<!-- <p align="center">
   <a href="https://metamask-web3auth-demo.vercel.app/" target="_blank">
     <img src={require("../_assets/quickstart-web3auth.png").default} alt="Web3Auth SDK Quickstart" width="600px" class="appScreen" />
   </a>
-</p>
+</p> -->
 
 ## Prerequisites
 
@@ -43,15 +43,15 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
     <summary>Degit vs. Git clone</summary>
     <div>
 
-    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-    
-    Alternatively, you can use `git clone`, which will download the entire repository.
-    To do so, clone the MetaMask Connect examples repository and navigate into the `partners/web3auth` directory:
+   `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-    ```bash
-    git clone https://github.com/MetaMask/metamask-sdk-examples
-    cd metamask-sdk-examples/partners/web3auth
-    ```
+   Alternatively, you can use `git clone`, which will download the entire repository.
+   To do so, clone the MetaMask Connect examples repository and navigate into the `partners/web3auth` directory:
+
+   ```bash
+   git clone https://github.com/MetaMask/metamask-sdk-examples
+   cd metamask-sdk-examples/partners/web3auth
+   ```
 
     </div>
     </details>

@@ -1,5 +1,5 @@
 ---
-description: Interact with contracts with MM Connect in your JavaScript dapp.
+description: Interact with contracts with MetaMask Connect in your JavaScript dapp.
 keywords: [SDK, JavaScript, wagmi, read, write, smart, contract, contracts, dapp]
 sidebar_label: Interact with contracts
 toc_max_heading_level: 3
@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # Interact with smart contracts
 
 Interact with smart contracts in your JavaScript dapp.
-With MM Connect, you can:
+With MetaMask Connect, you can:
 
 - **Read data** from smart contracts.
 - **Write data** to smart contracts.
@@ -19,7 +19,7 @@ With MM Connect, you can:
 - **Manage transaction states**.
 - **Handle contract errors**.
 
-The following examples demonstrate how to use MM Connect with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to interact with Solidity smart contracts.
+The following examples demonstrate how to use MetaMask Connect with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to interact with Solidity smart contracts.
 
 This simple Hello World contract allows anyone to read and write a message to it.
 
@@ -47,11 +47,23 @@ contract HelloWorld {
 <TabItem value="viem">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 import { createPublicClient, custom } from 'viem'
 import { sepolia } from 'viem/chains'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 const publicClient = createPublicClient({
@@ -95,10 +107,22 @@ const message = await publicClient.readContract({
 <TabItem value="web3.js">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 const web3 = new Web3(provider)
@@ -135,10 +159,22 @@ const message = await contract.methods.message().call()
 <TabItem value="ethers.js">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 import { ethers } from 'ethers'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 const ethersProvider = new ethers.BrowserProvider(provider)
@@ -180,9 +216,21 @@ const message = await contract.message()
 <TabItem value="Ethereum API">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 async function getMessage(contractAddress, userAddress) {
@@ -317,7 +365,7 @@ In this example, four contract read calls are batched together.
 The results are returned as an array in the same order as the calls, allowing you to process each result accordingly.
 
 :::info
-"Batching" can also refer to [batching JSON-RPC requests](metamask-exclusive/batch-requests.md) using MM Connect's `metamask_batch` method, or [sending atomic batch transactions](send-transactions/batch-transactions.md) in MetaMask.
+"Batching" can also refer to [batching JSON-RPC requests](metamask-exclusive/batch-requests.md) using MetaMask Connect's `metamask_batch` method, or [sending atomic batch transactions](send-transactions/batch-transactions.md) in MetaMask.
 :::
 
 ## Write to contracts
@@ -326,11 +374,23 @@ The results are returned as an array in the same order as the calls, allowing yo
 <TabItem value="viem">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 import { createPublicClient, custom } from 'viem'
 import { sepolia } from 'viem/chains'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 const contractABI = [
@@ -384,10 +444,22 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 <TabItem value="web3.js">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 const web3 = new Web3(provider)
@@ -413,10 +485,22 @@ const receipt = await tx.wait()
 <TabItem value="ethers.js">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 import { ethers } from 'ethers'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 const ethersProvider = new ethers.BrowserProvider(provider)
@@ -461,9 +545,21 @@ const receipt = await tx.wait()
 <TabItem value="Ethereum API">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 async function updateMessage(contractAddress, userAddress, newMessage) {

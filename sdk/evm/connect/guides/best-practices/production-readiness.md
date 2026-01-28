@@ -1,12 +1,12 @@
 ---
-description: MetaMask-specific production readiness checklist for dapps using MM Connect.
+description: MetaMask-specific production readiness checklist for dapps using MetaMask Connect.
 keywords: [SDK, production, readiness, checklist, compatibility, errors, dapp]
 toc_max_heading_level: 2
 ---
 
 # Production readiness
 
-When using MM Connect, ensure your dapp is production ready by focusing on these key areas unique to MetaMask:
+When using MetaMask Connect, ensure your dapp is production ready by focusing on these key areas unique to MetaMask:
 
 - [Wallet connection and mobile compatibility](#wallet-connection-and-mobile-compatibility)
 - [Reliable RPC endpoints](#reliable-rpc-endpoints)
@@ -23,7 +23,7 @@ When using MM Connect, ensure your dapp is production ready by focusing on these
 - **Custom RPC setup** - Use production-grade RPC endpoints and custom API keys by signing up on [MetaMask Developer](https://developer.metamask.io/).
   This improves reliability over public nodes.
 
-- **Configuration** - Configure your Wagmi (or MM Connect) setup with your custom RPC URL using environment variables.
+- **Configuration** - Configure your Wagmi (or MetaMask Connect) setup with your custom RPC URL using environment variables.
 For example:
 
   ```tsx title="Configure custom RPC endpoint"

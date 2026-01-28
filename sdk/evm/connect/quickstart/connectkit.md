@@ -1,5 +1,5 @@
 ---
-description: Quickstart guide for using MM Connect with a JavaScript and ConnectKit dapp.
+description: Quickstart guide for using MetaMask Connect with a JavaScript and ConnectKit dapp.
 toc_max_heading_level: 3
 sidebar_label: ConnectKit
 keywords: [connect, MetaMask, JavaScript, ConnectKit, SDK, dapp, Wallet SDK]
@@ -7,8 +7,8 @@ keywords: [connect, MetaMask, JavaScript, ConnectKit, SDK, dapp, Wallet SDK]
 
 # Connect to MetaMask using JavaScript + ConnectKit
 
-Get started with MM Connect in a JavaScript and ConnectKit dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up MM Connect](#set-up-manually) in an existing dapp.
+Get started with MetaMask Connect in a JavaScript and ConnectKit dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-connectkit-demo.vercel.app/" target="_blank">
@@ -25,7 +25,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up using a template
 
-1. Download the [MM Connect ConnectKit template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/connectkit):
+1. Download the [MetaMask Connect ConnectKit template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/connectkit):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/quickstarts/connectkit metamask-connectkit
@@ -80,9 +80,9 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up manually
 
-### 1. Install MM Connect
+### 1. Install MetaMask Connect
 
-Install MM Connect along with its peer dependencies to an existing React project:
+Install MetaMask Connect along with its peer dependencies to an existing React project:
 
 ```bash npm2yarn
 npm install connectkit wagmi viem@2.x @tanstack/react-query

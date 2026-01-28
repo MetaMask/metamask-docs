@@ -1,5 +1,5 @@
 ---
-description: Quickstart guide for using MM Connect with a JavaScript and RainbowKit dapp.
+description: Quickstart guide for using MetaMask Connect with a JavaScript and RainbowKit dapp.
 toc_max_heading_level: 3
 sidebar_label: RainbowKit
 keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK]
@@ -7,8 +7,8 @@ keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK]
 
 # Connect to MetaMask using JavaScript + RainbowKit
 
-Get started with MM Connect in a JavaScript and RainbowKit dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up MM Connect](#set-up-manually) in an existing dapp.
+Get started with MetaMask Connect in a JavaScript and RainbowKit dapp.
+You can [download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-rainbowkit-demo.vercel.app/" target="_blank">
@@ -25,7 +25,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up using a template
 
-1. Download the [MM Connect RainbowKit template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/rainbowkit):
+1. Download the [MetaMask Connect RainbowKit template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/rainbowkit):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/quickstarts/rainbowkit metamask-rainbowkit
@@ -44,7 +44,7 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
    Alternatively, you can use `git clone`, which will download the entire repository.
-   To do so, clone the MM Connect examples repository and navigate into the `quickstarts/rainbowkit` directory:
+   To do so, clone the MetaMask Connect examples repository and navigate into the `quickstarts/rainbowkit` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -80,9 +80,9 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
 ## Set up manually
 
-### 1. Install MM Connect
+### 1. Install MetaMask Connect
 
-Install MM Connect along with its peer dependencies to an existing React project:
+Install MetaMask Connect along with its peer dependencies to an existing React project:
 
 ```bash npm2yarn
 npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query
@@ -108,7 +108,7 @@ In the following example, replace `<YOUR-PROJECT-ID>` with your WalletConnect pr
 
 ```jsx
 const config = getDefaultConfig({
-  appName: 'MM Connect RainbowKit Quickstart',
+  appName: 'MetaMask Connect RainbowKit Quickstart',
   projectId: '<YOUR-PROJECT-ID>',
   chains: [mainnet, linea, sepolia, lineaSepolia],
   wallets: [

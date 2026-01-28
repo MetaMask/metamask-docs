@@ -74,9 +74,21 @@ The following is an example of using `eth_signTypedData_v4` with MetaMask:
 <TabItem value="eth_api">
 
 ```javascript
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 async function signTypedDataV4() {
@@ -456,9 +468,21 @@ The following is an example of using `personal_sign` with MetaMask:
 <TabItem value="eth_api">
 
 ```javascript
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 async function signTypedDataV4() {

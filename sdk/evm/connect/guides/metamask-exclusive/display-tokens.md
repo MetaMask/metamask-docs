@@ -38,9 +38,21 @@ extension (not on mobile).
 To prompt users to add an ERC-20 token, you can add something like the following to your project script:
 
 ```javascript
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 const tokenAddress = '0xd00981105e61274c8a5cd5a88fe7e037d935b513'
@@ -114,9 +126,21 @@ To prompt users to add a single NFT, add something like the following to your pr
 `wallet_watchAsset` supports both ERC-721 and ERC-1155 NFT standards.
 
 ```javascript
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 try {

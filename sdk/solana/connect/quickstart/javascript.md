@@ -4,19 +4,16 @@ sidebar_label: JavaScript
 keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK]
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
-# Connect to MetaMask using JavaScript
+# Connect to Solana using MetaMask Connect
 
 Get started with MetaMask Connect in your JavaScript dapp.
 You can [download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
 
-<p align="center">
+<!-- <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
     <img src={require("../_assets/quickstart-javascript.png").default} alt="JavaScript SDK Quickstart" width="600px" class="appScreen" />
   </a>
-</p>
+</p> -->
 
 ## Prerequisites
 
@@ -89,26 +86,25 @@ You've successfully set up MetaMask Connect.
 Install MetaMask Connect in an existing JavaScript project:
 
 ```bash npm2yarn
-npm install @metamask/connect-evm
+npm install @metamask/connect-solana
 ```
 
 ### 2. Initialize MetaMask Connect
 
-The following is an example of using MetaMask Connect for an EVM dapp in a JavaScript project:
+The following are examples of using MetaMask Connect in various JavaScript environments:
 
 ```javascript
-import { createEVMClient } from '@metamask/connect-evm'
+import { createSolanaClient } from '@metamask/connect-solana'
 
-const evmClient = createEVMClient({
+const solanaClient = createSolanaClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'Example JavaScript Solana dapp',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp:': 'https://api.devnet.solana.com',
     },
   },
 })
@@ -124,56 +120,50 @@ These examples configure MetaMask Connect with the following options:
 Connect to MetaMask and get the provider for RPC requests:
 
 ```javascript
-const provider = evmClient.getProvider()
+const provider = solanaClient.getProvider()
 
-const accounts = await evmClient.connect()
+const accounts = await solanaClient.connect()
 console.log('Connected account:', accounts[0])
 
 const result = await provider.request({
-  method: 'eth_accounts',
+  method: 'solana_accounts',
   params: [],
 })
-console.log('eth_accounts result:', result)
+console.log('solana_accounts result:', result)
 ```
 
-`evmClient.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
+`solanaClient.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
 
-Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
+Use `provider.request()` for arbitrary [JSON-RPC requests](#) like `solana_chainId` or `solana_getBalance`, or for [batching requests](#) via `metamask_batch`.
 
 ## Common MetaMask Connect methods at a glance
 
-| Method                                                                         | Description                                              |
-| ------------------------------------------------------------------------------ | -------------------------------------------------------- |
-| [`connect()`](../reference/methods.md#connect)                                 | Triggers wallet connection flow                          |
-| [`connectAndSign({ msg: "..." })`](../reference/methods.md#connectandsign)     | Connects and prompts user to sign a message              |
-| [`getProvider()`](../reference/methods.md#getprovider)                         | Returns the provider object for RPC requests             |
-| [`provider.request({ method, params })`](../reference/provider-api.md#request) | Calls any Ethereum JSON‑RPC method                       |
-| [Batched RPC](../guides/metamask-exclusive/batch-requests.md)                  | Use `metamask_batch` to group multiple JSON-RPC requests |
+| Method                                      | Description                                              |
+| ------------------------------------------- | -------------------------------------------------------- |
+| [`connect()`](#)                            | Triggers wallet connection flow                          |
+| [`connectAndSign({ msg: "..." })`](#)       | Connects and prompts user to sign a message              |
+| [`getProvider()`](#)                        | Returns the provider object for RPC requests             |
+| [`provider.request({ method, params })`](#) | Calls any Solana JSON‑RPC method                         |
+| [Batched RPC](#)                            | Use `metamask_batch` to group multiple JSON-RPC requests |
 
 ## Usage example
 
 ```javascript
 // 1. Connect and get accounts
-const accounts = await evmClient.connect()
+const accounts = await solanaClient.connect()
 
 // 2. Connect and sign in one step
-const signResult = await evmClient.connectAndSign({
+const signResult = await solanaClient.connectAndSign({
   msg: 'Sign in to the dapp',
 })
 
 // 3. Get provider for RPC requests
-const provider = evmClient.getProvider()
+const provider = solanaClient.getProvider()
 
 // 4. Make an RPC request
 const result = await provider.request({
-  method: 'eth_accounts',
+  method: 'solana_accounts',
   params: [],
-})
-
-// 5. Batch multiple RPC requests
-const batchResults = await provider.request({
-  method: 'metamask_batch',
-  params: [{ method: 'eth_accounts' }, { method: 'eth_chainId' }],
 })
 ```
 

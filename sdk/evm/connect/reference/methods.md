@@ -1,12 +1,12 @@
 ---
-description: Methods reference for MM Connect.
+description: Methods reference for MetaMask Connect.
 keywords: [SDK, method, methods, dapp]
 toc_max_heading_level: 2
 ---
 
-# MM Connect methods
+# MetaMask Connect methods
 
-MM Connect provides several convenience methods for connecting to and interacting with MetaMask, including the following.
+MetaMask Connect provides several convenience methods for connecting to and interacting with MetaMask, including the following.
 
 ## `connect`
 
@@ -92,11 +92,11 @@ if (provider) {
 
 ## `isInitialized`
 
-Checks if MM Connect has been initialized.
+Checks if MetaMask Connect has been initialized.
 
 ### Returns
 
-`True` if MM Connect is initialized, `false` otherwise.
+`True` if MetaMask Connect is initialized, `false` otherwise.
 
 ### Example
 

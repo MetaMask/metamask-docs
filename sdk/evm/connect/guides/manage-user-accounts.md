@@ -1,5 +1,5 @@
 ---
-description: Authenticate users with MM Connect in your Vanilla JS or Wagmi dapp.
+description: Authenticate users with MetaMask Connect in your Vanilla JS or Wagmi dapp.
 keywords: [SDK, JavaScript, wagmi, authenticate, connect, sign, accounts, wallet, dapp]
 toc_max_heading_level: 3
 ---
@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Manage user accounts
 
 Connect and manage user wallet sessions in your Vanilla JavaScript or Wagmi dapp.
-With MM Connect, you can:
+With MetaMask Connect, you can:
 
 - **Connect users' wallets** to your dapp.
 - **Access user accounts** (addresses).
@@ -38,9 +38,21 @@ With Wagmi, you can use provided hooks for handling wallet connections.
 <TabItem value="Vanilla JavaScript">
 
 ```javascript
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 // Connect wallet
@@ -164,13 +176,25 @@ function WatchAccount() {
 
 ## Connect and sign
 
-You can use MM Connect's [`connectAndSign`](../reference/methods.md#connectandsign) method to request wallet access and sign a message in a single user interaction.
+You can use MetaMask Connect's [`connectAndSign`](../reference/methods.md#connectandsign) method to request wallet access and sign a message in a single user interaction.
 For example:
 
 ```js
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 
 async function handleConnectAndSign() {
   try {
@@ -191,7 +215,7 @@ The following HTML displays a **Connect & Sign** button:
 ```
 
 :::tip
-This one-step flow is unique to MM Connect's `connectAndSign` method.
+This one-step flow is unique to MetaMask Connect's `connectAndSign` method.
 It's not part of Wagmi or other wallet libraries.
 :::
 

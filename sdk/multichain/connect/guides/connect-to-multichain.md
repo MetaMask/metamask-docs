@@ -4,7 +4,7 @@ sidebar_label: Connect to EVM and Solana
 
 # Connect to EVM and Solana in MetaMask
 
-Get started with MM Connect in your multichain JavaScript dapp.
+Get started with MetaMask Connect in your multichain JavaScript dapp.
 You can connect to EVM networks and Solana in MetaMask at the same time, and make requests to each network without having to switch between them.
 
 ## Prerequisites
@@ -15,49 +15,59 @@ You can connect to EVM networks and Solana in MetaMask at the same time, and mak
 
 ## Steps
 
-### 1. Install MM Connect
+### 1. Install MetaMask Connect
 
-Install MM Connect in an existing JavaScript project:
+Install MetaMask Connect in an existing JavaScript project:
 
 ```bash npm2yarn
-npm install @metamask/connect/multichain
+npm install @metamask/connect-multichain
 ```
 
-### 2. Initialize MM Connect
+### 2. Initialize MetaMask Connect
 
-Initialize MM Connect with configuration options:
+Initialize MetaMask Connect with configuration options:
 
 ```javascript
-import { createMultichainClient } from "@metamask/connect/multichain"
+import { createMultichainClient } from "@metamask/connect-multichain"
 
 const multichainClient = createMultichainClient({
-  dappMetadata: {
-    name: "Example multichain dapp",
+  dapp: {
+    name: "Metamask Connect Multichain Example",
     url: window.location.href,
     iconUrl: "https://mydapp.com/icon.png" // Optional
   },
-  infuraAPIKey: process.env.INFURA_API_KEY,
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY', // Ethereum Mainnet
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY', // Ethereum Sepolia
+      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet.solana.com', // Solana Mainnet
+      'solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ': 'https://api.devnet.solana.com', // Solana Devnet
+    },
+  },
 })
 ```
 
-This example configures MM Connect with the following options:
+This example configures MetaMask Connect with the following options:
 
-- [`dappMetadata`](../../../reference/options.md#dappmetadata) - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
-- [`infuraAPIKey`](../../../reference/options.md#infuraapikey) - Enables read-only RPC and load‑balancing.
-  Set this option to your [Infura API key](/developer-tools/dashboard/get-started/create-api).
+- `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
+- `api.supportedNetworks` - A map of caipChainIds -> RPC URLs for all networks supported by the app.
 
 ### 3. Connect and use provider
 
 Connect to MetaMask and get the provider for RPC requests:
 
 ```javascript
+await multichainClient.connect()
+
 const provider = multichainClient.getProvider()
 
-await provider.request({
+// TODO: replace with provider snippet
+const result = await provider.request({
   chain: 'eip155:1',
-  method: 'eth_sendTransaction',
-  params: [...]
+  method: 'eth_accounts',
+  params: [],
 });
+console.log('eth_accounts result:', result)
 ```
 
 ## Next steps

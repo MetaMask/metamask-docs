@@ -6,11 +6,11 @@ import CardList from '@site/src/components/CardList'
 
 # Connect to multiple ecosystems
 
-Connect to multiple blockchain networks and ecosystems in MetaMask at the same time using MM Connect.
+Connect to multiple blockchain networks and ecosystems in MetaMask at the same time using MetaMask Connect.
 
-MM Connect allows you to target specific chains as part of each method call, eliminating the need to detect and switch networks before executing signatures and transactions.
-With MM Connect, you can create unified multichain wallet connection flows, execute transactions across different networks and ecosystems more seamlessly, and clearly interpret chain-specific addresses.
-Today, MM Connect supports all EVM networks and Solana, and will soon support more ecosystems like Bitcoin and Tron.
+MetaMask Connect allows you to target specific chains as part of each method call, eliminating the need to detect and switch networks before executing signatures and transactions.
+With MetaMask Connect Multichain, you can create unified multichain wallet connection flows, execute transactions across different networks and ecosystems more seamlessly, and clearly interpret chain-specific addresses.
+Today, MetaMask Connect Multichain SDK supports all EVM networks and Solana, and will soon support more ecosystems like Bitcoin and Tron.
 
 Get started with the following guides:
 
@@ -29,7 +29,7 @@ description: 'Send transactions on EVM networks and Solana.',
 {
 href: '/sdk/multichain/connect/guides/connector-libraries',
 title: 'Connector library guide',
-description: 'Integrate MM connect into your existing multichain connector library.',
+description: 'Integrate MetaMask Connect into your existing multichain connector library.',
 }
 ]}
 />

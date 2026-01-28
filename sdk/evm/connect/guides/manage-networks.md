@@ -1,5 +1,5 @@
 ---
-description: Manage networks with MM Connect in your Vanilla JS or Wagmi dapp.
+description: Manage networks with MetaMask Connect in your Vanilla JS or Wagmi dapp.
 keywords: [SDK, JavaScript, wagmi, detect, switch, add, network, networks, dapp]
 toc_max_heading_level: 2
 ---
@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Manage networks
 
 Manage networks in your Vanilla JavaScript or Wagmi dapp.
-With MM Connect, you can:
+With MetaMask Connect, you can:
 
 - **Detect the current network** and monitor network changes.
 - **Switch between networks** programmatically.
@@ -37,9 +37,21 @@ Start by detecting the current network:
 <TabItem value="Vanilla JavaScript">
 
 ```javascript
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 // Get current chain ID

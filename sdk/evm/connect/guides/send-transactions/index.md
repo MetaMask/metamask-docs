@@ -1,5 +1,5 @@
 ---
-description: Handle transactions with MM Connect in your JavaScript dapp.
+description: Handle transactions with MetaMask Connect in your JavaScript dapp.
 keywords: [SDK, JavaScript, wagmi, send, transaction, transactions, status, estimate, gas, dapp]
 toc_max_heading_level: 2
 ---
@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Send transactions
 
 Handle EVM transactions in your JavaScript dapp.
-With MM Connect, you can:
+With MetaMask Connect, you can:
 
 - **Send transactions**.
 - **Track transaction status** in real time.
@@ -18,7 +18,7 @@ With MM Connect, you can:
 - **Handle transaction errors** gracefully.
 - **Manage complex transaction patterns**.
 
-The following examples demonstrate how to use MM Connect with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to send a [basic transaction](#send-a-basic-transaction) and an
+The following examples demonstrate how to use MetaMask Connect with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to send a [basic transaction](#send-a-basic-transaction) and an
 [advanced transaction with gas estimation](#send-an-advanced-transaction-with-gas-estimation).
 
 ## Send a basic transaction
@@ -27,11 +27,23 @@ The following examples demonstrate how to use MM Connect with viem, web3.js, eth
 <TabItem value="viem">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 import { createPublicClient, createWalletClient, custom } from 'viem'
 import { mainnet } from 'viem/chains'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 const publicClient = createPublicClient({ chain: mainnet, transport: custom(provider) })
@@ -56,10 +68,22 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 <TabItem value="web3.js">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 const web3 = new Web3(provider)
@@ -82,11 +106,23 @@ const receipt = await web3.eth.sendTransaction({
 <TabItem value="ethers.js">
 
 ```tsx
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 import { ethers } from 'ethers'
 import { BrowserProvider, parseUnits } from 'ethers'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 const ethersProvider = new ethers.BrowserProvider(provider)
@@ -111,7 +147,19 @@ const receipt = await tx.wait()
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
 
-const evmClient = createEVMClient();
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+});
 const provider = evmClient.getProvider();
 
 async function sendTransaction(recipientAddress, amount) {
@@ -240,7 +288,19 @@ function SendTransaction() {
 ```javascript
 import { createEVMClient } from "@metamask/connect/evm";
 
-const evmClient = createEVMClient();
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+});
 const provider = evmClient.getProvider();
 
 async function estimateGas(transaction) {

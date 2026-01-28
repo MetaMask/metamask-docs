@@ -1,15 +1,15 @@
-# About MM Connect
+# About MetaMask Connect
 
 ## Supported platforms
 
-With MM Connect, you can connect your dapp to MetaMask in the following ways:
+With MetaMask Connect, you can connect your dapp to MetaMask in the following ways:
 
 - **Desktop web dapps** - Automatically connect to the MetaMask extension, or connect to the MetaMask mobile app using a QR code.
-- **Mobile dapps** - MM Connect generates a deeplink that takes users directly to the MetaMask mobile app.
+- **Mobile dapps** - MetaMask Connect generates a deeplink that takes users directly to the MetaMask mobile app.
 
 The following table expands on the supported connection methods:
 
-| Dapp location | User wallet location | Connection method | MM Connect | Other SDKs |
+| Dapp location | User wallet location | Connection method | MetaMask Connect | Other SDKs |
 |---------------|-------------|------------------|--------------------------|--------------------------|
 | Desktop web | Wallet browser extension | Automatic connection via browser extension | Supported | Supported |
 | Desktop web | Wallet mobile app | QR code scan with wallet mobile app | Supported | Limited |
@@ -29,6 +29,6 @@ We recommend using services like [MetaMask Developer](https://developer.metamask
 
 <p align="center">
 
-![MM Connect architecture](_assets/architecture.png)
+![MetaMask Connect architecture](_assets/architecture.png)
 
 </p>

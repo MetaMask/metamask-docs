@@ -1,11 +1,11 @@
 ---
-description: Batch multiple JSON-RPC requests using MM Connect.
+description: Batch multiple JSON-RPC requests using MetaMask Connect.
 keywords: [SDK, batch, JSON-RPC, RPC, requests, methods, dapp]
 ---
 
 # Batch requests
 
-MM Connect provides a `metamask_batch` method to send multiple JSON-RPC requests in a single call.
+MetaMask Connect provides a `metamask_batch` method to send multiple JSON-RPC requests in a single call.
 These requests can be contract calls or other JSON-RPC methods (for example, signing messages or sending transactions).
 Despite being batched into one HTTP request, each call still requires individual user approval, and if any request is rejected, the entire batch fails.
 
@@ -16,7 +16,7 @@ Despite being batched into one HTTP request, each call still requires individual
 
 ## Batch JSON-RPC requests
 
-You can directly use MM Connect's `metamask_batch` method to group multiple JSON-RPC requests into a single HTTP call.
+You can directly use MetaMask Connect's `metamask_batch` method to group multiple JSON-RPC requests into a single HTTP call.
 
 Use cases include:
 
@@ -34,9 +34,21 @@ When using `metamask_batch`, keep in mind the following:
 The following is an example of batching JSON-RPC requests using `metamask_batch`:
 
 ```js
-import { createEVMClient } from '@metamask/connect/evm'
+import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient()
+const evmClient = createEVMClient({
+  dapp: {
+    name: 'Metamask Connect EVM Example',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png', // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
 const provider = evmClient.getProvider()
 
 async function handleBatchRequests() {
