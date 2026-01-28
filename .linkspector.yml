@@ -5,7 +5,6 @@ dirs:
   - ./sdk
   - ./services
   - ./snaps
-  - ./wallet
 excludedDirs:
   - ./build
   - ./.vercel

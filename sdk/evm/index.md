@@ -48,7 +48,7 @@ title: 'Embedded Wallet SDK (fka Web3Auth)',
 description: 'Set up Web3Auth SDK in a Next.js dapp. Use MetaMask Connect features with Web3Auth.',
 },
 {
-href: 'https://onboard.blocknative.com',
+href: 'https://web3onboard.thirdweb.com/',
 title: 'Web3-Onboard',
 description: 'Use MetaMask Connect features with Web3-Onboard.',
 buttonIcon: 'external-arrow',

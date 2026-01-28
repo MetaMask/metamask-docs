@@ -35,7 +35,7 @@ MetaMask implements the [Wallet Standard](https://github.com/wallet-standard/wal
 
 :::note
 With the Wallet Standard, MetaMask does not appear as a connection option for users that don't already have MetaMask installed.
-Check out [How to use the Wallet Adapter Guide](../solana/connect/guides/use-wallet-adapter).
+Check out [How to use the Wallet Adapter Guide](./connect/guides/use-wallet-adapter.md).
 :::
 
 ## Third-party libraries
