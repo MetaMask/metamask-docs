@@ -1,0 +1,22 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://megaeth-mainnet.infura.io \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_callMany","params":[[{"transactions":[{"from":"0x1985ea6e9c68e1c272d8209f3b478ac2fdb25c87","to":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","gas":"0x0f4240","gasPrice":"0x7896e72a","data":"0xa9059cbb000000000000000000000000bc0e63965946815d105e7591407704e6e1964e590000000000000000000000000000000000000000000000000000000005f5e100"},{"to":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","gasPrice":"0x7896e72a","data":"0x70a08231000000000000000000000000bc0e63965946815d105e7591407704e6e1964e59"}],"blockOverride":{"blockNumber":"0xbb5fe9"}}],{"blockNumber":"0xbb5fe9","transactionIndex":1},{},5000],"id":1}'
+```
+
+  </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://megaeth-mainnet.infura.io/ws -x '{"jsonrpc":"2.0","method":"eth_callMany","params":[[{"transactions":[{"from":"0x1985ea6e9c68e1c272d8209f3b478ac2fdb25c87","to":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","gas":"0x0f4240","gasPrice":"0x7896e72a","data":"0xa9059cbb000000000000000000000000bc0e63965946815d105e7591407704e6e1964e590000000000000000000000000000000000000000000000000000000005f5e100"},{"to":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","gasPrice":"0x7896e72a","data":"0x70a08231000000000000000000000000bc0e63965946815d105e7591407704e6e1964e59"}],"blockOverride":{"blockNumber":"0xbb5fe9"}}],{"blockNumber":"0xbb5fe9","transactionIndex":1},{},5000],"id":1}'
+```
+
+  </TabItem>
+</Tabs>

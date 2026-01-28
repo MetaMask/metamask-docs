@@ -1,0 +1,22 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://megaeth-mainnet.infura.io \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_getRawTransactionByHash","params":["0xa52be92809541220ee0aaaede6047d9a6c5d0cd96a517c854d944ee70a0ebb44"],"id":1}'
+```
+
+  </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://megaeth-mainnet.infura.io/ws -x '{"jsonrpc":"2.0","method":"eth_getRawTransactionByHash","params":["0xa52be92809541220ee0aaaede6047d9a6c5d0cd96a517c854d944ee70a0ebb44"],"id":1}'
+```
+
+  </TabItem>
+</Tabs>

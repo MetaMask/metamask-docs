@@ -91,6 +91,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-linea.svg`,
   },
   {
+    name: 'MegaETH',
+    href: '/services/reference/megaeth',
+    logo: `${LOGO_PATH}/logo_megaeth.svg`,
+  },
+  {
     name: 'Mantle',
     href: '/services/reference/mantle',
     logo: `${LOGO_PATH}/logo-mantle.svg`,

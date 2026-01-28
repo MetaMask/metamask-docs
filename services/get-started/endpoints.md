@@ -108,6 +108,14 @@ Include your authentication details when [making IPFS requests](../reference/ipf
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://linea-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://linea-sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
+## MegaETH
+
+| Network | Description             | URL                                          |
+|---------|-------------------------|----------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS     | `https://megaeth-mainnet.infura.io`          |
+| Mainnet | JSON-RPC over WebSocket | `wss://megaeth-mainnet.infura.io/ws`         |
+| Testnet | JSON-RPC over HTTPS     | `https://megaeth-testnet.infura.io/`         |
+
 ## Mantle
 
 | Network           | Description             | URL                                              |
