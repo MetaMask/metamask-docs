@@ -141,6 +141,8 @@ const { ethers, parseUnits } = require("ethers");
     // The transaction is now on chain!
     console.log(`Mined in block ${receipt.blockNumber}`);
   }
+
+main();
 ```
 
 ### 6. Execute the transaction
