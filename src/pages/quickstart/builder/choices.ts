@@ -6,7 +6,7 @@ export const METAMASK_SDK = 'METAMASK_SDK'
 
 // Product choices
 export const PRODUCTS: DisplayChoice[] = [
-  { key: METAMASK_SDK, displayName: 'MM Connect' },
+  { key: METAMASK_SDK, displayName: 'MetaMask Connect' },
   { key: EMBEDDED_WALLETS, displayName: 'Embedded Wallets' },
 ]
 

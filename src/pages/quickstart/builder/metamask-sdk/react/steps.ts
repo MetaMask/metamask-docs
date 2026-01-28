@@ -12,7 +12,7 @@ export default function getSteps(steps, files, replacementAggregator) {
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.MMSDK_REACT_APP_TSX,
         files[qsFileLinks.MMSDK_REACT_APP_TSX],
-        'MM Connect Import'
+        'MetaMask Connect Import'
       ),
     },
     {
@@ -20,7 +20,7 @@ export default function getSteps(steps, files, replacementAggregator) {
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.MMSDK_REACT_PACKAGE_JSON,
         files[qsFileLinks.MMSDK_REACT_PACKAGE_JSON],
-        'Install MM Connect'
+        'Install MetaMask Connect'
       ),
     },
     {
@@ -28,7 +28,7 @@ export default function getSteps(steps, files, replacementAggregator) {
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.MMSDK_REACT_APP_TSX,
         files[qsFileLinks.MMSDK_REACT_APP_TSX],
-        'Initialize MM Connect'
+        'Initialize MetaMask Connect'
       ),
     },
     {

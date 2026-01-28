@@ -1,8 +1,8 @@
 ---
-title: Create an AI agent using MM Connect
+title: Create an AI agent using MetaMask Connect
 image: 'img/tutorials/tutorials-banners/create-wallet-ai-agent.png'
-description: Create a wallet AI agent using MM Connect and Vercel's AI SDK.
-tags: [mm connect, AI agent, Vercel, Wagmi, Next.js, OpenAI]
+description: Create a wallet AI agent using MetaMask Connect and Vercel's AI SDK.
+tags: [MetaMask Connect, AI agent, Vercel, Wagmi, Next.js, OpenAI]
 date: May 2, 2025
 author: MetaMask Developer Relations
 discourseTopicId: 2609
@@ -12,7 +12,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 This tutorial walks you through creating an AI agent dapp that can display your wallet balance and initiate transactions from your wallet, on the Linea Sepolia network.
-You will use a provided template, which sets up MM Connect and [Vercel's AI SDK](https://sdk.vercel.ai/) with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
+You will use a provided template, which sets up MetaMask Connect and [Vercel's AI SDK](https://sdk.vercel.ai/) with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
 
 ## Prerequisites
 

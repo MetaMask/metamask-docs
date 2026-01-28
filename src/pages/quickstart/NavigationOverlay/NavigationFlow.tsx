@@ -27,7 +27,7 @@ const navigationOptions: NavigationOption[] = [
   {
     id: 'mm-sdk',
     title: "I want to connect to users' MetaMask wallets",
-    description: 'MM Connect',
+    description: 'MetaMask Connect',
     product: METAMASK_SDK,
   },
   {
@@ -148,7 +148,7 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
         <Heading as="h4" className={styles.quickLinksTitle}>Quick Links</Heading>
         <div className={styles.linkGrid}>
           <Link href="/sdk" className={styles.quickLink}>
-            📖 MM Connect Docs
+            📖 MetaMask Connect Docs
           </Link>
           <Link href="/wallet" className={styles.quickLink}>
             💳 Embedded Wallets Docs

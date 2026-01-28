@@ -208,12 +208,12 @@ const sdkSidebar = {
       items: [
         {
           type: "link",
-          label: "Integrate SNS with MM Connect",
+          label: "Integrate SNS with MetaMask Connect",
           href: "/tutorials/"
         },
         {
           type: "link",
-          label: "Integrate Solana Pay with MM Connect",
+          label: "Integrate Solana Pay with MetaMask Connect",
           href: "/tutorials/"
         },
       ],

@@ -12,7 +12,7 @@ export interface MobileProductItem {
 
 export const mobileProductsMenu: MobileProductItem[] = [
   {
-    label: 'MM Connect',
+    label: 'MetaMask Connect',
     href: '/sdk',
   },
   {

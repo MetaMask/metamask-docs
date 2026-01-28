@@ -1,8 +1,8 @@
 ---
 title: Upgrade an EOA to a smart account
-description: Upgrade a MetaMask EOA to a smart account using MM Connect and Wagmi.
+description: Upgrade a MetaMask EOA to a smart account using MetaMask Connect and Wagmi.
 image: 'img/tutorials/tutorials-banners/upgrade-eoa-to-smart-account.png'
-tags: [mm connect, wagmi, EOA, smart account, EIP-7702, EIP-5792]
+tags: [MetaMask Connect, wagmi, EOA, smart account, EIP-7702, EIP-5792]
 date: Aug 22, 2025
 author: MetaMask Developer Relations
 discourseTopicId: 2614

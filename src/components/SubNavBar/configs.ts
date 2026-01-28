@@ -49,7 +49,7 @@ export const EMBEDDED_WALLETS_SUBNAV_CONFIG: SubNavBarConfig = {
 
 export const SDK_SUBNAV_CONFIG: SubNavBarConfig = {
   pathPattern: '/sdk',
-  sectionName: 'MM Connect',
+  sectionName: 'MetaMask Connect',
   links: [
     {
       key: 'overview',
