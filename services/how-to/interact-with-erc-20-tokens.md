@@ -52,7 +52,7 @@ web3.sha3("Transfer(address, address, uint256)")[0..4]
   <TabItem value="Result" label="Result" >
 
 ```javascript
-0xa9059cbb
+0x70a08231
 ```
 
   </TabItem>
