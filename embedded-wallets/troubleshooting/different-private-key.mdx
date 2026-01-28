@@ -11,17 +11,13 @@ Developers and users frequently face confusion when they get different wallet ad
 
 A custom connection configures the OAuth/OpenID provider that issues the JWT your app uses for login. The Embedded Wallets (Web3Auth) network validates this provider configuration onchain and then verifies the issued JWT.
 
-::::tip
-
-To learn more about creating custom connections, see [authentication](../authentication/README.mdx).
-
-::::
+→ Learn more about creating custom connections, see [authentication](../authentication/README.mdx).
 
 Using the same custom connection configuration across SDKs results in the same wallet address, because wallet derivation depends on the connection and user identity—not the SDK.
 
 :::tip
 
-You might face errors where users using different social login credentials use different methods (like Google login and email passwordless), and receive different wallet addresses/keys. This is because, when you use different login providers, connection details change, even though the id, sub, email, and other fields remain the same. For such cases, you can use a **group connection**.
+You might face errors where users login with different methods (like Google login and email passwordless)—resulting in different wallet addresses/keys. This is because, when you use different login providers, connection details change, even though the ID, sub, email, and other properties remain the same. To control for such cases, use a **group connection**.
 
 :::
 
@@ -31,13 +27,13 @@ A group connection combines multiple login methods to create a single connection
 
 → Learn more about [creating a group connection](../authentication/group-connections.mdx).
 
-With a group connection, multiple sub-connections are combined and one wallet address is generated. So, in the case discussed above, connections with different login providers can be added as sub-connections under one group connection, which allow susers to get a single wallet address provided one of the fields (like email) stays the same across sub-connections.
+With a group connection, multiple sub-connections are combined and one wallet address is generated. So, in the case discussed above, connections with different login providers can be added as sub-connections under one group connection, which allow susers to get a single wallet address provided one of the fields (like email) stays the same across all sub-connections.
 
 ## Client ID
 
-To get your client ID, set up a new Plug and Play project on the [Embedded Wallets Dashboard](https://dashboard.web3auth.io). "Plug and Play" describes the pre-packaged user interface and experience that Embedded Wallets supports you with. This dashboard enables easy and efficient integration with your project, saving you the hassle of building everything from scratch.
+To get your client ID, set up a project on the [Embedded Wallets Dashboard](https://dashboard.web3auth.io). A "project" describes the pre-packaged user interface and experience that Embedded Wallets supports you with. The dashboard enables easy and efficient integration with your project, saving you the hassle of building everything from scratch.
 
-→ Learn how to [create a project and claim your client ID](/embedded-wallets/dashboard/).
+→ Learn how to [create a project and claim your client ID](../dashboard/README.mdx).
 
 :::important
 
@@ -49,17 +45,21 @@ Wallet addresses change if the client ID changes. Please use the same client ID 
 
 While creating a connection you need to select between `sapphire_devnet`, and `sapphire_mainnet`.
 
-`sapphire_devnet` is a sandbox environment for developers to experiment with. People usually test and finish their integration here. `sapphire_mainnet` is the production environment for scalable applications.
+`sapphire_devnet` is a sandbox environment for developers to experiment with. People usually test and finalize their integration here. `sapphire_mainnet` is the production environment for scalable applications.
 
-> Every network has different nodes and that causes the keys to change. If you move from one network to another, the keys are meant to change.
+:::tip
+
+Every network has different [nodes](../infrastructure/nodes-and-dkg.mdx) that issue different keys, this means the wallet addresses changes if you move from one network to another.
+
+:::
 
 ## Product
 
 Different SDKs can derive keys using different inputs and derivation paths. To keep addresses consistent across implementations:
 
 - Use the same custom connection configuration across platforms
-- Use the same Client ID across integrations
-- Keep the environment consistent (e.g., dev vs prod)
+- Use the same client ID across integrations
+- Keep the environment consistent: dev (devnet) vs. prod (mainnet)
 
 ### Migrating between SDKs
 
