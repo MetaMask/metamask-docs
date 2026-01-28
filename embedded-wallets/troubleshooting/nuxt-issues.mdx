@@ -1,5 +1,5 @@
 ---
-title: Bundler Polyfill Issues - Nuxt
+title: Bundler polyfill issues - Nuxt
 image: 'img/metamaskog.jpg'
 sidebar_label: Nuxt polyfill issues
 description: 'Bundler Polyfill Issues - Nuxt | Embedded Wallets'
@@ -11,11 +11,11 @@ To rectify this, the go-to method is to add the missing modules directly into th
 
 Some libraries rely on environment-specific modules that may be available at runtime in the browser even if they are not bundled. Libraries such as Embedded Wallets’ Web3Auth take advantage of this behavior and can function correctly without bundling all modules. However, if you are using a library that does not take advantage of this , you might face issues.
 
-To avoid unnecessary overhead, include only the required polyfills, test functionality carefully, and configure your bundler to ignore unresolved modules rather than including them in the final build.
+To avoid unnecessary overhead, include only the required polyfills, test functionality, and configure your bundler to ignore unresolved modules rather than including them in the final build.
 
 :::tip
 
-We recommend that you require certain node polyfills to be added to your project, while testing each of its functionalities. At the same time, instruct the bundler to ignore the missing modules, and not include them in the build.
+We recommend that you require certain Node polyfills to be added to your project, while testing each of its functionalities. At the same time, instruct the bundler to ignore the missing modules, and not include them in the build.
 
 :::
 

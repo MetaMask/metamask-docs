@@ -15,12 +15,12 @@ To ensure proper authentication with Embedded Wallets, the JWT header must provi
 
 :::
 
-When configuring Embedded Wallets's custom authentication, you may encounter JWT errors. Below is a list of these errors and the necessary steps to resolve them:
+When configuring Embedded Wallet's custom authentication, you may encounter JWT errors. Below is a list of these errors and the necessary steps to resolve them:
 
 - [Invalid JWT verifiers ID field](#invalid-jwt-verifiers-id-field): Error occurred while verifying params could not verify identity
 - [Failed to verify JWS signature](#failed-to-verify-jws-signature): Error occurred while verifying params unable to verify JWT token
 - [Duplicate token](#duplicate-token): Could not get result from [Torus nodes](../infrastructure/nodes-and-dkg.mdx), duplicate token found
-- [Expired token](#expired-token): Error occurred while verifying paramstimesigned is more than 1m0s ago
+- [Expired token](#expired-token): Error occurred while verifying the parameter's time signed is more than 1m0s ago
 - [Mismatch JWT Validation field](#mismatch-jwt-validation-field)
 - [Refresh Tokens?](#looking-for-refresh-tokens)
 
@@ -28,7 +28,7 @@ When configuring Embedded Wallets's custom authentication, you may encounter JWT
 
 ### Error occurred while verifying params could not verify identity
 
-"Error occurred while verifying params could not verify identity" error could be because the `verifierIdField` of `extraLoginOptions` is different from the one you have set up during the creation of Verifiers (`JWT Verifiers ID`) on the Embedded Wallets dashboard.
+"Error occurred while verifying params could not verify identity" can arise when the `verifierIdField` of `extraLoginOptions` is different from the one you have set up during the creation of Verifiers (`JWT Verifiers ID`) on the Embedded Wallets dashboard.
 
 This is the `JWT Verifiers ID` field on the `Verifier Modal` of the Embedded Wallets dashboard:
 
@@ -150,7 +150,7 @@ This is the `JWT Validation` field on the `Verifier Modal` of the Embedded Walle
 
 Ensure, these fields are present in the JWT Payload and match with the JWT.
 
-## Looking for refresh tokens?
+## Refresh tokens not supported
 
 Embedded Wallets does not support refresh tokens to maintain longer sessions, instead we offer [session management](../dashboard/advanced/session-management.mdx). 
 
@@ -160,7 +160,7 @@ During login with Embedded Wallets, pass the `sessionTime` parameter. This allow
 
 :::
 
-A refresh token is a unique token that can be used used to obtain additional access tokens from an Authentication Service Provider. With a refresh token, one can get a new `id_token` to make another login request. This enables users to maintain longer authentication sessions without the need for constant re-login. 
+A refresh token is a unique token that can be used to obtain additional access tokens from an Authentication Service Provider. With a refresh token, one can get a new `id_token` to make another login request. This enables users to maintain longer authentication sessions without the need for constant re-login. 
 
 While Embedded Wallets, verifies the validity of the `id_token` and compares its payload value to the JWKS provided by either the Auth provider or your custom JWKS, it does not support refresh. Although we do not support refresh tokens to maintain longer sessions, we do offer session management. Session management supports 
 dapps to check and maintain existing sessions with Embedded Wallets.

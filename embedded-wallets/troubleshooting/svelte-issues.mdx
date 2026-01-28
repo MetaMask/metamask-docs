@@ -1,17 +1,17 @@
 ---
-title: Bundler Polyfill Issues - Svelte with Vite
+title: Bundler Polyfill issues - Svelte with Vite
 image: 'img/metamaskog.jpg'
 sidebar_label: Svelte with Vite polyfill issues
 description: 'Bundler Polyfill Issues - Svelte with Vite | Embedded Wallets'
 ---
 
-When developing a new web3 project with Svelte and Vite, you may encounter bundler issues due to missing polyfills. This commonly occurs with packages like `eccrypto` which rely on node modules not present in the browser environment. Directly adding these modules to your package can solve the issue but may lead to a larger bundle size, affecting load times and user experience.
+When developing a new Embedded Wallets project with Svelte and Vite, you may encounter bundler issues due to missing polyfills. This commonly occurs with packages like `eccrypto` which rely on Node modules not present in the browser environment. Directly adding these modules to your package can solve the issue but may lead to a larger bundle size, affecting load times and user experience.
 
-It's essential to recognize that the required node polyfills should only be included during development and testing, and the bundler should be instructed to exclude them from the production build.
+It's essential to recognize that the required Node polyfills should only be included during development and testing, and the bundler should be instructed to exclude them from the production build.
 
 The following guide provides instructions for adding the necessary polyfills in a Svelte project using Vite.
 
-## Install the missing modules
+## Step 1: Install the missing modules
 
 First, identify the missing libraries in your build. For integrating Web3Auth with Svelte, you will need to polyfill `buffer` and `process`. For other libraries, use an alternative like the `empty-module` to prevent build warnings.
 
@@ -21,11 +21,13 @@ npm install --save-dev buffer process vite-plugin-node-polyfills
 
 :::warning
 
-You may need to polyfill additional libraries depending on the other blockchain libraries you are using with Web3Auth. Common polyfills include crypto-browserify, stream-browserify, and others listed in the previous guide.
+If you're using any other blockchain library alongside Web3Auth, it's possible that you might need to polyfill more libraries. Typically, the libraries like `crypto-browserify`, 
+`stream-browserify`, `browserify-zlib`, `assert`, `stream-http`, `https-browserify`, `os-browserify`, `url` 
+are the ones that might be required, with `crypto-browserify` and `url` being the most common polyfills.
 
 :::
 
-## Update your `vite.config.js`
+## Step 2: Update your `vite.config.js`
 
 Modify your Vite configuration to integrate the polyfills with Svelte as follows:
 
@@ -58,8 +60,8 @@ export default defineConfig({
 
 This configuration sets up the necessary aliases and defines globals for the browser environment, ensuring compatibility and reducing bundle size.
 
-## Address additional dependency issues
+## Step 3: Address additional dependency issues
 
-If there are additional dependencies that need to be polyfilled, consider adding them to the include array in the optimizeDeps section of the Vite config. Test your application thoroughly to ensure that all functionalities work as expected after the polyfills are added.
+If there are additional dependencies that need to be polyfilled, consider adding them to the include array in the `optimizeDeps` section of the Vite config. Test your application to ensure that all functionalities work as expected after the polyfills are added.
 
-By following these steps, you should be able to resolve bundler polyfill issues in your Svelte and Vite web3 project, leading to a more efficient build and a smoother user experience.
+By following these steps, you should be able to resolve bundler polyfill issues in your Svelte and Vite Embedded Wallets project, leading to a more efficient build and a smoother user experience.
