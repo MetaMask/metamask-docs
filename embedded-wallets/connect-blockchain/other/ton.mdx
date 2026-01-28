@@ -22,7 +22,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 npm install --save @web3auth/no-modal @web3auth/auth-adapter @web3auth/base tonweb @orbs-network/ton-access
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `rpc`
 
@@ -38,7 +38,7 @@ const rpc = await getHttpEndpoint()
 
 `@orbs-network/ton-access` is a lightweight library that helps discover and connect to TON blockchain nodes. It provides an endpoint to the TON network, ensuring you can reliably connect to the blockchain for your operations.
 
-## Get Accounts
+## Get accounts
 
 Using `getKeyPairFromPrivateKey()` and TON's wallet libraries, you can retrieve the user's account address.
 
@@ -103,7 +103,7 @@ export default class TonRPC {
 }
 ```
 
-## Get Balance
+## Get balance
 
 Using the account address we received in the previous step, we can fetch the balance using an RPC call to `tonweb.getBalance()`.
 
@@ -124,7 +124,7 @@ export default class TonRPC {
 }
 ```
 
-## Send Transaction
+## Send transaction
 
 ```typescript
 import TonWeb from 'tonweb'

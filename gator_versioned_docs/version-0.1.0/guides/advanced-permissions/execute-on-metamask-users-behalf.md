@@ -18,8 +18,8 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 
 ## Prerequisites
 
-- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
-- [Install MetaMask Flask 13.5.0 or later.](/snaps/get-started/install-flask)
+- [Install and set up the Smart Accounts Kit](../../get-started/install.md)
+- [Install MetaMask Flask 13.5.0 or later](/snaps/get-started/install-flask)
 
 ### 1. Set up a Wallet Client
 
@@ -96,9 +96,9 @@ const sessionAccount = privateKeyToAccount("0x...");
 
 ### 4. Check the EOA account code
 
-Advanced Permissions support the automatic upgrading of a MetaMask user's account to a [MetaMask smart account](../../concepts/smart-accounts.md),
-when using MetaMask Flask version 13.9.0 or later. For earlier versions, you must ensure that the 
-user is upgraded to a smart account before requesting Advanced Permissions.
+With MetaMask Flask 13.9.0 or later, Advanced Permissions support automatically upgrading a user’s
+account to a [MetaMask smart account](../../concepts/smart-accounts.md). On earlier versions, upgrade
+the user to a smart account before requesting Advanced Permissions.
 
 If the user has not yet been upgraded, you can handle the upgrade [programmatically](/sdk/evm/connect/guides/send-transactions/batch-transactions) or ask the 
 user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
@@ -140,7 +140,7 @@ if (code) {
 
 ### 5. Request Advanced Permissions
 
-Request Advanced Permissions from the user using the Wallet Client's `requestExecutionPermissions` action.
+Request Advanced Permissions from the user with the Wallet Client's `requestExecutionPermissions` action.
 In this example, you'll request an
 [ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission).
 

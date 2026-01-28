@@ -1,7 +1,7 @@
-With the web3dart library, apart from doing the normal interactions, and transactions, you can also
+In addition to the intetactions and transactions, the web3dart library allows you to
 deploy and interact with Smart Contracts.
 
-Firstly, we'll create a new smart contract using Solidity that allows to store a message and update
+Firstly, we'll create a new smart contract using Solidity that allows us to store a message and update
 it. The contract will have a constructor that takes an initial message as input, and a function to
 update the message.
 
@@ -22,14 +22,14 @@ contract HelloWorld {
 }
 ```
 
-The package don't have a way to compile solidity smart contracts, so we'll need to compile the
-contract using an online compiler and get the bytecode and abi from there. For this example we'll
+The package don't have a way to compile Solidity smart contracts, so we'll need to compile the
+contract using an online compiler and get the bytecode and ABI from there. For this example we'll
 use [Remix IDE](https://remix.ethereum.org/) to compile the contract.
 
-Please note that the bytecode and abi are different for each network, so you'll need to compile the
+Please note that the bytecode and ABI are different for each network, so you'll need to compile the
 contract for the network you want to deploy it to.
 
-Once compiled, please copy the bytecode and abi for the future usecases.
+Once compiled, please copy the bytecode and ABI for the future usecases.
 
 ```dart
 final contractAbi = '[{"constant":false,"inputs":[{"name":"newMessage","type":"string"}],"name":"update","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"message","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"initMessage","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]';

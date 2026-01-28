@@ -18,8 +18,10 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 
 ## Prerequisites
 
-- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
-- [Install MetaMask Flask 13.5.0 or later.](/snaps/get-started/install-flask)
+- [Install and set up the Smart Accounts Kit](../../get-started/install.md)
+- [Install MetaMask Flask 13.5.0 or later](/snaps/get-started/install-flask)
+
+## Steps
 
 ### 1. Set up a Wallet Client
 
@@ -173,11 +175,11 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     type: "erc20-token-periodic",
     data: {
       tokenAddress,
-      // 1 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
+      // 10 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
       periodAmount: parseUnits("10", 6),
       // 1 day in seconds
       periodDuration: 86400,
-      justification?: "Permission to transfer 1 USDC every day",
+      justification: "Permission to transfer 10 USDC every day",
     },
   },
   isAdjustmentAllowed: true,

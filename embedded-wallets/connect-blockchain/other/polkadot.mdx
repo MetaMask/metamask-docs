@@ -27,7 +27,7 @@ For Polkadot, we will use the libraries `@polkadot/keyring` and `@polkadot/util-
 npm install --save @polkadot/keyring @polkadot/util-crypto
 ```
 
-## Initializing Provider
+## Initializing provider
 
 ### Getting the `chainConfig`
 
@@ -67,7 +67,7 @@ npm install --save @polkadot/keyring @polkadot/util-crypto
 </TabItem>
 </Tabs>
 
-## Get Account and KeyPair
+## Get account and keypair
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Polkadot, we directly use the private key to make RPC calls.
 
@@ -92,7 +92,7 @@ const keyPair = keyring.addFromUri('0x' + privateKey)
 const address = keyPair.address
 ```
 
-## Get Balance
+## Get balance
 
 ```tsx
 import { Keyring } from '@polkadot/api'
@@ -124,7 +124,7 @@ const data = await api.query.system.account(keyPair.address)
 const balance = data.toHuman()
 ```
 
-## Send Transaction
+## Send transaction
 
 ```tsx
 import { Keyring } from '@polkadot/api'

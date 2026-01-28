@@ -18,7 +18,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 :::
 
-## Chain Details for Solana
+## Chain details for Solana
 
 <Tabs
  defaultValue="mainnet"
@@ -118,7 +118,7 @@ pod install
 
 To Initialize the `JSONRPCAPIClient` we require rpc url. The `JSONRPCAPIClient` instance will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response. For this example, we are using rpc url for Devnet-beta. To interact with Testnet or Mainnet, you can simply change the rpc url.
 
-### Initializing Solana SDK
+### Initializing the Solana SDK
 
 In the below code block, we'll create the `JSONRPCAPIClient` instance using the Devnet-beta rpc.
 
@@ -134,7 +134,7 @@ let endpoint = APIEndPoint(
 let solanaJSONRPCClient = JSONRPCAPIClient(endpoint: endpoint)
 ```
 
-### Initializing Web3Auth SDK
+### Initializing the Web3Auth SDK
 
 In the below code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to home view, otherwise you can route them to login view for authentication purpose. For checking, if user is already authenticated, we can check whether `Web3Auth.state` is `nil` or not.
 
@@ -162,7 +162,7 @@ let isUserAuthenticated = web3Auth.state != nil
 // Customize your logic to perform operations or navigation
 ```
 
-## Get Account
+## Get account
 
 We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retive user's public address by creating `KeyPair`. The `KeyPair` struct from `SolanaSwift` SDK once created can be used to sign the Solana transactions.
 
@@ -191,7 +191,7 @@ let balanceResponse = try await solanaJSONRPCClient.getBalance(
 let userBalance = return balanceResponse.convertToBalance(decimals: 9)
 ```
 
-## Sign Transaction
+## Sign a transaction
 
 Let's now go through how can we sign the transaction. In the below codeblock, we'll create a new function `perpareTransaction` which can be used to retrive the Base58 signature as well as broadcast transaction to the cluster. We'll use `BlockchainClient.prepareSendingNativeSOL` to create the transaction to self transfer 0.01 Sol and sign it. You can also checkout `prepareSendingSPLTokens`, and `prepareTransaction` for other types of transaction.
 
@@ -223,7 +223,7 @@ do {
 }
 ```
 
-## Send Transaction
+## Send transaction
 
 For the send transaction, we'll use `sendTransaction` method from `BlockchainClient` instance to broadcast the result of `perpareTransaction` to the cluster.
 

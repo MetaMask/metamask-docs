@@ -1,6 +1,6 @@
-Once user has successfully logged in, you can retrieve the user's private key using the `getPrivKey` method from the Embedded Wallets Android SDK (formerly Web3Auth). We'll use this private key to generate the Credentials for the user.
+Once user has successfully logged in, you can retrieve the user's private key using the `getPrivKey` method from the Embedded Wallets Android SDK. We'll use this private key to generate the Credentials for the user.
 
-This Credentials object has the user's key pair of private key and public key, and can be used to sign the transactions. Please note, that this assumes that the user has already logged in and the private key is available.
+This Credentials object has the user's keypair of private key and public key, and can be used to sign the transactions. Please note, that this assumes that the user has already logged in and the private key is available.
 
 ```kotlin
 import org.web3j.crypto.Credentials

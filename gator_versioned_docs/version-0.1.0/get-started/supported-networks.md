@@ -26,7 +26,7 @@ If you don't see the network you're looking for, you can request support by emai
 | Linea               | ✅      |
 | Optimism            | ✅      |
 | Polygon             | ✅      |
-| Sonic               | ✅      |
+| Sonic               | ❌      |
 | Unichain            | ✅      |
 
 ### Testnet networks
@@ -40,15 +40,15 @@ If you don't see the network you're looking for, you can request support by emai
 | Citrea                      | ✅      |
 | Ethereum Sepolia            | ✅      |
 | Gnosis Chiado               | ✅      |
-| Hoodi                       | ✅      |
+| Hoodi                       | ❌      |
 | Ink Sepolia                 | ✅      |
 | Linea Sepolia               | ✅      |
 | MegaEth                     | ✅      |
 | Monad                       | ✅      |
 | Optimism Sepolia            | ✅      |
 | Polygon Amoy                | ✅      |
-| Sei                         | ✅      |
-| Sonic                       | ✅      |
+| Sei                         | ❌      |
+| Sonic                       | ❌      |
 | Unichain Sepolia            | ✅      |
 
 ## Advanced Permissions (ERC-7715)

@@ -447,7 +447,7 @@ export const GET_OPTIONS = {
 
 export const REF_SERVICES_PATH = '/services/reference/'
 export const REF_WALLET_PATH = '/wallet/reference/'
-export const REF_FAUCET_PATH = '/developer-tools/faucet/'
+export const REF_FAUCET_PATH = '/developer-tools/faucet'
 
 export const REF_ALLOW_LOGIN_PATH = [REF_SERVICES_PATH, REF_WALLET_PATH, REF_FAUCET_PATH]
 

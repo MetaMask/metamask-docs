@@ -1,8 +1,7 @@
 To retrieve the native balance of the user, you can use the `Web3j` instance we created earlier. It
-has `ethGetBalance` method which helps to fetch the user's native token balance.
+has `ethGetBalance` method which fetches the user's native token balance.
 
-The result we get from method is in wei, the smallest value. To convert the value to ether, you can
-divide it with 10^18, where 18 denotes the decimals for wei.
+The result we get from Web3Client is in wei, the smallest unit of ether. To convert wei to ether, divide by 10^18, where 18 denotes the decimals for wei.
 
 ```kotlin
 import org.web3j.protocol.core.DefaultBlockParameterName
@@ -10,6 +9,6 @@ import org.web3j.protocol.core.DefaultBlockParameterName
 // Use the existing Web3j instance, and address from the previous step
 val balanceResponse = web3.ethGetBalance(address, DefaultBlockParameterName.LATEST).send()
 
-// Convert the balance from Wei to Ether format
+// Convert the balance from wei to ether format
 val ethBalance = BigDecimal.valueOf(balanceResponse.balance.toDouble()).divide(BigDecimal.TEN.pow(18))
 ```

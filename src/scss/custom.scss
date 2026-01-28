@@ -359,6 +359,30 @@ ol {
   font-size: 1.4rem !important;
 }
 
+.DocSearch-Button-Keys {
+  gap: 0 !important;
+}
+
+.DocSearch-Button-Key {
+  font-size: 1.6rem !important;
+}
+
+.DocSearch-Button-Key:last-child {
+  display: none !important;
+}
+
+.DocSearch-Button-Key:first-child {
+  width: auto !important;
+  padding: 0 0.35rem !important;
+  gap: 0.15rem;
+}
+
+.DocSearch-Button-Key:first-child::after {
+  content: 'K';
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
 /* Breadcrumbs */
 
 .breadcrumbs {
@@ -830,7 +854,7 @@ code:hover .code-unfocus {
 div[class^='theme-announcement-bar'] {
   font-family: var(--font-mm-euclid);
   font-size: 1.4rem;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   text-align: center;
   border-bottom: 1px solid var(--general-gray-light);
   background-color: var(--developer-purple-light);
