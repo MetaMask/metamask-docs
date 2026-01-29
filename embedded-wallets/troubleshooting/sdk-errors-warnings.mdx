@@ -1,7 +1,7 @@
 ---
-title: SDK Errors & Warnings
+title: SDK errors and warnings
 image: 'img/metamaskog.jpg'
-sidebar_label: SDK Errors & Warnings
+sidebar_label: SDK errors & warnings
 description: 'SDK Errors & Warnings | Embedded Wallets'
 ---
 
@@ -9,45 +9,45 @@ description: 'SDK Errors & Warnings | Embedded Wallets'
 
 `@web3auth/modal`, `@web3auth/no-modal`, and other frontend SDKs, including mobiles.
 
-### General Errors
+### General errors
 
 | Code                      | Message                                                 | Description                                                                                                                                                |
 | ------------------------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `TPC_NOT_SUPPORTED`       | Unable to detect device share.                          | This may be due to browser security settings. Adjust your current browser settings from 'Strict' to 'Moderate'. Alternatively, login via a Chrome Browser. |
+| `TPC_NOT_SUPPORTED`       | Unable to detect device share.                          | This may be due to browser security settings. Adjust your current browser settings from 'Strict' to 'Moderate'. Alternatively, log in via a Chrome Browser. |
 | `NETWORK_RESPONSE_FAILED` | Unable to detect login share from the Web3Auth Network. | This may be due to slow internet connection. Check your internet speed and try again.                                                                      |
 | `DUPLICATE_TOKEN_FOUND`   | Unable to verify.                                       | This may be due to invalid login. Kindly log out of your social login provider on your current browser and login again.                                    |
 | `BUSY_NETWORK`            | Unable to connect to Web3Auth Network.                  | The Network may be congested. Please try again in 5 minutes.                                                                                               |
-| `KEY_ASSIGN_FAILED`       | A key has not been assigned to you.                     | This might be due to communication with the Web3Auth Network Nodes. Kindly relogin to try again. If problem persists, please Contact Support.              |
+| `KEY_ASSIGN_FAILED`       | A key has not been assigned to you.                     | This might be due to communication with the Web3Auth network nodes. Kindly relogin to try again. If problem persists, please contact support.              |
 | `VERIFIER_NOT_SUPPORTED`  | Verifier not supported.                                 | Kindly ensure you have a live verifier on the right network (Testnet/Mainnet). Set up / Check verifier status here: https://dashboard.web3auth.io          |
 | `DEFAULT`                 | There seems to be some bug in the code.                 | Please contact support to fix this.                                                                                                                        |
 
-### Initialization Errors
+### Initialization errors
 
 | Code   | Message                                   | Description                                                                |
 | ------ | ----------------------------------------- | -------------------------------------------------------------------------- |
-| `5001` | Wallet is not found                       | Error occurred, when there's no wallet found                               |
-| `5002` | Wallet is not installed                   | Error occurred, when the requested wallet is not installed                 |
-| `5003` | Wallet is not ready yet                   | Error occurred, when the wallet is not ready                               |
-| `5004` | Wallet window is blocked                  | Error occurred, when the wallet window is blocked                          |
-| `5005` | Wallet window has been closed by the user | Error occurred, when the wallet window is closed by the user               |
-| `5006` | Incompatible chain namespace provided     | Error occurred, when the incompatible chainNamespace was passed            |
-| `5007` | Adapter has already been included         | Error occurred, when an already included adapter is being included again   |
-| `5008` | Invalid provider Config                   | Error occurred, when an invalid provider configs are being used            |
+| `5001` | Wallet is not found                       | Error occurred, when there's no wallet found.                               |
+| `5002` | Wallet is not installed                   | Error occurred, when the requested wallet is not installed .                |
+| `5003` | Wallet is not ready yet                   | Error occurred, when the wallet is not ready.                               |
+| `5004` | Wallet window is blocked                  | Error occurred, when the wallet window is blocked.                          |
+| `5005` | Wallet window has been closed by the user | Error occurred, when the wallet window is closed by the user.               |
+| `5006` | Incompatible chain namespace provided     | Error occurred, when the incompatible `chainNamespace` was passed.            |
+| `5007` | Adapter has already been included         | Error occurred, when the same adapter is added more than once..   |
+| `5008` | Invalid provider Config                   | Error occurred, when an invalid provider configurations are being used.            |
 | `5009` | Provider is not ready yet                 | Error occurred, when the provider is not ready and trying to use it        |
-| `5010` | Failed to connect with rpc url            | Error occurred, when trying to connect the wallet with the rpc url         |
-| `5011` | Invalid params passed in                  | Error occurred, when an invalid parameter was passed                       |
-| `5013` | Invalid network provided                  | Error occurred, when an invalid network was provided during initialization |
+| `5010` | Failed to connect with rpc url            | Error occurred, when trying to connect the wallet with the RPC URL.         |
+| `5011` | Invalid params passed in                  | Error occurred, when an invalid parameter was passed.                       |
+| `5013` | Invalid network provided                  | Error occurred, when an invalid network was provided during initialization. |
 
-### Login Errors
+### Login errors
 
-| Code   | Message                                  | Description                                                |
-| ------ | ---------------------------------------- | ---------------------------------------------------------- |
-| `5111` | Failed to connect with wallet            | Upon login, the wallet is unable to connect                |
-| `5112` | Failed to disconnect from wallet         | Upon log out, the wallet is unable to disconnect           |
-| `5113` | Wallet is not connected                  | Throws this error when trying to use a logged out wallet   |
-| `5114` | Wallet popup has been closed by the user | Throws this error when the user has closed the Login Modal |
+| Code   | Message                                  | Description                                                 |
+| ------ | ---------------------------------------- | ----------------------------------------------------------- |
+| `5111` | Failed to connect with wallet            | Upon login, the wallet is unable to connect.                |
+| `5112` | Failed to disconnect from wallet         | Upon log out, the wallet is unable to disconnect.           |
+| `5113` | Wallet is not connected                  | Throws this error when trying to use a logged out wallet.   |
+| `5114` | Wallet popup has been closed by the user | Throws this error when the user has closed the Login Modal. |
 
-### JSON RPC Errors
+### JSON RPC errors
 
 | Code             | Message            | Description                                                                                                                                             |
 | ---------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -55,10 +55,10 @@ description: 'SDK Errors & Warnings | Embedded Wallets'
 | -32600           | `Invalid Request`  | The JSON sent is not a valid Request object.                                                                                                            |
 | -32601           | `Method Not Found` | The method does not exist / is not available.                                                                                                           |
 | -32602           | `Invalid Params`   | Invalid method parameter(s).                                                                                                                            |
-| -32603           | `Internal Error`   | Internal JSON-RPC error. These can manifest as different generic issues (i.e.: attempting to access a protected endpoint before the user is logged in). |
-| -32000 to -32099 | `Server Error`     | Reserved for implementation-defined server-errors.                                                                                                      |
+| -32603           | `Internal Error`   | Internal JSON-RPC error. These can manifest as different generic issues (such as attempting to access a protected endpoint before the user is logged in). |
+| -32000 to -32099 | `Server Error`     | Reserved for implementation-defined server errors.                                                                                                      |
 
-## Torus EVM & Solana Wallet Plugin Errors
+## Torus EVM and Solana wallet plugin errors
 
 | Code   | Message                                                                                                                  |
 | ------ | ------------------------------------------------------------------------------------------------------------------------ |
@@ -75,49 +75,49 @@ description: 'SDK Errors & Warnings | Embedded Wallets'
 
 `@web3auth/node-sdk`
 
-### Constructor Errors
+### Constructor errors
 
-| Message                                              | Description                                          |
-| ---------------------------------------------------- | ---------------------------------------------------- |
-| `chainNamespace is required`                         | chainNamespace is required for EVM and Solana Chains |
-| `Please provide a valid clientId in constructor`     | Invalid clientId was passed in the constructor.      |
-| `chainId is required for non-OTHER chainNamespace`   | chainId is required for EVM and Solana Chains        |
-| `rpcTarget is required for non-OTHER chainNamespace` | rpcTarget is required for EVM and Solana Chains      |
+| Message                                              | Description                                             |
+| ---------------------------------------------------- | ------------------------------------------------------- |
+| `chainNamespace is required`                         | `chainNamespace` is required for EVM and Solana Chains. |
+| `Please provide a valid clientId in constructor`     | Invalid `clientId` was passed in the constructor.       |
+| `chainId is required for non-OTHER chainNamespace`   | A Chain ID is required for EVM and Solana Chains.       |
+| `rpcTarget is required for non-OTHER chainNamespace` | An RPC target is required for EVM and Solana Chains.    |
 
-### Initialization Errors
+### Initialization errors
 
 | Message                                                                                  | Description                                                                                  |
 | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `chainConfig is required for Solana in constructor `                                     | When initializing, chainConfig for Solana needs to be passed, else will throw this error     |
-| `chainConfig is required for EVM chain in constructor`                                   | When initializing, chainConfig for EVM Chains needs to be passed, else will throw this error |
-| `Invalid chainNamespace: ${this.currentChainNamespace} found while connecting to wallet` | When initializing, unsupported chainConfig was passed                                        |
+| `chainConfig is required for Solana in constructor `                                     | When initializing, `chainConfig` for Solana needs to be passed, else will throw this error.     |
+| `chainConfig is required for EVM chain in constructor`                                   | When initializing, `chainConfig` for EVM Chains needs to be passed, else will throw this error. |
+| `Invalid chainNamespace: ${this.currentChainNamespace} found while connecting to wallet` | When initializing, unsupported `chainConfig` was passed.                                        |
 
-### Login Errors
+### Login errors
 
 | Message                                                                                      | Description                                                                                   |
 | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | `User has already enabled mfa, please use the @web3auth/web3auth-web sdk for login with mfa` | A user has enabled 2FA, `@web3auth/node-sdk` only works for a users who have not enabled MFA. |
 
-### Other Errors
+### Other errors
 
-Some other errors could be found during `@web3auth/node-sdk` implementations:
+Additional errors may be found during `@web3auth/node-sdk` implementations:
 
 | Message                                     | Description                                 |
 | ------------------------------------------- | ------------------------------------------- |
-| `node results do not match at first lookup` | Verifier not supported                      |
+| `node results do not match at first lookup` | Verifier not supported.                     |
 | `Error occurred while verifying params`     | Invalid parameter was passed.               |
 | `Duplicate token found`                     | An already used (JWT)`id_token` was passed. |
 
-## Web3Auth Infrastructure Errors
+## Web3Auth infrastructure errors
 
 | Code   | Message                                                                                                         |
 | ------ | --------------------------------------------------------------------------------------------------------------- |
 | `1001` | Unable to delete service provider share                                                                         |
 | `1002` | Wrong share index                                                                                               |
 | `1003` | Unable to updateSDK                                                                                             |
-| `1101` | metadata not found, SDK likely not initialized                                                                  |
-| `1102` | getMetadata errored                                                                                             |
-| `1103` | setMetadata errored                                                                                             |
+| `1101` | Metadata not found, SDK likely not initialized                                                                  |
+| `1102` | `getMetadata` errored                                                                                             |
+| `1103` | `setMetadata` errored                                                                                             |
 | `1104` | previouslyFetchedCloudMetadata provided in initialization is outdated                                           |
 | `1105` | previouslyFetchedCloudMetadata.nonce should never be higher than the latestShareDetails, please contact support |
 | `1201` | Invalid tkeyStore                                                                                               |
@@ -133,8 +133,8 @@ Some other errors could be found during `@web3auth/node-sdk` implementations:
 | `1308` | Share was deleted                                                                                               |
 | `1401` | Unable to acquire lock                                                                                          |
 | `1402` | Unable to release lock                                                                                          |
-| `1501` | privkey unavailable                                                                                             |
-| `1502` | metadata pubkey unavailable                                                                                     |
-| `1503` | getAuthMetadata errored                                                                                         |
-| `1504` | setAuthMetadata errored                                                                                         |
+| `1501` | Private key unavailable                                                                                             |
+| `1502` | Metadata pubkey unavailable                                                                                     |
+| `1503` | `getAuthMetadata `errored                                                                                         |
+| `1504` | `setAuthMetadata` errored                                                                                         |
 | `1601` | delete1OutOf1 requires manualSync=true                                                                          |
