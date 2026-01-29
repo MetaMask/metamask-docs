@@ -234,7 +234,7 @@ Additional to the login config during initialization, you can pass extra options
 | `id_token_hint?`             | It denotes the previously issued ID token. It accepts a string value.        |
 | `id_token?`                  | JWT (ID token) to be passed for login. |
 | `login_hint?`                | It is used to send the user's email address during email passwordless login. It accepts a string value.  |
-| `acr_values?`                | acc_values  |
+| `acr_values?`                | acr_values  |
 | `scope?`                     | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. It accepts a string value. |
 | `audience?`                  | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. It accepts a string value.  |
 | `connection?`                | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. It accepts a string value.  |
@@ -242,7 +242,6 @@ Additional to the login config during initialization, you can pass extra options
 | `response_type?`             | Defines which grant to execute for the authorization server. It accepts a string value.  |
 | `nonce?`                     | Nonce  |
 | `redirect_uri?`              | It can be used to specify the default URL, where your custom JWT verifier can redirect your browser to with the result. If you are using Auth0, it must be allowlisted in the Allowed Callback URLs in your Auth0's application. |
-
 
 </TabItem>
 

@@ -10,7 +10,7 @@ To introduce session management without storing the private key in the device, a
 
 ### In expo-managed workflow
 
-When using our SDK with an Expo-based React Native app (aka managed workflow), you have to install the `expo-web-browser` package as a `WebBrowser` implementation. You also need to install `expo-secure-store` to store the user's session.
+When using our SDK with an Expo-based React Native app (aka managed workflow), you must install the `expo-web-browser` package as a `WebBrowser` implementation. You also need to install `expo-secure-store` to store the user's session.
 
 ```bash
 expo install expo-web-browser expo-secure-store
@@ -31,7 +31,7 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
 
 ### In bare React Native workflow
 
-Install Web3Auth's React Native SDK in your React Native project. When using our SDK with a bare workflow React Native app, you have to install a `WebBrowser` implementation made by us and a `Storage` implementation provided by react-native.
+Install Web3Auth's React Native SDK in your React Native project. When using our SDK with a bare workflow React Native app, you must install a `WebBrowser` implementation made by us and a `Storage` implementation provided by react-native.
 
 ```bash npm2yarn
 npm install --save @toruslabs/react-native-web-browser react-native-encrypted-storage

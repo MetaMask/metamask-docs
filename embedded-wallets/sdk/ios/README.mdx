@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for iOS applications with social logins, external wallets, and more. Our iOS SDK written in Swift simplifies connecting users to their preferred wallets and manage authentication state natively.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for iOS applications with social logins, external wallets, and more. Our iOS SDK, written in Swift, simplifies connecting users to their preferred wallets and manage authentication state natively.
 
 ## Requirements
 
@@ -66,6 +66,13 @@ To use Embedded Wallets for iOS you need to allowlist your `bundleId` in your Em
 - Allowlist `{bundleId}://auth` in the dashboard. This step is mandatory for the redirect to work.
 
 ## Initialize Embedded Wallets
+
+### Configure Redirection
+
+To use Web3Auth for iOS you need to allowlist your `bundleId` in your Web3Auth project.
+
+- Go to [Embedded Wallets developer dashboard](https://dashboard.web3auth.io), and create or open an existing Embedded Wallets project.
+- Allowlist `{bundleId}://auth` in the developer dashboard. This step is mandatory for the redirect to work.
 
 ### 1. Create an Embedded Wallets instance
 
