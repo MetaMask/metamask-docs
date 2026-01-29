@@ -29,11 +29,11 @@ Trigger the login flow that navigates the user to a browser model that allows th
 | --- | --- |
 | `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`. |
 | `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass user's email address as. Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
-| `redirectUrl?` | Url where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `string` as a value. |
+| `redirectUrl?` | URL where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `string` as a value. |
 | `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `string` as a value. |
 | `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MfaLevelType.default`, which shows MFA screen every 3rd login. It accepts `MfaLevelType` as a value. |
 | `dappShare?` | Custom verifier logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `string` as a value. |
-| `curve?` | It will be used to determine the public key encoded in the jwt token which returned in `getUserInfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `ed25519Key` method. The default value is `SUPPORTED_KEY_CURVES_TYPE.secp256k1`. |
+| `curve?` | It will be used to determine the public key encoded in the JWT token which returned in `getUserInfo` function after user login. This parameter won't change format of private key returned by We3Auth. Private key returned by `getPrivKey` is always secp256k1. To get the ed25519 key you can use `ed25519Key` method. The default value is `SUPPORTED_KEY_CURVES_TYPE.secp256k1`. |
 
 </TabItem>
 
@@ -131,7 +131,7 @@ export type LoginParams = BaseRedirectParams & {
 
 </Tabs>
 
-## Basic Usage
+## Basic usage
 
 ```typescript title="example.tsx"
 await web3auth.login({
@@ -140,9 +140,9 @@ await web3auth.login({
 })
 ```
 
-## Selecting Curve
+## Selecting curve
 
-The `web3auth.login()` method accepts a `curve` parameter. This parameter can be used to select the elliptic curve to use for deriving the address of the key within the jwt returned by Web3Auth for Server Side Verification.
+The `web3auth.login()` method accepts a `curve` parameter. This parameter can be used to select the elliptic curve to use for deriving the address of the key within the JWT returned by Web3Auth for Server Side Verification.
 
 ```typescript
 await web3auth.login({

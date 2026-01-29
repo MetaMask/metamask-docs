@@ -11,7 +11,7 @@ sidebar_label: v6 to v7
 
 #### The new provider object now works with the latest version of `web3.js`.
 
-With V7, the `connectTo()` method now returns a provider of type `IProvider` which is a hard-coded provider, ensuring compatibility with the latest version of web3.js. Previously, we had been using a proxy provider i.e. `SafeEventEmitterProvider` which gave errors with the breaking changes that came with web3.js v4. Remember, you can import the type `IProvider` from the `@web3auth/base` package.
+With V7, the `connectTo()` method now returns a provider of type `IProvider` which is a hard-coded provider, ensuring compatibility with the latest version of web3.js. Previously, we had been using a proxy provider that is, `SafeEventEmitterProvider` which gave errors with the breaking changes that came with web3.js v4. Remember, you can import the type `IProvider` from the `@web3auth/base` package.
 
 ```tsx
 // With V7
@@ -59,7 +59,7 @@ const openloginAdapter = new OpenloginAdapter({
 
 ### Extra parameters for `solana-provider` and `xrpl-provider`
 
-#### For Solana
+#### Solana
 
 For Solana, SolanaWallet in package `@web3auth/solana-provider`, the request typings require both input and output now use `string[]` when input placeholder is needed
 
@@ -72,7 +72,7 @@ const connectionConfig = await solanaWallet.request<string[], CustomChainConfig>
 const conn = new Connection(connectionConfig.rpcTarget)
 ```
 
-#### For XRPL
+#### XRPL
 
 For XRPL, after the change of `@web3auth/xrpl-provider` version to v7, the request typings require both input and output now so use `never` when input or output placeholder is needed
 
@@ -92,7 +92,7 @@ const accounts = await this.provider.request<never, string[]>({
 
 ### `wallet-connect-v2-adapter` requires different parameters
 
-#### With the deprecation of `@wallet-connect/qr-code-modal`, `wallet-connect-v2-adapter` now requires `@walletconnect/modal`.
+With the deprecation of `@wallet-connect/qr-code-modal`, `wallet-connect-v2-adapter` now requires `@walletconnect/modal`.
 
 ```tsx
 import { WalletConnectModal } from '@walletconnect/modal'

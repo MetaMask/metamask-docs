@@ -1,7 +1,7 @@
 ---
 title: Embedded Wallets SDK for Flutter
 sidebar_label: Getting Started
-description: 'MetaMask Embedded Wallets SDK for Flutter | Documentation'
+description: 'MetaMask Embedded Wallets SDK for Flutter | Web3Auth Plug and Play for Flutter'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -9,13 +9,23 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provides a seamless authentication experience for Flutter applications with social logins, external wallets, and more. Using our Flutter SDK written in Dart, you can easily connect users to their preferred wallets and manage authentication state across both iOS and Android platforms.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for Flutter applications with social logins, external wallets, and more. Using our Flutter SDK written in Dart, you can easily connect users to their preferred wallets and manage authentication state across both iOS and Android platforms.
 
 ## Requirements
 
 - **Android** API version 26 or newer
 - **iOS** 14, Xcode 12+ and Swift 5.x
 - Basic knowledge of Dart and Flutter Development
+
+## Prerequisites
+
+- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+
+:::tip
+
+See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
+
+:::
 
 ## Installation
 
@@ -38,21 +48,13 @@ Add `web3auth_flutter` using `flutter pub add` command:
 flutter pub add web3auth_flutter
 ```
 
-## Setup
-
-:::info
-
-Prerequisites Before you start, make sure you have registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/) and have set up your project. You can look into the [Dashboard Setup](../../dashboard/README.mdx) guide to learn more.
-
-:::
-
-### 1. Android Configuration
+### 1. Android configuration
 
 Once we have installed Web3Auth Flutter SDK, we also need to add the configuration for Android.
 
-#### Update compileSdkVersion
+#### Update `compileSdkVersion`
 
-For Android build `compileSdkVersion` needs to be `34`. Check your app module gradle file in your project to change it:
+For Android build `compileSdkVersion` needs to be `34`. Check your app module Gradle file in your project to change it:
 
 ```groovy
 android {
@@ -63,9 +65,9 @@ android {
 }
 ```
 
-#### Add Web3Auth to Gradle
+#### Add Embedded Wallets to Gradle
 
-In your project-level gradle file add JitPack repository:
+In your project-level Gradle file add JitPack repository:
 
 ```groovy
 dependencyResolutionManagement {
@@ -79,7 +81,7 @@ dependencyResolutionManagement {
 }
 ```
 
-#### Update Permissions
+#### Update permissions
 
 Open your app's `AndroidManifest.xml` file and add the following permission. Please make sure the `<uses-permission>` element should be a direct child of the `<manifest>` root element:
 
@@ -87,7 +89,7 @@ Open your app's `AndroidManifest.xml` file and add the following permission. Ple
 <uses-permission android:name="android.permission.INTERNET" />
 ```
 
-#### Configure Deep Link
+#### Configure deep link
 
 Open your app's `AndroidManifest.xml` file and add the following deep link intent filter to your Main activity:
 
@@ -103,7 +105,7 @@ Open your app's `AndroidManifest.xml` file and add the following deep link inten
 </intent-filter>
 ```
 
-#### Handle Custom Tabs
+#### Handle custom tabs
 
 For Android, you need to handle custom tabs lifecycle to trigger login exceptions. The Android SDK uses chrome custom tabs, and it's not possible to add a listener directly to the chrome custom tab close button to trigger login exceptions.
 
@@ -140,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
 }
 ```
 
-### 2. iOS Configuration
+### 2. iOS configuration
 
 #### Update global iOS platform
 
@@ -150,14 +152,14 @@ For iOS build global platform needs to be 14.0. Check `Podfile` in your project 
 platform :ios, '14.0'
 ```
 
-### 3. Configure Redirection
+### 3. Configure redirection
 
-- Go to [Web3Auth Developer Dashboard](https://dashboard.web3auth.io), and create or open an existing Web3Auth project.
+- From the [Embedded Wallets dashboard](https://dashboard.web3auth.io/), create or open an existing Web3Auth project.
 - For iOS, allowlist `{bundleId}://auth` in the developer dashboard. This step is mandatory for the redirect to work.
 
 ## Initialize Web3Auth
 
-### 1. Configure Web3Auth Instance
+### 1. Configure Web3Auth instance
 
 Import and configure Web3Auth in your Flutter application:
 
@@ -181,7 +183,7 @@ Future<void> initWeb3Auth() async {
 
   // focus-start
   await Web3AuthFlutter.init(Web3AuthOptions(
-    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Embedded Wallets dashboard
     network: Network.sapphire_mainnet, // or Network.sapphire_devnet
     redirectUrl: redirectUrl,
   ));
@@ -189,9 +191,9 @@ Future<void> initWeb3Auth() async {
 }
 ```
 
-### 2. Initialize Web3Auth Instance
+### 2. Initialize an Embedded Wallets instance
 
-Initialize the Web3Auth instance and check for existing sessions:
+Initialize the Embedded Wallets instance and check for existing sessions:
 
 ```dart
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
@@ -229,24 +231,24 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
 :::note
 
-After configuring Web3Auth, the next step is to initialize it using the `initialize` method. This method is essential for setting up the SDK, checking for any active sessions, and fetching the whitelabel configuration from your dashboard.
+After configuring Embedded Wallets, the next step is to initialize it using the `initialize` method. This method is essential for setting up the SDK, checking for any active sessions, and fetching the whitelabel configuration from your dashboard.
 
 If the API call to fetch the project configuration fails, the method will throw an error.
 
 :::
 
-## Advanced Configuration
+## Advanced configuration
 
-The Web3Auth Flutter SDK offers a rich set of advanced configuration options:
+The Embedded Wallets Flutter SDK offers a rich set of advanced configuration options:
 
-- **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
-- **[Whitelabeling & UI Customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
-- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
-- **[DApp Share](./advanced/dapp-share.mdx)**: Share DApp sessions across devices.
+- **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
+- **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx):** Set up and manage MFA.
+- **[Dapp Share](./advanced/dapp-share.mdx):** Share dapp sessions across devices.
 
 :::tip
 
-Head over to the advanced configuration sections to learn more about each configuration option.
+See the [advanced configuration sections](./advanced/) to learn more about each configuration option.
 
 :::
 
@@ -302,11 +304,11 @@ await Web3AuthFlutter.init(Web3AuthOptions(
 
 </Tabs>
 
-## Blockchain Integration
+## Blockchain integration
 
 Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
 
-### Ethereum Integration
+### Ethereum integration
 
 For Ethereum integration, you can get the private key and use it with web3dart or other Ethereum libraries:
 
@@ -332,7 +334,7 @@ final balanceResponse = await client.getBalance(address);
 final balance = balanceResponse.getValueInUnit(EtherUnit.ether).toStringAsFixed(4);
 ```
 
-### Solana Integration
+### Solana integration
 
 For Solana integration, you can get the Ed25519 private key:
 

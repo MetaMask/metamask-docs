@@ -1,13 +1,13 @@
-You need to install the `wagmi` and `@tanstack/react-query` packages and use the **Web3Auth
-implementation of `WagmiProvider`** for configuration.
+You need to install the `wagmi` and `@tanstack/react-query` packages and use the Embedded Wallets
+implementation of `WagmiProvider` for configuration.
 
 :::info
 
-The Web3Auth implementation of `WagmiProvider` is a custom implementation that is used to integrate
-with the Web3Auth Modal SDK. It is a wrapper around the `WagmiProvider` that makes it compatible.
+The Embedded Wallets implementation of `WagmiProvider` is a custom implementation that is used to integrate
+with the Embedded Wallets/Web3Auth Modal SDK. It is a wrapper around the `WagmiProvider` that makes it compatible.
 
 With this implementation, you can use the Wagmi hooks, however **no external connectors are
-supported**. Web3Auth provides a whole suite of connectors which you can use directly for a better
+supported**. Embedded Wallets provides a whole suite of connectors which you can use directly for a better
 experience with external wallets.
 
 :::
@@ -47,17 +47,17 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 
 :::info
 
-Wagmi provides a comprehensive set of React hooks for Ethereum and EVM-compatible chains. Web3Auth
+Wagmi provides a comprehensive set of React hooks for Ethereum and EVM-compatible chains. Embedded Wallets
 integrates seamlessly with Wagmi, so you can use hooks like `useAccount`, `useBalance`,
 `useSendTransaction`, and more, out of the box.
 
 :::
 
-Below are some examples of using Wagmi hooks in your dApp after Web3Auth and Wagmi are set up. You
-can note these functions work directly with Wagmi. Once you have set up Wagmi with Web3Auth, you can
+Below are some examples of using Wagmi hooks in your dapp after Embedded Wallets and Wagmi are set up. You
+can note these functions work directly with Wagmi. Once you have set up Wagmi with Embedded Wallets, you can
 use any Wagmi hook as you would in a standard Wagmi application.
 
-### Get Account Balance
+### Get account balance
 
 ```tsx
 import { useAccount, useBalance } from "wagmi";
@@ -79,7 +79,7 @@ export function Balance() {
 }
 ```
 
-### Send Transaction
+### Send transaction
 
 ```tsx
 import { FormEvent } from "react";
@@ -120,7 +120,7 @@ export function SendTransaction() {
 }
 ```
 
-### Switch Chain
+### Switch chain
 
 ```tsx
 import { useChainId, useSwitchChain } from "wagmi";

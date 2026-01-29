@@ -33,37 +33,37 @@ import { useWeb3AuthUser } from '@web3auth/modal/vue'
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 import type { IUseWeb3AuthUser } from '@web3auth/modal/vue'
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Whether the user info fetching process is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error that occurred during the user info fetching process.
 
-#### userInfo
+#### `userInfo`
 
 `Partial<UserInfo> | null`
 
 The current user's information, or null if not available.
 
-#### isMFAEnabled
+#### `isMFAEnabled`
 
 `boolean`
 
 Whether Multi-Factor Authentication (MFA) is enabled for the user.
 
-#### getUserInfo
+#### `getUserInfo`
 
 `() => Promise<Partial<UserInfo> | null>`
 

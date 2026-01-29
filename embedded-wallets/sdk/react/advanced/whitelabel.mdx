@@ -11,9 +11,9 @@ import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
 Web3Auth allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
 
-- **UI elements**: Customize the appearance of modals and components
-- **Branding**: Apply your brand colors, logos, and themes
-- **Translations**: Localize the interface for your users
+- **UI elements:** Customize the appearance of modals and components
+- **Branding:** Apply your brand colors, logos, and themes
+- **Translations:** Localize the interface for your users
 
 <WhitelabelingNote />
 
@@ -59,7 +59,7 @@ The `LoginMethodConfig` interface provides extensive customization options for e
 | `mainOption`              | `boolean`              | Whether to show login button on the main list                                        |
 | `showOnModal`             | `boolean`              | Controls visibility of the login button on modal                                     |
 | `authConnectionId`        | `string`               | Auth connection ID of the provider                                                   |
-| `groupedAuthConnectionId` | `string`               | Grouped auth connection ID of the provider                                           |
+| `groupedAuthConnectionId` | `string`               | Grouped Auth Connection ID of the provider                                           |
 | `extraLoginOptions`       | `ExtraLoginOptions`    | Additional parameters for social login                                               |
 | `authConnection`          | `AUTH_CONNECTION_TYPE` | Auth connection type (useful for customizing login buttons with custom connectors)   |
 | `isDefault`               | `boolean`              | Whether it's the default connector _(internal)_                                      |
@@ -134,9 +134,9 @@ export type LoginMethodConfig = Partial<
   </TabItem>
 </Tabs>
 
-## Common Customization Examples
+## Common customization examples
 
-### Disabling Specific Social Login Methods
+### Disabling specific social login methods
 
 Web3Auth provides the following social login methods:
 
@@ -201,7 +201,7 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
 export default web3AuthContextConfig
 ```
 
-### Enhancing Email and SMS Login Experience
+### Enhancing email and SMS login experience
 
 By specifying a custom `authConnectionId` for email or SMS login methods, you can ensure the entire authentication flow takes place seamlessly within the modal, eliminating the need for external popups.
 
@@ -244,8 +244,8 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
 export default web3AuthContextConfig
 ```
 
-## Creating a Fully Custom UI
+## Creating a fully custom UI
 
 For complete control over the authentication interface, you can bypass the Web3Auth modal entirely and use the `connectTo` function. This allows you to create custom buttons that connect directly to specific auth providers.
 
-See the [Custom Authentication](./custom-authentication.mdx) section for detailed implementation instructions.
+See the [custom authentication](./custom-authentication.mdx) section for detailed implementation instructions.

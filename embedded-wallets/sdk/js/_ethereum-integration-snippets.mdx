@@ -35,7 +35,7 @@ Using `eip155` as `chainNamespace` while initializing `web3auth` will provide an
 [`EIP1193`](https://eips.ethereum.org/EIPS/eip-1193) compatible provider as **`web3auth.provider`**
 after successful authentication.
 
-### Initializing and instantiating the Web3Auth SDK
+### Initializing and instantiating the Embedded Wallets SDK
 
 ```tsx
 import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
@@ -46,9 +46,9 @@ const web3AuthOptions: Web3AuthOptions = {
 }
 ```
 
-## Getting the Web3Auth provider
+## Getting the Embedded Wallets provider
 
-After initializing Web3Auth, the next step is to initialize the provider and use it for your
+After initializing Embedded Wallets, the next step is to initialize the provider and use it for your
 operations.
 
 ```tsx
@@ -65,7 +65,7 @@ const provider = web3auth.provider
 // Continue using the `provider`
 ```
 
-### Get Account and Balance
+### Get account and balance
 
 <Tabs
 defaultValue="viem"
@@ -125,7 +125,7 @@ const balance = await publicClient.getBalance({ address: address[0] })
 
 </Tabs>
 
-### Send Transaction
+### Send transaction
 
 <Tabs
   defaultValue="viem"
@@ -196,7 +196,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 </TabItem>
 </Tabs>
 
-### Send Transaction
+### Send transaction
 
 <Tabs
   defaultValue="viem"
@@ -267,9 +267,9 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 </TabItem>
 </Tabs>
 
-### Sign Message
+### Sign message
 
-#### Personal Sign
+#### Personal sign
 
 <Tabs
   defaultValue="viem"
@@ -326,8 +326,7 @@ const hash = await walletClient.signMessage({
 </TabItem>
 </Tabs>
 
-### Sign Typed Data v4
-
+### Sign typed data v4
 <Tabs
   defaultValue="viem"
   values={[
@@ -391,7 +390,7 @@ const signature = await walletClient.signTypedData({
 
 ```tsx
 /*
-  Use code from the above Initializing Provider here
+  Use code from the above initializing provider here
 */
 
 // provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
@@ -418,7 +417,7 @@ const originalMessage = JSON.stringify({
     /*
            - Anything you want. Just a JSON Blob that encodes the data you want to send
            - No required fields
-           - This is DApp Specific
+           - This is dapp Specific
            - Be as explicit as possible when building out the message schema.
           */
     contents: 'Hello, Bob!',
@@ -478,12 +477,12 @@ const signedMessage = await signer.provider.send(method, params)
 </TabItem>
 </Tabs>
 
-### Smart Contract
+### Smart contract
 
-#### Solidity Contract
+#### Solidity contract
 
 In this example, we'll be demonstrating how to use Web3Auth with web3.js or ethers.js to interact
-with Solidity smart contracts. The simple Hello World contract allows anyone to read and write a
+with Solidity smart contracts. The simple _Hello World_ contract allows anyone to read and write a
 message to it.
 
 ```tsx
@@ -504,7 +503,7 @@ contract HelloWorld {
 }
 ```
 
-### Deploy Contract
+### Deploy contract
 
 <Tabs
   defaultValue="viem"
@@ -518,7 +517,7 @@ contract HelloWorld {
 
 ```tsx
 /*
-  Use code from the above Initializing Provider here
+  Use code from the above initializing provider here
 */
 
 // provider is const provider = new ethers.providers.Web3Provider(web3Auth.provider); from above.
@@ -608,7 +607,7 @@ const deployedContractAddress = receipt.contractAddress
 </TabItem>
 </Tabs>
 
-### Read From Contract
+### Read from contract
 
 <Tabs
   defaultValue="viem"
@@ -709,7 +708,7 @@ const message = await publicClient.readContract({
 </TabItem>
 </Tabs>
 
-### Write to Contract
+### Write to contract
 
 <Tabs
   defaultValue="viem"
@@ -823,7 +822,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 </TabItem>
 </Tabs>
 
-### Fetch User's Private Key
+### Fetch user's private key
 
 `private_key` is used to fetch the private key of the logged in user. It is only available for
 `in-app` adapters like `auth`.

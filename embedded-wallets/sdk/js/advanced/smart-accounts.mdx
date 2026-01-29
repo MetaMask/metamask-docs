@@ -1,6 +1,6 @@
 ---
-title: Smart Accounts
-sidebar_label: Smart Accounts
+title: Smart accounts
+sidebar_label: Smart accounts
 description: '@web3auth/modal Native Account Abstraction | Embedded Wallets'
 ---
 
@@ -13,47 +13,51 @@ import SmartAccountSendTransaction from '../../_common/_aa-send-transaction.mdx'
 
 Effortlessly create and manage smart accounts for your users with just a few lines of code, using our Smart Account feature. Smart accounts offer enhanced control and programmability, enabling powerful features that traditional wallets can't provide.
 
-**Key features of Smart Accounts include:**
+**Key features of smart accounts include:**
 
-- **Gas Abstraction:** Cover transaction fees for users, or allow users to pay for their own transactions using ERC-20 tokens.
-- **Batch Transactions:** Perform multiple transactions in a single call.
-- **Automated Transactions:** Allow users to automate actions, like swapping ETH to USDT when ETH hits a specific price.
-- **Custom Spending Limits:** Allow users to set tailored spending limits.
+- **Gas abstraction:** Cover transaction fees for users, or allow users to pay for their own transactions using ERC-20 tokens.
+- **Batch transactions:** Perform multiple transactions in a single call.
+- **Automated transactions:** Allow users to automate actions, like swapping ETH to USDT when ETH hits a specific price.
+- **Custom spending limits:** Allow users to set tailored spending limits.
 
-> For more information about ERC-4337 and its components, [check out our detailed blog post](https://blog.web3auth.io/an-ultimate-guide-to-web3-wallets-externally-owned-account-and-smart-contract-wallet/#introduction-to-eip-4337).
+:::tip
+
+For more about ERC-4337 and its components, [check out our detailed blog post](https://blog.web3auth.io/an-ultimate-guide-to-web3-wallets-externally-owned-account-and-smart-contract-wallet/#introduction-to-eip-4337).
+
+:::
 
 Our smart account integration streamlines your setup, allowing you to create and manage smart accounts using your favorite libraries like Viem, Ethers, and Wagmi. You don't need to rely on third-party packages to effortlessly create ERC-4337 compatible Smart Contract Wallets (SCWs), giving users the ability to perform batch transactions and efficiently manage gas sponsorship.
 
 <GrowthPlanNote />
 
-## Enabling Smart Accounts
+## Enabling smart accounts
 
 :::info prerequisite
 
-To enable this feature, you need to configure Smart Accounts from your project in the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io).
+To enable this feature, you need to configure smart accounts from your project in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
 
 :::
 
-### Dashboard Configuration
+### Dashboard configuration
 
-To enable Smart Accounts, navigate to the Smart Accounts section in the Web3Auth dashboard, and enable the "Set up Smart Accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
+To enable smart accounts, navigate to the smart accounts section in the Web3Auth dashboard, and enable the "Set up Smart accounts" toggle. Web3Auth currently supports [MetaMask Smart Account](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
 
-![Enable Smart Accounts](/img/embedded-wallets/w3a-dashboard/smart-account/enable-smart-account.png)
+![Enable Smart accounts](/img/embedded-wallets/w3a-dashboard/smart-account/enable-smart-account.png)
 
-#### Wallet Configuration
+#### Wallet configuration
 
-Once Smart Accounts are enabled, you can customize the wallet configurations:
+Once smart accounts are enabled, you can customize the wallet configurations:
 
-- **All supported wallets (default):** Allows users to create Smart Accounts using both embedded and external wallets.
+- **All supported wallets (default):** Allows users to create smart accounts using both embedded and external wallets.
 - **Embedded wallets only:** Restricts Smart Account creation to only embedded wallets.
 
-#### Configure Bundler & Paymaster
+#### Configure bundler and paymaster
 
 A bundler aggregates UserOperations and submits them on-chain via the global EntryPoint contract. To configure the bundler:
 
-![Configure Bundler & Paymaster](/img/embedded-wallets/w3a-dashboard/smart-account/configure-paymaster.png)
+![Configure bundler and paymaster](/img/embedded-wallets/w3a-dashboard/smart-account/configure-paymaster.png)
 
-1. Navigate to the `Bundler & Paymaster` tab within the `Smart Accounts` section
+1. Navigate to the `Bundler & Paymaster` tab within the `Smart accounts` section
 2. Add the bundler URL for each supported chain
 3. Add the paymaster URL for each supported chain
 
@@ -63,13 +67,13 @@ Currently, the sponsored paymaster can only be configured via the dashboard. For
 
 :::
 
-### SDK Configuration [Optional]
+### Optional: SDK configuration
 
-While the dashboard provides a convenient way to configure Smart Accounts, the SDK offers greater flexibility by allowing you to override these settings.
+While the dashboard provides a convenient way to configure smart accounts, the SDK offers greater flexibility by allowing you to override these settings.
 
-### Basic Configuration
+### Basic configuration
 
-To enable Smart Accounts in your application, add the `accountAbstractionConfig` to your Web3Auth options:
+To enable smart accounts in your application, add the `accountAbstractionConfig` to your Web3Auth options:
 
 ```ts
 import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
@@ -96,7 +100,7 @@ const web3auth = new Web3Auth({
 await web3auth.init()
 ```
 
-### Advanced Configuration: Override Paymaster Context
+### Advanced configuration: override paymaster context
 
 You can override the paymaster context defined in the dashboard for specific chains. This is particularly useful when your paymaster requires custom settings or parameters.
 
@@ -138,21 +142,21 @@ The paymaster context must be manually configured for each chain that needs to b
 
 :::
 
-## Using Smart Accounts
+## Using smart accounts
 
-### Configure Signer
+### Configure signer
 
 <ConfigureSigners />
 
-### Get Smart Account Address
+### Get Smart account address
 
 <SmartAccountAddress />
 
-### Send Transaction
+### Send transaction
 
 <SmartAccountSendTransaction />
 
-### Sign Transaction
+### Sign transaction
 
 You can sign a transaction without immediately sending it. For the user's first transaction, the `UserOperation` calldata will automatically include the deployment data needed to create the Smart Account on-chain.
 
@@ -202,9 +206,9 @@ const signature = await walletClient.signTransaction(request as any)
 </TabItem>
 </Tabs>
 
-### Sign Message
+### Sign message
 
-Smart Accounts support message signing following the EIP-1271 standard for signature verification, using the `isValidSignature` method defined in the smart contract wallet instead of the `ecrecover` function used by EOAs.
+Smart accounts support message signing following the EIP-1271 standard for signature verification, using the `isValidSignature` method defined in the smart contract wallet instead of the `ecrecover` function used by EOAs.
 
 <Tabs
   defaultValue="viem"
@@ -255,9 +259,9 @@ const signedMessage = await walletClient.signMessage({
 </TabItem>
 </Tabs>
 
-### Send Batch Transaction
+### Send batch transaction
 
-One of the key advantages of Smart Accounts is the ability to execute multiple operations in a single transaction. For example, instead of requiring separate transactions for token approval and then swapping, both operations can be combined into a single UserOperation.
+One of the key advantages of smart accounts is the ability to execute multiple operations in a single transaction. For example, instead of requiring separate transactions for token approval and then swapping, both operations can be combined into a single UserOperation.
 
 To perform batch transactions, you must use the `BundlerClient` provided by Web3Auth:
 
@@ -301,9 +305,9 @@ When calling `sendUserOperation`, it returns a UserOperation hash, not the trans
 
 :::
 
-### Send Transaction Using ERC-20 Paymaster
+### Send Transaction Using ERC-20 paymaster
 
-You can use ERC-20 tokens to pay for transaction fees instead of the native token (e.g., ETH). This requires approving the token for use by the paymaster:
+You can use ERC-20 tokens to pay for transaction fees instead of the native token (for example, ETH). This requires approving the token for use by the paymaster:
 
 ```ts
 // Use your Web3Auth instance

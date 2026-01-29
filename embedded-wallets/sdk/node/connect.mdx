@@ -1,5 +1,5 @@
 ---
-title: Connect
+title: connect
 description: 'Authenticate users and establish provider connection'
 ---
 
@@ -9,10 +9,10 @@ The `connect` method is the primary authentication method for the Node.js SDK. I
 
 :::warning Prerequisites
 
-- You need to have a custom authentication setup on the dashboard.
-- You need to have a freshly generated JWT token from your authentication system in your backend.
+- Custom authentication set up on the dashboard.
+- Freshly generated JWT token from your authentication system in your backend.
 
-Read more about [Custom Authentication](/embedded-wallets/authentication/custom-connections/custom-jwt/).
+Read more about [custom authentication](/embedded-wallets/authentication/custom-connections/custom-jwt/).
 
 :::
 
@@ -39,18 +39,18 @@ export type LoginParams = {
 
 | Parameter                  | Type      | Description                                                                               |
 | -------------------------- | --------- | ----------------------------------------------------------------------------------------- |
-| `authConnectionId`         | `string`  | Custom verifier name from Web3Auth Dashboard                                              |
-| `userId`                   | `string`  | Unique identifier for the user (email, user ID, etc.)                                     |
-| `idToken?`                 | `string`  | Valid JWT token from your authentication system                                           |
-| `groupedAuthConnectionId?` | `string`  | Grouped auth connection ID                                                                |
+| `authConnectionId`         | `string`  | Custom verifier name from Embedded Wallets dashboard.                                              |
+| `userId`                   | `string`  | Unique identifier for the user (for example, email, user ID).                                     |
+| `idToken?`                 | `string`  | Valid JWT token from your authentication system.                                           |
+| `groupedAuthConnectionId?` | `string`  | Grouped Auth Connection ID.                                                                |
 | `userIdField?`             | `string`  | User's unique identifier field name. Add here if not set on the dashboard.                |
-| `isUserIdCaseSensitive?`   | `boolean` | Whether the user id field is case sensitive or not. Add here if not set on the dashboard. |
+| `isUserIdCaseSensitive?`   | `boolean` | Whether the user ID field is case sensitive or not. Add here if not set on the dashboard. |
 
-## Return Value
+## Return value
 
 Returns a `result` object containing the provider/ signer for blockchain operations. By default you get the standard Web3Auth provider, with the ability to get the private key, if enabled from the dashboard. You additionally get the signer for EVM and Solana chains, to be able to do transactions without the need to use the private key provider directly.
 
-### Object Structure
+### Object structure
 
 ```typescript
 import type { TransactionSigner } from '@solana/signers'
@@ -78,7 +78,7 @@ export type WalletResult =
 
 ## Examples
 
-### Custom JWT Token Authentication
+### Custom JWT token authentication
 
 ```javascript
 const { Web3Auth } = require('@web3auth/node-sdk')
@@ -125,7 +125,7 @@ const result = await web3auth.connect({
 // focus-end
 ```
 
-### Firebase Authentication
+### Firebase authentication
 
 ```javascript
 const { Web3Auth } = require('@web3auth/node-sdk')

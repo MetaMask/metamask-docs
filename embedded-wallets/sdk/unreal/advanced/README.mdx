@@ -7,9 +7,9 @@ description: 'Web3Auth Unreal SDK - Advanced Configuration | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your Unreal application's specific requirements.
+The Embedded Wallets SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your Unreal application's specific requirements.
 
-## Configuration Structure
+## Configuration structure
 
 When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
 
@@ -18,7 +18,7 @@ When setting up Web3Auth, you'll pass in the options to the constructor. This co
 
 // focus-start
 FWeb3AuthOptions Options;
-Options.ClientId = TEXT("YOUR_CLIENT_ID"); // Get your Client ID from Web3Auth Dashboard
+Options.ClientId = TEXT("YOUR_CLIENT_ID"); // Get your Client ID from the Web3Auth Dashboard
 Options.Network = TEXT("sapphire_mainnet"); // or "sapphire_devnet"
 Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
 
@@ -45,7 +45,7 @@ The Web3Auth Constructor takes an object with `FWeb3AuthOptions` as input.
 | `ClientId`           | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `FString`.                         |
 | `Network`            | Web3Auth Network: `"sapphire_mainnet"`, `"sapphire_devnet"`, `"mainnet"`, `"cyan"`, `"aqua"` or `"testnet"`. Mandatory field of type `FString`. |
 | `RedirectUrl`        | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `FString`.                         |
-| `WhiteLabelOptions?` | WhiteLabel options for custom UI, branding, and translations. Takes `FWeb3AuthWhiteLabelOptions` as a value.                                    |
+| `WhiteLabelOptions?` | Whitelabel options for custom UI, branding, and translations. Takes `FWeb3AuthWhiteLabelOptions` as a value.                                    |
 | `SessionTime?`       | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                                    |
 
 </TabItem>
@@ -78,7 +78,7 @@ struct FWeb3AuthOptions
 </TabItem>
 </Tabs>
 
-## Session Management
+## Session management
 
 Control how long users stay authenticated and how sessions persist in Unreal Engine.
 
@@ -99,13 +99,13 @@ Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
 UWeb3AuthSDK::GetInstance()->Initialize(Options);
 ```
 
-## Custom Authentication Methods
+## Custom authentication methods
 
-Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication.mdx) section.
+Control the login options presented to your users. For detailed configuration options and implementation examples, see the [custom authentication](./custom-authentication.mdx) section.
 
-## UI Customization
+## UI customization
 
-Create a seamless brand experience by customizing the Web3Auth Login Screens to match your Unreal application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
+Create a seamless brand experience by customizing the Web3Auth Login Screens to match your Unreal application's design. For complete customization options, refer to the [whitelabeling and UI customization](./whitelabel.mdx) section.
 
 ## Multi-Factor Authentication (MFA)
 

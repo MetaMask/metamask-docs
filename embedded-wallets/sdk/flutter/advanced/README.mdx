@@ -7,11 +7,11 @@ description: 'Web3Auth Flutter SDK - Advanced Configuration | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
+The Embedded Wallets SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
 
-## Configuration Structure
+## Configuration structure
 
-When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
+When setting up Embedded Wallets, you'll pass in the options to the constructor. This consists of:
 
 ```dart
 import 'package:web3auth_flutter/web3auth_flutter.dart';
@@ -35,7 +35,7 @@ Future<void> initWeb3Auth() async {
   // focus-start
 
   await Web3AuthFlutter.init(Web3AuthOptions(
-    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard dashboard
     network: Network.sapphire_mainnet, // or Network.sapphire_devnet
     redirectUrl: redirectUrl,
   ));
@@ -63,7 +63,7 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 | `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `String`.              |
 | `network`      | Web3Auth Network: `sapphire_mainnet`, `sapphire_devnet`, `mainnet`, `cyan`, `aqua` or `testnet`. Mandatory field of type `Network`. |
 | `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `Uri`.                 |
-| `whiteLabel?`  | WhiteLabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                    |
+| `whiteLabel?`  | Whitelabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                    |
 | `loginConfig?` | Login config for custom verifiers. Takes `HashMap<String, LoginConfigItem>` as a value.                                             |
 | `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                          |
 | `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                        |
@@ -121,7 +121,7 @@ class Web3AuthOptions {
 </TabItem>
 </Tabs>
 
-## Session Management
+## Session management
 
 Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keystore.
 
@@ -134,24 +134,24 @@ Control how long users stay authenticated and how sessions persist. The session 
 
 ```dart
 await Web3AuthFlutter.init(Web3AuthOptions(
-    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard dashboard
     network: Network.sapphire_mainnet, // or Network.sapphire_devnet
     sessionTime: 86400 * 7, // 7 days (in seconds)
     redirectUrl: redirectUrl,
 ));
 ```
 
-## Custom Authentication Methods
+## Custom authentication methods
 
-Control the login options presented to your users. For detailed configuration options and implementation examples, see the [Custom Authentication](./custom-authentication.mdx) section.
+Control the login options presented to your users. For detailed configuration options and implementation examples, see the [custom authentication](./custom-authentication.mdx) section.
 
-## UI Customization
+## UI customization
 
-Create a seamless brand experience by customizing the Web3Auth Login Screens to match your application's design. For complete customization options, refer to the [Whitelabeling & UI Customization](./whitelabel.mdx) section.
+Create a seamless brand experience by customizing the Web3Auth Login Screens to match your application's design. For complete customization options, refer to the [whitelabeling and UI customization](./whitelabel.mdx) section.
 
 ## Multi-Factor Authentication (MFA)
 
-Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add additional security layers to protect user accounts with two-factor authentication. See the [detailed configuration options and implementation examples](./mfa.mdx).
 
 **Key Configuration Options:**
 

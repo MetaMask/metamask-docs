@@ -4,7 +4,7 @@ sidebar_label: useWalletUI
 description: '@web3auth/modal Vue Composables useWalletUI | Embedded Wallets'
 ---
 
-Hook to show the Wallet Services UI modal using the Wallet Services Plugin.
+Hook to show the Wallet Services UI modal using the Wallet Services plugin.
 
 ### Import
 
@@ -29,25 +29,25 @@ import { useWalletUI } from '@web3auth/modal/vue'
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 import type { IUseWalletUI } from '@web3auth/modal/vue'
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Whether the Wallet UI opening process is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error that occurred during the Wallet UI opening process.
 
-#### showWalletUI
+#### `showWalletUI`
 
 `(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
 
