@@ -1,0 +1,75 @@
+---
+sidebar_label: Connect to EVM and Solana
+---
+
+# Connect to EVM and Solana in MetaMask
+
+Get started with MetaMask Connect in your multichain JavaScript dapp.
+You can connect to EVM networks and Solana in MetaMask at the same time, and make requests to each network without having to switch between them.
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) version 19 or later installed.
+- A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
+- [MetaMask](https://metamask.io/) installed in your browser or on mobile.
+
+## Steps
+
+### 1. Install MetaMask Connect
+
+Install MetaMask Connect in an existing JavaScript project:
+
+```bash npm2yarn
+npm install @metamask/connect-multichain
+```
+
+### 2. Initialize MetaMask Connect
+
+Initialize MetaMask Connect with configuration options:
+
+```javascript
+import { createMultichainClient } from "@metamask/connect-multichain"
+
+const multichainClient = createMultichainClient({
+  dapp: {
+    name: "Metamask Connect Multichain Example",
+    url: window.location.href,
+    iconUrl: "https://mydapp.com/icon.png" // Optional
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY', // Ethereum Mainnet
+      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY', // Ethereum Sepolia
+      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet.solana.com', // Solana Mainnet
+      'solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ': 'https://api.devnet.solana.com', // Solana Devnet
+    },
+  },
+})
+```
+
+This example configures MetaMask Connect with the following options:
+
+- `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
+- `api.supportedNetworks` - A map of caipChainIds -> RPC URLs for all networks supported by the app.
+
+### 3. Connect and use provider
+
+Connect to MetaMask and get the provider for RPC requests:
+
+```javascript
+await multichainClient.connect()
+
+const provider = multichainClient.getProvider()
+
+// TODO: replace with provider snippet
+const result = await provider.request({
+  chain: 'eip155:1',
+  method: 'eth_accounts',
+  params: [],
+});
+console.log('eth_accounts result:', result)
+```
+
+## Next steps
+
+Now that you've connected to multiple ecosystems in MetaMask, learn how to [send EVM and Solana transactions](send-transactions.md).
