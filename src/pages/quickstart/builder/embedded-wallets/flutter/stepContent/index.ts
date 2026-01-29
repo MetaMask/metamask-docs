@@ -3,7 +3,7 @@ import * as flutterQuickStart from './flutterQuickStart.mdx'
 import * as requirementsAndroid from './requirementsAndroid.mdx'
 import * as requirementsIOS from './requirementsIOS.mdx'
 import * as installation from './installation.mdx'
-import * as whitelist from './whitelist.mdx'
+import * as allowlist from './allowlist.mdx'
 import * as registerApp from '../../../../commonSteps/registerApp.mdx'
 import * as initialization from './initialize.mdx'
 import * as login from './login.mdx'
@@ -17,7 +17,7 @@ const STEPS = toSteps({
   requirementsIOS,
   installation,
   registerApp,
-  whitelist,
+  allowlist,
   initialization,
   login,
   getUserInfo,
