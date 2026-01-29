@@ -105,6 +105,8 @@
     "typescript": "^5.8.3"
   },
   "overrides": {
+    "axios": "^1.7.9",
+    "cross-spawn": "^7.0.6",
     "react-alert": {
       "react": "^18.0.0",
       "react-dom": "^18.0.0"
