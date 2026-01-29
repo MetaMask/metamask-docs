@@ -54,7 +54,7 @@ private void onLogin(Web3AuthResponse response)
 | --- | --- |
 | `loginProvider` | It sets the OAuth login method to be used. You can use any of the supported values are `GOOGLE`, `FACEBOOK`, `REDDIT`, `DISCORD`, `TWITCH`, `APPLE`, `LINE`, `GITHUB`, `KAKAO`, `LINKEDIN`, `TWITTER`, `WEIBO`, `WECHAT`, `EMAIL_PASSWORDLESS`. |
 | `extraLoginOptions?` | It can be used to set the OAuth login options for corresponding `loginProvider`. For instance, you'll need to pass the user's email address as. The Default value for the field is `null`, and it accepts `ExtraLoginOptions` as a value. |
-| `redirectUrl?` | URL where user will be redirected after successfull login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `URI` as a value. |
+| `redirectUrl?` | URL where user will be redirected after successful login. By default user will be redirected to same page where login will be initiated. Default value for the field is `null`, and accepts `URI` as a value. |
 | `appState?` | It can be used to keep track of the app state when user will be redirected to app after login. Default is `null`, and accepts `string` as a value. |
 | `mfaLevel?` | Customize the MFA screen shown to the user during OAuth authentication. Default value for field is `MFALevel.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value. |
 | `dappShare?` | Custom verifier logins can get a dapp share returned to them after a successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts `string` as a value. |
@@ -159,13 +159,14 @@ LoginParams() { selectedLoginProvider, extraLoginOptions = ExtraLoginOptions() }
 | `id_token?` | JWT (ID token) to be passed for login. |
 | `login_hint?` | It is used to send the user's email address during email passwordless login. String value. |
 | `acr_values?` | acr_values |
-| `scope?` | The default scope to be used on authentication requests. The defaultScope defined in the Auth0Client is included along with this scope. String value. |
+| `scope?` | The default scope to be used on authentication requests. The default scope defined in the Auth0Client is included along with this scope. String value. |
 | `audience?` | The audience, presented as the aud claim in the access token, defines the intended consumer of the token. String value. |
 | `connection?` | The name of the connection configured for your application. If null, it will redirect to the Auth0 Login Page and show the Login Widget. String value. |
 | `state?` | State |
 | `response_type?` | Defines which grant to be execute for the authorization server. String value. |
 | `nonce?` | Nonce value |
-| `redirect_uri?` | It can be used to specify the default URL, where your custom JWT verifier can redirect your browser to with the result. If you are using Auth0, it must be whitelisted in the Allowed Callback URLs in your Auth0's application. |
+| `redirect_uri?` | It can be used to specify the default URL, where your custom JWT verifier can redirect your browser to with the result. If you are using Auth0, it must be allowlisted in the Allowed Callback URLs in your Auth0's application. |
+
 
 </TabItem>
 

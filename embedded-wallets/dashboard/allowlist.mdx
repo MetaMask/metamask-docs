@@ -1,15 +1,15 @@
 ---
-title: Whitelist Settings
-sidebar_label: Whitelist
+title: Allowlist Settings
+sidebar_label: Allowlist
 image: 'img/metamaskog.jpg'
-description: 'Configure domain whitelisting in Web3Auth Dashboard | Embedded Wallets'
+description: 'Configure domain allowlisting in Web3Auth Dashboard | Embedded Wallets'
 ---
 
 import ProjectSettingsDomain from '@site/static/img/embedded-wallets/w3a-dashboard/project-settings-domain.png'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-The **Whitelist Settings** section allows you to configure domain and URL authorization for enhanced security. Web3Auth requires explicit whitelisting of domains and URLs that are authorized to use your project's Web3Auth SDK, providing protection against unauthorized usage and potential security threats.
+The **Allowlist Settings** section allows you to configure domain and URL authorization for enhanced security. Web3Auth requires explicit allowlisting of domains and URLs that are authorized to use your project's Web3Auth SDK, providing protection against unauthorized usage and potential security threats.
 
 <div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
   <img
@@ -21,7 +21,7 @@ The **Whitelist Settings** section allows you to configure domain and URL author
 
 ## Domain authorization overview
 
-Domain whitelisting is a critical security feature that prevents unauthorized applications from using your Web3Auth project credentials. Only domains and URLs explicitly added to your whitelist can successfully authenticate users through your Web3Auth configuration.
+Domain allowlisting is a critical security feature that prevents unauthorized applications from using your Web3Auth project credentials. Only domains and URLs explicitly added to your allowlist can successfully authenticate users through your Web3Auth configuration.
 
 ### Security benefits
 
@@ -30,7 +30,7 @@ Domain whitelisting is a critical security feature that prevents unauthorized ap
 - **Compliance ready**: Meets security standards for production applications
 - **Fraud prevention**: Blocks malicious sites from impersonating your application
 
-## Web application whitelisting
+## Web application allowlisting
 
 ### Supported URL formats
 
@@ -77,7 +77,7 @@ http://127.0.0.1:8080
 
 ### Adding web domains
 
-1. Navigate to **Project Settings** → **Whitelist**.
+1. Navigate to **Project Settings** → **Allowlist**.
 2. Click **Add Domain** or similar button.
 3. Enter the complete URL including protocol (http:// or https://).
 4. Verify the domain (if required).
@@ -92,11 +92,11 @@ http://127.0.0.1:8080
 
 :::
 
-## Mobile application whitelisting
+## Mobile application allowlisting
 
 ### Bundle identifiers
 
-For mobile applications, whitelist the app's bundle identifier or package name:
+For mobile applications, allowlist the app's bundle identifier or package name:
 
 <Tabs>
 <TabItem value="ios" label="iOS Bundle IDs">
@@ -162,7 +162,7 @@ https://staging.yourapp.com
 
 **Development Tips:**
 
-- Whitelist common development ports
+- Allowlist common development ports
 - Include both localhost and 127.0.0.1
 - Add staging and testing environments
 - Use HTTP for local development (HTTPS for staging)
@@ -171,13 +171,13 @@ https://staging.yourapp.com
 
 :::warning Production Requirements
 
-For Sapphire Mainnet projects, **at least one domain must be whitelisted** before the SDK can be used in production. This is a mandatory security requirement.
+For Sapphire Mainnet projects, **at least one domain must be allowlisted** before the SDK can be used in production. This is a mandatory security requirement.
 
 :::
 
 **Production Checklist:**
 
-- ✅ All production domains whitelisted
+- ✅ All production domains allowlisted
 - ✅ HTTPS enforced for all domains
 - ✅ Subdomain coverage complete
 - ✅ Mobile bundle IDs added
@@ -246,7 +246,7 @@ Monitor the verification status in your dashboard:
 **Problem**: Users cannot authenticate on your domain
 **Solutions:**
 
-- Verify the domain is in your whitelist
+- Verify the domain is in your allowlist
 - Check for typos in the domain name
 - Ensure protocol (http/https) matches exactly
 - Confirm subdomain patterns are correct
@@ -256,7 +256,7 @@ Monitor the verification status in your dashboard:
 **Problem**: Local development not working
 **Solutions:**
 
-- Add `http://localhost:PORT` to whitelist
+- Add `http://localhost:PORT` to allowlist
 - Include `http://127.0.0.1:PORT` as alternative
 - Check if your development server uses a different port
 - Verify protocol matches (http vs https)
@@ -268,21 +268,21 @@ Monitor the verification status in your dashboard:
 
 - Verify bundle ID matches exactly
 - Check deep link scheme configuration
-- Ensure URL schemes are properly whitelisted
+- Ensure URL schemes are properly allowlisted
 - Test with both debug and release builds
 
 ## Security best practices
 
 ### Regular audits
 
-- **Monthly reviews**: Check whitelist for unused domains
+- **Monthly reviews**: Check allowlist for unused domains
 - **Remove stale entries**: Delete old development or staging URLs
 - **Monitor access**: Review authentication patterns for anomalies
 - **Update documentation**: Keep domain lists current for your team
 
 ### Principle of least privilege
 
-- **Minimal domains**: Only whitelist necessary domains
+- **Minimal domains**: Only allowlist necessary domains
 - **Specific patterns**: Avoid overly broad wildcard patterns
 - **Environment separation**: Use different projects for dev/staging/prod
 - **Regular cleanup**: Remove domains when no longer needed
@@ -290,7 +290,7 @@ Monitor the verification status in your dashboard:
 ### Compliance considerations
 
 - **Data residency**: Consider where authentication occurs
-- **Privacy regulations**: Ensure whitelisted domains comply with privacy laws
+- **Privacy regulations**: Ensure allowlisted domains comply with privacy laws
 - **Security standards**: Meet industry requirements for domain authorization
 - **Audit trails**: Maintain records of domain modifications
 

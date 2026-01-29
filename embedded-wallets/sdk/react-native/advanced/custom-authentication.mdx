@@ -125,7 +125,7 @@ The `extraLoginOptions` parameter can be used to pass additional options require
 | `scope?`                     | The default scope to be used on authentication requests. The `defaultScope` defined in the Auth0Client is included along with this scope. Accepts a string value. |
 | `audience?`                  | The audience, presented as the `aud` claim in the access token, defines the intended consumer of the token. It takes a `string` as a value. |
 | `connection?`                | The name of the connection configured for your application. If null, it will redirect to the Auth0 login page and show the Login Widget. Accepts a string value. |
-| `redirect_uri?`              | It can be used to specify the default URL where your custom JWT verifier can redirect your browser with the result. If using Auth0, it must be whitelisted in the Allowed Callback URLs in your Auth0 application settings. Accepts a string value. |
+| `redirect_uri?`              | It can be used to specify the default URL where your custom JWT verifier can redirect your browser with the result. If using Auth0, it must be allowlisted in the Allowed Callback URLs in your Auth0 application settings. Accepts a string value. |
 
 ## Single verifier
 

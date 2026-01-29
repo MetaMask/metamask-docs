@@ -53,12 +53,12 @@ Download the [Unreal Package](https://github.com/Web3Auth/web3auth-unreal-sdk/re
 ### 1. Configure Embedded Wallets project
 
 1.1 Go to the [Embedded Wallets dashboard](https://dashboard.web3auth.io/), create or select an Web3Auth project:
-1.2 Add `{{SCHEMA}}://{YOUR_APP_PACKAGE_NAME}` to **Whitelist URLs**.
+1.2 Add `{{SCHEMA}}://{YOUR_APP_PACKAGE_NAME}` to **Allowlist URLs**.
 1.3 Copy the `Client ID` for usage later.
 
 ### 2. Configure deep link for Android
 
-To setup Android sdk and ndk for unreal editor. Please [see the unreal documentation](https://docs.unrealengine.com/5.0/en-US/how-to-set-up-android-sdk-and-ndk-for-your-unreal-engine-development-environment).
+To setup Android sdk and ndk for unreal editor, [see the unreal documentation](https://docs.unrealengine.com/5.0/en-US/how-to-set-up-android-sdk-and-ndk-for-your-unreal-engine-development-environment).
 
 - To add redirect URI into your Android app, open the `<Project-path>/Plugins/Web3AuthSDK/Source/Web3AuthSDK_Android.xml` file.
 - Find the `<androidManifestUpdates>` tag and inside that, will be a `<data>` tag element. Replace the existing redirect URI with one that you have registered on your Embedded Wallets dashboard.
