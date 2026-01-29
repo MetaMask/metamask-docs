@@ -12,4 +12,12 @@ curl https://hyperevm-mainnet.infura.io/v3/<YOUR-API-KEY> \
 ```
 
   </TabItem>
+
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://hyperevm-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getBlockReceipts", "params": ["latest"], "id": 1}'
+```
+
+  </TabItem>
 </Tabs>

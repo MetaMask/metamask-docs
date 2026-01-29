@@ -9,6 +9,13 @@ sidebar_key: hyperevm-json-rpc-api
 
 Infura supports a subset of standard EVM-compatible JSON-RPC methods on HyperEVM.
 
+::::info
+
+- WebSockets are supported on HyperEVM mainnet and can be used to set up bidirectional
+  stateful [subscriptions](subscription-methods/index.md).
+
+::::
+
 ## Standard methods
 
 - [`eth_blockNumber`](eth_blocknumber.mdx)
@@ -35,6 +42,10 @@ Infura supports a subset of standard EVM-compatible JSON-RPC methods on HyperEVM
 - [`eth_syncing`](eth_syncing.mdx)
 - [`net_version`](net_version.mdx)
 - [`web3_clientVersion`](web3_clientversion.mdx)
+
+## Subscription methods
+
+- [Subscription methods](subscription-methods/index.md)
 
 ## Trace and debug methods
 

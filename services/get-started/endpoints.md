@@ -85,6 +85,7 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 | Network | Description         | URL                                                     |
 |---------|---------------------|---------------------------------------------------------|
 | Mainnet | JSON-RPC over HTTPS | `https://hyperevm-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Mainnet | JSON-RPC over WebSocket | `wss://hyperevm-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
 | Testnet | JSON-RPC over HTTPS | `https://hyperevm-testnet.infura.io/v3/<YOUR-API-KEY>`  |
 
 ## IPFS

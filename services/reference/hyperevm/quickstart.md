@@ -8,7 +8,7 @@ import Banner from '@site/src/components/Banner'
 
 # HyperEVM quickstart
 
-This quickstart guide will help you set up and make calls on HyperEVM **mainnet** using the Infura endpoint.
+This quickstart guide will help you set up and make calls on HyperEVM using the Infura endpoint.
 
 <Banner>
 Don't have an Infura account? Sign up for our free plan and start using HyperEVM!
