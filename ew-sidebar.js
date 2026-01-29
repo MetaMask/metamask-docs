@@ -140,7 +140,7 @@ const sidebar = {
           label: "Configuration",
           items: [
             "dashboard/project-settings",
-            "dashboard/whitelist",
+            "dashboard/allowlist",
             {
               type: "category",
               label: "Advanced Settings",
