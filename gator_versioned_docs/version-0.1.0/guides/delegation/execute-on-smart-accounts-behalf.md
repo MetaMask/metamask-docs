@@ -193,7 +193,7 @@ const delegations = [signedDelegation]
 // USDC address on Ethereum Sepolia.
 const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
-const executions = createExecution({ target: tokenAddress, callData })
+const executions = [createExecution({ target: tokenAddress, callData })]
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
@@ -228,7 +228,7 @@ const delegations = [signedDelegation]
 // USDC address on Ethereum Sepolia.
 const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
-const executions = createExecution({ target: tokenAddress, callData })
+const executions = [createExecution({ target: tokenAddress, callData })]
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
