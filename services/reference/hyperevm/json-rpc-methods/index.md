@@ -41,6 +41,13 @@ Infura supports a subset of standard EVM-compatible JSON-RPC methods on HyperEVM
 - [`net_version`](net_version.mdx)
 - [`web3_clientVersion`](web3_clientversion.mdx)
 
+## HyperEVM-specific methods
+
+- [`eth_bigBlockGasPrice`](eth_bigblockgasprice.mdx)
+- [`eth_usingBigBlocks`](eth_usingbigblocks.mdx)
+- [`eth_getSystemTxsByBlockNumber`](eth_getsystemtxsbyblocknumber.mdx)
+- [`eth_getSystemTxsByBlockHash`](eth_getsystemtxsbyblockhash.mdx)
+
 ## Subscription methods
 
 - [Subscription methods](subscription-methods/index.md)

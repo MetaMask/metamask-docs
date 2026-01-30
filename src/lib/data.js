@@ -237,6 +237,12 @@ export const API_COSTS = {
     eth_newFilter: 80,
     eth_uninstallFilter: 80,
   },
+  hyperevm: {
+    eth_bigBlockGasPrice: 80,
+    eth_usingBigBlocks: 80,
+    eth_getSystemTxsByBlockNumber: 80,
+    eth_getSystemTxsByBlockHash: 80,
+  },
   linea: {
     linea_estimateGas: 100,
     linea_getTransactionExclusionStatusV1: 160,
