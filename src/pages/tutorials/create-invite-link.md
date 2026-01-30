@@ -272,7 +272,7 @@ import { DelegationManager } from '@metamask/smart-accounts-kit/contracts';
 
 const delegations = [decodedDelegation];
 
-const executions = createExecution(smartAccount.address, 1000000000000000n);
+const executions = [createExecution(smartAccount.address, 1000000000000000n)];
 
 const redeemDelegationCalldata = DelegationManager.encode.redeemDelegations({
   delegations: [delegations],
