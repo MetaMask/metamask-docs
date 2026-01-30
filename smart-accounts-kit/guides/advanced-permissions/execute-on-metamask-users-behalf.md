@@ -241,7 +241,7 @@ To redeem the permissions, use the client action based on your session account t
 A smart account uses the Bundler Client's `sendUserOperationWithDelegation` action,
 and an EOA uses the Wallet Client's `sendTransactionWithDelegation` action.
 
-See the [`sendUserOperationWithDelegation`](../../reference/advanced-permissions/bundler-client.md#senduseroperationwithdelegation) and [`sendTransactionWithDelegation`](../../reference/advanced-permissions/wallet-client.md#sendtransactionwithdelegation) API reference for more information.
+See the [`sendUserOperationWithDelegation`](../../reference/erc7710/bundler-client.md#senduseroperationwithdelegation) and [`sendTransactionWithDelegation`](../../reference/erc7710/wallet-client.md#sendtransactionwithdelegation) API reference for more information.
 
 <Tabs>
 <TabItem value="Smart account">
