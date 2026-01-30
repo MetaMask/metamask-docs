@@ -5,8 +5,6 @@ sidebar_label: JSON-RPC API
 sidebar_key: hyperevm-json-rpc-api
 ---
 
-# HyperEVM JSON-RPC API
-
 Infura supports a subset of standard EVM-compatible JSON-RPC methods on HyperEVM.
 
 ::::info
@@ -46,8 +44,3 @@ Infura supports a subset of standard EVM-compatible JSON-RPC methods on HyperEVM
 ## Subscription methods
 
 - [Subscription methods](subscription-methods/index.md)
-
-## Trace and debug methods
-
-- [Trace methods](trace-methods/index.md)
-- [Debug methods](debug/index.md)
