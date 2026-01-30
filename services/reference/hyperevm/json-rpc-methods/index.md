@@ -9,7 +9,6 @@ sidebar_label: JSON-RPC API
 sidebar_key: hyperevm-json-rpc-api
 ---
 
-<<<<<<< HEAD
 Infura supports a subset of standard EVM-compatible JSON-RPC methods on HyperEVM.
 
 ::::info
@@ -18,18 +17,6 @@ Infura supports a subset of standard EVM-compatible JSON-RPC methods on HyperEVM
   stateful [subscriptions](subscription-methods/index.md).
 
 ::::
-=======
-# HyperEVM JSON-RPC API
-
-Infura supports a subset of standard EVM-compatible JSON-RPC methods on HyperEVM **mainnet**.
-
-## Limitations
-
-- **Latest-only state**: HyperEVM only supports the latest block view. Requests that require historical state are not supported. In practice, data must be available from the latest block (for example, a transaction hash must exist in the latest block).
-- **`eth_getLogs` constraints**:
-  - Up to **4** topics.
-  - A maximum of **50** blocks in the query range.
->>>>>>> 98a45ed997 (Merge.)
 
 ## Standard methods
 
@@ -59,6 +46,9 @@ Infura supports a subset of standard EVM-compatible JSON-RPC methods on HyperEVM
 - [`web3_clientVersion`](web3_clientversion.mdx)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 42386ca724 (Add HyperEVM-specific methods)
 ## HyperEVM-specific methods
 
 - [`eth_bigBlockGasPrice`](eth_bigblockgasprice.mdx)
