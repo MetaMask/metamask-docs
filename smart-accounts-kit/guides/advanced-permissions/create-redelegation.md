@@ -182,3 +182,33 @@ export const agentSmartAccount = await toMetaMaskSmartAccount({
 
 </TabItem>
 </Tabs>
+
+### Limit redelegation using caveats
+
+When you create a redelegation, apply the toolkit's [caveats](../../reference/delegation/caveats.md) to narrow the Swap agent's authority. For example, you can limit the authority so Swap agent can use the delegation only once.
+
+To apply caveats, create the `Delegation` object and use [`createCaveatBuilder`](../../reference/delegation/index.md#createcaveatbuilder). Use [`getDelegationHashOffchain`](../../reference/delegation/index.md#getdelegationhashoffchain) to get the delegation hash, then provide it as the `authority` field. 
+
+This example uses the [`limitedCalls`](../../reference/delegation/caveats.md#limitedcalls) caveat with a limit of `1`.
+
+```ts
+// Use the config from previous step.
+import { sessionAccount, agentSmartAccount, tokenAddress } from './config.ts';
+import { createCaveatBuilder, getDelegationHashOffchain } from '@metamask/smart-accounts-kit/utils'
+
+const caveatBuilder = createCaveatBuilder(sessionAccount.environment)
+
+const caveats = caveatBuilder.addCaveat('limitedCalls', { limit: 1 })
+
+const redelegation: Delegation =  {
+  delegate: sessionAccount.address,
+  delegator: agentSmartAccount.address,
+  authority: getDelegationHashOffchain(rootDelegation),
+  caveats: caveats.build(),
+  salt: '0x',
+};
+
+const signedRedelegation = await sessionAccount.signDelegation({ delegation: redelegation })
+```
+
+
