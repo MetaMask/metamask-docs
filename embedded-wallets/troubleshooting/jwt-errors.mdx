@@ -1,7 +1,7 @@
 ---
-title: JWT Errors
+title: JWT errors
 image: 'img/metamaskog.jpg'
-sidebar_label: JWT Errors
+sidebar_label: JWT errors
 description: 'JWT Errors | Embedded Wallets'
 ---
 
@@ -11,36 +11,34 @@ import JWTVerifierID from '@site/static/img/embedded-wallets/authentication/jwt/
 
 :::warning
 
-To ensure proper authentication with Web3Auth, it is necessary for the JWT header to have the `kid` field, while the payload data should have the `iat` field.
+To ensure proper authentication with Embedded Wallets, the JWT header must provide the `kid` field, while the payload data must provide the `iat` field.
 
 :::
 
-When configuring Web3Auth's Custom Authentication, you may encounter JWT errors. Below is a list of these errors and the necessary steps to resolve them.
+When configuring Embedded Wallet's custom authentication, you may encounter JWT errors. Below is a list of these errors and the necessary steps to resolve them:
 
-- [Invalid JWT Verifiers ID field](#invalid-jwt-verifiers-id-field)
-  - Error occurred while verifying params could not verify identity
-- [Failed to verify JWS signature](#failed-to-verify-jws-signature)
-  - Error occurred while verifying params unable to verify jwt token
-- [Duplicate Token](#duplicate-token)
-  - Could not get result from torus nodes Duplicate token found
-- [Expired Token](#expired-token)
-  - Error occurred while verifying paramstimesigned is more than 1m0s ago
+- [Invalid JWT verifiers ID field](#invalid-jwt-verifiers-id-field): Error occurred while verifying params could not verify identity
+- [Failed to verify JWS signature](#failed-to-verify-jws-signature): Error occurred while verifying params unable to verify JWT token
+- [Duplicate token](#duplicate-token): Could not get result from [Torus nodes](../infrastructure/nodes-and-dkg.mdx), duplicate token found
+- [Expired token](#expired-token): Error occurred while verifying the parameter's time signed is more than 1m0s ago
 - [Mismatch JWT Validation field](#mismatch-jwt-validation-field)
-- [Refresh Tokens?](#looking-for-refresh-tokens)
+- [Refresh Tokens?](#refresh-tokens-not-supported)
 
-## Invalid `JWT Verifiers ID` field.
+## Invalid JWT verifiers ID field
 
 ### Error occurred while verifying params could not verify identity
 
-"Error occurred while verifying params could not verify identity" error could be because the `verifierIdField` of `extraLoginOptions` is different from the one you have set up during the creation of Verifiers (`JWT Verifiers ID`) on the Web3Auth dashboard.
+"Error occurred while verifying params could not verify identity" can arise when the `verifierIdField` of `extraLoginOptions` is different from the one you have set up during the creation of Verifiers (`JWT Verifiers ID`) on the Embedded Wallets dashboard.
 
-- This is the `JWT Verifiers ID` field on the `Verifier Modal` of the Web3Auth dashboard.
+This is the `JWT Verifiers ID` field on the `Verifier Modal` of the Embedded Wallets dashboard:
+
   <img
     style={{ display: 'block', maxHeight: '200px', marginBottom: '20px' }}
     src={JWTVerifierID}
     alt="JWT Verifier ID - Troubleshoot"
   />
-- Make sure, this matched with your code.
+
+Ensure, this matches your code:
 
   ```tsx
   import { WALLET_ADAPTERS, CHAIN_NAMESPACES } from '@web3auth/base'
@@ -56,16 +54,17 @@ When configuring Web3Auth's Custom Authentication, you may encounter JWT errors.
   })
   ```
 
-## Failed to verify JWS signature.
+## Failed to verify JWS signature
 
-### Error occurred while verifying params unable to verify jwt token
+### Error occurred while verifying params unable to verify JWT token
 
-"Error occurred while verifying params unable to verify jwt token" error could be because of the following reasons:
+"Error occurred while verifying params unable to verify jwt token" could arise because of the following reasons:
 
-- The verifier for your AuthAdapter might be wrong. Check to make sure the `verifier` field is set correctly.
-- The JWT is not signed with the correct key(JWK).
+- The verifier for your AuthAdapter might be wrong. Check to ensure the `verifier` field is set correctly.
+- The JWT is not signed with the correct key (JWK).
 - The JWKS endpoint is not reachable or doesn't return a valid JWK that was used to sign the JWT.
-- The JWKS endpoint is incorrect on the Web3Auth Dashboard. Double check to confirm the correct JWKS endpoint.
+- The JWKS endpoint is incorrect on the Embedded Wallets dashboard. Double check to confirm the correct JWKS endpoint.
+
   <img
     style={{ display: 'block', maxHeight: '200px', marginBottom: '20px' }}
     src={JWKSEndpoint}
@@ -73,6 +72,16 @@ When configuring Web3Auth's Custom Authentication, you may encounter JWT errors.
   />
 - The JWKS is missing the `kid` field.
 - The `kid` present in the JWT header is not present in the JWKS.
+
+:::info
+
+Embedded Wallets (Web3Auth) uses the JWKS to:
+
+- Fetch the provider’s public keys
+- Find the correct key using the JWT’s `kid`
+- Verify the JWT’s signature
+
+:::
 
 `sample jwks`:
 
@@ -95,9 +104,9 @@ When configuring Web3Auth's Custom Authentication, you may encounter JWT errors.
 
 ## Duplicate token
 
-### Could not get result from torus nodes Duplicate token found
+### Could not get result from Torus nodes duplicate token found
 
-- "Could not get result from torus nodes Duplicate token found" error is thrown when the JWT is sent twice in the same request.
+"Could not get result from torus nodes Duplicate token found" error is thrown when the JWT is sent twice in the same request.
 
   ```tsx
   await web3auth.connectTo(WALLET_ADAPTERS.AUTH, {
@@ -111,40 +120,48 @@ When configuring Web3Auth's Custom Authentication, you may encounter JWT errors.
 
 ## Expired token
 
-### Error occurred while verifying paramstimesigned is more than 1m0s ago
+### Error occurred while verifying `paramstimesigned` is more than 1m0s ago
 
 :::warning
 
-Web3Auth accepts only those JWTs whose `iat` is less than the current time and is not greater than `60s` from current time. Regardless of the `exp` field of the JWT.
+Embedded Wallets accepts only those JWTs whose `iat` is less than the current time and is not greater than `60s` from current time. Regardless of the `exp` field of the JWT.
 
-- In short, the JWT is considered expired if the `iat` is greater than `60s` from current time.
+- In short, the JWT is considered expired if the `iat` is greater than 60 s from current time.
 
 :::
 
 "Error occurred while verifying paramstimesigned is more than 1m0s ago 2022-02-24 13:46:05 +0000 UTC" error could be because:
 
-- JWT is expired.
-- The JWT's `exp` field is less than the current time.
-- The JWT's `iat` field is greater than `60s` from current time.
+- JWT is expired
+- The JWT's `exp` field is less than the current time
+- The JWT's `iat` field is greater than `60s` from current time
 
-## Mismatch JWT Validation field
+## Mismatch JWT validation field
 
-This error occurred when the validation field in the JWT is not matching with the validation field entered during the creation of Verifiers on the Web3Auth dashboard.
+This error occurred when the validation field in the JWT is not matching with the validation field entered during the creation of Verifiers on the Embedded Wallets dashboard.
 
-- This is the `JWT Validation` field on the `Verifier Modal` of the Web3Auth configuration.
+This is the `JWT Validation` field on the `Verifier Modal` of the Embedded Wallets configuration:
+
   <img
     style={{ display: 'block', maxHeight: '200px', marginBottom: '20px' }}
     src={JWTValidation}
     alt="JWT Validation Field - Troubleshoot"
   />
-- Make sure, these fields are present in the JWT Payload and matches with the JWT.
 
-## Looking for Refresh Tokens?
+Ensure, these fields are present in the JWT Payload and match with the JWT.
 
-A Refresh Token is a unique token that is used to obtain additional access tokens from an Authentication Service Provider. With Web3Auth, we verify the validity of the **id_token** and compare its payload value to the JWKS provided by either the Auth provider or your custom JWKS. And with Refresh Token, one can get a new id_token. And that id_token will be passed to Web3Auth, essentially making another login request.
+## Refresh tokens not supported
 
-#### What problem does the Refresh Token solve?
+Embedded Wallets does not support refresh tokens to maintain longer sessions, instead we offer [session management](../dashboard/advanced/session-management.mdx). 
 
-It enables users to maintain longer authentication sessions without the need for constant re-login. Although we do not support Refresh Tokens to maintain longer sessions, we do offer session management. The **Session Management** feature allows checking and maintaining existing sessions with Web3Auth.
+:::tip
 
-During login with Web3Auth, pass the `sessionTime` parameter. It will **allow users to stay authenticated with Web3Auth for up to 1 day by default or a maximum of 30 days** until they log out or their session data is cleared.
+During login with Embedded Wallets, pass the `sessionTime` parameter. This allows users to stay authenticated with Embedded Wallets for up to 1 day by default or a maximum of 30 days until they log out or their session data is cleared.
+
+:::
+
+A refresh token is a unique token that can be used to obtain additional access tokens from an Authentication Service Provider. With a refresh token, one can get a new `id_token` to make another login request. This enables users to maintain longer authentication sessions without the need for constant re-login. 
+
+While Embedded Wallets, verifies the validity of the `id_token` and compares its payload value to the JWKS provided by either the Auth provider or your custom JWKS, it does not support refresh. Although we do not support refresh tokens to maintain longer sessions, we do offer session management. Session management supports 
+dapps to check and maintain existing sessions with Embedded Wallets.
+

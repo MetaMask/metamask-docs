@@ -1,15 +1,15 @@
 ---
-title: Create a new project in the Dashboard
+title: Create a new project in the dashboard
 sidebar_label: Create a new project
 image: 'img/metamaskog.jpg'
-description: 'Create a new project in the Dashboard | MetaMask Embedded Wallets'
+description: 'Create a new project in the dashboard | MetaMask Embedded Wallets'
 ---
 
 import DashboardSignUpPage from '@site/static/img/embedded-wallets/w3a-dashboard/dashboard-signup.gif'
 
-To get started, visit the [Web3Auth Dashboard](https://dashboard.web3auth.io), log in using one of your social accounts or use your email address. You can use the Dashboard to manage your projects, configurations, wallet UI, and more for MetaMask Embedded Wallets (formerly Web3Auth).
+To get started, visit the [Web3Auth dashboard](https://dashboard.web3auth.io), log in using one of your social accounts or email address. You can use the dashboard to manage your projects, configurations, wallet UI, and more for MetaMask Embedded Wallets.
 
-While setting up your account, Web3Auth will prompt you to share some basic information about your organization.
+While setting up your account, you will be prompted to share some basic information about your organization.
 
 <div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
   <img
@@ -19,45 +19,48 @@ While setting up your account, Web3Auth will prompt you to share some basic info
   />
 </div>
 
-Once you've set up your account, you can use the Dashboard to manage your **projects** and **team**.
+Once you've set up your account, you can use the dashboard to manage your projects and team.
 
 :::tip
 
-Use the [Projects](https://dashboard.web3auth.io/organization) page of the Dashboard to create and manage new projects for your account. Resources, including wallets, authentication methods, and more are scoped to individual projects.
+Use the [projects](https://dashboard.web3auth.io/organization) page of the dashboard to create and manage new projects for your account. Resources, including wallets, authentication methods, and more are scoped to individual projects.
 
 :::
 
 ## Create a new project
 
-Before implementing any Embedded Wallet SDK, developers must create a new project in the Dashboard. This process generates a Client ID required for SDK integration.
+Before implementing any Embedded Wallet SDK, developers must create a new project in the Web3Auth Dashboard. This process generates a Client ID required for SDK integration.
 
-:::success Note
+:::important
 
-It is recommended to maintain separate projects for different environments (e.g., development, staging, production) to ensure optimal security of credentials.
+To ensure optimal security of credentials, it's recommended to maintain separate projects for different environments (such as development, staging, production).
 
 :::
 
-Login to the [Web3Auth Dashboard](https://dashboard.web3auth.io) and create a new project if you haven't already.
+Log in to the [Web3Auth Dashboard](https://dashboard.web3auth.io) and create a new project if you haven't already.
 
-## Get the Client ID
+## Get the client ID
 
-After creating a project, navigate to **Project Settings** and select the **General** tab to obtain the `Client ID`.
+After creating a project:
 
-The project comes pre-configured with default connections, chains and networks to facilitate faster integration with the SDKs.
+1. Navigate to **Project Settings**.
+2. Select the **General** tab to obtain the `Client ID`.
 
-## Dashboard Configuration
+The project comes pre-configured with default connections, chains, and networks to facilitate faster integration with the SDKs.
+
+## Dashboard configuration
 
 Once your project is created, you can configure various aspects of your integration through the dashboard:
 
-- **[Project Settings](./project-settings)** - Basic project information, credentials, and token verification
-- **[Whitelist Settings](./whitelist)** - Domain and URL authorization for enhanced security
-- **[Advanced Project Settings](./advanced/session-management)** - Advanced configuration options
-  - **[Session Management](./advanced/session-management)** - Session duration and behavior
-  - **[Test Accounts](./advanced/test-accounts)** - Development testing environment
-  - **[User Details in ID Token](./advanced/user-details)** - JWT token user data configuration
-  - **[Key Export Settings](./advanced/key-export)** - Private key export permissions
-- **[Chains and Networks](./chains-and-networks)** - Manage blockchain networks and custom chain configurations
-- **[Authentication](./authentication)** - Configure login methods, social connections, and custom authentication
-- **[Wallet Services](./wallet-services)** - Customize wallet UI and configure wallet features
-- **[Customization](./customization)** - Brand your login flow and customize the user experience
-- **[Analytics](./analytics)** - Monitor project usage and user engagement metrics
+- [Project settings](./project-settings) - Basic project information, credentials, and token verification
+- [Allowlist settings](./allowlist) - Domain and URL authorization for enhanced security
+- [Advanced project settings](./advanced/session-management) - Advanced configuration options
+  - [Session management](./advanced/session-management) - Session duration and behavior
+  - [Test accounts](./advanced/test-accounts) - Development testing environment
+  - [User details in ID Token](./advanced/user-details) - JWT token user data configuration
+  - [Key export settings](./advanced/key-export) - Private key export permissions
+- [Chains and networks](./chains-and-networks) - Manage blockchain networks and custom chain configurations
+- [Authentication](./authentication) - Configure login methods, social connections, and custom authentication
+- [Wallet services](./wallet-services) - Customize wallet UI and configure wallet features
+- [Customization](./customization) - Brand your login flow and customize the user experience
+- [Analytics](./analytics) - Monitor project usage and user engagement metrics

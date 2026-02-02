@@ -66,6 +66,8 @@ const sidebar = {
               items: [
                 'guides/smart-accounts/signers/dynamic',
                 'guides/smart-accounts/signers/embedded-wallets',
+                'guides/smart-accounts/signers/eoa-wallets',
+                'guides/smart-accounts/signers/passkey',
                 'guides/smart-accounts/signers/privy',
               ],
             },
@@ -111,6 +113,7 @@ const sidebar = {
                 'guides/advanced-permissions/use-permissions/native-token',
               ],
             },
+            'guides/advanced-permissions/create-redelegation',
           ],
         },
       ],
