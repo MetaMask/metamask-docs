@@ -163,14 +163,9 @@ const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
-  signer: {
-    type: "account",
-    data: {
-      // The requested permissions will granted to the
-      // session account.
-      address: sessionAccount.address,
-    },
-  },
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
   permission: {
     type: "erc20-token-periodic",
     data: {

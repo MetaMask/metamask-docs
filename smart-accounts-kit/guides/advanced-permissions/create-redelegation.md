@@ -48,14 +48,9 @@ const expiry = currentTime + 604800;
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
-  signer: {
-    type: "account",
-    data: {
-      // The requested permissions will be granted to the
-      // session account.
-      address: sessionAccount.address,
-    },
-  },
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
   permission: {
     type: "erc20-token-periodic",
     data: {
