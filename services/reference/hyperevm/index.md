@@ -6,6 +6,11 @@ import CardList from '@site/src/components/CardList'
 
 # HyperEVM
 
+:::note Decentralized Infrastructure Network (DIN)
+HyperEVM is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
+meaning calls to the network are routed to partner infrastructure providers
+:::
+
 HyperEVM is the EVM execution environment on the Hyperliquid blockchain, secured by the same consensus as HyperCore.
 
 ::::info See also
