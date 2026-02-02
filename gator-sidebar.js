@@ -190,7 +190,16 @@ const sidebar = {
           items: [
             'reference/advanced-permissions/permissions',
             'reference/advanced-permissions/wallet-client',
-            'reference/advanced-permissions/bundler-client',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'ERC-7710',
+          collapsed: true,
+          key: 'erc-7710-reference',
+          items: [
+            'reference/erc7710/bundler-client',
+            'reference/erc7710/wallet-client',
           ],
         },
       ],
