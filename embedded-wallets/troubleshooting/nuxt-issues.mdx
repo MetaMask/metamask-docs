@@ -1,19 +1,27 @@
 ---
-title: Bundler Polyfill Issues - Nuxt
+title: Bundler polyfill issues - Nuxt
 image: 'img/metamaskog.jpg'
-sidebar_label: Nuxt Polyfill Issues
+sidebar_label: Nuxt polyfill issues
 description: 'Bundler Polyfill Issues - Nuxt | Embedded Wallets'
 ---
 
-While setting up a new web3 project from scratch, you might face multiple issues with the bundler. This issue is caused because the core packages like `eccrypto` have certain dependencies, which are not present within the build environment. For rectifying this, the go-to method has been to just add the missing modules directly into the package, and edit the bundler configuration to take advantage of that.
+While setting up a new Web3 project from scratch, you might face bundler issues. This can occur because the core packages like `eccrypto` have dependencies which are not present within the build environment. 
 
-Although this method works, it increases the bundle size significantly. Causing slow loading speeds and a bad user experience. It is important to note that these modules, even while the build fails, are still present within the browser environment. Many libraries like Web3Auth are written in a way to take advantage of this fact. Hence, even if the build doesn't contain the polyfill, the library should still work as expected. However, if you are using a library that does not take advantage of this fact, you might face issues while using the library.
+To rectify this, the go-to method is to add the missing modules directly into the package, and edit the bundler configuration to use those. Although this approach works, it can significantly increase bundle size, leading to slower load times and a degraded user experience. 
 
-Hence, you need to be mindful of the fact that you only require certain node polyfills to be added to your project, while testing each of its functionalities. At the same time, you need to tell the bundler to ignore the missing modules, and not include them in the build.
+Some libraries rely on environment-specific modules that may be available at runtime in the browser even if they are not bundled. Libraries such as Embedded Wallets’ Web3Auth take advantage of this behavior and can function correctly without bundling all modules. However, if you are using a library that does not take advantage of this , you might face issues.
 
-In this guide, we have added instructions for adding the polyfills in Nuxt:
+To avoid unnecessary overhead, include only the required polyfills, test functionality, and configure your bundler to ignore unresolved modules rather than including them in the final build.
 
-## Install the missing modules
+:::tip
+
+We recommend that you require certain Node polyfills to be added to your project, while testing each of its functionalities. At the same time, instruct the bundler to ignore the missing modules, and not include them in the build.
+
+:::
+
+In this guide, we provide instructions for adding polyfills in Nuxt. The steps install the missing libraries required for module resolution and then configures Nuxt so they are not bundled unless needed at runtime.
+
+## Step 1: Install the missing modules
 
 Check for the missing libraries in your build and included packages, and accordingly polyfill them. For Web3Auth, you just need to polyfill the `buffer` and `process` libraries.
 
@@ -21,7 +29,7 @@ Check for the missing libraries in your build and included packages, and accordi
 npm install --save-dev buffer process
 ```
 
-## Create a plugin to polyfill the missing modules
+## Step 2: Create a plugin to polyfill the missing modules
 
 Create a new plugin file in the `plugins` directory of your Nuxt project. This plugin will polyfill the missing modules.
 
@@ -37,7 +45,7 @@ globalThis.process = process
 export default defineNuxtPlugin({})
 ```
 
-## Update your `nuxt.config.js`
+## Step 3: Update your `nuxt.config.js`
 
 Additional to the polyfilled modules, you need to update the `nuxt.config.js` file to define the `global` object.
 
