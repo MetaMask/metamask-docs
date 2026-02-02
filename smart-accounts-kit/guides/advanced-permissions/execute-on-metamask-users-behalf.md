@@ -315,5 +315,6 @@ export const calldata = encodeFunctionData({
 
 ## Next steps
 
-See how to configure different [ERC-20 token permissions](use-permissions/erc20-token.md) and
+- See how to [get the supported execution permissions](get-supported-permissions.md).
+- See how to configure different [ERC-20 token permissions](use-permissions/erc20-token.md) and
 [native token permissions](use-permissions/native-token.md).

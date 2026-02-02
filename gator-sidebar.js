@@ -104,6 +104,7 @@ const sidebar = {
           key: 'advanced-permissions-guides',
           items: [
             'guides/advanced-permissions/execute-on-metamask-users-behalf',
+            'guides/advanced-permissions/get-supported-permissions',
             {
               type: 'category',
               label: 'Use permissions',
