@@ -25,10 +25,10 @@ To use `requestExecutionPermissions`, the Viem Wallet Client must be extended wi
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
 | `chainId` | `number` | Yes | The chain ID on which the permission is being requested. |
-| `address` | `Address` | No | Address of the wallet to which the permission is being requested. |
+| `from` | `Address` | No | Address of the wallet to which the permission is being requested. |
 | `expiry` | `number` | Yes | The timestamp (in seconds) by which the permission must expire. |
 | `permission` | `SupportedPermissionParams` | Yes | The permission to be requested. The toolkit supports multiple [Advanced Permissions types](permissions.md). |
-| `signer` | `SignerParam` | Yes | The account to which the permission will be assigned. |
+| `to` | `Address` | Yes | The account to which the permission will be assigned. |
 | `isAdjustmentAllowed` | `boolean` | Yes | Defines whether the user is allowed to modify the requested permission. |
 
 ### Example
@@ -47,13 +47,9 @@ const expiry = currentTime + 604800;
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
-  signer: {
-    type: "account",
-    data: {
-      // The requested permissions will granted to the address.
-      address: "0x0955fFD7b83e5493a8c1FD5dC87e2CF37Eacc44a",
-    },
-  },
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
   permission: {
     type: "erc20-token-periodic",
     data: {

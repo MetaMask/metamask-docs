@@ -45,16 +45,9 @@ const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
-  signer: {
-    type: "account",
-    data: {
-      // Session account created as a prerequisite.
-      //
-      // The requested permissions will granted to the
-      // session account.
-      address: sessionAccountAddress,
-    },
-  },
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
   permission: {
     type: "erc20-token-periodic",
     data: {
@@ -115,16 +108,9 @@ const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
-  signer: {
-    type: "account",
-    data: {
-      // Session account created as a prerequisite.
-      //
-      // The requested permissions will granted to the
-      // session account.
-      address: sessionAccountAddress,
-    },
-  },
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
   permission: {
     type: "erc20-token-stream",
     data: {
