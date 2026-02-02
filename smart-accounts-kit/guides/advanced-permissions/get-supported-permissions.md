@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Get supported permissions
 
-[ERC-7715](https://eip.tools/eip/7715) defines an RPC method to retrieve the supported execution permissions for a wallet. Use this 
+[ERC-7715](https://eip.tools/eip/7715) defines a RPC method to retrieve the supported execution permissions for a wallet. Use this 
 method to check the supported permission types and the rules it supports before requesting. 
 
 
@@ -21,7 +21,7 @@ method to check the supported permission types and the rules it supports before 
 
 ## Request supported permissions
 
-Request the supported execution permissions types for a wallet with the 
+Request the supported execution permission types for a wallet with the 
 Wallet Client's `getSupportedExecutionPermissions` action.
 
 <Tabs>
