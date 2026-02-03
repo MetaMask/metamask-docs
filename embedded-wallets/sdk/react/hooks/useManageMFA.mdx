@@ -4,7 +4,7 @@ sidebar_label: useManageMFA
 description: '@web3auth/modal React Hooks useManageMFA | Embedded Wallets'
 ---
 
-Hook to manage Multi-Factor Authentication (MFA) using Web3Auth. This hook provides a convenient way to trigger MFA management actions, such as updating or configuring MFA settings for the user.
+Hook to manage Multi-Factor Authentication (MFA) using Embedded Wallets. This hook provides a convenient way to trigger MFA management actions, such as updating or configuring MFA settings for the user.
 
 ### Import
 
@@ -31,25 +31,25 @@ function ManageMFAButton() {
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IUseManageMFA } from '@web3auth/modal/react'
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Whether the MFA management process is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error that occurred during the MFA management process.
 
-#### manageMFA
+#### `manageMFA`
 
 `<T>(params?: T) => Promise<void>`
 
