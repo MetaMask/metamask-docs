@@ -2,7 +2,7 @@
 description: Bundler Client actions reference.
 sidebar_label: Bundler Client actions
 toc_max_heading_level: 2
-keywords: [ERC-7715, Viem, bundler client, actions, reference, advanced permissions]
+keywords: [ERC-7710, Viem, bundler client, actions, reference, advanced permissions, redeem delegation]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 # Bundler Client actions reference
 
-The following actions are related to the [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) used to [execute on a MetaMask user's behalf](../../guides/advanced-permissions/execute-on-metamask-users-behalf.md).
+These actions extend the [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) to support [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710) utilities.
 
 ## `sendUserOperationWithDelegation`
 

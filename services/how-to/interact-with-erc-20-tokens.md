@@ -124,7 +124,7 @@ curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
         "0x000000000000000000000000dfbaf3e4c7496dad574a1b842bc85b402bdc298d"
       ],
       "data": "0x00000000000000000000000000000000000000000000041f900d25d6693623a6",
-      "blockNumbern": "0x91F37C"
+      "blockNumber": "0x91F37C"
     }
   ]
 }
