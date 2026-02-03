@@ -2,43 +2,15 @@
 title: Ethereum trace_transaction
 sidebar_label: trace_transaction
 description: Returns traces for a transaction on Ethereum.
+hide_title: true
+hide_table_of_contents: true
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import ParserOpenRPC from "@site/src/components/ParserOpenRPC"
+import { NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc"
 
-import Description from "/services/reference/_partials/trace-methods/_trace_transaction-description.mdx"
-
-# `trace_transaction`
-
-<Description />
-
-## Parameters
-
-import Params from "/services/reference/_partials/trace-methods/_trace_transaction-parameters.mdx"
-
-<Params />
-
-## Returns
-
-import Returns from "/services/reference/_partials/trace-methods/_trace_transaction-returns.mdx"
-
-<Returns />
-
-## Example
-
-import Example from "/services/reference/_partials/trace-methods/_trace_transaction-example.mdx"
-
-<Example />
-
-### Request
-
-import Request from "/services/reference/_partials/trace-methods/_trace_transaction-request.mdx"
-
-<Request />
-
-### Response
-
-import Response from "/services/reference/_partials/trace-methods/_trace_transaction-response.mdx"
-
-<Response />
+<ParserOpenRPC
+  network={NETWORK_NAMES.ethereum}
+  method="trace_transaction"
+  src="local"
+/>

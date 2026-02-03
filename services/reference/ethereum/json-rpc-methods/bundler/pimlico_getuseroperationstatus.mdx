@@ -2,43 +2,15 @@
 title: pimlico_getUserOperationStatus
 sidebar_label: pimlico_getUserOperationStatus
 description: Get the current status of a user operation by its hash.
+hide_title: true
+hide_table_of_contents: true
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import ParserOpenRPC from "@site/src/components/ParserOpenRPC"
+import { NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc"
 
-import Description from "/services/reference/_partials/bundler/_pimlico_getuseroperationstatus-description.mdx"
-
-# `pimlico_getUserOperationStatus`
-
-<Description />
-
-## Parameters
-
-import Params from "/services/reference/_partials/bundler/_pimlico_getuseroperationstatus-parameters.mdx"
-
-<Params />
-
-## Returns
-
-import Returns from "/services/reference/_partials/bundler/_pimlico_getuseroperationstatus-returns.mdx"
-
-<Returns />
-
-## Example
-
-import Example from "/services/reference/_partials/bundler/_pimlico_getuseroperationstatus-example.mdx"
-
-<Example />
-
-### Request
-
-import Request from "/services/reference/_partials/bundler/_pimlico_getuseroperationstatus-request.mdx"
-
-<Request />
-
-### Response
-
-import Response from "/services/reference/_partials/bundler/_pimlico_getuseroperationstatus-response.mdx"
-
-<Response />
+<ParserOpenRPC
+  network={NETWORK_NAMES.ethereum}
+  method="pimlico_getUserOperationStatus"
+  src="local"
+/>

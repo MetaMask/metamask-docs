@@ -84,6 +84,8 @@ export const MM_RPC_URL = 'https://metamask.github.io/api-specs/latest/openrpc.j
 export const MM_REF_PATH = 'wallet/reference/json-rpc-methods'
 
 export enum NETWORK_NAMES {
+  base = 'base',
+  ethereum = 'ethereum',
   linea = 'linea',
   metamask = 'metamask',
 }
