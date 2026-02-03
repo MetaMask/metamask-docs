@@ -109,7 +109,7 @@ Create the below `async` function `getTokenBalance` that accomplishes this by in
 
 ```javascript
 async function getTokenBalance() {
-  const result = await.contract.methods.balanceOf(tokenHolder).call();
+  const result = await contract.methods.balanceOf(tokenHolder).call();
   console.log(result)
 }
 
