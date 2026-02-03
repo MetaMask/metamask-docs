@@ -4,7 +4,7 @@ sidebar_label: useCheckout
 description: '@web3auth/modal React Hooks useCheckout | Embedded Wallets'
 ---
 
-Hook to show the cryptocurrency checkout modal using Wallet Services Plugin.
+Hook to show the cryptocurrency checkout modal using Wallet Services plugin.
 
 ### Import
 
@@ -31,25 +31,25 @@ function CheckoutButton() {
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IUseCheckout } from '@web3auth/modal/react'
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Whether the checkout process is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
-Error that occurred during the checkout process.
+error that occurred during the checkout process.
 
-#### showCheckout
+#### `showCheckout`
 
 `(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
 
