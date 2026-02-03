@@ -8,28 +8,32 @@ import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import MFAMinimumPlan from '../../_common/_scale_plan_note.mdx'
 
-At Web3Auth, we prioritize your security by offering Multi-Factor Authentication (MFA). MFA is an extra layer of protection that verifies your identity when accessing your account. To ensure ownership, you must provide two or more different backup factors. You have the option to choose from the device, social, backup factor (seed phrase), and password factors to guarantee access to your Web3 account. Once you create a recovery factor, MFA is enabled, and your keys are divided into three shares for off-chain multi-sig, making the key self-custodial. With backup factors, you can easily recover your account if you lose access to your original device or helps login into a new device.
+Embedded Wallets prioritizes security by offering Multi-Factor Authentication (MFA). MFA is an extra layer of protection that verifies a user's identity when accessing their account. 
+
+To ensure ownership, the user must provide two or more different backup factors. They have the option to choose from the device, social, backup factor (seed phrase), and password factors to guarantee access to their Web3 account. Once a user creates a recovery factor, MFA is enabled, and their keys are divided into three shares for offchain multi-sig, making the key self-custodial. 
+
+These backup factors simplify the user experience when recovering their account if they lose access to the original device&mdash;or they can login into a new device.
 
 <MFAMinimumPlan />
 
-## Enable using the MFA Level
+## Enable using the multi-factor authentication level
 
-For a dApp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
+For a dapp, we provide various options to set up MFA. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
 
 :::caution Note
 
-If you are using default verifiers, your users may have set up MFA on other dApps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dApps. This is because MFA cannot be turned off once it is enabled.
+If you are using default verifiers, your users may have set up MFA on other dapps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
 
 :::
 
-### MFA Level Options
+### Multi-factor authentication level options
 
 | MFA Level | Description                                                |
 | --------- | ---------------------------------------------------------- |
 | DEFAULT   | Shows the MFA screen every third login.                    |
 | OPTIONAL  | Shows the MFA screen on every login, but user can skip it. |
 | MANDATORY | Makes it mandatory to set up MFA after first login.        |
-| NONE      | Skips the MFA setup screen                                 |
+| NONE      | Skips the MFA setup screen.                                |
 
 ### Usage
 
@@ -43,9 +47,9 @@ val loginResponse = web3Auth.login(
 )
 ```
 
-## Explicitly Enable MFA
+## Explicitly enable multi-factor authentication
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
 
 <Tabs
   defaultValue="default-verifier"
@@ -105,7 +109,7 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
      private fun enableMFA() {
         val loginParams = LoginParams(
             Provider.JWT,
-            extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+            extraLoginOptions = ExtraLoginOptions(id_token = "<your_jwt_token>")
         )
 
         // focus-next-line
@@ -138,13 +142,13 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
 </TabItem>
 </Tabs>
 
-## Configure MFA Settings
+## Configure multi-factor authentication settings
 
 You can configure the order of MFA or enable/disable MFA type by passing the `mfaSettings` parameter in `Web3AuthOptions`.
 
 :::note Note
 
-- At least two factors are mandatory when setting up the mfaSettings.
+- At least two factors are mandatory when setting up the `MfaSettings`.
 - If you set `mandatory: true` for all factors, the user must set up all four factors.
 - If you set `mandatory: false` for all factors, the user can skip setting up MFA. But at least two factors are mandatory.
 - If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can skip the optional factors. But, the user must set up at least two factors.
@@ -152,7 +156,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 
 :::
 
-### Parameters - MfaSettings
+### Parameters - `MfaSettings`
 
 `MfaSettings` allows you to set the type of the MFA.
 
@@ -193,9 +197,9 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 </TabItem>
 </Tabs>
 
-### Parameters - MfaSetting
+### Parameters - `MfaSetting` by factor
 
-`MfaSetting` allows you to setup MFA setting for a particular MFA type.
+`MfaSetting` allows you to configure MFA behavior for a particular MFA type.
 
 <Tabs
   defaultValue="table"
@@ -211,7 +215,7 @@ You can configure the order of MFA or enable/disable MFA type by passing the `mf
 | ------------ | ------------------------------------------------------------------------------- |
 | `enable`     | Enable/Disable MFA. It accepts `Boolean` as a value.                            |
 | `priority?`  | Priority of MFA. It accepts `Int` as a value, where valid range is from 1 to 4. |
-| `mandatory?` | Mandatory/Optional MFA. It acccepts `Boolean` as a value.                       |
+| `mandatory?` | Mandatory/Optional MFA. It accepts `Boolean` as a value.                       |
 
 </TabItem>
 

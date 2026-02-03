@@ -4,7 +4,7 @@ sidebar_label: useWeb3AuthUser
 description: '@web3auth/modal React Hooks useWeb3AuthUser | Embedded Wallets'
 ---
 
-Hook to fetch and manage the current Web3Auth user information.
+Hook to fetch and manage the current Embedded Wallets user information.
 
 ### Import
 
@@ -37,37 +37,37 @@ function UserInfo() {
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IUseWeb3AuthUser } from '@web3auth/modal/react'
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Whether the user info fetching process is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error that occurred during the user info fetching process.
 
-#### userInfo
+#### `userInfo`
 
 `Partial<UserInfo> | null`
 
 The current user's information, or null if not available.
 
-#### isMFAEnabled
+#### `isMFAEnabled`
 
 `boolean`
 
 Whether Multi-Factor Authentication (MFA) is enabled for the user.
 
-#### getUserInfo
+#### `getUserInfo`
 
 `() => Promise<Partial<UserInfo> | null>`
 

@@ -7,7 +7,7 @@ description: '@web3auth/modal Vue Composable useWeb3AuthConnect | Embedded Walle
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-Composable to connect to Web3Auth in Vue.
+Composable to connect to Embedded Wallets in Vue.
 
 ### Import
 
@@ -15,13 +15,13 @@ Composable to connect to Web3Auth in Vue.
 import { useWeb3AuthConnect } from '@web3auth/modal/vue'
 ```
 
-### Choosing the Right Connection Method
+### Choosing the right connection method
 
-You can connect users to Web3Auth in two main ways, depending on your application's needs:
+You can connect users to Embedded Wallets in two main ways, depending on your application's needs:
 
-- **Use `connect()`** when you want to display the default Web3Auth modal. This is ideal if you want to provide users with a pre-built, user-friendly interface where they can choose from all available login options (social logins, wallets, etc.) with minimal setup.
+- **Use `connect()`** when you want to display the default Embedded Wallets/Web3Auth modal. This is ideal if you want to provide users with a pre-built, user-friendly interface where they can choose from all available login options (such as social logins, wallets) with minimal setup.
 
-- **Use `connectTo(connector, params)`** when you want to build a fully custom login experience. This method lets you bypass the Web3Auth modal and connect directly to a specific wallet connector (such as Google, Facebook, or a particular wallet). Choose this if you want to design your own UI for login options, or if you want to restrict users to a specific authentication method. This method also allows you to use JWT based login configurations.
+- **Use `connectTo(connector, params)`** when you want to build a fully custom login experience. This method lets you bypass the Embedded Wallets/Web3Auth modal and connect directly to a specific wallet connector (such as Google, Facebook, or a particular wallet). Choose this if you want to design your own UI for login options, or if you want to restrict users to a specific authentication method. This method also allows you to use JWT-based login configurations.
 
 **Summary:**
 
@@ -42,7 +42,7 @@ You can connect users to Web3Auth in two main ways, depending on your applicatio
 
 :::info
 
-This is the most common way to connect to Web3Auth. It opens the Web3Auth modal UI, allowing users to select from available login options.
+This is the most common way to connect to Embedded Wallets/Web3Auth. It opens the Web3Auth modal UI, allowing users to select from available login options.
 
 :::
 
@@ -69,7 +69,7 @@ This is the most common way to connect to Web3Auth. It opens the Web3Auth modal 
 
 :::info
 
-This method allows you to build your own custom connection UI. It bypasses the Web3Auth modal UI, allowing you to create your own custom UI for login options. This can be useful if you want to hide Web3Auth from your end users.
+This method allows you to build your own custom connection UI. It bypasses the Web3Auth modal UI, allowing you to create your own custom UI for login options. This can be useful if you want to hide Embedded Wallets from your end users.
 
 :::
 
@@ -95,44 +95,44 @@ This method allows you to build your own custom connection UI. It bypasses the W
 
 </Tabs>
 
-### Return Type
+### Return type
 
 ```ts
 import type { IUseWeb3AuthConnect } from '@web3auth/modal/vue'
 ```
 
-#### isConnected
+#### `isConnected`
 
 `boolean`
 
 Whether the user is connected to Web3Auth.
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Whether the connection process is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error that occurred during the connection process.
 
-#### connectorName
+#### `connectorName`
 
 `WALLET_CONNECTOR_TYPE | null`
 
 Name of the connected connector.
 
-#### connect
+#### `connect`
 
 `() => Promise<IProvider | null>`
 
 Function to initiate the connection process. Opens the Web3Auth modal UI.
 
-#### connectTo
+#### `connectTo`
 
 `<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]) => Promise<IProvider | null>`
 
-Function to connect directly to a specific wallet connector. This bypasses the Web3Auth modal UI, allowing you to build custom interfaces. This method also allows you to use JWT based login configurations.
+Function to connect directly to a specific wallet connector. This bypasses the Web3Auth modal UI, allowing you to build custom interfaces. This method also allows you to use JWT-based login configurations.

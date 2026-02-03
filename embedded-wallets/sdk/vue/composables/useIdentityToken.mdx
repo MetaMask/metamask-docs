@@ -4,7 +4,7 @@ sidebar_label: useIdentityToken
 description: '@web3auth/modal Vue Composable useIdentityToken | Embedded Wallets'
 ---
 
-Composable to retrieve and manage the identity token from Web3Auth in Vue.
+Composable to retrieve and manage the identity token from Embedded Wallets in Vue.
 
 ### Import
 
@@ -32,31 +32,31 @@ import { useIdentityToken } from '@web3auth/modal/vue'
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 import type { IUseIdentityToken } from '@web3auth/modal/vue'
 ```
 
-#### loading
+#### `loading`
 
 `Ref<boolean>`
 
 Whether the authentication process is in progress.
 
-#### error
+#### `error`
 
 `Ref<Web3AuthError | null>`
 
 Error that occurred during the authentication process.
 
-#### token
+#### `token`
 
 `Ref<string | null>`
 
 The identity token returned after successful authentication.
 
-#### getIdentityToken
+#### `getIdentityToken`
 
 `() => Promise<string | null>`
 

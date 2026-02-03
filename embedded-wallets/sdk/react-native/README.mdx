@@ -1,7 +1,7 @@
 ---
 title: Embedded Wallets SDK for React Native
 sidebar_label: Getting Started
-description: 'MetaMask Embedded Wallets SDK for React Native | Documentation'
+description: 'MetaMask Embedded Wallets SDK for React Native | Web3Auth Plug and Play for React Native'
 ---
 
 import ExampleCards from '@theme/ExampleCards'
@@ -12,25 +12,35 @@ import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provides a seamless authentication experience for React Native applications with social logins, external wallets, and more. Using our React Native SDK, you can easily connect users to their preferred wallets and manage authentication state across both iOS and Android platforms.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for React Native applications with social logins, external wallets, and more. Our React Native SDK, simplifies how you connect users to their preferred wallets and manage authentication state across both iOS and Android platforms.
 
 ## Requirements
 
-- React Native Release 0.71 and above (for Bare React Native Workflow)
-- Expo SDK 48 and above (for Expo Managed Workflow)
+- React Native Release 0.71 and above (for Bare React Native workflow)
+- Expo SDK 48 and above (for Expo-managed workflow)
 - iOS Platform Target Version 14 and above
 - Android Target SDK Version 31 and above
 - Basic knowledge of JavaScript/TypeScript and React Native
 
-### Selecting your Workflow
+## Prerequisites
+
+- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+
+:::tip
+
+See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
+
+:::
+
+### Selecting your workflow
 
 In React Native, you have the choice to use one of the following workflows:
 
-#### Bare React Native Workflow
+#### Bare React Native workflow
 
 Your Bare React Native app is entirely built on your machine. In this workflow, the developer has complete control, along with the complexity that comes with that.
 
-#### Expo Managed Workflow
+#### Expo-managed workflow
 
 Your Expo app is built on your Expo's cloud, so you don't have control over the native modules used in the app. Developers build managed workflow apps using `expo-cli` on their computers and a development client on their mobile devices.
 
@@ -44,13 +54,13 @@ Please run `npx expo prebuild` to generate native code based on the version of e
 
 ## Installation
 
-### 1. Install Web3Auth React Native SDK
+### 1. Install Embedded Wallets React Native SDK
 
 ```bash npm2yarn
 npm install --save @web3auth/react-native-sdk
 ```
 
-### 2. Install Helper Modules
+### 2. Install helper modules
 
 Install required helper modules for WebBrowser and Storage:
 
@@ -59,8 +69,8 @@ Install required helper modules for WebBrowser and Storage:
 
 <Tabs
   values={[
-    { label: "Bare React Native Workflow", value: "bare" },
-    { label: "Expo Managed Workflow", value: "expo" },
+    { label: "Bare React Native workflow", value: "bare" },
+    { label: "Expo-managed workflow", value: "expo" },
   ]}
 >
 
@@ -80,14 +90,6 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
 
 </TabItem>
 </Tabs>
-
-## Setup
-
-:::info
-
-Prerequisites Before you start, make sure you have registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/) and have set up your project. You can look into the [Dashboard Setup](../../dashboard/README.mdx) guide to learn more.
-
-:::
 
 ### Android
 
@@ -129,7 +131,7 @@ Prerequisites Before you start, make sure you have registered on the [**Web3Auth
     android:exported="true">
   ```
 
-- Your `redirectUrl` is your defined scheme following some identifier or your choice. For example, if your scheme is `web3authrnexample`, you can define your `redirectUrl` as web3authrnexample://auth. Make sure you register this redirectUrl in the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io/).
+- Your `redirectUrl` is your defined scheme following some identifier or your choice. For example, if your scheme is `web3authrnexample`, you can define your `redirectUrl` as web3authrnexample://auth. Ensure you register this `redirectUrl` in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
 
   ```typescript
   const scheme = 'web3authrnexample' // Or your desired app redirection scheme
@@ -151,9 +153,9 @@ Prerequisites Before you start, make sure you have registered on the [**Web3Auth
   pod install
   ```
 
-- In iOS, you don't need to add `redirectUrl` as an iOS Custom URL Scheme, however, you may add it to your Info.plist, but it is not required. Make sure your `redirectUrl` is registered in the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io/).
+- In iOS, you don't need to add `redirectUrl` as an iOS Custom URL Scheme, however, you may add it to your Info.plist, but it is not required. Make sure your `redirectUrl` is registered in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
 
-### Expo Managed Workflow
+### Expo-managed workflow
 
 - Update the scheme in your `app.json` file.
 
@@ -165,7 +167,7 @@ Prerequisites Before you start, make sure you have registered on the [**Web3Auth
   }
   ```
 
-- For constructing your `redirectUrl`, you'll need to use the `expo-linking`, which will help you generate a `redirectUrl` for your app. Make sure you register that URL in the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io/).
+- For constructing your `redirectUrl`, you'll need to use the `expo-linking`, which will help you generate a `redirectUrl` for your app. Make sure you register that URL in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
 
   ```typescript
   import Constants, { AppOwnership } from 'expo-constants'
@@ -179,14 +181,14 @@ Prerequisites Before you start, make sure you have registered on the [**Web3Auth
 
 ## Initialize Web3Auth
 
-### 1. Create a Web3Auth Instance
+### 1. Create an Embedded Wallets instance
 
-Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Web3Auth Dashboard](https://dashboard.web3auth.io/).
+Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
 
 <Tabs
   values={[
-    { label: "Bare React Native Workflow", value: "bare" },
-    { label: "Expo Managed Workflow", value: "expo" },
+    { label: "Bare React Native workflow", value: "bare" },
+    { label: "Expo-managed workflow", value: "expo" },
   ]}
 >
 
@@ -233,7 +235,7 @@ const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
 </TabItem>
 </Tabs>
 
-### 2. Initialize the Web3Auth Instance
+### 2. Initialize the Embedded Wallets instance
 
 Initialize the Web3Auth instance before using any authentication methods:
 
@@ -253,19 +255,19 @@ useEffect(() => {
 }, [])
 ```
 
-## Advanced Configuration
+## Advanced configuration
 
-The Web3Auth React Native SDK offers a rich set of advanced configuration options:
+The Embedded Wallets React Native SDK offers a rich set of advanced configuration options:
 
-- **[Account Abstraction](./advanced/smart-accounts.mdx)**: Configure smart account parameters.
-- **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
-- **[Whitelabeling & UI Customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
-- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
-- **[DApp Share](./advanced/dapp-share.mdx)**: Share DApp sessions across devices.
+- **[Account Abstraction](./advanced/smart-accounts.mdx):** Configure smart account parameters.
+- **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
+- **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx):** Set up and manage MFA.
+- **[Dapp share](./advanced/dapp-share.mdx):** Share dapp sessions across devices.
 
 :::tip
 
-Head over to the advanced configuration sections to learn more about each configuration option.
+See the [advanced configuration sections](./advanced/) to learn more about each configuration option.
 
 :::
 
@@ -305,12 +307,12 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
     google: {
       verifier: 'google-verifier', // Get this from the Web3Auth Dashboard
       typeOfLogin: TypeOfLogin.GOOGLE,
-      clientId: 'GOOGLE_CLIENT_ID', // Google's client id
+      clientId: 'GOOGLE_CLIENT_ID', // Google's client ID
     },
     jwt: {
       verifier: 'jwt-verifier', // Get this from the Web3Auth Dashboard
       typeOfLogin: TypeOfLogin.JWT,
-      clientId: 'JWT_CLIENT_ID', // Custom JWT client id
+      clientId: 'JWT_CLIENT_ID', // Custom JWT client ID
     },
   },
 })
@@ -320,11 +322,11 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
 
 </Tabs>
 
-## Blockchain Integration
+## Blockchain integration
 
 Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
 
-### Ethereum Integration
+### Ethereum integration
 
 For Ethereum integration, you can get the provider and use it with ethers or viem:
 
@@ -372,7 +374,7 @@ const balance = ethers.formatEther(
 )
 ```
 
-### Solana Integration
+### Solana integration
 
 For Solana integration, you can get the private key and use it with Solana libraries:
 
@@ -390,8 +392,8 @@ const getSolanaAccount = async () => {
 
 ## Troubleshooting
 
-### Bundler Polyfill Issues
+### Bundler Polyfill issues
 
 While using Web3Auth in React Native, you may run into issues building. This issue occurs because some core packages like `eccrypto` have certain dependencies which are not present within the Metro build environment.
 
-To solve this, please have a look at our troubleshooting page for [React Native Metro Bundler Issues](../../troubleshooting/metro-issues.mdx)
+To solve this, please have a look at our troubleshooting page for [React Native Metro bundler issues](../../troubleshooting/metro-issues.mdx)

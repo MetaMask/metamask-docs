@@ -1,5 +1,5 @@
 ---
-title: Migrating Smart Accounts from v9 to v10
+title: Migrating Smart accounts from v9 to v10
 description: Comprehensive guide for migrating Web3Auth Smart Account configurations from v9 to v10.
 sidebar_label: Smart Account Migration
 ---
@@ -7,7 +7,7 @@ sidebar_label: Smart Account Migration
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# Web3Auth v10 Smart Account Migration Guide
+# Web3Auth v10 smart account migration guide
 
 This guide focuses specifically on migrating Smart Account configurations from Web3Auth v9 to v10. This is a supplementary guide to the main [v9 to v10 migration guide](README.mdx).
 
@@ -15,7 +15,7 @@ This guide focuses specifically on migrating Smart Account configurations from W
 
 Smart Account integration has been significantly streamlined in v10. The primary configuration is now managed on the dashboard, and the functionality is built directly into the main SDK, eliminating the need for separate provider packages.
 
-## Migration Steps
+## Migration steps
 
 ```typescript
 // remove-start
@@ -79,21 +79,21 @@ const web3AuthOptions: Web3AuthOptions = {
 // add-end
 ```
 
-The `@web3auth/account-abstraction-provider` has been deprecated. You can now enable Smart Accounts and configure the bundler and paymaster directly from the Web3Auth Dashboard.
+The `@web3auth/account-abstraction-provider` has been deprecated. You can now enable smart accounts and configure the bundler and paymaster directly from the Embedded Wallets dashboard.
 
-![Smart Accounts Section](https://i.ibb.co/gZYNwVyy/smart-accounts.gif)
+![Smart accounts Section](https://i.ibb.co/gZYNwVyy/smart-accounts.gif)
 
-See [Web3Auth React Smart Accounts](/embedded-wallets/sdk/react/advanced/smart-accounts) to learn more.
+See [Web3Auth React smart accounts](/embedded-wallets/sdk/react/advanced/smart-accounts) to learn more.
 
 If you want to override the Smart Account provider, bundler, paymaster, or paymaster context, you can now pass the custom configuration directly to `Web3AuthOptions` as shown above.
 
-## Key Changes
+## Key changes
 
-- **Package Removal**: Remove `@web3auth/account-abstraction-provider` package
-- **Dashboard Configuration**: Primary Smart Account settings are now managed on the Web3Auth Developer Dashboard
-- **Simplified Integration**: Smart Account functionality is built directly into the main SDK
-- **Optional Override**: Use `accountAbstractionConfig` in `Web3AuthOptions` for custom configurations
+- **Package removal:** Remove `@web3auth/account-abstraction-provider` package
+- **Dashboard Configuration:** Primary Smart Account settings are now managed on the Embedded Wallets dashboard
+- **Simplified Integration:** Smart Account functionality is built directly into the main SDK
+- **Optional Override:** Use `accountAbstractionConfig` in `Web3AuthOptions` for custom configurations
 
-## Next Steps
+## Next steps
 
 Return to the main [v9 to v10 migration guide](README.mdx) to continue with other migration aspects like MFA configurations and method renames.

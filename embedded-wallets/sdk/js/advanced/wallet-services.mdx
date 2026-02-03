@@ -10,11 +10,11 @@ import AuthAdapterSettings from '../../_common/_auth-adapter-settings.mdx'
 import AuthLoginSettings from '../../_common/_auth-login-settings.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
-Web3Auth Wallet Services provides a comprehensive suite of wallet functionality including Fiat on Ramp, Swaps, and Wallet UI Interoperability with WalletConnect. These services enhance your application by offering a complete wallet experience without building these features from scratch.
+Embedded Wallets' Wallet Services provides a comprehensive suite of wallet functionality including fiat-on-ramp, swaps, and wallet UI Interoperability with WalletConnect. These services enhance your application by offering a complete wallet experience without building these features from scratch.
 
 :::tip
 
-All these configurations can be directly accessed and managed through the Web3Auth dashboard. Manual configuration in the SDK is optional and provided here for reference purposes.
+All these configurations can be directly accessed and managed through the [Embedded Wallets dashboard](https://dashboard.web3auth.io). Manual configuration in the SDK is optional and provided here for reference purposes.
 
 :::
 
@@ -22,56 +22,56 @@ All these configurations can be directly accessed and managed through the Web3Au
 
 ## `walletServicesConfig`
 
-The `walletServicesConfig` option allows you to customize the wallet services experience for your users.
+The `walletServicesConfig` option allows you to customize the Wallet Services experience for your users.
 
 ```tsx
 walletServicesConfig?: WalletServicesConfig;
 ```
 
-### Configuration Options
+### Configuration options
 
 <Tabs>
   <TabItem value="Table">
 
 | Property               | Type                       | Description                                     |
 | ---------------------- | -------------------------- | ----------------------------------------------- |
-| `confirmationStrategy` | CONFIRMATION_STRATEGY_TYPE | How to display confirmation screens             |
-| `modalZIndex`          | number                     | Z-index for modal windows                       |
-| `enableKeyExport`      | boolean                    | Enable private key export functionality         |
-| `whiteLabel`           | Object                     | Customization options for the widget appearance |
+| `confirmationStrategy` | CONFIRMATION_STRATEGY_TYPE | How to display confirmation screens.            |
+| `modalZIndex`          | number                     | Z-index for modal windows.                      |
+| `enableKeyExport`      | boolean                    | Enable private key export functionality.        |
+| `whiteLabel`           | Object                     | Customization options for the widget appearance.|
 
-#### Confirmation Strategy Options
+#### Confirmation strategy options
 
 | Strategy       | Description                                                    |
 | -------------- | -------------------------------------------------------------- |
-| `default`      | Uses auto-approve by default, modal for WalletConnect requests |
-| `modal`        | Always uses modal for confirmations                            |
-| `auto-approve` | Automatically approves transactions without confirmation       |
+| `default`      | Uses auto-approve by default, modal for WalletConnect requests.|
+| `modal`        | Always uses modal for confirmations.                           |
+| `auto-approve` | Automatically approves transactions without confirmation.      |
 
-#### WhiteLabel Options
+#### Whitelabel options
 
 | Property            | Type                 | Description                               |
 | ------------------- | -------------------- | ----------------------------------------- |
-| `showWidgetButton`  | boolean              | Whether to show the widget button         |
-| `buttonPosition`    | BUTTON_POSITION_TYPE | Position of the widget button on the page |
-| `hideNftDisplay`    | boolean              | Hide NFT display in the wallet            |
-| `hideTokenDisplay`  | boolean              | Hide token display in the wallet          |
-| `hideTransfers`     | boolean              | Hide transfer functionality               |
-| `hideTopup`         | boolean              | Hide top-up (fiat on-ramp) functionality  |
-| `hideReceive`       | boolean              | Hide receive address functionality        |
-| `hideSwap`          | boolean              | Hide token swap functionality             |
-| `hideShowAllTokens` | boolean              | Hide the "show all tokens" option         |
-| `hideWalletConnect` | boolean              | Hide WalletConnect integration            |
-| `defaultPortfolio`  | "token" \| "nft"     | Default portfolio view                    |
+| `showWidgetButton`  | boolean              | Whether to show the widget button.        |
+| `buttonPosition`    | BUTTON_POSITION_TYPE | Position of the widget button on the page.|
+| `hideNftDisplay`    | boolean              | Hide NFT display in the wallet.           |
+| `hideTokenDisplay`  | boolean              | Hide token display in the wallet.         |
+| `hideTransfers`     | boolean              | Hide transfer functionality.              |
+| `hideTopup`         | boolean              | Hide top-up (fiat on-ramp) functionality. |
+| `hideReceive`       | boolean              | Hide receive address functionality.       |
+| `hideSwap`          | boolean              | Hide token swap functionality.            |
+| `hideShowAllTokens` | boolean              | Hide the "show all tokens" option.        |
+| `hideWalletConnect` | boolean              | Hide WalletConnect integration.           |
+| `defaultPortfolio`  | "token" \| "nft"     | Default portfolio view.                   |
 
-#### Button Position Options
+#### Button position options
 
 | Position       | Description                     |
 | -------------- | ------------------------------- |
-| `bottom-left`  | Bottom left corner of the page  |
-| `top-left`     | Top left corner of the page     |
-| `bottom-right` | Bottom right corner of the page |
-| `top-right`    | Top right corner of the page    |
+| `bottom-left`  | Bottom left corner of the page. |
+| `top-left`     | Top left corner of the page.    |
+| `bottom-right` | Bottom right corner of the page.|
+| `top-right`    | Top right corner of the page.   |
 
   </TabItem>
 

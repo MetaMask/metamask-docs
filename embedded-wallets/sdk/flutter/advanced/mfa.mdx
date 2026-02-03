@@ -12,24 +12,24 @@ At Web3Auth, we prioritize your security by offering Multi-Factor Authentication
 
 <MFAMinimumPlan />
 
-## Enable using the MFA Level
+## Enable using the Multi-Factor Authentication level
 
-For a dApp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
+For a dapp, we provide various options to set up MFA. You can customize the MFA screen by passing the `mfaLevel` parameter in `login` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
 
 :::caution Note
 
-If you are using default verifiers, your users may have set up MFA on other dApps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dApps. This is because MFA cannot be turned off once it is enabled.
+If you are using default verifiers, your users may have set up MFA on other dapps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
 
 :::
 
-### MFA Level Options
+### Multi-Factor Authentication level options
 
 | MFA Level | Description                                                |
 | --------- | ---------------------------------------------------------- |
 | DEFAULT   | Shows the MFA screen every third login.                    |
 | OPTIONAL  | Shows the MFA screen on every login, but user can skip it. |
 | MANDATORY | Makes it mandatory to set up MFA after first login.        |
-| NONE      | Skips the MFA setup screen                                 |
+| NONE      | Skips the MFA setup screen.                                |
 
 ### Usage
 
@@ -43,9 +43,9 @@ Web3AuthFlutter.login(
 );
 ```
 
-## Explicitly enable MFA
+## Explicitly enable Multi-Factor Authentication
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom jwt verifiers, you need to pass the JWT token in `loginParams` as well.
+The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will used during custom verifiers. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom JWT verifiers, you need to pass the JWT token in `loginParams` as well.
 
 <Tabs
   defaultValue="default-verifier"
@@ -84,15 +84,14 @@ try {
     // focus-next-line
     await Web3AuthFlutter.enableMFA(loginParams);
 
-} on UserCancelledException { log("User cancelled."); } catch(e) { log("Unknown exception
-occurred"); }
+} on UserCancelledException { log("User cancelled."); } catch(e) { log("Unknown exception occurred"); }
 
 ```
 
 </ TabItem>
 </ Tabs>
 
-## Configure MFA Settings
+## Configure Multi-Factor Authentication settings
 
 You can configure the order of MFA, and enable or disable MFA type by passing the `mfaSettings` parameter in `Web3AuthOptions` during initialization.
 
@@ -106,7 +105,7 @@ You can configure the order of MFA, and enable or disable MFA type by passing th
 
 :::
 
-### Parameters - MfaSettings
+### Parameters - `MfaSettings`
 
 `MfaSettings` allows you to set the type of the MFA.
 
@@ -167,9 +166,9 @@ class MfaSettings {
 </TabItem>
 </Tabs>
 
-### Parameters - MfaSetting
+### Parameters - `MfaSetting`
 
-`MfaSetting` allows you to setup MFA setting for a particular MFA type.
+`MfaSetting` allows you to configure the behavior of an individual MFA factor.
 
 <Tabs
   defaultValue="table"

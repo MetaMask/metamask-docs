@@ -14,13 +14,13 @@ import Tabs from "@theme/Tabs";
 
 | Parameter                         | Description                                                                                                                                                                              |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`                        | [Mandatory] Client Id for web3auth. You can obtain your client id from the web3auth developer dashboard.                                                                                 |
-| `web3AuthNetwork`                 | [Mandatory] Web3Auth Network to use for the session & the issued `idToken`. Default is `sapphire_mainnet`.                                                                               |
-| `enableLogging?`                  | Setting to true will enable logs. Default is false.                                                                                                                                      |
+| `clientId`                        | (Mandatory) Client ID, available from the [Embedded Wallets dashboard](https://dashboard.web3auth.io).                                                                                 |
+| `web3AuthNetwork`                 | (Mandatory) Web3Auth network to use for the session and the issued `idToken`. Default is `sapphire_mainnet`.                                                                               |
+| `enableLogging?`                  | Setting to true enables logs. Default is false.                                                                                                                                      |
 | `sessionTime?`                    | Session Time (in seconds) for `idToken` issued by Web3Auth for server side verification. Default is 7 days (7 \* 86400). Max value can be 30 days (86400 \* 30) and min can be 1 sec (1) |
-| `useSFAKey?`                      | Uses Single Factor Auth SDK key with web3auth provider. Default is false.                                                                                                                |
-| `storageType?`                    | Setting to `local` will persist social login session across browser tabs. Default is `local`.                                                                                            |
-| `defaultChainId?`                 | Default chain Id to use. Your first chain will be used as default.                                                                                                                       |
+| `useSFAKey?`                      | Uses Single Factor Auth SDK key with Web3Auth provider. Default is false.                                                                                                                |
+| `storageType?`                    | Setting to `local` persists social login session across browser tabs. Default is `local`.                                                                                            |
+| `defaultChainId?`                 | Default chain ID to use. Your first chain will be used as default.                                                                                                                       |
 | `multiInjectedProviderDiscovery?` | Whether to enable discovery of injected wallets in the browser. Default is true.                                                                                                         |
 
 </TabItem>
@@ -29,12 +29,12 @@ import Tabs from "@theme/Tabs";
 
 | Parameter                   | Description                                                                                              |
 | --------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `chains?`                   | [Fetched automatically from Dashboard] Multiple chain configurations, only provided chains will be used. |
-| `uiConfig?`                 | [Fetched automatically from Dashboard] Config for configuring UI display properties.                     |
+| `chains?`                   | (Fetched automatically from dashboard) Multiple chain configurations, only provided chains will be used. |
+| `uiConfig?`                 | (Fetched automatically from dashboard) Config for configuring UI display properties.                     |
 | `modalConfig?`              | Helps you customize the modal UI elements and authentication methods.                                    |
-| `accountAbstractionConfig?` | [Fetched automatically from Dashboard] Account abstraction config for your chain namespace.              |
-| `useAAWithExternalWallet?`  | [Fetched automatically from Dashboard] Whether to use AA with external wallet.                           |
-| `walletServicesConfig?`     | [Fetched automatically from Dashboard] Configure any parameter related to Wallet Services Plugin         |
+| `accountAbstractionConfig?` | (Fetched automatically from Dashboard) Account abstraction config for your chain namespace.              |
+| `useAAWithExternalWallet?`  | (Fetched automatically from Dashboard) Whether to use AA with external wallet.                           |
+| `walletServicesConfig?`     | (Fetched automatically from Dashboard) Configure any parameter related to Wallet Services plugin         |
 | `ssr?`                      | Whether to enable SSR mode.                                                                              |
 | `mfaSettings?`              | MFA settings for the auth connector.                                                                     |
 | `mfaLevel?`                 | MFA level for the auth connector.                                                                        |
@@ -101,7 +101,7 @@ export interface IWeb3AuthCoreOptions {
    */
   useSFAKey?: boolean;
   /**
-   * WhiteLabel options for web3auth
+   * Whitelabel options for web3auth
    */
   uiConfig?: UIConfig;
   /**

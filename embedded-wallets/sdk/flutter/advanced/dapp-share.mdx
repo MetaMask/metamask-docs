@@ -1,32 +1,32 @@
 ---
-title: dApp Share
-sidebar_label: dApp Share
-description: 'Web3Auth Flutter SDK - dApp Share | Embedded Wallets'
+title: Dapp Share
+sidebar_label: Dapp Share
+description: 'Web3Auth Flutter SDK - Dapp Share | Embedded Wallets'
 ---
 
-## Web3Auth Infrastructure at a glance
+## Embedded Wallets infrastructure at a glance
 
-If you go through the [Web3Auth infrastructure](/embedded-wallets/infrastructure/) you'll notice that to enable the non custodiality of Web3Auth, we split the private key into multiple parts, ie. `shares`. These shares are a part of the off chain multisig, where multiple shares are stored in different places and can be used to reconstruct the private key dynamically in the user's frontend application. For a glance at the structure of the shares, these are the following:
+As described in the [Embedded Wallets infrastructure](/embedded-wallets/infrastructure/), to enable the  non custodiality of Embedded Wallets, we split the private key into multiple parts, known as `shares`. These shares are a part of the offchain multisig, where multiple shares are stored in different places and can be used to reconstruct the private key dynamically in the user's frontend application. Typically, there are 3 shares:
 
-1. **`ShareA` is managed by a login service via node operators**: This share is further split amongst a network of nodes and retrieved via conventional authentication flows.
-2. **`ShareB` is stored on the user's device**: Implementation is device and system specific. For example, on mobile devices, the share could be stored in device storage secured via biometrics.
-3. **`ShareC` is a recovery share**: An extra share to be kept by the user, possibly kept on a separate device, downloaded or based on user input with enough entropy (eg. password, security questions, hardware device etc.).
+1. **`ShareA` is managed by a login service via node operators:** This share is further split amongst a network of nodes and retrieved via conventional authentication flows.
+2. **`ShareB` is stored on the user's device:** Implementation is device and system specific. For example, on mobile devices, the share could be stored in device storage secured via biometrics.
+3. **`ShareC` is a recovery share:** An extra share to be kept by the user, possibly kept on a separate device, downloaded or based on user input with enough entropy (such as, password, security questions, hardware device).
 
 Similar to existing 2FA systems, a user needs to prove ownership of at least 2 out of 3 (2/3) shares, in order to retrieve their private key. This initial setup provides several benefits.
 
-## The User Experience in Mobile Platforms
+## The user experience in mobile platforms
 
 The user experience on mobile platforms is very different from the web platforms. This is because the user has to be redirected to a browser where they can login using their socials and then back to the app once they have been successfully authenticated. This user experience shifts the context between two applications, whereas, in the web platforms, the context remains within the browser only.
 
-For the seamless login flow, we need to reconstruct the Shares `A` and `B`. `Share B` is managed by the login service and is provided on successful authentication. Whereas in web platforms, `Share A` is stored in the browser context. We can still store it in the browser context for mobile devices, but this has a few risks like users accidentally deleting browser data. This is a bigger problem in mobile devices since the user doesn't realize that the browser is being used to login within the app and clearing the browser data can cause their logins to fail. Hence, to tackle this issue, Web3Auth issues a dApp Share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
+For the seamless login flow, we need to reconstruct the Shares `A` and `B`. `Share B` is managed by the login service and is provided on successful authentication. Whereas in web platforms, `Share A` is stored in the browser context. We can still store it in the browser context for mobile devices, but this has a few risks like users accidentally deleting browser data. This is a bigger problem in mobile devices since the user doesn't realize that the browser is being used to login within the app and clearing the browser data can cause their logins to fail. Hence, to tackle this issue, Web3Auth issues a dapp share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
 
-## dApp Share in Flutter
+## Dapp share in Flutter
 
-Web3Auth issues a dApp Share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
+Web3Auth issues a dapp share, ie. a backup share that can be stored by the app developer directly within their application and used to reconstruct the private key after successful login by the user.
 
 After a successful login from a user, the user details are returned as a response to the application on mobile devices.
 
-#### Sample Response in Flutter
+#### Sample response in Flutter
 
 ```json
 {
@@ -47,13 +47,13 @@ After a successful login from a user, the user details are returned as a respons
 }
 ```
 
-If you notice, the reponses has a field called `dappShare` which is a 24 words seed phrase that can be used to reconstruct the private key. This dappShare is a supplement to the `Share A` and represents half of the private key. The application can store the dApp share in its own application's local storage safely.
+Notice, the reponses has a field called `dappShare` which is a 24 words seed phrase that can be used to reconstruct the private key. This dappShare is a supplement to the `Share A` and represents half of the private key. The application can store the dapp share in its own application's local storage safely.
 
-Now, while logging in, the user can use their social accounts to obtain one share, and the application provides the dApp Share, removing the need to store the share in the browser context and enabling the user to login seamlessly. This can be done by passing over the stored dApp share value in the login function.
+While logging in, the user can use their social accounts to obtain one share, and the application provides the dapp share, removing the need to store the share in the browser context and enabling the user to login seamlessly. This can be done by passing over the stored dapp share value in the login function.
 
 :::note
 
-One major thing to note here is that the `dappShare` is only available for custom verifiers and not the standard web3auth verifiers. This is done to make sure that an application only has access to the corresponding share to the private key of their application's user. Hence, to use dApp Share, one has to use the custom authentication feature of Web3Auth. Also, the dApp Share is only returned to users who have enabled 2FA to their account.
+It's important to note that the `dappShare` is only available for custom verifiers and not the standard Web3Auth verifiers. This is done to make sure that an application only has access to the corresponding share to the private key of their application's user. Hence, to use dapp share, one has to use the custom authentication feature of Web3Auth. Also, the dapp share is only returned to users who have enabled 2FA to their account.
 
 :::
 
