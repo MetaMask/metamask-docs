@@ -26,7 +26,7 @@ Returns a [SHA3](https://en.wikipedia.org/wiki/SHA-3) hash of the specified data
   <TabItem value="curl">
 
 ```bash
-curl https://megaeth-mainnet.infura.io \
+curl https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY> \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"jsonrpc": "2.0", "method": "web3_sha3", "params":["0x68656c6c6f20776f726c00"], "id": 1}'
@@ -36,7 +36,7 @@ curl https://megaeth-mainnet.infura.io \
   <TabItem value="WSS">
 
 ```bash
-wscat -c wss://megaeth-mainnet.infura.io/ws -x '{"jsonrpc": "2.0", "method":"web3_sha3", "params":["0x68656c6c6f20776f726c00"], "id": 1}'
+wscat -c wss://megaeth-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method":"web3_sha3", "params":["0x68656c6c6f20776f726c00"], "id": 1}'
 ```
 
   </TabItem>

@@ -112,9 +112,9 @@ Include your authentication details when [making IPFS requests](../reference/ipf
 
 | Network | Description             | URL                                          |
 |---------|-------------------------|----------------------------------------------|
-| Mainnet | JSON-RPC over HTTPS     | `https://megaeth-mainnet.infura.io`          |
-| Mainnet | JSON-RPC over WebSocket | `wss://megaeth-mainnet.infura.io/ws`         |
-| Testnet | JSON-RPC over HTTPS     | `https://megaeth-testnet.infura.io/`         |
+| Mainnet | JSON-RPC over HTTPS     | `https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Mainnet | JSON-RPC over WebSocket | `wss://megaeth-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
+| Testnet | JSON-RPC over HTTPS     | `https://megaeth-testnet.infura.io/v3/<YOUR-API-KEY>`  |
 
 ## Mantle
 
