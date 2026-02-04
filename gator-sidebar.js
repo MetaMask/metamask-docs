@@ -25,6 +25,7 @@ const sidebar = {
           ],
         },
         'get-started/use-the-cli',
+        'get-started/use-with-openclaw',
         {
           type: 'category',
           label: 'Use Scaffold-ETH 2',
