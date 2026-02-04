@@ -9,21 +9,25 @@ import TabItem from "@theme/TabItem";
 
 # Use the Smart Accounts Kit with OpenClaw
 
-Use the MetaMask Smart Accounts Kit [OpenClaw skill](https://github.com/openclaw/skill) to interact with the Smart Accounts Kit using natural language prompts. The skill enables you to create smart accounts, delegations, and request advanced permissions through an AI assistant.
+Use the MetaMask Smart Accounts Kit [OpenClaw skill](https://docs.openclaw.ai/tools/skills) to interact with the Smart Accounts Kit using natural language prompts. The skill enables you to create smart accounts, delegations, and request advanced permissions through an AI assistant.
 
 ## Install the skill
 
 <Tabs>
   <TabItem value="git">
-    ```bash
+
+```bash
     cd ~/.openclaw/workspace/skills
     git clone https://github.com/smartgator/smart-accounts-kit-skills.git
-    ```
+```
+
   </TabItem>
   <TabItem value="prompt">
-    ```txt
+
+```txt
     Install the skill from https://github.com/smartgator/smart-accounts-kit-skills.git
-    ```
+```
+
   </TabItem>
 </Tabs>
 
