@@ -24,9 +24,7 @@ OpenClaw is an open-source platform for AI agents that enables you to build, dep
 ```
 
   </TabItem>
-  <TabItem value="prompt">
-
-Ask OpenClaw to install the skill:
+  <TabItem value="OpenClaw prompt">
 
 ```txt
 Install the skill from https://github.com/smartgator/smart-accounts-kit-skills.git
