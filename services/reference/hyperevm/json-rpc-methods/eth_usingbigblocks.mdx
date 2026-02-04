@@ -1,0 +1,58 @@
+---
+title: HyperEVM eth_usingBigBlocks
+sidebar_label: eth_usingBigBlocks
+description: Returns whether an address is using big blocks on HyperEVM.
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
+
+# `eth_usingBigBlocks`
+
+Returns whether an address is using big blocks on HyperEVM. This Hyperliquid-specific method helps
+determine if an address can use enhanced transaction processing capabilities. <CreditCost network="hyperevm" method="eth_usingBigBlocks" />
+
+## Parameters
+
+- `address`: (string) _[required]_ - The address to check for big blocks usage.
+
+## Returns
+
+`true` if the address is using big blocks, otherwise false.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](/developer-tools/dashboard).
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://hyperevm-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "eth_usingBigBlocks", "params": ["0xFC1286EeddF81d6955eDAd5C8D99B8Aa32F3D2AA"], "id": 1}'
+```
+
+  </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://hyperevm-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_usingBigBlocks", "params": ["0xFC1286EeddF81d6955eDAd5C8D99B8Aa32F3D2AA"], "id": 1}'
+```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": true
+}
+```

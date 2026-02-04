@@ -86,6 +86,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-hemi.svg`,
   },
   {
+    name: 'HyperEVM',
+    href: '/services/reference/hyperevm',
+    logo: `${LOGO_PATH}/logo-hyperevm.svg`,
+  },
+  {
     name: 'Linea',
     href: '/services/reference/linea',
     logo: `${LOGO_PATH}/logo-linea.svg`,
@@ -231,6 +236,12 @@ export const API_COSTS = {
     eth_newBlockFilter: 80,
     eth_newFilter: 80,
     eth_uninstallFilter: 80,
+  },
+  hyperevm: {
+    eth_bigBlockGasPrice: 80,
+    eth_usingBigBlocks: 80,
+    eth_getSystemTxsByBlockNumber: 80,
+    eth_getSystemTxsByBlockHash: 80,
   },
   linea: {
     linea_estimateGas: 100,
