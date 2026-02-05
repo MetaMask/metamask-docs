@@ -39,13 +39,13 @@ View [EIP-20](https://eips.ethereum.org/EIPS/eip-20) for more details about how 
 
 Use [`eth_sendRawTransaction`](../reference/ethereum/json-rpc-methods/eth_sendrawtransaction.mdx) to send ERC-20 token transactions.
 
-The JSON-RPC format expects `eth_sendRawTransaction` to have a specific data field format that requires normalizing the `Transfer` function to a short [function selector](https://solidity.readthedocs.io/en/develop/abi-spec.html#function-selector). To do this, set the parameters for the function and run it through Ethereum’s [sha3 keccak hash](https://solidity.readthedocs.io/en/develop/abi-spec.html#function-selector):
+The JSON-RPC format expects `eth_sendRawTransaction` to have a specific data field format that requires normalizing the `transfer` function to a short [function selector](https://solidity.readthedocs.io/en/develop/abi-spec.html#function-selector). To do this, set the parameters for the function and run it through Ethereum’s [sha3 keccak hash](https://solidity.readthedocs.io/en/develop/abi-spec.html#function-selector):
 
 <Tabs>
   <TabItem value="JavaScript" label="JavaScript" default>
 
 ```javascript
-web3.sha3("Transfer(address, address, uint256)")[0..4]
+web3.utils.sha3("transfer(address,uint256)").slice(0, 10)
 ```
 
   </TabItem>
