@@ -19,7 +19,14 @@ delegations, and request advanced permissions through an AI assistant.
 ## Install the skill
 
 <Tabs>
-  <TabItem value="git">
+  <TabItem value="clawhub" label="ClawHub">
+
+```bash
+clawhub install smart-accounts-kit
+```
+
+  </TabItem>
+  <TabItem value="git" label="Git">
 
 ```bash
 cd ~/.openclaw/workspace/skills
@@ -27,7 +34,7 @@ git clone https://github.com/smartgator/smart-accounts-kit-skills.git
 ```
 
   </TabItem>
-  <TabItem value="OpenClaw prompt">
+  <TabItem value="prompt" label="OpenClaw prompt">
 
 ```txt
 Install the skill from https://github.com/smartgator/smart-accounts-kit-skills.git
