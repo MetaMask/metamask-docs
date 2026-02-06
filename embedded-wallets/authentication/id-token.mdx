@@ -59,7 +59,7 @@ A sample decoded token is shown below:
 
 :::warning NOTE
 
-If the `Return user data in identity token` setting is disabled on the dashboard, personally identifiable information (PII) such as **email**, **name**, and **profileImage** will be omitted from the token.
+If the **Return user data in identity token** setting is disabled on the dashboard, personally identifiable information (PII) such as **email**, **name**, and **profileImage** will be omitted from the token.
 
 :::
 
@@ -373,7 +373,11 @@ try {
 }
 ```
 
-> The replace operation above ensures that any instances of '\n' in the stringified public key are replaced with actual newlines, per the PEM-encoded format.
+:::note
+
+The replace operation above ensures that any instances of '\n' in the stringified public key are replaced with actual newlines, per the PEM-encoded format.
+
+:::
 
 </TabItem>
 </Tabs>

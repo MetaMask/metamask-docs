@@ -7,11 +7,16 @@ keywords: [flutter, solana, embedded-wallets, authentication, blockchain]
 description: 'Integrate Embedded Wallets with the Solana Blockchain in Flutter | Embedded Wallets'
 ---
 
-While using the Embedded Wallets Flutter SDK (formerly Web3Auth), you can retrieve the Ed25519 private key upon successful authentication. This private key can be used to derive the user's public address and interact with the [Solana](https://solana.org/) chain. We’ve highlighted a few methods here to get you started quickly.
+While using the Embedded Wallets Flutter SDK (formerly Web3Auth), you can retrieve the Ed25519 
+private key upon successful authentication. This private key can be used to derive the user's public 
+address and interact with the [Solana](https://solana.org/) chain. We’ve highlighted a few methods 
+here to get you started quickly.
 
 :::note
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). 
+Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may 
+reference `web3auth` identifiers.
 
 :::
 
@@ -32,7 +37,8 @@ import Tabs from '@theme/Tabs'
 
 - Chain Namespace: SOLANA
 - Chain ID: 0x1
-- Public RPC URL: https://api.mainnet-beta.solana.com (avoid public RPC in production; prefer managed services)
+- Public RPC URL: https://api.mainnet-beta.solana.com (avoid public RPC in production; prefer managed 
+services)
 - Display Name: Solana Mainnet
 - Block Explorer Link: https://explorer.solana.com
 - Ticker: SOL
@@ -45,7 +51,8 @@ import Tabs from '@theme/Tabs'
 
 - Chain Namespace: SOLANA
 - Chain ID: 0x2
-- Public RPC URL: https://api.testnet.solana.com (avoid public RPC in production; prefer managed services)
+- Public RPC URL: https://api.testnet.solana.com (avoid public RPC in production; prefer managed 
+services)
 - Display Name: Solana Testnet
 - Block Explorer Link: https://explorer.solana.com
 - Ticker: SOL
@@ -58,7 +65,8 @@ import Tabs from '@theme/Tabs'
 
 - Chain Namespace: SOLANA
 - Chain ID: 0x3
-- Public RPC URL: https://api.devnet.solana.com (avoid public RPC in production; prefer managed services)
+- Public RPC URL: https://api.devnet.solana.com (avoid public RPC in production; prefer managed 
+services)
 - Display Name: Solana Devnet
 - Block Explorer Link: https://explorer.solana.com?cluster=devnet
 - Ticker: SOL
@@ -70,21 +78,30 @@ import Tabs from '@theme/Tabs'
 
 ## Installation
 
-To interact with the Solana blockchain in Flutter, you can use any Solana compatible package. Here, we're using [solana](https://pub.dev/packages/solana) to demonstrate how to interact with Solana chain using Web3Auth.
+To interact with the Solana blockchain in Flutter, you can use any Solana compatible package. Here, 
+we're using [solana](https://pub.dev/packages/solana) to demonstrate how to interact with Solana 
+chain using Web3Auth.
 
 ```dart
 flutter pub add solana get_it hex
 ```
 
-> Note: We will also be using `get_it` package for dependency injection, and `hex` package to perform Hex encoding and decoding.
+:::note
+
+We will also be using `get_it` package for dependency injection, and `hex` package to perform Hex 
+encoding and decoding.
 
 ## Initialize
 
-To Initialize the `SolanaClient` we require `rpcUrl` and `websocketUrl`. The `rpcUrl` will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response. For this example, we are using `rpcUrl` & `websocketUrl` for Devnet-beta. To interact with Testnet or Mainnet, you can simply change the `rpcUrl` and `websocketUrl`.
+To Initialize the `SolanaClient` we require `rpcUrl` and `websocketUrl`. The `rpcUrl` will provide 
+a gateway and protocol to interact with Solana cluster while sending requests and receving response. 
+For this example, we are using `rpcUrl` and `websocketUrl` for Devnet-beta. To interact with Testnet 
+or Mainnet, change the `rpcUrl` and `websocketUrl`.
 
 ### Initializing the Solana SDK
 
-In the below code block, we'll initialize the `SolanaClient` using the Devnet-beta rpc and websocket urls. We'll also register the instance in GetIt for it to be accessed anywhere using service locator.
+In the following code block, we'll initialize the `SolanaClient` using the Devnet-beta RPC and websocket 
+URLs. We'll also register the instance in GetIt for it to be accessed anywhere using service locator.
 
 ```dart
 import 'package:flutter_solana_example/core/solana/solana_provider.dart';
@@ -113,11 +130,18 @@ class ServiceLocator {
 
 ### Initializing Web3Auth
 
-In the below code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, we can route them directly to `HomeScreen`, otherwise we can route them to `LoginScreen`.
+In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any 
+Web3Auth session persisted or not. If the user is already authenticated, we can route them directly 
+to `HomeScreen`, otherwise we can route them to `LoginScreen`.
 
-By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter during initialization.
+By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter 
+during initialization.
 
-> Note: The session can be persisted only for 30 days max.
+:::note
+
+The session can be persisted for up to 30 days max.
+
+:::
 
 ```dart
 // Additional imports
@@ -198,11 +222,14 @@ class _MainAppState extends State<MainApp> {
 
 ## Get account and Balance
 
-We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retive user's public address, and solana balance. We'll use `SolanaProvider` class to interact with Solana cluster and fetch user balance.
+We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. 
+In the following code block, we'll use the Ed25519 private key to retive user's public address, and 
+Solana balance. We'll use `SolanaProvider` class to interact with Solana cluster and fetch user 
+balance.
 
 ### Set up Solana provider
 
-In the below code block, we'll create Solana provider to interact and perform solana operations.
+In the following code block, we'll create Solana provider to interact and perform Solana operations.
 
 ```dart
 import 'dart:math';
@@ -339,7 +366,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
 ## Sign a transaction
 
-Let's now go through how can we sign the transaction. In the below code block, we'll add a new method inside `SolanaProvider` we setup earlier to help us sign a transfer transaction. After successful implementation, we can use the method in `HomeScreen`.
+Let's now go through how can we sign the transaction. In the following code block, we'll add a new 
+method inside `SolanaProvider` we setup earlier to help us sign a transfer transaction. After 
+successful implementation, we can use the method in `HomeScreen`.
 
 ```dart
 class SolanaProvider {
@@ -489,7 +518,8 @@ class SolanaProvider {
 }
 ```
 
-Once created, we can use the method in `HomeScreen` to transfer SOL. Upon successful transfer, we'll also refresh the balance of the user.
+Once created, we can use the method in `HomeScreen` to transfer SOL. Upon successful transfer, we'll 
+also refresh the balance of the user.
 
 ```dart
 // ..

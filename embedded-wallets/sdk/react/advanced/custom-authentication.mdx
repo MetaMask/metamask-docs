@@ -26,7 +26,7 @@ import GroupedAuthFirebase from './_custom-authentication-snippets/_grouped_auth
 
 Custom authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
 
-This feature, with MFA turned off, can make Embedded Wallets invisible to the end user.
+This feature, with Multi-Factor Authentication (MFA) turned off, can make Embedded Wallets invisible to the end user.
 
 <GrowthPlanNote />
 
@@ -58,7 +58,11 @@ You can only configure implicit login via modal, for JWT-based logins, you need 
 
 For the modal custom authentication, you need to pass the `modalConfig` object to the `Web3AuthOptions` object within the constructor.
 
-> **Read more about the `modalConfig` object in the [Whitelabel](./whitelabel.mdx) section.**
+:::tip
+
+Read more about the `modalConfig` object in the [Whitelabel](./whitelabel.mdx) section.
+
+:::
 
 ### Usage
 
