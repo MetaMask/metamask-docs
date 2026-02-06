@@ -150,7 +150,7 @@ const sidebar = {
                 "dashboard/advanced/session-management",
                 "dashboard/advanced/test-accounts",
                 "dashboard/advanced/user-details",
-            "dashboard/advanced/custom-chains",
+                "dashboard/advanced/custom-chains",
                 "dashboard/advanced/key-export",
               ],
             },
