@@ -150,6 +150,7 @@ const sidebar = {
                 "dashboard/advanced/session-management",
                 "dashboard/advanced/test-accounts",
                 "dashboard/advanced/user-details",
+            "dashboard/advanced/custom-chains",
                 "dashboard/advanced/key-export",
               ],
             },
@@ -209,7 +210,7 @@ const sidebar = {
         "infrastructure/glossary",
         {
           type: "link",
-          label: "Compliance, Audits and Trust", 
+          label: "Compliance, audits and trust", 
           href: "https://trust.web3auth.io",
         },
       ],
