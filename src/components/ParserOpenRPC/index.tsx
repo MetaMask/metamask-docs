@@ -15,13 +15,15 @@ import { trackClickForSegment, trackInputChangeForSegment } from '@site/src/lib/
 import { AuthBox } from '@site/src/components/ParserOpenRPC/AuthBox'
 import { MetamaskProviderContext } from '@site/src/theme/Root'
 import ProjectsBox from '@site/src/components/ParserOpenRPC/ProjectsBox'
-import { LINEA_REQUEST_URL } from '@site/src/lib/constants'
+import { BASE_PROD_URL, ETHEREUM_PROD_URL, LINEA_REQUEST_URL } from '@site/src/lib/constants'
 import useIsBrowser from '@docusaurus/useIsBrowser'
 import { encrypt } from '@metamask/eth-sig-util'
 import { hexlify } from 'ethers'
 
 // Import local specs
 import localLineaSpec from '@site/src/specs/linea/openrpc.json'
+import localBaseSpec from '@site/src/specs/base/openrpc.json'
+import localEthereumSpec from '@site/src/specs/ethereum/openrpc.json'
 
 interface ParserProps {
   network: NETWORK_NAMES
@@ -106,8 +108,15 @@ export default function ParserOpenRPC({
     src === 'local'
       ? {
           name: network,
-          data: network === NETWORK_NAMES.linea ? localLineaSpec : null,
-          error: network !== NETWORK_NAMES.linea, // Error if local spec not available for this network
+          data:
+            network === NETWORK_NAMES.linea
+              ? localLineaSpec
+              : network === NETWORK_NAMES.base
+                ? localBaseSpec
+                : network === NETWORK_NAMES.ethereum
+                  ? localEthereumSpec
+                  : null,
+          error: ![NETWORK_NAMES.linea, NETWORK_NAMES.base, NETWORK_NAMES.ethereum].includes(network), // Error if local spec not available for this network
         }
       : netData?.find(net => net.name === network)
 
@@ -164,7 +173,10 @@ export default function ParserOpenRPC({
       paramStructure: currentMethod?.paramStructure || null,
       errors,
       tags,
-      servers: currentNetwork.data?.servers?.[0]?.url || null,
+      servers:
+        currentNetwork.data?.servers?.[0]?.url ||
+        currentNetwork.data?.info?.servers?.[0]?.url ||
+        null,
     }
   }, [currentNetwork, method, src])
 
@@ -233,8 +245,14 @@ export default function ParserOpenRPC({
     }
   }
 
+  const defaultRequestUrl =
+    network === NETWORK_NAMES.base
+      ? BASE_PROD_URL
+      : network === NETWORK_NAMES.ethereum
+        ? ETHEREUM_PROD_URL
+        : LINEA_REQUEST_URL
   const INIT_URL =
-    currentMethodData.servers !== null ? currentMethodData.servers : `${LINEA_REQUEST_URL}/v3/`
+    currentMethodData.servers !== null ? currentMethodData.servers : `${defaultRequestUrl}/v3/`
 
   const handleServiceRequest = async () => {
     const URL = `${INIT_URL}${userAPIKey}`
