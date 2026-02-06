@@ -117,7 +117,7 @@ The code above uses the `privateKey` to create a `keyPair` using the `ECPair` cl
 
 - **`tweakedChildNode`**: This is the resulting key after tweaking the original public key. Taproot involves tweaking the public key using a tagged hash, which modifies the public key in a way that remains cryptographically secure but incorporates additional data or functionality.
 
-- **`address`**: This is the Bitcoin Taproot address derived from the provided public key. It is used to receive Bitcoin.
+- **`address`**: This is the Bitcoin Taproot address derived from the provided public key &emdash; it's used to receive Bitcoin.
 
 - **`output`**: This is the output script associated with the address. In Bitcoin transactions, an output script (also known as a scriptPubKey) defines the conditions that must be met to spend the funds sent to an address. For Taproot addresses, the output script enforces the spending conditions defined by the Taproot upgrade.
 

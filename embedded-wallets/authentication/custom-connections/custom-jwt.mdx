@@ -40,13 +40,13 @@ To use this feature, developers must go to the **Custom Connections** tab in the
 
 Follow these steps to create a custom JWT connection:
 
-1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+1. Visit the [Embedded Wallets dashboard](https://dashboard.web3auth.io).
 1. Go to the **Custom Connections** section.
 1. Click on the **Settings** icon near the **Custom Connection**.
-1. Enter the `Auth Connection ID`.
-1. Paste the `JWKS Endpoint`.
-1. Paste a sample `JWT Token` to auto populate the best **JWT validations** possible.
-1. Select the `JWT user identifier`: `email`, `sub` or `custom`.
+1. Enter the **Auth Connection ID**.
+1. Paste the **JWKS Endpoint**.
+1. Paste a sample **JWT Token** to auto populate the best **JWT validations** possible.
+1. Select the **JWT user identifier**: `email`, `sub` or `custom`.
 1. (Optional) Toggle the case sensitivity of `User Identifier`. 
 1. Click on **Add Custom Validations** to add validations manually.
    1. Type iss as a field and `your-issuer` as a value.
@@ -223,7 +223,7 @@ const jwt = await new jose.SignJWT({ 'urn:example:claim': true })
 console.log(jwt)
 
 // Verifying the JWT using Remote JWK Set.
-// This is just to show how the Verify works, look above to set-up custom jwt verifier on the Embedded Wallets Dashboard.
+// This is just to show how the Verify works, look above to set-up custom jwt verifier on the Embedded Wallets dashboard.
 // Check the steps below to see how once can generate the JWKS
 const JWKS = jose.createRemoteJWKSet(new URL('https://my-authz-server/.well-known/jwks.json'))
 
@@ -247,9 +247,13 @@ Check out the [troubleshooting page](/embedded-wallets/troubleshooting/jwt-error
 
 ## Usage
 
-Since, the **Custom Connection** details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+Since the **Custom Connection** details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
-> Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
+:::tip
+
+Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
+
+:::
 
 ### Log in with JWT
 
@@ -257,7 +261,7 @@ Since, the **Custom Connection** details are available from the dashboard, devel
 
 ## What are JWKS?
 
-JWKS stands for JSON Web Key Set. It is a set of keys containing the public keys that should be used to verify any JSON Web Token (JWT) issued by the authorization server and signed using the RS256 signing algorithm.
+JWKS stands for JSON Web Key Set. It's a set of keys containing the public keys that should be used to verify any JSON Web Token (JWT) issued by the authorization server and signed using the RS256 signing algorithm.
 
 ### How to create JWKS?
 
@@ -269,7 +273,7 @@ JWKS stands for JSON Web Key Set. It is a set of keys containing the public keys
 
 - If you are using your own custom JWT, you will need to convert your PEM file to JWKS.
 
-### How to convert PEM to JWKS?
+### How to convert PEM to JWKS
 
 If you're using `jose` or `jsonwebtoken` library, you can use the following steps to convert your PEM file to JWKS.
 
@@ -303,4 +307,4 @@ If you're using `jose` or `jsonwebtoken` library, you can use the following step
 
 4. To complete the process, you need to save the output as a `.json` file, host it on your server, and make sure it's publicly accessible.
 
-   This will give you the `JWKS Endpoint`, which is required when setting up a **Custom JWT Verifier** on the Embedded Wallets Dashboard.
+   This will give you the `JWKS Endpoint`, which is required when setting up a **Custom JWT Verifier** on the Embedded Wallets dashboard.
