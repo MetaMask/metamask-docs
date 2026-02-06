@@ -209,7 +209,7 @@ const sidebar = {
         "infrastructure/glossary",
         {
           type: "link",
-          label: "Compliance, Audits and Trust",
+          label: "Compliance, Audits and Trust", 
           href: "https://trust.web3auth.io",
         },
       ],
