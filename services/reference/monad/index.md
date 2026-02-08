@@ -1,4 +1,7 @@
----
+curl --url https://linea-mainnet.infura.io/v3/cae1536bcf8c4f268c37c253e6b9f625 \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'---
 description: Monad network documentation.
 ---
 
