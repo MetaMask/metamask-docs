@@ -1,0 +1,8 @@
+- `bundles`: [_Required_] Array of bundles to simulate. Each bundle includes:
+  - `transactions`: Array of call objects using the same fields as `eth_call`.
+  - `blockOverride`: [_Optional_] Block header overrides (for example, block number, hash, coinbase, timestamp, difficulty, gas limit, base fee).
+- `simulationContext`: [_Required_] Object describing where to simulate:
+  - `blockNumber`: Block number (hex quantity) or a tag (`latest`, `pending`, `safe`, `finalized`, `earliest`), or a block hash.
+  - `transactionIndex`: Index within the block to simulate against.
+- `stateOverrides`: [_Optional_] Object mapping addresses to overrides (`balance`, `nonce`, `code`, `state`, `stateDiff`).
+- `timeout`: [_Optional_] Max simulation time in milliseconds. Defaults to 5000.
