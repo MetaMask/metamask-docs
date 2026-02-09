@@ -44,6 +44,13 @@ const config = {
       },
     },
     {
+      tagName: 'meta',
+      attributes: {
+        name: 'algolia-site-verification',
+        content: '1AA18A875C92F2F7',
+      },
+    },
+    {
       tagName: 'link',
       attributes: {
         rel: 'icon',
@@ -753,31 +760,31 @@ const config = {
       },
       algolia: {
         // The application ID provided by Algolia
-        appId: 'AWX4QVM59R',
-
-        // Public API key: it is safe to commit it
-        apiKey: '861f327c200a8eab62a28ee1396f90de',
-
-        indexName: 'mm--v2-staging',
-
+        appId: 'W4ZOZ72ZFG',
+        apiKey: 'b4e925aa9bf05e5bef2e40b3ee6ee431',
+        indexName: 'mmdocs',
+        contextualSearch: false,
+        translations: {
+          button: {
+            buttonText: 'Search or Ask AI',
+            buttonAriaLabel: 'Search or Ask AI',
+          },
+        },
+        askAi: {
+          assistantId: 'REak1eiP5wfp',
+        },
         // Optional: see doc section below
-        contextualSearch: true,
-
         // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
         // externalUrlRegex: "external\\.com|domain\\.com",
-
         // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
-        replaceSearchResultPathname: {
-          from: '/',
-          to: baseUrl,
-        },
-
+        // replaceSearchResultPathname: {
+        //   from: '/',
+        //   to: baseUrl,
+        // },
         // Optional: Algolia search parameters
-        searchParameters: {},
-
+        // searchParameters: {},
         // Optional: path for search page that enabled by default (`false` to disable it)
-        searchPagePath: 'search',
-
+        // searchPagePath: 'search',
         //... other Algolia params
       },
       mermaid: {
@@ -796,6 +803,14 @@ const config = {
         },
       },
     }),
+  stylesheets: [
+    {
+      href: "https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css",
+      type: "text/css",
+      integrity: "sha384-WcoG4HRXMzYzfCgiyfrySxx90XSl2rxY5mnVY5TwtWE6KLrArNKn0T/mOgNL0Mmi",
+      crossorigin: "anonymous",
+    },
+  ],
 }
 
 module.exports = config

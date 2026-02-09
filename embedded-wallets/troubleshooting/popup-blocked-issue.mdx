@@ -1,22 +1,28 @@
 ---
-title: Popup Blocked Issue
+title: Popup blocked issue
 image: 'img/metamaskog.jpg'
-sidebar_label: Popup Blocked Issue
+sidebar_label: Popup blocked issue
 description: 'Popup blocked issue | Embedded Wallets'
 ---
 
-In this guide, we address a common challenge faced by developers: pop-ups being blocked on iOS and macOS devices. This issue frequently impedes user experience and requires specific attention to ensure smooth functionality across these platforms.
-
-Implementing these strategies should help in mitigating the issue of popups being blocked when using `uxMode` set to `popup` in Web3Auth on iOS and macOS devices.
-
-To address the issue of popups being blocked in Web3Auth when `uxMode` is set to `popup`, especially on iOS and macOS devices using browsers like Safari, you can follow these detailed strategies:
-
-1. **Browser Restrictions and Best Practices**: Browsers have specific restrictions and intelligent tracking prevention methods that often block popups. To navigate this, you should understand the heuristics used by different browsers and apply best practices accordingly. This might include instructing users to manually enable popups in their browser settings.
-
-2. **Optimizing the Code Flow**: One effective approach is to minimize the delay between user interaction and the appearance of the login popup. This can be achieved by separating the initialization of the SDK from the user login method calls. For instance, triggering the `connectTo` function on a button click rather than on page load can prevent the popup from being blocked. This method works around the browser's popup-blocking mechanisms, which are more likely to engage when popups do not directly follow a user action.
-
-3. **Alternative Authentication Methods**: If the popup issue persists, consider using an alternative `uxMode` like `redirect` rather than `popup`. Redirect methods are generally more reliable and less likely to be blocked by browsers. However, this might impact the user experience, as redirects are typically more disruptive than popups.
-
-4. **User Notifications and Settings**: You can also implement a notification system within your application that prompts users to allow popups if they are detected to be blocked. This user-centric approach can help in cases where browser settings are the root cause of the issue.
+This guide explains how to prevent popups from being blocked in browsers like Safari on iOS and macOS devices when using Web3Auth with `uxMode` set to popup.
 
 Implementing these strategies requires a balance between technical adjustments in the code and accommodating various browser behaviors and user actions. The goal is to ensure a smooth and uninterrupted authentication process for users across different platforms and browsers.
+
+## Browser restrictions and best practices
+
+Browsers have specific restrictions and intelligent tracking prevention methods that often block popups. To navigate this, you should understand the heuristics used by different browsers and apply best practices accordingly. This might include instructing users to manually enable popups in their browser settings.
+
+## Optimize the code flow
+
+One effective approach is to minimize the delay between user interaction and the appearance of the login popup. This can be achieved by separating the initialization of the SDK from the user login method calls. For instance, triggering the `connectTo` function on a button click rather than on page load can prevent the popup from being blocked. This method works around the browser's popup-blocking mechanisms, which are more likely to engage when popups do not directly follow a user action.
+
+## Leverage alternative authentication methods
+
+If the popup issue persists, consider using an alternative `uxMode` like `redirect` rather than `popup`. In general, redirect methods are more reliable and less likely to be blocked by browsers. However, this might impact the user experience, as redirects are typically more disruptive than popups.
+
+## Implement notifications
+
+You can also implement a notification system within your application that prompts users to allow popups if they are detected as blocked. This user-centric approach can help in cases where browser settings are the root cause of the issue.
+
+

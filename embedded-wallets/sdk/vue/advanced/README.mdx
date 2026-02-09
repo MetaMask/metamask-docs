@@ -8,13 +8,13 @@ import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import Web3AuthOptions from '../../_common/_web3auth-options.mdx'
 
-# Advanced Configuration
+# Advanced configuration
 
-The Web3Auth SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
+The Embedded Wallets SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
 
-## Configuration Structure
+## Configuration structure
 
-When setting up Web3Auth, you'll create a configuration object that is passed to the `Web3AuthProvider`. This consists of:
+When setting up Embedded Wallets, you'll create a configuration object that is passed to the `Web3AuthProvider`. This consists of:
 
 ```tsx title="web3authContext.tsx"
 import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
@@ -37,7 +37,7 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
 
 <Web3AuthOptions />
 
-## Session Management
+## Session management
 
 Control how long users stay authenticated and how sessions persist.
 
@@ -63,28 +63,27 @@ const web3AuthOptions = {
 }
 ```
 
-## Multi-Factor Authentication (MFA)
+## Multi-Factor Authentication
 
 Add additional security layers to protect user accounts with two-factor authentication. For detailed
-configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx)
-section.
+configuration options and implementation examples, see [Multi-Factor Authentication (MFA)](./mfa.mdx).
 
 **Key Configuration Options:**
 
 - `mfaSettings` - Configure MFA settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA
 
-## Custom Authentication Methods
+## Custom authentication methods
 
 Control the login options presented to your users and how they're displayed in the modal. For
 detailed configuration options and implementation examples, see the
-[Custom Authentication](./custom-authentication.mdx) section.
+[custom authentication](./custom-authentication.mdx) section.
 
 **Key Configuration Options:**
 
 - `modalConfig` - Define which authentication methods are available and customize their appearance
 
-## UI Customization
+## UI customization
 
 Create a seamless brand experience by customizing the Web3Auth Modal to match your application's
 design. For complete customization options, refer to the
@@ -95,10 +94,10 @@ design. For complete customization options, refer to the
 - `uiConfig` - Personalize the modal's look and feel with custom colors, logos, themes, and more
 - `modalConfig` - Control the visibility and arrangement of authentication options
 
-## Smart Accounts (Account Abstraction)
+## Smart accounts (account abstraction)
 
 Improve user experience with gasless transactions and advanced account features. Learn more in the
-[Smart Accounts](./smart-accounts.mdx) documentation.
+[smart accounts](./smart-accounts.mdx) documentation.
 
 **Key Configuration Options:**
 
@@ -113,4 +112,4 @@ Extend your application with enhanced wallet functionality. See the
 
 **Key Configuration Options:**
 
-- `walletServicesConfig` - Integrate additional wallet services and features
+- `walletServicesConfig` - Integrate additional Wallet Services and features
