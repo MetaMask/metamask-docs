@@ -237,6 +237,11 @@ export const API_COSTS = {
     eth_newFilter: 80,
     eth_uninstallFilter: 80,
   },
+  megaeth: {
+    eth_callMany: 80,
+    eth_getAccount: 80,
+    eth_getRawTransactionByHash: 80,
+  },
   linea: {
     linea_estimateGas: 100,
     linea_getTransactionExclusionStatusV1: 160,
