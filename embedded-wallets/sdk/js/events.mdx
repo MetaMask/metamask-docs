@@ -1,5 +1,5 @@
 ---
-title: Web3Auth Events & Status
+title: Web3Auth events and status
 sidebar_label: SDK Events
 description: '@web3auth/no-modal Native Account Abstraction | Embedded Wallets'
 ---
@@ -7,8 +7,6 @@ description: '@web3auth/no-modal Native Account Abstraction | Embedded Wallets'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import ChainConfig from '../_common/_chain-config.mdx'
-
-# Web3Auth Events & Status
 
 This page documents the key properties and lifecycle events available from a Web3Auth instance. These allow you to track the connection status, react to changes, and build responsive user experiences.
 
@@ -62,7 +60,7 @@ connectedConnectorName: WALLET_CONNECTOR_TYPE | null
 | Event               | Description                  |
 | ------------------- | ---------------------------- |
 | `AUTH`              | Web3Auth connector.          |
-| `WALLET_CONNECT_V2` | Wallet Connect V2 connector. |
+| `WALLET_CONNECT_V2` | WalletConnect V2 connector. |
 | `COINBASE`          | Coinbase connector.          |
 | `METAMASK`          | MetaMask connector.          |
 
@@ -109,8 +107,8 @@ status: CONNECTOR_STATUS_TYPE
 | `READY`         | Triggered when the connector is ready.                          |
 | `CONNECTING`    | Triggered when a connection is being established.               |
 | `CONNECTED`     | Triggered when a wallet is successfully connected.              |
-| `DISCONNECTING` | Triggered when the wallet is in the process of disconnecting.   |
-| `DISCONNECTED`  | Triggered when the wallet is disconnected.                      |
+| `DISCONNECTING` | Triggered when the wallet is in the process of Disconnecting.   |
+| `DISCONNECTED`  | Triggered when the wallet is Disconnected.                      |
 | `ERRORED`       | Triggered when an error occurs during the connection lifecycle. |
 
   </TabItem>

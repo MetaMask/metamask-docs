@@ -1,24 +1,46 @@
 ---
-title: Bundler Polyfill Issues - React Native Metro
+title: Bundler polyfill issues - React Native Metro
 image: 'img/metamaskog.jpg'
-sidebar_label: React Native Metro Polyfill Issues
+sidebar_label: React Native Metro polyfill issues
 description: 'Bundler Polyfill Issues - React Native Metro | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-While setting up a new web3 project from scratch, you might face multiple issues with the bundler. This issue is caused because the core packages like `eccrypto` have certain dependencies, which are not present within the build environment. For rectifying this, the go-to method has been to just add the missing modules directly into the package, and edit the bundler configuration to take advantage of that.
+While setting up a new Web3 project from scratch, you might face bundler issues. This can occur because the 
+core packages like `eccrypto` have dependencies which are not present within the build environment. 
 
-Although this method works, it increases the bundle size significantly. Causing slow loading speeds and a bad user experience. It is important to note that these modules, even while the build fails, are still present within the browser environment. Many libraries like Web3Auth are written in a way to take advantage of this fact. Hence, even if the build doesn't contain the polyfill, the library should still work as expected. However, if you are using a library that does not take advantage of this fact, you might face issues while using the library.
+To rectify this, the go-to method is to add the missing modules directly into the package, and edit the bundler 
+configuration to use those. Although this approach works, it can significantly increase bundle size, leading 
+to slower load times and a degraded user experience. 
 
-Hence, you need to be mindful of the fact that you only require certain node polyfills to be added to your project, while testing each of its functionalities. At the same time, you need to tell the bundler to ignore the missing modules, and not include them in the build.
+Some libraries rely on environment-specific modules that may be available at runtime in the browser even if 
+they are not bundled. Libraries such as Embedded Wallets’ Web3Auth take advantage of this behavior and can 
+function correctly without bundling all modules. However, if you are using a library that does not take 
+advantage of this, you might face issues.
 
-In this guide, we have added instructions for adding the polyfills in React Native Metro.
+To avoid unnecessary overhead, include only the required polyfills, test functionality with care, and 
+configure your bundler to ignore unresolved modules rather than including them in the final build.
 
-## Install the missing modules
+:::tip
 
-Check for the missing libraries in your build and included packages, and accordingly polyfill them. For Web3Auth, you need to polyfill the `buffer`, `process`, `crypto` and `stream` libraries. For the rest of the libraries, we are installing a dummy module called `empty-module` which helps us get rid of the warnings while building the project.
+We recommend that you require certain Node polyfills to be added to your project, while testing each of 
+its functionalities. At the same time, instruct the bundler to ignore the missing modules, and not include 
+them in the build.
+
+:::
+
+In this guide, we provide instructions for adding polyfills in React Native Metro. The steps install the 
+missing libraries required for module resolution and then configures Metro so they are not bundled unless 
+needed at runtime.
+
+## Step 1: Install the missing modules
+
+Check for the missing libraries in your build and included packages, and polyfill these. For Web3Auth, you 
+need to polyfill the `buffer`, `process`, `crypto` and `stream` libraries. For the rest of the libraries, 
+we are installing a dummy module called `empty-module` which helps us get rid of the warnings while building 
+the project.
 
 ```bash npm2yarn
 npm install --save empty-module readable-stream crypto-browserify react-native-get-random-values buffer process
@@ -26,23 +48,30 @@ npm install --save empty-module readable-stream crypto-browserify react-native-g
 
 :::warning
 
-There might be a possibility that you might need to polyfill more libraries, in case you're using any other blockchain library alongside Web3Auth that requires them. Generally, the libraries like `browserify-zlib`, `assert`, `stream-http`, `https-browserify`, `os-browserify`, `url` are the ones that might be required.
+If you're using any other blockchain library alongside Web3Auth, it's possible that you might need to polyfill more 
+libraries. Typically, the libraries like `browserify-zlib`, `assert`, `stream-http`, `https-browserify`, 
+`os-browserify`, `url` are commonly required.
 
 :::
 
-## Update your `metro.config.js`
+## Step 2: Update your `metro.config.js`
 
-To make use of the polyfilled modules while building the application, you need to reconfigure your metro bundler config.
+To make use of the polyfilled modules while building the application, you need to reconfigure your metro 
+bundler config.
 
-:::info Expo Managed Workflow
+:::info Expo-managed workflow
 
-You will have to create `metro.config.js` for Expo Managed Workflow, as it is not present by default. Read through this documentation to learn more about [**Customizing Metro Bundler**](https://docs.expo.dev/guides/customizing-metro/).
+Create a `metro.config.js` for an expo-managed workflow, as it is not present by default. 
 
-Note that polyfilling is not supported with "Expo Go" app. It is compatible only with Custom Dev Client and EAS builds. Please [**prebuild your expo app**](https://docs.expo.dev/workflow/prebuild/) to generate native code based on the version of expo a project has installed, before moving forward.
+Learn more about [customizing a metro bundler](https://docs.expo.dev/guides/customizing-metro/).
+
+Note that polyfilling is not supported with "Expo Go" app. It's compatible only with Custom Dev Client and Expo Application Services (EAS) builds. Please [prebuild your expo app](https://docs.expo.dev/workflow/prebuild/) 
+to generate native code based on the version of expo a project has installed, before progressing.
 
 :::
 
-You can copy the following code in your `metro.config.js` file. This will tell the bundler to ignore the missing modules and include the ones that are needed.
+You can copy the following code in your `metro.config.js` file. This will tell the bundler to ignore the 
+missing modules and include those that are needed.
 
 #### `metro.config.js`
 
@@ -118,9 +147,9 @@ module.exports = config
 
 </Tabs>
 
-## Fixing additional dependency issues
+## Step 3: Fix additional dependency issues
 
-- Create a `globals.js` to your project root directory and add the following code to it.
+1. Create a `globals.js` at your project root directory and add the following code to it:
 
   ```tsx title="globals.js"
   global.Buffer = require('buffer').Buffer
@@ -139,11 +168,12 @@ module.exports = config
   process.browser = true
   ```
 
-- Then, import the dependencies to `index.js` of your project.
+2. Import the dependencies to `index.js` of your project.
 
 :::info
 
-For Expo apps, you need to create an entry point, ie. the index.js file. This can be done by following the steps [**here**](https://docs.expo.dev/versions/latest/sdk/register-root-component/#what-if-i-want-to-name-my-main-app-file-something-other-than-appjs)
+For Expo apps, you need to create an entry point, that is, the index.js file. This can be done by following 
+the [naming guide](https://docs.expo.dev/versions/latest/sdk/register-root-component/#what-if-i-want-to-name-my-main-app-file-something-other-than-appjs)
 
 :::
 

@@ -6,17 +6,17 @@ description: 'Funding | Embedded Wallets'
 
 MetaMask Embedded Wallets supports multiple ways for users to add funds to their wallets. Let users pick the method that suits them:
 
-- Buy crypto with card, bank transfer, or local payment methods (Fiat On‑Ramp Aggregator).
+- Buy crypto with card, bank transfer, or local payment methods (fiat on‑ramp aggregator).
 - Transfer from an existing wallet or exchange.
 - Connect an external wallet and deposit to the embedded wallet.
 
-## Buy crypto with card or bank transfer (Fiat On‑Ramp Aggregator)
+## Buy crypto with card or bank transfer (fiat on‑ramp aggregator)
 
-The Fiat On-Ramp Aggregator, a key component of the Wallet Services, streamlines the process of converting fiat to cryptocurrency. With integration requiring just a single line of code, it supports over 100 payment methods.
+The fiat on‑ramp aggregator, a key component of the Embedded Wallets' services, streamlines the process of converting fiat to cryptocurrency. With integration requiring just a single line of code, it supports over 100 payment methods.
 
 :::note
 
-The Fiat on Ramp supports both Externally Owned Accounts (EOA) and Account Abstraction (AA) accounts powered by Web3Auth Native Account Abstraction.
+The fiat on-ramp supports both Externally Owned Accounts (EOA) and Account Abstraction (AA) accounts powered by Embedded Wallets' native account abstraction.
 
 Additionally, it supports both EVM and Solana accounts, providing a versatile solution for various blockchain environments.
 
@@ -24,7 +24,7 @@ Additionally, it supports both EVM and Solana accounts, providing a versatile so
 
 ### Using the Wallet Services UI
 
-When you click **Add Funds** on the Wallet Services UI, you'll be presented with options to fund your wallet:
+When the user clicks **Add Funds** on the Wallet Services UI, they'll be presented with options to fund their wallet:
 
 <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
   <img
@@ -39,11 +39,11 @@ When you click **Add Funds** on the Wallet Services UI, you'll be presented with
   />
 </div>
 
-You can choose between two funding methods:
+Users can choose to fund by card or QR code.
 
-#### Fund by Card
+#### Fund by card
 
-Select the card option to purchase crypto using a credit or debit card. This will take you to the card payment interface:
+Users select the card option to purchase crypto using a credit or debit card. This takes them to the card payment interface:
 
 <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
   <img
@@ -60,7 +60,7 @@ Select the card option to purchase crypto using a credit or debit card. This wil
 
 #### Fund by QR Code
 
-Select the QR code option to fund your wallet by scanning a QR code with another wallet:
+Users select the QR code option to fund their wallet by scanning a QR code with another wallet:
 
 <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
   <img
@@ -75,17 +75,19 @@ Select the QR code option to fund your wallet by scanning a QR code with another
   />
 </div>
 
-Here's how our aggregator addresses your on-ramping challenges:
+## Overcome on-ramping challenges
 
-- **Global Reach:** Access users in over 50 countries with worldwide payment coverage
+The fiat on‑ramp aggregator addresses your on-ramping challenges:
 
-- **Lower fees:** Save up to 70% on transaction fees by leveraging lower cost local payment providers
+- **Global reach:** Access users in over 50 countries with worldwide payment coverage.
 
-- **Localized Payment Options:** Offer familiar and real-time payment methods to boost user engagement and monetization
+- **Lower fees:** Save up to 70% on transaction fees by leveraging lower cost local payment providers.
 
-- **Higher Transaction Success Rates:** Address high failure rates (30-70%) of traditional methods like Visa/Mastercard in emerging markets by using reliable local payment options.
+- **Localized payment options:** Offer familiar and real-time payment methods to boost user engagement and monetization.
 
-- **Enhanced Security:** Provide a secure and cost-effective solution for both users and merchants, as local payment methods often require 2-factor authentication (2FA) and eliminate chargeback costs.
+- **Higher transaction success rates:** Address high failure rates (30-70%) of traditional methods like Visa/Mastercard in emerging markets by using reliable local payment options.
+
+- **Enhanced security:** Provide a secure and cost-effective solution for both users and merchants, as local payment methods often require 2-factor authentication (2FA) and eliminate chargeback costs.
 
 :::info
 
@@ -101,17 +103,17 @@ The UI lets users fund their embedded wallet by sending crypto from a self‑cus
 2. From an external wallet, send funds to that address on a supported network.
 3. Confirm the deposit and update balances in your app.
 
-## Fiat on Ramp Coverage
+## Fiat on-ramp coverage
 
 :::tip
 
-For the complete list of fiat, crypto and payment method coverage, please check [here](https://docs.google.com/spreadsheets/d/1HwIDgFQ-J-ptImT9yp6MmLpZId3l1NGe9qWJJN88msY/edit#gid=0)
+See a complete list of [fiat, crypto and payment method coverage](https://docs.google.com/spreadsheets/d/1HwIDgFQ-J-ptImT9yp6MmLpZId3l1NGe9qWJJN88msY/edit#gid=0)
 
 :::
 
-### Network Coverage
+### Network coverage
 
-The Onramp Aggregator is built to be chain-agnostic and supports a wide range of blockchain networks and tokens. Below is the list of main networks that we provide coverage.
+The chain-agnostic fiat on‑ramp aggregator supports a wide range of blockchain networks and tokens, including:
 
 ![Coverage](/img/embedded-wallets/wallet-services/topup/topup-coverage.png)
 
