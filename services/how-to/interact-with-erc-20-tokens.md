@@ -30,7 +30,7 @@ An ERC-20 token must implement the following functions:
 
 :::tip
 
-Some widely used tokens don't strictly follow ERC-20 return conventions. Do not
+Some widely used tokens don't strictly follow ERC-20 return conventions. Don't
 assume `transfer` or `transferFrom` return a boolean value. Use a safe wrapper
 (such as [OpenZeppelin’s `SafeERC20`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/utils/SafeERC20.sol)) or explicitly handle empty return data.
 
