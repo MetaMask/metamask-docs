@@ -4,7 +4,7 @@ sidebar_label: Introduction
 sidebar_position: 1
 ---
 
-import SectionAPIs from "@site/src/components/Sections/SectionAPIs.jsx";
+<!-- import SectionAPIs from "@site/src/components/Sections/SectionAPIs.jsx"; -->
 import SectionNetworks from "@site/src/components/Sections/SectionNetworks.jsx";
 
 # Build and scale your dapp using services

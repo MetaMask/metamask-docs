@@ -1,41 +1,41 @@
-export const API_LINKS = {
-  blockchain: [
-    {
-      name: 'Make requests',
-      href: '/services/how-to/make-batch-requests',
-    },
-    {
-      name: 'Send a transaction',
-      href: '/services/how-to/send-a-transaction',
-    },
-    {
-      name: 'Debug and optimize transactions',
-      href: '/services/how-to/trace-transactions',
-    },
-    {
-      name: 'Subscribe to events',
-      href: '/services/how-to/subscribe-to-events',
-    },
-    {
-      name: 'Explore all methods',
-      href: '/service/index',
-    },
-  ],
-  storage: [
-    {
-      name: 'Make requests',
-      href: '/services/how-to/use-ipfs/how-to/request-rate-limits',
-    },
-    {
-      name: 'Manage files',
-      href: '/services/how-to/use-ipfs/manage-files',
-    },
-    {
-      name: 'Explore all methods',
-      href: 'https://docs.ipfs.tech/reference/http/api/',
-    },
-  ],
-}
+// export const API_LINKS = {
+//   blockchain: [
+//     {
+//       name: 'Make requests',
+//       href: '/services/how-to/make-batch-requests',
+//     },
+//     {
+//       name: 'Send a transaction',
+//       href: '/services/how-to/send-a-transaction',
+//     },
+//     {
+//       name: 'Debug and optimize transactions',
+//       href: '/services/how-to/trace-transactions',
+//     },
+//     {
+//       name: 'Subscribe to events',
+//       href: '/services/how-to/subscribe-to-events',
+//     },
+//     {
+//       name: 'Explore all methods',
+//       href: '/services/index',
+//     },
+//   ],
+//   storage: [
+//     {
+//       name: 'Make requests',
+//       href: '/services/how-to/use-ipfs/how-to/request-rate-limits',
+//     },
+//     {
+//       name: 'Manage files',
+//       href: '/services/how-to/use-ipfs/manage-files',
+//     },
+//     {
+//       name: 'Explore all methods',
+//       href: 'https://docs.ipfs.tech/reference/http/api/',
+//     },
+//   ],
+// }
 
 const LOGO_PATH = '/img/logos'
 
@@ -71,11 +71,6 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-celo.svg`,
   },
   {
-    name: 'IPFS',
-    href: '/services/reference/ipfs',
-    logo: `${LOGO_PATH}/logo-ipfs.svg`,
-  },
-  {
     name: 'Ethereum',
     href: '/services/reference/ethereum',
     logo: `${LOGO_PATH}/logo-eth.svg`,
@@ -86,19 +81,24 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-hemi.svg`,
   },
   {
+    name: 'IPFS',
+    href: '/services/reference/ipfs',
+    logo: `${LOGO_PATH}/logo-ipfs.svg`,
+  },
+  {
     name: 'Linea',
     href: '/services/reference/linea',
     logo: `${LOGO_PATH}/logo-linea.svg`,
   },
   {
-    name: 'MegaETH',
-    href: '/services/reference/megaeth',
-    logo: `${LOGO_PATH}/logo_megaeth.svg`,
-  },
-  {
     name: 'Mantle',
     href: '/services/reference/mantle',
     logo: `${LOGO_PATH}/logo-mantle.svg`,
+  },
+  {
+    name: 'MegaETH',
+    href: '/services/reference/megaeth',
+    logo: `${LOGO_PATH}/logo_megaeth.svg`,
   },
   {
     name: 'Monad',
@@ -131,14 +131,14 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-scroll.svg`,
   },
   {
-    name: 'Solana',
-    href: '/services/reference/solana',
-    logo: `${LOGO_PATH}/logo-solana.svg`,
-  },
-  {
     name: 'Sei',
     href: '/services/reference/sei',
     logo: `${LOGO_PATH}/logo-sei.svg`,
+  },
+  {
+    name: 'Solana',
+    href: '/services/reference/solana',
+    logo: `${LOGO_PATH}/logo-solana.svg`,
   },
   {
     name: 'Starknet',
