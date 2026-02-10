@@ -1,5 +1,5 @@
 ---
-description: Learn how to get the granted execution permissions for a wallet.
+description: Learn how to get the granted Advanced Permissions for a wallet.
 sidebar_label: Get granted permisisons
 keywords: [advanced permissions, granted execution permissions, erc-7715, 7715]
 ---
@@ -7,10 +7,10 @@ keywords: [advanced permissions, granted execution permissions, erc-7715, 7715]
 import Tabs from "@theme/Tabs"; 
 import TabItem from "@theme/TabItem";
 
-# Get granted execution permissions
+# Get granted permissions
 
 [ERC-7715](https://eip.tools/eip/7715) defines an RPC method that returns the granted execution permissions
-for a wallet. Use the method to get the granted execution permissions for a wallet. 
+for a wallet. Use the method to get the granted Advanced Permissions for a wallet. 
 
 
 ## Prerequisites
@@ -19,9 +19,9 @@ for a wallet. Use the method to get the granted execution permissions for a wall
 - [Learn about Advanced Permissions](../../concepts/advanced-permissions.md)
 
 
-## Request granted execution permissions
+## Request granted permissions
 
-Request the granted execution permission for a wallet with the 
+Request the granted Advanced Permissions for a wallet with the 
 Wallet Client's `getGrantedExecutionPermissions` action.
 
 <Tabs>
