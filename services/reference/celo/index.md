@@ -49,7 +49,7 @@ No personal information is sent as part of partner requests, only information ne
 request. This means that Infura's partner service provider can service your request, but not store the
 content of your request.
 
-The following partners provide access to the BSC network:
+The following partners provide access to the Celo network:
 <!-- markdown-link-check-disable -->
 - BlockPI ([Terms of Use](https://blockpi.io/terms-of-use), [Privacy Policy](https://blockpi.io/privacy-policy))
 - 0xFury ([Privacy policy](https://0xfury.com/privacy))
