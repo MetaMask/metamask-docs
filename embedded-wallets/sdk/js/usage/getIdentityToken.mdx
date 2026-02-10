@@ -27,7 +27,7 @@ try {
 }
 ```
 
-### Return Type
+### Return type
 
 ```typescript
 getIdentityToken(): Promise<UserAuthInfo>
@@ -35,7 +35,7 @@ getIdentityToken(): Promise<UserAuthInfo>
 type UserAuthInfo = { idToken: string };
 ```
 
-### Response Format
+### Response format
 
 The `idToken` is a JWT that can be decoded to get user information.
 
@@ -59,19 +59,19 @@ The `idToken` is a JWT that can be decoded to get user information.
 
 <TabItem value="table">
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| `iat` | `number` | The "iat" (issued at) claim identifies the time at which the JWT was issued. |
-| `aud` | `string` | The "aud" (audience) claim identifies the recipients that the JWT is intended for. (Here, it's the dapp `client_id`) |
-| `iss` | `string` | The "iss" (issuer) claim identifies who issued the JWT. (Here, it's Web3Auth `https://api.openlogin.com/`) |
-| `email` | `string` | The email address of the user (optional) |
-| `name` | `string` | The name of the user (optional) |
-| `profileImage` | `string` | The profile image of the user (optional) |
-| `verifier` | `string` | Web3Auth's verifier used while user login |
-| `verifierId` | `string` | Unique user id given by OAuth login provider |
-| `aggregateVerifier` | `string` | Name of the verifier if you are using a single id verifier (aggregateVerifier) (optional) |
-| `exp` | `number` | The "exp" (expiration time) claim identifies the expiration time on or after which the _JWT MUST NOT be accepted for processing_. |
-| `wallets` | `array` | list of wallets for which this token is issued: <ul><li>`curve` "secp256k1" (default) or "ed25519" <br/> You can specify which curve you want use for the encoded public key in the login parameters<br/></li><li>`type` "web3auth_key" incase of social logins</li><li>`public_key` compressed public key derived based on the specified curve </li></ul> |
+| Parameter | Type | Description                                                              |
+| --------- | ---- | ------------------------------------------------------------------------ |
+| `iat` | `number` | The `iat` (issued at) claim identifies the time at which the JWT was issued. |
+| `aud` | `string` | The `aud` (audience) claim identifies the recipients the JWT is intended for (for example, the dapp `client_id`). |
+| `iss` | `string` | The `iss` (issuer) claim identifies who issued the JWT (for example, Web3Auth `https://api.openlogin.com/`). |
+| `email` | `string` | (Optional) The email address of the user. |
+| `name` | `string` | (Optional) The name of the user. |
+| `profileImage` | `string` | (Optional) The profile image of the user . |
+| `verifier` | `string` | The Web3Auth verifier used during user login. |
+| `verifierId` | `string` | The unique user ID provided by the OAuth login provider. |
+| `aggregateVerifier` | `string` | (Optional) The name of the verifier if you are using a single ID (aggregate) verifier. |
+| `exp` | `number` | The `exp` (expiration time) claim identifies the time on, or after which, the _JWT MUST NOT be accepted for processing_. |
+| `wallets` | `array` | List of wallets for which this token is issued:<br /><br />`curve`: Cryptographic curve used for the public key. Possible values are `secp256k1` (default) and `ed25519`. You can specify the curve in the login parameters.<br /><br />`type`: Wallet type. For social logins, this value is `web3auth_key`.<br /><br />`public_key`: Compressed public key derived using the specified curve. |
 
 </TabItem>
 
@@ -87,7 +87,7 @@ export type UserAuthInfo = { idToken: string }
 
 </Tabs>
 
-#### Sample Response
+#### Sample response
 
 ```json
 {
@@ -125,12 +125,12 @@ export type UserAuthInfo = { idToken: string }
 
 <TabItem value="table">
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| `iat` | `number` | The "iat" (issued at) claim identifies the time at which the JWT was issued. |
-| `aud` | `string` | The "audience" claim identifies the recipients that the JWT is intended for. (Here, it's `website's url`) |
-| `iss` | `string` | The "issuer" claim identifies who issued the JWT. <br/> Here, issuer could be `torus-evm`, `torus-solana`, `metamask`, `phantom`, `walletconnect-v1`, `coinbase`, `solflare` |
-| `wallets` | `array` | list of wallets for which this token is issued: <ul><li>`address` : Wallet public address</li><li>`type` Network Type such as "ethereum", "solana" or "starkware" incase of external wallets </li></ul> |
+| Parameter | Type | Description                                                                  |
+| --------- | ---- | ---------------------------------------------------------------------------- |
+| `iat` | `number` | The `iat` (issued at) claim identifies the time at which the JWT was issued. |
+| `aud` | `string` | The audience claim identifies the recipients the JWT is intended for (for example, the website URL). |
+| `iss` | `string` | The issuer claim identifies who issued the JWT.<br />Possible values: `torus-evm`, `torus-solana`, `metamask`, `phantom`, `walletconnect-v1`, `coinbase`, `solflare`. |
+| `wallets` | `array` | List of wallets for which this token is issued.<br />- `address`: wallet public address.<br />- `type`: network type such as `ethereum`, `solana`, or `starkware` for external wallets. |
 
 </TabItem>
 
@@ -146,7 +146,7 @@ export type UserAuthInfo = { idToken: string }
 
 </Tabs>
 
-#### Sample Response
+#### Sample response
 
 ```json
 {
@@ -167,7 +167,7 @@ export type UserAuthInfo = { idToken: string }
 
 </Tabs>
 
-### Error Handling
+### Error handling
 
 ```javascript
 try {
