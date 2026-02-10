@@ -115,6 +115,7 @@ const sidebar = {
                 'guides/advanced-permissions/use-permissions/native-token',
               ],
             },
+            'guides/advanced-permissions/get-granted-advanced-permissions',
             'guides/advanced-permissions/create-redelegation',
           ],
         },

@@ -83,6 +83,27 @@ const permission = {
 };
 ```
 
+### ERC-20 revocation permission
+
+Enables revoking an existing ERC-20 token allowance on behalf of the user.
+
+#### Parameters
+
+| Name            | Type     | Required | Description                                                            |
+| --------------- | -------- | -------- | ---------------------------------------------------------------------- |
+| `justification` | `string` | No       | A human-readable explanation of why the permission is being requested. |
+
+#### Example
+
+```typescript
+const permission = {
+  type: "erc20-token-revocation",
+  data: {
+    justification: "Permission to revoke ERC-20 token allowances",
+  },
+};
+```
+
 ## Native token permissions
 
 ### Native token periodic permission

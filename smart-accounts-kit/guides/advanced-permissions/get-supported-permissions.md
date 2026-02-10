@@ -1,5 +1,5 @@
 ---
-description: Learn how to get supported execution permissions for a wallet.
+description: Learn how to get supported Advanced Permissions for a wallet.
 sidebar_label: Get supported permisisons
 keywords: [advanced permissions, supported execution permissions, erc-7715, 7715]
 ---
@@ -10,7 +10,8 @@ import TabItem from "@theme/TabItem";
 # Get supported permissions
 
 [ERC-7715](https://eip.tools/eip/7715) defines an RPC method that returns the execution permissions
-a wallet supports. Use the method to verify the available permission types and rules before sending requests.
+a wallet supports. Use the method to verify the available Advanced Permissions types and 
+rules before sending requests.
 
 
 ## Prerequisites
@@ -21,7 +22,7 @@ a wallet supports. Use the method to verify the available permission types and r
 
 ## Request supported permissions
 
-Request the supported execution permission types for a wallet with the 
+Request the supported Advanced Permissions types for a wallet with the 
 Wallet Client's `getSupportedExecutionPermissions` action.
 
 <Tabs>
