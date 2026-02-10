@@ -11,20 +11,29 @@ import TabItem from "@theme/TabItem";
 
 Use the MetaMask Smart Accounts Kit [OpenClaw skill](https://docs.openclaw.ai/tools/skills) to interact with the Smart Accounts Kit using natural language prompts. 
 
-OpenClaw is an open-source platform for AI agents that enables you to build, deploy, and manage AI assistants with access to various tools and skills. The skill enables you to create smart accounts, delegations, and request advanced permissions through an AI assistant.
+[OpenClaw](https://openclaw.ai/) is an open-source platform for AI agents that enables you to build, deploy, and 
+manage AI assistants with access to various tools and skills. The skill enables you to create smart accounts, 
+delegations, and request advanced permissions through an AI assistant.
 
 ## Install the skill
 
 <Tabs>
-  <TabItem value="git">
+  <TabItem value="clawhub" label="ClawHub">
 
 ```bash
-    cd ~/.openclaw/workspace/skills
-    git clone https://github.com/smartgator/smart-accounts-kit-skills.git
+clawhub install smart-accounts-kit
 ```
 
   </TabItem>
-  <TabItem value="OpenClaw prompt">
+  <TabItem value="git" label="Git">
+
+```bash
+cd ~/.openclaw/workspace/skills
+git clone https://github.com/smartgator/smart-accounts-kit-skills.git
+```
+
+  </TabItem>
+  <TabItem value="prompt" label="OpenClaw prompt">
 
 ```txt
 Install the skill from https://github.com/smartgator/smart-accounts-kit-skills.git
