@@ -35,6 +35,7 @@ Some popular Ethereum-compatible Web3 libraries include (but are not limited to)
 | PHP        | [Web3.php](https://github.com/web3p/web3.php)                                                       |
 | Java       | [Web3j](https://docs.web3j.io/)                                                                     |
 | Ruby       | [Ethereum Ruby library](https://github.com/EthWorks/ethereum.rb)                                    |
+| Viem       | [Viem](https://viem.sh/)                                                                            |
 
 :::info How to access the blockchain
 
