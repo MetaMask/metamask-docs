@@ -53,7 +53,7 @@ export default function Card({
 
               {href && (
                 <Button
-                  as="button"
+                  as="div"
                   label={false}
                   type={theme === 'dark' ? 'secondary' : 'primary'}
                   icon={buttonIcon}
