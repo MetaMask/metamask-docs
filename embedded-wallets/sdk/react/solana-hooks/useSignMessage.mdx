@@ -4,7 +4,7 @@ sidebar_label: useSignMessage
 description: '@web3auth/modal React Hook useSignMessage | Embedded Wallets'
 ---
 
-Hook to sign a message using the connected Solana wallet from Web3Auth.
+Hook to sign a message using the connected Solana wallet from Embedded Wallets.
 
 ### Import
 
@@ -41,7 +41,7 @@ function SignMessageButton({ message }: { message: string }) {
 }
 ```
 
-### Return Type
+### Return type
 
 ```ts
 export type IUseSignMessage = {
@@ -52,25 +52,25 @@ export type IUseSignMessage = {
 }
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Indicates if the message signing is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error object if signing fails, otherwise null.
 
-#### data
+#### `data`
 
 `string | null`
 
 The signature as a string, or null if not signed yet.
 
-#### signMessage
+#### `signMessage`
 
 `(message: string) => Promise<string>`
 

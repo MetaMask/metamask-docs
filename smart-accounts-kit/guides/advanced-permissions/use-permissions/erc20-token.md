@@ -1,6 +1,6 @@
 ---
 description: Learn how to use the ERC-20 token permissions with Advanced Permissions (ERC-7715).
-keywords: [permissions, spending limit, restrict, 7715, erc-7715, erc20-permissions]
+keywords: [permissions, spending limit, restrict, 7715, erc-7715, erc20-permissions, revocation]
 ---
 
 import Tabs from "@theme/Tabs"; 
@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 # Use ERC-20 token permissions
  
 [Advanced Permissions (ERC-7715)](../../../concepts/advanced-permissions.md) supports ERC-20 token permission types that allow you to request fine-grained
-permissions for ERC-20 token transfers with time-based (periodic) or streaming conditions, depending on your use case.
+permissions for ERC-20 token transfers with time-based (periodic), streaming, or revocation conditions, depending on your use case.
 
 ## Prerequisites
 
@@ -45,16 +45,9 @@ const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
-  signer: {
-    type: "account",
-    data: {
-      // Session account created as a prerequisite.
-      //
-      // The requested permissions will granted to the
-      // session account.
-      address: sessionAccountAddress,
-    },
-  },
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
   permission: {
     type: "erc20-token-periodic",
     data: {
@@ -63,7 +56,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       periodAmount: parseUnits("10", 6),
       // 1 day in seconds.
       periodDuration: 86400,
-      justification?: "Permission to transfer 1 USDC every day",
+      justification: "Permission to transfer 10 USDC every day",
     },
   },
   isAdjustmentAllowed: true,
@@ -115,16 +108,9 @@ const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
-  signer: {
-    type: "account",
-    data: {
-      // Session account created as a prerequisite.
-      //
-      // The requested permissions will granted to the
-      // session account.
-      address: sessionAccountAddress,
-    },
-  },
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
   permission: {
     type: "erc20-token-stream",
     data: {
@@ -137,6 +123,58 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       maxAmount: parseUnits("2", 6),
       startTime: currentTime,
       justification: "Permission to use 0.1 USDC per second",
+    },
+  },
+  isAdjustmentAllowed: true,
+}]);
+```
+
+</TabItem>
+<TabItem value="client.ts">
+
+```typescript
+import { createWalletClient, custom } from "viem";
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+
+export const walletClient = createWalletClient({
+  transport: custom(window.ethereum),
+}).extend(erc7715ProviderActions());
+```
+
+</TabItem>
+</Tabs>
+
+## ERC-20 revocation permission
+
+This permission type enables revoking an existing ERC-20 token allowance on behalf of the user.
+
+For example, a user signs an ERC-7715 permission that lets a dapp revoke any ERC-20 token allowances
+periodically, or during an ongoing exploit.
+
+See the [ERC-20 revocation permission API reference](../../../reference/advanced-permissions/permissions.md#erc-20-revocation-permission) for more information.
+
+<Tabs>
+<TabItem value="example.ts">
+
+```typescript
+import { sepolia as chain } from "viem/chains";
+import { walletClient } from "./client.ts"
+
+// Since current time is in seconds, convert milliseconds to seconds.
+const currentTime = Math.floor(Date.now() / 1000);
+// 1 week from now.
+const expiry = currentTime + 604800;
+
+const grantedPermissions = await walletClient.requestExecutionPermissions([{
+  chainId: chain.id,
+  expiry,
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
+  permission: {
+    type: "erc20-token-revocation",
+    data: {
+      justification: "Permission to revoke ERC-20 token allowances",
     },
   },
   isAdjustmentAllowed: true,

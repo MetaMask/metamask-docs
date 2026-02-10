@@ -40,7 +40,7 @@ const permission = {
     tokenAddress: "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
     periodAmount: parseUnits("10", 6),
     periodDuration: 86400,
-    justification?: "Permission to transfer 1 USDC every day",
+    justification: "Permission to transfer 10 USDC every day",
   },
 };
 ```
@@ -79,6 +79,27 @@ const permission = {
     maxAmount: parseUnits("2", 6),
     startTime: currentTime,
     justification: "Permission to use 0.1 USDC per second",
+  },
+};
+```
+
+### ERC-20 revocation permission
+
+Enables revoking an existing ERC-20 token allowance on behalf of the user.
+
+#### Parameters
+
+| Name            | Type     | Required | Description                                                            |
+| --------------- | -------- | -------- | ---------------------------------------------------------------------- |
+| `justification` | `string` | No       | A human-readable explanation of why the permission is being requested. |
+
+#### Example
+
+```typescript
+const permission = {
+  type: "erc20-token-revocation",
+  data: {
+    justification: "Permission to revoke ERC-20 token allowances",
   },
 };
 ```

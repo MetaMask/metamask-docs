@@ -17,7 +17,7 @@
     "typecheck-staged": "tsc-files --noEmit",
     "lint": "npm run lint:js && npm run lint:style",
     "lint:js": "eslint . --max-warnings=5",
-    "lint:style": "stylelint 'src/**/*.css' --fix",
+    "lint:style": "stylelint \"src/**/*.css\" --fix",
     "lint:fix": "npm run lint:js -- --fix",
     "format": "prettier --write '{blog,docs,src}/**/*.{md,mdx,ts,js,tsx,jsx,json}'"
   },
@@ -59,6 +59,7 @@
     "ethers": "^6.15.0",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
+    "katex": "^0.16.25",
     "launchdarkly-js-client-sdk": "^3.9.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.debounce": "^4.0.8",
@@ -91,8 +92,8 @@
     "@docusaurus/plugin-client-redirects": "3.9.2",
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
-    "@eslint/js": "^9.36.0",
-    "@tsconfig/docusaurus": "^2.0.3",
+    "@eslint/js": "^9.39.2",
+    "@tsconfig/docusaurus": "^2.0.7",
     "@types/react-alert": "^7.0.6",
     "@types/react-modal": "^3.16.3",
     "@typescript-eslint/parser": "^8.46.2",
@@ -104,6 +105,8 @@
     "typescript": "^5.8.3"
   },
   "overrides": {
+    "axios": "^1.7.9",
+    "cross-spawn": "^7.0.6",
     "react-alert": {
       "react": "^18.0.0",
       "react-dom": "^18.0.0"
