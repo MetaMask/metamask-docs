@@ -18,7 +18,7 @@ You can send Starknet transactions using the
 ## Send a transaction
 
 Send a transaction using the
-[`starknet.account.execute()`](https://starknetjs.com/docs/api/classes/accountinterface/#execute)
+`starknet.account.execute()`
 function (with `get-starknet`) or the
 [`starknet_executeTxn`](../../../reference/non-evm-apis/starknet-snap-api.md#starknet_executetxn)
 method (with `wallet_invokeSnap`):
@@ -169,7 +169,7 @@ The following is a full, simplified example of connecting to a Starknet account 
         params: {
           snapId: "npm:@consensys/starknet-snap",
           request: {
-            method: "starkNet_executeTxn"
+            method: "starkNet_executeTxn",
             params: requestParams
           }
         }

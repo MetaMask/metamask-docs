@@ -21,24 +21,24 @@ ZKsync Era is a zero-knowledge Ethereum Virtual Machine (zkEVM) that scales Ethe
 
 :::info see also
 
-See the [official ZKsync Era documentation](https://docs.zksync.io/build) for more information.
+See the [official ZKsync Era documentation](https://docs.zksync.io) for more information.
 
 :::
 
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "/services/reference/zksync/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the ZKsync Era network."
     },
     {
-      href: "json-rpc-methods",
+      href: "/services/reference/zksync/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the ZKsync Era network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
       description: "Learn how to create an API key, secure it, and share it with your team."
     }
@@ -47,10 +47,12 @@ See the [official ZKsync Era documentation](https://docs.zksync.io/build) for mo
 
 ## Partners and privacy policies
 
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
 The following partners provide access to the ZKsync Era network:
 
 <!-- markdown-link-check-disable -->
-
 - Chainstack ([Terms of Use](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
-- Laconic LLC ([Privacy Policy](https://www.laconic.com/privacy-policy))
+- Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf))
+- [NorthWest Nodes](https://northwestnodes.com/)
 <!-- markdown-link-check-enable -->

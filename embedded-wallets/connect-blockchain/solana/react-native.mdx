@@ -1,0 +1,236 @@
+---
+title: Integrate Embedded Wallets with the Solana Blockchain in React Native
+sidebar_label: React Native
+image: 'img/embedded-wallets/banners/solana.png'
+description: 'Integrate Embedded Wallets with the Solana Blockchain in React Native | Embedded Wallets'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+While using the Web3Auth React Native SDK, you get a native Solana provider that can be used with [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/). Use it to get accounts, balances, sign and send transactions, and sign messages.
+
+## Chain details for Solana
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
+    { label: "Devnet", value: "devnet" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x1
+- Public RPC URL: https://api.mainnet-beta.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Mainnet
+- Block Explorer Link: https://explorer.solana.com
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+
+<TabItem value="testnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x2
+- Public RPC URL: https://api.testnet.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Testnet
+- Block Explorer Link: https://explorer.solana.com
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+
+<TabItem value="devnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x3
+- Public RPC URL: https://api.devnet.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Devnet
+- Block Explorer Link: https://explorer.solana.com?cluster=devnet
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+</Tabs>
+
+## Installation
+
+To interact with the Solana blockchain in React Native, you can use [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) library with Web3Auth along with `@web3auth/solana-provider` package.
+
+```bash npm2yarn
+npm install --save @solana/web3.js @web3auth/solana-provider
+```
+
+## Initializing provider
+
+Using `solana` as `chainNamespace` while initializing `web3auth` will provide a Solana provider as **`web3auth.provider`** after successful authentication.
+
+### Getting the chainConfig
+
+```typescript
+import { getSolanaChainConfig } from '@web3auth/base'
+
+const chainConfig = getSolanaChainConfig(1, 'your_web3auth_client_id') // For Mainnet
+// const chainConfig = getSolanaChainConfig(2, 'your_web3auth_client_id') // For Testnet
+// const chainConfig = getSolanaChainConfig(3, 'your_web3auth_client_id') // For Devnet
+```
+
+## Initialize
+
+```tsx
+import { Web3Auth, WEB3AUTH_NETWORK, CHAIN_NAMESPACES } from '@web3auth/react-native-sdk'
+import { SolanaWallet } from '@web3auth/solana-provider'
+
+const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
+  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  chainConfig: {
+    chainNamespace: CHAIN_NAMESPACES.SOLANA,
+    chainId: '0x1', // Use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
+    rpcTarget: 'https://api.mainnet-beta.solana.com',
+  },
+})
+
+await web3auth.init()
+await web3auth.login()
+
+// Initialize Solana Wallet
+const solanaWallet = new SolanaWallet(web3auth.provider)
+```
+
+## Get accounts
+
+```tsx
+import { SolanaWallet } from '@web3auth/solana-provider'
+
+const solanaWallet = new SolanaWallet(web3auth.provider)
+
+// Get user's Solana public address
+const accounts = await solanaWallet.requestAccounts()
+console.log('Solana accounts', accounts)
+```
+
+## Get balance
+
+```tsx
+import { Connection, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
+
+const solanaWallet = new SolanaWallet(web3auth.provider)
+
+// Get connection config
+const connectionConfig = await solanaWallet.request({
+  method: 'solana_provider_config',
+  params: [],
+})
+
+const connection = new Connection(connectionConfig.rpcTarget)
+
+// Get accounts
+const accounts = await solanaWallet.requestAccounts()
+
+// Fetch the balance for the specified public key
+const balance = await connection.getBalance(new PublicKey(accounts[0]))
+const balanceInSOL = balance / LAMPORTS_PER_SOL
+console.log(`Balance: ${balanceInSOL} SOL`)
+```
+
+## Sign a transaction
+
+```tsx
+import {
+  Connection,
+  PublicKey,
+  Transaction,
+  SystemProgram,
+  LAMPORTS_PER_SOL,
+} from '@solana/web3.js'
+
+const solanaWallet = new SolanaWallet(web3auth.provider)
+
+// Get connection config
+const connectionConfig = await solanaWallet.request({
+  method: 'solana_provider_config',
+  params: [],
+})
+
+const connection = new Connection(connectionConfig.rpcTarget)
+const accounts = await solanaWallet.requestAccounts()
+const { blockhash } = await connection.getRecentBlockhash('finalized')
+
+// Create a transfer transaction
+const transaction = new Transaction({
+  recentBlockhash: blockhash,
+  feePayer: new PublicKey(accounts[0]),
+}).add(
+  SystemProgram.transfer({
+    fromPubkey: new PublicKey(accounts[0]),
+    toPubkey: new PublicKey(accounts[0]), // Self transfer for demo
+    lamports: 0.01 * LAMPORTS_PER_SOL,
+  })
+)
+
+// Sign the transaction
+const signedTransaction = await solanaWallet.signTransaction(transaction)
+console.log('Signed transaction', signedTransaction)
+```
+
+## Send transaction
+
+```tsx
+import {
+  Connection,
+  PublicKey,
+  Transaction,
+  SystemProgram,
+  LAMPORTS_PER_SOL,
+} from '@solana/web3.js'
+
+const solanaWallet = new SolanaWallet(web3auth.provider)
+
+// Get connection config
+const connectionConfig = await solanaWallet.request({
+  method: 'solana_provider_config',
+  params: [],
+})
+
+const connection = new Connection(connectionConfig.rpcTarget)
+const accounts = await solanaWallet.requestAccounts()
+const block = await connection.getLatestBlockhash('finalized')
+
+// Create a transfer transaction
+const transaction = new Transaction({
+  blockhash: block.blockhash,
+  lastValidBlockHeight: block.lastValidBlockHeight,
+  feePayer: new PublicKey(accounts[0]),
+}).add(
+  SystemProgram.transfer({
+    fromPubkey: new PublicKey(accounts[0]),
+    toPubkey: new PublicKey(accounts[0]), // Self transfer for demo
+    lamports: 0.01 * LAMPORTS_PER_SOL,
+  })
+)
+
+// Sign and send the transaction
+const { signature } = await solanaWallet.signAndSendTransaction(transaction)
+console.log('Transaction signature', signature)
+```
+
+## Sign a message
+
+```tsx
+const solanaWallet = new SolanaWallet(web3auth.provider)
+
+// Create message to sign
+const message = new TextEncoder().encode('Hello Solana from React Native!')
+
+// Sign the message
+const signedMessage = await solanaWallet.signMessage(message)
+console.log('Signed message', signedMessage)
+```

@@ -1,5 +1,6 @@
 ---
-description: SDK options
+description: Configuration options reference for MetaMask SDK.
+keywords: [SDK, configure, configuration, option, options, dapp]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -114,33 +115,11 @@ The metadata options are:
 - `iconUrl` - URL of the dapp's icon
 
 :::tip important
-Setting `dappMetaData` creates a clear and trustworthy user experience when connecting your dapp to
-MetaMask Mobile.
-MetaMask Mobile displays this metadata in the connection modal to help users identify and verify the
+Setting `dappMetaData` creates a clear and trustworthy user experience when connecting your dapp to the
+MetaMask mobile app.
+MetaMask displays this metadata in the connection modal to help users identify and verify the
 connection request.
 :::
-
-### `defaultReadOnlyChainId`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-defaultReadOnlyChainId: <number or hexadecimal string>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-defaultReadOnlyChainId: "0x1"
-```
-
-</TabItem>
-</Tabs>
-
-Enables sending read-only RPC requests to this chain ID before the user connects to MetaMask.
-The value is automatically updated to the chain ID used in MetaMask once connected.
 
 ### `enableAnalytics`
 
@@ -262,7 +241,7 @@ openDeeplink: (link: string) => {
 </TabItem>
 </Tabs>
 
-A function that is called to open a deeplink to the MetaMask Mobile app.
+A function that is called to open a deeplink to the MetaMask mobile app.
 
 ### `readonlyRPCMap`
 

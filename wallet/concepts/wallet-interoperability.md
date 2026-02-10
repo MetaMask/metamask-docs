@@ -1,5 +1,5 @@
 ---
-description: Learn about wallet interoperability.
+description: Learn about wallet interoperability via EIP-6963.
 ---
 
 # Wallet interoperability
@@ -26,14 +26,14 @@ provided from each installed wallet:
   </video>
 </p>
 
-You can [connect to MetaMask using EIP-6963](../how-to/connect.md) and see the
+You can [connect to MetaMask using EIP-6963](../how-to/connect-extension.md) and see the
 [EIP-6963 Vite React + TypeScript demo](https://github.com/MetaMask/vite-react-ts-eip-6963/tree/main)
 for more information.
 
 ## EIP-6963 interfaces
 
 Wallets that support EIP-6963 implement and expose the following standardized interfaces.
-When [connecting to MetaMask using EIP-6963](../how-to/connect.md), it's important to review
+When [connecting to MetaMask using EIP-6963](../how-to/connect-extension.md), it's important to review
 and understand these interfaces.
 
 ### Provider info
@@ -79,16 +79,18 @@ interface EIP6963RequestProviderEvent extends Event {
 
 The following third-party libraries support EIP-6963:
 
-- [Wagmi 2+](https://wagmi.sh)
-- [Web3Modal 3+](https://docs.walletconnect.com/web3modal/about)
+- [Wagmi 2+](/sdk/connect/javascript-wagmi)
+- [Reown AppKit](https://docs.reown.com/appkit/overview)
 - [MIPD Store](https://github.com/wevm/mipd)
-- [RainbowKit](https://www.rainbowkit.com/)
+- [RainbowKit](https://www.rainbowkit.com)
+- [Web3-Onboard](https://web3onboard.thirdweb.com)
+- [ConnectKit](https://family.co/docs/connectkit)
 
 ### MIPD Store
 
 The [MIPD Store](https://github.com/wevm/mipd) stores the wallet providers and enables you to
 subscribe to the store and retrieve the providers.
-Unlike [Wagmi](https://wagmi.sh) and [Web3-Onboard](https://onboard.blocknative.com/), which are
+Unlike [Wagmi](https://wagmi.sh) and [Web3-Onboard](https://web3onboard.thirdweb.com/), which are
 libraries that provide components and connectors for multiple wallets and depend on MetaMask SDK for
 integration, the MIPD Store is a utility library that makes it easier to work with EIP-6963 and
 supports TypeScript types.
@@ -97,8 +99,7 @@ supports TypeScript types.
 
 :::note
 MetaMask SDK does not support connecting to non-MetaMask wallets via EIP-6963.
-If you intend to support discovery of other wallets, we recommend using other methods of adding
-EIP-6963 support such as [Wagmi 2+](https://wagmi.sh).
+If you intend to support discovery of other wallets, we recommend using a third-party library such as [Wagmi](/sdk/connect/javascript-wagmi).
 :::
 
 [MetaMask SDK](/sdk) automatically checks for the presence of the MetaMask extension via EIP-6963.
@@ -109,10 +110,9 @@ By adhering to the standards set by EIP-6963, the SDK unambiguously identifies a
 MetaMask, resolving potential conflicts that might arise with other wallet extensions, ensuring a
 more stable and reliable interaction for users.
 
-The SDK is also being integrated into [Wagmi 2+](https://wagmi.sh/), which supports EIP-6963.
+The SDK is also integrated into third-party libraries, like [Wagmi](/sdk/connect/javascript-wagmi), which support EIP-6963.
 The SDK on its own supports connecting _only_ to MetaMask via EIP-6963, so if you intend to support
-discovery of other wallets, we recommend using other methods of adding EIP-6963 support, such as
-Wagmi 2+.
+discovery of other wallets, we recommend using third-party libraries.
 
 ## Wallet support
 

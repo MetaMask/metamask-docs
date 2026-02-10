@@ -1,8 +1,10 @@
 ---
-title: "Trace methods"
+title: Linea trace methods
+sidebar_label: Trace methods
+sidebar_key: linea-trace-methods
 ---
 
-# Trace methods
+# Linea trace methods
 
 Infura provides access to the following trace API methods to allow users to gain insights into the execution of smart contracts and transactions:
 
@@ -56,7 +58,7 @@ smart contract transaction. Excludes precompiled contracts.
 | `result`            | Transaction result.                                                                                       |
 | `gasUsed`           | Gas used by the transaction. Includes any refunds of unused gas.                                          |
 | `output`            | Return value of the contract call. Contains only the actual value sent by a `RETURN` operation. If a `RETURN` was not executed, the output is empty bytes.  |
-| `subTraces`         | Traces of contract calls made by the transaction.                                                         |
+| `subtraces`         | Traces of contract calls made by the transaction.                                                         |
 | `traceAddress`      | Tree list address of where the call occurred, address of the parents, and order of the current sub call.  |
 | `transactionHash`   | Hash of the transaction.                                                                                  |
 | `transactionPosition`| Transaction position.                                                                                    |

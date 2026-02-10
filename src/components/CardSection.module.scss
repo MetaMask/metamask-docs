@@ -1,14 +1,14 @@
 .wrapper {
   position: relative;
-  padding: 2rem 0 0;
-  overflow: hidden;
+  padding-top: 2rem;
+  overflow: visible;
 
   @include bp(tablet) {
-    padding-top: 3rem;
+    padding-top: 2.4rem;
   }
 
   @include bp(desktop) {
-    padding: 4rem 0 0;
+    padding-top: 3rem;
   }
 }
 
@@ -35,7 +35,32 @@
   }
 }
 
-.grid {
+.section-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @include bp('desktop') {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  // When there's no title or description, use full width for cards
+  &.cards-only {
+    @include bp('desktop') {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.content-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-wrapper {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
@@ -43,10 +68,48 @@
   @include bp('tablet') {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  @include bp('desktop') {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.grid > li {
-  &:last-child {
-    margin-bottom: 1.6rem;
+.card-column {
+  display: flex;
+}
+
+.header {
+  margin-bottom: 0;
+
+  h2 {
+    font-size: 2.4rem;
+    font-weight: 500;
+    margin: 0 0 2rem 0;
+    color: var(--color-text-heading);
+    line-height: 1.2;
+
+    @include bp(tablet) {
+      font-size: 2.8rem;
+    }
+
+    @include bp(desktop) {
+      font-size: 3.2rem;
+    }
+  }
+
+  p {
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin: 0;
+    color: var(--color-text-paragraph);
+    line-height: 1.5;
+
+    @include bp(tablet) {
+      font-size: 1.7rem;
+    }
+
+    @include bp(desktop) {
+      font-size: 1.8rem;
+    }
   }
 }

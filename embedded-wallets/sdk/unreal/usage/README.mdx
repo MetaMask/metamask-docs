@@ -1,0 +1,35 @@
+---
+title: Using Unreal SDK
+sidebar_label: Overview
+description: 'Web3Auth Unreal SDK Functions | Embedded Wallets'
+---
+
+Embedded Wallets provides a comprehensive set of functions to handle authentication, user management, and blockchain interactions in your Unreal Engine applications. These functions allow you to implement features like user login, multi-factor authentication, private key retrieval, and Wallet Services with minimal effort. Each function is designed to handle a specific aspect of Embedded Wallets' functionality, making it easy to integrate into your Unreal projects.
+
+## List of functions
+
+:::tip
+
+For detailed usage, configuration options, and code examples, refer to the dedicated documentation page for each function.
+
+:::
+
+### Authentication functions
+
+| Function Name | Description                                        |
+| ------------- | -------------------------------------------------- |
+| [`login()`](./login.mdx)     | Logs in the user with the selected login provider. |
+| [`logout()`](./logout.mdx)    | Logs out the user from the current session.        |
+
+### User management functions
+
+| Function Name   | Description                                     |
+| --------------- | ----------------------------------------------- |
+| [`getUserInfo()`](./getUserInfo.mdx) | Retrieves the authenticated user's information. |
+
+### Private key functions
+
+| Function Name | Description |
+| --- | --- |
+| [`getPrivKey()`](./getPrivKey.mdx) | Retrieve the user's secp256k1 private key for EVM-compatible chains. |
+| [`getEd25519PrivKey()`](./getEd25519PrivKey.mdx) | Retrieve the user's ed25519 private key for chains like Solana, Near, Algorand. |

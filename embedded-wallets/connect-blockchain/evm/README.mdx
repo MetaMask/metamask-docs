@@ -1,0 +1,27 @@
+---
+title: Integrate Embedded Wallets with EVM Compatible Chains
+sidebar_label: Overview
+image: 'img/embedded-wallets/banners/ethereum.png'
+description: 'Integrate Embedded Wallets with EVM Compatible Chains | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import EVMChains from '../_evm-chains.mdx'
+
+Embedded Wallet SDKs seamlessly integrate with all EVM-based chains, following the specifications outlined in EIP-155 and EIP-1193. Additionally, smart accounts are supported for all compatible chains.
+
+You can check out the following guides we've written for selected blockchains. We have covered a wide variety of EVM Chains, if anything is missing, you can add directly on the [Dashboard](#dashboard-configuration).
+
+<EVMChains />
+
+## Dashboard configuration
+
+::::info
+
+With Embedded Wallets v10 onward, chains are already added to the dashboard. You can use any chain from the extensive list of predefined chains and add more if needed by toggling them on. See our guide to [add custom chains](/embedded-wallets/dashboard/chains-and-networks/#adding-custom-networks) for more details.
+
+::::
+
+The Embedded Wallets Web SDK(`@web3auth/modal`) from v10 onward does not need any additional setup on the code side for blockchain connections. All of it is handled on the dashboard. We can use any chain from the extensive list of predefined chains and add more if we need.
+
+![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)

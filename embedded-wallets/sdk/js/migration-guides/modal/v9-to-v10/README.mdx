@@ -1,0 +1,176 @@
+---
+title: Migrating to the Web3Auth Web SDK v10
+description: Learn what has changed from Web3Auth v9 (Modal and No-Modal) to the v10 Web SDK with minimal changes and cleaner architecture.
+sidebar_label: v9 to v10
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# Web3Auth web SDK v10 migration guide
+
+This guide will help you upgrade your Web3Auth SDK integration from v9 (whether you were using the Modal or the `@web3auth/no-modal` SDK) to the **unified Web3Auth Web SDK v10**.
+
+Version 10 consolidates into a single powerful SDK that centralizes configuration in the Dashboard, eliminates frontend adapter complexity, and provides seamless custom UI support.
+
+## Why these changes?
+
+Web3Auth v9 offered separate modal and non-modal SDKs for flexibility. V10 consolidates these into a unified SDK that simplifies integration patterns, reduces boilerplate, and centralizes configuration.
+
+Building on the foundation of v9, key areas of evolution in v10 include:
+
+- **A unified and versatile SDK (`@web3auth/modal`):** Consolidates all functionalities into a single SDK supporting both pre-built modal UIs and custom user interfaces with one consistent API.
+- **Dashboard-centric configuration:** Login methods, connections (formerly verifiers), Smart Account settings, and chain configurations are managed through the Web3Auth Developer Dashboard (now the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)).
+- **Streamlined login and connection management:** Moves to a declarative approach with login methods defined on the dashboard and more direct client-side connection calls.
+- **Automated Blockchain Setup:** Standard blockchains no longer require manual `chainConfig` and `privateKeyProvider` setup as these are handled automatically via dashboard settings.
+- **Integrated smart account functionality:** Smart account configuration is managed on the dashboard with functionality built directly into the main SDK, eliminating separate provider packages.
+- **Simplified Multi-Factor Authentication (MFA):** MFA setup is streamlined with key settings configured directly during SDK initialization.
+- **Modernized framework support:** React and Vue applications now use streamlined hooks/composables with automatic SDK initialization.
+
+The result is a cleaner, more declarative, and more maintainable integration experience—especially for teams maintaining apps across multiple auth flows and chains, all using one SDK.
+
+## Installation
+
+Install the latest v10 unified SDK package. Depending on your framework, you'll primarily use one of the following:
+
+```bash npm2yarn
+npm install @web3auth/modal
+```
+
+## General migration points (applicable to all frameworks)
+
+### 1. Centralized chain configuration
+
+```typescript
+import { Web3Auth } from '@web3auth/modal'
+// remove-start
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+import { getEvmChainConfig } from '@web3auth/base'
+
+const chainConfig = getEvmChainConfig(1, WEB3AUTH_CLIENT_ID)
+
+const ethereumPrivateKeyProvider = EthereumPrivateKeyProvider({
+  config: { chainConfig },
+})
+// remove-end
+
+const web3auth = new Web3Auth({
+  clientId: WEB3AUTH_CLIENT_ID, // Get your Client ID from the Web3Auth Dashboard
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // remove-next-line
+  privateKeyProvider: ethereumPrivateKeyProvider,
+})
+```
+
+**In v10, chain configurations for standard EVM chains and passing of private key providers are not needed anymore. You will be able to switch chains in your dapp among the chains you've toggled on from the [Embedded Wallets dashboard](https://dashboard.web3auth.io).**
+
+![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)
+
+This means the `chainConfig` and `privateKeyProvider` properties in `Web3AuthOptions` are not needed for v10 if you're using standard chains configured on your dashboard.
+
+You can also add custom chains on the dashboard and use them in your dapp.
+
+### 2. Multi-Factor Authentication (MFA)
+
+MFA configuration has been streamlined. In v9, both `mfaLevel` and detailed factor configurations (`mfaSettings`) were set within the `@web3auth/auth-adapter`. This has changed in v10.
+
+MFA factor settings and level configuration have moved from `AuthAdapter` to `Web3AuthOptions`:
+
+```typescript
+// remove-start
+import { AuthAdapter } from '@web3auth/auth-adapter'
+
+const authAdapter = new AuthAdapter({
+  loginSettings: {
+    mfaLevel: 'mandatory', // e.g., default, optional, mandatory, none
+  },
+  adapterSettings: {
+    mfaSettings: {
+      deviceShareFactor: { enable: true, priority: 1, mandatory: true },
+      // ... other factors
+    },
+  },
+})
+// remove-end
+
+// add-start
+import { MFA_FACTOR, MFA_LEVELS, WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
+
+const web3AuthOptions: Web3AuthOptions = {
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  mfaLevel: MFA_LEVELS.MANDATORY,
+  mfaSettings: {
+    // Configure individual factors here
+    [MFA_FACTOR.DEVICE]: {
+      enable: true,
+      priority: 1,
+      mandatory: true,
+    },
+    [MFA_FACTOR.BACKUP_SHARE]: {
+      enable: true,
+      priority: 2,
+      mandatory: true,
+    },
+    // ... other factors
+  },
+}
+// add-end
+```
+
+**Key changes:**
+
+- **Individual MFA Factor Settings:** Move from `AuthAdapter.adapterSettings.mfaSettings` to `Web3AuthOptions.mfaSettings`
+- **Factor Keys:** Change from descriptive strings (for example, `deviceShareFactor`) to enum values (for example, `[MFA_FACTOR.DEVICE]`)
+- **MFA Level:** Move from `AuthAdapter.loginSettings.mfaLevel` to `Web3AuthOptions.mfaLevel`
+
+### 3. `useCoreKitKey` Renamed to `useSFAKey`
+
+Note that the parameter `useCoreKitKey` (v9) has been renamed to `useSFAKey` (v10). This is a breaking change if you were using it to get CoreKit keys. This parameter is part of the `Web3AuthOptions` object.
+
+```typescript
+const web3AuthOptions: Web3AuthOptions = {
+  // remove-next-line
+  useCoreKitKey: true,
+  // add-next-line
+  useSFAKey: true,
+}
+```
+
+### 4. `authenticateUser()` Renamed to `getIdentityToken()`
+
+In v9, the method `web3auth.authenticateUser()` was used to retrieve the user's ID token. In v10, this method has been renamed to `web3auth.getIdentityToken()`.
+
+The purpose and the structure of the returned ID token (a JWT containing user information) remain the same. This is primarily a naming convention change.
+
+```typescript
+// remove-next-line
+const userAuthInfo = await web3auth.authenticateUser()
+// add-next-line
+const userAuthInfo = await web3auth.getIdentityToken() // Returns { idToken: string }
+
+const idToken = userAuthInfo.idToken
+```
+
+**Wallet Services:** If you used the `@web3auth/wallet-services-plugin` in v9, see the 🛠️ [Wallet Services migration guide](./wallet-services.mdx) for migrating to the built-in integration.
+
+## Additional migration guides
+
+For specific functionality or frameworks, refer to these dedicated migration guides:
+
+**📋 Whitelabeling and UI customization:** If you had whitelabeling configurations (`uiConfig`, `modalConfig`, or `AuthAdapter` whitelabel settings) in v9, see the [whitelabeling migration guide](./whitelabeling.mdx) for detailed steps.
+
+**🔧 Smart account functionality:** If you used smart accounts in v9 with `@web3auth/account-abstraction-provider`, see the [smart account migration guide](./smart-accounts.mdx) for the new dashboard-centric approach.
+
+**🔐 Custom authentication:** If you used custom verifiers or aggregate verifiers in v9, see the [custom authentication migration guide](./custom-authentication.mdx) for migrating to the new connections system.
+
+**⚛️ React and Vue applications:** If you're using React or Vue with Embedded Wallets, see the framework-specific migration guides:
+
+- [React migration guide](../../../../react/migration-guides/modal-v9-to-v10-react.mdx)
+- [Vue migration guide](../../../../vue/migration-guides/modal-v9-to-v10-vue.mdx)
+
+## Next steps
+
+- See the [Embedded wallets documentation - Web SDK v10](https://web3auth.io/embedded-wallets/sdk/js)
+- [Web3Auth v10 examples on GitHub](https://github.com/Web3Auth/web3auth-examples)
+- [Join the community](https://web3auth.io/community)

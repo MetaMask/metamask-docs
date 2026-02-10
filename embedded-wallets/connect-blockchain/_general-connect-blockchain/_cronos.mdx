@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0x19
+- **Public RPC URL:** https://evm.cronos.org
+- **Display Name:** Cronos Mainnet
+- **Block Explorer Link:** https://cronoscan.com
+- **Ticker:** CRO
+- **Ticker Name:** Cronos
+
+</TabItem>
+
+<TabItem value="testnet">
+
+- **Chain ID:** 0x152
+- **Public RPC URL:** https://evm-t3.cronos.org
+- **Display Name:** Cronos Testnet
+- **Block Explorer Link:** https://testnet.cronoscan.com
+- **Ticker:** TCRO
+- **Ticker Name:** Test Cronos
+
+</TabItem>
+</Tabs>

@@ -51,7 +51,7 @@ The following globals are also available:
 
 :::info note
 To use Node.js built-in modules such as `crypto` and `path`, set the
-[`polyfills`](../../reference/cli/options.md#polyfills) configuration option to `true`.
+[`polyfills`](../../reference/config-options.md#polyfills) configuration option to `true`.
 :::
 
 ## Secure ECMAScript (SES)

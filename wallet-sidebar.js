@@ -13,12 +13,11 @@ const sidebar = {
       label: "How to",
       collapsible: true,
       collapsed: false,
-      link: { type: "generated-index", slug: "/how-to" },
       items: [
         {
           type: "doc",
-          label: "Connect to MetaMask",
-          id: "how-to/connect"
+          label: "Connect to the extension",
+          id: "how-to/connect-extension"
         },
         {
           type: "doc",
@@ -30,7 +29,6 @@ const sidebar = {
           label: "Manage networks",
           collapsible: true,
           collapsed: true,
-          link: { type: "generated-index", slug: "/how-to/manage-networks" },
           items: [
             {
               type: "doc",
@@ -41,6 +39,11 @@ const sidebar = {
               type: "doc",
               label: "Add a network",
               id: "how-to/manage-networks/add-network"
+            },
+            {
+              type: "doc",
+              label: "Interact with multiple networks simultaneously",
+              id: "how-to/manage-networks/use-multichain"
             }
           ]
         },
@@ -59,16 +62,24 @@ const sidebar = {
           ]
         },
         {
-          type: "doc",
+          type: "category",
           label: "Send transactions",
-          id: "how-to/send-transactions"
+          collapsible: true,
+          collapsed: true,
+          link: {type: "doc", id: "how-to/send-transactions/index" },
+          items: [
+            {
+              type: "doc",
+              label: "Send batch transactions",
+              id: "how-to/send-transactions/send-batch-transactions"
+            }
+          ]
         },
         {
           type: "category",
           label: "Display in MetaMask",
           collapsible: true,
           collapsed: true,
-          link: { type: "generated-index", slug: "/how-to/display" },
           items: [
             {
               type: "doc",
@@ -100,8 +111,13 @@ const sidebar = {
           link: { type: "doc", id: "how-to/use-non-evm-networks/index" },
           items: [
             {
+              type: "doc",
+              label: "Solana",
+              id: "how-to/use-non-evm-networks/solana"
+            },
+            {
               type: "category",
-              label: "Use Starknet",
+              label: "Starknet",
               link: { type: "doc", id: "how-to/use-non-evm-networks/starknet/index" },
               items: [
                 {
@@ -170,12 +186,16 @@ const sidebar = {
       label: "Concepts",
       collapsible: true,
       collapsed: true,
-      link: { type: "generated-index", slug: "/concepts" },
       items: [
         {
           type: "doc",
           label: "About the Wallet API",
           id: "concepts/wallet-api"
+        },
+        {
+          type: "doc",
+          label: "About the Multichain API",
+          id: "concepts/multichain-api"
         },
         {
           type: "doc",
@@ -204,7 +224,6 @@ const sidebar = {
       label: "Tutorials",
       collapsible: true,
       collapsed: true,
-      link: { type: "generated-index", slug: "/tutorials" },
       items: [
         {
           type: "doc",
@@ -228,18 +247,12 @@ const sidebar = {
       label: "Reference",
       collapsible: true,
       collapsed: false,
-      link: { type: "generated-index", slug: "/reference" },
       items: [
         {
           type: "category",
           label: "Non-EVM APIs",
           collapsible: true,
           collapsed: true,
-          link: {
-            type: "generated-index",
-            slug: "/reference/non-evm-apis",
-            description: "Use the following APIs to interact with users' non-EVM accounts."
-          },
           items: [
             {
               type: "doc",
@@ -252,6 +265,11 @@ const sidebar = {
           type: "doc",
           label: "Ethereum provider API",
           id: "reference/provider-api",
+        },
+        {
+          type: "doc",
+          label: "Multichain API",
+          id: "reference/multichain-api",
         },
         {
           type: "category",

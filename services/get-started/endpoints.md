@@ -10,14 +10,14 @@ import GasApiNetworks from "@site/src/components/GasApiNetworks.tsx";
 
 The following lists all the network endpoints supported by Infura.
 
-Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](../../../developer-tools/dashboard/).
+Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](/developer-tools/dashboard).
 
 ## Arbitrum
 
 | Network           | Description             | URL                                                     |
 |-------------------|-------------------------|---------------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://arbitrum-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
-| Mainnet           | JSON-RPC over WebSocket | `wss://arbitrum-mainnet.io/ws/v3/<YOUR-API-KEY>`        |
+| Mainnet           | JSON-RPC over WebSocket | `wss://arbitrum-mainnet.infura.io/ws/v3/<YOUR-API-KEY>`        |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://arbitrum-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://arbitrum-sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
@@ -26,7 +26,7 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 | Network        | Description             | URL                                                     |
 |----------------|-------------------------|---------------------------------------------------------|
 | Mainnet        | JSON-RPC over HTTPS     | `https://avalanche-mainnet.infura.io/v3/<YOUR-API-KEY>` |
-| Mainnet        | JSON-RPC over WebSocket | `wss://avalanche-mainnet.io/ws/v3/<YOUR-API-KEY>`       |
+| Mainnet        | JSON-RPC over WebSocket | `wss://avalanche-mainnet.infura.io/ws/v3/<YOUR-API-KEY>`       |
 | Testnet (Fuji) | JSON-RPC over HTTPS     | `https://avalanche-fuji.infura.io/v3/<YOUR-API-KEY>`    |
 | Testnet (Fuji) | JSON-RPC over WebSocket | `wss://avalanche-fuji.infura.io/ws/v3/<YOUR-API-KEY>`   |
 
@@ -60,9 +60,7 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 | Network             | Description             | URL                                                   |
 |---------------------|-------------------------|-------------------------------------------------------|
 | Mainnet             | JSON-RPC over HTTPS     | `https://celo-mainnet.infura.io/v3/<YOUR-API-KEY>`    |
-| Mainnet             | JSON-RPC over WebSocket | `wss://celo-mainnet.infura.io/ws/v3/<YOUR-API-KEY>`   |
-| Testnet (Alfajores) | JSON-RPC over HTTPS     | `https://celo-alfajores.infura.io/v3/<YOUR-API-KEY>`  |
-| Testnet (Alfajores) | JSON-RPC over WebSocket | `wss://celo-alfajores.infura.io/ws/v3/<YOUR-API-KEY>` |
+| Testnet (Sepolia)   | JSON-RPC over HTTPS     | `https://celo-sepolia.infura.io/v3/<YOUR-API-KEY>`    |
 
 ## Ethereum
 
@@ -70,10 +68,17 @@ Ensure that you replace `<YOUR-API-KEY>` with an API key from your [MetaMask Dev
 |-------------------|-------------------------|------------------------------------------------|
 | Mainnet           | JSON-RPC over HTTPS     | `https://mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
-| Testnet (Holesky) | JSON-RPC over HTTPS     | `https://holesky.infura.io/v3/<YOUR-API-KEY>`  |
-| Testnet (Holesky) | JSON-RPC over WebSocket | `wss://holesky.infura.io/ws/v3/<YOUR-API-KEY>` |
+| Testnet (Hoodi)   | JSON-RPC over HTTPS     | `https://hoodi.infura.io/v3/<YOUR-API-KEY>`    |
+| Testnet (Hoodi)   | JSON-RPC over WebSocket | `wss://hoodi.infura.io/ws/v3/<YOUR-API-KEY>`   |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
+
+## Hemi
+
+| Network | Description         | URL                                                  |
+|---------|---------------------|------------------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS | `https://hemi-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Testnet | JSON-RPC over HTTPS | `https://hemi-testnet.infura.io/v3/<YOUR-API-KEY>`  |
 
 ## IPFS
 
@@ -90,7 +95,7 @@ to have access to the IPFS network.
 
 :::info
 
-Include your authentication details when [making IPFS requests](/reference/ipfs/quickstart.md).
+Include your authentication details when [making IPFS requests](../reference/ipfs/quickstart.md).
 
 :::
 
@@ -103,6 +108,14 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://linea-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 | Testnet (Sepolia) | JSON-RPC over WebSocket | `wss://linea-sepolia.infura.io/ws/v3/<YOUR-API-KEY>` |
 
+## MegaETH
+
+| Network | Description             | URL                                          |
+|---------|-------------------------|----------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS     | `https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Mainnet | JSON-RPC over WebSocket | `wss://megaeth-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
+| Testnet | JSON-RPC over HTTPS     | `https://megaeth-testnet.infura.io/v3/<YOUR-API-KEY>`  |
+
 ## Mantle
 
 | Network           | Description             | URL                                              |
@@ -110,6 +123,13 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Mainnet           | JSON-RPC over HTTPS     | `https://mantle-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Mainnet           | JSON-RPC over WebSocket | `wss://mantle-mainnet.infura.io/ws/v3/<YOUR-API-KEY>` |
 | Testnet (Sepolia) | JSON-RPC over HTTPS     | `https://mantle-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
+
+## Monad
+
+| Network           | Description             | URL                                              |
+|-------------------|-------------------------|--------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS     | `https://monad-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Testnet           | JSON-RPC over HTTPS     | `https://monad-testnet.infura.io/v3/<YOUR-API-KEY>`  |
 
 ## opBNB
 
@@ -151,6 +171,25 @@ Include your authentication details when [making IPFS requests](/reference/ipfs/
 | Mainnet | JSON-RPC over HTTPS     | `https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
 | Sepolia | JSON-RPC over HTTPS     | `https://scroll-sepolia.infura.io/v3/<YOUR-API-KEY>`  |
 
+## Sei
+
+| Network | Description             | URL                                                   |
+|---------|-------------------------|-------------------------------------------------------|
+| Mainnet | JSON-RPC over HTTPS     | `https://sei-mainnet.infura.io/v3/<YOUR-API-KEY>`     |
+| Testnet | JSON-RPC over HTTPS     | `https://sei-testnet.infura.io/v3/<YOUR-API-KEY>`     |
+
+## Solana
+
+:::note limited access
+Solana access is currently limited to select customers. [Contact us](https://www.infura.io/contact)
+if you're interested in accessing these methods.
+:::
+
+| Network           | Description         | URL                                                    |
+|-------------------|---------------------|--------------------------------------------------------|
+| Mainnet           | JSON-RPC over HTTPS | `https://solana-mainnet.infura.io/v3/<YOUR-API-KEY>`  |
+| Testnet (Devnet)  | JSON-RPC over HTTPS | `https://solana-devnet.infura.io/v3/<YOUR-API-KEY>`   |
+
 ## Starknet
 
 | Network           | Description         | URL                                                    |
@@ -188,7 +227,7 @@ ZKsync Era WebSockets are supported on Mainnet only.
 
 ## Gas API
 
-The Gas REST API supports multiple networks.
+The [Gas REST API](../reference/gas-api/index.md) supports multiple networks.
 
 Specify the chain ID in your request to interact with the relevant network.
 

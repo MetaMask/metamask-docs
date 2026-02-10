@@ -1,0 +1,35 @@
+# MetaMask developer documentation
+
+These links contain LLM-readable files following the llmstxt.org standard, for each product section:
+
+- MetaMask SDK
+  - https://docs.metamask.io/llms-sdk.txt - Documentation links for MetaMask SDK
+  - https://docs.metamask.io/llms-sdk-full.txt - Complete documentation for MetaMask SDK
+
+- Wallet API
+  - https://docs.metamask.io/llms-wallet.txt - Documentation links for Wallet API
+  - https://docs.metamask.io/llms-wallet-full.txt - Complete documentation for Wallet API
+
+- Embedded Wallets
+  - https://docs.metamask.io/llms-embedded-wallets.txt - Documentation links for Embedded Wallets
+  - https://docs.metamask.io/llms-embedded-wallets-full.txt - Complete documentation for Embedded Wallets
+
+- Smart Accounts Kit
+  - https://docs.metamask.io/llms-smart-accounts-kit.txt - Documentation links for Smart Accounts Kit
+  - https://docs.metamask.io/llms-smart-accounts-kit-full.txt - Complete documentation for Smart Accounts Kit
+
+- Services
+  - https://docs.metamask.io/llms-services.txt - Documentation links for MetaMask services
+  - https://docs.metamask.io/llms-services-full.txt - Complete documentation for MetaMask services
+
+- Developer dashboard
+  - https://docs.metamask.io/llms-dashboard.txt - Documentation links for MetaMask Developer dashboard
+  - https://docs.metamask.io/llms-dashboard-full.txt - Complete documentation for MetaMask Developer dashboard
+
+- Snaps
+  - https://docs.metamask.io/llms-snaps.txt - Documentation links for Snaps
+  - https://docs.metamask.io/llms-snaps-full.txt - Complete documentation for Snaps
+  
+- Tutorials
+  - https://docs.metamask.io/llms-tutorials.txt - Documentation links for MetaMask tutorials
+  - https://docs.metamask.io/llms-tutorials-full.txt - Complete documentation for MetaMask tutorials

@@ -22,8 +22,6 @@ Always do your own research before installing a Snap.
 
 ## Prerequisites
 
-- Ensure you have filled out the [Snap Builders Onboarding Form](https://feedback.metamask.io/snaps-onboarding).
-
 - Ensure that your Snap:
 
   - Has publicly available source code.
@@ -34,7 +32,7 @@ Always do your own research before installing a Snap.
 
 - Remove any `console` logs, "to-do" comments, and unused permissions or methods.
 
-- Scan your Snap for security vulnerabilities using [Snapper](https://github.com/sayfer-io/Snapper) and 
+- Scan your Snap for security vulnerabilities using [Snapper](https://github.com/sayfer-io/Snapper) and
   resolve any reported issues.
 
 - If your Snap uses any of the following API methods related to key management, you must provide
@@ -53,7 +51,7 @@ Always do your own research before installing a Snap.
 
   :::info
   A list of approved third-party auditors and details about the audit process are available on the
-  [MetaMask Snaps Builder Engagement Program](https://consensys.notion.site/Audit-process-1acbc67819dc4631b7a3d6c664e387a3).
+  [MetaMask Snaps Wiki](https://github.com/MetaMask/snaps/wiki/Audits).
   :::
 
 ## Steps
@@ -85,7 +83,7 @@ The form requests information about your Snap, including the following:
   For example: _After installing the Snap, visit the companion dapp at
   https://voyager-snap.linea.build to connect an account and track your Linea Voyage progress._
 
-- **GitHub repository and npm package URLs** - The public GitHub repo that hosts your Snap's
+- **GitHub repository and npm package URLs** - The public GitHub repo that hosts your Snap's 
   source code, and the npm package of your [published Snap](../how-to/publish-a-snap.md).
   If your Snap's source code is hosted on a different site, such as GitLab, you can link to that instead.
 
@@ -103,7 +101,7 @@ The form requests information about your Snap, including the following:
   :::
 
 - **Customer support details** -
-  [Customer support information](https://consensys.notion.site/Providing-User-Support-Information-cff79a7d896e4da6a2f8a17ce074e585)
+  [Customer support information](https://github.com/MetaMask/snaps/wiki/User-Support-Information)
   to ensure a smooth user experience for your Snap.
   This allows MetaMask to escalate any issues that a user might encounter with your Snap.
   The escalation contact will be kept confidential within MetaMask, and the rest of the information

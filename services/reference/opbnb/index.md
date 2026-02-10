@@ -34,27 +34,29 @@ Select an option below to get started with the opBNB network.
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "/services/reference/opbnb/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the opBNB network."
     },
     {
-      href: "json-rpc-methods",
+      href: "/services/reference/opbnb/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the opBNB network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
-      description: "Learn how to create an API key and secure and share it with your team."
+      description: "Learn how to create and secure an API key."
     }
   ]}
 />
 
 ## Partners and privacy policies
 
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
 The following partners provide access to the opBNB network:
 <!-- markdown-link-check-disable -->
 - Infstones ([Privacy Policy](https://infstones.com/terms/privacy-notice))
-- NodeReal ([Privacy Policy](https://nodereal.io/privacy-policy))
+- Validation Cloud ([Terms of Use](https://www.validationcloud.io/terms), [Privacy Policy](https://www.validationcloud.io/privacy))
 <!-- markdown-link-check-enable -->

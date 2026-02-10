@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Sepolia Testnet", value: "sepolia" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0xB9
+- **Public RPC URL:** https://rpc.mintchain.io
+- **Display Name:** Mint Mainnet
+- **Block Explorer Link:** https://explorer.mintchain.io
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+
+<TabItem value="sepolia">
+
+- **Chain ID:** 0x697
+- **Public RPC URL:** https://sepolia-testnet-rpc.mintchain.io
+- **Display Name:** Mint Sepolia Testnet
+- **Block Explorer Link:** https://sepolia-testnet-explorer.mintchain.io
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+</Tabs>

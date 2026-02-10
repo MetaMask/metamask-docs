@@ -1,2 +1,5 @@
-Polling method for a filter, which returns an array of logs which occurred since the last poll.
-Filter must be created by calling either [`eth_newFilter`](../../ethereum/json-rpc-methods/filter-methods/eth_newfilter.mdx) or [`eth_newBlockFilter`](../../ethereum/json-rpc-methods/filter-methods/eth_newblockfilter.mdx).
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+Polling method for a filter, which returns an array of logs which occurred since the last poll. <CreditCost network="evm_filter" method="eth_getFilterChanges" />
+
+Filter must be created by calling either [`eth_newFilter`](../eth_newfilter) or [`eth_newBlockFilter`](../eth_newblockfilter).

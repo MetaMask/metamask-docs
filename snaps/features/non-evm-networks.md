@@ -44,7 +44,7 @@ The general rule is: **Don't create a situation where your users can lose assets
 
 To derive a user's private keys:
 
-1. Choose between the BIP-32 or BIP-44 specifications to derive the user's private keys.
+1. Choose between the [BIP-32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki) or [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) specifications to derive the user's private keys.
    If the keys you want to derive conform to the
    [BIP-44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) structure, use
    [`snap_getBip44Entropy`](../reference/snaps-api.md#snap_getbip44entropy) to derive them.

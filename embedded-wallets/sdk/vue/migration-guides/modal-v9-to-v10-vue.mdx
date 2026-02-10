@@ -1,0 +1,225 @@
+---
+title: Migrating Vue Applications from v9 to v10
+description: Comprehensive guide for migrating Web3Auth Vue applications from v9 to v10 with composables.
+sidebar_label: v9 to v10
+---
+
+This guide focuses specifically on migrating Vue applications from Web3Auth v9 to v10. This is a supplementary guide to the main [v9 to v10 migration guide](../../js/migration-guides/modal/v9-to-v10/README.mdx).
+
+For general migration points (for example, chain configuration, MFA, method renames), please refer to the main migration guide.
+
+## Migrating a Vue application
+
+This section focuses on changes specific to migrating a Web3Auth v9 Vue application to v10 using `@web3auth/modal/vue`.
+
+### Vue plugin setup and configuration
+
+In Vue applications, Web3Auth is typically initialized as a plugin. The setup process involves creating a Web3Auth configuration and integrating it with your Vue application.
+
+```typescript title="main.ts"
+import { createApp } from 'vue'
+import { createWeb3AuthPlugin } from '@web3auth/modal/vue'
+import App from './App.vue'
+import web3AuthConfig from './web3authConfig' // see config file below
+
+const app = createApp(App)
+
+// Create and use the Web3Auth plugin
+const web3AuthPlugin = createWeb3AuthPlugin(web3AuthConfig)
+app.use(web3AuthPlugin)
+
+app.mount('#app')
+```
+
+```typescript title="web3authConfig.ts"
+import { WEB3AUTH_NETWORK } from '@web3auth/modal'
+import { type Web3AuthContextConfig } from '@web3auth/modal/vue'
+
+const clientId = 'YOUR_V10_CLIENT_ID' // Get from https://dashboard.web3auth.io
+
+const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId,
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  },
+}
+
+export default web3AuthConfig
+```
+
+### Vue composables path and `WalletServicesPlugin` updates
+
+Previously, Vue composables were at `@web3auth/modal-vue-composables`. Now, they are consolidated and imported from `@web3auth/modal/vue`. `WalletServicesPlugin` functionality is also integrated into these composables, whereas previously with v9 it was imported via `@web3auth/wallet-services-plugin-vue-composables`.
+
+### v10 Vue composables usage
+
+All composables are now streamlined under `@web3auth/modal/vue`:
+
+```vue title="App.vue"
+<template>
+  <div>
+    <button v-if="!isConnected" @click="connect">Connect Wallet</button>
+    <div v-else>
+      <p>Connected as: {{ userInfo?.name || 'Unknown' }}</p>
+      <button @click="disconnect">Disconnect</button>
+      <button @click="showWallet">Show Wallet UI</button>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+  import {
+    useWeb3Auth,
+    useWeb3AuthConnect,
+    useWeb3AuthDisconnect,
+    useIdentityToken,
+    useWeb3AuthUser,
+    useSwitchChain,
+    useEnableMFA,
+    useManageMFA,
+    useWalletConnectScanner, // Wallet Services
+    useWalletUI, // Wallet Services
+    useCheckout, // Wallet Services
+    useSwap, // Wallet Services
+    useWalletServicesPlugin, // Wallet Services
+  } from '@web3auth/modal/vue'
+
+  const { isConnected, isInitialized } = useWeb3Auth()
+  const { connect } = useWeb3AuthConnect()
+  const { disconnect } = useWeb3AuthDisconnect()
+  const { userInfo } = useWeb3AuthUser()
+  const { showWalletUI } = useWalletUI()
+
+  const showWallet = async () => {
+    try {
+      await showWalletUI()
+    } catch (error) {
+      console.error('Error showing wallet UI:', error)
+    }
+  }
+</script>
+```
+
+### Vue composable structure
+
+The new composable structure is more granular:
+
+- **Core Web3Auth:**
+  - `useWeb3Auth`: Core composable for Web3Auth initialization and state management.
+- **Authentication:**
+  - `useWeb3AuthConnect`: Handles Web3Auth connection processes.
+  - `useWeb3AuthDisconnect`: Manages disconnection from Web3Auth.
+- **Identity:**
+  - `useIdentityToken`: Retrieves and manages identity tokens.
+  - `useWeb3AuthUser`: Provides access to the authenticated user's information.
+- **Blockchain:**
+  - `useSwitchChain`: Allows switching between different blockchain networks.
+- **MFA:**
+  - `useEnableMFA`: Enables Multi-Factor Authentication (MFA) for enhanced security.
+  - `useManageMFA`: Provides functionality to manage MFA settings.
+- **Wallet Services plugin (now integrated):**
+  - `useWalletServicesPlugin`: Composable to access the Wallet Services plugin context and its functions.
+  - `useWalletConnectScanner`: Integrates WalletConnect scanner functionality.
+  - `useWalletUI`: Manages wallet UI components and user interactions.
+  - `useCheckout`: Facilitates cryptocurrency checkout processes.
+  - `useSwap`: Enables token swapping capabilities.
+
+Please refer to the [Vue Modal SDK documentation](/embedded-wallets/sdk/vue/) for the SDK reference.
+
+### Common Vue migration patterns
+
+Here are some common migration patterns when updating your Vue application from v9 to v10:
+
+#### Updating existing Vue components
+
+If you have existing Vue components using v9 composables, here's how to migrate them:
+
+**v9 Example:**
+
+```vue
+<script setup lang="ts">
+  import { useWeb3Auth } from '@web3auth/modal-vue-composables'
+  import { useWalletServicesPlugin } from '@web3auth/wallet-services-plugin-vue-composables'
+
+  const { web3Auth, isConnected, connect, disconnect } = useWeb3Auth()
+  const { isPluginConnected, showWalletUI } = useWalletServicesPlugin()
+</script>
+```
+
+**v10 Migration:**
+
+```vue
+<script setup lang="ts">
+  import {
+    useWeb3Auth,
+    useWeb3AuthConnect,
+    useWeb3AuthDisconnect,
+    useWalletUI,
+  } from '@web3auth/modal/vue'
+
+  const { isConnected } = useWeb3Auth()
+  const { connect } = useWeb3AuthConnect()
+  const { disconnect } = useWeb3AuthDisconnect()
+  const { showWalletUI } = useWalletUI()
+</script>
+```
+
+#### Error handling and loading states
+
+v10 composables provide better error handling and loading state management:
+
+```vue
+<template>
+  <div>
+    <button v-if="!isConnected" @click="handleConnect" :disabled="isConnecting">
+      {{ isConnecting ? 'Connecting...' : 'Connect Wallet' }}
+    </button>
+    <div v-else>
+      <p>Connected!</p>
+      <button @click="handleDisconnect" :disabled="isDisconnecting">
+        {{ isDisconnecting ? 'Disconnecting...' : 'Disconnect' }}
+      </button>
+    </div>
+
+    <div v-if="error" class="error">Error: {{ error.message }}</div>
+  </div>
+</template>
+
+<script setup lang="ts">
+  import { computed } from 'vue'
+  import { useWeb3Auth, useWeb3AuthConnect, useWeb3AuthDisconnect } from '@web3auth/modal/vue'
+
+  const { isConnected } = useWeb3Auth()
+  const { connect, isConnecting, error: connectError } = useWeb3AuthConnect()
+  const { disconnect, isDisconnecting, error: disconnectError } = useWeb3AuthDisconnect()
+
+  const error = computed(() => connectError.value || disconnectError.value)
+
+  const handleConnect = async () => {
+    try {
+      await connect()
+    } catch (err) {
+      console.error('Connection failed:', err)
+    }
+  }
+
+  const handleDisconnect = async () => {
+    try {
+      await disconnect()
+    } catch (err) {
+      console.error('Disconnection failed:', err)
+    }
+  }
+</script>
+```
+
+## Package removal
+
+When migrating Vue applications, ensure you remove these deprecated packages:
+
+- `@web3auth/modal-vue-composables`
+- `@web3auth/wallet-services-plugin-vue-composables`
+
+## Next steps
+
+Return to the main [v9 to v10 migration guide](../../js/migration-guides/modal/v9-to-v10/README.mdx) to continue with other migration aspects like MFA configurations, method renames, and chain configuration changes.

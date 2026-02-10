@@ -1,0 +1,139 @@
+---
+title: PnP iOS SDK - v7 to v8
+
+description: 'PnP iOS SDK - v7 to v8 | Embedded Wallets'
+sidebar_label: v7 to v8
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+# Migration guide from v7 to v8 for Web3Auth PnP iOS SDK
+
+## Overview
+
+This migration guide provides steps for upgrading from version 7(v7) to version 8(v8) of the Web3Auth PnP iOS SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate Multi-Factor Authentication (MFA) setup flow, `request` method for transaction confirmation screens, and `launchWalletServices` method for template wallet interface.
+
+## Changes in detail
+
+### `enableMFA` method
+
+From v8, developers can now use the `enableMFA` method to initiate MFA setup flow for already logged in users.
+
+<Tabs
+  defaultValue="default-verifier"
+  values={[
+    { label: "Default Verifier", value: "default-verifier" },
+    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+  ]}
+>
+
+<TabItem value = "default-verifier">
+```swift title="Usage"
+do {
+	// focus-next-line
+	let isMFAEnabled = try await self.web3Auth.enableMFA()
+} catch {
+	print(error.localizedDescription)
+	// Handle Error
+}
+```
+</TabItem>
+
+<TabItem value = "custom-jwt-verifier">
+
+```swift title="Usage"
+do {
+	let loginParams = W3ALoginParams(
+		.JWT,
+		extraLoginOptions: .init(id_token: "your_jwt_token")
+  	)
+
+    // focus-next-line
+    let isMFAEnabled = try await self.web3Auth.enableMFA(loginParams)
+
+} catch {
+  print(error.localizedDescription)
+  // Handle Error
+}
+
+```
+
+</TabItem>
+</Tabs>
+
+### `launchWalletServices` method
+
+From v8, developers can use the `launchWalletServices` to launches a WebView which allows them to use the templated wallet UI services. Developers can pass the `ChainConfig` in `W3AInitParams` to open Wallet Services with a specific chain selected.
+
+:::note
+
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+
+:::
+
+#### ChainConfig arguments
+
+| Parameter | Description |
+| --- | --- |
+| `chainNamespace` | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.eip155`. |
+| `decimals?` | Number of decimals for the currency ticker. Default value is 18, and accepts `int` as value. |
+| `blockExplorerUrl?` | Blockchain's explorer URL. (for example, `https://etherscan.io`) |
+| `chainId` | The chain ID of the selected blockchain in hex `String`. |
+| `displayName?` | Display Name for the chain. |
+| `logo?` | Logo for the selected `chainNamespace` & `chainId`. |
+| `rpcTarget` | RPC Target URL for the selected `chainNamespace` & `chainId`. |
+| `ticker?` | Default currency ticker of the network (for example, `ETH`) |
+| `tickerName?` | Name for currency ticker (for example, `Ethereum`) |
+
+#### Usage
+
+```swift title="Usage"
+do {
+  var chainConfig = ChainConfig(
+    chainNamespace: ChainNamespace.eip155,
+    chainId: "0x1",
+    rpcTarget: "https://mainnet.infura.io/v3/${key}",
+    ticker: "ETH"
+  )
+
+  val web3Auth = await Web3Auth(.init(
+    clientId: clientID,
+    network: network,
+    buildEnv: buildEnv,
+    // focus-start
+    chainConfig: chainConfig
+  ))
+
+  // focus-start
+  try await web3Auth?.launchWalletServices(
+    W3ALoginParams(loginProvider: .GOOGLE),
+  )
+  // focus-end
+} catch {
+  // Handle error
+}
+```
+
+### `request` method
+
+Now, developers can use the `request` method to use the templated transaction confirmation screens for signing transactions. To retrive the signature for the request, developers can use the `getSignResponse` static method.
+
+```swift title="Usage"
+var params = [Any]()
+params.append("Hello, Web3Auth from Android!")
+params.append("0x764dd67c0420b43a39ab337463d8995622f226a2")
+params.append("Web3Auth")
+
+do {
+  // focus-start
+  try await self.web3Auth?.request(
+    W3ALoginParams(loginProvider: .GOOGLE, mfaLevel: .NONE),
+    method: "personal_sign",
+    requestParams: params
+  )
+  // focus-end
+} catch {
+  // Handle error
+}
+```

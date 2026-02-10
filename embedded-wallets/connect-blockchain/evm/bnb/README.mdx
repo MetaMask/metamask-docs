@@ -1,0 +1,98 @@
+---
+title: Integrate Embedded Wallets with the BNB Blockchain
+sidebar_label: Overview
+
+keywords:
+  [
+    bnb,
+    wallet,
+    integration,
+    web3auth,
+    API,
+    SDK,
+    authentication,
+    blockchain,
+    solution,
+    development,
+  ]
+image: 'img/embedded-wallets/banners/bnb.png'
+description: 'Integrate Embedded Wallets with the BNB Blockchain | Embedded Wallets'
+---
+
+import Tiles from '@theme/Tiles'
+import ChainDetailsBnb from '../../_general-connect-blockchain/_bnb.mdx'
+
+Integrate Web3Auth seamlessly with EVM-based BNB blockchain. For Web SDKs, Web3Auth returns a provider that can be directly used to initialize the libraries like ethers.js, web3.js etc. and make blockchain calls, while for Mobile & Gaming SDKs, the private key is available in the user scope which can be used in a similar way to initialize the respective blockchain interaction libraries and make calls to the network.
+
+This documentation provides a straightforward guide for developers looking to implement blockchain connections quickly and effortlessly across various platforms.
+
+## Chain details for BNB
+
+<ChainDetailsBnb />
+
+export const Bnb = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/react',
+          },
+            {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/vue',
+      },
+
+      {
+        key: 'javascript',
+        title: 'JavaScript',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/javascript',
+      },
+      {
+        key: 'android',
+        title: 'Android (Kotlin)',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/android',
+      },
+      {
+        key: 'apple',
+        title: 'iOS (Swift)',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/ios',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/flutter',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/react-native',
+          },
+          {
+            key: 'node',
+            title: 'Node',
+            icon: 'logo-nodejs.png',
+            path: '/embedded-wallets/connect-blockchain/evm/bnb/node',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/connect-blockchain/evm/bnb/unity',
+      },
+    ],
+
+},
+]
+
+<Tiles tileGroups={Bnb} />

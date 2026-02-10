@@ -1,0 +1,370 @@
+---
+title: Custom Authentication
+sidebar_label: Custom Authentication
+description: '@web3auth/modal Custom Authentication | Embedded Wallets'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+import SingleModalConnections from './_custom-authentication-snippets/_single_modal_connections.mdx'
+import GroupedModalConnections from './_custom-authentication-snippets/_grouped_modal_connections.mdx'
+import ImplicitLoginGoogle from './_custom-authentication-snippets/_implicit_login_google.mdx'
+import ImplicitLoginFacebook from './_custom-authentication-snippets/_implicit_login_facebook.mdx'
+import ImplicitLoginDiscord from './_custom-authentication-snippets/_implicit_login_discord.mdx'
+import ImplicitLoginTwitch from './_custom-authentication-snippets/_implicit_login_twitch.mdx'
+import ImplicitLoginAuth0Google from './_custom-authentication-snippets/_implicit_login_auth0_google.mdx'
+import ImplicitLoginAuth0Spa from './_custom-authentication-snippets/_implicit_login_auth0_spa.mdx'
+import ImplicitLoginAwsCognito from './_custom-authentication-snippets/_implicit_login_aws_cognito.mdx'
+import JwtLoginGoogleOneTap from './_custom-authentication-snippets/_jwt_login_google_one_tap.mdx'
+import JwtLoginAuth0 from './_custom-authentication-snippets/_jwt_login_auth0.mdx'
+import JwtLoginFirebase from './_custom-authentication-snippets/_jwt_login_firebase.mdx'
+import JwtLoginCustom from './_custom-authentication-snippets/_jwt_login_custom.mdx'
+import GroupedAuthImplicitAuth0 from './_custom-authentication-snippets/_grouped_auth_implicit_auth0.mdx'
+import GroupedAuthJwtAuth0 from './_custom-authentication-snippets/_grouped_auth_jwt_auth0.mdx'
+import GroupedAuthFirebase from './_custom-authentication-snippets/_grouped_auth_firebase.mdx'
+
+Custom authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
+
+This feature, with MFA turned off, can make Embedded Wallets invisible to the end user.
+
+<GrowthPlanNote />
+
+## Getting an Auth Connection ID
+
+:::info prerequisite
+
+To enable this, you need to [create a connection](../../../dashboard/authentication.mdx) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+
+:::
+
+To configure a connection, you need to provide the particular details of the connection into our Embedded Wallets dashboard. This enables us to map a `authConnectionId` with your connection details. This `authConnectionId` helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
+
+:::tip
+
+Learn more about the [auth provider setup](../../../authentication/README.mdx) and the different configurations available for each connection.
+
+:::
+
+## Modal custom authentication
+
+The basic custom authentication is available directly in the modal. You can configure each of the auth providers in the modal to direct to your `authConnectionId`.
+
+:::note
+
+You can only configure implicit login via modal, for JWT-based logins, you need to create your own UI and use the `connectTo` function.
+
+:::
+
+For the modal custom authentication, you need to pass the `modalConfig` object to the `Web3AuthOptions` object within the constructor.
+
+> **Read more about the `modalConfig` object in the [Whitelabel](./whitelabel.mdx) section.**
+
+### Usage
+
+<Tabs>
+  <TabItem value="Single connections">
+    <SingleModalConnections />
+  </TabItem>
+  <TabItem value="Grouped connections">
+    <GroupedModalConnections />
+  </TabItem>
+</Tabs>
+
+## Advanced custom authentication
+
+The more advanced custom authentication is available via the `connectTo` function. This allows you to any service you want and tie it to your Web3Auth Integration. **This method allows you to make Web3Auth totally invisible to your end users and have a fully whitelabeled experience all across.**
+
+You can utilise this function to enable multiple types of connections like:
+
+- Implicit login connections
+- JWT login connections
+- Grouped auth connections
+
+<details>
+  <summary>`connectTo` Function Reference</summary>
+
+```ts
+connectTo<T extends WALLET_CONNECTOR_TYPE>(
+  connector: T,
+  params?: LoginParamMap[T]
+): Promise<IProvider | null>;
+
+export type LoginParamMap = {
+    [WALLET_CONNECTORS.AUTH]: Partial<AuthLoginParams>;
+    ...
+};
+```
+
+#### `AuthLoginParams`
+
+<Tabs>
+  <TabItem value="Table">
+
+| Parameter                  | Description                                                |
+| -------------------------- | ---------------------------------------------------------- |
+| `loginHint?`               | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` and `sms_passwordless` logins. |
+| `idToken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                            |
+| `authConnection?`          | The auth provider to use for login (for example, "google", "facebook").                                                                   |
+| `authConnectionId?`        | The ID configured in your Embedded Wallets dashboard for the connection.                                                                   |
+| `groupedAuthConnectionId?` | The grouped Auth Connection ID to be used for login.                                                                               |
+| `extraLoginOptions?`       | Custom OAuth options (for example, login_hint, domain).                                                                             |
+
+  </TabItem>
+
+  <TabItem value="Interface">
+    ```tsx
+    export type AuthLoginParams = LoginParams & {
+      loginHint?: string;
+      idToken?: string;
+  };
+    export type LoginParams = {
+  /**
+   * Any custom state you wish to pass along. This will be returned to you post redirect.
+   * Use this to store data that you want to be available to the dapp after login.
+   */
+  appState?: string;
+  /**
+   * The auth connection to be used for login.
+   */
+  authConnection: AUTH_CONNECTION_TYPE | CUSTOM_AUTH_CONNECTION_TYPE;
+  /**
+   * The auth connection ID to be used for login.
+   */
+  authConnectionId?: string;
+  /**
+   * The grouped auth connection ID to be used for login.
+   */
+  groupedAuthConnectionId?: string;
+  /**
+   * You can set the `mfaLevel` to customize when mfa screen should be shown to user.
+   * It currently accepts 4 values:-
+   * - `'default'`: Setting mfa level to `default` will present mfa screen to user on every third login.
+   * - `'optional'`: Setting mfa level to `default` will present mfa screen to user on every login but user can skip it.
+   * - `'mandatory'`: Setting mfa level to `mandatory` will make it mandatory for user to setup mfa after login.
+   * - `'none'`: Setting mfa level to `none` will make the user skip the mfa setup screen
+   *
+   * Defaults to `none`
+   * @defaultValue `none`
+   */
+  mfaLevel?: MfaLevelType;
+  /**
+   * This option is for internal use only in torus wallet and has no effect
+   * on user's login on other dapps.
+   *
+   * Defaults to false
+   * @defaultValue false
+   * @internal
+   */
+  getWalletKey?: boolean;
+  /**
+   * extraLoginOptions can be used to pass standard oauth login options to
+   * loginProvider.
+   *
+   * For ex: you will have to pass `login_hint` as user's email and `domain`
+   * as your app domain in `extraLoginOptions` while using `email_passwordless`
+   * loginProvider
+   */
+  extraLoginOptions?: ExtraLoginOptions;
+  /**
+   * Custom Logins can get a dapp share returned to them post successful login.
+   * This is useful if the dapps want to use this share to allow users to login seamlessly
+   * dappShare is a 24 word seed phrase
+   */
+  dappShare?: string;
+  /**
+   * This curve will be used to determine the public key encoded in the jwt token which returned in
+   * `getUserInfo` function after user login.
+   * You can use that public key from jwt token as a unique user identifier in your backend.
+   *
+   * - `'secp256k1'`: secp256k1 based pub key is added as a wallet public key in jwt token to use.
+   * - `'ed25519'`: ed25519 based pub key is added as a wallet public key in jwt token to use.
+   *
+   * Note: This parameter won't change format of private key returned by auth. Private key returned
+   * by auth is always `secp256k1`.
+   *
+   *
+   * @defaultValue secp256k1
+   */
+  curve?: SUPPORTED_KEY_CURVES_TYPE;
+  /**
+   * Allows the dapp to set a custom redirect url for the manage mfa flow.
+   *
+   */
+  dappUrl?: string;
+};
+    ```
+  </TabItem>
+</Tabs>
+
+#### Auth connection types
+```ts
+export const AUTH_CONNECTION = {
+  GOOGLE: 'google',
+  TWITTER: 'twitter',
+  FACEBOOK: 'facebook',
+  DISCORD: 'discord',
+  FARCASTER: 'farcaster',
+  APPLE: 'apple',
+  GITHUB: 'github',
+  REDDIT: 'reddit',
+  LINE: 'line',
+  KAKAO: 'kakao',
+  LINKEDIN: 'linkedin',
+  TWITCH: 'twitch',
+  TELEGRAM: 'telegram',
+  WECHAT: 'wechat',
+  EMAIL_PASSWORDLESS: 'email_passwordless',
+  SMS_PASSWORDLESS: 'sms_passwordless',
+  CUSTOM: 'custom',
+}
+```
+
+#### Advanced options (`extraLoginOptions`)
+
+For custom integrations (like Auth0, AWS Cognito), you can provide additional options:
+
+<Tabs>
+  <TabItem value="Table">
+
+| Parameter               | Description                                                 |
+| ----------------------- | ----------------------------------------------------------- |
+| `isUserIdCaseSensitive` | Whether the user ID field is case sensitive [Default: true] |
+| `domain`                | Auth provider domain (for example, "example.auth0.com")     |
+| `client_id`             | Client ID from your auth provider                           |
+| `scope`                 | OAuth scopes (for example, "email profile openid")          |
+| `response_type`         | Response type for OAuth flow                                |
+| `login_hint`            | Pre-fill user identifier                                    |
+
+  </TabItem>
+  <TabItem value="Interface">
+    ```ts
+    export type ExtraLoginOptions = Auth0ClientOptions;
+
+    export interface Auth0ClientOptions extends BaseLoginOptions {
+    /**
+     * Your Auth0 account domain such as `'example.auth0.com'`,
+     * `'example.eu.auth0.com'` or , `'example.mycompany.com'`
+     * (when using [custom domains](https://auth0.com/docs/custom-domains))
+     */
+    domain?: string;
+    /**
+     * The Client ID found on your Application settings page
+     */
+    client_id?: string;
+    /**
+     * The field in jwt token which maps to user id
+     */
+    userIdField?: string;
+    /**
+     * Whether the user ID field is case sensitive
+     * @defaultValue true
+     */
+    isUserIdCaseSensitive?: boolean;
+    id_token?: string;
+    access_token?: string;
+    /**
+     * The route for user info endpoint. This will be padded to domain
+     * @defaultValue userinfo
+     * */
+    user_info_route?: string;
+    /**
+     * The flow type for email_passwordless login
+     */
+    flow_type?: EMAIL_FLOW_TYPE;
+    }
+    ```
+
+  </TabItem>
+</Tabs>
+
+</details>
+
+### Implicit logins
+
+Implicit logins are the easiest way to authenticate users with your custom authentication services. Web3Auth currently supports implicit logins for the following providers directly:
+
+- Google
+- Facebook
+- Discord
+- Twitch
+- Auth0 (custom)
+
+In addition to these you can also use any other provider (for example, Auth0, AWS Cognito, Azure AD) by providing the particular details of their login within the `extraLoginOptions` object within the `connectTo` function.
+
+#### Usage
+
+<Tabs>
+  <TabItem value="Google">
+    <ImplicitLoginGoogle />
+  </TabItem>
+  <TabItem value="Facebook">
+    <ImplicitLoginFacebook />
+  </TabItem>
+  <TabItem value="Discord">
+    <ImplicitLoginDiscord />
+  </TabItem>
+  <TabItem value="Twitch">
+    <ImplicitLoginTwitch />
+  </TabItem>
+  <TabItem value="Auth0 Google">
+    <ImplicitLoginAuth0Google />
+  </TabItem>
+  <TabItem value="Auth0 SPA">
+    <ImplicitLoginAuth0Spa />
+  </TabItem>
+  <TabItem value="AWS Cognito">
+    <ImplicitLoginAwsCognito />
+  </TabItem>
+</Tabs>
+
+### JWT login
+
+JWT login is a way to authenticate users with your custom authentication services. With this method, Web3Auth just takes into account the `idToken` passed over to the `connectTo` function and uses it to authenticate the user. You can utilise this method with any authentication service that is OAuth 2.0 Compatible.
+
+:::warning
+
+If you have not configured on the dashboard, whether you user ID is case sensitive or not, then you need to pass the `isUserIdCaseSensitive` option to the `extraLoginOptions`.
+
+:::
+
+#### Usage
+
+<Tabs>
+  <TabItem value="Google One Tap">
+    <JwtLoginGoogleOneTap />
+  </TabItem>
+  <TabItem value="Auth0 JWT login">
+    <JwtLoginAuth0 />
+  </TabItem>
+  <TabItem value="Firebase JWT login">
+    <JwtLoginFirebase />
+  </TabItem>
+  <TabItem value="Custom JWT login">
+    <JwtLoginCustom />
+  </TabItem>
+</Tabs>
+
+### Grouped auth connections
+
+Grouped auth connections allows you to group multiple auth connections together and use them as a single connection. This is useful when you want to authenticate the user with multiple providers and require the same user wallet address to be generated.
+
+For example, you can group Google and email passwordless providers together and use them as a single connection. Now, if your user logs in with Google Auth or even with email passwordless using the same email, they will get the same wallet address.
+
+:::info Prerequisites
+
+You need to configure a grouped connection, by combining your single connections in the Embedded Wallets dashboard before using this feature.
+
+:::
+
+<Tabs>
+  <TabItem value="Google [Implicit] + Auth0 [Implicit]">
+    <GroupedAuthImplicitAuth0 />
+  </TabItem>
+  <TabItem value="Google One Tap [JWT] + Auth0 [JWT]">
+    <GroupedAuthJwtAuth0 />
+  </TabItem>
+  <TabItem value="Google [Implicit] + Firebase [JWT]">
+    <GroupedAuthFirebase />
+  </TabItem>
+</Tabs>

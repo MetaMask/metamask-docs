@@ -498,6 +498,7 @@ For MetaMask to call the Snap's `onTransaction` method, you must request the
 An object containing:
 
 - `transaction` - The raw transaction payload.
+  Learn more about the [parameters of a submitted transaction](/wallet/how-to/send-transactions#transaction-parameters).
 - `chainId` - The [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
   chain ID.
 - `transactionOrigin` - The transaction origin if

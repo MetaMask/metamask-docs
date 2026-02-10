@@ -9,14 +9,15 @@ You can display a dialog in the MetaMask UI using the
 [`snap_dialog`](../../reference/snaps-api.md#snap_dialog) API method.
 Dialogs can contain [custom UI](index.md) and [interactive UI](interactive-ui.md) components.
 
-There are four types of dialogs: [alerts](#display-an-alert-dialog),
+The four types of dialogs include [alerts](#display-an-alert-dialog),
 [confirmations](#display-a-confirmation-dialog), [prompts](#display-a-prompt-dialog), and
 [custom dialogs](#display-a-custom-dialog).
 
-:::caution
-Dialogs do not work when MetaMask is locked.
-To check if MetaMask is locked, use
-[`snap_getClientStatus`](../../reference/snaps-api.md#snap_getclientstatus).
+:::warning
+- Dialogs do not work when MetaMask is locked.
+  To check if MetaMask is locked, use
+  [`snap_getClientStatus`](../../reference/snaps-api.md#snap_getclientstatus).
+- [`metamask:` URLs](index.md#about-metamask-urls) are not supported in dialogs.
 :::
 
 ## Request permission to display dialogs

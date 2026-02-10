@@ -1,0 +1,169 @@
+---
+title: Customization
+sidebar_label: Customization
+image: 'img/metamaskog.jpg'
+description: 'Customize branding and login flow in Web3Auth Dashboard | Embedded Wallets'
+---
+
+import CustomizationBranding from '@site/static/img/embedded-wallets/w3a-dashboard/customization-branding.png'
+import CustomizationLoginModal from '@site/static/img/embedded-wallets/w3a-dashboard/customization-login-modal.png'
+
+## Branding
+
+The branding page under the customization section of the Embedded Wallets dashboard allows developers to personalize the visual identity of their application across multiple user interfaces. This includes the login screens, Multi-Factor Authentication (MFA) screens, wallet UI, and login modals.
+
+Effective branding ensures a seamless and recognizable user experience, helping users feel confident that they are interacting with your application—even when interacting with Web3Auth-hosted interfaces.
+
+:::note
+
+All changes made within the branding page can be previewed in real-time. However, to reflect updates in production, developers must click the **Save & Publish** button after making changes.
+
+:::
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={CustomizationBranding}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Customization Branding"
+  />
+</div>
+
+### Branding options
+
+#### Add brand logo
+
+Upload a logo to personalize the user interface and email templates. For optimal performance and compatibility, it is recommended to use a .png file. The logo appears across login flows, wallet views, and email communications.
+
+#### Use logo as loader
+
+Developers have the option to display the uploaded logo as the loading spinner across the Web3Auth login flow. This small detail enhances brand consistency and gives users a familiar visual cue during authentication.
+
+#### Custom terms and conditions/privacy policy
+
+Link to your application's terms of service and/or privacy policy. These links will be displayed during user onboarding and consent flows, ensuring legal compliance and improving transparency.
+
+#### Application name
+
+The name defined here will be used across system-generated communication, including the subject lines of email templates. Ensure that the application name clearly represents your project or organization.
+
+#### Default language
+
+Select the default localization for all user-facing Web3Auth components. Supported languages include:
+
+- English
+- Japanese
+- Korean
+- German
+- Mandarin
+- Spanish
+- French
+- Portuguese
+- Dutch
+- Turkish
+
+This setting ensures that your application's authentication flow is accessible and intuitive for users across different regions.
+
+### Theme and colors
+
+The Theme and Colors section allows developers to synchronize the aesthetic of the Web3Auth interfaces with the branding and design system of their application.
+
+#### Select mode
+
+Choose between Light, Dark, or Auto mode. When Auto is selected, the interface adapts to the user's system theme preference automatically. This ensures a consistent and user-friendly visual experience, regardless of the device or OS settings.
+
+#### Primary color
+
+Defines the primary brand color used across interactive elements such as:
+
+- Buttons
+- Hyperlinks
+- Tab indicators
+- Focus outlines
+- Loaders and spinners
+- Navigation tabs
+
+#### On primary color
+
+Specifies the color applied to text and icons that appear on top of primary color backgrounds (such as button labels or iconography). This ensures sufficient contrast for readability and accessibility.
+
+:::tip
+
+Choose color combinations that meet accessibility guidelines (such as [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/)) to provide an inclusive experience for all users.
+:::
+
+## Login modal
+
+The login modal page within the customization section of the Embedded Wallets dashboard provides developers with granular control over the appearance and behavior of the Web3Auth login flow.
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={CustomizationLoginModal}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Customization Login Modal"
+  />
+</div>
+
+### Design
+
+The design section offers layout and styling options to customize how the login modal is presented to users.
+
+#### Login modal appearance
+
+Developers can choose between two display modes for the login interface:
+
+- **Embedded widget**: The login UI is embedded directly within the application's layout. This option is ideal for single-page applications or flows that require a fully integrated experience.
+- **Modal widget**: The login interface opens as a pop-up modal overlay. This provides a more traditional Web3 wallet experience, where authentication occurs in a floating layer over the existing content.
+
+#### Logo alignment
+
+Configure how the application logo is aligned within the login modal:
+
+- **Center-aligned**: Displays the logo at the top center, suitable for balanced layouts.
+- **Left-aligned**: Positions the logo to the top-left, often preferred for enterprise or dashboard-style applications.
+
+#### Border radius
+
+Adjust the corner curvature of the modal interface:
+
+- Small, medium, or large radius options allow for stylistic variations that better match your app's design system.
+
+#### Border radius type
+
+Refine the shape of buttons and input fields within the modal by selecting:
+
+- **Pill**: Fully rounded ends for a modern, soft appearance.
+- **Rounded**: Gently curved corners for a subtle aesthetic.
+- **Square**: Sharp 90° corners for a more technical or minimalist look.
+
+These design customizations allow developers to ensure the login experience feels native to the application, enhancing user trust and engagement.
+
+### Authentication reorder
+
+The Authentication section provides flexibility in how login options are presented within the modal.
+
+#### Arrange login order
+
+When multiple login methods (such as, social, email/phone, external wallets) are available, developers can define the order in which these options appear:
+
+- Drag and drop the login methods to rearrange their position.
+- Order determines the priority and placement of login options shown to users during authentication.
+
+:::note
+
+This customization improves user experience by surfacing the most relevant login methods first—such as, placing a company-preferred SSO or social login provider at the top.
+
+:::
+
+### External wallets
+
+The external wallet settings let you configure how third-party wallets—such as MetaMask or any wallet connected through WalletConnect—are displayed in your application.
+
+#### Show installed external wallets
+
+Enable this to automatically detect and display any compatible wallets already installed in the user's browser or device (such as MetaMask). This improves onboarding by surfacing options users are already familiar with.
+
+#### Select number of external wallets
+
+Choose how many external wallet options are displayed at once. Developers can limit or expand this list based on the target user base and the types of wallets they're likely to use.
+
+These settings ensure wallet integrations are both comprehensive and context-aware, adapting to the environment and user preferences for seamless onboarding.

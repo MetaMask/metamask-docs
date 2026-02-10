@@ -1,0 +1,70 @@
+---
+title: useWeb3AuthUser
+sidebar_label: useWeb3AuthUser
+description: '@web3auth/modal/vue Composable useWeb3AuthUser | Embedded Wallets'
+---
+
+Composable to fetch and manage the current Web3Auth user information in Vue.
+
+### Import
+
+```ts
+import { useWeb3AuthUser } from '@web3auth/modal/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useWeb3AuthUser } from '@web3auth/modal/vue'
+
+  const { userInfo, loading, error, isMFAEnabled, getUserInfo } = useWeb3AuthUser()
+</script>
+
+<template>
+  <div v-if="loading">Loading user info...</div>
+  <div v-else-if="error">Error: {{ error.message }}</div>
+  <div v-else-if="!userInfo">No user info available.</div>
+  <div v-else>
+    <pre>{{ JSON.stringify(userInfo, null, 2) }}</pre>
+    <div>MFA Enabled: {{ isMFAEnabled ? "Yes" : "No" }}</div>
+    <button @click="getUserInfo">Refresh User Info</button>
+  </div>
+</template>
+```
+
+### Return type
+
+```ts
+import type { IUseWeb3AuthUser } from '@web3auth/modal/vue'
+```
+
+#### `loading`
+
+`boolean`
+
+Whether the user info fetching process is in progress.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error that occurred during the user info fetching process.
+
+#### `userInfo`
+
+`Partial<UserInfo> | null`
+
+The current user's information, or null if not available.
+
+#### `isMFAEnabled`
+
+`boolean`
+
+Whether Multi-Factor Authentication (MFA) is enabled for the user.
+
+#### `getUserInfo`
+
+`() => Promise<Partial<UserInfo> | null>`
+
+Function to fetch the latest user information from Web3Auth.

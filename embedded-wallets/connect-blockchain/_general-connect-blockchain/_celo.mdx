@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Sepolia Testnet", value: "sepolia" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0xa4ec
+- **Public RPC URL:** https://forno.celo.org
+- **Display Name:** Celo Mainnet
+- **Block Explorer Link:** https://explorer.celo.org
+- **Ticker:** CELO
+- **Ticker Name:** Celo
+
+</TabItem>
+
+<TabItem value="sepolia">
+
+- **Chain ID:** 0xaa044c
+- **Public RPC URL:** https://forno.celo-sepolia.celo-testnet.org
+- **Display Name:** Celo Sepolia Testnet
+- **Block Explorer Link:** https://celo-sepolia.blockscout.com/
+- **Ticker:** CELO
+- **Ticker Name:** Celo
+
+</TabItem>
+</Tabs>

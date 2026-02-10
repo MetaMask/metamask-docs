@@ -1,5 +1,5 @@
 ---
-description: Solve common issues.
+description: Solve common issues encountered by Snap developers.
 sidebar_position: 1
 ---
 
@@ -18,10 +18,10 @@ If you encounter any issues that you can't solve on your own, please
 Because [Secure ECMAScript (SES)](../../learn/about-snaps/execution-environment.md) adds additional restrictions
 on the JavaScript runtime on top of strict mode, code that executes normally under strict mode might
 not under SES.
-[`yarn mm-snap build`](../../reference/cli/subcommands.md#b-build) by default attempts to execute a
+[`yarn mm-snap build`](../../reference/cli.md#b-build) by default attempts to execute a
 Snap in a stubbed SES environment.
 You can also disable this behavior and run the evaluation step separately using
-[`yarn mm-snap eval`](../../reference/cli/subcommands.md#e-eval).
+[`yarn mm-snap eval`](../../reference/cli.md#e-eval).
 If an error is thrown during this step, it's likely due to a SES incompatibility, and you must fix
 the issues manually.
 These incompatibilities tend to occur in dependencies.
@@ -43,7 +43,7 @@ simply prepending `var variableName;` to your Snap bundle may solve the problem.
 `yarn mm-snap build` automatically handles that one.)
 
 :::caution
-Run [`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest) if you modified
+Run [`yarn mm-snap manifest --fix`](../../reference/cli.md#m-manifest) if you modified
 your Snap bundle after building.
 Otherwise, your manifest `shasum` value won't be correct, and attempting to install your Snap fails.
 :::
@@ -60,9 +60,9 @@ plugins for several other build systems:
 For examples on how to set up these build systems yourself, see the
 [examples](https://github.com/MetaMask/snaps/tree/main/packages/examples).
 
-We recommend running [`yarn mm-snap manifest --fix`](../../reference/cli/subcommands.md#m-manifest)
+We recommend running [`yarn mm-snap manifest --fix`](../../reference/cli.md#m-manifest)
 after creating your bundle to make sure your manifest `shasum` value is correct.
-You might also benefit from running [`yarn mm-snap eval`](../../reference/cli/subcommands.md#e-eval)
+You might also benefit from running [`yarn mm-snap eval`](../../reference/cli.md#e-eval)
 to detect any SES issues up front.
 
 ## Patch dependencies
@@ -94,7 +94,7 @@ Then add a postinstall script to your `package.json`:
 Now you can make changes to your dependencies inside `node_modules` and run
 `yarn patch-package package-name` to save the changes as a patch.
 This creates a `.patch` file containing your dependency patch.
-These patches can be committed to your Git repository and are replayed when you re-install your dependencies.
+These patches can be committed to your Git repository and are replayed when you reinstall your dependencies.
 
 ### Patch the use of `XMLHttpRequest`
 

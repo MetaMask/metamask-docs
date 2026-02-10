@@ -1,0 +1,169 @@
+---
+title: What are Embedded Wallets?
+image: 'img/metamaskog.jpg'
+sidebar_label: What are Embedded Wallets?
+description: 'What are MetaMask Embedded Wallets? | Documentation - MetaMask Embedded Wallets'
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly'
+import SEO from '@site/src/components/SEO'
+import Tiles from '@theme/Tiles'
+
+export const GetStarted = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/sdk/react',
+      },
+      {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/sdk/vue',
+      },
+      {
+        key: 'js',
+        title: 'JavaScript',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/sdk/js',
+      },
+      {
+        key: 'node',
+        title: 'Node.js',
+        icon: 'logo-nodejs.png',
+        path: '/embedded-wallets/sdk/node',
+      },
+      {
+        key: 'android',
+        title: 'Android',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/sdk/android',
+      },
+      {
+        key: 'ios',
+        title: 'iOS',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/sdk/ios',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/sdk/react-native',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/sdk/flutter',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/sdk/unity',
+      },
+      {
+        key: 'unreal',
+        title: 'Unreal Engine',
+        icon: 'logo-unreal.png',
+        path: '/embedded-wallets/sdk/unreal',
+      },
+    ],
+
+}, ]
+
+<SEO
+  title="MetaMask Embedded Wallets"
+  description="Pluggable embedded wallet infrastructure that simplifies Web3 wallet integration and user onboarding. OAuth-based logins, multiple platforms, seamless Web3 authentication."
+  keywords={[
+    'embedded wallets',
+    'web3 wallet integration',
+    'metamask sdk',
+    'web3auth alternative',
+    'social login web3',
+    'oauth wallet',
+    'dapp wallet integration',
+    'non-custodial wallet',
+    'crypto wallet sdk',
+    'blockchain wallet api',
+    'web3 authentication',
+    'metamask embedded wallet',
+    'wallet as a service',
+    'white label wallet',
+    'crypto wallet infrastructure',
+    'defi wallet integration',
+    'ethereum wallet sdk',
+    'multi-chain wallet',
+    'wallet connect alternative',
+    'web3 onboarding',
+    'smart contract wallet',
+    'account abstraction',
+    'biometric wallet login',
+    'gasless transactions',
+  ]}
+  slug="/embedded-wallets/"
+/>
+
+MetaMask Embedded Wallets (formerly Web3Auth) provides a pluggable embedded wallet infrastructure to simplify Web3 wallet integration and user onboarding. It supports OAuth-based logins and multiple platforms, allowing users to access Web3 applications through familiar authentication methods in under a minute.
+
+Users enjoy seamless onboarding while maintaining full control of their non-custodial wallets, ensuring both convenience and security.
+
+:::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+:::
+
+## Get started
+
+<Tiles tileGroups={GetStarted} />
+
+## Key features
+
+<BrowserOnly>
+  {() => {
+    const ModalAnim = require('@site/src/components/ModalAnim').default
+    return <ModalAnim />
+  }}
+</BrowserOnly>
+
+### 🔐 Authentication made simple
+
+Get your users started in seconds with familiar login methods they already use:
+
+- Sign in with Google, Twitter, GitHub and other popular social accounts
+- Passwordless login via email, SMS and authenticator apps.
+- Bring your own auth system while leveraging our secure wallet infrastructure
+
+### 🛡️ Bank-grade security
+
+Enterprise-level protection for your users' digital assets:
+
+- Advanced MPC technology splits keys across multiple parties
+- Users maintain 100% control of their non-custodial wallets
+- Distributed architecture prevents single points of failure
+- Multiple backup options for worry-free recovery
+
+### 💻 Built for developers
+
+Integrate MetaMask Embedded Wallets into your app with minimal effort:
+
+- Drop-in solution works with your existing auth system
+- No complex migrations or infrastructure changes needed
+- Full control to customize the look and feel
+- Support for web, mobile, and gaming platforms
+
+### 👥 Designed for users
+
+The smoothest path to Web3 for your users:
+
+- Get started in under 60 seconds
+- No crypto knowledge needed
+- Users own and control their wallets
+- Simple, reliable account recovery

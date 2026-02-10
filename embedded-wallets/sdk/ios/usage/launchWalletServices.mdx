@@ -1,0 +1,84 @@
+---
+title: Launch Wallet Services
+sidebar_label: launchWalletServices
+description: 'Web3Auth iOS SDK - launchWalletServices | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The `launchWalletServices` method launches a WebView which allows you to use the templated wallet UI services. The method takes `ChainConfig` as the required input. Wallet Services is currently only available for EVM chains.
+
+:::note
+
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+
+:::
+
+![Wallet Services](/img/embedded-wallets/wallet-services/mobile-wallet-services.png)
+
+## Parameters
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter           | Description                                                                                                                 |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `chainNamespace`    | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.eip155`. |
+| `decimals?`         | Number of decimals for the currency ticker. Default value is 18, and accepts `Int` as value.                                |
+| `blockExplorerUrl?` | Blockchain's explorer URL. (for example, `https://etherscan.io`)                                                                     |
+| `chainId`           | The chain ID of the selected blockchain `String`.                                                                           |
+| `displayName?`      | Display Name for the chain.                                                                                                 |
+| `logo?`             | Logo for the selected `chainNamespace` & `chainId`.                                                                         |
+| `rpcTarget`         | RPC Target URL for the selected `chainNamespace` & `chainId`.                                                               |
+| `ticker?`           | Default currency ticker of the network (for example, `ETH`)                                                                         |
+| `tickerName?`       | Name for currency ticker (for example, `Ethereum`)                                                                                  |
+
+</TabItem>
+
+<TabItem value="class">
+
+```swift
+public struct ChainConfig: Codable {
+    public init(chainNamespace: ChainNamespace = ChainNamespace.eip155, decimals: Int? = 18, blockExplorerUrl: String? = nil, chainId: String, displayName: String? = nil, logo: String? = nil, rpcTarget: String, ticker: String? = nil, tickerName: String? = nil) {
+        self.chainNamespace = chainNamespace
+        self.decimals = decimals
+        self.blockExplorerUrl = blockExplorerUrl
+        self.chainId = chainId
+        self.displayName = displayName
+        self.logo = logo
+        self.rpcTarget = rpcTarget
+        self.ticker = ticker
+        self.tickerName = tickerName
+    }
+}
+
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+```swift
+do {
+	// focus-start
+  try await web3Auth!.launchWalletServices(
+    chainConfig: ChainConfig(
+      chainId: "0xaa36a7",
+      rpcTarget: "https://eth-sepolia.public.blastapi.io"
+    )
+   )
+	// focus-end
+} catch {
+  print(error.localizedDescription)
+  // Handle error
+}
+```

@@ -1,0 +1,43 @@
+---
+title: PnP iOS SDK - v8.3 to v8.4
+description: 'PnP iOS SDK - v8.3 to v8.4 | Embedded Wallets'
+sidebar_label: v8.3 to v8.4
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+# Migration guide from v8.3 to v8.4 for Web3Auth PnP iOS SDK
+
+## Overview
+
+This migration guide provides steps for upgrading from version 8.3(v8.3) to version 8.4(v8.4) of the Web3Auth PnP iOS SDK. The guide outlines significant breaking change in the `W3AInitParams`.
+
+## Changes in detail
+
+### `W3AInitParams` changes
+
+From v8.4 onwards redirectUrl is a mandatory parameter in `W3AInitParams`.
+
+#### Before (v8.3)
+
+```swift title="Usage"
+import Web3Auth
+
+let web3auth = Web3Auth(W3AInitParams(
+  clientId: "<your clientId>",
+  network: .sapphire_mainnet,
+))
+```
+
+#### After (v8.4)
+
+```swift title="Usage"
+import Web3Auth
+
+let web3auth = Web3Auth(W3AInitParams(
+  clientId: "<your clientId>",
+  network: .sapphire_mainnet,
+  redirectUrl: "bundleId://auth"
+))
+```

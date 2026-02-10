@@ -1,0 +1,23 @@
+To sign a transaction, you can use the `Web3Client` object we created earlier. It has
+`signTransaction` method which signs the transaction for the given key pair, and chain.
+
+The method internally handles the nonce, gas price, and gas limit. If you want to manually set the
+nonce, gas price, and gas limit, you can override the parameters in the Transaction object.
+
+```dart
+import 'package:web3dart/web3dart.dart';
+
+// Use client, address, and credentials from previous code snippets
+final signature = await client.signTransaction(
+  credentials,
+  Transaction(
+    from: address,
+    // Replace with the recipient address
+    to: EthereumAddress.fromHex('0x809D4310d578649D8539e718030EE11e603Ee8f3'),
+    // Replace with the amount of ETH to send
+    value: EtherAmount.fromUnitAndValue(EtherUnit.gwei, 50000000), // 0.05 ETH
+    chainId: null,
+    fetchChainIdFromNetworkId: true,
+  ),
+);
+```

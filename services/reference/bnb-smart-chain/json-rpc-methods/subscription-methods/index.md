@@ -1,8 +1,11 @@
 ---
-title: "Subscription methods"
+title: BNB Smart Chain subscription methods
+sidebar_label: Subscription methods
+sidebar_key: bnb-smart-chain-subscription-methods
+description: BNB Smart Chain subscription methods
 ---
 
-# Subscription methods
+# BNB Smart Chain subscription methods
 
 Subscription methods are available for [WebSocket](../../../../concepts/websockets.md) connections only, and allow you to wait for events instead of polling for them. For example, dapps can subscribe to logs and receive notifications when a specific event occurs.
 

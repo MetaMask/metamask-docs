@@ -1,7 +1,5 @@
 ---
 sidebar_position: 2
-tags:
-  - Keyring API
 ---
 
 import Tabs from "@theme/Tabs";
@@ -68,7 +66,7 @@ Signs a transaction that can be submitted to the network later using
 An array containing:
 
 1. Transaction object to sign, which contains:
-   - `type`: `string` - [Transaction type.](https://docs.infura.io/api/networks/ethereum/concepts/transaction-types)
+   - `type`: `string` - [Transaction type.](/services/concepts/transaction-types/)
    - `nonce`: `string` - Anti-replay parameter.
    - `to`: `string` - Recipient address, or `null` if this is a contract creation transaction.
    - `from`: `string` - Sender address.
@@ -347,7 +345,7 @@ An array containing:
    - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
    - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
    - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
-     execution, to pay for callData, and to account for overhead that can't be tracked onchain.
+     execution, to pay for `callData`, and to account for overhead that can't be tracked onchain.
    - `maxFeePerGas`: `string` - Maximum total fee the sender is willing to pay per gas.
    - `maxPriorityFeePerGas`: `string` - Maximum fee the sender is willing to pay per gas above the
      base fee.
@@ -365,7 +363,7 @@ A partial user operation object containing:
 - `callGasLimit`: `string` - (Optional) Amount of gas to allocate to the main execution call.
 - `verificationGasLimit`: `string` - (Optional) Amount of gas to allocate to the verification step.
 - `preVerificationGas`: `string` - (Optional) Amount of gas to compensate the bundler for
-  pre-verification execution, to pay for callData, and to account for overhead that can't be tracked onchain.
+  pre-verification execution, to pay for `callData`, and to account for overhead that can't be tracked onchain.
 
 #### Example
 
@@ -425,7 +423,7 @@ An array containing:
    - `callGasLimit`: `string` - Amount of gas to allocate to the main execution call.
    - `verificationGasLimit`: `string` - Amount of gas to allocate to the verification step.
    - `preVerificationGas`: `string` - Amount of gas to compensate the bundler for pre-verification
-     execution, to pay for callData, and to account for overhead that can't be tracked onchain.
+     execution, to pay for `callData`, and to account for overhead that can't be tracked onchain.
    - `maxFeePerGas`: `string` - Maximum total fee the sender is willing to pay per gas.
    - `maxPriorityFeePerGas`: `string` - Maximum fee the sender is willing to pay per gas above the
      base fee.

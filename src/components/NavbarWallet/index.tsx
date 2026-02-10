@@ -9,7 +9,6 @@ import { MetamaskProviderContext } from '@site/src/theme/Root'
 import BrowserOnly from '@docusaurus/BrowserOnly'
 import styles from './navbarWallet.module.scss'
 import { Tooltip } from '@site/src/components/Tooltip'
-import { trackClickForSegment } from '@site/src/lib/segmentAnalytics'
 import Link from '@docusaurus/Link'
 import { useColorMode } from '@docusaurus/theme-common'
 import Text from '@site/src/components/Text'
@@ -60,27 +59,11 @@ const NavbarWalletComponent: FC = ({ includeUrl = [] }: INavbarWalletComponent) 
 
   const toggleDropdown = () => {
     setDropdownOpen(value => !value)
-    trackClickForSegment({
-      eventName: 'Account dropdown',
-      clickType: 'Navbar',
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
   }
 
   const handleCopy = () => {
     navigator.clipboard.writeText(userAccount)
     setCopyMessage(COPIED_TEXT)
-    trackClickForSegment({
-      eventName: 'Copy wallet address',
-      clickType: 'Navbar',
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
   }
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -107,27 +90,11 @@ const NavbarWalletComponent: FC = ({ includeUrl = [] }: INavbarWalletComponent) 
   }, [dropdownOpen])
 
   const handleDisconnect = () => {
-    trackClickForSegment({
-      eventName: 'Disconnect account',
-      clickType: 'Navbar',
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
     metaMaskDisconnect()
     setDropdownOpen(false)
   }
 
   const handleConnectWallet = () => {
-    trackClickForSegment({
-      eventName: showInstallButton ? 'Install MetaMask' : 'Connect Wallet',
-      clickType: 'Navbar',
-      userExperience: 'B',
-      responseStatus: null,
-      responseMsg: null,
-      timestamp: Date.now(),
-    })
     metaMaskWalletIdConnectHandler()
   }
 
@@ -233,6 +200,14 @@ const NavbarWallet = props => {
   const [loginEnabled, setLoginEnabled] = useState(false)
 
   useEffect(() => {
+    // Handle case where ldClient is null (when LaunchDarkly isn't initialized)
+    if (!ldClient) {
+      console.warn('LaunchDarkly client not available, disabling login feature')
+      setLdReady(true)
+      setLoginEnabled(false)
+      return
+    }
+
     ldClient.waitUntilReady().then(() => {
       setLoginEnabled(ldClient.variation(LOGIN_FF, false))
       setLdReady(true)

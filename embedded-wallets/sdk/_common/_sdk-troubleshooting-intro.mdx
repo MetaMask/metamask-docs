@@ -1,0 +1,26 @@
+## Troubleshooting
+
+### Bundler issues: missing dependencies
+
+You might encounter errors related to missing dependencies in the browser environment:
+
+- `Buffer is not defined`
+- `process is not defined`
+- Other Node.js-specific modules missing errors
+
+These Node.js dependencies need to be polyfilled in your application. See the detailed troubleshooting guides for popular bundlers:
+
+- **[Vite Troubleshooting Guide](/embedded-wallets/troubleshooting/vite-issues)**
+- **[Svelte Troubleshooting Guide](/embedded-wallets/troubleshooting/svelte-issues)**
+- **[Nuxt Troubleshooting Guide](/embedded-wallets/troubleshooting/nuxt-issues)**
+- **[Webpack 5 Troubleshooting Guide](/embedded-wallets/troubleshooting/webpack-issues)**
+
+### JWT errors
+
+When using custom authentication, you may encounter JWT errors:
+
+- [**Invalid JWT verifiers ID field**](/embedded-wallets/troubleshooting/jwt-errors#invalid-jwt-verifiers-id-field)
+- [**Failed to verify JWS signature**](/embedded-wallets/troubleshooting/jwt-errors#failed-to-verify-jws-signature)
+- [**Duplicate token**](/embedded-wallets/troubleshooting/jwt-errors#duplicate-token)
+- [**Expired token**](/embedded-wallets/troubleshooting/jwt-errors#expired-token)
+- [**Mismatch JWT validation field**](/embedded-wallets/troubleshooting/jwt-errors#mismatch-jwt-validation-field)

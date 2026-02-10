@@ -1,9 +1,0 @@
-{
-  "label": "Manage networks",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "slug": "how-to/manage-networks",
-    "description": "You can detect, add, and switch networks in MetaMask."
-  }
-}

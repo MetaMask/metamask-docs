@@ -1,0 +1,258 @@
+---
+title: Wallet Services
+sidebar_label: Wallet UI & Services
+description: '@web3auth/modal Wallet Services | Embedded Wallets'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import AuthAdapterSettings from '../../_common/_auth-adapter-settings.mdx'
+import AuthLoginSettings from '../../_common/_auth-login-settings.mdx'
+import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+
+Embedded Wallets' Wallet Services provides a comprehensive suite of wallet functionality including fiat-on-ramp, swaps, and wallet UI Interoperability with WalletConnect. These services enhance your application by offering a complete wallet experience without building these features from scratch.
+
+:::tip
+
+All these configurations can be directly accessed and managed through the [Embedded Wallets dashboard](https://dashboard.web3auth.io). Manual configuration in the SDK is optional and provided here for reference purposes.
+
+:::
+
+<GrowthPlanNote />
+
+## `walletServicesConfig`
+
+The `walletServicesConfig` option allows you to customize the Wallet Services experience for your users.
+
+```tsx
+walletServicesConfig?: WalletServicesConfig;
+```
+
+### Configuration options
+
+<Tabs>
+  <TabItem value="Table">
+
+| Property               | Type                       | Description                                     |
+| ---------------------- | -------------------------- | ----------------------------------------------- |
+| `confirmationStrategy` | CONFIRMATION_STRATEGY_TYPE | How to display confirmation screens.            |
+| `modalZIndex`          | number                     | Z-index for modal windows.                      |
+| `enableKeyExport`      | boolean                    | Enable private key export functionality.        |
+| `whiteLabel`           | Object                     | Customization options for the widget appearance.|
+
+#### Confirmation strategy options
+
+| Strategy       | Description                                                    |
+| -------------- | -------------------------------------------------------------- |
+| `default`      | Uses auto-approve by default, modal for WalletConnect requests.|
+| `modal`        | Always uses modal for confirmations.                           |
+| `auto-approve` | Automatically approves transactions without confirmation.      |
+
+#### Whitelabel options
+
+| Property            | Type                 | Description                               |
+| ------------------- | -------------------- | ----------------------------------------- |
+| `showWidgetButton`  | boolean              | Whether to show the widget button.        |
+| `buttonPosition`    | BUTTON_POSITION_TYPE | Position of the widget button on the page.|
+| `hideNftDisplay`    | boolean              | Hide NFT display in the wallet.           |
+| `hideTokenDisplay`  | boolean              | Hide token display in the wallet.         |
+| `hideTransfers`     | boolean              | Hide transfer functionality.              |
+| `hideTopup`         | boolean              | Hide top-up (fiat on-ramp) functionality. |
+| `hideReceive`       | boolean              | Hide receive address functionality.       |
+| `hideSwap`          | boolean              | Hide token swap functionality.            |
+| `hideShowAllTokens` | boolean              | Hide the "show all tokens" option.        |
+| `hideWalletConnect` | boolean              | Hide WalletConnect integration.           |
+| `defaultPortfolio`  | "token" \| "nft"     | Default portfolio view.                   |
+
+#### Button position options
+
+| Position       | Description                     |
+| -------------- | ------------------------------- |
+| `bottom-left`  | Bottom left corner of the page. |
+| `top-left`     | Top left corner of the page.    |
+| `bottom-right` | Bottom right corner of the page.|
+| `top-right`    | Top right corner of the page.   |
+
+  </TabItem>
+
+  <TabItem value="Interface">
+
+```tsx
+export type WalletServicesConfig = Omit<
+  WsEmbedParams,
+  | 'buildEnv'
+  | 'enableLogging'
+  | 'chainId'
+  | 'chains'
+  | 'confirmationStrategy'
+  | 'accountAbstractionConfig'
+> & {
+  /**
+   * Determines how to show confirmation screens
+   * @defaultValue default
+   *
+   * default & auto-approve
+   * - use auto-approve as default
+   * - if wallet connect request use modal
+   *
+   * modal
+   * - use modal always
+   */
+  confirmationStrategy?: Exclude<WsEmbedParams['confirmationStrategy'], 'popup'>
+  modalZIndex?: number
+}
+
+export interface WsEmbedParams {
+  /**
+   * Supported chains
+   */
+  chains: ProviderConfig[]
+  /**
+   * Chain to connect with
+   */
+  chainId: string
+  /**
+   * Build Environment of WsEmbed.
+   *
+   * production uses https://wallet.web3auth.io,
+   *
+   * staging uses https://staging-wallet.web3auth.io,
+   *
+   * testing uses https://develop-wallet.web3auth.io (latest internal build)
+   *
+   * development uses http://localhost:4050 (expects wallet-services-frontend to be run locally),
+   *
+   * @defaultValue production
+   */
+  buildEnv?: WS_EMBED_BUILD_ENV_TYPE
+  /**
+   * Enables or disables logging.
+   *
+   * Defaults to false in prod and true in other environments
+   */
+  enableLogging?: boolean
+  /**
+   * url of widget to load
+   *
+   * Defaults to true
+   * @defaultValue true
+   */
+  walletUrls?: Partial<Record<WS_EMBED_BUILD_ENV_TYPE, WalletUrlConfig>>
+  /**
+   * Determines how to show confirmation screens
+   * @defaultValue default
+   *
+   * default & popup
+   * - use popop as default
+   * - if wallet connect request use modal
+   *
+   * modal
+   * - use modal always
+   *
+   * auto-approve
+   * - does not work on embed. will use default
+   */
+  confirmationStrategy?: CONFIRMATION_STRATEGY_TYPE
+  /**
+   * Enable and configure account abstraction
+   */
+  accountAbstractionConfig?: AccountAbstractionMultiChainConfig
+  /**
+   * Enable private key export
+   *
+   * Defaults to false
+   * @defaultValue false
+   */
+  enableKeyExport?: boolean
+  /**
+   * Allows you to customize the look & feel of the widget
+   */
+  whiteLabel?: {
+    /**
+     * whether to show/hide ws-embed widget.
+     *
+     * Defaults to true
+     * @defaultValue true
+     */
+    showWidgetButton?: boolean
+    /**
+     * Determines where the wsEmbed widget is visible on the page.
+     * @defaultValue bottom-left
+     */
+    buttonPosition?: BUTTON_POSITION_TYPE
+    hideNftDisplay?: boolean
+    hideTokenDisplay?: boolean
+    hideTransfers?: boolean
+    hideTopup?: boolean
+    hideReceive?: boolean
+    hideSwap?: boolean
+    hideShowAllTokens?: boolean
+    hideWalletConnect?: boolean
+    defaultPortfolio?: 'token' | 'nft'
+  } & WhiteLabelData
+}
+
+export declare const CONFIRMATION_STRATEGY: {
+  readonly POPUP: 'popup'
+  readonly MODAL: 'modal'
+  readonly AUTO_APPROVE: 'auto-approve'
+  readonly DEFAULT: 'default'
+}
+export type CONFIRMATION_STRATEGY_TYPE =
+  (typeof CONFIRMATION_STRATEGY)[keyof typeof CONFIRMATION_STRATEGY]
+
+export type AccountAbstractionMultiChainConfig = {
+  smartAccountType?: SmartAccountType
+  chains?: {
+    chainId: string
+    bundlerConfig: BundlerConfig
+    paymasterConfig?: PaymasterConfig
+    smartAccountConfig?: SmartAccountConfig
+  }[]
+}
+
+export declare const BUTTON_POSITION: {
+  readonly BOTTOM_LEFT: 'bottom-left'
+  readonly TOP_LEFT: 'top-left'
+  readonly BOTTOM_RIGHT: 'bottom-right'
+  readonly TOP_RIGHT: 'top-right'
+}
+export type BUTTON_POSITION_TYPE = (typeof BUTTON_POSITION)[keyof typeof BUTTON_POSITION]
+```
+
+  </TabItem>
+</Tabs>
+
+## Usage
+
+```ts
+import { Web3Auth, BUTTON_POSITION, CONFIRMATION_STRATEGY, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // focus-start
+  walletServicesConfig: {
+    confirmationStrategy: CONFIRMATION_STRATEGY.MODAL,
+    modalZIndex: 99999,
+    enableKeyExport: false,
+    whiteLabel: {
+      showWidgetButton: true,
+      buttonPosition: BUTTON_POSITION.BOTTOM_RIGHT,
+      hideNftDisplay: false,
+      hideTokenDisplay: false,
+      hideTransfers: false,
+      hideTopup: false,
+      hideReceive: false,
+      hideSwap: false,
+      hideShowAllTokens: false,
+      hideWalletConnect: false,
+      defaultPortfolio: 'token',
+    },
+  },
+  // focus-end
+})
+
+// Initialize web3auth
+await web3auth.init()
+```

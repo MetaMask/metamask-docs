@@ -1,0 +1,27 @@
+Use the `EthereumClient.eth_getBalance` method to retrieve the balance of an Ethereum address. 
+
+The result we get from Web3Client is in wei, the smallest unit of ether. To convert wei to ether, divide by 10^18, where 18 denotes the decimals for wei.
+
+```swift
+import web3
+
+let etherInWei = pow(Double(10), 18)
+
+/// Convert Wei(BInt) unit to Ether(Decimal) unit
+public func toEther(wei: Wei) -> Ether {
+    guard let decimalWei = Double(wei.description) else {
+        return 0
+    }
+    return decimalWei / etherInWei
+}
+
+// focus-start
+let balanceResponse = try await client.eth_getBalance(
+    // Use the address from previous step
+    address: address,
+    block: .Latest
+)
+
+let balance = toEther(wei: balanceResponse)
+// focus-end
+```

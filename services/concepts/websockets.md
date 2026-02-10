@@ -52,7 +52,6 @@ Infura supports subscriptions over WebSockets for the following networks:
 - [Base](../reference/base/index.md)
 - [Binance Smart Chain](../reference/bnb-smart-chain/index.md)
 - [Blast](../reference/blast/index.md)
-- [Celo](../reference/celo/index.md)
 - [Ethereum](../reference/ethereum/index.md)
 - [Linea](../reference/linea/index.md)
 - [Mantle](../reference/mantle/index.md)
@@ -86,7 +85,7 @@ Credits are consumed for these actions to prevent spamming, even if no valuable 
 
 :::tip
 
-Refer to the [credit cost table](../get-started/pricing/credit-cost.md) for more information about the
+Refer to the [credit cost table](../get-started/pricing/credit-cost.mdx) for more information about the
 credit costs associated with the relevant method calls.
 
 For users on the existing request-based billing system, WebSocket activity is counted toward your daily request

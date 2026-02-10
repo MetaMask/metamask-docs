@@ -2,54 +2,84 @@ import Layout from '@theme/Layout'
 import Hero from '@site/src/components/Hero/Hero'
 import CardSection from '@site/src/components/CardSection'
 import CallToAction from '@site/src/components/CallToAction/CallToAction'
+import SectionIntro from '@site/src/components/SectionIntro/SectionIntro'
+import SEO from '@site/src/components/SEO'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext()
+
   return (
-    <Layout title={'Home'}>
+    <Layout title="Home">
+      <SEO
+        description="Build with the world's leading self-custodial crypto wallet. MetaMask developer documentation - SDK, Wallet API, Snaps, Embedded Wallets, Smart Accounts."
+        title="MetaMask Developer Documentation - Build Web3 Apps"
+        keywords={['metamask', 'web3 development', 'dapp development', 'embedded wallets', 'metamask quickstart', 'blockchain development', 'ethereum development', 'metamask sdk', 'web3 documentation', 'crypto wallet', 'defi development', 'nft development']}
+        slug="/"
+      />
       <Hero
         title={siteConfig.title}
-        description={"Build with the world's leading self-custodial crypto wallet."}
+        description="Build with the world's leading self-custodial crypto wallet."
+        buttons={[
+          {
+            label: 'Quickstart',
+            href: '/quickstart',
+            icon: 'arrow-right'
+          },
+          {
+            label: 'Tutorials',
+            href: '/tutorials/',
+            icon: 'arrow-right'
+          }
+        ]}
       />
+
+      <SectionIntro description="What do you want to do with MetaMask?" />
+
       <CardSection
         colorPalette="purple"
         cards={[
           {
-            title: 'SDK',
+            title: 'Connect to MetaMask',
             description:
-              'Use MetaMask SDK to build onchain dapps. Authenticate users, handle transactions, and interact with contracts across the MetaMask extension and MetaMask Mobile.',
+              'Connect your dapp to the MetaMask browser extension and mobile app. Ideal for users who want full control over their keys and transactions.',
             href: '/sdk',
-            theme: '',
+            buttonIcon: 'arrow-right',
           },
           {
-            title: 'Wallet API',
+            title: 'Create embedded wallets',
             description:
-              "Use the Wallet API to integrate your dapp with MetaMask. Connect to the MetaMask browser extension and interact with your users' accounts.",
-            href: '/wallet',
-            theme: '',
+              'Onboard power users and first-time users in seconds via social logins, or by integrating your own authentication providers.',
+            href: '/embedded-wallets',
+            buttonIcon: 'arrow-right',
           },
           {
-            title: 'Snaps',
+            title: 'Create smart accounts',
             description:
-              'Create a custom Snap to extend the functionality of MetaMask. Add support for custom networks, accounts types, and APIs.',
-            href: '/snaps',
-            theme: '',
+              'Create and interact with MetaMask Smart Accounts, unlocking new programmable account behaviors and granular permission sharing.',
+            href: '/smart-accounts-kit',
+            buttonIcon: 'arrow-right',
           },
           {
-            title: 'Services',
+            title: 'Build and scale your dapp',
             description:
-              'Use services provided by MetaMask and Infura to optimize essential development tasks and scale your dapp or Snap.',
+              'Use high performance APIs provided by MetaMask and Infura to build and scale your dapp or Snap.',
             href: '/services',
-            theme: '',
+            buttonIcon: 'arrow-right',
+          },
+          {
+            title: 'Extend MetaMask',
+            description:
+              'Create a custom mini app that runs inside the MetaMask extension. Add support for custom networks, accounts types, and APIs.',
+            href: '/snaps',
+            buttonIcon: 'arrow-right',
           },
         ]}
       />
+
       <CallToAction
-        title={'Contribute to MetaMask on GitHub'}
-        description={
-          'Join the MetaMask developer community and learn how to contribute to the MetaMask project itself.'
-        }
+        title="Contribute to MetaMask on GitHub"
+        description="Join the MetaMask developer community and learn how to contribute to the MetaMask project itself."
         button={{
           label: 'Contribute',
           href: 'https://github.com/metamask',

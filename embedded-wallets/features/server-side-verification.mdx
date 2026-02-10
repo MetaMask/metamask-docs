@@ -1,0 +1,38 @@
+---
+title: Server-Side Verification
+sidebar_label: Server-Side Verification
+description: 'Server-Side Verification | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import Tiles from '@theme/Tiles'
+
+Server-side verification enables developers to securely authenticate users on the backend by validating the ownership of a wallet address. This process involves the use of a `JSON Web Token (JWT)` issued upon user authentication, which contains claims about the end user, including proof of ownership over a wallet public address.
+
+Upon a user's successful connection of their wallet, Web3Auth generates a `JWT`, signed with a private key using the `ES256` algorithm, that is unique to your application. This token serves as a verifiable credential that you can use to authenticate the user on your backend.
+
+## Implementing server-side verification
+
+To implement server-side verification, follow these 3 steps:
+
+### Step 1. Retrieve the `JWT` (`idToken`)
+
+When a user logs in through Web3Auth, a `JWT` can be generated to prove that the user owns the wallet, and you can verify it on your backend server.
+
+**Different Flows for Different Wallets:**
+
+- **Social logins**: These tokens include a public key linked to the user's wallet.
+- **External wallets**: These tokens include the wallet address instead of the public key.
+
+### Step 2. Verify the `JWT`
+
+Use the public key/address provided to verify the `JWT`'s authenticity. This step confirms that the token is valid and the information it contains about the user can be trusted.
+
+### Step 3. Authenticate the user
+
+Based on the verified claims within the `JWT`, including wallet address ownership, authenticate the user in your backend system.
+
+## Next steps
+
+See the [Identity Token](/embedded-wallets/authentication/id-token) documentation to learn more about the `JWT` and how to verify it.

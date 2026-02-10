@@ -1,8 +1,6 @@
 ---
 sidebar_position: 2
 sidebar_label: Events
-tags:
-  - Keyring API
 ---
 
 # Account Management API events

@@ -1,0 +1,68 @@
+---
+title: useWalletServicesPlugin
+sidebar_label: useWalletServicesPlugin
+description: '@web3auth/modal React Hooks useWalletServicesPlugin | Embedded Wallets'
+---
+
+Hook to access the Wallet Services plugin context, enabling wallet-related features such as WalletConnect, checkout, swap, and wallet UI.
+
+### Import
+
+```tsx
+import { useWalletServicesPlugin } from '@web3auth/modal/react'
+```
+
+### Usage
+
+```tsx
+import { useWalletServicesPlugin } from '@web3auth/modal/react'
+
+function WalletServicesExample() {
+  const { isPluginConnected, showWalletConnectScanner, showCheckout, showWalletUI } =
+    useWalletServicesPlugin()
+
+  return (
+    <div>
+      <button onClick={() => showWalletConnectScanner()} disabled={!isPluginConnected}>
+        Show WalletConnect Scanner
+      </button>
+      <button onClick={() => showCheckout()} disabled={!isPluginConnected}>
+        Show Checkout
+      </button>
+      <button onClick={() => showWalletUI()} disabled={!isPluginConnected}>
+        Show Wallet UI
+      </button>
+    </div>
+  )
+}
+```
+
+### Return type
+
+```tsx
+import { type IWalletServicesContext } from '@web3auth/modal/react'
+```
+
+#### `IsPluginConnected`
+
+`boolean`
+
+Whether the Wallet Services plugin is connected and ready to use.
+
+#### `showWalletConnectScanner`
+
+`(showWalletConnectParams?: BaseEmbedControllerState["showWalletConnect"]) => Promise<void>`
+
+Shows the WalletConnect QR scanner. Accepts optional parameters for customizing the scanner behavior.
+
+#### `showCheckout`
+
+`(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
+
+Shows the topup modal for fiat-to-crypto checkout. Accepts optional parameters for customizing the checkout experience.
+
+#### `showWalletUI`
+
+`(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
+
+Shows the Wallet Services modal UI. Accepts optional parameters for customizing the wallet UI experience.

@@ -1,0 +1,176 @@
+---
+title: Multi Factor Authentication
+sidebar_label: Multi Factor Authentication
+description: '@web3auth/modal Multi Factor Authentication | Embedded Wallets'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+import AuthAdapterSettings from '../../_common/_auth-adapter-settings.mdx'
+import AuthLoginSettings from '../../_common/_auth-login-settings.mdx'
+import MFAMinimumPlan from '../../_common/_scale_plan_note.mdx'
+
+Web3Auth supports Multi-Factor Authentication (MFA) for enhanced security. MFA requires two or more factors—such as device, social, seed phrase, or password—to access your account and recover it if needed. When a recovery factor is set up, MFA is enabled and your key is split into three shares, using Web3Auth MPC for secure, self-custodial storage.
+
+![Backup MFA Options](/img/embedded-wallets/mfa/mfa-options.gif)
+
+:::caution
+
+If you are using default verifiers, your users may have set up MFA on other dapps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
+
+:::
+
+## Multi-Factor Authentication configuration options
+
+There are two ways to configure MFA in your application:
+
+1. **Using the `mfaLevel` setting:** Controls the frequency of the MFA setup request screen.
+2. **Using the `mfaSettings` setting:** Provides granular control over each factor, with their priority level, enable/disable status, and mandatory/optional settings.
+
+## `mfaLevel`
+
+The `mfaLevel` setting allows you to control when and how the MFA setup screen appears to users.
+
+```tsx
+mfaLevel?: MfaLevelType;
+```
+
+### Multi-Factor Authentication level types
+
+| Level       | Value       | Description                                        |
+| ----------- | ----------- | -------------------------------------------------- |
+| `DEFAULT`   | "default"   | MFA screen appears every 10th login                |
+| `OPTIONAL`  | "optional"  | MFA screen appears every login, but can be skipped |
+| `MANDATORY` | "mandatory" | MFA setup is required after login                  |
+| `NONE`      | "none"      | MFA setup is skipped entirely                      |
+
+### Type definition
+
+```tsx
+export type MfaLevelType = (typeof MFA_LEVELS)[keyof typeof MFA_LEVELS]
+export declare const MFA_LEVELS: {
+  readonly DEFAULT: 'default'
+  readonly OPTIONAL: 'optional'
+  readonly MANDATORY: 'mandatory'
+  readonly NONE: 'none'
+}
+```
+
+### Usage examples
+
+### Usage
+
+```tsx
+import { WALLET_CONNECTORS, AUTH_CONNECTION, MFA_LEVELS } from '@web3auth/modal'
+
+await connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.GOOGLE,
+  authConnectionId: 'w3a-google-demo',
+  // focus-next-line
+  mfaLevel: MFA_LEVELS.MANDATORY,
+})
+```
+
+## `mfaSettings`
+
+<MFAMinimumPlan />
+
+The `mfaSettings` option provides granular control over each individual MFA factor.
+
+```tsx
+mfaSettings?: MfaSettings;
+```
+
+### Multi-Factor Authentication factors
+
+| Factor          | Key                   | Description                          |
+| --------------- | --------------------- | ------------------------------------ |
+| `DEVICE`        | "deviceShareFactor"   | Device-based authentication.         |
+| `BACKUP_SHARE`  | "backUpShareFactor"   | Backup share (typically seed phrase).|
+| `SOCIAL_BACKUP` | "socialBackupFactor"  | Social account backup.               |
+| `PASSWORD`      | "passwordFactor"      | Password-based authentication.       |
+| `AUTHENTICATOR` | "authenticatorFactor" | Authenticator app (TOTP).            |
+
+### Multi-Factor Authentication settings properties
+| Property    | Type    | Description                                            |
+| ----------- | ------- | ------------------------------------------------------ |
+| `enable`    | boolean | Whether this factor is enabled.                        |
+| `priority`  | number  | Order in which factors are presented (lower = earlier).|
+| `mandatory` | boolean | Whether this factor is required.                       |
+
+### Type definitions
+
+```tsx
+export type MfaSettings = Partial<Record<MFA_FACTOR_TYPE, MFA_SETTINGS>>
+export type MFA_FACTOR_TYPE = (typeof MFA_FACTOR)[keyof typeof MFA_FACTOR]
+export declare const MFA_FACTOR: {
+  readonly DEVICE: 'deviceShareFactor'
+  readonly BACKUP_SHARE: 'backUpShareFactor'
+  readonly SOCIAL_BACKUP: 'socialBackupFactor'
+  readonly PASSWORD: 'passwordFactor'
+  readonly PASSKEYS: 'passkeysFactor'
+  readonly AUTHENTICATOR: 'authenticatorFactor'
+}
+export type MFA_SETTINGS = {
+  enable: boolean
+  priority?: number
+  mandatory?: boolean
+}
+```
+
+### Important rules
+
+- At least two factors must be enabled when setting up MFA.
+- If you set `mandatory: true` for all factors, the user must set up all enabled factors.
+- If you set `mandatory: false` for all factors, the user can skip setting up MFA, but at least two factors are still required.
+- If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can optionally set up the others.
+- The `priority` field determines the order of setup - lower priority values appear first.
+
+### Usage
+
+```tsx title="web3AuthContext.tsx"
+import { MFA_FACTORWEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
+
+const web3AuthOptions: Web3AuthOptions = {
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // focus-start
+  mfaSettings: {
+    [MFA_FACTOR.DEVICE]: {
+      enable: true,
+      priority: 1,
+      mandatory: true, // at least two factors are mandatory
+    },
+    [MFA_FACTOR.BACKUP_SHARE]: {
+      enable: true,
+      priority: 2,
+      mandatory: true, // at least two factors are mandatory
+    },
+    [MFA_FACTOR.SOCIAL_BACKUP]: {
+      enable: true,
+      priority: 3,
+      mandatory: false,
+    },
+    [MFA_FACTOR.PASSWORD]: {
+      enable: true,
+      priority: 4,
+      mandatory: false,
+    },
+    [MFA_FACTOR.PASSKEYS]: {
+      enable: true,
+      priority: 5,
+      mandatory: false,
+    },
+    [MFA_FACTOR.AUTHENTICATOR]: {
+      enable: true,
+      priority: 6,
+      mandatory: false,
+    },
+  },
+  // focus-end
+}
+
+const web3AuthContextConfig = {
+  web3AuthOptions,
+}
+```

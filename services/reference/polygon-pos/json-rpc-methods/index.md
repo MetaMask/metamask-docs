@@ -1,4 +1,9 @@
-# JSON-RPC methods
+---
+sidebar_label: JSON-RPC API
+sidebar_key: polygon-pos-json-rpc-api
+---
+
+# Polygon PoS JSON-RPC API
 
 Polygon's Bor node API is based on Go Ethereum (Geth).
 

@@ -1,0 +1,103 @@
+---
+description: API method credit cost.
+---
+
+import React from 'react';
+import CreditCostTable from '@site/src/components/CreditCost/CreditCostTable.js';
+
+# Credit costs
+
+The following tables outline the credit costs associated with various RPC methods across different
+networks. The credit calculation logic is designed to ensure accurate and fair pricing based on the
+specific network and method being used.
+
+:::caution important
+
+Requests for [archive data](../../concepts/archive-data.md) (older than 128 blocks)
+currently cost the same as non-archive data, but this might change in the near future.
+:::
+
+The process used to determine the credit cost for each request is as follows:
+
+1. **Initial check for a specific credit value** - When you make a request, the system first checks if there is a specific credit value assigned for the network and method used.
+   This ensures that any unique resource requirements or costs associated with a particular network are accurately reflected.
+
+1. **Fallback to the Ethereum method's credit value** - If no specific credit value is found for the network, the system applies the Ethereum method's credit value.
+   Ethereum serves as the baseline for pricing core RPC methods.
+
+1. **Fallback to the default credit value** - If the method is not found in the Ethereum table either, the system applies a default credit value.
+   Initially set to 80 credits, this default value ensures all requests are accounted for, even if specific pricing information is not available.
+
+## Error code costs
+
+When making requests that return HTTP status code errors, some errors count towards your credit usage:
+
+- **`429` errors**: These are not charged and can occur if you've exceeded your allowed throughput limit (requests per second).
+- **`402` errors**: These are not charged and can occur if you've exceeded your allowed daily credit usage.
+- **`4xx` errors**: These are errors caused by human input, and consume 5 credits.
+- **`5xx` errors**: These are server errors, and do not consume any credit charges.
+
+Making requests to a non-existent JSON-RPC method costs 160 credits.
+
+## Ethereum
+
+The Ethereum methods serve as a baseline for pricing RPC methods. If a credit cost is not available for
+a specific network, then use the default Ethereum method's credit cost.
+
+### Standard Ethereum-compliant methods
+
+<CreditCostTable methods="evm" />
+
+### Trace methods
+
+<CreditCostTable methods="evm_trace" />
+
+### Filter methods
+
+<CreditCostTable methods="evm_filter" />
+
+### Debug methods
+
+<CreditCostTable methods="evm_debug" />
+
+### Subscription events
+
+You can subscribe and unsubscribe to events using [`eth_subscribe`](../../reference/ethereum/json-rpc-methods/subscription-methods/eth_subscribe.mdx) and [`eth_unsubscribe`](../../reference/ethereum/json-rpc-methods/subscription-methods/eth_unsubscribe.mdx).
+
+The credit costs for the `logs` and `newHeads` events are charged per block, whereas `newPendingTransaction` events
+are charged at approximately one second intervals.
+
+<CreditCostTable methods="evm_subscription" />
+
+## Linea
+
+<CreditCostTable methods="linea" />
+
+## Polygon
+
+<CreditCostTable methods="polygon" />
+
+## Solana
+
+All Solana methods are charged at 160 credits per request.
+
+## Starknet
+
+<CreditCostTable methods="starknet" />
+
+## ZKsync Era
+
+<CreditCostTable methods="zksync" />
+
+## Gas API
+
+<CreditCostTable methods="gasApi" />
+
+## Bundler API
+
+:::info
+Refer to the [supported networks section](../../concepts/bundler.md#supported-networks)
+for the list of networks that support the Bundler API.
+:::
+
+<CreditCostTable methods="bundler" />

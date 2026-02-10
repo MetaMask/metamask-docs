@@ -1,16 +1,18 @@
 ---
 description: Scroll debug methods.
+sidebar_label: Debug methods
+sidebar_key: scroll-debug-methods
 ---
 
-# Debug methods
+# Scroll debug methods
 
 The debug API methods allow you to inspect and debug the network. Infura supports the following debug 
 methods on the Scroll network:
 
-- [`debug_traceBlock`](debug_traceblock.md)
-- [`debug_traceBlockByHash`](debug_traceblockbyhash.md)
-- [`debug_traceBlockByNumber`](debug_traceblockbynumber.md)
-- [`debug_traceCall`](debug_tracecall.md)
+- [`debug_traceBlock`](debug_traceblock.mdx)
+- [`debug_traceBlockByHash`](debug_traceblockbyhash.mdx)
+- [`debug_traceBlockByNumber`](debug_traceblockbynumber.mdx)
+- [`debug_traceCall`](debug_tracecall.mdx)
 
 ## Debug tracing types
 

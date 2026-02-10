@@ -130,7 +130,7 @@
 html {
   box-sizing: border-box;
 
-  font-family: var(--font-mm-centra);
+  font-family: var(--font-mm-euclid);
   font-size: 10px;
   font-weight: normal;
   font-style: normal;
@@ -139,10 +139,6 @@ html {
   -moz-font-smoothing: antialiased;
   -ms-font-smoothing: antialiased;
   font-smoothing: antialiased;
-
-  @media screen and (min-width: 1900px) {
-    font-size: 12px;
-  }
 
   &.no-scroll {
     overflow: hidden;

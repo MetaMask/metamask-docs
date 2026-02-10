@@ -34,6 +34,7 @@
   > h6,
   > ul,
   > ol,
+  table,
   .cards {
     a {
       color: var(--ifm-link-color);
@@ -68,6 +69,16 @@
 
     li {
       margin-left: 2rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  ul ol {
+    margin-top: 1rem;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
+
+    li {
       margin-bottom: 1rem;
     }
   }
@@ -115,6 +126,8 @@
   ol li > code,
   a > code,
   table > code,
+  table td > code,
+  table th > code,
   span > code {
     @extend .font-mm-sans-mono;
     font-size: 80%;

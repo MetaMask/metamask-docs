@@ -1,0 +1,191 @@
+.subNavBar {
+  background: var(--ifm-background-color);
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+  padding: 0;
+  position: sticky;
+  top: var(--ifm-navbar-height);
+  z-index: 100;
+  font-family: var(--ifm-font-family-base);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  backdrop-filter: blur(8px);
+}
+
+.container {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* Section heading - hidden by default, only shown on desktop with sidebar */
+.sectionHeading {
+  display: none;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ifm-color-emphasis-1000);
+  white-space: nowrap;
+  border-right: 1px solid var(--ifm-toc-border-color);
+  width: var(--doc-sidebar-width);
+  flex-shrink: 0;
+  text-align: left;
+  padding: 0 2.4rem;
+}
+
+/* Only show section heading on desktop with sidebar */
+@media (width >=997px) {
+  .sectionHeading {
+    display: block;
+  }
+
+  .navContent {
+    margin-left: 2rem;
+  }
+}
+
+.navContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.linksList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  /* Firefox */
+  -ms-overflow-style: none;
+
+  /* IE and Edge */
+}
+
+.linksList::-webkit-scrollbar {
+  display: none;
+
+  /* Chrome, Safari, Opera */
+}
+
+.linkItem {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.link {
+  display: block;
+  padding: 1.2rem 1.5rem;
+  text-decoration: none !important;
+  color: var(--ifm-navbar-link-color, var(--ifm-color-emphasis-700));
+  font-weight: 500;
+  font-size: 1.6rem;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.link:hover {
+  color: var(--ifm-navbar-link-hover-color, var(--ifm-color-primary));
+  text-decoration: none !important;
+  background-color: var(--ifm-hover-overlay);
+}
+
+.activeLink {
+  color: var(--ifm-navbar-link-hover-color, var(--ifm-color-primary)) !important;
+  border-bottom-color: var(--ifm-navbar-link-hover-color, var(--ifm-color-primary));
+  font-weight: 600;
+}
+
+.externalLink {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.externalIcon {
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+/* Dark mode support */
+[data-theme='dark'] .subNavBar {
+  background: var(--ifm-background-color);
+  border-bottom-color: var(--ifm-color-emphasis-300);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 30%);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme='dark'] .link {
+  color: var(--ifm-navbar-link-color, var(--ifm-color-emphasis-700));
+}
+
+[data-theme='dark'] .link:hover {
+  color: var(--ifm-navbar-link-hover-color, var(--ifm-color-primary));
+  background-color: var(--ifm-hover-overlay);
+}
+
+[data-theme='dark'] .activeLink {
+  color: var(--ifm-navbar-link-hover-color, var(--ifm-color-primary)) !important;
+}
+
+[data-theme='dark'] .sectionHeading {
+  color: var(--ifm-color-emphasis-800);
+  border-right-color: var(--ifm-color-emphasis-300);
+}
+
+/* Responsive design */
+@media (width <= 996px) {
+  .container {
+    padding: 0 var(--ifm-spacing-horizontal);
+  }
+}
+
+@media (width <= 996px) {
+  .container {
+    padding: 0 var(--ifm-spacing-horizontal);
+  }
+
+  /* Section heading is hidden on mobile anyway, so no special styling needed */
+  .link {
+    padding: 1rem 1.5rem;
+    font-size: 1.6rem;
+  }
+}
+
+@media (width <= 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .link {
+    padding: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .linksList {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .linksList::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (width <= 576px) {
+  .linksList {
+    padding: 0 0.5rem;
+  }
+
+  .link {
+    padding: 0.9rem 0.8rem;
+    font-size: 1.4rem;
+  }
+
+  .sectionHeading {
+    font-size: 1.2rem;
+  }
+}

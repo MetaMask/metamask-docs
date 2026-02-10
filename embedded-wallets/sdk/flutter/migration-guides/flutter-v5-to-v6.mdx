@@ -1,0 +1,63 @@
+---
+title: PnP Flutter SDK - v5 to v6
+description: 'PnP Flutter SDK - v5 to v6 | Embedded Wallets'
+sidebar_label: v5 to v6
+---
+
+This migration guide provides steps for upgrading from version v5 to v6 of the PnP Flutter SDK. The guide outlines significant changes and enhancements, including the support of Web3Auth OpenLogin version v9, and Wallet Services v3.
+
+## Breaking changes
+
+### `getSignResponse` is now removed.
+
+In v6, we try to improve the developer experience by removing the `getSignResponse` method and returning the result in the `request` method itself.
+
+Previously, after calling the `request` method, developers had to use the `getSignResponse` method to retrieve the `SignResponse`. In the latest version v6, the `request` method will return the `SignResponse` directly.
+
+```dart
+try {
+  List<dynamic> params = [];
+  // Message to be signed
+  params.add("Hello, Web3Auth from Flutter!");
+  // User's EOA address
+  params.add("<User Address in Hex>");
+
+  // add-next-line
+  final response = await Web3AuthFlutter.request(
+    ChainConfig(
+      chainId: "0x1",
+      rpcTarget: "https://mainnet.infura.io/v3/$key",
+    ),
+    "personal_sign",
+    params,
+  );
+
+  // remove-next-line
+  final response = await Web3AuthFlutter.getSignResponse();
+
+  log(response.toString());
+} on UserCancelledException {
+  log("User cancelled.");
+} catch(e) {
+  log("Unknown exception occurred");
+}
+```
+
+## Minimum Android SDK version
+
+The minimum Android SDK version for the PnP Flutter SDK is now 26. Please update your app level gradle file to set the minimum SDK version to 26.
+
+```gradle
+defaultConfig {
+    // ...
+    // add-next-line
+    minSdkVersion 26 //flutter.minSdkVersion
+    // remove-next-line
+    minSdkVersion 24 //flutter.minSdkVersion
+    // ...
+}
+```
+
+## Enhancements
+
+In the latest version v6, we have added support for the Web3Auth Auth Service version v9, and Wallet Services v3. In Wallet Services v3, the prebuilt wallet UI now supports the swap functionality allowing users to swap to their favorite token from the app itself.

@@ -1,0 +1,44 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Sepolia Testnet", value: "sepolia" },
+    { label: "Holesky Testnet", value: "holesky" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0x1
+- **RPC URL:** You can use our bundled RPC service from Infura, or your own choice of RPC service for production.
+- **Display Name:** Ethereum Mainnet
+- **Block Explorer Link:** https://etherscan.io
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+
+<TabItem value="sepolia">
+
+- **Chain ID:** 0xaa36a7
+- **Public RPC URL:** https://rpc.sepolia.org
+- **Display Name:** Ethereum Sepolia Testnet
+- **Block Explorer Link:** https://sepolia.etherscan.io
+- **Ticker:** ETH
+- **Ticker Name:** SepoliaETH
+
+</TabItem>
+
+<TabItem value="holesky">
+
+- **Chain ID:** 0x4268
+- **Public RPC URL:** https://rpc.holesky.ethpandaops.io
+- **Display Name:** Ethereum Holesky Testnet
+- **Block Explorer Link:** https://holesky.etherscan.io
+- **Ticker:** ETH
+- **Ticker Name:** HoleskyETH
+
+</TabItem>
+</Tabs>

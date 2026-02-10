@@ -1,6 +1,12 @@
-.tableOfContents_node_modules-\@docusaurus-theme-classic-lib-theme-TOC-styles-module {
+/* Target ToC container using attribute selector for CSS modules compatibility */
+[class*='tableOfContents'] {
   margin-top: -3rem;
-  top: calc(var(--ifm-navbar-height) + 2rem) !important;
+  top: calc(var(--ifm-navbar-height) + 4rem) !important;
+}
+
+/* Increase offset when SubNavBar is present to clear the sticky banner */
+body:has([class*='subNavBar']) [class*='tableOfContents'] {
+  top: calc(var(--ifm-navbar-height) + 9rem) !important;
 }
 
 .table-of-contents {
@@ -48,6 +54,7 @@
       border-radius: 0.4rem;
       background: var(--ifm-code-background);
       padding: 0.2rem 0.5rem;
+      hyphens: auto;
     }
   }
   li {

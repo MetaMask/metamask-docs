@@ -1,13 +1,23 @@
 ---
-title: "eth_sendRawTransaction"
+title: Ethereum eth_sendRawTransaction
+sidebar_label: eth_sendRawTransaction
+description: Submits pre-signed transaction on Ethereum.
 ---
 
 import Tabs from "@theme/Tabs"
 import TabItem from "@theme/TabItem"
 
-import Description from "./_eth_sendrawtransaction-description.mdx"
+import Description from "/services/reference/_partials/_eth_sendrawtransaction-description.mdx"
+
+# `eth_sendRawTransaction`
 
 <Description />
+
+:::tip MEV protection
+Maximal Extractable Value (MEV) protection is available for all Infura customers on Mainnet.
+This means `r`, `s`, and `v` signature fields might return empty hex values (`0x0`)
+while the transaction is pending on Mainnet.
+:::
 
 ## Parameters
 

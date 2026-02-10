@@ -1,0 +1,16 @@
+.navbarContainer {
+  min-height: var(--ifm-navbar-height);
+  position: sticky;
+  top: 0;
+  z-index: var(--ifm-z-index-fixed);
+}
+
+.navbar {
+  position: relative;
+  width: 100%;
+}
+
+.navbarHidden {
+  visibility: hidden;
+  pointer-events: none;
+}

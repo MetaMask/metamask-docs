@@ -1,0 +1,179 @@
+---
+title: Getting Started with the Web SDK
+sidebar_label: Getting Started
+description: 'Embedded Wallets Web SDK (formerly Web3Auth Plug and Play)'
+---
+
+import ExampleCards from '@theme/ExampleCards'
+import { webExamples, QUICK_START } from '@site/src/utils/example-maps'
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import SdkTroubleshootingIntro from '../_common/_sdk-troubleshooting-intro.mdx'
+
+:::note[Naming]
+
+Embedded Wallets SDKs were previously known as Web3Auth Plug and Play SDKs. Package names and APIs remain Web3Auth (for example, `@web3auth/modal`).
+
+:::
+
+## Overview
+
+Embedded Wallets provide a seamless authentication experience for web applications with social logins, external wallets, and more. Our JavaScript SDK simplifies how you connect users to their preferred wallets and manage authentication state.
+
+## Requirements
+
+- This is a frontend SDK and must be used in a browser environment.
+- Basic knowledge of JavaScript.
+
+## Prerequisites
+
+- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+
+:::tip
+
+See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
+
+:::
+
+## Installation
+
+Install the Web3Auth Modal SDK using npm or yarn:
+
+```bash npm2yarn
+npm install --save @web3auth/modal
+```
+
+### 1. Configuration
+
+Create an instance of Embedded Wallets containing the basic required configuration. This configuration will contain your Embedded Wallets Client ID and network details from the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+
+```javascript
+import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+})
+```
+
+### 2. Initialize Embedded Wallets
+
+Initialize the Web3Auth instance before using any authentication methods:
+
+```javascript
+await web3auth.init()
+```
+
+## Advanced configuration
+
+The Web3Auth Modal SDK offers a rich set of advanced configuration options:
+
+- **[Smart accounts](./advanced/smart-accounts.mdx):** Configure account abstraction parameters.
+- **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
+- **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx):** Set up and manage MFA.
+- **[Wallet Services](./advanced/wallet-services.mdx):** Integrate additional Wallet Services.
+
+:::tip
+
+See the [advanced configuration](./advanced/README.mdx) section to learn more about each configuration option.
+
+:::
+
+<Tabs
+  defaultValue="basic-config"
+  values={[
+    { label: "Basic Configuration", value: "basic-config" },
+    { label: "Advanced Configuration", value: "advanced-config" },
+  ]}
+>
+
+<TabItem value="basic-config">
+
+```javascript
+import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
+})
+```
+
+</TabItem>
+
+<TabItem value="advanced-config">
+
+```javascript
+import { Web3Auth, WEB3AUTH_NETWORK, WALLET_CONNECTORS, MFA_LEVELS } from '@web3auth/modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  modalConfig: {
+    connectors: {
+      [WALLET_CONNECTORS.AUTH]: {
+        label: 'auth',
+        loginMethods: {
+          google: {
+            name: 'google login',
+            // logoDark: "url to your custom logo which will shown in dark mode",
+          },
+          facebook: {
+            name: 'facebook login',
+            showOnModal: false, // hides the facebook option
+          },
+          email_passwordless: {
+            name: 'email passwordless login',
+            showOnModal: true,
+            authConnectionId: 'w3a-email_passwordless-demo',
+          },
+          sms_passwordless: {
+            name: 'sms passwordless login',
+            showOnModal: true,
+            authConnectionId: 'w3a-sms_passwordless-demo',
+          },
+        },
+        showOnModal: true, // set to false to hide all social login methods
+      },
+    },
+    hideWalletDiscovery: true, // set to true to hide external wallets discovery
+  },
+  mfaLevel: MFA_LEVELS.MANDATORY,
+})
+```
+
+</TabItem>
+
+</Tabs>
+
+## Blockchain integration
+
+Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**, each with dedicated provider methods.
+
+### Solana integration
+
+To interact with Solana networks, you can get the provider from Web3Auth and use it with Solana libraries:
+
+```javascript
+await web3auth.connect()
+// Use with a Solana library
+const solanaWallet = new SolanaWallet(web3auth.provider)
+```
+
+### Ethereum integration
+
+For Ethereum integration, you can get the provider and use it with ethers or viem:
+
+```javascript
+await web3auth.connect()
+// Use with ethers.js
+const ethProvider = new ethers.BrowserProvider(web3auth.provider)
+// OR
+// Use with viem
+const walletClient = createWalletClient({
+  chain: getViewChain(web3auth.provider),
+  transport: custom(web3auth.provider),
+})
+```
+
+<SdkTroubleshootingIntro />

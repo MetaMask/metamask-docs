@@ -1,0 +1,136 @@
+---
+title: Connect Embedded Wallets with any Blockchain
+sidebar_label: Non EVM Blockchains
+image: 'img/metamaskog.jpg'
+keywords: [web3auth, authentication, blockchain, agnostic]
+description: 'Connect Embedded Wallets with any Blockchain - Chain Agnostic'
+---
+
+import Tiles from '@theme/Tiles'
+
+With the Embedded Wallets SDKs (formerly Web3Auth), we can export the private key on demand. The private key returned is of the curve `secp256k1` & `ed25519` based on the particular requests. While these key curves serve the majority of blockchains out there, certain blockchains have different curve implementations of their own.
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+## Embedded Wallets are chain agnostic
+
+By default, Embedded Wallets supports the `secp256k1` and `ed25519` key curves. While these key curves serve the majority of blockchains out there, certain blockchains have different curve implementations of their own. With **Embedded Wallets you can interact with any blockchain of your choice**.
+
+In Embedded Wallets the ability to export the user's private key comes in handy. This private key can be utilized by the dApp to interact with the chain.
+
+:::info
+
+Embedded Wallets is composable - you can combine it with meta-transaction flows, multisigs, and other cryptographic protocols. It is easy to build on top of, and generally fits in with most other technology stacks, including but not limited to; your favorite scalability solutions, meta transactions, smart contract wallets, different elliptic curve pairs and even RSA.
+
+:::
+
+## Standard approach for connecting with non EVM chains
+
+For connecting with different blockchains to make blockchain calls like getting the user's `account`, fetch `balance`, `sign transaction`, `send transaction`, `read` from and `write` to the smart contract, etc., you need to find particular libraries that can help you achieve the following:
+
+1. Connect to an RPC endpoint and make the standard calls to the blockchain
+2. Use the private key returned by Web3Auth to create a key pair and signer for the particular chain.
+
+While the first is generally quite straightforward and well documented, the second point generally can take certain different methods depending upon what key curve and signer methods the blockchain supports. These methods can use one of the following approaches:
+
+- If the key curve supported by the blockchain is either `secp256k1` or `ed25519`, you can use their key pair libraries to directly get the account and key details to connect with and initialize the client-side libraries for making calls.
+
+  :::tip
+
+  You can refer to our [**StarkEx**](/embedded-wallets/connect-blockchain/other/starkex) or [**Aptos**](/embedded-wallets/connect-blockchain/other/aptos) examples for this approach.
+
+  :::
+
+- If the key curve supported by the blockchain is different, you can either derive a subkey in the particular curve or use the Web3Auth key as an extropy to derive a mnemonic for the particular chain. You can use the mnemonic to derive a private key. Either approaches give you a private key in the respective curve of the blockchain. Finally, using this key, you can get the key pair and initialize the client-side libraries accordingly.
+
+  :::tip
+
+  You can find this approach followed on our [**Tezos**](/embedded-wallets/connect-blockchain/other/tezos) and [**Algorand**](/embedded-wallets/connect-blockchain/other/algorand) examples
+
+  :::
+
+export const OtherChains = [
+  {
+    name: "",
+    description: "",
+    tiles: [
+      {
+        key: "algorand",
+        title: "Algorand",
+        icon: "logo-algorand.png",
+        path: "/embedded-wallets/connect-blockchain/other/algorand",
+      },
+      {
+        key: "aptos",
+        title: "Aptos",
+        icon: "logo-aptos.png",
+        path: "/embedded-wallets/connect-blockchain/other/aptos",
+      },
+      {
+        key: "cosmos",
+        title: "Cosmos",
+        icon: "logo-cosmos.png",
+        path: "/embedded-wallets/connect-blockchain/other/cosmos",
+      },
+      {
+        key: "immutablex",
+        title: "ImmutableX",
+        icon: "logo-immutablex.png",
+        path: "/embedded-wallets/connect-blockchain/other/immutablex",
+      },
+      {
+        key: "near",
+        title: "Near",
+        icon: "logo-near.png",
+        path: "/embedded-wallets/connect-blockchain/other/near",
+      },
+      {
+        key: "polkadot",
+        title: "Polkadot",
+        icon: "logo-polkadot.png",
+        path: "/embedded-wallets/connect-blockchain/other/polkadot",
+      },
+      {
+        key: "polymesh",
+        title: "Polymesh",
+        icon: "logo-polymesh.png",
+        path: "/embedded-wallets/connect-blockchain/other/polymesh",
+      },
+      {
+        key: "starkex",
+        title: "StarkEx",
+        icon: "logo-starkex.png",
+        path: "/embedded-wallets/connect-blockchain/other/starkex",
+      },
+      {
+        key: "starknet",
+        title: "Starknet",
+        icon: "logo-starknet.png",
+        path: "/embedded-wallets/connect-blockchain/other/starknet",
+      },
+      {
+        key: "sui",
+        title: "Sui",
+        icon: "logo-sui.png",
+        path: "/embedded-wallets/connect-blockchain/other/sui",
+      },
+      {
+        key: "tezos",
+        title: "Tezos",
+        icon: "logo-tezos.png",
+        path: "/embedded-wallets/connect-blockchain/other/tezos",
+      },
+
+    ],
+
+}, ];
+
+## Non-EVM chain guides
+
+You can checkout the following guides we've written for certain non EVM blockchains. The approach mentioned in this doc is very similar to the one followed in each one of them.
+
+<Tiles tileGroups={OtherChains} />

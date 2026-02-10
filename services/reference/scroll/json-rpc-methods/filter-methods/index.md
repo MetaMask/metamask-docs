@@ -1,8 +1,11 @@
 ---
-title: "Filter methods"
+title: Scroll filter methods
+sidebar_label: Filter methods
+sidebar_key: scroll-filter-methods
+description: Scroll filter methods
 ---
 
-# Filter methods
+# Scroll filter methods
 
 Infura supports the following filter methods over both HTTP and WebSocket. In both cases, the filter IDs can be shared by any connection using the same API key.
 

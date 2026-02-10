@@ -1,28 +1,34 @@
 .paramWrapper {
   border-bottom: 1px solid var(--general-gray-light);
-  padding-bottom: 1.5rem;
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .borderWrapper {
   border-bottom: 1px solid var(--general-gray-light);
-  padding-top: 2rem;
-  padding-bottom: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 0.8rem;
 }
 
 .schemaWrapper {
-  padding: 1.6rem 0;
+  padding: 1rem 0;
 }
 
 .schemaHeader {
   display: flex;
   align-items: baseline;
   gap: 0.8rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
+
+  h5 {
+    font-size: inherit;
+  }
 }
 
 .textAltColor {
   color: var(--general-gray-dark);
+  font-style: italic;
+  font-size: calc(var(--parser-font-size) * 0.85);
 
   [data-theme='dark'] & {
     color: var(--general-gray);
@@ -30,12 +36,13 @@
 }
 
 .textErrorColor {
-  font-size: 1.2rem;
+  font-size: calc(var(--parser-font-size) * 0.85);
   color: var(--error);
 }
 
 .description {
   color: var(--general-gray-dark);
+  font-size: inherit;
 
   [data-theme='dark'] & {
     color: var(--general-gray);
@@ -43,7 +50,7 @@
 }
 
 .paramItemWrapper {
-  padding: 0 1.6rem;
+  padding: 0 1.2rem;
 
   .borderTopLine {
     border-top: 1px solid transparent;
@@ -52,6 +59,84 @@
 
 .paramItemWrapper:not(:first-child) {
   border-top: 1px solid var(--general-gray-light);
+}
+
+.propItemWrapper {
+  margin-top: 0.5rem;
+}
+
+.propItemLabel {
+  font-weight: 500;
+  font-size: calc(var(--parser-font-size) * 0.85);
+  color: var(--general-gray-dark);
+  margin-right: 0.4rem;
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}
+
+.propItemValue {
+  font-family: var(--font-mm-sans-mono);
+  font-size: calc(var(--parser-font-size) * 0.85);
+  color: var(--general-black);
+  background-color: var(--ifm-code-background);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+  word-break: break-word;
+
+  [data-theme='dark'] & {
+    color: var(--general-white);
+  }
+}
+
+.patternWrapper {
+  display: inline-block;
+  background-color: var(--general-white-off);
+  border: 1px solid var(--general-gray-light);
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.4rem;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.1;
+  vertical-align: baseline;
+
+  [data-theme='dark'] & {
+    background-color: var(--general-black-light);
+    border-color: var(--general-black-light);
+  }
+}
+
+.patternLabel {
+  font-weight: 500;
+  color: var(--general-gray-dark);
+  margin-right: 0.2rem;
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}
+
+.patternValue {
+  font-family: var(--font-mm-sans-mono);
+  color: var(--general-gray-dark);
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}
+
+.paramSeparator {
+  border: none;
+  border-top: 1px dotted var(--general-gray-light);
+  margin: 0.6rem 0;
+  height: 0;
+  opacity: 0.6;
+
+  [data-theme='dark'] & {
+    border-top-color: var(--general-black-light);
+    opacity: 0.7;
+  }
 }
 
 .borderTopLine {
@@ -73,6 +158,7 @@
 .enumWrapper {
   border: 1px solid var(--general-gray-light);
   margin-bottom: 2rem;
+  font-size: inherit;
 }
 
 .enumItem {
@@ -86,7 +172,7 @@
 
 .enumTitle {
   display: inline-block;
-  font-size: 1.2rem;
+  font-size: calc(var(--parser-font-size) * 0.85);
   line-height: 1;
   padding: 0.4rem;
   border: 1px solid var(--general-gray-light);
@@ -94,17 +180,126 @@
 }
 
 .heading1 {
-  font-size: 2.4rem;
+  font-size: calc(var(--parser-font-size) * 1.93) !important;
   line-height: 133.333%;
 }
 
 .heading2 {
-  font-size: 2rem;
+  font-size: calc(var(--parser-font-size) * 1.64) !important;
   line-height: 140%;
 }
 
 .headingSmall {
-  font-size: 1.8rem;
+  font-size: calc(var(--parser-font-size) * 1.07) !important;
+}
+
+// Target the actual HTML structure in the parser component
+:global(.colContentWrap_src-components-ParserOpenRPC-global-module) {
+  h1 {
+    font-size: calc(var(--parser-font-size) * 1.93) !important;
+  }
+
+  h2 {
+    font-size: calc(var(--parser-font-size) * 1.64) !important;
+  }
+
+  h3 {
+    font-size: calc(var(--parser-font-size) * 1.07) !important;
+  }
+
+  h4 {
+    font-size: inherit !important;
+  }
+
+  h5 {
+    font-size: inherit !important;
+  }
+}
+
+// High specificity override for extraContent h2 to override global type-heading-sm
+:global(.colContentWrap_src-components-ParserOpenRPC-global-module) {
+  .extraContent {
+    h2 {
+      font-size: calc(var(--parser-font-size) * 1.64) !important;
+      font-family: var(--ifm-font-family-base) !important;
+      font-weight: 500 !important;
+      line-height: 140% !important;
+
+      @include bp('desktop') {
+        line-height: 125% !important;
+      }
+    }
+  }
+}
+
+// Target utility classes that might be overriding
+:global(.type-paragraph-m) {
+  h1 {
+    font-size: calc(var(--parser-font-size) * 1.93) !important;
+  }
+
+  h2 {
+    font-size: calc(var(--parser-font-size) * 1.64) !important;
+  }
+
+  h3 {
+    font-size: calc(var(--parser-font-size) * 1.07) !important;
+  }
+
+  h4 {
+    font-size: inherit !important;
+  }
+
+  h5 {
+    font-size: inherit !important;
+  }
+}
+
+// More specific targeting for the parser content area
+:global([id='centerContent']) {
+  h1 {
+    font-size: calc(var(--parser-font-size) * 1.93) !important;
+  }
+
+  h2 {
+    font-size: calc(var(--parser-font-size) * 1.64) !important;
+  }
+
+  h3 {
+    font-size: calc(var(--parser-font-size) * 1.07) !important;
+  }
+}
+
+// Additional specificity for heading elements within the parser component
+:global(.parserOpenRPC) {
+  h1 {
+    font-size: calc(var(--parser-font-size) * 1.93) !important;
+  }
+
+  h2 {
+    font-size: calc(var(--parser-font-size) * 1.64) !important;
+  }
+
+  h3 {
+    font-size: calc(var(--parser-font-size) * 1.07) !important;
+  }
+}
+
+// Target specific heading classes that might be used
+:global(.type-heading-l),
+:global(.type-heading-m),
+:global(.type-heading-s) {
+  &.heading1 {
+    font-size: calc(var(--parser-font-size) * 1.93) !important;
+  }
+
+  &.heading2 {
+    font-size: calc(var(--parser-font-size) * 1.64) !important;
+  }
+
+  &.headingSmall {
+    font-size: calc(var(--parser-font-size) * 1.07) !important;
+  }
 }
 
 .tagList {
@@ -136,6 +331,254 @@
   @include bp('desktop') {
     height: 2.3rem;
     line-height: 0.85;
+  }
+}
+
+.methodSummary {
+  font-style: italic;
+  font-size: inherit;
+}
+
+.methodDescription,
+.noParamsDescription {
+  font-size: inherit;
+}
+
+// Styles for markdown content rendered by MDContent component - scoped to ParserOpenRPC
+:global(.colContentWrap_src-components-ParserOpenRPC-global-module .md-content) {
+  font-size: inherit;
+  line-height: inherit;
+
+  a {
+    color: var(--ifm-link-color);
+    text-decoration: underline;
+    text-decoration-color: var(--ifm-link-color);
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.4rem;
+    transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    font-weight: 500;
+
+    &:hover {
+      color: var(--ifm-link-hover-color);
+      text-decoration: underline;
+      text-decoration-color: var(--ifm-link-hover-color);
+      text-decoration-thickness: 0.1rem;
+      text-underline-offset: 0.4rem;
+    }
+  }
+
+  code {
+    font-family: var(--font-mm-sans-mono);
+    font-size: var(--parser-code-font-size);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background: var(--ifm-code-background);
+    border-radius: 0.4rem;
+  }
+
+  ul,
+  ol {
+    font-size: inherit !important;
+    line-height: inherit;
+    margin: 0.5rem 0;
+  }
+
+  li {
+    font-size: inherit !important;
+    line-height: inherit;
+  }
+
+  p {
+    font-size: inherit;
+    line-height: inherit;
+  }
+}
+
+// Fallback selector for contexts where CSS module class names don't apply (e.g., wallet documentation)
+:global([id='centerContent'] .md-content) {
+  font-size: inherit;
+  line-height: inherit;
+
+  a {
+    color: var(--ifm-link-color);
+    text-decoration: underline;
+    text-decoration-color: var(--ifm-link-color);
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.4rem;
+    transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    font-weight: 500;
+
+    &:hover {
+      color: var(--ifm-link-hover-color);
+      text-decoration: underline;
+      text-decoration-color: var(--ifm-link-hover-color);
+      text-decoration-thickness: 0.1rem;
+      text-underline-offset: 0.4rem;
+    }
+  }
+
+  code {
+    font-family: var(--font-mm-sans-mono);
+    font-size: var(--parser-code-font-size);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background: var(--ifm-code-background);
+    border-radius: 0.4rem;
+  }
+
+  ul,
+  ol {
+    font-size: inherit !important;
+    line-height: inherit;
+    margin: 0.5rem 0;
+  }
+
+  li {
+    font-size: inherit !important;
+    line-height: inherit;
+  }
+
+  p {
+    font-size: inherit;
+    line-height: inherit;
+  }
+}
+
+// Additional high-specificity selectors to ensure lists match paragraph font size
+:global(.type-paragraph-m ul),
+:global(.type-paragraph-m ol),
+:global(.type-paragraph-m li) {
+  font-size: inherit !important;
+  line-height: inherit;
+}
+
+// Even higher specificity for cases where lists break out of paragraphs
+:global(.description_Vomw ul),
+:global(.description_Vomw ol),
+:global(.description_Vomw li) {
+  font-size: inherit !important;
+  line-height: inherit;
+}
+
+// Styles for extraContent to match the rest of the component
+.extraContent {
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--ifm-color-content);
+
+  // Ensure paragraphs match
+  p {
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0 0 0.5rem 0;
+  }
+
+  // Ensure lists match with proper bullet styling
+  ul {
+    font-size: inherit !important;
+    line-height: inherit;
+    margin: 0.5rem 0 1rem 0;
+    padding-left: 1.5rem;
+    list-style-type: disc;
+    list-style-position: outside;
+  }
+
+  ol {
+    font-size: inherit !important;
+    line-height: inherit;
+    margin: 0.5rem 0 1rem 0;
+    padding-left: 1.5rem;
+    list-style-type: decimal;
+    list-style-position: outside;
+  }
+
+  li {
+    font-size: inherit !important;
+    line-height: inherit;
+    margin-bottom: 0.25rem;
+    padding-left: 0.25rem;
+    list-style: inherit;
+  }
+
+  // Nested lists
+  ul ul,
+  ol ol,
+  ul ol,
+  ol ul {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  ul ul {
+    list-style-type: circle;
+  }
+
+  ul ul ul {
+    list-style-type: square;
+  }
+
+  // Ensure headings are proportional
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: calc(var(--parser-font-size) * 1.14);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  // Ensure inline code blocks match, but don't interfere with CodeBlock components
+  code:not(.codeBlockLines_e6Vv):not([class*='codeBlock']) {
+    font-family: var(--font-mm-sans-mono);
+    font-size: var(--parser-code-font-size);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background: var(--ifm-code-background);
+    border-radius: 0.4rem;
+  }
+
+  // Ensure CodeBlock components maintain their original styling
+  div[class*='codeBlockContainer'] {
+    margin: 1rem 0;
+  }
+
+  pre[class*='codeBlock'] code {
+    background: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    font-size: inherit !important;
+  }
+
+  // Ensure links match
+  a {
+    color: var(--ifm-link-color);
+    text-decoration: underline;
+    text-decoration-color: var(--ifm-link-color);
+    text-decoration-thickness: 0.1rem;
+    text-underline-offset: 0.4rem;
+    transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    font-weight: 500;
+
+    &:hover {
+      color: var(--ifm-link-hover-color);
+      text-decoration: underline;
+      text-decoration-color: var(--ifm-link-hover-color);
+      text-decoration-thickness: 0.1rem;
+      text-underline-offset: 0.4rem;
+    }
+  }
+
+  // Ensure Docusaurus admonitions match the component font size
+  :global(.alert) {
+    font-size: inherit;
+    line-height: inherit;
+
+    p {
+      font-size: inherit;
+      line-height: inherit;
+    }
   }
 }
 

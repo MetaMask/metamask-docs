@@ -57,7 +57,7 @@ yarn install
 You may get a warning like the following:
 
 ```bash
-@lavamoat/allow-scripts has detected dependencies without configuration. explicit configuration required.
+@lavamoat/allow-scripts has detected dependencies without configuration. An explicit configuration is required.
 run "allow-scripts auto" to automatically populate the configuration.
 ```
 
@@ -189,9 +189,7 @@ You've now successfully connected, installed, interacted with, and customized yo
 
 ## Next steps
 
-- Fill out the [Snap Builders Onboarding Form](https://feedback.metamask.io/snaps-onboarding) to
-  allow the MetaMask Snaps team to engage with you and provide support as you begin to develop your Snap.
-- To learn more about the Snaps system, review [fundamental Snaps concepts](/snaps/learn/about-snaps)
-  and try the [Snaps tutorials](/snaps/learn/tutorials).
-- To implement specific features and use cases, see the [Snaps feature guides](/snaps/features).
-- To follow best practices for developing a Snap, see the [Snaps how-to guides](/snaps/how-to).
+- To learn more about the Snaps system, review [fundamental Snaps concepts](../learn/about-snaps/index.md)
+  and try the [Snaps tutorials](../learn/tutorials/gas-estimation.md).
+- To implement specific features and use cases, see the [Snaps feature guides](../features/cron-jobs.md).
+- To follow best practices for developing a Snap, see the Snaps [best practices](../learn/best-practices/design-guidelines.md) and [how-to guides](../how-to/request-permissions.md).

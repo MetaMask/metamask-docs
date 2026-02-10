@@ -4,9 +4,9 @@
 
 [class*='admonition'] {
   ul {
-    list-style-position: inside;
+    list-style-position: outside;
     list-style-type: disc;
-    margin: 1rem 0;
+    margin: 1rem 1.6rem;
   }
   p {
     margin-top: 0.6rem;

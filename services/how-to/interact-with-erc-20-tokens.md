@@ -39,20 +39,20 @@ View [EIP-20](https://eips.ethereum.org/EIPS/eip-20) for more details about how 
 
 Use [`eth_sendRawTransaction`](../reference/ethereum/json-rpc-methods/eth_sendrawtransaction.mdx) to send ERC-20 token transactions.
 
-The JSON-RPC format expects `eth_sendRawTransaction` to have a specific data field format that requires normalizing the `Transfer` function to a short [function selector](https://solidity.readthedocs.io/en/develop/abi-spec.html#function-selector). To do this, set the parameters for the function and run it through Ethereum’s [sha3 keccak hash](https://solidity.readthedocs.io/en/develop/abi-spec.html#function-selector):
+The JSON-RPC format expects `eth_sendRawTransaction` to have a specific data field format that requires normalizing the `transfer` function to a short [function selector](https://solidity.readthedocs.io/en/develop/abi-spec.html#function-selector). To do this, set the parameters for the function and run it through Ethereum’s [sha3 keccak hash](https://solidity.readthedocs.io/en/develop/abi-spec.html#function-selector):
 
 <Tabs>
   <TabItem value="JavaScript" label="JavaScript" default>
 
 ```javascript
-web3.sha3("Transfer(address, address, uint256)")[0..4]
+web3.utils.sha3("transfer(address,uint256)").slice(0, 10)
 ```
 
   </TabItem>
   <TabItem value="Result" label="Result" >
 
 ```javascript
-0x70a08231
+0xa9059cbb
 ```
 
   </TabItem>
@@ -124,7 +124,7 @@ curl https://mainnet.infura.io/v3/<YOUR-API-KEY> \
         "0x000000000000000000000000dfbaf3e4c7496dad574a1b842bc85b402bdc298d"
       ],
       "data": "0x00000000000000000000000000000000000000000000041f900d25d6693623a6",
-      "blockNumbern": "0x91F37C"
+      "blockNumber": "0x91F37C"
     }
   ]
 }
@@ -141,7 +141,7 @@ If `fromBlock` and `toBlock` are omitted, `eth_getLogs` returns the _entire_ cha
 
 :::
 
-This request tells the blockchain to retrieve event logs related to address `0x6B175474E89094C44Da98b954EedeAC495271d0F` emitted in block `0x91F37C` that matches topics `0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef`, `0x000000000000000000000000ee25e1ba53c225d250861c8e5a9a3e0fe19c790e` and `0x000000000000000000000000dfbaf3e4c7496dad574a1b842bc85b402bdc298d`.
+This request tells the blockchain to retrieve event logs related to address `0x6B175474E89094C44Da98b954EedeAC495271d0F` emitted in block `0x91F37C` that match topics `0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef`, `0x000000000000000000000000ee25e1ba53c225d250861c8e5a9a3e0fe19c790e` and `0x000000000000000000000000dfbaf3e4c7496dad574a1b842bc85b402bdc298d`.
 
 The response returned for this request is an array of events. In this example, only one event for one address matches the specified topics.
 

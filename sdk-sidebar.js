@@ -4,66 +4,71 @@
 const sidebar = {
   sdkSidebar: [
     {
-      type: 'category',
+      type: 'doc',
       label: 'Introduction',
-      collapsible: false,  
-      collapsed: false,
-      items: [
-        'introduction/welcome',
-        'introduction/supported-platforms',
-        'introduction/supported-networks',
-        'introduction/llm-prompt',
-        {
-          type: 'link',
-          label: 'Try demo dapp',
-          href: 'https://metamask-sdk-examples-relink.vercel.app/',
-        },
-      ],
+      id: "index",
     },
     {
       type: 'category',
-      label: 'Quickstart',
-      collapsible: false,  
+      label: 'Connect to MetaMask',
+      collapsible: false,
       collapsed: false,
       items: [
-        'quickstart/javascript-wagmi',
-        'quickstart/javascript',
-        'quickstart/react-native',
+        'connect/javascript-wagmi',
+        'connect/javascript',
+        'connect/javascript-rainbowkit',
+        'connect/javascript-connectkit',
+        'connect/javascript-dynamic',
+        'connect/javascript-web3auth',
+        'connect/react-native',
       ],
     },
     {
       type: 'category',
       label: 'Guides',
-      collapsible: false,  
+      collapsible: false,
       collapsed: false,
       items: [
         'guides/authenticate-users',
         'guides/manage-networks',
         'guides/handle-transactions',
         'guides/interact-with-contracts',
+        'guides/use-deeplinks',
+        'guides/batch-requests',
+        'guides/production-readiness',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Tutorials',
+      collapsible: false,
+      collapsed: false,
+      items: [
         {
-          type: 'category',
-          label: 'Advanced',
-          collapsible: true,  
-          collapsed: true,
-          items: [
-            'guides/advanced/connect-and-sign',
-            'guides/advanced/batch-requests',
-            'guides/advanced/production-readiness',
-          ],
+          type: "link",
+          label: "Create a wallet AI agent",
+          href: "/tutorials/create-wallet-ai-agent"
+        },
+        {
+          type: "link",
+          label: "Upgrade an EOA to a smart account",
+          href: "/tutorials/upgrade-eoa-to-smart-account"
         },
       ],
     },
     {
       type: 'category',
       label: 'Reference',
-      collapsible: false,  
+      collapsible: false,
       collapsed: false,
       items: [
-        'reference/sdk-options'
+        'reference/llm-prompt',
+        'reference/supported-platforms',
+        'reference/sdk-options',
+        'reference/sdk-methods',
       ],
-    }
+    },
   ],
-};
+}
 
-module.exports = sidebar;
+module.exports = sidebar

@@ -1,11 +1,12 @@
 ---
 description: Arbitrum quickstart guide
+sidebar_label: Quickstart
 sidebar_position: 2
 ---
 
 import Banner from '@site/src/components/Banner'
 
-# Quickstart
+# Arbitrum quickstart
 
 This quickstart guide will help you set up and make calls on the Arbitrum network using the Infura endpoints.
 
@@ -15,7 +16,7 @@ Don't have an Infura account? Sign up for our free plan and start using the Arbi
 
 ## Prerequisites
 
-Ensure you have an [API key](../../../../developer-tools/dashboard/get-started/create-api/) with the Arbitrum network enabled.
+Ensure you have an [API key](/developer-tools/dashboard/get-started/create-api) with the Arbitrum network enabled.
 
 ## Make calls
 
@@ -192,7 +193,7 @@ by Infura. Here are some suggestions:
 
 - **Try out different networks**: Infura supports multiple networks including Ethereum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](../../../../developer-tools/dashboard/how-to/dashboard-stats/) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](/developer-tools/dashboard/how-to/dashboard-stats) to ensure you're not hitting your rate limits.
 
-Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
-[Infura community](https://community.infura.io/) for help and answers to common questions.
+Remember, the MetaMask community is here to help. If you have any questions or run into any issues, check out the
+[MetaMask community](https://community.metamask.io/) for help and answers to common questions.

@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Shasta Testnet", value: "shasta" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0x2b6653dc
+- **Public RPC URL:** https://api.trongrid.io
+- **Display Name:** TRON Mainnet
+- **Block Explorer Link:** https://tronscan.org
+- **Ticker:** TRX
+- **Ticker Name:** TRON
+
+</TabItem>
+
+<TabItem value="shasta">
+
+- **Chain ID:** 0x94a9059e
+- **Public RPC URL:** https://api.shasta.trongrid.io/jsonrpc
+- **Display Name:** TRON Shasta Testnet
+- **Block Explorer Link:** https://shasta.tronscan.org
+- **Ticker:** TRX
+- **Ticker Name:** TRON
+
+</TabItem>
+</Tabs>

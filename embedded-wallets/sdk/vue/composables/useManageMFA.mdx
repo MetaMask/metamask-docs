@@ -1,0 +1,54 @@
+---
+title: useManageMFA
+sidebar_label: useManageMFA
+description: '@web3auth/modal Vue Composables useManageMFA | Embedded Wallets'
+---
+
+Hook to manage Multi-Factor Authentication (MFA) using Embedded Wallets. This composable provides a convenient way to trigger MFA management actions, such as updating or configuring MFA settings for the user.
+
+### Import
+
+```ts
+import { useManageMFA } from '@web3auth/modal/vue'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { useManageMFA } from '@web3auth/modal/vue'
+
+  const { manageMFA, loading, error } = useManageMFA()
+</script>
+
+<template>
+  <button @click="manageMFA" :disabled="loading">
+    {{ loading ? "Managing MFA..." : "Manage MFA" }}
+  </button>
+  <div v-if="error">{{ error.message }}</div>
+</template>
+```
+
+### Return type
+
+```ts
+import type { IUseManageMFA } from '@web3auth/modal/vue'
+```
+
+#### `loading`
+
+`boolean`
+
+Whether the MFA management process is in progress.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error that occurred during the MFA management process.
+
+#### `manageMFA`
+
+`<T>(params?: T) => Promise<void>`
+
+Function to initiate the MFA management process. Accepts optional parameters depending on the MFA action or configuration required by your implementation.

@@ -1,4 +1,9 @@
-# JSON-RPC methods
+---
+sidebar_label: JSON-RPC API
+sidebar_key: scroll-json-rpc-api
+---
+
+# Scroll JSON-RPC API
 
 Here you can find the JSON-RPC API endpoints. You [can call these APIs using a variety of tools](../quickstart.md).
 
@@ -66,7 +71,7 @@ service availability problems.
 | 400  | Bad request           | Incorrect HTTP Request type or invalid characters, ensure that your request body and format is correct.                                                                                                                                                                                                                                                                          |
 | 401  | Unauthorized          | This can happen when one or multiple security requirements are not met. Example responses: `project id required in the url`, `invalid project id`, `invalid project id or project secret`, `invalid JWT`.                                                                                                                                                                        |
 | 403  | Forbidden             | The request was intentionally refused due to specific settings mismatch, check your key settings. Example response: `"error":{"code":-32002,"message":"rejected due to project ID settings"}`.                                                                                                                                                                                   |
-| 429  | Too Many Requests     | The daily request total or request per second are higher than your plan allows. Refer to the [Avoid rate limiting](../../../how-to/avoid-rate-limiting) topic for more information. Example responses: `"error": {"code": -32005, "message": "daily request count exceeded, request rate limited"}`, `"error": {"code": -32005, "message": "project ID request rate exceeded"}`. |
+| 429  | Too Many Requests     | The daily request total or request per second are higher than your plan allows. Refer to the [Avoid rate limiting](../../../how-to/avoid-rate-limiting.md) topic for more information. Example responses: `"error": {"code": -32005, "message": "daily request count exceeded, request rate limited"}`, `"error": {"code": -32005, "message": "project ID request rate exceeded"}`. |
 | 500  | Internal Server Error | Error while processing the request on the server side.                                                                                                                                                                                                                                                                                                                           |
 | 502  | Bad Gateway           | Indicates a communication error which can have various causes, from networking issues to invalid response received from the server.                                                                                                                                                                                                                                              |
 | 503  | Service Unavailable   | Indicates that the server is not ready to handle the request.                                                                                                                                                                                                                                                                                                                    |

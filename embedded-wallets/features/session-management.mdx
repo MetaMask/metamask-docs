@@ -1,0 +1,26 @@
+---
+title: Session Management
+sidebar_label: Session Management
+description: 'Session Management | Embedded Wallets'
+---
+
+SDKs provide session management to minimize repeated logins, enhancing user experience by maintaining login state for a specified duration. This seamless experience offers several advantages, including:
+
+- **User experience:** Reduces login frequency for a smoother experience.
+- **Efficiency:** Session restoration is quick, occurring in milliseconds.
+- **Integration:** Easy to implement with minimal impact on user flow.
+
+### Session key
+
+Upon login, a unique session key is generated. The user state is then encrypted with this session key and stored on the Web3Auth metadata server.
+
+### Secure storage
+
+Session keys are stored securely in the client's environment (for example, browser local storage, Android encrypted shared preferences, or iOS keychain services).
+
+### Restoration
+
+1. **Retrieve key:** SDK retrieves the session key from secure storage.
+2. **Server communication:** SDK requests user state restoration from the metadata server.
+3. **Decryption:** Encrypted user state is decrypted with the session key.
+4. **Fallback:** If no active session, user proceeds with standard login.

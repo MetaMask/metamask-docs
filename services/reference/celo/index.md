@@ -6,16 +6,18 @@ import CardList from '@site/src/components/CardList'
 
 # Celo
 
-Celo is a fully EVM-compatible, Proof of Stake (PoS), layer-1 protocol that features a mobile-first platform, built-in
-stablecoins, collateralized by crypto and natural assets.
+:::note Decentralized Infrastructure Network (DIN)
 
-Celo is a platform that acts as a global payment infrastructure for cryptocurrencies targeting mobile users. Celo operates
-native, ERC20-like stable tokens like [cUSD, cEUR, and cREAL](https://celoreserve.org/).
+Celo is supported through the [DIN](https://www.din.build/) service,
+meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
+
+:::
+
+Celo is an Ethereum layer-2 network designed for fast, low-cost payments. It offers low fees and fast finality while letting you reuse familiar Ethereum tools and contracts with little or no change.
 
 :::info See also
 
 - The [official Celo documentation](https://docs.celo.org/) for more information.
-- The [key differences between building on Celo and Ethereum](https://docs.celo.org/developer/migrate/from-ethereum).
 
 :::
 
@@ -24,19 +26,31 @@ Select an option below to get started with the Celo network.
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "/services/reference/celo/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Celo network."
     },
     {
-      href: "json-rpc-methods",
+      href: "/services/reference/celo/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Celo network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
-      description: "Learn how to create an API key and secure and share it with your team."
+      description: "Learn how to create and secure an API key."
     }
   ]}
 />
+
+## Partners and privacy policies
+
+No personal information is sent as part of partner requests, only information necessary to fulfill your API
+request. This means that Infura's partner service provider can service your request, but not store the
+content of your request.
+
+The following partners provide access to the Celo network:
+<!-- markdown-link-check-disable -->
+- BlockPI ([Terms of Use](https://blockpi.io/terms-of-use), [Privacy Policy](https://blockpi.io/privacy-policy))
+- 0xFury ([Privacy policy](https://0xfury.com/privacy))
+<!-- markdown-link-check-enable -->

@@ -1,0 +1,111 @@
+---
+title: Advanced Configuration
+sidebar_label: Overview
+description: 'Web3Auth Unity SDK - Advanced Configuration | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The Embedded Wallets SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your Unity application's specific requirements.
+
+## Configuration structure
+
+When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
+
+```cs
+web3Auth = GetComponent<Web3Auth>();
+
+// focus-start
+web3Auth.setOptions(new Web3AuthOptions(){
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+    network = Web3Auth.Network.SAPPHIRE_MAINNET, // or Web3Auth.Network.SAPPHIRE_DEVNET
+    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+});
+// focus-end
+```
+
+### `Web3AuthOptions`
+
+The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter      | Description                                                                                                                                  |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `string`.                       |
+| `network`      | Web3Auth Network: `SAPPHIRE_MAINNET`, `SAPPHIRE_DEVNET`, `MAINNET`, `CYAN`, `AQUA` or `TESTNET`. Mandatory field of type `Web3Auth.Network`. |
+| `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `Uri`.                          |
+| `whiteLabel?`  | Whitelabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                             |
+| `loginConfig?` | Login config for custom verifiers. Takes `LoginConfigItem` as a value.                                                                       |
+| `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                                   |
+| `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                                 |
+
+</TabItem>
+
+<TabItem value="class">
+
+```cs
+public class Web3AuthOptions
+{
+    public string clientId { get; set; }
+    public Web3Auth.Network network { get; set; }
+    public Uri redirectUrl { get; set; }
+    public WhiteLabelData whiteLabel { get; set; }
+    public LoginConfigItem loginConfig { get; set; }
+    public MfaSettings mfaSettings { get; set; }
+    public int sessionTime { get; set; } = 86400;
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Session management
+
+Control how long users stay authenticated and how sessions persist in Unity.
+
+**Key Configuration Options:**
+
+- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
+  - Minimum: 1 second (`1`).
+  - Maximum: 30 days (`86400 * 30`).
+  - Default: 1 day (`86400`).
+
+```cs
+web3Auth.setOptions(new Web3AuthOptions(){
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
+    network = Web3Auth.Network.SAPPHIRE_MAINNET,
+    sessionTime = 86400 * 7, // 7 days (in seconds)
+    redirectUrl = new Uri("torusapp://com.torus.Web3AuthUnity/auth"),
+});
+```
+
+## Custom authentication methods
+
+Control the login options presented to your users. For detailed configuration options and implementation examples, see the [custom authentication](./custom-authentication.mdx) section.
+
+## UI customization
+
+Create a seamless brand experience by customizing the Embedded Wallets login screens to match your Unity application's design. For complete customization options, refer to the [whitelabeling and UI customization](./whitelabel.mdx) section.
+
+## Multi-Factor Authentication (MFA)
+
+Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+
+**Key Configuration Options:**
+
+- `mfaSettings` - Configure MFA settings for different authentication flows
+- `mfaLevel` - Control when users are prompted to set up MFA
+
+## Dapp share
+
+Share authentication sessions across different applications. For detailed configuration options and implementation examples, see the [dapp share](./dapp-share.mdx) section.

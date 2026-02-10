@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0xCC
+- **Public RPC URL:** https://opbnb-mainnet-rpc.bnbchain.org
+- **Display Name:** opBNB Mainnet
+- **Block Explorer Link:** https://opbnbscan.com
+- **Ticker:** BNB
+- **Ticker Name:** BNB
+
+</TabItem>
+
+<TabItem value="testnet">
+
+- **Chain ID:** 0x15EB
+- **Public RPC URL:** https://opbnb-testnet-rpc.bnbchain.org
+- **Display Name:** opBNB Testnet
+- **Block Explorer Link:** https://testnet.opbnbscan.com
+- **Ticker:** tBNB
+- **Ticker Name:** Test BNB
+
+</TabItem>
+</Tabs>

@@ -1,0 +1,69 @@
+---
+name: ci
+
+on:
+  workflow_call:
+  pull_request:
+    branches: 
+      - main
+
+permissions:
+  contents: read
+
+env:
+  SEGMENT_ANALYTICS_KEY: ${{ secrets.SEGMENT_ANALYTICS_KEY }}
+  LD_CLIENT_ID: ${{ secrets.LD_CLIENT_ID }}
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build
+        uses: ConsenSys/github-actions/docs-build@main
+
+  case:
+    name: Check for case being inconsistent
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        folder: ['docs']
+    steps:
+      - uses: actions/checkout@v6
+      - name: Case check action
+        uses: ConsenSys/github-actions/docs-case-check@main
+        with:
+          DOC_DIR: ${{ matrix.folder }}
+          SKIP_TEST: true
+
+  lint:
+    name: Lint Code Base
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Lint
+        uses: ConsenSys/github-actions/docs-lint-all@main
+
+  spelling:
+    name: Spelling
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        file-extensions: ['.md', '.mdx']
+    steps:
+      - uses: actions/checkout@v6
+      - name: Vale
+        uses: Consensys/github-actions/docs-spelling-check@main
+        with:
+          FILEPATHS: 'snaps,services,wallet,developer-tools,docs'
+
+  linkCheck:
+    name: Link Checking
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: LinkCheck
+        uses: ConsenSys/github-actions/docs-link-check@main
+        with:
+          CONFIG_FILE: '.linkspector.yml'

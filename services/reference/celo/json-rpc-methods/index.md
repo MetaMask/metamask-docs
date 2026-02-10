@@ -1,4 +1,9 @@
-# JSON-RPC methods
+---
+sidebar_label: JSON-RPC API
+sidebar_key: celo-json-rpc-api
+---
+
+# Celo JSON-RPC API
 
 Celo supports a subset [Ethereum JSON-RPC methods](../../ethereum/json-rpc-methods/index.md). WebSocket calls are not supported when using the Celo endpoints.
 
@@ -17,6 +22,3 @@ The following methods are supported by Celo, but not supported by Infura using a
 - `eth_newFilter`
 - `eth_newBlockFilter`
 - `eth_uninstallFilter`
-
-Infura is also compatible with the [Celo ContractKit](https://docs.celo.org/developer/contractkit), a library of tools
-designed to integrate applications with Celo.

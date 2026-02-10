@@ -1,0 +1,201 @@
+---
+title: Flutter SDK - v3 to v4
+
+description: ' Flutter SDK - v3 to v4 | Embedded Wallets'
+sidebar_label: v3 to v4
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+# Migration guide from v3 to v4 for Embedded Wallets Flutter SDK
+
+## Overview
+
+This migration guide provides steps for upgrading from version 3(v3) to version 4(v4) of the Embedded Wallets Flutter SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate MFA setup flow, `request` method for transaction confirmation screens, `launchWalletServices` method for template wallet interface, updates to the `Provider` and the `TypeOfLogin` enum.
+
+## Changes in detail
+
+### `setResultUrl` is removed
+
+With the new v4 update, there's a breaking change with the removal of the `setResultUrl` method, which was used to trigger the user `UserCancelledException` on Android.
+
+From v4, developers won't be able to use the `setResultUrl` method.
+
+### `enableMFA` method
+
+From v4, developers can now use the `enableMFA` method to initiate MFA setup flow for already logged in users.
+
+<Tabs
+  defaultValue="default-verifier"
+  values={[
+    { label: "Default Verifier", value: "default-verifier" },
+    { label: "Custom JWT Verifier", value: "custom-jwt-verifier" },
+  ]}
+>
+
+<TabItem value="default-verifier">
+
+```dart title="Usage"
+try {
+  // focus-next-line
+  await Web3AuthFlutter.enableMFA();
+} on UserCancelledException {
+  log("User cancelled.");
+} catch(e) {
+  log("Unknown exception occurred");
+}
+```
+
+</TabItem>
+
+<TabItem value="custom-jwt-verifier">
+
+```dart title="Usage"
+try {
+    final loginParams = LoginParams(
+        loginProvider: Provider.jwt,
+        extraLoginOptions: ExtraLoginOptions(
+            id_token: "YOUR_JWT_TOKEN",
+        ),
+    );
+
+    // focus-next-line
+    await Web3AuthFlutter.enableMFA(loginParams);
+
+} on UserCancelledException {
+  log("User cancelled.");
+} catch(e) {
+    log("Unknown exceptionoccurred");
+}
+
+```
+
+</TabItem>
+</Tabs>
+
+### `launchWalletServices` method
+
+From v4, developers can use the `launchWalletServices` to launches a WebView which allows them to use the templated wallet UI services. Developers can pass the `ChainConfig` to launch Wallet Services with a specific chain selected.
+
+:::note
+
+Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+
+:::
+
+#### ChainConfig arguments
+
+| Parameter | Description |
+| --- | --- |
+| `chainNamespace` | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.eip155`. |
+| `decimals?` | Number of decimals for the currency ticker. Default value is 18, and accepts `int` as value. |
+| `blockExplorerUrl?` | Blockchain's explorer URL. (for example, `https://etherscan.io`) |
+| `chainId` | The chain ID of the selected blockchain in hex `String`. |
+| `displayName?` | Display Name for the chain. |
+| `logo?` | Logo for the selected `chainNamespace` and `chainId`. |
+| `rpcTarget` | RPC Target URL for the selected `chainNamespace` & `chainId`. |
+| `ticker?` | Default currency ticker of the network (for example, `ETH`) |
+| `tickerName?` | Name for currency ticker (for example, `Ethereum`) |
+
+#### Usage
+
+```dart title="Usage"
+try {
+  // focus-start
+  await Web3AuthFlutter.launchWalletServices(
+    ChainConfig(
+      chainId: "0x1",
+      rpcTarget: "https://mainnet.infura.io/v3/$key",
+    ),
+  );
+  // focus-end
+} on UserCancelledException {
+  log("User cancelled.");
+} catch(e) {
+  log("Unknown exception occurred");
+}
+```
+
+### `request` method
+
+Now, developers can use the `request` method to use the templated transaction confirmation screens for signing transactions. To retrive the signature for the request, developers can use the `getSignResponse` static method.
+
+```dart title="Usage"
+try {
+  List<dynamic> params = [];
+  // Message to be signed
+  params.add("Hello, Web3Auth from Flutter!");
+  // User's EOA address
+  params.add("<User Address in Hex>");
+
+  // focus-start
+  await Web3AuthFlutter.request(
+    ChainConfig(
+      chainId: "0x1",
+      rpcTarget: "https://mainnet.infura.io/v3/$key",
+    ),
+    "personal_sign",
+    params,
+  );
+  // focus-end
+} on UserCancelledException {
+  log("User cancelled.");
+} catch(e) {
+  log("Unknown exception occurred");
+}
+
+// focus-next-line
+final signResponse = await Web3AuthFlutter.getSignResponse();
+log(signResponse.toString())
+```
+
+### New login providers
+
+v4 update brings two new providers: SMS Passwordless and Farcaster login.
+
+#### SMS Passwordless
+
+```dart title="Usage"
+Future<void> initWeb3Auth() async {
+  Uri redirectUrl;
+  if (Platform.isAndroid) {
+    redirectUrl = Uri.parse('{SCHEME}://{HOST}/auth');
+    // w3a://com.example.w3aflutter/auth
+  } else if (Platform.isIOS) {
+    redirectUrl = Uri.parse('{bundleId}://auth');
+    // com.example.w3aflutter://openlogin
+  } else {
+    throw UnKnownException('Unknown platform');
+  }
+
+  await Web3AuthFlutter.init(
+    Web3AuthOptions(
+      clientId: "WEB3AUTH_CLIENT_ID",
+      network: Network.sapphire_mainnet,
+      redirectUrl: redirectUrl,
+    ),
+  );
+}
+
+// Login
+final Web3AuthResponse response = await Web3AuthFlutter.login(
+  LoginParams(loginProvider: Provider.sms_passwordless,
+    // focus-start
+    extraLoginOptions: ExtraLoginOptions(
+      // The phone number should be in format of +{country_code}-{phone_number}
+      login_hint: "+91-9911223311",
+    ),
+    // focus-end
+  ),
+);
+```
+
+#### Farcaster
+
+```dart title="Usage"
+final Web3AuthResponse response = await Web3AuthFlutter.login(
+  // focus-next-line
+  LoginParams(loginProvider: Provider.farcaster)
+);
+```

@@ -1,0 +1,19 @@
+Since the web3dart package doesn't support deploying contracts directly, we'll use the precompiled smart
+contract byteCode to deploy the contract using the `sendTransaction` method.
+
+```dart
+// Use the client, address, and credentials from previous code snippets
+
+// Use the bytecode from the previous step
+final payload = Uint8List.fromList(utf8.encode(byteCode));
+
+final transaction = Transaction(
+  // Please make sure to keep the `to` field as `null`
+  // for deploying the contract
+  to: null,
+  from: address,
+  data: payload,
+);
+
+final receipt = await client.sendTransaction(credential, transaction);
+```

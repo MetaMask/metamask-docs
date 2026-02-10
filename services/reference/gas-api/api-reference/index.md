@@ -1,13 +1,14 @@
 ---
 description: Reference content for the Gas API.
+sidebar_label: API reference
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# API reference
+# Gas API reference
 
-This section provides reference information for the various Gas REST APIs.
+This section provides reference information for the Gas REST APIs.
 Use the APIs to:
 
 - [Get EIP-1559 gas prices.](./gasprices-type2.md)
@@ -15,14 +16,18 @@ Use the APIs to:
 - [Get the base fee percentile (in Gwei).](./basefeepercentile.md)
 - [Get the busy threshold for a network.](./busythreshold.md)
 
+:::info
+See the [list of supported Gas API networks](../../../get-started/endpoints.md#gas-api).
+:::
+
 ## Supported API request formats
 
 You can call the Gas APIs in two ways:
 
-- **Using the API key only** - Add your [API key](../../../../developer-tools/dashboard/get-started/create-api)
+- **Using the API key only** - Add your [API key](/developer-tools/dashboard/get-started/create-api)
   as a path option.
 - **Using the API key and API key secret** - Use basic authentication and specify the API key
-  and [API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).
+  and [API key secret](/developer-tools/dashboard/how-to/secure-an-api/api-key-secret).
 
 <Tabs>
   <TabItem value="API key only" label="Use an API key only" default>

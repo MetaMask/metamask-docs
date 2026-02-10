@@ -1,0 +1,7 @@
+{
+  "name": "docusaurus-plugin-segment",
+  "version": "1.0.0",
+  "description": "Custom Segment analytics plugin for Docusaurus",
+  "main": "index.ts",
+  "type": "module"
+}

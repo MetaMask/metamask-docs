@@ -1,11 +1,12 @@
 ---
 description: IPFS quickstart guide
 sidebar_position: 2
+sidebar_label: Quickstart
 ---
 
 import Banner from '@site/src/components/Banner'
 
-# Quickstart
+# IPFS quickstart
 
 This quickstart guide will help you set up and make calls on the IPFS network using the Infura endpoints.
 
@@ -18,8 +19,8 @@ to have access to the IPFS network.
 
 ## Prerequisites
 
-Before you begin, ensure you have a valid [API key](../../../../developer-tools/dashboard/get-started/create-api) and
-[API key secret](../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/).
+Before you begin, ensure you have a valid [API key](/developer-tools/dashboard/get-started/create-api) and
+[API key secret](/developer-tools/dashboard/how-to/secure-an-api/api-key-secret).
 
 ## Make calls
 
@@ -292,11 +293,11 @@ Now that you have successfully made a call to the IPFS network, you can explore 
 by Infura. Here are some suggestions:
 
 - **Explore other IPFS APIs**: Infura supports a wide range of APIs. You can find more information in the
-  [HTTP API methods documentation](../http-api-methods/).
+  [HTTP API methods documentation](http-api-methods/index.md).
 
 - **Try out different networks**: Infura supports multiple networks including Arbitrum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](../../../../developer-tools/dashboard/) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](/developer-tools/dashboard) to ensure you're not hitting your rate limits.
 
-Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
-[Infura community](https://community.infura.io/) for help and answers to common questions.
+Remember, the MetaMask community is here to help. If you have any questions or run into any issues, check out the
+[MetaMask community](https://community.metamask.io/) for help and answers to common questions.

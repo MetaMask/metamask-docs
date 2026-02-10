@@ -1,0 +1,194 @@
+---
+title: Private Key Access
+description: 'Extract private keys for blockchain operations'
+---
+
+## Overview
+
+The Node.js SDK provides direct access to user private keys, enabling integration with any blockchain network. This is a key feature that makes the SDK suitable for backend and programmatic use cases. Note that if the private key export is disabled in the dashboard, the methods will throw an error.
+
+:::warning Security Notice
+
+Private keys provide full control over user assets. Handle them securely:
+
+- Never log private keys
+- Store them encrypted if persistence is needed
+- Use secure memory handling
+- Implement proper access controls
+
+:::
+
+## Available methods
+
+The provider offers different methods to access private keys depending on your blockchain needs:
+
+| Method              | Description                    | Use Case                                  |
+| ------------------- | ------------------------------ | ----------------------------------------- |
+| `private_key`       | Ethereum-formatted private key | EVM chains (for example, Ethereum, Polygon, BSC) |
+| `solana_privateKey` | Solana private key             | Solana blockchain                         |
+| `private_key`       | Raw private key                | Any blockchain                            |
+
+## EVM chains 
+
+For EVM-compatible chains such as Ethereum, Polygon, BSC.
+
+### Get Ethereum private key
+
+```javascript
+const privateKey = await provider.request({ method: 'private_key' })
+console.log('Private Key:', privateKey) // 0x1234567890abcdef...
+```
+
+### Use with Ethers.js
+
+```javascript
+const { ethers } = require('ethers')
+
+// Get private key
+const privateKey = await provider.request({ method: 'private_key' })
+
+// Create wallet instance
+const wallet = new ethers.Wallet(privateKey)
+
+// Connect to a provider
+const rpcProvider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth')
+const connectedWallet = wallet.connect(rpcProvider)
+
+// Get address
+const address = await connectedWallet.getAddress()
+console.log('Wallet Address:', address)
+
+// Sign a transaction
+const tx = {
+  to: '0x742d35Cc6635C0532925a3b8138341B0F7E8a4e8',
+  value: ethers.utils.parseEther('0.1'),
+}
+
+const signedTx = await connectedWallet.signTransaction(tx)
+const receipt = await connectedWallet.sendTransaction(tx)
+```
+
+### Use with Viem
+
+```javascript
+const { createWalletClient, createPublicClient, http } = require('viem')
+const { privateKeyToAccount } = require('viem/accounts')
+const { mainnet } = require('viem/chains')
+
+// Get private key
+const privateKey = await provider.request({ method: 'private_key' })
+
+// Create account from private key
+const account = privateKeyToAccount(privateKey)
+
+// Create wallet client
+const walletClient = createWalletClient({
+  account,
+  chain: mainnet,
+  transport: http('https://rpc.ankr.com/eth'),
+})
+
+// Create public client for reading
+const publicClient = createPublicClient({
+  chain: mainnet,
+  transport: http('https://rpc.ankr.com/eth'),
+})
+
+// Send transaction
+const hash = await walletClient.sendTransaction({
+  to: '0x742d35Cc6635C0532925a3b8138341B0F7E8a4e8',
+  value: parseEther('0.1'),
+})
+```
+
+## Solana integration
+
+### Get Solana private key
+
+```javascript
+const solana_privateKey = await provider.request({ method: 'solana_privateKey' })
+console.log('Solana Private Key:', solana_privateKey) // Base58 encoded
+```
+
+### Use with Solana Web3.js
+
+```javascript
+const {
+  Connection,
+  Keypair,
+  PublicKey,
+  Transaction,
+  SystemProgram,
+  LAMPORTS_PER_SOL,
+} = require('@solana/web3.js')
+const bs58 = require('bs58')
+
+// Get private key
+const solana_privateKey = await provider.request({ method: 'solana_privateKey' })
+
+// Create keypair from private key
+const secretKey = bs58.decode(solana_privateKey)
+const keypair = Keypair.fromSecretKey(secretKey)
+
+// Connect to Solana
+const connection = new Connection('https://api.mainnet-beta.solana.com')
+
+// Get balance
+const balance = await connection.getBalance(keypair.publicKey)
+console.log('Balance:', balance / LAMPORTS_PER_SOL, 'SOL')
+
+// Send transaction
+const transaction = new Transaction().add(
+  SystemProgram.transfer({
+    fromPubkey: keypair.publicKey,
+    toPubkey: new PublicKey('11111111111111111111111111111112'),
+    lamports: 0.1 * LAMPORTS_PER_SOL,
+  })
+)
+
+const signature = await connection.sendTransaction(transaction, [keypair])
+```
+
+## Other blockchains
+
+### Get raw private key
+
+```javascript
+const rawPrivateKey = await provider.request({ method: 'private_key' })
+console.log('Raw Private Key:', rawPrivateKey) // Hex string
+```
+
+### Example: Bitcoin integration
+
+```javascript
+const bitcoin = require('bitcoinjs-lib')
+
+// Get raw private key
+const rawPrivateKey = await provider.request({ method: 'private_key' })
+
+// Create Bitcoin keypair
+const keyPair = bitcoin.ECPair.fromPrivateKey(Buffer.from(rawPrivateKey.slice(2), 'hex'))
+
+// Get Bitcoin address
+const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey })
+console.log('Bitcoin Address:', address)
+```
+
+## Disabling private key export
+
+Private key export can be disabled in the [Embedded Wallets dashboard](https://dashboard.web3auth.io):
+
+1. Go to your project settings.
+2. Navigate to **Advanced Settings**.
+3. Toggle **Disable Private Key Export**.
+4. Save changes.
+
+When disabled, private key methods will throw an error:
+
+```javascript
+try {
+  const privateKey = await provider.request({ method: 'private_key' })
+} catch (error) {
+  console.error('Private key export disabled:', error.message)
+}
+```

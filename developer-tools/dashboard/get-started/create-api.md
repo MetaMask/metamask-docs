@@ -7,7 +7,7 @@ sidebar_position: 2
 
 :::important API key restrictions
 
-Based on your plan, Infura allows for the following amount of API keys:
+Based on your plan, Infura allows for the following number of API keys:
 
 - Free plan - Allows one API key.
 - Developer plan - Allows up to five API keys.
@@ -38,7 +38,6 @@ requiring an API key secret or JWTs with each API request.
 We recommend the following best practices when creating your API keys:
 
 - Group API key endpoints by environment. For example, create separate API keys for production or development environments.
-- Group API key endpoints by groups or individuals [sharing the API key](../how-to/project-sharing.md).
 - Limit the number of networks or services per API key only to the necessary endpoints.
 - Group the API key endpoints based on shared security considerations such as
   [allowlists](../how-to/secure-an-api/use-an-allowlist.md) or

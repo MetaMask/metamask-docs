@@ -1,12 +1,12 @@
 - `log object array`: (array) An array of log objects, or an empty array if nothing has changed since the last poll.
-- For filters created with [`eth_newBlockFilter`](../../ethereum/json-rpc-methods/filter-methods/eth_newblockfilter.mdx) the return values are block hashes (32 bytes), for example, `["0x3454645634534..."]`.
-- For filters created with [`eth_newFilter`](../../ethereum/json-rpc-methods/filter-methods/eth_newfilter.mdx) the logs are objects with the following params:
+- For filters created with [`eth_newBlockFilter`](../eth_newblockfilter) the return values are block hashes (32 bytes), for example, `["0x3454645634534..."]`.
+- For filters created with [`eth_newFilter`](../eth_newfilter) the logs are objects with the following params:
   - `address`: 20 bytes. Address from which this log originated.
-  - `blockHash`: 32 bytes. The hash of the block where this log was in. `Null` when it is a pending log.
-  - `blockNumber`: The block number where this log was in. `Null` when it is a pending log.
+  - `blockHash`: 32 bytes. The hash of the block where this log was in. `null` when it is a pending log.
+  - `blockNumber`: The block number where this log was in. `null` when it is a pending log.
   - `data`: DATA. Contains the non-indexed arguments of the log.
-  - `logIndex`: A hexadecimal of the log index position in the block. `Null` when it is a pending log.
+  - `logIndex`: A hexadecimal of the log index position in the block. `null` when it is a pending log.
   - `removed`: `true` when the log was removed, due to a chain reorganization. `false` if it is a valid log.
   - `topics`: Array of DATA. An array of 0 to 4 32-bytes DATA of indexed log arguments. In Solidity the first `topic` is the hash of the signature of the event (for example, `Deposit(address,bytes32,uint256)`), except when you declared the event with the anonymous specifier.
-  - `transactionHash`: 32 bytes. A hash of the transactions from which this log was created. `Null` when it is a pending log.
-  - `transactionIndex`: A hexadecimal of the transactions index position from which this log was created. `Null` when it is a pending log.
+  - `transactionHash`: 32 bytes. A hash of the transactions from which this log was created. `null` when it is a pending log.
+  - `transactionIndex`: A hexadecimal of the transactions index position from which this log was created. `null` when it is a pending log.

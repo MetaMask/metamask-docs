@@ -20,7 +20,7 @@ interface DetailsBoxProps {
   components: SchemaComponents
   result: any
   tags: TagItem[]
-  extraContent?: JSX.Element
+  extraContent?: JSX.Element | Record<string, JSX.Element>
 }
 
 export default function DetailsBox({
@@ -33,6 +33,16 @@ export default function DetailsBox({
   tags,
   extraContent,
 }: DetailsBoxProps) {
+  // Helper function to render extraContent at specific positions
+  const renderExtraContent = (position: string) => {
+    if (React.isValidElement(extraContent)) {
+      // Backward compatibility - old syntax only renders at after-description
+      return position === 'after-description' ? extraContent : null
+    }
+    // New syntax - render at specified position
+    return extraContent?.[position] || null
+  }
+
   return (
     <>
       {tags.length > 0 && (
@@ -48,19 +58,28 @@ export default function DetailsBox({
       {summary !== null && (
         <p
           style={{ marginBottom: '0.5rem' }}
-          className={clsx('padding-bottom--md', styles.borderBottomLine)}>
+          className={clsx('padding-bottom--md', styles.borderBottomLine, styles.methodSummary)}>
           <strong>Summary: </strong>
           <span className={styles.summaryText}>
             <MDContent content={summary} />
+            {/* after-summary content is inline appended */}
+            {renderExtraContent('after-summary')}
           </span>
         </p>
       )}
+      {/* after-summary content when summary is null */}
+      {summary === null && renderExtraContent('after-summary')}
       {description !== null && (
-        <div className="padding-top--md">
+        <div className={clsx('padding-top--md', styles.methodDescription)}>
           <MDContent content={description} />
         </div>
       )}
-      {extraContent && <div className="padding-top--lg">{extraContent}</div>}
+      {/* after-description content */}
+      {renderExtraContent('after-description') && (
+        <div className={clsx('padding-top--lg', styles.extraContent)}>
+          {renderExtraContent('after-description')}
+        </div>
+      )}
       <Heading
         as="h2"
         className={clsx(styles.secondaryHeading, 'padding-top--lg padding-bottom--md')}>
@@ -68,11 +87,19 @@ export default function DetailsBox({
       </Heading>
       <div className={styles.paramContainer}>
         {params.length === 0 ? (
-          <div className="padding-vert--md">This method doesn't accept any parameters.</div>
+          <div className={clsx('padding-vert--md', styles.noParamsDescription)}>
+            This method doesn't accept any parameters.
+          </div>
         ) : (
           params && renderParamSchemas(params, components)
         )}
       </div>
+      {/* after-parameters content */}
+      {renderExtraContent('after-parameters') && (
+        <div className={clsx('padding-top--lg', styles.extraContent)}>
+          {renderExtraContent('after-parameters')}
+        </div>
+      )}
       <Heading
         as="h2"
         className={clsx(styles.secondaryHeading, 'padding-top--lg padding-vert--md')}>
@@ -81,6 +108,12 @@ export default function DetailsBox({
       <div className={styles.paramContainer}>
         {result && renderResultSchemas(result, components)}
       </div>
+      {/* after-returns content */}
+      {renderExtraContent('after-returns') && (
+        <div className={clsx('padding-top--lg', styles.extraContent)}>
+          {renderExtraContent('after-returns')}
+        </div>
+      )}
     </>
   )
 }

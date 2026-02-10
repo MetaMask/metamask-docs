@@ -1,0 +1,135 @@
+---
+title: Integrate Embedded Wallets with the Solana Blockchain in Node.js
+sidebar_label: Node.js
+image: 'img/embedded-wallets/banners/solana.png'
+description: 'Integrate Embedded Wallets with the Solana Blockchain in Node.js | Embedded Wallets'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+Use the Web3Auth Node SDK to get a Solana signer for server-side operations. The Node SDK returns a `TransactionSigner` that can be used with `@solana/web3.js` for blockchain operations without exposing the private key directly.
+
+## Chain details for Solana
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
+    { label: "Devnet", value: "devnet" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x1
+- Public RPC URL: https://api.mainnet-beta.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Mainnet
+- Block Explorer Link: https://explorer.solana.com
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+
+<TabItem value="testnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x2
+- Public RPC URL: https://api.testnet.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Testnet
+- Block Explorer Link: https://explorer.solana.com
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+
+<TabItem value="devnet">
+
+- Chain Namespace: SOLANA
+- Chain ID: 0x3
+- Public RPC URL: https://api.devnet.solana.com (avoid public RPC in production; prefer managed services)
+- Display Name: Solana Devnet
+- Block Explorer Link: https://explorer.solana.com?cluster=devnet
+- Ticker: SOL
+- Ticker Name: Solana
+- Logo: https://images.toruswallet.io/solana.svg
+
+</TabItem>
+</Tabs>
+
+## Installation
+
+To interact with the Solana blockchain in Node.js, you need to install the required packages:
+
+```bash npm2yarn
+npm install --save @solana/web3.js @solana/signers
+```
+
+## Initializing the Web3Auth Node SDK
+
+The Web3Auth Node SDK provides a `TransactionSigner` for Solana when using the `SOLANA` chain namespace. Here's how to set it up:
+
+```javascript
+import { Web3Auth } from '@web3auth/node-sdk'
+import { CHAIN_NAMESPACES } from '@web3auth/base'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID',
+  chainConfig: {
+    chainNamespace: CHAIN_NAMESPACES.SOLANA,
+    chainId: '0x1', // Use 0x1 for Mainnet, 0x2 for Testnet, 0x3 for Devnet
+    rpcTarget: 'https://api.mainnet-beta.solana.com',
+  },
+})
+
+await web3auth.init()
+
+// Connect with JWT token or other method
+const result = await web3auth.connect({
+  verifier: 'YOUR_VERIFIER_NAME',
+  verifierId: 'USER_ID',
+  idToken: 'JWT_TOKEN',
+})
+
+// result.signer is the Solana TransactionSigner
+const solanaSigner = result.signer
+```
+
+## Examples
+
+Below examples use the `TransactionSigner` returned by the Node SDK. The signer provides access to the user's Solana address and signing capabilities.
+
+```javascript
+const { LAMPORTS_PER_SOL, Connection, PublicKey } = require('@solana/web3.js')
+const { createSignableMessage } = require('@solana/signers')
+
+// Get Solana Accounts
+const getAccounts = async signer => {
+  const publicKey = signer.address
+  console.log('Public Key:', publicKey)
+}
+
+// Get Solana Balance
+const getBalance = async signer => {
+  const publicKey = new PublicKey(signer.address)
+  const connection = new Connection('https://api.devnet.solana.com')
+  const balance = (await connection.getBalance(publicKey)) / LAMPORTS_PER_SOL
+  console.log('Balance:', balance, 'SOL')
+}
+
+// Sign Solana Message
+const signMessage = async (signer, message) => {
+  const messageBytes = new TextEncoder().encode(message)
+  const signableMessage = createSignableMessage(messageBytes)
+  const [signature] = await signer.signMessages([signableMessage])
+  console.log('Signed Message:', signature)
+}
+
+// Usage
+await getAccounts(result.signer)
+await getBalance(result.signer)
+await signMessage(result.signer, 'Hello Web3Auth!')
+```

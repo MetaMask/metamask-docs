@@ -1,0 +1,12 @@
+We'll initialize the Web3j instance with the RPC URL of the network you want to connect to. This
+client allows us to interact with the blockchain. To get the public RPC URL, see
+[ChainList](https://chainlist.org/).
+
+```kotlin
+import org.web3j.protocol.Web3j
+import org.web3j.protocol.http.HttpService
+
+// Please avoid using public RPC URL in production, use services
+// like Infura.
+val web3 = Web3j.build(HttpService("YOUR_RPC_URL"))
+```

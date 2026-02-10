@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Set environment variables on the command line or in a `.env` file.
 ---
 
 import Tabs from "@theme/Tabs";
@@ -31,7 +32,7 @@ Snaps CLI:
    PUBLIC_KEY=abc123 SNAP_ENV=dev
    ```
 
-2. Build your Snap using the [Snaps CLI](../reference/cli/subcommands.md):
+2. Build your Snap using the [Snaps CLI](../reference/cli.md):
 
    ```bash
    yarn mm-snap build

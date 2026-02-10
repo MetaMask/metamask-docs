@@ -857,7 +857,7 @@ The SVG is rendered within an `<img>` tag, which prevents JavaScript or interact
 being supported.
 
 :::note
-To disable image support, set the [`features.images`](../../reference/cli/options.md#featuresimages)
+To disable image support, set the [`features.images`](../../reference/config-options.md#featuresimages)
 configuration option to `false`.
 The default is `true`.
 :::
@@ -999,8 +999,9 @@ A Snap can link to the following screens using the `metamask:` scheme:
   Snap IDs for local testing and production.
 
 :::warning
-MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not 
-installed. 
+- MetaMask will throw an error if the URL is not valid or if the URL leads to a Snap that is not 
+installed.
+- `metamask:` URLs are not supported in [dialogs](dialogs.md).
 :::
 
 #### Example
@@ -1240,14 +1241,19 @@ Outputs text.
 #### Props
 
 - `color` - (Optional) The color of the text.
-  Possible values are `"default"`, "`alternative`", `"muted"`, `"error"`, `"success"`, and `"warning"`.
+  Possible values are `"default"`, `"alternative"`, `"muted"`, `"error"`, `"success"`, and `"warning"`.
   The default is `"default"`.
 - `alignment` - (Optional) The alignment of the text.
   Possible values are `"start"`, `"center"`, and `"end"`.
   The default is `"start"`.
 - `children` - The content to display.
   This can include strings, and [`Bold`](#bold), [`Italic`](#italic), [`Icon`](#icon), [`Link`](#link), and [`Skeleton`](#skeleton) components.
-
+- `size` - (Optional) The size of the text.
+  Possible values are `"sm"` and `"md"`.
+  The default is `"md"`.
+- `fontWeight` - (Optional) The font weight of the text.
+  Possible values are `"regular"`, `"medium"`, and `"bold"`.
+  The default is `"regular"`.
 
 #### Example
 

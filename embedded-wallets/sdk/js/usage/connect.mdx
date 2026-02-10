@@ -1,0 +1,108 @@
+---
+title: connect & connectTo
+sidebar_label: connect & connectTo
+description: '@web3auth/modal Connect Functions | Embedded Wallets'
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+Functions to connect users to Embedded Wallets in the browser.
+
+### Import
+
+```javascript
+import { Web3Auth } from '@web3auth/modal'
+```
+
+### Choosing the right connection method
+
+You can connect users to Embedded Wallets in two main ways, depending on your application's needs:
+
+- **Use `connect()`** when you want to display the default Embedded Wallets/Web3Auth modal. This is ideal if you want to provide users with a pre-built, user-friendly interface where they can choose from all available login options (for example, social logins, wallets) with minimal setup.
+
+- **Use `connectTo(connector, params)`** when you want to build a fully custom login experience. This method lets you bypass the Web3Auth modal and connect directly to a specific wallet connector (such as Google, Facebook, or a particular wallet). Choose this if you want to design your own UI for login options, or if you want to restrict users to a specific authentication method. This method also allows you to use JWT-based login configurations.
+
+**Summary:**
+
+- Use `connect()` for the standard modal experience.
+- Use `connectTo()` for custom UIs or direct connection to a specific login method.
+
+### Usage
+
+<Tabs
+  defaultValue="basic"
+  values={[
+    { label: "Basic Modal", value: "basic" },
+    { label: "Custom UI", value: "custom-ui" },
+  ]}
+>
+
+<TabItem value="basic">
+
+:::info
+
+This is the most common way to connect to Embedded Wallets. It opens the Embedded Wallets/Web3Auth modal UI, allowing users to select from available login options.
+
+:::
+
+```javascript
+// Initialize Web3Auth first
+const web3auth = new Web3Auth({
+  // Your configuration options
+})
+
+await web3auth.init()
+
+// Show the modal and connect
+const provider = await web3auth.connect()
+```
+
+</TabItem>
+
+<TabItem value="custom-ui">
+
+:::info
+
+This method allows you to build your own custom connection UI. It bypasses the Embedded Wallets/Web3Auth modal UI, allowing you to create your own custom UI for login options. This can be useful if you want to hide Embedded Wallets from your end users.
+
+:::
+
+```javascript
+import { WALLET_CONNECTORS, AUTH_CONNECTION } from '@web3auth/modal'
+
+// Initialize Web3Auth first
+const web3auth = new Web3Auth({
+  // Your configuration options
+})
+
+await web3auth.init()
+
+// Connect directly to Google
+const provider = await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.GOOGLE,
+})
+```
+
+</TabItem>
+
+</Tabs>
+
+### Return types
+
+```tsx
+connect(): Promise<IProvider | null>;
+connectTo<T extends WALLET_CONNECTOR_TYPE>(connector: T, params?: LoginParamMap[T]): Promise<IProvider | null>;
+```
+
+#### Return values
+
+- **IProvider | null**
+  - On successful login, returns an `IProvider` instance containing the respective provider corresponding to your selected blockchain.
+  - On unsuccessful login, returns `null`.
+
+:::tip
+
+Read more about connecting your users with the selected blockchain in the [providers SDK Reference](/embedded-wallets/sdk/react).
+
+:::

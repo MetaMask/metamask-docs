@@ -1,0 +1,144 @@
+
+
+```bash npm2yarn
+npm install @solana/web3.js
+```
+
+## Solana composables
+
+| Composable Name             | Description                                  |
+| --------------------------- | -------------------------------------------- |
+| [`useSignAndSendTransaction`](./solana-composables/useSignAndSendTransaction.mdx) | Sign and send a Solana transaction.          |
+| [`useSignMessage`](./solana-composables/useSignMessage.mdx)            | Sign a message with the Solana wallet.       |
+| [`useSignTransaction`](./solana-composables/useSignTransaction.mdx)        | Sign a Solana transaction (without sending). |
+| [`useSolanaWallet`](./solana-composables/useSolanaWallet.mdx)           | Access Solana wallet state and utilities.    |
+
+## Composable usage examples
+
+### Get Solana wallet
+
+```vue
+<template>
+  <div>
+    <h2>Solana Wallet</h2>
+    <p>Connected: {{ connected ? 'Yes' : 'No' }}</p>
+    <p v-if="address">Address: {{ address }}</p>
+  </div>
+</template>
+
+<script setup>
+  import { useSolanaWallet } from '@web3auth/modal/vue'
+
+  const { address, connected } = useSolanaWallet()
+</script>
+```
+
+### Sign message
+
+```vue
+<template>
+  <div>
+    <h2>Sign message</h2>
+    <button @click="handleSignMessage" :disabled="isPending">
+      {{ isPending ? 'Signing...' : 'Sign message' }}
+    </button>
+    <p v-if="error">Error: {{ error.message }}</p>
+  </div>
+</template>
+
+<script setup>
+  import { useSignMessage } from '@web3auth/modal/vue'
+
+  const { signMessage, isPending, error } = useSignMessage()
+
+  const handleSignMessage = async () => {
+    try {
+      const message = new TextEncoder().encode('Hello Solana!')
+      const signature = await signMessage(message)
+      console.log('Signature:', signature)
+    } catch (err) {
+      console.error('Error signing message:', err)
+    }
+  }
+</script>
+```
+
+### Sign transaction
+
+```vue
+<template>
+  <div>
+    <h2>Sign transaction</h2>
+    <button @click="handleSignTransaction" :disabled="isPending">
+      {{ isPending ? 'Signing...' : 'Sign transaction' }}
+    </button>
+    <p v-if="error">Error: {{ error.message }}</p>
+  </div>
+</template>
+
+<script setup>
+  import { useSignTransaction } from '@web3auth/modal/vue'
+  import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
+
+  const { signTransaction, isPending, error } = useSignTransaction()
+
+  const handleSignTransaction = async () => {
+    try {
+      // Create a simple transfer transaction
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: new PublicKey('YOUR_PUBLIC_KEY'),
+          toPubkey: new PublicKey('DESTINATION_PUBLIC_KEY'),
+          lamports: 0.01 * LAMPORTS_PER_SOL,
+        })
+      )
+
+      const signedTransaction = await signTransaction(transaction)
+      console.log('Signed Transaction:', signedTransaction)
+    } catch (err) {
+      console.error('Error signing transaction:', err)
+    }
+  }
+</script>
+```
+
+### Sign and send transaction
+
+```vue
+<template>
+  <div>
+    <h2>Sign and Send transaction</h2>
+    <button @click="handleSignAndSend" :disabled="isPending">
+      {{ isPending ? 'Processing...' : 'Sign and Send' }}
+    </button>
+    <p v-if="error">Error: {{ error.message }}</p>
+  </div>
+</template>
+
+<script setup>
+  import { useSignAndSendTransaction } from '@web3auth/modal/vue'
+  import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js'
+
+  const { signAndSendTransaction, isPending, error } = useSignAndSendTransaction()
+
+  const handleSignAndSend = async () => {
+    try {
+      // Create a simple transfer transaction
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: new PublicKey('YOUR_PUBLIC_KEY'),
+          toPubkey: new PublicKey('DESTINATION_PUBLIC_KEY'),
+          lamports: 0.01 * LAMPORTS_PER_SOL,
+        })
+      )
+
+      const signature = await signAndSendTransaction(transaction)
+      console.log('Transaction Signature:', signature)
+    } catch (err) {
+      console.error('Error signing and sending transaction:', err)
+    }
+  }
+</script>
+```
+
+Further code and advanced usage should be implemented using Solana's web3.js library as needed.

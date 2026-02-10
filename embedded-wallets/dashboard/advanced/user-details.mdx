@@ -1,0 +1,618 @@
+---
+title: User Details in ID Token
+sidebar_label: User Details
+image: 'img/metamaskog.jpg'
+description: 'Configure user data in JWT identity tokens | Embedded Wallets'
+---
+
+import ProjectSettingsAdvanced from '@site/static/img/embedded-wallets/w3a-dashboard/project-settings-advanced.png'
+
+The **User Details in ID Token** setting determines whether Personally Identifiable Information (PII)—such as the user's email, profile picture, and name—is returned in the JWT identity token issued by Web3Auth. This configuration allows you to control the level of user information available directly within the authentication token.
+
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={ProjectSettingsAdvanced}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="User Details Settings"
+  />
+</div>
+
+## User data overview
+
+JWT identity tokens can include various types of user information, ranging from minimal identifiers to comprehensive profile data. The configuration of this setting impacts both functionality and privacy considerations for your application.
+
+### Available user data types
+
+**Basic Identifier Information:**
+
+- User ID (always included)
+- Wallet address (always included)
+- Authentication timestamp (always included)
+
+**Optional Profile Information:**
+
+- Email address
+- Full name
+- Profile picture URL
+- Social login provider data
+- Custom user metadata
+
+## Configuration options
+
+### Enable user data in tokens
+
+When **enabled**, the identity token includes comprehensive user profile information:
+
+```json
+{
+  "iss": "https://api.web3auth.io",
+  "sub": "user_unique_identifier",
+  "aud": "your_client_id",
+  "exp": 1640995200,
+  "iat": 1640908800,
+  "email": "user@example.com",
+  "name": "John Doe",
+  "picture": "https://profile-pics.com/user.jpg",
+  "provider": "google",
+  "wallet_address": "0x1234567890abcdef...",
+  "custom_data": {
+    "user_tier": "premium",
+    "registration_date": "2023-01-15"
+  }
+}
+```
+
+### Disable user data in tokens
+
+When **disabled**, the identity token contains only essential identification information:
+
+```json
+{
+  "iss": "https://api.web3auth.io",
+  "sub": "user_unique_identifier",
+  "aud": "your_client_id",
+  "exp": 1640995200,
+  "iat": 1640908800,
+  "wallet_address": "0x1234567890abcdef..."
+}
+```
+
+### Email-only mode
+
+When **userIdentifier is set to email**, only the user's email is included in the token:
+
+```json
+{
+  "iss": "https://api.web3auth.io",
+  "sub": "user_unique_identifier",
+  "aud": "your_client_id",
+  "exp": 1640995200,
+  "iat": 1640908800,
+  "email": "user@example.com",
+  "wallet_address": "0x1234567890abcdef..."
+}
+```
+
+## Implementation patterns
+
+### Token parsing and validation
+
+**Complete Token Processing:**
+
+```javascript
+import jwt from 'jsonwebtoken'
+
+async function processUserToken(idToken) {
+  try {
+    // Verify and decode the token
+    const decoded = jwt.verify(idToken, publicKey, {
+      issuer: 'https://api.web3auth.io',
+      audience: 'your_client_id',
+    })
+
+    // Extract user information
+    const userProfile = {
+      id: decoded.sub,
+      walletAddress: decoded.wallet_address,
+      email: decoded.email || null,
+      name: decoded.name || null,
+      picture: decoded.picture || null,
+      provider: decoded.provider || null,
+      customData: decoded.custom_data || {},
+    }
+
+    return userProfile
+  } catch (error) {
+    console.error('Token validation failed:', error)
+    throw new Error('Invalid user token')
+  }
+}
+```
+
+**Conditional Data Handling:**
+
+```javascript
+function extractUserData(decodedToken) {
+  const baseData = {
+    userId: decodedToken.sub,
+    walletAddress: decodedToken.wallet_address,
+    issuedAt: new Date(decodedToken.iat * 1000),
+    expiresAt: new Date(decodedToken.exp * 1000),
+  }
+
+  // Handle optional profile data
+  if (decodedToken.email) {
+    baseData.email = decodedToken.email
+  }
+
+  if (decodedToken.name) {
+    baseData.displayName = decodedToken.name
+  }
+
+  if (decodedToken.picture) {
+    baseData.profilePicture = decodedToken.picture
+  }
+
+  if (decodedToken.custom_data) {
+    baseData.metadata = decodedToken.custom_data
+  }
+
+  return baseData
+}
+```
+
+### Frontend integration
+
+**React Implementation:**
+
+```jsx
+import { useEffect, useState } from 'react'
+import { Web3Auth } from '@web3auth/modal'
+
+function UserProfile() {
+  const [userInfo, setUserInfo] = useState(null)
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      if (web3auth.status === 'connected') {
+        // Get ID token with user data
+        const idToken = await web3auth.authenticateUser()
+
+        // Parse user information from token
+        const userProfile = parseUserToken(idToken.idToken)
+        setUserInfo(userProfile)
+      }
+    }
+
+    loadUserData()
+  }, [])
+
+  if (!userInfo) {
+    return <div>Loading user profile...</div>
+  }
+
+  return (
+    <div className="user-profile">
+      {userInfo.picture && <img src={userInfo.picture} alt="Profile" />}
+      {userInfo.name && <h2>{userInfo.name}</h2>}
+      {userInfo.email && <p>Email: {userInfo.email}</p>}
+      <p>Wallet: {userInfo.walletAddress}</p>
+    </div>
+  )
+}
+```
+
+**Vue Implementation:**
+
+```vue
+<template>
+  <div class="user-profile" v-if="userInfo">
+    <img v-if="userInfo.picture" :src="userInfo.picture" alt="Profile" />
+    <h2 v-if="userInfo.name">{{ userInfo.name }}</h2>
+    <p v-if="userInfo.email">Email: {{ userInfo.email }}</p>
+    <p>Wallet: {{ userInfo.walletAddress }}</p>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        userInfo: null,
+      }
+    },
+
+    async mounted() {
+      if (this.$web3auth.status === 'connected') {
+        const idToken = await this.$web3auth.authenticateUser()
+        this.userInfo = this.parseUserToken(idToken.idToken)
+      }
+    },
+
+    methods: {
+      parseUserToken(token) {
+        // Implementation to parse JWT token
+        return parseUserToken(token)
+      },
+    },
+  }
+</script>
+```
+
+## Use cases and benefits
+
+### Streamlined user onboarding
+
+**Profile Pre-population:**
+
+```javascript
+async function setupUserAccount(idToken) {
+  const userProfile = parseUserToken(idToken)
+
+  // Pre-populate user profile from token data
+  const accountData = {
+    email: userProfile.email,
+    displayName: userProfile.name,
+    avatarUrl: userProfile.picture,
+    authProvider: userProfile.provider,
+    walletAddress: userProfile.walletAddress,
+  }
+
+  // Create user account with pre-filled information
+  await createUserAccount(accountData)
+
+  // Skip additional profile setup steps
+  redirectToMainApplication()
+}
+```
+
+### Personalized user experience
+
+**Dynamic UI Customization:**
+
+```javascript
+function personalizeInterface(userProfile) {
+  // Customize greeting based on available name
+  const greeting = userProfile.name ? `Welcome back, ${userProfile.name}!` : `Welcome back!`
+
+  // Update profile avatar
+  if (userProfile.picture) {
+    updateUserAvatar(userProfile.picture)
+  }
+
+  // Apply user-specific settings
+  if (userProfile.customData?.theme) {
+    applyUserTheme(userProfile.customData.theme)
+  }
+
+  // Show personalized content
+  displayPersonalizedContent(userProfile)
+}
+```
+
+### Session management
+
+**Enhanced Session Context:**
+
+```javascript
+class SessionManager {
+  constructor(idToken) {
+    this.userProfile = parseUserToken(idToken)
+    this.sessionData = this.initializeSession()
+  }
+
+  initializeSession() {
+    return {
+      userId: this.userProfile.id,
+      email: this.userProfile.email,
+      displayName: this.userProfile.name,
+      walletAddress: this.userProfile.walletAddress,
+      loginProvider: this.userProfile.provider,
+      sessionStart: new Date(),
+      lastActivity: new Date(),
+    }
+  }
+
+  updateActivity() {
+    this.sessionData.lastActivity = new Date()
+
+    // Log activity with user context
+    this.logUserActivity({
+      userId: this.sessionData.userId,
+      email: this.sessionData.email,
+      action: 'page_view',
+      timestamp: new Date(),
+    })
+  }
+}
+```
+
+## Privacy and compliance considerations
+
+### Data minimization principles
+
+**GDPR Compliance:**
+
+- Only include necessary user data in tokens
+- Obtain explicit consent for PII inclusion
+- Provide clear privacy notices
+- Enable data portability and deletion
+
+**Implementation Example:**
+
+```javascript
+class PrivacyCompliantTokenHandler {
+  constructor(privacySettings) {
+    this.allowedFields = privacySettings.allowedTokenFields
+    this.userConsent = privacySettings.userConsent
+  }
+
+  processUserToken(rawToken) {
+    const decodedToken = jwt.decode(rawToken)
+    const filteredData = {}
+
+    // Only include fields user consented to
+    this.allowedFields.forEach(field => {
+      if (decodedToken[field] && this.userConsent[field]) {
+        filteredData[field] = decodedToken[field]
+      }
+    })
+
+    return filteredData
+  }
+}
+```
+
+### Regional compliance
+
+**Multi-Jurisdictional Considerations:**
+
+```javascript
+function getRegionSpecificTokenHandling(userRegion) {
+  const regionPolicies = {
+    EU: {
+      requireExplicitConsent: true,
+      dataRetentionDays: 90,
+      allowProfilePictures: false,
+      requireDataProcessingNotice: true,
+    },
+    US: {
+      requireExplicitConsent: false,
+      dataRetentionDays: 365,
+      allowProfilePictures: true,
+      requireDataProcessingNotice: false,
+    },
+    APAC: {
+      requireExplicitConsent: true,
+      dataRetentionDays: 180,
+      allowProfilePictures: true,
+      requireDataProcessingNotice: true,
+    },
+  }
+
+  return regionPolicies[userRegion] || regionPolicies['EU'] // Default to strictest
+}
+```
+
+## Security considerations
+
+### Token security best practices
+
+**Secure Token Handling:**
+
+```javascript
+class SecureTokenProcessor {
+  constructor() {
+    this.tokenCache = new Map()
+    this.encryptionKey = process.env.TOKEN_ENCRYPTION_KEY
+  }
+
+  async processToken(idToken) {
+    // Validate token signature
+    const isValid = await this.validateTokenSignature(idToken)
+    if (!isValid) {
+      throw new Error('Invalid token signature')
+    }
+
+    // Check for token replay attacks
+    if (this.isTokenReplayed(idToken)) {
+      throw new Error('Token replay detected')
+    }
+
+    // Extract and sanitize user data
+    const userData = this.extractUserData(idToken)
+    return this.sanitizeUserData(userData)
+  }
+
+  sanitizeUserData(userData) {
+    // Remove potentially dangerous content
+    const sanitized = { ...userData }
+
+    if (sanitized.name) {
+      sanitized.name = this.sanitizeString(sanitized.name)
+    }
+
+    if (sanitized.email) {
+      sanitized.email = this.validateEmail(sanitized.email)
+    }
+
+    if (sanitized.picture) {
+      sanitized.picture = this.validateImageUrl(sanitized.picture)
+    }
+
+    return sanitized
+  }
+}
+```
+
+### Data validation
+
+**Input Validation and Sanitization:**
+
+```javascript
+function validateUserData(userData) {
+  const validators = {
+    email: email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email),
+    name: name => name.length <= 100 && !/[<>]/.test(name),
+    picture: url => {
+      try {
+        const parsed = new URL(url)
+        return ['https:'].includes(parsed.protocol)
+      } catch {
+        return false
+      }
+    },
+  }
+
+  const validatedData = {}
+
+  Object.keys(userData).forEach(key => {
+    if (validators[key]) {
+      if (validators[key](userData[key])) {
+        validatedData[key] = userData[key]
+      } else {
+        console.warn(`Invalid ${key} data:`, userData[key])
+      }
+    } else {
+      validatedData[key] = userData[key]
+    }
+  })
+
+  return validatedData
+}
+```
+
+## Performance considerations
+
+### Token size management
+
+**Optimizing Token Size:**
+
+- Include only necessary user fields
+- Avoid large profile pictures (use URLs instead)
+- Limit custom metadata size
+- Consider token size impact on network performance
+
+**Token Size Monitoring:**
+
+```javascript
+function analyzeTokenSize(idToken) {
+  const tokenSize = new Blob([idToken]).size
+  const decoded = jwt.decode(idToken)
+
+  const analysis = {
+    totalSize: tokenSize,
+    headerSize: JSON.stringify(decoded.header).length,
+    payloadSize: JSON.stringify(decoded.payload).length,
+    signatureSize: idToken.split('.')[2].length,
+    userDataSize: JSON.stringify({
+      email: decoded.email,
+      name: decoded.name,
+      picture: decoded.picture,
+      custom_data: decoded.custom_data,
+    }).length,
+  }
+
+  // Log warning for large tokens
+  if (tokenSize > 8192) {
+    // 8KB threshold
+    console.warn('Large JWT token detected:', analysis)
+  }
+
+  return analysis
+}
+```
+
+### Caching strategies
+
+**Efficient User Data Caching:**
+
+```javascript
+class UserDataCache {
+  constructor() {
+    this.cache = new Map()
+    this.ttl = 5 * 60 * 1000 // 5 minutes
+  }
+
+  getUserData(userId, idToken) {
+    const cached = this.cache.get(userId)
+
+    if (cached && Date.now() - cached.timestamp < this.ttl) {
+      return cached.data
+    }
+
+    // Parse fresh token data
+    const userData = parseUserToken(idToken)
+
+    // Cache with timestamp
+    this.cache.set(userId, {
+      data: userData,
+      timestamp: Date.now(),
+    })
+
+    return userData
+  }
+
+  invalidateUser(userId) {
+    this.cache.delete(userId)
+  }
+
+  clearExpired() {
+    const now = Date.now()
+    for (const [userId, cached] of this.cache.entries()) {
+      if (now - cached.timestamp >= this.ttl) {
+        this.cache.delete(userId)
+      }
+    }
+  }
+}
+```
+
+## Decision framework
+
+### When to enable user data in tokens
+
+**Recommended for:**
+
+- Applications requiring immediate user context
+- Single-page applications with limited backend calls
+- Personalization-heavy interfaces
+- Offline-capable applications
+
+**Consider enabling when:**
+
+- User onboarding needs profile pre-population
+- UI personalization improves user experience
+- Session management benefits from user context
+- Reduced API calls for user data improve performance
+
+### When to disable user data in tokens
+
+**Recommended for:**
+
+- High-security applications
+- Compliance-heavy environments
+- Applications with separate user management systems
+- Minimal data exposure requirements
+
+**Consider disabling when:**
+
+- Privacy regulations are strict
+- Token size is a concern
+- User data is managed separately
+- Security requirements prefer minimal token content
+
+### Email-only configuration
+
+**Optimal for:**
+
+- Applications needing user identification only
+- Email-based user management systems
+- Privacy-focused applications
+- Minimal PII exposure scenarios
+
+## Next steps
+
+- **[Session Management](../session-management)** - Configure session duration and behavior
+- **[Key Export Settings](../key-export)** - Control private key export permissions
+- **[Project Settings](../../project-settings)** - Configure basic project information

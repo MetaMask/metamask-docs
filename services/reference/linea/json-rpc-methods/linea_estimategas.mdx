@@ -1,14 +1,16 @@
 ---
-title: "linea_estimateGas"
+title: linea_estimateGas
+sidebar_label: linea_estimateGas
 ---
 
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # `linea_estimateGas`
 
 Generates and returns the estimated amount of gas required to allow the transaction to complete and be
-published on Ethereum. The method does not submit the transaction to the blockchain.
+published on Ethereum. The method does not submit the transaction to the blockchain. <CreditCost network="linea" method="linea_estimateGas" />
 
 The `priorityFeePerGas` returned by this method includes the cost of submitting the transaction to Ethereum, which
 can vary based on the size of the `calldata`.
