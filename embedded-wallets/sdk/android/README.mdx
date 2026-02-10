@@ -1,7 +1,7 @@
 ---
 title: Embedded Wallets SDK for Android
 sidebar_label: Getting Started
-description: 'MetaMask Embedded Wallets SDK for Android | Documentation'
+description: 'MetaMask Embedded Wallets SDK for Android | Web3Auth Plug and Play for Android'
 ---
 
 import TabItem from '@theme/TabItem'
@@ -9,21 +9,31 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play/ W3A PnP) provides a seamless authentication experience for Android applications with social logins, external wallets, and more. Using our Android SDK written in Kotlin, you can easily connect users to their preferred wallets and manage authentication state natively.
+MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seamless authentication experience for Android applications with social logins, external wallets, and more. Our Android SDK, written in Kotlin, simplifies how you connect users to their preferred wallets and manage authentication state natively.
 
 ## Requirements
 
 - Android API version `24` or newer
 - Android Compile and Target SDK: `34`
-- Basic knowledge of Java or Kotlin Development
+- Basic knowledge of Java or Kotlin development
+
+## Prerequisites
+
+- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+
+:::tip
+
+See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
+
+:::
 
 ## Installation
 
 Install the Web3Auth Android SDK by adding it to your project dependencies:
 
-### 1. Add JitPack Repository
+### 1. Add JitPack repository
 
-In your project-level gradle file add JitPack repository:
+In your project-level Gradle file add JitPack repository:
 
 ```groovy
 dependencyResolutionManagement {
@@ -37,7 +47,7 @@ dependencyResolutionManagement {
 }
 ```
 
-### 2. Add Web3Auth Dependency
+### 2. Add Web3Auth dependency
 
 Then, in your app-level `build.gradle` dependencies section, add the following:
 
@@ -49,17 +59,9 @@ dependencies {
 }
 ```
 
-## Setup
+### 1. Update permissions
 
-:::info
-
-Prerequisites Before you start, make sure you have registered on the [**Web3Auth Dashboard**](https://dashboard.web3auth.io/) and have set up your project. You can look into the [Dashboard Setup](../../dashboard/README.mdx) guide to learn more.
-
-:::
-
-### 1. Update Permissions
-
-Open your app's `AndroidManifest.xml` file and add the following permission. Please make sure the `<uses-permission>` element should be a direct child of the `<manifest>` root element.
+Open your app's `AndroidManifest.xml` file and add the following permission. Ensure the `<uses-permission>` element is a direct child of the `<manifest>` root element.
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
@@ -67,7 +69,7 @@ Open your app's `AndroidManifest.xml` file and add the following permission. Ple
 
 ### 2. Configure `AndroidManifest.xml` File
 
-Make sure your Main activity launchMode is set to **singleTop** in your `AndroidManifest.xml`:
+Ensure your main activity launchMode is set to **singleTop** in your `AndroidManifest.xml`:
 
 ```xml
 <activity
@@ -77,7 +79,7 @@ Make sure your Main activity launchMode is set to **singleTop** in your `Android
 </activity>
 ```
 
-From version **7.1.2**, please make sure to set `android:allowBackup` to `false`, and add `tools:replace="android:fullBackupContent"` in your `AndroidManifest.xml` file:
+From version **7.1.2**, set `android:allowBackup` to `false` and add `tools:replace="android:fullBackupContent"` in your `AndroidManifest.xml` file:
 
 ```xml
 <application
@@ -89,18 +91,18 @@ From version **7.1.2**, please make sure to set `android:allowBackup` to `false`
 </application>
 ```
 
-### 3. Handle Redirects
+### 3. Handle redirects
 
-Once the gradles and permission has been updated, you need to configure Web3Auth project by whitelisting your scheme and package name.
+Once the gradles and permission has been updated, you need to configure your Embedded Wallets project by allowlisting your scheme and package name.
 
 #### Configure a Plug n Play project
 
-- Go to [Web3Auth Developer Dashboard](https://dashboard.web3auth.io), and create or open an existing Web3Auth project.
-- Whitelist `{SCHEME}://{YOUR_APP_PACKAGE_NAME}` in the developer dashboard. This step is mandatory for the redirect to work.
+- From the [Embedded Wallets dashboard](https://dashboard.web3auth.io), create or open an existing Web3Auth project.
+- Allowlist `{SCHEME}://{YOUR_APP_PACKAGE_NAME}` in the dashboard. This step is mandatory for the redirect to work.
 
-#### Configure Deep Link
+#### Configure deep link
 
-Open your app's `AndroidManifest.xml` file and add the following deep link intent filter to your Main activity
+Open your app's `AndroidManifest.xml` file and add the following deep link intent filter to your main activity:
 
 ```xml
 <intent-filter>
@@ -114,11 +116,15 @@ Open your app's `AndroidManifest.xml` file and add the following deep link inten
 </intent-filter>
 ```
 
-### 4. Triggering Login exceptions
+### 4. Triggering login exceptions
 
-The `setCustomTabsClosed` method can be used to trigger login exceptions for Android. The Android SDK uses the custom tabs and from current implementation of chrome custom tab, it's not possible to add a listener directly to chrome custom tab close button and trigger login exceptions.
+:::note
 
-Hence, it's necessary to use `setCustomTabsClosed` method in your login screen to trigger exceptions.
+The Android SDK uses the custom tabs and from current implementation of Chrome custom tab, it's not possible to add a listener directly to Chrome custom tab close button and trigger login exceptions.
+
+:::
+
+Apply the `setCustomTabsClosed` method in your login screen to trigger login exceptions for Android.
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -139,11 +145,11 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-## Initialize Web3Auth
+## Initialize Embedded Wallets
 
-### 1. Create a Web3Auth instance
+### 1. Create an Embedded Wallets instance
 
-Create a Web3Auth instance and configure it with your project settings:
+Create an Embedded Wallets instance and configure it with your project settings:
 
 ```kotlin
 import com.web3auth.core.Web3Auth
@@ -164,7 +170,7 @@ var web3Auth = Web3Auth(
 web3Auth.setResultUrl(intent?.data)
 ```
 
-### 2. Set Result URL
+### 2. Set result URL
 
 Whenever user initiates a login flow, a new intent of CustomTabs is launched. It's necessary step to use `setResultUrl` in `onNewIntent` method to successful track the login process.
 
@@ -177,9 +183,9 @@ override fun onNewIntent(intent: Intent?) {
 }
 ```
 
-### 3. Initialize the Web3Auth instance
+### 3. Initialize the Embedded Wallets instance
 
-After instantiating Web3Auth, the next step is to initialize it using the `initialize` method. This method is essential for setting up the SDK, checking for any active sessions, and fetching the whitelabel configuration from your dashboard.
+After instantiating Embedded Wallets, the next step is to initialize it using the `initialize` method. This method is essential for setting up the SDK, checking for any active sessions, and fetching the whitelabel configuration from your dashboard.
 
 Once the `initialize` method executes successfully, you can use the `getPrivKey` or `getEd25519PrivKey` methods to verify if an active session exists. If there is no active session, these methods will return an empty string; otherwise, they will return the respective private key.
 
@@ -205,18 +211,18 @@ initializeCF.whenComplete { _, error ->
 }
 ```
 
-## Advanced Configuration
+## Advanced configuration
 
 The Web3Auth Android SDK offers a rich set of advanced configuration options:
 
-- **[Custom Authentication](./advanced/custom-authentication.mdx)**: Define authentication methods.
-- **[Whitelabeling & UI Customization](./advanced/whitelabel.mdx)**: Personalize the modal's appearance.
-- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx)**: Set up and manage MFA.
-- **[DApp Share](./advanced/dapp-share.mdx)**: Share DApp sessions across devices.
+- **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
+- **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
+- **[Multi-Factor Authentication (MFA)](./advanced/mfa.mdx):** Set up and manage MFA.
+- **[Dapp Share](./advanced/dapp-share.mdx):** Share dapp sessions across devices.
 
 :::tip
 
-Head over to the advanced configuration sections to learn more about each configuration option.
+See the [advanced configuration sections](./advanced/) to learn more about each configuration option.
 
 :::
 
@@ -273,11 +279,11 @@ val web3Auth = Web3Auth(
 
 </Tabs>
 
-## Blockchain Integration
+## Blockchain integration
 
-Web3Auth is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Web3Auth offers robust support for both **Solana** and **Ethereum**.
+Embedded Wallets is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Embedded Wallets offers robust support for both **Solana** and **Ethereum**.
 
-### Ethereum Integration
+### Ethereum integration
 
 For Ethereum integration, you can get the private key using the `getPrivKey` method and use it with web3j or other Ethereum libraries:
 
@@ -306,7 +312,7 @@ val balanceResponse = web3.ethGetBalance(address, DefaultBlockParameterName.LATE
 val ethBalance = BigDecimal.valueOf(balanceResponse.balance.toDouble()).divide(BigDecimal.TEN.pow(18))
 ```
 
-### Solana Integration
+### Solana integration
 
 For Solana integration, you can get the Ed25519 private key using the `getEd25519PrivKey` method and use it with sol4k or any other Solana libraries:
 

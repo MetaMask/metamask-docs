@@ -4,25 +4,25 @@ description: Comprehensive guide for migrating Web3Auth React applications from 
 sidebar_label: v9 to v10
 ---
 
-This guide focuses specifically on migrating React applications from Web3Auth v9 to v10. This is a supplementary guide to the main [v9 to v10 migration guide](../../js/migration-guides/modal/v9-to-v10/README.mdx).
+This guide focuses specifically on migrating React applications from Embedded Wallets/Web3Auth v9 to v10. This is a supplementary guide to the main [v9 to v10 migration guide](../../js/migration-guides/modal/v9-to-v10/README.mdx).
 
-For general migration points (chain configuration, MFA, method renames, etc.), please refer to the main migration guide.
+For general migration points (such as chain configuration, MFA, method renames), please refer to the main migration guide.
 
-## Migrating a React Application
+## Migrating a React application
 
 This section focuses on changes specific to migrating a Web3Auth v9 React application to v10 using `@web3auth/modal/react`.
 
-### React Hooks Path and WalletServicesPlugin Updates
+### React hooks path and WalletServicesPlugin updates
 
 Previously, React hooks were at `@web3auth/modal-react-hooks`. Now, they are consolidated and imported from `@web3auth/modal/react`. Even WalletServicesPlugin is now integrated into the hooks. Previously, it was a separate package named `@web3auth/wallet-services-plugin-react-hooks`.
 
 The `Web3AuthProvider` component remains essential for initializing the Web3Auth SDK and providing its context. Key changes include:
 
-- **Import Path**: `Web3AuthProvider` is imported from `@web3auth/modal/react`.
-- **Configuration Prop**: `Web3AuthProvider` in v10 typically takes a single `config` prop. This `config` object (e.g., `web3AuthContextConfig`) will contain your `web3AuthOptions` and any client-side SDK configurations.
-- **Dashboard Configuration**: Many configurations (like chain details for standard EVM chains, and verifier/connection settings) are now primarily managed through the Web3Auth Developer Dashboard.
+- **Import path:** `Web3AuthProvider` is imported from `@web3auth/modal/react`.
+- **Configuration Prop:** `Web3AuthProvider` in v10 typically takes a single `config` prop. This `config` object (for example, `web3AuthContextConfig`) will contain your `web3AuthOptions` and any client-side SDK configurations.
+- **Dashboard configuration:** Many configurations (like chain details for standard EVM chains, and verifier/connection settings) are now primarily managed through the Web3Auth Developer Dashboard (now the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)).
 
-### v10 `Web3AuthProvider` and Hook Usage
+### v10 `Web3AuthProvider` and hook usage
 
 `Web3AuthProvider` is configured with a `config` object, and all hooks are streamlined under `@web3auth/modal/react`.
 
@@ -85,7 +85,7 @@ import {
 } from '@web3auth/modal/react'
 ```
 
-### React Hook Structure
+### React hook structure
 
 The new hook structure is more granular:
 
@@ -93,7 +93,7 @@ The new hook structure is more granular:
   - `useWeb3Auth`: Core hook for initialization status and overall SDK state.
 - **Authentication:**
   - `useWeb3AuthConnect`: Handles connection.
-  - `useWeb3AuthDisconnect`: Manages disconnection.
+  - `useWeb3AuthDisconnect`: Manages Disconnection.
 - **Identity:**
   - `useIdentityToken`: Retrieves identity tokens.
   - `useWeb3AuthUser`: Accesses authenticated user's information.
@@ -102,23 +102,23 @@ The new hook structure is more granular:
 - **MFA:**
   - `useEnableMFA`: Enables MFA.
   - `useManageMFA`: Manages MFA settings.
-- **Wallet Services Plugin (now integrated):**
-  - `useWalletServicesPlugin`: Hook to access the Wallet Services Plugin context.
+- **Wallet Services plugin (now integrated):**
+  - `useWalletServicesPlugin`: Hook to access the Wallet Services plugin context.
     - `isPluginConnected`: `boolean`
     - `showWalletConnectScanner(params?)`: `Promise<void>`
     - `showCheckout(params?)`: `Promise<void>`
     - `showWalletUI(params?)`: `Promise<void>`
     - `showSwap(params?)`: `Promise<void>`
 
-Refer to the [React Modal SDK Hooks documentation](/embedded-wallets/sdk/react/hooks) for the detailed SDK reference.
+Refer to the [React Modal SDK hooks documentation](/embedded-wallets/sdk/react/hooks) for the detailed SDK reference.
 
-## Package Removal
+## Package removal
 
 When migrating React applications, ensure you remove these deprecated packages:
 
 - `@web3auth/modal-react-hooks`
 - `@web3auth/wallet-services-plugin-react-hooks`
 
-## Next Steps
+## Next steps
 
 Return to the main [v9 to v10 migration guide](../../js/migration-guides/modal/v9-to-v10/README.mdx) to continue with other migration aspects like MFA configurations, method renames, and chain configuration changes.

@@ -163,23 +163,18 @@ const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
-  signer: {
-    type: "account",
-    data: {
-      // The requested permissions will granted to the
-      // session account.
-      address: sessionAccount.address,
-    },
-  },
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
   permission: {
     type: "erc20-token-periodic",
     data: {
       tokenAddress,
-      // 1 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
+      // 10 USDC in WEI format. Since USDC has 6 decimals, 10 * 10^6
       periodAmount: parseUnits("10", 6),
       // 1 day in seconds
       periodDuration: 86400,
-      justification?: "Permission to transfer 1 USDC every day",
+      justification: "Permission to transfer 10 USDC every day",
     },
   },
   isAdjustmentAllowed: true,
@@ -241,7 +236,7 @@ To redeem the permissions, use the client action based on your session account t
 A smart account uses the Bundler Client's `sendUserOperationWithDelegation` action,
 and an EOA uses the Wallet Client's `sendTransactionWithDelegation` action.
 
-See the [`sendUserOperationWithDelegation`](../../reference/advanced-permissions/bundler-client.md#senduseroperationwithdelegation) and [`sendTransactionWithDelegation`](../../reference/advanced-permissions/wallet-client.md#sendtransactionwithdelegation) API reference for more information.
+See the [`sendUserOperationWithDelegation`](../../reference/erc7710/bundler-client.md#senduseroperationwithdelegation) and [`sendTransactionWithDelegation`](../../reference/erc7710/wallet-client.md#sendtransactionwithdelegation) API reference for more information.
 
 <Tabs>
 <TabItem value="Smart account">
@@ -315,5 +310,6 @@ export const calldata = encodeFunctionData({
 
 ## Next steps
 
-See how to configure different [ERC-20 token permissions](use-permissions/erc20-token.md) and
+- See how to [get the supported execution permissions](get-supported-permissions.md).
+- See how to configure different [ERC-20 token permissions](use-permissions/erc20-token.md) and
 [native token permissions](use-permissions/native-token.md).

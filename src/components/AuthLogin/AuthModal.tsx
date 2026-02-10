@@ -250,6 +250,9 @@ const AuthModal = ({
       const projectsResponse = await fetch(`${DASHBOARD_URL}/api/v1/users/${userId}/projects`, {
         ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
       })
+      if (!projectsResponse.ok) {
+        throw new Error(`Failed to fetch projects: ${projectsResponse.status} ${projectsResponse.statusText}`)
+      }
       const {
         result: { projects },
       } = await projectsResponse.json()
@@ -259,6 +262,9 @@ const AuthModal = ({
       const uksUserRawResp = await fetch(`${DASHBOARD_URL}/api/v1/users/${userId}`, {
         ...REQUEST_PARAMS('GET', { Authorization: `Bearer ${token}` }),
       })
+      if (!uksUserRawResp.ok) {
+        throw new Error(`Failed to fetch user info: ${uksUserRawResp.status} ${uksUserRawResp.statusText}`)
+      }
       const {
         result: {
           servicePlan: { tier },

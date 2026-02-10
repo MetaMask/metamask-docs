@@ -4,7 +4,7 @@ sidebar_label: useSwap
 description: '@web3auth/modal React Hooks useSwap | Embedded Wallets'
 ---
 
-Hook to open the Swap interface using the Wallet Services Plugin.
+Hook to open the Swap interface using the Wallet Services plugin.
 
 ### Import
 
@@ -31,25 +31,25 @@ function SwapButton() {
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IUseSwap } from '@web3auth/modal/react'
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Whether the swap interface is being opened.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error that occurred while opening the swap interface.
 
-#### showSwap
+#### `showSwap`
 
 `(showSwapParams?: BaseEmbedControllerState["showSwap"]) => Promise<void>`
 
