@@ -179,6 +179,6 @@ const tx = await signer.sendTransaction({
   gasLimit: limit,
   nonce: signer.getTransactionCount(),
   maxPriorityFeePerGas: ethers.utils.parseUnits("2", "gwei"),
-  chainId: 3,
+  chainId: 11155111,
 });
 ```
