@@ -41,6 +41,7 @@ const sidebar = {
           href: "https://docs.metamask.io/llms-smart-accounts-kit-full.txt"
         },
         'get-started/supported-networks',
+        'get-started/supported-advanced-permissions',
       ],
     },
     {
