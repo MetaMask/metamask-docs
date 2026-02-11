@@ -28,6 +28,14 @@ An ERC-20 token must implement the following functions:
 - `approve(spender, value)` - Allows `spender` to withdraw from your account multiple times, up to the `value` amount.
 - `transferFrom(from, to, value)` - Transfers `value` amount of tokens from address `from` to address `to`.
 
+:::tip
+
+Some widely used tokens don't strictly follow ERC-20 return conventions. Don't
+assume `transfer` or `transferFrom` return a boolean value. Use a safe wrapper
+(such as [OpenZeppelin’s `SafeERC20`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/utils/SafeERC20.sol)) or explicitly handle empty return data.
+
+:::
+
 At certain times, an ERC-20 token also must emit the following events:
 
 - `Transfer(from, to, value)` - Must trigger when tokens are transferred, including zero value transfers.
