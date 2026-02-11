@@ -20,15 +20,15 @@ import WalletPreview from '@site/static/img/tutorials/android-wallet-preview.png
   slug="/tutorials/android-wallet"
 />
 
-In this guide, we'll talk about how we can use Web3Auth to build your Ethereum Web3 wallet in Android. 
-The wallet will only support the Ethereum ecosystem, but functionality can be extended with any blockchain 
-ecosystem.
+In this guide, we'll talk about how we can use MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) 
+to build your Ethereum Web3 wallet in Android. The wallet will only support the Ethereum ecosystem, but 
+functionality can be extended with any blockchain ecosystem.
 
 You will create a simple app with the functionality to log in, display user details, and perform blockchain 
-interactions. The signing of the blockchain transactions is done through the Web3Auth embedded wallet. You 
+interactions. The signing of the blockchain transactions is done through the Embedded Wallets SDK. You 
 can check out the infrastructure docs, 
-["Web3Auth Wallet Management Infrastructure"](/embedded-wallets/infrastructure/) for a high-level overview 
-of the Web3Auth architecture and implementation. For those who want to skip straight to the code, you can 
+[Embedded Wallets management infrastructure](/embedded-wallets/infrastructure/) for a high-level overview 
+of the Embedded Wallets architecture and implementation. For those who want to skip straight to the code, you can 
 find it on [GitHub](https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-playground).
 
 Here are a few screenshots of the application.
@@ -39,24 +39,25 @@ Here are a few screenshots of the application.
   alt="Android Wallet Screenshots"
 />
 
-## How to set up Web3Auth Dashboard
+## How to set up Embedded Wallets dashboard
 
-If you haven't already, sign up on the Web3Auth platform. It is free and gives you access to the Web3Auth's 
-base plan. After the basic setup, explore other features and functionalities offered by the Web3Auth Dashboard. 
+If you haven't already, sign up on the [Embedded Wallets platform](https://dashboard.web3auth.io/). It's free 
+and gives you access to the Embedded Wallets'base plan. After the basic setup, explore other features and 
+functionalities offered by Embedded Wallets. 
 It includes custom verifiers, whitelabeling, analytics, and more. 
 Head to the [Embedded Wallet documentation](/embedded-wallets/dashboard/) page for detailed instructions on 
-setting up the Web3Auth Dashboard.
+setting up the dashboard.
 
 ## Integrating Web3Auth in Android
 
-Once, you have set up the Web3Auth Dashboard, and created a new project, it's time to integrate Web3Auth in 
-your Android application. For the implementation, we'll use the 
+Once, you have set up your Embedded Wallets dashboard, and created a new project, it's time to integrate Web3Auth 
+in your Android application. For the implementation, we'll use the 
 ["web3auth-android-sdk"](https://github.com/Web3Auth/web3auth-android-sdk) SDK. This SDK facilitates 
-integration with Web3Auth. This way you can manage an embedded wallet in your Android application.
+integration with Web3Auth. This way you can manage an Embedded Wallet in your Android application.
 
 ### Installation
 
-To install the web3auth-android-sdk SDK,in your module-level `build.gradle` or `settings.gradle` file, 
+1. To install the web3auth-android-sdk SDK,in your module-level `build.gradle` or `settings.gradle` file, 
 add JitPack repository.
 
 ```groovy
@@ -71,8 +72,7 @@ dependencyResolutionManagement {
 }
 ```
 
-Once, you have added the JitPack repository, then in your app-level `build.gradle` dependencies section, 
-add the `web3auth-android-sdk`.
+2. In your app-level `build.gradle` dependencies section, add the `web3auth-android-sdk`.
 
 ```groovy
 dependencies {
@@ -82,8 +82,8 @@ dependencies {
 }
 ```
 
-For the prerequisites, and other mandatory configuration of the SDK, please head to our 
-[installation documentation](/embedded-wallets/sdk/android#installation).
+{/*For the prerequisites, and other mandatory configuration of the SDK, please head to our 
+[installation documentation](/embedded-wallets/sdk/android#installation).*/}
 
 ### Initialization
 
