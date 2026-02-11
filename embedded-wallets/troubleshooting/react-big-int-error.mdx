@@ -1,16 +1,18 @@
 ---
-title: Big Int error in React production build.
-sidebar_label: Big Int React Error
+title: BigInt error in React production build.
+sidebar_label: BigInt React error
 image: 'img/metamaskog.jpg'
 
 description: "Getting a 'Cannot convert BigInt value to a number' error in your React production build? Here's how to fix it."
 ---
 
-While developing your React app with `@web3auth/modal`, there might be a case where the application is working fine in development mode but when you build the app for production, you get the following error:
+While developing your React app with @web3auth/modal, the application may work correctly in development mode but fail in production with the following error:
 
-> Uncaught TypeError: Cannot convert a BigInt value to a number
+Uncaught TypeError: Cannot convert a BigInt value to a number
 
-This error is caused by the fact that the production build of React is not specified the versions of the browsers. Due to this the production build of React uses the default browserlist configuration which might lead to the above error. This can be solved by adding the following lines to the `package.json` file:
+This happens because the production build relies on Browserslist to determine which browsers to target. If browser versions are not explicitly specified, the build uses the default Browserslist configuration, which may target environments that do not fully support BigInt. This mismatch can result in runtime errors in production.
+
+You can resolve this issue by explicitly defining supported browser versions in your package.json file:
 
 ```json title="package.json"
 "browserslist": {
@@ -26,4 +28,4 @@ This error is caused by the fact that the production build of React is not speci
   }
 ```
 
-By adding these lines, you are telling the Javascript bundlers to use specific versions of the browsers for the production build. After adding the above lines, create the production build again and you should be good to go.
+By adding these lines, you are telling the JavaScript bundlers to use specific versions of the browsers for the production build. After adding the above lines, create the production build again and you should be good to go.

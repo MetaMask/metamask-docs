@@ -9,22 +9,22 @@ sidebar_label: Custom Authentication Migration
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# Web3Auth v10 Custom Authentication Migration Guide
+# Web3Auth v10 custom authentication migration guide
 
 This guide focuses specifically on migrating custom authentication configurations from Web3Auth v9
-to v10. This covers the transition from "Verifiers" to "Connections" and "Grouped Connections". This
+to v10. This covers the transition from "Verifiers" to "connections" and "Grouped connections". This
 is a supplementary guide to the main [v9 to v10 migration guide](README.mdx).
 
 ## Overview
 
 In v9, custom authentication used `verifier` and `aggregate verifier` configurations for linking
 accounts from different social providers to the same underlying user wallet. In v10, this system is
-streamlined with "Connections" and "Grouped Connections" configured on the Web3Auth Developer
+streamlined with "connections" and "Grouped connections" configured on the Web3Auth Developer
 Dashboard, significantly reducing client-side code complexity.
 
-## Key Changes & Mapping
+## Key changes & Mapping
 
-### 1. Single Verifiers (v9) to Single Connections (v10)
+### 1. Single verifiers (v9) to single connections (v10)
 
 Single verifiers in v9 become connections in v10:
 
@@ -77,12 +77,12 @@ const web3AuthOptions: Web3AuthOptions = {
 
 #### Action
 
-Your existing v9 single verifiers will be automatically migrated to "Connections" on the new
-Web3Auth Developer Dashboard. Locate your migrated Connection, note its `authConnectionId`, and use
+Your existing v9 single verifiers will be automatically migrated to "connections" on the 
+Web3Auth Developer Dashboard (now the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)). Locate your migrated connection, note its `authConnectionId`, and use
 this ID in your v10 client code (`modalConfig` or `connectTo`). Remove any v9 `AuthAdapter`
 configuration previously used for this verifier.
 
-### 2. Aggregate Verifiers (v9) to Grouped Connections (v10)
+### 2. Aggregate verifiers (v9) to grouped connections (v10)
 
 Aggregate verifiers in v9 become grouped connections in v10:
 
@@ -156,18 +156,18 @@ const web3AuthOptions: Web3AuthOptions = {
 // add-end
 ```
 
-You first create individual "Connections" on the dashboard for each auth provider (e.g., one for
-Google, one for your custom JWT). Then, you create a "Grouped Connection" on the dashboard,
+First create individual "connections" on the dashboard for each auth provider (for example, one for
+Google, one for your custom JWT). Then, create a "Grouped connection" on the dashboard,
 selecting the individual connections you want to group.
 
 #### Action
 
-1. Your existing v9 Aggregate Verifiers (and their sub-verifiers) will be automatically migrated to
-   the new v10 dashboard. They will appear as individual "Connections" that are part of a "Grouped
-   Connection".
-2. On the v10 dashboard, locate your migrated Grouped Connection. Note its
+1. Your existing v9 Aggregate verifiers (and their sub-verifiers) will be automatically migrated to
+   the new v10 dashboard. They will appear as individual "connections" that are part of a **Grouped
+   connection**.
+2. On the v10 dashboard, locate your migrated Grouped connection. Note its
    `groupedAuthConnectionId`.
-3. For each login method within that group, find the corresponding individual migrated Connection
+3. For each login method within that group, find the corresponding individual migrated connection
    and note its specific `authConnectionId`.
 4. Update your v10 client code to use both the `groupedAuthConnectionId` (for the group) and the
    specific `authConnectionId` (for the particular login method being invoked) in `modalConfig` or
@@ -178,7 +178,7 @@ selecting the individual connections you want to group.
 This dashboard-centric approach, with automatic migration of existing verifiers, simplifies
 client-side logic and provides a more robust way to manage authentication methods.
 
-## Next Steps
+## Next steps
 
 Return to the main [v9 to v10 migration guide](README.mdx) to continue with other
 migration aspects like MFA configurations and method renames.

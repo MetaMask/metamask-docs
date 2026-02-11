@@ -4,21 +4,14 @@ sidebar_label: Overview
 description: '@web3auth/modal Solana Vue Composables | Embedded Wallets'
 ---
 
-Web3Auth provides a set of Vue composables for basic Solana wallet operations. These composables are designed to simplify common Solana interactions in your Vue app.
+Embedded Wallets provides a set of Vue composables for basic Solana wallet operations. These composables are designed to simplify common Solana interactions in your Vue app.
 
 :::info
 
-For advanced Solana features, you should use [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) on top of the composables provided.
+For advanced Solana features, you should use [`@solana/web3.js`](https://solana-labs.github.io/solana-web3.js/) to interact with the Solana blockchain using the Embedded Wallets Vue composables.
 
 :::
 
-## Solana Composables
+import SolanaComposablesSnippets from '../_solana-composables-snippets.mdx'
 
-| Composable Name             | Description                                  |
-| --------------------------- | -------------------------------------------- |
-| `useSignAndSendTransaction` | Sign and send a Solana transaction.          |
-| `useSignMessage`            | Sign a message with the Solana wallet.       |
-| `useSignTransaction`        | Sign a Solana transaction (without sending). |
-| `useSolanaWallet`           | Access Solana wallet state and utilities.    |
-
-Further code and advanced usage should be implemented using Solana's web3.js library as needed.
+<SolanaComposablesSnippets />

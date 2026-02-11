@@ -72,24 +72,58 @@ function TabList({
         },
         className
       )}>
-      {tabValues.map(({ value, label, attributes }) => (
-        <li
-          // TODO extract TabListItem
-          role="tab"
-          tabIndex={selectedValue === value ? 0 : -1}
-          aria-selected={selectedValue === value}
-          key={value}
-          ref={tabControl => tabRefs.push(tabControl)}
-          onKeyDown={handleKeydown}
-          onClick={handleTabChange}
-          {...attributes}
-          className={clsx('tabs__item', styles.tabItem, attributes?.className as string, {
-            'tabs__item--active': selectedValue === value,
-          })}>
-          {label ?? value}
-        </li>
+      {tabValues.map((tabValue) => (
+        <TabListItem
+          key={tabValue.value}
+          value={tabValue.value}
+          label={tabValue.label}
+          attributes={tabValue.attributes}
+          selectedValue={selectedValue}
+          handleTabChange={handleTabChange}
+          handleKeydown={handleKeydown}
+          setRef={(tabControl) => tabRefs.push(tabControl)}
+        />
       ))}
     </ul>
+  )
+}
+
+function TabListItem({
+  value,
+  label,
+  attributes,
+  selectedValue,
+  handleTabChange,
+  handleKeydown,
+  setRef,
+}: {
+  value: string
+  label?: string
+  attributes?: { [key: string]: unknown; className?: string }
+  selectedValue: string
+  handleTabChange: (
+    event:
+      | React.FocusEvent<HTMLLIElement>
+      | React.MouseEvent<HTMLLIElement>
+      | React.KeyboardEvent<HTMLLIElement>
+  ) => void
+  handleKeydown: (event: React.KeyboardEvent<HTMLLIElement>) => void
+  setRef: (element: HTMLLIElement | null) => void
+}) {
+  return (
+    <li
+      role="tab"
+      tabIndex={selectedValue === value ? 0 : -1}
+      aria-selected={selectedValue === value}
+      ref={setRef}
+      onKeyDown={handleKeydown}
+      onClick={handleTabChange}
+      {...attributes}
+      className={clsx('tabs__item', styles.tabItem, attributes?.className as string, {
+        'tabs__item--active': selectedValue === value,
+      })}>
+      {label ?? value}
+    </li>
   )
 }
 

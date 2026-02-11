@@ -11,14 +11,14 @@ import * as logout from './logout.mdx'
 import * as rnQuickStart from './rnQuickStart.mdx'
 import * as requirementsAndroid from './requirementsAndroid.mdx'
 import * as requirementsIOS from './requirementsIOS.mdx'
-import * as whitelist from './whitelist.mdx'
+import * as allowlist from './allowlist.mdx'
 
 const STEPS = toSteps({
   rnQuickStart,
   reactNativeBundlerIssues,
   requirementsAndroid,
   requirementsIOS,
-  whitelist,
+  allowlist,
   installation,
   registerApp,
   walletAggregatorOnly,
