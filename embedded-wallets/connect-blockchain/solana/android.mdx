@@ -104,11 +104,11 @@ dependencies {
 
 ## Initialize
 
-To Initialize the `Connection` we require rpc url. The `Connection` object will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response.The `sol4k` SDK also provides `RpcUrl` constant for all the supported clusters. For this example, we are using `RpcUrl.DEVNET` for Devnet-beta. To interact with Testnet or Mainnet, you can simply change the `RpcUrl`.
+To Initialize the `Connection` we require a RPC URL. The `Connection` object will provide a gateway and protocol to interact with Solana cluster while sending requests and receving response.The `sol4k` SDK also provides `RpcUrl` constant for all the supported clusters. For this example, we are using `RpcUrl.DEVNET` for Devnet-beta. To interact with Testnet or Mainnet, change the `RpcUrl`.
 
 ### Initializing the Solana SDK
 
-In the below code block, we'll create the `Connection` instance using the Devnet-beta rpc.
+Create the `Connection` instance using the Devnet-beta RPC, for example:
 
 ```kotlin
 import org.sol4k.Connection
@@ -119,11 +119,15 @@ val connection = Connection(RpcUrl.DEVNET)
 
 ### Initializing the Web3Auth SDK
 
-In the below code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. For checking, if user is already authenticated, we can check whether private key is empty or not.
+In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to `HomeScreen`, otherwise you can route them to `LoginScreen` for authentication purpose. For checking, if user is already authenticated, we can check whether private key is empty or not.
 
 By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter during initialization.
 
-> Note: Note: The session can be persisted only for 30 days max
+:::note
+
+The session can be persisted for up to 30 days max.
+
+:::
 
 ```kotlin
 import com.web3auth.core.Web3Auth
@@ -150,7 +154,7 @@ val isUserAuthenticated = web3Auth.getPrivkey().isNotEmpty()
 
 ## Get account
 
-We can use `getEd25519PrivKey` method in Web3Auth to retrieve the private key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retrieve user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
+We can use `getEd25519PrivKey` method in Web3Auth to retrieve the private key for the Solana ecosystem. In the following code block, we'll use the Ed25519 private key to retrieve user's public address by creating `Keypair`. The `Keypair` instance from `sol4k` SDK once created can be used to sign the Solana transactions.
 
 ```kotlin
 val ed25519PrivateKey = web3Auth.getEd25519PrivKey()
