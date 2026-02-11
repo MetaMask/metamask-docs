@@ -91,6 +91,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-linea.svg`,
   },
   {
+    name: 'MegaETH',
+    href: '/services/reference/megaeth',
+    logo: `${LOGO_PATH}/logo_megaeth.svg`,
+  },
+  {
     name: 'Mantle',
     href: '/services/reference/mantle',
     logo: `${LOGO_PATH}/logo-mantle.svg`,
@@ -231,6 +236,11 @@ export const API_COSTS = {
     eth_newBlockFilter: 80,
     eth_newFilter: 80,
     eth_uninstallFilter: 80,
+  },
+  megaeth: {
+    eth_callMany: 80,
+    eth_getAccount: 80,
+    eth_getRawTransactionByHash: 80,
   },
   linea: {
     linea_estimateGas: 100,
