@@ -35,12 +35,6 @@ const config = {
 
   headTags: [
     {
-      tagName: 'script',
-      attributes: {
-        src: 'https://cmp.osano.com/AzZMxHTbQDOQD8c1J/84e64bce-4a70-4dcc-85cb-7958f22b2371/osano.js',
-      },
-    },
-    {
       tagName: 'link',
       attributes: {
         rel: 'icon',
@@ -324,6 +318,7 @@ const config = {
     './src/plugins/segment',
     './src/plugins/launchdarkly',
     './src/plugins/sentry',
+    './src/plugins/osano.ts',
     [
       '@docusaurus/plugin-google-tag-manager',
       {
