@@ -38,11 +38,11 @@ Always do your own research before installing a Snap.
 - If your Snap uses any of the following API methods related to key management, you must provide
   evidence of a third-party audit from an approved auditor:
 
-  - [`snap_getBip32Entropy`](../reference/snaps-api/snap_getbip32entropy)
-  - [`snap_getBip32PublicKey`](../reference/snaps-api/snap_getbip32publickey)
-  - [`snap_getBip44Entropy`](../reference/snaps-api/snap_getbip44entropy)
-  - [`snap_getEntropy`](../reference/snaps-api/snap_getentropy)
-  - [`snap_manageAccounts`](../reference/snaps-api/snap_manageaccounts)
+  - [`snap_getBip32Entropy`](../reference/snaps-api/snap_getbip32entropy.mdx)
+  - [`snap_getBip32PublicKey`](../reference/snaps-api/snap_getbip32publickey.mdx)
+  - [`snap_getBip44Entropy`](../reference/snaps-api/snap_getbip44entropy.mdx)
+  - [`snap_getEntropy`](../reference/snaps-api/snap_getentropy.mdx)
+  - [`snap_manageAccounts`](../reference/snaps-api/snap_manageaccounts.mdx)
 
   The audit must cover the Snap source code that is to run within the Snaps system, and any modules
   used for key management.
@@ -163,11 +163,11 @@ The following is a list of permissions that do not require allowlisting:
 - [`endowment:page-home`](../reference/permissions.md#endowmentpage-home)
 - [`endowment:signature-insight`](../reference/permissions.md#endowmentsignature-insight)
 - [`endowment:transaction-insight`](../reference/permissions.md#endowmenttransaction-insight)
-- [`snap_dialog`](../reference/snaps-api/snap_dialog)
-- [`snap_getLocale`](../reference/snaps-api/snap_getlocale-deprecated)
-- [`snap_getPreferences`](../reference/snaps-api/snap_getpreferences)
-- [`snap_manageState`](../reference/snaps-api/snap_managestate)
-- [`snap_notify`](../reference/snaps-api/snap_notify)
+- [`snap_dialog`](../reference/snaps-api/snap_dialog.mdx)
+- [`snap_getLocale`](../reference/snaps-api/snap_getlocale-deprecated.mdx)
+- [`snap_getPreferences`](../reference/snaps-api/snap_getpreferences.mdx)
+- [`snap_manageState`](../reference/snaps-api/snap_managestate.mdx)
+- [`snap_notify`](../reference/snaps-api/snap_notify.mdx)
 
 If your Snap only uses permissions from this list,
 it can be installed in the MetaMask extension without inclusion on the allowlist.

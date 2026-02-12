@@ -15,9 +15,9 @@ Snaps can access the global object `snap`, which has one method: `request`.
 You can use this object to make [Snaps API](../../reference/snaps-api) requests.
 These API methods allow Snaps to extend or modify the functionality of MetaMask.
 
-To call each method (except the [interactive UI methods](../../reference/snaps-api/interactive-ui-methods)),
+To call each method (except the [interactive UI methods](../../features/custom-ui/interactive-ui.md)),
 you must first [request permission](../../how-to/request-permissions.md) in the Snap manifest file.
-For example, to call [`snap_notify`](../../reference/snaps-api/snap_notify), first request the
+For example, to call [`snap_notify`](../../reference/snaps-api/snap_notify.mdx), first request the
 `snap_notify` permission:
 
 ```json title="snap.manifest.json"

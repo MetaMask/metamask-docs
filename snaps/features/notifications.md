@@ -6,13 +6,13 @@ sidebar_position: 10
 # Notifications
 
 You can display notifications directly in MetaMask or natively in a user's operating system (OS)
-using the [`snap_notify`](../reference/snaps-api/snap_notify) API method.
+using the [`snap_notify`](../reference/snaps-api/snap_notify.mdx) API method.
 
 ## Steps
 
 ### 1. Request permission to notify users
 
-Request the [`snap_notify`](../reference/snaps-api/snap_notify) permission.
+Request the [`snap_notify`](../reference/snaps-api/snap_notify.mdx) permission.
 Add the following to your Snap's manifest file:
 
 ```json title="snap.manifest.json"
@@ -23,7 +23,7 @@ Add the following to your Snap's manifest file:
 
 ### 2. Create a notification
 
-Create a notification by calling [`snap_notify`](../reference/snaps-api/snap_notify), which takes
+Create a notification by calling [`snap_notify`](../reference/snaps-api/snap_notify.mdx), which takes
 a notification `type` and `message`.
 Specify `type: "inApp"` to display the notification in the MetaMask UI, or `type: "native"` to
 display the notification in the user's OS.
@@ -96,6 +96,6 @@ await snap.request({
 See the
 [`@metamask/notifications-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/notifications)
 package for a full example of implementing notifications using
-[`snap_notify`](../reference/snaps-api/snap_notify).
+[`snap_notify`](../reference/snaps-api/snap_notify.mdx).
 This example exposes a [custom JSON-RPC API](../learn/about-snaps/apis.md#custom-json-rpc-apis) for
 dapps to display in-app and native notifications.
