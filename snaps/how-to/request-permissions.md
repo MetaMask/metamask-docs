@@ -16,7 +16,7 @@ Snaps and dapps follow the [EIP-2255 wallet permissions specification](https://e
 
 ### Snaps API methods
 
-Request permission to call [Snaps API methods](../reference/snaps-api) in the
+Request permission to call [Snaps API methods](../reference/snaps-api/index.md) in the
 `initialPermissions` field of the Snap [manifest file](../learn/about-snaps/files.md#manifest-file).
 For example, to request to call [`snap_dialog`](../reference/snaps-api/snap_dialog.mdx), add the
 following to the manifest file:
