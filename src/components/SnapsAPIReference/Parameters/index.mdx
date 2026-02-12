@@ -1,0 +1,10 @@
+import Parameter from './Parameter/index.mdx';
+
+## Parameters
+
+{Array.isArray(props.method.parameters) ?
+  props.method.parameters.map((parameter, index) => (
+    <Parameter key={index} parameter={parameter} />
+  ))
+  : <Parameter parameter={props.method.parameters} />
+}

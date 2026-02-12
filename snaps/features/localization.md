@@ -13,7 +13,7 @@ title and description) in the user's language.
 ### 1. Get the user's language
 
 In your Snap's code, determine the user's language by using the
-[`snap_getPreferences`](../reference/snaps-api.md#snap_getpreferences) API method.
+[`snap_getPreferences`](../reference/snaps-api/snap_getpreferences) API method.
 To call `snap_getPreferences`, first request the required permission by adding it to the
 `initialPermissions` field in your manifest file:
 
