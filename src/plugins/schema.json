@@ -1,0 +1,927 @@
+[
+  {
+    "name": "snap_cancelBackgroundEvent",
+    "description": null,
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "The ID of the background event to cancel."
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_clearState",
+    "description": "`snap_clearState` clears the state of the Snap.",
+    "parameters": [
+      {
+        "name": "encrypted",
+        "type": "boolean | undefined",
+        "description": "Whether to use the separate encrypted state, or the\nunencrypted state. Defaults to the encrypted state. Encrypted state can only\nbe used if the extension is unlocked, while unencrypted state can be used\nwhether the extension is locked or unlocked."
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_closeWebSocket",
+    "description": "Handler for the `snap_closeWebSocket` method.",
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "The id of the WebSocket connection to close."
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_createInterface",
+    "description": null,
+    "parameters": [
+      {
+        "name": "ui",
+        "type": "JSXElement",
+        "description": "The components to display in the interface."
+      },
+      {
+        "name": "context",
+        "type": "Record<string, Json> | undefined",
+        "description": null
+      }
+    ],
+    "result": {
+      "type": "string",
+      "description": "The result returned by the `snap_createInterface` method, which is the id of the created interface."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_dialog",
+    "description": null,
+    "parameters": {
+      "type": "AlertDialog | ConfirmationDialog | PromptDialog | DefaultDialog",
+      "description": null
+    },
+    "result": {
+      "type": "Json",
+      "description": null
+    },
+    "subjectTypes": ["snap"],
+    "restricted": true
+  },
+  {
+    "name": "snap_endTrace",
+    "description": "Handler for the `snap_endTrace` method.",
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string | undefined",
+        "description": "The unique identifier of the trace.\nDefaults to 'default' if not provided."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": "The name of the trace."
+      },
+      {
+        "name": "timestamp",
+        "type": "number | undefined",
+        "description": "Override the end time of the trace."
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_experimentalProviderRequest",
+    "description": null,
+    "parameters": [
+      {
+        "name": "chainId",
+        "type": "`${string}:${string}`",
+        "description": "The CAIP-2 chain ID to make the request to."
+      },
+      {
+        "name": "request",
+        "type": "{ method: string; params: JsonRpcParams; } | { method: string; }",
+        "description": "The JSON-RPC request."
+      }
+    ],
+    "result": {
+      "type": "Json",
+      "description": "The result returned by the `snap_experimentalProviderRequest` method, which will be a JSON serializable value.\n\nNOTE: This implementation is experimental and may be removed or changed without warning."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_getBackgroundEvents",
+    "description": null,
+    "parameters": null,
+    "result": {
+      "type": "{ id: string; scheduledAt: string; snapId: SnapId; date: string; request: { method: string; jsonrpc?: \"2.0\" | undefined; id?: string | number | null | undefined; params?: Record<string, Json> | Json[] | undefined; }; }[]",
+      "description": "The result returned by the `snap_getBackgroundEvents` method.\n\nIt consists of an array background events (if any) for a snap."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_getBip32Entropy",
+    "description": null,
+    "parameters": [
+      {
+        "name": "curve",
+        "type": "\"secp256k1\" | \"ed25519\" | \"ed25519Bip32\"",
+        "description": null
+      },
+      {
+        "name": "path",
+        "type": "string[]",
+        "description": null
+      },
+      {
+        "name": "source",
+        "type": "string | undefined",
+        "description": "The ID of the entropy source to use. If not specified, the primary entropy\nsource will be used. For a list of available entropy sources, see the\n`snap_listEntropySources` method."
+      }
+    ],
+    "result": [
+      {
+        "name": "depth",
+        "type": "number",
+        "description": "The 0-indexed path depth of this node."
+      },
+      {
+        "name": "masterFingerprint",
+        "type": "number | undefined",
+        "description": "The fingerprint of the master node, i.e., the node at depth 0. May be\nundefined if this node was created from an extended key."
+      },
+      {
+        "name": "parentFingerprint",
+        "type": "number",
+        "description": "The fingerprint of the parent key, or 0 if this is a master node."
+      },
+      {
+        "name": "index",
+        "type": "number",
+        "description": "The index of the node, or 0 if this is a master node."
+      },
+      {
+        "name": "network",
+        "type": "Network | undefined",
+        "description": "The network for the node. This is only used for extended keys, and defaults\nto `mainnet`."
+      },
+      {
+        "name": "privateKey",
+        "type": "string | undefined",
+        "description": "The (optional) private key of this node."
+      },
+      {
+        "name": "publicKey",
+        "type": "string",
+        "description": "The public key of this node."
+      },
+      {
+        "name": "chainCode",
+        "type": "string",
+        "description": "The chain code of this node."
+      },
+      {
+        "name": "curve",
+        "type": "\"secp256k1\" | \"ed25519\" | \"ed25519Bip32\"",
+        "description": "The name of the curve used by the node."
+      }
+    ],
+    "subjectTypes": ["snap"],
+    "restricted": true
+  },
+  {
+    "name": "snap_getBip32PublicKey",
+    "description": null,
+    "parameters": [
+      {
+        "name": "curve",
+        "type": "\"secp256k1\" | \"ed25519\" | \"ed25519Bip32\"",
+        "description": null
+      },
+      {
+        "name": "path",
+        "type": "string[]",
+        "description": null
+      },
+      {
+        "name": "compressed",
+        "type": "boolean | undefined",
+        "description": "Whether to return the compressed public key. Defaults to `false`."
+      },
+      {
+        "name": "source",
+        "type": "string | undefined",
+        "description": "The ID of the entropy source to use. If not specified, the primary entropy\nsource will be used. For a list of available entropy sources, see the\n`snap_listEntropySources` method."
+      }
+    ],
+    "result": {
+      "type": "string",
+      "description": "The result returned by the `snap_getBip32PublicKey` method.\n\nIt is the public key in hexadecimal format, in either compressed or\nuncompressed format, depending on the `compressed` parameter."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": true
+  },
+  {
+    "name": "snap_getBip44Entropy",
+    "description": null,
+    "parameters": [
+      {
+        "name": "coinType",
+        "type": "number",
+        "description": null
+      },
+      {
+        "name": "source",
+        "type": "string | undefined",
+        "description": "The ID of the entropy source to use. If not specified, the primary entropy\nsource will be used. For a list of available entropy sources, see the\n`snap_listEntropySources` method."
+      }
+    ],
+    "result": [
+      {
+        "name": "depth",
+        "type": "0 | 3 | 2 | 1 | 4 | 5",
+        "description": "The 0-indexed BIP-44 path depth of this node.\n\nA BIP-44 path is of the form:\n\n`m / 44' / coin_type' / account' / change / address_index`\n\nWith the following depths:\n\n`0 / 1 / 2 / 3 / 4 / 5`"
+      },
+      {
+        "name": "masterFingerprint",
+        "type": "number | undefined",
+        "description": "The fingerprint of the master node, i.e., the node at depth 0. May be\nundefined if this node was created from an extended key."
+      },
+      {
+        "name": "parentFingerprint",
+        "type": "number",
+        "description": "The fingerprint of the parent key, or 0 if this is a master node."
+      },
+      {
+        "name": "index",
+        "type": "number",
+        "description": "The index of the node, or 0 if this is a master node."
+      },
+      {
+        "name": "network",
+        "type": "Network | undefined",
+        "description": "The network for the node. This is only used for extended keys, and defaults\nto `mainnet`."
+      },
+      {
+        "name": "privateKey",
+        "type": "string | undefined",
+        "description": "The hexadecimal string representation of the private key for this node.\nMay be `undefined` if the node is a public node."
+      },
+      {
+        "name": "publicKey",
+        "type": "string",
+        "description": "The hexadecimal string representation of the public key for this node."
+      },
+      {
+        "name": "chainCode",
+        "type": "string",
+        "description": "The hexadecimal string representation of the chain code for this node."
+      },
+      {
+        "name": "coin_type",
+        "type": "number",
+        "description": null
+      },
+      {
+        "name": "path",
+        "type": "`m / bip32:${number}' / bip32:${number}'`",
+        "description": null
+      }
+    ],
+    "subjectTypes": ["snap"],
+    "restricted": true
+  },
+  {
+    "name": "snap_getClientStatus",
+    "description": "`snap_getClientStatus` returns useful information about the client running the snap.",
+    "parameters": null,
+    "result": [
+      {
+        "name": "clientVersion",
+        "type": "string",
+        "description": "The semantic version of the client that the Snap is running in."
+      },
+      {
+        "name": "platformVersion",
+        "type": "string",
+        "description": "The Snaps Platform version that the client is running."
+      },
+      {
+        "name": "locked",
+        "type": "boolean",
+        "description": "A boolean flag that indicates whether the client is locked or not."
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "description": "A boolean flag that indicates whether the client is active or not."
+      }
+    ],
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_getCurrencyRate",
+    "description": null,
+    "parameters": [
+      {
+        "name": "currency",
+        "type": "\"btc\" | \"BTC\"",
+        "description": "The currency symbol."
+      }
+    ],
+    "result": {
+      "type": "CurrencyRate | null",
+      "description": "The result returned by the `snap_getCurrencyRate` method, which is the {@link CurrencyRate} object."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_getEntropy",
+    "description": null,
+    "parameters": [
+      {
+        "name": "version",
+        "type": "1",
+        "description": "The version of the entropy to retrieve. This is used for backwards\ncompatibility. As of now, only version 1 is supported."
+      },
+      {
+        "name": "salt",
+        "type": "string | undefined",
+        "description": "The optional salt to use when deriving the entropy."
+      },
+      {
+        "name": "source",
+        "type": "string | undefined",
+        "description": "The ID of the entropy source to use. If not specified, the primary entropy\nsource will be used. For a list of available entropy sources, see the\n`snap_listEntropySources` method."
+      }
+    ],
+    "result": [
+      {
+        "name": "length",
+        "type": "number",
+        "description": null
+      }
+    ],
+    "subjectTypes": ["snap"],
+    "restricted": true
+  },
+  {
+    "name": "snap_getFile",
+    "description": null,
+    "parameters": [
+      {
+        "name": "path",
+        "type": "string",
+        "description": "The path to the file to retrieve."
+      },
+      {
+        "name": "encoding",
+        "type": "\"base64\" | \"hex\" | \"utf8\" | undefined",
+        "description": "The encoding to use when retrieving the file."
+      }
+    ],
+    "result": {
+      "type": "string",
+      "description": "The result returned by the `snap_getFile` method."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_getInterfaceContext",
+    "description": null,
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "The interface id."
+      }
+    ],
+    "result": {
+      "type": "Record<string, Json> | null",
+      "description": "The result returned by the `snap_getInterfaceContext` method, which is the context for a given interface."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_getInterfaceState",
+    "description": null,
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "The interface id."
+      }
+    ],
+    "result": {
+      "type": "{ [x: string]: string | boolean | { addresses: `${string}:${string}:${string}`[]; accountId: string; } | { symbol: string; name: string; asset: `${string}:${string}/${string}:${string}`; } | { name: string; size: number; contentType: string; contents: string; } | Record<string, string | boolean | { addresses: `${string}:${string}:${string}`[]; accountId: string; } | { symbol: string; name: string; asset: `${string}:${string}/${string}:${string}`; } | { name: string; size: number; contentType: string; contents: string; } | null> | null; }",
+      "description": "The result returned by the `snap_getInterfaceState` method, which is the state of the interface."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_getLocale",
+    "description": null,
+    "parameters": [
+      {
+        "name": "length",
+        "type": "Json",
+        "description": null
+      }
+    ],
+    "result": {
+      "type": "string",
+      "description": "The result returned by the `snap_getLocale` method.\n\nIt is the locale of the user's MetaMask extension."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": true
+  },
+  {
+    "name": "snap_getPreferences",
+    "description": null,
+    "parameters": [
+      {
+        "name": "length",
+        "type": "Json",
+        "description": null
+      }
+    ],
+    "result": [
+      {
+        "name": "locale",
+        "type": "string",
+        "description": "The user's selected locale."
+      },
+      {
+        "name": "currency",
+        "type": "string",
+        "description": "The user's selected currency."
+      },
+      {
+        "name": "hideBalances",
+        "type": "boolean",
+        "description": "Whether the user has chosen to hide balances."
+      },
+      {
+        "name": "useSecurityAlerts",
+        "type": "boolean",
+        "description": "Whether to run transactions and signatures through security providers."
+      },
+      {
+        "name": "simulateOnChainActions",
+        "type": "boolean",
+        "description": "Whether to simulate transactions and signatures."
+      },
+      {
+        "name": "useTokenDetection",
+        "type": "boolean",
+        "description": "Whether to auto-detect tokens."
+      },
+      {
+        "name": "batchCheckBalances",
+        "type": "boolean",
+        "description": "Whether to fetch balances in an aggregated manner."
+      },
+      {
+        "name": "displayNftMedia",
+        "type": "boolean",
+        "description": "Whether to display NFT media."
+      },
+      {
+        "name": "useNftDetection",
+        "type": "boolean",
+        "description": "Whether to auto-detect NFTs."
+      },
+      {
+        "name": "useExternalPricingData",
+        "type": "boolean",
+        "description": "Whether to get token price data from an external source."
+      },
+      {
+        "name": "showTestnets",
+        "type": "boolean",
+        "description": "Whether to show testnets."
+      }
+    ],
+    "subjectTypes": ["snap"],
+    "restricted": true
+  },
+  {
+    "name": "snap_getState",
+    "description": "`snap_getState` gets the state of the Snap.",
+    "parameters": [
+      {
+        "name": "key",
+        "type": "string | undefined",
+        "description": "The key of the state to retrieve. If not provided, the entire\nstate is retrieved. This may contain Lodash-style path syntax, e.g.,\n`a.b.c`, with the exception of array syntax."
+      },
+      {
+        "name": "encrypted",
+        "type": "boolean | undefined",
+        "description": "Whether to use the separate encrypted state, or the\nunencrypted state. Defaults to the encrypted state. Encrypted state can only\nbe used if the client is unlocked, while unencrypted state can be used\nwhether the client is locked or unlocked."
+      }
+    ],
+    "result": {
+      "type": "Json",
+      "description": "The result returned by the `snap_getState` method."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_getWebSockets",
+    "description": "Handler for the `snap_getWebSockets` method.",
+    "parameters": null,
+    "result": {
+      "type": "{ id: string; url: string; protocols: string[]; }[]",
+      "description": "The result returned by the `snap_getWebSockets` method."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_listEntropySources",
+    "description": null,
+    "parameters": null,
+    "result": {
+      "type": "{ name: string; id: string; type: \"mnemonic\"; primary: boolean; }[]",
+      "description": "The result returned by the `snap_listEntropySources` method."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_manageAccounts",
+    "description": null,
+    "parameters": [
+      {
+        "name": "method",
+        "type": "string",
+        "description": "The method to call on the Snap."
+      }
+    ],
+    "result": {
+      "type": "Json",
+      "description": "The result returned by the `snap_manageAccounts` method, which is the result\nreturned by the Snap."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": true
+  },
+  {
+    "name": "snap_manageState",
+    "description": null,
+    "parameters": [
+      {
+        "name": "operation",
+        "type": "\"clear\" | \"get\" | \"update\"",
+        "description": "The operation to perform on the state."
+      },
+      {
+        "name": "encrypted",
+        "type": "boolean | undefined",
+        "description": "Whether to use the separate encrypted state, or the\nunencrypted state. Defaults to the encrypted state."
+      }
+    ],
+    "result": {
+      "type": "Record<string, Json> | null",
+      "description": "The result returned by the `snap_manageState` method.\n\nIf the operation is `get`, the result is the state. Otherwise, the result is\n`null`."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": true
+  },
+  {
+    "name": "snap_notify",
+    "description": null,
+    "parameters": [
+      {
+        "name": "type",
+        "type": "\"native\" | \"inApp\"",
+        "description": "The type of notification to display."
+      },
+      {
+        "name": "message",
+        "type": "string",
+        "description": "The message to display in the notification."
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": true
+  },
+  {
+    "name": "snap_openWebSocket",
+    "description": "Handler for the `snap_openWebSocket` method.",
+    "parameters": [
+      {
+        "name": "url",
+        "type": "string",
+        "description": "The URL of the WebSocket connection to open."
+      },
+      {
+        "name": "protocols",
+        "type": "string[] | undefined",
+        "description": "The protocols to use for the WebSocket connection."
+      }
+    ],
+    "result": {
+      "type": "string",
+      "description": "The result returned by the `snap_openWebSocket` method."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_resolveInterface",
+    "description": null,
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "The interface id."
+      },
+      {
+        "name": "value",
+        "type": "Json",
+        "description": "The value to resolve the interface with."
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_scheduleBackgroundEvent",
+    "description": null,
+    "parameters": [
+      {
+        "name": "request",
+        "type": "{ method: string; params?: (((Record<string, Json> | Json[]) & ExactOptionalGuard) & JsonRpcParams) | undefined; }",
+        "description": "The request to be called when the event fires."
+      }
+    ],
+    "result": {
+      "type": "string",
+      "description": "The result returned by the `snap_scheduleBackgroundEvent` method, which is the ID of the scheduled event."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_sendWebSocketMessage",
+    "description": "Handler for the `snap_sendWebSocketMessage` method.",
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "The id of the WebSocket connection to send a message to."
+      },
+      {
+        "name": "message",
+        "type": "string | number[]",
+        "description": "The message to send."
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_setState",
+    "description": "`snap_setState` sets the state of the Snap.",
+    "parameters": [
+      {
+        "name": "key",
+        "type": "string | undefined",
+        "description": "The key of the state to update. If not provided, the entire\nstate is updated. This may contain Lodash-style path syntax, e.g.,\n`a.b.c`, with the exception of array syntax."
+      },
+      {
+        "name": "value",
+        "type": "Json",
+        "description": "The value to set the state to."
+      },
+      {
+        "name": "encrypted",
+        "type": "boolean | undefined",
+        "description": "Whether to use the separate encrypted state, or the\nunencrypted state. Defaults to the encrypted state. Encrypted state can only\nbe used if the client is unlocked, while unencrypted state can be used\nwhether the client is locked or unlocked."
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_startTrace",
+    "description": "Handler for the `snap_startTrace` method.",
+    "parameters": [
+      {
+        "name": "data",
+        "type": "Record<string, string | number | boolean> | undefined",
+        "description": "Custom data to associate with the trace."
+      },
+      {
+        "name": "id",
+        "type": "string | undefined",
+        "description": "A unique identifier when not tracing a callback.\nDefaults to 'default' if not provided."
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "description": "The name of the trace."
+      },
+      {
+        "name": "parentContext",
+        "type": "Json | undefined",
+        "description": "The parent context of the trace.\nIf provided, the trace will be nested under the parent trace."
+      },
+      {
+        "name": "startTime",
+        "type": "number | undefined",
+        "description": "Override the start time of the trace."
+      },
+      {
+        "name": "tags",
+        "type": "Record<string, string | number | boolean> | undefined",
+        "description": "Custom tags to associate with the trace."
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_trackError",
+    "description": "Handler for the `snap_trackError` method.",
+    "parameters": [
+      {
+        "name": "error",
+        "type": "{ name: string; message: string; stack: string | null; cause: TrackableError | null; }",
+        "description": "The error object to track."
+      }
+    ],
+    "result": {
+      "type": "string",
+      "description": "The result returned by the `snap_trackEvent` method. This is the ID of the\ntracked error, as returned by the Sentry instance in the client."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_trackEvent",
+    "description": "Handler for the `snap_trackEvent` method.",
+    "parameters": [
+      {
+        "name": "event",
+        "type": "{ event: string; properties?: Record<string, Json> | undefined; sensitiveProperties?: Record<string, Json> | undefined; }",
+        "description": "Primary payload object containing other metrics properties."
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "snap_updateInterface",
+    "description": null,
+    "parameters": [
+      {
+        "name": "id",
+        "type": "string",
+        "description": "The interface id."
+      },
+      {
+        "name": "ui",
+        "type": "JSXElement",
+        "description": "The components to display in the interface."
+      },
+      {
+        "name": "context",
+        "type": "Record<string, Json> | undefined",
+        "description": null
+      }
+    ],
+    "result": null,
+    "subjectTypes": ["snap"],
+    "restricted": false
+  },
+  {
+    "name": "wallet_getAllSnaps",
+    "description": "`wallet_getAllSnaps` gets all installed Snaps. Currently, this can only be\ncalled from `https://snaps.metamask.io`.",
+    "parameters": null,
+    "result": {
+      "type": "{ [x: string & { [brand]: typeof snapIdSymbol; }]: { error: JsonRpcError; } | Snap; }",
+      "description": "The result returned by the `wallet_getSnaps` method.\n\nIt consists of a map of Snap IDs to either the Snap object or an error."
+    },
+    "subjectTypes": ["snap", "website"],
+    "restricted": false
+  },
+  {
+    "name": "wallet_getSnaps",
+    "description": "`wallet_getSnaps` gets the requester's permitted and installed Snaps.",
+    "parameters": null,
+    "result": {
+      "type": "{ [x: string & { [brand]: typeof snapIdSymbol; }]: { error: JsonRpcError; } | Snap; }",
+      "description": "The result returned by the `wallet_getSnaps` method.\n\nIt consists of a map of Snap IDs to either the Snap object or an error."
+    },
+    "subjectTypes": ["snap", "website"],
+    "restricted": false
+  },
+  {
+    "name": "wallet_invokeKeyring",
+    "description": "`wallet_invokeKeyring` gets the requester's permitted and installed Snaps.",
+    "parameters": [
+      {
+        "name": "snapId",
+        "type": "string",
+        "description": "The ID of the Snap to invoke."
+      },
+      {
+        "name": "request",
+        "type": "{ [x: string]: Json; }",
+        "description": "The JSON-RPC request to send to the Snap."
+      }
+    ],
+    "result": {
+      "type": "Json",
+      "description": "The result returned by the `wallet_invokeKeyring` method, which is the result\nreturned by the Snap."
+    },
+    "subjectTypes": ["snap", "website"],
+    "restricted": false
+  },
+  {
+    "name": "wallet_invokeSnap",
+    "description": null,
+    "parameters": [
+      {
+        "name": "snapId",
+        "type": "string",
+        "description": "The ID of the Snap to invoke."
+      },
+      {
+        "name": "request",
+        "type": "{ [x: string]: Json; }",
+        "description": "The JSON-RPC request to send to the Snap."
+      }
+    ],
+    "result": {
+      "type": "Json",
+      "description": "The result returned by the `wallet_invokeSnap` method, which is the result\nreturned by the Snap."
+    },
+    "subjectTypes": ["snap", "website"],
+    "restricted": false
+  },
+  {
+    "name": "wallet_requestSnaps",
+    "description": "`wallet_requestSnaps` installs the requested Snaps and requests permission to use them if necessary.",
+    "parameters": {
+      "type": "{ [x: string]: { version?: string | undefined; }; }",
+      "description": "The request parameters for the `wallet_requestSnaps` method.\n\nIt consists of a map of Snap IDs to optional version strings to request."
+    },
+    "result": {
+      "type": "{ [x: string]: Snap | { error: JsonRpcError; }; }",
+      "description": "The result returned by the `wallet_requestSnaps` method.\n\nIt consists of a map of Snap IDs to either the Snap object or an error."
+    },
+    "subjectTypes": ["snap", "website"],
+    "restricted": false
+  },
+  {
+    "name": "wallet_snap",
+    "description": null,
+    "parameters": [
+      {
+        "name": "snapId",
+        "type": "string",
+        "description": null
+      },
+      {
+        "name": "request",
+        "type": "{ [x: string]: Json; }",
+        "description": null
+      }
+    ],
+    "result": {
+      "type": "Json",
+      "description": "The result returned by the `wallet_invokeSnap` method, which is the result\nreturned by the Snap."
+    },
+    "subjectTypes": ["snap"],
+    "restricted": true
+  }
+]

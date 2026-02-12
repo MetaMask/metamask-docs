@@ -112,7 +112,7 @@ This interaction can be confusing to the user, since the Snap accesses the data 
 without the user being aware.
 
 If the cron job requires access to encrypted data, use
-[`snap_getClientStatus`](../reference/snaps-api.md#snap_getclientstatus) to ensure that MetaMask is
+[`snap_getClientStatus`](../reference/snaps-api/snap_getclientstatus) to ensure that MetaMask is
 unlocked before accessing state.
 This will prevent an unexpected password request, improving the user's experience.
 

@@ -6,7 +6,7 @@ sidebar_position: 2
 # Dialogs
 
 You can display a dialog in the MetaMask UI using the
-[`snap_dialog`](../../reference/snaps-api.md#snap_dialog) API method.
+[`snap_dialog`](../../reference/snaps-api/snap_dialog) API method.
 Dialogs can contain [custom UI](index.md) and [interactive UI](interactive-ui.md) components.
 
 The four types of dialogs include [alerts](#display-an-alert-dialog),
@@ -16,13 +16,13 @@ The four types of dialogs include [alerts](#display-an-alert-dialog),
 :::warning
 - Dialogs do not work when MetaMask is locked.
   To check if MetaMask is locked, use
-  [`snap_getClientStatus`](../../reference/snaps-api.md#snap_getclientstatus).
+  [`snap_getClientStatus`](../../reference/snaps-api/snap_getclientstatus).
 - [`metamask:` URLs](index.md#about-metamask-urls) are not supported in dialogs.
 :::
 
 ## Request permission to display dialogs
 
-To display dialogs, first request the [`snap_dialog`](../../reference/snaps-api.md#snap_dialog) permission.
+To display dialogs, first request the [`snap_dialog`](../../reference/snaps-api/snap_dialog) permission.
 Add the following to your Snap's manifest file:
 
 ```json title="snap.manifest.json"
@@ -34,7 +34,7 @@ Add the following to your Snap's manifest file:
 ## Display an alert dialog
 
 To display an alert that can only be acknowledged, call
-[`snap_dialog`](../../reference/snaps-api.md#snap_dialog) with `type: "alert"`.
+[`snap_dialog`](../../reference/snaps-api/snap_dialog) with `type: "alert"`.
 The following example displays custom UI that alerts the user when something happens in the system:
 
 ```tsx title="index.tsx"
@@ -63,7 +63,7 @@ await snap.request({
 ## Display a confirmation dialog
 
 To display a confirmation that can be accepted or rejected, call
-[`snap_dialog`](../../reference/snaps-api.md#snap_dialog) with `type: "confirmation"`.
+[`snap_dialog`](../../reference/snaps-api/snap_dialog) with `type: "confirmation"`.
 The following example displays custom UI that asks the user to confirm whether they would like to
 take an action:
 
@@ -95,7 +95,7 @@ if (result === true) {
 ## Display a prompt dialog
 
 To display a prompt where the user can enter a text response, call
-[`snap_dialog`](../../reference/snaps-api.md#snap_dialog) with `type: "prompt"`.
+[`snap_dialog`](../../reference/snaps-api/snap_dialog) with `type: "prompt"`.
 Prompt dialogs also accept a `placeholder` value that displays in the input field when no text is entered.
 
 The following example displays custom UI that prompts the user to enter a wallet address:
@@ -126,8 +126,8 @@ const walletAddress = await snap.request({
 
 ## Display a custom dialog
 
-To display a custom dialog, call [`snap_dialog`](../../reference/snaps-api.md#snap_dialog)
-without providing a `type`. Custom dialogs can be resolved by calling [`snap_resolveInterface`](../../reference/snaps-api.md#snap_resolveinterface). The UI passed to a custom dialog should contain a `Footer` element. Its buttons will be displayed at the bottom of the dialog. Here is a complete example:
+To display a custom dialog, call [`snap_dialog`](../../reference/snaps-api/snap_dialog)
+without providing a `type`. Custom dialogs can be resolved by calling [`snap_resolveInterface`](../../reference/snaps-api/snap_resolveinterface). The UI passed to a custom dialog should contain a `Footer` element. Its buttons will be displayed at the bottom of the dialog. Here is a complete example:
 
 ```tsx title="index.tsx"
 import {

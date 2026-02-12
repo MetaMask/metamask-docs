@@ -1,0 +1,16 @@
+.parameter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.parameter-type {
+  color: var(--general-gray-dark);
+  font-style: italic;
+  font-size: 14px;
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}

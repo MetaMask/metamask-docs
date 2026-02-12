@@ -1,0 +1,14 @@
+import { Tags } from './Tags';
+import Description from './Description/index.mdx';
+import Parameters from './Parameters/index.mdx';
+import Returns from './Returns/index.mdx';
+
+<Tags method={props.method} />
+
+# {props.method.name}
+
+{props.method.description && (<Description method={props.method} />)}
+
+{props.method.parameters && (<Parameters method={props.method} />)}
+
+{props.method.result && (<Returns method={props.method} />)}

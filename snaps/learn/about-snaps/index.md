@@ -16,9 +16,9 @@ The following diagram outlines the high-level architecture of the Snaps system:
 ![Snaps architecture diagram](../../assets/snaps-architecture.png)
 
 The following diagram illustrates how Snaps can [derive non-EVM keys](../../features/non-evm-networks.md) using
-[`snap_getBip32Entropy`](../../reference/snaps-api.md#snap_getbip32entropy),
-[`snap_getBip44Entropy`](../../reference/snaps-api.md#snap_getbip44entropy), and
-[`snap_getEntropy`](../../reference/snaps-api.md#snap_getentropy):
+[`snap_getBip32Entropy`](../../reference/snaps-api/snap_getbip32entropy),
+[`snap_getBip44Entropy`](../../reference/snaps-api/snap_getbip44entropy), and
+[`snap_getEntropy`](../../reference/snaps-api/snap_getentropy):
 
 ![Snaps get entropy diagram](../../assets/snaps-getentropy.png)
 
@@ -44,7 +44,7 @@ of MetaMask core unless given permission to do so.
 
 ### APIs
 
-A Snap can communicate with MetaMask using the [Snaps API](../../reference/snaps-api.md) and some
+A Snap can communicate with MetaMask using the [Snaps API](../../reference/snaps-api) and some
 [MetaMask JSON-RPC API](/wallet/reference/json-rpc-methods) methods.
 The Snaps API allows Snaps to extend or modify the functionality of MetaMask, and communicate with
 other Snaps.

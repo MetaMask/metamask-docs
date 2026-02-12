@@ -7,7 +7,7 @@ sidebar_position: 5
 
 You can store and manage sensitive information within a Snap using encrypted storage, or
 non-sensitive information using unencrypted storage.
-Use the [`snap_manageState`](../reference/snaps-api.md#snap_managestate) API method to persist up to
+Use the [`snap_manageState`](../reference/snaps-api/snap_managestate) API method to persist up to
 100 MB of data to the user's disk and retrieve it at will.
 We recommend using this method for storing data in a Snap long term.
 
@@ -21,7 +21,7 @@ Do not assume that the data a Snap stores is unique to a single dapp unless it i
 ## Request permission to store data
 
 To store data within a Snap, first request the
-[`snap_manageState`](../reference/snaps-api.md#snap_managestate) permission.
+[`snap_manageState`](../reference/snaps-api/snap_managestate) permission.
 Add the following to your Snap's manifest file:
 
 ```json title="snap.manifest.json"
@@ -32,7 +32,7 @@ Add the following to your Snap's manifest file:
 
 ## Use encrypted storage
 
-By default, [`snap_manageState`](../reference/snaps-api.md#snap_managestate) automatically encrypts
+By default, [`snap_manageState`](../reference/snaps-api/snap_managestate) automatically encrypts
 data using a Snap-specific key before storing it on the user's disk, and automatically decrypts it
 when retrieved.
 This is useful to store sensitive information, such as passwords.
@@ -72,14 +72,14 @@ await snap.request({
 :::tip
 Accessing encrypted state requires MetaMask to be unlocked.
 If you need to access encrypted state in a background task such as a [cron job](cron-jobs.md), use
-[`snap_getClientStatus`](../reference/snaps-api.md#snap_getclientstatus) to ensure that MetaMask is
+[`snap_getClientStatus`](../reference/snaps-api/snap_getclientstatus) to ensure that MetaMask is
 unlocked before accessing state, preventing an unexpected password request.
 :::
 
 ## Use unencrypted storage
 
 To use unencrypted storage, set `encrypted` to `false` when storing, retrieving, or clearing data
-using [`snap_manageState`](../reference/snaps-api.md#snap_managestate).
+using [`snap_manageState`](../reference/snaps-api/snap_managestate).
 The Snap will use a storage section separate from the encrypted storage, and will not encrypt the data.
 This is useful to access non-sensitive data from background operations such as
 [cron jobs](cron-jobs.md), without requiring the user to enter their password in the case that
@@ -121,6 +121,6 @@ await snap.request({
 ## Example
 
 See the [`@metamask/manage-state-example-snap`](https://github.com/MetaMask/snaps/tree/main/packages/examples/packages/manage-state)
-package for a full example of storing data using [`snap_manageState`](../reference/snaps-api.md#snap_managestate).
+package for a full example of storing data using [`snap_manageState`](../reference/snaps-api/snap_managestate).
 This example exposes a [custom JSON-RPC API](../learn/about-snaps/apis.md#custom-json-rpc-apis) for
 dapps to store, retrieve, and clear data.
