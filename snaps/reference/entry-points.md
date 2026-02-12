@@ -94,7 +94,7 @@ None.
 One of the following:
 
 - A `content` object displayed using [custom UI](../features/custom-ui/index.md).
-- An `id` returned by [`snap_createInterface`](./snaps-api/snap_createinterface) for
+- An `id` returned by [`snap_createInterface`](./snaps-api/snap_createinterface.mdx) for
   [interactive UI](../features/custom-ui/interactive-ui.md).
 
 #### Example
@@ -515,7 +515,7 @@ When interacting with EVM chain IDs, the provided chain ID uses the format `name
 - One of the following:
   - A `content` object displayed using [custom UI](../features/custom-ui/index.md), alongside the confirmation
     for the transaction that `onTransaction` was called with.
-  - An `id` returned by [`snap_createInterface`](./snaps-api/snap_createinterface) for
+  - An `id` returned by [`snap_createInterface`](./snaps-api/snap_createinterface.mdx) for
     [interactive UI](../features/custom-ui/interactive-ui.md).
 
 #### Example
@@ -653,7 +653,7 @@ To respond to [interactive UI](../features/custom-ui/interactive-ui.md) events, 
   - `name` - The name of the component that fired the event.
     Optional when the event type is `ButtonClickEvent`.
   - `value` - When the event type is `FormSubmitEvent`, the values in the form as an object.
-- `context` - The context object passed to the interface when calling [`snap_createInterface`](./snaps-api/snap_createinterface), or `null`.
+- `context` - The context object passed to the interface when calling [`snap_createInterface`](./snaps-api/snap_createinterface.mdx), or `null`.
 
 #### Example
 
