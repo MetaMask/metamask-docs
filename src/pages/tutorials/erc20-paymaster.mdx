@@ -19,39 +19,52 @@ import Tabs from '@theme/Tabs'
   slug="/tutorials/erc20-paymaster"
 />
 
-A paymaster is a vital component in the ERC-4337 standard, responsible for covering transaction costs on behalf of the user. There are various types of paymasters, such as gasless paymasters, ERC-20 paymasters, and more.
+A paymaster is a vital component in the ERC-4337 standard, responsible for covering transaction costs on behalf of the user. Various types of paymasters are available, such as gasless paymasters, ERC-20 paymasters, and more.
 
-In this guide, we'll talk about how you can use the Pimlico's ERC-20 Paymaster with Web3Auth Account Abstraction Provider to allow your users to pay for their transactions using ERC-20 tokens.
+In this guide, we'll demonstrate how you can use the Pimlico's ERC-20 Paymaster with Embedded Wallets' Account Abstraction Provider to allow your users to pay for their transactions using ERC-20 tokens.
+
+:::tip
 
 If you are looking to use sponsored paymaster, you can refer to the [sponsored paymaster guide](/tutorials/sending-gasless-transaction).
+
+:::
 
 ## Prerequisites
 
 - Pimlico Account: Since we'll be using the Pimlico paymaster, you'll need to have an API key from Pimlico. You can get a free API key from [Pimlico Dashboard](https://dashboard.pimlico.io/).
-- Web3Auth Dashboard: If you haven't already, sign up on the Web3Auth platform. It is free and gives you access to the Web3Auth's base plan. Head to Web3Auth's documentation page for detailed [instructions on setting up the Web3Auth Dashboard](/embedded-wallets/dashboard/).
-- Web3Auth PnP Web SDK: This guide assumes that you already know how to integrate the PnP Web SDK in your project. If not, you can learn how to [integrate Web3Auth in your Web app](/embedded-wallets/sdk/react/).
+- Embedded Wallets account: If you haven't already, sign up on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/). It's free and gives you access to the base plan. 
 
-## Integrate AccountAbstractionProvider
+:::tip
 
-Once, you have set up the Web3Auth Dashboard, and created a new project, it's time to integrate Web3Auth Account Abstraction Provider in your Web application. For the implementation, we'll use the [@web3auth/account-abstraction-provider](https://www.npmjs.com/package/@web3auth/account-abstraction-provider). The provider simplifies the entire process by managing the complex logic behind configuring the account abstraction provider, bundler, and preparing user operations.
+See the documentation for detailed instructions on [setting up the Embedded Wallets dashboard](/embedded-wallets/dashboard/).
 
-If you are already using the Web3Auth Pnp SDK in your project, you just need to configure the AccountAbstractionProvider with the paymaster details, and pass it to the Web3Auth instance. No other changes are required.
+:::
 
-### Installation
+- Web3Auth PnP Web SDK: This guide assumes that you already know how to [integrate the Embedded Wallets SDK in your project](/embedded-wallets/sdk/react/).
+
+- Ensure you have enough USDC balance in the wallet to pay the transaction fees. [Request faucet for USDC tokens](https://faucet.circle.com/).
+
+## Step 1: Integrate AccountAbstractionProvider
+
+Once, you have set up the Embedded Wallets dashboard, and created a new project, it's time to integrate the Embedded Wallets Account Abstraction Provider in your Web application. For the implementation, we'll use the [@web3auth/account-abstraction-provider](https://www.npmjs.com/package/@web3auth/account-abstraction-provider). The provider simplifies the entire process by managing the complex logic behind configuring the account abstraction provider, bundler, and preparing user operations.
+
+If you are already using the Embedded Wallets SDK in your project, you just need to configure the AccountAbstractionProvider with the paymaster details, and pass it to Embedded Wallets' Web3Auth instance. No other changes are required.
+
+### 1.1 Installation
 
 ```bash
 npm install --save @web3auth/account-abstraction-provider
 ```
 
-### Configure ERC-20 Paymaster
+### 1.2 Configure ERC-20 Paymaster
 
-The `AccountAbstractionProvider` requires specific configurations to function correctly. One key configuration is the paymaster. Web3Auth supports custom paymaster configurations, allowing you to deploy your own paymaster and integrate it with the provider.
+The `AccountAbstractionProvider` requires specific configurations to function correctly. One key configuration is the paymaster. Embedded Wallets supports custom paymaster configurations, allowing you to deploy your own paymaster and integrate it with the provider.
 
 You can choose from a variety of paymaster services available in the ecosystem. In this guide, we'll be configuring the Pimlico's ERC-20 Paymaster. However, it's important to note that paymaster support is not limited to the Pimlico, giving you the flexibility to integrate any compatible paymaster service that suits your requirements.
 
 To configure the ERC-20 Paymaster, you need to pass the `token` in the `paymasterContext` which allows you to specify the ERC-20 token that will be used to pay for the transaction. For this guide, we'll use the USDC token. [Find the USDC token address for your desired network](https://developers.circle.com/stablecoins/usdc-on-test-networks).
 
-For the simplicity, we have only use `SafeSmartAccount`, but you choose your favorite smart account provider from the available ones. [Learn how to configure the smart account](/embedded-wallets/sdk/react/advanced/smart-accounts).
+For the simplicity, we have only use `SafeSmartAccount`, but you choose your favorite smart account provider from the available ones. Learn how to [configure the smart account](/embedded-wallets/sdk/react/advanced/smart-accounts).
 
 ```ts
 // focus-start
@@ -94,13 +107,19 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 // focus-end
 ```
 
-## Configure Web3Auth
+## Step 2: Configure Embedded Wallets
 
-Once you have configured your `AccountAbstractionProvider`, you can now plug it in your Web3Auth Modal/No Modal instance. If you are using the external wallets like MetaMask, Coinbase, etc, you can define whether you want to use the AccountAbstractionProvider, or EthereumPrivateKeyProvider by setting the `useAAWithExternalWallet` in `IWeb3AuthCoreOptions`.
+Once you have configured your `AccountAbstractionProvider`, you can now plug it in your Embedded Wallets Modal/No Modal instance. If you are using external wallets like MetaMask, you can define whether you want to use the AccountAbstractionProvider, or EthereumPrivateKeyProvider by setting the `useAAWithExternalWallet` in `IWeb3AuthCoreOptions`. 
 
-If you are setting `useAAWithExternalWallet` to `true`, it'll create a new Smart Account for your user, where the signer/creator of the Smart Account would be the external wallet.
+:::tip
 
-If you are setting `useAAWithExternalWallet` to `false`, it'll skip creating a new Smart Account, and directly use the external wallet to sign the transactions.
+For the generic web SDK setup, see the [JavaScript SDK guide](/embedded-wallets/sdk/js).
+
+:::
+
+If you are setting `useAAWithExternalWallet` to `true`, it'll create a new smart account for your user, where the signer/creator of the smart account would be the external wallet.
+
+If you are setting `useAAWithExternalWallet` to `false`, it'll skip creating a new smart account, and directly use the external wallet to sign the transactions.
 
 <Tabs
   defaultValue="modal"
@@ -166,17 +185,21 @@ web3auth.configureAdapter(authadapter);
 </TabItem>
 </Tabs>
 
-## Send a transaction
+## Step 3: Send a transaction
 
-To submit the transaction using ERC-20 paymaster, we'll require to first need to approve ERC-20 token to be used by the paymaster. Ideally, we should first check the token allowance, and only provide approve allowance to be used by the paymaster.
+To submit the transaction using ERC-20 paymaster, we'll first need to approve an ERC-20 token to be used by the paymaster. Ideally, we should first check the token allowance, and only approve the allowance needed by the paymaster.
 
 To modify the token allowance, you'll need to perform a write operation on the ERC-20 contract. In the example below, we're using Pimlico, but be sure to update the paymaster and ERC-20 token addresses according to your specific case.
 
-Since, we want to perform the approval transaction, and send transaction in a single call, we'll use batch transaction feature of the `AccountAbstractionProvider`. Performing a batch transaction differs slightly from the normal flow.
+Since, we want to perform the approval transaction and send transaction in a single call, we'll use batch transaction feature of the `AccountAbstractionProvider`. Performing a batch transaction differs slightly from the normal flow.
 
-To execute a batch transaction, you'll need to use the `BundlerClient` generated by the `AccountAbstractionProvider`. The Web3Auth instance provider can't be used for this, as it's a proxy provider designed to ensure compatibility with your preferred signer package for basic operations.
+To execute a batch transaction, you'll need to use the `BundlerClient` generated by the `AccountAbstractionProvider`. Embedded Wallets' Web3Auth instance provider can't be used for this, as it's a proxy provider designed to ensure compatibility with your preferred signer package for basic operations.
 
-Please make sure you have enough USDC balance in the wallet to pay the transaction fees. [Request faucet for USDC tokens](https://faucet.circle.com/).
+:::important
+
+Please make sure you have enough [USDC balance](#prerequisites).
+
+:::
 
 ```ts
 // Use the same accountAbstractionProvider we created earlier.
@@ -226,6 +249,51 @@ const receipt = await bundlerClient.waitForUserOperationReceipt({
 const transactionHash = receipt.receipt.transactionHash
 ```
 
-## Conclusion
+## Next steps
 
-Voila, you have successfully sent your first transaction using the Pimlico's ERC-20 paymaster with Web3Auth Account Abstraction Provider. To learn more about advance features of the Account Abstraction Provider like performing batch transactions, using sponsored paymaster you can refer to the [Account Abstraction Provider](/embedded-wallets/sdk/react) documentation.
+Congratulations, you have successfully sent your first transaction using the Pimlico's ERC-20 paymaster with Embedded Wallets Account Abstraction Provider. 
+
+Learn more about advance features of the Account Abstraction Provider like:
+
+- Performing batch transactions:
+
+<Tabs
+  defaultValue="react"
+  values={[
+    { label: "React", value: "react" },
+    { label: "JavaScript", value: "js" },
+    { label: "Vue", value: "vue" },
+  ]}
+>
+<TabItem value="react">
+[React smart accounts: batch transactions](/embedded-wallets/sdk/react/advanced/smart-accounts#send-batch-transaction)
+</TabItem>
+<TabItem value="js">
+[JS smart accounts: batch transactions](/embedded-wallets/sdk/js/advanced/smart-accounts#send-batch-transaction)
+</TabItem>
+<TabItem value="vue">
+[Vue smart accounts: batch transactions](/embedded-wallets/sdk/vue/advanced/smart-accounts#send-batch-transaction)
+</TabItem>
+</Tabs>
+
+- Using a sponsored paymaster:
+
+<Tabs
+  defaultValue="react"
+  values={[
+    { label: "React", value: "react" },
+    { label: "JavaScript", value: "js" },
+    { label: "Vue", value: "vue" },
+  ]}
+>
+<TabItem value="react">
+[React smart accounts: configure bundler and paymaster](/embedded-wallets/sdk/react/advanced/smart-accounts#configure-bundler-and-paymaster)
+</TabItem>
+<TabItem value="js">
+[JS smart accounts: configure bundler and paymaster](/embedded-wallets/sdk/js/advanced/smart-accounts#configure-bundler-and-paymaster)
+</TabItem>
+<TabItem value="vue">
+[Vue smart accounts: configure bundler and paymaster](/embedded-wallets/sdk/vue/advanced/smart-accounts#configure-bundler-and-paymaster)
+</TabItem>
+</Tabs>
+

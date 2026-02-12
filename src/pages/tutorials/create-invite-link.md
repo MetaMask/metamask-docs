@@ -18,7 +18,7 @@ Bob can start using your dapp right away, without installing a wallet or paying 
 
 You'll enable this by:
 
-- Adding an [embedded wallet](/embedded-wallets) for instant onboarding.
+- Adding an [Embedded Wallet](/embedded-wallets) for instant onboarding.
 - Creating a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts) to create and redeem an invitation.
 - Creating an [open delegation](/smart-accounts-kit/concepts/delegation) to represent an invitation.
 
@@ -45,9 +45,9 @@ Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-a
 npm install @metamask/smart-accounts-kit @web3auth/modal wagmi @tanstack/react-query
 ```
 
-#### 1.2. Set up Embedded Wallets (Web3Auth)
+#### 1.2. Set up Embedded Wallets
 
-Configure [MetaMask Embedded Wallets (Web3Auth)](/embedded-wallets/) to enable users to instantly connect to your dapp using familiar login methods, like social accounts or email.
+Configure [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets/) to enable users to instantly connect to your dapp using familiar login methods, like social accounts or email.
 
 1. Add a `WEB3AUTH_CLIENT_ID` environment variable, replacing `<YOUR-CLIENT-ID>` with your Web3Auth Client ID:
 
