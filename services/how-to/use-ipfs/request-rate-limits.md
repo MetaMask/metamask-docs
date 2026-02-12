@@ -33,4 +33,4 @@ You can retrieve IPFS data using the API with a limit of 1500 requests per secon
 
 Read-only requests from a [dedicated gateway](access-ipfs-content/dedicated-gateways.md) have a limit of 100 requests per second.
 
-If you would like a custom rate limit for requests per second, [contact us](https://app.infura.io/support/ticket).
+If you would like a custom rate limit for requests per second, [contact us](https://www.infura.io/contact).
