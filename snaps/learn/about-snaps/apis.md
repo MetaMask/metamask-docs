@@ -12,7 +12,7 @@ Snaps, dapps, and MetaMask can communicate with each other using the [Snaps API]
 ## Snaps API
 
 Snaps can access the global object `snap`, which has one method: `request`.
-You can use this object to make [Snaps API](../../reference/snaps-api) requests.
+You can use this object to make [Snaps API](../../reference/snaps-api/index.md) requests.
 These API methods allow Snaps to extend or modify the functionality of MetaMask.
 
 To call each method (except the [interactive UI methods](../../features/custom-ui/interactive-ui.md)),
