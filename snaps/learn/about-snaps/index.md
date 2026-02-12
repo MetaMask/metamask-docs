@@ -16,9 +16,9 @@ The following diagram outlines the high-level architecture of the Snaps system:
 ![Snaps architecture diagram](../../assets/snaps-architecture.png)
 
 The following diagram illustrates how Snaps can [derive non-EVM keys](../../features/non-evm-networks.md) using
-[`snap_getBip32Entropy`](../../reference/snaps-api/snap_getbip32entropy),
-[`snap_getBip44Entropy`](../../reference/snaps-api/snap_getbip44entropy), and
-[`snap_getEntropy`](../../reference/snaps-api/snap_getentropy):
+[`snap_getBip32Entropy`](../../reference/snaps-api/snap_getbip32entropy.mdx),
+[`snap_getBip44Entropy`](../../reference/snaps-api/snap_getbip44entropy.mdx), and
+[`snap_getEntropy`](../../reference/snaps-api/snap_getentropy.mdx):
 
 ![Snaps get entropy diagram](../../assets/snaps-getentropy.png)
 
