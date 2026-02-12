@@ -12,7 +12,7 @@ Snaps can [request the following permissions](../how-to/request-permissions.md).
 
 ## RPC API permissions
 
-You must request permission to call [Snaps API methods](snaps-api).
+You must request permission to call [Snaps API methods](snaps-api/index.md).
 For example, to request to call [`snap_dialog`](snaps-api/snap_dialog.mdx), add the following to the
 manifest file:
 
