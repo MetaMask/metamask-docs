@@ -1,7 +1,7 @@
 ---
 title: Create a chain-agnostic web3 wallet in Flutter
 image: 'img/tutorials/tutorials-banners/flutter-wallet.png'
-description: Empower your Flutter app with a chain-agnostic web3 wallet using the Embedded Wallets SDK.
+description: Empower your Flutter app with a chain-agnostic web3 wallet using the Web3Auth PnP SDK.
 tags: [embedded wallets, flutter, android, ios, evm, solana, web3auth]
 date: April 22, 2024
 author: MetaMask Developer Relations
@@ -20,15 +20,9 @@ import WalletPreview from '@site/static/img/tutorials/flutter-wallet-preview.png
   slug="/tutorials/flutter-wallet"
 />
 
-In this guide, we'll talk about how we can use Embedded Wallets (formerly Web3Auth) to build your chain-agnostic Web3 wallet in Flutter. The wallet will support the Ethereum and Solana ecosystem.
+In this guide, we'll talk about how we can use Web3Auth to build your chain-agnostic Web3 wallet in Flutter. The wallet will support the Ethereum and Solana ecosystem.
 
-You will create a demo app which supports user log in, display user details, and performs blockchain interactions. The signing of the blockchain transactions is done through the Embedded Wallets SDK. 
-
-:::tip
-
-Check out [Embedded Wallets management infrastructure](/embedded-wallets/infrastructure/) for a high-level overview of the Embedded Wallets management infrastructure, architecture, and implementation. For those who want to skip straight to the code, find it on [GitHub](https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-playground).
-
-:::
+As an overview, the app is quite simple, with functionality to log in, display user details, and perform blockchain interactions. The signing of the blockchain transactions is done through the Web3Auth embedded wallet. You can check out the infrastructure docs, ["Web3Auth Wallet Management Infrastructure"](/embedded-wallets/infrastructure/) for a high-level overview of the Web3Auth architecture and implementation. For those who want to skip straight to the code, you can find it on [GitHub](https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-playground).
 
 Here are few screenshots of the application.
 
