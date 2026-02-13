@@ -258,7 +258,11 @@ wallet, we will add an Email Passwordless login. We'll create a helper function,
 After successfully logging in, we'll generate and prepare the `Credentials`, required to interact with the 
 blockchain. Along with that, we'll retrieve user info, and navigate them to `HomeScreen`.
 
-Learn more about [Web3Auth LoginParams](/embedded-wallets/sdk/android/usage/login#parameters).
+:::note
+
+Learn more about [Embedded Wallets' `LoginParams`](/embedded-wallets/sdk/flutter/usage/login#parameters).
+
+:::
 
 ```kotlin
 class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
