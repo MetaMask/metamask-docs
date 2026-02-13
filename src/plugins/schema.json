@@ -52,7 +52,7 @@
       },
       {
         "name": "context",
-        "type": "null | Record<string, Json>",
+        "type": "Record<string, Json> | null",
         "description": null
       }
     ],
@@ -67,11 +67,11 @@
     "name": "snap_dialog",
     "description": null,
     "parameters": {
-      "type": "{ content: ComponentOrElement } | { id: string } | { type: \"alert\"; content: JSXElement } | { type: \"alert\"; id: string } | { type: \"confirmation\"; content: ComponentOrElement } | { type: \"confirmation\"; id: string } | { type: \"prompt\"; content: ComponentOrElement; placeholder?: null | string } | { type: \"prompt\"; id: string; placeholder?: string | undefined }",
+      "type": "{ content: ComponentOrElement } | { id: string } | { type: \"alert\"; content: JSXElement } | { type: \"alert\"; id: string } | { type: \"confirmation\"; content: ComponentOrElement } | { type: \"confirmation\"; id: string } | { type: \"prompt\"; content: ComponentOrElement; placeholder?: string | null } | { type: \"prompt\"; id: string; placeholder?: string | undefined }",
       "description": null
     },
     "result": {
-      "type": "{ [prop: string]: Json; } | boolean | Json[] | null | number | string",
+      "type": "{ [prop: string]: Json; } | boolean | Json[] | number | string | null",
       "description": null
     },
     "subjectTypes": ["snap"],
@@ -83,7 +83,7 @@
     "parameters": [
       {
         "name": "id",
-        "type": "null | string",
+        "type": "string | null",
         "description": "The unique identifier of the trace.\nDefaults to 'default' if not provided."
       },
       {
@@ -93,7 +93,7 @@
       },
       {
         "name": "timestamp",
-        "type": "null | number",
+        "type": "number | null",
         "description": "Override the end time of the trace."
       }
     ],
@@ -128,7 +128,7 @@
     "description": null,
     "parameters": null,
     "result": {
-      "type": "{ id: string; scheduledAt: string; snapId: SnapId; date: string; request: { method: string; jsonrpc?: \"2.0\" | null; id?: null | number | string | undefined; params?: Json[] | Record<string, Json> | undefined } }[]",
+      "type": "{ id: string; scheduledAt: string; snapId: SnapId; date: string; request: { method: string; jsonrpc?: \"2.0\" | null; id?: number | string | undefined | null; params?: Json[] | Record<string, Json> | undefined } }[]",
       "description": "The result returned by the `snap_getBackgroundEvents` method.\n\nIt consists of an array background events (if any) for a snap."
     },
     "subjectTypes": ["snap"],
@@ -150,7 +150,7 @@
       },
       {
         "name": "source",
-        "type": "null | string",
+        "type": "string | null",
         "description": "The ID of the entropy source to use. If not specified, the primary entropy\nsource will be used. For a list of available entropy sources, see the\n`snap_listEntropySources` method."
       }
     ],
@@ -162,7 +162,7 @@
       },
       {
         "name": "masterFingerprint",
-        "type": "null | number",
+        "type": "number | null",
         "description": "The fingerprint of the master node, i.e., the node at depth 0. May be\nundefined if this node was created from an extended key."
       },
       {
@@ -182,7 +182,7 @@
       },
       {
         "name": "privateKey",
-        "type": "null | string",
+        "type": "string | null",
         "description": "The (optional) private key of this node."
       },
       {
@@ -225,7 +225,7 @@
       },
       {
         "name": "source",
-        "type": "null | string",
+        "type": "string | null",
         "description": "The ID of the entropy source to use. If not specified, the primary entropy\nsource will be used. For a list of available entropy sources, see the\n`snap_listEntropySources` method."
       }
     ],
@@ -247,7 +247,7 @@
       },
       {
         "name": "source",
-        "type": "null | string",
+        "type": "string | null",
         "description": "The ID of the entropy source to use. If not specified, the primary entropy\nsource will be used. For a list of available entropy sources, see the\n`snap_listEntropySources` method."
       }
     ],
@@ -259,7 +259,7 @@
       },
       {
         "name": "masterFingerprint",
-        "type": "null | number",
+        "type": "number | null",
         "description": "The fingerprint of the master node, i.e., the node at depth 0. May be\nundefined if this node was created from an extended key."
       },
       {
@@ -279,7 +279,7 @@
       },
       {
         "name": "privateKey",
-        "type": "null | string",
+        "type": "string | null",
         "description": "The hexadecimal string representation of the private key for this node.\nMay be `undefined` if the node is a public node."
       },
       {
@@ -346,7 +346,7 @@
       }
     ],
     "result": {
-      "type": "{ currency: string; conversionRate: number; conversionDate: number; usdConversionRate?: null | number } | null",
+      "type": "{ currency: string; conversionRate: number; conversionDate: number; usdConversionRate?: number | null } | null",
       "description": "The result returned by the `snap_getCurrencyRate` method, which is the {@link CurrencyRate} object."
     },
     "subjectTypes": ["snap"],
@@ -363,12 +363,12 @@
       },
       {
         "name": "salt",
-        "type": "null | string",
+        "type": "string | null",
         "description": "The optional salt to use when deriving the entropy."
       },
       {
         "name": "source",
-        "type": "null | string",
+        "type": "string | null",
         "description": "The ID of the entropy source to use. If not specified, the primary entropy\nsource will be used. For a list of available entropy sources, see the\n`snap_listEntropySources` method."
       }
     ],
@@ -415,7 +415,7 @@
       }
     ],
     "result": {
-      "type": "null | Record<string, Json>",
+      "type": "Record<string, Json> | null",
       "description": "The result returned by the `snap_getInterfaceContext` method, which is the context for a given interface."
     },
     "subjectTypes": ["snap"],
@@ -432,7 +432,7 @@
       }
     ],
     "result": {
-      "type": "Record<string, { addresses: `${string}:${string}:${string}`[]; accountId: string } | { name: string; size: number; contentType: string; contents: string } | { symbol: string; name: string; asset: `${string}:${string}/${string}:${string}` } | boolean | null | Record<string, { addresses: `${string}:${string}:${string}`[]; accountId: string; } | { name: string; size: number; contentType: string; contents: string; } | { symbol: string; name: string; asset: `${string}:${string}/${string}:${string}`; } | boolean | null | string> | string>",
+      "type": "Record<string, { addresses: `${string}:${string}:${string}`[]; accountId: string } | { name: string; size: number; contentType: string; contents: string } | { symbol: string; name: string; asset: `${string}:${string}/${string}:${string}` } | boolean | Record<string, { addresses: `${string}:${string}:${string}`[]; accountId: string; } | { name: string; size: number; contentType: string; contents: string; } | { symbol: string; name: string; asset: `${string}:${string}/${string}:${string}`; } | boolean | string | null> | string | null>",
       "description": "The result returned by the `snap_getInterfaceState` method, which is the state of the interface."
     },
     "subjectTypes": ["snap"],
@@ -531,7 +531,7 @@
     "parameters": [
       {
         "name": "key",
-        "type": "null | string",
+        "type": "string | null",
         "description": "The key of the state to retrieve. If not provided, the entire\nstate is retrieved. This may contain Lodash-style path syntax, e.g.,\n`a.b.c`, with the exception of array syntax."
       },
       {
@@ -602,7 +602,7 @@
       }
     ],
     "result": {
-      "type": "null | Record<string, Json>",
+      "type": "Record<string, Json> | null",
       "description": "The result returned by the `snap_manageState` method.\n\nIf the operation is `get`, the result is the state. Otherwise, the result is\n`null`."
     },
     "subjectTypes": ["snap"],
@@ -638,7 +638,7 @@
       },
       {
         "name": "protocols",
-        "type": "null | string[]",
+        "type": "string[] | null",
         "description": "The protocols to use for the WebSocket connection."
       }
     ],
@@ -674,7 +674,7 @@
     "parameters": [
       {
         "name": "request",
-        "type": "{ method: string; params?: Json[] & ExactOptionalGuard & Json[] | Json[] & ExactOptionalGuard & Record<string, Json> | null | Record<string, Json> & { _exactOptionalGuard?: typeof exactOptionalSymbol | undefined } | Record<string, Json> & ExactOptionalGuard & Json[] }",
+        "type": "{ method: string; params?: Json[] & ExactOptionalGuard & Json[] | Json[] & ExactOptionalGuard & Record<string, Json> | Record<string, Json> & { _exactOptionalGuard?: typeof exactOptionalSymbol | undefined } | Record<string, Json> & ExactOptionalGuard & Json[] | null }",
         "description": "The request to be called when the event fires."
       }
     ],
@@ -710,7 +710,7 @@
     "parameters": [
       {
         "name": "key",
-        "type": "null | string",
+        "type": "string | null",
         "description": "The key of the state to update. If not provided, the entire\nstate is updated. This may contain Lodash-style path syntax, e.g.,\n`a.b.c`, with the exception of array syntax."
       },
       {
@@ -734,12 +734,12 @@
     "parameters": [
       {
         "name": "data",
-        "type": "null | Record<string, boolean | number | string>",
+        "type": "Record<string, boolean | number | string> | null",
         "description": "Custom data to associate with the trace."
       },
       {
         "name": "id",
-        "type": "null | string",
+        "type": "string | null",
         "description": "A unique identifier when not tracing a callback.\nDefaults to 'default' if not provided."
       },
       {
@@ -749,17 +749,17 @@
       },
       {
         "name": "parentContext",
-        "type": "{ [prop: string]: Json; } | boolean | Json[] | null | null | number | string",
+        "type": "{ [prop: string]: Json; } | boolean | Json[] | number | string | null | null",
         "description": "The parent context of the trace.\nIf provided, the trace will be nested under the parent trace."
       },
       {
         "name": "startTime",
-        "type": "null | number",
+        "type": "number | null",
         "description": "Override the start time of the trace."
       },
       {
         "name": "tags",
-        "type": "null | Record<string, boolean | number | string>",
+        "type": "Record<string, boolean | number | string> | null",
         "description": "Custom tags to associate with the trace."
       }
     ],
@@ -773,7 +773,7 @@
     "parameters": [
       {
         "name": "error",
-        "type": "{ name: string; message: string; stack: null | string; cause: null | TrackableError }",
+        "type": "{ name: string; message: string; stack: string | null; cause: TrackableError | null }",
         "description": "The error object to track."
       }
     ],
@@ -790,7 +790,7 @@
     "parameters": [
       {
         "name": "event",
-        "type": "{ event: string; properties?: null | Record<string, Json>; sensitiveProperties?: Record<string, Json> | undefined }",
+        "type": "{ event: string; properties?: Record<string, Json> | null; sensitiveProperties?: Record<string, Json> | undefined }",
         "description": "Primary payload object containing other metrics properties."
       }
     ],
@@ -814,7 +814,7 @@
       },
       {
         "name": "context",
-        "type": "null | Record<string, Json>",
+        "type": "Record<string, Json> | null",
         "description": null
       }
     ],
