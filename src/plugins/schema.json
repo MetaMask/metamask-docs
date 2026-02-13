@@ -67,11 +67,11 @@
     "name": "snap_dialog",
     "description": null,
     "parameters": {
-      "type": "{ content: ComponentOrElement } | { id: string } | { type: \"alert\"; content: JSXElement } | { type: \"alert\"; id: string } | { type: \"confirmation\"; content: ComponentOrElement } | { type: \"confirmation\"; id: string } | { type: \"prompt\"; content: ComponentOrElement; placeholder?: string | null } | { type: \"prompt\"; id: string; placeholder?: string | undefined }",
+      "type": "{ content: JSXElement } | { id: string } | { type: \"alert\"; content: JSXElement } | { type: \"alert\"; id: string } | { type: \"confirmation\"; content: JSXElement } | { type: \"confirmation\"; id: string } | { type: \"prompt\"; content: JSXElement; placeholder?: string | null } | { type: \"prompt\"; id: string; placeholder?: string | undefined }",
       "description": null
     },
     "result": {
-      "type": "{ [prop: string]: Json; } | boolean | Json[] | number | string | null",
+      "type": "Json",
       "description": null
     },
     "subjectTypes": ["snap"],
@@ -112,7 +112,7 @@
       },
       {
         "name": "request",
-        "type": "{ method: string } | { method: string; params: Json[] | Record<string, Json> }",
+        "type": "{ method: string } | { method: string; params: JsonRpcParams }",
         "description": "The JSON-RPC request."
       }
     ],
@@ -128,7 +128,7 @@
     "description": null,
     "parameters": null,
     "result": {
-      "type": "{ id: string; scheduledAt: string; snapId: SnapId; date: string; request: { method: string; jsonrpc?: \"2.0\" | null; id?: number | string | undefined | null; params?: Json[] | Record<string, Json> | undefined } }[]",
+      "type": "{ id: string; scheduledAt: string; snapId: SnapId; date: string; request: { method: string; jsonrpc?: \"2.0\" | null; id?: number | string | null; params?: Json[] | Record<string, Json> | null } }[]",
       "description": "The result returned by the `snap_getBackgroundEvents` method.\n\nIt consists of an array background events (if any) for a snap."
     },
     "subjectTypes": ["snap"],
@@ -674,7 +674,7 @@
     "parameters": [
       {
         "name": "request",
-        "type": "{ method: string; params?: Json[] & ExactOptionalGuard & Json[] | Json[] & ExactOptionalGuard & Record<string, Json> | Record<string, Json> & { _exactOptionalGuard?: typeof exactOptionalSymbol | undefined } | Record<string, Json> & ExactOptionalGuard & Json[] | null }",
+        "type": "{ method: string; params?: JsonRpcParams }",
         "description": "The request to be called when the event fires."
       }
     ],
@@ -749,7 +749,7 @@
       },
       {
         "name": "parentContext",
-        "type": "{ [prop: string]: Json; } | boolean | Json[] | number | string | null | null",
+        "type": "{ [prop: string]: Json; } | boolean | Json[] | number | string | null",
         "description": "The parent context of the trace.\nIf provided, the trace will be nested under the parent trace."
       },
       {
