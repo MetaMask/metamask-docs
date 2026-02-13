@@ -1,7 +1,7 @@
 ---
 title: Create an Ethereum Web3 wallet in Android
 image: 'img/tutorials/tutorials-banners/android-wallet.png'
-description: Empower your Android app with an Ethereum web3 wallet using the Web3Auth PnP SDK.
+description: "Empower your Android app with an Ethereum web3 wallet using the Embedded Wallets | Web3Auth PnP SDK."
 tags: [embedded wallets, android, evm, kotlin, secp256k1, web3auth]
 date: May 27, 2024
 author: MetaMask Developer Relations
@@ -15,25 +15,27 @@ import WalletPreview from '@site/static/img/tutorials/android-wallet-preview.png
 
 <SEO
   title="Build your own Ethereum Web3 wallet in Android"
-  description="Empower your Android app with a Ethereum Web3 wallet using the Web3Auth PnP SDK."
+  description="Empower your Android app with an Ethereum Web3 wallet using the Embedded Wallets (Web3Auth PnP SDK)."
   image="https://docs.metamask.io/img/tutorials/tutorials-banners/android-wallet.png"
   slug="/tutorials/android-wallet"
 />
 
-In this guide, we'll talk about how we can use MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) 
+In this guide, we'll use the MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) 
 to build your Ethereum Web3 wallet in Android. The wallet will only support the Ethereum ecosystem, but 
 functionality can be extended with any blockchain ecosystem.
 
-You will create a demo app which supports user log in, displays user details, and performs blockchain 
+You will create a demo app which supports user login, displays user details, and performs blockchain 
 interactions. The signing of the blockchain transactions is done through the Embedded Wallets SDK. 
 
 :::tip
 
-Check out [Embedded Wallets management infrastructure](/embedded-wallets/infrastructure/) for a high-level overview of the Embedded Wallets management infrastructure, architecture, and implementation. For those who want to skip straight to the code, find it on [GitHub](https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-playground).
+Check out [Embedded Wallets management infrastructure](/embedded-wallets/infrastructure/) for a 
+high-level overview of the Embedded Wallets management infrastructure, architecture, and implementation. 
+For those who want to skip straight to the code, find it on [GitHub](https://github.com/Web3Auth/web3auth-android-examples/tree/main/android-playground).
 
 :::
 
-Here are a few screenshots of the application.
+This is what your application will look like:
 
 <img
   style={{ display: 'block', margin: '20px auto' }}
@@ -41,7 +43,7 @@ Here are a few screenshots of the application.
   alt="Android Wallet Screenshots"
 />
 
-## Set up the Embedded Wallets dashboard
+## Step 1: Set up the Embedded Wallets dashboard
 
 If you haven't already, sign up on the [Embedded Wallets platform](https://dashboard.web3auth.io/). It's free 
 and gives you access to the Embedded Wallets' base plan. After the basic setup, explore other features and 
@@ -50,14 +52,13 @@ It includes custom verifiers, whitelabeling, analytics, and more.
 Head to the [Embedded Wallet documentation](/embedded-wallets/dashboard/) page for detailed instructions on 
 setting up the dashboard.
 
-## Integrating Embedded Wallets in Android
+## Step 2: Integrate Embedded Wallets in Android
 
-Once, you have set up your Embedded Wallets dashboard, and created a new project, it's time to integrate the 
-Web3Auth SDK in your Android application. For the implementation, we'll use the 
+Next, integrate the Embedded Wallets/Web3Auth SDK in your Android application. For the implementation, we'll use the 
 ["web3auth-android-sdk"](https://github.com/Web3Auth/web3auth-android-sdk) SDK to manage an Embedded Wallet in 
 your Android application.
 
-### Installation
+### 2.1 Installation
 
 To install the web3auth-android-sdk SDK:
 
@@ -85,10 +86,10 @@ dependencies {
 }
 ```
 
-### Initialization
+### 2.2 Initialization
 
-Next, initialize Web3Auth in your Android app. 
-This sets up the necessary configurations using Client ID and prepares Web3Auth. 
+1. Next, initialize Web3Auth in your Android app. This sets up the necessary configurations using Client ID and 
+prepares Web3Auth. 
 
 Since we are using the Model–View–ViewModel (MVVM) architecture for the wallet, along with dependency injection, 
 we have defined a `Web3AuthHelper` to interact with a `Web3Auth` instance, which also makes it easier to write 
@@ -99,7 +100,7 @@ class Web3AuthHelperImpl(
     private val web3Auth: Web3Auth
 ): Web3AuthHelper {
 
-    // Performs the login to authenticate the user with Web3Auth netowrk.
+    // Performs the login to authenticate the user with Web3Auth network.
     override suspend fun login(loginParams: LoginParams): CompletableFuture<Web3AuthResponse> {
         return web3Auth.login(loginParams)
     }
@@ -138,8 +139,7 @@ class Web3AuthHelperImpl(
 }
 ```
 
-Once we have the created `Web3AuthHelper`, the next step is to initialize the `Web3Auth` instance in the 
-Kotlin module and make it a singleton component.
+2. Initialize the `Web3Auth` instance in the Kotlin module and make it a singleton component.
 
 ```kotlin
 val appModule = module {
@@ -175,7 +175,7 @@ Learn more about [Embedded Wallets initialization](/embedded-wallets/sdk/android
 
 :::
 
-### Session management
+### 2.3 Session management
 
 To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivKey` method. 
 For an authenticated user, the result would be a non-empty string. You can navigate to different 
@@ -250,7 +250,7 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
 }
 ```
 
-### Authentication
+### 2.4 Authentication
 
 If the user is not authenticated, we can utilize the `login` method to authenticate the user. For the 
 wallet, we will add an Email Passwordless login. We'll create a helper function, `login` inside 
@@ -260,7 +260,7 @@ blockchain. Along with that, we'll retrieve user info, and navigate them to `Hom
 
 :::note
 
-Learn more about [Embedded Wallets' `LoginParams`](/embedded-wallets/sdk/flutter/usage/login#parameters).
+Learn more about [Embedded Wallets' `LoginParams`](/embedded-wallets/sdk/android/usage/login#parameters).
 
 :::
 
@@ -294,7 +294,7 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
 }
 ```
 
-## Set up blockchain providers
+## Step 3: Set up blockchain providers
 
 Once we have successfully authenticated the user, the next step is to fetch the user details, retrieve 
 the wallet address, and prepare blockchain providers for interactions. This guide supports the Ethereum ecosystem, 
@@ -343,19 +343,18 @@ Generally, for any blockchain provider, you'll only require the `getBalance`, `s
 with smart contracts, we'll be required to generate smart contract function wrappers in Java from Solidity 
 ABI files.
 
-### Smart contract wrappers
+### 3.1 Smart contract wrappers
 
 For generating the wrappers, we'll use the [web3j command line tools](https://docs.web3j.io/4.11.0/command_line_tools/).
 
-To install the web3j CLI, you can use the below command. Read more about 
+1. To install the web3j CLI, you can use the below command. Read more about 
 [web3j CLI installation](https://docs.web3j.io/4.11.0/command_line_tools/#installation).
 
 ```bash
 curl -L get.web3j.io | sh && source ~/.web3j/source.sh
 ```
 
-Once, we have installed the CLI, the next step is to create `Token.sol` file, which has the smart contract 
-interface for the ERC-20 token. 
+2. Create a `Token.sol` file, which has the smart contract interface for the ERC-20 token. 
 
 :::tip
 
@@ -385,25 +384,24 @@ interface IERC20 {
 }
 ```
 
-After creating the interface for the ERC-20 token, the next step is to compile the solidity file and 
-generate the ABI and bin files to generate the wrappers. To compile the solidity file, we'll use the 
-[solc](https://docs.soliditylang.org/en/latest/installing-solidity.html).
+3. install [solc](https://docs.soliditylang.org/en/latest/installing-solidity.html) which will allow 
+us to compile the solidity file and generate the ABI and bin files to generate the wrappers. 
 
-To install the solc we'll require the npm or yarn. If you have the npm already installed, you can use 
+For this, we'll require the npm or yarn. If you have the npm already installed, you can use 
 the following command to install the solc package globally.
 
 ```bash
 npm install -g solc
 ```
 
-Once, we have the solc package installed, we'll compile the smart contract. The bin and ABI options will 
-generate the ABI and bin files. Feel free to choose the output directory of your choice.
+4. Compile the smart contract. The bin and ABI options will generate the ABI and bin files. Feel free 
+to choose the output directory of your choice.
 
 ```bash
 solc Token.sol --bin --abi --optimize -o <output-dir>/
 ```
 
-Once, we have compiled the smart contract, the next step is to use the web3j CLI to generate the wrappers.
+5. Use the web3j CLI to generate the wrappers.
 
 ```bash
 web3j generate solidity -b /path/to/Tokne.bin -a /path/to/Token..abi -o /path/to/src/main/java -p com.your.organisation.name
@@ -413,10 +411,10 @@ Once you run the command, it'll create a wrapper `Token.java` which extends the 
 class to interact with the smart contracts. Please ensure to compile and regenerate wrappers if you make 
 any changes in the smart contract.
 
-### Ethereum use case implementation
+### 3.2 Ethereum use case implementation
 
-Once we have generated `Token` wrapper, we'll create `EthereumUseCaseImpl` and implement the methods. To 
-create the `Web3j` instance, you'll require the RPC target URL. If you are using public RPCs, you can face 
+Next, we'll create `EthereumUseCaseImpl` and implement the methods. To create the `Web3j` instance, you'll 
+require the RPC target URL. If you are using public RPCs, you can face 
 some network congestion. It's ideal to use [paid RPCs](/services) for production.
 
 The `getBalance`, and `approve` methods are used to interact with smart contracts in the Ethereum ecosystem. 
@@ -519,7 +517,7 @@ val appModule = module {
 }
 ```
 
-## Set up supported chains
+## Step 4: Set up supported chains
 
 Next, we must define the supported chains. To keep things simple, we'll create a new file `ChainConfigList` with an 
 array of `ChainConfig` to define the supported chains.
@@ -553,18 +551,18 @@ var chainConfigList = arrayOf(
 )
 ```
 
-## Wallet implementation
+## Step 5: Wallet implementation
 
-Once, we have set up the `EthereumUseCase`, and supported chains, it's time to integrate and plug them into the 
-wallet. Since we have already created `MainViewModel` before, we'll add the other features inside it.
+Next, we need to integrate and plug the `EthereumUseCase` and supported chains into the wallet. Since we have 
+already created `MainViewModel` before, we'll add the other features inside it.
 
 This will help us to separate business logic from UI.
 
-### Set up `MainViewModel`
+### 5.1 Set up `MainViewModel`
 
-Once we have set up supported chains, the next on the list is to add more functionality in `MinaViewModel` to 
-help us manage the state and functionality of the wallet. It will help us manage the state of the currently 
-selected chain, fetch balance, sign transactions, and access other functionalities of Web3Auth.
+We will add more functionality in `MinaViewModel` to help us manage the state and functionality of the wallet. 
+It will help us manage the state of the currently selected chain, fetch balance, sign transactions, and access 
+other functionalities of Web3Auth.
 
 ```kotlin
 class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
@@ -727,9 +725,9 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
 }
 ```
 
-### Set up home screen
+### 5.2 Set up home screen
 
-Once, we have our view model ready, we create a new `HomeScreen` to show user details as email address, 
+Next, we create a new `HomeScreen` to show user details as email address, 
 wallet address, user's balance for the selected chain, and blockchain interaction methods.
 
 To get the user's balance, we'll use `getBalance` method from the `MainViewModel`. The method internally 
@@ -944,7 +942,7 @@ fun AccountView(viewModel: MainViewModel) {
 }
 ```
 
-### Chain interactions
+### 5.3 Chain interactions
 
 The next step is to set up chain interactions for signing messages, signing transactions, reading from contracts, 
 and writing on contracts. 
@@ -1197,7 +1195,7 @@ How to fix:
 
 ## Next steps
 
-Congratulations, you have built a Ethereum Web3 wallet. While this guide only provides an overview of 
+Congratulations, you have built an Ethereum Web3 wallet. While this guide only provides an overview of 
 how to create your wallet with Ethereum ecosystem support, the general idea can be used for any blockchain 
 ecosystem.
 
