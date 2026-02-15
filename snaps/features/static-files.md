@@ -6,7 +6,7 @@ sidebar_position: 12
 # Static files
 
 You can handle static files in your Snap bundle using the
-[`snap_getFile`](../reference/snaps-api.md#snap_getfile) API method.
+[`snap_getFile`](../reference/snaps-api/snap_getfile.mdx) API method.
 This is useful to load Wasm modules, ZK circuits, or any other files that must be lazily loaded.
 
 ## Steps
@@ -32,7 +32,7 @@ For example:
 
 ### 2. Load static files using `snap_getFile`
 
-In your Snap code, load static files using [`snap_getFile`](../reference/snaps-api.md#snap_getfile).
+In your Snap code, load static files using [`snap_getFile`](../reference/snaps-api/snap_getfile.mdx).
 This method returns a string in the encoding specified, with a default of Base64 if no encoding is specified.
 For example:
 

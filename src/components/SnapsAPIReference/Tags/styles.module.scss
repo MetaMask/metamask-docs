@@ -1,0 +1,11 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style-type: none !important;
+  margin-left: 0 !important;
+
+  li {
+    margin: 0 !important;
+  }
+}

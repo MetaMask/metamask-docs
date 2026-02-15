@@ -21,9 +21,9 @@ The following interactive UI components are available:
 ## Create an interactive interface
 
 Create an interactive interface using the
-[`snap_createInterface`](../../reference/snaps-api.md#snap_createinterface) method.
+[`snap_createInterface`](../../reference/snaps-api/snap_createinterface.mdx) method.
 This method returns the ID of the created interface.
-You can pass this ID to [`snap_dialog`](../../reference/snaps-api.md#snap_dialog), returned from
+You can pass this ID to [`snap_dialog`](../../reference/snaps-api/snap_dialog.mdx), returned from
 [`onTransaction`](../../reference/entry-points.md#ontransaction), or from
 [`onHomePage`](../../reference/entry-points.md#onhomepage).
 
@@ -34,14 +34,14 @@ the Snap's storage.
 ### Add context to an interface
 
 You can optionally add context to an interface by passing a `context` object to the
-[`snap_createInterface`](../../reference/snaps-api.md#snap_createinterface) method.
+[`snap_createInterface`](../../reference/snaps-api/snap_createinterface.mdx) method.
 This object can contain any data you want to pass to the interface.
 This context will be passed to [`onUserInput`](../../reference/entry-points.md#onuserinput) when the user interacts with the interface.
 
 ## Update an interactive interface
 
 To update an interactive interface that is still active, use the
-[`snap_updateInterface`](../../reference/snaps-api.md#snap_updateinterface) method.
+[`snap_updateInterface`](../../reference/snaps-api/snap_updateinterface.mdx) method.
 Pass the ID of the interface to be updated, and the new UI.
 
 Updating an interface can be done as part of the
@@ -61,9 +61,9 @@ The following is an example flow:
 ## Get an interactive interface's state and context
 
 At any point, you can retrieve an interactive interface's state and context.
-To retrieve its state, call the [`snap_getInterfaceState`](../../reference/snaps-api.md#snap_getinterfacestate)
+To retrieve its state, call the [`snap_getInterfaceState`](../../reference/snaps-api/snap_getinterfacestate.mdx)
 method with the interface ID.
-To retrieve its context, call [`snap_getInterfaceContext`](../../reference/snaps-api.md#snap_getinterfacecontext)
+To retrieve its context, call [`snap_getInterfaceContext`](../../reference/snaps-api/snap_getinterfacecontext.mdx)
 with the interface ID.
 
 ## Example
