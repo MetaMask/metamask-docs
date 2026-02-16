@@ -801,7 +801,14 @@ const config = {
         },
       },
     }),
-  stylesheets: [require.resolve("katex/dist/katex.min.css")],
+  stylesheets: [
+    {
+      href: "https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css",
+      type: "text/css",
+      integrity: "sha384-WcoG4HRXMzYzfCgiyfrySxx90XSl2rxY5mnVY5TwtWE6KLrArNKn0T/mOgNL0Mmi",
+      crossorigin: "anonymous",
+    },
+  ],
 }
 
 module.exports = config
