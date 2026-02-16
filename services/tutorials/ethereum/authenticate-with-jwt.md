@@ -17,7 +17,7 @@ with Node.js.
 
 - [Node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 20+
 - A text editor (for example, [VS Code](https://code.visualstudio.com/))
-- An [Infura account](https://app.infura.io/register)
+- An [Infura account](https://developer.metamask.io/register)
 
 ## Steps
 
