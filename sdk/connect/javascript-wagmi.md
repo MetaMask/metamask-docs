@@ -4,9 +4,9 @@ toc_max_heading_level: 3
 sidebar_label: JavaScript + Wagmi (recommended)
 keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp, Wallet SDK]
 ---
-
+343297
 # Connect to MetaMask using JavaScript + Wagmi
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 Get started with MetaMask SDK in a JavaScript and Wagmi dapp.
 You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDK](#set-up-manually) in an existing dapp.
 
