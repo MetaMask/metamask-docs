@@ -62,7 +62,7 @@ your Android application.
 
 To install the web3auth-android-sdk SDK:
 
-1. In your module-level `build.gradle` or `settings.gradle` file, add the JitPack repository.
+2.1.1 In your module-level `build.gradle` or `settings.gradle` file, add the JitPack repository.
 
 ```groovy
 dependencyResolutionManagement {
@@ -76,7 +76,7 @@ dependencyResolutionManagement {
 }
 ```
 
-2. In your app-level `build.gradle` dependencies section, add the `web3auth-android-sdk`.
+2.1.2 In your app-level `build.gradle` dependencies section, add the `web3auth-android-sdk`.
 
 ```groovy
 dependencies {
@@ -88,7 +88,7 @@ dependencies {
 
 ### 2.2 Initialization
 
-1. Next, initialize Web3Auth in your Android app. This sets up the necessary configurations using Client ID and 
+2.2.1 Next, initialize Web3Auth in your Android app. This sets up the necessary configurations using Client ID and 
 prepares Web3Auth. 
 
 Since we are using the Model–View–ViewModel (MVVM) architecture for the wallet, along with dependency injection, 
@@ -139,7 +139,7 @@ class Web3AuthHelperImpl(
 }
 ```
 
-2. Initialize the `Web3Auth` instance in the Kotlin module and make it a singleton component.
+2.2.2 Initialize the `Web3Auth` instance in the Kotlin module and make it a singleton component.
 
 ```kotlin
 val appModule = module {
@@ -323,7 +323,7 @@ to support any additional ecosystem, you can create the chain-agnostic use case 
 
 :::tip
 
-Learn more on [integrating different blockchains with Embedded Wallets](/embedded-wallets/connect-blockchain/).
+Learn more about [integrating different blockchains with Embedded Wallets](/embedded-wallets/connect-blockchain/).
 
 :::
 
@@ -347,14 +347,19 @@ ABI files.
 
 For generating the wrappers, we'll use the [web3j command line tools](https://docs.web3j.io/4.11.0/command_line_tools/).
 
-1. To install the web3j CLI, you can use the below command. Read more about 
-[web3j CLI installation](https://docs.web3j.io/4.11.0/command_line_tools/#installation).
+3.1.1 To install the web3j CLI, you can use the following command:
 
 ```bash
 curl -L get.web3j.io | sh && source ~/.web3j/source.sh
 ```
+:::tip
 
-2. Create a `Token.sol` file, which has the smart contract interface for the ERC-20 token. 
+Learn more about 
+[web3j CLI installation](https://docs.web3j.io/4.11.0/command_line_tools/#installation).
+
+:::
+
+3.1.2 Create a `Token.sol` file, which has the smart contract interface for the ERC-20 token. 
 
 :::tip
 
@@ -384,7 +389,7 @@ interface IERC20 {
 }
 ```
 
-3. install [solc](https://docs.soliditylang.org/en/latest/installing-solidity.html) which will allow 
+3.1.3 Install [solc](https://docs.soliditylang.org/en/latest/installing-solidity.html) which will allow 
 us to compile the solidity file and generate the ABI and bin files to generate the wrappers. 
 
 For this, we'll require the npm or yarn. If you have the npm already installed, you can use 
@@ -394,14 +399,14 @@ the following command to install the solc package globally.
 npm install -g solc
 ```
 
-4. Compile the smart contract. The bin and ABI options will generate the ABI and bin files. Feel free 
+3.1.4 Compile the smart contract. The bin and ABI options will generate the ABI and bin files. Feel free 
 to choose the output directory of your choice.
 
 ```bash
 solc Token.sol --bin --abi --optimize -o <output-dir>/
 ```
 
-5. Use the web3j CLI to generate the wrappers.
+3.1.5 Use the web3j CLI to generate the wrappers.
 
 ```bash
 web3j generate solidity -b /path/to/Tokne.bin -a /path/to/Token..abi -o /path/to/src/main/java -p com.your.organisation.name
@@ -944,10 +949,10 @@ fun AccountView(viewModel: MainViewModel) {
 
 ### 5.3 Chain interactions
 
-The next step is to set up chain interactions for signing messages, signing transactions, reading from contracts, 
+We need to set up chain interactions for signing messages, signing transactions, reading from contracts, 
 and writing on contracts. 
 
-1. For signing messages and transaction, we'll create a new `TransactionScreen` widget and utilize `signMessage` and 
+5.3.1 For signing messages and transaction, we'll create a new `TransactionScreen` widget and utilize `signMessage` and 
 `sendTransaction` from `MainViewModel` for the respective functionality.
 
 ```kotlin
@@ -1064,7 +1069,7 @@ fun TransactionView(viewModel: MainViewModel) {
 }
 ```
 
-2. Next, we create a `SmartContractsScreen` for fetching ERC-20 token balances, and revoking approval. 
+5.3.2 Next, we create a `SmartContractsScreen` for fetching ERC-20 token balances, and revoking approval. 
 We'll utilize the `getTokenBalance` and `revokeApproval` methods  from `MainViewModel` for this.
 
 ```kotlin
@@ -1177,14 +1182,15 @@ fun WriteContractView(viewModel: MainViewModel) {
     }
 }
 ```
+Congratulations, you have built an Ethereum web3 wallet. While this guide only provides an overview of 
+how to create your wallet with Ethereum ecosystem support, the general idea can be used for any blockchain 
+ecosystem.
 
 ## Troubleshooting
 
 ### ERC-20 transfers fail
 
-Some widely used tokens (such as USDT) don't strictly follow ERC-20 return values. 
-
-If your wrapper or client expects
+Some widely used tokens (such as USDT) don't follow ERC-20 return values. If your wrapper or client expects
 `transfer`/`transferFrom` to return a `bool`, calls can fail with ABI decoding errors.
 
 How to fix:
@@ -1194,10 +1200,6 @@ How to fix:
 (for example, OpenZeppelin's [`SafeERC20`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/utils/SafeERC20.sol)) to handle empty return data.
 
 ## Next steps
-
-Congratulations, you have built an Ethereum Web3 wallet. While this guide only provides an overview of 
-how to create your wallet with Ethereum ecosystem support, the general idea can be used for any blockchain 
-ecosystem.
 
 - [Learn more about Embedded Wallets for Android](/embedded-wallets/sdk/android). 
 - You can find the code used for the guide on our 
