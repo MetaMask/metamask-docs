@@ -1,11 +1,10 @@
 ---
-title: What are Embedded Wallets?
+title: Get started
 image: 'img/metamaskog.jpg'
-sidebar_label: What are Embedded Wallets?
+sidebar_label: Get Started
 description: 'What are MetaMask Embedded Wallets? | Documentation - MetaMask Embedded Wallets'
 ---
 
-import BrowserOnly from '@docusaurus/BrowserOnly'
 import SEO from '@site/src/components/SEO'
 import Tiles from '@theme/Tiles'
 
@@ -110,60 +109,36 @@ export const GetStarted = [
   slug="/embedded-wallets/"
 />
 
-MetaMask Embedded Wallets (formerly Web3Auth) provides a pluggable embedded wallet infrastructure to simplify Web3 wallet integration and user onboarding. It supports OAuth-based logins and multiple platforms, allowing users to access Web3 applications through familiar authentication methods in under a minute.
+Seamlessly provide your users with Web3 wallets using social logins they already know and trust.
 
-Users enjoy seamless onboarding while maintaining full control of their non-custodial wallets, ensuring both convenience and security.
+### Step 1: Create a developer account
 
-:::note
+Sign up at the Embedded Wallets dashboard: [dashboard.web3auth.io](https://dashboard.web3auth.io/). The basic plan
+is free.
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+:::note[Discover]
 
+  &#8594; Learn how to [create a new project](/embedded-wallets/dashboard/README.mdx)
+
+  &#8594; Learn what's included in each [Embedded Wallets plan](https://web3auth.io/pricing.html)
 :::
 
-## Get started
+### Step 2: Choose your platform
+
+Select the SDK for your framework or platform:
 
 <Tiles tileGroups={GetStarted} />
 
-## Key features
+### Step 3: Configure your app
 
-<BrowserOnly>
-  {() => {
-    const ModalAnim = require('@site/src/components/ModalAnim').default
-    return <ModalAnim />
-  }}
-</BrowserOnly>
+Select from a rich set of advanced configuration options to create the user experience your audience demands.
 
-### 🔐 Authentication made simple
+:::note[Discover]
 
-Get your users started in seconds with familiar login methods they already use:
+  &#8594; Learn how to [brand your app](./dashboard/customization.mdx)
 
-- Sign in with Google, Twitter, GitHub and other popular social accounts
-- Passwordless login via email, SMS and authenticator apps.
-- Bring your own auth system while leveraging our secure wallet infrastructure
+:::
 
-### 🛡️ Bank-grade security
+## Next steps
 
-Enterprise-level protection for your users' digital assets:
-
-- Advanced MPC technology splits keys across multiple parties
-- Users maintain 100% control of their non-custodial wallets
-- Distributed architecture prevents single points of failure
-- Multiple backup options for worry-free recovery
-
-### 💻 Built for developers
-
-Integrate MetaMask Embedded Wallets into your app with minimal effort:
-
-- Drop-in solution works with your existing auth system
-- No complex migrations or infrastructure changes needed
-- Full control to customize the look and feel
-- Support for web, mobile, and gaming platforms
-
-### 👥 Designed for users
-
-The smoothest path to Web3 for your users:
-
-- Get started in under 60 seconds
-- No crypto knowledge needed
-- Users own and control their wallets
-- Simple, reliable account recovery
+- Learn [what are Embedded Wallets and how do they work?](./how-it-works.mdx)

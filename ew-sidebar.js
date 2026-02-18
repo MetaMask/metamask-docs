@@ -126,8 +126,8 @@ function mobileTopNavButton(selectedSDK) {
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebar = {
   overview: [
-    "README",
-    "how-it-works",
+    { type: "doc", id: "README", label: "Get Started" },
+    { type: "doc", id: "how-it-works", label: "What are Embedded Wallets?" },
     {
       type: "category",
       label: "Dashboard",
@@ -164,9 +164,9 @@ const sidebar = {
     },
     {
       type: "category",
-      label: "Get Started",
+      label: "Choose your platform",
       collapsible: true,
-      collapsed: false,
+      collapsed: true,
       items: [
         { type: "link", label: "React", href: "/embedded-wallets/sdk/react" },
         { type: "link", label: "Vue", href: "/embedded-wallets/sdk/vue" },
