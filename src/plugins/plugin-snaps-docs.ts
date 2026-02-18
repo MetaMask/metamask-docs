@@ -2,16 +2,30 @@ import * as path from 'path'
 import { readFile, mkdir, writeFile } from 'fs/promises'
 import { LoadContext, Plugin } from '@docusaurus/types'
 
-// TODO.
-export const SNAPS_RPC_URL = 'https://metamask.github.io/api-specs/latest/openrpc.json'
+// TODO: Update to `latest`.
+export const SNAPS_RPC_URL = 'https://metamask.github.io/snaps/schema/staging/schema.json'
 export const SNAPS_REF_PATH = 'snaps/reference/snaps-api'
+
+async function fetchSnapsMethods() {
+  return await fetch(SNAPS_RPC_URL)
+    .then((response) => {
+      if (!response.ok || response.status !== 200) {
+        throw new Error(`Failed to fetch Snaps API schema: ${response.statusText}`)
+      }
+      return response.json()
+    })
+    .catch((error) => {
+      console.error('Error fetching Snaps API schema:', error)
+      return []
+    })
+}
 
 export default function useSnapsDocsPlugin(context: LoadContext): Plugin {
   async function generateSnapsDocs() {
-    const methods = await readFile(path.join(__dirname, 'schema.json'), 'utf-8').then(JSON.parse)
+    const methods = await fetchSnapsMethods();
 
     // Ensure the reference directory exists before trying to write files.
-    await mkdir(path.join(context.siteDir, 'snaps', 'reference', 'snaps-api'), {
+    await mkdir(path.join(context.siteDir, SNAPS_REF_PATH), {
       recursive: true,
     })
 
