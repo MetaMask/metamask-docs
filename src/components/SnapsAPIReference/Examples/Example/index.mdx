@@ -1,0 +1,9 @@
+import Markdown from 'react-markdown';
+import CodeBlock from '@theme/CodeBlock'
+
+### {props.example.title ? props.example.title : `Example ${props.index}`}
+
+<CodeBlock language="json">
+  {props.example.content}
+</CodeBlock>
+

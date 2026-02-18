@@ -1,0 +1,10 @@
+import Example from './Example/index.mdx';
+
+## Examples
+
+{Array.isArray(props.method.examples) ?
+  props.method.examples.map((example, index) => (
+    <Example key={index} index={index + 1} example={example} />
+  ))
+  : <Example index={1} example={props.method.examples} />
+}

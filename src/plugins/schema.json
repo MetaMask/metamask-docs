@@ -1,7 +1,7 @@
 [
   {
     "name": "snap_cancelBackgroundEvent",
-    "description": null,
+    "description": "Some documentation for the `snap_cancelBackgroundEvent` method.\n\nIt works on multiple lines, and has some **formatting**.\n\nIt also supports [links](https://www.markdownguide.org/cheat-sheet/).\n\n- Lists\n- Are\n- Cool",
     "parameters": [
       {
         "name": "id",
@@ -11,6 +11,13 @@
     ],
     "result": null,
     "subjectTypes": ["snap"],
+    "examples": [
+      {
+        "title": "Example JSON-RPC request",
+        "language": "json",
+        "content": "{\n  \"id\": 1,\n  \"jsonrpc\": \"2.0\",\n  \"method\": \"snap_cancelBackgroundEvent\",\n  \"params\": {\n    \"id\": \"1234-5678-9012-3456\"\n  }\n}\n"
+      }
+    ],
     "restricted": false
   },
   {
@@ -25,6 +32,7 @@
     ],
     "result": null,
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -39,6 +47,7 @@
     ],
     "result": null,
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -61,6 +70,7 @@
       "description": "The result returned by the `snap_createInterface` method, which is the id of the created interface."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -74,6 +84,7 @@
       "type": "Json",
       "description": null
     },
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   },
@@ -99,6 +110,7 @@
     ],
     "result": null,
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -121,6 +133,7 @@
       "description": "The result returned by the `snap_experimentalProviderRequest` method, which will be a JSON serializable value.\n\nNOTE: This implementation is experimental and may be removed or changed without warning."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -132,6 +145,7 @@
       "description": "The result returned by the `snap_getBackgroundEvents` method.\n\nIt consists of an array background events (if any) for a snap."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -201,6 +215,7 @@
         "description": "The name of the curve used by the node."
       }
     ],
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   },
@@ -233,6 +248,7 @@
       "type": "string",
       "description": "The result returned by the `snap_getBip32PublicKey` method.\n\nIt is the public key in hexadecimal format, in either compressed or\nuncompressed format, depending on the `compressed` parameter."
     },
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   },
@@ -303,6 +319,7 @@
         "description": null
       }
     ],
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   },
@@ -333,6 +350,7 @@
       }
     ],
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -350,6 +368,7 @@
       "description": "The result returned by the `snap_getCurrencyRate` method, which is the {@link CurrencyRate} object."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -379,6 +398,7 @@
         "description": null
       }
     ],
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   },
@@ -402,6 +422,7 @@
       "description": "The result returned by the `snap_getFile` method."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -419,6 +440,7 @@
       "description": "The result returned by the `snap_getInterfaceContext` method, which is the context for a given interface."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -436,6 +458,7 @@
       "description": "The result returned by the `snap_getInterfaceState` method, which is the state of the interface."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -452,6 +475,7 @@
       "type": "string",
       "description": "The result returned by the `snap_getLocale` method.\n\nIt is the locale of the user's MetaMask extension."
     },
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   },
@@ -522,6 +546,7 @@
         "description": "Whether to show testnets."
       }
     ],
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   },
@@ -545,6 +570,7 @@
       "description": "The result returned by the `snap_getState` method."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -556,6 +582,7 @@
       "description": "The result returned by the `snap_getWebSockets` method."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -567,6 +594,7 @@
       "description": "The result returned by the `snap_listEntropySources` method."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -583,6 +611,7 @@
       "type": "Json",
       "description": "The result returned by the `snap_manageAccounts` method, which is the result\nreturned by the Snap."
     },
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   },
@@ -605,6 +634,7 @@
       "type": "Record<string, Json> | null",
       "description": "The result returned by the `snap_manageState` method.\n\nIf the operation is `get`, the result is the state. Otherwise, the result is\n`null`."
     },
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   },
@@ -624,6 +654,7 @@
       }
     ],
     "result": null,
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   },
@@ -647,6 +678,7 @@
       "description": "The result returned by the `snap_openWebSocket` method."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -666,6 +698,7 @@
     ],
     "result": null,
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -683,6 +716,7 @@
       "description": "The result returned by the `snap_scheduleBackgroundEvent` method, which is the ID of the scheduled event."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -702,6 +736,7 @@
     ],
     "result": null,
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -726,6 +761,7 @@
     ],
     "result": null,
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -765,6 +801,7 @@
     ],
     "result": null,
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -782,6 +819,7 @@
       "description": "The result returned by the `snap_trackEvent` method. This is the ID of the\ntracked error, as returned by the Sentry instance in the client."
     },
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -796,6 +834,7 @@
     ],
     "result": null,
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -820,6 +859,7 @@
     ],
     "result": null,
     "subjectTypes": ["snap"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -831,6 +871,7 @@
       "description": "The result returned by the `wallet_getSnaps` method.\n\nIt consists of a map of Snap IDs to either the Snap object or an error."
     },
     "subjectTypes": ["snap", "website"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -842,6 +883,7 @@
       "description": "The result returned by the `wallet_getSnaps` method.\n\nIt consists of a map of Snap IDs to either the Snap object or an error."
     },
     "subjectTypes": ["snap", "website"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -864,6 +906,7 @@
       "description": "The result returned by the `wallet_invokeKeyring` method, which is the result\nreturned by the Snap."
     },
     "subjectTypes": ["snap", "website"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -886,6 +929,7 @@
       "description": "The result returned by the `wallet_invokeSnap` method, which is the result\nreturned by the Snap."
     },
     "subjectTypes": ["snap", "website"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -900,6 +944,7 @@
       "description": "The result returned by the `wallet_requestSnaps` method.\n\nIt consists of a map of Snap IDs to either the Snap object or an error."
     },
     "subjectTypes": ["snap", "website"],
+    "examples": [],
     "restricted": false
   },
   {
@@ -921,6 +966,7 @@
       "type": "Json",
       "description": "The result returned by the `wallet_invokeSnap` method, which is the result\nreturned by the Snap."
     },
+    "examples": [],
     "subjectTypes": ["snap"],
     "restricted": true
   }
