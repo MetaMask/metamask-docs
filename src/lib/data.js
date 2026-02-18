@@ -52,6 +52,11 @@ export const NETWORK_LINKS = [
     logo: `${LOGO_PATH}/logo-ipfs.svg`,
   },
   {
+    name: 'IPFS',
+    href: '/services/reference/ipfs',
+    logo: `${LOGO_PATH}/logo-ipfs.svg`,
+  },
+  {
     name: 'Linea',
     href: '/services/reference/linea',
     logo: `${LOGO_PATH}/logo-linea.svg`,
