@@ -2,7 +2,7 @@ import styles from './styles.module.scss';
 import Markdown from 'react-markdown';
 
 <div className={styles.parameter}>
-  {props.parameter.name && <h3 className={styles['parameter-name']}>{props.parameter.name}</h3>}
+  {props.parameter.name && <h3>{props.parameter.name}</h3>}
   <span className={styles['parameter-type']}>
     {props.parameter.type}
   </span>
