@@ -18,6 +18,14 @@ manage AI assistants with access to various tools and skills. The Smart Accounts
 
 This skill enables your agent to grant, redeem, inspect and revoke ERC-7710 delegations using the [@metamask/gator-cli](https://www.npmjs.com/package/@metamask/gator-cli) package.
 
+:::warning Alpha version
+
+This CLI is in alpha version, and stores agent's private key in a local 
+JSON file (~/.gator-cli/). Please proceed with caution, and do not use 
+it with accounts holding significant funds.
+
+:::
+
 ### Install
 
 <Tabs>
