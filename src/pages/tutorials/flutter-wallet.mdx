@@ -1,7 +1,7 @@
 ---
 title: Create a chain-agnostic web3 wallet in Flutter
 image: 'img/tutorials/tutorials-banners/flutter-wallet.png'
-description: Empower your Flutter app with a chain-agnostic web3 wallet using the Web3Auth PnP SDK.
+description: "Empower your Flutter app with a chain-agnostic web3 wallet using the MetaMask Embedded Wallets SDK | Web3Auth PnP SDK."
 tags: [embedded wallets, flutter, android, ios, evm, solana, web3auth]
 date: April 22, 2024
 author: MetaMask Developer Relations
@@ -20,11 +20,17 @@ import WalletPreview from '@site/static/img/tutorials/flutter-wallet-preview.png
   slug="/tutorials/flutter-wallet"
 />
 
-In this guide, we'll talk about how we can use Web3Auth to build your chain-agnostic Web3 wallet in Flutter. The wallet will support the Ethereum and Solana ecosystem.
+In this guide, we'll use the MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) to build your chain-agnostic web3 wallet in Flutter. The wallet will support the Ethereum and Solana ecosystems.
 
-As an overview, the app is quite simple, with functionality to log in, display user details, and perform blockchain interactions. The signing of the blockchain transactions is done through the Web3Auth embedded wallet. You can check out the infrastructure docs, ["Web3Auth Wallet Management Infrastructure"](/embedded-wallets/infrastructure/) for a high-level overview of the Web3Auth architecture and implementation. For those who want to skip straight to the code, you can find it on [GitHub](https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-playground).
+You will create a demo app which supports user login, displays user details, and performs blockchain interactions. The signing of the blockchain transactions is done through the Embedded Wallets SDK. 
 
-Here are few screenshots of the application.
+:::tip
+
+See the [Embedded Wallets management infrastructure](/embedded-wallets/infrastructure/) for a high-level overview of the Embedded Wallets management infrastructure, architecture, and implementation. For those who want to skip straight to the code, find it on [GitHub](https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-playground).
+
+:::
+
+This is what your application will look like: 
 
 <img
   style={{ display: 'block', margin: '20px auto' }}
@@ -32,17 +38,24 @@ Here are few screenshots of the application.
   alt="Flutter Wallet Screenshots"
 />
 
-## How to set up Web3Auth Dashboard
+## Step 1: Set up the Embedded Wallets dashboard
 
-If you haven't already, sign up on the Web3Auth platform. It is free and gives you access to the Web3Auth's base plan. After the basic setup, explore other features and functionalities offered by the Web3Auth Dashboard. It includes custom verifiers, whitelabeling, analytics, and more. Head to [Web3Auth's documentation](/embedded-wallets/dashboard/) page for detailed instructions on setting up the Web3Auth Dashboard.
+Sign up on the [Embedded Wallets platform](https://dashboard.web3auth.io/). It's free 
+and gives you access to the Embedded Wallets' base plan. 
 
-## Integrating Web3Auth in Flutter
+:::tip
 
-Once, you have set up the Web3Auth Dashboard, and created a new project, it's time to integrate Web3Auth in your Flutter application. For the implementation, we'll use the "web3auth_flutter package". This package facilitates integration with Web3Auth. This way you can easily manage embedded wallet in your Flutter application.
+Consider exploring other features and functionalities offered by the Embedded Wallets dashboard. It includes custom verifiers, whitelabeling, analytics, and more. Head to the [Embedded Wallet documentation](/embedded-wallets/dashboard/) page for detailed instructions on setting up the dashboard.
 
-### Installation
+:::
 
-To install the web3auth_flutter package, you have two options. You can either manually add the package in the `pubspec.yaml` file, or you can use the `flutter pub add` command.
+## Step 2: Integrate Embedded Wallets in Flutter
+
+Once you have set up your Embedded Wallets dashboard, and created a new project, it's time to integrate Web3Auth SDK in your Flutter application. For the implementation, we'll use the "web3auth_flutter package" to manage an Embedded Wallet in your Flutter application.
+
+### 2.1 Installation
+
+To install the web3auth_flutter package, you have two options. Either manually add the package in the `pubspec.yaml` file, or use the `flutter pub add` command.
 
 <Tabs defaultValue = "console"
   values={[
@@ -71,15 +84,15 @@ dependencies:
 </TabItem>
 </Tabs>
 
-### Initialization
+### 2.2 Initialization
 
-After successfully installing the package, the next step is to initialize Web3Auth in your Flutter app. This sets up the necessary configurations using Client Id and prepares Web3Auth. [Learn more about Web3Auth Initialization](/embedded-wallets/sdk/flutter#initialize-web3auth).
+Next, initialize Web3Auth in your Flutter app. This sets up the necessary configurations using Client ID and prepares Web3Auth.
 
 ```dart
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Addditional code
+  // Additional code
 
   final Uri redirectUrl;
   if (Platform.isAndroid) {
@@ -102,10 +115,21 @@ Future<void> main() async {
   runApp(const MainApp());
 }
 ```
+:::tip
 
-### Session Management
+Learn more about [Web3Auth initialization](/embedded-wallets/sdk/flutter#initialize-web3auth).
 
-To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivKey` method. For a user already authenticated, the result would be a non-empty `String`. You can navigate to different views based on the result. If the user is already authenticated, we'll navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again. [Learn more about Web3Auth session management](/embedded-wallets/features/session-management).
+:::
+
+### 2.3 Session management
+
+To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivKey` method. For an authenticated user, the result would be a non-empty string. You can navigate to different views based on the result. If the user is already authenticated, we'll navigate them to `HomeScreen`. In case of no active session, we'll navigate to `LoginScreen` to authenticate again. 
+
+:::tip
+
+[Learn more about Web3Auth session management](/embedded-wallets/features/session-management).
+
+:::
 
 ```dart
 class MainApp extends StatefulWidget {
@@ -147,11 +171,15 @@ class _MainAppState extends State<MainApp> {
 }
 ```
 
-### Authentication
+### 2.4 Authentication
 
-If the user is not authenticated, you should utilize the `login` method. For the Wallet, we will add two login options, Google, and Email Passwordless login. In Web3Auth, you can choose between a Single Page Authentication flow or a Regular Web Application flow. For this guide, we'll be using a Single Page Authentication flow. We'll create a helper function, `_login` inside `LoginScreen`. The login method is pretty straightforward in Web3Auth and takes `LoginParams` as input. After successfully logging in, we'll navigate the user to `HomeScreen`.
+If the user is not authenticated, you should utilize the `login` method. For the wallet, we will add two login options, Google, and Email Passwordless login. With Embedded Wallets, you can choose between a Single Page Authentication flow or a Regular Web Application flow. For this guide, we'll be using a Single Page Authentication flow. We'll create a helper function, `_login` inside `LoginScreen`. The login method is pretty straightforward in Embedded Wallets and takes `LoginParams` as input. After successfully logging in, we'll navigate the user to `HomeScreen`.
 
-Learn more about [Web3Auth LoginParams](/embedded-wallets/sdk/flutter/usage/login#parameters).
+:::tip
+
+Learn more about [Embedded Wallets' `LoginParams`](/embedded-wallets/sdk/flutter/usage/login#parameters).
+
+:::
 
 ```dart
 class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
@@ -172,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
 
   Future<void> _login(BuildContext context) async {
     try {
-      // Validate the form, and TextField. In case of invalide
+      // Validate the form, and TextField. In case of invalid
       // form state, return back.
       if (!formKey.currentState!.validate()) {
         return;
@@ -208,13 +236,15 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
 }
 ```
 
-## Set up Blockchain Providers
+## Step 3: Set up blockchain providers
 
-Once we have successfully authenticated the user, the next step would be to fetch the user details, retrieve wallet address and prepare blockchain providers for interactions. For this guide, we are supporting only Ethereum and Solana ecosystem, but the general idea can be used for any blockchain ecosystem.
+Next, we fetch the user details, retrieve their wallet address, and prepare blockchain providers for interactions. This guide supports the Ethereum and Solana ecosystems, but the general idea can be extended to any blockchain ecosystem.
 
-Given that the project follows clean architecture and Test-Driven Development (TDD) principles, we'll want to create an abstract layer to interact with the Blockchain providers. This abstraction will help us easily expand the blockchain support while isolate it from the rest of the application.
+Given that the project follows clean architecture and Test-Driven Development (TDD) principles, we'll want to create an abstract layer to interact with the blockchain providers. This abstraction simplifies expanding the blockchain support while isolating it from the rest of the application.
 
-For interacting ethereum chains, we'll use the [web3dart](https://pub.dev/packages/web3dart) package. Similary for solana, we'll use the [solana](https://pub.dev/packages/solana) package. To install the packages, you have two options. You can either manually add the packages in the `pubspec.yaml` file, or you can use the `flutter pub add` command.
+For interacting with Ethereum chains, we'll use the [web3dart](https://pub.dev/packages/web3dart) package. While for Solana, we'll use the [Solana](https://pub.dev/packages/solana) package. 
+
+3.1 To install the packages, you have two options. Either manually add the packages in the `pubspec.yaml` file, or use the `flutter pub add` command.
 
 <Tabs defaultValue = "console"
   values={[
@@ -245,15 +275,19 @@ dependencies:
 </TabItem>
 </Tabs>
 
-After successfully installing both packages, it's time to set up our Blockchain provider. First, we'll create a new class, `ChainProvider`, which will used as a base class for `EthereumProvider` and `SolanaProvider`. If you wish to support any additional ecosystem, you can extend the `ChainProvider` and implement the methods.
+3.2 Set up our Blockchain provider. First, we'll create a new class, `ChainProvider`, which will used as a base class for `EthereumProvider` and `SolanaProvider`. If you wish to support any additional ecosystem, you can extend the `ChainProvider` and implement the methods.
 
-If you want to learn, how you can integrate different blockchain with Web3Auth, you can checkout our [Connect Blockchain resources](/embedded-wallets/connect-blockchain/).
+:::note 
+
+Learn how to integrate different blockchains with Embedded Wallets from the [Connect Blockchain resources](/embedded-wallets/connect-blockchain/).
+
+:::
 
 ```dart
 abstract class ChainProvider {
   Future<String> getBalance(String address);
   Future<String> sendTransaction(String to, double amount);
-  Future<String> signMessage(String messsage);
+  Future<String> signMessage(String message);
   Future<dynamic> readContract(
     String address,
     String function,
@@ -268,13 +302,19 @@ abstract class ChainProvider {
 }
 ```
 
-Generally, for any blockchain provider, you'll only require the `getBalance`, `sendTransaction`, and `signMessage`. The `readContract` and `writeContract` can be used to interact with SmartContract.
+Typically, when interacting with blockchain providers, you'll only require the `getBalance`, `sendTransaction`, and `signMessage`.
 
-### Ethereum Provider
+### Ethereum provider
 
-Once we have our base class, we'll create `EthereumProvider` and implement the methods. To create the `Web3Client` instance, you'll require the rpcTarget URL. If you are using public RPCs, you can face some network congestion. It's ideal to use paid RPCs for production.
+With our base class in place, we'll create `EthereumProvider` and implement the methods. To create the `Web3Client` instance, you'll require the RPC target URL. 
 
-The `readContract`, and `writeContract` methods are used to interact with smart contracts on Ethereum ecosystem. The `readContract` is used to read the data from the smart contracts, where as the `writeContract` is used to write data on smart contract.
+:::note
+
+If you are using public RPCs, you could face some network congestion. Ideally, use [paid RPCs](/services) for production.
+
+:::
+
+The `readContract`, and `writeContract` methods are used to interact with smart contracts on Ethereum ecosystem. As the names suggest, `readContract` is used to read the data from the smart contracts, while the `writeContract` is used to write data on smart contract.
 
 ```dart
 class EthereumProvider extends ChainProvider {
@@ -292,7 +332,7 @@ class EthereumProvider extends ChainProvider {
       EthereumAddress.fromHex(address),
     );
 
-    // The result we from Web3Client is in wei, the smallest value. To convert
+    // The result from Web3Client is in wei, the smallest value. To convert
     // the value to ether, you can divide it with 10^18, where 18 denotes the
     // decimals for wei.
     //
@@ -323,10 +363,10 @@ class EthereumProvider extends ChainProvider {
   }
 
   @override
-  Future<String> signMessage(String messsage) async {
+  Future<String> signMessage(String message) async {
     final Credentials credentials = await _prepareCredentials();
     final signBytes = credentials.signPersonalMessageToUint8List(
-      Uint8List.fromList(messsage.codeUnits),
+      Uint8List.fromList(message.codeUnits),
     );
 
     return bytesToHex(signBytes);
@@ -334,8 +374,8 @@ class EthereumProvider extends ChainProvider {
 
   // Prepares the Credentials used for signing the message,
   // and transaction on EVM chains. EVM ecosystem uses the
-  // scep2561k curve. You can use the Web3AuthFlutter.getPrivKey
-  // to retrieve the scep2561K compatible private key.
+  // secp256k1 curve. You can use the Web3AuthFlutter.getPrivKey
+  // to retrieve the secp256k1 compatible private key.
   Future<Credentials> _prepareCredentials() async {
     final privateKey = await Web3AuthFlutter.getPrivKey();
     final Credentials credentials = EthPrivateKey.fromHex(privateKey);
@@ -392,9 +432,9 @@ class EthereumProvider extends ChainProvider {
 }
 ```
 
-### Solana Provider
+### Solana provider
 
-After `EthereumProvider`, it's time to extend `ChainProvider` and create `SolanaProvider`. For `SolanaProvider`, we'll only implement the `getBalance`, `sendTransaction`, and `signMessage`. We'll also add `_generateKeyPair()`, a helper method to create `Ed25519HDKeyPair`. It's used to sign the transactions and messages on Solana ecosystem. Since, Solana uses `ed25519` curve, we can utilize the `Web3AuthFlutter.getEd25519PrivKey`.
+Next, we will extend `ChainProvider` and create `SolanaProvider`. For `SolanaProvider`, we'll only implement the `getBalance`, `sendTransaction`, and `signMessage`. We'll also add `_generateKeyPair()`, a helper method to create `Ed25519HDKeyPair`. It's used to sign the transactions and messages on Solana ecosystem. Since, Solana uses `ed25519` curve, we can utilize the `Web3AuthFlutter.getEd25519PrivKey`.
 
 ```dart
 class SolanaProvider extends ChainProvider {
@@ -434,13 +474,13 @@ class SolanaProvider extends ChainProvider {
   }
 
   @override
-  Future<String> signMessage(String messsage) async {
+  Future<String> signMessage(String message) async {
     final Ed25519HDKeyPair ed25519hdKeyPair = await _generateKeyPair();
 
-    final signatrure = await ed25519hdKeyPair.sign(
-      ByteArray.fromString(messsage),
+    final signature = await ed25519hdKeyPair.sign(
+      ByteArray.fromString(message),
     );
-    return signatrure.toBase58();
+    return signature.toBase58();
   }
 
   Future<Ed25519HDKeyPair> _generateKeyPair() async {
@@ -468,11 +508,11 @@ class SolanaProvider extends ChainProvider {
 }
 ```
 
-## Set up Supported Chains
+## Step 4: Set up supported chains
 
-After having our blockchain proivders in place, the next step on the list to define the supported chains. To keep things simple, we'll simply a create a new file `chain_configs` with list of Map to define the supported chains.
+Next, we define the supported chains with a `chain_configs` file that uses "list of map" to define the supported chains.
 
-For the guide, we have added the support for Ethereum Sepolia, Ethereum Mainnet, Polygon Mainnet, Polygon Amoy, and Solana devnet. If you wish to support more chains in your wallet, you can simply add the config with the required details in the list below.
+For this guide we will support Ethereum Sepolia, Ethereum Mainnet, Polygon Mainnet, Polygon Amoy, and Solana Devnet using the Ethereum and Solana providers. If you wish to support more EVM-compatible chains in your wallet, add the config with the required details in the list below.
 
 ```dart
 import 'package:web3auth_flutter/enums.dart';
@@ -531,7 +571,7 @@ final chainConfigs = [
 ];
 ```
 
-Once, we have defined the supported chains, create a new model `ChainConfig`, to represent the Dart object for the above chain config map. We'll use the `ChainConfig` model for UI purposes and chain interaction.
+Next we create a new model `ChainConfig`, to represent the Dart object for the above chain config map. We'll use the `ChainConfig` model for UI purposes and chain interaction.
 
 In the `ChainConfig,` we'll also add a `isEVM` parameter to help us differentiate the selected chain ecosystem. If `isEVM` is true for the selected chain, we can use `EthereumProvider` for chain interactions, or else we can use the `SolanaProvider`.
 
@@ -570,15 +610,15 @@ class ChainConfigModel extends ChainConfig {
 }
 ```
 
-## Wallet Implementation
+## Step 5: Wallet implementation
 
-Once, we have set up the providers, and supported chains, it's time to integrate and plug them into the wallet. For this guide, we are using the `get_it` package for service locator abilities. It will help us with the dependency injection.
+Next we integrate the providers and supported chains into the wallet. For this guide, we are using the `get_it` package for service locator abilities. It will help us with the dependency injection.
 
-### Service Locator
+### 5.1 Service locator
 
-Let's create a new `ServiceLocator` class, and set up the `ChainConfigDataSource` and `ChainConfigRepository`. The `ChainConfigRepository` is responsible for converting the list of chain configs map we defined earlier into a list of `ChainConfig` models and inject into UI. As said earlier, for simplicity we are maintaining the list of chain configs on the frontend, but using `ChainConfigRepository` you can get the list from the server as well.
+Let's create a new `ServiceLocator` class, and set up the `ChainConfigDataSource` and `ChainConfigRepository`. The `ChainConfigRepository` is responsible for converting the list of chain configurations map we defined earlier into a list of `ChainConfig` models and inject into UI. As said earlier, for simplicity we are maintaining the list of chain configurations on the frontend, but using `ChainConfigRepository` you can get the list from the server as well.
 
-Checkout the implementation of `ChainConfigDataSource` and `ChainConfigRepository` for more details.
+See the implementation of `ChainConfigDataSource` and `ChainConfigRepository` for more details.
 
 ```dart
 class ServiceLocator {
@@ -598,20 +638,20 @@ class ServiceLocator {
 }
 ```
 
-After successfully setting up the `ServiceLocator`, initialize it in the `main` function above `Web3AuthFlutter` initiliation.
+After successfully setting up the `ServiceLocator`, initialize it in the `main` function above `Web3AuthFlutter` initialization.
 
 ```dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.setUp();
 
-  // Additional Web3AuthFlutter initiliation code.
+  // Additional Web3AuthFlutter initiation code.
 }
 ```
 
-### Set up Home Provider
+### 5.2 Set up the home provider
 
-Once we have set up service locator, the next on list is to create a `ChangeNotifier` to help us maange the state of the wallet. The notifier will help us manage the state of currently selected chain, and access the respective chain provider. For the state management, we will be using the `provider` package, so make sure to add `provider` as a dependency.
+Next, create a `ChangeNotifier` to help us manage the state of the wallet. The notifier will help us manage the state of currently selected chain, and access the respective chain provider. For the state management, we will be using the `provider` package, so make sure to add `provider` as a dependency.
 
 ```dart
 class HomeProvider with ChangeNotifier {
@@ -662,13 +702,13 @@ extension ChainConfigExtension on ChainConfig {
 }
 ```
 
-### Setting up Home screen
+### 5.3 Set up the home screen
 
-Once, we have our provider ready, we create a new `HomeScreen` widget to show user details as email address, wallet address, user's balance for selectedChain, and blockchain interaction methods. We'll retrieve the `ChainConfigRepository` using `ServiceLocator`, and initialize our `HomeProvider`.
+Next, we create a new `HomeScreen` widget to show user details as email address, wallet address, user's balance for `selectedChain`, and blockchain interaction methods. We'll retrieve the `ChainConfigRepository` using `ServiceLocator`, and initialize our `HomeProvider`.
 
-To get the user's balance, we'll use `prepareAccount` method from the `ChainConfigRepository`. The method internally uses `ChainProvider` to retrieve user's wallet address, and fetch the wallet balance for the address. Checkout `ChainConfigRepository` implementation for more details. The methods returns `Account` object which has the above details.
+5.3.1 To get the user's balance, we'll use `prepareAccount` method from the `ChainConfigRepository`. The method internally uses `ChainProvider` to retrieve user's wallet address, and fetch the wallet balance for the address. Checkout `ChainConfigRepository` implementation for more details. The methods returns `Account` object which has the above details.
 
-Checkout `Account` data model below.
+See the `Account` data model below:
 
 ```dart
 class Account {
@@ -686,7 +726,7 @@ class Account {
 }
 ```
 
-Once, we have retrieve the `ChainConfigRepository` in `init` method of `HomeScren`, we'll invoke the `prepareAccount`, and pass the `Account` instance to `StreamController` which is used for data flow in the application.
+5.3.2 Once, we have retrieved the `ChainConfigRepository` in `init` method of `HomeScreen`, we'll invoke the `prepareAccount`, and pass the `Account` instance to `StreamController` which is used for data flow in the application:
 
 ```dart
 class HomeScreen extends StatefulWidget {
@@ -842,11 +882,11 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 ```
 
-In `HomeScreen` we'll also give users an option to logout from the wallet in navigation drawer. To do so, we'll utilize the `Web3AuthFlutter.logout`. Upon success, we'll navigate users back to `LoginScreen`. Checkout `SideDrawer` widget for navigation drawer implementation.
+5.3.3 In `HomeScreen` we'll also give users an option to logout from the wallet in navigation drawer. To do so, we'll utilize the `Web3AuthFlutter.logout`. Upon success, we'll navigate users back to `LoginScreen`. Checkout `SideDrawer` widget for navigation drawer implementation.
 
-### Chain Interactions
+### 5.4 Chain interactions
 
-Once we have setup `HomeScreen`, the next step is to setup chain interactions for signing message, signing transaction, reading from contracts, and writing on contracts. For signing message and transaction, we'll create a new `TransactionsScreen` widget and utilize `signMessage` and `sendTransaction` from `ChainProvider` for respective functionality.
+Next, set up chain interactions for signing message, signing transaction, reading from contracts, and writing on contracts. For signing messages and transactions, we'll create a new `TransactionsScreen` widget and utilize `signMessage` and `sendTransaction` from `ChainProvider` for respective functionality.
 
 To retrieve currently selected chain, and respective provider we'll use the `HomeProvider`.
 
@@ -859,7 +899,7 @@ class TransactionsScreen extends StatefulWidget {
 }
 
 class _TransactionsScreenState extends State<TransactionsScreen> {
-  // Additional variable initiliation
+  // Additional variable initiation
 
   @override
   void initState() {
@@ -918,8 +958,9 @@ class _TransactionsScreenState extends State<TransactionsScreen> {
 }
 ```
 
-## Conclusion
+Congratulations, you have built a chain agnostic web3 wallet. While this guide only gives you an overview of how to create your wallet with EVM and Solana ecosystem support, the general idea can be used for any blockchain ecosystem.
 
-Voila, you have build a chain agnostic Web3 wallet. This guide only gives you an overview of how to create your wallet with EVM and Solana ecosystem support. The general idea of the guide can be used for any of the blockchain ecosystem.
+## Next steps
 
-If you are interested in learning more about Web3Auth, please checkout our [documentation for Flutter](/embedded-wallets/sdk/flutter). You can find the code used for the guide on our [examples repo](https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-playground).
+- Learn more about Embedded Wallets, checkout our [documentation for Flutter](/embedded-wallets/sdk/flutter). 
+- Find the code used for the guide on our [examples repo](https://github.com/Web3Auth/web3auth-flutter-examples/tree/main/flutter-playground).
