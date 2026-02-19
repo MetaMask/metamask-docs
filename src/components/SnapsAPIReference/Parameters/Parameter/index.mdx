@@ -6,6 +6,7 @@ import Markdown from 'react-markdown';
   <span className={styles['parameter-type']}>
     {props.parameter.type}
   </span>
+  {!props.response && props.parameter.required && <span className={styles['parameter-required']}>required</span>}
 </div>
 
 {props.parameter.description && (

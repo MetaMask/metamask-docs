@@ -4,7 +4,7 @@ import Parameter from '../Parameters/Parameter/index.mdx';
 
 {Array.isArray(props.method.result) ?
   props.method.result.map((parameter, index) => (
-    <Parameter key={index} parameter={parameter} />
+    <Parameter key={index} parameter={parameter} response={true} />
   ))
-  : <Parameter parameter={props.method.result} />
+  : <Parameter parameter={props.method.result} response={true} />
 }
