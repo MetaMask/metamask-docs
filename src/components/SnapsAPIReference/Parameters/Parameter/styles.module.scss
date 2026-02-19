@@ -7,8 +7,8 @@
 
 .parameter-type {
   color: var(--general-gray-dark);
-  font-style: italic;
-  font-size: 14px;
+  font-size: 11px;
+  font-family: var(--ifm-font-family-monospace);
 
   [data-theme='dark'] & {
     color: var(--general-gray);
