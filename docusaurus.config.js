@@ -326,6 +326,14 @@ const config = {
       },
     ],
     [
+      'docusaurus-pushfeedback',
+      {
+        project: '2o1q4nzpj8', // Replace with your PushFeedback project ID
+        buttonPosition: 'center-right',
+        modalPosition: 'sidebar-right',
+      },
+    ],
+    [
       'docusaurus-plugin-llms',
       {
         // Set docsDir to site root to collect from all directories
