@@ -21,7 +21,7 @@ This skill enables your agent to grant, redeem, inspect and revoke ERC-7710 dele
 :::warning Alpha version
 
 This CLI is in alpha version, and stores agent's private key in a local 
-JSON file (~/.gator-cli/). Please proceed with caution, and do not use 
+JSON file (`~/.gator-cli/`). Please proceed with caution, and do not use 
 it with accounts holding significant funds.
 
 :::
