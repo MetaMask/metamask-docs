@@ -240,11 +240,6 @@ Signature: `string` - Hex-encoded signature.
 </TabItem>
 </Tabs>
 
-### Deprecated methods
-
-Snaps can also implement [deprecated signing
-methods](/wallet/concepts/signing-methods/#deprecated-signing-methods) that some dapps might use.
-
 ## ERC-4337 methods
 
 :::flaskOnly

@@ -23,29 +23,6 @@ export const SERVICES_DASHBOARD_CONFIG: SidebarSectionDropdownProps = {
   defaultSection: 'services',
 }
 
-export const SDK_WALLET_CONFIG: SidebarSectionDropdownProps = {
-  sections: [
-    {
-      key: 'sdk',
-      label: 'SDK',
-      title: 'MetaMask SDK',
-      description: 'Connect to MetaMask extension and mobile',
-      path: '/sdk/',
-      pathPattern: '/sdk',
-    },
-    {
-      key: 'wallet',
-      label: 'Wallet API',
-      title: 'Wallet API',
-      description: 'Connect to MetaMask extension only',
-      path: '/wallet/',
-      pathPattern: '/wallet',
-    },
-  ],
-  dropdownLabel: 'Product:',
-  defaultSection: 'sdk',
-}
-
 export const SNAPS_CONFIG: SidebarStaticTitleProps = {
   title: 'Snaps',
   pathPattern: '/snaps',

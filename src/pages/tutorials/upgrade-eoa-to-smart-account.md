@@ -1,14 +1,14 @@
 ---
 title: Upgrade an EOA to a smart account
-description: Upgrade a MetaMask EOA to a smart account using MetaMask SDK and Wagmi.
+description: Upgrade a MetaMask EOA to a smart account using MetaMask Connect and Wagmi.
 image: 'img/tutorials/tutorials-banners/upgrade-eoa-to-smart-account.png'
-tags: [metamask sdk, wagmi, EOA, smart account, EIP-7702, EIP-5792]
+tags: [MetaMask Connect, wagmi, EOA, smart account, EIP-7702, EIP-5792]
 date: Aug 22, 2025
 author: MetaMask Developer Relations
 discourseTopicId: 2614
 ---
 
-This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/wallet/how-to/send-transactions/send-batch-transactions/#about-atomic-batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
+This tutorial walks you through upgrading a MetaMask externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts) via [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702), and sending an [atomic batch transaction](/sdk/evm/connect/guides/send-transactions/batch-transactions) via [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
 You will use a provided template, which sets up MetaMask SDK with a [Next.js](https://nextjs.org/docs) and [Wagmi](https://wagmi.sh/) dapp.
 
 ## Prerequisites
@@ -63,7 +63,7 @@ Add a `NEXT_PUBLIC_INFURA_API_KEY` environment variable, replacing `<YOUR-API-KE
 NEXT_PUBLIC_INFURA_API_KEY=<YOUR-API-KEY>
 ```
 
-In `src/providers/AppProvider.tsx`, configure the Wagmi [MetaMask SDK connector](https://wagmi.sh/react/api/connectors/metaMask) using your Infura API key:
+In `src/providers/AppProvider.tsx`, configure the Wagmi [MetaMask connector](https://wagmi.sh/react/api/connectors/metaMask) using your Infura API key:
 
 ```tsx title="AppProvider.tsx"
 "use client";
@@ -89,7 +89,7 @@ import { metaMask } from "wagmi/connectors";
 
 ### 3. Create a connect and disconnect button
 
-In `src/app/page.tsx`, use the `useAccount`, `useConnect`, and `useDisconnect` hooks from Wagmi, along with the MetaMask SDK connector, to create a button to connect and disconnect your MetaMask wallet, and display the connection status:
+In `src/app/page.tsx`, use the `useAccount`, `useConnect`, and `useDisconnect` hooks from Wagmi, along with the MetaMask connector, to create a button to connect and disconnect your MetaMask wallet, and display the connection status:
 
 ```tsx title="page.tsx"
 "use client";
@@ -200,7 +200,7 @@ When connected, the interface displays your connected wallet address:
 
 ### 4. Handle and send batch transactions
 
-In `src/app/page.tsx`, use the [`useSendCalls`](https://wagmi.sh/react/api/hooks/useSendCalls) hook from Wagmi to handle and send [atomic batch transactions](/wallet/how-to/send-transactions/send-batch-transactions).
+In `src/app/page.tsx`, use the [`useSendCalls`](https://wagmi.sh/react/api/hooks/useSendCalls) hook from Wagmi to handle and send [atomic batch transactions](/sdk/evm/connect/guides/send-transactions/batch-transactions).
 Also use React's `useState` hook to handle the transaction state.
 The following example sends 0.001 and 0.0001 ETH in a batch transaction.
 Replace `<YOUR-RECIPIENT-ADDRESS>` with recipient addresses of your choice:

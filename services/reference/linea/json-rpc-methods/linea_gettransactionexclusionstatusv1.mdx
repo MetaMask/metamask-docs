@@ -1,13 +1,72 @@
 ---
-title: linea_getTransactionExclusionStatusV1
-hide_title: true
-hide_table_of_contents: true
+title: Linea linea_getTransactionExclusionStatusV1
+sidebar_label: linea_getTransactionExclusionStatusV1
+description: Verify if a transaction exceeded data line limits on Linea.
 ---
 
-import ParserOpenRPC from "@site/src/components/ParserOpenRPC"
-import { NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc"
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
 
-<ParserOpenRPC
-  network={NETWORK_NAMES.linea}
-  method="linea_getTransactionExclusionStatusV1"
-/>
+# `linea_getTransactionExclusionStatusV1`
+
+Checks if a transaction was rejected for exceeding data line limits, preventing the prover from generating a proof to be included in a block.
+
+Rejected transaction data is only available within seven days of the transaction attempt. Querying older transactions returns a null response.
+
+## Parameters
+
+- `transactionHash`: [_Required_] A string representing the hash (32 bytes) of a transaction.
+
+## Returns
+
+A transaction exclusion object, or `null` if the transaction was not excluded or the data has been purged.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://linea-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "linea_getTransactionExclusionStatusV1", "params": ["0x526e56101cf39c1e717cef9cedf6fdddb42684711abda35bae51136dbb350ad7"], "id": 1}'
+```
+
+  </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://linea-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "linea_getTransactionExclusionStatusV1", "params": ["0x526e56101cf39c1e717cef9cedf6fdddb42684711abda35bae51136dbb350ad7"], "id": 1}'
+```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+```JSON
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "txHash": "0x526e56101cf39c1e717cef9cedf6fdddb42684711abda35bae51136dbb350ad7",
+    "from": "0x4d144d7b9c96b26361d6ac74dd1d8267edca4fc2",
+    "nonce": "0x64",
+    "txRejectionStage": "SEQUENCER",
+    "reasonMessage": "Transaction line count for module ADD=402 is above the limit 70",
+    "blockNumber": "0x3039",
+    "timestamp": "2024-08-22T09:18:51Z"
+  }
+}
+```
+
+  </TabItem>
+</Tabs>

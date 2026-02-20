@@ -47,8 +47,38 @@ export const EMBEDDED_WALLETS_SUBNAV_CONFIG: SubNavBarConfig = {
   ],
 }
 
+export const SDK_SUBNAV_CONFIG: SubNavBarConfig = {
+  pathPattern: '/sdk',
+  sectionName: 'MetaMask Connect',
+  links: [
+    {
+      key: 'overview',
+      label: 'Overview',
+      path: '/sdk',
+    },
+    {
+      key: 'multichain',
+      label: 'Multichain',
+      path: '/sdk/multichain',
+    },
+    {
+      key: 'evm',
+      label: 'EVM',
+      path: '/sdk/evm',
+    },
+    {
+      key: 'solana',
+      label: 'Solana',
+      path: '/sdk/solana',
+    },
+  ],
+}
+
 // Array of all sub nav configs for easy iteration
-export const ALL_SUBNAV_CONFIGS = [EMBEDDED_WALLETS_SUBNAV_CONFIG]
+export const ALL_SUBNAV_CONFIGS = [
+  EMBEDDED_WALLETS_SUBNAV_CONFIG,
+  SDK_SUBNAV_CONFIG,
+]
 
 // Helper function to get config for current path
 export function getSubNavConfigForPath(pathname: string): SubNavBarConfig | null {
