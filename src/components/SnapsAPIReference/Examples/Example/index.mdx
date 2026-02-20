@@ -1,9 +1,8 @@
-import Markdown from 'react-markdown';
 import CodeBlock from '@theme/CodeBlock'
 
-### {props.example.title ? props.example.title : `Example ${props.index}`}
+{!props.only && <h3>{props.example.title ? props.example.title : `Example ${props.index}`}</h3>}
 
-<CodeBlock language="json">
+<CodeBlock language={props.example.language}>
   {props.example.content}
 </CodeBlock>
 
