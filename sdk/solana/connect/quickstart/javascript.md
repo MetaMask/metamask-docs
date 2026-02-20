@@ -6,8 +6,8 @@ keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK]
 
 # Connect to Solana using MetaMask Connect
 
-Get started with MetaMask Connect in your JavaScript dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
+This quickstart gets you up and running with MetaMask Connect for Solana in a JavaScript dapp.
+You can [download the template](#set-up-using-a-template) to start quickly, or [set up manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">

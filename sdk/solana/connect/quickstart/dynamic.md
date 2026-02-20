@@ -7,9 +7,9 @@ keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 
 # Connect to Solana using Dynamic SDK
 
-Get started with MetaMask Connect and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
-You can use MetaMask Connect features directly within Dynamic SDK.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connects](#set-up-manually) in an existing dapp.
+This quickstart gets you up and running with MetaMask Connect for Solana inside [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
+Dynamic handles wallet discovery and connection UI, and MetaMask Connect adds reliable cross-platform support for MetaMask.
+You can [download the template](#set-up-using-a-template) to start quickly, or [set up manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
   <a href="https://metamask-dynamic-demo.vercel.app/" target="_blank">

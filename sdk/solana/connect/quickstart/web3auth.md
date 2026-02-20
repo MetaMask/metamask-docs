@@ -7,10 +7,8 @@ keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
 
 # Connect to Solana using Embedded Wallets SDK
 
-Get started with MetaMask Connect and [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets),
-enabling users to sign in with an email or social media account.
-You can use MetaMask Connect features directly within Embedded Wallets SDK.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
+This quickstart gets you up and running with MetaMask Connect for Solana inside [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets), enabling users to sign in with an email or social media account.
+You can [download the template](#set-up-using-a-template) to start quickly, or [set up the SDKs manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
   <a href="https://metamask-web3auth-demo.vercel.app/" target="_blank">

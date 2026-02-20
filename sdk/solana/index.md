@@ -11,9 +11,9 @@ import CardList from '@site/src/components/CardList'
 [Solana](https://solana.com/) is a high-performance network that provides fast transaction speeds and low fees.
 Connect to Solana in MetaMask using `@metamask/connect-solana`.
 
-## Wallet Standard compatible
+The Solana client is fully compatible with the [Wallet Standard](https://github.com/wallet-standard/wallet-standard), so MetaMask appears as a Solana wallet in any dapp using `@solana/wallet-adapter` — users connect the same way they would with Phantom or Solflare.
 
-The Solana client provides a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet, so it integrates seamlessly with the Solana wallet adapter ecosystem.
+## Quick example
 
 ```typescript
 import { createSolanaClient } from '@metamask/connect-solana';
@@ -35,8 +35,7 @@ await client.registerWallet();
 const wallet = client.getWallet();
 ```
 
-**What you get:** MetaMask appears as a Solana wallet in any dapp using `@solana/wallet-adapter`.
-Users connect the same way they would with Phantom or Solflare.
+The SDK handles platform detection, relay connections, and session persistence automatically — you just work with the wallet.
 
 ## Get started
 

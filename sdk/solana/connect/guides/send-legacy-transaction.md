@@ -3,11 +3,11 @@ import TabItem from '@theme/TabItem';
 
 # Send a legacy transaction
 
-Solana supports [legacy transactions and versioned transactions](https://solana.com/developers/guides/advanced/versions).
-Unlike versioned transactions, legacy transactions cannot include Address Lookup Tables, so they are capped at 32 addresses per transaction.
+Solana [legacy transactions](https://solana.com/developers/guides/advanced/versions) are the simpler of Solana's two transaction formats.
+They don't support Address Lookup Tables and are capped at 32 addresses per transaction, but they work well for straightforward operations like transfers.
 
-After connecting to MetaMask, your dapp can prompt a user to sign and send one or more Solana legacy transactions.
-See the [Solana documentation](https://solana.com/docs/core/transactions) for more information about Solana transactions and how to create them.
+This guide shows you how to sign and send legacy transactions through MetaMask.
+See the [Solana documentation](https://solana.com/docs/core/transactions) for more background on Solana transactions.
 
 ## Sign and send a transaction
 

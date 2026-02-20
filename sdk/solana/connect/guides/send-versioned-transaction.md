@@ -3,10 +3,9 @@ import TabItem from '@theme/TabItem';
 
 # Send a versioned transaction
 
-Solana supports [legacy transactions and versioned transactions](https://solana.com/developers/guides/advanced/versions).
-Unlike legacy transactions, versioned transactions (`v0`) can include [Address Lookup Tables](https://solana.com/developers/guides/advanced/lookup-tables) (ALTs or Address LUTs), enabling you to efficiently load up to 256 addresses in a single transaction.
+Solana [versioned transactions](https://solana.com/developers/guides/advanced/versions) (`v0`) support [Address Lookup Tables](https://solana.com/developers/guides/advanced/lookup-tables), which let you reference up to 256 addresses in a single transaction — useful for complex operations that would exceed the limits of legacy transactions.
 
-After connecting to MetaMask, your dapp can prompt a user to sign and send a Solana versioned transaction.
+This guide shows you how to create, sign, and send versioned transactions through MetaMask.
 
 ## Create a versioned transaction
 

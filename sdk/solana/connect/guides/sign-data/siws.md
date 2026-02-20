@@ -4,8 +4,7 @@ description: Enable your users to Sign in with Solana.
 
 # Sign in with Solana
 
-You can set up [Sign-In with Solana (SIWS)](https://docs.siws.xyz/) to enable users to easily
-sign in to your dapp by authenticating with their MetaMask wallet.
+[Sign-In with Solana (SIWS)](https://docs.siws.xyz/) lets users sign in to your dapp by authenticating with their MetaMask wallet, instead of a traditional username and password.
 
 <p align="center">
     <img height="500" src={require("../../_assets/siwe.png").default} alt="Sign-in with Ethereum request" class="appScreen" />
