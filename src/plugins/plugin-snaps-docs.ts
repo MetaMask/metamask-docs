@@ -3,7 +3,7 @@ import { mkdir, writeFile } from 'fs/promises'
 import { LoadContext, Plugin } from '@docusaurus/types'
 
 // TODO: Update to `latest`.
-export const SNAPS_RPC_URL = 'https://metamask.github.io/snaps/schema/staging/schema.json'
+export const SNAPS_RPC_URL = 'http://localhost:3000/schema.json'
 export const SNAPS_REF_PATH = 'snaps/reference/snaps-api'
 
 export default function useSnapsDocsPlugin(context: LoadContext): Plugin {
