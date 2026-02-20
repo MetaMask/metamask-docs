@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Manage user accounts
 
 Connect and manage user wallet sessions in your Vanilla JavaScript or Wagmi dapp.
-With MetaMask Connect, you can:
+With MetaMask Connect:
 
 - **Connect users' wallets** to your dapp.
 - **Access user accounts** (addresses).
@@ -28,11 +28,11 @@ With MetaMask Connect, you can:
 
 ## Connect wallet
 
-With Vanilla JavaScript, you can implement user authentication directly using the
+With Vanilla JavaScript, implement user authentication directly using the
 [`eth_requestAccounts`](../reference/json-rpc-api/index.md) RPC method
 and [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event.
 
-With Wagmi, you can use provided hooks for handling wallet connections.
+With Wagmi, use the provided hooks for handling wallet connections.
 
 <Tabs>
 <TabItem value="Vanilla JavaScript">
@@ -176,7 +176,7 @@ function WatchAccount() {
 
 ## Connect and sign
 
-You can use MetaMask Connect's [`connectAndSign`](../reference/methods.md#connectandsign) method to request wallet access and sign a message in a single user interaction.
+Use MetaMask Connect's [`connectAndSign`](../reference/methods.md#connectandsign) method to request wallet access and sign a message in a single user interaction.
 For example:
 
 ```js

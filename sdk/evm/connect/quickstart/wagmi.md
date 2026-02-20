@@ -8,7 +8,7 @@ keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp, Wallet SDK]
 # Connect to MetaMask using JavaScript + Wagmi
 
 Get started with MetaMask Connect in a JavaScript and Wagmi dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <!-- a href="https://metamask-wagmi-demo.vercel.app/" target="_blank" -->
@@ -42,8 +42,8 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-   Alternatively, you can use `git clone`, which will download the entire repository.
-   To do so, clone the MetaMask Connect examples repository and navigate into the `quickstarts/wagmi` directory:
+   Alternatively, use `git clone` to download the entire repository.
+   Clone the MetaMask Connect examples repository and navigate into the `quickstarts/wagmi` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -154,7 +154,7 @@ export const ConnectButton = () => {
 }
 ```
 
-Once you've added the connect button, you can test your dapp by running `pnpm run dev`.
+After adding the connect button, test your dapp by running `pnpm run dev`.
 
 ## Production readiness
 
@@ -163,7 +163,7 @@ For production deployments, it's important to use reliable RPC providers instead
 We recommend using services like [MetaMask Developer](https://developer.metamask.io/) to ensure better reliability and performance.
 :::
 
-You can configure your RPC endpoints in the Wagmi configuration as follows, replacing `<YOUR-API-KEY>` with your [Infura API key](/developer-tools/dashboard/get-started/create-api):
+Configure your RPC endpoints in the Wagmi configuration as follows, replacing `<YOUR-API-KEY>` with your [Infura API key](/developer-tools/dashboard/get-started/create-api):
 
 ```jsx
 const config = createConfig({
@@ -177,7 +177,7 @@ const config = createConfig({
 
 ## Next steps
 
-After completing the basic setup, you can follow these guides to add your own functionality:
+After completing the basic setup, follow these guides to add your own functionality:
 
 - [Manage user accounts](../guides/manage-user-accounts.md)
 - [Manage networks](../guides/manage-networks.md)

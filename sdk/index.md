@@ -9,7 +9,7 @@ import CardList from '@site/src/components/CardList'
 # Seamlessly connect to the MetaMask wallet
 
 MetaMask Connect enables a fast, reliable connection from your dapp to the MetaMask extension and MetaMask Mobile.
-With a single integration, you can onboard users and interact with their accounts across desktop browsers, mobile browsers, and native apps.
+With a single integration, onboard users and interact with their accounts across desktop browsers, mobile browsers, and native apps.
 
 It replaces the previous MetaMask SDK with a ground-up rewrite built on the [Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
 The SDK automatically detects the user's environment and picks the best connection method — whether that's communicating directly with the extension, scanning a QR code, or deeplinking to MetaMask Mobile.
@@ -65,7 +65,7 @@ This is the fastest path if you already have a working dapp and want to add Meta
 Use [`@metamask/connect-multichain`](/sdk/multichain) directly for the full [Multichain API](/sdk/multichain).
 This gives you more control — you work with scopes and `wallet_invokeMethod` rather than per-chain RPC — and unlocks the best experience for multichain dapps with a single connection prompt for all ecosystems.
 
-You can also **start with Option A and migrate to Option B** over time.
+Also **start with Option A and migrate to Option B** over time.
 The ecosystem clients are built on the multichain client under the hood, so they share the same transport and session infrastructure.
 
 ### Packages

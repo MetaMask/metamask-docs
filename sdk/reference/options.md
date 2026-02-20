@@ -8,7 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # MetaMask Connect options
 
-When you create a MetaMask Connect client, you can pass configuration options to control how your dapp identifies itself, which networks it supports, and how connections behave.
+When you create a MetaMask Connect client, pass configuration options to control how your dapp identifies itself, which networks it supports, and how connections behave.
 This page documents the available options for each client type.
 
 ## Common options
@@ -97,7 +97,7 @@ Chain IDs follow the [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/C
 
 :::caution
 Use [Infura allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist) to protect against other people submitting requests to your API key.
-You can restrict interactions to specific addresses, origins, user agents, and request methods.
+Restrict interactions to specific addresses, origins, user agents, and request methods.
 :::
 
 ## EVM client options

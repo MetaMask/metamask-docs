@@ -38,7 +38,7 @@ The SDK handles platform detection, relay connections, and session persistence a
 ## Get started
 
 MetaMask Connect is available in a variety of ways to make integration as easy as possible.
-You can access it directly via npm, through popular developer libraries like Wagmi, or as part of popular convenience libraries:
+Access it directly via npm, through popular developer libraries like Wagmi, or as part of popular convenience libraries:
 
 <CardList
 items={[
@@ -74,7 +74,7 @@ description: 'Set up Dynamic SDK in a Next.js dapp. Use MetaMask Connect feature
 },
 {
 href: '/sdk/evm/connect/quickstart/web3auth',
-title: 'Embedded Wallet SDK (fka Web3Auth)',
+title: 'Embedded Wallet SDK (formerly Web3Auth)',
 description: 'Set up Web3Auth SDK in a Next.js dapp. Use MetaMask Connect features with Web3Auth.',
 },
 {
@@ -96,9 +96,9 @@ The EVM client works seamlessly with popular Ethereum libraries:
 | [ethers.js](https://docs.ethers.org/) | Pass `client.getProvider()` to `BrowserProvider`  |
 | [web3.js](https://web3js.org/)        | Pass `client.getProvider()` to `Web3` constructor |
 
-## Using with ethers.js and Solana together
+## Use EVM and Solana together
 
-If your dapp supports both EVM and Solana, you can use both the EVM and Solana clients.
+If your dapp supports both EVM and Solana, use both the EVM and Solana clients.
 They share the same underlying multichain session — the user only approves once.
 
 See the [Multichain documentation](/sdk/multichain) for more details on cross-ecosystem connections.

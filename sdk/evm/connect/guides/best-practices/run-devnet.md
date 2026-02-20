@@ -4,8 +4,8 @@ description: Configure and connect to a Hardhat development network.
 
 # Run a development network
 
-You can run a personal Ethereum development network using [Hardhat](https://hardhat.org/hardhat-network/docs/overview#hardhat-network),
-which allows you to develop a dapp in a secure test environment.
+Run a personal Ethereum development network using [Hardhat](https://hardhat.org/hardhat-network/docs/overview#hardhat-network)
+to develop a dapp in a secure test environment.
 
 :::note
 When using a local development blockchain such as Hardhat Network or
@@ -64,11 +64,11 @@ Follow these steps to connect MetaMask to Hardhat Network.
 
    Hardhat automatically gives each of your first 20 accounts 10000 test ether (you can modify
    these numbers in the [`accounts`](https://hardhat.org/hardhat-network/docs/reference#accounts)
-   configuration), which makes it easy to start development.
+   configuration), to quickly start development.
 
 4. Run `npx hardhat node` to run Hardhat Network and expose a JSON-RPC interface.
 
-5. You can now connect MetaMask to your Hardhat Network RPC URL, `http://127.0.0.1:8545/`.
+5. Connect MetaMask to your Hardhat Network RPC URL, `http://127.0.0.1:8545/`.
    In the MetaMask extension:
 
    1. In the upper left corner, select the network you're currently connected to.

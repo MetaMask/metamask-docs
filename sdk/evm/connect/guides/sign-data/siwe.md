@@ -4,7 +4,7 @@ description: Enable your users to sign in with Ethereum.
 
 # Sign in with Ethereum
 
-You can set up [Sign-In with Ethereum (SIWE)](https://docs.siwe.xyz/) to enable users to easily
+Set up [Sign-In with Ethereum (SIWE)](https://docs.siwe.xyz/) to let users
 sign in to your dapp by authenticating with their MetaMask wallet.
 
 MetaMask supports the SIWE standard message format as specified in [ERC-4361](https://eips.ethereum.org/EIPS/eip-4361).
@@ -26,7 +26,7 @@ The user must explicitly select to proceed, accepting the risk of a phishing att
 :::caution important
 MetaMask displays a prominent warning for mismatched domains, but does **not** block users from
 bypassing the warning and accepting the sign-in request.
-This is to not break existing dapps that may have use cases for mismatched domains.
+This avoids breaking existing dapps that may have use cases for mismatched domains.
 :::
 
 <div class="imgRow">

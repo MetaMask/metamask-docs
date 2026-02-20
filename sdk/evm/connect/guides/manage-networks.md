@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Manage networks
 
 Manage networks in your Vanilla JavaScript or Wagmi dapp.
-With MetaMask Connect, you can:
+With MetaMask Connect:
 
 - **Detect the current network** and monitor network changes.
 - **Switch between networks** programmatically.
@@ -25,11 +25,11 @@ With MetaMask Connect, you can:
 
 ## Detect and switch networks
 
-Wtih Vanilla JavaScript, you can implement network management directly using the
+With Vanilla JavaScript, implement network management directly using the
 [`eth_chainId`](../reference/json-rpc-api/index.md) RPC method and
 [`chainChanged`](../reference/provider-api.md#chainchanged) provider event.
 
-With Wagmi, you can use provided hooks for several network-related operations.
+With Wagmi, use the provided hooks for several network-related operations.
 
 Start by detecting the current network:
 

@@ -25,11 +25,11 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
 
 #### Parameters
 
-- `optionalScopes`: `object` - (Optional) [CAIP-217](https://standards.chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet can support in order to be used with this dapp.
+- `optionalScopes`: `object` - (Optional) [CAIP-217](https://standards.chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet can support for use with this dapp.
   If scopes are specified, only the following properties are supported:
   - `references`: `array` - (Optional) A list of references to specific blockchains for the namespace of this scope.
     This property can only be used if the scope namespace does not already specify the blockchain.
-    For example, you can use this property for an `"eip155"` scope, but not an `"eip155:10"` scope.
+    For example, use this property for an `"eip155"` scope, but not an `"eip155:10"` scope.
     
     References are mainly used when there would otherwise be duplicate scopes.
   - `methods`: `array` - A list of JSON-RPC methods the wallet must support to be compatible with the dapp.
@@ -305,7 +305,7 @@ changes to a session.
 ### `wallet_notify`
 
 Notifies the dapp of events or state changes related to a specific, previously authorized network.
-This event is defined in [CAIP-319](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-319.md).
+[CAIP-319](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-319.md) defines this event.
 
 :::note
 MetaMask doesn't support session IDs.
@@ -346,7 +346,7 @@ MetaMask doesn't support session IDs.
 ### `wallet_sessionChanged`
 
 Notifies the dapp of updates to the active connection's authorization scopes.
-This method is defined in [CAIP-311](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-311.md).
+[CAIP-311](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-311.md) defines this method.
 
 :::note
 MetaMask doesn't support session IDs.

@@ -16,7 +16,7 @@ The Solana client is fully compatible with the [Wallet Standard](https://github.
 ## Quick example
 
 ```typescript
-import { createSolanaClient } from '@metamask/connect-solana';
+import { createSolanaClient } from '@metamask/connect-solana'
 
 const client = await createSolanaClient({
   dapp: { name: 'My DApp', url: 'https://mydapp.com' },
@@ -26,13 +26,13 @@ const client = await createSolanaClient({
       devnet: 'https://api.devnet.solana.com',
     },
   },
-});
+})
 
 // Register as a discoverable wallet
-await client.registerWallet();
+await client.registerWallet()
 
 // Or get the wallet instance for direct use
-const wallet = client.getWallet();
+const wallet = client.getWallet()
 ```
 
 The SDK handles platform detection, relay connections, and session persistence automatically — you just work with the wallet.
@@ -82,9 +82,9 @@ Using `@metamask/connect-solana` with `registerWallet()` ensures MetaMask is alw
 
 See the [Wallet Adapter guide](./connect/guides/use-wallet-adapter.md) for more information.
 
-## Using with EVM together
+## Use with EVM
 
-If your dapp supports both EVM and Solana, you can use both the EVM and Solana clients.
+If your dapp supports both EVM and Solana, use both the EVM and Solana clients.
 They share the same underlying multichain session — the user only approves once.
 
 See the [Multichain documentation](/sdk/multichain) for more details on cross-ecosystem connections.

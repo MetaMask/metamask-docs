@@ -12,14 +12,14 @@ manually](https://support.metamask.io/nfts/nft-tokens-in-your-metamask-wallet/).
 
 Manually adding tokens involves the user interacting with contract addresses, and is error-prone.
 
-You can improve the security and experience of displaying your
+Improve the security and experience of displaying your
 [ERC-20 token](#display-an-erc-20-token) or users' [NFTs](#display-nfts) in MetaMask by using the
 [`wallet_watchAsset`](../../reference/json-rpc-api/index.md) RPC method.
 `wallet_watchAsset` provides a friendly interface that prompts users to register tokens to their
 MetaMask wallet, without having to interact with contract addresses.
 
 :::tip
-With `wallet_watchAsset`, you can prompt users to add their ERC-20 tokens and NFTs even when they
+With `wallet_watchAsset`, prompt users to add their ERC-20 tokens and NFTs even when they
 have token autodetection or NFT autodetection disabled.
 
 Also, token autodetection only detects ERC-20 tokens on
@@ -35,7 +35,7 @@ extension (not on mobile).
 
 ## Display an ERC-20 token
 
-To prompt users to add an ERC-20 token, you can add something like the following to your project script:
+To prompt users to add an ERC-20 token, add something like the following to your project script:
 
 ```javascript
 import { createEVMClient } from '@metamask/connect-evm'
@@ -108,7 +108,7 @@ and the [MIP proposal lifecycle](https://github.com/MetaMask/metamask-improvemen
 for more information.
 :::
 
-You can prompt users to add a single NFT or multiple NFTs using `wallet_watchAsset`.
+Prompt users to add a single NFT or multiple NFTs using `wallet_watchAsset`.
 The add NFT interfaces look like the following:
 
 <div class="imgRow">

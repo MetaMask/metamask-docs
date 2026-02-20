@@ -7,7 +7,7 @@ keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK]
 # Connect to Solana using MetaMask Connect
 
 This quickstart gets you up and running with MetaMask Connect for Solana in a JavaScript dapp.
-You can [download the template](#set-up-using-a-template) to start quickly, or [set up manually](#set-up-manually) in an existing project.
+[Download the template](#set-up-using-a-template) to start quickly, or [set up manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
@@ -42,8 +42,8 @@ You can [download the template](#set-up-using-a-template) to start quickly, or [
 
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-   Alternatively, you can use `git clone`, which will download the entire repository.
-   To do so, clone the MetaMask Connect examples repository and navigate into the `quickstarts/javascript` directory:
+   Alternatively, use `git clone` to download the entire repository.
+   Clone the MetaMask Connect examples repository and navigate into the `quickstarts/javascript` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -91,7 +91,7 @@ npm install @metamask/connect-solana
 
 ### 2. Initialize MetaMask Connect
 
-The following are examples of using MetaMask Connect in various JavaScript environments:
+The following examples show how to use MetaMask Connect in various JavaScript environments:
 
 ```javascript
 import { createSolanaClient } from '@metamask/connect-solana'

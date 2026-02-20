@@ -71,7 +71,7 @@ if (ethAccounts.length > 0) {
 }
 ```
 
-You can target a different chain by changing the `scope` — for example, `eip155:137` for Polygon:
+Target a different chain by changing the `scope` — for example, `eip155:137` for Polygon:
 
 ```typescript
 const polAccounts = session.sessionScopes['eip155:137']?.accounts || []

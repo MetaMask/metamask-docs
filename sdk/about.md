@@ -50,7 +50,7 @@ You don't need to manage any of this — it's all handled automatically. Here's 
 | **Session management** | Handled automatically per-client                                                                                                                                                                                                          | Full control over unified session                                         |
 | **Best for**           | Existing dapps that want MetaMask Connect benefits with minimal code changes                                                                                                                                                              | New or multichain-native dapps that want the best possible cross-chain UX |
 
-You can also **start with Option A and migrate to Option B** over time.
+Also **start with Option A and migrate to Option B** over time.
 The ecosystem clients are built on the multichain client, so they share the same transport and session infrastructure under the hood.
 
 ## Wallet connector library integrations

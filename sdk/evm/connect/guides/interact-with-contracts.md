@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # Interact with smart contracts
 
 Interact with smart contracts in your JavaScript dapp.
-With MetaMask Connect, you can:
+With MetaMask Connect:
 
 - **Read data** from smart contracts.
 - **Write data** to smart contracts.
@@ -305,7 +305,7 @@ function TokenBalance() {
 
 ### Batch contract reads
 
-With Wagmi, you can perform multiple contract read operations using the [`useReadContracts`](https://wagmi.sh/react/api/hooks/useReadContracts) hook.
+With Wagmi, perform multiple contract read operations using the [`useReadContracts`](https://wagmi.sh/react/api/hooks/useReadContracts) hook.
 This hook batches contract calls internally, returning the results as an array.
 For example:
 

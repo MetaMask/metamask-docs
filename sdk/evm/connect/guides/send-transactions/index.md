@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Send transactions
 
 Handle EVM transactions in your JavaScript dapp.
-With MetaMask Connect, you can:
+With MetaMask Connect:
 
 - **Send transactions**.
 - **Track transaction status** in real time.

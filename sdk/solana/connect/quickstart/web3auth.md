@@ -8,7 +8,7 @@ keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
 # Connect to Solana using Embedded Wallets SDK
 
 This quickstart gets you up and running with MetaMask Connect for Solana inside [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets), enabling users to sign in with an email or social media account.
-You can [download the template](#set-up-using-a-template) to start quickly, or [set up the SDKs manually](#set-up-manually) in an existing project.
+[Download the template](#set-up-using-a-template) to start quickly, or [set up the SDKs manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
   <a href="https://metamask-web3auth-demo.vercel.app/" target="_blank">
@@ -43,8 +43,8 @@ You can [download the template](#set-up-using-a-template) to start quickly, or [
 
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-   Alternatively, you can use `git clone`, which will download the entire repository.
-   To do so, clone the MetaMask Connect examples repository and navigate into the `partners/web3auth` directory:
+   Alternatively, use `git clone` to download the entire repository.
+   Clone the MetaMask Connect examples repository and navigate into the `partners/web3auth` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -138,7 +138,7 @@ In `.env.local`, add a `NEXT_PUBLIC_WEB3AUTH_CLIENT_ID` environment variable, re
 NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<YOUR-CLIENT-ID>
 ```
 
-You can now test your dapp by running `pnpm run dev`.
+Test your dapp by running `pnpm run dev`.
 
 ## Usage
 

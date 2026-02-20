@@ -9,9 +9,9 @@ import TabItem from "@theme/TabItem";
 
 # Use deeplinks
 
-You can use deeplinks to directly route your users to specific, pre-configured functions inside the MetaMask mobile app.
-For example, you can create a deeplink that lets users make one-click payments with a preset token, recipient, and amount.
-You can also convert deeplinks to QR codes, so users can scan them with a mobile device.
+Use deeplinks to directly route your users to specific, pre-configured functions inside the MetaMask mobile app.
+For example, create a deeplink that lets users make one-click payments with a preset token, recipient, and amount.
+Convert deeplinks to QR codes so users can scan them with a mobile device.
 
 If a user doesn't have the mobile app installed, deeplinks route the user to a landing page where they can download the app.
 

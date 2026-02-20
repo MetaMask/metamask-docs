@@ -3,7 +3,7 @@
 Solana's [Wallet Adapter](https://github.com/solana-labs/wallet-adapter) is the standard way for Solana dapps to discover and connect to wallets.
 This guide shows you how to set it up with MetaMask in a React dapp.
 
-You can use the [`create-solana-dapp`](https://github.com/solana-foundation/create-solana-dapp) CLI tool to generate a new project with the Wallet Adapter built in, or follow the steps below to add it to an existing dapp.
+Use the [`create-solana-dapp`](https://github.com/solana-foundation/create-solana-dapp) CLI tool to generate a new project with the Wallet Adapter built in, or follow the steps below to add it to an existing dapp.
 
 :::info
 See the [Solana documentation](https://solana.com/developers/cookbook/wallets/connect-wallet-react) for more information.
@@ -25,7 +25,7 @@ npm install @solana/web3.js       \
 
 ### 2. Create the Solana provider
 
-Create a `SolanaProvider` that will be used to provide the Solana context to the application:
+Create a `SolanaProvider` to provide the Solana context to the application:
 
 ```typescript title='components/SolanaProvider.tsx'
 'use client';
