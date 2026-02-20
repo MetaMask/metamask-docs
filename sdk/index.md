@@ -6,32 +6,24 @@ keywords: [connect, sdk, integrate, dapp, multichain, evm, solana]
 
 import CardList from '@site/src/components/CardList'
 
-# MetaMask Connect
+# Seamlessly connect to the MetaMask wallet
 
-MetaMask Connect is a unified SDK for dapps to connect to MetaMask across all platforms and ecosystems.
-It replaces the previous MetaMask SDK with a ground-up rewrite built on the [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
+MetaMask Connect enables a fast, reliable connection from your dapp to the MetaMask extension and MetaMask Mobile.
+With a single integration, you can onboard users and interact with their accounts across desktop browsers, mobile browsers, and native apps.
 
-A single integration handles:
+It replaces the previous MetaMask SDK with a ground-up rewrite built on the [Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
+The SDK automatically detects the user's environment and picks the best connection method — whether that's communicating directly with the extension, scanning a QR code, or deeplinking to MetaMask Mobile.
 
-- **Desktop browser with Extension installed** — communicates directly with the extension
-- **Desktop browser without Extension** — connects to MetaMask Mobile via QR code + relay
-- **Mobile native browser** — connects to MetaMask Mobile via deeplink + relay
-- **In-app browser (inside MetaMask Mobile)** — direct bridge, no relay needed
-- **React Native apps** — deeplink + relay to MetaMask Mobile
+## Why use MetaMask Connect?
 
-The dapp doesn't need to detect or handle any of this — the SDK figures out the right transport automatically.
+If the MetaMask extension is installed, standards like [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) handle wallet discovery well.
+But when the extension isn't available — on mobile, in a different browser, or on a new device — your users need another way in.
+MetaMask Connect fills that gap and gives you more:
 
-## Why not just EIP-6963?
-
-[EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) solves wallet discovery — it lets dapps find which wallets are available as injected providers (`window.ethereum`).
-That's useful, but it only works when the Extension is present in the same browser.
-
-MetaMask Connect gives you:
-
-1. **Remote connections** when the Extension isn't installed — mobile wallet connections via relay, replacing WalletConnect for MetaMask-specific flows with better stability and UX
-2. **Multichain session management** — request access to EVM + Solana (+ future ecosystems) in a single session, instead of connecting per-chain
-3. **Automatic session persistence** — sessions survive page reloads and new tabs without re-prompting the user
-4. **Cross-platform consistency** — same API whether connecting to Extension or Mobile
+1. **Cross-platform connections** — Reach users on any device. When the extension isn't available, the SDK connects to MetaMask Mobile through a relay, with no extra setup on your side.
+2. **Multichain sessions** — Request access to EVM and Solana (and future ecosystems) in a single connection, instead of connecting per chain.
+3. **Persistent sessions** — Sessions survive page reloads and new tabs, so users aren't prompted to reconnect.
+4. **Consistent API** — The same interface works whether the user connects through the extension or Mobile.
 
 ## Get started
 
@@ -57,42 +49,29 @@ description: 'Connect to Solana.',
 
 ## Integration options
 
-There are two ways to integrate, depending on how much you want to adopt:
+There are two ways to integrate, depending on what works best for your dapp:
 
 ### Option A: Ecosystem-specific clients (drop-in)
 
-Use [`@metamask/connect-evm`](/sdk/evm) and/or [`@metamask/connect-solana`](/sdk/solana) for a familiar developer experience with minimal changes to your existing code.
+Use [`@metamask/connect-evm`](/sdk/evm) and/or [`@metamask/connect-solana`](/sdk/solana) for a familiar experience with minimal changes to your existing code.
 
-- **EVM** — Provides an EIP-1193 compatible provider, so your existing `ethers.js`, `viem`, or `web3.js` code works as-is
-- **Solana** — Provides a Wallet Standard compatible wallet, so it integrates with the Solana wallet adapter ecosystem
+- **EVM** — Gives you an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) compatible provider, so your existing `ethers.js`, `viem`, or `web3.js` code works as-is.
+- **Solana** — Gives you a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet that plugs into the Solana wallet adapter ecosystem.
 
-### Option B: Multichain client (full API)
+This is the fastest path if you already have a working dapp and want to add MetaMask Connect.
 
-Use [`@metamask/connect-multichain`](/sdk/multichain) directly for the full Multichain API experience.
-This is more powerful but requires adapting your dapp to work with scopes and `wallet_invokeMethod` rather than traditional per-chain RPC.
+### Option B: Multichain client (full control)
 
-This is the path that unlocks the best UX for multichain dapps — a single connection prompt for all ecosystems.
+Use [`@metamask/connect-multichain`](/sdk/multichain) directly for the full [Multichain API](/sdk/multichain).
+This gives you more control — you work with scopes and `wallet_invokeMethod` rather than per-chain RPC — and unlocks the best experience for multichain dapps with a single connection prompt for all ecosystems.
 
-You can also **start with Option A and migrate to Option B** incrementally.
-The ecosystem clients are wrappers around the multichain client — they use the same transport, session, and relay infrastructure under the hood.
+You can also **start with Option A and migrate to Option B** over time.
+The ecosystem clients are built on the multichain client under the hood, so they share the same transport and session infrastructure.
 
-## Packages
+### Packages
 
-| Package | Purpose |
-|---------|---------|
-| [`@metamask/connect-evm`](https://www.npmjs.com/package/@metamask/connect-evm) | EVM client — EIP-1193 provider |
-| [`@metamask/connect-solana`](https://www.npmjs.com/package/@metamask/connect-solana) | Solana client — Wallet Standard |
-| [`@metamask/connect-multichain`](https://www.npmjs.com/package/@metamask/connect-multichain) | Core — full Multichain API |
-
-## Install
-
-```bash npm2yarn
-# For EVM dapps
-npm install @metamask/connect-evm
-
-# For Solana dapps
-npm install @metamask/connect-solana
-
-# For full multichain control
-npm install @metamask/connect-multichain
-```
+| Package                                                                                      | Purpose                         |
+| -------------------------------------------------------------------------------------------- | ------------------------------- |
+| [`@metamask/connect-evm`](https://www.npmjs.com/package/@metamask/connect-evm)               | EVM client — EIP-1193 provider  |
+| [`@metamask/connect-solana`](https://www.npmjs.com/package/@metamask/connect-solana)         | Solana client — Wallet Standard |
+| [`@metamask/connect-multichain`](https://www.npmjs.com/package/@metamask/connect-multichain) | Core — full Multichain API      |
