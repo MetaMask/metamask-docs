@@ -70,8 +70,8 @@ The ecosystem clients are built on the multichain client under the hood, so they
 
 ### Packages
 
-| Package                                                                                      | Purpose                         |
-| -------------------------------------------------------------------------------------------- | ------------------------------- |
-| [`@metamask/connect-evm`](https://www.npmjs.com/package/@metamask/connect-evm)               | EVM client — EIP-1193 provider  |
-| [`@metamask/connect-solana`](https://www.npmjs.com/package/@metamask/connect-solana)         | Solana client — Wallet Standard |
-| [`@metamask/connect-multichain`](https://www.npmjs.com/package/@metamask/connect-multichain) | Core — full Multichain API      |
+| Package                                                                                      | Purpose                                 |
+| -------------------------------------------------------------------------------------------- | --------------------------------------- |
+| [`@metamask/connect-evm`](https://www.npmjs.com/package/@metamask/connect-evm)               | EVM client — EIP-1193 provider          |
+| [`@metamask/connect-solana`](https://www.npmjs.com/package/@metamask/connect-solana)         | Solana client — Wallet Standard         |
+| [`@metamask/connect-multichain`](https://www.npmjs.com/package/@metamask/connect-multichain) | Multichain client — full Multichain API |
