@@ -43,55 +43,56 @@ function App() {
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IUseWeb3Auth } from '@web3auth/modal/react'
 ```
 
-#### initError
+#### `initError`
 
 `Error | null`
 
 Error that occurred during Web3Auth initialization.
 
-#### isConnected
+#### `isConnected`
 
 `boolean`
 
 Whether the user is connected to Web3Auth.
 
-#### isInitialized
+#### `isInitialized`
 
 `boolean`
 
 Whether Web3Auth has completed initialization.
 
-#### isInitializing
+#### `isInitializing`
 
 `boolean`
 
 Whether Web3Auth is currently initializing.
 
-#### provider
+#### `provider`
 
 `IProvider | null`
 
+
 Connected provider from Web3Auth.
 
-#### status
+#### `status`
 
 `string`
 
 Current status of the Web3Auth connection.
 
-#### web3Auth
+#### `web3auth`
 
 `Web3Auth`
 
 The Web3Auth instance.
 
-#### getPlugin
+#### `getPlugin`
 
 `(pluginName: PLUGIN_NAME) => IPlugin | null`
 

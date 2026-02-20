@@ -102,10 +102,9 @@ export default function LookupAPIPage() {
                 <code>verifier</code>
               </td>
               <td>
-                The verifier name can be found on your Web3Auth dashboard. To learn more about
-                verifiers, click{' '}
-                <a href="/docs/authentication" target="_blank" rel="noopener noreferrer">
-                  here
+                The verifier name can be found on your Embedded Wallets dashboard.{' '} 
+                <a href="/embedded-wallets/authentication" target="_blank" rel="noopener noreferrer">
+                  Learn more about verifiers
                 </a>
                 .
               </td>
@@ -124,7 +123,7 @@ export default function LookupAPIPage() {
                 <code>verifierId</code>
               </td>
               <td>
-                The verifier ID value. One of the ways to get it is via the response to the{' '}
+                The verifier identifier. Returned in response to the{' '}
                 <code>getUserInfo()</code> method.
               </td>
               <td>
@@ -141,7 +140,7 @@ export default function LookupAPIPage() {
               <td>
                 <code>web3AuthNetwork</code>
               </td>
-              <td>Name of the Web3Auth Network your project is deployed on.</td>
+              <td>Name of the Web3Auth (Embedded Wallets) network your project is deployed on.</td>
               <td>
                 <select
                   name="web3AuthNetwork"
@@ -161,7 +160,7 @@ export default function LookupAPIPage() {
                 <code>clientId</code>
               </td>
               <td>
-                The client ID for your project. This can also be found on the Web3Auth dashboard.
+                The client ID for your project. This can also be found on the Embedded Wallets dashboard.
               </td>
               <td>
                 <input

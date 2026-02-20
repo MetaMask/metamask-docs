@@ -73,11 +73,11 @@ export default function getSteps(
 
   steps.push(
     {
-      ...STEPS.whitelist,
+      ...STEPS.allowlist,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX,
         files[qsFileLinks.EW_PNP_REACT_NATIVE_APP_TSX],
-        'Whitelist bundle ID'
+        'Allowlist bundle ID'
       ),
     },
     {

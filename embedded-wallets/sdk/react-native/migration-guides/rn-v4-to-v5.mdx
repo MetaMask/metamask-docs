@@ -21,8 +21,8 @@ Please look at the [whitelabel](/embedded-wallets/sdk/react-native/advanced/whit
 <Tabs
   defaultValue="expo"
   values={[
-    { label: "Expo Managed Workflow", value: "expo" },
-    { label: "Bare React Native Workflow", value: "bare" },
+    { label: "Expo-managed workflow", value: "expo" },
+    { label: "Bare React Native workflow", value: "bare" },
   ]}
 >
 
@@ -62,7 +62,7 @@ import * as WebBrowser from '@toruslabs/react-native-web-browser'
 import EncryptedStorage from 'react-native-encrypted-storage'
 import Web3Auth, { LOGIN_PROVIDER, OPENLOGIN_NETWORK } from '@web3auth/react-native-sdk'
 
-const clientId = 'YOUR WEB3AUTH CLIENT ID'
+const clientId = '<YOUR WEB3AUTH CLIENT ID>'
 
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
   clientId,

@@ -13,7 +13,7 @@ npm install --save @solana/web3.js @web3auth/solana-provider
 
 Using `solana` as `chainNamespace` while initializing `web3auth` will provide a Solana provider as **`web3auth.provider`** after successful authentication.
 
-### Initializing and instantiating the Web3Auth SDK
+### Initializing and instantiating the Embedded Wallets SDK
 
 ```tsx
 import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
@@ -47,7 +47,7 @@ const solanaWallet = new SolanaWallet(provider)
 // Continue using the `solanaWallet`
 ```
 
-## Get Account and Balance
+## Get account and balance
 
 ```tsx
 import {
@@ -74,7 +74,7 @@ const connection = new Connection(connectionConfig.rpcTarget)
 const balance = await connection.getBalance(new PublicKey(accounts[0]))
 ```
 
-## Sign Transaction
+## Sign transaction
 
 ```tsx
 import {
@@ -111,7 +111,7 @@ const signedTx = await solanaWallet.signTransaction(transaction)
 console.log(signedTx.signature)
 ```
 
-## Sign All Transactions
+## Sign all transactions
 
 ```tsx
 import {
@@ -160,7 +160,7 @@ const signedTx = await solanaWallet.signAllTransactions([transaction1, transacti
 console.log(signedTx)
 ```
 
-## Sign and Send Transaction
+## Sign and Send transaction
 
 ```tsx
 import {
@@ -199,7 +199,7 @@ const { signature } = await solanaWallet.signAndSendTransaction(transaction)
 console.log(signature)
 ```
 
-## Sign Message
+## Sign message
 
 ```tsx
 import {
@@ -216,7 +216,7 @@ const result = await solanaWallet.signMessage(msg)
 console.log(result.toString())
 ```
 
-## Fetch User's Private Key
+## Fetch user's private key
 
 `solana_privateKey` is used to fetch the private key of the logged in user. It is only available for `in-app` adapters like `auth`.
 

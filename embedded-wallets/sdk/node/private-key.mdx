@@ -18,19 +18,21 @@ Private keys provide full control over user assets. Handle them securely:
 
 :::
 
-## Available Methods
+## Available methods
 
 The provider offers different methods to access private keys depending on your blockchain needs:
 
 | Method              | Description                    | Use Case                                  |
 | ------------------- | ------------------------------ | ----------------------------------------- |
-| `private_key`       | Ethereum-formatted private key | EVM chains (Ethereum, Polygon, BSC, etc.) |
+| `private_key`       | Ethereum-formatted private key | EVM chains (for example, Ethereum, Polygon, BSC) |
 | `solana_privateKey` | Solana private key             | Solana blockchain                         |
 | `private_key`       | Raw private key                | Any blockchain                            |
 
-## EVM Chains (Ethereum, Polygon, BSC, etc.)
+## EVM chains 
 
-### Get Ethereum Private Key
+For EVM-compatible chains such as Ethereum, Polygon, BSC.
+
+### Get Ethereum private key
 
 ```javascript
 const privateKey = await provider.request({ method: 'private_key' })
@@ -99,9 +101,9 @@ const hash = await walletClient.sendTransaction({
 })
 ```
 
-## Solana Integration
+## Solana integration
 
-### Get Solana Private Key
+### Get Solana private key
 
 ```javascript
 const solana_privateKey = await provider.request({ method: 'solana_privateKey' })
@@ -147,16 +149,16 @@ const transaction = new Transaction().add(
 const signature = await connection.sendTransaction(transaction, [keypair])
 ```
 
-## Other Blockchains
+## Other blockchains
 
-### Get Raw Private Key
+### Get raw private key
 
 ```javascript
 const rawPrivateKey = await provider.request({ method: 'private_key' })
 console.log('Raw Private Key:', rawPrivateKey) // Hex string
 ```
 
-### Example: Bitcoin Integration
+### Example: Bitcoin integration
 
 ```javascript
 const bitcoin = require('bitcoinjs-lib')
@@ -172,14 +174,14 @@ const { address } = bitcoin.payments.p2pkh({ pubkey: keyPair.publicKey })
 console.log('Bitcoin Address:', address)
 ```
 
-## Disabling Private Key Export
+## Disabling private key export
 
-Private key export can be disabled in the Web3Auth Dashboard:
+Private key export can be disabled in the [Embedded Wallets dashboard](https://dashboard.web3auth.io):
 
-1. Go to your project settings
-2. Navigate to "Advanced Settings"
-3. Toggle "Disable Private Key Export"
-4. Save changes
+1. Go to your project settings.
+2. Navigate to **Advanced Settings**.
+3. Toggle **Disable Private Key Export**.
+4. Save changes.
 
 When disabled, private key methods will throw an error:
 

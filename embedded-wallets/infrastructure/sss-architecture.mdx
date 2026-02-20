@@ -2,21 +2,30 @@
 title: Web3Auth Shamir Secret Sharing Architecture
 sidebar_label: SSS Architecture
 
-description: 'SSS Architecture - Web3Auth Wallet Infrastructure | Embedded Wallets'
+description: 'Secret Sharing Architecture - Embedded Wallets Infrastructure | Web3Auth Wallet Infrastructure'
 ---
 
 import ExpandingSharesFlow from '@site/static/img/embedded-wallets/infrastructure/expanding-shares-sss-flow.png'
 import KeyInitialisationFlow from '@site/static/img/embedded-wallets/infrastructure/key-initialisation-sss-flow.png'
 import KeyReconstructionFlow from '@site/static/img/embedded-wallets/infrastructure/key-reconstruction-sss-flow.png'
 import SSSArchitectureFlow from '@site/static/img/embedded-wallets/infrastructure/sss-architecture-flow.png'
+import Options from '../_partials/_sdk-key-model-table.mdx'
 
-This document provides an in-depth exploration of the technical architecture of the Shamir's Secret Sharing(SSS)-based SDKs, this includes the current Plug and Play & Single Factor Auth Mobile SDKs.
+This document provides an in-depth exploration of the technical architecture of the [Shamir's Secret Sharing](./glossary.mdx#shamir-secret-sharing) (SSS)-based SDKs, this includes the current Plug and Play and Single Factor Auth Mobile SDKs.
 
-Shamir's Secret Sharing is a base form of MPC that splits a secret into $n$ shares, of which threshold $t$ are required to reconstruct the secret. You maybe looking for the [MPC Architecture documentation](/embedded-wallets/infrastructure/mpc-architecture/) instead which does not require the key to be reconstructed on usage.
+SSS is a base form of Multi-Party Computation (MPC) that splits a secret into $n$ shares, of which threshold $t$ are required to reconstruct the secret. 
+
+:::note
+
+Alternatively, consider the [MPC architecture ](/embedded-wallets/infrastructure/mpc-architecture/) which does not fully-reconstruct the key.
+
+<Options />
+
+:::
 
 ## Components
 
-The accompanying image illustrates the typical flow of wallet management within the SSS Infrastructure.
+The accompanying image illustrates the typical flow of wallet management within the SSS infrastructure.
 
 <img
   alt="SSS Flow and Components"
@@ -24,9 +33,9 @@ The accompanying image illustrates the typical flow of wallet management within 
   src={SSSArchitectureFlow}
 />
 
-### Auth Nodes (enabling social login)
+### Auth nodes (enabling social login)
 
-Auth Nodes provide a user-specific key based on some form of attestation from the user. This attestation could come in the form of an OAuth login from an existing account, a traditional email account login, or even biometrics. Nodes need not return a private key, but need to fulfill the interface:
+Auth nodes provide a user-specific key based on some form of attestation from the user. This attestation could come in the form of an OAuth login from an existing account, a traditional email account login, or even biometrics. Nodes need not return a private key, but need to fulfill the interface:
 
 - $retrievePubKey()$
 - $encrypt(msg, pubKey)$
@@ -35,31 +44,37 @@ Auth Nodes provide a user-specific key based on some form of attestation from th
 
 For ease of illustration the rest of this document assumes that this is implemented with secp256k1 keys and ECIES. The key retrieved from the nodes is referred to as an encryption key or $encKey$.
 
+<!-- if this is the flow in ./nodes-and-dkg.mdx#verifiers-and-key-retrieval, then consider linking there -->
+
 ### Storage layer
 
-The storage layer serves as a persistent data store for storing encrypted metadata. Examples of such systems include IPFS, Arweave, Sia, or even BFT layers. Data availability and cost are the main factors to consider but the choice of storage layer is ultimately up to the implementer.
+The storage layer serves as a persistent data store for storing encrypted metadata. Examples of such systems include IPFS, Arweave, Sia, or even Byzantine Fault Tolerant (BFT) layers. Data availability and cost are the main factors to consider but the choice of storage layer is ultimately up to the implementer.
 
-Our SSS Infrastructure utilizes $encKey$ from the nodes as an entry point to retrieve the private key. $encKey$ is used to retrieve encrypted user-specific data from the storage layer, referred to as metadata. This data includes a user's threshold, polynomial commitments, associated devices, and so on.
+Our SSS infrastructure utilizes $encKey$ from the nodes as an entry point to retrieve the private key. $encKey$ is used to retrieve encrypted user-specific data from the storage layer, referred to as metadata. This data includes a user's threshold, polynomial commitments, associated devices, and so on.
 
 ### User device
 
-The SSS Infrastructure is dependent on user devices to store shares. The base flow accommodates a single device, but users can use multiple devices to increase the threshold once they have an initial setup. Access to device storage on the user's device is implementation specific. For example, for native applications on mobile, they can make use of the device keychain.
+The SSS infrastructure is dependent on user devices to store shares. The base flow accommodates a single device, but users can use multiple devices to increase the threshold once they have an initial setup. Access to device storage on the user's device is implementation specific. For example, for native applications on mobile, they can make use of the device keychain.
 
 ### Recovery share
 
-This is generally _not_ used during normal operation, and is intended for use in key recovery / share refresh if the user loses his/her device or shares.
+This is generally _not_ used during normal operation, and is intended for use in key recovery / share refresh if the user loses their device or shares.
 
 ## Flows
 
-### Key Initialization
+### Key handling on user login
 
-A key is initialized upon a user-triggered action (eg. login to nodes). We then attempt to retrieve associated metadata for the user. If none exists, the user is a new one and we generate a corresponding SSS 2/3 polynomial with its respective key and shares. If it exists, we decrypt the metadata using the nodes $encKey$ and read the metadata to verify user information and associated secret sharing parameters.
+Key handling begins in response to a user-triggered action, such as logging in. At this stage, the system attempts to retrieve any existing encrypted metadata associated with the user.
+
+If metadata is found, the user is an existing user. The metadata is decrypted using the nodes’ $encKey$ , and the stored information is used to validate the user and load the existing secret-sharing parameters. No new key material is generated in this path.
+
+If no metadata is found, the user is treated as a new user, and a new key is initialized. In this case, a 2-of-3 Shamir’s Secret Sharing (SSS) polynomial is generated, producing a private key and its corresponding shares.
 
 We select a polynomial $f(z)$ over $Z_q$ where: $$f(z) = a_1z + \sigma$$
 
 - $f(0) = \sigma$ denotes the private key scalar to be used by the user
-- $a_1$ is a coefficient to $z$
-- $f(z_1),f(z_2)$ and $f(z_3)$ are ShareA, ShareB and ShareC respectively
+- $a_1$ is a polynomial coefficient to $z$
+- $f(z_1),f(z_2)$ and $f(z_3)$ are ShareA, ShareB, and ShareC respectively
 
 <img
   alt="Key Initialisation Flow"
@@ -69,7 +84,7 @@ We select a polynomial $f(z)$ over $Z_q$ where: $$f(z) = a_1z + \sigma$$
 
 ShareA is stored on the user's device, ShareB is encrypted with the $encKey$ and stored on the storage layer for future retrieval, and ShareC dependent on user input or handled as a recovery share.
 
-### Key Reconstruction
+### Key reconstruction
 
 <img
   alt="Key Reconstruction Flow"
@@ -77,21 +92,22 @@ ShareA is stored on the user's device, ShareB is encrypted with the $encKey$ and
   src={KeyReconstructionFlow}
 />
 
-If a user has logged in previously, he/she reconstructs their key by decrypting ShareB (retrieved through the storage layer) and combining it with ShareA on the user's current device using [Lagrange interpolation](https://brilliant.org/wiki/lagrange-interpolation/#:~:text=Lagrange%20Interpolation,proof%20of%20the%20theorem%20below).
+If a user has logged in previously, they reconstruct their key by decrypting ShareB (retrieved through the storage layer) and combining it with ShareA on the user's current device using [Lagrange interpolation](https://brilliant.org/wiki/lagrange-interpolation/#:~:text=Lagrange%20Interpolation,proof%20of%20the%20theorem%20below).
 
-### Key Generation with Deterministic Share
+### Key generation with deterministic share
 
-Provided with a user input, $input$, we can pre-determine a single share in the generation of the SSS polynomial, where we peg ShareC or $f(z_3)$ to a users input. Let $H$ be a cryptographically secure hash function. $$\text{Given} \, f(z_3)= H(input)\\ \text{Select } \sigma \text{ over } Z_q \text{ and solve } a_1= \frac{f(z_3) - \sigma}{z_3}$$
+Provided with a user input, $input$, we can predetermine a single share in the generation of the SSS polynomial, where we peg ShareC or $f(z_3)$ to a user's input. Let $H$ be a cryptographically secure hash function. Given:
+$$f(z_3)= H(input), \text{select } \sigma \text{ over } Z_q \text{ and solve } a_1= \frac{f(z_3) - \sigma}{z_3}$$.
 
 In the case of secret resharing, we can also conduct the deterministic generation of the $f(z)$ polynomial with a given $\sigma$ and $input$. We are able to peg $n$ given values to the key or shares as long as $n\le d + 1$ where $d$ is the degree of the SSS polynomial $f(z)$.
 
-It is important that $input$ has sufficient entropy in its generation. A potential way to guarantee this is via using several security questions (for example three of them) with answers $A,B,C$ to derive $input = A|B|C$. This can be implemented with a repository of questions, of which order and index can be defined in metadata.
+It is important that $input$ has sufficient entropy in its generation. A potential way to guarantee this is via using several security questions (for example a minnimum of three) with answers $A,B,C$ to derive $input = A|B|C$. This can be implemented with a repository of questions, of which order and index can be defined in metadata.
 
-Candidate qualified questions are suggested to be ones with deterministic answers (i.e. "your parent's birthday" or "your city of birth"), rather than "what's your favorite singer?". To accommodate for cases that users tend to forget their answers. There is a further potential of splitting the answers themselves via SSS such that the user can answer 3/5 questions, giving redundancy.
+Candidate qualified questions should have deterministic answers (such as, "your parent's birthday" or "your city of birth"), rather than "what's your favorite singer?". To accommodate for cases that users tend to forget their answers, there is a further potential of splitting the answers themselves via SSS such that the user can answer 3/5 questions, giving redundancy.
 
-### Expanding the Number of Shares (Adding a Device)
+### Expanding the number of shares (adding a device)
 
-In the case of a new device the user needs to migrate a share to the device to reconstruct their key. This can be done user input or through a login to a current device.
+In the case of adding a new device, the user needs to migrate a share to the device to reconstruct their key. This can be done via user input or through a login to a current device.
 
 <img
   alt="Expanding Shares Flow"
@@ -99,15 +115,15 @@ In the case of a new device the user needs to migrate a share to the device to r
   src={ExpandingSharesFlow}
 />
 
-On reconstruction of $f(z)$ on the new device we set ShareD to $f(z_4)$.
+On reconstruction of $f(z)$ on the new device, we set ShareD to $f(z_4)$.
 
 ### Share resharing and revocability
 
-Utilizing the storage layer, we are able to generate new shares for all devices, regardless if they are online or offline. This allows us to remove devices from the sharing, allow the user to change their security questions and/or adjust their security threshold. The key concept here is utilizing published Share commitments as encryption keys to retrieve shares on the most updated SSS polynomial.
+Utilizing the storage layer, we are able to generate new shares for all devices, regardless if they are online or offline. This allows us to remove devices from the sharing, allow the user to change their security questions and/or adjust their security threshold. The key concept here is utilizing published share commitments as encryption keys to retrieve shares on the most updated SSS polynomial.
 
 This is illustrated from a 2/4 SSS sharing $f(z)$ with shares $s_a, s_b, s_c, s_d$ kept on 3 user devices and the nodes. Let $g$ be a generator of a multiplicative subgroup where the discrete log problem is assumed hard to solve. During initialization of the key we create share commitments $g^{s_a}, g^{s_b}, g^{s_c}, g^{s_d}$ to be stored on the storage layer. These share commitments are analogous to public keys derived from the share scalars.
 
-Given the user loses device D holding $s_d$, and wants to make that share redundant. He/she first reconstructs their key on device A. We utilize a public key based encryption scheme (eg. ECIES).
+Given the user loses device D holding $s_d$, and wants to make that share redundant, they first reconstruct their key on device A. We utilize a public key-based encryption scheme (ECIES).
 
 The user generates a new 2/3 SSS polynomial $h(z)$ on the same $\sigma$ with shares $s_1, s_2, s_3$ and encrypts the newly generated shares for each respective share commitment, except for the lost $g^{s_d}$ commitment.
 

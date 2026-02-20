@@ -140,7 +140,7 @@ const sidebar = {
           label: "Configuration",
           items: [
             "dashboard/project-settings",
-            "dashboard/whitelist",
+            "dashboard/allowlist",
             {
               type: "category",
               label: "Advanced Settings",
@@ -209,7 +209,7 @@ const sidebar = {
         "infrastructure/glossary",
         {
           type: "link",
-          label: "Compliance, Audits and Trust",
+          label: "Compliance, Audits and Trust", 
           href: "https://trust.web3auth.io",
         },
       ],

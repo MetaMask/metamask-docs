@@ -4,7 +4,7 @@ sidebar_label: useSignAndSendTransaction
 description: '@web3auth/modal React Hook useSignAndSendTransaction | Embedded Wallets'
 ---
 
-Hook to sign and send a Solana transaction using the connected Solana wallet from Web3Auth.
+Hook to sign and send a Solana transaction using the connected Solana wallet from Embedded Wallets.
 
 ### Import
 
@@ -46,7 +46,7 @@ function SignAndSendTransactionButton({
 }
 ```
 
-### Return Type
+### Return type
 
 ```ts
 export type IUseSignAndSendTransaction = {
@@ -57,25 +57,25 @@ export type IUseSignAndSendTransaction = {
 }
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Indicates if the transaction signing and sending is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error object if signing or sending fails, otherwise null.
 
-#### data
+#### `data`
 
 `string | null`
 
 The transaction signature as a string, or null if not signed yet.
 
-#### signAndSendTransaction
+#### `signAndSendTransaction`
 
 `(transaction: TransactionOrVersionedTransaction) => Promise<string>`
 

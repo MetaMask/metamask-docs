@@ -11,11 +11,11 @@ import Tabs from '@theme/Tabs'
 
 This guide provides a detailed step-by-step process to help you migrate your PnP React Native project from version 5 to version 6 of the SDK. This includes necessary changes to your `metro.config.js` and `globals.ts` files and updates for both bare React Native and Expo workflows.
 
-## Metro Configurations
+## Metro configurations
 
-### Expo Workflow
+### Expo workflow
 
-#### Before:
+#### Before
 
 ```javascript
 const { getDefaultConfig } = require('expo/metro-config')
@@ -46,7 +46,7 @@ config.transformer.getTransformOptions = () => ({
 module.exports = config
 ```
 
-#### After:
+#### After
 
 ```javascript
 const { getDefaultConfig } = require('expo/metro-config')
@@ -89,7 +89,7 @@ module.exports = config
 
 ## Updating `globals.ts`
 
-### Bare React Native Workflow
+### Bare React Native workflow
 
 ```typescript
 import { install } from 'react-native-quick-crypto'
@@ -111,7 +111,7 @@ if (!global.process.version) {
 process.browser = true
 ```
 
-### Expo Workflow
+### Expo workflow
 
 ```typescript
 import './globals'
@@ -138,7 +138,7 @@ npm install react-native-quick-crypto
 
 ## Updating `index.ts`
 
-### Bare React Native Workflow
+### Bare React Native workflow
 
 ```typescript
 import { AppRegistry } from 'react-native'
@@ -148,7 +148,7 @@ import { name as appName } from './app.json'
 AppRegistry.registerComponent(appName, () => App)
 ```
 
-### Expo Workflow
+### Expo workflow
 
 ```typescript
 import './globals'

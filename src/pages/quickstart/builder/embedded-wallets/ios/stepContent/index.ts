@@ -1,6 +1,6 @@
 import * as getUserInfo from '../../../../commonSteps/getUserInfo.mdx'
 import * as registerApp from '../../../../commonSteps/registerApp.mdx'
-import * as whitelist from './whitelist.mdx'
+import * as allowlist from './allowlist.mdx'
 import { toSteps } from '../../../../utils'
 import * as blockchainCalls from './blockchainCalls.mdx'
 import * as initialization from './initialize.mdx'
@@ -14,7 +14,7 @@ const STEPS = toSteps({
   iOSQuickStart,
   installation,
   registerApp,
-  whitelist,
+  allowlist,
   initialization,
   login,
   getUserInfo,

@@ -4,7 +4,7 @@ sidebar_label: useSwitchChain
 description: '@web3auth/modal Vue Composables useSwitchChain | Embedded Wallets'
 ---
 
-Composable to switch blockchain networks with Web3Auth in Vue.
+Composable to switch blockchain networks with Embedded Wallets in Vue.
 
 ### Import
 
@@ -29,29 +29,29 @@ import { useSwitchChain } from '@web3auth/modal/vue'
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 import { type IUseSwitchChain } from '@web3auth/modal/vue'
 ```
 
-#### loading
+#### `loading`
 
 `boolean`
 
 Whether the chain switching process is in progress.
 
-#### error
+#### `error`
 
 `Web3AuthError | null`
 
 Error that occurred during the chain switching process.
 
-#### switchChain
+#### `switchChain`
 
 `(chainId: string) => Promise<void>`
 
-Function to initiate the chain switch. Pass the target `chainId` as a string (e.g., "0x1" for Ethereum Mainnet).
+Function to initiate the chain switch. Pass the target `chainId` as a string (for example, "0x1" for Ethereum Mainnet).
 
 ## Example
 

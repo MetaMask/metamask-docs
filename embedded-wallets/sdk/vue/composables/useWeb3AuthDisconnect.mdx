@@ -29,25 +29,25 @@ import { useWeb3AuthDisconnect } from '@web3auth/modal/vue'
 </template>
 ```
 
-### Return Type
+### Return type
 
 ```ts
 import type { IUseWeb3AuthDisconnect } from '@web3auth/modal/vue'
 ```
 
-#### loading
+#### `loading`
 
 `Ref<boolean>`
 
 Whether the disconnection process is in progress.
 
-#### error
+#### `error`
 
 `Ref<Web3AuthError | null>`
 
 Error that occurred during the disconnection process.
 
-#### disconnect
+#### `disconnect`
 
 `(options?: { cleanup: boolean }) => Promise<void>`
 

@@ -8,9 +8,9 @@ import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
-Custom Authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
+Custom authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
 
-**This feature, with MFA turned off, can even make Web3Auth invisible to the end user.**
+This feature, with MFA turned off, can make Embedded Wallets invisible to the end user.
 
 <GrowthPlanNote />
 
@@ -18,36 +18,40 @@ Custom Authentication is a way to authenticate users with your custom authentica
 
 :::info prerequisite
 
-To enable this, you need to [Create a Connection](../../../dashboard/authentication.mdx) from the **Authentication** tab of your project from the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](../../../dashboard/authentication.mdx) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
 
 :::
 
-To configure a connection, you need to provide the particular details of the connection into our Web3Auth Dashboard. This enables us to map a `authConnectionId` with your connection details. This `authConnectionId` helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
+To configure a connection, you need to provide the particular details of the connection into our Embedded Wallets dashboard. This enables us to map a `authConnectionId with your connection details. This `authConnectionId helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
 
 :::tip
 
-Visit the [Auth Provider Setup](../../../authentication/README.mdx) page to learn more about to setup the different configurations available for each connection.
+Learn more about the [auth provider setup](../../../authentication/README.mdx) and the different configurations available for each connection.
 
 :::
 
-## Modal Custom Authentication
+## Modal custom authentication
 
 The basic custom authentication is available directly in the modal. You can configure each of the auth providers in the modal to direct to your `authConnectionId`.
 
 :::note
 
-You can only configure implicit login via modal, for JWT based logins, you need to create your own UI and use the `connectTo` function.
+You can only configure implicit login via modal, for JWT-based logins, you need to create your own UI and use the `connectTo` function.
 
 :::
 
 For the modal custom authentication, you need to pass the `modalConfig` object to the `Web3AuthOptions` object within the constructor.
 
-> **Read more about the `modalConfig` object in the [Whitelabel](./whitelabel.mdx) section.**
+:::tip
+
+Learn more about the `modalConfig` object in the [Whitelabel](./whitelabel.mdx) section.
+
+:::
 
 ### Usage
 
 <Tabs>
-  <TabItem value="Single Connections">
+  <TabItem value="Single connections">
 
 ```ts title="web3authContext.ts"
 import { WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
@@ -106,7 +110,7 @@ export default web3AuthContextConfig
 ```
 
   </TabItem>
-  <TabItem value="Grouped Connections">
+  <TabItem value="Grouped connections">
 
 ```ts title="web3authContext.ts"
 import { WALLET_CONNECTORS, WEB3AUTH_NETWORK } from '@web3auth/modal'
@@ -151,15 +155,15 @@ export default web3AuthContextConfig
   </TabItem>
 </Tabs>
 
-## Advanced Custom Authentication
+## Advanced custom authentication
 
 The more advanced custom authentication is available via the `connectTo` function. This allows you to any service you want and tie it to your Web3Auth Integration. **This method allows you to make Web3Auth totally invisible to your end users and have a fully whitelabeled experience all across.**
 
 You can utilise this function to enable multiple types of connections like:
 
-- Implicit Login Connections
-- JWT Login Connections
-- Grouped Auth Connections
+- Implicit Login connections
+- JWT login connections
+- Grouped auth connections
 
 <details>
   <summary>`connectTo` Function Reference</summary>
@@ -181,14 +185,14 @@ export type LoginParamMap = {
 <Tabs>
   <TabItem value="Table">
 
-| Parameter                  | Description                                                                                                                        |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Parameter                  | Description                                                      |
+| -------------------------- | -----------------------------------------------------------------|
 | `loginHint?`               | Helps pass over the login hint to the auth provider. This is used especially for `email_passwordless` & `sms_passwordless` logins. |
-| `idToken?`                 | Pass over the JWT ID Token directly to Web3Auth for JWT authentication.                                                            |
-| `authConnection?`          | The auth provider to use for login (e.g., "google", "facebook").                                                                   |
-| `authConnectionId?`        | The ID configured in your Web3Auth Dashboard for the connection.                                                                   |
-| `groupedAuthConnectionId?` | The grouped auth connection ID to be used for login.                                                                               |
-| `extraLoginOptions?`       | Custom OAuth options (e.g., login_hint, domain, etc.).                                                                             |
+| `idToken?`                 | Pass over the JWT ID token directly to Web3Auth for JWT authentication.                                                            |
+| `authConnection?`          | The auth provider to use for login (for example, "google", "facebook").                                                                   |
+| `authConnectionId?`        | The ID configured in your Embedded Wallets dashboard for the connection.                                                                   |
+| `groupedAuthConnectionId?` | The grouped Auth Connection ID to be used for login.                                                                               |
+| `extraLoginOptions?`       | Custom OAuth options (for example, login_hint, domain).                                                                             |
 
   </TabItem>
 
@@ -268,7 +272,7 @@ export type LoginParamMap = {
    */
   curve?: SUPPORTED_KEY_CURVES_TYPE;
   /**
-   * Allows the dapp to set a custom redirect url for the manage mfa flow.
+   * Allows the dapp to set a custom redirect url for the manage MFA flow.
    *
    */
   dappUrl?: string;
@@ -277,7 +281,7 @@ export type LoginParamMap = {
   </TabItem>
 </Tabs>
 
-#### Auth Connection Types
+#### Auth connection types
 
 ```ts
 export const AUTH_CONNECTION = {
@@ -301,21 +305,21 @@ export const AUTH_CONNECTION = {
 }
 ```
 
-#### Advanced Options (`extraLoginOptions`)
+#### Advanced options (`extraLoginOptions`)
 
 For custom integrations (like Auth0, AWS Cognito), you can provide additional options:
 
 <Tabs>
   <TabItem value="Table">
 
-| Parameter               | Description                                                 |
-| ----------------------- | ----------------------------------------------------------- |
-| `isUserIdCaseSensitive` | Whether the user id field is case sensitive [Default: true] |
-| `domain`                | Auth provider domain (e.g., "example.auth0.com")            |
-| `client_id`             | Client ID from your auth provider                           |
-| `scope`                 | OAuth scopes (e.g., "email profile openid")                 |
-| `response_type`         | Response type for OAuth flow                                |
-| `login_hint`            | Pre-fill user identifier                                    |
+| Parameter               | Description                                                  |
+| ----------------------- | -------------------------------------------------------------|
+| `isUserIdCaseSensitive` | Whether the user ID field is case sensitive (Default: true). |
+| `domain`                | Auth provider domain (for example, "example.auth0.com") .    |
+| `client_id`             | Client ID from your auth provider.                           |
+| `scope`                 | OAuth scopes (for example, "email profile openid").          |
+| `response_type`         | Response type for OAuth flow.                                |
+| `login_hint`            | Pre-fill user identifier.                                    |
 
   </TabItem>
   <TabItem value="Interface">
@@ -369,9 +373,9 @@ Implicit logins are the easiest way to authenticate users with your custom authe
 - Facebook
 - Discord
 - Twitch
-- Auth0 (Custom)
+- Auth0 (custom)
 
-In addition to these you can also use any other provider like Auth0, AWS Cognito, Azure AD, etc. by providing the particular details of their login within the `extraLoginOptions` object within the `connectTo` function.
+In addition to these you can also use any other provider, for example Auth0, AWS Cognito, Azure AD. by providing the particular details of their login within the `extraLoginOptions` object within the `connectTo` function.
 
 #### Usage
 
@@ -451,13 +455,13 @@ await connectTo(WALLET_CONNECTORS.AUTH, {
   </TabItem>
 </Tabs>
 
-### JWT Login
+### JWT login
 
-JWT Login is a way to authenticate users with your custom authentication services. With this method, Web3Auth just takes into account the `idToken` passed over to the `connectTo` function and uses it to authenticate the user. You can utilise this method with any authentication service that is OAuth 2.0 Compatible.
+JWT login is a way to authenticate users with your custom authentication services. With this method, Web3Auth just takes into account the `idToken` passed over to the `connectTo` function and uses it to authenticate the user. You can utilise this method with any authentication service that is OAuth 2.0 Compatible.
 
 :::warning
 
-If you have not configured on the dashboard, whether you user id is case sensitive or not, then you need to pass the `isUserIdCaseSensitive` option to the `extraLoginOptions`.
+If you have not configured on the dashboard, whether you user ID is case sensitive or not, then you need to pass the `isUserIdCaseSensitive` option to the `extraLoginOptions`.
 
 :::
 
@@ -482,7 +486,7 @@ const loginWithGoogle = async (idToken: string) => {
 ```
 
   </TabItem>
-  <TabItem value="Auth0 JWT Login">
+  <TabItem value="Auth0 JWT login">
 
 ```html
 <script setup lang="ts">
@@ -522,7 +526,7 @@ const loginWithGoogle = async (idToken: string) => {
 ```
 
 </TabItem>
-<TabItem value="Firebase JWT Login">
+<TabItem value="Firebase JWT login">
 
 ```ts
 const loginWithFirebaseGithub = async () => {
@@ -552,7 +556,7 @@ const loginWithFirebaseGithub = async () => {
 ```
 
 </TabItem>
-<TabItem value="Custom JWT Login">
+<TabItem value="Custom JWT login">
 
 ```ts
 const getIdToken = async () => {
@@ -590,15 +594,15 @@ const loginWithJWT = async () => {
 </TabItem>
 </Tabs>
 
-### Grouped Auth Connections
+### Grouped auth connections
 
-Grouped Auth Connections allows you to group multiple auth connections together and use them as a single connection. This is useful when you want to authenticate the user with multiple providers and require the same user wallet address to be generated.
+Grouped auth connections allows you to group multiple auth connections together and use them as a single connection. This is useful when you want to authenticate the user with multiple providers and require the same user wallet address to be generated.
 
-For example, you can group Google & Email Passwordless providers together and use them as a single connection. Now, if your user logs in with Google Auth or even with Email Passwordless using the same email, they will get the same wallet address.
+For example, you can group Google and email passwordless providers together and use them as a single connection. Now, if your user logs in with Google Auth or even with email passwordless using the same email, they will get the same wallet address.
 
 :::info Prerequisites
 
-You need to configure a grouped connection, by combining your single connections in the Web3Auth Dashboard before using this feature.
+You need to configure a grouped connection, by combining your single connections in the Embedded Wallets dashboard before using this feature.
 
 :::
 

@@ -83,7 +83,7 @@ def watch():
             print({
               "hash": tx_hash,
               "from": tx["from"],
-              "value": web3.fromWei(tx["value"], "ether")
+              "value": web3.from_wei(tx["value"], "ether")
             })
     time.sleep(5)
 

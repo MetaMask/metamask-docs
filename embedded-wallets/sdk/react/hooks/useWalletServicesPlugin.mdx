@@ -4,7 +4,7 @@ sidebar_label: useWalletServicesPlugin
 description: '@web3auth/modal React Hooks useWalletServicesPlugin | Embedded Wallets'
 ---
 
-Hook to access the Wallet Services Plugin context, enabling wallet-related features such as WalletConnect, Checkout, Swap, and Wallet UI.
+Hook to access the Wallet Services plugin context, enabling wallet-related features such as WalletConnect, checkout, swap, and wallet UI.
 
 ### Import
 
@@ -37,31 +37,31 @@ function WalletServicesExample() {
 }
 ```
 
-### Return Type
+### Return type
 
 ```tsx
 import { type IWalletServicesContext } from '@web3auth/modal/react'
 ```
 
-#### isPluginConnected
+#### `IsPluginConnected`
 
 `boolean`
 
-Whether the Wallet Services Plugin is connected and ready to use.
+Whether the Wallet Services plugin is connected and ready to use.
 
-#### showWalletConnectScanner
+#### `showWalletConnectScanner`
 
 `(showWalletConnectParams?: BaseEmbedControllerState["showWalletConnect"]) => Promise<void>`
 
 Shows the WalletConnect QR scanner. Accepts optional parameters for customizing the scanner behavior.
 
-#### showCheckout
+#### `showCheckout`
 
 `(showCheckoutParams?: BaseEmbedControllerState["showCheckout"]) => Promise<void>`
 
-Shows the TopUp modal for fiat-to-crypto checkout. Accepts optional parameters for customizing the checkout experience.
+Shows the topup modal for fiat-to-crypto checkout. Accepts optional parameters for customizing the checkout experience.
 
-#### showWalletUI
+#### `showWalletUI`
 
 `(showWalletUiParams?: BaseEmbedControllerState["showWalletUi"]) => Promise<void>`
 

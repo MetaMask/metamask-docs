@@ -7,7 +7,7 @@ sidebar_label: v9 to v10
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-# Web3Auth Web SDK v10 Migration Guide
+# Web3Auth web SDK v10 migration guide
 
 This guide will help you upgrade your Web3Auth SDK integration from v9 (whether you were using the Modal or the `@web3auth/no-modal` SDK) to the **unified Web3Auth Web SDK v10**.
 
@@ -19,13 +19,13 @@ Web3Auth v9 offered separate modal and non-modal SDKs for flexibility. V10 conso
 
 Building on the foundation of v9, key areas of evolution in v10 include:
 
-- **A Unified & Versatile SDK (`@web3auth/modal`):** Consolidates all functionalities into a single SDK supporting both pre-built modal UIs and custom user interfaces with one consistent API.
-- **Dashboard-Centric Configuration:** Login methods, connections (formerly verifiers), Smart Account settings, and chain configurations are now managed through the Web3Auth Developer Dashboard.
-- **Streamlined Login & Connection Management:** Moves to a declarative approach with login methods defined on the dashboard and more direct client-side connection calls.
+- **A unified and versatile SDK (`@web3auth/modal`):** Consolidates all functionalities into a single SDK supporting both pre-built modal UIs and custom user interfaces with one consistent API.
+- **Dashboard-centric configuration:** Login methods, connections (formerly verifiers), Smart Account settings, and chain configurations are managed through the Web3Auth Developer Dashboard (now the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)).
+- **Streamlined login and connection management:** Moves to a declarative approach with login methods defined on the dashboard and more direct client-side connection calls.
 - **Automated Blockchain Setup:** Standard blockchains no longer require manual `chainConfig` and `privateKeyProvider` setup as these are handled automatically via dashboard settings.
-- **Integrated Smart Account Functionality:** Smart Account configuration is managed on the dashboard with functionality built directly into the main SDK, eliminating separate provider packages.
+- **Integrated smart account functionality:** Smart account configuration is managed on the dashboard with functionality built directly into the main SDK, eliminating separate provider packages.
 - **Simplified Multi-Factor Authentication (MFA):** MFA setup is streamlined with key settings configured directly during SDK initialization.
-- **Modernized Framework Support:** React and Vue applications now use streamlined hooks/composables with automatic SDK initialization.
+- **Modernized framework support:** React and Vue applications now use streamlined hooks/composables with automatic SDK initialization.
 
 The result is a cleaner, more declarative, and more maintainable integration experience—especially for teams maintaining apps across multiple auth flows and chains, all using one SDK.
 
@@ -37,9 +37,9 @@ Install the latest v10 unified SDK package. Depending on your framework, you'll 
 npm install @web3auth/modal
 ```
 
-## General Migration Points (Applicable to All Frameworks)
+## General migration points (applicable to all frameworks)
 
-### 1. Centralized Chain Configuration
+### 1. Centralized chain configuration
 
 ```typescript
 import { Web3Auth } from '@web3auth/modal'
@@ -62,7 +62,7 @@ const web3auth = new Web3Auth({
 })
 ```
 
-**In v10, chain configurations for standard EVM chains and passing of private key providers are not needed anymore. You will be able to switch chains in your dapp among the chains you've toggled on from the [Web3Auth Developer Dashboard](https://dashboard.web3auth.io).**
+**In v10, chain configurations for standard EVM chains and passing of private key providers are not needed anymore. You will be able to switch chains in your dapp among the chains you've toggled on from the [Embedded Wallets dashboard](https://dashboard.web3auth.io).**
 
 ![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)
 
@@ -118,10 +118,10 @@ const web3AuthOptions: Web3AuthOptions = {
 // add-end
 ```
 
-**Key Changes:**
+**Key changes:**
 
 - **Individual MFA Factor Settings:** Move from `AuthAdapter.adapterSettings.mfaSettings` to `Web3AuthOptions.mfaSettings`
-- **Factor Keys:** Change from descriptive strings (e.g., `deviceShareFactor`) to enum values (e.g., `[MFA_FACTOR.DEVICE]`)
+- **Factor Keys:** Change from descriptive strings (for example, `deviceShareFactor`) to enum values (for example, `[MFA_FACTOR.DEVICE]`)
 - **MFA Level:** Move from `AuthAdapter.loginSettings.mfaLevel` to `Web3AuthOptions.mfaLevel`
 
 ### 3. `useCoreKitKey` Renamed to `useSFAKey`
@@ -152,25 +152,25 @@ const userAuthInfo = await web3auth.getIdentityToken() // Returns { idToken: str
 const idToken = userAuthInfo.idToken
 ```
 
-**Wallet Services:** If you used the `@web3auth/wallet-services-plugin` in v9, see the 🛠️ **[Wallet Services Migration Guide](./wallet-services.mdx)** for migrating to the built-in integration.
+**Wallet Services:** If you used the `@web3auth/wallet-services-plugin` in v9, see the 🛠️ [Wallet Services migration guide](./wallet-services.mdx) for migrating to the built-in integration.
 
-## Additional Migration Guides
+## Additional migration guides
 
 For specific functionality or frameworks, refer to these dedicated migration guides:
 
-**📋 Whitelabeling and UI Customization:** If you had whitelabeling configurations (`uiConfig`, `modalConfig`, or `AuthAdapter` whitelabel settings) in v9, see the **[Whitelabeling Migration Guide](./whitelabeling.mdx)** for detailed steps.
+**📋 Whitelabeling and UI customization:** If you had whitelabeling configurations (`uiConfig`, `modalConfig`, or `AuthAdapter` whitelabel settings) in v9, see the [whitelabeling migration guide](./whitelabeling.mdx) for detailed steps.
 
-**🔧 Smart Account Functionality:** If you used Smart Accounts in v9 with `@web3auth/account-abstraction-provider`, see the **[Smart Account Migration Guide](./smart-accounts.mdx)** for the new dashboard-centric approach.
+**🔧 Smart account functionality:** If you used smart accounts in v9 with `@web3auth/account-abstraction-provider`, see the [smart account migration guide](./smart-accounts.mdx) for the new dashboard-centric approach.
 
-**🔐 Custom Authentication:** If you used custom verifiers or aggregate verifiers in v9, see the **[Custom Authentication Migration Guide](./custom-authentication.mdx)** for migrating to the new Connections system.
+**🔐 Custom authentication:** If you used custom verifiers or aggregate verifiers in v9, see the [custom authentication migration guide](./custom-authentication.mdx) for migrating to the new connections system.
 
-**⚛️ React & Vue Applications:** If you're using React or Vue with Web3Auth, see the framework-specific migration guides:
+**⚛️ React and Vue applications:** If you're using React or Vue with Embedded Wallets, see the framework-specific migration guides:
 
-- [React Migration Guide](../../../../react/migration-guides/modal-v9-to-v10-react.mdx)
-- [Vue Migration Guide](../../../../vue/migration-guides/modal-v9-to-v10-vue.mdx)
+- [React migration guide](../../../../react/migration-guides/modal-v9-to-v10-react.mdx)
+- [Vue migration guide](../../../../vue/migration-guides/modal-v9-to-v10-vue.mdx)
 
-## Further Reading
+## Next steps
 
-- [Web3Auth Documentation - Web SDK v10](https://web3auth.io/embedded-wallets/sdk/js)
-- [Web3Auth v10 Examples on GitHub](https://github.com/Web3Auth/web3auth-examples)
-- [Join the Community](https://web3auth.io/community)
+- See the [Embedded wallets documentation - Web SDK v10](https://web3auth.io/embedded-wallets/sdk/js)
+- [Web3Auth v10 examples on GitHub](https://github.com/Web3Auth/web3auth-examples)
+- [Join the community](https://web3auth.io/community)

@@ -25,6 +25,7 @@ const sidebar = {
           ],
         },
         'get-started/use-the-cli',
+        'get-started/use-with-openclaw',
         {
           type: 'category',
           label: 'Use Scaffold-ETH 2',
@@ -40,6 +41,7 @@ const sidebar = {
           href: "https://docs.metamask.io/llms-smart-accounts-kit-full.txt"
         },
         'get-started/supported-networks',
+        'get-started/supported-advanced-permissions',
       ],
     },
     {
@@ -104,6 +106,7 @@ const sidebar = {
           key: 'advanced-permissions-guides',
           items: [
             'guides/advanced-permissions/execute-on-metamask-users-behalf',
+            'guides/advanced-permissions/get-supported-permissions',
             {
               type: 'category',
               label: 'Use permissions',
@@ -113,6 +116,7 @@ const sidebar = {
                 'guides/advanced-permissions/use-permissions/native-token',
               ],
             },
+            'guides/advanced-permissions/get-granted-advanced-permissions',
             'guides/advanced-permissions/create-redelegation',
           ],
         },
@@ -190,7 +194,16 @@ const sidebar = {
           items: [
             'reference/advanced-permissions/permissions',
             'reference/advanced-permissions/wallet-client',
-            'reference/advanced-permissions/bundler-client',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'ERC-7710',
+          collapsed: true,
+          key: 'erc-7710-reference',
+          items: [
+            'reference/erc7710/bundler-client',
+            'reference/erc7710/wallet-client',
           ],
         },
       ],

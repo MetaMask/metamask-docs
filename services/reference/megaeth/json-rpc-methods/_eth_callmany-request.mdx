@@ -1,0 +1,45 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc":"2.0",
+    "id":1,
+    "method":"eth_callMany",
+    "params":[
+      [
+        {
+          "transactions":[
+            {
+              "to":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "data":"0x70a08231000000000000000000000000bc0e63965946815d105e7591407704e6e1964e59"
+            },
+            {
+              "to":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+              "data":"0x313ce567"
+            }
+          ]
+        }
+      ],
+      {
+        "blockNumber":"latest"
+      }
+    ]
+  }'
+```
+
+  </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://megaeth-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc":"2.0","id":1,"method":"eth_callMany","params":[[{"transactions":[{"to":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","data":"0x70a08231000000000000000000000000bc0e63965946815d105e7591407704e6e1964e59"},{"to":"0x833589fcd6edb6e08f4c7c32d4f71b54bda02913","data":"0x313ce567"}]}],{"blockNumber":"latest"}]}'
+```
+
+  </TabItem>
+</Tabs>

@@ -44,11 +44,11 @@ export default function getSteps(steps, files, replacementAggregator) {
       ),
     },
     {
-      ...STEPS.whitelist,
+      ...STEPS.allowlist,
       pointer: replacementAggregator.highlightRange(
         qsFileLinks.EW_PNP_FLUTTER_BUILD_GRADLE,
         files[qsFileLinks.EW_PNP_FLUTTER_BUILD_GRADLE],
-        'Whitelist bundle ID'
+        'Allowlist bundle ID'
       ),
     },
     {

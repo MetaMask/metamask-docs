@@ -42,16 +42,9 @@ const expiry = currentTime + 604800;
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
-  signer: {
-    type: "account",
-    data: {
-      // Session account created as a prerequisite.
-      //
-      // The requested permissions will granted to the
-      // session account.
-      address: sessionAccountAddress,
-    },
-  },
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
   permission: {
     type: "native-token-periodic",
     data: {
@@ -109,16 +102,9 @@ const expiry = currentTime + 604800;
 const grantedPermissions = await walletClient.requestExecutionPermissions([{
   chainId: chain.id,
   expiry,
-  signer: {
-    type: "account",
-    data: {
-      // Session account created as a prerequisite.
-      //
-      // The requested permissions will granted to the
-      // session account.
-      address: sessionAccountAddress,
-    },
-  },
+  // The requested permissions will granted to the
+  // session account.
+  to: sessionAccount.address,
   permission: {
     type: "native-token-stream",
     data: {

@@ -8,15 +8,15 @@ sidebar_label: v3 to v4
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-# Migration Guide from v3 to v4 for Web3Auth Flutter SDK
+# Migration guide from v3 to v4 for Embedded Wallets Flutter SDK
 
 ## Overview
 
-This migration guide provides steps for upgrading from version 3(v3) to version 4(v4) of the Web3Auth Flutter SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate MFA setup flow, `request` method for transaction confirmation screens, `launchWalletServices` method for template wallet interface, updates to the `Provider` and the `TypeOfLogin` enum.
+This migration guide provides steps for upgrading from version 3(v3) to version 4(v4) of the Embedded Wallets Flutter SDK. The guide outlines significant changes and enhancements, including the introduction of `enableMFA` method to initiate MFA setup flow, `request` method for transaction confirmation screens, `launchWalletServices` method for template wallet interface, updates to the `Provider` and the `TypeOfLogin` enum.
 
-## Changes in Detail
+## Changes in detail
 
-### `setResultUrl` is now removed
+### `setResultUrl` is removed
 
 With the new v4 update, there's a breaking change with the removal of the `setResultUrl` method, which was used to trigger the user `UserCancelledException` on Android.
 
@@ -76,7 +76,7 @@ try {
 
 ### `launchWalletServices` method
 
-From v4, developers can use the `launchWalletServices` to launches a WebView which allows them to use the templated wallet UI services. Developers can pass the `ChainConfig` to launch wallet services with a specific chain selected.
+From v4, developers can use the `launchWalletServices` to launches a WebView which allows them to use the templated wallet UI services. Developers can pass the `ChainConfig` to launch Wallet Services with a specific chain selected.
 
 :::note
 
@@ -84,19 +84,19 @@ Access to Wallet Services is gated. You can use this feature in `sapphire_devnet
 
 :::
 
-#### ChainConfig Arguments
+#### ChainConfig arguments
 
 | Parameter | Description |
 | --- | --- |
 | `chainNamespace` | Custom configuration for your preferred blockchain. As of now only EVM supported. Default value is `ChainNamespace.eip155`. |
 | `decimals?` | Number of decimals for the currency ticker. Default value is 18, and accepts `int` as value. |
-| `blockExplorerUrl?` | Blockchain's explorer URL. (eg: `https://etherscan.io`) |
-| `chainId` | The chain id of the selected blockchain in hex `String`. |
+| `blockExplorerUrl?` | Blockchain's explorer URL. (for example, `https://etherscan.io`) |
+| `chainId` | The chain ID of the selected blockchain in hex `String`. |
 | `displayName?` | Display Name for the chain. |
-| `logo?` | Logo for the selected `chainNamespace` & `chainId`. |
+| `logo?` | Logo for the selected `chainNamespace` and `chainId`. |
 | `rpcTarget` | RPC Target URL for the selected `chainNamespace` & `chainId`. |
-| `ticker?` | Default currency ticker of the network (e.g: `ETH`) |
-| `tickerName?` | Name for currency ticker (e.g: `Ethereum`) |
+| `ticker?` | Default currency ticker of the network (for example, `ETH`) |
+| `tickerName?` | Name for currency ticker (for example, `Ethereum`) |
 
 #### Usage
 
@@ -150,9 +150,9 @@ final signResponse = await Web3AuthFlutter.getSignResponse();
 log(signResponse.toString())
 ```
 
-### New Login Providers
+### New login providers
 
-v4 update brings two new providers. Now developers can use the SMS Passwordless and Farcaster login options.
+v4 update brings two new providers: SMS Passwordless and Farcaster login.
 
 #### SMS Passwordless
 

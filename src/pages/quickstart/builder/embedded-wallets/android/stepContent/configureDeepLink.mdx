@@ -1,4 +1,4 @@
-### Configure your deeplink and whitelist
+### Configure your deeplink and allowlist
 
 Open your app's `AndroidManifest.xml` file and add the following deeplink intent filter to your
 sign-in activity:
@@ -15,11 +15,11 @@ sign-in activity:
 </intent-filter>
 ```
 
-Follow these steps to add your app to the whitelist:
+Follow these steps to add your app to the allowlist:
 
 1. In the [Developer dashboard](https://dashboard.web3auth.io/), select your project.
 
-2. Add `{YOUR_APP_PACKAGE_NAME}://auth` to **Whitelist URLs**.
+2. Add `{YOUR_APP_PACKAGE_NAME}://auth` to **Allowlist URLs**.
 
 3. Copy the `Client ID` and paste it inside the `res/values/strings.xml` file. It will be used as
     `R.string.web3auth_project_id` during initialization.
