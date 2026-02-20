@@ -466,3 +466,5 @@ export const REQUEST_PARAMS = (method = 'POST', headers = {}) => ({
 export const LINEA_PROD_URL = 'https://linea-mainnet.infura.io'
 export const LINEA_DEV_URL = 'https://linea-mainnet.dev.infura.org'
 export const LINEA_REQUEST_URL = LINEA_PROD_URL
+export const BASE_PROD_URL = 'https://base-mainnet.infura.io'
+export const BASE_REQUEST_URL = BASE_PROD_URL

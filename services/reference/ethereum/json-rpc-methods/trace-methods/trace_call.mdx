@@ -2,43 +2,15 @@
 title: Ethereum trace_call
 sidebar_label: trace_call
 description: Executes a call on Ethereum and returns possible traces.
+hide_title: true
+hide_table_of_contents: true
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import ParserOpenRPC from "@site/src/components/ParserOpenRPC"
+import { NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc"
 
-import Description from "/services/reference/_partials/trace-methods/_trace_call-description.mdx"
-
-# `trace_call`
-
-<Description />
-
-## Parameters
-
-import Params from "/services/reference/_partials/trace-methods/_trace_call-parameters.mdx"
-
-<Params />
-
-## Returns
-
-import Returns from "/services/reference/_partials/trace-methods/_trace_call-returns.mdx"
-
-<Returns />
-
-## Example
-
-import Example from "/services/reference/_partials/trace-methods/_trace_call-example.mdx"
-
-<Example />
-
-### Request
-
-import Request from "/services/reference/_partials/trace-methods/_trace_call-request.mdx"
-
-<Request />
-
-### Response
-
-import Response from "/services/reference/_partials/trace-methods/_trace_call-response.mdx"
-
-<Response />
+<ParserOpenRPC
+  network={NETWORK_NAMES.ethereum}
+  method="trace_call"
+  src="local"
+/>

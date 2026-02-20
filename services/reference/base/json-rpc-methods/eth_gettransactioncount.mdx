@@ -2,43 +2,15 @@
 title: Base eth_getTransactionCount
 sidebar_label: eth_getTransactionCount
 description: Gets transaction count for an address on Base.
+hide_title: true
+hide_table_of_contents: true
 ---
 
-import Tabs from "@theme/Tabs"
-import TabItem from "@theme/TabItem"
+import ParserOpenRPC from "@site/src/components/ParserOpenRPC"
+import { NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc"
 
-import Description from "/services/reference/_partials/_eth_gettransactioncount-description.mdx"
-
-# `eth_getTransactionCount`
-
-<Description />
-
-## Parameters
-
-import Params from "/services/reference/_partials/_eth_gettransactioncount-parameters.mdx"
-
-<Params />
-
-## Returns
-
-import Returns from "/services/reference/_partials/_eth_gettransactioncount-returns.mdx"
-
-<Returns />
-
-## Example
-
-import Example from "/services/reference/_partials/_eth_gettransactioncount-example.mdx"
-
-<Example />
-
-### Request
-
-import Request from "./_eth_gettransactioncount-request.mdx"
-
-<Request />
-
-### Response
-
-import Response from "/services/reference/_partials/_eth_gettransactioncount-response.mdx"
-
-<Response />
+<ParserOpenRPC
+  network={NETWORK_NAMES.base}
+  method="eth_getTransactionCount"
+  src="local"
+/>
