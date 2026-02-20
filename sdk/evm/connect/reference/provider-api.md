@@ -6,7 +6,7 @@ description: See the MetaMask Ethereum provider API reference.
 
 This page is a reference for the Ethereum provider API of MetaMask's Wallet API.
 MetaMask injects the provider API into websites visited by its users using the `window.ethereum` provider object.
-You can use the provider [properties](#properties), [methods](#methods), and [events](#events) in your dapp.
+Use the provider [properties](#properties), [methods](#methods), and [events](#events) in your dapp.
 
 :::info Note
 MetaMask supports [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963), which introduces an
@@ -15,7 +15,7 @@ This alternative mechanism enables dapps to support wallet interoperability
 by discovering multiple injected wallet providers in a user's browser.
 We recommend using this mechanism to connect to MetaMask.
 
-You can access the provider API using the selected EIP-6963 provider object.
+Access the provider API using the selected EIP-6963 provider object.
 Throughout this documentation, we refer to the selected provider using `provider`.
 :::
 
@@ -41,7 +41,7 @@ provider.isMetaMask // Or window.ethereum.isMetaMask if you don't support EIP-69
 ### `isConnected()`
 
 Indicates whether the provider is connected to the current chain.
-If the provider isn't connected, the page must be reloaded to re-establish the connection.
+If the provider isn't connected, reload the page to re-establish the connection.
 See the [`connect`](#connect) and [`disconnect`](#disconnect) events for more information.
 
 :::note
@@ -141,7 +141,7 @@ The MetaMask provider emits events using the Node.js
 [`EventEmitter`](https://nodejs.org/api/events.html) API.
 The following is an example of listening to the [`accountsChanged`](#accountschanged) event.
 
-You should [remove listeners](#remove-event-listeners) after you're done listening to an event (for example, on component
+[Remove listeners](#remove-event-listeners) after you're done listening to an event (for example, on component
 `unmount` in React).
 
 ```javascript
@@ -264,7 +264,7 @@ a reference to the function passed to `on` for the event.
 
 #### `removeAllListeners`
 
-You can use `removeAllListeners` to remove all listeners from the event emitter at once. This method is helpful when you need to clean up all listeners simultaneously.
+Use `removeAllListeners` to remove all listeners from the event emitter at once. This method is helpful when you need to clean up all listeners simultaneously.
 
 :::caution
 

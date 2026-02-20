@@ -4,15 +4,15 @@ description: Use RPC methods to request cryptographic signatures from users.
 
 # Sign messages
 
-You can use the following RPC methods to request cryptographic signatures from users:
+Your dapp can ask users to sign a message with their Solana account — for example, to verify ownership or authorize an action.
 
 ## Use `signMessage`
 
-`signMessage` is used to request human-readable signatures that don't need to be efficiently processed onchain.
+Use `signMessage` to request a human-readable signature that doesn't need to be verified onchain.
 
 ### Example
 
-The following is an example of using `signMessage` with MetaMask:
+The following example requests a signed message using MetaMask:
 
 ```javascript
 import { createSolanaClient } from '@metamask/connect-solana'

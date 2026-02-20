@@ -1,14 +1,44 @@
 ---
 sidebar_label: Introduction
+description: Connect to EVM networks using MetaMask Connect.
+keywords: [evm, ethereum, connect, eip-1193, provider, ethers, viem, web3js]
 ---
 
 import CardList from '@site/src/components/CardList'
 
 # Connect to EVM networks
 
-Connect to EVM networks in MetaMask using MetaMask Connect.
+Connect to Ethereum and other EVM networks in MetaMask using `@metamask/connect-evm`.
+Your existing `viem`, `ethers.js`, or `web3.js` code works with minimal changes — the EVM client gives you a standard [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider (the same `window.ethereum`-shaped interface you're used to), with automatic platform detection, relay connections, and session persistence built in.
+
+## Quick example
+
+```typescript
+import { createEVMClient } from '@metamask/connect-evm'
+
+const client = await createEVMClient({
+  dapp: { name: 'My DApp', url: 'https://mydapp.com' },
+})
+
+// Connect and request chains
+const { accounts, chainId } = await client.connect({
+  chainIds: ['0x1', '0x89'], // Ethereum Mainnet + Polygon
+})
+
+// Get an EIP-1193 provider — works with ethers.js, viem, web3.js, etc.
+const provider = client.getProvider()
+const balance = await provider.request({
+  method: 'eth_getBalance',
+  params: [accounts[0], 'latest'],
+})
+```
+
+The SDK handles platform detection, relay connections, and session persistence automatically — you just work with the provider.
+
+## Get started
+
 MetaMask Connect is available in a variety of ways to make integration as easy as possible.
-You can access it directly via npm, through popular developer libraries like Wagmi, or as part of popular convenience libraries:
+Access it directly via npm, through popular developer libraries like Wagmi, or as part of popular convenience libraries:
 
 <CardList
 items={[
@@ -44,7 +74,7 @@ description: 'Set up Dynamic SDK in a Next.js dapp. Use MetaMask Connect feature
 },
 {
 href: '/sdk/evm/connect/quickstart/web3auth',
-title: 'Embedded Wallet SDK (fka Web3Auth)',
+title: 'Embedded Wallet SDK (formerly Web3Auth)',
 description: 'Set up Web3Auth SDK in a Next.js dapp. Use MetaMask Connect features with Web3Auth.',
 },
 {
@@ -55,3 +85,20 @@ buttonIcon: 'external-arrow',
 }
 ]}
 />
+
+## Library compatibility
+
+The EVM client works seamlessly with popular Ethereum libraries:
+
+| Library                               | Compatibility                                     |
+| ------------------------------------- | ------------------------------------------------- |
+| [viem](https://viem.sh/)              | Use with `custom()` transport                     |
+| [ethers.js](https://docs.ethers.org/) | Pass `client.getProvider()` to `BrowserProvider`  |
+| [web3.js](https://web3js.org/)        | Pass `client.getProvider()` to `Web3` constructor |
+
+## Use EVM and Solana together
+
+If your dapp supports both EVM and Solana, use both the EVM and Solana clients.
+They share the same underlying multichain session — the user only approves once.
+
+See the [Multichain documentation](/sdk/multichain) for more details on cross-ecosystem connections.

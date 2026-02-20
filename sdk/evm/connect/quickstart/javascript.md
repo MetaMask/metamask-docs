@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 # Connect to MetaMask using JavaScript
 
 Get started with MetaMask Connect in your JavaScript dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
@@ -45,8 +45,8 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-   Alternatively, you can use `git clone`, which will download the entire repository.
-   To do so, clone the MetaMask Connect examples repository and navigate into the `quickstarts/javascript` directory:
+   Alternatively, use `git clone` to download the entire repository.
+   Clone the MetaMask Connect examples repository and navigate into the `quickstarts/javascript` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -145,7 +145,7 @@ Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc
 | Method                                                                         | Description                                              |
 | ------------------------------------------------------------------------------ | -------------------------------------------------------- |
 | [`connect()`](../reference/methods.md#connect)                                 | Triggers wallet connection flow                          |
-| [`connectAndSign({ msg: "..." })`](../reference/methods.md#connectandsign)     | Connects and prompts user to sign a message              |
+| [`connectAndSign({ msg: "..." })`](../reference/methods.md#connectandsign)     | Connects and prompts the user to sign a message          |
 | [`getProvider()`](../reference/methods.md#getprovider)                         | Returns the provider object for RPC requests             |
 | [`provider.request({ method, params })`](../reference/provider-api.md#request) | Calls any Ethereum JSON‑RPC method                       |
 | [Batched RPC](../guides/metamask-exclusive/batch-requests.md)                  | Use `metamask_batch` to group multiple JSON-RPC requests |

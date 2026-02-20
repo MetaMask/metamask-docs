@@ -8,96 +8,31 @@ import TabItem from "@theme/TabItem";
 
 # MetaMask Connect options
 
-MetaMask Connect takes the following configuration options.
+When you create a MetaMask Connect client, pass configuration options to control how your dapp identifies itself, which networks it supports, and how connections behave.
+This page documents the available options for each client type.
 
-### `checkInstallationImmediately`
+## Common options
 
-<Tabs>
-<TabItem value="Syntax">
+These options are available for all client types (`createEVMClient`, `createSolanaClient`, `createMultichainClient`).
 
-```javascript
-checkInstallationImmediately: <boolean>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-checkInstallationImmediately: true
-```
-
-</TabItem>
-</Tabs>
-
-Enables or disables immediately checking if MetaMask is installed on the user's browser.
-If `true`, MetaMask Connect checks for installation upon page load and sends a connection request, prompting
-the user to install MetaMask if it's not already installed.
-If `false`, MetaMask Connect waits for the connect method to be called to check for installation.
-
-The default is `false`.
-
-### `checkInstallationOnAllCalls`
+### `dapp`
 
 <Tabs>
 <TabItem value="Syntax">
 
-```javascript
-checkInstallationOnAllCalls: <boolean>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-checkInstallationOnAllCalls: true
-```
-
-</TabItem>
-</Tabs>
-
-Enables or disables checking if MetaMask is installed on the user's browser before each RPC request.
-The default is `false`.
-
-### `communicationServerUrl`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-communicationServerUrl: <string>
-```
-
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-communicationServerUrl: "https://metamask-sdk-socket.metafi.codefi.network/"
-```
-
-</TabItem>
-</Tabs>
-
-The URL of the communication server to use.
-This option is mainly used for debugging and testing MetaMask Connect.
-
-### `dappMetadata`
-
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-dappMetadata: {
-  name: <string>,
-  url: <string>,
-  iconUrl: <string>,
+```typescript
+dapp: {
+  name: string,
+  url: string,
+  iconUrl?: string,
 }
 ```
 
 </TabItem>
 <TabItem value="Example">
 
-```javascript
-dappMetadata: {
+```typescript
+dapp: {
   name: "My Dapp",
   url: "https://mydapp.com",
   iconUrl: "https://mydapp.com/icon.png",
@@ -108,183 +43,240 @@ dappMetadata: {
 </Tabs>
 
 Metadata about the dapp using MetaMask Connect.
-The metadata options are:
 
-- `name` - Name of the dapp
-- `url` - URL of the dapp
-- `iconUrl` - URL of the dapp's icon
+- `name` — Name of the dapp (required)
+- `url` — URL of the dapp (required)
+- `iconUrl` — URL of the dapp's icon (optional)
 
-:::tip important
-Setting `dappMetaData` creates a clear and trustworthy user experience when connecting your dapp to the
-MetaMask mobile app.
-MetaMask displays this metadata in the connection modal to help users identify and verify the
-connection request.
+:::tip
+Setting `dapp` metadata creates a clear and trustworthy user experience when connecting your dapp to MetaMask.
+MetaMask displays this metadata in the connection modal to help users identify and verify the connection request.
 :::
 
-### `enableAnalytics`
+### `api.supportedNetworks`
 
 <Tabs>
 <TabItem value="Syntax">
 
-```javascript
-enableAnalytics: <boolean>
+```typescript
+api: {
+  supportedNetworks: Record<string, string>
+}
 ```
 
 </TabItem>
-<TabItem value="Example">
+<TabItem value="Example (EVM)">
 
-```javascript
-enableAnalytics: true
+```typescript
+api: {
+  supportedNetworks: {
+    'eip155:1': 'https://mainnet.infura.io/v3/YOUR_API_KEY',
+    'eip155:137': 'https://polygon-mainnet.infura.io/v3/YOUR_API_KEY',
+    'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_API_KEY',
+  },
+}
+```
+
+</TabItem>
+<TabItem value="Example (Solana)">
+
+```typescript
+api: {
+  supportedNetworks: {
+    'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
+    'solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ': 'https://api.devnet.solana.com',
+  },
+}
 ```
 
 </TabItem>
 </Tabs>
 
-Enables or disables sending anonymous analytics to MetaMask to help improve MetaMask Connect.
+A map of chain IDs to RPC URLs for all networks your dapp supports.
+Chain IDs follow the [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) format — use the `eip155` namespace for EVM networks (for example, `eip155:1` for Ethereum Mainnet) and the `solana` namespace with the genesis hash for Solana networks.
+
+:::caution
+Use [Infura allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist) to protect against other people submitting requests to your API key.
+Restrict interactions to specific addresses, origins, user agents, and request methods.
+:::
+
+## EVM client options
+
+Additional options available for `createEVMClient`.
+
+### Full example
+
+```typescript
+import { createEVMClient } from '@metamask/connect-evm';
+
+const client = createEVMClient({
+  dapp: {
+    name: 'My EVM Dapp',
+    url: 'https://mydapp.com',
+    iconUrl: 'https://mydapp.com/icon.png',
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_API_KEY',
+      'eip155:137': 'https://polygon-mainnet.infura.io/v3/YOUR_API_KEY',
+    },
+  },
+});
+```
+
+## Solana client options
+
+Additional options available for `createSolanaClient`.
+
+### Full example
+
+```typescript
+import { createSolanaClient } from '@metamask/connect-solana';
+
+const client = createSolanaClient({
+  dapp: {
+    name: 'My Solana Dapp',
+    url: 'https://mydapp.com',
+    iconUrl: 'https://mydapp.com/icon.png',
+  },
+  api: {
+    supportedNetworks: {
+      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
+      'solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ': 'https://api.devnet.solana.com',
+    },
+  },
+});
+```
+
+## Multichain client options
+
+Additional options available for `createMultichainClient`.
+
+### Full example
+
+```typescript
+import { createMultichainClient } from '@metamask/connect-multichain';
+
+const client = createMultichainClient({
+  dapp: {
+    name: 'My Multichain Dapp',
+    url: 'https://mydapp.com',
+    iconUrl: 'https://mydapp.com/icon.png',
+  },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_API_KEY',
+      'eip155:137': 'https://polygon-mainnet.infura.io/v3/YOUR_API_KEY',
+      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
+    },
+  },
+});
+```
+
+## Legacy options
+
+The following options are from the previous MetaMask SDK and may still be supported for backwards compatibility.
+
+<details>
+<summary>Legacy options reference</summary>
+
+### `checkInstallationImmediately`
+
+```typescript
+checkInstallationImmediately: boolean
+```
+
+Enables or disables immediately checking if MetaMask is installed on the user's browser.
+The default is `false`.
+
+### `checkInstallationOnAllCalls`
+
+```typescript
+checkInstallationOnAllCalls: boolean
+```
+
+Enables or disables checking if MetaMask is installed before each RPC request.
+The default is `false`.
+
+### `communicationServerUrl`
+
+```typescript
+communicationServerUrl: string
+```
+
+The URL of the communication server to use.
+This option is mainly used for debugging and testing.
+
+### `dappMetadata`
+
+```typescript
+dappMetadata: {
+  name: string,
+  url: string,
+  iconUrl?: string,
+}
+```
+
+Legacy equivalent of `dapp`. Metadata about the dapp using MetaMask Connect.
+
+### `enableAnalytics`
+
+```typescript
+enableAnalytics: boolean
+```
+
+Enables or disables sending anonymous analytics to MetaMask.
 The default is `true`.
 
 ### `extensionOnly`
 
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-extensionOnly: <boolean>
+```typescript
+extensionOnly: boolean
 ```
 
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-extensionOnly: true
-```
-
-</TabItem>
-</Tabs>
-
-Enables or disables automatically using the MetaMask browser extension if it's detected.
+Enables or disables automatically using the MetaMask browser extension if detected.
 The default is `true`.
 
 ### `infuraAPIKey`
 
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-infuraAPIKey: <string>
+```typescript
+infuraAPIKey: string
 ```
 
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-infuraAPIKey: process.env.INFURA_API_KEY
-```
-
-</TabItem>
-</Tabs>
-
-The [Infura API key](/developer-tools/dashboard/get-started/create-api) to
-use for RPC requests.
-Configure this option to make read-only RPC requests from your dapp.
-
-:::caution important
-Use [Infura allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist)
-to protect against other people submitting requests to your API key.
-You can restrict interactions to specific addresses, origins, user agents, and request methods.
-We recommend using all allowlist options to maximize the security of your API key and dapp.
-:::
+The [Infura API key](/developer-tools/dashboard/get-started/create-api) to use for RPC requests.
 
 ### `headless`
 
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-headless: <boolean>
+```typescript
+headless: boolean
 ```
 
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-headless: true
-```
-
-</TabItem>
-</Tabs>
-
-Enables or disables headless mode.
-Setting this to `true` allows you to display custom modals.
+Enables or disables headless mode for custom modals.
 The default is `false`.
 
 ### `openDeeplink`
 
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-openDeeplink: <function>
+```typescript
+openDeeplink: (link: string) => void
 ```
 
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-openDeeplink: (link: string) => {
-  if (canOpenLink) {
-    Linking.openURL(link);
-  }
-}
-```
-
-</TabItem>
-</Tabs>
-
-A function that is called to open a deeplink to the MetaMask mobile app.
+A function called to open a deeplink to the MetaMask mobile app.
 
 ### `readonlyRPCMap`
 
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-readonlyRPCMap: <map>
+```typescript
+readonlyRPCMap: Record<string, string>
 ```
 
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-readonlyRPCMap: {
-  "0x539": "http://localhost:8545",
-}
-```
-
-</TabItem>
-</Tabs>
-
-A map of RPC URLs to use for read-only RPC requests.
+A map of chain IDs to RPC URLs for read-only requests.
 
 ### `shouldShimWeb3`
 
-<Tabs>
-<TabItem value="Syntax">
-
-```javascript
-shouldShimWeb3: <boolean>
+```typescript
+shouldShimWeb3: boolean
 ```
 
-</TabItem>
-<TabItem value="Example">
-
-```javascript
-shouldShimWeb3: false
-```
-
-</TabItem>
-</Tabs>
-
-Enables or disables shimming the `window.web3` object with the Ethereum provider returned by MetaMask Connect
-(useful for compatibility with older browsers).
+Enables or disables shimming the `window.web3` object.
 The default is `true`.
+
+</details>

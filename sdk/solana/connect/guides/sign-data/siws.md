@@ -4,8 +4,7 @@ description: Enable your users to Sign in with Solana.
 
 # Sign in with Solana
 
-You can set up [Sign-In with Solana (SIWS)](https://docs.siws.xyz/) to enable users to easily
-sign in to your dapp by authenticating with their MetaMask wallet.
+[Sign-In with Solana (SIWS)](https://docs.siws.xyz/) lets users sign in to your dapp by authenticating with their MetaMask wallet, instead of a traditional username and password.
 
 <p align="center">
     <img height="500" src={require("../../_assets/siwe.png").default} alt="Sign-in with Ethereum request" class="appScreen" />
@@ -21,7 +20,7 @@ The user must explicitly select to proceed, accepting the risk of a phishing att
 :::caution important
 MetaMask displays a prominent warning for mismatched domains, but does **not** block users from
 bypassing the warning and accepting the sign-in request.
-This is to not break existing dapps that may have use cases for mismatched domains.
+This avoids breaking existing dapps that may have use cases for mismatched domains.
 :::
 
 <div class="imgRow">
@@ -37,7 +36,7 @@ This is to not break existing dapps that may have use cases for mismatched domai
 
 <!-- TODO: Add link to solana_signMessage JSON-RPC method -->
 
-The following is an example of setting up SIWS with MetaMask using
+The following example shows how to set up SIWS with MetaMask using
 [`solana_signMessage`](#):
 
 ```javascript title="index.js"

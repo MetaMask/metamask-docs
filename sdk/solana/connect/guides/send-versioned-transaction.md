@@ -3,10 +3,9 @@ import TabItem from '@theme/TabItem';
 
 # Send a versioned transaction
 
-Solana supports [legacy transactions and versioned transactions](https://solana.com/developers/guides/advanced/versions).
-Unlike legacy transactions, versioned transactions (`v0`) can include [Address Lookup Tables](https://solana.com/developers/guides/advanced/lookup-tables) (ALTs or Address LUTs), enabling you to efficiently load up to 256 addresses in a single transaction.
+Solana [versioned transactions](https://solana.com/developers/guides/advanced/versions) (`v0`) support [Address Lookup Tables](https://solana.com/developers/guides/advanced/lookup-tables), which let you reference up to 256 addresses in a single transaction — useful for complex operations that would exceed the limits of legacy transactions.
 
-After connecting to MetaMask, your dapp can prompt a user to sign and send a Solana versioned transaction.
+This guide shows you how to create, sign, and send versioned transactions through MetaMask.
 
 ## Create a versioned transaction
 
@@ -39,7 +38,7 @@ const transactionV0 = new VersionedTransaction(messageV0);
 
 ## Sign and send a versioned transaction
 
-After creating an unsigned versioned transaction, you can ask the user's MetaMask wallet to sign and send the transaction.
+After creating an unsigned versioned transaction, ask the user's MetaMask wallet to sign and send the transaction.
 Use the `signAndSendTransaction` method on the provider, which accepts an optional [`SendOptions`](https://solana-foundation.github.io/solana-web3.js/types/SendOptions.html) object as a second parameter.
 
 The method returns a promise for an object containing the `signature`.
@@ -57,7 +56,7 @@ await connection.getSignatureStatus(signature);
 Create an [Address Lookup Table (ALT)](https://solana.com/developers/guides/advanced/lookup-tables) to efficiently load addresses into tables, significantly increasing the number of addresses that can be used in a single transaction.
 
 Use the [createLookupTable](https://solana-foundation.github.io/solana-web3.js/classes/AddressLookupTableProgram.html#createlookuptable) method to create the instruction needed to create a new ALT and determine its address.
-With this instruction, you can create a transaction, sign it, and send it to create an ALT onchain.
+With this instruction, create a transaction, sign it, and send it to create an ALT onchain.
 For example:
 
 ```typescript  theme={null}
@@ -81,7 +80,7 @@ const lookupSignature = await signAndSendTransaction(provider, lookupTransaction
 
 ## Extend an Address Lookup Table
 
-After creating an ALT, you can extend it by appending addresses to the table.
+After creating an ALT, extend it by appending addresses to the table.
 Use the [extendLookupTable](https://solana-foundation.github.io/solana-web3.js/classes/AddressLookupTableProgram.html#extendlookuptable) method to create a new extend instruction, and send it in a transaction.
 For example:
 
@@ -112,7 +111,7 @@ const extensionSignature = await signAndSendTransaction(provider, extensionTrans
 
 ## Create, sign, and send a versioned transaction with an ALT
 
-After creating an ALT, you can create a versioned transaction with the ALT and ask the user's MetaMask wallet to sign and send it.
+After creating an ALT, create a versioned transaction with the ALT and ask the user's MetaMask wallet to sign and send it.
 
 First, use the [`getAddressLookupTable`](https://solana-foundation.github.io/solana-web3.js/classes/Connection.html#getaddresslookuptable) method to fetch the account of the created ALT:
 

@@ -8,7 +8,7 @@ keywords: [connect, MetaMask, JavaScript, ConnectKit, SDK, dapp, Wallet SDK]
 # Connect to MetaMask using JavaScript + ConnectKit
 
 Get started with MetaMask Connect in a JavaScript and ConnectKit dapp.
-You can [download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-connectkit-demo.vercel.app/" target="_blank">
@@ -43,8 +43,8 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
 
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
-   Alternatively, you can use `git clone`, which will download the entire repository.
-   To do so, clone the MetaMask SDK examples repository and navigate into the `quickstarts/connectkit` directory:
+   Alternatively, use `git clone` to download the entire repository.
+   Clone the MetaMask SDK examples repository and navigate into the `quickstarts/connectkit` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -157,7 +157,7 @@ function App() {
 export default App
 ```
 
-You can now test your dapp by running `pnpm run dev`.
+Test your dapp by running `pnpm run dev`.
 
 ## Live example
 

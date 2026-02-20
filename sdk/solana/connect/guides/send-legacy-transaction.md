@@ -3,17 +3,17 @@ import TabItem from '@theme/TabItem';
 
 # Send a legacy transaction
 
-Solana supports [legacy transactions and versioned transactions](https://solana.com/developers/guides/advanced/versions).
-Unlike versioned transactions, legacy transactions cannot include Address Lookup Tables, so they are capped at 32 addresses per transaction.
+Solana [legacy transactions](https://solana.com/developers/guides/advanced/versions) are the simpler of Solana's two transaction formats.
+They don't support Address Lookup Tables and are capped at 32 addresses per transaction, but they work well for straightforward operations like transfers.
 
-After connecting to MetaMask, your dapp can prompt a user to sign and send one or more Solana legacy transactions.
-See the [Solana documentation](https://solana.com/docs/core/transactions) for more information about Solana transactions and how to create them.
+This guide shows you how to sign and send legacy transactions through MetaMask.
+See the [Solana documentation](https://solana.com/docs/core/transactions) for more background on Solana transactions.
 
 ## Sign and send a transaction
 
-After creating an unsigned legacy transaction, you can ask the user's MetaMask wallet to sign and send the transaction.
+After creating an unsigned legacy transaction, ask the user's MetaMask wallet to sign and send the transaction.
 Use the `signAndSendTransaction` method on the provider, or use `signAndSendTransaction` with the provider's `request` method.
-You can specify an optional [`SendOptions`](https://solana-foundation.github.io/solana-web3.js/types/SendOptions.html) object as a second parameter for `signAndSendTransaction`, or as an `options` parameter when using `request`.
+Specify an optional [`SendOptions`](https://solana-foundation.github.io/solana-web3.js/types/SendOptions.html) object as a second parameter for `signAndSendTransaction`, or as an `options` parameter when using `request`.
 
 The method returns a promise for an object containing the `signature`.
 
@@ -51,7 +51,7 @@ await connection.getSignatureStatus(signature);
 
 ## Sign and send multiple transactions
 
-After creating multiple unsigned legacy transactions, you can ask the user's MetaMask wallet to sign and send all the transactions at once.
+After creating multiple unsigned legacy transactions, ask the user's MetaMask wallet to sign and send all the transactions at once.
 Use the `signAndSendAllTransactions` method on the provider.
 This method accepts an array of Solana transactions, and an optional [`SendOptions`](https://solana-foundation.github.io/solana-web3.js/types/SendOptions.html) object as a second parameter.
 

@@ -2,7 +2,7 @@
 
 To connect to Solana in MetaMask from your dapp, use Framework Kit.
 
-Framework-kit supports MetaMask out-of-the-box for Solana dapps, handling RPC connections, wallet adapters, and state management for you:
+Framework Kit supports MetaMask out-of-the-box for Solana dapps, handling RPC connections, wallet adapters, and state management for you:
 
 - **One provider, many hooks** — Wrap your app once with `SolanaProvider`, then use hooks anywhere.
 - **Wallet connection built-in** — `useWalletConnection` handles discovery, connection, and disconnection.
@@ -22,7 +22,7 @@ npm install @solana/client @solana/react-hooks
 
 ### 2. Create the Solana provider
 
-Create a `SolanaProvider` that will be used to provide the Solana context to the application:
+Create a `SolanaProvider` to provide the Solana context to the application:
 
 ```typescript title='components/SolanaProvider.tsx'
 'use client';

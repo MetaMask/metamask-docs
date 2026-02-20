@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 # Sign data
 
-You can use the following RPC methods to request cryptographic signatures from users:
+Use the following RPC methods to request cryptographic signatures from users:
 
 - [`eth_signTypedData_v4`](#use-eth_signtypeddata_v4) - Use this method to request the most human-readable
   signatures that are efficient to process onchain.
@@ -48,7 +48,7 @@ contract to provide replay protection of these signatures between different cont
 
 We recommend using [`eth-sig-util`](https://github.com/MetaMask/eth-sig-util) to generate and
 validate signatures.
-You can use [`eip712-codegen`](https://github.com/danfinlay/eip712-codegen#readme) to generate most
+Use [`eip712-codegen`](https://github.com/danfinlay/eip712-codegen#readme) to generate most
 of the Solidity required to verify these signatures onchain.
 It currently doesn't generate the top-level struct verification code, so you must write that part manually.
 See
@@ -451,7 +451,7 @@ It's often used for signature challenges that are authenticated on a web server,
   they're agreeing to.
 - If using this method for a signature challenge, think about what would prevent a phisher from
   reusing the same challenge and impersonating your site.
-  Add text referring to your domain, or the current time, so the user can easily verify if this
+  Add text referring to your domain, or the current time, so the user can verify if this
   challenge is legitimate.
   :::
 

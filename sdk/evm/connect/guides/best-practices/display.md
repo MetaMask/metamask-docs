@@ -7,7 +7,7 @@ your dapp icon.
 
 MetaMask retrieves this icon using the HTML selector `<head> link[rel="shortcut icon"]`, so you can
 follow the [favicon standard](https://en.wikipedia.org/wiki/Favicon) to customize your dapp icon.
-Make sure to have a `link` tag within your dapp's `head` with `rel = "shortcut icon"`, as in the
+Add a `link` tag within your dapp's `head` with `rel = "shortcut icon"`, as in the
 following example.
 The tag's `href` attribute is used for assigning the dapp icon.
 

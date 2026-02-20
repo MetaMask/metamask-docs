@@ -7,7 +7,7 @@ import TabItem from '@theme/TabItem';
 
 # Send batch transactions
 
-You can send and manage batch transactions in MetaMask, using the methods specified by
+Send and manage batch transactions in MetaMask, using the methods specified by
 [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792):
 
 - [`wallet_getCapabilities`](../../reference/json-rpc-api/index.md) - Query whether support for atomic batch transactions is available.
@@ -28,12 +28,12 @@ See the [Smart Accounts Kit documentation](/smart-accounts-kit) for more informa
 
 The key benefits of atomic batch transactions include:
 
-- **Fewer clicks and less friction** - Users only need to review and approve a single wallet confirmation, instead of multiple confirmations.
+- **Fewer steps and less friction** - Users only need to review and approve a single wallet confirmation, instead of multiple confirmations.
   For example, users can confirm a spending cap and swap in one step instead of two.
 - **Faster completion times** - Only a single atomic transaction is confirmed onchain, instead of multiple individual transactions.
 - **Reduced gas fees** - When multiple transactions are executed atomically, users only need to pay a single gas fee.
 
-You can send batch transactions using [third-party libraries](#use-third-party-libraries)
+Send batch transactions using [third-party libraries](#use-third-party-libraries)
 or [directly in your dapp](#send-batch-transactions-1).
 
 ## Send batch transactions
@@ -182,7 +182,7 @@ MetaMask's support for atomic batch transactions includes the following networks
 - Unichain Mainnet and Sepolia
 - Berachain Mainnet and Bepolia
 
-MetaMask will support this feature on more networks as they adopt EIP-7702.
+MetaMask supports this feature on more networks as they adopt EIP-7702.
 
 </div>
 </details>
@@ -375,7 +375,7 @@ In these cases, `atomic` is `true` but multiple receipts are returned.
 
 ## Use third-party libraries
 
-You can send batch transactions using the following third-party libraries that support EIP-5792:
+Send batch transactions using the following third-party libraries that support EIP-5792:
 
 - [Wagmi](https://wagmi.sh/react/api/hooks/useCapabilities)
 - [Viem](https://viem.sh/docs/actions/wallet/getCapabilities)
