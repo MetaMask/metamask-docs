@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs'
 
 #### `manageMFA()`
 
-You can redirect users to the Web3Auth Account Dashboard to manage their MFA settings by calling the `manageMFA()` function. This method ensures that identity details are injected into the dashboard internally for custom verifier-based dapps. In order to see what's present on the account dashboard, please refer to the [Account Dashboard](/embedded-wallets/features/user-account-dashboard).
+You can redirect users to the Embedded Wallets account dashboard to manage their MFA settings by calling the `manageMFA()` function. This method ensures that identity details are injected into the dashboard internally for custom verifier-based dapps. In order to see what's present on the account dashboard, please refer to the [Account Dashboard](/embedded-wallets/features/user-account-dashboard).
 
 ```javascript
 await web3auth.manageMFA()
@@ -28,6 +28,6 @@ manageMFA<T>(loginParams?: T): Promise<void>;
 
 If MFA is not already enabled, the `manageMFA()` method will throw an error. Ensure you use `enableMFA()` before calling `manageMFA()`.
 
-If your dapp uses default verifiers, users can directly log in to the Account Dashboard to manage MFA. For custom verifier-based dapps, the `manageMFA()` method must be used.
+If your dapp uses default verifiers, users can directly log in to the account dashboard to manage MFA. For custom verifier-based dapps, the `manageMFA()` method must be used.
 
 :::

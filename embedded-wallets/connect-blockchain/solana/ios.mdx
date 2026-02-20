@@ -91,7 +91,7 @@ To install `SolanaSwift` through Swift Package Manager, follow the below steps:
     https://github.com/p2p-org/solana-swift
    ```
 
-   From the `Dependency Rule` dropdown, select `Exact Version` and enter `5.0.0` as the version.
+   From the **Dependency Rule** dropdown, select **Exact Version** and enter **5.0.0** as the version.
 
 Once finished, Xcode will automatically begin resolving and downloading your dependencies in the background.
 
@@ -116,11 +116,11 @@ pod install
 
 ## Initialize
 
-To Initialize the `JSONRPCAPIClient` we require rpc url. The `JSONRPCAPIClient` instance will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response. For this example, we are using rpc url for Devnet-beta. To interact with Testnet or Mainnet, you can simply change the rpc url.
+To Initialize the `JSONRPCAPIClient` we require a RPC URL. The `JSONRPCAPIClient` instance will provide a gateway & protocol to interact with Solana cluster while sending requests and receving response. For this example, we are using the RPC URL for Devnet-beta. To interact with Testnet or Mainnet, change the RPC URL.
 
 ### Initializing the Solana SDK
 
-In the below code block, we'll create the `JSONRPCAPIClient` instance using the Devnet-beta rpc.
+In the following code block, we'll create the `JSONRPCAPIClient` instance using the Devnet-beta RPC.
 
 ```swift
 import SolanaSwift
@@ -136,11 +136,15 @@ let solanaJSONRPCClient = JSONRPCAPIClient(endpoint: endpoint)
 
 ### Initializing the Web3Auth SDK
 
-In the below code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to home view, otherwise you can route them to login view for authentication purpose. For checking, if user is already authenticated, we can check whether `Web3Auth.state` is `nil` or not.
+In the following code block, we'll initialize the Web3Auth SDK and check whether the user has any Web3Auth session persisted or not. If the user is already authenticated, you can route them directly to home view, otherwise you can route them to login view for authentication purpose. For checking, if user is already authenticated, we can check whether `Web3Auth.state` is `nil` or not.
 
 By default, the session is persisted for 1 day. You can modify it using `sessionTime` parameter during initialization.
 
-> Note: Note: The session can be persisted only for 30 days max
+:::note
+
+The session can be persisted for up to 30 days max.
+
+:::
 
 ```swift
 import Web3Auth
@@ -164,7 +168,7 @@ let isUserAuthenticated = web3Auth.state != nil
 
 ## Get account
 
-We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the below code block, we'll use the Ed25519 private key to retive user's public address by creating `KeyPair`. The `KeyPair` struct from `SolanaSwift` SDK once created can be used to sign the Solana transactions.
+We can use `getEd25519PrivKey` method in Web3Auth to retrive the priavte key for the Solana ecosystem. In the following code block, we'll use the Ed25519 private key to retive user's public address by creating `KeyPair`. The `KeyPair` struct from `SolanaSwift` SDK once created can be used to sign the Solana transactions.
 
 ```swift
 let ed25519PrivateKey = web3Auth.getEd25519PrivKey()

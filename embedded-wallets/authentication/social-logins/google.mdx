@@ -24,7 +24,7 @@ To integrate Google Sign-In with Embedded Wallets, developers must first configu
 
    ![Google OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/google/google-app-redirect-uri.png)
 
-3. Obtain the OAuth `Client ID` from the [App on the Google Developer dashboard](https://console.developers.google.com/)
+3. Obtain the OAuth Client ID from the [App on the Google Developer dashboard](https://console.developers.google.com/)
 
 ## Step 2: Create a Google connection
 
@@ -32,7 +32,7 @@ To integrate Google Sign-In with Embedded Wallets, developers must first configu
 
 To use this feature, enable **Google** from the Social Connections section in the [dashboard](https://dashboard.web3auth.io).
 
-> By default, Web3Auth uses its own pre-configured credentials for Google login.
+By default, Web3Auth uses its own pre-configured credentials for Google login.
 
 :::
 
@@ -50,11 +50,11 @@ To use this feature, enable **Google** from the Social Connections section in th
 
 Follow these steps to create a Google connection:
 
-1. Visit the [Embedded Wallets Dashboard](https://dashboard.web3auth.io).
+1. Visit the [Embedded Wallets dashboard](https://dashboard.web3auth.io).
 1. Go to the **Social Connections** section.
 1. Click the **Settings** icon near the Google connection.
-1. Enter the `Auth Connection ID`.
-1. Enter the `Google Client ID`.
+1. Enter the **Auth Connection ID**.
+1. Enter the **Google Client ID**.
 1. Click the **Add Connection** button to save the settings.
 
 <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
@@ -71,9 +71,13 @@ Follow these steps to create a Google connection:
 
 ## Usage
 
-Since, the Google connection details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+Since the Google connection details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
-> Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
+:::tip
+
+Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
+
+:::
 
 <Tabs>
   <TabItem value="implicit" label="Implicit Login">

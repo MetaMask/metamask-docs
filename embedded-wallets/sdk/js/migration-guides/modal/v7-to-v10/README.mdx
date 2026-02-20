@@ -17,7 +17,7 @@ Web3Auth PnP Web SDK v10**, focusing on core package and initialization changes.
 ## Why migrate to v10?
 
 Web3Auth v10 consolidates functionality into a single powerful SDK that centralizes configuration in
-the Dashboard and eliminates frontend adapter complexity.
+the dashboard and eliminates frontend adapter complexity.
 
 Key improvements from v7 to v10:
 
@@ -293,18 +293,18 @@ const idToken = await web3auth.getIdentityToken()
 | -------------------- | ------------------------------------------- | ----------------------- |
 | **Package**          | `@web3auth/modal` + adapters                | `@web3auth/modal` only  |
 | **Authentication**   | `OpenloginAdapter` required                 | Built-in                |
-| **Chain Config**     | Manual `chainConfig` + `privateKeyProvider` | Dashboard Configuration |
+| **Chain Config**     | Manual `chainConfig` + `privateKeyProvider` | Dashboard configuration |
 | **External Wallets** | Manual adapter setup                        | Automatic detection     |
-| **Branding**         | `uiConfig` + `OpenloginAdapter` whiteLabel  | Dashboard Configuration |
+| **Branding**         | `uiConfig` + `OpenloginAdapter` whiteLabel  | Dashboard configuration |
 | **ID token**         | `authenticateUser()`                        | `getIdentityToken()`    |
 
 ## Benefits of v10 migration
 
-1. **Unified Architecture:** Single package handles all use cases
-2. **Reduced Complexity:** No manual adapter configuration or chain setup
-3. **Dashboard Control:** Centralized configuration management
-4. **Better Developer Experience:** Cleaner API with improved TypeScript support
-5. **Future-Proof:** Aligned with Web3Auth's long-term architectural direction
+1. **Unified architecture:** Single package handles all use cases.
+2. **Reduced complexity:** No manual adapter configuration or chain setup.
+3. **Dashboard control:** Centralized configuration management.
+4. **Better developer Experience:** Cleaner API with improved TypeScript support.
+5. **Future-proof:** Aligned with Web3Auth's long-term architectural direction.
 
 ## Next steps
 

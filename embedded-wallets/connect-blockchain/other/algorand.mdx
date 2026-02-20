@@ -71,7 +71,7 @@ Once a user logs in, the Embedded Wallets SDK returns a provider. Since there is
 
 Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Algorand-specific signing functions, hence, we first derive the Algorand Key using the `getAlgorandKeyPair()` function.
 
-On the underhood, it uses the `algosdk.secretKeyToMnemonic()` function, where we need to pass the `Buffer.from(privateKey, "hex")`, ie. the hexadecimal to Uint8Array converted private key. We get a mnemonic seed phrase that can be used to derive the key pair using the `algosdk.mnemonicToSecretKey()`, this returns a key pair. We can use the returned private key pair from this and use it on Algorand transactions.
+On the underhood, it uses the `algosdk.secretKeyToMnemonic()` function, where we need to pass the `Buffer.from(privateKey, "hex")`, that is, the hexadecimal to Uint8Array converted private key. We get a mnemonic seed phrase that can be used to derive the key pair using the `algosdk.mnemonicToSecretKey()`, this returns a key pair. We can use the returned private key pair from this and use it on Algorand transactions.
 
 ```tsx
 import { IProvider } from '@web3auth/base'

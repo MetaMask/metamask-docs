@@ -1,6 +1,6 @@
 ---
-title: Web3Auth Identity Token
-sidebar_label: Web3Auth Identity Token
+title: Embedded Wallets identity token
+sidebar_label: Web3Auth identity token
 image: 'img/metamaskog.jpg'
 description: 'Identity Token | Embedded Wallets'
 ---
@@ -8,9 +8,9 @@ description: 'Identity Token | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The **Identity Token** (ID Token) issued by Web3Auth is a JSON Web Token (JWT) that contains verified identity claims about the authenticated user. This token is signed using Web3Auth's private key and cannot be spoofed, allowing developers to trust the identity information presented by the client.
+The **Identity Token** (ID Token) issued by Embedded Wallets is a JSON Web Token (JWT) that contains verified identity claims about the authenticated user. This token is signed using Embedded Wallets' private key and cannot be spoofed, allowing developers to trust the identity information presented by the client.
 
-Once a user successfully authenticates via Web3Auth, the platform issues an ID token which can then be used to authorize client-to-server requests or verify ownership of associated wallet addresses.
+Once a user successfully authenticates via Embedded Wallets, the platform issues an ID token which can then be used to authorize client-to-server requests or verify ownership of associated wallet addresses.
 
 #### Purpose of the ID token
 
@@ -22,7 +22,7 @@ When making a backend request from the frontend, the client must include this ID
 
 ## ID token format
 
-Web3Auth tokens are ES256-signed JWTs containing various identity claims about the user.
+Embedded Wallets (previously Web3Auth) issues tokens as ES256-signed JWTs containing various identity claims about the user.
 
 A sample decoded token is shown below:
 
@@ -59,7 +59,7 @@ A sample decoded token is shown below:
 
 :::warning NOTE
 
-If the `Return user data in identity token` setting is disabled on the dashboard, personally identifiable information (PII) such as **email**, **name**, and **profileImage** will be omitted from the token.
+If the **Return user data in identity token** setting is disabled on the dashboard, personally identifiable information (PII) such as **email**, **name**, and **profileImage** will be omitted from the token.
 
 :::
 
@@ -373,7 +373,11 @@ try {
 }
 ```
 
-> The replace operation above ensures that any instances of '\n' in the stringified public key are replaced with actual newlines, per the PEM-encoded format.
+:::note
+
+The replace operation above ensures that any instances of '\n' in the stringified public key are replaced with actual newlines, per the PEM-encoded format.
+
+:::
 
 </TabItem>
 </Tabs>
@@ -384,7 +388,7 @@ If the token is valid, the payload will contain identity claims (such as, userId
 
 :::
 
-## Things to remember
+## Troubleshooting
 
 - The `iss` field in the token must be `https://api-auth.web3auth.io`.
 - The `aud` field must match your **Project Client ID**.
