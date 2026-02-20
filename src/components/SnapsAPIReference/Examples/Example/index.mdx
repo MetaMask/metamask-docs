@@ -1,0 +1,17 @@
+import CodeBlock from '@theme/CodeBlock'
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+{props.showTitle && <h3>{props.example.title ? props.example.title : `Example ${props.index}`}</h3>}
+
+{props.example.examples.length > 1
+  ? <Tabs>
+      {props.example.examples.map((example, index) => (
+        <TabItem key={index} value={example.name ? example.name : `Example ${index + 1}`}>
+          <CodeBlock language={example.language}>{example.content}</CodeBlock>
+        </TabItem>
+      ))}
+    </Tabs>
+  : <CodeBlock language={props.example.examples[0].language}>{props.example.examples[0].content}</CodeBlock>
+}
+

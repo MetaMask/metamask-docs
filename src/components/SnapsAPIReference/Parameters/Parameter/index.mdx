@@ -1,0 +1,15 @@
+import styles from './styles.module.scss';
+import Markdown from 'react-markdown';
+
+<div className={styles.parameter}>
+  {props.parameter.name && <h3>{props.parameter.name}</h3>}
+  <span className={styles['parameter-type']}>
+    {props.parameter.type}
+  </span>
+  {!props.response && props.parameter.required && <span className={styles['parameter-required']}>required</span>}
+</div>
+
+{props.parameter.description && (
+  <Markdown>{props.parameter.description}</Markdown>
+)}
+

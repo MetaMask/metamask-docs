@@ -179,6 +179,7 @@ const config = {
     './src/plugins/docusaurus-plugin-tutorials',
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',
+    './src/plugins/plugin-snaps-docs.ts',
     [
       '@docusaurus/plugin-content-docs',
       {
@@ -727,7 +728,17 @@ const config = {
       },
       prism: {
         theme: codeTheme,
-        additionalLanguages: ['csharp', 'gradle', 'bash', 'json', 'java', 'kotlin', 'swift', 'groovy', 'dart'],
+        additionalLanguages: [
+          'csharp',
+          'gradle',
+          'bash',
+          'json',
+          'java',
+          'kotlin',
+          'swift',
+          'groovy',
+          'dart',
+        ],
         magicComments: [
           {
             className: 'theme-code-block-highlighted-line',
@@ -803,10 +814,10 @@ const config = {
     }),
   stylesheets: [
     {
-      href: "https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css",
-      type: "text/css",
-      integrity: "sha384-WcoG4HRXMzYzfCgiyfrySxx90XSl2rxY5mnVY5TwtWE6KLrArNKn0T/mOgNL0Mmi",
-      crossorigin: "anonymous",
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css',
+      type: 'text/css',
+      integrity: 'sha384-WcoG4HRXMzYzfCgiyfrySxx90XSl2rxY5mnVY5TwtWE6KLrArNKn0T/mOgNL0Mmi',
+      crossorigin: 'anonymous',
     },
   ],
 }

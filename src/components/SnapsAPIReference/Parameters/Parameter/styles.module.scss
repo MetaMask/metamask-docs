@@ -1,0 +1,21 @@
+.parameter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.parameter-type {
+  color: var(--general-gray-dark);
+  font-size: 11px;
+  font-family: var(--ifm-font-family-monospace);
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}
+
+.parameter-required {
+  font-size: 14px;
+  color: var(--error);
+}
