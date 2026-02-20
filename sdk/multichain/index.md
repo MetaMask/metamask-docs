@@ -10,57 +10,80 @@ import CardList from '@site/src/components/CardList'
 
 Connect to multiple blockchain networks and ecosystems in MetaMask at the same time using `@metamask/connect-multichain`.
 
-This is the full Multichain API experience — more powerful than the ecosystem-specific clients, but requires adapting your dapp to work with scopes and `wallet_invokeMethod` rather than traditional per-chain RPC.
+With the multichain client, your dapp can request access to EVM networks and Solana (and future ecosystems like **Bitcoin** and **Tron**) in a single connection prompt — no separate connect flows per chain.
+This gives you more control than the [ecosystem-specific clients](/sdk#integration-options), but requires adapting your dapp to work with the Multichain API rather than traditional per-chain RPC.
 
-## The Multichain API
+## How the Multichain API works
 
-MetaMask Connect is built on the [CASA Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) (CAIP-25), a chain-agnostic standard for wallet-dapp communication.
-For the full rationale and specification of MetaMask's adoption of these standards, see [MIP-5: Adopt Chain Agnostic Standards for a Multichain API](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-5.md).
+MetaMask Connect is built on the [Multichain API (CAIP-25)](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) specification, a chain-agnostic standard for wallet-dapp communication.
+For the full rationale and specification, see [MIP-5](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-5.md).
 
-Instead of the traditional EIP-1193 model (`eth_requestAccounts` on one chain at a time), the Multichain API lets dapps:
+Instead of connecting to one chain at a time, the Multichain API lets you:
 
-- **Request permissions across ecosystems in one call** — e.g., "I need Ethereum Mainnet, Polygon, and Solana Mainnet" as a single session request
-- **Invoke methods on any permitted scope** — send a Solana transaction and an EVM transaction through the same session
-- **Use standardized session lifecycle** — `wallet_createSession`, `wallet_invokeMethod`, `wallet_getSession`, `wallet_revokeSession`
+- **Request access to multiple ecosystems at once** — for example, Ethereum Mainnet, Polygon, and Solana Mainnet in a single session
+- **Send requests to any chain in the session** — send a Solana transaction and an EVM transaction through the same connection
+- **Manage the full session lifecycle** — create, query, invoke methods on, and revoke sessions with `wallet_createSession`, `wallet_getSession`, `wallet_invokeMethod`, and `wallet_revokeSession`
 
-This means a dapp that supports both EVM and Solana doesn't need separate connection flows — one session covers both.
+For dapps that support both EVM and Solana, this means one session covers both — and users see a single approval prompt.
+
+<!-- Insert the MetaMask Connect Image -->
+<p align="center">
+    <img height="500" src={require("./_assets/metamask-connect-modal.png").default} alt="MetaMask Connect Multichain Connect Modal" class="appScreen" />
+</p>
 
 ## Quick example
 
 ```typescript
-import { createMultichainClient } from '@metamask/connect-multichain';
+import { createMultichainClient } from '@metamask/connect-multichain'
+import { address, createSolanaRpc } from '@solana/kit'
 
-const client = await createMultichainClient({
+const client = createMultichainClient({
   dapp: { name: 'My DApp', url: 'https://mydapp.com' },
-});
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_API_KEY',
+      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
+    },
+  },
+})
 
-// Connect with scopes across ecosystems
-await client.connect(
-  ['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'],
-  [],
-);
+// Connect with scopes across ecosystems — one approval for all chains
+await client.connect(['eip155:1', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])
 
-// Invoke methods on any scope
-const ethBalance = await client.invokeMethod({
-  scope: 'eip155:1',
-  request: { method: 'eth_getBalance', params: ['0x...', 'latest'] },
-});
+// Get accounts from session
+const session = await client.getSession()
+const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
+const solAccounts =
+  session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
 
-const solBalance = await client.invokeMethod({
-  scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
-  request: { method: 'getBalance', params: ['...'] },
-});
+// Get ETH balance via invokeMethod
+if (ethAccounts.length > 0) {
+  const ethAddress = ethAccounts[0].split(':')[2]
+  const ethBalance = await client.invokeMethod({
+    scope: 'eip155:1',
+    request: { method: 'eth_getBalance', params: [ethAddress, 'latest'] },
+  })
+  console.log('ETH balance:', ethBalance)
+}
+
+// Get SOL balance via @solana/kit (getBalance is not supported via invokeMethod)
+if (solAccounts.length > 0) {
+  const solAddress = solAccounts[0].split(':')[2]
+  const rpc = createSolanaRpc('https://api.mainnet-beta.solana.com')
+  const balance = await rpc.getBalance(address(solAddress)).send()
+  console.log('SOL balance:', balance)
+}
 ```
 
-## When to use the Multichain Client
+## When to use the multichain client
 
-The Multichain Client is best for:
+The multichain client is a good fit when you're:
 
-- **New dapps** designed from the ground up for multichain
-- **Dapps requiring the best cross-chain UX** — a single connection prompt for all ecosystems
-- **Advanced use cases** requiring full control over the session lifecycle
+- **Building a new dapp** designed from the ground up for multiple ecosystems
+- **Looking for the best cross-chain UX** — one connection prompt for all chains
+- **Needing full control** over the session lifecycle
 
-If you're integrating MetaMask Connect into an existing dapp and want minimal code changes, consider using the [ecosystem-specific clients](/sdk#integration-options) instead (`@metamask/connect-evm` or `@metamask/connect-solana`).
+If you're adding MetaMask Connect to an existing dapp and want minimal code changes, the [ecosystem-specific clients](/sdk#integration-options) (`@metamask/connect-evm` or `@metamask/connect-solana`) are a simpler starting point — you can always migrate later.
 
 ## Get started
 
