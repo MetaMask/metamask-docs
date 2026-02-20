@@ -9,33 +9,31 @@ import CardList from '@site/src/components/CardList'
 # Connect to EVM networks
 
 Connect to Ethereum and other EVM networks in MetaMask using `@metamask/connect-evm`.
+Your existing `viem`, `ethers.js`, or `web3.js` code works with minimal changes — the EVM client gives you a standard [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider (the same `window.ethereum`-shaped interface you're used to), with automatic platform detection, relay connections, and session persistence built in.
 
-## Drop-in EIP-1193 provider
-
-The EVM client provides an **EIP-1193 compatible provider** (`window.ethereum`-shaped), so your existing EVM code works with minimal changes.
-This means your existing `ethers.js`, `viem`, or `web3.js` code works as-is.
+## Quick example
 
 ```typescript
-import { createEVMClient } from '@metamask/connect-evm';
+import { createEVMClient } from '@metamask/connect-evm'
 
 const client = await createEVMClient({
   dapp: { name: 'My DApp', url: 'https://mydapp.com' },
-});
+})
 
 // Connect and request chains
 const { accounts, chainId } = await client.connect({
-  chainIds: ['0x1', '0x89'],  // Ethereum Mainnet + Polygon
-});
+  chainIds: ['0x1', '0x89'], // Ethereum Mainnet + Polygon
+})
 
 // Get an EIP-1193 provider — works with ethers.js, viem, web3.js, etc.
-const provider = client.getProvider();
+const provider = client.getProvider()
 const balance = await provider.request({
   method: 'eth_getBalance',
   params: [accounts[0], 'latest'],
-});
+})
 ```
 
-**What you get:** Automatic platform detection, relay connections, session persistence — all behind a standard EIP-1193 interface.
+The SDK handles platform detection, relay connections, and session persistence automatically — you just work with the provider.
 
 ## Get started
 
@@ -92,11 +90,11 @@ buttonIcon: 'external-arrow',
 
 The EVM client works seamlessly with popular Ethereum libraries:
 
-| Library | Compatibility |
-|---------|---------------|
-| [ethers.js](https://docs.ethers.org/) | Pass `client.getProvider()` to `BrowserProvider` |
-| [viem](https://viem.sh/) | Use with `custom()` transport |
-| [web3.js](https://web3js.org/) | Pass `client.getProvider()` to `Web3` constructor |
+| Library                               | Compatibility                                     |
+| ------------------------------------- | ------------------------------------------------- |
+| [viem](https://viem.sh/)              | Use with `custom()` transport                     |
+| [ethers.js](https://docs.ethers.org/) | Pass `client.getProvider()` to `BrowserProvider`  |
+| [web3.js](https://web3js.org/)        | Pass `client.getProvider()` to `Web3` constructor |
 
 ## Using with ethers.js and Solana together
 

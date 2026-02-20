@@ -8,8 +8,8 @@ import TabItem from "@theme/TabItem";
 
 # MetaMask Connect options
 
-MetaMask Connect clients take configuration options when initialized.
-This page documents the options for each client type.
+When you create a MetaMask Connect client, you can pass configuration options to control how your dapp identifies itself, which networks it supports, and how connections behave.
+This page documents the available options for each client type.
 
 ## Common options
 
@@ -92,10 +92,8 @@ api: {
 </TabItem>
 </Tabs>
 
-A map of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) chain IDs to RPC URLs for all networks supported by the dapp.
-
-For EVM networks, use the `eip155` namespace (e.g., `eip155:1` for Ethereum Mainnet).
-For Solana networks, use the `solana` namespace with the genesis hash.
+A map of chain IDs to RPC URLs for all networks your dapp supports.
+Chain IDs follow the [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) format — use the `eip155` namespace for EVM networks (for example, `eip155:1` for Ethereum Mainnet) and the `solana` namespace with the genesis hash for Solana networks.
 
 :::caution
 Use [Infura allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist) to protect against other people submitting requests to your API key.
