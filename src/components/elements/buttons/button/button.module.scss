@@ -123,6 +123,13 @@
 
   mask-image: radial-gradient(white, black);
 
+  border: 2px solid transparent;
+
+  &:focus {
+    border: 2px solid var(--focus-outline-color-light);
+    outline: none;
+  }
+
   &:before {
     content: '';
 

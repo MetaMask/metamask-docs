@@ -21,7 +21,7 @@ interface ButtonProps {
   href?: string
   onClick?: () => void
   disabled?: boolean
-  as?: 'link' | 'a' | 'button'
+  as?: 'link' | 'a' | 'button' | 'div'
   external?: boolean
   rel?: string | boolean
   download?: boolean | string
@@ -115,20 +115,40 @@ const Button = forwardRef<HTMLElement, ButtonProps>(
       textTransform !== 'none' && textTransform
     )
 
+    const isLinkElement = asValue === 'link' || asValue === 'a'
+    const isButtonElement = asValue === 'button'
+
+    const elementProps: Record<string, unknown> = {
+      ref: ref as React.Ref<unknown>,
+      'aria-label': ariaLabel,
+      onClick,
+      className: buttonClassNames,
+      style,
+      ...rest,
+    }
+
+    if (isLinkElement) {
+      elementProps.href = href
+      if (external) {
+        elementProps.target = '_blank'
+        elementProps.rel = rel || 'noreferrer noopener'
+      } else if (rel) {
+        elementProps.rel = rel
+      }
+      if (download) {
+        elementProps.download = download
+      }
+    }
+
+    if (isButtonElement) {
+      elementProps.disabled = disabled
+      if (buttonType) {
+        elementProps.type = buttonType
+      }
+    }
+
     return (
-      <Component
-        ref={ref as React.Ref<any>}
-        href={asValue !== 'button' ? href : null}
-        target={asValue !== 'button' && external ? '_blank' : null}
-        rel={rel ? rel : external && asValue !== 'button' ? 'noreferrer noopener' : null}
-        aria-label={ariaLabel}
-        onClick={onClick}
-        className={buttonClassNames}
-        disabled={disabled}
-        download={as !== 'button' && download ? download : null}
-        style={style}
-        {...(asValue === 'button' && { type: buttonType })}
-        {...rest}>
+      <Component {...elementProps}>
         <span className={clsx(styles['button-holder'], labelBig && styles['label-big'])}>
           {children}
           {hasSpinner && <Spinner />}

@@ -1,0 +1,8 @@
+:root {
+  --focus-outline-color-light: #0066cc;
+  --focus-outline-color-dark: #4da6ff;
+}
+
+[data-theme='dark'] {
+  --focus-outline-color-light: var(--focus-outline-color-dark);
+}
