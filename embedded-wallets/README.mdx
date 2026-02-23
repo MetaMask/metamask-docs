@@ -2,10 +2,28 @@
 title: What are Embedded Wallets?
 image: 'img/metamaskog.jpg'
 sidebar_label: About
-description: 'How MetaMask Embedded Wallets Work? | Documentation - Embedded Wallets'
+description: 'How do MetaMask Embedded Wallets Work? | Documentation - Embedded Wallets'
+slug: /
 ---
 
 import BrowserOnly from '@docusaurus/BrowserOnly'
+import SEO from '@site/src/components/SEO'
+
+<SEO
+  title="MetaMask Embedded Wallets"
+  description="What are MetaMask Embedded Wallets? Pluggable wallet infrastructure for Web3. OAuth logins, multiple platforms, non-custodial wallets."
+  keywords={[
+    'embedded wallets',
+    'web3 wallet',
+    'metamask embedded wallets',
+    'oauth wallet',
+    'web3auth',
+    'non-custodial',
+    'wallet infrastructure',
+  ]}
+  slug="/embedded-wallets/"
+/>
+
 import PnPCoreKitFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-dark.png'
 import PnPCoreKitFlowLight from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-light.png'
 
@@ -107,5 +125,11 @@ The MetaMask Embedded Wallets infrastructure is built to handle millions of user
 :::note[Rebrand]
 
 The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+:::
+
+:::tip[Start]
+
+[Get started with Embedded Wallets](./get-started.mdx).
 
 :::
