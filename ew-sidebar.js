@@ -126,8 +126,8 @@ function mobileTopNavButton(selectedSDK) {
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebar = {
   overview: [
-    { type: "doc", id: "how-it-works", label: "About" },
-    { type: "doc", id: "README", label: "Get Started" },
+    { type: "doc", id: "README", label: "About" },
+    { type: "doc", id: "get-started", label: "Get Started" },
     {
       type: "category",
       label: "Choose your platform",
