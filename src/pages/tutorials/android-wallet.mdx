@@ -531,6 +531,12 @@ Below, we support Ethereum Sepolia, and Arbitrum Sepolia. If you wish to support
 more chains in your wallet, add the config with the required details in the list below. Along 
 with that, you can also add the desired chain using the add custom chain feature in the app.
 
+:::note
+
+Android cannot fetch chain configuration from the Embedded Wallets dashboard; supported chains must be defined in code as shown below. Learn more about supporting [chains and chain-specific integrations](/embedded-wallets/connect-blockchain/#reference-guides-for-blockchain-connections).
+
+:::
+
 ```kotlin
 var chainConfigList = arrayOf(
     ChainConfig(
