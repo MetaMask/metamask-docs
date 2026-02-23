@@ -18,7 +18,7 @@ Bob can start using your dapp right away, without installing a wallet or paying 
 
 You'll enable this by:
 
-- Adding an [Embedded Wallet](/embedded-wallets) for instant onboarding.
+- Adding an [embedded wallet](/embedded-wallets) for instant onboarding.
 - Creating a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts) to create and redeem an invitation.
 - Creating an [open delegation](/smart-accounts-kit/concepts/delegation) to represent an invitation.
 
