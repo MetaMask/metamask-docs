@@ -44,9 +44,9 @@ Follow these steps to create a AWS Cognito connection:
 
 1. Visit the [dashboard](https://dashboard.web3auth.io).
 1. Go to the **Custom Connections** section.
-1. Click on the **Settings** icon near the `AWS Cognito` connection.
-1. Enter the `Cognito Connection ID`.
-1. Paste `https://cognito-idp.{REGION}.amazonaws.com/{USER_POOL_ID}/.well-known/jwks.json` as `JWKS Endpoint`.
+1. Click on the **Settings** icon near the **AWS Cognito** connection.
+1. Enter the **Cognito Connection ID**.
+1. Paste `https://cognito-idp.{REGION}.amazonaws.com/{USER_POOL_ID}/.well-known/jwks.json` as **JWKS Endpoint**.
 1. Paste a sample JWT Token to auto populate the best **JWT validations** possible.
 1. Select the **JWT user identifier**: `email`, `sub` or `custom`.
 1. (Optional) Toggle the case sensitivity of **User Identifier**.
@@ -55,7 +55,11 @@ Follow these steps to create a AWS Cognito connection:
    1. Next, type aud as a field and `APP_CLIENT_ID` as a value.
 1. Click on the **Add Connection** button to save the settings.
 
-> Note: Replace the `REGION`, `USER_POOL_ID` and `APP_CLIENT_ID` with your Cognito specific details.
+:::note
+
+Replace the `REGION`, `USER_POOL_ID`, and `APP_CLIENT_ID` with your Cognito-specific details.
+
+:::
 
 <div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
   <img
@@ -71,9 +75,13 @@ Follow these steps to create a AWS Cognito connection:
 
 ## Usage
 
-Since, the `AWS Cognito Connection` details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
+Since the **AWS Cognito Connection** details are available from the dashboard, developers don't need to pass any additional parameters to the `Web3AuthProvider`.
 
-> Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
+:::tip
+
+Follow our [quickstart](/quickstart/?product=EMBEDDED_WALLETS&walletAggregatorOnly=NO&framework=REACT&stepIndex=0) to set up the basic flow.
+
+:::
 
 ### Log in with AWS Cognito
 
