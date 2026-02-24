@@ -11,12 +11,20 @@ toc_max_heading_level: 4
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-This tutorial demonstrates how to integrate core functionalities of the Solana Name Service (SNS) with [MetaMask Embedded Wallets](/embedded-wallets).
-Create a seamless onboarding experience by pairing simple social logins with a powerful, human-readable onchain identity layer.
+MetaMask Embedded Wallets enable users to log in with familiar web2 socials by using [Shamir's
+Secret Sharing](../../embedded-wallets/infrastructure/sss-architecture/) Multi-Party Computation (MPC) to ensure the 
+wallet key is distributed and non-custodial.
 
-As an overview, this integration allows users to:
+This tutorial demonstrates how to integrate [MetaMask Embedded Wallets](/embedded-wallets) with core functionalities 
+of the Solana Name Service (SNS) to create a seamless domain management experience &mdash; pairing simple social logins 
+with a powerful, human-readable onchain identity layer on Solana.
 
-- Log in using familiar web2 social providers (Google, Apple, etc.).
+By combining Embedded Wallets' familiar web2 social logins with SNS's human-readable domain functionality, 
+you can enable users to register, resolve, and manage `.sol` domains directly from their embedded wallet.
+
+MetaMask Embedded Wallets social login allows users to:
+
+- Log in using familiar web2 social providers (such as Google and Apple).
 - Register new `.sol` domains with their embedded wallet.
 - Resolve domain names to wallet addresses for easy transfers.
 - Fetch and display their primary domain as a user identity.
@@ -36,45 +44,48 @@ This tutorial follows the implementation demonstrated in the following live stre
 </p>
 
 :::info
+
 A [complete implementation example](https://github.com/Web3Auth/web3auth-examples/tree/main/other/sns-example) is available on GitHub.
+
 :::
 
-## Steps
+## Step 1: Set up the dashboard
 
-### 1. Set up the dashboard
-
-MetaMask Embedded Wallets enable users to log in with familiar web2 socials by using Shamir
-Secret Sharing (MPC) to ensure the wallet key is distributed and non-custodial.
-Follow these steps to set up and configure your Embedded Wallets (Web3Auth) dashboard:
+Follow these steps to set up and configure your Embedded Wallets (Web3Auth) dashboard.
 
 1. Sign up for a free account on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/login).
 2. Create a new project.
-3. Copy your Client ID from the dashboard.
-   This ID is crucial for initializing the SDK.
-4. Navigate to **Chains & Networks** and enable Solana, Solana Devnet, and Solana Testnet.
-   Ensure all the RPC URLs are configured.
+3. Copy your Client ID from the dashboard: this ID is crucial for initializing the SDK.
+4. Navigate to **Chains & Networks** and enable Solana, Solana Devnet, and Solana Testnet. Ensure all the [RPC URLs are configured](../../embedded-wallets/dashboard/chains-and-networks).
+
+:::tip
 
 See the [Embedded Wallets dashboard documentation](/embedded-wallets/dashboard) for more information.
 You can explore other dashboard features, including custom verifiers, whitelabeling, and analytics.
 
-### 2. Install dependencies
+:::
+
+## Step 2: Install dependencies
 
 Install the following dependencies in your project:
 
 ```bash npm2yarn
 npm install @web3auth/modal @solana/web3.js @bonfida/spl-name-service @solana/spl-token
 ```
+:::note
 
-- `@web3auth/modal` enables the embedded wallet integration with social logins.
-- `@solana/web3.js` enables interacting with the Solana blockchain and constructing transactions.
-- `@bonfida/spl-name-service` enables SNS domain registration, resolution, and management.
-- `@solana/spl-token` handles token operations when processing domain registration payments.
+- `@web3auth/modal`: Enables the embedded wallet integration with social logins.
+- `@solana/web3.js`: Enables interacting with the Solana blockchain and constructing transactions.
+- `@bonfida/spl-name-service`: Enables SNS domain registration, resolution, and management.
+- `@solana/spl-token`: Handles token operations when processing domain registration payments.
 
-### 3. Integrate MetaMask Embedded Wallets in React
+:::
+
+## Step 3: Integrate MetaMask Embedded Wallets in React
 
 Use the `@web3auth/modal` SDK to integrate and manage Embedded Wallets in your React application.
 
-#### 3.1. Initialize the provider
+### 3.1 Initialize the provider
 
 Wrap your application components with a `Web3AuthProvider` to configure the SDK with your Client ID:
 
@@ -118,7 +129,7 @@ const web3AuthContextConfig: Web3AuthContextConfig = {
 export default web3AuthContextConfig
 ```
 
-#### 3.2. Access wallet and user information
+### 3.2 Access wallet and user information
 
 Access wallet information and user details using the [Solana hooks](/embedded-wallets/sdk/react/solana-hooks):
 
@@ -156,12 +167,12 @@ export function WalletInfo() {
 }
 ```
 
-### 4. Integrate Solana Name Service (SNS)
+## Step 4: Integrate Solana Name Service
 
-SNS enables users to register human-readable domain names that map to Solana wallet addresses.
+The Solana Name Service (SNS) enables users to register human-readable domain names that map to Solana wallet addresses.
 Follow these steps to implement the core SNS functionalities: domain resolution, registration, and management.
 
-#### 4.1. Import components
+### 4.1 Import components
 
 Import the necessary components from the installed libraries:
 
@@ -173,7 +184,7 @@ import { useSolanaWallet } from '@web3auth/modal/react/solana'
 // focus-end
 ```
 
-#### 4.2. Resolve domains
+### 4.2 Resolve domains
 
 Domain resolution converts a `.sol` domain name to its corresponding wallet address.
 This is useful for enabling users to send payments using human-readable names instead of long wallet addresses.
@@ -260,7 +271,7 @@ export function DomainResolver() {
 }
 ```
 
-#### 4.3. Register domains
+### 4.3 Register domains
 
 Domain registration allows users to claim new `.sol` domains.
 The registration process involves creating and sending a transaction with the appropriate instructions.
@@ -362,7 +373,7 @@ export function DomainRegistration() {
 }
 ```
 
-#### 4.4. Display the primary domain
+### 4.4 Display the primary domain
 
 A primary domain serves as the user's main identity.
 This component fetches and displays the user's primary domain, providing instant personalization for your application.
@@ -446,35 +457,29 @@ export function PrimaryDomain() {
 
 ### Development environment
 
-- **Devnet for testing** - Always develop and test on devnet or testnet.
+- **Devnet for testing:** Always develop and test on devnet or testnet.
   You can use the [Solana Faucet](https://faucet.solana.com/) to get test SOL for your new account.
-- **Environment variables** - Store your Client ID and other sensitive configuration in environment variables.
+- **Environment variables:** -Store your Client ID and other sensitive configuration in environment variables.
 
 ### User experience
 
-- **Input validation** - Always validate and normalize domain input (lowercase, trim `.sol` extension).
-- **Loading states** - Implement proper loading states while processing domain operations.
-- **Error handling** - Provide clear error messages when operations fail or when domains don't exist.
-- **Fallback for listed domains** - When resolving domains that are listed for sale, implement fallback
+- **Input validation:** Always validate and normalize domain input (lowercase, trim `.sol` extension).
+- **Loading states:** Implement proper loading states while processing domain operations.
+- **Error handling:** Provide clear error messages when operations fail or when domains don't exist.
+- **Fallback for listed domains:** When resolving domains that are listed for sale, implement fallback
   functionality to prevent incorrect transfers.
 
 ### Production readiness
 
-- **Domain availability** - Before registration, check domain availability using SNS APIs or SDK methods.
-- **Transaction confirmation** - Implement proper transaction confirmation handling to ensure operations complete successfully.
-- **Rate limiting** - Consider implementing rate limiting for domain operations to prevent spam.
-- **Security** - Always validate domain operations server-side when dealing with financial transactions.
+- **Domain availability:** Before registration, check domain availability using SNS APIs or SDK methods.
+- **Transaction confirmation:** Implement proper transaction confirmation handling to ensure operations complete 
+successfully.
+- **Rate limiting:** Consider implementing rate limiting for domain operations to prevent spam.
+- **Security:** Always validate domain operations server-side when dealing with financial transactions.
 
-## Conclusion
+## Next steps
 
-This tutorial demonstrates how to integrate MetaMask Embedded Wallets with Solana Name Service (SNS) to create a seamless domain management experience.
-By combining Embedded Wallets' familiar web2 social logins with SNS's human-readable domain functionality, 
-you can enable users to register, resolve, and manage `.sol` domains directly from their embedded wallet.
-
-The integration provides a smooth, familiar experience for your users while leveraging the power of
-decentralized identity and human-readable addresses on Solana.
-
-For more advanced SNS features like domain records, subdomains, and social integrations, see the [SNS SDK documentation](https://docs.sns.id/dev/sns-sdk).
-
-To learn more about Embedded Wallets, see the [Web SDK documentation](/embedded-wallets/sdk/react/) and the
+- For more advanced SNS features like domain records, subdomains, and social integrations, see the 
+[SNS SDK documentation](https://docs.sns.id/dev/sns-sdk).
+- To learn more about Embedded Wallets, see the [Web SDK documentation](/embedded-wallets/sdk/react/) and the
 [SNS integration example](https://github.com/Web3Auth/web3auth-examples/tree/main/other/sns-example).
