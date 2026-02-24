@@ -71,7 +71,7 @@ Once a user logs in, the Embedded Wallets SDK returns a provider. Since there is
 
 Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Tezos EC Curve specific signing functions, hence, we first derive the Tezos Key using the `getTezosKeyPair()` function.
 
-On the underhood, it uses the `tezosCrypto.utils.seedToKeyPair()` function, where we need to pass the `hex2buf(privateKey)`, ie. the hexadecimal to byteArray converted private key. We can use the returned private key pair from this and use on Tezos transactions.
+On the underhood, it uses the `tezosCrypto.utils.seedToKeyPair()` function, where we need to pass the `hex2buf(privateKey)`, that is, the hexadecimal to byteArray converted private key. We can use the returned private key pair from this and use on Tezos transactions.
 
 ```tsx
 import * as tezosCrypto from '@tezos-core-tools/crypto-utils'
