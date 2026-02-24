@@ -8,7 +8,6 @@ import Layout from '@theme/Layout'
 import { TutorialsInterface, platformMap, productMap } from '../../utils/tutorials-map'
 
 import { useState, useEffect } from 'react'
-import SEO from '@site/src/components/SEO'
 import Hero from '@site/src/components/Hero/Hero'
 import Input from '@site/src/components/Input'
 import TutorialCard from './TutorialCard'
@@ -140,13 +139,6 @@ export default function Tutorials({ content = {} }: TutorialsInterface) {
 
   return (
     <Layout title="Tutorials">
-      <SEO
-        title="Tutorials"
-        description="Tutorials to integrate, customize, and build with MetaMask developer tools."
-        image={`${baseUrl}img/tutorialsog.jpg`}
-        slug="/tutorials"
-      />
-
       <Hero
         title="Tutorials"
         description="Explore use cases and follow these hands-on tutorials to integrate and build with MetaMask developer tools."
