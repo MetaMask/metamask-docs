@@ -19,7 +19,7 @@ export default function Home(): JSX.Element {
         />
         <meta
           name="keywords"
-          content="metamask, wallet, blockchain, web3, web3.js, ethers.js, solana, ethereum, crypto, sdk, snaps, dapp"
+          content="metamask, wallet, blockchain, web3, web3.js, ethers.js, ethereum, evm-compatible chains, bitcoin, solana, ethereum, crypto, sdk, snaps, dapp"
         />
         <meta property="og:site_name" content="MetaMask" />
         <meta property="og:type" content="website" />
