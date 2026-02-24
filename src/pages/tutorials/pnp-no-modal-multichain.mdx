@@ -1,7 +1,7 @@
 ---
-title: Create a chain-agnostic web3 wallet with Web3Auth
+title: Create a chain-agnostic web3 wallet with Embedded Wallets
 image: 'img/tutorials/tutorials-banners/multi.png'
-description: Create a chain-agnostic web3 wallet with Web3Auth, connecting embedded wallets with multiple blockchains.
+description: Create a chain-agnostic web3 wallet with Embedded Wallets (previously Web3Auth), connecting Embedded Wallets with multiple blockchains.
 tags: [embedded wallets, multichain, polkadot, evm, cosmos, web3auth]
 date: February 9, 2024
 author: MetaMask Developer Relations
@@ -19,41 +19,92 @@ import Tabs from '@theme/Tabs'
   slug="/tutorials/pnp-no-modal-multichain"
 />
 
-This guide will cover the basics of how to integrate Web3Auth with different blockchains at the same time. In this demo, you will be able to authenticate with different social logins and get different addresses from each blockchain. Of course, you can interact and sign transactions with any of them.
+Embedded Wallets (previously Web3Auth) integrates with different blockchains at the same time. Follow this demo to 
+authenticate users using different social logins and get different addresses from each blockchain. 
 
-You will be able to make calls like get the user's `account`, fetch `balance`, `sign message`, `send transaction`, `read` from and `write` to smart contracts, etc.
+This integration lets your users interact and sign transactions with any connected chain. For example, get the 
+user's `account`, fetch `balance`, `sign message`, `send transaction`, `read` from and `write` to smart contracts, and more.
 
-**Web3Auth is designed to support any blockchain that follows the `secp256k1` & `ed25519` curves**. This means it works seamlessly with all EVMs such as Ethereum, Polygon, Binance Smart Chain, and others. Additionally, it supports non-EVM blockchains like Aptos, Cosmos, Polkadot, Solana, Tezos, Bitcoin, among many others. Web3Auth is not limited to these examples and is capable of integrating with any blockchain that adheres to these cryptographic standards, offering a wide range of compatibility to suit various needs and preferences in the blockchain ecosystem.
+:::tip
 
-## Quick Start
+Embedded Wallets is designed to support any blockchain that follows the **`secp256k1` and `ed25519` curves**. 
+This means it works seamlessly with all EVMs such as Ethereum, Polygon, Binance Smart Chain, and others. 
+Additionally, it supports non-EVM blockchains like Aptos, Cosmos, Polkadot, Solana, Tezos, Bitcoin, among many 
+others. Embedded Wallets is not limited to these examples and is capable of integrating with any blockchain that 
+adheres to these cryptographic standards, offering a wide range of compatibility to suit various needs and 
+preferences in the blockchain ecosystem.
 
-You can run the following command or you can check the [full example](https://github.com/Web3Auth/web3auth-pnp-examples/tree/main/custom-authentication/multi-chain-example) in our Github.
+:::
+
+This guide covers the basics of how to integrate a multi-chain wallet application using Embedded Wallets . 
+With this setup, you can:
+
+1. Authenticate users with their social accounts.
+2. Generate blockchain addresses for multiple chains (Ethereum, Solana, Tezos, Polkadot).
+3. Check balances across different blockchains.
+4. Sign messages and send transactions on various networks.
+
+The power of Embedded Wallets lies in its ability to derive keys for multiple blockchains from a single 
+authentication session, providing users with a seamless experience across the web3 ecosystem.
+
+## Quickstart
+
+Run the following command: 
 
 ```bash
 npx degit Web3Auth/web3auth-pnp-examples/custom-authentication/multi-chain-example/ w3a-multi-chain-demo && cd w3a-multi-chain-demo && npm install && npm run dev
 ```
+:::note
+
+See the 
+[full example on GitHub](https://github.com/Web3Auth/web3auth-pnp-examples/tree/main/custom-authentication/multi-chain-example).
+
+:::
 
 ## Prerequisites
 
 - For Web Apps: A basic knowledge of JavaScript is required to use Web3Auth SDK.
+- For Mobile Apps: For the Web3Auth Mobile SDKs, you have a choice between iOS, Android, React Native, and Flutter. 
+Refer to the [Web3Auth SDK Reference](/sdk) for more information.
 
-- For Mobile Apps: For the Web3Auth Mobile SDKs, you have a choice between iOS, Android, React Native & Flutter. Please refer to the [Web3Auth SDK Reference](/sdk) for more information.
+## Step 1: Set up Embedded Wallets dashboard
 
-- Create a Web3Auth account on the [Web3Auth Dashboard](https://dashboard.web3auth.io)
+Create a Web3Auth account on the [Web3Auth Dashboard](https://dashboard.web3auth.io). The basic account is free. 
 
-## How to set up Web3Auth Dashboard
+:::note
 
-If you haven't already, sign up on the Web3Auth platform. It is free and gives you access to the Web3Auth's base plan. After the basic setup, explore other features and functionalities offered by the Web3Auth Dashboard. It includes custom verifiers, whitelabeling, analytics, and more. Head to [Web3Auth's documentation](/embedded-wallets/dashboard/) page for detailed instructions on setting up the Web3Auth Dashboard.
+See the [Web3Auth's documentation](/embedded-wallets/dashboard/) for detailed instructions on setting up the 
+Embedded Wallets dashboard.
 
-## Using Web3Auth with Multiple Blockchains
+:::
 
-To use Web3Auth with multiple blockchains, you need to set up your React application with the Web3Auth SDK. This guide will walk you through the setup and implementation.
+:::tip
 
-#### Setting up your base project for using Web3 libraries:
+The paid accounts offer custom verifiers, whitelabeling, analytics, and more. 
 
-If you are starting from scratch, to set up this project locally, you will need to create a base Web application, where you can install the required dependencies. However, while working with Web3, there are a few base libraries, which need additional configuration. This is because certain packages are not available in the browser environment, and we need to polyfill them manually. You can follow [this documentation](/embedded-wallets/troubleshooting/webpack-issues) where we have mentioned the configuration changes for some popular frameworks for your reference.
+:::
 
-### Installation
+
+## Step 2: Set up your React app
+
+To use Web3Auth with multiple blockchains, you need to set up your React application with the Web3Auth SDK. 
+This guide will walk you through the setup and implementation.
+
+### 2.1 Set up your base project
+
+If you are starting from scratch, to set up this project locally, you will need to create a base web application, 
+where you can install the required dependencies. However, while working with Web3, there are a few base libraries, 
+which need additional configuration. This is because certain packages are not available in the browser environment, 
+and we need to polyfill them manually. 
+
+:::tip
+
+Follow [troubleshooting documentation](/embedded-wallets/troubleshooting/webpack-issues) for details on the 
+configuration changes for some popular frameworks for your reference.
+
+:::
+
+### 2.2 Installation
 
 We need several dependencies to make this work with multiple blockchains:
 
@@ -61,9 +112,9 @@ We need several dependencies to make this work with multiple blockchains:
 npm install @web3auth/modal @solana/web3.js ethers @taquito/signer @taquito/taquito @taquito/utils @polkadot/api @polkadot/util-crypto tweetnacl
 ```
 
-### Setting up Web3Auth Provider
+### 2.3 Set up the Embedded Wallets provider
 
-First, create a configuration file for Web3Auth (e.g., `web3authContext.tsx`):
+2.3.1 First, create a configuration file for Embedded Wallets such as, `web3authContext.tsx`:
 
 ```tsx
 import { WEB3AUTH_NETWORK, type Web3AuthOptions } from '@web3auth/modal'
@@ -84,7 +135,7 @@ const web3AuthContextConfig = {
 export default web3AuthContextConfig
 ```
 
-Then, set up the Web3Auth provider in your application entry point (`index.tsx` or similar):
+2.3.2 Set up the Embedded Wallets provider in your application entry point such as, `index.tsx` or similar:
 
 ```tsx
 import ReactDOM from 'react-dom/client'
@@ -102,11 +153,12 @@ root.render(
 )
 ```
 
-### Implementing the Multi-Chain Wallet
+## Step 3: Implement the multi-chain wallet
 
-Now, let's implement the main application with support for multiple blockchains. We'll create RPC modules for each blockchain and use them in our app.
+Now, let's implement the main application with support for multiple blockchains. We'll create RPC modules for 
+each blockchain and use them in our app.
 
-#### Setting up the Main App Component
+Set up the main app component with:
 
 ```tsx
 import './App.css'
@@ -269,13 +321,14 @@ function App() {
 export default App
 ```
 
-### Implementing Blockchain RPC Modules
+## Step 4: Implement blockchain RPC modules
 
-Let's implement the RPC modules for each blockchain. These modules will interact with the respective blockchain networks.
+Next we implement the RPC modules for each blockchain. These modules will interact with the respective blockchain 
+networks.
 
-## EVM (Ethereum)
+### EVM (Ethereum)
 
-Here's how to implement the Ethereum RPC module:
+To implement the Ethereum RPC module:
 
 ```tsx
 // ethersRPC.ts
@@ -346,9 +399,9 @@ export async function sendEthereumTransaction(provider: IProvider): Promise<any>
 }
 ```
 
-## Solana
+### Solana
 
-Here's how to implement the Solana RPC module:
+To implement the Solana RPC module:
 
 ```tsx
 // solanaRPC.ts
@@ -445,7 +498,7 @@ export async function sendSolanaTransaction(ethProvider: IProvider): Promise<str
 }
 ```
 
-## Tezos
+### Tezos
 
 Here's how to implement the Tezos RPC module:
 
@@ -530,7 +583,7 @@ export async function signAndSendTezosTransaction(provider: IProvider): Promise<
 }
 ```
 
-## Polkadot
+### Polkadot
 
 Here's how to implement the Polkadot RPC module:
 
@@ -586,20 +639,12 @@ export async function signAndSendPolkadotTransaction(provider: IProvider): Promi
 }
 ```
 
-## Conclusion
+## Next steps
 
-This guide has shown you how to create a multi-chain wallet application using Web3Auth. With this setup, you can:
-
-1. Authenticate users with their social accounts
-2. Generate blockchain addresses for multiple chains (Ethereum, Solana, Tezos, Polkadot)
-3. Check balances across different blockchains
-4. Sign messages and send transactions on various networks
-
-The power of Web3Auth lies in its ability to derive keys for multiple blockchains from a single authentication session, providing users with a seamless experience across the web3 ecosystem.
-
-If you want to integrate with a specific blockchain and you're having trouble with the code, please contact us in our [community portal](https://web3auth.io/community/).
-
-## References
-
-- [Web3Auth Documentation](https://docs.metamask.io/)
-- [Web3Auth Examples](https://github.com/Web3Auth/web3auth-pnp-examples/)
+- If you want to integrate with a specific blockchain and you're having trouble with the code, please contact us 
+in our [community portal](https://web3auth.io/community/).
+- Discover how to work with supported chains:
+  - [EVM-compatible chains](../../embedded-wallets/connect-blockchain/evm/)
+  - [Solana](../../embedded-wallets/connect-blockchain/solana/)
+  - [Standard approach to connect with non EVM chains](../../embedded-wallets/connect-blockchain/other/#standard-approach-for-connecting-with-non-evm-chains)
+- Browse the [Embedded Wallets examples](https://github.com/Web3Auth/web3auth-pnp-examples/)
