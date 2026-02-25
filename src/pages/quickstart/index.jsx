@@ -11,7 +11,8 @@ import { useEffect, useMemo, useState, useRef, useCallback } from 'react'
 import MoonLoader from 'react-spinners/BeatLoader'
 import React from 'react'
 
-import SEO from '@site/src/components/SEO'
+import Head from '@docusaurus/Head'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import IntegrationBuilderCodeView from '../../theme/IntegrationBuilderCodeView'
 import builder from './builder'
 import styles from './styles.module.css'
@@ -111,6 +112,11 @@ async function loadFilesDirectly() {
 }
 
 export default function IntegrationBuilderPage(props) {
+  const { siteConfig } = useDocusaurusContext()
+  const rootUrl =
+    (siteConfig.url ?? '').replace(/\/$/, '') +
+    ((siteConfig.baseUrl ?? '/') === '/' ? '' : (siteConfig.baseUrl ?? '').replace(/\/$/, ''))
+
   // Try different ways to access files from component props
   let files = {}
 
@@ -758,39 +764,27 @@ export default function IntegrationBuilderPage(props) {
     <Layout
       title="MetaMask Quickstart"
       description="MetaMask Quickstart - Choose the right MetaMask integration for your project. Build with the world's leading self-custodial crypto wallet.">
-      <SEO
-        title="MetaMask Quickstart"
-        description="MetaMask Quickstart for easy quick start. Choose the right MetaMask integration for your project and start building with the world's leading self-custodial crypto wallet."
-        keywords={[
-          'metamask quickstart',
-          'web3 development',
-          'dapp development',
-          'ethereum development',
-          'blockchain development',
-          'metamask sdk',
-          'web3 tutorial',
-          'smart contract integration',
-          'crypto wallet integration',
-          'defi development',
-          'nft development',
-          'blockchain api',
-          'web3 javascript',
-          'ethereum javascript',
-          'metamask react',
-          'web3 react',
-          'blockchain tutorial',
-          'crypto development',
-          'ethereum tutorial',
-          'web3 integration',
-          'metamask integration',
-          'wallet connect',
-          'web3 authentication',
-          'blockchain wallet',
-          'ethereum wallet',
-        ]}
-        image="https://docs.metamask.io/img/quickstartog.jpg"
-        url="https://docs.metamask.io/quickstart"
-      />
+      <Head>
+        <meta
+          name="keywords"
+          content="metamask, wallet, blockchain, solana, ethereum, crypto, sdk, metamask quickstart, web3 development, dapp development, ethereum development, blockchain development, metamask sdk, web3 tutorial, smart contract integration, crypto wallet integration, defi development, nft development, blockchain api, web3 javascript, ethereum javascript, metamask react, web3 react, blockchain tutorial, crypto development, ethereum tutorial, web3 integration, metamask integration, wallet connect, web3 authentication, blockchain wallet, ethereum wallet"
+        />
+        <meta property="og:site_name" content="MetaMask" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${rootUrl}/quickstart`} />
+        <meta property="og:image" content={`${rootUrl}/img/quickstartog.jpg`} />
+        <meta property="og:image:secure_url" content={`${rootUrl}/img/quickstartog.jpg`} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="MetaMask Quickstart" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@MetaMask" />
+        <meta name="twitter:creator" content="@MetaMask" />
+        <meta name="twitter:image" content={`${rootUrl}/img/quickstartog.jpg`} />
+        <meta itemProp="image" content={`${rootUrl}/img/quickstartog.jpg`} />
+        <meta name="author" content="MetaMask" />
+      </Head>
       <div className={styles.container} style={{ position: 'relative' }}>
         {/* Top Control Pane */}
         <div className={styles.topControlPane}>

@@ -3,12 +3,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+import Head from '@docusaurus/Head'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import { TutorialsInterface, platformMap, productMap } from '../../utils/tutorials-map'
 
 import { useState, useEffect } from 'react'
-import SEO from '@site/src/components/SEO'
 import Hero from '@site/src/components/Hero/Hero'
 import Input from '@site/src/components/Input'
 import TutorialCard from './TutorialCard'
@@ -39,7 +39,9 @@ export default function Tutorials({ content = {} }: TutorialsInterface) {
   const [selectedPlatforms, setSelectedPlatforms] = useState<OptionType[]>([])
   const [filteredTutorials, setFilteredTutorials] = useState(completeTutorials)
   const { siteConfig } = useDocusaurusContext()
-  const { baseUrl } = siteConfig
+  const rootUrl =
+    (siteConfig.url ?? '').replace(/\/$/, '') +
+    ((siteConfig.baseUrl ?? '/') === '/' ? '' : (siteConfig.baseUrl ?? '').replace(/\/$/, ''))
 
   // Apply tag filters first
   useEffect(() => {
@@ -138,15 +140,33 @@ export default function Tutorials({ content = {} }: TutorialsInterface) {
 
   // No transformation needed - we'll render TutorialCard directly
 
-  return (
-    <Layout title="Tutorials">
-      <SEO
-        title="Tutorials"
-        description="Tutorials to integrate, customize, and build with MetaMask developer tools."
-        image={`${baseUrl}img/tutorialsog.jpg`}
-        slug="/tutorials"
-      />
+  const tutorialsImage = `${rootUrl}/img/tutorialsog.jpg`
 
+  return (
+    <Layout
+      title="Tutorials"
+      description="Tutorials to integrate, customize, and build with MetaMask developer tools.">
+      <Head>
+        <meta
+          name="keywords"
+          content="metamask, wallet, blockchain, web3, web3.js, ethers.js, solana, ethereum, crypto, sdk, snaps, dapp"
+        />
+        <meta property="og:site_name" content="MetaMask" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${rootUrl}/tutorials`} />
+        <meta property="og:image" content={tutorialsImage} />
+        <meta property="og:image:secure_url" content={tutorialsImage} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Tutorials" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@MetaMask" />
+        <meta name="twitter:creator" content="@MetaMask" />
+        <meta name="twitter:image" content={tutorialsImage} />
+        <meta itemProp="image" content={tutorialsImage} />
+        <meta name="author" content="MetaMask" />
+      </Head>
       <Hero
         title="Tutorials"
         description="Explore use cases and follow these hands-on tutorials to integrate and build with MetaMask developer tools."
