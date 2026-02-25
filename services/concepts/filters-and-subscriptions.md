@@ -13,10 +13,7 @@ Ethereum methods use this underlying implementation to search for and retrieve s
 
 :::info
 
-Infura is even faster at this than regular Ethereum nodes as we make use of custom off-chain indexing and data storage strategies. See the following blogs for more information:
-
-- [Introducing faster Ethereum logs and events](https://blog.infura.io/post/faster-logs-and-events-e43e2fa13773).
-- [Filters support over HTTPS](https://blog.infura.io/post/filters-support-over-https).
+Infura is even faster at this than regular Ethereum nodes as we make use of custom off-chain indexing and data storage strategies.
 
 :::
 
