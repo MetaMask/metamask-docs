@@ -25,7 +25,6 @@ const sdkSidebar = {
       items: [
         'multichain/connect/guides/connect-to-multichain',
         'multichain/connect/guides/send-transactions',
-        'multichain/connect/guides/connector-libraries',
       ],
     },
     {
