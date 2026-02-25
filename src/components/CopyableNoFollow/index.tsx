@@ -1,3 +1,9 @@
+/*
+  This component allows MM to provide rpc urls with a no follow so that tools such as ahref dont 
+  tripper http 404s on urls that support api requests. It provides a copy option to allow users
+  to grab the url without right-click.
+*/
+
 import React, { useState, useCallback } from 'react'
 import styles from './styles.module.css'
 
