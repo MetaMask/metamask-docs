@@ -28,7 +28,7 @@ export default function CopyableNoFollow({ url, children }: CopyableNoFollowProp
 
   return (
     <span className={styles.wrapper}>
-      <a href={url} rel="nofollow" target="_blank" className={styles.link}>
+      <a href={url} rel="nofollow" target="_blank">
         {children ?? url}
       </a>
       <button
