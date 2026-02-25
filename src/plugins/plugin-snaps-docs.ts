@@ -55,6 +55,7 @@ export default function useSnapsDocsPlugin(context: LoadContext): Plugin {
       const content = `---
 id: ${methodName}
 title: ${method.name}
+description: Reference documentation for the \`${method.name}\` method of the Snaps API.
 hide_title: true
 ---
 
