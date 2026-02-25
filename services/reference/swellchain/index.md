@@ -19,7 +19,7 @@ infrastructure for efficient transaction processing and scalability.
 
 :::info See also
 
-- The [official Swellchain documentation](https://build.swellnetwork.io/) for more information.
+- The [official Swellchain site](https://www.swellnetwork.io/) for more information.
 - The official
 [Optimism Ethereum JSON-RPC API documentation](https://docs.optimism.io/builders/node-operators/json-rpc)
 (Bedrock release) for custom Swellchain methods.

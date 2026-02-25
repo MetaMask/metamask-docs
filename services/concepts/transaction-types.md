@@ -65,12 +65,6 @@ Use the [`eth_createAccessList`](../reference/ethereum/json-rpc-methods/eth_crea
 }
 ```
 
-:::info
-
-View the [Infura article](https://blog.infura.io/post/optimizing-ethereum-transactions-with-eth_createaccesslist) that describes how `eth_createAccessList` can help optimize gas costs, reduce out-of-gas errors, and verify clients for infrastructure access.
-
-:::
-
 ## EIP-1559 transactions
 
 Transactions with type `0x2` are transactions introduced in [EIP-1559](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1559.md), included in Ethereum's [London fork](https://ethereum.org/en/history/#london). EIP-1559 addresses the network congestion and overpricing of transaction fees caused by the historical fee market, in which users send transactions specifying a gas price bid using the `gasPrice` parameter, and miners choose transactions with the highest bids.

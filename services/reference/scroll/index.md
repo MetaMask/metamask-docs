@@ -55,7 +55,7 @@ No personal information is sent as part of partner requests, only information ne
 
 The following partners provide access to the Scroll network:
 <!-- markdown-link-check-disable -->
-- Everstake ([Terms of Service](https://everstake.one/docs/terms-of-use.pdf), [Privacy Policy](https://everstake.one/docs/privacy-policy.pdf))
+- Everstake ([Terms of Use](https://everstake.one/terms-of-use), [Privacy Notice](https://everstake.one/privacy-notice))
 - Nodies ([Terms of Service](https://www.nodies.app/tos.txt), [Privacy Policy](https://www.nodies.app/privacy.txt))
 - Chainstack ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
 <!-- markdown-link-check-enable -->

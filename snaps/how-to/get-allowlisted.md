@@ -80,8 +80,6 @@ The form requests information about your Snap, including the following:
   You can use line breaks, lists, and URLs.
   You cannot use HTML.
   If applicable, describe quick steps to onboard and use the Snap.
-  For example: _After installing the Snap, visit the companion dapp at
-  https://voyager-snap.linea.build to connect an account and track your Linea Voyage progress._
 
 - **GitHub repository and npm package URLs** - The public GitHub repo that hosts your Snap's 
   source code, and the npm package of your [published Snap](../how-to/publish-a-snap.md).
