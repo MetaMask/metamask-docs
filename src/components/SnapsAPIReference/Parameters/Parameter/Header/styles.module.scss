@@ -1,0 +1,36 @@
+.parameter-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.parameter-name {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.parameter-description {
+  p {
+    font-size: 1.4rem;
+    line-height: 150%;
+    margin: 0;
+  }
+}
+
+.parameter-type {
+  color: var(--general-gray-dark);
+  font-size: 1.19rem;
+  font-style: italic;
+
+  [data-theme='dark'] & {
+    color: var(--general-gray);
+  }
+}
+
+.parameter-required {
+  font-size: 14px;
+  color: var(--error);
+}
