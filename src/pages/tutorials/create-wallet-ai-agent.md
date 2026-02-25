@@ -27,7 +27,7 @@ You will use a provided template, which sets up MetaMask SDK and [Vercel's AI SD
 
 ### 1. Set up the project
 
-1.  Clone the [`Consensys/wallet-agent`](https://github.com/Consensys/wallet-agent/tree/main) repository:
+1.  Clone the [`Consensys/wallet-agent`](#) repository:
 
     ```bash
     git clone git@github.com:Consensys/wallet-agent.git
@@ -301,5 +301,5 @@ You can configure the AI agent to directly send the transaction using a [Viem Wa
 
 ## Resources
 
-- View the main branch of the [`Consensys/wallet-agent`](https://github.com/Consensys/wallet-agent) template for the completed implementation of this tutorial.
+<!-- - View the main branch of the [`Consensys/wallet-agent`](#) template for the completed implementation of this tutorial. -->
 - Watch the [live coding session](https://www.youtube.com/watch?v=ZVuOaKuAhBQ) on YouTube, in which the MetaMask DevRel team walks through creating a wallet AI agent from the initial template.
