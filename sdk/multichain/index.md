@@ -53,8 +53,7 @@ await client.connect(['eip155:1', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], []
 // Get accounts from session
 const session = await client.getSession()
 const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
-const solAccounts =
-  session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
+const solAccounts = session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
 
 // Get ETH balance via invokeMethod
 if (ethAccounts.length > 0) {
@@ -98,11 +97,6 @@ description: 'Connect to EVM networks and Solana in MetaMask.',
 href: '/sdk/multichain/connect/guides/send-transactions',
 title: 'Send EVM and Solana transactions',
 description: 'Send transactions on EVM networks and Solana.',
-},
-{
-href: '/sdk/multichain/connect/guides/connector-libraries',
-title: 'Connector library guide',
-description: 'Integrate MetaMask Connect into your existing multichain connector library.',
 },
 {
 href: '/sdk/multichain/connect/reference/api',
