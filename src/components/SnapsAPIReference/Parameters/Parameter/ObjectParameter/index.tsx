@@ -7,14 +7,13 @@ import { Description } from '../Description'
 
 export type ObjectParameterProps = {
   parameter: ObjectMethodParameter
-  nested?: boolean
 }
 
-export const ObjectParameter: FunctionComponent<ObjectParameterProps> = ({ parameter, nested }) => {
+export const ObjectParameter: FunctionComponent<ObjectParameterProps> = ({ parameter }) => {
   const { description, properties } = parameter
 
   return (
-    <div className={nested ? styles['parameter-child-item'] : styles.parameter}>
+    <div className={styles.parameter}>
       <div className={styles['parameter-main']}>
         <Header parameter={parameter} type="object" />
         {description && <Description>{description}</Description>}
@@ -22,7 +21,7 @@ export const ObjectParameter: FunctionComponent<ObjectParameterProps> = ({ param
 
       <div className={styles['parameter-children']}>
         {Object.entries(properties).map(([key, property]) => (
-          <Parameter key={`${key}-${property.name}`} parameter={property} nested={false} />
+          <Parameter key={`${key}-${property.name}`} parameter={property} />
         ))}
       </div>
     </div>

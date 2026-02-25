@@ -7,25 +7,23 @@ import { ArrayParameter } from './ArrayParameter'
 
 type ParameterProps = {
   parameter: MethodParameter;
-  nested?: boolean;
 }
 
 export const Parameter: FunctionComponent<ParameterProps> = ({
   parameter,
-  nested,
 }) => {
   switch (parameter.kind) {
     case 'array':
-      return <ArrayParameter parameter={parameter} nested={nested} />;
+      return <ArrayParameter parameter={parameter} />;
 
     case 'object':
-      return <ObjectParameter parameter={parameter} nested={nested} />;
+      return <ObjectParameter parameter={parameter} />;
 
     case 'primitive':
-      return <PrimitiveParameter parameter={parameter} nested={nested} />;
+      return <PrimitiveParameter parameter={parameter} />;
 
     case 'union':
-      return <UnionParameter parameter={parameter} nested={nested} />;
+      return <UnionParameter parameter={parameter} />;
   }
 
   return null;
