@@ -39,7 +39,9 @@ export default function Tutorials({ content = {} }: TutorialsInterface) {
   const [selectedPlatforms, setSelectedPlatforms] = useState<OptionType[]>([])
   const [filteredTutorials, setFilteredTutorials] = useState(completeTutorials)
   const { siteConfig } = useDocusaurusContext()
-  const { baseUrl } = siteConfig
+  const rootUrl =
+    (siteConfig.url ?? '').replace(/\/$/, '') +
+    ((siteConfig.baseUrl ?? '/') === '/' ? '' : (siteConfig.baseUrl ?? '').replace(/\/$/, ''))
 
   // Apply tag filters first
   useEffect(() => {
@@ -138,36 +140,30 @@ export default function Tutorials({ content = {} }: TutorialsInterface) {
 
   // No transformation needed - we'll render TutorialCard directly
 
-  const tutorialsImage = `${baseUrl}img/tutorialsog.jpg`
+  const tutorialsImage = `${rootUrl}/img/tutorialsog.jpg`
 
   return (
-    <Layout title="Tutorials">
+    <Layout
+      title="Tutorials"
+      description="Tutorials to integrate, customize, and build with MetaMask developer tools.">
       <Head>
-        <title>Tutorials | MetaMask</title>
-        <meta name="description" content="Tutorials to integrate, customize, and build with MetaMask developer tools." />
         <meta
           name="keywords"
           content="metamask, wallet, blockchain, web3, web3.js, ethers.js, solana, ethereum, crypto, sdk, snaps, dapp"
         />
         <meta property="og:site_name" content="MetaMask" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Tutorials" />
-        <meta property="og:description" content="Tutorials to integrate, customize, and build with MetaMask developer tools." />
-        <meta property="og:url" content="https://docs.metamask.io/tutorials" />
+        <meta property="og:url" content={`${rootUrl}/tutorials`} />
         <meta property="og:image" content={tutorialsImage} />
         <meta property="og:image:secure_url" content={tutorialsImage} />
-        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:type" content="image/jpeg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Tutorials" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@MetaMask" />
         <meta name="twitter:creator" content="@MetaMask" />
-        <meta name="twitter:title" content="Tutorials" />
-        <meta name="twitter:description" content="Tutorials to integrate, customize, and build with MetaMask developer tools." />
         <meta name="twitter:image" content={tutorialsImage} />
-        <meta itemProp="name" content="Tutorials" />
-        <meta itemProp="description" content="Tutorials to integrate, customize, and build with MetaMask developer tools." />
         <meta itemProp="image" content={tutorialsImage} />
         <meta name="author" content="MetaMask" />
       </Head>
