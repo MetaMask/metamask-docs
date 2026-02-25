@@ -8,14 +8,13 @@ import classNames from 'classnames'
 
 export type UnionParameterProps = {
   parameter: UnionMethodParameter
-  nested?: boolean
 }
 
-export const UnionParameter: FunctionComponent<UnionParameterProps> = ({ parameter, nested }) => {
+export const UnionParameter: FunctionComponent<UnionParameterProps> = ({ parameter }) => {
   const { description, options } = parameter
 
   return (
-    <div className={nested ? styles['parameter-child-item'] : styles.parameter}>
+    <div className={styles.parameter}>
       <div className={styles['parameter-main']}>
         <Header parameter={parameter} type="union" />
         {description && <Description>{description}</Description>}
@@ -26,7 +25,7 @@ export const UnionParameter: FunctionComponent<UnionParameterProps> = ({ paramet
         {Object.entries(options).map(([key, property], index, array) => (
           <Fragment key={`${key}-${property.name}`}>
             <div className={styles['parameter-child']}>
-              <Parameter parameter={property} nested={true} />
+              <Parameter parameter={property} />
             </div>
             {index < array.length - 1 && (
               <p className={classNames('type-paragraph-s', styles['parameter-separator'])}>or</p>
@@ -41,7 +40,7 @@ export const UnionParameter: FunctionComponent<UnionParameterProps> = ({ paramet
           <div className={styles['parameter-children']}>
             {Object.entries(parameter.commonProperties).map(([key, property]) => (
               <div key={`${key}-${property.name}`} className={styles['parameter-child']}>
-                <Parameter parameter={property} nested={true} />
+                <Parameter parameter={property} />
               </div>
             ))}
           </div>
