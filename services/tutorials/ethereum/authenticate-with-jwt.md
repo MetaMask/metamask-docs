@@ -9,9 +9,9 @@ import TabItem from '@theme/TabItem';
 
 # Authenticate with JWT
 
-This tutorial demonstrates how to create and apply a JSON Web Token (JWT) to authenticate an 
-[`eth_blockNumber`](../../reference/ethereum/json-rpc-methods/eth_blocknumber.mdx) API request 
-with Node.js. 
+This tutorial demonstrates how to create and apply a JSON Web Token (JWT) to authenticate an
+[`eth_blockNumber`](../../reference/ethereum/json-rpc-methods/eth_blocknumber.mdx) API request
+with Node.js.
 
 ## Prerequisites
 
@@ -109,7 +109,7 @@ openssl ec            \
 
 #### 3.1. Update the MetaMask Developer dashboard
 
-In the [MetaMask Developer dashboard](https://app.infura.io/), under **API Keys**, select the key you want to use for authentication. Go to its **Settings** tab. Under **Requirements**, fill out these fields:
+In the [MetaMask Developer dashboard](https://developer.metamask.io/login), under **API Keys**, select the key you want to use for authentication. Go to its **Settings** tab. Under **Requirements**, fill out these fields:
 
 - **JWT PUBLIC KEY NAME** - Provide a unique name for your JWT public key, which can help you manage multiple keys.
 - **JWT PUBLIC KEY** - Paste the entire contents of the `public_key.pem` file.
@@ -362,9 +362,8 @@ You can run this request yourself to make the call. Your console outputs the res
 Consider following these next steps:
 
 - [Configure your JWT](../../how-to/json-web-token-jwt.md) to control its scope.
-- Learn more about [keeping your Infura secrets safe](https://www.infura.io/blog/post/best-practises-for-infura-api-key-management).
 - Decode your JWT: Copy the JWT provided in the console by the [optional curl equivalent step](#optional-examine-the-curl-equivalent), and paste it into the **Encoded** field in [jwt.io](https://jwt.io/).
-- Add a layer of verification to your call by applying the JWT's **FINGERPRINT** provided in the MetaMask Developer dashboard. 
+- Add a layer of verification to your call by applying the JWT's **FINGERPRINT** provided in the MetaMask Developer dashboard.
 
   :::note
 
