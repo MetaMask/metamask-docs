@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { Fragment, FunctionComponent } from 'react'
 import { UnionMethodParameter } from '../types'
 import styles from '../styles.module.scss'
 import { Parameter } from '../index'
@@ -24,14 +24,14 @@ export const UnionParameter: FunctionComponent<UnionParameterProps> = ({ paramet
       <h3 className="margin-vert--lg type-paragraph-s">Options</h3>
       <div className={styles['parameter-children']}>
         {Object.entries(options).map(([key, property], index, array) => (
-          <>
-            <div key={`${key}-${property.name}`} className={styles['parameter-child']}>
+          <Fragment key={`${key}-${property.name}`}>
+            <div className={styles['parameter-child']}>
               <Parameter parameter={property} nested={true} />
             </div>
             {index < array.length - 1 && (
               <p className={classNames('type-paragraph-s', styles['parameter-separator'])}>or</p>
             )}
-          </>
+          </Fragment>
         ))}
       </div>
 
