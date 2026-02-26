@@ -71,8 +71,8 @@ Use [`@metamask/connect-multichain`](/sdk/multichain) to work directly with the 
 This option uses **scopes** and `wallet_invokeMethod` instead of per-chain RPC and supports a single connection prompt across ecosystems..
 **This is the recommended long-term path.**
 
-All three options are built on the same multichain client under the hood, sharing the same transport and session infrastructure.
-You can start with whichever option fits your dapp today and migrate to **Option C** when you're ready for full multichain control.
+All options use the same underlying multichain client and share transport and session infrastructure.
+You can start with the option that fits your dapp today and move to the multichain client (Option C) when you need full multichain control.
 
 ### Packages
 
