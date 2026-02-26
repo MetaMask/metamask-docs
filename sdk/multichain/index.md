@@ -20,7 +20,7 @@ For the full rationale and specification, see [MIP-5](https://github.com/MetaMas
 
 Instead of connecting to one chain at a time, the Multichain API lets you do the following:
 
-- **Request access to multiple ecosystems at once** — for example, Ethereum Mainnet, Polygon, and Solana Mainnet in a single session
+- **Request access to multiple ecosystems at once**: For example, request Ethereum Mainnet, Polygon, and Solana Mainnet in a single session.
 - **Send requests to any chain in the session**: For example, send a Solana transaction and an EVM transaction through the same connection.
 - **Manage the full session lifecycle**: Create, query, invoke methods on, and revoke sessions with `wallet_createSession`, `wallet_getSession`, `wallet_invokeMethod`, and `wallet_revokeSession`.
 
