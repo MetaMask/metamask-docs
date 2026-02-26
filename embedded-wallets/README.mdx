@@ -6,9 +6,100 @@ description: 'What are MetaMask Embedded Wallets? Pluggable wallet infrastructur
 slug: /
 ---
 
+import Head from '@docusaurus/Head'
 import BrowserOnly from '@docusaurus/BrowserOnly'
-import PnPCoreKitFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-dark.png'
-import PnPCoreKitFlowLight from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-light.png'
+import Tiles from '@theme/Tiles'
+
+export const GetStarted = [
+  {
+    name: '',
+    description: '',
+    tiles: [
+      {
+        key: 'react',
+        title: 'React',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/sdk/react',
+      },
+      {
+        key: 'vue',
+        title: 'Vue',
+        icon: 'logo-vue.png',
+        path: '/embedded-wallets/sdk/vue',
+      },
+      {
+        key: 'js',
+        title: 'JavaScript',
+        icon: 'logo-js.png',
+        path: '/embedded-wallets/sdk/js',
+      },
+      {
+        key: 'node',
+        title: 'Node.js',
+        icon: 'logo-nodejs.png',
+        path: '/embedded-wallets/sdk/node',
+      },
+      {
+        key: 'android',
+        title: 'Android',
+        icon: 'logo-android.png',
+        path: '/embedded-wallets/sdk/android',
+      },
+      {
+        key: 'ios',
+        title: 'iOS',
+        icon: 'logo-apple.png',
+        path: '/embedded-wallets/sdk/ios',
+      },
+      {
+        key: 'react-native',
+        title: 'React Native',
+        icon: 'logo-react.png',
+        path: '/embedded-wallets/sdk/react-native',
+      },
+      {
+        key: 'flutter',
+        title: 'Flutter',
+        icon: 'logo-flutter.png',
+        path: '/embedded-wallets/sdk/flutter',
+      },
+      {
+        key: 'unity',
+        title: 'Unity',
+        icon: 'logo-unity.png',
+        path: '/embedded-wallets/sdk/unity',
+      },
+      {
+        key: 'unreal',
+        title: 'Unreal Engine',
+        icon: 'logo-unreal.png',
+        path: '/embedded-wallets/sdk/unreal',
+      },
+    ],
+
+}, ]
+
+<Head>
+  <meta
+    name="keywords"
+    content="metamask, wallet, blockchain, solana, ethereum, crypto, sdk, embedded wallets, web3 wallet integration, metamask sdk, web3auth alternative, social login web3, oauth wallet, dapp wallet integration, non-custodial wallet, crypto wallet sdk, blockchain wallet api, web3 authentication, metamask embedded wallet, wallet as a service, white label wallet, crypto wallet infrastructure, defi wallet integration, ethereum wallet sdk, multi-chain wallet, wallet connect alternative, web3 onboarding, smart contract wallet, account abstraction, biometric wallet login, gasless transactions"
+  />
+  <meta property="og:site_name" content="MetaMask" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://docs.metamask.io/embedded-wallets/" />
+  <meta property="og:image" content="https://docs.metamask.io/img/metamaskog.jpg" />
+  <meta property="og:image:secure_url" content="https://docs.metamask.io/img/metamaskog.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="MetaMask Embedded Wallets" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@MetaMask" />
+  <meta name="twitter:creator" content="@MetaMask" />
+  <meta name="twitter:image" content="https://docs.metamask.io/img/metamaskog.jpg" />
+  <meta itemProp="image" content="https://docs.metamask.io/img/metamaskog.jpg" />
+  <meta name="author" content="MetaMask" />
+</Head>
 
 MetaMask Embedded Wallets (formerly Web3Auth) provides a pluggable embedded wallet infrastructure to simplify Web3 wallet integration and user onboarding. It supports OAuth-based logins and multiple platforms, allowing users to access Web3 applications through familiar authentication methods in under a minute.
 
