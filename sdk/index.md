@@ -8,7 +8,7 @@ import CardList from '@site/src/components/CardList'
 
 # Seamlessly connect to the MetaMask wallet
 
-MetaMask Connect enables a fast, reliable connection from your dapp to the MetaMask extension and MetaMask Mobile.
+MetaMask Connect enables a fast, reliable connection from your dapp to the MetaMask browser extension and the MetaMask mobile app.
 With a single integration, onboard users and interact with their accounts across desktop browsers, mobile browsers, and native apps.
 
 MetaMask Connect replaces the legacy MetaMask SDK with a complete rewrite built on the [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
