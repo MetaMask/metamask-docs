@@ -62,7 +62,7 @@ Use this option when you want to add MetaMask Connect to an existing single-ecos
 
 ### Option B: Multiple ecosystem clients
 
-If your dapp needs to support both EVM and Solana, you can use [`@metamask/connect-evm`](/sdk/evm) and [`@metamask/connect-solana`](/sdk/solana) together.
+If your dapp supports both EVM and Solana, use [`@metamask/connect-evm`](/sdk/evm) and [`@metamask/connect-solana`](/sdk/solana) together.
 This gives you per-ecosystem APIs while covering multiple chains, and is a good fit when you want to keep familiar provider interfaces for each ecosystem.
 
 ### Option C: Multichain client (full control, recommended)
