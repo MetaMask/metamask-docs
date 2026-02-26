@@ -8,7 +8,7 @@ import CardList from '@site/src/components/CardList'
 
 # Connect to multiple ecosystems
 
-Connect to multiple blockchain networks and ecosystems in MetaMask at the same time using `@metamask/connect-multichain`.
+Use `@metamask/connect-multichain` to connect to multiple blockchain networks and ecosystems in MetaMask at the same time..
 
 With the multichain client, your dapp can request access to EVM networks and Solana (and future ecosystems like **Bitcoin** and **Tron**) in a single connection prompt — no separate connect flows per chain.
 This gives you more control than the [ecosystem-specific clients](/sdk#integration-options), but requires adapting your dapp to work with the Multichain API rather than traditional per-chain RPC.
