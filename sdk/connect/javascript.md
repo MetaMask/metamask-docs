@@ -138,7 +138,7 @@ These examples configure the SDK with the following options:
 
 - [`dappMetadata`](../reference/sdk-options.md#dappmetadata) - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
 - [`infuraAPIKey`](../reference/sdk-options.md#infuraapikey) - Enables read-only RPC and load‑balancing.
-  Set this option to your [Infura API key](/developer-tools/dashboard/get-started/create-api).
+  Set this option to your [Infura API key](/developer-tools/dashboard/get-started/create-api.md).
 
 ### 3. Connect and use provider
 
