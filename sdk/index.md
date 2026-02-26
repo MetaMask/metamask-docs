@@ -67,7 +67,7 @@ This option gives you ecosystem-specific APIs while supporting both ecosystems, 
 
 ### Option C: Multichain client (full control, recommended)
 
-Use [`@metamask/connect-multichain`](/sdk/multichain) directly for the full [Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
+Use [`@metamask/connect-multichain`](/sdk/multichain) to work directly with the [Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
 This gives you more control — you work with **scopes** and `wallet_invokeMethod` rather than per-chain RPC — and unlocks the best experience for multichain dapps with a single connection prompt for all ecosystems.
 **This is the recommended long-term path.**
 
