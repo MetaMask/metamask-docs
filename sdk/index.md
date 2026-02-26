@@ -16,8 +16,8 @@ The MetaMask Connect SDK detects the user’s environment and selects the best c
 
 ## Why use MetaMask Connect?
 
-If the MetaMask extension is installed, standards like [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) handle wallet discovery well.
-But when the extension isn't available — on mobile, in a different browser, or on a new device — your users need another way in.
+If the MetaMask browser extension is installed, standards such as [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) support wallet discovery.
+When the extension isn't available (for example, on mobile, in a different browser, or on a new device), users need another way to connect.
 MetaMask Connect fills that gap and gives you more:
 
 1. **Cross-platform connections** — Reach users on any device. When the extension isn't available, the SDK connects to MetaMask Mobile through a relay, with no extra setup on your side.
