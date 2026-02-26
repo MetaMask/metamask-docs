@@ -20,7 +20,7 @@ If the MetaMask browser extension is installed, standards such as [EIP-6963](htt
 When the extension isn't available (for example, on mobile, in a different browser, or on a new device), users need another way to connect.
 MetaMask Connect fills that gap and provides the following benefits:
 
-1. **Cross-platform connections** — Reach users on any device. When the extension isn't available, the SDK connects to MetaMask Mobile through a relay, with no extra setup on your side.
+1. **Cross-platform connections**: Reach users on any device. When the MetaMask browser extension isn’t available, MetaMask Connect connects users through the MetaMask mobile app with no additional setup.
 2. **Multichain sessions** — Request access to EVM and Solana (and future ecosystems) in a single connection, instead of connecting per chain.
 3. **Persistent sessions** — Sessions survive page reloads and new tabs, so users aren't prompted to reconnect.
 4. **Consistent API** — The same interface works whether the user connects through the extension or Mobile.
