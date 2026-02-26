@@ -18,7 +18,7 @@ The MetaMask Connect SDK detects the user’s environment and selects the best c
 
 If the MetaMask browser extension is installed, standards such as [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) support wallet discovery.
 When the extension isn't available (for example, on mobile, in a different browser, or on a new device), users need another way to connect.
-MetaMask Connect fills that gap and gives you more:
+MetaMask Connect fills that gap and provides the following benefits:
 
 1. **Cross-platform connections** — Reach users on any device. When the extension isn't available, the SDK connects to MetaMask Mobile through a relay, with no extra setup on your side.
 2. **Multichain sessions** — Request access to EVM and Solana (and future ecosystems) in a single connection, instead of connecting per chain.
