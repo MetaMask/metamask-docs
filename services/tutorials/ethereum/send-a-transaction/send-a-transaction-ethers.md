@@ -159,7 +159,7 @@ https://sepolia.etherscan.io/tx/0x7c5c0061fbda9e01c1bb1269ffc7323107e2116d8f7327
 Mined in block 7587728
 ```
 
-You can search for the transaction on a block explorer such as [Sepolia Etherscan](https://www.infura.io/faucet).
+You can search for the transaction on a block explorer such as [Sepolia Etherscan](https://sepolia.etherscan.io/).
 
 ### (Optional) Fine tune the transaction details
 
