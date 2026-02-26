@@ -53,7 +53,7 @@ There are three ways to integrate, depending on what works best for your dapp:
 
 ### Option A: Single-ecosystem client (drop-in for existing dapps)
 
-If your dapp already targets a single ecosystem, use [`@metamask/connect-evm`](/sdk/evm) or [`@metamask/connect-solana`](/sdk/solana) for a familiar experience with minimal changes to your existing code.
+If your dapp targets a single ecosystem, use [`@metamask/connect-evm`](/sdk/evm) or [`@metamask/connect-solana`](/sdk/solana) for a familiar experience with minimal changes to your existing code.
 
 - **EVM** — Gives you an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) compatible provider, so your existing `ethers.js`, `viem`, or `web3.js` code works as-is.
 - **Solana** — Gives you a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet that plugs into the Solana wallet adapter ecosystem.
