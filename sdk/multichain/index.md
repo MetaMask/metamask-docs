@@ -11,7 +11,7 @@ import CardList from '@site/src/components/CardList'
 Use `@metamask/connect-multichain` to connect to multiple blockchain networks and ecosystems in MetaMask at the same time..
 
 With the multichain client, your dapp can request access to EVM networks, Solana, and future ecosystems in a single connection prompt, instead of using separate connection flows for each chain.
-This gives you more control than the [ecosystem-specific clients](/sdk#integration-options), but requires adapting your dapp to work with the Multichain API rather than traditional per-chain RPC.
+This gives you more control than the [ecosystem-specific clients](/sdk/#integration-options), but requires adapting your dapp to work with the Multichain API rather than traditional per-chain RPC.
 
 ## How the Multichain API works
 
@@ -82,7 +82,7 @@ The multichain client is a good fit when you're:
 - **Looking for the best cross-chain UX** — one connection prompt for all chains
 - **Needing full control** over the session lifecycle
 
-If you're adding MetaMask Connect to an existing dapp and want minimal code changes, the [ecosystem-specific clients](/sdk#integration-options) (`@metamask/connect-evm` or `@metamask/connect-solana`) are a simpler starting point — you can always migrate later.
+If you're adding MetaMask Connect to an existing dapp and want minimal code changes, the [ecosystem-specific clients](/sdk/#integration-options) (`@metamask/connect-evm` or `@metamask/connect-solana`) are a simpler starting point — you can always migrate later.
 
 ## Get started
 
