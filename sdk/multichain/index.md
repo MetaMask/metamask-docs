@@ -18,7 +18,7 @@ This gives you more control than the [ecosystem-specific clients](/sdk#integrati
 MetaMask Connect is built on the [Multichain API (CAIP-25)](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) specification, a chain-agnostic standard for wallet-dapp communication.
 For the full rationale and specification, see [MIP-5](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-5.md).
 
-Instead of connecting to one chain at a time, the Multichain API lets you:
+Instead of connecting to one chain at a time, the Multichain API lets you do the following:
 
 - **Request access to multiple ecosystems at once** — for example, Ethereum Mainnet, Polygon, and Solana Mainnet in a single session
 - **Send requests to any chain in the session**: For example, send a Solana transaction and an EVM transaction through the same connection.
