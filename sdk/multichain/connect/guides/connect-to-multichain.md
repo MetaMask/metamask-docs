@@ -6,8 +6,7 @@ keywords: [multichain, evm, solana, connect, caip-25, scope]
 
 # Connect to EVM and Solana in MetaMask
 
-This guide walks you through setting up MetaMask Connect in a multichain JavaScript dapp.
-By the end, your dapp can connect to EVM networks and Solana at the same time, and make requests to each one without switching between them.
+By the end, your dapp can connect to EVM networks and Solana in a single session and make requests to each ecosystem without switching connections.
 
 ## Prerequisites
 
