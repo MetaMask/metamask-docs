@@ -58,7 +58,7 @@ If your dapp targets a single ecosystem, use [`@metamask/connect-evm`](/sdk/evm)
 - **EVM**: Provides an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) compatible provider, so existing `ethers.js`, `viem`, or `web3.js` integrations work with minimal changes.
 - **Solana**: Provides a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet that integrates with the Solana wallet adapter ecosystem.
 
-This is the fastest path if you already have a working single-chain dapp and want to add MetaMask Connect.
+Use this option when you want to add MetaMask Connect to an existing single-ecosystem dapp.
 
 ### Option B: Multiple ecosystem clients
 
