@@ -208,6 +208,7 @@ const sidebar = {
             "dashboard/advanced/test-accounts",
             "dashboard/advanced/user-details",
             "dashboard/advanced/key-export",
+            "dashboard/advanced/custom-chains",
           ],
         },
         "dashboard/chains-and-networks",
