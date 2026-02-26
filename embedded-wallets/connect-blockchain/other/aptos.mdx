@@ -10,6 +10,7 @@ description: 'Integrate Embedded Wallets with the Aptos Blockchain | Embedded Wa
 import InitializeWeb3Auth from '../_initialize-web3auth-other-pnp.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
+import CopyableNoFollow from '@site/src/components/CopyableNoFollow'
 
 While using the Embedded Wallets Web SDK for a non-EVM chain like [Aptos](https://aptos.dev/), you can obtain the user's private key from the provider. Using this private key, you can use the corresponding libraries of the blockchain to make calls like fetching the user's `account`, retrieving `balance`, `signing transactions`, `sending transactions`, or interacting with smart contracts. We will focus on testnet for this guide.
 
@@ -70,9 +71,9 @@ npm install --save @aptos-labs/ts-sdk
 
 - Chain Namespace: other
 - Chain ID: 0x1
-- Public RPC URL: https://fullnode.mainnet.aptoslabs.com/v1
+- Public RPC URL: <CopyableNoFollow url="https://fullnode.mainnet.aptoslabs.com/v1" />
 - Display Name: Aptos Mainnet
-- Block Explorer Link: https://explorer.aptoslabs.com/
+- Block Explorer Link: [https://explorer.aptoslabs.com/](https://explorer.aptoslabs.com/)
 - Ticker: APT
 - Ticker Name: Aptos
 
@@ -84,9 +85,9 @@ npm install --save @aptos-labs/ts-sdk
 
 - Chain Namespace: other
 - Chain ID: 0x7E6
-- Public RPC URL: https://fullnode.testnet.aptoslabs.com/v1
+- Public RPC URL: <CopyableNoFollow url="https://fullnode.testnet.aptoslabs.com/v1" />
 - Display Name: Aptos Testnet
-- Block Explorer Link: https://explorer.aptoslabs.com/testnet
+- Block Explorer Link: [https://explorer.aptoslabs.com/testnet](https://explorer.aptoslabs.com/testnet)
 - Ticker: APT
 - Ticker Name: Aptos
 
