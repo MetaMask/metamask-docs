@@ -435,7 +435,7 @@ class EthereumProvider extends ChainProvider {
 
 ### Solana provider
 
-Next, we will extend `ChainProvider` and create `SolanaProvider`. For `SolanaProvider`, we'll only implement the `getBalance`, `sendTransaction`, and `signMessage`. We'll also add `_generateKeyPair()`, a helper method to create `Ed25519HDKeyPair`. It's used to sign the transactions and messages on Solana ecosystem. Since, Solana uses `ed25519` curve, we can utilize the `Web3AuthFlutter.getEd25519PrivKey`.
+Next, extend `ChainProvider` and create `SolanaProvider`. In `SolanaProvider`, only implement the `getBalance`, `sendTransaction`, and `signMessage` methods. Add `_generateKeyPair()`to generate an `Ed25519HDKeyPair`which `SolanaProvider` uses to sign transactions and messages in the Solana ecosystem. Because Solana uses the `ed25519` curve, we can use `Web3AuthFlutter.getEd25519PrivKey` to retrieve the private key.
 
 ```dart
 class SolanaProvider extends ChainProvider {
