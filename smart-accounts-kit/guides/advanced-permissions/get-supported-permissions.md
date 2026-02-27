@@ -1,6 +1,6 @@
 ---
 description: Learn how to get supported Advanced Permissions for a wallet.
-sidebar_label: Get supported permisisons
+sidebar_label: Get supported permissions
 keywords: [advanced permissions, supported execution permissions, erc-7715, 7715]
 ---
 

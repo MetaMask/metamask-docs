@@ -1,24 +1,17 @@
 ---
 title: Create a chain-agnostic web3 wallet in Flutter
 image: 'img/tutorials/tutorials-banners/flutter-wallet.png'
-description: Empower your Flutter app with a chain-agnostic web3 wallet using the MetaMask Embedded Wallets SDK.
+description: "Empower your Flutter app with a chain-agnostic web3 wallet using the Embedded Wallets SDK | Web3Auth PnP SDK."
 tags: [embedded wallets, flutter, android, ios, evm, solana, web3auth]
 date: April 22, 2024
 author: MetaMask Developer Relations
 discourseTopicId: 2607
 ---
 
-import SEO from '@site/src/components/SEO'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import WalletPreview from '@site/static/img/tutorials/flutter-wallet-preview.png'
 
-<SEO
-  title="Build your own Chain Agnostic Web3 wallet in Flutter"
-  description="Empower your Flutter app with a Chain Agnostic Web3 wallet using the Web3Auth PnP SDK."
-  image="https://docs.metamask.io/img/tutorials/tutorials-banners/flutter-wallet.png"
-  slug="/tutorials/flutter-wallet"
-/>
 
 In this guide, we'll use the MetaMask Embedded Wallets SDK (formerly Web3Auth) to build your chain-agnostic web3 wallet in Flutter. The wallet will support the Ethereum and Solana ecosystems.
 
@@ -86,7 +79,7 @@ dependencies:
 
 ### 2.2 Initialization
 
-Next, initialize Web3Auth in your Flutter app. This sets up the necessary configurations using Client ID and prepares Web3Auth.
+Initialize Web3Auth in your Flutter app. This sets up the necessary configurations using Client ID and prepares Web3Auth.
 
 ```dart
 Future<void> main() async {
@@ -239,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
 
 ## Step 3: Set up blockchain providers
 
-Next, you fetch the user details, retrieve the wallet address, and prepare providers for onchain interactions. This guide covers Ethereum and Solana, but you can apply the same approach to other ecosystems.
+Fetch the user details, retrieve the wallet address, and prepare providers for onchain interactions. This guide covers Ethereum and Solana, but you can apply the same approach to other ecosystems.
 
 Because the project follows clean architecture and test-driven development (TDD) principles, create an abstract layer for interacting with blockchain providers. This abstraction isolates provider logic from the rest of the app and makes it easier to add support for additional blockchains.
 
@@ -435,7 +428,7 @@ class EthereumProvider extends ChainProvider {
 
 ### Solana provider
 
-Next, extend `ChainProvider` and create `SolanaProvider`. In `SolanaProvider`, only implement the `getBalance`, `sendTransaction`, and `signMessage` methods. Add `_generateKeyPair()`to generate an `Ed25519HDKeyPair`which `SolanaProvider` uses to sign transactions and messages in the Solana ecosystem. Because Solana uses the `ed25519` curve, we can use `Web3AuthFlutter.getEd25519PrivKey` to retrieve the private key.
+Extend `ChainProvider` and create `SolanaProvider`. In `SolanaProvider`, only implement the `getBalance`, `sendTransaction`, and `signMessage` methods. Add `_generateKeyPair()`to generate an `Ed25519HDKeyPair`which `SolanaProvider` uses to sign transactions and messages in the Solana ecosystem. Because Solana uses the `ed25519` curve, we can use `Web3AuthFlutter.getEd25519PrivKey` to retrieve the private key.
 
 ```dart
 class SolanaProvider extends ChainProvider {
@@ -511,9 +504,11 @@ class SolanaProvider extends ChainProvider {
 
 ## Step 4: Set up supported chains
 
-Next, we define the supported chains with a `chain_configs` file that uses "list of map" to define the supported chains.
+### 4.1 Define the supported chains
 
-For this guide we will support Ethereum Sepolia, Ethereum Mainnet, Polygon Mainnet, Polygon Amoy, and Solana Devnet using the Ethereum and Solana providers. If you wish to support more EVM-compatible chains in your wallet, add the config with the required details in the list below.
+Define the supported chains with a `chain_configs` file that uses "list of map" to define the supported chains.
+
+For this guide we will support Ethereum Sepolia, Ethereum Mainnet, Polygon Mainnet, Polygon Amoy, and Solana Devnet using the Ethereum and Solana providers. If you wish to support more EVM-compatible chains in your wallet, add the config with the required details in the list below:
 
 ```dart
 import 'package:web3auth_flutter/enums.dart';
@@ -572,7 +567,9 @@ final chainConfigs = [
 ];
 ```
 
-Next we create a new model `ChainConfig`, to represent the Dart object for the above chain config map. We'll use the `ChainConfig` model for UI purposes and chain interaction.
+### 4.2 Create a model to represent the Dart object
+
+Create a new model `ChainConfig`, to represent the Dart object for the above chain config map. We'll use the `ChainConfig` model for UI purposes and chain interaction.
 
 In the `ChainConfig,` we'll also add a `isEVM` parameter to help us differentiate the selected chain ecosystem. If `isEVM` is true for the selected chain, we can use `EthereumProvider` for chain interactions, or else we can use the `SolanaProvider`.
 
@@ -613,7 +610,7 @@ class ChainConfigModel extends ChainConfig {
 
 ## Step 5: Wallet implementation
 
-Next we integrate the providers and supported chains into the wallet. For this guide, we are using the `get_it` package for service locator abilities. It will help us with the dependency injection.
+Integrate the providers and supported chains into the wallet. For this guide, we are using the `get_it` package for service locator abilities. It will help us with the dependency injection.
 
 ### 5.1 Service locator
 
@@ -652,7 +649,7 @@ void main() async {
 
 ### 5.2 Set up the home provider
 
-Next, create a `ChangeNotifier` to help us manage the state of the wallet. The notifier will help us manage the state of currently selected chain, and access the respective chain provider. For the state management, we will be using the `provider` package, so make sure to add `provider` as a dependency.
+Create a `ChangeNotifier` to help us manage the state of the wallet. The notifier will help us manage the state of currently selected chain, and access the respective chain provider. For the state management, we will be using the `provider` package, so make sure to add `provider` as a dependency.
 
 ```dart
 class HomeProvider with ChangeNotifier {
@@ -705,7 +702,7 @@ extension ChainConfigExtension on ChainConfig {
 
 ### 5.3 Set up the home screen
 
-Next, we create a new `HomeScreen` widget to show user details as email address, wallet address, user's balance for `selectedChain`, and blockchain interaction methods. We'll retrieve the `ChainConfigRepository` using `ServiceLocator`, and initialize our `HomeProvider`.
+Create a new `HomeScreen` widget to show user details as email address, wallet address, user's balance for `selectedChain`, and blockchain interaction methods. We'll retrieve the `ChainConfigRepository` using `ServiceLocator`, and initialize our `HomeProvider`.
 
 5.3.1 To get the user's balance, we'll use `prepareAccount` method from the `ChainConfigRepository`. The method internally uses `ChainProvider` to retrieve user's wallet address, and fetch the wallet balance for the address. Checkout `ChainConfigRepository` implementation for more details. The methods returns `Account` object which has the above details.
 
@@ -887,7 +884,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 ### 5.4 Chain interactions
 
-Next, set up chain interactions for signing message, signing transaction, reading from contracts, and writing on contracts. For signing messages and transactions, we'll create a new `TransactionsScreen` widget and utilize `signMessage` and `sendTransaction` from `ChainProvider` for respective functionality.
+Set up chain interactions for signing message, signing transaction, reading from contracts, and writing on contracts. For signing messages and transactions, we'll create a new `TransactionsScreen` widget and utilize `signMessage` and `sendTransaction` from `ChainProvider` for respective functionality.
 
 To retrieve currently selected chain, and respective provider we'll use the `HomeProvider`.
 

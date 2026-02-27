@@ -1,22 +1,44 @@
+import Head from '@docusaurus/Head'
 import Layout from '@theme/Layout'
 import Hero from '@site/src/components/Hero/Hero'
 import CardSection from '@site/src/components/CardSection'
 import CallToAction from '@site/src/components/CallToAction/CallToAction'
 import SectionIntro from '@site/src/components/SectionIntro/SectionIntro'
-import SEO from '@site/src/components/SEO'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext()
+  const rootUrl =
+    (siteConfig.url ?? '').replace(/\/$/, '') +
+    ((siteConfig.baseUrl ?? '/') === '/' ? '' : (siteConfig.baseUrl ?? '').replace(/\/$/, ''))
+  const pageUrl = `${rootUrl}/`
+  const defaultImage = `${rootUrl}/img/metamaskog.jpg`
 
   return (
-    <Layout title="Home">
-      <SEO
-        description="Build with the world's leading self-custodial crypto wallet. MetaMask developer documentation - SDK, Wallet API, Snaps, Embedded Wallets, Smart Accounts."
-        title="MetaMask Developer Documentation - Build Web3 Apps"
-        keywords={['metamask', 'web3 development', 'dapp development', 'embedded wallets', 'metamask quickstart', 'blockchain development', 'ethereum development', 'metamask sdk', 'web3 documentation', 'crypto wallet', 'defi development', 'nft development']}
-        slug="/"
-      />
+    <Layout
+      title="Home"
+      description="Build with the world's leading self-custodial crypto wallet. MetaMask developer documentation - SDK, Wallet API, Snaps, Embedded Wallets, Smart Accounts.">
+      <Head>
+        <meta
+          name="keywords"
+          content="metamask, wallet, blockchain, web3, web3.js, ethers.js, ethereum, evm-compatible chains, bitcoin, solana, ethereum, crypto, sdk, snaps, dapp"
+        />
+        <meta property="og:site_name" content="MetaMask" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:image" content={defaultImage} />
+        <meta property="og:image:secure_url" content={defaultImage} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="MetaMask" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@MetaMask" />
+        <meta name="twitter:creator" content="@MetaMask" />
+        <meta name="twitter:image" content={defaultImage} />
+        <meta itemProp="image" content={defaultImage} />
+        <meta name="author" content="MetaMask" />
+      </Head>
       <Hero
         title={siteConfig.title}
         description="Build with the world's leading self-custodial crypto wallet."
