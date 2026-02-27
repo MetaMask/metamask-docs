@@ -239,7 +239,7 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
 
 ## Step 3: Set up blockchain providers
 
-Next, we fetch the user details, retrieve their wallet address, and prepare blockchain providers for interactions. This guide supports the Ethereum and Solana ecosystems, but the general idea can be extended to any blockchain ecosystem.
+Next, you fetch the user details, retrieve the wallet address, and prepare providers for onchain interactions. This guide covers Ethereum and Solana, but you can apply the same approach to other ecosystems.
 
 Given that the project follows clean architecture and Test-Driven Development (TDD) principles, we'll want to create an abstract layer to interact with the blockchain providers. This abstraction simplifies expanding the blockchain support while isolating it from the rest of the application.
 
