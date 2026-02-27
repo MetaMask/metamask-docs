@@ -173,7 +173,8 @@ class _MainAppState extends State<MainApp> {
 
 ### 2.4 Authentication
 
-If the user is not authenticated, you should utilize the `login` method. For the wallet, we will add two login options, Google, and Email Passwordless login. With Embedded Wallets, you can choose between a Single Page Authentication flow or a Regular Web Application flow. For this guide, we'll be using a Single Page Authentication flow. We'll create a helper function, `_login` inside `LoginScreen`. The login method is pretty straightforward in Embedded Wallets and takes `LoginParams` as input. After successfully logging in, we'll navigate the user to `HomeScreen`.
+If the user isn't authenticated, call the `login` method. Provide two sign-in options for the wallet: Google and passwordless email login. Embedded Wallets supports two authentication flows: single page authentication, and regular web application. In this guide, you use the single-page authentication flow.
+We'll create a helper function, `_login` inside `LoginScreen`. The login method `LoginParams` as input. After a successful sign-in, navigate the user to `HomeScreen`.
 
 :::tip
 
