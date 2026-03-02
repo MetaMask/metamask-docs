@@ -22,7 +22,7 @@ occur on Optimism are posted and validated on Ethereum mainnet using Optimistic 
 - For more information on the Optimism network, please see the
   [official Optimism developer documentation](https://docs.optimism.io/).
 - See the [differences between the behavior of Ethereum and Optimism](https://docs.optimism.io/stack/differences).
-- See the [JSON-RPC methods specific to Optimism Bedrock](https://docs.optimism.io/builders/node-operators/json-rpc).
+- See the [JSON-RPC methods specific to Optimism Bedrock](https://docs.optimism.io/node-operators/reference/op-node-json-rpc).
 
 :::
 

@@ -19,7 +19,7 @@ that can perform more computations than on Ethereum's base layer, while maintain
 
 :::info see also
 
-See the [Starknet documentation](https://docs.starknet.io/documentation/) to find out more. You can also watch an
+See the [Starknet documentation](https://docs.starknet.io/) to find out more. You can also watch an
 [Introduction to Starknet](https://www.youtube.com/watch?v=eL9le56gcS0).
 
 :::
