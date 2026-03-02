@@ -9,11 +9,6 @@ import Banner from '@site/src/components/Banner'
 
 This quickstart guide will help you set up and make calls on the Solana network using the Infura endpoints.
 
-:::note limited access
-Solana access is currently limited to select customers. [Contact us](https://www.infura.io/contact)
-if you're interested in accessing these methods.
-:::
-
 ## Prerequisites
 
 Ensure you have an [API key](/developer-tools/dashboard/get-started/create-api) with the Solana network enabled.
