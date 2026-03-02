@@ -10,9 +10,6 @@ import CardList from '@site/src/components/CardList'
 
 Solana is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service, meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
-Solana access is currently limited to select customers. [Contact us](https://www.infura.io/contact)
-if you're interested in accessing these methods.
-
 :::
 
 Solana provides a high-performance network that is utilized for a range of use cases, including finance, NFTs, payments, and gaming.
@@ -48,6 +45,6 @@ Select an option below to get started with the Solana network.
 
 The following partners provide access to the Solana network:
 <!-- markdown-link-check-disable -->
-- Everstake ([Terms of Service](https://everstake.one/docs/terms-of-use.pdf), [Privacy Policy](https://everstake.one/docs/privacy-policy.pdf))
+- Everstake ([Terms of Use](https://everstake.one/terms-of-use), [Privacy Notice](https://everstake.one/privacy-notice))
 - Triton One ([Terms of Service and Privacy Policy](https://triton.one/legal))
 <!-- markdown-link-check-enable -->

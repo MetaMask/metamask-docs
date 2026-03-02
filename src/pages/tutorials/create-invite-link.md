@@ -45,9 +45,9 @@ Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-a
 npm install @metamask/smart-accounts-kit @web3auth/modal wagmi @tanstack/react-query
 ```
 
-#### 1.2. Set up Embedded Wallets (Web3Auth)
+#### 1.2. Set up Embedded Wallets
 
-Configure [MetaMask Embedded Wallets (Web3Auth)](/embedded-wallets/) to enable users to instantly connect to your dapp using familiar login methods, like social accounts or email.
+Configure [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets/) to enable users to instantly connect to your dapp using familiar login methods, like social accounts or email.
 
 1. Add a `WEB3AUTH_CLIENT_ID` environment variable, replacing `<YOUR-CLIENT-ID>` with your Web3Auth Client ID:
 
