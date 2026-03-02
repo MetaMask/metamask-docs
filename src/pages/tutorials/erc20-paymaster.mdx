@@ -101,7 +101,7 @@ const accountAbstractionProvider = new AccountAbstractionProvider({
 
 ## Step 2: Configure Embedded Wallets
 
-Once you have configured your `AccountAbstractionProvider`, you can now plug it in your Embedded Wallets Modal/No Modal instance. If you are using external wallets like MetaMask, you can define whether you want to use the `AccountAbstractionProvider`, or EthereumPrivateKeyProvider by setting the `useAAWithExternalWallet` in `IWeb3AuthCoreOptions`. 
+After you configure `AccountAbstractionProvider`, plug it into your Embedded Wallets modal or no-modal instance. If you use an external wallet such as MetaMask, set `useAAWithExternalWallet` in `IWeb3AuthCoreOptions` to control whether Web3Auth uses `AccountAbstractionProvider` or `EthereumPrivateKeyProvider`. 
 
 :::tip
 
