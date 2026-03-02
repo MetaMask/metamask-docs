@@ -181,5 +181,7 @@ export const delegatorSmartAccount = await toMetaMaskSmartAccount({
 
 You've successfully created, deployed, and applied a custom caveat enforcer!
 
-For production use cases, you might need to add additional caveats to restrict the delegation further.
-Learn more about [caveat enforcers](/smart-accounts-kit/concepts/delegation/caveat-enforcers).
+## Next steps
+
+- For production use cases, you might need to add additional caveats to restrict the delegation further.
+- Learn more about [caveat enforcers](/smart-accounts-kit/concepts/delegation/caveat-enforcers).
