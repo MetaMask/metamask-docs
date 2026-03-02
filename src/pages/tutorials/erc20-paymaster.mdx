@@ -38,7 +38,7 @@ See the documentation for detailed instructions on [setting up the Embedded Wall
 
 ## Step 1: Integrate `AccountAbstractionProvider`
 
-Once, you have set up the Embedded Wallets dashboard, and created a new project, it's time to integrate the Embedded Wallets account abstraction provider in your Web application. For the implementation, we'll use the [@web3auth/account-abstraction-provider](https://www.npmjs.com/package/@web3auth/account-abstraction-provider). The provider simplifies the entire process by managing the complex logic behind configuring the account abstraction provider, bundler, and preparing user operations.
+After you set up the Embedded Wallets dashboard and create a project, integrate the Embedded Wallets account abstraction provider into your web application. For this guide, use the [`@web3auth/account-abstraction-provider`](https://www.npmjs.com/package/@web3auth/account-abstraction-provider). This package manages the configuration for the account abstraction provider and bundler and prepares user operations.
 
 If you are already using the Embedded Wallets SDK in your project, you just need to configure the `AccountAbstractionProvider` with the paymaster details, and pass it to Embedded Wallets' Web3Auth instance. No other changes are required.
 
