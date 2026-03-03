@@ -83,8 +83,8 @@ api: {
 ```typescript
 api: {
   supportedNetworks: {
-    'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
-    'solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ': 'https://api.devnet.solana.com',
+    mainnet: 'https://api.mainnet-beta.solana.com',
+    devnet: 'https://api.devnet.solana.com',
   },
 }
 ```
@@ -92,8 +92,9 @@ api: {
 </TabItem>
 </Tabs>
 
-A map of chain IDs to RPC URLs for all networks your dapp supports.
-Chain IDs follow the [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) format — use the `eip155` namespace for EVM networks (for example, `eip155:1` for Ethereum Mainnet) and the `solana` namespace with the genesis hash for Solana networks.
+A map of network identifiers to RPC URLs for all networks your dapp supports.
+For EVM networks, use [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) chain IDs with the `eip155` namespace (for example, `eip155:1` for Ethereum Mainnet).
+For the Solana client, use friendly network names (`mainnet`, `devnet`, `testnet`) — the client converts these to CAIP-2 identifiers internally.
 
 :::caution
 Use [Infura allowlists](/developer-tools/dashboard/how-to/secure-an-api/use-an-allowlist) to protect against other people submitting requests to your API key.
@@ -152,8 +153,8 @@ const client = await createSolanaClient({
   },
   api: {
     supportedNetworks: {
-      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
-      'solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ': 'https://api.devnet.solana.com',
+      mainnet: 'https://api.mainnet-beta.solana.com',
+      devnet: 'https://api.devnet.solana.com',
     },
   },
 });

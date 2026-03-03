@@ -104,7 +104,7 @@ const solanaClient = await createSolanaClient({
   },
   api: {
     supportedNetworks: {
-      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.devnet.solana.com',
+      devnet: 'https://api.devnet.solana.com',
     },
   },
 })
@@ -113,7 +113,7 @@ const solanaClient = await createSolanaClient({
 These examples configure MetaMask Connect with the following options:
 
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
-- `api.supportedNetworks` - A map of caipChainIds -> RPC URLs for all networks supported by the app.
+- `api.supportedNetworks` - A map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs for all networks supported by the app.
 
 ### 3. Connect and use the wallet
 
@@ -134,7 +134,7 @@ The client handles cross-platform connection (desktop and mobile), including dee
 | ------------------ | ------------------------------------------------------------------------------------ |
 | `getWallet()`      | Returns a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet instance |
 | `registerWallet()` | Registers MetaMask with the Wallet Standard registry (no-op if auto-registered)      |
-| `disconnect()`     | Disconnects from the wallet and revokes the session                                  |
+| `disconnect()`     | Disconnects Solana scopes without terminating the broader multichain session          |
 
 ## Usage example
 
