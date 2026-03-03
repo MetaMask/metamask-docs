@@ -96,7 +96,7 @@ The following examples show how to use MetaMask Connect in various JavaScript en
 ```javascript
 import { createSolanaClient } from '@metamask/connect-solana'
 
-const solanaClient = createSolanaClient({
+const solanaClient = await createSolanaClient({
   dapp: {
     name: 'Example JavaScript Solana dapp',
     url: window.location.href,
@@ -104,7 +104,7 @@ const solanaClient = createSolanaClient({
   },
   api: {
     supportedNetworks: {
-      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp:': 'https://api.devnet.solana.com',
+      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.devnet.solana.com',
     },
   },
 })
@@ -115,56 +115,43 @@ These examples configure MetaMask Connect with the following options:
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
 - `api.supportedNetworks` - A map of caipChainIds -> RPC URLs for all networks supported by the app.
 
-### 3. Connect and use provider
+### 3. Connect and use the wallet
 
-Connect to MetaMask and get the provider for RPC requests:
+Get the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) wallet instance and connect:
 
 ```javascript
-const provider = solanaClient.getProvider()
+const wallet = solanaClient.getWallet()
 
-const accounts = await solanaClient.connect()
-console.log('Connected account:', accounts[0])
-
-const result = await provider.request({
-  method: 'solana_accounts',
-  params: [],
-})
-console.log('solana_accounts result:', result)
+const { accounts } = await wallet.features['standard:connect'].connect()
+console.log('Connected account:', accounts[0].address)
 ```
 
-`solanaClient.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
+The client handles cross-platform connection (desktop and mobile), including deeplinking.
 
-Use `provider.request()` for arbitrary [JSON-RPC requests](#) like `solana_chainId` or `solana_getBalance`, or for [batching requests](#) via `metamask_batch`.
+## `SolanaClient` methods at a glance
 
-## Common MetaMask Connect methods at a glance
-
-| Method                                      | Description                                              |
-| ------------------------------------------- | -------------------------------------------------------- |
-| [`connect()`](#)                            | Triggers wallet connection flow                          |
-| [`connectAndSign({ msg: "..." })`](#)       | Connects and prompts user to sign a message              |
-| [`getProvider()`](#)                        | Returns the provider object for RPC requests             |
-| [`provider.request({ method, params })`](#) | Calls any Solana JSON‑RPC method                         |
-| [Batched RPC](#)                            | Use `metamask_batch` to group multiple JSON-RPC requests |
+| Method             | Description                                                                          |
+| ------------------ | ------------------------------------------------------------------------------------ |
+| `getWallet()`      | Returns a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet instance |
+| `registerWallet()` | Registers MetaMask with the Wallet Standard registry (no-op if auto-registered)      |
+| `disconnect()`     | Disconnects from the wallet and revokes the session                                  |
 
 ## Usage example
 
 ```javascript
 // 1. Connect and get accounts
-const accounts = await solanaClient.connect()
+const wallet = solanaClient.getWallet()
+const { accounts } = await wallet.features['standard:connect'].connect()
 
-// 2. Connect and sign in one step
-const signResult = await solanaClient.connectAndSign({
-  msg: 'Sign in to the dapp',
+// 2. Sign a message
+const message = new TextEncoder().encode('Hello from my dapp')
+const [{ signature }] = await wallet.features['solana:signMessage'].signMessage({
+  account: accounts[0],
+  message,
 })
 
-// 3. Get provider for RPC requests
-const provider = solanaClient.getProvider()
-
-// 4. Make an RPC request
-const result = await provider.request({
-  method: 'solana_accounts',
-  params: [],
-})
+// 3. Disconnect
+await solanaClient.disconnect()
 ```
 
 ## Live example

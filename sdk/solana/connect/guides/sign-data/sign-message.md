@@ -17,19 +17,26 @@ The following example requests a signed message using MetaMask:
 ```javascript
 import { createSolanaClient } from '@metamask/connect-solana'
 
-const solanaClient = createSolanaClient()
-const provider = solanaClient.getProvider()
+const solanaClient = await createSolanaClient({
+  dapp: {
+    name: 'My Solana DApp',
+    url: window.location.origin,
+  },
+})
+
+const wallet = solanaClient.getWallet()
+
+// Connect and get the user's account
+const { accounts } = await wallet.features['standard:connect'].connect()
 
 async function signMessage() {
-  const message = 'Only good humans allowed. Paw-thorize yourself.'
-  const encodedMessage = new TextEncoder().encode(message)
+  const message = new TextEncoder().encode(
+    'Only good humans allowed. Paw-thorize yourself.'
+  )
 
-  const signature = await provider.request({
-    method: 'signMessage',
-    params: {
-      message: encodedMessage,
-      display: 'hex',
-    },
+  const [{ signature }] = await wallet.features['solana:signMessage'].signMessage({
+    account: accounts[0],
+    message,
   })
 
   return signature

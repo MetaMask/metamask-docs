@@ -42,19 +42,24 @@ The following example shows how to set up SIWS with MetaMask using
 ```javascript title="index.js"
 import { createSolanaClient } from '@metamask/connect-solana'
 
-const solanaClient = createSolanaClient()
-const provider = solanaClient.getProvider()
+const solanaClient = await createSolanaClient({
+  dapp: {
+    name: 'My Solana DApp',
+    url: window.location.origin,
+  },
+})
+
+const wallet = solanaClient.getWallet()
+const { accounts } = await wallet.features['standard:connect'].connect()
 
 const siwsSign = async siwsMessage => {
   try {
-    const from = accounts[0]
-    const sign = await provider.request({
-      method: 'solana_signMessage',
-      params: {
-        message: siwsMessage,
-      },
+    const message = new TextEncoder().encode(siwsMessage)
+    const [{ signature }] = await wallet.features['solana:signMessage'].signMessage({
+      account: accounts[0],
+      message,
     })
-    siwsResult.innerHTML = sign
+    siwsResult.innerHTML = signature
   } catch (err) {
     console.error(err)
     siwsResult.innerHTML = `Error: ${err.message}`
@@ -63,6 +68,7 @@ const siwsSign = async siwsMessage => {
 
 siws.onclick = async () => {
   const domain = window.location.host
+  const from = accounts[0].address
   const siwsMessage = `${domain} wants you to sign in with your Solana account:\n${from}\n\nI accept the MetaMask Terms of Service: https://community.metamask.io/tos\n\nURI: https://${domain}\nVersion: 1\nChain ID: 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp\nNonce: 32891757\nIssued At: 2021-09-30T16:25:24.000Z`
   siwsSign(siwsMessage)
 }

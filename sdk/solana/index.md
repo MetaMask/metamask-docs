@@ -28,10 +28,7 @@ const client = await createSolanaClient({
   },
 })
 
-// Register as a discoverable wallet
-await client.registerWallet()
-
-// Or get the wallet instance for direct use
+// Get the wallet instance for direct use
 const wallet = client.getWallet()
 ```
 
@@ -77,7 +74,7 @@ MetaMask implements the [Wallet Standard](https://github.com/wallet-standard/wal
 
 :::note
 With the Wallet Standard alone, MetaMask does not appear as a connection option for users that don't already have MetaMask installed.
-Using `@metamask/connect-solana` with `registerWallet()` ensures MetaMask is always available as an option.
+`createSolanaClient()` automatically registers MetaMask with the Wallet Standard registry, making it discoverable even if the user doesn't have MetaMask installed.
 :::
 
 See the [Wallet Adapter guide](./connect/guides/use-wallet-adapter.md) for more information.

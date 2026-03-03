@@ -128,12 +128,23 @@ const client = createEVMClient({
 
 Additional options available for `createSolanaClient`.
 
+### `skipAutoRegister`
+
+```typescript
+skipAutoRegister: boolean
+```
+
+Skips automatically registering MetaMask with the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) registry when the client is created.
+The default is `false`, meaning MetaMask is registered automatically and appears as a wallet option in any dapp using `@solana/wallet-adapter`.
+
+Set to `true` if you want to control when registration happens by calling `registerWallet()` manually.
+
 ### Full example
 
 ```typescript
 import { createSolanaClient } from '@metamask/connect-solana';
 
-const client = createSolanaClient({
+const client = await createSolanaClient({
   dapp: {
     name: 'My Solana Dapp',
     url: 'https://mydapp.com',

@@ -16,10 +16,11 @@ See the [Solana documentation](https://solana.com/developers/cookbook/wallets/co
 Install the following dependencies:
 
 ```bash
-npm install @solana/web3.js       \
-  @solana/wallet-adapter-base     \
-  @solana/wallet-adapter-react    \
-  @solana/wallet-adapter-react-ui \
+npm install @metamask/connect-solana \
+  @solana/web3.js                    \
+  @solana/wallet-adapter-base        \
+  @solana/wallet-adapter-react       \
+  @solana/wallet-adapter-react-ui    \
   @solana/wallet-adapter-wallets
 ```
 
@@ -30,13 +31,13 @@ Create a `SolanaProvider` to provide the Solana context to the application:
 ```typescript title='components/SolanaProvider.tsx'
 'use client';
 
-import React, { FC, ReactNode, useMemo } from 'react';
+import React, { FC, ReactNode, useEffect, useMemo } from 'react';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
+import { createSolanaClient } from '@metamask/connect-solana';
 
-// Default styles that can be overridden by your dapp.
 import '@solana/wallet-adapter-react-ui/styles.css';
 
 interface SolanaProviderProps {
@@ -44,11 +45,17 @@ interface SolanaProviderProps {
 }
 
 export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
-  // The network can be set to devnet, testnet, or mainnet-beta.
   const network = WalletAdapterNetwork.Devnet;
-
-  // You can also provide a custom RPC endpoint.
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+
+  useEffect(() => {
+    createSolanaClient({
+      dapp: {
+        name: 'My Solana DApp',
+        url: window.location.origin,
+      },
+    });
+  }, []);
 
   return (
     <ConnectionProvider endpoint={endpoint}>
@@ -59,6 +66,8 @@ export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
   );
 };
 ```
+
+Calling `createSolanaClient()` registers MetaMask with the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) registry, so MetaMask appears as a connection option in the wallet modal — even if the user doesn't have MetaMask installed.
 
 ### 3. Wrap the application in the Solana Provider
 
