@@ -1,5 +1,5 @@
 ---
-description: Learn how to use the native token permissions with Advanced Permissions (ERC-7115).
+description: Learn how to use the native token permissions with Advanced Permissions (ERC-7715).
 keywords: [permissions, spending limit, restrict, 7715, erc-7715, native-token-permissions, advanced permissions]
 ---
 
@@ -8,7 +8,7 @@ import TabItem from "@theme/TabItem";
 
 # Use native token permissions
  
-[Advanced Permissions (ERC-7115)](../../../concepts/advanced-permissions.md) supports native token permission types that allow you to request fine-grained
+[Advanced Permissions (ERC-7715)](../../../concepts/advanced-permissions.md) supports native token permission types that allow you to request fine-grained
 permissions for native token transfers with time-based (periodic) or streaming conditions, depending on your use case.
 
 ## Prerequisites

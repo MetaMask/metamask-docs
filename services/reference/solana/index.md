@@ -10,9 +10,6 @@ import CardList from '@site/src/components/CardList'
 
 Solana is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service, meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
-Solana access is currently limited to select customers. [Contact us](https://www.infura.io/contact)
-if you're interested in accessing these methods.
-
 :::
 
 Solana provides a high-performance network that is utilized for a range of use cases, including finance, NFTs, payments, and gaming.

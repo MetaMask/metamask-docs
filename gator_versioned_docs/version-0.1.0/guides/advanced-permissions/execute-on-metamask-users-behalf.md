@@ -1,5 +1,5 @@
 ---
-description: Use Advanced Permissions (ERC-7115) to perform executions on a MetaMask user's behalf.
+description: Use Advanced Permissions (ERC-7715) to perform executions on a MetaMask user's behalf.
 sidebar_label: Execute on a MetaMask user's behalf
 keywords: [execution, smart account, create, redeem, delegation, erc 7715, 7715, session account, advanced permissions]
 ---
@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Perform executions on a MetaMask user's behalf
 
-[Advanced Permissions (ERC-7115)](../../concepts/advanced-permissions.md) are fine-grained permissions that your dapp can request from a MetaMask user to execute transactions on their 
+[Advanced Permissions (ERC-7715)](../../concepts/advanced-permissions.md) are fine-grained permissions that your dapp can request from a MetaMask user to execute transactions on their 
 behalf. For example, a user can grant your dapp permission to spend 10 USDC per day to buy ETH over the course 
 of a month. Once the permission is granted, your dapp can use the allocated 10 USDC each day to 
 purchase ETH directly from the MetaMask user's account.
@@ -104,7 +104,7 @@ If the user has not yet been upgraded, you can handle the upgrade [programmatica
 user to [switch to a smart account manually](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/#how-to-switch-to-a-metamask-smart-account).
 
 :::info Why is a Smart Account upgrade is required?
-MetaMask's Advanced Permissions (ERC-7115) implementation requires the user to be upgraded to a MetaMask 
+MetaMask's Advanced Permissions (ERC-7715) implementation requires the user to be upgraded to a MetaMask 
 Smart Account because, under the hood, you're requesting a signature for an [ERC-7710 delegation](../../concepts/delegation/index.md).
 ERC-7710 delegation is one of the core features supported only by MetaMask Smart Accounts.
 :::
