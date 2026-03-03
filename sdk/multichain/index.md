@@ -16,7 +16,7 @@ This gives you more control than the [ecosystem-specific clients](/sdk/#integrat
 ## How the Multichain API works
 
 MetaMask Connect is built on the [Multichain API (CAIP-25)](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) specification, a chain-agnostic standard for wallet-dapp communication.
-For the full rationale and specification, see [MIP-5](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-5.md).
+For the full rationale and specification, see [MetaMask Improvement Proposal-5 (MIP-5)](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-5.md).
 
 Instead of connecting to one chain at a time, the Multichain API lets you do the following:
 
