@@ -81,7 +81,7 @@ const { availableAmount } = await caveatEnforcerClient.getErc20PeriodTransferEnf
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { parseUnits } from 'viem'
 
 // startDate should be in seconds.
@@ -89,7 +89,7 @@ const startDate = Math.floor(Date.now() / 1000);
 
 export const delegation = createDelegation({
   scope: {
-    type: 'erc20PeriodTransfer',
+    type: ScopeType.Erc20PeriodTransfer,
     tokenAddress: '0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da',
     periodAmount: parseUnits('10', 6),
     periodDuration: 86400,

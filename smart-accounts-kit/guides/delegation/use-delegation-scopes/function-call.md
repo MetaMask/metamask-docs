@@ -29,14 +29,14 @@ See the [function call scope reference](../../../reference/delegation/delegation
 The following example sets the delegation scope to allow the delegate to call the `approve` function on the USDC token contract:
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 
 // USDC address on Sepolia.
 const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
 const delegation = createDelegation({
   scope: {
-    type: "functionCall",
+    type: ScopeType.FunctionCall,
     targets: [USDC_ADDRESS],
     selectors: ["approve(address, uint256)"],
   },
@@ -61,7 +61,7 @@ You can include or exclude specific parameters to precisely define what parts of
 :::
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { encodeAbiParameters, erc20Abi } from "viem";
 
 // USDC address on Sepolia.
@@ -69,7 +69,7 @@ const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 
 const delegation = createDelegation({
   scope: {
-    type: "functionCall",
+    type: ScopeType.FunctionCall,
     targets: [USDC_ADDRESS],
     selectors: ["approve(address, uint256)"],
     allowedCalldata: [
@@ -99,7 +99,7 @@ contract, with a specific spender address and an allowance value of 0. This effe
 revoking ERC-20 approvals for a specific spender.
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { encodeFunctionData, erc20Abi } from "viem";
 
 // USDC address on Sepolia.
@@ -107,7 +107,7 @@ const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 
 const delegation = createDelegation({
   scope: {
-    type: "functionCall",
+    type: ScopeType.FunctionCall,
     targets: [USDC_ADDRESS],
     selectors: ["approve(address, uint256)"],
     exactCalldata: {
@@ -130,7 +130,7 @@ You can set `valueLte` to allow native token transfer up to a specified amount p
 to take `0.00001` ETH as a fee each time he revokes a token approval on her behalf.
 
 ```ts
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { parseEther } from "viem";
 
 // USDC address on Sepolia.
@@ -138,7 +138,7 @@ const USDC_ADDRESS = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
 const delegation = createDelegation({
   scope: {
-    type: "functionCall",
+    type: ScopeType.FunctionCall,
     targets: [USDC_ADDRESS],
     selectors: ["approve(address, uint256)"],
     valueLte: { maxValue: parseEther("0.00001") },

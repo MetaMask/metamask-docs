@@ -29,7 +29,7 @@ Internally, this scope uses the [`erc20PeriodTransfer`](../../../reference/deleg
 See the [ERC-20 periodic scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-periodic-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { parseUnits } from "viem";
 
 // startDate should be in seconds.
@@ -37,7 +37,7 @@ const startDate = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
-    type: "erc20PeriodTransfer",
+    type: ScopeType.Erc20PeriodTransfer,
     tokenAddress: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
     // USDC has 6 decimal places.
     periodAmount: parseUnits("10", 6),
@@ -63,7 +63,7 @@ Internally, this scope uses the [`erc20Streaming`](../../../reference/delegation
 See the [ERC-20 streaming scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-streaming-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { parseUnits } from "viem";
 
 // startTime should be in seconds.
@@ -71,7 +71,7 @@ const startTime = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
-    type: "erc20Streaming",
+    type: ScopeType.Erc20Streaming,
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
     // USDC has 6 decimal places.
     amountPerSecond: parseUnits("0.1", 6),
@@ -98,12 +98,12 @@ Internally, this scope uses the [`erc20TransferAmount`](../../../reference/deleg
 See the [ERC-20 transfer scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-transfer-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { parseUnits } from "viem";
 
 const delegation = createDelegation({
   scope: {
-    type: "erc20TransferAmount",
+    type: ScopeType.Erc20TransferAmount,
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
     // USDC has 6 decimal places.
     maxAmount: parseUnits("10", 6),
@@ -123,11 +123,11 @@ Internally, this scope uses the [`erc721Transfer`](../../../reference/delegation
 See the [ERC-721 scope reference](../../../reference/delegation/delegation-scopes.md#erc-721-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 
 const delegation = createDelegation({
   scope: {
-    type: "erc721Transfer",
+    type: ScopeType.Erc721Transfer,
     tokenAddress: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
     tokenId: 1n,
   },
@@ -154,7 +154,7 @@ optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md
 See the [native token periodic scope reference](../../../reference/delegation/delegation-scopes.md#native-token-periodic-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { parseEther } from "viem";
 
 // startDate should be in seconds.
@@ -162,7 +162,7 @@ const startDate = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
-    type: "nativeTokenPeriodTransfer",
+    type: ScopeType.NativeTokenPeriodTransfer,
     periodAmount: parseEther("0.01"),
     periodDuration: 86400,
     startDate,
@@ -189,7 +189,7 @@ optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md
 See the [native token streaming scope reference](../../../reference/delegation/delegation-scopes.md#native-token-streaming-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { parseEther } from "viem";
 
 // startTime should be in seconds.
@@ -197,7 +197,7 @@ const startTime = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
-    type: "nativeTokenStreaming",
+    type: ScopeType.NativeTokenStreaming,
     amountPerSecond: parseEther("0.001"),
     initialAmount: parseEther("0.01"),
     maxAmount: parseEther("0.1"),
@@ -225,12 +225,12 @@ optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md
 See the [native token transfer scope reference](../../../reference/delegation/delegation-scopes.md#native-token-transfer-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { parseEther } from "viem";
 
 const delegation = createDelegation({
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: ScopeType.NativeTokenTransferAmount,
     maxAmount: parseEther("0.001"),
   },
   to: delegateAccount,

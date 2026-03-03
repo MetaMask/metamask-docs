@@ -86,7 +86,7 @@ const { availableAmount } = await caveatEnforcerClient.getErc20PeriodTransferEnf
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
 import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 
@@ -97,7 +97,7 @@ const startDate = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {
-    type: 'erc20PeriodTransfer',
+    type: ScopeType.Erc20PeriodTransfer,
     tokenAddress: '0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da',
     periodAmount: parseUnits('10', 6),
     periodDuration: 86400,
@@ -140,7 +140,7 @@ const { availableAmount } = await caveatEnforcerClient.getErc20StreamingEnforcer
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
 import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 import { parseUnits } from 'viem'
@@ -152,7 +152,7 @@ const startTime = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {
-    type: 'erc20Streaming',
+    type: ScopeType.Erc20Streaming,
     tokenAddress: '0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92',
     amountPerSecond: parseUnits('0.1', 6),
     initialAmount: parseUnits('1', 6),
@@ -196,7 +196,7 @@ const { availableAmount } = await caveatEnforcerClient.getNativeTokenPeriodTrans
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
 import { parseEther } from 'viem'
 import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
@@ -208,7 +208,7 @@ const startDate = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {
-    type: 'nativeTokenPeriodTransfer',
+    type: ScopeType.NativeTokenPeriodTransfer,
     periodAmount: parseEther('0.01', 6),
     periodDuration: 86400,
     startDate,
@@ -250,7 +250,7 @@ const { availableAmount } = await caveatEnforcerClient.getNativeTokenStreamingEn
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
 import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 
@@ -261,7 +261,7 @@ const startTime = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {
-    type: "nativeTokenStreaming",
+    type: ScopeType.NativeTokenStreaming,
     amountPerSecond: parseEther('0.001'),
     initialAmount: parseEther('0.01'),
     maxAmount: parseEther('0.1'),
