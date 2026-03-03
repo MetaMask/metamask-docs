@@ -348,7 +348,7 @@ export const delegation = createDelegation({
 </TabItem>
 </Tabs>
 
-## `getDelegationHashOffchain`
+## `hashDelegation`
 
 Returns the delegation hash. 
 
@@ -364,10 +364,10 @@ Returns the delegation hash.
 <TabItem value ="example.ts">
 
 ```ts
-import { getDelegationHashOffchain } from "@metamask/smart-accounts-kit/utils";
+import { hashDelegation } from "@metamask/smart-accounts-kit/utils";
 import { delegation } from "./config.ts";
 
-const delegationHash = getDelegationHashOffchain(delegation);
+const delegationHash = hashDelegation(delegation);
 ```
 
 </TabItem>
