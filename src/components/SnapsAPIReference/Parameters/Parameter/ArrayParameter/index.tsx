@@ -33,9 +33,9 @@ export const ArrayParameter: FunctionComponent<ArrayParameterProps> = ({ paramet
         {description && <Description>{description}</Description>}
       </div>
 
-      <div className={styles['parameter-children']}>
+      {element.kind !== 'primitive' && (<div className={styles['parameter-children']}>
         <Parameter parameter={element} />
-      </div>
+      </div>)}
     </div>
   )
 }
