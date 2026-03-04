@@ -156,6 +156,9 @@ const execution = createExecution({
 
 Decodes an ABI-encoded hex string to an array of delegations.
 
+Use `decodeDelegations` when working with a permission context that contains a delegation
+chain, such as the `context` property returned by [`requestExecutionPermissions`](../advanced-permissions/wallet-client.md#requestexecutionpermissions) response.
+
 ### Parameters
 
 | Name | Type | Required | Description |
@@ -168,6 +171,26 @@ Decodes an ABI-encoded hex string to an array of delegations.
 import { decodeDelegations } from "@metamask/smart-accounts-kit/utils";
 
 const delegations = decodeDelegations("0x7f0db33d..c06aeeac");
+```
+
+## `decodeDelegation`
+
+Decodes an ABI-encoded hex string to a single delegation.
+
+Use `decodeDelegation` when you have a single encoded delegation rather than an encoded delegation chain.
+
+### Parameters
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| `encoded` | `Hex` | Yes | The ABI-encoded hex string to decode. |
+
+### Example
+
+```ts
+import { decodeDelegation } from "@metamask/smart-accounts-kit/utils";
+
+const delegation = decodeDelegation("0x7f0db33d..c06aeeac");
 ```
 
 ## `deploySmartAccountsEnvironment`
@@ -339,6 +362,51 @@ export const delegation = createDelegation({
   environment: getSmartAccountsEnvironment(sepolia.id),
   scope: {
     type: "nativeTokenTransferAmount",
+    // 0.001 ETH in wei format.
+    maxAmount: parseEther("0.001"),
+  },
+});
+```
+
+</TabItem>
+</Tabs>
+
+## `encodeDelegation`
+
+Encodes a single delegation to an ABI-encoded hex string.
+
+### Parameters
+
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| `delegation` | `Delegation` | Yes | The delegation to be encoded. |
+
+### Example
+
+<Tabs>
+<TabItem value="example.ts">
+
+```ts
+import { encodeDelegation } from "@metamask/smart-accounts-kit/utils";
+import { delegation } from "./delegation.ts";
+
+const encodedDelegation = encodeDelegation(delegation);
+```
+
+</TabItem>
+<TabItem value="delegation.ts">
+
+```ts
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
+import { sepolia } from "viem/chains";
+import { parseEther } from "viem";
+
+export const delegation = createDelegation({
+  from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
+  to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
+  environment: getSmartAccountsEnvironment(sepolia.id),
+  scope: {
+    type: ScopeType.NativeTokenTransferAmount,
     // 0.001 ETH in wei format.
     maxAmount: parseEther("0.001"),
   },
