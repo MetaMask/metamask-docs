@@ -55,8 +55,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       startTime: currentTime,
       justification: "Permission to use 0.001 ETH every day",
     },
+    isAdjustmentAllowed: true,
   },
-  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -117,8 +117,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       startTime: currentTime,
       justification: "Permission to use 0.0001 ETH per second",
     },
+    isAdjustmentAllowed: true,
   },
-  isAdjustmentAllowed: true,
 }]);
 ```
 

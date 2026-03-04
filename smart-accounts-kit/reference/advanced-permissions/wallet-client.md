@@ -27,9 +27,8 @@ To use `requestExecutionPermissions`, the Viem Wallet Client must be extended wi
 | `chainId` | `number` | Yes | The chain ID on which the permission is being requested. |
 | `from` | `Address` | No | Address of the wallet to which the permission is being requested. |
 | `expiry` | `number` | Yes | The timestamp (in seconds) by which the permission must expire. |
-| `permission` | `SupportedPermissionParams` | Yes | The permission to be requested. The toolkit supports multiple [Advanced Permissions types](permissions.md). |
+| `permission` | `SupportedPermissionParams` | Yes | The permission to be requested. The toolkit supports multiple [Advanced Permissions types](permissions.md). Includes `isAdjustmentAllowed` to define whether the user can modify the requested permission. |
 | `to` | `Address` | Yes | The account to which the permission will be assigned. |
-| `isAdjustmentAllowed` | `boolean` | Yes | Defines whether the user is allowed to modify the requested permission. |
 
 ### Example
 
@@ -58,8 +57,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       periodDuration: 86400,
       justification: "Permission to transfer 10 USDC every day",
     },
+    isAdjustmentAllowed: true,
   },
-  isAdjustmentAllowed: true,
 }]);
 ```
 
