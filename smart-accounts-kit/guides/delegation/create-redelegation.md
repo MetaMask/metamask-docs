@@ -147,14 +147,14 @@ export const carolSmartAccount = await toMetaMaskSmartAccount({
 
 When you create a redelegation, apply the toolkit's [caveats](../../reference/delegation/caveats.md) to narrow the Carol's authority. For example, you can limit the authority so Carol can use the delegation only once.
 
-To apply caveats, create the `Delegation` object and use [`createCaveatBuilder`](../../reference/delegation/index.md#createcaveatbuilder). Use [`getDelegationHashOffchain`](../../reference/delegation/index.md#getdelegationhashoffchain) to get the delegation hash, then provide it as the `authority` field. 
+To apply caveats, create the `Delegation` object and use [`createCaveatBuilder`](../../reference/delegation/index.md#createcaveatbuilder). Use [`hashDelegation`](../../reference/delegation/index.md#hashdelegation) to get the delegation hash, then provide it as the `authority` field. 
 
 This example uses the [`limitedCalls`](../../reference/delegation/caveats.md#limitedcalls) caveat with a limit of `1`.
 
 ```ts
 // Use the config from previous step.
 import { bobSmartAccount, carolSmartAccount } from "./config.ts"
-import { createCaveatBuilder, getDelegationHashOffchain } from '@metamask/smart-accounts-kit/utils'
+import { createCaveatBuilder, hashDelegation } from '@metamask/smart-accounts-kit/utils'
 
 const caveatBuilder = createCaveatBuilder(bobSmartAccount.environment)
 
@@ -163,7 +163,7 @@ const caveats = caveatBuilder.addCaveat('limitedCalls', { limit: 1 })
 const redelegation: Delegation =  {
   delegate: bobSmartAccount.address,
   delegator: carolSmartAccount.address,
-  authority: getDelegationHashOffchain(rootDelegation),
+  authority: hashDelegation(rootDelegation),
   caveats: caveats.build(),
   salt: '0x',
 };

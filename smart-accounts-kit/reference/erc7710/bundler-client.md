@@ -31,7 +31,7 @@ Objects in the `calls` array also require the following parameters:
 | Name | Type | Required | Description                                                                                                                                                                                        |
 | ---- | ---- | -------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `delegationManager` | `Address` | Yes | The address of Delegation Manager.                                                                                                                                                                 |
-| `permissionsContext` | `Hex` | Yes | Encoded calldata for redeeming permissions. If you're not using Advanced Permissions (ERC-7715), you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
+| `permissionContext` | `PermissionContext` | Yes | An encoded delegation chain (`Hex`) or a decoded delegation chain (`Delegation[]`) for redeeming permissions. |
 
 ### Example
 
@@ -42,10 +42,10 @@ Objects in the `calls` array also require the following parameters:
 import { sessionAccount, bundlerClient, publicClient } from "./client.ts";
 
 // These properties must be extracted from the permission response.
-const permissionsContext = permissionsResponse[0].context;
+const permissionContext = permissionsResponse[0].context;
 const delegationManager = permissionsResponse[0].signerMeta.delegationManager;
 
-// Calls without permissionsContext and delegationManager will be executed 
+// Calls without permissionContext and delegationManager will be executed 
 // as a normal user operation.
 const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
   publicClient,
@@ -55,7 +55,7 @@ const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
       to: sessionAccount.address,
       data: "0x",
       value: 1n,
-      permissionsContext,
+      permissionContext,
       delegationManager,
     },
   ],
