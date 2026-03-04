@@ -30,7 +30,7 @@ Enum representing the [MetaMask smart account](../concepts/smart-accounts.md) im
 | ----- | ----------- |
 | `Implementation.Hybrid` | Supports both ECDSA and WebAuthn (passkey) signers. |
 | `Implementation.MultiSig` | Supports multiple ECDSA signers with threshold-based signing. |
-| `Implementation.Stateless7702` | Uses [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702) to delegate an EOA to a smart account without deployment. |
+| `Implementation.Stateless7702` | Uses [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702) to upgrade an EOA to a smart account without deployment. |
 
 ### `ScopeType`
 
