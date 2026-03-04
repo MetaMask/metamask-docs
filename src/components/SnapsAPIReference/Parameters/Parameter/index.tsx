@@ -8,12 +8,14 @@ import { Description } from '@site/src/components/SnapsAPIReference/Parameters/P
 
 type ParameterProps = {
   parameter: MethodParameter;
+  root?: boolean;
 }
 
 export const Parameter: FunctionComponent<ParameterProps> = ({
   parameter,
+  root,
 }) => {
-  if (parameter === null) {
+  if (parameter === null || (root && parameter.type === 'null')) {
     return <Description>This method does not have any parameters.</Description>
   }
 
