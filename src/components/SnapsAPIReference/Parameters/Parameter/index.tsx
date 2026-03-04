@@ -4,6 +4,7 @@ import { MethodParameter } from './types'
 import { PrimitiveParameter } from './PrimitiveParameter'
 import { UnionParameter } from './UnionParameter';
 import { ArrayParameter } from './ArrayParameter'
+import { Description } from '@site/src/components/SnapsAPIReference/Parameters/Parameter/Description'
 
 type ParameterProps = {
   parameter: MethodParameter;
@@ -12,6 +13,10 @@ type ParameterProps = {
 export const Parameter: FunctionComponent<ParameterProps> = ({
   parameter,
 }) => {
+  if (parameter === null) {
+    return <Description>This method does not have any parameters.</Description>
+  }
+
   switch (parameter.kind) {
     case 'array':
       return <ArrayParameter parameter={parameter} />;
