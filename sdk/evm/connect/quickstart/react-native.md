@@ -196,7 +196,7 @@ function App() {
 
   // Disconnect wallet
   const disconnectWallet = async () => {
-    await sdk?.terminate()
+    await sdk?.disconnect()
   }
 
   return (

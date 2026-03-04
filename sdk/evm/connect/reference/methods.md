@@ -12,14 +12,24 @@ MetaMask Connect provides several convenience methods for connecting to and inte
 
 Connects to MetaMask and requests account access.
 
+### Parameters
+
+| Name                   | Type      | Required | Description                                                                                                                                                                              |
+| ---------------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `options.chainIds`     | `Hex[]`   | No       | Array of hex chain IDs to request permission for (defaults to `['0x1']` if not provided). Ethereum Mainnet (`0x1`) is always included in the request regardless of what is passed. |
+| `options.account`      | `string`  | No       | Specific account address to connect.                                                                                                                                                     |
+| `options.forceRequest` | `boolean` | No       | Force a new connection request even if already connected.                                                                                                                                |
+
 ### Returns
 
-A promise that resolves to an array of account addresses.
+A promise that resolves to an object containing `accounts` (an array of account addresses) and `chainId`.
 
 ### Example
 
 ```javascript
-const accounts = await evmClient.connect();
+const { accounts, chainId } = await evmClient.connect({
+  chainIds: ['0x1', '0x89'],
+});
 console.log("Connected accounts:", accounts);
 ```
 
@@ -106,18 +116,13 @@ if (evmClient.isInitialized()) {
 }
 ```
 
-## `terminate`
+## `disconnect`
 
-Terminates the MetaMask connection, switching back to the injected provider if connected via extension.
-
-:::note
-The `disconnect()` SDK method is deprecated.
-Use `terminate()` instead.
-:::
+Disconnects all EVM (`eip155`) scopes from MetaMask and cleans up local state.
+This only revokes the EVM-specific scopes currently held in the session; it does not terminate the broader multichain session if non-EVM scopes (such as Solana) are also active.
 
 ### Example
 
 ```javascript
-await evmClient.terminate();
-console.log("Connection terminated");
+await evmClient.disconnect();
 ```

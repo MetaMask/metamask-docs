@@ -26,7 +26,8 @@ npm install @metamask/connect-multichain
 
 ### 2. Initialize the client
 
-Initialize the multichain client with configuration options:
+Initialize the multichain client with configuration options.
+`createMultichainClient` is a singleton — calling it again merges new options into the existing instance rather than creating a new one (see the [options reference](/sdk/reference/options#multichain-client-options) for details).
 
 ```typescript
 import { createMultichainClient } from '@metamask/connect-multichain'

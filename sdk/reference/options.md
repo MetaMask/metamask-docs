@@ -164,6 +164,12 @@ const client = await createSolanaClient({
 
 Additional options available for `createMultichainClient`.
 
+:::note Singleton behavior
+`createMultichainClient` returns a single shared instance per global context.
+Calling it a second time with different options merges the new `api.supportedNetworks`, `ui.*`, `mobile.*`, `transport.extensionId`, and `debug` values into the existing instance rather than creating a new one.
+The `dapp` value is never overwritten on subsequent calls.
+:::
+
 ### Full example
 
 ```typescript

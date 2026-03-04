@@ -86,7 +86,7 @@ async function connectWallet() {
 // Disconnect wallet
 async function disconnectWallet() {
   try {
-    await evmClient.terminate()
+    await evmClient.disconnect()
   } catch (err) {
     console.error('Error with disconnecting:', err)
   }
