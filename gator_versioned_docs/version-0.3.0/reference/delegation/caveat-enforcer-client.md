@@ -209,7 +209,7 @@ const startDate = Math.floor(Date.now() / 1000)
 export const delegation = createDelegation({
   scope: {
     type: 'nativeTokenPeriodTransfer',
-    periodAmount: parseEther('0.01', 6),
+    periodAmount: parseEther('0.01'),
     periodDuration: 86400,
     startDate,
   },

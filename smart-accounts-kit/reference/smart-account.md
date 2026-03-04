@@ -289,7 +289,7 @@ Signs the delegation and returns the delegation signature.
 <TabItem value ="example.ts">
 
 ```ts
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { delegatorSmartAccount } from "./config.ts";
 
 // The address to which the delegation is granted. It can be an EOA address, or 
@@ -301,7 +301,7 @@ const delegation = createDelegation({
   from: account.address,
   environment: delegatorSmartAccount.environment,
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: ScopeType.NativeTokenTransferAmount,
     // 0.001 ETH in wei format.
     maxAmount: 1000000000000000n,
   },
