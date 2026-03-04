@@ -15,7 +15,7 @@ Get started with MetaMask Connect in your React Native or Expo dapp.
 
 ### 1. Create a new project
 
-Create a new React Native or Expo project using the following commands:
+Create a new React Native or Expo project:
 
 <Tabs>
   <TabItem value="React Native">
@@ -28,7 +28,7 @@ npx react-native@latest init MyProject
   <TabItem value="Expo">
 
 ```bash
-npx create-expo-app devexpo --template
+npx create-expo-app MyProject --template
 ```
 
   </TabItem>
@@ -36,78 +36,139 @@ npx create-expo-app devexpo --template
 
 ### 2. Install dependencies
 
-Install MetaMask Connect and its dependencies using the following commands:
-
-<Tabs>
-  <TabItem value="React Native">
+Install MetaMask Connect and its required polyfill packages:
 
 ```bash
-npm install eciesjs @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-react-native react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values
+npm install @metamask/connect-evm react-native-get-random-values buffer @react-native-async-storage/async-storage readable-stream
 ```
 
-  </TabItem>
-  <TabItem value="Expo">
+### 3. Create polyfills
 
-```bash
-npx expo install expo-crypto @metamask/sdk-react ethers@5.7.2 @react-native-async-storage/async-storage node-libs-expo react-native-background-timer react-native-randombytes react-native-url-polyfill react-native-get-random-values@1.8.0
+Create `src/polyfills.ts` with all required global shims.
+This file must be imported before any SDK code:
+
+```typescript title="src/polyfills.ts"
+import { Buffer } from 'buffer';
+
+global.Buffer = Buffer;
+
+if (typeof window !== 'undefined' && !window.location) {
+  (window as any).location = {
+    href: 'https://mydapp.com',
+    protocol: 'https:',
+    hostname: 'mydapp.com',
+  };
+}
+if (typeof window === 'undefined') {
+  (global as any).window = {
+    location: {
+      href: 'https://mydapp.com',
+      protocol: 'https:',
+      hostname: 'mydapp.com',
+    },
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => true,
+  };
+}
+
+class JsonRpcEvent extends Event {
+  data: any;
+  constructor(type: string, data?: any) {
+    super(type);
+    this.data = data;
+  }
+}
+
+class JsonRpcCustomEvent extends Event {
+  detail: any;
+  constructor(type: string, options?: { detail?: any }) {
+    super(type);
+    this.detail = options?.detail;
+  }
+}
+
+global.Event = JsonRpcEvent as any;
+global.CustomEvent = JsonRpcCustomEvent as any;
+
+if (typeof global.addEventListener === 'undefined') {
+  (global as any).addEventListener = () => {};
+}
+if (typeof global.removeEventListener === 'undefined') {
+  (global as any).removeEventListener = () => {};
+}
 ```
 
-  </TabItem>
-</Tabs>
+Create the empty module stub used by the Metro config:
 
-### 3. Configure Metro
-
-If you're using Expo, run the following command to create a default Metro configuration file:
-
-```bash
-npx expo customize metro.config.js
+```javascript title="src/empty-module.js"
+module.exports = {};
 ```
 
-In React Native or Expo, update the default Metro configuration file to the following:
+### 4. Configure Metro
+
+Metro cannot resolve Node.js built-in modules.
+Map them to React Native-compatible shims or the empty module stub:
 
 <Tabs>
   <TabItem value="React Native">
 
 ```javascript title="metro.config.js"
 const { getDefaultConfig, mergeConfig } = require("@react-native/metro-config")
+const path = require("path")
 
-const defaultConfig = getDefaultConfig(__dirname)
+const emptyModule = path.resolve(__dirname, "src/empty-module.js")
 
 const config = {
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
-  },
   resolver: {
     extraNodeModules: {
-      ...require("node-libs-react-native"),
+      stream: require.resolve("readable-stream"),
+      crypto: emptyModule,
+      http: emptyModule,
+      https: emptyModule,
+      net: emptyModule,
+      tls: emptyModule,
+      zlib: emptyModule,
+      os: emptyModule,
+      dns: emptyModule,
+      assert: emptyModule,
+      url: emptyModule,
+      path: emptyModule,
+      fs: emptyModule,
     },
   },
 }
 
-module.exports = mergeConfig(defaultConfig, config)
+module.exports = mergeConfig(getDefaultConfig(__dirname), config)
 ```
 
   </TabItem>
   <TabItem value="Expo">
 
+Run `npx expo customize metro.config.js` to create a default config, then update it:
+
 ```javascript title="metro.config.js"
+const { getDefaultConfig } = require("expo/metro-config")
+const path = require("path")
+
 const config = getDefaultConfig(__dirname)
+const emptyModule = path.resolve(__dirname, "src/empty-module.js")
 
 config.resolver.extraNodeModules = {
-  ...require("node-libs-expo"),
+  stream: require.resolve("readable-stream"),
+  crypto: emptyModule,
+  http: emptyModule,
+  https: emptyModule,
+  net: emptyModule,
+  tls: emptyModule,
+  zlib: emptyModule,
+  os: emptyModule,
+  dns: emptyModule,
+  assert: emptyModule,
+  url: emptyModule,
+  path: emptyModule,
+  fs: emptyModule,
 }
-
-config.transformer.getTransformOptions = async () => ({
-  transform: {
-    experimentalImportSupport: false,
-    inlineRequires: true,
-  },
-})
 
 module.exports = config
 ```
@@ -115,34 +176,171 @@ module.exports = config
   </TabItem>
 </Tabs>
 
-### 4. Add required imports
+### 5. Set up the entry file
 
-Add the following import statements to the React Native or Expo entry file:
-
-<Tabs>
-  <TabItem value="React Native">
+The import order is critical.
+`react-native-get-random-values` **must** be the very first import, followed by the polyfills file,
+before any other code:
 
 ```javascript title="index.js or App.tsx"
-import "node-libs-react-native/globals"
-import "react-native-url-polyfill/auto"
-import "react-native-get-random-values"
+import 'react-native-get-random-values'
+import './src/polyfills'
 ```
 
-  </TabItem>
-  <TabItem value="Expo">
+:::caution
+If you import anything from `@metamask/connect-evm` before `react-native-get-random-values`,
+you will get `crypto.getRandomValues is not a function`.
+:::
 
-```javascript title="App.tsx"
-import "node-libs-expo/globals"
-import "react-native-url-polyfill/auto"
-import "react-native-get-random-values"
+### 6. Use MetaMask Connect
+
+Initialize the EVM client and use it to connect, sign, and send transactions.
+`mobile.preferredOpenLink` is **required** — it tells the SDK how to open deeplinks to the MetaMask
+Mobile app:
+
+```tsx
+import React, { useEffect, useRef, useState, useCallback } from 'react'
+import { View, Text, TouchableOpacity, StyleSheet, Alert, Linking } from 'react-native'
+import { createEVMClient } from '@metamask/connect-evm'
+
+let clientPromise = null
+
+function getClient() {
+  if (!clientPromise) {
+    clientPromise = createEVMClient({
+      dapp: {
+        name: 'My RN DApp',
+        url: 'https://mydapp.com',
+      },
+      api: {
+        supportedNetworks: {
+          '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+          '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+        },
+      },
+      ui: {
+        preferExtension: false,
+      },
+      mobile: {
+        preferredOpenLink: (deeplink) => Linking.openURL(deeplink),
+      },
+    })
+  }
+  return clientPromise
+}
+
+export default function App() {
+  const clientRef = useRef(null)
+  const [accounts, setAccounts] = useState([])
+  const [chainId, setChainId] = useState(null)
+  const [connecting, setConnecting] = useState(false)
+
+  useEffect(() => {
+    let mounted = true
+
+    async function init() {
+      const client = await getClient()
+      if (!mounted) return
+      clientRef.current = client
+
+      const provider = client.getProvider()
+      provider.on('accountsChanged', (accs) => {
+        if (mounted) setAccounts(accs)
+      })
+      provider.on('chainChanged', (id) => {
+        if (mounted) setChainId(id)
+      })
+      provider.on('disconnect', () => {
+        if (mounted) {
+          setAccounts([])
+          setChainId(null)
+        }
+      })
+    }
+
+    init()
+    return () => { mounted = false }
+  }, [])
+
+  const handleConnect = useCallback(async () => {
+    const client = clientRef.current
+    if (!client) return
+
+    setConnecting(true)
+    try {
+      const result = await client.connect({ chainIds: ['0x1'] })
+      setAccounts(result.accounts)
+      setChainId(result.chainId)
+    } catch (err) {
+      if (err.code === 4001) {
+        Alert.alert('Rejected', 'Connection was rejected.')
+        return
+      }
+      if (err.code === -32002) {
+        Alert.alert('Pending', 'Check MetaMask to approve the request.')
+        return
+      }
+      Alert.alert('Error', err.message ?? 'Connection failed')
+    } finally {
+      setConnecting(false)
+    }
+  }, [])
+
+  const handleDisconnect = useCallback(async () => {
+    const client = clientRef.current
+    if (!client) return
+    await client.disconnect()
+    setAccounts([])
+    setChainId(null)
+  }, [])
+
+  const isConnected = accounts.length > 0
+
+  return (
+    <View style={styles.container}>
+      {!isConnected ? (
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleConnect}
+          disabled={connecting}
+        >
+          <Text style={styles.buttonText}>
+            {connecting ? 'Connecting...' : 'Connect MetaMask'}
+          </Text>
+        </TouchableOpacity>
+      ) : (
+        <View>
+          <Text style={styles.label}>Account: {accounts[0]}</Text>
+          <Text style={styles.label}>Chain: {chainId}</Text>
+          <TouchableOpacity style={styles.button} onPress={handleDisconnect}>
+            <Text style={styles.buttonText}>Disconnect</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 },
+  button: { backgroundColor: '#037DD6', padding: 14, borderRadius: 8, marginVertical: 8 },
+  buttonText: { color: '#fff', fontSize: 16, textAlign: 'center' },
+  label: { fontSize: 14, marginVertical: 4 },
+})
 ```
 
-  </TabItem>
-</Tabs>
+### 7. iOS configuration
 
-### 5. Build and run
+Add the `metamask` URL scheme to your `Info.plist` so the app can open MetaMask Mobile:
 
-Run the React Native or Expo project on Android or iOS using the following commands:
+```xml title="ios/MyProject/Info.plist"
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>metamask</string>
+</array>
+```
+
+### 8. Build and run
 
 <Tabs>
   <TabItem value="React Native">
@@ -156,55 +354,10 @@ npx react-native run-ios
   <TabItem value="Expo">
 
 ```bash
-# Prebuild first
 npx expo prebuild
-
-# Then run
 npx expo run:android
 npx expo run:ios
 ```
 
   </TabItem>
 </Tabs>
-
-### 6. Use MetaMask Connect
-
-Initialize and use MetaMask Connect in your React Native or Expo project using the `useSDK` hook.
-For example:
-
-```javascript
-import { useSDK } from "@metamask/sdk-react"
-
-function App() {
-  const { account, chainId, ethereum, sdk } = useSDK()
-
-  // Connect to MetaMask
-  const connectWallet = async () => {
-    try {
-      await sdk?.connect()
-    } catch (error) {
-      console.error("Failed to connect wallet:", error)
-    }
-  }
-
-  // Handle state changes
-  useEffect(() => {
-    if (account && chainId) {
-      // Handle account and network changes
-    }
-  }, [account, chainId])
-
-  // Disconnect wallet
-  const disconnectWallet = async () => {
-    await sdk?.disconnect()
-  }
-
-  return (
-    // Your app UI
-  )
-}
-```
-
-## Example
-
-See the [React Native demo](https://github.com/MetaMask/metamask-sdk/tree/main/packages/examples/reactNativeDemo) on GitHub for more information.

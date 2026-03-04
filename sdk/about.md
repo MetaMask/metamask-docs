@@ -41,7 +41,7 @@ You don't need to manage any of this — it's all handled automatically. Here's 
 
 ## Which integration option should I choose?
 
-|                        | Ecosystem clients (Option A - EVM and Solana)                                                                                                                                                                                             | Multichain client (Option B)                                              |
+|                        | Ecosystem clients (Options A/B - EVM and Solana)                                                                                                                                                                                          | Multichain client (Option C)                                              |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | **Integration effort** | Low — drop-in replacement for existing provider code                                                                                                                                                                                      | Medium — requires adapting to the scope-based Multichain API              |
 | **EVM support**        | Standard [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider, works with ethers/viem/web3.js                                                                                                                                     | Via `wallet_invokeMethod` with EVM scopes                                 |
@@ -50,7 +50,7 @@ You don't need to manage any of this — it's all handled automatically. Here's 
 | **Session management** | Handled automatically per-client                                                                                                                                                                                                          | Full control over unified session                                         |
 | **Best for**           | Existing dapps that want MetaMask Connect benefits with minimal code changes                                                                                                                                                              | New or multichain-native dapps that want the best possible cross-chain UX |
 
-Also **start with Option A and migrate to Option B** over time.
+Also **start with Options A/B and migrate to Option C** over time.
 The ecosystem clients are built on the multichain client, so they share the same transport and session infrastructure under the hood.
 
 ## Wallet connector library integrations

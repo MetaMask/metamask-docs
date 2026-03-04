@@ -105,7 +105,7 @@ The scopes and properties of the created connection.
       }
     },
     "sessionProperties": {
-      "expiry": "2022-11-31T17:07:31+00:00",
+      "expiry": "2022-11-30T17:07:31+00:00",
       "globalConfig": {
         "foo": "bar"
       }
@@ -167,10 +167,10 @@ The scopes and properties of the connection.
         "notifications": [],
         "accounts": ["eip155:137:0xdef456"]
       },
-      "solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ": {
+      "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1": {
         "methods": ["getBalance", "getAccountInfo", "sendTransaction", "getBlock"],
         "notifications": [],
-        "accounts": ["solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ:4Nd1mS8AUwK3kU3gdiAM6QCvqhA7Do8rKtMXsGyqrJxy"]
+        "accounts": ["solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1:4Nd1mS8AUwK3kU3gdiAM6QCvqhA7Do8rKtMXsGyqrJxy"]
       }
     }
   }

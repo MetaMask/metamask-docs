@@ -32,7 +32,7 @@ Initialize the multichain client with configuration options.
 ```typescript
 import { createMultichainClient } from '@metamask/connect-multichain'
 
-const client = createMultichainClient({
+const client = await createMultichainClient({
   dapp: {
     name: 'My Multichain Dapp',
     url: window.location.href,
@@ -43,7 +43,7 @@ const client = createMultichainClient({
       'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
       'eip155:137': 'https://polygon-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
       'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
-      'solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ': 'https://api.devnet.solana.com',
+      'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1': 'https://api.devnet.solana.com',
     },
   },
 })
@@ -60,14 +60,13 @@ Connect to MetaMask and request access to multiple chains across ecosystems:
 
 ```typescript
 // Connect with scopes across ecosystems - one approval for all chains
-await client.connect(
-  [
+const session = await client.connect({
+  scopes: [
     'eip155:1', // Ethereum Mainnet
     'eip155:137', // Polygon
     'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp', // Solana Mainnet
   ],
-  [] // Account preferences (optional)
-)
+})
 ```
 
 The user sees a single approval prompt for all requested chains.
@@ -75,10 +74,12 @@ This is a key advantage of the multichain approach — no separate connection fl
 
 ### 4. Get session and accounts
 
-After connecting, retrieve the session to see which chains and accounts the user authorized:
+`connect()` returns the session object directly, which contains the chains and accounts the user authorized:
 
 ```typescript
-const session = await client.getSession()
+const session = await client.connect({
+  scopes: ['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'],
+})
 
 // Accounts are in CAIP-10 format (e.g. "eip155:1:0x..." or "solana:5eykt...:83ast...")
 const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
@@ -153,8 +154,8 @@ Scopes are [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-
 
 | Ecosystem | Format                 | Example                                                                                                 |
 | --------- | ---------------------- | ------------------------------------------------------------------------------------------------------- |
-| EVM       | `eip155:<chainId>`     | `eip155:1` (Ethereum), `eip155:42161` (Linea), `eip155:137` (Polygon)                                   |
-| Solana    | `solana:<genesisHash>` | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` (Mainnet), `solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ` (Devnet) |
+| EVM       | `eip155:<chainId>`     | `eip155:1` (Ethereum), `eip155:42161` (Arbitrum One), `eip155:137` (Polygon)                                  |
+| Solana    | `solana:<genesisHash>` | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` (Mainnet), `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` (Devnet) |
 
 ## Full example
 
@@ -164,7 +165,7 @@ import { address, createSolanaRpc } from '@solana/kit'
 
 async function main() {
   // 1. Initialize client
-  const client = createMultichainClient({
+  const client = await createMultichainClient({
     dapp: {
       name: 'Multichain Demo',
       url: window.location.href,
@@ -178,10 +179,11 @@ async function main() {
   })
 
   // 2. Connect to both Ethereum Mainnet and Solana Mainnet
-  await client.connect(['eip155:1', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])
+  const session = await client.connect({
+    scopes: ['eip155:1', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'],
+  })
 
   // 3. Get accounts from session
-  const session = await client.getSession()
   const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
   const solAccounts =
     session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
@@ -229,7 +231,21 @@ async function main() {
     console.log('ETH tx hash:', txHash)
   }
 
-  //  TODO: Send a SOL transaction
+  // 7. Sign a Solana message
+  if (solAccounts.length > 0) {
+    const solAddress = solAccounts[0].split(':')[2]
+    const signResult = await client.invokeMethod({
+      scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+      request: {
+        method: 'solana_signMessage',
+        params: {
+          message: btoa('Hello from Solana!'),
+          pubkey: solAddress,
+        },
+      },
+    })
+    console.log('SOL sign result:', signResult)
+  }
 }
 
 main()

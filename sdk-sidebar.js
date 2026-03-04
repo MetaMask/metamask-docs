@@ -63,6 +63,7 @@ const sdkSidebar = {
         'evm/connect/quickstart/web3auth',
       ],
     },
+    'evm/connect/migrate-from-sdk',
     {
       type: 'category',
       label: 'Guides',

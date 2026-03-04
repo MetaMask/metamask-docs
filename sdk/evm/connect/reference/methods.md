@@ -35,69 +35,108 @@ console.log("Connected accounts:", accounts);
 
 ## `connectAndSign`
 
-Connects to MetaMask and signs a message in a single operation.
+Connects to MetaMask and signs a `personal_sign` message in a single user approval.
 
 ### Parameters
 
-- `msg`: `string` - The message to sign.
+| Name               | Type    | Required | Description                                                                                                  |
+| ------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| `options.message`  | `string`| Yes      | The message to sign.                                                                                         |
+| `options.chainIds` | `Hex[]` | No       | Array of hex chain IDs to request permission for (defaults to `['0x1']`).                                    |
 
 ### Returns
 
-A promise that resolves to the signature of the signed message.
+A promise that resolves to an object containing `accounts` (an array of account addresses), `chainId`, and `signature`.
 
 ### Example
 
 ```javascript
-const signature = await evmClient.connectAndSign({ 
-  msg: "Hello from my dapp!" 
+const { accounts, chainId, signature } = await evmClient.connectAndSign({
+  message: "Sign in to My DApp",
+  chainIds: ['0x1'],
 });
+console.log("Connected:", accounts[0]);
 console.log("Signature:", signature);
 ```
 
 ## `connectWith`
 
-Connects to MetaMask and executes a specific [JSON-RPC method](json-rpc-api/index.md).
+Connects to MetaMask and executes a specific [JSON-RPC method](json-rpc-api/index.md) in a single user approval.
 
 ### Parameters
 
-- `rpc`: `object` - The RPC method to execute.
-  - `method`: `string` - The RPC method name.
-  - `params`: `any[]` - The parameters for the RPC method.
+| Name              | Type               | Required | Description                                                                                                   |
+| ----------------- | ------------------ | -------- | ------------------------------------------------------------------------------------------------------------- |
+| `options.method`  | `string`           | Yes      | The JSON-RPC method name.                                                                                     |
+| `options.params`  | `any[] \| Function`| Yes      | The parameters for the method. Can be a function `(accounts: Address[]) => any[]` for dynamic account injection. |
+| `options.chainIds`| `Hex[]`            | No       | Array of hex chain IDs to request permission for (defaults to `['0x1']`).                                     |
 
 ### Returns
 
-A promise that resolves to the result of the RPC call.
+A promise that resolves to an object containing `accounts`, `chainId`, and `result` (the return value of the RPC call).
 
 ### Example
 
 ```javascript
-const result = await evmClient.connectWith({
-  rpc: {
-    method: "eth_getBalance",
-    params: ["0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6", "latest"]
-  }
+const { accounts, chainId, result } = await evmClient.connectWith({
+  method: "eth_sendTransaction",
+  params: [{
+    from: "0xYourAddress",
+    to: "0xRecipientAddress",
+    value: "0x2386F26FC10000",
+  }],
+  chainIds: ['0x1'],
 });
-console.log("Balance:", result);
+console.log("Transaction hash:", result);
+```
+
+## `switchChain`
+
+Switches the active chain on the EVM client.
+If the chain is not already added to the user's MetaMask wallet, the optional `chainConfiguration`
+parameter triggers a `wallet_addEthereumChain` request as a fallback.
+
+### Parameters
+
+| Name                          | Type     | Required | Description                                                       |
+| ----------------------------- | -------- | -------- | ----------------------------------------------------------------- |
+| `options.chainId`             | `Hex`    | Yes      | The hex chain ID to switch to.                                    |
+| `options.chainConfiguration`  | `object` | No       | Fallback chain details if the chain is not yet added to MetaMask. |
+| `options.chainConfiguration.chainName`          | `string`   | Yes | Human-readable chain name.                        |
+| `options.chainConfiguration.nativeCurrency`     | `object`   | Yes | `{ name, symbol, decimals }` for the native token.|
+| `options.chainConfiguration.rpcUrls`            | `string[]` | Yes | Array of RPC endpoint URLs.                       |
+| `options.chainConfiguration.blockExplorerUrls`  | `string[]` | No  | Array of block explorer URLs.                     |
+
+### Example
+
+```javascript
+await evmClient.switchChain({
+  chainId: '0xa4b1',
+  chainConfiguration: {
+    chainName: 'Arbitrum One',
+    nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+    blockExplorerUrls: ['https://arbiscan.io'],
+  },
+});
 ```
 
 ## `getProvider`
 
-Returns the active Ethereum provider object.
+Returns the active EIP-1193 Ethereum provider object.
+The provider is available immediately after `createEVMClient` resolves, even before calling `connect()`.
+Read-only RPC calls work immediately; account-dependent calls require `connect()` first.
 
 ### Returns
 
-The active provider, or undefined if no provider is found.
+An EIP-1193 compatible provider object.
 
 ### Example
 
 ```javascript
 const provider = evmClient.getProvider();
-if (provider) {
-  // Use the provider for RPC calls
-  const accounts = await provider.request({
-    method: "eth_requestAccounts"
-  });
-}
+const chainId = await provider.request({ method: "eth_chainId" });
+console.log("Current chain:", chainId);
 ```
 
 ## `isInitialized`
@@ -106,7 +145,7 @@ Checks if MetaMask Connect has been initialized.
 
 ### Returns
 
-`True` if MetaMask Connect is initialized, `false` otherwise.
+`true` if MetaMask Connect is initialized, `false` otherwise.
 
 ### Example
 

@@ -23,7 +23,7 @@ MetaMask Connect fills that gap and provides the following benefits:
 1. **Cross-platform connections**: Reach users on any device. When the MetaMask browser extension isn’t available, MetaMask Connect connects users through the MetaMask mobile app with no additional setup.
 2. **Multichain sessions** : Request access to EVM, Solana, and future ecosystems in a single connection instead of connecting per chain.
 3. **Persistent sessions**: Keep sessions across page reloads and new tabs so users don’t need to reconnect.
-4. **Consistent API**Use the same interface whether users connect through the extension or MetaMask Mobile.
+4. **Consistent API**: Use the same interface whether users connect through the extension or MetaMask Mobile.
 
 ## Get started
 
@@ -68,7 +68,7 @@ This option gives you ecosystem-specific APIs while supporting both ecosystems, 
 ### Option C: Multichain client (full control, recommended)
 
 Use [`@metamask/connect-multichain`](/sdk/multichain) to work directly with the [Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
-This option uses **scopes** and `wallet_invokeMethod` instead of per-chain RPC and supports a single connection prompt across ecosystems..
+This option uses **scopes** and `wallet_invokeMethod` instead of per-chain RPC and supports a single connection prompt across ecosystems.
 **This is the recommended long-term path.**
 
 All options use the same underlying multichain client and share transport and session infrastructure.

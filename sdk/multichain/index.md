@@ -8,7 +8,7 @@ import CardList from '@site/src/components/CardList'
 
 # Connect to multiple ecosystems
 
-Use `@metamask/connect-multichain` to connect to multiple blockchain networks and ecosystems in MetaMask at the same time..
+Use `@metamask/connect-multichain` to connect to multiple blockchain networks and ecosystems in MetaMask at the same time.
 
 With the multichain client, your dapp can request access to EVM networks, Solana, and future ecosystems in a single connection prompt, instead of using separate connection flows for each chain.
 This gives you more control than the [ecosystem-specific clients](/sdk/#integration-options), but requires adapting your dapp to work with the Multichain API rather than traditional per-chain RPC.
@@ -37,7 +37,7 @@ For dapps that support both EVM and Solana, this means one session covers both â
 import { createMultichainClient } from '@metamask/connect-multichain'
 import { address, createSolanaRpc } from '@solana/kit'
 
-const client = createMultichainClient({
+const client = await createMultichainClient({
   dapp: { name: 'My DApp', url: 'https://mydapp.com' },
   api: {
     supportedNetworks: {
@@ -48,10 +48,9 @@ const client = createMultichainClient({
 })
 
 // Connect with scopes across ecosystems â€” one approval for all chains
-await client.connect(['eip155:1', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])
-
-// Get accounts from session
-const session = await client.getSession()
+const session = await client.connect({
+  scopes: ['eip155:1', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'],
+})
 const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
 const solAccounts = session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
 
