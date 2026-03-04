@@ -35,12 +35,12 @@ Alice to delegate to Bob the ability to spend 10 USDC on her behalf.
 
 ```typescript
 import { aliceSmartAccount, bobSmartAccount } from "./config.ts";
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { parseUnits } from 'viem'
 
 const delegation = createDelegation({
   scope: {
-    type: "erc20TransferAmount",
+    type: ScopeType.Erc20TransferAmount,
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
     // USDC has 6 decimal places.
     maxAmount: parseUnits("10", 6),
@@ -103,12 +103,12 @@ Bob to delegate to Carol the ability to spend 5 USDC on Alice's behalf.
 
 ```typescript
 import { bobSmartAccount, carolSmartAccount } from "./config.ts"
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { parseUnits } from 'viem'
 
 const redelegation = createDelegation({
   scope: {
-    type: "erc20TransferAmount",
+    type: ScopeType.Erc20TransferAmount,
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
     // USDC has 6 decimal places.
     maxAmount: parseUnits("5", 6),

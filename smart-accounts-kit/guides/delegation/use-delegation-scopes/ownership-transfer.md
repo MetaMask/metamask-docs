@@ -23,13 +23,13 @@ Internally, this scope uses the [`ownershipTransfer`](../../../reference/delegat
 See the [ownership transfer scope reference](../../../reference/delegation/delegation-scopes.md#ownership-transfer-scope) for more details.
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 
 const contractAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
 const delegation = createDelegation({
   scope: {
-    type: "ownershipTransfer",
+    type: ScopeType.OwnershipTransfer,
     contractAddress,
   },
   to: delegateAccount,
