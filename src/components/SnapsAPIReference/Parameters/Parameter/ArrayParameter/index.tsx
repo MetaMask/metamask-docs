@@ -9,13 +9,27 @@ export type ArrayParameterProps = {
   parameter: ArrayMethodParameter
 }
 
+function getArrayType(parameter: ArrayMethodParameter): string {
+  const { element } = parameter
+
+  if (element.kind === 'object') {
+    return 'object[]'
+  }
+
+  if (element.kind === 'union') {
+    return 'union[]'
+  }
+
+  return `${element.type}[]`
+}
+
 export const ArrayParameter: FunctionComponent<ArrayParameterProps> = ({ parameter }) => {
   const { description, element } = parameter
 
   return (
     <div className={styles.parameter}>
       <div className={styles['parameter-main']}>
-        <Header parameter={parameter} type="array" />
+        <Header parameter={parameter} type={getArrayType(parameter)} />
         {description && <Description>{description}</Description>}
       </div>
 

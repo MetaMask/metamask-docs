@@ -2,7 +2,7 @@ import CodeBlock from '@theme/CodeBlock'
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-{props.showTitle && <h3>{props.example.title ? props.example.title : `Example ${props.index}`}</h3>}
+{!props.example.only && <h3>{props.example.title ? props.example.title : `Example ${props.index}`}</h3>}
 
 {props.example.examples.length > 1
   ? <Tabs>
