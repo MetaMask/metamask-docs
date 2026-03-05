@@ -6,7 +6,7 @@ keywords: [tutorial, multichain, react, vite, evm, solana, caip, metamask, conne
 
 # Create a multichain dapp
 
-In this tutorial, you'll build a React dapp that connects to four blockchains at once — Ethereum, Linea, Base, and Solana — using the MetaMask Connect Multichain SDK.
+In this tutorial, you’ll build a React dapp that connects to four networks (Ethereum, Linea, Base, and Solana) by using the MetaMask Connect Multichain SDK.
 By the end, your dapp will handle wallet login and logout, read balances across all four chains, sign messages, and send transactions on all four chains. You'll learn how to:
 
 - Set up a multichain session with a single connection prompt.
