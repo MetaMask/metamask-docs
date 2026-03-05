@@ -11,7 +11,7 @@ By the end, your dapp will handle wallet login and logout, read balances across 
 
 - Set up a multichain session with a single connection prompt.
 - Read account balances across EVM networks and Solana.
-- Sign messages on both ecosystems.
+- Sign messages in both ecosystems.
 - Send transactions on EVM and Solana.
 
 ## What is the Multichain API?
