@@ -69,7 +69,7 @@ Creates a delegation with a specific delegate.
 ### Example
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem";
 
@@ -81,7 +81,7 @@ const delegation = createDelegation({
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getSmartAccountsEnvironment(sepolia.id),
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: ScopeType.NativeTokenTransferAmount,
     // 0.001 ETH in wei format.
     maxAmount: parseEther("0.001"),
   },
@@ -107,7 +107,7 @@ Creates an open delegation that can be redeemed by any delegate.
 ### Example
 
 ```typescript
-import { createOpenDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createOpenDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem";
 
@@ -117,7 +117,7 @@ const delegation = createOpenDelegation({
   // Alternatively you can use environment property of MetaMask smart account.
   environment: getSmartAccountsEnvironment(sepolia.id),
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: ScopeType.NativeTokenTransferAmount,
     // 0.001 ETH in wei format.
     maxAmount: parseEther("0.001"),
   },
@@ -307,7 +307,7 @@ const disableDelegationData = DelegationManager.encode.disableDelegation({
 <TabItem value="delegation.ts">
 
 ```ts
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem";
 
@@ -316,7 +316,7 @@ export const delegation = createDelegation({
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   environment: getSmartAccountsEnvironment(sepolia.id),
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: ScopeType.NativeTokenTransferAmount,
     // 0.001 ETH in wei format.
     maxAmount: parseEther("0.001"),
   },
@@ -352,7 +352,7 @@ const encodedDelegations = encodeDelegations([delegation]);
 <TabItem value="delegation.ts">
 
 ```ts
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem";
 
@@ -361,7 +361,7 @@ export const delegation = createDelegation({
   to: "0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488",
   environment: getSmartAccountsEnvironment(sepolia.id),
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: ScopeType.NativeTokenTransferAmount,
     // 0.001 ETH in wei format.
     maxAmount: parseEther("0.001"),
   },
@@ -416,7 +416,7 @@ export const delegation = createDelegation({
 </TabItem>
 </Tabs>
 
-## `getDelegationHashOffchain`
+## `hashDelegation`
 
 Returns the delegation hash. 
 
@@ -432,10 +432,10 @@ Returns the delegation hash.
 <TabItem value ="example.ts">
 
 ```ts
-import { getDelegationHashOffchain } from "@metamask/smart-accounts-kit/utils";
+import { hashDelegation } from "@metamask/smart-accounts-kit/utils";
 import { delegation } from "./config.ts";
 
-const delegationHash = getDelegationHashOffchain(delegation);
+const delegationHash = hashDelegation(delegation);
 ```
 
 </TabItem>
@@ -445,6 +445,7 @@ const delegationHash = getDelegationHashOffchain(delegation);
 import { 
   getSmartAccountsEnvironment,
   createDelegation,
+  ScopeType,
 } from "@metamask/smart-accounts-kit";
 import { parseEther } from "viem";
 import { sepolia } from "viem/chains";
@@ -461,7 +462,7 @@ export const delegation = createDelegation({
   from: "0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1",
   environment,
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: ScopeType.NativeTokenTransferAmount,
     // 0.001 ETH in wei format.
     maxAmount: parseEther("0.001"),
   },
@@ -608,6 +609,7 @@ const signature = signDelegation({
 import { 
   getSmartAccountsEnvironment,
   createDelegation,
+  ScopeType,
 } from "@metamask/smart-accounts-kit";
 import { createWalletClient, parseEther } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
@@ -628,7 +630,7 @@ export const delegation = createDelegation({
   from: account.address,
   environment,
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: ScopeType.NativeTokenTransferAmount,
     // 0.001 ETH in wei format.
     maxAmount: parseEther("0.001"),
   },

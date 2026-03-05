@@ -26,7 +26,7 @@ she can apply the [`timestamp`](../../../reference/delegation/caveats.md#timesta
 The following example creates a delegation using [`createDelegation`](../../../reference/delegation/index.md#createdelegation), applies the ERC-20 transfer scope with a spending limit of 10 USDC, and applies the `timestamp` caveat enforcer to restrict the delegation's validity to a seven-day period:
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 
 // Convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
@@ -42,7 +42,7 @@ const caveats = [{
 
 const delegation = createDelegation({
   scope: {
-    type: "erc20TransferAmount",
+    type: ScopeType.Erc20TransferAmount,
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
     maxAmount: 10000n,
   },

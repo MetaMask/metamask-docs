@@ -35,7 +35,7 @@ const grantedExecutionPermissions = await walletClient.getGrantedExecutionPermis
 // Example response:
 // [
 //   {
-//     chainId: "0x14a34",
+//     chainId: 84532,
 //     context: "0x0000...0000",
 //     delegationManager: "0xdb9B1e94B5b69Df7e401DDbedE43491141047dB3",
 //     dependencies: [],
