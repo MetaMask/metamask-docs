@@ -18,8 +18,8 @@ We recommend using this mechanism to connect to MetaMask.
 Access the provider API using the selected EIP-6963 provider object.
 Throughout this documentation, we refer to the selected provider using `provider`.
 
-When using MetaMask Connect, you get the same EIP-1193 provider via `client.getProvider()`.
-The provider returned by MetaMask Connect is available immediately after `createEVMClient` resolves
+When using MetaMask Connect EVM, you get the same EIP-1193 provider via `client.getProvider()`.
+The provider returned by MetaMask Connect EVM is available immediately after `createEVMClient` resolves
 and supports the same methods, properties, and events documented below.
 :::
 
@@ -203,7 +203,7 @@ provider // Or window.ethereum if you don't support EIP-6963.
 ```
 
 The provider emits this event when it's first able to submit RPC requests to a chain.
-When using MetaMask Connect, the `connect` event also includes the `accounts` array.
+When using MetaMask Connect EVM, the `connect` event also includes the `accounts` array.
 We recommend listening to this event and using the
 [`isConnected()`](#isconnected) provider method to determine when
 the provider is connected.

@@ -10,7 +10,7 @@ toc_max_heading_level: 2
 This guide walks you through migrating from `@metamask/sdk` or `@metamask/sdk-react` to
 `@metamask/connect-evm`.
 
-MetaMask Connect is a rewrite of the legacy SDK built on the
+MetaMask Connect EVM (`@metamask/connect-evm`) is a rewrite of the legacy MetaMask SDK(`@metamask/sdk`) built on the
 [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) with
 async initialization, a singleton client, and built-in support for EVM, [Solana](../../solana/index.md), and
 [multichain](../../multichain/index.md) sessions.
@@ -25,9 +25,6 @@ npm uninstall @metamask/sdk @metamask/sdk-react
 
 # Install new (EVM only)
 npm install @metamask/connect-evm
-
-# If you also need Solana support
-npm install @metamask/connect-solana
 ```
 
 ## 2. Update imports
@@ -46,22 +43,6 @@ npm install @metamask/connect-solana
 ```typescript
 // add-start
 + import { createEVMClient, getInfuraRpcUrls } from '@metamask/connect-evm'
-// add-end
-```
-
-**New (Multichain):**
-
-```typescript
-// add-start
-+ import { createMultichainClient } from '@metamask/connect-multichain'
-// add-end
-```
-
-**New (Solana):**
-
-```typescript
-// add-start
-+ import { createSolanaClient } from '@metamask/connect-solana'
 // add-end
 ```
 
@@ -118,26 +99,26 @@ npm install @metamask/connect-solana
 
 Use the following table to map `MetaMaskSDK` configuration options to their equivalents in `createEVMClient`.
 The table includes renamed options, options that moved into grouped objects (for example, `ui` and `mobile`), and
-options that MetaMask Connect no longer exposes.
-| Old (`MetaMaskSDK`)      | New (`createEVMClient`)                             | Notes                                                      |
+options that MetaMask Connect EVM no longer exposes.
+| Old (`MetaMaskSDK`) | New (`createEVMClient`) | Notes |
 | ------------------------ | --------------------------------------------------- | ---------------------------------------------------------- |
-| `dappMetadata`           | `dapp`                                              | Same shape: `{ name, url, iconUrl }`                       |
-| `dappMetadata.name`      | `dapp.name`                                         | Required                                                   |
-| `dappMetadata.url`       | `dapp.url`                                          | Auto-set in browsers; required in Node.js and React Native |
-| `infuraAPIKey`           | `api.supportedNetworks` via `getInfuraRpcUrls(key)` | Helper generates RPC URLs for all Infura-supported chains  |
-| `readonlyRPCMap`         | `api.supportedNetworks`                             | Merge into the same object                                 |
-| `headless`               | `ui.headless`                                       | Same behavior                                              |
-| `extensionOnly`          | `ui.preferExtension`                                | `true` prefers extension (default); not the same as "only" |
-| `openDeeplink`           | `mobile.preferredOpenLink`                          | Same signature: `(deeplink: string) => void`               |
-| `useDeeplink`            | `mobile.useDeeplink`                                | Same behavior                                              |
-| `timer`                  | Removed                                             | No longer configurable                                     |
-| `enableAnalytics`        | Removed                                             | No longer available                                        |
-| `communicationServerUrl` | Removed                                             | Managed internally                                         |
-| `storage`                | Removed                                             | Managed internally                                         |
+| `dappMetadata` | `dapp` | Same shape: `{ name, url, iconUrl }` |
+| `dappMetadata.name` | `dapp.name` | Required |
+| `dappMetadata.url` | `dapp.url` | Auto-set in browsers; required in Node.js and React Native |
+| `infuraAPIKey` | `api.supportedNetworks` via `getInfuraRpcUrls(key)` | Helper generates RPC URLs for all Infura-supported chains |
+| `readonlyRPCMap` | `api.supportedNetworks` | Merge into the same object |
+| `headless` | `ui.headless` | Same behavior |
+| `extensionOnly` | `ui.preferExtension` | `true` prefers extension (default); not the same as "only" |
+| `openDeeplink` | `mobile.preferredOpenLink` | Same signature: `(deeplink: string) => void` |
+| `useDeeplink` | `mobile.useDeeplink` | Same behavior |
+| `timer` | Removed | No longer configurable |
+| `enableAnalytics` | Removed | No longer available |
+| `communicationServerUrl` | Removed | Managed internally |
+| `storage` | Removed | Managed internally |
 
 ## 4. Update connection flow
 
-In MetaMask Connect, you request chain permissions during `connect()` and receive the connected accounts
+In MetaMask Connect EVM, you request chain permissions during `connect()` and receive the connected accounts
 and selected chain ID in a single response. This replaces the previous flow where you connected first
 and then made a separate JSON-RPC request for `eth_chainId`.
 
@@ -184,14 +165,14 @@ The method returns the RPC result directly:
 ```typescript
 const txHash = await client.connectWith({
   method: 'eth_sendTransaction',
-  params: (account) => [{ from: account, to: '0x...', value: '0x0' }],
+  params: account => [{ from: account, to: '0x...', value: '0x0' }],
   chainIds: ['0x1'],
 })
 ```
 
 ## 5. Update provider access
 
-In MetaMask Connect, `client.getProvider()` returns an EIP-1193 provider. You no longer use the
+In MetaMask Connect EVM, `client.getProvider()` returns an EIP-1193 provider. You no longer use the
 `SDKProvider` returned by `sdk.getProvider()`.
 
 **Old:**
@@ -237,7 +218,7 @@ provider.on('disconnect', () => {
 })
 ```
 
-MetaMask Connect also supports SDK-level event handlers that you register during initialization:
+MetaMask Connect EVM also supports SDK-level event handlers that you register during initialization:
 
 ```typescript
 const client = await createEVMClient({
@@ -272,17 +253,17 @@ provider.on('display_uri', uri => {
 
 ## 7. Adopt new capabilities
 
-MetaMask Connect introduces features that are not available in `@metamask/sdk`:
+MetaMask Connect EVM introduces features that are not available in `@metamask/sdk`:
 
-| Capability                  | Description                                                                                                |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **Multichain client**       | `createMultichainClient` from `@metamask/connect-multichain` supports CAIP-25 scopes across EVM and Solana |
-| **`invokeMethod`**          | Call RPC methods on specific CAIP-2 scopes without switching chains                                        |
-| **Solana support**          | `createSolanaClient` from `@metamask/connect-solana` with wallet-standard adapter                          |
-| **`connectAndSign`**        | Connect and sign a message in a single user approval                                                       |
-| **`connectWith`**           | Connect and execute any RPC method in a single user approval                                               |
-| **Partial disconnect**      | `disconnect(scopes)` revokes specific CAIP scopes while keeping others active                              |
-| **Singleton client**        | Subsequent `create*Client` calls merge options into the existing instance                                  |
+| Capability             | Description                                                                                                |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Multichain client**  | `createMultichainClient` from `@metamask/connect-multichain` supports CAIP-25 scopes across EVM and Solana |
+| **`invokeMethod`**     | Call RPC methods on specific CAIP-2 scopes without switching chains                                        |
+| **Solana support**     | `createSolanaClient` from `@metamask/connect-solana` with wallet-standard adapter                          |
+| **`connectAndSign`**   | Connect and sign a message in a single user approval                                                       |
+| **`connectWith`**      | Connect and execute any RPC method in a single user approval                                               |
+| **Partial disconnect** | `disconnect(scopes)` revokes specific CAIP scopes while keeping others active                              |
+| **Singleton client**   | Subsequent `create*Client` calls merge options into the existing instance                                  |
 
 ### Next step: Go multichain
 
@@ -298,8 +279,9 @@ const multichainClient = await createMultichainClient({
   dapp: { name: 'My DApp', url: window.location.href },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_KEY',
-      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp':
+        'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })
@@ -358,7 +340,7 @@ See the [multichain quickstart](../../multichain/connect/quickstart.md) for a fu
   own React context (see example below).
 - **Test on both extension and mobile**: the transport layer has changed, and behavior differences
   may surface in one environment but not the other.
-:::
+  :::
 
 ### React context pattern (replacing `useSDK`)
 
@@ -381,7 +363,7 @@ export function EVMProvider({ children }: { children: React.ReactNode }) {
     initialized.current = true
     createEVMClient({
       dapp: { name: 'My DApp', url: window.location.href },
-      api: { supportedNetworks: getInfuraRpcUrls('YOUR_INFURA_KEY') },
+      api: { supportedNetworks: getInfuraRpcUrls('YOUR_INFURA_API_KEY') },
     }).then(setClient)
   }, [])
 

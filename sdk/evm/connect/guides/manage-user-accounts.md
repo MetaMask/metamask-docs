@@ -1,5 +1,5 @@
 ---
-description: Authenticate users with MetaMask Connect in your Vanilla JS or Wagmi dapp.
+description: Authenticate users with MetaMask Connect EVM in your Vanilla JS or Wagmi dapp.
 keywords: [SDK, JavaScript, wagmi, authenticate, connect, sign, accounts, wallet, dapp]
 toc_max_heading_level: 3
 ---
@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 # Manage user accounts
 
 Connect and manage user wallet sessions in your Vanilla JavaScript or Wagmi dapp.
-With MetaMask Connect:
+With MetaMask Connect EVM:
 
 - **Connect users' wallets** to your dapp.
 - **Access user accounts** (addresses).
@@ -176,7 +176,7 @@ function WatchAccount() {
 
 ## Connect and sign
 
-Use MetaMask Connect's [`connectAndSign`](../reference/methods.md#connectandsign) method to request wallet access and sign a message in a single user interaction.
+Use MetaMask Connect EVM's [`connectAndSign`](../reference/methods.md#connectandsign) method to request wallet access and sign a message in a single user interaction.
 For example:
 
 ```js
@@ -215,7 +215,7 @@ The following HTML displays a **Connect & Sign** button:
 ```
 
 :::tip
-This one-step flow is unique to MetaMask Connect's `connectAndSign` method.
+This one-step flow is unique to MetaMask Connect EVM's `connectAndSign` method.
 It's not part of Wagmi or other wallet libraries.
 :::
 

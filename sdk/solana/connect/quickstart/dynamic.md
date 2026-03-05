@@ -1,14 +1,14 @@
 ---
 sidebar_label: Dynamic SDK
-description: Quickstart guide for using MetaMask Connect and Dynamic SDK.
+description: Quickstart guide for using MetaMask Connect Solana and Dynamic SDK.
 toc_max_heading_level: 3
 keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 ---
 
 # Connect to Solana using Dynamic SDK
 
-This quickstart gets you up and running with MetaMask Connect for Solana inside [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
-Dynamic handles wallet discovery and connection UI, and MetaMask Connect adds reliable cross-platform support for MetaMask.
+This quickstart gets you up and running with MetaMask Connect Solana inside [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
+Dynamic handles wallet discovery and connection UI, and MetaMask Connect Solana adds reliable cross-platform support for MetaMask.
 [Download the template](#set-up-using-a-template) to start quickly, or [set up manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
@@ -79,54 +79,30 @@ Dynamic handles wallet discovery and connection UI, and MetaMask Connect adds re
    pnpm dev
    ```
 
-You've successfully set up MetaMask Connect and Dynamic SDK.
+You've successfully set up MetaMask Connect Solana and Dynamic SDK.
 See how to [use the combined SDKs](#usage).
 
 ## Set up manually
 
 ### 1. Install dependencies
 
-Install MetaMask Connect and the required dependencies to an existing project:
+Install Dynamic SDK with the Solana extension and Solana web3.js:
 
 ```bash npm2yarn
-npm install @dynamic-labs/sdk-react-core @dynamic-labs/ethereum @dynamic-labs/wagmi-connector wagmi viem @tanstack/react-query
+npm install @dynamic-labs/client @dynamic-labs/solana-extension @solana/web3.js
 ```
 
-### 2. Configure providers
+### 2. Create the Dynamic client
 
-Set up your providers in `app/providers.tsx`:
+Create a Dynamic client extended with Solana support in `lib/dynamic.ts`:
 
-```typescript title="providers.tsx"
-"use client";
+```typescript title="lib/dynamic.ts"
+import { createClient } from '@dynamic-labs/client'
+import { SolanaExtension } from '@dynamic-labs/solana-extension'
 
-import { DynamicContextProvider } from "@dynamic-labs/sdk-react-core";
-import { EthereumWalletConnectors } from "@dynamic-labs/ethereum";
-import { DynamicWagmiConnector } from "@dynamic-labs/wagmi-connector";
-import { WagmiProvider } from "wagmi";
-import { config } from "@/wagmi.config";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-export function Providers({ children }: { children: React.ReactNode }) {
-
-  const queryClient = new QueryClient();
-
-  return (
-    <DynamicContextProvider
-      settings={{
-        mobileExperience: "redirect",
-        environmentId: process.env.NEXT_PUBLIC_DYNAMIC_ENVIRONMENT_ID!,
-        walletConnectors: [EthereumWalletConnectors],
-        appName: "MetaMask Dynamic Integration",
-      }}
-    >
-      <WagmiProvider config={config}>
-        <QueryClientProvider client={queryClient}>
-          <DynamicWagmiConnector>{children}</DynamicWagmiConnector>
-        </QueryClientProvider>
-      </WagmiProvider>
-    </DynamicContextProvider>
-  );
-}
+export const dynamicClient = createClient({
+  environmentId: process.env.NEXT_PUBLIC_DYNAMIC_ENVIRONMENT_ID!,
+}).extend(SolanaExtension())
 ```
 
 ### 3. Set up environment variables
@@ -162,25 +138,78 @@ export const Navbar = () => {
 
 ### Check wallet status
 
-Use the `useAccount` hook from Wagmi:
+Use the Dynamic client to check the primary wallet:
 
 ```typescript
 "use client";
 
-import { useAccount } from "wagmi";
+import { dynamicClient } from '@/lib/dynamic'
 
-export const Hero = () => {
-  const { address, isConnected } = useAccount();
+export const WalletStatus = () => {
+  const wallet = dynamicClient.wallets.primary
 
   return (
     <div>
-      {isConnected ? (
-        <p>Connected: {address}</p>
+      {wallet ? (
+        <p>Connected: {wallet.address}</p>
       ) : (
         <p>Not connected</p>
       )}
     </div>
   );
+};
+```
+
+### Send a SOL transfer
+
+Use the Solana extension's `getConnection` and `getSigner` methods to build and send a transaction:
+
+```typescript
+"use client";
+
+import { dynamicClient } from '@/lib/dynamic'
+import {
+  LAMPORTS_PER_SOL,
+  PublicKey,
+  SystemProgram,
+  TransactionMessage,
+  VersionedTransaction,
+} from '@solana/web3.js'
+
+export const SendSol = () => {
+  const send = async () => {
+    const wallet = dynamicClient.wallets.primary
+    if (!wallet) return
+
+    const connection = dynamicClient.solana.getConnection({
+      commitment: 'singleGossip',
+    })
+    const signer = dynamicClient.solana.getSigner({ wallet })
+
+    const { blockhash } = await connection.getLatestBlockhash()
+    const fromKey = new PublicKey(wallet.address)
+    const toKey = new PublicKey('DESTINATION_PUBLIC_KEY')
+
+    const instructions = [
+      SystemProgram.transfer({
+        fromPubkey: fromKey,
+        toPubkey: toKey,
+        lamports: 0.01 * LAMPORTS_PER_SOL,
+      }),
+    ]
+
+    const messageV0 = new TransactionMessage({
+      payerKey: fromKey,
+      recentBlockhash: blockhash,
+      instructions,
+    }).compileToV0Message()
+
+    const transaction = new VersionedTransaction(messageV0)
+    const { signature } = await signer.signAndSendTransaction(transaction)
+    console.log('Transaction signature:', signature)
+  }
+
+  return <button onClick={send}>Send 0.01 SOL</button>
 };
 ```
 
@@ -191,7 +220,7 @@ Before deploying your project to production:
 1. Update your `next.config.ts` with production domains.
 2. Set up proper environment variables.
 3. Configure your Dynamic SDK environment ID.
-4. Ensure MetaMask Connect is properly initialized.
+4. Ensure MetaMask Connect Solana is properly initialized.
 
 ## Troubleshooting
 

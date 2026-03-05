@@ -1,13 +1,13 @@
 ---
 sidebar_label: Embedded Wallets SDK
-description: Quickstart guide for using MetaMask Connect and Embedded Wallets SDK.
+description: Quickstart guide for using MetaMask Connect Solana and Embedded Wallets SDK.
 toc_max_heading_level: 3
 keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
 ---
 
 # Connect to Solana using Embedded Wallets SDK
 
-This quickstart gets you up and running with MetaMask Connect for Solana inside [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets), enabling users to sign in with an email or social media account.
+This quickstart gets you up and running with MetaMask Connect Solana inside [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets), enabling users to sign in with an email or social media account.
 [Download the template](#set-up-using-a-template) to start quickly, or [set up the SDKs manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
@@ -78,52 +78,54 @@ This quickstart gets you up and running with MetaMask Connect for Solana inside 
    pnpm dev
    ```
 
-You've successfully set up MetaMask Connect and MetaMask Embedded Wallets.
+You've successfully set up MetaMask Connect Solana and MetaMask Embedded Wallets.
 See how to [use Embedded Wallets](#usage).
 
 ## Set up manually
 
 ### 1. Install dependencies
 
-Install MetaMask Connect and the required dependencies to an existing project:
+Install Embedded Wallets SDK and Solana web3.js:
 
 ```bash npm2yarn
-npm install viem wagmi @tanstack/react-query @web3auth/modal@10
+npm install @web3auth/modal@10 @solana/web3.js
 ```
 
 ### 2. Configure providers
 
-Set up your providers in `app/providers.tsx`:
+Set up your providers in `app/providers.tsx` with Solana chain configuration:
 
 ```typescript title="providers.tsx"
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { type ReactNode, useState } from "react";
+import { type ReactNode } from "react";
 import { Web3AuthProvider } from "@web3auth/modal/react";
-import { WagmiProvider } from "@web3auth/modal/react/wagmi";
 
 type Props = {
   children: ReactNode;
 };
 
 export function Providers({ children }: Props) {
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
     <Web3AuthProvider
       config={{
         web3AuthOptions: {
           clientId: process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID!,
-          web3AuthNetwork: "sapphire_devnet"
+          web3AuthNetwork: "sapphire_devnet",
+          chainConfig: {
+            chainNamespace: "SOLANA",
+            chainId: "0x3",
+            rpcTarget: "https://api.devnet.solana.com",
+            displayName: "Solana Devnet",
+            blockExplorerUrl: "https://explorer.solana.com/?cluster=devnet",
+            ticker: "SOL",
+            tickerName: "Solana",
+            logo: "https://images.toruswallet.io/solana.svg",
+          },
         },
       }}
     >
-      <QueryClientProvider client={queryClient}>
-        <WagmiProvider>
-          <div className="container">{children}</div>
-        </WagmiProvider>
-      </QueryClientProvider>
+      <div className="container">{children}</div>
     </Web3AuthProvider>
   );
 }
@@ -156,7 +158,7 @@ export const Navbar = () => {
 
   return (
     <nav>
-      <button onClick={() => connect()}>Connect or Sign in</button>;
+      <button onClick={() => connect()}>Connect or Sign in</button>
     </nav>
   );
 };
@@ -164,47 +166,87 @@ export const Navbar = () => {
 
 ### Check wallet status
 
-Use the `useAccount` hook from Wagmi to check the wallet status:
+Use the `useSolanaWallet` hook to access the Solana wallet state:
 
 ```typescript
 "use client";
 
-import { useAccount } from "wagmi";
+import { useSolanaWallet } from "@web3auth/modal/react/solana";
 
-export const Hero = () => {
-  const { address, isConnected } = useAccount();
+export const WalletStatus = () => {
+  const { address, connected } = useSolanaWallet();
 
   return (
     <div>
-      {isConnected ? <p>Connected: {address}</p> : <p>Not connected</p>}
+      {connected ? <p>Connected: {address}</p> : <p>Not connected</p>}
     </div>
+  );
+};
+```
+
+### Sign a message
+
+Use the `useSignMessage` hook to request a signed message:
+
+```typescript
+"use client";
+
+import { useSignMessage } from "@web3auth/modal/react/solana";
+
+export const SignMessage = () => {
+  const { signMessage, isPending } = useSignMessage();
+
+  const handleSign = async () => {
+    try {
+      const message = new TextEncoder().encode("Hello from Solana!");
+      const signature = await signMessage(message);
+      console.log("Signature:", signature);
+    } catch (err) {
+      console.error("Error signing message:", err);
+    }
+  };
+
+  return (
+    <button onClick={handleSign} disabled={isPending}>
+      {isPending ? "Signing..." : "Sign message"}
+    </button>
   );
 };
 ```
 
 ### Send a transaction
 
-Use the `useSendTransaction` hook from Wagmi to send a transaction:
+Use the `useSignAndSendTransaction` hook to sign and send a Solana transaction:
 
 ```typescript
 "use client";
 
-import { useSendTransaction } from "wagmi";
-import { parseEther } from "viem";
+import { useSignAndSendTransaction } from "@web3auth/modal/react/solana";
+import { Transaction, SystemProgram, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 export const SendTransaction = () => {
-  const { sendTransaction } = useSendTransaction();
+  const { signAndSendTransaction, isPending } = useSignAndSendTransaction();
+
+  const handleSend = async () => {
+    try {
+      const transaction = new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: new PublicKey("YOUR_PUBLIC_KEY"),
+          toPubkey: new PublicKey("DESTINATION_PUBLIC_KEY"),
+          lamports: 0.01 * LAMPORTS_PER_SOL,
+        })
+      );
+
+      const signature = await signAndSendTransaction(transaction);
+      console.log("Transaction signature:", signature);
+    } catch (err) {
+      console.error("Error sending transaction:", err);
+    }
+  };
 
   return (
-    <button
-      onClick={() =>
-        sendTransaction({
-          to: "0xd2135CfB216b74109775236E36d4b433F1DF507B",
-          value: parseEther("0.001"),
-        })
-      }
-    >
-      Send transaction
+    <button onClick={handleSend} disabled={isPending}>
+      {isPending ? "Sending..." : "Send 0.01 SOL"}
     </button>
   );
 };

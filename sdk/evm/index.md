@@ -1,6 +1,6 @@
 ---
 sidebar_label: Introduction
-description: Connect to EVM networks using MetaMask Connect.
+description: Connect to EVM networks using MetaMask Connect EVM.
 keywords: [evm, ethereum, connect, eip-1193, provider, ethers, viem, web3js]
 ---
 
@@ -33,7 +33,7 @@ approves once. See the [multichain quickstart](../multichain/connect/quickstart.
 
 ## Supported platforms and libraries
 
-MetaMask Connect supports multiple integration paths. You can install it from npm, use it through
+MetaMask Connect EVM supports multiple integration paths. You can install it from npm, use it through
 developer libraries such as Wagmi, or integrate it through supported third-party libraries.
 
 Choose a quickstart based on your stack.
@@ -43,42 +43,42 @@ items={[
 {
 href: '/sdk/evm/connect/quickstart/javascript',
 title: 'JavaScript',
-description: 'Set up MetaMask Connect in a JavaScript dapp.',
+description: 'Set up MetaMask Connect EVM in a JavaScript dapp.',
 },
 {
 href: '/sdk/evm/connect/quickstart/wagmi',
 title: 'Wagmi',
-description: 'Set up MetaMask Connect in a Next.js and Wagmi dapp.',
+description: 'Set up MetaMask Connect EVM in a Next.js and Wagmi dapp.',
 },
 {
 href: '/sdk/evm/connect/quickstart/rainbowkit',
 title: 'RainbowKit',
-description: 'Set up MetaMask Connect in a JavaScript and RainbowKit dapp.',
+description: 'Set up MetaMask Connect EVM in a JavaScript and RainbowKit dapp.',
 },
 {
 href: '/sdk/evm/connect/quickstart/connectkit',
 title: 'ConnectKit',
-description: 'Set up MetaMask Connect in a JavaScript and ConnectKit dapp.',
+description: 'Set up MetaMask Connect EVM in a JavaScript and ConnectKit dapp.',
 },
 {
 href: '/sdk/evm/connect/quickstart/react-native',
 title: 'React Native',
-description: 'Set up MetaMask Connect in a React Native or Expo dapp.',
+description: 'Set up MetaMask Connect EVM in a React Native or Expo dapp.',
 },
 {
 href: '/sdk/evm/connect/quickstart/dynamic',
 title: 'Dynamic SDK',
-description: 'Set up Dynamic SDK in a Next.js dapp. Use MetaMask Connect features with Dynamic.',
+description: 'Set up Dynamic SDK in a Next.js dapp. Use MetaMask Connect EVM features with Dynamic.',
 },
 {
 href: '/sdk/evm/connect/quickstart/web3auth',
 title: 'Embedded Wallet SDK (formerly Web3Auth)',
-description: 'Set up Web3Auth SDK in a Next.js dapp. Use MetaMask Connect features with Web3Auth.',
+description: 'Set up Web3Auth SDK in a Next.js dapp. Use MetaMask Connect EVM features with Web3Auth.',
 },
 {
 href: 'https://web3onboard.thirdweb.com/',
 title: 'Web3-Onboard',
-description: 'Use MetaMask Connect features with Web3-Onboard.',
+description: 'Use MetaMask Connect EVM features with Web3-Onboard.',
 buttonIcon: 'external-arrow',
 }
 ]}

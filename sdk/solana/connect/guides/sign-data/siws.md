@@ -7,7 +7,7 @@ description: Enable your users to Sign in with Solana.
 [Sign-In with Solana (SIWS)](https://docs.siws.xyz/) lets users sign in to your dapp by authenticating with their MetaMask wallet, instead of a traditional username and password.
 
 <p align="center">
-    <img height="500" src={require("../../_assets/siwe.png").default} alt="Sign-in with Ethereum request" class="appScreen" />
+    <img height="500" src={require("../../_assets/siwe.png").default} alt="Sign-in with Solana request" class="appScreen" />
 </p>
 
 ## Domain binding
@@ -34,10 +34,8 @@ This avoids breaking existing dapps that may have use cases for mismatched domai
 
 ## Example
 
-<!-- TODO: Add link to solana_signMessage JSON-RPC method -->
-
 The following example shows how to set up SIWS with MetaMask using
-[`solana_signMessage`](#):
+[`solana:signMessage`](../../reference/methods.md#supported-wallet-standard-features):
 
 ```javascript title="index.js"
 import { createSolanaClient } from '@metamask/connect-solana'
@@ -82,7 +80,4 @@ The following HTML displays the SIWS button:
 <p class="alert">Result:<span id="siwsResult"></span></p>
 ```
 
-<!-- TODO: Add link to live example -->
-
-See the [live example](#) and
-[test dapp source code](#) for more information.
+See the [JavaScript quickstart](../../quickstart/javascript.md) for a complete working example.

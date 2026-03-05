@@ -1,5 +1,5 @@
 ---
-description: Quickstart guide for using MetaMask Connect with a React Native dapp.
+description: Quickstart guide for using MetaMask Connect EVM with a React Native dapp.
 sidebar_label: React Native
 keywords: [connect, MetaMask, React, Native, SDK, dapp]
 ---
@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 # Connect to MetaMask using React Native
 
-Get started with MetaMask Connect in your React Native or Expo dapp.
+Get started with MetaMask Connect EVM in your React Native or Expo dapp.
 
 ## Steps
 
@@ -36,7 +36,7 @@ npx create-expo-app MyProject --template
 
 ### 2. Install dependencies
 
-Install MetaMask Connect and its required polyfill packages:
+Install MetaMask Connect EVM and its required polyfill packages:
 
 ```bash
 npm install @metamask/connect-evm react-native-get-random-values buffer @react-native-async-storage/async-storage readable-stream
@@ -192,7 +192,7 @@ If you import anything from `@metamask/connect-evm` before `react-native-get-ran
 you will get `crypto.getRandomValues is not a function`.
 :::
 
-### 6. Use MetaMask Connect
+### 6. Use MetaMask Connect EVM
 
 Initialize the EVM client and use it to connect, sign, and send transactions.
 `mobile.preferredOpenLink` is **required** — it tells the SDK how to open deeplinks to the MetaMask

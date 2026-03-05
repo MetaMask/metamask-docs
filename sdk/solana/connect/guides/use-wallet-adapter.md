@@ -26,7 +26,7 @@ a new project with the Wallet Adapter built in.
 
 ### 1. Install dependencies
 
-Install MetaMask Connect for Solana and the Wallet Adapter packages:
+Install MetaMask Connect Solana and the Wallet Adapter packages:
 
 ```bash
 npm install @metamask/connect-solana \
@@ -39,7 +39,7 @@ npm install @metamask/connect-solana \
 
 ### 2. Create the Solana provider
 
-Create a `SolanaProvider` component that initializes MetaMask Connect and wraps the Wallet Adapter
+Create a `SolanaProvider` component that initializes MetaMask Connect Solana and wraps the Wallet Adapter
 providers:
 
 ```typescript title='components/SolanaProvider.tsx'

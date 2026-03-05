@@ -19,7 +19,7 @@ Jump to the [Quickstart](/sdk/multichain/connect/quickstart) to set up MetaMask 
 
 ## How the Multichain API works
 
-MetaMask Connect is built on the [Multichain API (CAIP-25)](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) specification, a chain-agnostic standard for wallet-dapp communication.
+MetaMask Connect Multichain is built on the [Multichain API (CAIP-25)](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) specification, a chain-agnostic standard for wallet-dapp communication.
 For the full rationale and specification, see [MetaMask Improvement Proposal-5 (MIP-5)](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-5.md).
 
 Instead of connecting to one chain at a time, the Multichain API lets you do the following:
@@ -43,7 +43,7 @@ The multichain client is a good fit when you're:
 - **Looking for the best cross-chain UX** — one connection prompt for all chains
 - **Needing full control** over the session lifecycle
 
-If you're adding MetaMask Connect to an existing dapp and want minimal code changes, the [ecosystem-specific clients](/sdk/#integration-options) ([`@metamask/connect-evm`](/sdk/evm) or [`@metamask/connect-solana`](/sdk/solana)) are a simpler starting point — you can always migrate later.
+If you're adding MetaMask Connect Multichain to an existing dapp and want minimal code changes, the [ecosystem-specific clients](/sdk/#integration-options) ([`@metamask/connect-evm`](/sdk/evm) or [`@metamask/connect-solana`](/sdk/solana)) are a simpler starting point — you can always migrate later.
 
 ## Get started
 

@@ -1,5 +1,5 @@
 ---
-description: Quickstart guide for using MetaMask Connect with a JavaScript dapp.
+description: Quickstart guide for using MetaMask Connect EVM with a JavaScript dapp.
 sidebar_label: JavaScript
 keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK]
 ---
@@ -9,8 +9,8 @@ import TabItem from "@theme/TabItem";
 
 # Connect to MetaMask using JavaScript
 
-Get started with MetaMask Connect in your JavaScript dapp.
-[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
+Get started with MetaMask Connect EVM in your JavaScript dapp.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
@@ -80,21 +80,21 @@ Get started with MetaMask Connect in your JavaScript dapp.
    pnpm dev
    ```
 
-You've successfully set up MetaMask Connect.
+You've successfully set up MetaMask Connect EVM.
 
 ## Set up manually
 
-### 1. Install MetaMask Connect
+### 1. Install MetaMask Connect EVM
 
-Install MetaMask Connect in an existing JavaScript project:
+Install MetaMask Connect EVM in an existing JavaScript project:
 
 ```bash npm2yarn
 npm install @metamask/connect-evm
 ```
 
-### 2. Initialize MetaMask Connect
+### 2. Initialize MetaMask Connect EVM
 
-The following is an example of using MetaMask Connect for an EVM dapp in a JavaScript project:
+The following is an example of using MetaMask Connect EVM for an EVM dapp in a JavaScript project:
 
 ```javascript
 import { createEVMClient, getInfuraRpcUrls } from '@metamask/connect-evm'
@@ -115,7 +115,7 @@ const evmClient = await createEVMClient({
 })
 ```
 
-These examples configure MetaMask Connect with the following options:
+These examples configure MetaMask Connect EVM with the following options:
 
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
 - `api.supportedNetworks` - A map of hex chain IDs to RPC URLs for all networks supported by the app.
@@ -162,7 +162,7 @@ is always included regardless of what you pass.
 
 Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
 
-## Common MetaMask Connect methods at a glance
+## Common MetaMask Connect EVM methods at a glance
 
 | Method                                                                         | Description                                              |
 | ------------------------------------------------------------------------------ | -------------------------------------------------------- |

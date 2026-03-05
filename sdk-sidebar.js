@@ -230,24 +230,24 @@ const sdkSidebar = {
         },
       ],
     },
-    {
-      type: 'category',
-      label: 'Tutorials',
-      collapsible: false,
-      collapsed: false,
-      items: [
-        {
-          type: "link",
-          label: "Integrate SNS with MetaMask Connect",
-          href: "/tutorials/"
-        },
-        {
-          type: "link",
-          label: "Integrate Solana Pay with MetaMask Connect",
-          href: "/tutorials/"
-        },
-      ],
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Tutorials',
+    //   collapsible: false,
+    //   collapsed: false,
+    //   items: [
+    //     {
+    //       type: "link",
+    //       label: "Integrate SNS with MetaMask Connect",
+    //       href: "/tutorials/"
+    //     },
+    //     {
+    //       type: "link",
+    //       label: "Integrate Solana Pay with MetaMask Connect",
+    //       href: "/tutorials/"
+    //     },
+    //   ],
+    // },
     {
       type: 'category',
       label: 'Reference',

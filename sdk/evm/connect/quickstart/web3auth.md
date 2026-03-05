@@ -1,15 +1,15 @@
 ---
 sidebar_label: Embedded Wallets SDK
-description: Quickstart guide for using MetaMask Connect and Embedded Wallets SDK.
+description: Quickstart guide for using MetaMask Connect EVM and Embedded Wallets SDK.
 toc_max_heading_level: 3
 keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
 ---
 
 # Connect to MetaMask using Embedded Wallets SDK
 
-Get started with MetaMask Connect and [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets),
+Get started with MetaMask Connect EVM and [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets),
 enabling users to sign in with an email or social media account.
-Use MetaMask Connect features directly within Embedded Wallets SDK.
+Use MetaMask Connect EVM features directly within Embedded Wallets SDK.
 [Download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
 
 <p align="center">
@@ -80,14 +80,14 @@ Use MetaMask Connect features directly within Embedded Wallets SDK.
    pnpm dev
    ```
 
-You've successfully set up MetaMask Connect and MetaMask Embedded Wallets.
+You've successfully set up MetaMask Connect EVM and MetaMask Embedded Wallets.
 See how to [use Embedded Wallets](#usage).
 
 ## Set up manually
 
 ### 1. Install dependencies
 
-Install MetaMask Connect and the required dependencies to an existing project:
+Install MetaMask Connect EVM and the required dependencies to an existing project:
 
 ```bash npm2yarn
 npm install viem wagmi @tanstack/react-query @web3auth/modal@10

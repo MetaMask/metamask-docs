@@ -1,5 +1,5 @@
 ---
-description: Quickstart guide for using MetaMask Connect with a JavaScript and ConnectKit dapp.
+description: Quickstart guide for using MetaMask Connect EVM with a JavaScript and ConnectKit dapp.
 toc_max_heading_level: 3
 sidebar_label: ConnectKit
 keywords: [connect, MetaMask, JavaScript, ConnectKit, SDK, dapp, Wallet SDK]
@@ -7,8 +7,8 @@ keywords: [connect, MetaMask, JavaScript, ConnectKit, SDK, dapp, Wallet SDK]
 
 # Connect to MetaMask using JavaScript + ConnectKit
 
-Get started with MetaMask Connect in a JavaScript and ConnectKit dapp.
-[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
+Get started with MetaMask Connect EVM in a JavaScript and ConnectKit dapp.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-connectkit-demo.vercel.app/" target="_blank">
@@ -80,9 +80,9 @@ Get started with MetaMask Connect in a JavaScript and ConnectKit dapp.
 
 ## Set up manually
 
-### 1. Install MetaMask Connect
+### 1. Install MetaMask Connect EVM
 
-Install MetaMask Connect along with its peer dependencies to an existing React project:
+Install MetaMask Connect EVM along with its peer dependencies to an existing React project:
 
 ```bash npm2yarn
 npm install connectkit wagmi viem@2.x @tanstack/react-query

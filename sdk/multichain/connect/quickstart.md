@@ -7,11 +7,11 @@ keywords: [multichain, evm, solana, connect, caip-25, scope]
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Connect to multichain using MetaMask Connect
+# Connect to multichain using MetaMask Connect Multichain
 
 Get started with MetaMask Connect Multichain in your JavaScript(Vite) dapp.
 
-[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect Multichain](#set-up-manually) in an existing dapp.
 
 <!-- <p align="center">
   <a href="" target="_blank">
@@ -28,7 +28,7 @@ Get started with MetaMask Connect Multichain in your JavaScript(Vite) dapp.
 - An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the [MetaMask Developer dashboard](https://developer.metamask.io).
 
 :::note
-This quickstart uses [Vite](https://vite.dev/) as the build tool for convenience, but MetaMask Connect works with vanilla JavaScript or any build tool of your choice.
+This quickstart uses [Vite](https://vite.dev/) as the build tool for convenience, but MetaMask Connect Multichain works with vanilla JavaScript or any build tool of your choice.
 :::
 
 ## Set up using a template
@@ -122,7 +122,7 @@ const client = await createMultichainClient({
 })
 ```
 
-This example configures MetaMask Connect with the following options:
+This example configures MetaMask Connect Multichain with the following options:
 
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
 - `api.supportedNetworks` - A map of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) chain IDs to RPC URLs for all networks supported by the dapp.

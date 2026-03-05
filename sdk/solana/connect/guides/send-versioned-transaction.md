@@ -76,6 +76,20 @@ const [{ signature }] = await wallet.features['solana:signAndSendTransaction'].s
 await connection.getSignatureStatus(signature)
 ```
 
+### Sign without sending
+
+Use `solana:signTransaction` when you need a signed versioned transaction without broadcasting it:
+
+```javascript
+const [{ signedTransaction }] = await wallet.features['solana:signTransaction'].signTransaction({
+  account,
+  transaction: transactionV0.serialize(),
+  chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
+})
+
+const txSignature = await connection.sendRawTransaction(signedTransaction)
+```
+
 ## Create an Address Lookup Table
 
 Create an [Address Lookup Table (ALT)](https://solana.com/developers/guides/advanced/lookup-tables) to efficiently load addresses into tables, significantly increasing the number of addresses that can be used in a single transaction.

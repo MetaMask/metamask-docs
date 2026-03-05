@@ -77,6 +77,22 @@ for (const transaction of transactions) {
 }
 ```
 
+## Sign a transaction without sending
+
+Use `solana:signTransaction` when you need a signed transaction but want to submit it yourself — for
+example, for offline signing or multi-sig workflows.
+
+```javascript
+const [{ signedTransaction }] = await wallet.features['solana:signTransaction'].signTransaction({
+  account,
+  transaction: transaction.serialize({ verifySignatures: false }),
+  chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
+})
+
+const txSignature = await connection.sendRawTransaction(signedTransaction)
+await connection.getSignatureStatus(txSignature)
+```
+
 ## Next steps
 
 To efficiently load more addresses in a single transaction, learn how to [send a versioned transaction](send-versioned-transaction.md) with Address Lookup Tables.

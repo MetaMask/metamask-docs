@@ -1,12 +1,12 @@
 ---
-description: Quickstart guide for using MetaMask Connect with a JavaScript dapp.
+description: Quickstart guide for using MetaMask Connect Solana with a JavaScript dapp.
 sidebar_label: JavaScript
 keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK]
 ---
 
-# Connect to Solana using MetaMask Connect
+# Connect to Solana using MetaMask Connect Solana
 
-This quickstart gets you up and running with MetaMask Connect for Solana in a JavaScript dapp.
+This quickstart gets you up and running with MetaMask Connect Solana in a JavaScript dapp.
 [Download the template](#set-up-using-a-template) to start quickly, or [set up manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
@@ -77,21 +77,21 @@ This quickstart gets you up and running with MetaMask Connect for Solana in a Ja
    pnpm dev
    ```
 
-You've successfully set up MetaMask Connect.
+You've successfully set up MetaMask Connect Solana.
 
 ## Set up manually
 
-### 1. Install MetaMask Connect
+### 1. Install MetaMask Connect Solana
 
-Install MetaMask Connect in an existing JavaScript project:
+Install MetaMask Connect Solana in an existing JavaScript project:
 
 ```bash npm2yarn
 npm install @metamask/connect-solana
 ```
 
-### 2. Initialize MetaMask Connect
+### 2. Initialize MetaMask Connect Solana
 
-The following examples show how to use MetaMask Connect in various JavaScript environments:
+The following examples show how to use MetaMask Connect Solana in various JavaScript environments:
 
 ```javascript
 import { createSolanaClient } from '@metamask/connect-solana'
@@ -110,7 +110,13 @@ const solanaClient = await createSolanaClient({
 })
 ```
 
-These examples configure MetaMask Connect with the following options:
+:::info
+`createSolanaClient` is async and uses a singleton multichain core under the hood.
+Calling it multiple times returns the same underlying session, so you can safely call it during
+initialization without worrying about duplicate connections.
+:::
+
+These examples configure MetaMask Connect Solana with the following options:
 
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
 - `api.supportedNetworks` - A map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs for all networks supported by the app.
@@ -139,16 +145,29 @@ The client handles cross-platform connection (desktop and mobile), including dee
 ## Usage example
 
 ```javascript
-// 1. Connect and get accounts
 const wallet = solanaClient.getWallet()
-const { accounts } = await wallet.features['standard:connect'].connect()
 
-// 2. Sign a message
-const message = new TextEncoder().encode('Hello from my dapp')
-const [{ signature }] = await wallet.features['solana:signMessage'].signMessage({
-  account: accounts[0],
-  message,
-})
+// 1. Connect and get accounts
+try {
+  const { accounts } = await wallet.features['standard:connect'].connect()
+  console.log('Connected:', accounts[0].address)
+
+  // 2. Sign a message
+  const message = new TextEncoder().encode('Hello from my dapp')
+  const [{ signature }] = await wallet.features['solana:signMessage'].signMessage({
+    account: accounts[0],
+    message,
+  })
+  console.log('Signature:', signature)
+} catch (err) {
+  if (err.code === 4001) {
+    console.log('User rejected the request')
+  } else if (err.code === -32002) {
+    console.log('A request is already pending — check MetaMask')
+  } else {
+    console.error('Unexpected error:', err)
+  }
+}
 
 // 3. Disconnect
 await solanaClient.disconnect()

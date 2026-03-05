@@ -1,5 +1,5 @@
 ---
-description: Interact with contracts with MetaMask Connect in your JavaScript dapp.
+description: Interact with contracts with MetaMask Connect EVM in your JavaScript dapp.
 keywords: [SDK, JavaScript, wagmi, read, write, smart, contract, contracts, dapp]
 sidebar_label: Interact with contracts
 toc_max_heading_level: 3
@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 # Interact with smart contracts
 
 Interact with smart contracts in your JavaScript dapp.
-With MetaMask Connect:
+With MetaMask Connect EVM:
 
 - **Read data** from smart contracts.
 - **Write data** to smart contracts.
@@ -19,7 +19,7 @@ With MetaMask Connect:
 - **Manage transaction states**.
 - **Handle contract errors**.
 
-The following examples demonstrate how to use MetaMask Connect with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to interact with Solidity smart contracts.
+The following examples demonstrate how to use MetaMask Connect EVM with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to interact with Solidity smart contracts.
 
 This simple Hello World contract allows anyone to read and write a message to it.
 
@@ -365,7 +365,7 @@ In this example, four contract read calls are batched together.
 The results are returned as an array in the same order as the calls, allowing you to process each result accordingly.
 
 :::info
-"Batching" can also refer to [batching JSON-RPC requests](metamask-exclusive/batch-requests.md) using MetaMask Connect's `metamask_batch` method, or [sending atomic batch transactions](send-transactions/batch-transactions.md) in MetaMask.
+"Batching" can also refer to [batching JSON-RPC requests](metamask-exclusive/batch-requests.md) using MetaMask Connect EVM's `metamask_batch` method, or [sending atomic batch transactions](send-transactions/batch-transactions.md) in MetaMask.
 :::
 
 ## Write to contracts

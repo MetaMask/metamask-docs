@@ -1,15 +1,15 @@
 ---
 sidebar_label: Dynamic SDK
-description: Quickstart guide for using MetaMask Connect and Dynamic SDK.
+description: Quickstart guide for using MetaMask Connect EVM and Dynamic SDK.
 toc_max_heading_level: 3
 keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 ---
 
 # Connect to MetaMask using Dynamic SDK
 
-Get started with MetaMask Connect and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
-Use MetaMask Connect features directly within Dynamic SDK.
-[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect](#set-up-manually) in an existing dapp.
+Get started with MetaMask Connect EVM and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
+Use MetaMask Connect EVM features directly within Dynamic SDK.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-dynamic-demo.vercel.app/" target="_blank">
@@ -79,14 +79,14 @@ Use MetaMask Connect features directly within Dynamic SDK.
    pnpm dev
    ```
 
-You've successfully set up MetaMask Connect and Dynamic SDK.
+You've successfully set up MetaMask Connect EVM and Dynamic SDK.
 See how to [use the combined SDKs](#usage).
 
 ## Set up manually
 
 ### 1. Install dependencies
 
-Install MetaMask Connect and the required dependencies to an existing project:
+Install MetaMask Connect EVM and the required dependencies to an existing project:
 
 ```bash npm2yarn
 npm install @dynamic-labs/sdk-react-core @dynamic-labs/ethereum @dynamic-labs/wagmi-connector wagmi viem @tanstack/react-query
@@ -191,7 +191,7 @@ Before deploying your project to production:
 1. Update your `next.config.ts` with production domains.
 2. Set up proper environment variables.
 3. Configure your Dynamic SDK environment ID.
-4. Ensure MetaMask Connect is properly initialized.
+4. Ensure MetaMask Connect EVM is properly initialized.
 
 ## Troubleshooting
 
