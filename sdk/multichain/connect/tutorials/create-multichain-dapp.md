@@ -10,7 +10,7 @@ In this tutorial, you’ll build a React dapp that connects to four networks (Et
 By the end, your dapp will handle wallet login and logout, read balances across all four chains, sign messages, and send transactions on all four chains. You'll learn how to do the following:
 
 - Set up a multichain session with a single connection prompt.
-- Read account balances across EVM and Solana chains.
+- Read account balances across EVM networks and Solana.
 - Sign messages on both ecosystems.
 - Send transactions on EVM and Solana.
 
