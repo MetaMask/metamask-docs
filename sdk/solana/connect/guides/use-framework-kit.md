@@ -1,20 +1,29 @@
+---
+sidebar_label: Use Framework Kit
+description: Set up Framework Kit to connect a Solana dapp to MetaMask.
+keywords: [solana, framework kit, react, hooks, wallet, connect]
+---
+
 # Use Framework Kit
 
-To connect to Solana in MetaMask from your dapp, use Framework Kit.
+[Framework Kit](https://www.framework-kit.com/) is a React library that simplifies Solana dapp
+development. It handles RPC connections, wallet adapters, and state management, so you can interact
+with Solana using React hooks.
 
-Framework Kit supports MetaMask out-of-the-box for Solana dapps, handling RPC connections, wallet adapters, and state management for you:
+Framework Kit supports MetaMask out-of-the-box. This guide walks you through setting it up.
 
-- **One provider, many hooks** — Wrap your app once with `SolanaProvider`, then use hooks anywhere.
-- **Wallet connection built-in** — `useWalletConnection` handles discovery, connection, and disconnection.
-- **Automatic data refresh** — Balances and account data stay in sync without manual refetching.
-- **Common operations simplified** — `useSolTransfer`, `useSplToken`, and `useTransactionPool` for transfers and custom transactions.
-- **TypeScript-first** — Full type inference out of the box.
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) version 19 or later
+- A package manager such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm),
+  [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/)
+- A React or Next.js project
 
 ## Steps
 
 ### 1. Install dependencies
 
-Install the following dependencies:
+Install Framework Kit's Solana client and React hooks:
 
 ```bash
 npm install @solana/client @solana/react-hooks
@@ -22,7 +31,7 @@ npm install @solana/client @solana/react-hooks
 
 ### 2. Create the Solana provider
 
-Create a `SolanaProvider` to provide the Solana context to the application:
+Create a `SolanaProviderWrapper` component that initializes the Solana client with MetaMask support:
 
 ```typescript title='components/SolanaProvider.tsx'
 'use client';
@@ -50,9 +59,9 @@ export const SolanaProviderWrapper: FC<SolanaProviderWrapperProps> = ({ children
 };
 ```
 
-### 3. Wrap the application in the Solana Provider
+### 3. Add the provider to your root layout
 
-Add the `SolanaProviderWrapper` to the `RootLayout` in the `app` directory:
+Wrap your application with `SolanaProviderWrapper` so all components can access Solana hooks:
 
 ```typescript
 import './globals.css';
@@ -71,6 +80,29 @@ export default function RootLayout({
     </html>
   );
 }
+```
+
+### 4. Connect to MetaMask
+
+Use the `useWalletConnection` hook in any component to connect to the user's wallet:
+
+```typescript
+import { useWalletConnection } from "@solana/react-hooks";
+
+export const ConnectWallet = () => {
+  const { wallet, connect, disconnect } = useWalletConnection();
+
+  if (wallet) {
+    return (
+      <div>
+        <p>Connected: {wallet.accounts[0].address}</p>
+        <button onClick={disconnect}>Disconnect</button>
+      </div>
+    );
+  }
+
+  return <button onClick={() => connect("metamask")}>Connect MetaMask</button>;
+};
 ```
 
 ## Next steps

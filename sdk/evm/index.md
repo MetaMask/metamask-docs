@@ -8,37 +8,25 @@ import CardList from '@site/src/components/CardList'
 
 # Connect to EVM networks
 
-Connect to Ethereum and other EVM networks in MetaMask using `@metamask/connect-evm`.
-Your existing `viem`, `ethers.js`, or `web3.js` code works with minimal changes — the EVM client gives you a standard [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider (the same `window.ethereum`-shaped interface you're used to), with automatic platform detection, relay connections, and session persistence built in.
+Use `@metamask/connect-evm` to connect your dapp to Ethereum and other EVM networks in the MetaMask mobile app
+or browser extension.
+The MetaMask Connect EVM client provides an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)-compatible
+provider with the same shape as `window.ethereum`, meaning existing `viem`, `ethers.js`, or `web3.js`
+code works with minimal changes.
 
-## Quick example
+MetaMask Connect also includes automatic platform detection, relay-based connections, and session persistence.
 
-```typescript
-import { createEVMClient } from '@metamask/connect-evm'
+:::info Multichain support
+If your dapp supports both EVM and Solana, use both the EVM and Solana clients.
+They share the same underlying [multichain session](../multichain/index.md), meaning the user only approves once.
+:::
 
-const client = await createEVMClient({
-  dapp: { name: 'My DApp', url: 'https://mydapp.com' },
-})
+## Supported platforms and libraries
 
-// Connect and request chains
-const { accounts, chainId } = await client.connect({
-  chainIds: ['0x1', '0x89'], // Ethereum Mainnet + Polygon
-})
+MetaMask Connect supports multiple integration paths. You can install it from npm, use it through
+developer libraries such as Wagmi, or integrate it through supported third-party libraries.
 
-// Get an EIP-1193 provider — works with ethers.js, viem, web3.js, etc.
-const provider = client.getProvider()
-const balance = await provider.request({
-  method: 'eth_getBalance',
-  params: [accounts[0], 'latest'],
-})
-```
-
-The SDK handles platform detection, relay connections, and session persistence automatically — you just work with the provider.
-
-## Get started
-
-MetaMask Connect is available in a variety of ways to make integration as easy as possible.
-Access it directly via npm, through popular developer libraries like Wagmi, or as part of popular convenience libraries:
+Choose a quickstart based on your stack.
 
 <CardList
 items={[
@@ -96,9 +84,3 @@ The EVM client works seamlessly with popular Ethereum libraries:
 | [ethers.js](https://docs.ethers.org/) | Pass `client.getProvider()` to `BrowserProvider`  |
 | [web3.js](https://web3js.org/)        | Pass `client.getProvider()` to `Web3` constructor |
 
-## Use EVM and Solana together
-
-If your dapp supports both EVM and Solana, use both the EVM and Solana clients.
-They share the same underlying multichain session — the user only approves once.
-
-See the [Multichain documentation](/sdk/multichain) for more details on cross-ecosystem connections.
