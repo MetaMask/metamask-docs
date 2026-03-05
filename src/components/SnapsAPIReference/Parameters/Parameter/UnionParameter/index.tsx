@@ -22,8 +22,8 @@ export const UnionParameter: FunctionComponent<UnionParameterProps> = ({ paramet
 
       <h3 className="margin-vert--lg type-paragraph-s">Options</h3>
       <div className={styles['parameter-children']}>
-        {Object.entries(options).map(([key, property], index, array) => (
-          <Fragment key={`${key}-${property.name}`}>
+        {options.map((property, index, array) => (
+          <Fragment key={`${index}-${property.name}`}>
             <div className={styles['parameter-child']}>
               <Parameter parameter={property} />
             </div>
