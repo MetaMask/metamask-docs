@@ -1,16 +1,13 @@
 /* H1 Wrapper styles */
 .h1Wrapper {
   position: relative;
-  margin-bottom: 1.5rem; /* Maintain spacing after H1 */
-  min-height: 48px; /* Ensure minimum height for button */
+  margin-bottom: 1.5rem;
+  min-height: 48px;
 }
 
 @media (width >= 997px) {
   .h1Wrapper h1 {
-    /* Don't override the default H1 margin-bottom */
-
-    /* Add padding-right to prevent text from going under the button */
-    padding-right: 180px;
+    padding-right: 220px;
   }
 }
 
@@ -30,24 +27,23 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 20px;
-  background: rgb(255 255 255 / 5%);
-  border: 1px solid rgb(255 255 255 / 15%);
+  padding: 10px 16px;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 8px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--ifm-font-color-base);
   transition: all 0.2s ease;
-  backdrop-filter: blur(10px);
-  min-width: 160px;
+  white-space: nowrap;
 }
 
 .mainButton:hover {
-  background: rgb(255 255 255 / 10%);
-  border-color: rgb(255 255 255 / 25%);
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-emphasis-400);
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
 }
 
 .arrow {
@@ -62,14 +58,13 @@
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  min-width: 280px;
+  min-width: 300px;
   background: var(--ifm-background-surface-color);
-  border: 1px solid rgb(255 255 255 / 15%);
+  border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 25%);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 15%);
   z-index: 1000;
   overflow: hidden;
-  backdrop-filter: blur(10px);
 }
 
 @media (width <= 996px) {
@@ -83,23 +78,17 @@
   align-items: flex-start;
   gap: 12px;
   width: 100%;
-  padding: 12px 16px;
+  padding: 10px 16px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgb(255 255 255 / 8%);
   cursor: pointer;
   text-align: left;
-  transition: all 0.2s ease;
+  transition: background 0.15s ease;
   color: var(--ifm-font-color-base);
 }
 
-.dropdownItem:last-child {
-  border-bottom: none;
-}
-
 .dropdownItem:hover {
-  background: rgb(255 255 255 / 5%);
-  transform: translateX(2px);
+  background: var(--ifm-color-emphasis-100);
 }
 
 .dropdownItem svg {
@@ -107,16 +96,21 @@
   margin-top: 2px;
 }
 
+.divider {
+  height: 1px;
+  background: var(--ifm-color-emphasis-200);
+  margin: 4px 0;
+}
+
 .itemTitle {
   font-weight: 600;
   font-size: 14px;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   color: var(--ifm-font-color-base);
 }
 
 .itemDescription {
   font-size: 12px;
-  color: var(--ifm-color-emphasis-700);
-  opacity: 0.7;
+  color: var(--ifm-color-emphasis-600);
 }
 
