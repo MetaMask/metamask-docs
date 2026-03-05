@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 You can sign Starknet transactions using the
 [`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
-[`wallet_invokeSnap`](/snaps/reference/snaps-api/wallet_invokesnap.mdx) JSON-RPC method.
+[`wallet_invokeSnap`](/snaps/reference/snaps-api/wallet_invokesnap) JSON-RPC method.
 
 ## Prerequisites
 
