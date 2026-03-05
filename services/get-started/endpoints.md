@@ -153,7 +153,6 @@ Include your authentication details when [making IPFS requests](../reference/ipf
 | Network | Description         | URL                                                |
 |---------|---------------------|----------------------------------------------------|
 | Mainnet | JSON-RPC over HTTPS | `https://palm-mainnet.infura.io/v3/<YOUR-API-KEY>` |
-| Testnet | JSON-RPC over HTTPS | `https://palm-testnet.infura.io/v3/<YOUR-API-KEY>` |
 
 ## Polygon PoS
 
