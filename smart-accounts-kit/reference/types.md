@@ -6,7 +6,7 @@ keywords: [types, delegation, smart accounts, reference, enums]
 
 # Types
 
-This page documents the types used in toolkit APIs.
+This page documents the types used in Smart Accounts Kit APIs.
 
 ## Enums
 
@@ -71,7 +71,7 @@ Defines an expected calldata segment for a single function signature.
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
 | `startIndex` | `number` | Yes | The byte offset in the calldata (including the 4-byte selector) where the expected value starts. |
-| `value` | `Hex` | Yes | The expected hex encoded calldata at that offset. |
+| `value` | `Hex` | Yes | The expected hex-encoded calldata at that offset. |
 
 ### `Caveat`
 
@@ -101,7 +101,7 @@ Represents a delegation that grants permissions from a delegator to a delegate.
 | `delegator` | `Hex` | Yes | The address that is granting the delegation. |
 | `authority` | `Hex` | Yes | The parent delegation hash, or `ROOT_AUTHORITY` for creating root delegations. |
 | `caveats` | [`Caveat`](#caveat)`[]` | Yes | An array of [caveats](delegation/caveats.md) that constrain the delegation. |
-| `salt` | `Hex` | Yes |The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
+| `salt` | `Hex` | Yes | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 | `signature` | `Hex` | Yes | The signature to validate the delegation. |
 
 ### `ExactCalldataBuilderConfig`

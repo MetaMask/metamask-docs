@@ -60,7 +60,7 @@ Creates a delegation with a specific delegate.
 | ---- | ---- | -------- | ----------- |
 | `from` | `Hex` | Yes | The address that is granting the delegation. |
 | `to` | `Hex` | Yes | The address to which the delegation is being granted. |
-| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. See [delegation scopes](delegation-scopes.md) for the full list of scope types and their parameters. |
+| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. See [delegation scopes](./delegation-scopes.md) for the full list of scope types and their parameters. |
 | `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
 | `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. |
 | `parentDelegation` | [`Delegation`](../types.md#delegation) \| `Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
@@ -97,7 +97,7 @@ Creates an open delegation that can be redeemed by any delegate.
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
 | `from` | `Hex` | Yes | The address that is granting the delegation. |
-| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. See [delegation scopes](delegation-scopes.md) for the full list of scope types and their parameters. |
+| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. See [delegation scopes](./delegation-scopes.md) for the full list of scope types and their parameters. |
 | `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
 | `caveats` | `Caveats`| No | Caveats that further refine the authority granted by the `scope`. |
 | `parentDelegation` | [`Delegation`](../types.md#delegation) \| `Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
