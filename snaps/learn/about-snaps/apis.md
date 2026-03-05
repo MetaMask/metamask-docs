@@ -49,9 +49,9 @@ Wallet API methods for Snaps:
   permitted Snaps.
 - [`wallet_requestSnaps`](../../reference/snaps-api/wallet_requestsnaps.mdx) - Requests
   permission to communicate with the specified Snaps.
-- [`wallet_snap`](../../reference/snaps-api/wallet_snap.mdx) - (Restricted.mdx) Calls the
+- [`wallet_snap`](../../reference/snaps-api/wallet_snap.mdx) - (Restricted) Calls the
   specified custom JSON-RPC API method of the specified Snap.
-- [`wallet_invokeSnap`](../../reference/snaps-api/wallet_invokesnap.mdx) - (Restricted.mdx)
+- [`wallet_invokeSnap`](../../reference/snaps-api/wallet_invokesnap.mdx) - (Restricted)
   Synonymous with `wallet_snap`.
 
 A dapp must first [request permission](../../how-to/request-permissions.md#request-permissions-from-a-dapp)
