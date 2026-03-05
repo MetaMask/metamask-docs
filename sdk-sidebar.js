@@ -11,7 +11,35 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'reference/options',
+        {
+          type: 'category',
+          label: '@metamask/connect-multichain',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'multichain/connect/reference/methods',
+            'multichain/connect/reference/api',
+          ],
+        },
+        {
+          type: 'category',
+          label: '@metamask/connect-evm',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'evm/connect/reference/methods',
+            'evm/connect/reference/provider-api',
+          ],
+        },
+        {
+          type: 'category',
+          label: '@metamask/connect-solana',
+          collapsible: true,
+          collapsed: false,
+          items: [
+            'solana/connect/reference/methods',
+          ],
+        },
       ],
     },
   ],
@@ -65,13 +93,13 @@ const sdkSidebar = {
         'evm/connect/quickstart/web3auth',
       ],
     },
-    'evm/connect/migrate-from-sdk',
     {
       type: 'category',
       label: 'Guides',
       collapsible: false,
       collapsed: false,
       items: [
+        'evm/connect/migrate-from-sdk',
         'evm/connect/guides/manage-user-accounts',
         'evm/connect/guides/manage-networks',
         {
@@ -218,6 +246,15 @@ const sdkSidebar = {
           label: "Integrate Solana Pay with MetaMask Connect",
           href: "/tutorials/"
         },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Reference',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'solana/connect/reference/methods',
       ],
     },
   ],
