@@ -119,7 +119,7 @@ export function getClient() {
   scope IDs to RPC endpoint URLs.
   Each entry tells the client which chains your dapp supports and where to send RPC requests.
 
-### 3. Connect (login)
+### 3. Connect (sign-in)
 
 Call `connect()` with the scopes you want.
 The user sees a single approval prompt for all four chains:
