@@ -8,18 +8,20 @@ import TabItem from "@theme/TabItem";
 # Multichain API
 
 :::tip Notes
+
 - The Multichain API is an experimental feature.
 - MetaMask implements an older version of the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md) Multichain API specification.
-:::
+  :::
 
 Dapps can call Multichain API [methods](#methods) to create and manage
 [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md) multichain connections with MetaMask.
 The API also provides [events](#events) that wallets can send to dapps to notify them of onchain or connection changes.
 
 :::note See also
+
 - [About the Multichain API](../concepts/multichain-api.md)
 - [Interact with multiple networks](../how-to/manage-networks/use-multichain.md)
-:::
+  :::
 
 ## Methods
 
@@ -36,8 +38,9 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
   - `references`: `array` - (Optional) A list of references to specific blockchains for the namespace of this scope.
     This property can only be used if the scope namespace does not already specify the blockchain.
     For example, you can use this property for an `"eip155"` scope, but not an `"eip155:10"` scope.
-    
+
     References are mainly used when there would otherwise be duplicate scopes.
+
   - `methods`: `array` - A list of JSON-RPC methods the wallet must support to be compatible with the dapp.
   - `notifications`: `array` - A list of JSON-RPC notifications the wallet must support to be compatible with the dapp.
   - `accounts`: `array` - (Optional) A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md)
@@ -45,6 +48,7 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
     Dapps should include this only if they know which accounts they want the user to permit.
     When supplied, these accounts are preselected by default in the account selection process.
     Dapps typically omit this property for the user to select their own accounts.
+
 - `sessionProperties`: `object` - (Optional) Properties that the wallet can use to determine if the connection is valid.
 - `requiredScopes`: `object` - (Optional) [CAIP-217](https://standards.chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet must support to be compatible with the dapp.
   We don't recommend using `requiredScopes` with MetaMask.
@@ -68,7 +72,14 @@ The scopes and properties of the created connection.
     "optionalScopes": {
       "eip155": {
         "references": ["1", "137"],
-        "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_sign", "eth_subscribe", "get_balance", "personal_sign"],
+        "methods": [
+          "eth_sendTransaction",
+          "eth_signTransaction",
+          "eth_sign",
+          "eth_subscribe",
+          "get_balance",
+          "personal_sign"
+        ],
         "notifications": ["eth_subscription"]
       },
       "eip155:10": {
@@ -95,9 +106,19 @@ The scopes and properties of the created connection.
     "sessionScopes": {
       "eip155": {
         "references": ["1", "137"],
-        "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_subscribe", "get_balance", "eth_sign", "personal_sign"],
+        "methods": [
+          "eth_sendTransaction",
+          "eth_signTransaction",
+          "eth_subscribe",
+          "get_balance",
+          "eth_sign",
+          "personal_sign"
+        ],
         "notifications": ["eth_subscription"],
-        "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"]
+        "accounts": [
+          "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+          "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+        ]
       },
       "eip155:10": {
         "methods": ["get_balance"],
@@ -176,7 +197,9 @@ The scopes and properties of the connection.
       "solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ": {
         "methods": ["getBalance", "getAccountInfo", "sendTransaction", "getBlock"],
         "notifications": [],
-        "accounts": ["solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ:4Nd1mS8AUwK3kU3gdiAM6QCvqhA7Do8rKtMXsGyqrJxy"]
+        "accounts": [
+          "solana:4sGjMW1sUnHzSxGspuhpqLDx6wiyjNtZ:4Nd1mS8AUwK3kU3gdiAM6QCvqhA7Do8rKtMXsGyqrJxy"
+        ]
       }
     }
   }
@@ -203,7 +226,7 @@ MetaMask doesn't support session IDs.
 - `request`: `object` - A request object containing:
   - `method`: `string` - The [JSON-RPC API](json-rpc-methods/index.md) method to invoke,
     previously authorized to the dapp within a connection.
-  - `params`: `object` - The RPC method parameters (can be empty).
+  - `params`: `object | array` - The RPC method parameters (can be empty).
 
 #### Returns
 
