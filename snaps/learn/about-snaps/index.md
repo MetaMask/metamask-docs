@@ -49,7 +49,7 @@ A Snap can communicate with MetaMask using the [Snaps API](../../reference/snaps
 The Snaps API allows Snaps to extend or modify the functionality of MetaMask, and communicate with
 other Snaps.
 
-Dapps can use the [Wallet API for Snaps](../../reference/wallet-api-for-snaps.md) to install and
+Dapps can use the [Wallet API for Snaps](../../reference/snaps-api/wallet_invokesnap.mdx) to install and
 communicate with Snaps.
 
 A Snap can implement its own custom JSON-RPC API to communicate with dapps and other Snaps.

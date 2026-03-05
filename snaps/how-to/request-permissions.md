@@ -65,10 +65,10 @@ See the [`eth_accounts` dynamic permission](../reference/permissions.md#eth_acco
 
 ## Request permissions from a dapp
 
-Dapps that communicate with Snaps using [`wallet_snap`](../reference/wallet-api-for-snaps.md#wallet_snap)
-or [`wallet_invokeSnap`](../reference/wallet-api-for-snaps.md#wallet_invokesnap) must request
+Dapps that communicate with Snaps using [`wallet_snap`](../reference/snaps-api/wallet_snap.mdx)
+or [`wallet_invokeSnap`](../reference/snaps-api/wallet_invokesnap.mdx) must request
 permission to do so by calling
-[`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps) first.
+[`wallet_requestSnaps`](../reference/snaps-api/wallet_requestsnaps.mdx) first.
 
 The following example calls `wallet_requestSnaps` to request permission to connect to the
 `hello-snap` Snap, then calls `wallet_invokeSnap` to invoke the `hello` JSON-RPC method exposed by the Snap:

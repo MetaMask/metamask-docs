@@ -400,7 +400,7 @@ The user can revoke this permission by going to the Snap's settings under **Snap
 
 A Snap can authorize specific dapps or Snaps to automatically connect,
 skipping the need for users to manually confirm a connection when the dapp or Snap calls
-[`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
+[`wallet_requestSnaps`](../reference/snaps-api/wallet_requestsnaps.mdx).
 
 The following is an example of specifying `initialConnections` for a dapp:
 

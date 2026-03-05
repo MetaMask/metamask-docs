@@ -7,7 +7,7 @@ sidebar_position: 5
 
 You can authorize specific dapps or Snaps to automatically connect to your Snap, skipping the need
 for users to manually confirm a connection when the dapp or Snap calls
-[`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
+[`wallet_requestSnaps`](../reference/snaps-api/wallet_requestsnaps.mdx).
 This is useful, for example, for [Snaps used by multiple dapps](#snap-used-by-multiple-dapps) or
 [Snaps installed from the Snaps directory](#snap-installed-from-the-snaps-directory).
 
@@ -44,14 +44,14 @@ We recommend removing local sites before deploying your Snap to production.
 ### 2. Connect to the Snap from an authorized dapp
 
 When you visit a dapp specified in the Snap's `initialConnections`, and the dapp calls
-[`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps), if the Snap is
+[`wallet_requestSnaps`](../reference/snaps-api/wallet_requestsnaps.mdx), if the Snap is
 already installed, the dapp connects immediately and can make further calls to the Snap.
 If the Snap is not installed, you see a confirmation to install the Snap.
 
 Additionally, since the connection between the Snap and a dapp listed in `initialConnections`
-is automatic, calling [`wallet_getSnaps`](../reference/wallet-api-for-snaps.md#wallet_getsnaps) from
+is automatic, calling [`wallet_getSnaps`](../reference/snaps-api/wallet_getsnaps.mdx) from
 the dapp returns the Snap even if the dapp never called
-[`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
+[`wallet_requestSnaps`](../reference/snaps-api/wallet_requestsnaps.mdx).
 This makes the flow of using the Snap from an authorized dapp completely seamless.
 
 ## Example
@@ -63,10 +63,10 @@ of connecting to a Snap from a dapp authorized in `initialConnections`.
 While the code is exactly the same as it would be without the dapp being listed in
 `initialConnections`, the comments show how the flow is different from the user's perspective.
 
-The key is that calling [`wallet_getSnaps`](../reference/wallet-api-for-snaps.md#wallet_getsnaps)
+The key is that calling [`wallet_getSnaps`](../reference/snaps-api/wallet_getsnaps.mdx)
 from an authorized dapp when the Snap is already installed returns that Snap even if the dapp never
 explicitly connected to it by calling
-[`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
+[`wallet_requestSnaps`](../reference/snaps-api/wallet_requestsnaps.mdx).
 
 ```js title="script.js"
 const snapId = "npm:@myorg/mysnap"
