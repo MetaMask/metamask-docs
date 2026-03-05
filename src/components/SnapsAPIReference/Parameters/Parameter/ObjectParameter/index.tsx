@@ -20,8 +20,8 @@ export const ObjectParameter: FunctionComponent<ObjectParameterProps> = ({ param
       </div>
 
       <div className={styles['parameter-children']}>
-        {Object.entries(properties).map(([key, property]) => (
-          <Parameter key={`${key}-${property.name}`} parameter={property} />
+        {properties.map((property, index) => (
+          <Parameter key={`${index}-${property.name}`} parameter={property} />
         ))}
       </div>
     </div>
