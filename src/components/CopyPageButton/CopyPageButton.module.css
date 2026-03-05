@@ -91,8 +91,10 @@
   background: var(--ifm-color-emphasis-100);
 }
 
-.dropdownItem svg {
+.dropdownItem > svg:first-child {
   flex-shrink: 0;
+  width: 16px;
+  height: 16px;
   margin-top: 2px;
 }
 
@@ -102,11 +104,23 @@
   margin: 4px 0;
 }
 
+.itemTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .itemTitle {
   font-weight: 600;
   font-size: 14px;
   margin-bottom: 1px;
   color: var(--ifm-font-color-base);
+}
+
+.externalArrow {
+  flex-shrink: 0;
+  color: var(--ifm-color-emphasis-500);
+  margin-top: 1px;
 }
 
 .itemDescription {
