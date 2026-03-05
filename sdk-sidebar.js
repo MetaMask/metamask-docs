@@ -4,7 +4,9 @@
 const sdkSidebar = {
   overview: [
     'index',
-    'about',
+    'architecture',
+    'integration-options',
+    'supported-platforms',
     {
       type: 'category',
       label: 'Reference',

@@ -9,7 +9,8 @@ import CardList from '@site/src/components/CardList'
 # Seamlessly connect to the MetaMask wallet
 
 MetaMask Connect enables a fast, reliable connection from your dapp to the MetaMask browser extension and the MetaMask mobile app.
-With a single integration, you can onboard users and interact with their accounts across desktop browsers, mobile browsers, and native apps.
+With a single integration, you can onboard users and interact with their accounts across desktop browsers, mobile browsers, and native apps. It offers multiple
+[integration options](./integration-options.md), from single-ecosystem clients for EVM or Solana to a multichain client that connects to multiple chains in a single session.
 
 MetaMask Connect replaces the legacy MetaMask SDK with a complete rewrite built on the [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
 The MetaMask Connect SDK detects the user’s environment and selects the best connection method, whether it communicates directly with the MetaMask browser extension, prompts the user to scan a QR code, or deep links to the MetaMask mobile app.
@@ -30,6 +31,11 @@ MetaMask Connect fills that gap and provides the following benefits:
 <CardList
 items={[
 {
+href: '/sdk/integration-options',
+title: 'Integration options',
+description: 'Compare single-ecosystem, multi-ecosystem, and multichain integration paths to find the right fit for your dapp.',
+},
+{
 href: '/sdk/multichain',
 title: 'Multichain',
 description: 'Connect to multiple ecosystems at the same time.',
@@ -47,37 +53,4 @@ description: 'Connect to Solana.',
 ]}
 />
 
-## Integration options
 
-There are three ways to integrate, depending on what works best for your dapp:
-
-### Option A: Single-ecosystem client (drop-in for existing dapps)
-
-If your dapp targets a single ecosystem, use [`@metamask/connect-evm`](/sdk/evm) or [`@metamask/connect-solana`](/sdk/solana) for a familiar experience with minimal changes to your existing code.
-
-- **EVM**: Provides an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) compatible provider, so existing `ethers.js`, `viem`, or `web3.js` integrations work with minimal changes.
-- **Solana**: Provides a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet that integrates with the Solana wallet adapter ecosystem.
-
-Use this option when you want to add MetaMask Connect to an existing single-ecosystem dapp.
-
-### Option B: Multiple ecosystem clients
-
-If your dapp supports both EVM and Solana, use [`@metamask/connect-evm`](/sdk/evm) and [`@metamask/connect-solana`](/sdk/solana) together.
-This option gives you ecosystem-specific APIs while supporting both ecosystems, and is a good fit when you want to keep familiar provider interfaces for each ecosystem.
-
-### Option C: Multichain client (full control, recommended)
-
-Use [`@metamask/connect-multichain`](/sdk/multichain) to work directly with the [Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
-This option uses **scopes** and `wallet_invokeMethod` instead of per-chain RPC and supports a single connection prompt across ecosystems.
-**This is the recommended long-term path.**
-
-All options use the same underlying multichain client and share transport and session infrastructure.
-You can start with the option that fits your dapp today and move to the multichain client (Option C) when you need full multichain control.
-
-### Packages
-
-| Package                                                                                      | Purpose                                 |
-| -------------------------------------------------------------------------------------------- | --------------------------------------- |
-| [`@metamask/connect-evm`](https://www.npmjs.com/package/@metamask/connect-evm)               | EVM client — EIP-1193 provider          |
-| [`@metamask/connect-solana`](https://www.npmjs.com/package/@metamask/connect-solana)         | Solana client — Wallet Standard         |
-| [`@metamask/connect-multichain`](https://www.npmjs.com/package/@metamask/connect-multichain) | Multichain client — full Multichain API |

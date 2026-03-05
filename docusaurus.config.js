@@ -752,7 +752,7 @@ const config = {
       },
       mermaid: {
         options: {
-          fontFamily: 'arial, verdana, sans-serif;',
+          fontFamily: 'Euclid Circular B, arial, verdana, sans-serif',
           wrap: true,
           securityLevel: 'loose',
           sequence: {
