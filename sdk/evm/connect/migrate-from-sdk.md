@@ -336,7 +336,7 @@ See the [multichain quickstart](../../multichain/connect/quickstart.md) for a fu
 - **Provider exists before connection**: `client.getProvider()` never returns `undefined`.
   Read-only RPC calls work immediately; account-dependent calls require `connect()` first.
 - **`@metamask/sdk-react` has no direct replacement**: if you were using `MetaMaskProvider` and
-  `useSDK()`, migrate to [wagmi hooks](../quickstart/wagmi.md) or manage the client instance in your
+  `useSDK()`, migrate to [wagmi hooks](./quickstart/wagmi.md) or manage the client instance in your
   own React context (see example below).
 - **Test on both extension and mobile**: the transport layer has changed, and behavior differences
   may surface in one environment but not the other.
@@ -375,5 +375,5 @@ export function useEVMClient() {
 }
 ```
 
-For a full-featured solution, consider using [wagmi](../quickstart/wagmi.md) with the MetaMask
+For a full-featured solution, consider using [wagmi](./quickstart/wagmi.md) with the MetaMask
 connector, which provides React hooks out of the box.

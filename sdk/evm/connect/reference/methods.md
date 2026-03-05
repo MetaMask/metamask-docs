@@ -205,7 +205,7 @@ Disconnects all EVM (`eip155`) scopes from MetaMask and cleans up local state.
 This only revokes the EVM-specific scopes currently held in the session; it does not terminate the broader multichain session if non-EVM scopes (such as Solana) are also active.
 
 :::tip Multichain partial disconnect
-If your dapp also uses Solana via the [multichain client](../../multichain/index.md), calling
+If your dapp also uses Solana via the [multichain client](../../../multichain/index.md), calling
 `disconnect()` on the EVM client only revokes EVM (`eip155`) scopes.
 Non-EVM scopes remain active, so the user stays connected to Solana.
 :::
