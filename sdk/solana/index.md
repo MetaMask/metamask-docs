@@ -20,7 +20,7 @@ You interact with the wallet through the client APIs.
 
 :::tip
 If your dapp supports both EVM and Solana, use both the EVM and Solana clients.
-They share the same underlying [multichain session](/sdk/multichain), meaning the user only approves once.
+They share the same underlying [multichain session](../multichain/index.md), meaning the user only approves once.
 :::
 
 ## Get started

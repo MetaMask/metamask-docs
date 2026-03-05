@@ -17,9 +17,8 @@ code works with minimal changes.
 MetaMask Connect also includes automatic platform detection, relay-based connections, and session persistence.
 
 :::info Multichain support
-If your dapp supports both EVM and Solana, use the [multichain API](/sdk/multichain) o create a single
-session across ecosystems. This reduces duplicate connection prompts and lets you send requests to EVM
-networks and Solana through one session.
+If your dapp supports both EVM and Solana, use both the EVM and Solana clients.
+They share the same underlying [multichain session](../multichain/index.md), meaning the user only approves once.
 :::
 
 ## Supported platforms and libraries
