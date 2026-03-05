@@ -61,8 +61,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       periodDuration: 86400,
       justification: "Permission to transfer 10 USDC every day",
     },
+    isAdjustmentAllowed: true,
   },
-  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -114,9 +114,9 @@ underlying delegations. To decode the delegations, use the [decodeDelegations](.
 ```ts
 import { decodeDelegations } from "@metamask/smart-accounts-kit/utils";
 
-const permissionsContext = grantedPermissions[0].context;
+const permissionContext = grantedPermissions[0].context;
 
-const delegations = decodeDelegations(permissionsContext);
+const delegations = decodeDelegations(permissionContext);
 const rootDelegation = delegations[0];
 ```
 
@@ -138,12 +138,12 @@ When creating a redelegation, you can only narrow the scope of the original auth
 
 ```typescript
 import { sessionAccount, agentSmartAccount, tokenAddress } from "./config.ts";
-import { createDelegation } from "@metamask/smart-accounts-kit";
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit";
 import { parseUnits } from "viem";
 
 const redelegation = createDelegation({
   scope: {
-    type: "erc20TransferAmount",
+    type: ScopeType.Erc20TransferAmount,
     tokenAddress,
     // USDC has 6 decimal places.
     maxAmount: parseUnits("5", 6),
@@ -182,14 +182,15 @@ export const agentSmartAccount = await toMetaMaskSmartAccount({
 
 When you create a redelegation, apply the toolkit's [caveats](../../reference/delegation/caveats.md) to narrow the Swap agent's authority. For example, you can limit the authority so Swap agent can use the delegation only once.
 
-To apply caveats, create the `Delegation` object and use [`createCaveatBuilder`](../../reference/delegation/index.md#createcaveatbuilder). Use [`getDelegationHashOffchain`](../../reference/delegation/index.md#getdelegationhashoffchain) to get the delegation hash, then provide it as the `authority` field. 
+To apply caveats, create the `Delegation` object and use [`createCaveatBuilder`](../../reference/delegation/index.md#createcaveatbuilder). 
+Use [`hashDelegation`](../../reference/delegation/index.md#hashdelegation) to get the delegation hash, then provide it as the `authority` field. 
 
 This example uses the [`limitedCalls`](../../reference/delegation/caveats.md#limitedcalls) caveat with a limit of `1`.
 
 ```ts
 // Use the config from previous step.
 import { sessionAccount, agentSmartAccount, tokenAddress } from './config.ts';
-import { createCaveatBuilder, getDelegationHashOffchain } from '@metamask/smart-accounts-kit/utils'
+import { createCaveatBuilder, hashDelegation } from '@metamask/smart-accounts-kit/utils'
 
 const caveatBuilder = createCaveatBuilder(sessionAccount.environment)
 
@@ -198,7 +199,7 @@ const caveats = caveatBuilder.addCaveat('limitedCalls', { limit: 1 })
 const redelegation: Delegation =  {
   delegate: sessionAccount.address,
   delegator: agentSmartAccount.address,
-  authority: getDelegationHashOffchain(rootDelegation),
+  authority: hashDelegation(rootDelegation),
   caveats: caveats.build(),
   salt: '0x',
 };

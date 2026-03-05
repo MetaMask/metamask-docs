@@ -176,8 +176,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       periodDuration: 86400,
       justification: "Permission to transfer 10 USDC every day",
     },
+    isAdjustmentAllowed: true,
   },
-  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -245,13 +245,13 @@ See the [`sendUserOperationWithDelegation`](../../reference/erc7710/bundler-clie
 import { calldata } from "./config.ts";
 
 // These properties must be extracted from the permission response.
-const permissionsContext = grantedPermissions[0].context;
+const permissionContext = grantedPermissions[0].context;
 const delegationManager = grantedPermissions[0].signerMeta.delegationManager;
 
 // USDC address on Ethereum Sepolia.
 const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 
-// Calls without permissionsContext and delegationManager will be executed 
+// Calls without permissionContext and delegationManager will be executed 
 // as a normal user operation.
 const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
   publicClient,
@@ -260,7 +260,7 @@ const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
     {
       to: tokenAddress,
       data: calldata,
-      permissionsContext,
+      permissionContext,
       delegationManager,
     },
   ],
@@ -277,7 +277,7 @@ const userOperationHash = await bundlerClient.sendUserOperationWithDelegation({
 import { calldata } from "./config.ts";
 
 // These properties must be extracted from the permission response.
-const permissionsContext = grantedPermissions[0].context;
+const permissionContext = grantedPermissions[0].context;
 const delegationManager = grantedPermissions[0].signerMeta.delegationManager;
 
 // USDC address on Ethereum Sepolia.
@@ -286,7 +286,7 @@ const tokenAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238";
 const transactionHash = await sessionAccountWalletClient.sendTransactionWithDelegation({
   to: tokenAddress,
   data: calldata,
-  permissionsContext,
+  permissionContext,
   delegationManager,
 });
 ```
