@@ -31,7 +31,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { createPublicClient, createWalletClient, custom } from 'viem'
 import { mainnet } from 'viem/chains'
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -39,8 +39,8 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })
@@ -71,7 +71,7 @@ const receipt = await publicClient.waitForTransactionReceipt({ hash })
 import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -79,8 +79,8 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })
@@ -110,7 +110,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { ethers } from 'ethers'
 import { BrowserProvider, parseUnits } from 'ethers'
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -118,8 +118,8 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })
@@ -145,9 +145,9 @@ const receipt = await tx.wait()
 <TabItem value="Ethereum API">
 
 ```javascript
-import { createEVMClient } from "@metamask/connect/evm";
+import { createEVMClient } from '@metamask/connect-evm';
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -155,8 +155,8 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 });
@@ -286,9 +286,9 @@ function SendTransaction() {
 <TabItem value="Ethereum API">
 
 ```javascript
-import { createEVMClient } from "@metamask/connect/evm";
+import { createEVMClient } from '@metamask/connect-evm';
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -296,8 +296,8 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 });
@@ -340,15 +340,16 @@ function AdvancedTransaction() {
   // Estimate gas
   const { data: gasEstimate } = useEstimateGas(transaction)
 
-  const { sendTransaction } = useSendTransaction({
-    ...transaction,
-    gas: gasEstimate,
-    onSuccess: (hash) => {
-      console.log("Transaction sent:", hash)
-    }
-  })
+  const { sendTransaction } = useSendTransaction()
 
-  return <button onClick={() => sendTransaction()}>Send with Gas Estimate</button>
+  function handleSend() {
+    sendTransaction({
+      ...transaction,
+      gas: gasEstimate,
+    })
+  }
+
+  return <button onClick={handleSend}>Send with Gas Estimate</button>
 }
 ```
 

@@ -40,7 +40,7 @@ To prompt users to add an ERC-20 token, add something like the following to your
 ```javascript
 import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -48,8 +48,8 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })
@@ -128,7 +128,7 @@ To prompt users to add a single NFT, add something like the following to your pr
 ```javascript
 import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -136,8 +136,8 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })

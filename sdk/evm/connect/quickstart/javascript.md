@@ -97,9 +97,9 @@ npm install @metamask/connect-evm
 The following is an example of using MetaMask Connect for an EVM dapp in a JavaScript project:
 
 ```javascript
-import { createEVMClient } from '@metamask/connect-evm'
+import { createEVMClient, getInfuraRpcUrls } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -107,8 +107,9 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      ...getInfuraRpcUrls('YOUR_INFURA_API_KEY'),
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })
@@ -117,7 +118,13 @@ const evmClient = createEVMClient({
 These examples configure MetaMask Connect with the following options:
 
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
-- `api.supportedNetworks` - A map of caipChainIds -> RPC URLs for all networks supported by the app.
+- `api.supportedNetworks` - A map of hex chain IDs to RPC URLs for all networks supported by the app.
+  Use the `getInfuraRpcUrls` helper to generate URLs for all Infura-supported chains, or specify your own.
+
+:::info `createEVMClient` is async
+`createEVMClient` returns a promise. Always `await` it before using the client.
+The client is a **singleton** -- calling `createEVMClient` again returns the same instance.
+:::
 
 ### 3. Connect and use provider
 
@@ -126,17 +133,32 @@ Connect to MetaMask and get the provider for RPC requests:
 ```javascript
 const provider = evmClient.getProvider()
 
-const accounts = await evmClient.connect()
-console.log('Connected account:', accounts[0])
+try {
+  const { accounts, chainId } = await evmClient.connect({
+    chainIds: ['0x1', '0xaa36a7'],
+  })
+  console.log('Connected account:', accounts[0])
+  console.log('Active chain:', chainId)
+} catch (error) {
+  if (error.code === 4001) {
+    console.log('User rejected the connection request')
+  } else if (error.code === -32002) {
+    console.log('Connection request already pending')
+  } else {
+    console.error('Connection failed:', error)
+  }
+}
 
-const result = await provider.request({
-  method: 'eth_accounts',
-  params: [],
+const balance = await provider.request({
+  method: 'eth_getBalance',
+  params: [accounts[0], 'latest'],
 })
-console.log('eth_accounts result:', result)
+console.log('Balance:', balance)
 ```
 
 `evmClient.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
+Pass `chainIds` to request permission for specific chains (hex strings). Ethereum Mainnet (`0x1`)
+is always included regardless of what you pass.
 
 Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
 
@@ -145,7 +167,7 @@ Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc
 | Method                                                                         | Description                                              |
 | ------------------------------------------------------------------------------ | -------------------------------------------------------- |
 | [`connect()`](../reference/methods.md#connect)                                 | Triggers wallet connection flow                          |
-| [`connectAndSign({ msg: "..." })`](../reference/methods.md#connectandsign)     | Connects and prompts the user to sign a message          |
+| [`connectAndSign({ message: "..." })`](../reference/methods.md#connectandsign) | Connects and prompts the user to sign a message          |
 | [`getProvider()`](../reference/methods.md#getprovider)                         | Returns the provider object for RPC requests             |
 | [`provider.request({ method, params })`](../reference/provider-api.md#request) | Calls any Ethereum JSON‑RPC method                       |
 | [Batched RPC](../guides/metamask-exclusive/batch-requests.md)                  | Use `metamask_batch` to group multiple JSON-RPC requests |
@@ -154,11 +176,11 @@ Use `provider.request()` for arbitrary [JSON-RPC requests](../reference/json-rpc
 
 ```javascript
 // 1. Connect and get accounts
-const accounts = await evmClient.connect()
+const { accounts, chainId } = await evmClient.connect()
 
 // 2. Connect and sign in one step
-const signResult = await evmClient.connectAndSign({
-  msg: 'Sign in to the dapp',
+const signature = await evmClient.connectAndSign({
+  message: 'Sign in to the dapp',
 })
 
 // 3. Get provider for RPC requests

@@ -195,6 +195,7 @@ Listen to this event to [detect a user's network](../guides/manage-networks.md).
 ```typescript
 interface ConnectInfo {
   chainId: string;
+  accounts: string[];
 }
 
 provider // Or window.ethereum if you don't support EIP-6963.
@@ -202,6 +203,7 @@ provider // Or window.ethereum if you don't support EIP-6963.
 ```
 
 The provider emits this event when it's first able to submit RPC requests to a chain.
+When using MetaMask Connect, the `connect` event also includes the `accounts` array.
 We recommend listening to this event and using the
 [`isConnected()`](#isconnected) provider method to determine when
 the provider is connected.

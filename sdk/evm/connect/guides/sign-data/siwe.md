@@ -46,7 +46,7 @@ The following is an example of setting up SIWE with MetaMask using
 ```javascript title="index.js"
 import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -54,12 +54,14 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })
 const provider = evmClient.getProvider()
+
+let accounts = []
 
 const siweSign = async siweMessage => {
   try {
@@ -77,6 +79,8 @@ const siweSign = async siweMessage => {
 }
 
 siwe.onclick = async () => {
+  const result = await evmClient.connect()
+  accounts = result.accounts
   const domain = window.location.host
   const from = accounts[0]
   const siweMessage = `${domain} wants you to sign in with your Ethereum account:\n${from}\n\nI accept the MetaMask Terms of Service: https://community.metamask.io/tos\n\nURI: https://${domain}\nVersion: 1\nChain ID: 1\nNonce: 32891757\nIssued At: 2021-09-30T16:25:24.000Z`

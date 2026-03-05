@@ -39,7 +39,7 @@ Start by detecting the current network:
 ```javascript
 import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -47,8 +47,8 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })
@@ -140,8 +140,8 @@ Display the current network and a switch network button in HTML:
 ```html
 <div>
   <div id="networkStatus">Current Network: Loading...</div>
-  <button onclick="switchNetwork("mainnet")">Switch to Mainnet</button>
-  <button onclick="switchNetwork("optimism")">Switch to Optimism</button>
+  <button onclick="switchNetwork('mainnet')">Switch to Mainnet</button>
+  <button onclick="switchNetwork('optimism')">Switch to Optimism</button>
 </div>
 ```
 

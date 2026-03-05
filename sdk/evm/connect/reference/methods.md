@@ -47,16 +47,28 @@ Connects to MetaMask and signs a `personal_sign` message in a single user approv
 
 ### Returns
 
-A promise that resolves to an object containing `accounts` (an array of account addresses), `chainId`, and `signature`.
+A promise that resolves to the signature as a hex string.
+
+:::tip
+To access the connected accounts and chain ID alongside the signature, use the `connectAndSign` event handler
+when [initializing the client](../quickstart/javascript.md):
+
+```javascript
+eventHandlers: {
+  connectAndSign: ({ accounts, chainId, signResponse }) => {
+    console.log('Accounts:', accounts, 'Chain:', chainId, 'Signature:', signResponse)
+  },
+}
+```
+:::
 
 ### Example
 
 ```javascript
-const { accounts, chainId, signature } = await evmClient.connectAndSign({
+const signature = await evmClient.connectAndSign({
   message: 'Sign in to My DApp',
   chainIds: ['0x1'],
 })
-console.log('Connected:', accounts[0])
 console.log('Signature:', signature)
 ```
 
@@ -69,28 +81,43 @@ Connects to MetaMask and executes a specific [JSON-RPC method](json-rpc-api/inde
 | Name               | Type                | Required | Description                                                                                                      |
 | ------------------ | ------------------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
 | `options.method`   | `string`            | Yes      | The JSON-RPC method name.                                                                                        |
-| `options.params`   | `any[] \| Function` | Yes      | The parameters for the method. Can be a function `(accounts: Address[]) => any[]` for dynamic account injection. |
-| `options.chainIds` | `Hex[]`             | No       | Array of hex chain IDs to request permission for (defaults to `['0x1']`).                                        |
+| `options.params`       | `unknown[] \| (account: Address) => unknown[]` | Yes      | The parameters for the method. Can be a function that receives the connected account and returns params. |
+| `options.chainIds`     | `Hex[]`   | No       | Array of hex chain IDs to request permission for (defaults to `['0x1']`).                                        |
+| `options.account`      | `string`  | No       | Specific account address to connect.                                                                              |
+| `options.forceRequest` | `boolean` | No       | Force a new connection request even if already connected.                                                         |
 
 ### Returns
 
-A promise that resolves to an object containing `accounts`, `chainId`, and `result` (the return value of the RPC call).
+A promise that resolves to the result of the RPC method invocation.
+
+:::tip
+To access the connected accounts and chain ID alongside the result, use the `connectWith` event handler
+when [initializing the client](../quickstart/javascript.md):
+
+```javascript
+eventHandlers: {
+  connectWith: ({ accounts, chainId, connectWithResponse }) => {
+    console.log('Accounts:', accounts, 'Chain:', chainId, 'Result:', connectWithResponse)
+  },
+}
+```
+:::
 
 ### Example
 
 ```javascript
-const { accounts, chainId, result } = await evmClient.connectWith({
+const txHash = await evmClient.connectWith({
   method: 'eth_sendTransaction',
-  params: [
+  params: (account) => [
     {
-      from: '0xYourAddress',
+      from: account,
       to: '0xRecipientAddress',
       value: '0x2386F26FC10000',
     },
   ],
   chainIds: ['0x1'],
 })
-console.log('Transaction hash:', result)
+console.log('Transaction hash:', txHash)
 ```
 
 ## `switchChain`
@@ -142,20 +169,34 @@ const chainId = await provider.request({ method: 'eth_chainId' })
 console.log('Current chain:', chainId)
 ```
 
-## `isInitialized`
+## `getChainId`
 
-Checks if MetaMask Connect has been initialized.
+Returns the currently selected chain ID.
 
 ### Returns
 
-`true` if MetaMask Connect is initialized, `false` otherwise.
+`Hex | undefined` - The currently selected chain ID as a hex string, or `undefined` if not connected.
 
 ### Example
 
 ```javascript
-if (evmClient.isInitialized()) {
-  console.log('SDK is ready to use')
-}
+const chainId = evmClient.getChainId()
+console.log('Current chain:', chainId) // e.g., '0x1'
+```
+
+## `getAccount`
+
+Returns the currently selected account.
+
+### Returns
+
+`Address | undefined` - The currently selected account address, or `undefined` if not connected.
+
+### Example
+
+```javascript
+const account = evmClient.getAccount()
+console.log('Current account:', account) // e.g., '0x...'
 ```
 
 ## `disconnect`
@@ -163,8 +204,34 @@ if (evmClient.isInitialized()) {
 Disconnects all EVM (`eip155`) scopes from MetaMask and cleans up local state.
 This only revokes the EVM-specific scopes currently held in the session; it does not terminate the broader multichain session if non-EVM scopes (such as Solana) are also active.
 
+:::tip Multichain partial disconnect
+If your dapp also uses Solana via the [multichain client](../../multichain/index.md), calling
+`disconnect()` on the EVM client only revokes EVM (`eip155`) scopes.
+Non-EVM scopes remain active, so the user stays connected to Solana.
+:::
+
 ### Example
 
 ```javascript
 await evmClient.disconnect()
+```
+
+## Properties
+
+The EVM client exposes the following read-only properties:
+
+| Property        | Type                   | Description                                                                                              |
+| --------------- | ---------------------- | -------------------------------------------------------------------------------------------------------- |
+| `accounts`      | `Address[]`            | Currently permitted accounts.                                                                            |
+| `selectedAccount` | `Address \| undefined` | Currently selected account (first in `accounts`).                                                       |
+| `selectedChainId` | `Hex \| undefined`   | Currently selected chain ID as a hex string.                                                             |
+| `status`        | `ConnectionStatus`     | Connection status: `'loaded'`, `'pending'`, `'connecting'`, `'connected'`, or `'disconnected'`. |
+
+### Example
+
+```javascript
+console.log('Status:', evmClient.status)
+console.log('Accounts:', evmClient.accounts)
+console.log('Selected account:', evmClient.selectedAccount)
+console.log('Selected chain:', evmClient.selectedChainId)
 ```

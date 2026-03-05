@@ -76,7 +76,7 @@ The following is an example of using `eth_signTypedData_v4` with MetaMask:
 ```javascript
 import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -84,8 +84,8 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })
@@ -175,13 +175,19 @@ async function signTypedDataV4() {
 <TabItem value="viem">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
-import { createPublicClient, createWalletClient, custom } from 'viem'
+import { createEVMClient } from '@metamask/connect-evm'
+import { createWalletClient, custom } from 'viem'
 import { mainnet } from 'viem/chains'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = await createEVMClient({
+  dapp: { name: 'My DApp', url: window.location.href },
+  api: {
+    supportedNetworks: {
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
+const provider = evmClient.getProvider()
 
 const walletClient = createWalletClient({ chain: mainnet, transport: custom(provider) })
 
@@ -258,13 +264,19 @@ const signature = await walletClient.signTypedData({
 <TabItem value="ethers">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from '@metamask/connect-evm'
 import { ethers } from 'ethers'
 import { BrowserProvider, parseUnits } from 'ethers'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = await createEVMClient({
+  dapp: { name: 'My DApp', url: window.location.href },
+  api: {
+    supportedNetworks: {
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
+const provider = evmClient.getProvider()
 
 const ethersProvider = new ethers.BrowserProvider(provider)
 const signer = await ethersProvider.getSigner()
@@ -346,12 +358,18 @@ const signature = await signer.provider.send(method, params)
 <TabItem value="web3">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = await createEVMClient({
+  dapp: { name: 'My DApp', url: window.location.href },
+  api: {
+    supportedNetworks: {
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
+const provider = evmClient.getProvider()
 
 const web3 = new Web3(provider)
 
@@ -426,7 +444,7 @@ const message = {
 const params = [fromAddress, JSON.stringify(message)]
 const method = 'eth_signTypedData_v4'
 
-const signature = await web3.eth.sendAsync(method, params)
+const signature = await provider.request({ method, params })
 ```
 
 </TabItem>
@@ -470,7 +488,7 @@ The following is an example of using `personal_sign` with MetaMask:
 ```javascript
 import { createEVMClient } from '@metamask/connect-evm'
 
-const evmClient = createEVMClient({
+const evmClient = await createEVMClient({
   dapp: {
     name: 'Metamask Connect EVM Example',
     url: window.location.href,
@@ -478,14 +496,14 @@ const evmClient = createEVMClient({
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:11155111': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })
 const provider = evmClient.getProvider()
 
-async function signTypedDataV4() {
+async function personalSign() {
   // Get current account
   const accounts = await provider.request({
     method: 'eth_requestAccounts',
@@ -507,13 +525,19 @@ async function signTypedDataV4() {
 <TabItem value="viem">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
-import { createPublicClient, createWalletClient, custom } from 'viem'
+import { createEVMClient } from '@metamask/connect-evm'
+import { createWalletClient, custom } from 'viem'
 import { mainnet } from 'viem/chains'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = await createEVMClient({
+  dapp: { name: 'My DApp', url: window.location.href },
+  api: {
+    supportedNetworks: {
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
+const provider = evmClient.getProvider()
 
 const walletClient = createWalletClient({ chain: mainnet, transport: custom(provider) })
 
@@ -531,13 +555,18 @@ const signature = await walletClient.signMessage({
 <TabItem value="ethers">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from '@metamask/connect-evm'
 import { ethers } from 'ethers'
-import { BrowserProvider, parseUnits } from 'ethers'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = await createEVMClient({
+  dapp: { name: 'My DApp', url: window.location.href },
+  api: {
+    supportedNetworks: {
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
+const provider = evmClient.getProvider()
 
 const ethersProvider = new ethers.BrowserProvider(provider)
 const signer = await ethersProvider.getSigner()
@@ -551,12 +580,18 @@ const signature = await signer.signMessage(exampleMessage)
 <TabItem value="web3">
 
 ```tsx
-import { MetaMaskSDK } from '@metamask/sdk'
+import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
-// Initialize SDK
-const MMSDK = new MetaMaskSDK()
-const provider = MMSDK.getProvider()
+const evmClient = await createEVMClient({
+  dapp: { name: 'My DApp', url: window.location.href },
+  api: {
+    supportedNetworks: {
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
+const provider = evmClient.getProvider()
 
 const web3 = new Web3(provider)
 

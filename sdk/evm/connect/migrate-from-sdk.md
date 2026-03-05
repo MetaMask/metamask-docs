@@ -166,10 +166,11 @@ Ethereum Mainnet (`0x1`) is always included regardless of what you pass.
 
 ### Connect-and-sign shortcut
 
-Use `connectAndSign` to connect and sign a personal_sign message in one user approval:
+Use `connectAndSign` to connect and sign a `personal_sign` message in one user approval.
+The method returns the signature directly:
 
 ```typescript
-const { accounts, chainId, signature } = await client.connectAndSign({
+const signature = await client.connectAndSign({
   message: 'Sign in to My DApp',
   chainIds: ['0x1'],
 })
@@ -177,12 +178,13 @@ const { accounts, chainId, signature } = await client.connectAndSign({
 
 ### Connect-and-execute shortcut
 
-Connect and execute any JSON-RPC method in a single user approval:
+Connect and execute any JSON-RPC method in a single user approval.
+The method returns the RPC result directly:
 
 ```typescript
-const { accounts, chainId, result } = await client.connectWith({
+const txHash = await client.connectWith({
   method: 'eth_sendTransaction',
-  params: [{ from: '0x...', to: '0x...', value: '0x0' }],
+  params: (account) => [{ from: account, to: '0x...', value: '0x0' }],
   chainIds: ['0x1'],
 })
 ```
@@ -235,36 +237,42 @@ provider.on('disconnect', () => {
 })
 ```
 
-MetaMask Connect also exposes SDK-level events you can register during initialization:
+MetaMask Connect also supports SDK-level event handlers that you register during initialization:
 
 ```typescript
 const client = await createEVMClient({
   dapp: { name: 'My DApp' },
+  api: {
+    supportedNetworks: {
+      '0x1': 'https://mainnet.infura.io/v3/YOUR_KEY',
+    },
+  },
   eventHandlers: {
-    display_uri: uri => {
+    displayUri: uri => {
       /* render QR code for mobile connection */
     },
-    wallet_sessionChanged: session => {
-      /* session restored on page reload */
+    connect: ({ chainId, accounts }) => {
+      /* connection established */
+    },
+    disconnect: () => {
+      /* disconnected */
     },
   },
 })
 ```
 
-Or subscribe after creation:
+You can also listen for the `display_uri` event on the **provider** for custom QR code UI:
 
 ```typescript
-client.on('display_uri', uri => {
-  /* ... */
-})
-client.on('wallet_sessionChanged', session => {
-  /* ... */
+const provider = client.getProvider()
+provider.on('display_uri', uri => {
+  /* render custom QR code */
 })
 ```
 
 ## 7. Adopt new capabilities
 
-MetaMask Connect introduces features that are not available in `@metamask/sdk:`
+MetaMask Connect introduces features that are not available in `@metamask/sdk`:
 
 | Capability                  | Description                                                                                                |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -275,7 +283,41 @@ MetaMask Connect introduces features that are not available in `@metamask/sdk:`
 | **`connectWith`**           | Connect and execute any RPC method in a single user approval                                               |
 | **Partial disconnect**      | `disconnect(scopes)` revokes specific CAIP scopes while keeping others active                              |
 | **Singleton client**        | Subsequent `create*Client` calls merge options into the existing instance                                  |
-| **`wallet_sessionChanged`** | Event fired when a session is restored on page load                                                        |
+
+### Next step: Go multichain
+
+If your dapp supports (or plans to support) both EVM and Solana, consider upgrading to the
+[multichain client](../../multichain/connect/quickstart.md).
+The EVM client is built on top of `createMultichainClient` internally, so the upgrade is
+straightforward:
+
+```typescript
+import { createMultichainClient } from '@metamask/connect-multichain'
+
+const multichainClient = await createMultichainClient({
+  dapp: { name: 'My DApp', url: window.location.href },
+  api: {
+    supportedNetworks: {
+      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_KEY',
+      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
+    },
+  },
+})
+
+// EVM call
+await multichainClient.invokeMethod({
+  scope: 'eip155:1',
+  request: { method: 'eth_getBalance', params: ['0x...', 'latest'] },
+})
+
+// Solana call
+await multichainClient.invokeMethod({
+  scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+  request: { method: 'getBalance', params: { pubkey: '...' } },
+})
+```
+
+See the [multichain quickstart](../../multichain/connect/quickstart.md) for a full walkthrough.
 
 ## Full option mapping
 
@@ -312,7 +354,44 @@ MetaMask Connect introduces features that are not available in `@metamask/sdk:`
 - **Provider exists before connection**: `client.getProvider()` never returns `undefined`.
   Read-only RPC calls work immediately; account-dependent calls require `connect()` first.
 - **`@metamask/sdk-react` has no direct replacement**: if you were using `MetaMaskProvider` and
-  `useSDK()`, migrate to either wagmi hooks or manage the client instance in your own React context.
+  `useSDK()`, migrate to [wagmi hooks](../quickstart/wagmi.md) or manage the client instance in your
+  own React context (see example below).
 - **Test on both extension and mobile**: the transport layer has changed, and behavior differences
   may surface in one environment but not the other.
-  :::
+:::
+
+### React context pattern (replacing `useSDK`)
+
+If you were using `@metamask/sdk-react`, you can create a minimal React context to hold the
+EVM client instance:
+
+```tsx
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { createEVMClient, getInfuraRpcUrls } from '@metamask/connect-evm'
+import type { MetamaskConnectEVM } from '@metamask/connect-evm'
+
+const EVMContext = createContext<MetamaskConnectEVM | null>(null)
+
+export function EVMProvider({ children }: { children: React.ReactNode }) {
+  const [client, setClient] = useState<MetamaskConnectEVM | null>(null)
+  const initialized = useRef(false)
+
+  useEffect(() => {
+    if (initialized.current) return
+    initialized.current = true
+    createEVMClient({
+      dapp: { name: 'My DApp', url: window.location.href },
+      api: { supportedNetworks: getInfuraRpcUrls('YOUR_INFURA_KEY') },
+    }).then(setClient)
+  }, [])
+
+  return <EVMContext.Provider value={client}>{children}</EVMContext.Provider>
+}
+
+export function useEVMClient() {
+  return useContext(EVMContext)
+}
+```
+
+For a full-featured solution, consider using [wagmi](../quickstart/wagmi.md) with the MetaMask
+connector, which provides React hooks out of the box.

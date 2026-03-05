@@ -8,17 +8,27 @@ import CardList from '@site/src/components/CardList'
 
 # Connect to EVM networks
 
-Use `@metamask/connect-evm` to connect your dapp to Ethereum and other EVM networks in the MetaMask mobile app
+`@metamask/connect-evm` is the modern replacement for `@metamask/sdk`.
+Use it to connect your dapp to Ethereum and other EVM networks in the MetaMask mobile app
 or browser extension.
-The MetaMask Connect EVM client provides an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)-compatible
+
+The EVM client provides an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)-compatible
 provider with the same shape as `window.ethereum`, meaning existing `viem`, `ethers.js`, or `web3.js`
 code works with minimal changes.
+It also includes automatic platform detection, relay-based connections, session persistence, and
+convenience methods like [`connectAndSign`](connect/reference/methods.md#connectandsign) and
+[`connectWith`](connect/reference/methods.md#connectwith).
 
-MetaMask Connect also includes automatic platform detection, relay-based connections, and session persistence.
+:::tip Coming from `@metamask/sdk`?
+See the [migration guide](connect/migrate-from-sdk.md) for a step-by-step upgrade path covering
+package changes, API differences, and new capabilities.
+:::
 
-:::info Multichain support
-If your dapp supports both EVM and Solana, use both the EVM and Solana clients.
-They share the same underlying [multichain session](../multichain/index.md), meaning the user only approves once.
+:::info Going multichain?
+If your dapp supports (or plans to support) both EVM and Solana, you can use the
+[multichain client](../multichain/index.md) instead.
+The EVM and Solana clients share the same underlying multichain session, meaning the user only
+approves once. See the [multichain quickstart](../multichain/connect/quickstart.md) to get started.
 :::
 
 ## Supported platforms and libraries
