@@ -174,7 +174,7 @@ The following are guidelines for validating RPC parameters and handling values:
 Avoid using the following deprecated methods:
 
 - `wallet_enable`, which is deprecated in favor of
-  [`wallet_requestSnaps`](../../reference/wallet-api-for-snaps.md#wallet_requestsnaps).
+  [`wallet_requestSnaps`](../../reference/snaps-api/wallet_requestsnaps.mdx).
 
 - `snap_confirm`, which is deprecated in favor of [`snap_dialog`](../../reference/snaps-api/snap_dialog.mdx).
 
