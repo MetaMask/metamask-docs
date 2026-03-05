@@ -83,8 +83,8 @@ api: {
 ```typescript
 api: {
   supportedNetworks: {
-    mainnet: 'https://api.mainnet-beta.solana.com',
-    devnet: 'https://api.devnet.solana.com',
+    mainnet: 'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+    devnet: 'https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY',
   },
 }
 ```
@@ -289,8 +289,8 @@ const client = await createSolanaClient({
   },
   api: {
     supportedNetworks: {
-      mainnet: 'https://api.mainnet-beta.solana.com',
-      devnet: 'https://api.devnet.solana.com',
+      mainnet: 'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+      devnet: 'https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 });
@@ -321,7 +321,7 @@ const client = await createMultichainClient({
     supportedNetworks: {
       'eip155:1': 'https://mainnet.infura.io/v3/YOUR_API_KEY',
       'eip155:137': 'https://polygon-mainnet.infura.io/v3/YOUR_API_KEY',
-      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
+      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 });

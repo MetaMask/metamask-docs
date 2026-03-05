@@ -17,13 +17,14 @@ const sdkSidebar = {
   ],
   multichain: [
     'multichain/index',
+    'multichain/connect/quickstart',
     {
       type: 'category',
       label: 'Guides',
       collapsible: false,
       collapsed: false,
       items: [
-        'multichain/connect/guides/connect-to-multichain',
+        'multichain/connect/guides/sign-transactions',
         'multichain/connect/guides/send-transactions',
       ],
     },
@@ -42,6 +43,7 @@ const sdkSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
+        'multichain/connect/reference/methods',
         'multichain/connect/reference/api',
       ],
     },

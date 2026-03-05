@@ -33,7 +33,7 @@ After creating an unsigned legacy transaction, use the wallet's `solana:signAndS
 The method accepts a serialized transaction as a `Uint8Array` and returns an object containing the `signature`.
 
 ```javascript
-const connection = new Connection('https://api.devnet.solana.com')
+const connection = new Connection('https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY')
 const publicKey = new PublicKey(account.address)
 
 const transaction = new Transaction().add(

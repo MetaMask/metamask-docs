@@ -30,7 +30,7 @@ const wallet = solanaClient.getWallet()
 const { accounts } = await wallet.features['standard:connect'].connect()
 const account = accounts[0]
 const publicKey = new PublicKey(account.address)
-const connection = new Connection('https://api.devnet.solana.com')
+const connection = new Connection('https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY')
 ```
 
 ## Create a versioned transaction

@@ -13,6 +13,10 @@ Use `@metamask/connect-multichain` to connect to multiple blockchain networks an
 With the multichain client, your dapp can request access to EVM networks, Solana, and future ecosystems in a single connection prompt, instead of using separate connection flows for each chain.
 This gives you more control than the [ecosystem-specific clients](/sdk/#integration-options), but requires adapting your dapp to work with the Multichain API rather than traditional per-chain RPC.
 
+:::tip Ready to code?
+Jump to the [Quickstart](/sdk/multichain/connect/quickstart) to set up MetaMask Connect Multichain in minutes.
+:::
+
 ## How the Multichain API works
 
 MetaMask Connect is built on the [Multichain API (CAIP-25)](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) specification, a chain-agnostic standard for wallet-dapp communication.
@@ -22,7 +26,7 @@ Instead of connecting to one chain at a time, the Multichain API lets you do the
 
 - **Request access to multiple ecosystems at once**: For example, request Ethereum Mainnet, Polygon, and Solana Mainnet in a single session.
 - **Send requests to any chain in the session**: For example, send a Solana transaction and an EVM transaction through the same connection.
-- **Manage the full session lifecycle**: Create, query, invoke methods on, and revoke sessions with `wallet_createSession`, `wallet_getSession`, `wallet_invokeMethod`, and `wallet_revokeSession`.
+- **Manage the full session lifecycle**: Connect, retrieve session data, invoke methods on any chain, and disconnect — using [`connect`](/sdk/multichain/connect/reference/methods#connect), [`getSession`](/sdk/multichain/connect/reference/methods#getsession), [`invokeMethod`](/sdk/multichain/connect/reference/methods#invokemethod), and [`disconnect`](/sdk/multichain/connect/reference/methods#disconnect). These SDK methods wrap the underlying [Multichain API](/sdk/multichain/connect/reference/api) ([`wallet_createSession`](/sdk/multichain/connect/reference/api#wallet_createsession), [`wallet_getSession`](/sdk/multichain/connect/reference/api#wallet_getsession), [`wallet_invokeMethod`](/sdk/multichain/connect/reference/api#wallet_invokemethod), [`wallet_revokeSession`](/sdk/multichain/connect/reference/api#wallet_revokesession)).
 
 For dapps that support both EVM and Solana, this means one session covers both — and users see a single approval prompt.
 
@@ -30,48 +34,6 @@ For dapps that support both EVM and Solana, this means one session covers both �
 <p align="center">
     <img height="500" src={require("./_assets/metamask-connect-modal.png").default} alt="MetaMask Connect Multichain Connect Modal" class="appScreen" />
 </p>
-
-## Quick example
-
-```typescript
-import { createMultichainClient } from '@metamask/connect-multichain'
-import { address, createSolanaRpc } from '@solana/kit'
-
-const client = await createMultichainClient({
-  dapp: { name: 'My DApp', url: 'https://mydapp.com' },
-  api: {
-    supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_API_KEY',
-      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
-    },
-  },
-})
-
-// Connect with scopes across ecosystems — one approval for all chains
-const session = await client.connect({
-  scopes: ['eip155:1', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'],
-})
-const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
-const solAccounts = session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
-
-// Get ETH balance via invokeMethod
-if (ethAccounts.length > 0) {
-  const ethAddress = ethAccounts[0].split(':')[2]
-  const ethBalance = await client.invokeMethod({
-    scope: 'eip155:1',
-    request: { method: 'eth_getBalance', params: [ethAddress, 'latest'] },
-  })
-  console.log('ETH balance:', ethBalance)
-}
-
-// Get SOL balance via @solana/kit (getBalance is not supported via invokeMethod)
-if (solAccounts.length > 0) {
-  const solAddress = solAccounts[0].split(':')[2]
-  const rpc = createSolanaRpc('https://api.mainnet-beta.solana.com')
-  const balance = await rpc.getBalance(address(solAddress)).send()
-  console.log('SOL balance:', balance)
-}
-```
 
 ## When to use the multichain client
 
@@ -81,21 +43,36 @@ The multichain client is a good fit when you're:
 - **Looking for the best cross-chain UX** — one connection prompt for all chains
 - **Needing full control** over the session lifecycle
 
-If you're adding MetaMask Connect to an existing dapp and want minimal code changes, the [ecosystem-specific clients](/sdk/#integration-options) (`@metamask/connect-evm` or `@metamask/connect-solana`) are a simpler starting point — you can always migrate later.
+If you're adding MetaMask Connect to an existing dapp and want minimal code changes, the [ecosystem-specific clients](/sdk/#integration-options) ([`@metamask/connect-evm`](/sdk/evm) or [`@metamask/connect-solana`](/sdk/solana)) are a simpler starting point — you can always migrate later.
 
 ## Get started
 
 <CardList
 items={[
 {
-href: '/sdk/multichain/connect/guides/connect-to-multichain',
-title: 'Connect to EVM and Solana',
-description: 'Connect to EVM networks and Solana in MetaMask.',
+href: '/sdk/multichain/connect/quickstart',
+title: 'Quickstart',
+description: 'Get started with MetaMask Connect Multichain in minutes.',
+},
+{
+href: '/sdk/multichain/connect/guides/sign-transactions',
+title: 'Sign messages',
+description: 'Sign messages and typed data on EVM and Solana.',
 },
 {
 href: '/sdk/multichain/connect/guides/send-transactions',
-title: 'Send EVM and Solana transactions',
+title: 'Send transactions',
 description: 'Send transactions on EVM networks and Solana.',
+},
+{
+href: '/sdk/multichain/connect/tutorials/create-multichain-dapp',
+title: 'Create a multichain dapp',
+description: 'Build a React dapp that connects to Ethereum, Linea, Base, and Solana.',
+},
+{
+href: '/sdk/multichain/connect/reference/methods',
+title: 'SDK methods',
+description: 'Reference for connect, invokeMethod, disconnect, and more.',
 },
 {
 href: '/sdk/multichain/connect/reference/api',

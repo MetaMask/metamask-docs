@@ -49,8 +49,8 @@ your integration pattern.
 
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
-- [MetaMask Wallet](https://metamask.io/download) installed in your browser.
-- RPC endpoint URLs for the EVM and Solana networks you want to use (for example, from [Infura](https://infura.io/) or QuickNode).
+- [MetaMask](https://metamask.io/download) installed in your browser.
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the [MetaMask Developer dashboard](https://developer.metamask.io).
 
 ## Steps
 
@@ -87,11 +87,11 @@ export const SCOPES = {
   SOLANA: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
 } as const
 
-let client: ReturnType<typeof createMultichainClient> | null = null
+let client: Awaited<ReturnType<typeof createMultichainClient>> | null = null
 
-export function getClient() {
+export async function getClient() {
   if (!client) {
-    client = createMultichainClient({
+    client = await createMultichainClient({
       dapp: {
         name: 'Multichain Tutorial Dapp',
         url: window.location.href,
@@ -127,7 +127,7 @@ The user sees a single approval prompt for all four chains:
 ```typescript
 import { getClient, SCOPES } from './multichain'
 
-const client = getClient()
+const client = await getClient()
 
 await client.connect([SCOPES.ETHEREUM, SCOPES.LINEA, SCOPES.BASE, SCOPES.SOLANA], [])
 ```
@@ -222,7 +222,7 @@ async function getSolBalance(accounts: string[]): Promise<string> {
   if (accounts.length === 0) return '0'
 
   const solAddress = extractAddress(accounts[0])
-  const rpc = createSolanaRpc('https://api.mainnet-beta.solana.com')
+  const rpc = createSolanaRpc('https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY')
   const { value } = await rpc.getBalance(address(solAddress)).send()
 
   const sol = Number(value) / 1e9
@@ -259,12 +259,14 @@ console.log('EVM signature:', signature)
 #### Solana (`solana_signMessage`)
 
 ```typescript
+const solAddress = extractAddress(solAccounts[0])
 const signature = await client.invokeMethod({
   scope: SCOPES.SOLANA,
   request: {
     method: 'solana_signMessage',
     params: {
-      message: 'Hello from my multichain dapp!',
+      message: btoa('Hello from my multichain dapp!'),
+      pubkey: solAddress,
     },
   },
 })
@@ -345,11 +347,11 @@ export const SCOPE_LABELS: Record<string, string> = {
   [SCOPES.SOLANA]: 'Solana',
 }
 
-let client: ReturnType<typeof createMultichainClient> | null = null
+let client: Awaited<ReturnType<typeof createMultichainClient>> | null = null
 
-export function getClient() {
+export async function getClient() {
   if (!client) {
-    client = createMultichainClient({
+    client = await createMultichainClient({
       dapp: {
         name: 'Multichain Tutorial Dapp',
         url: window.location.href,
@@ -359,7 +361,7 @@ export function getClient() {
           [SCOPES.ETHEREUM]: 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
           [SCOPES.LINEA]: 'https://linea-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
           [SCOPES.BASE]: 'https://base-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-          [SCOPES.SOLANA]: 'https://api.mainnet-beta.solana.com',
+          [SCOPES.SOLANA]: 'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
         },
       },
     })
@@ -400,7 +402,7 @@ export default function App() {
 
   const handleConnect = async () => {
     try {
-      const client = getClient()
+      const client = await getClient()
       await client.connect([SCOPES.ETHEREUM, SCOPES.LINEA, SCOPES.BASE, SCOPES.SOLANA], [])
       const session = await client.getSession()
       const accts: ChainAccounts = {}
@@ -417,7 +419,8 @@ export default function App() {
 
   const handleDisconnect = async () => {
     try {
-      await getClient().disconnect()
+      const client = await getClient()
+      await client.disconnect()
       setConnected(false)
       setAccounts({})
       setBalances({})
@@ -430,7 +433,7 @@ export default function App() {
   // --- Balances ---
 
   const fetchBalances = async () => {
-    const client = getClient()
+    const client = await getClient()
     const result: Record<string, string> = {}
 
     for (const scope of [SCOPES.ETHEREUM, SCOPES.LINEA, SCOPES.BASE] as const) {
@@ -453,7 +456,7 @@ export default function App() {
     if (solAccts.length > 0) {
       try {
         const solAddr = extractAddress(solAccts[0])
-        const rpc = createSolanaRpc('https://api.mainnet-beta.solana.com')
+        const rpc = createSolanaRpc('https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY')
         const { value } = await rpc.getBalance(address(solAddr)).send()
         result[SCOPES.SOLANA] = (Number(value) / 1e9).toFixed(6)
       } catch (err: unknown) {
@@ -469,7 +472,7 @@ export default function App() {
 
   const signEvmMessage = async () => {
     try {
-      const client = getClient()
+      const client = await getClient()
       const addr = extractAddress(accounts[SCOPES.ETHEREUM]?.[0] || '')
       const sig = await client.invokeMethod({
         scope: SCOPES.ETHEREUM,
@@ -486,12 +489,16 @@ export default function App() {
 
   const signSolMessage = async () => {
     try {
-      const client = getClient()
+      const client = await getClient()
+      const solAddress = extractAddress(accounts[SCOPES.SOLANA]?.[0] || '')
       const sig = await client.invokeMethod({
         scope: SCOPES.SOLANA,
         request: {
           method: 'solana_signMessage',
-          params: { message: 'Hello from my multichain dapp!' },
+          params: {
+            message: btoa('Hello from my multichain dapp!'),
+            pubkey: solAddress,
+          },
         },
       })
       addLog(`SOL signature: ${JSON.stringify(sig)}`)
@@ -504,7 +511,7 @@ export default function App() {
 
   const sendEvmTransaction = async () => {
     try {
-      const client = getClient()
+      const client = await getClient()
       const addr = extractAddress(accounts[SCOPES.ETHEREUM]?.[0] || '')
       const txHash = await client.invokeMethod({
         scope: SCOPES.ETHEREUM,
@@ -603,8 +610,9 @@ export default function App() {
 
 ## Next steps
 
-- [Send EVM and Solana transactions](../guides/send-transactions.md) for more transaction patterns
-  including Solana transfer construction.
+- [Multichain SDK methods](../reference/methods.md) for all available methods and events.
 - [Multichain API reference](../reference/api.md) for all available methods and events.
-- [Connect to EVM and Solana](../guides/connect-to-multichain.md) for a shorter guide focused on
-  connection and balance queries.
+- [Sign transactions](../guides/sign-transactions.md) for more signing patterns
+  including Solana signing construction.
+- [Send transactions](../guides/send-transactions.md) for more transaction patterns
+  including Solana transfer construction.

@@ -58,12 +58,13 @@ The ecosystem clients are built on the multichain client, so they share the same
 If your dapp already uses a wallet connector library, adopting MetaMask Connect is straightforward.
 MetaMask Connect integrates with the most popular options:
 
-| Library                | Status    | Documentation                                                                                                          |
-| ---------------------- | --------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **Wagmi / RainbowKit** | Supported | [Wagmi quickstart](/sdk/evm/connect/quickstart/wagmi), [RainbowKit quickstart](/sdk/evm/connect/quickstart/rainbowkit) |
-| **Web3Auth**           | Supported | [Web3Auth quickstart](/sdk/evm/connect/quickstart/web3auth)                                                            |
-| **Dynamic**            | Supported | [Dynamic quickstart](/sdk/evm/connect/quickstart/dynamic)                                                              |
-| **ConnectKit**         | Supported | [ConnectKit quickstart](/sdk/evm/connect/quickstart/connectkit)                                                        |
+| Library        | Status    | Documentation                                                   |
+| -------------- | --------- | --------------------------------------------------------------- |
+| **Wagmi**      | Supported | [Wagmi quickstart](/sdk/evm/connect/quickstart/wagmi)           |
+| **RainbowKit** | Supported | [RainbowKit quickstart](/sdk/evm/connect/quickstart/rainbowkit) |
+| **ConnectKit** | Supported | [ConnectKit quickstart](/sdk/evm/connect/quickstart/connectkit) |
+| **Web3Auth**   | Supported | [Web3Auth quickstart](/sdk/evm/connect/quickstart/web3auth)     |
+| **Dynamic**    | Supported | [Dynamic quickstart](/sdk/evm/connect/quickstart/dynamic)       |
 
 In most cases, adopting MetaMask Connect is as simple as updating a dependency or adding a connector — no changes to your application code.
 

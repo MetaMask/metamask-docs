@@ -104,7 +104,7 @@ const solanaClient = await createSolanaClient({
   },
   api: {
     supportedNetworks: {
-      devnet: 'https://api.devnet.solana.com',
+      devnet: 'https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY',
     },
   },
 })

@@ -42,7 +42,7 @@ import { FC, ReactNode } from 'react';
 
 // Create a client pointing to Solana devnet
 const client = createClient({
-  endpoint: "https://api.devnet.solana.com",
+  endpoint: "https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY",
   walletConnectors: [...metamask()],
 });
 

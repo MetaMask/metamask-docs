@@ -1,7 +1,7 @@
 ---
 sidebar_label: Send transactions
 description: Send EVM and Solana transactions from a single multichain session.
-keywords: [multichain, evm, solana, transaction, send, invokeMethod]
+keywords: [multichain, evm, solana, transaction, send, invokeMethod, signAndSendTransaction]
 ---
 
 # Send EVM and Solana transactions
@@ -10,113 +10,211 @@ This guide shows you how to send transactions on both EVM networks and Solana fr
 
 ## Prerequisites
 
-- A multichain client initialized and connected as shown in the [Connect to EVM and Solana](connect-to-multichain.md) guide.
-- For Solana balance queries, install `@solana/kit`:
+- A multichain client initialized and connected as shown in the [quickstart](../quickstart.md).
+- For building Solana transactions, install `@solana/web3.js`:
 
 ```bash npm2yarn
-npm install @solana/kit
+npm install @solana/web3.js
 ```
 
 ## Initialize and connect
 
 Set up the multichain client and connect to both ecosystems:
 
-```typescript
-import { createMultichainClient } from '@metamask/connect-multichain'
+```javascript
+import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
 
-const client = createMultichainClient({
+const client = await createMultichainClient({
   dapp: {
     name: 'Multichain Demo',
     url: window.location.href,
-    iconUrl: 'https://mydapp.com/icon.png',
   },
   api: {
     supportedNetworks: {
-      'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'eip155:137': 'https://polygon-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-      'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp': 'https://api.mainnet-beta.solana.com',
+      ...getInfuraRpcUrls('YOUR_INFURA_API_KEY'),
     },
   },
 })
 
-await client.connect(['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])
-
-const session = await client.getSession()
+await client.connect(
+  ['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], // Ethereum, Polygon, Solana
+  []
+)
 ```
+
+## Understand RPC routing
+
+The multichain client routes EVM methods based on type:
+
+| Route        | Methods                                                                                                                       | Transport                                        |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| **RPC node** | `eth_call`, `eth_getBalance`, `eth_blockNumber`, `eth_getTransactionReceipt`, `eth_estimateGas`, `eth_getCode`, `eth_getLogs` | Infura / custom RPC URL from `supportedNetworks` |
+| **Wallet**   | `eth_sendTransaction`, `personal_sign`, `eth_signTypedData_v4`, `wallet_switchEthereumChain`, `wallet_addEthereumChain`       | MetaMask (extension or mobile)                   |
+
+All Solana methods route through the MetaMask wallet — there is no RPC node fallback for Solana.
 
 ## Send an EVM transaction
 
-Use `invokeMethod` to send a transaction on any EVM chain in the session:
+Use [`invokeMethod`](../reference/methods.md#invokemethod) to send a transaction on any EVM chain in the session:
 
-```typescript
-const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
+```javascript
+const txHash = await client.invokeMethod({
+  scope: 'eip155:1', // Ethereum Mainnet
+  request: {
+    method: 'eth_sendTransaction',
+    params: [
+      {
+        from: '0xYourAddress',
+        to: '0xRecipientAddress',
+        value: '0x2386F26FC10000', // 0.01 ETH in hex wei
+        gas: '0x5208', // 21000 gas (optional)
+      },
+    ],
+  },
+})
+console.log('ETH tx hash:', txHash)
+```
 
-if (ethAccounts.length > 0) {
-  const fromAddress = ethAccounts[0].split(':')[2] // Extract address from CAIP-10
+Target a different chain by changing the `scope` — for example, `eip155:137` for Polygon:
 
+```javascript
+const txHash = await client.invokeMethod({
+  scope: 'eip155:137',
+  request: {
+    method: 'eth_sendTransaction',
+    params: [
+      {
+        from: '0xYourAddress',
+        to: '0xRecipientAddress',
+        value: '0x2386F26FC10000', // 0.01 POL in hex wei
+      },
+    ],
+  },
+})
+console.log('POL tx hash:', txHash)
+```
+
+## Estimate gas
+
+Use `eth_estimateGas` to estimate the gas cost before sending.
+This routes to the RPC node and does not prompt the user:
+
+```javascript
+const gasEstimate = await client.invokeMethod({
+  scope: 'eip155:1',
+  request: {
+    method: 'eth_estimateGas',
+    params: [
+      {
+        from: '0xYourAddress',
+        to: '0xRecipientAddress',
+        value: '0x2386F26FC10000',
+      },
+    ],
+  },
+})
+console.log('Estimated gas:', gasEstimate)
+```
+
+## Build and send a Solana transaction
+
+Build a transaction with `@solana/web3.js`, serialize it to base64, then send it with `solana_signAndSendTransaction`.
+This signs and broadcasts the transaction in one step:
+
+```javascript
+import { Connection, PublicKey, SystemProgram, Transaction } from '@solana/web3.js'
+
+const connection = new Connection('https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY')
+const fromPubkey = new PublicKey('YourSolanaPublicKey')
+const toPubkey = new PublicKey('RecipientSolanaPublicKey')
+
+const transaction = new Transaction().add(
+  SystemProgram.transfer({
+    fromPubkey,
+    toPubkey,
+    lamports: 1_000_000, // 0.001 SOL
+  })
+)
+
+transaction.recentBlockhash = (await connection.getLatestBlockhash()).blockhash
+transaction.feePayer = fromPubkey
+
+const serialized = transaction.serialize({
+  requireAllSignatures: false,
+  verifySignatures: false,
+})
+const base64Transaction = Buffer.from(serialized).toString('base64')
+
+const result = await client.invokeMethod({
+  scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+  request: {
+    method: 'solana_signAndSendTransaction',
+    params: {
+      transaction: base64Transaction,
+    },
+  },
+})
+console.log('SOL tx signature:', result.signature)
+```
+
+## Sign a Solana transaction without sending
+
+Use `solana_signTransaction` to get the signed transaction back without broadcasting it.
+This is useful when you need to inspect or modify the signed output before submitting:
+
+```javascript
+const signResult = await client.invokeMethod({
+  scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
+  request: {
+    method: 'solana_signTransaction',
+    params: {
+      transaction: base64Transaction,
+    },
+  },
+})
+
+// Broadcast the signed transaction yourself
+const signedBuffer = Buffer.from(signResult.transaction, 'base64')
+const txId = await connection.sendRawTransaction(signedBuffer)
+console.log('Transaction ID:', txId)
+```
+
+## Error handling
+
+| Error code | Description               | Action                                                     |
+| ---------- | ------------------------- | ---------------------------------------------------------- |
+| `4001`     | User rejected the request | Show a retry option. Do not treat as an application error. |
+| `-32002`   | Request already pending   | Wait for the user to respond in MetaMask before retrying.  |
+
+```javascript
+try {
   const txHash = await client.invokeMethod({
     scope: 'eip155:1',
     request: {
       method: 'eth_sendTransaction',
       params: [
         {
-          from: fromAddress,
-          to: '0x4B0897b0513FdBeEc7C469D9aF4fA6C0752aBea7',
-          value: '0x29a2241af62c0000', // 3 ETH in wei
+          from: '0xYourAddress',
+          to: '0xRecipientAddress',
+          value: '0x2386F26FC10000',
         },
       ],
     },
   })
-  console.log('ETH tx hash:', txHash)
-}
-```
-
-Target a different chain by changing the `scope` — for example, `eip155:137` for Polygon:
-
-```typescript
-const polAccounts = session.sessionScopes['eip155:137']?.accounts || []
-
-if (polAccounts.length > 0) {
-  const fromAddress = polAccounts[0].split(':')[2]
-
-  const txHash = await client.invokeMethod({
-    scope: 'eip155:137',
-    request: {
-      method: 'eth_sendTransaction',
-      params: [
-        {
-          from: fromAddress,
-          to: '0x4B0897b0513FdBeEc7C469D9aF4fA6C0752aBea7',
-          value: '0x2386F26FC10000', // 0.01 POL in wei
-        },
-      ],
-    },
-  })
-  console.log('POL tx hash:', txHash)
-}
-```
-
-## Send a Solana transaction
-
-Use `invokeMethod` with the `solana_signAndSendTransaction` method:
-
-```typescript
-const solAccounts = session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
-
-if (solAccounts.length > 0) {
-  const result = await client.invokeMethod({
-    scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
-    request: {
-      method: 'solana_signAndSendTransaction',
-      params: {
-        transaction: '<base64-encoded-transaction>',
-      },
-    },
-  })
-  console.log('SOL tx signature:', result)
+} catch (err) {
+  if (err.code === 4001) {
+    console.log('User rejected the transaction')
+    return
+  }
+  if (err.code === -32002) {
+    console.log('A transaction request is already pending')
+    return
+  }
+  throw err
 }
 ```
 
 ## Next steps
 
-- [Multichain API reference](../reference/api.md) for all available methods and events
+- [Sign messages on EVM and Solana](sign-transactions.md)
+- [Multichain SDK methods reference](../reference/methods.md)
