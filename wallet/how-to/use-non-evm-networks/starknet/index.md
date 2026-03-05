@@ -8,7 +8,7 @@ description: Interact with users' Starknet accounts in MetaMask.
 You can interact with users' Starknet accounts in MetaMask by connecting to the
 [Starknet Snap](https://snaps.metamask.io/snap/npm/consensys/starknet-snap/).
 You can use the [`get-starknet`](https://github.com/starknet-io/get-starknet) library or the
-[`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method from
+[`wallet_invokeSnap`](/snaps/reference/snaps-api/wallet_invokesnap.mdx) JSON-RPC method from
 your dapp to connect to the Starknet Snap.
 Both options support similar functionalities, but offer different ways of interacting with users'
 Starknet accounts.
