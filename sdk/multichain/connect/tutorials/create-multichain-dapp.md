@@ -159,7 +159,7 @@ const ethAddress = extractAddress(ethAccounts[0])
 // "0xabc123..."
 ```
 
-### 4. Disconnect (logout)
+### 4. Disconnect (sign-out)
 
 To end the session and clear all authorizations:
 
