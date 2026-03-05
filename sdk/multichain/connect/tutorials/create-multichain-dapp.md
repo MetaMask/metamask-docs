@@ -101,7 +101,7 @@ export function getClient() {
           [SCOPES.ETHEREUM]: 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
           [SCOPES.LINEA]: 'https://linea-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
           [SCOPES.BASE]: 'https://base-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-          [SCOPES.SOLANA]: 'https://api.mainnet-beta.solana.com',
+          [SCOPES.SOLANA]: 'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
         },
       },
     })
