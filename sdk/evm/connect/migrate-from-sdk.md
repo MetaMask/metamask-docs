@@ -7,12 +7,13 @@ toc_max_heading_level: 2
 
 # Migrate from the legacy SDK
 
-This guide walks you through migrating from `@metamask/sdk` (or `@metamask/sdk-react`) to
+This guide walks you through migrating from `@metamask/sdk` or `@metamask/sdk-react` to
 `@metamask/connect-evm`.
-MetaMask Connect is a complete rewrite of the legacy SDK, built on the
+
+MetaMask Connect is a rewrite of the legacy SDK built on the
 [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) with
-async initialization, a singleton client, and built-in support for EVM, Solana, and multichain
-sessions.
+async initialization, a singleton client, and built-in support for EVM, [Solana](../../solana/index.md), and
+[multichain](../../multichain/index.md) sessions.
 
 ## 1. Replace packages
 
@@ -113,12 +114,11 @@ npm install @metamask/connect-solana
 // add-end
 ```
 
-`createEVMClient` is async and returns a singleton.
-Calling it again merges new options into the existing instance rather than creating a new one.
-There is no separate `init()` step.
-
 ### Option mapping
 
+Use the following table to map `MetaMaskSDK` configuration options to their equivalents in `createEVMClient`.
+The table includes renamed options, options that moved into grouped objects (for example, `ui` and `mobile`), and
+options that MetaMask Connect no longer exposes.
 | Old (`MetaMaskSDK`)      | New (`createEVMClient`)                             | Notes                                                      |
 | ------------------------ | --------------------------------------------------- | ---------------------------------------------------------- |
 | `dappMetadata`           | `dapp`                                              | Same shape: `{ name, url, iconUrl }`                       |
@@ -136,6 +136,10 @@ There is no separate `init()` step.
 | `storage`                | Removed                                             | Managed internally                                         |
 
 ## 4. Update connection flow
+
+In MetaMask Connect, you request chain permissions during `connect()` and receive the connected accounts
+and selected chain ID in a single response. This replaces the previous flow where you connected first
+and then made a separate JSON-RPC request for `eth_chainId`.
 
 **Old:**
 
@@ -162,7 +166,7 @@ Ethereum Mainnet (`0x1`) is always included regardless of what you pass.
 
 ### Connect-and-sign shortcut
 
-Connect and sign a `personal_sign` message in a single user approval:
+Use `connectAndSign` to connect and sign a personal_sign message in one user approval:
 
 ```typescript
 const { accounts, chainId, signature } = await client.connectAndSign({
@@ -185,6 +189,9 @@ const { accounts, chainId, result } = await client.connectWith({
 
 ## 5. Update provider access
 
+In MetaMask Connect, `client.getProvider()` returns an EIP-1193 provider. You no longer use the
+`SDKProvider` returned by `sdk.getProvider()`.
+
 **Old:**
 
 ```typescript
@@ -205,8 +212,8 @@ const { accounts, chainId, result } = await client.connectWith({
 
 Key differences:
 
-- The provider is a standard **EIP-1193 provider**, not the custom `SDKProvider`.
-- The provider is available **immediately** after `createEVMClient` resolves, even before `connect()`.
+- The provider is a standard EIP-1193 provider, not the custom `SDKProvider`.
+- The provider is available immediately after `createEVMClient` resolves, even before `connect()`.
 - Read-only calls (like `eth_blockNumber`) work immediately against `supportedNetworks` RPCs.
   Account-dependent calls require `connect()` first.
 - `client.getProvider()` never returns `undefined`.
@@ -257,7 +264,7 @@ client.on('wallet_sessionChanged', session => {
 
 ## 7. Adopt new capabilities
 
-These features are new in MetaMask Connect and have no legacy SDK equivalent:
+MetaMask Connect introduces features that are not available in `@metamask/sdk:`
 
 | Capability                  | Description                                                                                                |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -294,18 +301,18 @@ These features are new in MetaMask Connect and have no legacy SDK equivalent:
 
 :::info Important notes
 
-- **`createEVMClient` is async** -- unlike `new MetaMaskSDK()`, it returns a promise.
+- **`createEVMClient` is async**: Unlike `new MetaMaskSDK()`, it returns a promise.
   Always `await` it before accessing the client.
-- **The client is a singleton** -- calling `createEVMClient` or `createMultichainClient` multiple
+- **The client is a singleton**: Calling `createEVMClient` or `createMultichainClient` multiple
   times merges options into the same instance. Do not recreate it on every render.
-- **`connect()` returns an object** -- destructure `{ accounts, chainId }` instead of treating the
+- **`connect()` returns an object**: Destructure `{ accounts, chainId }` instead of treating the
   return value as an accounts array.
-- **Chain IDs must be hex strings** -- use `'0x1'` not `1` or `'1'` in `chainIds` and
+- **Chain IDs must be hex strings**: Use `'0x1'` not `1` or `'1'` in `chainIds` and
   `supportedNetworks` keys.
-- **Provider exists before connection** -- `client.getProvider()` never returns `undefined`.
+- **Provider exists before connection**: `client.getProvider()` never returns `undefined`.
   Read-only RPC calls work immediately; account-dependent calls require `connect()` first.
-- **`@metamask/sdk-react` has no 1:1 replacement** -- if you were using `MetaMaskProvider` and
+- **`@metamask/sdk-react` has no direct replacement**: if you were using `MetaMaskProvider` and
   `useSDK()`, migrate to either wagmi hooks or manage the client instance in your own React context.
-- **Test on both extension and mobile** -- the transport layer has changed, and behavior differences
+- **Test on both extension and mobile**: the transport layer has changed, and behavior differences
   may surface in one environment but not the other.
   :::
