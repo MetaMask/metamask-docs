@@ -232,7 +232,7 @@ Deployment happens during the first [transaction](send-starknet-transactions.md)
 ## Connect using `wallet_invokeSnap`
 
 Alternatively, you can manage the Snap invocation manually.
-Use the [`wallet_invokeSnap`](/snaps/reference/snaps-api/wallet_invokesnap.mdx) JSON-RPC
+Use the [`wallet_invokeSnap`](/snaps/reference/snaps-api/wallet_invokesnap) JSON-RPC
 method to directly interact with the Starknet Snap. 
 
 :::warning Important
