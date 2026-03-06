@@ -385,3 +385,13 @@ according to [CAIP-217](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/c
   }
 }
 ```
+
+## Error codes
+
+The Multichain API can return the following JSON-RPC error codes:
+
+| Code | Description | Related methods |
+| ---- | ----------- | --------------- |
+| 5000 | Unknown error with request | `wallet_revokeSession`, `wallet_createSession` | 
+| 5100 | Requested networks are not supported | `wallet_createSession` |
+| 5302 | Invalid `sessionProperties` requested | `wallet_createSession` |
