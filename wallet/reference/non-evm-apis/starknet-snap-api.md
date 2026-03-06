@@ -11,7 +11,7 @@ When connected to the [Starknet Snap](../../how-to/use-non-evm-networks/starknet
 can use the Starknet Snap API to interact with users' Starknet accounts (for example, to send transactions).
 
 The examples on this page use the
-[`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) JSON-RPC method,
+[`wallet_invokeSnap`](/snaps/reference/snaps-api/wallet_invokesnap) JSON-RPC method,
 which supports all Starknet Snap API methods.
 
 :::note

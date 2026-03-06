@@ -34,7 +34,7 @@ yarn add @metamask/snaps-sdk
 Then, whenever you're required to return a custom UI component, import the components from the
 SDK at `@metamask/snaps-sdk/jsx` and build your UI with them.
 For example, to display a [`Box`](#box) using 
-[`snap_dialog`](../../reference/snaps-api.md#snap_dialog):
+[`snap_dialog`](../../reference/snaps-api/snap_dialog.mdx):
 
 ```javascript title="index.jsx"
 import { Box, Heading, Text } from "@metamask/snaps-sdk/jsx";
