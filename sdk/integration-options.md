@@ -50,8 +50,8 @@ In most cases, update a dependency or add a connector with no changes to your ap
 
 | Library        | Documentation                                                   |
 | -------------- | --------------------------------------------------------------- |
-| **Wagmi**      | [Quickstart](/sdk/evm/connect/quickstart/wagmi)           |
-| **RainbowKit** | [Quickstart](/sdk/evm/connect/quickstart/rainbowkit) |
-| **ConnectKit** | [Quickstart](/sdk/evm/connect/quickstart/connectkit) |
-| **Web3Auth**   | [Quickstart](/sdk/evm/connect/quickstart/web3auth)     |
-| **Dynamic**    | [Quickstart](/sdk/evm/connect/quickstart/dynamic)       |
+| **Wagmi**      | [Quickstart](/sdk/evm/quickstart/wagmi)           |
+| **RainbowKit** | [Quickstart](/sdk/evm/quickstart/rainbowkit) |
+| **ConnectKit** | [Quickstart](/sdk/evm/quickstart/connectkit) |
+| **Web3Auth**   | [Quickstart](/sdk/evm/quickstart/web3auth)     |
+| **Dynamic**    | [Quickstart](/sdk/evm/quickstart/dynamic)       |

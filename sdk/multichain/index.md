@@ -14,7 +14,7 @@ With the multichain client, your dapp can request access to EVM networks, Solana
 This gives you more control than the [ecosystem-specific clients](/sdk/#integration-options), but requires adapting your dapp to work with the Multichain API rather than traditional per-chain RPC.
 
 :::tip Ready to code?
-Jump to the [Quickstart](/sdk/multichain/connect/quickstart) to set up MetaMask Connect Multichain in minutes.
+Jump to the [Quickstart](/sdk/multichain/quickstart) to set up MetaMask Connect Multichain in minutes.
 :::
 
 ## How the Multichain API works
@@ -26,7 +26,7 @@ Instead of connecting to one chain at a time, the Multichain API lets you do the
 
 - **Request access to multiple ecosystems at once**: For example, request Ethereum Mainnet, Polygon, and Solana Mainnet in a single session.
 - **Send requests to any chain in the session**: For example, send a Solana transaction and an EVM transaction through the same connection.
-- **Manage the full session lifecycle**: Connect, retrieve session data, invoke methods on any chain, and disconnect — using [`connect`](/sdk/multichain/connect/reference/methods#connect), [`getSession`](/sdk/multichain/connect/reference/methods#getsession), [`invokeMethod`](/sdk/multichain/connect/reference/methods#invokemethod), and [`disconnect`](/sdk/multichain/connect/reference/methods#disconnect). These SDK methods wrap the underlying [Multichain API](/sdk/multichain/connect/reference/api) ([`wallet_createSession`](/sdk/multichain/connect/reference/api#wallet_createsession), [`wallet_getSession`](/sdk/multichain/connect/reference/api#wallet_getsession), [`wallet_invokeMethod`](/sdk/multichain/connect/reference/api#wallet_invokemethod), [`wallet_revokeSession`](/sdk/multichain/connect/reference/api#wallet_revokesession)).
+- **Manage the full session lifecycle**: Connect, retrieve session data, invoke methods on any chain, and disconnect — using [`connect`](/sdk/multichain/reference/methods#connect), [`getSession`](/sdk/multichain/reference/methods#getsession), [`invokeMethod`](/sdk/multichain/reference/methods#invokemethod), and [`disconnect`](/sdk/multichain/reference/methods#disconnect). These SDK methods wrap the underlying [Multichain API](/sdk/multichain/reference/api) ([`wallet_createSession`](/sdk/multichain/reference/api#wallet_createsession), [`wallet_getSession`](/sdk/multichain/reference/api#wallet_getsession), [`wallet_invokeMethod`](/sdk/multichain/reference/api#wallet_invokemethod), [`wallet_revokeSession`](/sdk/multichain/reference/api#wallet_revokesession)).
 
 For dapps that support both EVM and Solana, this means one session covers both — and users see a single approval prompt.
 
@@ -50,32 +50,32 @@ If you're adding MetaMask Connect Multichain to an existing dapp and want minima
 <CardList
 items={[
 {
-href: '/sdk/multichain/connect/quickstart',
+href: '/sdk/multichain/quickstart',
 title: 'Quickstart',
 description: 'Get started with MetaMask Connect Multichain in minutes.',
 },
 {
-href: '/sdk/multichain/connect/guides/sign-transactions',
+href: '/sdk/multichain/guides/sign-transactions',
 title: 'Sign messages',
 description: 'Sign messages and typed data on EVM and Solana.',
 },
 {
-href: '/sdk/multichain/connect/guides/send-transactions',
+href: '/sdk/multichain/guides/send-transactions',
 title: 'Send transactions',
 description: 'Send transactions on EVM networks and Solana.',
 },
 {
-href: '/sdk/multichain/connect/tutorials/create-multichain-dapp',
+href: '/sdk/multichain/tutorials/create-multichain-dapp',
 title: 'Create a multichain dapp',
 description: 'Build a React dapp that connects to Ethereum, Linea, Base, and Solana.',
 },
 {
-href: '/sdk/multichain/connect/reference/methods',
+href: '/sdk/multichain/reference/methods',
 title: 'SDK methods',
 description: 'Reference for connect, invokeMethod, disconnect, and more.',
 },
 {
-href: '/sdk/multichain/connect/reference/api',
+href: '/sdk/multichain/reference/api',
 title: 'API reference',
 description: 'Full Multichain API method and event reference.',
 }
