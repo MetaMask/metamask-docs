@@ -64,7 +64,7 @@
     },
     {
       "source": "/sdk/introduction/supported-platforms/",
-      "destination": "/sdk/about/"
+      "destination": "/sdk/supported-platforms/"
     },
     {
       "source": "/sdk/introduction/llm-prompt/",
@@ -620,7 +620,7 @@
     },
     {
       "source": "/sdk/reference/supported-platforms/",
-      "destination": "/sdk/about/"
+      "destination": "/sdk/supported-platforms/"
     },
     {
       "source": "/sdk/reference/sdk-methods/",
