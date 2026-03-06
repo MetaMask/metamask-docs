@@ -1,9 +1,6 @@
 import React from 'react'
-import { useLocation } from '@docusaurus/router'
 
 export default function AnnouncementBar(): JSX.Element | null {
-  const location = useLocation()
-  
   return (
     <div className="theme-announcement-bar" role="banner" data-announcement-bar="true">
       <div style={{ textAlign: 'center' }}>
