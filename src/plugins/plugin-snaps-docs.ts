@@ -2,8 +2,7 @@ import * as path from 'path'
 import { mkdir, writeFile } from 'fs/promises'
 import { LoadContext, Plugin } from '@docusaurus/types'
 
-// TODO: Update to `latest`.
-export const SNAPS_RPC_URL = 'https://raw.githubusercontent.com/MetaMask/snaps/eed974f42bb752382065fbbc6ac152bdec2eae4b/packages/snaps-rpc-methods/schema/schema.json'
+export const SNAPS_RPC_URL = 'https://metamask.github.io/snaps/schema/latest/schema.json'
 export const SNAPS_REF_PATH = 'snaps/reference/snaps-api'
 
 export default function useSnapsDocsPlugin(context: LoadContext): Plugin {
@@ -14,14 +13,13 @@ export default function useSnapsDocsPlugin(context: LoadContext): Plugin {
    * @returns A promise that resolves to an array of Snaps API methods.
    */
   async function fetchSnapsMethods() {
-    return await fetch(SNAPS_RPC_URL)
-      .then((response) => {
-        if (!response.ok || response.status !== 200) {
-          throw new Error(`Failed to fetch Snaps API schema: ${response.statusText}`)
-        }
+    return await fetch(SNAPS_RPC_URL).then(response => {
+      if (!response.ok || response.status !== 200) {
+        throw new Error(`Failed to fetch Snaps API schema: ${response.statusText}`)
+      }
 
-        return response.json()
-      });
+      return response.json()
+    })
   }
 
   /**
@@ -35,7 +33,7 @@ export default function useSnapsDocsPlugin(context: LoadContext): Plugin {
    * them and include them in the site navigation.
    */
   async function generateSnapsDocs() {
-    const methods = await fetchSnapsMethods();
+    const methods = await fetchSnapsMethods()
 
     // Ensure the reference directory exists before trying to write files.
     await mkdir(path.join(context.siteDir, SNAPS_REF_PATH), {
