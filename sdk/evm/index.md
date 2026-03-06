@@ -14,7 +14,7 @@ or browser extension.
 
 The EVM client provides an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)-compatible
 provider with the same shape as `window.ethereum`, meaning existing `viem`, `ethers.js`, or `web3.js`
-code works with minimal changes.
+code works without changes.
 It also includes automatic platform detection, relay-based connections, session persistence, and
 convenience methods like [`connectAndSign`](connect/reference/methods.md#connectandsign) and
 [`connectWith`](connect/reference/methods.md#connectwith).
