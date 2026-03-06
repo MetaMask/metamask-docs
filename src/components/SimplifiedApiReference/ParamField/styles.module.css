@@ -1,0 +1,46 @@
+.paramField {
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.paramHeader {
+  margin-bottom: 0.5rem;
+}
+
+.paramName {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.paramName code {
+  font-family: var(--font-mm-sans-mono);
+  font-size: 1.3rem;
+}
+
+.paramType {
+  color: var(--ifm-color-emphasis-700);
+  font-size: 1.4rem;
+  font-style: italic;
+}
+
+.required {
+  background: var(--ifm-color-primary);
+  color: white;
+  padding: 0rem 0.3rem;
+  border-radius: 0.25rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.paramDescription {
+  font-size: 1.6rem;
+}
+
+html[data-theme='dark'] {
+  .required {
+    color: black;
+    font-weight: 400;
+  }
+}

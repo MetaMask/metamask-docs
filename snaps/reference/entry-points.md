@@ -399,7 +399,7 @@ module.exports.onRpcRequest = async ({ origin, request }) => {
 
 To provide [signature insights](../features/signature-insights.md) before a user signs a message, a
 Snap must expose the `onSignature` entry point.
-Whenever a [signing method](/wallet/concepts/signing-methods) is called, such as `personal_sign` or
+Whenever a signing method is called, such as `personal_sign` or
 `eth_signTypedData_v4`, MetaMask passes the raw unsigned signature payload to the `onSignature`
 handler method.
 
@@ -498,7 +498,6 @@ For MetaMask to call the Snap's `onTransaction` method, you must request the
 An object containing:
 
 - `transaction` - The raw transaction payload.
-  Learn more about the [parameters of a submitted transaction](/wallet/how-to/send-transactions#transaction-parameters).
 - `chainId` - The [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/master/CAIPs/caip-2.md)
   chain ID.
 - `transactionOrigin` - The transaction origin if

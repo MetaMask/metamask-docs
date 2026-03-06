@@ -89,7 +89,7 @@ Snaps can also call some Wallet JSON-RPC API methods using the `ethereum` global
 
 To expose `ethereum` to the Snap execution environment, a Snap must first request the
 [`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider) permission.
-For example, to call [`eth_requestAccounts`](/wallet/reference/json-rpc-methods/eth_requestaccounts), first request
+For example, to call [`eth_requestAccounts`](/sdk/evm/connect/reference/json-rpc-api), first request
 the required permission:
 
 ```json title="snap.manifest.json"
@@ -108,16 +108,16 @@ The `ethereum` global available to Snaps has fewer capabilities than `window.eth
 Snaps can only use it to make read requests, not to write to the blockchain or initiate transactions.
 Snaps can call all Wallet JSON-RPC API methods **except** the following:
 
-- [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestpermissions)
-- [`wallet_revokePermissions`](/wallet/reference/json-rpc-methods/wallet_revokepermissions)
-- [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain)
-- [`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchethereumchain)
-- [`wallet_watchAsset`](/wallet/reference/json-rpc-methods/wallet_watchasset)
-- [`wallet_registerOnboarding`](/wallet/reference/json-rpc-methods/wallet_registeronboarding)
-- [`wallet_scanQRCode`](/wallet/reference/json-rpc-methods/wallet_scanqrcode)
-- [`eth_sendTransaction`](/wallet/reference/json-rpc-methods/eth_sendtransaction)
-- [`eth_decrypt`](/wallet/reference/json-rpc-methods/eth_decrypt)
-- [`eth_getEncryptionPublicKey`](/wallet/reference/json-rpc-methods/eth_getencryptionpublickey)
+- `wallet_requestPermissions`
+- `wallet_revokePermissions`
+- `wallet_addEthereumChain`
+- `wallet_switchEthereumChain`
+- `wallet_watchAsset`
+- `wallet_registerOnboarding`
+- `wallet_scanQRCode`
+- `eth_sendTransaction`
+- `eth_decrypt`
+- `eth_getEncryptionPublicKey`
 
 ## Custom JSON-RPC APIs
 

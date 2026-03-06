@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 This tutorial walks you through creating a Snap that calculates the percentage of gas fees they would 
 pay for their transaction.
 
-It gets the current gas price by calling the [`eth_gasPrice`](/wallet/reference/json-rpc-methods/eth_gasprice) RPC
+It gets the current gas price by calling the [`eth_gasPrice`](/sdk/evm/connect/reference/json-rpc-api) RPC
 method using the global Ethereum provider made available to Snaps, and displays this as a percentage 
 of gas fees in a tab in MetaMask's transaction confirmation window.
 
@@ -303,9 +303,7 @@ export const onTransaction: OnTransactionHandler = async ({ transaction }) => {
 
 :::note Notes
 
-- Learn more about the [parameters of a submitted transaction](/wallet/how-to/send-transactions#transaction-parameters).
-
-- If you have previously developed a dapp, you're likely familiar with accessing the Ethereum provider 
+If you have previously developed a dapp, you're likely familiar with accessing the Ethereum provider 
 using `window.ethereum`. In a Snap, the `window` object is not available. Instead, when you request 
 the `endowment:ethereum-provider` permission, your Snap is granted access to the 
 [`ethereum` global object](../about-snaps/apis.md#snap-requests).

@@ -1,14 +1,41 @@
 ---
 title: Linea eth_accounts
 sidebar_label: eth_accounts
-hide_title: true
-hide_table_of_contents: true
+description: Returns a null value on Linea.
 ---
 
-import ParserOpenRPC from "@site/src/components/ParserOpenRPC"
-import { NETWORK_NAMES } from "@site/src/plugins/plugin-json-rpc"
+# `eth_accounts`
 
-<ParserOpenRPC
-  network={NETWORK_NAMES.linea}
-  method="eth_accounts"
-/>
+import Description from "/services/reference/_partials/_eth_accounts-description.mdx";
+
+<Description />
+
+## Parameters
+
+import Parameters from "/services/reference/_partials/_eth_accounts-parameters.mdx";
+
+<Parameters />
+
+## Returns
+
+import Returns from "/services/reference/_partials/_eth_accounts-returns.mdx";
+
+<Returns />
+
+## Example
+
+import Example from "/services/reference/_partials/_eth_accounts-example.mdx";
+
+<Example />
+
+### Request
+
+import Request from "./_eth_accounts-request.mdx"
+
+<Request />
+
+### Response
+
+import Response from "/services/reference/_partials/_eth_accounts-response.mdx";
+
+<Response />

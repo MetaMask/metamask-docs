@@ -1,81 +1,41 @@
 ---
 title: Linea eth_getLogs
 sidebar_label: eth_getLogs
-hide_title: true
-hide_table_of_contents: true
+description: Returns filtered logs on Linea.
 ---
 
-import ParserOpenRPC from '@site/src/components/ParserOpenRPC'
-import { NETWORK_NAMES } from '@site/src/plugins/plugin-json-rpc'
-import Heading from '@theme/Heading'
-import CodeBlock from '@theme/CodeBlock'
+# `eth_getLogs`
 
-<ParserOpenRPC
-  network={NETWORK_NAMES.linea}
-  method="eth_getLogs"
-  extraContent={{
-    'after-returns': (
-      <>
-        <Heading as="h2" className="padding-top--lg padding-bottom--md">
-          Constraints
-        </Heading>
-        <div className="padding-bottom--lg">
-          <p>The following constraints apply:</p>
-          <p>
-            To prevent queries from consuming too many resources, <code>eth_getLogs</code> requests
-            are currently limited by three constraints:
-          </p>
-          <ul>
-            <li>A maximum of 5,000 parameters can be included in a single request.</li>
-            <li>A maximum of 10,000 results can be returned by a single query.</li>
-            <li>Query duration must not exceed 10 seconds.</li>
-          </ul>
-          <p>
-            If a query returns too many results or exceeds the max query duration, one of the
-            following errors is returned:
-          </p>
-          <CodeBlock language="json">
-            {JSON.stringify(
-              {
-                jsonrpc: '2.0',
-                id: 1,
-                error: {
-                  code: -32005,
-                  message: 'query returned more than 10000 results',
-                },
-              },
-              null,
-              2
-            )}
-          </CodeBlock>
-          <p>or</p>
-          <CodeBlock language="json">
-            {JSON.stringify(
-              {
-                jsonrpc: '2.0',
-                id: 1,
-                error: {
-                  code: -32005,
-                  message: 'query timeout exceeded',
-                },
-              },
-              null,
-              2
-            )}
-          </CodeBlock>
-          <p>If this happens:</p>
-          <ul>
-            <li>
-              Limit your query to a smaller number of blocks using <code>fromBlock</code> and{' '}
-              <code>toBlock</code>.
-            </li>
-            <li>
-              If querying for commonly used <code>topics</code>, consider limiting to a single smart
-              contract <code>address</code>.
-            </li>
-          </ul>
-        </div>
-      </>
-    ),
-  }}
-/>
+import Description from "/services/reference/_partials/_eth_getlogs-description.mdx";
+
+<Description />
+
+## Parameters
+
+import Parameters from "./_eth_getlogs-parameters.mdx";
+
+<Parameters />
+
+## Returns
+
+import Returns from "/services/reference/_partials/_eth_getlogs-returns.mdx";
+
+<Returns />
+
+## Example
+
+import Example from "/services/reference/_partials/_eth_getlogs-example.mdx";
+
+<Example />
+
+### Request
+
+import Request from "./_eth_getlogs-request.mdx"
+
+<Request />
+
+### Response
+
+import Response from "/services/reference/_partials/_eth_getlogs-response.mdx";
+
+<Response />
