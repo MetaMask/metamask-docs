@@ -20,7 +20,7 @@ Aggregates multiple partial signatures into a single combined multisig signature
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
-| `signatures` | `PartialSignature[]` | Yes | Collection of partial signatures provided by signers, to be merged into an aggregated signature. |
+| `signatures` | [`PartialSignature`](./types.md#partialsignature)[] | Yes | Collection of partial signatures provided by signers, to be merged into an aggregated signature. |
 
 ### Example
 
@@ -534,7 +534,7 @@ Creates a `MetaMaskSmartAccount` instance.
 | `client` | `Client`                                            | Yes                                                          | Viem Client to retrieve smart account data.                                                                                                                                       |
 | `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be Hybrid, Multisig, or Stateless7702.                                                                                                             |
 | `signer` | `SignerConfigByImplementation <TImplementation>` | Yes                                                          | Signers for the smart account. Can be a Viem Account, Viem Wallet Client, or a WebAuthnAccount. Web3AuthnAccounts are only supported for Hybrid implementations.                  |
-| `environment` | `SmartAccountsEnvironment`                              | No                                                           | Environment to resolve the smart contracts.                                                                                                                                       |
+| `environment` | [`SmartAccountsEnvironment`](./types.md#smartaccountsenvironment)                              | No                                                           | Environment to resolve the smart contracts.                                                                                                                                       |
 | `deployParams` | `DeployParams<TImplementation>`                     | Required if `address` is not provided                        | The parameters that will be used to deploy the smart account and generate its deterministic address.                                                                              |
 | `deploySalt` | `Hex`                                               | Required if `address` is not provided                        | The salt that will be used to deploy the smart account.                                                                                                                           |
 | `address` | `Address`                                           | Required if `deployParams` and `deploySalt` are not provided, or if the implementation is `Stateless7702`. | The address of the smart account. If an address is provided, the smart account will not be deployed. This should be used if you intend to interact with an existing smart account. |

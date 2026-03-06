@@ -22,7 +22,7 @@ delegation, and read the required state.
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
 | `client`      | `Client`               | Yes      | The Viem Client to interact with the caveat enforcer contracts and read their state. |
-| `environment` | `SmartAccountsEnvironment` | Yes      | Environment to resolve the smart contracts for the current chain.       |
+| `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes      | Environment to resolve the smart contracts for the current chain.       |
 
 ### Example
 
@@ -66,7 +66,7 @@ Returns the available amount from the ERC-20 period transfer enforcer for the cu
 
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| `delegation`  | [`Delegation`](../types.md#delegation)           | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -120,7 +120,7 @@ Returns the available amount from the ERC-20 streaming enforcer.
 
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| `delegation`  | [`Delegation`](../types.md#delegation)           | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -176,7 +176,7 @@ Returns the available amount from the native token period enforcer for the curre
 
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| `delegation`  | [`Delegation`](../types.md#delegation)           | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -230,7 +230,7 @@ Returns the available amount from the native streaming enforcer.
 
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| `delegation`  | [`Delegation`](../types.md#delegation)           | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -285,7 +285,7 @@ encode the args for the token index you want to check the available amount.
 
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object with token index for which you want to check the available amount. |
+| `delegation`  | [`Delegation`](../types.md#delegation)           | Yes      | The delegation object with token index for which you want to check the available amount. |
 
 ### Example
 
