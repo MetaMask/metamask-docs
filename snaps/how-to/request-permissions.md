@@ -59,8 +59,8 @@ permission, add the following to the manifest file:
 Dynamic permissions are not requested in the manifest file.
 Instead, your Snap can acquire dynamic permissions during its lifecycle.
 
-For example, request permission to call the [`eth_accounts`](/sdk/evm/connect/reference/json-rpc-api)
-MetaMask JSON-RPC API method by calling [`eth_requestAccounts`](/sdk/evm/connect/reference/json-rpc-api).
+For example, request permission to call the [`eth_accounts`](/sdk/evm/reference/json-rpc-api)
+MetaMask JSON-RPC API method by calling [`eth_requestAccounts`](/sdk/evm/reference/json-rpc-api).
 See the [`eth_accounts` dynamic permission](../reference/permissions.md#eth_accounts) for more information.
 
 ## Request permissions from a dapp

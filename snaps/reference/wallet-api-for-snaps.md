@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 # Wallet API for Snaps
 
 Dapps can install and communicate with Snaps using a subset of the
-[Wallet JSON-RPC API](/sdk/evm/connect/reference/json-rpc-api).
+[Wallet JSON-RPC API](/sdk/evm/reference/json-rpc-api).
 This page is a reference for those Snaps-specific methods.
 
 ## `wallet_getSnaps`

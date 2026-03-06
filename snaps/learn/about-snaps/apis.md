@@ -89,7 +89,7 @@ Snaps can also call some Wallet JSON-RPC API methods using the `ethereum` global
 
 To expose `ethereum` to the Snap execution environment, a Snap must first request the
 [`endowment:ethereum-provider`](../../reference/permissions.md#endowmentethereum-provider) permission.
-For example, to call [`eth_requestAccounts`](/sdk/evm/connect/reference/json-rpc-api), first request
+For example, to call [`eth_requestAccounts`](/sdk/evm/reference/json-rpc-api), first request
 the required permission:
 
 ```json title="snap.manifest.json"

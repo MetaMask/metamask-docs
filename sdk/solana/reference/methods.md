@@ -35,7 +35,7 @@ Calling `createSolanaClient` multiple times returns the same underlying multicha
 :::note
 `createSolanaClient` does not accept `eventHandlers`.
 To listen for lower-level multichain events (such as session changes), use `client.core.on()` after
-creating the client. See the [multichain event methods](/sdk/multichain/connect/reference/methods#on).
+creating the client. See the [multichain event methods](/sdk/multichain/reference/methods#on).
 :::
 
 ### Returns
@@ -128,11 +128,11 @@ await client.disconnect()
 | `core`   | `MultichainCore` | The underlying MultichainCore instance. |
 
 The `core` property exposes the full multichain client, giving access to lower-level methods such as
-[`connect`](/sdk/multichain/connect/reference/methods#connect),
-[`getSession`](/sdk/multichain/connect/reference/methods#getsession),
-[`invokeMethod`](/sdk/multichain/connect/reference/methods#invokemethod),
-[`on`](/sdk/multichain/connect/reference/methods#on), and
-[`off`](/sdk/multichain/connect/reference/methods#off).
+[`connect`](/sdk/multichain/reference/methods#connect),
+[`getSession`](/sdk/multichain/reference/methods#getsession),
+[`invokeMethod`](/sdk/multichain/reference/methods#invokemethod),
+[`on`](/sdk/multichain/reference/methods#on), and
+[`off`](/sdk/multichain/reference/methods#off).
 
 ### Example
 

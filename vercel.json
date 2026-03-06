@@ -64,7 +64,7 @@
     },
     {
       "source": "/sdk/introduction/supported-platforms/",
-      "destination": "/sdk/about/"
+      "destination": "/sdk/supported-platforms/"
     },
     {
       "source": "/sdk/introduction/llm-prompt/",
@@ -100,7 +100,7 @@
     },
     {
       "source": "/wallet/connect/3rd-party-libraries/wagmi/",
-      "destination": "/sdk/evm/connect/quickstart/wagmi/"
+      "destination": "/sdk/evm/quickstart/wagmi/"
     },
     {
       "source": "/wallet/connect/3rd-party-libraries/web3-onboard/",
@@ -156,51 +156,51 @@
     },
     {
       "source": "/guide/accessing-accounts/",
-      "destination": "/sdk/evm/connect/guides/manage-user-accounts/"
+      "destination": "/sdk/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/wallet/how-to/connect/access-accounts/",
-      "destination": "/sdk/evm/connect/guides/manage-user-accounts/"
+      "destination": "/sdk/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/wallet/get-started/access-accounts/",
-      "destination": "/sdk/evm/connect/guides/manage-user-accounts/"
+      "destination": "/sdk/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/wallet/how-to/manage-networks/",
-      "destination": "/sdk/evm/connect/guides/manage-networks/"
+      "destination": "/sdk/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/get-started/detect-network/",
-      "destination": "/sdk/evm/connect/guides/manage-networks/"
+      "destination": "/sdk/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/connect/detect-network/",
-      "destination": "/sdk/evm/connect/guides/manage-networks/"
+      "destination": "/sdk/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/detect-network/",
-      "destination": "/sdk/evm/connect/guides/manage-networks/"
+      "destination": "/sdk/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/add-network/",
-      "destination": "/sdk/evm/connect/guides/manage-networks/"
+      "destination": "/sdk/evm/guides/manage-networks/"
     },
     {
       "source": "/guide/signing-data/",
-      "destination": "/sdk/evm/connect/guides/sign-data/"
+      "destination": "/sdk/evm/guides/sign-data/"
     },
     {
       "source": "/wallet/how-to/sign-data/connect-and-sign/",
-      "destination": "/sdk/evm/connect/guides/manage-user-accounts/"
+      "destination": "/sdk/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/wallet/how-to/use-siwe/",
-      "destination": "/sdk/evm/connect/guides/sign-data/siwe/"
+      "destination": "/sdk/evm/guides/sign-data/siwe/"
     },
     {
       "source": "/guide/sending-transactions/",
-      "destination": "/sdk/evm/connect/guides/send-transactions/"
+      "destination": "/sdk/evm/guides/send-transactions/"
     },
     {
       "source": "/wallet/how-to/use-3rd-party-integrations/:path*/",
@@ -212,35 +212,35 @@
     },
     {
       "source": "/wallet/how-to/batch-json-rpc-requests/",
-      "destination": "/sdk/evm/connect/guides/metamask-exclusive/batch-requests/"
+      "destination": "/sdk/evm/guides/metamask-exclusive/batch-requests/"
     },
     {
       "source": "/wallet/how-to/display/",
-      "destination": "/sdk/evm/connect/guides/metamask-exclusive/display-tokens/"
+      "destination": "/sdk/evm/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/guide/registering-your-token/",
-      "destination": "/sdk/evm/connect/guides/metamask-exclusive/display-tokens/"
+      "destination": "/sdk/evm/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/wallet/how-to/register-token/",
-      "destination": "/sdk/evm/connect/guides/metamask-exclusive/display-tokens/"
+      "destination": "/sdk/evm/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/guide/registering-function-names/",
-      "destination": "/sdk/evm/connect/guides/best-practices/display/"
+      "destination": "/sdk/evm/guides/best-practices/display/"
     },
     {
       "source": "/wallet/how-to/register-method-names/",
-      "destination": "/sdk/evm/connect/guides/best-practices/display/"
+      "destination": "/sdk/evm/guides/best-practices/display/"
     },
     {
       "source": "/guide/defining-your-icon/",
-      "destination": "/sdk/evm/connect/guides/best-practices/display/"
+      "destination": "/sdk/evm/guides/best-practices/display/"
     },
     {
       "source": "/wallet/how-to/set-icon/",
-      "destination": "/sdk/evm/connect/guides/best-practices/display/"
+      "destination": "/sdk/evm/guides/best-practices/display/"
     },
     {
       "source": "/wallet/how-to/display/custom-modals/",
@@ -252,7 +252,7 @@
     },
     {
       "source": "/wallet/how-to/interact-with-smart-contracts/:path*/",
-      "destination": "/sdk/evm/connect/guides/interact-with-contracts/"
+      "destination": "/sdk/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/wallet/how-to/use-unity-sdk/",
@@ -272,11 +272,11 @@
     },
     {
       "source": "/wallet/get-started/run-development-network/",
-      "destination": "/sdk/evm/connect/guides/best-practices/run-devnet/"
+      "destination": "/sdk/evm/guides/best-practices/run-devnet/"
     },
     {
       "source": "/wallet/how-to/get-started-building/run-devnet/",
-      "destination": "/sdk/evm/connect/guides/best-practices/run-devnet/"
+      "destination": "/sdk/evm/guides/best-practices/run-devnet/"
     },
     {
       "source": "/wallet/how-to/get-started-building/secure-dapp/",
@@ -328,11 +328,11 @@
     },
     {
       "source": "/guide/initializing-dapps/",
-      "destination": "/sdk/evm/connect/guides/interact-with-contracts/"
+      "destination": "/sdk/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/wallet/how-to/interact-with-smart-contracts/",
-      "destination": "/sdk/evm/connect/guides/interact-with-contracts/"
+      "destination": "/sdk/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/wallet/tutorials/",
@@ -400,35 +400,35 @@
     },
     {
       "source": "/guide/ethereum-provider/",
-      "destination": "/sdk/evm/connect/reference/provider-api/"
+      "destination": "/sdk/evm/reference/provider-api/"
     },
     {
       "source": "/wallet/reference/json-rpc-api/",
-      "destination": "/sdk/evm/connect/reference/json-rpc-api/"
+      "destination": "/sdk/evm/reference/json-rpc-api/"
     },
     {
       "source": "/guide/rpc-api/",
-      "destination": "/sdk/evm/connect/reference/json-rpc-api/"
+      "destination": "/sdk/evm/reference/json-rpc-api/"
     },
     {
       "source": "/wallet/reference/rpc-api/",
-      "destination": "/sdk/evm/connect/reference/json-rpc-api/"
+      "destination": "/sdk/evm/reference/json-rpc-api/"
     },
     {
       "source": "/wallet/reference/(eth_.*)",
-      "destination": "/sdk/evm/connect/reference/json-rpc-api/$1"
+      "destination": "/sdk/evm/reference/json-rpc-api/$1"
     },
     {
       "source": "/wallet/reference/(wallet_.*)",
-      "destination": "/sdk/evm/connect/reference/json-rpc-api/$1"
+      "destination": "/sdk/evm/reference/json-rpc-api/$1"
     },
     {
       "source": "/wallet/reference/(personal_.*)",
-      "destination": "/sdk/evm/connect/reference/json-rpc-api/$1"
+      "destination": "/sdk/evm/reference/json-rpc-api/$1"
     },
     {
       "source": "/wallet/reference/(web3_.*)",
-      "destination": "/sdk/evm/connect/reference/json-rpc-api/$1"
+      "destination": "/sdk/evm/reference/json-rpc-api/$1"
     },
     {
       "source": "/wallet/reference/non-evm-apis/",
@@ -436,15 +436,15 @@
     },
     {
       "source": "/sdk/guides/advanced/connect-and-sign/",
-      "destination": "/sdk/evm/connect/guides/manage-user-accounts/"
+      "destination": "/sdk/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/sdk/guides/advanced/batch-requests/",
-      "destination": "/sdk/evm/connect/guides/metamask-exclusive/batch-requests/"
+      "destination": "/sdk/evm/guides/metamask-exclusive/batch-requests/"
     },
     {
       "source": "/sdk/guides/advanced/production-readiness/",
-      "destination": "/sdk/evm/connect/guides/best-practices/production-readiness/"
+      "destination": "/sdk/evm/guides/best-practices/production-readiness/"
     },
     {
       "source": "/wallet/reference/multichain-api/",
@@ -452,95 +452,95 @@
     },
     {
       "source": "/sdk/connect/javascript-wagmi/",
-      "destination": "/sdk/evm/connect/quickstart/wagmi/"
+      "destination": "/sdk/evm/quickstart/wagmi/"
     },
     {
       "source": "/sdk/connect/javascript/",
-      "destination": "/sdk/evm/connect/quickstart/javascript/"
+      "destination": "/sdk/evm/quickstart/javascript/"
     },
     {
       "source": "/sdk/connect/javascript-rainbowkit/",
-      "destination": "/sdk/evm/connect/quickstart/rainbowkit/"
+      "destination": "/sdk/evm/quickstart/rainbowkit/"
     },
     {
       "source": "/sdk/connect/react-native/",
-      "destination": "/sdk/evm/connect/quickstart/react-native/"
+      "destination": "/sdk/evm/quickstart/react-native/"
     },
     {
       "source": "/sdk/guides/authenticate-users/",
-      "destination": "/sdk/evm/connect/guides/manage-user-accounts/"
+      "destination": "/sdk/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/sdk/guides/manage-networks/",
-      "destination": "/sdk/evm/connect/guides/manage-networks/"
+      "destination": "/sdk/evm/guides/manage-networks/"
     },
     {
       "source": "/sdk/guides/handle-transactions/",
-      "destination": "/sdk/evm/connect/guides/send-transactions/"
+      "destination": "/sdk/evm/guides/send-transactions/"
     },
     {
       "source": "/sdk/guides/interact-with-contracts/",
-      "destination": "/sdk/evm/connect/guides/interact-with-contracts/"
+      "destination": "/sdk/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/sdk/guides/use-deeplinks/",
-      "destination": "/sdk/evm/connect/guides/metamask-exclusive/use-deeplinks/"
+      "destination": "/sdk/evm/guides/metamask-exclusive/use-deeplinks/"
     },
     {
       "source": "/sdk/guides/batch-requests/",
-      "destination": "/sdk/evm/connect/guides/metamask-exclusive/batch-requests/"
+      "destination": "/sdk/evm/guides/metamask-exclusive/batch-requests/"
     },
     {
       "source": "/sdk/guides/production-readiness/",
-      "destination": "/sdk/evm/connect/guides/best-practices/production-readiness/"
+      "destination": "/sdk/evm/guides/best-practices/production-readiness/"
     },
     {
       "source": "/wallet/how-to/connect-extension/",
-      "destination": "/sdk/evm/connect/guides/connect-extension/"
+      "destination": "/sdk/evm/guides/connect-extension/"
     },
     {
       "source": "/wallet/how-to/access-accounts/",
-      "destination": "/sdk/evm/connect/guides/manage-user-accounts/"
+      "destination": "/sdk/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/wallet/how-to/manage-networks/detect-network/",
-      "destination": "/sdk/evm/connect/guides/manage-networks/"
+      "destination": "/sdk/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/manage-networks/add-network/",
-      "destination": "/sdk/evm/connect/guides/manage-networks/"
+      "destination": "/sdk/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/manage-networks/use-multichain/",
-      "destination": "/sdk/evm/connect/guides/manage-networks/"
+      "destination": "/sdk/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/sign-data/",
-      "destination": "/sdk/evm/connect/guides/sign-data/"
+      "destination": "/sdk/evm/guides/sign-data/"
     },
     {
       "source": "/wallet/how-to/sign-data/siwe/",
-      "destination": "/sdk/evm/connect/guides/sign-data/siwe/"
+      "destination": "/sdk/evm/guides/sign-data/siwe/"
     },
     {
       "source": "/wallet/how-to/send-transactions/",
-      "destination": "/sdk/evm/connect/guides/send-transactions/"
+      "destination": "/sdk/evm/guides/send-transactions/"
     },
     {
       "source": "/wallet/how-to/send-transactions/send-batch-transactions/",
-      "destination": "/sdk/evm/connect/guides/send-transactions/batch-transactions/"
+      "destination": "/sdk/evm/guides/send-transactions/batch-transactions/"
     },
     {
       "source": "/wallet/how-to/display/tokens/",
-      "destination": "/sdk/evm/connect/guides/metamask-exclusive/display-tokens/"
+      "destination": "/sdk/evm/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/wallet/how-to/display/method-names/",
-      "destination": "/sdk/evm/connect/guides/best-practices/display/"
+      "destination": "/sdk/evm/guides/best-practices/display/"
     },
     {
       "source": "/wallet/how-to/display/icon/",
-      "destination": "/sdk/evm/connect/guides/best-practices/display/"
+      "destination": "/sdk/evm/guides/best-practices/display/"
     },
     {
       "source": "/wallet/how-to/manage-permissions/",
@@ -564,7 +564,7 @@
     },
     {
       "source": "/wallet/how-to/run-devnet/",
-      "destination": "/sdk/evm/connect/guides/best-practices/run-devnet/"
+      "destination": "/sdk/evm/guides/best-practices/run-devnet/"
     },
     {
       "source": "/wallet/how-to/secure-dapp/",
@@ -572,11 +572,11 @@
     },
     {
       "source": "/sdk/connect/javascript-dynamic/",
-      "destination": "/sdk/evm/connect/partners/dynamic/"
+      "destination": "/sdk/evm/partners/dynamic/"
     },
     {
       "source": "/sdk/connect/javascript-web3auth/",
-      "destination": "/sdk/evm/connect/partners/web3auth/"
+      "destination": "/sdk/evm/partners/web3auth/"
     },
     {
       "source": "/wallet/concepts/wallet-api/",
@@ -592,7 +592,7 @@
     },
     {
       "source": "/wallet/concepts/signing-methods/",
-      "destination": "/sdk/evm/connect/guides/sign-data/"
+      "destination": "/sdk/evm/guides/sign-data/"
     },
     {
       "source": "/wallet/concepts/wallet-interoperability/",
@@ -600,7 +600,7 @@
     },
     {
       "source": "/wallet/concepts/smart-contracts/",
-      "destination": "/sdk/evm/connect/guides/interact-with-contracts/"
+      "destination": "/sdk/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/wallet/tutorials/react-dapp-local-state/",
@@ -620,11 +620,11 @@
     },
     {
       "source": "/sdk/reference/supported-platforms/",
-      "destination": "/sdk/about/"
+      "destination": "/sdk/supported-platforms/"
     },
     {
       "source": "/sdk/reference/sdk-methods/",
-      "destination": "/sdk/evm/connect/reference/methods/"
+      "destination": "/sdk/evm/reference/methods/"
     },
     {
       "source": "/wallet/reference/non-evm-apis/starknet-snap-api/",
@@ -632,15 +632,15 @@
     },
     {
       "source": "/wallet/reference/provider-api/",
-      "destination": "/sdk/evm/connect/reference/provider-api/"
+      "destination": "/sdk/evm/reference/provider-api/"
     },
     {
       "source": "/wallet/reference/multichain-api/",
-      "destination": "/sdk/multichain/connect/reference/api/"
+      "destination": "/sdk/multichain/reference/api/"
     },
     {
       "source": "/wallet/reference/json-rpc-methods/",
-      "destination": "/sdk/evm/connect/reference/json-rpc-api/"
+      "destination": "/sdk/evm/reference/json-rpc-api/"
     },
     {
       "source": "/wallet/how-to/use-non-evm-networks/starknet/:path*/",
@@ -981,6 +981,18 @@
     {
       "source": "/embedded-wallets/dashboard/whitelist/",
       "destination": "/embedded-wallets/dashboard/allowlist/"
+    },
+    {
+      "source": "/sdk/evm/connect/:path*/",
+      "destination": "/sdk/evm/:path*/"
+    },
+    {
+      "source": "/sdk/solana/connect/:path*/",
+      "destination": "/sdk/solana/:path*/"
+    },
+    {
+      "source": "/sdk/multichain/connect/:path*/",
+      "destination": "/sdk/multichain/:path*/"
     }
   ]
 }
