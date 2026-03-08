@@ -1,0 +1,86 @@
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+Web3Auth enables you to configure your bundler and define the paymaster context. The bundler
+aggregates the UserOperations and submits them on-chain via a global entry point contract.
+
+Bundler support is not limited to the examples below—you can use any bundler of your choice.
+
+<Tabs
+defaultValue="pimlico"
+values={[
+  { label: "Pimlico", value: "pimlico" },
+  { label: "ZeroDev", value: "zerodev" },
+]}
+>
+
+<TabItem value="pimlico">
+
+```ts
+import {
+  AccountAbstractionProvider,
+  SafeSmartAccount,
+} from "@web3auth/account-abstraction-provider";
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: "0xaa36a7",
+  rpcTarget: "https://rpc.sepolia.org",
+  displayName: "Ethereum Sepolia Testnet",
+  blockExplorerUrl: "https://sepolia.etherscan.io",
+  ticker: "ETH",
+  tickerName: "Ethereum",
+  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+};
+
+const accountAbstractionProvider = new AccountAbstractionProvider({
+  config: {
+    chainConfig,
+    smartAccountInit: new SafeSmartAccount(),
+    // focus-start
+    bundlerConfig: {
+      // Get the pimlico API Key from dashboard.pimlico.io
+      url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
+    },
+    // focus-end
+  },
+});
+```
+
+</TabItem>
+
+<TabItem value="zerodev">
+
+```ts
+import {
+  AccountAbstractionProvider,
+  KernelSmartAccount,
+} from "@web3auth/account-abstraction-provider";
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: "0xaa36a7",
+  rpcTarget: "https://rpc.sepolia.org",
+  displayName: "Ethereum Sepolia Testnet",
+  blockExplorerUrl: "https://sepolia.etherscan.io",
+  ticker: "ETH",
+  tickerName: "Ethereum",
+  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+};
+
+const accountAbstractionProvider = new AccountAbstractionProvider({
+  config: {
+    chainConfig,
+    smartAccountInit: new KernelSmartAccount(),
+    // focus-start
+    bundlerConfig: {
+      // Get the ZeroDev API from https://dashboard.zerodev.app/
+      url: `https://rpc.zerodev.app/api/v2/bundler/${projectId}`,
+    },
+    // focus-end
+  },
+});
+```
+
+</TabItem>
+</Tabs>

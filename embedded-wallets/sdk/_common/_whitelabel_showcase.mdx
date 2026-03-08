@@ -1,0 +1,170 @@
+import Image4 from '@site/static/img/tutorials/whitelabel-web3auth-openlogin-dark.png'
+import Image7 from '@site/static/img/tutorials/whitelabel-web3auth-openlogin-language.png'
+import Image3 from '@site/static/img/tutorials/whitelabel-web3auth-openlogin-light.png'
+import Image9 from '@site/static/img/tutorials/whitelabel-web3auth-openlogin-logo-dark.png'
+import Image8 from '@site/static/img/tutorials/whitelabel-web3auth-openlogin-logo-light.png'
+import DashboardImage from '@site/static/img/tutorials/whitelabel-web3auth-openlogin-theme1.png'
+import Image6 from '@site/static/img/tutorials/whitelabel-web3auth-openlogin-theme2.png'
+
+### `name`
+
+The name of the application. This will be displayed in the key reconstruction page.
+
+<div className="text-image-column">
+  <div>
+    <h4>
+      Standard screen <strong>without</strong> any change
+    </h4>
+    <img
+      style={{ display: 'block', maxHeight: '500px', alignSelf: 'center' }}
+      src={DashboardImage}
+      alt="Standard screen without any change"
+    />
+  </div>
+  <div>
+    <h4>
+      Name changed to <code>Formidable Duo</code>
+    </h4>
+    <img
+      style={{ display: 'block', maxHeight: '500px', alignSelf: 'center' }}
+      src={Image6}
+      alt="Name changed to Formidable Duo"
+    />
+  </div>
+</div>
+<br />
+
+### `logoLight` & `logoDark`
+
+The logo of the application. Displayed in dark and light mode respectively. This will be displayed
+in the key reconstruction page.
+
+<div className="text-image-column">
+  <div>
+    <h4>
+      <code>logoLight</code> on dark mode
+    </h4>
+    <img
+      style={{ display: 'block', maxHeight: '500px', alignSelf: 'center' }}
+      src={Image8}
+      alt="logoLight on dark mode"
+    />
+  </div>
+  <div>
+    <h4>
+      <code>logoDark</code> on light mode
+    </h4>
+    <img
+      style={{ display: 'block', maxHeight: '500px', alignSelf: 'center' }}
+      src={Image9}
+      alt="logoDark on light mode"
+    />
+  </div>
+</div>
+<br />
+
+### `defaultLanguage`
+
+Default language will set the language used on all OpenLogin screens. The supported languages are:
+
+<div className="text-image-column">
+  <div style={{ flexGrow: '1', minWidth: '200px' }}>
+    <ul>
+      <li>
+        <code>en</code> - English (default)
+      </li>
+      <li>
+        <code>de</code> - German
+      </li>
+      <li>
+        <code>ja</code> - Japanese
+      </li>
+      <li>
+        <code>ko</code> - Korean
+      </li>
+      <li>
+        <code>zh</code> - Mandarin
+      </li>
+      <li>
+        <code>es</code> - Spanish
+      </li>
+      <li>
+        <code>fr</code> - French
+      </li>
+      <li>
+        <code>pt</code> - Portuguese
+      </li>
+      <li>
+        <code>nl</code> - Dutch
+      </li>
+      <li>
+        <code>tr</code> - Turkish
+      </li>
+    </ul>
+  </div>
+  <div>
+    <img style={{ width: '100%', maxWidth: '500px' }} src={Image7} alt="default Language screen" />
+  </div>
+</div>
+<br />
+
+### `dark`
+
+Can be set to `true` or `false` with default set to `false`.
+
+<br />
+
+<div className="text-image-column">
+  <div>
+    <h4>
+      For Light: <code>dark: false</code>
+    </h4>
+    <img
+      style={{ display: 'block', maxHeight: '500px', alignSelf: 'center' }}
+      src={Image3}
+      alt="light theme"
+    />
+  </div>
+  <div>
+    <h4>
+      For Dark: <code>dark: true</code>
+    </h4>
+    <img
+      style={{ display: 'block', maxHeight: '500px', alignSelf: 'center' }}
+      src={Image4}
+      alt="dark theme"
+    />
+  </div>
+</div>
+
+<br />
+
+### `theme`
+
+Theme is a record of colors that can be configured. As of, now only `primary` color can be set and
+has effect on OpenLogin screens (default primary color is `#0364FF`). Theme affects icons and links.
+Examples below.
+
+<div className="text-image-column">
+  <div>
+    <h4>
+      Standard color <code>#0364FF</code>
+    </h4>
+    <img
+      style={{ display: 'block', maxHeight: '500px', alignSelf: 'center' }}
+      src={DashboardImage}
+      alt="Theme is a record of colors that can be configured."
+    />
+  </div>
+  <div>
+    <h4>
+      Color changed to <code>#D72F7A</code>
+    </h4>
+    <img
+      style={{ display: 'block', maxHeight: '500px', alignSelf: 'center' }}
+      src={Image6}
+      alt="Theme affects icons and links."
+    />
+  </div>
+</div>
+<br />

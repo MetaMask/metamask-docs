@@ -1,0 +1,98 @@
+---
+title: Whitelabel
+sidebar_label: Whitelabel
+description: 'Web3Auth - Whitelabel | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import WhiteLabelShowcase from '../../_common/_whitelabel_showcase.mdx'
+import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
+
+Embedded Wallets supports whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
+
+- **UI elements:** Customize the appearance of modals and components
+- **Branding:** Apply your brand colors, logos, and themes
+- **Translations:** Localize the interface for your users
+
+<WhitelabelingNote />
+
+<GrowthPlanNote />
+
+## Customizing the Web3Auth login screens
+
+For defining custom UI, branding, and translations for your brand during Embedded Wallets instantiation, you just need to specify an additional parameter within the `Web3AuthOptions` object called `whiteLabel`. This parameter takes object called `WhiteLabelData`.
+
+### `WhiteLabelData`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `appName?` | Display name for the app in the UI. |
+| `logoLight?` | App logo to be used in dark mode. It accepts URL as a string. |
+| `logoDark?` | App logo to be used in light mode. It accepts URL as a string. |
+| `defaultLanguage?` | Language which will be used by Web3Auth, app will use browser language if not specified. Default language is `Language.EN`. Checkout `Language` for supported languages. |
+| `mode?` | Theme mode for the login modal. Choose between `ThemeModes.AUTO`, `ThemeModes.LIGHT` or `ThemeModes.DARK` background modes. Default value is `ThemeModes.AUTO`. |
+| `theme?` | Used to customize the theme of the login modal. It accepts `HashMap` as a value. |
+| `appUrl?` | URL to be used in the modal. It accepts URL as a string. |
+| `useLogoLoader?` | Use logo loader. If `logoDark` and `logoLight` are null, the default Web3Auth logo will be used for the loader. Default value is false. |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```kotlin
+data class WhiteLabelData(
+    private var appName: String? = null,
+    private var appUrl: String? = null,
+    private var logoLight: String? = null,
+    private var logoDark: String? = null,
+    private var defaultLanguage: Language? = Language.EN,
+    private var mode: ThemeModes? = null,
+    private var useLogoLoader: Boolean? = false,
+    private var theme: HashMap<String, String>? = null
+)
+```
+
+</TabItem>
+</Tabs>
+
+<WhiteLabelShowcase />
+
+### Example
+
+```kotlin title="Usage"
+web3Auth = Web3Auth (
+  Web3AuthOptions (
+    context = this,
+    clientId = getString (R.string.web3auth_project_id),
+    network = Network.MAINNET,
+    redirectUrl = Uri.parse ("{YOUR_APP_PACKAGE_NAME}://auth"),
+    // Optional whitelabel object
+    // focus-start
+    whiteLabel = WhiteLabelData (
+      appName = "Web3Auth Sample App",
+      appUrl = null,
+      logoLight = null,
+      logoDark = null,
+      defaultLanguage = Language.EN, // EN, DE, JA, KO, ZH, ES, FR, PT, NL
+      ThemeModes = ThemeModes.DARK, // LIGHT, DARK, AUTO
+      useLogoLoader = true,
+      theme = hashMapOf (
+        "primary" to "#229954"
+      )
+    )
+    // focus-end
+  )
+)
+```

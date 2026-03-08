@@ -1,6 +1,7 @@
 ---
 title: Celo filter methods
 sidebar_label: Filter methods
+sidebar_key: celo-filter-methods
 description: Celo filter methods
 ---
 

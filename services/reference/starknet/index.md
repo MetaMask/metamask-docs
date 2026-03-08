@@ -19,7 +19,7 @@ that can perform more computations than on Ethereum's base layer, while maintain
 
 :::info see also
 
-See the [Starknet documentation](https://docs.starknet.io/documentation/) to find out more. You can also watch an
+See the [Starknet documentation](https://docs.starknet.io/) to find out more. You can also watch an
 [Introduction to Starknet](https://www.youtube.com/watch?v=eL9le56gcS0).
 
 :::
@@ -27,19 +27,19 @@ See the [Starknet documentation](https://docs.starknet.io/documentation/) to fin
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "/services/reference/starknet/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Starknet network."
     },
     {
-      href: "json-rpc-methods",
+      href: "/services/reference/starknet/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Starknet network."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
-      description: "Learn how to create an API key and secure and share it with your team."
+      description: "Learn how to create and secure an API key."
     }
   ]}
 />

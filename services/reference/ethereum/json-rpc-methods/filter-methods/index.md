@@ -1,6 +1,7 @@
 ---
 title: Ethereum filter methods
 sidebar_label: Filter methods
+sidebar_key: ethereum-filter-methods
 description: Ethereum filter methods
 ---
 

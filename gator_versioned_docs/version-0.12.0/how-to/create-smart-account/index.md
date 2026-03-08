@@ -13,8 +13,8 @@ Enable users to create a [smart account](../../concepts/smart-accounts.md) direc
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../../get-started/install.md)
-- [Configure the Delegation Toolkit.](../configure.md)
+- [Install and set up the Delegation Toolkit](../../get-started/install.md)
+- [Configure the Delegation Toolkit](../configure.md)
 
 ## Create a `MetaMaskSmartAccount`
 
@@ -22,7 +22,7 @@ The following is an example of creating a smart account using Viem Core SDK.
 Viem Core SDK provides low-level interfaces to offer flexibility and control over the smart
 account creation lifecycle.
 
-In the example, the Viem [`privateKeyToAccount`](https://viem.sh/docs/accounts/privateKey.html)
+In the example, the Viem [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount)
 function creates an externally owned account as the owner of the smart account.
 
 <Tabs>

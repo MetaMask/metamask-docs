@@ -23,6 +23,7 @@ based on historical data.
 **Path**:
 
 - `chainId`: `string` - ID of the chain to query.
+  See the [list of supported chain IDs](../../../get-started/endpoints.md#gas-api).
 
 ## Returns
 
@@ -33,8 +34,8 @@ less than or equal to the provided amount.
 
 ### Request
 
-Include your [API key](../../../../../developer-tools/dashboard/get-started/create-api)
-and optional [API key secret](../../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/)
+Include your [API key](/developer-tools/dashboard/get-started/create-api)
+and optional [API key secret](/developer-tools/dashboard/how-to/secure-an-api/api-key-secret)
 to authorize your account to use the APIs.
 
 :::tip
@@ -48,7 +49,7 @@ instead of using the curl authentication option (`-u`).
 ```bash
 curl -X "GET" \
   -u <YOUR-API-KEY>:<YOUR-API-KEY-SECRET> \
-  "https://gas.api.infura.io/networks/1/baseFeeHistory"
+  "https://gas.api.infura.io/networks/1/baseFeePercentile"
 ```
 
   </TabItem>
@@ -75,7 +76,7 @@ const chainId = 1;
         },
       }
     );
-    console.log("Base fee history:", data);
+    console.log("Base fee percentile:", data);
   } catch (error) {
     console.log("Server responded with:", error);
   }

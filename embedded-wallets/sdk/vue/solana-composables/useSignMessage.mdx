@@ -1,0 +1,109 @@
+---
+title: useSignMessage
+sidebar_label: useSignMessage
+description: '@web3auth/modal Vue Composable useSignMessage | Embedded Wallets'
+---
+
+Composable to sign a message using the connected Solana wallet from Web3Auth in Vue.
+
+### Import
+
+```ts
+import { useSignMessage } from '@web3auth/modal/vue/solana'
+```
+
+### Usage
+
+```html
+<script setup lang="ts">
+  import { ref } from 'vue'
+  import { useSignMessage } from '@web3auth/modal/vue/solana'
+
+  const message = ref('')
+  const { signMessage, loading, error, data } = useSignMessage()
+
+  const handleSign = async () => {
+    try {
+      await signMessage(message.value)
+      // Do something with data.value
+    } catch (e) {
+      // Handle error
+    }
+  }
+</script>
+
+<template>
+  <div>
+    <input v-model="message" placeholder="Message" />
+    <button @click="handleSign" :disabled="loading">
+      {{ loading ? "Signing..." : "Sign Message" }}
+    </button>
+    <div v-if="error">Error: {{ error.message }}</div>
+    <div v-if="data">Signature: {{ data }}</div>
+  </div>
+</template>
+```
+
+### Return Type
+
+```ts
+export type IUseSignMessage = {
+  loading: boolean
+  error: Web3AuthError | null
+  data: string | null
+  signMessage: (message: string) => Promise<string>
+}
+```
+
+#### loading
+
+`boolean`
+
+Indicates if the message signing is in progress.
+
+#### error
+
+`Web3AuthError | null`
+
+Error object if signing fails, otherwise null.
+
+#### data
+
+`string | null`
+
+The signature as a string, or null if not signed yet.
+
+#### signMessage
+
+`(message: string) => Promise<string>`
+
+Function to sign a message. Returns the signature as a string.
+
+## Example
+
+```html title="SignMessage.vue"
+<script setup lang="ts">
+  import { useSignMessage } from '@web3auth/modal/vue/solana'
+
+  const { data: hash, error, loading: isPending, signMessage } = useSignMessage()
+
+  function submit(event: Event) {
+    event.preventDefault()
+    const formData = new FormData(event.target as HTMLFormElement)
+    const message = formData.get('message')
+    signMessage(message!.toString())
+  }
+</script>
+
+<template>
+  <div>
+    <h2>Sign Message</h2>
+    <form @submit.prevent="submit">
+      <input name="message" placeholder="Message" required />
+      <button :disabled="isPending" type="submit">{{ isPending ? "Signing..." : "Sign" }}</button>
+    </form>
+    <div v-if="hash" class="hash">Message Hash: {{ hash }}</div>
+    <div v-if="error" class="error">Error: {{ error.message }}</div>
+  </div>
+</template>
+```

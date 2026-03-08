@@ -1,0 +1,227 @@
+---
+title: "getAssetsByCreator"
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js';
+
+# `getAssetsByCreator`
+
+Returns the list of assets given a creator address. <CreditCost network="solana" method="getAssetsByCreator" />
+
+## Parameters
+
+- `creatorAddress`: (string) _[required]_ - The `base58` encoded public key of the creator of the assets.
+- `onlyVerified`: (boolean) _[optional]_ - Indicates whether to retrieve only verified assets.
+- `sortBy`: (object) _[optional]_ - Sorting criteria for the results:
+  - `sortBy` - The field to sort by. Possible values: `created`, `updated`, `recent_action`, `id`, `none`.
+  - `sortDirection` - The sort direction. Possible values: `asc`, `desc`.
+- `limit`: (number) _[optional]_ - The maximum number of assets to retrieve.
+- `page`: (number) _[optional]_ - The index of the page to retrieve.
+- `before`: (string) _[optional]_ - Retrieve assets before the specified ID.
+- `after`: (string) _[optional]_ - Retrieve assets after the specified ID.
+
+## Returns
+
+`result` - An object containing the following fields:
+
+- `total` - The total number of assets matching the query.
+- `limit` - The maximum number of assets returned in this response.
+- `items` - An array of asset objects. Each asset object contains:
+  - `interface` - The interface type of the asset. Return types include: `V1_NFT`, `V1_PRINT`, `LEGACY_NFT`,
+      `V2_NFT`, `FungibleAsset`, `FungibleToken`, `Custom`, `Identity`, `Executable`, `ProgrammableNFT`.
+  - `id` - The ID of the asset.
+  - `content` - An object containing the metadata and content information:
+    - `$schema` - The schema URI.
+    - `json_uri` - The URI pointing to the asset's JSON metadata.
+    - `files` - List of associated files with `uri`, `mime`, and optional `contexts`.
+    - `metadata` - An object containing the metadata information:
+      - `name` - The name of the asset.
+      - `symbol` - The symbol of the asset.
+      - `description` - A description of the asset.
+      - `attributes` - List of attributes with `trait_type` and `value`.
+      - `token_standard` - The token standard of the asset.
+  - `ownership` - An object containing the ownership details:
+    - `owner` - The owner's public key.
+    - `frozen` - Whether the asset is frozen.
+    - `delegated` - Whether the asset is delegated.
+    - `delegate` - The delegate's public key.
+    - `ownership_model` - The ownership model, for example `single` or `token`.
+  - `compression` - An object containing the asset compression details:
+    - `eligible` - Whether the asset is eligible for compression.
+    - `compressed` - Whether the asset is compressed.
+    - `data_hash` - The data hash of the asset.
+    - `creator_hash` - The creator hash of the asset.
+    - `asset_hash` - The asset hash.
+    - `tree` - The Merkle tree ID.
+    - `seq` - The sequence number.
+    - `leaf_id` - The leaf ID.
+  - `royalty` - An object containing the royalty details:
+    - `royalty_model` - The royalty model (`creators`, `fanout`, or `single`).
+    - `target` - The target address for royalties.
+    - `percent` - The royalty percentage.
+    - `basis_points` - The royalty in basis points.
+    - `primary_sale_happened` - Whether the primary sale has occurred.
+    - `locked` - Whether the royalty is locked.
+  - `creators` - List of creators:
+    - `address` - The creator's public key.
+    - `share` - The creator's share percentage.
+    - `verified` - Whether the creator is verified.
+  - `grouping` - Grouping details:
+    - `group_key` - The group key (for example, `collection`).
+    - `group_value` - The group value.
+  - `uses` - An object containing the usage details:
+    - `use_method` - The usage method (`burn`, `multiple`, or `single`).
+    - `remaining` - The remaining uses.
+    - `total` - The total uses.
+  - `mutable` - Whether the asset is mutable.
+  - `burnt` - Whether the asset is burnt.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with your API key.
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://solana-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"jsonrpc": "2.0", "id": 1, "method": "getAssetsByCreator", "params": ["D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3", true, {"sortBy": "created", "sortDirection": "desc"}, 50, 1, null, null]}'
+  ```
+  </TabItem>
+</Tabs>
+
+### Response
+
+<Tabs>
+  <TabItem value="JSON">
+
+  ```bash
+  {
+    "jsonrpc": "2.0",
+    "result": {
+      "total": 50,
+      "limit": 50,
+      "page": 1,
+      "items": [
+        {
+          "interface": "Custom",
+          "id": "H5soVfY8CD5Pcdmud6HUdW6N4GN7amE7zAxgDjWtMux6",
+          "content": {
+            "$schema": "https://schema.metaplex.com/nft1.0.json",
+            "json_uri": "https://famousfoxes.com/metadata/7616.json",
+            "files": [
+              {
+                "uri": "https://famousfoxes.com/hd/7616.png",
+                "mime": "image/png"
+              }
+            ],
+            "metadata": {
+              "attributes": [
+                {
+                  "value": "Straw",
+                  "trait_type": "Background"
+                },
+                {
+                  "value": "Hoodie Light",
+                  "trait_type": "Outfit"
+                },
+                {
+                  "value": "Natural",
+                  "trait_type": "Skin"
+                },
+                {
+                  "value": "Smirk",
+                  "trait_type": "Mouth"
+                },
+                {
+                  "value": "None",
+                  "trait_type": "Head"
+                },
+                {
+                  "value": "Scar",
+                  "trait_type": "Eyes"
+                }
+              ],
+              "description": "The Famous Fox Federation, an independent organization of the most fabulously famous foxes on the Blockchain.",
+              "name": "Fox #7616",
+              "symbol": "FFF"
+            },
+            "links": {
+              "external_url": "https://famousfoxes.com",
+              "image": "https://famousfoxes.com/hd/7616.png"
+            }
+          },
+          "authorities": [
+            {
+              "address": "3pMvTLUA9NzZQd4gi725p89mvND1wRNQM3C8XEv1hTdA",
+              "scopes": [
+                "full"
+              ]
+            }
+          ],
+          "compression": {
+            "eligible": false,
+            "compressed": false,
+            "data_hash": "",
+            "creator_hash": "",
+            "asset_hash": "",
+            "tree": "",
+            "seq": 0,
+            "leaf_id": 0
+          },
+          "grouping": [
+            {
+              "group_key": "collection",
+              "group_value": "BUjZjAS2vbbb65g7Z1Ca9ZRVYoJscURG5L3AkVvHP9ac"
+            }
+          ],
+          "royalty": {
+            "royalty_model": "creators",
+            "target": null,
+            "percent": 0.042,
+            "basis_points": 420,
+            "primary_sale_happened": true,
+            "locked": false
+          },
+          "creators": [
+            {
+              "address": "D3XrkNZz6wx6cofot7Zohsf2KSsu2ArngNk8VqU9cTY3",
+              "share": 0,
+              "verified": true
+            },
+            {
+              "address": "3pMvTLUA9NzZQd4gi725p89mvND1wRNQM3C8XEv1hTdA",
+              "share": 100,
+              "verified": true
+            }
+          ],
+          "ownership": {
+            "frozen": true,
+            "delegated": true,
+            "delegate": "3fn29NJqUuKJgwHKmk9n54TbaXG9DgWvLAqajxZLUi22",
+            "ownership_model": "single",
+            "owner": "3ZsZsjVDjMh6rrEdFi13TnBgh9W9vLyCYcY4yzApzrdK"
+          },
+          "supply": {
+            "print_max_supply": 0,
+            "print_current_supply": 0,
+            "edition_nonce": 254
+          },
+          "mutable": true,
+          "burnt": false
+        },
+        ...
+      ]
+    },
+    "id": 1
+  }
+  ```
+
+  </TabItem>
+</Tabs>

@@ -1,0 +1,35 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="curl">
+
+  ```bash
+  curl https://celo-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "method": "pimlico_simulateAssetChanges",
+      "id": 4337,
+      "params": [
+        {
+          "sender": "0x5a6b47F4131bf1feAFA56A05573314BcF44C9149",
+          "nonce": "0x1",
+          "callData": "0x9faf00f4d9c8df66a69fd6242d468aa8a31a439d14fc6c7af3868a06ed392233bc7e39475df25ad2b52bd5e19e1d438277207a415cb4d4ce8ad192464c55ddf1a9559ff900000000000000000000000073da77f0f2daaa88b908413495d3d0e37458212e00000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000002000000000000000000000000039946fd82c9c86c9a61bceed86fbdd284590bdd90000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000",
+          "callGasLimit": "0x0",
+          "verificationGasLimit": "0x0",
+          "preVerificationGas": "0x0",
+          "maxFeePerGas": "0x7a5cf70d5",
+          "maxPriorityFeePerGas": "0x3b9aca00",
+          "paymasterVerificationGasLimit": "0x0",
+          "paymasterPostOpGasLimit": "0x0",
+          "signature": "0xfffffffffffffffffffffffffffffff0000000000000000000000000000000007aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1c"
+        },
+        "0x0000000071727De22E5E9d8BAf0edAc6f37da032"
+      ]
+    }'
+  ```
+
+  </TabItem>
+</Tabs>

@@ -1,0 +1,34 @@
+---
+title: showCheckout
+sidebar_label: showCheckout
+description: '@web3auth/modal showCheckout Function | Embedded Wallets'
+---
+
+Function to show the cryptocurrency checkout modal, allowing users to select their local currency and specify the token to top up their wallet.
+
+:::note
+
+This is a paid feature and the minimum [pricing plan](https://web3auth.io/pricing.html) to use this SDK in a production environment is the **Scale Plan**. You can use this feature in Web3Auth Sapphire Devnet network for free.
+
+:::
+
+### Usage
+
+```ts
+await web3auth.showCheckout({
+  show: true,
+}) // Opens the TopUp modal
+```
+
+### Parameters
+
+| Name | Description |
+| --- | --- |
+| `receiveWalletAddress?` | Specifies the recipient's address. By default, it is set to the currently connected address. |
+| `tokenList?` | Specifies the tokens to display in the list. By default, all tokens are shown. Use the ticker name to specify which tokens to display, such as `[USDC, USDT, ETH]`. Please checkout the coverage details for [full list of supported networks and tokens](/embedded-wallets/features/funding#network-coverage). |
+| `fiatList?` | Specifies the available fiat currencies enabled for purchase. Use the currency acronym to define which fiat currencies to display, such as `[USD, SGD, INR, JPY]`. Please checkout the coverage details for [full list of supported currencies](/embedded-wallets/features/funding#country-and-payment-method-coverage). |
+| `show` | Determines whether the checkout UI is displayed. This can be used to programmatically control its visibility. |
+
+### Supported cryptocurrencies
+
+To checkout the supported cryptocurrencies and networks, [checkout the coverage documentation](/embedded-wallets/features/funding#fiat-on-ramp-coverage).

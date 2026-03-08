@@ -1,6 +1,7 @@
 ---
 title: Ethereum subscription methods
 sidebar_label: Subscription methods
+sidebar_key: ethereum-subscription-methods
 description: Ethereum subscription methods
 ---
 

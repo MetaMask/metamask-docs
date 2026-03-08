@@ -16,6 +16,8 @@ const sidebar = {
       items: [
         'connect/javascript-wagmi',
         'connect/javascript',
+        'connect/javascript-rainbowkit',
+        'connect/javascript-connectkit',
         'connect/javascript-dynamic',
         'connect/javascript-web3auth',
         'connect/react-native',
@@ -32,25 +34,27 @@ const sidebar = {
         'guides/handle-transactions',
         'guides/interact-with-contracts',
         'guides/use-deeplinks',
-        {
-          type: 'category',
-          label: 'Advanced',
-          collapsible: true,
-          collapsed: true,
-          items: [
-            'guides/advanced/connect-and-sign',
-            'guides/advanced/batch-requests',
-            'guides/advanced/production-readiness',
-          ],
-        },
+        'guides/batch-requests',
+        'guides/production-readiness',
       ],
     },
     {
-      type:'category',
+      type: 'category',
       label: 'Tutorials',
       collapsible: false,
       collapsed: false,
-      items: ['tutorials/create-wallet-ai-agent'],
+      items: [
+        {
+          type: "link",
+          label: "Create a wallet AI agent",
+          href: "/tutorials/create-wallet-ai-agent"
+        },
+        {
+          type: "link",
+          label: "Upgrade an EOA to a smart account",
+          href: "/tutorials/upgrade-eoa-to-smart-account"
+        },
+      ],
     },
     {
       type: 'category',
@@ -61,6 +65,7 @@ const sidebar = {
         'reference/llm-prompt',
         'reference/supported-platforms',
         'reference/sdk-options',
+        'reference/sdk-methods',
       ],
     },
   ],

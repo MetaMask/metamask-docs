@@ -1,0 +1,70 @@
+---
+title: Bundler polyfill issues - Nuxt
+image: 'img/metamaskog.jpg'
+sidebar_label: Nuxt polyfill issues
+description: 'Bundler Polyfill Issues - Nuxt | Embedded Wallets'
+---
+
+While setting up a new Web3 project from scratch, you might face bundler issues. This can occur because the core packages like `eccrypto` have dependencies which are not present within the build environment. 
+
+To rectify this, the go-to method is to add the missing modules directly into the package, and edit the bundler configuration to use those. Although this approach works, it can significantly increase bundle size, leading to slower load times and a degraded user experience. 
+
+Some libraries rely on environment-specific modules that may be available at runtime in the browser even if they are not bundled. Libraries such as Embedded Wallets’ Web3Auth take advantage of this behavior and can function correctly without bundling all modules. However, if you are using a library that does not take advantage of this , you might face issues.
+
+To avoid unnecessary overhead, include only the required polyfills, test functionality, and configure your bundler to ignore unresolved modules rather than including them in the final build.
+
+:::tip
+
+We recommend that you require certain Node polyfills to be added to your project, while testing each of its functionalities. At the same time, instruct the bundler to ignore the missing modules, and not include them in the build.
+
+:::
+
+In this guide, we provide instructions for adding polyfills in Nuxt. The steps install the missing libraries required for module resolution and then configures Nuxt so they are not bundled unless needed at runtime.
+
+## Step 1: Install the missing modules
+
+Check for the missing libraries in your build and included packages, and accordingly polyfill them. For Web3Auth, you just need to polyfill the `buffer` and `process` libraries.
+
+```bash npm2yarn
+npm install --save-dev buffer process
+```
+
+## Step 2: Create a plugin to polyfill the missing modules
+
+Create a new plugin file in the `plugins` directory of your Nuxt project. This plugin will polyfill the missing modules.
+
+```javascript title:"node.client.ts"
+// plugins/node.client.ts
+
+import { Buffer } from 'buffer'
+import process from 'process'
+
+globalThis.Buffer = Buffer
+globalThis.process = process
+
+export default defineNuxtPlugin({})
+```
+
+## Step 3: Update your `nuxt.config.js`
+
+Additional to the polyfilled modules, you need to update the `nuxt.config.js` file to define the `global` object.
+
+```tsx
+/* eslint-disable import/no-extraneous-dependencies */
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+
+// https://nuxt.com/docs/api/configuration/nuxt-config
+
+export default defineNuxtConfig({
+  devtools: { enabled: true },
+  ssr: false,
+  vite: {
+    define: {
+      global: 'globalThis',
+    },
+  },
+
+  compatibilityDate: '2024-08-08',
+})
+```

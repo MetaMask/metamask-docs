@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0x60
+- **Public RPC URL:** https://rpc.bitkubchain.io
+- **Display Name:** Bitkub Chain Mainnet
+- **Block Explorer Link:** https://www.bkcscan.com
+- **Ticker:** KUB
+- **Ticker Name:** Bitkub Coin
+
+</TabItem>
+
+<TabItem value="testnet">
+
+- **Chain ID:** 0x6545
+- **Public RPC URL:** https://rpc-testnet.bitkubchain.io
+- **Display Name:** Bitkub Chain Testnet
+- **Block Explorer Link:** https://testnet.bkcscan.com
+- **Ticker:** tKUB
+- **Ticker Name:** Test Bitkub Coin
+
+</TabItem>
+</Tabs>

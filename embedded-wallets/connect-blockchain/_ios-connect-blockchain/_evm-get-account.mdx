@@ -1,0 +1,38 @@
+Use the `EthereumAccount` class to retrieve the user's Ethereum address. This account can
+also be used to sign transactions and messages.
+
+The package doesn't provides any direct way to consume the the private key and create an account.
+Hence, we'll create an extension for the `Web3AuthState` extending the
+`EthereumSingleKeyStorageProtocol` to retrieve the private key and create an account.
+
+```swift
+import web3
+import Web3Auth
+
+extension Web3AuthState: EthereumSingleKeyStorageProtocol {
+    public func storePrivateKey(key: Data) throws {
+
+    }
+
+    public func loadPrivateKey() throws -> Data {
+        guard let data = self.privKey?.web3.hexData else {
+            throw PlaygroundError.decodingError
+        }
+
+        return data
+    }
+}
+```
+
+Once we have created the extension, we can use the Web3AuthState to create an `EthereumAccount`.
+Please note, that this assumes that the user has already logged in and the state is available.
+
+```swift
+import web3
+
+// Use your existing Web3Auth instance
+let web3authState = web3Auth.state!
+
+let account = try EthereumAccount(keyStorage: web3authState)
+let address = account.address
+```

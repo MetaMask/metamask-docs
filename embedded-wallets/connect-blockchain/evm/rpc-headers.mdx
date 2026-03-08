@@ -1,0 +1,106 @@
+---
+title: Adding API Keys to RPC Requests via HTTP Headers
+sidebar_label: API Keys in RPC Headers
+image: 'img/metamaskog.jpg'
+
+description: 'How to securely attach API keys to blockchain RPC requests | Embedded Wallets'
+---
+
+### Adding API keys in RPC headers
+
+MetaMask Embedded Wallets allows you to specify the RPC endpoint URL, but it doesn't directly provide an option to set custom HTTP headers such as API keys required by certain blockchain providers. To accommodate blockchain APIs that require authentication headers, you need to manually intercept and attach these headers to your application's outgoing RPC requests.
+
+We'll use **TRON** as an example in this guide. You can obtain your TRON API key [here](https://developers.tron.network/reference/select-network).
+
+::::note
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+::::
+
+:::tip
+
+If you're using TRON's mainnet RPC endpoint (`https://api.trongrid.io`), you may face rate limits or rejected requests unless you attach the required `TRON-PRO-API-KEY` header. This guide helps you configure that. However, if you're working on the Shasta testnet (`https://api.shasta.trongrid.io`), this step is not required.
+
+:::
+
+### Identifying the RPC host URL
+
+First, identify the hostname for your RPC provider by checking the network logs in your browser:
+
+1. Open your browser's Developer Tools (`Network` tab).
+2. Execute a blockchain-related action (for example, fetching balance).
+3. Locate the RPC request URL (for example, `https://api.trongrid.io/jsonrpc`).
+4. Note the hostname (for example, `api.trongrid.io`).
+
+### Adding headers via global `fetch` patch
+
+Create a file named `globals.js` and include the following code snippet:
+
+```jsx title="globals.js"
+;(function () {
+  if (typeof globalThis === 'undefined') {
+    if (typeof global !== 'undefined') global.globalThis = global
+    else if (typeof self !== 'undefined') self.globalThis = self
+    else if (typeof window !== 'undefined') window.globalThis = window
+    else throw new Error('Unable to locate global object')
+  }
+})()
+
+const { fetch: originalFetch } = globalThis
+
+const RPC_HEADER_MAP = {
+  'api.trongrid.io': {
+    'TRON-PRO-API-KEY': 'YOUR_TRON_API_KEY',
+  },
+  // Add other RPC hosts and headers if needed
+}
+
+globalThis.fetch = (...args) => {
+  const [resource, config = {}] = args
+  const url = new URL(resource instanceof Request ? resource.url : resource)
+  const headers = new Headers(config.headers || {})
+
+  const customHeaders = RPC_HEADER_MAP[url.hostname]
+
+  if (customHeaders) {
+    Object.entries(customHeaders).forEach(([key, value]) => {
+      headers.set(key, value)
+    })
+  }
+
+  return originalFetch(resource, { ...config, headers })
+}
+```
+
+Replace `"YOUR_TRON_API_KEY"` with the actual API key provided by your blockchain RPC provider.
+
+### Importing the patch into your application
+
+Make sure to import this file at the very beginning of your application's entry point (`index.tsx` or `main.ts`):
+
+```tsx
+import './globals' // Ensure this is the first import
+```
+
+:::warning Note
+
+Perform this operation with caution. Avoid exposing sensitive API keys within client-side applications. Ensure the API keys used here are restricted and suitable for public-facing environments.
+
+:::
+
+### Why this approach works
+
+- MetaMask Embedded Wallets SDK uses the provided RPC URL configured via the developer dashboard.
+- Blockchain SDKs like `TronWeb` internally use the global `fetch` API.
+- Our patch intercepts these fetch calls and injects necessary headers, ensuring compatibility with authenticated blockchain RPCs.
+
+:::tip
+
+**Security Recommendations:**
+
+- Always use restricted or public-safe API keys in frontend environments.
+- Enable key restrictions or usage limits wherever possible.
+- For sensitive transactions, consider routing through a secure backend server.
+
+:::

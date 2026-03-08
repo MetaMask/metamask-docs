@@ -1,5 +1,6 @@
 ---
 sidebar_label: JSON-RPC API
+sidebar_key: zksync-json-rpc-api
 ---
 
 # ZKsync Era JSON-RPC API

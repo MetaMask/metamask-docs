@@ -1,6 +1,7 @@
 ---
 title: Avalanche (C-Chain) subscription methods
 sidebar_label: Subscription methods
+sidebar_key: avalanche-c-chain-subscription-methods
 description: Avalanche (C-Chain) subscription methods
 ---
 

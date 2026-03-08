@@ -1,14 +1,14 @@
-import React from "react";
-import styles from "./badge.module.scss";
-import clsx from "clsx";
+import React from 'react'
+import styles from './badge.module.scss'
+import clsx from 'clsx'
 
-type variant = "error" | "success" | "default";
+type variant = 'error' | 'success' | 'default'
 
 interface IBadge {
-  variant?: variant;
-  label: string;
+  variant?: variant
+  label: string
 }
 
-export default function Badge({ variant = "default", label }: IBadge) {
-  return <span className={clsx(styles.badge, styles[variant])}>{label}</span>;
+export default function Badge({ variant = 'default', label }: IBadge) {
+  return <span className={clsx(styles.badge, styles[variant])}>{label}</span>
 }

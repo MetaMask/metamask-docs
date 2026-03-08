@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Sepolia Testnet", value: "sepolia" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0x2105
+- **RPC URL:** You can use our bundled RPC service from Infura, or your own choice of RPC service for production.
+- **Display Name:** Base Mainnet
+- **Block Explorer Link:** https://basescan.org
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+
+<TabItem value="sepolia">
+
+- **Chain ID:** 0x14a34
+- **Public RPC URL:** https://sepolia.base.org
+- **Display Name:** Base Sepolia Testnet
+- **Block Explorer Link:** https://sepolia.basescan.org
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+</Tabs>

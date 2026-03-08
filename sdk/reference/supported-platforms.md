@@ -1,5 +1,6 @@
 ---
 description: Supported dapp platforms for MetaMask SDK.
+keywords: [SDK, supported, platforms, desktop, mobile, dapp]
 ---
 
 # Supported platforms

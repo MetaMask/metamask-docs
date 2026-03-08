@@ -1,0 +1,88 @@
+---
+title: Launch Wallet Services
+sidebar_label: launchWalletServices
+description: 'Web3Auth Flutter SDK - launchWalletServices Function | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The `launchWalletServices` method launches the templated wallet UI in WebView. The template wallet allows the user to view their account details, tokens, and additional features to interact with connected blockchain network.
+
+## Parameters
+
+The `launchWalletServices` method takes in `ChainConfig` as a required input.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Class", value: "class" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter           | Description                                                                |
+| ------------------- | -------------------------------------------------------------------------- |
+| `chainNamespace`    | Custom chain namespace for the chain. Defaults to `ChainNamespace.eip155`. |
+| `decimals?`         | Number of decimals for the native currency. Defaults to `18`.              |
+| `blockExplorerUrl?` | URL of the block explorer for the chain.                                   |
+| `chainId`           | Chain ID of the chain.                                                     |
+| `displayName?`      | Display name for the chain.                                                |
+| `logo?`             | Logo URL for the chain.                                                    |
+| `rpcTarget`         | RPC target URL for the chain.                                              |
+| `ticker?`           | Ticker symbol for the native currency.                                     |
+| `tickerName?`       | Name of the native currency.                                               |
+
+</TabItem>
+
+<TabItem value="class">
+
+```dart
+class ChainConfig {
+  final ChainNamespace chainNamespace;
+  final int? decimals;
+  final String? blockExplorerUrl;
+  final String chainId;
+  final String? displayName;
+  final String? logo;
+  final String rpcTarget;
+  final String? ticker;
+  final String? tickerName;
+
+  ChainConfig({
+    this.chainNamespace = ChainNamespace.eip155,
+    this.decimals = 18,
+    this.blockExplorerUrl,
+    required this.chainId,
+    this.displayName,
+    this.logo,
+    required this.rpcTarget,
+    this.ticker,
+    this.tickerName,
+  });
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+```dart title="Usage"
+try {
+  // focus-start
+  await Web3AuthFlutter.launchWalletServices(
+    ChainConfig(
+      chainId: "0x1",
+      rpcTarget: "https://mainnet.infura.io/v3/$key",
+    ),
+  );
+  // focus-end
+} on UserCancelledException {
+  log("User cancelled.");
+} catch(e) {
+  log("Unknown exception occurred");
+}
+```

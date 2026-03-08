@@ -1,17 +1,17 @@
-import React from "react";
-import styles from "./table.module.scss";
-import clsx from "clsx";
+import React from 'react'
+import styles from './table.module.scss'
+import clsx from 'clsx'
 
-type TableCell = string | React.ReactElement;
+type TableCell = string | React.ReactElement
 
 interface TableRow {
-  cells: TableCell[];
+  cells: TableCell[]
 }
 
 interface ITable {
-  classes?: string;
-  thCells: TableCell[];
-  trRows?: TableRow[];
+  classes?: string
+  thCells: TableCell[]
+  trRows?: TableRow[]
 }
 
 export default function Table({ classes, thCells = [], trRows = [] }: ITable) {
@@ -42,5 +42,5 @@ export default function Table({ classes, thCells = [], trRows = [] }: ITable) {
         </table>
       </div>
     </div>
-  );
+  )
 }

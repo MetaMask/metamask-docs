@@ -18,6 +18,7 @@ blockchain network. <CreditCost network="gasApi" method="suggestedGasFees" />
 **Path**:
 
 - `chainId`: `string` - ID of the chain to query.
+  See the [list of supported chain IDs](../../../get-started/endpoints.md#gas-api).
 
 ## Returns
 
@@ -41,8 +42,8 @@ Recommended gas price details based of the level of urgency:
 
 ### Request
 
-Include your [API key](../../../../../developer-tools/dashboard/get-started/create-api)
-and optional [API key secret](../../../../../developer-tools/dashboard/how-to/secure-an-api/api-key-secret/)
+Include your [API key](/developer-tools/dashboard/get-started/create-api)
+and optional [API key secret](/developer-tools/dashboard/how-to/secure-an-api/api-key-secret)
 to authorize your account to use the APIs.
 
 :::tip

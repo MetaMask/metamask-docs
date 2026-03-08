@@ -6,7 +6,7 @@ description: Prompt a user to add or switch to an Ethereum network.
 
 In some cases, such as when [interacting with smart contracts](../../concepts/smart-contracts.md),
 your dapp must connect a user to a new network in MetaMask.
-Instead of the user [adding a new network manually](https://support.metamask.io/hc/en-us/articles/360043227612-How-to-add-a-custom-network-RPC#h_01G63GGJ83DGDRCS2ZWXM37CV5),
+Instead of the user [adding a new network manually](https://support.metamask.io/configure/networks/how-to-add-a-custom-network-rpc/#adding-a-network-manually),
 which requires them to configure RPC URLs and chain IDs, your dapp can use the
 [`wallet_addEthereumChain`](/wallet/reference/json-rpc-methods/wallet_addethereumchain) and
 [`wallet_switchEthereumChain`](/wallet/reference/json-rpc-methods/wallet_switchethereumchain) RPC methods to prompt

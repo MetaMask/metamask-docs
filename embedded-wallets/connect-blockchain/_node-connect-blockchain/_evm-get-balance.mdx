@@ -1,0 +1,7 @@
+```tsx
+const address = await result.signer.getAddress()
+const balance = ethers.formatEther(
+  await result.signer.provider.getBalance(address) // Balance is in wei
+)
+console.log('\x1b[33m%s\x1b[0m', 'Balance:', balance, 'ETH')
+```

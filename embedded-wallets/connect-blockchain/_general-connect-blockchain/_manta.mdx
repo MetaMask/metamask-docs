@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Sepolia Testnet", value: "sepolia" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0xA9
+- **Public RPC URL:** https://pacific-rpc.manta.network/http
+- **Display Name:** Manta Pacific Mainnet
+- **Block Explorer Link:** https://pacific-explorer.manta.network
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+
+<TabItem value="sepolia">
+
+- **Chain ID:** 0x34816E
+- **Public RPC URL:** https://pacific-rpc.sepolia-testnet.manta.network/http
+- **Display Name:** Manta Pacific Sepolia Testnet
+- **Block Explorer Link:** https://pacific-explorer.sepolia-testnet.manta.network
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+</Tabs>

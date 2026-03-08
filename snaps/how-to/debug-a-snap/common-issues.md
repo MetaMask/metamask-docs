@@ -94,7 +94,7 @@ Then add a postinstall script to your `package.json`:
 Now you can make changes to your dependencies inside `node_modules` and run
 `yarn patch-package package-name` to save the changes as a patch.
 This creates a `.patch` file containing your dependency patch.
-These patches can be committed to your Git repository and are replayed when you re-install your dependencies.
+These patches can be committed to your Git repository and are replayed when you reinstall your dependencies.
 
 ### Patch the use of `XMLHttpRequest`
 

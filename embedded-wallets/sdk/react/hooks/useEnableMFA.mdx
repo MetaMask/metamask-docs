@@ -1,0 +1,56 @@
+---
+title: useEnableMFA
+sidebar_label: useEnableMFA
+description: '@web3auth/modal React Hooks useEnableMFA | Embedded Wallets'
+---
+
+Hook to enable Multi-Factor Authentication (MFA) using Web3Auth.
+
+### Import
+
+```tsx
+import { useEnableMFA } from '@web3auth/modal/react'
+```
+
+### Usage
+
+```tsx
+import { useEnableMFA } from '@web3auth/modal/react'
+
+function EnableMFAButton() {
+  const { enableMFA, loading, error } = useEnableMFA()
+
+  return (
+    <div>
+      <button onClick={() => enableMFA()} disabled={loading}>
+        {loading ? 'Enabling MFA...' : 'Enable MFA'}
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Return type
+
+```tsx
+import { type IUseEnableMFA } from '@web3auth/modal/react'
+```
+
+#### `loading`
+
+`boolean`
+
+Whether the MFA enabling process is in progress.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error that occurred during the MFA enabling process.
+
+#### `enableMFA`
+
+`<T>(params?: T) => Promise<void>`
+
+Function to initiate the MFA enabling process. Accepts optional parameters depending on the MFA method or configuration required by your implementation.

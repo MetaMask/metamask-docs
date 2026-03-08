@@ -32,19 +32,19 @@ See the [official Scroll documentation](https://docs.scroll.io/en/home/) for mor
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "/services/reference/scroll/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to the Scroll network."
     },
     {
-      href: "json-rpc-methods",
+      href: "/services/reference/scroll/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with the Scroll network."
     },
     {
       href: "/developer-tools/dashboard/get-started/create-api/",
       title: "Create an API key",
-      description: "Learn how to create an API key and secure and share it with your team."
+      description: "Learn how to create and secure an API key."
     }
   ]}
 />
@@ -55,7 +55,7 @@ No personal information is sent as part of partner requests, only information ne
 
 The following partners provide access to the Scroll network:
 <!-- markdown-link-check-disable -->
-- Everstake ([Terms of Service](https://everstake.one/docs/terms-of-use.pdf), [Privacy Policy](https://everstake.one/docs/privacy-policy.pdf))
+- Everstake ([Terms of Use](https://everstake.one/terms-of-use), [Privacy Notice](https://everstake.one/privacy-notice))
 - Nodies ([Terms of Service](https://www.nodies.app/tos.txt), [Privacy Policy](https://www.nodies.app/privacy.txt))
 - Chainstack ([Terms of Service](https://chainstack.com/tos/), [Privacy Policy](https://chainstack.com/privacy/))
 <!-- markdown-link-check-enable -->

@@ -1,6 +1,7 @@
 ---
 description: Scroll debug methods.
 sidebar_label: Debug methods
+sidebar_key: scroll-debug-methods
 ---
 
 # Scroll debug methods

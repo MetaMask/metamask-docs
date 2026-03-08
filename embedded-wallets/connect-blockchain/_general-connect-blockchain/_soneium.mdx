@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Minato Testnet", value: "minato" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0x74c
+- **Public RPC URL:** https://mainnet-rpc.soneium.org
+- **Display Name:** Soneium Mainnet
+- **Block Explorer Link:** https://mainnet-explorer.soneium.org
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+
+<TabItem value="minato">
+
+- **Chain ID:** 0x79a
+- **Public RPC URL:** https://testnet-rpc.soneium.org
+- **Display Name:** Soneium Minato Testnet
+- **Block Explorer Link:** https://testnet-explorer.soneium.org
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+</Tabs>

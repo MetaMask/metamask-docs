@@ -1,11 +1,9 @@
 export function onRouteDidUpdate({ location, previousLocation }) {
   if (!previousLocation && location.hash) {
-    return;
+    return
   }
-  if (previousLocation && 
-      location.pathname === previousLocation.pathname && 
-      location.hash) {
-    return;
+  if (previousLocation && location.pathname === previousLocation.pathname && location.hash) {
+    return
   }
   function handleScroll() {
     const items = document.querySelectorAll('.menu__link--active')

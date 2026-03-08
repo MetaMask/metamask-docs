@@ -25,9 +25,9 @@ If a user operation is sent from a smart contract account that has not been depl
 
 ## Prerequisites
 
-- [Install and set up the Delegation Toolkit.](../get-started/install.md)
-- [Configure the Delegation Toolkit.](configure.md)
-- [Create a smart account.](create-smart-account/index.md)
+- [Install and set up the Delegation Toolkit](../get-started/install.md)
+- [Configure the Delegation Toolkit](configure.md)
+- [Create a smart account](create-smart-account/index.md)
 
 ## Send a user operation
 
@@ -94,7 +94,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
 
 export const bundlerClient = createBundlerClient({
   client: publicClient,
-  transport: http("https://public.pimlico.io/v2/1/rpc")
+  transport: http("https://public.pimlico.io/v2/11155111/rpc")
 });
 ```
 

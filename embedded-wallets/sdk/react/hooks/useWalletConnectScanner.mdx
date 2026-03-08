@@ -1,0 +1,56 @@
+---
+title: useWalletConnectScanner
+sidebar_label: useWalletConnectScanner
+description: '@web3auth/modal React Hooks useWalletConnectScanner | Embedded Wallets'
+---
+
+Hook to show the WalletConnect QR scanner using the Wallet Services plugin.
+
+### Import
+
+```tsx
+import { useWalletConnectScanner } from '@web3auth/modal/react'
+```
+
+### Usage
+
+```tsx
+import { useWalletConnectScanner } from '@web3auth/modal/react'
+
+function WalletConnectScannerButton() {
+  const { showWalletConnectScanner, loading, error } = useWalletConnectScanner()
+
+  return (
+    <div>
+      <button onClick={() => showWalletConnectScanner()} disabled={loading}>
+        {loading ? 'Opening Scanner...' : 'Show WalletConnect Scanner'}
+      </button>
+      {error && <div>{error.message}</div>}
+    </div>
+  )
+}
+```
+
+### Return type
+
+```tsx
+import { type IUseWalletConnectScanner } from '@web3auth/modal/react'
+```
+
+#### `loading`
+
+`boolean`
+
+Whether the scanner opening process is in progress.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error that occurred during the scanner opening process.
+
+#### `showWalletConnectScanner`
+
+`(showWalletConnectScannerParams?: BaseEmbedControllerState["showWalletConnect"]) => Promise<void>`
+
+Function to show the WalletConnect QR scanner. Accepts optional parameters for customizing the scanner behavior.

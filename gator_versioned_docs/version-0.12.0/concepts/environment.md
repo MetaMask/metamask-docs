@@ -87,7 +87,7 @@ const environment: DeleGatorEnvironment = getDelegatorEnvironment(11155111);
 
 You can deploy the contracts using any method, but the toolkit provides a convenient [`deployDelegatorEnvironment`](../reference/api/delegation.md#deploydelegatorenvironment) function. This function simplifies deploying the Delegation Framework contracts to your desired EVM chain.
 
-This function requires a Viem [Public Client](https://viem.sh/docs/clients/public.html), [Wallet Client](https://viem.sh/docs/clients/wallet.html), and [Chain](https://viem.sh/docs/glossary/types#chain)
+This function requires a Viem [Public Client](https://viem.sh/docs/clients/public), [Wallet Client](https://viem.sh/docs/clients/wallet), and [Chain](https://viem.sh/docs/glossary/types#chain)
 to deploy the contracts and resolve the `DeleGatorEnvironment`. 
 
 Your wallet must have sufficient native token balance to deploy the contracts.

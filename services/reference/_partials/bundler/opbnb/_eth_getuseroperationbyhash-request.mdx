@@ -1,0 +1,20 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://opbnb-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "eth_getUserOperationByHash",
+    "params": ["0xa5a579c6fd86c2d8a4d27f5bb22796614d3a31bbccaba8f3019ec001e001b95f"],
+    "id": 1
+  }'
+```
+
+  </TabItem>
+</Tabs>

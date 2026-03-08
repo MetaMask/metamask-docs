@@ -2,6 +2,7 @@
 title: Palm JSON-RPC API
 description: Supported standard Ethereum methods on Palm network.
 sidebar_label: JSON-RPC API
+sidebar_key: palm-json-rpc-api
 ---
 
 # Palm JSON-RPC API

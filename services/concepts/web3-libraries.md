@@ -35,6 +35,7 @@ Some popular Ethereum-compatible Web3 libraries include (but are not limited to)
 | PHP        | [Web3.php](https://github.com/web3p/web3.php)                                                       |
 | Java       | [Web3j](https://docs.web3j.io/)                                                                     |
 | Ruby       | [Ethereum Ruby library](https://github.com/EthWorks/ethereum.rb)                                    |
+| Viem       | [Viem](https://viem.sh/)                                                                            |
 
 :::info How to access the blockchain
 
@@ -47,6 +48,3 @@ blockchain using some of these libraries.
 
 Web3.js and Ethers.js are two popular JavaScript Web3 libraries that enable frontend apps to interact with the Ethereum
 blockchain. They have similar functionality, with Web3.js currently being the most popular.
-
-Refer to this [Web3.js vs. Ethers.js article](https://blog.infura.io/post/ethereum-javascript-libraries-web3js-ethersjs-nov2021)
-which highlights the differences between the libraries to help you decide which library to use.

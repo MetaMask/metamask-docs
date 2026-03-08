@@ -103,14 +103,35 @@
   }
 }
 
-.button {
+.buttons-container {
+  display: flex;
+  gap: 1.6rem;
   margin-top: 2.7rem;
+  flex-wrap: wrap;
 
   @include bp('tablet') {
     margin-top: 3rem;
+    gap: 2rem;
   }
 
   @include bp('desktop') {
     margin-top: 3.2rem;
+  }
+}
+
+.button {
+  &:global(.primary) {
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+    border-radius: 4px;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
   }
 }

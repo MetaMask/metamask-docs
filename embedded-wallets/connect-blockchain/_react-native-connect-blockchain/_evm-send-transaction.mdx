@@ -1,0 +1,19 @@
+```tsx
+const ethersProvider = ethers.getDefaultProvider(providerUrl);
+const wallet = new ethers.Wallet(key, ethersProvider);
+
+const destination = "0x40e1c367Eca34250cAF1bc8330E9EddfD403fC56";
+
+// Convert 1 ether to wei
+const amount = ethers.utils.parseEther("0.001");
+
+// Submit transaction to the blockchain
+//focus-start
+const tx = await wallet.sendTransaction({
+  to: destination,
+  value: amount,
+  maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
+  maxFeePerGas: "6000000000000", // Max fee per gas
+});
+//focus-end
+```

@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0x1e
+- **Public RPC URL:** https://public-node.rsk.co
+- **Display Name:** Rootstock Mainnet
+- **Block Explorer Link:** https://explorer.rootstock.io
+- **Ticker:** RBTC
+- **Ticker Name:** Rootstock Bitcoin
+
+</TabItem>
+
+<TabItem value="testnet">
+
+- **Chain ID:** 0x1f
+- **Public RPC URL:** https://public-node.testnet.rsk.co
+- **Display Name:** Rootstock Testnet
+- **Block Explorer Link:** https://explorer.testnet.rootstock.io
+- **Ticker:** tRBTC
+- **Ticker Name:** Test Rootstock Bitcoin
+
+</TabItem>
+</Tabs>

@@ -1,5 +1,6 @@
 ---
 sidebar_label: JSON-RPC API
+sidebar_key: scroll-json-rpc-api
 ---
 
 # Scroll JSON-RPC API

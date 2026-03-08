@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Testnet", value: "testnet" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0x2eb
+- **Public RPC URL:** https://mainnet.evm.nodes.onflow.org
+- **Display Name:** Flow EVM Mainnet
+- **Block Explorer Link:** https://evm.flowscan.io
+- **Ticker:** FLOW
+- **Ticker Name:** Flow
+
+</TabItem>
+
+<TabItem value="testnet">
+
+- **Chain ID:** 0x221
+- **Public RPC URL:** https://testnet.evm.nodes.onflow.org
+- **Display Name:** Flow EVM Testnet
+- **Block Explorer Link:** https://evm-testnet.flowscan.io
+- **Ticker:** FLOW
+- **Ticker Name:** Flow
+
+</TabItem>
+</Tabs>

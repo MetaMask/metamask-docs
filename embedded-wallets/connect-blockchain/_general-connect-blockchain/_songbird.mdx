@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Coston Testnet", value: "coston" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0x13
+- **Public RPC URL:** https://songbird-api.flare.network/ext/C/rpc
+- **Display Name:** Songbird Canary Network
+- **Block Explorer Link:** https://songbird-explorer.flare.network
+- **Ticker:** SGB
+- **Ticker Name:** Songbird
+
+</TabItem>
+
+<TabItem value="coston">
+
+- **Chain ID:** 0x10
+- **Public RPC URL:** https://coston-api.flare.network/ext/C/rpc
+- **Display Name:** Songbird Coston Testnet
+- **Block Explorer Link:** https://coston-explorer.flare.network
+- **Ticker:** CFLR
+- **Ticker Name:** Coston Flare
+
+</TabItem>
+</Tabs>

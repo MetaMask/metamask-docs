@@ -144,8 +144,8 @@ if __name__ == "__main__":
 
 Execute the program using the following:
 
-```
-Python python3 subscribe.py
+```python
+python3 subscribe.py
 ```
 
 You should now see the terminal fill up with Ethereum transfers:

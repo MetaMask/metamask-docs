@@ -1,0 +1,52 @@
+```ts
+import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
+// focus-start
+import {
+  AccountAbstractionProvider,
+  SafeSmartAccount,
+} from "@web3auth/account-abstraction-provider";
+// focus-end
+import { Web3Auth } from "@web3auth/modal";
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: "0xaa36a7",
+  rpcTarget: "https://rpc.sepolia.org",
+  displayName: "Ethereum Sepolia Testnet",
+  blockExplorerUrl: "https://sepolia.etherscan.io",
+  ticker: "ETH",
+  tickerName: "Ethereum",
+  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+};
+
+// focus-start
+const accountAbstractionProvider = new AccountAbstractionProvider({
+  config: {
+    chainConfig,
+    bundlerConfig: {
+      // Get the pimlico API Key from dashboard.pimlico.io
+      url: `https://api.pimlico.io/v2/11155111/rpc?apikey=${pimlicoAPIKey}`,
+    },
+    smartAccountInit: new SafeSmartAccount(),
+  }
+});
+// focus-end
+
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: { chainConfig },
+});
+
+
+const web3auth = new Web3Auth({
+  clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  privateKeyProvider,
+  // focus-start
+  accountAbstractionProvider
+  // This will allow you to use EthereumPrivateKeyProvider for
+  // external wallets, while use the AccountAbstractionProvider
+  // for Web3Auth embedded wallets.
+  useAAWithExternalWallet: false,
+  // focus-end
+});
+```

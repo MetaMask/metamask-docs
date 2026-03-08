@@ -166,7 +166,7 @@ You can search for the transaction on a block explorer such as [Sepolia Ethersca
 To change default values, update the `signer.sendTransaction` method to include an `estimateGas` result:
 
 ```javascript title="eip1559_tx.js"
-const limit = provider.estimateGas({
+const limit = await provider.estimateGas({
   from: signer.address,
   to: "<to_address_goes_here>",
   value: ethers.utils.parseUnits("0.001", "ether"),
@@ -177,8 +177,8 @@ const tx = await signer.sendTransaction({
   to: "<to_address_goes_here>",
   value: ethers.utils.parseUnits("0.001", "ether"),
   gasLimit: limit,
-  nonce: signer.getTransactionCount(),
+  nonce: await signer.getTransactionCount(),
   maxPriorityFeePerGas: ethers.utils.parseUnits("2", "gwei"),
-  chainId: 3,
+  chainId: 11155111,
 });
 ```

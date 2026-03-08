@@ -1,6 +1,7 @@
 ---
 title: Avalanche (C-Chain) filter methods
 sidebar_label: Filter methods
+sidebar_key: avalanche-c-chain-filter-methods
 description: Avalanche (C-Chain) filter methods
 ---
 

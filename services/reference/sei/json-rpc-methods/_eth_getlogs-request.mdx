@@ -1,0 +1,15 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://sei-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "eth_getLogs", "params": [{"address": "0x6cAfAD6AAf5F3EAB6a7a31472A8B577d5eCF8777", "blockhash": "0x39f66b313cec316249c2933702bbca771d85845896d794008e482ca63bc045b1"}], "id":1}'
+```
+
+  </TabItem>
+</Tabs>

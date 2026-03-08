@@ -1,6 +1,8 @@
 ---
 title: Linea filter methods
 sidebar_label: Filter methods
+sidebar_key: linea-filter-methods
+description: Linea filter methods
 ---
 
 # Linea filter methods

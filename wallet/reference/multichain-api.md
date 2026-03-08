@@ -7,12 +7,13 @@ import TabItem from "@theme/TabItem";
 
 # Multichain API
 
-:::tip Experimental
-The Multichain API is an experimental feature.
+:::tip Notes
+- The Multichain API is an experimental feature.
+- MetaMask implements an older version of the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md) Multichain API specification.
 :::
 
 Dapps can call Multichain API [methods](#methods) to create and manage
-[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) multichain connections with MetaMask.
+[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md) multichain connections with MetaMask.
 The API also provides [events](#events) that wallets can send to dapps to notify them of onchain or connection changes.
 
 :::note See also
@@ -26,11 +27,11 @@ The API also provides [events](#events) that wallets can send to dapps to notify
 
 Creates a multichain connection with a wallet, authorizing that wallet with the specified set of scopes
 and properties.
-This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
+This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md).
 
 #### Parameters
 
-- `optionalScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet can support in order to be used with this dapp.
+- `optionalScopes`: `object` - (Optional) [CAIP-217](https://standards.chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet can support in order to be used with this dapp.
   If scopes are specified, only the following properties are supported:
   - `references`: `array` - (Optional) A list of references to specific blockchains for the namespace of this scope.
     This property can only be used if the scope namespace does not already specify the blockchain.
@@ -45,7 +46,7 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
     When supplied, these accounts are preselected by default in the account selection process.
     Dapps typically omit this property for the user to select their own accounts.
 - `sessionProperties`: `object` - (Optional) Properties that the wallet can use to determine if the connection is valid.
-- `requiredScopes`: `object` - (Optional) [CAIP-217](https://chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet must support to be compatible with the dapp.
+- `requiredScopes`: `object` - (Optional) [CAIP-217](https://standards.chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet must support to be compatible with the dapp.
   We don't recommend using `requiredScopes` with MetaMask.
   MetaMask treats all `requiredScopes` as `optionalScopes`.
 

@@ -1,5 +1,6 @@
 ---
 sidebar_label: JSON-RPC API
+sidebar_key: bnb-smart-chain-json-rpc-api
 ---
 
 # BNB Smart Chain JSON-RPC API

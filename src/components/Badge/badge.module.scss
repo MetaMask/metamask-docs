@@ -8,7 +8,7 @@
   --badge-error-bg-color: rgba(215, 56, 71, 0.1);
 }
 
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --badge-default-color: #bbc0c5;
   --badge-default-bg-color: #24272a;
   --badge-default-border-color: #bbc0c5;
@@ -30,7 +30,7 @@
   padding: 2px 8px;
   color: var(--badge-default-color);
   background-color: var(--badge-default-bg-color);
-  text-transform: capitalize;
+  text-transform: none;
 
   &.success {
     color: var(--badge-success-color);

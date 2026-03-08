@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="testnet"
+  values={[
+    { label: "Testnet", value: "testnet" },
+    { label: "Holesky", value: "holesky" },
+  ]}
+>
+<TabItem value="testnet">
+
+- **Chain ID:** 0xa96
+- **Public RPC URL:** https://rpc-testnet.morphl2.io
+- **Display Name:** Morph Testnet
+- **Block Explorer Link:** https://explorer-testnet.morphl2.io
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+
+<TabItem value="holesky">
+
+- **Chain ID:** 0xafa
+- **Public RPC URL:** https://rpc-holesky.morphl2.io
+- **Display Name:** Morph Holesky
+- **Block Explorer Link:** https://explorer-holesky.morphl2.io
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+</Tabs>

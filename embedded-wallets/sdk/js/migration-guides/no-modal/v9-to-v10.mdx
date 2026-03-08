@@ -1,0 +1,211 @@
+---
+title: Migrating to the Web3Auth PnP Web SDK v10 from v9 (No-Modal)
+description:
+  Learn how to migrate from Web3Auth No-Modal v9 to the unified v10 SDK with connectTo functionality
+  for custom UI implementations.
+sidebar_label: v9 to v10
+---
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+# Web3Auth no-modal v9 to v10 migration guide
+
+:::info Recommended: Switch to Modal SDK
+
+While the `@web3auth/no-modal` package continues to receive updates, it now primarily serves as an
+internal SDK to power the modal SDK. **We strongly recommend migrating to the `@web3auth/modal`
+package** for the best developer experience.
+
+The Modal SDK offers everything you need: pre-built UI components for quick integration AND full
+custom UI control via `connectTo` for advanced use cases. Plus, you'll get priority documentation,
+examples, and community support.
+
+:::
+
+This guide will help you upgrade your Web3Auth No-Modal SDK integration from v9 to the **unified
+Web3Auth PnP Web SDK v10**, which consolidates both modal and no-modal functionality into a single
+package.
+
+## Why migrate to v10?
+
+Web3Auth v10 unifies the modal and no-modal SDKs into a single powerful package. Whether you want a
+pre-built modal UI or a custom implementation, you now use the same `@web3auth/modal` package with
+`connectTo` for no-modal-like functionality.
+
+Key improvements from v9 no-modal to v10:
+
+- **Unified SDK package:** Single `@web3auth/modal` package replaces `@web3auth/no-modal`
+- **Dashboard-centric Configuration:** Chain configurations managed via Web3Auth Developer Dashboard
+- **Simplified integration:** No more manual adapter registration and configuration
+- **Enhanced developer experience:** Cleaner API with better TypeScript support
+- **Custom UI support:** Use `connectTo` for seamless custom UI implementations
+
+## Installation
+
+Update to the unified v10 SDK package:
+
+```bash npm2yarn
+npm uninstall @web3auth/no-modal @web3auth/auth-adapter @web3auth/wallet-services-plugin
+npm install @web3auth/modal
+```
+
+For custom blockchain configurations:
+
+```bash npm2yarn
+npm install @web3auth/ethereum-provider
+```
+
+## Breaking changes from v9 to v10
+
+### 1. Package migration: no-modal → Modal
+
+**v9 used separate no-modal package:**
+
+```typescript
+// remove-start
+import { Web3AuthNoModal } from '@web3auth/no-modal'
+import { AuthAdapter } from '@web3auth/auth-adapter'
+import { WalletServicesPlugin } from '@web3auth/wallet-services-plugin'
+// remove-end
+```
+
+**v10 uses unified modal package:**
+
+```typescript
+// add-start
+import { Web3Auth } from '@web3auth/modal'
+// Most functionality is now built-in - no separate adapters needed for basic use cases
+// add-end
+```
+
+### 2. Class name change: web3authnomodal → Web3Auth
+
+**v9 initialization:**
+
+```typescript
+// remove-start
+import { Web3AuthNoModal } from '@web3auth/no-modal'
+
+const web3auth = new Web3AuthNoModal({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  chainConfig,
+  privateKeyProvider,
+})
+// remove-end
+```
+
+**v10 initialization:**
+
+```typescript
+// add-start
+import { Web3Auth } from '@web3auth/modal'
+
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // Chain configuration managed via Web3Auth Developer Dashboard
+})
+// add-end
+```
+
+### 3. No-modal functionality: direct connection → connectto
+
+**v9 approach for custom UI:**
+
+```typescript
+// remove-start
+const authAdapter = new AuthAdapter({
+  adapterSettings: {
+    loginConfig: {
+      google: {
+        verifier: 'YOUR_GOOGLE_VERIFIER_NAME',
+        typeOfLogin: 'google',
+        clientId: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+      },
+    },
+  },
+})
+
+web3auth.configureAdapter(authAdapter)
+await web3auth.init()
+
+// Custom UI - connect directly
+await web3auth.connectTo('auth', {
+  loginProvider: 'google',
+})
+// remove-end
+```
+
+**v10 approach for custom UI:**
+
+```typescript
+// add-start
+await web3auth.init()
+
+// Custom UI - use connectTo
+await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.GOOGLE,
+})
+
+// Or with custom verifiers/connections
+await web3auth.connectTo(WALLET_CONNECTORS.AUTH, {
+  authConnection: AUTH_CONNECTION.GOOGLE,
+  authConnectionId: 'YOUR_GOOGLE_AUTH_CONNECTION_ID',
+})
+// add-end
+```
+
+### 4. Chain configuration centralization
+
+**v9 required manual chain and provider configuration:**
+
+```typescript
+// remove-start
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
+
+const chainConfig = {
+  chainNamespace: 'eip155',
+  chainId: '0x1',
+  rpcTarget: 'https://rpc.ethereum.org',
+  displayName: 'Ethereum Mainnet',
+  blockExplorer: 'https://etherscan.io/',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+}
+
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: { chainConfig },
+})
+
+const web3auth = new Web3AuthNoModal({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  privateKeyProvider,
+})
+// remove-end
+```
+
+**v10 handles standard chains automatically via dashboard:**
+
+```typescript
+// add-start
+const web3auth = new Web3Auth({
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  // Chain configuration managed via Web3Auth Developer Dashboard
+})
+// add-end
+```
+
+Configure your chains on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/) instead
+of in code.
+
+## Next steps
+
+1. Update your package dependencies
+2. Migrate your initialization code to use `Web3Auth` from `@web3auth/modal`
+3. Replace direct adapter methods with `connectTo` calls
+4. Configure your chains and branding on the Embedded Wallets dashboard
+5. Test your custom UI implementation with the new `connectTo` API

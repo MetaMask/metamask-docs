@@ -1,0 +1,27 @@
+```tsx title="App.tsx"
+const { getIdTokenClaims, loginWithPopup } = useAuth0();
+
+const loginWithAuth0 = async () => {
+  try {
+    await loginWithPopup();
+
+    const idToken = (await getIdTokenClaims())?.__raw.toString();
+    if (!idToken) {
+      throw new Error("No id token found");
+    }
+
+    // focus-start
+    await connectTo(WALLET_CONNECTORS.AUTH, {
+      authConnectionId: "w3a-auth0-demo",
+      authConnection: AUTH_CONNECTION.CUSTOM,
+      idToken,
+      extraLoginOptions: {
+        isUserIdCaseSensitive: false,
+      },
+    });
+    // focus-end
+  } catch (err) {
+    console.error(err);
+  }
+};
+```

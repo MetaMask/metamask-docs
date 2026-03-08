@@ -1,0 +1,32 @@
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet" },
+    { label: "Sepolia Testnet", value: "sepolia" },
+  ]}
+>
+<TabItem value="mainnet">
+
+- **Chain ID:** 0x82
+- **Public RPC URL:** https://mainnet.unichain.org
+- **Display Name:** Unichain Mainnet
+- **Block Explorer Link:** https://uniscan.xyz
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+
+<TabItem value="sepolia">
+
+- **Chain ID:** 0x515
+- **Public RPC URL:** https://sepolia.unichain.org
+- **Display Name:** Unichain Sepolia Testnet
+- **Block Explorer Link:** https://sepolia.uniscan.xyz
+- **Ticker:** ETH
+- **Ticker Name:** Ethereum
+
+</TabItem>
+</Tabs>

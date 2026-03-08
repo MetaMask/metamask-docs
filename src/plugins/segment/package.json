@@ -4,4 +4,4 @@
   "description": "Custom Segment analytics plugin for Docusaurus",
   "main": "index.ts",
   "type": "module"
-} 
+}

@@ -1,6 +1,7 @@
 ---
 title: opBNB subscription methods
 sidebar_label: Subscription methods
+sidebar_key: opbnb-subscription-methods
 description: opBNB subscription methods
 ---
 

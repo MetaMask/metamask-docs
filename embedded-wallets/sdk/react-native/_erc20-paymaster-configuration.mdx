@@ -1,0 +1,49 @@
+import TabItem from "@theme/TabItem";
+import Tabs from "@theme/Tabs";
+
+When using an ERC-20 paymaster, ensure you include the approval transaction, as Web3Auth does not
+handle the approval internally.
+
+For Pimlico, you can specify the token you want to use in the paymasterContext. If you want to set
+up sponsorship policies, you can define those in the paymasterContext as well.
+[Checkout the supported tokens for ERC-20 paymaster on Pimlico](https://docs.pimlico.io/infra/paymaster/erc20-paymaster/supported-tokens).
+
+```ts
+import {
+  AccountAbstractionProvider,
+  SafeSmartAccount,
+} from "@web3auth/account-abstraction-provider";
+
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: "0xaa36a7",
+  rpcTarget: "https://rpc.sepolia.org",
+  displayName: "Ethereum Sepolia Testnet",
+  blockExplorerUrl: "https://sepolia.etherscan.io",
+  ticker: "ETH",
+  tickerName: "Ethereum",
+  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+};
+
+const accountAbstractionProvider = new AccountAbstractionProvider({
+  config: {
+    chainConfig,
+    bundlerConfig: {
+      // Get the pimlico API Key from dashboard.pimlico.io
+      url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
+      // focus-start
+      paymasterContext: {
+        token: "SUPPORTED_TOKEN_CONTRACT_ADDRESS",
+      },
+      // focus-end
+    },
+    smartAccountInit: new SafeSmartAccount(),
+    // focus-start
+    paymasterConfig: {
+      // Get the pimlico API Key from dashboard.pimlico.io
+      url: `https://api.pimlico.io/v2/${chainId}/rpc?apikey=${pimlicoAPIKey}`,
+    },
+    // focus-end
+  },
+});
+```

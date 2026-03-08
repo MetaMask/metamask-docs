@@ -1,0 +1,48 @@
+---
+title: Using Unity SDK
+sidebar_label: Overview
+description: 'Web3Auth Unity SDK Functions | Embedded Wallets'
+---
+
+Embedded Wallets provides a comprehensive set of functions to handle authentication, user management, and blockchain interactions in your Unity applications. These functions allow you to implement features like user login, multi-factor authentication, private key retrieval, and Wallet Services with minimal effort. Each function is designed to handle a specific aspect of Embedded Wallets' functionality, making it easy to integrate into your Unity projects.
+
+## List of functions
+
+:::tip
+
+For detailed usage, configuration options, and code examples, refer to the dedicated documentation page for each function.
+
+:::
+
+### Authentication functions
+
+| Function Name 			 | Description                                        |
+| -------------------------- | -------------------------------------------------- |
+| [`login()`](./login.mdx)   | Logs the user in with the selected login provider. |
+| [`logout()`](./logout.mdx) | Logs the user out from the current session.        |
+
+### User management functions
+
+| Function Name 					   | Description                                     |
+| ------------------------------------ | ----------------------------------------------- |
+| [`getUserInfo()`](./getUserInfo.mdx) | Retrieves the authenticated user's information. |
+
+### Private key functions
+
+| Function Name 								   | Description 								|
+| ------------------------------------------------ | ------------------------------------------ |
+| [`getPrivKey()`](./getPrivKey.mdx) 			   | Retrieve the user's secp256k1 private key for EVM-compatible chains. |
+| [`getEd25519PrivKey()`](./getEd25519PrivKey.mdx) | Retrieve the user's ed25519 private key for chains like Solana, Near, Algorand. |
+
+### Security functions
+
+| Function Name 				   | Description                                       |
+| -------------------------------- | ------------------------------------------------- |
+| [`enableMFA()`](./enableMFA.mdx) | Enables Multi-Factor Authentication for the user. |
+
+### Wallet Services functions
+
+| Function Name          							  | Description                                |
+| ------------------------------------------------------ | --------------------------------------- |
+| [`launchWalletServices()`](./launchWalletServices.mdx) | Launches the templated wallet UI in WebView. |
+| [`request()`](./request.mdx)         				     | Opens templated transaction screens for signing transactions. |

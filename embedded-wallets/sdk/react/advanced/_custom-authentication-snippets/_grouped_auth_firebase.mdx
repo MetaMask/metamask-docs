@@ -1,0 +1,33 @@
+```tsx title="App.tsx"
+const loginWithGoogle = async () => {
+  // focus-start
+  await connectTo(WALLET_CONNECTORS.AUTH, {
+    groupedAuthConnectionId: "aggregate-sapphire",
+    authConnectionId: "w3a-google",
+    authConnection: AUTH_CONNECTION.GOOGLE,
+  });
+  // focus-end
+};
+
+const loginWithFirebaseGithub = async () => {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const githubProvider = new GithubAuthProvider();
+
+  const result = await signInWithPopup(auth, githubProvider);
+
+  const idToken = await result.user.getIdToken(true);
+
+  // focus-start
+  connectTo(WALLET_CONNECTORS.AUTH, {
+    groupedAuthConnectionId: "aggregate-sapphire",
+    authConnectionId: "w3a-firebase",
+    authConnection: AUTH_CONNECTION.CUSTOM,
+    idToken,
+    extraLoginOptions: {
+      isUserIdCaseSensitive: false,
+    },
+  });
+  // focus-end
+};
+```

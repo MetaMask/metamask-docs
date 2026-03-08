@@ -1,0 +1,27 @@
+To interact with any smart contract, you need the contract address and the ABI of the contract. The
+ABI of the contract helps encode the function name and its parameters. Consideri ABI as an outline
+of the contract, which provides contract specifications.
+
+We'll create a `DeployedContract` instance with the contract address and ABI. Once created, we can
+use it to call the contract function. To interact with the contract, we'll use the `call` method
+form the Web3Client.
+
+In this sample, we'll read the message from the contract we deployed in the previous step.
+
+```dart
+import 'package:web3dart/web3dart.dart';
+
+// Use the client, address, contractAbi and credentials from previous code snippets
+final contract = DeployedContract(
+    ContractAbi.fromJson(contractAbi, ''),
+    "ADDRESS_OF_DEPLOYED_CONTRACT_IN_HEX",
+);
+
+final messageFunction = contract.function('message');
+
+final message = await client.call(
+    contract: contract,
+    function: messageFunction,
+    params: [],
+);
+```

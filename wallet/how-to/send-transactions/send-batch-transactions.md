@@ -14,13 +14,13 @@ You can send and manage batch transactions in MetaMask, using the methods specif
 ## About atomic batch transactions
 
 An atomic batch transaction is a group of transactions that are executed together as a single unit.
-When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their externally owned account (EOA) to a [MetaMask smart account](/delegation-toolkit/concepts/smart-accounts).
+When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit/concepts/smart-accounts).
 If the user accepts, MetaMask proceeds to upgrade the account and process the request as a single atomic transaction as specified by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
 
 :::note MetaMask Smart Accounts
 MetaMask Smart Accounts are [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) smart contract accounts that support programmable account behavior and advanced features such as multi-signature approvals, transaction batching, and custom security policies.
 
-See the [Delegation Toolkit documentation](/delegation-toolkit) for more information about smart accounts and their capabilities.
+See the [Smart Accounts Kit documentation](/smart-accounts-kit) for more information about smart accounts and their capabilities.
 :::
 
 The key benefits of atomic batch transactions include:
@@ -90,13 +90,17 @@ If you don't specify any chain IDs in `wallet_getCapabilities`, MetaMask will re
 <details>
 <summary>Supported networks</summary>
 <div>
-MetaMask currently supports atomic batch transactions on the following networks:
+MetaMask's support for atomic batch transactions includes the following networks:
 
 - Ethereum Mainnet and Sepolia
 - Gnosis Mainnet and Chiado
 - BNB Smart Chain Mainnet and Testnet
-- OP Mainnet
+- OP Mainnet and Sepolia
 - Base Mainnet and Sepolia
+- Polygon Mainnet and Amoy
+- Arbitrum Mainnet, Sepolia, and Nova
+- Unichain Mainnet and Sepolia
+- Berachain Mainnet and Bepolia
 
 MetaMask will support this feature on more networks as they adopt EIP-7702.
 </div>
@@ -219,7 +223,7 @@ In these cases, `atomic` is `true` but multiple receipts are returned.
 ## Resources
 
 - See the [MetaMask 7702/5792 Readiness dapp](https://7702playground.metamask.io/) to quickly test sending batch transactions.
-- See the [MetaMask Delegation Toolkit documentation](/delegation-toolkit) for more information about MetaMask Smart Accounts and their capabilities.
+- See the [MetaMask Smart Accounts Kit documentation](/smart-accounts-kit) for more information about MetaMask Smart Accounts and their capabilities.
 - See the following topics in the MetaMask end user documentation:
   - [What is a smart account?](https://support.metamask.io/configure/accounts/what-is-a-smart-account/)
   - [How to switch to or revert from a smart account](https://support.metamask.io/configure/accounts/switch-to-or-revert-from-a-smart-account/)

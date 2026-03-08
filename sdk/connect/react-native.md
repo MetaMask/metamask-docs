@@ -176,12 +176,12 @@ For example:
 import { useSDK } from "@metamask/sdk-react"
 
 function App() {
-  const { connect, disconnect, account, chainId, ethereum } = useSDK()
+  const { account, chainId, ethereum, sdk } = useSDK()
 
   // Connect to MetaMask
   const connectWallet = async () => {
     try {
-      await connect()
+      await sdk?.connect()
     } catch (error) {
       console.error("Failed to connect wallet:", error)
     }
@@ -196,7 +196,7 @@ function App() {
 
   // Disconnect wallet
   const disconnectWallet = async () => {
-    await disconnect()
+    await sdk?.terminate()
   }
 
   return (

@@ -19,9 +19,9 @@ infrastructure for efficient transaction processing and scalability.
 
 :::info See also
 
-- The [official Swellchain documentation](https://build.swellnetwork.io/) for more information.
+- The [official Swellchain site](https://www.swellnetwork.io/) for more information.
 - The official
-[Optimism Ethereum JSON-RPC API documentation](https://docs.optimism.io/builders/node-operators/json-rpc)
+[Optimism Ethereum JSON-RPC API documentation](https://docs.optimism.io/node-operators/reference/op-node-json-rpc)
 (Bedrock release) for custom Swellchain methods.
 
 :::
@@ -31,19 +31,19 @@ Select an option below to get started with the Swellchain network.
 <CardList
   items={[
     {
-      href: "quickstart",
+      href: "/services/reference/swellchain/quickstart",
       title: "Quickstart",
       description: "Learn how to quickly connect and make calls to Swellchain."
     },
     {
-      href: "json-rpc-methods",
+      href: "/services/reference/swellchain/json-rpc-methods",
       title: "JSON-RPC APIs",
       description: "View the APIs available for communicating with Swellchain."
     },
     {
-      href: "../../../developer-tools/dashboard/get-started/create-api/",
+      href: "/developer-tools/dashboard/get-started/create-api",
       title: "Create an API key",
-      description: "Learn how to create an API key and secure and share it with your team."
+      description: "Learn how to create and secure an API key."
     }
   ]}
 />

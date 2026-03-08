@@ -2,6 +2,7 @@
 title: Starknet JSON-RPC API
 description: Starknet JSON-RPC API methods.
 sidebar_label: JSON-RPC API
+sidebar_key: starknet-json-rpc-api
 ---
 
 # Starknet JSON-RPC API

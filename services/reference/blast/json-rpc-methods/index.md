@@ -1,5 +1,6 @@
 ---
 sidebar_label: JSON-RPC API
+sidebar_key: blast-json-rpc-api
 ---
 
 # Blast JSON-RPC API

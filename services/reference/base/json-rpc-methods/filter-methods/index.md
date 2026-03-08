@@ -1,6 +1,7 @@
 ---
 title: Base filter methods
 sidebar_label: Filter methods
+sidebar_key: base-filter-methods
 description: Base filter methods
 ---
 

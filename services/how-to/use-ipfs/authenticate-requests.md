@@ -23,8 +23,8 @@ Authorization: Basic <base64(USERNAME:PASSWORD)>
 ```
 
 Username is the `API_KEY` and password is the `API_KEY_SECRET.` Find your authorization credentials in the API key's settings
-page after you [register your Infura account](https://infura.io/register) and
-[create an API key](../../../../developer-tools/dashboard/get-started/create-api/) that includes the IPFS network.
+page after you [register your Infura account](https://developer.metamask.io/register) and
+[create an API key](/developer-tools/dashboard/get-started/create-api) that includes the IPFS network.
 
 For example, to authenticate and upload a file to IPFS using curl, you would use the following command:
 

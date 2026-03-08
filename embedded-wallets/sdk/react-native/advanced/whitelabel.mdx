@@ -1,0 +1,210 @@
+---
+title: Whitelabel PnP React Native SDK
+sidebar_label: Whitelabel
+description: 'Web3Auth PnP React Native SDK - Whitelabel | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+import WhiteLabelShowcase from '../../_common/_whitelabel_showcase.mdx'
+import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
+
+import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
+
+Embedded Wallets allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
+
+- **UI elements:** Customize the appearance of modals and components
+- **Branding:** Apply your brand colors, logos, and themes
+- **Translations:** Localize the interface for your users
+
+<WhitelabelingNote />
+
+<GrowthPlanNote />
+
+## Customizing the Embedded Wallets login screens
+
+For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `WhiteLabelData`.
+
+### `WhiteLabelData`
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Interface", value: "interface" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter | Description |
+| --- | --- |
+| `appName?` | Display name for the app in the UI. |
+| `logoLight?` | App logo to be used in dark mode. It accepts URL as string. |
+| `logoDark?` | App logo to be used in light mode. It accepts URL as string. |
+| `defaultLanguage?` | Language which will be used by Web3Auth, app will use browser language if not specified. Default language is `LANGUAGE_TYPE.en`. Checkout `LANGUAGE_TYPE` for supported languages. |
+| `mode?` | Theme mode for the login modal. Choose between `THEME_MODE_TYPE.auto`, `THEME_MODE_TYPE.light` or `THEME_MODE_TYPE.dark` background modes. Default value is `ThemeModes.auto`. |
+| `theme?` | Used to customize the theme of the login modal. It accepts `Record` as a value. |
+| `appUrl?` | URL to be used in the Modal. It accepts URL as string. |
+| `useLogoLoader?` | Use logo loader. If `logoDark` and `logoLight` are null, the default Web3Auth logo will be used for the loader. Default value is false. |
+| `tncLink` | Terms and conditions link in `Partial<Record<LANGUAGE_TYPE, string>>`. |
+| `privacyPolicy` | Privacy policy link in `Partial<Record<LANGUAGE_TYPE, string>>`. |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```tsx
+export type WhiteLabelData = {
+  /**
+   * App name to display in the UI
+   */
+  appName?: string
+  /**
+   * App url
+   */
+  appUrl?: string
+  /**
+   * App logo to use in light mode
+   */
+  logoLight?: string
+  /**
+   * App logo to use in dark mode
+   */
+  logoDark?: string
+  /**
+   * language which will be used by web3auth. app will use browser language if not specified. if language is not supported it will use "en":
+   * en: english
+   * de: german
+   * ja: japanese
+   * ko: korean
+   * zh: mandarin
+   * es: spanish
+   * fr: french
+   * pt: portuguese
+   * nl: dutch
+   *
+   * @defaultValue en
+   */
+  defaultLanguage?: LANGUAGE_TYPE
+  /**
+   theme
+    *
+    * @defaultValue auto
+    */
+  mode?: THEME_MODE_TYPE
+  /**
+   * Use logo loader
+   *
+   * @defaultValue false
+   */
+  useLogoLoader?: boolean
+  /**
+   * Used to customize theme of the login modal with following options
+   * `'primary'` - To customize primary color of modal's content.
+   */
+  theme?: {
+    primary?: string
+    gray?: string
+    red?: string
+    green?: string
+    success?: string
+    warning?: string
+    error?: string
+    info?: string
+    white?: string
+  }
+  /**
+   * Language specific link for terms and conditions on torus-website. See (examples/vue-app) to configure
+   * e.g.
+   * tncLink: {
+   *  en: "http://example.com/tnc/en",
+   *  ja: "http://example.com/tnc/ja",
+   * }
+   */
+  tncLink?: Partial<Record<LANGUAGE_TYPE, string>>
+  /**
+   * Language specific link for privacy policy on torus-website. See (examples/vue-app) to configure
+   * e.g.
+   * privacyPolicy: {
+   *  en: "http://example.com/tnc/en",
+   *  ja: "http://example.com/tnc/ja",
+   * }
+   */
+  privacyPolicy?: Partial<Record<LANGUAGE_TYPE, string>>
+}
+```
+
+</TabItem>
+</Tabs>
+
+<WhiteLabelShowcase />
+
+### Example
+
+<Tabs
+  defaultValue="expo"
+  values={[
+    { label: "Expo-managed workflow", value: "expo" },
+    { label: "Bare React Native workflow", value: "bare" },
+  ]}
+>
+
+<TabItem value="expo">
+
+```tsx
+import * as WebBrowser from 'expo-web-browser'
+import * as SecureStore from 'expo-secure-store'
+import Web3Auth, { LOGIN_PROVIDER, WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
+
+const clientId = 'YOUR WEB3AUTH CLIENT ID'
+
+const web3auth = new Web3Auth(WebBrowser, SecureStore, {
+  clientId,
+  network: WEB3AUTH_NETWORK.TESTNET, // or other networks
+  // focus-start
+  whiteLabel: {
+    appName: 'My App',
+    logoLight: 'https://web3auth.io/img/logo-light.png',
+    logoDark: 'https://web3auth.io/img/logo-dark.png',
+    defaultLanguage: 'en',
+    mode: 'auto', // or "dark" or "light"
+    theme: {
+      primary: '#cddc39',
+    },
+  },
+  // focus-end
+})
+```
+
+</TabItem>
+
+<TabItem value="bare">
+
+```tsx
+import * as WebBrowser from '@toruslabs/react-native-web-browser'
+import EncryptedStorage from 'react-native-encrypted-storage'
+import Web3Auth, { LOGIN_PROVIDER, WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
+
+const clientId = 'YOUR WEB3AUTH CLIENT ID'
+
+const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
+  clientId,
+  network: WEB3AUTH_NETWORK.TESTNET, // or other networks
+  // focus-start
+  whiteLabel: {
+    appName: 'My App',
+    logoLight: 'https://web3auth.io/img/logo-light.png',
+    logoDark: 'https://web3auth.io/img/logo-dark.png',
+    defaultLanguage: 'en',
+    mode: 'auto', // or "dark" or "light"
+    theme: {
+      primary: '#cddc39',
+    },
+  },
+  // focus-end
+})
+```
+
+</TabItem>
+</Tabs>

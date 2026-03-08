@@ -1,5 +1,6 @@
 ---
 description: Interact with contracts with the SDK in your Wagmi or Vanilla JavaScript dapp.
+keywords: [SDK, Wagmi, JavaScript, read, write, smart, contract, contracts, dapp]
 sidebar_label: Interact with contracts
 toc_max_heading_level: 2
 ---

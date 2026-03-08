@@ -1,0 +1,10 @@
+An object containing asset changes that would occur from executing the user operation:
+
+`assetChanges`: (array) - Array of asset change objects, each containing:
+
+- `token`: (object) - Token information (varies by token type). Token metadata fields (`name` and `symbol`)
+    are included when available but may be undefined as they are optional in token standards.
+- `value`: (object) - Balance change information:
+    - `diff`: (string) - The balance difference.
+    - `pre`: (string) - Balance before the operation.
+    - `post`: (string) - Balance after the operation.

@@ -1,0 +1,82 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="curl without an override">
+
+  ```bash
+  curl https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "method": "eth_estimateUserOperationGas",
+      "params": [
+        {
+          "sender": "0x5a6b47F4131bf1feAFA56A05573314BcF44C9149",
+          "nonce": "0x845adb2c711129d4f3966735ed98a9f09fc4ce5700000000000000000000",
+          "factory": "0xd703aaE79538628d27099B8c4f621bE4CCd142d5",
+          "factoryData": "0xc5265d5d000000000000000000000000aac5d4240af87249b3f71bc8e4a2cae074a3e419",
+          "callData": "0xe9ae5c5300000000000000000000000000000000000000000000000000000000000000000000000000",
+          "callGasLimit": "0x0",
+          "verificationGasLimit": "0x0",
+          "preVerificationGas": "0x0",
+          "maxFeePerGas": "0x7a5cf70d5",
+          "maxPriorityFeePerGas": "0x3b9aca00",
+          "paymaster": null,
+          "paymasterVerificationGasLimit": null,
+          "paymasterPostOpGasLimit": null,
+          "paymasterData": null,
+          "signature": "0xfffffffffffffffffffffffffffffff0000000000000000000000000000000007aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1c"
+        },
+        "0x0000000071727De22E5E9d8BAf0edAc6f37da032"
+      ],
+      "id": 1
+    }'
+  ```
+
+  </TabItem>
+  <TabItem value="curl with an override">
+
+  ```bash
+  curl https://scroll-mainnet.infura.io/v3/<YOUR-API-KEY> \
+    -X POST \
+    -H "Content-Type: application/json" \
+    -d '{
+      "jsonrpc": "2.0",
+      "method": "eth_estimateUserOperationGas",
+      "params": [
+        {
+          "sender": "0xa203fDb8bC335F86016F635b85389B62B189E417",
+          "nonce": "0x35bf2a054f92f3730b87582ef223c8d663f9eb01158154750000000000000000",
+          "factory": "0xd703aaE79538628d27099B8c4f621bE4CCd142d5",
+          "callData": "0xb61d27f6000000000000000000000000530fff22987e137e7c8d2adcc4c15eb45b4fa752",
+          "callGasLimit": "0x0",
+          "verificationGasLimit": "0x0",
+          "preVerificationGas": "0x0",
+          "maxPriorityFeePerGas": "0x12a05f200",
+          "maxFeePerGas": "0x5b08082fa",
+          "paymaster": null,
+          "paymasterVerificationGasLimit": null,
+          "paymasterPostOpGasLimit": null,
+          "paymasterData": null,
+          "signature": "0xa6cc6589c8bd561cfd68d7b6b0757ef6f208e7438782939938498eee7d703260137856c840c491b3d415956265e81bf5c2184a725be2abfc365f7536b6af525e1c"
+        },
+        "0x0000000071727De22E5E9d8BAf0edAc6f37da032",
+        {
+          "0xd9c9cd5f6779558b6e0ed4e6acf6b1947e7fa1f3": {
+            "balance": "0xde0b6b3a7640000"
+          },
+          "0xebe8efa441b9302a0d7eaecc277c09d20d684540": {
+            "stateDiff": {
+              "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80": "0x21"
+            }
+          }
+        }
+      ],
+      "id": 1
+    }'
+  ```
+
+  </TabItem>
+</Tabs> 

@@ -1,0 +1,218 @@
+---
+title: Integrate Web3Auth with the XRPL Blockchain
+sidebar_label: XRPL
+image: 'img/embedded-wallets/banners/xrpl.png'
+
+keywords: [xrpl, web3auth, authentication, blockchain]
+description: 'Integrate Web3Auth with the XRPL Blockchain | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The Web3Auth Web SDK offers a standard provider for accessing the user's private key on non-EVM chains like [XRPL](https://xrpl.org/). You can use our native `@web3auth/xrpl-provider` for making direct connections with XRPL Blockchain. This will provide an xrplProvider that can be injected back into the Web3Auth instance, allowing you to perform actions such as retrieving account information, obtaining balances, signing and sending transactions, and reading from and writing to smart contracts. Here are some methods to help you quickly get started.
+
+## Installation
+
+To interact with the XRPL blockchain, you can use the `@web3auth/xrpl-provider` package.
+
+```bash npm2yarn
+npm install --save @web3auth/xrpl-provider
+```
+
+### Getting the `chainConfig`
+
+<Tabs
+ defaultValue="mainnet"
+  values={[
+    { label: "Mainnet", value: "mainnet", },
+    { label: "Testnet", value: "testnet", },
+    { label: "Devnet", value: "devnet", },
+  ]}
+>
+<TabItem
+  value="mainnet"
+>
+
+- Chain Namespace: OTHER
+- Chain ID: 0x1
+- Public RPC URL: https://ripple-node.tor.us (Avoid using public rpcTarget in production, use
+  services like Infura)
+- WebSocket URL: wss://s2.ripple.com
+- Ticker: XRP
+- Ticker Name: XRPL
+- Display Name: xrpl mainnet
+- Block Explorer Link: https://livenet.xrpl.org
+
+</TabItem>
+
+<TabItem
+  value="testnet"
+>
+
+- Chain Namespace: OTHER
+- Chain ID: 0x2
+- Public RPC URL: https://testnet-ripple-node.tor.us (Avoid using public rpcTarget in production,
+  use services like Infura)
+- WebSocket URL: wss://s.altnet.rippletest.net
+- Ticker: XRP
+- Ticker Name: XRPL
+- Display Name: xrpl testnet
+- Block Explorer Link: https://testnet.xrpl.org
+
+</TabItem>
+
+<TabItem
+  value="devnet"
+>
+
+- Chain Namespace: OTHER
+- Chain ID: 0x3
+- Public RPC URL: https://devnet-ripple-node.tor.us (Avoid using public rpcTarget in production, use
+  services like Infura)
+- WebSocket URL: wss://s.devnet.rippletest.net/
+- Ticker: XRP
+- Ticker Name: XRPL
+- Display Name: xrpl devnet
+- Block Explorer Link: https://devnet.xrpl.org
+
+</TabItem>
+</Tabs>
+
+## Initializing provider
+
+Post V10 release, Web3Auth Web SDK does not need any additional setup on the code side for XRPL.
+All is handled on the dashboard.
+
+```tsx
+import { Web3Auth, WEB3AUTH_NETWORK } from '@web3auth/modal'
+
+const web3AuthOptions: Web3AuthOptions = {
+  clientId,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+}
+
+const web3auth = new Web3Auth(web3AuthOptions)
+
+await web3auth.init()
+
+await web3auth.connect()
+// await web3auth.connectTo(); // For custom flow
+
+const provider = web3auth.provider
+```
+
+## Get account and Balance
+
+```tsx
+try {
+  // provider is from above
+  const accounts = await provider.request<string[]>({
+    method: 'xrpl_getAccounts',
+  })
+
+  if (accounts) {
+    const accInfo = (await provider.request({
+      method: 'account_info',
+      params: [
+        {
+          account: accounts[0],
+          strict: true,
+          ledger_index: 'current',
+          queue: true,
+        },
+      ],
+    })) as Record<string, Record<string, string>>
+    console.log('XRPL account info', accInfo)
+    // XRPL Account
+    const account = accInfo?.account_data?.Account
+    // Balance
+    const balance = accInfo?.account_data?.Balance
+  } else {
+    console.log('No accounts found, please report this issue.')
+  }
+} catch (error) {
+  console.error('Error', error)
+}
+```
+
+## Sign a transaction
+
+```tsx
+try {
+  const accounts = await provider.request<string[]>({
+    method: 'xrpl_getAccounts',
+  })
+
+  if (accounts && accounts.length > 0) {
+    const tx: Payment = {
+      TransactionType: 'Payment',
+      Account: accounts[0] as string,
+      Amount: xrpToDrops(2),
+      Destination: 'rJAHHPYmy4g3h7kzfj2Mzm2nHwpKuVdEvX', // Destination address
+    }
+    const txSign = await provider.request({
+      method: 'xrpl_signTransaction',
+      params: {
+        transaction: tx,
+      },
+    })
+    console.log('txRes', txSign)
+  } else {
+    console.log('failed to fetch accounts')
+  }
+} catch (error) {
+  console.log('error', error)
+}
+```
+
+## Send transaction
+
+```tsx
+try {
+  const accounts = await provider.request<string[]>({
+    method: 'xrpl_getAccounts',
+  })
+
+  if (accounts && accounts.length > 0) {
+    const tx: Payment = {
+      TransactionType: 'Payment',
+      Account: accounts[0] as string,
+      Amount: xrpToDrops(2),
+      Destination: 'rJAHHPYmy4g3h7kzfj2Mzm2nHwpKuVdEvX',
+    }
+    const txSign = await provider.request({
+      method: 'xrpl_submitTransaction',
+      params: {
+        transaction: tx,
+      },
+    })
+    console.log('txRes', txSign)
+  } else {
+    console.log('failed to fetch accounts')
+  }
+} catch (error) {
+  console.log('error', error)
+}
+```
+
+## Sign a message
+
+```tsx
+try {
+  const msg = "Hello world";
+  const hexMsg = convertStringToHex(msg);
+  const txSign =
+    (await provider.request) <
+    { signature: string } >
+    {
+      method: "xrpl_signMessage",
+      params: {
+        message: hexMsg,
+      },
+    };
+  console.log("txRes", txSign);
+} catch (error) {
+  console.log("error", error);
+}
+```

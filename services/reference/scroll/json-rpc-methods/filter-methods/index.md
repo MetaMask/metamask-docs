@@ -1,6 +1,7 @@
 ---
 title: Scroll filter methods
 sidebar_label: Filter methods
+sidebar_key: scroll-filter-methods
 description: Scroll filter methods
 ---
 

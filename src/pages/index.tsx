@@ -1,3 +1,4 @@
+import Head from '@docusaurus/Head'
 import Layout from '@theme/Layout'
 import Hero from '@site/src/components/Hero/Hero'
 import CardSection from '@site/src/components/CardSection'
@@ -7,81 +8,93 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext()
+  const rootUrl =
+    (siteConfig.url ?? '').replace(/\/$/, '') +
+    ((siteConfig.baseUrl ?? '/') === '/' ? '' : (siteConfig.baseUrl ?? '').replace(/\/$/, ''))
+  const pageUrl = `${rootUrl}/`
+  const defaultImage = `${rootUrl}/img/metamaskog.jpg`
 
   return (
-    <Layout title="Home">
+    <Layout
+      title="Home"
+      description="Build with the world's leading self-custodial crypto wallet. MetaMask developer documentation - SDK, Wallet API, Snaps, Embedded Wallets, Smart Accounts.">
+      <Head>
+        <meta
+          name="keywords"
+          content="metamask, wallet, blockchain, web3, web3.js, ethers.js, ethereum, evm-compatible chains, bitcoin, solana, ethereum, crypto, sdk, snaps, dapp"
+        />
+        <meta property="og:site_name" content="MetaMask" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="og:image" content={defaultImage} />
+        <meta property="og:image:secure_url" content={defaultImage} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="MetaMask" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@MetaMask" />
+        <meta name="twitter:creator" content="@MetaMask" />
+        <meta name="twitter:image" content={defaultImage} />
+        <meta itemProp="image" content={defaultImage} />
+        <meta name="author" content="MetaMask" />
+      </Head>
       <Hero
         title={siteConfig.title}
         description="Build with the world's leading self-custodial crypto wallet."
-        button={{
-          label: 'Get Started',
-          href: '/sdk',
-          icon: 'arrow-right',
-        }}
+        buttons={[
+          {
+            label: 'Quickstart',
+            href: '/quickstart',
+            icon: 'arrow-right'
+          },
+          {
+            label: 'Tutorials',
+            href: '/tutorials/',
+            icon: 'arrow-right'
+          }
+        ]}
       />
-      <SectionIntro description="What do you want to build with MetaMask? Whether you're integrating with the extension, embedding smart accounts, or scaling with powerful infrastructure—choose a path below to get started." />
+
+      <SectionIntro description="What do you want to do with MetaMask?" />
+
       <CardSection
-        title="Connect to MetaMask extension and mobile"
-        description="Connect your dapp to the MetaMask browser extension and MetaMask mobile app. Ideal for users who want full control over their keys and transactions."
         colorPalette="purple"
         cards={[
           {
-            title: 'MetaMask SDK',
+            title: 'Connect to MetaMask',
             description:
-              'Provide your users a fast, reliable, and seamless connection to MetaMask extension and mobile.',
+              'Connect your dapp to the MetaMask browser extension and mobile app. Ideal for users who want full control over their keys and transactions.',
             href: '/sdk',
-            buttonIcon: "arrow-right",
+            buttonIcon: 'arrow-right',
           },
           {
-            title: 'Wallet API',
+            title: 'Create embedded wallets',
             description:
-              "Directly integrate your dapp with the MetaMask extension, and interact with your users' accounts.",
-            href: '/wallet',
-            buttonIcon: "arrow-right",
+              'Onboard power users and first-time users in seconds via social logins, or by integrating your own authentication providers.',
+            href: '/embedded-wallets',
+            buttonIcon: 'arrow-right',
           },
-        ]}
-      />
-
-      <CardSection
-        title="Add an embedded MetaMask wallet"
-        description="Enable embedded wallets and smart accounts directly within your dapp. Ideal for seamless onboarding, custom permission controls, and mobile-first, or first-time user experiences."
-        colorPalette="purple"
-        cards={[
           {
-            title: 'Delegation Toolkit',
+            title: 'Create smart accounts',
             description:
-              'Integrate MetaMask Smart Accounts into your dapp. Create embedded wallets that support delegated permissions, gas abstraction, and secure execution.',
-            href: '/delegation-toolkit',
-            buttonIcon: "arrow-right",
+              'Create and interact with MetaMask Smart Accounts, unlocking new programmable account behaviors and granular permission sharing.',
+            href: '/smart-accounts-kit',
+            buttonIcon: 'arrow-right',
           },
           {
-            title: 'Embedded Wallets SDK',
-            description:
-              'Onboard power users and first-time users in seconds via social logins, passkeys, or by integrating your own authentication providers.',
-            href: 'https://web3auth.io/docs/',
-            buttonIcon: "external-arrow",
-          },
-        ]}
-      />
-
-      <CardSection
-        title="Extend MetaMask and scale your dapp"
-        description="Extend MetaMask's capabilities and build scalable dapps with developer tools, hosted infrastructure, and customizable Snaps."
-        colorPalette="purple"
-        cards={[
-          {
-            title: 'Snaps',
-            description:
-              'Create a custom mini app that runs inside the MetaMask extension. Add support for custom networks, accounts types, and APIs.',
-            href: '/snaps',
-            buttonIcon: "arrow-right",
-          },
-          {
-            title: 'Services',
+            title: 'Build and scale your dapp',
             description:
               'Use high performance APIs provided by MetaMask and Infura to build and scale your dapp or Snap.',
             href: '/services',
-            buttonIcon: "arrow-right",
+            buttonIcon: 'arrow-right',
+          },
+          {
+            title: 'Extend MetaMask',
+            description:
+              'Create a custom mini app that runs inside the MetaMask extension. Add support for custom networks, accounts types, and APIs.',
+            href: '/snaps',
+            buttonIcon: 'arrow-right',
           },
         ]}
       />

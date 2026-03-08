@@ -11,7 +11,7 @@ Build the documentation site locally using the following steps.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) version 18+
+- [Node.js](https://nodejs.org/) version 20.x
 - [Git](https://git-scm.com/)
 
 ### Steps
@@ -43,6 +43,6 @@ Build the documentation site locally using the following steps.
    npm start
    ```
 
-   Once the server starts, you can view the documentation at `http://localhost:3000`.
+   Once the server starts, you can view the documentation at `http://localhost:3003`.
 
 For more information on contributing to the documentation, see the [full contribution guidelines](CONTRIBUTING.md).

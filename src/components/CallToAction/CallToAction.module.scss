@@ -1,14 +1,14 @@
 .call-to-action {
   position: relative;
-  padding: 2rem 0 6.4rem;
+  padding: 3rem 0;
   overflow: hidden;
 
   @include bp(tablet) {
-    padding-top: 4rem;
+    padding: 4rem 0;
   }
 
   @include bp(desktop) {
-    padding: 5rem 0 8rem;
+    padding: 6rem 0;
   }
 }
 

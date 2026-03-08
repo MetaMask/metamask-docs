@@ -1,5 +1,6 @@
 ---
 description: Context about MetaMask SDK that can be provided to an LLM.
+keywords: [SDK, LLM, intro, context, integration, dapp]
 ---
 
 # LLM prompt

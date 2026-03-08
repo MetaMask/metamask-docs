@@ -9,11 +9,11 @@ As with Ethereum, [transactions](https://ethereum.org/en/developers/docs/transac
 - Regular transactions from one account to another.
 - Contract deployment transactions, or calling a function in a smart contract.
 
-This tutorial uses the Ethereum Web3 JavaScript library to send a transaction between two accounts on the Polygon-Mumbai testnet.
+This tutorial uses the Ethereum Web3 JavaScript library to send a transaction between two accounts on the Polygon Amoy testnet.
 
 ## Prerequisites
 
-- An Infura [API key](../../../../developer-tools/dashboard/get-started/create-api/)
+- An Infura [API key](/developer-tools/dashboard/get-started/create-api)
 - [Node.js installed](https://nodejs.org/en/download/)
 - [MetaMask installed](https://metamask.io) and an account for testing purposes
 
@@ -27,11 +27,11 @@ You can use [MetaMask](https://metamask.io) or a similar Ethereum wallet to crea
 
 ### 1. Add Polygon network to MetaMask
 
-Refer to the Polygon instructions to [add the Polygon networks to MetaMask](https://polygon.technology/blog/getting-started-with-metamask-on-polygon). This tutorial uses the Polygon Mumbai network.
+Refer to the Polygon instructions to [add the Polygon networks to MetaMask](https://polygon.technology/blog/getting-started-with-metamask-on-polygon). This tutorial uses the Polygon Amoy network.
 
 ### 2. Fund your account
 
-[Use the Polygon faucet](https://faucet.polygon.technology) to load testnet MATIC on your account for the Mumbai network.
+[Use the Polygon faucet](https://faucet.polygon.technology) to load testnet MATIC on your account for the Amoy network.
 
 ### 3. Create a project directory
 
@@ -146,4 +146,4 @@ The command line will display the block number containing the transaction detail
 
 ### 8. View the transaction details
 
-Copy transaction hash and view the transaction in the [Polygon Mumbai block explorer](https://amoy.polygonscan.com/).
+Copy transaction hash and view the transaction in the [Polygon Amoy block explorer](https://amoy.polygonscan.com/).

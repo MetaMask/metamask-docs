@@ -5,7 +5,7 @@ sidebar_position: 7
 
 # Send an ERC-20 token
 
-In this tutorial we'll use Rust and the [ethers-rs library](https://www.gakonst.com/ethers-rs/getting-started/intro.html) to send an ERC-20 token from one address to another. This tutorial uses the Sepolia testnet and sends the [Chainlink token (LINK)](https://sepolia.etherscan.io/token/0x779877a7b0d9e8603169ddbd7836e478b4624789#code).
+In this tutorial we'll use Rust and the [ethers-rs library](https://docs.rs/ethers/latest/ethers/) to send an ERC-20 token from one address to another. This tutorial uses the Sepolia testnet and sends the [Chainlink token (LINK)](https://sepolia.etherscan.io/token/0x779877a7b0d9e8603169ddbd7836e478b4624789#code).
 
 ## Prerequisites
 
@@ -123,7 +123,7 @@ async fn main() -> Result<()> {
 Next, make the following updates to the above code:
 
 - On line 17 replace the `INFURA_API_KEY` with the API key of your API project from the
-  [MetaMask Developer dashboard](https://app.infura.io/login).
+  [MetaMask Developer dashboard](https://developer.metamask.io/login).
 - On line 30 replace the `SIGNER_PRIVATE_KEY` with the private key of your Ethereum account.
 
 :::tip Secure your keys

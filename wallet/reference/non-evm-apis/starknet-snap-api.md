@@ -100,9 +100,9 @@ Registers a contract's class on the Starknet blockchain without deploying it.
 - `senderAddress`: `string` - Address of the sender.
 - `chainId`: `string` - (Optional) ID of the target Starknet network. The default is the Starknet Sepolia testnet.
 - `contractPayload`: `object` - Transaction payload to be deployed.
-  - `contract`: `CompiledContract` | `string` - The compiled contract code ([in Cairo](https://book.cairo-lang.org/ch13-00-introduction-to-starknet-smart-contracts.html)).
+  - `contract`: `CompiledContract` | `string` - The compiled contract code (in Cairo).
   - `classHash?`: `string` - (Optional) The computed class hash of compiled contract.
-  - `casm?`: `CompiledContract` | `string` - (Optional) - The compiled [casm](https://docs.starknet.io/architecture-and-concepts/smart-contracts/cairo-and-sierra/).
+  - `casm?`: `CompiledContract` | `string` - (Optional) - The compiled [casm](https://www.starknet.io/cairo-book/appendix-09-sierra.html#sierra).
   - `compiledClassHash?`: `string` - (Optional) The compiled class hash from casm.
 - `invocationsDetails`: `object` - (Optional) Transaction details object containing:
   - `nonce`: (Optional) Nonce for the transaction.
@@ -278,12 +278,11 @@ Gets the estimated gas fee for calling a method on any contract.
 #### Parameters
 
 - `address`: `string` - The account address from which the transaction is being made.
-- `invocations`: `array` - The [invocations](https://starknetjs.com/docs/API/namespaces/types#invocations)
-  to estimate the fee for.
+- `invocations`: `array` - The invocations to estimate the fee for.
   Each invocation represents a contract call.
 - `chainId`: `string` - The chain ID of the target Starknet network.
   If not provided, the default is the Starknet Sepolia testnet.
-- `details`: `object` - (Optional) The [universal details](https://starknetjs.com/docs/API/interfaces/types.EstimateFeeDetails)
+- `details`: `object` - (Optional) The universal details
   associated with the invocations, such as nonce and version.
 
 #### Returns
@@ -710,7 +709,7 @@ Gets the status of a transaction.
 
 #### Returns
 
-The [status](https://docs.starknet.io/architecture-and-concepts/network-architecture/transaction-life-cycle/)
+The [status](https://docs.starknet.io/learn/protocol/transactions#transaction-lifecycle)
 of the transaction.
 
 #### Example
@@ -812,7 +811,7 @@ await provider.request({           // Or window.ethereum if you don't suppo
 
 ### `starkNet_signDeclareTransaction`
 
-Signs a [`DECLARE` transaction](https://docs.starknet.io/architecture-and-concepts/network-architecture/transactions/#declare-transaction) using the private key, returns the signature, and uses it to declare the contract class on Starknet.
+Signs a [`DECLARE` transaction](https://docs.starknet.io/learn/cheatsheets/transactions-reference#declare-v3) using the private key, returns the signature, and uses it to declare the contract class on Starknet.
 
 #### Parameters
 

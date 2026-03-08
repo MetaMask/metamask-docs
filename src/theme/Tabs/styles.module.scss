@@ -36,6 +36,38 @@
   p {
     padding: 1.6rem;
   }
+
+  // Required for tabs that include bullet lists (e.g., bundler method parameters)
+  // Without this, L1 bullets are not visible and spacing is inconsistent
+  ul,
+  ol {
+    margin: 1.6rem 0 1.6rem 2rem;
+
+    li {
+      margin-bottom: 1rem;
+
+      // Handle list items that contain paragraphs (L1 bullets from markdown parsing)
+      p {
+        padding: 0; // Remove padding for paragraphs inside list items
+        margin: 0; // Remove margin to prevent double spacing
+      }
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+    list-style-position: outside;
+  }
+
+  ul ul {
+    list-style-type: circle;
+    margin-left: 1.6rem;
+    margin-top: 1rem;
+  }
+
+  ul ul ul {
+    list-style-type: square;
+  }
 }
 
 .flaskOnly::after {
