@@ -10,6 +10,11 @@ export const EMBEDDED_WALLETS_SUBNAV_CONFIG: SubNavBarConfig = {
       path: '/embedded-wallets',
     },
     {
+      key: 'dashboard',
+      label: 'Dashboard',
+      path: '/embedded-wallets/dashboard/',
+    },
+    {
       key: 'sdk',
       label: 'SDKs',
       path: '/embedded-wallets/sdk/',
@@ -33,11 +38,6 @@ export const EMBEDDED_WALLETS_SUBNAV_CONFIG: SubNavBarConfig = {
       key: 'connect-blockchain',
       label: 'Other Blockchains',
       path: '/embedded-wallets/connect-blockchain/other/',
-    },
-    {
-      key: 'dashboard',
-      label: 'Dashboard ↗',
-      path: 'https://dashboard.web3auth.io/',
     },
     {
       key: 'demo',

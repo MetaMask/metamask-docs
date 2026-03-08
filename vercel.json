@@ -773,6 +773,10 @@
     {
       "source": "/embedded-wallets/dashboard/whitelist/",
       "destination": "/embedded-wallets/dashboard/allowlist/"
+    },
+    {
+      "source": "/embedded-wallets/how-it-works/",
+      "destination": "/embedded-wallets/"
     }
   ]
 }
