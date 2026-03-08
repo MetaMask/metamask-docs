@@ -1,5 +1,5 @@
 .root {
-  --font-family-sans: 'Geist', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+  --font-family-sans: var(--font-mm-geist);
 }
 
 .rowWrap {
