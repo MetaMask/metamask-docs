@@ -12,7 +12,7 @@ This page documents the types used in Smart Accounts Kit APIs.
 
 ### `CaveatType`
 
-Enum representing [caveat](delegation/caveats.md) type.
+Enum representing the [caveat](delegation/caveats.md) type.
 
 | Value | String |
 | ----- | ------ |
