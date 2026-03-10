@@ -171,6 +171,13 @@ const openInAiTool = async (baseUrl, flashCopiedFn) => {
   }
 };
 
+const ExternalArrow = () => (
+  <svg className={styles.externalArrow} width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M3.5 2H10V8.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M10 2L2 10" strokeLinecap="round"/>
+  </svg>
+);
+
 export default function CopyPageButton({ standalone = false }) {
   const [isOpen, setIsOpen] = useState(false);
   const [copiedId, setCopiedId] = useState(null);
@@ -252,13 +259,6 @@ export default function CopyPageButton({ standalone = false }) {
       console.error('Failed to view markdown:', err);
     }
   };  
-
-  const ExternalArrow = () => (
-    <svg className={styles.externalArrow} width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M3.5 2H10V8.5" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M10 2L2 10" strokeLinecap="round"/>
-    </svg>
-  );
 
   return (
     <div className={styles.container} ref={containerRef} data-copy-button>
