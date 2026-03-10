@@ -147,9 +147,6 @@ const buildMarkdown = () => {
   return markdown;
 };
 
-const MCP_SERVER_URL = 'https://docs.metamask.io/mcp';
-const MCP_SERVER_NAME = 'metamask-docs';
-
 const openInAiTool = (baseUrl) => {
   const markdown = buildMarkdown();
   if (!markdown) return;
@@ -236,30 +233,7 @@ export default function CopyPageButton({ standalone = false }) {
     } catch (err) {
       console.error('Failed to view markdown:', err);
     }
-  };
-
-  const handleCopyMcpUrl = async () => {
-    try {
-      await navigator.clipboard.writeText(MCP_SERVER_URL);
-      flashCopied('mcp');
-    } catch (err) {
-      console.error('Failed to copy MCP URL:', err);
-    }
-  };
-
-  const handleCopyMcpConfig = async (id) => {
-    try {
-      const config = JSON.stringify(
-        { mcpServers: { [MCP_SERVER_NAME]: { url: MCP_SERVER_URL } } },
-        null,
-        2
-      );
-      await navigator.clipboard.writeText(config);
-      flashCopied(id);
-    } catch (err) {
-      console.error('Failed to copy MCP config:', err);
-    }
-  };
+  };  
 
   const ExternalArrow = () => (
     <svg className={styles.externalArrow} width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -362,45 +336,6 @@ export default function CopyPageButton({ standalone = false }) {
             </div>
           </button>
 
-          <div className={styles.divider} />
-
-          {/* MCP Server actions */}
-          <button className={styles.dropdownItem} onClick={handleCopyMcpUrl}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-            </svg>
-            <div>
-              <div className={styles.itemTitle}>
-                {copiedId === 'mcp' ? 'Copied!' : 'Copy MCP Server'}
-              </div>
-              <div className={styles.itemDescription}>Copy MCP Server URL to clipboard</div>
-            </div>
-          </button>
-
-          <button className={styles.dropdownItem} onClick={() => handleCopyMcpConfig('cursor')}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/>
-            </svg>
-            <div>
-              <div className={styles.itemTitle}>
-                {copiedId === 'cursor' ? 'Copied!' : 'Connect to Cursor'}
-              </div>
-              <div className={styles.itemDescription}>Install MCP Server on Cursor</div>
-            </div>
-          </button>
-
-          <button className={styles.dropdownItem} onClick={() => handleCopyMcpConfig('vscode')}>
-            <svg width="16" height="16" viewBox="0 0 100 100" fill="currentColor">
-              <path d="M70.9119 99.3171C72.4869 99.9307 74.2828 99.8914 75.8725 99.1264L96.4608 89.2197C98.6242 88.1787 100 85.9892 100 83.5872V16.4133C100 14.0113 98.6243 11.8218 96.4609 10.7808L75.8725 0.873756C73.7862 -0.130129 71.3446 0.11576 69.5135 1.44695C69.252 1.63711 69.0028 1.84943 68.769 2.08341L29.3551 38.0415L12.1872 25.0096C10.589 23.7965 8.35363 23.8959 6.86933 25.2461L1.36303 30.2549C-0.452552 31.9064 -0.454633 34.7627 1.35853 36.417L16.2471 50.0001L1.35853 63.5832C-0.454633 65.2374 -0.452552 68.0938 1.36303 69.7453L6.86933 74.7541C8.35363 76.1043 10.589 76.2037 12.1872 74.9905L29.3551 61.9587L68.769 97.9167C69.3925 98.5406 70.1246 99.0104 70.9119 99.3171ZM75.0152 27.2989L45.1091 50.0001L75.0152 72.7012V27.2989Z"/>
-            </svg>
-            <div>
-              <div className={styles.itemTitle}>
-                {copiedId === 'vscode' ? 'Copied!' : 'Connect to VS Code'}
-              </div>
-              <div className={styles.itemDescription}>Install MCP Server on VS Code</div>
-            </div>
-          </button>
         </div>
       )}
     </div>
