@@ -37,8 +37,8 @@ const supportedPermissions = await walletClient.getSupportedExecutionPermissions
 // {
 //     "native-token-stream": {
 //         "chainIds": [
-//             "0x1",
-//             "0xa",
+//             1,
+//             10,
 //         ],
 //         "ruleTypes": [
 //             "expiry"

@@ -136,7 +136,7 @@ Before creating a delegation, ensure that the delegator account (in this example
 :::
 
 ```typescript
-import { createDelegation } from "@metamask/smart-accounts-kit"
+import { createDelegation, ScopeType } from "@metamask/smart-accounts-kit"
 import { parseUnits } from "viem"
 
 // USDC address on Ethereum Sepolia.
@@ -147,7 +147,7 @@ const delegation = createDelegation({
   from: delegatorSmartAccount.address,
   environment: delegatorSmartAccount.environment
   scope: {
-    type: "erc20TransferAmount",
+    type: ScopeType.Erc20TransferAmount,
     tokenAddress,
     // 10 USDC 
     maxAmount: parseUnits("10", 6),

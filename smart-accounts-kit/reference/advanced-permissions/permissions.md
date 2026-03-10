@@ -42,6 +42,7 @@ const permission = {
     periodDuration: 86400,
     justification: "Permission to transfer 10 USDC every day",
   },
+  isAdjustmentAllowed: true,
 };
 ```
 
@@ -80,6 +81,7 @@ const permission = {
     startTime: currentTime,
     justification: "Permission to use 0.1 USDC per second",
   },
+  isAdjustmentAllowed: true,
 };
 ```
 
@@ -101,6 +103,7 @@ const permission = {
   data: {
     justification: "Permission to revoke ERC-20 token allowances",
   },
+  isAdjustmentAllowed: true,
 };
 ```
 
@@ -136,6 +139,7 @@ const permission = {
     startTime: currentTime,
     justification: "Permission to use 0.001 ETH every day",
   },
+  isAdjustmentAllowed: true,
 };
 ```
 
@@ -174,5 +178,6 @@ const permission = {
     startTime: currentTime,
     justification: "Permission to use 0.0001 ETH per second",
   },
+  isAdjustmentAllowed: true,
 };
 ```

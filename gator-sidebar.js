@@ -206,6 +206,7 @@ const sidebar = {
             'reference/erc7710/wallet-client',
           ],
         },
+        'reference/types',
       ],
     },
   ],

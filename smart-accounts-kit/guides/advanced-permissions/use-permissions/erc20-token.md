@@ -58,8 +58,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       periodDuration: 86400,
       justification: "Permission to transfer 10 USDC every day",
     },
+    isAdjustmentAllowed: true,
   },
-  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -124,8 +124,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
       startTime: currentTime,
       justification: "Permission to use 0.1 USDC per second",
     },
+    isAdjustmentAllowed: true,
   },
-  isAdjustmentAllowed: true,
 }]);
 ```
 
@@ -176,8 +176,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
     data: {
       justification: "Permission to revoke ERC-20 token allowances",
     },
+    isAdjustmentAllowed: true,
   },
-  isAdjustmentAllowed: true,
 }]);
 ```
 

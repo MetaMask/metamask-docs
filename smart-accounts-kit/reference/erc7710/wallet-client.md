@@ -29,7 +29,7 @@ This function has the same parameters, and it also requires the following parame
 | Name | Type | Required | Description                                                                                                                                                                                               |
 | ---- | ---- | -------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `delegationManager` | `Address` | Yes | The address of the Delegation Manager.                                                                                                                                                                    |
-| `permissionsContext` | `Hex` | Yes | Encoded calldata for redeeming delegations. If you're not using Advanced Permissions (ERC-7715), you can use the [`redeemDelegations`](../delegation/index.md#redeemdelegations) utility function to generate the calldata manually. |
+| `permissionContext` | `PermissionContext` | Yes | An encoded delegation chain (`Hex`) or a decoded delegation chain (`Delegation[]`) for redeeming delegations. |
 
 ### Example
 
@@ -41,14 +41,14 @@ import { walletClient, publicClient } from "./client.ts";
 
 // These properties must be extracted from the permission response. See
 // `grantPermissions` action to learn how to request permissions.
-const permissionsContext = permissionsResponse[0].context;
+const permissionContext = permissionsResponse[0].context;
 const delegationManager = permissionsResponse[0].signerMeta.delegationManager;
 
 const hash = walletClient.sendTransactionWithDelegation({
   chain,
   to: "0x70997970c51812dc3a010c7d01b50e0d17dc79c8",
   value: 1n,
-  permissionsContext,
+  permissionContext,
   delegationManager
 });
 ```

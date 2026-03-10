@@ -31,7 +31,7 @@ At the start of each new period, the allowance resets.
 #### Example
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseUnits } from "viem";
 
@@ -40,7 +40,7 @@ const startDate = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
-    type: "erc20PeriodTransfer",
+    type: ScopeType.Erc20PeriodTransfer,
     tokenAddress: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
     // 10 ERC-20 token with 6 decimals
     periodAmount: parseUnits("10", 6),
@@ -75,7 +75,7 @@ At the start, a specified initial amount is released, after which tokens accrue 
 #### Example
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseUnits } from "viem";
 
@@ -84,7 +84,7 @@ const startTime = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
-    type: "erc20Streaming",
+    type: ScopeType.Erc20Streaming,
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
     // 0.1 ERC-20 token with 6 decimals
     amountPerSecond: parseUnits("0.1", 6),
@@ -118,13 +118,13 @@ This scope is useful for setting simple, fixed transfer limits without any time-
 #### Example
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseUnits } from "viem";
 
 const delegation = createDelegation({
   scope: {
-    type: "erc20TransferAmount",
+    type: ScopeType.Erc20TransferAmount,
     tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
     // 1 ERC-20 token with 6 decimals
     maxAmount: parseUnits("1", 6),
@@ -152,12 +152,12 @@ Limits the delegation to ERC-721 token (NFT) transfers only.
 #### Example
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 
 const delegation = createDelegation({
   scope: {
-    type: "erc721Transfer",
+    type: ScopeType.Erc721Transfer,
     tokenAddress: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
     tokenId: 1n,
   },
@@ -182,13 +182,13 @@ At the start of each new period, the allowance resets.
 | `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
 | `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
 | `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | [`AllowedCalldataBuilderConfig`](../types.md#allowedcalldatabuilderconfig)`[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | [`ExactCalldataBuilderConfig`](../types.md#exactcalldatabuilderconfig)     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem";
 
@@ -197,7 +197,7 @@ const startDate = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
-    type: "nativeTokenPeriodTransfer",
+    type: ScopeType.NativeTokenPeriodTransfer,
     periodAmount: parseEther("0.01"),
     periodDuration: 86400,
     startDate,
@@ -225,13 +225,13 @@ At the start, a specified initial amount is released, after which tokens accrue 
 | `maxAmount`       | `bigint`  | Yes      | The maximum total amount that can be unlocked.            |
 | `amountPerSecond` | `bigint`  | Yes      | The rate at which tokens accrue per second.               |
 | `startTime`       | `number`  | Yes      | The start timestamp in seconds.                           |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | [`AllowedCalldataBuilderConfig`](../types.md#allowedcalldatabuilderconfig)`[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | [`ExactCalldataBuilderConfig`](../types.md#exactcalldatabuilderconfig)     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem";
 
@@ -240,7 +240,7 @@ const startTime = Math.floor(Date.now() / 1000);
 
 const delegation = createDelegation({
   scope: {
-    type: "nativeTokenStreaming",
+    type: ScopeType.NativeTokenStreaming,
     amountPerSecond: parseEther("0.0001"),
     initialAmount: parseEther("0.01"),
     maxAmount: parseEther("0.1"),
@@ -265,19 +265,19 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 | Name              | Type      | Required | Description                                                       |
 | ----------------- | --------- | -------- | ----------------------------------------------------------------- |
 | `maxAmount`       | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
+| `allowedCalldata` | [`AllowedCalldataBuilderConfig`](../types.md#allowedcalldatabuilderconfig)`[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | [`ExactCalldataBuilderConfig`](../types.md#exactcalldatabuilderconfig)     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
 #### Example
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem";
 
 const delegation = createDelegation({
   scope: {
-    type: "nativeTokenTransferAmount",
+    type: ScopeType.NativeTokenTransferAmount,
     // 0.001 ETH in wei format.
     maxAmount: parseEther("0.001"),
   },
@@ -300,21 +300,21 @@ Defines the specific methods, contract addresses, and calldata that are allowed 
 | ----------------- | -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `targets`         | `Address[]`                      | Yes      | The list of addresses that the delegate is allowed to call.                                                                                                     |
 | `selectors`       | `MethodSelector[]`               | Yes      | The list of method selectors that the delegate is allowed to call. The selector value can be 4-byte hex string, ABI function signature, or ABI function object. |
-| `allowedCalldata` | `AllowedCalldataBuilderConfig[]` | No       | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
-| `exactCalldata`   | `ExactCalldataBuilderConfig`     | No       | The calldata the delegate is allowed to call. Cannot be used together with `allowedCalldata`. |
-| `valueLte`        | `ValueLteBuilderConfig`          | No       | The maximum native token amount the delegate can transfer. By default, the amount is set to `0`. |
+| `allowedCalldata` | [`AllowedCalldataBuilderConfig`](../types.md#allowedcalldatabuilderconfig)`[]` | No       | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
+| `exactCalldata`   | [`ExactCalldataBuilderConfig`](../types.md#exactcalldatabuilderconfig)     | No       | The calldata the delegate is allowed to call. Cannot be used together with `allowedCalldata`. |
+| `valueLte`        | [`ValueLteBuilderConfig`](../types.md#valueltebuilderconfig)          | No       | The maximum native token amount the delegate can transfer. By default, the amount is set to `0`. |
 
 #### Example
 
 This example sets the delegation scope to allow the delegate to call the `approve` function on the USDC token contract:
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 
 const delegation = createDelegation({
   scope: {
-    type: "functionCall",
+    type: ScopeType.FunctionCall,
     targets: ["0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"], // USDC address on Sepolia.
     selectors: ["approve(address, uint256)"]
   },
@@ -340,14 +340,14 @@ Restricts a delegation to ownership transfer calls only.
 #### Example
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
+import { createDelegation, getSmartAccountsEnvironment, ScopeType } from "@metamask/smart-accounts-kit";
 import { sepolia } from "viem/chains";
 
 const contractAddress = "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
 
 const delegation = createDelegation({
   scope: {
-    type: "ownershipTransfer",
+    type: ScopeType.OwnershipTransfer,
     contractAddress,
   },
   // Address that is granting the delegation.

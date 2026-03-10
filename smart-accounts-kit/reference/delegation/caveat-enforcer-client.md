@@ -22,7 +22,7 @@ delegation, and read the required state.
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
 | `client`      | `Client`               | Yes      | The Viem Client to interact with the caveat enforcer contracts and read their state. |
-| `environment` | `SmartAccountsEnvironment` | Yes      | Environment to resolve the smart contracts for the current chain.       |
+| `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes      | Environment to resolve the smart contracts for the current chain.       |
 
 ### Example
 
@@ -66,7 +66,7 @@ Returns the available amount from the ERC-20 period transfer enforcer for the cu
 
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| `delegation`  | [`Delegation`](../types.md#delegation)           | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -86,7 +86,7 @@ const { availableAmount } = await caveatEnforcerClient.getErc20PeriodTransferEnf
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
 import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 
@@ -97,7 +97,7 @@ const startDate = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {
-    type: 'erc20PeriodTransfer',
+    type: ScopeType.Erc20PeriodTransfer,
     tokenAddress: '0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da',
     periodAmount: parseUnits('10', 6),
     periodDuration: 86400,
@@ -120,7 +120,7 @@ Returns the available amount from the ERC-20 streaming enforcer.
 
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| `delegation`  | [`Delegation`](../types.md#delegation)           | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -140,7 +140,7 @@ const { availableAmount } = await caveatEnforcerClient.getErc20StreamingEnforcer
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
 import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 import { parseUnits } from 'viem'
@@ -152,7 +152,7 @@ const startTime = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {
-    type: 'erc20Streaming',
+    type: ScopeType.Erc20Streaming,
     tokenAddress: '0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92',
     amountPerSecond: parseUnits('0.1', 6),
     initialAmount: parseUnits('1', 6),
@@ -176,7 +176,7 @@ Returns the available amount from the native token period enforcer for the curre
 
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| `delegation`  | [`Delegation`](../types.md#delegation)           | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -196,7 +196,7 @@ const { availableAmount } = await caveatEnforcerClient.getNativeTokenPeriodTrans
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
 import { parseEther } from 'viem'
 import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
@@ -208,8 +208,8 @@ const startDate = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {
-    type: 'nativeTokenPeriodTransfer',
-    periodAmount: parseEther('0.01', 6),
+    type: ScopeType.NativeTokenPeriodTransfer,
+    periodAmount: parseEther('0.01'),
     periodDuration: 86400,
     startDate,
   },
@@ -230,7 +230,7 @@ Returns the available amount from the native streaming enforcer.
 
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object for which you want to check the available amount. |
+| `delegation`  | [`Delegation`](../types.md#delegation)           | Yes      | The delegation object for which you want to check the available amount. |
 
 ### Example
 
@@ -250,7 +250,7 @@ const { availableAmount } = await caveatEnforcerClient.getNativeTokenStreamingEn
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation } from '@metamask/smart-accounts-kit'
+import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
 import { sepolia as chain } from 'viem/chains'
 import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
 
@@ -261,7 +261,7 @@ const startTime = Math.floor(Date.now() / 1000)
 
 export const delegation = createDelegation({
   scope: {
-    type: "nativeTokenStreaming",
+    type: ScopeType.NativeTokenStreaming,
     amountPerSecond: parseEther('0.001'),
     initialAmount: parseEther('0.01'),
     maxAmount: parseEther('0.1'),
@@ -285,7 +285,7 @@ encode the args for the token index you want to check the available amount.
 
 | Name          | Type                   | Required | Description |
 | ------------- | ---------------------- | -------- | ----------- |
-| `delegation`  | `Delegation`           | Yes      | The delegation object with token index for which you want to check the available amount. |
+| `delegation`  | [`Delegation`](../types.md#delegation)           | Yes      | The delegation object with token index for which you want to check the available amount. |
 
 ### Example
 
@@ -311,7 +311,7 @@ const { availableAmount } = await caveatEnforcerClient.getMultiTokenPeriodEnforc
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment, ROOT_AUTHORITY } from '@metamask/smart-accounts-kit'
+import { createDelegation, getSmartAccountsEnvironment, ROOT_AUTHORITY, CaveatType } from '@metamask/smart-accounts-kit'
 import { createCaveatBuilder } from '@metamask/smart-accounts-kit/utils'
 import { sepolia as chain } from 'viem/chains'
 import { parseUnits, parseEther } from 'viem'
@@ -343,10 +343,7 @@ const tokenConfigs = [
   }
 ]
 
-const caveats = caveatBuilder.addCaveat({
-  'multiTokenPeriod',
-   tokenConfigs
-})
+const caveats = caveatBuilder.addCaveat(CaveatType.MultiTokenPeriod, tokenConfigs)
 
 export const delegation: Delegation =  {
   delegate: 'DELEGATE_ADDRESS',
