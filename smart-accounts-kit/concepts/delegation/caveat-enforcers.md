@@ -128,10 +128,16 @@ The `CaveatBuilder` provides a developer-friendly TypeScript API that:
 - Handles the creation of the `caveats` array needed when creating a delegation.
 
 Each [caveat type](../../reference/delegation/caveats.md) in the `CaveatBuilder`
-corresponds to a specific caveat enforcer contract. For example, when you use:
+corresponds to a specific caveat enforcer contract. The following example uses an [`AllowedTargets`](../../reference/delegation/caveats.md#allowedtargets) caveat.
 
 ```typescript
-caveatBuilder.addCaveat("allowedTargets", ["0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92"]);
+const caveats = [{
+  type: CaveatType.AllowedTargets,
+  targets: [
+    "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
+    "0xB2880E3862f1024cAC05E66095148C0a9251718b",
+  ]
+}];
 ```
 
 The builder is creating a caveat that references the

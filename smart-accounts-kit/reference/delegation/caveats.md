@@ -9,6 +9,8 @@ keywords: [caveats, caveat enforcers, configuration, smart contracts, reference]
 
 When [constraining a delegation scope](../../guides/delegation/use-delegation-scopes/constrain-scope.md), you can specify the following caveat types.
 
+You can use either a string literal or the [`CaveatType`](../types.md#caveattype) enum to define the caveat type.
+
 ## `allowedCalldata`
 
 Limits the calldata that is executed.
@@ -29,6 +31,8 @@ Caveat enforcer contract: [`AllowedCalldataEnforcer.sol`](https://github.com/Met
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const value = encodeAbiParameters(
   [
     { type: "string" },
@@ -41,7 +45,7 @@ const value = encodeAbiParameters(
 );
 
 const caveats = [{
-  type: "allowedCalldata",
+  type: CaveatType.AllowedCalldata,
   startIndex: 4,
   value,
 }];
@@ -66,8 +70,10 @@ Caveat enforcer contract: [`AllowedMethodsEnforcer.sol`](https://github.com/Meta
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "allowedMethods",
+  type: CaveatType.AllowedMethods,
   selectors: [
     // 4-byte Hex string.
     "0xa9059cbb",
@@ -107,8 +113,10 @@ Caveat enforcer contract: [`AllowedTargetsEnforcer.sol`](https://github.com/Meta
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "allowedTargets",
+  type: CaveatType.AllowedTargets,
   targets: [
     "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
     "0xB2880E3862f1024cAC05E66095148C0a9251718b",
@@ -131,8 +139,10 @@ Caveat enforcer contract: [`ArgsEqualityCheckEnforcer.sol`](https://github.com/M
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "argsEqualityCheck",
+  type: CaveatType.ArgsEqualityCheck,
   args: "0xf2bef872456302645b7c0bb59dcd96ffe6d4a844f311ebf95e7cf439c9393de2",
 }];
 ```
@@ -153,8 +163,10 @@ Caveat enforcer contract: [`BlockNumberEnforcer.sol`](https://github.com/MetaMas
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "blockNumber",
+  type: CaveatType.BlockNumber,
   afterThreshold: 19426587n,
   beforeThreshold: 0n,
 }];
@@ -177,8 +189,10 @@ Caveat enforcer contract: [`DeployedEnforcer.sol`](https://github.com/MetaMask/d
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "deployed",
+  type: CaveatType.Deployed,
   contractAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
   salt: "0x0e3e8e2381fde0e8515ed47ec9caec8ba2bc12603bc2b36133fa3e3fa4d88587",
   bytecode: "0x..." // The deploy bytecode for the contract at 0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92
@@ -204,8 +218,10 @@ Caveat enforcer contract: [`ERC1155BalanceChangeEnforcer.sol`](https://github.co
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "erc1155BalanceChange",
+  type: CaveatType.Erc1155BalanceChange,
   tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
   recipient: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
   tokenId: 1n,
@@ -232,8 +248,10 @@ Caveat enforcer contract: [`ERC20BalanceChangeEnforcer.sol`](https://github.com/
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "erc20BalanceChange",
+  type: CaveatType.Erc20BalanceChange,
   tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
   recipient: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
   balance: 1000000n,
@@ -262,12 +280,14 @@ Caveat enforcer contract: [`ERC20PeriodTransferEnforcer.sol`](https://github.com
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 // Current time as start date. 
 // Since startDate is in seconds, we need to convert milliseconds to seconds.
 const startDate = Math.floor(Date.now() / 1000);
 
 const caveats = [{
-  type: "erc20PeriodTransfer",
+  type: CaveatType.Erc20PeriodTransfer,
   // Address of the ERC-20 token.
   tokenAddress: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
   // 1 ERC-20 token - 18 decimals, in wei.
@@ -297,12 +317,14 @@ Caveat enforcer contract: [`ERC20StreamingEnforcer.sol`](https://github.com/Meta
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 // Current time as start date. 
 // Since startDate is in seconds, we need to convert milliseconds to seconds.
 const startDate = Math.floor(Date.now() / 1000);
 
 const caveats = [{
-  type: "erc20Streaming",
+  type: CaveatType.Erc20Streaming,
   // Address of the ERC-20 token.
   tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
   // 1 ERC-20 token - 18 decimals, in wei.
@@ -331,8 +353,10 @@ Caveat enforcer contract: [`ERC20TransferAmountEnforcer.sol`](https://github.com
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "erc20TransferAmount",
+  type: CaveatType.Erc20TransferAmount,
   tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
   // 1 ERC-20 token - 18 decimals, in wei.
   maxAmount: 1000000000000000000n
@@ -357,8 +381,10 @@ Caveat enforcer contract: [`ERC721BalanceChangeEnforcer.sol`](https://github.com
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "erc721BalanceChange",
+  type: CaveatType.Erc721BalanceChange,
   tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
   recipient: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
   balance: 1000000n,
@@ -382,8 +408,10 @@ Caveat enforcer contract: [`ERC721TransferEnforcer.sol`](https://github.com/Meta
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "erc721Transfer",
+  type: CaveatType.Erc721Transfer,
   tokenAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92",
   tokenId: 1n
 }];
@@ -405,8 +433,10 @@ Caveat enforcer contract: [`ExactCalldataEnforcer.sol`](https://github.com/MetaM
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "exactCalldata",
+  type: CaveatType.ExactCalldata,
   calldata: "0x1234567890abcdef",
 }];
 ```
@@ -427,6 +457,8 @@ Caveat enforcer contract: [`ExactCalldataBatchEnforcer.sol`](https://github.com/
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const executions = [
   {
     target: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
@@ -441,7 +473,7 @@ const executions = [
 ];
 
 const caveats = [{
-  type: "exactCalldataBatch",
+  type: CaveatType.ExactCalldataBatch,
   executions,
 }];
 ```
@@ -462,8 +494,10 @@ Caveat enforcer contract: [`ExactExecutionEnforcer.sol`](https://github.com/Meta
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "exactExecution",
+  type: CaveatType.ExactExecution,
   target: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
   value: 1000000000000000000n,
   callData: "0x",
@@ -486,6 +520,8 @@ Caveat enforcer contract: [`ExactExecutionBatchEnforcer.sol`](https://github.com
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const executions = [
   {
     target: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
@@ -500,7 +536,7 @@ const executions = [
 ];
 
 const caveats = [{
-  type: "exactExecutionBatch",
+  type: CaveatType.ExactExecutionBatch,
   executions,
 }];
 ```
@@ -520,8 +556,10 @@ Caveat enforcer contract: [`IdEnforcer.sol`](https://github.com/MetaMask/delegat
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "id",
+  type: CaveatType.Id,
   id: 123456,
 }];
 ```
@@ -541,8 +579,10 @@ Caveat enforcer contract: [`LimitedCallsEnforcer.sol`](https://github.com/MetaMa
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "limitedCalls",
+  type: CaveatType.LimitedCalls,
   limit: 1,
 }];
 ```
@@ -571,6 +611,7 @@ The list of `TokenPeriodConfig` objects, where each object contains:
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
 import { zeroAddress } from 'viem';
 
 // Current time as start date. 
@@ -598,7 +639,7 @@ const tokenPeriodConfigs = [
 ]
 
 const caveats = [{
-  type: "multiTokenPeriod",
+  type: CaveatType.MultiTokenPeriod,
   tokenPeriodConfigs,
 }];
 ```
@@ -620,8 +661,10 @@ Caveat enforcer contract: [`NativeBalanceChangeEnforcer.sol`](https://github.com
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "nativeBalanceChange",
+  type: CaveatType.NativeBalanceChange,
   recipient: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
   balance: 1000000n,
   changeType: BalanceChangeType.Increase,
@@ -646,8 +689,10 @@ Caveat enforcer contract: [`NativeTokenPaymentEnforcer.sol`](https://github.com/
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "nativeTokenPayment",
+  type: CaveatType.NativeTokenPayment,
   recipient: "0x3fF528De37cd95b67845C1c55303e7685c72F319",
   amount: 1000000n,
 }];
@@ -673,12 +718,14 @@ Caveat enforcer contract: [`NativeTokenPeriodTransferEnforcer.sol`](https://gith
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 // Current time as start date. 
 // Since startDate is in seconds, we need to convert milliseconds to seconds.
 const startDate = Math.floor(Date.now() / 1000);
 
 const caveats = [{
-  type: "nativeTokenPeriodTransfer",
+  type: CaveatType.NativeTokenPeriodTransfer,
   // 1 ETH in wei.
   periodAmount: 1000000000000000000n,
   // 1 day in seconds.
@@ -705,12 +752,14 @@ Caveat enforcer contract: [`NativeTokenStreamingEnforcer.sol`](https://github.co
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 // Current time as start date. 
 // Since startDate is in seconds, we need to convert milliseconds to seconds.
 const startDate = Math.floor(Date.now() / 1000);
 
 const caveats = [{
-  type: "nativeTokenStreaming",
+  type: CaveatType.NativeTokenStreaming,
   // 0.01 ETH in wei.
   initialAmount: 10000000000000000,
   // 0.5 ETH in wei.
@@ -736,8 +785,10 @@ Caveat enforcer contract: [`NativeTokenTransferAmountEnforcer.sol`](https://gith
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "nativeTokenTransferAmount",
+  type: CaveatType.NativeTokenTransferAmount,
   // 0.00001 ETH in wei.
   maxAmount: 10000000000000000n
 }];
@@ -759,8 +810,10 @@ Caveat enforcer contract: [`NonceEnforcer.sol`](https://github.com/MetaMask/dele
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "nonce",
+  type: CaveatType.Nonce,
   nonce: "0x1"
 }];
 ```
@@ -780,8 +833,10 @@ Caveat enforcer contract: [`OwnershipTransferEnforcer.sol`](https://github.com/M
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "ownershipTransfer",
+  type: CaveatType.OwnershipTransfer,
   contractAddress: "0xc11F3a8E5C7D16b75c9E2F60d26f5321C6Af5E92"
 }];
 ```
@@ -811,8 +866,10 @@ Caveat enforcer contract: [`RedeemerEnforcer.sol`](https://github.com/MetaMask/d
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "redeemer",
+  type: CaveatType.Redeemer,
   redeemers: [
     "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
     "0x6be97c23596ECed7170fdFb28e8dA1Ca5cdc54C5"
@@ -842,8 +899,10 @@ Caveat enforcer contract: [`SpecificActionERC20TransferBatchEnforcer.sol`](https
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "specificActionERC20TransferBatch",
+  type: CaveatType.SpecificActionERC20TransferBatch,
   tokenAddress: "0xb4aE654Aca577781Ca1c5DE8FbE60c2F423f37da",
   recipient: "0x027aeAFF3E5C33c4018FDD302c20a1B83aDCD96C",
   // 1 ERC-20 token - 18 decimals, in wei
@@ -869,6 +928,8 @@ Caveat enforcer contract: [`TimestampEnforcer.sol`](https://github.com/MetaMask/
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 // We need to convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000);
 // 1 hour after current time.
@@ -877,7 +938,7 @@ const afterThreshold = currentTime + 3600;
 const beforeThreshold = afterThreshold + 86400;
 
 const caveats = [{
-  type: "timestamp",
+  type: CaveatType.Timestamp,
   afterThreshold,
   beforeThreshold,
 }];
@@ -898,8 +959,10 @@ Caveat enforcer contract: [`ValueLteEnforcer.sol`](https://github.com/MetaMask/d
 ### Example
 
 ```typescript
+import { CaveatType } from "@metamask/smart-accounts-kit";
+
 const caveats = [{
-  type: "valueLte",
+  type: CaveatType.ValueLte,
   // 0.01 ETH in wei.
   maxValue: 10000000000000000n
 }];

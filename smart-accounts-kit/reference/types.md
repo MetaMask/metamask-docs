@@ -10,6 +10,44 @@ This page documents the types used in Smart Accounts Kit APIs.
 
 ## Enums
 
+### `CaveatType`
+
+Enum representing the [caveat](delegation/caveats.md) type.
+
+| Value | String |
+| ----- | ------ |
+| `CaveatType.AllowedCalldata` | `"allowedCalldata"` |
+| `CaveatType.AllowedMethods` | `"allowedMethods"` |
+| `CaveatType.AllowedTargets` | `"allowedTargets"` |
+| `CaveatType.ArgsEqualityCheck` | `"argsEqualityCheck"` |
+| `CaveatType.BlockNumber` | `"blockNumber"` |
+| `CaveatType.Deployed` | `"deployed"` |
+| `CaveatType.Erc1155BalanceChange` | `"erc1155BalanceChange"` |
+| `CaveatType.Erc20BalanceChange` | `"erc20BalanceChange"` |
+| `CaveatType.Erc20PeriodTransfer` | `"erc20PeriodTransfer"` |
+| `CaveatType.Erc20Streaming` | `"erc20Streaming"` |
+| `CaveatType.Erc20TransferAmount` | `"erc20TransferAmount"` |
+| `CaveatType.Erc721BalanceChange` | `"erc721BalanceChange"` |
+| `CaveatType.Erc721Transfer` | `"erc721Transfer"` |
+| `CaveatType.ExactCalldata` | `"exactCalldata"` |
+| `CaveatType.ExactCalldataBatch` | `"exactCalldataBatch"` |
+| `CaveatType.ExactExecution` | `"exactExecution"` |
+| `CaveatType.ExactExecutionBatch` | `"exactExecutionBatch"` |
+| `CaveatType.Id` | `"id"` |
+| `CaveatType.LimitedCalls` | `"limitedCalls"` |
+| `CaveatType.MultiTokenPeriod` | `"multiTokenPeriod"` |
+| `CaveatType.NativeBalanceChange` | `"nativeBalanceChange"` |
+| `CaveatType.NativeTokenPayment` | `"nativeTokenPayment"` |
+| `CaveatType.NativeTokenPeriodTransfer` | `"nativeTokenPeriodTransfer"` |
+| `CaveatType.NativeTokenStreaming` | `"nativeTokenStreaming"` |
+| `CaveatType.NativeTokenTransferAmount` | `"nativeTokenTransferAmount"` |
+| `CaveatType.Nonce` | `"nonce"` |
+| `CaveatType.OwnershipTransfer` | `"ownershipTransfer"` |
+| `CaveatType.Redeemer` | `"redeemer"` |
+| `CaveatType.SpecificActionERC20TransferBatch` | `"specificActionERC20TransferBatch"` |
+| `CaveatType.Timestamp` | `"timestamp"` |
+| `CaveatType.ValueLte` | `"valueLte"` |
+
 ### `ExecutionMode`
 
 Enum specifying how delegated executions are processed when [redeeming delegations](delegation/index.md#redeemdelegations).

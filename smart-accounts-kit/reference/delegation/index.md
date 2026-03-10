@@ -62,7 +62,7 @@ Creates a delegation with a specific delegate.
 | `to` | `Hex` | Yes | The address to which the delegation is being granted. |
 | `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. See [delegation scopes](./delegation-scopes.md) for the full list of scope types and their parameters. |
 | `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
-| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. |
+| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. See [caveats reference](./caveats.md) for the full list of caveat types and their parameters. |
 | `parentDelegation` | [`Delegation`](../types.md#delegation) \| `Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
 | `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 
@@ -99,7 +99,7 @@ Creates an open delegation that can be redeemed by any delegate.
 | `from` | `Hex` | Yes | The address that is granting the delegation. |
 | `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. See [delegation scopes](./delegation-scopes.md) for the full list of scope types and their parameters. |
 | `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
-| `caveats` | `Caveats`| No | Caveats that further refine the authority granted by the `scope`. |
+| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. See [caveats reference](./caveats.md) for the full list of caveat types and their parameters. |
 | `parentDelegation` | [`Delegation`](../types.md#delegation) \| `Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
 | `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 

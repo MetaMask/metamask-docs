@@ -311,7 +311,7 @@ const { availableAmount } = await caveatEnforcerClient.getMultiTokenPeriodEnforc
 <TabItem value="config.ts">
 
 ```typescript
-import { createDelegation, getSmartAccountsEnvironment, ROOT_AUTHORITY } from '@metamask/smart-accounts-kit'
+import { createDelegation, getSmartAccountsEnvironment, ROOT_AUTHORITY, CaveatType } from '@metamask/smart-accounts-kit'
 import { createCaveatBuilder } from '@metamask/smart-accounts-kit/utils'
 import { sepolia as chain } from 'viem/chains'
 import { parseUnits, parseEther } from 'viem'
@@ -343,10 +343,7 @@ const tokenConfigs = [
   }
 ]
 
-const caveats = caveatBuilder.addCaveat({
-  'multiTokenPeriod',
-   tokenConfigs
-})
+const caveats = caveatBuilder.addCaveat(CaveatType.MultiTokenPeriod, tokenConfigs)
 
 export const delegation: Delegation =  {
   delegate: 'DELEGATE_ADDRESS',
