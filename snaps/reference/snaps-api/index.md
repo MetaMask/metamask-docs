@@ -5,4 +5,5 @@ description: See the Snaps API reference.
 
 # JSON-RPC API
 
-This section provides a reference for the JSON-RPC API of MetaMask's Snaps API.
+This section provides a reference for the JSON-RPC methods available in the
+MetaMask Snaps API.
