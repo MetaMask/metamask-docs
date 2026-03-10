@@ -13,7 +13,7 @@ the Web3 ecosystem.
 
 :::important
 
-Palm testnet is deprecated. Mainnet remains supported.
+Support for Palm testnet is deprecated; Mainnet support remains.
 
 :::
 
