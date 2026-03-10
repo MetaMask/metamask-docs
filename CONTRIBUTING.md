@@ -71,7 +71,7 @@ To contribute changes:
    >
    > - All documentation content is located in the `sdk`, `wallet`, `embedded-wallets`, `smart-accounts-kit`, `services`,
    >   `developer-tools`, `snaps`, and `src/pages` directories.
-   > - If you add a new documentation page, edit `sdk-sidebar.js`, `wallet-sidebar.js`, `ew-sidebar.js`, `gator-sidebar.js`,
+   > - If you add a new documentation page, edit `mm-connect-sidebar.js`, `ew-sidebar.js`, `gator-sidebar.js`,
    >   `services-sidebar.js`, `dashboard-sidebar.js`, or `snaps-sidebar.js` to add the page to the
    >   [sidebar](https://docs-template.consensys.io/create/configure-docusaurus#sidebar).
    > - If you delete, rename, or move a documentation file, add a
@@ -116,13 +116,13 @@ Refer to the [Consensys documentation style guide](https://docs-template.consens
 
 ## Format links
 
-Most links in the Markdown pages use *relative file paths*, for example:
+Most links in the Markdown pages use _relative file paths_, for example:
 
 ```md
 You can enable users to create a [MetaMask smart account](../../concepts/smart-accounts.md) directly in your dapp.
 ```
 
-However, when linking between different product sections or using the `CardList` component, use *absolute URL paths*. For example:
+However, when linking between different product sections or using the `CardList` component, use _absolute URL paths_. For example:
 
 ```md
 When a dapp requests to submit a batch of transactions atomically, MetaMask may prompt users to upgrade their
@@ -131,14 +131,14 @@ externally owned account (EOA) to a [MetaMask smart account](/smart-accounts-kit
 
 ```md
 <CardList
-  items={[
-    {
-      href: '/snaps/learn/about-snaps',
-      title: 'About Snaps',
-      description: 'See a high-level, technical overview of the Snaps system.',
-    },
-    ...
-  ]}
+items={[
+{
+href: '/snaps/learn/about-snaps',
+title: 'About Snaps',
+description: 'See a high-level, technical overview of the Snaps system.',
+},
+...
+]}
 />
 ```
 

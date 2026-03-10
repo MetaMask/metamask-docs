@@ -258,14 +258,26 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'sdk',
-        path: 'sdk',
-        routeBasePath: 'sdk',
+        id: 'metamask-connect',
+        path: 'metamask-connect',
+        routeBasePath: 'metamask-connect',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
-        sidebarPath: require.resolve('./sdk-sidebar.js'),
+        sidebarPath: require.resolve('./mm-connect-sidebar.js'),
         breadcrumbs: false,
         remarkPlugins,
         rehypePlugins,
+      },
+    ],
+
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        createRedirects(existingPath) {
+          if (existingPath.includes('/metamask-connect')) {
+            return [existingPath.replace('/metamask-connect', '/sdk')];
+          }
+          return undefined;
+        },
       },
     ],
 
@@ -352,18 +364,18 @@ const config = {
             description: 'Complete documentation for MetaMask Embedded Wallets',
           },
           {
-            filename: 'llms-sdk.txt',
-            includePatterns: ['sdk/**/*.{md,mdx}'],
+            filename: 'llms-metamask-connect.txt',
+            includePatterns: ['metamask-connect/**/*.{md,mdx}'],
             fullContent: false,
-            title: 'MetaMask SDK documentation',
-            description: 'Documentation links for MetaMask SDK',
+            title: 'MetaMask Connect documentation',
+            description: 'Documentation links for MetaMask Connect',
           },
           {
-            filename: 'llms-sdk-full.txt',
-            includePatterns: ['sdk/**/*.{md,mdx}'],
+            filename: 'llms-metamask-connect-full.txt',
+            includePatterns: ['metamask-connect/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask SDK documentation',
-            description: 'Complete documentation for MetaMask SDK',
+            title: 'MetaMask Connect documentation',
+            description: 'Complete documentation for MetaMask Connect',
           },
           {
             filename: 'llms-smart-accounts-kit.txt',
@@ -581,7 +593,7 @@ const config = {
             items: [
               {
                 label: 'MetaMask Connect',
-                to: '/sdk',
+                to: '/metamask-connect',
               },
               {
                 label: 'Embedded Wallets',

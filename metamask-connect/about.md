@@ -60,11 +60,11 @@ MetaMask Connect integrates with the most popular options:
 
 | Library        | Status    | Documentation                                                   |
 | -------------- | --------- | --------------------------------------------------------------- |
-| **Wagmi**      | Supported | [Wagmi quickstart](/sdk/evm/connect/quickstart/wagmi)           |
-| **RainbowKit** | Supported | [RainbowKit quickstart](/sdk/evm/connect/quickstart/rainbowkit) |
-| **ConnectKit** | Supported | [ConnectKit quickstart](/sdk/evm/connect/quickstart/connectkit) |
-| **Web3Auth**   | Supported | [Web3Auth quickstart](/sdk/evm/connect/quickstart/web3auth)     |
-| **Dynamic**    | Supported | [Dynamic quickstart](/sdk/evm/connect/quickstart/dynamic)       |
+| **Wagmi**      | Supported | [Wagmi quickstart](/metamask-connect/evm/connect/quickstart/wagmi)           |
+| **RainbowKit** | Supported | [RainbowKit quickstart](/metamask-connect/evm/connect/quickstart/rainbowkit) |
+| **ConnectKit** | Supported | [ConnectKit quickstart](/metamask-connect/evm/connect/quickstart/connectkit) |
+| **Web3Auth**   | Supported | [Web3Auth quickstart](/metamask-connect/evm/connect/quickstart/web3auth)     |
+| **Dynamic**    | Supported | [Dynamic quickstart](/metamask-connect/evm/connect/quickstart/dynamic)       |
 
 In most cases, adopting MetaMask Connect is as simple as updating a dependency or adding a connector — no changes to your application code.
 

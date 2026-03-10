@@ -147,7 +147,7 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
       {/* <div className={styles.quickLinks}>
         <Heading as="h4" className={styles.quickLinksTitle}>Quick Links</Heading>
         <div className={styles.linkGrid}>
-          <Link href="/sdk" className={styles.quickLink}>
+          <Link href="/metamask-connect" className={styles.quickLink}>
             📖 MetaMask Connect Docs
           </Link>
           <Link href="/wallet" className={styles.quickLink}>

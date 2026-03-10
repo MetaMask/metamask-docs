@@ -37,32 +37,32 @@ See the [multichain quickstart](../multichain/connect/quickstart.md) to get star
 <CardList
 items={[
 {
-href: '/sdk/solana/connect/guides/use-wallet-adapter',
+href: '/metamask-connect/solana/connect/guides/use-wallet-adapter',
 title: 'Wallet Adapter',
 description: 'Use Solana\'s Wallet Adapter to connect a React dapp to MetaMask.',
 },
 {
-href: '/sdk/solana/connect/guides/use-framework-kit',
+href: '/metamask-connect/solana/connect/guides/use-framework-kit',
 title: 'Framework Kit',
 description: 'Use Framework Kit for a hooks-based React workflow with MetaMask.',
 },
 {
-href: '/sdk/solana/connect/quickstart/javascript',
+href: '/metamask-connect/solana/connect/quickstart/javascript',
 title: 'JavaScript',
 description: 'Use wallet-standard features directly in a JavaScript dapp.',
 },
 {
-href: '/sdk/solana/connect/quickstart/web3auth',
+href: '/metamask-connect/solana/connect/quickstart/web3auth',
 title: 'MetaMask Embedded Wallets',
 description: 'Set up Embedded Wallets SDK (previously Web3Auth) for Solana.',
 },
 {
-href: '/sdk/solana/connect/quickstart/dynamic',
+href: '/metamask-connect/solana/connect/quickstart/dynamic',
 title: 'Dynamic',
 description: 'Set up Dynamic SDK for Solana in a Next.js dapp.',
 },
 {
-href: '/sdk/solana/connect/reference/methods',
+href: '/metamask-connect/solana/connect/reference/methods',
 title: 'SDK methods',
 description: 'Reference for all Solana SDK methods, properties, and types.',
 }

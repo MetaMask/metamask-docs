@@ -1,7 +1,7 @@
 // @ts-check
 
 /** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
-const sdkSidebar = {
+const metamaskConnectSidebar = {
   overview: [
     'index',
     'about',
@@ -260,4 +260,4 @@ const sdkSidebar = {
   ],
 }
 
-module.exports = sdkSidebar
+module.exports = metamaskConnectSidebar

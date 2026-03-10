@@ -30,17 +30,17 @@ MetaMask Connect fills that gap and provides the following benefits:
 <CardList
 items={[
 {
-href: '/sdk/multichain',
+href: '/metamask-connect/multichain',
 title: 'Multichain',
 description: 'Connect to multiple ecosystems at the same time.',
 },
 {
-href: '/sdk/evm',
+href: '/metamask-connect/evm',
 title: 'EVM networks',
 description: 'Connect to Ethereum and other EVM networks.',
 },
 {
-href: '/sdk/solana',
+href: '/metamask-connect/solana',
 title: 'Solana',
 description: 'Connect to Solana.',
 }
@@ -53,7 +53,7 @@ There are three ways to integrate, depending on what works best for your dapp:
 
 ### Option A: Single-ecosystem client (drop-in for existing dapps)
 
-If your dapp targets a single ecosystem, use [`@metamask/connect-evm`](/sdk/evm) or [`@metamask/connect-solana`](/sdk/solana) for a familiar experience with minimal changes to your existing code.
+If your dapp targets a single ecosystem, use [`@metamask/connect-evm`](/metamask-connect/evm) or [`@metamask/connect-solana`](/metamask-connect/solana) for a familiar experience with minimal changes to your existing code.
 
 - **EVM**: Provides an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) compatible provider, so existing `ethers.js`, `viem`, or `web3.js` integrations work with minimal changes.
 - **Solana**: Provides a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet that integrates with the Solana wallet adapter ecosystem.
@@ -62,12 +62,12 @@ Use this option when you want to add MetaMask Connect to an existing single-ecos
 
 ### Option B: Multiple ecosystem clients
 
-If your dapp supports both EVM and Solana, use [`@metamask/connect-evm`](/sdk/evm) and [`@metamask/connect-solana`](/sdk/solana) together.
+If your dapp supports both EVM and Solana, use [`@metamask/connect-evm`](/metamask-connect/evm) and [`@metamask/connect-solana`](/metamask-connect/solana) together.
 This option gives you ecosystem-specific APIs while supporting both ecosystems, and is a good fit when you want to keep familiar provider interfaces for each ecosystem.
 
 ### Option C: Multichain client (full control, recommended)
 
-Use [`@metamask/connect-multichain`](/sdk/multichain) to work directly with the [Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
+Use [`@metamask/connect-multichain`](/metamask-connect/multichain) to work directly with the [Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
 This option uses **scopes** and `wallet_invokeMethod` instead of per-chain RPC and supports a single connection prompt across ecosystems.
 **This is the recommended long-term path.**
 
