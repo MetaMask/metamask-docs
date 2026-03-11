@@ -287,7 +287,7 @@ An object containing `coinType`, the BIP-44 coin type to get the entropy for.
 Coin type 60 is reserved for MetaMask externally owned accounts and blocked for Snaps.
 To connect to MetaMask accounts in a Snap, use
 [`endowment:ethereum-provider`](../reference/permissions.md#endowmentethereum-provider) and
-[`eth_requestAccounts`](/metamask-connect/evm/connect/reference/json-rpc-api).
+[`eth_requestAccounts`](/metamask-connect/evm/reference/json-rpc-api).
 :::
 
 #### Returns

@@ -12,8 +12,8 @@ This guide walks you through migrating from `@metamask/sdk` or `@metamask/sdk-re
 
 MetaMask Connect EVM (`@metamask/connect-evm`) is a rewrite of the legacy MetaMask SDK(`@metamask/sdk`) built on the
 [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) with
-async initialization, a singleton client, and built-in support for EVM, [Solana](../../solana/index.md), and
-[multichain](../../multichain/index.md) sessions.
+async initialization, a singleton client, and built-in support for EVM, [Solana](../solana/index.md), and
+[multichain](../multichain/index.md) sessions.
 
 ## 1. Replace packages
 
@@ -268,7 +268,7 @@ MetaMask Connect EVM introduces features that are not available in `@metamask/sd
 ### Next step: Go multichain
 
 If your dapp supports (or plans to support) both EVM and Solana, consider upgrading to the
-[multichain client](../../multichain/connect/quickstart.md).
+[multichain client](../multichain/quickstart.md).
 The EVM client is built on top of `createMultichainClient` internally, so the upgrade is
 straightforward:
 
@@ -299,7 +299,7 @@ await multichainClient.invokeMethod({
 })
 ```
 
-See the [multichain quickstart](../../multichain/connect/quickstart.md) for a full walkthrough.
+See the [multichain quickstart](../multichain/quickstart.md) for a full walkthrough.
 
 ## Full option mapping
 

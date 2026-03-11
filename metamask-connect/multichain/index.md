@@ -14,7 +14,7 @@ With the multichain client, your dapp can request access to EVM networks, Solana
 This gives you more control than the [ecosystem-specific clients](/metamask-connect/integration-options), but requires adapting your dapp to work with the Multichain API rather than traditional per-chain RPC.
 
 :::tip Ready to code?
-Jump to the [Quickstart](/metamask-connect/multichain/connect/quickstart) to set up MetaMask Connect Multichain in minutes.
+Jump to the [Quickstart](/metamask-connect/multichain/quickstart) to set up MetaMask Connect Multichain in minutes.
 :::
 
 ## How the Multichain API works
@@ -26,7 +26,7 @@ Instead of connecting to one chain at a time, the Multichain API lets you do the
 
 - **Request access to multiple ecosystems at once**: For example, request Ethereum Mainnet, Polygon, and Solana Mainnet in a single session.
 - **Send requests to any chain in the session**: For example, send a Solana transaction and an EVM transaction through the same connection.
-- **Manage the full session lifecycle**: Connect, retrieve session data, invoke methods on any chain, and disconnect — using [`connect`](/metamask-connect/multichain/connect/reference/methods#connect), [`getSession`](/metamask-connect/multichain/connect/reference/methods#getsession), [`invokeMethod`](/metamask-connect/multichain/connect/reference/methods#invokemethod), and [`disconnect`](/metamask-connect/multichain/connect/reference/methods#disconnect). These SDK methods wrap the underlying [Multichain API](/metamask-connect/multichain/connect/reference/api) ([`wallet_createSession`](/metamask-connect/multichain/connect/reference/api#wallet_createsession), [`wallet_getSession`](/metamask-connect/multichain/connect/reference/api#wallet_getsession), [`wallet_invokeMethod`](/metamask-connect/multichain/connect/reference/api#wallet_invokemethod), [`wallet_revokeSession`](/metamask-connect/multichain/connect/reference/api#wallet_revokesession)).
+- **Manage the full session lifecycle**: Connect, retrieve session data, invoke methods on any chain, and disconnect — using [`connect`](/metamask-connect/multichain/reference/methods#connect), [`getSession`](/metamask-connect/multichain/reference/methods#getsession), [`invokeMethod`](/metamask-connect/multichain/reference/methods#invokemethod), and [`disconnect`](/metamask-connect/multichain/reference/methods#disconnect). These SDK methods wrap the underlying [Multichain API](/metamask-connect/multichain/reference/api) ([`wallet_createSession`](/metamask-connect/multichain/reference/api#wallet_createsession), [`wallet_getSession`](/metamask-connect/multichain/reference/api#wallet_getsession), [`wallet_invokeMethod`](/metamask-connect/multichain/reference/api#wallet_invokemethod), [`wallet_revokeSession`](/metamask-connect/multichain/reference/api#wallet_revokesession)).
 
 For dapps that support both EVM and Solana, this means one session covers both — and users see a single approval prompt.
 
@@ -50,32 +50,32 @@ If you're adding MetaMask Connect Multichain to an existing dapp and want minima
 <CardList
 items={[
 {
-href: '/metamask-connect/multichain/connect/quickstart',
+href: '/metamask-connect/multichain/quickstart',
 title: 'Quickstart',
 description: 'Get started with MetaMask Connect Multichain in minutes.',
 },
 {
-href: '/metamask-connect/multichain/connect/guides/sign-transactions',
+href: '/metamask-connect/multichain/guides/sign-transactions',
 title: 'Sign messages',
 description: 'Sign messages and typed data on EVM and Solana.',
 },
 {
-href: '/metamask-connect/multichain/connect/guides/send-transactions',
+href: '/metamask-connect/multichain/guides/send-transactions',
 title: 'Send transactions',
 description: 'Send transactions on EVM networks and Solana.',
 },
 {
-href: '/metamask-connect/multichain/connect/tutorials/create-multichain-dapp',
+href: '/metamask-connect/multichain/tutorials/create-multichain-dapp',
 title: 'Create a multichain dapp',
 description: 'Build a React dapp that connects to Ethereum, Linea, Base, and Solana.',
 },
 {
-href: '/metamask-connect/multichain/connect/reference/methods',
+href: '/metamask-connect/multichain/reference/methods',
 title: 'SDK methods',
 description: 'Reference for connect, invokeMethod, disconnect, and more.',
 },
 {
-href: '/metamask-connect/multichain/connect/reference/api',
+href: '/metamask-connect/multichain/reference/api',
 title: 'API reference',
 description: 'Full Multichain API method and event reference.',
 }

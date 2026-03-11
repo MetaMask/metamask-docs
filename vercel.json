@@ -100,7 +100,7 @@
     },
     {
       "source": "/wallet/connect/3rd-party-libraries/wagmi/",
-      "destination": "/metamask-connect/evm/connect/quickstart/wagmi/"
+      "destination": "/metamask-connect/evm/quickstart/wagmi/"
     },
     {
       "source": "/wallet/connect/3rd-party-libraries/web3-onboard/",
@@ -156,51 +156,51 @@
     },
     {
       "source": "/guide/accessing-accounts/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-user-accounts/"
+      "destination": "/metamask-connect/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/wallet/how-to/connect/access-accounts/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-user-accounts/"
+      "destination": "/metamask-connect/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/wallet/get-started/access-accounts/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-user-accounts/"
+      "destination": "/metamask-connect/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/wallet/how-to/manage-networks/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-networks/"
+      "destination": "/metamask-connect/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/get-started/detect-network/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-networks/"
+      "destination": "/metamask-connect/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/connect/detect-network/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-networks/"
+      "destination": "/metamask-connect/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/detect-network/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-networks/"
+      "destination": "/metamask-connect/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/add-network/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-networks/"
+      "destination": "/metamask-connect/evm/guides/manage-networks/"
     },
     {
       "source": "/guide/signing-data/",
-      "destination": "/metamask-connect/evm/connect/guides/sign-data/"
+      "destination": "/metamask-connect/evm/guides/sign-data/"
     },
     {
       "source": "/wallet/how-to/sign-data/connect-and-sign/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-user-accounts/"
+      "destination": "/metamask-connect/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/wallet/how-to/use-siwe/",
-      "destination": "/metamask-connect/evm/connect/guides/sign-data/siwe/"
+      "destination": "/metamask-connect/evm/guides/sign-data/siwe/"
     },
     {
       "source": "/guide/sending-transactions/",
-      "destination": "/metamask-connect/evm/connect/guides/send-transactions/"
+      "destination": "/metamask-connect/evm/guides/send-transactions/"
     },
     {
       "source": "/wallet/how-to/use-3rd-party-integrations/:path*/",
@@ -212,35 +212,35 @@
     },
     {
       "source": "/wallet/how-to/batch-json-rpc-requests/",
-      "destination": "/metamask-connect/evm/connect/guides/metamask-exclusive/batch-requests/"
+      "destination": "/metamask-connect/evm/guides/metamask-exclusive/batch-requests/"
     },
     {
       "source": "/wallet/how-to/display/",
-      "destination": "/metamask-connect/evm/connect/guides/metamask-exclusive/display-tokens/"
+      "destination": "/metamask-connect/evm/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/guide/registering-your-token/",
-      "destination": "/metamask-connect/evm/connect/guides/metamask-exclusive/display-tokens/"
+      "destination": "/metamask-connect/evm/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/wallet/how-to/register-token/",
-      "destination": "/metamask-connect/evm/connect/guides/metamask-exclusive/display-tokens/"
+      "destination": "/metamask-connect/evm/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/guide/registering-function-names/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/display/"
+      "destination": "/metamask-connect/evm/guides/best-practices/display/"
     },
     {
       "source": "/wallet/how-to/register-method-names/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/display/"
+      "destination": "/metamask-connect/evm/guides/best-practices/display/"
     },
     {
       "source": "/guide/defining-your-icon/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/display/"
+      "destination": "/metamask-connect/evm/guides/best-practices/display/"
     },
     {
       "source": "/wallet/how-to/set-icon/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/display/"
+      "destination": "/metamask-connect/evm/guides/best-practices/display/"
     },
     {
       "source": "/wallet/how-to/display/custom-modals/",
@@ -252,7 +252,7 @@
     },
     {
       "source": "/wallet/how-to/interact-with-smart-contracts/:path*/",
-      "destination": "/metamask-connect/evm/connect/guides/interact-with-contracts/"
+      "destination": "/metamask-connect/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/wallet/how-to/use-unity-sdk/",
@@ -272,11 +272,11 @@
     },
     {
       "source": "/wallet/get-started/run-development-network/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/run-devnet/"
+      "destination": "/metamask-connect/evm/guides/best-practices/run-devnet/"
     },
     {
       "source": "/wallet/how-to/get-started-building/run-devnet/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/run-devnet/"
+      "destination": "/metamask-connect/evm/guides/best-practices/run-devnet/"
     },
     {
       "source": "/wallet/how-to/get-started-building/secure-dapp/",
@@ -328,11 +328,11 @@
     },
     {
       "source": "/guide/initializing-dapps/",
-      "destination": "/metamask-connect/evm/connect/guides/interact-with-contracts/"
+      "destination": "/metamask-connect/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/wallet/how-to/interact-with-smart-contracts/",
-      "destination": "/metamask-connect/evm/connect/guides/interact-with-contracts/"
+      "destination": "/metamask-connect/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/wallet/tutorials/",
@@ -392,43 +392,43 @@
     },
     {
       "source": "/wallet/reference/",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/"
     },
     {
       "source": "/wallet/category/reference/",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/"
     },
     {
       "source": "/guide/ethereum-provider/",
-      "destination": "/metamask-connect/evm/connect/reference/provider-api/"
+      "destination": "/metamask-connect/evm/reference/provider-api/"
     },
     {
       "source": "/wallet/reference/json-rpc-api/",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/"
     },
     {
       "source": "/guide/rpc-api/",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/"
     },
     {
       "source": "/wallet/reference/rpc-api/",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/"
     },
     {
       "source": "/wallet/reference/(eth_.*)",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/$1"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/$1"
     },
     {
       "source": "/wallet/reference/(wallet_.*)",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/$1"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/$1"
     },
     {
       "source": "/wallet/reference/(personal_.*)",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/$1"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/$1"
     },
     {
       "source": "/wallet/reference/(web3_.*)",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/$1"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/$1"
     },
     {
       "source": "/wallet/reference/non-evm-apis/",
@@ -436,63 +436,63 @@
     },
     {
       "source": "/metamask-connect/guides/advanced/connect-and-sign/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-user-accounts/"
+      "destination": "/metamask-connect/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/metamask-connect/guides/advanced/batch-requests/",
-      "destination": "/metamask-connect/evm/connect/guides/metamask-exclusive/batch-requests/"
+      "destination": "/metamask-connect/evm/guides/metamask-exclusive/batch-requests/"
     },
     {
       "source": "/metamask-connect/guides/advanced/production-readiness/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/production-readiness/"
+      "destination": "/metamask-connect/evm/guides/best-practices/production-readiness/"
     },
     {
       "source": "/metamask-connect/connect/javascript-wagmi/",
-      "destination": "/metamask-connect/evm/connect/quickstart/wagmi/"
+      "destination": "/metamask-connect/evm/quickstart/wagmi/"
     },
     {
       "source": "/metamask-connect/connect/javascript/",
-      "destination": "/metamask-connect/evm/connect/quickstart/javascript/"
+      "destination": "/metamask-connect/evm/quickstart/javascript/"
     },
     {
       "source": "/metamask-connect/connect/javascript-rainbowkit/",
-      "destination": "/metamask-connect/evm/connect/quickstart/rainbowkit/"
+      "destination": "/metamask-connect/evm/quickstart/rainbowkit/"
     },
     {
       "source": "/metamask-connect/connect/javascript-connectkit/",
-      "destination": "/metamask-connect/evm/connect/quickstart/connectkit/"
+      "destination": "/metamask-connect/evm/quickstart/connectkit/"
     },
     {
       "source": "/metamask-connect/connect/react-native/",
-      "destination": "/metamask-connect/evm/connect/quickstart/react-native/"
+      "destination": "/metamask-connect/evm/quickstart/react-native/"
     },
     {
       "source": "/metamask-connect/guides/authenticate-users/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-user-accounts/"
+      "destination": "/metamask-connect/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/metamask-connect/guides/manage-networks/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-networks/"
+      "destination": "/metamask-connect/evm/guides/manage-networks/"
     },
     {
       "source": "/metamask-connect/guides/handle-transactions/",
-      "destination": "/metamask-connect/evm/connect/guides/send-transactions/"
+      "destination": "/metamask-connect/evm/guides/send-transactions/"
     },
     {
       "source": "/metamask-connect/guides/interact-with-contracts/",
-      "destination": "/metamask-connect/evm/connect/guides/interact-with-contracts/"
+      "destination": "/metamask-connect/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/metamask-connect/guides/use-deeplinks/",
-      "destination": "/metamask-connect/evm/connect/guides/metamask-exclusive/use-deeplinks/"
+      "destination": "/metamask-connect/evm/guides/metamask-exclusive/use-deeplinks/"
     },
     {
       "source": "/metamask-connect/guides/batch-requests/",
-      "destination": "/metamask-connect/evm/connect/guides/metamask-exclusive/batch-requests/"
+      "destination": "/metamask-connect/evm/guides/metamask-exclusive/batch-requests/"
     },
     {
       "source": "/metamask-connect/guides/production-readiness/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/production-readiness/"
+      "destination": "/metamask-connect/evm/guides/best-practices/production-readiness/"
     },
     {
       "source": "/wallet/how-to/connect-extension/",
@@ -500,47 +500,47 @@
     },
     {
       "source": "/wallet/how-to/access-accounts/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-user-accounts/"
+      "destination": "/metamask-connect/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/wallet/how-to/manage-networks/detect-network/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-networks/"
+      "destination": "/metamask-connect/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/manage-networks/add-network/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-networks/"
+      "destination": "/metamask-connect/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/manage-networks/use-multichain/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-networks/"
+      "destination": "/metamask-connect/evm/guides/manage-networks/"
     },
     {
       "source": "/wallet/how-to/sign-data/",
-      "destination": "/metamask-connect/evm/connect/guides/sign-data/"
+      "destination": "/metamask-connect/evm/guides/sign-data/"
     },
     {
       "source": "/wallet/how-to/sign-data/siwe/",
-      "destination": "/metamask-connect/evm/connect/guides/sign-data/siwe/"
+      "destination": "/metamask-connect/evm/guides/sign-data/siwe/"
     },
     {
       "source": "/wallet/how-to/send-transactions/",
-      "destination": "/metamask-connect/evm/connect/guides/send-transactions/"
+      "destination": "/metamask-connect/evm/guides/send-transactions/"
     },
     {
       "source": "/wallet/how-to/send-transactions/send-batch-transactions/",
-      "destination": "/metamask-connect/evm/connect/guides/send-transactions/batch-transactions/"
+      "destination": "/metamask-connect/evm/guides/send-transactions/batch-transactions/"
     },
     {
       "source": "/wallet/how-to/display/tokens/",
-      "destination": "/metamask-connect/evm/connect/guides/metamask-exclusive/display-tokens/"
+      "destination": "/metamask-connect/evm/guides/metamask-exclusive/display-tokens/"
     },
     {
       "source": "/wallet/how-to/display/method-names/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/display/"
+      "destination": "/metamask-connect/evm/guides/best-practices/display/"
     },
     {
       "source": "/wallet/how-to/display/icon/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/display/"
+      "destination": "/metamask-connect/evm/guides/best-practices/display/"
     },
     {
       "source": "/wallet/how-to/manage-permissions/",
@@ -564,7 +564,7 @@
     },
     {
       "source": "/wallet/how-to/run-devnet/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/run-devnet/"
+      "destination": "/metamask-connect/evm/guides/best-practices/run-devnet/"
     },
     {
       "source": "/wallet/how-to/secure-dapp/",
@@ -572,11 +572,11 @@
     },
     {
       "source": "/metamask-connect/connect/javascript-dynamic/",
-      "destination": "/metamask-connect/evm/connect/quickstart/dynamic/"
+      "destination": "/metamask-connect/evm/quickstart/dynamic/"
     },
     {
       "source": "/metamask-connect/connect/javascript-web3auth/",
-      "destination": "/metamask-connect/evm/connect/quickstart/web3auth/"
+      "destination": "/metamask-connect/evm/quickstart/web3auth/"
     },
     {
       "source": "/wallet/concepts/wallet-api/",
@@ -592,7 +592,7 @@
     },
     {
       "source": "/wallet/concepts/signing-methods/",
-      "destination": "/metamask-connect/evm/connect/guides/sign-data/"
+      "destination": "/metamask-connect/evm/guides/sign-data/"
     },
     {
       "source": "/wallet/concepts/wallet-interoperability/",
@@ -600,7 +600,7 @@
     },
     {
       "source": "/wallet/concepts/smart-contracts/",
-      "destination": "/metamask-connect/evm/connect/guides/interact-with-contracts/"
+      "destination": "/metamask-connect/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/wallet/tutorials/react-dapp-local-state/",
@@ -624,7 +624,7 @@
     },
     {
       "source": "/metamask-connect/reference/sdk-methods/",
-      "destination": "/metamask-connect/evm/connect/reference/methods/"
+      "destination": "/metamask-connect/evm/reference/methods/"
     },
     {
       "source": "/wallet/reference/non-evm-apis/starknet-snap-api/",
@@ -632,19 +632,19 @@
     },
     {
       "source": "/wallet/reference/provider-api/",
-      "destination": "/metamask-connect/evm/connect/reference/provider-api/"
+      "destination": "/metamask-connect/evm/reference/provider-api/"
     },
     {
       "source": "/wallet/reference/multichain-api/",
-      "destination": "/metamask-connect/multichain/connect/reference/api/"
+      "destination": "/metamask-connect/multichain/reference/api/"
     },
     {
       "source": "/wallet/reference/json-rpc-methods/",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/"
     },
     {
       "source": "/wallet/reference/json-rpc-methods/:path*/",
-      "destination": "/metamask-connect/evm/connect/reference/json-rpc-api/"
+      "destination": "/metamask-connect/evm/reference/json-rpc-api/"
     },
     {
       "source": "/wallet/how-to/use-non-evm-networks/starknet/:path*/",
@@ -984,59 +984,59 @@
     },
     {
       "source": "/sdk/connect/javascript-wagmi/",
-      "destination": "/metamask-connect/evm/connect/quickstart/wagmi/"
+      "destination": "/metamask-connect/evm/quickstart/wagmi/"
     },
     {
       "source": "/sdk/connect/javascript/",
-      "destination": "/metamask-connect/evm/connect/quickstart/javascript/"
+      "destination": "/metamask-connect/evm/quickstart/javascript/"
     },
     {
       "source": "/sdk/connect/javascript-rainbowkit/",
-      "destination": "/metamask-connect/evm/connect/quickstart/rainbowkit/"
+      "destination": "/metamask-connect/evm/quickstart/rainbowkit/"
     },
     {
       "source": "/sdk/connect/javascript-connectkit/",
-      "destination": "/metamask-connect/evm/connect/quickstart/connectkit/"
+      "destination": "/metamask-connect/evm/quickstart/connectkit/"
     },
     {
       "source": "/sdk/connect/javascript-dynamic/",
-      "destination": "/metamask-connect/evm/connect/quickstart/dynamic/"
+      "destination": "/metamask-connect/evm/quickstart/dynamic/"
     },
     {
       "source": "/sdk/connect/javascript-web3auth/",
-      "destination": "/metamask-connect/evm/connect/quickstart/web3auth/"
+      "destination": "/metamask-connect/evm/quickstart/web3auth/"
     },
     {
       "source": "/sdk/connect/react-native/",
-      "destination": "/metamask-connect/evm/connect/quickstart/react-native/"
+      "destination": "/metamask-connect/evm/quickstart/react-native/"
     },
     {
       "source": "/sdk/guides/authenticate-users/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-user-accounts/"
+      "destination": "/metamask-connect/evm/guides/manage-user-accounts/"
     },
     {
       "source": "/sdk/guides/manage-networks/",
-      "destination": "/metamask-connect/evm/connect/guides/manage-networks/"
+      "destination": "/metamask-connect/evm/guides/manage-networks/"
     },
     {
       "source": "/sdk/guides/handle-transactions/",
-      "destination": "/metamask-connect/evm/connect/guides/send-transactions/"
+      "destination": "/metamask-connect/evm/guides/send-transactions/"
     },
     {
       "source": "/sdk/guides/interact-with-contracts/",
-      "destination": "/metamask-connect/evm/connect/guides/interact-with-contracts/"
+      "destination": "/metamask-connect/evm/guides/interact-with-contracts/"
     },
     {
       "source": "/sdk/guides/use-deeplinks/",
-      "destination": "/metamask-connect/evm/connect/guides/metamask-exclusive/use-deeplinks/"
+      "destination": "/metamask-connect/evm/guides/metamask-exclusive/use-deeplinks/"
     },
     {
       "source": "/sdk/guides/batch-requests/",
-      "destination": "/metamask-connect/evm/connect/guides/metamask-exclusive/batch-requests/"
+      "destination": "/metamask-connect/evm/guides/metamask-exclusive/batch-requests/"
     },
     {
       "source": "/sdk/guides/production-readiness/",
-      "destination": "/metamask-connect/evm/connect/guides/best-practices/production-readiness/"
+      "destination": "/metamask-connect/evm/guides/best-practices/production-readiness/"
     },
     {
       "source": "/sdk/tutorials/create-wallet-ai-agent/",
@@ -1060,7 +1060,7 @@
     },
     {
       "source": "/sdk/reference/sdk-methods/",
-      "destination": "/metamask-connect/evm/connect/reference/methods/"
+      "destination": "/metamask-connect/evm/reference/methods/"
     },
     {
       "source": "/sdk/:path*/",
@@ -1069,6 +1069,18 @@
     {
       "source": "/sdk/",
       "destination": "/metamask-connect/"
+    },
+    {
+      "source": "/metamask-connect/evm/connect/:path*/",
+      "destination": "/metamask-connect/evm/:path*/"
+    },
+    {
+      "source": "/metamask-connect/solana/connect/:path*/",
+      "destination": "/metamask-connect/solana/:path*/"
+    },
+    {
+      "source": "/metamask-connect/multichain/connect/:path*/",
+      "destination": "/metamask-connect/multichain/:path*/"
     }
   ]
 }

@@ -50,8 +50,8 @@ In most cases, update a dependency or add a connector with no changes to your ap
 
 | Library        | Documentation                                                        |
 | -------------- | -------------------------------------------------------------------- |
-| **Wagmi**      | [Quickstart](/metamask-connect/evm/connect/quickstart/wagmi)         |
-| **RainbowKit** | [Quickstart](/metamask-connect/evm/connect/quickstart/rainbowkit)    |
-| **ConnectKit** | [Quickstart](/metamask-connect/evm/connect/quickstart/connectkit)    |
-| **Web3Auth**   | [Quickstart](/metamask-connect/evm/connect/quickstart/web3auth)      |
-| **Dynamic**    | [Quickstart](/metamask-connect/evm/connect/quickstart/dynamic)       |
+| **Wagmi**      | [Quickstart](/metamask-connect/evm/quickstart/wagmi)         |
+| **RainbowKit** | [Quickstart](/metamask-connect/evm/quickstart/rainbowkit)    |
+| **ConnectKit** | [Quickstart](/metamask-connect/evm/quickstart/connectkit)    |
+| **Web3Auth**   | [Quickstart](/metamask-connect/evm/quickstart/web3auth)      |
+| **Dynamic**    | [Quickstart](/metamask-connect/evm/quickstart/dynamic)       |
