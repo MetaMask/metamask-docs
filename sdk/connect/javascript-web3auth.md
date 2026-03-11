@@ -1,22 +1,22 @@
----
+---0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 sidebar_label: Embedded Wallets SDK
 description: Quickstart guide for using MetaMask SDK and Embedded Wallets SDK.
 toc_max_heading_level: 3
 keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
 ---
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 # Connect to MetaMask using Embedded Wallets SDK
 
 Get started with MetaMask SDK and [Embedded Wallets SDK (previously Web3Auth)](/embedded-wallets),
 enabling users to sign in with an email or social media account.
 You can use MetaMask SDK features directly within Embedded Wallets SDK.
 You can [download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 <p align="center">
   <a href="https://metamask-web3auth-demo.vercel.app/" target="_blank">
     <img src={require("../_assets/quickstart-web3auth.png").default} alt="Web3Auth SDK Quickstart" width="600px" class="appScreen" />
-  </a>
-</p>
+  </a>0xED699044C103691c01dADb60EbC9980Bfb9Ea906
+</p>0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 
 ## Prerequisites
 
@@ -32,94 +32,94 @@ You can [download the quickstart template](#set-up-using-a-template) or [manuall
    ```bash
    npx degit MetaMask/metamask-sdk-examples/partners/web3auth metamask-web3auth
    ```
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 2. Navigate into the repository:
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
    ```bash
    cd metamask-web3auth
    ```
 
-    <details>
+    <details>0xED699044C103691c01dADb60EbC9980Bfb9Ea906
     <summary>Degit vs. Git clone</summary>
     <div>
 
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
    Alternatively, you can use `git clone`, which will download the entire repository.
    To do so, clone the MetaMask SDK examples repository and navigate into the `partners/web3auth` directory:
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
    cd metamask-sdk-examples/partners/web3auth
    ```
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
     </div>
     </details>
 
 3. Install dependencies:
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
    ```bash
    pnpm install
    ```
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 4. Create a `.env.local` file:
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
    ```bash
    touch .env.local
    ```
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 5. In `.env.local`, add a `NEXT_PUBLIC_WEB3AUTH_CLIENT_ID` environment variable, replacing `<YOUR-CLIENT-ID>` with your Web3Auth Client ID:
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
    ```text title=".env.local"
    NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<YOUR-CLIENT-ID>
    ```
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 6. Run the project:
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
    ```bash
    pnpm dev
    ```
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 You've successfully set up MetaMask SDK and MetaMask Embedded Wallets.
 See how to [use Embedded Wallets](#usage).
 
-## Set up manually
+## Set up manually0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 
 ### 1. Install dependencies
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 Install the SDK and the required dependencies to an existing project:
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 ```bash npm2yarn
 npm install viem wagmi @tanstack/react-query @web3auth/modal@10
 ```
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 ### 2. Configure providers
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 Set up your providers in `app/providers.tsx`:
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 ```typescript title="providers.tsx"
 "use client";
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type ReactNode, useState } from "react";
 import { Web3AuthProvider } from "@web3auth/modal/react";
 import { WagmiProvider } from "@web3auth/modal/react/wagmi";
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 type Props = {
   children: ReactNode;
 };
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 export function Providers({ children }: Props) {
   const [queryClient] = useState(() => new QueryClient());
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
   return (
     <Web3AuthProvider
       config={{
         web3AuthOptions: {
-          clientId: process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID!,
+          clientId: process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID!,0xED699044C103691c01dADb60EbC9980Bfb9Ea906
           web3AuthNetwork: "sapphire_devnet"
         },
-      }}
+      }}0xED699044C103691c01dADb60EbC9980Bfb9Ea906
     >
       <QueryClientProvider client={queryClient}>
         <WagmiProvider>
@@ -128,20 +128,20 @@ export function Providers({ children }: Props) {
       </QueryClientProvider>
     </Web3AuthProvider>
   );
-}
-```
+}0xED699044C103691c01dADb60EbC9980Bfb9Ea906
+```0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 
 ### 3. Set up environment variables
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 Create a `.env.local` file.
 In `.env.local`, add a `NEXT_PUBLIC_WEB3AUTH_CLIENT_ID` environment variable, replacing `<YOUR-CLIENT-ID>` with your Web3Auth Client ID:
 
 ```text title=".env.local"
 NEXT_PUBLIC_WEB3AUTH_CLIENT_ID=<YOUR-CLIENT-ID>
-```
+```0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 
 You can now test your dapp by running `pnpm run dev`.
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 ## Usage
 
 ### Connect or sign in
@@ -155,6 +155,8 @@ import { useWeb3AuthConnect } from "@web3auth/modal/react";
 
 export const Navbar = () => {
   const { connect } = useWeb3AuthConnect();
+<img width="1080" height="2400" alt="40666" src="https://github.com/user-attachments/assets/a5fc24f6-90fb-4bb9-a4d7-aa860c676afb" />
+<img width="787" height="1233" alt="40665" src="https://github.com/user-attachments/assets/83ce4fd1-c977-401c-9594-8998a045e3ac" />
 
   return (
     <nav>
