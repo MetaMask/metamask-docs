@@ -47,6 +47,11 @@ title: 'JavaScript',
 description: 'Use wallet-standard features directly in a JavaScript dapp.',
 },
 {
+href: '/metamask-connect/solana/guides/use-framework-kit',
+title: 'Framework Kit',
+description: 'Use Framework Kit for a hooks-based React workflow with MetaMask.',
+},
+{
 href: '/metamask-connect/solana/reference/methods',
 title: 'SDK methods',
 description: 'Reference for all Solana SDK methods, properties, and types.',

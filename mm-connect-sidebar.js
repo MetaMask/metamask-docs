@@ -225,7 +225,7 @@ const metamaskConnectSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        // 'solana/guides/use-framework-kit',
+        'solana/guides/use-framework-kit',
         'solana/guides/use-wallet-adapter',
         {
           type: 'category',
