@@ -42,24 +42,9 @@ title: 'Wallet Adapter',
 description: 'Use Solana\'s Wallet Adapter to connect a React dapp to MetaMask.',
 },
 {
-href: '/metamask-connect/solana/guides/use-framework-kit',
-title: 'Framework Kit',
-description: 'Use Framework Kit for a hooks-based React workflow with MetaMask.',
-},
-{
 href: '/metamask-connect/solana/quickstart/javascript',
 title: 'JavaScript',
 description: 'Use wallet-standard features directly in a JavaScript dapp.',
-},
-{
-href: '/metamask-connect/solana/quickstart/web3auth',
-title: 'MetaMask Embedded Wallets',
-description: 'Set up Embedded Wallets SDK (previously Web3Auth) for Solana.',
-},
-{
-href: '/metamask-connect/solana/quickstart/dynamic',
-title: 'Dynamic',
-description: 'Set up Dynamic SDK for Solana in a Next.js dapp.',
 },
 {
 href: '/metamask-connect/solana/reference/methods',
