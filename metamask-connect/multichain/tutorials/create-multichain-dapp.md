@@ -14,21 +14,10 @@ By the end, your dapp will handle wallet login and logout, read balances across 
 - Sign messages in both ecosystems.
 - Send transactions on EVM and Solana.
 
-## What is the Multichain API?
+## Key concepts
 
-The [Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) is a wallet
-communication standard built on [CAIP](https://github.com/ChainAgnostic/CAIPs) (Chain Agnostic
-Improvement Proposals).
-Instead of connecting to one chain at a time, the Multichain API lets your dapp request access to
-multiple chains across different ecosystems in a single session.
-
-Three CAIP concepts matter for this tutorial:
-
-| Concept        | Standard                                                                     | What it means                                            | Example                   |
-| -------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------- | ------------------------- |
-| **Scope**      | [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)   | A chain identifier in `namespace:reference` format       | `eip155:1` (Ethereum)     |
-| **Account ID** | [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md) | A chain-specific account — `namespace:reference:address` | `eip155:1:0xabc...`       |
-| **Session**    | [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) | An authorized connection containing multiple scopes      | One session for ETH + SOL |
+This tutorial uses [scopes, account IDs, and sessions](../concepts/scopes.md) to identify chains and
+accounts across ecosystems. If you're unfamiliar with these concepts, review them before continuing.
 
 This tutorial uses the following scopes:
 

@@ -50,6 +50,15 @@ const metamaskConnectSidebar = {
     'multichain/quickstart',
     {
       type: 'category',
+      label: 'Concepts',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'multichain/connect/concepts/scopes',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Guides',
       collapsible: false,
       collapsed: false,

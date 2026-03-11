@@ -6,8 +6,9 @@ keywords: [connect, sdk, integration, evm, solana, multichain, packages]
 
 # Integration options
 
-MetaMask Connect offers three integration paths. All share the same underlying transport and session
-infrastructure, so you can start with the option that fits your dapp today and migrate later.
+MetaMask Connect lets you add wallet connectivity to your dapp using one of three integration paths.
+All share the same underlying transport and session infrastructure, so you can start with the option
+that fits your dapp today and migrate later.
 
 ## Single-ecosystem
 
@@ -33,25 +34,25 @@ across all ecosystems. **This is the recommended long-term path.**
 
 ## Compare options
 
-|                    | Single-ecosystem                                                                     | Multi-ecosystem                             | Multichain                                              |
-| ------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------- | ------------------------------------------------------- |
-| **Package**        | [`connect-evm`](/metamask-connect/evm) or [`connect-solana`](/metamask-connect/solana) | Both `connect-evm` and `connect-solana`     | [`connect-multichain`](/metamask-connect/multichain)     |
-| **Effort**         | Low — drop-in provider                                                               | Low — two providers                         | Medium — scope-based API                                |
-| **EVM support**    | EIP-1193 provider                                                                    | EIP-1193 provider                           | Via `wallet_invokeMethod`                               |
-| **Solana support** | Wallet Standard                                                                      | Wallet Standard                             | Via `wallet_invokeMethod`                               |
-| **Cross-chain UX** | Single ecosystem                                                                     | Separate connect per ecosystem              | Single prompt for all ecosystems                        |
-| **Sessions**       | Automatic                                                                            | Automatic per-client                        | Full control                                            |
-| **Best for**       | Existing single-chain dapps                                                          | Dapps supporting EVM and Solana             | Multichain-native dapps                                 |
+|                    | Single-ecosystem                                                                       | Multi-ecosystem                         | Multichain                                           |
+| ------------------ | -------------------------------------------------------------------------------------- | --------------------------------------- | ---------------------------------------------------- |
+| **Package**        | [`connect-evm`](/metamask-connect/evm) or [`connect-solana`](/metamask-connect/solana) | Both `connect-evm` and `connect-solana` | [`connect-multichain`](/metamask-connect/multichain) |
+| **Effort**         | Low — drop-in provider                                                                 | Low — two providers                     | Medium — scope-based API                             |
+| **EVM support**    | EIP-1193 provider                                                                      | EIP-1193 provider                       | Via `wallet_invokeMethod`                            |
+| **Solana support** | Wallet Standard                                                                        | Wallet Standard                         | Via `wallet_invokeMethod`                            |
+| **Cross-chain UX** | Single ecosystem                                                                       | Separate connect per ecosystem          | Single prompt for all ecosystems                     |
+| **Sessions**       | Automatic                                                                              | Automatic per-client                    | Full control                                         |
+| **Best for**       | Existing single-chain dapps                                                            | Dapps supporting EVM and Solana         | Multichain-native dapps                              |
 
 ## Wallet connector libraries
 
 If your dapp already uses a wallet connector library, adopting MetaMask Connect is straightforward.
 In most cases, update a dependency or add a connector with no changes to your application code.
 
-| Library        | Documentation                                                        |
-| -------------- | -------------------------------------------------------------------- |
-| **Wagmi**      | [Quickstart](/metamask-connect/evm/quickstart/wagmi)         |
-| **RainbowKit** | [Quickstart](/metamask-connect/evm/quickstart/rainbowkit)    |
-| **ConnectKit** | [Quickstart](/metamask-connect/evm/quickstart/connectkit)    |
-| **Web3Auth**   | [Quickstart](/metamask-connect/evm/quickstart/web3auth)      |
-| **Dynamic**    | [Quickstart](/metamask-connect/evm/quickstart/dynamic)       |
+| Library        | Documentation                                             |
+| -------------- | --------------------------------------------------------- |
+| **Wagmi**      | [Quickstart](/metamask-connect/evm/quickstart/wagmi)      |
+| **RainbowKit** | [Quickstart](/metamask-connect/evm/quickstart/rainbowkit) |
+| **ConnectKit** | [Quickstart](/metamask-connect/evm/quickstart/connectkit) |
+| **Web3Auth**   | [Quickstart](/metamask-connect/evm/quickstart/web3auth)   |
+| **Dynamic**    | [Quickstart](/metamask-connect/evm/quickstart/dynamic)    |

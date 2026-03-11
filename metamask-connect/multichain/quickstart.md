@@ -157,26 +157,17 @@ if (ethAccounts.length > 0) {
 ```
 
 The user sees a single approval prompt for all requested chains.
-Use [`invokeMethod()`](reference/methods.md#invokemethod) to call RPC methods on any chain in the session by specifying a [CAIP-2 scope](#understanding-scopes).
+Use [`invokeMethod()`](reference/methods.md#invokemethod) to call RPC methods on any chain in the session by specifying a [scope](concepts/scopes.md).
 
 ## Multichain client methods at a glance
 
 | Method                                                                  | Description                                            |
 | ----------------------------------------------------------------------- | ------------------------------------------------------ |
-| [`connect(scopes, caipAccountIds)`](reference/methods.md#connect)       | Connects to MetaMask with multichain scopes            |
-| [`getSession()`](reference/methods.md#getsession)                       | Returns the current session with approved accounts     |
-| [`invokeMethod({ scope, request })`](reference/methods.md#invokemethod) | Calls an RPC method on a specific chain                |
-| [`disconnect()`](reference/methods.md#disconnect)                       | Disconnects all scopes and ends the session            |
-| [`disconnect(scopes)`](reference/methods.md#disconnect)                 | Disconnects specific scopes without ending the session |
+| [`connect(scopes, caipAccountIds)`](reference/methods.md#connect)       | Connects to MetaMask with multichain [scopes](concepts/scopes.md)            |
+| [`getSession()`](reference/methods.md#getsession)                       | Returns the current [session](concepts/scopes.md#sessions-caip-25) with approved accounts     |
+| [`invokeMethod({ scope, request })`](reference/methods.md#invokemethod) | Calls an RPC method on a specific chain using a [scope](concepts/scopes.md)                |
+| [`disconnect()`](reference/methods.md#disconnect)                       | Disconnects all [scopes](concepts/scopes.md) and ends the session            |
+| [`disconnect(scopes)`](reference/methods.md#disconnect)                 | Disconnects specific [scopes](concepts/scopes.md) without ending the session |
 | [`on(event, handler)`](reference/methods.md#on)                         | Registers an event handler                             |
 | [`off(event, handler)`](reference/methods.md#off)                       | Removes an event handler                               |
 | [`getInfuraRpcUrls(apiKey)`](reference/methods.md#getinfurarpcurls)     | Generates Infura RPC URLs keyed by CAIP-2 chain ID     |
-
-## Understanding scopes
-
-Scopes are [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) chain identifiers that specify which blockchain you're targeting.
-
-| Ecosystem | Format                 | Example                                                                                                 |
-| --------- | ---------------------- | ------------------------------------------------------------------------------------------------------- |
-| EVM       | `eip155:<chainId>`     | `eip155:1` (Ethereum), `eip155:42161` (Arbitrum One), `eip155:137` (Polygon)                            |
-| Solana    | `solana:<genesisHash>` | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` (Mainnet), `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` (Devnet) |
