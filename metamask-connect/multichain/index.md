@@ -14,7 +14,7 @@ With the multichain client, your dapp can request access to EVM networks, Solana
 This gives you more control than the [ecosystem-specific clients](/metamask-connect/integration-options), but requires adapting your dapp to work with the Multichain API rather than traditional per-chain RPC.
 
 :::tip Ready to code?
-Jump to the [Quickstart](/metamask-connect/multichain/quickstart) to set up MetaMask Connect Multichain in minutes.
+Jump to the [Quickstart](/metamask-connect/multichain/quickstart/javascript) to set up MetaMask Connect Multichain in minutes.
 :::
 
 ## How the Multichain API works
@@ -50,7 +50,7 @@ If you're adding MetaMask Connect Multichain to an existing dapp and want minima
 <CardList
 items={[
 {
-href: '/metamask-connect/multichain/quickstart',
+href: '/metamask-connect/multichain/quickstart/javascript',
 title: 'Quickstart',
 description: 'Get started with MetaMask Connect Multichain in minutes.',
 },
