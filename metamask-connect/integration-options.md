@@ -53,10 +53,12 @@ support both ecosystems while keeping familiar provider interfaces for each.
 If your dapp already uses a wallet connector library, adopting MetaMask Connect is straightforward.
 In most cases, update a dependency or add a connector with no changes to your application code.
 
-| Library        | Documentation                                             |
-| -------------- | --------------------------------------------------------- |
-| **Wagmi**      | [Quickstart](/metamask-connect/evm/quickstart/wagmi)      |
-| **RainbowKit** | [Quickstart](/metamask-connect/evm/quickstart/rainbowkit) |
-| **ConnectKit** | [Quickstart](/metamask-connect/evm/quickstart/connectkit) |
-| **Web3Auth**   | [Quickstart](/metamask-connect/evm/quickstart/web3auth)   |
-| **Dynamic**    | [Quickstart](/metamask-connect/evm/quickstart/dynamic)    |
+| Library | Ecosystem | Documentation |
+| --- | --- | --- |
+| [Wagmi](https://wagmi.sh) | EVM | [Quickstart](/metamask-connect/evm/quickstart/wagmi) |
+| [RainbowKit](https://www.rainbowkit.com) | EVM | [Quickstart](/metamask-connect/evm/quickstart/rainbowkit) |
+| [ConnectKit](https://docs.family.co/connectkit) | EVM | [Quickstart](/metamask-connect/evm/quickstart/connectkit) |
+| [Web3Auth](https://web3auth.io) | EVM, Solana | [EVM Quickstart](/metamask-connect/evm/quickstart/web3auth), [Solana Quickstart](/metamask-connect/solana/quickstart/web3auth) |
+| [Dynamic](https://www.dynamic.xyz) | EVM, Solana | [EVM Quickstart](/metamask-connect/evm/quickstart/dynamic), [Solana Quickstart](/metamask-connect/solana/quickstart/dynamic) |
+| [Wallet Adapter](https://github.com/solana-labs/wallet-adapter) | Solana | [Guide](/metamask-connect/solana/guides/use-wallet-adapter) |
+| [Framework Kit](https://www.framework-kit.com/) | Solana | [Guide](/metamask-connect/solana/guides/use-framework-kit) |
