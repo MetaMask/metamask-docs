@@ -55,6 +55,7 @@ id: ${methodName}
 title: ${method.name}
 description: Reference documentation for the \`${method.name}\` method of the Snaps API.
 hide_title: true
+hide_table_of_contents: true
 ---
 
 import SnapsAPIReference from '@site/src/components/SnapsAPIReference/index.mdx';
