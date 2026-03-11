@@ -54,7 +54,7 @@ const metamaskConnectSidebar = {
       collapsible: false,
       collapsed: false,
       items: [
-        'multichain/connect/concepts/scopes',
+        'multichain/concepts/scopes',
       ],
     },
     {
