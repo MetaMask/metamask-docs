@@ -1,14 +1,21 @@
 ---
-description: Quickstart guide for using MetaMask Connect EVM with a JavaScript and RainbowKit dapp.
+description: Quickstart guide for using MetaMask SDK with a JavaScript and RainbowKit dapp.
 toc_max_heading_level: 3
 sidebar_label: RainbowKit
 keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK]
 ---
 
+:::info Heads up
+Looks like you've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
+The MetaMask Connect integration for this library is on its way -- once ready, it will be linked
+from the sidebar navigation. In the meantime, this guide is still perfectly valid if you're using
+MetaMask SDK.
+:::
+
 # Connect to MetaMask using JavaScript + RainbowKit
 
-Get started with MetaMask Connect EVM in a JavaScript and RainbowKit dapp.
-[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
+Get started with MetaMask SDK in a JavaScript and RainbowKit dapp.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask SDK](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-rainbowkit-demo.vercel.app/" target="_blank">
@@ -25,7 +32,7 @@ Get started with MetaMask Connect EVM in a JavaScript and RainbowKit dapp.
 
 ## Set up using a template
 
-1. Download the [MetaMask Connect RainbowKit template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/rainbowkit):
+1. Download the [MetaMask SDK RainbowKit template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/rainbowkit):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/quickstarts/rainbowkit metamask-rainbowkit
@@ -44,7 +51,7 @@ Get started with MetaMask Connect EVM in a JavaScript and RainbowKit dapp.
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
    Alternatively, use `git clone` to download the entire repository.
-   Clone the MetaMask Connect examples repository and navigate into the `quickstarts/rainbowkit` directory:
+   Clone the MetaMask SDK examples repository and navigate into the `quickstarts/rainbowkit` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -80,9 +87,9 @@ Get started with MetaMask Connect EVM in a JavaScript and RainbowKit dapp.
 
 ## Set up manually
 
-### 1. Install MetaMask Connect EVM
+### 1. Install the SDK
 
-Install MetaMask Connect EVM along with its peer dependencies to an existing React project:
+Install MetaMask SDK along with its peer dependencies to an existing React project:
 
 ```bash npm2yarn
 npm install @rainbow-me/rainbowkit wagmi viem@2.x @tanstack/react-query
@@ -108,7 +115,7 @@ In the following example, replace `<YOUR-PROJECT-ID>` with your WalletConnect pr
 
 ```jsx
 const config = getDefaultConfig({
-  appName: 'MetaMask Connect RainbowKit Quickstart',
+  appName: 'MetaMask SDK RainbowKit Quickstart',
   projectId: '<YOUR-PROJECT-ID>',
   chains: [mainnet, linea, sepolia, lineaSepolia],
   wallets: [

@@ -1,15 +1,22 @@
 ---
 sidebar_label: Dynamic SDK
-description: Quickstart guide for using MetaMask Connect EVM and Dynamic SDK.
+description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
 toc_max_heading_level: 3
 keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 ---
 
+:::info Heads up
+Looks like you've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
+The MetaMask Connect integration for this library is on its way -- once ready, it will be linked
+from the sidebar navigation. In the meantime, this guide is still perfectly valid if you're using
+MetaMask SDK.
+:::
+
 # Connect to MetaMask using Dynamic SDK
 
-Get started with MetaMask Connect EVM and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
-Use MetaMask Connect EVM features directly within Dynamic SDK.
-[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
+Get started with MetaMask SDK and [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
+Use MetaMask SDK features directly within Dynamic SDK.
+[Download the quickstart template](#set-up-using-a-template) or [manually set up the SDKs](#set-up-manually) in an existing dapp.
 
 <p align="center">
   <a href="https://metamask-dynamic-demo.vercel.app/" target="_blank">
@@ -26,7 +33,7 @@ Use MetaMask Connect EVM features directly within Dynamic SDK.
 
 ## Set up using a template
 
-1. Download the [MetaMask Connect + Dynamic SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/dynamic):
+1. Download the [MetaMask SDK + Dynamic SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/dynamic):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/partners/dynamic metamask-dynamic
@@ -45,7 +52,7 @@ Use MetaMask Connect EVM features directly within Dynamic SDK.
     `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
     
     Alternatively, use `git clone` to download the entire repository.
-    Clone the MetaMask Connect examples repository and navigate into the `partners/dynamic` directory:
+    Clone the MetaMask SDK examples repository and navigate into the `partners/dynamic` directory:
 
     ```bash
     git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -79,14 +86,14 @@ Use MetaMask Connect EVM features directly within Dynamic SDK.
    pnpm dev
    ```
 
-You've successfully set up MetaMask Connect EVM and Dynamic SDK.
+You've successfully set up MetaMask SDK and Dynamic SDK.
 See how to [use the combined SDKs](#usage).
 
 ## Set up manually
 
 ### 1. Install dependencies
 
-Install MetaMask Connect EVM and the required dependencies to an existing project:
+Install the SDK and the required dependencies to an existing project:
 
 ```bash npm2yarn
 npm install @dynamic-labs/sdk-react-core @dynamic-labs/ethereum @dynamic-labs/wagmi-connector wagmi viem @tanstack/react-query
@@ -191,7 +198,7 @@ Before deploying your project to production:
 1. Update your `next.config.ts` with production domains.
 2. Set up proper environment variables.
 3. Configure your Dynamic SDK environment ID.
-4. Ensure MetaMask Connect EVM is properly initialized.
+4. Ensure MetaMask SDK is properly initialized.
 
 ## Troubleshooting
 

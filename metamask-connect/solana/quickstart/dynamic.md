@@ -1,14 +1,21 @@
 ---
 sidebar_label: Dynamic SDK
-description: Quickstart guide for using MetaMask Connect Solana and Dynamic SDK.
+description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
 toc_max_heading_level: 3
 keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
 ---
 
+:::info Heads up
+Looks like you've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
+The MetaMask Connect integration for this library is on its way -- once ready, it will be linked
+from the sidebar navigation. In the meantime, this guide is still perfectly valid if you're using
+MetaMask SDK.
+:::
+
 # Connect to Solana using Dynamic SDK
 
-This quickstart gets you up and running with MetaMask Connect Solana inside [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
-Dynamic handles wallet discovery and connection UI, and MetaMask Connect Solana adds reliable cross-platform support for MetaMask.
+This quickstart gets you up and running with MetaMask SDK inside [Dynamic SDK](https://docs.dynamic.xyz/introduction/welcome).
+Dynamic handles wallet discovery and connection UI, and MetaMask SDK adds reliable cross-platform support for MetaMask.
 [Download the template](#set-up-using-a-template) to start quickly, or [set up manually](#set-up-manually) in an existing project.
 
 <!-- <p align="center">
@@ -26,7 +33,7 @@ Dynamic handles wallet discovery and connection UI, and MetaMask Connect Solana 
 
 ## Set up using a template
 
-1. Download the [MetaMask Connect + Dynamic SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/dynamic):
+1. Download the [MetaMask SDK + Dynamic SDK template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/partners/dynamic):
 
    ```bash
    npx degit MetaMask/metamask-sdk-examples/partners/dynamic metamask-dynamic
@@ -45,7 +52,7 @@ Dynamic handles wallet discovery and connection UI, and MetaMask Connect Solana 
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
    Alternatively, use `git clone` to download the entire repository.
-   Clone the MetaMask Connect examples repository and navigate into the `partners/dynamic` directory:
+   Clone the MetaMask SDK examples repository and navigate into the `partners/dynamic` directory:
 
    ```bash
    git clone https://github.com/MetaMask/metamask-sdk-examples
@@ -79,7 +86,7 @@ Dynamic handles wallet discovery and connection UI, and MetaMask Connect Solana 
    pnpm dev
    ```
 
-You've successfully set up MetaMask Connect Solana and Dynamic SDK.
+You've successfully set up MetaMask SDK and Dynamic SDK.
 See how to [use the combined SDKs](#usage).
 
 ## Set up manually
@@ -220,7 +227,7 @@ Before deploying your project to production:
 1. Update your `next.config.ts` with production domains.
 2. Set up proper environment variables.
 3. Configure your Dynamic SDK environment ID.
-4. Ensure MetaMask Connect Solana is properly initialized.
+4. Ensure MetaMask SDK is properly initialized.
 
 ## Troubleshooting
 
