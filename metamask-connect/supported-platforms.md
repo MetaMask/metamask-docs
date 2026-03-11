@@ -13,12 +13,12 @@ Your dapp can reach users on desktop and mobile with a single integration:
 
 Here's how each connection method compares:
 
-| Dapp location  | User wallet location     | Connection method                          | MetaMask Connect | Other SDKs |
-| -------------- | ------------------------ | ------------------------------------------ | ---------------- | ---------- |
-| Desktop web    | Wallet browser extension | Automatic connection via browser extension | Supported        | Supported  |
-| Desktop web    | Wallet mobile app        | QR code scan with wallet mobile app        | Supported        | Limited    |
-| Mobile browser | Wallet mobile app        | Deeplink directly to wallet mobile app     | Supported        | Limited    |
-| Mobile dapp    | Wallet mobile app        | Deeplink directly to wallet mobile app     | Supported        | Limited    |
+| Dapp location  | User wallet location             | Connection method                          | MetaMask Connect | Other SDKs |
+| -------------- | -------------------------------- | ------------------------------------------ | ---------------- | ---------- |
+| Desktop web    | MetaMaskWallet browser extension | Automatic connection via browser extension | Supported        | Supported  |
+| Desktop web    | MetaMask mobile app              | QR code scan with wallet mobile app        | Supported        | Limited    |
+| Mobile browser | MetaMask mobile app              | Deeplink directly to wallet mobile app     | Supported        | Limited    |
+| Mobile dapp    | MetaMask mobile app              | Deeplink directly to wallet mobile app     | Supported        | Limited    |
 
 :::tip
 For a better user experience on mobile, use reliable RPC providers instead of public nodes.

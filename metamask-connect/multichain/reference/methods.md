@@ -2,7 +2,7 @@
 description: Methods reference for MetaMask Connect Multichain.
 keywords: [multichain, evm, solana, connect, method, methods, dapp]
 toc_max_heading_level: 2
-sidebar_label: Multichain SDK methods
+sidebar_label: MetaMask Connect Multichain methods
 ---
 
 # MetaMask Connect Multichain SDK methods

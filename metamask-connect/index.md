@@ -13,7 +13,7 @@ With a single integration, you can onboard users and interact with their account
 [integration options](./integration-options.md), from single-ecosystem clients for EVM or Solana to a multichain client that connects to multiple chains in a single session.
 
 MetaMask Connect replaces the legacy MetaMask SDK with a complete rewrite built on the [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) and a more secure and robust relay server infrastructure for improved reliability.
-The MetaMask Connect SDK detects the user’s environment and selects the best connection method, whether it communicates directly with the MetaMask browser extension, prompts the user to scan a QR code, or deep links to the MetaMask mobile app.
+The MetaMask Connect detects the user’s environment and selects the best connection method, whether it communicates directly with the MetaMask browser extension, prompts the user to scan a QR code, or deep links to the MetaMask mobile app.
 
 ## Why use MetaMask Connect?
 

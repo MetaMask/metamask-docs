@@ -19,7 +19,7 @@ The following diagram illustrates this:
 ```mermaid
 flowchart TB
     subgraph dapp [Your dapp]
-        SDK[MetaMask Connect SDK]
+        SDK[MetaMask Connect]
     end
 
     subgraph detection [Platform detection]
