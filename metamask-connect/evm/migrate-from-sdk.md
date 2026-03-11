@@ -290,7 +290,7 @@ MetaMask Connect EVM introduces features that are not available in `@metamask/sd
 ### Next step: Go multichain
 
 If your dapp supports (or plans to support) both EVM and Solana, consider upgrading to the
-[multichain client](../multichain/quickstart.md).
+[multichain client](../multichain/quickstart/javascript.md).
 The EVM client is built on top of `createMultichainClient` internally, so the upgrade is
 straightforward:
 
@@ -321,7 +321,7 @@ await multichainClient.invokeMethod({
 })
 ```
 
-See the [multichain quickstart](../multichain/quickstart.md) for a full walkthrough.
+See the [multichain quickstart](../multichain/quickstart/javascript.md) for a full walkthrough.
 
 ## Full option mapping
 

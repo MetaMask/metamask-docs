@@ -12,7 +12,7 @@ All signing methods route to the MetaMask wallet and require user approval.
 
 ## Prerequisites
 
-- A multichain client initialized and connected as shown in the [quickstart](../quickstart.md).
+- A multichain client initialized and connected as shown in the [quickstart](../quickstart/javascript.md).
 
 ## Initialize and connect
 

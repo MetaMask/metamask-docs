@@ -29,7 +29,7 @@ If your dapp targets both EVM and Solana from a single codebase, consider using
 [`@metamask/connect-multichain`](../multichain/index.md) directly.
 The multichain client provides a unified `invokeMethod` interface for both ecosystems and manages
 scopes, sessions, and selective disconnect in one place.
-See the [multichain quickstart](../multichain/quickstart.md) to get started.
+See the [multichain quickstart](../multichain/quickstart/javascript.md) to get started.
 :::
 
 ## Get started

@@ -48,7 +48,7 @@ support both ecosystems while keeping familiar provider interfaces for each.
 | **Sessions**       | Full control                                         | Automatic                                                                              | Automatic per-client                    |
 | **Best for**       | Multichain-native dapps                              | Existing single-chain dapps                                                            | Dapps supporting EVM and Solana         |
 
-## Wallet connector libraries
+<!-- ## Wallet connector libraries
 
 If your dapp already uses a wallet connector library, adopting MetaMask Connect is straightforward.
 In most cases, update a dependency or add a connector with no changes to your application code.
@@ -61,4 +61,4 @@ In most cases, update a dependency or add a connector with no changes to your ap
 | [Web3Auth](https://web3auth.io) | EVM, Solana | [EVM Quickstart](/metamask-connect/evm/quickstart/web3auth), [Solana Quickstart](/metamask-connect/solana/quickstart/web3auth) |
 | [Dynamic](https://www.dynamic.xyz) | EVM, Solana | [EVM Quickstart](/metamask-connect/evm/quickstart/dynamic), [Solana Quickstart](/metamask-connect/solana/quickstart/dynamic) |
 | [Wallet Adapter](https://github.com/solana-labs/wallet-adapter) | Solana | [Guide](/metamask-connect/solana/guides/use-wallet-adapter) |
-| [Framework Kit](https://www.framework-kit.com/) | Solana | [Guide](/metamask-connect/solana/guides/use-framework-kit) |
+| [Framework Kit](https://www.framework-kit.com/) | Solana | [Guide](/metamask-connect/solana/guides/use-framework-kit) | -->

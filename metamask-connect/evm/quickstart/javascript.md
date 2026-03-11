@@ -12,11 +12,11 @@ import TabItem from "@theme/TabItem";
 Get started with MetaMask Connect EVM in your JavaScript dapp.
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
-<p align="center">
+<!-- <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
     <img src={require("../_assets/quickstart-javascript.png").default} alt="JavaScript SDK Quickstart" width="600px" class="appScreen" />
   </a>
-</p>
+</p> -->
 
 ## Prerequisites
 
@@ -30,13 +30,13 @@ Get started with MetaMask Connect EVM in your JavaScript dapp.
 1. Download the [MetaMask Connect JavaScript template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript):
 
    ```bash
-   npx degit MetaMask/metamask-sdk-examples/quickstarts/javascript metamask-javascript
+   npx degit MetaMask/metamask-sdk-examples/quickstarts/javascript metamask-connect-javascript
    ```
 
 2. Navigate into the repository:
 
    ```bash
-   cd metamask-javascript
+   cd metamask-connect-javascript
    ```
 
     <details>
@@ -199,6 +199,6 @@ const batchResults = await provider.request({
 })
 ```
 
-## Live example
+<!-- ## Live example
 
-<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript?ctl=1&embed=1&file=src%2Fmain.js&hideNavigation=1"></iframe>
+<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript?ctl=1&embed=1&file=src%2Fmain.js&hideNavigation=1"></iframe> -->

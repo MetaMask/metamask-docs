@@ -28,7 +28,7 @@ package changes, API differences, and new capabilities.
 If your dapp supports (or plans to support) both EVM and Solana, you can use the
 [multichain client](../multichain/index.md) instead.
 The EVM and Solana clients share the same underlying multichain session, meaning the user only
-approves once. See the [multichain quickstart](../multichain/quickstart.md) to get started.
+approves once. See the [multichain quickstart](../multichain/quickstart/javascript.md) to get started.
 :::
 
 ## Supported platforms and libraries
@@ -46,34 +46,9 @@ title: 'JavaScript',
 description: 'Set up MetaMask Connect EVM in a JavaScript dapp.',
 },
 {
-href: '/metamask-connect/evm/quickstart/wagmi',
-title: 'Wagmi',
-description: 'Set up MetaMask Connect EVM in a Next.js and Wagmi dapp.',
-},
-{
-href: '/metamask-connect/evm/quickstart/rainbowkit',
-title: 'RainbowKit',
-description: 'Set up MetaMask Connect EVM in a JavaScript and RainbowKit dapp.',
-},
-{
-href: '/metamask-connect/evm/quickstart/connectkit',
-title: 'ConnectKit',
-description: 'Set up MetaMask Connect EVM in a JavaScript and ConnectKit dapp.',
-},
-{
 href: '/metamask-connect/evm/quickstart/react-native',
 title: 'React Native',
 description: 'Set up MetaMask Connect EVM in a React Native or Expo dapp.',
-},
-{
-href: '/metamask-connect/evm/quickstart/dynamic',
-title: 'Dynamic SDK',
-description: 'Set up Dynamic SDK in a Next.js dapp. Use MetaMask Connect EVM features with Dynamic.',
-},
-{
-href: '/metamask-connect/evm/quickstart/web3auth',
-title: 'Embedded Wallet SDK (formerly Web3Auth)',
-description: 'Set up Web3Auth SDK in a Next.js dapp. Use MetaMask Connect EVM features with Web3Auth.',
 }
 ]}
 />

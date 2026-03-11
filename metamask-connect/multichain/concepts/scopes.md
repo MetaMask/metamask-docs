@@ -82,6 +82,6 @@ const solAccounts = session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKv
 
 ## Next steps
 
-- [Quickstart](../quickstart.md): Set up MetaMask Connect Multichain.
+- [Quickstart](../quickstart/javascript.md): Set up MetaMask Connect Multichain.
 - [Send transactions](../guides/send-transactions.md): Send transactions on EVM and Solana.
 - [API reference](../reference/api.md): Full Multichain API reference.
