@@ -1,7 +1,8 @@
 ---
+title: "MetaMask Connect - Dapp Wallet Integration SDK"
 sidebar_label: Introduction
-description: Introduction page for MetaMask Connect documentation.
-keywords: [connect, sdk, integrate, dapp, multichain, evm, solana]
+description: MetaMask Connect enables fast, reliable dapp-to-wallet connections across desktop, mobile, and native apps with multichain support for EVM and Solana.
+keywords: [connect, sdk, integrate, dapp, multichain, evm, solana, metamask connect, wallet connection, browser extension, mobile wallet, CAIP-25, wallet SDK, web3 wallet, cryptocurrency wallet]
 ---
 
 import CardList from '@site/src/components/CardList'

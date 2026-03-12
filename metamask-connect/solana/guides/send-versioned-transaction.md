@@ -1,3 +1,9 @@
+---
+sidebar_label: Send a versioned transaction
+description: Create, sign, and send Solana versioned (v0) transactions with Address Lookup Tables through MetaMask Connect using @solana/web3.js.
+keywords: [solana, versioned transaction, v0 transaction, address lookup table, metamask, signAndSendTransaction, wallet-standard, solana web3.js]
+---
+
 # Send a versioned transaction
 
 Solana [versioned transactions](https://solana.com/developers/guides/advanced/versions) (`v0`) support [Address Lookup Tables](https://solana.com/developers/guides/advanced/lookup-tables), which let you reference up to 256 addresses in a single transaction — useful for complex operations that would exceed the limits of legacy transactions.

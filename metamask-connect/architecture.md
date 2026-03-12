@@ -1,7 +1,7 @@
 ---
 sidebar_label: Architecture
 description: Learn how MetaMask Connect routes connections across platforms.
-keywords: [connect, sdk, architecture, platform detection, relay, session]
+keywords: [connect, sdk, architecture, platform detection, relay, session, end-to-end encryption, transport layer, websocket relay, session persistence, connection flow]
 ---
 
 # Architecture

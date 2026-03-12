@@ -1,6 +1,6 @@
 ---
 description: Interact with contracts with MetaMask Connect EVM in your JavaScript dapp.
-keywords: [SDK, JavaScript, wagmi, read, write, smart, contract, contracts, dapp]
+keywords: [SDK, JavaScript, wagmi, read, write, smart, contract, contracts, dapp, smart contract interaction, ABI, contract read, contract write, viem, ethers.js, web3.js, ERC-20, ERC-721]
 sidebar_label: Interact with contracts
 toc_max_heading_level: 3
 ---

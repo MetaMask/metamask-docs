@@ -18,6 +18,13 @@ keywords:
     solana,
     evm,
     multichain,
+    browser extension,
+    mobile browser,
+    native app,
+    connection methods,
+    QR code connection,
+    wallet deeplink,
+    cross-platform wallet,
   ]
 ---
 

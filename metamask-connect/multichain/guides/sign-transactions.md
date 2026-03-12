@@ -1,7 +1,7 @@
 ---
 sidebar_label: Sign messages
 description: Sign messages on EVM and Solana from a single multichain session.
-keywords: [multichain, evm, solana, sign, personal_sign, signTypedData, signMessage, invokeMethod]
+keywords: [multichain, evm, solana, sign, personal_sign, signTypedData, signMessage, invokeMethod, multichain signing, cross-chain signature]
 ---
 
 # Sign messages on EVM and Solana

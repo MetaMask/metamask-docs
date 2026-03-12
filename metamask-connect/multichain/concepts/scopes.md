@@ -1,7 +1,7 @@
 ---
 sidebar_label: Scopes
 description: Understand scopes, account IDs, and sessions in MetaMask Connect Multichain.
-keywords: [multichain, caip, scope, caip-2, caip-10, caip-25, session, chain id]
+keywords: [multichain, caip, scope, caip-2, caip-10, caip-25, session, chain id, chain namespace, account ID format, blockchain identifier, eip155, solana scope]
 ---
 
 # Scopes, accounts, and sessions

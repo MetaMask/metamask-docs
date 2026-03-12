@@ -1,5 +1,7 @@
 ---
+sidebar_label: Sign data
 description: Use RPC methods to request cryptographic signatures from users.
+keywords: [eth_signTypedData_v4, personal_sign, EIP-712, message signing, cryptographic signature, sign data, metamask, ethereum]
 ---
 
 import Tabs from '@theme/Tabs';

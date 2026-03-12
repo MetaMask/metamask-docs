@@ -1,3 +1,9 @@
+---
+sidebar_label: Display in MetaMask
+description: Customize how your dapp appears in MetaMask, including favicon icons and method names displayed in the transaction confirmation screen.
+keywords: [metamask, favicon, dapp icon, display, method names, 4byte, transaction confirmation, UX, branding]
+---
+
 # Display in MetaMask
 
 ## Display icons

@@ -1,7 +1,7 @@
 ---
 sidebar_label: Integration options
 description: Choose the right MetaMask Connect integration for your dapp.
-keywords: [connect, sdk, integration, evm, solana, multichain, packages]
+keywords: [connect, sdk, integration, evm, solana, multichain, packages, connect-evm, connect-solana, connect-multichain, single ecosystem, npm package, wallet integration guide]
 ---
 
 # Integration options

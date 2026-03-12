@@ -1,6 +1,7 @@
 ---
 sidebar_class_name: 'hidden'
-description: See the MetaMask JSON-RPC API reference.
+description: Interactive reference for the MetaMask JSON-RPC API, including standard Ethereum methods and MetaMask-specific enhancements for dapp integration.
+keywords: [JSON-RPC, RPC API, metamask, ethereum, eth_sendTransaction, wallet_switchEthereumChain, wallet_addEthereumChain, wallet_sendCalls]
 ---
 
 # JSON-RPC API

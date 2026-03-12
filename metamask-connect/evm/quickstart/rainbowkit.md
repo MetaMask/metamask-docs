@@ -2,7 +2,7 @@
 description: Quickstart guide for using MetaMask SDK with a JavaScript and RainbowKit dapp.
 toc_max_heading_level: 3
 sidebar_label: RainbowKit
-keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK, rainbowkit connector, wallet modal, connect button, react wallet UI]
 ---
 
 :::info Heads up

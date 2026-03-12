@@ -1,7 +1,7 @@
 ---
 sidebar_label: Use Framework Kit
 description: Set up Framework Kit to connect a Solana dapp to MetaMask.
-keywords: [solana, framework kit, react, hooks, wallet, connect]
+keywords: [solana, framework kit, react, hooks, wallet, connect, react hooks, solana hooks, wallet hooks, unified API]
 ---
 
 # Use Framework Kit

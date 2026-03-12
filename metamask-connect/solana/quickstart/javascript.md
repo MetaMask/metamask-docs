@@ -1,7 +1,7 @@
 ---
 description: Quickstart guide for using MetaMask Connect Solana with a JavaScript dapp.
 sidebar_label: JavaScript
-keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK, vanilla javascript, wallet-standard, solana browser dapp, signAndSendTransaction, connect solana]
 ---
 
 # Connect to Solana using MetaMask Connect Solana

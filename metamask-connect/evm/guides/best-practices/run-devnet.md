@@ -1,5 +1,7 @@
 ---
+sidebar_label: Run a development network
 description: Configure and connect to a Hardhat development network.
+keywords: [hardhat, development network, local blockchain, devnet, testing, localhost RPC, metamask, ethereum development]
 ---
 
 # Run a development network

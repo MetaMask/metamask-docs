@@ -2,7 +2,7 @@
 description: Quickstart guide for using MetaMask SDK with a JavaScript and Wagmi dapp.
 toc_max_heading_level: 3
 sidebar_label: Wagmi
-keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp, Wallet SDK, wagmi connector, react hooks, useConnect, useAccount, wallet connector, web3 react]
 ---
 
 :::info Heads up

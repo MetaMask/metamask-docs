@@ -1,7 +1,7 @@
 ---
 description: Quickstart guide for using MetaMask Connect EVM with a React Native dapp.
 sidebar_label: React Native
-keywords: [connect, MetaMask, React, Native, SDK, dapp]
+keywords: [connect, MetaMask, React, Native, SDK, dapp, react native wallet, mobile dapp, polyfills, metro config, mobile deeplinks, iOS, Android]
 ---
 
 import Tabs from "@theme/Tabs";

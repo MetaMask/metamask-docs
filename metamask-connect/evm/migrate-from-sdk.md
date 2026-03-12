@@ -1,7 +1,7 @@
 ---
 sidebar_label: Migrate from legacy SDK
 description: Migrate from @metamask/sdk to @metamask/connect-evm with step-by-step package, API, and configuration changes.
-keywords: [SDK, migrate, migration, upgrade, connect, MetaMask, dapp]
+keywords: [SDK, migrate, migration, upgrade, connect, MetaMask, dapp, metamask sdk migration, sdk to connect, breaking changes, "@metamask/sdk deprecation", upgrade guide]
 toc_max_heading_level: 2
 ---
 

@@ -1,6 +1,7 @@
 ---
+sidebar_label: Send transactions
 description: Handle transactions with MetaMask Connect EVM in your JavaScript dapp.
-keywords: [SDK, JavaScript, wagmi, send, transaction, transactions, status, estimate, gas, dapp]
+keywords: [SDK, JavaScript, wagmi, send, transaction, transactions, status, estimate, gas, dapp, eth_sendTransaction, gas estimation, transaction receipt, viem, ethers.js, web3.js, send ETH]
 toc_max_heading_level: 2
 ---
 

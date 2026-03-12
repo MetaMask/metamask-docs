@@ -1,5 +1,7 @@
 ---
+sidebar_label: Sign in with Solana
 description: Enable your users to Sign in with Solana.
+keywords: [sign in with solana, SIWS, solana authentication, domain binding, off-chain auth, metamask, solana login]
 ---
 
 # Sign in with Solana

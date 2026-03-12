@@ -1,5 +1,7 @@
 ---
-description: See the Multichain API reference.
+sidebar_label: Multichain API reference
+description: Complete reference for the MetaMask Multichain API (CAIP-25), including wallet_createSession, wallet_invokeMethod, and wallet_revokeSession methods.
+keywords: [wallet_createSession, wallet_getSession, wallet_invokeMethod, wallet_revokeSession, CAIP-25, multichain API, metamask]
 ---
 
 import Tabs from "@theme/Tabs";

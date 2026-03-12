@@ -1,6 +1,6 @@
 ---
-description: Methods reference for MetaMask Connect Multichain.
-keywords: [multichain, evm, solana, connect, method, methods, dapp]
+description: Complete methods reference for MetaMask Connect Multichain, including connect, getSession, invokeMethod, disconnect, and session event handlers.
+keywords: [multichain, evm, solana, connect, method, methods, dapp, getSession, invokeMethod, disconnect, session events, API reference]
 toc_max_heading_level: 2
 sidebar_label: MetaMask Connect Multichain methods
 ---

@@ -1,5 +1,7 @@
 ---
+sidebar_label: Sign in with Ethereum
 description: Enable your users to sign in with Ethereum.
+keywords: [sign in with ethereum, ERC-4361, SIWE, authentication, domain binding, phishing prevention, ethereum login, metamask]
 ---
 
 # Sign in with Ethereum

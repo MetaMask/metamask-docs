@@ -1,6 +1,7 @@
 ---
+sidebar_label: Manage networks
 description: Manage networks with MetaMask Connect EVM in your Vanilla JS or Wagmi dapp.
-keywords: [SDK, JavaScript, wagmi, detect, switch, add, network, networks, dapp]
+keywords: [SDK, JavaScript, wagmi, detect, switch, add, network, networks, dapp, wallet_switchEthereumChain, wallet_addEthereumChain, chain ID, network detection, custom network, EVM chain]
 toc_max_heading_level: 2
 ---
 

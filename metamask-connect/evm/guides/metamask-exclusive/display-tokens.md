@@ -1,5 +1,7 @@
 ---
+sidebar_label: Display tokens
 description: Display a user's ERC-20 tokens or NFTs.
+keywords: [wallet_watchAsset, ERC-20 token, NFT display, ERC-721, token suggestion, custom token, metamask, display tokens]
 ---
 
 # Display tokens

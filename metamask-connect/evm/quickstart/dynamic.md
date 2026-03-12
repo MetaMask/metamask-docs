@@ -2,7 +2,7 @@
 sidebar_label: Dynamic SDK
 description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
 toc_max_heading_level: 3
-keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK, dynamic xyz, embedded wallet, social login, multi-wallet]
 ---
 
 :::info Heads up

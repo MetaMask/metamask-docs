@@ -1,7 +1,7 @@
 ---
 sidebar_label: Send transactions
 description: Send EVM and Solana transactions from a single multichain session.
-keywords: [multichain, evm, solana, transaction, send, invokeMethod, signAndSendTransaction]
+keywords: [multichain, evm, solana, transaction, send, invokeMethod, signAndSendTransaction, multichain transaction, eth_sendTransaction, RPC routing]
 ---
 
 # Send EVM and Solana transactions

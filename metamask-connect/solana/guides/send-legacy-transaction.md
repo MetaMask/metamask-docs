@@ -1,3 +1,9 @@
+---
+sidebar_label: Send a legacy transaction
+description: Sign and send Solana legacy transactions through MetaMask Connect using the wallet-standard signAndSendTransaction feature with @solana/web3.js.
+keywords: [solana, legacy transaction, send transaction, metamask, signAndSendTransaction, wallet-standard, solana web3.js, SPL token transfer]
+---
+
 # Send a legacy transaction
 
 Solana [legacy transactions](https://solana.com/developers/guides/advanced/versions) are the simpler of Solana's two transaction formats.

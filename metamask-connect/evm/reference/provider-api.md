@@ -1,5 +1,7 @@
 ---
-description: See the MetaMask Ethereum provider API reference.
+sidebar_label: Ethereum provider API
+description: Complete reference for the MetaMask Ethereum provider API (EIP-1193), including properties, methods like request(), and events like accountsChanged and chainChanged.
+keywords: [ethereum provider, EIP-1193, window.ethereum, EIP-6963, provider API, metamask, request method, events, accountsChanged, chainChanged]
 ---
 
 # Ethereum provider API

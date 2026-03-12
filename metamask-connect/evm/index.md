@@ -1,7 +1,8 @@
 ---
+title: "MetaMask Connect EVM - Ethereum Dapp Integration"
 sidebar_label: Introduction
-description: Connect to EVM networks using MetaMask Connect EVM.
-keywords: [evm, ethereum, connect, eip-1193, provider, ethers, viem, web3js]
+description: Connect your dapp to Ethereum and EVM-compatible networks using MetaMask Connect EVM. Get an EIP-1193 provider with viem, ethers.js, or web3.js support.
+keywords: [evm, ethereum, connect, eip-1193, provider, ethers, viem, web3js, metamask connect evm, ethereum dapp, createEVMClient, web3 provider, metamask integration]
 ---
 
 import CardList from '@site/src/components/CardList'

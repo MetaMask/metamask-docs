@@ -1,5 +1,7 @@
 ---
+sidebar_label: Sign messages
 description: Use RPC methods to request cryptographic signatures from users.
+keywords: [solana sign message, signMessage, wallet-standard, off-chain signature, message verification, metamask, solana]
 ---
 
 # Sign messages

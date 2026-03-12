@@ -1,7 +1,7 @@
 ---
 sidebar_label: JavaScript
 description: Connect to multiple blockchain ecosystems simultaneously using MetaMask Connect Multichain.
-keywords: [multichain, evm, solana, connect, caip-25, scope]
+keywords: [multichain, evm, solana, connect, caip-25, scope, vite template, createMultichainClient, multichain setup, EVM Solana dapp]
 ---
 
 import Tabs from "@theme/Tabs";

@@ -1,7 +1,7 @@
 ---
 description: Quickstart guide for using MetaMask Connect EVM with a JavaScript dapp.
 sidebar_label: JavaScript
-keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK, vanilla javascript, createEVMClient, eth_requestAccounts, browser dapp, metamask integration tutorial]
 ---
 
 import Tabs from "@theme/Tabs";

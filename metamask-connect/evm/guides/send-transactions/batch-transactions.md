@@ -1,5 +1,7 @@
 ---
+sidebar_label: Batch transactions
 description: Send atomic batch transactions using `wallet_sendCalls`.
+keywords: [EIP-5792, atomic batch, wallet_sendCalls, wallet_getCapabilities, wallet_getCallsStatus, bundle transactions, batch transactions, metamask]
 ---
 
 import Tabs from '@theme/Tabs';

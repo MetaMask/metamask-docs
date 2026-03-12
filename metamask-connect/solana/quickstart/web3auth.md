@@ -2,7 +2,7 @@
 sidebar_label: Embedded Wallets SDK
 description: Quickstart guide for using MetaMask SDK and Embedded Wallets SDK.
 toc_max_heading_level: 3
-keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK, web3auth solana, embedded wallet, seedless, social login]
 ---
 
 :::info Heads up

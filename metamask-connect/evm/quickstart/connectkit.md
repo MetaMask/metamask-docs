@@ -2,7 +2,7 @@
 description: Quickstart guide for using MetaMask SDK with a JavaScript and ConnectKit dapp.
 toc_max_heading_level: 3
 sidebar_label: ConnectKit
-keywords: [connect, MetaMask, JavaScript, ConnectKit, SDK, dapp, Wallet SDK]
+keywords: [connect, MetaMask, JavaScript, ConnectKit, SDK, dapp, Wallet SDK, connectkit integration, wallet modal, family wallet connector, react wallet]
 ---
 
 :::info Heads up

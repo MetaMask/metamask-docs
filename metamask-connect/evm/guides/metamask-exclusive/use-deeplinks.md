@@ -1,6 +1,7 @@
 ---
+sidebar_label: Use deeplinks
 description: Use deeplinks to connect to users' MetaMask mobile wallets.
-keywords: [SDK, deeplink, deeplinks, mobile, dapp]
+keywords: [SDK, deeplink, deeplinks, mobile, dapp, metamask deeplink, mobile wallet link, in-app browser, universal link, app link]
 toc_max_heading_level: 2
 ---
 

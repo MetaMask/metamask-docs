@@ -1,7 +1,8 @@
 ---
+title: "MetaMask Connect Multichain - Cross-Chain Wallet API"
 sidebar_label: Introduction
-description: Connect to multiple blockchain ecosystems using the Multichain API.
-keywords: [multichain, caip-25, evm, solana, session, scope]
+description: Connect to Ethereum, Solana, and other blockchain ecosystems from a single session using the MetaMask Connect Multichain API built on CAIP-25.
+keywords: [multichain, caip-25, evm, solana, session, scope, metamask connect multichain, createMultichainClient, cross-chain, unified wallet session, blockchain interoperability]
 ---
 
 import CardList from '@site/src/components/CardList'

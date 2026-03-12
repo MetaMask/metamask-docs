@@ -1,6 +1,7 @@
 ---
+sidebar_label: Production readiness
 description: MetaMask-specific production readiness checklist for dapps using MetaMask Connect EVM.
-keywords: [SDK, production, readiness, checklist, compatibility, errors, dapp]
+keywords: [SDK, production, readiness, checklist, compatibility, errors, dapp, production checklist, cross-platform testing, error handling, RPC endpoint, deployment, launch]
 toc_max_heading_level: 2
 ---
 

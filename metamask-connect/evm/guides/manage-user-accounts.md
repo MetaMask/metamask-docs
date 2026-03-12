@@ -1,6 +1,7 @@
 ---
+sidebar_label: Manage user accounts
 description: Authenticate users with MetaMask Connect EVM in your Vanilla JS or Wagmi dapp.
-keywords: [SDK, JavaScript, wagmi, authenticate, connect, sign, accounts, wallet, dapp]
+keywords: [SDK, JavaScript, wagmi, authenticate, connect, sign, accounts, wallet, dapp, eth_requestAccounts, accountsChanged, session management, wallet connection, user authentication]
 toc_max_heading_level: 3
 ---
 
