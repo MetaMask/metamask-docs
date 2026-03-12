@@ -380,11 +380,11 @@
     },
     {
       "source": "/wallet/reference/sdk-js-options/",
-      "destination": "/metamask-connect/reference/options/"
+      "destination": "/metamask-connect/evm/reference/methods/"
     },
     {
       "source": "/metamask-connect/reference/sdk-options/",
-      "destination": "/metamask-connect/reference/options/"
+      "destination": "/metamask-connect/evm/reference/methods/"
     },
     {
       "source": "/wallet/reference/sdk-unity-api/",

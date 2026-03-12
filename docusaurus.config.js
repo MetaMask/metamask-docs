@@ -441,7 +441,7 @@ const config = {
           },
           {
             from: ['/wallet/reference/sdk-js-options'],
-            to: '/metamask-connect/reference/options/',
+            to: '/metamask-connect/evm/reference/methods/',
           },
           {
             from: [
