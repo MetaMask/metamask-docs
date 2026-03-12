@@ -19,8 +19,8 @@ Builds an array of caveats.
 
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
-| `environment` | `SmartAccountsEnvironment` | Yes | Environment to resolve the smart contracts for the current chain. |
-| `config` | `CaveatBuilderConfig` | No | Configuration for `CoreCaveatBuilder`. |
+| `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes | Environment to resolve the smart contracts for the current chain. |
+| `config` | [`CaveatBuilderConfig`](../types.md#caveatbuilderconfig) | No | Configuration for `CoreCaveatBuilder`. |
 
 ### Example
 
@@ -60,10 +60,10 @@ Creates a delegation with a specific delegate.
 | ---- | ---- | -------- | ----------- |
 | `from` | `Hex` | Yes | The address that is granting the delegation. |
 | `to` | `Hex` | Yes | The address to which the delegation is being granted. |
-| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. |
-| `environment` | `SmartAccountsEnvironment` | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
-| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. |
-| `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
+| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. See [delegation scopes](./delegation-scopes.md) for the full list of scope types and their parameters. |
+| `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
+| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. See [caveats reference](./caveats.md) for the full list of caveat types and their parameters. |
+| `parentDelegation` | [`Delegation`](../types.md#delegation) \| `Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
 | `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 
 ### Example
@@ -97,10 +97,10 @@ Creates an open delegation that can be redeemed by any delegate.
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
 | `from` | `Hex` | Yes | The address that is granting the delegation. |
-| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. |
-| `environment` | `SmartAccountsEnvironment` | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
-| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. |
-| `parentDelegation` | `Delegation \| Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
+| `scope` | `ScopeConfig` | Yes | The scope of the delegation that defines the initial authority. See [delegation scopes](./delegation-scopes.md) for the full list of scope types and their parameters. |
+| `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes | The environment used by the toolkit to define contract addresses for interacting with the Delegation Framework contracts. |
+| `caveats` | `Caveats` | No | Caveats that further refine the authority granted by the `scope`. See [caveats reference](./caveats.md) for the full list of caveat types and their parameters. |
+| `parentDelegation` | [`Delegation`](../types.md#delegation) \| `Hex` | No | The parent delegation or its corresponding hex to create a delegation chain. |
 | `salt` | `Hex` | No | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 
 
@@ -287,7 +287,7 @@ Encodes the calldata for disabling a delegation.
 
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delegation` | `Delegation` | Yes | The delegation to be disabled. |
+| `delegation` | [`Delegation`](../types.md#delegation) | Yes | The delegation to be disabled. |
 
 ### Example
 
@@ -334,7 +334,7 @@ Encodes an array of delegations to an ABI-encoded hex string.
 
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delegations` | `Delegation[]` | Yes | The delegation array to be encoded. |
+| `delegations` | [`Delegation`](../types.md#delegation)`[]` | Yes | The delegation array to be encoded. |
 
 ### Example
 
@@ -379,7 +379,7 @@ Encodes a single delegation to an ABI-encoded hex string.
 
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delegation` | `Delegation` | Yes | The delegation to be encoded. |
+| `delegation` | [`Delegation`](../types.md#delegation) | Yes | The delegation to be encoded. |
 
 ### Example
 
@@ -424,7 +424,7 @@ Returns the delegation hash.
 
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
-| `input` | `Delegation` | Yes | The delegation object to hash. |
+| `input` | [`Delegation`](../types.md#delegation) | Yes | The delegation object to hash. |
 
 ### Example
 
@@ -502,7 +502,7 @@ Overrides or adds the `SmartAccountsEnvironment` for a chain and supported versi
 | ---- | ---- | -------- | ----------- |
 | `chainId` | `number` | Yes | The chain ID of the network for which the `SmartAccountsEnvironment` should be overridden. |
 | `version` | `SupportedVersion` | Yes | The version of the Delegation Framework contracts to override for the specified chain. |
-| `environment` | `SmartAccountsEnvironment` | Yes | The environment containing contract addresses to override for the given chain and version. |
+| `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes | The environment containing contract addresses to override for the given chain and version. |
 
 ### Example
 
@@ -548,9 +548,9 @@ This method supports batch redemption, allowing multiple delegations to be proce
 
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delegations` | `Delegation[][]` | Yes | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed. |
-| `modes` | `ExecutionMode[]` | Yes | A collection specifying the [execution mode](../../concepts/delegation/index.md#execution-modes) for each corresponding delegation chain. Supported execution modes are `SingleDefault`, `SingleTry`, `BatchDefault`, and `BatchTry`. |
-| `executions` | `ExecutionStruct[][]` | Yes | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain. |
+| `delegations` | [`Delegation`](../types.md#delegation)`[][]` | Yes | A nested collection representing chains of delegations. Each inner collection contains a chain of delegations to be redeemed. |
+| `modes` | [`ExecutionMode`](../types.md#executionmode)`[]` | Yes | A collection specifying the [execution mode](../../concepts/delegation/index.md#execution-modes) for each corresponding delegation chain. |
+| `executions` | [`ExecutionStruct`](../types.md#executionstruct)`[][]` | Yes | A nested collection where each inner collection contains a list of `ExecutionStruct` objects associated with a specific delegation chain. |
 
 ### Example
 
@@ -577,7 +577,7 @@ Signs the delegation and returns the delegation signature.
 | Name | Type | Required | Description |
 | --- | --- | --- | --- |
 | `privateKey` | `Hex` | Yes | The private key to use for signing the delegation. |
-| `delegation` | `Omit<Delegation, "signature">` | Yes | The unsigned delegation object to sign. |
+| `delegation` | `Omit<`[`Delegation`](../types.md#delegation)`, "signature">` | Yes | The unsigned delegation object to sign. |
 | `chainId` | `number` | Yes | The chain ID on which the delegation manager is deployed. |
 | `delegationManager` | `0x${string}` | Yes | The address of the Delegation Manager. |
 | `name` | `string` | No | The name of the domain of the Delegation Manager. The default is `DelegationManager`. |

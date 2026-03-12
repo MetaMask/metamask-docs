@@ -154,11 +154,12 @@ This example uses the [`limitedCalls`](../../reference/delegation/caveats.md#lim
 ```ts
 // Use the config from previous step.
 import { bobSmartAccount, carolSmartAccount } from "./config.ts"
+import { CaveatType } from '@metamask/smart-accounts-kit'
 import { createCaveatBuilder, hashDelegation } from '@metamask/smart-accounts-kit/utils'
 
 const caveatBuilder = createCaveatBuilder(bobSmartAccount.environment)
 
-const caveats = caveatBuilder.addCaveat('limitedCalls', { limit: 1 })
+const caveats = caveatBuilder.addCaveat(CaveatType.LimitedCalls, { limit: 1 })
 
 const redelegation: Delegation =  {
   delegate: bobSmartAccount.address,
