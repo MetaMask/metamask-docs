@@ -1,6 +1,7 @@
 ---
+title: "Migrate from Legacy SDK to MetaMask Connect EVM"
 sidebar_label: Migrate from legacy SDK
-description: Migrate from @metamask/sdk to @metamask/connect-evm with step-by-step package, API, and configuration changes.
+description: Step-by-step guide to migrate from the legacy @metamask/sdk to @metamask/connect-evm, covering package replacements, API changes, and configuration updates.
 keywords: [SDK, migrate, migration, upgrade, connect, MetaMask, dapp, metamask sdk migration, sdk to connect, breaking changes, "@metamask/sdk deprecation", upgrade guide]
 toc_max_heading_level: 2
 ---
@@ -385,3 +386,10 @@ connector, which provides React hooks out of the box.
 Test on both extension and mobile. The transport layer has changed, and behavior differences may
 surface in one environment but not the other.
 :::
+
+## Next steps
+
+- [JavaScript quickstart](./quickstart/javascript.md)
+- [Manage user accounts](./guides/manage-user-accounts.md)
+- [Send transactions](./guides/send-transactions/index.md)
+- [Production readiness checklist](./guides/best-practices/production-readiness.md)

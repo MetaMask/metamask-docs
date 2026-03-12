@@ -1,4 +1,5 @@
 ---
+title: "Multichain API Reference - MetaMask Connect"
 sidebar_label: Multichain API reference
 description: Complete reference for the MetaMask Multichain API (CAIP-25), including wallet_createSession, wallet_invokeMethod, and wallet_revokeSession methods.
 keywords: [wallet_createSession, wallet_getSession, wallet_invokeMethod, wallet_revokeSession, CAIP-25, multichain API, metamask]
@@ -379,3 +380,10 @@ according to [CAIP-217](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/c
   }
 }
 ```
+
+## Next steps
+
+- [JavaScript quickstart](../quickstart/javascript.md) to set up MetaMask Connect Multichain in a dapp.
+- [MetaMask Connect Multichain methods](methods.md) for the SDK-level methods that wrap this API.
+- [Scopes, accounts, and sessions](../concepts/scopes.md) to understand CAIP-2, CAIP-10, and CAIP-25 identifiers.
+- [Send transactions on EVM and Solana](../guides/send-transactions.md) for practical usage examples.

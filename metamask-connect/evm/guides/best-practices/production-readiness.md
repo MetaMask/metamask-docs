@@ -1,6 +1,7 @@
 ---
+title: "Production Readiness Checklist - MetaMask Connect EVM"
 sidebar_label: Production readiness
-description: MetaMask-specific production readiness checklist for dapps using MetaMask Connect EVM.
+description: Verify wallet connections, RPC endpoints, cross-platform compatibility, and error handling before launching your MetaMask Connect EVM dapp.
 keywords: [SDK, production, readiness, checklist, compatibility, errors, dapp, production checklist, cross-platform testing, error handling, RPC endpoint, deployment, launch]
 toc_max_heading_level: 2
 ---
@@ -48,3 +49,10 @@ For example:
 - **Event management** - If you're using Vanilla JavaScript, handle MetaMask events such as [`chainChanged`](../../reference/provider-api.md#chainchanged)
   and [`accountsChanged`](../../reference/provider-api.md#accountschanged) to promptly update the UI and internal state.
   If you're using Wagmi, you generally don't need to handle MetaMask events, because the hooks will handle the events for you.
+
+## Next steps
+
+- [Customize your dapp display in MetaMask](./display.md)
+- [Run a development network](./run-devnet.md)
+- [Ethereum provider API reference](../../reference/provider-api.md)
+- [EVM reference methods](../../reference/methods.md)

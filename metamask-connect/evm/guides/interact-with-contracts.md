@@ -1,5 +1,6 @@
 ---
-description: Interact with contracts with MetaMask Connect EVM in your JavaScript dapp.
+title: "Interact with Smart Contracts - MetaMask Connect EVM"
+description: Read and write smart contract data, handle events, and manage transactions using viem, ethers.js, or web3.js with MetaMask Connect EVM.
 keywords: [SDK, JavaScript, wagmi, read, write, smart, contract, contracts, dapp, smart contract interaction, ABI, contract read, contract write, viem, ethers.js, web3.js, ERC-20, ERC-721]
 sidebar_label: Interact with contracts
 toc_max_heading_level: 3
@@ -10,7 +11,8 @@ import TabItem from '@theme/TabItem';
 
 # Interact with smart contracts
 
-Interact with smart contracts in your JavaScript dapp.
+Use MetaMask Connect EVM to read and write smart contract data from your JavaScript dapp. MetaMask Connect EVM provides an EIP-1193 provider that works with viem, ethers.js, and web3.js for calling contract functions, deploying contracts, listening to events, and managing transaction states with proper error handling.
+
 With MetaMask Connect EVM:
 
 - **Read data** from smart contracts.
@@ -644,21 +646,21 @@ function MintNFT() {
 
 Follow these best practices when interacting with smart contracts.
 
-#### Contract validation
+### Contract validation
 
 - Always **verify contract addresses**.
 - Double check **ABI correctness**.
 - **Validate input data** before sending.
 - Use **typed data** when possible (for example, using [Viem](https://viem.sh/)).
 
-#### Error handling
+### Error handling
 
 - Handle [common errors](#common-errors) like **user rejection** and **contract reverts**.
 - Provide **clear error messages** to users.
 - Implement proper **error recovery** flows.
 - Consider **gas estimation failures**.
 
-#### User experience
+### User experience
 
 - Show **clear loading states**.
 - Display **transaction progress**.

@@ -1,6 +1,7 @@
 ---
+title: "Use Solana Wallet Adapter - MetaMask Connect"
 sidebar_label: Use the Wallet Adapter
-description: Set up Solana's Wallet Adapter to connect a dapp to MetaMask.
+description: Configure Solana's Wallet Adapter with MetaMask Connect in a React dapp using WalletProvider, ConnectionProvider, and useWallet hooks.
 keywords: [solana, wallet adapter, wallet standard, connect, react, "@solana/wallet-adapter", WalletProvider, ConnectionProvider, useWallet, react solana]
 ---
 

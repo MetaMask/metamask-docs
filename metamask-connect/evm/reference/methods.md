@@ -1,5 +1,6 @@
 ---
-description: Complete methods reference for MetaMask Connect EVM, including connect, connectAndSign, connectWith, getProvider, and disconnect.
+title: "MetaMask Connect EVM Methods Reference"
+description: Complete API reference for MetaMask Connect EVM methods including connect, connectAndSign, connectWith, getProvider, and disconnect.
 keywords: [evm, connect, method, methods, dapp, connectAndSign, connectWith, getProvider, disconnect, EIP-1193, API reference]
 toc_max_heading_level: 2
 sidebar_label: MetaMask Connect EVM methods
@@ -7,7 +8,7 @@ sidebar_label: MetaMask Connect EVM methods
 
 # MetaMask Connect EVM SDK methods
 
-MetaMask Connect EVM (`@metamask/connect-evm`) provides several convenience methods for connecting to and interacting with MetaMask, including the following.
+MetaMask Connect EVM (`@metamask/connect-evm`) exposes five primary methods: `connect()` to establish a wallet session, `connectAndSign()` to connect and sign a message in one step, `connectWith()` to connect and execute an RPC call atomically, `getProvider()` to obtain the EIP-1193 provider for arbitrary JSON-RPC requests, and `disconnect()` to end the session.
 
 ## `connect`
 

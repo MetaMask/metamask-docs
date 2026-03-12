@@ -1,6 +1,7 @@
 ---
+title: "Sign Messages on Solana - MetaMask Connect"
 sidebar_label: Sign messages
-description: Use RPC methods to request cryptographic signatures from users.
+description: Request off-chain cryptographic signatures from users on Solana using MetaMask Connect's signMessage wallet-standard feature.
 keywords: [solana sign message, signMessage, wallet-standard, off-chain signature, message verification, metamask, solana]
 ---
 
@@ -44,3 +45,10 @@ async function signMessage() {
   return signature
 }
 ```
+
+## Next steps
+
+- [Sign in with Solana (SIWS)](siws.md) to authenticate users with domain-bound, phishing-resistant sign-in messages.
+- [Send a legacy transaction](../send-legacy-transaction.md) to transfer SOL or interact with Solana programs.
+- [Send a versioned transaction](../send-versioned-transaction.md) to use Address Lookup Tables for complex operations.
+- [MetaMask Connect Solana methods](../../reference/methods.md) for the full list of wallet-standard features.

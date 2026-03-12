@@ -1,13 +1,14 @@
 ---
+title: "Ethereum Provider API - MetaMask Connect EVM"
 sidebar_label: Ethereum provider API
-description: Complete reference for the MetaMask Ethereum provider API (EIP-1193), including properties, methods like request(), and events like accountsChanged and chainChanged.
+description: Reference for the MetaMask Ethereum provider API (EIP-1193), covering properties, the request() method, and events like accountsChanged and chainChanged.
 keywords: [ethereum provider, EIP-1193, window.ethereum, EIP-6963, provider API, metamask, request method, events, accountsChanged, chainChanged]
 ---
 
 # Ethereum provider API
 
-This page is a reference for the Ethereum provider API of MetaMask's Wallet API.
-MetaMask injects the provider API into websites visited by its users using the `window.ethereum` provider object.
+The MetaMask Ethereum provider API follows the EIP-1193 standard and exposes a `request()` method for JSON-RPC calls, properties like `chainId` and `selectedAddress`, and events including `accountsChanged`, `chainChanged`, `connect`, and `disconnect`. MetaMask injects this provider as `window.ethereum`, and MetaMask Connect EVM returns the same interface via `getProvider()`.
+
 Use the provider [properties](#properties), [methods](#methods), and [events](#events) in your dapp.
 
 :::info Note
@@ -326,3 +327,10 @@ and [EIP-1474](https://eips.ethereum.org/EIPS/eip-1474#error-codes).
 The [`eth-rpc-errors`](https://npmjs.com/package/eth-rpc-errors) package implements all RPC errors
 returned by the MetaMask provider, and can help you identify their meaning.
 :::
+
+## Next steps
+
+- [JSON-RPC API reference](./json-rpc-api/index.md)
+- [Manage user accounts](../guides/manage-user-accounts.md)
+- [Manage networks](../guides/manage-networks.md)
+- [Send transactions](../guides/send-transactions/index.md)

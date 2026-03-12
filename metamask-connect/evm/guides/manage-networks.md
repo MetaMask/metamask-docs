@@ -1,6 +1,7 @@
 ---
+title: "Manage Networks - MetaMask Connect EVM"
 sidebar_label: Manage networks
-description: Manage networks with MetaMask Connect EVM in your Vanilla JS or Wagmi dapp.
+description: Detect, switch, and add EVM networks programmatically using wallet_switchEthereumChain and wallet_addEthereumChain in your dapp.
 keywords: [SDK, JavaScript, wagmi, detect, switch, add, network, networks, dapp, wallet_switchEthereumChain, wallet_addEthereumChain, chain ID, network detection, custom network, EVM chain]
 toc_max_heading_level: 2
 ---
@@ -10,7 +11,8 @@ import TabItem from '@theme/TabItem';
 
 # Manage networks
 
-Manage networks in your Vanilla JavaScript or Wagmi dapp.
+Use MetaMask Connect EVM to detect, switch, and add EVM networks in your dapp. MetaMask Connect EVM supports `wallet_switchEthereumChain` for switching between networks, `wallet_addEthereumChain` for adding custom networks, and the `chainChanged` event for monitoring network changes in real time.
+
 With MetaMask Connect EVM:
 
 - **Detect the current network** and monitor network changes.
@@ -20,7 +22,7 @@ With MetaMask Connect EVM:
 
 <p align="center">
   <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require("../_assets/network.gif").default} alt="Switch Networks" width="450px" />
+    <img src={require("../_assets/network.gif").default} alt="MetaMask Connect EVM network switching demonstration between Ethereum networks" width="450px" />
   </a>
 </p>
 
@@ -216,13 +218,13 @@ function NetworkWatcher() {
 
 Follow these best practices when managing networks.
 
-#### Error handling
+### Error handling
 
 - Implement error handling for network switching operations.
 - Provide **clear feedback messages** to users when network operations fail.
 - Handle cases where networks need to be **added before switching**.
 
-#### User experience
+### User experience
 
 - Display **loading states** during network switches.
 - Show **clear network status information** at all times.

@@ -1,4 +1,5 @@
 ---
+title: "Send Solana Versioned Transactions - MetaMask Connect"
 sidebar_label: Send a versioned transaction
 description: Create, sign, and send Solana versioned (v0) transactions with Address Lookup Tables through MetaMask Connect using @solana/web3.js.
 keywords: [solana, versioned transaction, v0 transaction, address lookup table, metamask, signAndSendTransaction, wallet-standard, solana web3.js]
@@ -211,3 +212,10 @@ const [{ signature }] = await wallet.features['solana:signAndSendTransaction'].s
   chain: 'solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1',
 })
 ```
+
+## Next steps
+
+- [Send a legacy transaction](send-legacy-transaction.md) for simpler transactions that don't require Address Lookup Tables.
+- [Sign messages](sign-data/sign-message.md) to verify wallet ownership or authorize off-chain actions.
+- [MetaMask Connect Solana methods](../reference/methods.md) for the full API reference.
+- [Use the Multichain SDK](../../multichain/quickstart/javascript.md) to send transactions on both EVM and Solana from a single session.

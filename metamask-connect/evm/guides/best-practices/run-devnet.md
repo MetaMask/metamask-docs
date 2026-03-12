@@ -1,6 +1,7 @@
 ---
+title: "Run a Development Network - MetaMask Connect"
 sidebar_label: Run a development network
-description: Configure and connect to a Hardhat development network.
+description: Set up and connect MetaMask to a Hardhat development network for local EVM testing with gas calculation and custom chain configuration.
 keywords: [hardhat, development network, local blockchain, devnet, testing, localhost RPC, metamask, ethereum development]
 ---
 
@@ -96,3 +97,9 @@ network state _and_ the known sent transactions.
 
 To clear MetaMask's transaction queue and reset its nonce calculation, go to **Settings > Advanced**
 and select **Reset account**.
+
+## Next steps
+
+- [Manage networks](../manage-networks.md)
+- [Send transactions](../send-transactions/index.md)
+- [Production readiness checklist](./production-readiness.md)

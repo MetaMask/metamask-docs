@@ -1,5 +1,6 @@
 ---
-description: Quickstart guide for using MetaMask Connect EVM with a React Native dapp.
+title: "React Native Quickstart - MetaMask Connect EVM"
+description: Set up MetaMask Connect EVM in a React Native or Expo app with required polyfills, metro configuration, and mobile deeplink support.
 sidebar_label: React Native
 keywords: [connect, MetaMask, React, Native, SDK, dapp, react native wallet, mobile dapp, polyfills, metro config, mobile deeplinks, iOS, Android]
 ---
@@ -361,3 +362,10 @@ npx expo run:ios
 
   </TabItem>
 </Tabs>
+
+## Next steps
+
+- [Manage user accounts](../guides/manage-user-accounts.md)
+- [Send transactions](../guides/send-transactions/index.md)
+- [Sign data](../guides/sign-data/index.md)
+- [Production readiness checklist](../guides/best-practices/production-readiness.md)

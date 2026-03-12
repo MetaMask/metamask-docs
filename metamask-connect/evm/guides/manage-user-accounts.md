@@ -1,6 +1,7 @@
 ---
+title: "Manage User Accounts - MetaMask Connect EVM"
 sidebar_label: Manage user accounts
-description: Authenticate users with MetaMask Connect EVM in your Vanilla JS or Wagmi dapp.
+description: Connect wallets, access accounts, listen for changes, and use connectAndSign for single-step authentication in Vanilla JS or Wagmi dapps.
 keywords: [SDK, JavaScript, wagmi, authenticate, connect, sign, accounts, wallet, dapp, eth_requestAccounts, accountsChanged, session management, wallet connection, user authentication]
 toc_max_heading_level: 3
 ---
@@ -10,7 +11,8 @@ import TabItem from '@theme/TabItem';
 
 # Manage user accounts
 
-Connect and manage user wallet sessions in your Vanilla JavaScript or Wagmi dapp.
+Use MetaMask Connect EVM to connect wallets, retrieve user accounts, and handle session lifecycle in Vanilla JavaScript or Wagmi dapps. MetaMask Connect EVM provides `connect()` for wallet access, `connectAndSign()` for single-step authentication, and the `accountsChanged` event for tracking when users switch accounts.
+
 With MetaMask Connect EVM:
 
 - **Connect users' wallets** to your dapp.
@@ -23,7 +25,7 @@ With MetaMask Connect EVM:
 
 <p align="center">
   <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require("../_assets/connect.gif").default} alt="Connect to MetaMask" width="450px" />
+    <img src={require("../_assets/connect.gif").default} alt="MetaMask Connect EVM wallet connection flow demonstration" width="450px" />
   </a>
 </p>
 
@@ -224,25 +226,25 @@ It's not part of Wagmi or other wallet libraries.
 
 Follow these best practices when authenticating users.
 
-#### User interaction
+### User interaction
 
 - Only trigger connection requests in response to user actions (like selecting a button).
 - Never auto-connect on page load.
 - Provide clear feedback during connection states.
 
-#### Error handling
+### Error handling
 
 - Handle [common errors](#common-errors) like user rejection (code `4001`).
 - Provide clear error messages to users.
 - Fall back gracefully when MetaMask is not installed.
 
-#### Account changes
+### Account changes
 
 - Always listen for account changes.
 - Update your UI when accounts change.
 - Handle disconnection events.
 
-#### Chain support
+### Chain support
 
 - Listen for network/chain changes.
 - Verify the current chain meets your requirements.

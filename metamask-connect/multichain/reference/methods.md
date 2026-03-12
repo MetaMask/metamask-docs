@@ -1,4 +1,5 @@
 ---
+title: "MetaMask Connect Multichain Methods Reference"
 description: Complete methods reference for MetaMask Connect Multichain, including connect, getSession, invokeMethod, disconnect, and session event handlers.
 keywords: [multichain, evm, solana, connect, method, methods, dapp, getSession, invokeMethod, disconnect, session events, API reference]
 toc_max_heading_level: 2
@@ -7,7 +8,7 @@ sidebar_label: MetaMask Connect Multichain methods
 
 # MetaMask Connect Multichain SDK methods
 
-MetaMask Connect Multichain (`@metamask/connect-multichain`) provides methods for connecting to MetaMask across multiple blockchain ecosystems simultaneously, including the following.
+MetaMask Connect Multichain (`@metamask/connect-multichain`) exposes four primary methods: `connect()` to create a CAIP-25 session across multiple chains, `getSession()` to retrieve authorized scopes and accounts, `invokeMethod()` to send RPC requests to any chain in the session, and `disconnect()` to end the session. It also provides event handlers for session changes.
 
 ## `connect`
 
@@ -218,3 +219,10 @@ client.on('stateChanged', status => {
   console.log('Connection status:', status)
 })
 ```
+
+## Next steps
+
+- [JavaScript quickstart](../quickstart/javascript.md) to set up MetaMask Connect Multichain in a dapp.
+- [Send transactions on EVM and Solana](../guides/send-transactions.md) using `invokeMethod`.
+- [Sign messages on EVM and Solana](../guides/sign-transactions.md) using `invokeMethod`.
+- [Multichain API reference](api.md) for the underlying CAIP-25 protocol methods.

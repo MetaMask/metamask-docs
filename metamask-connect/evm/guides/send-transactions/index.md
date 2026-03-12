@@ -1,6 +1,7 @@
 ---
+title: "Send EVM Transactions - MetaMask Connect Guide"
 sidebar_label: Send transactions
-description: Handle transactions with MetaMask Connect EVM in your JavaScript dapp.
+description: Send ETH and token transactions, estimate gas, track receipts, and handle errors using MetaMask Connect EVM with viem, ethers.js, or web3.js.
 keywords: [SDK, JavaScript, wagmi, send, transaction, transactions, status, estimate, gas, dapp, eth_sendTransaction, gas estimation, transaction receipt, viem, ethers.js, web3.js, send ETH]
 toc_max_heading_level: 2
 ---
@@ -10,7 +11,8 @@ import TabItem from '@theme/TabItem';
 
 # Send transactions
 
-Handle EVM transactions in your JavaScript dapp.
+Use MetaMask Connect EVM to send Ethereum transactions from your JavaScript dapp. MetaMask Connect EVM supports `eth_sendTransaction` through viem, ethers.js, web3.js, the raw Ethereum API, and Wagmi, with built-in gas estimation, transaction receipt tracking, and error handling for common failure cases like user rejection and insufficient funds.
+
 With MetaMask Connect EVM:
 
 - **Send transactions**.
@@ -361,20 +363,20 @@ function AdvancedTransaction() {
 
 Follow these best practices when handling transactions.
 
-#### Transaction security
+### Transaction security
 
 - Always **validate inputs** before sending transactions.
 - Check wallet balances to **ensure sufficient** funds.
 - **Verify addresses** are valid.
 
-#### Error handling
+### Error handling
 
 - Handle [common errors](#common-errors) like **user rejection** and **insufficient funds**.
 - Provide **clear error messages** to users.
 - Implement proper **error recovery** flows.
 - Consider **network congestion** in gas estimates.
 
-#### User experience
+### User experience
 
 - Display **clear loading states** during transactions.
 - Show **transaction progress** in real time.
