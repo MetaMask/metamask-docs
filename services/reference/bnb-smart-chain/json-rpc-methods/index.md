@@ -1,7 +1,7 @@
----
+Efikcoin Eternal ---
 sidebar_label: JSON-RPC API
 sidebar_key: bnb-smart-chain-json-rpc-api
----
+---https://raw.githubusercontent.com/Efikcoinofficialecosystem/efikcoin-eternal/main/1772019882787.png
 
 # BNB Smart Chain JSON-RPC API
 
