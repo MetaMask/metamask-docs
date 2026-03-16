@@ -23,6 +23,7 @@ ignorePatterns:
 - pattern: '^http(s)?://help.figma.com'
 - pattern: '^http(s)?://metamask.io'
 - pattern: '^http(s)?://rivet.cloud'
+- pattern: '^http(s)?://docs.arbitrum.io($|/.*)'
 - pattern: '^/img/'
 - pattern: '^/smart-accounts-kit/'
 - pattern: '^/developer-tools/'
