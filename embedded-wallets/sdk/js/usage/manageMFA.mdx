@@ -11,6 +11,12 @@ import Tabs from '@theme/Tabs'
 
 You can redirect users to the Embedded Wallets account dashboard to manage their MFA settings by calling the `manageMFA()` function. This method ensures that identity details are injected into the dashboard internally for custom verifier-based dapps. In order to see what's present on the account dashboard, please refer to the [Account Dashboard](/embedded-wallets/features/user-account-dashboard).
 
+:::info
+
+Please note that this function doesn't work for external wallet logins. It only works for social login embedded wallets.
+
+:::
+
 ```javascript
 await web3auth.manageMFA()
 ```
