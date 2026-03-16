@@ -6,10 +6,16 @@ import CardList from '@site/src/components/CardList'
 
 # Palm
 
-The [Palm Network](https://palm.network/) is an Ethereum Virtual Machine-compatible Polygon Supernet. The Palm Network is for
+The [Palm network](https://palm.network/) is an Ethereum Virtual Machine-compatible Polygon Supernet. The Palm network is for
 creators, fans, and leaders in various industries such as art, technology, sports, and entertainment. The network
 provides support to developers in their quest to build new and user-friendly tools that contribute to the growth of
 the Web3 ecosystem.
+
+:::important
+
+Support for Palm testnet is deprecated; Mainnet support remains.
+
+:::
 
 :::info See also
 
