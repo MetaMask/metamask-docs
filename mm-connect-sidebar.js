@@ -44,6 +44,18 @@ const metamaskConnectSidebar = {
         },
       ],
     },
+    {
+      type: 'category',
+      label: 'Troubleshooting',
+      collapsible: true,
+      collapsed: true,
+      link: { type: 'doc', id: 'troubleshooting/index' },
+      items: [
+        'troubleshooting/vite-polyfill-issues',
+        'troubleshooting/metro-polyfill-issues',
+        'troubleshooting/webpack-polyfill-issues',
+      ],
+    },
   ],
   multichain: [
     'multichain/index',
@@ -54,6 +66,7 @@ const metamaskConnectSidebar = {
       collapsed: false,
       items: [
         'multichain/quickstart/javascript',
+        'multichain/quickstart/react-native',
       ],
     },
     {
@@ -215,6 +228,7 @@ const metamaskConnectSidebar = {
       collapsed: false,
       items: [
         'solana/quickstart/javascript',
+        'solana/quickstart/react-native',
         // 'solana/quickstart/dynamic',
         // 'solana/quickstart/web3auth',
       ],

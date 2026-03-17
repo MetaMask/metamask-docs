@@ -1,16 +1,22 @@
 ---
-title: "React Native Quickstart - MetaMask Connect EVM"
-description: Set up MetaMask Connect EVM in a React Native or Expo app with required polyfills, metro configuration, and mobile deeplink support.
+title: "React Native Quickstart - MetaMask Connect Solana"
+description: Set up MetaMask Connect Solana in a React Native or Expo app using the multichain client with polyfills, metro configuration, and mobile deeplink support.
 sidebar_label: React Native
-keywords: [connect, MetaMask, React, Native, SDK, dapp, react native wallet, mobile dapp, polyfills, metro config, mobile deeplinks, iOS, Android]
+keywords: [connect, MetaMask, React, Native, Solana, SDK, dapp, mobile dapp, polyfills, metro config, mobile deeplinks, invokeMethod]
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-# Connect to MetaMask using React Native
+# Connect to Solana using React Native
 
-Get started with MetaMask Connect EVM in your React Native or Expo dapp.
+Get started with MetaMask Connect Solana in your React Native or Expo dapp.
+
+:::info
+`@solana/wallet-adapter-react` does not support React Native.
+This guide uses `createMultichainClient` from `@metamask/connect-multichain` with `invokeMethod`
+to call Solana RPC methods directly.
+:::
 
 ## Steps
 
@@ -22,14 +28,14 @@ Create a new React Native or Expo project:
   <TabItem value="React Native">
 
 ```bash
-npx react-native@latest init MyProject
+npx react-native@latest init MySolanaProject
 ```
 
   </TabItem>
   <TabItem value="Expo">
 
 ```bash
-npx create-expo-app MyProject --template
+npx create-expo-app MySolanaProject --template
 ```
 
   </TabItem>
@@ -37,10 +43,10 @@ npx create-expo-app MyProject --template
 
 ### 2. Install dependencies
 
-Install MetaMask Connect EVM and its required polyfill packages:
+Install MetaMask Connect Multichain, Solana web3.js, and required polyfill packages:
 
 ```bash
-npm install @metamask/connect-evm react-native-get-random-values buffer @react-native-async-storage/async-storage readable-stream
+npm install @metamask/connect-multichain @solana/web3.js react-native-get-random-values buffer @react-native-async-storage/async-storage readable-stream
 ```
 
 ### 3. Create polyfills
@@ -53,7 +59,6 @@ import { Buffer } from 'buffer';
 
 global.Buffer = Buffer;
 
-// Polyfill window object — React Native doesn't have one
 let windowObj: any;
 if (typeof global !== 'undefined' && global.window) {
   windowObj = global.window;
@@ -83,7 +88,6 @@ if (typeof global !== 'undefined') {
   global.window = windowObj;
 }
 
-// Polyfill Event if missing
 if (typeof global.Event === 'undefined') {
   class EventPolyfill {
     type: string;
@@ -103,7 +107,6 @@ if (typeof global.Event === 'undefined') {
   windowObj.Event = EventPolyfill as any;
 }
 
-// Polyfill CustomEvent if missing
 if (typeof global.CustomEvent === 'undefined') {
   const EventClass = global.Event || class { type: string; constructor(type: string) { this.type = type; } };
   class CustomEventPolyfill extends (EventClass as any) {
@@ -118,15 +121,15 @@ if (typeof global.CustomEvent === 'undefined') {
 }
 ```
 
-:::tip
-For detailed troubleshooting of polyfill issues, see [React Native Metro polyfill issues](../../troubleshooting/metro-polyfill-issues.md).
-:::
-
 Create the empty module stub used by the Metro config:
 
 ```javascript title="src/empty-module.js"
 module.exports = {};
 ```
+
+:::tip
+For detailed troubleshooting of polyfill issues, see [React Native Metro polyfill issues](../../troubleshooting/metro-polyfill-issues.md).
+:::
 
 ### 4. Configure Metro
 
@@ -211,38 +214,40 @@ import './polyfills'
 ```
 
 :::caution
-If you import anything from `@metamask/connect-evm` before `react-native-get-random-values`,
+If you import anything from `@metamask/connect-multichain` before `react-native-get-random-values`,
 you will get `crypto.getRandomValues is not a function`.
 :::
 
-### 6. Use MetaMask Connect EVM
+### 6. Use MetaMask Connect with Solana
 
-Initialize the EVM client and use it to connect, sign, and send transactions.
-`mobile.preferredOpenLink` is **required** — it tells the SDK how to open deeplinks to the MetaMask
+Initialize the multichain client and use `invokeMethod` to interact with Solana.
+`mobile.preferredOpenLink` is **required** -- it tells the SDK how to open deeplinks to the MetaMask
 Mobile app:
 
 ```tsx
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Linking } from 'react-native'
-import { createEVMClient } from '@metamask/connect-evm'
+import {
+  createMultichainClient,
+  getInfuraRpcUrls,
+} from '@metamask/connect-multichain'
+import { Buffer } from 'buffer'
+
+const SOLANA_MAINNET = 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
 
 let clientPromise = null
 
 function getClient() {
   if (!clientPromise) {
-    clientPromise = createEVMClient({
+    clientPromise = createMultichainClient({
       dapp: {
-        name: 'My RN DApp',
+        name: 'My Solana RN DApp',
         url: 'https://mydapp.com',
       },
       api: {
-        supportedNetworks: {
-          '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-          '0xaa36a7': 'https://sepolia.infura.io/v3/YOUR_INFURA_API_KEY',
-        },
-      },
-      ui: {
-        preferExtension: false,
+        supportedNetworks: getInfuraRpcUrls({
+          infuraApiKey: 'YOUR_INFURA_API_KEY',
+        }),
       },
       mobile: {
         preferredOpenLink: (deeplink) => Linking.openURL(deeplink),
@@ -255,7 +260,6 @@ function getClient() {
 export default function App() {
   const clientRef = useRef(null)
   const [accounts, setAccounts] = useState([])
-  const [chainId, setChainId] = useState(null)
   const [connecting, setConnecting] = useState(false)
 
   useEffect(() => {
@@ -266,18 +270,11 @@ export default function App() {
       if (!mounted) return
       clientRef.current = client
 
-      const provider = client.getProvider()
-      provider.on('accountsChanged', (accs) => {
-        if (mounted) setAccounts(accs)
-      })
-      provider.on('chainChanged', (id) => {
-        if (mounted) setChainId(id)
-      })
-      provider.on('disconnect', () => {
-        if (mounted) {
-          setAccounts([])
-          setChainId(null)
-        }
+      client.on('wallet_sessionChanged', (session) => {
+        if (!mounted) return
+        const scopeData = session?.sessionScopes?.[SOLANA_MAINNET]
+        const accs = scopeData?.accounts?.map((a) => a.split(':').pop()) ?? []
+        setAccounts(accs)
       })
     }
 
@@ -291,16 +288,14 @@ export default function App() {
 
     setConnecting(true)
     try {
-      const result = await client.connect({ chainIds: ['0x1'] })
-      setAccounts(result.accounts)
-      setChainId(result.chainId)
+      await client.connect([SOLANA_MAINNET], [])
+      const session = client.getSession()
+      const scopeData = session?.sessionScopes?.[SOLANA_MAINNET]
+      const accs = scopeData?.accounts?.map((a) => a.split(':').pop()) ?? []
+      setAccounts(accs)
     } catch (err) {
       if (err.code === 4001) {
         Alert.alert('Rejected', 'Connection was rejected.')
-        return
-      }
-      if (err.code === -32002) {
-        Alert.alert('Pending', 'Check MetaMask to approve the request.')
         return
       }
       Alert.alert('Error', err.message ?? 'Connection failed')
@@ -309,12 +304,33 @@ export default function App() {
     }
   }, [])
 
+  const handleSignMessage = useCallback(async () => {
+    const client = clientRef.current
+    if (!client || accounts.length === 0) return
+
+    try {
+      const message = Buffer.from('Hello from React Native!').toString('base64')
+      const result = await client.invokeMethod({
+        scope: SOLANA_MAINNET,
+        request: {
+          method: 'solana_signMessage',
+          params: {
+            message,
+            pubkey: accounts[0],
+          },
+        },
+      })
+      Alert.alert('Signed', result.signature.slice(0, 40) + '...')
+    } catch (err) {
+      Alert.alert('Sign failed', err.message)
+    }
+  }, [accounts])
+
   const handleDisconnect = useCallback(async () => {
     const client = clientRef.current
     if (!client) return
-    await client.disconnect()
+    await client.disconnect([SOLANA_MAINNET])
     setAccounts([])
-    setChainId(null)
   }, [])
 
   const isConnected = accounts.length > 0
@@ -328,13 +344,15 @@ export default function App() {
           disabled={connecting}
         >
           <Text style={styles.buttonText}>
-            {connecting ? 'Connecting...' : 'Connect MetaMask'}
+            {connecting ? 'Connecting...' : 'Connect MetaMask (Solana)'}
           </Text>
         </TouchableOpacity>
       ) : (
         <View>
-          <Text style={styles.label}>Account: {accounts[0]}</Text>
-          <Text style={styles.label}>Chain: {chainId}</Text>
+          <Text style={styles.label}>Address: {accounts[0]}</Text>
+          <TouchableOpacity style={styles.button} onPress={handleSignMessage}>
+            <Text style={styles.buttonText}>Sign Message</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={handleDisconnect}>
             <Text style={styles.buttonText}>Disconnect</Text>
           </TouchableOpacity>
@@ -356,7 +374,7 @@ const styles = StyleSheet.create({
 
 Add the `metamask` URL scheme to your `Info.plist` so the app can open MetaMask Mobile:
 
-```xml title="ios/MyProject/Info.plist"
+```xml title="ios/MySolanaProject/Info.plist"
 <key>LSApplicationQueriesSchemes</key>
 <array>
   <string>metamask</string>
@@ -385,10 +403,20 @@ npx expo run:ios
   </TabItem>
 </Tabs>
 
+## Solana CAIP-2 scope reference
+
+| Network  | CAIP-2 scope                              |
+| -------- | ----------------------------------------- |
+| Mainnet  | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` |
+| Devnet   | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` |
+
+:::note
+Devnet and testnet require [MetaMask Flask](https://metamask.io/flask/). Production MetaMask only supports Solana mainnet.
+:::
+
 ## Next steps
 
-- [Manage user accounts](../guides/manage-user-accounts.md)
-- [Send transactions](../guides/send-transactions/index.md)
-- [Sign data](../guides/sign-data/index.md)
-- [Production readiness checklist](../guides/best-practices/production-readiness.md)
+- [Send a legacy Solana transaction](../guides/send-legacy-transaction.md)
+- [Send a versioned Solana transaction](../guides/send-versioned-transaction.md)
+- [Sign a Solana message](../guides/sign-data/sign-message.md)
 - [Troubleshoot bundler polyfill issues](../../troubleshooting/metro-polyfill-issues.md)
