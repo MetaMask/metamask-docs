@@ -1,5 +1,5 @@
 ---
-title: React Native Metro polyfill issues
+title: React Native Metro Polyfill Issues - MetaMask Connect
 description: Resolve bundler polyfill issues when using MetaMask Connect packages with React Native Metro.
 sidebar_label: React Native Metro polyfill issues
 keywords: [MetaMask, Connect, polyfill, React Native, Metro, Expo, bundler, troubleshooting, Buffer, Event, CustomEvent, crypto]
@@ -27,7 +27,7 @@ It is compatible only with Custom Dev Client and [Expo Application Services (EAS
 npm install react-native-get-random-values buffer readable-stream @react-native-async-storage/async-storage
 ```
 
-`react-native-get-random-values` provides `crypto.getRandomValues`, which the SDK requires.
+`react-native-get-random-values` provides `crypto.getRandomValues`, which MetaMask Connect requires.
 `readable-stream` provides a `stream` shim for Metro.
 `buffer` provides the `Buffer` global.
 `@react-native-async-storage/async-storage` is needed for session persistence.
@@ -226,13 +226,13 @@ import "../polyfills"; // Must be second
 
 ### `crypto.getRandomValues is not a function`
 
-**Cause**: `react-native-get-random-values` was not imported before the SDK.
+**Cause**: `react-native-get-random-values` was not imported before MetaMask Connect.
 
-**Fix**: Ensure `import 'react-native-get-random-values'` is the very first import in your entry file, before any SDK imports or polyfills.
+**Fix**: Ensure `import 'react-native-get-random-values'` is the very first import in your entry file, before any MetaMask Connect imports or polyfills.
 
 ### `Buffer is not defined`
 
-**Cause**: The `Buffer` polyfill was not loaded before the SDK accessed it.
+**Cause**: The `Buffer` polyfill was not loaded before MetaMask Connect accessed it.
 
 **Fix**: Ensure `global.Buffer = Buffer` is set in your polyfills file, and the polyfills file is imported immediately after `react-native-get-random-values`.
 
@@ -244,7 +244,7 @@ import "../polyfills"; // Must be second
 
 ### `Event is not defined` or `CustomEvent is not defined`
 
-**Cause**: React Native does not provide browser `Event`/`CustomEvent` classes that the SDK's internal event system requires.
+**Cause**: React Native does not provide browser `Event`/`CustomEvent` classes that MetaMask Connect's internal event system requires.
 
 **Fix**: Ensure the `Event` and `CustomEvent` polyfills are included in your polyfills file as shown in [Step 3](#step-3-create-the-polyfills-file).
 
@@ -253,3 +253,9 @@ import "../polyfills"; // Must be second
 **Cause**: Polyfilling native modules is not supported with Expo Go.
 
 **Fix**: Use a [Custom Dev Client](https://docs.expo.dev/develop/development-builds/introduction/) or [EAS builds](https://docs.expo.dev/eas/). Run `npx expo prebuild` before building.
+
+## Next steps
+
+- [Troubleshooting overview](index.md)
+- [EVM React Native quickstart](../evm/quickstart/react-native.md)
+- [Solana React Native quickstart](../solana/quickstart/react-native.md)

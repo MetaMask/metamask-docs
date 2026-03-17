@@ -40,7 +40,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },

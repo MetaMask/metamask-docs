@@ -1,5 +1,5 @@
 ---
-title: Webpack 5 polyfill issues
+title: Webpack 5 Polyfill Issues - MetaMask Connect
 description: Resolve bundler polyfill issues when using MetaMask Connect packages with Webpack 5.
 sidebar_label: Webpack 5 polyfill issues
 keywords: [MetaMask, Connect, polyfill, Webpack, bundler, troubleshooting, CRA, Angular, Vue, Buffer, process]
@@ -168,3 +168,9 @@ module.exports = defineConfig({
   },
 });
 ```
+
+## Next steps
+
+- [Troubleshooting overview](index.md)
+- [Get started with EVM](../evm/index.md)
+- [Get started with Solana](../solana/index.md)

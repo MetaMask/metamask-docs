@@ -115,7 +115,7 @@ In the following example, add your WalletConnect project ID:
 ```jsx
 const config = createConfig(
   getDefaultConfig({
-    // Your dApps chains
+    // Your dapp's chains
     chains: [mainnet, linea, sepolia, lineaSepolia],
     transports: {
       // RPC URL for each chain

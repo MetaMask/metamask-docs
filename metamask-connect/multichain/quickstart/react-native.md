@@ -222,7 +222,7 @@ you will get `crypto.getRandomValues is not a function`.
 ### 6. Use MetaMask Connect Multichain
 
 Initialize the multichain client and use it to connect to both EVM and Solana networks in a single session.
-`mobile.preferredOpenLink` is **required** -- it tells the SDK how to open deeplinks to the MetaMask
+`mobile.preferredOpenLink` is **required** -- it tells MetaMask Connect how to open deeplinks to the MetaMask
 Mobile app:
 
 ```tsx

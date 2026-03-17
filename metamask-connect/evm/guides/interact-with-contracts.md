@@ -55,7 +55,7 @@ import { sepolia } from 'viem/chains'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -114,7 +114,7 @@ import { Web3 } from 'web3'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -166,7 +166,7 @@ import { ethers } from 'ethers'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -222,7 +222,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -382,7 +382,7 @@ import { sepolia } from 'viem/chains'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -451,7 +451,7 @@ import { Web3 } from 'web3'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -492,7 +492,7 @@ import { ethers } from 'ethers'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -551,7 +551,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },

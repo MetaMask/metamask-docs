@@ -1,5 +1,5 @@
 ---
-title: Vite polyfill issues
+title: Vite Polyfill Issues - MetaMask Connect
 description: Resolve bundler polyfill issues when using MetaMask Connect packages with Vite.
 sidebar_label: Vite polyfill issues
 keywords: [MetaMask, Connect, polyfill, Vite, bundler, troubleshooting, global, Buffer, process]
@@ -84,3 +84,9 @@ export default defineConfig({
 If you use additional blockchain libraries alongside MetaMask Connect, you might need to add `resolve.alias` entries for modules like `crypto-browserify`, `stream-browserify`, `assert`, `http`, `https`, `os`, `url`, or `zlib`.
 Only add these if you encounter specific build errors referencing those modules.
 :::
+
+## Next steps
+
+- [Troubleshooting overview](index.md)
+- [Get started with EVM](../evm/index.md)
+- [Get started with Solana](../solana/index.md)

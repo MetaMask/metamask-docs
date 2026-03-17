@@ -43,7 +43,7 @@ account names in place of addresses).
 
 <p align="center">
 
-![eth_signTypedData_v4](../../_assets/signTypedData.png)
+![MetaMask confirmation dialog showing an eth_signTypedData_v4 structured data signing request](../../_assets/signTypedData.png)
 
 </p>
 
@@ -83,7 +83,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -495,7 +495,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
-    name: 'Metamask Connect EVM Example',
+    name: 'MetaMask Connect EVM Example',
     url: window.location.href,
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
@@ -613,3 +613,9 @@ const signature = await web3.eth.sign(fromAddress, exampleMessage)
 
 `personal_sign` prepends the message with `\x19Ethereum Signed Message:\n<length of message>` before
 hashing and signing it.
+
+## Next steps
+
+- [Sign in with Ethereum (SIWE)](siwe.md)
+- [Send transactions](../send-transactions/index.md)
+- [Interact with smart contracts](../interact-with-contracts.md)

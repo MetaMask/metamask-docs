@@ -34,9 +34,9 @@ Calling `createSolanaClient` multiple times returns the same underlying multicha
 
 | Name                    | Type                      | Required | Description                                                                |
 | ----------------------- | ------------------------- | -------- | -------------------------------------------------------------------------- |
-| `dapp.name`             | `string`                  | Yes      | Name of your dApp.                                                         |
-| `dapp.url`              | `string`                  | No       | URL of your dApp.                                                          |
-| `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dApp.                                                    |
+| `dapp.name`             | `string`                  | Yes      | Name of your dapp.                                                         |
+| `dapp.url`              | `string`                  | No       | URL of your dapp.                                                          |
+| `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dapp.                                                    |
 | `api.supportedNetworks` | `SolanaSupportedNetworks` | No       | Map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs.         |
 | `debug`                 | `boolean`                 | No       | Reserved for future use; not currently forwarded to the underlying client. |
 | `skipAutoRegister`      | `boolean`                 | No       | Skip auto-registering the wallet during creation (defaults to `false`).    |
@@ -204,9 +204,9 @@ Configuration options passed to [`createSolanaClient`](#createsolanaclient).
 | Field                   | Type                      | Required | Description                                                                |
 | ----------------------- | ------------------------- | -------- | -------------------------------------------------------------------------- |
 | `dapp`                  | `object`                  | Yes      | Dapp identification and branding settings.                                 |
-| `dapp.name`             | `string`                  | Yes      | Name of your dApp.                                                         |
-| `dapp.url`              | `string`                  | No       | URL of your dApp.                                                          |
-| `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dApp.                                                    |
+| `dapp.name`             | `string`                  | Yes      | Name of your dapp.                                                         |
+| `dapp.url`              | `string`                  | No       | URL of your dapp.                                                          |
+| `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dapp.                                                    |
 | `api`                   | `object`                  | No       | Optional API configuration.                                                |
 | `api.supportedNetworks` | `SolanaSupportedNetworks` | No       | Map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs.         |
 | `debug`                 | `boolean`                 | No       | Reserved for future use; not currently forwarded to the underlying client. |

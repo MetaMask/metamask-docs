@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: Troubleshooting - MetaMask Connect
 description: Solve common bundler polyfill issues when using MetaMask Connect packages with different build tools.
 sidebar_label: Overview
 keywords: [MetaMask, Connect, polyfill, bundler, troubleshooting, Vite, Metro, Webpack, React Native]
