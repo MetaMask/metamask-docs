@@ -59,7 +59,8 @@ module.exports = (context, options) => ({
     return fileContents
   },
   async contentLoaded({ content, actions }) {
-    const { createData, addRoute } = actions
+    const { createData, addRoute, setGlobalData } = actions
+    setGlobalData(content)
 
     // Create JSON data file
     const files = await createData('files.json', JSON.stringify(content))
