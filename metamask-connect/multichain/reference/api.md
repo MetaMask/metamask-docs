@@ -22,7 +22,8 @@ import TabItem from "@theme/TabItem";
 :::tip Notes
 
 - MetaMask implements an older version of the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md) Multichain API specification.
-  :::
+
+:::
 
 The Multichain API lets your dapp create and manage sessions that span multiple chains and ecosystems through a single connection.
 Use the [methods](#methods) below to create sessions, send requests to any chain in the session, and listen for [events](#events) like account or network changes.
