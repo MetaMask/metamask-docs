@@ -1,9 +1,20 @@
 ---
-title: "MetaMask Connect Solana Methods Reference"
+title: 'MetaMask Connect Solana Methods Reference'
 description: Complete methods reference for MetaMask Connect Solana, including createSolanaClient configuration and wallet-standard features.
-keywords: [solana, connect, method, methods, dapp, createSolanaClient, wallet-standard features, signTransaction, signMessage, API reference]
+keywords:
+  [
+    solana,
+    connect,
+    method,
+    methods,
+    dapp,
+    createSolanaClient,
+    wallet-standard features,
+    signTransaction,
+    signMessage,
+    API reference,
+  ]
 toc_max_heading_level: 2
-sidebar_label: MetaMask Connect Solana methods
 ---
 
 # MetaMask Connect Solana SDK methods

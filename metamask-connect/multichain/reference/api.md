@@ -1,8 +1,16 @@
 ---
-title: "Multichain API Reference - MetaMask Connect"
-sidebar_label: Multichain API reference
+title: 'Multichain API Reference'
 description: Complete reference for the MetaMask Multichain API (CAIP-25), including wallet_createSession, wallet_invokeMethod, and wallet_revokeSession methods.
-keywords: [wallet_createSession, wallet_getSession, wallet_invokeMethod, wallet_revokeSession, CAIP-25, multichain API, metamask]
+keywords:
+  [
+    wallet_createSession,
+    wallet_getSession,
+    wallet_invokeMethod,
+    wallet_revokeSession,
+    CAIP-25,
+    multichain API,
+    metamask,
+  ]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -11,8 +19,9 @@ import TabItem from "@theme/TabItem";
 # Multichain API
 
 :::tip Notes
+
 - MetaMask implements an older version of the [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/899779996e8c30ec9c189ff49737704150606f31/CAIPs/caip-25.md) Multichain API specification.
-:::
+  :::
 
 The Multichain API lets your dapp create and manage sessions that span multiple chains and ecosystems through a single connection.
 Use the [methods](#methods) below to create sessions, send requests to any chain in the session, and listen for [events](#events) like account or network changes.
@@ -32,8 +41,9 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
   - `references`: `array` - (Optional) A list of references to specific blockchains for the namespace of this scope.
     This property can only be used if the scope namespace does not already specify the blockchain.
     For example, use this property for an `"eip155"` scope, but not an `"eip155:10"` scope.
-    
+
     References are mainly used when there would otherwise be duplicate scopes.
+
   - `methods`: `array` - A list of JSON-RPC methods the wallet must support to be compatible with the dapp.
   - `notifications`: `array` - A list of JSON-RPC notifications the wallet must support to be compatible with the dapp.
   - `accounts`: `array` - (Optional) A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md)
@@ -41,6 +51,7 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
     Dapps should include this only if they know which accounts they want the user to permit.
     When supplied, these accounts are preselected by default in the account selection process.
     Dapps typically omit this property for the user to select their own accounts.
+
 - `sessionProperties`: `object` - (Optional) Properties that the wallet can use to determine if the connection is valid.
 - `requiredScopes`: `object` - (Optional) [CAIP-217](https://standards.chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet must support to be compatible with the dapp.
   We don't recommend using `requiredScopes` with MetaMask.
@@ -63,7 +74,14 @@ The scopes and properties of the created connection.
   "params": {
     "optionalScopes": {
       "eip155": {
-        "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_sign", "eth_subscribe", "get_balance", "personal_sign"],
+        "methods": [
+          "eth_sendTransaction",
+          "eth_signTransaction",
+          "eth_sign",
+          "eth_subscribe",
+          "get_balance",
+          "personal_sign"
+        ],
         "notifications": ["eth_subscription"]
       },
       "eip155:10": {
@@ -90,9 +108,19 @@ The scopes and properties of the created connection.
     "sessionScopes": {
       "eip155": {
         "references": ["1", "137"],
-        "methods": ["eth_sendTransaction", "eth_signTransaction", "eth_subscribe", "get_balance", "eth_sign", "personal_sign"],
+        "methods": [
+          "eth_sendTransaction",
+          "eth_signTransaction",
+          "eth_subscribe",
+          "get_balance",
+          "eth_sign",
+          "personal_sign"
+        ],
         "notifications": ["eth_subscription"],
-        "accounts": ["eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb", "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"]
+        "accounts": [
+          "eip155:1:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb",
+          "eip155:137:0xab16a96d359ec26a11e2c2b3d8f8b8942d5bfcdb"
+        ]
       },
       "eip155:10": {
         "methods": ["get_balance"],
@@ -171,7 +199,9 @@ The scopes and properties of the connection.
       "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1": {
         "methods": ["getBalance", "getAccountInfo", "sendTransaction", "getBlock"],
         "notifications": [],
-        "accounts": ["solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1:4Nd1mS8AUwK3kU3gdiAM6QCvqhA7Do8rKtMXsGyqrJxy"]
+        "accounts": [
+          "solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1:4Nd1mS8AUwK3kU3gdiAM6QCvqhA7Do8rKtMXsGyqrJxy"
+        ]
       }
     }
   }

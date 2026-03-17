@@ -1,8 +1,25 @@
 ---
-title: "MetaMask Connect - Dapp Wallet Integration SDK"
+title: 'MetaMask Connect - Dapp Wallet Integration SDK'
 sidebar_label: Introduction
 description: Connect your dapp to the MetaMask wallet across desktop, mobile, and native apps with multichain EVM and Solana support using a single SDK integration.
-keywords: [connect, sdk, integrate, dapp, multichain, evm, solana, metamask connect, wallet connection, browser extension, mobile wallet, CAIP-25, wallet SDK, web3 wallet, cryptocurrency wallet]
+keywords:
+  [
+    connect,
+    sdk,
+    integrate,
+    dapp,
+    multichain,
+    evm,
+    solana,
+    metamask connect,
+    wallet connection,
+    browser extension,
+    mobile wallet,
+    CAIP-25,
+    wallet SDK,
+    web3 wallet,
+    cryptocurrency wallet,
+  ]
 ---
 
 import CardList from '@site/src/components/CardList'
@@ -54,24 +71,20 @@ description: 'Connect to Solana.',
 ]}
 />
 
-## Frequently asked questions
+### Frequently asked questions
 
-### What is MetaMask Connect?
-
-MetaMask Connect is an SDK that enables dapps to connect to the MetaMask browser extension and MetaMask Mobile across desktop browsers, mobile browsers, and native apps. It replaces the legacy `@metamask/sdk` with a new implementation built on the CAIP-25 Multichain API and end-to-end encrypted relay connections.
-
-### How is MetaMask Connect different from the legacy MetaMask SDK?
+#### How is MetaMask Connect different from the legacy MetaMask SDK?
 
 MetaMask Connect is a complete rewrite of the legacy SDK. Key differences include async initialization with `createEVMClient`, a singleton client pattern, built-in multichain support for both EVM and Solana, CAIP-25 session management, and improved relay server infrastructure. See the [migration guide](/metamask-connect/evm/migrate-from-sdk) for step-by-step upgrade instructions.
 
-### Does MetaMask Connect support mobile?
+#### Does MetaMask Connect support mobile?
 
 Yes. MetaMask Connect automatically detects the user's platform and selects the best connection method. On mobile browsers it uses deeplinks to open MetaMask Mobile, on desktop browsers without the extension it shows a QR code for scanning with MetaMask Mobile, and in native apps it uses deeplinks. See [supported platforms](/metamask-connect/supported-platforms) for the full matrix.
 
-### Which blockchain networks does MetaMask Connect support?
+#### Which blockchain networks does MetaMask Connect support?
 
 MetaMask Connect supports Ethereum and all EVM-compatible networks (Polygon, Arbitrum, Optimism, Linea, Base, etc.) through `@metamask/connect-evm`, Solana through `@metamask/connect-solana`, and both simultaneously through `@metamask/connect-multichain`. See [integration options](/metamask-connect/integration-options) to choose the right package.
 
-### Do I need an Infura API key to use MetaMask Connect?
+#### Do I need an Infura API key to use MetaMask Connect?
 
 An Infura API key is recommended for reliable RPC access and relay connections. You can get a free API key from the [MetaMask Developer dashboard](/developer-tools/dashboard/get-started/create-api). MetaMask Connect uses the API key to generate RPC URLs for supported networks via the `getInfuraRpcUrls` helper.

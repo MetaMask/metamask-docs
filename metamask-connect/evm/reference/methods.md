@@ -1,9 +1,21 @@
 ---
-title: "MetaMask Connect EVM Methods Reference"
+title: 'MetaMask Connect EVM Methods Reference'
 description: Complete API reference for MetaMask Connect EVM methods including connect, connectAndSign, connectWith, getProvider, and disconnect.
-keywords: [evm, connect, method, methods, dapp, connectAndSign, connectWith, getProvider, disconnect, EIP-1193, API reference]
+keywords:
+  [
+    evm,
+    connect,
+    method,
+    methods,
+    dapp,
+    connectAndSign,
+    connectWith,
+    getProvider,
+    disconnect,
+    EIP-1193,
+    API reference,
+  ]
 toc_max_heading_level: 2
-sidebar_label: MetaMask Connect EVM methods
 ---
 
 # MetaMask Connect EVM SDK methods

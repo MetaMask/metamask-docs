@@ -1,8 +1,20 @@
 ---
-title: "Ethereum Provider API - MetaMask Connect EVM"
-sidebar_label: Ethereum provider API
+title: 'Ethereum Provider API - MetaMask Connect EVM'
+sidebar_label: Ethereum Provider API
 description: Reference for the MetaMask Ethereum provider API (EIP-1193), covering properties, the request() method, and events like accountsChanged and chainChanged.
-keywords: [ethereum provider, EIP-1193, window.ethereum, EIP-6963, provider API, metamask, request method, events, accountsChanged, chainChanged]
+keywords:
+  [
+    ethereum provider,
+    EIP-1193,
+    window.ethereum,
+    EIP-6963,
+    provider API,
+    metamask,
+    request method,
+    events,
+    accountsChanged,
+    chainChanged,
+  ]
 ---
 
 # Ethereum provider API
