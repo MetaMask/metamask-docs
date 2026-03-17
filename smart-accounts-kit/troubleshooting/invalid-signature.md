@@ -4,9 +4,6 @@ sidebar_label: Invalid EOA signature
 keywords: [InvalidEOASignature, error code, delegation, troubleshooting, invalid EOA signature]
 ---
 
-import Tabs from "@theme/Tabs"; 
-import TabItem from "@theme/TabItem";
-
 # Invalid EOA signature
 
 The Delegation Manager reverts with `InvalidEOASignature()` in the following cases.
