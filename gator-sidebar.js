@@ -215,7 +215,7 @@ const sidebar = {
       collapsed: true,
       items: [
         'troubleshooting/error-codes',
-        'troubleshooting/invalide-delegate',
+        'troubleshooting/invalid-delegate',
       ],
     },
   ],
