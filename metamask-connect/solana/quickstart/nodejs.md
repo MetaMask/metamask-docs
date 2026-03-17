@@ -70,7 +70,7 @@ A QR code appears in the terminal -- scan it with MetaMask Mobile:
 ```javascript
 await solanaClient.core.connect([SOLANA_MAINNET], [])
 
-const session = solanaClient.core.getSession()
+const session = await solanaClient.core.getSession()
 const accounts = session?.sessionScopes?.[SOLANA_MAINNET]?.accounts ?? []
 const address = accounts[0]?.split(':').pop()
 console.log('Connected Solana address:', address)
@@ -152,7 +152,7 @@ const solanaClient = await createSolanaClient({
 // Connect -- scan the QR code with MetaMask Mobile
 await solanaClient.core.connect([SOLANA_MAINNET], [])
 
-const session = solanaClient.core.getSession()
+const session = await solanaClient.core.getSession()
 const accounts = session?.sessionScopes?.[SOLANA_MAINNET]?.accounts ?? []
 const address = accounts[0]?.split(':').pop()
 console.log('Connected:', address)

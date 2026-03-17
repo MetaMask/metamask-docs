@@ -72,7 +72,7 @@ await client.connect(
   [],
 )
 
-const session = client.getSession()
+const session = await client.getSession()
 const ethAccounts = session?.sessionScopes?.['eip155:1']?.accounts ?? []
 const solAccounts =
   session?.sessionScopes?.['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']
@@ -201,7 +201,7 @@ const client = await createMultichainClient({
 // Connect -- scan the QR code with MetaMask Mobile
 await client.connect([ETH_MAINNET, SOLANA_MAINNET], [])
 
-const session = client.getSession()
+const session = await client.getSession()
 const ethAddress = session?.sessionScopes?.[ETH_MAINNET]?.accounts?.[0]?.split(':').pop()
 const solAddress = session?.sessionScopes?.[SOLANA_MAINNET]?.accounts?.[0]?.split(':').pop()
 console.log('ETH:', ethAddress)

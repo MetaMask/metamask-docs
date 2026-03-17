@@ -291,7 +291,7 @@ export default function App() {
         [ETH_MAINNET, POLYGON, SOLANA_MAINNET],
         [],
       )
-      const newSession = client.getSession()
+      const newSession = await client.getSession()
       setSession(newSession)
     } catch (err) {
       if (err.code === 4001) {
