@@ -1,6 +1,7 @@
 ---
+title: "Sign Data with MetaMask Connect EVM"
 sidebar_label: Sign data
-description: Use RPC methods to request cryptographic signatures from users.
+description: Request cryptographic signatures from users using eth_signTypedData_v4 for structured EIP-712 data or personal_sign for simple messages.
 keywords: [eth_signTypedData_v4, personal_sign, EIP-712, message signing, cryptographic signature, sign data, metamask, ethereum]
 ---
 
@@ -8,6 +9,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 # Sign data
+
+MetaMask Connect EVM supports two signing methods: `eth_signTypedData_v4` for structured, human-readable EIP-712 signatures that can be verified onchain, and `personal_sign` for simple message signing commonly used in authentication flows like Sign-In with Ethereum (SIWE). Both methods work with viem, ethers.js, web3.js, and the raw Ethereum API.
 
 Use the following RPC methods to request cryptographic signatures from users:
 
@@ -461,7 +464,7 @@ It's often used for signature challenges that are authenticated on a web server,
 
 <p align="center">
 
-![Personal sign](../../_assets/personal_sign.png)
+![MetaMask personal_sign message signing confirmation dialog](../../_assets/personal_sign.png)
 
 </p>
 

@@ -1,5 +1,6 @@
 ---
-description: Quickstart guide for using MetaMask SDK with a JavaScript and RainbowKit dapp.
+title: "RainbowKit Integration - MetaMask Connect EVM"
+description: Add MetaMask wallet support to your React dapp using RainbowKit's ConnectButton component, wagmi hooks, and pre-built wallet modals.
 toc_max_heading_level: 3
 sidebar_label: RainbowKit
 keywords: [connect, MetaMask, JavaScript, RainbowKit, SDK, dapp, Wallet SDK, rainbowkit connector, wallet modal, connect button, react wallet UI]
@@ -19,7 +20,7 @@ Get started with MetaMask SDK in a JavaScript and RainbowKit dapp.
 
 <p align="center">
   <a href="https://metamask-rainbowkit-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-rainbowkit.png").default} alt="Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-rainbowkit.png").default} alt="MetaMask Connect EVM with RainbowKit wallet selector interface" width="600px" class="appScreen" />
   </a>
 </p>
 
@@ -163,6 +164,13 @@ export default App
 ```
 
 Test your dapp by running `pnpm run dev`.
+
+## Next steps
+
+- [Manage user accounts](../guides/manage-user-accounts.md)
+- [Send transactions](../guides/send-transactions/index.md)
+- [Sign data](../guides/sign-data/index.md)
+- [Interact with smart contracts](../guides/interact-with-contracts.md)
 
 ## Live example
 

@@ -1,6 +1,7 @@
 ---
+title: "Display ERC-20 Tokens and NFTs in MetaMask"
 sidebar_label: Display tokens
-description: Display a user's ERC-20 tokens or NFTs.
+description: Prompt users to register custom ERC-20 tokens and NFTs in MetaMask using the wallet_watchAsset RPC method for better token visibility.
 keywords: [wallet_watchAsset, ERC-20 token, NFT display, ERC-721, token suggestion, custom token, metamask, display tokens]
 ---
 
@@ -115,10 +116,10 @@ The add NFT interfaces look like the following:
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../../_assets/watchasset-nft.png").default} alt="NFT confirmation" class="appScreen" />
+        <img src={require("../../_assets/watchasset-nft.png").default} alt="MetaMask wallet_watchAsset NFT confirmation dialog showing token details" class="appScreen" />
     </div>
     <div class="imgCol">
-        <img src={require("../../_assets/watchasset-nft-2.png").default} alt="Multiple NFTs confirmation" class="appScreen" />
+        <img src={require("../../_assets/watchasset-nft-2.png").default} alt="MetaMask wallet_watchAsset confirmation for multiple NFTs batch display" class="appScreen" />
     </div>
 </div>
 
@@ -199,3 +200,9 @@ provider.sendAsync([{
   ...
 ])
 ```
+
+## Next steps
+
+- [Manage networks](../manage-networks.md)
+- [Interact with smart contracts](../interact-with-contracts.md)
+- [JSON-RPC API reference](../../reference/json-rpc-api/index.md)

@@ -1,16 +1,25 @@
 ---
+title: 'MetaMask Connect Solana Methods Reference'
 description: Complete methods reference for MetaMask Connect Solana, including createSolanaClient configuration and wallet-standard features.
-keywords: [solana, connect, method, methods, dapp, createSolanaClient, wallet-standard features, signTransaction, signMessage, API reference]
+keywords:
+  [
+    solana,
+    connect,
+    method,
+    methods,
+    dapp,
+    createSolanaClient,
+    wallet-standard features,
+    signTransaction,
+    signMessage,
+    API reference,
+  ]
 toc_max_heading_level: 2
-sidebar_label: MetaMask Connect Solana methods
 ---
 
 # MetaMask Connect Solana SDK methods
 
-MetaMask Connect Solana (`@metamask/connect-solana`) provides a wallet-standard integration for
-connecting to MetaMask as a Solana wallet.
-It wraps `@metamask/connect-multichain` and handles wallet discovery and session management
-automatically.
+MetaMask Connect Solana (`@metamask/connect-solana`) provides `createSolanaClient()` to initialize the client, `getWallet()` to access wallet-standard features (signTransaction, signAndSendTransaction, signMessage), and automatic wallet-standard registration for compatibility with the Solana Wallet Adapter ecosystem. The client wraps `@metamask/connect-multichain` and handles wallet discovery and session management automatically.
 
 ## `createSolanaClient`
 
@@ -213,3 +222,10 @@ The object returned by [`createSolanaClient`](#createsolanaclient).
 | `getWallet()`      | `() => Wallet`        | Returns a wallet-standard compatible MetaMask wallet instance. |
 | `registerWallet()` | `() => Promise<void>` | Registers MetaMask with the wallet-standard registry.          |
 | `disconnect()`     | `() => Promise<void>` | Disconnects all Solana scopes from MetaMask.                   |
+
+## Next steps
+
+- [JavaScript quickstart](../quickstart/javascript.md) to set up MetaMask Connect Solana in a dapp.
+- [Send a legacy transaction](../guides/send-legacy-transaction.md) using the `signAndSendTransaction` wallet-standard feature.
+- [Sign messages](../guides/sign-data/sign-message.md) using the `signMessage` wallet-standard feature.
+- [Multichain SDK methods](../../multichain/reference/methods.md) for the lower-level multichain client API.

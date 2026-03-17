@@ -1,6 +1,7 @@
 ---
+title: "JavaScript Quickstart - MetaMask Connect Multichain"
 sidebar_label: JavaScript
-description: Connect to multiple blockchain ecosystems simultaneously using MetaMask Connect Multichain.
+description: Set up MetaMask Connect Multichain in a Vite JavaScript dapp to connect to EVM and Solana ecosystems from a single session using CAIP-25.
 keywords: [multichain, evm, solana, connect, caip-25, scope, vite template, createMultichainClient, multichain setup, EVM Solana dapp]
 ---
 
@@ -15,7 +16,7 @@ Get started with MetaMask Connect Multichain in your JavaScript(Vite) dapp.
 
 <!-- <p align="center">
   <a href="" target="_blank">
-    <img src={require("../_assets/quickstart-multichain.png").default} alt="Multichain Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-multichain.png").default} alt="MetaMask Connect Multichain JavaScript quickstart dapp showing EVM and Solana connections" width="600px" class="appScreen" />
   </a>
 </p> -->
 
@@ -168,3 +169,10 @@ Use [`invokeMethod()`](../reference/methods.md#invokemethod) to call RPC methods
 | [`on(event, handler)`](../reference/methods.md#on)                         | Registers an event handler                                                                   |
 | [`off(event, handler)`](../reference/methods.md#off)                       | Removes an event handler                                                                     |
 | [`getInfuraRpcUrls(apiKey)`](../reference/methods.md#getinfurarpcurls)     | Generates Infura RPC URLs keyed by CAIP-2 chain ID                                           |
+
+## Next steps
+
+- [Scopes, accounts, and sessions](../concepts/scopes.md) to understand CAIP-2 chain identifiers and CAIP-25 sessions.
+- [Send transactions on EVM and Solana](../guides/send-transactions.md) from a single multichain session.
+- [Sign messages on EVM and Solana](../guides/sign-transactions.md) using `invokeMethod`.
+- [Create a multichain dapp](../tutorials/create-multichain-dapp.md) for a full step-by-step tutorial with React.

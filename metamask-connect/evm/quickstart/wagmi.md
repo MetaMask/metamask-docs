@@ -1,5 +1,6 @@
 ---
-description: Quickstart guide for using MetaMask SDK with a JavaScript and Wagmi dapp.
+title: "Wagmi Integration - MetaMask Connect EVM"
+description: Integrate MetaMask into a React dapp using Wagmi hooks like useConnect and useAccount, with the MetaMask connector and wallet connection UI.
 toc_max_heading_level: 3
 sidebar_label: Wagmi
 keywords: [connect, MetaMask, JavaScript, Wagmi, SDK, dapp, Wallet SDK, wagmi connector, react hooks, useConnect, useAccount, wallet connector, web3 react]
@@ -19,7 +20,7 @@ Get started with MetaMask SDK in a JavaScript and Wagmi dapp.
 
 <p align="center">
   <!-- a href="https://metamask-wagmi-demo.vercel.app/" target="_blank" -->
-    <img src={require("../_assets/quickstart.jpg").default} alt="Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart.jpg").default} alt="MetaMask Connect EVM with Wagmi dapp interface" width="600px" class="appScreen" />
   <!-- /a -->
 </p>
 

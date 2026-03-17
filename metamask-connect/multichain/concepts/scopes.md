@@ -1,14 +1,13 @@
 ---
+title: "Multichain Scopes and Sessions - MetaMask Connect"
 sidebar_label: Scopes
-description: Understand scopes, account IDs, and sessions in MetaMask Connect Multichain.
+description: Learn how CAIP-2 scopes, CAIP-10 account IDs, and CAIP-25 sessions work in MetaMask Connect Multichain to identify chains and accounts.
 keywords: [multichain, caip, scope, caip-2, caip-10, caip-25, session, chain id, chain namespace, account ID format, blockchain identifier, eip155, solana scope]
 ---
 
 # Scopes, accounts, and sessions
 
-MetaMask Connect Multichain uses [CAIP](https://github.com/ChainAgnostic/CAIPs) (Chain Agnostic
-Improvement Proposals) standards to identify chains, accounts, and sessions across ecosystems.
-Understanding these concepts helps you work with the multichain client.
+MetaMask Connect Multichain uses three CAIP standards: **CAIP-2 scopes** (like `eip155:1` for Ethereum Mainnet or `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` for Solana Mainnet) to identify chains, **CAIP-10 account IDs** to identify accounts across chains, and **CAIP-25 sessions** to group authorized scopes and accounts into a single connection. Understanding these concepts helps you work with the multichain client.
 
 ## Scopes (CAIP-2)
 

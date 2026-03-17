@@ -1,6 +1,7 @@
 ---
+title: "Build a Multichain Dapp Tutorial - MetaMask Connect"
 sidebar_label: Create a multichain dapp
-description: Build a React dapp that connects to Ethereum, Linea, Base, and Solana using the Multichain API.
+description: Step-by-step tutorial to build a React dapp that connects to Ethereum, Linea, Base, and Solana using MetaMask Connect Multichain SDK.
 keywords: [tutorial, multichain, react, vite, evm, solana, caip, metamask, connect, ethereum linea base solana, multichain wallet, step-by-step, full stack dapp]
 ---
 

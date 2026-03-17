@@ -1,5 +1,6 @@
 ---
-description: Quickstart guide for using MetaMask Connect EVM with a JavaScript dapp.
+title: "JavaScript Quickstart - MetaMask Connect EVM"
+description: Set up MetaMask Connect EVM in a vanilla JavaScript dapp with createEVMClient, connect to wallets, and handle accounts and chain switching.
 sidebar_label: JavaScript
 keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK, vanilla javascript, createEVMClient, eth_requestAccounts, browser dapp, metamask integration tutorial]
 ---
@@ -9,12 +10,13 @@ import TabItem from "@theme/TabItem";
 
 # Connect to MetaMask using JavaScript
 
-Get started with MetaMask Connect EVM in your JavaScript dapp.
+Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and connect to the MetaMask wallet in under 5 minutes. MetaMask Connect EVM provides an EIP-1193 provider that works with viem, ethers.js, and web3.js, handles cross-platform connections (desktop extension, mobile QR code, and deeplinks), and persists sessions across page reloads.
+
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
 <!-- <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-javascript.png").default} alt="JavaScript SDK Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-javascript.png").default} alt="MetaMask Connect EVM JavaScript quickstart dapp interface" width="600px" class="appScreen" />
   </a>
 </p> -->
 

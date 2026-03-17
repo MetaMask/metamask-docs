@@ -1,8 +1,23 @@
 ---
-title: "MetaMask Connect EVM - Ethereum Dapp Integration"
+title: 'MetaMask Connect EVM - Ethereum Dapp Integration'
 sidebar_label: Introduction
-description: Connect your dapp to Ethereum and EVM-compatible networks using MetaMask Connect EVM. Get an EIP-1193 provider with viem, ethers.js, or web3.js support.
-keywords: [evm, ethereum, connect, eip-1193, provider, ethers, viem, web3js, metamask connect evm, ethereum dapp, createEVMClient, web3 provider, metamask integration]
+description: Connect your dapp to Ethereum and EVM-compatible networks using MetaMask Connect EVM. Get an EIP-1193 provider compatible with viem, ethers.js, and web3.js.
+keywords:
+  [
+    evm,
+    ethereum,
+    connect,
+    eip-1193,
+    provider,
+    ethers,
+    viem,
+    web3js,
+    metamask connect evm,
+    ethereum dapp,
+    createEVMClient,
+    web3 provider,
+    metamask integration,
+  ]
 ---
 
 import CardList from '@site/src/components/CardList'
@@ -63,3 +78,17 @@ The EVM client works seamlessly with popular Ethereum libraries:
 | [viem](https://viem.sh/)              | Use with `custom()` transport                     |
 | [ethers.js](https://docs.ethers.org/) | Pass `client.getProvider()` to `BrowserProvider`  |
 | [web3.js](https://web3js.org/)        | Pass `client.getProvider()` to `Web3` constructor |
+
+### Frequently asked questions
+
+#### What libraries does MetaMask Connect EVM work with?
+
+MetaMask Connect EVM provides an EIP-1193 compatible provider that works with viem (via `custom()` transport), ethers.js (via `BrowserProvider`), web3.js (via `Web3` constructor), and wagmi (via the `metamask()` connector). It also supports wallet connector libraries like RainbowKit, ConnectKit, Dynamic, Privy, Web3Auth, and more.
+
+#### Do I need an Infura API key for MetaMask Connect EVM?
+
+An Infura API key is **recommended** for production dapps. MetaMask Connect EVM uses RPC URLs to route read requests and relay connections. Use the `getInfuraRpcUrls` helper to generate URLs for all Infura-supported chains automatically, or provide your own RPC endpoints in the `api.supportedNetworks` configuration.
+
+#### How do I migrate from @metamask/sdk to @metamask/connect-evm?
+
+Replace `@metamask/sdk` with `@metamask/connect-evm` in your dependencies, update imports from `MetaMaskSDK` to `createEVMClient`, switch from synchronous to async initialization, and update your provider access pattern. The [migration guide](migrate-from-sdk.md) provides a complete step-by-step walkthrough with code examples for each change.

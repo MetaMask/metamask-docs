@@ -1,5 +1,6 @@
 ---
-description: Quickstart guide for using MetaMask Connect Solana with a JavaScript dapp.
+title: "JavaScript Quickstart - MetaMask Connect Solana"
+description: Set up MetaMask Connect Solana in a vanilla JavaScript dapp using wallet-standard features, signAndSendTransaction, and createSolanaClient.
 sidebar_label: JavaScript
 keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK, vanilla javascript, wallet-standard, solana browser dapp, signAndSendTransaction, connect solana]
 ---
@@ -11,7 +12,7 @@ This quickstart gets you up and running with MetaMask Connect Solana in a JavaSc
 
 <!-- <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-javascript.png").default} alt="JavaScript SDK Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-javascript.png").default} alt="MetaMask Connect Solana JavaScript quickstart dapp interface" width="600px" class="appScreen" />
   </a>
 </p> -->
 
@@ -176,3 +177,10 @@ await solanaClient.disconnect()
 ## Live example
 
 <iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript?ctl=1&embed=1&file=src%2Fmain.js&hideNavigation=1"></iframe>
+
+## Next steps
+
+- [Use the Wallet Adapter](../guides/use-wallet-adapter.md) to integrate MetaMask with Solana's standard wallet discovery in a React dapp.
+- [Send a legacy transaction](../guides/send-legacy-transaction.md) to transfer SOL or interact with programs.
+- [Sign messages](../guides/sign-data/sign-message.md) to verify wallet ownership or authorize off-chain actions.
+- [Use the Multichain SDK](../../multichain/quickstart/javascript.md) to connect to both EVM and Solana from a single session.

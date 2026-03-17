@@ -1,6 +1,7 @@
 ---
+title: "Customize Dapp Display in MetaMask"
 sidebar_label: Display in MetaMask
-description: Customize how your dapp appears in MetaMask, including favicon icons and method names displayed in the transaction confirmation screen.
+description: Configure your dapp's favicon icon and smart contract method names to improve how transactions and requests appear in the MetaMask UI.
 keywords: [metamask, favicon, dapp icon, display, method names, 4byte, transaction confirmation, UX, branding]
 ---
 
@@ -34,3 +35,9 @@ displays **Contract Interaction** to the user.
 
 To register your contract's method names so they show in the MetaMask interface,
 [submit each method's signature to the Ethereum Signature Database](https://www.4byte.directory/submit/).
+
+## Next steps
+
+- [Production readiness checklist](./production-readiness.md)
+- [Display tokens in MetaMask](../metamask-exclusive/display-tokens.md)
+- [Interact with smart contracts](../interact-with-contracts.md)

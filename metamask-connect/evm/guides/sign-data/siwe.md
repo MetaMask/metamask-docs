@@ -1,6 +1,7 @@
 ---
+title: "Sign-In with Ethereum (SIWE) - MetaMask Connect"
 sidebar_label: Sign in with Ethereum
-description: Enable your users to sign in with Ethereum.
+description: Implement Sign-In with Ethereum (SIWE) using ERC-4361 to authenticate users with their MetaMask wallet and prevent phishing attacks.
 keywords: [sign in with ethereum, ERC-4361, SIWE, authentication, domain binding, phishing prevention, ethereum login, metamask]
 ---
 
@@ -33,10 +34,10 @@ This avoids breaking existing dapps that may have use cases for mismatched domai
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../../_assets/siwe-bad-domain.png").default} alt="Sign-in bad domain" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain.png").default} alt="MetaMask Sign-In with Ethereum domain mismatch warning" class="appScreen" />
     </div>
     <div class="imgCol">
-        <img src={require("../../_assets/siwe-bad-domain-2.png").default} alt="Sign-in bad domain pop-up" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain-2.png").default} alt="MetaMask Sign-In with Ethereum domain mismatch detailed warning popup" class="appScreen" />
     </div>
 </div>
 
@@ -100,3 +101,9 @@ The following HTML displays the SIWE button:
 
 See the [live example](https://metamask.github.io/test-dapp/#siwe) and
 [test dapp source code](https://github.com/MetaMask/test-dapp) for more information.
+
+## Next steps
+
+- [Sign data with personal_sign and eth_signTypedData_v4](./index.md)
+- [Manage user accounts](../manage-user-accounts.md)
+- [Ethereum provider API events and methods](../../reference/provider-api.md)

@@ -1,6 +1,7 @@
 ---
+title: "Dynamic SDK Integration - MetaMask Connect EVM"
 sidebar_label: Dynamic SDK
-description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
+description: Combine MetaMask with Dynamic SDK for multi-wallet support, social login, and embedded wallet features in your React dapp.
 toc_max_heading_level: 3
 keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK, dynamic xyz, embedded wallet, social login, multi-wallet]
 ---
@@ -20,7 +21,7 @@ Use MetaMask SDK features directly within Dynamic SDK.
 
 <p align="center">
   <a href="https://metamask-dynamic-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-dynamic.png").default} alt="Dynamic SDK Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-dynamic.png").default} alt="MetaMask Connect EVM with Dynamic SDK multi-wallet interface" width="600px" class="appScreen" />
   </a>
 </p>
 
@@ -215,6 +216,12 @@ Common issues and solutions include:
   - Test on actual mobile devices.
   - Verify redirect URLs.
   - Check MetaMask mobile app installation.
+
+## Next steps
+
+- [Manage user accounts](../guides/manage-user-accounts.md)
+- [Send transactions](../guides/send-transactions/index.md)
+- [Sign data](../guides/sign-data/index.md)
 
 ## Live example
 

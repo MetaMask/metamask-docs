@@ -1,6 +1,7 @@
 ---
+title: "Send Cross-Chain Transactions - MetaMask Connect Multichain"
 sidebar_label: Send transactions
-description: Send EVM and Solana transactions from a single multichain session.
+description: Send EVM and Solana transactions from a single MetaMask Connect Multichain session using invokeMethod, with no network switching required.
 keywords: [multichain, evm, solana, transaction, send, invokeMethod, signAndSendTransaction, multichain transaction, eth_sendTransaction, RPC routing]
 ---
 

@@ -1,6 +1,7 @@
 ---
+title: "Batch JSON-RPC Requests - MetaMask Connect EVM"
 sidebar_label: Batch requests
-description: Batch multiple JSON-RPC requests using MetaMask Connect EVM.
+description: Group multiple JSON-RPC requests into a single call using MetaMask Connect EVM's metamask_batch method for streamlined dapp interactions.
 keywords: [SDK, batch, JSON-RPC, RPC, requests, methods, dapp, metamask_batch, JSON-RPC batch, multiple requests, performance optimization]
 ---
 
@@ -94,3 +95,9 @@ The following HTML displays a **Send Batch** button:
   We recommend using services like [MetaMask Developer](https://developer.metamask.io/) to ensure better reliability and performance.
 - Ensure that requests in a batch do not depend on one another's chain context, as mid-batch state changes can affect outcomes.
   :::
+
+## Next steps
+
+- [Send batch transactions](../send-transactions/batch-transactions.md)
+- [Sign data](../sign-data/index.md)
+- [JSON-RPC API reference](../../reference/json-rpc-api/index.md)

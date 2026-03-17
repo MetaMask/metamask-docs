@@ -1,10 +1,13 @@
 ---
+title: "MetaMask Connect Architecture - Platform Detection and Session Routing"
 sidebar_label: Architecture
-description: Learn how MetaMask Connect routes connections across platforms.
+description: Understand how MetaMask Connect detects platforms, selects transports, creates encrypted sessions, and persists connections across page reloads.
 keywords: [connect, sdk, architecture, platform detection, relay, session, end-to-end encryption, transport layer, websocket relay, session persistence, connection flow]
 ---
 
 # Architecture
+
+MetaMask Connect manages the full connection lifecycle between your dapp and the MetaMask wallet. It detects the user's platform, selects the best transport (direct extension, QR code relay, or deeplink), creates an encrypted CAIP-25 session, and persists that session across page reloads. All relay traffic is end-to-end encrypted so the relay server never sees message content.
 
 When a user connects, MetaMask Connect automatically handles the following:
 
@@ -41,3 +44,9 @@ flowchart TB
     Extension --> Session[Multichain session]
     MobileApp --> Session
 ```
+
+## Next steps
+
+- [Explore integration options](./integration-options.md)
+- [View supported platforms and connection methods](./supported-platforms.md)
+- [Get started with EVM](./evm/index.md)

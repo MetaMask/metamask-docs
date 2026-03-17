@@ -1,6 +1,7 @@
 ---
+title: "Dynamic SDK Integration - MetaMask Connect Solana"
 sidebar_label: Dynamic SDK
-description: Quickstart guide for using MetaMask SDK and Dynamic SDK.
+description: Integrate MetaMask with Dynamic SDK for Solana dapps, combining wallet discovery UI with cross-platform MetaMask support and social login.
 toc_max_heading_level: 3
 keywords: [connect, MetaMask, Dynamic, SDK, dapp, Wallet SDK, dynamic xyz, solana embedded wallet, social login]
 ---
@@ -20,7 +21,7 @@ Dynamic handles wallet discovery and connection UI, and MetaMask SDK adds reliab
 
 <!-- <p align="center">
   <a href="https://metamask-dynamic-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-dynamic.png").default} alt="Dynamic SDK Quickstart" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-dynamic.png").default} alt="MetaMask Connect Solana with Dynamic SDK multi-wallet interface" width="600px" class="appScreen" />
   </a>
 </p> -->
 
@@ -248,3 +249,9 @@ Common issues and solutions include:
 ## Live example
 
 <iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/partners/dynamic?ctl=1&embed=1&file=app%2Fproviders.tsx&hideNavigation=1"></iframe>
+
+## Next steps
+
+- [Send a legacy transaction](../guides/send-legacy-transaction.md) to transfer SOL using MetaMask Connect.
+- [Sign messages](../guides/sign-data/sign-message.md) to verify wallet ownership or authorize off-chain actions.
+- [MetaMask Connect Solana methods](../reference/methods.md) for the full API reference.

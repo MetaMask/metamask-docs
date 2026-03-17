@@ -1,6 +1,7 @@
 ---
+title: "MetaMask Connect Supported Platforms and Connection Methods"
 sidebar_label: Supported platforms
-description: Learn about MetaMask Connect platform support, supported environments, and connection methods.
+description: View supported platforms, browsers, and connection methods for MetaMask Connect, including desktop extensions, mobile QR codes, and native deeplinks.
 keywords:
   [
     connect,
@@ -80,3 +81,9 @@ Select a ✅ to jump to the relevant quickstart or guide.
 Node.js support uses QR code connections via MetaMask Mobile.
 See the [Node.js playground](https://github.com/MetaMask/connect-monorepo/tree/main/playground/node-playground) for a working example.
 :::
+
+## Next steps
+
+- [Choose an integration option](./integration-options.md)
+- [EVM JavaScript quickstart](./evm/quickstart/javascript.md)
+- [Solana JavaScript quickstart](./solana/quickstart/javascript.md)
