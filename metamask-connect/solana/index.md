@@ -68,3 +68,17 @@ Several third-party libraries for Solana dapps detect and handle MetaMask out-of
 - [Privy](https://docs.privy.io/welcome)
 - [Reown](https://docs.reown.com/appkit/overview)
 - [Embedded Wallets](/embedded-wallets)
+
+### Frequently asked questions
+
+#### What is wallet-standard and why does MetaMask Connect Solana use it?
+
+[Wallet Standard](https://github.com/wallet-standard/wallet-standard) is a cross-wallet interface specification for the Solana ecosystem. `@metamask/connect-solana` implements this standard so that MetaMask is automatically discoverable by any Solana dapp or library that supports wallet-standard, including Solana Wallet Adapter. This means you get consistent connect, sign, and send APIs without writing MetaMask-specific code.
+
+#### Can I use Solana Wallet Adapter with MetaMask Connect?
+
+Yes. When you call `createSolanaClient`, MetaMask is automatically registered with the wallet-standard registry, so Solana Wallet Adapter detects it alongside other installed wallets. No extra configuration is needed. See the [Wallet Adapter guide](./guides/use-wallet-adapter.md) for a full React setup walkthrough.
+
+#### Which Solana networks does MetaMask Connect support?
+
+MetaMask Connect Solana supports mainnet, devnet, and testnet. You can configure custom RPC URLs for each network using the `api.supportedNetworks` option in `createSolanaClient`. If your dapp also targets EVM networks, consider using [`@metamask/connect-multichain`](../multichain/index.md) to manage both ecosystems in a single session.
