@@ -99,6 +99,13 @@ Install the multichain client in an existing JavaScript(Vite) project:
 npm install @metamask/connect-multichain
 ```
 
+:::tip Bundler polyfill issues?
+Some bundlers (Vite, Webpack 5) may need extra configuration for Node.js globals used by
+transitive dependencies. See [Vite polyfill issues](../../troubleshooting/vite-polyfill-issues.md)
+or [Webpack 5 polyfill issues](../../troubleshooting/webpack-polyfill-issues.md) if you run into
+errors like `Buffer is not defined` or `process is not defined`.
+:::
+
 ### 2. Initialize MetaMask Connect Multichain
 
 The following is an example of using MetaMask Connect Multichain for a multichain dapp in a JavaScript(Vite) project:
@@ -176,3 +183,4 @@ Use [`invokeMethod()`](../reference/methods.md#invokemethod) to call RPC methods
 - [Send transactions on EVM and Solana](../guides/send-transactions.md) from a single multichain session.
 - [Sign messages on EVM and Solana](../guides/sign-transactions.md) using `invokeMethod`.
 - [Create a multichain dapp](../tutorials/create-multichain-dapp.md) for a full step-by-step tutorial with React.
+- [Troubleshoot bundler polyfill issues](../../troubleshooting/index.md)

@@ -90,6 +90,13 @@ Install MetaMask Connect Solana in an existing JavaScript project:
 npm install @metamask/connect-solana
 ```
 
+:::tip Bundler polyfill issues?
+Some bundlers (Vite, Webpack 5) may need extra configuration for Node.js globals used by
+transitive dependencies. See [Vite polyfill issues](../../troubleshooting/vite-polyfill-issues.md)
+or [Webpack 5 polyfill issues](../../troubleshooting/webpack-polyfill-issues.md) if you run into
+errors like `Buffer is not defined` or `process is not defined`.
+:::
+
 ### 2. Initialize MetaMask Connect Solana
 
 The following examples show how to use MetaMask Connect Solana in various JavaScript environments:
@@ -184,3 +191,4 @@ await solanaClient.disconnect()
 - [Send a legacy transaction](../guides/send-legacy-transaction.md) to transfer SOL or interact with programs.
 - [Sign messages](../guides/sign-data/sign-message.md) to verify wallet ownership or authorize off-chain actions.
 - [Use the Multichain SDK](../../multichain/quickstart/javascript.md) to connect to both EVM and Solana from a single session.
+- [Troubleshoot bundler polyfill issues](../../troubleshooting/index.md)

@@ -66,6 +66,7 @@ const metamaskConnectSidebar = {
       collapsed: false,
       items: [
         'multichain/quickstart/javascript',
+        'multichain/quickstart/nodejs',
         'multichain/quickstart/react-native',
       ],
     },
@@ -117,6 +118,7 @@ const metamaskConnectSidebar = {
       collapsed: false,
       items: [
         'evm/quickstart/javascript',
+        'evm/quickstart/nodejs',
         // 'evm/quickstart/wagmi',
         // 'evm/quickstart/rainbowkit',
         // 'evm/quickstart/connectkit',
@@ -228,6 +230,7 @@ const metamaskConnectSidebar = {
       collapsed: false,
       items: [
         'solana/quickstart/javascript',
+        'solana/quickstart/nodejs',
         'solana/quickstart/react-native',
         // 'solana/quickstart/dynamic',
         // 'solana/quickstart/web3auth',

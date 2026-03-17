@@ -94,6 +94,13 @@ Install MetaMask Connect EVM in an existing JavaScript project:
 npm install @metamask/connect-evm
 ```
 
+:::tip Bundler polyfill issues?
+Some bundlers (Vite, Webpack 5) may need extra configuration for Node.js globals used by
+transitive dependencies. See [Vite polyfill issues](../../troubleshooting/vite-polyfill-issues.md)
+or [Webpack 5 polyfill issues](../../troubleshooting/webpack-polyfill-issues.md) if you run into
+errors like `Buffer is not defined` or `process is not defined`.
+:::
+
 ### 2. Initialize MetaMask Connect EVM
 
 The following is an example of using MetaMask Connect EVM for an EVM dapp in a JavaScript project:
@@ -204,3 +211,11 @@ const batchResults = await provider.request({
 <!-- ## Live example
 
 <iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript?ctl=1&embed=1&file=src%2Fmain.js&hideNavigation=1"></iframe> -->
+
+## Next steps
+
+- [Manage user accounts](../guides/manage-user-accounts.md)
+- [Send transactions](../guides/send-transactions/index.md)
+- [Sign data](../guides/sign-data/index.md)
+- [Use the Multichain SDK](../../multichain/quickstart/javascript.md) to connect to both EVM and Solana from a single session
+- [Troubleshoot bundler polyfill issues](../../troubleshooting/index.md)
