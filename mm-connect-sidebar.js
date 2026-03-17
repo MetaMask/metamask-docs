@@ -17,7 +17,7 @@ const metamaskConnectSidebar = {
           type: 'category',
           label: '@metamask/connect-multichain',
           collapsible: true,
-          collapsed: false,
+          collapsed: true,
           items: [
             'multichain/reference/methods',
             'multichain/reference/api',
@@ -27,7 +27,7 @@ const metamaskConnectSidebar = {
           type: 'category',
           label: '@metamask/connect-evm',
           collapsible: true,
-          collapsed: false,
+          collapsed: true,
           items: [
             'evm/reference/methods',
             'evm/reference/provider-api',
@@ -37,7 +37,7 @@ const metamaskConnectSidebar = {
           type: 'category',
           label: '@metamask/connect-solana',
           collapsible: true,
-          collapsed: false,
+          collapsed: true,
           items: [
             'solana/reference/methods',
           ],
