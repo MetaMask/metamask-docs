@@ -25,7 +25,7 @@ Error codes from the [MetaMask Delegation Framework contracts](https://github.co
 | `0xfce698f7` | `ECDSAInvalidSignatureLength(uint256)` | The ECDSA signature length is incorrect. |
 | `0xac241e11` | `EmptySignature()` | The signature is empty. |
 | `0xd93c0665` | `EnforcedPause()` | The Delegation Manager contract is paused by the owner. |
-| `0x3db6791c` | `InvalidEOASignature()` | EOA signature verification failed. |
+| `0x3db6791c` | `InvalidEOASignature()` | EOA signature verification failed.<br/><br/>See [Invalid signature troubleshooting page](./invalid-signature.md) to learn more. |
 | `0x155ff427` | `InvalidERC1271Signature()` | Smart contract signature (ERC-1271) verification failed. |
 | `0x118cdaa7` | `OwnableUnauthorizedAccount(address)` | An unauthorized account attempted an owner only action. |
 | `0x1e4fbdf7` | `OwnableInvalidOwner(address)` | Invalid owner address in an ownership transfer. |
