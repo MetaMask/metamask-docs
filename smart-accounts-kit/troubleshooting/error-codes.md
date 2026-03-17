@@ -18,7 +18,7 @@ Error codes from the [MetaMask Delegation Framework contracts](https://github.co
 | `0xb9f0f171` | `InvalidDelegator()` | The caller is not the delegator specificed in the delegation, or the delegator is not deployed. |
 | `0x05baa052` | `CannotUseADisabledDelegation()` | The delegation has been disabled by the delegator. |
 | `0xded4370e` | `InvalidAuthority()` | The delegation chain authority validation failed. The authority hash of a child delegation does not match the hash of its parent delegation. |
-| `0x1bcaf69f` | `BatchDataLengthMismatch()` | The array lengths do not match in a batch `redeemDelegations` call. |
+| `0x1bcaf69f` | `BatchDataLengthMismatch()` | The array lengths do not match in a batch `redeemDelegations` contract call. |
 | `0x005ecddb` | `AlreadyDisabled()` | The delegation has already been disabled. |
 | `0xf2a5f75a` | `AlreadyEnabled()` | The delegation is already enabled. |
 | `0xf645eedf` | `ECDSAInvalidSignature()` | Invalid ECDSA signature format. |
