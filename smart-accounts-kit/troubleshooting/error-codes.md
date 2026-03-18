@@ -1,7 +1,6 @@
 ---
 description: Delegation Framework error codes
 sidebar_label: Error codes
-toc_max_heading_level: 2
 keywords: [error codes, errors, debug, error references, delegation framework]
 ---
 
@@ -14,7 +13,7 @@ Error codes from the [MetaMask Delegation Framework contracts](https://github.co
 
 | Error code | Error name | Description |
 | ---------- | ---------- | ----------- |
-| `0xb5863604` | `InvalidDelegate()` | The caller is not the delegate specified in the delegation. |
+| `0xb5863604` | `InvalidDelegate()` | The caller is not the delegate specified in the delegation.<br/><br/>See [Invalid delegate troubleshooting page](./invalid-delegate.md) to learn more. |
 | `0xb9f0f171` | `InvalidDelegator()` | The caller is not the delegator specificed in the delegation, or the delegator is not deployed. |
 | `0x05baa052` | `CannotUseADisabledDelegation()` | The delegation has been disabled by the delegator. |
 | `0xded4370e` | `InvalidAuthority()` | The delegation chain authority validation failed. The authority hash of a child delegation does not match the hash of its parent delegation. |
