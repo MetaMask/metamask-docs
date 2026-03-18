@@ -214,8 +214,9 @@ const sidebar = {
       label: 'Troubleshooting',
       collapsed: true,
       items: [
+        'troubleshooting/allowance-exceeded',
         'troubleshooting/error-codes',
-        'troubleshooting/invalid-delegate',
+        'troubleshooting/invalid-delegate'
       ],
     },
   ],
