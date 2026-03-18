@@ -97,5 +97,4 @@ if (balance < requiredPrefund) {
 ### Use a paymaster
 
 You can use a paymaster to sponsor the gas fees for the smart account, so the account doesn't
-need to hold native tokens. See [how to send a gasless transaction](../guides/smart-accounts/send-gasless-transaction.md)
-for details on configuring a paymaster.
+need to hold native tokens. For more information about configuring a paymaster, see [send a gasless transaction](../guides/smart-accounts/send-gasless-transaction.md).
