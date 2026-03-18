@@ -6,7 +6,7 @@ keywords: [InvalidDelegator, error code, delegation, troubleshooting]
 
 # Invalid delegator
 
-The Delegation Manager reverts with `InvalidDelegator()` when the caller isn't the delegator 
+The Delegation Manager reverts with `InvalidDelegator()` when the caller is not the delegator 
 specified in the delegation. 
 
 This error is thrown by the `disableDelegation` and `enableDelegation` contract functions. Only the 
