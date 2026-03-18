@@ -8,7 +8,6 @@ keywords: [InvalidDelegate, error code, delegation, troubleshooting]
 
 The Delegation Manager reverts with `InvalidDelegate()` in the following two cases.
 
-
 ## Account is not the delegate
 
 The account redeeming the delegation is not the delegate specified in the delegation. 

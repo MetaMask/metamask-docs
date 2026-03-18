@@ -216,6 +216,7 @@ const sidebar = {
       items: [
         'troubleshooting/error-codes',
         'troubleshooting/invalid-delegate',
+        'troubleshooting/aa21-prefund',
       ],
     },
   ],
