@@ -62,6 +62,9 @@ Ensure your contract is as readable as possible to the user.
 The following is an example of using `eth_signTypedData_v4` with MetaMask:
 
 ```javascript title="index.js"
+import * as sigUtil from "@metamask/eth-sig-util"
+import * as ethUtil from "ethereumjs-util"
+
 signTypedDataV4Button.addEventListener("click", async function (event) {
   event.preventDefault()
 
@@ -131,9 +134,10 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
     },
   })
 
-  var from = await web3.eth.getAccounts()
+  var accounts = await web3.eth.getAccounts()
+  var from = accounts[0]
 
-  var params = [from[0], msgParams]
+  var params = [from, msgParams]
   var method = "eth_signTypedData_v4"
 
   provider // Or window.ethereum if you don't support EIP-6963.
@@ -141,7 +145,7 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
       {
         method,
         params,
-        from: from[0],
+        from: from,
       },
       function (err, result) {
         if (err) return console.dir(err)
@@ -163,7 +167,7 @@ signTypedDataV4Button.addEventListener("click", async function (event) {
           alert("Successfully recovered signer as " + from)
         } else {
           alert(
-            "Failed to verify signer when comparing " + result + " to " + from
+            "Failed to verify signer when comparing " + result.result + " to " + from
           )
         }
       }
