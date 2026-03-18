@@ -10,24 +10,25 @@ The Delegation Manager reverts with `InvalidEOASignature()` in the following cas
 
 ## Smart account is not deployed
 
-The root delegation's delegator must be a MetaMask smart account. The Delegation Manager
-checks delegator code length to determine whether the delegator is an EOA or a smart
-account. 
+The [root delegation's](../concepts/delegation/index.md#delegation-types) delegator must be a
+MetaMask smart account. The Delegation Manager checks the delegator code to determine
+whether it is an externally owned account (EOA) or a smart account.
 
-If the smart account hasn't been deployed yet, it has no code at its address,
-so the Delegation Manager treats it as an EOA and attempts ECDSA signature recovery.
-Since the delegation was signed by the smart account, recovery produces a different address and reverts.
+If the smart account is not deployed yet, its address has no contract code. The Delegation
+Manager treats the address as an EOA and attempts ECDSA signature recovery. Because the
+delegation was signed by the smart account, signature recovery returns a different address,
+and the call reverts.
 
 ### Solution
 
-Verify the delegator's smart account is deployed before the delegation is redeemed. The
-smart account can be either an ERC-4337 smart account or an EIP-7702 upgraded EOA. 
+Verify that the smart account used as the delegator is deployed before redeeming the delegation. The
+smart account can be either an ERC-4337 smart account or an EIP-7702 upgraded EOA.
 
-For an ERC-4337 smart account, the first user operation sent from the account automatically
-deploys it. See [deploy a smart account guide](../guides/smart-accounts/deploy-smart-account.md) to learn more
+For an ERC-4337 smart account, the first user operation sent from that account deploys it
+automatically. For more information, see the [deploy a smart account](../guides/smart-accounts/deploy-smart-account.md) guide.
 
-For an EIP-7702 upgraded EOA, verify that the authorization to set the
-account code has been submitted before the delegation is redeemed.
+For an EIP-7702-upgraded EOA, verify that you submit the authorization to set the account code
+before redeeming the delegation.
 
 ```ts
 import { getSmartAccountsEnvironment } from "@metamask/smart-accounts-kit";
@@ -53,7 +54,7 @@ if (code) {
 }
 ```
 
-If the EOA isn't upgraded to a MetaMask smart account, see the [EIP-7702 quickstart guide](../get-started/smart-account-quickstart/eip7702.md).
+To upgrade an EOA to a MetaMask smart account, see the [EIP-7702 quickstart guide](../get-started/smart-account-quickstart/eip7702.md).
 
 ## Incorrect signer
 
@@ -62,11 +63,14 @@ address. When the delegator is an EOA, the Delegation Manager recovers the signe
 the EIP-712 typed data hash and compares it to the `delegator` field. If they don't
 match, the transaction reverts.
 
-This case occurs when redeeming a [delegation chain](../guides/delegation/create-redelegation.md), where an intermediate or leaf delegation has an EOA as the delegator and the delegation is signed with the wrong account.
+This occurs when redeeming a [delegation chain](../guides/delegation/create-redelegation.md). An
+intermediate or leaf delegation has an EOA as the delegator, but the delegation is signed by an
+account other than the expected delegator.
 
 ### Solution
 
-Verify that the private key used to sign the delegation belongs to the delegator address. See [`signDelegation`](../reference/delegation/index.md#signdelegation) reference docs to learn more.
+Verify that the private key used to sign the delegation corresponds to the delegator address. For
+more information, see the [`signDelegation`](../reference/delegation/index.md#signdelegation) reference.
 
 ## Incorrect chain ID or Delegation Manager
 
@@ -76,5 +80,5 @@ Delegation Manager, the recovered address won't match.
 
 ### Solution
 
-Verify that the chain ID and Delegation Manager contract address used during signing
-match the exact chain and contract where the delegation is being redeemed.
+Verify that the chain ID and Delegation Manager contract address you use when signing match the
+chain and contract where you redeem the delegation.
