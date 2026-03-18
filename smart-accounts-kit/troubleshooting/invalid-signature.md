@@ -14,7 +14,7 @@ The root delegation's delegator must be a MetaMask smart account. The Delegation
 checks delegator code length to determine whether the delegator is an EOA or a smart
 account. 
 
-If the smart account has not been deployed yet, it has no code at its address,
+If the smart account hasn't been deployed yet, it has no code at its address,
 so the Delegation Manager treats it as an EOA and attempts ECDSA signature recovery.
 Since the delegation was signed by the smart account, recovery produces a different address and reverts.
 
@@ -39,29 +39,27 @@ const code = await publicClient.getCode({
 });
 
 if (code) {
-  // The address to which EOA has delegated. According to EIP-7702, 0xef0100 || address
-  // represents the delegation. 
-  // 
-  // You need to remove the first 8 characters (0xef0100) to get the delegator address.
+  // According to EIP-7702, the code format is 0xef0100 || address.
+  // Remove the first 8 characters (0xef0100) to get the delegator address.
   const delegatorAddress = `0x${code.substring(8)}`;
 
   const statelessDelegatorAddress = getSmartAccountsEnvironment(chain.id)
   .implementations
   .EIP7702StatelessDeleGatorImpl;
 
-  // If account is not upgraded to MetaMask smart account, you can
+  // If the account isn't upgraded to a MetaMask smart account, you can
   // either upgrade programmatically or ask the user to switch to a smart account manually.
   const isAccountUpgraded = delegatorAddress.toLowerCase() === statelessDelegatorAddress.toLowerCase();
 }
 ```
 
-If the EOA is not upgraded to MetaMask smart account, [learn how to upgrade an EOA to MetaMask smart account](../get-started/smart-account-quickstart/eip7702.md). 
+If the EOA isn't upgraded to a MetaMask smart account, see the [EIP-7702 quickstart guide](../get-started/smart-account-quickstart/eip7702.md).
 
 ## Incorrect signer
 
-The delegation was signed with an account that does not correspond to the delegator
+The delegation was signed with an account that doesn't correspond to the delegator
 address. When the delegator is an EOA, the Delegation Manager recovers the signer from
-the EIP-712 typed data hash and compares it to the `delegator` field. If they do not
+the EIP-712 typed data hash and compares it to the `delegator` field. If they don't
 match, the transaction reverts.
 
 This case occurs when redeeming a [delegation chain](../guides/delegation/create-redelegation.md), where an intermediate or leaf delegation has an EOA as the delegator and the delegation is signed with the wrong account.
@@ -74,7 +72,7 @@ Verify that the private key used to sign the delegation belongs to the delegator
 
 The EIP-712 domain separator used for signing the delegation includes the chain ID and the Delegation Manager contract
 address. If the delegation was signed on a different chain or against a different
-Delegation Manager, the recovered address will not match.
+Delegation Manager, the recovered address won't match.
 
 ### Solution
 
