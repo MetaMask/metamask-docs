@@ -1,6 +1,7 @@
 ---
 description: How to resolve the InvalidDelegator error.
 sidebar_label: Invalid delegator
+toc_max_heading_level: 2
 keywords: [InvalidDelegator, error code, delegation, troubleshooting]
 ---
 

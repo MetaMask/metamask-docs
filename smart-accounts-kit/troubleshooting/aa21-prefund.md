@@ -1,6 +1,7 @@
 ---
 description: How to resolve the AA21 didn't pay prefund error when submitting user operations.
 sidebar_label: AA21 didn't pay prefund
+toc_max_heading_level: 2
 keywords: [AA21, pay prefund, user operation, troubleshooting]
 ---
 

@@ -1,6 +1,7 @@
 ---
 description: How to resolve the InvalidDelegate error when redeeming delegations.
 sidebar_label: Invalid delegate
+toc_max_heading_level: 2
 keywords: [InvalidDelegate, error code, delegation, troubleshooting]
 ---
 
