@@ -160,6 +160,14 @@ Represents a single execution to perform on behalf of a delegator.
 | `value` | `bigint` | Yes | Value of native tokens to send along with the call in wei format. |
 | `callData` | `Hex` | Yes | Encoded function data to be executed on the target address. |
 
+### `GetGrantedExecutionPermissionsResult`
+
+The return type of [`getGrantedExecutionPermissions`](advanced-permissions/wallet-client.md#getgrantedexecutionpermissions). An array of [`PermissionResponse`](#permissionresponse) objects.
+
+### `GetSupportedExecutionPermissionsResult`
+
+The return type of [`getSupportedExecutionPermissions`](advanced-permissions/wallet-client.md#getsupportedexecutionpermissions). A `Record<string,` [`SupportedPermissionInfo`](#supportedpermissioninfo)`>` keyed by permission type.
+
 ### `PartialSignature`
 
 Represents a single signer's contribution to a multisig aggregated signature.
@@ -169,6 +177,25 @@ Represents a single signer's contribution to a multisig aggregated signature.
 | `signer` | `Address` | Yes | The address of the signer. |
 | `signature` | `Hex` | Yes | The signer's signature over the user operation. |
 | `type` | `SignatureType`| Yes | The signature type to represent signature algorithm. Only supported value is `ECDSA`. |
+
+### `PermissionResponse`
+
+Represents a granted Advanced Permission. 
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| `chainId` | `number` | Yes | The chain ID for which the permission was granted. |
+| `from` | `Address` | Yes | The account address that granted the permission. |
+| `to` | `Hex` | Yes | The account address that received the permission. |
+| `permission` | `PermissionTypes` | Yes | The granted [permission](advanced-permissions/permissions.md) details. |
+| `rules` | `Record<string, unknown>[]` | No | The rules applied to the permission. For example, permission expiry. |
+| `context` | `Hex` | Yes | The permission context (encoded delegation list) used when redeeming the permission. |
+| `dependencies` | `{ factory: Address, factoryData: Hex }[]` | Yes | Factory dependencies for account deployment. |
+| `delegationManager` | `Address` | Yes | The address of the Delegation Manager contract for the permission. |
+
+### `RequestExecutionPermissionsReturnType`
+
+The return type of [`requestExecutionPermissions`](advanced-permissions/wallet-client.md#requestexecutionpermissions). An array of [`PermissionResponse`](#permissionresponse) objects.
 
 ### `SmartAccountsEnvironment`
 
@@ -181,6 +208,15 @@ An object containing the contract addresses required to interact with the Delega
 | `SimpleFactory` | `Hex` | Yes | The address of the factory contract for deploying MetaMask smart accounts. |
 | `implementations` | `Record<string, Hex>` | Yes | A map of MetaMask smart account implementation types to their deployed addresses. |
 | `caveatEnforcers` | `Record<string, Hex>` | Yes | A map of caveat enforcer types to their deployed addresses. |
+
+### `SupportedPermissionInfo`
+
+Describes a supported Advanced Permission type. Used in [`GetSupportedExecutionPermissionsResult`](#getsupportedexecutionpermissionsresult).
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| `chainIds` | `number[]` | Yes | The chain IDs on which the permission type is supported. |
+| `ruleTypes` | `string[]` | Yes | The rule types supported for the permission type (for example, `"expiry"`). |
 
 ### `ValueLteBuilderConfig`
 
