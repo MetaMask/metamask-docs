@@ -215,6 +215,7 @@ const sidebar = {
       collapsed: true,
       items: [
         'troubleshooting/error-codes',
+        'troubleshooting/invalid-signature',
         'troubleshooting/invalid-delegate',
         'troubleshooting/aa21-prefund',
       ],
