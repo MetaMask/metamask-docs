@@ -237,11 +237,15 @@ await evmClient.disconnect()
 Generates a map of Infura RPC URLs keyed by hex chain ID.
 Use this utility to populate `api.supportedNetworks` when calling `createEVMClient`.
 
+:::note
+Each chain must be activated in your [Infura dashboard](https://developer.metamask.io/) before `getInfuraRpcUrls` can generate working URLs for it.
+:::
+
 ### Parameters
 
-| Name           | Type       | Required | Description                                                                                             |
-| -------------- | ---------- | -------- | ------------------------------------------------------------------------------------------------------- |
-| `infuraApiKey` | `string`   | Yes      | Your Infura API key.                                                                                    |
+| Name           | Type       | Required | Description                                                                                                |
+| -------------- | ---------- | -------- | ---------------------------------------------------------------------------------------------------------- |
+| `infuraApiKey` | `string`   | Yes      | Your Infura API key.                                                                                       |
 | `chainIds`     | `string[]` | No       | Array of hex chain IDs to include (e.g. `['0x1', '0x89']`). If omitted, all supported chains are included. |
 
 ### Returns
@@ -257,6 +261,7 @@ const evmClient = await createEVMClient({
   dapp: { name: 'My DApp', url: window.location.href },
   api: {
     supportedNetworks: {
+      // Each chain must be active in your Infura dashboard
       ...getInfuraRpcUrls({ infuraApiKey: 'YOUR_INFURA_API_KEY', chainIds: ['0x1', '0xaa36a7'] }),
     },
   },

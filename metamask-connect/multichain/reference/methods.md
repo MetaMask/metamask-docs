@@ -171,20 +171,89 @@ client.off('wallet_sessionChanged', handler)
 ## `getInfuraRpcUrls`
 
 Generates a map of Infura RPC URLs keyed by [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain ID.
+When called without `caipChainIds`, the returned map includes all [supported chains](#supported-chains).
 Use this utility to populate `api.supportedNetworks` when calling `createMultichainClient`.
+
+:::tip Single-ecosystem dapps
+If your dapp targets only EVM, use the
+[`getInfuraRpcUrls` helper in `@metamask/connect-evm`](/metamask-connect/evm/reference/methods#getinfurarpcurls)
+instead. It returns hex-chain-ID-keyed URLs that can be passed directly to `createEVMClient`.
+
+If your dapp targets only Solana, use the
+[`getInfuraRpcUrls` helper in `@metamask/connect-solana`](/metamask-connect/solana/reference/methods#getinfurarpcurls)
+instead. It returns network-name-keyed URLs (`mainnet`, `devnet`) that can be passed directly to
+`createSolanaClient`.
+:::
 
 ### Parameters
 
-| Name            | Type       | Required | Description                                                                                                          |
-| --------------- | ---------- | -------- | -------------------------------------------------------------------------------------------------------------------- |
-| `infuraApiKey`  | `string`   | Yes      | Your Infura API key.                                                                                                 |
-| `caipChainIds`  | `string[]` | No       | Array of [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain IDs to include. If omitted, all supported chains are included. |
+| Name           | Type       | Required | Description                                                                                                                                         |
+| -------------- | ---------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `infuraApiKey` | `string`   | Yes      | Your Infura API key.                                                                                                                                |
+| `caipChainIds` | `string[]` | No       | Array of [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain IDs to include. If omitted, all [supported chains](#supported-chains) are included. |
 
 ### Returns
 
 A `Record<string, string>` mapping CAIP-2 chain IDs to Infura RPC URLs. When `caipChainIds` is provided, only matching chains are included.
 
+### Supported chains
+
+The following chains are included by default when `caipChainIds` is omitted.
+
+| Ecosystem  | Network | CAIP-2 chain ID                           |
+| ---------- | ------- | ----------------------------------------- |
+| Ethereum   | Mainnet | `eip155:1`                                |
+| Ethereum   | Sepolia | `eip155:11155111`                         |
+| Ethereum   | Hoodi   | `eip155:560048`                           |
+| Linea      | Mainnet | `eip155:59144`                            |
+| Linea      | Sepolia | `eip155:59141`                            |
+| Polygon    | Mainnet | `eip155:137`                              |
+| Polygon    | Amoy    | `eip155:80002`                            |
+| Optimism   | Mainnet | `eip155:10`                               |
+| Optimism   | Sepolia | `eip155:11155420`                         |
+| Arbitrum   | Mainnet | `eip155:42161`                            |
+| Arbitrum   | Sepolia | `eip155:421614`                           |
+| Base       | Mainnet | `eip155:8453`                             |
+| Base       | Sepolia | `eip155:84532`                            |
+| Blast      | Mainnet | `eip155:81457`                            |
+| Blast      | Sepolia | `eip155:168587773`                        |
+| ZKsync     | Mainnet | `eip155:324`                              |
+| ZKsync     | Sepolia | `eip155:300`                              |
+| BSC        | Mainnet | `eip155:56`                               |
+| BSC        | Testnet | `eip155:97`                               |
+| opBNB      | Mainnet | `eip155:204`                              |
+| opBNB      | Testnet | `eip155:5611`                             |
+| Scroll     | Mainnet | `eip155:534352`                           |
+| Scroll     | Sepolia | `eip155:534351`                           |
+| Mantle     | Mainnet | `eip155:5000`                             |
+| Mantle     | Sepolia | `eip155:5003`                             |
+| Sei        | Mainnet | `eip155:1329`                             |
+| Sei        | Testnet | `eip155:713715`                           |
+| Swellchain | Mainnet | `eip155:1923`                             |
+| Swellchain | Testnet | `eip155:1924`                             |
+| Unichain   | Mainnet | `eip155:130`                              |
+| Unichain   | Sepolia | `eip155:1301`                             |
+| Hemi       | Mainnet | `eip155:43111`                            |
+| Hemi       | Testnet | `eip155:743111`                           |
+| MegaETH    | Mainnet | `eip155:6342`                             |
+| MegaETH    | Testnet | `eip155:6342001`                          |
+| Monad      | Mainnet | `eip155:143`                              |
+| Monad      | Testnet | `eip155:10143`                            |
+| Palm       | Mainnet | `eip155:11297108109`                      |
+| Avalanche  | Mainnet | `eip155:43114`                            |
+| Avalanche  | Fuji    | `eip155:43113`                            |
+| Celo       | Mainnet | `eip155:42220`                            |
+| Celo       | Sepolia | `eip155:44787`                            |
+| Solana     | Mainnet | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` |
+| Solana     | Devnet  | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` |
+
+:::note
+Each chain must be activated in your [Infura dashboard](https://developer.metamask.io/) before `getInfuraRpcUrls` can generate working URLs for it.
+:::
+
 ### Example
+
+Include all supported chains:
 
 ```javascript
 import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
@@ -194,6 +263,25 @@ const client = await createMultichainClient({
   api: {
     supportedNetworks: {
       ...getInfuraRpcUrls({ infuraApiKey: 'YOUR_INFURA_API_KEY' }),
+    },
+  },
+})
+```
+
+Include only specific chains using `caipChainIds`:
+
+```javascript
+import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
+
+const client = await createMultichainClient({
+  dapp: { name: 'My DApp', url: 'https://mydapp.com' },
+  api: {
+    supportedNetworks: {
+      // Each chain must be active in your Infura dashboard
+      ...getInfuraRpcUrls({
+        infuraApiKey: 'YOUR_INFURA_API_KEY',
+        caipChainIds: ['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'],
+      }),
     },
   },
 })

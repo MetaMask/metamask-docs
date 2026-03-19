@@ -39,7 +39,7 @@ In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly
 The `supportedNetworks` map uses network names (`mainnet`, `devnet`) as keys:
 
 ```javascript title="index.mjs"
-import { createSolanaClient } from '@metamask/connect-solana'
+import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
 
 const SOLANA_MAINNET = 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
 
@@ -49,9 +49,10 @@ const solanaClient = await createSolanaClient({
     url: 'https://myapp.com',
   },
   api: {
-    supportedNetworks: {
-      mainnet: 'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-    },
+    supportedNetworks: getInfuraRpcUrls({
+      infuraApiKey: 'YOUR_INFURA_API_KEY',
+      networks: ['mainnet'],
+    }),
   },
 })
 ```
@@ -133,7 +134,7 @@ Production MetaMask only supports Solana mainnet.
 ## Full example
 
 ```javascript title="index.mjs"
-import { createSolanaClient } from '@metamask/connect-solana'
+import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
 
 const SOLANA_MAINNET = 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
 
@@ -143,9 +144,10 @@ const solanaClient = await createSolanaClient({
     url: 'https://myapp.com',
   },
   api: {
-    supportedNetworks: {
-      mainnet: 'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-    },
+    supportedNetworks: getInfuraRpcUrls({
+      infuraApiKey: 'YOUR_INFURA_API_KEY',
+      networks: ['mainnet'],
+    }),
   },
 })
 

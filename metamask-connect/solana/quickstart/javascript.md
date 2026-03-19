@@ -95,7 +95,7 @@ npm install @metamask/connect-solana
 The following examples show how to use MetaMask Connect Solana in various JavaScript environments:
 
 ```javascript
-import { createSolanaClient } from '@metamask/connect-solana'
+import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
 
 const solanaClient = await createSolanaClient({
   dapp: {
@@ -104,9 +104,10 @@ const solanaClient = await createSolanaClient({
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
   api: {
-    supportedNetworks: {
-      devnet: 'https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY',
-    },
+    supportedNetworks: getInfuraRpcUrls({
+      infuraApiKey: 'YOUR_INFURA_API_KEY',
+      networks: ['devnet'],
+    }),
   },
 })
 ```
