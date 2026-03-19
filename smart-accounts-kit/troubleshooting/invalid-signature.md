@@ -1,6 +1,7 @@
 ---
 description: How to resolve the InvalidEOASignature error when redeeming delegations.
 sidebar_label: Invalid EOA signature
+toc_max_heading_level: 2
 keywords: [InvalidEOASignature, error code, delegation, troubleshooting, invalid EOA signature]
 ---
 
@@ -54,7 +55,7 @@ if (code) {
 }
 ```
 
-To upgrade an EOA to a MetaMask smart account, see the [EIP-7702 quickstart guide](../get-started/smart-account-quickstart/eip7702.md).
+To upgrade an EOA to a MetaMask smart account, see the [EIP-7702 quickstart](../get-started/smart-account-quickstart/eip7702.md).
 
 ## Incorrect signer
 
