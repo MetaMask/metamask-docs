@@ -218,6 +218,7 @@ const sidebar = {
         'troubleshooting/allowance-exceeded',
         'troubleshooting/error-codes',
         'troubleshooting/invalid-delegate',
+        'troubleshooting/invalid-delegator',
         'troubleshooting/invalid-signature',
       ],
     },
