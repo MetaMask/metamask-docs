@@ -165,7 +165,7 @@ The user will need to approve a new connection prompt to use your dapp again.
 
 #### EVM balances
 
-Use [`invokeMethod`](../reference/api.md#wallet_invokemethod) with `eth_getBalance` to query the
+Use [`invokeMethod`](../reference/api.md#wallet_invokemethod) with [`eth_getBalance`](../../evm/reference/json-rpc-api/eth_getBalance.mdx) to query the
 balance on any EVM chain in the session.
 The result is a hex-encoded wei value:
 
@@ -226,7 +226,7 @@ const solBalance = await getSolBalance(solAccounts)
 
 #### EVM (`personal_sign`)
 
-To sign a message on an EVM chain, hex-encode the message and use `personal_sign`:
+To sign a message on an EVM chain, hex-encode the message and use [`personal_sign`](../../evm/reference/json-rpc-api/personal_sign.mdx):
 
 ```typescript
 function toHex(str: string): string {
@@ -267,7 +267,7 @@ console.log('SOL signature:', signature)
 
 #### EVM transaction
 
-Use `eth_sendTransaction` to send a transaction on any EVM scope:
+Use [`eth_sendTransaction`](../../evm/reference/json-rpc-api/eth_sendTransaction.mdx) to send a transaction on any EVM scope:
 
 ```typescript
 const fromAddress = extractAddress(ethAccounts[0])

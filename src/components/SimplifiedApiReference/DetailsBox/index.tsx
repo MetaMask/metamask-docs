@@ -1,6 +1,7 @@
 import React from 'react'
 import Heading from '@theme/Heading'
 import ParamField from '../ParamField'
+import ReactMarkdown from 'react-markdown'
 import styles from './styles.module.css'
 
 interface NestedParam {
@@ -51,7 +52,7 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
       
       {description && (
         <div className={styles.description}>
-          <p>{description}</p>
+          <ReactMarkdown skipHtml={true}>{description}</ReactMarkdown>
         </div>
       )}
       
@@ -88,7 +89,7 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
           </Heading>
           <div className={styles.paramContainer}>
             <div className={styles.returnsInfo}>
-              <p>{returns.description}</p>
+              <ReactMarkdown skipHtml={true}>{returns.description}</ReactMarkdown>
             </div>
           </div>
         </>
@@ -104,7 +105,6 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
               <thead>
                 <tr>
                   <th>Code</th>
-                  <th>Message</th>
                   <th>Description</th>
                 </tr>
               </thead>
@@ -112,8 +112,9 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
                 {errors.map((error, index) => (
                   <tr key={index}>
                     <td><code>{error.code}</code></td>
-                    <td>{error.message}</td>
-                    <td>{error.description}</td>
+                    <td>
+                      <ReactMarkdown skipHtml={true}>{error.description}</ReactMarkdown>
+                    </td>
                   </tr>
                 ))}
               </tbody>

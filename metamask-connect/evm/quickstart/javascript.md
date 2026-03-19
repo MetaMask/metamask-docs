@@ -125,7 +125,7 @@ These examples configure MetaMask Connect EVM with the following options:
 
 :::info `createEVMClient` is async
 `createEVMClient` returns a promise. Always `await` it before using the client.
-The client is a **singleton** -- calling `createEVMClient` again returns the same instance.
+The client is a **singleton** — calling `createEVMClient` again returns the same instance.
 :::
 
 ### 3. Connect and use provider

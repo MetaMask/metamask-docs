@@ -97,7 +97,7 @@ console.log('POL tx hash:', txHash)
 
 ## Estimate gas
 
-Use `eth_estimateGas` to estimate the gas cost before sending.
+Use [`eth_estimateGas`](../../evm/reference/json-rpc-api/eth_estimateGas.mdx) to estimate the gas cost before sending.
 This routes to the RPC node and does not prompt the user:
 
 ```javascript

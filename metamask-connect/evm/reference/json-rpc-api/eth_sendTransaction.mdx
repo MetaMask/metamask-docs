@@ -1,0 +1,54 @@
+---
+title: eth_sendTransaction
+sidebar_label: eth_sendTransaction
+description: Creates a new wallet confirmation to make an Ethereum transaction from the user's account. This method requires that the user has granted permission to interact with their account first, so make sure to call `eth_requestAccounts` (recommended) or `wallet_requestPermissions` first.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_sendTransaction", "MetaMask", "Restricted", "Multichain"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_sendTransaction"
+  description="Creates a new wallet confirmation to make an Ethereum transaction from the user's account. This method requires that the user has granted permission to interact with their account first, so make sure to call `eth_requestAccounts` (recommended) or `wallet_requestPermissions` first."
+  parameters={[{
+    name: "Transaction",
+    type: "object",
+    required: true,
+    description: "The transaction object to sign and send.",
+    children: [
+      { name: "data", type: "string", required: false, description: "hex encoded bytes" },
+      { name: "from", type: "string", required: true, description: "hex encoded address" },
+      { name: "gas", type: "string", required: false, description: "hex encoded unsigned integer" },
+      { name: "gasPrice", type: "string", required: false, description: "hex encoded unsigned integer" },
+      { name: "maxFeePerGas", type: "string", required: false, description: "hex encoded unsigned integer" },
+      { name: "maxPriorityFeePerGas", type: "string", required: false, description: "hex encoded unsigned integer" },
+      { name: "to", type: "string", required: false, description: "hex encoded address" },
+      { name: "value", type: "string", required: false, description: "hex encoded unsigned integer" }
+    ]
+  }]}
+  returns={{
+  type: "string",
+  description: "The transaction hash of the sent transaction."
+}}
+  errors={[{ code: 4100, message: "The requested account and/or method has not been authorized by the user.", description: "The requested account and/or method has not been authorized by the user." }]}
+  exampleRequest={`await provider.request({
+    method: "eth_sendTransaction",
+    params: [
+  {
+    "to": "0x4B0897b0513FdBeEc7C469D9aF4fA6C0752aBea7",
+    "from": "0xDeaDbeefdEAdbeefdEadbEEFdeadbeefDEADbEEF",
+    "gas": "0x76c0",
+    "value": "0x8ac7230489e80000",
+    "data": "0x",
+    "gasPrice": "0x4a817c800"
+  }
+]
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x4e306b5a5a37532e1734503f7d2427a86f2c992fbe471f5be403b9f734e667c8"
+}`}
+/>

@@ -101,8 +101,8 @@ console.log('ETH balance:', balance)
 Disconnects from MetaMask.
 The behavior depends on whether `scopes` are provided:
 
-- **No arguments** -- revokes all scopes and fully tears down the session.
-- **With `scopes`** -- revokes only the specified scopes. If other scopes remain, the session stays alive.
+- **No arguments** — revokes all scopes and fully tears down the session.
+- **With `scopes`** — revokes only the specified scopes. If other scopes remain, the session stays alive.
 
 ### Parameters
 
@@ -117,10 +117,10 @@ A promise that resolves when the disconnect is complete.
 ### Example
 
 ```javascript
-// Fully disconnect -- revokes all scopes and ends the session
+// Fully disconnect — revokes all scopes and ends the session
 await client.disconnect()
 
-// Selective disconnect -- revokes only Solana, keeps EVM scopes active
+// Selective disconnect — revokes only Solana, keeps EVM scopes active
 await client.disconnect(['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'])
 ```
 

@@ -8,7 +8,7 @@ keywords: [connect, MetaMask, Embedded Wallets, SDK, dapp, Wallet SDK, web3auth 
 
 :::info Heads up
 Looks like you've landed on a guide that still uses the MetaMask legacy SDK (`@metamask/sdk`).
-The MetaMask Connect integration for this library is on its way -- once ready, it will be linked
+The MetaMask Connect integration for this library is on its way — once ready, it will be linked
 from the sidebar navigation. In the meantime, this guide is still perfectly valid if you're using
 MetaMask SDK.
 :::

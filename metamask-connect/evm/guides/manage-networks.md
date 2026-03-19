@@ -29,7 +29,7 @@ With MetaMask Connect EVM:
 ## Detect and switch networks
 
 With Vanilla JavaScript, implement network management directly using the
-[`eth_chainId`](../reference/json-rpc-api/index.md) RPC method and
+[`eth_chainId`](../reference/json-rpc-api/eth_chainId.mdx) RPC method and
 [`chainChanged`](../reference/provider-api.md#chainchanged) provider event.
 
 With Wagmi, use the provided hooks for several network-related operations.
@@ -79,8 +79,8 @@ provider.on('chainChanged', chainId => {
 ```
 
 Switch networks using the
-[`wallet_switchEthereumChain`](../reference/json-rpc-api/index.md)
-and [`wallet_addEthereumChain`](../reference/json-rpc-api/index.md)
+[`wallet_switchEthereumChain`](../reference/json-rpc-api/wallet_switchEthereumChain.mdx)
+and [`wallet_addEthereumChain`](../reference/json-rpc-api/wallet_addEthereumChain.mdx)
 RPC methods:
 
 ```javascript
@@ -237,7 +237,7 @@ The following table lists common network management errors and their codes:
 
 | Error code | Description             | Solution                                                                                         |
 | ---------- | ----------------------- | ------------------------------------------------------------------------------------------------ |
-| `4902`     | Network not added       | Use [`wallet_addEthereumChain`](../reference/json-rpc-api/index.md) to add the network first. |
+| `4902`     | Network not added       | Use [`wallet_addEthereumChain`](../reference/json-rpc-api/wallet_addEthereumChain.mdx) to add the network first. |
 | `4001`     | User rejected request   | Show a message asking the user to approve the network switch.                                    |
 | `-32002`   | Request already pending | Disable the switch network button while the request is pending.                                  |
 

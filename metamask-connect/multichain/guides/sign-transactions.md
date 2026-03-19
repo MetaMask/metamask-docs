@@ -42,7 +42,7 @@ await client.connect(
 
 ## Sign an EVM message (`personal_sign`)
 
-Use [`invokeMethod`](../reference/methods.md#invokemethod) with `personal_sign` to sign a plaintext message.
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with [`personal_sign`](../../evm/reference/json-rpc-api/personal_sign.mdx) to sign a plaintext message.
 The message must be hex-encoded, and the params order is `[message, account]`:
 
 ```javascript
@@ -67,7 +67,7 @@ Target a different chain by changing the `scope` — for example, `eip155:137` f
 
 ## Sign EVM typed data (`eth_signTypedData_v4`)
 
-Use `eth_signTypedData_v4` to sign [EIP-712](https://eips.ethereum.org/EIPS/eip-712) structured data.
+Use [`eth_signTypedData_v4`](../../evm/reference/json-rpc-api/eth_signTypedData_v4.mdx) to sign [EIP-712](https://eips.ethereum.org/EIPS/eip-712) structured data.
 The params order is `[account, typedDataJSON]` — the typed data must be passed as a JSON string, not an object:
 
 ```javascript
@@ -116,7 +116,7 @@ Chain IDs in the typed data `domain.chainId` are integers (for example, `1`), no
 
 ## Sign a Solana message (`solana_signMessage`)
 
-Use `invokeMethod` with `solana_signMessage` to sign an arbitrary message on Solana.
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with `solana_signMessage` to sign an arbitrary message on Solana.
 The message must be base64-encoded:
 
 ```javascript

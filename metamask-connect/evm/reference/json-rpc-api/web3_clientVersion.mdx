@@ -1,0 +1,29 @@
+---
+title: web3_clientVersion
+sidebar_label: web3_clientVersion
+description: Returns the current MetaMask client version. This differs slightly per client. For example, the browser extension returns a string like `MetaMask/v10.33.1`, while the mobile app returns a string like `MetaMask/8.1.2/Mobile`.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["web3_clientVersion", "Ethereum", "Multichain"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="web3_clientVersion"
+  description="Returns the current MetaMask client version. This differs slightly per client. For example, the browser extension returns a string like `MetaMask/v10.33.1`, while the mobile app returns a string like `MetaMask/8.1.2/Mobile`."
+  parameters={[]}
+  returns={{
+  type: "string",
+  description: "The current client version."
+}}
+  exampleRequest={`await provider.request({
+    method: "web3_clientVersion",
+    params: []
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "MetaMask/v10.33.1"
+}`}
+/>
