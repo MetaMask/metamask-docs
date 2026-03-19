@@ -81,7 +81,7 @@ internally by MetaMask.
 
 Restricted methods are methods that cannot be called unless you have permission to do so using
 [`wallet_requestPermissions`](/wallet/reference/json-rpc-methods/wallet_requestpermissions) or
-[`wallet_requestSnaps`](/snaps/reference/wallet-api-for-snaps/#wallet_requestsnaps).
+[`wallet_requestSnaps`](/snaps/reference/snaps-api/wallet_requestsnaps).
 
 The following methods are restricted:
 
@@ -97,10 +97,10 @@ The following methods are restricted:
   See [how to access a user's accounts](../how-to/access-accounts.md) for more information.
   :::
 
-- [`wallet_snap`](/snaps/reference/wallet-api-for-snaps/#wallet_snap) - Gaining permission requires
+- [`wallet_snap`](/snaps/reference/snaps-api/wallet_snap) - Gaining permission requires
   calling `wallet_requestSnap`.
 
-- [`wallet_invokeSnap`](/snaps/reference/wallet-api-for-snaps/#wallet_invokesnap) - Gaining
+- [`wallet_invokeSnap`](/snaps/reference/snaps-api/wallet_invokesnap) - Gaining
   permission requires calling `wallet_requestSnap`.
 
 ### Unrestricted methods

@@ -12,12 +12,12 @@ Snaps, dapps, and MetaMask can communicate with each other using the [Snaps API]
 ## Snaps API
 
 Snaps can access the global object `snap`, which has one method: `request`.
-You can use this object to make [Snaps API](../../reference/snaps-api.md) requests.
+You can use this object to make [Snaps API](../../reference/snaps-api/index.md) requests.
 These API methods allow Snaps to extend or modify the functionality of MetaMask.
 
-To call each method (except the [interactive UI methods](../../reference/snaps-api.md#interactive-ui-methods)),
+To call each method (except the [interactive UI methods](../../features/custom-ui/interactive-ui.md)),
 you must first [request permission](../../how-to/request-permissions.md) in the Snap manifest file.
-For example, to call [`snap_notify`](../../reference/snaps-api.md#snap_notify), first request the
+For example, to call [`snap_notify`](../../reference/snaps-api/snap_notify.mdx), first request the
 `snap_notify` permission:
 
 ```json title="snap.manifest.json"
@@ -43,15 +43,15 @@ await snap.request({
 ### Dapp requests
 
 Dapps can install and communicate with Snaps using the following
-[Wallet API methods for Snaps](../../reference/wallet-api-for-snaps.md):
+Wallet API methods for Snaps:
 
-- [`wallet_getSnaps`](../../reference/wallet-api-for-snaps.md#wallet_getsnaps) - Gets the dapp's
+- [`wallet_getSnaps`](../../reference/snaps-api/wallet_getsnaps.mdx) - Gets the dapp's
   permitted Snaps.
-- [`wallet_requestSnaps`](../../reference/wallet-api-for-snaps.md#wallet_requestsnaps) - Requests
+- [`wallet_requestSnaps`](../../reference/snaps-api/wallet_requestsnaps.mdx) - Requests
   permission to communicate with the specified Snaps.
-- [`wallet_snap`](../../reference/wallet-api-for-snaps.md#wallet_snap) - (Restricted) Calls the
+- [`wallet_snap`](../../reference/snaps-api/wallet_snap.mdx) - (Restricted) Calls the
   specified custom JSON-RPC API method of the specified Snap.
-- [`wallet_invokeSnap`](../../reference/wallet-api-for-snaps.md#wallet_invokesnap) - (Restricted)
+- [`wallet_invokeSnap`](../../reference/snaps-api/wallet_invokesnap.mdx) - (Restricted)
   Synonymous with `wallet_snap`.
 
 A dapp must first [request permission](../../how-to/request-permissions.md#request-permissions-from-a-dapp)
