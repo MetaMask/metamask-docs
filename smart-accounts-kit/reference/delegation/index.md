@@ -340,7 +340,6 @@ Encodes the calldata to enable a disabled delegation.
 
 ```ts
 import { DelegationManager } from "@metamask/smart-accounts-kit/contracts";
-import { delegation } from "./delegation.ts";
 
 const enableDelegationData = DelegationManager.encode.enableDelegation({
   delegation, // Already disbaled delegation.
