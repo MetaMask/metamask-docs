@@ -1,13 +1,13 @@
 ---
 description: How to resolve the InvalidDelegate error when redeeming delegations.
 sidebar_label: Invalid delegate
+toc_max_heading_level: 2
 keywords: [InvalidDelegate, error code, delegation, troubleshooting]
 ---
 
 # Invalid delegate
 
 The Delegation Manager reverts with `InvalidDelegate()` in the following two cases.
-
 
 ## Account is not the delegate
 

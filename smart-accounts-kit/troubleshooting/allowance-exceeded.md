@@ -1,6 +1,7 @@
 ---
 description: How to resolve allowance exceeded errors when redeeming delegations.
 sidebar_label: Allowance exceeded
+toc_max_heading_level: 2
 keywords: [allowance, allowance exceeded, erc20 transfer amount exceeded, spending limit, troubleshooting]
 ---
 

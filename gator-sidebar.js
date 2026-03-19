@@ -214,9 +214,11 @@ const sidebar = {
       label: 'Troubleshooting',
       collapsed: true,
       items: [
+        'troubleshooting/aa21-prefund',
         'troubleshooting/allowance-exceeded',
         'troubleshooting/error-codes',
-        'troubleshooting/invalid-delegate'
+        'troubleshooting/invalid-delegate',
+        'troubleshooting/invalid-signature',
       ],
     },
   ],
