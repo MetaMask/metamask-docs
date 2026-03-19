@@ -186,11 +186,116 @@ export const ConnectButton = () => {
 
 After adding the connect button, test your dapp by running `pnpm run dev`.
 
+## Common operations
+
+### Switch chains
+
+Use `useSwitchChain` and `useChainId` to let users switch between your configured chains:
+
+```tsx
+import { useSwitchChain, useChainId } from 'wagmi'
+
+function ChainSwitcher() {
+  const chainId = useChainId()
+  const { chains, switchChain } = useSwitchChain()
+
+  return (
+    <div>
+      {chains.map(chain => (
+        <button
+          key={chain.id}
+          disabled={chainId === chain.id}
+          onClick={() => switchChain({ chainId: chain.id })}>
+          {chain.name}
+        </button>
+      ))}
+    </div>
+  )
+}
+```
+
+### Sign a message
+
+Use `useSignMessage` to request a `personal_sign` signature from the connected wallet:
+
+```tsx
+import { useSignMessage } from 'wagmi'
+
+function SignMessage() {
+  const { data: signature, signMessage, isPending } = useSignMessage()
+
+  return (
+    <div>
+      <button disabled={isPending} onClick={() => signMessage({ message: 'Hello from my dapp!' })}>
+        Sign Message
+      </button>
+      {signature && <p>Signature: {signature}</p>}
+    </div>
+  )
+}
+```
+
+### Send a transaction
+
+Use `useSendTransaction` and `useWaitForTransactionReceipt` to send ETH and track confirmation:
+
+```tsx
+import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi'
+import { parseEther } from 'viem'
+
+function SendTransaction() {
+  const { data: hash, sendTransaction, isPending } = useSendTransaction()
+  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash })
+
+  return (
+    <div>
+      <button
+        disabled={isPending}
+        onClick={() =>
+          sendTransaction({
+            to: '0xRecipientAddress',
+            value: parseEther('0.01'),
+          })
+        }>
+        {isPending ? 'Sending...' : 'Send 0.01 ETH'}
+      </button>
+      {isConfirming && <p>Confirming...</p>}
+      {isSuccess && <p>Confirmed! Hash: {hash}</p>}
+    </div>
+  )
+}
+```
+
+### Connect and sign
+
+Use the `connectAndSign` connector option to connect and prompt the user to sign a message in a single approval:
+
+```jsx
+metaMask({
+  dapp: { name: 'My Dapp', url: window.location.origin },
+  connectAndSign: 'By signing, you agree to our Terms of Service.',
+})
+```
+
+### Connect and execute
+
+Use the `connectWith` connector option to connect and execute any RPC method in a single approval:
+
+```jsx
+metaMask({
+  dapp: { name: 'My Dapp', url: window.location.origin },
+  connectWith: {
+    method: 'eth_signTypedData_v4',
+    params: [address, JSON.stringify(typedData)],
+  },
+})
+```
+
 ## Production readiness
 
 :::tip
 For production deployments, use reliable RPC providers instead of public nodes.
-We recommend using services like [MetaMask Developer](https://developer.metamask.io/) to ensure better reliability and performance.
+We recommend using services like [Infura](https://developer.metamask.io/) to ensure better reliability and performance.
 See the [production readiness checklist](../guides/best-practices/production-readiness.md) for more details.
 :::
 
@@ -202,7 +307,7 @@ If you previously used `@metamask/sdk` with wagmi, the MetaMask connector now us
 
    ```bash npm2yarn
    npm uninstall @metamask/sdk
-   npm install @metamask/connect-evm@~0.8.0
+   npm install @metamask/connect-evm
    ```
 
 2. Update connector options:
@@ -227,6 +332,7 @@ After completing the basic setup, follow these guides to add your own functional
 - [Manage user accounts](../guides/manage-user-accounts.md)
 - [Manage networks](../guides/manage-networks.md)
 - [Send transactions](../guides/send-transactions/index.md)
+- [Sign data](../guides/sign-data/index.md)
 - [Interact with smart contracts](../guides/interact-with-contracts.md)
 
 <!-- ## Live example

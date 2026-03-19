@@ -63,6 +63,11 @@ title: 'JavaScript',
 description: 'Set up MetaMask Connect EVM in a JavaScript dapp.',
 },
 {
+href: '/metamask-connect/evm/quickstart/wagmi',
+title: 'Wagmi',
+description: 'Set up MetaMask Connect EVM in a React and Wagmi dapp.',
+},
+{
 href: '/metamask-connect/evm/quickstart/react-native',
 title: 'React Native',
 description: 'Set up MetaMask Connect EVM in a React Native or Expo dapp.',
