@@ -28,8 +28,8 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
   type: "object",
   description: "An object specifying the status of the `atomic` capability for specific [EIP-155](https://eips.ethereum.org/EIPS/eip-155) chain IDs. For each chain, the `atomic` capability can have a `status` of: <br> <ul>   <li>`supported` - The wallet will execute calls sent using         `wallet_sendCalls` atomically.</li>   <li>`ready` - The wallet can upgrade to `supported` pending user           approval to upgrade their account via EIP-7702.</li> </ul> If the `atomic` capability is not `supported` or `ready` for a specified chain ID, the wallet will not return anything for that chain ID."
 }}
-  errors={[{ code: "", message: "", description: "" },
-  { code: "", message: "", description: "" }]}
+  errors={[{ code: "-32602", message: "", description: "The wallet cannot parse the request." },
+  { code: "4100", message: "", description: "The requested account and/or method has not been authorized by the user." }]}
   exampleRequest={`await provider.request({
     method: "wallet_getCapabilities",
     params: [

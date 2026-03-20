@@ -17,7 +17,7 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
   type: "array",
   description: "An array of Ethereum addresses that the user has authorized the dapp to access."
 }}
-  errors={[{ code: "", message: "", description: "" }]}
+  errors={[{ code: "4001", message: "", description: "User rejected the request." }]}
   exampleRequest={`await provider.request({
     method: "eth_requestAccounts",
     params: []
