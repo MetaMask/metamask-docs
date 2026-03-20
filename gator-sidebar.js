@@ -209,6 +209,16 @@ const sidebar = {
         'reference/types',
       ],
     },
+    {
+      type: 'category',
+      label: 'Troubleshooting',
+      collapsed: true,
+      items: [
+        'troubleshooting/error-codes',
+        'troubleshooting/invalid-delegate',
+        'troubleshooting/aa21-prefund',
+      ],
+    },
   ],
 }
 
