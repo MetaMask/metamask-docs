@@ -58,7 +58,7 @@ const solanaClient = await createSolanaClient({
 ```
 
 :::info Asynchronous client
-`createSolanaClient` returns a promise. Always `await` it before using the client.
+[`createSolanaClient`](../reference/methods.md#createsolanaclient) returns a promise. Always `await` it before using the client.
 The client uses a singleton multichain core under the hood — calling it multiple times
 returns the same underlying session.
 :::
@@ -79,7 +79,7 @@ console.log('Connected Solana address:', address)
 
 ### 4. Sign a message
 
-Use `invokeMethod` to call the `signMessage` method on the Solana scope:
+Use [`invokeMethod`](../../multichain/reference/methods.md#invokemethod) to call the `signMessage` method on the Solana scope:
 
 ```javascript
 const message = Buffer.from('Hello from Node.js!', 'utf8').toString('base64')
@@ -106,7 +106,7 @@ console.log('Disconnected')
 
 ## Listen for session events
 
-Use the `wallet_sessionChanged` event on the multichain core to track session state:
+Use the [`wallet_sessionChanged`](../../multichain/reference/api.md#wallet_sessionchanged) event on the multichain core to track session state:
 
 ```javascript
 solanaClient.core.on('wallet_sessionChanged', (session) => {

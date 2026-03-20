@@ -101,7 +101,7 @@ const txSignature = await connection.sendRawTransaction(signedTransaction)
 
 Create an [Address Lookup Table (ALT)](https://solana.com/developers/guides/advanced/lookup-tables) to efficiently load addresses into tables, significantly increasing the number of addresses that can be used in a single transaction.
 
-Use the [createLookupTable](https://solana-foundation.github.io/solana-web3.js/classes/AddressLookupTableProgram.html#createlookuptable) method to create the instruction needed to create a new ALT and determine its address.
+Use the [`createLookupTable`](https://solana-foundation.github.io/solana-web3.js/classes/AddressLookupTableProgram.html#createlookuptable) method to create the instruction needed to create a new ALT and determine its address.
 With this instruction, create a transaction, sign it, and send it to create an ALT onchain.
 For example:
 
@@ -133,7 +133,7 @@ const [{ signature: lookupSignature }] = await wallet.features['solana:signAndSe
 ## Extend an Address Lookup Table
 
 After creating an ALT, extend it by appending addresses to the table.
-Use the [extendLookupTable](https://solana-foundation.github.io/solana-web3.js/classes/AddressLookupTableProgram.html#extendlookuptable) method to create a new extend instruction, and send it in a transaction.
+Use the [`extendLookupTable`](https://solana-foundation.github.io/solana-web3.js/classes/AddressLookupTableProgram.html#extendlookuptable) method to create a new extend instruction, and send it in a transaction.
 For example:
 
 ```typescript

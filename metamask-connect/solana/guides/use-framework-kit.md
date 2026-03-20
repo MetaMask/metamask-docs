@@ -85,7 +85,7 @@ export default function RootLayout({
 
 ### 4. Connect to MetaMask
 
-Use the `useWalletConnection` hook in any component to connect to the user's wallet:
+Use the [`useWalletConnection`](https://www.framework-kit.com/docs/react-hooks#usewalletconnection) hook in any component to connect to the user's wallet:
 
 ```typescript
 import { useWalletConnection } from "@solana/react-hooks";

@@ -82,7 +82,7 @@ export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
 };
 ```
 
-Calling `createSolanaClient()` registers MetaMask with the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) registry, so MetaMask appears as a connection option in the wallet modal — even if the user doesn't have MetaMask installed.
+Calling [`createSolanaClient()`](../reference/methods.md#createsolanaclient) registers MetaMask with the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) registry, so MetaMask appears as a connection option in the wallet modal — even if the user doesn't have MetaMask installed.
 
 ### 3. Add the provider to your root layout
 
@@ -110,7 +110,7 @@ export default function RootLayout({
 
 ### 4. Add a connect button
 
-Use the Wallet Adapter's `WalletMultiButton` component to add a connect button to your dapp:
+Use the Wallet Adapter's [`WalletMultiButton`](https://github.com/anza-xyz/wallet-adapter/blob/master/packages/ui/react-ui/src/WalletMultiButton.tsx) component to add a connect button to your dapp:
 
 ```typescript title='components/ConnectWallet.tsx'
 'use client';

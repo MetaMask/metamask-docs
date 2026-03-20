@@ -117,7 +117,7 @@ const solanaClient = await createSolanaClient({
 ```
 
 :::info
-`createSolanaClient` is asynchronous and uses a singleton multichain core under the hood.
+[`createSolanaClient`](../reference/methods.md#createsolanaclient) is asynchronous and uses a singleton multichain core under the hood.
 Calling it multiple times returns the same underlying session, so you can safely call it during
 initialization without worrying about duplicate connections.
 :::
@@ -144,9 +144,9 @@ The client handles cross-platform connection (desktop and mobile), including dee
 
 | Method             | Description                                                                          |
 | ------------------ | ------------------------------------------------------------------------------------ |
-| `getWallet()`      | Returns a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet instance |
-| `registerWallet()` | Registers MetaMask with the Wallet Standard registry (no-op if auto-registered)      |
-| `disconnect()`     | Disconnects Solana scopes without terminating the broader multichain session          |
+| [`getWallet()`](../reference/methods.md#getwallet)      | Returns a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet instance |
+| [`registerWallet()`](../reference/methods.md#registerwallet) | Registers MetaMask with the Wallet Standard registry (no-op if auto-registered)      |
+| [`disconnect()`](../reference/methods.md#disconnect)    | Disconnects Solana scopes without terminating the broader multichain session          |
 
 ## Usage example
 

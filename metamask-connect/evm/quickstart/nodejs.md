@@ -56,14 +56,14 @@ const evmClient = await createEVMClient({
 })
 ```
 
-:::info `createEVMClient` is async
+:::info Asynchronous client
 `createEVMClient` returns a promise. Always `await` it before using the client.
 The client is a **singleton** — calling `createEVMClient` again returns the same instance.
 :::
 
 ### 3. Connect to MetaMask
 
-Call `connect()` to start the connection flow.
+Call [`connect()`](../reference/methods.md#connect) to start the connection flow.
 A QR code appears in the terminal — scan it with the MetaMask mobile app:
 
 ```javascript
@@ -100,7 +100,7 @@ console.log('Balance (wei):', balance)
 
 ### 5. Sign a message
 
-Use `personal_sign` to request a signature from the connected wallet:
+Use [`personal_sign`](../reference/json-rpc-api/personal_sign.mdx) to request a signature from the connected wallet:
 
 ```javascript
 const message = '0x' + Buffer.from('Hello from Node.js!', 'utf8').toString('hex')

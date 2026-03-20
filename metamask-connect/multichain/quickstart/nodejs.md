@@ -85,7 +85,7 @@ The user sees a single approval prompt for all requested chains.
 
 ### 4. Invoke EVM methods
 
-Use `invokeMethod` with an EVM scope to make JSON-RPC requests.
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with an EVM scope to make JSON-RPC requests.
 Read methods route through the RPC node; signing methods route through the wallet:
 
 ```javascript
@@ -115,7 +115,7 @@ console.log('ETH signature:', signature)
 
 ### 5. Invoke Solana methods
 
-Use `invokeMethod` with a Solana scope. All Solana methods route through the wallet:
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with a Solana scope. All Solana methods route through the wallet:
 
 ```javascript
 const solAddress = solAccounts[0]?.split(':').pop()
@@ -147,7 +147,7 @@ console.log('Disconnected')
 
 ## Listen for session events
 
-Register event listeners before calling `connect()` to track session changes:
+Register event listeners before calling [`connect()`](../reference/methods.md#connect) to track session changes:
 
 ```javascript
 client.on('wallet_sessionChanged', (session) => {
