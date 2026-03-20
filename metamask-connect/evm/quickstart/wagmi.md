@@ -21,14 +21,14 @@ keywords:
   ]
 ---
 
-# Connect to MetaMask using Wagmi
+# Connect to EVM - Wagmi quickstart
 
 Get started with MetaMask Connect EVM in a React and Wagmi dapp.
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
 :::tip Migrating from @metamask/sdk?
 If you are upgrading an existing wagmi project that used `@metamask/sdk`, see the
-[wagmi connector migration reference](#migrate-from-metamasksdk) at the bottom of this page
+[Wagmi connector migration reference](#migrate-from-metamasksdk) at the bottom of this page
 for a parameter mapping table.
 :::
 
@@ -301,7 +301,7 @@ See the [production readiness checklist](../guides/best-practices/production-rea
 
 ## Migrate from `@metamask/sdk` {#migrate-from-metamasksdk}
 
-If you previously used `@metamask/sdk` with wagmi, the MetaMask connector now uses `@metamask/connect-evm` under the hood. Update your dependencies and connector configuration:
+If you previously used `@metamask/sdk` with Wagmi, the MetaMask connector now uses `@metamask/connect-evm` under the hood. Update your dependencies and connector configuration:
 
 1. Replace `@metamask/sdk` with `@metamask/connect-evm`:
 
@@ -321,9 +321,9 @@ If you previously used `@metamask/sdk` with wagmi, the MetaMask connector now us
    | `forceDeleteProvider`           | _(removed)_                             | Not needed with new SDK                       |
    | `forceInjectProvider`           | _(removed)_                             | Not needed with new SDK                       |
    | `injectProvider`                | _(removed)_                             | Not needed with new SDK                       |
-   | `readonlyRPCMap`                | _(auto-configured)_                     | Built automatically from wagmi's chain config |
+   | `readonlyRPCMap`                | _(auto-configured)_                     | Built automatically from Wagmi's chain config |
 
-For non-wagmi migration details, see the full [migration guide](../guides/migrate-from-sdk.md).
+For non-Wagmi migration details, see the full [migration guide](../guides/migrate-from-sdk.md).
 
 ## Next steps
 
