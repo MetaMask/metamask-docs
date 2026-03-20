@@ -49,5 +49,5 @@ export const DTKQuickStartSourceCode = {
 }
 
 export const MMSDKQuickStartSourceCode = {
-  REACT: 'https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/react',
+  REACT: 'https://github.com/MetaMask/metamask-connect-examples/tree/main/quickstarts/evm/react',
 }
