@@ -5,8 +5,8 @@
   "license": "(MIT OR Apache-2.0)",
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start -p 3003",
-    "build": "docusaurus build",
+    "start": "docusaurus snaps:generate && docusaurus start -p 3003",
+    "build": "docusaurus snaps:generate && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

@@ -16,9 +16,9 @@ Snaps and dapps follow the [EIP-2255 wallet permissions specification](https://e
 
 ### Snaps API methods
 
-Request permission to call [Snaps API methods](../reference/snaps-api.md) in the
+Request permission to call [Snaps API methods](../reference/snaps-api/index.md) in the
 `initialPermissions` field of the Snap [manifest file](../learn/about-snaps/files.md#manifest-file).
-For example, to request to call [`snap_dialog`](../reference/snaps-api.md#snap_dialog), add the
+For example, to request to call [`snap_dialog`](../reference/snaps-api/snap_dialog.mdx), add the
 following to the manifest file:
 
 ```json title="snap.manifest.json"
@@ -32,9 +32,9 @@ following to the manifest file:
 All Snaps API methods except the following interactive UI methods require requesting permission in
 the manifest file:
 
-- [`snap_createInterface`](../reference/snaps-api.md#snap_createinterface)
-- [`snap_getInterfaceState`](../reference/snaps-api.md#snap_getinterfacestate)
-- [`snap_updateInterface`](../reference/snaps-api.md#snap_updateinterface)
+- [`snap_createInterface`](../reference/snaps-api/snap_createinterface.mdx)
+- [`snap_getInterfaceState`](../reference/snaps-api/snap_getinterfacestate.mdx)
+- [`snap_updateInterface`](../reference/snaps-api/snap_updateinterface.mdx)
 
 :::
 
@@ -65,10 +65,10 @@ See the [`eth_accounts` dynamic permission](../reference/permissions.md#eth_acco
 
 ## Request permissions from a dapp
 
-Dapps that communicate with Snaps using [`wallet_snap`](../reference/wallet-api-for-snaps.md#wallet_snap)
-or [`wallet_invokeSnap`](../reference/wallet-api-for-snaps.md#wallet_invokesnap) must request
+Dapps that communicate with Snaps using [`wallet_snap`](../reference/snaps-api/wallet_snap.mdx)
+or [`wallet_invokeSnap`](../reference/snaps-api/wallet_invokesnap.mdx) must request
 permission to do so by calling
-[`wallet_requestSnaps`](../reference/wallet-api-for-snaps.md#wallet_requestsnaps) first.
+[`wallet_requestSnaps`](../reference/snaps-api/wallet_requestsnaps.mdx) first.
 
 The following example calls `wallet_requestSnaps` to request permission to connect to the
 `hello-snap` Snap, then calls `wallet_invokeSnap` to invoke the `hello` JSON-RPC method exposed by the Snap:

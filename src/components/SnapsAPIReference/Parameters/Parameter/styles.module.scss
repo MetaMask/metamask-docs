@@ -1,0 +1,18 @@
+.parameter, .root {
+  display: block;
+}
+
+.parameter-main {
+  margin-bottom: 0.8rem;
+}
+
+.parameter-children {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-left: 1.2rem;
+}
+
+.parameter-separator {
+  font-style: italic;
+}

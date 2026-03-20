@@ -1,0 +1,10 @@
+import Example from './Example/index.mdx';
+
+{props.method.examples.length === 1 ? <h2>Example</h2> : <h2>Examples</h2>}
+
+{Array.isArray(props.method.examples) ?
+  props.method.examples.map((example, index) => (
+    <Example key={index} index={index + 1} example={example} only={props.method.examples.length === 1} />
+  ))
+  : <Example index={1} example={props.method.examples} only={true} />
+}
