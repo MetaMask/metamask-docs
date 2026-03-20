@@ -62,7 +62,7 @@ Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and
     <summary>Using React?</summary>
     <div>
 
-   If you're building with React, try the [interactive React quickstart](/quickstart) instead.
+   If you're building with React, try the [interactive React quickstart](/quickstart/?product=METAMASK_CONNECT&ecosystem=EVM&framework=REACT&stepIndex=0) instead.
    It walks you through connecting, signing, sending transactions, and switching chains with a live
    code preview alongside each step.
 
