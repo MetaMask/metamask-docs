@@ -60,7 +60,18 @@ module.exports = (context, options) => ({
   },
   async contentLoaded({ content, actions }) {
     const { createData, addRoute, setGlobalData } = actions
-    setGlobalData(content)
+
+    // Only expose the explicitly opted-in keys as global data (loaded on every page).
+    // All other files are served as per-route modules via addRoute below.
+    const globalDataKeys = options.globalDataKeys ?? []
+    const globalDataSubset = {}
+    for (const shortKey of globalDataKeys) {
+      const filename = qsFileLinks[shortKey]
+      if (filename !== undefined && content[filename] !== undefined) {
+        globalDataSubset[filename] = content[filename]
+      }
+    }
+    setGlobalData(globalDataSubset)
 
     // Create JSON data file
     const files = await createData('files.json', JSON.stringify(content))
@@ -91,6 +102,7 @@ module.exports.validateOptions = ({ options, validate }) =>
   validate(
     joi.object({
       rootDir: joi.string().required(),
+      globalDataKeys: joi.array().items(joi.string()).default([]),
     }),
     options
   )

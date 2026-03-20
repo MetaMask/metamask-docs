@@ -175,7 +175,7 @@ const config = {
     ],
   ],
   plugins: [
-    ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache' }],
+    ['./src/plugins/docusaurus-plugin-virtual-files', { rootDir: '.integrationBuilderCache', globalDataKeys: ['EW_AI_SKILL_MD'] }],
     './src/plugins/docusaurus-plugin-tutorials',
     'docusaurus-plugin-sass',
     './src/plugins/mm-scss-utils',
