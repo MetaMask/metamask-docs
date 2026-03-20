@@ -88,14 +88,10 @@ This action takes no parameters and returns a [`GetSupportedExecutionPermissions
 
 ### Example
 
-<Tabs>
-<TabItem value="example.ts">
+<Tabs defaultValue="example.ts">
+<TabItem value="response.ts">
 
 ```ts
-import { walletClient } from "./client.ts";
-
-const supportedPermissions = await walletClient.getSupportedExecutionPermissions();
-
 // Example response:
 // {
 //     "native-token-stream": {
@@ -108,6 +104,15 @@ const supportedPermissions = await walletClient.getSupportedExecutionPermissions
 //     },
 //     // ...
 // }
+```
+
+</TabItem>
+<TabItem value="example.ts">
+
+```ts
+import { walletClient } from "./client.ts";
+
+const supportedPermissions = await walletClient.getSupportedExecutionPermissions();
 ```
 
 </TabItem>
@@ -134,14 +139,10 @@ This action takes no parameters and returns a [`GetGrantedExecutionPermissionsRe
 
 ### Example
 
-<Tabs>
-<TabItem value="example.ts">
+<Tabs defaultValue="example.ts">
+<TabItem value="response.ts">
 
 ```ts
-import { walletClient } from "./client.ts";
-
-const grantedPermissions = await walletClient.getGrantedExecutionPermissions();
-
 // Example response:
 // [
 //   {
@@ -162,6 +163,16 @@ const grantedPermissions = await walletClient.getGrantedExecutionPermissions();
 //   },
 //   // ...
 // ]
+```
+
+</TabItem>
+
+<TabItem value="example.ts">
+
+```ts
+import { walletClient } from "./client.ts";
+
+const grantedPermissions = await walletClient.getGrantedExecutionPermissions();
 ```
 
 </TabItem>

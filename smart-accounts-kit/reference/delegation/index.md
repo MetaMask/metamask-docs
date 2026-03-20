@@ -342,7 +342,7 @@ Encodes the calldata to enable a disabled delegation.
 import { DelegationManager } from "@metamask/smart-accounts-kit/contracts";
 
 const enableDelegationData = DelegationManager.encode.enableDelegation({
-  delegation, // Already disbaled delegation.
+  delegation, // Already disabled delegation.
 });
 ```
 
