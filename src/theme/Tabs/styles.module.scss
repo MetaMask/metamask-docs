@@ -1,12 +1,25 @@
 .tabList {
   margin-bottom: var(--ifm-leading);
   padding: 0;
+  border-radius: var(--ifm-code-border-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
+  overflow: hidden;
+
+  // Prevent the code block inside a tab panel from adding its own card styling,
+  // since the outer .tabList container already provides the card appearance.
+  [role='tabpanel'] {
+    [class*='codeBlockContainer'] {
+      border-radius: 0;
+      box-shadow: none;
+      margin-bottom: 0;
+    }
+  }
 }
 
 .tabs {
   display: flex;
   gap: 0.8rem;
-  padding: 1.2rem;
+  padding: 1.2rem 2rem;
   border-bottom: 1px solid var(--ifm-color-emphasis-500);
   background-color: var(--prism-background-color);
   overflow-x: auto;
