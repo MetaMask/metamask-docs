@@ -35,13 +35,6 @@ const sidebar = {
             'get-started/use-scaffold-eth/advanced-permissions',
           ],
         },
-        {
-          type: "link",
-          label: "LLM context",
-          href: "https://docs.metamask.io/llms-smart-accounts-kit-full.txt"
-        },
-        'get-started/supported-networks',
-        'get-started/supported-advanced-permissions',
       ],
     },
     {
@@ -66,8 +59,8 @@ const sidebar = {
               link: { type: "doc", id: "guides/smart-accounts/signers/index" },
               collapsed: true,
               items: [
-                'guides/smart-accounts/signers/dynamic',
                 'guides/smart-accounts/signers/embedded-wallets',
+                'guides/smart-accounts/signers/dynamic',
                 'guides/smart-accounts/signers/eoa-wallets',
                 'guides/smart-accounts/signers/passkey',
                 'guides/smart-accounts/signers/privy',
@@ -116,7 +109,7 @@ const sidebar = {
                 'guides/advanced-permissions/use-permissions/native-token',
               ],
             },
-            'guides/advanced-permissions/get-granted-advanced-permissions',
+            'guides/advanced-permissions/get-granted-permissions',
             'guides/advanced-permissions/create-redelegation',
           ],
         },

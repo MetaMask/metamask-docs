@@ -7,17 +7,17 @@ keywords: [passkey, smart account, signer, metamask smart account]
 # Use a passkey with MetaMask Smart Accounts
 
 Passkeys eliminate the need for traditional seed phrases that are difficult to remember, enabling a more seamless 
-and secure way for users to access their Externally Owned Accounts (EOAs). Compared to traditional EOAs which use 
+and secure way for users to access their externally owned accounts (EOAs). Compared to traditional EOAs which use 
 secp256k1 elliptic curve to generate key pairs and signatures, a passkey-based EOA uses the 
 secp256r1 (P-256) elliptic curve.
 
-MetaMask Smart Accounts is signer agnostic and natively supports passkeys (P-256 elliptic curve signatures), so you can use a passkey as the signer.
+MetaMask Smart Accounts is signer-agnostic and natively supports passkeys (P-256 elliptic curve signatures), so you can use a passkey as the signer.
 
 ## Prerequisites
 
-- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later
+- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
+    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
  
 ## Steps
 

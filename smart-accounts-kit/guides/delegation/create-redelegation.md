@@ -20,8 +20,8 @@ chain where the root permissions are reshared with additional parties.
 
 ## Prerequisites
 
-- [Install and set up the Smart Accounts Kit](../../get-started/install.md)
-- [Learn how to create a delegation](execute-on-smart-accounts-behalf.md)
+- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
+- [Learn how to create a delegation.](execute-on-smart-accounts-behalf.md)
 
 ## Create a delegation
 
@@ -174,4 +174,4 @@ const signedRedelegation = await bobSmartAccount.signDelegation({ delegation: re
 
 ## Next steps
 
-- See [how to disable a delegation](disable-delegation.md) to revoke permissions.
+See [how to disable a delegation](disable-delegation.md) to revoke permissions.
