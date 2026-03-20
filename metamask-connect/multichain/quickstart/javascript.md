@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 
 Get started with MetaMask Connect Multichain in your JavaScript (Vite) dapp.
 
-[Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect Multichain](#set-up-manually) in an existing dapp.
+<!-- [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect Multichain](#set-up-manually) in an existing dapp. -->
 
 <!-- <p align="center">
   <a href="" target="_blank">
@@ -32,6 +32,7 @@ Get started with MetaMask Connect Multichain in your JavaScript (Vite) dapp.
 This quickstart uses [Vite](https://vite.dev/) as the build tool for convenience, but MetaMask Connect Multichain works with vanilla JavaScript or any build tool of your choice.
 :::
 
+<!--
 ## Set up using a template
 
 1. Download the [MetaMask Connect JavaScript (Vite) template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript):
@@ -88,8 +89,9 @@ This quickstart uses [Vite](https://vite.dev/) as the build tool for convenience
    ```
 
 You've successfully set up MetaMask Connect Multichain SDK.
+-->
 
-## Set up manually
+## Steps
 
 ### 1. Install MetaMask Connect Multichain
 

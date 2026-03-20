@@ -26,13 +26,13 @@ In Node.js, use the multichain core directly via `client.core.connect()` and
 
 ## Steps
 
-### 1. Install dependencies
+### 1. Install MetaMask Connect Solana
 
 ```bash npm2yarn
 npm install @metamask/connect-solana
 ```
 
-### 2. Initialize the Solana client
+### 2. Initialize MetaMask Connect Solana
 
 Create a file (for example, `index.mjs`) and initialize the client.
 In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly.

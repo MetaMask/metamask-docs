@@ -12,7 +12,9 @@ import TabItem from "@theme/TabItem";
 
 Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and connect to the MetaMask wallet in under 5 minutes. MetaMask Connect EVM provides an EIP-1193 provider that works with viem, ethers.js, and web3.js, handles cross-platform connections (desktop extension, mobile QR code, and deeplinks), and persists sessions across page reloads.
 
+<!--
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
+-->
 
 <!-- <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
@@ -27,6 +29,7 @@ Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
 - An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 
+<!--
 ## Set up using a template
 
 1. Download the [MetaMask Connect JavaScript template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript):
@@ -100,8 +103,9 @@ Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and
    ```
 
 You've successfully set up MetaMask Connect EVM.
+-->
 
-## Set up manually
+## Steps
 
 ### 1. Install MetaMask Connect EVM
 

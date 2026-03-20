@@ -24,7 +24,9 @@ polyfilling in browser or React Native environments.
 
 ## Steps
 
-### 1. Install dependencies
+### 1. Install MetaMask Connect EVM
+
+Install MetaMask Connect EVM and MetaMask Connect Multichain:
 
 ```bash npm2yarn
 npm install @metamask/connect-evm @metamask/connect-multichain
@@ -32,7 +34,7 @@ npm install @metamask/connect-evm @metamask/connect-multichain
 
 `@metamask/connect-multichain` provides the [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) helper for generating RPC URLs.
 
-### 2. Initialize the EVM client
+### 2. Initialize MetaMask Connect EVM
 
 Create a file (for example, `index.mjs`) and initialize the client.
 In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly:

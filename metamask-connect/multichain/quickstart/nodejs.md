@@ -25,13 +25,13 @@ polyfilling in browser or React Native environments.
 
 ## Steps
 
-### 1. Install dependencies
+### 1. Install MetaMask Connect Multichain
 
 ```bash npm2yarn
 npm install @metamask/connect-multichain
 ```
 
-### 2. Initialize the multichain client
+### 2. Initialize MetaMask Connect Multichain
 
 Create a file (for example, `index.mjs`) and initialize the client.
 In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly.
