@@ -19,8 +19,6 @@ keywords:
   ]
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
 import SkillContent from '@site/src/components/SkillContent'
 
 Speed up MetaMask Embedded Wallets integrations by giving your AI coding assistant access to the documentation and SDK reference information.
@@ -42,46 +40,41 @@ the docs alone. The Skill contains no code. The MCP server provides up-to-date c
 For the best experience, use the MCP server alongside the skill so that your LLM can fetch live docs and examples rather than relying on static text.
 :::
 
-<Tabs>
-<TabItem value="cursor-skill" label="Cursor" default>
+### Cursor
 
 Copy the skill into your project:
 
-```bash npm2yarn
+```bash
 npx degit Web3Auth/web3auth-mcp/skills/web3auth .cursor/skills/web3auth
 ```
 
 Cursor picks up any `SKILL.md` inside `.cursor/skills/` automatically and activates it when relevant.
 
-</TabItem>
-<TabItem value="claude-code-skill" label="Claude Code CLI">
+### Claude Code CLI
 
 Download the skill and append it to your project's `CLAUDE.md`:
 
-```bash npm2yarn
+```bash
 npx degit Web3Auth/web3auth-mcp/skills/web3auth /tmp/web3auth-skill
 cat /tmp/web3auth-skill/SKILL.md >> CLAUDE.md
 ```
 
-</TabItem>
-<TabItem value="claude-desktop-skill" label="Claude Desktop">
+### Claude Desktop
 
 Open **Claude Desktop → Settings → Custom Instructions** and paste the skill content below directly.
 
-</TabItem>
-<TabItem value="antigravity-skill" label="Antigravity">
+### Antigravity
 
 Copy the skill into your project:
 
-```bash npm2yarn
+```bash
 npx degit Web3Auth/web3auth-mcp/skills/web3auth .agent/skills/web3auth
 ```
 
 Antigravity picks up skills inside `.agent/skills/` automatically. For global installation across all
 projects, use `~/.gemini/antigravity/skills/` instead.
 
-</TabItem>
-<TabItem value="openclaw-skill" label="OpenClaw">
+### OpenClaw
 
 Open your agent's configuration in the OpenClaw dashboard and paste the skill content below into the
 **Custom Instructions** field.
@@ -96,13 +89,9 @@ For self-hosted instances, add it to your `openclaw.json`:
 }
 ```
 
-</TabItem>
-<TabItem value="other-skill" label="Other tools">
+### Other tools
 
 For any LLM tool with a system prompt or custom instructions field, paste the skill content below directly.
-
-</TabItem>
-</Tabs>
 
 <details>
 <summary><strong>View `SKILL.md` file</strong></summary>
@@ -126,8 +115,7 @@ assistant directly to the documentation. It provides five tools:
 | `get_sdk_reference` | Fetch SDK types and hooks from the open-source repos |
 | `search_community`  | Search the MetaMask Builder Hub for real user issues |
 
-<Tabs>
-<TabItem value="cursor" label="Cursor" default>
+### Cursor
 
 The fastest way is one click. Click the button below to install the MCP server in Cursor automatically:
 
@@ -154,8 +142,7 @@ Or add it manually. Open **Cursor Settings → Tools & Integrations → MCP** an
 }
 ```
 
-</TabItem>
-<TabItem value="claude-code" label="Claude Code CLI">
+### Claude Code CLI
 
 Run the following in your terminal:
 
@@ -175,8 +162,7 @@ Or add manually to your project's `claude.json`:
 }
 ```
 
-</TabItem>
-<TabItem value="claude-desktop" label="Claude Desktop">
+### Claude Desktop
 
 Open your Claude Desktop configuration file:
 
@@ -197,8 +183,7 @@ Add the server to the `mcpServers` section:
 
 Restart Claude Desktop and ask: _"Search MetaMask Embedded Wallets docs for React quick start"_ to verify the connection.
 
-</TabItem>
-<TabItem value="antigravity" label="Antigravity">
+### Antigravity
 
 Open your MCP configuration file:
 
@@ -217,14 +202,13 @@ Add the server to the `mcpServers` section:
 }
 ```
 
-Antigravity automatically reloads MCP configuration changes. You don’t need to restart it.
+Antigravity automatically reloads MCP configuration changes. You don't need to restart it.
 
-</TabItem>
-<TabItem value="codex" label="Codex CLI">
+### Codex CLI
 
 For Codex CLI or any stdio-only agent, use [mcp-remote](https://github.com/modelcontextprotocol/mcp-remote) to bridge the HTTP endpoint:
 
-```bash npm2yarn
+```bash
 npm install -g mcp-remote
 ```
 
@@ -241,9 +225,7 @@ Then add to your agent's configuration:
 }
 ```
 
-</TabItem>
-
-<TabItem value="openclaw" label="OpenClaw">
+### OpenClaw
 
 For managed instances, go to your **OpenClaw dashboard → Skills → Add custom skill** and enter the MCP
 server URL:
@@ -265,9 +247,6 @@ For self-hosted instances, add the server to your `openclaw.json`:
 ```
 
 OpenClaw hot-reloads config changes — no restart required.
-
-</TabItem>
-</Tabs>
 
 ---
 
