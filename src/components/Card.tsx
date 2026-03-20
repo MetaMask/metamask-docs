@@ -11,7 +11,7 @@ import Shape from '@site/static/img/shapes/intro-cards/shape.svg'
 import styles from './Card.module.scss'
 
 export type CardItem = {
-  title: string
+  title: string | ReactNode
   href: string
   description?: string | ReactNode
   theme?: string

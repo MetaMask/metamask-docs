@@ -95,6 +95,17 @@
   }
 }
 
+/* Override global `.type-heading-sm` (3rem on desktop) for homepage / product cards */
+.item-title:global(.type-heading-sm) {
+  font-size: 2.2rem;
+  line-height: 140%;
+
+  @include bp('desktop') {
+    font-size: 2.2rem;
+    line-height: 140%;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -126,6 +137,12 @@
 
 .item-description {
   font-size: 1.7rem;
+
+  /* Reset applies `font: inherit` to `strong`, which strips default bold */
+  strong {
+    font-weight: 600;
+  }
+
   @include bp(tablet) {
     max-width: 82%;
   }

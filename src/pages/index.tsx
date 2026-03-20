@@ -1,3 +1,4 @@
+import React from 'react'
 import Head from '@docusaurus/Head'
 import Layout from '@theme/Layout'
 import Hero from '@site/src/components/Hero/Hero'
@@ -63,36 +64,57 @@ export default function Home(): JSX.Element {
         cards={[
           {
             title: 'Connect to MetaMask',
-            description:
-              'Connect your dapp to the MetaMask browser extension and mobile app. Ideal for users who want full control over their keys and transactions.',
+            description: (
+              <>
+                Connect your dapp to the <strong>MetaMask browser extension and mobile app</strong>.
+                Ideal for users who want full control over their <strong>keys and transactions</strong>.
+              </>
+            ),
             href: '/sdk',
             buttonIcon: 'arrow-right',
           },
           {
             title: 'Create embedded wallets',
-            description:
-              'Onboard power users and first-time users in seconds via social logins, or by integrating your own authentication providers.',
+            description: (
+              <>
+                Onboard users to your dapp via <strong>social logins</strong>,
+                or by integrating your own <strong>authentication providers</strong>.
+                No seed phrases required.
+              </>
+            ),
             href: '/embedded-wallets',
             buttonIcon: 'arrow-right',
           },
           {
             title: 'Create smart accounts',
-            description:
-              'Create and interact with MetaMask Smart Accounts, unlocking new programmable account behaviors and granular permission sharing.',
+            description: (
+              <>
+                Create and interact with <strong>MetaMask Smart Accounts</strong>, unlocking new{' '}
+                <strong>programmable account behaviors</strong> and granular permission sharing.
+              </>
+            ),
             href: '/smart-accounts-kit',
             buttonIcon: 'arrow-right',
           },
           {
             title: 'Build and scale your dapp',
-            description:
-              'Use high performance APIs provided by MetaMask and Infura to build and scale your dapp or Snap.',
+            description: (
+              <>
+                Use <strong>high performance APIs</strong> provided by MetaMask and Infura to build
+                and scale your <strong>dapp or Snap</strong>.
+              </>
+            ),
             href: '/services',
             buttonIcon: 'arrow-right',
           },
           {
             title: 'Extend MetaMask',
-            description:
-              'Create a custom mini app that runs inside the MetaMask extension. Add support for custom networks, accounts types, and APIs.',
+            description: (
+              <>
+                Create a <strong>custom mini app (Snap)</strong> that runs inside the MetaMask extension. Add
+                support for <strong>custom networks</strong>, account types, and APIs.
+              </>
+            ),
             href: '/snaps',
             buttonIcon: 'arrow-right',
           },
