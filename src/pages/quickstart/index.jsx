@@ -21,10 +21,17 @@ import { METAMASK_CONNECT, EMBEDDED_WALLETS, YES, NO } from './builder/choices'
 import NavigationOverlay from './NavigationOverlay'
 import MediaStep from './MediaStep'
 
+const ALLOWED_OPTION_KEYS = new Set([
+  'product',
+  'framework',
+  'ecosystem',
+  'walletAggregatorOnly',
+  'stepIndex',
+])
+
 const hasRelevantURLParams = () => {
   const url = new URL(getWindowLocation())
-  const relevantParams = ['product', 'framework', 'ecosystem', 'walletAggregatorOnly']
-  return relevantParams.some(param => url.searchParams.has(param))
+  return [...ALLOWED_OPTION_KEYS].some(param => param !== 'stepIndex' && url.searchParams.has(param))
 }
 
 const validateURLParams = () => {
@@ -54,7 +61,9 @@ const getDefaultBuilderOptions = () => {
 
   const urlOpts = {}
   url.searchParams.forEach((value, key) => {
-    urlOpts[key] = value
+    if (ALLOWED_OPTION_KEYS.has(key)) {
+      urlOpts[key] = value
+    }
   })
 
   return { ...defaultOpts, ...urlOpts }
@@ -612,6 +621,7 @@ export default function IntegrationBuilderPage(props) {
   // };
 
   const onChangeDropdown = (optionKey, optionValue) => {
+    if (!ALLOWED_OPTION_KEYS.has(optionKey)) return
     setBuilderOptions({
       ...builderOptions,
       [optionKey]: optionValue,
