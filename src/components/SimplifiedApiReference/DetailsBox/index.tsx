@@ -48,7 +48,7 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
 }) => {
   return (
     <>
-      <Heading as="h1">{method}</Heading>
+      <Heading as="h1" className={styles.title}>{method}</Heading>
       
       {description && (
         <div className={styles.description}>
@@ -56,7 +56,7 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
         </div>
       )}
       
-      <Heading as="h2" className={styles.sectionHeading}>
+      <Heading as="h3" className={styles.sectionHeading}>
         Parameters
       </Heading>
       
@@ -84,7 +84,7 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
       
       {returns && (
         <>
-          <Heading as="h2" className={styles.sectionHeading}>
+          <Heading as="h3" className={styles.sectionHeading}>
             Returns
           </Heading>
           <div className={styles.paramContainer}>
@@ -97,7 +97,7 @@ const DetailsBox: React.FC<DetailsBoxProps> = ({
       
       {errors.length > 0 && (
         <>
-          <Heading as="h2" className={styles.sectionHeading}>
+          <Heading as="h3" className={styles.sectionHeading}>
             Errors
           </Heading>
           <div className={styles.paramContainer}>

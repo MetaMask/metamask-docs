@@ -25,7 +25,7 @@ import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
   type: "array",
   description: "An array of the user's permissions."
 }}
-  errors={[{ code: "", message: "", description: "" }]}
+  errors={[{ code: "4100", description: "User rejected the request." }]}
   exampleRequest={`await provider.request({
     method: "wallet_requestPermissions",
     params: [
