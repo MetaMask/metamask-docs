@@ -1,0 +1,29 @@
+---
+title: eth_blockNumber
+sidebar_label: eth_blockNumber
+description: Returns the number of most recent block.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_blockNumber"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_blockNumber"
+  description="Returns the number of most recent block."
+  parameters={[]}
+  returns={{
+  type: "string",
+  description: "hex encoded unsigned integer"
+}}
+  exampleRequest={`await provider.request({
+    method: "eth_blockNumber",
+    params: []
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x2377"
+}`}
+/>

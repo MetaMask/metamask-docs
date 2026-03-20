@@ -1,6 +1,6 @@
 ---
 title: 'MetaMask Connect Solana methods'
-description: Complete methods reference for MetaMask Connect Solana, including createSolanaClient configuration and wallet-standard features.
+description: Complete methods reference for MetaMask Connect Solana, including createSolanaClient, getInfuraRpcUrls, and wallet-standard features.
 keywords:
   [
     solana,
@@ -9,6 +9,7 @@ keywords:
     methods,
     dapp,
     createSolanaClient,
+    getInfuraRpcUrls,
     wallet-standard features,
     signTransaction,
     signMessage,
@@ -19,7 +20,7 @@ toc_max_heading_level: 2
 
 # MetaMask Connect Solana methods
 
-MetaMask Connect Solana (`@metamask/connect-solana`) provides `createSolanaClient()` to initialize the client, `getWallet()` to access Wallet Standard features (`signTransaction`, `signAndSendTransaction`, `signMessage`), and automatic Wallet Standard registration for compatibility with the Solana Wallet Adapter ecosystem. The client wraps `@metamask/connect-multichain` and handles wallet discovery and session management automatically.
+MetaMask Connect Solana (`@metamask/connect-solana`) provides `createSolanaClient()` to initialize the client, `getInfuraRpcUrls()` to generate Infura RPC endpoints for Solana networks, `getWallet()` to access Wallet Standard features (`signTransaction`, `signAndSendTransaction`, `signMessage`), and automatic Wallet Standard registration for compatibility with the Solana Wallet Adapter ecosystem. The client wraps `@metamask/connect-multichain` and handles wallet discovery and session management automatically.
 
 ## `createSolanaClient`
 
@@ -54,7 +55,7 @@ A promise that resolves to a [`SolanaClient`](#solanaclient) instance.
 ### Example
 
 ```javascript
-import { createSolanaClient } from '@metamask/connect-solana'
+import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
 
 const client = await createSolanaClient({
   dapp: {
@@ -62,11 +63,54 @@ const client = await createSolanaClient({
     url: 'https://mydapp.com',
   },
   api: {
-    supportedNetworks: {
-      mainnet: 'https://api.mainnet-beta.solana.com',
-      devnet: 'https://api.devnet.solana.com',
-    },
+    supportedNetworks: getInfuraRpcUrls({
+      infuraApiKey: 'YOUR_INFURA_API_KEY',
+      networks: ['mainnet', 'devnet'],
+    }),
   },
+})
+```
+
+## `getInfuraRpcUrls`
+
+Generates Solana Infura RPC URLs keyed by network name.
+The returned map can be passed directly to `createSolanaClient({ api: { supportedNetworks } })`.
+
+Under the hood, this delegates to the [multichain `getInfuraRpcUrls`](/metamask-connect/multichain/reference/methods#getinfurarpcurls), which maps CAIP-2 chain IDs to Infura endpoints, then translates the result back to Solana network names.
+
+:::note
+Each chain must be activated in your [Infura dashboard](https://developer.metamask.io/) before `getInfuraRpcUrls` can generate working URLs for it.
+:::
+
+### Parameters
+
+| Name           | Type              | Required | Description                                                        |
+| -------------- | ----------------- | -------- | ------------------------------------------------------------------ |
+| `infuraApiKey` | `string`          | Yes      | Your Infura API key.                                               |
+| `networks`     | `SolanaNetwork[]` | Yes      | Solana networks to include (for example, `['mainnet', 'devnet']`). |
+
+### Returns
+
+[`SolanaSupportedNetworks`](#solanasupportednetworks) — a map of network names to Infura RPC URLs.
+
+### Example
+
+```javascript
+import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
+
+// Each chain must be active in your Infura dashboard
+const supportedNetworks = getInfuraRpcUrls({
+  infuraApiKey: 'YOUR_INFURA_API_KEY',
+  networks: ['mainnet', 'devnet'],
+})
+// {
+//   mainnet: 'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+//   devnet: 'https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY',
+// }
+
+const client = await createSolanaClient({
+  dapp: { name: 'My Solana DApp', url: 'https://mydapp.com' },
+  api: { supportedNetworks },
 })
 ```
 

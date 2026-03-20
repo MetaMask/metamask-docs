@@ -44,7 +44,7 @@ This avoids breaking existing dapps that may have use cases for mismatched domai
 ## Example
 
 The following is an example of setting up SIWE with MetaMask using
-[`personal_sign`](../../reference/json-rpc-api/index.md):
+[`personal_sign`](../../reference/json-rpc-api/personal_sign.mdx):
 
 ```javascript title="index.js"
 import { createEVMClient } from '@metamask/connect-evm'
@@ -104,6 +104,6 @@ See the [live example](https://metamask.github.io/test-dapp/#siwe) and
 
 ## Next steps
 
-- [Sign data with personal_sign and eth_signTypedData_v4](./index.md)
-- [Manage user accounts](../manage-user-accounts.md)
-- [Ethereum provider API events and methods](../../reference/provider-api.md)
+- [Sign data](./index.md) with `personal_sign` and `eth_signTypedData_v4`.
+- [Manage user accounts.](../manage-user-accounts.md)
+- See [Ethereum provider API events and methods](../../reference/provider-api.md).

@@ -111,8 +111,7 @@
     padding-right: 0.5rem;
   }
 
-  p
-    + .codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Container-styles-module {
+  p + [class*='codeBlockContainer'] {
     margin-top: 1rem;
   }
 
@@ -188,7 +187,7 @@
       }
     }
 
-    .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
+    [class*='collapsibleContent'] {
       border-top: 1px solid var(--ifm-code-background);
       margin-top: 2rem;
       padding-top: 2rem;
@@ -210,7 +209,7 @@
     }
   }
 
-  .details_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module > summary {
+  [class*='details'] > summary {
     padding-left: 1.6rem;
     font-family: var(--ifm-heading-font-family);
     &::before {

@@ -8,7 +8,7 @@ keywords: [connect, MetaMask, Node.js, Solana, SDK, CLI, server-side, createSola
 # Connect to Solana - Node.js quickstart
 
 Get started with MetaMask Connect Solana in a Node.js application.
-The SDK displays a QR code in the terminal that you scan with MetaMask Mobile to establish a connection.
+The SDK displays a QR code in the terminal that you scan with the MetaMask mobile app to establish a connection.
 
 :::info Wallet Standard is browser-only
 [Wallet Standard](https://github.com/wallet-standard/wallet-standard) features (`getWallet()`,
@@ -21,25 +21,25 @@ In Node.js, use the multichain core directly via `client.core.connect()` and
 
 - [Node.js](https://nodejs.org/) version 20 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/installation).
-- [MetaMask Mobile](https://metamask.io/download/) installed on your phone.
+- The [MetaMask mobile app](https://metamask.io/download/) installed on your phone.
 - An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 
 ## Steps
 
-### 1. Install dependencies
+### 1. Install MetaMask Connect Solana
 
 ```bash npm2yarn
 npm install @metamask/connect-solana
 ```
 
-### 2. Initialize the Solana client
+### 2. Initialize MetaMask Connect Solana
 
 Create a file (for example, `index.mjs`) and initialize the client.
 In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly.
 The `supportedNetworks` map uses network names (`mainnet`, `devnet`) as keys:
 
 ```javascript title="index.mjs"
-import { createSolanaClient } from '@metamask/connect-solana'
+import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
 
 const SOLANA_MAINNET = 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
 
@@ -49,9 +49,10 @@ const solanaClient = await createSolanaClient({
     url: 'https://myapp.com',
   },
   api: {
-    supportedNetworks: {
-      mainnet: 'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-    },
+    supportedNetworks: getInfuraRpcUrls({
+      infuraApiKey: 'YOUR_INFURA_API_KEY',
+      networks: ['mainnet'],
+    }),
   },
 })
 ```
@@ -133,7 +134,7 @@ Production MetaMask only supports Solana mainnet.
 ## Full example
 
 ```javascript title="index.mjs"
-import { createSolanaClient } from '@metamask/connect-solana'
+import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
 
 const SOLANA_MAINNET = 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
 
@@ -143,13 +144,14 @@ const solanaClient = await createSolanaClient({
     url: 'https://myapp.com',
   },
   api: {
-    supportedNetworks: {
-      mainnet: 'https://solana-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
-    },
+    supportedNetworks: getInfuraRpcUrls({
+      infuraApiKey: 'YOUR_INFURA_API_KEY',
+      networks: ['mainnet'],
+    }),
   },
 })
 
-// Connect -- scan the QR code with MetaMask Mobile
+// Connect — scan the QR code with the MetaMask mobile app
 await solanaClient.core.connect([SOLANA_MAINNET], [])
 
 const session = await solanaClient.core.getSession()

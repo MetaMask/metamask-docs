@@ -56,7 +56,7 @@ Here's how each connection method compares across dapp locations:
 
 \***Limited**: Most other SDKs don't include built-in QR code or deeplink support for connecting to the MetaMask mobile app, and require additional configuration or third-party relay services.
 
-\*\***MetaMask in-app browser**: Dapps can use the `https://link.metamask.io/dapp/{url}` [deeplink](./evm/guides/metamask-exclusive/use-deeplinks.md) to open directly inside MetaMask Mobile's built-in browser, giving full wallet access without relay overhead. This works for any dapp regardless of ecosystem (EVM, Solana, or multichain).
+\*\***MetaMask in-app browser**: Dapps can use the `https://link.metamask.io/dapp/{url}` [deeplink](./evm/guides/metamask-exclusive/use-deeplinks.md) to open directly inside the MetaMask mobile app's built-in browser, giving full wallet access without relay overhead. This works for any dapp regardless of ecosystem (EVM, Solana, or multichain).
 
 :::caution Third-party in-app browsers
 WebViews inside apps like Twitter, Discord, or Reddit have inconsistent deeplink support. Some block external deeplinks or handle them incorrectly. Test in your target environments, or guide users to open your dapp in a full mobile browser.
@@ -82,13 +82,13 @@ Select a ✅ to jump to the relevant quickstart or guide.
 | Node.js                 |                         ✅                          |                             —                             |                            ✅                            |
 
 :::note
-Node.js support uses QR code connections via MetaMask Mobile.
+Node.js support uses QR code connections via the MetaMask mobile app.
 See the [Node.js playground](https://github.com/MetaMask/connect-monorepo/tree/main/playground/node-playground) for a working example.
 :::
 
 ## Next steps
 
 - [Explore integration options.](./integration-options.md)
-- [Use deeplinks to route users to MetaMask Mobile.](./evm/guides/metamask-exclusive/use-deeplinks.md)
+- [Use deeplinks to route users to the MetaMask mobile app.](./evm/guides/metamask-exclusive/use-deeplinks.md)
 - Follow the [EVM JavaScript quickstart](./evm/quickstart/javascript.md).
 - Follow the [Solana JavaScript quickstart](./solana/quickstart/javascript.md).

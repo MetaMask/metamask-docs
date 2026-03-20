@@ -32,7 +32,7 @@ With MetaMask Connect EVM, you can:
 ## Connect wallet
 
 With Vanilla JavaScript, implement user authentication directly using the
-[`eth_requestAccounts`](../reference/json-rpc-api/index.md) RPC method
+[`eth_requestAccounts`](../reference/json-rpc-api/eth_requestAccounts.mdx) RPC method
 and [`accountsChanged`](../reference/provider-api.md#accountschanged) provider event.
 
 With Wagmi, use the provided hooks for handling wallet connections.

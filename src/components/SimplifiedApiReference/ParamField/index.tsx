@@ -1,5 +1,6 @@
 import React from 'react'
 import Expandable from '../Expandable'
+import ReactMarkdown from 'react-markdown'
 import styles from './styles.module.css'
 
 interface NestedParam {
@@ -59,7 +60,7 @@ const ParamField: React.FC<ParamFieldProps> = ({
         </div>
       </div>
       <div className={styles.paramDescription}>
-        {description}
+        <ReactMarkdown skipHtml={true}>{description}</ReactMarkdown>
       </div>
       {hasChildren && renderNestedParams(children, expandableTitle)}
     </div>

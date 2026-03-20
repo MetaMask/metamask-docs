@@ -326,6 +326,26 @@ export const delegation = createDelegation({
 </TabItem>
 </Tabs>
 
+## `enableDelegation`
+
+Encodes the calldata to enable a disabled delegation. 
+
+### Parameters
+
+| Name | Type | Required | Description |
+| --- | --- | --- | --- |
+| `delegation` | [`Delegation`](../types.md#delegation) | Yes | The delegation to be enabled. |
+
+### Example
+
+```ts
+import { DelegationManager } from "@metamask/smart-accounts-kit/contracts";
+
+const enableDelegationData = DelegationManager.encode.enableDelegation({
+  delegation, // Already disabled delegation.
+});
+```
+
 ## `encodeDelegations`
 
 Encodes an array of delegations to an ABI-encoded hex string.

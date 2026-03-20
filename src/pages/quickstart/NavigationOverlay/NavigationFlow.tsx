@@ -8,7 +8,7 @@ import Button from '@site/src/components/elements/buttons/button'
 import SvgStar from '@site/static/img/icons/star.svg'
 import Shape from '@site/static/img/shapes/intro-cards/shape.svg'
 import styles from './NavigationOverlay.module.css'
-import { METAMASK_SDK, EMBEDDED_WALLETS, YES, NO } from '../builder/choices'
+import { METAMASK_CONNECT, EMBEDDED_WALLETS, YES, NO } from '../builder/choices'
 
 interface NavigationOption {
   id: string
@@ -28,7 +28,7 @@ const navigationOptions: NavigationOption[] = [
     id: 'mm-sdk',
     title: "I want to connect to users' MetaMask wallets",
     description: 'MetaMask Connect',
-    product: METAMASK_SDK,
+    product: METAMASK_CONNECT,
   },
   {
     id: 'embedded-wallets-1',

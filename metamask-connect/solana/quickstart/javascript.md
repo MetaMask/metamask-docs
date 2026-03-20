@@ -8,7 +8,9 @@ keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK, vanilla javascr
 # Connect to Solana quickstart
 
 This quickstart gets you up and running with MetaMask Connect Solana in a JavaScript dapp.
+<!--
 [Download the template](#set-up-using-a-template) to start quickly, or [set up manually](#set-up-manually) in an existing project.
+-->
 
 <!-- <p align="center">
   <a href="https://metamask-javascript-demo.vercel.app/" target="_blank">
@@ -23,6 +25,7 @@ This quickstart gets you up and running with MetaMask Connect Solana in a JavaSc
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
 - An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 
+<!--
 ## Set up using a template
 
 1. Download the [MetaMask Connect JavaScript template](https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript):
@@ -79,8 +82,9 @@ This quickstart gets you up and running with MetaMask Connect Solana in a JavaSc
    ```
 
 You've successfully set up MetaMask Connect Solana.
+-->
 
-## Set up manually
+## Steps
 
 ### 1. Install MetaMask Connect Solana
 
@@ -95,7 +99,7 @@ npm install @metamask/connect-solana
 The following examples show how to use MetaMask Connect Solana in various JavaScript environments:
 
 ```javascript
-import { createSolanaClient } from '@metamask/connect-solana'
+import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
 
 const solanaClient = await createSolanaClient({
   dapp: {
@@ -104,9 +108,10 @@ const solanaClient = await createSolanaClient({
     iconUrl: 'https://mydapp.com/icon.png', // Optional
   },
   api: {
-    supportedNetworks: {
-      devnet: 'https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY',
-    },
+    supportedNetworks: getInfuraRpcUrls({
+      infuraApiKey: 'YOUR_INFURA_API_KEY',
+      networks: ['devnet'],
+    }),
   },
 })
 ```

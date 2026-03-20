@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 # Send transactions
 
-Use MetaMask Connect EVM to send Ethereum transactions from your JavaScript dapp. MetaMask Connect EVM supports `eth_sendTransaction` through viem, ethers.js, web3.js, the raw Ethereum API, and Wagmi, with built-in gas estimation, transaction receipt tracking, and error handling for common failure cases like user rejection and insufficient funds.
+Use MetaMask Connect EVM to send Ethereum transactions from your JavaScript dapp. MetaMask Connect EVM supports [`eth_sendTransaction`](../../reference/json-rpc-api/eth_sendTransaction.mdx) through viem, ethers.js, web3.js, the raw Ethereum API, and Wagmi, with built-in gas estimation, transaction receipt tracking, and error handling for common failure cases like user rejection and insufficient funds.
 
 With MetaMask Connect EVM:
 

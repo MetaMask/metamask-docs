@@ -85,6 +85,7 @@
     "rehype-katex": "^7.0.1",
     "remark-codesandbox": "^0.10.1",
     "remark-docusaurus-tabs": "^0.2.0",
+    "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
     "sass": "^1.93.0"
   },

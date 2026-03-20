@@ -1,8 +1,6 @@
-### Connect and use the provider
+### Use the provider
 
-Connect to MetaMask and get the provider for RPC requests.
-
-`MMSDK.connect()` handles cross-platform connection (desktop and mobile), including deeplinking.
+Use `client.getProvider()` to get the provider object for RPC requests.
 
 Use `provider.request()` for arbitrary [JSON-RPC requests](/metamask-connect/evm/reference/json-rpc-api) like
 `eth_chainId` or `eth_getBalance`, or for [batching requests](/metamask-connect/evm/guides/metamask-exclusive/batch-requests) via

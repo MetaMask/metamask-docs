@@ -353,10 +353,10 @@ See the [multichain quickstart](../../multichain/quickstart/javascript.md) for a
 | `openDeeplink`           | `mobile.preferredOpenLink`                         | Moved to `mobile` namespace           |
 | `useDeeplink`            | `mobile.useDeeplink`                               | Moved to `mobile` namespace           |
 | `SDKProvider`            | `EIP1193Provider`                                  | Standard provider interface           |
-| `timer`                  | Removed                                            | --                                    |
-| `enableAnalytics`        | Removed                                            | --                                    |
-| `communicationServerUrl` | Removed                                            | --                                    |
-| `storage`                | Removed                                            | --                                    |
+| `timer`                  | Removed                                            | —                                    |
+| `enableAnalytics`        | Removed                                            | —                                    |
+| `communicationServerUrl` | Removed                                            | —                                    |
+| `storage`                | Removed                                            | —                                    |
 
 ### React context pattern (replacing `useSDK`)
 

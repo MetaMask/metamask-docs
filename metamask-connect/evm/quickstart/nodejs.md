@@ -8,7 +8,7 @@ keywords: [connect, MetaMask, Node.js, SDK, CLI, server-side, createEVMClient, E
 # Connect to EVM - Node.js quickstart
 
 Get started with MetaMask Connect EVM in a Node.js application.
-The SDK displays a QR code in the terminal that you scan with MetaMask Mobile to establish a connection.
+The SDK displays a QR code in the terminal that you scan with the MetaMask mobile app to establish a connection.
 
 :::info No polyfills required
 Node.js has native support for `Buffer`, `crypto`, `stream`, and other modules that require
@@ -19,12 +19,14 @@ polyfilling in browser or React Native environments.
 
 - [Node.js](https://nodejs.org/) version 20 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/installation).
-- [MetaMask Mobile](https://metamask.io/download/) installed on your phone.
+- The [MetaMask mobile app](https://metamask.io/download/) installed on your phone.
 - An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
 
 ## Steps
 
-### 1. Install dependencies
+### 1. Install MetaMask Connect EVM
+
+Install MetaMask Connect EVM and MetaMask Connect Multichain:
 
 ```bash npm2yarn
 npm install @metamask/connect-evm @metamask/connect-multichain
@@ -32,7 +34,7 @@ npm install @metamask/connect-evm @metamask/connect-multichain
 
 `@metamask/connect-multichain` provides the [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) helper for generating RPC URLs.
 
-### 2. Initialize the EVM client
+### 2. Initialize MetaMask Connect EVM
 
 Create a file (for example, `index.mjs`) and initialize the client.
 In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly:
@@ -56,13 +58,13 @@ const evmClient = await createEVMClient({
 
 :::info `createEVMClient` is async
 `createEVMClient` returns a promise. Always `await` it before using the client.
-The client is a **singleton** -- calling `createEVMClient` again returns the same instance.
+The client is a **singleton** — calling `createEVMClient` again returns the same instance.
 :::
 
 ### 3. Connect to MetaMask
 
 Call `connect()` to start the connection flow.
-A QR code appears in the terminal -- scan it with MetaMask Mobile:
+A QR code appears in the terminal — scan it with the MetaMask mobile app:
 
 ```javascript
 try {
@@ -167,7 +169,7 @@ const evmClient = await createEVMClient({
   },
 })
 
-// Connect -- scan the QR code with MetaMask Mobile
+// Connect — scan the QR code with the MetaMask mobile app
 const { accounts, chainId } = await evmClient.connect({ chainIds: ['0x1'] })
 console.log('Connected:', accounts[0], 'on', chainId)
 

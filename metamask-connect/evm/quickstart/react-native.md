@@ -354,7 +354,7 @@ const styles = StyleSheet.create({
 
 ### 7. iOS configuration
 
-Add the `metamask` URL scheme to your `Info.plist` so the app can open MetaMask Mobile:
+Add the `metamask` URL scheme to your `Info.plist` so the app can open the MetaMask mobile app:
 
 ```xml title="ios/MyProject/Info.plist"
 <key>LSApplicationQueriesSchemes</key>
