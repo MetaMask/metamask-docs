@@ -22,6 +22,8 @@ select each button:
 const ethereumButton = document.querySelector(".enableEthereumButton");
 const sendEthButton = document.querySelector(".sendEthButton");
 
+const provider = window.ethereum; // Or use your EIP-6963 provider
+
 let accounts = [];
 
 sendEthButton.addEventListener("click", () => {
