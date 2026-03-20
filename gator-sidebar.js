@@ -220,6 +220,7 @@ const sidebar = {
         'troubleshooting/invalid-delegate',
         'troubleshooting/invalid-delegator',
         'troubleshooting/invalid-signature',
+        'troubleshooting/user-operation-reverted',
       ],
     },
   ],
