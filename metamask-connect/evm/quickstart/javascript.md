@@ -58,6 +58,23 @@ Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and
     </div>
     </details>
 
+    <details>
+    <summary>Using React?</summary>
+    <div>
+
+   If you're building with React, try the [interactive React quickstart](/quickstart) instead.
+   It walks you through connecting, signing, sending transactions, and switching chains with a live
+   code preview alongside each step.
+
+   You can also clone the [React quickstart template](https://github.com/MetaMask/metamask-connect-examples/tree/main/quickstarts/evm/react) directly:
+
+   ```bash
+   npx degit MetaMask/metamask-connect-examples/quickstarts/evm/react mm-react-quickstart
+   ```
+
+    </div>
+    </details>
+
 3. Install dependencies:
 
    ```bash

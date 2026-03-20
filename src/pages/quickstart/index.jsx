@@ -17,13 +17,13 @@ import IntegrationBuilderCodeView from '../../theme/IntegrationBuilderCodeView'
 import builder from './builder'
 import styles from './styles.module.css'
 import { getWindowLocation } from '../../theme/URLParams'
-import { METAMASK_SDK, EMBEDDED_WALLETS, YES, NO } from './builder/choices'
+import { METAMASK_CONNECT, EMBEDDED_WALLETS, YES, NO } from './builder/choices'
 import NavigationOverlay from './NavigationOverlay'
 import MediaStep from './MediaStep'
 
 const hasRelevantURLParams = () => {
   const url = new URL(getWindowLocation())
-  const relevantParams = ['product', 'framework', 'walletAggregatorOnly']
+  const relevantParams = ['product', 'framework', 'ecosystem', 'walletAggregatorOnly']
   return relevantParams.some(param => url.searchParams.has(param))
 }
 
@@ -37,7 +37,7 @@ const validateURLParams = () => {
   if (!product) return false
 
   // Validate product parameter
-  const validProducts = [METAMASK_SDK, EMBEDDED_WALLETS]
+  const validProducts = [METAMASK_CONNECT, EMBEDDED_WALLETS]
   if (!validProducts.includes(product)) return false
 
   // If we have walletAggregatorOnly, validate its value
@@ -727,10 +727,10 @@ export default function IntegrationBuilderPage(props) {
             <div className={styles.cardContainer}>
               {option.choices.map(value => (
                 <React.Fragment key={value.key}>
-                  {value.key === METAMASK_SDK && (
+                  {value.key === METAMASK_CONNECT && (
                     <div
                       className={
-                        builderOptions[key] === METAMASK_SDK ? styles.selectedCard : styles.card
+                        builderOptions[key] === METAMASK_CONNECT ? styles.selectedCard : styles.card
                       }
                       onClick={() => onChangeDropdown(key, value.key)}>
                       <h5 className={classNames(styles.cardTitle)}>{value.displayName}</h5>
