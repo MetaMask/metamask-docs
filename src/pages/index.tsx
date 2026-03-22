@@ -43,18 +43,6 @@ export default function Home(): JSX.Element {
       <Hero
         title={siteConfig.title}
         description="Build with the world's leading self-custodial crypto wallet."
-        buttons={[
-          {
-            label: 'Quickstart',
-            href: '/quickstart',
-            icon: 'arrow-right'
-          },
-          {
-            label: 'Tutorials',
-            href: '/tutorials/',
-            icon: 'arrow-right'
-          }
-        ]}
       />
 
       <SectionIntro description="What do you want to do with MetaMask?" />
