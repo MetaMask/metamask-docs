@@ -1,0 +1,289 @@
+---
+title: Build with AI
+sidebar_label: Build with AI
+toc_max_heading_level: 2
+description: 'Build MetaMask Embedded Wallets integrations faster using AI coding assistants — Cursor, Claude, Codex, Antigravity, OpenClaw, and more.'
+image: 'img/metamaskog.jpg'
+keywords:
+  [
+    ai,
+    cursor,
+    claude,
+    codex,
+    antigravity,
+    openclaw,
+    mcp,
+    llm,
+    coding assistant,
+    embedded wallets,
+    web3auth,
+  ]
+---
+
+import SkillContent from '@site/src/components/SkillContent'
+
+Speed up MetaMask Embedded Wallets integrations by giving your AI coding assistant access to the documentation and SDK reference information.
+
+You'll set up the following:
+
+- **Skill**: Guides your AI assistant on how to reason about the SDK (for example, architecture, framework-specific considerations, key derivation rules, and common pitfalls). There's no code in the skill; the MCP provides that.
+- **MCP server**: Provides real-time access to documentation search, code examples, and SDK types.
+
+## Skill
+
+The Skill guides your AI assistant by providing a mental model for MetaMask Embedded Wallets. It includes SDK selection logic,
+key derivation rules, authentication concepts, platform quirks, and common mistakes that aren't obvious from
+the docs alone. The Skill contains no code. The MCP server provides up-to-date code examples and implementation references.
+
+:::tip
+For the best experience, use the MCP server alongside the skill so that your LLM can fetch live docs and examples rather than relying on static text.
+:::
+
+### Cursor
+
+Copy the skill into your project:
+
+```bash
+npx degit Web3Auth/web3auth-mcp/skills/web3auth .cursor/skills/web3auth
+```
+
+Cursor picks up any `SKILL.md` inside `.cursor/skills/` automatically and activates it when relevant.
+
+### Claude Code CLI
+
+Download the skill and append it to your project's `CLAUDE.md`:
+
+```bash
+npx degit Web3Auth/web3auth-mcp/skills/web3auth /tmp/web3auth-skill
+cat /tmp/web3auth-skill/SKILL.md >> CLAUDE.md
+```
+
+### Claude Desktop
+
+Open **Claude Desktop → Settings → Custom Instructions** and paste the skill content below directly.
+
+### Antigravity
+
+Copy the skill into your project:
+
+```bash
+npx degit Web3Auth/web3auth-mcp/skills/web3auth .agent/skills/web3auth
+```
+
+Antigravity picks up skills inside `.agent/skills/` automatically. For global installation across all
+projects, use `~/.gemini/antigravity/skills/` instead.
+
+### OpenClaw
+
+Open your agent's configuration in the OpenClaw dashboard and paste the skill content below into the
+**Custom Instructions** field.
+
+For self-hosted instances, add it to your `openclaw.json`:
+
+```json
+{
+  "agent": {
+    "instructions": "<paste SKILL.md content here>"
+  }
+}
+```
+
+### Other tools
+
+For any LLM tool with a system prompt or custom instructions field, paste the skill content below directly.
+
+<details>
+<summary><strong>View `SKILL.md` file</strong></summary>
+
+<SkillContent />
+
+</details>
+
+## MCP server
+
+The [MetaMask Embedded Wallets MCP server](https://github.com/Web3Auth/web3auth-mcp) connects your AI coding
+assistant directly to the documentation. It provides five tools:
+
+| Tool                | What it does                                         |
+| ------------------- | ---------------------------------------------------- |
+| `search_docs`       | Search documentation and example projects            |
+| `get_doc`           | Fetch the full content of any doc page               |
+| `get_example`       | Fetch complete source code of an integration example |
+| `get_sdk_reference` | Fetch SDK types and hooks from the open-source repos |
+| `search_community`  | Search the MetaMask Builder Hub for real user issues |
+
+### Cursor
+
+Select the following button to install the MCP server in Cursor automatically:
+
+<p>
+  <a
+    href="https://cursor.com/en/install-mcp?name=web3auth&config=eyJ1cmwiOiJodHRwczovL21jcC53ZWIzYXV0aC5pbyJ9"
+    target="_blank"
+    rel="noopener noreferrer">
+    <img
+      src="https://cursor.com/deeplink/mcp-install-dark.svg"
+      alt="Add MetaMask Embedded Wallets MCP to Cursor"
+      height="32"
+    />
+  </a>
+</p>
+
+You can also add it manually. Open **Cursor Settings → Tools & Integrations → MCP** and add:
+
+```json
+{
+  "mcpServers": {
+    "web3auth": {
+      "url": "https://mcp.web3auth.io"
+    }
+  }
+}
+```
+
+### Claude Code CLI
+
+Run the following in your terminal:
+
+```bash
+claude mcp add --transport http web3auth https://mcp.web3auth.io
+```
+
+Or add manually to your project's `claude.json`:
+
+```json
+{
+  "mcpServers": {
+    "web3auth": {
+      "url": "https://mcp.web3auth.io"
+    }
+  }
+}
+```
+
+### Claude Desktop
+
+Open your Claude Desktop configuration file:
+
+- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
+
+Add the server to the `mcpServers` section:
+
+```json
+{
+  "mcpServers": {
+    "web3auth": {
+      "url": "https://mcp.web3auth.io"
+    }
+  }
+}
+```
+
+Restart Claude Desktop and ask: _"Search MetaMask Embedded Wallets docs for React quick start"_ to verify the connection.
+
+### Antigravity
+
+Open your MCP configuration file:
+
+- **macOS/Linux**: `~/.config/antigravity/mcp.json`
+- **Windows**: `%APPDATA%\antigravity\mcp.json`
+
+Add the server to the `mcpServers` section:
+
+```json
+{
+  "mcpServers": {
+    "web3auth": {
+      "url": "https://mcp.web3auth.io"
+    }
+  }
+}
+```
+
+Antigravity automatically reloads MCP configuration changes. You don't need to restart it.
+
+### Codex CLI
+
+For Codex CLI or any stdio-only agent, use [mcp-remote](https://github.com/modelcontextprotocol/mcp-remote) to bridge the HTTP endpoint:
+
+```bash
+npm install -g mcp-remote
+```
+
+Then add to your agent's configuration:
+
+```json
+{
+  "mcpServers": {
+    "web3auth": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.web3auth.io"]
+    }
+  }
+}
+```
+
+### OpenClaw
+
+For managed instances, go to your **OpenClaw dashboard → Skills → Add custom skill** and enter the MCP
+server URL:
+
+```
+https://mcp.web3auth.io
+```
+
+For self-hosted instances, add the server to your `openclaw.json`:
+
+```json
+{
+  "mcpServers": {
+    "web3auth": {
+      "url": "https://mcp.web3auth.io"
+    }
+  }
+}
+```
+
+OpenClaw hot-reloads config changes — no restart required.
+
+## Static docs (llms.txt)
+
+If your AI tool doesn't support MCP yet, use the static documentation file instead. This gives your AI
+assistant the full MetaMask Embedded Wallets documentation as a single text file.
+
+:::warning
+The static file is a snapshot and may not include the latest updates. Use the MCP server when possible
+for always-current docs.
+:::
+
+Add the following URL as a custom doc source in your tool's settings, or paste it directly into your AI chat:
+
+```
+https://docs.metamask.io/llms-embedded-wallets-full.txt
+```
+
+For tools that support the [llms.txt spec](https://llmstxt.org/) and can index docs automatically, add:
+
+```
+https://docs.metamask.io/llms-embedded-wallets.txt
+```
+
+## Start building
+
+Once the skill and MCP are set up, ask your AI assistant directly. Good starting prompts include:
+
+- _"Add MetaMask Embedded Wallets to my React app with Google login."_
+- _"Set up social login wallets in my Next.js app using Wagmi."_
+- _"Integrate embedded wallets in my Flutter app."_
+- _"Why are my users getting different wallet addresses after I changed the login method?"_
+
+The MCP server will search the docs and fetch real working examples. The skill will ensure the correct SDK is
+chosen and common pitfalls are avoided before a line of code is written.
+
+:::tip
+
+Use planning mode (where available) for your initial prompt. Review the plan before generating code — this
+catches architecture mistakes early and avoids config errors that would change wallet addresses in production.
+
+:::
