@@ -20,7 +20,7 @@ export type CardLeadIcon = 'wallet' | 'user' | 'shield' | 'globe' | 'controls' |
 
 const LEAD_ICON_COMPONENTS: Record<
   CardLeadIcon,
-  React.ComponentType<React.SVGProps<SVGSVGElement>>
+  React.ComponentType<React.SVGProps<SVGElement>>
 > = {
   wallet: SvgWallet,
   user: SvgUser,
