@@ -52,6 +52,7 @@ export default function Home(): JSX.Element {
         cards={[
           {
             title: 'Connect to MetaMask',
+            leadIcon: 'wallet',
             description: (
               <>
                 Connect your dapp to the <strong>MetaMask browser extension and mobile app</strong>.
@@ -63,6 +64,7 @@ export default function Home(): JSX.Element {
           },
           {
             title: 'Create embedded wallets',
+            leadIcon: 'user',
             description: (
               <>
                 Onboard users to your dapp via <strong>social logins</strong>,
@@ -75,6 +77,7 @@ export default function Home(): JSX.Element {
           },
           {
             title: 'Create smart accounts',
+            leadIcon: 'shield',
             description: (
               <>
                 Create and interact with <strong>MetaMask Smart Accounts</strong>, unlocking new{' '}
@@ -86,6 +89,7 @@ export default function Home(): JSX.Element {
           },
           {
             title: 'Build and scale your dapp',
+            leadIcon: 'globe',
             description: (
               <>
                 Use <strong>high performance APIs</strong> provided by MetaMask and Infura to build
@@ -97,6 +101,7 @@ export default function Home(): JSX.Element {
           },
           {
             title: 'Extend MetaMask',
+            leadIcon: 'controls',
             description: (
               <>
                 Create a <strong>custom mini app (Snap)</strong> that runs inside the MetaMask extension. Add
