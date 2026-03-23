@@ -31,7 +31,7 @@ pre[class*='language-'] {
   }
 }
 
-.codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+[class*='codeBlockTitle'] {
   background-color: var(--general-black-light);
   border-bottom: 1px solid var(--general-gray-dark) !important;
   padding: 1.2rem 2rem !important;
@@ -40,20 +40,11 @@ pre[class*='language-'] {
     padding: 0.8rem 2rem !important;
   }
 }
-.codeBlockTitle_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module
-  + .codeBlockContent_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+
+[class*='codeBlockTitle'] + [class*='codeBlockContent'] {
   code[class*='language-'],
   pre[class*='language-'] {
     padding-top: 1.2rem;
-  }
-}
-
-.tabItem_node_modules-\@docusaurus-theme-classic-lib-theme-TabItem-styles-module {
-  .codeBlockContent_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
-    code[class*='language-'],
-    pre[class*='language-'] {
-      padding-top: 1.6rem;
-    }
   }
 }
 
@@ -65,7 +56,7 @@ pre code {
   background-color: var(--general-black-light) !important;
 }
 
-.buttonGroup_node_modules-\@docusaurus-theme-classic-lib-theme-CodeBlock-Content-styles-module {
+[class*='buttonGroup'] {
   top: 0.8rem !important;
   right: 0.8rem !important;
 
