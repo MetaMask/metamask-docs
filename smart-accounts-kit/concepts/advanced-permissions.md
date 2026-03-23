@@ -32,7 +32,7 @@ The MetaMask user that the session account requests permissions from must be upg
 
 ## Advanced Permissions vs. delegations
 
-Advanced Permissions expand on regular [delegations](delegation/index.md) by enabling permission sharing *via the MetaMask browser extension*.
+Advanced Permissions expand on regular [delegations](delegation/overview.md) by enabling permission sharing *via the MetaMask browser extension*.
 
 With regular delegations, the dapp constructs a delegation and requests the user to sign it.
 These delegations are not human-readable, so it is the dapp's responsibility to provide context for the user.

@@ -133,9 +133,11 @@ const sidebar = {
           label: 'Delegation',
           collapsed: true,
           key: 'delegation-concepts',
-          link: { type: "doc", id: "concepts/delegation/index" },
           items: [
+            'concepts/delegation/overview',
+            'concepts/delegation/delegation-manager',
             'concepts/delegation/caveat-enforcers',
+            'concepts/delegation/delegation-scopes',
           ],
         },
         'concepts/advanced-permissions',
