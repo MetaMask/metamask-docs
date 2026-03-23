@@ -14,11 +14,11 @@ to create different types of smart accounts with different signature schemes.
 
 ## Prerequisites
 
-[Install and set up the Smart Accounts Kit](../../get-started/install.md).
+[Install and set up the Smart Accounts Kit.](../../get-started/install.md)
 
 ## Hybrid smart account
 
-A Hybrid smart account supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
+A [Hybrid smart account](../../concepts/smart-accounts.md#hybrid-smart-account) supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 
 This example uses `toMetaMaskSmartAccount` and Viem's [Wallet Client](https://viem.sh/docs/clients/wallet)
 to create a Hybrid smart account. The `signer` parameter also accepts Viem's [Local Account](https://viem.sh/docs/accounts/local) and [WebAuthnAccount](https://viem.sh/account-abstraction/accounts/webauthn#webauthn-account).
@@ -170,7 +170,7 @@ create an EIP-7702 smart account. This example doesn't handle the upgrade proces
 :::note Important
 The EIP-7702 implementation only works with Viem's [Local Accounts](https://viem.sh/docs/accounts/local). It doesn't work with a [JSON-RPC Account](https://viem.sh/docs/accounts/jsonRpc) like MetaMask.
 
-See the [upgrade a MetaMask EOA to a smart account](https://docs.metamask.io/tutorials/upgrade-eoa-to-smart-account/) tutorial.
+See the [Upgrade a MetaMask EOA to a smart account](https://docs.metamask.io/tutorials/upgrade-eoa-to-smart-account/) tutorial.
 :::
 
 <Tabs>
