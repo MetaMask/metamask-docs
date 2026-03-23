@@ -26,7 +26,7 @@ Verify that the smart account used as the delegator is deployed before redeeming
 smart account can be either an ERC-4337 smart account or an EIP-7702 upgraded EOA.
 
 For an ERC-4337 smart account, the first user operation sent from that account deploys it
-automatically. For more information, see the [deploy a smart account](../guides/smart-accounts/deploy-smart-account.md) guide.
+automatically. For more information, see [Deploy a smart account](../guides/smart-accounts/deploy-smart-account.md).
 
 For an EIP-7702-upgraded EOA, verify that you submit the authorization to set the account code
 before redeeming the delegation.

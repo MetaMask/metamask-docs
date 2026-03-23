@@ -209,10 +209,10 @@ const sidebar = {
       items: [
         'troubleshooting/aa21-prefund',
         'troubleshooting/allowance-exceeded',
-        'troubleshooting/error-codes',
         'troubleshooting/invalid-delegate',
         'troubleshooting/invalid-delegator',
         'troubleshooting/invalid-signature',
+        'troubleshooting/error-codes',
       ],
     },
   ],
