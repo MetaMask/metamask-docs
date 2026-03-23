@@ -49,7 +49,7 @@ export const walletClient = createWalletClient({
 </TabItem>
 <TabItem value="Example response">
 
-```JSON
+```ts
 {
   "native-token-stream": {
     "chainIds": [

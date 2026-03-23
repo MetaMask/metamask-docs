@@ -48,7 +48,7 @@ export const walletClient = createWalletClient({
 </TabItem>
 <TabItem value="Example response">
 
-```JSON
+```ts
 [
   {
     chainId: 84532,
