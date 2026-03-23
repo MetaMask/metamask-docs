@@ -14,7 +14,7 @@ to create different types of smart accounts with different signature schemes.
 
 ## Prerequisites
 
-[Install and set up the Smart Accounts Kit](../../get-started/install.md)
+[Install and set up the Smart Accounts Kit](../../get-started/install.md).
 
 ## Hybrid smart account
 
