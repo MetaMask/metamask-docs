@@ -92,8 +92,8 @@ export default function Home(): JSX.Element {
             leadIcon: 'globe',
             description: (
               <>
-                Use <strong>high performance APIs</strong> provided by MetaMask and Infura to build
-                and scale your <strong>dapp or Snap</strong>.
+                Use <strong>high performance APIs</strong> provided by MetaMask and <strong>Infura</strong> to build
+                and scale your dapp or Snap.
               </>
             ),
             href: '/services',
