@@ -5,7 +5,7 @@ keywords: [delegation scopes, delegation, authority, spending limit, function ca
 
 # Delegation scopes
 
-When creating a delegation, you must configure a *scope* to define the delegation's initial authority and help prevent delegation misuse.
+When creating a delegation, you must configure a scope to define the delegation's initial authority and help prevent delegation misuse.
 
 Scopes are not part of the [Delegation Framework](overview.md#delegation-framework) itself, but an abstraction introduced in the Smart Accounts Kit that builds on top of [caveat enforcers](caveat-enforcers.md) to provide pre-configured restriction patterns for common use cases.
 
@@ -18,7 +18,7 @@ Scopes and caveats work together to define and restrict a delegation's authority
 
 For example, a spending limit scope might allow a delegate to transfer up to 100 USDC, while an additional caveat could restrict the transfers to only occur within a specific time window.
 
-You can further [constrain a delegation's scope by adding caveats](../../guides/delegation/use-delegation-scopes/constrain-scope.md).
+See [how to constrain a delegation's scope by adding caveats](../../guides/delegation/use-delegation-scopes/constrain-scope.md).
 
 ## Categories
 

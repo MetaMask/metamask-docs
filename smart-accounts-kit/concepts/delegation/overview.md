@@ -13,7 +13,7 @@ The account that grants the permission is called the delegator account, while th
 is called the delegate account.
 
 The Smart Accounts Kit follows the [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710) standard for smart contract delegation.
-In addition, users can use [delegatoion scopes](delegation-scopes.md), and [caveat enforcers](caveat-enforcers.md) to apply rules and restrictions to delegations.
+In addition, users can use [delegation scopes](delegation-scopes.md) and [caveat enforcers](caveat-enforcers.md) to apply rules and restrictions to delegations.
 For example, Alice delegates the ability to spend her USDC to Bob, limiting the amount to 100 USDC.
 
 ## Delegation types
