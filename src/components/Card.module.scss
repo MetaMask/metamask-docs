@@ -95,10 +95,25 @@
   }
 }
 
+/* Override global `.type-heading-sm` (3rem on desktop) for homepage / product cards */
+.item-title:global(.type-heading-sm) {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 2.2rem;
+  line-height: 140%;
+
+  @include bp('desktop') {
+    font-size: 2.2rem;
+    line-height: 140%;
+  }
+}
+
 .header {
   display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.2rem;
   position: relative;
 }
 
@@ -120,12 +135,19 @@
   flex: 0 0 auto;
   width: 2.4rem;
   height: 2.4rem;
+  margin-top: 0.2rem; /* align with first line of title cap height */
   color: var(--color-palette, var(--general-gray-mid));
   transition: color calc(var(--motion) * var(--motion-speed)) $gentle-ease;
 }
 
 .item-description {
   font-size: 1.7rem;
+
+  /* Reset applies `font: inherit` to `strong`, which strips default bold */
+  strong {
+    font-weight: 600;
+  }
+
   @include bp(tablet) {
     max-width: 82%;
   }
