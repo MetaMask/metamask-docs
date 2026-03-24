@@ -11,7 +11,7 @@ The Delegation Manager reverts with `InvalidEOASignature()` in the following cas
 
 ## Smart account is not deployed
 
-The [root delegation's](../concepts/delegation/index.md#delegation-types) delegator must be a
+The [root delegation's](../concepts/delegation/overview.md#root-delegation) delegator must be a
 MetaMask smart account. The Delegation Manager checks the delegator code to determine
 whether it is an externally owned account (EOA) or a smart account.
 
