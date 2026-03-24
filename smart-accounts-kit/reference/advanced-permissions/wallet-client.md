@@ -92,18 +92,17 @@ This action takes no parameters and returns a [`GetSupportedExecutionPermissions
 <TabItem value="response.ts">
 
 ```ts
-// Example response:
-// {
-//     "native-token-stream": {
-//         "chainIds": [1, 10],
-//         "ruleTypes": ["expiry"]
-//     },
-//     "erc20-token-periodic": {
-//         "chainIds": [1, 137],
-//         "ruleTypes": ["expiry"]
-//     },
-//     // ...
-// }
+{
+  "native-token-stream": {
+    "chainIds": [1, 10],
+    "ruleTypes": ["expiry"]
+  },
+  "erc20-token-periodic": {
+    "chainIds": [1, 137],
+    "ruleTypes": ["expiry"]
+  },
+// ...
+}
 ```
 
 </TabItem>
@@ -143,26 +142,25 @@ This action takes no parameters and returns a [`GetGrantedExecutionPermissionsRe
 <TabItem value="response.ts">
 
 ```ts
-// Example response:
-// [
-//   {
-//     chainId: 84532,
-//     context: "0x0000...0000",
-//     delegationManager: "0xdb9B...7dB3",
-//     dependencies: [],
-//     from: "0x993f...7f31",
-//     permission: {
-//       type: "erc20-token-periodic",
-//       isAdjustmentAllowed: false,
-//       data: { ... },
-//     },
-//     rules: [
-//       { type: "expiry", data: { ... } },
-//     ],
-//     to: "0xAB57...7F1f",
-//   },
-//   // ...
-// ]
+[
+  {
+    chainId: 84532,
+    context: "0x0000...0000",
+    delegationManager: "0xdb9B...7dB3",
+    dependencies: [],
+    from: "0x993f...7f31",
+    permission: {
+      type: "erc20-token-periodic",
+      isAdjustmentAllowed: false,
+      data: { ... },
+    },
+    rules: [
+      { type: "expiry", data: { ... } },
+    ],
+    to: "0xAB57...7F1f",
+  },
+// ...
+]
 ```
 
 </TabItem>

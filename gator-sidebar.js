@@ -35,6 +35,8 @@ const sidebar = {
             'get-started/use-scaffold-eth/advanced-permissions',
           ],
         },
+        'get-started/supported-networks',
+        'get-started/supported-advanced-permissions',
       ],
     },
     {

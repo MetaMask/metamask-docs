@@ -25,28 +25,7 @@ Request the granted Advanced Permissions for a wallet with the
 Wallet Client's [`getGrantedExecutionPermissions`](../../reference/advanced-permissions/wallet-client.md#getgrantedexecutionpermissions) action.
 
 <Tabs>
-<TabItem value="example.ts">
-
-```typescript
-import { walletClient } from "./config.ts";
-
-const grantedExecutionPermissions = await walletClient.getGrantedExecutionPermissions();
-```
-
-</TabItem>
-<TabItem value="config.ts">
-
-```ts
-import { createWalletClient, custom } from "viem";;
-import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
-
-export const walletClient = createWalletClient({
-  transport: custom(window.ethereum),
-}).extend(erc7715ProviderActions());
-```
-
-</TabItem>
-<TabItem value="Example response">
+<TabItem value="response.ts">
 
 ```ts
 [
@@ -68,6 +47,27 @@ export const walletClient = createWalletClient({
   },
   // ...
 ]
+```
+
+</TabItem>
+<TabItem value="example.ts" default>
+
+```typescript
+import { walletClient } from "./config.ts";
+
+const grantedExecutionPermissions = await walletClient.getGrantedExecutionPermissions();
+```
+
+</TabItem>
+<TabItem value="config.ts">
+
+```ts
+import { createWalletClient, custom } from "viem";;
+import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
+
+export const walletClient = createWalletClient({
+  transport: custom(window.ethereum),
+}).extend(erc7715ProviderActions());
 ```
 
 </TabItem>
