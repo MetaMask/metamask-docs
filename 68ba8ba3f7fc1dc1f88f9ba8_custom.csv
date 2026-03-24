@@ -1,0 +1,11 @@
+Timestamp (UTC),Type,Base Currency,Base Amount,Quote Currency (Optional),Quote Amount (Optional),Fee Currency (Optional),Fee Amount (Optional),From (Optional),To (Optional),Blockchain (Optional), ID (Optional),Description (Optional),Reference Price Per Unit (Optional),Reference Price Currency (Optional)
+2020-01-01 00:00:00,fiat-deposit,USD,1000,,,,,Bank,Binance,,Manual-ID-1,Deposit of your local currency onto the exchange, ,
+2020-01-01 00:05:00,buy,BTC,0.99,USD,990,USD,10,Binance,Binance,,Manual-ID-2,,,
+2020-04-17 07:35:06,sell,BTC,0.99,ETH,4.95,ETH,0.01,Binance,Binance,,Manual-ID-3,Note the amount received in the wallet will be 4.95 ETH due to the 0.01 ETH fee, ,
+2020-07-20 11:22:00,receive,XRP,1,,,,,Wallet,Binance,Ripple,Manual-ID-4,Transfer of crypto from another wallet to the exchange., ,
+2020-07-21 15:30:25,airdrop,XRP,0.01,,,,,unknown,Binance,,Manual-ID-5,,,
+2020-07-21 15:30:26,airdrop,XRP,0.01,,,,,unknown,Binance,,Manual-ID-6,,,
+2020-07-21 15:33:00,send,XRP,0.015,,,XRP,0.005,Binance,Wallet,Ripple,Manual-ID-7,"Transfer 0.02 XRP from our wallet, but have a 0.005 fee, so what is actually received will be 0.015", ,
+2020-08-10 0:35:06,sell,ETH,4.95,USD,2000,USD,10,Binance,Binance,,Manual-ID-8,,,
+2020-08-10 07:35:06,fiat-withdrawal,USD,1990,,,,,Binance,Bank,,Manual-ID-9,Cash out to local bank,,
+2020-08-21 15:16:59,buy,ETH,2.5,,,,,Jimmy,My wallet,,,From Jimmy,100,AUD
