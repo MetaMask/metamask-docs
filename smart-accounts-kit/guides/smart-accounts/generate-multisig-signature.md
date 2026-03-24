@@ -18,7 +18,7 @@ into a single aggregated signature.
 ## Prerequisites
 
 - [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
-- [Create a Multisig smart account.](create-smart-account.md#create-a-multisig-smart-account)
+- [Create a Multisig smart account.](create-smart-account.md#multisig-smart-account)
 
 ## Generate a multisig signature
 

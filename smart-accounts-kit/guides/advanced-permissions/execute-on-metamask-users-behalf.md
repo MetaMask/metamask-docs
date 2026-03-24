@@ -107,7 +107,7 @@ user to [switch to a smart account manually](https://support.metamask.io/configu
 
 :::info Why is a Smart Account upgrade is required?
 MetaMask's Advanced Permissions (ERC-7715) implementation requires the user to be upgraded to a MetaMask 
-Smart Account because, under the hood, you're requesting a signature for an [ERC-7710 delegation](../../concepts/delegation/index.md).
+Smart Account because, under the hood, you're requesting a signature for an [ERC-7710 delegation](../../concepts/delegation/overview.md).
 ERC-7710 delegation is one of the core features supported only by MetaMask Smart Accounts.
 :::
 
