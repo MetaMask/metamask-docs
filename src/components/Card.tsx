@@ -5,17 +5,38 @@ import Heading from '@theme/Heading'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
 import Button from '@site/src/components/elements/buttons/button'
 
+import SvgControls from '@site/static/img/icons/controls.svg'
+import SvgGlobe from '@site/static/img/icons/globe.svg'
+import SvgShield from '@site/static/img/icons/shield.svg'
 import SvgStar from '@site/static/img/icons/star.svg'
+import SvgUser from '@site/static/img/icons/user.svg'
+import SvgWallet from '@site/static/img/icons/wallet.svg'
 import Shape from '@site/static/img/shapes/intro-cards/shape.svg'
 
 import styles from './Card.module.scss'
 
+/** Optional lead icon for product cards (defaults to star). */
+export type CardLeadIcon = 'wallet' | 'user' | 'shield' | 'globe' | 'controls' | 'star'
+
+const LEAD_ICON_COMPONENTS: Record<
+  CardLeadIcon,
+  React.ComponentType<React.SVGProps<SVGElement>>
+> = {
+  wallet: SvgWallet,
+  user: SvgUser,
+  shield: SvgShield,
+  globe: SvgGlobe,
+  controls: SvgControls,
+  star: SvgStar,
+}
+
 export type CardItem = {
-  title: string
+  title: string | ReactNode
   href: string
   description?: string | ReactNode
   theme?: string
   buttonIcon?: 'arrow-right' | 'external-arrow'
+  leadIcon?: CardLeadIcon
 }
 
 export default function Card({
@@ -24,8 +45,10 @@ export default function Card({
   description,
   theme,
   buttonIcon = 'arrow-right',
+  leadIcon = 'star',
 }: CardItem) {
   const [isHovered, setIsHovered] = useState(false)
+  const LeadIcon = LEAD_ICON_COMPONENTS[leadIcon] ?? LEAD_ICON_COMPONENTS.star
 
   return (
     <div className={clsx(styles['item'], isHovered && styles['active'])}>
@@ -38,7 +61,7 @@ export default function Card({
             <Shape className={styles['shape']} />
 
             <div className={styles['header']}>
-              <SvgStar className={styles['icon']} />
+              <LeadIcon className={styles['icon']} aria-hidden />
               <Heading as="h3" className={clsx(styles['item-title'], 'type-heading-sm')}>
                 {title}
               </Heading>
