@@ -32,18 +32,33 @@ import PnPCoreKitFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/
   <meta name="author" content="MetaMask" />
 </Head>
 
-MetaMask Embedded Wallets (formerly Web3Auth) provides a pluggable embedded wallet infrastructure to simplify Web3 wallet integration and user onboarding. It supports OAuth-based logins and multiple platforms, allowing users to access Web3 applications through familiar authentication methods in under a minute.
+MetaMask Embedded Wallets (formerly Web3Auth) provides a pluggable embedded wallet infrastructure to
+simplify Web3 wallet integration and user onboarding. It supports OAuth-based logins and multiple
+platforms, allowing your users to access Web3 applications through familiar authentication methods
+in under a minute.
 
-Users enjoy seamless onboarding while maintaining full control of their non-custodial wallets, ensuring both convenience and security.
+MetaMask Embedded Wallets removes the complexity of traditional wallet management by removing the need
+to manage private keys and seed phrases.
+
+<p style={{ margin: '1.25rem 0' }}>
+  <img
+    src="/img/embedded-wallets/wallet-user-flow-comparison.svg"
+    alt="End-user steps: traditional standalone wallet versus Embedded Wallets"
+    style={{
+      display: 'block',
+      width: '100%',
+      maxWidth: 794,
+      height: 'auto',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }}
+  />
+</p>
+
+Users enjoy seamless onboarding while maintaining full control of their non-custodial wallets, ensuring
+both convenience and security.
 
 ## Key features
-
-<BrowserOnly>
-  {() => {
-    const ModalAnim = require('@site/src/components/ModalAnim').default
-    return <ModalAnim />
-  }}
-</BrowserOnly>
 
 ### 🔐 Authentication made simple
 
@@ -80,7 +95,10 @@ The smoothest path to Web3 for your users:
 - Users own and control their wallets
 - Simple, reliable account recovery
 
-MetaMask Embedded Wallets (formerly Web3Auth) operate as wallet infrastructure, providing enhanced flexibility and security for decentralized applications (dapps) and blockchain wallets. Throughout this documentation, we'll explore the functionality of MetaMask Embedded Wallets, showcasing how it produces unique cryptographic key providers for each user and application.
+MetaMask Embedded Wallets operate as wallet infrastructure, providing enhanced flexibility and security
+for decentralized applications (dapps) and blockchain wallets. Throughout this documentation, we'll
+explore the functionality of MetaMask Embedded Wallets, showcasing how it produces unique cryptographic
+key providers for each user and application.
 
 ## How do Embedded Wallets work?
 
