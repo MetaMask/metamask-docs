@@ -45,5 +45,7 @@ No personal information is sent as part of partner requests, only information ne
 
 The following partner provides access to the HyperEVM network:
 
+- Alchemy ([Terms of Service](https://legal.alchemy.com/#contract-hjjoqzsvlx),
+    [Privacy Policy](https://legal.alchemy.com/#contract-sblyf8eub))
 - Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf))
 - Nodies DLB ([Terms of Use](https://www.nodies.app/tos.txt), [Privacy Policy](https://www.nodies.app/privacy.txt))
