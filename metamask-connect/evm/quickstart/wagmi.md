@@ -1,6 +1,6 @@
 ---
 title: 'Wagmi Integration - MetaMask Connect EVM'
-description: Integrate MetaMask Connect EVM into a React dapp using Wagmi hooks like useConnect and useAccount, with the MetaMask connector and wallet connection UI.
+description: Integrate MetaMask Connect EVM into a React dapp using Wagmi hooks like useConnect and useConnection, with the MetaMask connector and wallet connection UI.
 toc_max_heading_level: 3
 sidebar_label: Wagmi
 keywords:
@@ -15,7 +15,7 @@ keywords:
     wagmi connector,
     react hooks,
     useConnect,
-    useAccount,
+    useConnection,
     wallet connector,
     web3 react,
   ]
@@ -96,8 +96,12 @@ TOD0: Update with new screenshot and link
 
 Install MetaMask Connect EVM along with its peer dependencies to an existing React project:
 
+:::note Version requirements
+This quickstart requires `wagmi@^3.6.0` and `wagmi/connectors@^8.0.0`
+:::
+
 ```bash npm2yarn
-npm install @metamask/connect-evm wagmi@latest @wagmi/connectors@latest viem@2.x @tanstack/react-query
+npm install @metamask/connect-evm wagmi@^3.6.0 wagmi/connectors@^8.0.0 viem@2.x @tanstack/react-query
 ```
 
 ### 2. Import required dependencies
@@ -114,13 +118,12 @@ import { metaMask } from 'wagmi/connectors'
 ### 3. Configure your project
 
 Set up your configuration with the desired chains and connectors.
-In the following example, replace `<NEXT_PUBLIC_INFURA_API_KEY>` with your [Infura API key](/developer-tools/dashboard/get-started/create-api):
+In the following example, replace `<VITE_INFURA_API_KEY>` with your [Infura API key](/developer-tools/dashboard/get-started/create-api):
 
 ```jsx
-const INFURA_KEY = process.env.NEXT_PUBLIC_INFURA_API_KEY!;
+const INFURA_KEY = import.meta.env.VITE_INFURA_API_KEY
 
 const config = createConfig({
-  ssr: true, // Enable this if your dapp uses server-side rendering.
   chains: [mainnet, sepolia, lineaSepolia],
   connectors: [
     metaMask({
@@ -135,7 +138,7 @@ const config = createConfig({
     [sepolia.id]: http(`https://sepolia.infura.io/v3/${INFURA_KEY}`),
     [lineaSepolia.id]: http(`https://linea-sepolia.infura.io/v3/${INFURA_KEY}`),
   },
-});
+})
 ```
 
 ### 4. Set up providers
@@ -161,24 +164,29 @@ const App = () => {
 Add the wallet connect and disconnect buttons to your application:
 
 ```jsx
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useConnection, useConnect, useConnectors, useDisconnect } from 'wagmi'
 
 export const ConnectButton = () => {
-  const { address } = useAccount()
-  const { connectors, connect } = useConnect()
-  const { disconnect } = useDisconnect()
+  const { address, isConnected } = useConnection()
+  const connectors = useConnectors()
+  const connect = useConnect()
+  const disconnect = useDisconnect()
+
+  const handleConnect = async () => {
+    // highlight-start
+    const connector = connectors.find(c => c.id === 'metaMaskSDK') ?? connectors[0]
+    await connect.mutateAsync({ connector })
+    // highlight-end
+  }
 
   return (
     <div>
-      {address ? (
-        <button onClick={() => disconnect()}>Disconnect</button>
+      {isConnected ? (
+        <button onClick={() => disconnect.mutate()}>Disconnect</button>
       ) : (
-        connectors.map(connector => (
-          <button key={connector.uid} onClick={() => connect({ connector })}>
-            {connector.name}
-          </button>
-        ))
+        <button onClick={handleConnect}>Connect MetaMask</button>
       )}
+      {address && <p>Connected: {address}</p>}
     </div>
   )
 }
@@ -190,14 +198,15 @@ After adding the connect button, test your dapp by running `pnpm run dev`.
 
 ### Switch chains
 
-Use `useSwitchChain` and `useChainId` to let users switch between your configured chains:
+Use `useConnection`, `useChains`, and `useSwitchChain` to let users switch between your configured chains:
 
 ```tsx
-import { useSwitchChain, useChainId } from 'wagmi'
+import { useConnection, useChains, useSwitchChain } from 'wagmi'
 
 function ChainSwitcher() {
-  const chainId = useChainId()
-  const { chains, switchChain } = useSwitchChain()
+  const { chainId } = useConnection()
+  const chains = useChains()
+  const switchChain = useSwitchChain()
 
   return (
     <div>
@@ -205,7 +214,7 @@ function ChainSwitcher() {
         <button
           key={chain.id}
           disabled={chainId === chain.id}
-          onClick={() => switchChain({ chainId: chain.id })}>
+          onClick={() => switchChain.mutate({ chainId: chain.id })}>
           {chain.name}
         </button>
       ))}
@@ -222,14 +231,19 @@ Use `useSignMessage` to request a `personal_sign` signature from the connected w
 import { useSignMessage } from 'wagmi'
 
 function SignMessage() {
-  const { data: signature, signMessage, isPending } = useSignMessage()
+  const signMessage = useSignMessage()
+
+  const handleSign = async () => {
+    const signature = await signMessage.mutateAsync({ message: 'Hello from my dapp!' })
+    console.log('Signature:', signature)
+  }
 
   return (
     <div>
-      <button disabled={isPending} onClick={() => signMessage({ message: 'Hello from my dapp!' })}>
-        Sign Message
+      <button disabled={signMessage.isPending} onClick={handleSign}>
+        {signMessage.isPending ? 'Signing...' : 'Sign Message'}
       </button>
-      {signature && <p>Signature: {signature}</p>}
+      {signMessage.data && <p>Signature: {signMessage.data}</p>}
     </div>
   )
 }
@@ -237,30 +251,29 @@ function SignMessage() {
 
 ### Send a transaction
 
-Use `useSendTransaction` and `useWaitForTransactionReceipt` to send ETH and track confirmation:
+Use `useSendTransaction` to send ETH:
 
 ```tsx
-import { useSendTransaction, useWaitForTransactionReceipt } from 'wagmi'
+import { useSendTransaction } from 'wagmi'
 import { parseEther } from 'viem'
 
 function SendTransaction() {
-  const { data: hash, sendTransaction, isPending } = useSendTransaction()
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash })
+  const sendTx = useSendTransaction()
+
+  const handleSend = async () => {
+    const hash = await sendTx.mutateAsync({
+      to: '0xRecipientAddress',
+      value: parseEther('0.01'),
+    })
+    console.log('Transaction hash:', hash)
+  }
 
   return (
     <div>
-      <button
-        disabled={isPending}
-        onClick={() =>
-          sendTransaction({
-            to: '0xRecipientAddress',
-            value: parseEther('0.01'),
-          })
-        }>
-        {isPending ? 'Sending...' : 'Send 0.01 ETH'}
+      <button disabled={sendTx.isPending} onClick={handleSend}>
+        {sendTx.isPending ? 'Sending...' : 'Send 0.01 ETH'}
       </button>
-      {isConfirming && <p>Confirming...</p>}
-      {isSuccess && <p>Confirmed! Hash: {hash}</p>}
+      {sendTx.data && <p>Transaction hash: {sendTx.data}</p>}
     </div>
   )
 }
@@ -303,14 +316,25 @@ See the [production readiness checklist](../guides/best-practices/production-rea
 
 If you previously used `@metamask/sdk` with Wagmi, the MetaMask connector now uses `@metamask/connect-evm` under the hood. Update your dependencies and connector configuration:
 
-1. Replace `@metamask/sdk` with `@metamask/connect-evm`:
+1. Replace `@metamask/sdk` with `@metamask/connect-evm` and update Wagmi packages:
 
    ```bash npm2yarn
    npm uninstall @metamask/sdk
-   npm install @metamask/connect-evm
+   npm install @metamask/connect-evm wagmi@^3.6.0 wagmi/connectors@^8.0.0
    ```
 
-2. Update connector options:
+2. Update hook usage for wagmi v3:
+
+   | Old (wagmi v2)                      | New (wagmi v3)                         | Notes                                       |
+   | ----------------------------------- | -------------------------------------- | ------------------------------------------- |
+   | `useAccount()`                      | `useConnection()`                      | Returns `address`, `isConnected`, `chainId` |
+   | `useConnect()` returns `connectors` | `useConnectors()` hook                 | Connectors are a separate hook              |
+   | `connect({ connector })`            | `connect.mutate({ connector })`        | Hooks return mutation objects               |
+   | `signMessage({ message })`          | `signMessage.mutateAsync({ message })` | Use `.mutateAsync()` for async results      |
+   | `sendTransaction({...})`            | `sendTx.mutateAsync({...})`            | Use `.mutateAsync()` for async results      |
+   | `switchChain({ chainId })`          | `switchChain.mutate({ chainId })`      | Mutation pattern                            |
+
+3. Update connector options:
 
    | Old parameter (`@metamask/sdk`) | New parameter (`@metamask/connect-evm`) | Notes                                         |
    | ------------------------------- | --------------------------------------- | --------------------------------------------- |
