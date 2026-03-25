@@ -74,7 +74,7 @@ The client is a **singleton** — calling it again returns the same instance wit
 
 ### 3. Connect to MetaMask
 
-Register a [`wallet_sessionChanged`](../reference/methods.md#on) listener to capture session data, then connect with both EVM and Solana scopes in a single call.
+Register a [`wallet_sessionChanged`](../reference/api.md#wallet_sessionchanged) listener using the [`on`](../reference/methods.md#on) method to capture session data, then connect with both EVM and Solana scopes in a single call.
 A QR code appears in the terminal — scan it with the MetaMask mobile app:
 
 ```javascript
