@@ -1,8 +1,21 @@
 ---
-title: "Node.js Quickstart - MetaMask Connect EVM"
+title: 'Node.js Quickstart - MetaMask Connect EVM'
 description: Set up MetaMask Connect EVM in a Node.js application with createEVMClient, connect via QR code, and use the EIP-1193 provider for JSON-RPC requests.
 sidebar_label: Node.js
-keywords: [connect, MetaMask, Node.js, SDK, CLI, server-side, createEVMClient, EIP-1193, QR code, personal_sign, node quickstart]
+keywords:
+  [
+    connect,
+    MetaMask,
+    Node.js,
+    SDK,
+    CLI,
+    server-side,
+    createEVMClient,
+    EIP-1193,
+    QR code,
+    personal_sign,
+    node quickstart,
+  ]
 ---
 
 # Connect to EVM - Node.js quickstart
@@ -26,13 +39,11 @@ polyfilling in browser or React Native environments.
 
 ### 1. Install MetaMask Connect EVM
 
-Install MetaMask Connect EVM and MetaMask Connect Multichain:
+Install MetaMask Connect EVM:
 
 ```bash npm2yarn
-npm install @metamask/connect-evm @metamask/connect-multichain
+npm install @metamask/connect-evm
 ```
-
-`@metamask/connect-multichain` provides the [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) helper for generating RPC URLs.
 
 ### 2. Initialize MetaMask Connect EVM
 
@@ -40,8 +51,7 @@ Create a file (for example, `index.mjs`) and initialize the client.
 In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly:
 
 ```javascript title="index.mjs"
-import { createEVMClient } from '@metamask/connect-evm'
-import { getInfuraRpcUrls } from '@metamask/connect-multichain'
+import { createEVMClient, getInfuraRpcUrls } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
@@ -58,7 +68,6 @@ const evmClient = await createEVMClient({
 
 :::info Asynchronous client
 `createEVMClient` returns a promise. Always `await` it before using the client.
-The client is a **singleton** — calling `createEVMClient` again returns the same instance.
 :::
 
 ### 3. Connect to MetaMask
@@ -141,10 +150,10 @@ const evmClient = await createEVMClient({
     disconnect: () => {
       console.log('Disconnected')
     },
-    accountsChanged: (accounts) => {
+    accountsChanged: accounts => {
       console.log('Accounts changed:', accounts)
     },
-    chainChanged: (chainId) => {
+    chainChanged: chainId => {
       console.log('Chain changed:', chainId)
     },
   },
@@ -154,8 +163,7 @@ const evmClient = await createEVMClient({
 ## Full example
 
 ```javascript title="index.mjs"
-import { createEVMClient } from '@metamask/connect-evm'
-import { getInfuraRpcUrls } from '@metamask/connect-multichain'
+import { createEVMClient, getInfuraRpcUrls } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
   dapp: {
@@ -205,4 +213,3 @@ node index.mjs
 - [Manage user accounts](../guides/manage-user-accounts.md)
 - [Send transactions](../guides/send-transactions/index.md)
 - [Sign data](../guides/sign-data/index.md)
-- [Use the Multichain SDK](../../multichain/quickstart/nodejs.md) to connect to both EVM and Solana from a single session

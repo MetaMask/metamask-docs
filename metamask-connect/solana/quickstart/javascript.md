@@ -1,13 +1,27 @@
 ---
-title: "JavaScript Quickstart - MetaMask Connect Solana"
+title: 'JavaScript Quickstart - MetaMask Connect Solana'
 description: Set up MetaMask Connect Solana in a vanilla JavaScript dapp using wallet-standard features, signAndSendTransaction, and createSolanaClient.
 sidebar_label: JavaScript
-keywords: [connect, MetaMask, JavaScript, SDK, dapp, Wallet SDK, vanilla javascript, wallet-standard, solana browser dapp, signAndSendTransaction, connect solana]
+keywords:
+  [
+    connect,
+    MetaMask,
+    JavaScript,
+    SDK,
+    dapp,
+    Wallet SDK,
+    vanilla javascript,
+    wallet-standard,
+    solana browser dapp,
+    signAndSendTransaction,
+    connect solana,
+  ]
 ---
 
 # Connect to Solana quickstart
 
 This quickstart gets you up and running with MetaMask Connect Solana in a JavaScript dapp.
+
 <!--
 [Download the template](#set-up-using-a-template) to start quickly, or [set up manually](#set-up-manually) in an existing project.
 -->
@@ -142,11 +156,11 @@ The client handles cross-platform connection (desktop and mobile), including dee
 
 ## `SolanaClient` methods at a glance
 
-| Method             | Description                                                                          |
-| ------------------ | ------------------------------------------------------------------------------------ |
-| [`getWallet()`](../reference/methods.md#getwallet)      | Returns a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet instance |
-| [`registerWallet()`](../reference/methods.md#registerwallet) | Registers MetaMask with the Wallet Standard registry (no-op if auto-registered)      |
-| [`disconnect()`](../reference/methods.md#disconnect)    | Disconnects Solana scopes without terminating the broader multichain session          |
+| Method                                                       | Description                                                                                                |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| [`getWallet()`](../reference/methods.md#getwallet)           | Returns a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet instance |
+| [`registerWallet()`](../reference/methods.md#registerwallet) | Registers MetaMask with the Wallet Standard registry (no-op if auto-registered)                            |
+| [`disconnect()`](../reference/methods.md#disconnect)         | Disconnects Solana scopes without terminating the broader multichain session                               |
 
 ## Usage example
 
@@ -179,13 +193,8 @@ try {
 await solanaClient.disconnect()
 ```
 
-## Live example
-
-<iframe className="mt-6" width="100%" height="600px" frameBorder="0" src="https://stackblitz.com/github/MetaMask/metamask-sdk-examples/tree/main/quickstarts/javascript?ctl=1&embed=1&file=src%2Fmain.js&hideNavigation=1"></iframe>
-
 ## Next steps
 
 - [Use the Wallet Adapter](../guides/use-wallet-adapter.md) to integrate MetaMask with Solana's standard wallet discovery in a React dapp.
 - [Send a legacy transaction](../guides/send-legacy-transaction.md) to transfer SOL or interact with programs.
 - [Sign messages](../guides/sign-data/sign-message.md) to verify wallet ownership or authorize off-chain actions.
-- [Use the Multichain SDK](../../multichain/quickstart/javascript.md) to connect to both EVM and Solana from a single session.
