@@ -20,7 +20,7 @@ export const DTKQuickStartHostedLinks = {
 }
 
 export const MMSDKQuickStartHostedLinks = {
-  REACT: 'https://metamask-react-demo.vercel.app/',
+  REACT: 'https://demo-mmc-evm-react.vercel.app/',
 }
 
 export const EWQuickStartSourceCode = {
@@ -49,5 +49,5 @@ export const DTKQuickStartSourceCode = {
 }
 
 export const MMSDKQuickStartSourceCode = {
-  REACT: 'https://github.com/MetaMask/metamask-sdk-examples/tree/main/quickstarts/react',
+  REACT: 'https://github.com/MetaMask/metamask-connect-examples/tree/main/quickstarts/evm/react',
 }

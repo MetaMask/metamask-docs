@@ -26,7 +26,7 @@ const Banner: FC<BannerProps> = ({ children }) => {
             className={styles['button']}
             as="a"
             type={theme === 'dark' ? 'secondary' : 'primary'}
-            href="https://app.infura.io/register"
+            href="https://developer.metamask.io/register"
             target="_blank"
             rel="noopener noreferrer"
             label="Sign up"

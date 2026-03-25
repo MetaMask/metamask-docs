@@ -56,10 +56,11 @@ export default function Home(): JSX.Element {
             description: (
               <>
                 Connect your dapp to the <strong>MetaMask browser extension and mobile app</strong>.
-                Ideal for users who want full control over their <strong>keys and transactions</strong>.
+                Interact with users' accounts across <strong>multichain, EVM, or Solana</strong> networks
+                using a single integration.
               </>
             ),
-            href: '/sdk',
+            href: '/metamask-connect',
             buttonIcon: 'arrow-right',
           },
           {

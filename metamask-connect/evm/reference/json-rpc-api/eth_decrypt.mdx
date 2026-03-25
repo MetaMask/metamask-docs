@@ -1,0 +1,48 @@
+---
+title: eth_decrypt
+sidebar_label: eth_decrypt
+description: This method is deprecated and may be removed in the future.
+
+ Requests that MetaMask decrypt the specified encrypted message.
+ The message must have been encrypted using the public encryption key of the specified Ethereum address.
+ Returns a promise that resolves to the decrypted message, or rejects if the decryption attempt fails.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_decrypt", "MetaMask", "Restricted", "Deprecated"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_decrypt"
+  description="This method is deprecated and may be removed in the future.   Requests that MetaMask decrypt the specified encrypted message.  The message must have been encrypted using the public encryption key of the specified Ethereum address.  Returns a promise that resolves to the decrypted message, or rejects if the decryption attempt fails."
+  parameters={[{
+    name: "EncryptedMessage",
+    type: "string",
+    required: true,
+    description: "The encrypted message to decrypt."
+  },
+{
+    name: "Address",
+    type: "string",
+    required: true,
+    description: "The address of the Ethereum account that can decrypt the message."
+  }]}
+  returns={{
+  type: "array",
+  description: "An array of the user's permissions."
+}}
+  errors={[{ code: 4100, message: "The requested account and/or method has not been authorized by the user.", description: "The requested account and/or method has not been authorized by the user." }]}
+  exampleRequest={`await provider.request({
+    method: "eth_decrypt",
+    params: [
+  "0x7b2276657273696f6e223a227832353531392d7873616c736132302d706f6c7931333035222c226e6f6e6365223a2243533967507076467071765358704655416679726a7179774e35302b7a747766222c22657068656d5075626c69634b6579223a224372774b61456d2f4b356d6d714239764c376f5872636d6441417757764479324f784c3333527135576e553d222c2263697068657274657874223a2248347a65336e7177572b753174663956343945506167454e343872774f766b6952676244566e47587a38493d227d",
+  "0xD1F5279BE4B4dD94133A23deE1B23F5bfC0Db1d0"
+]
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "Hello, Ethereum!"
+}`}
+/>
