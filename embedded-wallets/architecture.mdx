@@ -1,7 +1,7 @@
 ---
 title: Architecture
 sidebar_label: Architecture
-description: 'How MetaMask Embedded Wallets fit together: SDK layout, integrations, and wallet management infrastructure.'
+description: How MetaMask Embedded Wallets fit together: SDK layout, integrations, and wallet management infrastructure.
 ---
 
 import PnPCoreKitFlowLight from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-light.png'
@@ -10,6 +10,13 @@ import PnPCoreKitFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/
 MetaMask Embedded Wallets includes front-end SDKs that run in your app and coordinate OAuth sign-in
 with the Embedded Wallets network. You use these SDKs to authenticate a user, retrieve the key
 material required for that user, and create a client that can sign requests on the user's behalf.
+
+:::note[Rebrand]
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs).
+Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+:::
 
 At a high level, the flow includes:
 
