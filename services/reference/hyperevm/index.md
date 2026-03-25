@@ -8,7 +8,7 @@ import CardList from '@site/src/components/CardList'
 
 :::note Decentralized Infrastructure Network (DIN)
 HyperEVM is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
-meaning calls to the network are routed to partner infrastructure providers
+meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 :::
 
 HyperEVM is the EVM execution environment on the Hyperliquid blockchain, secured by the same consensus as HyperCore.
@@ -39,3 +39,11 @@ Select an option below to get started with HyperEVM.
   ]}
 />
 
+## Partners and privacy policies
+
+No personal information is sent as part of partner requests, only information necessary to fulfill your API request. This means that Infura's partner service provider can service your request, but not store the content of your request.
+
+The following partner provides access to the HyperEVM network:
+
+- Liquify ([Privacy Policy](https://www.liquify.com/Liquify_RPC_PP.pdf))
+- Nodies DLB ([Terms of Use](https://www.nodies.app/tos.txt), [Privacy Policy](https://www.nodies.app/privacy.txt))
