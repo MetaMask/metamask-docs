@@ -128,6 +128,7 @@ const sidebar = {
   overview: [
     { type: "doc", id: "README", label: "About" },
     { type: "doc", id: "get-started", label: "Get Started" },
+    { type: "doc", id: "architecture", label: "Architecture" },
     "build-with-ai",
     {
       type: "category",

@@ -6,9 +6,6 @@ description: 'What are MetaMask Embedded Wallets? Pluggable wallet infrastructur
 ---
 
 import Head from '@docusaurus/Head'
-import BrowserOnly from '@docusaurus/BrowserOnly'
-import PnPCoreKitFlowLight from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-light.png'
-import PnPCoreKitFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-dark.png'
 
 <Head>
   <meta
@@ -34,11 +31,10 @@ import PnPCoreKitFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/
 
 MetaMask Embedded Wallets (formerly Web3Auth) provides a pluggable embedded wallet infrastructure to
 simplify Web3 wallet integration and user onboarding. It supports OAuth-based logins and multiple
-platforms, allowing your users to access Web3 applications through familiar authentication methods
-in under a minute.
+platforms, allowing your users to access Web3 applications through familiar authentication methods.
 
-MetaMask Embedded Wallets removes the complexity of traditional wallet management by removing the need
-to manage private keys and seed phrases.
+MetaMask Embedded Wallets reduces traditional wallet management overhead by removing the need
+to manage private keys and seed phrases directly.
 
 <p style={{ margin: '1.25rem 0' }}>
   <img
@@ -55,80 +51,52 @@ to manage private keys and seed phrases.
   />
 </p>
 
-Users enjoy seamless onboarding while maintaining full control of their non-custodial wallets, ensuring
-both convenience and security.
+Users get a smoother onboarding experience while retaining control of non-custodial wallets.
 
 ## Key features
 
-### 🔐 Authentication made simple
+### Authentication
 
-Get your users started in seconds with familiar login methods they already use:
+Help users get started quickly with login methods they already use:
 
-- Sign in with Google, Twitter, GitHub and other popular social accounts
-- Passwordless login via email, SMS and authenticator apps.
-- Bring your own auth system while leveraging our secure wallet infrastructure
+- Sign in with Google, Twitter, GitHub and other popular social accounts.
+- Passwordless sign-in with email, SMS and authenticator apps.
+- Bring your own auth system while using MetaMask Embedded Wallets infrastructure.
 
-### 🛡️ Bank-grade security
+### Security
 
 Enterprise-level protection for your users' digital assets:
 
-- Advanced MPC technology splits keys across multiple parties
-- Users maintain 100% control of their non-custodial wallets
-- Distributed architecture prevents single points of failure
-- Multiple backup options for worry-free recovery
+- Advanced MPC technology splits keys across multiple parties.
+- Users maintain 100% control of their non-custodial wallets.
+- A distributed architecture prevents single points of failure
+- Multiple recovery options support account restore flows.
 
-### 💻 Built for developers
+### Developer experience
 
-Integrate MetaMask Embedded Wallets into your app with minimal effort:
+Integrate MetaMask Embedded Wallets into your app with minimal setup:
 
-- Drop-in solution works with your existing auth system
-- No complex migrations or infrastructure changes needed
-- Full control to customize the look and feel
-- Support for web, mobile, and gaming platforms
+- Use a drop-in solution that works with your existing auth system.
+- No complex migrations or infrastructure changes needed.
+- Customize the look and feel.
+- Support for web, mobile, and gaming platforms.
 
-### 👥 Designed for users
+### User experience
 
-The smoothest path to Web3 for your users:
+Provide a low-friction path to Web3:
 
-- Get started in under 60 seconds
-- No crypto knowledge needed
-- Users own and control their wallets
-- Simple, reliable account recovery
+- Help users get started quickly.
+- Avoid requiring users to understand blockchain concepts up front.
+- Users own and control their wallets.
+- Support account recovery flows.
 
-MetaMask Embedded Wallets operate as wallet infrastructure, providing enhanced flexibility and security
-for decentralized applications (dapps) and blockchain wallets. Throughout this documentation, we'll
-explore the functionality of MetaMask Embedded Wallets, showcasing how it produces unique cryptographic
-key providers for each user and application.
+MetaMask Embedded Wallets provides wallet infrastructure for dapps and blockchain wallets. This
+documentation explains how it works, including how it generates cryptographic key providers for
+each user and application.
 
 ## How do Embedded Wallets work?
 
-### High-level architecture
-
-The Embedded Wallet SDKs live solely on the user/application's frontend client and handle the interactions between OAuth providers and the Embedded Wallet network.
-
-The diagram below describes the relationship between the SDKs and integrating applications. It also depicts the difference between the products that power the infrastructure for a developer-friendly integration.
-
-<picture>
-  <source srcset={PnPCoreKitFlowLight} media="(prefers-color-scheme: light)" />
-  <source srcset={PnPCoreKitFlowDark} media="(prefers-color-scheme: dark)" />
-  <img
-    src={PnPCoreKitFlowLight}
-    style={{ display: 'block', maxHeight: '600px', margin: '20px auto' }}
-    alt="This diagram describes the relationship between the Embedded Wallet SDK and integrating application"
-  />
-</picture>
-
-### Wallet management infrastructure
-
-The [wallet management infrastructure](./infrastructure/README.mdx) enhances security by distributing a user's wallet across various key shares, thereby avoiding direct exposure of seed phrases. These key shares form a 'web of trust' and enable wallet management akin to multi-factor account handling. Users employ OAuth logins, trusted devices, and other factors to manage their cryptographic key pairs. Importantly, the complete private keys are not stored anywhere within the wallet infrastructure system, including our databases or any participating nodes.
-
-To create a social login share, users interact with the Embedded Wallets network, where key generation operates via a 5/9 consensus system. This setup guarantees that wallets remain non-custodial, ensuring that neither MetaMask, social login providers, nor any other party holding a key share can claim full ownership.
-
-:::tip managing wallets
-
-For managing wallets, our infrastructure uses various cryptographic techniques such as [Shamir's Secret Sharing](./infrastructure/sss-architecture.mdx), threshold cryptography, and [Multi Party Computation (MPC)](./infrastructure/mpc-architecture.mdx). To learn more about how we manage wallets, please refer to our [Wallet Management and Security of our Infrastructure](./infrastructure/README.mdx).
-
-:::
+See **[Architecture](./architecture.mdx)** for the high-level system design, SDK and integration diagram, and wallet management infrastructure.
 
 ## Is MetaMask Embedded Wallets a wallet?
 
