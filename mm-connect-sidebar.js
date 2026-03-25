@@ -116,8 +116,8 @@ const metamaskConnectSidebar = {
       collapsed: false,
       items: [
         'evm/quickstart/javascript',
+        'evm/quickstart/wagmi',
         'evm/quickstart/nodejs',
-        // 'evm/quickstart/wagmi',
         // 'evm/quickstart/rainbowkit',
         // 'evm/quickstart/connectkit',
         'evm/quickstart/react-native',
