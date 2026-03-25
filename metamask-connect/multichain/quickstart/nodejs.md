@@ -1,8 +1,22 @@
 ---
-title: "Node.js Quickstart - MetaMask Connect Multichain"
+title: 'Node.js Quickstart - MetaMask Connect Multichain'
 description: Set up MetaMask Connect Multichain in a Node.js application to connect to EVM and Solana simultaneously using createMultichainClient, CAIP-25 scopes, and invokeMethod.
 sidebar_label: Node.js
-keywords: [multichain, evm, solana, connect, Node.js, caip-25, scope, createMultichainClient, invokeMethod, getInfuraRpcUrls, QR code, node quickstart]
+keywords:
+  [
+    multichain,
+    evm,
+    solana,
+    connect,
+    Node.js,
+    caip-25,
+    scope,
+    createMultichainClient,
+    invokeMethod,
+    getInfuraRpcUrls,
+    QR code,
+    node quickstart,
+  ]
 ---
 
 # Multichain Node.js quickstart
@@ -38,10 +52,7 @@ In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly
 Use [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) to generate RPC URLs for all Infura-supported chains:
 
 ```javascript title="index.mjs"
-import {
-  createMultichainClient,
-  getInfuraRpcUrls,
-} from '@metamask/connect-multichain'
+import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
 
 const client = await createMultichainClient({
   dapp: {
@@ -63,22 +74,25 @@ The client is a **singleton** — calling it again returns the same instance wit
 
 ### 3. Connect to MetaMask
 
-Connect with both EVM and Solana scopes in a single call.
+Register a [`wallet_sessionChanged`](../reference/methods.md#on) listener to capture session data, then connect with both EVM and Solana scopes in a single call.
 A QR code appears in the terminal — scan it with the MetaMask mobile app:
 
 ```javascript
-await client.connect(
-  ['eip155:1', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'],
-  [],
-)
+let session
+client.on('wallet_sessionChanged', s => {
+  session = s
+})
 
-const session = await client.getSession()
-const ethAccounts = session?.sessionScopes?.['eip155:1']?.accounts ?? []
-const solAccounts =
-  session?.sessionScopes?.['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']
-    ?.accounts ?? []
-console.log('ETH accounts:', ethAccounts)
-console.log('SOL accounts:', solAccounts)
+await client.connect(['eip155:1', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])
+
+const ethAddress = session?.sessionScopes?.['eip155:1']?.accounts?.[0]?.split(':').pop()
+const solAddress = session?.sessionScopes?.[
+  'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
+]?.accounts?.[0]
+  ?.split(':')
+  .pop()
+console.log('ETH:', ethAddress)
+console.log('SOL:', solAddress)
 ```
 
 The user sees a single approval prompt for all requested chains.
@@ -89,8 +103,6 @@ Use [`invokeMethod`](../reference/methods.md#invokemethod) with an EVM scope to 
 Read methods route through the RPC node; signing methods route through the wallet:
 
 ```javascript
-const ethAddress = ethAccounts[0]?.split(':').pop()
-
 // Read: get balance via RPC node
 const balance = await client.invokeMethod({
   scope: 'eip155:1',
@@ -102,15 +114,15 @@ const balance = await client.invokeMethod({
 console.log('ETH balance:', balance)
 
 // Sign: personal_sign via wallet
-const message = '0x' + Buffer.from('Hello from Node.js!', 'utf8').toString('hex')
-const signature = await client.invokeMethod({
+const ethMsg = '0x' + Buffer.from('Hello Ethereum!', 'utf8').toString('hex')
+const ethSig = await client.invokeMethod({
   scope: 'eip155:1',
   request: {
     method: 'personal_sign',
-    params: [message, ethAddress],
+    params: [ethMsg, ethAddress],
   },
 })
-console.log('ETH signature:', signature)
+console.log('ETH signature:', ethSig)
 ```
 
 ### 5. Invoke Solana methods
@@ -118,20 +130,19 @@ console.log('ETH signature:', signature)
 Use [`invokeMethod`](../reference/methods.md#invokemethod) with a Solana scope. All Solana methods route through the wallet:
 
 ```javascript
-const solAddress = solAccounts[0]?.split(':').pop()
-const solMessage = Buffer.from('Hello from Node.js!', 'utf8').toString('base64')
+const solMsg = Buffer.from('Hello Solana!', 'utf8').toString('base64')
 
-const solSignature = await client.invokeMethod({
+const solSig = await client.invokeMethod({
   scope: 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp',
   request: {
     method: 'signMessage',
     params: {
       account: { address: solAddress },
-      message: solMessage,
+      message: solMsg,
     },
   },
 })
-console.log('SOL signature:', solSignature)
+console.log('SOL signature:', solSig)
 ```
 
 ### 6. Disconnect
@@ -147,10 +158,10 @@ console.log('Disconnected')
 
 ## Listen for session events
 
-Register event listeners before calling [`connect()`](../reference/methods.md#connect) to track session changes:
+[Step 3](#3-connect-to-metamask) captures the session with a minimal `wallet_sessionChanged` listener. For production use, expand the handler to track all scope and account changes throughout the session lifecycle:
 
 ```javascript
-client.on('wallet_sessionChanged', (session) => {
+client.on('wallet_sessionChanged', session => {
   if (session?.sessionScopes) {
     const scopes = Object.keys(session.sessionScopes)
     console.log('Active scopes:', scopes)
@@ -165,23 +176,20 @@ client.on('wallet_sessionChanged', (session) => {
 
 ## Multichain client methods at a glance
 
-| Method                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)       | Connects to MetaMask with multichain [scopes](../concepts/scopes.md).                         |
-| [`getSession()`](../reference/methods.md#getsession)                       | Returns the current [session](../concepts/scopes.md#sessions-caip-25) with approved accounts. |
-| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod) | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md).               |
-| [`disconnect()`](../reference/methods.md#disconnect)                       | Disconnects all [scopes](../concepts/scopes.md) and ends the session.                         |
-| [`disconnect(scopes)`](../reference/methods.md#disconnect)                 | Disconnects specific [scopes](../concepts/scopes.md) without ending the session.              |
-| [`on(event, handler)`](../reference/methods.md#on)                         | Registers an event handler.                                                                   |
+| Method                                                                           | Description                                                                                   |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)             | Connects to MetaMask with multichain [scopes](../concepts/scopes.md).                         |
+| [`getSession()`](../reference/methods.md#getsession)                             | Returns the current [session](../concepts/scopes.md#sessions-caip-25) with approved accounts. |
+| [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod)       | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md).               |
+| [`disconnect()`](../reference/methods.md#disconnect)                             | Disconnects all [scopes](../concepts/scopes.md) and ends the session.                         |
+| [`disconnect(scopes)`](../reference/methods.md#disconnect)                       | Disconnects specific [scopes](../concepts/scopes.md) without ending the session.              |
+| [`on(event, handler)`](../reference/methods.md#on)                               | Registers an event handler.                                                                   |
 | [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) | Generates Infura RPC URLs keyed by CAIP-2 chain ID.                                           |
 
 ## Full example
 
 ```javascript title="index.mjs"
-import {
-  createMultichainClient,
-  getInfuraRpcUrls,
-} from '@metamask/connect-multichain'
+import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
 
 const ETH_MAINNET = 'eip155:1'
 const SOLANA_MAINNET = 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'
@@ -198,10 +206,15 @@ const client = await createMultichainClient({
   },
 })
 
+// Capture session data via event before connecting
+let session
+client.on('wallet_sessionChanged', s => {
+  session = s
+})
+
 // Connect — scan the QR code with the MetaMask mobile app
 await client.connect([ETH_MAINNET, SOLANA_MAINNET], [])
 
-const session = await client.getSession()
 const ethAddress = session?.sessionScopes?.[ETH_MAINNET]?.accounts?.[0]?.split(':').pop()
 const solAddress = session?.sessionScopes?.[SOLANA_MAINNET]?.accounts?.[0]?.split(':').pop()
 console.log('ETH:', ethAddress)

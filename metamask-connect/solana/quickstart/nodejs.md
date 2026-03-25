@@ -1,8 +1,22 @@
 ---
-title: "Node.js Quickstart - MetaMask Connect Solana"
+title: 'Node.js Quickstart - MetaMask Connect Solana'
 description: Set up MetaMask Connect Solana in a Node.js application using createSolanaClient with the multichain core for connecting, signing, and sending Solana transactions.
 sidebar_label: Node.js
-keywords: [connect, MetaMask, Node.js, Solana, SDK, CLI, server-side, createSolanaClient, invokeMethod, signMessage, QR code, node quickstart]
+keywords:
+  [
+    connect,
+    MetaMask,
+    Node.js,
+    Solana,
+    SDK,
+    CLI,
+    server-side,
+    createSolanaClient,
+    invokeMethod,
+    signMessage,
+    QR code,
+    node quickstart,
+  ]
 ---
 
 # Connect to Solana - Node.js quickstart
@@ -65,16 +79,20 @@ returns the same underlying session.
 
 ### 3. Connect to MetaMask
 
-Use the multichain core to connect with a Solana scope.
+Register a [`wallet_sessionChanged`](../../multichain/reference/api.md#wallet_sessionchanged) listener to capture session data, then connect with a Solana scope.
 A QR code appears in the terminal — scan it with the MetaMask mobile app:
 
 ```javascript
+let session
+solanaClient.core.on('wallet_sessionChanged', s => {
+  session = s
+})
+
 await solanaClient.core.connect([SOLANA_MAINNET], [])
 
-const session = await solanaClient.core.getSession()
 const accounts = session?.sessionScopes?.[SOLANA_MAINNET]?.accounts ?? []
 const address = accounts[0]?.split(':').pop()
-console.log('Connected Solana address:', address)
+console.log('Connected:', address)
 ```
 
 ### 4. Sign a message
@@ -106,10 +124,10 @@ console.log('Disconnected')
 
 ## Listen for session events
 
-Use the [`wallet_sessionChanged`](../../multichain/reference/api.md#wallet_sessionchanged) event on the multichain core to track session state:
+[Step 3](#3-connect-to-metamask) captures the session with a minimal `wallet_sessionChanged` listener. For production use, expand the handler to track account changes throughout the session lifecycle:
 
 ```javascript
-solanaClient.core.on('wallet_sessionChanged', (session) => {
+solanaClient.core.on('wallet_sessionChanged', session => {
   if (session?.sessionScopes) {
     const solanaAccounts = session.sessionScopes[SOLANA_MAINNET]?.accounts ?? []
     console.log('Solana accounts:', solanaAccounts)
@@ -121,10 +139,10 @@ solanaClient.core.on('wallet_sessionChanged', (session) => {
 
 ## Solana CAIP-2 scope reference
 
-| Network  | CAIP-2 scope                              |
-| -------- | ----------------------------------------- |
-| Mainnet  | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` |
-| Devnet   | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` |
+| Network | CAIP-2 scope                              |
+| ------- | ----------------------------------------- |
+| Mainnet | `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp` |
+| Devnet  | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` |
 
 :::note
 Devnet and testnet require [MetaMask Flask](https://metamask.io/flask/).
@@ -151,10 +169,15 @@ const solanaClient = await createSolanaClient({
   },
 })
 
+// Capture session data via event before connecting
+let session
+solanaClient.core.on('wallet_sessionChanged', s => {
+  session = s
+})
+
 // Connect — scan the QR code with the MetaMask mobile app
 await solanaClient.core.connect([SOLANA_MAINNET], [])
 
-const session = await solanaClient.core.getSession()
 const accounts = session?.sessionScopes?.[SOLANA_MAINNET]?.accounts ?? []
 const address = accounts[0]?.split(':').pop()
 console.log('Connected:', address)
