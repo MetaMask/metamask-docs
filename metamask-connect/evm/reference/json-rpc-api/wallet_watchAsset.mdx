@@ -1,0 +1,66 @@
+---
+title: wallet_watchAsset
+sidebar_label: wallet_watchAsset
+description: Requests that the user track the specified token in MetaMask. Returns a boolean indicating if the token was successfully added. Once added, the token is indistinguishable from those added using legacy methods, such as a centralized registry. Introduced by [EIP-747](https://eips.ethereum.org/EIPS/eip-747).
+hide_title: true
+hide_table_of_contents: true
+keywords: ["wallet_watchAsset", "MetaMask", "Experimental", "Multichain"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="wallet_watchAsset"
+  description="Requests that the user track the specified token in MetaMask. Returns a boolean indicating if the token was successfully added. Once added, the token is indistinguishable from those added using legacy methods, such as a centralized registry. Introduced by [EIP-747](https://eips.ethereum.org/EIPS/eip-747)."
+  parameters={[{
+    name: "type",
+    type: "string",
+    required: true,
+    description: "The token type (`ERC20`, `ERC721`, or `ERC1155`). Support for ERC-721 and ERC-1155 tokens is experimental and currently only available on the extension (not on mobile). See [MIP-1](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/MIPs/mip-1.md) and the [MIP proposal lifecycle](https://github.com/MetaMask/metamask-improvement-proposals/blob/main/PROCESS-GUIDE.md#proposal-lifecycle) for more information."
+  },
+{
+    name: "options",
+    type: "object",
+    required: false,
+    description: "An object containing information about the token.",
+    children: [
+      { name: "address", type: "string", required: true, description: "The address of the token contract." },
+      { name: "decimals", type: "number", required: false, description: "The number of token decimals (optional for ERC-20 tokens)." },
+      { name: "image", type: "string", required: false, description: "A string URL of the token logo (optional for ERC-20 tokens)." },
+      { name: "symbol", type: "string", required: false, description: "A ticker symbol or shorthand, up to 11 characters (optional for ERC-20 tokens)." },
+      { name: "tokenId", type: "string", required: false, description: "The unique identifier of the NFT (required for ERC-721 and ERC-1155 tokens)." }
+    ]
+  }]}
+  returns={{
+  type: "boolean",
+  description: "`true` if the token was added, `false` otherwise."
+}}
+  errors={[{ code: -32602, message: "Must specify address, symbol, and decimals.", description: "Must specify address, symbol, and decimals." },
+  { code: -32602, message: "Invalid symbol: not a string.", description: "Invalid symbol: not a string." },
+  { code: -32602, message: "Invalid symbol '${symbol}': longer than 11 characters.", description: "Invalid symbol '${symbol}': longer than 11 characters." },
+  { code: -32602, message: "Invalid decimals '${decimals}': must be 0 <= 36.", description: "Invalid decimals '${decimals}': must be 0 <= 36." },
+  { code: -32602, message: "Invalid address '${address}'.", description: "Invalid address '${address}'." },
+  { code: -32602, message: "Asset type is required.", description: "Asset type is required." },
+  { code: -32602, message: "Both address and tokenId are required.", description: "Both address and tokenId are required." },
+  { code: -32602, message: "Invalid address.", description: "Invalid address." },
+  { code: -32000, message: "Suggested NFT is not owned by the selected account.", description: "Suggested NFT is not owned by the selected account." },
+  { code: -32000, message: "Suggested NFT of type ${standard} does not match received type ${type}.", description: "Suggested NFT of type ${standard} does not match received type ${type}." },
+  { code: -32002, message: "Unable to verify ownership. Possibly because the standard is not supported or the user's currently selected network does not match the chain of the asset in question.", description: "Unable to verify ownership. Possibly because the standard is not supported or the user's currently selected network does not match the chain of the asset in question." }]}
+  exampleRequest={`await provider.request({
+    method: "wallet_watchAsset",
+    params: [
+  "ERC20",
+  {
+    "address": "0xb60e8dd61c5d32be8058bb8eb970870f07233155",
+    "symbol": "FOO",
+    "decimals": 18,
+    "image": "https://foo.io/token-image.svg"
+  }
+]
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": true
+}`}
+/>

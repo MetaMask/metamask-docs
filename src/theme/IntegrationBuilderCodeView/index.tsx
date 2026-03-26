@@ -1,10 +1,8 @@
 import CodeBlock from '@theme/CodeBlock'
 import classNames from 'classnames'
-import rangeParser from 'parse-numeric-range'
 import path from 'path'
 import { FiFile } from 'react-icons/fi'
-import { animated, useSpring } from 'react-spring'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 import styles from './styles.module.css'
 
@@ -14,7 +12,6 @@ interface Props {
   highlight?: string
   selectedFilename: string
   onClickFilename: (filename: string) => void
-  scroll?: number
 }
 
 const getDisplayName = (filename: string): string => {
@@ -45,20 +42,28 @@ export default function IntegrationBuilderCodeView({
   highlight,
   onClickFilename,
 }: Props) {
-  const highlightLines = rangeParser(highlight || '0')
-  const [viewportHeight, setViewportHeight] = useState(800)
+  const bodyRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setViewportHeight(window.innerHeight)
+    if (!highlight) return
+    const el = bodyRef.current
+    if (!el) return
 
-    const handleResize = () => setViewportHeight(window.innerHeight)
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    // Wait one frame for CodeBlock to finish rendering the new content
+    requestAnimationFrame(() => {
+      const highlightedLine = el.querySelector(
+        '.theme-code-block-highlighted-line, .code-focus'
+      ) as HTMLElement | null
 
-  const props = useSpring({
-    scroll: Math.max(highlightLines[0] * 15 - viewportHeight / 3, 0),
-  }) // 15 is line height, position at roughly 1/3 of the viewport
+      if (highlightedLine) {
+        const containerHeight = el.clientHeight
+        const lineTop = highlightedLine.offsetTop
+        const target = Math.max(lineTop - containerHeight / 3, 0)
+        el.scrollTo({ top: target, behavior: 'smooth' })
+      }
+    })
+  }, [highlight])
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -81,11 +86,11 @@ export default function IntegrationBuilderCodeView({
           ))}
         </ul>
       </div>
-      <animated.div className={styles.body} scrollTop={props.scroll}>
+      <div className={styles.body} ref={bodyRef}>
         <CodeBlock className={getLanguage(selectedFilename)}>
           {fileContents[selectedFilename]}
         </CodeBlock>
-      </animated.div>
+      </div>
     </div>
   )
 }

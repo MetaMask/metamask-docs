@@ -1,0 +1,59 @@
+---
+title: eth_getTransactionByBlockNumberAndIndex
+sidebar_label: eth_getTransactionByBlockNumberAndIndex
+description: Returns information about a transaction by block number and transaction index position.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_getTransactionByBlockNumberAndIndex"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_getTransactionByBlockNumberAndIndex"
+  description="Returns information about a transaction by block number and transaction index position."
+  parameters={[{
+    name: "Block",
+    type: "object",
+    required: true,
+    description: "Block number or tag"
+  },
+{
+    name: "Transaction index",
+    type: "string",
+    required: true,
+    description: "hex encoded unsigned integer"
+  }]}
+  returns={{
+  type: "null",
+  description: "Transaction information"
+}}
+  exampleRequest={`await provider.request({
+    method: "eth_getTransactionByBlockNumberAndIndex",
+    params: [
+  "0x1442e",
+  "0x2"
+]
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "blockHash": "0x510efccf44a192e6e34bcb439a1947e24b86244280762cbb006858c237093fda",
+        "blockNumber": "0x422",
+        "chainId": 2018,
+        "from": "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73",
+        "gas": "0x5208",
+        "gasPrice": "0x3b9aca00",
+        "hash": "0xa52be92809541220ee0aaaede6047d9a6c5d0cd96a517c854d944ee70a0ebb44",
+        "input": "0x",
+        "nonce": "0x1",
+        "to": "0x627306090abab3a6e1400e9345bc60c78a8bef57",
+        "transactionIndex": "0x0",
+        "value": "0x4e1003b28d9280000",
+        "v": "0xfe7",
+        "r": "0x84caf09aefbd5e539295acc67217563438a4efb224879b6855f56857fa2037d3",
+        "s": "0x5e863be3829812c81439f0ae9d8ecb832b531d651fb234c848d1bf45e62be8b9"
+    }
+}`}
+/>

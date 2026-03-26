@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from './NavigationOverlay.module.css'
 import NavigationFlow from './NavigationFlow'
 import { getWindowLocation } from '../../../theme/URLParams'
-import { METAMASK_SDK, EMBEDDED_WALLETS, YES, NO } from '../builder/choices'
+import { METAMASK_CONNECT, EMBEDDED_WALLETS, YES, NO } from '../builder/choices'
 
 interface NavigationOverlayProps {
   onClose: () => void
@@ -25,7 +25,7 @@ const validateURLParams = () => {
   if (!product) return false
 
   // Validate product parameter
-  const validProducts = [METAMASK_SDK, EMBEDDED_WALLETS]
+  const validProducts = [METAMASK_CONNECT, EMBEDDED_WALLETS]
   if (!validProducts.includes(product)) return false
 
   // If we have walletAggregatorOnly, validate its value

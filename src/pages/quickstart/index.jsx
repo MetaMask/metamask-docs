@@ -17,14 +17,21 @@ import IntegrationBuilderCodeView from '../../theme/IntegrationBuilderCodeView'
 import builder from './builder'
 import styles from './styles.module.css'
 import { getWindowLocation } from '../../theme/URLParams'
-import { METAMASK_SDK, EMBEDDED_WALLETS, YES, NO } from './builder/choices'
+import { METAMASK_CONNECT, EMBEDDED_WALLETS, YES, NO } from './builder/choices'
 import NavigationOverlay from './NavigationOverlay'
 import MediaStep from './MediaStep'
 
+const ALLOWED_OPTION_KEYS = new Set([
+  'product',
+  'framework',
+  'ecosystem',
+  'walletAggregatorOnly',
+  'stepIndex',
+])
+
 const hasRelevantURLParams = () => {
   const url = new URL(getWindowLocation())
-  const relevantParams = ['product', 'framework', 'walletAggregatorOnly']
-  return relevantParams.some(param => url.searchParams.has(param))
+  return [...ALLOWED_OPTION_KEYS].some(param => param !== 'stepIndex' && url.searchParams.has(param))
 }
 
 const validateURLParams = () => {
@@ -37,7 +44,7 @@ const validateURLParams = () => {
   if (!product) return false
 
   // Validate product parameter
-  const validProducts = [METAMASK_SDK, EMBEDDED_WALLETS]
+  const validProducts = [METAMASK_CONNECT, EMBEDDED_WALLETS]
   if (!validProducts.includes(product)) return false
 
   // If we have walletAggregatorOnly, validate its value
@@ -54,7 +61,9 @@ const getDefaultBuilderOptions = () => {
 
   const urlOpts = {}
   url.searchParams.forEach((value, key) => {
-    urlOpts[key] = value
+    if (ALLOWED_OPTION_KEYS.has(key)) {
+      urlOpts[key] = value
+    }
   })
 
   return { ...defaultOpts, ...urlOpts }
@@ -612,6 +621,7 @@ export default function IntegrationBuilderPage(props) {
   // };
 
   const onChangeDropdown = (optionKey, optionValue) => {
+    if (!ALLOWED_OPTION_KEYS.has(optionKey)) return
     setBuilderOptions({
       ...builderOptions,
       [optionKey]: optionValue,
@@ -727,10 +737,10 @@ export default function IntegrationBuilderPage(props) {
             <div className={styles.cardContainer}>
               {option.choices.map(value => (
                 <React.Fragment key={value.key}>
-                  {value.key === METAMASK_SDK && (
+                  {value.key === METAMASK_CONNECT && (
                     <div
                       className={
-                        builderOptions[key] === METAMASK_SDK ? styles.selectedCard : styles.card
+                        builderOptions[key] === METAMASK_CONNECT ? styles.selectedCard : styles.card
                       }
                       onClick={() => onChangeDropdown(key, value.key)}>
                       <h5 className={classNames(styles.cardTitle)}>{value.displayName}</h5>

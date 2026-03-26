@@ -9,7 +9,9 @@ import {
 import {
   PRODUCTS,
   LANGS_EMBEDDED_WALLETS,
-  LANGS_METAMASK_SDK,
+  LANGS_METAMASK_CONNECT,
+  ECOSYSTEM_CHOICES,
+  EVM,
   EMBEDDED_WALLETS,
   WALLET_AGGREGATOR_TOGGLE,
   NO,
@@ -28,7 +30,7 @@ import EWAngular from './embedded-wallets/angular'
 import EWNextjs from './embedded-wallets/nextjs'
 import EWReact from './embedded-wallets/react'
 import EWVue from './embedded-wallets/vue'
-import MMReact from './metamask-sdk/react'
+import MMConnectEVMReact from './metamask-connect/evm-react'
 
 const frameworks = {
   EW_ANGULAR: EWAngular,
@@ -39,15 +41,15 @@ const frameworks = {
   EW_IOS: EWIos,
   EW_REACT_NATIVE: EWReactNative,
   EW_FLUTTER: EWFlutter,
-  MMSDK_REACT: MMReact,
+  MMCONNECT_EVM_REACT: MMConnectEVMReact,
 }
 
-// Helper function to map framework choice to framework key based on product
-const getFrameworkKey = (product: string, framework: string): string => {
+// Helper function to map framework choice to framework key based on product and ecosystem
+const getFrameworkKey = (product: string, framework: string, ecosystem?: string): string => {
   if (product === EMBEDDED_WALLETS) {
     return `EW_${framework}`
   } else {
-    return `MMSDK_${framework}`
+    return `MMCONNECT_${ecosystem || EVM}_${framework}`
   }
 }
 
@@ -62,11 +64,17 @@ const builder: IntegrationBuilder = {
       type: 'product_selection',
       choices: PRODUCTS,
     },
+    ecosystem: {
+      displayName: 'Ecosystem',
+      default: EVM,
+      type: 'dropdown',
+      choices: ECOSYSTEM_CHOICES,
+    },
     framework: {
       displayName: 'Platform/ Framework',
-      default: LANGS_METAMASK_SDK[0].key,
+      default: LANGS_METAMASK_CONNECT[0].key,
       type: 'dropdown',
-      choices: LANGS_METAMASK_SDK,
+      choices: LANGS_METAMASK_CONNECT,
     },
   },
 
@@ -91,8 +99,8 @@ const builder: IntegrationBuilder = {
       }
       frameworkDefault = frameworkChoices[0].key
     } else {
-      frameworkChoices = LANGS_METAMASK_SDK
-      frameworkDefault = LANGS_METAMASK_SDK[0].key
+      frameworkChoices = LANGS_METAMASK_CONNECT
+      frameworkDefault = LANGS_METAMASK_CONNECT[0].key
     }
 
     if (!frameworkChoices.map(item => item.key).includes(finalValues.framework)) {
@@ -107,21 +115,35 @@ const builder: IntegrationBuilder = {
         type: 'product_selection',
         choices: PRODUCTS,
       },
-      framework: {
+    }
+
+    if (finalValues.product === EMBEDDED_WALLETS) {
+      // Embedded Wallets: Framework then Wallet Aggregator toggle
+      dynamicOptions.framework = {
         displayName: 'Platform/ Framework',
         default: frameworkDefault,
         type: 'dropdown',
         choices: frameworkChoices,
-      },
-    }
-
-    // Add wallet aggregator toggle only for embedded wallets
-    if (finalValues.product === EMBEDDED_WALLETS) {
+      }
       dynamicOptions.walletAggregatorOnly = {
         displayName: 'Wallet Aggregator Only',
         default: NO,
         type: 'dropdown',
         choices: WALLET_AGGREGATOR_TOGGLE,
+      }
+    } else {
+      // MetaMask Connect: Ecosystem first, then Framework
+      dynamicOptions.ecosystem = {
+        displayName: 'Ecosystem',
+        default: EVM,
+        type: 'dropdown',
+        choices: ECOSYSTEM_CHOICES,
+      }
+      dynamicOptions.framework = {
+        displayName: 'Platform/ Framework',
+        default: frameworkDefault,
+        type: 'dropdown',
+        choices: frameworkChoices,
       }
     }
 
@@ -138,7 +160,7 @@ const builder: IntegrationBuilder = {
     }
 
     // Get the correct framework key by mapping the choice to the framework object key
-    const frameworkKey = getFrameworkKey(finalValues.product, finalValues.framework)
+    const frameworkKey = getFrameworkKey(finalValues.product, finalValues.framework, finalValues.ecosystem)
 
     // Check if the framework exists before calling build
     if (!frameworks[frameworkKey]) {
