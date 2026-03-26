@@ -1,0 +1,8 @@
+### Initialize MetaMask Connect EVM
+
+Initialize MetaMask Connect EVM using `createEVMClient` with these options:
+
+- `dapp` - Displays your dapp's name, URL, and icon URL during connection.
+- `api.supportedNetworks` - Maps chain IDs to RPC URLs. Use `getInfuraRpcUrls()` to generate URLs for all Infura-supported chains.
+
+`createEVMClient` is async and returns a singleton — calling it again returns the same instance.

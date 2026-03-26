@@ -1,0 +1,36 @@
+---
+title: eth_sendRawTransaction
+sidebar_label: eth_sendRawTransaction
+description: Submits a raw transaction. You can create and sign a transaction externally using a library such as [web3.js](https://web3js.readthedocs.io/) or [ethers.js](https://docs.ethers.org/). For [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) transactions, the raw form must be the network form. This means it includes the blobs, KZG commitments, and KZG proofs.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_sendRawTransaction"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_sendRawTransaction"
+  description="Submits a raw transaction. You can create and sign a transaction externally using a library such as [web3.js](https://web3js.readthedocs.io/) or [ethers.js](https://docs.ethers.org/). For [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844) transactions, the raw form must be the network form. This means it includes the blobs, KZG commitments, and KZG proofs."
+  parameters={[{
+    name: "Transaction",
+    type: "string",
+    required: true,
+    description: "hex encoded bytes"
+  }]}
+  returns={{
+  type: "string",
+  description: "32 byte hex value"
+}}
+  exampleRequest={`await provider.request({
+    method: "eth_sendRawTransaction",
+    params: [
+  "0xf869018203e882520894f17f52151ebef6c7334fad080c5704d77216b732881bc16d674ec80000801ba02da1c48b670996dcb1f447ef9ef00b33033c48a4fe938f420bec3e56bfd24071a062e0aa78a81bf0290afbc3a9d8e9a068e6d74caa66c5e0fa8a46deaae96b0833"
+]
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"
+}`}
+/>

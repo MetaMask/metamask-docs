@@ -1,0 +1,36 @@
+---
+title: eth_getBlockTransactionCountByHash
+sidebar_label: eth_getBlockTransactionCountByHash
+description: Returns the number of transactions in a block from a block matching the given block hash.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_getBlockTransactionCountByHash"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_getBlockTransactionCountByHash"
+  description="Returns the number of transactions in a block from a block matching the given block hash."
+  parameters={[{
+    name: "Block hash",
+    type: "string",
+    required: false,
+    description: "32 byte hex value"
+  }]}
+  returns={{
+  type: "null",
+  description: "Transaction count"
+}}
+  exampleRequest={`await provider.request({
+    method: "eth_getBlockTransactionCountByHash",
+    params: [
+  "0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"
+]
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x8"
+}`}
+/>

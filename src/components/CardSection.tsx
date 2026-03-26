@@ -50,7 +50,7 @@ export default function CardSection({
 
               {/* Cards Columns */}
               <div className={styles['cards-wrapper']}>
-                {cards.map(({ title, description, href, buttonIcon }, index) => (
+                {cards.map(({ title, description, href, buttonIcon, leadIcon }, index) => (
                   <div key={index} className={styles['card-column']}>
                     <Card
                       title={title}
@@ -58,6 +58,7 @@ export default function CardSection({
                       href={href}
                       theme={theme}
                       buttonIcon={buttonIcon}
+                      leadIcon={leadIcon}
                     />
                   </div>
                 ))}

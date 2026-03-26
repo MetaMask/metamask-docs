@@ -1,0 +1,36 @@
+---
+title: eth_getUncleCountByBlockNumber
+sidebar_label: eth_getUncleCountByBlockNumber
+description: Returns the number of transactions in a block matching the given block number.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_getUncleCountByBlockNumber"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_getUncleCountByBlockNumber"
+  description="Returns the number of transactions in a block matching the given block number."
+  parameters={[{
+    name: "Block",
+    type: "object",
+    required: false,
+    description: "Block number or tag"
+  }]}
+  returns={{
+  type: "null",
+  description: "Uncle count"
+}}
+  exampleRequest={`await provider.request({
+    method: "eth_getUncleCountByBlockNumber",
+    params: [
+  "0xe8"
+]
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x1"
+}`}
+/>

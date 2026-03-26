@@ -122,7 +122,7 @@ const rootDelegation = delegations[0];
 
 ## Create a redelegation
 
-Create a [redelegation](../../concepts/delegation/index.md#delegation-types) from dapp to a Swap agent.
+Create a [redelegation](../../concepts/delegation/overview.md#redelegation) from dapp to a Swap agent.
 
 To create a redelegation, provide the signed delegation as the `parentDelegation` argument when calling [createDelegation](../../reference/delegation/index.md#createdelegation).
 

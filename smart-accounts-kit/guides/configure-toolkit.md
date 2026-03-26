@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 # Configure the Smart Accounts Kit
 
 The Smart Accounts Kit is highly configurable, providing support for custom [bundlers and paymasters](#configure-the-bundler).
-You can also configure the [toolkit environment](#optional-configure-the-toolkit-environment) to interact with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework).
+You can also configure the [toolkit environment](#optional-configure-the-toolkit-environment) to interact with the [Delegation Framework](../concepts/delegation/overview.md#delegation-framework).
 
 ## Prerequisites
 
@@ -57,7 +57,7 @@ Providing a paymaster is optional when configuring your bundler client. However,
 
 ## (Optional) Configure the toolkit environment
 
-The toolkit environment (`SmartAccountsEnvironment`) defines the contract addresses necessary for interacting with the [Delegation Framework](../concepts/delegation/index.md#delegation-framework) on a specific network.
+The toolkit environment (`SmartAccountsEnvironment`) defines the contract addresses necessary for interacting with the [Delegation Framework](../concepts/delegation/overview.md#delegation-framework) on a specific network.
 It serves several key purposes:
 
 - It provides a centralized configuration for all the contract addresses required by the Delegation Framework.
@@ -119,7 +119,7 @@ See the changelog of the toolkit version you are using (in the left sidebar) for
 
 Alternatively, you can use the [`getSmartAccountsEnvironment`](../reference/delegation/index.md#getsmartaccountsenvironment) function to resolve the environment.
 This function is especially useful if your delegator is not a smart account when
-creating a [redelegation](../concepts/delegation/index.md#delegation-types).
+creating a [redelegation](../concepts/delegation/overview.md#delegation-types).
 
 ```typescript
 import { 

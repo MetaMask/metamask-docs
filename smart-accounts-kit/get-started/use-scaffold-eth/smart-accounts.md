@@ -59,4 +59,4 @@ You can view the completed transaction on Etherscan.
 
 ## Next steps
 
-Learn more about [MetaMask Smart Accounts](../../concepts/smart-accounts.md) and [delegation](../../concepts/delegation/index.md).
+Learn more about [MetaMask Smart Accounts](../../concepts/smart-accounts.md) and [delegation](../../concepts/delegation/overview.md).

@@ -1,0 +1,29 @@
+---
+title: eth_gasPrice
+sidebar_label: eth_gasPrice
+description: Returns the current price per gas in wei.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_gasPrice"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_gasPrice"
+  description="Returns the current price per gas in wei."
+  parameters={[]}
+  returns={{
+  type: "string",
+  description: "hex encoded unsigned integer"
+}}
+  exampleRequest={`await provider.request({
+    method: "eth_gasPrice",
+    params: []
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x3e8"
+}`}
+/>

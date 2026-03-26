@@ -1,0 +1,29 @@
+---
+title: wallet_registerOnboarding
+sidebar_label: wallet_registerOnboarding
+description: Registers the requesting site with MetaMask as the initiator of onboarding, enabling MetaMask to redirect the user back to the site after onboarding. Returns a promise that resolves to `true`, or rejects the request if there's an error. Instead of calling this method directly, you should use the [`@metamask/onboarding`](https://github.com/MetaMask/metamask-onboarding) library.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["wallet_registerOnboarding", "MetaMask", "Multichain"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="wallet_registerOnboarding"
+  description="Registers the requesting site with MetaMask as the initiator of onboarding, enabling MetaMask to redirect the user back to the site after onboarding. Returns a promise that resolves to `true`, or rejects the request if there's an error. Instead of calling this method directly, you should use the [`@metamask/onboarding`](https://github.com/MetaMask/metamask-onboarding) library."
+  parameters={[]}
+  returns={{
+  type: "boolean",
+  description: "`true` if the request was successful, `false` otherwise."
+}}
+  exampleRequest={`await provider.request({
+    method: "wallet_registerOnboarding",
+    params: []
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": true
+}`}
+/>

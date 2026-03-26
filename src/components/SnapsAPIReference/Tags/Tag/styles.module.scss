@@ -1,0 +1,16 @@
+.tag {
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: 2.6rem;
+  font-weight: 500;
+  padding: 0.7rem 0.9rem;
+  line-height: 0.8;
+  color: var(--general-black);
+  background: var(--color-palette);
+
+  @media (min-width: 997px) {
+    height: 2.3rem;
+    line-height: 0.85;
+  }
+}

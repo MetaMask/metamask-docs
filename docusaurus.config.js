@@ -5,12 +5,6 @@ import fs from 'fs'
 require('dotenv').config()
 const { themes } = require('prism-react-renderer')
 const { REF_ALLOW_LOGIN_PATH } = require('./src/lib/constants')
-const {
-  fetchAndGenerateDynamicSidebarItems,
-  NETWORK_NAMES,
-  MM_REF_PATH,
-  MM_RPC_URL,
-} = require('./src/plugins/plugin-json-rpc')
 const codeTheme = themes.dracula
 const productsDropdown = fs.readFileSync('./src/components/NavDropdown/Products.html', 'utf-8')
 const baseUrl = process.env.DEST || '/'
@@ -81,14 +75,36 @@ const config = {
       attributes: {
         type: 'application/ld+json',
       },
-      innerHTML: `
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": `${fullUrl}#organization`,
+        "name": "MetaMask",
+        "url": fullUrl,
+        "logo": new URL('img/favicons/favicon-96x96.png', fullUrl).toString(),
+        "description": "MetaMask is the leading self-custodial cryptocurrency wallet and Web3 gateway, enabling developers to build dapps that connect to MetaMask across EVM and Solana ecosystems.",
+        "sameAs": [
+          "https://github.com/MetaMask",
+          "https://twitter.com/MetaMask",
+          "https://www.linkedin.com/company/metamask",
+          "https://metamask.io"
+        ]
+      }),
+    },
     {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "url": "${fullUrl}",
-      "logo": "${new URL('img/favicons/favicon-96x96.png', fullUrl).toString()}"
-    }
-  `,
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": `${fullUrl}#website`,
+        "name": "MetaMask Developer Documentation",
+        "url": fullUrl,
+        "publisher": { "@id": `${fullUrl}#organization` },
+        "description": "Official developer documentation for MetaMask Connect, Embedded Wallets, Snaps, and the MetaMask developer platform."
+      }),
     },
   ],
 
@@ -265,37 +281,13 @@ const config = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'wallet',
-        path: 'wallet',
-        routeBasePath: 'wallet',
+        id: 'metamask-connect',
+        path: 'metamask-connect',
+        routeBasePath: 'metamask-connect',
         editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
-        sidebarPath: require.resolve('./wallet-sidebar.js'),
+        sidebarPath: require.resolve('./mm-connect-sidebar.js'),
         breadcrumbs: false,
-        remarkPlugins,
-        rehypePlugins,
-        sidebarItemsGenerator: async function ({ defaultSidebarItemsGenerator, ...args }) {
-          const sidebarItems = await defaultSidebarItemsGenerator(args)
-          const dynamicItems = await fetchAndGenerateDynamicSidebarItems(
-            MM_RPC_URL,
-            MM_REF_PATH,
-            NETWORK_NAMES.metamask
-          )
-          if (args.item.dirName === 'reference/json-rpc-methods') {
-            return [...sidebarItems, ...dynamicItems]
-          }
-          return sidebarItems
-        },
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'sdk',
-        path: 'sdk',
-        routeBasePath: 'sdk',
-        editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
-        sidebarPath: require.resolve('./sdk-sidebar.js'),
-        breadcrumbs: false,
+        showLastUpdateTime: true,
         remarkPlugins,
         rehypePlugins,
       },
@@ -384,18 +376,18 @@ const config = {
             description: 'Complete documentation for MetaMask Embedded Wallets',
           },
           {
-            filename: 'llms-sdk.txt',
-            includePatterns: ['sdk/**/*.{md,mdx}'],
+            filename: 'llms-metamask-connect.txt',
+            includePatterns: ['metamask-connect/**/*.{md,mdx}'],
             fullContent: false,
-            title: 'MetaMask SDK documentation',
-            description: 'Documentation links for MetaMask SDK',
+            title: 'MetaMask Connect documentation',
+            description: 'Documentation links for MetaMask Connect',
           },
           {
-            filename: 'llms-sdk-full.txt',
-            includePatterns: ['sdk/**/*.{md,mdx}'],
+            filename: 'llms-metamask-connect-full.txt',
+            includePatterns: ['metamask-connect/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask SDK documentation',
-            description: 'Complete documentation for MetaMask SDK',
+            title: 'MetaMask Connect documentation',
+            description: 'Complete documentation for MetaMask Connect',
           },
           {
             filename: 'llms-smart-accounts-kit.txt',
@@ -493,7 +485,7 @@ const config = {
         {
           name: 'keywords',
           content:
-            'MetaMask, Embedded Wallets, Quickstart, Web3 Development, SDK, Wallet Integration, API, Dapp Development, Blockchain Development, Ethereum Development, Smart Contract, Account Abstraction, Snaps, Crypto Wallet, DeFi, NFT, Infura, Services, Dashboard',
+            'MetaMask, Embedded Wallets, Quickstart, Web3 Development, SDK, MetaMask Connect, Wallet Integration, API, Dapp Development, Blockchain Development, Ethereum Development, Smart Contract, Account Abstraction, Snaps, Crypto Wallet, DeFi, NFT, Infura, Services, Dashboard',
         },
         // Twitter-specific meta tags
         {
@@ -612,20 +604,16 @@ const config = {
             title: 'Documentation',
             items: [
               {
-                label: 'SDK',
-                to: '/sdk',
-              },
-              {
-                label: 'Wallet API',
-                to: '/wallet',
-              },
-              {
-                label: 'Smart Accounts Kit',
-                to: '/smart-accounts-kit',
+                label: 'MetaMask Connect',
+                to: '/metamask-connect',
               },
               {
                 label: 'Embedded Wallets',
                 to: '/embedded-wallets',
+              },
+              {
+                label: 'Smart Accounts Kit',
+                to: '/smart-accounts-kit',
               },
               {
                 label: 'Snaps',
@@ -653,7 +641,7 @@ const config = {
                 href: 'https://github.com/MetaMask/metamask-extension/',
               },
               {
-                label: 'MetaMask SDK GitHub',
+                label: 'MetaMask Connect GitHub',
                 href: 'https://github.com/MetaMask/metamask-sdk/',
               },
               {
@@ -798,7 +786,7 @@ const config = {
       },
       mermaid: {
         options: {
-          fontFamily: 'arial, verdana, sans-serif;',
+          fontFamily: 'arial, verdana, sans-serif',
           wrap: true,
           securityLevel: 'loose',
           sequence: {
