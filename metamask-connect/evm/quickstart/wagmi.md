@@ -312,7 +312,7 @@ We recommend using services like [Infura](https://developer.metamask.io/) to ens
 See the [production readiness checklist](../guides/best-practices/production-readiness.md) for more details.
 :::
 
-## Migrate from `@metamask/sdk` {#migrate-from-metamasksdk}
+## Migrate from `@metamask/sdk`
 
 If you previously used `@metamask/sdk` with Wagmi, the MetaMask connector now uses `@metamask/connect-evm` under the hood. Update your dependencies and connector configuration:
 

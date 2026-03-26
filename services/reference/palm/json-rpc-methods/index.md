@@ -7,8 +7,7 @@ sidebar_key: palm-json-rpc-api
 
 # Palm JSON-RPC API
 
-The standard Ethereum methods documented in this section are supported by Infura on the Palm network. Refer to the
-[official Palm documentation regarding API differences](https://docs.palm.io/json-rpc-api-changes#d9IEH).
+The standard Ethereum methods documented in this section are supported by Infura on the Palm network.
 
 :::info WebSocket calls not supported
 
