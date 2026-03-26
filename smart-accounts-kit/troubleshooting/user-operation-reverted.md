@@ -7,20 +7,20 @@ keywords: [user operation, reverted, reason 0x, empty revert, execution, trouble
 
 # User operation reverted
 
-A user operation reverts with reason `0x` when the validation phase passes
-but the execution phase fails silently. This is distinct from AA-coded `EntryPoint` contract errors such as `AA23`, `AA25`,
+A user operation reverts with reason `0x` when validation succeeds, but execution fails without a
+revert reason. This differs from AA-coded `EntryPoint` contract errors such as `AA23`, `AA25`,
 or `AA21`.
 
-When the `EntryPoint` contract calls the smart account's execution function, it uses a low-level
-`call` internally. If that inner call reverts with empty data, the bundler surfaces the error as
-reason `0x` with no additional information.
+When the `EntryPoint` contract calls the smart account's execution function, it performs a low-level
+`call` internally. If that inner call reverts with empty data, the bundler reports
+reason `0x` with no additional details.
 
-The following are common causes.
+The following sections describe common causes and how to troubleshoot them.
 
 ## Function doesn't exist
 
 The `callData` encodes a call from the smart account to a target contract, but the function
-selector doesn't match any function on that contract and no fallback function exists. The EVM
+selector doesn't match any function on that contract, and no fallback function exists. The EVM
 reverts with empty data.
 
 This commonly happens when:
@@ -30,7 +30,7 @@ This commonly happens when:
 
 ### Solution
 
-Decode your `callData` and verify the inner call. Check that the target address has deployed code
+Decode `callData` and verify the inner call. Confirm that the target address has deployed code
 and that the function selector matches the target's ABI.
 
 ```typescript
@@ -104,7 +104,7 @@ const allowance = await publicClient.readContract({
 If the cause isn't immediately clear, follow these steps:
 
 1. Decode the inner call: Extract the `(to, value, data)` tuple from your `callData` to
-   understand what the smart account executes.
+   confirm what the smart account executes.
 2. Use Tenderly: Simulate the user operation in [Tenderly](https://tenderly.co) to get a full
    execution trace. The trace view shows the exact line where the inner call reverts.
 2. Check the basics: Verify the target has deployed code, the smart account has enough
