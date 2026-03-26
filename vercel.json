@@ -535,8 +535,12 @@
       "destination": "/services/tutorials/ethereum/authenticate-with-jwt"
     },
     {
+      "source": "/services/tutorials/layer-2-networks/deploy-an-nft-smart-contract-on-palm/",
+      "destination": "/services/"
+    },
+    {
       "source": "/services/tutorials/layer-2-networks/",
-      "destination": "/services/tutorials/layer-2-networks/deploy-an-nft-smart-contract-on-palm/"
+      "destination": "/services/tutorials/layer-2-networks/send-a-transaction/"
     },
     {
       "source": "/services/reference/",
