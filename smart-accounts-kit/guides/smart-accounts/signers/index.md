@@ -8,16 +8,15 @@ import CardList from "@site/src/components/CardList"
 # Configure a signer
 
 When [creating a smart account](../create-smart-account.md), you must specify a signer. The signer owns the smart account and is responsible for
-generating the signatures required to submit user operations. MetaMask Smart Accounts is signer agnostic, allowing you
-to use any signer you prefer such as Embedded Wallets, Passkeys, EOA wallets, or a custom signer.
+generating the signatures required to submit user operations. MetaMask Smart Accounts is signer-agnostic, allowing you
+to use any signer you prefer, such as Embedded Wallets, passkeys, EOA wallets, or a custom signer.
 
-MetaMask Smart Accounts has native integration with [MetaMask Embedded Wallets](/embedded-wallets/), making it seamless to use smart
-accounts with embedded wallets and make user onboarding easier. In addition to native native integration, you can also use
+MetaMask Smart Accounts has a native integration with [MetaMask Embedded Wallets](/embedded-wallets/), making user onboarding easier. In addition to the native integration, you can use
 third-party wallet providers as Privy, Dynamic, or Para as the signer for your smart account.
 
-Checkout the following guides to learn how to configure different signers:
+See the following guides to learn how to configure different signers:
 
-## Recommended 
+## Recommended
 
 <CardList items={[
   {
@@ -27,7 +26,7 @@ Checkout the following guides to learn how to configure different signers:
   }
 ]}/>
 
-## More
+## Other signers
 
 <CardList items={[
   {

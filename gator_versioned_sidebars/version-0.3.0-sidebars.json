@@ -217,7 +217,8 @@
         "troubleshooting/error-codes",
         "troubleshooting/invalid-delegate",
         "troubleshooting/invalid-delegator",
-        "troubleshooting/invalid-signature"
+        "troubleshooting/invalid-signature",
+        "troubleshooting/user-operation-reverted"
       ]
     },
     {

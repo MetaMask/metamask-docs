@@ -6,7 +6,7 @@ keywords: [privy, smart account, signer, metamask smart account]
 
 # Use Privy with MetaMask Smart Accounts
 
-[Privy](https://docs.privy.io/welcome) provides an embedded wallet solution that enables seamless social login for Web3 applications making user onboarding easier. MetaMask Smart Accounts is a signer agnostic implementation
+[Privy](https://docs.privy.io/welcome) provides an embedded wallet solution that enables seamless social login for Web3 applications making user onboarding easier. MetaMask Smart Accounts is a signer-agnostic implementation
 that allows you to use Privy's EOA wallet as a signer for MetaMask Smart Accounts.
 
 :::info
@@ -17,8 +17,8 @@ This guide supports React and React-based frameworks.
 
 - Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
-- A [Privy App ID](https://docs.privy.io/basics/get-started/dashboard/create-new-app#get-api-credentials)
+    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
+- Create a [Privy App ID](https://docs.privy.io/basics/get-started/dashboard/create-new-app#get-api-credentials).
 
 ## Steps
 

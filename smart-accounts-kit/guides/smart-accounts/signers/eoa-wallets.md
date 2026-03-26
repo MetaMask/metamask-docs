@@ -4,9 +4,9 @@ sidebar_label: EOA (e.g. MetaMask)
 keywords: [metamask, smart account, signer, metamask smart account]
 ---
 
-# Use Externally Owned Account (EOA) with MetaMask Smart Accounts
+# Use an EOA with MetaMask Smart Accounts
 
-Externally Owned Accounts (EOAs) are accounts controlled by a user’s private key (paired with a public address) and are typically accessed through wallet apps like MetaMask. MetaMask Smart Accounts is signer-agnostic, so
+Externally owned accounts (EOAs) are accounts controlled by a user's private key (paired with a public address) and are typically accessed through wallet apps like MetaMask. MetaMask Smart Accounts is signer-agnostic, so
 you can use an EOA as the signer.
 
 :::info
@@ -15,9 +15,9 @@ This guide supports React and React-based frameworks. For Vue, see [Wagmi docs](
 
 ## Prerequisites
 
-- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later
+- Install [Node.js](https://nodejs.org/en/blog/release/v18.18.0) v18 or later.
 - Install [Yarn](https://yarnpkg.com/),
-    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager
+    [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), or another package manager.
  
 ## Steps
 

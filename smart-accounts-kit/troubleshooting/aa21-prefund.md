@@ -1,7 +1,6 @@
 ---
 description: How to resolve the AA21 didn't pay prefund error when submitting user operations.
 sidebar_label: AA21 didn't pay prefund
-toc_max_heading_level: 2
 keywords: [AA21, pay prefund, user operation, troubleshooting]
 ---
 
@@ -98,4 +97,4 @@ if (balance < requiredPrefund) {
 ### Use a paymaster
 
 You can use a paymaster to sponsor the gas fees for the smart account, so the account doesn't
-need to hold native tokens. For more information about configuring a paymaster, see [send a gasless transaction](../guides/smart-accounts/send-gasless-transaction.md).
+need to hold native tokens. For more information about configuring a paymaster, see [Send a gasless transaction](../guides/smart-accounts/send-gasless-transaction.md).
