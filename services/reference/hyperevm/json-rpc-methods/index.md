@@ -48,6 +48,6 @@ WebSockets are supported on HyperEVM mainnet and can be used to set up bidirecti
 - [`eth_getSystemTxsByBlockNumber`](eth_getsystemtxsbyblocknumber.mdx)
 - [`eth_getSystemTxsByBlockHash`](eth_getsystemtxsbyblockhash.mdx)
 
-## Subscription methods
+## Other methods
 
-- [Subscription methods](subscription-methods/index.md)
+[Debug methods](debug/index.md), [trace methods](trace-methods/index.md), and [subscription methods](subscription-methods/index.md) are also supported.
