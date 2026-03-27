@@ -9,7 +9,7 @@ Infura supports a subset of standard EVM-compatible JSON-RPC methods on HyperEVM
 
 ::::info
 
-- WebSockets are supported on HyperEVM mainnet and can be used to set up bidirectional
+WebSockets are supported on HyperEVM mainnet and can be used to set up bidirectional
   stateful [subscriptions](subscription-methods/index.md).
 
 ::::
