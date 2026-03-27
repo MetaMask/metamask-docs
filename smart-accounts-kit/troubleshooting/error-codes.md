@@ -6,15 +6,15 @@ keywords: [error codes, errors, debug, error references, delegation framework]
 
 # Error codes
 
-Error codes from the [MetaMask Delegation Framework contracts](https://github.com/metamask/delegation-framework). Use a decoder such as 
+The following tables describe error codes from the [MetaMask Delegation Framework contracts](https://github.com/metamask/delegation-framework). Use a decoder such as 
 [calldata.swiss-knife.xyz](https://calldata.swiss-knife.xyz/decoder) to identify error signatures from raw revert data.
 
 ## Delegation Manager error codes
 
 | Error code | Error name | Description |
 | ---------- | ---------- | ----------- |
-| `0xb5863604` | `InvalidDelegate()` | The caller is not the delegate specified in the delegation.<br/><br/>See how to [troubleshoot an invalid delegate](./invalid-delegate.md). |
-| `0xb9f0f171` | `InvalidDelegator()` | The caller is not the delegator specificed in the delegation.<br/><br/>See how to [troubleshoot an invalid delegator](./invalid-delegator.md). |
+| `0xb5863604` | `InvalidDelegate()` | The caller is not the delegate specified in the delegation. [Troubleshoot an invalid delegate.](./invalid-delegate.md) |
+| `0xb9f0f171` | `InvalidDelegator()` | The caller is not the delegator specificed in the delegation. [Troubleshoot an invalid delegator.](./invalid-delegator.md) |
 | `0x05baa052` | `CannotUseADisabledDelegation()` | The delegation has been disabled by the delegator. |
 | `0xded4370e` | `InvalidAuthority()` | The delegation chain authority validation failed. The authority hash of a child delegation does not match the hash of its parent delegation. |
 | `0x1bcaf69f` | `BatchDataLengthMismatch()` | The array lengths do not match in a batch `redeemDelegations` contract call. |
@@ -24,7 +24,7 @@ Error codes from the [MetaMask Delegation Framework contracts](https://github.co
 | `0xfce698f7` | `ECDSAInvalidSignatureLength(uint256)` | The ECDSA signature length is incorrect. |
 | `0xac241e11` | `EmptySignature()` | The signature is empty. |
 | `0xd93c0665` | `EnforcedPause()` | The Delegation Manager contract is paused by the owner. |
-| `0x3db6791c` | `InvalidEOASignature()` | EOA signature verification failed.<br/><br/>See how to [troubleshoot an invalid EOA signature](./invalid-signature.md). |
+| `0x3db6791c` | `InvalidEOASignature()` | EOA signature verification failed. [Troubleshoot an invalid EOA signature.](./invalid-signature.md) |
 | `0x155ff427` | `InvalidERC1271Signature()` | Smart contract signature (ERC-1271) verification failed. |
 | `0x118cdaa7` | `OwnableUnauthorizedAccount(address)` | An unauthorized account attempted an owner only action. |
 | `0x1e4fbdf7` | `OwnableInvalidOwner(address)` | Invalid owner address in an ownership transfer. |
@@ -53,4 +53,4 @@ Error codes from the [MetaMask Delegation Framework contracts](https://github.co
 | `ERC20TransferAmountEnforcer:invalid-method` | When redeeming a delegation with an `erc20TransferAmount` caveat, the execution calls a function other than `transfer(address,uint256)`. |
 | `ERC20TransferAmountEnforcer:allowance-exceeded` | When redeeming a delegation with an `erc20TransferAmount` caveat, the cumulative transfer amount exceeds the allowed limit. |
 | `CaveatEnforcer:invalid-call-type` | When redeeming a delegation, the execution uses a batch call type, but the caveat enforcer only supports single calls. |
-| `CaveatEnforcer:invalid-execution-type` | When redeeming a delegation, the execution uses a non default execution mode, but the caveat enforcer only supports the default mode. [Learn more about execution modes](../reference/types.md#executionmode).|
+| `CaveatEnforcer:invalid-execution-type` | When redeeming a delegation, the execution uses a non-default [execution mode](../reference/types.md#executionmode), but the caveat enforcer only supports the default mode. |

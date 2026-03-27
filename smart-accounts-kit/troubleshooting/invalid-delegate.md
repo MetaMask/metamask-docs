@@ -23,8 +23,8 @@ from that smart account.
 
 ## Broken redelegation chain
 
-When Delegation Manager validates a [redelegation chain](../guides/delegation/create-redelegation.md), each child delegation’s `delegator` 
-must match the parent delegation’s `delegate`. If any link in the chain fails this check, the 
+When Delegation Manager validates a [redelegation chain](../guides/delegation/create-redelegation.md), each child delegation's `delegator` 
+must match the parent delegation's `delegate`. If any link in the chain fails this check, the 
 authority is invalid.
 
 ### Solution
@@ -35,7 +35,7 @@ delegations, the child's `delegator` must be the parent's `delegate`.
 This error can also occur if the delegations are not passed in the correct order. The 
 delegation array order should be from leaf to root. 
 
-For example, if the delegation chain is Alice to Bob to Carol. The order should be following
+For example, if the delegation chain is Alice to Bob to Carol, the order should be following:
 
 ```ts
 const rootDelegation = createDelegation({

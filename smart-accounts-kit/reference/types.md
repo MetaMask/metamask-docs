@@ -6,7 +6,7 @@ keywords: [types, delegation, smart accounts, reference, enums]
 
 # Types
 
-This page documents the types used in Smart Accounts Kit APIs.
+This page documents the TypeScript [enums](#enums) and [types](#types-1) used in Smart Accounts Kit APIs.
 
 ## Enums
 
@@ -100,7 +100,7 @@ Enum representing predefined time intervals in seconds for transfer period durat
 | `TransferWindow.Quarterly` | `7776000` |
 | `TransferWindow.Yearly` | `31536000` |
 
-## Type
+## Types
 
 ### `AllowedCalldataBuilderConfig`
 

@@ -17,12 +17,6 @@ Support for Palm testnet is deprecated; Mainnet support remains.
 
 :::
 
-:::info See also
-
-The [official Palm documentation](https://docs.palm.io/) for more information about using the Palm network.
-
-:::
-
 <CardList
   items={[
     {

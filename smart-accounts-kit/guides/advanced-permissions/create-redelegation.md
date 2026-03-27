@@ -13,16 +13,16 @@ Redelegation is a core feature that sets Advanced Permissions apart from other p
 It allows a session account (delegate) to create a delegation chain, passing on the same or reduced level of authority 
 from the MetaMask account (delegator).
 
-For example, if a dapp is granted permission to spend 10 USDC on a user’s behalf, it can 
+For example, if a dapp is granted permission to spend 10 USDC on a user's behalf, it can 
 further delegate that permission to specific agents, such as allowing a Swap agent to spend 
 up to 5 USDC. This creates a permission sharing chain in which the root permissions are 
 shared with additional parties.
 
 ## Prerequisites
 
-- [Install and set up the Smart Accounts Kit](../../get-started/install.md)
-- [Learn about Advanced Permissions](../../concepts/advanced-permissions.md)
-- [Learn how to request Advanced Permissions](execute-on-metamask-users-behalf.md)
+- [Install and set up the Smart Accounts Kit.](../../get-started/install.md)
+- [Learn about Advanced Permissions.](../../concepts/advanced-permissions.md)
+- [Learn how to request Advanced Permissions.](execute-on-metamask-users-behalf.md)
 
 
 ## Request Advanced Permissions
@@ -109,7 +109,7 @@ export const walletClient = createWalletClient({
 The granted permissions object includes a `context` property that represents the encoded delegations. 
 
 To create a redelegation, you must first decode these delegations to access the 
-underlying delegations. To decode the delegations, use the [decodeDelegations](../../reference/delegation/index.md#decodedelegations) utility function.
+underlying delegations. To decode the delegations, use the [`decodeDelegations`](../../reference/delegation/index.md#decodedelegations) utility function.
 
 ```ts
 import { decodeDelegations } from "@metamask/smart-accounts-kit/utils";
@@ -124,7 +124,7 @@ const rootDelegation = delegations[0];
 
 Create a [redelegation](../../concepts/delegation/overview.md#redelegation) from dapp to a Swap agent.
 
-To create a redelegation, provide the signed delegation as the `parentDelegation` argument when calling [createDelegation](../../reference/delegation/index.md#createdelegation).
+To create a redelegation, provide the signed delegation as the `parentDelegation` argument when calling [`createDelegation`](../../reference/delegation/index.md#createdelegation).
 
 This example uses the [`erc20TransferAmount`](../delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing 
 dapp to delegate to a Swap agent the ability to spend 5 USDC on user's behalf.

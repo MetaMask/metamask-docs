@@ -23,33 +23,36 @@ rules before sending requests.
 ## Request supported permissions
 
 Request the supported Advanced Permissions types for a wallet with the 
-Wallet Client's `getSupportedExecutionPermissions` action.
+Wallet Client's [`getSupportedExecutionPermissions`](../../reference/advanced-permissions/wallet-client.md#getsupportedexecutionpermissions) action.
 
 <Tabs>
-<TabItem value="example.ts">
+<TabItem value="response.ts">
+
+```ts
+{
+  "native-token-stream": {
+    "chainIds": [
+      1,
+      10,
+    ],
+    "ruleTypes": [
+      "expiry"
+    ]
+  },
+  // ...
+}
+```
+
+</TabItem>
+<TabItem value="example.ts" default>
 
 ```typescript
 import { walletClient } from "./config.ts";
 
 const supportedPermissions = await walletClient.getSupportedExecutionPermissions();
-
-// Example response:
-// {
-//     "native-token-stream": {
-//         "chainIds": [
-//             1,
-//             10,
-//         ],
-//         "ruleTypes": [
-//             "expiry"
-//         ]
-//     },
-//     // ...
-// }
 ```
 
 </TabItem>
-
 <TabItem value="config.ts">
 
 ```ts
@@ -59,7 +62,9 @@ import { erc7715ProviderActions } from "@metamask/smart-accounts-kit/actions";
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
 }).extend(erc7715ProviderActions());
- 
 ```
+
 </TabItem>
 </Tabs>
+
+See the full list of [supported Advanced Permissions](../../get-started/supported-advanced-permissions.md).
