@@ -1,0 +1,23 @@
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://hyperevm-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "eth_getBlockByHash", "params": ["0xb3b2061d85c877b0f607789c50b8b76a241ad30ca7c3dce2b62b07c452e52c9c", true], "id": 1}'
+```
+
+  </TabItem>
+
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://hyperevm-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getBlockByHash", "params": ["0xb3b2061d85c877b0f607789c50b8b76a241ad30ca7c3dce2b62b07c452e52c9c", true], "id": 1}'
+```
+
+  </TabItem>
+</Tabs>
