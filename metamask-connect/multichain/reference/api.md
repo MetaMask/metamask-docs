@@ -417,5 +417,5 @@ according to [CAIP-217](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/c
 
 - Follow the [JavaScript quickstart](../quickstart/javascript.md) to set up MetaMask Connect Multichain in a dapp.
 - See the [MetaMask Connect Multichain methods](methods.md) for the client-level methods that wrap this API.
-- See [Scopes, accounts, and sessions](../concepts/scopes.md) to understand CAIP-2, CAIP-10, and CAIP-25 identifiers.
+- Understand [scopes](../concepts/scopes.md), [accounts](../concepts/accounts.md), and [sessions](../concepts/sessions.md) for CAIP-2, CAIP-10, and CAIP-25 identifiers.
 - See [Send transactions on EVM and Solana](../guides/send-transactions.md) for practical usage examples.

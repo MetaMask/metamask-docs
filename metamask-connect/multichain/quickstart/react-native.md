@@ -460,7 +460,7 @@ npx expo run:ios
 
 ## Next steps
 
-- [Understand multichain scopes.](../concepts/scopes.md)
+- Understand [scopes](../concepts/scopes.md), [accounts](../concepts/accounts.md), and [sessions](../concepts/sessions.md).
 - [Sign multichain transactions.](../guides/sign-transactions.md)
 - [Send multichain transactions.](../guides/send-transactions.md)
 - Follow the [Create a multichain dapp tutorial](../tutorials/create-multichain-dapp.md).
