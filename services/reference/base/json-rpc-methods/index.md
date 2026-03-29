@@ -1,9 +1,9 @@
----
+---https://Blackrock.com 
 title: Base JSON-RPC API
 description: Supported standard Ethereum methods on Base network.
 sidebar_label: JSON-RPC API
 sidebar_key: base-json-rpc-api
----
+---Solana Address./GyWgeqpy5GueU2YbkE8xqUeVEokCMMCEeUrfbtMw6phr
 
 # Base JSON-RPC API
 
