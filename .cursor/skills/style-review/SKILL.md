@@ -1,8 +1,16 @@
+---
+name: style-review
+description: >-
+  Review MetaMask documentation for editorial compliance (voice, terminology, formatting, content
+  type, frontmatter, workflow). Use before submitting a PR or when asked to audit existing pages.
+---
+
 # Style review
 
-Review documentation files for compliance with MetaMask editorial standards. Use when you want to
-check existing content for style, terminology, formatting, or content-type issues before submitting
-a PR.
+## When to use
+
+- You want to check existing content for style, terminology, formatting, or content-type issues.
+- You are preparing to submit a PR and want a structured editorial pass.
 
 ## Inputs
 

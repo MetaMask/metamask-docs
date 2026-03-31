@@ -1,8 +1,18 @@
+---
+name: author-page
+description: >-
+  Scaffold or draft new MetaMask documentation to editorial standards. Use when creating a new
+  page, writing a first draft, or helping a non-writer meet the documentation team's expectations.
+---
+
 # Author a new documentation page
 
 Help create a new documentation page that follows MetaMask editorial standards from the start.
-Use when you need to scaffold a new page, write a first draft, or help a non-writer produce
-content that meets the documentation team's expectations.
+
+## When to use
+
+- You need to scaffold a new page or write a first draft.
+- You are helping someone who is not a writer produce content that meets team expectations.
 
 ## Inputs
 

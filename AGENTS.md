@@ -43,3 +43,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contribution workflow.
 
 Detailed editorial, formatting, and product-specific rules are in `.cursor/rules/`. These rules
 apply automatically when you edit files matching their glob patterns.
+
+Agent skills live under `.cursor/skills/<skill-name>/SKILL.md`. This repo includes **author-page**
+(scaffold and draft new pages) and **style-review** (editorial compliance before PR). Cursor loads
+these when the task matches each skill's description.
