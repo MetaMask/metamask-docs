@@ -1,4 +1,4 @@
-# MetaMask Developer Documentation
+# MetaMask developer documentation
 
 This repository contains the source for [docs.metamask.io](https://docs.metamask.io), the MetaMask
 developer documentation site. It is built with Docusaurus and covers multiple products aimed at
