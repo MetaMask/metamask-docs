@@ -1,0 +1,11 @@
+node_modules/
+build/
+.docusaurus/
+.vercel/
+.integrationBuilderCache/
+gator_versioned_docs/
+gator_versioned_sidebars/
+i18n/
+static/
+src/specs/
+package-lock.json
