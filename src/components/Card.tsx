@@ -11,12 +11,14 @@ import SvgShield from '@site/static/img/icons/shield.svg'
 import SvgStar from '@site/static/img/icons/star.svg'
 import SvgUser from '@site/static/img/icons/user.svg'
 import SvgWallet from '@site/static/img/icons/wallet.svg'
+import SvgCommunity from '@site/static/img/icons/community.svg'
+import SvgMultichain from '@site/static/img/icons/multichain.svg'
 import Shape from '@site/static/img/shapes/intro-cards/shape.svg'
 
 import styles from './Card.module.scss'
 
 /** Optional lead icon for product cards (defaults to star). */
-export type CardLeadIcon = 'wallet' | 'user' | 'shield' | 'globe' | 'controls' | 'star'
+export type CardLeadIcon = 'wallet' | 'user' | 'shield' | 'globe' | 'controls' | 'community' | 'multichain' |'star'
 
 const LEAD_ICON_COMPONENTS: Record<
   CardLeadIcon,
@@ -27,6 +29,8 @@ const LEAD_ICON_COMPONENTS: Record<
   shield: SvgShield,
   globe: SvgGlobe,
   controls: SvgControls,
+  community: SvgCommunity,
+  multichain: SvgMultichain,
   star: SvgStar,
 }
 
