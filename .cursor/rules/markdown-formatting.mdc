@@ -28,6 +28,16 @@ for full details. The rules below cover the most common conventions.
 - Use double quotes in JavaScript code samples.
 - Indent code with two spaces, not four.
 - For npm install commands, use ` ```bash npm2yarn ` fences to produce automatic npm/yarn tabs.
+- Write code samples that can be copied, pasted, and run as-is. Do not include shell prompts
+  (for example, `user@host $`) or trailing comments that break execution.
+- Use angle-bracket placeholders for values the reader must supply
+  (for example, `<YOUR_INFURA_API_KEY>`).
+
+## Tabs
+
+- Use Docusaurus `<Tabs>` and `<TabItem>` components to display parallel content such as code
+  samples in different languages or package-manager commands.
+- Import `Tabs` and `TabItem` from `@theme/Tabs` and `@theme/TabItem` at the top of the file.
 
 ## Admonitions
 
@@ -38,7 +48,7 @@ for full details. The rules below cover the most common conventions.
 ## Tables
 
 - Align table columns in the source Markdown for readability.
-- Use a tool like [Markdown Table Formatter](http://markdowntable.com/) if needed.
+- Use a tool like [Markdown Table Formatter](https://markdowntable.com/) if needed.
 
 ## Front-matter
 

@@ -43,8 +43,6 @@ Place images in the product's designated asset folder:
 - `snaps/assets/`
 - `static/img/` (for site-wide assets)
 
-Use white or `#1b1b1d` backgrounds for light/dark mode compatibility.
-
 ## Update rule files for structural changes
 
 When a change affects the structure, naming, or conventions of a product area, update the
@@ -81,6 +79,4 @@ than rewriting valid technical language.
 
 ## Cross-product links
 
-- Use relative file paths for links within the same product section.
-- Use absolute URL paths (for example, `/snaps/learn/about-snaps`) for links that cross product
-  boundaries.
+See the **Links** section in `markdown-formatting.mdc`.
