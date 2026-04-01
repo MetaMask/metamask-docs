@@ -20,7 +20,14 @@ import TabItem from "@theme/TabItem";
 # Multichain API
 
 The Multichain API lets your dapp create and manage sessions that span multiple chains and ecosystems through a single connection.
-Use the [methods](#methods) below to create sessions, send requests to any chain in the session, and listen for [events](#events) like account or network changes.
+
+:::info SDK methods vs. Multichain API
+MetaMask Connect Multichain exposes [high-level SDK methods](methods.md) that wrap the standard Multichain API.
+Use those methods if you're building with the multichain client.
+
+The standard Multichain API is client-agnostic, and is not entirely exposed by MetaMask Connect Multichain.
+Use the standard methods referenced on this page if you're building your own client or need lower-level control.
+:::
 
 :::note
 
@@ -416,6 +423,6 @@ according to [CAIP-217](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/c
 ## Next steps
 
 - Follow the [JavaScript quickstart](../quickstart/javascript.md) to set up MetaMask Connect Multichain in a dapp.
-- See the [MetaMask Connect Multichain methods](methods.md) for the client-level methods that wrap this API.
+- See the [MetaMask Connect Multichain methods](methods.md) for the high-level methods that wrap this API.
 - See [Scopes, accounts, and sessions](../concepts/scopes.md) to understand CAIP-2, CAIP-10, and CAIP-25 identifiers.
 - See [Send transactions on EVM and Solana](../guides/send-transactions.md) for practical usage examples.
