@@ -8,8 +8,9 @@ alwaysApply: false
 
 ## Product naming
 
-- The product name is **MetaMask Smart Accounts Kit**.
-- Use **smart account** in prose (not "smart contract account" or "SCA"), unless directly quoting
+- The product name is **MetaMask Smart Accounts Kit**. Use **Smart Accounts Kit** as short form in prose.
+- When referring to an actual account, use "MetaMask smart account" (singular) or "MetaMask Smart Accounts" (plural, capitalized) on first use, and "smart account" or "smart accounts" on subsequent uses.
+- Do not use "smart contract account" or "SCA" unless directly quoting
   an ERC specification.
 - The code-level type is `MetaMaskSmartAccount` (backtick it on first use in a page).
 - **Externally owned account (EOA)** on first use, then **EOA**.
@@ -25,8 +26,8 @@ Smart Accounts Kit has three pillars. Use these terms consistently:
   - **root delegation**, **open root delegation**, **redelegation**, **open redelegation**.
   - **delegation scopes** (a Smart Accounts Kit abstraction on top of caveat enforcers).
   - **caveat enforcers** (on-chain restriction contracts).
-- **Advanced Permissions (ERC-7715)**: fine-grained permissions granted through the MetaMask
-  extension. Distinct from regular delegation (which does not require the extension).
+- **Advanced Permissions (ERC-7715)**: fine-grained, human-readable permissions granted through the MetaMask
+  extension. Distinct from regular delegations (which cannot be granted through the extension).
 
 ## Content organization
 

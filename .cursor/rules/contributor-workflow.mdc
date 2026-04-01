@@ -18,7 +18,7 @@ Every new documentation page must be added to the appropriate sidebar file:
 | Embedded Wallets   | `ew-sidebar.js`          |
 | Smart Accounts Kit | `gator-sidebar.js`       |
 | Services           | `services-sidebar.js`    |
-| Developer Tools    | `dashboard-sidebar.js`   |
+| Developer dashboard    | `dashboard-sidebar.js`   |
 | Snaps              | `snaps-sidebar.js`       |
 
 ## Redirects
