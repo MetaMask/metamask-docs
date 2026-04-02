@@ -6,22 +6,18 @@ keywords: [multichain, caip, caip-25, session, sessionScopes, connection, persis
 
 # Sessions (CAIP-25)
 
-A session is a single authorized connection that bundles approved [scopes](./scopes.md) and
-[accounts](./accounts.md), as defined in
-[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md). If the wallet returns
-a `sessionId`, the dapp and wallet can reference that session directly. If the wallet does not
-return a `sessionId`, the wallet must track the session state internally. For more information about
-the session lifecycle, see [CAIP-316](https://standards.chainagnostic.org/CAIPs/caip-316).
+A session is an authorized connection between your dapp and MetaMask that can span multiple blockchain ecosystems and chains, as defined in
+[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
+When a user approves a connection, MetaMask creates a session including the approved [scopes](./scopes.md) and [accounts](./accounts.md).
 
-You read the session with [`getSession`](../reference/methods.md#getsession), and you end or change it with [`disconnect`](../reference/methods.md#disconnect). That way your dapp always has a single place to see what MetaMask approved, and the connection can persist across reloads and tabs.
+MetaMask Connect Multichain provides the method [`getSession`](../reference/methods.md#getsession) to get information about the current session,
+and the method [`disconnect`](../reference/methods.md#disconnect) to end or update the session.
+For more information about the session lifecycle, see [CAIP-316](https://standards.chainagnostic.org/CAIPs/caip-316).
 
-## Format
+A session is persistent, meaning it survives across page reloads and new tabs.
 
-As defined by [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md), when a user approves a connection, MetaMask creates a session that includes:
-
-- **`sessionScopes`**: The chains the user approved, each with its associated accounts.
-- **Persistence**: Sessions survive page reloads and new tabs.
-- **Lifecycle**: Use [`getSession`](../reference/methods.md#getsession) to retrieve session data and [`disconnect`](../reference/methods.md#disconnect) to end or modify the session.
+A session includes `sessionScopes`, which contains the chains the user approved, each with its associated accounts.
+The following example extracts the approved Ethereum Mainnet and Solana Mainnet accounts from `sessionScopes`:
 
 ```javascript
 const session = await client.getSession()
