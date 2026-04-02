@@ -20,7 +20,7 @@ A session includes `sessionScopes`, which contains the chains the user approved,
 The following example extracts the approved Ethereum Mainnet and Solana Mainnet accounts from `sessionScopes`:
 
 ```javascript
-const session = await client.getSession()
+const session = await client.provider.getSession()
 
 const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
 const solAccounts = session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
