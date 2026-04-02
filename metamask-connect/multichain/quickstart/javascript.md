@@ -137,7 +137,7 @@ Connect to MetaMask, get accounts from the session, and invoke RPC methods on ch
 ```javascript
 await client.connect(['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])
 
-const session = await client.getSession()
+const session = await client.provider.getSession()
 const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
 const solAccounts = session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
 console.log('ETH accounts:', ethAccounts)
