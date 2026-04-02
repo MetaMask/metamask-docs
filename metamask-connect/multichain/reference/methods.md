@@ -61,7 +61,7 @@ A promise that resolves to the current `Session` object containing `sessionScope
 ```javascript
 await client.connect(['eip155:1', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])
 
-const session = await client.getSession()
+const session = await client.provider.getSession()
 const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
 const solAccounts = session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
 ```

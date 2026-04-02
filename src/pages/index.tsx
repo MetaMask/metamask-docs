@@ -52,7 +52,7 @@ export default function Home(): JSX.Element {
         cards={[
           {
             title: 'Connect to MetaMask',
-            leadIcon: 'wallet',
+            leadIcon: 'multichain',
             description: (
               <>
                 Connect your dapp to the <strong>MetaMask browser extension and mobile app</strong>.
@@ -65,7 +65,7 @@ export default function Home(): JSX.Element {
           },
           {
             title: 'Create embedded wallets',
-            leadIcon: 'user',
+            leadIcon: 'wallet',
             description: (
               <>
                 Onboard users to your dapp via <strong>social logins</strong>,
@@ -78,7 +78,7 @@ export default function Home(): JSX.Element {
           },
           {
             title: 'Create smart accounts',
-            leadIcon: 'shield',
+            leadIcon: 'community',
             description: (
               <>
                 Create and interact with <strong>MetaMask Smart Accounts</strong>, unlocking new{' '}
