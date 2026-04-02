@@ -8,7 +8,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # MetaMask Smart Accounts quickstart
 
-You can get started quickly with MetaMask Smart Accounts by creating your first <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> and sending a <GlossaryTerm term="User operation">user operation</GlossaryTerm>.
+You can get started quickly with [MetaMask Smart Accounts](../../concepts/smart-accounts.md) by creating your first <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> and sending a <GlossaryTerm term="User operation">user operation</GlossaryTerm>.
 
 ## Prerequisites
 
@@ -28,7 +28,8 @@ npm install @metamask/smart-accounts-kit
 
 ### 2. Set up a Public Client
 
-Set up a <GlossaryTerm term="Public Client" /> using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function. This client will let the smart account query the signer's account state and interact with the blockchain network.
+Set up a <GlossaryTerm term="Public Client" /> using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function.
+This client will let the smart account query the signer's account state and interact with the blockchain network.
 
 ```typescript
 import { createPublicClient, http } from "viem";
@@ -42,7 +43,8 @@ const publicClient = createPublicClient({
 
 ### 3. Set up a Bundler Client
 
-Set up a <GlossaryTerm term="Bundler Client" /> using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function. This lets you use the bundler service to estimate gas for <GlossaryTerm term="User operation">user operations</GlossaryTerm> and submit transactions to the network.
+Set up a <GlossaryTerm term="Bundler" >Bundler Client</GlossaryTerm> using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
+This lets you use the bundler service to estimate gas for <GlossaryTerm term="User operation">user operations</GlossaryTerm> and submit transactions to the network.
 
 ```typescript
 import { createBundlerClient } from "viem/account-abstraction";
@@ -58,7 +60,7 @@ const bundlerClient = createBundlerClient({
 Create a <GlossaryTerm term="MetaMask smart account" /> to send the first <GlossaryTerm term="User operation">user operation</GlossaryTerm>.
 
 This example configures a <GlossaryTerm term="Hybrid smart account" />,
-which is a flexible smart account implementation that supports both an <GlossaryTerm term="EOA" /> owner and any number of passkey (WebAuthn) signers:
+which is a flexible smart account implementation that supports both an <GlossaryTerm term="EOA" /> owner and any number of <GlossaryTerm term="Passkey">passkey</GlossaryTerm> (WebAuthn) signers:
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";

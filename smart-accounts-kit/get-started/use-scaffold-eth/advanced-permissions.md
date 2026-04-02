@@ -4,6 +4,8 @@ sidebar_label: Advanced Permissions (ERC-7715)
 keywords: [scaffold-eth, delegation, advanced permissions, erc7715, 7715, template]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Use Advanced Permissions with Scaffold-ETH 2
 
 Use the [Advanced Permissions (ERC-7715) extension](https://github.com/MetaMask/erc-7715-extension) for [Scaffold-ETH 2](https://docs.scaffoldeth.io/) to bootstrap a project in 
@@ -19,7 +21,7 @@ from a MetaMask user, and execute transactions on their behalf.
 
 ### 1. Install the extension
 
-Run the following command to install the Smart Accounts Kit extension:
+Run the following command to install the <GlossaryTerm term="Smart Accounts Kit" /> extension:
 
 ```bash
 npx create-eth@latest -e metamask/erc-7715-extension your-project-name
@@ -46,8 +48,8 @@ yarn start
 ### 4. Complete the Advanced Permissions lifecycle
 
 Navigate to the **Advanced Permissions (ERC-7715)** page in your Scaffold-ETH
-frontend at http://localhost:3000/erc-7715-permissions, and follow the steps to request an advanced
-permission, and execute a transaction on the user's behalf.
+frontend at http://localhost:3000/erc-7715-permissions, and follow the steps to request an <GlossaryTerm term="Advanced Permissions">advanced
+permission</GlossaryTerm>, and execute a transaction on the user's behalf.
 
 You can view the completed transaction on Etherscan.
 

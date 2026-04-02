@@ -2,23 +2,18 @@
   "description": "Technical terms used in our documentation",
   "terms": [
     {
-      "term": "7702 smart account",
-      "definition": "A stateless EIP-7702 smart account implementation that upgrades an EOA for smart-account operations.",
-      "relatedTerms": ["MetaMask smart account", "Hybrid smart account", "Multisig smart account"]
-    },
-    {
       "term": "Account abstraction",
-      "definition": "The ERC-4337 model that enables smart contracts, not just EOAs, to act as user accounts.",
-      "relatedTerms": ["MetaMask smart account", "EOA", "User operation"]
+      "definition": "A mechanism that enables users to manage smart contract accounts containing arbitrary verification logic.",
+      "relatedTerms": ["MetaMask smart account", "User operation"]
     },
     {
       "term": "Advanced Permissions",
-      "definition": "ERC-7715 permissions that let dapps request narrowly scoped transaction capabilities from MetaMask users."
+      "definition": "Fine-grained, customizable transaction capabilities that dapps can request from MetaMask extension users."
     },
     {
-      "term": "Bundler Client",
-      "definition": "A client for submitting ERC-4337 user operations to bundler infrastructure for inclusion onchain.",
-      "relatedTerms": ["Public Client", "User operation"]
+      "term": "Bundler",
+      "definition": "A service that collects user operations from smart accounts, packages them, and submits them to the network.",
+      "relatedTerms": ["User operation", "MetaMask smart account"]
     },
     {
       "term": "Caveat",
@@ -37,13 +32,13 @@
     },
     {
       "term": "Delegation",
-      "definition": "The ability for a MetaMask smart account to authorize another account to execute specific actions on its behalf.",
+      "definition": "The ability for a MetaMask smart account to authorize another account to perform specific executions on its behalf.",
       "relatedTerms": ["Delegate account", "Delegator account", "Delegation Framework"]
     },
     {
       "term": "Delegation Framework",
-      "definition": "The ERC-7710-based delegation system that combines delegations, scopes, and caveat enforcers to constrain authority.",
-      "relatedTerms": ["Delegation", "Delegation scope", "Caveat"]
+      "definition": "A set of audited smart contracts that handle smart account creation, the delegation lifecycle, and caveat enforcement.",
+      "relatedTerms": ["Delegation", "MetaMask smart account", "Caveat enforcer"]
     },
     {
       "term": "Delegation manager",
@@ -61,30 +56,30 @@
       "relatedTerms": ["Delegate account", "Delegation", "Delegation Framework"]
     },
     {
+      "term": "EIP-7702 smart account",
+      "definition": "A stateless MetaMask smart account implementation that represents an upgraded EOA.",
+      "relatedTerms": ["MetaMask smart account", "EOA", "Hybrid smart account"]
+    },
+    {
       "term": "EOA",
       "abbreviation": "Externally owned account",
       "definition": "A private-key-controlled account with no built-in programmable execution logic.",
-      "relatedTerms": ["MetaMask smart account", "Account abstraction"]
+      "relatedTerms": ["MetaMask smart account", "Signer", "Passkey"]
     },
     {
       "term": "Hybrid smart account",
       "definition": "A smart account implementation that supports both an EOA owner and passkey signers.",
-      "relatedTerms": ["MetaMask smart account", "7702 smart account", "Multisig smart account"]
+      "relatedTerms": ["MetaMask smart account", "EIP-7702 smart account", "Multisig smart account"]
     },
     {
       "term": "MetaMask smart account",
-      "definition": "A single MetaMask Smart Account used to execute transactions through smart-contract account logic.",
-      "relatedTerms": ["7702 smart account", "Hybrid smart account", "Multisig smart account"]
-    },
-    {
-      "term": "MetaMask Smart Accounts",
-      "definition": "ERC-4337 smart contract accounts that support programmable behavior, advanced security policies, and flexible signing options.",
-      "relatedTerms": ["MetaMask smart account", "Account abstraction", "Delegation"]
+      "definition": "A smart contract account that supports programmable behavior, delegated permissions, flexible signing options, and other advanced features.",
+      "relatedTerms": ["EIP-7702 smart account", "Hybrid smart account", "Multisig smart account"]
     },
     {
       "term": "Multisig smart account",
       "definition": "A smart account that requires signatures from multiple configured signers to satisfy a threshold.",
-      "relatedTerms": ["MetaMask smart account", "7702 smart account", "Hybrid smart account"]
+      "relatedTerms": ["MetaMask smart account", "EIP-7702 smart account", "Hybrid smart account"]
     },
     {
       "term": "Open delegation",
@@ -97,9 +92,13 @@
       "relatedTerms": ["Delegation", "Open delegation", "Redelegation"]
     },
     {
+      "term": "Passkey",
+      "definition": "A cryptographic key that can be used to sign transactions instead of a private key.",
+      "relatedTerms": ["Signer", "EOA"]
+    },
+    {
       "term": "Public Client",
-      "definition": "A read-focused blockchain client used to fetch onchain state, simulate calls, and monitor transactions.",
-      "relatedTerms": ["Bundler Client"]
+      "definition": "An interface used to fetch blockchain state, read from smart contracts, and monitor transactions."
     },
     {
       "term": "Redelegation",
@@ -112,14 +111,23 @@
       "relatedTerms": ["Delegation", "Redelegation"]
     },
     {
+      "term": "Signer",
+      "definition": "An account that can sign transactions for a smart account.",
+      "relatedTerms": ["MetaMask smart account", "EOA", "Passkey"]
+    },
+    {
       "term": "Smart Accounts Kit",
-      "definition": "MetaMask toolkit for creating, managing, and interacting with smart accounts, delegations, and advanced permissions.",
-      "relatedTerms": ["MetaMask Smart Accounts", "Delegation Framework", "Advanced Permissions"]
+      "definition": "Toolkit for creating, managing, and interacting with MetaMask Smart Accounts, delegations, and Advanced Permissions.",
+      "relatedTerms": ["MetaMask smart account", "Delegation Framework", "Advanced Permissions"]
     },
     {
       "term": "User operation",
-      "definition": "An ERC-4337 signed instruction package that tells a smart account what execution(s) to perform.",
+      "definition": "A signed instruction package that tells a smart account what executions to perform.",
       "relatedTerms": ["Account abstraction", "Bundler Client"]
+    },
+    {
+      "term": "Wallet Client",
+      "definition": "An interface for interacting with blockchain accounts, executing transactions, and signing messages."
     }
   ]
 }

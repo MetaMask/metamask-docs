@@ -10,7 +10,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Install and set up the Smart Accounts Kit
 
-This page provides instructions to install and set up the <GlossaryTerm term="Smart Accounts Kit" />, enabling you to create and interact with <GlossaryTerm term="MetaMask smart account">MetaMask Smart Accounts</GlossaryTerm> into your dapp.
+This page provides instructions to install and set up the <GlossaryTerm term="Smart Accounts Kit" /> in your dapp, enabling you to create and interact with <GlossaryTerm term="MetaMask smart account">MetaMask Smart Accounts</GlossaryTerm>.
 
 ## Prerequisites
 
