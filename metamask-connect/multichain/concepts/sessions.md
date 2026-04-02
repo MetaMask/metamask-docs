@@ -26,6 +26,10 @@ const ethAccounts = session.sessionScopes['eip155:1']?.accounts || []
 const solAccounts = session.sessionScopes['solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp']?.accounts || []
 ```
 
+:::note
+MetaMask doesn't support session IDs.
+:::
+
 ## Next steps
 
 - [Scopes](./scopes.md): Understand CAIP-2 chain identifiers used in sessions.
