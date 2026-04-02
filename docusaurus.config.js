@@ -197,6 +197,13 @@ const config = {
     './src/plugins/mm-scss-utils',
     './src/plugins/plugin-snaps-docs.ts',
     [
+      'docusaurus-plugin-glossary',
+      {
+        glossaryPath: 'src/lib/glossary.json',
+        routePath: '/glossary',
+      },
+    ],
+    [
       '@docusaurus/plugin-content-docs',
       {
         id: 'snaps',
