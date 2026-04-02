@@ -129,7 +129,7 @@ Pass an empty array to let the user choose their own accounts.
 After connecting, retrieve the session to see which accounts the user authorized:
 
 ```typescript
-const session = await client.getSession()
+const session = await client.provider.getSession()
 
 const ethAccounts = session.sessionScopes[SCOPES.ETHEREUM]?.accounts || []
 const lineaAccounts = session.sessionScopes[SCOPES.LINEA]?.accounts || []
@@ -390,7 +390,7 @@ export default function App() {
     try {
       const client = await getClient()
       await client.connect([SCOPES.ETHEREUM, SCOPES.LINEA, SCOPES.BASE, SCOPES.SOLANA], [])
-      const session = await client.getSession()
+      const session = await client.provider.getSession()
       const accts: ChainAccounts = {}
       for (const scope of Object.values(SCOPES)) {
         accts[scope] = session.sessionScopes[scope]?.accounts || []
