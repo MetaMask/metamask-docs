@@ -289,7 +289,7 @@ export default function App() {
     setConnecting(true)
     try {
       await client.connect([SOLANA_MAINNET], [])
-      const session = await client.getSession()
+      const session = await client.provider.getSession()
       const scopeData = session?.sessionScopes?.[SOLANA_MAINNET]
       const accs = scopeData?.accounts?.map((a) => a.split(':').pop()) ?? []
       setAccounts(accs)
