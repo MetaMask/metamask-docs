@@ -21,7 +21,20 @@ toc_max_heading_level: 2
 
 # MetaMask Connect Multichain methods
 
-MetaMask Connect Multichain (`@metamask/connect-multichain`) exposes four primary methods: `connect()` to create a CAIP-25 session across multiple chains, `getSession()` to retrieve authorized scopes and accounts, `invokeMethod()` to send RPC requests to any chain in the session, and `disconnect()` to end the session. It also provides event handlers for session changes.
+MetaMask Connect Multichain (`@metamask/connect-multichain`) exposes four primary methods:
+
+- [`connect`](#connect) to create a [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) session across multiple chains.
+- [`getSession`](#getsession) to retrieve authorized scopes and accounts.
+- [`invokeMethod`](#invokemethod) to send RPC requests to any chain in the session.
+- [`disconnect`](#disconnect) to end the session.
+
+It also provides event handlers for session changes.
+When building with MetaMask Connect Multichain, use these high-level methods to create and manage sessions.
+
+:::note
+These high-level methods wrap the standard [Multichain API](api.md) methods.
+Use those standard methods if you're building your own client or need lower-level control.
+:::
 
 ## `connect`
 
