@@ -568,7 +568,7 @@ const caveats = [{
 
 ## `limitedCalls`
 
-Limits the number of times the delegate can perform executions on the delegator's behalf.
+Limits the number of times the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> can perform executions on the <GlossaryTerm term="Delegator account">delegator</GlossaryTerm>'s behalf.
 
 <GlossaryTerm term="Caveat enforcer" /> contract: [`LimitedCallsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/LimitedCallsEnforcer.sol)
 
@@ -782,7 +782,7 @@ Enforces an allowance of native currency (for example, ETH).
 
 | Name           | Type      | Required | Description                                                       |
 | -------------- | --------- | -------- | ----------------------------------------------------------------- |
-| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
+| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm>. |
 
 ### Example
 
@@ -948,7 +948,7 @@ const caveats = [{
 
 ## `valueLte`
 
-Limits the value of native tokens that the delegate can spend.
+Limits the value of native tokens that the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> can spend.
 
 <GlossaryTerm term="Caveat enforcer" /> contract: [`ValueLteEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ValueLteEnforcer.sol)
 

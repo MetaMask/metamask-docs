@@ -7,6 +7,7 @@ keywords: [ERC-7715, Viem, wallet client, actions, reference, advanced permissio
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Wallet Client actions reference
 
@@ -18,7 +19,7 @@ To use Advanced Permissions (ERC-7715) actions, the Viem Wallet Client must be e
 
 ## `requestExecutionPermissions`
 
-Requests Advanced Permissions from the MetaMask extension account according to the [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) specification. Returns a [`RequestExecutionPermissionsReturnType`](../types.md#requestexecutionpermissionsreturntype).
+Requests <GlossaryTerm term="Advanced Permissions" /> from the MetaMask extension account according to the [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) specification. Returns a [`RequestExecutionPermissionsReturnType`](../types.md#requestexecutionpermissionsreturntype).
 
 ### Parameters
 
@@ -79,7 +80,7 @@ export const walletClient = createWalletClient({
 
 ## `getSupportedExecutionPermissions`
 
-Returns the Advanced Permissions types that the wallet supports, according to the
+Returns the <GlossaryTerm term="Advanced Permissions" /> types that the wallet supports, according to the
 [ERC-7715](https://eips.ethereum.org/EIPS/eip-7715) 
 specification. Use this to verify the available permission types and supported
 chains before requesting permissions.

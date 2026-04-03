@@ -4,6 +4,8 @@ sidebar_label: Types
 keywords: [types, delegation, smart accounts, reference, enums]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Types
 
 This page documents the TypeScript [enums](#enums) and [types](#types-1) used in Smart Accounts Kit APIs.
@@ -117,8 +119,8 @@ Represents a restriction or condition applied to a delegation.
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
-| `enforcer` | `Hex` | Yes | The contract address of the enforcer. |
-| `terms` | `Hex` | Yes | The terms of the caveat encoded as hex data. |
+| `enforcer` | `Hex` | Yes | The contract address of the <GlossaryTerm term="Caveat enforcer">caveat enforcer</GlossaryTerm>. |
+| `terms` | `Hex` | Yes | The terms of the <GlossaryTerm term="Caveat">caveat</GlossaryTerm> encoded as hex data. |
 | `args` | `Hex` | Yes | Additional arguments required by the caveat enforcer, encoded as hex data. |
 
 ### `CaveatBuilderConfig`
@@ -127,24 +129,24 @@ Optional configuration for [`createCaveatBuilder`](delegation/index.md#createcav
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
-| `allowInsecureUnrestrictedDelegation` | `boolean` | No | Whether to allow unrestricted delegations with no caveats. The default is `false`. |
+| `allowInsecureUnrestrictedDelegation` | `boolean` | No | Whether to allow unrestricted delegations with no <GlossaryTerm term="Caveat">caveats</GlossaryTerm>. The default is `false`. |
 
 ### `Delegation`
 
-Represents a delegation that grants permissions from a delegator to a delegate.
+Represents a delegation that grants permissions from a <GlossaryTerm term="Delegator account">delegator</GlossaryTerm> to a <GlossaryTerm term="Delegate account">delegate</GlossaryTerm>.
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
 | `delegate` | `Hex` | Yes | The address to which the delegation is being granted. |
 | `delegator` | `Hex` | Yes | The address that is granting the delegation. |
-| `authority` | `Hex` | Yes | The parent delegation hash, or `ROOT_AUTHORITY` for creating root delegations. |
+| `authority` | `Hex` | Yes | The parent delegation hash, or `ROOT_AUTHORITY` for creating <GlossaryTerm term="Root delegation">root delegations</GlossaryTerm>. |
 | `caveats` | [`Caveat`](#caveat)`[]` | Yes | An array of [caveats](delegation/caveats.md) that constrain the delegation. |
 | `salt` | `Hex` | Yes | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations. |
 | `signature` | `Hex` | Yes | The signature to validate the delegation. |
 
 ### `ExactCalldataBuilderConfig`
 
-Defines the exact calldata the delegate is allowed to call.
+Defines the exact calldata the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> is allowed to call.
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
@@ -152,7 +154,7 @@ Defines the exact calldata the delegate is allowed to call.
 
 ### `ExecutionStruct`
 
-Represents a single execution to perform on behalf of a delegator.
+Represents a single execution to perform on behalf of a <GlossaryTerm term="Delegator account">delegator</GlossaryTerm>.
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
@@ -170,7 +172,7 @@ The return type of [`getSupportedExecutionPermissions`](advanced-permissions/wal
 
 ### `PartialSignature`
 
-Represents a single signer's contribution to a multisig aggregated signature.
+Represents a single <GlossaryTerm term="Signer">signer</GlossaryTerm>'s contribution to a multisig aggregated signature.
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
@@ -180,7 +182,7 @@ Represents a single signer's contribution to a multisig aggregated signature.
 
 ### `PermissionResponse`
 
-Represents a granted Advanced Permission. 
+Represents a granted <GlossaryTerm term="Advanced Permissions">Advanced Permission</GlossaryTerm>. 
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
@@ -191,7 +193,7 @@ Represents a granted Advanced Permission.
 | `rules` | `Record<string, unknown>[]` | No | The rules applied to the permission. For example, permission expiry. |
 | `context` | `Hex` | Yes | The permission context (encoded delegation list) used when redeeming the permission. |
 | `dependencies` | `{ factory: Address, factoryData: Hex }[]` | Yes | Factory dependencies for account deployment. |
-| `delegationManager` | `Address` | Yes | The address of the Delegation Manager contract for the permission. |
+| `delegationManager` | `Address` | Yes | The address of the <GlossaryTerm term="Delegation Manager" /> contract for the permission. |
 
 ### `RequestExecutionPermissionsReturnType`
 
@@ -199,19 +201,19 @@ The return type of [`requestExecutionPermissions`](advanced-permissions/wallet-c
 
 ### `SmartAccountsEnvironment`
 
-An object containing the contract addresses required to interact with the Delegation Framework on a specific chain.
+An object containing the contract addresses required to interact with the <GlossaryTerm term="Delegation Framework" /> on a specific chain.
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
-| `DelegationManager` | `Hex` | Yes | The address of the Delegation Manager contract. |
+| `DelegationManager` | `Hex` | Yes | The address of the <GlossaryTerm term="Delegation Manager" /> contract. |
 | `EntryPoint` | `Hex` | Yes | The address of the ERC-4337 EntryPoint contract. |
-| `SimpleFactory` | `Hex` | Yes | The address of the factory contract for deploying MetaMask smart accounts. |
+| `SimpleFactory` | `Hex` | Yes | The address of the factory contract for deploying <GlossaryTerm term="MetaMask smart account">MetaMask Smart Accounts</GlossaryTerm>. |
 | `implementations` | `Record<string, Hex>` | Yes | A map of MetaMask smart account implementation types to their deployed addresses. |
 | `caveatEnforcers` | `Record<string, Hex>` | Yes | A map of caveat enforcer types to their deployed addresses. |
 
 ### `SupportedPermissionInfo`
 
-Describes a supported Advanced Permission type. Used in [`GetSupportedExecutionPermissionsResult`](#getsupportedexecutionpermissionsresult).
+Describes a supported <GlossaryTerm term="Advanced Permissions">Advanced Permission</GlossaryTerm> type. Used in [`GetSupportedExecutionPermissionsResult`](#getsupportedexecutionpermissionsresult).
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
@@ -222,4 +224,4 @@ Describes a supported Advanced Permission type. Used in [`GetSupportedExecutionP
 
 | Name | Type | Required | Description |
 | ---- | ---- | -------- | ----------- |
-| `maxValue` | `bigint` | Yes | The maximum native token amount the delegate can transfer per call. |
+| `maxValue` | `bigint` | Yes | The maximum native token amount the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> can transfer per call. |

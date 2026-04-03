@@ -5,15 +5,17 @@ toc_max_heading_level: 2
 keywords: [InvalidEOASignature, error code, delegation, troubleshooting, invalid EOA signature]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Invalid EOA signature
 
-The Delegation Manager reverts with `InvalidEOASignature()` in the following cases.
+The <GlossaryTerm term="Delegation Manager" /> reverts with `InvalidEOASignature()` in the following cases.
 
 ## Smart account is not deployed
 
-The [root delegation's](../concepts/delegation/overview.md#root-delegation) delegator must be a
-MetaMask smart account. The Delegation Manager checks the delegator code to determine
-whether it is an externally owned account (EOA) or a smart account.
+The [root delegation's](../concepts/delegation/overview.md#root-delegation) <GlossaryTerm term="Delegator account">delegator</GlossaryTerm> must be a
+<GlossaryTerm term="MetaMask smart account" />. The Delegation Manager checks the delegator code to determine
+whether it is an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> or a smart account.
 
 If the smart account is not deployed yet, its address has no contract code. The Delegation
 Manager treats the address as an EOA and attempts ECDSA signature recovery. Because the

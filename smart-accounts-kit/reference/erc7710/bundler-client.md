@@ -7,6 +7,7 @@ keywords: [ERC-7710, Viem, bundler client, actions, reference, advanced permissi
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Bundler Client actions reference
 
@@ -14,7 +15,7 @@ These actions extend the [Viem Bundler Client](https://viem.sh/account-abstracti
 
 ## `sendUserOperationWithDelegation`
 
-Sends a user operation with redeem permissions according to the [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710) specifications.
+Sends a <GlossaryTerm term="User operation">user operation</GlossaryTerm> with redeem permissions according to the [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710) specifications.
 
 :::info
 To use `sendUserOperationWithDelegation`, the Viem Bundler Client must be
@@ -30,7 +31,7 @@ Objects in the `calls` array also require the following parameters:
 
 | Name | Type | Required | Description                                                                                                                                                                                        |
 | ---- | ---- | -------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `delegationManager` | `Address` | Yes | The address of Delegation Manager.                                                                                                                                                                 |
+| `delegationManager` | `Address` | Yes | The address of the <GlossaryTerm term="Delegation Manager" />.                                                                                                                                                                 |
 | `permissionContext` | `PermissionContext` | Yes | An encoded delegation chain (`Hex`) or a decoded delegation chain (`Delegation[]`) for redeeming permissions. |
 
 ### Example
