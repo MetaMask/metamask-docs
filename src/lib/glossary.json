@@ -18,7 +18,7 @@
     {
       "term": "Caveat",
       "definition": "A restriction attached to a delegation that limits how delegated authority can be used.",
-      "relatedTerms": ["Caveat enforcer", "Delegation", "Delegation Framework"]
+      "relatedTerms": ["Caveat enforcer", "Delegation", "Delegation scope"]
     },
     {
       "term": "Caveat enforcer",

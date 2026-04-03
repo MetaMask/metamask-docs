@@ -131,7 +131,7 @@ In a production dapp, you should first check the existing token allowance and on
 :::
 
 Batch the approve call with other onchain actions you want to perform using the ERC-20 paymaster.
-Pass the `paymasterClient` from [Step 3](#3-create-a-paymaster-client) to the `paymaster` property.
+Pass the `paymasterClient` from [Step 3](#3-set-up-a-paymaster-client) to the `paymaster` property.
 
 ```typescript
 // Appropriate fee per gas must be determined for the bundler being used.

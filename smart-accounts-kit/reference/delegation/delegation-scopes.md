@@ -6,6 +6,7 @@ keywords: [delegation scopes, configuration, reference]
 
 import Tabs from "@theme/Tabs"; 
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Delegation scopes
 
@@ -113,7 +114,7 @@ This scope is useful for setting simple, fixed transfer limits without any time-
 | Name           | Type      | Required | Description                                                       |
 | -------------- | --------- | -------- | ----------------------------------------------------------------- |
 | `tokenAddress` | `Address` | Yes      | The ERC-20 token contract address.                                |
-| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
+| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by <GlossaryTerm term="Delegate account">delegate</GlossaryTerm>. |
 
 #### Example
 
@@ -147,7 +148,7 @@ Limits the delegation to ERC-721 token (NFT) transfers only.
 | Name           | Type      | Required | Description                                                                  |
 | -------------- | --------- | -------- | ---------------------------------------------------------------------------- |
 | `tokenAddress` | `Address` | Yes      | The ERC-721 token contract address.                                          |
-| `tokenId`      | `bigint`  | Yes      | The ID of the ERC-721 token that can be transferred by delegate. |
+| `tokenId`      | `bigint`  | Yes      | The ID of the ERC-721 token that can be transferred by <GlossaryTerm term="Delegate account">delegate</GlossaryTerm>. |
 
 #### Example
 
@@ -182,7 +183,7 @@ At the start of each new period, the allowance resets.
 | `periodAmount`   | `bigint`  | Yes      | The maximum amount of tokens that can be transferred per period. |
 | `periodDuration` | `number`  | Yes      | The duration of each period in seconds.                          |
 | `startDate`      | `number`  | Yes      | The timestamp when the first period begins in seconds.           |
-| `allowedCalldata` | [`AllowedCalldataBuilderConfig`](../types.md#allowedcalldatabuilderconfig)`[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
+| `allowedCalldata` | [`AllowedCalldataBuilderConfig`](../types.md#allowedcalldatabuilderconfig)`[]` | No  | The list of calldata the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
 | `exactCalldata`   | [`ExactCalldataBuilderConfig`](../types.md#exactcalldatabuilderconfig)     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
 #### Example
@@ -264,7 +265,7 @@ This scope is useful for setting simple, fixed transfer limits without any time 
 
 | Name              | Type      | Required | Description                                                       |
 | ----------------- | --------- | -------- | ----------------------------------------------------------------- |
-| `maxAmount`       | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
+| `maxAmount`       | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by <GlossaryTerm term="Delegate account">delegate</GlossaryTerm>. |
 | `allowedCalldata` | [`AllowedCalldataBuilderConfig`](../types.md#allowedcalldatabuilderconfig)`[]` | No  | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
 | `exactCalldata`   | [`ExactCalldataBuilderConfig`](../types.md#exactcalldatabuilderconfig)     | No  | The calldata the delegate is allowed to call. The default is `0x` to disallow ERC-20 and ERC-721 token transfers. Cannot be used together with `allowedCalldata`. |
 
@@ -298,7 +299,7 @@ Defines the specific methods, contract addresses, and calldata that are allowed 
 
 | Name              | Type                             | Required | Description                                                                                                                                                     |
 | ----------------- | -------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `targets`         | `Address[]`                      | Yes      | The list of addresses that the delegate is allowed to call.                                                                                                     |
+| `targets`         | `Address[]`                      | Yes      | The list of addresses that the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> is allowed to call.                                                                                                     |
 | `selectors`       | `MethodSelector[]`               | Yes      | The list of method selectors that the delegate is allowed to call. The selector value can be 4-byte hex string, ABI function signature, or ABI function object. |
 | `allowedCalldata` | [`AllowedCalldataBuilderConfig`](../types.md#allowedcalldatabuilderconfig)`[]` | No       | The list of calldata the delegate is allowed to call. It doesn't support multiple selectors. Each entry in the list represents a portion of calldata corresponding to the same function signature. You can include or exclude specific parameters to define what parts of the calldata are valid. Cannot be used together with `exactCalldata`. |
 | `exactCalldata`   | [`ExactCalldataBuilderConfig`](../types.md#exactcalldatabuilderconfig)     | No       | The calldata the delegate is allowed to call. Cannot be used together with `allowedCalldata`. |
