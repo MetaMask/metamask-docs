@@ -17,7 +17,7 @@ Your dapp will handle wallet login and logout, read balances across all four cha
 
 ## Key concepts
 
-This tutorial uses [scopes, account IDs, and sessions](../concepts/scopes.md) to identify chains and
+This tutorial uses [scopes](../concepts/scopes.md), [account IDs](../concepts/accounts.md), and [sessions](../concepts/sessions.md) to identify chains and
 accounts across ecosystems. If you're unfamiliar with these concepts, review them before continuing.
 
 This tutorial uses the following scopes:

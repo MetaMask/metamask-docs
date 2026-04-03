@@ -41,14 +41,12 @@ Instead of connecting to one chain at a time, the Multichain API lets you:
 
 - **Request access to multiple ecosystems at once**: For example, request Ethereum Mainnet, Polygon, and Solana Mainnet in a single session.
 - **Send requests to any chain in the session**: For example, send a Solana transaction and an EVM transaction through the same connection.
-- **Manage the full session lifecycle**: Connect, retrieve session data, invoke methods on any chain, and disconnect — using [`connect`](reference/methods.md#connect), [`getSession`](reference/methods.md#getsession), [`invokeMethod`](reference/methods.md#invokemethod), and [`disconnect`](reference/methods.md#disconnect).
-  These SDK methods wrap the underlying [Multichain API](reference/api.md) ([`wallet_createSession`](reference/api.md#wallet_createsession), [`wallet_getSession`](reference/api.md#wallet_getsession), [`wallet_invokeMethod`](reference/api.md#wallet_invokemethod), [`wallet_revokeSession`](reference/api.md#wallet_revokesession)).
+- **Manage the full session lifecycle**: Connect, retrieve session data, invoke methods on any chain, and disconnect using [SDK methods](reference/methods.md) that wrap the underlying [Multichain API](reference/api.md).
 
 For dapps that support both EVM and Solana, this means one session covers both — and users see a single approval prompt.
 
-<!-- Insert the MetaMask Connect Image -->
 <p align="center">
-    <img height="500" src={require("./_assets/metamask-connect-modal.png").default} alt="MetaMask Connect Multichain Connect Modal" class="appScreen" />
+    <img height="500" src={require("./_assets/metamask-connect-modal.png").default} alt="MetaMask Connect Multichain Connect Modal" />
 </p>
 
 ## When to use the multichain client
@@ -108,7 +106,7 @@ Specify which chains to connect to using CAIP-2 scopes (for example, `eip155:1` 
 
 ### How does CAIP-25 work in MetaMask Connect?
 
-CAIP-25 is a chain-agnostic standard for wallet-dapp communication. When your dapp calls `connect()` with a list of CAIP-2 scopes, MetaMask creates a session that authorizes your dapp to send requests to those chains. You then use `invokeMethod()` to send JSON-RPC requests to any authorized chain by specifying its scope. The user sees a single approval prompt for all requested chains.
+[CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) is a chain-agnostic standard for wallet-dapp communication. When your dapp calls [`connect`](reference/methods.md#connect) with a list of CAIP-2 scopes, MetaMask creates a session that authorizes your dapp to send requests to those chains. You then use [`invokeMethod`](reference/methods.md#invokemethod) to send JSON-RPC requests to any authorized chain by specifying its scope. The user sees a single approval prompt for all requested chains.
 
 ### Can I use the multichain client alongside ecosystem-specific clients?
 

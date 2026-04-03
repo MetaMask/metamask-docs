@@ -164,7 +164,7 @@ Use [`invokeMethod()`](../reference/methods.md#invokemethod) to call RPC methods
 | Method                                                                     | Description                                                                                  |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)       | Connects to MetaMask with multichain [scopes](../concepts/scopes.md)                         |
-| [`getSession()`](../reference/methods.md#getsession)                       | Returns the current [session](../concepts/scopes.md#sessions-caip-25) with approved accounts |
+| [`getSession()`](../reference/methods.md#getsession)                       | Returns the current [session](../concepts/sessions.md) with approved accounts |
 | [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod) | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md)               |
 | [`disconnect()`](../reference/methods.md#disconnect)                       | Disconnects all [scopes](../concepts/scopes.md) and ends the session                         |
 | [`disconnect(scopes)`](../reference/methods.md#disconnect)                 | Disconnects specific [scopes](../concepts/scopes.md) without ending the session              |
@@ -174,7 +174,7 @@ Use [`invokeMethod()`](../reference/methods.md#invokemethod) to call RPC methods
 
 ## Next steps
 
-- See [Scopes, accounts, and sessions](../concepts/scopes.md) to understand CAIP-2 chain identifiers and CAIP-25 sessions.
+- Understand [scopes](../concepts/scopes.md), [accounts](../concepts/accounts.md), and [sessions](../concepts/sessions.md) for CAIP-2 chain identifiers, CAIP-10 account IDs, and CAIP-25 sessions.
 - [Send transactions on EVM and Solana](../guides/send-transactions.md) from a single multichain session.
 - [Sign messages on EVM and Solana](../guides/sign-transactions.md) using `invokeMethod`.
 - See [Create a multichain dapp](../tutorials/create-multichain-dapp.md) for a full step-by-step tutorial with React.
