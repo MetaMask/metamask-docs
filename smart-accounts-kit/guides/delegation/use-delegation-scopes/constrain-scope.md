@@ -7,6 +7,7 @@ keywords: [constrain, restrict, scope, caveat, caveat enforcer]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Constrain a delegation scope
 

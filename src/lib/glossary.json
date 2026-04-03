@@ -41,8 +41,8 @@
       "relatedTerms": ["Delegation", "MetaMask smart account", "Caveat enforcer"]
     },
     {
-      "term": "Delegation manager",
-      "definition": "The component that validates and redeems delegations, including signature checks and caveat-enforcer hooks.",
+      "term": "Delegation Manager",
+      "definition": "The component that validates and redeems delegations, including signature checks and caveat enforcer hooks.",
       "relatedTerms": ["Delegation", "Caveat enforcer"]
     },
     {

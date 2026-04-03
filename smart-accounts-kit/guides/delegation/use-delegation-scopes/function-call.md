@@ -5,10 +5,11 @@ keywords: [delegation scope, function call, restrict, delegation]
 
 import Tabs from "@theme/Tabs"; 
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Use the function call scope
  
-The function call scope defines the specific methods, contract addresses, and calldata that are allowed for the delegation.
+The function call scope defines the specific methods, contract addresses, and calldata that are allowed for the <GlossaryTerm term="Delegation">delegation</GlossaryTerm>.
 For example, Alice delegates to Bob the ability to call the `approve` function on the USDC contract, with the approval amount set to `0`.
 
 ## Prerequisites
@@ -22,7 +23,7 @@ For example, Alice delegates to Bob the ability to call the `approve` function o
 
 This scope requires `targets`, which specifies the permitted contract addresses, and `selectors`, which specifies the allowed methods.
 
-Internally, this scope uses the [`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets), [`allowedMethods`](../../../reference/delegation/caveats.md#allowedmethods), and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) caveat enforcers, and 
+Internally, this scope uses the [`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets), [`allowedMethods`](../../../reference/delegation/caveats.md#allowedmethods), and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) <GlossaryTerm term="Caveat enforcer">caveat enforcers</GlossaryTerm>, and 
 optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
 See the [function call scope reference](../../../reference/delegation/delegation-scopes.md#function-call-scope) for more details.
 
@@ -49,7 +50,7 @@ const delegation = createDelegation({
 ### Define allowed calldata
 
 You can further restrict the scope by defining the `allowedCalldata`. For example, you can set 
-`allowedCalldata` so the delegate is only permitted to call the `approve` function on the
+`allowedCalldata` so the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> is only permitted to call the `approve` function on the
 USDC token contract with an allowance value of `0`. This effectively limits the delegate to 
 revoking ERC-20 approvals.
 
@@ -94,7 +95,7 @@ const delegation = createDelegation({
 ### Define exact calldata
 
 You can define the `exactCalldata` instead of the `allowedCalldata`. For example, you can
-set `exactCalldata` so the delegate is permitted to call only the `approve` function on the USDC token
+set `exactCalldata` so the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> is permitted to call only the `approve` function on the USDC token
 contract, with a specific spender address and an allowance value of 0. This effectively limits the delegate to
 revoking ERC-20 approvals for a specific spender.
 

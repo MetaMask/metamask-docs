@@ -6,11 +6,12 @@ keywords: [advanced permissions, supported execution permissions, erc-7715, 7715
 
 import Tabs from "@theme/Tabs"; 
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Get supported permissions
 
 [ERC-7715](https://eip.tools/eip/7715) defines an RPC method that returns the execution permissions
-a wallet supports. Use the method to verify the available Advanced Permissions types and 
+a wallet supports. Use the method to verify the available <GlossaryTerm term="Advanced Permissions" /> types and 
 rules before sending requests.
 
 
