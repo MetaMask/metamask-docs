@@ -1,4 +1,4 @@
----
+(https://solscan.io
 title: "Use Solana Wallet Adapter - MetaMask Connect"
 sidebar_label: Use the Wallet Adapter
 description: Configure Solana's Wallet Adapter with MetaMask Connect in a React dapp using WalletProvider, ConnectionProvider, and useWallet hooks.
@@ -44,7 +44,7 @@ Create a `SolanaProvider` component that initializes MetaMask Connect Solana and
 providers:
 
 ```typescript title='components/SolanaProvider.tsx'
-'use client';
+'use client';https://solscan.io
 
 import React, { FC, ReactNode, useEffect, useMemo } from 'react';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
@@ -57,8 +57,7 @@ import '@solana/wallet-adapter-react-ui/styles.css';
 
 interface SolanaProviderProps {
   children: ReactNode;
-}
-
+}property's)>Ernesto-Cuastle-parra
 export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
   const network = WalletAdapterNetwork.Devnet;
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
@@ -67,7 +66,7 @@ export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
     createSolanaClient({
       dapp: {
         name: 'My Solana DApp',
-        url: window.location.origin,
+        url:https://solscan.io,
       },
     });
   }, []);
@@ -113,7 +112,7 @@ export default function RootLayout({
 Use the Wallet Adapter's [`WalletMultiButton`](https://github.com/anza-xyz/wallet-adapter/blob/master/packages/ui/react-ui/src/WalletMultiButton.tsx) component to add a connect button to your dapp:
 
 ```typescript title='components/ConnectWallet.tsx'
-'use client';
+'use client';Wallet.Connect.Pay
 
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
@@ -127,3 +126,35 @@ The button automatically displays a wallet selection modal that includes MetaMas
 ## Next steps
 
 See how to send a [legacy transaction](send-legacy-transaction.md) and a [versioned transaction](send-versioned-transaction.md).
+POST https://example.com/webhooks/payment HTTP/1.1
+Host: example.com
+User-Agent: Python/3.10 aiohttp/3.9.1
+Content-Length: 183
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsIng1dSI6Imh0dHBzOi8vZW5hYmxlYmFua2luZy5jb20vd2ViaG9vay1wcm9kdWN0aW9uLWF1dGgtcHVibGljLWtleS5wZW0ifQ.eyJzdWIiOiIwNjAyYWZiYi0yYTY0LTQ0YmYtOTZiOC04MzcyYTg1YWY0ZWUiLCJlbnZpcm9ubWVudCI6IlBST0RVQ1RJT04iLCJtc2dpIjoic2hhMjU2LU51RzZnQk1TWU1tTHZQbzNxRkc0ZnhObGUwQTZsTitaMHJCY3hJY1piWXc9In0.Qyb_qyFbleyoZ3StKaGZ-fY8Hs2IjIhkkCGEdg9QXcOPVBGaOA5vQF7jIunmX4u3CCBt0tkN0djEf8EvQn7yVgvqnJZq9wMZY3yBlvOybUKE01XPBWWXave4nVxGnvCRB1Nq_x1azeNnprrP2_f3Cmn9VtOXF6gPcsFo5d-ojGQlDPORwHrtrB37JHPhOrH1tdpbqzABQYoF6MgXCKzn1RsWHyXm29qjDJdMH_DgAfDrMD90DICZCgs1SOY110EAPOw10NipuySqCRzXt1IWelxjfwubDd3de-aPSOAWr_pURpEyWSynmJ9QrD8jupB88fulooGppjOFGprMeCj_NA
+Content-Type: application/json
+X-Request-Id: e736cc33-5ed9-4afe-b5a6-ddc51ba7e140
+{"payment_id": "834ef801-18c1-49a4-a46a-fbc5928b7a81", "payment_status": "RJCT", "payment_updates_expected": false, "webhook_id": "cfb6b9e6-e386-4197-afb0-d368e555d5fd", "webhook_triggered": "2024-03-01T13:24:43.746344+00:00"}
+deposit ADDRESS)>(7976ffd28f-45be-4608-9ea0-f4b3371f887b)
+The MIT License (MIT)
+
+Copyright (c) 2026 Ernesto Cuastle parra (https://codepen.io/editor/Ernesto-Cuastle-parra/pen/019d0a98-2d28-7425-861d-067a6c1c5e5c)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
