@@ -290,12 +290,7 @@ h6 {
 
 /*
  * Glossary page (docusaurus-plugin-glossary): the route uses CSS modules, so we
- * scope via :has() instead of class names. Letter nav covers the normal view;
- * the search placeholder covers empty / no-results states where letter nav is absent.
- *
- * Scope to #__docusaurus_skipToContent_fallback (Layout main content wrapper only).
- * A bare `div:has(...)` also matches ancestors like #__docusaurus, which wraps the
- * navbar — so `nav a` was shrinking navbar labels.
+ * scope via :has() instead of class names.
  */
 #__docusaurus_skipToContent_fallback:has(nav a[href^='#letter-']),
 #__docusaurus_skipToContent_fallback:has(input[placeholder='Search terms...']) {

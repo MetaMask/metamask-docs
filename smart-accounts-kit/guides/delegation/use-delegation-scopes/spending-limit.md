@@ -3,9 +3,11 @@ description: Learn how to use the spending limit scopes for a delegation.
 keywords: [delegation scope, spending limit, restrict, delegation]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Use spending limit scopes
  
-Spending limit scopes define how much a delegate can spend in native, ERC-20, or ERC-721 tokens.
+Spending limit scopes define how much a <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> can spend in native, ERC-20, or ERC-721 tokens.
 You can set transfer limits with or without time-based (periodic) or streaming conditions, depending on your use case.
 
 ## Prerequisites
@@ -25,7 +27,7 @@ Bob can transfer a total of 10 USDC per day; the limit resets at the beginning o
 
 When this scope is applied, the toolkit automatically disallows native token transfers (sets the native token transfer limit to `0`). 
 
-Internally, this scope uses the [`erc20PeriodTransfer`](../../../reference/delegation/caveats.md#erc20periodtransfer) and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) caveat enforcers.
+Internally, this scope uses the [`erc20PeriodTransfer`](../../../reference/delegation/caveats.md#erc20periodtransfer) and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) <GlossaryTerm term="Caveat enforcer">caveat enforcers</GlossaryTerm>.
 See the [ERC-20 periodic scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-periodic-scope) for more details.
 
 ```typescript
@@ -59,7 +61,7 @@ For example, Alice creates a delegation that allows Bob to spend 0.1 USDC per se
 
 When this scope is applied, the toolkit automatically disallows native token transfers (sets the native token transfer limit to `0`).
 
-Internally, this scope uses the [`erc20Streaming`](../../../reference/delegation/caveats.md#erc20streaming) and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) caveat enforcers.
+Internally, this scope uses the [`erc20Streaming`](../../../reference/delegation/caveats.md#erc20streaming) and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) <GlossaryTerm term="Caveat enforcer">caveat enforcers</GlossaryTerm>.
 See the [ERC-20 streaming scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-streaming-scope) for more details.
 
 ```typescript
@@ -94,7 +96,7 @@ Bob may use the 10 USDC in a single transaction or make multiple transactions, a
 
 When this scope is applied, the toolkit automatically disallows native token transfers (sets the native token transfer limit to `0`).
 
-Internally, this scope uses the [`erc20TransferAmount`](../../../reference/delegation/caveats.md#erc20transferamount) and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) caveat enforcers.
+Internally, this scope uses the [`erc20TransferAmount`](../../../reference/delegation/caveats.md#erc20transferamount) and [`valueLte`](../../../reference/delegation/caveats.md#valuelte) <GlossaryTerm term="Caveat enforcer">caveat enforcers</GlossaryTerm>.
 See the [ERC-20 transfer scope reference](../../../reference/delegation/delegation-scopes.md#erc-20-transfer-scope) for more details.
 
 ```typescript
@@ -119,7 +121,7 @@ const delegation = createDelegation({
 This scope limits the delegation to ERC-721 token transfers only.
 For example, Alice creates a delegation that allows Bob to transfer an NFT she owns on her behalf.
 
-Internally, this scope uses the [`erc721Transfer`](../../../reference/delegation/caveats.md#erc721transfer) caveat enforcer. 
+Internally, this scope uses the [`erc721Transfer`](../../../reference/delegation/caveats.md#erc721transfer) <GlossaryTerm term="Caveat enforcer">caveat enforcer</GlossaryTerm>. 
 See the [ERC-721 scope reference](../../../reference/delegation/delegation-scopes.md#erc-721-scope) for more details.
 
 ```typescript
@@ -149,7 +151,7 @@ When this scope is applied, the toolkit disallows ERC-20 and ERC-721 token trans
 You can optionally configure `exactCalldata` to restrict transactions to a specific operation, or configure
 `allowedCalldata` to allow transactions that match certain patterns or ranges.
 
-Internally, this scope uses the [`nativeTokenPeriodTransfer`](../../../reference/delegation/caveats.md#nativetokenperiodtransfer) caveat enforcer, and 
+Internally, this scope uses the [`nativeTokenPeriodTransfer`](../../../reference/delegation/caveats.md#nativetokenperiodtransfer) <GlossaryTerm term="Caveat enforcer">caveat enforcer</GlossaryTerm>, and 
 optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
 See the [native token periodic scope reference](../../../reference/delegation/delegation-scopes.md#native-token-periodic-scope) for more details.
 
@@ -184,7 +186,7 @@ When this scope is applied, the toolkit disallows ERC-20 and ERC-721 token trans
 You can optionally configure `exactCalldata` to restrict transactions to a specific operation, or configure
 `allowedCalldata` to allow transactions that match certain patterns or ranges.
 
-Internally, this scope uses the [`nativeTokenStreaming`](../../../reference/delegation/caveats.md#nativetokenstreaming) caveat enforcer, and
+Internally, this scope uses the [`nativeTokenStreaming`](../../../reference/delegation/caveats.md#nativetokenstreaming) <GlossaryTerm term="Caveat enforcer">caveat enforcer</GlossaryTerm>, and
 optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
 See the [native token streaming scope reference](../../../reference/delegation/delegation-scopes.md#native-token-streaming-scope) for more details.
 
@@ -220,7 +222,7 @@ When this scope is applied, the toolkit disallows ERC-20 and ERC-721 token trans
 You can optionally configure `exactCalldata` to restrict transactions to a specific operation, or configure
 `allowedCalldata` to allow transactions that match certain patterns or ranges.
 
-Internally, this scope uses the [`nativeTokenTransferAmount`](../../../reference/delegation/caveats.md#nativetokentransferamount) caveat enforcer, and
+Internally, this scope uses the [`nativeTokenTransferAmount`](../../../reference/delegation/caveats.md#nativetokentransferamount) <GlossaryTerm term="Caveat enforcer">caveat enforcer</GlossaryTerm>, and
 optionally uses the [`allowedCalldata`](../../../reference/delegation/caveats.md#allowedcalldata) or [`exactCalldata`](../../../reference/delegation/caveats.md#exactcalldata) caveat enforcers when those parameters are specified.
 See the [native token transfer scope reference](../../../reference/delegation/delegation-scopes.md#native-token-transfer-scope) for more details.
 

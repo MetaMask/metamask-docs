@@ -4,13 +4,15 @@ sidebar_label: MetaMask Embedded Wallets
 keywords: [web3auth, smart account, signer, metamask smart account]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Use MetaMask Embedded Wallets with MetaMask Smart Accounts
 
 [MetaMask Embedded Wallets (Web3Auth)](/embedded-wallets/) provides a pluggable embedded wallet 
 infrastructure to simplify Web3 wallet integration and user onboarding. It supports social logins allowing 
 users to access Web3 applications through familiar authentication methods in under a minute. 
 
-MetaMask Smart Accounts is a signer-agnostic implementation that allows you to use Embedded Wallets as a signer for MetaMask Smart Accounts.
+MetaMask Smart Accounts is a signer-agnostic implementation that allows you to use Embedded Wallets as a signer for <GlossaryTerm term="MetaMask smart account">smart accounts</GlossaryTerm>.
 
 :::info
 This guide supports React and React-based frameworks.
@@ -91,7 +93,7 @@ export const web3authConfig = {
 ### 3. Create a smart account
 
 Once the user has connected their wallet, use the [Wallet Client](https://viem.sh/docs/clients/wallet) from Wagmi as the signer to create a
-MetaMask smart account.
+<GlossaryTerm term="MetaMask smart account" />.
 
 ```ts
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";

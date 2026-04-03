@@ -4,10 +4,12 @@ sidebar_label: Passkey
 keywords: [passkey, smart account, signer, metamask smart account]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Use a passkey with MetaMask Smart Accounts
 
 Passkeys eliminate the need for traditional seed phrases that are difficult to remember, enabling a more seamless 
-and secure way for users to access their externally owned accounts (EOAs). Compared to traditional EOAs which use 
+and secure way for users to access their <GlossaryTerm term="Externally owned account (EOA)">EOAs</GlossaryTerm>. Compared to traditional EOAs which use 
 secp256k1 elliptic curve to generate key pairs and signatures, a passkey-based EOA uses the 
 secp256r1 (P-256) elliptic curve.
 
@@ -43,7 +45,7 @@ const credential = await createWebAuthnCredential({
 
 ### 3. Create a smart account
 
-Once the passkey is created, use the [Viem WebAuthn Account](https://viem.sh/account-abstraction/accounts/webauthn) to configure your passkey as a MetaMask smart account signer.
+Once the passkey is created, use the [Viem WebAuthn Account](https://viem.sh/account-abstraction/accounts/webauthn) to configure your passkey as a <GlossaryTerm term="MetaMask smart account" /> signer.
 
 The `deployParams` parameter needs the X and Y coordinates of the P-256 public key. Since WebAuthn credentials store
 a compressed public key, you need to deserialize it, and extract the X and Y coordinates.

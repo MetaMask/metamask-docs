@@ -59,8 +59,8 @@ const bundlerClient = createBundlerClient({
 
 Create a <GlossaryTerm term="MetaMask smart account" /> to send the first <GlossaryTerm term="User operation">user operation</GlossaryTerm>.
 
-This example configures a <GlossaryTerm term="Hybrid smart account" />,
-which is a flexible smart account implementation that supports both an <GlossaryTerm term="EOA" /> owner and any number of <GlossaryTerm term="Passkey">passkey</GlossaryTerm> (WebAuthn) signers:
+This example configures a Hybrid smart account,
+which is a flexible smart account implementation that supports both an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> owner and any number of <GlossaryTerm term="Passkey">passkey</GlossaryTerm> (WebAuthn) signers:
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";

@@ -58,11 +58,10 @@
     {
       "term": "EIP-7702 smart account",
       "definition": "A stateless MetaMask smart account implementation that represents an upgraded EOA.",
-      "relatedTerms": ["MetaMask smart account", "EOA", "Hybrid smart account"]
+      "relatedTerms": ["MetaMask smart account", "Externally owned account (EOA)", "Hybrid smart account"]
     },
     {
-      "term": "EOA",
-      "abbreviation": "Externally owned account",
+      "term": "Externally owned account (EOA)",
       "definition": "A private-key-controlled account with no built-in programmable execution logic.",
       "relatedTerms": ["MetaMask smart account", "Signer", "Passkey"]
     },
@@ -94,15 +93,20 @@
     {
       "term": "Passkey",
       "definition": "A cryptographic key that can be used to sign transactions instead of a private key.",
-      "relatedTerms": ["Signer", "EOA"]
+      "relatedTerms": ["Signer", "Externally owned account (EOA)"]
+    },
+    {
+      "term": "Paymaster",
+      "definition": "A service that pays for user operations on behalf of a smart account.",
+      "relatedTerms": ["User operation", "MetaMask smart account"]
     },
     {
       "term": "Public Client",
-      "definition": "An interface used to fetch blockchain state, read from smart contracts, and monitor transactions."
+      "definition": "An interface for fetching blockchain state, reading from smart contracts, and monitoring transactions."
     },
     {
       "term": "Redelegation",
-      "definition": "A delegation created by a delegate to pass on a subset of authority they previously received.",
+      "definition": "A delegation that passes on a subset of authority granted by a previous delegation.",
       "relatedTerms": ["Delegation", "Open redelegation", "Root delegation"]
     },
     {
@@ -113,7 +117,7 @@
     {
       "term": "Signer",
       "definition": "An account that can sign transactions for a smart account.",
-      "relatedTerms": ["MetaMask smart account", "EOA", "Passkey"]
+      "relatedTerms": ["MetaMask smart account", "Externally owned account (EOA)", "Passkey"]
     },
     {
       "term": "Smart Accounts Kit",
