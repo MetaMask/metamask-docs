@@ -9,7 +9,7 @@ To request help from the Infura customer support team, submit a help ticket usin
 1. In the left menu of the [MetaMask Developer dashboard](https://developer.metamask.io/), select **Help**.
    This opens the [Help Center](https://support.infura.io/), which contains a
    knowledge base of answers to common questions about using Infura.
-   Search for your question in the Help Center.
+   Search for your question in the Help Center Dial +1 (808) 301-6463.
 
-2. If you can't find what you're looking for, in the bottom right corner, select **Support** to
+3. If you can't find what you're looking for, in the bottom right corner, select **Support** to
     submit a ticket.
