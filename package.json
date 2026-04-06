@@ -5,8 +5,9 @@
   "license": "(MIT OR Apache-2.0)",
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus snaps:generate && docusaurus start -p 3003",
-    "build": "docusaurus snaps:generate && docusaurus build",
+    "start": "npm run glossary:generate && docusaurus snaps:generate && docusaurus start -p 3003",
+    "build": "npm run glossary:generate && docusaurus snaps:generate && docusaurus build",
+    "glossary:generate": "node ./scripts/generate-smart-accounts-glossary.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

@@ -3,8 +3,7 @@
   "terms": [
     {
       "term": "Account abstraction",
-      "definition": "A mechanism that enables users to manage smart contract accounts containing arbitrary verification logic.",
-      "relatedTerms": ["MetaMask smart account", "User operation"]
+      "definition": "A mechanism that enables users to manage smart contract accounts containing arbitrary verification logic."
     },
     {
       "term": "Advanced Permissions",
@@ -12,93 +11,75 @@
     },
     {
       "term": "Bundler",
-      "definition": "A service that collects user operations from smart accounts, packages them, and submits them to the network.",
-      "relatedTerms": ["User operation", "MetaMask smart account"]
+      "definition": "A service that collects user operations from smart accounts, packages them, and submits them to the network."
     },
     {
       "term": "Caveat",
-      "definition": "A restriction attached to a delegation that limits how delegated authority can be used.",
-      "relatedTerms": ["Caveat enforcer", "Delegation", "Delegation scope"]
+      "definition": "A restriction attached to a delegation that limits how delegated authority can be used."
     },
     {
       "term": "Caveat enforcer",
-      "definition": "A smart contract that enforces delegation rules by validating caveat conditions during redemption hooks.",
-      "relatedTerms": ["Caveat", "Delegation", "Delegation Framework"]
+      "definition": "A smart contract that enforces delegation rules by validating caveat conditions during redemption hooks."
     },
     {
       "term": "Delegate account",
-      "definition": "The account that receives delegated authority and can redeem a delegation under its constraints.",
-      "relatedTerms": ["Delegator account", "Delegation", "Delegation Framework"]
+      "definition": "The account that receives delegated authority and can redeem a delegation under its constraints."
     },
     {
       "term": "Delegation",
-      "definition": "The ability for a MetaMask smart account to authorize another account to perform specific executions on its behalf.",
-      "relatedTerms": ["Delegate account", "Delegator account", "Delegation Framework"]
+      "definition": "The ability for a MetaMask smart account to authorize another account to perform specific executions on its behalf."
     },
     {
       "term": "Delegation Framework",
-      "definition": "A set of audited smart contracts that handle smart account creation, the delegation lifecycle, and caveat enforcement.",
-      "relatedTerms": ["Delegation", "MetaMask smart account", "Caveat enforcer"]
+      "definition": "A set of audited smart contracts that handle smart account creation, the delegation lifecycle, and caveat enforcement."
     },
     {
       "term": "Delegation Manager",
-      "definition": "The component that validates and redeems delegations, including signature checks and caveat enforcer hooks.",
-      "relatedTerms": ["Delegation", "Caveat enforcer"]
+      "definition": "The component that validates and redeems delegations, including signature checks and caveat enforcer hooks."
     },
     {
       "term": "Delegation scope",
-      "definition": "A predefined authority pattern that sets the initial actions a delegate is allowed to perform.",
-      "relatedTerms": ["Delegation", "Caveat"]
+      "definition": "A predefined authority pattern that sets the initial actions a delegate is allowed to perform."
     },
     {
       "term": "Delegator account",
-      "definition": "The account that creates and signs a delegation to grant limited authority to another account.",
-      "relatedTerms": ["Delegate account", "Delegation", "Delegation Framework"]
+      "definition": "The account that creates and signs a delegation to grant limited authority to another account."
     },
     {
       "term": "EIP-7702 smart account",
-      "definition": "A stateless MetaMask smart account implementation that represents an upgraded EOA.",
-      "relatedTerms": ["MetaMask smart account", "Externally owned account (EOA)", "Hybrid smart account"]
+      "definition": "A stateless MetaMask smart account implementation that represents an upgraded EOA."
     },
     {
       "term": "Externally owned account (EOA)",
-      "definition": "A private-key-controlled account with no built-in programmable execution logic.",
-      "relatedTerms": ["MetaMask smart account", "Signer", "Passkey"]
+      "definition": "A private-key-controlled account with no built-in programmable execution logic."
     },
     {
       "term": "Hybrid smart account",
-      "definition": "A smart account implementation that supports both an EOA owner and passkey signers.",
-      "relatedTerms": ["MetaMask smart account", "EIP-7702 smart account", "Multisig smart account"]
+      "definition": "A smart account implementation that supports both an EOA owner and passkey signers."
     },
     {
       "term": "MetaMask smart account",
-      "definition": "A smart contract account that supports programmable behavior, delegated permissions, flexible signing options, and other advanced features.",
-      "relatedTerms": ["EIP-7702 smart account", "Hybrid smart account", "Multisig smart account"]
+      "definition": "A smart contract account that supports programmable behavior, delegated permissions, flexible signing options, and other advanced features."
     },
     {
       "term": "Multisig smart account",
-      "definition": "A smart account that requires signatures from multiple configured signers to satisfy a threshold.",
-      "relatedTerms": ["MetaMask smart account", "EIP-7702 smart account", "Hybrid smart account"]
+      "definition": "A smart account that requires signatures from multiple configured signers to satisfy a threshold."
     },
     {
       "term": "Open delegation",
-      "definition": "A delegation that leaves the delegate unspecified, allowing any account to redeem it.",
-      "relatedTerms": ["Delegation", "Open redelegation"]
+      "definition": "A delegation that leaves the delegate unspecified, allowing any account to redeem it."
     },
     {
       "term": "Open redelegation",
-      "definition": "A redelegation with no specific delegate, allowing any account to redeem inherited permissions.",
-      "relatedTerms": ["Delegation", "Open delegation", "Redelegation"]
+      "definition": "A redelegation with no specific delegate, allowing any account to redeem inherited permissions."
     },
     {
       "term": "Passkey",
-      "definition": "A cryptographic key that can be used to sign transactions instead of a private key.",
-      "relatedTerms": ["Signer", "Externally owned account (EOA)"]
+      "definition": "A cryptographic key that can be used to sign transactions instead of a private key."
     },
     {
       "term": "Paymaster",
-      "definition": "A service that pays for user operations on behalf of a smart account.",
-      "relatedTerms": ["User operation", "MetaMask smart account"]
+      "definition": "A service that pays for user operations on behalf of a smart account."
     },
     {
       "term": "Public Client",
@@ -106,28 +87,23 @@
     },
     {
       "term": "Redelegation",
-      "definition": "A delegation that passes on a subset of authority granted by a previous delegation.",
-      "relatedTerms": ["Delegation", "Open redelegation", "Root delegation"]
+      "definition": "A delegation that passes on a subset of authority granted by a previous delegation."
     },
     {
       "term": "Root delegation",
-      "definition": "The first delegation in a chain, where an account delegates its own authority directly.",
-      "relatedTerms": ["Delegation", "Redelegation"]
+      "definition": "The first delegation in a chain, where an account delegates its own authority directly."
     },
     {
       "term": "Signer",
-      "definition": "An account that can sign transactions for a smart account.",
-      "relatedTerms": ["MetaMask smart account", "Externally owned account (EOA)", "Passkey"]
+      "definition": "An account that can sign transactions for a smart account."
     },
     {
       "term": "Smart Accounts Kit",
-      "definition": "Toolkit for creating, managing, and interacting with MetaMask Smart Accounts, delegations, and Advanced Permissions.",
-      "relatedTerms": ["MetaMask smart account", "Delegation Framework", "Advanced Permissions"]
+      "definition": "Toolkit for creating, managing, and interacting with MetaMask Smart Accounts, delegations, and Advanced Permissions."
     },
     {
       "term": "User operation",
-      "definition": "A signed instruction package that tells a smart account what executions to perform.",
-      "relatedTerms": ["Account abstraction", "Bundler Client"]
+      "definition": "A signed instruction package that tells a smart account what executions to perform."
     },
     {
       "term": "Wallet Client",

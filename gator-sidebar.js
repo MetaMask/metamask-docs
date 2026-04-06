@@ -205,9 +205,9 @@ const sidebar = {
         },
         'reference/types',
         {
-          type: "link",
-          label: "Glossary",
-          href: "/glossary"
+          type: 'doc',
+          id: 'reference/glossary',
+          label: 'Glossary',
         },
       ],
     },

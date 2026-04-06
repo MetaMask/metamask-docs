@@ -1,8 +1,13 @@
 import React, { useMemo, useState, useRef, useEffect, useCallback } from 'react';
-import { usePluginData } from '@docusaurus/useGlobalData';
+import glossaryData from '@site/src/lib/glossary.json';
 import styles from './styles.module.css';
 
-export default function GlossaryTerm({ term, definition, routePath = '/glossary', children }) {
+export default function GlossaryTerm({
+  term,
+  definition,
+  routePath = '/smart-accounts-kit/reference/glossary',
+  children,
+}) {
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipStyle, setTooltipStyle] = useState(null);
   const [placement, setPlacement] = useState('top'); // 'top' | 'bottom'
@@ -67,23 +72,22 @@ export default function GlossaryTerm({ term, definition, routePath = '/glossary'
     };
   }, [showTooltip, updatePosition]);
 
-  // Pull definition/route from plugin global data if not provided
-  const pluginData = usePluginData('docusaurus-plugin-glossary');
+  // Pull definition from local glossary data if not provided
   const effectiveDefinition = useMemo(() => {
     if (definition && typeof definition === 'string' && definition.length > 0) {
       return definition;
     }
-    const terms = (pluginData && pluginData.terms) || [];
+    const terms = (glossaryData && glossaryData.terms) || [];
     const found = terms.find(
       t => typeof t.term === 'string' && t.term.toLowerCase() === String(term).toLowerCase()
     );
     return found && found.definition ? found.definition : undefined;
-  }, [definition, pluginData, term]);
+  }, [definition, term]);
 
   const effectiveRoutePath = useMemo(() => {
     if (routePath && typeof routePath === 'string' && routePath.length > 0) return routePath;
-    return (pluginData && pluginData.routePath) || '/glossary';
-  }, [pluginData, routePath]);
+    return '/smart-accounts-kit/development/reference/glossary';
+  }, [routePath]);
 
   const displayText = children || term;
   const termId = term.toLowerCase().replace(/\s+/g, '-');

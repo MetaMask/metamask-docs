@@ -288,66 +288,6 @@ h6 {
   @extend .type-heading-xxs;
 }
 
-/*
- * Glossary page (docusaurus-plugin-glossary): the route uses CSS modules, so we
- * scope via :has() instead of class names.
- */
-#__docusaurus_skipToContent_fallback:has(nav a[href^='#letter-']),
-#__docusaurus_skipToContent_fallback:has(input[placeholder='Search terms...']) {
-  header h1 {
-    @extend .type-heading-m;
-    margin-bottom: 2rem;
-  }
-
-  header p {
-    display: none;
-  }
-
-  input[type='text'] {
-    font-size: 1.6rem !important;
-  }
-
-  nav a {
-    font-size: 1.4rem !important;
-  }
-
-  section h2 {
-    @extend .type-heading-sm;
-  }
-
-  dt {
-    @extend .type-heading-s;
-    margin-bottom: 1rem;
-  }
-
-  dt span {
-    font-size: 1.6rem !important;
-    line-height: 150%;
-  }
-
-  dd {
-    font-size: 1.6rem !important;
-    line-height: 150%;
-  }
-
-  dd > div {
-    font-size: 1.6rem !important;
-    line-height: 150%;
-  }
-
-  dd a {
-    font-size: 1.6rem !important;
-  }
-
-  dd strong {
-    font-size: 1.6rem !important;
-  }
-
-  footer p {
-    font-size: 1.4rem !important;
-  }
-}
-
 p,
 ul,
 ol {
