@@ -1,11 +1,13 @@
 import React, { useMemo, useState, useRef, useEffect, useCallback } from 'react';
+import Link from '@docusaurus/Link';
+import GithubSlugger from 'github-slugger';
 import glossaryData from '@site/src/lib/glossary.json';
 import styles from './styles.module.css';
 
 export default function GlossaryTerm({
   term,
   definition,
-  routePath = '/smart-accounts-kit/reference/glossary',
+  routePath = '/smart-accounts-kit/development/reference/glossary',
   children,
 }) {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -90,12 +92,15 @@ export default function GlossaryTerm({
   }, [routePath]);
 
   const displayText = children || term;
-  const termId = term.toLowerCase().replace(/\s+/g, '-');
+  const termId = useMemo(() => {
+    const slugger = new GithubSlugger();
+    return slugger.slug(String(term || ''));
+  }, [term]);
 
   return (
     <span ref={wrapperRef} className={styles.glossaryTermWrapper}>
-      <a
-        href={`${effectiveRoutePath}#${termId}`}
+      <Link
+        to={`${effectiveRoutePath}#${termId}`}
         className={styles.glossaryTerm}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
@@ -104,7 +109,7 @@ export default function GlossaryTerm({
         aria-describedby={`tooltip-${termId}`}
       >
         {displayText}
-      </a>
+      </Link>
       {effectiveDefinition && (
         <span
           ref={tooltipRef}
