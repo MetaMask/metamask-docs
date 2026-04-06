@@ -99,8 +99,8 @@ export default function GlossaryTerm({
 
   return (
     <span ref={wrapperRef} className={styles.glossaryTermWrapper}>
-      <Link
-        to={`${effectiveRoutePath}#${termId}`}
+      <a
+        href={`${effectiveRoutePath}#${termId}`}
         className={styles.glossaryTerm}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
@@ -109,7 +109,7 @@ export default function GlossaryTerm({
         aria-describedby={`tooltip-${termId}`}
       >
         {displayText}
-      </Link>
+      </a>
       {effectiveDefinition && (
         <span
           ref={tooltipRef}
