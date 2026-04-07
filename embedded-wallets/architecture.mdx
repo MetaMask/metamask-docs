@@ -1,7 +1,7 @@
 ---
 title: Architecture
 sidebar_label: Architecture
-description: How MetaMask Embedded Wallets fit together: SDK layout, integrations, and wallet management infrastructure.
+description: "How MetaMask Embedded Wallets fit together: SDK layout, integrations, and wallet management infrastructure."
 ---
 
 import PnPCoreKitFlowLight from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-light.png'
@@ -55,9 +55,8 @@ single share to control the wallet.
 
 :::tip managing wallets
 
-For wallet management, the infrastructure uses cryptographic techniques such as
-[Shamir's Secret Sharing](./infrastructure/sss-architecture.mdx), threshold cryptography, and
-[Multi Party Computation (MPC)](./infrastructure/mpc-architecture.mdx). For more information, see
-[Wallet management infrastructure](./infrastructure/README.mdx).
+The infrastructure uses [Shamir's Secret Sharing](./infrastructure/sss-architecture.mdx) to split and
+recover wallet keys.
+For more details, see [Wallet management infrastructure](./infrastructure/README.mdx).
 
 :::
