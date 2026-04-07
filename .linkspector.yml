@@ -2,10 +2,9 @@ dirs:
   - ./smart-accounts-kit
   - ./developer-tools
   - ./embedded-wallets
-  - ./sdk
+  - ./metamask-connect
   - ./services
   - ./snaps
-  - ./wallet
 excludedDirs:
   - ./build
   - ./.vercel
@@ -28,13 +27,16 @@ ignorePatterns:
 - pattern: '^/smart-accounts-kit/'
 - pattern: '^/developer-tools/'
 - pattern: '^/embedded-wallets/'
-- pattern: '^/sdk/'
+- pattern: '^/metamask-connect/'
 - pattern: '^/services/'
 - pattern: '^/snaps/'
 - pattern: '^/wallet/'
 - pattern: '^/tutorials/'
+- pattern: '^/quickstart/'
 - pattern: 'https://web3onboard.thirdweb.com'
 - pattern: 'https://0xfury.com/privacy'
+- pattern: '^https://docs.arbitrum.io'
+- pattern: '^https://nodefleet.org'
 aliveStatusCodes:
 - 200
 - 206

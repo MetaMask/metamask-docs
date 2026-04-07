@@ -1,8 +1,7 @@
 import { CSSProperties, FunctionComponent } from 'react'
 import CutOffCorners from '@site/src/components/elements/cut-off-corners'
 import clsx from 'clsx'
-import styles
-  from '@site/src/components/ParserOpenRPC/DetailsBox/styles.module.scss'
+import styles from './styles.module.scss'
 
 const TAG_MAPPING: Record<string, {
   name: string;

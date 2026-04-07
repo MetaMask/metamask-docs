@@ -1,0 +1,57 @@
+---
+title: HyperEVM eth_bigBlockGasPrice
+sidebar_label: eth_bigBlockGasPrice
+description: Returns the base fee for the next big block on HyperEVM.
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
+
+# `eth_bigBlockGasPrice`
+
+Returns the base fee for the next big block. <CreditCost network="hyperevm" method="eth_bigBlockGasPrice" />
+
+## Parameters
+
+None.
+
+## Returns
+
+The hexadecimal value of the base fee for the next big block.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](/developer-tools/dashboard).
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://hyperevm-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "eth_bigBlockGasPrice", "params": [], "id": 1}'
+```
+
+  </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://hyperevm-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_bigBlockGasPrice", "params": [], "id": 1}'
+```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": "0x2540be400"
+}
+```

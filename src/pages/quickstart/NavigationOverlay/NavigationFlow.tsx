@@ -8,7 +8,7 @@ import Button from '@site/src/components/elements/buttons/button'
 import SvgStar from '@site/static/img/icons/star.svg'
 import Shape from '@site/static/img/shapes/intro-cards/shape.svg'
 import styles from './NavigationOverlay.module.css'
-import { METAMASK_SDK, EMBEDDED_WALLETS, YES, NO } from '../builder/choices'
+import { METAMASK_CONNECT, EMBEDDED_WALLETS, YES, NO } from '../builder/choices'
 
 interface NavigationOption {
   id: string
@@ -27,8 +27,8 @@ const navigationOptions: NavigationOption[] = [
   {
     id: 'mm-sdk',
     title: "I want to connect to users' MetaMask wallets",
-    description: 'MetaMask SDK',
-    product: METAMASK_SDK,
+    description: 'MetaMask Connect',
+    product: METAMASK_CONNECT,
   },
   {
     id: 'embedded-wallets-1',
@@ -147,8 +147,8 @@ const NavigationFlow: React.FC<NavigationFlowProps> = ({ onSelect }) => {
       {/* <div className={styles.quickLinks}>
         <Heading as="h4" className={styles.quickLinksTitle}>Quick Links</Heading>
         <div className={styles.linkGrid}>
-          <Link href="/sdk" className={styles.quickLink}>
-            📖 MetaMask SDK Docs
+          <Link href="/metamask-connect" className={styles.quickLink}>
+            📖 MetaMask Connect Docs
           </Link>
           <Link href="/wallet" className={styles.quickLink}>
             💳 Embedded Wallets Docs
