@@ -21,6 +21,7 @@ If you don't see the network you're looking for, you can request support by emai
 | Berachain           | ✅      | ✅      | ✅      | ✅     |
 | Binance Smart Chain | ✅      | ✅      | ✅      | ✅     |
 | Celo                | ❌      | ❌      | ❌      | ✅     |
+| Citrea              | ❌      | ❌      | ❌      | ✅     |
 | Ethereum            | ✅      | ✅      | ✅      | ✅     |
 | Gnosis Chain        | ✅      | ✅      | ✅      | ✅     |
 | Ink                 | ✅      | ✅      | ✅      | ✅     |
