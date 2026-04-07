@@ -1,0 +1,29 @@
+---
+title: eth_coinbase
+sidebar_label: eth_coinbase
+description: Returns the client coinbase address.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_coinbase"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_coinbase"
+  description="Returns the client coinbase address."
+  parameters={[]}
+  returns={{
+  type: "string",
+  description: "hex encoded address"
+}}
+  exampleRequest={`await provider.request({
+    method: "eth_coinbase",
+    params: []
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73"
+}`}
+/>

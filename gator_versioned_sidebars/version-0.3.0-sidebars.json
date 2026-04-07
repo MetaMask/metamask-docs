@@ -217,7 +217,8 @@
         "troubleshooting/error-codes",
         "troubleshooting/invalid-delegate",
         "troubleshooting/invalid-delegator",
-        "troubleshooting/invalid-signature"
+        "troubleshooting/invalid-signature",
+        "troubleshooting/user-operation-reverted"
       ]
     },
     {
@@ -227,8 +228,7 @@
       "items": [
         "changelog/0.3.0",
         "changelog/0.2.0",
-        "changelog/0.1.0",
-        "changelog/0.13.0"
+        "changelog/0.1.0"
       ]
     }
   ]

@@ -1,0 +1,347 @@
+// @ts-check
+
+/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
+const metamaskConnectSidebar = {
+  overview: [
+    'index',
+    'architecture',
+    'integration-options',
+    'supported-platforms',
+    {
+      type: 'category',
+      label: 'Reference',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        {
+          type: 'category',
+          label: '@metamask/connect-multichain',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'multichain/reference/methods',
+            'multichain/reference/api',
+          ],
+        },
+        {
+          type: 'category',
+          label: '@metamask/connect-evm',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'evm/reference/methods',
+            'evm/reference/provider-api',
+          ],
+        },
+        {
+          type: 'category',
+          label: '@metamask/connect-solana',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'solana/reference/methods',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Troubleshooting',
+      collapsible: true,
+      collapsed: true,
+      link: { type: 'doc', id: 'troubleshooting/index' },
+      items: [
+        'troubleshooting/metro-polyfill-issues',
+      ],
+    },
+  ],
+  multichain: [
+    'multichain/index',
+    {
+      type: 'category',
+      label: 'Quickstart',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'multichain/quickstart/javascript',
+        'multichain/quickstart/nodejs',
+        'multichain/quickstart/react-native',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Concepts',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'multichain/concepts/scopes',
+        'multichain/concepts/accounts',
+        'multichain/concepts/sessions',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'multichain/guides/sign-transactions',
+        'multichain/guides/send-transactions',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Tutorials',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'multichain/tutorials/create-multichain-dapp',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Reference',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'multichain/reference/methods',
+        'multichain/reference/api',
+      ],
+    },
+  ],
+  evm: [
+    'evm/index',
+    {
+      type: 'category',
+      label: 'Quickstart',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'evm/quickstart/javascript',
+        'evm/quickstart/wagmi',
+        'evm/quickstart/nodejs',
+        // 'evm/quickstart/rainbowkit',
+        // 'evm/quickstart/connectkit',
+        'evm/quickstart/react-native',
+        // 'evm/quickstart/dynamic',
+        // 'evm/quickstart/web3auth',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'evm/guides/migrate-from-sdk',
+        'evm/guides/manage-user-accounts',
+        'evm/guides/manage-networks',
+        {
+          type: 'category',
+          label: 'Send transactions',
+          collapsible: true,
+          collapsed: true,
+          link: { type: "doc", id: "evm/guides/send-transactions/index" },
+          items: [
+            'evm/guides/send-transactions/batch-transactions',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Sign data',
+          collapsible: true,
+          collapsed: true,
+          link: { type: "doc", id: "evm/guides/sign-data/index" },
+          items: [
+            'evm/guides/sign-data/siwe',
+          ],
+        },
+        'evm/guides/interact-with-contracts',
+        {
+          type: 'category',
+          label: 'MetaMask exclusive',
+          collapsible: false,
+          collapsed: false,
+          items: [
+            'evm/guides/metamask-exclusive/batch-requests',
+            'evm/guides/metamask-exclusive/use-deeplinks',
+            'evm/guides/metamask-exclusive/display-tokens',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Best practices',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'evm/guides/best-practices/display',
+            'evm/guides/best-practices/run-devnet',
+            'evm/guides/best-practices/production-readiness',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Tutorials',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        // {
+        //   type: "link",
+        //   label: "Create a wallet AI agent",
+        //   href: "/tutorials/create-wallet-ai-agent"
+        // },
+        {
+          type: "link",
+          label: "Upgrade an EOA to a smart account",
+          href: "/tutorials/upgrade-eoa-to-smart-account"
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Reference',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'evm/reference/methods',
+        'evm/reference/provider-api',
+        {
+          type: "category",
+          label: "JSON-RPC API",
+          collapsible: true,
+          collapsed: true,
+          link: { type: "doc", id: "evm/reference/json-rpc-api/index" },
+          items: [
+            "evm/reference/json-rpc-api/wallet_addEthereumChain",
+            "evm/reference/json-rpc-api/wallet_getCallsStatus",
+            "evm/reference/json-rpc-api/wallet_getCapabilities",
+            "evm/reference/json-rpc-api/wallet_getPermissions",
+            "evm/reference/json-rpc-api/wallet_registerOnboarding",
+            "evm/reference/json-rpc-api/wallet_requestPermissions",
+            "evm/reference/json-rpc-api/wallet_revokePermissions",
+            "evm/reference/json-rpc-api/wallet_scanQRCode",
+            "evm/reference/json-rpc-api/wallet_sendCalls",
+            "evm/reference/json-rpc-api/wallet_switchEthereumChain",
+            "evm/reference/json-rpc-api/wallet_watchAsset",
+            "evm/reference/json-rpc-api/eth_accounts",
+            "evm/reference/json-rpc-api/eth_blockNumber",
+            "evm/reference/json-rpc-api/eth_call",
+            "evm/reference/json-rpc-api/eth_chainId",
+            "evm/reference/json-rpc-api/eth_coinbase",
+            "evm/reference/json-rpc-api/eth_estimateGas",
+            "evm/reference/json-rpc-api/eth_feeHistory",
+            "evm/reference/json-rpc-api/eth_gasPrice",
+            "evm/reference/json-rpc-api/eth_getBalance",
+            "evm/reference/json-rpc-api/eth_getBlockByHash",
+            "evm/reference/json-rpc-api/eth_getBlockByNumber",
+            "evm/reference/json-rpc-api/eth_getBlockTransactionCountByHash",
+            "evm/reference/json-rpc-api/eth_getBlockTransactionCountByNumber",
+            "evm/reference/json-rpc-api/eth_getCode",
+            "evm/reference/json-rpc-api/eth_getFilterChanges",
+            "evm/reference/json-rpc-api/eth_getFilterLogs",
+            "evm/reference/json-rpc-api/eth_getLogs",
+            "evm/reference/json-rpc-api/eth_getProof",
+            "evm/reference/json-rpc-api/eth_getStorageAt",
+            "evm/reference/json-rpc-api/eth_getTransactionByBlockHashAndIndex",
+            "evm/reference/json-rpc-api/eth_getTransactionByBlockNumberAndIndex",
+            "evm/reference/json-rpc-api/eth_getTransactionByHash",
+            "evm/reference/json-rpc-api/eth_getTransactionCount",
+            "evm/reference/json-rpc-api/eth_getTransactionReceipt",
+            "evm/reference/json-rpc-api/eth_getUncleCountByBlockHash",
+            "evm/reference/json-rpc-api/eth_getUncleCountByBlockNumber",
+            "evm/reference/json-rpc-api/eth_newBlockFilter",
+            "evm/reference/json-rpc-api/eth_newFilter",
+            "evm/reference/json-rpc-api/eth_newPendingTransactionFilter",
+            "evm/reference/json-rpc-api/eth_requestAccounts",
+            "evm/reference/json-rpc-api/eth_sendRawTransaction",
+            "evm/reference/json-rpc-api/eth_sendTransaction",
+            "evm/reference/json-rpc-api/eth_signTypedData_v4",
+            "evm/reference/json-rpc-api/eth_subscribe",
+            "evm/reference/json-rpc-api/eth_syncing",
+            "evm/reference/json-rpc-api/eth_uninstallFilter",
+            "evm/reference/json-rpc-api/eth_unsubscribe",
+            "evm/reference/json-rpc-api/personal_sign",
+            "evm/reference/json-rpc-api/web3_clientVersion"
+          ],
+        },
+      ],
+    },
+  ],
+  solana: [
+    'solana/index',
+    {
+      type: 'category',
+      label: 'Quickstart',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'solana/quickstart/javascript',
+        'solana/quickstart/nodejs',
+        'solana/quickstart/react-native',
+        // 'solana/quickstart/dynamic',
+        // 'solana/quickstart/web3auth',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'solana/guides/use-framework-kit',
+        'solana/guides/use-wallet-adapter',
+        {
+          type: 'category',
+          label: 'Send transactions',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'solana/guides/send-legacy-transaction',
+            'solana/guides/send-versioned-transaction',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Sign data',
+          collapsible: true,
+          collapsed: true,
+          items: [
+            'solana/guides/sign-data/sign-message',
+            'solana/guides/sign-data/siws',
+          ],
+        },
+      ],
+    },
+    // {
+    //   type: 'category',
+    //   label: 'Tutorials',
+    //   collapsible: false,
+    //   collapsed: false,
+    //   items: [
+    //     {
+    //       type: "link",
+    //       label: "Integrate SNS with MetaMask Connect",
+    //       href: "/tutorials/"
+    //     },
+    //     {
+    //       type: "link",
+    //       label: "Integrate Solana Pay with MetaMask Connect",
+    //       href: "/tutorials/"
+    //     },
+    //   ],
+    // },
+    {
+      type: 'category',
+      label: 'Reference',
+      collapsible: false,
+      collapsed: false,
+      items: [
+        'solana/reference/methods',
+      ],
+    },
+  ],
+}
+
+module.exports = metamaskConnectSidebar

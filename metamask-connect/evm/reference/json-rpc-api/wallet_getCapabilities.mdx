@@ -1,0 +1,53 @@
+---
+title: wallet_getCapabilities
+sidebar_label: wallet_getCapabilities
+description: Returns information about the wallet's support for the `atomic` capability. The `atomic` capability specifies how the wallet will execute batches of transactions sent using `wallet_sendCalls`. `wallet_getCapabilities` is specified by [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792).
+hide_title: true
+hide_table_of_contents: true
+keywords: ["wallet_getCapabilities", "MetaMask"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="wallet_getCapabilities"
+  description="Returns information about the wallet's support for the `atomic` capability. The `atomic` capability specifies how the wallet will execute batches of transactions sent using `wallet_sendCalls`. `wallet_getCapabilities` is specified by [EIP-5792](https://eips.ethereum.org/EIPS/eip-5792)."
+  parameters={[{
+    name: "Address",
+    type: "string",
+    required: true,
+    description: "A wallet address."
+  },
+{
+    name: "Chain IDs",
+    type: "array",
+    required: false,
+    description: "An array of chain IDs to get capabilities for."
+  }]}
+  returns={{
+  type: "object",
+  description: "An object specifying the status of the `atomic` capability for specific [EIP-155](https://eips.ethereum.org/EIPS/eip-155) chain IDs. For each chain, the `atomic` capability can have a `status` of: <br> <ul>   <li>`supported` - The wallet will execute calls sent using         `wallet_sendCalls` atomically.</li>   <li>`ready` - The wallet can upgrade to `supported` pending user           approval to upgrade their account via EIP-7702.</li> </ul> If the `atomic` capability is not `supported` or `ready` for a specified chain ID, the wallet will not return anything for that chain ID."
+}}
+  errors={[{ code: "-32602", message: "", description: "The wallet cannot parse the request." },
+  { code: "4100", message: "", description: "The requested account and/or method has not been authorized by the user." }]}
+  exampleRequest={`await provider.request({
+    method: "wallet_getCapabilities",
+    params: [
+  "0xd46e8dd67c5d32be8058bb8eb970870f07244567",
+  [
+    "0xaa36a7"
+  ]
+]
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": {
+        "0xaa36a7": {
+            "atomic": {
+                "status": "ready"
+            }
+        }
+    }
+}`}
+/>

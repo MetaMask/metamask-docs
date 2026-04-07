@@ -1,0 +1,92 @@
+---
+title: HyperEVM eth_getSystemTxsByBlockNumber
+sidebar_label: eth_getSystemTxsByBlockNumber
+description: Returns system transactions for a specified block number on HyperEVM.
+---
+
+import Tabs from "@theme/Tabs"
+import TabItem from "@theme/TabItem"
+import CreditCost from '@site/src/components/CreditCost/CreditCostPrice.js'
+
+# `eth_getSystemTxsByBlockNumber`
+
+Returns system transactions for a specified block number on HyperEVM. This Hyperliquid-specific method exposes internal system transactions responsible for protocol operations, network maintenance, and other system-level activities. <CreditCost network="hyperevm" method="eth_getSystemTxsByBlockNumber" />
+
+## Parameters
+
+- `blockNumber`: (string) _[required]_ - The block number in hexadecimal format, or the tag `latest`, `pending`, `safe`, or `finalized`.
+
+## Returns
+
+- `result`: (array) - An array of system transaction objects included in the block.
+  - `type`: (string) - The transaction type.
+  - `chainId`: (string) - The chain ID encoded as hexadecimal.
+  - `nonce`: (string) - The transaction count of the sender.
+  - `gasPrice`: (string) - Gas price in wei, encoded as hexadecimal.
+  - `gas`: (string) - Gas limit provided by the sender.
+  - `to`: (string) - Recipient address (null for contract creation).
+  - `value`: (string) - Value transferred in wei, encoded as hexadecimal.
+  - `input`: (string) - Input data of the transaction.
+  - `r`: (string) - ECDSA signature r.
+  - `s`: (string) - ECDSA signature s.
+  - `v`: (string) - ECDSA recovery id.
+  - `hash`: (string) - Transaction hash.
+  - `blockHash`: (string) - Block hash.
+  - `blockNumber`: (string) - Block number in hexadecimal.
+  - `transactionIndex`: (string) - Index of the transaction in the block.
+  - `from`: (string) - Sender address.
+
+## Example
+
+Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](/developer-tools/dashboard).
+
+### Request
+
+<Tabs>
+  <TabItem value="curl">
+
+```bash
+curl https://hyperevm-mainnet.infura.io/v3/<YOUR-API-KEY> \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc": "2.0", "method": "eth_getSystemTxsByBlockNumber", "params": ["0xcc901c"], "id": 1}'
+```
+
+  </TabItem>
+  <TabItem value="WSS">
+
+```bash
+wscat -c wss://hyperevm-mainnet.infura.io/ws/v3/<YOUR-API-KEY> -x '{"jsonrpc": "2.0", "method": "eth_getSystemTxsByBlockNumber", "params": ["0xcc901c"], "id": 1}'
+```
+
+  </TabItem>
+</Tabs>
+
+### Response
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": [
+    {
+      "type": "0x0",
+      "chainId": "0x1",
+      "nonce": "0x0",
+      "gasPrice": "0x2540be400",
+      "gas": "0x5208",
+      "to": "0x0000000000000000000000000000000000000000",
+      "value": "0x0",
+      "input": "0x",
+      "r": "0x0",
+      "s": "0x0",
+      "v": "0x0",
+      "hash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "blockHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+      "blockNumber": "0xcc901c",
+      "transactionIndex": "0x0",
+      "from": "0x0000000000000000000000000000000000000000"
+    }
+  ]
+}
+```

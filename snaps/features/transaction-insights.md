@@ -100,10 +100,6 @@ export const onTransaction: OnTransactionHandler = async ({
 </TabItem>
 </Tabs>
 
-:::note
-Learn more about the [parameters of a submitted transaction](/wallet/how-to/send-transactions#transaction-parameters).
-:::
-
 The Snap tab in the transaction confirmation window displays the transaction insights:
 
 <p align="center">

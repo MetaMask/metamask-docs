@@ -23,6 +23,7 @@ npm-debug.log*
 .envrc
 .env
 .integrationBuilderCache
+.cursor
 
 # Generated Snaps docs
 snaps/reference/snaps-api/*.mdx

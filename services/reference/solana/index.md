@@ -46,5 +46,5 @@ Select an option below to get started with the Solana network.
 The following partners provide access to the Solana network:
 <!-- markdown-link-check-disable -->
 - Everstake ([Terms of Use](https://everstake.one/terms-of-use), [Privacy Notice](https://everstake.one/privacy-notice))
-- Triton One ([Terms of Service and Privacy Policy](https://triton.one/legal))
+- Triton One ([Terms of Service and Privacy Policy](https://triton.one/policies))
 <!-- markdown-link-check-enable -->

@@ -12,7 +12,7 @@ discourseTopicId: 2613
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This tutorial walks you through creating a custom [caveat enforcer](/smart-accounts-kit/concepts/delegation/caveat-enforcers) and applying it to a [delegation](/smart-accounts-kit/concepts/delegation/).
+This tutorial walks you through creating a custom [caveat enforcer](/smart-accounts-kit/concepts/delegation/caveat-enforcers) and applying it to a [delegation](/smart-accounts-kit/concepts/delegation/overview).
 
 The Smart Accounts Kit includes [out-of-the-box caveat enforcers](/smart-accounts-kit/reference/delegation/caveats) that define rules and restrictions for common use cases.
 For more specific control or other use cases, you can create custom caveat enforcers.

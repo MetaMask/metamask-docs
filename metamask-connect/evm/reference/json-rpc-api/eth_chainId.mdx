@@ -1,0 +1,29 @@
+---
+title: eth_chainId
+sidebar_label: eth_chainId
+description: Returns the chain ID of the current network.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_chainId"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_chainId"
+  description="Returns the chain ID of the current network."
+  parameters={[]}
+  returns={{
+  type: "string",
+  description: "hex encoded unsigned integer"
+}}
+  exampleRequest={`await provider.request({
+    method: "eth_chainId",
+    params: []
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x1"
+}`}
+/>

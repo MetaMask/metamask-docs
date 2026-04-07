@@ -1,0 +1,29 @@
+---
+title: eth_newBlockFilter
+sidebar_label: eth_newBlockFilter
+description: Creates a filter in the node, to notify when a new block arrives.
+hide_title: true
+hide_table_of_contents: true
+keywords: ["eth_newBlockFilter"]
+---
+
+import SimplifiedApiReference from '@site/src/components/SimplifiedApiReference'
+
+<SimplifiedApiReference
+  method="eth_newBlockFilter"
+  description="Creates a filter in the node, to notify when a new block arrives."
+  parameters={[]}
+  returns={{
+  type: "string",
+  description: "hex encoded unsigned integer"
+}}
+  exampleRequest={`await provider.request({
+    method: "eth_newBlockFilter",
+    params: []
+});`}
+  exampleResponse={`{
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x01"
+}`}
+/>

@@ -90,7 +90,7 @@ const bundlerClient = createBundlerClient({
 
 ### 5. Create and fund a smart account
 
-Create a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create-smart-account/#create-a-hybrid-smart-account).
+Create a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create-smart-account/#hybrid-smart-account).
 A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
 
 ```typescript

@@ -5,12 +5,12 @@ sidebar_position: 2
 
 # Get testnet ETH and tokens
 
-Use testnet tokens to test applications on blockchain networks without using real cryptocurrency. 
+Use testnet tokens to test applications on blockchain networks without using real cryptocurrency.
 Testnet tokens allow you to simulate transactions, deploy smart contracts, and interact with dapps in a controlled environment.
 
 :::note
 
-Use [testnet endpoints](../get-started/endpoints.md) during development and initial testing phases before moving to mainnet for production environments. 
+Use [testnet endpoints](../get-started/endpoints.md) during development and initial testing phases before moving to mainnet for production environments.
 
 :::
 
