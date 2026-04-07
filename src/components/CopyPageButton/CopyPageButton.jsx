@@ -261,7 +261,7 @@ export default function CopyPageButton({ standalone = false }) {
   };  
 
   return (
-    <div className={styles.container} ref={containerRef} data-copy-button>
+    <div className={`${styles.container} ${standalone ? styles.standalone : ''}`} ref={containerRef} data-copy-button>
       <button
         className={styles.mainButton}
         onClick={() => setIsOpen(!isOpen)}
