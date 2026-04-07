@@ -10,7 +10,9 @@ keywords: [dynamic, smart account, signer, metamask smart account]
 wallets, making user onboarding easier. MetaMask Smart Accounts is a signer-agnostic implementation
 that allows you to use Dynamic's EOA wallet as a signer for MetaMask Smart Accounts.
 
+<!--
 View the complete code for this guide in the [`gator-examples`](https://github.com/MetaMask/gator-examples/tree/main/examples/smart-accounts/signers/dynamic) repository.
+-->
 
 :::info
 This guide supports React and React-based frameworks.
