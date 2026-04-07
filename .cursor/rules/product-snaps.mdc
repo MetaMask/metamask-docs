@@ -22,7 +22,7 @@ Snaps uses a content structure that differs slightly from other products:
 | `how-to/`       | How-to                | Procedural step-by-step guides                |
 | `features/`     | Feature reference     | Feature-centric documentation                 |
 | `reference/`    | API reference         | Snaps API and Keyring API methods             |
-| `get-started/`  | Quickstart            | First-time setup and onboarding               |
+| `get-started/`  | Onboarding            | First-time setup and onboarding               |
 
 ## Generated reference pages
 

@@ -18,23 +18,23 @@ Help create a new documentation page that follows MetaMask editorial standards f
 
 Ask the user for any information they have not already provided:
 
-1. **Product area** — which product is this for? (MetaMask Connect, Embedded Wallets,
+1. **Product area** - which product is this for? (MetaMask Connect, Embedded Wallets,
    Smart Accounts Kit, Services, Snaps, Developer Tools)
-2. **Content type** — what kind of page? (concept/explanation, how-to guide, quickstart,
+2. **Content type** - what kind of page? (concept/explanation, how-to guide, quickstart,
    reference, tutorial, troubleshooting)
-3. **Topic** — what is the page about?
-4. **File path** — where should the file live? (Suggest one based on product and content type
+3. **Topic** - what is the page about?
+4. **File path** - where should the file live? (Suggest one based on product and content type
    if the user doesn't specify.)
 
 ## Step 1: Determine conventions
 
 Based on the product and content type, load the relevant rules:
 
-- `.cursor/rules/content-types.mdc` — structural expectations for the content type.
-- `.cursor/rules/product-*.mdc` — product-specific terminology and conventions.
-- `.cursor/rules/editorial-voice.mdc` — tone and voice.
-- `.cursor/rules/markdown-formatting.mdc` — formatting conventions.
-- `.cursor/rules/terminology.mdc` — required terms and casing.
+- `.cursor/rules/content-types.mdc` - structural expectations for the content type.
+- `.cursor/rules/product-*.mdc` - product-specific terminology and conventions.
+- `.cursor/rules/editorial-voice.mdc` - tone and voice.
+- `.cursor/rules/markdown-formatting.mdc` - formatting conventions.
+- `.cursor/rules/terminology.mdc` - required terms and casing.
 
 Check how existing pages in the same folder are structured. Match their conventions for headings,
 front-matter fields, intro style, and parameter formats.
@@ -43,9 +43,9 @@ front-matter fields, intro style, and parameter formats.
 
 Create the file with the correct structure for its content type.
 
-### Front-matter
+### Frontmatter
 
-Follow **Front-matter** in `.cursor/rules/markdown-formatting.mdc` (required `description`,
+Follow **Frontmatter** in `.cursor/rules/markdown-formatting.mdc` (required `description`,
 recommended `keywords`, optional `sidebar_label` only when the nav label would otherwise be too
 long or wordy, and the `title` vs duplicate H1 rule). Do not repeat or contradict that rule here.
 
@@ -176,7 +176,7 @@ description: <one sentence>
 
 ## Prerequisites
 
-- <Requirement — assume no prior knowledge>
+- <Requirement - assume no prior knowledge>
 
 ## Steps
 
@@ -247,5 +247,7 @@ Before finishing, check:
 After creating the page, remind the user to:
 
 1. Add the page to the correct sidebar file (see `contributor-workflow.mdc` for the mapping).
-2. Preview locally with `npm start`.
-3. Check that the CI linter passes before requesting review.
+2. If any page was moved, renamed, or removed in the same change set, add redirects in
+   `vercel.json` (see `contributor-workflow.mdc`).
+3. Preview locally with `npm start`.
+4. Check that the CI linter passes before requesting review.

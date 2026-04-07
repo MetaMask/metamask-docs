@@ -11,7 +11,7 @@ alwaysApply: false
 - The product name is **MetaMask Connect**. Do not call it "MetaMask SDK." The SDK is the
   underlying library; MetaMask Connect is the product and documentation brand.
 - When referring to the npm package, use the package name in backticks (for example,
-  `@metamask/sdk`).
+  `@metamask/connect-evm`).
 
 ## Content organization
 

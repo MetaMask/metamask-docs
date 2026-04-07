@@ -7,11 +7,12 @@ alwaysApply: false
 # Content types (Diataxis)
 
 This repository follows the [Diataxis framework](https://diataxis.fr/) to organize documentation by
-function. The folder a file lives in determines the content type and structure expectations.
+function. The folder a file lives in usually determines the content type and structure expectations.
+`get-started/` is a mix of onboarding topics; see that section for when quickstart rules apply.
 
 ## Folder-to-type mapping
 
-### `concepts/` and `learn/` — Explanation
+### `concepts/` and `learn/` - Explanation
 
 - Explain **why** something exists and **how** it works at a high level.
 - Provide context: design decisions, historical reasons, trade-offs, and alternatives.
@@ -19,9 +20,9 @@ function. The folder a file lives in determines the content type and structure e
 - Do not include step-by-step instructions. Link to related guides or quickstarts instead.
 - Keep explanation closely bounded. Do not let instructions or reference details creep in.
 - End every concept page with a "Next steps" section linking to actionable content.
-- Example: @smart-accounts-kit/concepts/smart-accounts.md
+- Example: `smart-accounts-kit/concepts/smart-accounts.md`
 
-### `guides/` and `how-to/` — How-to
+### `guides/` and `how-to/` - How-to
 
 - Goal-oriented steps that help the reader achieve a specific outcome.
 - Title the page with the goal (for example, "Configure gas limits"), not a generic label.
@@ -31,17 +32,37 @@ function. The folder a file lives in determines the content type and structure e
 - Assume the reader has basic knowledge of the product.
 - Omit the unnecessary. Practical usability matters more than completeness.
 - Do not digress into explanations or teaching. Link to concept pages instead.
-- Example: @smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf.md
+- Example: `smart-accounts-kit/guides/advanced-permissions/execute-on-metamask-users-behalf.md`
 
-### `quickstart/` and `get-started/` — Tutorial-adjacent quickstart
+### `quickstart/` and `get-started/`
 
-- End-to-end, copy-paste-and-run path to a working integration.
+The folder name alone does not imply a single content type for every file under `get-started/`.
+
+**Tutorial-adjacent quickstart** (end-to-end, copy-paste-and-run path to a working integration)
+applies only when:
+
+- The file lives under a `quickstart/` directory, or
+- The file lives under `get-started/` and **quickstart** appears in the file or directory name
+  (for example, `smart-account-quickstart/index.md`).
+
+For those quickstart pages:
+
 - State what the reader will build or achieve.
 - Provide complete, working code that can be copied and pasted.
 - Keep the scope narrow. Link to guides for extended scenarios.
-- Examples: @smart-accounts-kit/get-started/install.md, @smart-accounts-kit/get-started/smart-account-quickstart/index.md
 
-### `reference/` — Reference
+**Other `get-started/` pages** are onboarding essentials readers should see before the rest of
+the docs: installation, system requirements, supported networks, supported clients, dashboard
+setup, and similar. They are not necessarily quickstarts. Choose structure based on the topic
+(how-to steps, short explanation, or reference-style facts) and match conventions of neighboring
+pages in the same `get-started/` section.
+
+Examples:
+
+- Quickstart: `smart-accounts-kit/get-started/smart-account-quickstart/index.md`
+- Onboarding in `get-started/` (not quickstart): `smart-accounts-kit/get-started/install.md`
+
+### `reference/` - Reference
 
 - Precise, complete, structured descriptions of APIs, methods, parameters, and return values.
 - Describe and only describe. Be austere, neutral, and factual.
@@ -53,41 +74,33 @@ function. The folder a file lives in determines the content type and structure e
 - Include short usage examples to illustrate parameters and return values.
 - Keep explanatory prose to the minimum needed to use the API correctly.
 - Do not include tutorials or extended how-to steps.
-- Examples: @snaps/reference/config-options.md, @smart-accounts-kit/reference/delegation/delegation-scopes.md, @services/reference/solana/json-rpc-methods
+- Examples: `snaps/reference/config-options.md`,
+  `smart-accounts-kit/reference/delegation/delegation-scopes.md`,
+  `services/reference/solana/json-rpc-methods`
 
-### `tutorials/` — Tutorial
+### `tutorials/` - Tutorial
 
 - Learning-oriented, reproducible, end-to-end walkthrough.
 - State what the reader will build or accomplish at the very start.
 - Do not assume the reader has prior knowledge of the subject or tools.
 - Deliver visible results early and often. Each step should produce output the reader can verify.
 - Show expected output (for example, "You should see `Server running on port 3000`").
-- Ruthlessly minimise explanation. Keep the focus on doing, not theory. Link to concept pages for
+- Ruthlessly minimize explanation. Keep the focus on doing, not theory. Link to concept pages for
   deeper understanding.
 - Ignore options and alternatives. Guide the reader along a single path to a successful conclusion.
 - Provide a complete working project or code sample.
 - Aspire to perfect reliability. Test every step. A learner who doesn't get the expected result
   loses confidence immediately.
-- Example: @src/pages/tutorials/create-wallet-ai-agent.md
+- Example: `src/pages/tutorials/create-wallet-ai-agent.md`
 
-### `troubleshooting/` — Problem/solution
+### `troubleshooting/` - Problem/solution
 
 - State the symptom or error message first, then the fix.
 - One problem per section or page.
 - Include the exact error text when available so readers can search for it.
-- Example: @smart-accounts-kit/troubleshooting/allowance-exceeded.md
+- Example: `smart-accounts-kit/troubleshooting/allowance-exceeded.md`
 
-## Frontmatter requirements
+## Frontmatter
 
-Every new page must include at minimum:
-
-- `description`: one-sentence summary for SEO and link previews.
-
-Optional (use sparingly):
-
-- `sidebar_label`: only when the default sidebar text would be too long or wordy for the nav.
-  See **Front-matter** in `markdown-formatting.mdc`.
-
-Also recommended:
-
-- `keywords`: array of relevant search terms.
+For required and optional documentation frontmatter (`description`, `keywords`, `sidebar_label`,
+`title` vs duplicate H1), see **Frontmatter** in `markdown-formatting.mdc`.

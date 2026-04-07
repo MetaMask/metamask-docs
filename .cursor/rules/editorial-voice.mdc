@@ -17,11 +17,11 @@ The rules below are the most actionable subset for AI-assisted editing.
 - Use contractions naturally ("it's," "don't"). Be informal but not sloppy.
 - Refer to the reader's application as "your dapp" (not "the dapp" or "your application").
 - Refer to the reader as "you" (not "the developer," "the user," or "users").
-- Dapp developers (our readers) in turn have users. It's ok to use users in that context.
+- Dapp developers (our readers) in turn have users. It's ok to use "users" in that context.
 
 ## Clarity
 
-- Get to the point in the first sentence of every section. Does it answer "what", "why", "when"?
+- Get to the point in the first sentence of every section. Does it answer "what," "why," and "when"?
 - Use short, simple sentences. Remove nonessential or redundant words.
 - Break up three or more paragraphs with subheadings, lists, tables, code samples, or admonitions.
 - Write for developers who want to accomplish a task or learn a skill, not for marketing purposes.
@@ -40,7 +40,6 @@ The rules below are the most actionable subset for AI-assisted editing.
 - Use only one space after periods, question marks, and colons.
 - Use sentence case for all headings and titles. Never use title case.
 - Do not end headings, subheadings, or UI titles with periods.
-- Use descriptive link text. Do not use "click here" or bare URLs as link text.
 - Use backticks for inline code, file names, and URLs referenced in prose.
 - Use bold for UI element names (buttons, menu items, field labels).
 

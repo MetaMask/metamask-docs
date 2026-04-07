@@ -50,11 +50,11 @@ for full details. The rules below cover the most common conventions.
 - Align table columns in the source Markdown for readability.
 - Use a tool like [Markdown Table Formatter](https://markdowntable.com/) if needed.
 
-## Front-matter
+## Frontmatter
 
 - Required: `description` (one sentence for SEO and previews).
 - Recommended: `keywords` (array).
-- `sidebar_label`: optional. Use sparingly—only when the default sidebar text (usually from the
+- `sidebar_label`: optional. Use sparingly; only when the default sidebar text (usually from the
   page title) would be too long or wordy for the navigation. Omit when the default is fine.
 - If the frontmatter contains a `title` field, do not add a separate top-level `# Heading` to
   avoid a duplicate H1.

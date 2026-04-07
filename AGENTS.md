@@ -20,9 +20,11 @@ dapp developers and wallet extension builders.
 Follow these guides when writing or editing documentation:
 
 - [Consensys documentation style guide](https://docs-template.consensys.net/contribute/style-guide)
+- [Consensys Markdown formatting guide](https://docs-template.consensys.net/contribute/format-markdown)
 - [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
 - [Diataxis framework](https://diataxis.fr/) for content structure
 
+The rules under `.cursor/rules/` cover the most actionable parts of these references.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contribution workflow.
 
 ## Critical rules
@@ -47,13 +49,3 @@ apply automatically when you edit files matching their glob patterns.
 Agent skills live under `.cursor/skills/<skill-name>/SKILL.md`. This repo includes **author-page**
 (scaffold and draft new pages) and **style-review** (editorial compliance before PR). Cursor loads
 these when the task matches each skill's description.
-
-## Further reading
-
-The inlined rules in `.cursor/rules/` cover the most actionable guidance from the external style
-guides. For the complete references, see:
-
-- [Consensys documentation style guide](https://docs-template.consensys.net/contribute/style-guide)
-- [Consensys Markdown formatting guide](https://docs-template.consensys.net/contribute/format-markdown)
-- [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
-- [Diataxis framework](https://diataxis.fr/)

@@ -20,9 +20,9 @@ The user provides a file path or directory to review. If not provided, ask what 
 
 Read the file path to determine:
 
-1. **Product area** — which product folder the file lives in (for example, `metamask-connect/`,
+1. **Product area** - which product folder the file lives in (for example, `metamask-connect/`,
    `services/`, `snaps/`). Load the corresponding product rule from `.cursor/rules/product-*.mdc`.
-2. **Content type** — which subfolder determines the expected structure (for example, `concepts/`,
+2. **Content type** - which subfolder determines the expected structure (for example, `concepts/`,
    `how-to/`, `reference/`). Use `.cursor/rules/content-types.mdc` for the mapping.
 
 ## Step 2: Run Vale (if available)
@@ -37,15 +37,16 @@ If Vale is not installed, skip this step and note it in the report. Continue wit
 
 ## Step 3: Review against editorial rules
 
-Read the file fully. Check it against every category below, referencing the corresponding rule file.
+Read the file fully. The following points are quick reminders; use the linked `.mdc` files as the
+source of truth for full criteria, examples, and edge cases.
 
 ### Voice and tone (editorial-voice.mdc)
 
 - Active voice and present tense used throughout.
-- Second person ("you") — not "the developer" or "users."
+- Second person ("you"), not "the developer" or "users."
 - Contractions used naturally.
 - No marketing language, superlatives, or promotional tone.
-- No em dashes or en dashes — use commas, parentheses, or semicolons.
+- No em dashes or en dashes; use commas, parentheses, or semicolons.
 - First sentence of each section gets to the point.
 - No slang, figures of speech, or culturally specific idioms.
 
@@ -62,7 +63,7 @@ Read the file fully. Check it against every category below, referencing the corr
 - Each sentence on its own line.
 - Code blocks have a language tag.
 - Links use relative paths within the product, absolute paths across products.
-- Descriptive link text — no "click here" or bare URLs.
+- Descriptive link text; no "click here" or bare URLs.
 - Admonitions use Docusaurus syntax and are not nested.
 - Tables are aligned in source Markdown.
 - No duplicate H1 if frontmatter contains a `title` field.
@@ -92,10 +93,10 @@ Read the file fully. Check it against every category below, referencing the corr
 
 Present findings as a structured report grouped by category. For each issue:
 
-1. **Line number** — approximate location in the file.
-2. **Category** — Voice/Tone, Terminology, Formatting, Content Type, Frontmatter, or Workflow.
-3. **Issue** — what is wrong.
-4. **Suggestion** — how to fix it.
+1. **Line number** - approximate location in the file.
+2. **Category** - Voice/Tone, Terminology, Formatting, Content Type, Frontmatter, or Workflow.
+3. **Issue** - what is wrong.
+4. **Suggestion** - how to fix it.
 
 ### Report format
 
@@ -106,16 +107,17 @@ Present findings as a structured report grouped by category. For each issue:
 
 ### Summary
 - X issues found (Y from Vale, Z from manual review)
+- Severity: A critical, B suggestions
 
 ### Voice and tone
-- Line 12: Passive voice — "The block number can be specified..." → "Specify the block number..."
+- Line 12: Passive voice - "The block number can be specified..." → "Specify the block number..."
 
 ### Terminology
 - Line 8: "smart contract account" → Use "smart account" per terminology.mdc.
 
 ### Formatting
 - Line 45: Code block missing language tag.
-- Line 22: Em dash found — replace with comma or period.
+- Line 22: Em dash found - replace with comma or period.
 
 ### Content type
 - Page is in `concepts/` but contains numbered step-by-step instructions. Move steps to a
@@ -123,9 +125,6 @@ Present findings as a structured report grouped by category. For each issue:
 
 ### Frontmatter
 - Missing `description` field.
-
-### Summary
-X total issues: Y critical, Z suggestions.
 ```
 
 If reviewing a directory, produce one report per file, then a summary at the end showing totals
