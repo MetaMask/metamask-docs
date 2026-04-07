@@ -12,7 +12,6 @@ export default function GlossaryTerm({
 }) {
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipStyle, setTooltipStyle] = useState(null);
-  const [placement, setPlacement] = useState('top'); // 'top' | 'bottom'
   const wrapperRef = useRef(null);
   const tooltipRef = useRef(null);
 
@@ -29,10 +28,10 @@ export default function GlossaryTerm({
     // Decide top vs bottom based on available space
     const hasSpaceAbove = wrapperRect.top >= tooltipRect.height + preferredGap;
     const hasSpaceBelow = viewportHeight - wrapperRect.bottom >= tooltipRect.height + preferredGap;
-    const nextPlacement = hasSpaceAbove || !hasSpaceBelow ? 'top' : 'bottom';
+    const placeAbove = hasSpaceAbove || !hasSpaceBelow;
 
     let top;
-    if (nextPlacement === 'top') {
+    if (placeAbove) {
       top = wrapperRect.top - tooltipRect.height - preferredGap;
     } else {
       top = wrapperRect.bottom + preferredGap;
@@ -46,7 +45,6 @@ export default function GlossaryTerm({
       Math.min(left, viewportWidth - tooltipRect.width - horizontalMargin)
     );
 
-    setPlacement(nextPlacement);
     setTooltipStyle({ top: Math.max(4, top), left });
   }, []);
 
@@ -114,11 +112,7 @@ export default function GlossaryTerm({
         <span
           ref={tooltipRef}
           id={`tooltip-${termId}`}
-          className={
-            `${styles.tooltip} ${showTooltip ? styles.tooltipVisible : ''} ` +
-            `${placement === 'top' ? styles.tooltipTop : styles.tooltipBottom} ` +
-            `${styles.tooltipFloating}`
-          }
+          className={`${styles.tooltip} ${showTooltip ? styles.tooltipVisible : ''} ${styles.tooltipFloating}`}
           role="tooltip"
           style={
             showTooltip && tooltipStyle

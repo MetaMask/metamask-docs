@@ -49,48 +49,6 @@
   top: 0; /* overridden inline */
 }
 
-/* Base arrow removed; arrows are defined per-placement to avoid inversion */
-
-/* Arrow for top placement (tooltip above anchor) */
-.tooltipTop::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -6px;
-  border: 6px solid transparent;
-  border-top-color: var(--ifm-background-surface-color);
-}
-.tooltipTop::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -7px;
-  border: 7px solid transparent;
-  border-top-color: var(--ifm-color-emphasis-300);
-}
-
-/* Arrow for bottom placement (tooltip below anchor) */
-.tooltipBottom::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: -6px;
-  border: 6px solid transparent;
-  border-bottom-color: var(--ifm-background-surface-color);
-}
-.tooltipBottom::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: -7px;
-  border: 7px solid transparent;
-  border-bottom-color: var(--ifm-color-emphasis-300);
-}
-
 .tooltipVisible {
   opacity: 1;
   pointer-events: auto;
@@ -107,20 +65,6 @@
 [data-theme='dark'] .tooltip {
   background: var(--ifm-background-surface-color);
   border-color: var(--ifm-color-emphasis-400);
-}
-
-/* Dark mode arrow overrides scoped to placement to avoid upside-down arrows */
-[data-theme='dark'] .tooltipTop::after {
-  border-top-color: var(--ifm-background-surface-color);
-}
-[data-theme='dark'] .tooltipTop::before {
-  border-top-color: var(--ifm-color-emphasis-400);
-}
-[data-theme='dark'] .tooltipBottom::after {
-  border-bottom-color: var(--ifm-background-surface-color);
-}
-[data-theme='dark'] .tooltipBottom::before {
-  border-bottom-color: var(--ifm-color-emphasis-400);
 }
 
 /* Responsive adjustments */
