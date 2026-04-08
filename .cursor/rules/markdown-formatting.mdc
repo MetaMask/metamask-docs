@@ -1,0 +1,64 @@
+---
+description: Markdown formatting conventions for the MetaMask documentation site (Docusaurus).
+globs: ["**/*.md", "**/*.mdx"]
+alwaysApply: false
+---
+
+# Markdown formatting
+
+Follow the [Consensys Markdown formatting guide](https://docs-template.consensys.net/contribute/format-markdown)
+for full details. The rules below cover the most common conventions.
+
+## Line length and sentence breaks
+
+- Wrap lines at roughly 100 columns.
+- Start each new sentence on a new line, even if the previous line is short. This makes diffs
+  easier to review.
+
+## Links
+
+- Use relative file paths for links within the same product (for example, `./concepts/scopes.md`).
+- Use absolute URL paths for cross-product links (for example, `/snaps/learn/about-snaps`).
+- Use descriptive link text. Do not use "click here" or bare URLs.
+- Use absolute links on `CardList` components.
+
+## Code blocks
+
+- Always specify the language on fenced code blocks (` ```javascript `, ` ```bash `, etc.).
+- Use double quotes in JavaScript code samples.
+- Indent code with two spaces, not four.
+- For npm install commands, use ` ```bash npm2yarn ` fences to produce automatic npm/yarn tabs.
+- Write code samples that can be copied, pasted, and run as-is. Do not include shell prompts
+  (for example, `user@host $`) or trailing comments that break execution.
+- Use angle-bracket placeholders for values the reader must supply
+  (for example, `<YOUR_INFURA_API_KEY>`).
+
+## Tabs
+
+- Use Docusaurus `<Tabs>` and `<TabItem>` components to display parallel content such as code
+  samples in different languages or package-manager commands.
+- Import `Tabs` and `TabItem` from `@theme/Tabs` and `@theme/TabItem` at the top of the file.
+
+## Admonitions
+
+- Use Docusaurus admonitions: `:::note`, `:::tip`, `:::caution`, `:::info`, `:::danger`.
+- Add a custom title on the same line only when it helps scanning (for example, `:::caution important`).
+- Do not nest admonitions.
+
+## Tables
+
+- Align table columns in the source Markdown for readability.
+- Use a tool like [Markdown Table Formatter](https://markdowntable.com/) if needed.
+
+## Frontmatter
+
+- Required: `description` (one sentence for SEO and previews).
+- Recommended: `keywords` (array).
+- `sidebar_label`: optional. Use sparingly; only when the default sidebar text (usually from the
+  page title) would be too long or wordy for the navigation. Omit when the default is fine.
+- If the frontmatter contains a `title` field, do not add a separate top-level `# Heading` to
+  avoid a duplicate H1.
+
+## File and folder names
+
+- Use lowercase letters and dashes only (for example, `send-transactions.md`, not `sendTransactions.md`).

@@ -1,0 +1,55 @@
+---
+description: Product-specific guidance for Embedded Wallets documentation, including naming, content organization, and SDK conventions.
+globs: ["embedded-wallets/**/*.md", "embedded-wallets/**/*.mdx"]
+alwaysApply: false
+---
+
+# Embedded Wallets
+
+## Product naming
+
+- The product name is **MetaMask Embedded Wallets**.
+- Use **Embedded Wallets** (capitalized) as the short form in prose.
+- The SDKs are **MetaMask Embedded Wallet SDKs** (formerly Plug and Play).
+- Package names and code identifiers still use `web3auth` (for example, `@web3auth/modal`). Do not
+  rename these in code samples.
+- Do not describe Embedded Wallets as a "wallet." It is **embedded wallet infrastructure** that
+  developers integrate into their applications.
+
+## Content organization
+
+Embedded Wallets uses domain-oriented folders rather than strict Diataxis categories:
+
+| Folder               | Content                                          |
+|----------------------|--------------------------------------------------|
+| Root (`README.mdx`)  | Product overview and positioning                 |
+| `sdk/`               | Per-platform integration docs (React, Vue, JS, Node, Android, iOS, React Native, Flutter, Unity, Unreal) |
+| `authentication/`    | Auth methods by type (social, basic, custom)     |
+| `features/`          | Product capabilities (MPC, smart accounts, funding, NFT minting, session management) |
+| `dashboard/`         | Developer console and project configuration      |
+| `connect-blockchain/`| Chain-specific connection guides (EVM, Solana, other) |
+| `infrastructure/`    | Architecture and security (MPC, SSS, nodes)      |
+| `troubleshooting/`   | Problem/solution pages                           |
+
+When adding new content, place it in the domain folder that best matches the topic. Do not create
+new top-level folders without discussing with the documentation team.
+
+## SDK documentation
+
+- Each platform SDK has its own subfolder under `sdk/` with a consistent structure: `README.mdx`,
+  `usage/` or equivalent, `advanced/`, and (where applicable) `migration-guides/`.
+- Shared SDK snippets live in `sdk/_common/`. Reuse these partials where possible instead of
+  duplicating content.
+- Chain-specific connection snippets live in `connect-blockchain/` as underscore-prefixed files
+  (for example, `_evm-chains.mdx`).
+
+## Images
+
+Embedded Wallets images are stored in `static/img/embedded-wallets/`, not alongside the Markdown
+source files. Use `@site/static/img/embedded-wallets/...` imports in MDX.
+
+## Sidebar
+
+The sidebar configuration is in [ew-sidebar.js](ew-sidebar.js). It groups SDKs by platform
+category (Web, Mobile and Gaming, Backend) using HTML helpers imported from
+`./src/utils/w3a-sdk-map.js`.

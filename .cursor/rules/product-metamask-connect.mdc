@@ -1,0 +1,42 @@
+---
+description: Product-specific guidance for MetaMask Connect documentation, including terminology, CAIP standards, and content organization.
+globs: ["metamask-connect/**/*.md", "metamask-connect/**/*.mdx"]
+alwaysApply: false
+---
+
+# MetaMask Connect
+
+## Product naming
+
+- The product name is **MetaMask Connect**. Do not call it "MetaMask SDK." The SDK is the
+  underlying library; MetaMask Connect is the product and documentation brand.
+- When referring to the npm package, use the package name in backticks (for example,
+  `@metamask/connect-evm`).
+
+## Content organization
+
+MetaMask Connect has three sub-areas, each with its own quickstart, guides, and reference:
+
+| Sub-area   | Path                        | Focus                                     |
+|------------|-----------------------------|-------------------------------------------|
+| EVM        | `metamask-connect/evm/`     | Ethereum and EVM-compatible chains        |
+| Multichain | `metamask-connect/multichain/` | Cross-chain using CAIP standards       |
+| Solana     | `metamask-connect/solana/`  | Solana-specific integration               |
+
+## CAIP standards (Multichain)
+
+Multichain documentation uses Chain Agnostic Improvement Proposals (CAIPs). Use these terms
+consistently:
+
+- **Scopes** (CAIP-2): chain identifiers such as `eip155:1` or `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp`.
+- **Account IDs** (CAIP-10): chain-qualified account identifiers such as `eip155:1:0xabc...`.
+- **Sessions** (CAIP-25): an authorized connection grouping approved scopes and accounts.
+
+## EVM conventions
+
+- Reference the `window.ethereum` provider when discussing the injected provider.
+- Mention EIP-6963 (Multi Injected Provider Discovery) where relevant for provider detection.
+
+## Sidebar
+
+The sidebar configuration is in [mm-connect-sidebar.js](mm-connect-sidebar.js).

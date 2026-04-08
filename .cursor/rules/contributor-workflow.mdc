@@ -1,0 +1,82 @@
+---
+description: Workflow rules for contributors and reviewers covering sidebar updates, redirects, verification, and PR expectations.
+alwaysApply: true
+---
+
+# Contributor workflow
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full contribution process. The rules below highlight
+the requirements that are most often missed.
+
+## Sidebar updates
+
+Every new documentation page must be added to the appropriate sidebar file:
+
+| Product              | Sidebar file             |
+|----------------------|--------------------------|
+| MetaMask Connect     | `mm-connect-sidebar.js`  |
+| Embedded Wallets     | `ew-sidebar.js`          |
+| Smart Accounts Kit   | `gator-sidebar.js`       |
+| Services             | `services-sidebar.js`    |
+| Developer dashboard  | `dashboard-sidebar.js`   |
+| Snaps                | `snaps-sidebar.js`       |
+
+## Redirects
+
+Every deleted, renamed, or moved page must have a redirect added in `vercel.json`. Docusaurus is
+configured with `onBrokenLinks: 'throw'`, so broken internal links will fail the build.
+
+## Factual accuracy
+
+Do not state as fact any API behavior, parameter, or return value that you have not verified
+against the codebase or published reference. If you are uncertain, add a review comment or
+admonition noting the uncertainty. This rule applies to both human and AI-assisted contributions.
+
+## Images
+
+Place images in the product's designated asset folder:
+
+- `metamask-connect/*/_assets/`
+- `static/img/embedded-wallets/` (Embedded Wallets product images)
+- `smart-accounts-kit/assets/`
+- `services/images/`
+- `snaps/assets/`
+- `static/img/` (for site-wide assets)
+
+## Update rule files for structural changes
+
+When a change affects the structure, naming, or conventions of a product area, update the
+corresponding `.cursor/rules/` file in the same PR. Examples of changes that require a rule update:
+
+- Renaming a product or changing its branding (update the product rule file and `terminology.mdc`).
+- Adding, removing, or renaming top-level content folders (update the product rule file and
+  `content-types.mdc` if a new folder pattern is introduced).
+- Changing the parameter documentation format in a reference section (update the product rule file
+  and `content-types.mdc`).
+- Moving image storage to a different directory (update `contributor-workflow.mdc` and the product
+  rule file).
+- Adding a new product area to the repository (create a new `product-*.mdc` rule file and add the
+  product to the table in `contributor-workflow.mdc` and `AGENTS.md`).
+- Changing sidebar file names or adding new sidebar files (update the sidebar table above and the
+  product rule file).
+- Introducing new shared partials or generated-content patterns (update the product rule file).
+
+Keeping rule files current prevents stale guidance from producing incorrect contributions.
+
+## CI linting
+
+Pull requests are checked by a Vale-based linter
+([docs-spelling-check](https://github.com/Consensys/github-actions/tree/main/docs-spelling-check))
+that enforces Microsoft style, Consensys terminology, and spelling. Fix any linter warnings before
+requesting review. If a warning is a false positive, add the term to the Vale vocabulary file rather
+than rewriting valid technical language.
+
+## Pull requests
+
+- Summarize what changed and why in the PR description. Do not just list files.
+- Link the related issue using `fixes #<number>` when applicable.
+- Preview locally with `npm start` before requesting review.
+
+## Cross-product links
+
+See the **Links** section in `markdown-formatting.mdc`.
