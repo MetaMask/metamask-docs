@@ -253,5 +253,5 @@ Common issues and solutions include:
 ## Next steps
 
 - [Send a legacy transaction](../guides/send-legacy-transaction.md) to transfer SOL using MetaMask Connect.
-- [Sign messages](../guides/sign-data/sign-message.md) to verify wallet ownership or authorize off-chain actions.
+- [Sign messages](../guides/sign-data/sign-message.md) to verify wallet ownership or authorize offchain actions.
 - [MetaMask Connect Solana methods](../reference/methods.md) for the full API reference.

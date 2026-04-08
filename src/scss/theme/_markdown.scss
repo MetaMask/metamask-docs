@@ -107,8 +107,18 @@
   }
 
   code {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding: var(--inline-code-padding);
+    font-family: var(--inline-code-font);
+    background-color: var(--ifm-code-background);
+    border: none;
+    box-shadow: none;
+    border-radius: var(--inline-code-border-radius);
+  }
+
+  pre code,
+  [class*='codeBlockContainer'] code {
+    background-color: transparent;
+    border-radius: 0;
   }
 
   p + [class*='codeBlockContainer'] {
@@ -128,8 +138,10 @@
   table td > code,
   table th > code,
   span > code {
-    @extend .font-mm-sans-mono;
-    font-size: 80%;
+    font-size: var(--inline-code-font-size);
+    font-weight: var(--inline-code-font-weight);
+    position: relative;
+    top: var(--inline-code-baseline-nudge);
   }
 
   table {
@@ -197,11 +209,13 @@
     code {
       @extend .type-paragraph-s;
       color: var(--ifm-heading-color) !important;
-      background: var(--ifm-code-background);
-
-      [data-theme='dark'] & {
-        background-color: var(--general-gray-dark);
-      }
+      background-color: var(--ifm-code-background);
+      border: none;
+      border-radius: var(--inline-code-border-radius);
+      font-size: var(--inline-code-font-size);
+      font-weight: var(--inline-code-font-weight);
+      position: relative;
+      top: var(--inline-code-baseline-nudge);
     }
 
     table tr:nth-child(2n) {

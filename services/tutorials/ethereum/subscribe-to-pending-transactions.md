@@ -7,7 +7,7 @@ sidebar_position: 8
 
 This tutorial shows you how to use Ethereum subscriptions to listen for new transactions on the blockchain as they get submitted.
 
-The tutorial uses the Python `websockets` library and Infura’s WebSocket endpoint to subscribe to transactions and events on the blockchain.
+The tutorial uses the Python `websockets` library and Infura's WebSocket endpoint to subscribe to transactions and events on the blockchain.
 
 ## Prerequisites
 
@@ -52,7 +52,7 @@ from websockets import connect
 
 ### 4. Connect to Infura
 
-Connect to Infura’s WebSockets endpoint to subscribe to new pending transactions, and Infura’s HTTP Ethereum endpoint so we can make JSON-RPC calls such as `eth_get_transaction` to get more information about a specific transaction.
+Connect to Infura's WebSockets endpoint to subscribe to new pending transactions, and Infura's HTTP Ethereum endpoint so we can make JSON-RPC calls such as `eth_get_transaction` to get more information about a specific transaction.
 
 Define the following endpoints in your file:
 
@@ -70,7 +70,7 @@ Replace `<YOUR-API-KEY>` with your Infura API key, you can use the same for both
 
 ### 5. Subscribe to pending transactions
 
-Create an `async` method that connects to Infura’s WebSocket endpoint:
+Create an `async` method that connects to Infura's WebSocket endpoint:
 
 ```python
 async def get_event():
@@ -161,7 +161,7 @@ You should now see the terminal fill up with Ethereum transfers:
 
 ### 7. Monitor a specific address for transactions
 
-You can update the program to monitor incoming transactions to a specific Ethereum address. Let’s define an account we’d like to monitor first, outside of the `get_event()` function:
+You can update the program to monitor incoming transactions to a specific Ethereum address. Let's define an account we'd like to monitor first, outside of the `get_event()` function:
 
 ```python
 account = "<YOUR_PUBLIC_ADDRESS>"

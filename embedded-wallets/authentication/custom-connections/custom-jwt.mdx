@@ -12,7 +12,7 @@ import CustomConnectionOptions from '@site/static/img/embedded-wallets/w3a-dashb
 import CustomJWTConnection from '@site/static/img/embedded-wallets/w3a-dashboard/custom-connection.png'
 import JwtLoginCustom from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_custom.mdx'
 
-Embedded Wallets supports integration with custom login providers through [JWT-based](https://www.jwt.io/introduction#what-is-json-web-token) authentication schemes, allowing developers to maintain their existing authentication infrastructure while leveraging Web3Auth’s wallet and key management capabilities. Custom authentication can be implemented using industry-standard cryptographic algorithms such as RSA or ECDSA signatures.
+Embedded Wallets supports integration with custom login providers through [JWT-based](https://www.jwt.io/introduction#what-is-json-web-token) authentication schemes, allowing developers to maintain their existing authentication infrastructure while leveraging Web3Auth's wallet and key management capabilities. Custom authentication can be implemented using industry-standard cryptographic algorithms such as RSA or ECDSA signatures.
 
 To use this feature, developers must ensure that their JWTs adhere to the [JWT specification](https://datatracker.ietf.org/doc/html/rfc7519). Each JWT must be signed using a private key, and its corresponding public key must be accessible via a [JWKS (JSON Web Key Set)](https://datatracker.ietf.org/doc/html/rfc7517) endpoint. Web3Auth will use this endpoint to verify the integrity and authenticity of incoming tokens during login.
 

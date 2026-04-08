@@ -1033,24 +1033,30 @@ input:checked+.slider::before {
 .stepBody h5>code,
 .stepBody h6>code,
 .stepBody a>code {
-  font-family: var(--font-mm-sans-mono);
-  font-size: 80%;
-  background: var(--ifm-code-background);
-  border-radius: var(--ifm-code-border-radius);
-  padding: 0.15rem 0.3rem;
+  font-family: var(--inline-code-font);
+  font-size: var(--inline-code-font-size);
+  font-weight: var(--inline-code-font-weight);
+  background-color: var(--ifm-code-background);
+  border-radius: var(--inline-code-border-radius);
+  padding: var(--inline-code-padding);
   color: var(--ifm-code-color);
-  border: 1px solid var(--ifm-color-emphasis-300);
+  border: none;
+  position: relative;
+  top: var(--inline-code-baseline-nudge);
 }
 
 /* Ensure code blocks are NOT affected */
 .stepBody pre code {
   /* Reset any inline code styling for code blocks */
   font-size: inherit;
+  font-weight: inherit;
   background: inherit;
   border-radius: inherit;
   padding: inherit;
   color: inherit;
   border: none;
+  position: static;
+  top: auto;
 }
 
 /* Media Step Styles */

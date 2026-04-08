@@ -39,8 +39,6 @@
   --color-text-heading: var(--ifm-heading-color);
   --color-text: var(--general-black);
   --color-text-paragraph: var(--color-text);
-  --ifm-code-font-size: 90%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --select-arrow: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 7"><path fill="currentColor" fill-rule="evenodd" d="M11.9038 1.82478 5.24975 6.80979-1.4043 1.82478-.385019.464234 5.24975 4.68564 10.8845.464233l1.0193 1.360547Z" clip-rule="evenodd"/></svg>');
 
   /* Links */
@@ -135,9 +133,18 @@
   --search-input-focus: var(--general-black);
 
   /* Code Block */
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-code-border-radius: 0;
   --prism-background-color: var(--general-black-light);
   --ifm-code-font-size: 1.6rem;
+
+  /* Inline code */
+  --inline-code-font: 'Andale Mono', AndaleMono, Menlo, Consolas, Monaco, 'Courier New', monospace;
+  --inline-code-font-size: 0.9em;
+  --inline-code-font-weight: 600;
+  --inline-code-baseline-nudge: -0.045em;
+  --inline-code-border-radius: 0.35rem;
+  --inline-code-padding: 0.05em 0.25em;
 
   /* Markdown: Tables */
   --ifm-table-border-color: var(--general-gray-light);

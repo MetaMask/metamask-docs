@@ -44,7 +44,7 @@ Control the order in which results are returned. Sorting may affect performance.
     first.
 - **`recent_action`**: Sorts by the timestamp of the most recent update or event. Helpful when
     tracking activity or status changes.
-- **`none`**: No sorting applied. Use for faster responses when order doesn’t matter.
+- **`none`**: No sorting applied. Use for faster responses when order doesn't matter.
 
 ## Sort direction
 

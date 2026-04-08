@@ -101,7 +101,7 @@ User metadata is strictly supplementary and only helps to facilitate and govern 
 does not leak information about the shares of the private key being used to sign transactions.
 
 Metadata uses an encrypted storage layer that serves as a persistent data store for storing encrypted information 
-about the user’s keys (for example, public key, preferences, device information, and thresholds). This information is stored in a replicated fashion across the set of nodes that are involved in facilitating the user login.
+about the user's keys (for example, public key, preferences, device information, and thresholds). This information is stored in a replicated fashion across the set of nodes that are involved in facilitating the user login.
 
 During operation, when the user achieves threshold shares, they can read and write to metadata. Writing to metadata requires encrypting the data and signing it with the shares / private key.
 
@@ -124,9 +124,9 @@ use in key recovery / share refresh if the user loses his/her device or shares.
 
 Key handling begins in response to a user-triggered action, such as logging in. At this stage, the system attempts to retrieve any existing encrypted metadata associated with the user.
 
-If metadata is found, the user is an existing user. The metadata is decrypted using the nodes’ $encKey$ , and the stored information is used to validate the user and load the existing secret-sharing parameters. No new key material is generated in this path.
+If metadata is found, the user is an existing user. The metadata is decrypted using the nodes' $encKey$ , and the stored information is used to validate the user and load the existing secret-sharing parameters. No new key material is generated in this path.
 
-If no metadata is found, the user is treated as a new user, and a new key is initialized. In this case, a 2-of-3 Shamir’s Secret Sharing (SSS) polynomial is generated, producing a private key and its corresponding shares.
+If no metadata is found, the user is treated as a new user, and a new key is initialized. In this case, a 2-of-3 Shamir's Secret Sharing (SSS) polynomial is generated, producing a private key and its corresponding shares.
 
 We select a polynomial $f(z)$ over $Z_q$ where: $$f(z) = a_1z + \sigma$$
 
@@ -143,7 +143,7 @@ We select a polynomial $f(z)$ over $Z_q$ where: $$f(z) = a_1z + \sigma$$
 ### Key usage, access, and signing
 
 For returning users, key access is established by retrieving ShareB via a session token handshake and combining it 
-with the locally stored ShareA on the user’s device to produce threshold signatures.
+with the locally stored ShareA on the user's device to produce threshold signatures.
 
 <img
   alt="Key Usage Flow"
