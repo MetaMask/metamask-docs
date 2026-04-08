@@ -15,12 +15,18 @@
 .container {
   position: relative;
   display: inline-block;
+  visibility: hidden;
 }
 
 .h1Wrapper .container {
   position: absolute;
   top: 0;
   right: 0;
+  visibility: visible;
+}
+
+.standalone {
+  visibility: visible;
 }
 
 .mainButton {

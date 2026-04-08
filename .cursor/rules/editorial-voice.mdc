@@ -1,0 +1,60 @@
+---
+description: Editorial voice and tone rules aligned with the Microsoft Writing Style Guide and Consensys documentation standards.
+globs: ["**/*.md", "**/*.mdx"]
+alwaysApply: false
+---
+
+# Editorial voice
+
+Follow the [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
+and the [Consensys documentation style guide](https://docs-template.consensys.net/contribute/style-guide).
+The rules below are the most actionable subset for AI-assisted editing.
+
+## Voice and tone
+
+- Use active voice and present tense.
+- Write in second person. Address the reader as "you."
+- Use contractions naturally ("it's," "don't"). Be informal but not sloppy.
+- Refer to the reader's application as "your dapp" (not "the dapp" or "your application").
+- Refer to the reader as "you" (not "the developer," "the user," or "users").
+- Dapp developers (our readers) in turn have users. It's ok to use "users" in that context.
+
+## Clarity
+
+- Get to the point in the first sentence of every section. Does it answer "what," "why," and "when"?
+- Use short, simple sentences. Remove nonessential or redundant words.
+- Break up three or more paragraphs with subheadings, lists, tables, code samples, or admonitions.
+- Write for developers who want to accomplish a task or learn a skill, not for marketing purposes.
+
+## Sentence construction
+
+- Lead with what's most important. Front-load keywords for scanning.
+- Start sentences with a verb when possible. Edit out "you can" and "there is/are" phrasing.
+- Use the Oxford (serial) comma in lists of three or more items (for example, "Android, iOS, and
+  Windows").
+- Do not start sentences with "So," "Basically," or "Actually."
+
+## Punctuation and formatting
+
+- Do not use em dashes or en dashes. Use commas, parentheses, semicolons, or rephrase the sentence.
+- Use only one space after periods, question marks, and colons.
+- Use sentence case for all headings and titles. Never use title case.
+- Do not end headings, subheadings, or UI titles with periods.
+- Use backticks for inline code, file names, and URLs referenced in prose.
+- Use bold for UI element names (buttons, menu items, field labels).
+
+## Developer content
+
+- List prerequisites before the first step. Suggest good practices (for example, "secure private
+  keys," "protect RPC endpoints in production").
+- Write code samples that are readable, can be copied and pasted, and work as expected. Do not
+  include shell prompts (for example, `user@host $`) in code blocks.
+- Use angle-bracket placeholders for user-supplied values (for example, `<YOUR_API_KEY>`).
+
+## What to avoid
+
+- No marketing language, superlatives, or promotional tone ("best-in-class," "powerful," "seamless").
+- No slang, figures of speech, or culturally specific idioms.
+- No run-on sentences.
+- No jargon without definition. If a term must be used, define it on first use or link to a
+  glossary entry.
