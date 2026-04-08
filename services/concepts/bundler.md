@@ -30,7 +30,7 @@ for more about the bundler methods and
 
 ## User operations
 
-A user operation (UserOp) is an is an off-chain request that a bundler later includes onchain by
+A user operation (UserOp) is an is an offchain request that a bundler later includes onchain by
 calling the EntryPoint. UserOps go to a dedicated mempool watched by bundlers instead of being broadcast
 as raw L1/L2 transactions.
 
@@ -92,5 +92,5 @@ Bundler methods are active on the following networks:
 - [Unichain](../reference/unichain/json-rpc-methods/bundler/index.md) (mainnet and Sepolia)
 
 :::info
-[Contact support](https://support.infura.io/) if you require bundler method activation on a network not listed here that’s currently supported by Pimlico.
+[Contact support](https://support.infura.io/) if you require bundler method activation on a network not listed here that's currently supported by Pimlico.
 :::

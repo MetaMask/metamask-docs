@@ -177,7 +177,7 @@ Bob can now redeem the delegation. The redeem transaction is sent to the `Delega
 To prepare the calldata for the redeem transaction, use the [`redeemDelegations`](../../reference/delegation/index.md#redeemdelegations) method from `DelegationManager`.
 Since Bob is redeeming a single delegation chain, use the [`SingleDefault`](../../concepts/delegation/delegation-manager.md#execution-modes) execution mode.
 
-Bob can redeem the delegation by submitting a user operation if his account is a smart account, or a regular transaction if his account is an EOA. In this example, Bob transfers 1 USDC from Alice’s account to his own.
+Bob can redeem the delegation by submitting a user operation if his account is a smart account, or a regular transaction if his account is an EOA. In this example, Bob transfers 1 USDC from Alice's account to his own.
 
 <Tabs>
 <TabItem value="Redeem with a smart account">

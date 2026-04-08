@@ -211,7 +211,7 @@ async function collectData(contract) {
 
 :::info
 
-Since you’re already requesting the `decimals` value from the contract, you can also request the `symbol` value to display the ticker of the token.
+Since you're already requesting the `decimals` value from the contract, you can also request the `symbol` value to display the ticker of the token.
 
 :::
 

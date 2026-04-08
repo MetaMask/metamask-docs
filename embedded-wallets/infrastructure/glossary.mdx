@@ -6,15 +6,15 @@ description: "Important Terms and Definitions - Embedded Wallets' Cryptographic 
 
 ### Shamir Secret Sharing 
 
-[Shamir’s Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing) (SSS) scheme is a polynomial 
+[Shamir's Secret Sharing](https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing) (SSS) scheme is a polynomial 
 threshold $(t,n)$ secret sharing scheme where the secret holder divides a secret into n multiple shares and each participant is given a share by evaluating a
 polynomial of order $t$ . To reconstruct the secret, $t + 1$ shares are required.
 
-SSS is often applied in MPC cryptography and is fundamental to Embedded Wallet’s infrastructure.
+SSS is often applied in MPC cryptography and is fundamental to Embedded Wallet's infrastructure.
 
 ### Verifiable Secret Sharing
 
-Verifiable secret sharing (VSS) refers to a class of secret-sharing schemes—often built on top of Shamir’s Secret Sharing—that ensure a well-defined secret can be reconstructed, even if the party distributing the shares behaves maliciously.
+Verifiable secret sharing (VSS) refers to a class of secret-sharing schemes—often built on top of Shamir's Secret Sharing—that ensure a well-defined secret can be reconstructed, even if the party distributing the shares behaves maliciously.
 
 ### Threshold Signature Schemes 
 
@@ -66,10 +66,10 @@ varient of [Async Verifiable Secret Sharing](https://eprint.iacr.org/2002/134.pd
 
 ### Proactive Secret Sharing
 
-Proactive Secret Sharing (PSS) allows participants to “refresh” shares, so that all participants receive
+Proactive Secret Sharing (PSS) allows participants to "refresh" shares, so that all participants receive
 new shares, while the secret remains unchanged. This allows the secret sharing to be secure against
 mobile adversaries who may be able to compromise all participants over the lifetime of the secret
-(for example, an adversary hacks a random participant’s server every month).
+(for example, an adversary hacks a random participant's server every month).
 
 Simply copying shares across epochs is a bad idea, since a single node operator operating in two
 separate epochs would get access to two shares, and it also makes it impossible to increase or

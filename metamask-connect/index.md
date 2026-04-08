@@ -42,7 +42,7 @@ MetaMask Connect fills that gap and provides the following benefits:
 
 - **Cross-platform connections**: Reach users on any device. When the MetaMask browser extension isn't available, MetaMask Connect connects users through the MetaMask mobile app with no additional setup.
 - **Multichain sessions**: Request access to EVM, Solana, and future ecosystems in a single connection instead of connecting per chain.
-- **Persistent sessions**: Keep sessions across page reloads and new tabs so users don’t need to reconnect.
+- **Persistent sessions**: Keep sessions across page reloads and new tabs so users don't need to reconnect.
 - **Consistent API**: Use the same interface whether users connect through the extension or the MetaMask mobile app.
 
 ## Get started

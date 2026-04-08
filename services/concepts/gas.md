@@ -19,7 +19,7 @@ smart contract. It acts as a safety mechanism to prevent users from accidentally
 
 ## EIP-1559 gas prices
 
-The Ethereum London hard fork update changed the blockchain’s transaction fee model by implementing
+The Ethereum London hard fork update changed the blockchain's transaction fee model by implementing
 [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559). This update changed the way users pay gas fees on the Ethereum
 network and other EVM chains.
 

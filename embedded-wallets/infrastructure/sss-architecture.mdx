@@ -65,9 +65,9 @@ This is generally _not_ used during normal operation, and is intended for use in
 
 Key handling begins in response to a user-triggered action, such as logging in. At this stage, the system attempts to retrieve any existing encrypted metadata associated with the user.
 
-If metadata is found, the user is an existing user. The metadata is decrypted using the nodes’ $encKey$ , and the stored information is used to validate the user and load the existing secret-sharing parameters. No new key material is generated in this path.
+If metadata is found, the user is an existing user. The metadata is decrypted using the nodes' $encKey$ , and the stored information is used to validate the user and load the existing secret-sharing parameters. No new key material is generated in this path.
 
-If no metadata is found, the user is treated as a new user, and a new key is initialized. In this case, a 2-of-3 Shamir’s Secret Sharing (SSS) polynomial is generated, producing a private key and its corresponding shares.
+If no metadata is found, the user is treated as a new user, and a new key is initialized. In this case, a 2-of-3 Shamir's Secret Sharing (SSS) polynomial is generated, producing a private key and its corresponding shares.
 
 We select a polynomial $f(z)$ over $Z_q$ where: $$f(z) = a_1z + \sigma$$
 

@@ -1,8 +1,8 @@
 ---
 title: "Sign Messages on Solana - MetaMask Connect"
 sidebar_label: Sign messages
-description: Request off-chain cryptographic signatures from users on Solana using MetaMask Connect's signMessage wallet-standard feature.
-keywords: [solana sign message, signMessage, wallet-standard, off-chain signature, message verification, metamask, solana]
+description: Request offchain cryptographic signatures from users on Solana using MetaMask Connect's signMessage wallet-standard feature.
+keywords: [solana sign message, signMessage, wallet-standard, offchain signature, message verification, metamask, solana]
 ---
 
 # Sign messages

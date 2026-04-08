@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 
 # Disable a delegation
 
-Delegations are created off-chain and can be stored anywhere, but you can disable a delegation on-chain using the
+Delegations are created offchain and can be stored anywhere, but you can disable a delegation onchain using the
 toolkit. When a delegation is disabled, any attempt to redeem it will revert, effectively revoking the permissions 
 that were previously granted.
 

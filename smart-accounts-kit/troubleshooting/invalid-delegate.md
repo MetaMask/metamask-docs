@@ -18,7 +18,7 @@ the delegation, unless it's an [open delegation](../reference/delegation/index.m
 ### Solution 
 
 Verify that the account redeeming the delegation matches the address in the 
-delegation’s `to` field. If the delegate is a smart account, send the user operation
+delegation's `to` field. If the delegate is a smart account, send the user operation
 from that smart account.
 
 ## Broken redelegation chain

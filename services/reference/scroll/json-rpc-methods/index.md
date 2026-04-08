@@ -25,7 +25,7 @@ You may encounter various errors when interacting with a network:
 
 ### JSON-RPC errors
 
-Error codes returned by Infura’s RPC service network APIs can vary slightly between implementations, but
+Error codes returned by Infura's RPC service network APIs can vary slightly between implementations, but
 they generally follow the [JSON-RPC 2.0 specification](https://www.jsonrpc.org/specification#error_object)
 and Ethereum-specific conventions.
 

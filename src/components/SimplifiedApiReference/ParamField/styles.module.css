@@ -15,8 +15,15 @@
 }
 
 .paramName code {
-  font-family: var(--font-mm-sans-mono);
-  font-size: 1.3rem;
+  font-family: var(--inline-code-font);
+  font-size: 1.38rem;
+  font-weight: var(--inline-code-font-weight);
+  background-color: var(--ifm-code-background);
+  border: none;
+  border-radius: var(--inline-code-border-radius);
+  padding: var(--inline-code-padding);
+  position: relative;
+  top: var(--inline-code-baseline-nudge);
 }
 
 .paramType {
