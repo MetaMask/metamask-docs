@@ -28,7 +28,7 @@ shared with additional parties.
 
 ## Request Advanced Permissions
 
-Request Advanced Permissions from the user with the <GlossaryTerm term="Wallet Client" />'s [`requestExecutionPermissions`](../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) action.
+Request Advanced Permissions from the user with the Wallet Client's [`requestExecutionPermissions`](../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) action.
 
 This example uses the [ERC-20 periodic permission](./use-permissions/erc20-token.md#erc-20-periodic-permission), allowing the
 user to grant dapp the ability to spend 10 USDC on their behalf. 

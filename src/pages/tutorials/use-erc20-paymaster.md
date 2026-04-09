@@ -40,7 +40,7 @@ npm install @metamask/smart-accounts-kit
 
 ### 2. Set up a Public Client
 
-Set up a <GlossaryTerm term="Public Client" /> using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function. 
+Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function. 
 You will configure a <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> and Bundler Client with the Public Client, which you can use to query the <GlossaryTerm term="Signer">signer</GlossaryTerm>'s account state and interact with the blockchain network.
 
 ```typescript

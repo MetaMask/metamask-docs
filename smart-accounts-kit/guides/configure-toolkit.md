@@ -10,7 +10,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Configure the Smart Accounts Kit
 
-The <GlossaryTerm term="Smart Accounts Kit" /> is highly configurable, providing support for custom <GlossaryTerm term="Bundler">bundlers</GlossaryTerm> and <GlossaryTerm term="Paymaster">paymasters</GlossaryTerm>.
+The Smart Accounts Kit is highly configurable, providing support for custom <GlossaryTerm term="Bundler">bundlers</GlossaryTerm> and <GlossaryTerm term="Paymaster">paymasters</GlossaryTerm>.
 You can also configure the toolkit environment to interact with the
 <GlossaryTerm term="Delegation Framework" />.
 

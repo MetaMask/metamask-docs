@@ -19,7 +19,7 @@ the first <GlossaryTerm term="User operation">user operation</GlossaryTerm>, or 
 
 ## Deploy with the first user operation
 
-When you send the first user operation from a smart account, the <GlossaryTerm term="Smart Accounts Kit" /> checks whether the account is already deployed. If the account 
+When you send the first user operation from a smart account, the Smart Accounts Kit checks whether the account is already deployed. If the account 
 is not deployed, the toolkit adds the `initCode` to the user operation to deploy the account within the 
 same operation. Internally, the `initCode` is encoded using the `factory` and `factoryData`. 
 

@@ -21,7 +21,7 @@ from a MetaMask user, and execute transactions on their behalf.
 
 ### 1. Install the extension
 
-Run the following command to install the <GlossaryTerm term="Smart Accounts Kit" /> extension:
+Run the following command to install the Smart Accounts Kit extension:
 
 ```bash
 npx create-eth@latest -e metamask/erc-7715-extension your-project-name

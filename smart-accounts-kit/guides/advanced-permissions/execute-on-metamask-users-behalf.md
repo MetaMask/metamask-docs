@@ -26,7 +26,7 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 
 ### 1. Set up a Wallet Client
 
-Set up a <GlossaryTerm term="Wallet Client" /> using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function. This client will
+Set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function. This client will
 help you interact with MetaMask Flask. 
 
 Then, extend the Wallet Client functionality using `erc7715ProviderActions`.
@@ -43,7 +43,7 @@ const walletClient = createWalletClient({
 
 ### 2. Set up a Public Client
 
-Set up a <GlossaryTerm term="Public Client" /> using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function. 
+Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function. 
 This client will help you query the account state and interact with the blockchain network.
 
 ```typescript
@@ -145,7 +145,7 @@ if (code) {
 
 ### 5. Request Advanced Permissions
 
-Request Advanced Permissions from the user with the <GlossaryTerm term="Wallet Client" />'s `requestExecutionPermissions` action.
+Request Advanced Permissions from the user with the Wallet Client's `requestExecutionPermissions` action.
 In this example, you'll request an
 [ERC-20 periodic permission](use-permissions/erc20-token.md#erc-20-periodic-permission).
 
@@ -192,7 +192,7 @@ For a smart account, set up a <GlossaryTerm term="Bundler" >Bundler Client</Glos
 This lets you use the bundler service 
 to estimate gas for user operations and submit transactions to the network.
 
-For an EOA, set up a <GlossaryTerm term="Wallet Client" /> using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function.
+For an EOA, set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function.
 This lets you send transactions directly to the network.
 
 The toolkit provides public actions for both of the clients which can be used to redeem Advanced Permissions, and execute transactions on a user's behalf. 

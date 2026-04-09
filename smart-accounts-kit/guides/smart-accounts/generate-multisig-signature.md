@@ -9,7 +9,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Generate a multisig signature
 
-The <GlossaryTerm term="Smart Accounts Kit" /> supports [Multisig smart accounts](../../concepts/smart-accounts.md#multisig-smart-account),
+The Smart Accounts Kit supports [Multisig smart accounts](../../concepts/smart-accounts.md#multisig-smart-account),
 allowing you to add multiple <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm>
 <GlossaryTerm term="Signer">signers</GlossaryTerm> with a configurable execution threshold. When the threshold 
 is greater than 1, you can collect signatures from the required signers 

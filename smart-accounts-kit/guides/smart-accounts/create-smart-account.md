@@ -87,7 +87,7 @@ export const walletClient = createWalletClient({
 A [Multisig smart account](../../concepts/smart-accounts.md#multisig-smart-account) supports multiple <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> <GlossaryTerm term="Signer">signers</GlossaryTerm> with a configurable threshold for execution.
 
 This example uses [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmartaccount) to create a
-Multisig smart account with a combination of account signers and <GlossaryTerm term="Wallet Client" /> signers.
+Multisig smart account with a combination of account signers and Wallet Client signers.
 
 <Tabs>
 <TabItem value="example.ts">

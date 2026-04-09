@@ -23,7 +23,7 @@ the <GlossaryTerm term="Delegation">delegation</GlossaryTerm> lifecycle (create,
 
 ### 1. Install the extension
 
-Run the following command to install the <GlossaryTerm term="Smart Accounts Kit" /> extension:
+Run the following command to install the Smart Accounts Kit extension:
 
 ```bash
 npx create-eth@latest -e metamask/gator-extension your-project-name

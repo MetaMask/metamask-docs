@@ -43,7 +43,7 @@ npm install @metamask/smart-accounts-kit ox
 
 ### 2. Set up a Public Client
 
-Set up a <GlossaryTerm term="Public Client" /> using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function. 
+Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function. 
 You will configure a <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> and Bundler Client with the Public Client, which you can use to query the <GlossaryTerm term="Signer">signer</GlossaryTerm>'s account state and interact with the blockchain network.
 
 ```typescript
@@ -118,7 +118,7 @@ const credential = await createWebAuthnCredential({
 
 ### 6. Add the passkey as a backup signer
 
-Use the `HybridDeleGator` contract namespace from the <GlossaryTerm term="Smart Accounts Kit" /> to encode the calldata required to add the passkey signer.
+Use the `HybridDeleGator` contract namespace from the Smart Accounts Kit to encode the calldata required to add the passkey signer.
 The encoding function needs the X and Y coordinates of the P-256 public key.
 Since WebAuthn credentials store a compressed public key, you need to use the [Ox SDK](https://oxlib.sh/#installation) to deserialize it, and extract the X and Y coordinates.
 

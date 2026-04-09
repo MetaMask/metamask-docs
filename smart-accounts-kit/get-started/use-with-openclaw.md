@@ -11,7 +11,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Use the Smart Accounts Kit with OpenClaw
 
-Use the MetaMask Smart Accounts Kit [OpenClaw skills](https://docs.openclaw.ai/tools/skills) to interact with the <GlossaryTerm term="Smart Accounts Kit" /> using natural language prompts.
+Use the MetaMask Smart Accounts Kit [OpenClaw skills](https://docs.openclaw.ai/tools/skills) to interact with the Smart Accounts Kit using natural language prompts.
 
 [OpenClaw](https://openclaw.ai/) is an open-source platform for AI agents that enables you to build, deploy, and
 manage AI assistants with access to various tools and skills. The Smart Accounts Kit provides the following two skills.

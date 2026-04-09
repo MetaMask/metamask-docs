@@ -11,15 +11,15 @@ This glossary defines common Smart Accounts Kit terms used across the documentat
 
 ### Account abstraction
 
-A mechanism that enables users to manage smart contract accounts containing arbitrary verification logic.
+A conceptual model for programmable onchain accounts, including flexible validation logic, custom signature schemes, and gas abstraction. ERC-4337 defines a mechanism for account abstraction.
 
 ### Advanced Permissions
 
-Fine-grained, customizable transaction capabilities that dapps can request from MetaMask extension users.
+Fine-grained, wallet execution permissions that dapps can request from MetaMask extension users. Based on ERC-7715.
 
 ### Bundler
 
-A service that collects user operations from smart accounts, packages them, and submits them to the network.
+An ERC-4337 component that manages the alternate mempool: it collects user operations from smart accounts, bundles them into transactions, and submits them to the network.
 
 ### Caveat
 
@@ -43,11 +43,11 @@ A set of audited smart contracts that handle smart account creation, the delegat
 
 ### Delegation Manager
 
-The component that validates and redeems delegations, including signature checks and caveat enforcer hooks.
+The ERC-7710 component that validates and redeems delegations, including signature checks and caveat enforcer hooks.
 
 ### Delegation scope
 
-A predefined authority pattern that sets the initial actions a delegate is allowed to perform.
+A predefined authority pattern representing a caveat or group of caveats, which sets the initial actions a delegate is allowed to perform. You can combine scopes with additional caveats.
 
 ### Delegator account
 
@@ -67,11 +67,11 @@ A smart account implementation that supports both an EOA owner and passkey signe
 
 ### MetaMask smart account
 
-A smart contract account that supports programmable behavior, delegated permissions, flexible signing options, and other advanced features.
+A smart contract account created using the Smart Accounts Kit that supports programmable behavior, flexible signing options, and ERC-7710 delegations.
 
 ### Multisig smart account
 
-A smart account that requires signatures from multiple configured signers to satisfy a threshold.
+A smart account implementation that requires multiple signers to generate a valid signature.
 
 ### Open delegation
 
@@ -89,13 +89,9 @@ A cryptographic key that can be used to sign transactions instead of a private k
 
 A service that pays for user operations on behalf of a smart account.
 
-### Public Client
-
-An interface for fetching blockchain state, reading from smart contracts, and monitoring transactions.
-
 ### Redelegation
 
-A delegation that passes on a subset of authority granted by a previous delegation.
+A delegation that passes on authority granted by a previous delegation.
 
 ### Root delegation
 
@@ -105,15 +101,7 @@ The first delegation in a chain, where an account delegates its own authority di
 
 An account that can sign transactions for a smart account.
 
-### Smart Accounts Kit
-
-Toolkit for creating, managing, and interacting with MetaMask Smart Accounts, delegations, and Advanced Permissions.
-
 ### User operation
 
-A signed instruction package that tells a smart account what executions to perform.
-
-### Wallet Client
-
-An interface for interacting with blockchain accounts, executing transactions, and signing messages.
+A pseudo-transaction object defined by ERC-4337 that describes what a smart account should execute. User operations are submitted to the alternate mempool managed by bundlers.
 

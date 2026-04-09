@@ -23,7 +23,7 @@ You'll complete the delegation lifecycle (create, sign, and redeem a delegation)
 
 ### 1. Set up a Public Client
 
-Set up a <GlossaryTerm term="Public Client" /> using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function.
+Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function.
 You will configure Alice's account (the <GlossaryTerm term="Delegator account">delegator</GlossaryTerm>) and the Bundler Client with the Public Client, which you can use to query the signer's account state and interact with smart contracts.
 
 ```typescript

@@ -8,7 +8,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Use the Smart Accounts Kit CLI
 
-Use the `@metamask/create-gator-app` interactive CLI to bootstrap a project with the <GlossaryTerm term="Smart Accounts Kit" /> in under two minutes. 
+Use the `@metamask/create-gator-app` interactive CLI to bootstrap a project with the Smart Accounts Kit in under two minutes. 
 The CLI automatically installs the required dependencies and sets up a project structure using a selected template,
 allowing you to focus on building your dapp.
 

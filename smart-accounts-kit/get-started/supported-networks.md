@@ -5,9 +5,7 @@ description: Supported networks for Smart Accounts Kit.
 keywords: [MetaMask, smart accounts kit, supported networks, mainnet, testnet]
 ---
 
-import GlossaryTerm from '@theme/GlossaryTerm';
-
-The following tables display the networks supported by each version of the <GlossaryTerm term="Smart Accounts Kit" />.
+The following tables display the networks supported by each version of the Smart Accounts Kit.
 
 If you don't see the network you're looking for, you can request support by emailing hellogators@consensys.net.
 
