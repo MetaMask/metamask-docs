@@ -2,7 +2,7 @@
 title: "Sign-In with Solana (SIWS) - MetaMask Connect"
 sidebar_label: Sign in with Solana
 description: Implement Sign-In with Solana (SIWS) authentication in your dapp using MetaMask Connect, with domain binding and phishing protection.
-keywords: [sign in with solana, SIWS, solana authentication, domain binding, off-chain auth, metamask, solana login]
+keywords: [sign in with solana, SIWS, solana authentication, domain binding, offchain auth, metamask, solana login]
 ---
 
 # Sign in with Solana
@@ -87,6 +87,6 @@ See the [JavaScript quickstart](../../quickstart/javascript.md) for a complete w
 
 ## Next steps
 
-- [Sign messages](sign-message.md) for general-purpose off-chain signatures without domain binding.
+- [Sign messages](sign-message.md) for general-purpose offchain signatures without domain binding.
 - [Send a legacy transaction](../send-legacy-transaction.md) to transfer SOL or interact with Solana programs.
 - [MetaMask Connect Solana methods](../../reference/methods.md) for the full list of wallet-standard features.

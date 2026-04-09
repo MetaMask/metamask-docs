@@ -19,7 +19,7 @@ The following methods use a unique format depending on the transaction type:
 
 ## Legacy transactions
 
-Transactions with type `0x0` are legacy transactions that use the transaction format existing before typed transactions were introduced in [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718). They contain the parameters `nonce`, `gasPrice`, `gasLimit`, `to`, `value`, `data`, `v`, `r`, and `s`. Legacy transactions don’t use [access lists](../reference/ethereum/json-rpc-methods/eth_createaccesslist.mdx) or incorporate [EIP-1559 fee market changes](#eip-1559-transactions).
+Transactions with type `0x0` are legacy transactions that use the transaction format existing before typed transactions were introduced in [EIP-2718](https://eips.ethereum.org/EIPS/eip-2718). They contain the parameters `nonce`, `gasPrice`, `gasLimit`, `to`, `value`, `data`, `v`, `r`, and `s`. Legacy transactions don't use [access lists](../reference/ethereum/json-rpc-methods/eth_createaccesslist.mdx) or incorporate [EIP-1559 fee market changes](#eip-1559-transactions).
 
 ```js title="Legacy transaction object example"
 {
@@ -37,7 +37,7 @@ Transactions with type `0x0` are legacy transactions that use the transaction fo
 
 ## Access list transactions
 
-Transactions with type `0x1` are transactions introduced in [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930). They contain, along with the [legacy parameters](#legacy-transactions), an `accessList` parameter, which specifies an array of addresses and storage keys that the transaction plans to access (an _access list_). Access list transactions must specify an access list, and they don’t incorporate [EIP-1559 fee market changes](#eip-1559-transactions).
+Transactions with type `0x1` are transactions introduced in [EIP-2930](https://eips.ethereum.org/EIPS/eip-2930). They contain, along with the [legacy parameters](#legacy-transactions), an `accessList` parameter, which specifies an array of addresses and storage keys that the transaction plans to access (an _access list_). Access list transactions must specify an access list, and they don't incorporate [EIP-1559 fee market changes](#eip-1559-transactions).
 
 Also, access list transactions contain the `yParity` parameter. The returned values for this parameter can either be `0x0` or `0x1`. This is the parity (0 for even, 1 for odd) of the y-value of a [`secp256k1`](https://eips.ethereum.org/EIPS/eip-2098) signature.
 
@@ -69,14 +69,14 @@ Use the [`eth_createAccessList`](../reference/ethereum/json-rpc-methods/eth_crea
 
 Transactions with type `0x2` are transactions introduced in [EIP-1559](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1559.md), included in Ethereum's [London fork](https://ethereum.org/en/history/#london). EIP-1559 addresses the network congestion and overpricing of transaction fees caused by the historical fee market, in which users send transactions specifying a gas price bid using the `gasPrice` parameter, and miners choose transactions with the highest bids.
 
-EIP-1559 transactions don’t specify `gasPrice`, and instead use an in-protocol, dynamically changing _base fee_ per gas. At each block, the base fee per gas is adjusted to address network congestion as measured by a gas target.
+EIP-1559 transactions don't specify `gasPrice`, and instead use an in-protocol, dynamically changing _base fee_ per gas. At each block, the base fee per gas is adjusted to address network congestion as measured by a gas target.
 
 EIP-1559 transactions contain the [`accessList` and `yParity` parameters](transaction-types.md#access-list-transactions) and [legacy parameters](transaction-types.md#legacy-transactions) (except for `gasPrice`).
 
 They also contain a `maxPriorityFeePerGas` parameter, which specifies the maximum fee the sender is willing to pay per gas above the base fee, in order to get their transaction prioritized;
 and a `maxFeePerGas` parameter, which specifies the maximum total fee (base fee + priority fee) the sender is willing to pay per gas.
 
-An EIP-1559 transaction always pays the base fee of the block it’s included in, and it pays a priority fee as priced by `maxPriorityFeePerGas` or, if the base fee per gas + `maxPriorityFeePerGas` exceeds `maxFeePerGas`, it pays a priority fee as priced by `maxFeePerGas` minus the base fee per gas. The base fee is burned, and the priority fee is paid to the miner that included the transaction. A transaction’s priority fee per gas incentivizes miners to include the transaction over other transactions with lower priority fees per gas.
+An EIP-1559 transaction always pays the base fee of the block it's included in, and it pays a priority fee as priced by `maxPriorityFeePerGas` or, if the base fee per gas + `maxPriorityFeePerGas` exceeds `maxFeePerGas`, it pays a priority fee as priced by `maxFeePerGas` minus the base fee per gas. The base fee is burned, and the priority fee is paid to the miner that included the transaction. A transaction's priority fee per gas incentivizes miners to include the transaction over other transactions with lower priority fees per gas.
 
 ```js title="EIP-1559 transaction object example"
 {

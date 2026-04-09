@@ -6,9 +6,6 @@ description: 'What are MetaMask Embedded Wallets? Pluggable wallet infrastructur
 ---
 
 import Head from '@docusaurus/Head'
-import BrowserOnly from '@docusaurus/BrowserOnly'
-import PnPCoreKitFlowLight from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-light.png'
-import PnPCoreKitFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-dark.png'
 
 <Head>
   <meta
@@ -32,85 +29,73 @@ import PnPCoreKitFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/
   <meta name="author" content="MetaMask" />
 </Head>
 
-MetaMask Embedded Wallets (formerly Web3Auth) provides a pluggable embedded wallet infrastructure to simplify Web3 wallet integration and user onboarding. It supports OAuth-based logins and multiple platforms, allowing users to access Web3 applications through familiar authentication methods in under a minute.
+MetaMask Embedded Wallets (formerly Web3Auth) provides a pluggable embedded wallet infrastructure to
+simplify Web3 wallet integration and user onboarding. It supports OAuth-based logins and multiple
+platforms, allowing your users to access Web3 applications through familiar authentication methods.
 
-Users enjoy seamless onboarding while maintaining full control of their non-custodial wallets, ensuring both convenience and security.
+MetaMask Embedded Wallets reduces traditional wallet management overhead by removing the need
+to manage private keys and seed phrases directly.
+
+<p style={{ margin: '1.25rem 0' }}>
+  <img
+    src="/img/embedded-wallets/wallet-user-flow-comparison.svg"
+    alt="End-user steps: traditional standalone wallet versus Embedded Wallets"
+    style={{
+      display: 'block',
+      width: '100%',
+      maxWidth: 794,
+      height: 'auto',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    }}
+  />
+</p>
+
+Users get a smoother onboarding experience while retaining control of non-custodial wallets.
 
 ## Key features
 
-<BrowserOnly>
-  {() => {
-    const ModalAnim = require('@site/src/components/ModalAnim').default
-    return <ModalAnim />
-  }}
-</BrowserOnly>
+### Authentication
 
-### 🔐 Authentication made simple
+Help users get started quickly with sign-in methods they already use:
 
-Get your users started in seconds with familiar login methods they already use:
+- Sign in with Google, Twitter, GitHub, and other popular social accounts.
+- Sign in with email, SMS, and authenticator apps without passwords.
+- Bring your own auth system while using MetaMask Embedded Wallets infrastructure.
 
-- Sign in with Google, Twitter, GitHub and other popular social accounts
-- Passwordless login via email, SMS and authenticator apps.
-- Bring your own auth system while leveraging our secure wallet infrastructure
-
-### 🛡️ Bank-grade security
+### Security
 
 Enterprise-level protection for your users' digital assets:
 
-- Advanced MPC technology splits keys across multiple parties
-- Users maintain 100% control of their non-custodial wallets
-- Distributed architecture prevents single points of failure
-- Multiple backup options for worry-free recovery
+- Users maintain 100% control of their non-custodial wallets.
+- A distributed architecture prevents single points of failure.
+- Multiple recovery options support account recovery flows.
 
-### 💻 Built for developers
+### Developer experience
 
-Integrate MetaMask Embedded Wallets into your app with minimal effort:
+Integrate MetaMask Embedded Wallets into your app with minimal setup:
 
-- Drop-in solution works with your existing auth system
-- No complex migrations or infrastructure changes needed
-- Full control to customize the look and feel
-- Support for web, mobile, and gaming platforms
+- Use a drop-in solution that works with your existing auth system.
+- Avoid complex migrations or infrastructure changes.
+- Customize the look and feel.
+- Integrate on web, mobile, and gaming platforms.
 
-### 👥 Designed for users
+### User experience
 
-The smoothest path to Web3 for your users:
+Provide a low-friction path to Web3:
 
-- Get started in under 60 seconds
-- No crypto knowledge needed
-- Users own and control their wallets
-- Simple, reliable account recovery
+- Help users get started quickly.
+- Avoid requiring users to understand blockchain concepts up front.
+- Let users own and control their wallets.
+- Support account recovery flows.
 
-MetaMask Embedded Wallets (formerly Web3Auth) operate as wallet infrastructure, providing enhanced flexibility and security for decentralized applications (dapps) and blockchain wallets. Throughout this documentation, we'll explore the functionality of MetaMask Embedded Wallets, showcasing how it produces unique cryptographic key providers for each user and application.
+MetaMask Embedded Wallets provides wallet infrastructure for dapps and blockchain wallets. This
+documentation explains how it works, including how it generates cryptographic key providers for
+each user and application.
 
 ## How do Embedded Wallets work?
 
-### High-level architecture
-
-The Embedded Wallet SDKs live solely on the user/application's frontend client and handle the interactions between OAuth providers and the Embedded Wallet network.
-
-The diagram below describes the relationship between the SDKs and integrating applications. It also depicts the difference between the products that power the infrastructure for a developer-friendly integration.
-
-<picture>
-  <source srcset={PnPCoreKitFlowLight} media="(prefers-color-scheme: light)" />
-  <source srcset={PnPCoreKitFlowDark} media="(prefers-color-scheme: dark)" />
-  <img
-    src={PnPCoreKitFlowLight}
-    style={{ display: 'block', maxHeight: '600px', margin: '20px auto' }}
-    alt="This diagram describes the relationship between the Embedded Wallet SDK and integrating application"
-  />
-</picture>
-
-### Wallet management infrastructure
-
-The [wallet management infrastructure](./infrastructure/README.mdx) enhances security by distributing a user's wallet across various key shares, thereby avoiding direct exposure of seed phrases. These key shares form a 'web of trust' and enable wallet management akin to multi-factor account handling. Users employ OAuth logins, trusted devices, and other factors to manage their cryptographic key pairs. Importantly, the complete private keys are not stored anywhere within the wallet infrastructure system, including our databases or any participating nodes.
-
-To create a social login share, users interact with the Embedded Wallets network, where key generation operates via a 5/9 consensus system. This setup guarantees that wallets remain non-custodial, ensuring that neither MetaMask, social login providers, nor any other party holding a key share can claim full ownership.
-
-:::tip managing wallets
-
-For managing wallets, our infrastructure uses various cryptographic techniques such as [Shamir's Secret Sharing](./infrastructure/sss-architecture.mdx), threshold cryptography, and [Multi Party Computation (MPC)](./infrastructure/mpc-architecture.mdx). To learn more about how we manage wallets, please refer to our [Wallet Management and Security of our Infrastructure](./infrastructure/README.mdx).
-
-:::
+See **[Architecture](./architecture.mdx)** for the high-level system design, SDK and integration diagram, and wallet management infrastructure.
 
 ## Is MetaMask Embedded Wallets a wallet?
 
@@ -124,14 +109,7 @@ The MetaMask Embedded Wallets infrastructure is built to handle millions of user
 
 - Global availability across multiple regions with consistent low-latency performance worldwide
 - Automatic horizontal scaling that adjusts capacity based on demand, eliminating bottlenecks and ensuring uninterrupted service
-- Enhanced security and reliability through distributed MPC architecture, maintaining a track record of zero downtime over three years of operation
 - Enterprise-grade infrastructure running on Kubernetes orchestration for maximum reliability and performance
-
-:::note[Rebrand]
-
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
-
-:::
 
 :::tip[Start]
 

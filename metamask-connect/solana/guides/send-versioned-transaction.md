@@ -216,6 +216,6 @@ const [{ signature }] = await wallet.features['solana:signAndSendTransaction'].s
 ## Next steps
 
 - [Send a legacy transaction](send-legacy-transaction.md) for simpler transactions that don't require Address Lookup Tables.
-- [Sign messages](sign-data/sign-message.md) to verify wallet ownership or authorize off-chain actions.
+- [Sign messages](sign-data/sign-message.md) to verify wallet ownership or authorize offchain actions.
 - [MetaMask Connect Solana methods](../reference/methods.md) for the full API reference.
 - [Use the Multichain SDK](../../multichain/quickstart/javascript.md) to send transactions on both EVM and Solana from a single session.

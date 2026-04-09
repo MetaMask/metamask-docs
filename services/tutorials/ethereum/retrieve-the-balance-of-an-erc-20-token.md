@@ -54,7 +54,7 @@ Make sure to replace `<YOUR-API-KEY>` with your Infura API key.
 
 ### 4. Set the ABI
 
-You'll only use the `balanceOf` method, so you don’t need the entire ABI for ERC-20 smart contracts. In the `retrieveBalance.js` file, define the ABI for the `balanceOf` method by adding the following to the script:
+You'll only use the `balanceOf` method, so you don't need the entire ABI for ERC-20 smart contracts. In the `retrieveBalance.js` file, define the ABI for the `balanceOf` method by adding the following to the script:
 
 ```javascript
 const balanceOfABI = [

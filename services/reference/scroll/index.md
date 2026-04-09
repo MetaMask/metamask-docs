@@ -16,7 +16,7 @@ Performance issues are not expected, but they are possible as we optimize and st
 
 :::
 
-Scroll is a general-purpose zero knowledge Ethereum Virtual Machine (zkEVM) rollup that uses the EVM for off-chain computations. 
+Scroll is a general-purpose zero knowledge Ethereum Virtual Machine (zkEVM) rollup that uses the EVM for offchain computations. 
 This allows Scroll to scale the experience of Ethereum, ensuring cheaper and more accessible data while maintaining the robust security
 inherent to Ethereum.
 

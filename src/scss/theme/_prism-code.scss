@@ -5,14 +5,7 @@
  */
 code[class*='language-'],
 pre[class*='language-'] {
-  font-family:
-    'Andale Mono',
-    AndaleMono,
-    Menlo,
-    Consolas,
-    Monaco,
-    Courier New,
-    monospace;
+  font-family: var(--inline-code-font);
   line-height: 1.5;
   hyphens: none;
   color: var(--general-gray) !important;

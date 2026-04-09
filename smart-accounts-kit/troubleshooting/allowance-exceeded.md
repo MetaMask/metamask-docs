@@ -13,7 +13,7 @@ Spending limit [caveat enforcers](../concepts/delegation/caveat-enforcers.md) re
 ## Spending limit exceeded
 
 The delegation's spending limit has been fully or partially used up by previous redemptions.
-Enforcers track cumulative spending on-chain using the delegation hash as a key, and revert when
+Enforcers track cumulative spending onchain using the delegation hash as a key, and revert when
 the next transfer exceeds the allowed limit.
 
 ### Solution

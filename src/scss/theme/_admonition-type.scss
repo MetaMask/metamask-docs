@@ -56,11 +56,16 @@
   ul {
     code {
       @extend .type-heading-xxs;
-      font-family: var(--ifm-heading-font-family);
+      font-family: var(--inline-code-font);
       color: var(--ifm-alert-foreground-color);
-      padding: 0.2rem 0.7rem;
-      border-radius: 0.4rem;
-      font-size: 80% !important;
+      padding: var(--inline-code-padding);
+      background-color: var(--ifm-code-background);
+      border: none;
+      border-radius: var(--inline-code-border-radius);
+      font-size: var(--inline-code-font-size) !important;
+      font-weight: var(--inline-code-font-weight) !important;
+      position: relative !important;
+      top: var(--inline-code-baseline-nudge) !important;
     }
   }
 

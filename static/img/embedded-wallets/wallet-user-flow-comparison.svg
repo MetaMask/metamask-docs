@@ -1,0 +1,133 @@
+<!--
+  scale(0.85) about frame center (476,264); viewBox fits transformed artwork (~15% smaller, no empty margin).
+  Dark: @media (prefers-color-scheme: dark) — transparent frame (page shows through), white text.
+  As <img>, this tracks OS/browser dark mode, not the Docusaurus navbar theme if they differ.
+-->
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="79 47 794 434"
+  color-scheme="light dark"
+  role="img"
+  aria-labelledby="wf-title wf-desc"
+>
+  <title id="wf-title">Traditional standalone wallet versus Embedded Wallets end-user steps</title>
+  <desc id="wf-desc">
+    Six numbered steps for a traditional standalone wallet compared to three steps for Embedded Wallets,
+    with a vertical divider between the columns.
+  </desc>
+  <defs>
+    <style>
+      .wf-title {
+        font-family: Geist, Arial, 'Helvetica Neue', Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        fill: #121314;
+      }
+      .wf-body {
+        font-family: Geist, Arial, 'Helvetica Neue', Helvetica, sans-serif;
+        font-size: 19px;
+        font-weight: 400;
+        fill: #121314;
+      }
+      .wf-num {
+        font-family: Geist, Arial, 'Helvetica Neue', Helvetica, sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        fill: #3d065f;
+      }
+
+      .wf-frame {
+        fill: #f7f9fc;
+        stroke: #d075ff;
+        stroke-width: 2;
+      }
+
+      .wf-rule {
+        stroke: #d075ff;
+        stroke-width: 2;
+      }
+
+      .wf-step-circle {
+        fill: #eac2ff;
+        stroke: #d075ff;
+        stroke-width: 2;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .wf-frame {
+          fill: none;
+          stroke: #d075ff;
+        }
+
+        .wf-title,
+        .wf-body {
+          fill: #ffffff;
+        }
+
+        .wf-num {
+          fill: #ffffff;
+        }
+
+        .wf-rule {
+          stroke: #d075ff;
+        }
+
+        .wf-step-circle {
+          fill: #3d065f;
+          stroke: #eac2ff;
+        }
+      }
+    </style>
+  </defs>
+  <g transform="translate(476,264) scale(0.85) translate(-476,-264)">
+  <rect class="wf-frame" x="16" y="16" width="920" height="496" rx="14" ry="14" />
+  <g transform="translate(24,20)">
+    <!-- Inner coords: frame world y 16–512 → iy = wy − 20 -->
+    <line class="wf-rule" x1="460" y1="-4" x2="460" y2="492" />
+    <!-- Column headings -->
+    <text class="wf-title" x="28" y="40">Traditional standalone wallet</text>
+    <text class="wf-title" x="482" y="40">Embedded Wallets</text>
+    <!-- Spines (between circle edges) -->
+    <line class="wf-rule" x1="42" y1="112" x2="42" y2="415" />
+    <line class="wf-rule" x1="496" y1="112" x2="496" y2="214" />
+    <!-- Standalone steps -->
+    <circle cx="42" cy="96" r="16" class="wf-step-circle" />
+    <text class="wf-num" x="42" y="96" text-anchor="middle" dominant-baseline="central">1</text>
+    <text class="wf-body">
+      <tspan x="80" y="90">Download and install the wallet</tspan>
+      <tspan x="80" y="114">extension or mobile app.</tspan>
+    </text>
+    <circle cx="42" cy="163" r="16" class="wf-step-circle" />
+    <text class="wf-num" x="42" y="163" text-anchor="middle" dominant-baseline="central">2</text>
+    <text class="wf-body" x="80" y="163" dominant-baseline="central">Create a new wallet</text>
+    <circle cx="42" cy="230" r="16" class="wf-step-circle" />
+    <text class="wf-num" x="42" y="230" text-anchor="middle" dominant-baseline="central">3</text>
+    <text class="wf-body" x="80" y="230" dominant-baseline="central">Store the 12-24 word seed phrase</text>
+    <circle cx="42" cy="297" r="16" class="wf-step-circle" />
+    <text class="wf-num" x="42" y="297" text-anchor="middle" dominant-baseline="central">4</text>
+    <text class="wf-body" x="80" y="297" dominant-baseline="central">Connect the dapp and the wallet</text>
+    <circle cx="42" cy="364" r="16" class="wf-step-circle" />
+    <text class="wf-num" x="42" y="364" text-anchor="middle" dominant-baseline="central">5</text>
+    <text class="wf-body">
+      <tspan x="80" y="357">Sign the wallet request to approve</tspan>
+      <tspan x="80" y="381">the connection</tspan>
+    </text>
+    <circle cx="42" cy="431" r="16" class="wf-step-circle" />
+    <text class="wf-num" x="42" y="431" text-anchor="middle" dominant-baseline="central">6</text>
+    <text class="wf-body" x="80" y="431" dominant-baseline="central">Ready to receive wallet requests</text>
+    <!-- Embedded steps -->
+    <circle cx="496" cy="96" r="16" class="wf-step-circle" />
+    <text class="wf-num" x="496" y="96" text-anchor="middle" dominant-baseline="central">1</text>
+    <text class="wf-body">
+      <tspan x="536" y="90">Sign in using the preferred provider</tspan>
+      <tspan x="536" y="114">(Google, Facebook, etc.)</tspan>
+    </text>
+    <circle cx="496" cy="163" r="16" class="wf-step-circle" />
+    <text class="wf-num" x="496" y="163" text-anchor="middle" dominant-baseline="central">2</text>
+    <text class="wf-body" x="536" y="163" dominant-baseline="central">Approve the sign-in request</text>
+    <circle cx="496" cy="230" r="16" class="wf-step-circle" />
+    <text class="wf-num" x="496" y="230" text-anchor="middle" dominant-baseline="central">3</text>
+    <text class="wf-body" x="536" y="230" dominant-baseline="central">Ready to receive wallet requests</text>
+  </g>
+  </g>
+</svg>

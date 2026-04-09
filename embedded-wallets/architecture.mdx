@@ -1,0 +1,62 @@
+---
+title: Architecture
+sidebar_label: Architecture
+description: "How MetaMask Embedded Wallets fit together: SDK layout, integrations, and wallet management infrastructure."
+---
+
+import PnPCoreKitFlowLight from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-light.png'
+import PnPCoreKitFlowDark from '@site/static/img/embedded-wallets/flow-diagrams/pnp-core-kit-flow-dark.png'
+
+MetaMask Embedded Wallets includes front-end SDKs that run in your app and coordinate OAuth sign-in
+with the Embedded Wallets network. You use these SDKs to authenticate a user, retrieve the key
+material required for that user, and create a client that can sign requests on the user's behalf.
+
+:::note[Rebrand]
+
+The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs).
+Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+
+:::
+
+At a high level, the flow includes:
+
+1. **Your app**: Starts OAuth sign-in with the selected login provider.
+1. **Login providers**: Authenticates the user and returns an ID token.
+1. **Embedded Wallet SDK**: Submits the ID token for validation and requests the user's OAuth key share.
+1. **Core kit (tKey)**: Combines key shares to recreate the user's signing key.
+1. **Embedded Wallets network**: Validates tokens and returns the required key share.
+1. **Your app**: uses the SDK-provided client to create a wallet provider and sign requests on the
+    user's behalf.
+
+The following diagram summarizes the login flow and shows how the SDK components interact with the
+integrating app and the Embedded Wallets network.
+
+<picture>
+  <source srcset={PnPCoreKitFlowLight} media="(prefers-color-scheme: light)" />
+  <source srcset={PnPCoreKitFlowDark} media="(prefers-color-scheme: dark)" />
+  <img
+    src={PnPCoreKitFlowLight}
+    style={{ display: 'block', maxHeight: '600px', margin: '20px auto' }}
+    alt="This diagram describes the relationship between the Embedded Wallet SDK and integrating application"
+  />
+</picture>
+
+### Wallet management infrastructure
+
+The [wallet management infrastructure](./infrastructure/README.mdx) improves security by splitting a
+user's wallet into multiple key shares, which avoids direct exposure of seed phrases. Users combine
+OAuth sign-in, trusted devices, and other recovery factors to access and manage their cryptographic
+keys. The infrastructure is designed so that no single party holds the full private key.
+
+To create an OAuth login share, users interact with the Embedded Wallets network. Key generation
+uses a threshold process that requires multiple participants to contribute shares. This helps keep
+wallets non-custodial, because no single party (including MetaMask or the login provider) can use a
+single share to control the wallet.
+
+:::tip managing wallets
+
+The infrastructure uses [Shamir's Secret Sharing](./infrastructure/sss-architecture.mdx) to split and
+recover wallet keys.
+For more details, see [Wallet management infrastructure](./infrastructure/README.mdx).
+
+:::

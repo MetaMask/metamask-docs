@@ -9,7 +9,7 @@ While setting up a new Web3 project from scratch, you might face bundler issues.
 
 To rectify this, the go-to method is to add the missing modules directly into the package, and edit the bundler configuration to use those. Although this approach works, it can significantly increase bundle size, leading to slower load times and a degraded user experience. 
 
-Some libraries rely on environment-specific modules that may be available at runtime in the browser even if they are not bundled. Libraries such as Embedded Wallets’ Web3Auth take advantage of this behavior and can function correctly without bundling all modules. However, if you are using a library that does not take advantage of this , you might face issues.
+Some libraries rely on environment-specific modules that may be available at runtime in the browser even if they are not bundled. Libraries such as Embedded Wallets' Web3Auth take advantage of this behavior and can function correctly without bundling all modules. However, if you are using a library that does not take advantage of this , you might face issues.
 
 To avoid unnecessary overhead, include only the required polyfills, test functionality, and configure your bundler to ignore unresolved modules rather than including them in the final build.
 

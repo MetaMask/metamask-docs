@@ -61,7 +61,7 @@ Replace `<YOUR-API-KEY>` with your Infura API key.
 
 ### 4. Set the ABI
 
-For ERC-721 NFTs, use the `tokenURI` function, which is part of the ERC-721 standard. This function retrieves a token’s metadata so you can view it. For ERC-1155, use the `uri` method.
+For ERC-721 NFTs, use the `tokenURI` function, which is part of the ERC-721 standard. This function retrieves a token's metadata so you can view it. For ERC-1155, use the `uri` method.
 
 Note the `tokenURI` and `uri` methods are optional for contracts. However, these methods are the only standardized onchain way of seeing NFT metadata without using a third-party API.
 
