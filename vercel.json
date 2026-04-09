@@ -583,6 +583,14 @@
       "destination": "/services/get-started/infura/"
     },
     {
+      "source": "/services/reference/swellchain/",
+      "destination": "/services/reference/"
+    },
+    {
+      "source": "/services/reference/swellchain/:path*/",
+      "destination": "/services/reference/"
+    },
+    {
       "source": "/services/reference/:path*/json-rpc-methods/eth_coinbase/",
       "destination": "/services/get-started/infura/"
     },
