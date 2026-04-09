@@ -188,8 +188,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 Set up a Viem client depending on your session account type.
 
-For a smart account, set up a <GlossaryTerm term="Bundler" >Bundler Client</GlossaryTerm> using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
-This lets you use the bundler service 
+For a smart account, set up a Bundler Client using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
+This lets you use the <GlossaryTerm term="Bundler">bundler</GlossaryTerm> service
 to estimate gas for user operations and submit transactions to the network.
 
 For an EOA, set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function.

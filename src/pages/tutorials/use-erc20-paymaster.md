@@ -70,8 +70,8 @@ const paymasterClient = createPaymasterClient({
 
 ### 4. Set up a Bundler Client
 
-Set up a <GlossaryTerm term="Bundler" >Bundler Client</GlossaryTerm> using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
-You can use the bundler service to estimate gas for user operations and submit transactions to the network.
+Set up a Bundler Client using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
+You can use the <GlossaryTerm term="Bundler">bundler</GlossaryTerm> service to estimate gas for user operations and submit transactions to the network.
 
 To use the ERC-20 paymaster, configure the `paymasterContext` with the ERC-20 token you wish to use to pay for gas fees.
 For this tutorial, specify the Sepolia USDC token address.

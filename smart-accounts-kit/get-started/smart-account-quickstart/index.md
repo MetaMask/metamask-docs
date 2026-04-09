@@ -43,8 +43,8 @@ const publicClient = createPublicClient({
 
 ### 3. Set up a Bundler Client
 
-Set up a <GlossaryTerm term="Bundler" >Bundler Client</GlossaryTerm> using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
-This lets you use the bundler service to estimate gas for <GlossaryTerm term="User operation">user operations</GlossaryTerm> and submit transactions to the network.
+Set up a Bundler Client using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
+This lets you use the <GlossaryTerm term="Bundler">bundler</GlossaryTerm> service to estimate gas for <GlossaryTerm term="User operation">user operations</GlossaryTerm> and submit transactions to the network.
 
 ```typescript
 import { createBundlerClient } from "viem/account-abstraction";

@@ -114,8 +114,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
 ### 2. Set up a Bundler Client
 
-Set up a <GlossaryTerm term="Bundler" >Bundler Client</GlossaryTerm> using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
-You can use the bundler service to estimate gas for user operations and submit transactions to the network.
+Set up a Bundler Client using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
+You can use the <GlossaryTerm term="Bundler">bundler</GlossaryTerm> service to estimate gas for user operations and submit transactions to the network.
 
 Set `paymaster` to `true` to use the Pimlico <GlossaryTerm term="Paymaster">paymaster</GlossaryTerm> with the Bundler Client, and replace `<YOUR-API-KEY>` with your Pimlico API key:
 
