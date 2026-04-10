@@ -24,6 +24,7 @@
           ]
         },
         "get-started/use-the-cli",
+        "get-started/use-with-openclaw",
         {
           "type": "category",
           "label": "Use Scaffold-ETH 2",
@@ -38,7 +39,8 @@
           "label": "LLM context",
           "href": "https://docs.metamask.io/llms-smart-accounts-kit-full.txt"
         },
-        "get-started/supported-networks"
+        "get-started/supported-networks",
+        "get-started/supported-advanced-permissions"
       ]
     },
     {
@@ -56,7 +58,23 @@
             "guides/smart-accounts/deploy-smart-account",
             "guides/smart-accounts/send-user-operation",
             "guides/smart-accounts/send-gasless-transaction",
-            "guides/smart-accounts/generate-multisig-signature"
+            "guides/smart-accounts/generate-multisig-signature",
+            {
+              "type": "category",
+              "label": "Configure signers",
+              "link": {
+                "type": "doc",
+                "id": "guides/smart-accounts/signers/index"
+              },
+              "collapsed": true,
+              "items": [
+                "guides/smart-accounts/signers/dynamic",
+                "guides/smart-accounts/signers/embedded-wallets",
+                "guides/smart-accounts/signers/eoa-wallets",
+                "guides/smart-accounts/signers/passkey",
+                "guides/smart-accounts/signers/privy"
+              ]
+            }
           ]
         },
         {
@@ -101,7 +119,10 @@
                 "guides/advanced-permissions/use-permissions/erc20-token",
                 "guides/advanced-permissions/use-permissions/native-token"
               ]
-            }
+            },
+            "guides/advanced-permissions/get-supported-permissions",
+            "guides/advanced-permissions/get-granted-permissions",
+            "guides/advanced-permissions/create-redelegation"
           ]
         }
       ]
@@ -119,9 +140,11 @@
           "key": "delegation-concepts",
           "link": {
             "type": "doc",
-            "id": "concepts/delegation/index"
+            "id": "concepts/delegation/overview"
           },
           "items": [
+            "concepts/delegation/delegation-scopes",
+            "concepts/delegation/delegation-manager",
             "concepts/delegation/caveat-enforcers"
           ]
         },
@@ -161,6 +184,7 @@
       "collapsed": true,
       "items": [
         "reference/smart-account",
+        "reference/types",
         {
           "type": "category",
           "label": "Delegation",
@@ -183,10 +207,32 @@
           "key": "advanced-permissions-reference",
           "items": [
             "reference/advanced-permissions/permissions",
-            "reference/advanced-permissions/wallet-client",
-            "reference/advanced-permissions/bundler-client"
+            "reference/advanced-permissions/wallet-client"
+          ]
+        },
+        {
+          "type": "category",
+          "label": "ERC-7710",
+          "collapsed": true,
+          "items": [
+            "reference/erc7710/wallet-client",
+            "reference/erc7710/bundler-client"
           ]
         }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Troubleshooting",
+      "collapsed": true,
+      "items": [
+        "troubleshooting/aa21-prefund",
+        "troubleshooting/allowance-exceeded",
+        "troubleshooting/error-codes",
+        "troubleshooting/invalid-delegate",
+        "troubleshooting/invalid-delegator",
+        "troubleshooting/invalid-signature",
+        "troubleshooting/user-operation-reverted"
       ]
     },
     {
@@ -194,6 +240,9 @@
       "label": "Changelog",
       "collapsed": false,
       "items": [
+        "changelog/1.1.0",
+        "changelog/1.0.0",
+        "changelog/0.3.0",
         "changelog/0.2.0"
       ]
     }
