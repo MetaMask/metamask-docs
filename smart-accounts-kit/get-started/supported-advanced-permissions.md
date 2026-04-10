@@ -4,8 +4,10 @@ description: Supported Advanced Permissions for Smart Accounts Kit, MetaMask Fla
 keywords: [MetaMask, smart accounts kit, supported advanced permissions, erc-7715, 7715]
 ---
 
-The following table displays the Advanced Permissions types supported by the 
-Smart Accounts Kit, [MetaMask Flask](/snaps/get-started/install-flask), and MetaMask production, and the minimum version required for each.
+import GlossaryTerm from '@theme/GlossaryTerm';
+
+The following table displays the <GlossaryTerm term="Advanced Permissions" /> types supported by
+the Smart Accounts Kit, [MetaMask Flask](/snaps/get-started/install-flask), and MetaMask production, and the minimum version required for each.
 
 If you don't see the Advanced Permissions type you're looking for, you can request it by 
 emailing [hellogators@consensys.net](mailto:hellogators@consensys.net).

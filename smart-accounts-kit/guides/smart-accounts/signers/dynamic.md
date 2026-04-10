@@ -4,11 +4,13 @@ sidebar_label: Dynamic
 keywords: [dynamic, smart account, signer, metamask smart account]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Use Dynamic with MetaMask Smart Accounts
 
 [Dynamic](https://www.dynamic.xyz/) is an embedded wallet solution that enables seamless social login and passkey based
 wallets, making user onboarding easier. MetaMask Smart Accounts is a signer-agnostic implementation
-that allows you to use Dynamic's EOA wallet as a signer for MetaMask Smart Accounts.
+that allows you to use Dynamic's EOA wallet as a signer for <GlossaryTerm term="MetaMask smart account">smart accounts</GlossaryTerm>.
 
 <!--
 View the complete code for this guide in the [`gator-examples`](https://github.com/MetaMask/gator-examples/tree/main/examples/smart-accounts/signers/dynamic) repository.
@@ -105,7 +107,7 @@ export const wagmiConfig = createConfig({
 ### 3. Create a smart account
 
 Once the user has connected their wallet, use the [Wallet Client](https://viem.sh/docs/clients/wallet) from Wagmi as the signer to create a
-MetaMask smart account.
+<GlossaryTerm term="MetaMask smart account" />.
 
 ```ts
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";

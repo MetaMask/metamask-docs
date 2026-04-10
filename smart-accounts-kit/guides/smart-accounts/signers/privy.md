@@ -4,10 +4,12 @@ sidebar_label: Privy
 keywords: [privy, smart account, signer, metamask smart account]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Use Privy with MetaMask Smart Accounts
 
 [Privy](https://docs.privy.io/welcome) provides an embedded wallet solution that enables seamless social login for Web3 applications making user onboarding easier. MetaMask Smart Accounts is a signer-agnostic implementation
-that allows you to use Privy's EOA wallet as a signer for MetaMask Smart Accounts.
+that allows you to use Privy's <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> wallet as a signer for <GlossaryTerm term="MetaMask smart account">smart accounts</GlossaryTerm>.
 
 :::info
 This guide supports React and React-based frameworks.
@@ -39,7 +41,7 @@ provider enables you to use Wagmi hooks with Privy.
 Once you have created the `PrivyAppProvider`, you must wrap it at the root of your application so
 that the rest of your application has access to the Privy's context. 
 
-For the advance configuration, see Privy's [configuring appearance](https://docs.privy.io/basics/get-started/dashboard/configuring-appearance) and [configuring login methods](https://docs.privy.io/basics/get-started/dashboard/configure-login-methods) guide.
+For an advanced configuration, see Privy's [configuring appearance](https://docs.privy.io/basics/get-started/dashboard/configuring-appearance) and [configuring login methods](https://docs.privy.io/basics/get-started/dashboard/configure-login-methods) guides.
 
 <Tabs>
 <TabItem value = "provider.ts">
@@ -92,7 +94,7 @@ export const wagmiConfig = createConfig({
 ### 3. Create a smart account
 
 Once the user has connected their wallet, use the [Wallet Client](https://viem.sh/docs/clients/wallet) from Wagmi as the signer to create a
-MetaMask smart account.
+<GlossaryTerm term="MetaMask smart account" />.
 
 ```ts
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";

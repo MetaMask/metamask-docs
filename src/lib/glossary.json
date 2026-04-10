@@ -1,0 +1,101 @@
+{
+  "description": "Technical terms used in our documentation",
+  "terms": [
+    {
+      "term": "Account abstraction",
+      "definition": "A conceptual model for programmable onchain accounts, including flexible validation logic, custom signature schemes, and gas abstraction. ERC-4337 defines a mechanism for account abstraction."
+    },
+    {
+      "term": "Advanced Permissions",
+      "definition": "Fine-grained, wallet execution permissions that dapps can request from MetaMask extension users. Based on ERC-7715."
+    },
+    {
+      "term": "Bundler",
+      "definition": "An ERC-4337 component that manages the alternate mempool: it collects user operations from smart accounts, packages them, and submits them to the network."
+    },
+    {
+      "term": "Caveat",
+      "definition": "A restriction attached to a delegation that limits how delegated authority can be used."
+    },
+    {
+      "term": "Caveat enforcer",
+      "definition": "A smart contract that enforces delegation rules by validating caveat conditions during redemption hooks."
+    },
+    {
+      "term": "Delegate account",
+      "definition": "The account that receives delegated authority and can redeem a delegation under its constraints."
+    },
+    {
+      "term": "Delegation",
+      "definition": "The ability for a MetaMask smart account to authorize another account to perform specific executions on its behalf."
+    },
+    {
+      "term": "Delegation Framework",
+      "definition": "A set of audited smart contracts that handle smart account creation, the delegation lifecycle, and caveat enforcement."
+    },
+    {
+      "term": "Delegation Manager",
+      "definition": "The ERC-7710 component that validates and redeems delegations, including signature checks and caveat enforcer hooks."
+    },
+    {
+      "term": "Delegation scope",
+      "definition": "A predefined authority pattern representing a caveat or group of caveats, which sets the initial actions a delegate is allowed to perform. You can combine scopes with additional caveats."
+    },
+    {
+      "term": "Delegator account",
+      "definition": "The account that creates and signs a delegation to grant limited authority to another account."
+    },
+    {
+      "term": "EIP-7702 smart account",
+      "definition": "A stateless MetaMask smart account implementation that represents an upgraded EOA."
+    },
+    {
+      "term": "Externally owned account (EOA)",
+      "definition": "A private-key-controlled account with no built-in programmable execution logic."
+    },
+    {
+      "term": "Hybrid smart account",
+      "definition": "A smart account implementation that supports both an EOA owner and passkey signers."
+    },
+    {
+      "term": "MetaMask smart account",
+      "definition": "A smart contract account created using the Smart Accounts Kit that supports programmable behavior, flexible signing options, and ERC-7710 delegations."
+    },
+    {
+      "term": "Multisig smart account",
+      "definition": "A smart account implementation that requires multiple signers to generate a valid signature."
+    },
+    {
+      "term": "Open delegation",
+      "definition": "A delegation that leaves the delegate unspecified, allowing any account to redeem it."
+    },
+    {
+      "term": "Open redelegation",
+      "definition": "A redelegation with no specific delegate, allowing any account to redeem inherited permissions."
+    },
+    {
+      "term": "Passkey",
+      "definition": "A cryptographic key that can be used to sign transactions instead of a private key."
+    },
+    {
+      "term": "Paymaster",
+      "definition": "A service that pays for user operations on behalf of a smart account."
+    },
+    {
+      "term": "Redelegation",
+      "definition": "A delegation that passes on authority granted by a previous delegation."
+    },
+    {
+      "term": "Root delegation",
+      "definition": "The first delegation in a chain, where an account delegates its own authority directly."
+    },
+    {
+      "term": "Signer",
+      "definition": "An account that can sign transactions for a smart account."
+    },
+    {
+      "term": "User operation",
+      "definition": "A pseudo-transaction object defined by ERC-4337 that describes what a smart account should execute. User operations are submitted to the alternate mempool managed by bundlers."
+    }
+  ]
+}

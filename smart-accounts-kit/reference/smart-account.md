@@ -7,6 +7,7 @@ keywords: [smart accounts, API, methods, reference]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # MetaMask Smart Accounts API reference
 
@@ -470,7 +471,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
 
 ## `signUserOperation`
 
-Signs a user operation with the `MetaMaskSmartAccount` signer. The Delegation
+Signs a <GlossaryTerm term="User operation">user operation</GlossaryTerm> with the `MetaMaskSmartAccount` signer. The Delegation
 Toolkit uses Viem under the hood to provide this functionality.
 
 ### Parameters
@@ -538,7 +539,7 @@ Creates a `MetaMaskSmartAccount` instance.
 | Name | Type                                                | Required                                                     | Description                                                                                                                                                                       |
 | ---- |-----------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `client` | `Client`                                            | Yes                                                          | Viem Client to retrieve smart account data.                                                                                                                                       |
-| `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be Hybrid, Multisig, or Stateless7702.                                                                                                             |
+| `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be <GlossaryTerm term="Hybrid smart account">`Hybrid`</GlossaryTerm>, <GlossaryTerm term="Multisig smart account">`Multisig`</GlossaryTerm>, or <GlossaryTerm term="EIP-7702 smart account">`Stateless7702`</GlossaryTerm>.                                                                                                             |
 | `signer` | `SignerConfigByImplementation <TImplementation>` | No | Signer for the smart account. Can be a Viem Account, Viem Wallet Client, or a WebAuthn Account. WebAuthn accounts are only supported for Hybrid implementations. If omitted, non-signing operations still work, but signing operations such as `signUserOperation`, `signDelegation`, `signMessage`, and `signTypedData` will throw an error. |
 | `environment` | [`SmartAccountsEnvironment`](./types.md#smartaccountsenvironment)                              | No                                                           | Environment to resolve the smart contracts.                                                                                                                                       |
 | `deployParams` | `DeployParams<TImplementation>`                     | Required if `address` is not provided                        | The parameters that will be used to deploy the smart account and generate its deterministic address.                                                                              |

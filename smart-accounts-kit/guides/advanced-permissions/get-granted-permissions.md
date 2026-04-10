@@ -6,11 +6,12 @@ keywords: [advanced permissions, granted execution permissions, erc-7715, 7715]
 
 import Tabs from "@theme/Tabs"; 
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Get granted permissions
 
 [ERC-7715](https://eip.tools/eip/7715) defines an RPC method that returns the granted execution permissions
-for a wallet. Use the method to get the granted Advanced Permissions for a wallet. 
+for a wallet. Use the method to get the granted <GlossaryTerm term="Advanced Permissions" /> for a wallet. 
 
 
 ## Prerequisites

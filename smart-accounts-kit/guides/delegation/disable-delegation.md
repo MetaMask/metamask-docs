@@ -7,6 +7,7 @@ keywords: [delegation, disable, revoke]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Disable a delegation
 
@@ -29,7 +30,7 @@ delegation, the transaction will revert, preventing him from spending Alice's US
 
 To disable a delegation, you can use the [`disableDelegation`](../../reference/delegation/index.md#disabledelegation) utility function from the 
 toolkit to generate calldata. Once the calldata is prepared, you can send it to the
-Delegation Manager to disable the delegation. 
+<GlossaryTerm term="Delegation Manager" /> to disable the delegation. 
 
 <Tabs>
 <TabItem value="example.ts">

@@ -1,0 +1,77 @@
+.glossaryTermWrapper {
+  position: relative;
+  display: inline;
+}
+
+.glossaryTerm {
+  color: var(--ifm-font-color-base);
+  text-decoration: underline dotted !important;
+  cursor: help;
+  transition: all 0.2s;
+  font-weight: normal !important;
+}
+
+.glossaryTerm:hover {
+  color: var(--ifm-color-primary-dark);
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  padding: 0.75rem 1rem;
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-font-color-base);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 1.4rem;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  line-height: 1.8rem;
+  white-space: normal;
+  max-width: 400px;
+  min-width: 200px;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  visibility: hidden;
+}
+
+.tooltipFloating {
+  position: fixed;
+  bottom: auto;
+  transform: none;
+  left: 0; /* overridden inline */
+  top: 0; /* overridden inline */
+}
+
+.tooltipVisible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.tooltip strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--ifm-color-primary);
+}
+
+/* Dark mode adjustments */
+[data-theme='dark'] .tooltip {
+  background: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tooltip {
+    max-width: 250px;
+    min-width: 180px;
+    font-size: 0.8rem;
+  }
+}

@@ -6,11 +6,13 @@ keywords: [configure, smart accounts kit, bundler, paymaster, smart accounts env
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Configure the Smart Accounts Kit
 
-The Smart Accounts Kit is highly configurable, providing support for custom [bundlers and paymasters](#configure-the-bundler).
-You can also configure the [toolkit environment](#optional-configure-the-toolkit-environment) to interact with the [Delegation Framework](../concepts/delegation/overview.md#delegation-framework).
+The Smart Accounts Kit is highly configurable, providing support for custom <GlossaryTerm term="Bundler">bundlers</GlossaryTerm> and <GlossaryTerm term="Paymaster">paymasters</GlossaryTerm>.
+You can also configure the toolkit environment to interact with the
+<GlossaryTerm term="Delegation Framework" />.
 
 ## Prerequisites
 
@@ -18,7 +20,7 @@ You can also configure the [toolkit environment](#optional-configure-the-toolkit
 
 ## Configure the bundler
 
-The toolkit uses Viem's Account Abstraction API to configure custom bundlers and paymasters.
+The toolkit uses Viem's Account Abstraction API to configure custom <GlossaryTerm term="Bundler">bundlers</GlossaryTerm> and <GlossaryTerm term="Paymaster">paymasters</GlossaryTerm>.
 This provides a robust and flexible foundation for creating and managing [MetaMask Smart Accounts](../concepts/smart-accounts.md).
 See Viem's [account abstraction documentation](https://viem.sh/account-abstraction) for more information on the API's features, methods, and best practices.
 
@@ -52,7 +54,7 @@ Replace the bundler and paymaster URLs with your bundler and paymaster endpoints
 For example, you can use endpoints from [Pimlico](https://docs.pimlico.io/references/bundler), [Infura](/services), or [ZeroDev](https://docs.zerodev.app/meta-infra/intro).
 
 :::note
-Providing a paymaster is optional when configuring your bundler client. However, if you choose not to use a paymaster, the smart contract account must have enough funds to pay gas fees.
+Providing a paymaster is optional when configuring your bundler client. However, if you choose not to use a paymaster, the smart account must have enough funds to pay gas fees.
 :::
 
 ## (Optional) Configure the toolkit environment
@@ -66,7 +68,7 @@ It serves several key purposes:
 
 ### Resolve the environment
 
-When you create a [MetaMask smart account](../concepts/smart-accounts.md), the toolkit automatically
+When you create a <GlossaryTerm term="MetaMask smart account" />, the toolkit automatically
 resolves the environment based on the version it requires and the chain configured.
 If no environment is found for the specified chain, it throws an error.
 
@@ -118,8 +120,8 @@ See the changelog of the toolkit version you are using (in the left sidebar) for
 :::
 
 Alternatively, you can use the [`getSmartAccountsEnvironment`](../reference/delegation/index.md#getsmartaccountsenvironment) function to resolve the environment.
-This function is especially useful if your delegator is not a smart account when
-creating a [redelegation](../concepts/delegation/overview.md#delegation-types).
+This function is especially useful if your <GlossaryTerm term="Delegator account">delegator</GlossaryTerm> is not a smart account when
+creating a <GlossaryTerm term="Redelegation">redelegation</GlossaryTerm>.
 
 ```typescript
 import { 
@@ -134,7 +136,7 @@ const environment: SmartAccountsEnvironment = getSmartAccountsEnvironment(sepoli
 
 ### Deploy a custom environment
 
-You can deploy the contracts using any method, but the toolkit provides a convenient [`deploySmartAccountsEnvironment`](../reference/delegation/index.md#deploysmartaccountsenvironment) function. This function simplifies deploying the Delegation Framework contracts to your desired EVM chain.
+You can deploy the contracts using any method, but the toolkit provides a convenient [`deploySmartAccountsEnvironment`](../reference/delegation/index.md#deploysmartaccountsenvironment) function. This function simplifies deploying the <GlossaryTerm term="Delegation Framework" /> contracts to your desired EVM chain.
 
 This function requires a Viem [Public Client](https://viem.sh/docs/clients/public), [Wallet Client](https://viem.sh/docs/clients/wallet), and [Chain](https://viem.sh/docs/glossary/types#chain)
 to deploy the contracts and resolve the `SmartAccountsEnvironment`. 
@@ -274,6 +276,6 @@ overrideDeployedEnvironment(
 ```
 
 :::note
-Make sure to specify the Delegation Framework version required by the toolkit.
+Make sure to specify the <GlossaryTerm term="Delegation Framework" /> version required by the toolkit.
 See the changelog of the toolkit version you are using (in the left sidebar) for its required Framework version.
 :::

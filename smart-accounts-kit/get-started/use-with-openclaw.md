@@ -7,17 +7,18 @@ keywords: [openclaw, skill, delegation, smart accounts, ai, metamask smart accou
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Use the Smart Accounts Kit with OpenClaw
 
 Use the MetaMask Smart Accounts Kit [OpenClaw skills](https://docs.openclaw.ai/tools/skills) to interact with the Smart Accounts Kit using natural language prompts.
 
 [OpenClaw](https://openclaw.ai/) is an open-source platform for AI agents that enables you to build, deploy, and
-manage AI assistants with access to various tools and skills. The Smart Accounts Kit provides the below two skills.
+manage AI assistants with access to various tools and skills. The Smart Accounts Kit provides the following two skills.
 
 ## Gator CLI skill
 
-This skill enables your agent to grant, redeem, inspect and revoke ERC-7710 delegations using the [`@metamask/gator-cli`](https://www.npmjs.com/package/@metamask/gator-cli) package.
+This skill enables your agent to grant, redeem, inspect, and revoke ERC-7710 <GlossaryTerm term="Delegation">delegations</GlossaryTerm> using the [`@metamask/gator-cli`](https://www.npmjs.com/package/@metamask/gator-cli) package.
 
 :::warning Alpha version
 

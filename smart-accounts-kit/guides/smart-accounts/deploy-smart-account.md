@@ -5,11 +5,12 @@ keywords: [deploy, smart account, user operation]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Deploy a smart account
 
-You can deploy MetaMask Smart Accounts in two different ways. You can either deploy a smart account automatically when sending 
-the first user operation, or manually deploy the account.
+You can deploy [MetaMask Smart Accounts](../../concepts/smart-accounts.md) in two different ways. You can either deploy a smart account automatically when sending 
+the first <GlossaryTerm term="User operation">user operation</GlossaryTerm>, or manually deploy the account.
 
 ## Prerequisites
 
@@ -94,7 +95,7 @@ method from the smart account to retrieve the `factory` and `factoryData`. This 
 The `factory` represents the contract address responsible for deploying the smart account, while `factoryData` contains the 
 calldata that will be executed by the `factory` to deploy the smart account. 
 
-The relay account can be either an externally owned account (EOA) or another smart account. This example uses an EOA.
+The relay account can be either an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> or another smart account. This example uses an EOA.
 
 <Tabs>
 <TabItem value="example.ts">

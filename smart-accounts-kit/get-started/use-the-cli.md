@@ -4,6 +4,8 @@ sidebar_label: Use the CLI
 keywords: [CLI, delegation, smart accounts, template]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Use the Smart Accounts Kit CLI
 
 Use the `@metamask/create-gator-app` interactive CLI to bootstrap a project with the Smart Accounts Kit in under two minutes. 
@@ -49,14 +51,14 @@ The CLI provides the following options to display CLI details, and further custo
 | `-v` or `--version` | Check the current version of the `@metamask/create-gator-app` CLI.                                                                                                    |
 | `-h` or `--help`    | Display the available options.                                                                                                                              |
 | `--skip-install`    | Skip the installation of dependencies.                                                                                                                      |
-| `--add-web3auth` | Add [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets) as a signer for the delegator account.<br/>Supported templates:<br/>- MetaMask Smart Accounts Starter<br/>- MetaMask Smart Accounts & Delegation Starter |
+| `--add-web3auth` | Add [MetaMask Embedded Wallets (previously Web3Auth)](/embedded-wallets) as a <GlossaryTerm term="Signer">signer</GlossaryTerm> for the <GlossaryTerm term="Delegator account">delegator account</GlossaryTerm>.<br/><br/>Supported templates:<br/>- MetaMask Smart Accounts Starter<br/>- MetaMask Smart Accounts & Delegation Starter |
 
 ## Examples
 
 ### MetaMask Embedded Wallets configuration
 
-To create a project that uses [MetaMask Embedded Wallets](/embedded-wallets) as the signer for your delegator 
-account, use the `--add-web3auth` option with `@metamask/create-gator-app`:
+To create a project that uses [MetaMask Embedded Wallets](/embedded-wallets) as the <GlossaryTerm term="Signer">signer</GlossaryTerm> for your 
+<GlossaryTerm term="Delegator account">delegator account</GlossaryTerm>, use the `--add-web3auth` option with `@metamask/create-gator-app`:
 
 ```bash
 npx @metamask/create-gator-app --add-web3auth

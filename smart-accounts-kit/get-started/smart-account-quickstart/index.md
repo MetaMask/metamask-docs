@@ -4,9 +4,11 @@ sidebar_label: Smart account quickstart
 keywords: [quickstart, smart accounts, user operation]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # MetaMask Smart Accounts quickstart
 
-You can get started quickly with [MetaMask Smart Accounts](../../concepts/smart-accounts.md) by creating your first smart account and sending a user operation.
+You can get started quickly with [MetaMask Smart Accounts](../../concepts/smart-accounts.md) by creating your first <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> and sending a <GlossaryTerm term="User operation">user operation</GlossaryTerm>.
 
 ## Prerequisites
 
@@ -26,7 +28,8 @@ npm install @metamask/smart-accounts-kit
 
 ### 2. Set up a Public Client
 
-Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. This client will let the smart account query the signer's account state and interact with the blockchain network.
+Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function.
+This client will let the smart account query the signer's account state and interact with the blockchain network.
 
 ```typescript
 import { createPublicClient, http } from "viem";
@@ -40,7 +43,8 @@ const publicClient = createPublicClient({
 
 ### 3. Set up a Bundler Client
 
-Set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function. This lets you use the bundler service to estimate gas for user operations and submit transactions to the network.
+Set up a Bundler Client using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
+This lets you use the <GlossaryTerm term="Bundler">bundler</GlossaryTerm> service to estimate gas for <GlossaryTerm term="User operation">user operations</GlossaryTerm> and submit transactions to the network.
 
 ```typescript
 import { createBundlerClient } from "viem/account-abstraction";
@@ -53,10 +57,10 @@ const bundlerClient = createBundlerClient({
 
 ### 4. Create a MetaMask smart account
 
-[Create a MetaMask smart account](../../guides/smart-accounts/create-smart-account.md) to send the first user operation.
+Create a <GlossaryTerm term="MetaMask smart account" /> to send the first <GlossaryTerm term="User operation">user operation</GlossaryTerm>.
 
 This example configures a Hybrid smart account,
-which is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers:
+which is a flexible smart account implementation that supports both an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> owner and any number of <GlossaryTerm term="Passkey">passkey</GlossaryTerm> (WebAuthn) signers:
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
@@ -73,11 +77,11 @@ const smartAccount = await toMetaMaskSmartAccount({
 });
 ```
 
+See [Create a MetaMask smart account](../../guides/smart-accounts/create-smart-account.md) to learn how to configure different smart account types.
+
 ### 5. Send a user operation
 
-Send a user operation using Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
-
-See [Send a user operation](../../guides/smart-accounts/send-user-operation.md) to learn how to estimate fee per gas, and wait for the transaction receipt.
+Send a <GlossaryTerm term="User operation">user operation</GlossaryTerm> using Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
 
 The smart account will remain counterfactual until the first user operation. If the smart account is not 
 deployed, it will be automatically deployed upon the sending first user operation.
@@ -101,6 +105,8 @@ const userOperationHash = await bundlerClient.sendUserOperation({
   maxPriorityFeePerGas,
 });
 ```
+
+See [Send a user operation](../../guides/smart-accounts/send-user-operation.md) to learn how to estimate fee per gas, and wait for the transaction receipt.
 
 ## Next steps
 

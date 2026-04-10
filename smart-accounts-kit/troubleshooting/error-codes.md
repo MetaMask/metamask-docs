@@ -4,6 +4,8 @@ sidebar_label: Error codes
 keywords: [error codes, errors, debug, error references, delegation framework]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Error codes
 
 The following tables describe error codes from the [MetaMask Delegation Framework contracts](https://github.com/metamask/delegation-framework). Use a decoder such as 
@@ -13,8 +15,8 @@ The following tables describe error codes from the [MetaMask Delegation Framewor
 
 | Error code | Error name | Description |
 | ---------- | ---------- | ----------- |
-| `0xb5863604` | `InvalidDelegate()` | The caller is not the delegate specified in the delegation. [Troubleshoot an invalid delegate.](./invalid-delegate.md) |
-| `0xb9f0f171` | `InvalidDelegator()` | The caller is not the delegator specificed in the delegation. [Troubleshoot an invalid delegator.](./invalid-delegator.md) |
+| `0xb5863604` | `InvalidDelegate()` | The caller is not the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> specified in the delegation. [Troubleshoot an invalid delegate.](./invalid-delegate.md) |
+| `0xb9f0f171` | `InvalidDelegator()` | The caller is not the <GlossaryTerm term="Delegator account">delegator</GlossaryTerm> specificed in the delegation. [Troubleshoot an invalid delegator.](./invalid-delegator.md) |
 | `0x05baa052` | `CannotUseADisabledDelegation()` | The delegation has been disabled by the delegator. |
 | `0xded4370e` | `InvalidAuthority()` | The delegation chain authority validation failed. The authority hash of a child delegation does not match the hash of its parent delegation. |
 | `0x1bcaf69f` | `BatchDataLengthMismatch()` | The array lengths do not match in a batch `redeemDelegations` contract call. |
@@ -23,7 +25,7 @@ The following tables describe error codes from the [MetaMask Delegation Framewor
 | `0xf645eedf` | `ECDSAInvalidSignature()` | Invalid ECDSA signature format. |
 | `0xfce698f7` | `ECDSAInvalidSignatureLength(uint256)` | The ECDSA signature length is incorrect. |
 | `0xac241e11` | `EmptySignature()` | The signature is empty. |
-| `0xd93c0665` | `EnforcedPause()` | The Delegation Manager contract is paused by the owner. |
+| `0xd93c0665` | `EnforcedPause()` | The <GlossaryTerm term="Delegation Manager" /> contract is paused by the owner. |
 | `0x3db6791c` | `InvalidEOASignature()` | EOA signature verification failed. [Troubleshoot an invalid EOA signature.](./invalid-signature.md) |
 | `0x155ff427` | `InvalidERC1271Signature()` | Smart contract signature (ERC-1271) verification failed. |
 | `0x118cdaa7` | `OwnableUnauthorizedAccount(address)` | An unauthorized account attempted an owner only action. |
@@ -37,7 +39,7 @@ The following tables describe error codes from the [MetaMask Delegation Framewor
 | ---------- | ---------- | ----------- |
 | `0xd663742a` | `NotEntryPoint()` | The caller is not the EntryPoint contract. |
 | `0x0796d945` | `NotEntryPointOrSelf()` | The caller is neither the EntryPoint contract nor the smart account itself. |
-| `0x1a4b3a04` | `NotDelegationManager()` | The caller is not the DelegationManager contract. |
+| `0x1a4b3a04` | `NotDelegationManager()` | The caller is not the <GlossaryTerm term="Delegation Manager" /> contract. |
 | `0xb96fcfe4` | `UnsupportedCallType(bytes1)` | The execution call type is not supported. |
 | `0x1187dc06` | `UnsupportedExecType(bytes1)` | The execution type is not supported. |
 | `0x29c3b7ee` | `NotSelf()` | The caller is not the smart account itself. |

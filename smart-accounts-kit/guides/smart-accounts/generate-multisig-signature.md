@@ -5,12 +5,13 @@ keywords: [generate, multsig, signature, smart account]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Generate a multisig signature
 
 The Smart Accounts Kit supports [Multisig smart accounts](../../concepts/smart-accounts.md#multisig-smart-account),
-allowing you to add multiple externally owned accounts (EOA) 
-signers with a configurable execution threshold. When the threshold 
+allowing you to add multiple <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm>
+<GlossaryTerm term="Signer">signers</GlossaryTerm> with a configurable execution threshold. When the threshold 
 is greater than 1, you can collect signatures from the required signers 
 and use the [`aggregateSignature`](../../reference/smart-account.md#aggregatesignature) function to combine them 
 into a single aggregated signature.
