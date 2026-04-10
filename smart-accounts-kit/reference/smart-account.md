@@ -229,6 +229,12 @@ export const smartAccount = await toMetaMaskSmartAccount({
 
 Returns the nonce for a smart account.
 
+### Parameters
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| `key` | `bigint` | No | The nonce key to retrieve the nonce. Different keys maintain independent nonce sequences, enabling parallel user operation execution. |
+
 ### Example
 
 <Tabs>
@@ -538,6 +544,7 @@ Creates a `MetaMaskSmartAccount` instance.
 | `deployParams` | `DeployParams<TImplementation>`                     | Required if `address` is not provided                        | The parameters that will be used to deploy the smart account and generate its deterministic address.                                                                              |
 | `deploySalt` | `Hex`                                               | Required if `address` is not provided                        | The salt that will be used to deploy the smart account.                                                                                                                           |
 | `address` | `Address`                                           | Required if `deployParams` and `deploySalt` are not provided, or if the implementation is `Stateless7702`. | The address of the smart account. If an address is provided, the smart account will not be deployed. This should be used if you intend to interact with an existing smart account. |
+| `nonceKeyManager` | `NonceManager`                                      | No                                                           | A custom nonce key manager for managing nonces. If provided, it enables support for multiple nonce keys to avoid collisions during parallel user operation execution. |
 
 ### Hybrid implementation
 
@@ -580,7 +587,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 import { createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
- 
+
 export const account = privateKeyToAccount("0x...");
 export const publicClient = createPublicClient({
   chain,
