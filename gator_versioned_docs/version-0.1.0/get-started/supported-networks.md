@@ -67,6 +67,7 @@ If you don't see the network you're looking for, you can request support by emai
 | Linea               | ✅      |
 | Optimism            | ✅      |
 | Polygon             | ✅      |
+| Sei                 | ✅      |
 | Sonic               | ✅      |
 | Unichain            | ✅      |
 
@@ -85,6 +86,7 @@ If you don't see the network you're looking for, you can request support by emai
 | MegaEth             | ✅      |
 | Optimism Sepolia    | ✅      |
 | Polygon Amoy        | ✅      |
+| Sei                 | ✅      |
 | Sepolia             | ✅      |
 | Sonic               | ✅      |
 | Unichain Sepolia    | ✅      |

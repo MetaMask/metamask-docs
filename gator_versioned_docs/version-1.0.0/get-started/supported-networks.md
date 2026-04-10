@@ -79,6 +79,7 @@ If you don't see the network you're looking for, you can request support by emai
 | Monad               | ✅      | ✅      | ✅      | ✅     |
 | Optimism            | ✅      | ✅      | ✅      | ✅     |
 | Polygon             | ✅      | ✅      | ✅      | ✅     |
+| Sei                 | ✅      | ✅      | ✅      | ✅     |
 | Sonic               | ✅      | ✅      | ✅      | ✅     |
 | Unichain            | ✅      | ✅      | ✅      | ✅     |
 
@@ -97,6 +98,7 @@ If you don't see the network you're looking for, you can request support by emai
 | MegaETH             | ✅      | ✅      | ✅      | ✅     |
 | Optimism Sepolia    | ✅      | ✅      | ✅      | ✅     |
 | Polygon Amoy        | ✅      | ✅      | ✅      | ✅     |
+| Sei                 | ✅      | ✅      | ✅      | ✅     |
 | Sepolia             | ✅      | ✅      | ✅      | ✅     |
 | Sonic               | ✅      | ✅      | ✅      | ✅     |
 | Unichain Sepolia    | ✅      | ✅      | ✅      | ✅     |
