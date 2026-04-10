@@ -13,59 +13,61 @@ If you don't see the network you're looking for, you can request support by emai
 
 ### Mainnet networks
 
-| Network Name        | v0.1.0 | v0.2.0 | v0.3.0 | v1.0.0 |
+| Network Name        | v0.2.0 | v0.3.0 | v1.0.0 | v1.1.0 |
 | ------------------- | -------| -------| -------| -------|
 | Arbitrum Nova       | ✅      | ✅      | ✅      | ✅     |
 | Arbitrum One        | ✅      | ✅      | ✅      | ✅     |
 | Base                | ✅      | ✅      | ✅      | ✅     |
 | Berachain           | ✅      | ✅      | ✅      | ✅     |
 | Binance Smart Chain | ✅      | ✅      | ✅      | ✅     |
-| Celo                | ❌      | ❌      | ❌      | ✅     |
-| Citrea              | ❌      | ❌      | ❌      | ✅     |
+| Celo                | ❌      | ❌      | ✅      | ✅     |
+| Citrea              | ❌      | ❌      | ✅      | ✅     |
 | Ethereum            | ✅      | ✅      | ✅      | ✅     |
 | Gnosis Chain        | ✅      | ✅      | ✅      | ✅     |
 | Ink                 | ✅      | ✅      | ✅      | ✅     |
 | Linea               | ✅      | ✅      | ✅      | ✅     |
-| MegaETH             | ❌      | ❌      | ❌      | ✅     |
-| Monad               | ❌      | ✅      | ✅      | ✅     |
+| Mantle              | ❌      | ❌      | ❌      | ✅     |
+| MegaETH             | ❌      | ❌      | ✅      | ✅     |
+| Monad               | ✅      | ✅      | ✅      | ✅     |
 | Optimism            | ✅      | ✅      | ✅      | ✅     |
 | Polygon             | ✅      | ✅      | ✅      | ✅     |
-| Ronin               | ❌      | ❌      | ❌      | ✅     |
+| Ronin               | ❌      | ❌      | ✅      | ✅     |
 | Sei                 | ✅      | ✅      | ✅      | ✅     |
-| Sonic               | ❌      | ✅      | ✅      | ✅     |
-| Tempo               | ❌      | ❌      | ❌      | ✅     |
+| Sonic               | ✅      | ✅      | ✅      | ✅     |
+| Tempo               | ❌      | ❌      | ✅      | ✅     |
 | Unichain            | ✅      | ✅      | ✅      | ✅     |
 
 ### Testnet networks
 
-| Network Name                | v0.1.0 | v0.2.0 | v0.3.0 | v1.0.0 |
+| Network Name                | v0.2.0 | v0.3.0 | v1.0.0 | v1.1.0 |
 | --------------------------- | -------| -------| -------| -------|
 | Arbitrum Sepolia            | ✅      | ✅      | ✅      | ✅     |
 | Base Sepolia                | ✅      | ✅      | ✅      | ✅     |
 | Berachain Bepolia           | ✅      | ✅      | ✅      | ✅     |
 | Binance Smart Chain         | ✅      | ✅      | ✅      | ✅     |
-| Celo Alfajores              | ❌      | ❌      | ❌      | ✅     |
+| Celo Alfajores              | ❌      | ❌      | ✅      | ✅     |
 | Citrea                      | ✅      | ✅      | ✅      | ✅     |
 | Ethereum Sepolia            | ✅      | ✅      | ✅      | ✅     |
 | Gnosis Chiado               | ✅      | ✅      | ✅      | ✅     |
-| Hoodi                       | ❌      | ✅      | ✅      | ✅     |
+| Hoodi                       | ✅      | ✅      | ✅      | ✅     |
 | Ink Sepolia                 | ✅      | ✅      | ✅      | ✅     |
 | Linea Sepolia               | ✅      | ✅      | ✅      | ✅     |
+| Mantle Sepolia              | ❌      | ❌      | ❌      | ✅     |
 | MegaETH                     | ✅      | ✅      | ✅      | ✅     |
 | Monad                       | ✅      | ✅      | ✅      | ✅     |
 | Optimism Sepolia            | ✅      | ✅      | ✅      | ✅     |
 | Polygon Amoy                | ✅      | ✅      | ✅      | ✅     |
-| Ronin Saigon                | ❌      | ❌      | ❌      | ✅     |
-| Sei                         | ❌      | ✅      | ✅      | ✅     |
-| Sonic                       | ❌      | ✅      | ✅      | ✅     |
-| Tempo Moderato              | ❌      | ❌      | ❌      | ✅     |
+| Ronin Saigon                | ❌      | ❌      | ✅      | ✅     |
+| Sei                         | ✅      | ✅      | ✅      | ✅     |
+| Sonic                       | ✅      | ✅      | ✅      | ✅     |
+| Tempo Moderato              | ❌      | ❌      | ✅      | ✅     |
 | Unichain Sepolia            | ✅      | ✅      | ✅      | ✅     |
 
 ## Advanced Permissions (ERC-7715)
 
 ### Mainnet networks
 
-| Network Name        | v0.1.0 | v0.2.0 | v0.3.0 | v1.0.0 |
+| Network Name        | v0.2.0 | v0.3.0 | v1.0.0 | v1.1.0 |
 | ------------------- | -------| -------| -------| -------|
 | Arbitrum Nova       | ✅      | ✅      | ✅      | ✅     |
 | Arbitrum One        | ✅      | ✅      | ✅      | ✅     |
@@ -75,6 +77,7 @@ If you don't see the network you're looking for, you can request support by emai
 | Citrea              | ✅      | ✅      | ✅      | ✅     |
 | Ethereum            | ✅      | ✅      | ✅      | ✅     |
 | Gnosis              | ✅      | ✅      | ✅      | ✅     |
+| Linea               | ✅      | ✅      | ✅      | ✅     |
 | Monad               | ✅      | ✅      | ✅      | ✅     |
 | Optimism            | ✅      | ✅      | ✅      | ✅     |
 | Polygon             | ✅      | ✅      | ✅      | ✅     |
@@ -83,7 +86,7 @@ If you don't see the network you're looking for, you can request support by emai
 
 ### Testnet networks
 
-| Network Name        | v0.1.0 | v0.2.0 | v0.3.0 | v1.0.0 |
+| Network Name        | v0.2.0 | v0.3.0 | v1.0.0 | v1.1.0 |
 | ------------------- | -------| -------| -------| -------|
 | Arbitrum Sepolia    | ✅      | ✅      | ✅      | ✅     |
 | Base Sepolia        | ✅      | ✅      | ✅      | ✅     |
@@ -92,6 +95,7 @@ If you don't see the network you're looking for, you can request support by emai
 | Chiado              | ✅      | ✅      | ✅      | ✅     |
 | Citrea              | ✅      | ✅      | ✅      | ✅     |
 | Hoodi               | ✅      | ✅      | ✅      | ✅     |
+| Linea Sepolia       | ✅      | ✅      | ✅      | ✅     |
 | MegaETH             | ✅      | ✅      | ✅      | ✅     |
 | Optimism Sepolia    | ✅      | ✅      | ✅      | ✅     |
 | Polygon Amoy        | ✅      | ✅      | ✅      | ✅     |
