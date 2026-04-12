@@ -20,6 +20,7 @@ export default [{
         "node_modules/*",
         ".docusaurus/*",
         ".integrationBuilderCache/*",
+        "scripts/*.js",
         "**/*.md",
         "**/*.mdx",
         "static/*",

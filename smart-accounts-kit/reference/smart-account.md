@@ -7,6 +7,7 @@ keywords: [smart accounts, API, methods, reference]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # MetaMask Smart Accounts API reference
 
@@ -228,6 +229,12 @@ export const smartAccount = await toMetaMaskSmartAccount({
 ## `getNonce`
 
 Returns the nonce for a smart account.
+
+### Parameters
+
+| Name | Type | Required | Description |
+| ---- | ---- | -------- | ----------- |
+| `key` | `bigint` | No | The nonce key to retrieve the nonce. Different keys maintain independent nonce sequences, enabling parallel user operation execution. |
 
 ### Example
 
@@ -464,7 +471,7 @@ export const smartAccount = await toMetaMaskSmartAccount({
 
 ## `signUserOperation`
 
-Signs a user operation with the `MetaMaskSmartAccount` signer. The Delegation
+Signs a <GlossaryTerm term="User operation">user operation</GlossaryTerm> with the `MetaMaskSmartAccount` signer. The Delegation
 Toolkit uses Viem under the hood to provide this functionality.
 
 ### Parameters
@@ -532,12 +539,13 @@ Creates a `MetaMaskSmartAccount` instance.
 | Name | Type                                                | Required                                                     | Description                                                                                                                                                                       |
 | ---- |-----------------------------------------------------|--------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `client` | `Client`                                            | Yes                                                          | Viem Client to retrieve smart account data.                                                                                                                                       |
-| `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be Hybrid, Multisig, or Stateless7702.                                                                                                             |
+| `implementation` | `TImplementation`                                   | Yes                                                          | Implementation type for the smart account. Can be <GlossaryTerm term="Hybrid smart account">`Hybrid`</GlossaryTerm>, <GlossaryTerm term="Multisig smart account">`Multisig`</GlossaryTerm>, or <GlossaryTerm term="EIP-7702 smart account">`Stateless7702`</GlossaryTerm>.                                                                                                             |
 | `signer` | `SignerConfigByImplementation <TImplementation>` | No | Signer for the smart account. Can be a Viem Account, Viem Wallet Client, or a WebAuthn Account. WebAuthn accounts are only supported for Hybrid implementations. If omitted, non-signing operations still work, but signing operations such as `signUserOperation`, `signDelegation`, `signMessage`, and `signTypedData` will throw an error. |
 | `environment` | [`SmartAccountsEnvironment`](./types.md#smartaccountsenvironment)                              | No                                                           | Environment to resolve the smart contracts.                                                                                                                                       |
 | `deployParams` | `DeployParams<TImplementation>`                     | Required if `address` is not provided                        | The parameters that will be used to deploy the smart account and generate its deterministic address.                                                                              |
 | `deploySalt` | `Hex`                                               | Required if `address` is not provided                        | The salt that will be used to deploy the smart account.                                                                                                                           |
 | `address` | `Address`                                           | Required if `deployParams` and `deploySalt` are not provided, or if the implementation is `Stateless7702`. | The address of the smart account. If an address is provided, the smart account will not be deployed. This should be used if you intend to interact with an existing smart account. |
+| `nonceKeyManager` | `NonceManager`                                      | No                                                           | A custom nonce key manager for managing nonces. If provided, it enables support for multiple nonce keys to avoid collisions during parallel user operation execution. |
 
 ### Hybrid implementation
 
@@ -580,7 +588,7 @@ const smartAccount = await toMetaMaskSmartAccount({
 import { createPublicClient, http } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { sepolia as chain } from "viem/chains";
- 
+
 export const account = privateKeyToAccount("0x...");
 export const publicClient = createPublicClient({
   chain,

@@ -5,6 +5,8 @@ toc_max_heading_level: 2
 keywords: [caveats, caveat enforcers, configuration, smart contracts, reference]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Caveats reference
 
 When [constraining a delegation scope](../../guides/delegation/use-delegation-scopes/constrain-scope.md), you can specify the following caveat types.
@@ -19,7 +21,7 @@ You can use this caveat to enforce function parameters.
 We strongly recommend using this caveat to validate static types and not dynamic types.
 You can validate dynamic types through a series of `allowedCalldata` terms, but this is tedious and error-prone.
 
-Caveat enforcer contract: [`AllowedCalldataEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedCalldataEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`AllowedCalldataEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedCalldataEnforcer.sol)
 
 ### Parameters
 
@@ -57,9 +59,9 @@ This example uses Viem's [`encodeAbiParameters`](https://viem.sh/docs/abi/encode
 
 ## `allowedMethods`
 
-Limits what methods the delegate can call.
+Limits what methods the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> can call.
 
-Caveat enforcer contract: [`AllowedMethodsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedMethodsEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`AllowedMethodsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedMethodsEnforcer.sol)
 
 ### Parameters
 
@@ -100,9 +102,9 @@ This example adds the `transfer` function to the allowed methods in three differ
 
 ## `allowedTargets`
 
-Limits what addresses the delegate can call.
+Limits what addresses the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> can call.
 
-Caveat enforcer contract: [`AllowedTargetsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedTargetsEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`AllowedTargetsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/AllowedTargetsEnforcer.sol)
 
 ### Parameters
 
@@ -128,7 +130,7 @@ const caveats = [{
 
 Ensures that the `args` provided when redeeming the delegation are equal to the terms specified on the caveat.
 
-Caveat enforcer contract: [`ArgsEqualityCheckEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ArgsEqualityCheckEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ArgsEqualityCheckEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ArgsEqualityCheckEnforcer.sol)
 
 ### Parameters
 
@@ -151,7 +153,7 @@ const caveats = [{
 
 Specifies a range of blocks through which the delegation will be valid.
 
-Caveat enforcer contract: [`BlockNumberEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/BlockNumberEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`BlockNumberEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/BlockNumberEnforcer.sol)
 
 ### Parameters
 
@@ -176,7 +178,7 @@ const caveats = [{
 
 Ensures a contract is deployed, and if not, deploys the contract.
 
-Caveat enforcer contract: [`DeployedEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/DeployedEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`DeployedEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/DeployedEnforcer.sol)
 
 ### Parameters
 
@@ -203,7 +205,7 @@ const caveats = [{
 
 Ensures that the recipient's ERC-1155 token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
 
-Caveat enforcer contract: [`ERC1155BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC1155BalanceChangeEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ERC1155BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC1155BalanceChangeEnforcer.sol)
 
 ### Parameters
 
@@ -234,7 +236,7 @@ const caveats = [{
 
 Ensures that the recipient's ERC-20 token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
 
-Caveat enforcer contract: [`ERC20BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20BalanceChangeEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ERC20BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20BalanceChangeEnforcer.sol)
 
 ### Parameters
 
@@ -266,7 +268,7 @@ specified time window. At the start of each new period, the allowed transfer
 amount resets. Any unused transfer allowance from the previous period does not
 carry over and is forfeited.
 
-Caveat enforcer contract: [`ERC20PeriodTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20PeriodTransferEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ERC20PeriodTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20PeriodTransferEnforcer.sol)
 
 ### Parameters
 
@@ -302,7 +304,7 @@ const caveats = [{
 
 Enforces a linear streaming transfer limit for ERC-20 tokens. Block token access until the specified start timestamp. At the start timestamp, immediately release the specified initial amount. Afterward, accrue tokens linearly at the specified rate, up to the specified maximum.
 
-Caveat enforcer contract: [`ERC20StreamingEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20StreamingEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ERC20StreamingEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20StreamingEnforcer.sol)
 
 ### Parameters
 
@@ -341,7 +343,7 @@ const caveats = [{
 
 Limits the transfer of ERC-20 tokens.
 
-Caveat enforcer contract: [`ERC20TransferAmountEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20TransferAmountEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ERC20TransferAmountEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20TransferAmountEnforcer.sol)
 
 ### Parameters
 
@@ -367,7 +369,7 @@ const caveats = [{
 
 Ensures that the recipient's ERC-721 token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
 
-Caveat enforcer contract: [`ERC721BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721BalanceChangeEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ERC721BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721BalanceChangeEnforcer.sol)
 
 ### Parameters
 
@@ -396,14 +398,14 @@ const caveats = [{
 
 Restricts the execution to only allow ERC-721 token transfers, specifically the `transferFrom(from, to, tokenId)` function, for a specified token ID and contract.
 
-Caveat enforcer contract: [`ERC721TransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721TransferEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ERC721TransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721TransferEnforcer.sol)
 
 ### Parameters
 
 | Name           | Type      | Required | Description                                                                  |
 | -------------- | --------- | -------- | ---------------------------------------------------------------------------- |
 | `tokenAddress` | `Address` | Yes      | The ERC-721 token contract address.                                          |
-| `tokenId`      | `bigint`  | Yes      | The ID of the ERC-721 token that can be transferred by delegate.             |
+| `tokenId`      | `bigint`  | Yes      | The ID of the ERC-721 token that can be transferred by <GlossaryTerm term="Delegate account">delegate</GlossaryTerm>.             |
 
 ### Example
 
@@ -422,13 +424,13 @@ const caveats = [{
 Verifies that the transaction calldata matches the expected calldata. For batch transactions,
 see [`exactCalldataBatch`](#exactcalldatabatch).
 
-Caveat enforcer contract: [`ExactCalldataEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactCalldataEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ExactCalldataEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactCalldataEnforcer.sol)
 
 ### Parameters
 
 | Name              | Type                             | Required | Description                                           |
 | ----------------- | -------------------------------- | -------- | ----------------------------------------------------- |
-| `calldata`        | `Hex`                            | Yes      | The calldata that the delegate is allowed to call.  |
+| `calldata`        | `Hex`                            | Yes      | The calldata that the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> is allowed to call.  |
 
 ### Example
 
@@ -446,7 +448,7 @@ const caveats = [{
 Verifies that the provided batch execution calldata matches
 the expected calldata for each individual execution in the batch.
 
-Caveat enforcer contract: [`ExactCalldataBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactCalldataBatchEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ExactCalldataBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactCalldataBatchEnforcer.sol)
 
 ### Parameters
 
@@ -483,7 +485,7 @@ const caveats = [{
 Verifies that the provided execution matches the expected execution. For batch transactions,
 see [`exactExecutionBatch`](#exactexecutionbatch).
 
-Caveat enforcer contract: [`ExactExecutionEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ExactExecutionEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionEnforcer.sol)
 
 ### Parameters
 
@@ -509,7 +511,7 @@ const caveats = [{
 Verifies that each execution in the batch matches the expected
 execution parameters—including target, value, and calldata.
 
-Caveat enforcer contract: [`ExactExecutionBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionBatchEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ExactExecutionBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionBatchEnforcer.sol)
 
 ### Parameters
 
@@ -545,7 +547,7 @@ const caveats = [{
 
 Specifies an ID for multiple delegations. Once one of them is redeemed, the other delegations with the same ID are revoked.
 
-Caveat enforcer contract: [`IdEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/IdEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`IdEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/IdEnforcer.sol)
 
 ### Parameters
 
@@ -566,9 +568,9 @@ const caveats = [{
 
 ## `limitedCalls`
 
-Limits the number of times the delegate can perform executions on the delegator's behalf.
+Limits the number of times the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> can perform executions on the <GlossaryTerm term="Delegator account">delegator</GlossaryTerm>'s behalf.
 
-Caveat enforcer contract: [`LimitedCallsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/LimitedCallsEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`LimitedCallsEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/LimitedCallsEnforcer.sol)
 
 ### Parameters
 
@@ -595,7 +597,7 @@ At the start of each new period, the allowed transfer amount for each token rese
 When redeeming the delegation, the index of the relevant token configuration must be specified
 as the `args` of this caveat (encoded as `uint256` hex value).
 
-Caveat enforcer contract: [`MultiTokenPeriodEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/MultiTokenPeriodEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`MultiTokenPeriodEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/MultiTokenPeriodEnforcer.sol)
 
 ### Parameters
 
@@ -648,7 +650,7 @@ const caveats = [{
 
 Ensures that the recipient's native token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
 
-Caveat enforcer contract: [`NativeBalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeBalanceChangeEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`NativeBalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeBalanceChangeEnforcer.sol)
 
 ### Parameters
 
@@ -677,7 +679,7 @@ Enforces payment in native token (for example, ETH) for the right to use the del
 A permissions context allowing payment must be provided as the `args` when
 redeeming the delegation.
 
-Caveat enforcer contract: [`NativeTokenPaymentEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenPaymentEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`NativeTokenPaymentEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenPaymentEnforcer.sol)
 
 ### Parameters
 
@@ -705,7 +707,7 @@ specified time window. At the start of each new period, the allowed transfer
 amount resets. Any unused transfer allowance from the previous period does not
 carry over and is forfeited.
 
-Caveat enforcer contract: [`NativeTokenPeriodTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenPeriodTransferEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`NativeTokenPeriodTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenPeriodTransferEnforcer.sol)
 
 ### Parameters
 
@@ -738,7 +740,7 @@ const caveats = [{
 
 Enforces a linear streaming limit for native tokens (for example, ETH). Nothing is available before the specified start timestamp. At the start timestamp, the specified initial amount becomes immediately available. After that, tokens accrue linearly at the specified rate, capped by the specified maximum.
 
-Caveat enforcer contract: [`NativeTokenStreamingEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenStreamingEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`NativeTokenStreamingEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenStreamingEnforcer.sol)
 
 ### Parameters
 
@@ -774,13 +776,13 @@ const caveats = [{
 
 Enforces an allowance of native currency (for example, ETH).
 
-Caveat enforcer contract: [`NativeTokenTransferAmountEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenTransferAmountEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`NativeTokenTransferAmountEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeTokenTransferAmountEnforcer.sol)
 
 ### Parameters
 
 | Name           | Type      | Required | Description                                                       |
 | -------------- | --------- | -------- | ----------------------------------------------------------------- |
-| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by delegate. |
+| `maxAmount`    | `bigint`  | Yes      | The maximum amount of tokens that can be transferred by the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm>. |
 
 ### Example
 
@@ -798,7 +800,7 @@ const caveats = [{
 
 Adds a nonce to a delegation, and revokes previous delegations by incrementing the current nonce by calling `incrementNonce(address _delegationManager)`.
 
-Caveat enforcer contract: [`NonceEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NonceEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`NonceEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NonceEnforcer.sol)
 
 ### Parameters
 
@@ -822,7 +824,7 @@ const caveats = [{
 
 Restricts the execution to only allow ownership transfers, specifically the `transferOwnership(address _newOwner)` function, for a specified contract.
 
-Caveat enforcer contract: [`OwnershipTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/OwnershipTransferEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`OwnershipTransferEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/OwnershipTransferEnforcer.sol)
 
 ### Parameters
 
@@ -855,7 +857,7 @@ This condition is enforced, but if Bob is a delegator he can create a separate d
 that allows her to redeem Alice's delegation through Bob.
 :::
 
-Caveat enforcer contract: [`RedeemerEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/RedeemerEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`RedeemerEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/RedeemerEnforcer.sol)
 
 ### Parameters
 
@@ -884,7 +886,7 @@ Ensures validation of a batch consisting of exactly two transactions:
 2. The second transaction must be an ERC-20 token transfer that matches specified
    parameters—including the ERC-20 token contract address, amount, and recipient.
 
-Caveat enforcer contract: [`SpecificActionERC20TransferBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/SpecificActionERC20TransferBatchEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`SpecificActionERC20TransferBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/SpecificActionERC20TransferBatchEnforcer.sol)
 
 ### Parameters
 
@@ -916,7 +918,7 @@ const caveats = [{
 
 Specifies a range of timestamps through which the delegation will be valid.
 
-Caveat enforcer contract: [`TimestampEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/TimestampEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`TimestampEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/TimestampEnforcer.sol)
 
 ### Parameters
 
@@ -946,9 +948,9 @@ const caveats = [{
 
 ## `valueLte`
 
-Limits the value of native tokens that the delegate can spend.
+Limits the value of native tokens that the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> can spend.
 
-Caveat enforcer contract: [`ValueLteEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ValueLteEnforcer.sol)
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ValueLteEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ValueLteEnforcer.sol)
 
 ### Parameters
 

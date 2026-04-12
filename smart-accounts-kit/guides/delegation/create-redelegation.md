@@ -7,12 +7,13 @@ keywords: [delegation, state, caveat enforcer, delegation scope, redelegation]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Create a redelegation
 
 Redelegation is a core feature that sets delegations apart from other permission sharing frameworks.
-It allows a delegate to create a delegation chain, passing on the same or reduced level of authority 
-from the root delegator.
+It allows a <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> to create a delegation chain, passing on the same or reduced level of authority 
+from the root <GlossaryTerm term="Delegator account">delegator</GlossaryTerm>.
 
 For example, if Alice grants Bob permission to spend 10 USDC on her behalf, Bob can further grant Carol
 permission to spend up to 5 USDC on Alice's behalf-that is, Bob can redelegate. This creates a delegation 
@@ -27,7 +28,7 @@ chain where the root permissions are reshared with additional parties.
 
 Create a [root delegation](../../concepts/delegation/overview.md#root-delegation) from Alice to Bob.
 
-This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing 
+This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) <GlossaryTerm term="Delegation scope">scope</GlossaryTerm>, allowing 
 Alice to delegate to Bob the ability to spend 10 USDC on her behalf. 
 
 <Tabs>
@@ -95,7 +96,7 @@ export const bobSmartAccount = await toMetaMaskSmartAccount({
 Create a [redelegation](../../concepts/delegation/overview.md#redelegation) from Bob to Carol. When creating a redelegation, you can only narrow the scope of the original authority, not expand it. 
 
 To create a redelegation, provide the signed delegation as the `parentDelegation` argument when calling [createDelegation](../../reference/delegation/index.md#createdelegation).
-This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing 
+This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) <GlossaryTerm term="Delegation scope">scope</GlossaryTerm>, allowing 
 Bob to delegate to Carol the ability to spend 5 USDC on Alice's behalf.
 
 <Tabs>

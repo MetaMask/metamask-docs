@@ -6,11 +6,12 @@ keywords: [AA21, pay prefund, user operation, troubleshooting]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # AA21 didn't pay prefund
 
-The `EntryPoint` contract reverts with `AA21 didn't pay prefund` when a smart account doesn't
-have enough native token balance to cover the gas cost of the user operation.
+The `EntryPoint` contract reverts with `AA21 didn't pay prefund` when a <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> doesn't
+have enough native token balance to cover the gas cost of the <GlossaryTerm term="User operation">user operation</GlossaryTerm>.
 
 Before executing a user operation, the `EntryPoint` requires the sender account to prefund the
 expected gas cost. If the account's balance is lower than the required prefund, the `EntryPoint`
@@ -22,7 +23,7 @@ reverts the operation.
 
 Fund the smart account with enough native tokens to cover the required prefund.
 Use Viem's [`estimateUserOperationGas`](https://viem.sh/account-abstraction/actions/bundler/estimateUserOperationGas)
-to get the gas estimates from your bundler, then calculate the required prefund based on the
+to get the gas estimates from your <GlossaryTerm term="Bundler">bundler</GlossaryTerm>, then calculate the required prefund based on the
 `EntryPoint` version.
 
 <Tabs>
@@ -96,5 +97,5 @@ if (balance < requiredPrefund) {
 
 ### Use a paymaster
 
-You can use a paymaster to sponsor the gas fees for the smart account, so the account doesn't
+You can use a <GlossaryTerm term="Paymaster">paymaster</GlossaryTerm> to sponsor the gas fees for the smart account, so the account doesn't
 need to hold native tokens. For more information about configuring a paymaster, see [Send a gasless transaction](../guides/smart-accounts/send-gasless-transaction.md).

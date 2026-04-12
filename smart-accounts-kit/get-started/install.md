@@ -6,10 +6,11 @@ keywords: [install, MetaMask, delegation, smart accounts kit, smart, accounts]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Install and set up the Smart Accounts Kit
 
-This page provides instructions to install and set up the Smart Accounts Kit, enabling you to create and interact with [MetaMask Smart Accounts](../concepts/smart-accounts.md) into your dapp.
+This page provides instructions to install and set up the Smart Accounts Kit in your dapp, enabling you to create and interact with <GlossaryTerm term="MetaMask smart account">MetaMask Smart Accounts</GlossaryTerm>.
 
 ## Prerequisites
 
@@ -32,7 +33,7 @@ npm install @metamask/smart-accounts-kit
 
 ### 2. (Optional) Install the contracts
 
-If you plan to extend the Delegation Framework smart contracts (for example, to
+If you plan to extend the <GlossaryTerm term="Delegation Framework" /> smart contracts (for example, to
 [create a custom caveat enforcer](/tutorials/create-custom-caveat-enforcer)), install
 the contract package using Foundry's command-line tool, Forge:
 

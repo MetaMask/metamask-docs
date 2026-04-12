@@ -5,6 +5,7 @@ keywords: [create, smart account, signer, hybrid, multisig, 7702]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Create a smart account
 
@@ -18,7 +19,7 @@ to create different types of smart accounts with different signature schemes.
 
 ## Hybrid smart account
 
-A [Hybrid smart account](../../concepts/smart-accounts.md#hybrid-smart-account) supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
+A [Hybrid smart account](../../concepts/smart-accounts.md#hybrid-smart-account) supports both an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> owner and any number of <GlossaryTerm term="Passkey">passkey</GlossaryTerm> (WebAuthn) <GlossaryTerm term="Signer">signers</GlossaryTerm>.
 
 This example uses `toMetaMaskSmartAccount` and Viem's [Wallet Client](https://viem.sh/docs/clients/wallet)
 to create a Hybrid smart account. The `signer` parameter also accepts Viem's [Local Account](https://viem.sh/docs/accounts/local) and [WebAuthnAccount](https://viem.sh/account-abstraction/accounts/webauthn#webauthn-account).
@@ -83,7 +84,7 @@ export const walletClient = createWalletClient({
 
 ## Multisig smart account
 
-A [Multisig smart account](../../concepts/smart-accounts.md#multisig-smart-account) supports multiple EOA signers with a configurable threshold for execution.
+A [Multisig smart account](../../concepts/smart-accounts.md#multisig-smart-account) supports multiple <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> <GlossaryTerm term="Signer">signers</GlossaryTerm> with a configurable threshold for execution.
 
 This example uses [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmartaccount) to create a
 Multisig smart account with a combination of account signers and Wallet Client signers.
@@ -159,8 +160,8 @@ The number of signers must be at least equal to the threshold to generate a vali
 
 ## EIP-7702 smart account
 
-An [EIP-7702 smart account](../../concepts/smart-accounts.md#stateless-7702-smart-account) represents an EOA that has been upgraded
-to support MetaMask Smart Accounts functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
+An [EIP-7702 smart account](../../concepts/smart-accounts.md#stateless-7702-smart-account) represents an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> that has been upgraded
+to support <GlossaryTerm term="MetaMask smart account">MetaMask Smart Accounts</GlossaryTerm> functionality as defined by [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702).
 
 This example uses [`toMetaMaskSmartAccount`](../../reference/smart-account.md#tometamasksmartaccount)
 and Viem's [`privateKeyToAccount`](https://viem.sh/docs/accounts/local/privateKeyToAccount) to

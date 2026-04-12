@@ -5,9 +5,11 @@ toc_max_heading_level: 2
 keywords: [user operation, reverted, reason 0x, empty revert, execution, troubleshooting]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # User operation reverted
 
-A user operation reverts with reason `0x` when validation succeeds, but execution fails without a
+A <GlossaryTerm term="User operation">user operation</GlossaryTerm> reverts with reason `0x` when validation succeeds, but execution fails without a
 revert reason. This differs from AA-coded `EntryPoint` contract errors such as `AA23`, `AA25`,
 or `AA21`.
 

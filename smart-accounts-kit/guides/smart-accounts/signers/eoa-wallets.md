@@ -4,6 +4,8 @@ sidebar_label: EOA (e.g. MetaMask)
 keywords: [metamask, smart account, signer, metamask smart account]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Use an EOA with MetaMask Smart Accounts
 
 Externally owned accounts (EOAs) are accounts controlled by a user's private key (paired with a public address) and are typically accessed through wallet apps like MetaMask. MetaMask Smart Accounts is signer-agnostic, so
@@ -81,7 +83,7 @@ export const config = createConfig({
 ### 3. Create a smart account
 
 Once the user has connected their wallet, use the [Wallet Client](https://viem.sh/docs/clients/wallet) from Wagmi as the signer to create a
-MetaMask smart account.
+<GlossaryTerm term="MetaMask smart account" />.
 
 ```ts
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";

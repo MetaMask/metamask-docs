@@ -6,6 +6,7 @@ keywords: [execution, smart account, create, redeem, delegation, erc 7715, 7715,
 
 import Tabs from "@theme/Tabs"; 
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Perform executions on a MetaMask user's behalf
 
@@ -25,10 +26,11 @@ In this guide, you'll request an ERC-20 periodic transfer permission from a Meta
 
 ### 1. Set up a Wallet Client
 
-Set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) using Viem's `createWalletClient` function. This client will
+Set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function. This client will
 help you interact with MetaMask Flask. 
 
-Then, extend the Wallet Client functionality using `erc7715ProviderActions`. These actions enable you to request Advanced Permissions from the user.
+Then, extend the Wallet Client functionality using `erc7715ProviderActions`.
+These actions enable you to request <GlossaryTerm term="Advanced Permissions" /> from the user.
 
 ```typescript
 import { createWalletClient, custom } from "viem";
@@ -41,7 +43,7 @@ const walletClient = createWalletClient({
 
 ### 2. Set up a Public Client
 
-Set up a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function. 
+Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function. 
 This client will help you query the account state and interact with the blockchain network.
 
 ```typescript
@@ -56,8 +58,9 @@ const publicClient = createPublicClient({
 
 ### 3. Set up a session account
 
-Set up a session account which can either be a smart account or an externally owned account (EOA)
-to request Advanced Permissions. The requested permissions are granted to the session account, which
+Set up a session account, which can be either a smart account or an
+<GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm>,
+to request <GlossaryTerm term="Advanced Permissions" />. The requested permissions are granted to the session account, which
 is responsible for executing transactions on behalf of the user.
 
 <Tabs>
@@ -185,12 +188,12 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([{
 
 Set up a Viem client depending on your session account type.
 
-For a smart account, set up a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) 
-using Viem's `createBundlerClient` function. This lets you use the bundler service 
+For a smart account, set up a Bundler Client using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
+This lets you use the <GlossaryTerm term="Bundler">bundler</GlossaryTerm> service
 to estimate gas for user operations and submit transactions to the network.
 
-For an EOA, set up a [Viem Wallet Client](https://viem.sh/docs/clients/wallet) 
-using Viem's `createWalletClient` function. This lets you send transactions directly to the network.
+For an EOA, set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function.
+This lets you send transactions directly to the network.
 
 The toolkit provides public actions for both of the clients which can be used to redeem Advanced Permissions, and execute transactions on a user's behalf. 
 

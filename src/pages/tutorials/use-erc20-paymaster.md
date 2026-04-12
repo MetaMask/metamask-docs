@@ -9,6 +9,8 @@ author: MetaMask Developer Relations
 discourseTopicId: 2602
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 This tutorial walks you through using an ERC-20 paymaster with [MetaMask Smart Accounts](/smart-accounts-kit/concepts/smart-accounts), enabling users to pay gas fees in USDC.
 This tutorial uses Pimlico's paymaster, but you can use any paymaster of your choice.
 
@@ -36,10 +38,10 @@ Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-a
 npm install @metamask/smart-accounts-kit
 ```
 
-### 2. Create a Public Client
+### 2. Set up a Public Client
 
-Create a [Viem Public Client](https://viem.sh/docs/clients/public) using Viem's `createPublicClient` function.
-You will configure a smart account and Bundler Client with the Public Client, which you can use to query the signer's account state and interact with the blockchain network.
+Set up a Public Client using Viem's [`createPublicClient`](https://viem.sh/docs/clients/public) function. 
+You will configure a <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> and Bundler Client with the Public Client, which you can use to query the <GlossaryTerm term="Signer">signer</GlossaryTerm>'s account state and interact with the blockchain network.
 
 ```typescript
 import { createPublicClient, http } from "viem";
@@ -51,10 +53,10 @@ const publicClient = createPublicClient({
 });
 ```
 
-### 3. Create a Paymaster Client
+### 3. Set up a Paymaster Client
 
-Create a [Viem Paymaster Client](https://viem.sh/account-abstraction/clients/paymaster)
-using Viem's `createPaymasterClient` function. This client interacts with the paymaster service, enabling users to pay gas fees in USDC.
+Set up a <GlossaryTerm term="Paymaster">Paymaster Client</GlossaryTerm>
+using Viem's [`createPaymasterClient`](https://viem.sh/account-abstraction/clients/paymaster) function. This client interacts with the paymaster service, enabling users to pay gas fees in USDC.
 
 Replace `<YOUR-API-KEY>` with your Pimlico API key:
 
@@ -66,9 +68,10 @@ const paymasterClient = createPaymasterClient({
 });
 ```
 
-### 4. Create a Bundler Client
+### 4. Set up a Bundler Client
 
-Create a [Viem Bundler Client](https://viem.sh/account-abstraction/clients/bundler) using Viem's `createBundlerClient` function. You can use the bundler service to estimate gas for user operations and submit transactions to the network.
+Set up a Bundler Client using Viem's [`createBundlerClient`](https://viem.sh/account-abstraction/clients/bundler) function.
+You can use the <GlossaryTerm term="Bundler">bundler</GlossaryTerm> service to estimate gas for user operations and submit transactions to the network.
 
 To use the ERC-20 paymaster, configure the `paymasterContext` with the ERC-20 token you wish to use to pay for gas fees.
 For this tutorial, specify the Sepolia USDC token address.
@@ -91,7 +94,7 @@ const bundlerClient = createBundlerClient({
 ### 5. Create and fund a smart account
 
 Create a [Hybrid smart account](/smart-accounts-kit/guides/smart-accounts/create-smart-account/#hybrid-smart-account).
-A Hybrid smart account is a flexible smart account implementation that supports both an externally owned account (EOA) owner and any number of passkey (WebAuthn) signers.
+A Hybrid smart account is a flexible smart account implementation that supports both an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> owner and any number of <GlossaryTerm term="Passkey">passkey</GlossaryTerm> (WebAuthn) signers.
 
 ```typescript
 import { Implementation, toMetaMaskSmartAccount } from "@metamask/smart-accounts-kit";
@@ -118,7 +121,7 @@ You can use [Circle's faucet](https://faucet.circle.com/) to get Sepolia USDC.
 
 The ERC-20 paymaster works by transferring the token from the smart account, and reimbursing itself for paying the gas fees on the user's behalf.
 
-To send a user operation with the ERC-20 paymaster, use the [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method from the Bundler Client.
+To send a <GlossaryTerm term="User operation">user operation</GlossaryTerm> with the ERC-20 paymaster, use the [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method from the Bundler Client.
 You must include a call approving the ERC-20 token to be used by the paymaster.
 To modify the token allowance for the paymaster, perform a write operation on the USDC contract.
 For this tutorial, set an allowance of 10 USDC tokens.
@@ -128,7 +131,7 @@ In a production dapp, you should first check the existing token allowance and on
 :::
 
 Batch the approve call with other onchain actions you want to perform using the ERC-20 paymaster.
-Pass the `paymasterClient` from [Step 3](#3-create-a-paymaster-client) to the `paymaster` property.
+Pass the `paymasterClient` from [Step 3](#3-set-up-a-paymaster-client) to the `paymaster` property.
 
 ```typescript
 // Appropriate fee per gas must be determined for the bundler being used.

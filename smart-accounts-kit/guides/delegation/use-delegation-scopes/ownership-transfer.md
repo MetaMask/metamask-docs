@@ -3,6 +3,8 @@ description: Learn how to use the ownership transfer scope for a delegation.
 keywords: [delegation scope, ownership transfer, restrict, delegation]
 ---
 
+import GlossaryTerm from '@theme/GlossaryTerm';
+
 # Use the ownership transfer scope
  
 The ownership transfer scope restricts a delegation to ownership transfer calls only.
@@ -19,7 +21,7 @@ For example, Alice has deployed a smart contract, and she delegates to Bob the a
 
 This scope requires a `contractAddress`, which represents the address of the deployed contract.
 
-Internally, this scope uses the [`ownershipTransfer`](../../../reference/delegation/caveats.md#ownershiptransfer) caveat enforcer.
+Internally, this scope uses the [`ownershipTransfer`](../../../reference/delegation/caveats.md#ownershiptransfer) <GlossaryTerm term="Caveat enforcer">caveat enforcer</GlossaryTerm>.
 See the [ownership transfer scope reference](../../../reference/delegation/delegation-scopes.md#ownership-transfer-scope) for more details.
 
 ```typescript

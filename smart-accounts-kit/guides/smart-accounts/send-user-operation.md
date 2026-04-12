@@ -5,6 +5,7 @@ keywords: [ERC-4337, send, user operation, smart account]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Send a user operation
 
@@ -13,7 +14,7 @@ They incorporate significant enhancements that improve user experience and provi
 flexibility in account management and transaction execution.
 
 Viem's Account Abstraction API allows a developer to specify an array of `Calls` that will be executed as a user operation via Viem's [`sendUserOperation`](https://viem.sh/account-abstraction/actions/bundler/sendUserOperation) method.
-The MetaMask Smart Accounts Kit encodes and executes the provided calls.
+The Smart Accounts Kit encodes and executes the provided calls.
 
 User operations are not directly sent to the network.
 Instead, they are sent to a bundler, which validates, optimizes, and aggregates them before network submission.
@@ -30,11 +31,11 @@ If a user operation is sent from a MetaMask smart account that has not been depl
 
 ## Send a user operation
 
-The following is a simplified example of sending a user operation using Viem Core SDK. Viem Core SDK offers more granular control for developers who require it.
+The following is a simplified example of sending a <GlossaryTerm term="User operation">user operation</GlossaryTerm> using Viem Core SDK. Viem Core SDK offers more granular control for developers who require it.
 
 In the example, a user operation is created with the necessary gas limits.
 
-This user operation is passed to a bundler instance, and the `EntryPoint` address is retrieved from the client.
+This user operation is passed to a <GlossaryTerm term="Bundler">bundler</GlossaryTerm> instance, and the `EntryPoint` address is retrieved from the client.
 
 <Tabs>
 <TabItem value="example.ts">

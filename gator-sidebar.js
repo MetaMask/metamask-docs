@@ -204,6 +204,11 @@ const sidebar = {
           ],
         },
         'reference/types',
+        {
+          type: 'doc',
+          id: 'reference/glossary',
+          label: 'Glossary',
+        },
       ],
     },
     {

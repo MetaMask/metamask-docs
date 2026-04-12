@@ -5,11 +5,12 @@ keywords: [send, gasless transaction, smart account, sponsor, paymaster]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Send a gasless transaction
 
-MetaMask Smart Accounts support gas sponsorship, which simplifies onboarding by abstracting gas fees away from end users.
-You can use any paymaster service provider, such as [Pimlico](https://docs.pimlico.io/references/paymaster) or [ZeroDev](https://docs.zerodev.app/meta-infra/rpcs), or plug in your own custom paymaster.
+[MetaMask Smart Accounts](../../concepts/smart-accounts.md) support gas sponsorship, which simplifies onboarding by abstracting gas fees away from end users.
+You can use any <GlossaryTerm term="Paymaster">paymaster</GlossaryTerm> service provider, such as [Pimlico](https://docs.pimlico.io/references/paymaster) or [ZeroDev](https://docs.zerodev.app/meta-infra/rpcs), or plug in your own custom paymaster.
 
 ## Prerequisites
 

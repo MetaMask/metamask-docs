@@ -6,12 +6,13 @@ keywords: [advanced permissions, caveat, delegation scope, redelegation, delegat
 
 import Tabs from "@theme/Tabs"; 
 import TabItem from "@theme/TabItem";
+import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Create a redelegation
 
-Redelegation is a core feature that sets Advanced Permissions apart from other permission sharing frameworks.
-It allows a session account (delegate) to create a delegation chain, passing on the same or reduced level of authority 
-from the MetaMask account (delegator).
+Redelegation is a core feature that sets <GlossaryTerm term="Advanced Permissions" /> apart from other permission sharing frameworks.
+It allows a session account (<GlossaryTerm term="Delegate account">delegate</GlossaryTerm>) to create a delegation chain, passing on the same or reduced level of authority 
+from the MetaMask account (<GlossaryTerm term="Delegator account">delegator</GlossaryTerm>).
 
 For example, if a dapp is granted permission to spend 10 USDC on a user's behalf, it can 
 further delegate that permission to specific agents, such as allowing a Swap agent to spend 
@@ -126,7 +127,7 @@ Create a [redelegation](../../concepts/delegation/overview.md#redelegation) from
 
 To create a redelegation, provide the signed delegation as the `parentDelegation` argument when calling [`createDelegation`](../../reference/delegation/index.md#createdelegation).
 
-This example uses the [`erc20TransferAmount`](../delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) scope, allowing 
+This example uses the [`erc20TransferAmount`](../delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) <GlossaryTerm term="Delegation scope">scope</GlossaryTerm>, allowing 
 dapp to delegate to a Swap agent the ability to spend 5 USDC on user's behalf.
 
 :::note

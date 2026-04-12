@@ -67,9 +67,11 @@ If you don't see the network you're looking for, you can request support by emai
 | Citrea              | ✅      | ✅      | ✅     |
 | Ethereum            | ✅      | ✅      | ✅     |
 | Gnosis              | ✅      | ✅      | ✅     |
+| Linea               | ✅      | ✅      | ✅     |
 | Monad               | ✅      | ✅      | ✅     |
 | Optimism            | ✅      | ✅      | ✅     |
 | Polygon             | ✅      | ✅      | ✅     |
+| Sei                 | ✅      | ✅      | ✅     |
 | Sonic               | ✅      | ✅      | ✅     |
 | Unichain            | ✅      | ✅      | ✅     |
 
@@ -84,9 +86,11 @@ If you don't see the network you're looking for, you can request support by emai
 | Chiado              | ✅      | ✅      | ✅     |
 | Citrea              | ✅      | ✅      | ✅     |
 | Hoodi               | ✅      | ✅      | ✅     |
+| Linea Sepolia       | ✅      | ✅      | ✅     |
 | MegaEth             | ✅      | ✅      | ✅     |
 | Optimism Sepolia    | ✅      | ✅      | ✅     |
 | Polygon Amoy        | ✅      | ✅      | ✅     |
+| Sei                 | ✅      | ✅      | ✅     |
 | Sepolia             | ✅      | ✅      | ✅     |
 | Sonic               | ✅      | ✅      | ✅     |
 | Unichain Sepolia    | ✅      | ✅      | ✅     |
