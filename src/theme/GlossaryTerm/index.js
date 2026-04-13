@@ -8,7 +8,7 @@ function useIsTouchDevice() {
   const [isTouch, setIsTouch] = useState(false);
   useEffect(() => {
     setIsTouch(
-      'ontouchstart' in window ||
+      'ontouchstart' in window &&
       window.matchMedia('(pointer: coarse)').matches
     );
   }, []);
