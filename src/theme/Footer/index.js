@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Footer from '@theme-original/Footer'
-import { Intercom } from '@intercom/messenger-js-sdk'
-import useIsBrowser from '@docusaurus/useIsBrowser'
 
 export default function FooterWrapper(props) {
   const [canShowFooter, setCanShowFooter] = useState(true)
@@ -21,21 +19,12 @@ export default function FooterWrapper(props) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // check if footer can be shown
       const path = window.location.pathname
       if (path.includes('quickstart')) {
         setCanShowFooter(false)
       }
     }
   }, [])
-
-  const isBrowser = useIsBrowser()
-  const isProd = process.env.NODE_ENV === 'production'
-  if (isBrowser && isProd) {
-    Intercom({
-      app_id: 'txttgas6',
-    })
-  }
 
   if (!canShowFooter) return null
 
