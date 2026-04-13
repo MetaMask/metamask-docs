@@ -7,7 +7,7 @@ keywords: [solana sign message, signMessage, wallet-standard, offchain signature
 
 # Sign messages
 
-Your dapp can ask users to sign a message with their Solana account — for example, to verify ownership or authorize an action.
+Your dapp can ask users to sign a message with their Solana account; for example, to verify ownership or authorize an action.
 
 ## Use `signMessage`
 

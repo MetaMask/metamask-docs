@@ -67,7 +67,7 @@ Call this after [`connect`](#connect) to retrieve the accounts the user authoriz
 
 ### Returns
 
-A promise that resolves to the current `Session` object containing `sessionScopes` — a map of CAIP-2 scope IDs to their approved accounts.
+A promise that resolves to the current `Session` object containing `sessionScopes`, a map of CAIP-2 scope IDs to their approved accounts.
 
 ### Example
 
@@ -114,8 +114,8 @@ console.log('ETH balance:', balance)
 Disconnects from MetaMask.
 The behavior depends on whether `scopes` are provided:
 
-- **No arguments** — revokes all scopes and fully tears down the session.
-- **With `scopes`** — revokes only the specified scopes. If other scopes remain, the session stays alive.
+- **No arguments**: revokes all scopes and fully tears down the session.
+- **With `scopes`**: revokes only the specified scopes. If other scopes remain, the session stays alive.
 
 ### Parameters
 

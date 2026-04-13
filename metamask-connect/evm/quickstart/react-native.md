@@ -218,7 +218,7 @@ you will get `crypto.getRandomValues is not a function`.
 ### 6. Use MetaMask Connect EVM
 
 Initialize the EVM client and use it to connect, sign, and send transactions.
-`mobile.preferredOpenLink` is **required** — it tells MetaMask Connect how to open deeplinks to the MetaMask
+`mobile.preferredOpenLink` is **required**; it tells MetaMask Connect how to open deeplinks to the MetaMask
 Mobile app:
 
 ```tsx

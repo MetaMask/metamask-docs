@@ -72,8 +72,8 @@ const evmClient = await createEVMClient({
 
 ### 3. Connect to MetaMask
 
-Call [`connect()`](../reference/methods.md#connect) to start the connection flow.
-A QR code appears in the terminal — scan it with the MetaMask mobile app:
+Call [`connect`](../reference/methods.md#connect) to start the connection flow.
+A QR code appears in the terminal. Scan it with the MetaMask mobile app:
 
 ```javascript
 try {

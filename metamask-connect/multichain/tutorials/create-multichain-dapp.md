@@ -102,16 +102,16 @@ export async function getClient() {
 
 `createMultichainClient` takes two configuration objects:
 
-- **`dapp`** — Your dapp's identity.
+- **`dapp`**: Your dapp's identity.
   MetaMask shows the `name` and `url` during the connection prompt so users know who is requesting
   access.
-- **`api.supportedNetworks`** — A map of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
+- **`api.supportedNetworks`**: A map of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
   scope IDs to RPC endpoint URLs.
   Each entry tells the client which chains your dapp supports and where to send RPC requests.
 
 ### 3. Connect (sign-in)
 
-Call `connect()` with the scopes you want.
+Call `connect` with the scopes you want.
 The user sees a single approval prompt for all four chains:
 
 ```typescript
@@ -192,7 +192,7 @@ const lineaBalance = await getEvmBalance(SCOPES.LINEA, lineaAccounts)
 const baseBalance = await getEvmBalance(SCOPES.BASE, baseAccounts)
 ```
 
-The same function works for all three EVM chains — only the `scope` changes.
+The same function works for all three EVM chains; only the `scope` changes.
 
 #### Solana balance
 
@@ -288,7 +288,7 @@ const txHash = await client.invokeMethod({
 console.log('EVM tx hash:', txHash)
 ```
 
-To send on a different chain, change the `scope` — for example, `SCOPES.LINEA` or `SCOPES.BASE`.
+To send on a different chain, change the `scope`; for example, `SCOPES.LINEA` or `SCOPES.BASE`.
 The same address format and RPC method works across all EVM chains.
 
 #### Solana transaction
@@ -580,7 +580,7 @@ export default function App() {
 
 - **Leverage session persistence.**
   Sessions survive page reloads and new tabs.
-  Check for an existing session on startup with `getSession()` before prompting the user to connect
+  Check for an existing session on startup with `getSession` before prompting the user to connect
   again.
 
 - **Show chain context clearly.**

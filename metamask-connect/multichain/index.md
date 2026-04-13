@@ -43,7 +43,7 @@ Instead of connecting to one chain at a time, the Multichain API lets you:
 - **Send requests to any chain in the session**: For example, send a Solana transaction and an EVM transaction through the same connection.
 - **Manage the full session lifecycle**: Connect, retrieve session data, invoke methods on any chain, and disconnect using [SDK methods](reference/methods.md) that wrap the underlying [Multichain API](reference/api.md).
 
-For dapps that support both EVM and Solana, this means one session covers both — and users see a single approval prompt.
+For dapps that support both EVM and Solana, this means one session covers both, and users see a single approval prompt.
 
 <p align="center">
     <img height="500" src={require("./_assets/metamask-connect-modal.png").default} alt="MetaMask Connect Multichain Connect Modal" />
@@ -54,10 +54,10 @@ For dapps that support both EVM and Solana, this means one session covers both �
 The multichain client is a good fit when you're:
 
 - **Building a new dapp** designed from the ground up for multiple ecosystems.
-- **Looking for the best cross-chain UX** — one connection prompt for all chains.
+- **Looking for the best cross-chain UX**: one connection prompt for all chains.
 - **Needing full control** over the session lifecycle.
 
-If you're adding MetaMask Connect Multichain to an existing dapp and want minimal code changes, the [ecosystem-specific clients](../integration-options.md) ([`@metamask/connect-evm`](../evm/index.md) or [`@metamask/connect-solana`](../solana/index.md)) are a simpler starting point — you can always migrate later.
+If you're adding MetaMask Connect Multichain to an existing dapp and want minimal code changes, the [ecosystem-specific clients](../integration-options.md) ([`@metamask/connect-evm`](../evm/index.md) or [`@metamask/connect-solana`](../solana/index.md)) are a simpler starting point. You can always migrate later.
 
 ## Get started
 

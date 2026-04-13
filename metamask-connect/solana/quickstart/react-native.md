@@ -221,7 +221,7 @@ you will get `crypto.getRandomValues is not a function`.
 ### 6. Use MetaMask Connect with Solana
 
 Initialize the multichain client and use `invokeMethod` to interact with Solana.
-`mobile.preferredOpenLink` is **required** — it tells MetaMask Connect how to open deeplinks to the MetaMask
+`mobile.preferredOpenLink` is **required**; it tells MetaMask Connect how to open deeplinks to the MetaMask
 mobile app:
 
 ```tsx

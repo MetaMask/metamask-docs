@@ -21,7 +21,13 @@ toc_max_heading_level: 2
 
 # MetaMask Connect EVM methods
 
-MetaMask Connect EVM (`@metamask/connect-evm`) exposes five primary methods: `connect()` to establish a wallet session, `connectAndSign()` to connect and sign a message in one step, `connectWith()` to connect and execute an RPC call atomically, `getProvider()` to obtain the EIP-1193 provider for arbitrary JSON-RPC requests, and `disconnect()` to end the session.
+MetaMask Connect EVM (`@metamask/connect-evm`) exposes five primary methods:
+
+- `connect` to establish a wallet session.
+- `connectAndSign` to connect and sign a message in one step.
+- `connectWith` to connect and execute an RPC call atomically.
+- `getProvider` to obtain the EIP-1193 provider for arbitrary JSON-RPC requests.
+- `disconnect` to end the session.
 
 ## `connect`
 
@@ -170,8 +176,8 @@ await evmClient.switchChain({
 ## `getProvider`
 
 Returns the active EIP-1193 Ethereum provider object.
-The provider is available immediately after `createEVMClient` resolves, even before calling `connect()`.
-Read-only RPC calls work immediately; account-dependent calls require `connect()` first.
+The provider is available immediately after `createEVMClient` resolves, even before calling `connect`.
+Read-only RPC calls work immediately; account-dependent calls require `connect` first.
 
 ### Returns
 
@@ -222,7 +228,7 @@ This only revokes the EVM-specific scopes currently held in the session; it does
 
 :::tip Multichain partial disconnect
 If your dapp also uses Solana via the [multichain client](../../multichain/index.md), calling
-`disconnect()` on the EVM client only revokes EVM (`eip155`) scopes.
+`disconnect` on the EVM client only revokes EVM (`eip155`) scopes.
 Non-EVM scopes remain active, so the user stays connected to Solana.
 :::
 

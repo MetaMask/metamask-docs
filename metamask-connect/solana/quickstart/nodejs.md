@@ -25,10 +25,10 @@ Get started with MetaMask Connect Solana in a Node.js application.
 The SDK displays a QR code in the terminal that you scan with the MetaMask mobile app to establish a connection.
 
 :::info Wallet Standard is browser-only
-[Wallet Standard](https://github.com/wallet-standard/wallet-standard) features (`getWallet()`,
+[Wallet Standard](https://github.com/wallet-standard/wallet-standard) features (`getWallet`,
 `wallet.features[...]`) are designed for browser environments.
-In Node.js, use the multichain core directly via `client.core.connect()` and
-`client.core.invokeMethod()` to interact with Solana.
+In Node.js, use the multichain core directly via `client.core.connect` and
+`client.core.invokeMethod` to interact with Solana.
 :::
 
 ## Prerequisites
@@ -73,14 +73,14 @@ const solanaClient = await createSolanaClient({
 
 :::info Asynchronous client
 [`createSolanaClient`](../reference/methods.md#createsolanaclient) returns a promise. Always `await` it before using the client.
-The client uses a singleton multichain core under the hood — calling it multiple times
+The client uses a singleton multichain core under the hood; calling it multiple times
 returns the same underlying session.
 :::
 
 ### 3. Connect to MetaMask
 
 Register a [`wallet_sessionChanged`](../../multichain/reference/api.md#wallet_sessionchanged) listener to capture session data, then connect with a Solana scope.
-A QR code appears in the terminal — scan it with the MetaMask mobile app:
+A QR code appears in the terminal. Scan it with the MetaMask mobile app:
 
 ```javascript
 let session

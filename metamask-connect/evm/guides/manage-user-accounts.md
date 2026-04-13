@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 # Manage user accounts
 
-Use MetaMask Connect EVM to connect wallets, retrieve user accounts, and handle session lifecycle in Vanilla JavaScript or Wagmi dapps. MetaMask Connect EVM provides `connect()` for wallet access, `connectAndSign()` for single-step authentication, and the `accountsChanged` event for tracking when users switch accounts.
+Use MetaMask Connect EVM to connect wallets, retrieve user accounts, and handle session lifecycle in Vanilla JavaScript or Wagmi dapps. MetaMask Connect EVM provides `connect` for wallet access, `connectAndSign` for single-step authentication, and the `accountsChanged` event for tracking when users switch accounts.
 
 With MetaMask Connect EVM, you can:
 
