@@ -7,7 +7,8 @@ keywords: [multichain, evm, solana, sign, personal_sign, signTypedData, signMess
 
 # Sign messages on EVM and Solana
 
-This guide shows you how to sign messages and typed data on both EVM networks and Solana from a single multichain session — no network switching required.
+This guide shows you how to sign messages and typed data on both EVM networks and Solana from a single multichain session.
+No network switching is required.
 
 All signing methods route to the MetaMask wallet and require user approval.
 
@@ -63,12 +64,12 @@ const signature = await client.invokeMethod({
 console.log('Signature:', signature)
 ```
 
-Target a different chain by changing the `scope` — for example, `eip155:137` for Polygon.
+Target a different chain by changing the `scope`; for example, `eip155:137` for Polygon.
 
 ## Sign EVM typed data (`eth_signTypedData_v4`)
 
 Use [`eth_signTypedData_v4`](../../evm/reference/json-rpc-api/eth_signTypedData_v4.mdx) to sign [EIP-712](https://eips.ethereum.org/EIPS/eip-712) structured data.
-The params order is `[account, typedDataJSON]` — the typed data must be passed as a JSON string, not an object:
+The params order is `[account, typedDataJSON]`. The typed data must be passed as a JSON string, not an object:
 
 ```javascript
 const typedData = {

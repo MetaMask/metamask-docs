@@ -79,17 +79,17 @@ description: 'Set up MetaMask Connect EVM in a React Native or Expo dapp.',
 
 The EVM client works seamlessly with popular Ethereum libraries:
 
-| Library                               | Compatibility                                     |
-| ------------------------------------- | ------------------------------------------------- |
-| [viem](https://viem.sh/)              | Use with `custom()` transport                     |
-| [ethers.js](https://docs.ethers.org/) | Pass `client.getProvider()` to `BrowserProvider`  |
-| [web3.js](https://web3js.org/)        | Pass `client.getProvider()` to `Web3` constructor |
+| Library                               | Compatibility                                   |
+| ------------------------------------- | ----------------------------------------------- |
+| [viem](https://viem.sh/)              | Use with `custom` transport                     |
+| [ethers.js](https://docs.ethers.org/) | Pass `client.getProvider` to `BrowserProvider`  |
+| [web3.js](https://web3js.org/)        | Pass `client.getProvider` to `Web3` constructor |
 
 ## Frequently asked questions
 
 ### What libraries does MetaMask Connect EVM work with?
 
-MetaMask Connect EVM provides an EIP-1193 compatible provider that works with viem (via `custom()` transport), ethers.js (via `BrowserProvider`), web3.js (via `Web3` constructor), and Wagmi (via the `metamask()` connector). It also supports wallet connector libraries like RainbowKit, ConnectKit, Dynamic, Privy, Web3Auth, and more.
+MetaMask Connect EVM provides an EIP-1193 compatible provider that works with viem (via `custom` transport), ethers.js (via `BrowserProvider`), web3.js (via `Web3` constructor), and Wagmi (via the `metamask` connector). It also supports wallet connector libraries like RainbowKit, ConnectKit, Dynamic, Privy, Web3Auth, and more.
 
 ### Do I need an Infura API key for MetaMask Connect EVM?
 

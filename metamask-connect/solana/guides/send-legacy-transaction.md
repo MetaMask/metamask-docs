@@ -86,7 +86,7 @@ for (const transaction of transactions) {
 
 ## Sign a transaction without sending
 
-Use `solana:signTransaction` when you need a signed transaction but want to submit it yourself — for
+Use `solana:signTransaction` when you need a signed transaction but want to submit it yourself; for
 example, for offline signing or multi-sig workflows.
 
 ```javascript

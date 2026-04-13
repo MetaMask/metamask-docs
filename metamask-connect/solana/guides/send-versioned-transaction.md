@@ -7,7 +7,7 @@ keywords: [solana, versioned transaction, v0 transaction, address lookup table, 
 
 # Send a versioned transaction
 
-Solana [versioned transactions](https://solana.com/developers/guides/advanced/versions) (`v0`) support [Address Lookup Tables](https://solana.com/developers/guides/advanced/lookup-tables), which let you reference up to 256 addresses in a single transaction — useful for complex operations that would exceed the limits of legacy transactions.
+Solana [versioned transactions](https://solana.com/developers/guides/advanced/versions) (`v0`) support [Address Lookup Tables](https://solana.com/developers/guides/advanced/lookup-tables), which let you reference up to 256 addresses in a single transaction. This is useful for complex operations that would exceed the limits of legacy transactions.
 
 This guide shows you how to create, sign, and send versioned transactions through MetaMask.
 

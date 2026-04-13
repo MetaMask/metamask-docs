@@ -327,11 +327,11 @@ If you previously used `@metamask/sdk` with Wagmi, the MetaMask connector now us
 
    | Old (wagmi v2)                      | New (wagmi v3)                         | Notes                                       |
    | ----------------------------------- | -------------------------------------- | ------------------------------------------- |
-   | `useAccount()`                      | `useConnection()`                      | Returns `address`, `isConnected`, `chainId` |
-   | `useConnect()` returns `connectors` | `useConnectors()` hook                 | Connectors are a separate hook              |
+   | `useAccount`                        | `useConnection`                        | Returns `address`, `isConnected`, `chainId` |
+   | `useConnect` returns `connectors`   | `useConnectors` hook                   | Connectors are a separate hook              |
    | `connect({ connector })`            | `connect.mutate({ connector })`        | Hooks return mutation objects               |
-   | `signMessage({ message })`          | `signMessage.mutateAsync({ message })` | Use `.mutateAsync()` for async results      |
-   | `sendTransaction({...})`            | `sendTx.mutateAsync({...})`            | Use `.mutateAsync()` for async results      |
+   | `signMessage({ message })`          | `signMessage.mutateAsync({ message })` | Use `.mutateAsync` for async results        |
+   | `sendTransaction({...})`            | `sendTx.mutateAsync({...})`            | Use `.mutateAsync` for async results        |
    | `switchChain({ chainId })`          | `switchChain.mutate({ chainId })`      | Mutation pattern                            |
 
 3. Update connector options:

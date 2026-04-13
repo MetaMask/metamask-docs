@@ -40,7 +40,7 @@ Replace `@metamask/sdk` and `@metamask/sdk-react` imports with the new `@metamas
 
 :::note
 `@metamask/sdk-react` has no direct replacement. If you were using `MetaMaskProvider` and
-`useSDK()`, migrate to [wagmi hooks](../quickstart/wagmi.md) or manage the client instance in your
+`useSDK`, migrate to [wagmi hooks](../quickstart/wagmi.md) or manage the client instance in your
 own React context (see [React context pattern](#react-context-pattern-replacing-usesdk) below).
 :::
 
@@ -63,7 +63,7 @@ own React context (see [React context pattern](#react-context-pattern-replacing-
 
 ### 3. Update initialization
 
-Replace the `MetaMaskSDK` constructor and `init()` call with `createEVMClient()`, which handles
+Replace the `MetaMaskSDK` constructor and `init` call with `createEVMClient`, which handles
 initialization in a single async step.
 
 :::caution
@@ -142,7 +142,7 @@ options that MetaMask Connect EVM no longer exposes.
 
 ### 4. Update connection flow
 
-In MetaMask Connect EVM, you request chain permissions during `connect()` and receive the connected accounts
+In MetaMask Connect EVM, you request chain permissions during `connect` and receive the connected accounts
 and selected chain ID in a single response. This replaces the previous flow where you connected first
 and then made a separate JSON-RPC request for `eth_chainId`.
 
@@ -165,12 +165,12 @@ and then made a separate JSON-RPC request for `eth_chainId`.
 // add-end
 ```
 
-`connect()` now returns an object with both `accounts` and `chainId` in a single call.
+`connect` now returns an object with both `accounts` and `chainId` in a single call.
 The `chainIds` parameter specifies which chains to request permission for.
 Ethereum Mainnet (`0x1`) is always included regardless of what you pass.
 
 :::note
-Chain IDs must be hex strings — use `'0x1'`, not `1` or `'1'`, in `chainIds` and
+Chain IDs must be hex strings. Use `'0x1'`, not `1` or `'1'`, in `chainIds` and
 `supportedNetworks` keys.
 :::
 
@@ -207,8 +207,8 @@ app and encounter errors referencing `Buffer`, `crypto`, `stream`, or `Event is 
 
 ### 5. Update provider access
 
-In MetaMask Connect EVM, `client.getProvider()` returns an EIP-1193 provider. You no longer use the
-`SDKProvider` returned by `sdk.getProvider()`.
+In MetaMask Connect EVM, `client.getProvider` returns an EIP-1193 provider. You no longer use the
+`SDKProvider` returned by `sdk.getProvider`.
 
 **Old:**
 
@@ -231,10 +231,10 @@ In MetaMask Connect EVM, `client.getProvider()` returns an EIP-1193 provider. Yo
 Key differences:
 
 - The provider is a standard EIP-1193 provider, not the custom `SDKProvider`.
-- The provider is available immediately after `createEVMClient` resolves, even before `connect()`.
+- The provider is available immediately after `createEVMClient` resolves, even before `connect`.
 - Read-only calls (like `eth_blockNumber`) work immediately against `supportedNetworks` RPCs.
-  Account-dependent calls require `connect()` first.
-- `client.getProvider()` never returns `undefined`.
+  Account-dependent calls require `connect` first.
+- `client.getProvider` never returns `undefined`.
 
 ### 6. Update event handling
 
@@ -341,10 +341,10 @@ See the [multichain quickstart](../../multichain/quickstart/javascript.md) for a
 | Old (`@metamask/sdk`)    | New (`@metamask/connect-evm`)                      | Status                                |
 | ------------------------ | -------------------------------------------------- | ------------------------------------- |
 | `new MetaMaskSDK(opts)`  | `await createEVMClient(opts)`                      | Renamed, async                        |
-| `sdk.init()`             | Not needed                                         | Init happens in `createEVMClient`     |
-| `sdk.connect()`          | `client.connect({ chainIds })`                     | Returns `{ accounts, chainId }`       |
-| `sdk.getProvider()`      | `client.getProvider()`                             | Returns EIP-1193 provider             |
-| `sdk.disconnect()`       | `client.disconnect()`                              | Same, plus partial disconnect support |
+| `sdk.init`               | Not needed                                         | Init happens in `createEVMClient`     |
+| `sdk.connect`            | `client.connect({ chainIds })`                     | Returns `{ accounts, chainId }`       |
+| `sdk.getProvider`        | `client.getProvider`                               | Returns EIP-1193 provider             |
+| `sdk.disconnect`         | `client.disconnect`                                | Same, plus partial disconnect support |
 | `dappMetadata`           | `dapp`                                             | Renamed                               |
 | `infuraAPIKey`           | [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) in `api.supportedNetworks` | Helper function                       |
 | `readonlyRPCMap`         | `api.supportedNetworks`                            | Merged with Infura URLs               |

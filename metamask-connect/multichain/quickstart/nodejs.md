@@ -69,13 +69,13 @@ const client = await createMultichainClient({
 
 :::info Asynchronous client
 `createMultichainClient` returns a promise. Always `await` it before using the client.
-The client is a **singleton** — calling it again returns the same instance with merged options.
+The client is a **singleton**; calling it again returns the same instance with merged options.
 :::
 
 ### 3. Connect to MetaMask
 
 Register a [`wallet_sessionChanged`](../reference/api.md#wallet_sessionchanged) listener using the [`on`](../reference/methods.md#on) method to capture session data, then connect with both EVM and Solana scopes in a single call.
-A QR code appears in the terminal — scan it with the MetaMask mobile app:
+A QR code appears in the terminal. Scan it with the MetaMask mobile app:
 
 ```javascript
 let session
@@ -179,9 +179,9 @@ client.on('wallet_sessionChanged', session => {
 | Method                                                                           | Description                                                                                   |
 | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)             | Connects to MetaMask with multichain [scopes](../concepts/scopes.md).                         |
-| [`getSession()`](../reference/methods.md#getsession)                             | Returns the current [session](../concepts/sessions.md) with approved accounts. |
+| [`getSession`](../reference/methods.md#getsession)                               | Returns the current [session](../concepts/sessions.md) with approved accounts. |
 | [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod)       | Calls an RPC method on a specific chain using a [scope](../concepts/scopes.md).               |
-| [`disconnect()`](../reference/methods.md#disconnect)                             | Disconnects all [scopes](../concepts/scopes.md) and ends the session.                         |
+| [`disconnect`](../reference/methods.md#disconnect)                               | Disconnects all [scopes](../concepts/scopes.md) and ends the session.                         |
 | [`disconnect(scopes)`](../reference/methods.md#disconnect)                       | Disconnects specific [scopes](../concepts/scopes.md) without ending the session.              |
 | [`on(event, handler)`](../reference/methods.md#on)                               | Registers an event handler.                                                                   |
 | [`getInfuraRpcUrls({ infuraApiKey })`](../reference/methods.md#getinfurarpcurls) | Generates Infura RPC URLs keyed by CAIP-2 chain ID.                                           |

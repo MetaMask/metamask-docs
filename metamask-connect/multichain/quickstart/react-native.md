@@ -222,7 +222,7 @@ you will get `crypto.getRandomValues is not a function`.
 ### 6. Use MetaMask Connect Multichain
 
 Initialize the multichain client and use it to connect to both EVM and Solana networks in a single session.
-`mobile.preferredOpenLink` is **required** — it tells MetaMask Connect how to open deeplinks to the MetaMask
+`mobile.preferredOpenLink` is **required**; it tells MetaMask Connect how to open deeplinks to the MetaMask
 Mobile app:
 
 ```tsx
@@ -452,9 +452,9 @@ npx expo run:ios
 | Method                                                                  | Description                                            |
 | ----------------------------------------------------------------------- | ------------------------------------------------------ |
 | [`connect(scopes, caipAccountIds)`](../reference/methods.md#connect)    | Connects to MetaMask with multichain [scopes](../concepts/scopes.md). |
-| [`getSession()`](../reference/methods.md#getsession)                    | Returns the current session with approved accounts.     |
+| [`getSession`](../reference/methods.md#getsession)                      | Returns the current session with approved accounts.     |
 | [`invokeMethod({ scope, request })`](../reference/methods.md#invokemethod) | Calls an RPC method on a specific chain.             |
-| [`disconnect()`](../reference/methods.md#disconnect)                    | Disconnects all scopes and ends the session.            |
+| [`disconnect`](../reference/methods.md#disconnect)                      | Disconnects all scopes and ends the session.            |
 | [`disconnect(scopes)`](../reference/methods.md#disconnect)              | Disconnects specific scopes without ending the session. |
 | [`on(event, handler)`](../reference/methods.md#on)                     | Registers an event handler.                             |
 

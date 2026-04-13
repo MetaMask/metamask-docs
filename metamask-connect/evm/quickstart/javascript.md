@@ -146,7 +146,7 @@ These examples configure MetaMask Connect EVM with the following options:
 
 :::info Asynchronous client
 `createEVMClient` returns a promise. Always `await` it before using the client.
-The client is a **singleton** — calling `createEVMClient` again returns the same instance.
+The client is a **singleton**; calling `createEVMClient` again returns the same instance.
 :::
 
 ### 3. Connect and use provider
@@ -179,19 +179,19 @@ const balance = await provider.request({
 console.log('Balance:', balance)
 ```
 
-[`evmClient.connect()`](../reference/methods.md#connect) handles cross-platform connection (desktop and mobile), including deeplinking.
+[`evmClient.connect`](../reference/methods.md#connect) handles cross-platform connection (desktop and mobile), including deeplinking.
 Pass `chainIds` to request permission for specific chains (hex strings). Ethereum Mainnet (`0x1`)
 is always included regardless of what you pass.
 
-Use [`provider.request()`](../reference/provider-api.md#request) for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
+Use [`provider.request`](../reference/provider-api.md#request) for arbitrary [JSON-RPC requests](../reference/json-rpc-api/index.md) like `eth_chainId` or `eth_getBalance`, or for [batching requests](../guides/metamask-exclusive/batch-requests.md) via `metamask_batch`.
 
 ## Common MetaMask Connect EVM methods at a glance
 
 | Method                                                                         | Description                                              |
 | ------------------------------------------------------------------------------ | -------------------------------------------------------- |
-| [`connect()`](../reference/methods.md#connect)                                 | Triggers wallet connection flow                          |
+| [`connect`](../reference/methods.md#connect)                                   | Triggers wallet connection flow                          |
 | [`connectAndSign({ message: "..." })`](../reference/methods.md#connectandsign) | Connects and prompts the user to sign a message          |
-| [`getProvider()`](../reference/methods.md#getprovider)                         | Returns the provider object for RPC requests             |
+| [`getProvider`](../reference/methods.md#getprovider)                           | Returns the provider object for RPC requests             |
 | [`provider.request({ method, params })`](../reference/provider-api.md#request) | Calls any Ethereum JSON‑RPC method                       |
 | [Batched RPC](../guides/metamask-exclusive/batch-requests.md)                  | Use `metamask_batch` to group multiple JSON-RPC requests |
 
