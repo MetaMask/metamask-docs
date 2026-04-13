@@ -183,8 +183,8 @@ try {
 
 ### Display multiple NFTs
 
-To prompt users to add multiple NFTs, use `sendAsync()` instead of
-`request()` to call `wallet_watchAsset`.
+To prompt users to add multiple NFTs, use `sendAsync` instead of
+`request` to call `wallet_watchAsset`.
 For example:
 
 ```javascript

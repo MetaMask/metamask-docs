@@ -20,7 +20,7 @@ toc_max_heading_level: 2
 
 # MetaMask Connect Solana methods
 
-MetaMask Connect Solana (`@metamask/connect-solana`) provides `createSolanaClient()` to initialize the client, `getInfuraRpcUrls()` to generate Infura RPC endpoints for Solana networks, `getWallet()` to access Wallet Standard features (`signTransaction`, `signAndSendTransaction`, `signMessage`), and automatic Wallet Standard registration for compatibility with the Solana Wallet Adapter ecosystem. The client wraps `@metamask/connect-multichain` and handles wallet discovery and session management automatically.
+MetaMask Connect Solana (`@metamask/connect-solana`) provides `createSolanaClient` to initialize the client, `getInfuraRpcUrls` to generate Infura RPC endpoints for Solana networks, `getWallet` to access Wallet Standard features (`signTransaction`, `signAndSendTransaction`, `signMessage`), and automatic Wallet Standard registration for compatibility with the Solana Wallet Adapter ecosystem. The client wraps `@metamask/connect-multichain` and handles wallet discovery and session management automatically.
 
 ## `createSolanaClient`
 
@@ -44,7 +44,7 @@ Calling `createSolanaClient` multiple times returns the same underlying multicha
 
 :::note
 `createSolanaClient` does not accept `eventHandlers`.
-To listen for lower-level multichain events (such as session changes), use `client.core.on()` after
+To listen for lower-level multichain events (such as session changes), use `client.core.on` after
 creating the client. See the [multichain event methods](/metamask-connect/multichain/reference/methods#on).
 :::
 
@@ -91,7 +91,7 @@ Each chain must be activated in your [Infura dashboard](https://developer.metama
 
 ### Returns
 
-[`SolanaSupportedNetworks`](#solanasupportednetworks) — a map of network names to Infura RPC URLs.
+[`SolanaSupportedNetworks`](#solanasupportednetworks), a map of network names to Infura RPC URLs.
 
 ### Example
 
@@ -198,7 +198,7 @@ console.log('Solana accounts:', solAccounts)
 
 ## Supported Wallet Standard features
 
-The wallet returned by [`getWallet()`](#getwallet) implements the following
+The wallet returned by [`getWallet`](#getwallet) implements the following
 [Wallet Standard](https://github.com/wallet-standard/wallet-standard) features.
 Access them via `wallet.features['<feature>']`.
 
@@ -260,12 +260,12 @@ Configuration options passed to [`createSolanaClient`](#createsolanaclient).
 
 The object returned by [`createSolanaClient`](#createsolanaclient).
 
-| Property / Method  | Type                  | Description                                                    |
-| ------------------ | --------------------- | -------------------------------------------------------------- |
-| `core`             | `MultichainCore`      | The underlying MultichainCore instance.                        |
-| `getWallet()`      | `() => Wallet`        | Returns a Wallet Standard compatible MetaMask wallet instance. |
-| `registerWallet()` | `() => Promise<void>` | Registers MetaMask with the Wallet Standard registry.          |
-| `disconnect()`     | `() => Promise<void>` | Disconnects all Solana scopes from MetaMask.                   |
+| Property / Method | Type                  | Description                                                    |
+| ----------------- | --------------------- | -------------------------------------------------------------- |
+| `core`            | `MultichainCore`      | The underlying MultichainCore instance.                        |
+| `getWallet`       | `() => Wallet`        | Returns a Wallet Standard compatible MetaMask wallet instance. |
+| `registerWallet`  | `() => Promise<void>` | Registers MetaMask with the Wallet Standard registry.          |
+| `disconnect`      | `() => Promise<void>` | Disconnects all Solana scopes from MetaMask.                   |
 
 ## Next steps
 

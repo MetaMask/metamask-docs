@@ -189,7 +189,7 @@
       "type": "category",
       "label": "Changelog",
       "collapsed": false,
-      "items": ["changelog/0.2.0", "changelog/0.1.0"]
+      "items": ["changelog/0.2.0"]
     }
   ]
 }

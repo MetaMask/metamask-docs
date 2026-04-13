@@ -156,11 +156,11 @@ The client handles cross-platform connection (desktop and mobile), including dee
 
 ## `SolanaClient` methods at a glance
 
-| Method                                                       | Description                                                                                                |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| [`getWallet()`](../reference/methods.md#getwallet)           | Returns a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet instance |
-| [`registerWallet()`](../reference/methods.md#registerwallet) | Registers MetaMask with the Wallet Standard registry (no-op if auto-registered)                            |
-| [`disconnect()`](../reference/methods.md#disconnect)         | Disconnects Solana scopes without terminating the broader multichain session                               |
+| Method                                                     | Description                                                                                                |
+| ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| [`getWallet`](../reference/methods.md#getwallet)           | Returns a [Wallet Standard](https://github.com/wallet-standard/wallet-standard) compatible wallet instance |
+| [`registerWallet`](../reference/methods.md#registerwallet) | Registers MetaMask with the Wallet Standard registry (no-op if auto-registered)                            |
+| [`disconnect`](../reference/methods.md#disconnect)         | Disconnects Solana scopes without terminating the broader multichain session                               |
 
 ## Usage example
 
