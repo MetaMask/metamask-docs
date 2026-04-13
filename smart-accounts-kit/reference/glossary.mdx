@@ -19,7 +19,7 @@ Fine-grained, wallet execution permissions that dapps can request from MetaMask 
 
 ### Bundler
 
-An ERC-4337 component that manages the alternate mempool: it collects user operations from smart accounts, bundles them into transactions, and submits them to the network.
+An ERC-4337 component that manages the alternate mempool: it collects user operations from smart accounts, packages them, and submits them to the network.
 
 ### Caveat
 
@@ -104,3 +104,4 @@ An account that can sign transactions for a smart account.
 ### User operation
 
 A pseudo-transaction object defined by ERC-4337 that describes what a smart account should execute. User operations are submitted to the alternate mempool managed by bundlers.
+
