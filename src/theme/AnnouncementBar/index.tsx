@@ -7,7 +7,7 @@ export default function AnnouncementBar(): JSX.Element | null {
   return (
     <div className="theme-announcement-bar" role="banner" data-announcement-bar="true">
       <div style={{ textAlign: 'center' }}>
-        <strong style={{ fontWeight: 700 }}>MetaMask SDK</strong> is now <strong style={{ fontWeight: 700 }}>MetaMask Connect</strong> — go multichain with one integration across Ethereum, Solana, and every chain ahead. <a href="/metamask-connect">Get started</a>.
+        <strong style={{ fontWeight: 700 }}>MetaMask SDK</strong> is now <strong style={{ fontWeight: 700 }}>MetaMask Connect</strong>. Go multichain with one integration across Ethereum, Solana, and additional chains as support expands. <a href="/metamask-connect">Get started</a>.
       </div>
     </div>
   )

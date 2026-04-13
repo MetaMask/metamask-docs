@@ -30,6 +30,8 @@
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^14.2.0",
+    "@docsearch/css": "^4.6.2",
+    "@docsearch/react": "^4.6.2",
     "@docusaurus/core": "3.9.2",
     "@docusaurus/plugin-client-redirects": "3.9.2",
     "@docusaurus/plugin-content-docs": "3.9.2",
