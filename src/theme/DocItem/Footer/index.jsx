@@ -17,9 +17,7 @@ export default function DocItemFooter({ feedbackKey }) {
         <div className={styles.feedbackCol}>
           <FeedbackWidget key={feedbackKey} />
         </div>
-        <div className={styles.editCol}>
-          {editUrl && <EditThisPage editUrl={editUrl} />}
-        </div>
+        <div className={styles.editCol}>{editUrl && <EditThisPage editUrl={editUrl} />}</div>
       </div>
       {(lastUpdatedAt || formattedLastUpdatedAt) && (
         <div className={clsx('type-paragraph-m', styles.lastUpdated)}>

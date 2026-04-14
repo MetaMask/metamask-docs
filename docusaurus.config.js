@@ -320,9 +320,9 @@ const config = {
             module: {
               rules: [{ test: /api\/.*\.ts$/, use: 'null-loader' }],
             },
-          };
+          }
         },
-      };
+      }
     },
     // Custom Segment plugin for controlled analytics
     './src/plugins/segment',

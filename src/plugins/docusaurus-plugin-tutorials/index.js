@@ -1,7 +1,11 @@
 const path = require('path')
-const fs = require('fs/promises')
-const { glob } = require('glob')
+const fs = require('fs')
+const util = require('util')
+const glob = require('glob')
 const matter = require('gray-matter')
+
+const globAsync = util.promisify(glob.glob || glob)
+const readFileAsync = util.promisify(fs.readFile)
 
 module.exports = (context, options) => ({
   name: 'docusaurus-plugin-tutorials',
@@ -12,11 +16,11 @@ module.exports = (context, options) => ({
   async loadContent() {
     const dir = path.resolve(context.siteDir, 'src', 'pages', 'tutorials')
 
-    const filenames = await glob('**/*.{md,mdx}', { cwd: dir, nodir: true })
+    const filenames = await globAsync('**/*.{md,mdx}', { cwd: dir, nodir: true })
     const frontMatters = {}
 
     for (const filename of filenames) {
-      const src = await fs.readFile(path.join(dir, filename), 'utf-8')
+      const src = await readFileAsync(path.join(dir, filename), 'utf-8')
       const { data } = matter(src)
       const splits = filename.split('.')
       splits.pop()

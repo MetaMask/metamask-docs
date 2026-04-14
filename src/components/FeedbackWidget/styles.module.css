@@ -36,7 +36,10 @@
   background: var(--ifm-background-surface-color);
   color: var(--ifm-color-content-secondary);
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
   user-select: none;
 }
 
@@ -108,13 +111,13 @@
   user-select: none;
 }
 
-.submitBtn:hover:not(:disabled) {
-  opacity: 0.85;
-}
-
 .submitBtn:disabled {
   opacity: 0.4;
   cursor: default;
+}
+
+.submitBtn:hover:not(:disabled) {
+  opacity: 0.85;
 }
 
 .error {
