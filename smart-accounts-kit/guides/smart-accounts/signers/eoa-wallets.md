@@ -37,7 +37,7 @@ Once you've created the `AppProvider`, wrap it at the root of your application s
 that the rest of your application has access to the Wagmi's and TanStack's context.
 This will allow every component inside the provider to use the Wagmi hooks.
 
-The configuration uses the [`MetaMask Connect`](https://wagmi.sh/react/api/connectors/metaMask) connector.
+The example uses the [MetaMask Connect](https://wagmi.sh/react/api/connectors/metaMask) connector.
 For the advance configuration, see [Wagmi's createConfig API reference](https://wagmi.sh/react/api/createConfig).
 
 <Tabs>
