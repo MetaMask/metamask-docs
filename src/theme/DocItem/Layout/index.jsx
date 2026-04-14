@@ -90,7 +90,7 @@ export default function DocItemLayout({ children }) {
             <DocH1CopyPageWrapper />
             <CopyPageButton />
             <DocItemContent>{children}</DocItemContent>
-            <DocItemFooter feedbackKey={metadata.permalink} />
+            <DocItemFooter />
           </article>
           <DocItemPaginator />
         </div>
