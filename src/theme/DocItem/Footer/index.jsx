@@ -7,6 +7,12 @@ import EditThisPage from '@theme/EditThisPage'
 import FeedbackWidget from '@site/src/components/FeedbackWidget'
 import styles from './styles.module.css'
 
+if (typeof window !== 'undefined') {
+  window.__feedbackDebug = window.__feedbackDebug || []
+  window.__feedbackDebug.push('0: DocItem/Footer module loaded')
+  console.log('[DocItemFooter] 0: MODULE LOADED')
+}
+
 export default function DocItemFooter({ feedbackKey }) {
   const { metadata } = useDoc()
   const { editUrl, lastUpdatedAt, formattedLastUpdatedAt, lastUpdatedBy } = metadata

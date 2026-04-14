@@ -11,10 +11,16 @@ declare global {
   }
 }
 
+/* --- Module-level debug: runs when this chunk loads, before React --- */
+if (typeof window !== 'undefined') {
+  window.__feedbackDebug = ['1: module loaded']
+  console.log('[FeedbackWidget] 1: MODULE LOADED')
+}
+
 function dbg(msg: string) {
   if (typeof window !== 'undefined') {
     window.__feedbackDebug = window.__feedbackDebug || []
-    window.__feedbackDebug.push(`[${new Date().toISOString()}] ${msg}`)
+    window.__feedbackDebug.push(msg)
     console.log(`[FeedbackWidget] ${msg}`)
   }
 }
