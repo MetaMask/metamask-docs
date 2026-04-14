@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import BrowserOnly from '@docusaurus/BrowserOnly'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './styles.module.css'
 
 type Rating = 'yes' | 'no' | null
@@ -12,18 +11,31 @@ declare global {
 }
 
 export default function FeedbackWidget(): React.ReactNode {
-  return (
-    <BrowserOnly fallback={<div className={styles.widget} />}>
-      {() => <FeedbackWidgetClient />}
-    </BrowserOnly>
-  )
-}
-
-function FeedbackWidgetClient(): React.ReactNode {
   const [rating, setRating] = useState<Rating>(null)
   const [phase, setPhase] = useState<Phase>('initial')
   const [reason, setReason] = useState('')
   const [submitting, setSubmitting] = useState(false)
+  const yesBtnRef = useRef<HTMLButtonElement>(null)
+  const noBtnRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const yesBtn = yesBtnRef.current
+    const noBtn = noBtnRef.current
+    const onYes = () => {
+      setRating('yes')
+      setPhase('comment')
+    }
+    const onNo = () => {
+      setRating('no')
+      setPhase('comment')
+    }
+    yesBtn?.addEventListener('click', onYes)
+    noBtn?.addEventListener('click', onNo)
+    return () => {
+      yesBtn?.removeEventListener('click', onYes)
+      noBtn?.removeEventListener('click', onNo)
+    }
+  }, [])
 
   const fireAnalyticsEvent = (selectedRating: Rating, reasonText: string) => {
     window.dataLayer?.push({
@@ -32,11 +44,6 @@ function FeedbackWidgetClient(): React.ReactNode {
       rating: selectedRating,
       reason: reasonText,
     })
-  }
-
-  const handleRating = (selected: Rating) => {
-    setRating(selected)
-    setPhase('comment')
   }
 
   const handleSubmit = async () => {
@@ -89,10 +96,24 @@ function FeedbackWidgetClient(): React.ReactNode {
         <>
           <p className={styles.prompt}>Was this page helpful?</p>
           <div className={styles.buttons}>
-            <button type="button" className={styles.ratingBtn} onClick={() => handleRating('yes')}>
+            <button
+              type="button"
+              className={styles.ratingBtn}
+              ref={yesBtnRef}
+              onClick={() => {
+                setRating('yes')
+                setPhase('comment')
+              }}>
               Yes
             </button>
-            <button type="button" className={styles.ratingBtn} onClick={() => handleRating('no')}>
+            <button
+              type="button"
+              className={styles.ratingBtn}
+              ref={noBtnRef}
+              onClick={() => {
+                setRating('no')
+                setPhase('comment')
+              }}>
               No
             </button>
           </div>
