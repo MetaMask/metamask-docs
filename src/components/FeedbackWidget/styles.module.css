@@ -24,18 +24,20 @@
 }
 
 .ratingBtn {
-  all: unset;
-  box-sizing: border-box;
   display: inline-block;
+  box-sizing: border-box;
+  appearance: none;
   font-family: var(--ifm-font-family-base);
   font-size: 1rem;
   font-weight: 500;
   padding: 10px 28px;
+  margin: 0;
   border-radius: 8px;
-  border: 1px solid var(--ifm-color-emphasis-300);
-  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  background: var(--ifm-background-surface-color) !important;
   color: var(--ifm-color-content-secondary);
   cursor: pointer;
+  outline: none;
   transition:
     background 0.15s,
     border-color 0.15s,
@@ -44,8 +46,8 @@
 }
 
 .ratingBtn:hover {
-  background: var(--ifm-color-emphasis-100);
-  border-color: var(--ifm-color-emphasis-500);
+  background: var(--ifm-color-emphasis-100) !important;
+  border-color: var(--ifm-color-emphasis-500) !important;
   color: var(--ifm-color-content);
 }
 
@@ -62,22 +64,24 @@
 }
 
 .textarea {
-  all: unset;
-  box-sizing: border-box;
   display: block;
+  box-sizing: border-box;
+  appearance: none;
   width: 100%;
   max-width: 560px;
   padding: 14px 16px;
+  margin: 0;
   font-size: 1rem;
   color: var(--ifm-color-content);
-  background: var(--ifm-background-surface-color);
-  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-surface-color) !important;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
   border-radius: 8px;
   font-family: var(--ifm-font-family-base);
   resize: vertical;
   line-height: 1.6;
   white-space: pre-wrap;
   overflow-wrap: break-word;
+  outline: none;
 }
 
 .textarea::placeholder {
@@ -86,7 +90,7 @@
 
 .textarea:focus {
   outline: none;
-  border-color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary) !important;
 }
 
 .actions {
@@ -96,17 +100,20 @@
 }
 
 .submitBtn {
-  all: unset;
-  box-sizing: border-box;
   display: inline-block;
+  box-sizing: border-box;
+  appearance: none;
   font-family: var(--ifm-font-family-base);
   font-size: 1rem;
   font-weight: 500;
   padding: 10px 28px;
+  margin: 0;
   border-radius: 8px;
-  background: var(--ifm-color-primary);
+  border: none !important;
+  background: var(--ifm-color-primary) !important;
   color: #fff;
   cursor: pointer;
+  outline: none;
   transition: opacity 0.15s;
   user-select: none;
 }
