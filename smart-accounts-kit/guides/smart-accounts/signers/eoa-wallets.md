@@ -28,7 +28,7 @@ This guide supports React and React-based frameworks. For Vue, see [Wagmi docs](
 Install the [Smart Accounts Kit](https://www.npmjs.com/package/@metamask/smart-accounts-kit) and other dependencies in your project:
 
 ```bash npm2yarn
-npm install @metamask/smart-accounts-kit wagmi @tanstack/react-query viem
+npm install @metamask/smart-accounts-kit wagmi @metamask/connect-evm @tanstack/react-query viem
 ```
 
 ### 2. Create the App provider
@@ -37,6 +37,7 @@ Once you've created the `AppProvider`, wrap it at the root of your application s
 that the rest of your application has access to the Wagmi's and TanStack's context.
 This will allow every component inside the provider to use the Wagmi hooks.
 
+The configuration uses the [`MetaMask Connect`](https://wagmi.sh/react/api/connectors/metaMask) connector.
 For the advance configuration, see [Wagmi's createConfig API reference](https://wagmi.sh/react/api/createConfig).
 
 <Tabs>
@@ -68,9 +69,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
 ```ts
 import { createConfig, http } from 'wagmi'
 import { sepolia } from 'viem/chains'
+import { metaMask } from 'wagmi/connectors'
 
 export const config = createConfig({
   chains: [sepolia],
+  connectors: [metaMask()],
   transports: {
     [sepolia.id]: http(),
   },
@@ -87,9 +90,9 @@ Once the user has connected their wallet, use the [Wallet Client](https://viem.s
 
 ```ts
 import { Implementation, toMetaMaskSmartAccount } from '@metamask/smart-accounts-kit'
-import { useAccount, usePublicClient, useWalletClient } from 'wagmi'
+import { useConnection, usePublicClient, useWalletClient } from 'wagmi'
 
-const { address } = useAccount()
+const { address } = useConnection()
 const publicClient = usePublicClient()
 const { data: walletClient } = useWalletClient()
 
