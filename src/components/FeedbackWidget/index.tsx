@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import BrowserOnly from '@docusaurus/BrowserOnly'
 import styles from './styles.module.css'
 
 type Rating = 'yes' | 'no' | null
@@ -11,6 +12,14 @@ declare global {
 }
 
 export default function FeedbackWidget(): React.ReactNode {
+  return (
+    <BrowserOnly fallback={<div className={styles.widget} />}>
+      {() => <FeedbackWidgetClient />}
+    </BrowserOnly>
+  )
+}
+
+function FeedbackWidgetClient(): React.ReactNode {
   const [rating, setRating] = useState<Rating>(null)
   const [phase, setPhase] = useState<Phase>('initial')
   const [reason, setReason] = useState('')
