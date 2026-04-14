@@ -7,6 +7,15 @@ type Phase = 'initial' | 'comment' | 'submitted' | 'error'
 declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[]
+    __feedbackDebug?: string[]
+  }
+}
+
+function dbg(msg: string) {
+  if (typeof window !== 'undefined') {
+    window.__feedbackDebug = window.__feedbackDebug || []
+    window.__feedbackDebug.push(`[${new Date().toISOString()}] ${msg}`)
+    console.log(`[FeedbackWidget] ${msg}`)
   }
 }
 
@@ -15,27 +24,51 @@ export default function FeedbackWidget(): React.ReactNode {
   const [phase, setPhase] = useState<Phase>('initial')
   const [reason, setReason] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const yesBtnRef = useRef<HTMLButtonElement>(null)
-  const noBtnRef = useRef<HTMLButtonElement>(null)
+  const widgetRef = useRef<HTMLDivElement>(null)
+
+  dbg(`render: phase=${phase}, rating=${rating}`)
 
   useEffect(() => {
-    const yesBtn = yesBtnRef.current
-    const noBtn = noBtnRef.current
-    const onYes = () => {
-      setRating('yes')
-      setPhase('comment')
+    dbg('useEffect fired (component mounted)')
+
+    const widget = widgetRef.current
+    if (!widget) {
+      dbg('ERROR: widgetRef is null')
+      return
     }
-    const onNo = () => {
-      setRating('no')
-      setPhase('comment')
+
+    dbg(`widget element found: ${widget.innerHTML.substring(0, 100)}`)
+
+    const yesBtn = widget.querySelector('[data-feedback="yes"]') as HTMLElement
+    const noBtn = widget.querySelector('[data-feedback="no"]') as HTMLElement
+    dbg(`yesBtn found: ${!!yesBtn}, noBtn found: ${!!noBtn}`)
+
+    if (yesBtn) {
+      yesBtn.onclick = () => {
+        dbg('YES clicked via direct onclick assignment')
+        setRating('yes')
+        setPhase('comment')
+      }
     }
-    yesBtn?.addEventListener('click', onYes)
-    noBtn?.addEventListener('click', onNo)
-    return () => {
-      yesBtn?.removeEventListener('click', onYes)
-      noBtn?.removeEventListener('click', onNo)
+    if (noBtn) {
+      noBtn.onclick = () => {
+        dbg('NO clicked via direct onclick assignment')
+        setRating('no')
+        setPhase('comment')
+      }
     }
+
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement
+      if (target.closest('[data-feedback]')) {
+        dbg(`document click captured on: ${target.textContent}`)
+      }
+    })
   }, [])
+
+  useEffect(() => {
+    dbg(`phase changed to: ${phase}`)
+  }, [phase])
 
   const fireAnalyticsEvent = (selectedRating: Rating, reasonText: string) => {
     window.dataLayer?.push({
@@ -76,7 +109,7 @@ export default function FeedbackWidget(): React.ReactNode {
 
   if (phase === 'submitted') {
     return (
-      <div className={styles.widget}>
+      <div className={styles.widget} ref={widgetRef}>
         <p className={styles.thanks}>Thanks for your feedback!</p>
       </div>
     )
@@ -84,14 +117,14 @@ export default function FeedbackWidget(): React.ReactNode {
 
   if (phase === 'error') {
     return (
-      <div className={styles.widget}>
+      <div className={styles.widget} ref={widgetRef}>
         <p className={styles.error}>Something went wrong. Please try again later.</p>
       </div>
     )
   }
 
   return (
-    <div className={styles.widget}>
+    <div className={styles.widget} ref={widgetRef}>
       {phase === 'initial' && (
         <>
           <p className={styles.prompt}>Was this page helpful?</p>
@@ -99,8 +132,9 @@ export default function FeedbackWidget(): React.ReactNode {
             <button
               type="button"
               className={styles.ratingBtn}
-              ref={yesBtnRef}
+              data-feedback="yes"
               onClick={() => {
+                dbg('YES clicked via React onClick')
                 setRating('yes')
                 setPhase('comment')
               }}>
@@ -109,8 +143,9 @@ export default function FeedbackWidget(): React.ReactNode {
             <button
               type="button"
               className={styles.ratingBtn}
-              ref={noBtnRef}
+              data-feedback="no"
               onClick={() => {
+                dbg('NO clicked via React onClick')
                 setRating('no')
                 setPhase('comment')
               }}>
