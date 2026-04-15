@@ -22,7 +22,7 @@
     "lint:fix": "npm run lint:js -- --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "node ./scripts/husky-prepare.js"
   },
   "lint-staged": {
     "src/**/*.{ts,js,jsx,tsx}": "npm run lint:fix",
