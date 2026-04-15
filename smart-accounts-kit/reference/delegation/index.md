@@ -208,10 +208,10 @@ Throws an error if the cavet enforcer is not a known enforcer in [`SmartAccounts
 
 ### Parameters
 
-| Name          | Type                                                               | Required | Description                                                                  |
-| ------------- | ------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------- |
+| Name          | Type                                                               | Required | Description                                                                                                            |
+| ------------- | ------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `caveat`      | [`Caveat`](../types.md#caveat)                                     | Yes      | The <GlossaryTerm term="Caveat">caveat</GlossaryTerm> object containing an `enforcer` address and ABI-encoded `terms`. |
-| `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes      | Environment to resolve the <GlossaryTerm term="Caveat enforcer">caveat enforcer</GlossaryTerm> addresses.             |
+| `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes      | Environment to resolve the <GlossaryTerm term="Caveat enforcer">caveat enforcer</GlossaryTerm> addresses.              |
 
 ### Example
 
