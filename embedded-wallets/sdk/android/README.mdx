@@ -13,7 +13,7 @@ MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides authent
 
 ## Requirements
 
-- Android API version `24` or newer
+- Android API version `26` or newer
 - Android Compile and Target SDK: `34`
 - Basic knowledge of Java or Kotlin development
 
@@ -159,11 +159,11 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 // focus-start
 var web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
-        web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET, // or Web3AuthNetwork.SAPPHIRE_DEVNET
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET, // or Web3AuthNetwork.SAPPHIRE_DEVNET
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
-  )
+  ),
+  this
 )
 // focus-end
 
@@ -240,11 +240,11 @@ See the [advanced configuration sections](./advanced/) to learn more about each 
 ```kotlin
 val web3Auth = Web3Auth(
     Web3AuthOptions(
-        context = this,
         clientId = "YOUR_CLIENT_ID",
         web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET, // or Web3AuthNetwork.SAPPHIRE_DEVNET
         redirectUrl = "YOUR_APP_SCHEME://auth"
-    )
+    ),
+    this
 )
 ```
 
@@ -255,10 +255,9 @@ val web3Auth = Web3Auth(
 ```kotlin
 val web3Auth = Web3Auth(
     Web3AuthOptions(
-        context = this,
         clientId = "YOUR_CLIENT_ID",
         web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET, // or Web3AuthNetwork.SAPPHIRE_DEVNET
-        redirectUrl = "YOUR_APP_SCHEME://auth"
+        redirectUrl = "YOUR_APP_SCHEME://auth",
         authConnectionConfig = listOf(AuthConnectionConfig(
           authConnectionId = "auth-connection-id", // Get it from MetaMask Developer Dashboard
           authConnection = AuthConnection.GOOGLE,
@@ -272,7 +271,8 @@ val web3Auth = Web3Auth(
           passkeysFactor = MfaSetting(true, 5, true),
           authenticatorFactor = MfaSetting(true, 6, true),
         )
-  )
+    ),
+    this
 )
 ```
 

@@ -6,29 +6,50 @@ description: 'Web3Auth Android SDK - getUserInfo Function | Embedded Wallets'
 
 You can use the `getUserInfo` method to retrieve various details about the user, such as their login type, whether multi-factor authentication (MFA) is enabled, profile image, name, and other relevant information.
 
+:::note
+
+`getUserInfo()` throws an `Error` with code `NOUSERFOUND` when no active session exists. Always call it after `initialize()` completes and only when `getPrivateKey()` returns a non-empty string.
+
+:::
+
 ## Usage
 
 ```kotlin
 val userInfo = web3Auth.getUserInfo()
 ```
 
-## UserInfo response
+## `UserInfo` Fields
 
-```json
-{
-  "userInfo": {
-    "email": "w3a-heroes@web3auth.com",
-    "name": "Web3Auth Heroes",
-    "profileImage": "https://lh3.googleusercontent.com/a/Ajjjsdsmdjmnm...",
-    "verifier": "torus",
-    "verifierId": "w3a-heroes@web3auth.com",
-    "typeOfLogin": "google",
-    "aggregateVerifier": "w3a-google-sapphire",
-    "dappShare": "", // 24 words of seed phrase will be sent only incase of custom verifiers
-    "idToken": "<jwtToken issued by Web3Auth>",
-    "oAuthIdToken": "<jwtToken issued by OAuth provider>", // will be sent only incase of custom verifiers
-    "oAuthAccessToken": "<accessToken issued by OAuth Provider>", // will be sent only incase of custom verifiers
-    "isMfaEnabled": false // Returns whether the user has enabled MFA or not
-  }
-}
+| Field                     | Type       | Description                                                                                     |
+| ------------------------- | ---------- | ----------------------------------------------------------------------------------------------- |
+| `email`                   | `String`   | Email address of the user. Empty string if not available.                                       |
+| `name`                    | `String`   | Display name of the user. Empty string if not available.                                        |
+| `profileImage`            | `String`   | URL of the user's profile image. Empty string if not available.                                 |
+| `authConnectionId`        | `String`   | The auth connection ID (verifier name) used to log in.                                          |
+| `groupedAuthConnectionId` | `String`   | The grouped auth connection ID if aggregate verifiers are used. Empty string if not applicable. |
+| `userId`                  | `String`   | The user's unique ID within the auth connection (e.g. email for email-based, sub for OAuth).    |
+| `authConnection`          | `String`   | The auth connection type used (e.g. `"google"`, `"custom"`).                                    |
+| `dappShare`               | `String`   | DApp share for custom verifiers. Empty string for default verifiers.                            |
+| `idToken`                 | `String`   | JWT issued by Web3Auth after authentication.                                                    |
+| `oAuthIdToken`            | `String`   | JWT issued by the OAuth provider. Only present for custom verifiers.                            |
+| `oAuthAccessToken`        | `String`   | Access token issued by the OAuth provider. Only present for custom verifiers.                   |
+| `isMfaEnabled`            | `Boolean?` | Whether the user has MFA enabled. `null` if the information is not available in the session.    |
+
+### Interface
+
+```kotlin
+data class UserInfo(
+    var email: String = "",
+    var name: String = "",
+    var profileImage: String = "",
+    var groupedAuthConnectionId: String = "",
+    var authConnectionId: String = "",
+    var userId: String = "",
+    var authConnection: String = "",
+    var dappShare: String = "",
+    var idToken: String = "",
+    var oAuthIdToken: String = "",
+    var oAuthAccessToken: String = "",
+    var isMfaEnabled: Boolean? = null
+)
 ```

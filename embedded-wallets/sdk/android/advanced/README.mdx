@@ -21,11 +21,11 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 // focus-start
 var web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
-  )
+  ),
+  this
 )
 // focus-end
 
@@ -53,10 +53,10 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 | `clientId`        | Your Embedded Wallets Client ID. You can get it from Embedded Wallets [dashboard](https://developer.metamask.io/) under project details. It's a mandatory field of type `String` |
 | `web3AuthNetwork` | Defines the Embedded Wallets Network. It's a mandatory field of type `Web3AuthNetwork`.                                                                                          |
 | `redirectUrl`     | URL that Embedded Wallets will redirect API responses upon successful authentication from browser. It's a mandatory field of type `String`.                                       |
-| `sessionTime?`    | Allows developers to configure the session management time. Session time is in seconds, default is 86400 seconds which is 1 day. `sessionTime` can be max 30 days.                 |
+| `sessionTime?`    | Allows developers to configure the session management time. Session time is in seconds, default is `86400 * 30` (30 days). `sessionTime` can be max 30 days.                       |
 | `useSFAKey?`      | Use SFA key to get single factor auth key. It's an optional field with default value as `false`. Useful for wallet pregeneration and SFA mode.                                  |
-| `chains?`         | Custom chain configuration for blockchain networks. It takes `Chains` as a value.                                                                                                |
-| `defaultChainId?` | Default chain ID to use. It's an optional field with default value as `null`. The first chain in the list will be used if not provided.                                            |
+| `chains?`         | Custom chain configuration for blockchain networks. It takes `Chains` as a value. See [Chains configuration](#chains-configuration) below.                                     |
+| `defaultChainId?` | Default chain ID to use. It's an optional field with a default value of `"0x1"` (Ethereum mainnet). The first chain from the project config will be used if the project has chains configured. |
 | `enableLogging?`  | Setting to true will enable logs. It's an optional field with default value as `false`.                                                                                            |
 
 </TabItem>
@@ -76,21 +76,19 @@ The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
 
 ```kotlin
 data class Web3AuthOptions(
-    var context: Context,
     val clientId: String,
-    val web3AuthNetwork: Web3AuthNetwork,
-    var authBuildEnv: BuildEnv? = BuildEnv.PRODUCTION,
     var redirectUrl: String,
-    var sdkUrl: String = getSdkUrl(authBuildEnv),
-    val whiteLabel: WhiteLabelData? = null,
-    val authConnectionConfig: List<AuthConnectionConfig>? = null,
+    @SerializedName("network") val web3AuthNetwork: Web3AuthNetwork,
+    @SerializedName("buildEnv") var authBuildEnv: BuildEnv = BuildEnv.PRODUCTION,
+    var whiteLabel: WhiteLabelData? = null,
+    var authConnectionConfig: List<AuthConnectionConfig>? = emptyList(),
     val useSFAKey: Boolean? = false,
-    val chains: Chains? = null,
-    val mfaSettings: MfaSettings? = null,
-    val sessionTime: Int = 86400,
+    var chains: Chains? = null,
+    var mfaSettings: MfaSettings? = null,
+    val sessionTime: Int = 30 * 86400,
     val walletServicesConfig: WalletServicesConfig? = null,
-    val defaultChainId: String? = null,
-    val enableLogging: Boolean? = false
+    var defaultChainId: String? = "0x1",
+    var enableLogging: Boolean = false
 )
 ```
 
@@ -106,17 +104,72 @@ Control how long users stay authenticated and how sessions persist. The session 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
-  - Default: 7 days (`86400 * 7`).
+  - Default: 30 days (`86400 * 30`).
 
 ```kotlin
 var web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     sessionTime = 86400 * 7, // 7 days (in seconds)
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
-  )
+  ),
+  this
+)
+```
+
+## Chains Configuration
+
+The `chains` parameter lets you specify a custom blockchain network for the SDK. When set, this chain is used by wallet services (`showWalletUI`, `request`) in addition to any chains configured in the project dashboard.
+
+### `Chains` Fields
+
+| Field               | Type             | Required | Description                                                                                               |
+| ------------------- | ---------------- | -------- | --------------------------------------------------------------------------------------------------------- |
+| `chainId`           | `String`         | Yes      | Chain ID in hex format (e.g. `"0x1"` for Ethereum mainnet, `"0x89"` for Polygon).                        |
+| `rpcTarget`         | `String`         | Yes      | RPC endpoint URL for the chain.                                                                           |
+| `chainNamespace`    | `ChainNamespace` | No       | Namespace of the chain. Accepts `ChainNamespace.EIP155`, `SOLANA`, or `OTHER`. Default is `EIP155`.       |
+| `decimals`          | `Int?`           | No       | Number of decimals for the native token. Default is `18`.                                                 |
+| `blockExplorerUrl`  | `String?`        | No       | URL of the block explorer for this chain.                                                                 |
+| `displayName`       | `String?`        | No       | Human-readable name for the chain.                                                                        |
+| `logo`              | `String?`        | No       | URL of the chain's logo image.                                                                            |
+| `ticker`            | `String?`        | No       | Ticker symbol for the native token (e.g. `"ETH"`).                                                       |
+| `tickerName`        | `String?`        | No       | Full name of the native token (e.g. `"Ethereum"`).                                                        |
+
+### Interface
+
+```kotlin
+data class Chains(
+    val chainNamespace: ChainNamespace = ChainNamespace.EIP155,
+    val decimals: Int? = 18,
+    val blockExplorerUrl: String? = null,
+    val chainId: String,
+    val displayName: String? = null,
+    val logo: String? = null,
+    val rpcTarget: String,
+    val ticker: String? = null,
+    val tickerName: String? = null,
+)
+```
+
+### Example
+
+```kotlin
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID",
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "YOUR_APP_SCHEME://auth",
+    chains = Chains(
+      chainId = "0x89",
+      rpcTarget = "https://rpc.ankr.com/polygon",
+      displayName = "Polygon Mainnet",
+      ticker = "MATIC",
+      tickerName = "Matic",
+      blockExplorerUrl = "https://polygonscan.com"
+    )
+  ),
+  this
 )
 ```
 
@@ -136,3 +189,26 @@ Add additional security layers to protect user accounts with two-factor authenti
 
 - `mfaSettings` - Configure MFA settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA
+
+## Wallet Services Configuration
+
+The `walletServicesConfig` parameter in `Web3AuthOptions` allows you to customize the behavior of the wallet UI (`showWalletUI`) and request signing (`request`). For full configuration options, see the [Smart Accounts](./smart-accounts) section.
+
+| Parameter               | Description                                                                                                                                           |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy` enum. Default is `ConfirmationStrategy.DEFAULT`.                  |
+| `whiteLabel?`           | Whitelabel settings specific to the wallet services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as value. |
+
+```kotlin
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID",
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "YOUR_APP_SCHEME://auth",
+    walletServicesConfig = WalletServicesConfig(
+      confirmationStrategy = ConfirmationStrategy.MODAL
+    )
+  ),
+  this
+)
+```

@@ -6,14 +6,33 @@ description: 'Web3Auth Android SDK - getPrivateKey Function | Embedded Wallets'
 
 To retrieve the secp256k1 private key of the user, use `getPrivateKey` method. The method returns an EVM compatible private key which can be used to sign transactions on EVM compatible chains.
 
-## Usage
-
-```kotlin
-val privateKey = web3Auth.getPrivateKey()
-```
-
 :::note
 
 Web3Auth supports two widely used cryptographic curves, Secp256k1 and Ed25519, making it chain-agnostic and compatible with multiple blockchain networks. [Learn more about how to connect different blockchains](/embedded-wallets/connect-blockchain).
 
 :::
+
+:::info Session behavior
+
+- When `initialize()` completes and no active session exists, `getPrivateKey()` returns an **empty string** (`""`). Use this to check for an active session.
+- After a successful `connectTo()`, `getPrivateKey()` returns the private key.
+- If `useSFAKey = true` in `Web3AuthOptions`, this method returns the SFA core kit key instead of the standard secp256k1 key.
+- `getPrivateKey()` throws `IllegalStateException` if the internal response is in an unexpected null state.
+
+:::
+
+## Usage
+
+```kotlin
+val initializeCF = web3Auth.initialize()
+initializeCF.whenComplete { _, error ->
+    if (error == null) {
+        val privateKey = web3Auth.getPrivateKey()
+        if (privateKey.isNotEmpty()) {
+            // Active session found, user is already logged in
+        } else {
+            // No active session, prompt user to log in
+        }
+    }
+}
+```

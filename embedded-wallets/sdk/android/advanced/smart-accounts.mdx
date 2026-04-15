@@ -1,0 +1,125 @@
+---
+title: Smart Accounts
+sidebar_label: Smart Accounts
+description: 'Web3Auth Android SDK - Smart Accounts (Account Abstraction) | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+Smart Accounts enable Account Abstraction (ERC-4337) for your users, allowing features like gas sponsorship (paymasters), batched transactions, and session keys. Smart account support is configured in your Web3Auth Dashboard and is automatically applied when you use `showWalletUI` or `request`.
+
+:::info
+
+Smart Account configuration is managed at the project level in the [Web3Auth Dashboard](https://dashboard.web3auth.io). The SDK automatically retrieves the configuration during `initialize()`.
+
+:::
+
+## Wallet Services Configuration
+
+You can customize the wallet UI behavior for smart account flows using `walletServicesConfig` in `Web3AuthOptions`.
+
+### `WalletServicesConfig`
+
+| Parameter               | Description                                                                                                                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | Controls how transaction confirmations are presented. Accepts `ConfirmationStrategy` as a value. Default is `ConfirmationStrategy.DEFAULT`.                                                  |
+| `whiteLabel?`           | Optional whitelabel configuration to apply specifically to the wallet services UI. Accepts `WhiteLabelData` as a value. When set, it is merged with the project-level whitelabel config.    |
+
+### `ConfirmationStrategy`
+
+| Value          | Description                                                        |
+| -------------- | ------------------------------------------------------------------ |
+| `POPUP`        | Shows transaction confirmations in a popup window.                 |
+| `MODAL`        | Shows transaction confirmations in a modal overlay.                |
+| `AUTO_APPROVE` | Automatically approves transactions without showing a confirmation. |
+| `DEFAULT`      | Uses the platform default confirmation behavior.                   |
+
+### Interface
+
+```kotlin
+data class WalletServicesConfig(
+    val confirmationStrategy: ConfirmationStrategy? = ConfirmationStrategy.DEFAULT,
+    var whiteLabel: WhiteLabelData? = null
+)
+
+enum class ConfirmationStrategy {
+    @SerializedName("popup")
+    POPUP,
+    @SerializedName("modal")
+    MODAL,
+    @SerializedName("auto-approve")
+    AUTO_APPROVE,
+    @SerializedName("default")
+    DEFAULT
+}
+```
+
+### Usage
+
+```kotlin
+val web3Auth = Web3Auth(
+  Web3AuthOptions(
+    clientId = "YOUR_WEB3AUTH_CLIENT_ID",
+    web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+    redirectUrl = "YOUR_APP_SCHEME://auth",
+    walletServicesConfig = WalletServicesConfig(
+      confirmationStrategy = ConfirmationStrategy.MODAL
+    )
+  ),
+  this
+)
+```
+
+## Using Smart Account Operations
+
+Once smart accounts are enabled in your dashboard, you can use the `request` method to send user operations. See the [request](../usage/request) page for full details and examples.
+
+### Supported Smart Account Methods
+
+| Method                         | Description                                         |
+| ------------------------------ | --------------------------------------------------- |
+| `eth_sendUserOperation`        | Send a user operation for account abstraction.      |
+| `eth_estimateUserOperationGas` | Estimate gas for a user operation.                  |
+| `wallet_showUserOperation`     | Display user operation details in the wallet UI.    |
+
+### Example
+
+```kotlin
+val userOp = JsonObject().apply {
+    addProperty("sender", smartAccountAddress)
+    addProperty("nonce", "0x0")
+    addProperty("initCode", "0x")
+    addProperty("callData", encodedCallData)
+    addProperty("callGasLimit", "0x5208")
+    addProperty("verificationGasLimit", "0x5208")
+    addProperty("preVerificationGas", "0x5208")
+    addProperty("maxFeePerGas", "0x3b9aca00")
+    addProperty("maxPriorityFeePerGas", "0x3b9aca00")
+    addProperty("paymasterAndData", "0x")
+    addProperty("signature", "0x")
+}
+
+val params = JsonArray().apply {
+    add(userOp)
+}
+
+val userOpCompletableFuture = web3Auth.request(
+    "eth_sendUserOperation",
+    requestParams = params
+)
+
+userOpCompletableFuture.whenComplete { result, error ->
+    if (error == null) {
+        Log.d("UserOp Hash", result.toString())
+    } else {
+        Log.d("UserOp Error", error.message ?: "Failed to send user operation")
+    }
+}
+```
+
+:::tip
+
+The bundler and paymaster configuration is automatically handled by the Web3Auth Dashboard. You do not need to provide these URLs manually in your Android code.
+
+:::

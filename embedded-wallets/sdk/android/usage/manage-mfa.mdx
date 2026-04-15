@@ -39,20 +39,19 @@ manageMFACF.whenComplete{_, error ->
 
 ```kotlin title="Usage"
 val loginParams = LoginParams(
-  Provider.JWT,
-  extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+  AuthConnection.CUSTOM,
+  authConnectionId = "your_auth_connection_id"
 )
 
 val manageMFACF = web3Auth.manageMFA(loginParams)
 
-manageMFACF.whenComplete{_, error ->
+manageMFACF.whenComplete { _, error ->
   if (error == null) {
-     // Handle success
+    // Handle success
   } else {
-     // Handle error
+    // Handle error
   }
 }
-
 ```
 
 </TabItem>

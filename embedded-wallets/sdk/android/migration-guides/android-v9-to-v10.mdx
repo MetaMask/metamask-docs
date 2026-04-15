@@ -124,7 +124,6 @@ val web3Auth = Web3Auth(
 ```kotlin
 val web3Auth = Web3Auth(
     Web3AuthOptions(
-        context = this,
         clientId = "YOUR_CLIENT_ID",
         web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
         redirectUrl = "your-app://auth", // Now a String instead of Uri
@@ -134,7 +133,8 @@ val web3Auth = Web3Auth(
             clientId = "google-client-id"
         )),
         authBuildEnv = BuildEnv.PRODUCTION // Renamed from buildEnv
-    )
+    ),
+    this
 )
 ```
 

@@ -23,9 +23,10 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### User management functions
 
-| Function Name                          | Description                                     |
-| -------------------------------------- | ----------------------------------------------- |
-| [`getUserInfo()`](./get-user-info.mdx) | Retrieves the authenticated user's information. |
+| Function Name                          | Description                                                                                   |
+| -------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [`getUserInfo()`](./get-user-info.mdx) | Retrieves the authenticated user's information as a `UserInfo` object.                        |
+| `getWeb3AuthResponse()`                | Retrieves the full `Web3AuthResponse` from the current session, including keys and user info. |
 
 ### Private key functions
 
@@ -47,3 +48,19 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | [`showWalletUI()`](./launch-wallet-services.mdx)         | Launches the templated wallet UI in WebView with automatic chain configuration from dashboard. |
 | [`request()`](./request.mdx)                             | Opens templated transaction screens for signing EVM transactions with simplified parameters.   |
+
+## `getWeb3AuthResponse()`
+
+The `getWeb3AuthResponse()` method returns the full `Web3AuthResponse` from the current session. This gives you direct access to all session data including keys, user info, signatures, and factor keys.
+
+```kotlin
+val response = web3Auth.getWeb3AuthResponse()
+```
+
+:::warning
+
+`getWeb3AuthResponse()` throws an `Error` with code `NOUSERFOUND` when no active session exists. Check for an active session using `getPrivateKey().isNotEmpty()` before calling this method.
+
+:::
+
+For most use cases, prefer the typed accessors (`getPrivateKey()`, `getEd25519PrivateKey()`, `getUserInfo()`) which provide a more ergonomic API with clear error messages.

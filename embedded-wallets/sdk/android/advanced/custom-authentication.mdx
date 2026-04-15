@@ -153,7 +153,6 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
@@ -164,7 +163,8 @@ val web3Auth = Web3Auth(
       clientId = getString(R.string.google_client_id) // Google's client id
     ))
     // focus-end
-  )
+  ),
+  this
 )
 
 // focus-start
@@ -185,7 +185,6 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
@@ -198,7 +197,8 @@ val web3Auth = Web3Auth(
       )
     )
     // focus-end
-  )
+  ),
+  this
 )
 
 // focus-start
@@ -220,7 +220,6 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
@@ -228,10 +227,11 @@ val web3Auth = Web3Auth(
     authConnectionConfig = listOf(AuthConnectionConfig(
       authConnectionId = "auth-connection-id", // Get it from MetaMask Developer Dashboard
       authConnection = AuthConnection.CUSTOM,
-      clientId = getString (R.string.auth0_project_id) // Auth0's client id
+      clientId = getString(R.string.auth0_project_id) // Auth0's client id
     ))
     // focus-end
-  )
+  ),
+  this
 )
 
 // focus-start
@@ -252,7 +252,6 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
@@ -264,7 +263,8 @@ val web3Auth = Web3Auth(
       )
     )
     // focus-end
-  )
+  ),
+  this
 )
 
 // focus-start
@@ -383,7 +383,6 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
@@ -391,10 +390,11 @@ val web3Auth = Web3Auth(
     authConnectionConfig = listOf(AuthConnectionConfig(
       authConnectionId = "auth-connection-id", // Get it from MetaMask Developer Dashboard
       authConnection = AuthConnection.CUSTOM,
-      clientId = getString (R.string.auth0_project_id) // Auth0's client id
+      clientId = getString(R.string.auth0_project_id) // Auth0's client id
     ))
     // focus-end
-  )
+  ),
+  this
 )
 
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
@@ -423,7 +423,6 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
@@ -433,7 +432,8 @@ val web3Auth = Web3Auth(
       authConnection = AuthConnection.CUSTOM,
     ))
     // focus-end
-  )
+  ),
+  this
 )
 
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
@@ -461,11 +461,11 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
-  )
+  ),
+  this
 )
 
 val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
@@ -496,11 +496,11 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
-  )
+  ),
+  this
 )
 
 // focus-start
@@ -528,7 +528,6 @@ import org.torusresearch.fetchnodedetails.types.Web3AuthNetwork
 
 val web3Auth = Web3Auth(
   Web3AuthOptions(
-    context = this,
     clientId = "YOUR_WEB3AUTH_CLIENT_ID", // Pass over your Web3Auth Client ID from Developer Dashboard
     web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
     redirectUrl = "{YOUR_APP_PACKAGE_NAME}://auth",
@@ -550,7 +549,8 @@ val web3Auth = Web3Auth(
       )
     )
     // focus-end
-  )
+  ),
+  this
 )
 
 // focus-start
