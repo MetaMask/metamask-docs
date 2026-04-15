@@ -2,6 +2,11 @@ const OsanoPlugin = () => {
   return {
     name: 'docusaurus-plugin-osano',
     injectHtmlTags() {
+      // Prevent Osano from running in Vercel preview/dev builds where it can block React hydration.
+      if (process.env.VERCEL_ENV !== 'production') {
+        return {}
+      }
+
       return {
         headTags: [
           {
