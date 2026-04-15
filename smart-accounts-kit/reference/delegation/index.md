@@ -200,6 +200,77 @@ import { decodeDelegation } from '@metamask/smart-accounts-kit/utils'
 const delegation = decodeDelegation('0x7f0db33d..c06aeeac')
 ```
 
+## `decodeCaveat`
+
+Decodes a caveat's encoded `terms`.
+
+Throws an error if the cavet enforcer is not a known enforcer in [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment).
+
+### Parameters
+
+| Name          | Type                                                               | Required | Description                                                                  |
+| ------------- | ------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------- |
+| `caveat`      | [`Caveat`](../types.md#caveat)                                     | Yes      | The <GlossaryTerm term="Caveat">caveat</GlossaryTerm> object containing an `enforcer` address and ABI-encoded `terms`. |
+| `environment` | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes      | Environment to resolve the <GlossaryTerm term="Caveat enforcer">caveat enforcer</GlossaryTerm> addresses.             |
+
+### Example
+
+<Tabs>
+<TabItem value="example.ts">
+
+```ts
+import { decodeCaveat } from '@metamask/smart-accounts-kit/utils'
+import { delegation } from './config.ts'
+
+const environment = delegation.environment
+
+// Decode the first caveat from the delegation.
+const decodedCaveat = decodeCaveat({
+  caveat: delegation.caveats[0],
+  environment,
+})
+
+// Output:
+// {
+//   type: 'erc20TransferAmount',
+//   tokenAddress: '0x1c7D...7238',
+//   maxAmount: 10000000n,
+// }
+```
+
+</TabItem>
+<TabItem value="config.ts">
+
+```ts
+import {
+  createDelegation,
+  getSmartAccountsEnvironment,
+  ScopeType,
+} from '@metamask/smart-accounts-kit'
+import { sepolia } from 'viem/chains'
+import { parseUnits } from 'viem'
+
+const environment = getSmartAccountsEnvironment(sepolia.id)
+
+// USDC address on Ethereum Sepolia.
+const tokenAddress = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
+
+export const delegation = createDelegation({
+  from: '0x7E48cA6b7fe6F3d57fdd0448B03b839958416fC1',
+  to: '0x2B2dBd1D5fbeB77C4613B66e9F35dBfE12cB0488',
+  environment,
+  scope: {
+    type: ScopeType.Erc20TransferAmount,
+    tokenAddress,
+    // 10 USDC
+    maxAmount: parseUnits('10', 6),
+  },
+})
+```
+
+</TabItem>
+</Tabs>
+
 ## `deploySmartAccountsEnvironment`
 
 Deploys the <GlossaryTerm term="Delegation Framework" /> contracts to an EVM chain.
