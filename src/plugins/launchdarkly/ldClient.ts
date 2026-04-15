@@ -9,6 +9,11 @@ export default (function () {
   }
 
   const { LD_CLIENT_ID } = siteConfig.customFields
+
+  if (!LD_CLIENT_ID) {
+    return null
+  }
+
   const COOKIE_NAME = 'feature_preview'
   const feature_preview = Cookies.get(COOKIE_NAME)
 
