@@ -35,6 +35,9 @@ export function getPnPVersion(platform) {
   if (platform === reactnative) {
     return pnpRNVersion
   }
+  if (platform === node) {
+    return pnpNodeVersion
+  }
   if (platform === flutter) {
     return pnpFlutterVersion
   }
