@@ -124,17 +124,17 @@ The `chains` parameter lets you specify a custom blockchain network for the SDK.
 
 ### `Chains` Fields
 
-| Field               | Type             | Required | Description                                                                                               |
-| ------------------- | ---------------- | -------- | --------------------------------------------------------------------------------------------------------- |
-| `chainId`           | `String`         | Yes      | Chain ID in hex format (e.g. `"0x1"` for Ethereum mainnet, `"0x89"` for Polygon).                        |
-| `rpcTarget`         | `String`         | Yes      | RPC endpoint URL for the chain.                                                                           |
-| `chainNamespace`    | `ChainNamespace` | No       | Namespace of the chain. Accepts `ChainNamespace.EIP155`, `SOLANA`, or `OTHER`. Default is `EIP155`.       |
-| `decimals`          | `Int?`           | No       | Number of decimals for the native token. Default is `18`.                                                 |
-| `blockExplorerUrl`  | `String?`        | No       | URL of the block explorer for this chain.                                                                 |
-| `displayName`       | `String?`        | No       | Human-readable name for the chain.                                                                        |
-| `logo`              | `String?`        | No       | URL of the chain's logo image.                                                                            |
-| `ticker`            | `String?`        | No       | Ticker symbol for the native token (e.g. `"ETH"`).                                                       |
-| `tickerName`        | `String?`        | No       | Full name of the native token (e.g. `"Ethereum"`).                                                        |
+| Field              | Type             | Required | Description                                                                                         |
+| ------------------ | ---------------- | -------- | --------------------------------------------------------------------------------------------------- |
+| `chainId`          | `String`         | Yes      | Chain ID in hex format (e.g. `"0x1"` for Ethereum mainnet, `"0x89"` for Polygon).                   |
+| `rpcTarget`        | `String`         | Yes      | RPC endpoint URL for the chain.                                                                     |
+| `chainNamespace`   | `ChainNamespace` | No       | Namespace of the chain. Accepts `ChainNamespace.EIP155`, `SOLANA`, or `OTHER`. Default is `EIP155`. |
+| `decimals`         | `Int?`           | No       | Number of decimals for the native token. Default is `18`.                                           |
+| `blockExplorerUrl` | `String?`        | No       | URL of the block explorer for this chain.                                                           |
+| `displayName`      | `String?`        | No       | Human-readable name for the chain.                                                                  |
+| `logo`             | `String?`        | No       | URL of the chain's logo image.                                                                      |
+| `ticker`           | `String?`        | No       | Ticker symbol for the native token (e.g. `"ETH"`).                                                  |
+| `tickerName`       | `String?`        | No       | Full name of the native token (e.g. `"Ethereum"`).                                                  |
 
 ### Interface
 
@@ -196,7 +196,7 @@ The `walletServicesConfig` parameter in `Web3AuthOptions` allows you to customiz
 
 | Parameter               | Description                                                                                                                                           |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy` enum. Default is `ConfirmationStrategy.DEFAULT`.                  |
+| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy` enum. Default is `ConfirmationStrategy.DEFAULT`.                 |
 | `whiteLabel?`           | Whitelabel settings specific to the wallet services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as value. |
 
 ```kotlin

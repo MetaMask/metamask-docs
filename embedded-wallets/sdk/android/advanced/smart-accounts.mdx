@@ -21,19 +21,19 @@ You can customize the wallet UI behavior for smart account flows using `walletSe
 
 ### `WalletServicesConfig`
 
-| Parameter               | Description                                                                                                                                                                                  |
-| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `confirmationStrategy?` | Controls how transaction confirmations are presented. Accepts `ConfirmationStrategy` as a value. Default is `ConfirmationStrategy.DEFAULT`.                                                  |
-| `whiteLabel?`           | Optional whitelabel configuration to apply specifically to the wallet services UI. Accepts `WhiteLabelData` as a value. When set, it is merged with the project-level whitelabel config.    |
+| Parameter               | Description                                                                                                                                                                              |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | Controls how transaction confirmations are presented. Accepts `ConfirmationStrategy` as a value. Default is `ConfirmationStrategy.DEFAULT`.                                              |
+| `whiteLabel?`           | Optional whitelabel configuration to apply specifically to the wallet services UI. Accepts `WhiteLabelData` as a value. When set, it is merged with the project-level whitelabel config. |
 
 ### `ConfirmationStrategy`
 
-| Value          | Description                                                        |
-| -------------- | ------------------------------------------------------------------ |
-| `POPUP`        | Shows transaction confirmations in a popup window.                 |
-| `MODAL`        | Shows transaction confirmations in a modal overlay.                |
+| Value          | Description                                                         |
+| -------------- | ------------------------------------------------------------------- |
+| `POPUP`        | Shows transaction confirmations in a popup window.                  |
+| `MODAL`        | Shows transaction confirmations in a modal overlay.                 |
 | `AUTO_APPROVE` | Automatically approves transactions without showing a confirmation. |
-| `DEFAULT`      | Uses the platform default confirmation behavior.                   |
+| `DEFAULT`      | Uses the platform default confirmation behavior.                    |
 
 ### Interface
 
@@ -73,15 +73,15 @@ val web3Auth = Web3Auth(
 
 ## Using Smart Account Operations
 
-Once smart accounts are enabled in your dashboard, you can use the `request` method to send user operations. See the [request](../usage/request) page for full details and examples.
+Once smart accounts are enabled in your dashboard, you can use the `request` method to send user operations. See the [request](../../usage/request) page for full details and examples.
 
 ### Supported Smart Account Methods
 
-| Method                         | Description                                         |
-| ------------------------------ | --------------------------------------------------- |
-| `eth_sendUserOperation`        | Send a user operation for account abstraction.      |
-| `eth_estimateUserOperationGas` | Estimate gas for a user operation.                  |
-| `wallet_showUserOperation`     | Display user operation details in the wallet UI.    |
+| Method                         | Description                                      |
+| ------------------------------ | ------------------------------------------------ |
+| `eth_sendUserOperation`        | Send a user operation for account abstraction.   |
+| `eth_estimateUserOperationGas` | Estimate gas for a user operation.               |
+| `wallet_showUserOperation`     | Display user operation details in the wallet UI. |
 
 ### Example
 

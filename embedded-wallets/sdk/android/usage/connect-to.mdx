@@ -103,17 +103,17 @@ enum class AuthConnection {
 
 `connectTo` returns a `CompletableFuture<Web3AuthResponse>`. The response contains:
 
-| Field                  | Type            | Description                                                                                                       |
-| ---------------------- | --------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `privateKey`           | `String?`       | secp256k1 private key (EVM). Use `getPrivateKey()` for a safe accessor.                                           |
-| `ed25519PrivKey`       | `String?`       | Ed25519 private key (Solana, Near, etc.). Use `getEd25519PrivateKey()` for a safe accessor.                       |
-| `userInfo`             | `UserInfo?`     | User profile information. See [getUserInfo](./getUserInfo) for field details.                                     |
-| `coreKitKey`           | `String?`       | SFA key returned when `useSFAKey = true`.                                                                         |
-| `coreKitEd25519PrivKey`| `String?`       | SFA Ed25519 key returned when `useSFAKey = true`.                                                                 |
-| `factorKey`            | `String?`       | Factor key for MFA flows.                                                                                         |
-| `sessionId`            | `String?`       | Current session identifier.                                                                                       |
-| `signatures`           | `List<String>?` | Session token signatures for advanced use cases.                                                                  |
-| `error`                | `String?`       | Non-null when the session returned an error.                                                                      |
+| Field                   | Type            | Description                                                                                 |
+| ----------------------- | --------------- | ------------------------------------------------------------------------------------------- |
+| `privateKey`            | `String?`       | secp256k1 private key (EVM). Use `getPrivateKey()` for a safe accessor.                     |
+| `ed25519PrivKey`        | `String?`       | Ed25519 private key (Solana, Near, etc.). Use `getEd25519PrivateKey()` for a safe accessor. |
+| `userInfo`              | `UserInfo?`     | User profile information. See [getUserInfo](../getUserInfo) for field details.              |
+| `coreKitKey`            | `String?`       | SFA key returned when `useSFAKey = true`.                                                   |
+| `coreKitEd25519PrivKey` | `String?`       | SFA Ed25519 key returned when `useSFAKey = true`.                                           |
+| `factorKey`             | `String?`       | Factor key for MFA flows.                                                                   |
+| `sessionId`             | `String?`       | Current session identifier.                                                                 |
+| `signatures`            | `List<String>?` | Session token signatures for advanced use cases.                                            |
+| `error`                 | `String?`       | Non-null when the session returned an error.                                                |
 
 Prefer the typed accessors `getPrivateKey()` and `getEd25519PrivateKey()` over reading `privateKey` directly — they correctly handle the `useSFAKey` flag and throw `IllegalStateException` instead of returning null when no key is available.
 

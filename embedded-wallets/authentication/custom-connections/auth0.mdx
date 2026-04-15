@@ -145,12 +145,12 @@ web3Auth.setResultUrl(intent?.data)
 
 ##### Logging in
 
-Once initialized, you can use the `web3Auth.login(LoginParams("{selectedLoginProvider}"))` function to authenticate the user when they click the login button.
+Once initialized, you can use the `web3Auth.connectTo(LoginParams("{selectedLoginProvider}"))` function to authenticate the user when they click the login button.
 
 ```kotlin
 private fun signIn() {
   val selectedLoginProvider = Provider.JWT   // For Auth0, we use JWT
-  val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+  val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
     // focus-start
     LoginParams(
       selectedLoginProvider,
