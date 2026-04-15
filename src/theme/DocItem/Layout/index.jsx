@@ -99,7 +99,7 @@ function FeedbackWidget({ permalink }) {
           <div style={{ display: 'flex', gap: '12px' }}>
             <button
               type="button"
-              onClick={() => { window.alert('YES clicked – handler fires'); handleRating('yes'); }}
+              onClick={() => handleRating('yes')}
               style={{
                 display: 'inline-block',
                 boxSizing: 'border-box',
