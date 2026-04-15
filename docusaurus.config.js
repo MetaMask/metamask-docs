@@ -328,7 +328,7 @@ const config = {
     './src/plugins/segment',
     './src/plugins/launchdarkly',
     './src/plugins/sentry',
-    './src/plugins/osano.ts',
+    // './src/plugins/osano.ts', // temporarily disabled to test preview hydration
     [
       '@docusaurus/plugin-google-tag-manager',
       {
