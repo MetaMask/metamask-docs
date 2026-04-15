@@ -25,9 +25,9 @@
     "prepare": "node ./scripts/husky-prepare.js"
   },
   "lint-staged": {
-    "src/**/*.{ts,js,jsx,tsx}": "npm run lint:fix",
-    "**/*.{ts,tsx}": "npm run typecheck-staged",
-    "**/*.css": "npm run lint:style",
+    "**/*.{js,jsx,ts,tsx}": "eslint --fix --max-warnings=5",
+    "**/*.{ts,tsx}": "tsc-files --noEmit",
+    "**/*.css": "stylelint --fix",
     "**/*.{md,mdx,ts,js,tsx,jsx,json,css,scss,html,yml,yaml}": "prettier --write"
   },
   "dependencies": {
