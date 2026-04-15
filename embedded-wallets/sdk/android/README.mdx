@@ -192,7 +192,13 @@ Once the `initialize` method executes successfully, you can use the `getPrivateK
 
 :::note
 
-If the API call to fetch the project configuration fails, the method will throw an error.
+The `initialize` method may throw an error in the following situations:
+
+- No active session exists for the user.
+- A network error occurs while fetching the project configuration from the dashboard.
+- Session validation fails (for example, the stored session token is invalid or expired).
+
+Wrap the call in a `whenComplete` handler and treat any non-null error as a failed initialization rather than an absent session.
 
 :::
 
