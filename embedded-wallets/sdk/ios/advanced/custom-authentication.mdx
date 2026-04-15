@@ -8,33 +8,42 @@ import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
-Custom authentication is a way to authenticate users with your custom authentication service. For example, while authenticating with Google, you can use your own Google Client ID to authenticate users directly.
+Custom authentication lets you use your own identity provider to sign users in directly. For example,
+you can use your own Google Client ID when authenticating with Google.
 
-This feature, with MFA turned off, can even make Embedded Wallets invisible to the end user.
+With MFA disabled, custom authentication makes the wallet infrastructure invisible to your users, so
+they don't see any authentication modal or branding.
 
 <GrowthPlanNote />
 
-## Get an Auth Connection ID
+## Create a connection
 
 :::info prerequisite
 
-To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://developer.metamask.io) with your desired configuration.
+[Create a connection](../../../dashboard/authentication.mdx) from the **Authentication** tab of
+your project in the [Embedded Wallets developer dashboard](https://developer.metamask.io).
+
 
 :::
 
-To configure a connection, you need to provide the particular details of the connection into our Embedded Wallets dashboard. This enables us to map an `authConnectionId` with your connection details. This `authConnectionId` helps us to identify the connection details while initializing the SDK. You can configure multiple connections for the same project, and you can also update the connection details anytime.
+Provide your connection details in the Embedded Wallets dashboard to generate an `authConnectionId`.
+The SDK uses this ID to identify the connection during initialization. You can configure multiple
+connections for the same project and update them anytime.
 
 :::tip
 
-Learn more about the [auth provider setup](/embedded-wallets/authentication) and the different configurations available for each connection.
+See [authentication provider setup](../../../authentication/README.mdx) for available connection configurations.
 
 :::
 
 ## Configuration
 
-To use custom authentication (using supported social providers or login providers like Auth0, AWS Cognito, Firebase, or your own custom JWT login), you can add the configuration using the `authConnectionConfig` parameter during the initialization.
+To use custom authentication with supported social providers or login providers like Auth0, AWS
+Cognito, Firebase, or your own custom JWT, add the configuration using the `authConnectionConfig`
+parameter during initialization.
 
-The `authConnectionConfig` parameter is an array of `AuthConnectionConfig` instances, each defining a specific authentication connection.
+The `authConnectionConfig` parameter is an array of `AuthConnectionConfig` instances, each defining
+a specific authentication connection.
 
 ### Parameters
 
@@ -50,6 +59,7 @@ After creating the auth connection from the [Embedded Wallets developer dashboar
 
 <TabItem value="table">
 
+<<<<<<< HEAD
 | Parameter                  | Description                                                                                                                                                                                                                                                                               |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `authConnectionId`         | The name of the auth connection that you have registered on the Embedded Wallets dashboard. It's a mandatory field, and accepts `String` as a value.                                                                                                                                      |
@@ -65,6 +75,24 @@ After creating the auth connection from the [Embedded Wallets developer dashboar
 | `showOnModal?`             | Whether to show the login button on modal or not. Default is true.                                                                                                                                                                                                                        |
 | `showOnDesktop?`           | Whether to show the login button on desktop. Default is true.                                                                                                                                                                                                                             |
 | `showOnMobile?`            | Whether to show the login button on mobile. Default is true.                                                                                                                                                                                                                              |
+=======
+| Parameter                  | Description                                                                                                                                                          |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `authConnectionId`         | Name of the auth connection registered in the Embedded Wallets dashboard. Required. `String`.                                                                        |
+| `authConnection`           | Sign-in type for this connection. `.GOOGLE` triggers a Google sign-in flow; `.CUSTOM` expects your own JWT token with no sign-in flow. Required. `AuthConnection`.   |
+| `clientId`                 | Client ID from your sign-in provider (for example, Google Client ID), or your Embedded Wallets client ID when using `.CUSTOM`. Required. `String`.                   |
+| `name?`                    | Display name for the auth connection. If `nil`, the default name is used. `String`.                                                                                  |
+| `description?`             | Description for the sign-in button. If provided, the button renders at full width; otherwise it renders as an icon button. `String`.                                 |
+| `groupedAuthConnectionId?` | JWT token field that maps to a grouped auth connection ID. Must match the JWT auth connection ID configured in the dashboard. `String`.                               |
+| `logoHover?`               | Logo shown on mouse hover. `String`.                                                                                                                                 |
+| `logoLight?`               | Light logo for dark backgrounds. `String`.                                                                                                                           |
+| `logoDark?`                | Dark logo for light backgrounds. `String`.                                                                                                                           |
+| `mainOption?`              | Show the sign-in button on the main list. Default is `false`. `Bool`.                                                                                                |
+| `showOnModal?`             | Show the sign-in button on the modal. Default is `true`. `Bool`.                                                                                                     |
+| `showOnDesktop?`           | Show the sign-in button on desktop. Default is `true`. `Bool`.                                                                                                       |
+| `showOnMobile?`            | Show the sign-in button on mobile. Default is `true`. `Bool`.                                                                                                        |
+
+>>>>>>> 6f369b09 (Initial custom-authentication edits.)
 
 </TabItem>
 
@@ -212,7 +240,8 @@ let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnectio
 
 ## Configure extra sign-in options
 
-Additional to the auth connection config during initialization, you can pass extra options to the `connectTo` function to configure the login flow for cases requiring additional info. The `ExtraLoginOptions` accepts the following parameters.
+In addition to the auth connection config during initialization, you can pass extra options to the
+`connectTo` function to configure the login flow. `ExtraLoginOptions` accepts the following parameters.
 
 ### Parameters
 
@@ -226,6 +255,7 @@ Additional to the auth connection config during initialization, you can pass ext
 
 <TabItem value="table">
 
+<<<<<<< HEAD
 | Parameter                | Description                                                                                                                                                                                                                     |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `additionalParams?`      | Additional params in `[String: String]` format for OAuth login, use id_token (JWT) to authenticate with Web3Auth.                                                                                                               |
@@ -250,6 +280,32 @@ Additional to the auth connection config during initialization, you can pass ext
 | `response_type?`         | Defines which grant to execute for the authorization server. It accepts a string value.                                                                                                                                         |
 | `nonce?`                 | nonce                                                                                                                                                                                                                           |
 | `redirect_uri?`          | It can be used to specify the default URL where your custom JWT verifier can redirect your browser to with the result. If you are using Auth0, it must be allowlisted in the Allowed Callback URLs in your Auth0's application. |
+=======
+| Parameter                | Description                                                                                                                                                           |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `additionalParams?`      | Additional parameters in `[String: String]` format for OAuth sign-in. Use `id_token` (JWT) to authenticate with the SDK. `[String: String]`.                         |
+| `domain?`                | Custom authentication domain (for example, `example.au.auth0.com` for Auth0). `String`.                                                                              |
+| `client_id?`             | Client ID from your sign-in provider for custom auth connections. `String`.                                                                                           |
+| `leeway?`                | Clock-skew tolerance for JWT expiration, in seconds. Recommended maximum is 120 seconds. `Int`.                                                                       |
+| `userIdField?`           | JWT token field that maps to the user ID. Must match the JWT user ID configured in the dashboard. `String`.                                                           |
+| `isUserIdCaseSensitive?` | Whether the user ID field is case-sensitive. `Bool`.                                                                                                                   |
+| `display?`               | OIDC `display` parameter controlling how the authentication UI renders (for example, `page`, `popup`, `touch`). `String`.                                             |
+| `prompt?`                | OIDC `prompt` parameter shown during authentication (for example, `login`, `consent`, `none`). `String`.                                                              |
+| `max_age?`               | Maximum time (in seconds) since the last authentication before the user must re-authenticate. `String`.                                                               |
+| `ui_locales?`            | Space-separated list of language tags, ordered by preference (for example, `fr-CA fr en`). `String`.                                                                  |
+| `id_token_hint?`         | Previously issued ID token, used as a hint for re-authentication. `String`.                                                                                           |
+| `id_token?`              | JWT (ID token) to pass for sign-in. `String`.                                                                                                                         |
+| `access_token?`          | Access token for OAuth flows. `String`.                                                                                                                               |
+| `flow_type?`             | Email passwordless flow type. `EmailFlowType` (`.code` or `.link`).                                                                                                   |
+| `acr_values?`            | Authentication context class reference values requested from the provider. `String`.                                                                                  |
+| `scope?`                 | Default scope for authentication requests. `String`.                                                                                                                  |
+| `audience?`              | Audience for the access token, presented as the `aud` claim. `String`.                                                                                                |
+| `connection?`            | Name of the connection configured for your dapp. If `nil`, redirects to the Auth0 sign-in page. `String`.                                                            |
+| `state?`                 | Opaque value used to maintain state between the request and callback, preventing CSRF attacks. `String`.                                                              |
+| `response_type?`         | Grant type to execute for the authorization server. `String`.                                                                                                         |
+| `nonce?`                 | Random value used to prevent replay attacks in OIDC flows. `String`.                                                                                                  |
+| `redirect_uri?`          | URL where your custom JWT verifier redirects the browser with the result. For Auth0, must be allowlisted in **Allowed Callback URLs** in your Auth0 application.      |
+>>>>>>> 6f369b09 (Initial custom-authentication edits.)
 
 </TabItem>
 
@@ -302,7 +358,9 @@ public enum EmailFlowType: String, Codable {
 
 <TabItem value="auth0">
 
-Auth0 has a special login flow called the SPA flow. This flow requires a `client_id` and `domain` to be passed, and Web3Auth will get the JWT `id_token` from Auth0 directly. You can pass these configurations in the `ExtraLoginOptions` object in the login function.
+Auth0 has a special login flow called the SPA flow. This flow requires a `client_id` and `domain`, and
+the SDK retrieves the JWT `id_token` from Auth0 directly. Pass these values in the `ExtraLoginOptions`
+object in the `connectTo` call.
 
 ```swift
 import Web3Auth
@@ -341,7 +399,9 @@ let result = try await web3Auth.connectTo(
 
 <TabItem value="custom-jwt">
 
-If you're using any other provider like Firebase, AWS Cognito, or deploying your own custom JWT server, you need to put the JWT token into the `idToken` field of `LoginParams`. For SFA (Single Factor Auth) mode, this enables direct authentication without additional login flows.
+If you're using another provider like Firebase, AWS Cognito, or your own custom JWT server, pass the
+JWT token in the `idToken` parameter of `LoginParams`. In Single Factor Auth (SFA) mode, this
+enables direct authentication without additional login flows.
 
 ```swift
 import Web3Auth
@@ -378,7 +438,9 @@ let result = try await web3Auth.connectTo(
 
 <TabItem value="email-passwordless">
 
-To use the Email Passwordless login, you need to put the email into the `loginHint` parameter of the `LoginParams`. By default, the login flow will be `code` flow. If you want to use the `link` flow, you need to put `flow_type` into the `extraLoginOptions`.
+For Email Passwordless login, pass the email address as the `loginHint` parameter of `LoginParams`.
+The default flow is `code` (OTP). To use a magic link flow instead, set `flow_type` to `.link` in
+`extraLoginOptions`.
 
 ```swift
 import Web3Auth
@@ -408,7 +470,8 @@ let result = try await web3Auth.connectTo(
 
 <TabItem value="sms-passwordless">
 
-To use the SMS Passwordless login, send the phone number as the `loginHint` parameter of `LoginParams`. Please ensure the phone number takes the format: `+{country_code}-{phone_number}`, for example `+91-9911223344`.
+For SMS Passwordless login, pass the phone number as the `loginHint` parameter of `LoginParams`.
+The phone number must use the format `+{country_code}-{phone_number}`, for example `+91-9911223344`.
 
 ```swift
 import Web3Auth
@@ -436,7 +499,9 @@ let result = try await web3Auth.connectTo(
 
 ### Grouped auth connection example
 
-You can use grouped auth connections to combine multiple login methods to get the same address for the users regardless of their login providers. For example, combining a Google and Email Passwordless login, or Google and GitHub via Auth0 to access the same address for your user.
+Grouped auth connections combine multiple login methods so your users get the same address regardless
+of how they sign in. For example, combine Google and Email Passwordless, or Google and GitHub via
+Auth0, to resolve to the same address.
 
 ```swift
 import Web3Auth
