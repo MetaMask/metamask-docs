@@ -69,6 +69,12 @@ Pull requests run **`npm run format:check`** (Prettier against `.prettierrc` and
 **`npm run format`** locally to fix style before pushing. Generated Snaps API pages under
 `snaps/reference/snaps-api/` are excluded from formatting in git (see `.prettierignore`).
 
+After **`npm install`**, [Husky](https://typicode.github.io/husky/) installs a Git **`pre-commit`** hook
+that runs [**`lint-staged`**](https://github.com/lint-staged/lint-staged) using the rules in
+`package.json`. Staged files matching those patterns are auto-formatted with Prettier (and other
+commands in `lint-staged`, such as ESLint on `src/`). Restage if the hook edits files. Hooks are
+local only and are not required for CI to pass.
+
 Pull requests are checked by a Vale-based linter
 ([docs-spelling-check](https://github.com/Consensys/github-actions/tree/main/docs-spelling-check))
 that enforces Microsoft style, Consensys terminology, and spelling. Fix any linter warnings before

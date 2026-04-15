@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+# Git GUIs (Fork, etc.) often omit Node from PATH. Resolve node, then run lint-staged without npx.
+cd "$(dirname "$0")/.." || exit 1
+
+export PATH="$HOME/.volta/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  # shellcheck disable=SC1090
+  . "$HOME/.nvm/nvm.sh"
+  nvm use default >/dev/null 2>&1 || nvm use node >/dev/null 2>&1 || true
+fi
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "husky: Node.js not found. Install Node.js or open your terminal and run: which node" >&2
+  echo "husky: If you use nvm, ensure default is set (nvm alias default <version>)." >&2
+  exit 1
+fi
+
+# Call the CLI with explicit node so we do not rely on the stub shebang (#!/usr/bin/env node).
+exec node ./node_modules/lint-staged/bin/lint-staged.js
