@@ -1,5 +1,5 @@
 ---
-title: Logging in a User
+title: Sign in a user
 sidebar_label: connectTo
 description: 'Web3Auth iOS SDK - connectTo Function | Embedded Wallets'
 ---
@@ -7,9 +7,13 @@ description: 'Web3Auth iOS SDK - connectTo Function | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-To log in a user, use the `connectTo` method. It triggers the login flow and navigates the user to a browser modal allowing them to authenticate. You can pass in the supported auth connections to the method for specific social logins (such as `.GOOGLE`, `.APPLE`, `.FACEBOOK`) and do whitelabel login.
+To sign in a user, use the `connectTo` method.
+It triggers the sign-in flow and navigates the user to a browser modal for authentication.
+Pass supported auth connections for specific social sign-ins (such as `.GOOGLE`, `.APPLE`,
+`.FACEBOOK`) or use whitelabel sign-in.
 
-For SFA (Single Factor Auth) login with a JWT token, pass the `idToken` parameter to authenticate directly without the browser modal.
+For SFA (Single Factor Auth) sign-in with a JWT token, pass the `idToken` parameter to
+authenticate directly without the browser modal.
 
 ## Parameters
 
@@ -267,7 +271,9 @@ let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnectio
 
 <TabItem value="sfa_jwt">
 
-For SFA (Single Factor Auth) mode, pass the JWT token via `idToken` to authenticate directly without any browser-based login flow. This is useful when you already have a JWT from your own authentication system.
+For SFA (Single Factor Auth) mode, pass the JWT token via `idToken` to authenticate directly
+without any browser-based sign-in flow.
+This is useful when you already have a JWT from your own authentication system.
 
 ```swift
 import Web3Auth
@@ -284,7 +290,7 @@ let web3Auth = try await Web3Auth(
 let result = try await web3Auth.connectTo(
     loginParams: LoginParams(
         authConnection: .CUSTOM,
-        authConnectionId: "your-auth-connection-id", // Get it from Web3Auth Dashboard
+        authConnectionId: "your-auth-connection-id", // Get it from the Embedded Wallets dashboard
         idToken: "your_jwt_token"
     )
 )
