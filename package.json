@@ -21,12 +21,13 @@
     "lint:style": "stylelint \"src/**/*.css\" --fix",
     "lint:fix": "npm run lint:js -- --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "node ./scripts/husky-prepare.js"
   },
   "lint-staged": {
-    "src/**/*.{ts,js,jsx,tsx}": "npm run lint:fix",
-    "**/*.{ts,tsx}": "npm run typecheck-staged",
-    "**/*.css": "npm run lint:style",
+    "**/*.{js,jsx,ts,tsx}": "eslint --fix --max-warnings=5",
+    "**/*.{ts,tsx}": "tsc-files --noEmit",
+    "**/*.css": "stylelint --fix",
     "**/*.{md,mdx,ts,js,tsx,jsx,json,css,scss,html,yml,yaml}": "prettier --write"
   },
   "dependencies": {
@@ -104,6 +105,8 @@
     "@typescript-eslint/parser": "^8.46.2",
     "eslint": "^9.35.0",
     "eslint-plugin-react": "^7.37.5",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
     "stylelint": "^15.0.0 ",
     "stylelint-config-standard": "^34.0.0",
     "tsc-files": "^1.1.4",
