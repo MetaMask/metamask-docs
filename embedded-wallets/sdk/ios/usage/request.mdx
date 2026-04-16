@@ -4,11 +4,17 @@ sidebar_label: Send requests
 description: 'Web3Auth iOS SDK - request | Embedded Wallets'
 ---
 
-The `request` method facilitates the use of templated transaction screens for signing transactions. The method returns a `SignResponse?`. It can be used to sign transactions for any EVM chain and screens can be whitelabeled to your branding.
+The `request` method opens templated transaction screens for signing transactions.
+The method returns a `SignResponse?`.
+Use it to sign transactions on any EVM chain.
+You can white-label the screens to match your branding.
 
-Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
+See the list of [JSON-RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/).
+The `request` method currently supports only signing methods.
 
-Chain configuration is retrieved automatically from your project settings in the Embedded Wallets dashboard.
+The SDK retrieves chain configuration automatically from your project settings in the Embedded
+Wallets dashboard.
+
 
 <img
   className="docImg"
@@ -18,12 +24,12 @@ Chain configuration is retrieved automatically from your project settings in the
 
 ## Parameters
 
-| Parameter       | Description                                                                                                                                                                                                    |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `method`        | JSON RPC method name in `String`. Currently, the request method only supports the signing methods.                                                                                                             |
-| `requestParams` | Parameters for the corresponding method. The parameters should be in the list and in the correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/) to know more. |
-| `path?`         | Path in the wallet WebView. Defaults to `"wallet/request"`.                                                                                                                                                    |
-| `appState?`     | Optional app state string to be passed through the request flow.                                                                                                                                               |
+| Parameter       | Description                                                                                                                                                                                             |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `method`        | JSON RPC method name in `String`. Currently, the request method only supports the signing methods.                                                                                                      |
+| `requestParams` | Parameters for the corresponding method, in the correct sequence. See [JSON-RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/) for details. |
+| `path?`         | Path in the wallet WebView. Defaults to `"wallet/request"`.                                                                                                                                            |
+| `appState?`     | Optional app state string to be passed through the request flow.                                                                                                                                        |
 
 ## Usage
 
@@ -60,6 +66,6 @@ do {
 
 | Name      | Description                                                   |
 | --------- | ------------------------------------------------------------- |
-| `success` | Determines whether the request was successful or not.         |
+| `success` | Whether the request succeeded.                                |
 | `result?` | Holds the signature for the request when `success` is `true`. |
 | `error?`  | Holds the error for the request when `success` is `false`.    |
