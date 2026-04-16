@@ -7,11 +7,12 @@ description: 'Web3Auth iOS SDK - Advanced Configuration | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The Embedded Wallets SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
+The Embedded Wallets SDK offers configuration options to customize authentication flows, UI
+appearance, blockchain integrations, and security features for your dapp.
 
 ## Configuration structure
 
-When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
+Pass options to the `Web3Auth` constructor during setup:
 
 ```swift
 import Web3Auth
@@ -29,7 +30,7 @@ web3Auth = try await Web3Auth(
 
 ### `Web3AuthOptions`
 
-The Web3Auth constructor takes a `Web3AuthOptions` struct as input.
+The constructor takes a `Web3AuthOptions` struct as input.
 
 <Tabs
   defaultValue="table"
@@ -92,9 +93,11 @@ public struct Web3AuthOptions: Codable {
 
 Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keychain.
 
-**Key Configuration Options:**
+**Key configuration options:**
 
-- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to sign in again.
+- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated
+  before needing to sign in again.
+
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
   - Default: 30 days (`86400 * 30`).
@@ -112,7 +115,9 @@ web3Auth = try await Web3Auth(
 
 ## Chains configuration
 
-The `chains` parameter lets you specify custom blockchain networks for the SDK. When set, these chains are used by wallet services (`showWalletUI`, `request`) in addition to any chains configured in the project dashboard.
+The `chains` parameter lets you specify custom blockchain networks for the SDK.
+When set, these chains are used by wallet services (`showWalletUI`, `request`) in addition to
+any chains configured in the project dashboard.
 
 ### `Chains` fields
 
@@ -168,7 +173,9 @@ web3Auth = try await Web3Auth(
 
 ## Wallet Services configuration
 
-The `walletServicesConfig` parameter in `Web3AuthOptions` allows you to customize the behavior of the wallet UI (`showWalletUI`) and request signing (`request`). For full configuration options, see the [Smart Accounts](./smart-accounts.mdx) section.
+The `walletServicesConfig` parameter in `Web3AuthOptions` customizes the behavior of the wallet
+UI (`showWalletUI`) and request signing (`request`).
+For full configuration options, see the [Smart Accounts](./smart-accounts.mdx) section.
 
 | Parameter               | Description                                                                                                                                  |
 | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -190,17 +197,24 @@ web3Auth = try await Web3Auth(
 
 ## Custom authentication methods
 
-Control the sign-in options presented to your users. For detailed configuration options and implementation examples, see the [custom authentication](./custom-authentication.mdx) section.
+Control the sign-in options presented to your users.
+For detailed configuration options and implementation examples, see the
+[custom authentication](./custom-authentication.mdx) section.
 
 ## UI customization
 
-Customize the brand experience by customizing the Web3Auth Sign-in Screens to match your application's design. For complete customization options, refer to the [Whitelabeling and UI Customization](./whitelabel.mdx) section.
+Customize the Embedded Wallets sign-in screens to match your dapp's design.
+For complete customization options, see
+[Whitelabeling and UI customization](./whitelabel.mdx).
+
 
 ## Multi-Factor Authentication
 
-Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add security layers to protect user accounts with two-factor authentication.
+For detailed configuration options and implementation examples, see
+[Multi-Factor Authentication](./mfa.mdx).
 
-**Key Configuration Options:**
+**Key configuration options:**
 
 - `mfaSettings` - Configure MFA settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA
