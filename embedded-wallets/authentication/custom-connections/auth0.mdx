@@ -165,12 +165,12 @@ web3Auth.setResultUrl(intent?.data)
 
 ##### Logging in
 
-Once initialized, you can use the `web3Auth.login(LoginParams("{selectedLoginProvider}"))` function to authenticate the user when they click the login button.
+Once initialized, you can use the `web3Auth.connectTo(LoginParams("{selectedLoginProvider}"))` function to authenticate the user when they click the login button.
 
 ```kotlin
 private fun signIn() {
   val selectedLoginProvider = Provider.JWT   // For Auth0, we use JWT
-  val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.login(
+  val loginCompletableFuture: CompletableFuture<Web3AuthResponse> = web3Auth.connectTo(
     // focus-start
     LoginParams(
       selectedLoginProvider,
@@ -184,7 +184,7 @@ private fun signIn() {
 }
 ```
 
-When connecting, the `login` function takes the LoginParams arguments for the login. See the [LoginParams](/embedded-wallets/sdk/android/usage/login#parameters) for more details.
+When connecting, the `connectTo` function takes the LoginParams arguments for the login. See the [LoginParams](../../../sdk/android/usage/connectTo#parameters) for more details.
 
 ### Flutter
 

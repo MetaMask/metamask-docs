@@ -16,23 +16,24 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### Authentication functions
 
-| Function Name              | Description                                        |
-| -------------------------- | -------------------------------------------------- |
-| [`login()`](./login.mdx)   | Logs in the user with the selected login provider. |
-| [`logout()`](./logout.mdx) | Logs out the user from the current session.        |
+| Function Name                    | Description                                        |
+| -------------------------------- | -------------------------------------------------- |
+| [`connectTo()`](./connectTo.mdx) | Logs in the user with the selected login provider. |
+| [`logout()`](./logout.mdx)       | Logs out the user from the current session.        |
 
 ### User management functions
 
-| Function Name                        | Description                                     |
-| ------------------------------------ | ----------------------------------------------- |
-| [`getUserInfo()`](./getUserInfo.mdx) | Retrieves the authenticated user's information. |
+| Function Name           | Description                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------------- |
+| `getUserInfo()`         | Retrieves the authenticated user's information as a `UserInfo` object.                        |
+| `getWeb3AuthResponse()` | Retrieves the full `Web3AuthResponse` from the current session, including keys and user info. |
 
 ### Private key functions
 
-| Function Name                                    | Description                                                                     |
-| ------------------------------------------------ | ------------------------------------------------------------------------------- |
-| [`getPrivKey()`](./getPrivKey.mdx)               | Retrieve the user's secp256k1 private key for EVM-compatible chains.            |
-| [`getEd25519PrivKey()`](./getEd25519PrivKey.mdx) | Retrieve the user's ed25519 private key for chains like Solana, Near, Algorand. |
+| Function Name            | Description                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| `getPrivateKey()`        | Retrieve the user's secp256k1 private key for EVM-compatible chains.            |
+| `getEd25519PrivateKey()` | Retrieve the user's ed25519 private key for chains like Solana, Near, Algorand. |
 
 ### Security functions
 
@@ -43,7 +44,23 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### Wallet Services functions
 
-| Function Name                                          | Description                                                       |
-| ------------------------------------------------------ | ----------------------------------------------------------------- |
-| [`launchWalletServices()`](./launchWalletServices.mdx) | Launches the templated wallet UI in WebView.                      |
-| [`request()`](./request.mdx)                           | Opens templated transaction screens for signing EVM transactions. |
+| Function Name    | Description                                                                                    |
+| ---------------- | ---------------------------------------------------------------------------------------------- |
+| `showWalletUI()` | Launches the templated wallet UI in WebView with automatic chain configuration from dashboard. |
+| `request()`      | Opens templated transaction screens for signing EVM transactions with simplified parameters.   |
+
+## `getWeb3AuthResponse()`
+
+The `getWeb3AuthResponse()` method returns the full `Web3AuthResponse` from the current session. This gives you direct access to all session data including keys, user info, signatures, and factor keys.
+
+```kotlin
+val response = web3Auth.getWeb3AuthResponse()
+```
+
+:::warning
+
+`getWeb3AuthResponse()` throws an `Error` with code `NOUSERFOUND` when no active session exists. Check for an active session using `getPrivateKey().isNotEmpty()` before calling this method.
+
+:::
+
+For most use cases, prefer the typed accessors (`getPrivateKey()`, `getEd25519PrivateKey()`, `getUserInfo()`) which provide a more ergonomic API with clear error messages.

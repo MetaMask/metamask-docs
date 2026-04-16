@@ -69,7 +69,7 @@ dependencyResolutionManagement {
 dependencies {
     // ...
     // focus-next-line
-    implementation 'com.github.web3auth:web3auth-android-sdk:7.4.0'
+    implementation 'com.github.web3auth:web3auth-android-sdk:10.0.0'
 }
 ```
 
@@ -88,8 +88,8 @@ class Web3AuthHelperImpl(
 ): Web3AuthHelper {
 
     // Performs the login to authenticate the user with Web3Auth network.
-    override suspend fun login(loginParams: LoginParams): CompletableFuture<Web3AuthResponse> {
-        return web3Auth.login(loginParams)
+    override suspend fun connectTo(loginParams: LoginParams): CompletableFuture<Web3AuthResponse> {
+        return web3Auth.connectTo(loginParams)
     }
 
     // Logout of the current active session.
@@ -99,7 +99,7 @@ class Web3AuthHelperImpl(
 
     // Returns the Ethereum compatible private key.
     override fun getPrivateKey(): String {
-      return web3Auth.getPrivkey()
+      return web3Auth.getPrivateKey()
     }
 
     // Returns the user information such as name, email, profile image, and etc.
@@ -121,7 +121,7 @@ class Web3AuthHelperImpl(
     }
 
     override suspend fun isUserAuthenticated(): Boolean {
-        return web3Auth.getPrivkey().isNotEmpty()
+        return web3Auth.getPrivateKey().isNotEmpty()
     }
 }
 ```
@@ -146,10 +146,10 @@ private fun getWeb3AuthHelper(context: Context): Web3AuthHelper {
     val web3Auth = Web3Auth(
         Web3AuthOptions(
             clientId = "WEB3AUTH_CLIENT_ID",
-            context = context,
-            network = Network.SAPPHIRE_MAINNET,
-            redirectUrl = Uri.parse("w3a://com.example.android_playground/auth")
-        )
+            web3AuthNetwork = Web3AuthNetwork.SAPPHIRE_MAINNET,
+            redirectUrl = "w3a://com.example.android_playground/auth"
+        ),
+        context
     )
     // focus-end
 
@@ -165,7 +165,7 @@ Learn more about [Embedded Wallets initialization](/embedded-wallets/sdk/android
 
 ### 2.3 Session management
 
-To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivKey` method.
+To check whether the user is authenticated, you can use the `getPrivateKey` or `getEd25519PrivateKey` method.
 For an authenticated user, the result would be a non-empty string. You can navigate to different
 views based on the result. If the user is already authenticated, we'll generate and prepare the `Credentials`,
 required to interact with the blockchain. Along with that, we'll retrieve user info, and navigate them
@@ -248,7 +248,7 @@ blockchain. Along with that, we'll retrieve user info, and navigate them to `Hom
 
 :::note
 
-Learn more about [Embedded Wallets' `LoginParams`](/embedded-wallets/sdk/android/usage/login#parameters).
+Learn more about [Embedded Wallets' `LoginParams`](/embedded-wallets/sdk/android/usage/connectTo#parameters).
 
 :::
 
@@ -259,14 +259,14 @@ class MainViewModel(private val web3AuthHelper: Web3AuthHelper) : ViewModel() {
     fun login(email: String) {
         // focus-start
         val loginParams = LoginParams(
-            loginProvider = Provider.EMAIL_PASSWORDLESS,
-            extraLoginOptions = ExtraLoginOptions(login_hint = email)
+            AuthConnection.EMAIL_PASSWORDLESS,
+            loginHint = email
         )
         // focus-end
         viewModelScope.launch {
             try {
                 // focus-next-line
-                web3AuthHelper.login(loginParams = loginParams).await()
+                web3AuthHelper.connectTo(loginParams = loginParams).await()
                 // Functions from Session Management code snippets
                 prepareCredentials()
                 prepareUserInfo()
@@ -497,20 +497,6 @@ class EthereumUseCaseImpl(
 }
 ```
 
-Once we have the created `EthereumUseCaseImpl`, next is to initialize the `EthereumUseCaseImpl` instance in the Kotlin
-module.
-
-```kotlin
-val appModule = module {
-    // Additional code
-
-    // focus-next-line
-    factory<EthereumUseCase> { EthereumUseCaseImpl(Web3j.build(HttpService(chainConfigList.first().rpcTarget))) }
-
-    // Additional code
-}
-```
-
 ## Step 4: Set up supported chains
 
 Next, we must define the supported chains. To keep things simple, we'll create a new file `ChainConfigList` with an
@@ -549,6 +535,20 @@ var chainConfigList = arrayOf(
         tickerName = "Ethereum"
     )
 )
+```
+
+Once we have the created `EthereumUseCaseImpl`, next is to initialize the `EthereumUseCaseImpl` instance in the Kotlin
+module.
+
+```kotlin
+val appModule = module {
+    // Additional code
+
+    // focus-next-line
+    factory<EthereumUseCase> { EthereumUseCaseImpl(Web3j.build(HttpService(chainConfigList.first().rpcTarget))) }
+
+    // Additional code
+}
 ```
 
 ## Step 5: Wallet implementation

@@ -59,23 +59,30 @@ class MainActivity : AppCompatActivity() {
 
 <TabItem value="custom-jwt-verifier">
 
+:::warning
+
+`enableMFA` does **not** accept an `idToken` in `LoginParams`. Passing `idToken` will cause the SDK to throw an `ENABLE_MFA_NOT_ALLOWED` error. For custom JWT verifiers, pass an empty `LoginParams` with the `authConnection` only — the SDK automatically uses the session's auth connection to re-authenticate.
+
+:::
+
 ```kotlin title="Usage"
 import android.widget.Button
 import com.web3auth.core.Web3Auth
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Auth
+class MainActivity : AppCompatActivity() {
+    private lateinit var web3Auth: Web3Auth
 
-     private fun enableMFA() {
+    private fun enableMFA() {
         val loginParams = LoginParams(
-            Provider.JWT,
-            extraLoginOptions = ExtraLoginOptions(id_token = "your_jwt_token")
+            AuthConnection.CUSTOM,
+            authConnectionId = "your_auth_connection_id"
         )
 
         // focus-next-line
         val completableFuture = web3Auth.enableMFA(loginParams)
 
-        completableFuture.whenComplete{_, error ->
+        completableFuture.whenComplete { _, error ->
             if (error == null) {
                 Log.d("MainActivity_Web3Auth", "Launched successfully")
                 // Add your logic
@@ -94,9 +101,7 @@ class MainActivity : AppCompatActivity() { private lateinit var web3Auth: Web3Au
         ...
     }
     ...
-
 }
-
 ```
 
 </TabItem>
