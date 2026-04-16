@@ -9,24 +9,18 @@ import Tabs from '@theme/Tabs'
 
 ## Overview
 
-MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides authentication for iOS applications with social logins, external wallets, and more. Our iOS SDK, written in Swift, simplifies connecting users to their preferred wallets and manage authentication state natively.
+The MetaMask Embedded Wallets SDK for iOS (formerly Web3Auth Plug and Play) supports social
+sign-ins, external wallets, and native authentication state management.
+The SDK is written in Swift.
 
-## Requirements
+## Prerequisites
 
 - iOS 14+
 - Xcode 12+
 - Swift 5.x
-- Basic knowledge of Swift and iOS Development
-
-## Prerequisites
-
-- Set up your project on the [Embedded Wallets dashboard](https://developer.metamask.io/)
-
-:::tip
-
-See the [dashboard setup](../../dashboard/README.mdx) guide to learn more.
-
-:::
+- A project configured on the
+  [Embedded Wallets dashboard](https://developer.metamask.io/).
+  See the [dashboard setup](../../dashboard/README.mdx) guide for details.
 
 ## Installation
 
@@ -42,9 +36,10 @@ Install the Web3Auth iOS SDK using one of the following methods:
    https://github.com/Web3Auth/web3auth-swift-sdk
    ```
 
-   From the **Dependency Rule** dropdown, select **Exact Version** and enter **12.0.1** as the version.
+   From the **Dependency Rule** dropdown, select **Exact Version** and enter **12.0.1** as the
+   version.
 
-3. When finished, Xcode will automatically begin resolving and downloading your dependencies in the background.
+3. Xcode automatically resolves and downloads your dependencies in the background.
 
 ### CocoaPods
 
@@ -60,14 +55,18 @@ pod 'Web3Auth', '~> 12.0.1'
 
 ### Configure redirection
 
-To use Embedded Wallets for iOS you need to allowlist your `bundleId` in your Embedded Wallets project.
+To use Embedded Wallets for iOS, allowlist your `bundleId` in your Embedded Wallets project.
 
-- Go to [Embedded Wallets developer dashboard](https://developer.metamask.io), and create or open an existing Embedded Wallets project.
-- Allowlist `{bundleId}://auth` in the dashboard. This step is mandatory for the redirect to work.
+- Go to the [Embedded Wallets developer dashboard](https://developer.metamask.io) and create or
+  open an existing project.
+- Allowlist `{bundleId}://auth` in the dashboard.
+  This step is mandatory for the redirect to work.
 
 ## Initialize Embedded Wallets
 
-The iOS SDK uses an async initializer. The constructor fetches project configuration and restores any active session automatically. There is no separate `initialize()` call.
+The iOS SDK uses an async initializer.
+The constructor fetches project configuration and restores any active session automatically.
+The SDK does not require a separate `initialize()` call.
 
 ### Create and initialize an Embedded Wallets instance
 
@@ -84,16 +83,16 @@ class ViewModel: ObservableObject {
             // focus-start
             web3Auth = try await Web3Auth(
                 options: Web3AuthOptions(
-                    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Get your Client ID from MetaMask Developer Dashboard
+                    clientId: "<YOUR_CLIENT_ID>", // From the Embedded Wallets dashboard
                     web3AuthNetwork: .SAPPHIRE_MAINNET, // or .SAPPHIRE_DEVNET
-                    redirectUrl: "com.yourapp.bundleid://auth"
+                    redirectUrl: "<YOUR_BUNDLE_ID>://auth"
                 )
             )
             // focus-end
 
             // Check for an active session
             if web3Auth?.web3AuthResponse != nil {
-                // User is already logged in
+                // User is already signed in
             }
         } catch {
             print("Error initializing Web3Auth: \(error)")
@@ -104,13 +103,15 @@ class ViewModel: ObservableObject {
 
 :::note
 
-The async constructor throws if the project configuration fetch fails or if a stored session token is invalid. Wrap it in `do/catch` and treat any error as a failed initialization rather than an absent session.
+The async constructor throws if the project configuration fetch fails or if a stored session token
+is invalid.
+Wrap it in `do/catch` and treat any error as a failed initialization rather than an absent session.
 
 :::
 
 ## Advanced configuration
 
-The Embedded Wallets iOS SDK offers a rich set of advanced configuration options:
+The Embedded Wallets iOS SDK supports several advanced configuration options:
 
 - **[Custom authentication](./advanced/custom-authentication.mdx):** Define authentication methods.
 - **[Whitelabeling and UI customization](./advanced/whitelabel.mdx):** Personalize the modal's appearance.
@@ -136,9 +137,9 @@ See the [advanced configuration sections](./advanced/) to learn more about each 
 ```swift
 web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
-        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        clientId: "<YOUR_CLIENT_ID>",
         web3AuthNetwork: .SAPPHIRE_MAINNET, // or .SAPPHIRE_DEVNET
-        redirectUrl: "com.yourapp.bundleid://auth"
+        redirectUrl: "<YOUR_BUNDLE_ID>://auth"
     )
 )
 ```
@@ -150,12 +151,12 @@ web3Auth = try await Web3Auth(
 ```swift
 web3Auth = try await Web3Auth(
     options: Web3AuthOptions(
-        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        clientId: "<YOUR_CLIENT_ID>",
         web3AuthNetwork: .SAPPHIRE_MAINNET, // or .SAPPHIRE_DEVNET
-        redirectUrl: "com.yourapp.bundleid://auth",
+        redirectUrl: "<YOUR_BUNDLE_ID>://auth",
         authConnectionConfig: [
             AuthConnectionConfig(
-                authConnectionId: "your-auth-connection-id", // Get it from MetaMask Developer Dashboard
+                authConnectionId: "<YOUR_AUTH_CONNECTION_ID>", // From the Embedded Wallets dashboard
                 authConnection: .GOOGLE,
                 clientId: "YOUR_GOOGLE_CLIENT_ID"
             )
@@ -174,17 +175,19 @@ web3Auth = try await Web3Auth(
 
 </Tabs>
 
-## Single Factor Auth (SFA) support
+## Single-factor authentication (SFA) support
 
-The iOS SDK includes built-in support for Single Factor Auth (SFA), allowing seamless authentication when you already have a JWT token from your own authentication system. When MFA is disabled, users are authenticated directly using your JWT token, making the login experience completely frictionless.
+The iOS SDK supports single-factor authentication (SFA), which authenticates users directly with a
+JWT token from your own authentication system.
+When MFA is disabled, users sign in using only the JWT token.
 
 ```swift
-// SFA login with custom JWT
+// SFA sign-in with custom JWT
 let result = try await web3Auth.connectTo(
     loginParams: LoginParams(
         authConnection: .CUSTOM,
-        authConnectionId: "your-auth-connection-id",
-        idToken: "your_jwt_token"
+        authConnectionId: "<YOUR_AUTH_CONNECTION_ID>",
+        idToken: "<YOUR_JWT_TOKEN>"
     )
 )
 ```
@@ -193,11 +196,13 @@ SFA mode is activated automatically when you provide an `idToken` parameter.
 
 ## Blockchain integration
 
-Embedded Wallets is blockchain agnostic, enabling integration with any blockchain network. Out of the box, Embedded Wallets offers robust support for both **Solana** and **Ethereum**.
+Embedded Wallets supports any blockchain network, with built-in support for **Ethereum** and
+**Solana**.
 
 ### Ethereum integration
 
-For Ethereum integration, you can get the private key using the `getPrivateKey` method and use it with web3.swift or other Ethereum libraries:
+Get the private key using the `getPrivateKey` method and use it with web3.swift or other Ethereum
+libraries:
 
 ```swift
 import web3
@@ -232,7 +237,8 @@ let balance = toEther(wei: balanceResponse)
 
 ### Solana integration
 
-For Solana integration, you can get the Ed25519 private key using the `getEd25519PrivateKey` method and use it with SolanaSwift or any other Solana libraries:
+Get the Ed25519 private key using the `getEd25519PrivateKey` method and use it with SolanaSwift or
+other Solana libraries:
 
 ```swift
 import SolanaSwift
