@@ -67,7 +67,7 @@ By default, MetaMask enforces the following restrictions on calling
 [Account Management API](../../reference/keyring-api/account-management/index.md) methods on your Snap based on
 the caller origin:
 
-| Method                                                                                                               |  MetaMask origin   |    dapp origin     |
+| Method                                                                                                               |  MetaMask origin   |    Dapp origin     |
 | :------------------------------------------------------------------------------------------------------------------- | :----------------: | :----------------: |
 | [`keyring_listAccounts`](../../reference/keyring-api/account-management/index.md#keyring_listaccounts)               | :white_check_mark: | :white_check_mark: |
 | [`keyring_getAccount`](../../reference/keyring-api/account-management/index.md#keyring_getaccount)                   | :white_check_mark: | :white_check_mark: |
@@ -95,7 +95,7 @@ calls to the `keyring_deleteAccount` method originating from dapps.
 :::
 
 Your Snap can also impose varying restrictions depending on the calling dapp.
-For example, dapp 1 may have access to a different set of methods than dapp 2.
+For example, Dapp 1 may have access to a different set of methods than Dapp 2.
 The following is an example of implementing such logic:
 
 ```ts

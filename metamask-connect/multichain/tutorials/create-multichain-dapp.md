@@ -1,5 +1,5 @@
 ---
-title: 'Build a Multichain dapp Tutorial - MetaMask Connect'
+title: 'Build a Multichain Dapp Tutorial - MetaMask Connect'
 sidebar_label: Create a multichain dapp
 description: Step-by-step tutorial to build a React dapp that connects to Ethereum, Linea, Base, and Solana using MetaMask Connect Multichain SDK.
 keywords:

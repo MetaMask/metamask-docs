@@ -11,7 +11,7 @@ listed on the right unless they appear in code, URLs, or direct quotations from 
 
 | Required term                          | Do not use                                              |
 |----------------------------------------|---------------------------------------------------------|
-| dapp                                   | DApp, Dapp, dApp, decentralized application             |
+| dapp                                   | DApp, dApp, decentralized application                    |
 | MetaMask                               | Metamask, metamask (except in code/URLs)                |
 | smart account                          | smart contract account, SCA (unless quoting an ERC)     |
 | externally owned account (EOA)         | externally-owned account                                |
@@ -23,6 +23,13 @@ listed on the right unless they appear in code, URLs, or direct quotations from 
 | onchain / offchain                     | on-chain, off-chain                                     |
 
 ## Standards and specifications
+
+### Sentence and title capitalization
+
+Use **dapp** in running prose.
+Use **Dapp** when it appears at the beginning of a sentence or in title-style text
+(for example, page titles, table headers, and list labels).
+Do not use **dApp** or **DApp** outside code, URLs, or direct quotations.
 
 When introducing a standard for the first time on a page, spell out the full name with the
 identifier in parentheses. Use the short form on subsequent references.

@@ -54,7 +54,7 @@ graph TD
 The diagram contains the following components:
 
 - **User** - The user interacting with the dapp, the Snap companion dapp, and MetaMask.
-- **dapp** - The dapp requesting an action to be performed on an account.
+- **Dapp** - The dapp requesting an action to be performed on an account.
 - **MetaMask** - The wallet the dapp connects to.
   MetaMask routes requests to the account management Snap and lets the user perform some level of
   account management.
@@ -259,7 +259,7 @@ Dapp -->>- User: Done
 ```
 
 The flow starts the same way as the [synchronous flow](#synchronous-transaction-flow): a user or
-dapp initiates a sign request.
+Dapp initiates a sign request.
 After approval, MetaMask calls
 [`keyring_submitRequest`](../../reference/keyring-api/account-management/index.md#keyring_submitrequest).
 

@@ -1,5 +1,5 @@
 ---
-title: 'MetaMask Connect Solana - Solana dapp Integration'
+title: 'MetaMask Connect Solana - Solana Dapp Integration'
 sidebar_label: Introduction
 toc_max_heading_level: 2
 description: Connect your dapp to Solana using MetaMask Connect Solana. Use wallet-standard features, Wallet Adapter, or Framework Kit for React and vanilla JS apps.
