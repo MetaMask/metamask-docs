@@ -4,13 +4,19 @@ description: 'iOS SDK v11 to v12 migration guide | Embedded Wallets'
 sidebar_label: v11 to v12
 ---
 
-This migration guide covers the breaking changes and enhancements introduced in v12 of the Web3Auth iOS SDK. Version 12 aligns the iOS SDK with the Android SDK v10 changes and introduces a new API surface with cleaner naming conventions.
+This migration guide covers the breaking changes and enhancements introduced in v12 of the
+Embedded Wallets iOS SDK.
+Version 12 aligns the iOS SDK with the Android SDK v10 changes and introduces a new API surface
+with cleaner naming conventions.
 
 ## Breaking changes
 
 ### Initialization: `W3AInitParams` renamed to `Web3AuthOptions`
 
-The initialization struct has been renamed from `W3AInitParams` to `Web3AuthOptions`, and the constructor is now fully async. The separate `initialize()` call has been removed — session restoration happens automatically in the constructor.
+The initialization struct has been renamed from `W3AInitParams` to `Web3AuthOptions`, and the
+constructor is now fully async.
+The separate `initialize()` call has been removed; session restoration happens automatically in
+the constructor.
 
 **Network enum renamed**: `Network` is now `Web3AuthNetwork`, and enum cases are now uppercase (for example, `.sapphire_mainnet` becomes `.SAPPHIRE_MAINNET`).
 
@@ -35,7 +41,10 @@ The new constructor throws if initialization fails, so wrap it in `do/catch`.
 
 ### URL callbacks removed
 
-The `setResultUrl(url:)` method has been removed. The SDK now uses `ASWebAuthenticationSession` internally and handles all redirects automatically. Remove any calls to `setResultUrl` and the associated `onOpenURL` handler.
+The `setResultUrl(url:)` method has been removed.
+The SDK now uses `ASWebAuthenticationSession` internally and handles all redirects
+automatically.
+Remove any calls to `setResultUrl` and the associated `onOpenURL` handler.
 
 ```swift
 // remove-start
@@ -69,7 +78,9 @@ let params = LoginParams(authConnection: .CUSTOM, authConnectionId: "your-connec
 
 ### `loginConfig` renamed to `authConnectionConfig`; `W3ALoginConfig` renamed to `AuthConnectionConfig`
 
-The custom authentication configuration has changed from a dictionary (`[String: W3ALoginConfig]`) to an array (`[AuthConnectionConfig]`). The type itself has been renamed with updated field names.
+The custom authentication configuration has changed from a dictionary
+(`[String: W3ALoginConfig]`) to an array (`[AuthConnectionConfig]`).
+The type itself has been renamed with updated field names.
 
 | Old field               | New field                 |
 | ----------------------- | ------------------------- |
@@ -129,7 +140,9 @@ let ed25519Key = try web3Auth.getEd25519PrivateKey()
 
 ### `launchWalletServices(chainConfig:)` renamed to `showWalletUI(path:)`
 
-The chain configuration is no longer passed directly to the wallet services method. Instead, chain config comes from the project settings in the Web3Auth Dashboard or via the new `chains` parameter in `Web3AuthOptions`.
+The chain configuration is no longer passed directly to the wallet services method.
+Instead, chain config comes from the project settings in the Embedded Wallets dashboard or via
+the new `chains` parameter in `Web3AuthOptions`.
 
 ```swift
 // remove-next-line
@@ -140,7 +153,8 @@ try await web3Auth.showWalletUI()
 
 ### `request(chainConfig:method:requestParams:)` signature updated
 
-The `chainConfig` parameter has been removed. Chain configuration now comes from the dashboard or `Web3AuthOptions.chains`.
+The `chainConfig` parameter has been removed.
+Chain configuration now comes from the dashboard or `Web3AuthOptions.chains`.
 
 ```swift
 // remove-start
@@ -198,7 +212,9 @@ Web3AuthOptions(
 
 ### Chains configuration
 
-You can now configure blockchain networks directly in `Web3AuthOptions` using the `chains` parameter. When set, these chains are used by wallet services in addition to any chains configured in the project dashboard.
+Configure blockchain networks directly in `Web3AuthOptions` using the `chains` parameter.
+When set, these chains are used by wallet services in addition to any chains configured in the
+project dashboard.
 
 ```swift
 Web3AuthOptions(
@@ -220,7 +236,8 @@ Web3AuthOptions(
 
 ### Wallet Services configuration
 
-A new `walletServicesConfig` parameter in `Web3AuthOptions` lets you customize the confirmation strategy for transaction requests.
+A new `walletServicesConfig` parameter in `Web3AuthOptions` lets you customize the confirmation
+strategy for transaction requests.
 
 ```swift
 Web3AuthOptions(
@@ -235,7 +252,9 @@ Web3AuthOptions(
 
 ### SFA (Single Factor Auth) mode
 
-The `idToken` parameter in `LoginParams` enables direct SFA authentication. When provided, the SDK authenticates the user with the given JWT token without launching any browser-based login flow.
+The `idToken` parameter in `LoginParams` enables direct SFA authentication.
+When provided, the SDK authenticates the user with the given JWT token without launching any
+browser-based sign-in flow.
 
 ```swift
 let result = try await web3Auth.connectTo(
@@ -249,7 +268,8 @@ let result = try await web3Auth.connectTo(
 
 ### `loginHint` in `LoginParams`
 
-A new `loginHint` parameter has been added directly to `LoginParams`, eliminating the need to nest it inside `ExtraLoginOptions` for passwordless flows.
+A new `loginHint` parameter has been added directly to `LoginParams`, eliminating the need to
+nest it inside `ExtraLoginOptions` for passwordless flows.
 
 ```swift
 // Old way
