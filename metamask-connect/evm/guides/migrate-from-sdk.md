@@ -267,7 +267,11 @@ provider.on('disconnect', () => {
 })
 ```
 
-MetaMask Connect EVM also supports SDK-level event handlers that you register during initialization:
+MetaMask Connect EVM also supports SDK-level event handlers that you register during initialization.
+The `connect` handler receives both `chainId` and `accounts` (a MetaMask Connect extension of the
+standard EIP-1193 `connect` event, which only includes `chainId`).
+See the [Ethereum provider API events](../reference/provider-api.md#events) for the full event
+reference.
 
 ```typescript
 const client = await createEVMClient({
@@ -291,7 +295,13 @@ const client = await createEVMClient({
 })
 ```
 
-You can also listen for the `display_uri` event on the **provider** for custom QR code UI:
+You can also listen for the `display_uri` event on the **provider** for custom QR code UI.
+
+:::note Event naming
+The `eventHandlers` option uses camelCase (`displayUri`), while the provider event uses snake_case
+(`display_uri`).
+Both deliver the same URI string for QR code rendering.
+:::
 
 ```typescript
 const provider = client.getProvider()

@@ -114,6 +114,14 @@ const txSignature = await connection.sendRawTransaction(signedTransaction)
 await connection.getSignatureStatus(txSignature)
 ```
 
+:::caution Chrome Android
+There is a known issue with `@solana/wallet-adapter-react` on Chrome Android when used with the
+wallet-standard provider from `@metamask/connect-solana`.
+Test Solana transaction flows on desktop Chrome and the MetaMask browser extension before targeting
+mobile.
+See [Troubleshooting](../../troubleshooting/index.md#chrome-android) for details.
+:::
+
 ## Next steps
 
 To efficiently load more addresses in a single transaction, learn how to [send a versioned transaction](send-versioned-transaction.md) with Address Lookup Tables.

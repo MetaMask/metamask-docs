@@ -74,7 +74,11 @@ const metamaskConnectSidebar = {
       label: 'Guides',
       collapsible: false,
       collapsed: false,
-      items: ['multichain/guides/sign-transactions', 'multichain/guides/send-transactions'],
+      items: [
+        'multichain/guides/sign-transactions',
+        'multichain/guides/send-transactions',
+        'multichain/guides/headless-mode',
+      ],
     },
     {
       type: 'category',
@@ -278,6 +282,7 @@ const metamaskConnectSidebar = {
           items: [
             'solana/guides/send-legacy-transaction',
             'solana/guides/send-versioned-transaction',
+            'solana/guides/batch-transactions',
           ],
         },
         {

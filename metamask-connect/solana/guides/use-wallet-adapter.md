@@ -94,8 +94,20 @@ export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
 };
 ```
 
-Calling [`createSolanaClient`](../reference/methods.md#createsolanaclient) registers MetaMask with the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) registry.
-This displays MetaMask as a connection option in the wallet modal, even if the user doesn't have MetaMask installed.
+Calling [`createSolanaClient`](../reference/methods.md#createsolanaclient) registers MetaMask with
+the [Wallet Standard](https://github.com/wallet-standard/wallet-standard) registry.
+This displays MetaMask as a connection option in the wallet modal, even if the user doesn't have
+MetaMask installed.
+
+:::tip Timing
+The `useEffect` pattern above works because `createSolanaClient` typically resolves before the user
+opens the wallet modal.
+If MetaMask does not appear in the wallet list, ensure `createSolanaClient` has resolved before the
+`WalletProvider` renders.
+One approach is to await the client in your app's entry point before calling `createRoot().render()`.
+See [Troubleshooting: MetaMask wallet not appearing](../../troubleshooting/index.md#metamask-wallet-not-appearing-in-solana-wallet-adapter)
+for details.
+:::
 
 ### 3. Add the provider to your root layout
 
@@ -136,6 +148,14 @@ export const ConnectWallet = () => {
 ```
 
 The button automatically displays a wallet selection modal that includes MetaMask.
+
+:::caution Chrome Android
+There is a known issue with `@solana/wallet-adapter-react` on Chrome Android when used with the
+wallet-standard provider from `@metamask/connect-solana`.
+Test Solana wallet-adapter flows on desktop Chrome and the MetaMask browser extension before
+targeting mobile.
+See [Troubleshooting](../../troubleshooting/index.md#chrome-android) for details.
+:::
 
 ## Next steps
 

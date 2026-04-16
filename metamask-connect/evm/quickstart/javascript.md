@@ -154,6 +154,8 @@ const evmClient = await createEVMClient({
 These examples configure MetaMask Connect EVM with the following options:
 
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
+  Use `base64Icon` instead of `iconUrl` when a hosted URL is unavailable (for example, in React
+  Native).
 - `api.supportedNetworks` - A map of hex chain IDs to RPC URLs for all networks supported by the app.
   Use the [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) helper to generate URLs for all Infura-supported chains, or specify your own.
 

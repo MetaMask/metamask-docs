@@ -124,7 +124,7 @@ const client = await createMultichainClient({
   dapp: {
     name: 'My Multichain Dapp',
     url: window.location.href,
-    iconUrl: 'https://mydapp.com/icon.png',
+    iconUrl: 'https://mydapp.com/icon.png', // Or use base64Icon for embedded icons (e.g., React Native)
   },
   api: {
     supportedNetworks: {
