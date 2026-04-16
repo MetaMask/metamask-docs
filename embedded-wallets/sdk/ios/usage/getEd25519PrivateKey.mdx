@@ -4,9 +4,11 @@ sidebar_label: getEd25519PrivateKey
 description: 'Web3Auth iOS SDK - getEd25519PrivateKey | Embedded Wallets'
 ---
 
-To retrieve the Ed25519 private key of the user, use the `getEd25519PrivateKey` method. This private key can be used to sign transactions on Solana, Near, Algorand, and other chains that use the ed25519 curve.
+The `getEd25519PrivateKey` method returns the user's Ed25519 private key.
+Use this key to sign transactions on Solana, Near, Algorand, and other chains that use the Ed25519
+curve.
 
-The method throws if no user session is found or if the key is unavailable.
+This method throws an error if no user session exists or if the key is unavailable.
 
 ## Usage
 
