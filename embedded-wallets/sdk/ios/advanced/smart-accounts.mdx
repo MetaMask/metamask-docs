@@ -7,17 +7,23 @@ description: 'Web3Auth iOS SDK - Smart Accounts and Wallet Services Configuratio
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The iOS SDK provides fine-grained control over the `showWalletUI` and `request` flows through the `walletServicesConfig` parameter in `Web3AuthOptions`. This lets you customize how transaction confirmations are displayed and tailor the wallet UI branding.
+The iOS SDK provides fine-grained control over the `showWalletUI` and `request` flows through
+the `walletServicesConfig` parameter in `Web3AuthOptions`.
+Customize how transaction confirmations display and tailor the wallet UI branding.
 
 :::note
 
-Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` for free. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
+Wallet Services requires a paid plan.
+You can use this feature in `sapphire_devnet` for free.
+The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a
+production environment is the **Scale Plan**.
 
 :::
 
 ## `WalletServicesConfig`
 
-Pass `walletServicesConfig` in `Web3AuthOptions` to configure how wallet services behave across your application.
+Pass `walletServicesConfig` in `Web3AuthOptions` to configure how wallet services behave across
+your dapp.
 
 ### Parameters
 
