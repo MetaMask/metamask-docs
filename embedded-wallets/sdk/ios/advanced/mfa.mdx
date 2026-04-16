@@ -8,17 +8,31 @@ import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import MFAMinimumPlan from '../../_common/_scale_plan_note.mdx'
 
-At Web3Auth, we prioritize your security by offering Multi-Factor Authentication (MFA). MFA is an extra layer of protection that verifies your identity when accessing your account. To ensure ownership, you must provide two or more different backup factors. You have the option to choose from the device, social, backup factor (seed phrase), and password factors to guarantee access to your web3 account. Once you create a recovery factor, MFA is enabled, and your keys are divided into three shares for offchain multi-sig, making the key self-custodial. With backup factors, you can easily recover your account if you lose access to your original device or helps login into a new device.
+Multi-Factor Authentication (MFA) adds an extra layer of protection that verifies your identity
+when accessing your account.
+To ensure ownership, you must provide two or more different backup factors.
+Choose from device, social, backup factor (seed phrase), and password factors to secure access
+to your web3 account.
+Once you create a recovery factor, MFA is enabled, and your keys are divided into three shares
+for offchain multi-sig, making the key self-custodial.
+With backup factors, you can recover your account if you lose access to your original device or
+need to sign in on a new device.
+
 
 <MFAMinimumPlan />
 
-## Enable using the Multi-Factor Authentication level
+## Enable using the MFA level
 
-For a dapp, we provide various options to set up Multi-Factor Authentication. You can customize the MFA screen by passing the `mfaLevel` parameter in `connectTo` method. You can enable or disable a backup factor and change their order. Currently, there are four values for MFA level.
+Customize the MFA screen by passing the `mfaLevel` parameter in the `connectTo` method.
+You can enable or disable a backup factor and change their order.
+There are four MFA level values.
 
 :::caution Note
 
-If you are using default auth connections, your users may have set up MFA on other dapps that also use default Web3Auth auth connections. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
+If you're using default auth connections, your users may have set up MFA on other dapps that
+also use default Embedded Wallets auth connections.
+In this case, the MFA screen continues to appear if the user has enabled MFA on other dapps.
+MFA can't be turned off once enabled.
 
 :::
 
@@ -26,9 +40,9 @@ If you are using default auth connections, your users may have set up MFA on oth
 
 | MFA Level | Description                                                |
 | --------- | ---------------------------------------------------------- |
-| DEFAULT   | Shows the MFA screen every third login.                    |
-| OPTIONAL  | Shows the MFA screen on every login, but user can skip it. |
-| MANDATORY | Makes it mandatory to set up MFA after first login.        |
+| DEFAULT   | Shows the MFA screen every third sign-in.                    |
+| OPTIONAL  | Shows the MFA screen on every sign-in, but user can skip it. |
+| MANDATORY | Makes it mandatory to set up MFA after first sign-in.        |
 | NONE      | Skips the MFA setup screen.                                |
 
 ### Usage
@@ -55,7 +69,10 @@ let result = try await web3Auth.connectTo(
 
 ## Explicitly enable MFA
 
-The `enableMFA` method is used to trigger MFA setup flow for users. The method takes `LoginParams` which will be used during custom auth connections. If you are using default login providers, you don't need to pass `LoginParams`. If you are using custom JWT auth connections, you need to pass the valid JWT token in `LoginParams` as well.
+The `enableMFA` method triggers the MFA setup flow for users.
+It takes `LoginParams`, which is used during custom auth connections.
+If you're using default sign-in providers, you don't need to pass `LoginParams`.
+For custom JWT auth connections, pass the valid JWT token in `LoginParams`.
 
 <Tabs
   defaultValue="default-verifier"
@@ -102,21 +119,26 @@ do {
 
 ## Configure Multi-Factor Authentication settings
 
-You can configure the order of MFA or enable/disable MFA type by passing the `mfaSettings` object in `Web3AuthOptions`.
+Configure the order of MFA or enable/disable MFA types by passing the `mfaSettings` object in
+`Web3AuthOptions`.
 
 :::note Note
 
-- At least two factors are mandatory when setting up the mfaSettings.
-- If you set `mandatory: true` for all factors, the user must set up all four factors.
-- If you set `mandatory: false` for all factors, the user can skip setting up MFA. But at least two factors are mandatory.
-- If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can skip the optional factors. But, the user must set up at least two factors.
-- The `priority` field is used to set the order of the factors. The factor with the lowest priority will be the first factor to be set up. The factor with the highest priority will be the last factor to be set up.
+- At least two factors are mandatory when setting up `mfaSettings`.
+- If you set `mandatory: true` for all factors, the user must set up all factors.
+- If you set `mandatory: false` for all factors, the user can skip MFA setup, but at least
+  two factors are still mandatory.
+- If you set `mandatory: true` for some factors and `mandatory: false` for others, the user
+  must set up the mandatory factors and can skip the optional ones, but must set up at least
+  two factors total.
+- The `priority` field sets the order of the factors. The lowest priority value is set up
+  first; the highest is set up last.
 
 :::
 
-### Parameters - `MfaSettings`
+### `MfaSettings` parameters
 
-`MfaSettings` allows you to set the type of the MFA.
+`MfaSettings` configures which MFA factor types are available.
 
 <Tabs
   defaultValue="table"
@@ -164,9 +186,9 @@ public struct MfaSettings: Codable {
 </TabItem>
 </Tabs>
 
-### Parameters - `MfaSetting`
+### `MfaSetting` parameters
 
-`MfaSetting` allows you to configure the behavior of an individual MFA factor.
+`MfaSetting` configures the behavior of an individual MFA factor.
 
 <Tabs
   defaultValue="table"
