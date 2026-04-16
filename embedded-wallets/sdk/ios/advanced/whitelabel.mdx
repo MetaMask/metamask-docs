@@ -10,7 +10,9 @@ import WhiteLabelShowcase from '../../_common/_whitelabel_showcase.mdx'
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 import WhitelabelingNote from '../../_common/_whitelabeling_note.mdx'
 
-Web3Auth allows complete whitelabeling with application branding for a consistent user experience. You can customize three different aspects:
+Embedded Wallets supports whitelabeling with your dapp's branding for a consistent user
+experience.
+You can customize three aspects:
 
 - **UI elements:** Customize the appearance of modals and components
 - **Branding:** Apply your brand colors, logos, and themes
@@ -20,15 +22,14 @@ Web3Auth allows complete whitelabeling with application branding for a consisten
 
 <GrowthPlanNote />
 
-## Customizing the Web3Auth login screens
+## Customizing the Embedded Wallets sign-in screens
 
-For defining custom UI, branding, and translations for your brand app, you just need to define an optional object called `WhiteLabelData`. `WhiteLabelData` can be defined during initialization of the SDK in `Web3AuthOptions`.
+Define a `WhiteLabelData` object to customize UI, branding, and translations.
+Pass it during initialization of the SDK in `Web3AuthOptions`.
 
-<GrowthPlanNote />
+### Parameters
 
-### Arguments
-
-The parameters which can be used to customize the user flow screens are given below:
+The following parameters customize the sign-in screens:
 
 <Tabs
   defaultValue="table"
@@ -45,11 +46,11 @@ The parameters which can be used to customize the user flow screens are given be
 | `appName?`         | Display name for the app in the UI.                                                                                                                                      |
 | `logoLight?`       | App logo to be used in dark mode. It accepts URL as a string.                                                                                                            |
 | `logoDark?`        | App logo to be used in light mode. It accepts URL as a string.                                                                                                           |
-| `defaultLanguage?` | Language which will be used by Web3Auth, app will use browser language if not specified. Default language is `Language.en`. Checkout `Language` for supported languages. |
+| `defaultLanguage?` | Language used by Embedded Wallets. Falls back to browser language if not specified. Default is `Language.en`. See `Language` for supported languages. |
 | `mode?`            | Theme mode for the login modal. Choose between `ThemeModes.auto`, `ThemeModes.light` or `ThemeModes.dark` background modes. Default value is `ThemeModes.auto`.          |
 | `theme?`           | Used to customize the theme of the login modal. It accepts a dictionary of `[String: String]` as a value.                                                                |
 | `appUrl?`          | URL to be used in the modal. It accepts URL as a string.                                                                                                                 |
-| `useLogoLoader?`   | Use logo loader. If `logoDark` and `logoLight` are nil, the default Web3Auth logo will be used for the loader. Default value is false.                                   |
+| `useLogoLoader?`   | Use logo loader. If `logoDark` and `logoLight` are nil, the default Embedded Wallets logo is used for the loader. Default is false.                                   |
 
 </TabItem>
 
