@@ -117,7 +117,10 @@
                 "guides/advanced-permissions/use-permissions/erc20-token",
                 "guides/advanced-permissions/use-permissions/native-token"
               ]
-            }
+            },
+            "guides/advanced-permissions/get-supported-permissions",
+            "guides/advanced-permissions/get-granted-permissions",
+            "guides/advanced-permissions/create-redelegation"
           ]
         }
       ]
@@ -135,9 +138,13 @@
           "key": "delegation-concepts",
           "link": {
             "type": "doc",
-            "id": "concepts/delegation/index"
+            "id": "concepts/delegation/overview"
           },
-          "items": ["concepts/delegation/caveat-enforcers"]
+          "items": [
+            "concepts/delegation/delegation-scopes",
+            "concepts/delegation/delegation-manager",
+            "concepts/delegation/caveat-enforcers"
+          ]
         },
         "concepts/advanced-permissions"
       ]
@@ -175,6 +182,7 @@
       "collapsed": true,
       "items": [
         "reference/smart-account",
+        "reference/types",
         {
           "type": "category",
           "label": "Delegation",
@@ -197,9 +205,19 @@
           "key": "advanced-permissions-reference",
           "items": [
             "reference/advanced-permissions/permissions",
-            "reference/advanced-permissions/wallet-client",
-            "reference/advanced-permissions/bundler-client"
+            "reference/advanced-permissions/wallet-client"
           ]
+        },
+        {
+          "type": "category",
+          "label": "ERC-7710",
+          "collapsed": true,
+          "items": ["reference/erc7710/wallet-client", "reference/erc7710/bundler-client"]
+        },
+        {
+          "type": "doc",
+          "id": "reference/glossary",
+          "label": "Glossary"
         }
       ]
     },
@@ -221,7 +239,7 @@
       "type": "category",
       "label": "Changelog",
       "collapsed": false,
-      "items": ["changelog/0.3.0"]
+      "items": ["changelog/1.2.0", "changelog/1.1.0", "changelog/1.0.0", "changelog/0.3.0"]
     }
   ]
 }
