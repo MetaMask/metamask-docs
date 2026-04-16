@@ -1,8 +1,8 @@
 .modalOverlay {
   z-index: 300;
   position: fixed;
-  inset: 0px;
-  background-color: rgba(0, 0, 0, 0.75);
+  inset: 0;
+  background-color: rgb(0 0 0 / 75%);
 }
 
 .modalWrapper {
@@ -22,7 +22,9 @@
 
 .modalContent {
   color: #FFF;
+
   --font-family-sans: "Euclid Circular B", "Roboto", sans-serif;
+
   position: relative;
 }
 
@@ -52,39 +54,41 @@
   left: 0;
   width: 60px;
   height: 60px;
-
-  -webkit-animation: rotating 3s linear infinite;
-  -moz-animation: rotating 3s linear infinite;
-  -ms-animation: rotating 3s linear infinite;
-  -o-animation: rotating 3s linear infinite;
+  animation: rotating 3s linear infinite;
+  animation: rotating 3s linear infinite;
+  animation: rotating 3s linear infinite;
+  animation: rotating 3s linear infinite;
   animation: rotating 3s linear infinite;
 }
 
-@-webkit-keyframes spinner /* Safari and Chrome */ {
+@keyframes spinner /* Safari and Chrome */ {
   from {
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+    transform: rotate(360deg);
     transform: rotate(360deg);
   }
+
   to {
-    -webkit-transform: rotate(-360deg);
-    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+    transform: rotate(-360deg);
     transform: rotate(-360deg);
   }
 }
+
 @keyframes rotating {
   from {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+    transform: rotate(360deg);
+    transform: rotate(360deg);
+    transform: rotate(360deg);
     transform: rotate(360deg);
   }
+
   to {
-    -ms-transform: rotate(-360deg);
-    -moz-transform: rotate(-360deg);
-    -webkit-transform: rotate(-360deg);
-    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+    transform: rotate(-360deg);
+    transform: rotate(-360deg);
+    transform: rotate(-360deg);
     transform: rotate(-360deg);
   }
 }
@@ -100,7 +104,7 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
-  margin: 12px 0 0 0;
+  margin: 12px 0 0;
 }
 
 .content {
