@@ -1,5 +1,5 @@
 ---
-title: 'MetaMask Connect - Dapp Wallet Integration SDK'
+title: 'MetaMask Connect - dapp Wallet Integration SDK'
 sidebar_label: Introduction
 toc_max_heading_level: 2
 description: Connect your dapp to the MetaMask wallet across desktop, mobile, and native apps with multichain EVM and Solana support using a single SDK integration.

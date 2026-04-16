@@ -67,7 +67,7 @@ support both ecosystems while keeping familiar provider interfaces for each.
 | **Solana support** | Via `wallet_invokeMethod`                   | Wallet Standard                                                      | Wallet Standard                         |
 | **Cross-chain UX** | Single prompt for all ecosystems            | Single ecosystem                                                     | Separate connect per ecosystem          |
 | **Sessions**       | Full control                                | Automatic                                                            | Automatic per-client                    |
-| **Best for**       | Multichain-native dapps                     | Existing single-chain dapps                                          | Dapps supporting EVM and Solana         |
+| **Best for**       | Multichain-native dapps                     | Existing single-chain dapps                                          | dapps supporting EVM and Solana         |
 
 <!-- ## Wallet connector libraries
 

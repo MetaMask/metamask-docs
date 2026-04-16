@@ -45,7 +45,7 @@ MetaMask Connect detects the user's environment and selects the best connection 
 
 Here's how each connection method compares across dapp locations:
 
-| Dapp location           | User wallet                                           | Connection method               | MetaMask Connect |  Other SDKs  |
+| dapp location           | User wallet                                           | Connection method               | MetaMask Connect |  Other SDKs  |
 | ----------------------- | ----------------------------------------------------- | ------------------------------- | :--------------: | :----------: |
 | Desktop web browser     | 🧩 [Browser extension](https://metamask.io/download/) | Direct connection via extension |   ✅ Supported   | ✅ Supported |
 | Desktop web browser     | 📱 [Mobile app](https://metamask.io/download/)        | QR code scan                    |   ✅ Supported   | ⚠️ Limited\* |

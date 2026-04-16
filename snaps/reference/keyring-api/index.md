@@ -11,7 +11,7 @@ The Keyring API consists of:
 
 - [**Account Management API**](account-management/index.md) - An API for dapps to communicate with
   account management Snaps.
-  Dapps can manage accounts and signature requests using this API.
+  dapps can manage accounts and signature requests using this API.
 - [**Chain Methods API**](chain-methods.md) - An API that contains chain-specific EVM methods that
   account management Snaps can choose to implement to support dapp requests from custom accounts.
 

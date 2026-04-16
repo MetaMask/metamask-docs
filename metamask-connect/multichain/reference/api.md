@@ -57,9 +57,9 @@ This method is defined in [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/
   - `notifications`: `array` - A list of JSON-RPC notifications the wallet must support to be compatible with the dapp.
   - `accounts`: `array` - (Optional) A list of [CAIP-10](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md)
     account IDs valid within this scope.
-    Dapps should include this only if they know which accounts they want the user to permit.
+    dapps should include this only if they know which accounts they want the user to permit.
     When supplied, these accounts are preselected by default in the account selection process.
-    Dapps typically omit this property for the user to select their own accounts.
+    dapps typically omit this property for the user to select their own accounts.
 
 - `sessionProperties`: `object` - (Optional) Properties that the wallet can use to determine if the session is valid.
 - `requiredScopes`: `object` - (Optional) [CAIP-217](https://standards.chainagnostic.org/CAIPs/caip-217) authorization scopes the wallet must support to be compatible with the dapp.

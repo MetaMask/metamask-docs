@@ -1,5 +1,5 @@
 ---
-title: 'MetaMask Connect EVM - Ethereum Dapp Integration'
+title: 'MetaMask Connect EVM - Ethereum dapp Integration'
 sidebar_label: Introduction
 toc_max_heading_level: 2
 description: Connect your dapp to Ethereum and EVM-compatible networks using MetaMask Connect EVM. Get an EIP-1193 provider compatible with viem, ethers.js, and web3.js.

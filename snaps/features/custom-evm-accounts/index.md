@@ -54,7 +54,7 @@ graph TD
 The diagram contains the following components:
 
 - **User** - The user interacting with the dapp, the Snap companion dapp, and MetaMask.
-- **Dapp** - The dapp requesting an action to be performed on an account.
+- **dapp** - The dapp requesting an action to be performed on an account.
 - **MetaMask** - The wallet the dapp connects to.
   MetaMask routes requests to the account management Snap and lets the user perform some level of
   account management.

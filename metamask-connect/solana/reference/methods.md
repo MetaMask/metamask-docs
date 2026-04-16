@@ -247,7 +247,7 @@ Configuration options passed to [`createSolanaClient`](#createsolanaclient).
 
 | Field                   | Type                      | Required | Description                                                                |
 | ----------------------- | ------------------------- | -------- | -------------------------------------------------------------------------- |
-| `dapp`                  | `object`                  | Yes      | Dapp identification and branding settings.                                 |
+| `dapp`                  | `object`                  | Yes      | dapp identification and branding settings.                                 |
 | `dapp.name`             | `string`                  | Yes      | Name of your dapp.                                                         |
 | `dapp.url`              | `string`                  | No       | URL of your dapp.                                                          |
 | `dapp.iconUrl`          | `string`                  | No       | Icon URL for your dapp.                                                    |
