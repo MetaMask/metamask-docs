@@ -93,7 +93,7 @@ func main() {
     log.Fatal(err)
   }
 
-  toAddress := common.HexToAddress("ADDRESS_TO")
+  toAddress := common.HexToAddress("0xf333907BaF09DC58ad4Ba39Af94009801C825531")
   var data []byte
 
   chainID, err := client.NetworkID(context.Background())
@@ -130,7 +130,7 @@ Replace the following values in the script:
 
 - `<YOUR-API-KEY>` with the Infura API key.
 - `<PRIVATE-KEY>` with the [private key of your Ethereum account](https://metamask.zendesk.com/hc/en-us/articles/360015289632-How-to-Export-an-Account-Private-Key).
-- `<ADDRESS-TO>` with the address of the recipient of funds.
+- Replace the recipient address (`0xf333907BaF09DC58ad4Ba39Af94009801C825531`) with the address of your desired recipient, if different.
 
 If using a different Ethereum network, update the URL in the script.
 
