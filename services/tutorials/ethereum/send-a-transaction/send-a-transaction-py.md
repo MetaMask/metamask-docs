@@ -76,7 +76,7 @@ load_dotenv()
 infura_url = "https://sepolia.infura.io/v3/<YOUR-API-KEY>"
 private_key = os.getenv("PRIVATE_KEY")
 from_account = "<PUBLIC-KEY>"
-to_account = "<RECIPIENT-PUBLIC-KEY>"
+to_account = "0xf333907BaF09DC58ad4Ba39Af94009801C825531"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 
 try:
@@ -111,7 +111,7 @@ Ensure you replace the following values in the code:
 
 - `<YOUR-API-KEY>` with the API key of the Web3 project.
 - `<PUBLIC-KEY>` with the public key associated with the private key you added in the `.env` file.
-- `<RECIPIENT-PUBLIC-KEY>` With the public key of the recipient of the transfer.
+- Replace the recipient address (`0xf333907BaF09DC58ad4Ba39Af94009801C825531`) with the public key of your desired recipient, if different.
 
 If using a different Ethereum network, update the URL in the code.
 

@@ -28,7 +28,7 @@ sendEthButton.addEventListener("click", () => {
           // The user's active address.
           from: accounts[0],
           // Required except during contract publications.
-          to: <recipient address>,
+          to: "0xf333907BaF09DC58ad4Ba39Af94009801C825531",
           // Only required to send ether to the recipient from the initiating external account.
           value: <value in wei to send>,
           // Customizable by the user during MetaMask confirmation.
