@@ -119,7 +119,7 @@ Do **not** call `connect` again; the original promise resolves once the user act
 
 ### Chain not configured in `supportedNetworks`
 
-The chain ID passed to `connect()` or `wallet_switchEthereumChain` is not listed in the
+The chain ID passed to `connect` or `wallet_switchEthereumChain` is not listed in the
 `api.supportedNetworks` configuration.
 
 Add every chain the dapp needs to `supportedNetworks` with a valid RPC URL:
