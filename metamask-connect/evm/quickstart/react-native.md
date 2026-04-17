@@ -256,7 +256,7 @@ function getClient() {
   if (!clientPromise) {
     clientPromise = createEVMClient({
       dapp: {
-        name: 'My RN DApp',
+        name: 'My RN Dapp',
         url: 'https://mydapp.com',
       },
       api: {

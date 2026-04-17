@@ -261,7 +261,7 @@ function getClient() {
   if (!clientPromise) {
     clientPromise = createMultichainClient({
       dapp: {
-        name: 'My Solana RN DApp',
+        name: 'My Solana RN Dapp',
         url: 'https://mydapp.com',
       },
       api: {

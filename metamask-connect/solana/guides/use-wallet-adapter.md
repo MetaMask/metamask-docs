@@ -78,7 +78,7 @@ export const SolanaProvider: FC<SolanaProviderProps> = ({ children }) => {
   useEffect(() => {
     createSolanaClient({
       dapp: {
-        name: 'My Solana DApp',
+        name: 'My Solana Dapp',
         url: window.location.origin,
       },
     });

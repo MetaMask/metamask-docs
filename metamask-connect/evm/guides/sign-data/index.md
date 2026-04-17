@@ -195,7 +195,7 @@ import { createWalletClient, custom } from 'viem'
 import { mainnet } from 'viem/chains'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -284,7 +284,7 @@ import { ethers } from 'ethers'
 import { BrowserProvider, parseUnits } from 'ethers'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -377,7 +377,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -545,7 +545,7 @@ import { createWalletClient, custom } from 'viem'
 import { mainnet } from 'viem/chains'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -574,7 +574,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { ethers } from 'ethers'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -599,7 +599,7 @@ import { createEVMClient } from '@metamask/connect-evm'
 import { Web3 } from 'web3'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',

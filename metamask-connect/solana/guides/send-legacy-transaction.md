@@ -33,7 +33,7 @@ import { Connection, Transaction, SystemProgram, PublicKey } from '@solana/web3.
 
 const solanaClient = await createSolanaClient({
   dapp: {
-    name: 'My Solana DApp',
+    name: 'My Solana Dapp',
     url: window.location.origin,
   },
 })

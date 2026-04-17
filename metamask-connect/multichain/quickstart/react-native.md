@@ -265,7 +265,7 @@ function getClient() {
   if (!clientPromise) {
     clientPromise = createMultichainClient({
       dapp: {
-        name: 'My Multichain RN DApp',
+        name: 'My Multichain RN Dapp',
         url: 'https://mydapp.com',
       },
       api: {

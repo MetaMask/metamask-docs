@@ -276,7 +276,7 @@ Include all supported chains:
 import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
 
 const client = await createMultichainClient({
-  dapp: { name: 'My DApp', url: 'https://mydapp.com' },
+  dapp: { name: 'My Dapp', url: 'https://mydapp.com' },
   api: {
     supportedNetworks: {
       ...getInfuraRpcUrls({ infuraApiKey: 'YOUR_INFURA_API_KEY' }),
@@ -291,7 +291,7 @@ Include only specific chains using `caipChainIds`:
 import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
 
 const client = await createMultichainClient({
-  dapp: { name: 'My DApp', url: 'https://mydapp.com' },
+  dapp: { name: 'My Dapp', url: 'https://mydapp.com' },
   api: {
     supportedNetworks: {
       // Each chain must be active in your Infura dashboard

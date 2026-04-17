@@ -38,7 +38,7 @@ import {
 
 const solanaClient = await createSolanaClient({
   dapp: {
-    name: 'My Solana DApp',
+    name: 'My Solana Dapp',
     url: window.location.origin,
   },
 })

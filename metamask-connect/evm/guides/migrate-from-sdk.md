@@ -92,7 +92,7 @@ recreate it on every render.
 // remove-start
 - const sdk = new MetaMaskSDK({
 -  dappMetadata: {
--    name: 'My DApp',
+-    name: 'My Dapp',
 -    url: window.location.href,
 -  },
 -   infuraAPIKey: 'YOUR_INFURA_KEY',
@@ -113,7 +113,7 @@ recreate it on every render.
 // add-start
 + const client = await createEVMClient({
 +  dapp: {
-+    name: 'My DApp',
++    name: 'My Dapp',
 +    url: window.location.href,
 +  },
 +  api: {
@@ -195,7 +195,7 @@ The method returns the signature directly:
 
 ```typescript
 const signature = await client.connectAndSign({
-  message: 'Sign in to My DApp',
+  message: 'Sign in to My Dapp',
   chainIds: ['0x1'],
 })
 ```
@@ -275,7 +275,7 @@ reference.
 
 ```typescript
 const client = await createEVMClient({
-  dapp: { name: 'My DApp' },
+  dapp: { name: 'My Dapp' },
   api: {
     supportedNetworks: {
       '0x1': 'https://mainnet.infura.io/v3/YOUR_KEY',
@@ -335,7 +335,7 @@ straightforward:
 import { createMultichainClient } from '@metamask/connect-multichain'
 
 const multichainClient = await createMultichainClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       'eip155:1': 'https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
@@ -402,7 +402,7 @@ export function EVMProvider({ children }: { children: React.ReactNode }) {
     if (initialized.current) return
     initialized.current = true
     createEVMClient({
-      dapp: { name: 'My DApp', url: window.location.href },
+      dapp: { name: 'My Dapp', url: window.location.href },
       api: { supportedNetworks: getInfuraRpcUrls({ infuraApiKey: 'YOUR_INFURA_API_KEY' }) },
     }).then(setClient)
   }, [])

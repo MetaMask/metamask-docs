@@ -59,7 +59,7 @@ import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
 
 const client = await createSolanaClient({
   dapp: {
-    name: 'My Solana DApp',
+    name: 'My Solana Dapp',
     url: 'https://mydapp.com',
   },
   api: {
@@ -109,7 +109,7 @@ const supportedNetworks = getInfuraRpcUrls({
 // }
 
 const client = await createSolanaClient({
-  dapp: { name: 'My Solana DApp', url: 'https://mydapp.com' },
+  dapp: { name: 'My Solana Dapp', url: 'https://mydapp.com' },
   api: { supportedNetworks },
 })
 ```
@@ -145,7 +145,7 @@ A promise that resolves when registration is complete.
 
 ```javascript
 const client = await createSolanaClient({
-  dapp: { name: 'My Solana DApp', url: 'https://mydapp.com' },
+  dapp: { name: 'My Solana Dapp', url: 'https://mydapp.com' },
   skipAutoRegister: true,
 })
 

@@ -87,7 +87,7 @@ eventHandlers: {
 
 ```javascript
 const signature = await evmClient.connectAndSign({
-  message: 'Sign in to My DApp',
+  message: 'Sign in to My Dapp',
   chainIds: ['0x1'],
 })
 console.log('Signature:', signature)
@@ -264,7 +264,7 @@ A `Record<string, string>` mapping hex chain IDs to Infura RPC URLs. When `chain
 import { createEVMClient, getInfuraRpcUrls } from '@metamask/connect-evm'
 
 const evmClient = await createEVMClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   api: {
     supportedNetworks: {
       // Each chain must be active in your Infura dashboard

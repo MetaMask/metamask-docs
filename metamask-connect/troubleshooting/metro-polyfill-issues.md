@@ -260,7 +260,7 @@ If MetaMask Mobile does not open when your dapp initiates a connection, the `mob
 import { Linking } from 'react-native'
 
 const client = await createEVMClient({
-  dapp: { name: 'My DApp', url: 'https://mydapp.com' },
+  dapp: { name: 'My Dapp', url: 'https://mydapp.com' },
   mobile: {
     preferredOpenLink: deeplink => Linking.openURL(deeplink),
   },

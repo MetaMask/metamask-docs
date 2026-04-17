@@ -100,7 +100,7 @@ const typedData = {
   },
   primaryType: 'Mail',
   domain: {
-    name: 'My DApp',
+    name: 'My Dapp',
     version: '1',
     chainId: 1,
     verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',

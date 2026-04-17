@@ -126,7 +126,7 @@ Add every chain the dapp needs to `supportedNetworks` with a valid RPC URL:
 
 ```javascript
 const client = await createEVMClient({
-  dapp: { name: 'My DApp' },
+  dapp: { name: 'My Dapp' },
   api: {
     supportedNetworks: {
       ...getInfuraRpcUrls({

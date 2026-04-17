@@ -31,7 +31,7 @@ import { createSolanaClient } from '@metamask/connect-solana'
 
 const solanaClient = await createSolanaClient({
   dapp: {
-    name: 'My Solana DApp',
+    name: 'My Solana Dapp',
     url: window.location.origin,
   },
 })
