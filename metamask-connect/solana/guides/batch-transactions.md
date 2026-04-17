@@ -16,7 +16,7 @@ keywords:
 
 # Send batch transactions
 
-The `solana:signAndSendAllTransactions` wallet-standard feature lets you sign and send multiple
+The `solana:signAndSendAllTransactions` Wallet Standard feature lets you sign and send multiple
 Solana transactions in a single wallet interaction.
 This is useful for operations that span several transactions, such as initializing multiple accounts,
 batch token transfers, or multi-step program interactions.
