@@ -55,7 +55,7 @@ const client = await createMultichainClient({
 ### 2. Register a `display_uri` listener before connecting
 
 The `display_uri` event fires during the connecting phase with a one-time-use pairing URI.
-You **must** register the listener before calling `connect()`, or you may miss the event:
+You **must** register the listener before calling `connect`, or you may miss the event:
 
 ```javascript
 client.on('display_uri', uri => {
