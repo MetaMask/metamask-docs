@@ -42,7 +42,7 @@ Always check `err.code` before `err.message` for reliable error categorization.
 | `-32002` | Request already pending           | Show "Check MetaMask to approve the pending request." Do **not** call `connect()` again.   |
 | `-32602` | Invalid parameters                | Verify that parameters match the expected types (for example, hex chain IDs, not decimal). |
 | `-32603` | Internal error                    | Unexpected server-side error. Retry with exponential backoff.                              |
-| `-32000` | Execution reverted / server error | Transaction would fail on-chain. Check contract inputs and sender balance.                 |
+| `-32000` | Execution reverted / server error | Transaction would fail onchain. Check contract inputs and sender balance.                 |
 | `1013`   | Internal transport disconnect     | The SDK handles reconnection internally. Do not treat this as a user-facing disconnect.    |
 
 For the complete list of provider errors, see
