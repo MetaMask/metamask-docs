@@ -32,8 +32,8 @@ instructions.
 
 ## Error codes
 
-The following error codes appear in `err.code` on rejected promises from `connect()`,
-`invokeMethod()`, and `provider.request()` calls.
+The following error codes appear in `err.code` on rejected promises from `connect`,
+`invokeMethod`, and `provider.request` calls.
 Always check `err.code` before `err.message` for reliable error categorization.
 
 | Code     | Meaning                           | Recommended handling                                                                       |
