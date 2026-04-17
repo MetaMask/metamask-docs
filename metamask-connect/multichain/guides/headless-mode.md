@@ -112,7 +112,7 @@ const client = await createMultichainClient({
 
 ### Monitor connection status
 
-Use the `stateChanged` event to track the connection lifecycle and update your UI accordingly:
+Use the [`stateChanged`](../reference/methods.md#events) event to track the connection lifecycle and update your UI accordingly:
 
 ```javascript
 client.on('stateChanged', status => {
