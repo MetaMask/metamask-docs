@@ -334,24 +334,25 @@ See [React Native Metro polyfill issues](metro-polyfill-issues.md) for the full 
 
 ## Diagnostic checklist
 
-Run through this checklist when any MetaMask Connect integration is misbehaving:
+When any MetaMask Connect integration is misbehaving, ensure the following are true:
 
-- [ ] `supportedNetworks` has valid RPC URLs for every chain the dapp uses.
-- [ ] Chain IDs are hex strings for EVM (`'0x1'`, not `1` or `'1'`).
-- [ ] Polyfills loaded (React Native): `react-native-get-random-values` is first entry-file
-      import; `window` shim present; `Event`/`CustomEvent` shims present **only if using wagmi**;
-      `Buffer` set as safety net for peer deps.
-- [ ] `preferredOpenLink` set (React Native) for deeplinks to open MetaMask Mobile.
-- [ ] Import order correct: polyfills before SDK imports; `react-native-get-random-values` is the
+- `supportedNetworks` has valid RPC URLs for every chain the dapp uses.
+- Chain IDs are hex strings for EVM (`'0x1'`, not `1` or `'1'`).
+- In React Native dapps:
+  - Polyfills are loaded: `react-native-get-random-values` is the first entry-file
+      import; `window` shim is present; `Event`/`CustomEvent` shims are present **only if using Wagmi**;
+      `Buffer` is set as a safety net for peer dependencies.
+  - `preferredOpenLink` is set for deeplinks to open MetaMask Mobile.
+  - Import order is correct: polyfills before SDK imports; `react-native-get-random-values` is the
       very first import.
-- [ ] Error codes handled in catch blocks: at minimum handle `4001` (user rejected) and `-32002`
+- Error codes are handled in catch blocks: at minimum handle `4001` (user rejected) and `-32002`
       (pending).
-- [ ] Singleton client not recreated: `createEVMClient` / `createMultichainClient` called once;
-      subsequent calls merge into existing instance.
-- [ ] `display_uri` listener registered before `connect()` in headless mode for QR codes.
-- [ ] Solana `wallets` prop is `[]`: MetaMask uses wallet-standard discovery, not manual registration.
-- [ ] Solana devnet/testnet only supported in the browser extension, not mobile.
-- [ ] `debug: true` enabled in client options for verbose console output when debugging.
+- A singleton client is not recreated: `createEVMClient` / `createMultichainClient` is called once;
+      subsequent calls merge into the existing instance.
+- `display_uri` listener is registered before calling `connect` in headless mode for QR codes.
+- Solana `wallets` prop is `[]`: MetaMask uses Wallet Standard discovery, not manual registration.
+- Solana devnet/testnet is used only with the browser extension.
+- `debug: true` is set for verbose console output when debugging.
 
 ## Next steps
 
