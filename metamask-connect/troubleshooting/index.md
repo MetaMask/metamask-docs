@@ -228,9 +228,9 @@ provider.on('wallet_sessionChanged', session => {
 })
 ```
 
-Do not call `connect()` again immediately on page load if a session already exists.
+Do not call `connect` again immediately on page load if a session already exists.
 
-### `disconnect()` doesn't fully disconnect
+### `disconnect` doesn't fully disconnect
 
 Calling `disconnect(scopes)` with specific CAIP scopes only revokes those scopes, not the entire
 session.
