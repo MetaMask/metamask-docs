@@ -31,9 +31,9 @@ Use headless mode when you want to:
 
 ## Set up headless mode
 
-### 1. Create the client with headless mode enabled
+### 1. Configure the client with headless mode
 
-Set `ui.headless` to `true` in the client options:
+Initialize a MetaMask Connect Multichain client, and set `ui.headless` to `true` in the configuration options:
 
 ```javascript
 import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
