@@ -53,7 +53,7 @@ const connection = new Connection('https://solana-devnet.infura.io/v3/<YOUR_INFU
 
 ### 1. Build the transactions
 
-Construct each transaction with a fresh blockhash and fee payer.
+Construct each transaction with a new block hash and fee payer.
 Serialize each with `verifySignatures: false` since the wallet adds signatures:
 
 ```javascript
