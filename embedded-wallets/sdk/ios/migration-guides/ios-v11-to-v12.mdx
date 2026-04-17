@@ -1,0 +1,290 @@
+---
+title: iOS SDK - v11 to v12
+description: 'iOS SDK v11 to v12 migration guide | Embedded Wallets'
+sidebar_label: v11 to v12
+---
+
+This migration guide covers the breaking changes and enhancements introduced in v12 of the
+Embedded Wallets iOS SDK.
+Version 12 aligns the iOS SDK with the Android SDK v10 changes and introduces a new API surface
+with cleaner naming conventions.
+
+## Breaking changes
+
+### Initialization: `W3AInitParams` renamed to `Web3AuthOptions`
+
+The initialization struct has been renamed from `W3AInitParams` to `Web3AuthOptions`, and the
+constructor is now fully async.
+The separate `initialize()` call has been removed; session restoration happens automatically in
+the constructor.
+
+**Network enum renamed**: `Network` is now `Web3AuthNetwork`, and enum cases are now uppercase (for example, `.sapphire_mainnet` becomes `.SAPPHIRE_MAINNET`).
+
+```swift
+// remove-next-line
+web3Auth = await Web3Auth(W3AInitParams(
+// add-next-line
+web3Auth = try await Web3Auth(options: Web3AuthOptions(
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+// remove-next-line
+    network: .sapphire_mainnet,
+// add-next-line
+    web3AuthNetwork: .SAPPHIRE_MAINNET,
+    redirectUrl: "com.yourapp.bundleid://auth"
+))
+
+// remove-next-line
+await web3Auth.initialize()
+```
+
+The new constructor throws if initialization fails, so wrap it in `do/catch`.
+
+### URL callbacks removed
+
+The `setResultUrl(url:)` method has been removed.
+The SDK now uses `ASWebAuthenticationSession` internally and handles all redirects
+automatically.
+Remove any calls to `setResultUrl` and the associated `onOpenURL` handler.
+
+```swift
+// remove-start
+.onOpenURL { url in
+    Web3Auth.setResultUrl(url)
+}
+// remove-end
+```
+
+### `login()` renamed to `connectTo()`
+
+The `login` method and `W3ALoginParams` have been replaced by `connectTo` and `LoginParams`.
+
+```swift
+// remove-next-line
+let result = try await web3Auth.login(W3ALoginParams(loginProvider: .GOOGLE))
+// add-next-line
+let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnection: .GOOGLE))
+```
+
+### `Web3AuthProvider` renamed to `AuthConnection`; `.JWT` renamed to `.CUSTOM`
+
+The login provider enum has been renamed from `Web3AuthProvider` to `AuthConnection`. The `.JWT` case is now `.CUSTOM`.
+
+```swift
+// remove-next-line
+let params = W3ALoginParams(loginProvider: .JWT, extraLoginOptions: .init(id_token: "..."))
+// add-next-line
+let params = LoginParams(authConnection: .CUSTOM, authConnectionId: "your-connection-id", idToken: "your_jwt_token")
+```
+
+### `loginConfig` renamed to `authConnectionConfig`; `W3ALoginConfig` renamed to `AuthConnectionConfig`
+
+The custom authentication configuration has changed from a dictionary
+(`[String: W3ALoginConfig]`) to an array (`[AuthConnectionConfig]`).
+The type itself has been renamed with updated field names.
+
+| Old field               | New field                  |
+| ----------------------- | -------------------------- |
+| `verifier`              | `authConnectionId`         |
+| `typeOfLogin`           | `authConnection`           |
+| `verifierSubIdentifier` | `groupedAuthConnectionId`  |
+
+```swift
+// remove-start
+loginConfig: [
+    Web3AuthProvider.JWT.rawValue: .init(
+        verifier: "your-verifier-name",
+        typeOfLogin: .google,
+        clientId: "YOUR_GOOGLE_CLIENT_ID",
+        verifierSubIdentifier: "sub-verifier"
+    )
+]
+// remove-end
+// add-start
+authConnectionConfig: [
+    AuthConnectionConfig(
+        authConnectionId: "your-auth-connection-id",
+        authConnection: .GOOGLE,
+        clientId: "YOUR_GOOGLE_CLIENT_ID",
+        groupedAuthConnectionId: "sub-connection"
+    )
+]
+// add-end
+```
+
+### `ExtraLoginOptions`: `verifierIdField` and `isVerifierIdCaseSensitive` renamed
+
+```swift
+// remove-next-line
+ExtraLoginOptions(verifierIdField: "sub", isVerifierIdCaseSensitive: false)
+// add-next-line
+ExtraLoginOptions(userIdField: "sub", isUserIdCaseSensitive: false)
+```
+
+### `getPrivKey()` renamed to `getPrivateKey()`
+
+```swift
+// remove-next-line
+let privateKey = web3Auth.getPrivKey()
+// add-next-line
+let privateKey = web3Auth.getPrivateKey()
+```
+
+### `getEd25519PrivKey()` renamed to `getEd25519PrivateKey()`
+
+```swift
+// remove-next-line
+let ed25519Key = web3Auth.getEd25519PrivKey()
+// add-next-line
+let ed25519Key = try web3Auth.getEd25519PrivateKey()
+```
+
+### `launchWalletServices(chainConfig:)` renamed to `showWalletUI(path:)`
+
+The chain configuration is no longer passed directly to the wallet services method.
+Instead, chain config comes from the project settings in the Embedded Wallets dashboard or via
+the new `chains` parameter in `Web3AuthOptions`.
+
+```swift
+// remove-next-line
+try await web3Auth.launchWalletServices(chainConfig: ChainConfig(chainId: "0x89", rpcTarget: "https://rpc.ankr.com/polygon"))
+// add-next-line
+try await web3Auth.showWalletUI()
+```
+
+### `request(chainConfig:method:requestParams:)` signature updated
+
+The `chainConfig` parameter has been removed.
+Chain configuration now comes from the dashboard or `Web3AuthOptions.chains`.
+
+```swift
+// remove-start
+let response = try await web3Auth.request(
+    chainConfig: ChainConfig(chainId: "0x89", rpcTarget: "https://rpc.ankr.com/polygon"),
+    method: "personal_sign",
+    requestParams: params
+)
+// remove-end
+// add-start
+let response = try await web3Auth.request(
+    method: "personal_sign",
+    requestParams: params
+)
+// add-end
+```
+
+### `Web3AuthUserInfo` field renames
+
+The following fields in `Web3AuthUserInfo` (returned by `getUserInfo()`) have been renamed:
+
+| Old field name       | New field name            |
+| -------------------- | ------------------------- |
+| `verifier`           | `authConnectionId`        |
+| `verifierId`         | `userId`                  |
+| `typeOfLogin`        | `authConnection`          |
+| `aggregateVerifier`  | `groupedAuthConnectionId` |
+
+Update any code that reads these fields from the user info response.
+
+### `useCoreKitKey` renamed to `useSFAKey`
+
+```swift
+// remove-next-line
+Web3AuthOptions(clientId: "...", web3AuthNetwork: .SAPPHIRE_MAINNET, redirectUrl: "...", useCoreKitKey: true)
+// add-next-line
+Web3AuthOptions(clientId: "...", web3AuthNetwork: .SAPPHIRE_MAINNET, redirectUrl: "...", useSFAKey: true)
+```
+
+### Session time default changed
+
+The default `sessionTime` has changed from **7 days** to **30 days**. If you were relying on the 7-day default, set `sessionTime` explicitly:
+
+```swift
+Web3AuthOptions(
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+    web3AuthNetwork: .SAPPHIRE_MAINNET,
+    redirectUrl: "com.yourapp.bundleid://auth",
+    // add-next-line
+    sessionTime: 86400 * 7 // Explicitly set to 7 days if needed
+)
+```
+
+## New features
+
+### Chains configuration
+
+Configure blockchain networks directly in `Web3AuthOptions` using the `chains` parameter.
+When set, these chains are used by wallet services in addition to any chains configured in the
+project dashboard.
+
+```swift
+Web3AuthOptions(
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+    web3AuthNetwork: .SAPPHIRE_MAINNET,
+    redirectUrl: "com.yourapp.bundleid://auth",
+    chains: [
+        Chains(
+            chainId: "0x89",
+            rpcTarget: "https://rpc.ankr.com/polygon",
+            displayName: "Polygon Mainnet",
+            ticker: "MATIC",
+            tickerName: "Matic",
+            blockExplorerUrl: "https://polygonscan.com"
+        )
+    ]
+)
+```
+
+### Wallet Services configuration
+
+A new `walletServicesConfig` parameter in `Web3AuthOptions` lets you customize the confirmation
+strategy for transaction requests.
+
+```swift
+Web3AuthOptions(
+    clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+    web3AuthNetwork: .SAPPHIRE_MAINNET,
+    redirectUrl: "com.yourapp.bundleid://auth",
+    walletServicesConfig: WalletServicesConfig(
+        confirmationStrategy: .modal
+    )
+)
+```
+
+### SFA (Single Factor Auth) mode
+
+The `idToken` parameter in `LoginParams` enables direct SFA authentication.
+When provided, the SDK authenticates the user with the given JWT token without launching any
+browser-based sign-in flow.
+
+```swift
+let result = try await web3Auth.connectTo(
+    loginParams: LoginParams(
+        authConnection: .CUSTOM,
+        authConnectionId: "your-auth-connection-id",
+        idToken: "your_jwt_token"
+    )
+)
+```
+
+### `loginHint` in `LoginParams`
+
+A new `loginHint` parameter has been added directly to `LoginParams`, eliminating the need to
+nest it inside `ExtraLoginOptions` for passwordless flows.
+
+```swift
+// Old way
+let result = try await web3Auth.login(
+    W3ALoginParams(
+        loginProvider: .EMAIL_PASSWORDLESS,
+        extraLoginOptions: .init(loginHint: "hello@web3auth.io")
+    )
+)
+
+// New way
+let result = try await web3Auth.connectTo(
+    loginParams: LoginParams(
+        authConnection: .EMAIL_PASSWORDLESS,
+        loginHint: "hello@web3auth.io"
+    )
+)
+```

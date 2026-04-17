@@ -669,6 +669,22 @@
     {
       "source": "/sdk/:path*/",
       "destination": "/metamask-connect/"
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/login/",
+      "destination": "/embedded-wallets/sdk/ios/usage/connectTo/"
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/getPrivKey/",
+      "destination": "/embedded-wallets/sdk/ios/usage/getPrivateKey/"
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/getEd25519PrivKey/",
+      "destination": "/embedded-wallets/sdk/ios/usage/getEd25519PrivateKey/"
+    },
+    {
+      "source": "/embedded-wallets/sdk/ios/usage/launchWalletServices/",
+      "destination": "/embedded-wallets/sdk/ios/usage/showWalletUI/"
     }
   ]
 }

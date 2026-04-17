@@ -1,0 +1,182 @@
+---
+title: Smart accounts and Wallet Services configuration
+sidebar_label: Smart accounts
+description: 'Web3Auth iOS SDK - Smart Accounts and Wallet Services Configuration | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+The iOS SDK provides fine-grained control over the `showWalletUI` and `request` flows through
+the `walletServicesConfig` parameter in `Web3AuthOptions`.
+Customize how transaction confirmations display and tailor the wallet UI branding.
+
+:::note
+
+Wallet Services requires a paid plan.
+You can use this feature in `sapphire_devnet` for free.
+The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a
+production environment is the **Scale Plan**.
+
+:::
+
+## `WalletServicesConfig`
+
+Pass `walletServicesConfig` in `Web3AuthOptions` to configure how wallet services behave across
+your dapp.
+
+### Parameters
+
+| Parameter               | Description                                                                                                                                                    |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy`. Default is `.defaultStrategy`.                                           |
+| `whiteLabel?`           | Whitelabel configuration for the wallet services UI. When provided, merged with the project-level whitelabel config. Accepts `WhiteLabelData` as a value.      |
+
+### `ConfirmationStrategy`
+
+`ConfirmationStrategy` controls the UI shown when a user needs to confirm a transaction or signature request.
+
+| Value             | Description                                                                                                                                           |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.defaultStrategy` | Shows the default Web3Auth confirmation screen inside the wallet WebView. This is the default value.                                                  |
+| `.modal`          | Shows the confirmation request in a bottom sheet modal on top of your application, rather than navigating to a new full-screen WebView.               |
+| `.popup`          | Shows the confirmation in a small popup window. Useful for minimal UI disruption.                                                                     |
+
+### Interface
+
+```swift
+public struct WalletServicesConfig: Codable {
+    public let confirmationStrategy: ConfirmationStrategy?
+    public let whiteLabel: WhiteLabelData?
+
+    public init(
+        confirmationStrategy: ConfirmationStrategy? = nil,
+        whiteLabel: WhiteLabelData? = nil
+    )
+}
+
+public enum ConfirmationStrategy: String, Codable {
+    case defaultStrategy = "default"
+    case modal = "modal"
+    case popup = "popup"
+}
+```
+
+## Setup
+
+Configure `walletServicesConfig` during SDK initialization:
+
+```swift
+import Web3Auth
+
+web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth",
+        // focus-start
+        walletServicesConfig: WalletServicesConfig(
+            confirmationStrategy: .modal,
+            whiteLabel: WhiteLabelData(
+                appName: "My App",
+                theme: ["primary": "#0364FF"]
+            )
+        )
+        // focus-end
+    )
+)
+```
+
+## Usage examples
+
+<Tabs
+  defaultValue="show-wallet"
+  values={[
+    { label: "Show Wallet UI", value: "show-wallet" },
+    { label: "Sign Personal Message", value: "personal-sign" },
+    { label: "Sign Typed Data", value: "typed-data" },
+  ]}
+>
+
+<TabItem value="show-wallet">
+
+```swift
+do {
+    // focus-next-line
+    try await web3Auth.showWalletUI()
+} catch {
+    print(error.localizedDescription)
+    // Handle error
+}
+```
+
+</TabItem>
+
+<TabItem value="personal-sign">
+
+```swift
+do {
+    var params = [Any]()
+    params.append("Hello, Web3Auth from iOS!")
+    params.append(address) // User's EOA address
+
+    // focus-start
+    let response = try await web3Auth.request(
+        method: "personal_sign",
+        requestParams: params
+    )
+    // focus-end
+
+    if let response = response, response.success {
+        print("Signature: \(response.result!)")
+    }
+} catch {
+    print(error.localizedDescription)
+    // Handle error
+}
+```
+
+</TabItem>
+
+<TabItem value="typed-data">
+
+```swift
+do {
+    let typedData = """
+    {
+        "types": {
+            "EIP712Domain": [
+                { "name": "name", "type": "string" }
+            ],
+            "Mail": [
+                { "name": "contents", "type": "string" }
+            ]
+        },
+        "primaryType": "Mail",
+        "domain": { "name": "Ether Mail" },
+        "message": { "contents": "Hello, Bob!" }
+    }
+    """
+
+    var params = [Any]()
+    params.append(address) // User's EOA address
+    params.append(typedData)
+
+    // focus-start
+    let response = try await web3Auth.request(
+        method: "eth_signTypedData_v4",
+        requestParams: params
+    )
+    // focus-end
+
+    if let response = response, response.success {
+        print("Signature: \(response.result!)")
+    }
+} catch {
+    print(error.localizedDescription)
+    // Handle error
+}
+```
+
+</TabItem>
+</Tabs>

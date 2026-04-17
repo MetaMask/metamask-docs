@@ -15,7 +15,7 @@ export const unreal = 'Unreal Engine'
 
 export const pnpWebVersion = `10.0.x`
 export const pnpAndroidVersion = `9.1.2`
-export const pnpIOSVersion = `11.1.0`
+export const pnpIOSVersion = `12.0.1`
 export const pnpRNVersion = `8.1.x`
 export const pnpNodeVersion = `5.0.x`
 export const pnpFlutterVersion = `6.1.2`

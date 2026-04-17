@@ -1,0 +1,301 @@
+---
+title: Sign in a user
+sidebar_label: connectTo
+description: 'Web3Auth iOS SDK - connectTo Function | Embedded Wallets'
+---
+
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+To sign in a user, use the `connectTo` method.
+It triggers the sign-in flow and navigates the user to a browser modal for authentication.
+Pass supported auth connections for specific social sign-ins (such as `.GOOGLE`, `.APPLE`,
+`.FACEBOOK`) or use whitelabel sign-in.
+
+For SFA (Single Factor Auth) sign-in with a JWT token, pass the `idToken` parameter to
+authenticate directly without the browser modal.
+
+## Parameters
+
+The `connectTo` method accepts `LoginParams` as a required parameter.
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: "Table", value: "table" },
+    { label: "Struct", value: "struct" },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter                  | Description                                                                                                                                                                                                                                                                                          |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `authConnection`           | It sets the OAuth login method to be used. You can use any of the supported values: `.GOOGLE`, `.FACEBOOK`, `.REDDIT`, `.DISCORD`, `.TWITCH`, `.APPLE`, `.LINE`, `.GITHUB`, `.KAKAO`, `.LINKEDIN`, `.TWITTER`, `.WEIBO`, `.WECHAT`, `.EMAIL_PASSWORDLESS`, `.SMS_PASSWORDLESS`, and `.FARCASTER`.    |
+| `authConnectionId?`        | The auth connection ID for the connection. Required for SFA mode when `idToken` is passed. Default value is `nil`.                                                                                                                                                                                   |
+| `groupedAuthConnectionId?` | The grouped auth connection ID for grouped auth connections. It accepts `String` as a value.                                                                                                                                                                                                         |
+| `extraLoginOptions?`       | It can be used to set the OAuth login options for the corresponding `authConnection`. Default value is `nil`, and it accepts `ExtraLoginOptions` as a value.                                                                                                                                         |
+| `appState?`                | It can be used to keep track of the app state when user will be redirected to app after login. Default is `nil`, and it accepts a string value.                                                                                                                                                      |
+| `mfaLevel?`                | Customize the MFA screen shown to the user during authentication. Default value is `.DEFAULT`, which shows MFA screen every 3rd login. It accepts `MFALevel` as a value.                                                                                                                             |
+| `dappShare?`               | Custom auth connection logins can get a dapp share returned to them post successful login. This is useful if the dapps want to use this share to allow users to login seamlessly. It accepts a string value.                                                                                         |
+| `curve?`                   | It will be used to determine the public key encoded in the JWT token which is returned in `getUserInfo` after user login. Private key returned by `getPrivateKey` is always secp256k1. To get the ed25519 key you can use `getEd25519PrivateKey`. The default value is `.SECP256K1`.                 |
+| `loginHint?`               | Used to specify the user's email address or phone number for email/SMS passwordless login flows. For SMS, the format should be: `+{country_code}-{phone_number}` (for example `+1-1234567890`). It accepts a string value.                                                                           |
+| `idToken?`                 | JWT token for SFA (Single Factor Auth) mode. When provided, enables direct authentication without the social login browser flow. It accepts a string value.                                                                                                                                          |
+
+</TabItem>
+
+<TabItem value="struct">
+
+```swift
+public struct LoginParams: Codable, Sendable {
+    public init(
+        authConnection: AuthConnection,
+        authConnectionId: String? = nil,
+        groupedAuthConnectionId: String? = nil,
+        appState: String? = nil,
+        mfaLevel: MFALevel? = nil,
+        extraLoginOptions: ExtraLoginOptions? = nil,
+        dappShare: String? = nil,
+        curve: SUPPORTED_KEY_CURVES = .SECP256K1,
+        dappUrl: String? = nil,
+        loginHint: String? = nil,
+        idToken: String? = nil
+    )
+}
+
+public enum AuthConnection: String, Codable {
+    case GOOGLE = "google"
+    case FACEBOOK = "facebook"
+    case REDDIT = "reddit"
+    case DISCORD = "discord"
+    case TWITCH = "twitch"
+    case APPLE = "apple"
+    case LINE = "line"
+    case GITHUB = "github"
+    case KAKAO = "kakao"
+    case LINKEDIN = "linkedin"
+    case TWITTER = "twitter"
+    case WEIBO = "weibo"
+    case WECHAT = "wechat"
+    case EMAIL_PASSWORDLESS = "email_passwordless"
+    case CUSTOM = "custom"
+    case SMS_PASSWORDLESS = "sms_passwordless"
+    case FARCASTER = "farcaster"
+}
+```
+
+</TabItem>
+</Tabs>
+
+## Usage
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
+
+// focus-next-line
+let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnection: .GOOGLE))
+```
+
+## Examples
+
+<Tabs
+  defaultValue="google"
+  values={[
+    { label: "Google", value: "google" },
+    { label: "Facebook", value: "facebook" },
+    { label: "Discord", value: "discord" },
+    { label: "Twitch", value: "twitch" },
+    { label: "Email Passwordless", value: "email_passwordless" },
+    { label: "SMS Passwordless", value: "sms_passwordless" },
+    { label: "Farcaster", value: "farcaster" },
+    { label: "SFA JWT", value: "sfa_jwt" },
+  ]}
+>
+
+<TabItem value="google">
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
+
+// focus-next-line
+let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnection: .GOOGLE))
+```
+
+</TabItem>
+
+<TabItem value="facebook">
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
+
+// focus-next-line
+let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnection: .FACEBOOK))
+```
+
+</TabItem>
+
+<TabItem value="discord">
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
+
+// focus-next-line
+let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnection: .DISCORD))
+```
+
+</TabItem>
+
+<TabItem value="twitch">
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
+
+// focus-next-line
+let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnection: .TWITCH))
+```
+
+</TabItem>
+
+<TabItem value="email_passwordless">
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
+
+// focus-start
+let result = try await web3Auth.connectTo(
+    loginParams: LoginParams(
+        authConnection: .EMAIL_PASSWORDLESS,
+        loginHint: "hello@web3auth.io",
+        extraLoginOptions: ExtraLoginOptions(
+            flow_type: .code // Use .code for OTP flow or .link for magic link flow
+        )
+    )
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="sms_passwordless">
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
+
+// focus-start
+let result = try await web3Auth.connectTo(
+    loginParams: LoginParams(
+        authConnection: .SMS_PASSWORDLESS,
+        // The phone number should be in format of +{country_code}-{phone_number}
+        loginHint: "+91-9911223344"
+    )
+)
+// focus-end
+```
+
+</TabItem>
+
+<TabItem value="farcaster">
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
+
+// focus-next-line
+let result = try await web3Auth.connectTo(loginParams: LoginParams(authConnection: .FARCASTER))
+```
+
+</TabItem>
+
+<TabItem value="sfa_jwt">
+
+For SFA (Single Factor Auth) mode, pass the JWT token via `idToken` to authenticate directly
+without any browser-based sign-in flow.
+This is useful when you already have a JWT from your own authentication system.
+
+```swift
+import Web3Auth
+
+let web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
+
+// focus-start
+let result = try await web3Auth.connectTo(
+    loginParams: LoginParams(
+        authConnection: .CUSTOM,
+        authConnectionId: "your-auth-connection-id", // Get it from the Embedded Wallets dashboard
+        idToken: "your_jwt_token"
+    )
+)
+// focus-end
+```
+
+</TabItem>
+</Tabs>

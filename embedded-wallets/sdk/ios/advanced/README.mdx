@@ -7,27 +7,30 @@ description: 'Web3Auth iOS SDK - Advanced Configuration | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The Embedded Wallets SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your application's specific requirements.
+The Embedded Wallets SDK offers configuration options to customize authentication flows, UI
+appearance, blockchain integrations, and security features for your dapp.
 
 ## Configuration structure
 
-When setting up Web3Auth, you'll pass in the options to the constructor. This consists of:
+Pass options to the `Web3Auth` constructor during setup:
 
 ```swift
 import Web3Auth
 
 // focus-start
-web3Auth = Web3Auth(W3AInitParams(
-    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
-    network: .sapphire_mainnet, // or .sapphire_devnet
-    redirectUrl: "com.yourapp.bundleid://auth"
-))
+web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+        web3AuthNetwork: .SAPPHIRE_MAINNET, // or .SAPPHIRE_DEVNET
+        redirectUrl: "com.yourapp.bundleid://auth"
+    )
+)
 // focus-end
 ```
 
-### `W3AInitParams`
+### `Web3AuthOptions`
 
-The Web3Auth Constructor takes an object with `W3AInitParams` as input.
+The constructor takes a `Web3AuthOptions` struct as input.
 
 <Tabs
   defaultValue="table"
@@ -39,43 +42,47 @@ The Web3Auth Constructor takes an object with `W3AInitParams` as input.
 
 <TabItem value="table">
 
-| Parameter      | Description                                                                                                                               |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `String`.                    |
-| `network`      | Web3Auth Network: `.sapphire_mainnet`, `.sapphire_devnet`, `.mainnet`, `.cyan`, `.aqua` or `.testnet`. Mandatory field of type `Network`. |
-| `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `String`.                    |
-| `whiteLabel?`  | Whitelabel options for custom UI, branding, and translations. Takes `W3AWhiteLabelData`` as a value.                                      |
-| `loginConfig?` | Login config for custom verifiers. Takes `[String: W3ALoginConfig]` as a value.                                                           |
-| `mfaSettings?` | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                                |
-| `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                              |
+**Basic parameters:**
+
+| Parameter         | Description                                                                                                                                        |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`        | Your Web3Auth Client ID from the [Dashboard](https://dashboard.web3auth.io/). It's a mandatory field of type `String`.                             |
+| `web3AuthNetwork` | Web3Auth Network: `.SAPPHIRE_MAINNET`, `.SAPPHIRE_DEVNET`, `.MAINNET`, `.CYAN`, `.AQUA`, or `.TESTNET`. Mandatory field of type `Web3AuthNetwork`. |
+| `redirectUrl`     | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `String`.                             |
+| `sessionTime?`    | Session duration in seconds. Default is `86400 * 30` (30 days). Maximum is 30 days.                                                               |
+| `useSFAKey?`      | Use SFA key to get single factor auth key. Default is `false`. Useful for wallet pregeneration and SFA mode.                                       |
+| `defaultChainId?` | Default chain ID to use. Default is `"0x1"` (Ethereum mainnet).                                                                                   |
+| `enableLogging?`  | Enable SDK logging. Default is `false`.                                                                                                            |
+
+**Advanced parameters:**
+
+| Parameter               | Description                                                                                                                                 |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `whiteLabel?`           | Whitelabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                            |
+| `authConnectionConfig?` | Auth connection config for custom auth connections. Takes `[AuthConnectionConfig]` as a value.                                              |
+| `mfaSettings?`          | Configure MFA settings for authentication. Takes `MfaSettings` as a value.                                                                 |
+| `chains?`               | Custom chain configuration for blockchain networks. Takes `[Chains]` as a value. See [Chains configuration](#chains-configuration) below.   |
+| `walletServicesConfig?` | Configuration for wallet services including whitelabel options. Takes `WalletServicesConfig` as a value.                                    |
 
 </TabItem>
 
 <TabItem value="struct">
 
 ```swift
-public struct W3AInitParams {
-    public let clientId: String
-    public let network: Network
-    public let redirectUrl: String
-    public let whiteLabel: W3AWhiteLabelData?
-    public let loginConfig: [String: W3ALoginConfig]?
-    public let useCoreKitKey: Bool?
-    public let chainNamespace: ChainNamespace?
-    public let mfaSettings: MfaSettings?
-    public let sessionTime: Int?
-
-    public init(
-        clientId: String,
-        network: Network,
-        redirectUrl: String,
-        whiteLabel: W3AWhiteLabelData? = nil,
-        loginConfig: [String: W3ALoginConfig]? = nil,
-        useCoreKitKey: Bool? = nil,
-        chainNamespace: ChainNamespace? = .eip155,
-        mfaSettings: MfaSettings? = nil,
-        sessionTime: Int? = 86400
-    )
+public struct Web3AuthOptions: Codable {
+    let clientId: String
+    var redirectUrl: String
+    let authBuildEnv: BuildEnv?
+    var authConnectionConfig: [AuthConnectionConfig]?
+    var whiteLabel: WhiteLabelData?
+    var chains: [Chains]?
+    var defaultChainId: String?
+    let enableLogging: Bool?
+    let sessionTime: Int
+    var web3AuthNetwork: Web3AuthNetwork
+    var useSFAKey: Bool?
+    var walletServicesConfig: WalletServicesConfig?
+    var mfaSettings: MfaSettings?
 }
 ```
 
@@ -86,35 +93,126 @@ public struct W3AInitParams {
 
 Control how long users stay authenticated and how sessions persist. The session key is stored in the device's encrypted Keychain.
 
-**Key Configuration Options:**
+**Key configuration options:**
 
-- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
+- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated
+  before needing to sign in again.
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
-  - Default: 7 days (`86400 * 7`).
+  - Default: 30 days (`86400 * 30`).
 
 ```swift
-web3Auth = Web3Auth(W3AInitParams(
-    clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
-    network: .sapphire_mainnet, // or .sapphire_devnet
-    sessionTime: 86400 * 7, // 7 days (in seconds)
-    redirectUrl: "com.yourapp.bundleid://auth"
-))
+web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Get your Client ID from Web3Auth Dashboard
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth",
+        sessionTime: 86400 * 7 // 7 days (in seconds)
+    )
+)
+```
+
+## Chains configuration
+
+The `chains` parameter lets you specify custom blockchain networks for the SDK.
+When set, these chains are used by wallet services (`showWalletUI`, `request`) in addition to
+any chains configured in the project dashboard.
+
+### `Chains` fields
+
+| Field              | Type             | Required | Description                                                                               |
+| ------------------ | ---------------- | -------- | ----------------------------------------------------------------------------------------- |
+| `chainId`          | `String`         | Yes      | Chain ID in hex format (for example, `"0x1"` for Ethereum mainnet, `"0x89"` for Polygon). |
+| `rpcTarget`        | `String`         | Yes      | RPC endpoint URL for the chain.                                                           |
+| `chainNamespace`   | `ChainNamespace` | No       | Namespace of the chain. Accepts `.eip155`, `.solana`, or `.other`. Default is `.eip155`.  |
+| `decimals?`        | `Int?`           | No       | Number of decimals for the native token. Default is `18`.                                 |
+| `blockExplorerUrl?`| `String?`        | No       | URL of the block explorer for this chain.                                                 |
+| `displayName?`     | `String?`        | No       | Human-readable name for the chain.                                                        |
+| `logo?`            | `String?`        | No       | URL of the chain's logo image.                                                            |
+| `ticker?`          | `String?`        | No       | Ticker symbol for the native token (for example, `"ETH"`).                                |
+| `tickerName?`      | `String?`        | No       | Full name of the native token (for example, `"Ethereum"`).                                |
+
+### Interface
+
+```swift
+public struct Chains: Codable {
+    public let chainNamespace: ChainNamespace
+    public let decimals: Int?
+    public let blockExplorerUrl: String?
+    public let chainId: String?
+    public let displayName: String?
+    public let logo: String?
+    public let rpcTarget: String
+    public let ticker: String?
+    public let tickerName: String?
+}
+```
+
+### Example
+
+```swift
+web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth",
+        chains: [
+            Chains(
+                chainId: "0x89",
+                rpcTarget: "https://rpc.ankr.com/polygon",
+                displayName: "Polygon Mainnet",
+                ticker: "MATIC",
+                tickerName: "Matic",
+                blockExplorerUrl: "https://polygonscan.com"
+            )
+        ]
+    )
+)
+```
+
+## Wallet Services configuration
+
+The `walletServicesConfig` parameter in `Web3AuthOptions` customizes the behavior of the wallet
+UI (`showWalletUI`) and request signing (`request`).
+For full configuration options, see the [Smart Accounts](./smart-accounts.mdx) section.
+
+| Parameter               | Description                                                                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `confirmationStrategy?` | Controls how transaction confirmations are displayed. Accepts `ConfirmationStrategy`. Default is `.defaultStrategy`.                          |
+| `whiteLabel?`           | Whitelabel settings specific to the wallet services UI. When set, merged with the project-level whitelabel config. Accepts `WhiteLabelData`. |
+
+```swift
+web3Auth = try await Web3Auth(
+    options: Web3AuthOptions(
+        clientId: "YOUR_WEB3AUTH_CLIENT_ID",
+        web3AuthNetwork: .SAPPHIRE_MAINNET,
+        redirectUrl: "com.yourapp.bundleid://auth",
+        walletServicesConfig: WalletServicesConfig(
+            confirmationStrategy: .modal
+        )
+    )
+)
 ```
 
 ## Custom authentication methods
 
-Control the login options presented to your users. For detailed configuration options and implementation examples, see the [custom authentication](./custom-authentication.mdx) section.
+Control the sign-in options presented to your users.
+For detailed configuration options and implementation examples, see the
+[custom authentication](./custom-authentication.mdx) section.
 
 ## UI customization
 
-Create a seamless brand experience by customizing the Web3Auth Login Screens to match your application's design. For complete customization options, refer to the [Whitelabeling and UI Customization](./whitelabel.mdx) section.
+Customize the Embedded Wallets sign-in screens to match your dapp's design.
+For complete customization options, see
+[Whitelabeling and UI customization](./whitelabel.mdx).
 
 ## Multi-Factor Authentication
 
-Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
+Add security layers to protect user accounts with two-factor authentication.
+For detailed configuration options and implementation examples, see
+[Multi-Factor Authentication](./mfa.mdx).
 
-**Key Configuration Options:**
+**Key configuration options:**
 
 - `mfaSettings` - Configure MFA settings for different authentication flows
 - `mfaLevel` - Control when users are prompted to set up MFA
