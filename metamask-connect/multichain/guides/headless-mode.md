@@ -98,11 +98,11 @@ When the MetaMask browser extension is installed and `ui.preferExtension` is `tr
 the SDK connects directly through the extension.
 No `display_uri` event fires because no QR code is needed.
 
-To force the MWP/QR flow even when the extension is available, set `ui.preferExtension` to `false`:
+To display the QR connection option even when the extension is available, set `ui.preferExtension` to `false`:
 
 ```javascript
 const client = await createMultichainClient({
-  dapp: { name: 'My DApp', url: window.location.href },
+  dapp: { name: 'My Dapp', url: window.location.href },
   ui: {
     headless: true,
     preferExtension: false,
