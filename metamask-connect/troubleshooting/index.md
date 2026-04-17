@@ -167,7 +167,7 @@ No QR is generated because none is needed.
 
 ```javascript
 const client = await createEVMClient({
-  dapp: { name: 'My DApp' },
+  dapp: { name: 'My Dapp' },
   ui: { preferExtension: false },
 })
 ```
