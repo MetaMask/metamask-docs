@@ -2,7 +2,7 @@
 title: 'MetaMask Connect Solana - Solana Dapp Integration'
 sidebar_label: Introduction
 toc_max_heading_level: 2
-description: Connect your dapp to Solana using MetaMask Connect Solana. Use wallet-standard features, Wallet Adapter, or Framework Kit for React and vanilla JS apps.
+description: Connect your dapp to Solana using MetaMask Connect Solana. Use Wallet Standard features, Wallet Adapter, or Framework Kit for React and vanilla JS apps.
 keywords:
   [
     solana,
@@ -33,7 +33,7 @@ You interact with the wallet through the client APIs.
 
 :::tip Ready to code?
 Jump to the [Wallet Adapter guide](./guides/use-wallet-adapter.md) for a React dapp, or
-the [JavaScript quickstart](./quickstart/javascript.md) to use wallet-standard features
+the [JavaScript quickstart](./quickstart/javascript.md) to use Wallet Standard features
 directly.
 :::
 
@@ -57,7 +57,7 @@ description: 'Use Solana\'s Wallet Adapter to connect a React dapp to MetaMask.'
 {
 href: '/metamask-connect/solana/quickstart/javascript',
 title: 'JavaScript',
-description: 'Use wallet-standard features directly in a JavaScript dapp.',
+description: 'Use Wallet Standard features directly in a JavaScript dapp.',
 },
 {
 href: '/metamask-connect/solana/guides/use-framework-kit',

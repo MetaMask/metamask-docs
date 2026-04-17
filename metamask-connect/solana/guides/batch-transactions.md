@@ -1,7 +1,7 @@
 ---
 title: 'Send Batch Solana Transactions - MetaMask Connect'
 sidebar_label: Send batch transactions
-description: Sign and send multiple Solana transactions in a single wallet interaction using the signAndSendAllTransactions wallet-standard feature.
+description: Sign and send multiple Solana transactions in a single wallet interaction using the signAndSendAllTransactions Wallet Standard feature.
 keywords:
   [
     solana,

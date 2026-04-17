@@ -1,6 +1,6 @@
 ---
 title: 'MetaMask Connect Solana methods'
-description: Complete methods reference for MetaMask Connect Solana, including createSolanaClient, getInfuraRpcUrls, and wallet-standard features.
+description: Complete methods reference for MetaMask Connect Solana, including createSolanaClient, getInfuraRpcUrls, and Wallet Standard features.
 keywords:
   [
     solana,
@@ -10,7 +10,7 @@ keywords:
     dapp,
     createSolanaClient,
     getInfuraRpcUrls,
-    wallet-standard features,
+    Wallet Standard features,
     signTransaction,
     signMessage,
     API reference,

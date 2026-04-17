@@ -1,6 +1,6 @@
 ---
 title: 'JavaScript Quickstart - MetaMask Connect Solana'
-description: Set up MetaMask Connect Solana in a vanilla JavaScript dapp using wallet-standard features, signAndSendTransaction, and createSolanaClient.
+description: Set up MetaMask Connect Solana in a vanilla JavaScript dapp using Wallet Standard features, signAndSendTransaction, and createSolanaClient.
 sidebar_label: JavaScript
 keywords:
   [

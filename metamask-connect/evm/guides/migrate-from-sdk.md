@@ -318,7 +318,7 @@ MetaMask Connect EVM introduces features that are not available in `@metamask/sd
 | ---------------------- | ---------------------------------------------------------------------------------------------------------- |
 | **Multichain client**  | `createMultichainClient` from `@metamask/connect-multichain` supports CAIP-25 scopes across EVM and Solana |
 | **`invokeMethod`**     | Call RPC methods on specific CAIP-2 scopes without switching chains                                        |
-| **Solana support**     | `createSolanaClient` from `@metamask/connect-solana` with wallet-standard adapter                          |
+| **Solana support**     | `createSolanaClient` from `@metamask/connect-solana` with Wallet Standard adapter                          |
 | **`connectAndSign`**   | Connect and sign a message in a single user approval                                                       |
 | **`connectWith`**      | Connect and execute any RPC method in a single user approval                                               |
 | **Partial disconnect** | `disconnect(scopes)` revokes specific CAIP scopes while keeping others active                              |
