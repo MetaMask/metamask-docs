@@ -80,12 +80,12 @@ The SDK falls through to MetaMask Wallet Protocol (MWP) but has nowhere to rende
 
 ```javascript
 const client = await createEVMClient({
-  dapp: { name: 'My DApp' },
+  dapp: { name: 'My Dapp' },
   ui: { preferExtension: false },
 })
 ```
 
-**Cause B:** A concurrent `connect()` call is already in progress over MWP.
+**Cause B:** A concurrent `connect` call is already in progress over MWP.
 
 **Fix:** Guard against double-clicks with a loading state.
 Look for error code `-32002` and show a "check MetaMask" message instead of retrying.
