@@ -194,7 +194,7 @@ bootstrap()
 ```
 
 **Cause B:** The `wallets` prop on `WalletProvider` is not an empty array.
-MetaMask uses the wallet-standard auto-discovery protocol and must **not** be listed manually.
+MetaMask uses the Wallet Standard auto-discovery protocol and must **not** be listed manually.
 
 **Fix:** Always pass `wallets={[]}`:
 
