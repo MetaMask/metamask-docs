@@ -262,8 +262,8 @@ const client = await createEVMClient({
 ### Chrome Android Solana wallet-adapter issue {#chrome-android}
 
 There is a known issue with `@solana/wallet-adapter-react` on Chrome Android when used with the
-wallet-standard provider from `@metamask/connect-solana`.
-Treat Solana wallet-adapter flows on mobile Chrome as fragile until verified explicitly.
+Wallet Standard provider from `@metamask/connect-solana`.
+Treat Solana Wallet Adapter flows on mobile Chrome as fragile until verified explicitly.
 
 Test Solana flows on desktop Chrome and the MetaMask browser extension before targeting mobile.
 
