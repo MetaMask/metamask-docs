@@ -175,7 +175,7 @@ const client = await createEVMClient({
 ### MetaMask wallet not appearing in Solana wallet adapter
 
 **Cause A:** `createSolanaClient` has not resolved before the `WalletProvider` renders.
-MetaMask uses the wallet-standard auto-discovery protocol, but the wallet must be registered before
+MetaMask uses the Wallet Standard auto-discovery protocol, but the wallet must be registered before
 discovery runs.
 
 **Fix:** Await client creation before rendering your app:
@@ -185,7 +185,7 @@ import { createSolanaClient } from '@metamask/connect-solana'
 
 async function bootstrap() {
   await createSolanaClient({
-    dapp: { name: 'My DApp', url: window.location.href },
+    dapp: { name: 'My Dapp', url: window.location.href },
   })
   const root = createRoot(document.getElementById('root'))
   root.render(<App />)
