@@ -42,7 +42,7 @@ Always check `err.code` before `err.message` for reliable error categorization.
 | `-32002` | Request already pending           | Show "Check MetaMask to approve the pending request." Do **not** call `connect()` again.   |
 | `-32602` | Invalid parameters                | Verify that parameters match the expected types (for example, hex chain IDs, not decimal). |
 | `-32603` | Internal error                    | Unexpected server-side error. Retry with exponential backoff.                              |
-| `-32000` | Execution reverted / server error | Transaction would fail onchain. Check contract inputs and sender balance.                 |
+| `-32000` | Execution reverted / server error | Transaction would fail onchain. Check contract inputs and sender balance.                  |
 | `1013`   | Internal transport disconnect     | The SDK handles reconnection internally. Do not treat this as a user-facing disconnect.    |
 
 For the complete list of provider errors, see
@@ -161,9 +161,10 @@ await client.connect({ chainIds: ['0x1'] })
 ```
 
 **Cause B:** The MetaMask extension is detected and the SDK uses the extension transport.
-No QR is generated because none is needed.
+`preferExtension` defaults to `true`, so when the extension is installed the client prefers it and does not generate a QR code, because none is needed for that path.
+The same situation applies if you want a mobile QR flow while the extension is present.
 
-**Fix:** Force the MWP/QR flow by disabling extension preference:
+**Fix:** Force the MetaMask Wallet Protocol (MWP) / QR flow by setting `preferExtension` to `false` when creating the client:
 
 ```javascript
 const client = await createEVMClient({
@@ -245,20 +246,6 @@ await client.disconnect(['eip155:1'])
 await client.disconnect()
 ```
 
-### Extension transport used but want mobile QR
-
-`preferExtension` defaults to `true`.
-When the MetaMask browser extension is installed, the SDK always prefers it.
-
-Set `ui.preferExtension` to `false`:
-
-```javascript
-const client = await createEVMClient({
-  dapp: { name: 'My DApp' },
-  ui: { preferExtension: false },
-})
-```
-
 ### Chrome Android Solana wallet-adapter issue {#chrome-android}
 
 There is a known issue with `@solana/wallet-adapter-react` on Chrome Android when used with the
@@ -269,68 +256,7 @@ Test Solana flows on desktop Chrome and the MetaMask browser extension before ta
 
 ## React Native issues
 
-The following issues are specific to React Native.
-For full setup instructions, see the
-[React Native Metro polyfill guide](metro-polyfill-issues.md).
-
-### `Buffer is not defined`
-
-A dependency loaded before `@metamask/connect-multichain` uses `Buffer`.
-The Connect package self-polyfills `Buffer` via its React Native entry point, but peer dependencies
-like `eciesjs` may execute first.
-
-Add this to `polyfills.ts` and import it early (after `react-native-get-random-values`, before other
-imports):
-
-```typescript
-import { Buffer } from 'buffer'
-global.Buffer = Buffer
-```
-
-### `crypto.getRandomValues is not a function`
-
-`react-native-get-random-values` is either not installed or not imported as the very first import.
-
-Import it as the **first line** of your entry file, before any other import:
-
-```typescript
-import 'react-native-get-random-values'
-// all other imports follow
-```
-
-### `Event is not defined` / `CustomEvent is not defined`
-
-React Native does not provide `Event` or `CustomEvent` globals.
-These polyfills are **only required when using wagmi** — the Connect packages themselves use
-`eventemitter3` internally and do not need DOM events.
-
-If you use wagmi, add `Event` and `CustomEvent` polyfills in your polyfills file.
-See [React Native Metro polyfill issues](metro-polyfill-issues.md) for the full polyfill code.
-
-### Deeplinks not opening MetaMask app
-
-The `mobile.preferredOpenLink` callback is not configured.
-
-Pass a function that calls `Linking.openURL`:
-
-```typescript
-import { Linking } from 'react-native'
-
-const client = await createEVMClient({
-  dapp: { name: 'My DApp', url: 'https://mydapp.com' },
-  mobile: {
-    preferredOpenLink: deeplink => Linking.openURL(deeplink),
-  },
-})
-```
-
-### App crashes on import of SDK
-
-Metro cannot resolve Node.js built-in modules (`stream`, `crypto`, `http`, etc.) that SDK
-dependencies reference.
-
-Add `extraNodeModules` shims in `metro.config.js`.
-See [React Native Metro polyfill issues](metro-polyfill-issues.md) for the full Metro configuration.
+Polyfill setup, Metro `extraNodeModules`, entry-file import order, common bundler errors, and deeplinks to MetaMask Mobile are documented in [React Native Metro polyfill issues](metro-polyfill-issues.md).
 
 ## Diagnostic checklist
 
@@ -340,15 +266,15 @@ When any MetaMask Connect integration is misbehaving, ensure the following are t
 - Chain IDs are hex strings for EVM (`'0x1'`, not `1` or `'1'`).
 - In React Native dapps:
   - Polyfills are loaded: `react-native-get-random-values` is the first entry-file
-      import; `window` shim is present; `Event`/`CustomEvent` shims are present **only if using Wagmi**;
-      `Buffer` is set as a safety net for peer dependencies.
-  - `preferredOpenLink` is set for deeplinks to open MetaMask Mobile.
+    import; `window` shim is present; `Event`/`CustomEvent` shims are present **only if using wagmi**;
+    `Buffer` is set as a safety net for peer dependencies.
+  - `preferredOpenLink` is set for deeplinks to open MetaMask Mobile (see [Deeplinks not opening MetaMask app](metro-polyfill-issues.md#deeplinks-not-opening-metamask-app)).
   - Import order is correct: polyfills before SDK imports; `react-native-get-random-values` is the
-      very first import.
+    very first import.
 - Error codes are handled in catch blocks: at minimum handle `4001` (user rejected) and `-32002`
-      (pending).
+  (pending).
 - A singleton client is not recreated: `createEVMClient` / `createMultichainClient` is called once;
-      subsequent calls merge into the existing instance.
+  subsequent calls merge into the existing instance.
 - `display_uri` listener is registered before calling `connect` in headless mode for QR codes.
 - Solana `wallets` prop is `[]`: MetaMask uses Wallet Standard discovery, not manual registration.
 - Solana devnet/testnet is used only with the browser extension.
