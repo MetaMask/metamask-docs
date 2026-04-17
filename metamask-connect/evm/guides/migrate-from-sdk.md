@@ -298,7 +298,7 @@ const client = await createEVMClient({
 You can also listen for the `display_uri` event on the **provider** for custom QR code UI.
 
 :::note Event naming
-The `eventHandlers` option uses camelCase (`displayUri`), while the provider event uses snake_case
+The `eventHandlers` option uses camel case (`displayUri`), while the provider event uses snake case
 (`display_uri`).
 Both deliver the same URI string for QR code rendering.
 :::
