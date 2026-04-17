@@ -40,7 +40,7 @@ import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-mult
 
 const client = await createMultichainClient({
   dapp: {
-    name: 'My DApp',
+    name: 'My Dapp',
     url: window.location.href,
   },
   api: {
