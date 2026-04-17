@@ -111,11 +111,11 @@ try {
 
 ### Connection already pending (code `-32002`)
 
-A previous `connect()` call has not yet resolved.
+A previous `connect` call has not yet resolved.
 The user may still have the MetaMask approval dialog open on mobile.
 
 Show a message like "Check MetaMask to approve the connection."
-Do **not** call `connect()` again — the original promise resolves once the user acts.
+Do **not** call `connect` again; the original promise resolves once the user acts.
 
 ### Chain not configured in `supportedNetworks`
 
