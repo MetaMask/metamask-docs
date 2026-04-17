@@ -144,11 +144,11 @@ const client = await createEVMClient({
 **Cause A:** Headless mode is enabled but no `display_uri` listener is registered.
 The SDK generates the URI but has nowhere to render it.
 
-**Fix:** Register a `display_uri` listener **before** calling `connect()`:
+**Fix:** Register a `display_uri` listener **before** calling `connect`:
 
 ```javascript
 const client = await createEVMClient({
-  dapp: { name: 'My DApp' },
+  dapp: { name: 'My Dapp' },
   ui: { headless: true },
 })
 
