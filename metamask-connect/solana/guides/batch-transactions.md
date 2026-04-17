@@ -135,8 +135,8 @@ try {
 
 ## Important considerations
 
-- **Fresh blockhash:** Blockhashes expire after ~60 seconds.
-  Fetch `getLatestBlockhash()` immediately before building the batch.
+- **New block hash:** Block hashes expire after ~60 seconds.
+  Call `getLatestBlockhash` immediately before building the batch.
 - **Transaction size:** Each individual transaction is limited to 1,232 bytes.
   If a single transaction exceeds this limit, split it into smaller transactions.
 - **Confirmation:** A submitted transaction is not finalized until `confirmTransaction` returns.
