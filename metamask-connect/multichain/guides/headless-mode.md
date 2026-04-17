@@ -85,7 +85,7 @@ try {
 
 The pairing URI delivered by `display_uri` is a one-time-use token.
 Once used or expired, it cannot be reused.
-If the connection fails, start a new `connect()` call to generate a fresh URI.
+If the connection fails, call `connect` again to generate a fresh URI.
 
 ### `display_uri` only fires during connecting
 
