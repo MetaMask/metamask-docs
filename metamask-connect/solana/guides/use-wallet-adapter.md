@@ -151,8 +151,8 @@ The button automatically displays a wallet selection modal that includes MetaMas
 
 :::caution Chrome Android
 There is a known issue with `@solana/wallet-adapter-react` on Chrome Android when used with the
-wallet-standard provider from `@metamask/connect-solana`.
-Test Solana wallet-adapter flows on desktop Chrome and the MetaMask browser extension before
+Wallet Standard provider from `@metamask/connect-solana`.
+Test Solana Wallet Adapter flows on desktop Chrome and the MetaMask browser extension before
 targeting mobile.
 See [Troubleshooting](../../troubleshooting/index.md#chrome-android) for details.
 :::
