@@ -92,7 +92,7 @@ Look for error code `-32002` and show a "check MetaMask" message instead of retr
 
 ### User rejected request (code `4001`)
 
-The user clicked "Reject" in MetaMask. This is normal behavior.
+The user selected **Reject** in MetaMask. This is normal behavior.
 
 Handle gracefully by showing a retry button.
 Do not treat this as an application error:
