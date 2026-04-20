@@ -173,6 +173,38 @@ const client = await createEVMClient({
 })
 ```
 
+**Cause C:** A strict Content Security Policy (CSP) is blocking the QR code from rendering.
+The QR code embeds the MetaMask fox SVG as a `data:` URI, which `@metamask/multichain-ui`
+materializes via a `fetch`-style call.
+A CSP without `data:` in `connect-src` (or `img-src`) blocks this and the QR code fails to appear.
+A symptom in the browser console looks like:
+
+`Refused to connect to 'data:image/svg+xml;base64,...' because it violates the following Content Security Policy directive: "connect-src 'self' https: wss:".`
+
+**Fix:** Allow the `data:` scheme and the MetaMask relay and analytics origins in your CSP.
+A minimal working policy looks like:
+
+```html
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
+    connect-src 'self' data: https://*.infura.io wss://mm-sdk-relay.api.cx.metamask.io https://mm-sdk-analytics.api.cx.metamask.io;
+    img-src 'self' data:;
+    style-src 'self' 'unsafe-inline';
+  " />
+```
+
+- `data:` in `connect-src` and `img-src` — required for the fox SVG embedded in the QR code.
+- `wss://mm-sdk-relay.api.cx.metamask.io` — the relay used for remote (no-extension and mobile)
+  connections.
+- `https://mm-sdk-analytics.api.cx.metamask.io` — the default analytics endpoint emitted during the
+  connection lifecycle.
+- `style-src 'unsafe-inline'` — `@metamask/multichain-ui` injects component styles at runtime
+  inside Shadow DOM (Stencil).
+
+For the full reference, see the
+[Content Security Policy section of the connect-monorepo README](https://github.com/MetaMask/connect-monorepo#content-security-policy).
+
 ### MetaMask wallet not appearing in Solana wallet adapter
 
 **Cause A:** `createSolanaClient` has not resolved before the `WalletProvider` renders.
