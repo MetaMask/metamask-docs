@@ -194,16 +194,16 @@ A minimal working policy looks like:
   " />
 ```
 
-- `data:` in `connect-src` and `img-src` — required for the fox SVG embedded in the QR code.
-- `wss://mm-sdk-relay.api.cx.metamask.io` — the relay used for remote (no-extension and mobile)
+- `data:` in `connect-src` and `img-src` - Required for the fox SVG embedded in the QR code.
+- `wss://mm-sdk-relay.api.cx.metamask.io` - The relay used for remote (no-extension and mobile)
   connections.
-- `https://mm-sdk-analytics.api.cx.metamask.io` — the default analytics endpoint emitted during the
+- `https://mm-sdk-analytics.api.cx.metamask.io` - The default analytics endpoint emitted during the
   connection lifecycle.
-- `style-src 'unsafe-inline'` — `@metamask/multichain-ui` injects component styles at runtime
+- `style-src 'unsafe-inline'` - `@metamask/multichain-ui` injects component styles at runtime
   inside Shadow DOM (Stencil).
 
-For the full reference, see the
-[Content Security Policy section of the connect-monorepo README](https://github.com/MetaMask/connect-monorepo#content-security-policy).
+For the full reference, see
+[Content Security Policy](https://github.com/MetaMask/connect-monorepo#content-security-policy) in `metamask/connect-monorepo`.
 
 ### MetaMask wallet not appearing in Solana wallet adapter
 
