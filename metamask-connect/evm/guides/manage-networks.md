@@ -37,11 +37,11 @@ With MetaMask Connect EVM:
 - **Add new networks** to MetaMask.
 - **Handle common network-related errors**.
 
-<p align="center">
+<!-- p align="center">
   <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
     <img src={require("../_assets/network.gif").default} alt="MetaMask Connect EVM network switching demonstration between Ethereum networks" width="450px" />
   </a>
-</p>
+</p -->
 
 ## Detect and switch networks
 
