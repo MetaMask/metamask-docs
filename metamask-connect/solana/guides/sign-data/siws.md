@@ -19,7 +19,7 @@ keywords:
 [Sign-In with Solana (SIWS)](https://docs.siws.xyz/) lets users sign in to your dapp by authenticating with their MetaMask wallet, instead of a traditional username and password.
 
 <p align="center">
-    <img height="500" src={require("../../_assets/siwe.png").default} alt="Sign-in with Solana request" class="appScreen" />
+    <img height="700" src={require("../../_assets/siwe.png").default} alt="Sign-in with Solana request" />
 </p>
 
 ## Domain binding
@@ -37,10 +37,10 @@ This avoids breaking existing dapps that may have use cases for mismatched domai
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../../_assets/siwe-bad-domain.png").default} alt="MetaMask Sign-In with Solana domain mismatch warning" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain.png").default} alt="MetaMask Sign-In with Solana domain mismatch warning" />
     </div>
     <div class="imgCol">
-        <img src={require("../../_assets/siwe-bad-domain-2.png").default} alt="MetaMask Sign-In with Solana domain mismatch detailed warning popup" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain-2.png").default} alt="MetaMask Sign-In with Solana domain mismatch detailed warning popup" />
     </div>
 </div>
 
@@ -97,5 +97,5 @@ See the [JavaScript quickstart](../../quickstart/javascript.md) for a complete w
 ## Next steps
 
 - [Sign messages](sign-message.md) for general-purpose offchain signatures without domain binding.
-- [Send a legacy transaction](../send-legacy-transaction.md) to transfer SOL or interact with Solana programs.
-- [MetaMask Connect Solana methods](../../reference/methods.md) for the full list of Wallet Standard features.
+- [Send a legacy transaction](../send-transactions/legacy.md) to transfer SOL or interact with Solana programs.
+- See [MetaMask Connect Solana methods](../../reference/methods.md) for the full list of Wallet Standard features.

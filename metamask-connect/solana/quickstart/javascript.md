@@ -102,7 +102,7 @@ You've successfully set up MetaMask Connect Solana.
 
 ### 1. Install MetaMask Connect Solana
 
-Install MetaMask Connect Solana in an existing JavaScript project:
+Install the Solana Client in an existing JavaScript project:
 
 ```bash npm2yarn
 npm install @metamask/connect-solana
@@ -110,7 +110,8 @@ npm install @metamask/connect-solana
 
 ### 2. Initialize MetaMask Connect Solana
 
-The following examples show how to use MetaMask Connect Solana in various JavaScript environments:
+Initialize the Solana client using [`createSolanaClient`](../reference/methods.md#createsolanaclient).
+The following is an example of initializing the client in a JavaScript project:
 
 ```javascript
 import { createSolanaClient, getInfuraRpcUrls } from '@metamask/connect-solana'
@@ -136,10 +137,10 @@ Calling it multiple times returns the same underlying session, so you can safely
 initialization without worrying about duplicate connections.
 :::
 
-These examples configure MetaMask Connect Solana with the following options:
+This example configures MetaMask Connect Solana with the following options:
 
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
-- `api.supportedNetworks` - A map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs for all networks supported by the app.
+- `api.supportedNetworks` - A map of network names (`mainnet`, `devnet`, `testnet`) to RPC URLs for all networks supported by the dapp.
 
 ### 3. Connect and use the wallet
 
@@ -154,7 +155,7 @@ console.log('Connected account:', accounts[0].address)
 
 The client handles cross-platform connection (desktop and mobile), including deeplinking.
 
-## `SolanaClient` methods at a glance
+## Solana client methods at a glance
 
 | Method                                                     | Description                                                                                                |
 | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -196,5 +197,5 @@ await solanaClient.disconnect()
 ## Next steps
 
 - [Use the Wallet Adapter](../guides/use-wallet-adapter.md) to integrate MetaMask with Solana's standard wallet discovery in a React dapp.
-- [Send a legacy transaction](../guides/send-legacy-transaction.md) to transfer SOL or interact with programs.
+- [Send a legacy transaction](../guides/send-transactions/legacy.md) to transfer SOL or interact with programs.
 - [Sign messages](../guides/sign-data/sign-message.md) to verify wallet ownership or authorize offchain actions.

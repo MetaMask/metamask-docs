@@ -270,6 +270,6 @@ The object returned by [`createSolanaClient`](#createsolanaclient).
 ## Next steps
 
 - Follow the [JavaScript quickstart](../quickstart/javascript.md) to set up MetaMask Connect Solana in a dapp.
-- [Send a legacy transaction](../guides/send-legacy-transaction.md) using the `signAndSendTransaction` Wallet Standard feature.
+- [Send a legacy transaction](../guides/send-transactions/legacy.md) using the `signAndSendTransaction` Wallet Standard feature.
 - [Sign messages](../guides/sign-data/sign-message.md) using the `signMessage` Wallet Standard feature.
 - See the [multichain methods](../../multichain/reference/methods.md) for the lower-level multichain client API.

@@ -23,32 +23,33 @@ This guide shows you how to create, sign, and send versioned transactions throug
 
 ## Prerequisites
 
-Set up a Solana client and connect to the user's wallet:
+- Follow Step 1 of the [quickstart](../../quickstart/javascript.md) to install the Solana client.
+- Initialize a Solana client using [`createSolanaClient`](../../reference/methods.md#createsolanaclient) and connect to the user's wallet using [`getWallet`](../../reference/methods.md#getwallet) and [`standard:connect`](../../reference/methods.md#supported-wallet-standard-features):
 
-```javascript
-import { createSolanaClient } from '@metamask/connect-solana'
-import {
-  Connection,
-  PublicKey,
-  SystemProgram,
-  TransactionMessage,
-  VersionedTransaction,
-  AddressLookupTableProgram,
-} from '@solana/web3.js'
+  ```javascript
+  import { createSolanaClient } from '@metamask/connect-solana'
+  import {
+    Connection,
+    PublicKey,
+    SystemProgram,
+    TransactionMessage,
+    VersionedTransaction,
+    AddressLookupTableProgram,
+  } from '@solana/web3.js'
 
-const solanaClient = await createSolanaClient({
-  dapp: {
-    name: 'My Solana Dapp',
-    url: window.location.origin,
-  },
-})
+  const solanaClient = await createSolanaClient({
+    dapp: {
+      name: 'My Solana Dapp',
+      url: window.location.origin,
+    },
+  })
 
-const wallet = solanaClient.getWallet()
-const { accounts } = await wallet.features['standard:connect'].connect()
-const account = accounts[0]
-const publicKey = new PublicKey(account.address)
-const connection = new Connection('https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY')
-```
+  const wallet = solanaClient.getWallet()
+  const { accounts } = await wallet.features['standard:connect'].connect()
+  const account = accounts[0]
+  const publicKey = new PublicKey(account.address)
+  const connection = new Connection('https://solana-devnet.infura.io/v3/YOUR_INFURA_API_KEY')
+  ```
 
 ## Create a versioned transaction
 
@@ -79,7 +80,7 @@ const transactionV0 = new VersionedTransaction(messageV0)
 
 ## Sign and send a versioned transaction
 
-After creating an unsigned versioned transaction, use the wallet's `solana:signAndSendTransaction` feature to ask the user's MetaMask wallet to sign and send it.
+After creating an unsigned versioned transaction, use the wallet's [`solana:signAndSendTransaction`](../../reference/methods.md#supported-wallet-standard-features) feature to ask the user's MetaMask wallet to sign and send it.
 
 The method returns a promise for an object containing the `signature`.
 
@@ -95,9 +96,10 @@ const [{ signature }] = await wallet.features[
 await connection.getSignatureStatus(signature)
 ```
 
-### Sign without sending
+## Sign a transaction without sending
 
-Use `solana:signTransaction` when you need a signed versioned transaction without broadcasting it:
+Use the [`solana:signTransaction`](../../reference/methods.md#supported-wallet-standard-features) feature when you need a signed versioned transaction but want to submit it yourself.
+For example, for offline signing or multisig workflows.
 
 ```javascript
 const [{ signedTransaction }] = await wallet.features['solana:signTransaction'].signTransaction({
@@ -200,7 +202,7 @@ for (let i = 0; i < lookupTableAccount.state.addresses.length; i++) {
 ```
 
 The following example creates a simple transfer instruction, formats the instruction into a `v0`-compatible transaction message using the ALT's account, and creates a versioned transaction that parses the message.
-Sign and send the transaction using the wallet's `solana:signAndSendTransaction` feature.
+Sign and send the transaction using the wallet's [`solana:signAndSendTransaction`](../../reference/methods.md#supported-wallet-standard-features) feature.
 
 ```typescript
 const { blockhash: altBlockhash } = await connection.getLatestBlockhash()
@@ -232,7 +234,7 @@ const [{ signature }] = await wallet.features[
 
 ## Next steps
 
-- [Send a legacy transaction](send-legacy-transaction.md) for simpler transactions that don't require Address Lookup Tables.
-- [Sign messages](sign-data/sign-message.md) to verify wallet ownership or authorize offchain actions.
-- [MetaMask Connect Solana methods](../reference/methods.md) for the full API reference.
-- [Use the Multichain SDK](../../multichain/quickstart/javascript.md) to send transactions on both EVM and Solana from a single session.
+- [Send a legacy transaction](legacy.md) for simpler transactions that don't require Address Lookup Tables.
+- [Sign messages](../sign-data/sign-message.md) to verify wallet ownership or authorize offchain actions.
+- [MetaMask Connect Solana methods](../../reference/methods.md) for the full API reference.
+- [Use the Multichain SDK](../../../multichain/quickstart/javascript.md) to send transactions on both EVM and Solana from a single session.

@@ -280,9 +280,9 @@ const metamaskConnectSidebar = {
           collapsible: true,
           collapsed: true,
           items: [
-            'solana/guides/send-legacy-transaction',
-            'solana/guides/send-versioned-transaction',
-            'solana/guides/batch-transactions',
+            'solana/guides/send-transactions/legacy',
+            'solana/guides/send-transactions/versioned',
+            'solana/guides/send-transactions/batch',
           ],
         },
         {

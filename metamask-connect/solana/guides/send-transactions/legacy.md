@@ -25,27 +25,28 @@ See the [Solana documentation](https://solana.com/docs/core/transactions) for mo
 
 ## Prerequisites
 
-Set up a Solana client and connect to the user's wallet:
+- Follow Step 1 of the [quickstart](../../quickstart/javascript.md) to install the Solana client.
+- Initialize a Solana client using [`createSolanaClient`](../../reference/methods.md#createsolanaclient) and connect to the user's wallet using [`getWallet`](../../reference/methods.md#getwallet) and [`standard:connect`](../../reference/methods.md#supported-wallet-standard-features):
 
-```javascript
-import { createSolanaClient } from '@metamask/connect-solana'
-import { Connection, Transaction, SystemProgram, PublicKey } from '@solana/web3.js'
+  ```javascript
+  import { createSolanaClient } from '@metamask/connect-solana'
+  import { Connection, Transaction, SystemProgram, PublicKey } from '@solana/web3.js'
 
-const solanaClient = await createSolanaClient({
-  dapp: {
-    name: 'My Solana Dapp',
-    url: window.location.origin,
-  },
-})
+  const solanaClient = await createSolanaClient({
+    dapp: {
+      name: 'My Solana Dapp',
+      url: window.location.origin,
+    },
+  })
 
-const wallet = solanaClient.getWallet()
-const { accounts } = await wallet.features['standard:connect'].connect()
-const account = accounts[0]
-```
+  const wallet = solanaClient.getWallet()
+  const { accounts } = await wallet.features['standard:connect'].connect()
+  const account = accounts[0]
+  ```
 
 ## Sign and send a transaction
 
-After creating an unsigned legacy transaction, use the wallet's `solana:signAndSendTransaction` feature to ask the user's MetaMask wallet to sign and send it.
+After creating an unsigned legacy transaction, use the wallet's [`solana:signAndSendTransaction`](../../reference/methods.md#supported-wallet-standard-features) feature to ask the user's MetaMask wallet to sign and send it.
 
 The method accepts a serialized transaction as a `Uint8Array` and returns an object containing the `signature`.
 
@@ -100,8 +101,8 @@ for (const transaction of transactions) {
 
 ## Sign a transaction without sending
 
-Use `solana:signTransaction` when you need a signed transaction but want to submit it yourself; for
-example, for offline signing or multi-sig workflows.
+Use the [`solana:signTransaction`](../../reference/methods.md#supported-wallet-standard-features) feature when you need a signed transaction but want to submit it yourself.
+For example, for offline signing or multisig workflows.
 
 ```javascript
 const [{ signedTransaction }] = await wallet.features['solana:signTransaction'].signTransaction({
@@ -119,9 +120,9 @@ There is a known issue with `@solana/wallet-adapter-react` on Chrome Android whe
 Wallet Standard provider from `@metamask/connect-solana`.
 Test Solana transaction flows on desktop Chrome and the MetaMask browser extension before targeting
 mobile.
-See [Troubleshooting](../../troubleshooting/index.md#chrome-android) for details.
+See [Troubleshooting](../../../troubleshooting/index.md#chrome-android) for details.
 :::
 
 ## Next steps
 
-To efficiently load more addresses in a single transaction, learn how to [send a versioned transaction](send-versioned-transaction.md) with Address Lookup Tables.
+To efficiently load more addresses in a single transaction, learn how to [send a versioned transaction](versioned.md) with Address Lookup Tables.
