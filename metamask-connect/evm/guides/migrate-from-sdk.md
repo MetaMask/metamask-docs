@@ -201,8 +201,8 @@ const { accounts, chainId, signature } = await client.connectAndSign({
 ```
 
 :::info Breaking change in `@metamask/connect-evm` 1.0.0
-`connectAndSign` previously returned the signature as a bare string. It now returns an object —
-destructure `.signature` to read the signed value.
+`connectAndSign` previously returned the signature as a bare string. It now returns an object,
+so read `.signature` from the returned object to get the signed value.
 :::
 
 #### Connect-and-execute shortcut
@@ -223,8 +223,8 @@ const {
 ```
 
 :::info Breaking change in `@metamask/connect-evm` 1.0.0
-`connectWith` previously returned the raw RPC result. It now returns an object —
-destructure `.result` to read the RPC response value.
+`connectWith` previously returned the raw RPC result. It now returns an object,
+so read `.result` from the returned object to get the RPC response value.
 :::
 
 :::tip React Native polyfills

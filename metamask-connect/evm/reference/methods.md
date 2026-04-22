@@ -77,7 +77,7 @@ A promise that resolves to an object with the following fields:
 
 :::info Breaking change in `@metamask/connect-evm` 1.0.0
 `connectAndSign` previously returned the signature as a bare string. It now returns
-`{ accounts, chainId, signature }`. Destructure `.signature` to read the signed value.
+`{ accounts, chainId, signature }`. Read `.signature` from the returned object to get the signed value.
 :::
 
 :::tip
@@ -130,7 +130,7 @@ A promise that resolves to an object with the following fields:
 
 :::info Breaking change in `@metamask/connect-evm` 1.0.0
 `connectWith` previously returned the raw RPC result. It now returns
-`{ accounts, chainId, result }`. Destructure `.result` to read the RPC response value.
+`{ accounts, chainId, result }`. Read `.result` from the returned object to get the RPC response value.
 :::
 
 :::tip
