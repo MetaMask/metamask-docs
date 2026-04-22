@@ -23,31 +23,31 @@ For detailed usage, configuration options, and code examples, refer to the dedic
 
 ### User management functions
 
-| Function Name                                  | Description                                                   |
-| ---------------------------------------------- | ------------------------------------------------------------- |
+| Function Name                                    | Description                                                   |
+| ------------------------------------------------ | ------------------------------------------------------------- |
 | [`getUserInfo()`](./get-user-info.mdx)           | Retrieves the authenticated user's information.               |
 | [`getIdentityToken()`](./get-identity-token.mdx) | Gets the `idToken` from Web3Auth for authentication purposes. |
 
 ### Security functions
 
-| Function Name                    | Description                                                                        |
-| -------------------------------- | ---------------------------------------------------------------------------------- |
+| Function Name                     | Description                                                                        |
+| --------------------------------- | ---------------------------------------------------------------------------------- |
 | [`enableMFA()`](./enable-mfa.mdx) | Enables Multi-Factor Authentication for the user.                                  |
 | [`manageMFA()`](./manage-mfa.mdx) | Redirects the user to manage their MFA settings in the Web3Auth Account Dashboard. |
 
 ### Blockchain functions
 
-| Function Name                        | Description                                                                              |
-| ------------------------------------ | ---------------------------------------------------------------------------------------- |
-| `addChain()`                         | Adds chain configuration details to the connected adapter.                               |
+| Function Name                         | Description                                                                              |
+| ------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `addChain()`                          | Adds chain configuration details to the connected adapter.                               |
 | [`switchChain()`](./switch-chain.mdx) | Switches to a different blockchain network as per chainId already added to chain config. |
 
 ### Wallet Services plugin functions
 
-| Function Name                                                  | Description                                   |
-| -------------------------------------------------------------- | --------------------------------------------- |
-| [`showCheckout()`](./show-checkout.mdx)                         | Initiates cryptocurrency top-up for the user. |
+| Function Name                                                     | Description                                   |
+| ----------------------------------------------------------------- | --------------------------------------------- |
+| [`showCheckout()`](./show-checkout.mdx)                           | Initiates cryptocurrency top-up for the user. |
 | [`showWalletConnectScanner()`](./show-wallet-connect-scanner.mdx) | Displays the WalletConnect QR Code Scanner.   |
-| [`showWalletUI()`](./show-wallet-ui.mdx)                         | Shows the Embedded Wallet UI.                 |
-| [`showSwap()`](./show-swap.mdx)                                 | Displays the swap UI for token exchanges.     |
-| `showTransactionConfirmation()`                                | Shows the transaction confirmation UI.        |
+| [`showWalletUI()`](./show-wallet-ui.mdx)                          | Shows the Embedded Wallet UI.                 |
+| [`showSwap()`](./show-swap.mdx)                                   | Displays the swap UI for token exchanges.     |
+| `showTransactionConfirmation()`                                   | Shows the transaction confirmation UI.        |

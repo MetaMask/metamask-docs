@@ -204,7 +204,7 @@ const delegation = decodeDelegation('0x7f0db33d..c06aeeac')
 
 Decodes a caveat's encoded `terms`.
 
-Throws an error if the cavet enforcer is not a known enforcer in [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment).
+Throws an error if the caveat enforcer is not a known enforcer in [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment).
 
 ### Parameters
 

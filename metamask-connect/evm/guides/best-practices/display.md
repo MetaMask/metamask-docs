@@ -20,7 +20,7 @@ keywords:
 
 ## Display icons
 
-When your dapp makes a login request to a MetaMask user, MetaMask may render a modal that displays
+When your dapp makes a sign-in request to a MetaMask user, MetaMask may render a modal that displays
 your dapp icon.
 
 MetaMask retrieves this icon using the HTML selector `<head> link[rel="shortcut icon"]`, so you can

@@ -9,7 +9,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 # Use MetaMask Embedded Wallets with MetaMask Smart Accounts
 
 [MetaMask Embedded Wallets (Web3Auth)](/embedded-wallets/) provides a pluggable embedded wallet
-infrastructure to simplify Web3 wallet integration and user onboarding. It supports social logins allowing
+infrastructure to simplify Web3 wallet integration and user onboarding. It supports social sign-ins allowing
 users to access Web3 applications through familiar authentication methods in under a minute.
 
 MetaMask Smart Accounts is a signer-agnostic implementation that allows you to use Embedded Wallets as a signer for <GlossaryTerm term="MetaMask smart account">smart accounts</GlossaryTerm>.

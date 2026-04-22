@@ -30,7 +30,7 @@ Key enhancements include:
 
 - Asynchronous initialization.
 - A singleton client.
-- Built-in support for EVM, [Solana](../../solana/index.md), and [multichain](../../multichain/index.md) sessions.
+- Built-in support for EVM, [Solana](../../solana/index.mdx), and [multichain](../../multichain/index.mdx) sessions.
 
 ## Steps
 
@@ -191,27 +191,41 @@ Chain IDs must be hex strings. Use `'0x1'`, not `1` or `'1'`, in `chainIds` and
 #### Connect-and-sign shortcut
 
 Use [`connectAndSign`](../reference/methods.md#connectandsign) to connect and sign a `personal_sign` message in one user approval.
-The method returns the signature directly:
+The method returns `{ accounts, chainId, signature }`:
 
 ```typescript
-const signature = await client.connectAndSign({
+const { accounts, chainId, signature } = await client.connectAndSign({
   message: 'Sign in to My Dapp',
   chainIds: ['0x1'],
 })
 ```
 
+:::info Breaking change in `@metamask/connect-evm` 1.0.0
+`connectAndSign` previously returned the signature as a bare string. It now returns an object,
+so read `.signature` from the returned object to get the signed value.
+:::
+
 #### Connect-and-execute shortcut
 
 Use [`connectWith`](../reference/methods.md#connectwith) to connect and execute any JSON-RPC method in a single user approval.
-The method returns the RPC result directly:
+The method returns `{ accounts, chainId, result }`:
 
 ```typescript
-const txHash = await client.connectWith({
+const {
+  accounts,
+  chainId,
+  result: txHash,
+} = await client.connectWith({
   method: 'eth_sendTransaction',
   params: account => [{ from: account, to: '0x...', value: '0x0' }],
   chainIds: ['0x1'],
 })
 ```
+
+:::info Breaking change in `@metamask/connect-evm` 1.0.0
+`connectWith` previously returned the raw RPC result. It now returns an object,
+so read `.result` from the returned object to get the RPC response value.
+:::
 
 :::tip React Native polyfills
 Browser-based setups (Vite, Webpack) work without polyfills. If you are migrating a **React Native**
@@ -362,6 +376,8 @@ See the [multichain quickstart](../../multichain/quickstart/javascript.md) for a
 
 ## Full option mapping
 
+<!-- vale off -->
+
 | Old (`@metamask/sdk`)    | New (`@metamask/connect-evm`)                                                                               | Status                                |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------- | ------------------------------------- |
 | `new MetaMaskSDK(opts)`  | `await createEVMClient(opts)`                                                                               | Renamed, async                        |
@@ -381,6 +397,8 @@ See the [multichain quickstart](../../multichain/quickstart/javascript.md) for a
 | `enableAnalytics`        | Removed                                                                                                     | —                                     |
 | `communicationServerUrl` | Removed                                                                                                     | —                                     |
 | `storage`                | Removed                                                                                                     | —                                     |
+
+<!-- vale on -->
 
 ### React context pattern (replacing `useSDK`)
 

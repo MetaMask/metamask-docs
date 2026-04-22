@@ -27,7 +27,7 @@ Run the following command to install the Smart Accounts Kit extension:
 npx create-eth@latest -e metamask/erc-7715-extension your-project-name
 ```
 
-### 2. Set up enviroment variables
+### 2. Set up environment variables
 
 Navigate into the project's `nextjs` package, and create a `.env.local` file. Once created, update the
 `NEXT_PUBLIC_PIMLICO_API_KEY` environment variable with your Pimlico API Key.

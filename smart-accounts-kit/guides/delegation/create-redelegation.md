@@ -17,7 +17,7 @@ from the root <GlossaryTerm term="Delegator account">delegator</GlossaryTerm>.
 
 For example, if Alice grants Bob permission to spend 10 USDC on her behalf, Bob can further grant Carol
 permission to spend up to 5 USDC on Alice's behalf-that is, Bob can redelegate. This creates a delegation
-chain where the root permissions are reshared with additional parties.
+chain where the root permissions are re-shared with additional parties.
 
 ## Prerequisites
 
@@ -95,7 +95,7 @@ export const bobSmartAccount = await toMetaMaskSmartAccount({
 
 Create a [redelegation](../../concepts/delegation/overview.md#redelegation) from Bob to Carol. When creating a redelegation, you can only narrow the scope of the original authority, not expand it.
 
-To create a redelegation, provide the signed delegation as the `parentDelegation` argument when calling [createDelegation](../../reference/delegation/index.md#createdelegation).
+To create a redelegation, provide the signed delegation as the `parentDelegation` argument when calling [`createDelegation`](../../reference/delegation/index.md#createdelegation).
 This example uses the [`erc20TransferAmount`](use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) <GlossaryTerm term="Delegation scope">scope</GlossaryTerm>, allowing
 Bob to delegate to Carol the ability to spend 5 USDC on Alice's behalf.
 

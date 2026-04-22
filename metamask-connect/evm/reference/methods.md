@@ -119,16 +119,27 @@ Connects to MetaMask and signs a `personal_sign` message in a single user approv
 
 ### Returns
 
-A promise that resolves to the signature as a hex string.
+A promise that resolves to an object with the following fields:
+
+| Field       | Type        | Description                                      |
+| ----------- | ----------- | ------------------------------------------------ |
+| `accounts`  | `Address[]` | The accounts permitted on the resulting session. |
+| `chainId`   | `Hex`       | The selected chain ID as a hex string.           |
+| `signature` | `string`    | The `personal_sign` signature as a hex string.   |
+
+:::info Breaking change in `@metamask/connect-evm` 1.0.0
+`connectAndSign` previously returned the signature as a bare string. It now returns
+`{ accounts, chainId, signature }`. Read `.signature` from the returned object to get the signed value.
+:::
 
 :::tip
-To access the connected accounts and chain ID alongside the signature, use the `connectAndSign` event handler
-when initializing the client with [`createEVMClient`](#createevmclient):
+You can also subscribe to the `connectAndSign` event handler
+when initializing the client with [`createEVMClient`](#createevmclient) to receive the same payload:
 
 ```javascript
 eventHandlers: {
-  connectAndSign: ({ accounts, chainId, signResponse }) => {
-    console.log('Accounts:', accounts, 'Chain:', chainId, 'Signature:', signResponse)
+  connectAndSign: ({ accounts, chainId, signature }) => {
+    console.log('Accounts:', accounts, 'Chain:', chainId, 'Signature:', signature)
   },
 }
 ```
@@ -138,11 +149,11 @@ eventHandlers: {
 ### Example
 
 ```javascript
-const signature = await evmClient.connectAndSign({
+const { accounts, chainId, signature } = await evmClient.connectAndSign({
   message: 'Sign in to My Dapp',
   chainIds: ['0x1'],
 })
-console.log('Signature:', signature)
+console.log('Accounts:', accounts, 'Chain:', chainId, 'Signature:', signature)
 ```
 
 ## `connectWith`
@@ -161,16 +172,27 @@ Connects to MetaMask and executes a specific [JSON-RPC method](json-rpc-api/inde
 
 ### Returns
 
-A promise that resolves to the result of the RPC method invocation.
+A promise that resolves to an object with the following fields:
+
+| Field      | Type        | Description                                      |
+| ---------- | ----------- | ------------------------------------------------ |
+| `accounts` | `Address[]` | The accounts permitted on the resulting session. |
+| `chainId`  | `Hex`       | The selected chain ID as a hex string.           |
+| `result`   | `unknown`   | The result of the JSON-RPC method invocation.    |
+
+:::info Breaking change in `@metamask/connect-evm` 1.0.0
+`connectWith` previously returned the raw RPC result. It now returns
+`{ accounts, chainId, result }`. Read `.result` from the returned object to get the RPC response value.
+:::
 
 :::tip
-To access the connected accounts and chain ID alongside the result, use the `connectWith` event handler
-when initializing the client with [`createEVMClient`](#createevmclient):
+You can also subscribe to the `connectWith` event handler
+when initializing the client with [`createEVMClient`](#createevmclient) to receive the same payload:
 
 ```javascript
 eventHandlers: {
-  connectWith: ({ accounts, chainId, connectWithResponse }) => {
-    console.log('Accounts:', accounts, 'Chain:', chainId, 'Result:', connectWithResponse)
+  connectWith: ({ accounts, chainId, result }) => {
+    console.log('Accounts:', accounts, 'Chain:', chainId, 'Result:', result)
   },
 }
 ```
@@ -180,7 +202,11 @@ eventHandlers: {
 ### Example
 
 ```javascript
-const txHash = await evmClient.connectWith({
+const {
+  accounts,
+  chainId,
+  result: txHash,
+} = await evmClient.connectWith({
   method: 'eth_sendTransaction',
   params: account => [
     {
@@ -191,7 +217,7 @@ const txHash = await evmClient.connectWith({
   ],
   chainIds: ['0x1'],
 })
-console.log('Transaction hash:', txHash)
+console.log('Accounts:', accounts, 'Chain:', chainId, 'Transaction hash:', txHash)
 ```
 
 ## `switchChain`
@@ -279,7 +305,7 @@ Disconnects all EVM (`eip155`) scopes from MetaMask and cleans up local state.
 This only revokes the EVM-specific scopes currently held in the session; it does not terminate the broader multichain session if non-EVM scopes (such as Solana) are also active.
 
 :::tip Multichain partial disconnect
-If your dapp also uses Solana via the [multichain client](../../multichain/index.md), calling
+If your dapp also uses Solana via the [multichain client](../../multichain/index.mdx), calling
 `disconnect` on the EVM client only revokes EVM (`eip155`) scopes.
 Non-EVM scopes remain active, so the user stays connected to Solana.
 :::
@@ -301,10 +327,10 @@ Each chain must be activated in your [Infura dashboard](https://developer.metama
 
 ### Parameters
 
-| Name           | Type       | Required | Description                                                                                                |
-| -------------- | ---------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| `infuraApiKey` | `string`   | Yes      | Your Infura API key.                                                                                       |
-| `chainIds`     | `string[]` | No       | Array of hex chain IDs to include (e.g. `['0x1', '0x89']`). If omitted, all supported chains are included. |
+| Name           | Type       | Required | Description                                                                                                        |
+| -------------- | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| `infuraApiKey` | `string`   | Yes      | Your Infura API key.                                                                                               |
+| `chainIds`     | `string[]` | No       | Array of hex chain IDs to include (for example, `['0x1', '0x89']`). If omitted, all supported chains are included. |
 
 ### Returns
 
@@ -335,7 +361,7 @@ The EVM client exposes the following read-only properties:
 | `accounts`        | `Address[]`            | Currently permitted accounts.                                                                   |
 | `selectedAccount` | `Address \| undefined` | Currently selected account (first in `accounts`).                                               |
 | `selectedChainId` | `Hex \| undefined`     | Currently selected chain ID as a hex string.                                                    |
-| `status`          | `ConnectionStatus`     | Connection status: `'loaded'`, `'pending'`, `'connecting'`, `'connected'`, or `'disconnected'`. |
+| `status`          | `ConnectEvmStatus`     | Connection status: `'loaded'`, `'pending'`, `'connecting'`, `'connected'`, or `'disconnected'`. |
 
 ### Example
 

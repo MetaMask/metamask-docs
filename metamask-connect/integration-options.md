@@ -37,37 +37,37 @@ All options share the same underlying transport and session infrastructure, so y
 
 ## Multichain (recommended)
 
-Use [`@metamask/connect-multichain`](multichain/index.md) to work directly with the
+Use [`@metamask/connect-multichain`](multichain/index.mdx) to work directly with the
 [Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md). This uses
 scopes and `wallet_invokeMethod` instead of per-chain RPC, and supports a single connection prompt
 across all ecosystems.
 
 ## Single-ecosystem
 
-If your dapp targets a single ecosystem, use [`@metamask/connect-evm`](evm/index.md) or [`@metamask/connect-solana`](solana/index.md) to add MetaMask Connect to an existing dapp with minimal code changes.
+If your dapp targets a single ecosystem, use [`@metamask/connect-evm`](evm/index.mdx) or [`@metamask/connect-solana`](solana/index.mdx) to add MetaMask Connect to an existing dapp with minimal code changes.
 
 - **EVM**: Provides an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) compatible provider that
   works with `ethers.js`, `viem`, and `web3.js`.
 - **Solana**: Provides a [Wallet Standard](https://github.com/wallet-standard/wallet-standard)
-  compatible wallet that works with the Solana wallet adapter ecosystem.
+  compatible wallet that works with the Solana Wallet Adapter ecosystem.
 
 ## Multi-ecosystem
 
-If your dapp supports both EVM and Solana, use [`@metamask/connect-evm`](evm/index.md) and
-[`@metamask/connect-solana`](solana/index.md) together to
+If your dapp supports both EVM and Solana, use [`@metamask/connect-evm`](evm/index.mdx) and
+[`@metamask/connect-solana`](solana/index.mdx) together to
 support both ecosystems while keeping familiar provider interfaces for each.
 
 ## Compare options
 
-|                    | Multichain                                  | Single-ecosystem                                                     | Multi-ecosystem                         |
-| ------------------ | ------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------- |
-| **Package**        | [`connect-multichain`](multichain/index.md) | [`connect-evm`](evm/index.md) or [`connect-solana`](solana/index.md) | Both `connect-evm` and `connect-solana` |
-| **Effort**         | Medium (scope-based API)                    | Low (drop-in provider)                                               | Low (two providers)                     |
-| **EVM support**    | Via `wallet_invokeMethod`                   | EIP-1193 provider                                                    | EIP-1193 provider                       |
-| **Solana support** | Via `wallet_invokeMethod`                   | Wallet Standard                                                      | Wallet Standard                         |
-| **Cross-chain UX** | Single prompt for all ecosystems            | Single ecosystem                                                     | Separate connect per ecosystem          |
-| **Sessions**       | Full control                                | Automatic                                                            | Automatic per-client                    |
-| **Best for**       | Multichain-native dapps                     | Existing single-chain dapps                                          | Dapps supporting EVM and Solana         |
+|                    | Multichain                                   | Single-ecosystem                                                       | Multi-ecosystem                         |
+| ------------------ | -------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------- |
+| **Package**        | [`connect-multichain`](multichain/index.mdx) | [`connect-evm`](evm/index.mdx) or [`connect-solana`](solana/index.mdx) | Both `connect-evm` and `connect-solana` |
+| **Effort**         | Medium (scope-based API)                     | Low (drop-in provider)                                                 | Low (two providers)                     |
+| **EVM support**    | Via `wallet_invokeMethod`                    | EIP-1193 provider                                                      | EIP-1193 provider                       |
+| **Solana support** | Via `wallet_invokeMethod`                    | Wallet Standard                                                        | Wallet Standard                         |
+| **Cross-chain UX** | Single prompt for all ecosystems             | Single ecosystem                                                       | Separate connect per ecosystem          |
+| **Sessions**       | Full control                                 | Automatic                                                              | Automatic per-client                    |
+| **Best for**       | Multichain-native dapps                      | Existing single-chain dapps                                            | Dapps supporting EVM and Solana         |
 
 <!-- ## Wallet connector libraries
 

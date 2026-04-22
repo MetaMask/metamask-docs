@@ -279,7 +279,7 @@ export const delegation = createDelegation({
 ## `getMultiTokenPeriodEnforcerAvailableAmount`
 
 Returns the available amount from the multi token period transfer enforcer for the current period. You'll need to
-encode the args for the token index you want to check the available amount.
+encode the arguments for the token index you want to check the available amount.
 
 ### Parameters
 

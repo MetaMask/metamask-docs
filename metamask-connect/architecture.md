@@ -66,4 +66,4 @@ flowchart TB
 
 - [Explore integration options.](./integration-options.md)
 - [View supported platforms and connection methods.](./supported-platforms.md)
-- [Get started with EVM networks.](./evm/index.md)
+- [Get started with EVM networks.](./evm/index.mdx)

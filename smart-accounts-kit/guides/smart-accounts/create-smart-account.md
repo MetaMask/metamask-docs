@@ -216,6 +216,6 @@ export const account = privateKeyToAccount(privateKey)
 
 ## Next steps
 
-- [Configure signers](./signers/index.md) to use a signer that fits your needs.
+- [Configure signers](./signers/index.mdx) to use a signer that fits your needs.
 - [Deploy the smart account](deploy-smart-account.md) and [send user operations](send-user-operation.md) using [Viem Account Abstraction clients](../configure-toolkit.md).
 - [Create delegations](../delegation/execute-on-smart-accounts-behalf.md) to grant scoped permissions to other accounts.

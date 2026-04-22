@@ -26,7 +26,7 @@ keywords:
 Get started with MetaMask Connect EVM in a React and Wagmi dapp.
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
-:::tip Migrating from @metamask/sdk?
+:::tip Migrating from @MetaMask/sdk?
 If you are upgrading an existing wagmi project that used `@metamask/sdk`, see the
 [Wagmi connector migration reference](#migrate-from-metamasksdk) at the bottom of this page
 for a parameter mapping table.
