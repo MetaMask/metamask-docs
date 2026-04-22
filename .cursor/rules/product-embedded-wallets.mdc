@@ -1,6 +1,6 @@
 ---
 description: Product-specific guidance for Embedded Wallets documentation, including naming, content organization, and SDK conventions.
-globs: ["embedded-wallets/**/*.md", "embedded-wallets/**/*.mdx"]
+globs: embedded-wallets/**/*.md,embedded-wallets/**/*.mdx
 alwaysApply: false
 ---
 
@@ -22,10 +22,9 @@ Embedded Wallets uses domain-oriented folders rather than strict Diataxis catego
 
 | Folder               | Content                                          |
 |----------------------|--------------------------------------------------|
-| Root (`README.mdx`)  | Product overview and positioning                 |
+| Root (`README.mdx`)  | Product overview, positioning, and capability summary |
 | `sdk/`               | Per-platform integration docs (React, Vue, JS, Node, Android, iOS, React Native, Flutter, Unity, Unreal) |
 | `authentication/`    | Auth methods by type (social, basic, custom)     |
-| `features/`          | Product capabilities (MPC, smart accounts, funding, NFT minting, session management) |
 | `dashboard/`         | Developer console and project configuration      |
 | `connect-blockchain/`| Chain-specific connection guides (EVM, Solana, other) |
 | `infrastructure/`    | Architecture and security (MPC, SSS, nodes)      |

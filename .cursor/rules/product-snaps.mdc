@@ -1,6 +1,6 @@
 ---
 description: Product-specific guidance for Snaps documentation, including naming, content areas, and generated-content constraints.
-globs: ["snaps/**/*.md", "snaps/**/*.mdx"]
+globs: snaps/**/*.md,snaps/**/*.mdx
 alwaysApply: false
 ---
 

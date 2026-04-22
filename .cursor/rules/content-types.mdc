@@ -1,6 +1,6 @@
 ---
 description: Maps folder conventions to Diataxis content types so AI tools produce the right structure for each doc category.
-globs: ["**/*.md", "**/*.mdx"]
+globs: **/*.md,**/*.mdx
 alwaysApply: false
 ---
 
