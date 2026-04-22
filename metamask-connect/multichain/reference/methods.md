@@ -394,6 +394,8 @@ client.on('stateChanged', status => {
 | `ProtocolError` | Connection protocol failures (transport, pairing, handshake). |
 | `StorageError`  | Session persistence issues (read/write failures).             |
 
+### Example
+
 ```javascript
 import { ProtocolError, RpcError, StorageError } from '@metamask/connect-multichain'
 
