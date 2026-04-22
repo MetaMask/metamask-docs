@@ -73,7 +73,7 @@ const solanaClient = await createSolanaClient({
 })
 ```
 
-:::info Asynchronous client
+:::info Async client
 `createSolanaClient` returns a promise. Always `await` it before using the client.
 The client uses a singleton multichain core under the hood; calling it multiple times
 returns the same underlying session.

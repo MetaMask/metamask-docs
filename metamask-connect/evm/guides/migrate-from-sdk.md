@@ -28,7 +28,7 @@ MetaMask Connect EVM is a rewrite of the legacy SDK, built on the
 [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
 Key enhancements include:
 
-- Asynchronous initialization.
+- Async initialization.
 - A singleton client.
 - Built-in support for EVM, [Solana](../../solana/index.mdx), and [multichain](../../multichain/index.mdx) sessions.
 
@@ -78,10 +78,10 @@ own React context (see [React context pattern](#react-context-pattern-replacing-
 ### 3. Update initialization
 
 Replace the `MetaMaskSDK` constructor and `init` call with [`createEVMClient`](../reference/methods.md#createevmclient), which handles
-initialization in a single asynchronous step.
+initialization in a single async step.
 
 :::caution
-`createEVMClient` is asynchronous, so always `await` it before accessing the client. The client is also a
+`createEVMClient` is async, so always `await` it before accessing the client. The client is also a
 singleton. Calling `createEVMClient` multiple times merges options into the same instance. Do not
 recreate it on every render.
 :::

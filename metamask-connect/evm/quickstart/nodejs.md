@@ -66,7 +66,7 @@ const evmClient = await createEVMClient({
 })
 ```
 
-:::info Asynchronous client
+:::info Async client
 `createEVMClient` returns a promise. Always `await` it before using the client.
 :::
 

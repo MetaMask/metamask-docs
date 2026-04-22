@@ -69,7 +69,7 @@ const client = await createMultichainClient({
 })
 ```
 
-:::info Asynchronous client
+:::info Async client
 `createMultichainClient` returns a promise. Always `await` it before using the client.
 The client is a singleton; calling it again returns the same instance with merged options.
 :::

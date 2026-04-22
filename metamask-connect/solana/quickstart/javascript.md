@@ -132,7 +132,7 @@ const solanaClient = await createSolanaClient({
 ```
 
 :::info
-[`createSolanaClient`](../reference/methods.md#createsolanaclient) is asynchronous and uses a singleton multichain core under the hood.
+[`createSolanaClient`](../reference/methods.md#createsolanaclient) is async and uses a singleton multichain core under the hood.
 Calling it multiple times returns the same underlying session, so you can safely call it during
 initialization without worrying about duplicate connections.
 :::

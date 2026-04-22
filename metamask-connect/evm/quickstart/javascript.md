@@ -160,7 +160,7 @@ This example configures MetaMask Connect EVM with the following options:
 - `api.supportedNetworks` - A map of hex chain IDs to RPC URLs for all networks supported by the app.
   Use the [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) helper to generate URLs for all Infura-supported chains, or specify your own.
 
-:::info Asynchronous client
+:::info Async client
 `createEVMClient` returns a promise. Always `await` it before using the client.
 The client is a singleton; calling `createEVMClient` again returns the same instance.
 :::
