@@ -191,27 +191,41 @@ Chain IDs must be hex strings. Use `'0x1'`, not `1` or `'1'`, in `chainIds` and
 #### Connect-and-sign shortcut
 
 Use `connectAndSign` to connect and sign a `personal_sign` message in one user approval.
-The method returns the signature directly:
+The method returns `{ accounts, chainId, signature }`:
 
 ```typescript
-const signature = await client.connectAndSign({
+const { accounts, chainId, signature } = await client.connectAndSign({
   message: 'Sign in to My Dapp',
   chainIds: ['0x1'],
 })
 ```
 
+:::info Breaking change in `@metamask/connect-evm` 1.0.0
+`connectAndSign` previously returned the signature as a bare string. It now returns an object —
+destructure `.signature` to read the signed value.
+:::
+
 #### Connect-and-execute shortcut
 
 Connect and execute any JSON-RPC method in a single user approval.
-The method returns the RPC result directly:
+The method returns `{ accounts, chainId, result }`:
 
 ```typescript
-const txHash = await client.connectWith({
+const {
+  accounts,
+  chainId,
+  result: txHash,
+} = await client.connectWith({
   method: 'eth_sendTransaction',
   params: account => [{ from: account, to: '0x...', value: '0x0' }],
   chainIds: ['0x1'],
 })
 ```
+
+:::info Breaking change in `@metamask/connect-evm` 1.0.0
+`connectWith` previously returned the raw RPC result. It now returns an object —
+destructure `.result` to read the RPC response value.
+:::
 
 :::tip React Native polyfills
 Browser-based setups (Vite, Webpack) work without polyfills. If you are migrating a **React Native**

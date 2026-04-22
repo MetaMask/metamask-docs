@@ -217,8 +217,10 @@ const evmClient = await createEVMClient({
 
 async function handleConnectAndSign() {
   try {
-    const signature = await evmClient.connectAndSign({ message: 'Hello in one go!' })
-    console.log('Signature:', signature)
+    const { accounts, chainId, signature } = await evmClient.connectAndSign({
+      message: 'Hello in one go!',
+    })
+    console.log('Accounts:', accounts, 'Chain:', chainId, 'Signature:', signature)
   } catch (err) {
     console.error('Error with connectAndSign:', err)
   }

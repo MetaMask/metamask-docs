@@ -217,7 +217,7 @@ Use [`provider.request`](../reference/provider-api.md#request) for arbitrary [JS
 const { accounts, chainId } = await evmClient.connect()
 
 // 2. Connect and sign in one step
-const signature = await evmClient.connectAndSign({
+const { signature } = await evmClient.connectAndSign({
   message: 'Sign in to the dapp',
 })
 

@@ -67,16 +67,27 @@ Connects to MetaMask and signs a `personal_sign` message in a single user approv
 
 ### Returns
 
-A promise that resolves to the signature as a hex string.
+A promise that resolves to an object with the following fields:
+
+| Field       | Type        | Description                                      |
+| ----------- | ----------- | ------------------------------------------------ |
+| `accounts`  | `Address[]` | The accounts permitted on the resulting session. |
+| `chainId`   | `Hex`       | The selected chain ID as a hex string.           |
+| `signature` | `string`    | The `personal_sign` signature as a hex string.   |
+
+:::info Breaking change in `@metamask/connect-evm` 1.0.0
+`connectAndSign` previously returned the signature as a bare string. It now returns
+`{ accounts, chainId, signature }`. Destructure `.signature` to read the signed value.
+:::
 
 :::tip
-To access the connected accounts and chain ID alongside the signature, use the `connectAndSign` event handler
-when [initializing the client](../quickstart/javascript.md):
+You can also subscribe to the `connectAndSign` event handler
+when [initializing the client](../quickstart/javascript.md) to receive the same payload:
 
 ```javascript
 eventHandlers: {
-  connectAndSign: ({ accounts, chainId, signResponse }) => {
-    console.log('Accounts:', accounts, 'Chain:', chainId, 'Signature:', signResponse)
+  connectAndSign: ({ accounts, chainId, signature }) => {
+    console.log('Accounts:', accounts, 'Chain:', chainId, 'Signature:', signature)
   },
 }
 ```
@@ -86,11 +97,11 @@ eventHandlers: {
 ### Example
 
 ```javascript
-const signature = await evmClient.connectAndSign({
+const { accounts, chainId, signature } = await evmClient.connectAndSign({
   message: 'Sign in to My Dapp',
   chainIds: ['0x1'],
 })
-console.log('Signature:', signature)
+console.log('Accounts:', accounts, 'Chain:', chainId, 'Signature:', signature)
 ```
 
 ## `connectWith`
@@ -109,16 +120,27 @@ Connects to MetaMask and executes a specific [JSON-RPC method](json-rpc-api/inde
 
 ### Returns
 
-A promise that resolves to the result of the RPC method invocation.
+A promise that resolves to an object with the following fields:
+
+| Field      | Type        | Description                                      |
+| ---------- | ----------- | ------------------------------------------------ |
+| `accounts` | `Address[]` | The accounts permitted on the resulting session. |
+| `chainId`  | `Hex`       | The selected chain ID as a hex string.           |
+| `result`   | `unknown`   | The result of the JSON-RPC method invocation.    |
+
+:::info Breaking change in `@metamask/connect-evm` 1.0.0
+`connectWith` previously returned the raw RPC result. It now returns
+`{ accounts, chainId, result }`. Destructure `.result` to read the RPC response value.
+:::
 
 :::tip
-To access the connected accounts and chain ID alongside the result, use the `connectWith` event handler
-when [initializing the client](../quickstart/javascript.md):
+You can also subscribe to the `connectWith` event handler
+when [initializing the client](../quickstart/javascript.md) to receive the same payload:
 
 ```javascript
 eventHandlers: {
-  connectWith: ({ accounts, chainId, connectWithResponse }) => {
-    console.log('Accounts:', accounts, 'Chain:', chainId, 'Result:', connectWithResponse)
+  connectWith: ({ accounts, chainId, result }) => {
+    console.log('Accounts:', accounts, 'Chain:', chainId, 'Result:', result)
   },
 }
 ```
@@ -128,7 +150,11 @@ eventHandlers: {
 ### Example
 
 ```javascript
-const txHash = await evmClient.connectWith({
+const {
+  accounts,
+  chainId,
+  result: txHash,
+} = await evmClient.connectWith({
   method: 'eth_sendTransaction',
   params: account => [
     {
@@ -139,7 +165,7 @@ const txHash = await evmClient.connectWith({
   ],
   chainIds: ['0x1'],
 })
-console.log('Transaction hash:', txHash)
+console.log('Accounts:', accounts, 'Chain:', chainId, 'Transaction hash:', txHash)
 ```
 
 ## `switchChain`
@@ -283,7 +309,7 @@ The EVM client exposes the following read-only properties:
 | `accounts`        | `Address[]`            | Currently permitted accounts.                                                                   |
 | `selectedAccount` | `Address \| undefined` | Currently selected account (first in `accounts`).                                               |
 | `selectedChainId` | `Hex \| undefined`     | Currently selected chain ID as a hex string.                                                    |
-| `status`          | `ConnectionStatus`     | Connection status: `'loaded'`, `'pending'`, `'connecting'`, `'connected'`, or `'disconnected'`. |
+| `status`          | `ConnectEvmStatus`     | Connection status: `'loaded'`, `'pending'`, `'connecting'`, `'connected'`, or `'disconnected'`. |
 
 ### Example
 
