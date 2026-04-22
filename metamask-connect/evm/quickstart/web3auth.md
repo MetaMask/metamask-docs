@@ -1,7 +1,7 @@
 ---
 title: 'Web3Auth Embedded Wallets - MetaMask Connect EVM'
 sidebar_label: Embedded Wallets SDK
-description: Integrate MetaMask with Web3Auth Embedded Wallets SDK to enable email and social login alongside browser wallet connections in your dapp.
+description: Integrate MetaMask with Web3Auth Embedded Wallets SDK to enable email and social sign-in alongside browser wallet connections in your dapp.
 toc_max_heading_level: 3
 keywords:
   [
@@ -13,7 +13,7 @@ keywords:
     Wallet SDK,
     web3auth,
     embedded wallet,
-    social login,
+    social sign-in,
     MPC wallet,
     seedless onboarding,
   ]
@@ -35,7 +35,7 @@ Use MetaMask SDK features directly within Embedded Wallets SDK.
 
 <p align="center">
   <a href="https://metamask-web3auth-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-web3auth.png").default} alt="MetaMask Connect EVM with Web3Auth embedded wallet login interface" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-web3auth.png").default} alt="MetaMask Connect EVM with Web3Auth embedded wallet sign-in interface" width="600px" class="appScreen" />
   </a>
 </p>
 

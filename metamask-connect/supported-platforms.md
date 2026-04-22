@@ -72,6 +72,8 @@ Relay connections are more sensitive to network latency, so services like [Infur
 The following table shows which environment and ecosystem combinations MetaMask Connect supports.
 Select a ✅ to jump to the relevant quickstart or guide.
 
+<!-- vale off -->
+
 | Environment             |                         EVM                         |                          Solana                           |                        Multichain                        |
 | ----------------------- | :-------------------------------------------------: | :-------------------------------------------------------: | :------------------------------------------------------: |
 | Browser (vanilla JS/TS) |  [✅](/metamask-connect/evm/quickstart/javascript)  |   [✅](/metamask-connect/solana/quickstart/javascript)    | [✅](/metamask-connect/multichain/quickstart/javascript) |
@@ -80,6 +82,8 @@ Select a ✅ to jump to the relevant quickstart or guide.
 | wagmi                   |             [✅](/metamask-connect/evm)             |                             —                             |                            —                             |
 | Wallet Standard         |                          —                          | [✅](/metamask-connect/solana/guides/use-wallet-adapter/) |                            —                             |
 | Node.js                 |                         ✅                          |                             —                             |                            ✅                            |
+
+<!-- vale on -->
 
 :::note
 Node.js support uses QR code connections via the MetaMask mobile app.

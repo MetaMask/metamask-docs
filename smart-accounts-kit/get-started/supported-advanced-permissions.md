@@ -10,7 +10,7 @@ The following table displays the <GlossaryTerm term="Advanced Permissions" /> ty
 the Smart Accounts Kit, [MetaMask Flask](/snaps/get-started/install-flask), and MetaMask production, and the minimum version required for each.
 
 If you don't see the Advanced Permissions type you're looking for, you can request it by
-emailing [hellogators@consensys.net](mailto:hellogators@consensys.net).
+emailing [`hellogators@consensys.net`](mailto:hellogators@consensys.net).
 
 | Permission type                                                                                                          | Smart Accounts Kit | MetaMask Flask | MetaMask    |
 | ------------------------------------------------------------------------------------------------------------------------ | ------------------ | -------------- | ----------- |

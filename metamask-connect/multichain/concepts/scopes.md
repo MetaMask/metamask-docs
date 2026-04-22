@@ -30,7 +30,7 @@ Scopes solve this by providing a **universal chain identifier** for a chain or s
 When you [`connect`](../reference/methods.md#connect) to MetaMask, you pass an array of scopes to
 declare exactly which chains your dapp needs. When you call
 [`invokeMethod`](../reference/methods.md#invokemethod), you pass a scope to target the correct chain
-without switching netwoks.
+without switching networks.
 
 ## Format and examples
 

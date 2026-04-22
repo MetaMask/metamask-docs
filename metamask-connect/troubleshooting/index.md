@@ -214,7 +214,7 @@ If you cannot upgrade, add `data: blob:` to `connect-src` as a fallback.
 For the full reference, see
 [Content Security Policy](https://github.com/MetaMask/connect-monorepo#content-security-policy) in `metamask/connect-monorepo`.
 
-### MetaMask wallet not appearing in Solana wallet adapter
+### MetaMask wallet not appearing in Solana Wallet Adapter
 
 **Cause A:** `createSolanaClient` has not resolved before the `WalletProvider` renders.
 MetaMask uses the Wallet Standard auto-discovery protocol, but the wallet must be registered before

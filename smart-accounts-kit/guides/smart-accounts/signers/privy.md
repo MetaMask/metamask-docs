@@ -8,7 +8,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Use Privy with MetaMask Smart Accounts
 
-[Privy](https://docs.privy.io/welcome) provides an embedded wallet solution that enables seamless social login for Web3 applications making user onboarding easier. MetaMask Smart Accounts is a signer-agnostic implementation
+[Privy](https://docs.privy.io/welcome) provides an embedded wallet solution that enables seamless social sign-in for Web3 applications making user onboarding easier. MetaMask Smart Accounts is a signer-agnostic implementation
 that allows you to use Privy's <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm> wallet as a signer for <GlossaryTerm term="MetaMask smart account">smart accounts</GlossaryTerm>.
 
 :::info

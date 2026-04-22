@@ -144,7 +144,7 @@ This example configures MetaMask Connect Multichain with the following options:
 
 ### 3. Connect and use the Multichain client
 
-Connect to MetaMask, get accounts from the session, and invoke RPC methods on chain of your choice:
+Connect to MetaMask, get accounts from the session, and invoke RPC methods on a chain of your choice:
 
 ```javascript
 await client.connect(['eip155:1', 'eip155:137', 'solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp'], [])

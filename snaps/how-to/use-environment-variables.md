@@ -15,13 +15,15 @@ You can use environment variables [on the command line](#use-environment-variabl
 or [in a `.env` file](#use-environment-variables-in-a-env-file).
 
 :::note
+
 In addition to the environment variables you set, the following environment variables are set by the
 Snaps CLI:
 
 - `NODE_ENV="production"`
 - `NODE_DEBUG=false`
 - `DEBUG=false`
-  :::
+
+:::
 
 ## Use environment variables on the command line
 
@@ -92,8 +94,8 @@ Snaps CLI:
 3. You can also use environment variables directly in your Snap.
    For example:
 
-    <Tabs>
-    <TabItem value="JSX">
+   <Tabs>
+   <TabItem value="JSX">
 
    ```tsx title="index.tsx"
    import { Box, Text, Heading } from '@metamask/snaps-sdk/jsx'
@@ -114,8 +116,8 @@ Snaps CLI:
    })
    ```
 
-    </TabItem>
-    <TabItem value="Functions" deprecated>
+   </TabItem>
+   <TabItem value="Functions" deprecated>
 
    ```typescript title="index.ts"
    import { panel, text, heading } from '@metamask/snaps-sdk'
@@ -132,5 +134,5 @@ Snaps CLI:
    })
    ```
 
-    </TabItem>
-    </Tabs>
+   </TabItem>
+   </Tabs>

@@ -8,7 +8,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Use Dynamic with MetaMask Smart Accounts
 
-[Dynamic](https://www.dynamic.xyz/) is an embedded wallet solution that enables seamless social login and passkey based
+[Dynamic](https://www.dynamic.xyz/) is an embedded wallet solution that enables seamless social sign-in and passkey based
 wallets, making user onboarding easier. MetaMask Smart Accounts is a signer-agnostic implementation
 that allows you to use Dynamic's EOA wallet as a signer for <GlossaryTerm term="MetaMask smart account">smart accounts</GlossaryTerm>.
 

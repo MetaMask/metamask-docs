@@ -72,7 +72,7 @@ The form requests information about your Snap, including the following:
   **long description**, but this URL should be an official website designed to interact with your Snap.
 
 - **Snap short description** - A one or two sentence description of your Snap.
-  Try not to say "is a MetaMask Snap"—users already know this!
+  Try not to say "is a MetaMask Snap." Users already know this!
 
 - **Snap long description** - A description of your Snap's features and how to use them.
   You can use line breaks, lists, and URLs.

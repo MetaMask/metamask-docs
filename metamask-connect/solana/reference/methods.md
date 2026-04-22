@@ -117,7 +117,7 @@ const client = await createSolanaClient({
 ## `getWallet`
 
 Returns a Wallet Standard compatible MetaMask wallet instance.
-Use this to access wallet features directly outside of the Solana wallet adapter.
+Use this to access wallet features directly outside of the Solana Wallet Adapter.
 
 ### Returns
 

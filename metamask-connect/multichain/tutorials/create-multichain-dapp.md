@@ -23,7 +23,7 @@ keywords:
 # Create a multichain dapp
 
 In this tutorial, you'll build a React dapp that connects to four networks (Ethereum, Linea, Base, and Solana) using MetaMask Connect Multichain.
-Your dapp will handle wallet login and logout, read balances across all four chains, sign messages, and send transactions on all four chains. You'll learn how to do the following:
+Your dapp will handle wallet sign-in and sign-out, read balances across all four chains, sign messages, and send transactions on all four chains. You'll learn how to do the following:
 
 - Set up a multichain session with a single connection prompt.
 - Read account balances across EVM networks and Solana.
@@ -324,7 +324,7 @@ console.log('SOL tx signature:', result)
 ```
 
 Building a Solana transaction requires assembling instructions, setting a fee payer, and fetching a
-recent blockhash using `@solana/kit`.
+recent block hash using `@solana/kit`.
 See the [Send transactions](../guides/send-transactions.md) guide for a complete example.
 
 ## Full example

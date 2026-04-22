@@ -126,10 +126,10 @@ The add NFT interfaces look like the following:
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../../_assets/watchasset-nft.png").default} alt="MetaMask wallet_watchAsset NFT confirmation dialog showing token details" class="appScreen" />
+        <img src={require("../../_assets/watchasset-nft.png").default} alt="MetaMask `wallet_watchAsset` NFT confirmation dialog showing token details" class="appScreen" />
     </div>
     <div class="imgCol">
-        <img src={require("../../_assets/watchasset-nft-2.png").default} alt="MetaMask wallet_watchAsset confirmation for multiple NFTs batch display" class="appScreen" />
+        <img src={require("../../_assets/watchasset-nft-2.png").default} alt="MetaMask `wallet_watchAsset` confirmation for multiple NFTs batch display" class="appScreen" />
     </div>
 </div>
 

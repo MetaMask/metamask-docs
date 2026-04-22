@@ -30,7 +30,7 @@ Key enhancements include:
 
 - Asynchronous initialization.
 - A singleton client.
-- Built-in support for EVM, [Solana](../../solana/index.md), and [multichain](../../multichain/index.md) sessions.
+- Built-in support for EVM, [Solana](../../solana/index.mdx), and [multichain](../../multichain/index.mdx) sessions.
 
 ## Steps
 
@@ -376,6 +376,8 @@ See the [multichain quickstart](../../multichain/quickstart/javascript.md) for a
 
 ## Full option mapping
 
+<!-- vale off -->
+
 | Old (`@metamask/sdk`)    | New (`@metamask/connect-evm`)                                                                               | Status                                |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------- | ------------------------------------- |
 | `new MetaMaskSDK(opts)`  | `await createEVMClient(opts)`                                                                               | Renamed, async                        |
@@ -395,6 +397,8 @@ See the [multichain quickstart](../../multichain/quickstart/javascript.md) for a
 | `enableAnalytics`        | Removed                                                                                                     | —                                     |
 | `communicationServerUrl` | Removed                                                                                                     | —                                     |
 | `storage`                | Removed                                                                                                     | —                                     |
+
+<!-- vale on -->
 
 ### React context pattern (replacing `useSDK`)
 
