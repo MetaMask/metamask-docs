@@ -63,6 +63,10 @@ contract HelloWorld {
 }
 ```
 
+## Prerequisites
+
+Follow the [JavaScript quickstart](../quickstart/javascript.md) or [Wagmi quickstart](../quickstart/wagmi.md) to install, initialize, and connect the EVM client.
+
 ## Read from contracts
 
 <Tabs>

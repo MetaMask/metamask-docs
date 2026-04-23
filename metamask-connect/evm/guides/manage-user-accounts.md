@@ -45,6 +45,10 @@ With MetaMask Connect EVM, you can:
   </a>
 </p>
 
+## Prerequisites
+
+Follow the [JavaScript quickstart](../quickstart/javascript.md) or [Wagmi quickstart](../quickstart/wagmi.md) to install and initialize the EVM client.
+
 ## Connect wallet
 
 With Vanilla JavaScript, implement user authentication directly using the

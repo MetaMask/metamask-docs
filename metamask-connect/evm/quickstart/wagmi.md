@@ -26,7 +26,7 @@ keywords:
 Get started with MetaMask Connect EVM in a React and Wagmi dapp.
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
 
-:::tip Migrating from @MetaMask/sdk?
+:::tip Migrating from `@metamask/sdk`?
 If you are upgrading an existing wagmi project that used `@metamask/sdk`, see the
 [Wagmi connector migration reference](#migrate-from-metamasksdk) at the bottom of this page
 for a parameter mapping table.
@@ -61,9 +61,9 @@ TOD0: Update with new screenshot and link
    cd metamask-wagmi
    ```
 
-    <details>
-    <summary>Degit vs. Git clone</summary>
-    <div>
+   <details>
+   <summary>Degit vs. Git clone</summary>
+   <div>
 
    `degit` is a tool that enables cloning only the directory structure from a GitHub repository, without retrieving the entire repository.
 
@@ -75,8 +75,8 @@ TOD0: Update with new screenshot and link
    cd metamask-connect-examples/integrations/wagmi
    ```
 
-    </div>
-    </details>
+   </div>
+   </details>
 
 3. Install dependencies:
 

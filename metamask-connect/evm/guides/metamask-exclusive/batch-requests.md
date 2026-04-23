@@ -29,6 +29,10 @@ Despite being batched into one HTTP request, each call still requires individual
 [sending atomic batch transactions](../send-transactions/batch-transactions.md) in MetaMask.
 :::
 
+## Prerequisites
+
+Follow the [quickstart](../../quickstart/javascript.md) to install, initialize, and connect the EVM client.
+
 ## Batch JSON-RPC requests
 
 Use MetaMask Connect EVM's `metamask_batch` method to group multiple JSON-RPC requests into a single HTTP call.
@@ -40,11 +44,13 @@ Use cases include:
 - **Mixed transactions and signatures** - Combine transaction sending and signing requests in one batch.
 
 :::note
+
 When using `metamask_batch`, keep in mind the following:
 
 - Even though the requests are batched, each individual request still requires user approval.
 - If any request in the batch is rejected, the entire batch will fail.
-  :::
+
+:::
 
 The following is an example of batching JSON-RPC requests using `metamask_batch`:
 

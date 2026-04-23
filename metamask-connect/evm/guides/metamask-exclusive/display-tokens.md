@@ -46,6 +46,10 @@ Using `wallet_watchAsset` to display NFTs is experimental and currently only ava
 extension (not on mobile).
 :::
 
+## Prerequisites
+
+Follow the [quickstart](../../quickstart/javascript.md) to install, initialize, and connect the EVM client.
+
 ## Display an ERC-20 token
 
 To prompt users to add an ERC-20 token, add something like the following to your project script:

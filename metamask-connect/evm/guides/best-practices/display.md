@@ -18,6 +18,8 @@ keywords:
 
 # Display in MetaMask
 
+Follow these best practices when displaying icons or method names in MetaMask.
+
 ## Display icons
 
 When your dapp makes a sign-in request to a MetaMask user, MetaMask may render a modal that displays

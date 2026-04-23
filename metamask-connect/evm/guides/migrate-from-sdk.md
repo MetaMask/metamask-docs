@@ -228,7 +228,7 @@ so read `.result` from the returned object to get the RPC response value.
 :::
 
 :::tip React Native polyfills
-Browser-based setups (Vite, Webpack) work without polyfills. If you are migrating a **React Native**
+Browser-based setups (Vite, Webpack) work without polyfills. If you are migrating a React Native
 app and encounter errors referencing `Buffer`, `crypto`, `stream`, or `Event is not defined`, see
 [React Native Metro polyfill issues](../../troubleshooting/metro-polyfill-issues.md).
 :::
@@ -309,7 +309,7 @@ const client = await createEVMClient({
 })
 ```
 
-You can also listen for the `display_uri` event on the **provider** for custom QR code UI.
+You can also listen for the `display_uri` event on the provider for custom QR code UI.
 
 :::note Event naming
 The `eventHandlers` option uses camel case (`displayUri`), while the provider event uses snake case

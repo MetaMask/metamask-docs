@@ -43,6 +43,10 @@ With MetaMask Connect EVM:
   </a>
 </p>
 
+## Prerequisites
+
+Follow the [JavaScript quickstart](../quickstart/javascript.md) or [Wagmi quickstart](../quickstart/wagmi.md) to install and initialize the EVM client.
+
 ## Detect and switch networks
 
 With Vanilla JavaScript, implement network management directly using the

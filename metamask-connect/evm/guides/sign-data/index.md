@@ -13,6 +13,7 @@ keywords:
     metamask,
     ethereum,
   ]
+toc_max_heading_level: 2
 ---
 
 import Tabs from '@theme/Tabs'
@@ -42,6 +43,10 @@ If you can't sign in to a dapp when using a Ledger or Trezor, the dapp might be 
 sign data using an unsupported method, in which case we recommend using your standard MetaMask account.
 :::
 
+## Prerequisites
+
+Follow the [JavaScript quickstart](../../quickstart/javascript.md) or [Wagmi quickstart](../../quickstart/wagmi.md) to install, initialize, and connect the EVM client.
+
 ## Use `eth_signTypedData_v4`
 
 [`eth_signTypedData_v4`](../../reference/json-rpc-api/eth_signTypedData_v4.mdx)
@@ -52,9 +57,11 @@ It renders the structured data in a useful way (for example, displaying known
 account names in place of addresses).
 
 <p align="center">
-
-![MetaMask confirmation dialog showing an eth_signTypedData_v4 structured data signing request](../../_assets/signTypedData.png)
-
+  <img
+    src={require("../../_assets/signTypedData.png").default}
+    alt="MetaMask confirmation dialog showing an eth_signTypedData_v4 structured data signing request"
+    width="450px"
+  />
 </p>
 
 An `eth_signTypedData_v4` payload uses a standard format of encoding structs, but has a different
@@ -473,9 +480,11 @@ It's often used for signature challenges that are authenticated on a web server,
 [Sign-In with Ethereum](siwe.md).
 
 <p align="center">
-
-![MetaMask `personal_sign` message signing confirmation dialog](../../_assets/personal_sign.png)
-
+  <img
+    src={require("../../_assets/personal_sign.png").default}
+    alt="MetaMask personal_sign message signing confirmation dialog"
+    width="450px"
+  />
 </p>
 
 :::caution important
@@ -486,7 +495,8 @@ It's often used for signature challenges that are authenticated on a web server,
   reusing the same challenge and impersonating your site.
   Add text referring to your domain, or the current time, so the user can verify if this
   challenge is legitimate.
-  :::
+
+:::
 
 ### Example
 

@@ -26,7 +26,7 @@ MetaMask parses the message and gives the user a friendly interface prompting th
 your dapp:
 
 <p align="center">
-    <img height="500" src={require("../../_assets/siwe.png").default} alt="Sign-in with Ethereum request" class="appScreen" />
+  <img src={require("../../_assets/siwe.png").default} alt="Sign-in with Ethereum request" width="450" />
 </p>
 
 ## Domain binding
@@ -44,10 +44,10 @@ This avoids breaking existing dapps that may have use cases for mismatched domai
 
 <div class="imgRow">
     <div class="imgCol">
-        <img src={require("../../_assets/siwe-bad-domain.png").default} alt="MetaMask Sign-In with Ethereum domain mismatch warning" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain.png").default} alt="MetaMask Sign-In with Ethereum domain mismatch warning" />
     </div>
     <div class="imgCol">
-        <img src={require("../../_assets/siwe-bad-domain-2.png").default} alt="MetaMask Sign-In with Ethereum domain mismatch detailed warning popup" class="appScreen" />
+        <img src={require("../../_assets/siwe-bad-domain-2.png").default} alt="MetaMask Sign-In with Ethereum domain mismatch detailed warning popup" />
     </div>
 </div>
 

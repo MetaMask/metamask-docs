@@ -19,7 +19,7 @@ keywords:
 [Sign-In with Solana (SIWS)](https://docs.siws.xyz/) lets users sign in to your dapp by authenticating with their MetaMask wallet, instead of a traditional username and password.
 
 <p align="center">
-    <img height="700" src={require("../../_assets/siwe.png").default} alt="Sign-in with Solana request" />
+    <img width="450" src={require("../../_assets/siwe.png").default} alt="Sign-in with Solana request" />
 </p>
 
 ## Domain binding

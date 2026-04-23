@@ -140,7 +140,7 @@
 
   /* Inline code */
   --inline-code-font: 'Andale Mono', AndaleMono, Menlo, Consolas, Monaco, 'Courier New', monospace;
-  --inline-code-font-size: 0.9em;
+  --inline-code-font-size: 0.85em;
   --inline-code-font-weight: 600;
   --inline-code-baseline-nudge: -0.045em;
   --inline-code-border-radius: 0.35rem;
@@ -392,27 +392,8 @@ ol {
   font-size: 1.3rem !important;
 }
 
-/* Details */
-
-.details_lb9f > summary {
-  padding-left: 2.7rem !important;
-  font-size: 1.4rem;
-  font-weight: 600;
-  letter-spacing: 0.02rem;
-  text-transform: uppercase;
-
-  &::before {
-    border-width: 0.8rem !important;
-    margin-left: 0.5rem !important;
-  }
-}
-
-.collapsibleContent_i85q {
+.markdown [class*='collapsibleContent'] {
   padding-top: 0 !important;
-
-  > div {
-    font-weight: normal;
-  }
 }
 
 /* Images */

@@ -36,6 +36,11 @@
       font-size: 1rem;
       margin-right: 0.8rem;
     }
+
+    code {
+      margin-inline: 0.3em;
+      padding: 0em 0.2em;
+    }
   }
 
   [class*='admonitionContent'] {
@@ -44,12 +49,16 @@
   }
 
   a {
-    font-weight: 500;
+    font-weight: 400;
     color: var(--ifm-alert-foreground-color);
     text-decoration-color: var(--ifm-alert-foreground-color);
     text-decoration: underline;
     text-decoration-thickness: 0.1rem;
-    text-underline-offset: 0.4rem;
+    text-underline-offset: 0.3rem;
+
+    &:hover {
+      text-underline-offset: 0.3rem;
+    }
   }
 
   p,
@@ -66,6 +75,10 @@
       font-weight: var(--inline-code-font-weight) !important;
       position: relative !important;
       top: var(--inline-code-baseline-nudge) !important;
+    }
+
+    a code {
+      color: inherit;
     }
   }
 

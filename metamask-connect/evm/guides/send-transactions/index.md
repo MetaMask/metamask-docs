@@ -43,6 +43,10 @@ With MetaMask Connect EVM:
 The following examples demonstrate how to use MetaMask Connect EVM with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to send a [basic transaction](#send-a-basic-transaction) and an
 [advanced transaction with gas estimation](#send-an-advanced-transaction-with-gas-estimation).
 
+## Prerequisites
+
+Follow the [JavaScript quickstart](../../quickstart/javascript.md) or [Wagmi quickstart](../../quickstart/wagmi.md) to install, initialize, and connect the EVM client.
+
 ## Send a basic transaction
 
 <Tabs>
