@@ -1,6 +1,6 @@
 ---
 description: Required spelling and casing for product names, industry terms, and standards referenced across MetaMask documentation.
-globs: ['**/*.md', '**/*.mdx']
+globs: **/*.md,**/*.mdx
 alwaysApply: false
 ---
 

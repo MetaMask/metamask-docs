@@ -1,6 +1,6 @@
 ---
 description: Markdown formatting conventions for the MetaMask documentation site (Docusaurus).
-globs: ["**/*.md", "**/*.mdx"]
+globs: **/*.md,**/*.mdx
 alwaysApply: false
 ---
 

@@ -1,12 +1,6 @@
 ---
 description: Product-specific guidance for Smart Accounts Kit documentation, including terminology, delegation concepts, glossary/tooltips, and versioning.
-globs:
-  [
-    'smart-accounts-kit/**/*.md',
-    'smart-accounts-kit/**/*.mdx',
-    'src/lib/glossary.json',
-    'scripts/generate-smart-accounts-glossary.js',
-  ]
+globs: smart-accounts-kit/**/*.md,smart-accounts-kit/**/*.mdx,src/lib/glossary.json
 alwaysApply: false
 ---
 
