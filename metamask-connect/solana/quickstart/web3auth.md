@@ -278,6 +278,6 @@ export const SendTransaction = () => {
 
 ## Next steps
 
-- [Send a legacy transaction](../guides/send-legacy-transaction.md) to transfer SOL using MetaMask Connect.
+- [Send a legacy transaction](../guides/send-transactions/legacy.md) to transfer SOL using MetaMask Connect.
 - [Sign in with Solana (SIWS)](../guides/sign-data/siws.md) to authenticate users with their wallet instead of a username and password.
 - [MetaMask Connect Solana methods](../reference/methods.md) for the full API reference.

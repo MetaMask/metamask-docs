@@ -115,7 +115,8 @@ npm install @metamask/connect-multichain
 
 ### 2. Initialize MetaMask Connect Multichain
 
-The following is an example of using MetaMask Connect Multichain for a multichain dapp in a JavaScript (Vite) project:
+Initialize the multichain client using [`createMultichainClient`](../reference/methods.md#createmultichainclient).
+The following is an example of initializing the client in a JavaScript (Vite) project:
 
 ```javascript
 import { createMultichainClient } from '@metamask/connect-multichain'

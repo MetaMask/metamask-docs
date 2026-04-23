@@ -24,7 +24,7 @@ No network switching is required.
 
 ## Prerequisites
 
-- Follow the [quickstart](../quickstart/javascript.md) to initialize and connect a multichain client.
+- Follow Step 1 of the [quickstart](../quickstart/javascript.md) to install the multichain client.
 - To build Solana transactions, install `@solana/web3.js`:
 
 ```bash npm2yarn
@@ -33,7 +33,8 @@ npm install @solana/web3.js
 
 ## Initialize and connect
 
-Set up the multichain client and connect to both ecosystems:
+Initialize a multichain client using [`createMultichainClient`](../reference/methods.md#createmultichainclient),
+and connect to both ecosystems using [`connect`](../reference/methods.md#connect):
 
 ```javascript
 import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
@@ -69,7 +70,7 @@ All Solana methods route through the MetaMask wallet. There is no RPC node fallb
 
 ## Send an EVM transaction
 
-Use [`invokeMethod`](../reference/methods.md#invokemethod) to send a transaction on any EVM chain in the session:
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with [`eth_sendTransaction`](../../evm/reference/json-rpc-api/eth_sendTransaction.mdx) to send a transaction on any EVM chain in the session:
 
 ```javascript
 const txHash = await client.invokeMethod({
@@ -110,7 +111,7 @@ console.log('POL tx hash:', txHash)
 
 ## Estimate gas
 
-Use [`eth_estimateGas`](../../evm/reference/json-rpc-api/eth_estimateGas.mdx) to estimate the gas cost before sending.
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with [`eth_estimateGas`](../../evm/reference/json-rpc-api/eth_estimateGas.mdx) to estimate the gas cost before sending.
 This routes to the RPC node and does not prompt the user:
 
 ```javascript
@@ -199,6 +200,8 @@ console.log('Transaction ID:', txId)
 | ---------- | ------------------------- | ---------------------------------------------------------- |
 | `4001`     | User rejected the request | Show a retry option. Do not treat as an application error. |
 | `-32002`   | Request already pending   | Wait for the user to respond in MetaMask before retrying.  |
+
+<br/>
 
 ```javascript
 try {

@@ -41,13 +41,15 @@ polyfilling in browser or React Native environments.
 
 ### 1. Install MetaMask Connect Multichain
 
+Install the multichain client in an existing Node.js project:
+
 ```bash npm2yarn
 npm install @metamask/connect-multichain
 ```
 
 ### 2. Initialize MetaMask Connect Multichain
 
-Create a file (for example, `index.mjs`) and initialize the client.
+Create a file (`index.mjs`) and initialize the client using [`createMultichainClient`](../reference/methods.md#createmultichainclient).
 In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly.
 Use [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) to generate RPC URLs for all Infura-supported chains:
 
@@ -67,9 +69,9 @@ const client = await createMultichainClient({
 })
 ```
 
-:::info Asynchronous client
+:::info Async client
 `createMultichainClient` returns a promise. Always `await` it before using the client.
-The client is a **singleton**; calling it again returns the same instance with merged options.
+The client is a singleton; calling it again returns the same instance with merged options.
 :::
 
 ### 3. Connect to MetaMask
@@ -146,6 +148,8 @@ console.log('SOL signature:', solSig)
 ```
 
 ### 6. Disconnect
+
+Use [`disconnect`](../reference/methods.md#disconnect) to disconnect all scopes and end the session.
 
 ```javascript
 // Disconnect all scopes

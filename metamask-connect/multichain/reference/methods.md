@@ -7,6 +7,7 @@ keywords:
     evm,
     solana,
     connect,
+    createMultichainClient,
     method,
     methods,
     dapp,
@@ -21,8 +22,9 @@ toc_max_heading_level: 2
 
 # MetaMask Connect Multichain methods
 
-MetaMask Connect Multichain (`@metamask/connect-multichain`) exposes four primary methods:
+MetaMask Connect Multichain (`@metamask/connect-multichain`) exposes several methods, including:
 
+- [`createMultichainClient`](#createmultichainclient) to initialize the client.
 - [`connect`](#connect) to create a [CAIP-25](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md) session across multiple chains.
 - [`getSession`](#getsession) to retrieve authorized scopes and accounts.
 - [`invokeMethod`](#invokemethod) to send RPC requests to any chain in the session.
@@ -35,6 +37,49 @@ When building with MetaMask Connect Multichain, use these high-level methods to 
 These high-level methods wrap the standard [Multichain API](api.md) methods.
 Use those standard methods if you're building your own client or need lower-level control.
 :::
+
+## `createMultichainClient`
+
+Creates a new multichain client instance.
+
+### Parameters
+
+| Name                       | Type                         | Required | Description                                                                                                                                                                      |
+| -------------------------- | ---------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dapp.name`                | `string`                     | Yes      | Name of your dapp.                                                                                                                                                               |
+| `dapp.url`                 | `string`                     | No       | URL of your dapp. In browsers this is often set automatically; required in Node.js and React Native.                                                                             |
+| `dapp.iconUrl`             | `string`                     | No       | URL of your dapp icon.                                                                                                                                                           |
+| `dapp.base64Icon`          | `string`                     | No       | Base64-encoded icon when a hosted URL is unavailable (for example, some React Native setups).                                                                                    |
+| `api.supportedNetworks`    | `Record<string, string>`     | No       | Map of [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain IDs to RPC URLs. Use [`getInfuraRpcUrls`](#getinfurarpcurls) to generate Infura URLs, then merge custom endpoints. |
+| `ui.headless`              | `boolean`                    | No       | Enables or disables [headless mode](../guides/headless-mode.md). The default is `false`.                                                                                         |
+| `ui.preferExtension`       | `boolean`                    | No       | Directly connects through the MetaMask extension when it's installed. The default is `true`.                                                                                     |
+| `mobile.preferredOpenLink` | `(deeplink: string) => void` | No       | A function that's called to open a deeplink to the MetaMask Mobile App. Required in React Native.                                                                                |
+| `mobile.useDeeplink`       | `boolean`                    | No       | Controls use of deeplinks for mobile connection flows.                                                                                                                           |
+
+### Returns
+
+Returns a promise that resolves to a multichain client instance.
+The client is a singleton; calling `createMultichainClient` again returns the same instance.
+
+### Example
+
+```javascript
+import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
+
+const client = await createMultichainClient({
+  dapp: {
+    name: 'My Multichain Dapp',
+    url: window.location.href,
+    iconUrl: 'https://mydapp.com/icon.png',
+  },
+  api: {
+    supportedNetworks: {
+      ...getInfuraRpcUrls({ infuraApiKey: process.env.INFURA_API_KEY }),
+      'eip155:137': 'https://polygon-mainnet.infura.io/v3/YOUR_INFURA_API_KEY',
+    },
+  },
+})
+```
 
 ## `connect`
 
@@ -193,11 +238,11 @@ Use this utility to populate `api.supportedNetworks` when calling `createMultich
 
 :::tip Single-ecosystem dapps
 If your dapp targets only EVM, use the
-[`getInfuraRpcUrls` helper in `@metamask/connect-evm`](/metamask-connect/evm/reference/methods#getinfurarpcurls)
+[`getInfuraRpcUrls`](../../evm/reference/methods.md#getinfurarpcurls) helper in `@metamask/connect-evm`
 instead. It returns hex-chain-ID-keyed URLs that can be passed directly to `createEVMClient`.
 
 If your dapp targets only Solana, use the
-[`getInfuraRpcUrls` helper in `@metamask/connect-solana`](/metamask-connect/solana/reference/methods#getinfurarpcurls)
+[`getInfuraRpcUrls`](../../solana/reference/methods.md#getinfurarpcurls) helper in `@metamask/connect-solana`
 instead. It returns network-name-keyed URLs (`mainnet`, `devnet`) that can be passed directly to
 `createSolanaClient`.
 :::
@@ -348,6 +393,8 @@ client.on('stateChanged', status => {
 | `RpcError`      | JSON-RPC errors from the wallet (includes `code` and `data`). |
 | `ProtocolError` | Connection protocol failures (transport, pairing, handshake). |
 | `StorageError`  | Session persistence issues (read/write failures).             |
+
+### Example
 
 ```javascript
 import { ProtocolError, RpcError, StorageError } from '@metamask/connect-multichain'

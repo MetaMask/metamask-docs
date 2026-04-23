@@ -241,9 +241,10 @@ you will get `crypto.getRandomValues is not a function`.
 
 ### 6. Use MetaMask Connect EVM
 
-Initialize the EVM client and use it to connect, sign, and send transactions.
-`mobile.preferredOpenLink` is **required**; it tells MetaMask Connect how to open deeplinks to the MetaMask
-Mobile app:
+Initialize the EVM client using [`createEVMClient`](../reference/methods.md#createevmclient).
+`mobile.preferredOpenLink` is required; it tells MetaMask Connect how to open deeplinks to the MetaMask
+Mobile app.
+Use the client to connect, sign, and send transactions:
 
 ```tsx
 import React, { useEffect, useRef, useState, useCallback } from 'react'

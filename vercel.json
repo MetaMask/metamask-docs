@@ -203,6 +203,18 @@
       "destination": "/metamask-connect/evm/guides/best-practices/production-readiness/"
     },
     {
+      "source": "/metamask-connect/solana/guides/send-legacy-transaction/",
+      "destination": "/metamask-connect/solana/guides/send-transactions/legacy/"
+    },
+    {
+      "source": "/metamask-connect/solana/guides/send-versioned-transaction/",
+      "destination": "/metamask-connect/solana/guides/send-transactions/versioned/"
+    },
+    {
+      "source": "/metamask-connect/solana/guides/batch-transactions/",
+      "destination": "/metamask-connect/solana/guides/send-transactions/batch/"
+    },
+    {
       "source": "/wallet/how-to/connect-extension/",
       "destination": "/metamask-connect/evm/"
     },

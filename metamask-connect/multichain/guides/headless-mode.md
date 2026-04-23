@@ -29,11 +29,15 @@ Use headless mode when you want to:
 - Show the connection URI in a different format (for example, a deeplink button instead of a QR code).
 - Integrate the connection flow into an existing modal or onboarding wizard.
 
-## Set up headless mode
+## Prerequisites
 
-### 1. Configure the client with headless mode
+Follow Step 1 of the [quickstart](../quickstart/javascript.md) to install the multichain client.
 
-Initialize a MetaMask Connect Multichain client, and set `ui.headless` to `true` in the configuration options:
+## Steps
+
+### 1. Initialize the client with headless mode
+
+Initialize a multichain client using [`createMultichainClient`](../reference/methods.md#createmultichainclient), and set `ui.headless` to `true`:
 
 ```javascript
 import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
@@ -64,6 +68,8 @@ client.on('display_uri', uri => {
 ```
 
 ### 3. Connect and handle the result
+
+Call [`connect`](../reference/methods.md#connect) to connect to MetaMask, and handle the result:
 
 ```javascript
 try {

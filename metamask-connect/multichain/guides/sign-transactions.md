@@ -26,11 +26,12 @@ All signing methods route to the MetaMask wallet and require user approval.
 
 ## Prerequisites
 
-Follow the [quickstart](../quickstart/javascript.md) to initialize and connect a multichain client.
+Follow Step 1 of the [quickstart](../quickstart/javascript.md) to install the multichain client.
 
 ## Initialize and connect
 
-Set up the multichain client and connect to both ecosystems:
+Initialize a multichain client using [`createMultichainClient`](../reference/methods.md#createmultichainclient),
+and connect to both ecosystems using [`connect`](../reference/methods.md#connect):
 
 ```javascript
 import { createMultichainClient, getInfuraRpcUrls } from '@metamask/connect-multichain'
@@ -80,7 +81,7 @@ Target a different chain by changing the `scope`; for example, `eip155:137` for 
 
 ## Sign EVM typed data (`eth_signTypedData_v4`)
 
-Use [`eth_signTypedData_v4`](../../evm/reference/json-rpc-api/eth_signTypedData_v4.mdx) to sign [EIP-712](https://eips.ethereum.org/EIPS/eip-712) structured data.
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with [`eth_signTypedData_v4`](../../evm/reference/json-rpc-api/eth_signTypedData_v4.mdx) to sign [EIP-712](https://eips.ethereum.org/EIPS/eip-712) structured data.
 The params order is `[account, typedDataJSON]`. The typed data must be passed as a JSON string, not an object:
 
 ```javascript
@@ -154,6 +155,8 @@ console.log('Signature:', result.signature)
 | ---------- | ------------------------- | ---------------------------------------------------------- |
 | `4001`     | User rejected the request | Show a retry option. Do not treat as an application error. |
 | `-32002`   | Request already pending   | Wait for the user to respond in MetaMask before retrying.  |
+
+<br/>
 
 ```javascript
 try {

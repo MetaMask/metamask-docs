@@ -28,7 +28,7 @@ MetaMask Connect EVM is a rewrite of the legacy SDK, built on the
 [CAIP-25 Multichain API](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-25.md).
 Key enhancements include:
 
-- Asynchronous initialization.
+- Async initialization.
 - A singleton client.
 - Built-in support for EVM, [Solana](../../solana/index.mdx), and [multichain](../../multichain/index.mdx) sessions.
 
@@ -54,7 +54,7 @@ Replace `@metamask/sdk` and `@metamask/sdk-react` imports with the new `@metamas
 
 :::note
 `@metamask/sdk-react` has no direct replacement. If you were using `MetaMaskProvider` and
-`useSDK`, migrate to [wagmi hooks](../quickstart/wagmi.md) or manage the client instance in your
+`useSDK`, migrate to [Wagmi hooks](../quickstart/wagmi.md) or manage the client instance in your
 own React context (see [React context pattern](#react-context-pattern-replacing-usesdk) below).
 :::
 
@@ -77,7 +77,7 @@ own React context (see [React context pattern](#react-context-pattern-replacing-
 
 ### 3. Update initialization
 
-Replace the `MetaMaskSDK` constructor and `init` call with `createEVMClient`, which handles
+Replace the `MetaMaskSDK` constructor and `init` call with [`createEVMClient`](../reference/methods.md#createevmclient), which handles
 initialization in a single async step.
 
 :::caution
@@ -156,7 +156,7 @@ options that MetaMask Connect EVM no longer exposes.
 
 ### 4. Update connection flow
 
-In MetaMask Connect EVM, you request chain permissions during `connect` and receive the connected accounts
+In MetaMask Connect EVM, you request chain permissions during [`connect`](../reference/methods.md#connect) and receive the connected accounts
 and selected chain ID in a single response. This replaces the previous flow where you connected first
 and then made a separate JSON-RPC request for `eth_chainId`.
 
@@ -190,7 +190,7 @@ Chain IDs must be hex strings. Use `'0x1'`, not `1` or `'1'`, in `chainIds` and
 
 #### Connect-and-sign shortcut
 
-Use `connectAndSign` to connect and sign a `personal_sign` message in one user approval.
+Use [`connectAndSign`](../reference/methods.md#connectandsign) to connect and sign a `personal_sign` message in one user approval.
 The method returns `{ accounts, chainId, signature }`:
 
 ```typescript
@@ -207,7 +207,7 @@ so read `.signature` from the returned object to get the signed value.
 
 #### Connect-and-execute shortcut
 
-Connect and execute any JSON-RPC method in a single user approval.
+Use [`connectWith`](../reference/methods.md#connectwith) to connect and execute any JSON-RPC method in a single user approval.
 The method returns `{ accounts, chainId, result }`:
 
 ```typescript
@@ -235,7 +235,7 @@ app and encounter errors referencing `Buffer`, `crypto`, `stream`, or `Event is 
 
 ### 5. Update provider access
 
-In MetaMask Connect EVM, `client.getProvider` returns an EIP-1193 provider. You no longer use the
+In MetaMask Connect EVM, [`client.getProvider`](../reference/methods.md#getprovider) returns an EIP-1193 provider. You no longer use the
 `SDKProvider` returned by `sdk.getProvider`.
 
 **Old:**
@@ -328,15 +328,15 @@ provider.on('display_uri', uri => {
 
 MetaMask Connect EVM introduces features that are not available in `@metamask/sdk`:
 
-| Capability             | Description                                                                                                |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **Multichain client**  | `createMultichainClient` from `@metamask/connect-multichain` supports CAIP-25 scopes across EVM and Solana |
-| **`invokeMethod`**     | Call RPC methods on specific CAIP-2 scopes without switching chains                                        |
-| **Solana support**     | `createSolanaClient` from `@metamask/connect-solana` with Wallet Standard adapter                          |
-| **`connectAndSign`**   | Connect and sign a message in a single user approval                                                       |
-| **`connectWith`**      | Connect and execute any RPC method in a single user approval                                               |
-| **Partial disconnect** | `disconnect(scopes)` revokes specific CAIP scopes while keeping others active                              |
-| **Singleton client**   | Subsequent `create*Client` calls merge options into the existing instance                                  |
+| Capability                                                           | Description                                                                                                                                                                |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Multichain client**                                                | [`createMultichainClient`](../../multichain/reference/methods.md#createmultichainclient) from `@metamask/connect-multichain` supports CAIP-25 scopes across EVM and Solana |
+| [`invokeMethod`](../../multichain/reference/methods.md#invokemethod) | Call RPC methods on specific CAIP-2 scopes without switching chains                                                                                                        |
+| **Solana support**                                                   | [`createSolanaClient`](../../solana/reference/methods.md#createsolanaclient) from `@metamask/connect-solana` with Wallet Standard adapter                                  |
+| [`connectAndSign`](../reference/methods.md#connectandsign)           | Connect and sign a message in a single user approval                                                                                                                       |
+| [`connectWith`](../reference/methods.md#connectwith)                 | Connect and execute any RPC method in a single user approval                                                                                                               |
+| **Partial disconnect**                                               | [`disconnect(scopes)`](../../multichain/reference/methods.md#disconnect) revokes specific CAIP scopes while keeping others active                                          |
+| **Singleton client**                                                 | Subsequent `createEVMClient` calls merge options into the existing instance                                                                                                |
 
 #### Next step: Go multichain
 

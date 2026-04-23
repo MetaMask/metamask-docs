@@ -18,11 +18,13 @@ keywords:
 
 Your dapp can ask users to sign a message with their Solana account; for example, to verify ownership or authorize an action.
 
-## Use `signMessage`
+## Prerequisites
 
-Use `signMessage` to request a human-readable signature that doesn't need to be verified onchain.
+Follow the [quickstart](../../quickstart/javascript.md) to install, initialize, and connect the Solana client.
 
-### Example
+## Use `solana:signMessage`
+
+Use the [`solana:signMessage`](../../reference/methods.md#supported-wallet-standard-features) feature to request a human-readable signature that doesn't need to be verified onchain.
 
 The following example requests a signed message using MetaMask:
 
@@ -56,6 +58,6 @@ async function signMessage() {
 ## Next steps
 
 - [Sign in with Solana (SIWS)](siws.md) to authenticate users with domain-bound, phishing-resistant sign-in messages.
-- [Send a legacy transaction](../send-legacy-transaction.md) to transfer SOL or interact with Solana programs.
-- [Send a versioned transaction](../send-versioned-transaction.md) to use Address Lookup Tables for complex operations.
+- [Send a legacy transaction](../send-transactions/legacy.md) to transfer SOL or interact with Solana programs.
+- [Send a versioned transaction](../send-transactions/versioned.md) to use Address Lookup Tables for complex operations.
 - [MetaMask Connect Solana methods](../../reference/methods.md) for the full list of Wallet Standard features.

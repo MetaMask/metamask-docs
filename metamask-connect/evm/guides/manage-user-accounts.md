@@ -40,8 +40,8 @@ With MetaMask Connect EVM, you can:
 - **Support multiple wallet types** (extension, mobile app).
 
 <p align="center">
-  <a href="https://metamask-sdk-examples.vercel.app/" target="_blank">
-    <img src={require("../_assets/connect.gif").default} alt="MetaMask Connect EVM wallet connection flow demonstration" width="450px" />
+  <a href="https://demo-mmc-evm-react.vercel.app/" target="_blank">
+    <img src={require("../_assets/connect.png").default} alt="MetaMask Connect EVM wallet connection flow demonstration" width="500px" class="appScreen" />
   </a>
 </p>
 

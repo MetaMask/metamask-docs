@@ -23,7 +23,7 @@ import TabItem from "@theme/TabItem";
 
 # Connect to EVM quickstart
 
-Install `@metamask/connect-evm`, initialize a client with `createEVMClient`, and connect to the MetaMask wallet in under 5 minutes. MetaMask Connect EVM provides an EIP-1193 provider that works with viem, ethers.js, and web3.js, handles cross-platform connections (desktop extension, mobile QR code, and deeplinks), and persists sessions across page reloads.
+Install `@metamask/connect-evm`, initialize an EVM client, and connect to the MetaMask wallet in under 5 minutes. MetaMask Connect EVM provides an EIP-1193 provider that works with viem, ethers.js, and web3.js, handles cross-platform connections (desktop extension, mobile QR code, and deeplinks), and persists sessions across page reloads.
 
 <!--
 [Download the quickstart template](#set-up-using-a-template) or [manually set up MetaMask Connect EVM](#set-up-manually) in an existing dapp.
@@ -122,7 +122,7 @@ You've successfully set up MetaMask Connect EVM.
 
 ### 1. Install MetaMask Connect EVM
 
-Install MetaMask Connect EVM in an existing JavaScript project:
+Install the EVM client in an existing JavaScript project:
 
 ```bash npm2yarn
 npm install @metamask/connect-evm
@@ -130,7 +130,8 @@ npm install @metamask/connect-evm
 
 ### 2. Initialize MetaMask Connect EVM
 
-The following is an example of using MetaMask Connect EVM for an EVM dapp in a JavaScript project:
+Initialize the EVM client using [`createEVMClient`](../reference/methods.md#createevmclient).
+The following is an example of initializing the client in a JavaScript project:
 
 ```javascript
 import { createEVMClient, getInfuraRpcUrls } from '@metamask/connect-evm'
@@ -151,7 +152,7 @@ const evmClient = await createEVMClient({
 })
 ```
 
-These examples configure MetaMask Connect EVM with the following options:
+This example configures MetaMask Connect EVM with the following options:
 
 - `dapp` - Ensures trust by showing your dapp's `name`, `url`, and `iconUrl` during connection.
   Use `base64Icon` instead of `iconUrl` when a hosted URL is unavailable (for example, in React
@@ -159,9 +160,9 @@ These examples configure MetaMask Connect EVM with the following options:
 - `api.supportedNetworks` - A map of hex chain IDs to RPC URLs for all networks supported by the app.
   Use the [`getInfuraRpcUrls`](../reference/methods.md#getinfurarpcurls) helper to generate URLs for all Infura-supported chains, or specify your own.
 
-:::info Asynchronous client
+:::info Async client
 `createEVMClient` returns a promise. Always `await` it before using the client.
-The client is a **singleton**; calling `createEVMClient` again returns the same instance.
+The client is a singleton; calling `createEVMClient` again returns the same instance.
 :::
 
 ### 3. Connect and use provider

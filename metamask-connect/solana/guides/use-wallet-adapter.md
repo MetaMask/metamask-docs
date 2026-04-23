@@ -159,4 +159,4 @@ See [Troubleshooting](../../troubleshooting/index.md#chrome-android) for details
 
 ## Next steps
 
-See how to send a [legacy transaction](send-legacy-transaction.md) and a [versioned transaction](send-versioned-transaction.md).
+See how to send a [legacy transaction](send-transactions/legacy.md) and a [versioned transaction](send-transactions/versioned.md).
