@@ -138,6 +138,7 @@ const metamaskConnectSidebar = {
           link: { type: 'doc', id: 'evm/guides/sign-data/index' },
           items: ['evm/guides/sign-data/siwe'],
         },
+        'evm/guides/headless-mode',
         'evm/guides/interact-with-contracts',
         {
           type: 'category',
