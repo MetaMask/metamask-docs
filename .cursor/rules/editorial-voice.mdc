@@ -1,6 +1,6 @@
 ---
 description: Editorial voice and tone rules aligned with the Microsoft Writing Style Guide and Consensys documentation standards.
-globs: ["**/*.md", "**/*.mdx"]
+globs: **/*.md,**/*.mdx
 alwaysApply: false
 ---
 
@@ -44,12 +44,14 @@ The rules below are the most actionable subset for AI-assisted editing.
 
 ## Punctuation and formatting
 
-- Do not use em dashes or en dashes. Use commas, parentheses, semicolons, or rephrase the sentence.
+- Do not use em dashes (—) to set off extra information. Use commas, parentheses, semicolons, or rephrase the sentence.
 - Use only one space after periods, question marks, and colons.
 - Use sentence case for all headings and titles. Never use title case.
 - Do not end headings, subheadings, or UI titles with periods.
 - Use backticks for inline code, file names, and URLs referenced in prose.
-- Use bold for UI element names (buttons, menu items, field labels).
+- In general, do not use bold to emphasize words in a paragraph. Use bold sparingly:
+  - For UI element names (buttons, menu items, field labels).
+  - For emphasis in exceptional cases such as critical security warnings when an admonition is not enough.
 
 ## Developer content
 

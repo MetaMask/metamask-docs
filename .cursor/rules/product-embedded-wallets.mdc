@@ -1,6 +1,6 @@
 ---
 description: Product-specific guidance for Embedded Wallets documentation, including naming, content organization, and SDK conventions.
-globs: ["embedded-wallets/**/*.md", "embedded-wallets/**/*.mdx"]
+globs: embedded-wallets/**/*.md,embedded-wallets/**/*.mdx
 alwaysApply: false
 ---
 

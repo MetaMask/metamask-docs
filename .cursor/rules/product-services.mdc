@@ -1,6 +1,6 @@
 ---
 description: Product-specific guidance for Services (Infura) documentation, including naming, reference conventions, and partial reuse.
-globs: ["services/**/*.md", "services/**/*.mdx"]
+globs: services/**/*.md,services/**/*.mdx
 alwaysApply: false
 ---
 
