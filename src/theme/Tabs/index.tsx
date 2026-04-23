@@ -93,7 +93,7 @@ function TabList({ className }: { className?: string }) {
 }
 
 function TabContent({ children }: { children: ReactNode }) {
-  return <div className={styles.tabContent}>{children}</div>
+  return <div>{children}</div>
 }
 
 function TabsContainer({
