@@ -634,6 +634,10 @@ const signature = await web3.eth.sign(fromAddress, exampleMessage)
 `personal_sign` prepends the message with `\x19Ethereum Signed Message:\n<length of message>` before
 hashing and signing it.
 
+:::tip Connect and sign
+You can also [connect to MetaMask and `personal_sign`](../manage-user-accounts.md#connect-and-sign) in a single step, using MetaMask Connect EVM's `connectAndSign` method.
+:::
+
 ## Next steps
 
 - [Sign in with Ethereum (SIWE)](siwe.md)

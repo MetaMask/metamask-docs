@@ -43,29 +43,35 @@ With MetaMask Connect EVM:
 
 The following examples demonstrate how to use MetaMask Connect EVM with viem, web3.js, ethers.js, Ethereum APIs, or Wagmi to interact with Solidity smart contracts.
 
-This simple Hello World contract allows anyone to read and write a message to it.
-
-```tsx
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity >=0.7.0 <0.9.0;
-
-contract HelloWorld {
-
-  string public message;
-
-  constructor(string memory initMessage) {
-    message = initMessage;
-  }
-
-  function update(string memory newMessage) public {
-    message = newMessage;
-  }
-}
-```
-
 ## Prerequisites
 
-Follow the [JavaScript quickstart](../quickstart/javascript.md) or [Wagmi quickstart](../quickstart/wagmi.md) to install, initialize, and connect the EVM client.
+- Follow the [JavaScript quickstart](../quickstart/javascript.md) or [Wagmi quickstart](../quickstart/wagmi.md) to install, initialize, and connect the EVM client.
+- Create and deploy a simple smart contract. For example, the following contract allows anyone to read and write a message to it.
+
+  <details>
+  <summary>Hello World contract</summary>
+  <div>
+
+  ```tsx
+  // SPDX-License-Identifier: GPL-3.0
+  pragma solidity >=0.7.0 <0.9.0;
+
+  contract HelloWorld {
+
+    string public message;
+
+    constructor(string memory initMessage) {
+      message = initMessage;
+    }
+
+    function update(string memory newMessage) public {
+      message = newMessage;
+    }
+  }
+  ```
+
+  </div>
+  </details>
 
 ## Read from contracts
 

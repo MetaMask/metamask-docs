@@ -220,6 +220,54 @@ const {
 console.log('Accounts:', accounts, 'Chain:', chainId, 'Transaction hash:', txHash)
 ```
 
+## `getProvider`
+
+Returns the active EIP-1193 Ethereum provider object.
+The provider is available immediately after `createEVMClient` resolves, even before calling `connect`.
+Read-only RPC calls work immediately; account-dependent calls require `connect` first.
+
+### Returns
+
+An EIP-1193 compatible provider object.
+
+### Example
+
+```javascript
+const provider = evmClient.getProvider()
+const chainId = await provider.request({ method: 'eth_chainId' })
+console.log('Current chain:', chainId)
+```
+
+## `getAccount`
+
+Returns the currently selected account.
+
+### Returns
+
+`Address | undefined` - The currently selected account address, or `undefined` if not connected.
+
+### Example
+
+```javascript
+const account = evmClient.getAccount()
+console.log('Current account:', account) // e.g., '0x...'
+```
+
+## `getChainId`
+
+Returns the currently selected chain ID.
+
+### Returns
+
+`Hex | undefined` - The currently selected chain ID as a hex string, or `undefined` if not connected.
+
+### Example
+
+```javascript
+const chainId = evmClient.getChainId()
+console.log('Current chain:', chainId) // e.g., '0x1'
+```
+
 ## `switchChain`
 
 Switches the active chain on the EVM client.
@@ -249,54 +297,6 @@ await evmClient.switchChain({
     blockExplorerUrls: ['https://arbiscan.io'],
   },
 })
-```
-
-## `getProvider`
-
-Returns the active EIP-1193 Ethereum provider object.
-The provider is available immediately after `createEVMClient` resolves, even before calling `connect`.
-Read-only RPC calls work immediately; account-dependent calls require `connect` first.
-
-### Returns
-
-An EIP-1193 compatible provider object.
-
-### Example
-
-```javascript
-const provider = evmClient.getProvider()
-const chainId = await provider.request({ method: 'eth_chainId' })
-console.log('Current chain:', chainId)
-```
-
-## `getChainId`
-
-Returns the currently selected chain ID.
-
-### Returns
-
-`Hex | undefined` - The currently selected chain ID as a hex string, or `undefined` if not connected.
-
-### Example
-
-```javascript
-const chainId = evmClient.getChainId()
-console.log('Current chain:', chainId) // e.g., '0x1'
-```
-
-## `getAccount`
-
-Returns the currently selected account.
-
-### Returns
-
-`Address | undefined` - The currently selected account address, or `undefined` if not connected.
-
-### Example
-
-```javascript
-const account = evmClient.getAccount()
-console.log('Current account:', account) // e.g., '0x...'
 ```
 
 ## `disconnect`

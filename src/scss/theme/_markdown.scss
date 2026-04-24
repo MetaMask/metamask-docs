@@ -240,7 +240,6 @@
     text-transform: none;
   }
 
-  // details > summary,
   [class*='details'] > summary {
     @extend .type-heading-xxs;
     font-family: var(--ifm-font-family-base);
