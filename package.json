@@ -6,7 +6,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "npm run glossary:generate && docusaurus snaps:generate && docusaurus start -p 3003",
-    "build": "npm run glossary:generate && docusaurus snaps:generate && docusaurus build",
+    "build": "node scripts/patch-docusaurus-windows-routes.js && npm run glossary:generate && docusaurus snaps:generate && docusaurus build",
     "glossary:generate": "node ./scripts/generate-smart-accounts-glossary.js",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
