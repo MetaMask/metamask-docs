@@ -147,24 +147,7 @@ const sidebar = {
         { type: 'link', label: 'Unreal Engine', href: '/embedded-wallets/sdk/unreal' },
       ],
     },
-    {
-      type: 'category',
-      label: 'Features',
-      collapsible: true,
-      collapsed: false,
-      items: [
-        'features/external-wallets',
-        'features/smart-accounts',
-        'features/funding',
-        'features/user-account-dashboard',
-        'features/server-side-verification',
-        'features/whitelabel',
-        'features/wallet-pregeneration',
-        'features/nft-minting',
-        'features/session-management',
-        'features/mpc',
-      ],
-    },
+    'funding',
     {
       type: 'category',
       label: 'Infrastructure',
@@ -173,6 +156,7 @@ const sidebar = {
         'infrastructure/mpc-architecture',
         'infrastructure/sss-architecture',
         'infrastructure/nodes-and-dkg',
+        'infrastructure/session-management',
         'infrastructure/glossary',
         {
           type: 'link',
@@ -259,7 +243,9 @@ const sidebar = {
       ],
     },
     'authentication/group-connections',
+    'authentication/user-account-dashboard',
     'authentication/id-token',
+    'authentication/wallet-pregeneration',
   ],
   other_blockchains: [
     'connect-blockchain/README',

@@ -1,0 +1,83 @@
+---
+title: User account dashboard
+description: 'Let your users manage recovery, multi-factor authentication, devices, and connected apps for their MetaMask Embedded Wallets account.'
+---
+
+The Embedded Wallets account dashboard gives your users one place to manage their account across every dapp that uses MetaMask Embedded Wallets.
+Users can configure recovery and multi-factor authentication (MFA), review and revoke connected dapps, and manage trusted devices.
+
+:::info Try it
+
+Try the live [account dashboard](https://account.web3auth.io).
+
+:::
+
+![Unified recovery management screenshot](/img/embedded-wallets/account-dashboard/unified-recovery-management.jpg)
+
+## Recovery and MFA
+
+Users can:
+
+- Set up and manage recovery factors: password, social recovery, authenticator app, recovery phrase, and passkeys.
+- Unhide and copy their backup phrase.
+- Resend the recovery phrase to a registered email address.
+- Add or remove MFA factors at any time.
+
+![Account dashboard overview screenshot](/img/embedded-wallets/account-dashboard/account-dashboard-overview.jpg)
+
+## Connected dapps and sessions
+
+Users can see which dapps are connected to their account and stay in control of access:
+
+- View all dapps authorized to use the account.
+- Revoke a dapp's access instantly.
+- Sign out of active sessions as needed.
+
+## Devices
+
+Users can view and manage every device connected to their account:
+
+- Add trusted devices.
+- Remove unused or unauthorized devices.
+- Set the current device as the default for added convenience.
+
+![Device overview screenshot](/img/embedded-wallets/account-dashboard/device-overview.jpg)
+
+## Security status
+
+A visual indicator shows the overall security status of the account, prompting users to set up additional recovery factors for stronger protection.
+
+![Security insights screenshot](/img/embedded-wallets/account-dashboard/security-insights.jpg)
+
+## Use the dashboard in your dapp
+
+Users access the dashboard after authenticating with any dapp that uses Embedded Wallets.
+
+:::tip
+
+For a smoother experience, add a **Manage account** or **Security** link to [account.web3auth.io](https://account.web3auth.io) in your dapp's settings or profile screen.
+
+:::
+
+Encourage your users to:
+
+1. Set up at least three recovery factors.
+2. Regularly review connected dapps and sessions.
+3. Periodically review devices and enable an authenticator app.
+
+## FAQ
+
+### Can users access the account dashboard without logging in?
+
+No.
+Users must authenticate before they can access the dashboard.
+
+### What recovery factors are supported?
+
+The account dashboard supports the following recovery factors:
+
+- Social recovery
+- Recovery phrase
+- Password
+- Authenticator app
+- Passkeys

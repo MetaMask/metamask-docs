@@ -1,0 +1,54 @@
+---
+title: Wallet pregeneration
+description: 'Pregenerate Embedded Wallets and smart accounts for your users before they sign in, so wallets are ready on first login.'
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly'
+import PregenerateWallet from '@site/src/components/PregenerateWallet'
+import PregenrateSmartAccount from '@site/src/components/PregenrateSmartAccount'
+
+Wallet pregeneration creates an embedded wallet for a user before they sign in.
+Call the API from your backend with a user identifier (such as an email), and Embedded Wallets returns the wallet address that the user receives on their first sign-in.
+
+Pregenerated wallets unlock several patterns:
+
+- **Onboarding without immediate sign-in.** Assign wallets during invitation or sign-up so users can engage with your dapp
+  before completing OAuth or other authentication flows.
+- **Prefunded wallets.** Send tokens, NFTs, or rewards to a user's wallet address ahead of time so assets are waiting at first sign-in.
+  This pattern fits airdrops, welcome bonuses, and in-game items.
+- **Deferred authentication.** Defer the full sign-in flow until the user is ready for their first onchain transaction.
+
+:::note Plan requirement
+
+Wallet pregeneration is a paid feature.
+Use it for free on Sapphier Devnet; production use requires the [Scale Plan](https://web3auth.io/pricing.html).
+
+:::
+
+:::warning
+
+The pregeneration API returns Core Kit / SFA key wallet addresses.
+To use these addresses with the Embedded Wallets SDKs, set the `useCoreKitKey` or `useSFAKey` flag.
+
+For more context, see how [keys can change between products](/troubleshooting/different-private-key#product).
+
+:::
+
+## Pregenerate an EOA wallet
+
+Use the pregeneration API to create an externally owned account (EOA) for a user.
+Call it after the user verifies their email, or independently using any unique identifier.
+
+1. **Identify the user.** Determine the unique identifier (such as an email) you'll use as the `verifierId`.
+2. **Call the API.** Submit the user's identifier along with the **Verifier Name**, **Web3Auth Network**, and **Client ID** from your project dashboard.
+3. **Receive the wallet address.** Use the returned address.
+   The wallet is ready for the user on first sign-in.
+
+<BrowserOnly>{() => <PregenerateWallet />}</BrowserOnly>
+
+## Pregenerate a smart account
+
+The same API also pregenerates ERC-4337 smart accounts.
+The flow is identical to EOA pregeneration; only the returned address differs.
+
+<BrowserOnly>{() => <PregenrateSmartAccount />}</BrowserOnly>

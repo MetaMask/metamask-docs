@@ -1,7 +1,6 @@
 ---
 title: Smart accounts
-sidebar_label: Smart accounts
-description: '@web3auth/react-native-sdk Native Smart accounts | Embedded Wallets'
+description: Configure and use MetaMask Smart Accounts with Embedded Wallets React Native SDK
 ---
 
 import TabItem from '@theme/TabItem'
@@ -19,65 +18,54 @@ import SmartAccountSendTransaction from '../../_common/_aa-send-transaction.mdx'
 
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
-Effortlessly create and manage smart accounts for your users with just a few lines of code, using our Smart Account feature. Smart accounts offer enhanced control and programmability, enabling powerful features that traditional wallets can't provide.
-
-**Key features of smart accounts include:**
+Create and manage smart accounts for your users with just a few lines of code, using Embedded Wallets smart accounts.
+Smart accounts offer enhanced control and programmability, enabling powerful features that traditional wallets can't provide.
+Key features include:
 
 - **Gas abstraction:** Cover transaction fees for users, or allow users to pay for their own transactions using ERC-20 tokens.
 - **Batch transactions:** Perform multiple transactions in a single call.
 - **Automated transactions:** Allow users to automate actions, like swapping ETH to USDT when ETH hits a specific price.
 - **Custom spending limits:** Allow users to set tailored spending limits.
 
-:::tip
+Embedded Wallets smart accounts are powered by the [MetaMask Smart Accounts kit](/smart-accounts-kit), so you can create and
+manage [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) compatible smart accounts using your preferred libraries like viem, ethers.js, and Wagmi.
 
-For more about ERC-4337 and its components, [check out our detailed blog post](https://blog.web3auth.io/an-ultimate-guide-to-web3-wallets-externally-owned-account-and-smart-contract-wallet/#introduction-to-eip-4337).
+:::info
+
+For more about ERC-4337 and its components, read this blog post:
+[An ultimate guide to Web3 Wallets](https://blog.web3auth.io/an-ultimate-guide-to-web3-wallets-externally-owned-account-and-smart-contract-wallet/).
 
 :::
-
-Our smart account integration streamlines your setup, allowing you to create and manage smart accounts using your favorite libraries like Viem, Ethers, and Wagmi. You don't need to rely on third-party packages to effortlessly create ERC-4337 compatible Smart Contract Wallets (SCWs), giving users the ability to perform batch transactions and efficiently manage gas sponsorship.
 
 <GrowthPlanNote />
 
-## Enabling smart accounts
+## Enable smart accounts
 
-:::info prerequisite
-
-To enable this feature, you need to configure smart accounts from your project in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
-
-:::
-
-### Dashboard configuration
-
-To enable smart accounts, navigate to the smart accounts section in the Web3Auth dashboard, and enable the "Set up Smart accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
+Go to the **Smart Accounts** section in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/), and **Set up Smart accounts**.
+Embedded Wallets supports [MetaMask Smart Accounts](/smart-accounts-kit/guides/smart-accounts/create-smart-account/) as a smart account provider.
 
 ![Enable Smart accounts](/img/embedded-wallets/w3a-dashboard/smart-account/enable-smart-account.png)
 
-## Installation
+## Install the account abstraction provider
 
 <AccountAbstractionProviderInstallation />
 
-## Configure
+## Configure account abstraction
 
 <AAProviderConfiguration />
 
-Please note this is the important step for setting the Web3Auth account abstraction provider.
-
-- [Configure Smart Account provider](#configure-smart-account-provider)
-- [Configure Bundler](#configure-bundler)
-- [Configure Sponsored Paymaster](#sponsored-paymaster)
-- [Configure ERC-20 Paymaster](#erc-20-paymaster)
-
-## Configure smart account provider
+### Configure the smart account provider
 
 <ConfigureSmartAccountProvider />
 
-## Configure bundler
+### Configure the bundler
 
 <ConfigureBundler />
 
-## Configure paymaster
+### Configure the paymaster
 
-You can configure the paymaster of your choice to sponsor gas fees for your users, along with the paymaster context. The paymaster context lets you set additional parameters, such as choosing the token for ERC-20 paymasters, defining gas policies, and more.
+You can configure the paymaster of your choice to sponsor gas fees for your users, along with the paymaster context.
+The paymaster context lets you set additional parameters, like the token for ERC-20 paymasters or gas policies.
 
 ### Sponsored paymaster
 
@@ -87,9 +75,11 @@ You can configure the paymaster of your choice to sponsor gas fees for your user
 
 <ConfigureERC20Paymaster />
 
-## Set up
+## Set up Embedded Wallets
 
-### Configure Web3Auth instance
+### Configure Embedded Wallets
+
+Configure the Embedded Wallets `web3auth` instance:
 
 <Tabs
   values={[
@@ -207,18 +197,24 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
 </TabItem>
 </Tabs>
 
-### Configure signer
+### Configure the signer
 
 <ConfigureSigners />
 
-## Smart account address
+## Get the smart account address
 
 <SmartAccountAddress />
 
-## Send transaction
+## Send a transaction
 
 <SmartAccountSendTransaction />
 
-## Advanced smart account operations
+## Next steps
 
-To learn more about supported transaction methods, and how to perform batch transactions, [checkout our detailed documentation of AccountAbstractionProvider](/embedded-wallets/sdk/react).
+For supported transaction methods and batch transactions, see the
+[React SDK smart accounts page](/embedded-wallets/sdk/react/advanced/smart-accounts).
+
+See the following end-to-end tutorials:
+
+- [Send your first gasless transaction](/tutorials/sending-gasless-transaction)
+- [Send transactions with an ERC-20 paymaster](/tutorials/erc20-paymaster)

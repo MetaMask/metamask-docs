@@ -655,6 +655,46 @@
       "destination": "/embedded-wallets/dashboard/allowlist/"
     },
     {
+      "source": "/embedded-wallets/features/external-wallets/",
+      "destination": "/embedded-wallets/authentication/basic-logins/external-wallets/"
+    },
+    {
+      "source": "/embedded-wallets/features/smart-accounts/",
+      "destination": "/embedded-wallets/sdk/react/advanced/smart-accounts/"
+    },
+    {
+      "source": "/embedded-wallets/features/server-side-verification/",
+      "destination": "/embedded-wallets/authentication/id-token/"
+    },
+    {
+      "source": "/embedded-wallets/features/whitelabel/",
+      "destination": "/embedded-wallets/dashboard/customization/"
+    },
+    {
+      "source": "/embedded-wallets/features/mpc/",
+      "destination": "/embedded-wallets/infrastructure/mpc-architecture/"
+    },
+    {
+      "source": "/embedded-wallets/features/user-account-dashboard/",
+      "destination": "/embedded-wallets/authentication/user-account-dashboard/"
+    },
+    {
+      "source": "/embedded-wallets/features/session-management/",
+      "destination": "/embedded-wallets/infrastructure/session-management/"
+    },
+    {
+      "source": "/embedded-wallets/features/wallet-pregeneration/",
+      "destination": "/embedded-wallets/authentication/wallet-pregeneration/"
+    },
+    {
+      "source": "/embedded-wallets/features/funding/",
+      "destination": "/embedded-wallets/funding/"
+    },
+    {
+      "source": "/embedded-wallets/features/nft-minting/",
+      "destination": "/embedded-wallets/#developer-experience"
+    },
+    {
       "source": "/embedded-wallets/how-it-works/",
       "destination": "/embedded-wallets/"
     },

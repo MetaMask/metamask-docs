@@ -1,12 +1,11 @@
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-When using an ERC-20 paymaster, ensure you include the approval transaction, as Web3Auth does not
+When using an ERC-20 paymaster, ensure you include the approval transaction, as Embedded Wallets does not
 handle the approval internally.
 
-For Pimlico, you can specify the token you want to use in the paymasterContext. If you want to set
-up sponsorship policies, you can define those in the paymasterContext as well.
-[Checkout the supported tokens for ERC-20 paymaster on Pimlico](https://docs.pimlico.io/infra/paymaster/erc20-paymaster/supported-tokens).
+For Pimlico, specify your desired token and sponsorship policies in the `paymasterContext`.
+See the [tokens supported by Pimlico's ERC-20 paymaster](https://docs.pimlico.io/references/paymaster/erc20-paymaster/supported-tokens).
 
 ```ts
 import {

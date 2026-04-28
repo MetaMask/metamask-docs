@@ -1,24 +1,23 @@
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-Developers can use their preferred signer or Wagmi hooks to initiate onchain transactions, while
-Web3Auth manages the creation and submission of the UserOperation. Only the `to`, `data`, and
-`value` fields need to be provided. Any additional parameters will be ignored and automatically
-overridden.
+You can use your preferred signer or Wagmi hooks to initiate onchain transactions, while
+Embedded Wallets manages the creation and submission of the user operation.
+You only need to provide the `to`, `data`, and `value` fields.
+Any additional parameters will be ignored and automatically `overridden.
 
-To ensure reliable execution, the bundler client sets maxFeePerGas and maxPriorityFeePerGas values.
-If custom values are required, developers can use the
-[Viem's BundlerClient](https://viem.sh/account-abstraction/clients/bundler#bundler-client) to
+To ensure reliable execution, the bundler client sets `maxFeePerGas` and `maxPriorityFeePerGas`.
+If custom values are required, use Viem's [Bundler Client](https://viem.sh/account-abstraction/clients/bundler) to
 manually construct and send the user operation.
 
-Since Smart Accounts are deployed smart contracts, the user's first transaction also triggers the
+Since smart accounts are deployed smart contracts, the user's first transaction also triggers the
 onchain deployment of their wallet.
 
 <Tabs
   defaultValue="viem"
   values={[
-    { label: "Viem", value: "viem" },
-    { label: "Ethers", value: "ethers" },
+    { label: "viem", value: "viem" },
+    { label: "ethers.js", value: "ethers" },
     { label: "Wagmi", value: "wagmi" },
   ]}
 >

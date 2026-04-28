@@ -1,24 +1,41 @@
 ---
-title: Embedded Wallets identity token
-sidebar_label: Web3Auth identity token
+title: Identity token
 image: 'img/metamaskog.jpg'
-description: 'Identity Token | Embedded Wallets'
+description: 'Use the Embedded Wallets identity token (JWT) for server-side verification of user identity and wallet ownership.'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The **Identity Token** (ID Token) issued by Embedded Wallets is a JSON Web Token (JWT) that contains verified identity claims about the authenticated user. This token is signed using Embedded Wallets' private key and cannot be spoofed, allowing developers to trust the identity information presented by the client.
+The identity token (ID token) issued by Embedded Wallets is a JSON Web Token (JWT) that contains verified identity claims about the authenticated user.
+This token is signed using Embedded Wallets' private key and cannot be spoofed, allowing developers to trust the identity information presented by the client.
 
 Once a user successfully authenticates via Embedded Wallets, the platform issues an ID token which can then be used to authorize client-to-server requests or verify ownership of associated wallet addresses.
 
-#### Purpose of the ID token
+The ID token enables:
 
-- **User identity verification**: Ensures that the client user is indeed who they claim to be.
-- **Secure backend requests**: The token should be passed in API requests to validate sessions server-side.
+- **User identity verification**: Ensures that the client user is who they claim to be.
+- **Secure backend requests**: The token is passed in API requests to validate sessions server-side.
 - **Wallet ownership proof**: Includes public wallet keys to prove a user owns a particular wallet.
 
 When making a backend request from the frontend, the client must include this ID token to ensure the backend can verify the authenticated user.
+
+## Server-side verification
+
+Server-side verification uses the ID token to authenticate users on your backend by validating the ownership of a wallet address.
+The flow has three steps:
+
+1. **Retrieve the ID token on the client.** After the user authenticates with Embedded Wallets, the SDK issues a JWT signed with the `ES256` algorithm.
+   Send this token to your backend with each authenticated request.
+2. **Verify the token on your backend.** Validate the JWT signature against the appropriate JWKS endpoint or your project's verification key, and check that the wallet claim matches the identity the client is asserting.
+3. **Authenticate the user.** Once the token is verified, treat the wallet address (or public key) inside it as a trusted user identifier and continue with your application logic.
+
+The contents of the token differ based on how the user signed in:
+
+- **Social logins:** The token includes a `public_key` linked to the user's wallet.
+- **External wallets:** The token includes the wallet `address` instead of the public key.
+
+The sections below describe the token format, how to retrieve it on the client, and how to verify it on your backend.
 
 ## ID token format
 

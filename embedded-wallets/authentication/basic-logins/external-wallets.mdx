@@ -1,23 +1,51 @@
 ---
-title: External wallets login with Embedded Wallets
+title: External wallets sign-in with Embedded Wallets
 sidebar_label: External wallets
-description: 'External Wallets Login with Embedded Wallets | Embedded Wallets'
+description: 'Sign users in to your dapp with external EVM and Solana wallets using the Embedded Wallets external wallet aggregator.'
 ---
 
 import ExternalWalletsToggle from '@site/static/img/embedded-wallets/w3a-dashboard/external-wallets-toggle.png'
 import ExternalWalletsSelectWallets from '@site/static/img/embedded-wallets/w3a-dashboard/external-wallets-select-wallets.png'
 
-Web3Auth provides built-in support for email and SMS-based authentication, allowing users to log in seamlessly using a one-time passcode (OTP) sent to their email address or phone number. This form of passwordless authentication simplifies the onboarding process, removes friction for end users, and expands accessibility—especially in regions where social login options may be limited.
+Embedded Wallets provides an external wallet aggregator that unifies wallet discovery,
+connection, and session management for EVM and Solana wallets.
+Use it to sign users in to your dapp with MetaMask or any other supported wallet through a single
+integration.
 
-## Enable external wallets
+:::info Demo
 
-:::success Enable on dashboard
-
-To enable this feature, developers must first activate **External Wallets** from the **Social Connections** section in the [dashboard](https://dashboard.web3auth.io).
+Try the wallet aggregator in the [live demo](https://demo.web3auth.io).
 
 :::
 
-<div style={{ display: 'flex', margin: '20px 0' }}>
+## Features
+
+The wallet aggregator has the following features:
+
+- **Cross-ecosystem support:** Discover and connect to EVM and Solana wallets from one flow.
+- **Standards-native:** It detects EVM wallets through
+  [EIP-6963 (Multi Injected Provider Discovery)](https://eips.ethereum.org/EIPS/eip-6963) and Solana
+  wallets through the
+  [Solana Wallet Standard](https://github.com/wallet-standard/wallet-standard).
+- **Library compatibility:** Use it with ethers.js, viem, Wagmi, and `@solana/web3.js`.
+- **Framework hooks:** It supports React hooks and Vue composables to read connection state and trigger
+  flows.
+- **Dashboard control:** Manage which wallets appear, alongside social sign-ins, from the
+  [Embedded Wallets dashboard](https://dashboard.web3auth.io).
+
+## Choose a sign-in flow
+
+You can offer external wallets on their own or alongside social sign-ins. Configure the flow that fits
+your dapp from the [Embedded Wallets dashboard](https://dashboard.web3auth.io):
+
+- **Wallet aggregator only**, for users who already have a wallet.
+- **External wallets with social logins**, presented side by side in one flow.
+
+## Enable external wallets
+
+Go to the **Social Connections** section in the [dashboard](https://dashboard.web3auth.io), and enable **External Wallets**:
+
+<div align="center">
   <img
     src={ExternalWalletsToggle}
     alt="External Wallets Toggle"
@@ -29,20 +57,19 @@ To enable this feature, developers must first activate **External Wallets** from
   />
 </div>
 
-To choose which external wallets to enable, click the **Settings** icon next to the **External Wallets** toggle in the Social Connections section of the [dashboard](https://dashboard.web3auth.io).
+Select the **Settings** icon next to the **External Wallets** toggle, and choose which external wallets to enable.
+You can choose from wide range of wallets:
 
-:::note
-
-MetamMask Wallet is enabled by default and cannot be disabled.
-
-:::
-
-A wide range of wallets are available to choose from.
-
-<div style={{ display: 'flex', margin: '20px 0' }}>
+<div align="center">
   <img
     src={ExternalWalletsSelectWallets}
     style={{ alignSelf: 'center', maxWidth: '100%' }}
     alt="External Wallets Select Wallets"
   />
 </div>
+
+:::note
+
+MetaMask is enabled by default and cannot be disabled.
+
+:::

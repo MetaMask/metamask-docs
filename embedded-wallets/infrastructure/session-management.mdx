@@ -1,0 +1,41 @@
+---
+title: Session management
+description: 'How session management works in MetaMask Embedded Wallets, including session keys, secure storage, and the restoration flow.'
+---
+
+Embedded Wallets SDKs maintain user session state so users don't have to sign in every time they return to your dapp.
+A session is created at sign-in, persisted securely on the user's device, and restored automatically on the next visit.
+
+Session management offers several benefits:
+
+- **User experience:** Users sign in once and skip repeated authentication for the duration of the session.
+- **Performance:** Session restoration completes in milliseconds.
+- **Simple integration:** Session handling is built in to the SDKs, with minimal impact on your sign-in flow.
+
+:::tip Configure session duration
+
+Session lifetime is configured per project in the [Session management](../dashboard/advanced/session-management.mdx) page of the Embedded Wallets dashboard.
+
+:::
+
+## Session key
+
+When a user signs in, the SDK generates a unique session key.
+The user's session state is encrypted with this key and stored on the Embedded Wallets metadata server.
+
+## Secure storage
+
+The SDK stores the session key in the platform's secure local storage:
+
+- **Web:** browser local storage.
+- **Android:** encrypted shared preferences.
+- **iOS:** keychain services.
+
+## Restoration
+
+When the user returns to your dapp, the SDK automatically restores the session:
+
+1. **Retrieve the session key.** The SDK reads the session key from secure storage.
+2. **Request the encrypted state.** The SDK fetches the encrypted user state from the Embedded Wallets metadata server.
+3. **Decrypt the state.** The SDK decrypts the user state with the session key.
+4. **Fall back to sign-in.** If no valid session exists, the user is prompted to authenticate again.
