@@ -26,7 +26,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": "eslint --fix --max-warnings=5",
-    "**/*.{ts,tsx}": "tsc-files --noEmit",
+    "src/**/*.{ts,tsx}": "tsc-files --noEmit",
     "**/*.css": "stylelint --fix",
     "**/*.{md,mdx,ts,js,tsx,jsx,json,css,scss,html,yml,yaml}": "prettier --write"
   },

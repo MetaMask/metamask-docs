@@ -1,3 +1,4 @@
+/// <reference path="../../globals.d.ts" />
 import React, { useState } from 'react'
 import styles from './styles.module.css'
 
@@ -114,14 +115,6 @@ export default function FeedbackWidget(): React.ReactNode {
 
     const reasonText = isOtherSelected ? reason.trim() : ''
 
-    window.dataLayer?.push({
-      event: 'docs_feedback',
-      page_url: window.location.pathname,
-      rating,
-      option: selectedOption,
-      reason: reasonText,
-    })
-
     try {
       const res = await fetch('/api/docs-feedback', {
         method: 'POST',
@@ -137,6 +130,13 @@ export default function FeedbackWidget(): React.ReactNode {
         const body = await res.json().catch(() => null)
         throw new Error(body?.error || `Request failed (${res.status})`)
       }
+      window.dataLayer?.push({
+        event: 'docs_feedback',
+        page_url: window.location.pathname,
+        rating,
+        option: selectedOption,
+        reason: reasonText,
+      })
     } catch (err) {
       setErrorMsg(
         err instanceof Error ? err.message : 'Something went wrong. Please try again later.'

@@ -5,6 +5,7 @@ import { GoogleAuth } from 'google-auth-library'
 interface FeedbackBody {
   page_url: string
   rating: 'yes' | 'no'
+  option?: string
   reason?: string
 }
 
@@ -71,7 +72,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'Invalid or missing JSON body' })
   }
 
-  const { page_url: pageUrl, rating, reason } = req.body as Partial<FeedbackBody>
+  const { page_url: pageUrl, rating, option, reason } = req.body as Partial<FeedbackBody>
 
   if (
     typeof pageUrl !== 'string' ||
@@ -82,6 +83,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'page_url and rating (yes/no) are required' })
   }
 
+  if (option !== undefined && typeof option !== 'string') {
+    return res.status(400).json({ error: 'option must be a string' })
+  }
+
   if (reason !== undefined && typeof reason !== 'string') {
     return res.status(400).json({ error: 'reason must be a string' })
   }
@@ -90,10 +95,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(400).json({ error: 'invalid page_url' })
   }
 
+  const cleanOption = option ? sanitize(option) : ''
   const cleanReason = reason ? sanitize(reason) : ''
+  const feedbackDetail = cleanReason || cleanOption
 
-  if (rating === 'no' && !cleanReason) {
-    return res.status(400).json({ error: 'reason is required for negative feedback' })
+  if (rating === 'no' && !feedbackDetail) {
+    return res.status(400).json({ error: 'option or reason is required for negative feedback' })
   }
 
   const ts = new Date().toISOString()
@@ -103,7 +110,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ts,
       pageUrl,
       rating,
-      cleanReason,
+      feedbackDetail,
       getDeviceType((req.headers['user-agent'] as string) ?? ''),
     ])
   } catch (err) {
