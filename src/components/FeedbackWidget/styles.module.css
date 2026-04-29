@@ -138,3 +138,74 @@
   color: var(--ifm-color-danger, var(--ifm-color-emphasis-600));
   margin: 12px 0 0;
 }
+
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.radioInput {
+  flex-shrink: 0;
+  margin-top: 3px;
+  width: 16px !important;
+  height: 16px !important;
+  appearance: auto !important;
+  accent-color: var(--ifm-color-primary);
+  cursor: pointer;
+  border: revert !important;
+}
+
+.optionText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.optionLabel {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--ifm-color-content);
+  line-height: 150%;
+}
+
+.optionDescription {
+  font-size: 1.3rem;
+  color: var(--ifm-color-content-secondary);
+  line-height: 150%;
+}
+
+.inlineTextarea {
+  display: block;
+  box-sizing: border-box;
+  appearance: none;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  font-size: 1.4rem;
+  color: var(--ifm-color-content);
+  background: var(--ifm-background-surface-color) !important;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  border-radius: 8px;
+  font-family: var(--ifm-font-family-base);
+  resize: vertical;
+  line-height: 1.6;
+  outline: none;
+}
+
+.inlineTextarea::placeholder {
+  color: var(--ifm-color-emphasis-500);
+}
+
+.inlineTextarea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary) !important;
+}

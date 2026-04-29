@@ -2,7 +2,69 @@ import React, { useState } from 'react'
 import styles from './styles.module.css'
 
 type Rating = 'yes' | 'no' | null
-type Phase = 'initial' | 'comment' | 'submitted'
+type Phase = 'initial' | 'reason' | 'submitted'
+
+interface FeedbackOption {
+  value: string
+  label: string
+  description: string
+}
+
+const YES_OPTIONS: FeedbackOption[] = [
+  {
+    value: 'accurate',
+    label: 'Accurate',
+    description: 'Accurately describes the product or feature.',
+  },
+  {
+    value: 'solved',
+    label: 'Solved my problem',
+    description: 'Helped me resolve an issue.',
+  },
+  {
+    value: 'easy',
+    label: 'Easy to understand',
+    description: 'Easy to follow and comprehend.',
+  },
+  {
+    value: 'helpful',
+    label: 'Helped me decide to use the product',
+    description: 'Convinced me to adopt the product or feature.',
+  },
+  {
+    value: 'other',
+    label: 'Another reason',
+    description: '',
+  },
+]
+
+const NO_OPTIONS: FeedbackOption[] = [
+  {
+    value: 'inaccurate',
+    label: 'Inaccurate',
+    description: "Doesn't accurately describe the product or feature.",
+  },
+  {
+    value: 'missing-info',
+    label: "Couldn't find what I was looking for",
+    description: 'Missing important information.',
+  },
+  {
+    value: 'hard-to-understand',
+    label: 'Hard to understand',
+    description: 'Too complicated or unclear.',
+  },
+  {
+    value: 'code-errors',
+    label: 'Code sample errors',
+    description: 'One or more code samples are incorrect.',
+  },
+  {
+    value: 'other',
+    label: 'Another reason',
+    description: '',
+  },
+]
 
 function stripHtml(text: string): string {
   let prev = text
@@ -29,27 +91,35 @@ declare global {
 export default function FeedbackWidget(): React.ReactNode {
   const [rating, setRating] = useState<Rating>(null)
   const [phase, setPhase] = useState<Phase>('initial')
+  const [selectedOption, setSelectedOption] = useState('')
   const [reason, setReason] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
-  const reasonIsEmpty = !sanitizeReason(reason)
+  const options = rating === 'yes' ? YES_OPTIONS : NO_OPTIONS
+  const isOtherSelected = selectedOption === 'other'
+  const canSubmit = selectedOption !== '' && (!isOtherSelected || sanitizeReason(reason).length > 0)
 
   const handleRating = (selected: Rating) => {
     setRating(selected)
-    setPhase('comment')
+    setSelectedOption('')
+    setReason('')
+    setPhase('reason')
   }
 
   const handleSubmit = async () => {
-    if (rating === 'no' && reasonIsEmpty) return
+    if (!canSubmit) return
     setSubmitting(true)
     setErrorMsg('')
+
+    const reasonText = isOtherSelected ? reason.trim() : ''
 
     window.dataLayer?.push({
       event: 'docs_feedback',
       page_url: window.location.pathname,
       rating,
-      reason: reason.trim(),
+      option: selectedOption,
+      reason: reasonText,
     })
 
     try {
@@ -59,7 +129,8 @@ export default function FeedbackWidget(): React.ReactNode {
         body: JSON.stringify({
           page_url: window.location.pathname,
           rating,
-          reason: reason.trim(),
+          option: selectedOption,
+          reason: reasonText,
         }),
       })
       if (!res.ok) {
@@ -102,23 +173,45 @@ export default function FeedbackWidget(): React.ReactNode {
         </>
       )}
 
-      {phase === 'comment' && (
+      {phase === 'reason' && (
         <div className={styles.commentSection}>
-          <label htmlFor="feedback-reason" className={styles.label}>
-            {rating === 'yes' ? 'What worked well? (optional)' : 'What went wrong?'}
-          </label>
-          <textarea
-            id="feedback-reason"
-            className={styles.textarea}
-            value={reason}
-            onChange={e => setReason(e.target.value)}
-            placeholder={
-              rating === 'yes' ? 'Tell us what you liked...' : 'Tell us what we can improve...'
-            }
-            maxLength={1000}
-            rows={3}
-            required={rating === 'no'}
-          />
+          <p className={styles.label}>
+            {rating === 'yes' ? 'What worked well?' : 'What went wrong?'}
+          </p>
+          <div className={styles.optionList} role="radiogroup">
+            {options.map(opt => (
+              <label key={opt.value} className={styles.option}>
+                <input
+                  type="radio"
+                  name="feedback-option"
+                  value={opt.value}
+                  checked={selectedOption === opt.value}
+                  onChange={() => setSelectedOption(opt.value)}
+                  className={styles.radioInput}
+                />
+                <span className={styles.optionText}>
+                  <span className={styles.optionLabel}>{opt.label}</span>
+                  {opt.description && (
+                    <span className={styles.optionDescription}>{opt.description}</span>
+                  )}
+                  {opt.value === 'other' && isOtherSelected && (
+                    <textarea
+                      className={styles.inlineTextarea}
+                      value={reason}
+                      onChange={e => {
+                        e.stopPropagation()
+                        setReason(e.target.value)
+                      }}
+                      onClick={e => e.stopPropagation()}
+                      placeholder="Tell us more..."
+                      maxLength={1000}
+                      rows={7}
+                    />
+                  )}
+                </span>
+              </label>
+            ))}
+          </div>
           {errorMsg && (
             <p className={styles.error} role="alert">
               {errorMsg}
@@ -129,7 +222,7 @@ export default function FeedbackWidget(): React.ReactNode {
               type="button"
               className={styles.submitBtn}
               onClick={handleSubmit}
-              disabled={submitting || (rating === 'no' && reasonIsEmpty)}>
+              disabled={submitting || !canSubmit}>
               {submitting ? 'Sending...' : errorMsg ? 'Try again' : 'Submit'}
             </button>
           </div>
