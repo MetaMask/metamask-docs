@@ -38,7 +38,7 @@ that the rest of your application has access to the Wagmi's and TanStack's conte
 This will allow every component inside the provider to use the Wagmi hooks.
 
 The example uses the [MetaMask Connect](https://wagmi.sh/react/api/connectors/metaMask) connector.
-For the advance configuration, see [Wagmi's createConfig API reference](https://wagmi.sh/react/api/createConfig).
+For an advanced configuration, see Wagmi's [`createConfig`](https://wagmi.sh/react/api/createConfig) API reference.
 
 <Tabs>
 <TabItem value = "provider.ts">

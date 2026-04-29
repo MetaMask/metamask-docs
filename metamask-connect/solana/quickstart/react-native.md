@@ -243,8 +243,8 @@ you will get `crypto.getRandomValues is not a function`.
 
 ### 6. Use MetaMask Connect with Solana
 
-Initialize the multichain client and use `invokeMethod` to interact with Solana.
-`mobile.preferredOpenLink` is **required**; it tells MetaMask Connect how to open deeplinks to the MetaMask
+Initialize the multichain client using [`createMultichainClient`](../../multichain/reference/methods.md#createmultichainclient), and interact with Solana using [`invokeMethod`](../../multichain/reference/methods.md#invokemethod).
+`mobile.preferredOpenLink` is required; it tells MetaMask Connect how to open deeplinks to the MetaMask
 mobile app:
 
 ```tsx
@@ -434,7 +434,7 @@ Devnet and testnet require [MetaMask Flask](https://metamask.io/flask/). Product
 
 ## Next steps
 
-- [Send a legacy Solana transaction.](../guides/send-legacy-transaction.md)
-- [Send a versioned Solana transaction.](../guides/send-versioned-transaction.md)
+- [Send a legacy Solana transaction.](../guides/send-transactions/legacy.md)
+- [Send a versioned Solana transaction.](../guides/send-transactions/versioned.md)
 - [Sign a Solana message.](../guides/sign-data/sign-message.md)
 - [Troubleshoot bundler polyfill issues.](../../troubleshooting/metro-polyfill-issues.md)

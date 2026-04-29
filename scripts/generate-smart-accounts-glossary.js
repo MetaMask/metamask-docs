@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const prettier = require('prettier')
 
 const rootDir = path.resolve(__dirname, '..')
 const glossaryJsonPath = path.join(rootDir, 'src/lib/glossary.json')
@@ -44,17 +43,18 @@ function buildGlossaryMdx(terms) {
   return `${lines.join('\n')}\n`
 }
 
-async function main() {
+function main() {
   const terms = loadGlossaryTerms()
-  let mdx = buildGlossaryMdx(terms)
-  mdx = await prettier.format(mdx, { filepath: glossaryMdxPath })
+  const mdx = buildGlossaryMdx(terms)
   fs.writeFileSync(glossaryMdxPath, mdx, 'utf8')
   console.log(
     `Generated ${path.relative(rootDir, glossaryMdxPath)} from ${path.relative(rootDir, glossaryJsonPath)} (${terms.length} terms).`
   )
 }
 
-main().catch(err => {
+try {
+  main()
+} catch (err) {
   console.error(err)
   process.exit(1)
-})
+}

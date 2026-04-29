@@ -1,6 +1,6 @@
 ---
 description: Product-specific guidance for MetaMask Connect documentation, including terminology, CAIP standards, and content organization.
-globs: ["metamask-connect/**/*.md", "metamask-connect/**/*.mdx"]
+globs: metamask-connect/**/*.md,metamask-connect/**/*.mdx
 alwaysApply: false
 ---
 

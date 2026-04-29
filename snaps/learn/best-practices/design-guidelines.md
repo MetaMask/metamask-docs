@@ -123,7 +123,7 @@ on small screens.
 
 Use a descriptive name to help users understand how they benefit from installing your Snap, and
 increase the likelihood that they will install and use it.
-Don't use the word "Snap" in your name—your name should be specific and memorable, differentiating
+Don't use the word "Snap" in your name; your name should be specific and memorable, differentiating
 your Snap from others.
 For example:
 

@@ -134,9 +134,9 @@ Ensures that the `args` provided when redeeming the delegation are equal to the 
 
 ### Parameters
 
-| Name   | Type  | Required | Description                                                              |
-| ------ | ----- | -------- | ------------------------------------------------------------------------ |
-| `args` | `Hex` | Yes      | The expected args that must match exactly when redeeming the delegation. |
+| Name   | Type  | Required | Description                                                                   |
+| ------ | ----- | -------- | ----------------------------------------------------------------------------- |
+| `args` | `Hex` | Yes      | The expected arguments that must match exactly when redeeming the delegation. |
 
 ### Example
 
@@ -209,7 +209,8 @@ const caveats = [
 
 ## `erc1155BalanceChange`
 
-Ensures that the recipient's ERC-1155 token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
+Ensures that the recipient's ERC-1155 token balance has changed within the allowed bounds
+(either increased by a minimum or decreased by a maximum specified amount).
 
 <GlossaryTerm term="Caveat enforcer" /> contract: [`ERC1155BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC1155BalanceChangeEnforcer.sol)
 
@@ -242,7 +243,8 @@ const caveats = [
 
 ## `erc20BalanceChange`
 
-Ensures that the recipient's ERC-20 token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
+Ensures that the recipient's ERC-20 token balance has changed within the allowed bounds
+(either increased by a minimum or decreased by a maximum specified amount).
 
 <GlossaryTerm term="Caveat enforcer" /> contract: [`ERC20BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC20BalanceChangeEnforcer.sol)
 
@@ -250,7 +252,7 @@ Ensures that the recipient's ERC-20 token balance has changed within the allowed
 
 | Name           | Type                | Required | Description                                                                                                                                                                                         |
 | -------------- | ------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokenAddress` | `Address`           | Yes      | The ERC-20 token contract addres.                                                                                                                                                                   |
+| `tokenAddress` | `Address`           | Yes      | The ERC-20 token contract address.                                                                                                                                                                  |
 | `recipient`    | `Address`           | Yes      | The address on which the checks will be applied.                                                                                                                                                    |
 | `balance`      | `bigint`            | Yes      | The amount by which the balance must be changed.                                                                                                                                                    |
 | `changeType`   | `BalanceChangeType` | Yes      | The balance change type for the ERC-20 token. Specifies whether the balance should have increased or decreased. Valid parameters are `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`. |
@@ -381,7 +383,7 @@ const caveats = [
 
 ## `erc721BalanceChange`
 
-Ensures that the recipient's ERC-721 token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
+Ensures that the recipient's ERC-721 token balance has changed within the allowed bounds (either increased by a minimum or decreased by a maximum specified amount).
 
 <GlossaryTerm term="Caveat enforcer" /> contract: [`ERC721BalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ERC721BalanceChangeEnforcer.sol)
 
@@ -389,7 +391,7 @@ Ensures that the recipient's ERC-721 token balance has changed within the allowe
 
 | Name           | Type                | Required | Description                                                                                                                                                                                          |
 | -------------- | ------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokenAddress` | `Address`           | Yes      | The ERC-721 token contract addres.                                                                                                                                                                   |
+| `tokenAddress` | `Address`           | Yes      | The ERC-721 token contract address.                                                                                                                                                                  |
 | `recipient`    | `Address`           | Yes      | The address on which the checks will be applied.                                                                                                                                                     |
 | `balance`      | `bigint`            | Yes      | The amount by which the balance must be changed.                                                                                                                                                     |
 | `changeType`   | `BalanceChangeType` | Yes      | The balance change type for the ERC-721 token. Specifies whether the balance should have increased or decreased. Valid parameters are `BalanceChangeType.Increase` and `BalanceChangeType.Decrease`. |
@@ -533,7 +535,7 @@ const caveats = [
 ## `exactExecutionBatch`
 
 Verifies that each execution in the batch matches the expected
-execution parameters—including target, value, and calldata.
+execution parameters, including target, value, and calldata.
 
 <GlossaryTerm term="Caveat enforcer" /> contract: [`ExactExecutionBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ExactExecutionBatchEnforcer.sol)
 
@@ -680,7 +682,7 @@ const caveats = [
 
 ## `nativeBalanceChange`
 
-Ensures that the recipient's native token balance has changed within the allowed bounds—either increased by a minimum or decreased by a maximum specified amount.
+Ensures that the recipient's native token balance has changed within the allowed bounds (either increased by a minimum or decreased by a maximum specified amount).
 
 <GlossaryTerm term="Caveat enforcer" /> contract: [`NativeBalanceChangeEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/NativeBalanceChangeEnforcer.sol)
 
@@ -930,7 +932,7 @@ Ensures validation of a batch consisting of exactly two transactions:
 
 1. The first transaction must call a specific target contract with predefined calldata.
 2. The second transaction must be an ERC-20 token transfer that matches specified
-   parameters—including the ERC-20 token contract address, amount, and recipient.
+   parameters, including the ERC-20 token contract address, amount, and recipient.
 
 <GlossaryTerm term="Caveat enforcer" /> contract: [`SpecificActionERC20TransferBatchEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/SpecificActionERC20TransferBatchEnforcer.sol)
 

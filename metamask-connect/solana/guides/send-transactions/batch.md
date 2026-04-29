@@ -23,7 +23,13 @@ batch token transfers, or multi-step program interactions.
 
 ## Prerequisites
 
-Set up a Solana client and connect to the user's wallet:
+Follow Step 1 of the [quickstart](../../quickstart/javascript.md) to install the Solana client.
+
+## Steps
+
+### 1. Initialize and connect
+
+Initialize a Solana client using [`createSolanaClient`](../../reference/methods.md#createsolanaclient) and connect to the user's wallet using [`getWallet`](../../reference/methods.md#getwallet) and [`standard:connect`](../../reference/methods.md#supported-wallet-standard-features):
 
 ```javascript
 import { createSolanaClient } from '@metamask/connect-solana'
@@ -49,9 +55,7 @@ const publicKey = new PublicKey(account.address)
 const connection = new Connection('https://solana-devnet.infura.io/v3/<YOUR_INFURA_API_KEY>')
 ```
 
-## Build and send batch transactions
-
-### 1. Build the transactions
+### 2. Build the transactions
 
 Construct each transaction with a new block hash and fee payer.
 Serialize each with `verifySignatures: false` since the wallet adds signatures:
@@ -76,9 +80,9 @@ const serializedTransactions = recipients.map(recipient => {
 })
 ```
 
-### 2. Sign and send all transactions
+### 3. Sign and send all transactions
 
-Use the `solana:signAndSendAllTransactions` feature to submit the batch:
+Use the [`solana:signAndSendAllTransactions`](../../reference/methods.md#supported-wallet-standard-features) feature to submit the batch:
 
 ```javascript
 const batchFeature = wallet.features['solana:signAndSendAllTransactions']
@@ -90,7 +94,7 @@ const results = await batchFeature.signAndSendAllTransactions({
 })
 ```
 
-### 3. Confirm each transaction
+### 4. Confirm each transaction
 
 Always confirm transactions before updating the UI:
 
@@ -114,6 +118,8 @@ for (const { signature } of results) {
 ```
 
 ## Error handling
+
+When sending batch transactions, handle common errors:
 
 ```javascript
 try {
@@ -145,7 +151,7 @@ try {
 
 ## Next steps
 
-- [Send a legacy transaction](send-legacy-transaction.md) for single transactions.
-- [Send a versioned transaction](send-versioned-transaction.md) for transactions with Address
+- [Send a legacy transaction](legacy.md) for single transactions.
+- [Send a versioned transaction](versioned.md) for transactions with Address
   Lookup Tables.
-- [MetaMask Connect Solana methods](../reference/methods.md) for the full API reference.
+- [MetaMask Connect Solana methods](../../reference/methods.md) for the full API reference.

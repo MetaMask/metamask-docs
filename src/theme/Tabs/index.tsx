@@ -1,22 +1,19 @@
-import React, { cloneElement, type ReactElement } from 'react'
+import React, { isValidElement, type ReactElement, type ReactNode } from 'react'
 import clsx from 'clsx'
+import { ThemeClassNames } from '@docusaurus/theme-common'
 import {
   useScrollPositionBlocker,
   useTabs,
+  useTabsContextValue,
   sanitizeTabsChildren,
-  type TabItemProps,
+  TabsProvider,
 } from '@docusaurus/theme-common/internal'
 import useIsBrowser from '@docusaurus/useIsBrowser'
 import type { Props } from '@theme/Tabs'
 import styles from './styles.module.scss'
 
-function TabList({
-  className,
-  block,
-  selectedValue,
-  selectValue,
-  tabValues,
-}: Props & ReturnType<typeof useTabs>) {
+function TabList({ className }: { className?: string }) {
+  const { selectedValue, selectValue, tabValues, block } = useTabs()
   const tabRefs: (HTMLLIElement | null)[] = []
   const { blockElementScrollPositionUntilNextRender } = useScrollPositionBlocker()
 
@@ -67,129 +64,83 @@ function TabList({
       aria-orientation="horizontal"
       className={clsx(
         styles.tabs,
+        'tabs',
         {
           'tabs--block': block,
         },
         className
       )}>
-      {tabValues.map(tabValue => (
-        <TabListItem
-          key={tabValue.value}
-          value={tabValue.value}
-          label={tabValue.label}
-          attributes={tabValue.attributes}
-          selectedValue={selectedValue}
-          handleTabChange={handleTabChange}
-          handleKeydown={handleKeydown}
-          setRef={tabControl => tabRefs.push(tabControl)}
-        />
+      {tabValues.map(({ value, label, attributes }) => (
+        <li
+          role="tab"
+          tabIndex={selectedValue === value ? 0 : -1}
+          aria-selected={selectedValue === value}
+          key={value}
+          ref={ref => {
+            tabRefs.push(ref)
+          }}
+          onKeyDown={handleKeydown}
+          onClick={handleTabChange}
+          {...attributes}
+          className={clsx('tabs__item', styles.tabItem, attributes?.className as string, {
+            'tabs__item--active': selectedValue === value,
+          })}>
+          {label ?? value}
+        </li>
       ))}
     </ul>
   )
 }
 
-function TabListItem({
-  value,
-  label,
-  attributes,
-  selectedValue,
-  handleTabChange,
-  handleKeydown,
-  setRef,
+function TabContent({ children }: { children: ReactNode }) {
+  return <div>{children}</div>
+}
+
+function TabsContainer({
+  className,
+  children,
 }: {
-  value: string
-  label?: string
-  attributes?: { [key: string]: unknown; className?: string }
-  selectedValue: string
-  handleTabChange: (
-    event:
-      | React.FocusEvent<HTMLLIElement>
-      | React.MouseEvent<HTMLLIElement>
-      | React.KeyboardEvent<HTMLLIElement>
-  ) => void
-  handleKeydown: (event: React.KeyboardEvent<HTMLLIElement>) => void
-  setRef: (element: HTMLLIElement | null) => void
-}) {
+  className?: string
+  children: ReactNode
+}): ReactNode {
   return (
-    <li
-      role="tab"
-      tabIndex={selectedValue === value ? 0 : -1}
-      aria-selected={selectedValue === value}
-      ref={setRef}
-      onKeyDown={handleKeydown}
-      onClick={handleTabChange}
-      {...attributes}
-      className={clsx('tabs__item', styles.tabItem, attributes?.className as string, {
-        'tabs__item--active': selectedValue === value,
-      })}>
-      {label ?? value}
-    </li>
-  )
-}
-
-function TabContent({ lazy, children, selectedValue }: Props & ReturnType<typeof useTabs>) {
-  const childTabs = (Array.isArray(children) ? children : [children]).filter(
-    Boolean
-  ) as ReactElement<TabItemProps>[]
-  if (lazy) {
-    const selectedTabItem = childTabs.find(tabItem => tabItem.props.value === selectedValue)
-    if (!selectedTabItem) {
-      // fail-safe or fail-fast? not sure what's best here
-      return null
-    }
-    return cloneElement(selectedTabItem, { className: 'margin-top--md' })
-  }
-  return (
-    <div>
-      {childTabs.map((tabItem, i) =>
-        cloneElement(tabItem, {
-          key: i,
-          hidden: tabItem.props.value !== selectedValue,
-        })
-      )}
+    <div className={clsx(ThemeClassNames.tabs.container, 'tabs-container', styles.tabList)}>
+      <TabList className={className} />
+      <TabContent>{children}</TabContent>
     </div>
   )
 }
 
-function TabsComponent(props: Props): JSX.Element {
-  const tabs = useTabs(props)
-  /**
-   * Tabs and TabItems aren't rendered in a straightforward manner.
-   * Swizzling the TabItem component has no effect: the TabItem is used only for its data.
-   * The actual tab items are rendered by the TabList component above.
-   * Here we are adding custom styling to a tab by combining the tab values from the hook
-   * with the props of the TabItem.
-   */
-  const finalTabs = {
-    ...tabs,
-    tabValues: tabs.tabValues.map((tabValue, idx) => ({
-      ...tabValue,
-      attributes: {
-        ...tabValue.attributes,
-        className: clsx(tabValue.attributes?.className, {
-          [styles.flaskOnly]: props.children[idx]?.props.flaskOnly,
-          [styles.deprecated]: props.children[idx]?.props.deprecated,
-        }),
-      },
-    })),
-  }
-  return (
-    <div className={clsx('tabs-container', styles.tabList)}>
-      <TabList {...finalTabs} {...props} className={styles.tabs} />
-      <TabContent {...finalTabs} {...props} />
-    </div>
-  )
-}
-
-export default function Tabs(props: Props): JSX.Element {
+export default function Tabs(props: Props): ReactNode {
   const isBrowser = useIsBrowser()
+  const contextValue = useTabsContextValue(props)
+  const childItems = sanitizeTabsChildren(props.children)
+  const el = (idx: number) =>
+    isValidElement(childItems[idx]) ? (childItems[idx] as ReactElement) : null
+  const value = {
+    ...contextValue,
+    tabValues: contextValue.tabValues.map((tabValue, idx) => {
+      const child = el(idx)
+      return {
+        ...tabValue,
+        attributes: {
+          ...tabValue.attributes,
+          className: clsx(tabValue.attributes?.className, {
+            [styles.flaskOnly]: child?.props?.flaskOnly,
+            [styles.deprecated]: child?.props?.deprecated,
+          }),
+        },
+      }
+    }),
+  }
+
   return (
-    <TabsComponent
+    <TabsProvider
+      value={value}
       // Remount tabs after hydration
       // Temporary fix for https://github.com/facebook/docusaurus/issues/5653
-      key={String(isBrowser)}
-      {...props}>
-      {sanitizeTabsChildren(props.children)}
-    </TabsComponent>
+      key={String(isBrowser)}>
+      <TabsContainer className={props.className}>{childItems}</TabsContainer>
+    </TabsProvider>
   )
 }

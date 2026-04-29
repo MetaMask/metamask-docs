@@ -23,7 +23,7 @@ keywords:
 # Create a multichain dapp
 
 In this tutorial, you'll build a React dapp that connects to four networks (Ethereum, Linea, Base, and Solana) using MetaMask Connect Multichain.
-Your dapp will handle wallet login and logout, read balances across all four chains, sign messages, and send transactions on all four chains. You'll learn how to do the following:
+Your dapp will handle wallet sign-in and sign-out, read balances across all four chains, sign messages, and send transactions on all four chains. You'll learn how to do the following:
 
 - Set up a multichain session with a single connection prompt.
 - Read account balances across EVM networks and Solana.
@@ -80,7 +80,7 @@ Solana.
 
 ### 2. Initialize the multichain client
 
-Create a file `src/multichain.ts` to set up the client as a reusable singleton:
+Create a file `src/multichain.ts`, and initialize the client using [`createMultichainClient`](../reference/methods.md#createmultichainclient):
 
 ```typescript title="src/multichain.ts"
 import { createMultichainClient } from '@metamask/connect-multichain'
@@ -115,18 +115,18 @@ export async function getClient() {
 }
 ```
 
-`createMultichainClient` takes two configuration objects:
+Configure MetaMask Connect Multichain with the following options:
 
-- **`dapp`**: Your dapp's identity.
+- `dapp`: Your dapp's identity.
   MetaMask shows the `name` and `url` during the connection prompt so users know who is requesting
   access.
-- **`api.supportedNetworks`**: A map of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
+- `api.supportedNetworks`: A map of [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
   scope IDs to RPC endpoint URLs.
   Each entry tells the client which chains your dapp supports and where to send RPC requests.
 
 ### 3. Connect (sign-in)
 
-Call `connect` with the scopes you want.
+Call [`connect`](../reference/methods.md#connect) with the scopes you want.
 The user sees a single approval prompt for all four chains:
 
 ```typescript
@@ -166,21 +166,21 @@ const ethAddress = extractAddress(ethAccounts[0])
 
 ### 4. Disconnect (sign-out)
 
-To end the session and clear all authorizations:
+Call [`disconnect`](../reference/methods.md#disconnect) to end the session and clear all authorizations:
 
 ```typescript
 await client.disconnect()
 ```
 
 This revokes the active session
-([`wallet_revokeSession`](../reference/api.md#wallet_revokesession)).
+(`disconnect` wraps [`wallet_revokeSession`](../reference/api.md#wallet_revokesession)).
 The user will need to approve a new connection prompt to use your dapp again.
 
 ### 5. Fetch balances
 
 #### EVM balances
 
-Use [`invokeMethod`](../reference/api.md#wallet_invokemethod) with [`eth_getBalance`](../../evm/reference/json-rpc-api/eth_getBalance.mdx) to query the
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with [`eth_getBalance`](../../evm/reference/json-rpc-api/eth_getBalance.mdx) to query the
 balance on any EVM chain in the session.
 The result is a hex-encoded wei value:
 
@@ -241,7 +241,7 @@ const solBalance = await getSolBalance(solAccounts)
 
 #### EVM (`personal_sign`)
 
-To sign a message on an EVM chain, hex-encode the message and use [`personal_sign`](../../evm/reference/json-rpc-api/personal_sign.mdx):
+To sign a message on an EVM chain, hex-encode the message and use [`invokeMethod`](../reference/methods.md#invokemethod) with [`personal_sign`](../../evm/reference/json-rpc-api/personal_sign.mdx):
 
 ```typescript
 function toHex(str: string): string {
@@ -263,6 +263,8 @@ console.log('EVM signature:', signature)
 
 #### Solana (`solana_signMessage`)
 
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with `solana_signMessage` to sign a message on Solana:
+
 ```typescript
 const solAddress = extractAddress(solAccounts[0])
 const signature = await client.invokeMethod({
@@ -282,7 +284,7 @@ console.log('SOL signature:', signature)
 
 #### EVM transaction
 
-Use [`eth_sendTransaction`](../../evm/reference/json-rpc-api/eth_sendTransaction.mdx) to send a transaction on any EVM scope:
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with [`eth_sendTransaction`](../../evm/reference/json-rpc-api/eth_sendTransaction.mdx) to send a transaction on any EVM scope:
 
 ```typescript
 const fromAddress = extractAddress(ethAccounts[0])
@@ -308,7 +310,7 @@ The same address format and RPC method works across all EVM chains.
 
 #### Solana transaction
 
-Use `solana_signAndSendTransaction` with a base64-encoded transaction:
+Use [`invokeMethod`](../reference/methods.md#invokemethod) with `solana_signAndSendTransaction` to send a Solana base64-encoded transaction:
 
 ```typescript
 const result = await client.invokeMethod({
@@ -324,14 +326,14 @@ console.log('SOL tx signature:', result)
 ```
 
 Building a Solana transaction requires assembling instructions, setting a fee payer, and fetching a
-recent blockhash using `@solana/kit`.
-See the [Send transactions](../guides/send-transactions.md) guide for a complete example.
+recent block hash using `@solana/kit`.
+See [Send transactions](../guides/send-transactions.md) for a complete example.
 
 ## Full example
 
-Below is the complete source for the two main files.
+The following is the complete source for the two main files.
 After scaffolding the project (Step 1), replace the contents of these files, run `npm run dev`, and
-open the app in your browser.
+open the dapp in your browser.
 
 ```typescript title="src/multichain.ts"
 import { createMultichainClient } from '@metamask/connect-multichain'

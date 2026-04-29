@@ -173,7 +173,48 @@ const client = await createEVMClient({
 })
 ```
 
-### MetaMask wallet not appearing in Solana wallet adapter
+**Cause C:** A strict Content Security Policy (CSP) is blocking the QR code from rendering.
+The QR code embeds the MetaMask fox SVG as a `data:` URI.
+
+**Fix:** Allow the `data:` scheme in `img-src` and the MetaMask relay and analytics origins in
+`connect-src`.
+A minimal working policy looks like:
+
+```html
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
+    connect-src 'self' https://*.infura.io wss://mm-sdk-relay.api.cx.metamask.io https://mm-sdk-analytics.api.cx.metamask.io;
+    img-src 'self' data:;
+    style-src 'self' 'unsafe-inline';
+  " />
+```
+
+- `img-src 'self' data:` - Required for the fox SVG embedded in the QR code.
+- `wss://mm-sdk-relay.api.cx.metamask.io` - The relay used for remote (no-extension and mobile)
+  connections.
+- `https://mm-sdk-analytics.api.cx.metamask.io` - The default analytics endpoint emitted during the
+  connection lifecycle.
+- `style-src 'unsafe-inline'` - `@metamask/multichain-ui` injects component styles at runtime
+  inside Shadow DOM (Stencil).
+
+:::note Older versions
+In earlier package versions, the QR-code modal materialized the fox icon via an `XMLHttpRequest` on
+a `blob:` / `data:` URI, requiring `blob:` (and in some setups `data:`) in `connect-src`.
+Upgrade to `@metamask/connect-evm` 1.0.0, `@metamask/connect-solana` 1.0.0, or
+`@metamask/connect-multichain` 0.12.1 or later to remove this requirement — the fox SVG is now
+embedded directly as a `data:` URI without an extra request.
+A symptom on older versions looked like:
+
+`Refused to connect to 'data:image/svg+xml;base64,...' because it violates the following Content Security Policy directive: "connect-src 'self' https: wss:".`
+
+If you cannot upgrade, add `data: blob:` to `connect-src` as a fallback.
+:::
+
+For the full reference, see
+[Content Security Policy](https://github.com/MetaMask/connect-monorepo#content-security-policy) in `metamask/connect-monorepo`.
+
+### MetaMask wallet not appearing in Solana Wallet Adapter
 
 **Cause A:** `createSolanaClient` has not resolved before the `WalletProvider` renders.
 MetaMask uses the Wallet Standard auto-discovery protocol, but the wallet must be registered before

@@ -42,13 +42,15 @@ In Node.js, use the multichain core directly via `client.core.connect` and
 
 ### 1. Install MetaMask Connect Solana
 
+Install the Solana client in an existing Node.js project:
+
 ```bash npm2yarn
 npm install @metamask/connect-solana
 ```
 
 ### 2. Initialize MetaMask Connect Solana
 
-Create a file (for example, `index.mjs`) and initialize the client.
+Create a file (`index.mjs`) and initialize the client using [`createSolanaClient`](../reference/methods.md#createsolanaclient).
 In Node.js, there is no `window.location`, so you must set `dapp.url` explicitly.
 The `supportedNetworks` map uses network names (`mainnet`, `devnet`) as keys:
 
@@ -71,8 +73,8 @@ const solanaClient = await createSolanaClient({
 })
 ```
 
-:::info Asynchronous client
-[`createSolanaClient`](../reference/methods.md#createsolanaclient) returns a promise. Always `await` it before using the client.
+:::info Async client
+`createSolanaClient` returns a promise. Always `await` it before using the client.
 The client uses a singleton multichain core under the hood; calling it multiple times
 returns the same underlying session.
 :::
@@ -116,6 +118,8 @@ console.log('Signature:', result)
 ```
 
 ### 5. Disconnect
+
+Use [`disconnect`](../reference/methods.md#disconnect) to disconnect all scopes and end the session.
 
 ```javascript
 await solanaClient.disconnect()
@@ -209,7 +213,7 @@ node index.mjs
 
 ## Next steps
 
-- [Send a legacy Solana transaction.](../guides/send-legacy-transaction.md)
-- [Send a versioned Solana transaction.](../guides/send-versioned-transaction.md)
+- [Send a legacy Solana transaction.](../guides/send-transactions/legacy.md)
+- [Send a versioned Solana transaction.](../guides/send-transactions/versioned.md)
 - [Sign a Solana message.](../guides/sign-data/sign-message.md)
 - [Use the multichain client](../../multichain/quickstart/nodejs.md) to connect to both EVM and Solana from a single session.

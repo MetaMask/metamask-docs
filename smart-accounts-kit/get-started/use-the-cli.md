@@ -1,5 +1,5 @@
 ---
-description: Get started with the MetaMask Smart Accounts Kit using the `@metamask/create-gator-app` CLI.
+description: Get started with the MetaMask Smart Accounts Kit using the CLI.
 sidebar_label: Use the CLI
 keywords: [CLI, delegation, smart accounts, template]
 ---

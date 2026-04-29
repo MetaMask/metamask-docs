@@ -1,7 +1,7 @@
 ---
 title: 'Web3Auth Embedded Wallets - MetaMask Connect Solana'
 sidebar_label: Embedded Wallets SDK
-description: Integrate MetaMask with Web3Auth Embedded Wallets SDK for Solana, enabling email and social login alongside MetaMask wallet support.
+description: Integrate MetaMask with Web3Auth Embedded Wallets SDK for Solana, enabling email and social sign-in alongside MetaMask wallet support.
 toc_max_heading_level: 3
 keywords:
   [
@@ -14,7 +14,7 @@ keywords:
     web3auth solana,
     embedded wallet,
     seedless,
-    social login,
+    social sign-in,
   ]
 ---
 
@@ -32,7 +32,7 @@ This quickstart gets you up and running with MetaMask SDK inside [Embedded Walle
 
 <!-- <p align="center">
   <a href="https://metamask-web3auth-demo.vercel.app/" target="_blank">
-    <img src={require("../_assets/quickstart-web3auth.png").default} alt="MetaMask Connect Solana with Web3Auth embedded wallet login interface" width="600px" class="appScreen" />
+    <img src={require("../_assets/quickstart-web3auth.png").default} alt="MetaMask Connect Solana with Web3Auth embedded wallet sign-in interface" width="600px" class="appScreen" />
   </a>
 </p> -->
 
@@ -278,6 +278,6 @@ export const SendTransaction = () => {
 
 ## Next steps
 
-- [Send a legacy transaction](../guides/send-legacy-transaction.md) to transfer SOL using MetaMask Connect.
+- [Send a legacy transaction](../guides/send-transactions/legacy.md) to transfer SOL using MetaMask Connect.
 - [Sign in with Solana (SIWS)](../guides/sign-data/siws.md) to authenticate users with their wallet instead of a username and password.
 - [MetaMask Connect Solana methods](../reference/methods.md) for the full API reference.

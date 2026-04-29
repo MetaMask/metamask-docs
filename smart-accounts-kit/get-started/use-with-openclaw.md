@@ -56,11 +56,11 @@ The skill provides access to the following commands:
 | `init`    | Generate a private key and save config.      |
 | `create`  | Upgrade an EOA to an EIP-7702 smart account. |
 | `show`    | Display the EOA address.                     |
-| `status`  | Check config and on chain account status.    |
+| `status`  | Check config and onchain account status.     |
 | `balance` | Show native or ERC-20 balance.               |
 | `grant`   | Create, sign, and store a delegation.        |
 | `redeem`  | Redeem a delegation using an action type.    |
-| `revoke`  | Revoke a delegation on chain.                |
+| `revoke`  | Revoke a delegation onchain.                 |
 | `inspect` | View delegations for your account.           |
 
 ## Smart Accounts Kit skill

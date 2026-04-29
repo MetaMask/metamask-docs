@@ -2,7 +2,6 @@ import React, { type ReactNode } from 'react'
 import clsx from 'clsx'
 import ErrorBoundary from '@docusaurus/ErrorBoundary'
 import { PageMetadata, SkipToContentFallbackId, ThemeClassNames } from '@docusaurus/theme-common'
-import { useKeyboardNavigation } from '@docusaurus/theme-common/internal'
 import { useLocation } from '@docusaurus/router'
 import SkipToContent from '@theme/SkipToContent'
 import AnnouncementBar from '@theme/AnnouncementBar'
@@ -24,8 +23,6 @@ export default function Layout(props: Props): ReactNode {
     title,
     description,
   } = props
-
-  useKeyboardNavigation()
 
   const location = useLocation()
   const subNavConfig = getSubNavConfigForPath(location.pathname)
