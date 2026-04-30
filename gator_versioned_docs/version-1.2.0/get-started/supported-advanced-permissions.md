@@ -16,6 +16,5 @@ emailing [hellogators@consensys.net](mailto:hellogators@consensys.net).
 | ------------------------------------------------------------------------------------------------------------------------ | ------------------ | -------------- | ----------- |
 | [ERC-20 periodic](../guides/advanced-permissions/use-permissions/erc20-token.md#erc-20-periodic-permission)              | >= v0.1.0          | >= v13.5.0     | >= v13.23.0 |
 | [ERC-20 stream](../guides/advanced-permissions/use-permissions/erc20-token.md#erc-20-stream-permission)                  | >= v0.1.0          | >= v13.5.0     | >= v13.23.0 |
-| [ERC-20 revocation](../guides/advanced-permissions/use-permissions/erc20-token.md#erc-20-revocation-permission)          | >= v0.3.0          | >= v13.14.0    | >= 13.18.1  |
 | [Native token periodic](../guides/advanced-permissions/use-permissions/native-token.md#native-token-periodic-permission) | >= v0.1.0          | >= v13.5.0     | >= v13.23.0 |
 | [Native token stream](../guides/advanced-permissions/use-permissions/native-token.md#native-token-stream-permission)     | >= v0.1.0          | >= v13.5.0     | >= v13.23.0 |
