@@ -37,7 +37,7 @@ When using MetaMask Connect EVM, ensure your dapp is production ready by focusin
 
 ## Reliable RPC endpoints
 
-- **Custom RPC setup** - Use production-grade RPC endpoints and custom API keys by signing up on [MetaMask Developer](https://developer.metamask.io/).
+- **Custom RPC setup** - Use production-grade RPC endpoints and custom API keys by signing up on [Infura](https://app.infura.io/).
   This improves reliability over public nodes.
 
 - **Configuration** - Configure your Wagmi (or MetaMask Connect EVM) setup with your custom RPC URL using environment variables.
