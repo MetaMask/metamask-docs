@@ -1,10 +1,10 @@
----
+---0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 description: Learn about MetaMask Smart Accounts.
 keywords: [MetaMask, smart accounts, account abstraction, ERC-4337]
 ---
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 # MetaMask Smart Accounts
-
+0xED699044C103691c01dADb60EbC9980Bfb9Ea906
 The Smart Accounts Kit enables you to create and manage MetaMask Smart Accounts.
 MetaMask Smart Accounts are [ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) smart contract accounts
 that support programmable account behavior and advanced features such as multi-signature approvals,
