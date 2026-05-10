@@ -131,7 +131,7 @@ A public endpoint that exposes the JSON Web Key Set (JWKS) used by Web3Auth to s
 Pass the request to the JWKS endpoint with your project ID as the identifier:
 
 ```
-https://api.web3auth.io/jwks?project_id=<YOUR_PROJECT_ID>
+https://api-auth.web3auth.io/jwks
 ```
 
 ##### Implementation example
@@ -141,7 +141,7 @@ import jwt from 'jsonwebtoken'
 import jwksClient from 'jwks-rsa'
 
 const client = jwksClient({
-  jwksUri: 'https://api.web3auth.io/jwks?project_id=YOUR_PROJECT_ID',
+  jwksUri: 'https://api-auth.web3auth.io/jwks',
 })
 
 function getKey(header, callback) {
@@ -152,13 +152,22 @@ function getKey(header, callback) {
 }
 
 // Verify token
-jwt.verify(token, getKey, options, (err, decoded) => {
-  if (err) {
-    console.error('Token verification failed:', err)
-  } else {
-    console.log('Token verified:', decoded)
-  }
-})
+jwt.verify(
+  token,
+  getKey,
+  {
+    algorithms: ['ES256'],
+    issuer: 'https://api-auth.web3auth.io',
+    audience: process.env.WEB3AUTH_CLIENT_ID,
+  },
+  (err, decoded) => {
+    if (err) {
+      console.error('Token verification failed:', err)
+    } else {
+      console.log('Token verified:', decoded)
+    }
+  },
+)
 ```
 
 ### Project verification key
@@ -187,13 +196,22 @@ YOUR_PROJECT_VERIFICATION_KEY_HERE
 -----END PUBLIC KEY-----`
 
 // Verify token with static key
-jwt.verify(token, PROJECT_VERIFICATION_KEY, { algorithms: ['RS256'] }, (err, decoded) => {
-  if (err) {
-    console.error('Token verification failed:', err)
-  } else {
-    console.log('Token verified:', decoded)
-  }
-})
+jwt.verify(
+  token,
+  PROJECT_VERIFICATION_KEY,
+  {
+    algorithms: ['ES256'],
+    issuer: 'https://api-auth.web3auth.io',
+    audience: process.env.WEB3AUTH_CLIENT_ID,
+  },
+  (err, decoded) => {
+    if (err) {
+      console.error('Token verification failed:', err)
+    } else {
+      console.log('Token verified:', decoded)
+    }
+  },
+)
 ```
 
 ## Project management

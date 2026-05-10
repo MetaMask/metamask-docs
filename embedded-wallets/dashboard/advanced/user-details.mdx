@@ -45,7 +45,7 @@ When **enabled**, the identity token includes comprehensive user profile informa
 
 ```json
 {
-  "iss": "https://api.web3auth.io",
+  "iss": "https://api-auth.web3auth.io",
   "sub": "user_unique_identifier",
   "aud": "your_client_id",
   "exp": 1640995200,
@@ -68,7 +68,7 @@ When **disabled**, the identity token contains only essential identification inf
 
 ```json
 {
-  "iss": "https://api.web3auth.io",
+  "iss": "https://api-auth.web3auth.io",
   "sub": "user_unique_identifier",
   "aud": "your_client_id",
   "exp": 1640995200,
@@ -83,7 +83,7 @@ When **userIdentifier is set to email**, only the user's email is included in th
 
 ```json
 {
-  "iss": "https://api.web3auth.io",
+  "iss": "https://api-auth.web3auth.io",
   "sub": "user_unique_identifier",
   "aud": "your_client_id",
   "exp": 1640995200,
@@ -106,7 +106,7 @@ async function processUserToken(idToken) {
   try {
     // Verify and decode the token
     const decoded = jwt.verify(idToken, publicKey, {
-      issuer: 'https://api.web3auth.io',
+      issuer: 'https://api-auth.web3auth.io',
       audience: 'your_client_id',
     })
 

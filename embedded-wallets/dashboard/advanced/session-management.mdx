@@ -258,7 +258,11 @@ import jwt from 'jsonwebtoken'
 // Validate session token
 function validateSession(token) {
   try {
-    const decoded = jwt.verify(token, publicKey)
+    const decoded = jwt.verify(token, publicKey, {
+      algorithms: ['ES256'],
+      issuer: 'https://api-auth.web3auth.io',
+      audience: process.env.WEB3AUTH_CLIENT_ID,
+    })
     const now = Math.floor(Date.now() / 1000)
 
     if (decoded.exp < now) {
