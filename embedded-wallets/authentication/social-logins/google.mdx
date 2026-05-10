@@ -22,7 +22,11 @@ To integrate Google Sign-In with Embedded Wallets, developers must first configu
 2. Paste the following URI as a redirect URI into the "Authorized redirect URIs" field.
    - `https://auth.web3auth.io/auth`
 
-   ![Google OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/google/google-app-redirect-uri.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/google/google-app-redirect-uri.png"
+     alt="Google OAuth2.0 App Dashboard"
+   />
 
 3. Obtain the OAuth Client ID from the [App on the Google Developer dashboard](https://console.developers.google.com/)
 
@@ -36,17 +40,7 @@ By default, Web3Auth uses its own pre-configured credentials for Google login.
 
 :::
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={GoogleToggle}
-    style={{
-      maxWidth: '800px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Toggle Google Connection on Dashboard"
-  />
-</div>
+<img className="docImg" src={GoogleToggle} alt="Toggle Google Connection on Dashboard" />
 
 Follow these steps to create a Google connection:
 
@@ -57,17 +51,7 @@ Follow these steps to create a Google connection:
 1. Enter the **Google Client ID**.
 1. Click the **Add Connection** button to save the settings.
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={GoogleConnection}
-    style={{
-      maxWidth: '600px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Google Connection"
-  />
-</div>
+<img className="docImg" src={GoogleConnection} alt="Google Connection" />
 
 ## Usage
 

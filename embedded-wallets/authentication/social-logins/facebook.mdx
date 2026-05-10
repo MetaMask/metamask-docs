@@ -19,16 +19,28 @@ To integrate Facebook with Web3Auth, developers must first create a Facebook App
 
 3. On the next screen, you'll be presented with different products you can integrate into your Facebook app. Click **"Set Up"** in the card representing the **Facebook Login** capability.
 
-   ![Facebook OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/facebook/facebook-login-setup.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/facebook/facebook-login-setup.png"
+     alt="Facebook OAuth2.0 App Dashboard"
+   />
 
 4. Paste the following as a redirect URI into the "Valid OAuth Redirect URIs" field.
    - https://auth.web3auth.io/auth
 
-   ![Facebook OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/facebook/facebook-login-settings-oauth.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/facebook/facebook-login-settings-oauth.png"
+     alt="Facebook OAuth2.0 App Dashboard"
+   />
 
 5. Obtain the "App ID" and "App Secret" from the **Settings > Basic** screen.
 
-   ![Facebook OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/facebook/facebook-app-id-secret.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/facebook/facebook-app-id-secret.png"
+     alt="Facebook OAuth2.0 App Dashboard"
+   />
 
 ## Step 2: Create a Facebook connection
 
@@ -40,17 +52,7 @@ By default, Web3Auth uses its own pre-configured credentials for Facebook login.
 
 :::
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={FacebookToggle}
-    style={{
-      maxWidth: '800px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Toggle Facebook Connection on Dashboard"
-  />
-</div>
+<img className="docImg" src={FacebookToggle} alt="Toggle Facebook Connection on Dashboard" />
 
 Follow these steps to create a Facebook connection:
 
@@ -62,17 +64,7 @@ Follow these steps to create a Facebook connection:
 1. Enter the **Facebook App Secret**.
 1. Click the **Add Connection** button to save the settings.
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={FacebookConnection}
-    style={{
-      maxWidth: '600px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Facebook Connection"
-  />
-</div>
+<img className="docImg" src={FacebookConnection} alt="Facebook Connection" />
 
 ## Usage
 

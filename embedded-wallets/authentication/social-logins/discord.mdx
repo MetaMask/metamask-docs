@@ -18,13 +18,21 @@ To integrate Discord with Web3Auth, developers must first create a Discord App v
 2. Navigate to **OAuth2** from the sidebar, and paste the following as Redirect URI into the "Redirect URI" field.
    - https://auth.web3auth.io/auth
 
-   ![Discord OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/discord/discord-redirect-uri.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/discord/discord-redirect-uri.png"
+     alt="Discord OAuth2.0 App Dashboard"
+   />
 
 3. Ensure you save your changes.
 
 4. Copy the **Client ID** from here. We will use this in the Embedded Wallets dashboard.
 
-   ![Discord OAuth2.0 App Client ID and Secret](/img/embedded-wallets/authentication/discord/discord-clientid-secret.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/discord/discord-clientid-secret.png"
+     alt="Discord OAuth2.0 App Client ID and Secret"
+   />
 
 ## Step 2: Create a Discord connection
 
@@ -36,17 +44,7 @@ By default, Web3Auth uses its own pre-configured credentials for Discord login.
 
 :::
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={DiscordToggle}
-    style={{
-      maxWidth: '800px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Toggle Discord Connection on Dashboard"
-  />
-</div>
+<img className="docImg" src={DiscordToggle} alt="Toggle Discord Connection on Dashboard" />
 
 Follow these steps to create a Discord connection:
 
@@ -57,17 +55,7 @@ Follow these steps to create a Discord connection:
 1. Enter the `Discord Client ID`.
 1. Click the **Add Connection** button to save the settings.
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={DiscordConnection}
-    style={{
-      maxWidth: '600px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Discord Connection"
-  />
-</div>
+<img className="docImg" src={DiscordConnection} alt="Discord Connection" />
 
 ## Usage
 
