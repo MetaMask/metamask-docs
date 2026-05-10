@@ -1,45 +1,40 @@
 ---
-title: Add Custom Chains to the Dashboard
+title: Add custom chains
 sidebar_label: Add custom chains
 image: 'img/metamaskog.jpg'
-description: 'Add Custom Chains | Embedded Wallets'
+description: 'Add custom chains in the MetaMask Developer Dashboard | Embedded Wallets'
 ---
 
-MetaMask Embedded Wallets (formerly Web3Auth) Web SDK v10 onwards does not need any additional setup on the code side for blockchain connections. This is handled on our updated Dashboard. You can use any chain from the extensive list of predefined chains and add more if needed by toggling them on.
+import AddCustomChain from '@site/static/img/embedded-wallets/dev-dashboard/add-custom-chain.png'
 
-::::note
+You can add any EVM-compatible chain to your project through the dashboard or by passing chain configuration directly to the SDK during initialization.
 
-The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plug and Play SDKs). Package names and APIs remain Web3Auth (for example, Web3Auth React SDK), and code snippets may reference `web3auth` identifiers.
+<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
+  <img
+    src={AddCustomChain}
+    style={{ alignSelf: 'center', maxWidth: '100%' }}
+    alt="Add custom chain form"
+  />
+</div>
 
-::::
+## Add a custom chain in the dashboard
 
-![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)
-
-## Add custom chains
-
-To add a custom chain:
-
-1. Go to the [dashboard](https://dashboard.web3auth.io).
-2. Click on the **Projects** section and select the project you want to add the custom chain to.
-3. Click on the **Chains & Networks** tab.
-4. Fill in the details of the chain you want to add such as LogoURL, Network Name.
-5. Then press the **Save Network** blue button at the bottom.
-
-![Adding Custom Chain](/img/embedded-wallets/connect-blockchain/add-a-chain-dashboard-v2.png)
+1. Go to the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Select your project, then click the **Chains & Networks** tab.
+3. Click **Add a Custom Network**.
+4. Fill in the chain details: Logo URL, Network Name, Currency Symbol, Chain ID, Block Explorer URL, and RPC URL.
+5. Click **Save Network**.
 
 ## Add chains in code (Web SDK)
 
-While chains can be configured through the dashboard, you can also override these settings in your code by specifying custom chains during SDK initialization.
-
-### Example
+You can also override or extend chain configuration in code using the `chains` parameter at SDK initialization. Only chains listed in the `chains` array will be available in the SDK.
 
 ```typescript title="App.tsx"
 import { Web3Auth, WEB3AUTH_NETWORK, CHAIN_NAMESPACES } from '@web3auth/modal'
 
-// Define custom chain configurations
 const evmChainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: '0xaa36a7', // Sepolia chainId in hex
+  chainId: '0xaa36a7', // Sepolia in hex
   rpcTarget: 'https://1rpc.io/sepolia',
   displayName: 'Ethereum Sepolia Testnet',
   blockExplorerUrl: 'https://sepolia.etherscan.io',
@@ -61,15 +56,16 @@ const arbitrumChainConfig = {
   logo: 'https://arbitrum.foundation/images/logo.png',
 }
 
-// Initialize Web3Auth with custom chains
 const web3auth = new Web3Auth({
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
+  clientId: '<YOUR_CLIENT_ID>',
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  chains: [evmChainConfig, arbitrumChainConfig], // Pass array of custom chains
-  defaultChainId: '0x66eee', // Set default chain by chainId
+  chains: [evmChainConfig, arbitrumChainConfig],
+  defaultChainId: '0x66eee', // which chain to use by default
 })
 ```
 
-By using the `chains` parameter, you can specify multiple chain configurations for your application, only provided chains will be used. The `defaultChainId` parameter allows you to set which chain should be used by default.
+:::note
 
-This approach gives you flexibility to dynamically configure chains in your code while maintaining the ease of dashboard configuration for your project.
+SDK package names and code identifiers (`@web3auth/modal`, `Web3Auth`, `WEB3AUTH_NETWORK`) are unchanged from the original Web3Auth SDK.
+
+:::

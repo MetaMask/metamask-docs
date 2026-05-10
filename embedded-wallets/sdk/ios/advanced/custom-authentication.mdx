@@ -18,7 +18,7 @@ This feature, with MFA turned off, can even make Embedded Wallets invisible to t
 
 :::info prerequisite
 
-To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://developer.metamask.io) with your desired configuration.
 
 :::
 
@@ -140,7 +140,7 @@ let web3Auth = try await Web3Auth(
     // focus-start
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from MetaMask Developer Dashboard
         typeOfLogin: TypeOfLogin.google,
         clientId: "YOUR_GOOGLE_CLIENT_ID",
       )
@@ -164,7 +164,7 @@ let web3Auth = try await Web3Auth(
     // focus-start
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from MetaMask Developer Dashboard
         typeOfLogin: TypeOfLogin.facebook,
         clientId: "YOUR_FACEBOOK_CLIENT_ID",
       )
@@ -189,7 +189,7 @@ let web3Auth = try await Web3Auth(
     // focus-start
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from MetaMask Developer Dashboard
         typeOfLogin: TypeOfLogin.jwt,
         clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
       )
@@ -301,7 +301,7 @@ let web3Auth = try await Web3Auth(
     //focus-start
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from Web3Auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from MetaMask Developer Dashboard
         typeOfLogin: TypeOfLogin.jwt,
         clientId: "YOUR_AUTH0_CLIENT_ID",
       )
@@ -344,7 +344,7 @@ let web3Auth = try await Web3Auth(
     // focus-start
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from MetaMask Developer Dashboard
         typeOfLogin: TypeOfLogin.jwt,
         clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable
       )

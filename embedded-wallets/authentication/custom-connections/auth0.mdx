@@ -8,8 +8,8 @@ import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 import Tiles from '@theme/Tiles'
 
-import CustomConnectionOptions from '@site/static/img/embedded-wallets/w3a-dashboard/authentication-custom-connections.png'
-import Auth0Connection from '@site/static/img/embedded-wallets/w3a-dashboard/auth0-connection.png'
+import CustomConnectionOptions from '@site/static/img/embedded-wallets/dev-dashboard/authentication-custom-connections.png'
+import Auth0Connection from '@site/static/img/embedded-wallets/dev-dashboard/auth0-connection.png'
 
 import JwtLoginAuth0 from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_auth0.mdx'
 import ImplicitLoginAuth0Google from '../../sdk/react/advanced/_custom-authentication-snippets/_implicit_login_auth0_google.mdx'
@@ -21,7 +21,7 @@ Auth0 supports a [wide set of social logins](https://marketplace.auth0.com/categ
 
 ## Create an Auth0 application
 
-To begin, developers must first create an Auth0 application specific to their project. This initial setup is essential before configuring the connection with Web3Auth. Once the Auth0 application is created, developers can proceed to establish an Auth0 connection within the [dashboard](https://dashboard.web3auth.io).
+To begin, developers must first create an Auth0 application specific to their project. This initial setup is essential before configuring the connection with Web3Auth. Once the Auth0 application is created, developers can proceed to establish an Auth0 connection within the [dashboard](https://developer.metamask.io).
 
 This integration allows users to authenticate through Auth0, while still benefiting from Web3Auth's key management and wallet abstraction features. For platform-specific implementation details or additional customization, developers are encouraged to refer to the [official Auth0 documentation](https://auth0.com/docs/quickstart/native#webapp).
 
@@ -70,7 +70,7 @@ export const Auth0Setup = [
 
 :::success Connect Auth0
 
-To use this feature, developers must go to the **Custom Connections** tab in the [dashboard](https://dashboard.web3auth.io).
+To use this feature, developers must go to the **Custom Connections** tab in the [dashboard](https://developer.metamask.io).
 
 :::
 
@@ -88,7 +88,7 @@ To use this feature, developers must go to the **Custom Connections** tab in the
 
 Follow these steps to create an Auth0 connection:
 
-1. Visit the [dashboard](https://dashboard.web3auth.io).
+1. Visit the [dashboard](https://developer.metamask.io).
 2. Go to the **Custom Connections** section.
 3. Click on the **Settings** icon near the Auth0 connection.
 4. Enter the `Auth Connection ID`.
@@ -208,7 +208,7 @@ Future<void> initPlatformState() async {
   // focus-start
   final loginConfig = HashMap<String, LoginConfigItem>();
   loginConfig['jwt'] = LoginConfigItem(
-    verifier: "VERIFIER-NAME", // get it from web3auth dashboard
+    verifier: "VERIFIER-NAME", // get it from MetaMask Developer Dashboard
     typeOfLogin: TypeOfLogin.jwt,
     name: "Web3Auth Flutter Auth0 Example",
     clientId: "AUTH0-CLIENT-ID" // auth0 client id

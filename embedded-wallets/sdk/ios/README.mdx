@@ -20,7 +20,7 @@ MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seaml
 
 ## Prerequisites
 
-- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+- Set up your project on the [Embedded Wallets dashboard](https://developer.metamask.io/)
 
 :::tip
 
@@ -62,7 +62,7 @@ pod 'Web3Auth', '~> 11.1.0'
 
 To use Embedded Wallets for iOS you need to allowlist your `bundleId` in your Embedded Wallets project.
 
-- Go to [Embedded Wallets developer dashboard](https://dashboard.web3auth.io), and create or open an existing Embedded Wallets project.
+- Go to [Embedded Wallets developer dashboard](https://developer.metamask.io), and create or open an existing Embedded Wallets project.
 - Allowlist `{bundleId}://auth` in the dashboard. This step is mandatory for the redirect to work.
 
 ## Initialize Embedded Wallets
@@ -71,7 +71,7 @@ To use Embedded Wallets for iOS you need to allowlist your `bundleId` in your Em
 
 To use Web3Auth for iOS you need to allowlist your `bundleId` in your Web3Auth project.
 
-- Go to [Embedded Wallets developer dashboard](https://dashboard.web3auth.io), and create or open an existing Embedded Wallets project.
+- Go to [Embedded Wallets developer dashboard](https://developer.metamask.io), and create or open an existing Embedded Wallets project.
 - Allowlist `{bundleId}://auth` in the developer dashboard. This step is mandatory for the redirect to work.
 
 ### 1. Create an Embedded Wallets instance
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
 
         // Configure Web3Auth
         web3Auth = Web3Auth(W3AInitParams(
-            clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+            clientId: "YOUR_WEB3AUTH_CLIENT_ID", // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
             network: .sapphire_mainnet, // or .sapphire_devnet
             redirectUrl: "com.yourapp.bundleid://auth"
         ))
@@ -182,7 +182,7 @@ web3Auth = Web3Auth(W3AInitParams(
     redirectUrl: "com.yourapp.bundleid://auth",
     loginConfig: [
       Web3AuthProvider.JWT.rawValue: .init(
-        verifier: "YOUR_VERIFIER_NAME", // Get it from web3auth dashboard
+        verifier: "YOUR_VERIFIER_NAME", // Get it from MetaMask Developer Dashboard
         typeOfLogin: TypeOfLogin.google,
         clientId: "YOUR_GOOGLE_CLIENT_ID",
       )

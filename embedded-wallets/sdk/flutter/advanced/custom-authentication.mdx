@@ -18,7 +18,7 @@ This feature, with MFA turned off, can make Embedded Wallets invisible to the en
 
 :::info prerequisite
 
-To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://developer.metamask.io) with your desired configuration.
 
 :::
 
@@ -177,7 +177,7 @@ Future<void> initWeb3Auth() async {
   // focus-start
   final loginConfig = new HashMap<String, LoginConfigItem>();
   loginConfig['google'] = LoginConfigItem(
-    verifier: "verifier-name", // get it from web3auth dashboard
+    verifier: "verifier-name", // get it from MetaMask Developer Dashboard
     typeOfLogin: TypeOfLogin.google,
     clientId: "google_client_id" // google's client id
   );
@@ -224,7 +224,7 @@ Future<void> initWeb3Auth() async {
   // focus-start
   final loginConfig = new HashMap<String, LoginConfigItem>();
   loginConfig['facebook'] = LoginConfigItem(
-    verifier: "verifier-name", // get it from web3auth dashboard
+    verifier: "verifier-name", // get it from MetaMask Developer Dashboard
     typeOfLogin: TypeOfLogin.facebook,
     clientId: "facebook_client_id" // facebook's client id
   );
@@ -271,7 +271,7 @@ Future<void> initWeb3Auth() async {
   // focus-start
   final loginConfig = new HashMap<String, LoginConfigItem>();
   loginConfig['jwt'] = LoginConfigItem(
-    verifier: "verifier-name", // get it from web3auth dashboard
+    verifier: "verifier-name", // get it from MetaMask Developer Dashboard
     typeOfLogin: TypeOfLogin.jwt,
     clientId: "web3auth_client_id" // web3auth's plug and play client id
   );
@@ -461,7 +461,7 @@ Future<void> initWeb3Auth() async {
   // focus-start
   final loginConfig = new HashMap<String, LoginConfigItem>();
   loginConfig['jwt'] = LoginConfigItem(
-    verifier: "verifier-name", // get it from web3auth dashboard for auth0 configuration
+    verifier: "verifier-name", // get it from MetaMask Developer Dashboard for auth0 configuration
     typeOfLogin: TypeOfLogin.jwt,
     clientId: "auth0_client_id" // get it from auth0 dashboard
   );
@@ -517,7 +517,7 @@ Future<void> initWeb3Auth() async {
   // focus-start
   final loginConfig = new HashMap<String, LoginConfigItem>();
   loginConfig['jwt'] = LoginConfigItem(
-    verifier: "verifier-name", // get it from web3auth dashboard
+    verifier: "verifier-name", // get it from MetaMask Developer Dashboard
     typeOfLogin: TypeOfLogin.jwt,
   );
   // focus-end

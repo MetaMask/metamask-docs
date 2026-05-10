@@ -6,8 +6,8 @@ description: 'Firebase Login with Embedded Wallets | Embedded Wallets'
 
 import Tiles from '@theme/Tiles'
 
-import CustomConnectionOptions from '@site/static/img/embedded-wallets/w3a-dashboard/authentication-custom-connections.png'
-import FirebaseConnection from '@site/static/img/embedded-wallets/w3a-dashboard/firebase-connection.png'
+import CustomConnectionOptions from '@site/static/img/embedded-wallets/dev-dashboard/authentication-custom-connections.png'
+import FirebaseConnection from '@site/static/img/embedded-wallets/dev-dashboard/firebase-connection.png'
 import JwtLoginFirebase from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_firebase.mdx'
 
 [Firebase](https://firebase.google.com/) is a popular backend platform that enables developers to seamlessly integrate authentication, databases, and other services into their applications. Embedded Wallets supports Firebase as an authentication provider, allowing developers to leverage Firebase Authentication within the Web3Auth framework for secure user login and key management.
@@ -70,7 +70,7 @@ export const FirebaseSetup = [
 
 :::success Create Firebase Connection
 
-To use this feature, developers must go to the **Custom Connections** tab in the [dashboard](https://dashboard.web3auth.io).
+To use this feature, developers must go to the **Custom Connections** tab in the [dashboard](https://developer.metamask.io).
 
 :::
 
@@ -88,7 +88,7 @@ To use this feature, developers must go to the **Custom Connections** tab in the
 
 Follow these steps to create a Firebase connection:
 
-1. Visit the [dashboard](https://dashboard.web3auth.io).
+1. Visit the [dashboard](https://developer.metamask.io).
 1. Go to the **Custom Connections** section.
 1. Click on the **Settings** icon near the Firebase connection.
 1. Enter the `Firebase Connection ID`.
@@ -236,7 +236,7 @@ Future<void> initPlatformState() async {
   final loginConfig = HashMap<String, LoginConfigItem>();
 
   loginConfig['jwt'] = LoginConfigItem(
-    verifier: "VERIFIER_NAME", // get it from web3auth dashboard
+    verifier: "VERIFIER_NAME", // get it from MetaMask Developer Dashboard
     typeOfLogin: TypeOfLogin.jwt,
     name: "Firebase JWT Login",
     clientId: "WEB3AUTH_CLIENT_ID", // web3auth's plug and play client id

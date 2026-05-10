@@ -19,7 +19,7 @@ MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seaml
 
 ## Prerequisites
 
-- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+- Set up your project on the [Embedded Wallets dashboard](https://developer.metamask.io/)
 
 :::tip
 
@@ -52,7 +52,7 @@ Download the [Unreal Package](https://github.com/Web3Auth/web3auth-unreal-sdk/re
 
 ### 1. Configure Embedded Wallets project
 
-1.1 Go to the [Embedded Wallets dashboard](https://dashboard.web3auth.io/), create or select an Web3Auth project:
+1.1 Go to the [Embedded Wallets dashboard](https://developer.metamask.io/), create or select an Web3Auth project:
 1.2 Add `{{SCHEMA}}://{YOUR_APP_PACKAGE_NAME}` to **Allowlist URLs**.
 1.3 Copy the `Client ID` for usage later.
 
@@ -82,7 +82,7 @@ void AYourGameMode::BeginPlay()
 
     // Initialize Web3Auth
     FWeb3AuthOptions Options;
-    Options.ClientId = TEXT("YOUR_CLIENT_ID"); // Get your Client ID from Web3Auth Dashboard
+    Options.ClientId = TEXT("YOUR_CLIENT_ID"); // Get your Client ID from MetaMask Developer Dashboard
     Options.Network = TEXT("sapphire_mainnet"); // or "sapphire_devnet"
     Options.RedirectUrl = TEXT("YOUR_SCHEMA://YOUR_APP_PACKAGE_NAME");
 

@@ -147,4 +147,3 @@ export const walletClient = createWalletClient({
 
 </TabItem>
 </Tabs>
-
