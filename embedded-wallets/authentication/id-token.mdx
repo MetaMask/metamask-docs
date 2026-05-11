@@ -132,6 +132,25 @@ To validate an ID token server-side, use Web3Auth's JWKS endpoint or project-spe
 
 ### Using the JWKS endpoint
 
+:::warning Always validate `issuer` and `audience`
+
+Every JWKS-based verification call **must** include both `issuer` and `audience` options:
+
+- **`audience`** must equal your **Project Client ID**. Without it, a token issued by Web3Auth for any other project will pass signature verification — because all projects share the same signing infrastructure.
+- **`issuer`** must match the Web3Auth endpoint that issued the token (`https://api-auth.web3auth.io` for social logins, `https://authjs.web3auth.io` for external wallets).
+
+**Who is at risk without `audience` validation?**
+
+| User identifier used by dapp | Exploitable without `aud`? | Reason |
+|---|---|---|
+| `userId` / `email` / `authConnectionId` | **Yes** | These claims are set by verifier configuration, which an attacker controls via their own project |
+| `wallets[].public_key` (app-scoped key) | No | App keys are derived per-project; a different project produces different keys |
+| `wallets[].address` (on-chain address) | No | Bound to the user's cryptographic keys, cannot be forged |
+
+If your backend matches users by `userId`, `email`, or `authConnectionId` — the common pattern for Web2-style user management — always validate `audience`.
+
+:::
+
 <Tabs>
 <TabItem value="Social Login">
 
@@ -161,9 +180,14 @@ export async function POST(req: NextRequest) {
 
     //focus-start
     // Verify JWT using Web3Auth JWKS
-    // highlight-next-line
+    // highlight-start
     const jwks = jose.createRemoteJWKSet(new URL('https://api-auth.web3auth.io/jwks'))
-    const { payload } = await jose.jwtVerify(idToken, jwks, { algorithms: ['ES256'] })
+    const { payload } = await jose.jwtVerify(idToken, jwks, {
+      algorithms: ['ES256'],
+      issuer: 'https://api-auth.web3auth.io',
+      audience: process.env.WEB3AUTH_CLIENT_ID,
+    })
+    // highlight-end
 
     // Find matching wallet in JWT
     const wallets = (payload as any).wallets || []
@@ -232,9 +256,14 @@ export async function POST(req: NextRequest) {
 
     //focus-start
     // Verify JWT using AuthJS JWKS
-    // highlight-next-line
+    // highlight-start
     const jwks = jose.createRemoteJWKSet(new URL('https://authjs.web3auth.io/jwks'))
-    const { payload } = await jose.jwtVerify(idToken, jwks, { algorithms: ['ES256'] })
+    const { payload } = await jose.jwtVerify(idToken, jwks, {
+      algorithms: ['ES256'],
+      issuer: 'https://authjs.web3auth.io',
+      audience: process.env.WEB3AUTH_CLIENT_ID,
+    })
+    // highlight-end
 
     // Find matching wallet in JWT
     const wallets = (payload as any).wallets || []
@@ -390,7 +419,7 @@ If the token is valid, the payload will contain identity claims (such as, userId
 
 ## Troubleshooting
 
-- The `iss` field in the token must be `https://api-auth.web3auth.io`.
-- The `aud` field must match your **Project Client ID**.
-- The `exp` field must be in the future.
-- The `iat` field must be in the past.
+- Validate that `iss` equals `https://api-auth.web3auth.io` (social logins) or `https://authjs.web3auth.io` (external wallets). A mismatch means the token was not issued by the expected Web3Auth service.
+- Validate that `aud` equals your **Project Client ID**. A mismatch means the token was issued for a different project and must be rejected.
+- Validate that `exp` is in the future. Expired tokens must be rejected.
+- Validate that `iat` is in the past. A future `iat` indicates a malformed or tampered token.
