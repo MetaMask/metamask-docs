@@ -3,7 +3,16 @@ description: Wallet Client actions reference.
 sidebar_label: Wallet Client actions
 toc_max_heading_level: 2
 keywords:
-  [ERC-7710, Viem, wallet client, actions, reference, advanced permissions, redeem delegation]
+  [
+    ERC-7710,
+    Viem,
+    wallet client,
+    actions,
+    reference,
+    advanced permissions,
+    redeem delegation,
+    redelegate permission context,
+  ]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -78,6 +87,134 @@ const walletClient = createWalletClient({
   transport: http(),
   chain,
 }).extend(erc7710WalletActions())
+```
+
+</TabItem>
+</Tabs>
+
+## `redelegatePermissionContext`
+
+Creates a <GlossaryTerm term="Redelegation">redelegation</GlossaryTerm> to a specific <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> from a delegation chain encoded as `Hex` or decoded as [`Delegation`](../types.md#delegation)`[]`.
+
+The action returns [`RedelegatePermissionContextReturnType`](../types.md#redelegatepermissioncontextreturntype).
+
+### Parameters
+
+| Name                | Type                                                               | Required | Description                                                                                                                                                     |
+| ------------------- | ------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `environment`       | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes      | Contract addresses for the <GlossaryTerm term="Delegation Framework" /> on the target chain.                                                                    |
+| `permissionContext` | `PermissionContext`                                                | Yes      | Encoded delegation chain (`Hex`) or decoded chain ([`Delegation`](../types.md#delegation)`[]`), leaf first.                                                     |
+| `chainId`           | `number`                                                           | No       | Chain ID used when signing the delegation.                                                                                                                      |
+| `account`           | `Account` \| `Address`                                             | No       | Account that signs the redelegation. Defaults to the Wallet Client's configured account.                                                                        |
+| `scope`             | `ScopeConfig`                                                      | No       | <GlossaryTerm term="Delegation scope">Delegation scope</GlossaryTerm> to restrict the authority of the redelegation.                                            |
+| `caveats`           | `Caveats`                                                          | No       | Additional <GlossaryTerm term="Caveat">caveats</GlossaryTerm> to restrict the authority of the redelegation. See [caveats reference](../delegation/caveats.md). |
+| `salt`              | `Hex`                                                              | No       | Salt for redelegation.                                                                                                                                          |
+| `to`                | `Address`                                                          | Yes      | Address of the delegate for the redelegation.                                                                                                                   |
+
+### Example
+
+<Tabs>
+<TabItem value ="example.ts">
+
+```ts
+import { walletClient, publicClient, environment } from './client.ts'
+
+// These properties must be extracted from the permission response. See
+// `grantPermissions` action to learn how to request permissions.
+const permissionContext = permissionsResponse[0].context
+
+const { permissionContext: redelegatedPermissionContext } =
+  walletClient.redelegatePermissionContext({
+    to: 'DELEGATE_ADDRESS',
+    environment,
+    permissionContext: permissionContext,
+  })
+```
+
+</TabItem>
+<TabItem value ="client.ts">
+
+```ts
+import { http, createWalletClient } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { redelegatePermissionContextActions } from '@metamask/smart-accounts-kit/actions'
+
+// Your session account for requesting and redelegating should be the same.
+const privateKey = '0x...'
+const account = privateKeyToAccount(privateKey)
+
+export const environment = getSmartAccountsEnvironment(chain.id)
+
+const walletClient = createWalletClient({
+  account,
+  transport: http(),
+  chain,
+}).extend(redelegatePermissionContextActions())
+```
+
+</TabItem>
+</Tabs>
+
+## `redelegatePermissionContextOpen`
+
+Creates an <GlossaryTerm term="Open redelegation">open redelegation</GlossaryTerm> from a delegation chain encoded as `Hex` or decoded as [`Delegation`](../types.md#delegation)`[]`. This allows any account to redeem the inherited permissions.
+
+The action returns [`RedelegatePermissionContextReturnType`](../types.md#redelegatepermissioncontextreturntype).
+
+### Parameters
+
+| Name                | Type                                                               | Required | Description                                                                                                                                                     |
+| ------------------- | ------------------------------------------------------------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `environment`       | [`SmartAccountsEnvironment`](../types.md#smartaccountsenvironment) | Yes      | Contract addresses for the <GlossaryTerm term="Delegation Framework" /> on the target chain.                                                                    |
+| `permissionContext` | `PermissionContext`                                                | Yes      | Encoded delegation chain (`Hex`) or decoded chain ([`Delegation`](../types.md#delegation)`[]`), leaf first.                                                     |
+| `chainId`           | `number`                                                           | No       | Chain ID used when signing the delegation.                                                                                                                      |
+| `account`           | `Account` \| `Address`                                             | No       | Account that signs the redelegation. Defaults to the Wallet Client's configured account.                                                                        |
+| `scope`             | `ScopeConfig`                                                      | No       | <GlossaryTerm term="Delegation scope">Delegation scope</GlossaryTerm> to restrict the authority of the redelegation.                                            |
+| `caveats`           | `Caveats`                                                          | No       | Additional <GlossaryTerm term="Caveat">caveats</GlossaryTerm> to restrict the authority of the redelegation. See [caveats reference](../delegation/caveats.md). |
+| `salt`              | `Hex`                                                              | No       | Salt for redelegation.                                                                                                                                          |
+
+### Example
+
+<Tabs>
+<TabItem value ="example.ts">
+
+```ts
+import { walletClient, publicClient, environment } from './client.ts'
+
+// These properties must be extracted from the permission response. See
+// `grantPermissions` action to learn how to request permissions.
+const permissionContext = permissionsResponse[0].context
+
+const { permissionContext: redelegatedPermissionContext } =
+  walletClient.redelegatePermissionContextOpen({
+    environment,
+    permissionContext: permissionContext,
+  })
+```
+
+</TabItem>
+<TabItem value ="client.ts">
+
+```ts
+import { http, createWalletClient } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
+import { sepolia as chain } from 'viem/chains'
+import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
+import { redelegatePermissionContextActions } from '@metamask/smart-accounts-kit/actions'
+
+// Your session account for requesting and redelegating should be the same.
+const privateKey = '0x...'
+const account = privateKeyToAccount(privateKey)
+
+export const environment = getSmartAccountsEnvironment(chain.id)
+
+const walletClient = createWalletClient({
+  account,
+  transport: http(),
+  chain,
+}).extend(redelegatePermissionContextActions())
 ```
 
 </TabItem>
