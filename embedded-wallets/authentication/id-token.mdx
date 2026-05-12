@@ -141,11 +141,11 @@ Every JWKS-based verification call **must** include both `issuer` and `audience`
 
 **Who is at risk without `audience` validation?**
 
-| User identifier used by dapp | Exploitable without `aud`? | Reason |
-|---|---|---|
-| `userId` / `email` / `authConnectionId` | **Yes** | These claims are set by verifier configuration, which an attacker controls via their own project |
-| `wallets[].public_key` (app-scoped key) | No | App keys are derived per-project; a different project produces different keys |
-| `wallets[].address` (on-chain address) | No | Bound to the user's cryptographic keys, cannot be forged |
+| User identifier used by dapp            | Exploitable without `aud`? | Reason                                                                                           |
+| --------------------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------ |
+| `userId` / `email` / `authConnectionId` | **Yes**                    | These claims are set by verifier configuration, which an attacker controls via their own project |
+| `wallets[].public_key` (app-scoped key) | No                         | App keys are derived per-project; a different project produces different keys                    |
+| `wallets[].address` (onchain address)   | No                         | Bound to the user's cryptographic keys, cannot be forged                                         |
 
 If your backend matches users by `userId`, `email`, or `authConnectionId` — the common pattern for Web2-style user management — always validate `audience`.
 

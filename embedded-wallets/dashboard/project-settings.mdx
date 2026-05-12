@@ -88,10 +88,23 @@ function getKey(header, callback) {
   })
 }
 
-jwt.verify(token, getKey, options, (err, decoded) => {
-  if (err) throw new Error('Token verification failed')
-  return decoded
-})
+// Verify token
+jwt.verify(
+  token,
+  getKey,
+  {
+    algorithms: ['ES256'],
+    issuer: 'https://api-auth.web3auth.io',
+    audience: process.env.WEB3AUTH_CLIENT_ID,
+  },
+  (err, decoded) => {
+    if (err) {
+      console.error('Token verification failed:', err)
+    } else {
+      console.log('Token verified:', decoded)
+    }
+  }
+)
 ```
 
 ### Project verification key
@@ -105,10 +118,23 @@ const PROJECT_VERIFICATION_KEY = `-----BEGIN PUBLIC KEY-----
 <YOUR_PROJECT_VERIFICATION_KEY>
 -----END PUBLIC KEY-----`
 
-jwt.verify(token, PROJECT_VERIFICATION_KEY, { algorithms: ['RS256'] }, (err, decoded) => {
-  if (err) throw new Error('Token verification failed')
-  return decoded
-})
+// Verify token with static key
+jwt.verify(
+  token,
+  PROJECT_VERIFICATION_KEY,
+  {
+    algorithms: ['ES256'],
+    issuer: 'https://api-auth.web3auth.io',
+    audience: process.env.WEB3AUTH_CLIENT_ID,
+  },
+  (err, decoded) => {
+    if (err) {
+      console.error('Token verification failed:', err)
+    } else {
+      console.log('Token verified:', decoded)
+    }
+  }
+)
 ```
 
 :::note
