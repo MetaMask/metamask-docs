@@ -7,7 +7,6 @@ keywords:
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
-import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Create an x402 server with ERC-7710
 
