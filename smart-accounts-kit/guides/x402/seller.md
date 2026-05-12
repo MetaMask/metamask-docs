@@ -167,7 +167,7 @@ Call the MetaMask facilitator's `verify` endpoint to confirm the encoded delegat
 import { FACILITATOR_URL } from './config'
 
 export async function verifyPayment(req: Request, res: Response, next: NextFunction) {
-  const response = await fetch(`${FACILITATOR_URL}/platform/v2/x402/verify`, {
+  const response = await fetch(`${FACILITATOR_URL}/verify`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -195,7 +195,8 @@ export async function verifyPayment(req: Request, res: Response, next: NextFunct
 <TabItem value = 'src/config.ts'>
 
 ```ts
-const FACILITATOR_URL = 'https://tx-sentinel-base-mainnet.dev-api.cx.metamask.io'
+export const FACILITATOR_URL =
+  'https://tx-sentinel-base-mainnet.dev-api.cx.metamask.io/platform/v2/x402'
 ```
 
 </TabItem>
@@ -214,7 +215,7 @@ import { paymentRequirements } from './payment'
 import { FACILITATOR_URL } from './config'
 
 app.get('/api/premium', requirePayment, verifyPayment, async (_req, res) => {
-  const settlement = await fetch(`${FACILITATOR_URL}/platform/v2/x402/settle`, {
+  const settlement = await fetch(`${FACILITATOR_URL}/settle`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
