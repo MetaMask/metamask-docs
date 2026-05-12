@@ -19,7 +19,7 @@ The official `@x402/express` middleware doesn't support ERC-7710 delegation payl
 
 - [Node.js 18](https://nodejs.org/en) or later.
 - [Minimal Node.js Express server](https://expressjs.com/en/starter/installing.html).
-- A seller payout address to recieve funds (e.g. [MetaMask Wallet](https://metamask.io/download)).
+- A seller payout address to recieve funds (for example, [MetaMask Wallet](https://metamask.io/download)).
 
 ## Steps
 
@@ -220,7 +220,6 @@ app.get('/api/premium', requirePayment, verifyPayment, async (_req, res) => {
   // Run your business logic and send as a response.
   res.json({ message: 'Premium content unlocked' })
 })
-
 ;(app.listen(4402),
   () => {
     console.log('Seller listening on port 4402')
