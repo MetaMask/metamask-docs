@@ -46,7 +46,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
   {
     chainId: chain.id,
     expiry,
-    // The requested permissions will granted to the
+    // The requested permissions will be granted to the
     // session account.
     to: sessionAccount.address,
     permission: {
@@ -70,6 +70,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
 
 ```typescript
 import { createWalletClient, custom } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
 import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
@@ -111,7 +112,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
   {
     chainId: chain.id,
     expiry,
-    // The requested permissions will granted to the
+    // The requested permissions will be granted to the
     // session account.
     to: sessionAccount.address,
     permission: {
@@ -147,4 +148,3 @@ export const walletClient = createWalletClient({
 
 </TabItem>
 </Tabs>
-
