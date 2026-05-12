@@ -5,8 +5,8 @@ keywords:
   [x402, ERC-7710, HTTP 402, Advanced Permissions, facilitator, delegation, Express, Node.js]
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
 # Create an x402 server with ERC-7710
 
@@ -14,7 +14,7 @@ In this guide, you build a Node.js server that charges for HTTP API access using
 [x402](https://www.x402.org/) and accepts [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710)
 delegation payments verified through the MetaMask facilitator.
 
-The official `@x402/express` middleware doesn't support ERC-7710 delegation payloads. This guide
+The official `@x402/express` middleware doesn't yet support ERC-7710 delegation payloads. This guide
 shows you how to implement the x402 HTTP contract manually with Express.
 
 ## Prerequisites
@@ -31,172 +31,336 @@ shows you how to implement the x402 HTTP contract manually with Express.
 npm install viem
 ```
 
-### 2. Create payment requirements
+### 2. Define constants
 
-Define the payment requirements that every protected route returns to buyers. Follow the [x402 payment requirements schema](https://docs.x402.org/core-concepts/http-402#payment-headers-in-v2), and set `scheme` to `erc7710`.
-
-#### Parameters
-
-| Name                | Description                                                                                                                                                                                 |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `scheme`            | Payment scheme the facilitator uses to interpret the payload. Set this to `erc7710` so the facilitator routes the payment to its delegation verifier instead of the default `exact` scheme. |
-| `network`           | [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain identifier for the payment. The example uses `eip155:8453`, the identifier for Base.                                                 |
-| `maxAmountRequired` | Maximum amount the buyer must authorize, expressed in the wei format. The example charges 0.01 USDC.                                                                                        |
-| `resource`          | Protected route this requirement applies to.                                                                                                                                                |
-| `description`       | Short, human-readable label that buyers see in the `x402` response and your `/info` discovery payload.                                                                                      |
-| `mimeType`          | Content type of the response the buyer receives after a successful payment.                                                                                                                 |
-| `payTo`             | Seller wallet address that receives the settled funds.                                                                                                                                      |
-| `maxTimeoutSeconds` | Maximum time, in seconds, the buyer's payment authorization stays valid before settlement must complete.                                                                                    |
-| `asset`             | ERC-20 token contract address used for payment. The example uses USDC on Base.                                                                                                              |
-
-#### Implementation
-
-<Tabs>
-<TabItem value = "src/payment.ts">
+Configure the server constants the middleware uses to build payment requirements in later steps.
+The example charges in USDC on Base mainnet and routes verification and settlement through the
+MetaMask facilitator.
 
 ```ts
-import { PaymentRequirements } from './type'
-import { Hex } from 'viem'
+// src/config.ts
+import 'dotenv/config'
+import { Address } from 'viem'
+import { base } from 'viem/chains'
 
-export const paymentRequirements: PaymentRequirements = {
-  scheme: 'erc7710',
-  // CAIP-2 identifier for Base.
-  network: 'eip155:8453',
-  // 0.1 USDC in wei format.
-  maxAmountRequired: '10000',
-  resource: '/api/premium',
-  description: 'Premium API access',
-  mimeType: 'application/json',
-  payTo: '<YOUR_PAYTO_ADDRESS>',
-  maxTimeoutSeconds: 60,
-  // USDC contract address on Base.
-  asset: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
-}
+export const NETWORK_ID = `eip155:${base.id}`
+
+// USDC address on Base mainnet.
+export const USDC_ADDRESS: Address = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
+export const PAY_TO_ADDRESS = '0x<PAY_TO_ADDRESS>'
+// MetaMask facilitator host for Base mainnet.
+export const FACILITATOR_URL = 'https://tx-sentinel-base-mainnet.dev-api.cx.metamask.io'
+```
+
+### 3. Add a discovery method
+
+Add a public `GET /info` route that publishes the seller's payment terms, including the
+facilitator address discovered from the MetaMask facilitator's `/supported` endpoint. Buyers
+call this route before they prepare an ERC-7710 delegation payment payload.
+
+<Tabs>
+<TabItem value = "src/index.ts">
+
+```ts
+import express, { type Request, type Response } from 'express'
+import cors from 'cors'
+import { NETWORK_ID, USDC_ADDRESS, PAY_TO_ADDRESS } from './config'
+import { fetchFacilitatorAddress } from './utils'
+
+const app = express()
+
+app.use(cors())
+app.use(express.json({ limit: '1mb' }))
+
+app.get('/info', async (_req: Request, res: Response) => {
+  try {
+    const facilitatorAddress = await fetchFacilitatorAddress()
+    res.json({
+      payToAddress: PAY_TO_ADDRESS,
+      facilitatorAddress,
+      network: NETWORK_ID,
+      asset: USDC_ADDRESS,
+      supportedMethods: ['erc7710'],
+    })
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Failed to fetch facilitator address'
+    res.status(503).json({ error: message })
+  }
+})
 ```
 
 </TabItem>
-<TabItem value = "src/type.ts">
+<TabItem value = "src/utils.ts">
 
 ```ts
-import { Address } from 'viem'
+import type { Address } from 'viem'
+import { FACILITATOR_URL } from './config'
 
-export type PaymentRequirements = {
-  scheme: string
-  network: string
-  maxAmountRequired: string
-  resource: string
-  description: string
-  mimeType: string
-  payTo: Address
-  maxTimeoutSeconds: number
-  asset: Address
+export async function fetchFacilitatorAddress(): Promise<Address> {
+  const res = await fetch(`${FACILITATOR_URL}/platform/v2/x402/supported`)
+  if (!res.ok) throw new Error('Failed to fetch facilitator supported info')
+  const data = await res.json()
+  const address = data.signers?.['eip155:*']?.[0] as Address
+  if (!address) throw new Error('Facilitator address not found in /supported response')
+  return address
 }
 ```
 
 </TabItem>
 </Tabs>
 
-### 3. Add a discovery method
+### 4. Create payment middleware
 
-Add a public `GET /info` route that publishes your protected paths and their payment terms.
-Buyers call this route before they prepare an ERC-7710 delegation payment.
+Add payment middleware that runs before each protected handler. The middleware factory builds the
+payment requirements for the route, reads the buyer's delegation payload from the request
+header, verifies it through the facilitator, and settles asynchronously.
 
-```ts
-// src/index.ts
-import express from 'express'
-import { paymentRequirements } from './payment'
+When the header is missing, the middleware encodes the payment requirements in a `PAYMENT-REQUIRED`
+response header and returns `402 Payment Required` with a JSON body that tells the buyer how to pay.
+When the header is malformed, the middleware returns `400 Bad Request`.
 
-const app = express()
-app.use(express.json())
+The middleware builds payment requirements that follow the [x402 payment requirements schema](https://docs.x402.org/core-concepts/http-402#payment-headers-in-v2).
+Set `scheme` to `exact` and `assetTransferMethod` to `erc7710` so the facilitator routes the
+payment to its delegation verifier.
 
-app.get('/info', (_req, res) => {
-  res.json({
-    routes: ['/api/premium'],
-    accepts: [paymentRequirements],
-  })
-})
-```
-
-### 4. Add payment middleware
-
-Add payment middleware that runs before each protected handler. Parse the base64 `X-PAYMENT` header to
-extract the encoded delegation chain (`permissionContext`) the buyer prepared.
-
-When the `X-PAYMENT` header is missing or malformed, respond with `402 Payment Required` and a JSON body
-that tells the buyer how to pay.
-
-```ts
-// src/middleware.ts
-import type { Request, Response, NextFunction } from 'express'
-import { paymentRequirements } from './payment'
-
-export function requirePayment(req: Request, res: Response, next: NextFunction) {
-  const header = req.header('X-PAYMENT')
-
-  if (!header) {
-    return res.status(402).json({
-      x402Version: 1,
-      accepts: [paymentRequirements],
-      error: 'X-PAYMENT header missing',
-    })
-  }
-
-  try {
-    const decoded = JSON.parse(Buffer.from(header, 'base64').toString('utf8'))
-    res.locals.paymentPayload = decoded
-    return next()
-  } catch (error) {
-    return res.status(402).json({
-      x402Version: 1,
-      accepts: [paymentRequirements],
-      error: 'X-PAYMENT header is not valid base64-encoded JSON',
-    })
-  }
-}
-```
-
-### 5. Verify the payment
-
-Call the MetaMask facilitator's `verify` endpoint to confirm the encoded delegation chain authorizes the requested resource. If verification fails, return `402` with the failure reason from the facilitator so the buyer can correct the payment and retry.
+#### Parameters
 
 <Tabs>
-<TabItem value = 'src/middleware.ts'>
+<TabItem value = "PaymentRequirements">
+
+Payment terms the seller advertises. The middleware builds the `PaymentRequirements` object per
+request and returns it in the `PAYMENT-REQUIRED` response header when payment is missing.
+
+| Name                        | Description                                                                                                                                            |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `scheme`                    | Payment scheme the facilitator uses to interpret the payload. Set this to `exact` so the facilitator routes the payment through its standard verifier. |
+| `network`                   | [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain identifier for the payment. The example uses `eip155:8453`, the identifier for Base.            |
+| `amount`                    | Amount the buyer must authorize, expressed in the wei format. The example charges 0.01 USDC.                                                           |
+| `asset`                     | ERC-20 token contract address used for payment. The example uses USDC on Base.                                                                         |
+| `payTo`                     | Seller wallet address that receives the settled funds.                                                                                                 |
+| `maxTimeoutSeconds`         | Maximum time, in seconds, the buyer's payment authorization stays valid before settlement must complete.                                               |
+| `extra.assetTransferMethod` | Asset transfer method the facilitator uses. Set this to `erc7710` so the facilitator routes the payment to its ERC-7710 delegation verifier.           |
+| `extra.facilitators`        | List of facilitator addresses allowed to settle the payment. This helps buyers scope a delegation to a specific facilitator address before signing.    |
+
+</TabItem>
+<TabItem value = "PaymentPayload">
+
+Decoded delegation payload the buyer sends in the `payment-signature` request header. The
+middleware forwards this object to the facilitator's `/verify` and `/settle` endpoints.
+
+| Name                        | Description                                                                                                                                            |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `x402Version`               | Version of the x402 protocol the buyer used. The example uses version 2.                                                                               |
+| `accepted`                  | Snapshot of the `PaymentRequirements` the buyer agreed to. The facilitator uses this to confirm the buyer signed the same terms the seller advertised. |
+| `payload.delegationManager` | Address of the ERC-7710 delegation manager contract that executes the delegation.                                                                      |
+| `payload.permissionContext` | Hex-encoded delegation chain the buyer signed.                                                                                                         |
+| `payload.delegator`         | Address of the buyer's account that granted the delegation.                                                                                            |
+
+</TabItem>
+</Tabs>
+
+#### Implementation
+
+<Tabs>
+<TabItem value = "src/middleware.ts">
 
 ```ts
-// src/middleware.ts
-import { FACILITATOR_URL } from './config'
+import type { Request, Response, NextFunction } from 'express'
+import type { Address } from 'viem'
+import { USDC_ADDRESS, NETWORK_ID, PAY_TO_ADDRESS, FACILITATOR_URL } from './config'
+import type { PaymentPayload, PaymentRequirements, PaymentMiddlewareOptions } from './types'
+import { fetchFacilitatorAddress } from './utils'
 
-export async function verifyPayment(req: Request, res: Response, next: NextFunction) {
-  const response = await fetch(`${FACILITATOR_URL}/verify`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      x402Version: 1,
-      paymentPayload: res.locals.paymentPayload,
-      paymentRequirements,
-    }),
-  })
+export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    let facilitatorAddress: Address | null = null
+    try {
+      facilitatorAddress = await fetchFacilitatorAddress()
+    } catch (err) {
+      console.warn('[x402] Could not fetch facilitator address:', err)
+    }
 
-  const result = await response.json()
+    const paymentRequirements: PaymentRequirements = {
+      scheme: 'exact',
+      network: NETWORK_ID,
+      amount: options.amount,
+      asset: USDC_ADDRESS,
+      payTo: PAY_TO_ADDRESS,
+      maxTimeoutSeconds: 60,
+      extra: {
+        assetTransferMethod: 'erc7710',
+        ...(facilitatorAddress ? { facilitators: [facilitatorAddress] } : {}),
+      },
+    }
 
-  if (!response.ok || result.isValid !== true) {
-    return res.status(402).json({
-      x402Version: 1,
-      accepts: [paymentRequirements],
-      error: result.invalidReason ?? 'Verification failed',
-    })
+    const paymentHeader =
+      (req.headers['payment-signature'] as string) || (req.headers['x-payment-signature'] as string)
+
+    if (!paymentHeader) {
+      const paymentRequired = {
+        x402Version: 2,
+        accepts: [paymentRequirements],
+        description: options.description || 'Payment required to access this resource',
+        mimeType: options.mimeType || 'application/json',
+      }
+      const encoded = Buffer.from(JSON.stringify(paymentRequired)).toString('base64')
+      res.setHeader('PAYMENT-REQUIRED', encoded)
+      res.status(402).json({ error: 'Payment Required', paymentRequired })
+      return
+    }
+
+    let paymentPayload: PaymentPayload
+    try {
+      const decoded = Buffer.from(paymentHeader, 'base64').toString('utf-8')
+      paymentPayload = JSON.parse(decoded)
+    } catch {
+      res.status(400).json({ error: 'Invalid PAYMENT-SIGNATURE header' })
+      return
+    }
+
+    // Verification and settlement are added in steps 6 and 7.
+    next()
   }
-
-  return next()
 }
 ```
 
 </TabItem>
-<TabItem value = 'src/config.ts'>
+<TabItem value = "src/types.ts">
 
 ```ts
-export const FACILITATOR_URL =
-  'https://tx-sentinel-base-mainnet.dev-api.cx.metamask.io/platform/v2/x402'
+import type { Address, Hex } from 'viem'
+
+export interface PaymentRequirements {
+  scheme: string
+  network: string
+  amount: string
+  asset: Address
+  payTo: Address
+  maxTimeoutSeconds: number
+  extra: {
+    assetTransferMethod: string
+    [key: string]: unknown
+  }
+}
+
+export interface PaymentPayload {
+  x402Version: number
+  accepted: {
+    scheme: string
+    network: string
+    amount: string
+    asset: Address
+    payTo: Address
+    maxTimeoutSeconds: number
+    extra: {
+      assetTransferMethod: string
+      [key: string]: unknown
+    }
+  }
+  payload: {
+    delegationManager: Address
+    permissionContext: Hex
+    delegator: Address
+  }
+}
+
+export interface PaymentMiddlewareOptions {
+  amount: string
+  description?: string
+  mimeType?: string
+}
+```
+
+</TabItem>
+</Tabs>
+
+### 5. Verify the payment
+
+Call the MetaMask facilitator's `verify` endpoint through the `verifyPayment` helper to confirm
+the encoded delegation chain authorizes the requested resource. If verification fails, return
+`402` with the failure reason from the facilitator so the buyer can correct the payment and retry.
+If the facilitator itself is unreachable, return `502` so the buyer knows the failure is on the
+seller side.
+
+<Tabs>
+<TabItem value = "src/middleware.ts">
+
+```ts
+// add-start
++ import { facilitatorPost } from './utils'
++ import type { VerifyResult } from './types'
+// add-end
+
+// add-start
++ function verifyPayment(
++   paymentPayload: PaymentPayload,
++   paymentRequirements: PaymentRequirements,
++ ): Promise<VerifyResult> {
++   return facilitatorPost('verify', { paymentPayload, paymentRequirements })
++ }
+// add-end
+
+ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
+   return async (req: Request, res: Response, next: NextFunction) => {
+     // Additional code from previous step
+
+// add-start
++    let verifyResult: VerifyResult
++    try {
++      verifyResult = await verifyPayment(paymentPayload, paymentRequirements)
++    } catch (err) {
++      const message = err instanceof Error ? err.message : 'Verification failed'
++      res.status(502).json({ error: message })
++      return
++    }
++
++    if (!verifyResult.isValid) {
++      res.status(402).json({
++        error: 'Payment verification failed',
++        reason: verifyResult.invalidReason,
++        message: verifyResult.invalidMessage,
++      })
++      return
++    }
+// add-end
+
+     next()
+   }
+ }
+```
+
+</TabItem>
+<TabItem value = "src/utils.ts">
+
+```ts
+import { FACILITATOR_URL } from './config'
+
+export async function facilitatorPost<T>(endpoint: string, body: object): Promise<T> {
+  const res = await fetch(`${FACILITATOR_URL}/platform/v2/x402/${endpoint}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  })
+  if (!res.ok) {
+    const error = await res.json().catch(() => ({ error: `HTTP ${res.status}` }))
+    throw new Error(error.error || `Facilitator ${endpoint} failed: ${res.status}`)
+  }
+  return res.json()
+}
+```
+
+</TabItem>
+<TabItem value = "src/types.ts">
+
+```ts
+import type { Address } from 'viem'
+
+export interface VerifyResult {
+  isValid: boolean
+  invalidReason?: string
+  invalidMessage?: string
+  payer?: Address
+}
 ```
 
 </TabItem>
@@ -204,35 +368,111 @@ export const FACILITATOR_URL =
 
 ### 6. Settle the payment
 
-After verification succeeds, run your business logic and call the MetaMask facilitator's `settle` endpoint. Attach the settlement result to the response as the `X-PAYMENT-RESPONSE` header so the buyer can correlate it with the original request.
+After verification succeeds, wrap `res.json` so settlement runs asynchronously through the
+`settlePayment` helper after the protected handler responds. Set the `PAYMENT-RESPONSE` header
+with the verified payer and scheme so the buyer can correlate the result with the original
+request. Settling after responding keeps the protected route's latency independent of facilitator
+settlement time.
 
-The example returns `{ message: 'Premium content unlocked' }` as a placeholder. Replace it with whatever JSON payload your protected route serves.
+<Tabs>
+<TabItem value = "src/middleware.ts">
 
 ```ts
-// src/index.ts
-import { requirePayment, verifyPayment } from './middleware'
-import { paymentRequirements } from './payment'
-import { FACILITATOR_URL } from './config'
+// add-start
++ import type { SettleResult } from './types'
+// add-end
 
-app.get('/api/premium', requirePayment, verifyPayment, async (_req, res) => {
-  const settlement = await fetch(`${FACILITATOR_URL}/settle`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      x402Version: 1,
-      paymentPayload: res.locals.paymentPayload,
-      paymentRequirements,
-    }),
-  }).then(r => r.json())
+// add-start
++ function settlePayment(
++   paymentPayload: PaymentPayload,
++   paymentRequirements: PaymentRequirements,
++ ): Promise<SettleResult> {
++   return facilitatorPost('settle', { paymentPayload, paymentRequirements })
++ }
+// add-end
 
-  const encoded = Buffer.from(JSON.stringify(settlement)).toString('base64')
-  res.setHeader('X-PAYMENT-RESPONSE', encoded)
-  // Run your business logic and send as a response.
-  res.json({ message: 'Premium content unlocked' })
+ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
+   return async (req: Request, res: Response, next: NextFunction) => {
+     // Additional code from previous steps
+
+// add-start
++    const originalJson = res.json.bind(res)
++    res.json = function (body: unknown) {
++      settlePayment(paymentPayload, paymentRequirements)
++        .then((settleResult) => {
++          console.log(
++            '[x402] Settlement:',
++            settleResult.success
++              ? `tx ${settleResult.transaction}`
++              : `failed: ${settleResult.errorMessage}`,
++          )
++        })
++        .catch((err) => console.error('[x402] Settlement error:', err))
++
++      const paymentResponse = {
++        x402Version: 2,
++        scheme: paymentRequirements.scheme,
++        network: NETWORK_ID,
++        payer: verifyResult.payer,
++      }
++      const encodedResponse = Buffer.from(JSON.stringify(paymentResponse)).toString('base64')
++      res.setHeader('PAYMENT-RESPONSE', encodedResponse)
++      return originalJson(body)
++    }
+// add-end
+
+     next()
+   }
+ }
+```
+
+</TabItem>
+<TabItem value = "src/types.ts">
+
+```ts
+import type { Address, Hex } from 'viem'
+
+export interface SettleResult {
+  success: boolean
+  transaction?: Hex
+  network?: string
+  errorReason?: string
+  errorMessage?: string
+  payer?: Address
+}
+```
+
+</TabItem>
+</Tabs>
+
+### 7. Configure the server
+
+Mount the protected routes on an Express router gated by the middleware, then start the server.
+The example returns `{ message: 'Hello!' }` as a placeholder. Replace it with whatever JSON payload
+your protected route serves.
+
+```ts
+// src/index.ts (continued)
+import { createPaymentMiddleware } from './middleware'
+
+const api = express.Router()
+api.use(
+  createPaymentMiddleware({
+    // 0.01 USDC in wei format.
+    amount: '10000',
+    description: 'Access to protected resource',
+    mimeType: 'application/json',
+  })
+)
+
+api.get('/hello', (_req: Request, res: Response) => {
+  res.json({ message: 'Hello!' })
 })
 
+app.use('/api', api)
+
 app.listen(4402, () => {
-  console.log('Seller listening on port 4402')
+  console.log(`[seller] Server running on http://localhost:4402`)
 })
 ```
 
