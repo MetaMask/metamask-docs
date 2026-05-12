@@ -64,7 +64,7 @@ WebViews inside apps like Twitter, Discord, or Reddit have inconsistent deeplink
 
 :::tip
 For relay-based connections (QR code and deeplink), use a reliable RPC provider instead of public nodes.
-Relay connections are more sensitive to network latency, so services like [Infura](https://developer.metamask.io/) provide better reliability and performance.
+Relay connections are more sensitive to network latency, so services like [Infura](https://app.infura.io/) provide better reliability and performance.
 :::
 
 ## Supported environments

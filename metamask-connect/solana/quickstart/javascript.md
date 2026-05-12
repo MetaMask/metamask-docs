@@ -37,7 +37,7 @@ This quickstart gets you up and running with MetaMask Connect Solana in a JavaSc
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/) installed in your browser or on mobile.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the Infura dashboard.
 
 <!--
 ## Set up using a template

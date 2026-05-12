@@ -33,7 +33,7 @@ polyfilling in browser or React Native environments.
 - [Node.js](https://nodejs.org/) version 20 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), or [pnpm](https://pnpm.io/installation).
 - The [MetaMask mobile app](https://metamask.io/download/) installed on your phone.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the Infura dashboard.
 
 ## Steps
 

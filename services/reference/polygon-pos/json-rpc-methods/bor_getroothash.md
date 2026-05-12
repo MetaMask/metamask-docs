@@ -34,7 +34,7 @@ The maximum difference between the specified block range can be 32767.
 
 ## Example
 
-Replace `<YOUR-API-KEY>` with an API key from your [MetaMask Developer dashboard](https://developer.metamask.io/).
+Replace `<YOUR-API-KEY>` with an API key from your [Infura dashboard](https://app.infura.io/).
 
 ### Request
 
