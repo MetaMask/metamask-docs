@@ -76,10 +76,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
 import { createWalletClient, custom, createPublicClient, http } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { toMetaMaskSmartAccount, Implementation } from '@metamask/smart-accounts-kit'
-import {
-  erc7715ProviderActions,
-  redelegatePermissionContextActions,
-} from '@metamask/smart-accounts-kit/actions'
+import { erc7715ProviderActions, erc7710WalletActions } from '@metamask/smart-accounts-kit/actions'
 import { sepolia as chain } from 'viem/chains'
 
 // USDC address on Ethereum Sepolia.
@@ -97,7 +94,7 @@ export const sessionAccount = createWalletClient({
   account,
   chain,
   transport: http(),
-}).extend(redelegatePermissionContextActions())
+}).extend(erc7710WalletActions())
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
@@ -112,7 +109,7 @@ export const walletClient = createWalletClient({
 Create a [redelegation](../../concepts/delegation/overview.md#redelegation) from dapp to a Swap agent.
 
 To create a redelegation, provide the granted permission context as the `permissionContext` argument when calling [`redelegatePermissionContext`](../../reference/erc7710/wallet-client.md#redelegatepermissioncontext).
-In the previous step, `sessionAccount` was extended with `redelegatePermissionContextActions`.
+In the previous step, `sessionAccount` was extended with `erc7710WalletActions`.
 
 When you create a redelegation, apply the toolkit's [caveats](../../reference/delegation/caveats.md) to narrow the Swap agent's authority. In this example, we'll use [`erc20TransferAmount`](../../reference/delegation/caveats.md#erc20transferamount) enforcer, allowing dapp to delegate the Swap agent only the ability to spend 5 USDC on user's behalf.
 

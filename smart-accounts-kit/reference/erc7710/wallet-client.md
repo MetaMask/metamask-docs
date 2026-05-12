@@ -139,7 +139,7 @@ import { http, createWalletClient } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { sepolia as chain } from 'viem/chains'
 import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
-import { redelegatePermissionContextActions } from '@metamask/smart-accounts-kit/actions'
+import { erc7710WalletActions } from '@metamask/smart-accounts-kit/actions'
 
 // Your session account for requesting and redelegating should be the same.
 const privateKey = '0x...'
@@ -151,7 +151,7 @@ const walletClient = createWalletClient({
   account,
   transport: http(),
   chain,
-}).extend(redelegatePermissionContextActions())
+}).extend(erc7710WalletActions())
 ```
 
 </TabItem>
@@ -202,7 +202,7 @@ import { http, createWalletClient } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { sepolia as chain } from 'viem/chains'
 import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
-import { redelegatePermissionContextActions } from '@metamask/smart-accounts-kit/actions'
+import { erc7710WalletActions } from '@metamask/smart-accounts-kit/actions'
 
 // Your session account for requesting and redelegating should be the same.
 const privateKey = '0x...'
@@ -214,7 +214,7 @@ const walletClient = createWalletClient({
   account,
   transport: http(),
   chain,
-}).extend(redelegatePermissionContextActions())
+}).extend(erc7710WalletActions())
 ```
 
 </TabItem>
