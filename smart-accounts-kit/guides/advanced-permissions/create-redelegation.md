@@ -111,7 +111,9 @@ Create a [redelegation](../../concepts/delegation/overview.md#redelegation) from
 To create a redelegation, provide the granted permission context as the `permissionContext` argument when calling [`redelegatePermissionContext`](../../reference/erc7710/wallet-client.md#redelegatepermissioncontext).
 In the previous step, `sessionAccount` was extended with `erc7710WalletActions`.
 
-When you create a redelegation, apply the toolkit's [caveats](../../reference/delegation/caveats.md) to narrow the Swap agent's authority. In this example, we'll use [`erc20TransferAmount`](../../reference/delegation/caveats.md#erc20transferamount) enforcer, allowing your dapp to delegate the Swap agent only the ability to spend 5 USDC on the user's behalf.
+When you create a redelegation, apply the toolkit's [caveats](../../reference/delegation/caveats.md)
+to narrow the Swap agent's authority. In this example, we'll use [`erc20TransferAmount`](../../reference/delegation/caveats.md#erc20transferamount)
+enforcer, allowing your dapp to delegate the Swap agent only the ability to spend 5 USDC on the user's behalf.
 
 :::note
 When creating a redelegation, you can only narrow the scope of the original authority, not expand it.

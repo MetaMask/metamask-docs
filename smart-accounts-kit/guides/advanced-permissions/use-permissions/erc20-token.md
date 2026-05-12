@@ -76,14 +76,6 @@ import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
 }).extend(erc7715ProviderActions())
-
-const privateKey = '0x...'
-const account = privateKeyToAccount(privateKey)
-
-export const sessionAccount = createWalletClient({
-  account,
-  transport: custom(window.ethereum),
-})
 ```
 
 </TabItem>
