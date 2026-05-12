@@ -32,7 +32,7 @@ See the [ERC-20 periodic permission API reference](../../../reference/advanced-p
 ```typescript
 import { sepolia as chain } from 'viem/chains'
 import { parseUnits } from 'viem'
-import { walletClient } from './client.ts'
+import { walletClient, sessionAccount } from './client.ts'
 
 // Since current time is in seconds, convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000)
@@ -46,7 +46,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
   {
     chainId: chain.id,
     expiry,
-    // The requested permissions will granted to the
+    // The requested permissions will be granted to the
     // session account.
     to: sessionAccount.address,
     permission: {
@@ -70,11 +70,20 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
 
 ```typescript
 import { createWalletClient, custom } from 'viem'
+import { privateKeyToAccount } from 'viem/accounts'
 import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
 }).extend(erc7715ProviderActions())
+
+const privateKey = '0x...'
+const account = privateKeyToAccount(privateKey)
+
+export const sessionAccount = createWalletClient({
+  account,
+  transport: custom(window.ethereum),
+})
 ```
 
 </TabItem>
@@ -97,7 +106,7 @@ See the [ERC-20 stream permission API reference](../../../reference/advanced-per
 ```typescript
 import { sepolia as chain } from 'viem/chains'
 import { parseUnits } from 'viem'
-import { walletClient } from './client.ts'
+import { walletClient, sessionAccount } from './client.ts'
 
 // Since current time is in seconds, convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000)
@@ -111,7 +120,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
   {
     chainId: chain.id,
     expiry,
-    // The requested permissions will granted to the
+    // The requested permissions will be granted to the
     // session account.
     to: sessionAccount.address,
     permission: {
