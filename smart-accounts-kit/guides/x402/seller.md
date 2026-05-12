@@ -13,7 +13,7 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 In this guide, you build a Node.js server that charges for HTTP API access using
 [x402](https://www.x402.org/) and accepts [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710)
-delegations payments verified through the MetaMask facilitator.
+delegation payments verified through the MetaMask facilitator.
 
 The official `@x402/express` middleware doesn't support ERC-7710 delegation payloads. This guide
 shows you how to implement the x402 HTTP contract manually with Express.
