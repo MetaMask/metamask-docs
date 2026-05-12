@@ -32,7 +32,7 @@ See the [ERC-20 periodic permission API reference](../../../reference/advanced-p
 ```typescript
 import { sepolia as chain } from 'viem/chains'
 import { parseUnits } from 'viem'
-import { walletClient, sessionAccount } from './client.ts'
+import { walletClient } from './client.ts'
 
 // Since current time is in seconds, convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000)
@@ -98,7 +98,7 @@ See the [ERC-20 stream permission API reference](../../../reference/advanced-per
 ```typescript
 import { sepolia as chain } from 'viem/chains'
 import { parseUnits } from 'viem'
-import { walletClient, sessionAccount } from './client.ts'
+import { walletClient } from './client.ts'
 
 // Since current time is in seconds, convert milliseconds to seconds.
 const currentTime = Math.floor(Date.now() / 1000)
