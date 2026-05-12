@@ -18,7 +18,7 @@ This feature, with Multi-Factor Authentication turned off, can make Embedded Wal
 
 :::info prerequisite
 
-To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets developer dashboard](https://developer.metamask.io) with your desired configuration.
 
 :::
 
@@ -140,12 +140,12 @@ const web3auth = new Web3Auth(WebBrowser, {
   network: WEB3AUTH_NETWORK.MAINNET, // or other networks
   loginConfig: {
     google: {
-      verifier: 'google-verifier', // Get this from the Web3Auth Dashboard
+      verifier: 'google-verifier', // Get this from the MetaMask Developer Dashboard
       typeOfLogin: TypeOfLogin.GOOGLE,
       clientId: 'GOOGLE_CLIENT_ID', // Google's client ID
     },
     jwt: {
-      verifier: 'jwt-verifier', // Get this from the Web3Auth Dashboard
+      verifier: 'jwt-verifier', // Get this from the MetaMask Developer Dashboard
       typeOfLogin: TypeOfLogin.JWT,
       clientId: 'JWT_CLIENT_ID', // Custom JWT client ID
     },

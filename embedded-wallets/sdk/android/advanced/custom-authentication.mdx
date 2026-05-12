@@ -18,7 +18,7 @@ This feature, with Multi-Factor Authentication (MFA) turned off, can even make E
 
 :::info prerequisite
 
-To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets dashboard](https://dashboard.web3auth.io) with your desired configuration.
+To enable this, you need to [create a connection](/embedded-wallets/dashboard/authentication) from the **Authentication** tab of your project from the [Embedded Wallets dashboard](https://developer.metamask.io) with your desired configuration.
 
 :::
 
@@ -158,7 +158,7 @@ val web3Auth = Web3Auth(
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
     // focus-start
     loginConfig = hashMapOf("google" to LoginConfigItem(
-      verifier = "verifier-name", // Get it from Web3Auth dashboard
+      verifier = "verifier-name", // Get it from MetaMask Developer Dashboard
       typeOfLogin = TypeOfLogin.GOOGLE,
       clientId = getString(R.string.google_client_id) // Google's client id
     ))
@@ -190,7 +190,7 @@ val web3Auth = Web3Auth(
     // focus-start
     loginConfig = hashMapOf(
       "facebook" to LoginConfigItem(
-        verifier = "verifier-name", // Get it from Web3Auth dashboard
+        verifier = "verifier-name", // Get it from MetaMask Developer Dashboard
         typeOfLogin = TypeOfLogin.FACEBOOK,
         clientId = getString(R.string.facebook_client_id) // Facebook's client id
       )
@@ -223,7 +223,7 @@ val web3Auth = Web3Auth(
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
     // focus-start
     loginConfig = hashMapOf("jwt" to LoginConfigItem(
-      verifier = "verifier-name", // Get it from Web3Auth dashboard
+      verifier = "verifier-name", // Get it from MetaMask Developer Dashboard
       typeOfLogin = TypeOfLogin.JWT,
       clientId = getString (R.string.auth0_project_id) // Auth0's client id
     ))
@@ -255,7 +255,7 @@ val web3Auth = Web3Auth(
     // focus-start
     loginConfig = hashMapOf(
       "jwt" to LoginConfigItem(
-        verifier = "verifier-name", // Get it from Web3Auth dashboard
+        verifier = "verifier-name", // Get it from MetaMask Developer Dashboard
         typeOfLogin = TypeOfLogin.JWT,
       )
     )
@@ -375,7 +375,7 @@ val web3Auth = Web3Auth(
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
     // focus-start
     loginConfig = hashMapOf("jwt" to LoginConfigItem(
-      verifier = "verifier-name", // Get it from Web3Auth dashboard
+      verifier = "verifier-name", // Get it from MetaMask Developer Dashboard
       typeOfLogin = TypeOfLogin.JWT,
       clientId = getString (R.string.auth0_project_id) // Auth0's client id
     ))
@@ -416,7 +416,7 @@ val web3Auth = Web3Auth(
     redirectUrl = Uri.parse("{YOUR_APP_PACKAGE_NAME}://auth"),
     // focus-start
     loginConfig = hashMapOf("jwt" to LoginConfigItem(
-      verifier = "verifier-name", // Get it from Web3Auth dashboard
+      verifier = "verifier-name", // Get it from MetaMask Developer Dashboard
       typeOfLogin = TypeOfLogin.JWT,
     ))
     // focus-end

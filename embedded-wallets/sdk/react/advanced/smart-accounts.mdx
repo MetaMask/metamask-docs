@@ -34,15 +34,19 @@ Our smart account integration streamlines your setup, allowing you to create and
 
 :::info prerequisite
 
-To enable this feature, you need to configure smart accounts from your project in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+To enable this feature, you need to configure smart accounts from your project in the [Embedded Wallets dashboard](https://developer.metamask.io/).
 
 :::
 
 ### Dashboard configuration
 
-To enable smart accounts, navigate to the smart accounts section in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/), and enable the **Set up Smart accounts** toggle. mbedded Wallets currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
+To enable smart accounts, navigate to the smart accounts section in the [Embedded Wallets dashboard](https://developer.metamask.io/), and enable the **Set up Smart accounts** toggle. mbedded Wallets currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
 
-![Enable Smart accounts](/img/embedded-wallets/w3a-dashboard/smart-account/enable-smart-account.png)
+<img
+  className="docImg"
+  src="/img/embedded-wallets/dev-dashboard/smart-account/enable-smart-account.png"
+  alt="Enable Smart accounts"
+/>
 
 #### Wallet configuration
 
@@ -55,7 +59,11 @@ Once smart accounts are enabled, you can customize the wallet configurations:
 
 A bundler aggregates UserOperations and submits them onchain via the global EntryPoint contract. To configure the bundler:
 
-![Configure bundler and paymaster](/img/embedded-wallets/w3a-dashboard/smart-account/configure-paymaster.png)
+<img
+  className="docImg"
+  src="/img/embedded-wallets/dev-dashboard/smart-account/configure-paymaster.png"
+  alt="Configure bundler and paymaster"
+/>
 
 1. Navigate to the **Bundler & Paymaster** tab within the **Smart accounts** section
 2. Add the bundler URL for each supported chain
