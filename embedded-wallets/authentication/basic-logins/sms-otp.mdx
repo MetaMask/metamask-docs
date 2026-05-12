@@ -4,65 +4,35 @@ sidebar_label: SMS OTP
 description: 'SMS OTP Login with Embedded Wallets | Embedded Wallets'
 ---
 
-import SMSOTPToggle from '@site/static/img/embedded-wallets/w3a-dashboard/sms-otp-toggle.png'
-import SMSOTPAddConnection from '@site/static/img/embedded-wallets/w3a-dashboard/sms-otp-add-connection.png'
-import SMSOTPOnboarding from '@site/static/img/embedded-wallets/w3a-dashboard/email-passwordless-onboarding.gif'
+import SMSOTPToggle from '@site/static/img/embedded-wallets/dev-dashboard/sms-otp-toggle.png'
+import SMSOTPAddConnection from '@site/static/img/embedded-wallets/dev-dashboard/sms-otp-add-connection.png'
+import SMSOTPOnboarding from '@site/static/img/embedded-wallets/dev-dashboard/sms-otp-onboarding.png'
 
 Web3Auth provides built-in support for email and SMS-based authentication, allowing users to log in seamlessly using a one-time passcode (OTP) sent to their email address or phone number. This form of passwordless authentication simplifies the onboarding process, removes friction for end users, and expands accessibility—especially in regions where social login options may be limited.
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={SMSOTPOnboarding}
-    style={{
-      maxWidth: '600px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="SMS OTP Onboarding"
-  />
-</div>
+<img className="docImg" src={SMSOTPOnboarding} alt="SMS OTP Onboarding" />
 
 ## Set up a custom SMS OTP connection
 
 :::success Enable on dashboard
 
-To use this feature, developers must first enable **SMS OTP** from the **Social Connections** section in the [dashboard](https://dashboard.web3auth.io).
+To use this feature, developers must first enable **SMS OTP** from the **Social Connections** section in the [dashboard](https://developer.metamask.io).
 
 By default, Web3Auth uses its own pre-configured credentials for SMS OTP login.
 
 :::
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={SMSOTPToggle}
-    style={{
-      maxWidth: '600px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="SMS OTP Toggle"
-  />
-</div>
+<img className="docImg" src={SMSOTPToggle} alt="SMS OTP Toggle" />
 
 For enhanced control and branding, developers are encouraged to configure a custom SMS OTP connection. Follow these steps:
 
-1. Visit the [dashboard](https://dashboard.web3auth.io).
+1. Visit the [dashboard](https://developer.metamask.io).
 2. Go to the **Social Connections** section.
 3. Click the **Settings** icon next to the toggle for **SMS OTP**.
 4. Enter your custom `Auth Connection ID`.
 5. Click **Add Connection** to complete the setup.
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={SMSOTPAddConnection}
-    style={{
-      maxWidth: '600px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="SMS OTP Add Connection"
-  />
-</div>
+<img className="docImg" src={SMSOTPAddConnection} alt="SMS OTP Add Connection" />
 
 ## Usage
 
