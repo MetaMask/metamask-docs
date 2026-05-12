@@ -56,13 +56,13 @@ Control how long users stay authenticated and how sessions persist.
 **Key Configuration Options:**
 
 - `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before
-  needing to log in again.
+  needing to sign in again.
   - Minimum: 1 second (`1`).
   - Maximum: 30 days (`86400 * 30`).
   - Default: 7 days (`86400 * 7`).
 - `storageType` - Storage location for authentication state. Options:
-  - `"local"`: Persists across browser tabs and browser restarts (localStorage)
-  - `"session"`: Persists only in current tab, cleared when tab closes (sessionStorage)
+  - `"local"`: Persists across browser tabs and browser restarts (`localStorage`)
+  - `"session"`: Persists only in current tab, cleared when tab closes (`sessionStorage`)
 
 ```tsx
 const web3AuthOptions = {
@@ -88,7 +88,7 @@ section.
 
 ## Custom authentication methods
 
-Control the login options presented to your users and how they're displayed in the modal. For
+Control the sign-in options presented to your users and how they're displayed in the modal. For
 detailed configuration options and implementation examples, see the
 [custom authentication](./custom-authentication.mdx) section.
 

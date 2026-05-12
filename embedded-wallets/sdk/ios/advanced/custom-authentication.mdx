@@ -40,7 +40,7 @@ Consequentially, you will see the terms **"Verifier ID"** and **"Aggregate Verif
 
 :::
 
-To use custom authentication (using supported Social providers or Login providers like Auth0, AWS Cognito, Firebase, or your own custom JWT login), you can add the configuration using the `loginConfig` parameter during the initialization.
+To use custom authentication (using supported Social providers or Sign-in providers like Auth0, AWS Cognito, Firebase, or your own custom JWT sign-in), you can add the configuration using the `loginConfig` parameter during the initialization.
 
 The `loginConfig` parameter is a key value map. The key should be one of the `Web3AuthProvider` in its string form, and the value should be a `W3ALoginConfig` struct.
 
@@ -120,15 +120,15 @@ public enum TypeOfLogin: String, Codable {
 ### Usage
 
 <Tabs
-  defaultValue="google"
+  defaultValue="Google"
   values={[
-    { label: "Google", value: "google" },
-    { label: "Facebook", value: "facebook" },
+    { label: "Google", value: "Google" },
+    { label: "Facebook", value: "Facebook" },
     { label: "JWT", value: "jwt" },
   ]}
 >
 
-<TabItem value="google">
+<TabItem value="Google">
 
 ```swift
 import Web3Auth
@@ -152,7 +152,7 @@ let web3Auth = try await Web3Auth(
 
 </TabItem>
 
-<TabItem value="facebook">
+<TabItem value="Facebook">
 
 ```swift
 import Web3Auth
@@ -203,9 +203,9 @@ let web3Auth = try await Web3Auth(
 
 </Tabs>
 
-## Configure extra login options
+## Configure extra sign-in options
 
-Additional to the login config during initialization, you can pass extra options to the `login` function to configure the login flow for cases requiring additional info for enabling login. The `ExtraLoginOptions` accepts the following parameters.
+Additional to the sign-in config during initialization, you can pass extra options to the `login` function to configure the sign-in flow for cases requiring additional info for enabling sign-in. The `ExtraLoginOptions` accepts the following parameters.
 
 ### Parameters
 
@@ -279,16 +279,16 @@ public struct ExtraLoginOptions: Codable {
 <Tabs defaultValue="auth0"
   values={[
     { label: "Auth0", value: "auth0" },
-    { label: "Custom JWT", value: "byoj" },
+    { label: "Custom JWT", value: "custom-jwt" },
     { label: "Email Passwordless", value: "email-passwordless" },
     { label: "SMS Passwordless", value: "sms-passwordless" },
   ]}
 >
 
 <TabItem value="auth0">
-Auth0 has a special login flow, called the SPA flow. This flow requires a `client_id` and `domain`
+Auth0 has a special sign-in flow, called the SPA flow. This flow requires a `client_id` and `domain`
 to be passed, and Web3Auth will get the JWT `id_token` from Auth0 directly. You can pass these
-configurations in the `ExtraLoginOptions` object in the login function.
+configurations in the `ExtraLoginOptions` object in the sign-in function.
 
 ```swift
 import
@@ -327,7 +327,7 @@ let result = try await web3Auth.login(
 
 </TabItem>
 
-<TabItem value="byoj">
+<TabItem value="custom-jwt">
 If you're using any other provider like Firebase, AWS Cognito or deploying your own Custom JWT
 server, you need to put the JWT token into the `id_token` field of the `extraLoginOptions`,
 additionally, you need to pass over the `domain` field as well, which is mandatory. If you don't
@@ -366,8 +366,8 @@ let result = await web3Auth.login(
 </TabItem>
 
 <TabItem value="email-passwordless">
-To use the email passwordless login, you need to put the email into the `login_hint` parameter of
-the `ExtraLoginOptions`. By default, the login flow will be `code` flow, if you want to use the
+To use the email passwordless sign-in, you need to put the email into the `login_hint` parameter of
+the `ExtraLoginOptions`. By default, the sign-in flow will be `code` flow, if you want to use the
 `link` flow, you need to put `flow_type` into the `additionalParams` parameter of the
 `ExtraLoginOptions`.
 
@@ -393,7 +393,7 @@ let result = try await web3Auth.login(
 
 <TabItem value="sms-passwordless">
 
-To use the SMS Passwordless login, send the phone number as the `login_hint` parameter of the `ExtraLoginOptions`. Please ensure the phone number takes the format:
+To use the SMS Passwordless sign-in, send the phone number as the `login_hint` parameter of the `ExtraLoginOptions`. Please ensure the phone number takes the format:
 +\{country_code}-\{phone_number}, that is, (+91-09xx901xx1).
 
 ```swift
@@ -419,7 +419,7 @@ let result = try await web3Auth.login(W3ALoginParams(
 
 ### Aggregate verifier example
 
-You can use aggregate verifier to combine multiple login methods to get the same address for the users regardless of their login providers. For example, combining a Google and email passwordless login, or Google and GitHub via Auth0 to access the same address for your user.
+You can use aggregate verifier to combine multiple sign-in methods to get the same address for the users regardless of their sign-in providers. For example, combining a Google and email passwordless sign-in, or Google and GitHub via Auth0 to access the same address for your user.
 
 ```swift
 import Web3Auth
