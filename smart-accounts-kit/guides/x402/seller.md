@@ -11,21 +11,28 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Create an x402 server with ERC-7710
 
-In this guide, you build a Node.js server that charges for HTTP API access using [x402](https://www.x402.org/) and verifies payments through the MetaMask facilitator.
+In this guide, you build a Node.js server that charges for HTTP API access using
+[x402](https://www.x402.org/) and accepts [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710)
+delegations payments verified through the MetaMask facilitator.
 
-The official `@x402/express` middleware doesn't support ERC-7710 delegation payloads, so you implement the x402 HTTP contract manually.
+The official `@x402/express` middleware doesn't support ERC-7710 delegation payloads. This guide
+shows you how to implement the x402 HTTP contract manually with Express.
 
 ## Prerequisites
 
 - [Node.js 18](https://nodejs.org/en) or later.
-- [Minimal Node.js Express server](https://expressjs.com/en/starter/installing.html).
-- A seller payout address to recieve funds (for example, [MetaMask Wallet](https://metamask.io/download)).
+- A [Node.js Express server](https://expressjs.com/en/starter/installing.html).
+- A seller payout address to receive funds (for example, a [MetaMask wallet](https://metamask.io/download) address).
 
 ## Steps
 
 ### 1. Install the dependencies
 
-### 1. Create payment requirements
+```bash npm2yarn
+npm install viem
+```
+
+### 2. Create payment requirements
 
 Define the payment requirements that every protected route returns to buyers. Follow the [x402 payment requirements schema](https://docs.x402.org/core-concepts/http-402#payment-headers-in-v2), and set `scheme` to `erc7710`.
 
@@ -61,7 +68,7 @@ export const paymentRequirements: PaymentRequirements = {
   resource: '/api/premium',
   description: 'Premium API access',
   mimeType: 'application/json',
-  payTo: 'YOUR_PAYTO_ADDRESS',
+  payTo: '<YOUR_PAYTO_ADDRESS>',
   maxTimeoutSeconds: 60,
   // USDC contract address on Base.
   asset: '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913',
@@ -90,9 +97,10 @@ export type PaymentRequirements = {
 </TabItem>
 </Tabs>
 
-### 2. Add a discovery method
+### 3. Add a discovery method
 
-Add a public `GET /info` route that publishes your protected paths and their payment terms. Buyers call this route before they prepare a ERC-7710 delegation payment.
+Add a public `GET /info` route that publishes your protected paths and their payment terms.
+Buyers call this route before they prepare an ERC-7710 delegation payment.
 
 ```ts
 // src/index.ts
@@ -110,11 +118,13 @@ app.get('/info', (_req, res) => {
 })
 ```
 
-### 3. Add payment middleware
+### 4. Add payment middleware
 
-Add payment middleware that runs before each protected handler. Parse the base64 `X-PAYMENT` header to extract the encoded delegation chain (`permissionContext`) the buyer prepared.
+Add payment middleware that runs before each protected handler. Parse the base64 `X-PAYMENT` header to
+extract the encoded delegation chain (`permissionContext`) the buyer prepared.
 
-When the `X-PAYMENT` header is missing or malformed, respond with `402 Payment Required` and a JSON body that tells the buyer how to pay.
+When the `X-PAYMENT` header is missing or malformed, respond with `402 Payment Required` and a JSON body
+that tells the buyer how to pay.
 
 ```ts
 // src/middleware.ts
@@ -146,7 +156,7 @@ export function requirePayment(req: Request, res: Response, next: NextFunction) 
 }
 ```
 
-### 4. Verify the payment
+### 5. Verify the payment
 
 Call the MetaMask facilitator's `verify` endpoint to confirm the encoded delegation chain authorizes the requested resource. If verification fails, return `402` with the failure reason from the facilitator so the buyer can correct the payment and retry.
 
@@ -192,7 +202,7 @@ const FACILITATOR_URL = 'https://tx-sentinel-base-mainnet.dev-api.cx.metamask.io
 </TabItem>
 </Tabs>
 
-### 5. Settle the payment
+### 6. Settle the payment
 
 After verification succeeds, run your business logic and call the MetaMask facilitator's `settle` endpoint. Attach the settlement result to the response as the `X-PAYMENT-RESPONSE` header so the buyer can correlate it with the original request.
 
@@ -220,8 +230,13 @@ app.get('/api/premium', requirePayment, verifyPayment, async (_req, res) => {
   // Run your business logic and send as a response.
   res.json({ message: 'Premium content unlocked' })
 })
-;(app.listen(4402),
-  () => {
-    console.log('Seller listening on port 4402')
-  })
+
+app.listen(4402, () => {
+  console.log('Seller listening on port 4402')
+})
 ```
+
+## Next steps
+
+- Learn more about [ERC-7710 delegation](../../concepts/delegation/overview.md).
+- See the [x402 ERC-7710 specification](https://github.com/coinbase/x402/blob/main/specs/schemes/exact/scheme_exact_evm.md#3-assettransfermethod-erc-7710).
