@@ -24,7 +24,7 @@ In this guide, you set up recurring x402 payments by requesting an ERC-20 period
 <GlossaryTerm term="Advanced Permissions" /> permission from a user.
 
 For example, a user gives your agent permission to spend up to 10 USDC per week.
-Later, when the agent needs access an x402 endpoint, it checks the price, uses the permission the user
+Later, when the agent needs access to an x402 endpoint, it checks the price, uses the permission the user
 already gave it, and pays.
 
 ## Prerequisites
@@ -68,7 +68,7 @@ const sessionAccount = privateKeyToAccount('0x...')
 Request Advanced Permissions from the user with the Wallet Client's `requestExecutionPermissions` action.
 
 In this example, you request an [ERC-20 periodic permission](../../advanced-permissions/use-permissions/erc20-token.md#erc-20-periodic-permission) with a weekly allowance of 10 USDC. This creates
-a recurring payment budget that your agent can store and reuse for making x402 API call.
+a recurring payment budget that your agent can store and reuse for making an x402 API call.
 
 See the [`requestExecutionPermissions`](../../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) API reference for more information.
 
