@@ -11,6 +11,40 @@ Learn [how to use Advanced Permissions types](../../guides/advanced-permissions/
 
 ## ERC-20 token permissions
 
+### ERC-20 allowance permission
+
+Ensures a fixed ERC-20 token allowance.
+Transfers are allowed until the total transferred amount reaches the allowance amount.
+
+#### Parameters
+
+| Name              | Type      | Required | Description                                                            |
+| ----------------- | --------- | -------- | ---------------------------------------------------------------------- |
+| `tokenAddress`    | `Address` | Yes      | The ERC-20 token contract address.                                     |
+| `allowanceAmount` | `bigint`  | Yes      | The maximum total amount of tokens that can be transferred.            |
+| `startTime`       | `number`  | No       | The start timestamp in seconds. The default is the current time.       |
+| `justification`   | `string`  | No       | A human-readable explanation of why the permission is being requested. |
+
+#### Example
+
+```typescript
+import { parseUnits } from 'viem'
+
+const currentTime = Math.floor(Date.now() / 1000)
+const expiry = currentTime + 604800
+
+const permission = {
+  type: 'erc20-token-allowance',
+  data: {
+    tokenAddress: '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238',
+    allowanceAmount: parseUnits('50', 6),
+    startTime: currentTime,
+    justification: 'Permission to transfer up to 50 USDC in total',
+  },
+  isAdjustmentAllowed: true,
+}
+```
+
 ### ERC-20 periodic permission
 
 Ensures a per-period limit for ERC-20 token transfers.
@@ -87,6 +121,38 @@ const permission = {
 
 ## Native token permissions
 
+### Native token allowance permission
+
+Ensures a fixed native token allowance.
+Transfers are allowed until the total transferred amount reaches the allowance amount.
+
+#### Parameters
+
+| Name              | Type     | Required | Description                                                            |
+| ----------------- | -------- | -------- | ---------------------------------------------------------------------- |
+| `allowanceAmount` | `bigint` | Yes      | The maximum total amount of tokens that can be transferred.            |
+| `startTime`       | `number` | No       | The start timestamp in seconds. The default is the current time.       |
+| `justification`   | `string` | No       | A human-readable explanation of why the permission is being requested. |
+
+#### Example
+
+```typescript
+import { parseEther } from 'viem'
+
+const currentTime = Math.floor(Date.now() / 1000)
+const expiry = currentTime + 604800
+
+const permission = {
+  type: 'native-token-allowance',
+  data: {
+    allowanceAmount: parseEther('0.05'),
+    startTime: currentTime,
+    justification: 'Permission to transfer up to 0.05 ETH in total',
+  },
+  isAdjustmentAllowed: true,
+}
+```
+
 ### Native token periodic permission
 
 Ensures a per-period limit for native token transfers.
@@ -140,9 +206,7 @@ At the start, a specified initial amount is released, after which tokens accrue 
 #### Example
 
 ```typescript
-import { sepolia as chain } from 'viem/chains'
 import { parseEther } from 'viem'
-import { walletClient } from './client.ts'
 
 const currentTime = Math.floor(Date.now() / 1000)
 const expiry = currentTime + 604800
