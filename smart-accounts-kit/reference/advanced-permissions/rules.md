@@ -8,7 +8,7 @@ toc_max_heading_level: 2
 # Advanced Permissions rules reference
 
 When [executing on a MetaMask user's behalf](../../guides/advanced-permissions/execute-on-metamask-users-behalf.md), you can add the
-following rules types for the supported permission types.
+following rule types for the supported permission types.
 
 Use [`getSupportedExecutionPermissions`](./wallet-client.md#getsupportedexecutionpermissions) to
 check which rule types are available for each permission type on each chain.
