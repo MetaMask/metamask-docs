@@ -169,7 +169,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
 
 ### 5. Create a redelegation
 
-The granted advanced permisison is delegated to the session account. To let facilitator addresses
+The granted advanced permission is delegated to the session account. To let facilitator addresses
 redeem this permission context for x402 settlement, create an open redelegation from the session account.
 
 Use the Wallet Client's [`redelegatePermissionContextOpen`](../../../reference/erc7710/wallet-client.md#redelegatepermissioncontextopen)

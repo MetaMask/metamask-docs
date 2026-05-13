@@ -63,7 +63,7 @@ import { privateKeyToAccount } from 'viem/accounts'
 const sessionAccount = privateKeyToAccount('0x...')
 ```
 
-### 3. Request Advanced Permisisons
+### 3. Request Advanced Permissions
 
 Request Advanced Permissions from the user with the Wallet Client's `requestExecutionPermissions` action.
 
