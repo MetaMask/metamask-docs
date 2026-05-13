@@ -179,6 +179,15 @@ Represents a single <GlossaryTerm term="Signer">signer</GlossaryTerm>'s contribu
 | `signature` | `Hex`           | Yes      | The signer's signature over the user operation.                                       |
 | `type`      | `SignatureType` | Yes      | The signature type to represent signature algorithm. Only supported value is `ECDSA`. |
 
+### `RedelegatePermissionContextReturnType`
+
+Return type of [`redelegatePermissionContext`](erc7710/wallet-client.md#redelegatepermissioncontext) and [`redelegatePermissionContextOpen`](erc7710/wallet-client.md#redelegatepermissioncontextopen).
+
+| Name                | Type                        | Description                                                     |
+| ------------------- | --------------------------- | --------------------------------------------------------------- |
+| `delegation`        | [`Delegation`](#delegation) | The signed redelegation object.                                 |
+| `permissionContext` | `Hex`                       | ABI-encoded delegation chain with the new delegation prepended. |
+
 ### `PermissionResponse`
 
 Represents a granted <GlossaryTerm term="Advanced Permissions">Advanced Permission</GlossaryTerm>.
