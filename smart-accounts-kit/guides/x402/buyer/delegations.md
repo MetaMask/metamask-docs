@@ -230,7 +230,7 @@ export type PaymentPayload = {
 </TabItem>
 </Tabs>
 
-### 5. Call the API
+### 5. Make paid request
 
 Send the encoded payment payload in the `payment-signature` header. If verification succeeds, the server returns the protected data.
 
