@@ -4,11 +4,11 @@ sidebar_label: Delegations
 keywords: [x402, ERC-7710, delegation, smart account, facilitator, buyer, API]
 ---
 
-import Tabs from '@theme/Tabs'
-import TabItem from '@theme/TabItem'
-import GlossaryTerm from '@theme/GlossaryTerm'
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import GlossaryTerm from '@theme/GlossaryTerm';
 
-# Pay for x402 API with delegations
+# Pay for an x402 API with delegation
 
 In this guide, you use a buyer <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm>
 to access API data from an x402 server.
@@ -19,15 +19,18 @@ and send it as the payment payload when calling a protected API route.
 ## Prerequisites
 
 - [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
-- Fund smart account with USDC for the requested payment.
 
 ## Steps
 
 ### 1. Create a buyer account
 
-Create an account to represent buyer, the <GlossaryTerm term="Delegator account">delegator</GlossaryTerm> who will create a delegation.
+Create an account to represent the buyer, the <GlossaryTerm term="Delegator account">delegator</GlossaryTerm> who will create a delegation.
 
 The delegator must be a <GlossaryTerm term="MetaMask smart account" />; use the toolkit's [`toMetaMaskSmartAccount`](../../../reference/smart-account.md#tometamasksmartaccount) method to create the buyer account.
+
+:::note Important
+Fund the smart account with USDC for the requested payment.
+:::
 
 <Tabs>
 <TabItem value="example.ts">
@@ -68,8 +71,8 @@ export const buyerAccount = privateKeyToAccount('0x<BUYER_PRIVATE_KEY>')
 
 Call the protected API route once without a payment header.
 
-The server returns `402` and includes `PAYMENT-REQUIRED`, which gives you the payment terms needed
-to create an appropriate payment payload.
+The server returns `402` with the payment terms (`PAYMENT-REQUIRED`) in the response, which you use
+to build the payment payload.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -131,7 +134,7 @@ export type PaymentRequirements = {
 ### 3. Create a delegation
 
 Create an [open root delegation](../../../concepts/delegation/overview.md#open-root-delegation)
-from the buyer's smart account. With an open root delegation, the buyer delegates authority without
+from the buyer smart account. With an open root delegation, the buyer delegates authority without
 setting a specific delegate. Use [`createOpenDelegation`](../../../reference/delegation/index.md#createopendelegation) to create the open root delegation.
 
 This example uses the [`erc20TransferAmount`](../../../guides/delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope)
@@ -139,8 +142,10 @@ scope to allow USDC transfers up to the amount requested in `PAYMENT-REQUIRED`.
 It also uses the [`redeemer`](../../../reference/delegation/caveats.md#redeemer) caveat enforcer to restrict
 redemption to facilitator addresses provided by the server.
 
+:::warning
 Before creating the delegation, make sure your buyer smart account is deployed. If it is not
 deployed, delegation redemption will fail.
+:::
 
 ```ts
 import { CaveatType, createOpenDelegation, ScopeType } from '@metamask/smart-accounts-kit'
@@ -185,7 +190,7 @@ const signedDelegation = {
 ### 4. Create the payment payload
 
 Create a payment payload using the signed delegation and accepted requirements.
-For ERC-7710, x402 requires the payload fields `delegationManager`, `permissionContext`, and `delegator`.
+For ERC-7710 (Smart Contract Delegation), x402 requires the payload fields `delegationManager`, `permissionContext`, and `delegator`.
 The facilitator uses `permissionContext` to simulate during verification and then settle the payment.
 
 Use `encodeDelegations` to encode the delegation chain. Then base64 encode the full payment payload before sending it in the `payment-signature` header.
@@ -230,7 +235,7 @@ export type PaymentPayload = {
 </TabItem>
 </Tabs>
 
-### 5. Make paid request
+### 5. Make the paid request
 
 Send the encoded payment payload in the `payment-signature` header. If verification succeeds, the server returns the protected data.
 
