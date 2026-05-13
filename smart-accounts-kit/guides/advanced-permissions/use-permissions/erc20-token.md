@@ -9,13 +9,76 @@ import TabItem from "@theme/TabItem";
 # Use ERC-20 token permissions
 
 [Advanced Permissions (ERC-7715)](../../../concepts/advanced-permissions.md) supports ERC-20 token permission types that allow you to request fine-grained
-permissions for ERC-20 token transfers with time-based (periodic) or streaming conditions, depending on your use case.
+permissions for ERC-20 token transfers with periodic, fixed allowance, or streaming conditions, depending on your use case.
 
 ## Prerequisites
 
 - [Install and set up the Smart Accounts Kit.](../../../get-started/install.md)
 - [Configure the Smart Accounts Kit.](../../configure-toolkit.md)
 - [Create a session account.](../execute-on-metamask-users-behalf.md#3-set-up-a-session-account)
+
+## ERC-20 allowance permission
+
+This permission type ensures a fixed ERC-20 token allowance.
+It allows transfers up to a maximum total amount and doesn't reset by period.
+
+For example, a user signs an ERC-7715 permission that lets your dapp spend up to 50 USDC in total.
+After the dapp transfers 50 USDC, no additional transfers are allowed under this permission.
+
+See the [ERC-20 allowance permission API reference](../../../reference/advanced-permissions/permissions.md#erc-20-allowance-permission) for more information.
+
+<Tabs>
+<TabItem value="example.ts">
+
+```typescript
+import { sepolia as chain } from 'viem/chains'
+import { parseUnits } from 'viem'
+import { walletClient } from './client.ts'
+
+// Since current time is in seconds, convert milliseconds to seconds.
+const currentTime = Math.floor(Date.now() / 1000)
+// 1 week from now.
+const expiry = currentTime + 604800
+
+// USDC address on Ethereum Sepolia.
+const tokenAddress = '0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238'
+
+const grantedPermissions = await walletClient.requestExecutionPermissions([
+  {
+    chainId: chain.id,
+    expiry,
+    // The requested permissions will be granted to the
+    // session account.
+    to: sessionAccount.address,
+    permission: {
+      type: 'erc20-token-allowance',
+      data: {
+        tokenAddress,
+        // 50 USDC in WEI format. Since USDC has 6 decimals, 50 * 10^6.
+        allowanceAmount: parseUnits('50', 6),
+        startTime: currentTime,
+        justification: 'Permission to transfer up to 50 USDC in total',
+      },
+      isAdjustmentAllowed: true,
+    },
+  },
+])
+```
+
+</TabItem>
+<TabItem value="client.ts">
+
+```typescript
+import { createWalletClient, custom } from 'viem'
+import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
+
+export const walletClient = createWalletClient({
+  transport: custom(window.ethereum),
+}).extend(erc7715ProviderActions())
+```
+
+</TabItem>
+</Tabs>
 
 ## ERC-20 periodic permission
 
@@ -46,7 +109,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
   {
     chainId: chain.id,
     expiry,
-    // The requested permissions will granted to the
+    // The requested permissions will be granted to the
     // session account.
     to: sessionAccount.address,
     permission: {
