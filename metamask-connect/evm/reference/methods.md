@@ -322,7 +322,7 @@ Generates a map of Infura RPC URLs keyed by hex chain ID.
 Use this utility to populate `api.supportedNetworks` when calling [`createEVMClient`](#createevmclient).
 
 :::note
-Each chain must be activated in your [Infura dashboard](https://developer.metamask.io/) before `getInfuraRpcUrls` can generate working URLs for it.
+Each chain must be activated in your [Infura dashboard](https://app.infura.io/) before `getInfuraRpcUrls` can generate working URLs for it.
 :::
 
 ### Parameters

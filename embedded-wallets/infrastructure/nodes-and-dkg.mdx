@@ -19,7 +19,7 @@ The architecture consists of four parts:
 - A private Byzantine Fault Tolerant (BFT) network between nodes
 - A frontend client/SDK that interacts with nodes
 
-![Architecture](/img/tutorials/graph-6-final.png)
+<img className="docImg" src="/img/tutorials/graph-6-final.png" alt="Architecture" />
 
 A smart contract is used for node discovery. Nodes are selected, [operate for a fixed period](./glossary.mdx#epochs), and generate a set of keys via DKG.
 
@@ -77,7 +77,11 @@ The keys are assigned to a combination of `verifier` (for example, an authentica
 
 The key retrieval flow for an Embedded Wallets sign in uses the Torus Node Network as described below:
 
-![Standard login with OAuth2 (Google, Facebook, Apple, Reddit, Discord, Twitch)](/img/tutorials/login-key-assignments.png)
+<img
+  className="docImg"
+  src="/img/tutorials/login-key-assignments.png"
+  alt="Standard login with OAuth2 (Google, Facebook, Apple, Reddit, Discord, Twitch)"
+/>
 
 1. Your application prompts the user to sign in using their preferred authentication method (for example, OAuth).
 

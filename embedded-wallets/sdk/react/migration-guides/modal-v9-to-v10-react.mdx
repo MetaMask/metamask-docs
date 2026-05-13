@@ -20,7 +20,7 @@ The `Web3AuthProvider` component remains essential for initializing the Web3Auth
 
 - **Import path:** `Web3AuthProvider` is imported from `@web3auth/modal/react`.
 - **Configuration Prop:** `Web3AuthProvider` in v10 typically takes a single `config` prop. This `config` object (for example, `web3AuthContextConfig`) will contain your `web3AuthOptions` and any client-side SDK configurations.
-- **Dashboard configuration:** Many configurations (like chain details for standard EVM chains, and verifier/connection settings) are now primarily managed through the Web3Auth Developer Dashboard (now the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)).
+- **Dashboard configuration:** Many configurations (like chain details for standard EVM chains, and verifier/connection settings) are now primarily managed through the Web3Auth Developer Dashboard (now the [Embedded Wallets dashboard](https://developer.metamask.io/)).
 
 ### v10 `Web3AuthProvider` and hook usage
 
@@ -53,7 +53,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 import { WEB3AUTH_NETWORK, Web3AuthOptions } from '@web3auth/modal' // v10 modal options
 import { type Web3AuthContextConfig } from '@web3auth/modal/react' // v10 context config type
 
-const clientId = 'YOUR_V10_CLIENT_ID' // Get from https://dashboard.web3auth.io
+const clientId = 'YOUR_V10_CLIENT_ID' // Get from https://developer.metamask.io
 
 const web3AuthContextConfig: Web3AuthContextConfig = {
   web3AuthOptions: {

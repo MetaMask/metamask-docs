@@ -19,7 +19,7 @@ MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seaml
 
 ## Prerequisites
 
-- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+- Set up your project on the [Embedded Wallets dashboard](https://developer.metamask.io/).
 
 :::tip
 
@@ -97,7 +97,7 @@ Once the gradles and permission has been updated, you need to configure your Emb
 
 #### Configure a Plug n Play project
 
-- From the [Embedded Wallets dashboard](https://dashboard.web3auth.io), create or open an existing Web3Auth project.
+- From the [Embedded Wallets dashboard](https://developer.metamask.io), create or open an existing Web3Auth project.
 - Allowlist `{SCHEME}://{YOUR_APP_PACKAGE_NAME}` in the dashboard. This step is mandatory for the redirect to work.
 
 #### Configure deep link
@@ -259,7 +259,7 @@ val web3Auth = Web3Auth(
         network = Network.SAPPHIRE_MAINNET, // or Network.SAPPHIRE_DEVNET
         redirectUrl = "YOUR_APP_SCHEME://auth"
         loginConfig = hashMapOf("google" to LoginConfigItem(
-          verifier = "verifier-name", // Get it from Web3Auth dashboard
+          verifier = "verifier-name", // Get it from MetaMask Developer Dashboard
           typeOfLogin = TypeOfLogin.GOOGLE,
           clientId = getString(R.string.google_client_id) // Google's client id
         )),
