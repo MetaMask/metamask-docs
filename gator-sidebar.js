@@ -205,6 +205,7 @@ const sidebar = {
           key: 'advanced-permissions-reference',
           items: [
             'reference/advanced-permissions/permissions',
+            'reference/advanced-permissions/rules',
             'reference/advanced-permissions/wallet-client',
           ],
         },
