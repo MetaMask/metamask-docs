@@ -136,7 +136,6 @@ if (!facilitators || facilitators.length === 0) {
   // Handle error
 }
 
-const supportedPermissions = await walletClient.getSupportedExecutionPermissions()
 const currentTime = Math.floor(Date.now() / 1000)
 const expiry = currentTime + 3600
 
