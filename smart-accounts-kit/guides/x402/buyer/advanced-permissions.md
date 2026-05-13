@@ -122,8 +122,8 @@ export type PaymentRequirements = {
 Request Advanced Permissions from the user with the Wallet Client's `requestExecutionPermissions` action.
 
 In this example, you request an ERC-20 allowance permission with a fixed allowance equal to the
-resource cost. Use the `redeemer` rule to restrict redemption to facilitator addresses from
-the payment requirements.
+resource cost. Use the [`redeemer`](../../../reference/advanced-permissions/rules.md#redeemer) rule
+to restrict redemption to facilitator addresses from the payment requirements.
 
 See the [`requestExecutionPermissions`](../../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) API reference for more information.
 
