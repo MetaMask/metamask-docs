@@ -193,7 +193,8 @@ Create a payment payload using the signed delegation and accepted requirements.
 For ERC-7710 (Smart Contract Delegation), x402 requires the payload fields `delegationManager`, `permissionContext`, and `delegator`.
 The facilitator uses `permissionContext` to simulate during verification and then settle the payment.
 
-Use `encodeDelegations` to encode the delegation chain. Then base64 encode the full payment payload before sending it in the payment signature header.
+Use `encodeDelegations` to encode the delegation chain.
+Then base64 encode the full x402 payment payload before sending it in the `payment-signature` header.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -237,7 +238,8 @@ export type PaymentPayload = {
 
 ### 5. Make the paid request
 
-Send the encoded payment payload in the payment signature header. If verification succeeds, the server returns the protected data.
+Send the encoded x402 payment payload in the `payment-signature` header.
+If verification succeeds, the server returns the protected data.
 
 ```ts
 const apiResponse = await fetch('https://api.example.com/paid-endpoint', {

@@ -90,7 +90,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
     permission: {
       type: 'erc20-token-periodic',
       data: {
-        tokenAddress: accepted.asset,
+        tokenAddress,
         periodAmount: parseUnits('10', 6),
         periodDuration: 604800,
         startTime: currentTime,
@@ -230,7 +230,7 @@ For ERC-7710 (Smart Contract Delegation), x402 requires the payload fields `dele
 `permissionContext`, and `delegator`. The facilitator uses `permissionContext` to simulate
 during verification and then settle the payment.
 
-Encode the full payment payload as base64, then send it in the payment signature header.
+Encode the full x402 payment payload as base64, then send it in the `payment-signature` header.
 
 ```ts
 import { PaymentPayload } from './types'
@@ -252,7 +252,7 @@ const encodedPayment = Buffer.from(JSON.stringify(paymentPayload)).toString('bas
 
 ### 7. Make the paid request
 
-Send the base64 encoded payload in the payment signature header.
+Send the base64-encoded x402 payment payload in the `payment-signature` header.
 
 ```ts
 const apiResponse = await fetch('https://api.example.com/paid-endpoint', {
