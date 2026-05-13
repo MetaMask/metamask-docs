@@ -138,7 +138,7 @@ from the buyer smart account. With an open root delegation, the buyer delegates 
 setting a specific delegate. Use [`createOpenDelegation`](../../../reference/delegation/index.md#createopendelegation) to create the open root delegation.
 
 This example uses the [`erc20TransferAmount`](../../../guides/delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope)
-scope to allow USDC transfers up to the amount requested in `PAYMENT-REQUIRED`.
+scope to allow USDC transfers up to the amount requested in payment terms.
 It also uses the [`redeemer`](../../../reference/delegation/caveats.md#redeemer) caveat enforcer to restrict
 redemption to facilitator addresses provided by the server.
 
@@ -193,7 +193,7 @@ Create a payment payload using the signed delegation and accepted requirements.
 For ERC-7710 (Smart Contract Delegation), x402 requires the payload fields `delegationManager`, `permissionContext`, and `delegator`.
 The facilitator uses `permissionContext` to simulate during verification and then settle the payment.
 
-Use `encodeDelegations` to encode the delegation chain. Then base64 encode the full payment payload before sending it in the `payment-signature` header.
+Use `encodeDelegations` to encode the delegation chain. Then base64 encode the full payment payload before sending it in the payment signature header.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -237,7 +237,7 @@ export type PaymentPayload = {
 
 ### 5. Make the paid request
 
-Send the encoded payment payload in the `payment-signature` header. If verification succeeds, the server returns the protected data.
+Send the encoded payment payload in the payment signature header. If verification succeeds, the server returns the protected data.
 
 ```ts
 const apiResponse = await fetch('https://api.example.com/paid-endpoint', {

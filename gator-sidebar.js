@@ -122,7 +122,11 @@ const sidebar = {
               type: 'category',
               label: 'Buyer',
               collapsed: true,
-              items: ['guides/x402/buyer/delegations', 'guides/x402/buyer/advanced-permissions'],
+              items: [
+                'guides/x402/buyer/delegations',
+                'guides/x402/buyer/advanced-permissions',
+                'guides/x402/buyer/recurring-payments',
+              ],
             },
           ],
         },
