@@ -22,7 +22,7 @@ Ensure you have an [API key](/developer-tools/dashboard/get-started/create-api/)
 
 ### curl
 
-Run the following command in your terminal, replacing the endpoint with your MegaETH Mainnet endpoint from the MetaMask Developer dashboard:
+Run the following command in your terminal, replacing the endpoint with your MegaETH Mainnet endpoint from the Infura dashboard:
 
 ```bash
 curl https://megaeth-mainnet.infura.io/v3/<YOUR-API-KEY> \
@@ -45,7 +45,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. Create your JavaScript file and copy the following code:
 
-   Replace the endpoint with your MegaETH Mainnet endpoint from the MetaMask Developer dashboard.
+   Replace the endpoint with your MegaETH Mainnet endpoint from the Infura dashboard.
 
    ```javascript title="index.js"
    import fetch from 'node-fetch'
@@ -87,7 +87,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. Create your JavaScript file and copy the following code:
 
-   Replace the endpoint with your MegaETH Mainnet endpoint from the MetaMask Developer dashboard.
+   Replace the endpoint with your MegaETH Mainnet endpoint from the Infura dashboard.
 
    ```javascript title="index.js"
    const axios = require('axios')
@@ -123,7 +123,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. Create your JavaScript file and copy the following code:
 
-   Replace the endpoint with your MegaETH Mainnet endpoint from the MetaMask Developer dashboard.
+   Replace the endpoint with your MegaETH Mainnet endpoint from the Infura dashboard.
 
    ```javascript title="index.js"
    const ethers = require('ethers')
@@ -158,7 +158,7 @@ In these examples, you'll use [npm](https://docs.npmjs.com/downloading-and-insta
 
 1. Create your Python file and copy the following code:
 
-   Replace the endpoint with your MegaETH Mainnet endpoint from the MetaMask Developer dashboard.
+   Replace the endpoint with your MegaETH Mainnet endpoint from the Infura dashboard.
 
    ```python title="index.py"
    import requests
@@ -196,7 +196,7 @@ by Infura. Here are some suggestions:
 
 - **Try out different networks**: Infura supports multiple networks including Ethereum, Linea, Polygon, Optimism, and more.
 
-- **Monitor your usage**: Monitor your usage on the [MetaMask Developer dashboard](/developer-tools/dashboard/how-to/dashboard-stats/) to ensure you're not hitting your rate limits.
+- **Monitor your usage**: Monitor your usage on the [Infura dashboard](/developer-tools/dashboard/how-to/dashboard-stats/) to ensure you're not hitting your rate limits.
 
 Remember, the Infura community is here to help. If you have any questions or run into any issues, check out the
 [Infura community](https://community.infura.io/) for help and answers to common questions.
