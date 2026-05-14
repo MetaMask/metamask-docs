@@ -53,7 +53,7 @@ import { walletClient, publicClient } from './client.ts'
 // These properties must be extracted from the permission response. See
 // `grantPermissions` action to learn how to request permissions.
 const permissionContext = permissionsResponse[0].context
-const delegationManager = permissionsResponse[0].signerMeta.delegationManager
+const delegationManager = permissionsResponse[0].delegationManager
 
 const hash = walletClient.sendTransactionWithDelegation({
   chain,

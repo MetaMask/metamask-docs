@@ -48,72 +48,18 @@ export const NETWORK_ID = `eip155:${base.id}`
 // USDC address on Base mainnet.
 export const USDC_ADDRESS: Address = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'
 export const PAY_TO_ADDRESS = '0x<PAY_TO_ADDRESS>'
-// MetaMask facilitator host for Base mainnet.
-export const FACILITATOR_URL = 'https://tx-sentinel-base-mainnet.dev-api.cx.metamask.io'
+// MetaMask facilitator base URL for x402 on Base mainnet.
+export const FACILITATOR_URL =
+  'https://tx-sentinel-base-mainnet.dev-api.cx.metamask.io/platform/v2/x402'
 ```
 
-### 3. Add a discovery method
-
-Add a public `GET /info` route that publishes the seller's payment terms, including the
-facilitator address discovered from the MetaMask facilitator's `/supported` endpoint. Buyers
-call this route before they prepare an ERC-7710 delegation payment payload.
-
-<Tabs>
-<TabItem value = "src/index.ts">
-
-```ts
-import express, { type Request, type Response } from 'express'
-import cors from 'cors'
-import { NETWORK_ID, USDC_ADDRESS, PAY_TO_ADDRESS } from './config'
-import { fetchFacilitatorAddress } from './utils'
-
-const app = express()
-
-app.use(cors())
-app.use(express.json({ limit: '1mb' }))
-
-app.get('/info', async (_req: Request, res: Response) => {
-  try {
-    const facilitatorAddress = await fetchFacilitatorAddress()
-    res.json({
-      payToAddress: PAY_TO_ADDRESS,
-      facilitatorAddress,
-      network: NETWORK_ID,
-      asset: USDC_ADDRESS,
-      supportedMethods: ['erc7710'],
-    })
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Failed to fetch facilitator address'
-    res.status(503).json({ error: message })
-  }
-})
-```
-
-</TabItem>
-<TabItem value = "src/utils.ts">
-
-```ts
-import type { Address } from 'viem'
-import { FACILITATOR_URL } from './config'
-
-export async function fetchFacilitatorAddress(): Promise<Address> {
-  const res = await fetch(`${FACILITATOR_URL}/platform/v2/x402/supported`)
-  if (!res.ok) throw new Error('Failed to fetch facilitator supported info')
-  const data = await res.json()
-  const address = data.signers?.['eip155:*']?.[0] as Address
-  if (!address) throw new Error('Facilitator address not found in /supported response')
-  return address
-}
-```
-
-</TabItem>
-</Tabs>
-
-### 4. Create payment middleware
+### 3. Create payment middleware
 
 Add payment middleware that runs before each protected handler. The middleware factory builds the
 payment requirements for the route, reads the buyer's delegation payload from the request
-header, verifies it through the facilitator, and settles asynchronously.
+header, verifies it through the facilitator, and settles it before the protected handler runs.
+It also fetches the current facilitator signer address and includes it in
+`PaymentRequirements.extra.facilitators`.
 
 When the header is missing, the middleware encodes the payment requirements in a `PAYMENT-REQUIRED`
 response header and returns `402 Payment Required` with a JSON body that tells the buyer how to pay.
@@ -167,7 +113,7 @@ middleware forwards this object to the facilitator's `/verify` and `/settle` end
 ```ts
 import type { Request, Response, NextFunction } from 'express'
 import type { Address } from 'viem'
-import { USDC_ADDRESS, NETWORK_ID, PAY_TO_ADDRESS, FACILITATOR_URL } from './config'
+import { USDC_ADDRESS, NETWORK_ID, PAY_TO_ADDRESS } from './config'
 import type { PaymentPayload, PaymentRequirements, PaymentMiddlewareOptions } from './types'
 import { fetchFacilitatorAddress } from './utils'
 
@@ -218,9 +164,26 @@ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
       return
     }
 
-    // Verification and settlement are added in steps 6 and 7.
+    // Verification and settlement are added in steps 5 and 6.
     next()
   }
+}
+```
+
+</TabItem>
+<TabItem value = "src/utils.ts">
+
+```ts
+import type { Address } from 'viem'
+import { FACILITATOR_URL } from './config'
+
+export async function fetchFacilitatorAddress(): Promise<Address> {
+  const res = await fetch(`${FACILITATOR_URL}/supported`)
+  if (!res.ok) throw new Error('Failed to fetch facilitator supported info')
+  const data = await res.json()
+  const address = data.signers?.['eip155:*']?.[0] as Address
+  if (!address) throw new Error('Facilitator address not found in /supported response')
+  return address
 }
 ```
 
@@ -239,6 +202,7 @@ export interface PaymentRequirements {
   maxTimeoutSeconds: number
   extra: {
     assetTransferMethod: string
+    facilitators?: Address[]
     [key: string]: unknown
   }
 }
@@ -254,6 +218,7 @@ export interface PaymentPayload {
     maxTimeoutSeconds: number
     extra: {
       assetTransferMethod: string
+      facilitators?: Address[]
       [key: string]: unknown
     }
   }
@@ -274,7 +239,7 @@ export interface PaymentMiddlewareOptions {
 </TabItem>
 </Tabs>
 
-### 5. Verify the payment
+### 4. Verify the payment
 
 Call the MetaMask facilitator's `verify` endpoint through the `verifyPayment` helper to confirm
 the encoded delegation chain authorizes the requested resource. If verification fails, return
@@ -336,7 +301,7 @@ seller side.
 import { FACILITATOR_URL } from './config'
 
 export async function facilitatorPost<T>(endpoint: string, body: object): Promise<T> {
-  const res = await fetch(`${FACILITATOR_URL}/platform/v2/x402/${endpoint}`, {
+  const res = await fetch(`${FACILITATOR_URL}/${endpoint}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
@@ -366,13 +331,13 @@ export interface VerifyResult {
 </TabItem>
 </Tabs>
 
-### 6. Settle the payment
+### 5. Settle the payment
 
-After verification succeeds, wrap `res.json` so settlement runs asynchronously through the
-`settlePayment` helper after the protected handler responds. Set the `PAYMENT-RESPONSE` header
-with the verified payer and scheme so the buyer can correlate the result with the original
-request. Settling after responding keeps the protected route's latency independent of facilitator
-settlement time.
+After verification succeeds, settle the payment in the middleware through the `settlePayment`
+helper before calling `next()`.
+If settlement fails, return `402` with the facilitator error so the buyer can correct and retry.
+If settlement succeeds, set the `PAYMENT-RESPONSE` header with the verified payer and scheme so
+the buyer can correlate the result with the original request.
 
 <Tabs>
 <TabItem value = "src/middleware.ts">
@@ -396,29 +361,34 @@ settlement time.
      // Additional code from previous steps
 
 // add-start
-+    const originalJson = res.json.bind(res)
-+    res.json = function (body: unknown) {
-+      settlePayment(paymentPayload, paymentRequirements)
-+        .then((settleResult) => {
-+          console.log(
-+            '[x402] Settlement:',
-+            settleResult.success
-+              ? `tx ${settleResult.transaction}`
-+              : `failed: ${settleResult.errorMessage}`,
-+          )
-+        })
-+        .catch((err) => console.error('[x402] Settlement error:', err))
-+
-+      const paymentResponse = {
-+        x402Version: 2,
-+        scheme: paymentRequirements.scheme,
-+        network: NETWORK_ID,
-+        payer: verifyResult.payer,
-+      }
-+      const encodedResponse = Buffer.from(JSON.stringify(paymentResponse)).toString('base64')
-+      res.setHeader('PAYMENT-RESPONSE', encodedResponse)
-+      return originalJson(body)
++    let settleResult: SettleResult
++    try {
++      settleResult = await settlePayment(paymentPayload, paymentRequirements)
++    } catch (err) {
++      const message = err instanceof Error ? err.message : 'Settlement failed'
++      res.status(502).json({ error: message })
++      return
 +    }
++
++    if (!settleResult.success) {
++      res.status(402).json({
++        error: 'Payment settlement failed',
++        reason: settleResult.errorReason,
++        message: settleResult.errorMessage,
++      })
++      return
++    }
++
++    console.log('[x402] Settlement:', `tx ${settleResult.transaction}`)
++
++    const paymentResponse = {
++      x402Version: 2,
++      scheme: paymentRequirements.scheme,
++      network: NETWORK_ID,
++      payer: verifyResult.payer,
++    }
++    const encodedResponse = Buffer.from(JSON.stringify(paymentResponse)).toString('base64')
++    res.setHeader('PAYMENT-RESPONSE', encodedResponse)
 // add-end
 
      next()
@@ -445,7 +415,7 @@ export interface SettleResult {
 </TabItem>
 </Tabs>
 
-### 7. Configure the server
+### 6. Configure the server
 
 Mount the protected routes on an Express router gated by the middleware, then start the server.
 The example returns `{ message: 'Hello!' }` as a placeholder. Replace it with whatever JSON payload

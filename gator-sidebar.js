@@ -118,7 +118,19 @@ const sidebar = {
           label: 'x402',
           collapsed: true,
           key: 'x402-guides',
-          items: ['guides/x402/seller'],
+          items: [
+            'guides/x402/seller',
+            {
+              type: 'category',
+              label: 'Buyer',
+              collapsed: true,
+              items: [
+                'guides/x402/buyer/delegations',
+                'guides/x402/buyer/advanced-permissions',
+                'guides/x402/buyer/recurring-payments',
+              ],
+            },
+          ],
         },
       ],
     },
