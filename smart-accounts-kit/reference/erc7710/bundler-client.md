@@ -45,7 +45,7 @@ import { sessionAccount, bundlerClient, publicClient } from './client.ts'
 
 // These properties must be extracted from the permission response.
 const permissionContext = permissionsResponse[0].context
-const delegationManager = permissionsResponse[0].signerMeta.delegationManager
+const delegationManager = permissionsResponse[0].delegationManager
 
 // Calls without permissionContext and delegationManager will be executed
 // as a normal user operation.
