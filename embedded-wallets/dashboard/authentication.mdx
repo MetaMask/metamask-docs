@@ -5,9 +5,9 @@ image: 'img/metamaskog.jpg'
 description: 'Configure authentication methods and login connections | Embedded Wallets'
 ---
 
-import AuthenticationSocialConnections from '@site/static/img/embedded-wallets/w3a-dashboard/authentication-social-connections.png'
-import AuthenticationCustomConnections from '@site/static/img/embedded-wallets/w3a-dashboard/authentication-custom-connections.png'
-import AuthenticationGroupConnectionsSelect from '@site/static/img/embedded-wallets/w3a-dashboard/authentication-group-connections-select.png'
+import AuthenticationSocialConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
+import AuthenticationCustomConnections from '@site/static/img/embedded-wallets/dev-dashboard/authentication-custom-connections.png'
+import GroupConnections from '@site/static/img/embedded-wallets/dev-dashboard/group-connections.png'
 
 import Tiles from '@theme/Tiles'
 
@@ -126,7 +126,7 @@ export const tileGroupsDataSocial = [
         key: "new",
         title: "Missing login option?",
         icon: "logo-question-mark.svg",
-        path: "https://web3auth.io/community/c/feature-request/14",
+        path: "https://community.metamask.io/c/feature-request/",
         },
     ],
 
@@ -180,98 +180,52 @@ export const tileGroupsDataGroup = [
   },
 ]
 
-To use Web3Auth for user onboarding, developers must first configure the login methods that their application will support. All Web3Auth client SDKs require at least one login method to be enabled for authentication to function. This configuration ensures that users can authenticate securely and reliably across various platforms and environments.
-
-:::note
-
-A thoughtfully configured set of login options improves accessibility, enhances security, and provides flexibility for future scalability.
-
-:::
+Before you can use Embedded Wallets in your dapp, you must enable at least one login method. Configure all login methods from the **Authentication** tab in the [MetaMask Developer Dashboard](https://developer.metamask.io).
 
 ## Social connections
 
-<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
-  <img
-    src={AuthenticationSocialConnections}
-    style={{ alignSelf: 'center', maxWidth: '100%' }}
-    alt="Authentication Social Connections"
-  />
-</div>
+<img
+  className="docImg"
+  src={AuthenticationSocialConnections}
+  alt="Authentication Social Connections"
+/>
 
 ### Basic logins
 
-Basic Logins refer to standard authentication methods such as passwordless email or phone number login. These options are particularly useful for users who may not wish to use social accounts or external wallets.
-
-For most applications, it is recommended to either pair Basic Logins with alternative methods (such as social or external logins) or enable **Multi-Factor Authentication (MFA)**. This ensures users can retain access to their accounts even if they lose access to a primary login method. Supporting multiple login types also improves reach across various regions where certain providers may be limited.
+Basic logins cover passwordless email and phone number authentication. Pair them with social or external wallet logins, or enable MFA, so users can recover access if they lose a primary method.
 
 <Tiles tileGroups={tileGroupsDataBasic} />
 
 ### Social logins
 
-Social logins allow users to authenticate using their existing accounts from widely adopted platforms, offering a seamless and familiar experience. Embedded Wallets supports a wide range of social identity providers, including:
-
-Each social login method can be configured individually through the Web3Auth Dashboard. Developers can follow platform-specific guides to obtain necessary credentials (such as client IDs, secrets), and enable the desired providers.
+Social logins let users authenticate with their existing accounts from popular platforms. Configure each provider individually through the dashboard. Platform-specific guides cover obtaining the credentials (client IDs and secrets) each provider requires.
 
 <Tiles tileGroups={tileGroupsDataSocial} />
 
 ## Custom connections
 
-<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
-  <img
-    src={AuthenticationCustomConnections}
-    style={{ alignSelf: 'center', maxWidth: '100%' }}
-    alt="Authentication Custom Connections"
-  />
-</div>
+<img
+  className="docImg"
+  src={AuthenticationCustomConnections}
+  alt="Authentication Custom Connections"
+/>
 
-Custom connections allow developers to integrate Web3Auth with third-party or self-hosted identity providers. Supported platforms include:
+Custom connections let you integrate Embedded Wallets with third-party or self-hosted identity providers, so you can keep your existing authentication backend while adding non-custodial wallet access.
 
 <Tiles tileGroups={tileGroupsDataCustom} />
 
-These integrations offer advanced flexibility, enabling projects to maintain existing identity infrastructure while benefiting from Web3Auth's non-custodial key management. Developers can authenticate users using their preferred systems while still supporting seamless blockchain wallet access.
-
-:::tip
-
-Custom connections are ideal for enterprises or apps with an existing authentication backend who want to integrate Web3 capabilities without compromising on their current identity solutions.
-
-:::
-
 ## Group connections
 
-Group connections enable multiple login methods to be linked to the same onchain user identity. They are especially useful in scenarios where users may switch or alternate between login methods, allowing for continuous access to the same digital identity without fragmentation. This means that users logging in with different authentication providers (such as **_Google and Email Passwordless_**) can still access the same wallet address—ensuring a unified user experience.
+<img className="docImg" src={GroupConnections} alt="Group Connections page" />
 
-Before setting up a group connection, developers must first configure individual login connections that are eligible to be grouped. Once eligible connections are established, they can be grouped together under a single group connection.
+Group connections link multiple login methods to the same onchain user identity. Users who sign in with different providers (for example, Google and email passwordless) access the same wallet address.
+
+Set up the individual connections you want to group before creating a group connection.
 
 <Tiles tileGroups={tileGroupsDataGroup} />
 
-<div style={{ flexBasis: '300px', flexGrow: '1', textAlign: 'center' }}>
-  <img
-    src={AuthenticationGroupConnectionsSelect}
-    style={{ alignSelf: 'center', maxWidth: '100%' }}
-    alt="Authentication Group Connections"
-  />
-</div>
-
 :::note
 
-Group keys differ from standard individual connection keys. Ensure that each login method intended for grouping is properly configured beforehand.
+Group connections use separate keys from individual connections. Configure each member connection before creating the group.
 
 :::
-
-## Security considerations
-
-### Domain allowlisting
-
-Ensure authentication is restricted to authorized domains for enhanced security.
-
-### Connection verification
-
-Verify OAuth credentials and callback URLs for all social login providers.
-
-### Rate limiting
-
-Configure appropriate rate limits for authentication attempts to prevent abuse.
-
-### Multi-factor authentication
-
-Enable additional security layers where supported by the authentication provider.

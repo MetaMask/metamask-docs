@@ -76,7 +76,7 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
 import { createWalletClient, custom, createPublicClient, http } from 'viem'
 import { privateKeyToAccount } from 'viem/accounts'
 import { toMetaMaskSmartAccount, Implementation } from '@metamask/smart-accounts-kit'
-import { erc7715ProviderActions } from '@metamask/smart-accounts-kit/actions'
+import { erc7715ProviderActions, erc7710WalletActions } from '@metamask/smart-accounts-kit/actions'
 import { sepolia as chain } from 'viem/chains'
 
 // USDC address on Ethereum Sepolia.
@@ -90,13 +90,11 @@ const publicClient = createPublicClient({
 const privateKey = '0x...'
 const account = privateKeyToAccount(privateKey)
 
-export const sessionAccount = await toMetaMaskSmartAccount({
-  client: publicClient,
-  implementation: Implementation.Hybrid,
-  deployParams: [account.address, [], [], []],
-  deploySalt: '0x',
-  signer: { account },
-})
+export const sessionAccount = createWalletClient({
+  account,
+  chain,
+  transport: http(),
+}).extend(erc7710WalletActions())
 
 export const walletClient = createWalletClient({
   transport: custom(window.ethereum),
@@ -106,30 +104,16 @@ export const walletClient = createWalletClient({
 </TabItem>
 </Tabs>
 
-## Decode delegations
-
-The granted permissions object includes a `context` property that represents the encoded delegations.
-
-To create a redelegation, you must first decode these delegations to access the
-underlying delegations. To decode the delegations, use the [`decodeDelegations`](../../reference/delegation/index.md#decodedelegations) utility function.
-
-```ts
-import { decodeDelegations } from '@metamask/smart-accounts-kit/utils'
-
-const permissionContext = grantedPermissions[0].context
-
-const delegations = decodeDelegations(permissionContext)
-const rootDelegation = delegations[0]
-```
-
 ## Create a redelegation
 
 Create a [redelegation](../../concepts/delegation/overview.md#redelegation) from dapp to a Swap agent.
 
-To create a redelegation, provide the signed delegation as the `parentDelegation` argument when calling [`createDelegation`](../../reference/delegation/index.md#createdelegation).
+To create a redelegation, provide the granted permission context as the `permissionContext` argument when calling [`redelegatePermissionContext`](../../reference/erc7710/wallet-client.md#redelegatepermissioncontext).
+In the previous step, `sessionAccount` was extended with `erc7710WalletActions`.
 
-This example uses the [`erc20TransferAmount`](../delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope) <GlossaryTerm term="Delegation scope">scope</GlossaryTerm>, allowing
-dapp to delegate to a Swap agent the ability to spend 5 USDC on user's behalf.
+When you create a redelegation, apply the toolkit's [caveats](../../reference/delegation/caveats.md)
+to narrow the Swap agent's authority. In this example, we'll use [`erc20TransferAmount`](../../reference/delegation/caveats.md#erc20transferamount)
+enforcer, allowing your dapp to delegate the Swap agent only the ability to spend 5 USDC on the user's behalf.
 
 :::note
 When creating a redelegation, you can only narrow the scope of the original authority, not expand it.
@@ -139,25 +123,35 @@ When creating a redelegation, you can only narrow the scope of the original auth
 <TabItem value="redelegation.ts">
 
 ```typescript
-import { sessionAccount, agentSmartAccount, tokenAddress } from './config.ts'
-import { createDelegation, ScopeType } from '@metamask/smart-accounts-kit'
+import { sessionAccount, agentAccount, tokenAddress } from './config.ts'
+import {
+  createDelegation,
+  ScopeType,
+  getSmartAccountsEnvironment,
+  Caveats,
+  CaveatType,
+} from '@metamask/smart-accounts-kit'
 import { parseUnits } from 'viem'
+import { sepolia as chain } from 'viem/chains'
 
-const redelegation = createDelegation({
-  scope: {
-    type: ScopeType.Erc20TransferAmount,
+const caveats: Caveats = [
+  {
+    type: CaveatType.Erc20TransferAmount,
     tokenAddress,
     // USDC has 6 decimal places.
     maxAmount: parseUnits('5', 6),
   },
-  to: agentSmartAccount.address,
-  from: sessionAccount.address,
-  // Signed root delegation extracted from Advanced Permissions.
-  parentDelegation: rootDelegation,
-  environment: sessionAccount.environment,
-})
+]
 
-const signedRedelegation = await sessionAccount.signDelegation({ delegation: redelegation })
+const environment = getSmartAccountsEnvironment(chain.id)
+
+const { permissionContext: signedPermissionContext } =
+  await sessionAccount.redelegatePermissionContext({
+    to: agentAccount.address,
+    environment,
+    permissionContext: grantedPermissions[0].context,
+    caveats,
+  })
 ```
 
 </TabItem>
@@ -166,46 +160,9 @@ const signedRedelegation = await sessionAccount.signDelegation({ delegation: red
 ```typescript
 // Update the existing config to create a smart account for a Swap agent.
 
-const agentAccount = privateKeyToAccount('0x...')
-
-export const agentSmartAccount = await toMetaMaskSmartAccount({
-  client: publicClient,
-  implementation: Implementation.Hybrid,
-  deployParams: [agentAccount.address, [], [], []],
-  deploySalt: '0x',
-  signer: { account: agentAccount },
-})
+const agentPrivateKey = '0x...'
+export const agentAccount = privateKeyToAccount(agentPrivateKey)
 ```
 
 </TabItem>
 </Tabs>
-
-### Limit redelegation using caveats
-
-When you create a redelegation, apply the toolkit's [caveats](../../reference/delegation/caveats.md) to narrow the Swap agent's authority. For example, you can limit the authority so Swap agent can use the delegation only once.
-
-To apply caveats, create the `Delegation` object and use [`createCaveatBuilder`](../../reference/delegation/index.md#createcaveatbuilder).
-Use [`hashDelegation`](../../reference/delegation/index.md#hashdelegation) to get the delegation hash, then provide it as the `authority` field.
-
-This example uses the [`limitedCalls`](../../reference/delegation/caveats.md#limitedcalls) caveat with a limit of `1`.
-
-```ts
-// Use the config from previous step.
-import { sessionAccount, agentSmartAccount, tokenAddress } from './config.ts'
-import { CaveatType } from '@metamask/smart-accounts-kit'
-import { createCaveatBuilder, hashDelegation } from '@metamask/smart-accounts-kit/utils'
-
-const caveatBuilder = createCaveatBuilder(sessionAccount.environment)
-
-const caveats = caveatBuilder.addCaveat(CaveatType.LimitedCalls, { limit: 1 })
-
-const redelegation: Delegation = {
-  delegate: sessionAccount.address,
-  delegator: agentSmartAccount.address,
-  authority: hashDelegation(rootDelegation),
-  caveats: caveats.build(),
-  salt: '0x',
-}
-
-const signedRedelegation = await sessionAccount.signDelegation({ delegation: redelegation })
-```

@@ -45,7 +45,7 @@ TOD0: Update with new screenshot and link
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager installed, such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/download) installed in your browser or on mobile.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the MetaMask Developer dashboard.
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the Infura dashboard.
 
 ## Set up using a template
 
@@ -308,7 +308,7 @@ metaMask({
 
 :::tip
 For production deployments, use reliable RPC providers instead of public nodes.
-We recommend using services like [Infura](https://developer.metamask.io/) to ensure better reliability and performance.
+We recommend using services like [Infura](https://app.infura.io/) to ensure better reliability and performance.
 See the [production readiness checklist](../guides/best-practices/production-readiness.md) for more details.
 :::
 

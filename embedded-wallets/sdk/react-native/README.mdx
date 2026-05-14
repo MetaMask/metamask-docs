@@ -24,7 +24,7 @@ MetaMask Embedded Wallets SDK (formerly Web3Auth Plug and Play) provides a seaml
 
 ## Prerequisites
 
-- Set up your project on the [Embedded Wallets dashboard](https://dashboard.web3auth.io/)
+- Set up your project on the [Embedded Wallets dashboard](https://developer.metamask.io/)
 
 :::tip
 
@@ -131,7 +131,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
     android:exported="true">
   ```
 
-- Your `redirectUrl` is your defined scheme following some identifier or your choice. For example, if your scheme is `web3authrnexample`, you can define your `redirectUrl` as web3authrnexample://auth. Ensure you register this `redirectUrl` in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+- Your `redirectUrl` is your defined scheme following some identifier or your choice. For example, if your scheme is `web3authrnexample`, you can define your `redirectUrl` as web3authrnexample://auth. Ensure you register this `redirectUrl` in the [Embedded Wallets dashboard](https://developer.metamask.io/).
 
   ```typescript
   const scheme = 'web3authrnexample' // Or your desired app redirection scheme
@@ -153,7 +153,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
   pod install
   ```
 
-- In iOS, you don't need to add `redirectUrl` as an iOS Custom URL Scheme, however, you may add it to your Info.plist, but it is not required. Make sure your `redirectUrl` is registered in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+- In iOS, you don't need to add `redirectUrl` as an iOS Custom URL Scheme, however, you may add it to your Info.plist, but it is not required. Make sure your `redirectUrl` is registered in the [Embedded Wallets dashboard](https://developer.metamask.io/).
 
 ### Expo-managed workflow
 
@@ -167,7 +167,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
   }
   ```
 
-- For constructing your `redirectUrl`, you'll need to use the `expo-linking`, which will help you generate a `redirectUrl` for your app. Make sure you register that URL in the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+- For constructing your `redirectUrl`, you'll need to use the `expo-linking`, which will help you generate a `redirectUrl` for your app. Make sure you register that URL in the [Embedded Wallets dashboard](https://developer.metamask.io/).
 
   ```typescript
   import Constants, { AppOwnership } from 'expo-constants'
@@ -183,7 +183,7 @@ npm install --save @toruslabs/react-native-web-browser react-native-encrypted-st
 
 ### 1. Create an Embedded Wallets instance
 
-Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://dashboard.web3auth.io/).
+Create a configuration file for Web3Auth. This file will contain your Web3Auth Client ID and Network details from the [Embedded Wallets dashboard](https://developer.metamask.io/).
 
 <Tabs
   values={[
@@ -204,7 +204,7 @@ const resolvedRedirectUrl = `${scheme}://auth`
 
 // focus-start
 const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
@@ -225,7 +225,7 @@ const resolvedRedirectUrl = `${scheme}://auth`
 
 // focus-start
 const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from Web3Auth Dashboard
+  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
   network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
   redirectUrl: resolvedRedirectUrl,
 })
@@ -305,12 +305,12 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
   mfaLevel: MFA_LEVELS.MANDATORY,
   loginConfig: {
     google: {
-      verifier: 'google-verifier', // Get this from the Web3Auth Dashboard
+      verifier: 'google-verifier', // Get this from the MetaMask Developer Dashboard
       typeOfLogin: TypeOfLogin.GOOGLE,
       clientId: 'GOOGLE_CLIENT_ID', // Google's client ID
     },
     jwt: {
-      verifier: 'jwt-verifier', // Get this from the Web3Auth Dashboard
+      verifier: 'jwt-verifier', // Get this from the MetaMask Developer Dashboard
       typeOfLogin: TypeOfLogin.JWT,
       clientId: 'JWT_CLIENT_ID', // Custom JWT client ID
     },

@@ -111,7 +111,7 @@ The following HTML displays a **Send Batch** button:
 :::tip Tips
 
 - For a better user experience, use reliable RPC providers instead of public nodes.
-  We recommend using services like [MetaMask Developer](https://developer.metamask.io/) to ensure better reliability and performance.
+  We recommend using services like [Infura](https://app.infura.io/) to ensure better reliability and performance.
 - Ensure that requests in a batch do not depend on one another's chain context, as mid-batch state changes can affect outcomes.
   :::
 

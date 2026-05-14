@@ -1,102 +1,64 @@
 ---
-title: Test Accounts
+title: Test accounts
 sidebar_label: Test accounts
 image: 'img/metamaskog.jpg'
 description: 'Configure test accounts for development and testing | Embedded Wallets'
 ---
 
-import TestAccountsSettings from '@site/static/img/embedded-wallets/w3a-dashboard/test-accounts-settings.png'
+import TestAccountsSettings from '@site/static/img/embedded-wallets/dev-dashboard/test-accounts-settings.png'
 
-Test Accounts allow you to log in with static verification codes during development and testing phases. This feature simplifies the authentication flow when testing your application by providing predictable OTP codes and designated test credentials.
+Test accounts let you sign in with static verification codes during development and testing, without needing access to a real email inbox or SMS.
 
-Enabling this option permits login through the provided email, OTP code, or phone number. Note that these accounts are designated for testing only and should not be used in production/ storing funds.
+<img className="docImg" src={TestAccountsSettings} alt="Test accounts settings" />
 
-<div
-  style={{
-    flexBasis: '300px',
-    flexGrow: '1',
-    textAlign: 'center',
-  }}>
-  <img
-    src={TestAccountsSettings}
-    style={{ alignSelf: 'center', maxWidth: '100%' }}
-    alt="Test Accounts Settings"
-  />
-</div>
+:::warning
 
-## Enabling test accounts
+Test accounts are for development only. Disable them before deploying to production.
 
-Test Accounts can be enabled through the Web3Auth dashboard:
+:::
 
-1. Navigate to your project in the [Web3Auth dashboard](https://dashboard.web3auth.io).
-2. Click **Project Settings** then **Advanced**.
+## Enable test accounts
+
+1. Navigate to your project in the [MetaMask Developer Dashboard](https://developer.metamask.io).
+2. Click **Project Settings**, then **Advanced**.
 3. Locate the **Test Accounts** section.
-4. Toggle the **Enable Test Accounts** option.
+4. Toggle **Enable Test Accounts**.
 
 ## Test account types
 
 ### Email authentication
 
-When Test Accounts are enabled, each test account is assigned a unique email address in the format `test_account_XXXX@example.com`, where `XXXX` represents a randomly generated number. You can use these test email addresses to authenticate using email passwordless OTP login.
+Each test account has a unique email in the format `test_account_XXXX@example.com` (where `XXXX` is a randomly generated number shown in the dashboard). Use it to sign in via email passwordless OTP.
 
 ### Phone number authentication
 
-When Test Accounts are enabled, each test account is assigned a unique phone number in the format `+1 (555) XXX-XXXX`, where `XXX-XXXX` represents a randomly generated number. You can use these test phone numbers to authenticate using SMS OTP login.
+Each test account has a unique phone number in the format `+1 (555) XXX-XXXX` (where `XXX-XXXX` is shown in the dashboard). Use it to sign in via SMS OTP.
 
 ### Static OTP code
 
-When using Test Accounts, a static OTP verification code is generated and displayed in your project dashboard. This code remains constant for both email and phone number test accounts.
+The dashboard displays a single static OTP code that works for all test account logins. The code does not change unless you refresh it.
 
-## Usage in development
+## Using test accounts
 
 ### Email and OTP flow
 
-1. Enter a test email (such as `test_account_XXXX@example.com`).
-2. Click "Send Code" or equivalent button.
-3. Enter the static OTP: `XXXXXX`.
+1. Enter the test email shown in the dashboard.
+2. Click **Send Code**.
+3. Enter the static OTP code shown in the dashboard.
 4. Complete the authentication flow.
 
 ### SMS and OTP flow
 
-1. Enter a test phone number (such as `+1 (555) XXX-XXXX`).
-2. Click "Send Code" or equivalent button.
-3. Enter the static OTP: `XXXXXX`.
+1. Enter the test phone number shown in the dashboard.
+2. Click **Send Code**.
+3. Enter the static OTP code shown in the dashboard.
 4. Complete the authentication flow.
 
-## Benefits for development
+## Troubleshooting
 
-### Consistent testing experience
+If test accounts are not working:
 
-- Predictable Credentials: Same OTP code (`XXXXXX`) works every time
-- No External Dependencies: No need to access email or SMS during testing
-- Faster Iteration: Streamlined testing without waiting for delivery of verification codes
-
-### Team collaboration
-
-- Shared Test Accounts: Team members can use the same test credentials
-- Standardized Testing: Consistent testing experience across the development team
-- Demo-Friendly: Reliable for demonstrations and presentations
-
-### CICD integration
-
-- Automated Testing: Enables automated tests that require authentication flows
-- E2E Testing: Facilitates end-to-end testing scenarios
-- Staging Validation: Supports testing in staging environments
-
-## Security considerations
-
-### Best practices
-
-- Never use Test Accounts in production: they are designed for testing only and could expose your application to security vulnerabilities if used in production
-- Disable before going live: ensure Test Accounts are turned off before production deployment
-- Use separate projects: maintain separate projects for development and production environments
-- Document test credentials: clearly document which credentials are for testing only
-
-### Troubleshooting
-
-If Test Accounts are not functioning as expected:
-
-1. Verify Environment: Ensure you're using your particular Sapphire Devnet or Sapphire Mainnet environment where test accounts are enabled.
-2. Check Project Settings: Confirm Test Accounts are enabled in Project Settings > Advanced
-3. Email or Phone: Ensure test email or phone number is correct as mentioned in the dashboard, you can refresh the credentials by clicking on the refresh button.
-4. OTP Code: Always use `XXXXXX` as the verification code as mentioned in the dashboard.
+1. Verify you are using the correct Sapphire environment (Devnet or Mainnet) where test accounts are enabled.
+2. Check that **Enable Test Accounts** is toggled on under **Project Settings** → **Advanced**.
+3. Confirm the email or phone number matches exactly what the dashboard displays. Refresh credentials if needed.
+4. Use the static OTP code from the dashboard, not a code from your inbox.

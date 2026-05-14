@@ -73,7 +73,7 @@ The returned map can be passed directly to `createSolanaClient({ api: { supporte
 Under the hood, this delegates to the [multichain `getInfuraRpcUrls`](/metamask-connect/multichain/reference/methods#getinfurarpcurls), which maps CAIP-2 chain IDs to Infura endpoints, then translates the result back to Solana network names.
 
 :::note
-Each chain must be activated in your [Infura dashboard](https://developer.metamask.io/) before `getInfuraRpcUrls` can generate working URLs for it.
+Each chain must be activated in your [Infura dashboard](https://app.infura.io/) before `getInfuraRpcUrls` can generate working URLs for it.
 :::
 
 ### Parameters

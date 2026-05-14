@@ -4,8 +4,8 @@ sidebar_label: Twitch
 description: 'Twitch Social Login with Embedded Wallets | Embedded Wallets'
 ---
 
-import TwitchToggle from '@site/static/img/embedded-wallets/w3a-dashboard/authentication-social-connections.png'
-import TwitchConnection from '@site/static/img/embedded-wallets/w3a-dashboard/twitch-connection.png'
+import TwitchToggle from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
+import TwitchConnection from '@site/static/img/embedded-wallets/dev-dashboard/twitch-connection.png'
 
 Twitch supports social login, allowing users to [sign in using their Twitch credentials](https://dev.twitch.tv/docs/authentication/#user-access-tokens). Embedded Wallets supports Twitch as a social login provider, allowing developers to offer a familiar and quick authentication method for users with Twitch accounts.
 
@@ -19,58 +19,50 @@ Twitch supports social login, allowing users to [sign in using their Twitch cred
 2. Paste the following as a Redirect URI into the "OAuth Redirect URLs" field.
    - [https://auth.web3auth.io/auth](https://auth.web3auth.io/auth)
 
-   ![Twitch OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/twitch/twitch-app.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/twitch/twitch-app.png"
+     alt="Twitch OAuth2.0 App Dashboard"
+   />
 
 3. After creation of your Twitch app, click **Manage**.
 
-   ![Twitch OAuth2.0 App Manage](/img/embedded-wallets/authentication/twitch/twitch-manage.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/twitch/twitch-manage.png"
+     alt="Twitch OAuth2.0 App Manage"
+   />
 
 4. Obtain the **Client ID**.
 
-   ![Twitch OAuth2.0 App Manage](/img/embedded-wallets/authentication/twitch/twitch-client-id.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/twitch/twitch-client-id.png"
+     alt="Twitch OAuth2.0 App Manage"
+   />
 
 ## Step 2: Create a Twitch connection
 
 :::success Enable on dashboard
 
-To use this feature, enable `Twitch` from the Social Connections section in the [dashboard](https://dashboard.web3auth.io).
+To use this feature, enable `Twitch` from the Social Connections section in the [dashboard](https://developer.metamask.io).
 
 By default, Web3Auth uses its own pre-configured credentials for Twitch login.
 
 :::
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={TwitchToggle}
-    style={{
-      maxWidth: '800px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Toggle Twitch Connection on Dashboard"
-  />
-</div>
+<img className="docImg" src={TwitchToggle} alt="Toggle Twitch Connection on Dashboard" />
 
 Follow these steps to create a Twitch connection:
 
-1. Visit the [dashboard](https://dashboard.web3auth.io).
+1. Visit the [dashboard](https://developer.metamask.io).
 1. Go to the **Social Connections** section.
 1. Click the **Settings** icon near the Twitch connection.
 1. Enter the `Auth Connection ID`.
 1. Enter the `Twitch Client ID`.
 1. Click the **Add Connection** button to save the settings.
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={TwitchConnection}
-    style={{
-      maxWidth: '600px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Twitch Connection"
-  />
-</div>
+<img className="docImg" src={TwitchConnection} alt="Twitch Connection" />
 
 ## Usage
 

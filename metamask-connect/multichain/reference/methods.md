@@ -310,7 +310,7 @@ The following chains are included by default when `caipChainIds` is omitted.
 | Solana     | Devnet  | `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1` |
 
 :::note
-Each chain must be activated in your [Infura dashboard](https://developer.metamask.io/) before `getInfuraRpcUrls` can generate working URLs for it.
+Each chain must be activated in your [Infura dashboard](https://app.infura.io/) before `getInfuraRpcUrls` can generate working URLs for it.
 :::
 
 ### Example

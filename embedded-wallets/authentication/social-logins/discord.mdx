@@ -4,8 +4,8 @@ sidebar_label: Discord
 description: 'Discord Social Login with Embedded Wallets | Embedded Wallets'
 ---
 
-import DiscordToggle from '@site/static/img/embedded-wallets/w3a-dashboard/authentication-social-connections.png'
-import DiscordConnection from '@site/static/img/embedded-wallets/w3a-dashboard/discord-connection.png'
+import DiscordToggle from '@site/static/img/embedded-wallets/dev-dashboard/authentication-social-connections.png'
+import DiscordConnection from '@site/static/img/embedded-wallets/dev-dashboard/discord-connection.png'
 
 [Discord login](https://discord.com/developers/docs/topics/oauth2) is a social login provider that allows users to sign in using their Discord credentials. Embedded Wallets supports Discord as a social login provider, allowing developers to offer a familiar and quick authentication method for users with Discord accounts.
 
@@ -18,56 +18,44 @@ To integrate Discord with Web3Auth, developers must first create a Discord App v
 2. Navigate to **OAuth2** from the sidebar, and paste the following as Redirect URI into the "Redirect URI" field.
    - https://auth.web3auth.io/auth
 
-   ![Discord OAuth2.0 App Dashboard](/img/embedded-wallets/authentication/discord/discord-redirect-uri.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/discord/discord-redirect-uri.png"
+     alt="Discord OAuth2.0 App Dashboard"
+   />
 
 3. Ensure you save your changes.
 
 4. Copy the **Client ID** from here. We will use this in the Embedded Wallets dashboard.
 
-   ![Discord OAuth2.0 App Client ID and Secret](/img/embedded-wallets/authentication/discord/discord-clientid-secret.png)
+   <img
+     className="docImg"
+     src="/img/embedded-wallets/authentication/discord/discord-clientid-secret.png"
+     alt="Discord OAuth2.0 App Client ID and Secret"
+   />
 
 ## Step 2: Create a Discord connection
 
 :::success Enable on dashboard
 
-To use this feature, enable `Discord` from the Social Connections section in the [dashboard](https://dashboard.web3auth.io).
+To use this feature, enable `Discord` from the Social Connections section in the [dashboard](https://developer.metamask.io).
 
 By default, Web3Auth uses its own pre-configured credentials for Discord login.
 
 :::
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={DiscordToggle}
-    style={{
-      maxWidth: '800px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Toggle Discord Connection on Dashboard"
-  />
-</div>
+<img className="docImg" src={DiscordToggle} alt="Toggle Discord Connection on Dashboard" />
 
 Follow these steps to create a Discord connection:
 
-1. Visit the [dashboard](https://dashboard.web3auth.io).
+1. Visit the [dashboard](https://developer.metamask.io).
 1. Go to the **Social Connections** section.
 1. Click the **Settings** icon near the Discord connection.
 1. Enter the `Auth Connection ID`.
 1. Enter the `Discord Client ID`.
 1. Click the **Add Connection** button to save the settings.
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={DiscordConnection}
-    style={{
-      maxWidth: '600px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Discord Connection"
-  />
-</div>
+<img className="docImg" src={DiscordConnection} alt="Discord Connection" />
 
 ## Usage
 

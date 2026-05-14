@@ -8,8 +8,8 @@ image: 'img/metamaskog.jpg'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-import CustomConnectionOptions from '@site/static/img/embedded-wallets/w3a-dashboard/authentication-custom-connections.png'
-import CustomJWTConnection from '@site/static/img/embedded-wallets/w3a-dashboard/custom-connection.png'
+import CustomConnectionOptions from '@site/static/img/embedded-wallets/dev-dashboard/authentication-custom-connections.png'
+import CustomJWTConnection from '@site/static/img/embedded-wallets/dev-dashboard/custom-connection.png'
 import JwtLoginCustom from '../../sdk/react/advanced/_custom-authentication-snippets/_jwt_login_custom.mdx'
 
 Embedded Wallets supports integration with custom login providers through [JWT-based](https://www.jwt.io/introduction#what-is-json-web-token) authentication schemes, allowing developers to maintain their existing authentication infrastructure while leveraging Web3Auth's wallet and key management capabilities. Custom authentication can be implemented using industry-standard cryptographic algorithms such as RSA or ECDSA signatures.
@@ -22,25 +22,15 @@ Once the custom JWT login is working, developers can proceed to add it as a cust
 
 :::success Create Custom Connection
 
-To use this feature, developers must go to the **Custom Connections** tab in the [dashboard](https://dashboard.web3auth.io).
+To use this feature, developers must go to the **Custom Connections** tab in the [dashboard](https://developer.metamask.io).
 
 :::
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={CustomConnectionOptions}
-    style={{
-      maxWidth: '600px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Custom Connection Options"
-  />
-</div>
+<img className="docImg" src={CustomConnectionOptions} alt="Custom Connection Options" />
 
 Follow these steps to create a custom JWT connection:
 
-1. Visit the [Embedded Wallets dashboard](https://dashboard.web3auth.io).
+1. Visit the [Embedded Wallets dashboard](https://developer.metamask.io).
 1. Go to the **Custom Connections** section.
 1. Click on the **Settings** icon near the **Custom Connection**.
 1. Enter the **Auth Connection ID**.
@@ -53,17 +43,7 @@ Follow these steps to create a custom JWT connection:
    1. Type aud as a field and `your-audience` as a value.
 1. Click the **Add Connection** button to save the settings.
 
-<div style={{ display: 'flex', margin: '20px 0', justifyContent: 'center' }}>
-  <img
-    src={CustomJWTConnection}
-    style={{
-      maxWidth: '600px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-    }}
-    alt="Custom JWT Connection"
-  />
-</div>
+<img className="docImg" src={CustomJWTConnection} alt="Custom JWT Connection" />
 
 ## Create a JWT
 

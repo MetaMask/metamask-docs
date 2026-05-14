@@ -55,7 +55,7 @@ your integration pattern.
 - [Node.js](https://nodejs.org/) version 19 or later installed.
 - A package manager such as [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm), [Yarn](https://yarnpkg.com/), [pnpm](https://pnpm.io/installation), or [bun](https://bun.sh/).
 - [MetaMask](https://metamask.io/download) installed in your browser.
-- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the [MetaMask Developer dashboard](https://developer.metamask.io).
+- An [Infura API key](/developer-tools/dashboard/get-started/create-api) from the [Infura dashboard](https://app.infura.io).
 
 ## Steps
 
