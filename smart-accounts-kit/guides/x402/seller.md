@@ -39,7 +39,6 @@ MetaMask facilitator.
 
 ```ts
 // src/config.ts
-import 'dotenv/config'
 import { Address } from 'viem'
 import { base } from 'viem/chains'
 
@@ -77,16 +76,16 @@ payment to its delegation verifier.
 Payment terms the seller advertises. The middleware builds the `PaymentRequirements` object per
 request and returns it in the `PAYMENT-REQUIRED` response header when payment is missing.
 
-| Name                        | Description                                                                                                                                            |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `scheme`                    | Payment scheme the facilitator uses to interpret the payload. Set this to `exact` so the facilitator routes the payment through its standard verifier. |
-| `network`                   | [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain identifier for the payment. The example uses `eip155:8453`, the identifier for Base.            |
-| `amount`                    | Amount the buyer must authorize, expressed in the wei format. The example charges 0.01 USDC.                                                           |
-| `asset`                     | ERC-20 token contract address used for payment. The example uses USDC on Base.                                                                         |
-| `payTo`                     | Seller wallet address that receives the settled funds.                                                                                                 |
-| `maxTimeoutSeconds`         | Maximum time, in seconds, the buyer's payment authorization stays valid before settlement must complete.                                               |
-| `extra.assetTransferMethod` | Asset transfer method the facilitator uses. Set this to `erc7710` so the facilitator routes the payment to its ERC-7710 delegation verifier.           |
-| `extra.facilitators`        | List of facilitator addresses allowed to settle the payment. This helps buyers scope a delegation to a specific facilitator address before signing.    |
+| Name                        | Description                                                                                                                                                    |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scheme`                    | Payment scheme the facilitator uses to interpret the payload. Set this to `exact` so the facilitator routes the payment through its standard verifier.         |
+| `network`                   | [CAIP-2](https://chainagnostic.org/CAIPs/caip-2) chain identifier for the payment. The example uses `eip155:8453`, the identifier for Base.                    |
+| `amount`                    | Amount the buyer must authorize, expressed in the smallest unit of the supported token. The example charges 0.01 USDC (`10000`, because USDC uses 6 decimals). |
+| `asset`                     | ERC-20 token contract address used for payment. The example uses USDC on Base.                                                                                 |
+| `payTo`                     | Seller wallet address that receives the settled funds.                                                                                                         |
+| `maxTimeoutSeconds`         | Maximum time, in seconds, the buyer's payment authorization stays valid before settlement must complete.                                                       |
+| `extra.assetTransferMethod` | Asset transfer method the facilitator uses. Set this to `erc7710` so the facilitator routes the payment to its ERC-7710 delegation verifier.                   |
+| `extra.facilitators`        | List of facilitator addresses allowed to settle the payment. This helps buyers scope a delegation to a specific facilitator address before signing.            |
 
 </TabItem>
 <TabItem value = "PaymentPayload">
