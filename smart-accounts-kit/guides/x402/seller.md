@@ -61,9 +61,9 @@ header, verifies it through the facilitator, and settles it before the protected
 It also fetches the current facilitator signer address and includes it in
 `PaymentRequirements.extra.facilitators`.
 
-When the header is missing, the middleware encodes the payment requirements in a `PAYMENT-REQUIRED`
+When the `PAYMENT-SIGNATURE` header is missing, the middleware encodes the payment requirements in a `PAYMENT-REQUIRED`
 response header and returns `402 Payment Required` with a JSON body that tells the buyer how to pay.
-When the header is malformed, the middleware returns `400 Bad Request`.
+When the `PAYMENT-SIGNATURE` header is malformed, the middleware returns `400 Bad Request`.
 
 The middleware builds payment requirements that follow the [x402 payment requirements schema](https://docs.x402.org/core-concepts/http-402#payment-headers-in-v2).
 Set `scheme` to `exact` and `assetTransferMethod` to `erc7710` so the facilitator routes the
@@ -91,7 +91,7 @@ request and returns it in the `PAYMENT-REQUIRED` response header when payment is
 </TabItem>
 <TabItem value = "PaymentPayload">
 
-Decoded delegation payload the buyer sends in the `payment-signature` request header. The
+Decoded delegation payload the buyer sends in the `PAYMENT-SIGNATURE` request header. The
 middleware forwards this object to the facilitator's `/verify` and `/settle` endpoints.
 
 | Name                        | Description                                                                                                                                            |
@@ -139,8 +139,7 @@ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
       },
     }
 
-    const paymentHeader =
-      (req.headers['payment-signature'] as string) || (req.headers['x-payment-signature'] as string)
+    const paymentHeader = req.get('PAYMENT-SIGNATURE')
 
     if (!paymentHeader) {
       const paymentRequired = {
@@ -150,6 +149,7 @@ export function createPaymentMiddleware(options: PaymentMiddlewareOptions) {
         mimeType: options.mimeType || 'application/json',
       }
       const encoded = Buffer.from(JSON.stringify(paymentRequired)).toString('base64')
+      res.setHeader('Access-Control-Expose-Headers', 'PAYMENT-REQUIRED, PAYMENT-RESPONSE')
       res.setHeader('PAYMENT-REQUIRED', encoded)
       res.status(402).json({ error: 'Payment Required', paymentRequired })
       return
@@ -388,6 +388,7 @@ the buyer can correlate the result with the original request.
 +      payer: verifyResult.payer,
 +    }
 +    const encodedResponse = Buffer.from(JSON.stringify(paymentResponse)).toString('base64')
++    res.setHeader('Access-Control-Expose-Headers', 'PAYMENT-REQUIRED, PAYMENT-RESPONSE')
 +    res.setHeader('PAYMENT-RESPONSE', encodedResponse)
 // add-end
 

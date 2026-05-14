@@ -52,7 +52,7 @@ const sessionAccount = privateKeyToAccount('0x...')
 
 ### 3. Get payment requirements
 
-Call the protected API route once without a payment header.
+Call the protected API route once without the `PAYMENT-SIGNATURE` header.
 
 The server returns `402` with the payment terms (`PAYMENT-REQUIRED`) in the response, which you use
 to build the payment payload.
@@ -222,7 +222,7 @@ For ERC-7710 (Smart Contract Delegation), x402 requires the payload fields `dele
 `permissionContext`, and `delegator`. The facilitator uses `permissionContext` to simulate
 during verification and then settle the payment.
 
-Encode the full x402 payment payload as base64, then send it in the `payment-signature` header.
+Encode the full x402 payment payload as base64, then send it in the `PAYMENT-SIGNATURE` header.
 
 <Tabs>
 <TabItem value="example.ts">
@@ -267,13 +267,13 @@ export type PaymentPayload = {
 
 ### 7. Make the paid request
 
-Send the base64-encoded x402 payment payload in the `payment-signature` header.
+Send the base64-encoded x402 payment payload in the `PAYMENT-SIGNATURE` header.
 If verification succeeds, the server returns the protected data.
 
 ```ts
 const apiResponse = await fetch('https://api.example.com/paid-endpoint', {
   headers: {
-    'payment-signature': encodedPayment,
+    'PAYMENT-SIGNATURE': encodedPayment,
   },
 })
 
