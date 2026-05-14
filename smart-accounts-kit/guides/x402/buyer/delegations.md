@@ -1,5 +1,5 @@
 ---
-description: Access x402-protected API data using delegation.
+description: Pay for an x402-protected API data using delegation.
 sidebar_label: Delegations
 keywords: [x402, ERC-7710, delegation, smart account, facilitator, buyer, API]
 ---

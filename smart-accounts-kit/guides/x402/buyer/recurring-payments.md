@@ -24,8 +24,7 @@ In this guide, you set up recurring x402 payments by requesting an ERC-20 period
 <GlossaryTerm term="Advanced Permissions" /> permission from a user.
 
 For example, a user gives your agent permission to spend up to 10 USDC per week.
-Later, when the agent needs access to an x402 endpoint, it checks the price, uses the permission the user
-already gave it, and pays.
+Later, when the agent calls an x402 endpoint, it checks the price, uses the granted permission, and pays.
 
 ## Prerequisites
 
@@ -35,11 +34,9 @@ already gave it, and pays.
 
 ### 1. Set up a Wallet Client
 
-Set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function.
-This client will help you interact with MetaMask.
+Set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function. Use this client to interact with MetaMask.
 
-Then, extend the Wallet Client functionality using `erc7715ProviderActions`.
-These actions enable you to request <GlossaryTerm term="Advanced Permissions" /> from the user.
+Extend the Wallet Client with `erc7715ProviderActions` to enable <GlossaryTerm term="Advanced Permissions" /> requests.
 
 ```typescript
 import { createWalletClient, custom } from 'viem'
@@ -52,10 +49,8 @@ const walletClient = createWalletClient({
 
 ### 2. Set up an agent account
 
-Set up an agent account. The requested permissions are granted to this account, which allows the agent
-to make x402 API calls on behalf of the user.
-
-The agent account can be either a smart account or an EOA. This example uses an EOA as an agent account.
+The session account can be either a <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> or an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm>.
+This example uses an EOA as the session account.
 
 ```typescript
 import { privateKeyToAccount } from 'viem/accounts'
@@ -105,8 +100,8 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
 
 ### 4. Get payment requirements
 
-Once your agent has been granted permission, when it wants to access an x402-protected endpoint, it
-calls the endpoint without a payment header to request payment terms.
+Call the x402-protected endpoint without a payment header to request payment terms
+after your agent has been granted permission.
 
 The server returns `402` with the payment terms (`PAYMENT-REQUIRED`) in the response, which agent can use to
 build the payment payload.
@@ -222,7 +217,7 @@ export const sessionAccountWalletClient = createWalletClient({
 </TabItem>
 </Tabs>
 
-### 6. Make the payment payload
+### 6. Create the payment payload
 
 For each protected API call, create a payment payload with the redelegated permission context.
 

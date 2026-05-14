@@ -1,5 +1,5 @@
 ---
-description: Access an x402-protected API data using Advanced Permissions with a fixed allowance.
+description: Pay for an x402-protected API data using Advanced Permissions with a fixed allowance.
 sidebar_label: Advanced Permissions
 keywords:
   [x402, ERC-7715, ERC-7710, advanced permissions, redeemers, allowance, session account, buyer]
@@ -22,11 +22,9 @@ to pay for a specific x402-protected resource.
 
 ### 1. Set up a Wallet Client
 
-Set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function. This client will
-help you interact with MetaMask.
+Set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function. Use this client to interact with MetaMask.
 
-Then, extend the Wallet Client functionality using `erc7715ProviderActions`.
-These actions enable you to request <GlossaryTerm term="Advanced Permissions" /> from the user.
+Extend the Wallet Client with `erc7715ProviderActions` to enable <GlossaryTerm term="Advanced Permissions" /> requests.
 
 ```typescript
 import { createWalletClient, custom } from 'viem'
@@ -41,7 +39,8 @@ const walletClient = createWalletClient({
 
 Set up a session account. The requested permissions are granted to the session account, which is responsible for making x402 API calls.
 
-The session account can be either a smart account or an EOA. This examples uses EOA as a session account.
+The session account can be either a <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> or an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm>.
+This example uses an EOA as the session account.
 
 ```typescript
 import { privateKeyToAccount } from 'viem/accounts'
