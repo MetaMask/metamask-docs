@@ -119,6 +119,7 @@ const sidebar = {
           collapsed: true,
           key: 'x402-guides',
           items: [
+            'guides/x402/overview',
             'guides/x402/seller',
             {
               type: 'category',
