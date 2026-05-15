@@ -9,5 +9,5 @@ sidebar_key: sei-json-rpc-api
 The standard Ethereum methods documented in this section are supported by Infura on the Sei network.
 
 :::info See also
-Refer to the [official Sei documentation](https://www.docs.sei.io/) for more information.
+Refer to the [official Sei documentation](https://docs.sei.io/) for more information.
 :::

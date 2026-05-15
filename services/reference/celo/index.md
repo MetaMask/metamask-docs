@@ -8,7 +8,7 @@ import CardList from '@site/src/components/CardList'
 
 :::note Decentralized Infrastructure Network (DIN)
 
-Celo is supported through the [DIN](https://www.din.build/) service,
+Celo is supported through the [DIN](https://www.infura.io/solutions/decentralized-infrastructure-service) service,
 meaning calls to the network are routed to [partner infrastructure providers](#partners-and-privacy-policies).
 
 :::
