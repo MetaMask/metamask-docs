@@ -118,6 +118,7 @@ const sidebar = {
           label: 'x402',
           collapsed: true,
           items: [
+            'guides/x402/overview',
             {
               type: 'category',
               label: 'Buyer',
