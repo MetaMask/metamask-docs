@@ -38,33 +38,17 @@ Create a custom scheme that extends `ExactEvmScheme` from `@x402/evm` to add ERC
 delegation support.
 
 The scheme overrides `enhancePaymentRequirements` to set `assetTransferMethod` to `erc7710`
-and include the facilitator addresses so buyers can scope their delegation to specific
+and include the facilitator addresses so buyers can scope their delegation to a specific
 set of facilitators before creating the payment payload.
 
 ```ts
 import { ExactEvmScheme } from '@x402/evm/exact/server'
-import type {
-  PaymentRequirements,
-  Network,
-  Price,
-  AssetAmount,
-  SupportedKind,
-  SchemeNetworkServer,
-} from '@x402/core/types'
+import type { PaymentRequirements, SupportedKind } from '@x402/core/types'
 import type { FacilitatorClient } from '@x402/core/server'
 
-export class Erc7710EvmScheme implements SchemeNetworkServer {
-  readonly scheme = 'exact'
-  private readonly inner = new ExactEvmScheme()
-
-  constructor(private readonly facilitatorClient: FacilitatorClient) {}
-
-  async parsePrice(price: Price, network: Network): Promise<AssetAmount> {
-    return this.inner.parsePrice(price, network)
-  }
-
-  getAssetDecimals(asset: string, network: Network): number {
-    return this.inner.getAssetDecimals?.(asset, network) ?? 6
+export class Erc7710ExactEvmScheme extends ExactEvmScheme {
+  constructor(private readonly facilitatorClient: FacilitatorClient) {
+    super()
   }
 
   async enhancePaymentRequirements(
@@ -72,15 +56,17 @@ export class Erc7710EvmScheme implements SchemeNetworkServer {
     supportedKind: SupportedKind,
     facilitatorExtensions: string[]
   ): Promise<PaymentRequirements> {
-    const enhanced = await this.inner.enhancePaymentRequirements(
+    const enhanced = await super.enhancePaymentRequirements(
       paymentRequirements,
       supportedKind,
       facilitatorExtensions
     )
 
     const supported = await this.facilitatorClient.getSupported()
-    const facilitators =
-      supported.signers[paymentRequirements.network] ?? supported.signers['eip155:*'] ?? []
+    const facilitators = [
+      ...(supported.signers[paymentRequirements.network] ?? []),
+      ...(supported.signers['eip155:*'] ?? []),
+    ]
 
     return {
       ...enhanced,
@@ -112,7 +98,7 @@ import express, { type Request, type Response } from 'express'
 import cors from 'cors'
 import { paymentMiddleware } from '@x402/express'
 import { x402ResourceServer } from '@x402/core/server'
-import { Erc7710EvmScheme } from './scheme.js'
+import { Erc7710ExactEvmScheme } from './scheme.js'
 import { NETWORK_ID, PORT, payToAddress, facilitatorClient } from './config.js'
 
 const app = express()
@@ -136,7 +122,7 @@ app.use(
     },
     new x402ResourceServer(facilitatorClient).register(
       NETWORK_ID,
-      new Erc7710EvmScheme(facilitatorClient)
+      new Erc7710ExactEvmScheme(facilitatorClient)
     )
   )
 )
