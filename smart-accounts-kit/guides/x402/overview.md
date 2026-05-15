@@ -12,7 +12,7 @@ import CardList from '@site/src/components/CardList'
 [x402](https://www.x402.org/) is an open payment protocol that uses the HTTP `402` status code to enable programmatic, machine-to-machine payments over HTTP. It allows servers to charge for API access without requiring buyer accounts, API keys, or traditional payment infrastructure.
 
 For example, an AI agent can pay 0.01 USDC per request to access a weather API, or a
-dapp can charge users a micropayment to retrieve premium onchain analytics data.
+dapp can charge users a micro-payment to retrieve premium onchain analytics data.
 
 ## ERC-7710 payments
 
