@@ -34,11 +34,17 @@ Learn more [ERC-7710 delegations](../../concepts/delegation/overview.md).
 
 ## Guides
 
-Get started with x402 payments using MetaMask Smart Accounts Kit.
-These guides walk you through creating delegations, requesting permissions, and setting up recurring payments.
+Get started with x402 payments in Smart Accounts Kit.
+These guides walk you through seller endpoint setup and buyer payment flows.
 
 <CardList
 items={[
+{
+href: '/smart-accounts-kit/development/guides/x402/seller',
+title: 'Set up a seller endpoint',
+description:
+'Configure a resource server that returns x402 payment requirements and settles requests.',
+},
 {
 href: '/smart-accounts-kit/development/guides/x402/buyer/delegations',
 title: 'Pay using a delegation',
