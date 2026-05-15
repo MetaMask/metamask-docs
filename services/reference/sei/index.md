@@ -18,7 +18,7 @@ parallelized EVM architecture, native order matching, and subsystems that addres
 limitations while maintaining Ethereum compatibility.
 
 :::info See also
-Refer to the [official Sei documentation](https://www.docs.sei.io/) for more information.
+Refer to the [official Sei documentation](https://docs.sei.io/) for more information.
 :::
 
 Select an option below to get started with the Sei network.
