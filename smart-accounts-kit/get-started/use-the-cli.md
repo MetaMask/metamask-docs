@@ -27,6 +27,7 @@ Upon installation, you'll be asked the following prompts:
 ? Pick a framework: (Use arrow keys)
 ❯ nextjs
   vite-react
+  node
 ? Pick a template: (Use arrow keys)
 ❯ MetaMask Smart Accounts Starter
   MetaMask Smart Accounts & Delegation Starter
@@ -74,9 +75,10 @@ You'll be prompted to provide additional Web3Auth configuration details:
 
 ## Supported templates
 
-| Template                                         | Next.js | Vite React |
-| ------------------------------------------------ | ------- | ---------- |
-| MetaMask Smart Accounts Starter                  | ✅      | ✅         |
-| MetaMask Smart Accounts &amp; Delegation Starter | ✅      | ✅         |
-| Farcaster Mini App Delegation Starter            | ✅      |            |
-| Advanced Permissions (ERC-7715) Starter          | ✅      |            |
+| Template                                         | Next.js | Vite React | Node.js |
+| ------------------------------------------------ | ------- | ---------- | ------- |
+| MetaMask Smart Accounts Starter                  | ✅      | ✅         | ❌      |
+| MetaMask Smart Accounts &amp; Delegation Starter | ✅      | ✅         | ❌      |
+| Farcaster Mini App Delegation Starter            | ✅      | ❌         | ❌      |
+| Advanced Permissions (ERC-7715) Starter          | ✅      | ❌         | ❌      |
+| x402 Server                                      | ❌      | ❌         | ✅      |
