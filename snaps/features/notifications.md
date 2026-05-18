@@ -67,6 +67,9 @@ Each Snap can trigger up to:
 
 In-app notifications can include an optional expanded view that displays when selected.
 The expanded view includes a title, [custom UI](custom-ui/index.md) content, and an optional footer link.
+Note that the `content` field must use JSX components such as `Box` and `Text`. 
+If you are unfamiliar with JSX in Snaps, see the [custom UI](custom-ui/index.md) 
+documentation before proceeding.
 
 The following example displays a notification in MetaMask, with the message "Hello, world!"
 When the user selects the notification, the expanded view displays a page with a title, a paragraph, and a link to the MetaMask Snaps directory:
