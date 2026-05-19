@@ -1,0 +1,211 @@
+.widget {
+  flex: 0 1 auto;
+  width: 400px;
+  max-width: 100%;
+}
+
+.prompt {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 150%;
+  color: var(--ifm-color-content);
+  margin: 0 0 16px;
+}
+
+.thanks {
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 150%;
+  color: var(--ifm-color-content-secondary);
+  margin: 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.ratingBtn {
+  display: inline-block;
+  box-sizing: border-box;
+  appearance: none;
+  font-family: var(--ifm-font-family-base);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 150%;
+  padding: 8px 24px;
+  margin: 0;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  background: var(--ifm-background-surface-color) !important;
+  color: var(--ifm-color-content-secondary);
+  cursor: pointer;
+  outline: none;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+  user-select: none;
+}
+
+.ratingBtn:hover {
+  background: var(--ifm-color-emphasis-100) !important;
+  border-color: var(--ifm-color-emphasis-500) !important;
+  color: var(--ifm-color-content);
+}
+
+.commentSection {
+  margin-top: 20px;
+}
+
+.label {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 150%;
+  color: var(--ifm-color-content-secondary);
+  margin-bottom: 10px;
+  cursor: default;
+}
+
+.textarea {
+  display: block;
+  box-sizing: border-box;
+  appearance: none;
+  width: 100%;
+  max-width: 960px;
+  padding: 14px 16px;
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--ifm-color-content);
+  background: var(--ifm-background-surface-color) !important;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  border-radius: 8px;
+  font-family: var(--ifm-font-family-base);
+  resize: vertical;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  outline: none;
+}
+
+.textarea::placeholder {
+  color: var(--ifm-color-emphasis-500);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary) !important;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.submitBtn {
+  display: inline-block;
+  box-sizing: border-box;
+  appearance: none;
+  font-family: var(--ifm-font-family-base);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 150%;
+  padding: 8px 24px;
+  margin: 0;
+  border-radius: 8px;
+  border: none !important;
+  background: var(--ifm-color-primary) !important;
+  color: #000;
+  cursor: pointer;
+  outline: none;
+  transition: opacity 0.15s;
+  user-select: none;
+}
+
+.submitBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.submitBtn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+
+.error {
+  font-size: 1.4rem;
+  color: var(--ifm-color-danger, var(--ifm-color-emphasis-600));
+  margin: 12px 0 0;
+}
+
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.radioInput {
+  flex-shrink: 0;
+  margin-top: 3px;
+  width: 16px !important;
+  height: 16px !important;
+  appearance: auto !important;
+  accent-color: var(--ifm-color-primary);
+  cursor: pointer;
+  border: revert !important;
+}
+
+.optionText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.optionLabel {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--ifm-color-content);
+  line-height: 150%;
+}
+
+.optionDescription {
+  font-size: 1.3rem;
+  color: var(--ifm-color-content-secondary);
+  line-height: 150%;
+}
+
+.inlineTextarea {
+  display: block;
+  box-sizing: border-box;
+  appearance: none;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 12px;
+  font-size: 1.4rem;
+  color: var(--ifm-color-content);
+  background: var(--ifm-background-surface-color) !important;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  border-radius: 8px;
+  font-family: var(--ifm-font-family-base);
+  resize: vertical;
+  line-height: 1.6;
+  outline: none;
+}
+
+.inlineTextarea::placeholder {
+  color: var(--ifm-color-emphasis-500);
+}
+
+.inlineTextarea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary) !important;
+}

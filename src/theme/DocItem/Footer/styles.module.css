@@ -1,15 +1,19 @@
-.lastUpdated {
-  margin-top: 0.2rem;
-  margin-bottom: 2rem;
-  color: var(--general-gray-dark);
-
-  [data-theme='dark'] & {
-    color: var(--general-gray);
-  }
+.topRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-@media (width >= 997px) {
-  .lastUpdated {
-    text-align: right;
-  }
+.editLink {
+  flex-shrink: 0;
+  padding-top: 0.4rem;
+}
+
+.lastUpdatedRow {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--ifm-color-content);
 }

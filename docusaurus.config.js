@@ -312,6 +312,18 @@ const config = {
       },
     ],
     './src/plugins/plugin-json-rpc.ts',
+    function excludeApiPlugin() {
+      return {
+        name: 'exclude-api-directory',
+        configureWebpack() {
+          return {
+            module: {
+              rules: [{ test: /api\/.*\.ts$/, use: 'null-loader' }],
+            },
+          }
+        },
+      }
+    },
     // Custom Segment plugin for controlled analytics
     './src/plugins/segment',
     './src/plugins/launchdarkly',

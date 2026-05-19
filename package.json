@@ -26,7 +26,7 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": "eslint --fix --max-warnings=5",
-    "**/*.{ts,tsx}": "tsc-files --noEmit",
+    "src/**/*.{ts,tsx}": "tsc-files --noEmit",
     "**/*.css": "stylelint --fix",
     "**/*.{md,mdx,ts,js,tsx,jsx,json,css,scss,html,yml,yaml}": "prettier --write"
   },
@@ -99,18 +99,23 @@
     "@docusaurus/tsconfig": "3.10.0",
     "@docusaurus/types": "3.10.0",
     "@eslint/js": "^9.39.2",
+    "@googleapis/sheets": "^13.0.1",
     "@tsconfig/docusaurus": "^2.0.7",
     "@types/react-alert": "^7.0.6",
     "@types/react-modal": "^3.16.3",
     "@typescript-eslint/parser": "^8.46.2",
+    "@vercel/node": "^5.7.5",
     "eslint": "^9.35.0",
     "eslint-plugin-react": "^7.37.5",
+    "google-auth-library": "^10.6.2",
+    "googleapis-common": "^8.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
+    "null-loader": "^4.0.1",
     "stylelint": "^15.0.0 ",
     "stylelint-config-standard": "^34.0.0",
     "tsc-files": "^1.1.4",
-    "typescript": "^5.8.3"
+    "typescript": "5.8.3"
   },
   "overrides": {
     "axios": "^1.7.9",
@@ -118,6 +123,9 @@
     "react-alert": {
       "react": "^18.0.0",
       "react-dom": "^18.0.0"
+    },
+    "@vercel/node": {
+      "path-to-regexp": "6.3.0"
     }
   },
   "browserslist": {

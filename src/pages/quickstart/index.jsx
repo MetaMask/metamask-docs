@@ -20,6 +20,7 @@ import { getWindowLocation } from '../../theme/URLParams'
 import { METAMASK_CONNECT, EMBEDDED_WALLETS, YES, NO } from './builder/choices'
 import NavigationOverlay from './NavigationOverlay'
 import MediaStep from './MediaStep'
+import FeedbackWidget from '../../components/FeedbackWidget'
 
 const ALLOWED_OPTION_KEYS = new Set([
   'product',
@@ -933,6 +934,9 @@ export default function IntegrationBuilderPage(props) {
                       )}
                     </div>
                   ))}
+                  <div className={styles.feedbackSection}>
+                    <FeedbackWidget />
+                  </div>
                 </div>
               ) : (
                 <div className={styles.stepContainer}>
