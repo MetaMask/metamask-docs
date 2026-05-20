@@ -2,22 +2,10 @@
 title: Build with AI
 sidebar_label: Build with AI
 toc_max_heading_level: 2
-description: 'Build MetaMask Embedded Wallets integrations faster using AI coding assistants — Cursor, Claude, Codex, Antigravity, OpenClaw, and more.'
+description: 'Build MetaMask Embedded Wallets integrations faster using AI coding assistants — Cursor, Claude, Codex, Antigravity, and more.'
 image: 'img/metamaskog.jpg'
 keywords:
-  [
-    ai,
-    cursor,
-    claude,
-    codex,
-    antigravity,
-    openclaw,
-    mcp,
-    llm,
-    coding assistant,
-    embedded wallets,
-    web3auth,
-  ]
+  [ai, cursor, claude, codex, antigravity, mcp, llm, coding assistant, embedded wallets, web3auth]
 ---
 
 import SkillContent from '@site/src/components/SkillContent'
@@ -31,17 +19,39 @@ You'll set up the following:
 
 ## Skill
 
-The Skill guides your AI assistant by providing a mental model for MetaMask Embedded Wallets. It includes SDK selection logic,
-key derivation rules, authentication concepts, platform quirks, and common mistakes that aren't obvious from
-the docs alone. The Skill contains no code. The MCP server provides up-to-date code examples and implementation references.
+The Skill guides your AI assistant by providing a mental model for MetaMask Embedded Wallets.
+It includes SDK selection logic, key derivation rules, authentication concepts, platform quirks,
+and common mistakes that aren't obvious from the docs alone.
+The Skill contains no code. The MCP server provides up-to-date code examples and implementation references.
 
 :::tip
-For the best experience, use the MCP server alongside the skill so that your LLM can fetch live docs and examples rather than relying on static text.
+For the best experience, use the MCP server alongside the skill so that your LLM can fetch live
+docs and examples rather than relying on static text.
 :::
 
-### Cursor
+### Universal install (recommended)
 
-Copy the skill into your project:
+Run the following in your project directory:
+
+```bash
+npx skills add web3auth/skill
+```
+
+The skills CLI detects your active AI agent and installs to the correct directory automatically.
+Works with Cursor, Claude Code, Copilot, Cline, Codex, Antigravity, and 40+ more agents.
+See the [web3auth/skill README](https://github.com/Web3Auth/skill) for global and per-agent install options.
+
+### Manual install
+
+If you prefer to install the skill without the CLI, use the following per-tool instructions.
+
+**Cursor**
+
+```bash
+npx skills add web3auth/skill -a cursor
+```
+
+Or copy the skill directly into your project:
 
 ```bash
 npx degit Web3Auth/web3auth-mcp/skills/web3auth .cursor/skills/web3auth
@@ -50,48 +60,31 @@ npx degit Web3Auth/web3auth-mcp/skills/web3auth .cursor/skills/web3auth
 Cursor picks up each `SKILL.md` under `.cursor/skills/<skill-name>/` automatically and activates
 it when relevant.
 
-### Claude Code CLI
-
-Download the skill and append it to your project's `CLAUDE.md`:
+**Claude Code CLI**
 
 ```bash
-npx degit Web3Auth/web3auth-mcp/skills/web3auth /tmp/web3auth-skill
-cat /tmp/web3auth-skill/SKILL.md >> CLAUDE.md
+npx skills add web3auth/skill -a claude-code
 ```
 
-### Claude Desktop
+**Antigravity**
 
-Open **Claude Desktop → Settings → Custom Instructions** and paste the skill content below directly.
+```bash
+npx skills add web3auth/skill -a antigravity
+```
 
-### Antigravity
-
-Copy the skill into your project:
+Or copy the skill directly into your project:
 
 ```bash
 npx degit Web3Auth/web3auth-mcp/skills/web3auth .agent/skills/web3auth
 ```
 
-Antigravity picks up skills inside `.agent/skills/` automatically. For global installation across all
-projects, use `~/.gemini/antigravity/skills/` instead.
+Antigravity picks up skills inside `.agent/skills/` automatically.
+For global installation across all projects, use `~/.gemini/antigravity/skills/` instead.
 
-### OpenClaw
+**Claude Desktop and other tools**
 
-Open your agent's configuration in the OpenClaw dashboard and paste the skill content below into the
-**Custom Instructions** field.
-
-For self-hosted instances, add it to your `openclaw.json`:
-
-```json
-{
-  "agent": {
-    "instructions": "<paste SKILL.md content here>"
-  }
-}
-```
-
-### Other tools
-
-For any LLM tool with a system prompt or custom instructions field, paste the skill content below directly.
+Open **Claude Desktop → Settings → Custom Instructions** (or your tool's equivalent system prompt
+or custom instructions field) and paste the skill content below directly.
 
 <details>
 <summary>View `SKILL.md` file</summary>
@@ -225,29 +218,6 @@ Then add to your agent's configuration:
 }
 ```
 
-### OpenClaw
-
-For managed instances, go to your **OpenClaw dashboard → Skills → Add custom skill** and enter the MCP
-server URL:
-
-```
-https://mcp.web3auth.io
-```
-
-For self-hosted instances, add the server to your `openclaw.json`:
-
-```json
-{
-  "mcpServers": {
-    "web3auth": {
-      "url": "https://mcp.web3auth.io"
-    }
-  }
-}
-```
-
-OpenClaw hot-reloads config changes — no restart required.
-
 ## Static docs (llms.txt)
 
 If your AI tool doesn't support MCP yet, use the static documentation file instead. This gives your AI
@@ -284,7 +254,7 @@ chosen and common pitfalls are avoided before a line of code is written.
 
 :::tip
 
-Use planning mode (where available) for your initial prompt. Review the plan before generating code — this
+Use planning mode (where available) for your initial prompt. Review the plan before generating code; this
 catches architecture mistakes early and avoids config errors that would change wallet addresses in production.
 
 :::
