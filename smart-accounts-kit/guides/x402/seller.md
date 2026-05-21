@@ -14,8 +14,10 @@ In this guide, you build a Node.js server that charges for HTTP API access using
 [x402](https://www.x402.org/) and accepts [ERC-7710](https://eips.ethereum.org/EIPS/eip-7710) delegation
 payments verified through the MetaMask facilitator.
 
-You use the official [`@x402/express`](https://www.npmjs.com/package/@x402/express) middleware with a custom ERC-7710 scheme that routes
-verification and settlement through the MetaMask facilitator.
+You use the official [`@x402/express`](https://www.npmjs.com/package/@x402/express) middleware with the
+[`@metamask/x402`](https://www.npmjs.com/package/@metamask/x402)
+package, which provides an ERC-7710 server scheme that routes verification and settlement
+through the MetaMask facilitator.
 
 ## Prerequisites
 
@@ -24,70 +26,36 @@ verification and settlement through the MetaMask facilitator.
 - A seller payout address to receive funds (for example, a
   [MetaMask wallet](https://metamask.io/download) address).
 
+## Facilitator URLs
+
+The following table lists the available MetaMask facilitator endpoints:
+
+| Name         | ID             | URL                                                                     |
+| ------------ | -------------- | ----------------------------------------------------------------------- |
+| Base         | `eip155:8453`  | `https://tx-sentinel-base-mainnet.api.cx.metamask.io/platform/v2/x402`  |
+| Base Sepolia | `eip155:84532` | `https://tx-sentinel-base-sepolia.api.cx.metamask.io/platform/v2/x402`  |
+| Monad        | `eip155:143`   | `https://tx-sentinel-monad-mainnet.api.cx.metamask.io/platform/v2/x402` |
+
 ## Steps
 
 ### 1. Install the dependencies
 
 ```bash npm2yarn
-npm install @x402/core @x402/evm @x402/express cors express
+npm install @metamask/x402 @x402/core @x402/express cors express
 ```
 
-### 2. Create the ERC-7710 scheme
+### 2. Configure middleware
 
-Create a custom scheme that extends `ExactEvmScheme` from `@x402/evm` to add ERC-7710
-delegation support.
+Set up the Express server with the x402 `paymentMiddleware` and the `x402ExactEvmErc7710ServerScheme`
+from `@metamask/x402`.
+The scheme automatically adds payment requirements with ERC-7710 fields when
+`assetTransferMethod` is set to `erc7710` in the route configuration.
 
-The scheme overrides `enhancePaymentRequirements` to set `assetTransferMethod` to `erc7710`
-and include the facilitator addresses so buyers can scope their delegation to a specific
-set of facilitators before creating the payment payload.
-
-```ts
-import { ExactEvmScheme } from '@x402/evm/exact/server'
-import type { PaymentRequirements, SupportedKind } from '@x402/core/types'
-import type { FacilitatorClient } from '@x402/core/server'
-
-export class Erc7710ExactEvmScheme extends ExactEvmScheme {
-  constructor(private readonly facilitatorClient: FacilitatorClient) {
-    super()
-  }
-
-  async enhancePaymentRequirements(
-    paymentRequirements: PaymentRequirements,
-    supportedKind: SupportedKind,
-    facilitatorExtensions: string[]
-  ): Promise<PaymentRequirements> {
-    const enhanced = await super.enhancePaymentRequirements(
-      paymentRequirements,
-      supportedKind,
-      facilitatorExtensions
-    )
-
-    const supported = await this.facilitatorClient.getSupported()
-    const facilitators = [
-      ...(supported.signers[paymentRequirements.network] ?? []),
-      ...(supported.signers['eip155:*'] ?? []),
-    ]
-
-    return {
-      ...enhanced,
-      extra: {
-        ...enhanced.extra,
-        assetTransferMethod: 'erc7710',
-        facilitators,
-      },
-    }
-  }
-}
-```
-
-### 3. Configure the server
-
-Set up the Express server with the x402 `paymentMiddleware` and the custom ERC-7710 scheme.
 The `paymentMiddleware` intercepts requests to protected routes and handles the full x402 payment
 flow, including requirements advertisement, verification, and settlement.
 
 In this example, you create a protected `GET /api/hello` endpoint that charges 0.01 USDC on
-Base mainnet.
+Base Sepolia.
 Replace the payout address in `src/config.ts` with your own seller wallet address.
 
 <Tabs>
@@ -96,9 +64,8 @@ Replace the payout address in `src/config.ts` with your own seller wallet addres
 ```ts
 import express, { type Request, type Response } from 'express'
 import cors from 'cors'
-import { paymentMiddleware } from '@x402/express'
-import { x402ResourceServer } from '@x402/core/server'
-import { Erc7710ExactEvmScheme } from './scheme.js'
+import { paymentMiddleware, x402ResourceServer } from '@x402/express'
+import { x402ExactEvmErc7710ServerScheme } from '@metamask/x402'
 import { NETWORK_ID, PORT, payToAddress, facilitatorClient } from './config.js'
 
 const app = express()
@@ -114,6 +81,9 @@ app.use(
             price: '$0.01',
             network: NETWORK_ID,
             payTo: payToAddress,
+            extra: {
+              assetTransferMethod: 'erc7710',
+            },
           },
         ],
         description: 'Access to protected resource',
@@ -122,7 +92,7 @@ app.use(
     },
     new x402ResourceServer(facilitatorClient).register(
       NETWORK_ID,
-      new Erc7710ExactEvmScheme(facilitatorClient)
+      new x402ExactEvmErc7710ServerScheme()
     )
   )
 )
@@ -143,15 +113,15 @@ app.listen(PORT, () => {
 ```ts
 import { HTTPFacilitatorClient } from '@x402/core/server'
 
-export const NETWORK_ID = 'eip155:8453'
+export const NETWORK_ID = 'eip155:84532'
 export const PORT = 4402
 
 // Replace with your seller payout address.
 export const payToAddress = '0x<PAY_TO_ADDRESS>'
 
-// MetaMask facilitator base URL for x402 on Base mainnet.
+// MetaMask facilitator base URL for x402 on Base Sepolia.
 export const facilitatorClient = new HTTPFacilitatorClient({
-  url: 'https://tx-sentinel-base-mainnet.dev-api.cx.metamask.io/platform/v2/x402',
+  url: 'https://tx-sentinel-base-sepolia.api.cx.metamask.io/platform/v2/x402',
 })
 ```
 
