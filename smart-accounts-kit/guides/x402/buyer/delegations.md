@@ -10,11 +10,12 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 
 # Pay for an x402 API with delegation
 
-In this guide, you use a buyer <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm>
-to access API data from an x402 server.
+In this guide, you use a buyer account to access API data from an x402 server by creating
+an <GlossaryTerm term="Open root delegation">open delegation</GlossaryTerm> that authorizes
+token transfers on your behalf.
 
-You create an open delegation, restrict redemption to the facilitator, encode the delegation chain,
-and send it as the payment payload when calling a protected API route.
+You set up an `x402Erc7710Client` with a delegation provider, register it with the x402 client,
+and use `wrapFetchWithPayment` to automatically handle payment when calling a protected API route.
 
 ## Prerequisites
 
@@ -22,7 +23,13 @@ and send it as the payment payload when calling a protected API route.
 
 ## Steps
 
-### 1. Create a buyer account
+### 1. Install the dependencies
+
+```bash npm2yarn
+npm install @x402/core @x402/fetch @metamask/x402
+```
+
+### 2. Create a buyer account
 
 Create an account to represent the buyer, the <GlossaryTerm term="Delegator account">delegator</GlossaryTerm> who will create a delegation.
 
@@ -67,192 +74,88 @@ export const buyerAccount = privateKeyToAccount('0x<BUYER_PRIVATE_KEY>')
 </TabItem>
 </Tabs>
 
-### 2. Get payment requirements
+### 3. Create an x402 ERC-7710 client
 
-Call the protected API route once without the `PAYMENT-SIGNATURE` header.
+Create an `x402Erc7710Client` with a `delegationProvider` callback.
+The x402 client calls this function automatically when it needs to pay for a request, passing
+in the payment requirements from the server.
 
-The server returns `402` with the payment terms (`PAYMENT-REQUIRED`) in the response, which you use
-to build the payment payload.
-
-<Tabs>
-<TabItem value="example.ts">
-
-```ts
-import { PaymentRequirements } from './types'
-
-// Update the URL
-const challengeResponse = await fetch('https://api.example.com/paid-endpoint')
-if (challengeResponse.status !== 402) {
-  console.error('Expected 402 challenge from protected route')
-  // Handle error
-}
-
-const paymentRequiredHeader = challengeResponse.headers.get('PAYMENT-REQUIRED')
-if (!paymentRequiredHeader) {
-  console.error('PAYMENT-REQUIRED header is missing')
-  // Handle error
-}
-
-const decodedPaymentRequired = Buffer.from(paymentRequiredHeader, 'base64').toString('utf-8')
-const paymentRequired = JSON.parse(decodedPaymentRequired) as {
-  accepts: PaymentRequirements[]
-}
-
-const accepted = paymentRequired.accepts[0]
-if (!accepted) {
-  console.error('Server did not provide accepted payment requirements')
-  // Handle error
-}
-
-if (accepted.extra.assetTransferMethod !== 'erc7710') {
-  console.error('Server does not support ERC-7710 delegation payments')
-  // Handle error
-}
-```
-
-</TabItem>
-<TabItem value="types.ts">
-
-```ts
-export type PaymentRequirements = {
-  scheme: string
-  network: string
-  amount: string
-  asset: `0x${string}`
-  payTo: `0x${string}`
-  maxTimeoutSeconds: number
-  extra: {
-    assetTransferMethod: string
-    facilitators?: `0x${string}`[]
-  }
-}
-```
-
-</TabItem>
-</Tabs>
-
-### 3. Create a delegation
-
-Create an [open root delegation](../../../concepts/delegation/overview.md#open-root-delegation)
-from the buyer smart account. With an open root delegation, the buyer delegates authority without
-setting a specific delegate. Use [`createOpenDelegation`](../../../reference/delegation/index.md#createopendelegation) to create the open root delegation.
-
+Inside the provider, create an [open delegation](../../../concepts/delegation/overview.md#open-root-delegation)
+using [`createOpenDelegation`](../../../reference/delegation/index.md#createopendelegation).
 This example uses the [`erc20TransferAmount`](../../../guides/delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope)
-scope to allow USDC transfers up to the amount requested in payment terms.
-It also uses the [`redeemer`](../../../reference/delegation/caveats.md#redeemer) caveat enforcer to restrict
-redemption to facilitator addresses provided by the server.
+scope to allow USDC transfers up to the requested amount, and the
+[`timestamp`](../../../reference/delegation/caveats.md#timestamp) caveat to set a short expiry.
 
-:::warning
-Before creating the delegation, make sure your buyer smart account is deployed. If it is not
-deployed, delegation redemption will fail.
-:::
+For ERC-7710, x402 requires the payload fields `delegationManager`, `permissionContext`, and `delegator`.
+Use [`encodeDelegations`](../../../reference/delegation/index.md#encodedelegations) to encode the delegation chain.
 
 ```ts
 import { CaveatType, createOpenDelegation, ScopeType } from '@metamask/smart-accounts-kit'
-
-const facilitators = accepted.extra.facilitators
-if (!facilitators || facilitators.length === 0) {
-  console.log('No facilitators found in PAYMENT-REQUIRED')
-  // Handle the error
-}
-
-// Use the amount requested by the seller.
-const maxAmount = BigInt(accepted.amount)
-
-const caveats = [
-  {
-    type: CaveatType.Redeemer,
-    redeemers: facilitators,
-  },
-]
-
-const delegation = createOpenDelegation({
-  from: buyerSmartAccount.address,
-  environment: buyerSmartAccount.environment,
-  scope: {
-    type: ScopeType.Erc20TransferAmount,
-    tokenAddress: accepted.asset,
-    maxAmount,
-  },
-  caveats,
-})
-
-const signature = await buyerSmartAccount.signDelegation({
-  delegation,
-})
-
-const signedDelegation = {
-  ...delegation,
-  signature,
-}
-```
-
-### 4. Create the payment payload
-
-Create a payment payload using the signed delegation and accepted requirements.
-For ERC-7710 (Smart Contract Delegation), x402 requires the payload fields `delegationManager`, `permissionContext`, and `delegator`.
-The facilitator uses `permissionContext` to simulate during verification and then settle the payment.
-
-Use `encodeDelegations` to encode the delegation chain.
-Then base64 encode the full x402 payment payload before sending it in the `PAYMENT-SIGNATURE` header.
-
-<Tabs>
-<TabItem value="example.ts">
-
-```ts
 import { encodeDelegations } from '@metamask/smart-accounts-kit/utils'
-import { PaymentPayload } from './types'
+import { x402Erc7710Client } from '@metamask/x402'
+import { getAddress } from 'viem'
 
-const permissionContext = encodeDelegations([signedDelegation])
+const erc7710Client = new x402Erc7710Client({
+  delegationProvider: async requirements => {
+    // Expires in 1 minute.
+    const expiry = Math.floor(Date.now() / 1000) + 60
 
-const paymentPayload: PaymentPayload = {
-  x402Version: 2,
-  accepted,
-  payload: {
-    delegationManager: buyerSmartAccount.environment.DelegationManager,
-    permissionContext,
-    delegator: buyerSmartAccount.address,
+    const delegation = createOpenDelegation({
+      environment: buyerSmartAccount.environment,
+      from: buyerSmartAccount.address,
+      scope: {
+        type: ScopeType.Erc20TransferAmount,
+        tokenAddress: getAddress(requirements.asset),
+        maxAmount: BigInt(requirements.amount),
+      },
+      caveats: [
+        {
+          type: CaveatType.Timestamp,
+          afterThreshold: 0,
+          beforeThreshold: expiry,
+        },
+      ],
+    })
+
+    const signature = await buyerSmartAccount.signDelegation({
+      delegation,
+    })
+
+    const signedDelegation = {
+      ...delegation,
+      signature,
+    }
+
+    return {
+      delegationManager: buyerSmartAccount.environment.DelegationManager,
+      permissionContext: encodeDelegations([signedDelegation]),
+      delegator: buyerSmartAccount.address,
+    }
   },
-}
-
-const encodedPayment = Buffer.from(JSON.stringify(paymentPayload)).toString('base64')
+})
 ```
 
-</TabItem>
-<TabItem value="types.ts">
+### 4. Register the client
+
+Register the ERC-7710 client from the previous step with the x402 core client for all the EVM networks,
+then create an HTTP client and a payment-aware `fetch` function using `wrapFetchWithPayment`.
 
 ```ts
-export type PaymentPayload = {
-  x402Version: 2
-  accepted: PaymentRequirements
-  payload: {
-    delegationManager: `0x${string}`
-    permissionContext: `0x${string}`
-    delegator: `0x${string}`
-  }
-}
-```
+import { x402Client, x402HTTPClient } from '@x402/core/client'
+import { wrapFetchWithPayment } from '@x402/fetch'
 
-</TabItem>
-</Tabs>
+const coreClient = new x402Client().register('eip155:*', erc7710Client)
+const httpClient = new x402HTTPClient(coreClient)
+
+const fetchWithPayment = wrapFetchWithPayment(fetch, httpClient)
+```
 
 ### 5. Make the paid request
 
-Send the encoded x402 payment payload in the `PAYMENT-SIGNATURE` header.
-If verification succeeds, the server returns the protected data.
+Call the protected endpoint using `fetchWithPayment`.
 
 ```ts
-const apiResponse = await fetch('https://api.example.com/paid-endpoint', {
-  headers: {
-    'PAYMENT-SIGNATURE': encodedPayment,
-  },
+const paidResponse = await fetchWithPayment('https://api.example.com/paid-endpoint', {
+  method: 'GET',
 })
-
-if (!apiResponse.ok) {
-  const errorBody = await apiResponse.json()
-  throw new Error(errorBody.error ?? 'API request failed')
-}
-
-const data = await apiResponse.json()
-console.log('Protected API response:', data)
 ```
