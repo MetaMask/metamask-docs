@@ -1,5 +1,5 @@
 ---
-description: Pay for an x402-protected API data using delegation.
+description: Pay for an x402-protected API access using delegation.
 sidebar_label: Delegations
 keywords: [x402, ERC-7710, delegation, smart account, facilitator, buyer, API]
 ---
@@ -31,9 +31,13 @@ npm install @x402/core @x402/fetch @metamask/x402
 
 ### 2. Create a buyer account
 
-Create an account to represent the buyer, the <GlossaryTerm term="Delegator account">delegator</GlossaryTerm> who will create a delegation.
+Create an account to represent the buyer, the
+<GlossaryTerm term="Delegator account">delegator</GlossaryTerm> who creates a delegation.
 
-The delegator must be a <GlossaryTerm term="MetaMask smart account" />; use the toolkit's [`toMetaMaskSmartAccount`](../../../reference/smart-account.md#tometamasksmartaccount) method to create the buyer account.
+The delegator must be a <GlossaryTerm term="MetaMask smart account" />.
+Use the toolkit's
+[`toMetaMaskSmartAccount`](../../../reference/smart-account.md#tometamasksmartaccount) method to
+create the buyer account.
 
 :::note Important
 Fund the smart account with USDC for the requested payment.
@@ -137,8 +141,8 @@ const erc7710Client = new x402Erc7710Client({
 
 ### 4. Register the client
 
-Register the ERC-7710 client from the previous step with the x402 core client for all the EVM networks,
-then create an HTTP client and a payment-aware `fetch` function using `wrapFetchWithPayment`.
+Register the ERC-7710 client with the x402 core client for all EVM networks.
+Create an HTTP client and a payment-aware `fetch` function using `wrapFetchWithPayment`.
 
 ```ts
 import { x402Client, x402HTTPClient } from '@x402/core/client'
@@ -153,6 +157,8 @@ const fetchWithPayment = wrapFetchWithPayment(fetch, httpClient)
 ### 5. Make the paid request
 
 Call the protected endpoint using `fetchWithPayment`.
+It handles the x402 payment flow, calling your `delegationProvider`
+to create an open redelegation when the server returns a `402` response.
 
 ```ts
 const paidResponse = await fetchWithPayment('https://api.example.com/paid-endpoint', {
