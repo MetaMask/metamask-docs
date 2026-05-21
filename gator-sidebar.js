@@ -127,7 +127,9 @@ const sidebar = {
               collapsed: true,
               items: [
                 'guides/x402/buyer/delegations',
-                'guides/x402/buyer/advanced-permissions',
+                // Disable advanced permissions guide until MetaMask Extension
+                // is released with the new rules and permission type.
+                // 'guides/x402/buyer/advanced-permissions',
                 'guides/x402/buyer/recurring-payments',
               ],
             },

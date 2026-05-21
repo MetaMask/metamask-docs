@@ -24,7 +24,8 @@ In this guide, you set up recurring x402 payments by requesting an ERC-20 period
 <GlossaryTerm term="Advanced Permissions" /> permission from a user.
 
 For example, a user gives your agent permission to spend up to 10 USDC per week.
-Later, when the agent calls an x402 endpoint, it checks the price, uses the granted permission, and pays.
+Later, when the agent calls an x402 endpoint, it checks the price, uses the granted permission,
+and pays.
 
 ## Prerequisites
 
@@ -32,11 +33,20 @@ Later, when the agent calls an x402 endpoint, it checks the price, uses the gran
 
 ## Steps
 
-### 1. Set up a Wallet Client
+### 1. Install the dependencies
 
-Set up a Wallet Client using Viem's [`createWalletClient`](https://viem.sh/docs/clients/wallet) function. Use this client to interact with MetaMask.
+```bash npm2yarn
+npm install @x402/core @x402/fetch @metamask/x402
+```
 
-Extend the Wallet Client with `erc7715ProviderActions` to enable <GlossaryTerm term="Advanced Permissions" /> requests.
+### 2. Set up a Wallet Client
+
+Set up a Wallet Client using Viem's
+[`createWalletClient`](https://viem.sh/docs/clients/wallet) function.
+Use this client to interact with MetaMask.
+
+Extend the Wallet Client with `erc7715ProviderActions` to enable
+<GlossaryTerm term="Advanced Permissions" /> requests.
 
 ```typescript
 import { createWalletClient, custom } from 'viem'
@@ -47,9 +57,11 @@ const walletClient = createWalletClient({
 }).extend(erc7715ProviderActions())
 ```
 
-### 2. Set up an agent account
+### 3. Set up an agent account
 
-The session account can be either a <GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> or an <GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm>.
+The session account can be either a
+<GlossaryTerm term="MetaMask smart account">smart account</GlossaryTerm> or an
+<GlossaryTerm term="Externally owned account (EOA)">EOA</GlossaryTerm>.
 This example uses an EOA as the session account.
 
 ```typescript
@@ -58,14 +70,19 @@ import { privateKeyToAccount } from 'viem/accounts'
 const sessionAccount = privateKeyToAccount('0x...')
 ```
 
-### 3. Request Advanced Permissions
+### 4. Request Advanced Permissions
 
-Request Advanced Permissions from the user with the Wallet Client's `requestExecutionPermissions` action.
+Request Advanced Permissions from the user with the Wallet Client's
+`requestExecutionPermissions` action.
 
-In this example, you request an [ERC-20 periodic permission](../../advanced-permissions/use-permissions/erc20-token.md#erc-20-periodic-permission) with a weekly allowance of 10 USDC. This creates
-a recurring payment budget that your agent can store and reuse for making an x402 API call.
+In this example, you request an
+[ERC-20 periodic permission](../../advanced-permissions/use-permissions/erc20-token.md#erc-20-periodic-permission)
+with a weekly allowance of 10 USDC.
+This creates a recurring payment budget that your agent can store and reuse for x402 API calls.
 
-See the [`requestExecutionPermissions`](../../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions) API reference for more information.
+See the
+[`requestExecutionPermissions`](../../../reference/advanced-permissions/wallet-client.md#requestexecutionpermissions)
+API reference for more information.
 
 ```ts
 import { base as chain } from 'viem/chains'
@@ -98,101 +115,53 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
 ])
 ```
 
-### 4. Get payment requirements
+### 5. Create an x402 ERC-7710 client
 
-Call the x402-protected endpoint without the `PAYMENT-SIGNATURE` header to request payment terms
-after your agent has been granted permission.
+Create an `x402Erc7710Client` with a `delegationProvider` callback.
+The x402 client calls this function automatically when it needs to pay for a request, passing
+in the payment requirements from the server.
 
-The server returns `402` with the payment terms (`PAYMENT-REQUIRED`) in the response, which agent can use to
-build the payment payload.
+Inside the provider, create an <GlossaryTerm term="Open redelegation">open redelegation</GlossaryTerm>
+from the agent account so the facilitator can redeem the permission context for x402 settlement.
+This example uses the
+[`erc20TransferAmount`](../../../guides/delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope)
+scope to allow USDC transfers up to the amount requested in payment terms.
 
-```ts
-import { PaymentRequirements } from './types'
-
-// Update the URL
-const challengeResponse = await fetch('https://api.example.com/paid-endpoint')
-if (challengeResponse.status !== 402) {
-  console.error('Expected 402 challenge from protected route')
-  // Handle error
-}
-
-const paymentRequiredHeader = challengeResponse.headers.get('PAYMENT-REQUIRED')
-if (!paymentRequiredHeader) {
-  console.error('PAYMENT-REQUIRED header is missing')
-  // Handle error
-}
-
-const decodedPaymentRequired = Buffer.from(paymentRequiredHeader, 'base64').toString('utf-8')
-const paymentRequired = JSON.parse(decodedPaymentRequired) as {
-  accepts: PaymentRequirements[]
-}
-
-const accepted = paymentRequired.accepts[0]
-if (!accepted) {
-  console.error('Server did not provide accepted payment requirements')
-  // Handle error
-}
-
-if (accepted.extra.assetTransferMethod !== 'erc7710') {
-  console.error('Server does not support ERC-7710 delegation payments')
-  // Handle error
-}
-
-if (accepted.asset.toLowerCase() !== tokenAddress.toLowerCase()) {
-  console.error('Requested payment asset does not match recurring payment token')
-  // Handle error
-}
-```
-
-### 5. Create a redelegation
-
-The granted advanced permission is delegated to the agent account.
-For each protected API call, create a redelegation from the agent account so facilitator addresses
-can redeem the permission context for x402 settlement.
-
-This example uses the [`erc20TransferAmount`](../../../guides/delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope)
-scope while creating redelegation to allow USDC transfers up to the amount requested in payment terms. It also uses
-the [`redeemer`](../../../reference/delegation/caveats.md#redeemer) enforcer to restrict
-redemption to facilitator addresses provided by the server.
-
-Use the Wallet Client's [`redelegatePermissionContext`](../../../reference/erc7710/wallet-client.md#redelegatepermissioncontextopen) action to create a redelegated permission
-context.
+Use the Wallet Client's
+[`redelegatePermissionContextOpen`](../../../reference/erc7710/wallet-client.md#redelegatepermissioncontextopen)
+action to create a redelegated permission context.
 
 <Tabs>
 <TabItem value="example.ts">
 
 ```ts
-import { environment, sessionAccountWalletClient } from './config.ts'
 import { ScopeType, CaveatType } from '@metamask/smart-accounts-kit'
+import { x402Erc7710Client } from '@metamask/x402'
+import { getAddress } from 'viem'
+import { environment, sessionAccountWalletClient } from './config'
 
 const permission = grantedPermissions[0]
-if (!permission) {
-  console.error('No permission response returned by requestExecutionPermissions')
-  // Handle error
-}
 
-const facilitators = accepted.extra.facilitators
-if (!facilitators || facilitators.length === 0) {
-  console.error('No facilitators found in payment terms')
-  // Handle error
-}
+const erc7710Client = new x402Erc7710Client({
+  delegationProvider: async requirements => {
+    const { permissionContext: redelegatedPermissionContext } =
+      await sessionAccountWalletClient.redelegatePermissionContextOpen({
+        environment,
+        permissionContext: permission.context,
+        scope: {
+          type: ScopeType.Erc20TransferAmount,
+          tokenAddress: getAddress(requirements.asset),
+          maxAmount: BigInt(requirements.amount),
+        },
+      })
 
-const { permissionContext: redelegatedPermissionContext } =
-  await sessionAccountWalletClient.redelegatePermissionContext({
-    environment,
-    permissionContext: permission.context,
-    scope: {
-      type: ScopeType.Erc20TransferAmount,
-      tokenAddress: accepted.asset,
-      maxAmount: BigInt(accepted.amount),
-    },
-    caveats: [
-      {
-        type: CaveatType.Redeemer,
-        redeemers: facilitators,
-      },
-    ],
-  })
+    return {
+      delegationManager: permission.delegationManager,
+      permissionContext: redelegatedPermissionContext,
+      delegator: permission.from,
+    }
+  },
+})
 ```
 
 </TabItem>
@@ -206,7 +175,7 @@ import { erc7710WalletActions } from '@metamask/smart-accounts-kit/actions'
 
 export const environment = getSmartAccountsEnvironment(chain.id)
 
-// Use sessionAccount from previous step
+// Use sessionAccount from previous step.
 export const sessionAccountWalletClient = createWalletClient({
   account: sessionAccount,
   chain,
@@ -217,55 +186,34 @@ export const sessionAccountWalletClient = createWalletClient({
 </TabItem>
 </Tabs>
 
-### 6. Create the payment payload
+### 6. Register the client
 
-For each protected API call, create a payment payload with the redelegated permission context.
-
-For ERC-7710 (Smart Contract Delegation), x402 requires the payload fields `delegationManager`,
-`permissionContext`, and `delegator`. The facilitator uses `permissionContext` to simulate
-during verification and then settle the payment.
-
-Encode the full x402 payment payload as base64, then send it in the `PAYMENT-SIGNATURE` header.
+Register the ERC-7710 client with the x402 core client for all EVM networks,
+then create an HTTP client and a payment-aware `fetch` function using `wrapFetchWithPayment`.
 
 ```ts
-import { PaymentPayload } from './types'
+import { x402Client, x402HTTPClient } from '@x402/core/client'
+import { wrapFetchWithPayment } from '@x402/fetch'
 
-const permission = grantedPermissions[0]
+const coreClient = new x402Client().register('eip155:*', erc7710Client)
+const httpClient = new x402HTTPClient(coreClient)
 
-const paymentPayload: PaymentPayload = {
-  x402Version: 2,
-  accepted,
-  payload: {
-    delegationManager: permission.delegationManager,
-    permissionContext: redelegatedPermissionContext,
-    delegator: permission.from,
-  },
-}
-
-const encodedPayment = Buffer.from(JSON.stringify(paymentPayload)).toString('base64')
+const fetchWithPayment = wrapFetchWithPayment(fetch, httpClient)
 ```
 
 ### 7. Make the paid request
 
-Send the base64-encoded x402 payment payload in the `PAYMENT-SIGNATURE` header.
+Call the protected endpoint using `fetchWithPayment`.
+It handles the x402 payment flow, calling your `delegationProvider`
+to create an open redelegation when the server returns a `402` response.
 
 ```ts
-const apiResponse = await fetch('https://api.example.com/paid-endpoint', {
-  headers: {
-    'PAYMENT-SIGNATURE': encodedPayment,
-  },
+const paidResponse = await fetchWithPayment('https://api.example.com/paid-endpoint', {
+  method: 'GET',
 })
-
-if (!apiResponse.ok) {
-  const errorBody = await apiResponse.json()
-  console.error(errorBody.error ?? 'API request failed')
-  // Handle error
-}
-
-const data = await apiResponse.json()
-console.log('Protected API response:', data)
 ```
 
-Reuse the same weekly granted permission for additional protected routes and providers in your agent flow.
-Your agent can continue paying until the weekly cap is reached, then continue after the next weekly
-period starts.
+Reuse the same weekly granted permission for additional protected routes and providers in your
+agent flow.
+Your agent can continue paying until the weekly cap is reached, then continue after the next
+weekly period starts.
