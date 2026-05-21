@@ -481,6 +481,7 @@ const config = {
         ],
       },
     ],
+    'docusaurus-plugin-copy-page-button',
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:

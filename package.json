@@ -59,6 +59,7 @@
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "copy-to-clipboard": "^3.3.3",
+    "docusaurus-plugin-copy-page-button": "^0.6.1",
     "docusaurus-plugin-llms": "^0.2.2",
     "docusaurus-plugin-sass": "^0.2.5",
     "dotenv": "^17.2.1",
