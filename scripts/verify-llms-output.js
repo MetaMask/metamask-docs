@@ -76,20 +76,6 @@ const CUSTOM_LLM_FILES = [
     description: 'Complete documentation for Snaps',
   },
   {
-    filename: 'llms-wallet.txt',
-    includePatterns: ['wallet/**/*.{md,mdx}'],
-    fullContent: false,
-    title: 'Wallet API documentation',
-    description: 'Documentation links for Wallet API',
-  },
-  {
-    filename: 'llms-wallet-full.txt',
-    includePatterns: ['wallet/**/*.{md,mdx}'],
-    fullContent: true,
-    title: 'Wallet API documentation',
-    description: 'Complete documentation for Wallet API',
-  },
-  {
     filename: 'llms-tutorials.txt',
     includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
     fullContent: false,
