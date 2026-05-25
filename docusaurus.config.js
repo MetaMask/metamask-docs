@@ -363,6 +363,7 @@ This file contains the complete MetaMask developer documentation in a single mar
           'node_modules/**',
           'build/**',
           '.docusaurus/**',
+          '.llms-verify/**',
           '.cursor/**',
           '.github/**',
           '.husky/**',

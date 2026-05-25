@@ -108,18 +108,19 @@ async function summarize(outDir) {
   const llmsFull = path.join(outDir, 'llms-full.txt')
 
   const summary = { totalMarkdownFiles: mdFiles.length }
+  // Single read avoids a TOCTOU race; derive byte length from the buffer.
   try {
-    const s = await fs.stat(llmsTxt)
-    summary.llmsTxtBytes = s.size
-    const content = await fs.readFile(llmsTxt, 'utf8')
-    summary.llmsTxtLinkCount = (content.match(/\]\(http/g) || []).length
-    summary.llmsTxtUrlWithReadme = (content.match(/\/README\.md/g) || []).length
-    summary.llmsTxtUrlWithIndexMd = (content.match(/\/index\.md/g) || []).length
+    const content = await fs.readFile(llmsTxt)
+    summary.llmsTxtBytes = content.length
+    const text = content.toString('utf8')
+    summary.llmsTxtLinkCount = (text.match(/\]\(http/g) || []).length
+    summary.llmsTxtUrlWithReadme = (text.match(/\/README\.md/g) || []).length
+    summary.llmsTxtUrlWithIndexMd = (text.match(/\/index\.md/g) || []).length
     summary.llmsTxtUrlsStartingWithDocsSlash = (
-      content.match(/https:\/\/docs\.metamask\.io\/docs\//g) || []
+      text.match(/https:\/\/docs\.metamask\.io\/docs\//g) || []
     ).length
     summary.llmsTxtUrlsStartingWithSrcPages = (
-      content.match(/https:\/\/docs\.metamask\.io\/src\/pages\//g) || []
+      text.match(/https:\/\/docs\.metamask\.io\/src\/pages\//g) || []
     ).length
   } catch {
     summary.llmsTxt = 'MISSING'
