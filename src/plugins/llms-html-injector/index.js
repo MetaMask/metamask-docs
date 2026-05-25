@@ -58,12 +58,19 @@ async function postProcessLlmsOutput(outDir) {
 module.exports = function llmsHtmlInjectorPlugin(context, options = {}) {
   const inner = upstreamLlmsPlugin(context, options)
 
+  // Spread the inner plugin object so any lifecycle hook the upstream package
+  // already exposes (or adds in a future release) — e.g. `contentLoaded`,
+  // `loadContent`, `configureWebpack`, `getPathsToWatch`, `getThemePath`,
+  // `extendCli` — is forwarded to Docusaurus untouched. Only `name` and
+  // `postBuild` are overridden: `name` to identify this wrapper in build
+  // output, and `postBuild` to chain the generator's hook before our
+  // post-processing step (see the wrapper rationale at the top of this file).
   return {
+    ...inner,
     name: 'llms-html-injector',
-
     async postBuild(props) {
       if (typeof inner.postBuild === 'function') {
-        await inner.postBuild(props)
+        await inner.postBuild.call(inner, props)
       }
       await postProcessLlmsOutput(props.outDir)
     },
