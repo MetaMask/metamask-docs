@@ -6,6 +6,7 @@
 
 # Dev sanity-check output from scripts/verify-llms-output.js
 /.llms-verify
+/.llms-inspect
 
 # Generated files
 .docusaurus
