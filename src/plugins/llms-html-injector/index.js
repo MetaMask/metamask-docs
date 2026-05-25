@@ -1,8 +1,28 @@
 const path = require('path')
 const fs = require('fs/promises')
 
-const SITE_URL = 'https://docs.metamask.io'
 const MARKER = 'data-llms-md-alt'
+
+/**
+ * Build the URL prefix the upstream `docusaurus-plugin-llms` uses when it
+ * stamps absolute links into the generated `llms*.txt` indexes and `.md`
+ * files. The upstream concatenates `siteConfig.url` with `siteConfig.baseUrl`
+ * (trimmed of any trailing slash), so when the site is deployed under a
+ * non-root base path (e.g. `DEST=/staging/` in CI) the emitted URLs look like
+ * `https://docs.metamask.io/staging/...`.
+ *
+ * Both `rewriteLlmsIndexes` (find-and-replace match keys) and
+ * `injectAlternateLinks` (`<link rel="alternate">` hrefs) must use the same
+ * prefix; otherwise the rewrites silently no-op and the alternate links 404.
+ *
+ * Mirrors `node_modules/docusaurus-plugin-llms/lib/index.js`.
+ */
+function resolveSiteUrl(siteConfig) {
+  const url = (siteConfig && siteConfig.url) || ''
+  const rawBase = (siteConfig && siteConfig.baseUrl) || ''
+  const base = rawBase.endsWith('/') ? rawBase.slice(0, -1) : rawBase
+  return `${url}${base}`
+}
 
 // Source path prefixes that Docusaurus strips when constructing public URLs.
 // Mirrors `pathTransformation.ignorePaths` we pass to `docusaurus-plugin-llms`.
@@ -39,16 +59,25 @@ const upstreamLlmsPlugin = require('docusaurus-plugin-llms').default
  * The combination satisfies all five failing Agent Score checks together with
  * the Vercel `Accept: text/markdown` rewrite in `vercel.json`.
  */
-async function postProcessLlmsOutput(outDir) {
+async function postProcessLlmsOutput(outDir, siteUrl) {
+  if (!siteUrl) {
+    throw new Error(
+      '[llms-html-injector] postProcessLlmsOutput requires a siteUrl. ' +
+        'Pass the value produced by resolveSiteUrl(siteConfig) so the URL prefix ' +
+        '(including any non-root baseUrl such as /staging/) matches what ' +
+        'docusaurus-plugin-llms emitted into the generated files.'
+    )
+  }
+
   const renames = await normalizeMarkdownLayout(outDir)
   console.log(
     `[llms-html-injector] Normalized ${renames.size} .md file(s) into URL-aligned positions`
   )
 
-  const rewriteCount = await rewriteLlmsIndexes(outDir, renames)
+  const rewriteCount = await rewriteLlmsIndexes(outDir, renames, siteUrl)
   console.log(`[llms-html-injector] Updated URLs in ${rewriteCount} llms*.txt file(s)`)
 
-  const { injected, missing } = await injectAlternateLinks(outDir)
+  const { injected, missing } = await injectAlternateLinks(outDir, siteUrl)
   console.log(
     `[llms-html-injector] Injected markdown alternate link into ${injected} HTML pages ` +
       `(skipped ${missing} pages with no matching .md sibling)`
@@ -57,6 +86,10 @@ async function postProcessLlmsOutput(outDir) {
 
 module.exports = function llmsHtmlInjectorPlugin(context, options = {}) {
   const inner = upstreamLlmsPlugin(context, options)
+  // Resolve once at plugin construction. `context.siteConfig` is populated by
+  // Docusaurus before any plugin factory runs, and `baseUrl` cannot change
+  // between then and `postBuild`, so we don't need to recompute per build.
+  const siteUrl = resolveSiteUrl(context && context.siteConfig)
 
   // Spread the inner plugin object so any lifecycle hook the upstream package
   // already exposes (or adds in a future release) — e.g. `contentLoaded`,
@@ -72,14 +105,17 @@ module.exports = function llmsHtmlInjectorPlugin(context, options = {}) {
       if (typeof inner.postBuild === 'function') {
         await inner.postBuild.call(inner, props)
       }
-      await postProcessLlmsOutput(props.outDir)
+      await postProcessLlmsOutput(props.outDir, siteUrl)
     },
   }
 }
 
 // Exported for scripts/verify-llms-output.js, which invokes the generator
-// directly and then runs only the post-processing stage.
+// directly and then runs only the post-processing stage. The verify script
+// passes its own siteUrl (and uses `resolveSiteUrl` to mirror the production
+// computation when a non-root baseUrl is in play).
 module.exports.postProcessLlmsOutput = postProcessLlmsOutput
+module.exports.resolveSiteUrl = resolveSiteUrl
 
 /**
  * Walk every `.md` file under `outDir`, skipping the llms*.txt index files,
@@ -197,7 +233,7 @@ function urlAlignedRelative(relFrom) {
  * markdown file now point at the URL-aligned location. Returns the number of
  * files rewritten.
  */
-async function rewriteLlmsIndexes(outDir, renames) {
+async function rewriteLlmsIndexes(outDir, renames, siteUrl) {
   if (renames.size === 0) return 0
   const entries = await fs.readdir(outDir, { withFileTypes: true })
   let count = 0
@@ -208,8 +244,8 @@ async function rewriteLlmsIndexes(outDir, renames) {
     let text = await fs.readFile(abs, 'utf8')
     let changed = false
     for (const [from, to] of renames) {
-      const fromUrl = `${SITE_URL}/${from}`
-      const toUrl = `${SITE_URL}/${to}`
+      const fromUrl = `${siteUrl}/${from}`
+      const toUrl = `${siteUrl}/${to}`
       if (text.includes(fromUrl)) {
         text = text.split(fromUrl).join(toUrl)
         changed = true
@@ -228,7 +264,7 @@ async function rewriteLlmsIndexes(outDir, renames) {
  * the URL-aligned location, inject a `<link rel="alternate" type="text/markdown" href="...">`
  * into the `<head>`.
  */
-async function injectAlternateLinks(outDir) {
+async function injectAlternateLinks(outDir, siteUrl) {
   let injected = 0
   let missing = 0
   await visit(outDir)
@@ -265,7 +301,7 @@ async function injectAlternateLinks(outDir) {
       return false
     }
     if (html.includes(MARKER) || !html.includes('</head>')) return null
-    const href = `${SITE_URL}/${mdRel}`
+    const href = `${siteUrl}/${mdRel}`
     const tag = `<link ${MARKER} rel="alternate" type="text/markdown" href="${href}">`
     const next = html.replace('</head>', `${tag}</head>`)
     await fs.writeFile(htmlAbs, next, 'utf8')

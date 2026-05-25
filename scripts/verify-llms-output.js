@@ -140,9 +140,19 @@ async function main() {
   await fs.rm(outDir, { recursive: true, force: true })
   await fs.mkdir(outDir, { recursive: true })
 
+  // Mirror the baseUrl resolution from docusaurus.config.js so the script can
+  // simulate a staging build (e.g. `DEST=/staging/ node scripts/verify-llms-output.js`)
+  // and the post-injector summary reflects the URLs end users would see there.
+  const baseUrl = process.env.DEST || '/'
+  const siteConfig = { url: 'https://docs.metamask.io', baseUrl }
+
   const generator = require(
     path.join(siteDir, 'node_modules', 'docusaurus-plugin-llms', 'lib', 'generator.js')
   )
+  const { postProcessLlmsOutput, resolveSiteUrl } = require(
+    path.join(siteDir, 'src/plugins/llms-html-injector')
+  )
+  const siteUrl = resolveSiteUrl(siteConfig)
 
   const options = {
     docsDir: '.',
@@ -193,7 +203,7 @@ async function main() {
     siteDir,
     outDir,
     docsDir: options.docsDir,
-    siteUrl: 'https://docs.metamask.io',
+    siteUrl,
     docTitle: 'MetaMask developer documentation',
     docDescription:
       'MetaMask is the leading self-custodial cryptocurrency wallet and Web3 gateway.',
@@ -201,7 +211,7 @@ async function main() {
   }
 
   const allDocFiles = await generator.collectDocFiles(context)
-  console.log(`Collected ${allDocFiles.length} source markdown files`)
+  console.log(`Collected ${allDocFiles.length} source markdown files (siteUrl=${siteUrl})`)
 
   await generator.generateStandardLLMFiles(context, allDocFiles)
   await generator.generateCustomLLMFiles(context, allDocFiles)
@@ -213,8 +223,7 @@ async function main() {
   // wrapper plugin (used in docusaurus.config.js) that internally instantiates
   // docusaurus-plugin-llms; we've already run the generator above, so we skip
   // straight to normalize/rewrite/inject.
-  const { postProcessLlmsOutput } = require(path.join(siteDir, 'src/plugins/llms-html-injector'))
-  await postProcessLlmsOutput(outDir)
+  await postProcessLlmsOutput(outDir, siteUrl)
 
   // Mirror Docusaurus's static-asset copy step. In a real build, anything in
   // `static/` is copied verbatim to `outDir`, so static/llms.txt becomes
