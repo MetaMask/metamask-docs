@@ -91,13 +91,26 @@ async function normalizeMarkdownLayout(outDir) {
     if (!relTo || relTo === relFrom) continue
 
     const absTo = path.join(outDir, relTo)
+
+    // `fs.access` is used purely as an existence probe: a throw means "target
+    // is absent, proceed to rename", which is expected control flow. Errors
+    // from the subsequent `fs.unlink` are real I/O failures (file locked,
+    // permission denied, etc.) and must propagate rather than silently fall
+    // through to `fs.rename`, which would overwrite the existing target and
+    // contradict the "target exists -> drop the duplicate source" intent.
+    let targetExists = true
     try {
       await fs.access(absTo)
+    } catch {
+      targetExists = false
+    }
+
+    if (targetExists) {
       await fs.unlink(absFrom)
       renames.set(relFrom, relTo)
       dirsToPrune.add(path.dirname(absFrom))
       continue
-    } catch {}
+    }
 
     await fs.mkdir(path.dirname(absTo), { recursive: true })
     await fs.rename(absFrom, absTo)
