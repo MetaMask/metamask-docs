@@ -30,7 +30,7 @@ Find the full [demo code on GitHub](https://github.com/Web3Auth/web3auth-example
 
 ## Prerequisites
 
-- Pimlico Account: A Pimlico API key. You can get a free API key from [Pimlico Dashboard](https://dashboard.pimlico.io/).
+- Pimlico Account: A Pimlico API key. You can get a free API key from [Pimlico Dashboard](https://dashboard.pimlico.io/apikeys).
 - Embedded Wallets Web SDK: This guide assumes that you already know how to integrate the React SDK in your project. If
   not, you can learn how to [integrate Embedded Wallets in your web app](/embedded-wallets/sdk/react/).
 
@@ -98,7 +98,7 @@ import {
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: '0xaa36a7',
-  rpcTarget: 'https://rpc.sepolia.org',
+  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
   displayName: 'Ethereum Sepolia Testnet',
   blockExplorerUrl: 'https://sepolia.etherscan.io',
   ticker: 'ETH',

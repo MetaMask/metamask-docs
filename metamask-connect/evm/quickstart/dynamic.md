@@ -16,6 +16,7 @@ keywords:
     social login,
     multi-wallet,
   ]
+unlisted: true
 ---
 
 :::info Heads up

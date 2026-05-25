@@ -69,11 +69,21 @@ function useDocTOC() {
     desktop,
   }
 }
+function useNoIndex() {
+  const { frontMatter, metadata } = useDoc()
+  return Boolean(frontMatter.unlisted ?? metadata.unlisted)
+}
 export default function DocItemLayout({ children }) {
   const docTOC = useDocTOC()
   const structuredData = useStructuredData()
+  const noIndex = useNoIndex()
   return (
     <div className="row">
+      {noIndex && (
+        <Head>
+          <meta name="robots" content="noindex, nofollow" />
+        </Head>
+      )}
       {structuredData && (
         <Head>
           <script type="application/ld+json">{JSON.stringify(structuredData)}</script>

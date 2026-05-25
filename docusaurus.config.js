@@ -169,6 +169,10 @@ const config = {
         // documentation is served by dedicated `plugin-content-docs` instances
         // configured below in `plugins`, not by this preset slot.
         docs: false,
+        // The blog plugin is disabled too: this site has no blog content and
+        // the default-enabled `/blog/` route was being indexed as an orphan
+        // (Ahrefs orphan report, 2026-05-25).
+        blog: false,
         pages: {
           path: 'src/pages',
           routeBasePath: '/',
@@ -178,6 +182,18 @@ const config = {
             '**/_*/**',
             '**/*.test.{js,jsx,ts,tsx}',
             '**/__tests__/**',
+            // The quickstart "builder" tree is a library of React/MDX content
+            // fragments imported by `src/pages/quickstart/index.jsx`. The default
+            // `**/**.{js,jsx,ts,tsx,md,mdx}` include also turns each fragment
+            // into a standalone, content-less route (Ahrefs orphan report,
+            // 2026-05-25). Excluding the trees here removes the routes without
+            // breaking the imports.
+            'quickstart/builder/**',
+            'quickstart/commonSteps/**',
+            'quickstart/NavigationOverlay/**',
+            'quickstart/MediaStep/**',
+            'quickstart/interfaces.ts',
+            'quickstart/utils.tsx',
           ],
           mdxPageComponent: '@theme/MDXPage',
           remarkPlugins,
@@ -806,6 +822,10 @@ const config = {
         askAi: {
           assistantId: 'REak1eiP5wfp',
         },
+        // Disable the standalone `/search/` results page. The Algolia DocSearch
+        // modal still works; the dedicated page was being indexed as an orphan
+        // (Ahrefs orphan report, 2026-05-25).
+        searchPagePath: false,
         // Optional: see doc section below
         // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
         // externalUrlRegex: "external\\.com|domain\\.com",
@@ -816,8 +836,6 @@ const config = {
         // },
         // Optional: Algolia search parameters
         // searchParameters: {},
-        // Optional: path for search page that enabled by default (`false` to disable it)
-        // searchPagePath: 'search',
         //... other Algolia params
       },
       mermaid: {

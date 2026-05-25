@@ -1,5 +1,5 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": true,
   "headers": [
     {
@@ -25,6 +25,14 @@
     {
       "source": "/whats-new",
       "destination": "/"
+    },
+    {
+      "source": "/developer-tools/",
+      "destination": "/developer-tools/dashboard/"
+    },
+    {
+      "source": "/developer-tools",
+      "destination": "/developer-tools/dashboard/"
     },
     {
       "source": "/developer-tools/dashboard/how-to/project-sharing/",
