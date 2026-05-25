@@ -19,6 +19,14 @@
   ],
   "redirects": [
     {
+      "source": "/whats-new/",
+      "destination": "/"
+    },
+    {
+      "source": "/whats-new",
+      "destination": "/"
+    },
+    {
       "source": "/developer-tools/dashboard/how-to/project-sharing/",
       "destination": "/developer-tools/dashboard/"
     },

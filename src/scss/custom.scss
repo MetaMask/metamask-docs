@@ -872,7 +872,8 @@ div[class^='theme-announcement-bar'] {
   }
 }
 
-/* Removes "What's new?" on small viewports to make room for left navbar labels */
+/* Hides right-side navbar items (Faucet, Help, etc.) on small viewports
+   to make room for left-side navbar labels. */
 @media (max-width: 1196px) {
   .navbar__items--right .navbar__item {
     display: none;

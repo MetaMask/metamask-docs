@@ -6,50 +6,73 @@ const MARKER = 'data-llms-md-alt'
 
 // Source path prefixes that Docusaurus strips when constructing public URLs.
 // Mirrors `pathTransformation.ignorePaths` we pass to `docusaurus-plugin-llms`.
-const URL_STRIPPED_PREFIXES = ['docs/', 'src/pages/']
+const URL_STRIPPED_PREFIXES = ['src/pages/']
+
+// docusaurus-plugin-llms is wrapped (rather than registered separately) because
+// Docusaurus 3.x runs `postBuild` hooks concurrently via `Promise.all`. As two
+// independent plugins, the injector below would race against the generator and
+// find an empty outDir. Wrapping guarantees the generator's postBuild completes
+// before we normalize/rewrite/inject.
+const upstreamLlmsPlugin = require('docusaurus-plugin-llms').default
 
 /**
- * Docusaurus plugin that runs after `docusaurus-plugin-llms` (`generateMarkdownFiles: true`)
- * and:
+ * Docusaurus plugin that:
  *
- * 1. Normalizes the generated per-page `.md` files so their location mirrors the
- *    public URL of the corresponding HTML page (e.g. `embedded-wallets/README.md`
- *    -> `embedded-wallets.md`, `docs/whats-new.md` -> `whats-new.md`,
+ * 1. Delegates LLM-friendly file generation to `docusaurus-plugin-llms`
+ *    (per-section `llms-<product>.txt` indexes plus per-page `.md` files when
+ *    `generateMarkdownFiles: true`).
+ *
+ * 2. Normalizes the generated per-page `.md` files so their location mirrors
+ *    the public URL of the corresponding HTML page (e.g.
+ *    `embedded-wallets/README.md` -> `embedded-wallets.md`,
  *    `src/pages/tutorials/foo.md` -> `tutorials/foo.md`). This makes Fern's
  *    `markdown-url-support` check pass because `<page-url>.md` now returns 200.
  *
- * 2. Rewrites every `build/llms*.txt` URL so it points at the normalized file
+ * 3. Rewrites every `build/llms*.txt` URL so it points at the normalized file
  *    location instead of the original source path. This eliminates stale
  *    "links not in sitemap" warnings.
  *
- * 3. Injects `<link rel="alternate" type="text/markdown" href="<route>.md">`
+ * 4. Injects `<link rel="alternate" type="text/markdown" href="<route>.md">`
  *    into the `<head>` of every doc page that now has a sibling `.md`,
  *    satisfying `Llms Txt Directive Html` / `Llms Txt Directive Md`.
  *
  * The combination satisfies all five failing Agent Score checks together with
  * the Vercel `Accept: text/markdown` rewrite in `vercel.json`.
  */
-module.exports = function llmsHtmlInjectorPlugin() {
+async function postProcessLlmsOutput(outDir) {
+  const renames = await normalizeMarkdownLayout(outDir)
+  console.log(
+    `[llms-html-injector] Normalized ${renames.size} .md file(s) into URL-aligned positions`
+  )
+
+  const rewriteCount = await rewriteLlmsIndexes(outDir, renames)
+  console.log(`[llms-html-injector] Updated URLs in ${rewriteCount} llms*.txt file(s)`)
+
+  const { injected, missing } = await injectAlternateLinks(outDir)
+  console.log(
+    `[llms-html-injector] Injected markdown alternate link into ${injected} HTML pages ` +
+      `(skipped ${missing} pages with no matching .md sibling)`
+  )
+}
+
+module.exports = function llmsHtmlInjectorPlugin(context, options = {}) {
+  const inner = upstreamLlmsPlugin(context, options)
+
   return {
     name: 'llms-html-injector',
 
-    async postBuild({ outDir }) {
-      const renames = await normalizeMarkdownLayout(outDir)
-      console.log(
-        `[llms-html-injector] Normalized ${renames.size} .md file(s) into URL-aligned positions`
-      )
-
-      const rewriteCount = await rewriteLlmsIndexes(outDir, renames)
-      console.log(`[llms-html-injector] Updated URLs in ${rewriteCount} llms*.txt file(s)`)
-
-      const { injected, missing } = await injectAlternateLinks(outDir)
-      console.log(
-        `[llms-html-injector] Injected markdown alternate link into ${injected} HTML pages ` +
-          `(skipped ${missing} pages with no matching .md sibling)`
-      )
+    async postBuild(props) {
+      if (typeof inner.postBuild === 'function') {
+        await inner.postBuild(props)
+      }
+      await postProcessLlmsOutput(props.outDir)
     },
   }
 }
+
+// Exported for scripts/verify-llms-output.js, which invokes the generator
+// directly and then runs only the post-processing stage.
+module.exports.postProcessLlmsOutput = postProcessLlmsOutput
 
 /**
  * Walk every `.md` file under `outDir`, skipping the llms*.txt index files,

@@ -162,16 +162,13 @@ const config = {
     [
       'classic',
       {
-        docs: {
-          id: 'docs',
-          path: 'docs',
-          routeBasePath: '/',
-          editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
-          sidebarPath: false,
-          breadcrumbs: false,
-          remarkPlugins,
-          rehypePlugins,
-        },
+        // The classic preset's `docs` plugin is disabled. It previously
+        // rendered a single orphan page (`docs/whats-new.md`) at `/whats-new/`
+        // that pointed offsite for release notes. The page had no incoming
+        // internal links and is redirected to `/` in `vercel.json`. Per-product
+        // documentation is served by dedicated `plugin-content-docs` instances
+        // configured below in `plugins`, not by this preset slot.
+        docs: false,
         pages: {
           path: 'src/pages',
           routeBasePath: '/',
@@ -323,39 +320,32 @@ const config = {
         containerId: 'GTM-5FGPLC2Q',
       },
     ],
+    // The llms-html-injector plugin wraps docusaurus-plugin-llms so that
+    // generation (per-section `llms-<product>.txt` files and per-page `.md`
+    // files) runs sequentially before our post-processing (path normalization,
+    // index URL rewrites, and `<link rel="alternate" type="text/markdown">`
+    // injection). Wrapping is required because Docusaurus 3.x executes
+    // `postBuild` hooks concurrently via `Promise.all`, so registering both
+    // plugins separately would let the injector race against the generator.
     [
-      'docusaurus-plugin-llms',
+      './src/plugins/llms-html-injector',
       {
         // Set docsDir to site root to collect from all directories
         docsDir: '.',
-        // Generate a comprehensive root llms.txt + llms-full.txt covering every page
-        // (Agent Score: llms-txt-coverage check). The per-section files below remain
-        // useful as scoped indexes for AI tools.
-        generateLLMsTxt: true,
-        generateLLMsFullTxt: true,
-        // Emit an individual .md file next to every doc page so .md URLs return 200
-        // (Agent Score: markdown-url-support and llms-txt-directive-md checks). The
-        // companion llms-html-injector plugin (registered below) normalizes these
+        // The root llms.txt is hand-curated at static/llms.txt to stay under
+        // the AFDocs 50,000-char `llms-txt-size` threshold. The aggregate
+        // walker descends one level into the per-section indexes listed below,
+        // so coverage is preserved without dumping every page into a flat
+        // index. Likewise, a monolithic llms-full.txt would exceed every
+        // agent's context window (and crashes browser tabs at multi-MB
+        // sizes); the per-section *-full.txt files cover the bulk content.
+        generateLLMsTxt: false,
+        generateLLMsFullTxt: false,
+        // Emit an individual .md file next to every doc page so .md URLs
+        // return 200 (Agent Score: markdown-url-support and
+        // llms-txt-directive-md checks). The wrapper below normalizes these
         // files to URL-aligned paths and injects <link rel="alternate"> tags.
         generateMarkdownFiles: true,
-        // Custom framing for the root index, preserving the prose previously
-        // hand-maintained in static/llms.txt.
-        rootContent: `> MetaMask is the leading self-custodial cryptocurrency wallet and Web3 gateway, enabling developers to build dapps that connect to the MetaMask browser extension and mobile app across EVM and Solana ecosystems.
-
-This file follows the [llmstxt.org](https://llmstxt.org/) specification. Section-scoped indexes are also available:
-
-- [MetaMask Connect](https://docs.metamask.io/llms-metamask-connect.txt) ([full](https://docs.metamask.io/llms-metamask-connect-full.txt))
-- [Embedded Wallets](https://docs.metamask.io/llms-embedded-wallets.txt) ([full](https://docs.metamask.io/llms-embedded-wallets-full.txt))
-- [Smart Accounts Kit](https://docs.metamask.io/llms-smart-accounts-kit.txt) ([full](https://docs.metamask.io/llms-smart-accounts-kit-full.txt))
-- [Services](https://docs.metamask.io/llms-services.txt) ([full](https://docs.metamask.io/llms-services-full.txt))
-- [Developer dashboard](https://docs.metamask.io/llms-dashboard.txt) ([full](https://docs.metamask.io/llms-dashboard-full.txt))
-- [Snaps](https://docs.metamask.io/llms-snaps.txt) ([full](https://docs.metamask.io/llms-snaps-full.txt))
-- [Tutorials](https://docs.metamask.io/llms-tutorials.txt) ([full](https://docs.metamask.io/llms-tutorials-full.txt))
-`,
-        fullRootContent: `> MetaMask is the leading self-custodial cryptocurrency wallet and Web3 gateway, enabling developers to build dapps that connect to the MetaMask browser extension and mobile app across EVM and Solana ecosystems.
-
-This file contains the complete MetaMask developer documentation in a single markdown document, following the [llmstxt.org](https://llmstxt.org/) specification.
-`,
         // Ignore common non-doc directories
         // Note: src/pages/** is not ignored so tutorials can be collected
         // Each customLLMFiles entry filters by includePatterns, so only matching files are included
@@ -397,10 +387,13 @@ This file contains the complete MetaMask developer documentation in a single mar
         ],
         excludeImports: true,
         removeDuplicateHeadings: true,
-        // Path transformation to fix URL construction
-        // Since docsDir is '.', we need to remove 'docs/' prefix and handle src/pages paths
+        // Strip `src/pages` from generated URLs so a file at
+        // `src/pages/quickstart/foo.md` resolves to `/quickstart/foo/` to
+        // match the public route. `docsDir` is `.` (the site root) so any
+        // future top-level prefixes that should be hidden from URLs would
+        // be added here.
         pathTransformation: {
-          ignorePaths: ['docs', 'src/pages'],
+          ignorePaths: ['src/pages'],
         },
         // Generate separate files for each section
         customLLMFiles: [
@@ -519,11 +512,6 @@ This file contains the complete MetaMask developer documentation in a single mar
         ],
       },
     ],
-    // Runs in postBuild after docusaurus-plugin-llms generates files. Normalizes
-    // .md files to URL-aligned paths, rewrites llms*.txt URLs to match, and
-    // injects <link rel="alternate" type="text/markdown"> into every doc page's
-    // <head> (Agent Score: llms-txt-directive-html / llms-txt-directive-md).
-    './src/plugins/llms-html-injector',
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:
