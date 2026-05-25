@@ -4,6 +4,9 @@
 # Production
 /build
 
+# Dev sanity-check output from scripts/verify-llms-output.js
+/.llms-verify
+
 # Generated files
 .docusaurus
 .cache-loader

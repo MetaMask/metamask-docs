@@ -1,6 +1,22 @@
 {
   "cleanUrls": true,
   "trailingSlash": true,
+  "headers": [
+    {
+      "source": "/(.*)\\.md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=3600" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/:path*/",
+      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
+      "destination": "/:path*.md"
+    }
+  ],
   "redirects": [
     {
       "source": "/developer-tools/dashboard/how-to/project-sharing/",
