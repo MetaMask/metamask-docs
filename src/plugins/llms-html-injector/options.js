@@ -236,7 +236,10 @@ const llmsPluginOptions = {
   customLLMFiles,
 }
 
+// Export the options object as the module default. `customLLMFiles` and
+// `ignoreFiles` are already reachable as properties on the exported object;
+// do NOT add a self-referential `llmsPluginOptions` property here — Docusaurus
+// runs `JSON.stringify` over the entire site config during `genSiteConfig`
+// (codegen.js), and a cycle would crash the build with
+// `TypeError: Converting circular structure to JSON`.
 module.exports = llmsPluginOptions
-module.exports.llmsPluginOptions = llmsPluginOptions
-module.exports.customLLMFiles = customLLMFiles
-module.exports.ignoreFiles = ignoreFiles
