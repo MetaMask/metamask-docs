@@ -72,7 +72,7 @@ The SDKs are now branded as MetaMask Embedded Wallet SDKs (formerly Web3Auth Plu
 
 To interact with the Solana blockchain in Android, you can use any Solana compatible SDK. Here, we're using [sol4k](https://github.com/sol4k/sol4k) to demonstrate how to interact with Solana chain using Web3Auth.
 
-In your app-level gradle's dependencies section, add the following:
+In your app-level `build.gradle` dependencies section, add the following:
 
 <Tabs defaultValue = "groovy"
   values={[
@@ -104,7 +104,7 @@ dependencies {
 
 ## Initialize
 
-To Initialize the `Connection` we require a RPC URL. The `Connection` object will provide a gateway and protocol to interact with Solana cluster while sending requests and receving response.The `sol4k` SDK also provides `RpcUrl` constant for all the supported clusters. For this example, we are using `RpcUrl.DEVNET` for Devnet-beta. To interact with Testnet or Mainnet, change the `RpcUrl`.
+To Initialize the `Connection` we require a RPC URL. The `Connection` object will provide a gateway and protocol to interact with Solana cluster while sending requests and receving response. The `sol4k` SDK also provides `RpcUrl` constant for all the supported clusters. For this example, we are using `RpcUrl.DEVNET` for Devnet-beta. To interact with Testnet or Mainnet, change the `RpcUrl`.
 
 ### Initializing the Solana SDK
 
@@ -166,7 +166,7 @@ val userAccount = solanaKeyPair.publicKey.toBase58()
 
 ## Get user balance
 
-Once we have retrieved userAccount, we can use it to fetch user balance. We'll use `getBalance` method from `Connection` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is BigInteger, we will need to divide it by by 10^9, because Solana's token decimals is 9.
+Once we have retrieved userAccount, we can use it to fetch user balance. We'll use `getBalance` method from `Connection` instance to interact with Solana cluster and fetch user balance. The response of `getBalance` is BigInteger, we will need to divide it by 10^9, because Solana's token decimals is 9.
 
 ```kotlin
 try {
