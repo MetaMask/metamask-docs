@@ -10,6 +10,14 @@ const productsDropdown = fs.readFileSync('./src/components/NavDropdown/Products.
 const baseUrl = process.env.DEST || '/'
 const siteUrl = 'https://docs.metamask.io'
 
+// Options for the `llms-html-injector` plugin (which wraps
+// `docusaurus-plugin-llms`). Centralized in a standalone CommonJS module so
+// the same configuration drives both this production build and the
+// `scripts/verify-llms-output.js` sanity check, eliminating the silent-drift
+// risk that existed when both files maintained their own copy of the
+// `customLLMFiles` array and `ignoreFiles` list.
+const llmsPluginOptions = require('./src/plugins/llms-html-injector/options')
+
 const remarkPlugins = [
   require('remark-math'),
   [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }],
@@ -343,217 +351,11 @@ const config = {
     // injection). Wrapping is required because Docusaurus 3.x executes
     // `postBuild` hooks concurrently via `Promise.all`, so registering both
     // plugins separately would let the injector race against the generator.
-    [
-      './src/plugins/llms-html-injector',
-      {
-        // Set docsDir to site root to collect from all directories
-        docsDir: '.',
-        // The root llms.txt is hand-curated at static/llms.txt to stay under
-        // the AFDocs 50,000-char `llms-txt-size` threshold. The aggregate
-        // walker descends one level into the per-section indexes listed below,
-        // so coverage is preserved without dumping every page into a flat
-        // index. Likewise, a monolithic llms-full.txt would exceed every
-        // agent's context window (and crashes browser tabs at multi-MB
-        // sizes); the per-section *-full.txt files cover the bulk content.
-        generateLLMsTxt: false,
-        generateLLMsFullTxt: false,
-        // Emit an individual .md file next to every doc page so .md URLs
-        // return 200 (Agent Score: markdown-url-support and
-        // llms-txt-directive-md checks). The wrapper below normalizes these
-        // files to URL-aligned paths and injects <link rel="alternate"> tags.
-        generateMarkdownFiles: true,
-        // Ignore common non-doc directories
-        // Note: src/pages/** is not ignored so tutorials can be collected
-        // Each customLLMFiles entry filters by includePatterns, so only matching files are included
-        ignoreFiles: [
-          'node_modules/**',
-          'build/**',
-          '.docusaurus/**',
-          '.llms-verify/**',
-          '.cursor/**',
-          '.github/**',
-          '.husky/**',
-          '.vscode/**',
-          '.integrationBuilderCache/**',
-          'scripts/**',
-          'static/**',
-          'src/components/**',
-          'src/theme/**',
-          'src/lib/**',
-          'src/config/**',
-          'src/hooks/**',
-          'src/utils/**',
-          'src/plugins/**',
-          'src/specs/**',
-          'src/client/**',
-          'src/scss/**',
-          // Quickstart "builder" markdown is content fragments embedded by the
-          // builder UI, not standalone routes; include only the entry pages.
-          'src/pages/quickstart/builder/**',
-          'src/pages/quickstart/commonSteps/**',
-          'i18n/**',
-          '*.config.js',
-          '*.json',
-          '*.lock',
-          'README.md',
-          'CONTRIBUTING.md',
-          'AGENTS.md',
-          'LICENSE*',
-          'gator_versioned_docs/**',
-        ],
-        excludeImports: true,
-        removeDuplicateHeadings: true,
-        // Strip `src/pages` from generated URLs so a file at
-        // `src/pages/quickstart/foo.md` resolves to `/quickstart/foo/` to
-        // match the public route. `docsDir` is `.` (the site root) so any
-        // future top-level prefixes that should be hidden from URLs would
-        // be added here.
-        pathTransformation: {
-          ignorePaths: ['src/pages'],
-        },
-        // Generate separate files for each section
-        customLLMFiles: [
-          {
-            filename: 'llms-embedded-wallets.txt',
-            includePatterns: ['embedded-wallets/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'MetaMask Embedded Wallets documentation',
-            description: 'Documentation links for MetaMask Embedded Wallets',
-          },
-          // The single `llms-embedded-wallets-full.txt` was previously ~3.9 MB,
-          // which exceeds the practical context window of most LLM agents.
-          // Splitting by sub-domain keeps each full-content file under ~1.5 MB
-          // while preserving complete coverage of the section.
-          {
-            filename: 'llms-embedded-wallets-sdk-full.txt',
-            includePatterns: ['embedded-wallets/sdk/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'MetaMask Embedded Wallets SDKs',
-            description:
-              'Complete documentation for Embedded Wallets SDKs (React, Vue, JS, Node, Android, iOS, React Native, Flutter, Unity, Unreal)',
-          },
-          {
-            filename: 'llms-embedded-wallets-evm-full.txt',
-            includePatterns: ['embedded-wallets/connect-blockchain/evm/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'MetaMask Embedded Wallets EVM chain connections',
-            description:
-              'Complete documentation for connecting Embedded Wallets to EVM-compatible chains',
-          },
-          {
-            filename: 'llms-embedded-wallets-non-evm-full.txt',
-            includePatterns: [
-              'embedded-wallets/connect-blockchain/solana/**/*.{md,mdx}',
-              'embedded-wallets/connect-blockchain/other/**/*.{md,mdx}',
-              'embedded-wallets/connect-blockchain/*.{md,mdx}',
-            ],
-            fullContent: true,
-            title: 'MetaMask Embedded Wallets non-EVM chain connections',
-            description:
-              'Complete documentation for connecting Embedded Wallets to Solana and other non-EVM chains',
-          },
-          {
-            filename: 'llms-embedded-wallets-platform-full.txt',
-            includePatterns: [
-              'embedded-wallets/authentication/**/*.{md,mdx}',
-              'embedded-wallets/features/**/*.{md,mdx}',
-              'embedded-wallets/dashboard/**/*.{md,mdx}',
-              'embedded-wallets/infrastructure/**/*.{md,mdx}',
-              'embedded-wallets/troubleshooting/**/*.{md,mdx}',
-              'embedded-wallets/*.{md,mdx}',
-            ],
-            fullContent: true,
-            title: 'MetaMask Embedded Wallets platform features',
-            description:
-              'Complete documentation for Embedded Wallets authentication, features, dashboard, infrastructure, and troubleshooting',
-          },
-          {
-            filename: 'llms-metamask-connect.txt',
-            includePatterns: ['metamask-connect/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'MetaMask Connect documentation',
-            description: 'Documentation links for MetaMask Connect',
-          },
-          {
-            filename: 'llms-metamask-connect-full.txt',
-            includePatterns: ['metamask-connect/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'MetaMask Connect documentation',
-            description: 'Complete documentation for MetaMask Connect',
-          },
-          {
-            filename: 'llms-smart-accounts-kit.txt',
-            includePatterns: ['smart-accounts-kit/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'MetaMask Smart Accounts Kit documentation',
-            description: 'Documentation links for MetaMask Smart Accounts Kit',
-          },
-          {
-            filename: 'llms-smart-accounts-kit-full.txt',
-            includePatterns: ['smart-accounts-kit/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'MetaMask Smart Accounts Kit documentation',
-            description: 'Complete documentation for MetaMask Smart Accounts Kit',
-          },
-          {
-            filename: 'llms-snaps.txt',
-            includePatterns: ['snaps/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'Snaps documentation',
-            description: 'Documentation links for Snaps',
-          },
-          {
-            filename: 'llms-snaps-full.txt',
-            includePatterns: ['snaps/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Snaps documentation',
-            description: 'Complete documentation for Snaps',
-          },
-          {
-            filename: 'llms-tutorials.txt',
-            includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'Tutorials',
-            description: 'Documentation links for MetaMask tutorials',
-          },
-          {
-            filename: 'llms-tutorials-full.txt',
-            includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Tutorials',
-            description: 'Complete documentation for MetaMask tutorials',
-          },
-          {
-            filename: 'llms-dashboard.txt',
-            includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
-            fullContent: false,
-            title: 'Developer dashboard documentation',
-            description: 'Documentation links for MetaMask Developer dashboard',
-          },
-          {
-            filename: 'llms-dashboard-full.txt',
-            includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
-            fullContent: true,
-            title: 'Developer dashboard documentation',
-            description: 'Complete documentation for MetaMask Developer dashboard',
-          },
-          {
-            filename: 'llms-services.txt',
-            includePatterns: ['services/**/*.md'],
-            fullContent: false,
-            title: 'Services documentation',
-            description: 'Documentation links for MetaMask services',
-          },
-          {
-            filename: 'llms-services-full.txt',
-            includePatterns: ['services/**/*.md'],
-            fullContent: true,
-            title: 'Services documentation',
-            description: 'Complete documentation for MetaMask services',
-          },
-        ],
-      },
-    ],
+    //
+    // Options (ignoreFiles, customLLMFiles, pathTransformation, etc.) live in
+    // `./src/plugins/llms-html-injector/options.js` so the local sanity-check
+    // script can consume the exact same configuration.
+    ['./src/plugins/llms-html-injector', llmsPluginOptions],
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
   themeConfig:

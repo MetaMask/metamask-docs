@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /**
  * Dev-only sanity check that invokes docusaurus-plugin-llms against the current
- * docs source tree, using the same options we configured in docusaurus.config.js.
+ * docs source tree. The exact options object used by the production build is
+ * imported from `src/plugins/llms-html-injector/options.js`, so this script
+ * cannot silently drift from `docusaurus.config.js`.
  *
  * After the move to a hand-curated root `static/llms.txt`, the standard
  * llms.txt / llms-full.txt generators are disabled in production. This script
@@ -15,147 +17,12 @@
 const path = require('path')
 const fs = require('fs/promises')
 
-// Keep this list in sync with the customLLMFiles array in docusaurus.config.js.
-// Section indexes (no fullContent) stay under the AFDocs 50KB recommendation
-// for individual indexes; -full.txt files contain the bulk content per product.
-const CUSTOM_LLM_FILES = [
-  {
-    filename: 'llms-embedded-wallets.txt',
-    includePatterns: ['embedded-wallets/**/*.{md,mdx}'],
-    fullContent: false,
-    title: 'MetaMask Embedded Wallets documentation',
-    description: 'Documentation links for MetaMask Embedded Wallets',
-  },
-  // Mirror the split applied in docusaurus.config.js: the previous
-  // `llms-embedded-wallets-full.txt` was ~3.9 MB, exceeding most agent
-  // context windows. Sub-domain files keep each under ~1.5 MB.
-  {
-    filename: 'llms-embedded-wallets-sdk-full.txt',
-    includePatterns: ['embedded-wallets/sdk/**/*.{md,mdx}'],
-    fullContent: true,
-    title: 'MetaMask Embedded Wallets SDKs',
-    description:
-      'Complete documentation for Embedded Wallets SDKs (React, Vue, JS, Node, Android, iOS, React Native, Flutter, Unity, Unreal)',
-  },
-  {
-    filename: 'llms-embedded-wallets-evm-full.txt',
-    includePatterns: ['embedded-wallets/connect-blockchain/evm/**/*.{md,mdx}'],
-    fullContent: true,
-    title: 'MetaMask Embedded Wallets EVM chain connections',
-    description: 'Complete documentation for connecting Embedded Wallets to EVM-compatible chains',
-  },
-  {
-    filename: 'llms-embedded-wallets-non-evm-full.txt',
-    includePatterns: [
-      'embedded-wallets/connect-blockchain/solana/**/*.{md,mdx}',
-      'embedded-wallets/connect-blockchain/other/**/*.{md,mdx}',
-      'embedded-wallets/connect-blockchain/*.{md,mdx}',
-    ],
-    fullContent: true,
-    title: 'MetaMask Embedded Wallets non-EVM chain connections',
-    description:
-      'Complete documentation for connecting Embedded Wallets to Solana and other non-EVM chains',
-  },
-  {
-    filename: 'llms-embedded-wallets-platform-full.txt',
-    includePatterns: [
-      'embedded-wallets/authentication/**/*.{md,mdx}',
-      'embedded-wallets/features/**/*.{md,mdx}',
-      'embedded-wallets/dashboard/**/*.{md,mdx}',
-      'embedded-wallets/infrastructure/**/*.{md,mdx}',
-      'embedded-wallets/troubleshooting/**/*.{md,mdx}',
-      'embedded-wallets/*.{md,mdx}',
-    ],
-    fullContent: true,
-    title: 'MetaMask Embedded Wallets platform features',
-    description:
-      'Complete documentation for Embedded Wallets authentication, features, dashboard, infrastructure, and troubleshooting',
-  },
-  {
-    filename: 'llms-metamask-connect.txt',
-    includePatterns: ['metamask-connect/**/*.{md,mdx}'],
-    fullContent: false,
-    title: 'MetaMask Connect documentation',
-    description: 'Documentation links for MetaMask Connect',
-  },
-  {
-    filename: 'llms-metamask-connect-full.txt',
-    includePatterns: ['metamask-connect/**/*.{md,mdx}'],
-    fullContent: true,
-    title: 'MetaMask Connect documentation',
-    description: 'Complete documentation for MetaMask Connect',
-  },
-  {
-    filename: 'llms-smart-accounts-kit.txt',
-    includePatterns: ['smart-accounts-kit/**/*.{md,mdx}'],
-    fullContent: false,
-    title: 'MetaMask Smart Accounts Kit documentation',
-    description: 'Documentation links for MetaMask Smart Accounts Kit',
-  },
-  {
-    filename: 'llms-smart-accounts-kit-full.txt',
-    includePatterns: ['smart-accounts-kit/**/*.{md,mdx}'],
-    fullContent: true,
-    title: 'MetaMask Smart Accounts Kit documentation',
-    description: 'Complete documentation for MetaMask Smart Accounts Kit',
-  },
-  {
-    filename: 'llms-snaps.txt',
-    includePatterns: ['snaps/**/*.{md,mdx}'],
-    fullContent: false,
-    title: 'Snaps documentation',
-    description: 'Documentation links for Snaps',
-  },
-  {
-    filename: 'llms-snaps-full.txt',
-    includePatterns: ['snaps/**/*.{md,mdx}'],
-    fullContent: true,
-    title: 'Snaps documentation',
-    description: 'Complete documentation for Snaps',
-  },
-  {
-    filename: 'llms-tutorials.txt',
-    includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
-    fullContent: false,
-    title: 'Tutorials',
-    description: 'Documentation links for MetaMask tutorials',
-  },
-  {
-    filename: 'llms-tutorials-full.txt',
-    includePatterns: ['src/pages/tutorials/**/*.{md,mdx}'],
-    fullContent: true,
-    title: 'Tutorials',
-    description: 'Complete documentation for MetaMask tutorials',
-  },
-  {
-    filename: 'llms-dashboard.txt',
-    includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
-    fullContent: false,
-    title: 'Developer dashboard documentation',
-    description: 'Documentation links for MetaMask Developer dashboard',
-  },
-  {
-    filename: 'llms-dashboard-full.txt',
-    includePatterns: ['developer-tools/dashboard/**/*.{md,mdx}'],
-    fullContent: true,
-    title: 'Developer dashboard documentation',
-    description: 'Complete documentation for MetaMask Developer dashboard',
-  },
-  {
-    filename: 'llms-services.txt',
-    includePatterns: ['services/**/*.md'],
-    fullContent: false,
-    title: 'Services documentation',
-    description: 'Documentation links for MetaMask services',
-  },
-  {
-    filename: 'llms-services-full.txt',
-    includePatterns: ['services/**/*.md'],
-    fullContent: true,
-    title: 'Services documentation',
-    description: 'Complete documentation for MetaMask services',
-  },
-]
+// Single source of truth shared with `docusaurus.config.js`. Both the
+// production build and this sanity check now consume the exact same options
+// object (ignoreFiles, customLLMFiles, pathTransformation, etc.), so the
+// previous "keep these two arrays in sync by comment" arrangement — and its
+// silent-drift risk — is gone.
+const llmsPluginOptions = require('../src/plugins/llms-html-injector/options')
 
 async function main() {
   const siteDir = path.resolve(__dirname, '..')
@@ -178,60 +45,15 @@ async function main() {
   )
   const siteUrl = resolveSiteUrl(siteConfig)
 
-  const options = {
-    docsDir: '.',
-    generateLLMsTxt: false,
-    generateLLMsFullTxt: false,
-    generateMarkdownFiles: true,
-    excludeImports: true,
-    removeDuplicateHeadings: true,
-    pathTransformation: { ignorePaths: ['src/pages'] },
-    ignoreFiles: [
-      'node_modules/**',
-      'build/**',
-      '.docusaurus/**',
-      '.llms-verify/**',
-      '.cursor/**',
-      '.github/**',
-      '.husky/**',
-      '.vscode/**',
-      '.integrationBuilderCache/**',
-      'scripts/**',
-      'static/**',
-      'src/components/**',
-      'src/theme/**',
-      'src/lib/**',
-      'src/config/**',
-      'src/hooks/**',
-      'src/utils/**',
-      'src/plugins/**',
-      'src/specs/**',
-      'src/client/**',
-      'src/scss/**',
-      'src/pages/quickstart/builder/**',
-      'src/pages/quickstart/commonSteps/**',
-      'i18n/**',
-      '*.config.js',
-      '*.json',
-      '*.lock',
-      'README.md',
-      'CONTRIBUTING.md',
-      'AGENTS.md',
-      'LICENSE*',
-      'gator_versioned_docs/**',
-    ],
-    customLLMFiles: CUSTOM_LLM_FILES,
-  }
-
   const context = {
     siteDir,
     outDir,
-    docsDir: options.docsDir,
+    docsDir: llmsPluginOptions.docsDir,
     siteUrl,
     docTitle: 'MetaMask developer documentation',
     docDescription:
       'MetaMask is the leading self-custodial cryptocurrency wallet and Web3 gateway.',
-    options,
+    options: llmsPluginOptions,
   }
 
   const allDocFiles = await generator.collectDocFiles(context)
