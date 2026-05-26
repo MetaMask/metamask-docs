@@ -10,13 +10,6 @@
       ]
     }
   ],
-  "rewrites": [
-    {
-      "source": "/:path*/",
-      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
-      "destination": "/:path*.md"
-    }
-  ],
   "redirects": [
     {
       "source": "/whats-new/",
@@ -705,6 +698,14 @@
     {
       "source": "/wallet/:path*/",
       "destination": "/metamask-connect/"
+    },
+    {
+      "source": "/llms-wallet.txt",
+      "destination": "/llms-metamask-connect.txt"
+    },
+    {
+      "source": "/llms-wallet-full.txt",
+      "destination": "/llms-metamask-connect-full.txt"
     },
     {
       "source": "/sdk/",

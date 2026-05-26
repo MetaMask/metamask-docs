@@ -420,12 +420,52 @@ const config = {
             title: 'MetaMask Embedded Wallets documentation',
             description: 'Documentation links for MetaMask Embedded Wallets',
           },
+          // The single `llms-embedded-wallets-full.txt` was previously ~3.9 MB,
+          // which exceeds the practical context window of most LLM agents.
+          // Splitting by sub-domain keeps each full-content file under ~1.5 MB
+          // while preserving complete coverage of the section.
           {
-            filename: 'llms-embedded-wallets-full.txt',
-            includePatterns: ['embedded-wallets/**/*.{md,mdx}'],
+            filename: 'llms-embedded-wallets-sdk-full.txt',
+            includePatterns: ['embedded-wallets/sdk/**/*.{md,mdx}'],
             fullContent: true,
-            title: 'MetaMask Embedded Wallets documentation',
-            description: 'Complete documentation for MetaMask Embedded Wallets',
+            title: 'MetaMask Embedded Wallets SDKs',
+            description:
+              'Complete documentation for Embedded Wallets SDKs (React, Vue, JS, Node, Android, iOS, React Native, Flutter, Unity, Unreal)',
+          },
+          {
+            filename: 'llms-embedded-wallets-evm-full.txt',
+            includePatterns: ['embedded-wallets/connect-blockchain/evm/**/*.{md,mdx}'],
+            fullContent: true,
+            title: 'MetaMask Embedded Wallets EVM chain connections',
+            description:
+              'Complete documentation for connecting Embedded Wallets to EVM-compatible chains',
+          },
+          {
+            filename: 'llms-embedded-wallets-non-evm-full.txt',
+            includePatterns: [
+              'embedded-wallets/connect-blockchain/solana/**/*.{md,mdx}',
+              'embedded-wallets/connect-blockchain/other/**/*.{md,mdx}',
+              'embedded-wallets/connect-blockchain/*.{md,mdx}',
+            ],
+            fullContent: true,
+            title: 'MetaMask Embedded Wallets non-EVM chain connections',
+            description:
+              'Complete documentation for connecting Embedded Wallets to Solana and other non-EVM chains',
+          },
+          {
+            filename: 'llms-embedded-wallets-platform-full.txt',
+            includePatterns: [
+              'embedded-wallets/authentication/**/*.{md,mdx}',
+              'embedded-wallets/features/**/*.{md,mdx}',
+              'embedded-wallets/dashboard/**/*.{md,mdx}',
+              'embedded-wallets/infrastructure/**/*.{md,mdx}',
+              'embedded-wallets/troubleshooting/**/*.{md,mdx}',
+              'embedded-wallets/*.{md,mdx}',
+            ],
+            fullContent: true,
+            title: 'MetaMask Embedded Wallets platform features',
+            description:
+              'Complete documentation for Embedded Wallets authentication, features, dashboard, infrastructure, and troubleshooting',
           },
           {
             filename: 'llms-metamask-connect.txt',
