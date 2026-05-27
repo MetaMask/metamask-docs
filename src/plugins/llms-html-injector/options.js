@@ -187,14 +187,18 @@ const customLLMFiles = [
   },
   {
     filename: 'llms-services.txt',
-    includePatterns: ['services/**/*.md'],
+    // `*.{md,mdx}` (not `*.md`) is required: every `services/reference/**`
+    // JSON-RPC method page is an `.mdx` file (e.g. `zks_l1chainid.mdx`,
+    // `starknet_syncing.mdx`, `eth_simulatev1.mdx`). Matching only `.md`
+    // here silently excluded ~1k reference pages from the generated index.
+    includePatterns: ['services/**/*.{md,mdx}'],
     fullContent: false,
     title: 'Services documentation',
     description: 'Documentation links for MetaMask services',
   },
   {
     filename: 'llms-services-full.txt',
-    includePatterns: ['services/**/*.md'],
+    includePatterns: ['services/**/*.{md,mdx}'],
     fullContent: true,
     title: 'Services documentation',
     description: 'Complete documentation for MetaMask services',

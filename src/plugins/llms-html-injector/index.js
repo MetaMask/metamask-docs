@@ -77,10 +77,11 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
   const rewriteCount = await rewriteLlmsIndexes(outDir, renames, siteUrl)
   console.log(`[llms-html-injector] Updated URLs in ${rewriteCount} llms*.txt file(s)`)
 
-  const { injected, missing } = await injectAlternateLinks(outDir, siteUrl)
+  const { injected, missing, skippedRoot } = await injectAlternateLinks(outDir, siteUrl)
   console.log(
     `[llms-html-injector] Injected markdown alternate link into ${injected} HTML pages ` +
-      `(skipped ${missing} pages with no matching .md sibling)`
+      `(skipped ${missing} pages with no matching .md sibling, ` +
+      `${skippedRoot} root index.html page(s) by design)`
   )
 }
 
@@ -149,6 +150,14 @@ async function normalizeMarkdownLayout(outDir) {
     }
 
     if (targetExists) {
+      // Two source files normalize to the same URL-aligned target (e.g.
+      // `foo/README.md` and `foo/index.md` both -> `foo.md`). Whichever
+      // `collectMarkdownFiles` emits first wins; this loser is dropped.
+      // Today no source tree triggers this, but logging makes the silent
+      // delete loud if a future restructure ever does.
+      console.warn(
+        `[llms-html-injector] Target ${relTo} already exists; dropping duplicate source ${relFrom}`
+      )
       await fs.unlink(absFrom)
       renames.set(relFrom, relTo)
       dirsToPrune.add(path.dirname(absFrom))
@@ -267,8 +276,9 @@ async function rewriteLlmsIndexes(outDir, renames, siteUrl) {
 async function injectAlternateLinks(outDir, siteUrl) {
   let injected = 0
   let missing = 0
+  let skippedRoot = 0
   await visit(outDir)
-  return { injected, missing }
+  return { injected, missing, skippedRoot }
 
   async function visit(dir) {
     const entries = await fs.readdir(dir, { withFileTypes: true })
@@ -280,13 +290,21 @@ async function injectAlternateLinks(outDir, siteUrl) {
         const ok = await injectOne(full)
         if (ok === true) injected++
         else if (ok === false) missing++
+        else if (ok === 'root') skippedRoot++
       }
     }
   }
 
+  // The site root (`build/index.html`) is rendered from a React component
+  // (`src/pages/index.tsx`) and intentionally has no `.md` sibling — the
+  // root LLMS surface is the hand-curated `static/llms.txt`. Return the
+  // sentinel `'root'` instead of `null` so the caller can count this
+  // skip explicitly rather than letting it vanish; if a future change
+  // ever causes a non-homepage page to land at `relDir === '.'`, the
+  // bump in `skippedRoot` will make it visible.
   async function injectOne(htmlAbs) {
     const relDir = toPosix(path.relative(outDir, path.dirname(htmlAbs)))
-    if (!relDir || relDir === '.') return null
+    if (!relDir || relDir === '.') return 'root'
     const mdRel = `${relDir}.md`
     const mdAbs = path.join(outDir, mdRel)
     try {

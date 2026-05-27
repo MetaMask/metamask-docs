@@ -176,6 +176,12 @@ const config = {
         // internal links and is redirected to `/` in `vercel.json`. Per-product
         // documentation is served by dedicated `plugin-content-docs` instances
         // configured below in `plugins`, not by this preset slot.
+        //
+        // Theme-safety note: theme overrides under `src/theme/DocItem/**`
+        // consume `useDoc` from `@docusaurus/plugin-content-docs/client`,
+        // which binds to whichever named content-docs instance owns the
+        // current route. The classic preset's docs slot is unused at runtime,
+        // so disabling it has no impact on theme rendering.
         docs: false,
         // The blog plugin is disabled too: this site has no blog content and
         // the default-enabled `/blog/` route was being indexed as an orphan
@@ -355,6 +361,16 @@ const config = {
     // Options (ignoreFiles, customLLMFiles, pathTransformation, etc.) live in
     // `./src/plugins/llms-html-injector/options.js` so the local sanity-check
     // script can consume the exact same configuration.
+    //
+    // Related Vercel-level note (kept here because `vercel.json` is pure JSON
+    // and can't carry inline comments): `vercel.json` sets `cleanUrls: false`.
+    // With `trailingSlash: true` Docusaurus emits directory-style
+    // `/foo/index.html` URLs and never `*.html` leaves, so Vercel's `.html`
+    // stripping is a no-op for our content and adds an unnecessary redirect
+    // hop for any static `*.html` asset. Disabling it also stops Vercel from
+    // doing its own URL normalization underneath the Edge middleware in
+    // `middleware.ts`, which performs the `Accept: text/markdown`
+    // content-negotiation rewrite to the `.md` siblings emitted here.
     ['./src/plugins/llms-html-injector', llmsPluginOptions],
   ],
   clientModules: [require.resolve('./src/client/scroll-fix.js')],
