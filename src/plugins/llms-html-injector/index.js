@@ -49,6 +49,32 @@ function resolveSiteUrl(siteConfig) {
   return `${url}${base}`
 }
 
+/**
+ * Vercel sets `VERCEL_URL` (the auto-assigned `*.vercel.app` host) and
+ * `VERCEL_ENV` (`production`, `preview`, or `development`) for every build.
+ * On preview deployments we want the curated `static/llms.txt`, the
+ * generated `llms-*.txt` index files, and the per-page `.md` link bodies
+ * to point at the preview host instead of `https://docs.metamask.io` —
+ * otherwise AFDocs running against the preview URL follows every link to
+ * production (where the new files don't exist yet) and reports 404s for
+ * checks like `llms-txt-coverage` and `llms-txt-links-resolve`.
+ *
+ * Returns the preview origin (`https://<VERCEL_URL>`) only when running on
+ * a non-production Vercel deployment with a non-empty preview host. Returns
+ * null otherwise (production builds and local builds keep the configured
+ * `siteConfig.url` so the canonical site keeps the canonical host).
+ */
+function resolvePreviewSiteUrl() {
+  const env = process.env.VERCEL_ENV
+  const host = process.env.VERCEL_URL
+  if (!host) return null
+  // VERCEL_ENV is "preview" for branch deploys (PRs, branch URLs) and
+  // "development" when running `vercel dev`. Both should rewrite to the
+  // ephemeral host. "production" deploys keep the canonical URL.
+  if (env !== 'preview' && env !== 'development') return null
+  return `https://${host}`
+}
+
 // Source path prefixes that Docusaurus strips when constructing public URLs.
 // Mirrors `pathTransformation.ignorePaths` we pass to `docusaurus-plugin-llms`.
 const URL_STRIPPED_PREFIXES = ['src/pages/']
@@ -103,9 +129,10 @@ const upstreamLlmsPlugin = require('docusaurus-plugin-llms').default
  *    `embedded-wallets.md`, `src/pages/tutorials/foo.md` -> `tutorials/foo.md`).
  *
  * 3. Replaces every per-page `.md` body with markdown derived from the
- *    rendered HTML `<article>` (turndown). This is the only way to get true
- *    HTML/`.md` parity for pages assembled from MDX `import` partials, which
- *    the upstream plugin cannot resolve. Fixes `markdown-content-parity`.
+ *    rendered HTML `<article>` (node-html-markdown). This is the only way
+ *    to get true HTML/`.md` parity for pages assembled from MDX `import`
+ *    partials, which the upstream plugin cannot resolve. Fixes
+ *    `markdown-content-parity`.
  *
  * 4. Prepends a `> For the complete documentation index, see [llms.txt](/llms.txt).`
  *    blockquote to every per-page `.md`. Fixes `llms-txt-directive-md`.
@@ -186,6 +213,22 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
   console.log(
     `[llms-html-injector] Injected sr-only llms.txt body directive into ${bodyInjected} HTML pages`
   )
+
+  // On Vercel preview/development deployments, rewrite every absolute URL in
+  // generated llms*.txt files and per-page .md files from the canonical
+  // production host to the preview's auto-assigned host. The HTML alternate
+  // link injected above already uses a path-only href, so HTML files don't
+  // need this pass — only text artifacts that the llmstxt.org spec requires
+  // to carry absolute URLs.
+  const previewSiteUrl = resolvePreviewSiteUrl()
+  if (previewSiteUrl && previewSiteUrl !== siteUrl) {
+    const rewriteStats = await rewriteHostInBuildArtifacts(outDir, siteUrl, previewSiteUrl)
+    console.log(
+      `[llms-html-injector] Vercel preview detected (VERCEL_URL=${process.env.VERCEL_URL}); ` +
+        `rewrote ${siteUrl} -> ${previewSiteUrl} in ${rewriteStats.txtFiles} llms*.txt file(s) ` +
+        `and ${rewriteStats.mdFiles} per-page .md file(s)`
+    )
+  }
 }
 
 module.exports = function llmsHtmlInjectorPlugin(context, options = {}) {
@@ -390,7 +433,15 @@ async function injectAlternateLinks(outDir, siteUrl) {
       } else if (html.includes(MD_ALT_MARKER) || !html.includes('</head>')) {
         altLinkResult = null
       } else {
-        const href = `${siteUrl}/${mdRel}`
+        // Use a path-only href (`/foo/bar.md`) rather than an absolute URL.
+        // Browsers and AFDocs both resolve relative hrefs against the page's
+        // origin, so the same HTML works correctly on production
+        // (docs.metamask.io), Vercel preview deployments
+        // (`*.vercel.app`), and `localhost` without any host-rewrite step
+        // touching HTML files. The `siteUrl` parameter is retained for
+        // signature compatibility but no longer baked into the href.
+        void siteUrl
+        const href = `/${mdRel}`
         const tag = `<link ${MD_ALT_MARKER} rel="alternate" type="text/markdown" href="${href}">`
         html = html.replace('</head>', `${tag}</head>`)
         altLinkResult = true
@@ -435,7 +486,8 @@ async function injectAlternateLinks(outDir, siteUrl) {
  *   2. Locate the sibling `index.html` (path = `<md without .md>/index.html`).
  *   3. Parse with cheerio, select `<article>`, strip everything tagged with
  *      `data-markdown-ignore` plus nav/script/style/aside.
- *   4. Convert the remaining HTML to markdown via turndown (GFM enabled).
+ *   4. Convert the remaining HTML to markdown via node-html-markdown
+ *      (GFM-aware by default: tables, strikethrough, line breaks).
  *   5. Overwrite the `.md` with the new body.
  *
  * Frontmatter is intentionally not preserved: the upstream-generated `.md`
@@ -444,14 +496,14 @@ async function injectAlternateLinks(outDir, siteUrl) {
  * via Docusaurus components, so the new `.md` is self-contained.
  */
 async function replaceMdWithHtmlDerived(outDir) {
-  const turndownService = makeTurndownService()
+  const mdConverter = makeMarkdownConverter()
   const cheerio = require('cheerio')
   const mdFiles = await collectMarkdownFiles(outDir)
 
   let replaced = 0
   let skipped = 0
 
-  // Sequential is fine: ~2.5k pages * ~10ms parse + turndown = well under a
+  // Sequential is fine: ~2.5k pages * ~10ms parse + convert = well under a
   // minute. Parallelism would add complexity without measurable benefit at
   // this scale and risk hitting the open-file-descriptor limit.
   for (const mdAbs of mdFiles) {
@@ -467,7 +519,7 @@ async function replaceMdWithHtmlDerived(outDir) {
       continue
     }
 
-    const newBody = htmlToMarkdown(html, cheerio, turndownService)
+    const newBody = htmlToMarkdown(html, cheerio, mdConverter)
     if (!newBody) {
       skipped++
       continue
@@ -480,7 +532,7 @@ async function replaceMdWithHtmlDerived(outDir) {
   return { replaced, skipped }
 }
 
-function htmlToMarkdown(html, cheerio, turndownService) {
+function htmlToMarkdown(html, cheerio, mdConverter) {
   const $ = cheerio.load(html)
   let $article = $('article').first()
   if ($article.length === 0) {
@@ -492,8 +544,9 @@ function htmlToMarkdown(html, cheerio, turndownService) {
   // `.katex-mathml` (MathML for screen readers, with a `<math>` element whose
   // child `<mrow>` and child `<annotation>` both produce the same text) AND a
   // `.katex-html` (visual rendering, marked `aria-hidden="true"`). If we
-  // simply pass the container through to turndown, the resulting markdown
-  // contains every math expression two or three times (mrow text + annotation
+  // simply pass the container through to the markdown converter, the
+  // resulting markdown contains every math expression two or three times
+  // (mrow text + annotation
   // text + visual text), which AFDocs' content-parity check counts as
   // "missing from markdown" relative to the rendered HTML's deduplicated
   // visual text. Replace every `.katex` with just the LaTeX source from
@@ -514,7 +567,7 @@ function htmlToMarkdown(html, cheerio, turndownService) {
 
   // Strip elements that are intentionally human-only (chrome wrappers tagged
   // with data-markdown-ignore in src/theme/DocItem/Layout/index.jsx) plus
-  // structural noise that turndown would otherwise leave as empty markdown.
+  // structural noise the converter would otherwise leave as empty markdown.
   // `.katex` elements are gone by this point so the aria-hidden selector
   // only catches non-math hidden content (e.g. anchor link icons).
   $article.find('[data-markdown-ignore]').remove()
@@ -525,55 +578,88 @@ function htmlToMarkdown(html, cheerio, turndownService) {
   const contentHtml = ($article.html() || '').trim()
   if (!contentHtml) return null
 
-  const md = turndownService.turndown(contentHtml).trim()
+  const md = mdConverter.translate(contentHtml).trim()
   if (!md) return null
   return md + '\n'
 }
 
-function makeTurndownService() {
-  const TurndownService = require('turndown')
-  const { gfm } = require('turndown-plugin-gfm')
-  const td = new TurndownService({
-    headingStyle: 'atx',
-    hr: '---',
-    bulletListMarker: '-',
+function makeMarkdownConverter() {
+  const { NodeHtmlMarkdown } = require('node-html-markdown')
+  // node-html-markdown is GFM-aware by default (tables, strikethrough, line
+  // breaks), and ATX-only for headings, so no plugin equivalent of
+  // turndown-plugin-gfm is required. The remaining style options mirror the
+  // previous turndown configuration: fenced code blocks with ```, `-`
+  // bullets (NHM defaults to `*`), `_` for emphasis, `**` for strong,
+  // inline links over reference style.
+  const options = {
+    codeFence: '```',
     codeBlockStyle: 'fenced',
-    fence: '```',
+    bulletMarker: '-',
     emDelimiter: '_',
     strongDelimiter: '**',
-    linkStyle: 'inlined',
-    linkReferenceStyle: 'full',
-  })
-  td.use(gfm)
-  // Preserve `<details>`/`<summary>` (used by Docusaurus admonitions) as raw
-  // HTML so collapsed content survives the conversion. Turndown's default
-  // would strip the wrappers and keep only the inner text, losing structure.
-  td.keep(['details', 'summary'])
-  // Override the default escape so character sequences that have no
-  // ambiguous meaning in our doc body — square brackets in prose like
-  // "(string) [optional]", parentheses, hash symbols mid-sentence, asterisks
-  // adjacent to letters etc. — don't get backslash-escaped. The default
-  // turndown escape inserts `\[`, `\]`, `\(`, `\)`, `\#`, `\-`, `\>`, `\!`,
-  // `\*`, `\_`, etc., none of which the AFDocs `markdown-content-parity`
-  // normalizer strips. The result is segments like
-  // `callGasLimit: (string) [optional] - description` failing to match
-  // `callGasLimit: (string) \[optional\] - description` even though the
-  // prose is identical. Underscores inside identifiers are also escaped by
-  // default (`my_var` -> `my\_var`), which breaks the same substring check.
-  //
-  // This safe escape only neutralises the two sequences that would actually
-  // produce broken markdown if left raw: a leading `#`/`>`/`-`/`*`/digit at
-  // the start of a line (could create a heading/blockquote/list) and a
-  // backtick mid-prose (could open an inline code span). Everything else is
-  // left alone — the upstream HTML never had escapes there either, so the
-  // markdown round-trip stays faithful to the source content.
-  td.escape = function safeEscape(text) {
-    return text
-      .replace(/^([#>])/gm, '\\$1')
-      .replace(/^([-*+])(\s)/gm, '\\$1$2')
-      .replace(/^(\d+)\.(\s)/gm, '$1\\.$2')
+    useInlineLinks: true,
+    // Override both default escapes to a narrower set. Character sequences
+    // that have no ambiguous meaning in our doc body — square brackets in
+    // prose like "(string) [optional]", parentheses, hash symbols
+    // mid-sentence, asterisks adjacent to letters etc. — shouldn't get
+    // backslash-escaped. NHM's defaults would insert `\[`, `\]`, `\#`,
+    // `\>`, `\*`, `\_`, etc., none of which the AFDocs
+    // `markdown-content-parity` normalizer strips. The result is segments
+    // like `callGasLimit: (string) [optional] - description` failing to
+    // match `callGasLimit: (string) \[optional\] - description` even
+    // though the prose is identical. Underscores inside identifiers are
+    // also escaped by default (`my_var` -> `my\_var`), which breaks the
+    // same substring check.
+    //
+    // `globalEscape` is narrowed to backticks ONLY. A literal backtick in
+    // a text node (i.e. outside any `<code>`/`<pre>` — those elements set
+    // `noEscape: true` in NHM's default translators, so this regex is not
+    // applied to their contents) is the one character we cannot leave raw:
+    // unescaped, it would open an unintended inline code span in the
+    // emitted markdown, splicing surrounding prose into a `<code>` block
+    // when the markdown is rendered. The other characters NHM escapes by
+    // default (`\\`, `*`, `_`, `~`, `[`, `]`) are intentionally left raw
+    // for the parity-check reasons above. `lineStartEscape` is reduced
+    // to the sequences that would actually produce broken markdown if
+    // left raw at the start of a line: a leading `#`/`>` (could create a
+    // heading or blockquote), a leading `-`/`*`/`+` followed by
+    // whitespace (could create a list item), or `\d+.<space>` (could
+    // create an ordered list item). Everything else is left alone so the
+    // markdown round-trip stays faithful to the source content. NHM's TS
+    // signature documents the replacement as a string, but it passes the
+    // tuple straight through to `String.prototype.replace()`, which
+    // accepts a function at runtime; the function form is the only way to
+    // express the per-branch backslash positioning below (before `[#>]`/
+    // `[-*+]`, but between the digits and the dot in the ordered-list
+    // case).
+    globalEscape: [/`/g, '\\$&'],
+    lineStartEscape: [
+      /^([#>])|^([-*+])(?=\s)|^(\d+)\.(?=\s)/gm,
+      (match, hashOrGt, bullet, digits) => {
+        if (hashOrGt !== undefined) return '\\' + hashOrGt
+        if (bullet !== undefined) return '\\' + bullet
+        if (digits !== undefined) return digits + '\\.'
+        return match
+      },
+    ],
   }
-  return td
+  const customTranslators = {
+    // Preserve `<details>`/`<summary>` (used by Docusaurus admonitions) as
+    // raw HTML so collapsed content survives the conversion. NHM's default
+    // would strip the wrappers and keep only the inner text, losing
+    // structure. `recurse: false` prevents NHM from re-rendering the
+    // children; `content` sets the literal output to the element's
+    // outerHTML so the wrapper stays intact. node-html-parser's
+    // `ElementNode` exposes `outerHTML` as a string getter.
+    'details,summary': ({ node }) => ({
+      content: node.outerHTML,
+      recurse: false,
+      noEscape: true,
+      preserveWhitespace: true,
+      surroundingNewlines: 2,
+    }),
+  }
+  return new NodeHtmlMarkdown(options, customTranslators)
 }
 
 /**
@@ -763,6 +849,57 @@ async function generateAllPagesIndex(outDir, siteUrl, sitemapUrls) {
   }
 
   return { fileCount, urlCount }
+}
+
+/**
+ * Rewrite every literal occurrence of `fromHost` to `toHost` in:
+ *
+ *   - `build/llms*.txt` (root): hand-curated `llms.txt`, the upstream-emitted
+ *     per-section `llms-<product>.txt` / `llms-<product>-full.txt`, and the
+ *     `llms-all-<product>.txt` we generate from the sitemap.
+ *   - Every per-page `.md` under `outDir` (excluding `llms*.md` to mirror
+ *     `collectMarkdownFiles()`).
+ *
+ * Used only on Vercel preview/development deployments to swap the canonical
+ * production host (`https://docs.metamask.io`) for the deploy's auto-assigned
+ * `https://*.vercel.app` host so AFDocs running against the preview URL sees
+ * same-origin links it can resolve, and so the `llms-txt-coverage` walker
+ * actually descends into the linked `.txt` files (it skips cross-origin
+ * links). HTML files are intentionally untouched: the alternate link is now
+ * path-only (`/foo.md`), and rewriting other absolute URLs in HTML would
+ * break canonical/OG/JSON-LD metadata that should keep the canonical host
+ * even on preview.
+ *
+ * Plain string replace is sufficient and safer than a regex: `fromHost` is a
+ * fully-qualified URL, so the chance of an accidental match inside prose is
+ * effectively zero.
+ */
+async function rewriteHostInBuildArtifacts(outDir, fromHost, toHost) {
+  if (fromHost === toHost) return { txtFiles: 0, mdFiles: 0 }
+
+  let txtFiles = 0
+  let mdFiles = 0
+
+  const rootEntries = await fs.readdir(outDir, { withFileTypes: true })
+  for (const entry of rootEntries) {
+    if (!entry.isFile()) continue
+    if (!/^llms.*\.txt$/.test(entry.name)) continue
+    const abs = path.join(outDir, entry.name)
+    const text = await fs.readFile(abs, 'utf8')
+    if (!text.includes(fromHost)) continue
+    await fs.writeFile(abs, text.split(fromHost).join(toHost), 'utf8')
+    txtFiles++
+  }
+
+  const mdAbsPaths = await collectMarkdownFiles(outDir)
+  for (const mdAbs of mdAbsPaths) {
+    const text = await fs.readFile(mdAbs, 'utf8')
+    if (!text.includes(fromHost)) continue
+    await fs.writeFile(mdAbs, text.split(fromHost).join(toHost), 'utf8')
+    mdFiles++
+  }
+
+  return { txtFiles, mdFiles }
 }
 
 function toPosix(p) {

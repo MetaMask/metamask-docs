@@ -107,9 +107,9 @@ export default function DocItemLayout({ children }) {
               {docTOC.mobile}
             </div>
             <DocH1CopyPageWrapper />
-            <span data-markdown-ignore>
+            <div data-markdown-ignore>
               <CopyPageButton />
-            </span>
+            </div>
             <DocItemContent>{children}</DocItemContent>
 
             <div data-markdown-ignore>
