@@ -92,7 +92,9 @@
     "remark-docusaurus-tabs": "^0.2.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "sass": "^1.93.0"
+    "sass": "^1.93.0",
+    "turndown": "^7.2.4",
+    "turndown-plugin-gfm": "^1.0.2"
   },
   "devDependencies": {
     "@docusaurus/eslint-plugin": "^3.10.1",
