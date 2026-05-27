@@ -50,23 +50,33 @@ function resolveSiteUrl(siteConfig) {
 }
 
 /**
- * Vercel sets `VERCEL_URL` (the auto-assigned `*.vercel.app` host) and
- * `VERCEL_ENV` (`production`, `preview`, or `development`) for every build.
- * On preview deployments we want the curated `static/llms.txt`, the
- * generated `llms-*.txt` index files, and the per-page `.md` link bodies
- * to point at the preview host instead of `https://docs.metamask.io` —
- * otherwise AFDocs running against the preview URL follows every link to
- * production (where the new files don't exist yet) and reports 404s for
- * checks like `llms-txt-coverage` and `llms-txt-links-resolve`.
+ * Vercel sets several deployment URL env vars on every build:
  *
- * Returns the preview origin (`https://<VERCEL_URL>`) only when running on
- * a non-production Vercel deployment with a non-empty preview host. Returns
- * null otherwise (production builds and local builds keep the configured
- * `siteConfig.url` so the canonical site keeps the canonical host).
+ *   - `VERCEL_URL` — the deployment-specific host
+ *     (e.g. `metamask-docs-f8nytczy3-consensys.vercel.app`). Changes on
+ *     every deploy.
+ *   - `VERCEL_BRANCH_URL` — the stable branch alias
+ *     (e.g. `metamask-docs-git-my-branch-consensys.vercel.app`). Same URL
+ *     across rebuilds of the same branch — this is the URL collaborators
+ *     and CI tools normally test against.
+ *   - `VERCEL_ENV` — `production`, `preview`, or `development`.
+ *
+ * On preview/development deployments we want the curated `static/llms.txt`,
+ * the generated `llms-*.txt` index files, and the per-page `.md` link
+ * bodies to point at the same host AFDocs is being pointed at — otherwise
+ * AFDocs sees the absolute URLs as cross-origin and silently degrades
+ * checks like `llms-txt-links-markdown` and `llms-txt-coverage` to
+ * "skipped: all links external".
+ *
+ * `VERCEL_BRANCH_URL` is preferred because it matches the URL most reviewers
+ * paste into `npx afdocs check`. `VERCEL_URL` is the fallback when the
+ * branch URL isn't available (e.g. on `vercel dev`, where only the
+ * deployment-specific URL is set). Returns null on production deployments
+ * and outside Vercel so the canonical `siteConfig.url` is preserved.
  */
 function resolvePreviewSiteUrl() {
   const env = process.env.VERCEL_ENV
-  const host = process.env.VERCEL_URL
+  const host = process.env.VERCEL_BRANCH_URL || process.env.VERCEL_URL
   if (!host) return null
   // VERCEL_ENV is "preview" for branch deploys (PRs, branch URLs) and
   // "development" when running `vercel dev`. Both should rewrite to the
@@ -223,8 +233,9 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
   const previewSiteUrl = resolvePreviewSiteUrl()
   if (previewSiteUrl && previewSiteUrl !== siteUrl) {
     const rewriteStats = await rewriteHostInBuildArtifacts(outDir, siteUrl, previewSiteUrl)
+    const hostSource = process.env.VERCEL_BRANCH_URL ? 'VERCEL_BRANCH_URL' : 'VERCEL_URL'
     console.log(
-      `[llms-html-injector] Vercel preview detected (VERCEL_URL=${process.env.VERCEL_URL}); ` +
+      `[llms-html-injector] Vercel preview detected (${hostSource}=${process.env.VERCEL_BRANCH_URL || process.env.VERCEL_URL}); ` +
         `rewrote ${siteUrl} -> ${previewSiteUrl} in ${rewriteStats.txtFiles} llms*.txt file(s) ` +
         `and ${rewriteStats.mdFiles} per-page .md file(s)`
     )
