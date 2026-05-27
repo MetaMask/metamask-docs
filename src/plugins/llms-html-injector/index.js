@@ -8,6 +8,15 @@ const MD_ALT_MARKER = 'data-llms-md-alt'
 const BODY_DIRECTIVE_MARKER = 'data-llms-directive'
 const MD_DIRECTIVE_LINE = '> For the complete documentation index, see [llms.txt](/llms.txt).'
 
+// Matches the opening tag of every `<span class="katex-mathml">` (KaTeX
+// always emits this exact class with no additional classes on the wrapper
+// itself; the mathml subtree is the off-screen MathML rendering used by
+// screen readers). The `[^>]*` allow for any other attributes (rare but
+// possible if upstream rehype plugins add them). The capture group is
+// reused to splice the marker into the same position in the tag.
+const KATEX_MATHML_OPEN_TAG_RE =
+  /<span\b((?:[^>"']|"[^"]*"|'[^']*')*?\bclass="katex-mathml"(?:[^>"']|"[^"]*"|'[^']*')*?)>/g
+
 // Visible-but-screen-reader-only directive injected at the top of every
 // `<body>` in the build. AFDocs scans `<body>` (excluding nav/script/style)
 // for a mention of `llms.txt`, so this satisfies `llms-txt-directive-html`.
@@ -182,10 +191,11 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
     `[llms-html-injector] Normalized ${renames.size} .md file(s) into URL-aligned positions`
   )
 
-  const replaced = await replaceMdWithHtmlDerived(outDir)
+  const regen = await regenerateMdFromHtml(outDir)
   console.log(
-    `[llms-html-injector] Regenerated ${replaced.replaced} per-page .md from rendered HTML ` +
-      `(skipped ${replaced.skipped}: no HTML sibling or empty <article>)`
+    `[llms-html-injector] Regenerated ${regen.regenerated} per-page .md from rendered HTML, ` +
+      `created ${regen.created} new .md for pages without an upstream-emitted sibling ` +
+      `(skipped ${regen.skipped}: unreadable HTML or empty <article>)`
   )
 
   const directiveCount = await prependMdDirective(outDir)
@@ -211,7 +221,7 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
     )
   }
 
-  const { injected, missing, skippedRoot, bodyInjected } = await injectAlternateLinks(
+  const { injected, missing, skippedRoot, bodyInjected, katexMarked } = await injectAlternateLinks(
     outDir,
     siteUrl
   )
@@ -222,6 +232,9 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
   )
   console.log(
     `[llms-html-injector] Injected sr-only llms.txt body directive into ${bodyInjected} HTML pages`
+  )
+  console.log(
+    `[llms-html-injector] Marked ${katexMarked} KaTeX MathML span(s) as data-markdown-ignore`
   )
 
   // On Vercel preview/development deployments, rewrite every absolute URL in
@@ -391,14 +404,26 @@ async function rewriteLlmsIndexes(outDir, renames, siteUrl) {
  * the URL-aligned location, inject a `<link rel="alternate" type="text/markdown" href="...">`
  * into the `<head>`. Independently, inject a hidden `<div>` directive into the
  * `<body>` of every page so HTML-only agents can discover `/llms.txt`.
+ *
+ * Also marks every `<span class="katex-mathml">` with `data-markdown-ignore`.
+ * KaTeX renders each math expression three times in the DOM (`mrow` text +
+ * `<annotation>` LaTeX source + the visual `.katex-html`), which AFDocs'
+ * `markdown-content-parity` HTML extractor concatenates into segments like
+ * `retrievePubKey()retrievePubKey()retrievePubKey()` that can never match
+ * the single `$retrievePubKey()$` in the regenerated `.md`. Marking the
+ * MathML subtree as `data-markdown-ignore` makes AFDocs strip it before
+ * extracting text, leaving only the visual rendering — invisible to the
+ * markdown side via `htmlToMarkdown`'s own `.katex` replacement, but
+ * structurally aligned with what the parity check measures.
  */
 async function injectAlternateLinks(outDir, siteUrl) {
   let injected = 0
   let missing = 0
   let skippedRoot = 0
   let bodyInjected = 0
+  let katexMarked = 0
   await visit(outDir)
-  return { injected, missing, skippedRoot, bodyInjected }
+  return { injected, missing, skippedRoot, bodyInjected, katexMarked }
 
   async function visit(dir) {
     const entries = await fs.readdir(dir, { withFileTypes: true })
@@ -412,6 +437,7 @@ async function injectAlternateLinks(outDir, siteUrl) {
         else if (result.altLink === false) missing++
         else if (result.altLink === 'root') skippedRoot++
         if (result.bodyDirective) bodyInjected++
+        katexMarked += result.katexMarked
       }
     }
   }
@@ -422,7 +448,7 @@ async function injectAlternateLinks(outDir, siteUrl) {
     try {
       html = await fs.readFile(htmlAbs, 'utf8')
     } catch {
-      return { altLink: false, bodyDirective: false }
+      return { altLink: false, bodyDirective: false, katexMarked: 0 }
     }
 
     let changed = false
@@ -476,71 +502,126 @@ async function injectAlternateLinks(outDir, siteUrl) {
       }
     }
 
+    // Mark every KaTeX MathML wrapper with data-markdown-ignore. The marker
+    // is idempotent: we skip any opening tag that already carries the
+    // attribute (which a previous run may have added) so re-invoking the
+    // postBuild stage against an already-processed outDir does not append
+    // duplicate attributes.
+    let katexMarkedHere = 0
+    html = html.replace(KATEX_MATHML_OPEN_TAG_RE, (match, attrs) => {
+      if (/\bdata-markdown-ignore\b/.test(attrs)) return match
+      katexMarkedHere++
+      return `<span${attrs} data-markdown-ignore>`
+    })
+    if (katexMarkedHere > 0) changed = true
+
     if (changed) {
       await fs.writeFile(htmlAbs, html, 'utf8')
     }
 
-    return { altLink: altLinkResult, bodyDirective: bodyDirectiveAdded }
+    return {
+      altLink: altLinkResult,
+      bodyDirective: bodyDirectiveAdded,
+      katexMarked: katexMarkedHere,
+    }
   }
 }
 
 /**
- * Replace each per-page `.md` body with markdown derived from the rendered
- * HTML `<article>`. This is the only mechanism that achieves true HTML/MD
- * parity: the upstream `docusaurus-plugin-llms` reads raw source MDX and
- * cannot resolve `import` partials, leaving pages built from imported
- * components nearly empty in the upstream `.md` (e.g.
- * `services/reference/.../eth_sendrawtransaction`).
+ * Generate (or regenerate) every per-page `.md` from its rendered HTML
+ * `<article>`. This achieves true HTML/MD parity AND fills coverage gaps:
+ *
+ *   - The upstream `docusaurus-plugin-llms` reads raw source MDX and
+ *     cannot resolve `import` partials, leaving pages built from imported
+ *     components nearly empty in the upstream `.md` (e.g.
+ *     `services/reference/.../eth_sendrawtransaction`). Regenerating from
+ *     the rendered HTML resolves every partial and component.
+ *
+ *   - Some pages exist in the build with NO upstream-emitted `.md` at all
+ *     (e.g. Docusaurus-versioned docs: gator's `current` version publishes
+ *     under `/smart-accounts-kit/development/...` while the upstream only
+ *     emits a single `.md` per source file at the version-less path). The
+ *     ghost URLs fail AFDocs' `markdown-url-support`, `content-negotiation`,
+ *     and `llms-txt-directive-md` checks. Walking `build/**\/index.html`
+ *     and creating a `.md` sibling for any page that lacks one closes
+ *     that gap deterministically.
  *
  * Algorithm:
- *   1. Walk every URL-aligned `.md` (set produced by `normalizeMarkdownLayout`).
- *   2. Locate the sibling `index.html` (path = `<md without .md>/index.html`).
- *   3. Parse with cheerio, select `<article>`, strip everything tagged with
+ *   1. Walk every `build/**\/index.html` (skipping the root index.html,
+ *      which has no meaningful `.md` companion).
+ *   2. Compute the URL-aligned `.md` path (`<dir>.md`).
+ *   3. Read the HTML, parse with cheerio, select `<article>`, strip
  *      `data-markdown-ignore` plus nav/script/style/aside.
  *   4. Convert the remaining HTML to markdown via node-html-markdown
- *      (GFM-aware by default: tables, strikethrough, line breaks).
- *   5. Overwrite the `.md` with the new body.
+ *      (GFM-aware: tables, strikethrough, line breaks).
+ *   5. Write the `.md`, creating the directory if needed.
  *
  * Frontmatter is intentionally not preserved: the upstream-generated `.md`
  * frontmatter mirrors the source MDX frontmatter, but the rendered HTML
  * already inlines the resolved title/description/etc. into the article body
  * via Docusaurus components, so the new `.md` is self-contained.
  */
-async function replaceMdWithHtmlDerived(outDir) {
+async function regenerateMdFromHtml(outDir) {
   const mdConverter = makeMarkdownConverter()
   const cheerio = require('cheerio')
-  const mdFiles = await collectMarkdownFiles(outDir)
 
-  let replaced = 0
+  let regenerated = 0
+  let created = 0
   let skipped = 0
 
-  // Sequential is fine: ~2.5k pages * ~10ms parse + convert = well under a
+  await visit(outDir)
+  return { regenerated, created, skipped }
+
+  // Sequential is fine: ~2.5k pages * ~10ms parse + convert is well under a
   // minute. Parallelism would add complexity without measurable benefit at
   // this scale and risk hitting the open-file-descriptor limit.
-  for (const mdAbs of mdFiles) {
-    const relMd = toPosix(path.relative(outDir, mdAbs))
-    const baseName = relMd.slice(0, -'.md'.length)
-    const htmlAbs = path.join(outDir, baseName, 'index.html')
+  async function visit(dir) {
+    const entries = await fs.readdir(dir, { withFileTypes: true })
+    for (const entry of entries) {
+      const full = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        await visit(full)
+      } else if (entry.name === 'index.html') {
+        await processOne(full, dir)
+      }
+    }
+  }
+
+  async function processOne(htmlAbs, dir) {
+    const relDir = toPosix(path.relative(outDir, dir))
+    // Skip the site root: `<outDir>/index.html` would map to a top-level
+    // `.md` that has no canonical URL counterpart in the markdown space.
+    if (!relDir || relDir === '.') return
 
     let html
     try {
       html = await fs.readFile(htmlAbs, 'utf8')
     } catch {
       skipped++
-      continue
+      return
     }
 
     const newBody = htmlToMarkdown(html, cheerio, mdConverter)
     if (!newBody) {
       skipped++
-      continue
+      return
     }
 
-    await fs.writeFile(mdAbs, newBody, 'utf8')
-    replaced++
-  }
+    const mdAbs = path.join(outDir, `${relDir}.md`)
+    let existed = true
+    try {
+      await fs.access(mdAbs)
+    } catch {
+      existed = false
+    }
 
-  return { replaced, skipped }
+    if (!existed) {
+      await fs.mkdir(path.dirname(mdAbs), { recursive: true })
+    }
+    await fs.writeFile(mdAbs, newBody, 'utf8')
+    if (existed) regenerated++
+    else created++
+  }
 }
 
 function htmlToMarkdown(html, cheerio, mdConverter) {
@@ -557,23 +638,33 @@ function htmlToMarkdown(html, cheerio, mdConverter) {
   // `.katex-html` (visual rendering, marked `aria-hidden="true"`). If we
   // simply pass the container through to the markdown converter, the
   // resulting markdown contains every math expression two or three times
-  // (mrow text + annotation
-  // text + visual text), which AFDocs' content-parity check counts as
-  // "missing from markdown" relative to the rendered HTML's deduplicated
-  // visual text. Replace every `.katex` with just the LaTeX source from
-  // `<annotation encoding="application/x-tex">`, wrapped as inline math.
+  // (mrow text + annotation text + visual text), which AFDocs' content-parity
+  // check counts as "missing from markdown" relative to the rendered HTML's
+  // deduplicated visual text.
+  //
+  // Replace each `.katex` with a `<code>` element holding the **visual**
+  // text extracted from `.katex-html`. NHM converts `<code>` to a single
+  // backtick span (`` `n` ``) in the .md, and AFDocs' markdown stripper
+  // protects backtick spans then restores their bare content as plain text.
+  // The HTML side (post-`injectAlternateLinks`) marks `.katex-mathml` with
+  // `data-markdown-ignore` so AFDocs only sees the `.katex-html` rendering
+  // — the exact same string we embed here. Both sides thus normalize to
+  // identical text, so prose sentences with inline math (`\sigma` → σ,
+  // `a_1` → a1, etc.) substring-match cleanly. Using the LaTeX annotation
+  // source instead would re-introduce the mismatch that broke parity on
+  // `embedded-wallets/infrastructure/sss-architecture` (52% missing).
   $article.find('.katex').each((_, el) => {
     const $el = $(el)
+    const visual = $el.find('.katex-html').first().text().trim()
     const annotation = $el.find('annotation[encoding="application/x-tex"]').first().text().trim()
-    if (annotation) {
-      // Use a single-dollar inline math fence; remark-math (already in the
-      // repo's remark plugin chain) round-trips this format. The leading and
-      // trailing spaces keep the fence from glomming onto adjacent words.
-      $el.replaceWith(` $${annotation}$ `)
-    } else {
-      // No annotation (rare). Fall back to the visual-only katex-html text.
-      $el.replaceWith($el.find('.katex-html').text())
+    const inner = visual || annotation
+    if (!inner) {
+      $el.remove()
+      return
     }
+    const $code = $('<code></code>')
+    $code.text(inner)
+    $el.replaceWith($code)
   })
 
   // Strip elements that are intentionally human-only (chrome wrappers tagged
@@ -585,6 +676,53 @@ function htmlToMarkdown(html, cheerio, mdConverter) {
   $article.find('nav, script, style, aside, [aria-hidden="true"]').remove()
   // The body directive injected by injectAlternateLinks() lives outside
   // <article>, so it is not present here. No removal needed.
+
+  // Flatten Docusaurus chrome inside <details> elements. Docusaurus wraps
+  // collapsible content like this:
+  //
+  //   <details class="details_lb9f alert ..." data-collapsed="true">
+  //     <summary>Title</summary>
+  //     <div>
+  //       <div class="collapsibleContent_i85q">
+  //         <div>
+  //           <p>real content</p>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   </details>
+  //
+  // The custom NHM translator below preserves <details>/<summary> as raw
+  // HTML wrappers and recurses into children. Without this flattening, the
+  // emitted .md would carry every wrapper <div>, which AFDocs'
+  // markdown-content-parity normalizer collapses to text (`<x>` becomes
+  // `x`), smushing classnames like `collapsibleContent_i85q` into adjacent
+  // prose and breaking substring matches against the clean HTML segments.
+  //
+  // Unwrap iteratively so arbitrary depths of nested wrapper <div>s flatten.
+  // We only unwrap direct children of <details> that are <div>s with either
+  // no class or the Docusaurus collapsible-content class — never <div>s
+  // that the author intentionally placed (which always carry meaningful
+  // class names).
+  $article.find('details').each((_, el) => {
+    const $det = $(el)
+    Object.keys($det.attr() || {}).forEach(attr => $det.removeAttr(attr))
+    $det.children('summary').each((__, sEl) => {
+      const $sum = $(sEl)
+      Object.keys($sum.attr() || {}).forEach(attr => $sum.removeAttr(attr))
+    })
+    let didUnwrap = true
+    while (didUnwrap) {
+      didUnwrap = false
+      $det.children('div').each((__, dEl) => {
+        const $d = $(dEl)
+        const cls = $d.attr('class') || ''
+        if (!cls.trim() || /\bcollapsibleContent[_-]/.test(cls)) {
+          $d.replaceWith($d.contents())
+          didUnwrap = true
+        }
+      })
+    }
+  })
 
   const contentHtml = ($article.html() || '').trim()
   if (!contentHtml) return null
@@ -633,42 +771,63 @@ function makeMarkdownConverter() {
     // for the parity-check reasons above. `lineStartEscape` is reduced
     // to the sequences that would actually produce broken markdown if
     // left raw at the start of a line: a leading `#`/`>` (could create a
-    // heading or blockquote), a leading `-`/`*`/`+` followed by
-    // whitespace (could create a list item), or `\d+.<space>` (could
-    // create an ordered list item). Everything else is left alone so the
-    // markdown round-trip stays faithful to the source content. NHM's TS
-    // signature documents the replacement as a string, but it passes the
-    // tuple straight through to `String.prototype.replace()`, which
-    // accepts a function at runtime; the function form is the only way to
-    // express the per-branch backslash positioning below (before `[#>]`/
-    // `[-*+]`, but between the digits and the dot in the ordered-list
-    // case).
+    // heading or blockquote) or a leading `-`/`*`/`+` followed by
+    // whitespace (could create a list item). A leading `\d+.<space>`
+    // escape was previously included, but NHM applies these escapes to
+    // the text content of headings BEFORE prefixing `### ` etc.: a
+    // heading like `<h3>1. Set up the project</h3>` becomes
+    // `### 1\. Set up the project`, and AFDocs'
+    // markdown-content-parity stripper does not consume the literal `\`,
+    // so the segment fails to match the HTML side `1. Set up the
+    // project`. Body lists are emitted by NHM's `<ol>`/`<li>`
+    // translators directly (which insert their own `1. ` markers), so
+    // dropping this escape only affects free-standing `1. foo` text at
+    // line start — which our docs do not produce outside list contexts.
+    // NHM's TS signature documents the replacement as a string, but it
+    // passes the tuple straight through to `String.prototype.replace()`,
+    // which accepts a function at runtime; the function form is the only
+    // way to express the per-branch backslash positioning below.
     globalEscape: [/`/g, '\\$&'],
     lineStartEscape: [
-      /^([#>])|^([-*+])(?=\s)|^(\d+)\.(?=\s)/gm,
-      (match, hashOrGt, bullet, digits) => {
+      /^([#>])|^([-*+])(?=\s)/gm,
+      (match, hashOrGt, bullet) => {
         if (hashOrGt !== undefined) return '\\' + hashOrGt
         if (bullet !== undefined) return '\\' + bullet
-        if (digits !== undefined) return digits + '\\.'
         return match
       },
     ],
   }
   const customTranslators = {
-    // Preserve `<details>`/`<summary>` (used by Docusaurus admonitions) as
-    // raw HTML so collapsed content survives the conversion. NHM's default
-    // would strip the wrappers and keep only the inner text, losing
-    // structure. `recurse: false` prevents NHM from re-rendering the
-    // children; `content` sets the literal output to the element's
-    // outerHTML so the wrapper stays intact. node-html-parser's
-    // `ElementNode` exposes `outerHTML` as a string getter.
-    'details,summary': ({ node }) => ({
-      content: node.outerHTML,
-      recurse: false,
-      noEscape: true,
-      preserveWhitespace: true,
+    // Keep `<details>` and `<summary>` as raw HTML wrappers (GFM renders
+    // them natively in `.md`), but let NHM convert their children to
+    // markdown so the body of a collapsible block is plain markdown — not
+    // raw HTML chrome.
+    //
+    // The blank line between `</summary>` and the first content element is
+    // load-bearing: GFM-flavoured markdown parsers only treat inline-HTML
+    // children as markdown when there's a blank line separator. The
+    // `postfix: '</summary>\n\n'` plus NHM's own `\n\n` around block
+    // children produce that separator.
+    //
+    // The previous translator returned `content: node.outerHTML`, which
+    // embedded Docusaurus class wrappers (`details_lb9f`,
+    // `collapsibleContent_i85q`, etc.) verbatim into the .md. AFDocs'
+    // markdown-content-parity normalizer collapses `<x>` to its content,
+    // jamming those class names into adjacent prose and breaking
+    // substring matches against the rendered HTML's clean text segments.
+    // The cheerio pre-pass in `htmlToMarkdown` flattens those wrappers
+    // before NHM ever sees the tree.
+    details: {
+      prefix: '<details>\n',
+      postfix: '\n</details>',
       surroundingNewlines: 2,
-    }),
+      noEscape: true,
+    },
+    summary: {
+      prefix: '<summary>',
+      postfix: '</summary>\n\n',
+      noEscape: true,
+    },
   }
   return new NodeHtmlMarkdown(options, customTranslators)
 }
@@ -686,7 +845,7 @@ async function prependMdDirective(outDir) {
     const text = await fs.readFile(mdAbs, 'utf8')
     if (text.includes(MD_DIRECTIVE_LINE)) continue
 
-    // If a file still has YAML frontmatter (i.e. `replaceMdWithHtmlDerived`
+    // If a file still has YAML frontmatter (i.e. `regenerateMdFromHtml`
     // skipped it because no HTML sibling was found), insert the directive
     // after the closing `---` so frontmatter parsers still see the document
     // as well-formed.
