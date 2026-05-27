@@ -17,6 +17,7 @@ keywords:
     family wallet connector,
     react wallet,
   ]
+unlisted: true
 ---
 
 :::info Heads up

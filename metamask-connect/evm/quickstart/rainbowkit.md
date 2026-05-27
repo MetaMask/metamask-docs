@@ -17,6 +17,7 @@ keywords:
     connect button,
     react wallet UI,
   ]
+unlisted: true
 ---
 
 :::info Heads up
