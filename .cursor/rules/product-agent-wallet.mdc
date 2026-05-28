@@ -1,0 +1,61 @@
+---
+description: Product-specific guidance for MetaMask Agent Wallet documentation, including terminology, CLI conventions, and content organization.
+globs: agent-wallet/**/*.md,agent-wallet/**/*.mdx
+alwaysApply: false
+---
+
+# Agent Wallet
+
+## Product naming
+
+- The product name is **MetaMask Agent Wallet**. Use **Agent Wallet** as short form in prose.
+- The CLI binary is `mm` (lowercase, monospace). Do not document `mm-dev` or `mm-uat` in user-facing docs.
+- The npm package is `@metamask/agentic-cli`.
+
+## Wallet and trading modes
+
+- **server-wallet** — recommended default. Keys are held in a Cubist TEE-backed environment.
+- **BYOK** (bring your own key) — opt-in; user supplies a BIP-39 mnemonic.
+- **Guard Mode** — default trading mode (`--mode guard`). Enforces policies with human approval on violations.
+- **Beast Mode** — opt-in (`--mode beast`). Fewer policy interruptions; malicious transactions still require approval.
+
+CLI flags use `server-wallet`, `byok`, `guard`, and `beast`.
+
+## Security terms
+
+Use these terms consistently when describing the security stack:
+
+- **Transaction Shield** (powered by Blockaid)
+- **Servo** MEV protection
+- **Cubist TEE** (trusted execution environment)
+- **2FA** for policy violations and flagged transactions
+
+Do not add comparative security claims beyond approved product copy.
+
+## Content organization
+
+| Folder           | Content type                                      |
+| ---------------- | ------------------------------------------------- |
+| Root (`index.mdx`) | Product overview and navigation                   |
+| `get-started/`   | Install, quickstart, wallet mode selection        |
+| `guides/`        | Task-oriented how-to guides                       |
+| `concepts/`      | Architecture, security, agent skills pattern      |
+| `reference/`     | CLI commands, error codes, supported chains       |
+| `troubleshooting/` | Symptom-based fixes (single page in v1)         |
+
+Do not paste content from `.agents/skills/metamask-agent-wallet/` into documentation pages.
+
+## Reference conventions
+
+- Command headings use backtick-wrapped names (for example, `## \`mm transfer\``).
+- Parameters use tables with columns: Flag, Required, Description.
+- Use `bash` fences for CLI examples.
+- Global flags: `--format`, `--json`, `--toon`, `--verbose`.
+
+## Sidebar
+
+The sidebar configuration is in [agent-wallet-sidebar.js](agent-wallet-sidebar.js).
+
+## Images
+
+Place product images in `static/img/agent-wallet/`.

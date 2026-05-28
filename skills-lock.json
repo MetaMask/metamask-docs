@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "metamask-agent-wallet": {
+      "source": "metamask/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/metamask-agent-wallet/SKILL.md",
+      "computedHash": "f1ded18f30e9b2b04c8654b0e8198d1a09d44717689c4231087b7f1dd5546126"
+    },
+    "metamask-agent-workflows": {
+      "source": "metamask/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/metamask-agent-workflows/SKILL.md",
+      "computedHash": "27eb8e9ebedede1897fdd333efa3691d02cdf0bcfe5422446f3eff1c33a67cdf"
+    }
+  }
+}

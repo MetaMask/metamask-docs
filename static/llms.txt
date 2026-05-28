@@ -22,6 +22,11 @@ These links contain LLM-readable files following the llmstxt.org standard, for e
 - [Smart Accounts Kit documentation links](https://docs.metamask.io/llms-smart-accounts-kit.txt): Documentation links for Smart Accounts Kit.
 - [Smart Accounts Kit full documentation](https://docs.metamask.io/llms-smart-accounts-kit-full.txt): Complete documentation for Smart Accounts Kit.
 
+## Agent Wallet
+
+- [Agent Wallet documentation links](https://docs.metamask.io/llms-agent-wallet.txt): Documentation links for MetaMask Agent Wallet — the mm CLI for programmatic wallet access with mandatory security.
+- [Agent Wallet full documentation](https://docs.metamask.io/llms-agent-wallet-full.txt): Complete documentation for MetaMask Agent Wallet.
+
 ## Services
 
 - [Services documentation links](https://docs.metamask.io/llms-services.txt): Documentation links for MetaMask services.

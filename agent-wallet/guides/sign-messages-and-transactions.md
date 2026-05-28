@@ -1,0 +1,51 @@
+---
+description: Sign messages, typed data, and submit raw EVM transactions with mm wallet commands.
+keywords: [MetaMask, Agent Wallet, sign, EIP-712, transaction, mm]
+---
+
+# Sign messages and transactions
+
+Sign plaintext messages, EIP-712 typed data, or submit raw EVM transactions.
+
+## Prerequisites
+
+- [Quickstart](../get-started/quickstart.md) completed
+- Understanding of what you are signing — review payloads before confirming
+
+## Sign a plaintext message
+
+```bash
+mm wallet sign-message --message "<TEXT>" --chain-id <CHAIN_ID> [--wait]
+```
+
+## Sign EIP-712 typed data
+
+```bash
+mm wallet sign-typed-data --chain-id <CHAIN_ID> --payload '<JSON>' [--wait]
+```
+
+The payload must be valid JSON with `domain`, `types`, `primaryType`, and `message` fields.
+
+## Send a raw transaction
+
+```bash
+mm wallet send-transaction --chain-id <CHAIN_ID> --payload '<JSON>' [--wait]
+```
+
+The payload must include at least a `to` address. See the commands reference for the full schema.
+
+## Server-wallet polling
+
+In server-wallet mode, signing commands may return a `pollingId` when `--wait` is omitted. Track
+pending requests:
+
+```bash
+mm wallet requests list
+mm wallet requests watch --polling-id <POLLING_ID>
+```
+
+In BYOK mode, results return immediately when the mnemonic is unlocked.
+
+## Related commands
+
+See [`mm wallet`](../reference/commands.md#mm-wallet) in the commands reference.

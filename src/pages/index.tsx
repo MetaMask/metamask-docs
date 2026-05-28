@@ -76,7 +76,7 @@ export default function Home(): JSX.Element {
             buttonIcon: 'arrow-right',
           },
           {
-            title: 'Create smart accounts',
+            title: 'Upgrade to smart accounts',
             leadIcon: 'community',
             description: (
               <>
@@ -85,6 +85,19 @@ export default function Home(): JSX.Element {
               </>
             ),
             href: '/smart-accounts-kit',
+            buttonIcon: 'arrow-right',
+          },
+          {
+            title: 'Make Agent Wallets',
+            leadIcon: 'shield',
+            description: (
+              <>
+                Give <strong>AI agents programmatic wallet access</strong> via the{' '}
+                <strong>MetaMask Agent Wallet CLI</strong>. Transfer, swap, trade, and sign with{' '}
+                <strong>mandatory security</strong> on every transaction.
+              </>
+            ),
+            href: '/agent-wallet',
             buttonIcon: 'arrow-right',
           },
           {

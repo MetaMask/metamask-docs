@@ -346,6 +346,19 @@ const config = {
         rehypePlugins,
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'agent-wallet',
+        path: 'agent-wallet',
+        routeBasePath: 'agent-wallet',
+        editUrl: 'https://github.com/MetaMask/metamask-docs/edit/main/',
+        sidebarPath: require.resolve('./agent-wallet-sidebar.js'),
+        breadcrumbs: false,
+        remarkPlugins,
+        rehypePlugins,
+      },
+    ],
     './src/plugins/plugin-json-rpc.ts',
     // Custom Segment plugin for controlled analytics
     './src/plugins/segment',
@@ -518,6 +531,10 @@ const config = {
               {
                 label: 'Smart Accounts Kit',
                 to: '/smart-accounts-kit',
+              },
+              {
+                label: 'Agent Wallet',
+                to: '/agent-wallet',
               },
               {
                 label: 'Snaps',

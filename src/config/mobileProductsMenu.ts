@@ -24,6 +24,10 @@ export const mobileProductsMenu: MobileProductItem[] = [
     href: '/smart-accounts-kit',
   },
   {
+    label: 'Agent Wallet',
+    href: '/agent-wallet',
+  },
+  {
     label: 'Snaps',
     href: '/snaps',
   },
