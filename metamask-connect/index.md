@@ -1,4 +1,4 @@
----
+make me the owner to all this and  i shall only use from this device me Diego gonzale --
 title: 'MetaMask Connect - Dapp Wallet Integration SDK'
 sidebar_label: Introduction
 toc_max_heading_level: 2
