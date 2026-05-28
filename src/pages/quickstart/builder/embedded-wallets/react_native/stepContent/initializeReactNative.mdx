@@ -1,8 +1,49 @@
-### Initialize Web3Auth
+### Configure the SDK
 
-Initialize a `Web3Auth` instance with your project's client ID and your target network
-(this quickstart uses `SAPPHIRE_MAINNET`).
-Add a `redirectUrl` for your application, so the SDK can redirect users back to your app after authentication.
+Create a `web3authConfig.ts` file with your project's client ID, redirect URL, and chain configuration. Then wrap your app root in `Web3AuthProvider`:
+
+```typescript title="web3authConfig.ts"
+import {
+  CHAIN_NAMESPACES,
+  WEB3AUTH_NETWORK,
+  type Web3AuthContextConfig,
+} from '@web3auth/react-native-sdk'
+
+export const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID', // from developer.metamask.io
+    redirectUrl: 'yourapp://auth',
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    chains: [
+      {
+        chainNamespace: CHAIN_NAMESPACES.EIP155,
+        chainId: '0xaa36a7',
+        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+        displayName: 'Ethereum Sepolia',
+        blockExplorerUrl: 'https://sepolia.etherscan.io',
+        ticker: 'ETH',
+        tickerName: 'Ethereum',
+      },
+    ],
+    defaultChainId: '0xaa36a7',
+  },
+}
+```
+
+```tsx title="App.tsx"
+import WebBrowser from '@toruslabs/react-native-web-browser'
+import EncryptedStorage from 'react-native-encrypted-storage'
+import { Web3AuthProvider } from '@web3auth/react-native-sdk'
+import { web3AuthConfig } from './web3authConfig'
+
+export default function App() {
+  return (
+    <Web3AuthProvider webBrowser={WebBrowser} storage={EncryptedStorage} config={web3AuthConfig}>
+      <Screen />
+    </Web3AuthProvider>
+  )
+}
+```
 
 :::info
 

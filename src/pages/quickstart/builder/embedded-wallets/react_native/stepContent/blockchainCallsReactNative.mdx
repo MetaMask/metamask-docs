@@ -1,15 +1,30 @@
 ### Make blockchain calls
 
-With the React Native SDK, you can derive the user's private key in memory for the current session.
+After the user connects, use `useWeb3Auth().provider` with the Ethers library to make blockchain calls — no extra provider setup is needed.
 
-Use the private key to make blockchain calls, like fetching a user's account balance,
-signing or sending transactions, and reading or writing to smart contracts.
+```tsx
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import { ethers } from 'ethers'
 
-This quickstart makes calls to Ethereum using the [Ethers](https://docs.ethers.org/v5/cookbook/react-native/) library as an example.
+function BlockchainActions() {
+  const { provider } = useWeb3Auth()
+
+  const getAddress = async () => {
+    const ep = new ethers.BrowserProvider(provider!)
+    return (await ep.getSigner()).getAddress()
+  }
+
+  const getBalance = async () => {
+    const ep = new ethers.BrowserProvider(provider!)
+    const signer = await ep.getSigner()
+    const balance = await ep.getBalance(await signer.getAddress())
+    return ethers.formatEther(balance)
+  }
+}
+```
 
 :::tip Connect any blockchain
 
-See the [Embedded Wallets documentation](/embedded-wallets/connect-blockchain)
-to learn more about making calls on any supported blockchain.
+See the [Embedded Wallets documentation](/embedded-wallets/connect-blockchain) to learn more about making calls on any supported blockchain.
 
 :::

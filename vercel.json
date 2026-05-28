@@ -866,6 +866,36 @@
       "permanent": true
     },
     {
+      "source": "/embedded-wallets/sdk/react-native/migration-guides/rn-v3-to-v4",
+      "destination": "/embedded-wallets/sdk/react-native/migrate-to-v9",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/migration-guides/rn-v4-to-v5",
+      "destination": "/embedded-wallets/sdk/react-native/migrate-to-v9",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/migration-guides/rn-v5-to-v6",
+      "destination": "/embedded-wallets/sdk/react-native/migrate-to-v9",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/migration-guides/rn-v7-to-v8",
+      "destination": "/embedded-wallets/sdk/react-native/migrate-to-v9",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/migration-guides/rn-v8-to-v9",
+      "destination": "/embedded-wallets/sdk/react-native/migrate-to-v9",
+      "permanent": true
+    },
+    {
+      "source": "/embedded-wallets/sdk/react-native/migration-guides/rn-migrate-to-v9",
+      "destination": "/embedded-wallets/sdk/react-native/migrate-to-v9",
+      "permanent": true
+    },
+    {
       "source": "/embedded-wallets/sdk/react-native/usage/enableMFA",
       "destination": "/embedded-wallets/sdk/react-native/usage/enable-mfa",
       "permanent": true

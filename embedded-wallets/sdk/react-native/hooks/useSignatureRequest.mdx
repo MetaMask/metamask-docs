@@ -1,0 +1,92 @@
+---
+title: useSignatureRequest
+sidebar_label: useSignatureRequest
+description: '@web3auth/react-native-sdk useSignatureRequest hook | Embedded Wallets'
+---
+
+Hook to send JSON-RPC signing requests through the Wallet Services overlay. Unlike signing directly with `provider`, this presents a human-readable confirmation screen to the user before executing the operation.
+
+### Import
+
+```tsx
+import { useSignatureRequest } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+```tsx
+import { useSignatureRequest } from '@web3auth/react-native-sdk'
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import { ethers } from 'ethers'
+
+function SigningView() {
+  const { request, loading, error } = useSignatureRequest()
+  const { provider } = useWeb3Auth()
+
+  const getAddress = async () => {
+    const ep = new ethers.BrowserProvider(provider!)
+    return (await ep.getSigner()).getAddress()
+  }
+
+  const signPersonalMessage = async () => {
+    const address = await getAddress()
+    const message = 'Hello from Web3Auth!'
+    // Presents a signing confirmation in the Wallet Services overlay
+    const signature = await request('personal_sign', [
+      ethers.hexlify(ethers.toUtf8Bytes(message)),
+      address,
+    ])
+    console.log('Signature:', signature)
+  }
+
+  const sendTransaction = async () => {
+    const address = await getAddress()
+    const txHash = await request('eth_sendTransaction', [
+      {
+        from: address,
+        to: '0x0000000000000000000000000000000000000001',
+        value: ethers.toBeHex(ethers.parseEther('0.001')),
+        gasLimit: ethers.toBeHex(21000),
+      },
+    ])
+    console.log('Transaction hash:', txHash)
+  }
+
+  return (
+    <View>
+      <Button title="Sign message" disabled={loading} onPress={signPersonalMessage} />
+      <Button title="Send ETH" disabled={loading} onPress={sendTransaction} />
+      {error && <Text>{error.message}</Text>}
+    </View>
+  )
+}
+```
+
+### Return type
+
+#### `request`
+
+`(method: string, params: unknown[]) => Promise<unknown>`
+
+Sends a JSON-RPC call through the Wallet Services overlay. The user sees a confirmation screen before the operation is executed. Returns the JSON-RPC result value on success.
+
+Common `method` values:
+
+| Method                 | Description                              |
+| ---------------------- | ---------------------------------------- |
+| `personal_sign`        | Sign a personal message (EIP-191).       |
+| `eth_signTypedData_v4` | Sign typed structured data (EIP-712).    |
+| `eth_sendTransaction`  | Send a transaction.                      |
+| `eth_signTransaction`  | Sign a transaction without broadcasting. |
+
+#### `loading`
+
+`boolean`
+
+`true` while the request is pending user confirmation or execution.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error from the most recent `request` call, or `null` if successful.

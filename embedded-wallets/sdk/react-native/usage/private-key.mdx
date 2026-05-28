@@ -1,23 +1,93 @@
 ---
-title: Get Secp256k1 private key
-sidebar_label: Get private key
-description: 'Web3Auth React Native SDK - privKey | Embedded Wallets'
+title: Blockchain provider and private key
+sidebar_label: Blockchain provider
+description: 'Web3Auth React Native SDK v9 - provider and key access | Embedded Wallets'
 ---
 
-Using the `privKey()` method in the web3auth instance you can get the `secp256k1` private key.
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
 
-## Method
+In v9, the preferred way to perform EVM blockchain operations is through the `provider` returned by `useWeb3Auth()`. This is an EIP-1193 compatible provider that you pass directly to ethers or viem — no `EthereumPrivateKeyProvider` or `getPrivKey()` is needed.
 
-`get privKey(): string;`
-
-## Usage
+## Using the provider with ethers
 
 ```tsx
-const privateKey = web3auth.privKey()
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import { ethers } from 'ethers'
+
+function EvmActions() {
+  const { provider } = useWeb3Auth()
+
+  const getAddress = async () => {
+    const ep = new ethers.BrowserProvider(provider!)
+    const signer = await ep.getSigner()
+    return signer.getAddress()
+  }
+
+  const getBalance = async () => {
+    const ep = new ethers.BrowserProvider(provider!)
+    const signer = await ep.getSigner()
+    const balance = await ep.getBalance(await signer.getAddress())
+    return ethers.formatEther(balance)
+  }
+
+  const signMessage = async (message: string) => {
+    const ep = new ethers.BrowserProvider(provider!)
+    return (await ep.getSigner()).signMessage(message)
+  }
+
+  const sendTransaction = async (to: string, valueEth: string) => {
+    const ep = new ethers.BrowserProvider(provider!)
+    const signer = await ep.getSigner()
+    const tx = await signer.sendTransaction({
+      to,
+      value: ethers.parseEther(valueEth),
+    })
+    return tx.hash
+  }
+}
 ```
 
-## Response
+## Using the provider with viem
 
-```string
-"0ajjsdsd...."
+```tsx
+import { useWeb3Auth } from '@web3auth/react-native-sdk'
+import { createWalletClient, custom } from 'viem'
+import { sepolia } from 'viem/chains'
+
+function ViemActions() {
+  const { provider } = useWeb3Auth()
+
+  const getAddress = async () => {
+    const client = createWalletClient({
+      chain: sepolia,
+      transport: custom(provider!),
+    })
+    const [address] = await client.getAddresses()
+    return address
+  }
+}
 ```
+
+## Raw private key export
+
+:::caution
+
+Exporting raw private keys is strongly discouraged. Use the `provider` for signing instead. Raw key export must be explicitly enabled in the [Embedded Wallets dashboard](https://developer.metamask.io/) under **Key Export** settings.
+
+:::
+
+If key export is enabled in your project, you can request the private key using `personal_sign` through the provider:
+
+```tsx
+const { provider } = useWeb3Auth()
+
+// Request private key via provider — requires key export to be enabled in the dashboard
+const privateKey = await provider?.request({
+  method: 'eth_private_key',
+})
+```
+
+## Related
+
+- [useWeb3Auth hook reference](../hooks/useWeb3Auth.mdx)

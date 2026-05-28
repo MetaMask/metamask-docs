@@ -1,0 +1,64 @@
+import TabItem from '@theme/TabItem'
+import Tabs from '@theme/Tabs'
+
+<Tabs
+  defaultValue="table"
+  values={[
+    { label: 'Parameters', value: 'table' },
+    { label: 'Interface', value: 'interface' },
+  ]}
+>
+
+<TabItem value="table">
+
+| Parameter                   | Required | Description                                                                                                                                                                                                               |
+| --------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clientId`                  | Yes      | Your project's Client ID from the [Embedded Wallets dashboard](https://developer.metamask.io).                                                                                                                            |
+| `network`                   | Yes      | Sapphire network to use. Use `WEB3AUTH_NETWORK.SAPPHIRE_DEVNET` for development (allows `localhost`) and `WEB3AUTH_NETWORK.SAPPHIRE_MAINNET` for production.                                                              |
+| `redirectUrl`               | Yes      | Deep link URL that Web3Auth redirects to after authentication. Must be allowlisted in the dashboard under **Allowed Origins**.                                                                                            |
+| `chains?`                   | No       | Array of `CustomChainConfig` objects defining the EVM or Solana chains your app supports. Replaces the v8 `privateKeyProvider` pattern. The SDK creates the appropriate provider automatically based on `chainNamespace`. |
+| `defaultChainId?`           | No       | Hex chain ID string for the default active chain (for example, `"0xaa36a7"`). Defaults to the first entry in `chains`.                                                                                                    |
+| `accountAbstractionConfig?` | No       | Smart account configuration (`AccountAbstractionMultiChainConfig`). Set `smartAccountType` to `"safe"` or another supported provider to enable account abstraction. Set to `null` to disable.                             |
+| `walletServicesConfig?`     | No       | Configuration for the Wallet Services in-app browser overlay. Controls `confirmationStrategy` and other embed parameters.                                                                                                 |
+| `whiteLabel?`               | No       | Custom branding and UI options (`WhiteLabelData`). Applies to the authentication screens launched in the in-app browser.                                                                                                  |
+| `mfaLevel?`                 | No       | Default MFA prompt behavior. Accepts `MFA_LEVELS.DEFAULT`, `MFA_LEVELS.OPTIONAL`, `MFA_LEVELS.MANDATORY`, or `MFA_LEVELS.NONE`.                                                                                           |
+| `sessionTime?`              | No       | Session duration in seconds. Minimum is `1`; maximum is `86400 * 30` (30 days). Defaults to `86400` (1 day).                                                                                                              |
+| `enableLogging?`            | No       | Set to `true` to print SDK debug logs to the console. Defaults to `false`.                                                                                                                                                |
+| `walletSdkURL?`             | No       | Optional URL override for the Wallet Services embed. Leave unset to use the default production URL.                                                                                                                       |
+
+</TabItem>
+
+<TabItem value="interface">
+
+```typescript
+export interface SdkInitParams {
+  /** Your project Client ID from the Embedded Wallets dashboard */
+  clientId: string
+  /** Sapphire network — SAPPHIRE_DEVNET or SAPPHIRE_MAINNET */
+  network: WEB3AUTH_NETWORK_TYPE
+  /** Deep link URL registered in the dashboard under Allowed Origins */
+  redirectUrl: string
+  /** EVM / Solana chain configurations — replaces privateKeyProvider */
+  chains?: CustomChainConfig[]
+  /** Default active chain ID (hex string) */
+  defaultChainId?: string
+  /** Smart account configuration; set to null to disable */
+  accountAbstractionConfig?: AccountAbstractionMultiChainConfig | null
+  /** Wallet Services overlay configuration */
+  walletServicesConfig?: WalletServicesConfig
+  /** Whitelabel and branding options */
+  whiteLabel?: WhiteLabelData
+  /** Default MFA level */
+  mfaLevel?: MfaLevelType
+  /** Session duration in seconds (default: 86400) */
+  sessionTime?: number
+  /** Enable SDK debug logging */
+  enableLogging?: boolean
+  /** Override URL for the Wallet Services embed */
+  walletSdkURL?: string
+}
+```
+
+</TabItem>
+
+</Tabs>

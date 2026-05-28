@@ -1,40 +1,18 @@
 ---
 title: Smart accounts
 sidebar_label: Smart accounts
-description: '@web3auth/react-native-sdk Native Smart accounts | Embedded Wallets'
+description: 'Web3Auth React Native SDK v9 - Smart accounts (Account Abstraction) | Embedded Wallets'
 ---
 
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 import AccountAbstractionDescription from '../_account-abstraction-description.mdx'
-import AccountAbstractionProviderInstallation from '../_aa-provider-installation.mdx'
-import AAProviderConfiguration from '../_aa-provider-configuration.mdx'
-import ConfigureSmartAccountProvider from '../_smart-account-provider-configuration.mdx'
-import ConfigureBundler from '../_bundler-configuration.mdx'
-import ConfigureSponsoredPaymaster from '../_sponsored-paymaster-configuration.mdx'
-import ConfigureERC20Paymaster from '../_erc20-paymaster-configuration.mdx'
 import ConfigureSigners from '../../_common/_configure-aa-signers.mdx'
 import SmartAccountAddress from '../../_common/_aa-address.mdx'
 import SmartAccountSendTransaction from '../../_common/_aa-send-transaction.mdx'
-
 import GrowthPlanNote from '../../_common/_growth_plan_note.mdx'
 
-Effortlessly create and manage smart accounts for your users with just a few lines of code, using our Smart Account feature. Smart accounts offer enhanced control and programmability, enabling powerful features that traditional wallets can't provide.
-
-**Key features of smart accounts include:**
-
-- **Gas abstraction:** Cover transaction fees for users, or allow users to pay for their own transactions using ERC-20 tokens.
-- **Batch transactions:** Perform multiple transactions in a single call.
-- **Automated transactions:** Allow users to automate actions, like swapping ETH to USDT when ETH hits a specific price.
-- **Custom spending limits:** Allow users to set tailored spending limits.
-
-:::tip
-
-For more about ERC-4337 and its components, [check out our detailed blog post](https://blog.web3auth.io/an-ultimate-guide-to-web3-wallets-externally-owned-account-and-smart-contract-wallet/#introduction-to-eip-4337).
-
-:::
-
-Our smart account integration streamlines your setup, allowing you to create and manage smart accounts using your favorite libraries like Viem, Ethers, and Wagmi. You don't need to rely on third-party packages to effortlessly create ERC-4337 compatible Smart Contract Wallets (SCWs), giving users the ability to perform batch transactions and efficiently manage gas sponsorship.
+<AccountAbstractionDescription />
 
 <GrowthPlanNote />
 
@@ -42,176 +20,126 @@ Our smart account integration streamlines your setup, allowing you to create and
 
 :::info prerequisite
 
-To enable this feature, you need to configure smart accounts from your project in the [Embedded Wallets dashboard](https://developer.metamask.io/).
+Enable smart accounts in the [Embedded Wallets dashboard](https://developer.metamask.io/) under your project's smart accounts settings before configuring the SDK.
 
 :::
 
-### Dashboard configuration
+## SDK configuration
 
-To enable smart accounts, navigate to the smart accounts section in the MetaMask Developer Dashboard, and enable the "Set up Smart accounts" toggle. Web3Auth currently supports [MetaMaskSmartAccount](https://docs.gator.metamask.io/how-to/create-delegator-account#create-a-metamasksmartaccount) as a Smart Account provider.
-
-<img
-  className="docImg"
-  src="/img/embedded-wallets/dev-dashboard/smart-account/enable-smart-account.png"
-  alt="Enable Smart accounts"
-/>
-
-## Installation
-
-<AccountAbstractionProviderInstallation />
-
-## Configure
-
-<AAProviderConfiguration />
-
-Please note this is the important step for setting the Web3Auth account abstraction provider.
-
-- [Configure Smart Account provider](#configure-smart-account-provider)
-- [Configure Bundler](#configure-bundler)
-- [Configure Sponsored Paymaster](#sponsored-paymaster)
-- [Configure ERC-20 Paymaster](#erc-20-paymaster)
-
-## Configure smart account provider
-
-<ConfigureSmartAccountProvider />
-
-## Configure bundler
-
-<ConfigureBundler />
-
-## Configure paymaster
-
-You can configure the paymaster of your choice to sponsor gas fees for your users, along with the paymaster context. The paymaster context lets you set additional parameters, such as choosing the token for ERC-20 paymasters, defining gas policies, and more.
-
-### Sponsored paymaster
-
-<ConfigureSponsoredPaymaster />
-
-### ERC-20 paymaster
-
-<ConfigureERC20Paymaster />
-
-## Set up
-
-### Configure Web3Auth instance
+In v9, account abstraction is enabled by adding `accountAbstractionConfig` to `web3AuthOptions` in your `web3authConfig.ts` file. No separate `AccountAbstractionProvider` or `privateKeyProvider` construction is needed.
 
 <Tabs
+  defaultValue="bare"
   values={[
-    { label: "React Native Bare App", value: "rn-bare" },
-    { label: "React Native Expo App", value: "rn-expo" },
+    { label: 'Bare React Native', value: 'bare' },
+    { label: 'Expo', value: 'expo' },
   ]}
 >
-<TabItem value="rn-bare" default>
 
-```ts
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
-// focus-start
+<TabItem value="bare">
+
+```typescript title="web3authConfig.ts"
 import {
-  AccountAbstractionProvider,
-  SafeSmartAccount,
-} from '@web3auth/account-abstraction-provider'
-//focus-end
-import Web3Auth, { WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
-import * as WebBrowser from '@toruslabs/react-native-web-browser'
-import EncryptedStorage from 'react-native-encrypted-storage'
-import { CHAIN_NAMESPACES } from '@web3auth/base'
+  CHAIN_NAMESPACES,
+  WEB3AUTH_NETWORK,
+  type AccountAbstractionConfig,
+  type Web3AuthContextConfig,
+} from '@web3auth/react-native-sdk'
 
-const chainConfig = {
-  chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: '0xaa36a7',
-  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
-  displayName: 'Ethereum Sepolia Testnet',
-  blockExplorerUrl: 'https://sepolia.etherscan.io',
-  ticker: 'ETH',
-  tickerName: 'Ethereum',
-  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+const aaConfig: AccountAbstractionConfig = {
+  smartAccountType: 'safe',
 }
 
-// focus-start
-const accountAbstractionProvider = new AccountAbstractionProvider({
-  config: {
-    chainConfig,
-    bundlerConfig: {
-      // Get the pimlico API Key from dashboard.pimlico.io
-      url: `https://api.pimlico.io/v2/11155111/rpc?apikey=${pimlicoAPIKey}`,
-    },
-    smartAccountInit: new SafeSmartAccount(),
+const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID',
+    redirectUrl: 'yourapp://auth',
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    chains: [
+      {
+        chainNamespace: CHAIN_NAMESPACES.EIP155,
+        chainId: '0xaa36a7',
+        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+        displayName: 'Ethereum Sepolia Testnet',
+        blockExplorerUrl: 'https://sepolia.etherscan.io',
+        ticker: 'ETH',
+        tickerName: 'Ethereum',
+      },
+    ],
+    defaultChainId: '0xaa36a7',
+    // highlight-next-line
+    accountAbstractionConfig: aaConfig,
   },
-})
-// focus-end
+}
 
-const privateKeyProvider = new EthereumPrivateKeyProvider({
-  config: { chainConfig },
-})
-
-const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
-  clientId,
-  redirectUrl,
-  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
-  privateKeyProvider,
-  // focus-next-line
-  accountAbstractionProvider: aaProvider,
-})
+export default web3AuthConfig
 ```
 
 </TabItem>
-<TabItem value="rn-expo">
 
-```ts
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider'
-// focus-start
+<TabItem value="expo">
+
+The configuration is identical for Expo. Only the `Web3AuthProvider` props change (use `expo-web-browser` and `expo-secure-store` instead of the bare equivalents):
+
+```typescript title="web3authConfig.ts"
 import {
-  AccountAbstractionProvider,
-  SafeSmartAccount,
-} from '@web3auth/account-abstraction-provider'
-//focus-end
-import Web3Auth, { WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
-import * as WebBrowser from 'expo-web-browser'
-import * as SecureStore from 'expo-secure-store'
-import { CHAIN_NAMESPACES } from '@web3auth/base'
+  CHAIN_NAMESPACES,
+  WEB3AUTH_NETWORK,
+  type AccountAbstractionConfig,
+  type Web3AuthContextConfig,
+} from '@web3auth/react-native-sdk'
 
-const chainConfig = {
-  chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: '0xaa36a7',
-  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
-  displayName: 'Ethereum Sepolia Testnet',
-  blockExplorerUrl: 'https://sepolia.etherscan.io',
-  ticker: 'ETH',
-  tickerName: 'Ethereum',
-  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
+const aaConfig: AccountAbstractionConfig = {
+  smartAccountType: 'safe',
 }
 
-// focus-start
-const accountAbstractionProvider = new AccountAbstractionProvider({
-  config: {
-    chainConfig,
-    bundlerConfig: {
-      // Get the pimlico API Key from dashboard.pimlico.io
-      url: `https://api.pimlico.io/v2/11155111/rpc?apikey=${pimlicoAPIKey}`,
-    },
-    smartAccountInit: new SafeSmartAccount(),
+const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID',
+    redirectUrl: 'yourapp://auth',
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    chains: [
+      {
+        chainNamespace: CHAIN_NAMESPACES.EIP155,
+        chainId: '0xaa36a7',
+        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+        displayName: 'Ethereum Sepolia Testnet',
+        blockExplorerUrl: 'https://sepolia.etherscan.io',
+        ticker: 'ETH',
+        tickerName: 'Ethereum',
+      },
+    ],
+    defaultChainId: '0xaa36a7',
+    // highlight-next-line
+    accountAbstractionConfig: aaConfig,
   },
-})
-// focus-end
+}
 
-const privateKeyProvider = new EthereumPrivateKeyProvider({
-  config: { chainConfig },
-})
-
-const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId,
-  redirectUrl,
-  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or other networks
-  privateKeyProvider,
-  // focus-next-line
-  accountAbstractionProvider: aaProvider,
-})
+export default web3AuthConfig
 ```
 
 </TabItem>
+
 </Tabs>
 
-### Configure signer
+:::tip Dynamic AA toggle
+
+To let users toggle account abstraction on or off at runtime, maintain the config as state and pass a new `key` to `Web3AuthProvider` when it changes. This forces the provider to remount with the updated configuration:
+
+```tsx
+const [useAA, setUseAA] = useState(false)
+const config = useMemo(() => getWeb3AuthConfig(useAA), [useAA])
+
+return (
+  <Web3AuthProvider key={useAA ? 'aa' : 'eoa'} ... config={config}>
+    ...
+  </Web3AuthProvider>
+)
+```
+
+:::
+
+## Configure signers
 
 <ConfigureSigners />
 
@@ -222,7 +150,3 @@ const web3auth = new Web3Auth(WebBrowser, SecureStore, {
 ## Send transaction
 
 <SmartAccountSendTransaction />
-
-## Advanced smart account operations
-
-To learn more about supported transaction methods, and how to perform batch transactions, [checkout our detailed documentation of AccountAbstractionProvider](/embedded-wallets/sdk/react).

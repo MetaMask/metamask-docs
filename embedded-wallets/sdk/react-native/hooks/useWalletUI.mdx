@@ -1,0 +1,60 @@
+---
+title: useWalletUI
+sidebar_label: useWalletUI
+description: '@web3auth/react-native-sdk useWalletUI hook | Embedded Wallets'
+---
+
+Hook to open the Wallet Services in-app browser overlay. This provides users with a pre-built wallet interface for viewing balances, sending tokens, and managing their wallet — without leaving your app.
+
+### Import
+
+```tsx
+import { useWalletUI } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+```tsx
+import { useWalletUI } from '@web3auth/react-native-sdk'
+
+function WalletButton() {
+  const { showWalletUI, loading, error } = useWalletUI()
+
+  return (
+    <View>
+      <Button
+        title={loading ? 'Opening wallet…' : 'Open Wallet'}
+        disabled={loading}
+        onPress={() => showWalletUI()}
+      />
+      {error && <Text>{error.message}</Text>}
+    </View>
+  )
+}
+```
+
+### Return type
+
+#### `showWalletUI`
+
+`() => Promise<void>`
+
+Opens the Wallet Services overlay in an in-app browser. The user can view their balance, send/receive tokens, swap, and interact with dapps — all within the overlay. Replaces the v8 `web3auth.launchWalletServices(chainConfig)` method.
+
+#### `loading`
+
+`boolean`
+
+`true` while the overlay is loading.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error from the most recent `showWalletUI` call, or `null` if successful.
+
+:::info
+
+`walletServicesConfig` can be added to `web3AuthOptions` to customise the overlay behaviour. See the [advanced configuration](../advanced/README.mdx) for details.
+
+:::

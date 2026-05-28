@@ -1,116 +1,90 @@
 ---
-title: Request signature
-sidebar_label: Send requests
-description: 'Web3Auth React Native SDK - request | Embedded Wallets'
+title: Signature request
+sidebar_label: Signature request
+description: 'Web3Auth React Native SDK v9 - Signing with useSignatureRequest | Embedded Wallets'
 ---
 
-The `request` method facilitates the use of templated transaction screens for signing transactions. This function returns a promise of the signature that can be used to broadcast the transaction.
+Use the `useSignatureRequest` hook to send JSON-RPC signing requests through the Wallet Services overlay. Unlike signing directly through the provider, this presents a human-readable confirmation screen to the user before the operation is executed.
 
-Please check the list of [JSON RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api/), noting that the request method currently supports only the signing methods.
-
-## Method
-
-`request(chainConfig: ChainConfig, method: string, params: unknown[], path?: string): Promise<string>;`
-
-## Parameters
-
-| Arguments       | Description                                                                                                                                                                                            |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `chainConfig`   | Defines the chain to be used for signature.                                                                                                                                                            |
-| `method`        | JSON RPC method name in `string`. Currently, the request method only supports the singing methods.                                                                                                     |
-| `requestParams` | Parameters for the corresponding method. The parameters should be in the list and correct sequence. Take a look at [RPC methods](https://docs.metamask.io/wallet/reference/json-rpc-api) to know more. |
-
-## Examples
-
-### Personal sign
+## Import
 
 ```tsx
-const params = [
-  {
-    challenge: 'Hello World',
-    address,
-  },
-  null,
-]
-const res = await web3auth.request(chainConfig, 'personal_sign', params)
+import { useSignatureRequest } from '@web3auth/react-native-sdk'
 ```
 
-### Personal sign shorthand
+## Usage
 
 ```tsx
-const params = ['Hello World', address]
-const res = await web3auth.request(chainConfig, 'personal_sign', params)
-```
+import { useWeb3Auth, useSignatureRequest } from '@web3auth/react-native-sdk'
+import { ethers } from 'ethers'
 
-### Sign type 4
+function SigningView() {
+  const { provider } = useWeb3Auth()
+  const { request, loading, error } = useSignatureRequest()
 
-```tsx
-const params = [
-  address,
-  {
-    types: {
-      EIP712Domain: [
-        {
-          name: 'name',
-          type: 'string',
-        },
-        {
-          name: 'version',
-          type: 'string',
-        },
-        {
-          name: 'chainId',
-          type: 'uint256',
-        },
-        {
-          name: 'verifyingContract',
-          type: 'address',
-        },
-      ],
-      Person: [
-        {
-          name: 'name',
-          type: 'string',
-        },
-        {
-          name: 'wallet',
-          type: 'address',
-        },
-      ],
-      Mail: [
-        {
-          name: 'from',
-          type: 'Person',
-        },
-        {
-          name: 'to',
-          type: 'Person',
-        },
-        {
-          name: 'contents',
-          type: 'string',
-        },
-      ],
-    },
-    primaryType: 'Mail',
-    domain: {
-      name: 'Ether Mail',
-      version: '1',
-      chainId: 4,
-      verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC',
-    },
-    message: {
-      from: {
-        name: 'Cow',
-        wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826',
+  const getAddress = async () => {
+    const ep = new ethers.BrowserProvider(provider!)
+    return (await ep.getSigner()).getAddress()
+  }
+
+  const signPersonalMessage = async () => {
+    const address = await getAddress()
+    const message = 'Hello from Web3Auth!'
+    const signature = await request('personal_sign', [
+      ethers.hexlify(ethers.toUtf8Bytes(message)),
+      address,
+    ])
+    console.log('Signature:', signature)
+  }
+
+  const signTypedData = async () => {
+    const address = await getAddress()
+    const typedData = {
+      types: {
+        Message: [{ name: 'content', type: 'string' }],
       },
-      to: {
-        name: 'Bob',
-        wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
+      primaryType: 'Message',
+      domain: { name: 'MyApp', version: '1' },
+      message: { content: 'Hello!' },
+    }
+    const signature = await request('eth_signTypedData_v4', [address, JSON.stringify(typedData)])
+    console.log('Typed data signature:', signature)
+  }
+
+  const sendTransaction = async () => {
+    const address = await getAddress()
+    const txHash = await request('eth_sendTransaction', [
+      {
+        from: address,
+        to: '0x0000000000000000000000000000000000000001',
+        value: ethers.toBeHex(ethers.parseEther('0.001')),
+        gasLimit: ethers.toBeHex(21000),
       },
-      contents: 'Hello, Bob!',
-    },
-  },
-]
-const res = await web3auth.request(chainConfig, 'eth_signTypedData_v4', params)
+    ])
+    console.log('Transaction hash:', txHash)
+  }
+
+  return (
+    <View>
+      <Button title="Sign message" disabled={loading} onPress={signPersonalMessage} />
+      <Button title="Sign typed data" disabled={loading} onPress={signTypedData} />
+      <Button title="Send ETH" disabled={loading} onPress={sendTransaction} />
+      {error && <Text style={{ color: 'red' }}>{error.message}</Text>}
+    </View>
+  )
+}
 ```
+
+## Supported methods
+
+| Method                 | Description                                 |
+| ---------------------- | ------------------------------------------- |
+| `personal_sign`        | Sign a personal message (EIP-191).          |
+| `eth_signTypedData_v4` | Sign structured typed data (EIP-712).       |
+| `eth_sendTransaction`  | Send an Ethereum transaction.               |
+| `eth_signTransaction`  | Sign a transaction without broadcasting it. |
+
+## Related
+
+- [useSignatureRequest hook reference](../hooks/useSignatureRequest.mdx)
+- [Show Wallet UI](./launch-wallet-services.mdx)

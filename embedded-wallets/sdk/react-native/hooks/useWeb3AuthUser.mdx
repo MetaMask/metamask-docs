@@ -1,0 +1,57 @@
+---
+title: useWeb3AuthUser
+sidebar_label: useWeb3AuthUser
+description: '@web3auth/react-native-sdk useWeb3AuthUser hook | Embedded Wallets'
+---
+
+Hook to access the authenticated user's profile information. The returned `userInfo` object is reactive — it updates automatically when the session changes.
+
+### Import
+
+```tsx
+import { useWeb3AuthUser } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+```tsx
+import { useWeb3AuthUser } from '@web3auth/react-native-sdk'
+
+function UserProfile() {
+  const { userInfo } = useWeb3AuthUser()
+
+  if (!userInfo) return null
+
+  return (
+    <View>
+      <Text>Name: {userInfo.name}</Text>
+      <Text>Email: {userInfo.email}</Text>
+      {userInfo.profileImage && (
+        <Image source={{ uri: userInfo.profileImage }} style={{ width: 48, height: 48 }} />
+      )}
+    </View>
+  )
+}
+```
+
+### Return type
+
+#### `userInfo`
+
+`UserInfo | null`
+
+The authenticated user's profile object. `null` when no user is connected.
+
+| Field               | Type      | Description                                                         |
+| ------------------- | --------- | ------------------------------------------------------------------- |
+| `email`             | `string`  | User's email address, if provided by the authentication provider.   |
+| `name`              | `string`  | User's display name.                                                |
+| `profileImage`      | `string`  | URL of the user's profile picture.                                  |
+| `aggregateVerifier` | `string`  | Aggregate verifier identifier (grouped connection flows).           |
+| `verifier`          | `string`  | Verifier identifier used for this authentication.                   |
+| `verifierId`        | `string`  | The claim value used as the user's identifier within the verifier.  |
+| `typeOfLogin`       | `string`  | Authentication method that was used (for example, `google`, `jwt`). |
+| `dappShare`         | `string`  | Device share for MFA-enabled wallets.                               |
+| `oAuthIdToken`      | `string`  | Raw OAuth `id_token` from the authentication provider.              |
+| `oAuthAccessToken`  | `string`  | Raw OAuth `access_token` from the authentication provider.          |
+| `isMfaEnabled`      | `boolean` | Whether MFA is currently enabled for this user.                     |

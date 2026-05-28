@@ -859,6 +859,22 @@ const sidebar = {
     },
     {
       type: 'category',
+      label: 'Web3Auth hooks',
+      items: [
+        'sdk/react-native/hooks/README',
+        'sdk/react-native/hooks/useWeb3Auth',
+        'sdk/react-native/hooks/useWeb3AuthConnect',
+        'sdk/react-native/hooks/useWeb3AuthDisconnect',
+        'sdk/react-native/hooks/useWeb3AuthUser',
+        'sdk/react-native/hooks/useIdentityToken',
+        'sdk/react-native/hooks/useEnableMFA',
+        'sdk/react-native/hooks/useManageMFA',
+        'sdk/react-native/hooks/useWalletUI',
+        'sdk/react-native/hooks/useSignatureRequest',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Usage',
       items: [
         'sdk/react-native/usage/README',

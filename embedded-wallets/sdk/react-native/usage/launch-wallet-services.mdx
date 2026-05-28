@@ -1,43 +1,39 @@
 ---
-title: Launch Wallet Services
-sidebar_label: Show wallet UI
-description: 'Web3Auth React Native SDK - launchWalletServices | Embedded Wallets'
+title: Show Wallet UI
+sidebar_label: Wallet UI
+description: 'Web3Auth React Native SDK v9 - Wallet Services UI with useWalletUI | Embedded Wallets'
 ---
 
-import ChainConfig from '../../_common/_chain-config.mdx'
+Use the `useWalletUI` hook to open the Wallet Services in-app browser overlay, which provides a pre-built wallet interface for viewing balances, sending tokens, and managing the wallet.
 
-The `launchWalletServices` method launches a Secure Web Browser which allows you to use the templated wallet UI services. The method takes `ChainConfig` as the required input. Wallet Services is currently only available for EVM chains.
+## Import
 
-## Method
-
-`launchWalletServices(chainConfig: ChainConfig, path?: string | null): Promise<void>;`
-
-## Parameters
-
-<ChainConfig />
-
-:::note
-
-Access to Wallet Services is gated. You can use this feature in `sapphire_devnet` at no cost. The minimum [pricing plan](https://web3auth.io/pricing.html) to use this feature in a production environment is the **Scale Plan**.
-
-:::
+```tsx
+import { useWalletUI } from '@web3auth/react-native-sdk'
+```
 
 ## Usage
 
-```typescript
-const chainConfig = {
-  chainNamespace: ChainNamespace.EIP155,
-  chainId: '0xaa36a7',
-  rpcTarget: 'https://ethereum-sepolia.publicnode.com',
-  // Avoid using public rpcTarget in production.
-  // Use services like Infura
-  displayName: 'Ethereum Sepolia Testnet',
-  blockExplorerUrl: 'https://sepolia.etherscan.io',
-  ticker: 'ETH',
-  tickerName: 'Ethereum',
-  decimals: 18,
-  logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.png',
-}
+```tsx
+import { useWalletUI } from '@web3auth/react-native-sdk'
 
-await web3auth.launchWalletServices(chainConfig)
+function WalletButton() {
+  const { showWalletUI, loading, error } = useWalletUI()
+
+  return (
+    <View>
+      <Button
+        title={loading ? 'Opening wallet…' : 'Open Wallet'}
+        disabled={loading}
+        onPress={() => showWalletUI()}
+      />
+      {error && <Text style={{ color: 'red' }}>{error.message}</Text>}
+    </View>
+  )
+}
 ```
+
+## Related
+
+- [useWalletUI hook reference](../hooks/useWalletUI.mdx)
+- [Signature request](./request.mdx)

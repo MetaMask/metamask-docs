@@ -1,144 +1,80 @@
 ---
 title: Advanced configuration
 sidebar_label: Overview
-description: 'Web3Auth React Native SDK - Advanced Configuration | Embedded Wallets'
+description: 'Web3Auth React Native SDK v9 - Advanced Configuration | Embedded Wallets'
 ---
 
+import RnWeb3AuthOptions from '../../_common/_rn-web3auth-options.mdx'
+import RnCustomChainConfig from '../../_common/_rn-custom-chain-config.mdx'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
-The Embedded Wallets SDK provides extensive configuration options that allow you to customize authentication flows, UI appearance, blockchain integrations, and security features to meet your React Native application's specific requirements.
+All advanced SDK settings are configured in a `web3authConfig.ts` file and passed to `Web3AuthProvider` via the `config` prop. There is no constructor to call — the provider initialises the SDK automatically using the options you supply.
 
-## Configuration structure
+## Configuration file
 
-When setting up Embedded Wallets, you'll pass in the options to the constructor. This consists of:
+```typescript title="web3authConfig.ts"
+import {
+  CHAIN_NAMESPACES,
+  WEB3AUTH_NETWORK,
+  MFA_LEVELS,
+  type Web3AuthContextConfig,
+} from '@web3auth/react-native-sdk'
 
-<Tabs
-  defaultValue="expo"
-  values={[
-    { label: "Expo-managed workflow", value: "expo" },
-    { label: "Bare React Native workflow", value: "bare" },
-  ]}
->
-
-<TabItem value="expo">
-
-```typescript
-import Web3Auth, { WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
-import * as WebBrowser from 'expo-web-browser'
-import * as SecureStore from 'expo-secure-store'
-
-const scheme = 'web3authrnexample'
-const resolvedRedirectUrl = `${scheme}://auth`
-
-// focus-start
-const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
-  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
-  redirectUrl: resolvedRedirectUrl,
-})
-// focus-end
-```
-
-</TabItem>
-
-<TabItem value="bare">
-
-```typescript
-import Web3Auth, { WEB3AUTH_NETWORK } from '@web3auth/react-native-sdk'
-import * as WebBrowser from '@toruslabs/react-native-web-browser'
-import EncryptedStorage from 'react-native-encrypted-storage'
-
-const scheme = 'web3authrnexample'
-const resolvedRedirectUrl = `${scheme}://auth`
-
-// focus-start
-const web3auth = new Web3Auth(WebBrowser, EncryptedStorage, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable // Get your Client ID from MetaMask Developer Dashboard
-  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET, // or WEB3AUTH_NETWORK.SAPPHIRE_DEVNET
-  redirectUrl: resolvedRedirectUrl,
-})
-// focus-end
-```
-
-</TabItem>
-</Tabs>
-
-### `Web3AuthOptions`
-
-The Web3Auth Constructor takes an object with `Web3AuthOptions` as input.
-
-<Tabs
-  defaultValue="table"
-  values={[
-    { label: "Table", value: "table" },
-    { label: "Interface", value: "interface" },
-  ]}
->
-
-<TabItem value="table">
-
-| Parameter      | Description                                                                                                                                  |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `clientId`     | Your Web3Auth Client ID from the [Dashboard](https://developer.metamask.io/). It's a mandatory field of type `string`.                       |
-| `network`      | Web3Auth Network: `SAPPHIRE_MAINNET`, `SAPPHIRE_DEVNET`, `MAINNET`, `CYAN`, `AQUA` or `TESTNET`. Mandatory field of type `WEB3AUTH_NETWORK`. |
-| `redirectUrl`  | URL that Web3Auth will redirect API responses upon successful authentication. It's a mandatory field of type `string`.                       |
-| `whiteLabel?`  | Whitelabel options for custom UI, branding, and translations. Takes `WhiteLabelData` as a value.                                             |
-| `loginConfig?` | Login config for custom verifiers. Takes `LoginConfig` as a value.                                                                           |
-| `mfaLevel?`    | Configure MFA level for authentication. Takes `MFA_LEVELS` as a value.                                                                       |
-| `sessionTime?` | Configure session management time in seconds. Default is 86400 seconds (1 day). Max 30 days.                                                 |
-
-</TabItem>
-
-<TabItem value="interface">
-
-```typescript
-export interface Web3AuthOptions {
-  clientId: string
-  network: WEB3AUTH_NETWORK
-  redirectUrl?: string
-  whiteLabel?: WhiteLabelData
-  loginConfig?: LoginConfig
-  mfaLevel?: MFA_LEVELS
-  sessionTime?: number
+const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID', // from developer.metamask.io
+    redirectUrl: 'yourapp://auth',
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    chains: [
+      {
+        chainNamespace: CHAIN_NAMESPACES.EIP155,
+        chainId: '0xaa36a7',
+        rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+        displayName: 'Ethereum Sepolia Testnet',
+        blockExplorerUrl: 'https://sepolia.etherscan.io',
+        ticker: 'ETH',
+        tickerName: 'Ethereum',
+      },
+    ],
+    defaultChainId: '0xaa36a7',
+    // Optional advanced settings:
+    mfaLevel: MFA_LEVELS.DEFAULT,
+    sessionTime: 86400 * 7, // 7 days
+    enableLogging: false,
+  },
 }
+
+export default web3AuthConfig
 ```
 
-</TabItem>
-</Tabs>
+## `web3AuthOptions` parameter reference
+
+<RnWeb3AuthOptions />
+
+## Chain configuration
+
+<RnCustomChainConfig />
 
 ## Session management
 
-Control how long users stay authenticated and how sessions persist in React Native.
+Control how long users stay authenticated by setting `sessionTime` in `web3AuthOptions`:
 
-**Key Configuration Options:**
-
-- `sessionTime` - Session duration in seconds. Controls how long users remain authenticated before needing to log in again.
-  - Minimum: 1 second (`1`).
-  - Maximum: 30 days (`86400 * 30`).
-  - Default: 1 day (`86400`).
+- Minimum: `1` second
+- Maximum: `86400 * 30` (30 days)
+- Default: `86400` (1 day)
 
 ```typescript
-const web3auth = new Web3Auth(WebBrowser, SecureStore, {
-  clientId: 'YOUR_WEB3AUTH_CLIENT_ID', // Pass your Web3Auth Client ID, ideally using an environment variable
-  network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
-  redirectUrl: resolvedRedirectUrl,
-  sessionTime: 86400 * 7, // 7 days (in seconds)
-})
+web3AuthOptions: {
+  // ...
+  sessionTime: 86400 * 7, // 7 days
+}
 ```
 
-## Custom authentication methods
+## Advanced topics
 
-Control the login options presented to your users. For detailed configuration options and implementation examples, see the [custom authentication](./custom-authentication.mdx) section.
-
-## UI customization
-
-Create a seamless brand experience by customizing the Web3Auth Login Screens to match your React Native application's design. For complete customization options, refer to the [whitelabeling and UI customization](./whitelabel.mdx) section.
-
-## Multi-Factor Authentication
-
-Add additional security layers to protect user accounts with two-factor authentication. For detailed configuration options and implementation examples, see the [Multi-Factor Authentication](./mfa.mdx) section.
-
-## Dapp share
-
-Share authentication sessions across different applications. For detailed configuration options and implementation examples, see the [dapp share](./dapp-share.mdx) section.
+- [Custom authentication](./custom-authentication.mdx) — configure social login connections and custom JWT flows
+- [Smart accounts](./smart-accounts.mdx) — enable ERC-4337 account abstraction
+- [Whitelabeling](./whitelabel.mdx) — customize authentication UI branding
+- [Multi-Factor Authentication](./mfa.mdx) — control MFA prompts and factor configuration
+- [Dapp share](./dapp-share.mdx) — pass a custom device share for MFA-enabled wallets

@@ -1,0 +1,65 @@
+---
+title: useManageMFA
+sidebar_label: useManageMFA
+description: '@web3auth/react-native-sdk useManageMFA hook | Embedded Wallets'
+---
+
+Hook to manage Multi-Factor Authentication settings for the current user's embedded wallet.
+
+:::info
+
+This hook only works for social login embedded wallets. It is not available for external wallet connections.
+
+:::
+
+### Import
+
+```tsx
+import { useManageMFA } from '@web3auth/react-native-sdk'
+```
+
+### Usage
+
+```tsx
+import { useManageMFA } from '@web3auth/react-native-sdk'
+
+function ManageMFAButton() {
+  const { manageMFA, loading, error } = useManageMFA()
+
+  return (
+    <View>
+      <Button
+        title={loading ? 'Opening MFA settings…' : 'Manage MFA'}
+        disabled={loading}
+        onPress={() => manageMFA()}
+      />
+      {error && <Text>{error.message}</Text>}
+    </View>
+  )
+}
+```
+
+### Return type
+
+#### `manageMFA`
+
+`() => Promise<void>`
+
+Opens the MFA management screen in the Wallet Services overlay. The user can view, update, or remove existing second factors.
+
+#### `loading`
+
+`boolean`
+
+`true` while the MFA management interface is loading.
+
+#### `error`
+
+`Web3AuthError | null`
+
+Error from the most recent `manageMFA` call, or `null` if successful.
+
+### Related
+
+- [MFA advanced guide](../advanced/mfa.mdx)
+- [`useEnableMFA`](./useEnableMFA.mdx)

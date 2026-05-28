@@ -1,122 +1,128 @@
 ---
-title: Multi-factor authentication in PnP React Native SDK
+title: Multi-factor authentication in React Native SDK
 sidebar_label: Multi-factor authentication
-description: 'Web3Auth PnP React Native SDK - Multi Factor Authentication | Embedded Wallets'
+description: 'Web3Auth React Native SDK v9 - Multi-Factor Authentication | Embedded Wallets'
 ---
 
 import MFAMinimumPlan from '../../_common/_scale_plan_note.mdx'
 
-The Multi-Factor Authentication feature refers to the ability of the user to create a backup share (recovery phrase). This helps them log into a new device and also to recover their account if they lose their original device.
+The Multi-Factor Authentication feature lets users create a backup share (recovery phrase), which they use to log in from a new device or recover their account if they lose their device.
 
 <MFAMinimumPlan />
 
-You can set the `mfaLevel` within the `web3auth.login()` to customize when the mfa screen should be shown to the user. It currently accepts 4 values:
+## Default MFA level
 
-- **`default`** - Setting the mfaLevel to default will present the MFA screen to the user on every third login. `mfaLevel = MFALevel.DEFAULT`
-- **`optional`** - Setting mfaLevel to optional will present the MFA screen to the user on every login but the user will have the option to skip it. `mfaLevel = MFALevel.OPTIONAL`
-- **`mandatory`** - Setting mfaLevel to mandatory will make it mandatory for the user to set up MFA after login. `mfaLevel = MFALevel.MANDATORY`
-- **`none`** - Setting mfaLevel to none will skip the mfa setup screen totally. `mfaLevel = MFALevel.NONE`
+Set `mfaLevel` in `web3AuthOptions` to control when the MFA setup prompt is shown globally:
 
-:::caution Note
+```typescript title="web3authConfig.ts"
+import { WEB3AUTH_NETWORK, MFA_LEVELS, type Web3AuthContextConfig } from '@web3auth/react-native-sdk'
 
-If you are using default verifiers, your users may have set up MFA on other dapps that also use default Web3Auth verifiers. In this case, the MFA screen will continue to appear if the user has enabled MFA on other dapps. This is because MFA cannot be turned off once it is enabled.
-
-:::
-
-```tsx
-export const MFA_LEVELS = {
-  DEFAULT: 'default',
-  OPTIONAL: 'optional',
-  MANDATORY: 'mandatory',
-  NONE: 'none',
-}
-```
-
-## Using the `mfaSettings` to configure the Multi-Factor Authentication Order
-
-:::note
-
-This is a paid feature and the minimum [pricing plan](https://web3auth.io/pricing.html) to use this SDK in a production environment is the **SCALE Plan**. You can use this feature in `sapphire_devnet` for free.
-
-:::
-
-You can configure the order of MFA or enable/disable MFA type by passing the `mfaSettings` object in `Web3AuthOptions`. We offer the following backup factors under `mfaSettings`:
-
-- `deviceShareFactor`,
-- `backUpShareFactor`,
-- `socialBackupFactor`,
-- `passwordFactor`,
-- `passkeysFactor`, and
-- `authenticatorFactor`.
-
-```tsx
-export declare const MFA_FACTOR: {
-  readonly DEVICE: 'deviceShareFactor'
-  readonly BACKUP_SHARE: 'backUpShareFactor'
-  readonly SOCIAL_BACKUP: 'socialBackupFactor'
-  readonly PASSWORD: 'passwordFactor'
-  readonly PASSKEYS: 'passkeysFactor'
-  readonly AUTHENTICATOR: 'authenticatorFactor'
-}
-export type MFA_FACTOR_TYPE = (typeof MFA_FACTOR)[keyof typeof MFA_FACTOR]
-export type MFA_SETTINGS = {
-  enable: boolean
-  priority?: number
-  mandatory?: boolean
-}
-export type MfaSettings = Partial<Record<MFA_FACTOR_TYPE, MFA_SETTINGS>>
-```
-
-## Example
-
-```tsx
-const state = await web3auth.login({
-  loginProvider: LoginProvider.GOOGLE,
-  redirectUrl: resolvedRedirectUrl,
-  // focus-next-line
-  mfaLevel: MFALevel.MANDATORY, // MFALevel.DEFAULT, MFALevel.OPTIONAL, MFALevel.MANDATORY, MFALevel.NONE
-  // SCALE and above plan only feature
-  mfaSettings: {
-    deviceShareFactor: {
-      enable: true,
-      priority: 1,
-      mandatory: true, // at least two factors are mandatory
-    },
-    backUpShareFactor: {
-      enable: true,
-      priority: 2,
-      mandatory: true, // at least two factors are mandatory
-    },
-    socialBackupFactor: {
-      enable: true,
-      priority: 3,
-      mandatory: true, // at least two factors are mandatory
-    },
-    passwordFactor: {
-      enable: true,
-      priority: 4,
-      mandatory: true, // at least two factors are mandatory
-    },
-    passkeysFactor: {
-      enable: true,
-      priority: 5,
-      mandatory: true, // at least two factors are mandatory
-    },
-    authenticatorFactor: {
-      enable: true,
-      priority: 6,
-      mandatory: true, // at least two factors are mandatory
-    },
+const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    clientId: 'YOUR_CLIENT_ID',
+    redirectUrl: 'yourapp://auth',
+    network: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+    chains: [...],
+    // highlight-next-line
+    mfaLevel: MFA_LEVELS.DEFAULT,
   },
+}
+```
+
+| `MFA_LEVELS` value     | Behavior                                                       |
+| ---------------------- | -------------------------------------------------------------- |
+| `MFA_LEVELS.DEFAULT`   | Shows the MFA screen on every third login.                     |
+| `MFA_LEVELS.OPTIONAL`  | Shows the MFA screen on every login, but the user can skip it. |
+| `MFA_LEVELS.MANDATORY` | MFA setup is required immediately after the first login.       |
+| `MFA_LEVELS.NONE`      | MFA setup screen is never shown.                               |
+
+You can also override `mfaLevel` on a per-login basis by passing it to `connectTo`:
+
+```typescript
+const { connectTo } = useWeb3AuthConnect()
+
+await connectTo({
+  authConnection: AUTH_CONNECTION.GOOGLE,
+  mfaLevel: MFA_LEVELS.MANDATORY,
 })
 ```
 
-:::note Note
+:::caution
 
-- At least two factors are mandatory when setting up the mfaSettings.
-- If you set `mandatory: true` for all factors, the user must set up all four factors.
-- If you set `mandatory: false` for all factors, the user can skip setting up MFA. But at least two factors are mandatory.
-- If you set `mandatory: true` for some factors and `mandatory: false` for others, the user must set up the mandatory factors and can skip the optional factors. But, the user must set up at least two factors.
-- The `priority` field is used to set the order of the factors. The factor with the lowest priority will be the first factor to be set up. The factor with the highest priority will be the last factor to be set up.
+If a user has already enabled MFA through another app that uses the same Web3Auth verifier, the MFA screen will continue to appear regardless of the `mfaLevel` setting. MFA cannot be disabled once it has been enabled by the user.
 
 :::
+
+## Runtime MFA management
+
+Use the `useEnableMFA` and `useManageMFA` hooks to let users set up or update their MFA factors from within your app:
+
+```tsx
+import { useEnableMFA, useManageMFA } from '@web3auth/react-native-sdk'
+
+function MFAControls() {
+  const { enableMFA, loading: enabling } = useEnableMFA()
+  const { manageMFA, loading: managing } = useManageMFA()
+
+  return (
+    <View>
+      <Button title="Enable MFA" disabled={enabling} onPress={() => enableMFA()} />
+      <Button title="Manage MFA" disabled={managing} onPress={() => manageMFA()} />
+    </View>
+  )
+}
+```
+
+## MFA factor order (Scale plan and above)
+
+:::note
+
+Configuring `mfaSettings` is a paid feature. See [pricing](https://web3auth.io/pricing.html). You can test it on `sapphire_devnet` for free.
+
+:::
+
+Pass a `mfaSettings` object to configure which MFA factors are available and in what order they are shown:
+
+```typescript
+import { type MfaSettings } from '@web3auth/react-native-sdk'
+
+const mfaSettings: MfaSettings = {
+  deviceShareFactor: { enable: true, priority: 1, mandatory: true },
+  backUpShareFactor: { enable: true, priority: 2, mandatory: true },
+  socialBackupFactor: { enable: true, priority: 3, mandatory: false },
+  passwordFactor: { enable: true, priority: 4, mandatory: false },
+  passkeysFactor: { enable: true, priority: 5, mandatory: false },
+  authenticatorFactor: { enable: true, priority: 6, mandatory: false },
+}
+
+const web3AuthConfig: Web3AuthContextConfig = {
+  web3AuthOptions: {
+    ...
+    mfaLevel: MFA_LEVELS.MANDATORY,
+    // highlight-next-line
+    mfaSettings,
+  },
+}
+```
+
+### `mfaSettings` rules
+
+- At least two factors must be marked `mandatory: true`.
+- The `priority` field determines the display order (lower = shown first).
+- If all factors have `mandatory: false`, the user can still skip the screen. At least two must be set up overall.
+
+### Available MFA factors
+
+| Factor key            | Description                         |
+| --------------------- | ----------------------------------- |
+| `deviceShareFactor`   | Device-bound share (default factor) |
+| `backUpShareFactor`   | Downloadable recovery phrase        |
+| `socialBackupFactor`  | OAuth-based recovery                |
+| `passwordFactor`      | Password-protected recovery share   |
+| `passkeysFactor`      | Passkey-based recovery              |
+| `authenticatorFactor` | TOTP authenticator app              |
+
+### Related
+
+- [`useEnableMFA` hook reference](../hooks/useEnableMFA.mdx)
+- [`useManageMFA` hook reference](../hooks/useManageMFA.mdx)
