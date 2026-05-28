@@ -5,6 +5,14 @@ import { IntegrationStep } from './interfaces'
 
 interface Module {
   default: React.ComponentType<any>
+  // Step metadata is sourced from MDX `export const` declarations on the
+  // module namespace. `frontMatter` remains as a fallback so the helper still
+  // works when an MDX file is registered as a Docusaurus route page (where
+  // YAML front matter is allowed and surfaces under `mod.frontMatter`).
+  // Imported partials cannot carry front matter under Docusaurus 3.x, so any
+  // partial that needs `contentType`/`mediaContent` must use named exports.
+  contentType?: IntegrationStep['contentType']
+  mediaContent?: IntegrationStep['mediaContent']
   frontMatter?: Record<string, any>
 }
 
@@ -14,14 +22,14 @@ export function toStep(mod: Module): IntegrationStep {
     content: <Component />, // Always include the MDX content
   }
 
-  // Add contentType if specified
-  if (mod.frontMatter?.contentType) {
-    step.contentType = mod.frontMatter.contentType
+  const contentType = mod.contentType ?? mod.frontMatter?.contentType
+  if (contentType) {
+    step.contentType = contentType
   }
 
-  // Add mediaContent if specified
-  if (mod.frontMatter?.mediaContent) {
-    step.mediaContent = mod.frontMatter.mediaContent
+  const mediaContent = mod.mediaContent ?? mod.frontMatter?.mediaContent
+  if (mediaContent) {
+    step.mediaContent = mediaContent
   }
 
   return step

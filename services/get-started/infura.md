@@ -72,8 +72,8 @@ Use a tool such as the [Client Uniform Resource Locator (curl)](../concepts/curl
 - `eth_sign`
 
 Infura doesn't store the user's private key required to sign transactions.
-You can use [`web3.eth.sendTransaction`](https://web3js.readthedocs.io/en/v1.2.0/web3-eth.html#sendtransaction),
-which signs the transaction locally using the private key of the account, and sends the transaction via [`web3.eth.sendSignedTransaction`](https://web3js.readthedocs.io/en/v1.2.0/web3-eth.html#sendsignedtransaction),
+You can use [`web3.eth.sendTransaction`](https://docs.web3js.org/api/web3-eth/function/sendTransaction),
+which signs the transaction locally using the private key of the account, and sends the transaction via [`web3.eth.sendSignedTransaction`](https://docs.web3js.org/api/web3-eth/function/sendSignedTransaction),
 which is a wrapper for [`eth_sendRawTransaction`](../reference/ethereum/json-rpc-methods/eth_sendrawtransaction.mdx).
 
 </div>

@@ -15,6 +15,7 @@ keywords:
     solana embedded wallet,
     social sign-in,
   ]
+unlisted: true
 ---
 
 :::info Heads up

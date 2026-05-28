@@ -28,7 +28,7 @@ Some popular Ethereum-compatible Web3 libraries include (but are not limited to)
 
 | Language   | Library                                                                                             |
 | :--------- | :-------------------------------------------------------------------------------------------------- |
-| JavaScript | [Web3.js](https://web3js.readthedocs.io/), [Ethers.js](https://docs.ethers.org/)                    |
+| JavaScript | [Web3.js](https://docs.web3js.org/), [Ethers.js](https://docs.ethers.org/)                          |
 | Python     | [Web3.py](https://web3py.readthedocs.io/en/stable/)                                                 |
 | Rust       | [ethers-rs](https://github.com/gakonst/ethers-rs) (recommended), [Rust-web3](https://docs.rs/web3/) |
 | C++        | [Aleth](https://github.com/ethereum/aleth)                                                          |

@@ -2,7 +2,7 @@
   // This file is not used in compilation. It is here just for a nice editor experience.
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": ".",
     "baseUrl": ".",
     "paths": {
       "@site/*": ["./*"],
@@ -12,6 +12,6 @@
     },
     "types": ["docusaurus-plugin-sass"]
   },
-  "include": ["src/globals.d.ts", "./src/**/*"],
+  "include": ["src/globals.d.ts", "./src/**/*", "middleware.ts"],
   "exclude": ["node_modules"]
 }

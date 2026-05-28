@@ -1,7 +1,48 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": true,
+  "headers": [
+    {
+      "source": "/(.*)\\.md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=3600" }
+      ]
+    }
+  ],
   "redirects": [
+    {
+      "source": "/whats-new/",
+      "destination": "/"
+    },
+    {
+      "source": "/whats-new",
+      "destination": "/"
+    },
+    {
+      "source": "/blog/",
+      "destination": "/"
+    },
+    {
+      "source": "/blog",
+      "destination": "/"
+    },
+    {
+      "source": "/search/",
+      "destination": "/"
+    },
+    {
+      "source": "/search",
+      "destination": "/"
+    },
+    {
+      "source": "/developer-tools/",
+      "destination": "/developer-tools/dashboard/"
+    },
+    {
+      "source": "/developer-tools",
+      "destination": "/developer-tools/dashboard/"
+    },
     {
       "source": "/developer-tools/dashboard/how-to/project-sharing/",
       "destination": "/developer-tools/dashboard/"
@@ -673,6 +714,14 @@
     {
       "source": "/wallet/:path*/",
       "destination": "/metamask-connect/"
+    },
+    {
+      "source": "/llms-wallet.txt",
+      "destination": "/llms-metamask-connect.txt"
+    },
+    {
+      "source": "/llms-wallet-full.txt",
+      "destination": "/llms-metamask-connect-full.txt"
     },
     {
       "source": "/sdk/",

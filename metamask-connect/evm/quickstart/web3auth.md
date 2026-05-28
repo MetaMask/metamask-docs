@@ -17,6 +17,7 @@ keywords:
     MPC wallet,
     seedless onboarding,
   ]
+unlisted: true
 ---
 
 :::info Heads up

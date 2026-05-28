@@ -12,7 +12,10 @@ These links contain LLM-readable files following the llmstxt.org standard, for e
 ## Embedded Wallets
 
 - [Embedded Wallets documentation links](https://docs.metamask.io/llms-embedded-wallets.txt): Documentation links for Embedded Wallets.
-- [Embedded Wallets full documentation](https://docs.metamask.io/llms-embedded-wallets-full.txt): Complete documentation for Embedded Wallets.
+- [Embedded Wallets SDKs full documentation](https://docs.metamask.io/llms-embedded-wallets-sdk-full.txt): Complete documentation for Embedded Wallets SDKs (React, Vue, JS, Node, Android, iOS, React Native, Flutter, Unity, Unreal).
+- [Embedded Wallets EVM chain connections full documentation](https://docs.metamask.io/llms-embedded-wallets-evm-full.txt): Complete documentation for connecting Embedded Wallets to EVM-compatible chains.
+- [Embedded Wallets non-EVM chain connections full documentation](https://docs.metamask.io/llms-embedded-wallets-non-evm-full.txt): Complete documentation for connecting Embedded Wallets to Solana and other non-EVM chains.
+- [Embedded Wallets platform features full documentation](https://docs.metamask.io/llms-embedded-wallets-platform-full.txt): Complete documentation for Embedded Wallets authentication, features, dashboard, infrastructure, and troubleshooting.
 
 ## Smart Accounts Kit
 
