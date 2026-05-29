@@ -222,6 +222,7 @@ const sidebar = {
           key: 'erc-7710-reference',
           items: ['reference/erc7710/bundler-client', 'reference/erc7710/wallet-client'],
         },
+        'reference/x402',
         'reference/types',
         {
           type: 'doc',

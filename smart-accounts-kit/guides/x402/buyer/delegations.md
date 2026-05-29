@@ -1,5 +1,5 @@
 ---
-description: Pay for an x402-protected API access using delegation.
+description: Pay for x402-protected API access using delegation.
 sidebar_label: Delegations
 keywords: [x402, ERC-7710, delegation, smart account, facilitator, buyer, API]
 ---
@@ -11,10 +11,11 @@ import GlossaryTerm from '@theme/GlossaryTerm';
 # Pay for an x402 API with delegation
 
 In this guide, you use a buyer account to access API data from an x402 server by creating
-an <GlossaryTerm term="Open root delegation">open delegation</GlossaryTerm> that authorizes
-token transfers on your behalf.
+a <GlossaryTerm term="Delegation">delegation</GlossaryTerm> that authorizes token transfers
+on your behalf.
 
-You set up an `x402Erc7710Client` with a delegation provider, register it with the x402 client,
+You use [`createx402DelegationProvider`](../../../reference/x402.md#createx402delegationprovider)
+to set up an `x402Erc7710Client` with a delegation provider, register it with the x402 client,
 and use `wrapFetchWithPayment` to automatically handle payment when calling a protected API route.
 
 ## Prerequisites
@@ -80,62 +81,25 @@ export const buyerAccount = privateKeyToAccount('0x<BUYER_PRIVATE_KEY>')
 
 ### 3. Create an x402 ERC-7710 client
 
-Create an `x402Erc7710Client` with a `delegationProvider` callback.
-The x402 client calls this function automatically when it needs to pay for a request, passing
-in the payment requirements from the server.
+Create an `x402Erc7710Client` using
+[`createx402DelegationProvider`](../../../reference/x402.md#createx402delegationprovider).
+The provider creates an <GlossaryTerm term="Open delegation">open</GlossaryTerm>
+<GlossaryTerm term="Root delegation">root delegation</GlossaryTerm>, signs it, and returns an ABI-encoded delegation chain
+when the x402 client needs to pay for a request.
 
-Inside the provider, create an [open delegation](../../../concepts/delegation/overview.md#open-root-delegation)
-using [`createOpenDelegation`](../../../reference/delegation/index.md#createopendelegation).
-This example uses the [`erc20TransferAmount`](../../../guides/delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope)
-scope to allow USDC transfers up to the requested amount, and the
-[`timestamp`](../../../reference/delegation/caveats.md#timestamp) caveat to set a short expiry.
-
-For ERC-7710, x402 requires the payload fields `delegationManager`, `permissionContext`, and `delegator`.
-Use [`encodeDelegations`](../../../reference/delegation/index.md#encodedelegations) to encode the delegation chain.
+The provider appends [`redeemer`](../../../reference/delegation/caveats.md#redeemer),
+[`allowedTargets`](../../../reference/delegation/caveats.md#allowedtargets), and
+[`timestamp`](../../../reference/delegation/caveats.md#timestamp)
+<GlossaryTerm term="Caveat">caveats</GlossaryTerm> if not already present.
 
 ```ts
-import { CaveatType, createOpenDelegation, ScopeType } from '@metamask/smart-accounts-kit'
-import { encodeDelegations } from '@metamask/smart-accounts-kit/utils'
+import { createx402DelegationProvider } from '@metamask/smart-accounts-kit/experimental'
 import { x402Erc7710Client } from '@metamask/x402'
-import { getAddress } from 'viem'
 
 const erc7710Client = new x402Erc7710Client({
-  delegationProvider: async requirements => {
-    // Expires in 1 minute.
-    const expiry = Math.floor(Date.now() / 1000) + 60
-
-    const delegation = createOpenDelegation({
-      environment: buyerSmartAccount.environment,
-      from: buyerSmartAccount.address,
-      scope: {
-        type: ScopeType.Erc20TransferAmount,
-        tokenAddress: getAddress(requirements.asset),
-        maxAmount: BigInt(requirements.amount),
-      },
-      caveats: [
-        {
-          type: CaveatType.Timestamp,
-          afterThreshold: 0,
-          beforeThreshold: expiry,
-        },
-      ],
-    })
-
-    const signature = await buyerSmartAccount.signDelegation({
-      delegation,
-    })
-
-    const signedDelegation = {
-      ...delegation,
-      signature,
-    }
-
-    return {
-      delegationManager: buyerSmartAccount.environment.DelegationManager,
-      permissionContext: encodeDelegations([signedDelegation]),
-      delegator: buyerSmartAccount.address,
-    }
-  },
+  delegationProvider: createx402DelegationProvider({
+    account: buyerSmartAccount,
+  }),
 })
 ```
 
@@ -157,8 +121,8 @@ const fetchWithPayment = wrapFetchWithPayment(fetch, httpClient)
 ### 5. Make the paid request
 
 Call the protected endpoint using `fetchWithPayment`.
-It handles the x402 payment flow, calling your `delegationProvider`
-to create an open redelegation when the server returns a `402` response.
+It handles the x402 payment flow, calling your delegation provider
+to create an <GlossaryTerm term="Open delegation">open delegation</GlossaryTerm> when the server returns a `402` response.
 
 ```ts
 const paidResponse = await fetchWithPayment('https://api.example.com/paid-endpoint', {

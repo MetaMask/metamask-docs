@@ -644,6 +644,18 @@ import { sepolia } from 'viem/chains'
 const environment = getSmartAccountsEnvironment(sepolia.id)
 ```
 
+## `generateSalt`
+
+Generates a random 32-byte hex salt for creating delegations. This helps prevent hash collisions when creating identical delegations.
+
+### Example
+
+```ts
+import { generateSalt } from '@metamask/smart-accounts-kit/utils'
+
+const salt = generateSalt()
+```
+
 ## `overrideDeployedEnvironment`
 
 Overrides or adds the `SmartAccountsEnvironment` for a chain and supported version.
