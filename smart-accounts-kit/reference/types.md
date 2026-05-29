@@ -228,6 +228,39 @@ Describes a supported <GlossaryTerm term="Advanced Permissions">Advanced Permiss
 | `chainIds`  | `number[]` | Yes      | The chain IDs on which the permission type is supported.                    |
 | `ruleTypes` | `string[]` | Yes      | The rule types supported for the permission type (for example, `"expiry"`). |
 
+### `MaybeDeferred`
+
+Represents a value that can be provided directly or derived lazily from runtime [`PaymentRequirements`](#paymentrequirements).
+
+```ts
+type MaybeDeferred<TResult> =
+  | TResult
+  | ((requirements: PaymentRequirements) => Promise<TResult> | TResult)
+```
+
+### `PaymentRequirements`
+
+Represents the payment requirements returned by an x402 server. [`createx402DelegationProvider`](x402.md#createx402delegationprovider) uses these values to scope and construct the <GlossaryTerm term="Delegation">delegation</GlossaryTerm>.
+
+| Name                | Type                      | Required | Description                                                                                                   |
+| ------------------- | ------------------------- | -------- | ------------------------------------------------------------------------------------------------------------- |
+| `scheme`            | `string`                  | Yes      | The payment scheme identifier.                                                                                |
+| `network`           | `string`                  | Yes      | The [CAIP](https://namespaces.chainagnostic.org/eip155/caip2) network identifier. For example, `eip155:8453`. |
+| `asset`             | `string`                  | Yes      | The token contract address for the payment asset.                                                             |
+| `amount`            | `string`                  | Yes      | The payment amount in the token's smallest unit.                                                              |
+| `payTo`             | `string`                  | Yes      | The recipient address for the payment.                                                                        |
+| `maxTimeoutSeconds` | `number`                  | Yes      | The maximum time in seconds before the payment expires.                                                       |
+| `extra`             | `Record<string, unknown>` | No       | Additional context for x402, such as the asset transfer method.                                               |
+
+### `RedeemersConfig`
+
+Configuration for the redeemer constraint used in [`createx402DelegationProvider`](x402.md#createx402delegationprovider).
+
+| Name               | Type                                           | Required | Description                                                                                             |
+| ------------------ | ---------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `requireRedeemers` | `boolean`                                      | Yes      | Whether at least one redeemer constraint must exist.                                                    |
+| `addresses`        | [`MaybeDeferred`](#maybedeferred)`<Address[]>` | No       | The addresses that are allowed to redeem the <GlossaryTerm term="Delegation">delegation</GlossaryTerm>. |
+
 ### `ValueLteBuilderConfig`
 
 | Name       | Type     | Required | Description                                                                                                              |
