@@ -273,6 +273,66 @@ export const delegation = createDelegation({
 </TabItem>
 </Tabs>
 
+## `decodeRevertData`
+
+Decodes raw ABI-encoded revert data into a [`DecodedRevertReason`](../types.md#decodedrevertreason).
+
+Tries standard Solidity errors, and known
+<GlossaryTerm term="Delegation Framework" /> ABIs, then falls back to decoding printable ASCII bytes.
+
+Returns `undefined` if the data cound not be decoded.
+
+### Parameters
+
+| Name      | Type  | Required | Description                      |
+| --------- | ----- | -------- | -------------------------------- |
+| `rawData` | `Hex` | Yes      | The raw ABI-encoded revert data. |
+
+### Example
+
+```ts
+import { decodeRevertData } from '@metamask/smart-accounts-kit/utils'
+
+const decoded = decodeRevertData('0x08c379a0...')
+```
+
+## `decodeRevertReason`
+
+Extracts revert data from an error object and decodes it using [`decodeRevertData`](#decoderevertdata).
+Use this when you catch an error from any <GlossaryTerm term="Delegation Framework" /> interaction
+and want to decode the revert reason.
+
+Returns `undefined` if no revert data is found in the error.
+
+### Parameters
+
+| Name    | Type      | Required | Description                                              |
+| ------- | --------- | -------- | -------------------------------------------------------- |
+| `error` | `unknown` | Yes      | The error object to extract and decode revert data from. |
+
+### Example
+
+This example assumes you have a delegation signed by the <GlossaryTerm term="Delegator account">delegator</GlossaryTerm>.
+
+```ts
+import { ExecutionMode } from '@metamask/smart-accounts-kit'
+import { DelegationManager } from '@metamask/smart-accounts-kit/contracts'
+import { decodeRevertReason } from '@metamask/smart-accounts-kit/utils'
+
+try {
+  await DelegationManager.execute.redeemDelegations({
+    delegations: [[signedDelegation]],
+    modes: [ExecutionMode.SingleDefault],
+    executions: [[execution]],
+  })
+} catch (error) {
+  const decoded = decodeRevertReason(error)
+  if (decoded) {
+    console.log(decoded.message)
+  }
+}
+```
+
 ## `deploySmartAccountsEnvironment`
 
 Deploys the <GlossaryTerm term="Delegation Framework" /> contracts to an EVM chain.

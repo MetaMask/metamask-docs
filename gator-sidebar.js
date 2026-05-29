@@ -107,6 +107,7 @@ const sidebar = {
               items: [
                 'guides/advanced-permissions/use-permissions/erc20-token',
                 'guides/advanced-permissions/use-permissions/native-token',
+                'guides/advanced-permissions/use-permissions/approval-revocation',
               ],
             },
             'guides/advanced-permissions/get-granted-permissions',
