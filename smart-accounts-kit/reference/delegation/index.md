@@ -280,7 +280,7 @@ Decodes raw ABI-encoded revert data into a [`DecodedRevertReason`](../types.md#d
 Tries standard Solidity errors, and known
 <GlossaryTerm term="Delegation Framework" /> ABIs, then falls back to decoding printable ASCII bytes.
 
-Returns `undefined` if the data cound not be decoded.
+Returns `undefined` if the data could not be decoded.
 
 ### Parameters
 
