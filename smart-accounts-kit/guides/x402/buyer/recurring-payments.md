@@ -117,74 +117,27 @@ const grantedPermissions = await walletClient.requestExecutionPermissions([
 
 ### 5. Create an x402 ERC-7710 client
 
-Create an `x402Erc7710Client` with a `delegationProvider` callback.
-The x402 client calls this function automatically when it needs to pay for a request, passing
-in the payment requirements from the server.
+Create an `x402Erc7710Client` using
+[`createx402DelegationProvider`](../../../reference/x402.md#createx402delegationprovider).
 
-Inside the provider, create an <GlossaryTerm term="Open redelegation">open redelegation</GlossaryTerm>
-from the agent account so the facilitator can redeem the permission context for x402 settlement.
-This example uses the
-[`erc20TransferAmount`](../../../guides/delegation/use-delegation-scopes/spending-limit.md#erc-20-transfer-scope)
-scope to allow USDC transfers up to the amount requested in payment terms.
-
-Use the Wallet Client's
-[`redelegatePermissionContextOpen`](../../../reference/erc7710/wallet-client.md#redelegatepermissioncontextopen)
-action to create a redelegated permission context.
-
-<Tabs>
-<TabItem value="example.ts">
+The provider creates an <GlossaryTerm term="Open redelegation">open redelegation</GlossaryTerm>
+from the session account using the granted permission. The facilitator can then redeem the redelegated
+permission context for x402 settlement.
 
 ```ts
-import { ScopeType, CaveatType } from '@metamask/smart-accounts-kit'
+import { createx402DelegationProvider } from '@metamask/smart-accounts-kit/experimental'
 import { x402Erc7710Client } from '@metamask/x402'
-import { getAddress } from 'viem'
-import { environment, sessionAccountWalletClient } from './config'
 
 const permission = grantedPermissions[0]
 
 const erc7710Client = new x402Erc7710Client({
-  delegationProvider: async requirements => {
-    const { permissionContext: redelegatedPermissionContext } =
-      await sessionAccountWalletClient.redelegatePermissionContextOpen({
-        environment,
-        permissionContext: permission.context,
-        scope: {
-          type: ScopeType.Erc20TransferAmount,
-          tokenAddress: getAddress(requirements.asset),
-          maxAmount: BigInt(requirements.amount),
-        },
-      })
-
-    return {
-      delegationManager: permission.delegationManager,
-      permissionContext: redelegatedPermissionContext,
-      delegator: permission.from,
-    }
-  },
+  delegationProvider: createx402DelegationProvider({
+    account: sessionAccount,
+    parentPermissionContext: permission.context,
+    from: permission.from,
+  }),
 })
 ```
-
-</TabItem>
-<TabItem value="config.ts">
-
-```ts
-import { createWalletClient, http } from 'viem'
-import { base as chain } from 'viem/chains'
-import { getSmartAccountsEnvironment } from '@metamask/smart-accounts-kit'
-import { erc7710WalletActions } from '@metamask/smart-accounts-kit/actions'
-
-export const environment = getSmartAccountsEnvironment(chain.id)
-
-// Use sessionAccount from previous step.
-export const sessionAccountWalletClient = createWalletClient({
-  account: sessionAccount,
-  chain,
-  transport: http(),
-}).extend(erc7710WalletActions())
-```
-
-</TabItem>
-</Tabs>
 
 ### 6. Register the client
 
@@ -204,8 +157,8 @@ const fetchWithPayment = wrapFetchWithPayment(fetch, httpClient)
 ### 7. Make the paid request
 
 Call the protected endpoint using `fetchWithPayment`.
-It handles the x402 payment flow, calling your `delegationProvider`
-to create an open redelegation when the server returns a `402` response.
+The x402 payment flow calls your delegation provider to create an open redelegation
+when the server returns a `402` response.
 
 ```ts
 const paidResponse = await fetchWithPayment('https://api.example.com/paid-endpoint', {
@@ -213,7 +166,7 @@ const paidResponse = await fetchWithPayment('https://api.example.com/paid-endpoi
 })
 ```
 
-Reuse the same weekly granted permission for additional protected routes and providers in your
-agent flow.
-Your agent can continue paying until the weekly cap is reached, then continue after the next
+You can reuse the same weekly granted permission for additional protected routes and providers
+in your agent flow.
+Your agent continues paying until the weekly cap is reached, then resumes after the next
 weekly period starts.
