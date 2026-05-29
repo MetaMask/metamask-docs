@@ -10,7 +10,7 @@
       "launchdarkly": ["./node_modules/launchdarkly-js-client-sdk/dist/ldclient.es.js"],
       "sentry-plugin": ["./node_modules/@sentry/browser/build/npm/esm/index.js"]
     },
-    "types": ["docusaurus-plugin-sass"]
+    "types": ["docusaurus-plugin-sass", "node"]
   },
   "include": ["src/globals.d.ts", "./src/**/*", "middleware.ts"],
   "exclude": ["node_modules"]

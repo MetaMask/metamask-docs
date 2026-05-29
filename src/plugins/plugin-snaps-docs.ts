@@ -146,6 +146,14 @@ export default function useSnapsDocsPlugin(context: LoadContext): Plugin {
         `${methodName}.mdx`
       )
 
+      // The upstream schema occasionally embeds insecure `http://docs.metamask.io`
+      // links (for example in the `wallet_snap` description). Normalize them to
+      // HTTPS so the rendered pages don't link from an HTTPS page to HTTP.
+      const methodJson = JSON.stringify(method).replaceAll(
+        'http://docs.metamask.io',
+        'https://docs.metamask.io'
+      )
+
       const content = `---
 id: ${methodName}
 title: ${method.name}
@@ -156,7 +164,7 @@ hide_table_of_contents: true
 
 import SnapsAPIReference from '@site/src/components/SnapsAPIReference/index.mdx';
 
-<SnapsAPIReference method={${JSON.stringify(method)}}  />
+<SnapsAPIReference method={${methodJson}}  />
 `
 
       await writeFile(filePath, content)

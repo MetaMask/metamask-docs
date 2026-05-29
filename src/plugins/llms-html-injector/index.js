@@ -221,10 +221,8 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
     )
   }
 
-  const { injected, missing, skippedRoot, bodyInjected, katexMarked } = await injectAlternateLinks(
-    outDir,
-    siteUrl
-  )
+  const { injected, missing, skippedRoot, bodyInjected, katexMarked, canonicalFixed } =
+    await injectAlternateLinks(outDir, siteUrl)
   console.log(
     `[llms-html-injector] Injected markdown alternate link into ${injected} HTML pages ` +
       `(skipped ${missing} pages with no matching .md sibling, ` +
@@ -236,6 +234,21 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
   console.log(
     `[llms-html-injector] Marked ${katexMarked} KaTeX MathML span(s) as data-markdown-ignore`
   )
+  console.log(
+    `[llms-html-injector] Stripped trailing slash from canonical/og:url on ${canonicalFixed} dotted-route page(s)`
+  )
+
+  const sitemap = await normalizeSitemap(outDir, siteUrl)
+  if (sitemap.skipped) {
+    console.warn(
+      '[llms-html-injector] No sitemap.xml found in outDir; skipping sitemap normalization.'
+    )
+  } else {
+    console.log(
+      `[llms-html-injector] Sitemap: stripped trailing slash from ${sitemap.rewritten} dotted-segment <loc>(s) ` +
+        `and dropped ${sitemap.dropped} URL(s) shadowed by a vercel.json redirect`
+    )
+  }
 
   // On Vercel preview/development deployments, rewrite every absolute URL in
   // generated llms*.txt files and per-page .md files from the canonical
@@ -422,8 +435,9 @@ async function injectAlternateLinks(outDir, siteUrl) {
   let skippedRoot = 0
   let bodyInjected = 0
   let katexMarked = 0
+  let canonicalFixed = 0
   await visit(outDir)
-  return { injected, missing, skippedRoot, bodyInjected, katexMarked }
+  return { injected, missing, skippedRoot, bodyInjected, katexMarked, canonicalFixed }
 
   async function visit(dir) {
     const entries = await fs.readdir(dir, { withFileTypes: true })
@@ -437,6 +451,7 @@ async function injectAlternateLinks(outDir, siteUrl) {
         else if (result.altLink === false) missing++
         else if (result.altLink === 'root') skippedRoot++
         if (result.bodyDirective) bodyInjected++
+        if (result.canonicalFixed) canonicalFixed++
         katexMarked += result.katexMarked
       }
     }
@@ -515,6 +530,23 @@ async function injectAlternateLinks(outDir, siteUrl) {
     })
     if (katexMarkedHere > 0) changed = true
 
+    // Normalize trailing slashes in canonical/og:url metadata for "dotted"
+    // routes. Docusaurus (`trailingSlash: true`) always emits a trailing-slash
+    // canonical, but Vercel (`trailingSlash: true`) treats any final path
+    // segment containing a dot (e.g. `use-web3.js`, version `1.0.0`,
+    // `android-v7.1.1-to-v7.1.2`) as a file and 308-strips the slash. That
+    // makes the canonical point to a redirect. Stripping the slash here aligns
+    // the canonical/og:url with the URL Vercel actually serves with a 200.
+    let canonicalFixedHere = false
+    if (relDir && relDir !== '.' && lastSegmentHasDot(relDir)) {
+      const beforeCanonical = html
+      html = stripDottedTrailingSlashInMetadata(html)
+      if (html !== beforeCanonical) {
+        canonicalFixedHere = true
+        changed = true
+      }
+    }
+
     if (changed) {
       await fs.writeFile(htmlAbs, html, 'utf8')
     }
@@ -523,8 +555,41 @@ async function injectAlternateLinks(outDir, siteUrl) {
       altLink: altLinkResult,
       bodyDirective: bodyDirectiveAdded,
       katexMarked: katexMarkedHere,
+      canonicalFixed: canonicalFixedHere,
     }
   }
+}
+
+/**
+ * Return true when the final non-empty segment of a route/path contains a dot.
+ * These are the routes Vercel treats as files and serves without a trailing
+ * slash (308-stripping any trailing-slash variant).
+ */
+function lastSegmentHasDot(routePath) {
+  const segments = routePath.split('/').filter(Boolean)
+  const last = segments[segments.length - 1] || ''
+  return last.includes('.')
+}
+
+/**
+ * Strip the trailing slash from the `<link rel="canonical">` href and the
+ * `og:url` content in a page's HTML. Only called for dotted routes, where the
+ * emitted absolute URL is guaranteed to be this page's own trailing-slash URL.
+ */
+function stripDottedTrailingSlashInMetadata(html) {
+  // <link rel="canonical" href="...://.../use-web3.js/">
+  html = html.replace(/(<link\b[^>]*\brel="canonical"[^>]*\bhref=")([^"]+?)\/("[^>]*>)/i, '$1$2$3')
+  // <meta property="og:url" content="...://.../use-web3.js/"> (property first)
+  html = html.replace(
+    /(<meta\b[^>]*\bproperty="og:url"[^>]*\bcontent=")([^"]+?)\/("[^>]*>)/i,
+    '$1$2$3'
+  )
+  // <meta content="..." property="og:url"> (content first)
+  html = html.replace(
+    /(<meta\b[^>]*\bcontent=")([^"]+?)\/("[^>]*\bproperty="og:url"[^>]*>)/i,
+    '$1$2$3'
+  )
+  return html
 }
 
 /**
@@ -861,6 +926,128 @@ async function prependMdDirective(outDir) {
     updated++
   }
   return updated
+}
+
+/**
+ * Convert a `vercel.json` redirect `source` into an anchored RegExp matching a
+ * URL pathname (trailing slash stripped). Mirrors Vercel's path-to-regexp
+ * subset we use: `:name*` / `:name+` match across segments, `:name` matches a
+ * single segment.
+ */
+function redirectSourceToRegExp(source) {
+  let s = source.replace(/\/+$/, '')
+  // Escape regex metacharacters, but leave `:`/`*`/`+` for param handling.
+  s = s.replace(/[.^${}()|[\]\\?]/g, '\\$&')
+  // `:name*` or `:name+` -> match across one or more segments (`.*`).
+  s = s.replace(/:\w+[*+]/g, '.*')
+  // `:name` -> match a single path segment.
+  s = s.replace(/:\w+/g, '[^/]+')
+  return new RegExp(`^${s}$`)
+}
+
+/**
+ * Load the list of redirect matchers from `vercel.json` (located in the repo
+ * root, one level above the build `outDir`). Returns an empty array if the file
+ * is missing or unparseable so sitemap normalization degrades gracefully.
+ */
+async function loadRedirectMatchers(outDir) {
+  const vercelPath = path.join(outDir, '..', 'vercel.json')
+  let raw
+  try {
+    raw = await fs.readFile(vercelPath, 'utf8')
+  } catch {
+    return []
+  }
+  let parsed
+  try {
+    parsed = JSON.parse(raw)
+  } catch {
+    return []
+  }
+  const redirects = Array.isArray(parsed.redirects) ? parsed.redirects : []
+  const matchers = []
+  for (const r of redirects) {
+    if (!r || typeof r.source !== 'string') continue
+    try {
+      matchers.push(redirectSourceToRegExp(r.source))
+    } catch {
+      // Ignore sources we can't compile.
+    }
+  }
+  return matchers
+}
+
+/**
+ * Normalize `build/sitemap.xml` so every listed URL returns 200 (not a 3XX):
+ *
+ *   - Strip the trailing slash from `<loc>`s whose final path segment contains
+ *     a dot (Vercel serves these without a trailing slash; see
+ *     `stripDottedTrailingSlashInMetadata`).
+ *   - Drop entire `<url>` entries whose pathname is shadowed by a `vercel.json`
+ *     redirect (e.g. `.../eth_newpendingtransactionfilter/`, `.../tron/web/`),
+ *     since those 3XX-redirect on the deployed site and should not be indexed.
+ */
+async function normalizeSitemap(outDir, siteUrl) {
+  const xmlPath = path.join(outDir, 'sitemap.xml')
+  let xml
+  try {
+    xml = await fs.readFile(xmlPath, 'utf8')
+  } catch {
+    return { skipped: true, rewritten: 0, dropped: 0 }
+  }
+
+  const firstIdx = xml.indexOf('<url>')
+  const lastIdx = xml.lastIndexOf('</url>')
+  if (firstIdx === -1 || lastIdx === -1) {
+    return { skipped: false, rewritten: 0, dropped: 0 }
+  }
+  const head = xml.slice(0, firstIdx)
+  const tail = xml.slice(lastIdx + '</url>'.length)
+  const blocksRegion = xml.slice(firstIdx, lastIdx + '</url>'.length)
+  const blocks = blocksRegion.match(/<url>[\s\S]*?<\/url>/g) || []
+
+  const matchers = await loadRedirectMatchers(outDir)
+  let rewritten = 0
+  let dropped = 0
+  const kept = []
+
+  for (const block of blocks) {
+    const locMatch = block.match(/<loc>([^<]+)<\/loc>/)
+    if (!locMatch) {
+      kept.push(block)
+      continue
+    }
+    const loc = locMatch[1].trim()
+    let pathname
+    try {
+      pathname = loc.startsWith(siteUrl) ? loc.slice(siteUrl.length) : new URL(loc).pathname
+    } catch {
+      pathname = loc
+    }
+    if (!pathname.startsWith('/')) pathname = `/${pathname}`
+    const pathNoSlash = pathname.replace(/\/+$/, '') || '/'
+
+    if (matchers.some(re => re.test(pathNoSlash))) {
+      dropped++
+      continue
+    }
+
+    if (lastSegmentHasDot(pathname)) {
+      const newLoc = loc.replace(/\/+$/, '')
+      if (newLoc !== loc) {
+        kept.push(block.replace(/<loc>[^<]+<\/loc>/, `<loc>${newLoc}</loc>`))
+        rewritten++
+        continue
+      }
+    }
+    kept.push(block)
+  }
+
+  const newXml = head + kept.join('\n') + tail
+  if (newXml !== xml) {
+    await fs.writeFile(xmlPath, newXml, 'utf8')
+  }
+  return { skipped: false, rewritten, dropped }
 }
 
 /**
