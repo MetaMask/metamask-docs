@@ -230,7 +230,7 @@ Describes a supported <GlossaryTerm term="Advanced Permissions">Advanced Permiss
 
 ### `MaybeDeferred`
 
-Represents a value that can be provided directly or derived lazily from runtime [`PaymentRequirements`](#paymentrequirements).
+Represents a value that can be provided directly or derived at runtime from [`PaymentRequirements`](#paymentrequirements).
 
 ```ts
 type MaybeDeferred<TResult> =
