@@ -22,7 +22,31 @@ Use [MetaMask](https://metamask.io/) or similar to create an Ethereum account 
 :::
 
 ## Steps
+### Network selection
 
+Before running the example, ensure MetaMask is connected to the correct network, your account has sufficient test tokens, and the RPC endpoint in the example matches the selected network.
+
+## Why this tutorial matters for MetaMask developers
+
+This tutorial shows typical transaction flows for TypeScript developers and offers a clear separation between wallet-based (MetaMask) signing and server-side signing. Use the wallet flow for user-driven transactions and the key-based flow only for automation or testing.
+
+## Signing and broadcasting
+
+- MetaMask signs transactions locally in the user's browser or device. Private keys remain in the wallet and are not shared.
+- Infura accepts and broadcasts signed transactions to the network; Infura does not manage private keys or perform signing.
+
+### Using MetaMask for user signing
+
+1. Connect the user's wallet (for example, `await window.ethereum.request({ method: 'eth_requestAccounts' })`).
+2. Use the injected provider with a `Web3Provider` wrapper to obtain a signer and build a transaction.
+3. Request the signature via MetaMask and then broadcast it through the provider.
+4. For server-side automation, keep private keys secure and avoid exporting user keys.
+
+:::warning
+The example that stores a private key in `config.ts` is intended for local development, testing, or backend automation only. For production dapps, request transaction signatures from users' wallets (for example, MetaMask) instead of storing or exporting private keys.
+:::
+
+ 
 ### 1. Select your network and verify funds
 
 - **Sepolia** - To use the Sepolia testnet, ensure that your account has Sepolia ETH.

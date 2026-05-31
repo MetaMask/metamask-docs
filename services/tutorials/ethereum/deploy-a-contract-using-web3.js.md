@@ -7,6 +7,10 @@ sidebar_position: 2
 
 In this tutorial, you'll create a simple smart contract and use the Web3 JavaScript library to compile and then deploy the smart contract.
 
+## Why this tutorial matters for MetaMask developers
+
+This tutorial covers both developer-focused deployment scripts and the wallet-driven flow used when users sign transactions via MetaMask. It clarifies when to deploy from a script (CI or admin) versus when to use a wallet-driven signer in a dapp.
+
 ## Prerequisites
 
 - An [Ethereum project](../../get-started/infura.md) on Infura
@@ -20,6 +24,22 @@ You can use [MetaMask](https://metamask.io) or similar to create an Ethereum acc
 :::
 
 ## Steps
+
+### Network selection
+
+Before running the example, ensure MetaMask is connected to the correct network, your account has sufficient test tokens, and the RPC endpoint in the example matches the selected network.
+
+## Signing and broadcasting
+
+- MetaMask signs transactions locally in the user's browser or device. Private keys remain in the wallet and are not shared.
+- Infura accepts and broadcasts signed transactions to the network; Infura does not manage private keys or perform signing.
+
+### Using MetaMask for user signing
+
+1. Connect the user's wallet using `window.ethereum` and request accounts.
+2. Use a wallet provider (for example, `ethers.providers.Web3Provider(window.ethereum)`) to obtain a signer and have the user confirm the deployment transaction.
+3. MetaMask will prompt the user to sign; once signed the transaction is broadcast via the connected provider.
+4. For automated deployments or CI, use secure key management and do not place production keys in `.env` files in the repository.
 
 ### 1. Fund your Ethereum account
 
@@ -74,6 +94,10 @@ Install the `dotenv` package:
 ```
 npm install dotenv
 ```
+
+:::warning
+The `.env` example below includes a private key. This approach is intended for local development, testing, or backend automation only. For production, use secure key management (secrets manager or hardware keys) and avoid exporting user keys. When building dapps, prefer in-browser signing with MetaMask instead of placing private keys in files.
+:::
 
 ### 4. Create the `.env` file
 

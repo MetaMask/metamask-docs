@@ -9,6 +9,10 @@ import TabItem from '@theme/TabItem';
 
 In this tutorial, you'll send a transaction of 0.001 ETH from one account to another using the [`ethers.js`](https://docs.ethers.io/v5/) JavaScript library.
 
+## Why this tutorial matters for MetaMask developers
+
+This tutorial demonstrates both script-based and wallet-driven transaction flows you may use when building dapps with MetaMask. It clarifies what MetaMask handles (signing and user consent) and what Infura provides (RPC access and broadcasting).
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/en/download/)
@@ -21,6 +25,26 @@ Use [MetaMask](https://metamask.io) or similar to create an Ethereum account for
 :::
 
 ## Steps
+
+### Network selection
+
+Before running the example, ensure MetaMask is connected to the correct network, your account has sufficient test tokens, and the RPC endpoint in the example matches the selected network.
+
+## Signing and broadcasting
+
+- MetaMask signs transactions locally in the user's browser or device. Private keys remain in the wallet and are not shared.
+- Infura accepts and broadcasts signed transactions to the network; Infura does not manage private keys or perform signing.
+
+### Using MetaMask for user signing
+
+1. Connect the user's wallet with `await window.ethereum.request({ method: 'eth_requestAccounts' })`.
+2. Create a provider from the injected provider (`new ethers.providers.Web3Provider(window.ethereum)`) and get a signer.
+3. Build the transaction object and request the user to sign it through MetaMask. The extension will prompt the user for confirmation.
+4. Broadcast — MetaMask will typically broadcast the signed transaction automatically.
+
+:::warning
+This workflow (exporting private keys to `.env`) is intended for local development, testing, or backend automation only. For production dapps, request transaction signatures from users' wallets (for example, MetaMask) instead of exporting private keys.
+:::
 
 ### 1. Select your network and verify funds
 
