@@ -11,6 +11,26 @@ As with Ethereum, [transactions](https://ethereum.org/en/developers/docs/transac
 
 This tutorial uses the Ethereum Web3 JavaScript library to send a transaction between two accounts on the Polygon Amoy testnet.
 
+## Why this tutorial matters for MetaMask developers
+
+This tutorial explains how to send transactions on Polygon networks, and highlights how MetaMask integrates for network switching and user signing. Use the wallet-driven approach when building dapps with MetaMask, and use key-based scripts only for automation or testing.
+
+### Network selection
+
+Before running the example, ensure MetaMask is connected to the Polygon network you intend to use, your account has sufficient test MATIC, and that the RPC endpoint matches the selected network.
+
+## Signing and broadcasting
+
+- MetaMask signs transactions locally in the user's browser or device. Private keys remain in the wallet and are not shared.
+- Infura accepts and broadcasts signed transactions to the network; Infura does not manage private keys or perform signing.
+
+### Using MetaMask for user signing
+
+1. Add the Polygon network to MetaMask and switch to it.
+2. Request account access from the user (for example, `await window.ethereum.request({ method: 'eth_requestAccounts' })`).
+3. Use the injected provider to obtain a signer and request the signature via MetaMask.
+4. MetaMask will broadcast the signed transaction to the network via the connected RPC provider.
+
 ## Prerequisites
 
 - An Infura [API key](/developer-tools/dashboard/get-started/create-api)

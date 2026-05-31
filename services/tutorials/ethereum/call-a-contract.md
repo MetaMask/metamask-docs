@@ -7,9 +7,29 @@ sidebar_position: 3
 
 This tutorial uses Web3.js to execute a function in a smart contract. Calling the contract function is a type of transaction that requires paying gas.
 
+## Why this tutorial matters for MetaMask developers
+
+This tutorial shows how to call and execute contract functions in contexts where users may sign transactions with MetaMask. It clarifies when a dapp should request signatures from the user's wallet versus when server-side transactions are appropriate.
+
 ## Prerequisites
 
 Before attempting this tutorial, ensure you completed the tutorial to [deploy a contract](deploy-a-contract-using-web3.js.md) and [updated the `.env` file with the smart contract address](deploy-a-contract-using-web3.js.md#10-update-the-env-file).
+
+### Network selection
+
+Before running example transactions, ensure MetaMask is connected to the correct network and your account has sufficient test ETH.
+
+## Signing and broadcasting
+
+- MetaMask signs transactions locally in the user's browser or device. Private keys remain in the wallet and are not shared.
+- Infura accepts and broadcasts signed transactions to the network; Infura does not manage private keys or perform signing.
+
+### Using MetaMask for user signing
+
+1. Connect the user's wallet (for example, `await window.ethereum.request({ method: 'eth_requestAccounts' })`).
+2. Create a provider from the injected provider and obtain a signer.
+3. Request the user to sign the call/transaction via MetaMask; the extension will prompt for confirmation.
+4. Allow MetaMask to broadcast the signed transaction via the connected provider.
 
 ## Steps
 

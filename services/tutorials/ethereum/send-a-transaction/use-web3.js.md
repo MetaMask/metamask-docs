@@ -9,6 +9,10 @@ import TabItem from '@theme/TabItem';
 
 In this tutorial, you'll send a regular transaction of 0.001 ETH from one account to another using the Web3 JavaScript library.
 
+## Why this tutorial matters for MetaMask developers
+
+This tutorial shows common transaction flows developers encounter when building dapps that interact with MetaMask. It explains when MetaMask handles signing, when Infura provides RPC access and broadcasting, and when you should use a wallet-driven flow vs a server-side automation.
+
 ## Prerequisites
 
 - A [Web3 project](../../../get-started/infura.md) on Infura
@@ -22,6 +26,25 @@ Use [MetaMask](https://metamask.io) or similar to create an Ethereum account for
 :::
 
 ## Steps
+### Network selection
+
+Before running the example, ensure MetaMask is connected to the correct network, your account has sufficient test tokens, and the RPC endpoint in the example matches the selected network.
+
+## Signing and broadcasting
+
+- MetaMask signs transactions locally in the user's browser or device. Private keys remain in the wallet and are not shared.
+- Infura accepts and broadcasts signed transactions to the network; Infura does not manage private keys or perform signing.
+
+### Using MetaMask for user signing
+
+1. Connect the user's wallet (for example, `await window.ethereum.request({ method: 'eth_requestAccounts' })`).
+2. Create a provider using the injected provider (for example, `new ethers.providers.Web3Provider(window.ethereum)`) and request the signer.
+3. Build the transaction object and request the user to sign it through MetaMask (the extension or mobile app will prompt).
+4. Broadcast the signed transaction through the connected provider (MetaMask will typically handle broadcasting automatically).
+
+:::warning
+This workflow (exporting private keys to `.env`) is intended for local development, testing, or backend automation only. For production dapps, request transaction signatures from users' wallets (for example, MetaMask) instead of exporting private keys.
+:::
 
 ### 1. Select your network and verify funds
 
