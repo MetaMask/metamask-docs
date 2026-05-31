@@ -8,12 +8,9 @@ import SectionNetworks from "@site/src/components/Sections/SectionNetworks.jsx";
 
 # Build and scale your dapp using services
 
-MetaMask, in partnership with [Infura](https://www.infura.io/), offers a comprehensive set of
-services to facilitate dapp and Snap development.
-This includes JSON-RPC APIs for easy access to key networks and REST APIs aimed at automating and
-optimizing essential development tasks.
-These services streamline development workflows to help developers build and scale robust
-dapps and Snaps.
+MetaMask provides developer guidance for using hosted node services such as [Infura](https://www.infura.io/) so you can reliably access blockchains without running your own nodes. MetaMask handles wallet responsibilities (key management and signing); hosted providers like Infura run nodes and expose JSON‑RPC and REST APIs that dapps and servers use to read chain data and broadcast signed transactions.
+
+These docs explain how to use Infura endpoints with MetaMask-enabled workflows, including when to sign locally, which calls are broadcast by a provider, and how to choose endpoints for different networks.
 
 ## Features
 
@@ -37,6 +34,34 @@ include:
   Infura can leverage DIN to provide access to archive data that may not be natively supported.
 - **Expansion APIs** -
   [Access Infura's multichain Gas API](reference/gas-api/api-reference/index.md). Use the Gas API used by the MetaMask wallet to analyze and optimize gas costs on EIP-1559 compatible chains.
+
+## How it works
+
+```mermaid
+flowchart TD
+  U[User / Dapp] -->|Interacts with dapp UI| MM[MetaMask (wallet)]
+  MM -->|Prompts user to sign — private keys never leave the wallet| SIG[Signing (local)]
+  SIG -->|Signed transaction (raw tx)| INF[Provider (Infura) — JSON-RPC / REST]
+  INF -->|Broadcasts signed tx to network| NET[Blockchain network (Mainnet, L2s, Testnets)]
+  INF -->|Serves read queries (eth_call, eth_getBalance, archive data)| MM
+  subgraph Notes[ ]
+    direction LR
+    MM -. "Signs transactions locally; stores keys" .-> SIG
+    INF -. "Runs nodes; provides JSON-RPC endpoints, broadcasting, and historical data" .-> NET
+  end
+```
+
+MetaMask prompts users to sign transactions locally; the wallet creates a signed payload which can then be broadcast to the network through a provider endpoint such as Infura (for example, `eth_sendRawTransaction`). Infura provides read APIs (`eth_call`, `eth_getBalance`, block queries) and features like archive access and failover (DIN).
+
+### Signing vs broadcasting
+
+:::important
+MetaMask signs transactions locally using keys stored in the user's wallet. Hosted providers (like Infura) do not hold your private keys — they accept signed transactions (for example via `eth_sendRawTransaction`) and broadcast them to the network. Never share private keys or unencrypted signing material with a provider.
+:::
+
+### Network switching
+
+MetaMask controls the active network in the wallet UI. Dapps should detect the active `chainId` and, where server-side calls are needed, call the matching Infura endpoint for that network (see `/services/get-started/endpoints`). If your backend uses Infura to submit or monitor transactions, ensure it targets the same chain the user is interacting with in MetaMask.
 
 <head>
 <meta httpEquiv="cache-control" content="no-cache" />
