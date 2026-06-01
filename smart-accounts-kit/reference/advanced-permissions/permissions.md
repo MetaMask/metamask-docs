@@ -1,12 +1,21 @@
 ---
 description: Advanced Permissions (ERC-7715) reference.
 sidebar_label: Permissions
-keywords: [ERC-7715, permissions, ERC-20 token, native token, reference, advanced permissions]
+keywords:
+  [
+    ERC-7715,
+    permissions,
+    ERC-20 token,
+    native token,
+    approval revocation,
+    reference,
+    advanced permissions,
+  ]
 ---
 
 # Advanced Permissions reference
 
-When [executing on a MetaMask user's behalf](../../guides/advanced-permissions/execute-on-metamask-users-behalf.md), you can request the following permission types for ERC-20 token and native token transfers.
+When [executing on a MetaMask user's behalf](../../guides/advanced-permissions/execute-on-metamask-users-behalf.md), you can request the following permission types.
 Learn [how to use Advanced Permissions types](../../guides/advanced-permissions/use-permissions/erc20-token.md).
 
 ## ERC-20 token permissions
@@ -221,5 +230,39 @@ const permission = {
     justification: 'Permission to use 0.0001 ETH per second',
   },
   isAdjustmentAllowed: true,
+}
+```
+
+## Token approval revocation permission
+
+Enables revoking an existing token approvals on behalf of the user.
+
+#### Parameters
+
+| Name                      | Type      | Required | Description                                                            |
+| ------------------------- | --------- | -------- | ---------------------------------------------------------------------- |
+| `erc20Approve`            | `boolean` | Yes      | Whether to allow revoking ERC-20 allowances.                           |
+| `erc721Approve`           | `boolean` | Yes      | Whether to allow revoking ERC-721 per-token approvals.                 |
+| `erc721SetApprovalForAll` | `boolean` | Yes      | Whether to allow revoking ERC-721 and ERC-1155 operator approvals.     |
+| `permit2Approve`          | `boolean` | Yes      | Whether to allow revoking Permit2 approvals.                           |
+| `permit2Lockdown`         | `boolean` | Yes      | Whether to allow locking down Permit2.                                 |
+| `permit2InvalidateNonces` | `boolean` | Yes      | Whether to allow invalidating Permit2.                                 |
+| `justification`           | `string`  | No       | A human-readable explanation of why the permission is being requested. |
+
+#### Example
+
+```typescript
+const permission = {
+  type: 'token-approval-revocation',
+  data: {
+    erc20Approve: true,
+    erc721Approve: true,
+    erc721SetApprovalForAll: true,
+    permit2Approve: false,
+    permit2Lockdown: false,
+    permit2InvalidateNonces: false,
+    justification: 'Permission to revoke ERC-20, ERC-721, and ERC-115 token approvals',
+  },
+  isAdjustmentAllowed: false,
 }
 ```
