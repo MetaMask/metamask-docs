@@ -208,6 +208,14 @@ const config = {
             'quickstart/MediaStep/**',
             'quickstart/interfaces.ts',
             'quickstart/utils.tsx',
+            // The `/quickstart` route is registered by the
+            // `docusaurus-plugin-virtual-files` plugin, which also injects the
+            // `files` route module the page reads. Letting the pages plugin
+            // auto-generate a route for `index.jsx` produced a second,
+            // module-less `/quickstart` route and a duplicate `/quickstart/`
+            // entry in the sitemap. Exclude it here so the plugin route is the
+            // single canonical one.
+            'quickstart/index.jsx',
           ],
           mdxPageComponent: '@theme/MDXPage',
           remarkPlugins,
