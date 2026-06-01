@@ -247,13 +247,7 @@
       "type": "category",
       "label": "Changelog",
       "collapsed": false,
-      "items": [
-        "changelog/1.5.0",
-        "changelog/1.2.0",
-        "changelog/1.1.0",
-        "changelog/1.0.0",
-        "changelog/0.3.0"
-      ]
+      "items": ["changelog/1.5.0", "changelog/1.2.0", "changelog/1.1.0", "changelog/1.0.0"]
     }
   ]
 }
