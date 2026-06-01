@@ -204,6 +204,24 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
   const rewriteCount = await rewriteLlmsIndexes(outDir, renames, siteUrl)
   console.log(`[llms-html-injector] Updated URLs in ${rewriteCount} llms*.txt file(s)`)
 
+  // Normalize the sitemap *before* reading its URLs: normalizeSitemap drops
+  // `<loc>`s shadowed by a vercel.json redirect (they 3XX on the deployed
+  // site) and strips trailing slashes from dotted-segment routes. Reading the
+  // sitemap afterward ensures pruneStaleLlmsLinks and generateAllPagesIndex
+  // operate on the same 200-only URL set the deployed sitemap exposes, so the
+  // generated llms-all-*.txt indexes never point agents at redirecting pages.
+  const sitemap = await normalizeSitemap(outDir, siteUrl)
+  if (sitemap.skipped) {
+    console.warn(
+      '[llms-html-injector] No sitemap.xml found in outDir; skipping sitemap normalization.'
+    )
+  } else {
+    console.log(
+      `[llms-html-injector] Sitemap: stripped trailing slash from ${sitemap.rewritten} dotted-segment <loc>(s) ` +
+        `and dropped ${sitemap.dropped} URL(s) shadowed by a vercel.json redirect`
+    )
+  }
+
   const sitemapUrls = await readSitemapUrls(outDir)
   if (sitemapUrls) {
     const stale = await pruneStaleLlmsLinks(outDir, sitemapUrls, siteUrl)
@@ -237,18 +255,6 @@ async function postProcessLlmsOutput(outDir, siteUrl) {
   console.log(
     `[llms-html-injector] Stripped trailing slash from canonical/og:url on ${canonicalFixed} dotted-route page(s)`
   )
-
-  const sitemap = await normalizeSitemap(outDir, siteUrl)
-  if (sitemap.skipped) {
-    console.warn(
-      '[llms-html-injector] No sitemap.xml found in outDir; skipping sitemap normalization.'
-    )
-  } else {
-    console.log(
-      `[llms-html-injector] Sitemap: stripped trailing slash from ${sitemap.rewritten} dotted-segment <loc>(s) ` +
-        `and dropped ${sitemap.dropped} URL(s) shadowed by a vercel.json redirect`
-    )
-  }
 
   // On Vercel preview/development deployments, rewrite every absolute URL in
   // generated llms*.txt files and per-page .md files from the canonical
