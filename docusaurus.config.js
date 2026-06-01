@@ -663,7 +663,7 @@ const config = {
         // The application ID provided by Algolia
         appId: 'W4ZOZ72ZFG',
         apiKey: 'b4e925aa9bf05e5bef2e40b3ee6ee431',
-        indexName: 'mmdocs',
+        indexName: 'MetaMask Documentation',
         contextualSearch: false,
         translations: {
           button: {
