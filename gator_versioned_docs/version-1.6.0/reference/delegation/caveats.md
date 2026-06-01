@@ -13,6 +13,42 @@ When [constraining a delegation scope](../../guides/delegation/use-delegation-sc
 
 You can use either a string literal or the [`CaveatType`](../types.md#caveattype) enum to define the caveat type.
 
+## `approvalRevocation`
+
+Restricts the <GlossaryTerm term="Delegate account">delegate</GlossaryTerm> to revoking token approvals.
+Set each flag to `true` to enable the corresponding revocation type.
+
+<GlossaryTerm term="Caveat enforcer" /> contract: [`ApprovalRevocationEnforcer.sol`](https://github.com/MetaMask/delegation-framework/blob/main/src/enforcers/ApprovalRevocationEnforcer.sol)
+
+### Parameters
+
+| Name                      | Type      | Required | Description                                                        |
+| ------------------------- | --------- | -------- | ------------------------------------------------------------------ |
+| `erc20Approve`            | `boolean` | Yes      | Whether to allow revoking ERC-20 allowances.                       |
+| `erc721Approve`           | `boolean` | Yes      | Whether to allow revoking ERC-721 per-token approvals.             |
+| `erc721SetApprovalForAll` | `boolean` | Yes      | Whether to allow revoking ERC-721 and ERC-1155 operator approvals. |
+| `permit2Approve`          | `boolean` | Yes      | Whether to allow revoking Permit2 approvals.                       |
+| `permit2Lockdown`         | `boolean` | Yes      | Whether to allow locking down Permit2.                             |
+| `permit2InvalidateNonces` | `boolean` | Yes      | Whether to allow invalidating Permit2.                             |
+
+### Example
+
+```typescript
+import { CaveatType } from '@metamask/smart-accounts-kit'
+
+const caveats = [
+  {
+    type: CaveatType.ApprovalRevocation,
+    erc20Approve: true,
+    erc721Approve: false,
+    erc721SetApprovalForAll: false,
+    permit2Approve: false,
+    permit2Lockdown: false,
+    permit2InvalidateNonces: false,
+  },
+]
+```
+
 ## `allowedCalldata`
 
 Limits the calldata that is executed.
