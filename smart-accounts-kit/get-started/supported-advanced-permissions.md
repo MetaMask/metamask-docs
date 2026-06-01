@@ -12,9 +12,12 @@ the Smart Accounts Kit, [MetaMask Flask](/snaps/get-started/install-flask), and 
 If you don't see the Advanced Permissions type you're looking for, you can request it by
 emailing [`hellogators@consensys.net`](mailto:hellogators@consensys.net).
 
-| Permission type                                                                                                          | Smart Accounts Kit | MetaMask Flask | MetaMask    |
-| ------------------------------------------------------------------------------------------------------------------------ | ------------------ | -------------- | ----------- |
-| [ERC-20 periodic](../guides/advanced-permissions/use-permissions/erc20-token.md#erc-20-periodic-permission)              | >= v0.1.0          | >= v13.5.0     | >= v13.23.0 |
-| [ERC-20 stream](../guides/advanced-permissions/use-permissions/erc20-token.md#erc-20-stream-permission)                  | >= v0.1.0          | >= v13.5.0     | >= v13.23.0 |
-| [Native token periodic](../guides/advanced-permissions/use-permissions/native-token.md#native-token-periodic-permission) | >= v0.1.0          | >= v13.5.0     | >= v13.23.0 |
-| [Native token stream](../guides/advanced-permissions/use-permissions/native-token.md#native-token-stream-permission)     | >= v0.1.0          | >= v13.5.0     | >= v13.23.0 |
+| Permission type                                                                                                                         | Smart Accounts Kit | MetaMask Flask      | MetaMask    |
+| --------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ------------------- | ----------- |
+| [ERC-20 allowance](../guides/advanced-permissions/use-permissions/erc20-token.md#erc-20-allowance-permission)                           | >= v1.4.0          | >= v13.32.1-flask.0 | >= v13.32.1 |
+| [ERC-20 periodic](../guides/advanced-permissions/use-permissions/erc20-token.md#erc-20-periodic-permission)                             | >= v0.1.0          | >= v13.5.0          | >= v13.23.0 |
+| [ERC-20 stream](../guides/advanced-permissions/use-permissions/erc20-token.md#erc-20-stream-permission)                                 | >= v0.1.0          | >= v13.5.0          | >= v13.23.0 |
+| [Native token allowance](../guides/advanced-permissions/use-permissions/native-token.md#native-token-allowance-permission)              | >= v1.4.0          | >= v13.32.1-flask.0 | >= v13.32.1 |
+| [Native token periodic](../guides/advanced-permissions/use-permissions/native-token.md#native-token-periodic-permission)                | >= v0.1.0          | >= v13.5.0          | >= v13.23.0 |
+| [Native token stream](../guides/advanced-permissions/use-permissions/native-token.md#native-token-stream-permission)                    | >= v0.1.0          | >= v13.5.0          | >= v13.23.0 |
+| [Token approval revocation](../guides/advanced-permissions/use-permissions/approval-revocation.md#token-approval-revocation-permission) | >= v1.6.0          | -                   | -           |

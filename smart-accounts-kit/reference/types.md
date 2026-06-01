@@ -18,6 +18,7 @@ Enum representing the [caveat](delegation/caveats.md) type.
 
 | Value                                         | String                               |
 | --------------------------------------------- | ------------------------------------ |
+| `CaveatType.ApprovalRevocation`               | `"approvalRevocation"`               |
 | `CaveatType.AllowedCalldata`                  | `"allowedCalldata"`                  |
 | `CaveatType.AllowedMethods`                   | `"allowedMethods"`                   |
 | `CaveatType.AllowedTargets`                   | `"allowedTargets"`                   |
@@ -142,6 +143,16 @@ Represents a delegation that grants permissions from a <GlossaryTerm term="Deleg
 | `caveats`   | [`Caveat`](#caveat)`[]` | Yes      | An array of [caveats](delegation/caveats.md) that constrain the delegation.                                                        |
 | `salt`      | `Hex`                   | Yes      | The salt for generating the delegation hash. This helps prevent hash collisions when creating identical delegations.               |
 | `signature` | `Hex`                   | Yes      | The signature to validate the delegation.                                                                                          |
+
+### `DecodedRevertReason`
+
+Represents a decoded revert reason from a <GlossaryTerm term="Delegation Framework" /> error. Returned by [`decodeRevertData`](delegation/index.md#decoderevertdata) and [`decodeRevertReason`](delegation/index.md#decoderevertreason).
+
+| Name        | Type     | Required | Description                        |
+| ----------- | -------- | -------- | ---------------------------------- |
+| `errorName` | `string` | Yes      | The name of the decoded error.     |
+| `message`   | `string` | Yes      | The decoded revert reason message. |
+| `rawData`   | `Hex`    | Yes      | The raw ABI-encoded revert data.   |
 
 ### `ExactCalldataBuilderConfig`
 
