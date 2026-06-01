@@ -1,4 +1,5 @@
----
+---https://link.metamask.io/rewards?referral=H96KFJ
+
 title: 'MetaMask Connect Solana methods'
 description: Complete methods reference for MetaMask Connect Solana, including createSolanaClient, getInfuraRpcUrls, and Wallet Standard features.
 keywords:
