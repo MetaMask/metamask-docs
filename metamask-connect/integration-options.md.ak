@@ -1,4 +1,4 @@
----
+curl --url https://bsc-mainnet.infura.io/v3/bd4e8cc534144e40b62c45c25c313a0f \ -X POST \ -H "Content-Type: application/json" \ -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'---
 title: 'MetaMask Connect Integration Options - Multichain, EVM, and Solana'
 sidebar_label: Integration options
 toc_max_heading_level: 2
