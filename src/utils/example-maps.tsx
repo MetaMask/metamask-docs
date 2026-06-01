@@ -712,7 +712,7 @@ export const webExamples: ExamplesInterface[] = [
   {
     title: 'Server Side Verification Example',
     description: 'Implementing server-side verification with Web3Auth',
-    image: 'img/embedded-wallets/banners/ssv.png',
+    image: 'img/embedded-wallets/banners/react.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.web, tags.evm, tags.wagmi, 'nextjs', 'server-side'],
     link: 'https://github.com/Web3Auth/web3auth-examples/tree/main/other/server-side-verification-example',
@@ -985,7 +985,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
     title: 'Using Auth0 with Web3Auth PnP React Native SDK',
     description:
       'Using Auth0 Single Page App (Implicit Mode) in MetaMask Embedded Wallets React Native SDK in Android and iOS',
-    image: 'img/embedded-wallets/banners/react-native-auth0.png',
+    image: 'img/embedded-wallets/banners/react-native.png',
     type: SAMPLE_APP,
     tags: [tags.pnp, tags.android, tags.ios, tags.reactNative, tags.evm, 'auth0', 'implicit mode'],
     link: 'https://github.com/Web3Auth/web3auth-react-native-examples/tree/main/rn-bare-auth0-example',
@@ -997,7 +997,7 @@ export const pnpReactNativeExamples: ExamplesInterface[] = [
     title: 'Using Aggregate Verifiers in Web3Auth PnP React Native SDK',
     description:
       'Combine multiple logins (Google, Facebook and GitHub) using Aggregate Verifiers in MetaMask Embedded Wallets React Native SDK for Android and iOS',
-    image: 'img/embedded-wallets/banners/react-native-auth0.png',
+    image: 'img/embedded-wallets/banners/react-native.png',
     type: SAMPLE_APP,
     tags: [
       tags.pnp,

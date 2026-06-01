@@ -78,18 +78,17 @@ module.exports = (context, options) => ({
 
     const routePath = '/quickstart'
 
+    // This is the single canonical `/quickstart` route. The pages plugin is
+    // configured (in `docusaurus.config.js`) to exclude `quickstart/index.jsx`
+    // so it doesn't auto-generate a duplicate, module-less route for the same
+    // path. The builder navigates entirely via query strings on this path
+    // (e.g. `/quickstart/?product=...&framework=...&stepIndex=...`), so no
+    // catch-all child route is needed. A previous `${routePath}/*` splat route
+    // was removed because it served no real page and emitted a malformed
+    // `/quickstart/*/` URL into the sitemap.
     addRoute({
       path: routePath,
       exact: true,
-      component: '@site/src/pages/quickstart',
-      modules: {
-        files,
-      },
-    })
-
-    // Add this to prevent other routes from being created in the quickstart namespace
-    addRoute({
-      path: `${routePath}/*`,
       component: '@site/src/pages/quickstart',
       modules: {
         files,

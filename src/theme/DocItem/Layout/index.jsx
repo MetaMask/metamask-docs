@@ -93,19 +93,39 @@ export default function DocItemLayout({ children }) {
         <DocVersionBanner />
         <div className={styles.docItemContainer}>
           <article>
-            <DocBreadcrumbs />
-            <DocItemTags />
-            {docTOC.mobile}
+            {/* data-markdown-ignore wraps UI chrome that exists only in the
+                rendered HTML (breadcrumbs, tags, mobile TOC, copy button,
+                "Edit this page"/last-updated footer). AFDocs strips elements
+                with this attribute before comparing HTML to the .md sibling,
+                so the chrome no longer counts as "missing from markdown" in
+                the markdown-content-parity check. The same attribute is
+                respected by the build-time HTML→.md regenerator in
+                src/plugins/llms-html-injector. */}
+            <div data-markdown-ignore>
+              <DocBreadcrumbs />
+              <DocItemTags />
+              {docTOC.mobile}
+            </div>
             <DocH1CopyPageWrapper />
-            <CopyPageButton />
+            <div data-markdown-ignore>
+              <CopyPageButton />
+            </div>
             <DocItemContent>{children}</DocItemContent>
 
-            <DocItemFooter />
+            <div data-markdown-ignore>
+              <DocItemFooter />
+            </div>
           </article>
-          <DocItemPaginator />
+          <div data-markdown-ignore>
+            <DocItemPaginator />
+          </div>
         </div>
       </div>
-      {docTOC.desktop && <div className="col col--3">{docTOC.desktop}</div>}
+      {docTOC.desktop && (
+        <div className="col col--3" data-markdown-ignore>
+          {docTOC.desktop}
+        </div>
+      )}
     </div>
   )
 }

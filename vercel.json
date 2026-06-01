@@ -8,6 +8,24 @@
         { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
         { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=3600" }
       ]
+    },
+    {
+      "source": "/(llms.*)\\.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }]
+    },
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "</llms.txt>; rel=\"service-doc\", </llms.txt>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "header", "key": "accept", "value": ".*text/markdown.*" }],
+      "headers": [{ "key": "Content-Type", "value": "text/markdown; charset=utf-8" }]
     }
   ],
   "redirects": [
@@ -161,6 +179,10 @@
     },
     {
       "source": "/guide/ethereum-provider/",
+      "destination": "/metamask-connect/evm/reference/provider-api/"
+    },
+    {
+      "source": "/guide/ethereum-provider.html",
       "destination": "/metamask-connect/evm/reference/provider-api/"
     },
     {

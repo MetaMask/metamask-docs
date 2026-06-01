@@ -29,7 +29,13 @@ export default function middleware(request: Request) {
 
   let pathname = url.pathname
   if (pathname.endsWith('/')) pathname = pathname.slice(0, -1)
-  if (!pathname) return next()
+  if (!pathname) {
+    // The homepage has no `.md` sibling (the root index.html is skipped by the
+    // llms-html-injector by design), so route agents to the documentation
+    // index, which is already served as text/markdown.
+    url.pathname = '/llms.txt'
+    return rewrite(url)
+  }
 
   url.pathname = `${pathname}.md`
   return rewrite(url)
