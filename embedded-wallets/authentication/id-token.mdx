@@ -305,7 +305,9 @@ const validateIdToken = async () => {
   if (connectorName === 'auth') {
     //focus-start
     // Social login: send public key
-    const pubKey = await web3Auth?.provider?.request({ method: 'public_key' })
+    const pubKey = await web3Auth?.connection?.ethereumProvider?.request({
+      method: 'public_key',
+    })
     console.log('pubKey:', pubKey)
     res = await fetch('/api/login', {
       method: 'POST',
@@ -319,7 +321,9 @@ const validateIdToken = async () => {
   } else {
     //focus-start
     // External wallet: send address
-    const address = await web3Auth?.provider?.request({ method: 'eth_accounts' })
+    const address = await web3Auth?.connection?.ethereumProvider?.request({
+      method: 'eth_accounts',
+    })
     res = await fetch('/api/login-external', {
       method: 'POST',
       headers: {

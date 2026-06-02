@@ -1,0 +1,199 @@
+---
+title: Migrating to the Web3Auth Web SDK v11
+description: Learn what changed from Web3Auth v10 to v11, including the connection API and Solana kit migration.
+sidebar_label: v10 to v11
+---
+
+# Web3Auth web SDK v11 migration guide
+
+This guide helps you upgrade Embedded Wallets integrations from `@web3auth/modal` v10 to v11.
+
+Version 11 introduces a new `connection` object for wallet access and replaces the Solana `@solana/web3.js` integration surface with `@solana/kit`.
+
+## Why these changes?
+
+- **Clearer wallet access:** `provider` is no longer returned from hooks or readable on the `Web3Auth` class. Use `connection` instead.
+- **Solana modernization:** Solana hooks and composables use `@solana/kit` and import from `@web3auth/modal/{react,vue}/solana`.
+- **Fewer polyfills:** Vite and webpack polyfill workarounds for `buffer`, `process`, and `global` are no longer required.
+
+## Installation
+
+```bash npm2yarn
+npm install @web3auth/modal@11
+```
+
+For Solana apps, also install:
+
+```bash npm2yarn
+npm install @solana/kit @solana-program/system
+```
+
+React apps using EVM with Wagmi should upgrade to **wagmi v3** if you use `@web3auth/modal/react/wagmi`.
+
+## Provider API changes
+
+### `useWeb3Auth()` no longer returns `provider`
+
+**v10**
+
+```typescript
+const { provider } = useWeb3Auth()
+const accounts = await provider.request({ method: 'eth_accounts' })
+```
+
+**v11**
+
+```typescript
+const { connection } = useWeb3Auth()
+// connection: { ethereumProvider, solanaWallet, connectorName }
+```
+
+For EVM work in React and Vue, prefer **Wagmi hooks** (`useAccount`, `useBalance`, `useSendTransaction`). They receive the provider automatically through the Web3Auth connector.
+
+### `Web3Auth` class: `provider` is write-only
+
+**v10**
+
+```javascript
+const provider = web3auth.provider
+```
+
+**v11**
+
+```javascript
+const provider = web3auth.connection?.ethereumProvider ?? null
+```
+
+### Non-EVM apps that need the private key
+
+Extract the key once in a `useEffect`, then pass the string to helpers:
+
+```tsx
+const { connection } = useWeb3Auth()
+const [privateKey, setPrivateKey] = useState<string | null>(null)
+
+useEffect(() => {
+  if (!connection?.ethereumProvider) return
+  connection.ethereumProvider
+    .request({ method: 'private_key' })
+    .then(k => setPrivateKey((k as string) ?? null))
+    .catch(console.error)
+}, [connection])
+```
+
+### Server-side verification
+
+**v10**
+
+```tsx
+const pubKey = await web3Auth?.provider?.request({ method: 'public_key' })
+const address = await web3Auth?.provider?.request({ method: 'eth_accounts' })
+```
+
+**v11**
+
+```tsx
+const pubKey = await connection?.ethereumProvider?.request({ method: 'public_key' })
+// External wallet: use useAccount().address from Wagmi instead of eth_accounts
+```
+
+## Solana SDK migration
+
+### Package changes
+
+Remove `@solana/web3.js` as the primary dependency for new code. Add:
+
+```json
+{
+  "dependencies": {
+    "@solana/kit": "^6.x",
+    "@solana-program/system": "^0.12.x"
+  }
+}
+```
+
+### Hooks import path
+
+**v10**
+
+```typescript
+import { useSolanaWallet } from '@web3auth/modal/react'
+```
+
+**v11**
+
+```typescript
+import { useSolanaWallet, useSignTransaction } from '@web3auth/modal/react/solana'
+```
+
+### `useSolanaWallet()` return shape
+
+**v10** returned a `connection` (`@solana/web3.js` `Connection`).
+
+**v11** returns:
+
+```typescript
+{
+  accounts: string[] | null
+  solanaWallet: Wallet | null
+  rpc: Rpc<SolanaRpcApi> | null
+  getPrivateKey: () => Promise<string>
+}
+```
+
+### Fetching balance
+
+**v11**
+
+```typescript
+import { address } from '@solana/kit'
+import { useSolanaWallet } from '@web3auth/modal/react/solana'
+
+const { accounts, rpc } = useSolanaWallet()
+const { value } = await rpc!.getBalance(address(accounts![0])).send()
+const sol = Number(value) / 1e9
+```
+
+### Building a transfer transaction
+
+Use the `@solana/kit` `pipe` builder with `getTransferSolInstruction` from `@solana-program/system`. See the [React Solana hooks](/embedded-wallets/sdk/react/solana-hooks/useSignTransaction) or [Vue Solana composables](/embedded-wallets/sdk/vue/solana-composables/useSignTransaction) docs for full examples.
+
+### Vue: composables return refs
+
+Unwrap with `.value` in script logic:
+
+```typescript
+const { accounts, rpc } = useSolanaWallet()
+await rpc.value!.getLatestBlockhash().send()
+const feePayer = createNoopSigner(address(accounts.value![0]))
+```
+
+## Polyfill removal
+
+Remove these from your project when upgrading to v11:
+
+- Vite `define: { global: 'globalThis' }` and browserify aliases
+- `devDependencies`: `buffer`, `process`, `crypto-browserify`, and related polyfill packages
+- Angular `polyfills.ts` `global` / `Buffer` / `process` hacks (keep only `zone.js`)
+
+## Summary table
+
+| Area                 | v10                                  | v11                                     |
+| -------------------- | ------------------------------------ | --------------------------------------- |
+| Provider from hook   | `const { provider } = useWeb3Auth()` | Use `connection` or Wagmi hooks         |
+| Provider from class  | `web3auth.provider`                  | `web3auth.connection?.ethereumProvider` |
+| EVM in React/Vue     | `provider.request(...)`              | Wagmi hooks                             |
+| Solana RPC           | `new Connection(...)` from web3.js   | `rpc` from `useSolanaWallet()`          |
+| Solana signing hooks | `@web3auth/modal/react`              | `@web3auth/modal/react/solana`          |
+| Social login pubkey  | `web3Auth?.provider?.request`        | `connection?.ethereumProvider?.request` |
+
+## Framework supplements
+
+- [React v10 to v11 supplement](/embedded-wallets/sdk/react/migration-guides/modal-v10-to-v11-react)
+- [Vue v10 to v11 supplement](/embedded-wallets/sdk/vue/migration-guides/modal-v10-to-v11-vue)
+
+## Next steps
+
+- [React get started](/embedded-wallets/sdk/react/)
+- [Vue get started](/embedded-wallets/sdk/vue/)
+- [Web SDK get started](/embedded-wallets/sdk/js/)

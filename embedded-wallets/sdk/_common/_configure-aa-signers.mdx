@@ -30,7 +30,7 @@ additional setup is needed.
 import { createWalletClient } from 'viem'
 
 // Use your Web3Auth instance to retreive the provider.
-const provider = web3auth.provider
+const provider = web3auth.connection?.ethereumProvider ?? null
 
 const walletClient = createWalletClient({
   transport: custom(provider),
@@ -45,7 +45,7 @@ const walletClient = createWalletClient({
 import { ethers } from 'ethers'
 
 // Use your Web3Auth instance to retreive the provider.
-const provider = web3auth.provider
+const provider = web3auth.connection?.ethereumProvider ?? null
 
 const ethersProvider = new ethers.providers.Web3Provider(provider)
 const signer = await ethersProvider.getSigner()

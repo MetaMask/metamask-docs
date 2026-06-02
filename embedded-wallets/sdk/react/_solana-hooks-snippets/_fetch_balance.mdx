@@ -1,0 +1,29 @@
+```tsx title="getBalance.tsx"
+import { address } from '@solana/kit'
+import { useSolanaWallet } from '@web3auth/modal/react/solana'
+import { useEffect, useState } from 'react'
+
+export function Balance() {
+  const { accounts, rpc } = useSolanaWallet()
+  const [balance, setBalance] = useState<number | null>(null)
+
+  const fetchBalance = async () => {
+    if (!rpc || !accounts?.length) return
+    const { value } = await rpc.getBalance(address(accounts[0])).send()
+    setBalance(Number(value) / 1e9)
+  }
+
+  useEffect(() => {
+    fetchBalance()
+  }, [rpc, accounts])
+
+  return (
+    <div>
+      {balance !== null && <p>{balance} SOL</p>}
+      <button onClick={fetchBalance} type="button">
+        Fetch balance
+      </button>
+    </div>
+  )
+}
+```

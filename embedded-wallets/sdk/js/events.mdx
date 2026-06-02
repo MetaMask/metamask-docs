@@ -26,21 +26,21 @@ get connected(): boolean;
 const isConnected = web3auth.connected
 ```
 
-## `provider`
+## `connection`
 
-Returns the current provider instance if connected.
-
-#### Interface
-
-```ts
-get provider(): IProvider | null;
-```
+Returns the active wallet connection, including the Ethereum provider and Solana wallet when connected.
 
 #### Usage
 
 ```js
-const provider = web3auth.provider
+const provider = web3auth.connection?.ethereumProvider ?? null
+const solanaWallet = web3auth.connection?.solanaWallet ?? null
 ```
+
+:::note
+
+In v11, reading `web3auth.provider` returns `undefined`. Use `connection` instead.
+:::
 
 ## `connectedConnectorName`
 

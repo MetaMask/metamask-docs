@@ -1,0 +1,26 @@
+```tsx title="signMessage.tsx"
+import { FormEvent } from 'react'
+import { useSignMessage } from '@web3auth/modal/react/solana'
+
+export function SignMessage() {
+  const { signMessage, loading, error, data } = useSignMessage()
+
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const formData = new FormData(e.target as HTMLFormElement)
+    const message = formData.get('message')
+    signMessage(message!.toString())
+  }
+
+  return (
+    <form onSubmit={submit}>
+      <input name="message" placeholder="Message" required />
+      <button disabled={loading} type="submit">
+        {loading ? 'Signing...' : 'Sign message'}
+      </button>
+      {data && <p>Message hash: {data}</p>}
+      {error && <p>Error: {error.message}</p>}
+    </form>
+  )
+}
+```

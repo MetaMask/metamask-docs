@@ -107,7 +107,7 @@ After initializing Web3Auth, the next step is to authenticate and retrieve the p
 await web3auth.connect()
 
 // Get the provider
-const provider = web3auth.provider
+const provider = web3auth.connection?.ethereumProvider ?? null
 ```
 
 Once logged in, Web3Auth provides a JWT token and access to the Tron provider.

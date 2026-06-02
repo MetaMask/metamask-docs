@@ -68,7 +68,7 @@ npm install --save web3 starknet elliptic bn.js @starkware-industries/starkware-
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Even though Starknet is a layer 2 on Ethereum, it is not EVM compatible. Therefore, you cannot use the native [`EIP-1193`](https://eips.ethereum.org/EIPS/eip-1193) provider used for EVM blockchains; instead, use the private key directly to make calls.
 
-Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Starknet EC Curve specific signing functions, hence, we first derive the Stark Key using the `getStarkKey()` function.
+Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Starknet EC Curve specific signing functions, hence, we first derive the Stark Key using the `getStarkKey()` function.
 
 On the underhood, it uses the `starkwareCrypto.ec.keyFromPrivate()` function, where we pass our Private key with the `hex` argument since it is hex encoded. Further, we get the public key from this using the `starkwareCrypto.ec.keyFromPublic()` function, and we take its X-coordinate using `.pub.getX()` which is our `starkKey`. We use this `starkKey` on Starknet transactions.
 
@@ -83,7 +83,7 @@ import { ec as elliptic } from 'elliptic'
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 const keyPair = starkwareCrypto.ec.keyFromPrivate(privateKey, 'hex')
 // get the account address from the public key
@@ -104,7 +104,7 @@ import CompiledAccountContractAbi from './ArgentAccount.json'
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 const keyPair = starkwareCrypto.ec.keyFromPrivate(privateKey, 'hex')
 // get the account address from the public key

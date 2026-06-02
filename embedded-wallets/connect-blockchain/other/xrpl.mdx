@@ -81,7 +81,7 @@ npm install --save @web3auth/xrpl-provider
 
 ## Initializing provider
 
-Post V10 release, Web3Auth Web SDK does not need any additional setup on the code side for XRPL.
+From v11 onward, the Embedded Wallets Web SDK does not need any additional setup on the code side for XRPL.
 All is handled on the dashboard.
 
 ```tsx
@@ -99,7 +99,7 @@ await web3auth.init()
 await web3auth.connect()
 // await web3auth.connectTo(); // For custom flow
 
-const provider = web3auth.provider
+const provider = web3auth.connection?.ethereumProvider ?? null
 ```
 
 ## Get account and Balance

@@ -152,27 +152,31 @@ Web3Auth is blockchain agnostic, enabling integration with any blockchain networ
 
 ### Solana integration
 
-To interact with Solana networks, you can get the provider from Web3Auth and use it with Solana libraries:
+To interact with Solana networks, use the Solana wallet from the `connection` object after sign-in:
 
 ```javascript
 await web3auth.connect()
-// Use with a Solana library
-const solanaWallet = new SolanaWallet(web3auth.provider)
+const solanaWallet = web3auth.connection?.solanaWallet ?? null
 ```
+
+For building and signing transactions, use [`@solana/kit`](https://www.npmjs.com/package/@solana/kit) with the hooks or composables in the React and Vue SDKs, or see [Solana on JavaScript](/embedded-wallets/connect-blockchain/solana/javascript).
 
 ### Ethereum integration
 
-For Ethereum integration, you can get the provider and use it with ethers or viem:
+For Ethereum integration, use the EIP-1193 provider from `connection` with ethers or viem:
 
 ```javascript
 await web3auth.connect()
+const provider = web3auth.connection?.ethereumProvider ?? null
+if (!provider) return
+
 // Use with ethers.js
-const ethProvider = new ethers.BrowserProvider(web3auth.provider)
+const ethProvider = new ethers.BrowserProvider(provider)
 // OR
 // Use with viem
 const walletClient = createWalletClient({
-  chain: getViewChain(web3auth.provider),
-  transport: custom(web3auth.provider),
+  chain: getViewChain(provider),
+  transport: custom(provider),
 })
 ```
 

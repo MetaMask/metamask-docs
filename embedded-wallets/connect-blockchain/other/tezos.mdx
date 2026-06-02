@@ -69,7 +69,7 @@ npm install --save @taquito/signer @taquito/taquito @taquito/utils @tezos-core-t
 
 Once a user logs in, the Embedded Wallets SDK returns a provider. Since there isn't a native provider for Tezos, we directly use the private key to make RPC calls.
 
-Using the function, `web3auth.provider.request({method: "private_key"})` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Tezos EC Curve specific signing functions, hence, we first derive the Tezos Key using the `getTezosKeyPair()` function.
+Using the function, `web3auth.connection?.ethereumProvider?.request({ method: 'private_key' })` from Web3Auth provider, the application can have access to the user's private key. However, we cannot use this key with Tezos EC Curve specific signing functions, hence, we first derive the Tezos Key using the `getTezosKeyPair()` function.
 
 On the underhood, it uses the `tezosCrypto.utils.seedToKeyPair()` function, where we need to pass the `hex2buf(privateKey)`, that is, the hexadecimal to byteArray converted private key. We can use the returned private key pair from this and use on Tezos transactions.
 
@@ -85,7 +85,7 @@ const tezos = new TezosToolkit('https://ithacanet.ecadinfra.com')
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 
 // derive the Tezos Key Pair from the private key
@@ -112,7 +112,7 @@ const tezos = new TezosToolkit('https://ithacanet.ecadinfra.com')
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 
 // derive the Tezos Key Pair from the private key
@@ -160,7 +160,7 @@ const tezos = new TezosToolkit('https://ithacanet.ecadinfra.com')
   Use code from the above Initializing Provider here
 */
 
-// web3authProvider is web3auth.provider from above
+// web3authProvider is web3auth.connection?.ethereumProvider from above
 const privateKey = await web3authProvider.request({ method: 'private_key' })
 // derive the Tezos Key Pair from the private key
 const keyPair = tezosCrypto.utils.seedToKeyPair(hex2buf(privateKey))
