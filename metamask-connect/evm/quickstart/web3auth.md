@@ -112,7 +112,7 @@ See how to [use Embedded Wallets](#usage).
 Install the SDK and the required dependencies to an existing project:
 
 ```bash npm2yarn
-npm install viem wagmi @tanstack/react-query @web3auth/modal@10
+npm install viem wagmi @tanstack/react-query @web3auth/modal
 ```
 
 ### 2. Configure providers
