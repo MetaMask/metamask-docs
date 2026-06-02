@@ -39,11 +39,15 @@ createApp(App).use(VueQueryPlugin).mount('#app')
 
 ## When you need `connection`
 
+Read `connection` from `useWeb3Auth()` after sign-in. For EVM flows, prefer **Wagmi composables** from `@web3auth/modal/vue/wagmi` instead of reading `ethereumProvider` directly.
+
+Use `connection.ethereumProvider` only for JSON-RPC edge cases (for example, `private_key`, `public_key`, or custom methods):
+
 ```ts
 import { useWeb3Auth } from '@web3auth/modal/vue'
 
 const { connection } = useWeb3Auth()
-const provider = connection?.ethereumProvider
+const provider = connection?.ethereumProvider ?? null
 ```
 
 ## Solana Vue apps

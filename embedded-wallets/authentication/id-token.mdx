@@ -295,7 +295,12 @@ export async function POST(req: NextRequest) {
 <TabItem value="Frontend Call">
 
 ```ts title="App.tsx"
+import { useAccount } from '@web3auth/modal/react/wagmi'
+import { useIdentityToken, useWeb3Auth } from '@web3auth/modal/react'
+
 const { token, getIdentityToken, loading: idTokenLoading, error: idTokenError } = useIdentityToken()
+const { connection } = useWeb3Auth()
+const { address } = useAccount()
 
 const validateIdToken = async () => {
   //focus-next-line
@@ -305,7 +310,7 @@ const validateIdToken = async () => {
   if (connectorName === 'auth') {
     //focus-start
     // Social login: send public key
-    const pubKey = await web3Auth?.connection?.ethereumProvider?.request({
+    const pubKey = await connection?.ethereumProvider?.request({
       method: 'public_key',
     })
     console.log('pubKey:', pubKey)
@@ -320,17 +325,14 @@ const validateIdToken = async () => {
     //focus-end
   } else {
     //focus-start
-    // External wallet: send address
-    const address = await web3Auth?.connection?.ethereumProvider?.request({
-      method: 'eth_accounts',
-    })
+    // External wallet: send address (from Wagmi, not eth_accounts on the provider)
     res = await fetch('/api/login-external', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${idToken}`,
       },
-      body: JSON.stringify({ address }),
+      body: JSON.stringify({ address: address ?? null }),
     })
     //focus-end
   }

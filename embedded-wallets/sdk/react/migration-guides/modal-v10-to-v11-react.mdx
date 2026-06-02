@@ -38,16 +38,21 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 
 ## When you need `connection`
 
-Use `connection` only when Wagmi does not expose what you need:
+Read `connection` from `useWeb3Auth()` after sign-in. It exposes `ethereumProvider`, `solanaWallet`, and `connectorName`.
 
-- Raw private key for non-EVM chains
+For EVM accounts, balances, and transactions, use **Wagmi hooks** (`useAccount`, `useBalance`, `useSendTransaction`). Do not call `eth_accounts` on the provider.
+
+Use `connection.ethereumProvider` only when Wagmi does not expose what you need:
+
+- Raw private key for non-EVM chains (`private_key`)
 - `public_key` for social-login server verification
-- Custom RPC methods
+- Custom JSON-RPC methods
 
 ```tsx
 import { useWeb3Auth } from '@web3auth/modal/react'
 
 const { connection } = useWeb3Auth()
+// JSON-RPC edge cases only — prefer Wagmi for standard EVM flows
 const provider = connection?.ethereumProvider ?? null
 ```
 

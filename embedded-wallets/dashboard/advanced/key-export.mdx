@@ -29,7 +29,8 @@ Manual export is always available through the built-in wallet interface. Users i
 When enabled, your dapp can retrieve the user's private key using the `private_key` JSON-RPC method on the `auth` adapter:
 
 ```javascript
-const provider = web3auth.connection?.ethereumProvider ?? null
+const connection = web3auth.connection
+const provider = connection?.ethereumProvider ?? null
 const privateKey = await provider?.request({
   method: 'private_key',
 })
@@ -45,7 +46,7 @@ Never store or transmit a private key in plaintext. Retrieve it only when necess
 
 ## When to disable programmatic export
 
-Disable programmatic key export for consumer-facing dapps, dapps handling high-value assets, and regulated financial services. Most dapps do not need it — signing transactions through `web3auth.connection?.ethereumProvider` does not require key export.
+Disable programmatic key export for consumer-facing dapps, dapps handling high-value assets, and regulated financial services. Most dapps do not need it — signing transactions through the Embedded Wallets SDK (Wagmi, ethers, viem, or Solana hooks) does not require key export.
 
 ## Next steps
 
