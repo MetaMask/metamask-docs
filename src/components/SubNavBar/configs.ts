@@ -42,7 +42,7 @@ export const EMBEDDED_WALLETS_SUBNAV_CONFIG: SubNavBarConfig = {
     {
       key: 'demo',
       label: 'Demo ↗',
-      path: 'https://demo.web3auth.io/',
+      path: 'https://ew-demo.metamask.io/',
     },
   ],
 }
