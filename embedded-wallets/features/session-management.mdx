@@ -2,6 +2,7 @@
 title: Session Management
 sidebar_label: Session management
 description: 'Session Management | Embedded Wallets'
+keywords: [session, connect and sign, token persistence, web sdk, v11]
 ---
 
 SDKs provide session management to minimize repeated logins, enhancing user experience by maintaining login state for a specified duration. This seamless experience offers several advantages, including:
@@ -9,6 +10,24 @@ SDKs provide session management to minimize repeated logins, enhancing user expe
 - **User experience:** Reduces login frequency for a smoother experience.
 - **Efficiency:** Session restoration is quick, occurring in milliseconds.
 - **Integration:** Easy to implement with minimal impact on user flow.
+
+## Session persistence across reloads (Web SDK v11)
+
+Web SDK v11 (`@web3auth/modal` for JavaScript, React, and Vue) stores auth tokens after a successful login and restores the session when the user reloads the page.
+External wallet connections use the **connect and sign** flow by default, so users are not re-prompted for a signature after a refresh while the session is still valid.
+
+The SDK persists these tokens in client storage:
+
+| Token          | Purpose                                 |
+| -------------- | --------------------------------------- |
+| `idToken`      | Server-side identity verification       |
+| `accessToken`  | API access for authenticated requests   |
+| `refreshToken` | Renew expired sessions without re-login |
+
+On reload, the SDK reads stored tokens, validates the session, and reconnects automatically when possible.
+If the session expired or tokens are missing, the user goes through the standard login flow again.
+
+See [External wallet aggregator](/embedded-wallets/features/external-wallets/#connect-and-sign-web-sdk-v11-default) for connect-and-sign details.
 
 ### Session key
 

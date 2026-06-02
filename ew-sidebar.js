@@ -154,6 +154,7 @@ const sidebar = {
       collapsed: false,
       items: [
         'features/external-wallets',
+        'features/multi-wallet-linking',
         'features/smart-accounts',
         'features/funding',
         'features/user-account-dashboard',
@@ -196,6 +197,7 @@ const sidebar = {
     'dashboard/README',
     'dashboard/project-settings',
     'dashboard/allowlist',
+    'dashboard/access-control',
     'dashboard/chains-and-networks',
     {
       type: 'category',

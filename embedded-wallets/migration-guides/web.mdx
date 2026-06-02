@@ -8,8 +8,15 @@ keywords: [migration, v11, v10, v9, web3auth, embedded wallets, react, vue, java
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
-This guide upgrades Embedded Wallets Web SDK integrations from **v9 or v10** directly to **v11** for
+This guide upgrades Embedded Wallets **Web SDK** integrations from **v9 or v10** directly to **v11** for
 JavaScript (`@web3auth/modal`), React (`@web3auth/modal/react`), and Vue (`@web3auth/modal/vue`).
+
+:::note Platform scope
+
+This guide applies to the **Web SDK** only.
+Android, iOS, React Native, Flutter, Unity, and Unreal SDKs follow separate version lines and migration guides.
+
+:::
 
 ## AI-assisted migration
 
@@ -390,7 +397,7 @@ See the [Vue composables reference](/embedded-wallets/sdk/vue/composables) for t
 
 ## v11 API changes {#v11-api-changes}
 
-Version 11 introduces the `connection` object for wallet access, migrates Solana integrations to
+Web SDK v11 introduces the `connection` object for wallet access, migrates Solana integrations to
 `@solana/kit`, and removes the need for browser polyfills.
 If you're already on v10, this section is the main code update; if you're on v9, apply it together
 with [Migrating from v9](#migrating-from-v9).
@@ -592,19 +599,59 @@ switchChain({ chainId: chain.chainId })
 </TabItem>
 </Tabs>
 
+## Breaking changes in v11 {#breaking-changes-v11}
+
+Review these changes when upgrading from v10.
+
+### Node.js minimum version
+
+`@web3auth/modal@11` requires **Node.js 22+** and npm 10+.
+Support for Node.js 18 and 20 is discontinued.
+
+```bash npm2yarn
+node --version  # must be >= 22.x
+```
+
+### Dedicated social login connector removed
+
+The standalone social login connector is consolidated into the unified modal flow.
+Configure social providers through the [Embedded Wallets dashboard](/embedded-wallets/dashboard/authentication/) instead of a separate connector package.
+
+### Themed context removed
+
+The `ThemedContext` pattern from earlier SDK versions is removed.
+Use the modal state pattern and dashboard [Customization](/embedded-wallets/dashboard/customization/) settings for branding instead.
+
+### External wallet authentication mode
+
+External wallet login defaults to **connect and sign** (`initialAuthenticationMode: 'connect-and-sign'`).
+Sessions persist across page reloads without re-prompting for a signature.
+See [External wallet aggregator](/embedded-wallets/features/external-wallets/#connect-and-sign-web-sdk-v11-default).
+
+### New Web SDK feature pages
+
+| Feature                            | Documentation                                                            |
+| ---------------------------------- | ------------------------------------------------------------------------ |
+| Multi-wallet linking and switching | [Multi-wallet linking](/embedded-wallets/features/multi-wallet-linking/) |
+| EIP-7702 smart accounts            | [Smart accounts](/embedded-wallets/features/smart-accounts/)             |
+| Role-based access control          | [Access control](/embedded-wallets/dashboard/access-control/)            |
+
 ## Summary table
 
-| Area                | v9                                                | v10                                                     | v11                                     |
-| ------------------- | ------------------------------------------------- | ------------------------------------------------------- | --------------------------------------- |
-| Package             | `@web3auth/modal` or `no-modal` + adapters        | `@web3auth/modal`                                       | `@web3auth/modal@11`                    |
-| Custom UI login     | `connectTo('auth', { loginProvider })` + adapters | `connectTo(WALLET_CONNECTORS.AUTH, { authConnection })` | Same as v10                             |
-| Chain config        | Code (`chainConfig`)                              | Dashboard                                               | Dashboard                               |
-| Provider from hook  | `provider`                                        | `provider`                                              | `connection` or Wagmi                   |
-| Provider from class | `web3auth.provider`                               | `web3auth.provider`                                     | `web3auth.connection?.ethereumProvider` |
-| Identity token      | `authenticateUser()`                              | `getIdentityToken()`                                    | `getIdentityToken()`                    |
-| Solana RPC          | `@solana/web3.js` `Connection`                    | `@solana/web3.js` `Connection`                          | `rpc` from `useSolanaWallet()`          |
-| Solana hooks path   | `@web3auth/modal/react`                           | `@web3auth/modal/react`                                 | `@web3auth/modal/react/solana`          |
-| Polyfills           | Often required                                    | Often required                                          | Not required                            |
+| Area                 | v9                                                | v10                                                     | v11                                     |
+| -------------------- | ------------------------------------------------- | ------------------------------------------------------- | --------------------------------------- |
+| Package              | `@web3auth/modal` or `no-modal` + adapters        | `@web3auth/modal`                                       | `@web3auth/modal@11`                    |
+| Custom UI login      | `connectTo('auth', { loginProvider })` + adapters | `connectTo(WALLET_CONNECTORS.AUTH, { authConnection })` | Same as v10                             |
+| Chain config         | Code (`chainConfig`)                              | Dashboard                                               | Dashboard                               |
+| Provider from hook   | `provider`                                        | `provider`                                              | `connection` or Wagmi                   |
+| Provider from class  | `web3auth.provider`                               | `web3auth.provider`                                     | `web3auth.connection?.ethereumProvider` |
+| Identity token       | `authenticateUser()`                              | `getIdentityToken()`                                    | `getIdentityToken()`                    |
+| Solana RPC           | `@solana/web3.js` `Connection`                    | `@solana/web3.js` `Connection`                          | `rpc` from `useSolanaWallet()`          |
+| Solana hooks path    | `@web3auth/modal/react`                           | `@web3auth/modal/react`                                 | `@web3auth/modal/react/solana`          |
+| Polyfills            | Often required                                    | Often required                                          | Not required                            |
+| Node.js              | 18+                                               | 20+                                                     | 22+ (required)                          |
+| External wallet auth | Connect then sign                                 | Connect then sign                                       | Connect and sign (default)              |
+| Multi-wallet linking | Not available                                     | Not available                                           | `linkAccount`, `switchAccount`          |
 
 ## Next steps
 

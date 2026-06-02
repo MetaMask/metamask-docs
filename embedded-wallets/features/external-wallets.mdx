@@ -2,9 +2,10 @@
 title: External wallet aggregator
 image: 'img/metamaskog.jpg'
 description: 'A complete, cross-ecosystem wallet aggregation experience built into the Embedded Wallets SDK.'
+keywords: [external wallets, connect and sign, SIWE, MMConnect, wallet aggregator, web sdk, v11]
 ---
 
-The MetaMask Embedded Wallets SDK provides one of the most complete wallet aggregators on the market. It unifies EVM and Solana wallet discovery, connection, and session management into a single, production‑ready layer you can drop into any app.
+The MetaMask Embedded Wallets **Web SDK** provides a wallet aggregator that unifies EVM and Solana wallet discovery, connection, and session management into a single layer you can integrate into any web app.
 
 :::info demo
 
@@ -14,15 +15,67 @@ Looking for a quick preview? See the [Demo](https://ew-demo.metamask.io).
 
 ## Highlights
 
-- **Cross‑ecosystem:** EVM and Solana in a single flow.
-- **Standards‑native:** EIP‑6963 (EVM) and Solana Wallet Standard.
+- **Cross-ecosystem:** EVM and Solana in a single flow.
+- **Standards-native:** EIP-6963 (EVM) and Solana Wallet Standard.
 - **Works with your stack:** `ethers`, `viem`, `wagmi`, `@solana/kit`.
-- **First‑class developer experience:** Hooks and composables for React/Vue.
+- **First-class developer experience:** Hooks and composables for React/Vue.
 - **Central control:** Manage everything in the [Embedded Wallets dashboard](https://developer.metamask.io).
 
 <img className="docImg" src="/img/wallet-discovery.png" alt="Wallet Discovery" />
 
 _A familiar, unified wallet selection experience for users._
+
+## Connect and sign (Web SDK v11 default) {#connect-and-sign-web-sdk-v11-default}
+
+Web SDK v11 overhauls the external wallet connection flow for `@web3auth/modal` (JavaScript, React, and Vue).
+External wallet login now defaults to **connect and sign**, a Sign-In with Ethereum (SIWE) style flow that authenticates the wallet in one step instead of requiring a separate connect followed by a signature prompt.
+
+### Default authentication mode
+
+The SDK sets `initialAuthenticationMode` to `connect-and-sign` by default.
+To override it, pass `initialAuthenticationMode` in `Web3AuthOptions`:
+
+```tsx
+import {
+  CONNECTOR_INITIAL_AUTHENTICATION_MODE,
+  WEB3AUTH_NETWORK,
+  type Web3AuthOptions,
+} from '@web3auth/modal'
+
+const web3AuthOptions: Web3AuthOptions = {
+  clientId: 'YOUR_CLIENT_ID',
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
+  initialAuthenticationMode: CONNECTOR_INITIAL_AUTHENTICATION_MODE.CONNECT_AND_SIGN,
+}
+```
+
+### Session persistence across reloads
+
+After a successful connect-and-sign flow, the SDK stores auth tokens (`idToken`, `accessToken`, `refreshToken`) and restores the session on page reload.
+Users are not re-prompted for a signature after a refresh while the session is still valid.
+
+See [Session management](/embedded-wallets/features/session-management/) for how session keys and token storage work.
+
+### Benefits for dapps
+
+- Fewer drop-offs at authentication because login is one tap instead of two.
+- Less custom session-handling code in your integration.
+- SIWE-style nonces are generated via `viem` for external wallet connectors.
+
+## MetaMask connector (MM Connect)
+
+The MetaMask connector in Web SDK v11 uses the [MetaMask Connect](/metamask-connect/) SDK instead of the legacy integration path.
+This improves mobile MetaMask connections from web browsers, including:
+
+- **iOS Safari deep linking** between the browser and the MetaMask app.
+- **Session handoff** so users return to your dapp after approving a connection in the MetaMask mobile app.
+
+MetaMask Wallet remains enabled by default in the dashboard and cannot be disabled.
+
+## Multi-wallet linking
+
+Users who sign in with an embedded wallet method can link additional external wallets and switch between them mid-session in the Web SDK.
+See [Multi-wallet linking and switching](/embedded-wallets/features/multi-wallet-linking/) for `linkAccount()`, `switchAccount()`, and the `linkedAccounts` user object.
 
 ## Customize flow within the dashboard
 
@@ -44,3 +97,9 @@ _Toggle social logins and external wallets visibility._
 />
 
 _Toggle and manage supported wallets._
+
+## Next steps
+
+- [External wallets login](/embedded-wallets/authentication/basic-logins/external-wallets/): enable external wallets in the dashboard
+- [Multi-wallet linking and switching](/embedded-wallets/features/multi-wallet-linking/): link and switch wallets under one account
+- [Session management](/embedded-wallets/features/session-management/): session keys and token restoration

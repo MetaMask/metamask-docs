@@ -2,18 +2,26 @@
 title: External wallets login with Embedded Wallets
 sidebar_label: External wallets
 description: 'External Wallets Login with Embedded Wallets | Embedded Wallets'
+keywords: [external wallets, connect and sign, MetaMask, MMConnect, web sdk, v11]
 ---
 
 import ExternalWalletsToggle from '@site/static/img/embedded-wallets/dev-dashboard/external-wallets-toggle.png'
 import ExternalWalletsSelectWallets from '@site/static/img/embedded-wallets/dev-dashboard/external-wallets-select-wallets.png'
 
-Web3Auth provides built-in support for email and SMS-based authentication, allowing users to log in seamlessly using a one-time passcode (OTP) sent to their email address or phone number. This form of passwordless authentication simplifies the onboarding process, removes friction for end users, and expands accessibility—especially in regions where social login options may be limited.
+Embedded Wallets supports external wallet login alongside social and passwordless methods.
+Users can authenticate with MetaMask, WalletConnect, Coinbase Wallet, and other supported wallets through a unified discovery and connection flow.
+
+:::note Web SDK only
+
+The connect-and-sign default, MMConnect integration, and multi-wallet linking described below apply to **Web SDK v11** (`@web3auth/modal` for JavaScript, React, and Vue).
+
+:::
 
 ## Enable external wallets
 
 :::success Enable on dashboard
 
-To enable this feature, developers must first activate **External Wallets** from the **Social Connections** section in the [dashboard](https://developer.metamask.io).
+To enable this feature, activate **External Wallets** from the **Social Connections** section in the [dashboard](https://developer.metamask.io).
 
 :::
 
@@ -23,10 +31,33 @@ To choose which external wallets to enable, click the **Settings** icon next to 
 
 :::note
 
-MetamMask Wallet is enabled by default and cannot be disabled.
+MetaMask Wallet is enabled by default and cannot be disabled.
 
 :::
 
 A wide range of wallets are available to choose from.
 
 <img className="docImg" src={ExternalWalletsSelectWallets} alt="External Wallets Select Wallets" />
+
+## Connect and sign (Web SDK v11 default)
+
+Web SDK v11 uses **connect and sign** as the default external wallet authentication mode.
+Users sign a Sign-In with Ethereum (SIWE) style message during connection, so login is one step instead of connect followed by a separate signature prompt.
+
+Sessions persist across page reloads while tokens remain valid.
+See [External wallet aggregator](/embedded-wallets/features/external-wallets/#connect-and-sign-web-sdk-v11-default) for SDK configuration.
+
+## MetaMask on mobile
+
+The MetaMask connector in Web SDK v11 uses the MetaMask Connect (MMConnect) SDK for more reliable mobile browser connections, including iOS Safari deep linking and session handoff between the browser and the MetaMask app.
+
+## Multi-wallet linking
+
+Users who sign in with an embedded wallet method can link additional external wallets to the same account.
+See [Multi-wallet linking and switching](/embedded-wallets/features/multi-wallet-linking/).
+
+## Next steps
+
+- [External wallet aggregator](/embedded-wallets/features/external-wallets/): wallet discovery, connect-and-sign, and MMConnect details
+- [Session management](/embedded-wallets/features/session-management/): how sessions persist across reloads
+- [Access control](/embedded-wallets/dashboard/access-control/): restrict who can sign in

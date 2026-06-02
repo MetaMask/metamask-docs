@@ -9,9 +9,52 @@ import ProjectSettingsAdvanced from '@site/static/img/embedded-wallets/dev-dashb
 
 The **User Details in ID Token** setting controls whether personally identifiable information (PII) such as email, name, and profile picture is included in the JWT identity token issued by Embedded Wallets.
 
+Web SDK v11 (`@web3auth/modal` for JavaScript, React, and Vue) also surfaces a richer user object that includes linked accounts and authentication methods across every wallet the user has connected, not just the one they used to sign in.
+
 <img className="docImg" src={ProjectSettingsAdvanced} alt="User details settings" />
 
-## Configuration options
+## Richer user object (Web SDK v11) {#richer-user-object-web-sdk-v11}
+
+When you call `getUserInfo()` or use `useWeb3AuthUser`, the returned `UserInfo` object can include a `linkedAccounts` array.
+Each entry describes a wallet linked to the same Embedded Wallets user:
+
+| Field        | Description                                   |
+| ------------ | --------------------------------------------- |
+| `id`         | Linked account identifier                     |
+| `isPrimary`  | Whether this is the user's primary account    |
+| `eoaAddress` | Externally owned account address              |
+| `aaAddress`  | Smart account address, if configured          |
+| `connector`  | Connector name for this account               |
+| `active`     | Whether this account is the active connection |
+
+```tsx
+import { useWeb3AuthUser } from '@web3auth/modal/react'
+
+function UserProfile() {
+  const { userInfo } = useWeb3AuthUser()
+
+  return (
+    <div>
+      <p>Primary login: {userInfo?.typeOfLogin}</p>
+      <ul>
+        {userInfo?.linkedAccounts?.map(account => (
+          <li key={account.id}>
+            {account.eoaAddress} ({account.connector}){account.active ? ' (active)' : ''}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+```
+
+Use this object to unify analytics, CRM records, and support tooling under one user ID.
+See [Multi-wallet linking and switching](/embedded-wallets/features/multi-wallet-linking/) for linking and switching APIs.
+
+The dashboard **User management** section lists users and their linked accounts for your project.
+See [Access control](/embedded-wallets/dashboard/access-control/#user-management).
+
+## ID token configuration
 
 Navigate to **Project Settings** → **Advanced** → **User details** and choose one of three modes:
 

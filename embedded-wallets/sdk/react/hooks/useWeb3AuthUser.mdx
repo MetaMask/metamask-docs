@@ -6,9 +6,13 @@ description: '@web3auth/modal React Hooks useWeb3AuthUser | Embedded Wallets'
 
 Hook to fetch and manage the current Embedded Wallets user information.
 
+In Web SDK v11, `userInfo` can include a `linkedAccounts` array when the user has linked external wallets.
+See [User details](/embedded-wallets/dashboard/advanced/user-details/#richer-user-object-web-sdk-v11) and [Multi-wallet linking](/embedded-wallets/features/multi-wallet-linking/).
+
 :::info
 
-Please note that this hook doesn't work for external wallet logins. It only works for social login embedded wallets. It returns and empty object for external wallet logins.
+For external-wallet-only logins, profile fields may be limited compared to social or passwordless logins.
+Use `linkedAccounts` to see every wallet linked to the same user.
 
 :::
 
@@ -66,6 +70,7 @@ Error that occurred during the user info fetching process.
 `Partial<UserInfo> | null`
 
 The current user's information, or null if not available.
+May include `linkedAccounts` (array of linked wallet addresses and connectors) in Web SDK v11.
 
 #### `isMFAEnabled`
 
