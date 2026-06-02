@@ -18,36 +18,48 @@ import { useWeb3Auth } from '@web3auth/modal/react'
 import { useWeb3Auth } from '@web3auth/modal/react'
 
 function App() {
-  const { web3Auth, isConnected, isInitializing, provider, status, initError } = useWeb3Auth()
+  const { web3Auth, isConnected, isInitializing, connection, status, initError } = useWeb3Auth()
 
   if (isConnected) {
-    // User is connected
-    console.log('Connected with provider:', provider)
+    console.log('Connected via:', connection?.connectorName)
   }
   if (isInitializing) {
-    // Web3Auth is initializing
     console.log('Web3Auth is initializing')
   }
-  if (provider) {
-    // Web3Auth provider is connected
-    console.log('Web3Auth provider is connected')
+  if (connection?.ethereumProvider) {
+    // Use for JSON-RPC edge cases; prefer Wagmi hooks for standard EVM flows
+    console.log('Ethereum provider available')
   }
   if (status) {
-    // Web3Auth status
     console.log('Web3Auth status:', status)
   }
   if (initError) {
-    // Web3Auth initialization error
     console.log('Web3Auth initialization error:', initError)
   }
 }
 ```
+
+:::info
+
+For EVM wallet operations, use [Wagmi hooks](../ethereum-hooks.mdx) (`useAccount`, `useBalance`,
+`useSendTransaction`) after setting up `WagmiProvider`.
+Use `connection.ethereumProvider` only for JSON-RPC methods Wagmi does not cover.
+See the [Web SDK v11 migration guide](/embedded-wallets/migration-guides/web#provider-api-changes-all-frameworks).
+
+:::
 
 ### Return type
 
 ```tsx
 import { type IUseWeb3Auth } from '@web3auth/modal/react'
 ```
+
+#### `connection`
+
+`{ ethereumProvider, solanaWallet, connectorName } | null`
+
+Active wallet connection after sign-in. `ethereumProvider` is an EIP-1193 provider for EVM;
+`solanaWallet` exposes Solana wallet utilities.
 
 #### `initError`
 
@@ -73,19 +85,13 @@ Whether Web3Auth has completed initialization.
 
 Whether Web3Auth is currently initializing.
 
-#### `provider`
-
-`IProvider | null`
-
-Connected provider from Web3Auth.
-
 #### `status`
 
 `string`
 
 Current status of the Web3Auth connection.
 
-#### `web3auth`
+#### `web3Auth`
 
 `Web3Auth`
 

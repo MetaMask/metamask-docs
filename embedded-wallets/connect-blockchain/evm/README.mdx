@@ -22,6 +22,9 @@ With Embedded Wallets v11 onward, chains are already added to the dashboard. You
 
 ::::
 
-The Embedded Wallets Web SDK(`@web3auth/modal`) from v11 onward does not need any additional setup on the code side for blockchain connections. All of it is handled on the dashboard. We can use any chain from the extensive list of predefined chains and add more if we need.
+The Embedded Wallets Web SDK (`@web3auth/modal`) does not need any additional setup on the code side for standard EVM connections. Chains enabled in the dashboard are loaded automatically
+at runtime.
+
+You can still pass a `chains` array in `web3AuthOptions` when you need custom RPC endpoints, local testing overrides, or patterns shown in SDK demo apps. Prefer [dashboard chain configuration](/embedded-wallets/dashboard/chains-and-networks/) for production.
 
 ![Chains on Dashboard](https://i.ibb.co/4nCD2GTJ/chains.gif)

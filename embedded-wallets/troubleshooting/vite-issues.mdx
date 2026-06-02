@@ -8,6 +8,15 @@ description: 'Bundler Polyfill Issues - Vite | Embedded Wallets'
 import TabItem from '@theme/TabItem'
 import Tabs from '@theme/Tabs'
 
+:::info `@web3auth/modal` v11 and Vite
+
+The [React quick start](https://github.com/Web3Auth/web3auth-examples/tree/main/quick-starts/react-quick-start)
+runs on Vite **without** `buffer` or `process` polyfills. Build and test your app first; add the steps
+below only if the bundler reports missing Node modules. See also the
+[Web SDK v11 migration guide](/embedded-wallets/migration-guides/web#v11-api-changes).
+
+:::
+
 While setting up a new Web3 project from scratch, you might face bundler issues. This can occur because the
 core packages like `eccrypto` have dependencies which are not present within the build environment.
 
